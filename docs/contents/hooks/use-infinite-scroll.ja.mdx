@@ -27,9 +27,8 @@ const { ref, isFinish } = useInfiniteScroll({
 
 return (
   <VStack>
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -45,7 +44,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
 
     {!isFinish ? (
       <Center ref={ref} w="full">
@@ -90,9 +90,8 @@ return (
       p="md"
       overflowY="auto"
     >
-      {Array(count)
-        .fill(0)
-        .map((_, index) => (
+      <For each={Array.from({ length: count })}>
+        {(_, index) => (
           <Card key={index}>
             <CardHeader>
               <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -108,7 +107,8 @@ return (
               </Text>
             </CardBody>
           </Card>
-        ))}
+        )}
+      </For>
 
       {!isFinish ? (
         <Center ref={ref} w="full">
@@ -141,9 +141,8 @@ const { ref, isFinish } = useInfiniteScroll({
 
 return (
   <VStack>
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -159,7 +158,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
 
     {!isFinish ? (
       <Center ref={ref} w="full">
@@ -189,9 +189,8 @@ const { ref, isFinish } = useInfiniteScroll({
 
 return (
   <VStack>
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -207,7 +206,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
 
     {!isFinish ? (
       <Center ref={ref} w="full">
@@ -240,9 +240,8 @@ const { ref, isFinish } = useInfiniteScroll({
 
 return (
   <VStack>
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -258,7 +257,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
 
     {!isFinish ? (
       <Center ref={ref} w="full">
@@ -288,9 +288,8 @@ const { ref, isFinish } = useInfiniteScroll({
 
 return (
   <VStack>
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -306,7 +305,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
 
     {!isFinish ? (
       <Center ref={ref} w="full">
@@ -344,9 +344,8 @@ return (
       </Center>
     ) : null}
 
-    {Array(count)
-      .fill(0)
-      .map((_, index) => (
+    <For each={Array.from({ length: count })}>
+      {(_, index) => (
         <Card key={index}>
           <CardHeader>
             <Heading size="md">俺を誰だと思っていやがるッ!!</Heading>
@@ -362,7 +361,8 @@ return (
             </Text>
           </CardBody>
         </Card>
-      ))}
+      )}
+    </For>
   </VStack>
 )
 ```

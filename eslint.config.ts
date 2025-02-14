@@ -50,19 +50,11 @@ const noConsoleConfig: Linter.Config = {
   files: [
     "packages/cli/**/*.ts",
     "scripts/**/*.ts",
-    "stories/**/*.tsx",
-    "stories/**/*.ts",
+    "packages/**/*.stories.tsx",
+    "packages/**/*.stories.ts",
   ],
   rules: {
     "no-console": "off",
-  },
-}
-
-const storybookConfig: Linter.Config = {
-  name: "eslint/storybook",
-  files: ["stories/**/*.ts", "stories/**/*.tsx", "stories/**/*.d.ts"],
-  rules: {
-    "react-hooks/rules-of-hooks": "off",
   },
 }
 
@@ -126,7 +118,6 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   cspellConfig,
   reactConfig,
   reactHooksConfig,
-  storybookConfig,
   vitestConfig,
   vitestSetupTestsConfig,
   testingLibraryConfig,

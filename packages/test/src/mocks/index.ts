@@ -1,7 +1,2 @@
-import { image } from "./image"
-import { matchMedia } from "./match-media"
-
-export const mocks = {
-  image,
-  matchMedia,
-}
+export * from "./image"
+export * from "./match-media"

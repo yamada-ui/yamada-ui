@@ -1,7 +1,8 @@
 {
   "name": "@yamada-ui/cli",
-  "version": "1.2.2",
-  "description": "Generate theme tokens for autocomplete",
+  "type": "module",
+  "version": "1.2.3",
+  "description": "The official CLI for Yamada UI projects",
   "keywords": [
     "theme",
     "theming",
@@ -36,16 +37,15 @@
     "yamada-cli": "bin/index.js"
   },
   "scripts": {
-    "clean": "rimraf dist .turbo",
-    "build": "tsup src --format cjs --clean --shims",
-    "dev": "pnpm build --watch",
+    "clean": "rimraf dist .turbo .eslintcache",
+    "build": "tsup",
     "typecheck": " tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config",
+    "format": "prettier --ignore-path ../../.prettierignore --check . --cache"
   },
   "dependencies": {
     "@clack/prompts": "^0.8.2",
-    "chokidar": "^4.0.1",
+    "chokidar": "^4.0.3",
     "cli-check-node": "^1.3.4",
     "cli-handle-unhandled": "^1.1.1",
     "commander": "^12.1.0",
@@ -53,7 +53,7 @@
     "esbuild": "^0.24.0",
     "glob": "^11.0.0",
     "node-eval": "^2.0.0",
-    "prettier": "^3.4.1",
+    "prettier": "^3.4.2",
     "tar": "^7.4.3",
     "ts-morph": "^24.0.0",
     "typescript": "^5.7.2"
@@ -61,8 +61,21 @@
   "devDependencies": {
     "@types/node": "^22.10.1",
     "@types/update-notifier": "6.0.8",
-    "chalk": "^5.3.0",
+    "chalk": "^5.4.0",
+    "fs-extra": "^11.3.0",
     "update-notifier": "^7.3.1",
     "vitest": "^2.1.8"
+  },
+  "tsup": {
+    "clean": true,
+    "shims": true,
+    "bundle": false,
+    "format": [
+      "esm"
+    ],
+    "target": "es2022",
+    "entry": [
+      "src"
+    ]
   }
 }

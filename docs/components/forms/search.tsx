@@ -39,9 +39,9 @@ import scrollIntoView from "scroll-into-view-if-needed"
 const ACTION_DEFAULT_KEY = "Ctrl"
 const ACTION_APPLE_KEY = "⌘"
 
-const useSearch = () => {
+const useRouteDisclosure = () => {
   const { events } = useRouter()
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   useEffect(() => {
     events.on("routeChangeComplete", onClose)
@@ -51,7 +51,7 @@ const useSearch = () => {
     }
   }, [onClose, events])
 
-  return { isOpen, onClose, onOpen }
+  return { open, onClose, onOpen }
 }
 
 export interface SearchProps extends StackProps {}
@@ -59,7 +59,7 @@ export interface SearchProps extends StackProps {}
 export const Search = memo(
   forwardRef<SearchProps, "button">(({ ...rest }, ref) => {
     const { tc } = useI18n()
-    const { isOpen, onClose, onOpen } = useSearch()
+    const { open, onClose, onOpen } = useRouteDisclosure()
     const [actionKey, setActionKey] = useState(ACTION_APPLE_KEY)
 
     useEffect(() => {
@@ -75,7 +75,7 @@ export const Search = memo(
 
       ev.preventDefault()
 
-      if (isOpen) {
+      if (open) {
         onClose()
       } else {
         onOpen()
@@ -109,7 +109,7 @@ export const Search = memo(
           <Kbd>{actionKey} + K</Kbd>
         </HStack>
 
-        <SearchModal isOpen={isOpen} onClose={onClose} />
+        <SearchModal open={open} onClose={onClose} />
       </>
     )
   }),
@@ -119,7 +119,7 @@ export interface SearchButtonProps extends ButtonProps {}
 
 export const SearchButton = memo(
   forwardRef<SearchButtonProps, "button">(({ ...rest }, ref) => {
-    const { isOpen, onClose, onOpen } = useSearch()
+    const { open, onClose, onOpen } = useRouteDisclosure()
 
     return (
       <>
@@ -134,7 +134,7 @@ export const SearchButton = memo(
           onClick={handlerAll(rest.onClick, onOpen)}
         />
 
-        <SearchModal isOpen={isOpen} onClose={onClose} />
+        <SearchModal open={open} onClose={onClose} />
       </>
     )
   }),
@@ -142,234 +142,230 @@ export const SearchButton = memo(
 
 interface SearchModalProps extends ModalProps {}
 
-const SearchModal: FC<SearchModalProps> = memo(
-  ({ isOpen, onClose, ...rest }) => {
-    const [query, setQuery] = useState<string>("")
-    const [selectedIndex, setSelectedIndex] = useState<number>(0)
-    const { contents, t } = useI18n()
-    const router = useRouter()
-    const eventRef = useRef<"keyboard" | "mouse" | null>(null)
-    const directionRef = useRef<"down" | "up">("down")
-    const compositionRef = useRef<boolean>(false)
-    const containerRef = useRef<HTMLDivElement>(null)
-    const itemRefs = useRef<Map<number, RefObject<HTMLAnchorElement>>>(
-      new Map(),
-    )
+const SearchModal: FC<SearchModalProps> = memo(({ open, onClose, ...rest }) => {
+  const [query, setQuery] = useState<string>("")
+  const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const { contents, t } = useI18n()
+  const router = useRouter()
+  const eventRef = useRef<"keyboard" | "mouse" | null>(null)
+  const directionRef = useRef<"down" | "up">("down")
+  const compositionRef = useRef<boolean>(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const itemRefs = useRef<Map<number, RefObject<HTMLAnchorElement>>>(new Map())
 
-    const hits = useMemo(() => {
-      if (query.length < 1) return []
+  const hits = useMemo(() => {
+    if (query.length < 1) return []
 
-      return matchSorter(contents, query, {
-        keys: [
-          "hierarchy.lv1",
-          "hierarchy.lv2",
-          "hierarchy.lv3",
-          "hierarchy.lv4",
-          "description",
-          "title",
-        ],
-      }).slice(0, 20)
-    }, [query, contents])
+    return matchSorter(contents, query, {
+      keys: [
+        "hierarchy.lv1",
+        "hierarchy.lv2",
+        "hierarchy.lv3",
+        "hierarchy.lv4",
+        "description",
+        "title",
+      ],
+    }).slice(0, 20)
+  }, [query, contents])
 
-    const onKeyDown = useCallback(
-      (ev: KeyboardEvent<HTMLInputElement>) => {
-        if (compositionRef.current) return
+  const onKeyDown = useCallback(
+    (ev: KeyboardEvent<HTMLInputElement>) => {
+      if (compositionRef.current) return
 
-        eventRef.current = "keyboard"
+      eventRef.current = "keyboard"
 
-        const actions: { [key: string]: Function | undefined } = {
-          ArrowDown: () => {
-            if (selectedIndex + 1 === hits.length) return
+      const actions: { [key: string]: Function | undefined } = {
+        ArrowDown: () => {
+          if (selectedIndex + 1 === hits.length) return
 
-            directionRef.current = "down"
-            setSelectedIndex(selectedIndex + 1)
-          },
-          ArrowUp: () => {
-            if (selectedIndex === 0) return
+          directionRef.current = "down"
+          setSelectedIndex(selectedIndex + 1)
+        },
+        ArrowUp: () => {
+          if (selectedIndex === 0) return
 
-            directionRef.current = "up"
-            setSelectedIndex(selectedIndex - 1)
-          },
-          End: () => {
-            directionRef.current = "down"
-            setSelectedIndex(hits.length - 1)
-          },
-          Enter: () => {
-            if (!hits.length) return
+          directionRef.current = "up"
+          setSelectedIndex(selectedIndex - 1)
+        },
+        End: () => {
+          directionRef.current = "down"
+          setSelectedIndex(hits.length - 1)
+        },
+        Enter: () => {
+          if (!hits.length) return
 
-            onClose?.()
-            router.push(hits[selectedIndex]?.slug)
-          },
-          Home: () => {
-            directionRef.current = "up"
-            setSelectedIndex(0)
-          },
-        }
+          onClose?.()
+          router.push(hits[selectedIndex]?.slug)
+        },
+        Home: () => {
+          directionRef.current = "up"
+          setSelectedIndex(0)
+        },
+      }
 
-        const action = actions[ev.key]
+      const action = actions[ev.key]
 
-        if (!action) return
+      if (!action) return
 
-        ev.preventDefault()
-        ev.stopPropagation()
+      ev.preventDefault()
+      ev.stopPropagation()
 
-        action(ev)
-      },
-      [hits, onClose, selectedIndex, router],
-    )
+      action(ev)
+    },
+    [hits, onClose, selectedIndex, router],
+  )
 
-    useEffect(() => {
-      if (isOpen) return
+  useEffect(() => {
+    if (open) return
 
-      setQuery("")
-    }, [isOpen])
+    setQuery("")
+  }, [open])
 
-    useUpdateEffect(() => {
-      setSelectedIndex(0)
-    }, [query])
+  useUpdateEffect(() => {
+    setSelectedIndex(0)
+  }, [query])
 
-    useUpdateEffect(() => {
-      if (!containerRef.current || eventRef.current === "mouse") return
+  useUpdateEffect(() => {
+    if (!containerRef.current || eventRef.current === "mouse") return
 
-      const itemRef = itemRefs.current.get(selectedIndex)
+    const itemRef = itemRefs.current.get(selectedIndex)
 
-      if (!itemRef?.current) return
+    if (!itemRef?.current) return
 
-      scrollIntoView(itemRef.current, {
-        behavior: (actions) =>
-          actions.forEach(({ el, top }) => {
-            if (directionRef.current === "down") {
-              el.scrollTop = top + 16
-            } else {
-              el.scrollTop = top - 17
-            }
-          }),
-        block: "nearest",
-        boundary: containerRef.current,
-        inline: "nearest",
-        scrollMode: "if-needed",
-      })
-    }, [selectedIndex])
+    scrollIntoView(itemRef.current, {
+      behavior: (actions) =>
+        actions.forEach(({ el, top }) => {
+          if (directionRef.current === "down") {
+            el.scrollTop = top + 16
+          } else {
+            el.scrollTop = top - 17
+          }
+        }),
+      block: "nearest",
+      boundary: containerRef.current,
+      inline: "nearest",
+      scrollMode: "if-needed",
+    })
+  }, [selectedIndex])
 
-    return (
-      <Modal
-        size="3xl"
-        isOpen={isOpen}
-        placement="top"
-        withCloseButton={false}
-        onClose={onClose}
-        {...rest}
-      >
-        <ModalHeader fontSize="md" fontWeight="normal" pb="md">
-          <HStack position="relative" w="full">
-            <ui.input
-              autoComplete="off"
-              autoCorrect="off"
-              flex="1"
-              maxLength={64}
-              pl="lg"
-              placeholder={t("component.forms.search.placeholder") as string}
-              spellCheck="false"
-              value={query}
-              onChange={(ev) => setQuery(ev.target.value)}
-              onCompositionEnd={() => {
-                compositionRef.current = false
-              }}
-              onCompositionStart={() => {
-                compositionRef.current = true
-              }}
-              onKeyDown={onKeyDown}
-            />
+  return (
+    <Modal
+      size="3xl"
+      open={open}
+      placement="top"
+      withCloseButton={false}
+      onClose={onClose}
+      {...rest}
+    >
+      <ModalHeader fontSize="md" fontWeight="normal" pb="md">
+        <HStack position="relative" w="full">
+          <ui.input
+            autoComplete="off"
+            autoCorrect="off"
+            flex="1"
+            maxLength={64}
+            pl="lg"
+            placeholder={t("component.forms.search.placeholder") as string}
+            spellCheck="false"
+            value={query}
+            onChange={(ev) => setQuery(ev.target.value)}
+            onCompositionEnd={() => {
+              compositionRef.current = false
+            }}
+            onCompositionStart={() => {
+              compositionRef.current = true
+            }}
+            onKeyDown={onKeyDown}
+          />
 
-            <SearchIcon
-              color="muted"
-              fontSize="2xl"
-              left="0"
-              pointerEvents="none"
-              position="absolute"
-              top="50%"
-              transform="translateY(-50%)"
-            />
-          </HStack>
-        </ModalHeader>
+          <SearchIcon
+            color="muted"
+            fontSize="2xl"
+            left="0"
+            pointerEvents="none"
+            position="absolute"
+            top="50%"
+            transform="translateY(-50%)"
+          />
+        </HStack>
+      </ModalHeader>
 
-        {hits.length ? (
-          <ModalBody ref={containerRef} my="0" pb="md">
-            <Separator />
+      {hits.length ? (
+        <ModalBody ref={containerRef} my="0" pb="md">
+          <Separator />
 
-            <VStack as="ul" gap="sm">
-              {hits.map(({ type, hierarchy, slug, title }, index) => {
-                const isSelected = index === selectedIndex
-                const ref = createRef<HTMLAnchorElement>()
+          <VStack as="ul" gap="sm">
+            {hits.map(({ type, hierarchy, slug, title }, index) => {
+              const isSelected = index === selectedIndex
+              const ref = createRef<HTMLAnchorElement>()
 
-                itemRefs.current.set(index, ref)
+              itemRefs.current.set(index, ref)
 
-                return (
-                  <HStack
-                    key={slug}
-                    ref={ref}
-                    as={NextLink}
-                    href={slug}
-                    data-selected={dataAttr(isSelected)}
-                    bg={["blackAlpha.50", "whiteAlpha.50"]}
-                    borderWidth="1px"
-                    gap="2"
-                    minH="16"
-                    px="md"
-                    py="sm"
-                    rounded="md"
-                    transitionDuration="normal"
-                    transitionProperty="colors"
-                    _active={{}}
-                    _focus={{ outline: "none" }}
-                    _focusVisible={{ boxShadow: "outline" }}
-                    _hover={{ boxShadow: "outline" }}
-                    _selected={{ boxShadow: "outline" }}
-                    onClick={onClose}
-                    onMouseEnter={() => {
-                      eventRef.current = "mouse"
-                      setSelectedIndex(index)
-                    }}
-                  >
-                    {type === "page" ? (
-                      <FileIcon color="muted" fontSize="2xl" />
-                    ) : (
-                      <HashIcon
-                        color={["blackAlpha.500", "whiteAlpha.400"]}
-                        fontSize="2xl"
-                      />
-                    )}
+              return (
+                <HStack
+                  key={slug}
+                  ref={ref}
+                  as={NextLink}
+                  href={slug}
+                  data-selected={dataAttr(isSelected)}
+                  bg={["blackAlpha.50", "whiteAlpha.50"]}
+                  borderWidth="1px"
+                  gap="2"
+                  minH="16"
+                  px="md"
+                  py="sm"
+                  rounded="md"
+                  transitionDuration="normal"
+                  transitionProperty="colors"
+                  _active={{}}
+                  _focus={{ outline: "none" }}
+                  _focusVisible={{ boxShadow: "outline" }}
+                  _hover={{ boxShadow: "outline" }}
+                  _selected={{ boxShadow: "outline" }}
+                  onClick={onClose}
+                  onMouseEnter={() => {
+                    eventRef.current = "mouse"
+                    setSelectedIndex(index)
+                  }}
+                >
+                  {type === "page" ? (
+                    <FileIcon color="muted" fontSize="2xl" />
+                  ) : (
+                    <HashIcon
+                      color={["blackAlpha.500", "whiteAlpha.400"]}
+                      fontSize="2xl"
+                    />
+                  )}
 
-                    <VStack gap="0">
-                      {type === "fragment" ? (
-                        <Highlight
-                          color="muted"
-                          fontSize="xs"
-                          lineClamp={1}
-                          query={query}
-                          markProps={{ variant: "text-accent" }}
-                        >
-                          {hierarchy.lv1}
-                        </Highlight>
-                      ) : null}
-
+                  <VStack gap="0">
+                    {type === "fragment" ? (
                       <Highlight
+                        color="muted"
+                        fontSize="xs"
                         lineClamp={1}
                         query={query}
                         markProps={{ variant: "text-accent" }}
                       >
-                        {title}
+                        {hierarchy.lv1}
                       </Highlight>
-                    </VStack>
-                  </HStack>
-                )
-              })}
-            </VStack>
-          </ModalBody>
-        ) : null}
-      </Modal>
-    )
-  },
-)
+                    ) : null}
+
+                    <Highlight
+                      lineClamp={1}
+                      query={query}
+                      markProps={{ variant: "text-accent" }}
+                    >
+                      {title}
+                    </Highlight>
+                  </VStack>
+                </HStack>
+              )
+            })}
+          </VStack>
+        </ModalBody>
+      ) : null}
+    </Modal>
+  )
+})
 
 SearchModal.displayName = "SearchModal"

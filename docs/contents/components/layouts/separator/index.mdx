@@ -18,11 +18,9 @@ import { Separator } from "@yamada-ui/react"
 
 ```tsx
 <Flex direction="column" gap="md">
-  <Separator variant="solid" />
-
-  <Separator variant="dashed" />
-
-  <Separator variant="dotted" />
+  <For each={["solid", "dashed", "dotted"]}>
+    {(variant, index) => <Separator key={index} variant={variant} />}
+  </For>
 </Flex>
 ```
 
@@ -30,11 +28,11 @@ import { Separator } from "@yamada-ui/react"
 
 ```tsx
 <Flex h="sm" gap="md">
-  <Separator orientation="vertical" variant="solid" />
-
-  <Separator orientation="vertical" variant="dashed" />
-
-  <Separator orientation="vertical" variant="dotted" />
+  <For each={["solid", "dashed", "dotted"]}>
+    {(variant, index) => (
+      <Separator key={index} orientation="vertical" variant={variant} />
+    )}
+  </For>
 </Flex>
 ```
 

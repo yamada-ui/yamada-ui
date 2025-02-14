@@ -18,20 +18,22 @@ import { Wrap } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  {Array(20)
-    .fill(0)
-    .map((_, index) =>
-      ["primary", "secondary", "warning", "danger"].map((bg, nestedIndex) => (
-        <Box
-          key={`${index}-${nestedIndex}`}
-          p="md"
-          rounded="md"
-          bg={bg}
-          color="white"
-        >
-          Box
-        </Box>
-      )),
+  <For each={Array.from({ length: 20 })}>
+    {(_, index) => (
+      <For key={index} each={["primary", "secondary", "warning", "danger"]}>
+        {(bg, nestedIndex) => (
+          <Box
+            key={`${index}-${nestedIndex}`}
+            p="md"
+            rounded="md"
+            bg={bg}
+            color="white"
+          >
+            Box
+          </Box>
+        )}
+      </For>
     )}
+  </For>
 </Wrap>
 ```

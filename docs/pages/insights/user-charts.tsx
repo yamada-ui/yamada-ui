@@ -7,11 +7,11 @@ import { DEFAULT_SCORE, getInsightScore } from "./insights-utils"
 import { UserChart } from "./user-chart"
 
 export interface UserChartsProps extends GridProps {
-  isLoading: boolean
+  loading: boolean
 }
 
 export const UserCharts = memo(
-  forwardRef<UserChartsProps, "div">(({ isLoading, ...rest }, ref) => {
+  forwardRef<UserChartsProps, "div">(({ loading, ...rest }, ref) => {
     const { currentInsights, prevInsights, users } = useInsights()
 
     const computedUsers = useMemo(() => {
@@ -103,7 +103,7 @@ export const UserCharts = memo(
             id={id}
             key={id}
             currentScore={currentScore}
-            isLoading={isLoading}
+            loading={loading}
             prevScore={prevScore}
             timeline={timeline}
           />

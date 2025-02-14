@@ -217,9 +217,9 @@ const { getInputProps, getIncrementProps, getDecrementProps } = useNumberInput({
 
 return (
   <HStack maxW="xs" gap="sm">
-    <Button {...getIncrementProps()}>+</Button>
+    <IconButton icon={<PlusIcon fontSize="2xl" />} {...getIncrementProps()} />
     <Input {...getInputProps()} />
-    <Button {...getDecrementProps()}>-</Button>
+    <IconButton icon={<MinusIcon fontSize="2xl" />} {...getDecrementProps()} />
   </HStack>
 )
 ```

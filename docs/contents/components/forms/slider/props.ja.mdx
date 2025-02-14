@@ -27,6 +27,14 @@ tab: Props
 />
 
 <PropsCard
+  id="slider-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="slider-filledtrackcolor"
   name="filledTrackColor"
   type='UIValue<"border" | ({} & string) | Color | "amber.50" | "amber.100" | "amber.200" | "amber.300" | "amber.400" | "amber.500" | "amber.600" | "amber.700" | "amber.800" | "amber.900" | ... 318 more ... | "yellow.950">'
@@ -76,10 +84,19 @@ tab: Props
 />
 
 <PropsCard
+  id="slider-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="slider-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -88,6 +105,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -96,6 +114,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -104,6 +123,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -114,6 +134,7 @@ tab: Props
   description={
     "If `true`, the value will be incremented or decremented in reverse."
   }
+  deprecated={"Use `reversed` instead."}
 />
 
 <PropsCard
@@ -172,6 +193,31 @@ tab: Props
   type='"horizontal" | "vertical"'
   description={"The orientation of the slider."}
   defaultValue={"'horizontal'"}
+/>
+
+<PropsCard
+  id="slider-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="slider-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="slider-reversed"
+  name="reversed"
+  type="boolean"
+  description={
+    "If `true`, the value will be incremented or decremented in reverse."
+  }
 />
 
 <PropsCard

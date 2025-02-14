@@ -24,10 +24,11 @@ import { Textarea } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Textarea variant="outline" placeholder="outline" />
-  <Textarea variant="filled" placeholder="filled" />
-  <Textarea variant="flushed" placeholder="flushed" />
-  <Textarea variant="unstyled" placeholder="unstyled" />
+  <For each={["outline", "filled", "flushed", "unstyled"]}>
+    {(variant, index) => (
+      <Textarea key={index} variant={variant} placeholder={variant} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -48,10 +49,11 @@ Use the `resize` property to control the resize behavior of the `Textarea`.
 
 ```tsx
 <VStack>
-  <Textarea resize="block" placeholder="block" />
-  <Textarea resize="horizontal" placeholder="horizontal" />
-  <Textarea resize="vertical" placeholder="vertical" />
-  <Textarea resize="none" placeholder="none" />
+  <For each={["block", "horizontal", "vertical", "none"]}>
+    {(resize, index) => (
+      <Textarea key={index} resize={resize} placeholder={resize} />
+    )}
+  </For>
 </VStack>
 ```
 

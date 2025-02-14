@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "es2020",
+    "module": "commonjs",
+    "jsx": "react",
+    "esModuleInterop": true
+  },
+  "include": ["src"]
+}
+

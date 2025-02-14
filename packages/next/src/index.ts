@@ -1,6 +1,0 @@
-export { Image } from "./image"
-export { Image as Img } from "./image"
-export type { ImageProps } from "./image"
-export type { ImageProps as ImgProps } from "./image"
-export { Link } from "./link"
-export type { LinkProps } from "./link"

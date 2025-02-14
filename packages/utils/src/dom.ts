@@ -1,4 +1,3 @@
-import type React from "react"
 import { isNumber, isUndefined } from "./assertion"
 
 export function createdDom(): boolean {
@@ -92,10 +91,9 @@ export function getPx(value: number | string | undefined): number {
 
   if (value.includes("px")) return parseFloat(value)
 
-  const isBrowser = createdDom()
   let fontSize = 16
 
-  if (isBrowser) {
+  if (createdDom()) {
     const style = window.getComputedStyle(document.documentElement)
 
     const computedFontSize = parseFloat(style.fontSize)
@@ -106,18 +104,13 @@ export function getPx(value: number | string | undefined): number {
   return parseFloat(value) * fontSize
 }
 
-export function getEventRelatedTarget(ev: React.FocusEvent | React.MouseEvent) {
-  return (ev.relatedTarget ??
-    ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
-}
-
 type Booleanish = "false" | "true" | boolean
 
-export function dataAttr(condition: boolean | undefined) {
+export function dataAttr(condition: any) {
   return (condition ? "" : undefined) as Booleanish
 }
 
-export function ariaAttr(condition: boolean | undefined): boolean | undefined {
+export function ariaAttr(condition: any): boolean | undefined {
   return condition ? true : undefined
 }
 
@@ -207,4 +200,10 @@ export function getActiveElement(el?: HTMLElement): HTMLElement | null {
 
 export function isActiveElement(el: HTMLElement): boolean {
   return getActiveElement(el) === el
+}
+
+let createIdCounter = 0
+
+export function createId(prefix: string) {
+  return `${prefix}-${++createIdCounter}-${new Date().getTime()}`
 }

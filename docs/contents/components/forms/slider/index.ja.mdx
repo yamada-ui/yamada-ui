@@ -40,9 +40,26 @@ import {
 
 ```tsx
 <VStack>
-  <Slider size="sm" defaultValue={25} />
-  <Slider size="md" defaultValue={50} />
-  <Slider size="lg" defaultValue={75} />
+  <For
+    each={[
+      {
+        size: "sm",
+        defaultValue: 25,
+      },
+      {
+        size: "md",
+        defaultValue: 50,
+      },
+      {
+        size: "lg",
+        defaultValue: 75,
+      },
+    ]}
+  >
+    {({ size, defaultValue }, index) => (
+      <Slider key={index} size={size} defaultValue={defaultValue} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -50,8 +67,9 @@ import {
 
 ```tsx
 <VStack>
-  <Slider colorScheme="secondary" />
-  <Slider colorScheme="green" />
+  <For each={["secondary", "green"]}>
+    {(colorScheme, index) => <Slider key={index} colorScheme={colorScheme} />}
+  </For>
 </VStack>
 ```
 
@@ -207,41 +225,19 @@ return (
 
 ```tsx
 <VStack gap="lg" my="10">
-  <Slider size="sm">
-    <SliderMark value={25} w="10" ml="-5">
-      25%
-    </SliderMark>
-    <SliderMark value={50} w="10" ml="-5">
-      50%
-    </SliderMark>
-    <SliderMark value={75} w="10" ml="-5">
-      75%
-    </SliderMark>
-  </Slider>
-
-  <Slider size="md">
-    <SliderMark value={25} w="10" ml="-5">
-      25%
-    </SliderMark>
-    <SliderMark value={50} w="10" ml="-5">
-      50%
-    </SliderMark>
-    <SliderMark value={75} w="10" ml="-5">
-      75%
-    </SliderMark>
-  </Slider>
-
-  <Slider size="lg">
-    <SliderMark value={25} w="10" ml="-5">
-      25%
-    </SliderMark>
-    <SliderMark value={50} w="10" ml="-5">
-      50%
-    </SliderMark>
-    <SliderMark value={75} w="10" ml="-5">
-      75%
-    </SliderMark>
-  </Slider>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <Slider key={index} size={size}>
+        <For each={[25, 50, 75]}>
+          {(value, index) => (
+            <SliderMark key={index} value={value} w="10" ml="-5">
+              {value}%
+            </SliderMark>
+          )}
+        </For>
+      </Slider>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -261,15 +257,13 @@ return (
     onMouseEnter={on}
     onMouseLeave={off}
   >
-    <SliderMark value={25} w="10" ml="-5">
-      25%
-    </SliderMark>
-    <SliderMark value={50} w="10" ml="-5">
-      50%
-    </SliderMark>
-    <SliderMark value={75} w="10" ml="-5">
-      75%
-    </SliderMark>
+    <For each={[25, 50, 75]}>
+      {(value, index) => (
+        <SliderMark key={index} value={value} w="10" ml="-5">
+          {value}%
+        </SliderMark>
+      )}
+    </For>
 
     <Tooltip placement="top" label={`${value}%`} isOpen={isOpen}>
       <SliderThumb />
@@ -332,15 +326,13 @@ const [value, onChange] = useState<number>(50)
 
 return (
   <Slider value={value} onChange={onChange} my="10">
-    <SliderMark value={25} w="10" ml="-5">
-      25%
-    </SliderMark>
-    <SliderMark value={50} w="10" ml="-5">
-      50%
-    </SliderMark>
-    <SliderMark value={75} w="10" ml="-5">
-      75%
-    </SliderMark>
+    <For each={[25, 50, 75]}>
+      {(value, index) => (
+        <SliderMark key={index} value={value} w="10" ml="-5">
+          {value}%
+        </SliderMark>
+      )}
+    </For>
     <SliderMark
       value={value}
       bg="blue.500"

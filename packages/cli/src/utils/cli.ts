@@ -1,11 +1,13 @@
 import c from "chalk"
 import checkNode from "cli-check-node"
 import unhandledError from "cli-handle-unhandled"
+import { createRequire } from "node:module"
 import updateNotifier from "update-notifier"
-import pkg from "../../package.json"
+
+const pkg = createRequire(import.meta.url)("@yamada-ui/cli/package.json")
 
 export const initCLI = async () => {
-  checkNode("12")
+  checkNode("22")
 
   await unhandledError()
 

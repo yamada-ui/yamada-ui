@@ -69,12 +69,12 @@ tab: Props
   type='type ONLY_FOR_FORMAT =
   | boolean
   | "page"
-  | "time"
   | "true"
   | "false"
   | "step"
   | "location"
-  | "date"'
+  | "date"
+  | "time"'
 />
 
 <PropsCard
@@ -96,7 +96,7 @@ tab: Props
 <PropsCard
   id="reorder-aria-dropeffect"
   name="aria-dropeffect"
-  type='"link" | "none" | "copy" | "execute" | "move" | "popup"'
+  type='"none" | "link" | "copy" | "execute" | "move" | "popup"'
 />
 
 <PropsCard
@@ -117,11 +117,11 @@ tab: Props
   type='type ONLY_FOR_FORMAT =
   | boolean
   | "grid"
-  | "dialog"
-  | "menu"
   | "true"
   | "false"
+  | "dialog"
   | "listbox"
+  | "menu"
   | "tree"'
 />
 
@@ -307,12 +307,12 @@ tab: Props
   id="reorder-enterkeyhint"
   name="enterKeyHint"
   type='type ONLY_FOR_FORMAT =
-  | "search"
   | "enter"
   | "done"
   | "go"
   | "next"
   | "previous"
+  | "search"
   | "send"'
 />
 
@@ -327,8 +327,8 @@ tab: Props
   name="inputMode"
   type='type ONLY_FOR_FORMAT =
   | "text"
-  | "search"
   | "none"
+  | "search"
   | "tel"
   | "url"
   | "email"
@@ -354,6 +354,8 @@ tab: Props
 <PropsCard id="reorder-itemscope" name="itemScope" type="boolean" />
 
 <PropsCard id="reorder-itemtype" name="itemType" type="string" />
+
+<PropsCard id="reorder-key" name="key" type="Key" />
 
 <PropsCard id="reorder-lang" name="lang" type="string" />
 
@@ -1319,6 +1321,15 @@ tab: Props
 
 <PropsCard id="reorder-radiogroup" name="radioGroup" type="string" />
 
+<PropsCard
+  id="reorder-ref"
+  name="ref"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | ((instance: HTMLUListElement | null) => void)
+  | RefObject<HTMLUListElement>"
+/>
+
 <PropsCard id="reorder-rel" name="rel" type="string" />
 
 <PropsCard id="reorder-resource" name="resource" type="string" />
@@ -1435,12 +1446,12 @@ tab: Props
   type='type ONLY_FOR_FORMAT =
   | boolean
   | "page"
-  | "time"
   | "true"
   | "false"
   | "step"
   | "location"
-  | "date"'
+  | "date"
+  | "time"'
 />
 
 <PropsCard
@@ -1466,7 +1477,7 @@ tab: Props
 <PropsCard
   id="reorderitem-aria-dropeffect"
   name="aria-dropeffect"
-  type='"link" | "none" | "copy" | "execute" | "move" | "popup"'
+  type='"none" | "link" | "copy" | "execute" | "move" | "popup"'
 />
 
 <PropsCard
@@ -1495,11 +1506,11 @@ tab: Props
   type='type ONLY_FOR_FORMAT =
   | boolean
   | "grid"
-  | "dialog"
-  | "menu"
   | "true"
   | "false"
+  | "dialog"
   | "listbox"
+  | "menu"
   | "tree"'
 />
 
@@ -1702,12 +1713,12 @@ tab: Props
   id="reorderitem-enterkeyhint"
   name="enterKeyHint"
   type='type ONLY_FOR_FORMAT =
-  | "search"
   | "enter"
   | "done"
   | "go"
   | "next"
   | "previous"
+  | "search"
   | "send"'
 />
 
@@ -1722,8 +1733,8 @@ tab: Props
   name="inputMode"
   type='type ONLY_FOR_FORMAT =
   | "text"
-  | "search"
   | "none"
+  | "search"
   | "tel"
   | "url"
   | "email"
@@ -1742,6 +1753,8 @@ tab: Props
 <PropsCard id="reorderitem-itemscope" name="itemScope" type="boolean" />
 
 <PropsCard id="reorderitem-itemtype" name="itemType" type="string" />
+
+<PropsCard id="reorderitem-key" name="key" type="Key" />
 
 <PropsCard
   id="reorderitem-label"
@@ -2701,6 +2714,15 @@ tab: Props
 <PropsCard id="reorderitem-property" name="property" type="string" />
 
 <PropsCard id="reorderitem-radiogroup" name="radioGroup" type="string" />
+
+<PropsCard
+  id="reorderitem-ref"
+  name="ref"
+  type="type ONLY_FOR_FORMAT =
+  | string
+  | ((instance: HTMLLIElement | null) => void)
+  | RefObject<HTMLLIElement>"
+/>
 
 <PropsCard id="reorderitem-rel" name="rel" type="string" />
 

@@ -1,1 +1,0 @@
-{ "Notice": { "onClose": { "type": "() => void", "required": false } } }

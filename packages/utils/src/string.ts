@@ -1,5 +1,9 @@
 import type { StringLiteral } from "./index.types"
 
+export function cx(...classNames: (string | undefined)[]) {
+  return classNames.filter(Boolean).join(" ")
+}
+
 export function escape(value: string, replaceValue = ""): string {
   return value.replace(/\s+/g, replaceValue)
 }

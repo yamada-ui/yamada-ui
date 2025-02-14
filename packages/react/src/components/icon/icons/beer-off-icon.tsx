@@ -1,0 +1,9 @@
+import { BeerOff } from "lucide-react"
+import { component, Icon } from "../icon"
+
+/**
+ * `BeerOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
+ *
+ * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ */
+export const BeerOffIcon = component(Icon)({ as: BeerOff })

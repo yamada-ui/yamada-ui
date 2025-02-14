@@ -27,6 +27,14 @@ tab: Props
 />
 
 <PropsCard
+  id="saturationslider-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the form control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="saturationslider-focusthumbonchange"
   name="focusThumbOnChange"
   type="boolean"
@@ -51,10 +59,19 @@ tab: Props
 />
 
 <PropsCard
+  id="saturationslider-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the form control will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="saturationslider-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the form control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -63,6 +80,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the form control will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -71,6 +89,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the form control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -79,6 +98,7 @@ tab: Props
   name="isRequired"
   type="boolean"
   description={"If `true`, the form control will be required."}
+  deprecated={"Use `required` instead."}
   defaultValue={"false"}
 />
 
@@ -125,6 +145,22 @@ tab: Props
   type="UIValue<number>"
   description={"The aspect ratio of the saturation slider."}
   defaultValue={"'16 / 9'"}
+/>
+
+<PropsCard
+  id="saturationslider-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the form control will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="saturationslider-required"
+  name="required"
+  type="boolean"
+  description={"If `true`, the form control will be required."}
+  defaultValue={"false"}
 />
 
 <PropsCard

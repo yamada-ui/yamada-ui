@@ -54,10 +54,19 @@ tab: Props
 />
 
 <PropsCard
+  id="fieldset-invalid"
+  name="invalid"
+  type="boolean"
+  description={"If `true`, the fieldset will be invalid."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="fieldset-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the fieldset will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -66,6 +75,7 @@ tab: Props
   name="isInvalid"
   type="boolean"
   description={"If `true`, the fieldset will be invalid."}
+  deprecated={"Use `invalid` instead."}
   defaultValue={"false"}
 />
 
@@ -74,6 +84,7 @@ tab: Props
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the fieldset will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -84,10 +95,16 @@ tab: Props
   description={
     "If `true`, switch between helper message and error message using isInvalid."
   }
+  deprecated={"Use `replace` instead."}
   defaultValue={"true"}
 />
 
-<PropsCard id="fieldset-isrequired" name="isRequired" type="boolean" />
+<PropsCard
+  id="fieldset-isrequired"
+  name="isRequired"
+  type="boolean"
+  deprecated={"Use `required` instead."}
+/>
 
 <PropsCard
   id="fieldset-legend"
@@ -122,6 +139,26 @@ tab: Props
 />
 
 <PropsCard
+  id="fieldset-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the fieldset will be readonly."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
+  id="fieldset-replace"
+  name="replace"
+  type="boolean"
+  description={
+    "If `true`, switch between helper message and error message using isInvalid."
+  }
+  defaultValue={"true"}
+/>
+
+<PropsCard id="fieldset-required" name="required" type="boolean" />
+
+<PropsCard
   id="fieldset-requiredindicator"
   name="requiredIndicator"
   type="type ONLY_FOR_FORMAT =
@@ -135,7 +172,12 @@ tab: Props
 
 ### LegendProps
 
-<PropsCard id="legend-isrequired" name="isRequired" type="boolean" />
+<PropsCard
+  id="legend-isrequired"
+  name="isRequired"
+  type="boolean"
+  deprecated={"Use `required` instead."}
+/>
 
 <PropsCard
   id="legend-optionalindicator"
@@ -148,6 +190,8 @@ tab: Props
   | Iterable<ReactNode>
   | ReactPortal"
 />
+
+<PropsCard id="legend-required" name="required" type="boolean" />
 
 <PropsCard
   id="legend-requiredindicator"

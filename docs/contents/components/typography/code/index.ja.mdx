@@ -24,13 +24,13 @@ import { Code } from "@yamada-ui/react"
 
 ```tsx
 <VStack alignItems="start">
-  <Code variant="solid">console.log("Hello, Yamada!")</Code>
-
-  <Code variant="outline">console.log("Hello, Yamada!")</Code>
-
-  <Code variant="subtle">console.log("Hello, Yamada!")</Code>
-
-  <Code variant="surface">console.log("Hello, Yamada!")</Code>
+  <For each={["solid", "outline", "subtle", "surface"]}>
+    {(variant, index) => (
+      <Code key={index} variant={variant}>
+        console.log("Hello, Yamada!")
+      </Code>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -40,13 +40,13 @@ import { Code } from "@yamada-ui/react"
 
 ```tsx
 <VStack alignItems="start">
-  <Code size="xs">console.log("Hello, Yamada!")</Code>
-
-  <Code size="sm">console.log("Hello, Yamada!")</Code>
-
-  <Code size="md">console.log("Hello, Yamada!")</Code>
-
-  <Code size="lg">console.log("Hello, Yamada!")</Code>
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size, index) => (
+      <Code key={index} size={size}>
+        console.log("Hello, Yamada!")
+      </Code>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -55,315 +55,155 @@ import { Code } from "@yamada-ui/react"
 ```tsx
 <Wrap gap="md" w="full">
   <VStack w="auto">
-    <Code variant="solid" colorScheme="primary">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="secondary">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="success">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="warning">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="danger">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="link">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="gray">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="neutral">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="red">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="rose">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="pink">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="orange">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="amber">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="yellow">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="lime">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="green">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="emerald">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="teal">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="cyan">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="sky">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="blue">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="indigo">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="violet">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="purple">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="solid" colorScheme="fuchsia">
-      console.log("Hello, Yamada!")
-    </Code>
+    <For
+      each={[
+        "primary",
+        "secondary",
+        "success",
+        "warning",
+        "danger",
+        "link",
+        "gray",
+        "neutral",
+        "red",
+        "rose",
+        "pink",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "green",
+        "emerald",
+        "teal",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "violet",
+        "purple",
+        "fuchsia",
+      ]}
+    >
+      {(colorScheme, index) => (
+        <Code key={index} variant="solid" colorScheme={colorScheme}>
+          console.log("Hello, Yamada!")
+        </Code>
+      )}
+    </For>
   </VStack>
 
   <VStack w="auto">
-    <Code variant="outline" colorScheme="primary">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="secondary">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="success">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="warning">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="danger">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="link">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="gray">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="neutral">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="red">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="rose">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="pink">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="orange">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="amber">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="yellow">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="lime">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="green">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="emerald">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="teal">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="cyan">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="sky">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="blue">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="indigo">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="violet">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="purple">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="outline" colorScheme="fuchsia">
-      console.log("Hello, Yamada!")
-    </Code>
+    <For
+      each={[
+        "primary",
+        "secondary",
+        "success",
+        "warning",
+        "danger",
+        "link",
+        "gray",
+        "neutral",
+        "red",
+        "rose",
+        "pink",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "green",
+        "emerald",
+        "teal",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "violet",
+        "purple",
+        "fuchsia",
+      ]}
+    >
+      {(colorScheme, index) => (
+        <Code key={index} variant="outline" colorScheme={colorScheme}>
+          console.log("Hello, Yamada!")
+        </Code>
+      )}
+    </For>
   </VStack>
 
   <VStack w="auto">
-    <Code variant="subtle" colorScheme="primary">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="secondary">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="success">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="warning">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="danger">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="link">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="gray">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="neutral">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="red">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="rose">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="pink">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="orange">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="amber">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="yellow">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="lime">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="green">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="emerald">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="teal">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="cyan">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="sky">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="blue">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="indigo">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="violet">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="purple">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="subtle" colorScheme="fuchsia">
-      console.log("Hello, Yamada!")
-    </Code>
+    <For
+      each={[
+        "primary",
+        "secondary",
+        "success",
+        "warning",
+        "danger",
+        "link",
+        "gray",
+        "neutral",
+        "red",
+        "rose",
+        "pink",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "green",
+        "emerald",
+        "teal",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "violet",
+        "purple",
+        "fuchsia",
+      ]}
+    >
+      {(colorScheme, index) => (
+        <Code key={index} variant="subtle" colorScheme={colorScheme}>
+          console.log("Hello, Yamada!")
+        </Code>
+      )}
+    </For>
   </VStack>
 
   <VStack w="auto">
-    <Code variant="surface" colorScheme="primary">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="secondary">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="success">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="warning">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="danger">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="link">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="gray">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="neutral">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="red">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="rose">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="pink">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="orange">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="amber">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="yellow">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="lime">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="green">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="emerald">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="teal">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="cyan">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="sky">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="blue">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="indigo">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="violet">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="purple">
-      console.log("Hello, Yamada!")
-    </Code>
-    <Code variant="surface" colorScheme="fuchsia">
-      console.log("Hello, Yamada!")
-    </Code>
+    <For
+      each={[
+        "primary",
+        "secondary",
+        "success",
+        "warning",
+        "danger",
+        "link",
+        "gray",
+        "neutral",
+        "red",
+        "rose",
+        "pink",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "green",
+        "emerald",
+        "teal",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "violet",
+        "purple",
+        "fuchsia",
+      ]}
+    >
+      {(colorScheme, index) => (
+        <Code key={index} variant="surface" colorScheme={colorScheme}>
+          console.log("Hello, Yamada!")
+        </Code>
+      )}
+    </For>
   </VStack>
 </Wrap>
 ```

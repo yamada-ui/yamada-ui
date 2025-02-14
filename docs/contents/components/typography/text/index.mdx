@@ -28,45 +28,13 @@ import { Text } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Text fontSize="6xl" isTruncated>
-    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-  </Text>
-
-  <Text fontSize="5xl" isTruncated>
-    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-  </Text>
-
-  <Text fontSize="4xl" isTruncated>
-    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-  </Text>
-
-  <Text fontSize="3xl" isTruncated>
-    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-  </Text>
-
-  <Text fontSize="2xl" isTruncated>
-    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-  </Text>
-
-  <Text fontSize="xl" isTruncated>
-    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-  </Text>
-
-  <Text fontSize="lg" isTruncated>
-    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-  </Text>
-
-  <Text fontSize="md" isTruncated>
-    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-  </Text>
-
-  <Text fontSize="sm" isTruncated>
-    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-  </Text>
-
-  <Text fontSize="xs" isTruncated>
-    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-  </Text>
+  <For each={["6xl", "5xl", "4xl", "3xl", "2xl", "xl", "lg", "md", "sm", "xs"]}>
+    {(fontSize, index) => (
+      <Text key={index} fontSize={fontSize} isTruncated>
+        私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+      </Text>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -76,29 +44,28 @@ By passing `as`, you can render it as a different element or component.
 
 ```tsx
 <VStack>
-  <Text as="b">へっ！きたねぇ花火だ</Text>
-
-  <Text as="i">へっ！きたねぇ花火だ</Text>
-
-  <Text as="u">へっ！きたねぇ花火だ</Text>
-
-  <Text as="abbr">へっ！きたねぇ花火だ</Text>
-
-  <Text as="del">へっ！きたねぇ花火だ</Text>
-
-  <Text as="em">へっ！きたねぇ花火だ</Text>
-
-  <Text as="ins">へっ！きたねぇ花火だ</Text>
-
-  <Text as="kbd">へっ！きたねぇ花火だ</Text>
-
-  <Text as="mark">へっ！きたねぇ花火だ</Text>
-
-  <Text as="s">へっ！きたねぇ花火だ</Text>
-
-  <Text as="samp">へっ！きたねぇ花火だ</Text>
-
-  <Text as="sub">へっ！きたねぇ花火だ</Text>
+  <For
+    each={[
+      "b",
+      "i",
+      "u",
+      "abbr",
+      "del",
+      "em",
+      "ins",
+      "kbd",
+      "mark",
+      "s",
+      "samp",
+      "sub",
+    ]}
+  >
+    {(as, index) => (
+      <Text key={index} as={as}>
+        へっ！きたねぇ花火だ
+      </Text>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -108,20 +75,14 @@ If you want to truncate text after a certain number of lines, specify the number
 
 ```tsx
 <VStack>
-  <Text fontSize="2xl" lineClamp={3}>
-    『ドラゴンボール』（DRAGON
-    BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
-  </Text>
-
-  <Text fontSize="2xl" lineClamp={2}>
-    『ドラゴンボール』（DRAGON
-    BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
-  </Text>
-
-  <Text fontSize="2xl" lineClamp={1}>
-    『ドラゴンボール』（DRAGON
-    BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
-  </Text>
+  <For each={[3, 2, 1]}>
+    {(lineClamp, index) => (
+      <Text key={index} fontSize="2xl" lineClamp={lineClamp}>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    )}
+  </For>
 </VStack>
 ```
 

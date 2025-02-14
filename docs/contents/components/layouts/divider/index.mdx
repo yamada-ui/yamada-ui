@@ -23,11 +23,9 @@ import { Divider } from "@yamada-ui/react"
 
 ```tsx
 <Flex direction="column" gap="md">
-  <Divider variant="solid" />
-
-  <Divider variant="dashed" />
-
-  <Divider variant="dotted" />
+  <For each={["solid", "dashed", "dotted"]}>
+    {(variant, index) => <Divider key={index} variant={variant} />}
+  </For>
 </Flex>
 ```
 
@@ -35,11 +33,11 @@ import { Divider } from "@yamada-ui/react"
 
 ```tsx
 <Flex h="sm" gap="md">
-  <Divider orientation="vertical" variant="solid" />
-
-  <Divider orientation="vertical" variant="dashed" />
-
-  <Divider orientation="vertical" variant="dotted" />
+  <For each={["solid", "dashed", "dotted"]}>
+    {(variant, index) => (
+      <Divider key={index} orientation="vertical" variant={variant} />
+    )}
+  </For>
 </Flex>
 ```
 

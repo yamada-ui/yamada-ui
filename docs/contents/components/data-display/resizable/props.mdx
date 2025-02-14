@@ -40,9 +40,17 @@ tab: Props
 <PropsCard
   id="resizable-direction"
   name="direction"
-  type="ResizableDirection"
+  type="ResizableOrientation"
   description={"The direction of the resizable."}
+  deprecated={"Use `orientation` instead."}
   defaultValue={"horizontal"}
+/>
+
+<PropsCard
+  id="resizable-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the resizable trigger will be disabled."}
 />
 
 <PropsCard
@@ -57,6 +65,7 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the resizable trigger will be disabled."}
+  deprecated={"Use `Disabled` instead."}
 />
 
 <PropsCard
@@ -72,6 +81,14 @@ tab: Props
   name="onLayout"
   type="PanelGroupOnLayout"
   description={"The callback invoked when resizable items are resized."}
+/>
+
+<PropsCard
+  id="resizable-orientation"
+  name="orientation"
+  type="ResizableOrientation"
+  description={"The orientation of the resizable."}
+  defaultValue={"horizontal"}
 />
 
 <PropsCard
@@ -247,5 +264,6 @@ tab: Props
   name="isDisabled"
   type="boolean"
   description={"If `true`, the resizable trigger will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />

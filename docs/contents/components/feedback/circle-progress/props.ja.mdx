@@ -20,12 +20,21 @@ tab: Props
 />
 
 <PropsCard
+  id="circleprogress-fullrounded"
+  name="fullRounded"
+  type="boolean"
+  description={"If `true`, the cap of the progress indicator will be rounded."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="circleprogress-isanimation"
   name="isAnimation"
   type="boolean"
   description={
     "If `true`, the progress will be indeterminate and the `value` prop will be ignored."
   }
+  deprecated={"It will be deprecated in version 2.0."}
   defaultValue={"false"}
 />
 
@@ -34,6 +43,7 @@ tab: Props
   name="isRounded"
   type="boolean"
   description={"If `true`, the cap of the progress indicator will be rounded."}
+  deprecated={"Use `fullRounded` instead."}
   defaultValue={"false"}
 />
 

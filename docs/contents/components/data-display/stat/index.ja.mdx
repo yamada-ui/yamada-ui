@@ -58,21 +58,18 @@ import {
 
 ```tsx
 <Wrap gap="md">
-  <Stat
-    colorScheme="secondary"
-    label="Total Page Views"
-    number="1,993,818"
-    icon="increase"
-    helperMessage="21% more than last month"
-  />
-
-  <Stat
-    colorScheme="green"
-    label="Total Page Views"
-    number="1,993,818"
-    icon="increase"
-    helperMessage="21% more than last month"
-  />
+  <For each={["secondary", "green"]}>
+    {(colorScheme, index) => (
+      <Stat
+        key={index}
+        colorScheme={colorScheme}
+        label="Total Page Views"
+        number="1,993,818"
+        icon="increase"
+        helperMessage="21% more than last month"
+      />
+    )}
+  </For>
 </Wrap>
 ```
 

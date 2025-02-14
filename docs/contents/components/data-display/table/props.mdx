@@ -74,6 +74,14 @@ tab: Props
 />
 
 <PropsCard
+  id="table-focusable"
+  name="focusable"
+  type="boolean"
+  description={"If `true`, the table cell will be focusable."}
+  defaultValue={"true"}
+/>
+
+<PropsCard
   id="table-footergroupprops"
   name="footerGroupProps"
   type="HeaderGroupProps<Y>"
@@ -122,13 +130,14 @@ tab: Props
   name="isFocusable"
   type="boolean"
   description={"If `true`, the table cell will be focusable."}
+  deprecated={"use `focusable` instead"}
   defaultValue={"true"}
 />
 
 <PropsCard
   id="table-layout"
   name="layout"
-  type='"auto" | "fixed" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | [TableLayout | { [x: string]: TableLayout | undefined; ... 5 more ...; xl?: TableLayout | undefined; }, TableLayout | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<TableLayout>"
   description={"The CSS `table-layout` property."}
 />
 

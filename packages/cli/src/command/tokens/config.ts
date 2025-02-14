@@ -1,15 +1,17 @@
+import type { Dict } from "../../utils"
+
 export interface Config {
   key: string
   flatMap?: (value: string) => string | string[]
-  maxScanDepth?: number
-  omitScanKeys?: string[]
-  replaceKey?: string
+  maxDepth?: number
+  replaceKey?: (key: string) => string
+  shouldProcess?: (obj: Dict) => boolean
 }
 
 export const config: Config[] = [
   { key: "borders" },
   { key: "breakpoints" },
-  { key: "colors" },
+  { key: "colors", replaceKey: (key) => key.replace(/.base$/, "") },
   { key: "fonts" },
   { key: "fontSizes" },
   { key: "fontWeights" },
@@ -21,9 +23,11 @@ export const config: Config[] = [
   { key: "sizes" },
   { key: "spaces", flatMap: (value) => [value, `-${value}`] },
   { key: "zIndices" },
-  { key: "animations", omitScanKeys: ["keyframes"] },
+  { key: "animations", shouldProcess: (obj) => !obj.keyframes },
   { key: "gradients" },
-  { key: "transitions.property", replaceKey: "transitionProperty" },
-  { key: "transitions.duration", replaceKey: "transitionDuration" },
-  { key: "transitions.easing", replaceKey: "transitionEasing" },
+  { key: "easings" },
+  { key: "durations" },
+  { key: "aspectRatios" },
+  { key: "aspectRatios" },
+  { key: "keyframes", maxDepth: 1 },
 ]

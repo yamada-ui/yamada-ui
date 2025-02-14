@@ -173,7 +173,7 @@ interface ThemeSchemeButtonProps extends IconButtonProps {
 
 const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
   ({ popoverProps, ...rest }) => {
-    const { isOpen, onClose, onOpen } = useDisclosure()
+    const { open, onClose, onOpen } = useDisclosure()
     const { changeThemeScheme, theme } = useTheme()
     const { colorSchemes = [] } = theme
 
@@ -181,7 +181,6 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
       <Popover
         {...popoverProps}
         closeOnButton={false}
-        isOpen={isOpen}
         modifiers={[
           {
             name: "preventOverflow",
@@ -195,6 +194,7 @@ const ThemeSchemeButton: FC<ThemeSchemeButtonProps> = memo(
             },
           },
         ]}
+        open={open}
         restoreFocus={false}
         onClose={onClose}
         onOpen={onOpen}

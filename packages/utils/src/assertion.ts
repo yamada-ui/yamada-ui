@@ -26,6 +26,10 @@ export function isString(value: any): value is string {
   return Object.prototype.toString.call(value) === "[object String]"
 }
 
+export function isBooleanish(value: any): value is boolean {
+  return isBoolean(value) || value === "true" || value === "false"
+}
+
 export function isBoolean(value: any): value is boolean {
   return typeof value === "boolean"
 }

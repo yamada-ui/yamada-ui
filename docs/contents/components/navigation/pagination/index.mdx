@@ -25,10 +25,11 @@ import { Pagination } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Pagination total={10} variant="solid" />
-  <Pagination total={10} variant="outline" />
-  <Pagination total={10} variant="ghost" />
-  <Pagination total={10} variant="unstyled" />
+  <For each={["solid", "outline", "ghost", "unstyled"]}>
+    {(variant, index) => (
+      <Pagination key={index} total={10} variant={variant} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -36,11 +37,9 @@ import { Pagination } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Pagination total={10} size="xs" />
-  <Pagination total={10} size="sm" />
-  <Pagination total={10} size="md" />
-  <Pagination total={10} size="lg" />
-  <Pagination total={10} size="xl" />
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => <Pagination key={index} total={10} size={size} />}
+  </For>
 </VStack>
 ```
 
@@ -48,9 +47,22 @@ import { Pagination } from "@yamada-ui/react"
 
 ```tsx
 <VStack>
-  <Pagination total={10} variant="solid" colorScheme="secondary" />
-  <Pagination total={10} variant="outline" colorScheme="orange" />
-  <Pagination total={10} variant="ghost" colorScheme="cyan" />
+  <For
+    each={[
+      { variant: "solid", colorScheme: "secondary" },
+      { variant: "outline", colorScheme: "orange" },
+      { variant: "ghost", colorScheme: "cyan" },
+    ]}
+  >
+    {({ variant, colorScheme }, index) => (
+      <Pagination
+        key={index}
+        total={10}
+        variant={variant}
+        colorScheme={colorScheme}
+      />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -84,10 +96,11 @@ If you want to disable pagination, set `isDisabled`.
 
 ```tsx
 <VStack>
-  <Pagination total={10} variant="solid" isDisabled />
-  <Pagination total={10} variant="outline" isDisabled />
-  <Pagination total={10} variant="ghost" isDisabled />
-  <Pagination total={10} variant="unstyled" isDisabled />
+  <For each={["solid", "outline", "ghost", "unstyled"]}>
+    {(variant, index) => (
+      <Pagination key={index} total={10} variant={variant} isDisabled />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -99,9 +112,15 @@ If you want to disable pagination, set `isDisabled`.
 
 ```tsx
 <VStack>
-  <Pagination total={10} controlProps={{ children: <GhostIcon /> }} />
-  <Pagination total={10} controlPrevProps={{ children: <GhostIcon /> }} />
-  <Pagination total={10} controlNextProps={{ children: <GhostIcon /> }} />
+  <For
+    each={[
+      { props: { controlProps: { children: <GhostIcon /> } } },
+      { props: { controlPrevProps: { children: <GhostIcon /> } } },
+      { props: { controlNextProps: { children: <GhostIcon /> } } },
+    ]}
+  >
+    {({ props }, index) => <Pagination key={index} total={10} {...props} />}
+  </For>
 </VStack>
 ```
 
@@ -113,17 +132,17 @@ If you want to disable pagination, set `isDisabled`.
 
 ```tsx
 <VStack>
-  <Pagination total={10} withEdges edgeProps={{ children: <GhostIcon /> }} />
-  <Pagination
-    total={10}
-    withEdges
-    edgeFirstProps={{ children: <GhostIcon /> }}
-  />
-  <Pagination
-    total={10}
-    withEdges
-    edgeLastProps={{ children: <GhostIcon /> }}
-  />
+  <For
+    each={[
+      { props: { edgeProps: { children: <GhostIcon /> } } },
+      { props: { edgeFirstProps: { children: <GhostIcon /> } } },
+      { props: { edgeLastProps: { children: <GhostIcon /> } } },
+    ]}
+  >
+    {({ props }, index) => (
+      <Pagination key={index} total={10} withEdges {...props} />
+    )}
+  </For>
 </VStack>
 ```
 

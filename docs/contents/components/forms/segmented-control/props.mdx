@@ -22,10 +22,19 @@ order: 1
 />
 
 <PropsCard
+  id="segmentedcontrolbutton-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the segmented control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="segmentedcontrolbutton-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the segmented control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -34,6 +43,7 @@ order: 1
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the segmented control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -53,6 +63,14 @@ order: 1
   }
 />
 
+<PropsCard
+  id="segmentedcontrolbutton-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the segmented control will be readonly."}
+  defaultValue={"false"}
+/>
+
 ### SegmentedControlProps
 
 <PropsCard
@@ -70,10 +88,19 @@ order: 1
 />
 
 <PropsCard
+  id="segmentedcontrol-disabled"
+  name="disabled"
+  type="boolean"
+  description={"If `true`, the segmented control will be disabled."}
+  defaultValue={"false"}
+/>
+
+<PropsCard
   id="segmentedcontrol-isdisabled"
   name="isDisabled"
   type="boolean"
   description={"If `true`, the segmented control will be disabled."}
+  deprecated={"Use `disabled` instead."}
   defaultValue={"false"}
 />
 
@@ -82,6 +109,7 @@ order: 1
   name="isReadOnly"
   type="boolean"
   description={"If `true`, the segmented control will be readonly."}
+  deprecated={"Use `readOnly` instead."}
   defaultValue={"false"}
 />
 
@@ -109,6 +137,14 @@ order: 1
   description={
     "The callback fired when any children radio is checked or unchecked."
   }
+/>
+
+<PropsCard
+  id="segmentedcontrol-readonly"
+  name="readOnly"
+  type="boolean"
+  description={"If `true`, the segmented control will be readonly."}
+  defaultValue={"false"}
 />
 
 <PropsCard

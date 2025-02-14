@@ -16,14 +16,14 @@ tab: Props
 <PropsCard
   id="stack-align"
   name="align"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (string & {}) | "normal" | "center" | "end" | "flex-end" | "flex-start" | "self-end" | "self-start" | ... 7 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<AlignItems>"
   description={"The CSS `align-items` property."}
 />
 
 <PropsCard
   id="stack-direction"
   name="direction"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "column" | "row" | "column-reverse" | "row-reverse" | [FlexDirection | { [x: string]: FlexDirection | undefined; ... 5 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledT...'
+  type="UIValue<FlexDirection>"
   description={"The CSS `flex-direction` property."}
 />
 
@@ -38,7 +38,7 @@ tab: Props
 <PropsCard
   id="stack-justify"
   name="justify"
-  type='"left" | "right" | "-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | (string & {}) | "normal" | "center" | "end" | "flex-end" | "flex-start" | "start" | ... 8 more ... | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<JustifyContent>"
   description={"The CSS `justify-content` property."}
 />
 
@@ -52,6 +52,6 @@ tab: Props
 <PropsCard
   id="stack-wrap"
   name="wrap"
-  type='"-moz-initial" | "inherit" | "initial" | "revert" | "revert-layer" | "unset" | "nowrap" | "wrap" | "wrap-reverse" | [FlexWrap | { [x: string]: FlexWrap | undefined; ... 5 more ...; xl?: FlexWrap | undefined; }, FlexWrap | { ...; }] | { ...; } | [...] | { ...; } | ((theme: StyledTheme) => UIValue<...>)'
+  type="UIValue<FlexWrap>"
   description={"The CSS `flex-wrap` property."}
 />

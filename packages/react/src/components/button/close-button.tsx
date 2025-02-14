@@ -27,6 +27,7 @@ export const {
 export const CloseButton = withContext(IconButton)(
   undefined,
   ({ children, icon, ...rest }) => ({
+    "aria-label": "Close",
     children: children || icon || <XIcon />,
     ...rest,
   }),

@@ -242,7 +242,7 @@ import { ColorPicker } from "@yamada-ui/react"
 <VStack>
   <ColorPicker focusBorderColor="green.500" placeholder="custom border color" />
   <ColorPicker
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -251,14 +251,14 @@ import { ColorPicker } from "@yamada-ui/react"
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
   <For each={["outline", "filled", "flushed"]}>
     {(variant, index) => (
       <ColorPicker
-        isDisabled
+        disabled
         key={index}
         variant={variant}
         placeholder={variant}
@@ -270,14 +270,14 @@ import { ColorPicker } from "@yamada-ui/react"
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
   <For each={["outline", "filled", "flushed"]}>
     {(variant, index) => (
       <ColorPicker
-        isReadOnly
+        readOnly
         key={index}
         variant={variant}
         placeholder={variant}
@@ -386,7 +386,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.colorPicker}
+      invalid={!!errors.colorPicker}
       label="Pick color"
       errorMessage={errors.colorPicker ? errors.colorPicker.message : undefined}
     >

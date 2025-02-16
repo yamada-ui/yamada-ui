@@ -63,19 +63,19 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       width: "100%",
       _active: {
         bg: ["blackAlpha.50", "whiteAlpha.50"],
-        _disabled: {
-          bg: ["white", "black"],
-        },
         _focus: {
           bg: ["blackAlpha.50", "whiteAlpha.50"],
         },
+        _disabled: {
+          bg: ["white", "black"],
+        },
+      },
+      _focus: {
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
       },
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.4,
-      },
-      _focus: {
-        bg: ["blackAlpha.50", "whiteAlpha.50"],
       },
     },
     list: {

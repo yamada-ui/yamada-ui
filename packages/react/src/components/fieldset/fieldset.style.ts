@@ -51,9 +51,7 @@ export const fieldsetStyle = defineComponentSlotStyle({
     },
     panel: {
       root: {
-        bg: "bg.panel",
-        borderColor: "border.subtle",
-        borderWidth: "1px",
+        layerStyle: "panel",
       },
     },
     plain: {},
@@ -127,7 +125,7 @@ export const fieldsetStyle = defineComponentSlotStyle({
       css: {
         root: {
           p: "3",
-          rounded: "md",
+          rounded: "l2",
         },
       },
       size: "sm",
@@ -137,7 +135,7 @@ export const fieldsetStyle = defineComponentSlotStyle({
       css: {
         root: {
           p: "4",
-          rounded: "lg",
+          rounded: "l2",
         },
       },
       size: "md",
@@ -147,7 +145,7 @@ export const fieldsetStyle = defineComponentSlotStyle({
       css: {
         root: {
           p: "6",
-          rounded: "xl",
+          rounded: "l2",
         },
       },
       size: "lg",

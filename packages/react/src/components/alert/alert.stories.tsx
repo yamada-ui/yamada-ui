@@ -52,7 +52,7 @@ export const ColorScheme: Story = () => {
   return (
     <PropsTable
       variant="column"
-      columns={["basic", "solid", "subtle", "surface", "island"]}
+      columns={["plain", "solid", "subtle", "surface", "island"]}
       rows={COLOR_SCHEMES}
     >
       {(column, row, key) => {
@@ -111,7 +111,7 @@ export const Status: Story = () => {
 export const Loading: Story = () => {
   return (
     <>
-      <Alert.Root variant="basic" status="info">
+      <Alert.Root variant="plain" status="info">
         <Alert.Loading />
         <Alert.Title>セル</Alert.Title>
         <Alert.Description>

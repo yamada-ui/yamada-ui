@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react"
 import { Button } from "../../components/button"
-import { Dialog } from "../../components/modal"
+// import { Dialog } from "../../components/modal"
 import { Text } from "../../components/text"
 import { usePromiseDisclosure } from "./use-promise-disclosure"
 
@@ -11,7 +11,12 @@ const meta: Meta = {
 export default meta
 
 export const Basic = () => {
-  const { isOpen, onClose, onOpen, onSuccess } = usePromiseDisclosure()
+  const {
+    // open,
+    // onClose,
+    onOpen,
+    // onSuccess,
+  } = usePromiseDisclosure()
 
   const onClick = async () => {
     try {
@@ -32,11 +37,12 @@ export const Basic = () => {
 
       <Button onClick={onClick}>わけない</Button>
 
-      <Dialog
+      {/* TODO: Fix this */}
+      {/* <Dialog
         size="2xl"
         cancel="わけない"
         header="ミスター・サタン"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -47,7 +53,7 @@ export const Basic = () => {
         <Text>
           このミスター・サタンさまのたのみも、きけんというのかーーーっ!!!
         </Text>
-      </Dialog>
+      </Dialog> */}
     </>
   )
 }

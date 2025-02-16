@@ -1,5 +1,6 @@
 import { a11y, render } from "../../../test"
 import { ThemeProvider } from "../../providers/theme-provider"
+import { defaultConfig, defaultTheme } from "../../theme"
 import { Image } from "./image"
 import { Picture, Source } from "./picture"
 
@@ -131,17 +132,10 @@ describe("<Picture />", () => {
     const { container } = render(
       <ThemeProvider
         config={{
+          ...defaultConfig,
           breakpoint: { direction: "up" },
         }}
-        theme={{
-          breakpoints: {
-            sm: "30em",
-            md: "48em",
-            lg: "61em",
-            xl: "80em",
-            "2xl": "90em",
-          },
-        }}
+        theme={defaultTheme}
       >
         <Picture
           src={src}

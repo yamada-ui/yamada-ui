@@ -10,6 +10,7 @@ export interface InputElementProps
     Pick<InputProps, "errorBorderColor" | "focusBorderColor"> {}
 
 export const {
+  component,
   PropsContext: InputElementPropsContext,
   usePropsContext: useInputElementPropsContext,
   withContext,

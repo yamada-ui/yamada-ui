@@ -51,16 +51,22 @@ const getPrevIndex = (current: number, max: number, loop: boolean) => {
   return next
 }
 
-export type DescendantOptions<T extends HTMLElement = HTMLElement, K = {}> = {
+export type DescendantOptions<
+  T extends HTMLElement = HTMLElement,
+  K = {},
+> = K & {
   id?: string
   disabled?: boolean
   filter?: FilterDescendant<T, K>
-} & K
+}
 
-export type Descendant<T extends HTMLElement = HTMLElement, K = {}> = {
+export type Descendant<
+  T extends HTMLElement = HTMLElement,
+  K = {},
+> = DescendantOptions<T, K> & {
   index: number
   node: T
-} & DescendantOptions<T, K>
+}
 
 export type FilterDescendant<T extends HTMLElement = HTMLElement, K = {}> = (
   value: Descendant<T, K>,

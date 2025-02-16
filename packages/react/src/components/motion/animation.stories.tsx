@@ -24,10 +24,10 @@ export const Basic: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: 100 }}
-        bg={["primary", "secondary"]}
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
       >
         Motion
       </Motion>
@@ -40,10 +40,10 @@ export const WithTransition: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: 100 }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ duration: 2, ease: "easeOut" }}
       >
         Motion
@@ -57,11 +57,11 @@ export const WithTransitionType: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ rotate: 360, scale: 1 }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         initial={{ scale: 0 }}
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{
           type: "spring",
           damping: 20,
@@ -79,11 +79,11 @@ export const WithInitial: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: 100 }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         initial={{ x: -100 }}
         p="md"
-        rounded="md"
+        rounded="l2"
       >
         Motion
       </Motion>
@@ -102,12 +102,12 @@ export const WithExit: Story = () => {
         {visible ? (
           <Motion
             animate={{ opacity: 1 }}
-            bg="primary"
-            color="white"
+            bg="mono"
+            color="mono.contrast"
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             p="md"
-            rounded="md"
+            rounded="l2"
           >
             Motion
           </Motion>
@@ -122,10 +122,10 @@ export const UseKeyframes: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: [0, 100, 0] }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
       >
         Motion
       </Motion>
@@ -138,10 +138,10 @@ export const WithTimes: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Motion
         animate={{ x: [0, 100, 0] }}
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ duration: 3, times: [0, 0.2, 1] }}
       >
         Motion
@@ -159,7 +159,7 @@ export const WithRepeat: Story = () => {
           rotate: [0, 0, 180, 180, 0],
           scale: [1, 2, 2, 1, 1],
         }}
-        bg="primary"
+        bg="mono"
         h="xs"
         transition={{
           duration: 2,
@@ -181,7 +181,7 @@ export const WithLayout: Story = () => {
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Box
         as="button"
-        bg="primary"
+        bg="mono"
         display="flex"
         h="8"
         justifyContent={!flg ? "flex-start" : "flex-end"}
@@ -191,7 +191,7 @@ export const WithLayout: Story = () => {
         onClick={toggle}
       >
         <Motion
-          bg="white"
+          bg="mono.contrast"
           h="6"
           layout
           rounded="full"
@@ -210,13 +210,13 @@ export const UseLayoutGroup: Story = () => {
     return (
       <Motion
         as="button"
-        bg="primary"
+        bg="mono"
         display="flex"
         h="16"
         layout
         p="md"
         placeContent="center"
-        rounded="md"
+        rounded="l2"
         w={open ? "32" : "16"}
         onClick={toggle}
       />

@@ -12,7 +12,7 @@ import type {
   DOMElement,
   HTMLUIProps,
   StyledOptions,
-} from "./component.types"
+} from "./index.types"
 import {
   createContext,
   cx,
@@ -41,8 +41,8 @@ export type SlotName<
 
 export type Slot<Y extends number | string | symbol> =
   | [Y, Y]
-  | { name: string; slot: [Y, Y] | Y }
   | Y
+  | { name: string; slot: [Y, Y] | Y }
 
 export type InitialProps<Y extends Dict = Dict> = SuperProps<Y>
 export type SuperProps<Y extends Dict = Dict> = ((props: Y) => any) | Y
@@ -312,7 +312,6 @@ export function createSlotComponent<
     const { css, ...rest } = useComponentSlotStyle(mergedProps, {
       className,
       style,
-      slot,
       transferProps,
     })
 

@@ -6,11 +6,11 @@ export const SaturationSlider: ComponentMultiStyle<"SaturationSlider"> = {
       cursor: "pointer",
       rounded: "md",
       w: "full",
+      _readOnly: { cursor: "auto" },
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.6,
       },
-      _readOnly: { cursor: "auto" },
     },
     inner: {
       rounded: "md",

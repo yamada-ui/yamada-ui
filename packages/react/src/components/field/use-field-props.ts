@@ -12,16 +12,18 @@ export interface UseFieldProps<Y extends HTMLElement> extends FieldProps {
   onFocus?: FocusEventHandler<Y>
 }
 
-export const useFieldProps = <Y extends HTMLElement, M extends Dict>({
-  id,
-  disabled,
-  invalid,
-  readOnly,
-  required,
-  onBlur,
-  onFocus,
-  ...rest
-}: M & UseFieldProps<Y>) => {
+export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
+  {
+    id,
+    disabled,
+    invalid,
+    readOnly,
+    required,
+    onBlur,
+    onFocus,
+    ...rest
+  }: M & UseFieldProps<Y> = {} as M & UseFieldProps<Y>,
+) => {
   const fieldsetContext = useFieldsetContext()
   const fieldContext = useFieldContext()
 

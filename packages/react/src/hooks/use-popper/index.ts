@@ -44,7 +44,7 @@ export interface UsePopperProps {
    *
    * @default true
    */
-  eventListeners?: { resize?: boolean; scroll?: boolean } | boolean
+  eventListeners?: boolean | { resize?: boolean; scroll?: boolean }
   /**
    * If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.
    *

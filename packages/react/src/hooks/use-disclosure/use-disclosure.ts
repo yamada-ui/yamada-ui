@@ -68,10 +68,6 @@ export const useDisclosure = <
   ) as M | Y
 
   return {
-    /**
-     * @deprecated Use `open` instead.
-     */
-    isOpen: open,
     open,
     onClose,
     onOpen,

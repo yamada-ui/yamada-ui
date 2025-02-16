@@ -529,14 +529,3 @@ export function useComponentSlotStyle<
 >(props: Y, options: UseComponentSlotStyleOptions<Y, M, D> = {}) {
   return useStyle<Y, M, D, true>(props, { ...options, hasSlot: true })
 }
-
-/**
- * @deprecated
- */
-export function useComponentMultiStyle<
-  Y extends Dict = Dict,
-  M extends ComponentSlotStyle = ComponentSlotStyle,
-  D extends keyof Y = keyof Y,
->(props: Y, options: UseComponentSlotStyleOptions<Y, M, D> = {}) {
-  return useStyle<Y, M, D, true>(props, { ...options, hasSlot: true })
-}

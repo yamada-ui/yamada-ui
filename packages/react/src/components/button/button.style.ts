@@ -10,16 +10,17 @@ export const buttonStyle = defineComponentStyle({
     justifyContent: "center",
     overflow: "hidden",
     position: "relative",
+    rounded: "l2",
     transitionDuration: "moderate",
     transitionProperty: "common",
     userSelect: "none",
     verticalAlign: "middle",
     whiteSpace: "nowrap",
-    _disabled: {
-      layerStyle: "disabled",
-    },
     _readOnly: {
       layerStyle: "readOnly",
+    },
+    _disabled: {
+      layerStyle: "disabled",
     },
   },
 
@@ -77,7 +78,6 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.8}",
       minW: "8",
       px: "2",
-      rounded: "md",
       _icon: {
         fontSize: "md",
       },
@@ -89,7 +89,6 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.9}",
       minW: "9",
       px: "3",
-      rounded: "md",
       _icon: {
         fontSize: "md",
       },
@@ -101,7 +100,6 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.10}",
       minW: "10",
       px: "4",
-      rounded: "md",
       _icon: {
         fontSize: "lg",
       },
@@ -113,7 +111,6 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.11}",
       minW: "11",
       px: "4.5",
-      rounded: "md",
       _icon: {
         fontSize: "2xl",
       },
@@ -125,7 +122,6 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.12}",
       minW: "12",
       px: "5",
-      rounded: "lg",
       _icon: {
         fontSize: "2xl",
       },
@@ -137,7 +133,6 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.14}",
       minW: "14",
       px: "5",
-      rounded: "lg",
       _icon: {
         fontSize: "2xl",
       },

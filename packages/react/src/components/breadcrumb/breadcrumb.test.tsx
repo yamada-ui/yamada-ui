@@ -1,4 +1,3 @@
-import type { BreadcrumbItem } from "./"
 import { a11y, render, screen } from "../../../test"
 import { Breadcrumb } from "./"
 
@@ -84,7 +83,7 @@ describe("<Breadcrumb />", () => {
   })
 
   test("renders breadcrumb correctly with items", () => {
-    const items: BreadcrumbItem[] = [
+    const items: Breadcrumb.RootProps["items"] = [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
       { href: "/", label: "人造人間編" },
@@ -97,7 +96,7 @@ describe("<Breadcrumb />", () => {
   })
 
   test("is correctly truncated", () => {
-    const items: BreadcrumbItem[] = [
+    const items: Breadcrumb.RootProps["items"] = [
       { href: "/1", label: "サイヤ人編" },
       { href: "/2", label: "ナメック星編" },
       { href: "/3", label: "人造人間編" },
@@ -117,51 +116,8 @@ describe("<Breadcrumb />", () => {
     ).toHaveAttribute("aria-current", "page")
   })
 
-  test("correctly omitted using ellipsisPage", () => {
-    const items: BreadcrumbItem[] = [
-      { href: "/1", label: "サイヤ人編" },
-      { href: "/2", ellipsisPage: true, label: "ナメック星編" },
-      { href: "/3", ellipsisPage: true, label: "人造人間編" },
-      { href: "/4", currentPage: true, label: "魔人ブウ編" },
-    ]
-
-    render(<Breadcrumb.Root items={items} />)
-
-    const listItems = screen.getAllByRole("listitem")
-
-    expect(listItems).toHaveLength(3)
-    expect(listItems[0]?.querySelector("a")).toHaveAttribute("href", "/1")
-    expect(
-      listItems[listItems.length - 1]?.querySelector("span"),
-    ).toHaveAttribute("aria-current", "page")
-  })
-
-  test("if the last element has an ellipsisPage, the breadcrumbEllipsis is rendered correctly.", () => {
-    const items: BreadcrumbItem[] = [
-      { href: "/1", label: "サイヤ人編" },
-      { href: "/2", ellipsisPage: true, label: "ナメック星編" },
-      { href: "/3", label: "人造人間編" },
-      {
-        href: "/4",
-        currentPage: true,
-        ellipsisPage: true,
-        label: "魔人ブウ編",
-      },
-    ]
-
-    render(<Breadcrumb.Root items={items} />)
-
-    const listItems = screen.getAllByRole("listitem")
-
-    expect(listItems).toHaveLength(4)
-    expect(listItems[listItems.length - 1]?.firstElementChild).toHaveAttribute(
-      "aria-label",
-      "ellipsis",
-    )
-  })
-
   test("if boundaries is 0 or undefined, 1 is correctly reflected.", () => {
-    const items: BreadcrumbItem[] = [
+    const items: Breadcrumb.RootProps["items"] = [
       { href: "/1", label: "サイヤ人編" },
       { href: "/2", label: "ナメック星編" },
       { href: "/3", label: "人造人間編" },
@@ -207,7 +163,7 @@ describe("<Breadcrumb />", () => {
   test("retrieve omitted items correctly", () => {
     const ellipsis = vi.fn()
 
-    const items: BreadcrumbItem[] = [
+    const items: Breadcrumb.RootProps["items"] = [
       { href: "/", label: "サイヤ人編" },
       { href: "/", label: "ナメック星編" },
       { href: "/", label: "人造人間編" },

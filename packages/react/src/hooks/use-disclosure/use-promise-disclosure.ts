@@ -66,10 +66,6 @@ export const usePromiseDisclosure = <
   ) as M
 
   return {
-    /**
-     * @deprecated Use `open` instead.
-     */
-    isOpen: open,
     open,
     onClose,
     onOpen,

@@ -16,7 +16,7 @@ export const useClipboard = (
   defaultValue = "",
   timeoutOrOptions: number | UseClipboardOptions = {},
 ) => {
-  const [hasCopied, setHasCopied] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   const [value, setValue] = useState(defaultValue)
 
@@ -34,9 +34,9 @@ export const useClipboard = (
         setValue(newValue)
       }
 
-      const hasCopied = copy(newValue, copyOptions)
+      const copied = copy(newValue, copyOptions)
 
-      setHasCopied(hasCopied)
+      setCopied(copied)
     },
     [value, copyOptions],
   )
@@ -44,18 +44,18 @@ export const useClipboard = (
   useEffect(() => {
     let timeoutId: null | number = null
 
-    if (hasCopied)
+    if (copied)
       timeoutId = window.setTimeout(() => {
-        setHasCopied(false)
+        setCopied(false)
       }, timeout)
 
     return () => {
       if (timeoutId) window.clearTimeout(timeoutId)
     }
-  }, [timeout, hasCopied])
+  }, [timeout, copied])
 
   return {
-    hasCopied,
+    copied,
     setValue,
     value,
     onCopy,

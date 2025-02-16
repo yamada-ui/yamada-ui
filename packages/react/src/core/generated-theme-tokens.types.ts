@@ -1,8 +1,8 @@
 import type { UsageThemeTokens } from "./theme"
 
 export interface GeneratedThemeTokens extends UsageThemeTokens {
-  apply: {} & string
-  animations: {} & string
+  apply: string & {}
+  animations: string & {}
   aspectRatios:
     | "bronze"
     | "golden"
@@ -12,10 +12,10 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "square"
     | "ultrawide"
     | "wide"
-    | ({} & string)
-  blurs: "2xl" | "3xl" | "4xl" | "lg" | "md" | "sm" | "xl" | ({} & string)
-  borders: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
-  breakpoints: "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string)
+    | (string & {})
+  blurs: "2xl" | "3xl" | "4xl" | "lg" | "md" | "sm" | "xl" | (string & {})
+  borders: "lg" | "md" | "sm" | "xl" | "xs" | (string & {})
+  breakpoints: "2xl" | "lg" | "md" | "sm" | "xl" | (string & {})
   colors:
     | "amber"
     | "amber.50"
@@ -136,6 +136,26 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "cyan.outline"
     | "cyan.solid"
     | "cyan.subtle"
+    | "danger"
+    | "danger.50"
+    | "danger.100"
+    | "danger.200"
+    | "danger.300"
+    | "danger.400"
+    | "danger.500"
+    | "danger.600"
+    | "danger.700"
+    | "danger.800"
+    | "danger.900"
+    | "danger.950"
+    | "danger.contrast"
+    | "danger.emphasized"
+    | "danger.fg"
+    | "danger.ghost"
+    | "danger.muted"
+    | "danger.outline"
+    | "danger.solid"
+    | "danger.subtle"
     | "emerald"
     | "emerald.50"
     | "emerald.100"
@@ -365,26 +385,6 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "mono.outline"
     | "mono.solid"
     | "mono.subtle"
-    | "neutral"
-    | "neutral.50"
-    | "neutral.100"
-    | "neutral.200"
-    | "neutral.300"
-    | "neutral.400"
-    | "neutral.500"
-    | "neutral.600"
-    | "neutral.700"
-    | "neutral.800"
-    | "neutral.900"
-    | "neutral.950"
-    | "neutral.contrast"
-    | "neutral.emphasized"
-    | "neutral.fg"
-    | "neutral.ghost"
-    | "neutral.muted"
-    | "neutral.outline"
-    | "neutral.solid"
-    | "neutral.subtle"
     | "orange"
     | "orange.50"
     | "orange.100"
@@ -677,7 +677,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "yellow.outline"
     | "yellow.solid"
     | "yellow.subtle"
-    | ({} & string)
+    | (string & {})
   colorSchemes:
     | "amber"
     | "black"
@@ -691,7 +691,6 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "green"
     | "indigo"
     | "lime"
-    | "neutral"
     | "orange"
     | "pink"
     | "purple"
@@ -703,7 +702,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "white"
     | "whiteAlpha"
     | "yellow"
-    | ({} & string)
+    | (string & {})
   durations:
     | "fast"
     | "faster"
@@ -712,15 +711,15 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "slow"
     | "slower"
     | "slowest"
-    | ({} & string)
+    | (string & {})
   easings:
     | "ease"
     | "ease-in"
     | "ease-in-out"
     | "ease-in-smooth"
     | "ease-out"
-    | ({} & string)
-  fonts: "body" | "heading" | "mono" | ({} & string)
+    | (string & {})
+  fonts: "body" | "heading" | "mono" | (string & {})
   fontSizes:
     | "2xl"
     | "2xs"
@@ -736,7 +735,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "sm"
     | "xl"
     | "xs"
-    | ({} & string)
+    | (string & {})
   fontWeights:
     | "black"
     | "bold"
@@ -747,9 +746,9 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "normal"
     | "semibold"
     | "thin"
-    | ({} & string)
-  gradients: {} & string
-  keyframes: "spin" | ({} & string)
+    | (string & {})
+  gradients: string & {}
+  keyframes: "spin" | (string & {})
   layerStyles:
     | "active"
     | "disabled"
@@ -765,33 +764,36 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "subtle.hover"
     | "surface"
     | "surface.hover"
-    | ({} & string)
+    | (string & {})
   letterSpacings:
     | "tight"
     | "tighter"
     | "wide"
     | "wider"
     | "widest"
-    | ({} & string)
+    | (string & {})
   lineHeights:
     | "moderate"
     | "short"
     | "shorter"
     | "tall"
     | "taller"
-    | ({} & string)
+    | (string & {})
   radii:
     | "2xl"
     | "2xs"
     | "3xl"
     | "4xl"
     | "full"
+    | "l1"
+    | "l2"
+    | "l3"
     | "lg"
     | "md"
     | "sm"
     | "xl"
     | "xs"
-    | ({} & string)
+    | (string & {})
   shadows:
     | "2xl"
     | "inner"
@@ -801,7 +803,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "sm"
     | "xl"
     | "xs"
-    | ({} & string)
+    | (string & {})
   sizes:
     | "0.5"
     | "1"
@@ -906,8 +908,56 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "vw"
     | "xl"
     | "xs"
-    | ({} & string)
+    | (string & {})
   spaces:
+    | "0.5"
+    | "1"
+    | "1.5"
+    | "2"
+    | "2.5"
+    | "2xl"
+    | "3"
+    | "3.5"
+    | "3xl"
+    | "4"
+    | "4.5"
+    | "4xl"
+    | "5"
+    | "5.5"
+    | "5xl"
+    | "6"
+    | "6.5"
+    | "7"
+    | "7.5"
+    | "8"
+    | "9"
+    | "10"
+    | "11"
+    | "12"
+    | "13"
+    | "14"
+    | "15"
+    | "16"
+    | "20"
+    | "24"
+    | "28"
+    | "32"
+    | "36"
+    | "40"
+    | "44"
+    | "48"
+    | "52"
+    | "56"
+    | "60"
+    | "64"
+    | "68"
+    | "72"
+    | "76"
+    | "80"
+    | "84"
+    | "88"
+    | "92"
+    | "96"
     | "-0.5"
     | "-1"
     | "-1.5"
@@ -962,63 +1012,15 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "-sm"
     | "-xl"
     | "-xs"
-    | "0.5"
-    | "1"
-    | "1.5"
-    | "2"
-    | "2.5"
-    | "2xl"
-    | "3"
-    | "3.5"
-    | "3xl"
-    | "4"
-    | "4.5"
-    | "4xl"
-    | "5"
-    | "5.5"
-    | "5xl"
-    | "6"
-    | "6.5"
-    | "7"
-    | "7.5"
-    | "8"
-    | "9"
-    | "10"
-    | "11"
-    | "12"
-    | "13"
-    | "14"
-    | "15"
-    | "16"
-    | "20"
-    | "24"
-    | "28"
-    | "32"
-    | "36"
-    | "40"
-    | "44"
-    | "48"
-    | "52"
-    | "56"
-    | "60"
-    | "64"
-    | "68"
-    | "72"
-    | "76"
-    | "80"
-    | "84"
-    | "88"
-    | "92"
-    | "96"
     | "lg"
     | "md"
     | "px"
     | "sm"
     | "xl"
     | "xs"
-    | ({} & string)
-  textStyles: "outline" | "solid" | "subtle" | "surface" | ({} & string)
-  themeSchemes: "base" | ({} & string)
+    | (string & {})
+  textStyles: "outline" | "solid" | "subtle" | "surface" | (string & {})
+  themeSchemes: "base" | (string & {})
   zIndices:
     | "beerus"
     | "burter"
@@ -1034,5 +1036,5 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "vegeta"
     | "yamcha"
     | "zarbon"
-    | ({} & string)
+    | (string & {})
 }

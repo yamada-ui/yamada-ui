@@ -32,7 +32,7 @@ export const Basic = () => {
   )
 }
 
-export const WithTimeout = () => {
+export const Timeout = () => {
   const { background, page, screen } = useLoading()
 
   return (
@@ -52,7 +52,7 @@ export const WithTimeout = () => {
   )
 }
 
-export const WithMessage = () => {
+export const Message = () => {
   const { background, page, screen } = useLoading()
 
   return (

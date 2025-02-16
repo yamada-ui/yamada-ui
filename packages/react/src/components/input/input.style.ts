@@ -21,6 +21,7 @@ export const inputStyle = defineComponentStyle({
     appearance: "none",
     minW: "0",
     position: "relative",
+    rounded: "l2",
     textAlign: "start",
     transitionDuration: "moderate",
     transitionProperty: "common",
@@ -60,16 +61,16 @@ export const inputStyle = defineComponentStyle({
       borderBottomWidth: "1px",
       borderRadius: "0",
       px: "0",
-      _focusVisible: {
-        borderColor: "{focusBorderColor}",
-        boxShadow: "0px 1px 0px 0px {focusBorderColor}",
-        outline: "none",
-      },
       _invalid: {
         borderColor: "{errorBorderColor}",
         _focusVisible: {
           boxShadow: "0px 1px 0px 0px {errorBorderColor}",
         },
+      },
+      _focusVisible: {
+        borderColor: "{focusBorderColor}",
+        boxShadow: "0px 1px 0px 0px {focusBorderColor}",
+        outline: "none",
       },
     },
     outline: {
@@ -88,37 +89,31 @@ export const inputStyle = defineComponentStyle({
     xs: {
       fontSize: "xs",
       px: "2",
-      rounded: "md",
       ...getInputHeightStyle("{sizes.8}"),
     },
     sm: {
       fontSize: "sm",
       px: "2.5",
-      rounded: "md",
       ...getInputHeightStyle("{sizes.9}"),
     },
     md: {
       fontSize: "md",
       px: "3",
-      rounded: "md",
       ...getInputHeightStyle("{sizes.10}"),
     },
     lg: {
       fontSize: "lg",
       px: "3.5",
-      rounded: "md",
       ...getInputHeightStyle("{sizes.11}"),
     },
     xl: {
       fontSize: "xl",
       px: "4",
-      rounded: "lg",
       ...getInputHeightStyle("{sizes.12}"),
     },
     "2xl": {
       fontSize: "xl",
       px: "4",
-      rounded: "lg",
       ...getInputHeightStyle("{sizes.14}"),
     },
   },

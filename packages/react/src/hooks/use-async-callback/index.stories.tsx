@@ -29,7 +29,7 @@ export const Basic = () => {
   )
 }
 
-export const WithLoading = () => {
+export const Loading = () => {
   const [isLoading, onClick] = useAsyncCallback(
     async () => {
       await wait(3000)
@@ -45,7 +45,7 @@ export const WithLoading = () => {
   )
 }
 
-export const WithConfig = () => {
+export const Config = () => {
   const config = merge(defaultConfig, {
     loading: {
       defaultComponent: "page",

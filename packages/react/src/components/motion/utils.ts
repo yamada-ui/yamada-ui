@@ -1,5 +1,5 @@
 import type { Transition } from "motion/react"
-import type { MotionTransitionProps } from "./motion.types"
+import type { MotionTransitionProps } from "./index.types"
 import { isNumber } from "../../utils"
 
 export const MOTION_TRANSITION_EASINGS = {

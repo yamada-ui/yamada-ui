@@ -22,7 +22,7 @@ export const Basic: Story = () => {
       <Button onClick={toggle}>Please Click</Button>
 
       <Collapse open={open}>
-        <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
+        <Box bg="orange.500" color="white" mt="md" p="md" rounded="l2" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
       </Collapse>
@@ -38,7 +38,7 @@ export const WithDuration: Story = () => {
       <Button onClick={toggle}>Please Click</Button>
 
       <Collapse duration={0.7} open={open}>
-        <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
+        <Box bg="orange.500" color="white" mt="md" p="md" rounded="l2" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
       </Collapse>
@@ -54,12 +54,12 @@ export const ExitUnmount: Story = () => {
       <Button onClick={toggle}>Please Click</Button>
 
       <Collapse open={open} unmountOnExit>
-        <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
+        <Box bg="orange.500" color="white" mt="md" p="md" rounded="l2" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
       </Collapse>
 
-      <Box bg="purple.500" color="white" mt="md" p="md" rounded="md" w="full">
+      <Box bg="purple.500" color="white" mt="md" p="md" rounded="l2" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </VStack>
@@ -74,12 +74,12 @@ export const DisabledOpacity: Story = () => {
       <Button onClick={toggle}>Please Click</Button>
 
       <Collapse animationOpacity={false} open={open}>
-        <Box bg="orange.500" color="white" mt="md" p="md" rounded="md" w="full">
+        <Box bg="orange.500" color="white" mt="md" p="md" rounded="l2" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
       </Collapse>
 
-      <Box bg="purple.500" color="white" mt="md" p="md" rounded="md" w="full">
+      <Box bg="purple.500" color="white" mt="md" p="md" rounded="l2" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </VStack>

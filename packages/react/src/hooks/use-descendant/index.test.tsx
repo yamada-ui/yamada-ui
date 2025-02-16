@@ -7,14 +7,13 @@ describe("useDescendant", () => {
   const initializeDescendants = () => {
     const { result } = renderHook(() => createDescendant())
 
-    const { DescendantsContextProvider, useDescendant, useDescendants } =
-      result.current
+    const { DescendantsContext, useDescendant, useDescendants } = result.current
 
-    return { DescendantsContextProvider, useDescendant, useDescendants }
+    return { DescendantsContext, useDescendant, useDescendants }
   }
 
   const setup = () => {
-    const { DescendantsContextProvider, useDescendant, useDescendants } =
+    const { DescendantsContext, useDescendant, useDescendants } =
       initializeDescendants()
 
     const { result } = renderHook(() => useDescendants())
@@ -22,9 +21,7 @@ describe("useDescendant", () => {
 
     const Wrapper: FC<PropsWithChildren> = ({ children }) => {
       return (
-        <DescendantsContextProvider value={descendants}>
-          {children}
-        </DescendantsContextProvider>
+        <DescendantsContext value={descendants}>{children}</DescendantsContext>
       )
     }
 

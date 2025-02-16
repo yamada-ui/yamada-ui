@@ -1,6 +1,6 @@
 import type { ComponentType, ForwardRefExoticComponent } from "react"
 import type { DOMElement, StyledOptions } from "../../core"
-import type { MotionComponents, MotionFactory } from "./motion.types"
+import type { MotionComponents, MotionFactory } from "./index.types"
 import { motion as _motion } from "motion/react"
 import { styled } from "../../core"
 

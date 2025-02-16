@@ -8,13 +8,30 @@ export const inputElementStyle = defineComponentStyle({
     fontSize: "md",
     height: "full",
     justifyContent: "center",
-    pointerEvents: "none",
     position: "absolute",
     px: "3",
     zIndex: 1,
   },
 
   props: {
+    /**
+     * If `true`, the element clickable.
+     *
+     * @default false
+     */
+    clickable: {
+      false: {
+        pointerEvents: "none",
+      },
+      true: {
+        pointerEvents: "auto",
+      },
+    },
+    /**
+     * The placement of the element.
+     *
+     * @default 'start'
+     */
     placement: {
       end: {
         insetInlineEnd: "0",

@@ -12,7 +12,7 @@ type Props<Y extends HTMLElement = HTMLElement> = Omit<
 export type UseClickableProps<
   Y extends HTMLElement = HTMLElement,
   M extends Props<Y> = Props<Y>,
-> = {
+> = M & {
   /**
    * The ref for the element.
    */
@@ -70,7 +70,7 @@ export type UseClickableProps<
    * @deprecated Use `focusable` instead.
    */
   isFocusable?: boolean
-} & M
+}
 
 const isValidElement = (
   ev: KeyboardEvent | KeyboardEvent["nativeEvent"],

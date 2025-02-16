@@ -24,18 +24,18 @@ export const PasswordInput: ComponentMultiStyle<"PasswordInput"> =
         transitionDuration: "moderate",
         transitionProperty: "common",
         zIndex: "yamcha",
-        _disabled: {
-          cursor: "not-allowed",
-          opacity: 0.4,
+        _hover: {
+          opacity: 0.8,
         },
         _focusVisible: {
           boxShadow: "outline",
         },
-        _hover: {
-          opacity: 0.8,
-        },
         _readOnly: {
           pointerEvents: "none",
+        },
+        _disabled: {
+          cursor: "not-allowed",
+          opacity: 0.4,
         },
       },
       strengthMeter: {

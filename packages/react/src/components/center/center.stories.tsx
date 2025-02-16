@@ -13,7 +13,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Center bg="primary" color="white" minH="xs" minW="xs" rounded="md">
+    <Center bg="mono" color="mono.contrast" minBoxSize="xs" rounded="l2">
       Center
     </Center>
   )
@@ -21,8 +21,8 @@ export const Basic: Story = () => {
 
 export const IconWithFrame: Story = () => {
   return (
-    <Center bg="gray.500" color="white" minH="6xs" minW="6xs" rounded="full">
-      <SkullIcon fontSize="3xl" />
+    <Center bg="mono.subtle" color="mono" minBoxSize="10" rounded="full">
+      <SkullIcon fontSize="2xl" />
     </Center>
   )
 }

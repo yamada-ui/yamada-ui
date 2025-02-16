@@ -1,6 +1,7 @@
-import type { HTMLUIProps, StatusScheme, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { IconProps } from "../icon"
 import type { Loading } from "../loading"
+import type { StatusScheme } from "../status"
 import type { AlertStyle } from "./alert.style"
 import { useMemo } from "react"
 import { createSlotComponent, ui } from "../../core"
@@ -8,11 +9,11 @@ import { CircleCheckBigIcon, InfoIcon, TriangleAlertIcon } from "../icon"
 import { useLoadingComponent } from "../loading"
 import { alertStyle } from "./alert.style"
 
-const statuses = {
-  error: { colorScheme: "error", icon: TriangleAlertIcon },
-  info: { colorScheme: "info", icon: InfoIcon },
-  success: { colorScheme: "success", icon: CircleCheckBigIcon },
-  warning: { colorScheme: "warning", icon: TriangleAlertIcon },
+const icons = {
+  error: TriangleAlertIcon,
+  info: InfoIcon,
+  success: CircleCheckBigIcon,
+  warning: TriangleAlertIcon,
 } as const
 
 interface AlertContext {
@@ -64,7 +65,7 @@ export const AlertRoot = withProvider<"div", AlertRootProps>(
   },
   "root",
 )(({ colorScheme, status = "info" }) => ({
-  colorScheme: colorScheme ?? statuses[status].colorScheme,
+  colorScheme: colorScheme ?? status,
   status,
 }))
 
@@ -72,7 +73,7 @@ export interface AlertIconProps extends IconProps {}
 
 export const AlertIcon = withContext<"svg", AlertIconProps>((props) => {
   const { status } = useAlertContext()
-  const Icon = statuses[status].icon
+  const Icon = icons[status]
 
   return <Icon {...props} />
 }, "icon")()

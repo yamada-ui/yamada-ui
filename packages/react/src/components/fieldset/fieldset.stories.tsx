@@ -192,7 +192,7 @@ export const CustomContent: Story = () => {
       invalid
       legend="Contact details"
     >
-      <Fieldset.Content borderWidth="1px" p="md" rounded="lg">
+      <Fieldset.Content borderWidth="1px" p="md" rounded="l2">
         <Field.Root label="Name">
           <Input type="text" placeholder="Your name" />
         </Field.Root>

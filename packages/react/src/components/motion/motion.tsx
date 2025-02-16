@@ -1,6 +1,7 @@
-import type { FC } from "../../core"
+import type { ReactElement } from "react"
+import type { ComponentArgs, DOMElement } from "../../core"
 import type { Dict } from "../../utils"
-import type { MotionProps } from "./motion.types"
+import type { MotionProps } from "./index.types"
 import { motion } from "motion/react"
 import { useMemo } from "react"
 import { ui } from "../../core"
@@ -15,12 +16,12 @@ const Component = ui<"div", Dict>("div", { forwardProps })
  *
  * @see Docs https://yamada-ui.com/components/other/motion
  */
-export const Motion: FC<MotionProps> = ({
+export const Motion = (({
   ref,
   as: asProp = "div",
   className,
   ...rest
-}) => {
+}: MotionProps) => {
   const as = useMemo(() => motion.create(asProp), [asProp])
 
   return (
@@ -31,6 +32,10 @@ export const Motion: FC<MotionProps> = ({
       {...rest}
     />
   )
+}) as ComponentArgs & {
+  <Y extends DOMElement = "div">(
+    props: MotionProps<Y> & { as?: Y },
+  ): ReactElement
 }
 
 Motion.__ui__ = "Motion"

@@ -44,17 +44,17 @@ export const Select: ComponentMultiStyle<"Select"> = mergeMultiStyle(
         textDecoration: "none",
         userSelect: "none",
         width: "100%",
-        _active: {
-          bg: ["blackAlpha.200", "whiteAlpha.200"],
-        },
         _hover: {
           bg: ["blackAlpha.100", "whiteAlpha.100"],
-          _disabled: {
-            bg: ["white", "black"],
-          },
           _focus: {
             bg: ["blackAlpha.50", "whiteAlpha.50"],
           },
+          _disabled: {
+            bg: ["white", "black"],
+          },
+        },
+        _active: {
+          bg: ["blackAlpha.200", "whiteAlpha.200"],
         },
       },
       itemIcon: {

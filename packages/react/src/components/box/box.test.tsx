@@ -7,6 +7,21 @@ describe("<Box />", () => {
     await a11y(<Box>Box</Box>)
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Box.displayName).toBe("Box")
+    expect(Box.__ui__).toBe("Box")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Box>Box</Box>)
+    expect(screen.getByText("Box").tagName).toBe("DIV")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Box>Box</Box>)
+    expect(screen.getByText("Box")).toHaveClass("ui-box")
+  })
+
   test("as - prop works correctly", () => {
     render(
       <Box as="a" href="www.google.com">

@@ -60,7 +60,6 @@ export interface FocusLockProps {
  *
  * @see Docs https://yamada-ui.com/components/other/focus-lock
  */
-
 export const FocusLock: FC<FocusLockProps> = ({
   autoFocus,
   children,
@@ -106,5 +105,4 @@ export const FocusLock: FC<FocusLockProps> = ({
   )
 }
 
-FocusLock.displayName = "FocusLock"
 FocusLock.__ui__ = "FocusLock"

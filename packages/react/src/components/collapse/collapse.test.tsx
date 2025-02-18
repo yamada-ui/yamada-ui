@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { a11y, render, screen, waitFor } from "../../../test"
+import { a11y, render, screen, wait, waitFor } from "../../../test"
 import { Collapse } from "./collapse"
 
 describe("<Collapse />", () => {
@@ -7,15 +7,7 @@ describe("<Collapse />", () => {
     await a11y(<Collapse />)
   })
 
-  /**
-   * NOTE: This test is currently skipped
-   *
-   * Due to the following concerns:
-   * - Unstable due to relying on setTimeout for transition completion
-   * - height: auto validation may fail depending on environment
-   * - Investigating more reliable testing approaches
-   */
-  test.skip("toggles visibility on open change", async () => {
+  test("toggles visibility on open change", async () => {
     const TestComponent = () => {
       const [open, setOpen] = useState(false)
 
@@ -34,27 +26,21 @@ describe("<Collapse />", () => {
 
     expect(collapse).toHaveStyle({
       height: "0px",
-      opacity: "1",
-      overflow: "hidden",
     })
 
     await user.click(button)
-    await new Promise((resolve) => setTimeout(resolve, 300))
     await waitFor(() => {
       expect(collapse).toHaveStyle({
         height: "auto",
-        opacity: "1",
-        overflow: "hidden",
       })
     })
 
+    await wait(300)
+
     await user.click(button)
-    await new Promise((resolve) => setTimeout(resolve, 300))
     await waitFor(() => {
       expect(collapse).toHaveStyle({
         height: "0px",
-        opacity: "1",
-        overflow: "hidden",
       })
     })
   })

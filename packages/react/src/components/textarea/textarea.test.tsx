@@ -1,5 +1,5 @@
-import { Textarea } from "."
 import { a11y, render, screen } from "../../../test"
+import { Textarea } from "./"
 
 describe("<Textarea />", () => {
   test("Textarea renders correctly", async () => {

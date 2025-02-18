@@ -1,7 +1,6 @@
 import type { HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
-import type { Merge } from "../../utils"
-import type { UseCollapseProps } from "../collapse"
+import type { CollapseProps } from "../collapse"
 import type { WithTransitionProps } from "../motion"
 import type { AccordionStyle } from "./accordion.style"
 import type {
@@ -244,17 +243,15 @@ export const AccordionIcon = withContext<"svg", AccordionIconProps>(
   "icon",
 )()
 
-interface CollapseProps
-  extends Pick<
-    UseCollapseProps,
-    | "animationOpacity"
-    | "endingHeight"
-    | "startingHeight"
-    | keyof WithTransitionProps
-  > {}
-
 export interface AccordionPanelProps
-  extends Merge<HTMLUIProps, CollapseProps> {}
+  extends Omit<HTMLUIProps, "transition">,
+    Pick<
+      CollapseProps,
+      | "animationOpacity"
+      | "endingHeight"
+      | "startingHeight"
+      | keyof WithTransitionProps
+    > {}
 
 export const AccordionPanel = withContext<"div", AccordionPanelProps>(
   ({

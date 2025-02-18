@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { ScaleFade } from "."
 import { a11y, render, screen, waitFor } from "../../../test"
+import { Fade } from "./fade"
 
-describe("<ScaleFade />", () => {
+describe("<Fade />", () => {
   test("passes a11y test", async () => {
-    await a11y(<ScaleFade />)
+    await a11y(<Fade />)
   })
 
   test("toggles visibility on open change", async () => {
@@ -13,8 +13,8 @@ describe("<ScaleFade />", () => {
 
       return (
         <>
-          <button onClick={() => setOpen((prev) => !prev)}>button</button>
-          <ScaleFade open={open}>ScaleFade</ScaleFade>
+          <button onClick={() => setOpen(!open)}>button</button>
+          <Fade open={open}>Fade</Fade>
         </>
       )
     }
@@ -22,7 +22,7 @@ describe("<ScaleFade />", () => {
     const { user } = render(<TestComponent />)
 
     const button = await screen.findByRole("button", { name: /button/i })
-    const collapse = await screen.findByText("ScaleFade")
+    const collapse = await screen.findByText("Fade")
     expect(collapse).not.toBeVisible()
 
     await user.click(button)
@@ -38,24 +38,23 @@ describe("<ScaleFade />", () => {
 
       return (
         <>
-          <button onClick={() => setOpen((prev) => !prev)}>button</button>
-          <ScaleFade open={open} unmountOnExit>
-            ScaleFade
-          </ScaleFade>
+          <button onClick={() => setOpen(!open)}>button</button>
+          <Fade open={open} unmountOnExit>
+            Fade
+          </Fade>
         </>
       )
     }
 
     const { user } = render(<TestComponent />)
 
-    expect(screen.queryByText("ScaleFade")).toBeNull()
-
     const button = await screen.findByRole("button", { name: /button/i })
+    expect(screen.queryByText("Fade")).toBeNull()
 
     await user.click(button)
-    await waitFor(() => expect(screen.getByText("ScaleFade")).toBeVisible())
+    await waitFor(() => expect(screen.getByText("Fade")).toBeVisible())
 
     await user.click(button)
-    await waitFor(() => expect(screen.queryByText("ScaleFade")).toBeNull())
+    await waitFor(() => expect(screen.queryByText("Fade")).toBeNull())
   })
 })

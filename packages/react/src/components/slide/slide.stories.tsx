@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Slide } from "."
-import { Button } from "../../components/button"
-import { VStack } from "../../components/stack"
-import { Text } from "../../components/text"
 import { useBoolean } from "../../hooks/use-boolean"
+import { Button } from "../button"
+import { VStack } from "../stack"
+import { Text } from "../text"
+import { Slide } from "./slide"
 
 type Story = StoryFn<typeof Slide>
 
@@ -22,8 +22,8 @@ export const Basic: Story = () => {
       <Button onClick={toggle}>Please Click</Button>
 
       <Slide open={open} placement="bottom">
-        <VStack bg="orange.500" p="md" w="full">
-          <Text color="white">
+        <VStack bg="bg.panel" p="md" w="full">
+          <Text color="bg.contrast">
             クリリンのことか……クリリンのことかーーーっ！！！！！
           </Text>
 
@@ -36,7 +36,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithDuration: Story = () => {
+export const Duration: Story = () => {
   const [open, { toggle }] = useBoolean()
 
   return (
@@ -44,8 +44,8 @@ export const WithDuration: Story = () => {
       <Button onClick={toggle}>Please Click</Button>
 
       <Slide duration={0.7} open={open} placement="bottom">
-        <VStack bg="orange.500" p="md" w="full">
-          <Text color="white">
+        <VStack bg="bg.panel" p="md" w="full">
+          <Text color="bg.contrast">
             クリリンのことか……クリリンのことかーーーっ！！！！！
           </Text>
 
@@ -58,16 +58,16 @@ export const WithDuration: Story = () => {
   )
 }
 
-export const WithPlacement: Story = () => {
+export const Placement: Story = () => {
   const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide open={open} placement="left">
-        <VStack bg="orange.500" p="md" w="full">
-          <Text color="white">
+      <Slide open={open} placement="right">
+        <VStack bg="bg.panel" h="full" p="md">
+          <Text color="bg.contrast">
             クリリンのことか……クリリンのことかーーーっ！！！！！
           </Text>
 

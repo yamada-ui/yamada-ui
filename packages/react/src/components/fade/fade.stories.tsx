@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Fade } from "."
-import { Box } from "../../components/box"
-import { Button } from "../../components/button"
 import { useBoolean } from "../../hooks/use-boolean"
+import { Box } from "../box"
+import { Button } from "../button"
+import { Fade } from "./fade"
 
 type Story = StoryFn<typeof Fade>
 
@@ -20,10 +20,8 @@ export const Basic: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Fade open={open}>
-        <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
-          クリリンのことか……クリリンのことかーーーっ！！！！！
-        </Box>
+      <Fade bg="orange.500" color="white" open={open} p="md" rounded="md">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
       </Fade>
 
       <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
@@ -33,17 +31,22 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithDuration: Story = () => {
+export const Duration: Story = () => {
   const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Fade duration={0.4} open={open}>
-        <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
-          クリリンのことか……クリリンのことかーーーっ！！！！！
-        </Box>
+      <Fade
+        bg="orange.500"
+        color="white"
+        duration={0.4}
+        open={open}
+        p="md"
+        rounded="md"
+      >
+        クリリンのことか……クリリンのことかーーーっ！！！！！
       </Fade>
 
       <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
@@ -53,17 +56,22 @@ export const WithDuration: Story = () => {
   )
 }
 
-export const ExitUnmount: Story = () => {
+export const UnmountOnExit: Story = () => {
   const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Fade open={open} unmountOnExit>
-        <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
-          クリリンのことか……クリリンのことかーーーっ！！！！！
-        </Box>
+      <Fade
+        bg="orange.500"
+        color="white"
+        open={open}
+        p="md"
+        rounded="md"
+        unmountOnExit
+      >
+        クリリンのことか……クリリンのことかーーーっ！！！！！
       </Fade>
 
       <Box bg="purple.500" color="white" p="md" rounded="md" w="full">

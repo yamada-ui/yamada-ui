@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { SlideFade } from "."
 import { a11y, render, screen, waitFor } from "../../../test"
+import { SlideFade } from "./slide-fade"
 
 describe("<SlideFade />", () => {
   test("passes a11y test", async () => {

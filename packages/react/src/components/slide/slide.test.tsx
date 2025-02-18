@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { Slide } from "."
 import { a11y, render, screen, waitFor } from "../../../test"
+import { Slide } from "./slide"
 
 describe("<Slide />", () => {
   test("passes a11y test", async () => {

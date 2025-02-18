@@ -353,10 +353,10 @@ import "dayjs/locale/ja"
 
 ### クリアを無効化する
 
-クリアを無効化する場合は、`isClearable`を`false`に設定します。
+クリアを無効化する場合は、`clearable`を`false`に設定します。
 
 ```tsx
-<MultiDatePicker placeholder="YYYY/MM/DD" isClearable={false} />
+<MultiDatePicker placeholder="YYYY/MM/DD" clearable={false} />
 ```
 
 ### 入力を許可しない
@@ -415,7 +415,7 @@ import "dayjs/locale/ja"
     placeholder="custom border color"
   />
   <MultiDatePicker
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -466,37 +466,37 @@ import "dayjs/locale/ja"
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <MultiDatePicker isDisabled variant="outline" placeholder="outline" />
-  <MultiDatePicker isDisabled variant="filled" placeholder="filled" />
-  <MultiDatePicker isDisabled variant="flushed" placeholder="flushed" />
+  <MultiDatePicker disabled variant="outline" placeholder="outline" />
+  <MultiDatePicker disabled variant="filled" placeholder="filled" />
+  <MultiDatePicker disabled variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <MultiDatePicker isReadOnly variant="outline" placeholder="outline" />
-  <MultiDatePicker isReadOnly variant="filled" placeholder="filled" />
-  <MultiDatePicker isReadOnly variant="flushed" placeholder="flushed" />
+  <MultiDatePicker readOnly variant="outline" placeholder="outline" />
+  <MultiDatePicker readOnly variant="filled" placeholder="filled" />
+  <MultiDatePicker readOnly variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <MultiDatePicker isInvalid variant="outline" placeholder="outline" />
-  <MultiDatePicker isInvalid variant="filled" placeholder="filled" />
-  <MultiDatePicker isInvalid variant="flushed" placeholder="flushed" />
+  <MultiDatePicker invalid variant="outline" placeholder="outline" />
+  <MultiDatePicker invalid variant="filled" placeholder="filled" />
+  <MultiDatePicker invalid variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
@@ -530,7 +530,7 @@ import "dayjs/locale/ja"
   <MultiDatePicker placeholder="YYYY/MM/DD" closeOnSelect={false}>
     {({ value, onClose }) => (
       <VStack mt="sm">
-        <Button isDisabled={!value} onClick={onClose}>
+        <Button disabled={!value} onClick={onClose}>
           Submit{value ? ` ${value.length} dates` : ""}
         </Button>
       </VStack>
@@ -592,7 +592,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.multiDatePicker}
+      invalid={!!errors.multiDatePicker}
       label="Date to reserve"
       errorMessage={
         errors.multiDatePicker ? errors.multiDatePicker.message : undefined

@@ -1,4 +1,4 @@
-import { a11y } from "../../../test"
+import { a11y, render, screen } from "../../../test"
 import { AspectRatio } from "./aspect-ratio"
 
 describe("<AspectRatio />", () => {
@@ -8,5 +8,28 @@ describe("<AspectRatio />", () => {
         <img src="https://image.xyz/source" alt="placeholder" />
       </AspectRatio>,
     )
+  })
+
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(AspectRatio.displayName).toBe("AspectRatio")
+    expect(AspectRatio.__ui__).toBe("AspectRatio")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <AspectRatio data-testid="aspect-ratio">
+        <img src="https://image.xyz/source" alt="placeholder" />
+      </AspectRatio>,
+    )
+    expect(screen.getByTestId("aspect-ratio")).toHaveClass("ui-aspect-ratio")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <AspectRatio data-testid="aspect-ratio">
+        <img src="https://image.xyz/source" alt="placeholder" />
+      </AspectRatio>,
+    )
+    expect(screen.getByTestId("aspect-ratio").tagName).toBe("DIV")
   })
 })

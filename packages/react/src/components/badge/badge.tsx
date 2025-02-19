@@ -16,6 +16,6 @@ export const {
 /**
  * `Badge` is a component that emphasizes the status of an item to make it immediately recognizable.
  *
- * @see Docs https://yamada-ui.com/components/data-display/badge
+ * @see Docs https://yamada-ui.com/components/badge
  */
 export const Badge = withContext("span")()

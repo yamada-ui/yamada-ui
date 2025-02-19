@@ -51,7 +51,7 @@ export const {
 /**
  * `EmptyState` is used to display when a resource is empty or not available.
  *
- * @see Docs https://yamada-ui.com/components/other/empty-state
+ * @see Docs https://yamada-ui.com/components/empty-state
  */
 export const EmptyStateRoot = withProvider<"div", EmptyStateRootProps>(
   ({

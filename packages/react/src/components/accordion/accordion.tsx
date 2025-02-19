@@ -69,7 +69,7 @@ export const {
 /**
  * `Accordion` is a component for a list that displays information in an expandable or collapsible manner.
  *
- * @see Docs https://yamada-ui.com/components/disclosure/accordion
+ * @see Docs https://yamada-ui.com/components/accordion
  */
 export const AccordionRoot = withProvider<"div", AccordionRootProps>(
   ({ icon, iconHidden, ...props }) => {

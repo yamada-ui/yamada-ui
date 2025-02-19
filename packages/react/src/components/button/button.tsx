@@ -115,7 +115,7 @@ export const {
 /**
  * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.
  *
- * @see Docs https://yamada-ui.com/components/forms/button
+ * @see Docs https://yamada-ui.com/components/button
  */
 export const Button = withContext(
   ({

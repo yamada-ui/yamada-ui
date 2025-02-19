@@ -1,6 +1,6 @@
-import type { PropsWithChildren } from "react"
+import type { FC, PropsWithChildren, ReactNode } from "react"
 import type { HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
-import type { CloseButtonProps } from "../button"
+import type { ButtonProps, CloseButtonProps } from "../button"
 import type { FocusLockProps } from "../focus-lock"
 import type { MotionProps, MotionTransitionProps } from "../motion"
 import type { PortalProps } from "../portal"
@@ -11,8 +11,8 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, ui } from "../../core"
-import { findChildren, getValidChildren } from "../../utils"
-import { CloseButton } from "../button"
+import { findChildren, getValidChildren, wrapOrPassProps } from "../../utils"
+import { Button, CloseButton } from "../button"
 import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { Motion } from "../motion"
@@ -31,7 +31,7 @@ interface DrawerContext
 
 export interface DrawerRootProps
   extends ThemeProps<DrawerStyle>,
-    UseDrawerProps,
+    Omit<UseDrawerProps, "title">,
     Pick<
       FocusLockProps,
       | "autoFocus"
@@ -39,7 +39,8 @@ export interface DrawerRootProps
       | "initialFocusRef"
       | "lockFocusAcrossFrames"
       | "restoreFocus"
-    > {
+    >,
+    ShorthandDrawerContentProps {
   /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
    *
@@ -56,6 +57,10 @@ export interface DrawerRootProps
    * The animation duration.
    */
   duration?: MotionTransitionProps["duration"]
+  /**
+   * The modal trigger to use.
+   */
+  trigger?: ReactNode
   /**
    * If `true`, display the drawer close button.
    *
@@ -107,6 +112,8 @@ export const DrawerRoot = withProvider(
     allowPinchZoom = false,
     autoFocus,
     blockScrollOnMount = true,
+    body,
+    cancel,
     children,
     closeOnDrag,
     dragConstraints,
@@ -115,15 +122,24 @@ export const DrawerRoot = withProvider(
     dragVelocity,
     duration = { enter: 0.4, exit: 0.3 },
     finalFocusRef,
+    footer,
+    header,
     initialFocusRef,
     lockFocusAcrossFrames = true,
+    middle,
     placement,
     restoreFocus,
+    success,
+    title,
+    trigger,
     withCloseButton = !closeOnDrag,
     withDragBar = true,
     withOverlay = true,
     portalProps,
+    onCancel,
     onCloseComplete,
+    onMiddle,
+    onSuccess,
     ...props
   }) => {
     const validChildren = getValidChildren(children)
@@ -144,6 +160,10 @@ export const DrawerRoot = withProvider(
       placement,
       ...props,
     })
+    const hasChildren = !!cloneChildren.length
+    const customOpenTrigger = trigger ? (
+      <DrawerOpenTrigger>{trigger}</DrawerOpenTrigger>
+    ) : null
 
     const context = useMemo(
       () => ({
@@ -159,7 +179,7 @@ export const DrawerRoot = withProvider(
 
     return (
       <DrawerContext value={context}>
-        {openTrigger}
+        {openTrigger ?? customOpenTrigger}
 
         <AnimatePresence onExitComplete={onCloseComplete}>
           {open ? (
@@ -179,7 +199,22 @@ export const DrawerRoot = withProvider(
                   <ui.div {...getRootProps()}>
                     {customOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
 
-                    {cloneChildren}
+                    {hasChildren ? (
+                      cloneChildren
+                    ) : (
+                      <ShorthandDrawerContent
+                        body={body}
+                        cancel={cancel}
+                        footer={footer}
+                        header={header}
+                        middle={middle}
+                        success={success}
+                        title={title}
+                        onCancel={onCancel}
+                        onMiddle={onMiddle}
+                        onSuccess={onSuccess}
+                      />
+                    )}
                   </ui.div>
                 </RemoveScroll>
               </FocusLock>
@@ -286,6 +321,96 @@ export const DrawerContent = withContext<"div", DrawerContentProps>(
   },
   "content",
 )()
+
+interface ShorthandDrawerContentProps {
+  /**
+   * The drawer body to use.
+   */
+  body?: DrawerBodyProps | ReactNode
+  /**
+   * The drawer cancel button to use.
+   */
+  cancel?: ButtonProps | ReactNode
+  /**
+   * The drawer footer to use.
+   */
+  footer?: DrawerFooterProps | ReactNode
+  /**
+   * The drawer header to use.
+   */
+  header?: DrawerHeaderProps | ReactNode
+  /**
+   * The drawer middle button to use.
+   */
+  middle?: ButtonProps | ReactNode
+  /**
+   * The drawer success button to use.
+   */
+  success?: ButtonProps | ReactNode
+  /**
+   * The drawer title to use.
+   */
+  title?: DrawerTitleProps | ReactNode
+  /**
+   * The callback invoked when cancel button clicked.
+   */
+  onCancel?: (onClose: () => void) => void
+  /**
+   * The callback invoked when middle button clicked.
+   */
+  onMiddle?: (onClose: () => void) => void
+  /**
+   * The callback invoked when success button clicked.
+   */
+  onSuccess?: (onClose: () => void) => void
+}
+
+export const ShorthandDrawerContent: FC<ShorthandDrawerContentProps> = ({
+  body,
+  cancel,
+  footer,
+  header,
+  middle,
+  success,
+  title,
+  onCancel,
+  onMiddle,
+  onSuccess,
+}) => {
+  const { onClose } = useDrawerContext()
+  const customHeader = wrapOrPassProps(DrawerHeader, header)
+  const customTitle = wrapOrPassProps(DrawerTitle, title)
+  const customBody = wrapOrPassProps(DrawerBody, body)
+  const customFooter = wrapOrPassProps(DrawerFooter, footer)
+  const customCancel = wrapOrPassProps(Button, cancel, {
+    variant: "ghost",
+    onClick: () => (onCancel ? onCancel(onClose) : onClose()),
+  })
+  const customMiddle = wrapOrPassProps(Button, middle, {
+    colorScheme: "secondary",
+    onClick: () => (onMiddle ? onMiddle(onClose) : onClose()),
+  })
+  const customSuccess = wrapOrPassProps(Button, success, {
+    colorScheme: "primary",
+    onClick: () => (onSuccess ? onSuccess(onClose) : onClose()),
+  })
+
+  return (
+    <DrawerContent>
+      {customHeader ??
+        (customTitle ? <DrawerHeader>{customTitle}</DrawerHeader> : null)}
+      {customBody}
+      {customFooter ??
+        (customCancel || customMiddle || customSuccess ? (
+          <DrawerFooter>
+            {customCancel}
+            {customMiddle}
+            {customSuccess}
+          </DrawerFooter>
+        ) : null)}
+    </DrawerContent>
+  )
+}
 
 export interface DrawerDragBarProps extends HTMLUIProps {}
 

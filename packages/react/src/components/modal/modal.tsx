@@ -1,6 +1,6 @@
-import type { PropsWithChildren } from "react"
-import type { HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
-import type { CloseButtonProps } from "../button"
+import type { PropsWithChildren, ReactNode } from "react"
+import type { FC, HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { ButtonProps, CloseButtonProps } from "../button"
 import type { FocusLockProps } from "../focus-lock"
 import type { MotionProps, MotionTransitionProps } from "../motion"
 import type { PortalProps } from "../portal"
@@ -10,8 +10,8 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, ui } from "../../core"
-import { findChildren, getValidChildren } from "../../utils"
-import { CloseButton } from "../button"
+import { findChildren, getValidChildren, wrapOrPassProps } from "../../utils"
+import { Button, CloseButton } from "../button"
 import { fadeScaleVariants, fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { Motion } from "../motion"
@@ -27,7 +27,7 @@ interface ModalContext
 
 export interface ModalRootProps
   extends ThemeProps<ModalStyle>,
-    UseModalProps,
+    Omit<UseModalProps, "title">,
     Pick<
       FocusLockProps,
       | "autoFocus"
@@ -36,7 +36,7 @@ export interface ModalRootProps
       | "lockFocusAcrossFrames"
       | "restoreFocus"
     >,
-    PropsWithChildren {
+    ShorthandModalContentProps {
   /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
    *
@@ -59,6 +59,10 @@ export interface ModalRootProps
    * The animation duration.
    */
   duration?: MotionTransitionProps["duration"]
+  /**
+   * The modal trigger to use.
+   */
+  trigger?: ReactNode
   /**
    * If `true`, display the modal close button.
    *
@@ -105,16 +109,27 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
     animationScheme = "scale",
     autoFocus,
     blockScrollOnMount = true,
+    body,
+    cancel,
     children,
     duration,
     finalFocusRef,
+    footer,
+    header,
     initialFocusRef,
     lockFocusAcrossFrames = true,
+    middle,
     restoreFocus,
+    success,
+    title,
+    trigger,
     withCloseButton = true,
     withOverlay = true,
     portalProps,
+    onCancel,
     onCloseComplete,
+    onMiddle,
+    onSuccess,
     ...props
   }) => {
     const validChildren = getValidChildren(children)
@@ -127,6 +142,10 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
       ModalOverlay,
     )
     const { open, getRootProps, ...rest } = useModal(props)
+    const hasChildren = !!cloneChildren.length
+    const customOpenTrigger = trigger ? (
+      <ModalOpenTrigger>{trigger}</ModalOpenTrigger>
+    ) : null
 
     const context = useMemo(
       () => ({
@@ -141,7 +160,7 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
 
     return (
       <ModalContext value={context}>
-        {openTrigger}
+        {openTrigger ?? customOpenTrigger}
 
         <AnimatePresence onExitComplete={onCloseComplete}>
           {open ? (
@@ -161,7 +180,22 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
                   <ui.div {...getRootProps()}>
                     {customOverlay ?? (withOverlay ? <ModalOverlay /> : null)}
 
-                    {cloneChildren}
+                    {hasChildren ? (
+                      cloneChildren
+                    ) : (
+                      <ShorthandModalContent
+                        body={body}
+                        cancel={cancel}
+                        footer={footer}
+                        header={header}
+                        middle={middle}
+                        success={success}
+                        title={title}
+                        onCancel={onCancel}
+                        onMiddle={onMiddle}
+                        onSuccess={onSuccess}
+                      />
+                    )}
                   </ui.div>
                 </RemoveScroll>
               </FocusLock>
@@ -300,6 +334,96 @@ export const ModalContent = withContext<"div", ModalContentProps>(
   },
   "content",
 )()
+
+interface ShorthandModalContentProps {
+  /**
+   * The modal body to use.
+   */
+  body?: ModalBodyProps | ReactNode
+  /**
+   * The modal cancel button to use.
+   */
+  cancel?: ButtonProps | ReactNode
+  /**
+   * The modal footer to use.
+   */
+  footer?: ModalFooterProps | ReactNode
+  /**
+   * The modal header to use.
+   */
+  header?: ModalHeaderProps | ReactNode
+  /**
+   * The modal middle button to use.
+   */
+  middle?: ButtonProps | ReactNode
+  /**
+   * The modal success button to use.
+   */
+  success?: ButtonProps | ReactNode
+  /**
+   * The modal title to use.
+   */
+  title?: ModalTitleProps | ReactNode
+  /**
+   * The callback invoked when cancel button clicked.
+   */
+  onCancel?: (onClose: () => void) => void
+  /**
+   * The callback invoked when middle button clicked.
+   */
+  onMiddle?: (onClose: () => void) => void
+  /**
+   * The callback invoked when success button clicked.
+   */
+  onSuccess?: (onClose: () => void) => void
+}
+
+export const ShorthandModalContent: FC<ShorthandModalContentProps> = ({
+  body,
+  cancel,
+  footer,
+  header,
+  middle,
+  success,
+  title,
+  onCancel,
+  onMiddle,
+  onSuccess,
+}) => {
+  const { onClose } = useModalContext()
+  const customHeader = wrapOrPassProps(ModalHeader, header)
+  const customTitle = wrapOrPassProps(ModalTitle, title)
+  const customBody = wrapOrPassProps(ModalBody, body)
+  const customFooter = wrapOrPassProps(ModalFooter, footer)
+  const customCancel = wrapOrPassProps(Button, cancel, {
+    variant: "ghost",
+    onClick: () => (onCancel ? onCancel(onClose) : onClose()),
+  })
+  const customMiddle = wrapOrPassProps(Button, middle, {
+    colorScheme: "secondary",
+    onClick: () => (onMiddle ? onMiddle(onClose) : onClose()),
+  })
+  const customSuccess = wrapOrPassProps(Button, success, {
+    colorScheme: "primary",
+    onClick: () => (onSuccess ? onSuccess(onClose) : onClose()),
+  })
+
+  return (
+    <ModalContent>
+      {customHeader ??
+        (customTitle ? <ModalHeader>{customTitle}</ModalHeader> : null)}
+      {customBody}
+      {customFooter ??
+        (customCancel || customMiddle || customSuccess ? (
+          <ModalFooter>
+            {customCancel}
+            {customMiddle}
+            {customSuccess}
+          </ModalFooter>
+        ) : null)}
+    </ModalContent>
+  )
+}
 
 export interface ModalHeaderProps extends HTMLUIProps<"header"> {}
 

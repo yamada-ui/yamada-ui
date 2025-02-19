@@ -1,4 +1,4 @@
-import { isNumber, isString } from "@yamada-ui/utils"
+import { isNumber, isString, isUndefined } from "@yamada-ui/utils"
 import * as React from "react"
 
 export function getValidChildren(
@@ -92,4 +92,21 @@ export function pickChildren(
   return children.filter((child) =>
     types.every((type) => isSomeElement(child, type)),
   )
+}
+
+export const wrapOrPassProps = <Y extends React.PropsWithChildren>(
+  Component: React.FC<Y>,
+  nodeOrProps: React.ReactNode | Y,
+  additionalProps?: Y,
+) => {
+  if (isUndefined(nodeOrProps)) {
+    return null
+  } else if (isValidElement(nodeOrProps)) {
+    additionalProps ??= {} as Y
+    additionalProps.children = nodeOrProps
+
+    return <Component {...additionalProps} />
+  } else {
+    return <Component {...additionalProps} {...nodeOrProps} />
+  }
 }

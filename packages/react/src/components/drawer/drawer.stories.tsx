@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { useState } from "react"
 import { useDisclosure } from "../../hooks/use-disclosure"
+import { noop } from "../../utils"
 import { Button } from "../button"
 import { Container } from "../container"
 import { Wrap } from "../flex"
@@ -44,6 +45,20 @@ export const Basic: Story = () => {
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer.Root>
+  )
+}
+
+export const PropsPattern: Story = () => {
+  return (
+    <Drawer.Root
+      body="『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"
+      cancel="とじる"
+      success="Wikipedia"
+      title="ドラゴンボール"
+      trigger={<Button>Open Drawer</Button>}
+      onCancel={(onClose) => onClose()}
+      onSuccess={noop}
+    />
   )
 }
 
@@ -358,6 +373,20 @@ export const CustomOverlay: Story = () => {
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer.Root>
+  )
+}
+
+export const CustomButton: Story = () => {
+  return (
+    <Drawer.Root
+      size="lg"
+      body="『ドラゴンボール』（DRAGON BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。"
+      cancel={{ colorScheme: "danger", variant: "solid", children: "とじる" }}
+      middle={{ colorScheme: "info", children: "あらすじ" }}
+      success={{ colorScheme: "success", children: "Wikipedia" }}
+      title="ドラゴンボール"
+      trigger={<Button>Open Drawer</Button>}
+    />
   )
 }
 

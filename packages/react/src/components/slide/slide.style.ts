@@ -19,6 +19,10 @@ export const slideStyle = defineComponentStyle({
       top: { left: "0", right: "0", top: "0", w: "vw" },
     },
   },
+
+  defaultProps: {
+    placement: "right",
+  },
 })
 
 export type SlideStyle = typeof slideStyle

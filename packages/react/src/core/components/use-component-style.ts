@@ -441,7 +441,11 @@ function useStyle<
       props = Object.assign(props, { "data-variant": props.variant })
     if (props.size) props = Object.assign(props, { "data-size": props.size })
 
-    const computedProps = omitThemeProps(props, omitProps, transferProps) as Y
+    const computedProps = omitThemeProps(
+      mergedProps,
+      omitProps,
+      transferProps,
+    ) as Y
 
     computedProps.className = cx(
       className ?? customClassName,

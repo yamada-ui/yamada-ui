@@ -14,6 +14,56 @@ describe("<Accordion />", () => {
     )
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Accordion.Root.displayName).toBe("AccordionRoot")
+    expect(Accordion.Item.displayName).toBe("AccordionItem")
+    expect(Accordion.Button.displayName).toBe("AccordionButton")
+    expect(Accordion.Panel.displayName).toBe("AccordionPanel")
+
+    expect(Accordion.Root.__ui__).toBe("AccordionRoot")
+    expect(Accordion.Item.__ui__).toBe("AccordionItem")
+    expect(Accordion.Button.__ui__).toBe("AccordionButton")
+    expect(Accordion.Panel.__ui__).toBe("AccordionPanel")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <Accordion.Root data-testid="root">
+        <Accordion.Item data-testid="item" button="Accordion Label">
+          <Accordion.Panel data-testid="panel">
+            This is an accordion item
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+    expect(screen.getByTestId("root")).toHaveClass("ui-accordion__root")
+    expect(screen.getByTestId("item")).toHaveClass("ui-accordion__item")
+    expect(screen.getByTestId("panel")).toHaveClass("ui-accordion__panel")
+    expect(
+      screen.getByRole("button", { name: /Accordion Label/i }),
+    ).toHaveClass("ui-accordion__button")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <Accordion.Root data-testid="root">
+        <Accordion.Item data-testid="item" button="Accordion Label">
+          <Accordion.Panel data-testid="panel">
+            This is an accordion item
+          </Accordion.Panel>
+        </Accordion.Item>
+      </Accordion.Root>,
+    )
+    expect(screen.getByTestId("root").tagName).toBe("DIV")
+    const item = screen.getByTestId("item")
+    expect(item.tagName).toBe("DIV")
+    expect(item.children[0]?.tagName).toBe("H3")
+    expect(screen.getByTestId("panel").tagName).toBe("DIV")
+    expect(
+      screen.getByRole("button", { name: /Accordion Label/i }).tagName,
+    ).toBe("BUTTON")
+  })
+
   test("should render correctly with defaultIndex item expanded", async () => {
     render(
       <Accordion.Root defaultIndex={0}>

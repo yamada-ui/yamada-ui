@@ -217,7 +217,7 @@ export const useAccordionItem = ({
 
   const getItemProps: PropGetter = useCallback(
     ({ ref, ...props } = {}) => ({
-      "aria-expanded": open,
+      "data-expanded": dataAttr(open),
       ...props,
       ...rest,
       ref: mergeRefs(ref, rest.ref),

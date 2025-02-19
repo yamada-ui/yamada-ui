@@ -28,7 +28,7 @@ import { FileButton } from "@yamada-ui/react"
 </VStack>
 ```
 
-または、`children`を使用してカスタマイズすることも可能です。`children`は、`onClick`, `isDisabled`, `isReadOnly`, `isInvalid`を提供します。
+または、`children`を使用してカスタマイズすることも可能です。`children`は、`onClick`, `disabled`, `readOnly`, `invalid`を提供します。
 
 ```tsx
 <FileButton>
@@ -144,28 +144,28 @@ import { FileButton } from "@yamada-ui/react"
 ボーダーのカラーを変更する場合は、`errorBorderColor`にカラーを設定します。
 
 ```tsx
-<FileButton isInvalid errorBorderColor="orange.500">
+<FileButton invalid errorBorderColor="orange.500">
   Upload
 </FileButton>
 ```
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack alignItems="flex-start">
-  <FileButton isDisabled>Upload</FileButton>
+  <FileButton disabled>Upload</FileButton>
 
-  <FileButton as={IconButton} icon={<PlusIcon />} isDisabled />
+  <FileButton as={IconButton} icon={<PlusIcon />} disabled />
 
-  <FileButton isDisabled>
-    {({ onClick, isDisabled }) => (
+  <FileButton disabled>
+    {({ onClick, disabled }) => (
       <Link
         onClick={onClick}
-        opacity={isDisabled ? 0.4 : 1}
-        cursor={isDisabled ? "not-allowed" : "pointer"}
-        _hover={isDisabled ? undefined : { textDecoration: "underline" }}
+        opacity={disabled ? 0.4 : 1}
+        cursor={disabled ? "not-allowed" : "pointer"}
+        _hover={disabled ? undefined : { textDecoration: "underline" }}
       >
         Upload
       </Link>
@@ -173,7 +173,7 @@ import { FileButton } from "@yamada-ui/react"
   </FileButton>
 
   <FormControl
-    isDisabled
+    disabled
     label="Upload file"
     helperMessage="Please select a file to upload."
   >
@@ -184,20 +184,20 @@ import { FileButton } from "@yamada-ui/react"
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack alignItems="flex-start">
-  <FileButton isReadOnly>Upload</FileButton>
+  <FileButton readOnly>Upload</FileButton>
 
-  <FileButton as={IconButton} icon={<PlusIcon />} isReadOnly />
+  <FileButton as={IconButton} icon={<PlusIcon />} readOnly />
 
-  <FileButton isReadOnly>
-    {({ onClick, isReadOnly }) => (
+  <FileButton readOnly>
+    {({ onClick, readOnly }) => (
       <Link
         onClick={onClick}
-        cursor={isReadOnly ? "default" : "pointer"}
-        _hover={isReadOnly ? undefined : { textDecoration: "underline" }}
+        cursor={readOnly ? "default" : "pointer"}
+        _hover={readOnly ? undefined : { textDecoration: "underline" }}
       >
         Upload
       </Link>
@@ -205,7 +205,7 @@ import { FileButton } from "@yamada-ui/react"
   </FileButton>
 
   <FormControl
-    isReadOnly
+    readOnly
     label="Upload file"
     helperMessage="Please select a file to upload."
   >
@@ -216,15 +216,15 @@ import { FileButton } from "@yamada-ui/react"
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack alignItems="flex-start">
-  <FileButton isInvalid>Upload</FileButton>
+  <FileButton invalid>Upload</FileButton>
 
-  <FileButton as={IconButton} icon={<PlusIcon />} isInvalid />
+  <FileButton as={IconButton} icon={<PlusIcon />} invalid />
 
-  <FormControl isInvalid label="Upload file" errorMessage="File is required.">
+  <FormControl invalid label="Upload file" errorMessage="File is required.">
     <FileButton>Upload</FileButton>
   </FormControl>
 </VStack>
@@ -286,7 +286,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.fileButton}
+      invalid={!!errors.fileButton}
       label="Files"
       errorMessage={errors.fileButton ? errors.fileButton.message : undefined}
     >

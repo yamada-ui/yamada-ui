@@ -1,21 +1,17 @@
 import { useRef } from "react"
 import { Textarea } from "."
 import { fireEvent, render, screen } from "../../../test"
-import useAutosize from "./use-autosize"
+import { useAutosize } from "./use-autosize"
 
 const AutoSizeTextarea = ({
-  maxRows,
-  minRows,
+  maxRows = Infinity,
+  minRows = 1,
 }: {
   maxRows?: number
   minRows?: number
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
-  const resizeTextarea = useAutosize(
-    textareaRef,
-    maxRows || Infinity,
-    minRows || 1,
-  )
+  const resizeTextarea = useAutosize({ ref: textareaRef, maxRows, minRows })
 
   return (
     <Textarea

@@ -93,14 +93,14 @@ return (
 
     <Center w="full" gap="md">
       <Button
-        isDisabled={value === 0}
+        disabled={value === 0}
         onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
       >
         -10
       </Button>
 
       <Button
-        isDisabled={value === 360}
+        disabled={value === 360}
         colorScheme="blue"
         onClick={() => setValue((prev) => (prev !== 360 ? prev + 10 : prev))}
       >
@@ -113,14 +113,14 @@ return (
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <HueSlider isDisabled />
+  <HueSlider disabled />
 
   <Feildset
-    isDisabled
+    disabled
     legend="Pick color"
     helperMessage="Please select your favorite color"
   >
@@ -131,14 +131,14 @@ return (
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <HueSlider isReadOnly />
+  <HueSlider readOnly />
 
   <Feildset
-    isReadOnly
+    readOnly
     legend="Pick color"
     helperMessage="Please select your favorite color"
   >
@@ -195,7 +195,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Feildset
-      isInvalid={!!errors.hueSlider}
+      invalid={!!errors.hueSlider}
       legend="Pick color"
       errorMessage={errors.hueSlider ? errors.hueSlider.message : undefined}
     >

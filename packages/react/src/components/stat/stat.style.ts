@@ -1,13 +1,9 @@
-import type { ComponentMultiStyle } from "../../core"
+import { defineComponentSlotStyle } from "../../core"
 
-export const Stat: ComponentMultiStyle<"Stat"> = {
-  baseStyle: {
-    container: {
-      display: "flex",
-      flexDirection: "column",
-    },
+export const statStyle = defineComponentSlotStyle({
+  base: {
     helperMessage: {
-      color: "muted",
+      color: "fg.muted",
       fontSize: "sm",
     },
     icon: {
@@ -29,20 +25,22 @@ export const Stat: ComponentMultiStyle<"Stat"> = {
       w: "4",
     },
     label: {
-      color: "muted",
+      color: "fg.muted",
       fontWeight: "medium",
     },
-    number: ({ colorScheme: c }) => ({
-      color: c
-        ? [`${c}.500`, `${c}.600`]
-        : ["blackAlpha.800", "whiteAlpha.700"],
+    number: {
+      color: "colorScheme.outline",
       fontFeatureSettings: '"pnum"',
       fontSize: "5xl",
       fontVariantNumeric: "proportional-nums",
       fontWeight: "extrabold",
       verticalAlign: "baseline",
-    }),
+    },
+    root: {
+      display: "flex",
+      flexDirection: "column",
+    },
   },
+})
 
-  defaultProps: {},
-}
+export type StatStyle = typeof statStyle

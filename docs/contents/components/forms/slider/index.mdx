@@ -93,10 +93,10 @@ To change the orientation, set `orientation` to either `vertical` or `horizontal
 
 ### Reverse Direction
 
-To reverse the direction, set `isReversed` to `true`.
+To reverse the direction, set `reversed` to `true`.
 
 ```tsx
-<Slider isReversed />
+<Slider reversed />
 ```
 
 ### Set Minimum and Maximum Values
@@ -146,13 +146,13 @@ return (
 
     <ButtonGroup as={Center} gap="md" w="full">
       <Button
-        isDisabled={value === 0}
+        disabled={value === 0}
         onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
       >
         -10
       </Button>
       <Button
-        isDisabled={value === 100}
+        disabled={value === 100}
         colorScheme="blue"
         onClick={() => setValue((prev) => (prev !== 100 ? prev + 10 : prev))}
       >
@@ -165,14 +165,14 @@ return (
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <Slider isDisabled />
+  <Slider disabled />
 
   <Fieldset
-    isDisabled
+    disabled
     legend="Sound volume"
     helperMessage="Please select your preferred volume."
   >
@@ -183,14 +183,14 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <Slider isReadOnly />
+  <Slider readOnly />
 
   <Fieldset
-    isReadOnly
+    readOnly
     legend="Sound volume"
     helperMessage="Please select your preferred volume."
   >
@@ -201,17 +201,17 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make input invalid, set `isInvalid` to `true`.
+To make input invalid, set `invalid` to `true`.
 
 ```tsx functional=true
 const [value, onChange] = useState<number>(15)
 
 return (
   <VStack>
-    <Slider isInvalid={value < 20} value={value} onChange={onChange} />
+    <Slider invalid={value < 20} value={value} onChange={onChange} />
 
     <Fieldset
-      isInvalid={value < 20}
+      invalid={value < 20}
       legend="Sound volume"
       errorMessage="Volume should be set to 20 or higher."
     >
@@ -249,7 +249,7 @@ To display a tooltip, wrap `SliderThumb` with `Tooltip`.
 
 ```tsx functional=true
 const [value, onChange] = useState<number>(50)
-const [isOpen, { on, off }] = useBoolean(false)
+const [open, { on, off }] = useBoolean(false)
 
 return (
   <Slider
@@ -267,7 +267,7 @@ return (
       )}
     </For>
 
-    <Tooltip placement="top" label={`${value}%`} isOpen={isOpen}>
+    <Tooltip placement="top" label={`${value}%`} open={open}>
       <SliderThumb />
     </Tooltip>
   </Slider>
@@ -399,7 +399,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.slider}
+      invalid={!!errors.slider}
       legend="Sound volume"
       errorMessage={errors.slider ? errors.slider.message : undefined}
     >

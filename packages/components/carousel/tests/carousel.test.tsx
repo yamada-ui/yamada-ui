@@ -255,4 +255,80 @@ describe("<Carousel />", () => {
 
     indicators.forEach((indicator) => expect(indicator).toBeInTheDocument())
   })
+
+  const indicatorComponent: FC<{
+    index: number
+    selected: boolean
+  }> = ({ index }) => {
+    return (
+      <Button className="ui-carousel__indicators__indicator">
+        {`test indicator ${index}`}
+      </Button>
+    )
+  }
+
+  test("should move the carousel correctly when left or right arrow keys are pressed", () => {
+    render(
+      <Carousel indicatorsProps={{ component: indicatorComponent }}>
+        {slidesContentArr.map((value) => (
+          <CarouselSlide key={value}>{value}</CarouselSlide>
+        ))}
+      </Carousel>,
+    )
+
+    const carouselIndicators = document.querySelectorAll(
+      ".ui-carousel__indicators__indicator",
+    )
+    expect(carouselIndicators).toHaveLength(3)
+
+    const firstSlide = carouselIndicators[0] as HTMLButtonElement
+    firstSlide.focus()
+    expect(document.activeElement).toBe(firstSlide)
+
+    fireEvent.keyDown(firstSlide, { key: "ArrowRight", code: "ArrowRight" })
+    expect(document.activeElement).toBe(carouselIndicators[1])
+
+    fireEvent.keyDown(firstSlide, { key: "ArrowLeft", code: "ArrowLeft" })
+    expect(document.activeElement).toBe(carouselIndicators[2])
+
+    fireEvent.keyDown(firstSlide, { key: "Home", code: "Home" })
+    expect(document.activeElement).toBe(carouselIndicators[0])
+
+    fireEvent.keyDown(firstSlide, { key: "End", code: "End" })
+    expect(document.activeElement).toBe(carouselIndicators[2])
+  })
+
+  test("should move the carousel correctly when up or down arrow keys are pressed", () => {
+    render(
+      <Carousel
+        orientation="vertical"
+        indicatorsProps={{ component: indicatorComponent }}
+      >
+        {slidesContentArr.map((value) => (
+          <CarouselSlide key={value}>{value}</CarouselSlide>
+        ))}
+      </Carousel>,
+    )
+
+    const carouselIndicators = document.querySelectorAll(
+      ".ui-carousel__indicators__indicator",
+    )
+    expect(carouselIndicators).toHaveLength(3)
+
+    const firstSlide = carouselIndicators[0] as HTMLButtonElement
+    firstSlide.focus()
+    expect(document.activeElement).toBe(firstSlide)
+
+    fireEvent.keyDown(firstSlide, { key: "ArrowDown", code: "ArrowDown" })
+    expect(document.activeElement).toBe(carouselIndicators[1])
+
+    fireEvent.keyDown(firstSlide, { key: "ArrowUp", code: "ArrowUp" })
+    expect(document.activeElement).toBe(carouselIndicators[2])
+
+    fireEvent.keyDown(firstSlide, { key: "Home", code: "Home" })
+    expect(document.activeElement).toBe(carouselIndicators[0])
+
+    fireEvent.keyDown(firstSlide, { key: "End", code: "End" })
+    expect(document.activeElement).toBe(carouselIndicators[2])
+  })
 })

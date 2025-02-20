@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { useRef } from "react"
 import { ScrollArea } from "."
-import { Button } from "../../components/button"
-import { Wrap } from "../../components/flex"
-import { Heading } from "../../components/heading"
-import { VStack } from "../../components/stack"
-import { Text } from "../../components/text"
+import { Button } from "../button"
+import { Wrap } from "../flex"
+import { Heading } from "../heading"
+import { VStack } from "../stack"
+import { Text } from "../text"
 
 type Story = StoryFn<typeof ScrollArea>
 

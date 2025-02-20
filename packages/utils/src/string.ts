@@ -1,4 +1,5 @@
 import type { StringLiteral } from "./index.types"
+import { isString } from "./assertion"
 
 export function cx(...classNames: (string | undefined)[]) {
   return classNames.filter(Boolean).join(" ")
@@ -75,7 +76,6 @@ const sizeMap: StringLiteral[] = [
   "xs",
   "sm",
   "md",
-  "normal",
   "lg",
   "xl",
   "2xl",
@@ -88,10 +88,14 @@ const sizeMap: StringLiteral[] = [
   "9xl",
 ]
 
+export function isSize(value: any): boolean {
+  return isString(value) && sizeMap.includes(value)
+}
+
 export function transformSize(
   token: string | undefined,
   value: number,
-  omitTokens: null | string[] = ["normal"],
+  omitTokens: null | string[] = null,
 ): string | undefined {
   if (!token) return undefined
 

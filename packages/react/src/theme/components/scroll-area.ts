@@ -22,9 +22,6 @@ export const ScrollArea: ComponentStyle<"ScrollArea"> = {
         },
       },
     },
-    _focusVisible: {
-      boxShadow: "inline",
-    },
     _scrollbar: {
       h: "3",
       w: "3",
@@ -45,6 +42,9 @@ export const ScrollArea: ComponentStyle<"ScrollArea"> = {
     },
     _scrollbarTrack: {
       bg: "transparent",
+    },
+    _focusVisible: {
+      boxShadow: "inline",
     },
   },
 }

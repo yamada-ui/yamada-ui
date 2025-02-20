@@ -43,7 +43,8 @@
     "storybook:serve": "npx http-server ../../storybook-static",
     "storybook:build": "storybook build -c storybook -o ../../storybook-static",
     "test": "vitest",
-    "test:dev": "vitest --watch --ui",
+    "test:dev": "vitest --coverage --watch --ui",
+    "test:ci": "vitest --coverage",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config",
     "format": "prettier --ignore-path ../../.prettierignore --check . --cache",
@@ -78,7 +79,8 @@
     "@types/react-dom": "^19.0.2",
     "clean-package": "2.2.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "use-mask-input": "^3.4.2"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",

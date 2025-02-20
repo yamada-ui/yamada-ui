@@ -79,7 +79,7 @@ export const Icon: Story = () => {
 
 export const Justify: Story = () => {
   return (
-    <For each={["start", "center", "end"]}>
+    <For each={["start", "center", "end"] as const}>
       {(justify, index) => (
         <Blockquote.Root
           key={index}
@@ -124,7 +124,7 @@ export const CustomCite: Story = () => {
       <Blockquote.Root
         cite="Wikipedia"
         citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
-        citeProps={{ color: "primary" }}
+        citeProps={{ color: "link" }}
       >
         地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
       </Blockquote.Root>

@@ -29,6 +29,11 @@ export const layerStyles = defineStyles.layerStyle({
   "outline.hover": {
     bg: "colorScheme.ghost",
   },
+  panel: {
+    bg: "bg.panel",
+    borderColor: "border.subtle",
+    borderWidth: "1px",
+  },
   readOnly: {
     cursor: "default",
     _ripple: {

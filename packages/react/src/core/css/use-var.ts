@@ -2,7 +2,7 @@ import type { Dict } from "../../utils"
 import type { StyleConfig } from "../config"
 import type { StyleProperty } from "../styles"
 import type { StyledTheme, UsageTheme } from "../theme"
-import type { CSSObject, CSSProps } from "./index.types"
+import type { CSSProps } from "./index.types"
 import { useMemo } from "react"
 import { useTheme } from "../../providers/theme-provider"
 import {
@@ -17,7 +17,8 @@ import { styles } from "../styles"
 import { getVar } from "./var"
 
 type Format<Y> = (name: Y, index: number) => string
-type Variable = Required<CSSProps>["vars"][number]
+type Variables = Required<CSSProps>["vars"]
+type Variable = Variables[number]
 
 const defaultFormat: Format<any> = (name, index) => `${name}-${index}`
 
@@ -101,7 +102,7 @@ export const createVars =
         if (transform) {
           result[name] = getVar(formattedName)(theme)
         } else {
-          result[name] = `$${formattedName}`
+          result[name] = `{${formattedName}}`
         }
       }
     })
@@ -157,5 +158,7 @@ export const insertVars = <Y extends Dict | Dict[] | undefined>(
   }
 }
 
-export const mergeVars = (...vars: CSSObject["vars"][]): CSSProps["vars"] =>
+export const mergeVars = (
+  ...vars: (undefined | Variable | Variables)[]
+): CSSProps["vars"] =>
   vars.filter(Boolean).flatMap((vars) => vars as Variable[]) as CSSProps["vars"]

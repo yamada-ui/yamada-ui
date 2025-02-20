@@ -6,17 +6,26 @@ export interface UseDisclosureProps<
   M extends (...args: any[]) => Promise<void> | void = () => void,
 > {
   /**
-   * @deprecated Use `defaultOpen` instead.
+   * If `true`, the element will be initially opened.
    */
-  defaultIsOpen?: boolean
   defaultOpen?: boolean
   /**
-   * @deprecated Use `open` instead.
+   * If `true`, the element will be opened.
    */
-  isOpen?: boolean
   open?: boolean
+  /**
+   * The timing of the open and close.
+   *
+   * @default 'after'
+   */
   timing?: "after" | "before"
+  /**
+   * Callback invoked to close the element.
+   */
   onClose?: M
+  /**
+   * Callback invoked to open the element.
+   */
   onOpen?: Y
 }
 
@@ -30,10 +39,8 @@ export const useDisclosure = <
   Y extends (...args: any[]) => Promise<void> | void = () => void,
   M extends (...args: any[]) => Promise<void> | void = () => void,
 >({
-  defaultIsOpen = false,
-  defaultOpen = defaultIsOpen,
-  isOpen,
-  open: controlledOpen = isOpen,
+  defaultOpen = false,
+  open: controlledOpen,
   timing,
   onClose: onCloseProp,
   onOpen: onOpenProp,
@@ -78,10 +85,6 @@ export const useDisclosure = <
   ) as M | Y
 
   return {
-    /**
-     * @deprecated Use `open` instead.
-     */
-    isOpen: open,
     open,
     onClose,
     onOpen,

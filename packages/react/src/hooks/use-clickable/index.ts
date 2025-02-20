@@ -12,7 +12,7 @@ type Props<Y extends HTMLElement = HTMLElement> = Omit<
 export type UseClickableProps<
   Y extends HTMLElement = HTMLElement,
   M extends Props<Y> = Props<Y>,
-> = {
+> = M & {
   /**
    * The ref for the element.
    */
@@ -54,23 +54,7 @@ export type UseClickableProps<
    * @default true
    */
   focusOnClick?: boolean
-  /**
-   * If `true`, the element will be disabled. It will set the `disabled` HTML attribute.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
-   * If `true` and isDisabled, the element will have only `aria-disabled` set to `true`.
-   *
-   * @default false
-   *
-   * @deprecated Use `focusable` instead.
-   */
-  isFocusable?: boolean
-} & M
+}
 
 const isValidElement = (
   ev: KeyboardEvent | KeyboardEvent["nativeEvent"],
@@ -88,11 +72,9 @@ export const useClickable = <
     ref,
     clickOnEnter = true,
     clickOnSpace = true,
-    isDisabled,
-    disabled = isDisabled,
+    disabled,
     disableTouchBehavior = true,
-    isFocusable,
-    focusable = isFocusable,
+    focusable,
     focusOnClick = true,
     tabIndex: _tabIndex,
     onClick,

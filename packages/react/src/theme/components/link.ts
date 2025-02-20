@@ -9,11 +9,11 @@ export const Link: ComponentStyle<"Link"> = {
     transitionDuration: "fast",
     transitionProperty: "common",
     transitionTimingFunction: "ease-out",
-    _focusVisible: {
-      boxShadow: "outline",
-    },
     _hover: {
       textDecoration: "underline",
+    },
+    _focusVisible: {
+      boxShadow: "outline",
     },
   },
 }

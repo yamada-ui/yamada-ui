@@ -20,7 +20,7 @@ export const Basic = () => {
 
   return (
     <UIProvider theme={theme}>
-      <Heading apply="mdx.h1" isTruncated>
+      <Heading apply="mdx.h1" truncated>
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Heading>
     </UIProvider>

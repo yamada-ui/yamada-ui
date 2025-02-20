@@ -21,6 +21,7 @@ function createColorSchemeVariables(value: ColorScheme) {
           "subtle",
           "muted",
           "emphasized",
+          "bg",
           "ghost",
           "solid",
           "outline",

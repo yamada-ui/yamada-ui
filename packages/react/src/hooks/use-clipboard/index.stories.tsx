@@ -1,11 +1,7 @@
 import type { Meta } from "@storybook/react"
 import { useClipboard } from "."
 import { Button } from "../../components/button"
-import {
-  Editable,
-  EditableInput,
-  EditablePreview,
-} from "../../components/editable"
+import { Editable } from "../../components/editable"
 import { Input } from "../../components/input"
 import { HStack } from "../../components/stack"
 
@@ -16,7 +12,7 @@ const meta: Meta = {
 export default meta
 
 export const Basic = () => {
-  const { hasCopied, setValue, value, onCopy } = useClipboard()
+  const { copied, setValue, value, onCopy } = useClipboard()
 
   return (
     <>
@@ -26,19 +22,19 @@ export const Basic = () => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <Button onClick={onCopy}>{hasCopied ? "Copied!" : "Copy"}</Button>
+        <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
       </HStack>
 
-      <Editable placeholder="Paste here">
-        <EditablePreview width="full" />
-        <EditableInput />
-      </Editable>
+      <Editable.Root placeholder="Paste here">
+        <Editable.Preview width="full" />
+        <Editable.Input />
+      </Editable.Root>
     </>
   )
 }
 
-export const WithTimeout = () => {
-  const { hasCopied, setValue, value, onCopy } = useClipboard("", 5000)
+export const Timeout = () => {
+  const { copied, setValue, value, onCopy } = useClipboard("", 5000)
 
   return (
     <>
@@ -48,27 +44,27 @@ export const WithTimeout = () => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <Button onClick={onCopy}>{hasCopied ? "Copied!" : "Copy"}</Button>
+        <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
       </HStack>
 
-      <Editable placeholder="Paste here">
-        <EditablePreview width="full" />
-        <EditableInput />
-      </Editable>
+      <Editable.Root placeholder="Paste here">
+        <Editable.Preview width="full" />
+        <Editable.Input />
+      </Editable.Root>
     </>
   )
 }
 
 export const DirectCopy = () => {
-  const { hasCopied, onCopy } = useClipboard()
+  const { copied, onCopy } = useClipboard()
 
   const value = "孫悟空"
 
   return (
     <HStack gap="md">
-      <Input isReadOnly value={value} />
+      <Input readOnly value={value} />
       <Button onClick={() => onCopy(value)}>
-        {hasCopied ? "Copied!" : "Copy"}
+        {copied ? "Copied!" : "Copy"}
       </Button>
     </HStack>
   )

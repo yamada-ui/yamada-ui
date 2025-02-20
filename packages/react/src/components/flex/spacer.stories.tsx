@@ -14,21 +14,21 @@ export default meta
 export const Basic: Story = () => {
   return (
     <Flex gap="md" w="full">
-      <Box bg="primary" color="white" p="md" rounded="4">
+      <Box bg="info" color="white" p="md" rounded="l2">
         Box
       </Box>
 
-      <Box bg="secondary" color="white" p="md" rounded="4">
+      <Box bg="success" color="white" p="md" rounded="l2">
         Box
       </Box>
 
       <Spacer />
 
-      <Box bg="warning" color="white" p="md" rounded="4">
+      <Box bg="warning" color="white" p="md" rounded="l2">
         Box
       </Box>
 
-      <Box bg="danger" color="white" p="md" rounded="4">
+      <Box bg="danger" color="white" p="md" rounded="l2">
         Box
       </Box>
     </Flex>

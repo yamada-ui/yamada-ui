@@ -3,7 +3,7 @@ import { defineComponentSlotStyle } from "../../core"
 export const alertStyle = defineComponentSlotStyle({
   base: {
     description: {
-      lineHeight: "5",
+      lineHeight: "shorter",
     },
     icon: {
       boxSize: "5",
@@ -17,38 +17,30 @@ export const alertStyle = defineComponentSlotStyle({
       marginEnd: "3",
     },
     root: {
-      alignItems: "center",
+      alignItems: "start",
       display: "flex",
       overflow: "hidden",
       position: "relative",
       px: "4",
       py: "3",
-      rounded: "md",
+      rounded: "l2",
       w: "full",
     },
     title: {
       display: "block",
-      fontWeight: "bold",
-      lineHeight: "5",
+      lineHeight: "shorter",
       marginEnd: "2",
     },
   },
 
   variants: {
-    basic: {
-      icon: {
-        color: "colorScheme.solid",
-      },
-      root: {
-        bg: "bg",
-        borderWidth: "1px",
-      },
-    },
     island: {
+      description: {
+        color: "fg.muted",
+      },
       icon: { color: "colorScheme.solid" },
       root: {
-        bg: "bg",
-        borderWidth: "1px",
+        layerStyle: "panel",
         pl: 7,
         _before: {
           bg: "colorScheme.solid",
@@ -60,6 +52,17 @@ export const alertStyle = defineComponentSlotStyle({
           transform: "translateY(-50%)",
           w: 1,
         },
+      },
+    },
+    plain: {
+      description: {
+        color: "fg.muted",
+      },
+      icon: {
+        color: "colorScheme.solid",
+      },
+      root: {
+        layerStyle: "panel",
       },
     },
     solid: {
@@ -88,8 +91,20 @@ export const alertStyle = defineComponentSlotStyle({
     },
   },
 
+  compounds: [
+    {
+      css: {
+        icon: {
+          color: ["colorScheme.600", "colorScheme.400"],
+        },
+      },
+      colorScheme: ["secondary", "gray"],
+      variant: "plain",
+    },
+  ],
+
   defaultProps: {
-    variant: "basic",
+    variant: "plain",
   },
 })
 

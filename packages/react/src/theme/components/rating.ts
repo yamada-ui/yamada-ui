@@ -22,23 +22,23 @@ export const Rating: ComponentMultiStyle<"Rating"> = {
       lineHeight: "0",
       outline: "none",
       rounded: "sm",
-      _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
-      },
       _filled: {
         color: [`${c}.500`, `${c}.600`],
-      },
-      _focusVisible: {
-        boxShadow: "outline",
       },
       _notLast: {
         left: 0,
         position: "absolute",
         top: 0,
       },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
       _readOnly: {
         cursor: "default",
+      },
+      _disabled: {
+        cursor: "not-allowed",
+        opacity: 0.4,
       },
     },
   }),

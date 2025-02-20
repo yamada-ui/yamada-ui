@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react"
+import { App } from "../../../storybook/components"
 import { Button } from "../button"
-import { Center } from "../center"
 import { Wrap } from "../flex"
 import { Text } from "../text"
 import { useLoading } from "./loading-provider"
@@ -20,7 +20,7 @@ export const Basic = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Wrap gap="md">
         <Button onClick={() => screen.start()}>Start screen loading</Button>
         <Button onClick={() => page.start()}>Start page loading</Button>
@@ -28,15 +28,15 @@ export const Basic = () => {
           Start background loading
         </Button>
       </Wrap>
-    </Center>
+    </App>
   )
 }
 
-export const WithTimeout = () => {
+export const Timeout = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Wrap gap="md">
         <Button onClick={() => screen.start({ duration: 5000 })}>
           Start screen loading
@@ -48,15 +48,15 @@ export const WithTimeout = () => {
           Start background loading
         </Button>
       </Wrap>
-    </Center>
+    </App>
   )
 }
 
-export const WithMessage = () => {
+export const Message = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Wrap gap="md">
         <Button
           onClick={() => screen.start({ duration: 5000, message: "Loading" })}
@@ -76,7 +76,7 @@ export const WithMessage = () => {
           Start background loading
         </Button>
       </Wrap>
-    </Center>
+    </App>
   )
 }
 
@@ -84,7 +84,7 @@ export const CustomMessage = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Wrap gap="md">
         <Button
           onClick={() =>
@@ -108,7 +108,7 @@ export const CustomMessage = () => {
           Start background loading
         </Button>
       </Wrap>
-    </Center>
+    </App>
   )
 }
 
@@ -116,7 +116,7 @@ export const UpdateMessage = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Wrap gap="md">
         <Button
           onClick={() => {
@@ -154,7 +154,7 @@ export const UpdateMessage = () => {
           Start background loading
         </Button>
       </Wrap>
-    </Center>
+    </App>
   )
 }
 
@@ -178,8 +178,8 @@ export const AsyncFunction = () => {
   }
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Button onClick={getData}>Start page loading</Button>
-    </Center>
+    </App>
   )
 }

@@ -41,7 +41,7 @@ function getColor(value: string | undefined, theme: StyledTheme<UsageTheme>) {
 }
 
 function omitPercent(value?: string) {
-  if (value?.endsWith("%")) return value.split(" ")[0]
+  if (value?.endsWith("%")) return value.replace(/\d{1,3}%$/, "")
 
   return value
 }
@@ -84,7 +84,7 @@ export function colorMix(value: any, { properties, theme }: TransformOptions) {
 
   const { type, values } = getCSSFunction(value)
 
-  if (!values) return value
+  if (!values) return getColor(value, theme)
 
   switch (type) {
     case "mix":
@@ -115,7 +115,7 @@ export function colorMix(value: any, { properties, theme }: TransformOptions) {
     case "transparentize": {
       const [color, percent] = splitValues(values)
 
-      const color1 = getColor(`${color} ${percent}`, theme)
+      const color1 = getColor(percent ? `${color} ${percent}` : color, theme)
       const color2 =
         type === "transparentize"
           ? "transparent"

@@ -28,23 +28,23 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
         field: {
           width: "100%",
         },
-        _active: {
-          bg: ["blackAlpha.200", "whiteAlpha.200"],
-        },
-        _disabled: {
-          cursor: "not-allowed",
-          opacity: 0.4,
-        },
-        _hover: {
-          bg: ["blackAlpha.100", "whiteAlpha.100"],
-        },
         _last: {
           borderColor: "inherit",
           borderStartWidth: "1px",
           borderTopWidth: "1px",
           mt: "-1px",
         },
+        _hover: {
+          bg: ["blackAlpha.100", "whiteAlpha.100"],
+        },
+        _active: {
+          bg: ["blackAlpha.200", "whiteAlpha.200"],
+        },
         _readOnly: { cursor: "auto" },
+        _disabled: {
+          cursor: "not-allowed",
+          opacity: 0.4,
+        },
       },
     },
 
@@ -100,16 +100,16 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
         stepper: {
           bg: "transparent",
           border: "none",
-          _active: {
-            bg: "transparent",
-            opacity: 0.7,
+          _last: {
+            border: "none",
           },
           _hover: {
             bg: "transparent",
             opacity: 0.8,
           },
-          _last: {
-            border: "none",
+          _active: {
+            bg: "transparent",
+            opacity: 0.7,
           },
         },
       },
@@ -117,14 +117,14 @@ export const NumberInput: ComponentMultiStyle<"NumberInput"> = mergeMultiStyle(
         stepper: {
           bg: "transparent",
           border: "none",
-          _active: {
-            bg: "transparent",
+          _last: {
+            border: "none",
           },
           _hover: {
             bg: "transparent",
           },
-          _last: {
-            border: "none",
+          _active: {
+            bg: "transparent",
           },
         },
       },

@@ -118,17 +118,12 @@ export const useDynamicAnimation = <
 
 export interface UseAnimationObserverProps {
   ref: React.RefObject<HTMLElement | null>
-  /**
-   * @deprecated Use `open` instead
-   */
-  isOpen?: boolean
   open?: boolean
 }
 
 export const useAnimationObserver = ({
   ref,
-  isOpen,
-  open = isOpen,
+  open,
 }: UseAnimationObserverProps) => {
   const [mounted, setMounted] = useState(open)
   const [flg, { on }] = useBoolean()

@@ -34,7 +34,7 @@ export const {
 /**
  * `Ripple` is a component that adds a ripple effect to elements, allowing users to recognize when they have clicked.
  *
- * @see Docs https://yamada-ui.com/components/other/ripple
+ * @see Docs https://yamada-ui.com/components/ripple
  */
 export const Ripple: FC<RippleProps> = withContext(
   ({

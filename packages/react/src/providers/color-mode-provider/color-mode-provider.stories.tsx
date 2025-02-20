@@ -1,8 +1,8 @@
 import { Box } from "../../components/box"
 import { Button } from "../../components/button"
+// import { Calendar } from "../../components/calendar"
 import { Tag } from "../../components/tag"
 import { Text } from "../../components/text"
-import { Calendar } from "../../legacy-components/calendar"
 import { useColorMode } from "./color-mode-provider"
 import { useColorModeValue } from "./use-color-mode-value"
 
@@ -57,7 +57,8 @@ export const Components = () => {
 
       <Tag variant={["solid", "subtle"]}>Tag</Tag>
 
-      <Calendar variant={["solid", "subtle"]} />
+      {/* TODO: Fix this */}
+      {/* <Calendar variant={["solid", "subtle"]} /> */}
     </>
   )
 }

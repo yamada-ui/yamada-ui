@@ -16,6 +16,10 @@ const meta: Meta<typeof Badge> = {
 
 export default meta
 
+export const Basic: Story = () => {
+  return <Badge>Badge</Badge>
+}
+
 export const Variant: Story = () => {
   return (
     <PropsTable

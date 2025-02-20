@@ -43,7 +43,16 @@ export const transformProps: TransformProps = {
 
   colorScheme: ["colorScheme"],
 
-  outline: ["outline"],
+  focusRing: [
+    {
+      args: ["&:is(:focus, [data-focus])"],
+      properties: "focusRing",
+    },
+    {
+      args: ["&:is(:focus-visible, [data-focus-visible])"],
+      properties: "focusVisibleRing",
+    },
+  ],
 
   media: ["_media"],
 

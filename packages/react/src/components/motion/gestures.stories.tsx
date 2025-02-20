@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { Variants } from "motion/react"
 import { useMemo } from "react"
-import { Center } from "../center"
+import { App } from "../../../storybook/components"
 import { Motion } from "./motion"
 
 type Story = StoryFn<typeof Motion>
@@ -15,7 +15,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         bg="mono"
         cursor="pointer"
@@ -30,13 +30,13 @@ export const Basic: Story = () => {
         onTapCancel={(_, info) => console.log("Tap cancels", info)}
         onTapStart={(_, info) => console.log("Tap starts", info)}
       />
-    </Center>
+    </App>
   )
 }
 
-export const WithTransition: Story = () => {
+export const Transition: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         bg="mono"
         cursor="pointer"
@@ -46,11 +46,11 @@ export const WithTransition: Story = () => {
         whileHover={{ scale: 1.2, transition: { duration: 1 } }}
         whileTap={{ scale: 0.9 }}
       />
-    </Center>
+    </App>
   )
 }
 
-export const WithVariants: Story = () => {
+export const Variant: Story = () => {
   const variants: Variants = useMemo(
     () => ({
       enlarge: { scale: 1.2 },
@@ -60,7 +60,7 @@ export const WithVariants: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         bg="mono"
         cursor="pointer"
@@ -71,11 +71,11 @@ export const WithVariants: Story = () => {
         whileHover="enlarge"
         whileTap="reduce"
       />
-    </Center>
+    </App>
   )
 }
 
-export const UseStopPropagation: Story = () => {
+export const StopPropagation: Story = () => {
   const variants: Variants = useMemo(
     () => ({
       enlarge: { scale: 1.2 },
@@ -85,7 +85,7 @@ export const UseStopPropagation: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         bg="mono"
         cursor="pointer"
@@ -107,6 +107,6 @@ export const UseStopPropagation: Story = () => {
           onPointerDownCapture={(ev) => ev.stopPropagation()}
         />
       </Motion>
-    </Center>
+    </App>
   )
 }

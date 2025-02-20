@@ -5,6 +5,7 @@ type Tokens = { [key in ThemeToken]?: (CSSProperties | UIProperties)[] }
 
 export const tokens: Tokens = {
   animations: ["animation"],
+  aspectRatios: ["aspectRatio"],
   blurs: ["blur", "backdropBlur"],
   borders: [
     "border",

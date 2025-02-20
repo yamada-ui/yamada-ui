@@ -2,18 +2,19 @@ export {
   StatHelperMessage,
   StatIcon,
   StatLabel,
-  StatNumber,
   StatPropsContext,
   StatRoot,
+  StatUnit,
+  StatValue,
   useStatPropsContext,
 } from "./stat"
-
 export type {
   StatHelperMessageProps,
   StatIconProps,
   StatLabelProps,
-  StatNumberProps,
   StatRootProps,
+  StatUnitProps,
+  StatValueProps,
 } from "./stat"
 
 export * from "./stat.style"

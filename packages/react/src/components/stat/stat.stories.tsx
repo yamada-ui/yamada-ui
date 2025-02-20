@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { COLOR_SCHEMES } from "@yamada-ui/utils"
-import { Grid } from "../grid"
+import { PropsTable } from "../../../storybook/components"
 import { Stat } from "./"
 
 type Story = StoryFn<typeof Stat.Root>
@@ -14,48 +14,63 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <>
-      <Stat.Root
-        helperMessage="21% more than last month"
-        icon="increase"
-        label="Total Page Views"
-        number="1,993,818"
-      />
+    <Stat.Root>
+      <Stat.Label>Total Page Views</Stat.Label>
+      <Stat.Value>1,993,818</Stat.Value>
+      <Stat.HelperMessage>
+        <Stat.Icon type="increase" />
+        21% more than last month
+      </Stat.HelperMessage>
+    </Stat.Root>
+  )
+}
 
-      <Stat.Root>
-        <Stat.Label>Total Page Views</Stat.Label>
-        <Stat.Number>1,993,818</Stat.Number>
-        <Stat.HelperMessage>
-          <Stat.Icon type="increase" />
-          21% more than last month
-        </Stat.HelperMessage>
-      </Stat.Root>
-    </>
+export const PropsPattern: Story = () => {
+  return (
+    <Stat.Root
+      helperMessage="21% more than last month"
+      icon="increase"
+      label="Total Page Views"
+      value="1,993,818"
+    />
+  )
+}
+
+export const Size: Story = () => {
+  return (
+    <PropsTable columns={["xs", "sm", "md", "lg"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => (
+        <Stat.Root
+          key={key}
+          colorScheme={row}
+          size={column}
+          helperMessage="Time to complete"
+          label="Downloads"
+          value={
+            <>
+              8<Stat.Unit>hr</Stat.Unit>
+              18<Stat.Unit>min</Stat.Unit>
+            </>
+          }
+        />
+      )}
+    </PropsTable>
   )
 }
 
 export const ColorScheme: Story = () => {
   return (
-    <Grid
-      gap="md"
-      templateColumns={{
-        base: "repeat(4, 1fr)",
-        sm: "repeat(1, 1fr)",
-        md: "repeat(2, 1fr)",
-        lg: "repeat(3, 1fr)",
-      }}
-      w="full"
-    >
-      {COLOR_SCHEMES.map((colorScheme) => (
+    <PropsTable variant="column" rows={COLOR_SCHEMES}>
+      {(_, row, key) => (
         <Stat.Root
-          key={colorScheme}
-          colorScheme={colorScheme}
+          key={key}
+          colorScheme={row}
           helperMessage="21% more than last month"
           label="Total Likes"
-          number="818K"
+          value="818K"
         />
-      ))}
-    </Grid>
+      )}
+    </PropsTable>
   )
 }
 
@@ -66,8 +81,32 @@ export const CenterContent: Story = () => {
       helperMessage="From August 1 to August 18"
       icon="increase"
       label="Downloads"
-      number="18K"
+      value="18K"
     />
+  )
+}
+
+export const Unit: Story = () => {
+  return (
+    <>
+      <Stat.Root
+        label="Time to complete"
+        value={
+          <>
+            8<Stat.Unit>hr</Stat.Unit>
+            18<Stat.Unit>min</Stat.Unit>
+          </>
+        }
+      />
+
+      <Stat.Root>
+        <Stat.Label>Time to complete</Stat.Label>
+        <Stat.Value>
+          8<Stat.Unit>hr</Stat.Unit>
+          18<Stat.Unit>min</Stat.Unit>
+        </Stat.Value>
+      </Stat.Root>
+    </>
   )
 }
 
@@ -78,12 +117,12 @@ export const Decrease: Story = () => {
         helperMessage="21% more than last month"
         icon="decrease"
         label="Total Page Views"
-        number="1,993,818"
+        value="1,993,818"
       />
 
       <Stat.Root>
         <Stat.Label>Total Page Views</Stat.Label>
-        <Stat.Number>1,993,818</Stat.Number>
+        <Stat.Value>1,993,818</Stat.Value>
         <Stat.HelperMessage>
           <Stat.Icon type="decrease" />
           21% more than last month

@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react"
-import type { FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { UseInputBorderProps } from "../input"
 import type { EditableStyle } from "./editable.style"
@@ -35,6 +35,7 @@ export interface EditableRootProps
 }
 
 export const {
+  component,
   ComponentContext: EditableContext,
   PropsContext: EditablePropsContext,
   useComponentContext: useEditableContext,
@@ -49,7 +50,7 @@ export const {
 /**
  * `Editable` is a component used to obtain inline editable text input.
  *
- * @see Docs https://yamada-ui.com/components/forms/editable
+ * @see Docs https://yamada-ui.com/components/editable
  */
 export const EditableRoot = withProvider(
   ({
@@ -135,28 +136,33 @@ export const EditableControl = withContext<"div", EditableControlProps>(
 
 export interface EditableEditTriggerProps extends PropsWithChildren {}
 
-export const EditableEditTrigger: FC<EditableEditTriggerProps> = (props) => {
+export const EditableEditTrigger = component<
+  "fragment",
+  EditableEditTriggerProps
+>((props) => {
   const { getEditProps } = useEditableContext()
 
   return <Slot {...getEditProps(props)} />
-}
+}, "editTrigger")()
 
 export interface EditableCancelTriggerProps extends PropsWithChildren {}
 
-export const EditableCancelTrigger: FC<EditableCancelTriggerProps> = (
-  props,
-) => {
+export const EditableCancelTrigger = component<
+  "fragment",
+  EditableCancelTriggerProps
+>((props) => {
   const { getCancelProps } = useEditableContext()
 
   return <Slot {...getCancelProps(props)} />
-}
+}, "cancelTrigger")()
 
 export interface EditableSubmitTriggerProps extends PropsWithChildren {}
 
-export const EditableSubmitTrigger: FC<EditableSubmitTriggerProps> = (
-  props,
-) => {
+export const EditableSubmitTrigger = component<
+  "fragment",
+  EditableSubmitTriggerProps
+>((props) => {
   const { getSubmitProps } = useEditableContext()
 
   return <Slot {...getSubmitProps(props)} />
-}
+}, "submitTrigger")()

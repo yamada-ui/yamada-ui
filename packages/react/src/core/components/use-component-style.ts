@@ -18,7 +18,7 @@ import type {
   ThemeProps,
   WithoutThemeProps,
 } from "../theme"
-import type { Slot } from "./create-component"
+import type { ComponentSlot } from "./create-component"
 import type { HTMLUIProps } from "./index.types"
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
@@ -305,7 +305,7 @@ function getModifierStyle<Y extends boolean = false>(
 
 export function getSlotClassName<Y extends number | string | symbol>(
   className?: string,
-  slot?: Slot<Y>,
+  slot?: ComponentSlot<Y>,
 ) {
   if (!className || !slot) return className
 
@@ -441,7 +441,11 @@ function useStyle<
       props = Object.assign(props, { "data-variant": props.variant })
     if (props.size) props = Object.assign(props, { "data-size": props.size })
 
-    const computedProps = omitThemeProps(props, omitProps, transferProps) as Y
+    const computedProps = omitThemeProps(
+      mergedProps,
+      omitProps,
+      transferProps,
+    ) as Y
 
     computedProps.className = cx(
       className ?? customClassName,
@@ -523,17 +527,6 @@ export interface UseComponentSlotStyleOptions<
 > extends Omit<UseStyleOptions<Y, M, D, true>, "hasSlot"> {}
 
 export function useComponentSlotStyle<
-  Y extends Dict = Dict,
-  M extends ComponentSlotStyle = ComponentSlotStyle,
-  D extends keyof Y = keyof Y,
->(props: Y, options: UseComponentSlotStyleOptions<Y, M, D> = {}) {
-  return useStyle<Y, M, D, true>(props, { ...options, hasSlot: true })
-}
-
-/**
- * @deprecated
- */
-export function useComponentMultiStyle<
   Y extends Dict = Dict,
   M extends ComponentSlotStyle = ComponentSlotStyle,
   D extends keyof Y = keyof Y,

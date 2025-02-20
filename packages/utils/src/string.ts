@@ -111,7 +111,9 @@ export function toCamelCase(value: StringLiteral): string {
 }
 
 export function toPascalCase(value: StringLiteral): string {
-  return toCamelCase(value).replace(/^(.)/, (_, val) => val.toUpperCase())
+  return value
+    .replace(/[_-](.)/g, (_, val) => val.toUpperCase())
+    .replace(/^(.)/, (_, val) => val.toUpperCase())
 }
 
 export function toKebabCase(value: StringLiteral): string {

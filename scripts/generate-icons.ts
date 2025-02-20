@@ -1,10 +1,12 @@
 import type { Options } from "prettier"
 import { parse } from "@babel/parser"
 import traverse from "@babel/traverse"
-import { toKebabCase } from "@yamada-ui/utils"
+import { interopDefault, toKebabCase } from "@yamada-ui/utils"
 import { readdir, readFile, unlink, writeFile } from "fs/promises"
 import path from "path"
 import { format, resolveConfig } from "prettier"
+
+const resolvedTraverse = interopDefault(traverse)
 
 const ENTRY_PATH = path.join(
   process.cwd(),
@@ -50,7 +52,7 @@ const getIconNames = async () => {
 
   const iconNames: string[] = []
 
-  traverse(ast, {
+  resolvedTraverse(ast, {
     ExportNamedDeclaration: ({ node }) => {
       node.specifiers.forEach(({ exported }) => {
         if ("name" in exported) iconNames.push(exported.name)
@@ -72,7 +74,7 @@ const createIcons = async (iconNames: string[]) =>
         `/**`,
         ` * \`${iconName}Icon\` is [Lucide](https://lucide.dev) SVG icon component.`,
         ` *`,
-        ` * @see Docs https://yamada-ui.com/components/media-and-icons/lucide`,
+        ` * @see Docs https://yamada-ui.com/components/icon`,
         ` */`,
         `export const ${iconName}Icon = component(Icon)({ as: ${iconName} })`,
         ``,

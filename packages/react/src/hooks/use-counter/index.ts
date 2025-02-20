@@ -168,18 +168,6 @@ export const useCounter = ({
     clamp,
     decrement,
     increment,
-    /**
-     * @deprecated Use `max` instead.
-     */
-    isMax: max,
-    /**
-     * @deprecated Use `min` instead.
-     */
-    isMin: min,
-    /**
-     * @deprecated Use `out` instead.
-     */
-    isOut: out,
     max,
     min,
     out,

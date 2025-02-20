@@ -33,7 +33,7 @@ export const {
 /**
  * `List` is a component for displaying lists. By default, it renders a `ul` element.
  *
- * @see Docs https://yamada-ui.com/components/data-display/list
+ * @see Docs https://yamada-ui.com/components/list
  */
 export const ListRoot = withProvider(
   ({

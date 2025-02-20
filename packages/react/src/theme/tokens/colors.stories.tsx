@@ -1,21 +1,21 @@
 import type { Meta } from "@storybook/react"
-import { Box } from "../components/box"
-import { Center } from "../components/center"
-import { Container } from "../components/container"
-import { For } from "../components/for"
-import { Grid } from "../components/grid"
-import { Heading } from "../components/heading"
-import { Text } from "../components/text"
+import { Box } from "../../components/box"
+import { Center } from "../../components/center"
+import { Container } from "../../components/container"
+import { For } from "../../components/for"
+import { Grid } from "../../components/grid"
+import { Heading } from "../../components/heading"
+import { Text } from "../../components/text"
 import {
   COLOR_SCHEMES,
   DEFAULT_COLOR_SCHEMES,
   SEMANTIC_COLOR_SCHEMES,
   TONES,
   toTitleCase,
-} from "../utils"
+} from "../../utils"
 
 const meta: Meta = {
-  title: "Theme / Colors",
+  title: "Theme / Tokens / Colors",
 }
 
 export default meta
@@ -112,6 +112,7 @@ export const Basic = () => {
               each={[
                 "",
                 "subtle",
+                "overlay",
                 "muted",
                 "emphasized",
                 "contrast",

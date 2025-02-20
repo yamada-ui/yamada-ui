@@ -19,6 +19,10 @@ export interface IconButtonProps
     >,
     ThemeProps<IconButtonStyle> {
   /**
+   * The label for the button.
+   */
+  "aria-label": string
+  /**
    * The icon to be used in the button.
    */
   icon?: ReactNode

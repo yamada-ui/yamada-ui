@@ -1,4 +1,4 @@
-import type { ThemeProps } from "../../core"
+import type { HTMLProps, ThemeProps } from "../../core"
 import type { CloseButtonStyle } from "./close-button.style"
 import type { IconButtonProps } from "./icon-button"
 import { createComponent } from "../../core"
@@ -7,7 +7,8 @@ import { closeButtonStyle } from "./close-button.style"
 import { IconButton } from "./icon-button"
 
 export interface CloseButtonProps
-  extends IconButtonProps,
+  extends Omit<IconButtonProps, "aria-label">,
+    Pick<HTMLProps<"button">, "aria-label">,
     ThemeProps<CloseButtonStyle> {}
 
 export const {

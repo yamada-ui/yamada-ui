@@ -1,53 +1,67 @@
-import { defineComponentSlotStyle } from "../../core"
+import { defineComponentStyle } from "../../core"
 
-export const scrollAreaStyle = defineComponentSlotStyle({
+export const scrollAreaStyle = defineComponentStyle({
   base: {
-    inner: {},
-    root: {
+    "@-moz-document url-prefix()": {
+      scrollbarColor: "{colors.bg.emphasized} transparent",
+      _dark: {
+        scrollbarColor: "{colors.bg.emphasized} transparent",
+      },
+      _light: {
+        scrollbarColor: "{colors.bg.emphasized} transparent",
+      },
+    },
+    overflow: "auto",
+    _scrollbar: {
+      boxSize: "3",
+    },
+    _scrollbarCorner: {
+      bg: "transparent",
+    },
+    _scrollbarThumb: {
+      bg: "bg.emphasized",
+      bgClip: "padding-box",
+      border: "3px solid transparent",
+      rounded: "full",
+      _nativeHover: {
+        bg: "bg.contrast",
+        bgClip: "padding-box",
+      },
+    },
+    _scrollbarTrack: {
+      bg: "transparent",
+    },
+    _hidden: {
+      "&::-webkit-scrollbar-thumb": { bg: "transparent" },
+      "&::-webkit-scrollbar-track": { bg: "transparent" },
       "@-moz-document url-prefix()": {
-        scrollbarColor: "whiteAlpha.600 transparent",
+        scrollbarColor: "transparent transparent",
         _dark: {
-          scrollbarColor: "whiteAlpha.600 transparent",
+          scrollbarColor: "transparent transparent",
         },
         _light: {
-          scrollbarColor: "whiteAlpha.600 transparent",
+          scrollbarColor: "transparent transparent",
         },
       },
-      outline: 0,
       _dark: {
-        _scrollbarThumb: {
-          bg: "whiteAlpha.600",
-          bgClip: "padding-box",
-          _nativeHover: {
-            bg: "whiteAlpha.800",
-            bgClip: "padding-box",
-          },
-        },
+        "&::-webkit-scrollbar-thumb": { bg: "transparent" },
+        "&::-webkit-scrollbar-track": { bg: "transparent" },
+        _scrollbarThumb: { bg: "transparent" },
+        _scrollbarTrack: { bg: "transparent" },
       },
-      _scrollbar: {
-        h: "3",
-        w: "3",
+      _light: {
+        "&::-webkit-scrollbar-thumb": { bg: "transparent" },
+        "&::-webkit-scrollbar-track": { bg: "transparent" },
+        _scrollbarThumb: { bg: "transparent" },
+        _scrollbarTrack: { bg: "transparent" },
       },
-      _scrollbarButton: {},
-      _scrollbarCorner: {
-        bg: "transparent",
-      },
-      _scrollbarThumb: {
-        bg: "blackAlpha.600",
-        bgClip: "padding-box",
-        border: "3px solid transparent",
-        rounded: "full",
-        _nativeHover: {
-          bg: "blackAlpha.800",
-          bgClip: "padding-box",
-        },
-      },
-      _scrollbarTrack: {
-        bg: "transparent",
-      },
-      _focusVisible: {
-        boxShadow: "inline",
-      },
+      _scrollbarThumb: { bg: "transparent" },
+      _scrollbarTrack: { bg: "transparent" },
+    },
+    _never: {
+      "&::-webkit-scrollbar": { display: "none" },
+      scrollbarWidth: "none",
+      _scrollbar: { display: "none" },
     },
   },
 })

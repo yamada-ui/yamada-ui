@@ -1,45 +1,10 @@
 import type { UIEvent } from "react"
-import type { CSSObject, HTMLUIProps, PropGetter } from "../../core"
+import type { HTMLProps, PropGetter } from "../../core"
 import { dataAttr, handlerAll, isMac, vendor } from "@yamada-ui/utils"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { mergeCSS } from "../../core"
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
 import { mergeRefs, useSafeLayoutEffect } from "../../utils"
 
-const neverStyles: CSSObject = {
-  "&::-webkit-scrollbar": { display: "none" },
-  scrollbarWidth: "none",
-  _scrollbar: { display: "none" },
-}
-
-const hiddenStyles: CSSObject = {
-  "&::-webkit-scrollbar-thumb": { bg: "transparent" },
-  "&::-webkit-scrollbar-track": { bg: "transparent" },
-  "@-moz-document url-prefix()": {
-    scrollbarColor: "transparent transparent",
-    _dark: {
-      scrollbarColor: "transparent transparent",
-    },
-    _light: {
-      scrollbarColor: "transparent transparent",
-    },
-  },
-  _dark: {
-    "&::-webkit-scrollbar-thumb": { bg: "transparent" },
-    "&::-webkit-scrollbar-track": { bg: "transparent" },
-    _scrollbarThumb: { bg: "transparent" },
-    _scrollbarTrack: { bg: "transparent" },
-  },
-  _light: {
-    "&::-webkit-scrollbar-thumb": { bg: "transparent" },
-    "&::-webkit-scrollbar-track": { bg: "transparent" },
-    _scrollbarThumb: { bg: "transparent" },
-    _scrollbarTrack: { bg: "transparent" },
-  },
-  _scrollbarThumb: { bg: "transparent" },
-  _scrollbarTrack: { bg: "transparent" },
-}
-
-export interface UseScrollAreaProps extends HTMLUIProps {
+export interface UseScrollAreaProps extends HTMLProps {
   /**
    * Scrollbar visibility type.
    *
@@ -59,10 +24,9 @@ export interface UseScrollAreaProps extends HTMLUIProps {
 }
 
 export const useScrollArea = ({
+  id,
   ref,
   type = "hover",
-  css: cssProp,
-  overflow = "overlay",
   scrollHideDelay = 1000,
   onScrollPositionChange,
   ...rest
@@ -71,8 +35,10 @@ export const useScrollArea = ({
   const [isScrolling, setIsScrolling] = useState<boolean>(false)
   const isAlways = type === "always"
   const isNever = type === "never"
+  const isHidden = !isAlways && !isHovered && !isScrolling
   const isSafari = isMac() && vendor(/apple/i)
-  const componentKey = `${isHovered}-${isScrolling}`
+  const uuid = useId()
+  const key = `${id ?? uuid}-${isHovered}-${isScrolling}`
 
   const hoverTimeout = useRef<any>(undefined)
   const scrollTimeout = useRef<any>(undefined)
@@ -135,57 +101,60 @@ export const useScrollArea = ({
     }
   }, [])
 
-  const css = useMemo(() => {
-    const baseStyle = { overflow, ...cssProp }
-
-    if (isNever) {
-      return mergeCSS(baseStyle, neverStyles)
-    } else {
-      return mergeCSS(
-        baseStyle,
-        !isAlways && !isHovered && !isScrolling ? hiddenStyles : {},
-      )
-    }
-  }, [isAlways, isHovered, isNever, isScrolling, overflow, cssProp])
-
   const safariProps = useMemo(
     () => ({
-      key: componentKey,
+      key,
       ref: mergeRefs(ref, scrollAreaRef),
-      "data-key": componentKey,
+      "data-key": key,
     }),
-    [componentKey, ref, scrollAreaRef],
+    [key, ref, scrollAreaRef],
   )
 
   const getRootProps: PropGetter = useCallback(
-    (props) => ({
-      ...props,
+    ({ style, ...props } = {}) => ({
       ref,
-      "data-hovered": dataAttr(isHovered),
-      "data-scrolling": dataAttr(isScrolling),
-      tabIndex: 0,
-      ...(isSafari ? safariProps : {}),
-      css,
+      style: { overflow: "auto", ...style },
       ...rest,
-      onMouseEnter: handlerAll(rest.onMouseEnter, onMouseEnter),
-      onMouseLeave: handlerAll(rest.onMouseLeave, onMouseLeave),
-      onScroll: handlerAll(rest.onScroll, onScroll),
+      ...(isSafari ? safariProps : {}),
+      ...props,
+      "data-hidden": dataAttr(isHidden),
+      "data-hover": dataAttr(isHovered),
+      "data-never": dataAttr(isNever),
+      "data-scroll": dataAttr(isScrolling),
+      tabIndex: 0,
+      onMouseEnter: handlerAll(
+        props.onMouseEnter,
+        rest.onMouseEnter,
+        onMouseEnter,
+      ),
+      onMouseLeave: handlerAll(
+        props.onMouseLeave,
+        rest.onMouseLeave,
+        onMouseLeave,
+      ),
+      onScroll: handlerAll(props.onScroll, rest.onScroll, onScroll),
     }),
     [
+      isNever,
+      ref,
+      isHidden,
+      isHovered,
+      isScrolling,
+      isSafari,
+      safariProps,
+      rest,
       onMouseEnter,
       onMouseLeave,
       onScroll,
-      rest,
-      css,
-      isHovered,
-      isScrolling,
-      safariProps,
-      isSafari,
-      ref,
     ],
   )
 
   return {
+    isAlways,
+    isHidden,
+    isHovered,
+    isNever,
+    isScrolling,
     getRootProps,
   }
 }

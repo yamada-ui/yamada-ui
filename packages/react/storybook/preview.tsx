@@ -33,6 +33,7 @@ const App: FC<PropsWithChildren> = ({ children }) => {
   return (
     <VStack
       align="start"
+      gap={{ base: "lg", md: "md" }}
       minH={{
         base: "calc(100dvh - {spaces.lg} * 2)",
         md: "calc(100dvh - {spaces.md} * 2)",

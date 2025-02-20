@@ -67,7 +67,7 @@ export const Depth: Story = () => {
   )
 }
 
-export const WithBorder: Story = () => {
+export const Border: Story = () => {
   return (
     <>
       <VStack separator={<Separator />}>

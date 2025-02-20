@@ -1,10 +1,10 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { FC } from "react"
 import { AnimatePresence, LayoutGroup } from "motion/react"
+import { App } from "../../../storybook/components"
 import { useBoolean } from "../../hooks/use-boolean"
 import { Box } from "../box"
 import { Button } from "../button"
-import { Center } from "../center"
 import { Heading } from "../heading"
 import { HStack } from "../stack"
 import { VStack } from "../stack"
@@ -21,7 +21,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ x: 100 }}
         bg="mono"
@@ -31,13 +31,13 @@ export const Basic: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithTransition: Story = () => {
+export const Transition: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ x: 100 }}
         bg="mono"
@@ -48,13 +48,13 @@ export const WithTransition: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithTransitionType: Story = () => {
+export const TransitionType: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ rotate: 360, scale: 1 }}
         bg="mono"
@@ -70,13 +70,13 @@ export const WithTransitionType: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithInitial: Story = () => {
+export const Initial: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ x: 100 }}
         bg="mono"
@@ -87,11 +87,11 @@ export const WithInitial: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithExit: Story = () => {
+export const Exit: Story = () => {
   const [visible, { toggle }] = useBoolean()
 
   return (
@@ -117,9 +117,9 @@ export const WithExit: Story = () => {
   )
 }
 
-export const UseKeyframes: Story = () => {
+export const Keyframes: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ x: [0, 100, 0] }}
         bg="mono"
@@ -129,13 +129,13 @@ export const UseKeyframes: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithTimes: Story = () => {
+export const Times: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ x: [0, 100, 0] }}
         bg="mono"
@@ -146,13 +146,13 @@ export const WithTimes: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithRepeat: Story = () => {
+export const Repeat: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{
           borderRadius: ["0%", "0%", "50%", "50%", "0%"],
@@ -170,15 +170,15 @@ export const WithRepeat: Story = () => {
         }}
         w="xs"
       />
-    </Center>
+    </App>
   )
 }
 
-export const WithLayout: Story = () => {
+export const Layout: Story = () => {
   const [flg, { toggle }] = useBoolean()
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Box
         as="button"
         bg="mono"
@@ -199,11 +199,11 @@ export const WithLayout: Story = () => {
           w="6"
         />
       </Box>
-    </Center>
+    </App>
   )
 }
 
-export const UseLayoutGroup: Story = () => {
+export const GroupLayout: Story = () => {
   const Accordion: FC = () => {
     const [open, { toggle }] = useBoolean(false)
 
@@ -224,7 +224,7 @@ export const UseLayoutGroup: Story = () => {
   }
 
   return (
-    <Center gap="md" h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <VStack>
         <Heading size="md">Not using LayoutGroup</Heading>
 
@@ -244,6 +244,6 @@ export const UseLayoutGroup: Story = () => {
           </LayoutGroup>
         </HStack>
       </VStack>
-    </Center>
+    </App>
   )
 }

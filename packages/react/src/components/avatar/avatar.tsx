@@ -32,7 +32,7 @@ export const {
 /**
  * `Avatar` is a component that displays a profile picture or an icon with initials representing a user.
  *
- * @see Docs https://yamada-ui.com/components/media-and-icons/avatar
+ * @see Docs https://yamada-ui.com/components/avatar
  */
 export const Avatar = withProvider<"div", AvatarProps>((props) => {
   const { getFallbackProps, getImageProps, getRootProps } = useAvatar(props)

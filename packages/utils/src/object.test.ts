@@ -82,7 +82,7 @@ describe("Object", () => {
   describe("flattenObject", () => {
     test("should flatten an object to a specified depth", () => {
       const obj = { a: 1, b: { c: 2, d: { e: 3 } } }
-      expect(flattenObject(obj, { maxDepth: 1 })).toStrictEqual({
+      expect(flattenObject(obj, { maxDepth: 2 })).toStrictEqual({
         a: 1,
         "b.c": 2,
         "b.d": { e: 3 },

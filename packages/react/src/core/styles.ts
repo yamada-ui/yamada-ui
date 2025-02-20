@@ -3817,7 +3817,9 @@ export interface StyleProps {
   /**
    * The focus ring is used to identify the currently focused element.
    */
-  focusRing?: Token<"inside" | "mixed" | "none" | "outside">
+  focusRing?: Token<
+    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
+  >
   /**
    * Sets the value of `--focus-ring-color`.
    */
@@ -3837,7 +3839,9 @@ export interface StyleProps {
   /**
    * The focus ring is used to identify the currently focused element.
    */
-  focusVisibleRing?: Token<"inside" | "mixed" | "none" | "outside">
+  focusVisibleRing?: Token<
+    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
+  >
   /**
    * The CSS `font` property.
    *
@@ -6333,7 +6337,7 @@ export interface StyleProps {
       | StringLiteral
     dynamicRange?: "high" | "standard" | StringLiteral
     forcedColors?: "active" | "none" | StringLiteral
-    grid?: "StringLiteral" | 0 | 1
+    grid?: 0 | 1 | "StringLiteral"
     h?: CSS.Property.Height | number | ThemeTokens["sizes"]
     height?: CSS.Property.Height | number | ThemeTokens["sizes"]
     hover?: "hover" | "none" | StringLiteral

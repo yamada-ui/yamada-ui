@@ -14,21 +14,15 @@ export default meta
 export const TemplateColumns: Story = () => {
   return (
     <Grid gap="md" templateColumns="repeat(4, 1fr)" w="full">
-      <GridItem
-        bg="primary"
-        color="white"
-        p="md"
-        rounded="4"
-        textAlign="center"
-      >
+      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
       </GridItem>
 
       <GridItem
-        bg="secondary"
+        bg="success"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
@@ -38,13 +32,19 @@ export const TemplateColumns: Story = () => {
         bg="warning"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
-      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
+      <GridItem
+        bg="danger"
+        color="white"
+        p="md"
+        rounded="l2"
+        textAlign="center"
+      >
         GridItem
       </GridItem>
     </Grid>
@@ -54,21 +54,15 @@ export const TemplateColumns: Story = () => {
 export const TemplateRows: Story = () => {
   return (
     <Grid gap="md" templateRows="repeat(4, 1fr)" w="full">
-      <GridItem
-        bg="primary"
-        color="white"
-        p="md"
-        rounded="4"
-        textAlign="center"
-      >
+      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
       </GridItem>
 
       <GridItem
-        bg="secondary"
+        bg="success"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
@@ -78,13 +72,19 @@ export const TemplateRows: Story = () => {
         bg="warning"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
-      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
+      <GridItem
+        bg="danger"
+        color="white"
+        p="md"
+        rounded="l2"
+        textAlign="center"
+      >
         GridItem
       </GridItem>
     </Grid>
@@ -99,55 +99,15 @@ export const TemplateColumnsAndRows: Story = () => {
       templateRows="repeat(4, 1fr)"
       w="full"
     >
-      <GridItem
-        bg="primary"
-        color="white"
-        p="md"
-        rounded="4"
-        textAlign="center"
-      >
+      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
       </GridItem>
 
       <GridItem
-        bg="secondary"
+        bg="success"
         color="white"
         p="md"
-        rounded="4"
-        textAlign="center"
-      >
-        GridItem
-      </GridItem>
-
-      <GridItem
-        bg="warning"
-        color="white"
-        p="md"
-        rounded="4"
-        textAlign="center"
-      >
-        GridItem
-      </GridItem>
-
-      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
-        GridItem
-      </GridItem>
-
-      <GridItem
-        bg="primary"
-        color="white"
-        p="md"
-        rounded="4"
-        textAlign="center"
-      >
-        GridItem
-      </GridItem>
-
-      <GridItem
-        bg="secondary"
-        color="white"
-        p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
@@ -157,31 +117,31 @@ export const TemplateColumnsAndRows: Story = () => {
         bg="warning"
         color="white"
         p="md"
-        rounded="4"
-        textAlign="center"
-      >
-        GridItem
-      </GridItem>
-
-      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
-        GridItem
-      </GridItem>
-
-      <GridItem
-        bg="primary"
-        color="white"
-        p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
       <GridItem
-        bg="secondary"
+        bg="danger"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+
+      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+
+      <GridItem
+        bg="success"
+        color="white"
+        p="md"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
@@ -191,13 +151,53 @@ export const TemplateColumnsAndRows: Story = () => {
         bg="warning"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
-      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
+      <GridItem
+        bg="danger"
+        color="white"
+        p="md"
+        rounded="l2"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+
+      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
+        GridItem
+      </GridItem>
+
+      <GridItem
+        bg="success"
+        color="white"
+        p="md"
+        rounded="l2"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+
+      <GridItem
+        bg="warning"
+        color="white"
+        p="md"
+        rounded="l2"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+
+      <GridItem
+        bg="danger"
+        color="white"
+        p="md"
+        rounded="l2"
+        textAlign="center"
+      >
         GridItem
       </GridItem>
     </Grid>
@@ -218,11 +218,11 @@ export const TemplateAreas: Story = () => {
       <GridItem
         alignItems="center"
         area="one"
-        bg="primary"
+        bg="info"
         color="white"
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
       >
         GridItem
       </GridItem>
@@ -230,11 +230,11 @@ export const TemplateAreas: Story = () => {
       <GridItem
         alignItems="center"
         area="two"
-        bg="secondary"
+        bg="success"
         color="white"
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
       >
         GridItem
       </GridItem>
@@ -246,7 +246,7 @@ export const TemplateAreas: Story = () => {
         color="white"
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
       >
         GridItem
       </GridItem>
@@ -258,7 +258,7 @@ export const TemplateAreas: Story = () => {
         color="white"
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
       >
         GridItem
       </GridItem>
@@ -266,11 +266,11 @@ export const TemplateAreas: Story = () => {
       <GridItem
         alignItems="center"
         area="five"
-        bg="primary"
+        bg="info"
         color="white"
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
       >
         GridItem
       </GridItem>
@@ -278,11 +278,11 @@ export const TemplateAreas: Story = () => {
       <GridItem
         alignItems="center"
         area="six"
-        bg="secondary"
+        bg="success"
         color="white"
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
       >
         GridItem
       </GridItem>
@@ -294,7 +294,7 @@ export const TemplateAreas: Story = () => {
         color="white"
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
       >
         GridItem
       </GridItem>
@@ -306,7 +306,7 @@ export const TemplateAreas: Story = () => {
         color="white"
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
       >
         GridItem
       </GridItem>
@@ -324,24 +324,24 @@ export const CustomStartAndEnd: Story = () => {
     >
       <GridItem
         alignItems="center"
-        bg="primary"
+        bg="info"
         color="white"
         colSpan={2}
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
       >
         GridItem
       </GridItem>
 
       <GridItem
         alignItems="center"
-        bg="secondary"
+        bg="success"
         color="white"
         colSpan={2}
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
         rowSpan={3}
       >
         GridItem
@@ -353,7 +353,7 @@ export const CustomStartAndEnd: Story = () => {
         color="white"
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
         rowEnd={4}
         rowStart={2}
       >
@@ -368,7 +368,7 @@ export const CustomStartAndEnd: Story = () => {
         colStart={2}
         justifyContent="center"
         p="md"
-        rounded="4"
+        rounded="l2"
         rowEnd={4}
         rowStart={2}
       >

@@ -13,7 +13,7 @@ describe("Lucide icon", () => {
   })
 
   test("renders icons correctly", () => {
-    const Icon: FC<{ name: IconNames } & IconProps> = ({ name, ...rest }) => {
+    const Icon: FC<IconProps & { name: IconNames }> = ({ name, ...rest }) => {
       const Icon = icons[name]
 
       return <Icon {...rest} />

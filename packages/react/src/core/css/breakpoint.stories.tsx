@@ -2,10 +2,10 @@ import type { FC } from "react"
 import { useRef } from "react"
 import { Box } from "../../components/box"
 import { Button } from "../../components/button"
+// import { Calendar } from "../../components/calendar"
 import { Tag } from "../../components/tag"
 import { Text } from "../../components/text"
 import { useBreakpoint, useBreakpointValue } from "../../hooks/use-breakpoint"
-import { Calendar } from "../../legacy-components/calendar"
 import { UIProvider } from "../../providers/ui-provider"
 import { defaultConfig } from "../../theme"
 import { merge } from "../../utils"
@@ -135,7 +135,8 @@ export const Components = () => {
 
       <Tag size={{ base: "lg", md: "md" }}>Tag</Tag>
 
-      <Calendar size={{ base: "lg", md: "md" }} />
+      {/* TODO: Fix this */}
+      {/* <Calendar size={{ base: "lg", md: "md" }} /> */}
     </>
   )
 }

@@ -5,7 +5,7 @@ import { cloneElement, useCallback, useMemo } from "react"
 import { useValue } from "../../hooks/use-value"
 import { getValidChildren, runIfFunc } from "../../utils"
 
-export interface BreadcrumbItem extends HTMLProps<"a"> {
+interface BreadcrumbItem extends HTMLProps<"a"> {
   currentPage?: boolean
   label?: ReactNode
 }

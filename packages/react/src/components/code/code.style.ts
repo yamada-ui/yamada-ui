@@ -5,7 +5,7 @@ export const codeStyle = defineComponentStyle({
     alignItems: "center",
     display: "inline-flex",
     fontFamily: "mono",
-    rounded: "md",
+    rounded: "l1",
   },
 
   variants: {

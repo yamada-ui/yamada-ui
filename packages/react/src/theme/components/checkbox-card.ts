@@ -20,18 +20,14 @@ export const CheckboxCard: ComponentMultiStyle<"CheckboxCard"> =
           borderColor: [`${c}.500`, `${c}.600`],
           color: ["white", "black"],
 
-          _disabled: {
-            bg: ["blackAlpha.400", "whiteAlpha.300"],
-            borderColor: ["transparent", "transparent"],
-          },
           _readOnly: {
             bg: [`${c}.500`, `${c}.600`],
             borderColor: [`${c}.500`, `${c}.600`],
           },
-        },
-        _disabled: {
-          bg: ["blackAlpha.200", "whiteAlpha.100"],
-          borderColor: ["transparent", "transparent"],
+          _disabled: {
+            bg: ["blackAlpha.400", "whiteAlpha.300"],
+            borderColor: ["transparent", "transparent"],
+          },
         },
         _invalid: {
           borderColor: ["danger.500", "danger.400"],
@@ -41,6 +37,10 @@ export const CheckboxCard: ComponentMultiStyle<"CheckboxCard"> =
               borderColor: [`${c}.500`, `${c}.600`],
             },
           },
+        },
+        _disabled: {
+          bg: ["blackAlpha.200", "whiteAlpha.100"],
+          borderColor: ["transparent", "transparent"],
         },
       },
     }),

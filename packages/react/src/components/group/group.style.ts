@@ -2,9 +2,15 @@ import { defineComponentStyle } from "../../core"
 
 export const groupStyle = defineComponentStyle({
   base: {
+    "& > *": {
+      _focusVisible: {
+        zIndex: 1,
+      },
+    },
     display: "inline-flex",
     gap: "2",
     isolation: "isolate",
+    justifyContent: "start",
     position: "relative",
   },
 
@@ -45,34 +51,49 @@ export const groupStyle = defineComponentStyle({
         flexDirection: "column",
       },
     },
+    /**
+     * The stacking order of the group.
+     */
+    stacking: {
+      "first-on-top": {
+        "& > *": {
+          zIndex: "calc({--group-count} - {--group-index})",
+        },
+      },
+      "last-on-top": {
+        "& > *": {
+          zIndex: "{--group-index}",
+        },
+      },
+    },
   },
 
   compounds: [
     {
       css: {
-        "& > *:first-of-type:not(:last-of-type)": {
-          borderRightRadius: 0,
-          borderRightWidth: "0px",
+        "& > *[data-between]": {
+          borderRightWidth: "0px !important",
+          rounded: "0 !important",
         },
-        "& > *:not(:first-of-type):last-of-type": { borderLeftRadius: 0 },
-        "& > *:not(:first-of-type):not(:last-of-type)": {
-          borderRadius: 0,
-          borderRightWidth: "0px",
+        "& > *[data-first]:not([data-last])": {
+          borderRightWidth: "0px !important",
+          roundedRight: "0 !important",
         },
+        "& > *[data-last]:not([data-first])": { roundedLeft: "0 !important" },
       },
       attached: true,
       orientation: "horizontal",
     },
     {
       css: {
-        "& > *:first-of-type:not(:last-of-type)": { borderBottomRadius: 0 },
-        "& > *:not(:first-of-type):last-of-type": {
-          borderTopRadius: 0,
-          borderTopWidth: "0px",
+        "& > *[data-between]": {
+          borderTopWidth: "0px !important",
+          rounded: "0 !important",
         },
-        "& > *:not(:first-of-type):not(:last-of-type)": {
-          borderRadius: 0,
-          borderTopWidth: "0px",
+        "& > *[data-first]:not([data-last])": { roundedBottom: "0 !important" },
+        "& > *[data-last]:not([data-first])": {
+          borderTopWidth: "0px !important",
+          roundedTop: "0 !important",
         },
       },
       attached: true,

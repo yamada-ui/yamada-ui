@@ -14,21 +14,15 @@ export default meta
 export const Basic: Story = () => {
   return (
     <SimpleGrid columns={2} gap="md" w="full">
-      <GridItem
-        bg="primary"
-        color="white"
-        p="md"
-        rounded="4"
-        textAlign="center"
-      >
+      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
       </GridItem>
 
       <GridItem
-        bg="secondary"
+        bg="success"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
@@ -38,13 +32,19 @@ export const Basic: Story = () => {
         bg="warning"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
-      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
+      <GridItem
+        bg="danger"
+        color="white"
+        p="md"
+        rounded="l2"
+        textAlign="center"
+      >
         GridItem
       </GridItem>
     </SimpleGrid>
@@ -54,21 +54,15 @@ export const Basic: Story = () => {
 export const Gap: Story = () => {
   return (
     <SimpleGrid columnGap="lg" columns={2} rowGap="md" w="full">
-      <GridItem
-        bg="primary"
-        color="white"
-        p="md"
-        rounded="4"
-        textAlign="center"
-      >
+      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
       </GridItem>
 
       <GridItem
-        bg="secondary"
+        bg="success"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
@@ -78,13 +72,19 @@ export const Gap: Story = () => {
         bg="warning"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
-      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
+      <GridItem
+        bg="danger"
+        color="white"
+        p="md"
+        rounded="l2"
+        textAlign="center"
+      >
         GridItem
       </GridItem>
     </SimpleGrid>
@@ -94,21 +94,15 @@ export const Gap: Story = () => {
 export const MinChildWidth: Story = () => {
   return (
     <SimpleGrid gap="md" minChildWidth={{ base: "3xs", lg: 100 }} w="full">
-      <GridItem
-        bg="primary"
-        color="white"
-        p="md"
-        rounded="4"
-        textAlign="center"
-      >
+      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
       </GridItem>
 
       <GridItem
-        bg="secondary"
+        bg="success"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
@@ -118,13 +112,19 @@ export const MinChildWidth: Story = () => {
         bg="warning"
         color="white"
         p="md"
-        rounded="4"
+        rounded="l2"
         textAlign="center"
       >
         GridItem
       </GridItem>
 
-      <GridItem bg="danger" color="white" p="md" rounded="4" textAlign="center">
+      <GridItem
+        bg="danger"
+        color="white"
+        p="md"
+        rounded="l2"
+        textAlign="center"
+      >
         GridItem
       </GridItem>
     </SimpleGrid>

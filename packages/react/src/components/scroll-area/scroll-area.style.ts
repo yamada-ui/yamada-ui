@@ -24,9 +24,6 @@ export const scrollAreaStyle = defineComponentSlotStyle({
           },
         },
       },
-      _focusVisible: {
-        boxShadow: "inline",
-      },
       _scrollbar: {
         h: "3",
         w: "3",
@@ -47,6 +44,9 @@ export const scrollAreaStyle = defineComponentSlotStyle({
       },
       _scrollbarTrack: {
         bg: "transparent",
+      },
+      _focusVisible: {
+        boxShadow: "inline",
       },
     },
   },

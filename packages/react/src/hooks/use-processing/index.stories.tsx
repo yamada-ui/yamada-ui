@@ -20,7 +20,7 @@ export const Basic = () => {
   }
 
   return (
-    <Button isLoading={processing.isLoading} onClick={onClick}>
+    <Button loading={processing.loading} onClick={onClick}>
       Click me
     </Button>
   )

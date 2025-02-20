@@ -20,7 +20,7 @@ export const Basic = () => {
   )
 }
 
-export const UseOnOff = () => {
+export const OnAndOff = () => {
   const [flg, { off, on }] = useBoolean()
 
   return (

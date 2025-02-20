@@ -2,6 +2,7 @@
 .turbo
 dist
 node_modules
+coverage
 build
 pnpm-lock.yaml
 *.hbs

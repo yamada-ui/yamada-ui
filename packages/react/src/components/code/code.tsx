@@ -14,6 +14,6 @@ export const {
 /**
  * `Code` is a component that represents a code block. By default, it renders a `code` element.
  *
- * @see Docs https://yamada-ui.com/components/typography/code
+ * @see Docs https://yamada-ui.com/components/code
  */
 export const Code = withContext("code")()

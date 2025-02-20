@@ -42,6 +42,7 @@ const ignoresConfig: Linter.Config = {
     "examples/**",
     "coverage/**",
     "storybook-static/**",
+    // TODO: Remove legacy-components
     "**/legacy-components/**",
   ],
 }

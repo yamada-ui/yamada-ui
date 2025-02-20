@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { Variants } from "motion/react"
 import { useMemo } from "react"
-import { Center } from "../center"
+import { App } from "../../../storybook/components"
 import { Motion } from "./motion"
 
 type Story = StoryFn<typeof Motion>
@@ -15,7 +15,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ x: 100 }}
         bg="mono"
@@ -26,13 +26,13 @@ export const Basic: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithType: Story = () => {
+export const Type: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ x: 100 }}
         bg="mono"
@@ -43,13 +43,13 @@ export const WithType: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const UseValueSpecific: Story = () => {
+export const ValueSpecific: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ opacity: 1, x: 100 }}
         bg="mono"
@@ -66,11 +66,11 @@ export const UseValueSpecific: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithDelayChildren: Story = () => {
+export const DelayChildren: Story = () => {
   const list: Variants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -88,7 +88,7 @@ export const WithDelayChildren: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate="visible"
         bg="mono"
@@ -136,11 +136,11 @@ export const WithDelayChildren: Story = () => {
           w="full"
         />
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithStaggerChildren: Story = () => {
+export const StaggerChildren: Story = () => {
   const list: Variants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -158,7 +158,7 @@ export const WithStaggerChildren: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate="visible"
         bg="mono"
@@ -202,11 +202,11 @@ export const WithStaggerChildren: Story = () => {
           w="full"
         />
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithStaggerDirection: Story = () => {
+export const StaggerDirection: Story = () => {
   const list: Variants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -227,7 +227,7 @@ export const WithStaggerDirection: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate="visible"
         bg="mono"
@@ -271,11 +271,11 @@ export const WithStaggerDirection: Story = () => {
           w="full"
         />
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithAfterChildren: Story = () => {
+export const AfterChildren: Story = () => {
   const list: Variants = useMemo(
     () => ({
       hidden: { opacity: 0, transition: { when: "afterChildren" } },
@@ -291,7 +291,7 @@ export const WithAfterChildren: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate="hidden"
         bg="mono"
@@ -334,13 +334,13 @@ export const WithAfterChildren: Story = () => {
           w="full"
         />
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithRepeat: Story = () => {
+export const Repeat: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ rotate: 360 }}
         bg="mono"
@@ -351,13 +351,13 @@ export const WithRepeat: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithRepeatType: Story = () => {
+export const RepeatType: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ rotate: 360 }}
         bg="mono"
@@ -368,13 +368,13 @@ export const WithRepeatType: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithRepeatDelay: Story = () => {
+export const RepeatDelay: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ rotate: 360 }}
         bg="mono"
@@ -385,13 +385,13 @@ export const WithRepeatDelay: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const WithEasing: Story = () => {
+export const Ease: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate={{ x: 100 }}
         bg="mono"
@@ -402,6 +402,6 @@ export const WithEasing: Story = () => {
       >
         Motion
       </Motion>
-    </Center>
+    </App>
   )
 }

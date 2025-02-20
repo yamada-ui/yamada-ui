@@ -22,7 +22,7 @@ export const {
 /**
  * `CloseButton` is a component used primarily to trigger the close functionality of a component.
  *
- * @see Docs https://yamada-ui.com/components/other/close-button
+ * @see Docs https://yamada-ui.com/components/close-button
  */
 export const CloseButton = withContext(IconButton)(
   undefined,

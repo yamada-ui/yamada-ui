@@ -1,12 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { AnimatePresence, useScroll, useTransform } from "motion/react"
+import { App } from "../../../storybook/components"
 import { useBoolean } from "../../hooks/use-boolean"
 import { UIProvider } from "../../providers/ui-provider"
 import { defaultConfig } from "../../theme"
 import { merge } from "../../utils"
 import { Box } from "../box"
 import { Button } from "../button"
-import { Center } from "../center"
 import { Text } from "../text"
 import { Motion } from "./motion"
 
@@ -52,7 +52,7 @@ export const MotionConfig: Story = () => {
 
   return (
     <UIProvider config={config}>
-      <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <App>
         <Motion
           animate={{ x: 100 }}
           bg="mono"
@@ -62,12 +62,12 @@ export const MotionConfig: Story = () => {
         >
           Motion
         </Motion>
-      </Center>
+      </App>
     </UIProvider>
   )
 }
 
-export const UseScrollAndTransform: Story = () => {
+export const ScrollAndTransform: Story = () => {
   const { scrollYProgress } = useScroll()
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 400])
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -400])

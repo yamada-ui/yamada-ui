@@ -32,7 +32,7 @@ export const {
 /**
  * `Status` is component that indicate the status of a process or state.
  *
- * @see Docs https://yamada-ui.com/components/data-display/status
+ * @see Docs https://yamada-ui.com/components/status
  */
 export const Status = withProvider<"div", StatusProps>(
   ({ children, indicatorProps, labelProps, ...rest }) => {

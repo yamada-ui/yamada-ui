@@ -1,10 +1,10 @@
 import type { FC } from "react"
 import { useCallback, useEffect } from "react"
+import { App as OriginalApp } from "../../../storybook/components"
 import { UIProvider } from "../../providers/ui-provider"
 import { defaultConfig } from "../../theme"
 import { merge } from "../../utils"
 import { Button } from "../button"
-import { Center } from "../center"
 import { Wrap } from "../flex"
 import { useLoading } from "./loading-provider"
 
@@ -81,7 +81,7 @@ const App: FC = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <OriginalApp>
       <Wrap gap="md">
         <Button onClick={() => screen.start()}>Start screen loading</Button>
         <Button onClick={() => page.start()}>Start page loading</Button>
@@ -89,7 +89,7 @@ const App: FC = () => {
           Start background loading
         </Button>
       </Wrap>
-    </Center>
+    </OriginalApp>
   )
 }
 
@@ -107,7 +107,7 @@ const AsyncApp: FC = () => {
   }, [fetchData])
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <OriginalApp>
       <Wrap gap="md">
         <Button onClick={() => screen.start()}>Start screen loading</Button>
         <Button onClick={() => page.start()}>Start page loading</Button>
@@ -115,6 +115,6 @@ const AsyncApp: FC = () => {
           Start background loading
         </Button>
       </Wrap>
-    </Center>
+    </OriginalApp>
   )
 }

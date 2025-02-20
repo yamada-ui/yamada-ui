@@ -27,13 +27,15 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
       transitionDuration: "slower",
       transitionProperty: "common",
       userSelect: "none",
+      _selected: { cursor: "default", pointerEvents: "none" },
+      _hover: {
+        bg: ["blackAlpha.50", "whiteAlpha.50"],
+        _disabled: {
+          bg: ["initial", "initial"],
+        },
+      },
       _active: {
         bg: ["blackAlpha.100", "whiteAlpha.100"],
-      },
-      _disabled: {
-        boxShadow: "none",
-        cursor: "not-allowed",
-        opacity: 0.4,
       },
       _focus: {
         outline: "none",
@@ -41,13 +43,11 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
       _focusVisible: {
         boxShadow: "outline",
       },
-      _hover: {
-        bg: ["blackAlpha.50", "whiteAlpha.50"],
-        _disabled: {
-          bg: ["initial", "initial"],
-        },
+      _disabled: {
+        boxShadow: "none",
+        cursor: "not-allowed",
+        opacity: 0.4,
       },
-      _selected: { cursor: "default", pointerEvents: "none" },
     },
     last: {},
     next: {},
@@ -58,15 +58,15 @@ export const Pagination: ComponentMultiStyle<"Pagination"> = {
     ghost: ({ colorScheme: c = "primary", colorMode: m, theme: t }) => {
       return {
         item: {
-          _hover: {
-            bg: [`${c}.50`, transparentizeColor(`${c}.600`, 0.12)(t, m)],
-          },
           _selected: {
             bg: isGray(c) ? undefined : "transparent",
             color: isGray(c)
               ? ["blackAlpha.800", "whiteAlpha.700"]
               : [`${c}.600`, `${c}.500`],
             fontWeight: "semibold",
+          },
+          _hover: {
+            bg: [`${c}.50`, transparentizeColor(`${c}.600`, 0.12)(t, m)],
           },
         },
       }

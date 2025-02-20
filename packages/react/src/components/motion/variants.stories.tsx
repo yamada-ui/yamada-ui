@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { Variants } from "motion/react"
 import { useMemo } from "react"
-import { Center } from "../center"
+import { App } from "../../../storybook/components"
 import { Motion } from "./motion"
 
 type Story = StoryFn<typeof Motion>
@@ -23,7 +23,7 @@ export const Basic: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate="visible"
         bg="mono"
@@ -34,11 +34,11 @@ export const Basic: Story = () => {
         variants={variants}
         w="2xs"
       />
-    </Center>
+    </App>
   )
 }
 
-export const UsePropagation: Story = () => {
+export const Propagation: Story = () => {
   const list: Variants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -56,7 +56,7 @@ export const UsePropagation: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate="visible"
         bg="mono"
@@ -100,11 +100,11 @@ export const UsePropagation: Story = () => {
           w="full"
         />
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const UseOrchestration: Story = () => {
+export const Orchestration: Story = () => {
   const list: Variants = useMemo(
     () => ({
       hidden: {
@@ -128,7 +128,7 @@ export const UseOrchestration: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate="visible"
         bg="mono"
@@ -172,11 +172,11 @@ export const UseOrchestration: Story = () => {
           w="full"
         />
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const UseDynamicVariants: Story = () => {
+export const DynamicVariants: Story = () => {
   const list: Variants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -198,7 +198,7 @@ export const UseDynamicVariants: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         animate="visible"
         bg="mono"
@@ -246,11 +246,11 @@ export const UseDynamicVariants: Story = () => {
           w="full"
         />
       </Motion>
-    </Center>
+    </App>
   )
 }
 
-export const UseValueSpecific: Story = () => {
+export const ValueSpecific: Story = () => {
   const variants: Variants = useMemo(
     () => ({
       hidden: { opacity: 0, pathLength: 0 },
@@ -271,7 +271,7 @@ export const UseValueSpecific: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
         as="svg"
         animate="visible"
@@ -344,6 +344,6 @@ export const UseValueSpecific: Story = () => {
           variants={variants}
         />
       </Motion>
-    </Center>
+    </App>
   )
 }

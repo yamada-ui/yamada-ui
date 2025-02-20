@@ -30,11 +30,11 @@ export const ColorSelector: ComponentMultiStyle<"ColorSelector"> = {
     saturationSlider: { maxW: "full" },
     sliders: { flex: "1" },
     swatch: {
+      _readOnly: { cursor: "auto" },
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.6,
       },
-      _readOnly: { cursor: "auto" },
     },
     swatches: {},
     swatchesLabel: {

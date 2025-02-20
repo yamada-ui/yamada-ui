@@ -16,11 +16,11 @@ export const buttonStyle = defineComponentStyle({
     userSelect: "none",
     verticalAlign: "middle",
     whiteSpace: "nowrap",
-    _disabled: {
-      layerStyle: "disabled",
-    },
     _readOnly: {
       layerStyle: "readOnly",
+    },
+    _disabled: {
+      layerStyle: "disabled",
     },
   },
 

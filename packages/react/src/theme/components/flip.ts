@@ -5,11 +5,11 @@ export const Flip: ComponentMultiStyle<"Flip"> = {
     container: {
       position: "relative",
       userSelect: "none",
-      _disabled: {
-        cursor: "not-allowed",
-      },
       _readOnly: {
         cursor: "default",
+      },
+      _disabled: {
+        cursor: "not-allowed",
       },
     },
     flipIdent: {

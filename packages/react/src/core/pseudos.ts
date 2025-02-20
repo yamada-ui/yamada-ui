@@ -104,6 +104,10 @@ export const attributes = {
    */
   _notSelected: "&:not([data-selected]):not([aria-selected=true])",
   /**
+   * The CSS `&[data-numeric]` attribute selector.
+   */
+  _numeric: "&[data-numeric]",
+  /**
    * The CSS `&:where([data-outside])` attribute selector.
    */
   _outside: "&:where([data-outside])",
@@ -234,11 +238,6 @@ export const pseudoElementSelectors = Object.values(pseudoElements)
 
 export const pseudoClasses = {
   /**
-   * The CSS `&:is(:active, [data-active]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])` pseudo-class.
-   */
-  _active:
-    "&:is(:active, [data-active]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
-  /**
    * The CSS `:any-link` pseudo-class.
    */
   _anyLink: "&:is(:any-link, [data-any-link])",
@@ -263,11 +262,6 @@ export const pseudoClasses = {
    */
   _default: "&:default",
   /**
-   * The CSS `&:is(:disabled, [disabled], [aria-disabled=true], [data-disabled])` pseudo-class.
-   */
-  _disabled:
-    "&:is(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
-  /**
    * The CSS `&:empty` pseudo-class.
    */
   _empty: "&:empty",
@@ -288,14 +282,6 @@ export const pseudoClasses = {
    */
   _firstChild: "& > *:first-child",
   /**
-   * The CSS `&:is(:focus, [data-focus])` pseudo-class.
-   */
-  _focus: "&:is(:focus, [data-focus])",
-  /**
-   * The CSS `&:is(:focus-visible, [data-focus-visible])` pseudo-class.
-   */
-  _focusVisible: "&:is(:focus-visible, [data-focus-visible])",
-  /**
    * The CSS `&:not(:focus-within, [data-focus-within])` pseudo-class.
    */
   _focusWithin: "&:not(:focus-within, [data-focus-within])",
@@ -308,11 +294,6 @@ export const pseudoClasses = {
    */
   _horizontal:
     "&:is([data-orientation=horizontal], [aria-orientation=horizontal])",
-  /**
-   * The CSS `&:is(:hover, [data-hover])` pseudo-class.
-   */
-  _hover:
-    "&:is(:hover, [data-hover]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
   /**
    * The CSS `& :where(svg:not([data-loading]))` pseudo-class.
    */
@@ -443,10 +424,6 @@ export const pseudoClasses = {
    */
   _playing: "&:is(:playing, [data-playing])",
   /**
-   * The CSS `&:is([readonly], [data-readonly], [aria-readonly=true])` pseudo-class.
-   */
-  _readOnly: "&:is([readonly], [data-readonly], [aria-readonly=true])",
-  /**
    * The CSS `&:is(:read-write, [data-read-write])` pseudo-class.
    */
   _readWrite: "&:is(:read-write, [data-read-write])",
@@ -474,6 +451,33 @@ export const pseudoClasses = {
    * The CSS `&:visited` pseudo-class.
    */
   _visited: "&:visited",
+  /**
+   * The CSS `&:is(:hover, [data-hover])` pseudo-class.
+   */
+  _hover:
+    "&:is(:hover, [data-hover]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
+  /**
+   * The CSS `&:is(:active, [data-active]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])` pseudo-class.
+   */
+  _active:
+    "&:is(:active, [data-active]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
+  /**
+   * The CSS `&:is(:focus, [data-focus])` pseudo-class.
+   */
+  _focus: "&:is(:focus, [data-focus])",
+  /**
+   * The CSS `&:is(:focus-visible, [data-focus-visible])` pseudo-class.
+   */
+  _focusVisible: "&:is(:focus-visible, [data-focus-visible])",
+  /**
+   * The CSS `&:is([readonly], [data-readonly], [aria-readonly=true])` pseudo-class.
+   */
+  _readOnly: "&:is([readonly], [data-readonly], [aria-readonly=true])",
+  /**
+   * The CSS `&:is(:disabled, [disabled], [aria-disabled=true], [data-disabled])` pseudo-class.
+   */
+  _disabled:
+    "&:is(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
 } as const
 
 export type PseudoClasses = typeof pseudoClasses

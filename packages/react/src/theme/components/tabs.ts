@@ -19,16 +19,16 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       transitionDuration: "moderate",
       transitionProperty: "common",
       whiteSpace: "nowrap",
-      _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
-      },
+      _selected: { _hover: { opacity: 1 } },
+      _hover: { opacity: 0.7 },
       _focusVisible: {
         boxShadow: "outline",
         zIndex: "yamcha",
       },
-      _hover: { opacity: 0.7 },
-      _selected: { _hover: { opacity: 1 } },
+      _disabled: {
+        cursor: "not-allowed",
+        opacity: 0.4,
+      },
     }),
     tabList: ({ align, orientation }) => ({
       display: "flex",
@@ -213,8 +213,8 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
     }),
     unstyled: {
       tab: {
-        _hover: { opacity: "inherit" },
         _ripple: { display: "none" },
+        _hover: { opacity: "inherit" },
       },
     },
   },

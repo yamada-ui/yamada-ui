@@ -1,8 +1,8 @@
 import type { UsageThemeTokens } from "./theme"
 
 export interface GeneratedThemeTokens extends UsageThemeTokens {
-  apply: {} & string
-  animations: {} & string
+  apply: string & {}
+  animations: string & {}
   aspectRatios:
     | "bronze"
     | "golden"
@@ -12,10 +12,10 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "square"
     | "ultrawide"
     | "wide"
-    | ({} & string)
-  blurs: "2xl" | "3xl" | "4xl" | "lg" | "md" | "sm" | "xl" | ({} & string)
-  borders: "lg" | "md" | "sm" | "xl" | "xs" | ({} & string)
-  breakpoints: "2xl" | "lg" | "md" | "sm" | "xl" | ({} & string)
+    | (string & {})
+  blurs: "2xl" | "3xl" | "4xl" | "lg" | "md" | "sm" | "xl" | (string & {})
+  borders: "lg" | "md" | "sm" | "xl" | "xs" | (string & {})
+  breakpoints: "2xl" | "lg" | "md" | "sm" | "xl" | (string & {})
   colors:
     | "amber"
     | "amber.50"
@@ -29,6 +29,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "amber.800"
     | "amber.900"
     | "amber.950"
+    | "amber.bg"
     | "amber.contrast"
     | "amber.emphasized"
     | "amber.fg"
@@ -43,6 +44,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "bg.error"
     | "bg.info"
     | "bg.muted"
+    | "bg.overlay"
     | "bg.panel"
     | "bg.subtle"
     | "bg.success"
@@ -59,6 +61,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "black.800"
     | "black.900"
     | "black.950"
+    | "black.bg"
     | "black.contrast"
     | "black.emphasized"
     | "black.fg"
@@ -90,6 +93,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "blue.800"
     | "blue.900"
     | "blue.950"
+    | "blue.bg"
     | "blue.contrast"
     | "blue.emphasized"
     | "blue.fg"
@@ -128,6 +132,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "cyan.800"
     | "cyan.900"
     | "cyan.950"
+    | "cyan.bg"
     | "cyan.contrast"
     | "cyan.emphasized"
     | "cyan.fg"
@@ -148,6 +153,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "danger.800"
     | "danger.900"
     | "danger.950"
+    | "danger.bg"
     | "danger.contrast"
     | "danger.emphasized"
     | "danger.fg"
@@ -168,6 +174,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "emerald.800"
     | "emerald.900"
     | "emerald.950"
+    | "emerald.bg"
     | "emerald.contrast"
     | "emerald.emphasized"
     | "emerald.fg"
@@ -188,6 +195,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "error.800"
     | "error.900"
     | "error.950"
+    | "error.bg"
     | "error.contrast"
     | "error.emphasized"
     | "error.fg"
@@ -217,6 +225,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "flashy.800"
     | "flashy.900"
     | "flashy.950"
+    | "flashy.bg"
     | "flashy.contrast"
     | "flashy.emphasized"
     | "flashy.fg"
@@ -237,6 +246,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "fuchsia.800"
     | "fuchsia.900"
     | "fuchsia.950"
+    | "fuchsia.bg"
     | "fuchsia.contrast"
     | "fuchsia.emphasized"
     | "fuchsia.fg"
@@ -257,6 +267,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "gray.800"
     | "gray.900"
     | "gray.950"
+    | "gray.bg"
     | "gray.contrast"
     | "gray.emphasized"
     | "gray.fg"
@@ -277,6 +288,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "green.800"
     | "green.900"
     | "green.950"
+    | "green.bg"
     | "green.contrast"
     | "green.emphasized"
     | "green.fg"
@@ -297,6 +309,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "indigo.800"
     | "indigo.900"
     | "indigo.950"
+    | "indigo.bg"
     | "indigo.contrast"
     | "indigo.emphasized"
     | "indigo.fg"
@@ -317,6 +330,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "info.800"
     | "info.900"
     | "info.950"
+    | "info.bg"
     | "info.contrast"
     | "info.emphasized"
     | "info.fg"
@@ -337,6 +351,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "lime.800"
     | "lime.900"
     | "lime.950"
+    | "lime.bg"
     | "lime.contrast"
     | "lime.emphasized"
     | "lime.fg"
@@ -357,6 +372,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "link.800"
     | "link.900"
     | "link.950"
+    | "link.bg"
     | "link.contrast"
     | "link.emphasized"
     | "link.fg"
@@ -377,6 +393,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "mono.800"
     | "mono.900"
     | "mono.950"
+    | "mono.bg"
     | "mono.contrast"
     | "mono.emphasized"
     | "mono.fg"
@@ -397,6 +414,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "orange.800"
     | "orange.900"
     | "orange.950"
+    | "orange.bg"
     | "orange.contrast"
     | "orange.emphasized"
     | "orange.fg"
@@ -417,6 +435,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "pink.800"
     | "pink.900"
     | "pink.950"
+    | "pink.bg"
     | "pink.contrast"
     | "pink.emphasized"
     | "pink.fg"
@@ -437,6 +456,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "primary.800"
     | "primary.900"
     | "primary.950"
+    | "primary.bg"
     | "primary.contrast"
     | "primary.emphasized"
     | "primary.fg"
@@ -457,6 +477,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "purple.800"
     | "purple.900"
     | "purple.950"
+    | "purple.bg"
     | "purple.contrast"
     | "purple.emphasized"
     | "purple.fg"
@@ -477,6 +498,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "red.800"
     | "red.900"
     | "red.950"
+    | "red.bg"
     | "red.contrast"
     | "red.emphasized"
     | "red.fg"
@@ -497,6 +519,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "rose.800"
     | "rose.900"
     | "rose.950"
+    | "rose.bg"
     | "rose.contrast"
     | "rose.emphasized"
     | "rose.fg"
@@ -517,6 +540,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "secondary.800"
     | "secondary.900"
     | "secondary.950"
+    | "secondary.bg"
     | "secondary.contrast"
     | "secondary.emphasized"
     | "secondary.fg"
@@ -537,6 +561,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "sky.800"
     | "sky.900"
     | "sky.950"
+    | "sky.bg"
     | "sky.contrast"
     | "sky.emphasized"
     | "sky.fg"
@@ -557,6 +582,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "success.800"
     | "success.900"
     | "success.950"
+    | "success.bg"
     | "success.contrast"
     | "success.emphasized"
     | "success.fg"
@@ -577,6 +603,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "teal.800"
     | "teal.900"
     | "teal.950"
+    | "teal.bg"
     | "teal.contrast"
     | "teal.emphasized"
     | "teal.fg"
@@ -598,6 +625,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "violet.800"
     | "violet.900"
     | "violet.950"
+    | "violet.bg"
     | "violet.contrast"
     | "violet.emphasized"
     | "violet.fg"
@@ -618,6 +646,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "warning.800"
     | "warning.900"
     | "warning.950"
+    | "warning.bg"
     | "warning.contrast"
     | "warning.emphasized"
     | "warning.fg"
@@ -638,6 +667,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "white.800"
     | "white.900"
     | "white.950"
+    | "white.bg"
     | "white.contrast"
     | "white.emphasized"
     | "white.fg"
@@ -669,6 +699,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "yellow.800"
     | "yellow.900"
     | "yellow.950"
+    | "yellow.bg"
     | "yellow.contrast"
     | "yellow.emphasized"
     | "yellow.fg"
@@ -677,7 +708,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "yellow.outline"
     | "yellow.solid"
     | "yellow.subtle"
-    | ({} & string)
+    | (string & {})
   colorSchemes:
     | "amber"
     | "black"
@@ -702,7 +733,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "white"
     | "whiteAlpha"
     | "yellow"
-    | ({} & string)
+    | (string & {})
   durations:
     | "fast"
     | "faster"
@@ -711,15 +742,15 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "slow"
     | "slower"
     | "slowest"
-    | ({} & string)
+    | (string & {})
   easings:
     | "ease"
     | "ease-in"
     | "ease-in-out"
     | "ease-in-smooth"
     | "ease-out"
-    | ({} & string)
-  fonts: "body" | "heading" | "mono" | ({} & string)
+    | (string & {})
+  fonts: "body" | "heading" | "mono" | (string & {})
   fontSizes:
     | "2xl"
     | "2xs"
@@ -735,7 +766,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "sm"
     | "xl"
     | "xs"
-    | ({} & string)
+    | (string & {})
   fontWeights:
     | "black"
     | "bold"
@@ -746,9 +777,9 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "normal"
     | "semibold"
     | "thin"
-    | ({} & string)
-  gradients: {} & string
-  keyframes: "spin" | ({} & string)
+    | (string & {})
+  gradients: string & {}
+  keyframes: "spin" | (string & {})
   layerStyles:
     | "active"
     | "disabled"
@@ -757,6 +788,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "hover"
     | "outline"
     | "outline.hover"
+    | "panel"
     | "readOnly"
     | "solid"
     | "solid.hover"
@@ -764,21 +796,21 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "subtle.hover"
     | "surface"
     | "surface.hover"
-    | ({} & string)
+    | (string & {})
   letterSpacings:
     | "tight"
     | "tighter"
     | "wide"
     | "wider"
     | "widest"
-    | ({} & string)
+    | (string & {})
   lineHeights:
     | "moderate"
     | "short"
     | "shorter"
     | "tall"
     | "taller"
-    | ({} & string)
+    | (string & {})
   radii:
     | "2xl"
     | "2xs"
@@ -788,12 +820,14 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "l1"
     | "l2"
     | "l3"
+    | "l4"
+    | "l5"
     | "lg"
     | "md"
     | "sm"
     | "xl"
     | "xs"
-    | ({} & string)
+    | (string & {})
   shadows:
     | "2xl"
     | "inner"
@@ -803,7 +837,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "sm"
     | "xl"
     | "xs"
-    | ({} & string)
+    | (string & {})
   sizes:
     | "0.5"
     | "1"
@@ -908,8 +942,56 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "vw"
     | "xl"
     | "xs"
-    | ({} & string)
+    | (string & {})
   spaces:
+    | "0.5"
+    | "1"
+    | "1.5"
+    | "2"
+    | "2.5"
+    | "2xl"
+    | "3"
+    | "3.5"
+    | "3xl"
+    | "4"
+    | "4.5"
+    | "4xl"
+    | "5"
+    | "5.5"
+    | "5xl"
+    | "6"
+    | "6.5"
+    | "7"
+    | "7.5"
+    | "8"
+    | "9"
+    | "10"
+    | "11"
+    | "12"
+    | "13"
+    | "14"
+    | "15"
+    | "16"
+    | "20"
+    | "24"
+    | "28"
+    | "32"
+    | "36"
+    | "40"
+    | "44"
+    | "48"
+    | "52"
+    | "56"
+    | "60"
+    | "64"
+    | "68"
+    | "72"
+    | "76"
+    | "80"
+    | "84"
+    | "88"
+    | "92"
+    | "96"
     | "-0.5"
     | "-1"
     | "-1.5"
@@ -964,63 +1046,15 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "-sm"
     | "-xl"
     | "-xs"
-    | "0.5"
-    | "1"
-    | "1.5"
-    | "2"
-    | "2.5"
-    | "2xl"
-    | "3"
-    | "3.5"
-    | "3xl"
-    | "4"
-    | "4.5"
-    | "4xl"
-    | "5"
-    | "5.5"
-    | "5xl"
-    | "6"
-    | "6.5"
-    | "7"
-    | "7.5"
-    | "8"
-    | "9"
-    | "10"
-    | "11"
-    | "12"
-    | "13"
-    | "14"
-    | "15"
-    | "16"
-    | "20"
-    | "24"
-    | "28"
-    | "32"
-    | "36"
-    | "40"
-    | "44"
-    | "48"
-    | "52"
-    | "56"
-    | "60"
-    | "64"
-    | "68"
-    | "72"
-    | "76"
-    | "80"
-    | "84"
-    | "88"
-    | "92"
-    | "96"
     | "lg"
     | "md"
     | "px"
     | "sm"
     | "xl"
     | "xs"
-    | ({} & string)
-  textStyles: "outline" | "solid" | "subtle" | "surface" | ({} & string)
-  themeSchemes: "base" | ({} & string)
+    | (string & {})
+  textStyles: "outline" | "solid" | "subtle" | "surface" | (string & {})
+  themeSchemes: "base" | (string & {})
   zIndices:
     | "beerus"
     | "burter"
@@ -1036,5 +1070,5 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "vegeta"
     | "yamcha"
     | "zarbon"
-    | ({} & string)
+    | (string & {})
 }

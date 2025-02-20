@@ -82,7 +82,7 @@ export interface CSSProps extends StyleProps, PseudoProps {
 }
 
 export interface AnimationStyle {
-  keyframes: { [key: string]: StyleObject } | ThemeTokens["keyframes"]
+  keyframes: ThemeTokens["keyframes"] | { [key: string]: StyleObject }
   delay?: BaseToken<CSS.Property.AnimationDelay>
   direction?: BaseToken<CSS.Property.AnimationDirection>
   duration?: BaseToken<CSS.Property.AnimationDuration, "durations">

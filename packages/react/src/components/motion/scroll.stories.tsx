@@ -38,7 +38,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithTransition: Story = () => {
+export const Transition: Story = () => {
   return (
     <>
       <Text>Please scroll</Text>
@@ -60,7 +60,7 @@ export const WithTransition: Story = () => {
   )
 }
 
-export const WithOnce: Story = () => {
+export const Once: Story = () => {
   return (
     <>
       <Text>Please scroll</Text>
@@ -82,7 +82,7 @@ export const WithOnce: Story = () => {
   )
 }
 
-export const UseViewport: Story = () => {
+export const Viewport: Story = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
   return (
     <>
@@ -115,7 +115,7 @@ export const UseViewport: Story = () => {
   )
 }
 
-export const UseHook: Story = () => {
+export const UseScroll: Story = () => {
   const { scrollYProgress } = useScroll()
   const scale = useTransform(scrollYProgress, [0, 1], [0.2, 2])
 
@@ -284,8 +284,8 @@ export const CustomScrollBar: Story = () => {
   )
 }
 
-export const WithVariants: Story = () => {
-  const card: Variants = useMemo(
+export const Variant: Story = () => {
+  const variants: Variants = useMemo(
     () => ({
       offscreen: {
         y: 300,
@@ -356,7 +356,7 @@ export const WithVariants: Story = () => {
             placeItems="center"
             rounded="3xl"
             transformOrigin="10% 60%"
-            variants={card}
+            variants={variants}
             w="300px"
           >
             {emoji}

@@ -15,13 +15,13 @@ import { userEvent } from "@testing-library/user-event"
 import { defaultTheme, UIProvider } from "../src"
 import "@testing-library/jest-dom/vitest"
 
-export type RenderOptions = {
+export type RenderOptions = ReactRenderOptions & {
   withProvider?: boolean
-} & ReactRenderOptions
+}
 
-export type RenderReturn = {
+export type RenderReturn = ReturnType<typeof reactRender> & {
   user: ReturnType<typeof userEvent.setup>
-} & ReturnType<typeof reactRender>
+}
 
 export function render(
   ui: ReactElement,
@@ -49,10 +49,10 @@ export type RenderHookOptions<
   M extends Queries = typeof queries,
   D extends HydrateableContainer | RendererableContainer = HTMLElement,
   H extends HydrateableContainer | RendererableContainer = D,
-> = {
+> = ReactRenderHookOptions<Y, M, D, H> & {
   withProvider?: boolean
   providerProps?: Omit<UIProviderProps, "children">
-} & ReactRenderHookOptions<Y, M, D, H>
+}
 
 export function renderHook<
   Y,

@@ -18,8 +18,8 @@ import type {
   ThemeProps,
   WithoutThemeProps,
 } from "../theme"
-import type { HTMLUIProps } from "./component.types"
-import type { Slot, SlotName } from "./create-component"
+import type { ComponentSlot } from "./create-component"
+import type { HTMLUIProps } from "./index.types"
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
 import { useTheme } from "../../providers/theme-provider"
@@ -46,15 +46,12 @@ type Style<Y extends boolean = false> = Y extends false
 
 type MergedStyle = CSSModifierObject | CSSModifierObject<CSSSlotObject>
 
-interface GetStyleOptions<
-  Y extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
-> {
+interface GetStyleOptions {
   direction: BreakpointDirection
   queries: BreakpointQueries
   hasSlot?: boolean
   identifier?: string
   selectors?: (string | undefined)[]
-  slot?: Slot<SlotName<Y>>
   wrap?: CreateLayersReturn["wrap"]
 }
 
@@ -68,14 +65,13 @@ function getSelectorStyle<Y extends Dict = Dict>(
   ) as Y
 }
 
-function getStyle<
-  Y extends boolean = false,
-  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
->(style: CSSObject | CSSSlotObject | undefined) {
+function getStyle<Y extends boolean = false>(
+  style: CSSObject | CSSSlotObject | undefined,
+) {
   return function ({
     hasSlot = false,
     selectors = [],
-  }: GetStyleOptions<M>): Style<Y> | undefined {
+  }: GetStyleOptions): Style<Y> | undefined {
     if (!style || isEmptyObject(style)) return
 
     if (hasSlot) {
@@ -96,19 +92,19 @@ function getStyle<
   }
 }
 
-function getColorModeStyle<
-  Y extends boolean = false,
-  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
->(value: ColorModeArray<number | string>, mergedStyle: MergedStyle) {
-  return function ({ selectors = [], ...rest }: GetStyleOptions<M>) {
+function getColorModeStyle<Y extends boolean = false>(
+  value: ColorModeArray<number | string>,
+  mergedStyle: MergedStyle,
+) {
+  return function ({ selectors = [], ...rest }: GetStyleOptions) {
     const [lightValue, darkValue] = value
 
-    const lightStyle = getModifierStyle<Y, M>(
+    const lightStyle = getModifierStyle<Y>(
       lightValue,
       mergedStyle,
     )({ ...rest, selectors: [...selectors, pseudos._light] })
 
-    const darkStyle = getModifierStyle<Y, M>(
+    const darkStyle = getModifierStyle<Y>(
       darkValue,
       mergedStyle,
     )({ ...rest, selectors: [...selectors, pseudos._dark] })
@@ -159,16 +155,16 @@ function getResponsiveNextQuery(
   return nextQuery
 }
 
-function getResponsiveStyle<
-  Y extends boolean = false,
-  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
->(value: ResponsiveObject<number | string>, mergedStyle: MergedStyle) {
-  return function (options: GetStyleOptions<M>) {
+function getResponsiveStyle<Y extends boolean = false>(
+  value: ResponsiveObject<number | string>,
+  mergedStyle: MergedStyle,
+) {
+  return function (options: GetStyleOptions) {
     const { direction, identifier, queries, selectors = [] } = options
     const breakpoints = keysFormObject(value)
 
     if (breakpoints.length === 1 && "base" in value) {
-      return getModifierStyle<Y, M>(value.base, mergedStyle)(options)
+      return getModifierStyle<Y>(value.base, mergedStyle)(options)
     } else {
       const down = direction !== "up"
 
@@ -187,7 +183,7 @@ function getResponsiveStyle<
             const prevQuery = queries[index - 1]
             const query = prevQuery?.[down ? "minWQuery" : "maxWQuery"]
 
-            const style = getModifierStyle<Y, M>(
+            const style = getModifierStyle<Y>(
               value.base,
               mergedStyle,
             )({ ...options, selectors: [...selectors, query] })
@@ -208,7 +204,7 @@ function getResponsiveStyle<
             query = createQuery(minW, maxW, identifier)
           }
 
-          const style = getModifierStyle<Y, M>(
+          const style = getModifierStyle<Y>(
             value[breakpoint],
             mergedStyle,
           )({ ...options, selectors: [...selectors, query] })
@@ -223,35 +219,32 @@ function getResponsiveStyle<
   }
 }
 
-function getPropStyle<
-  Y extends boolean = false,
-  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
->(
+function getPropStyle<Y extends boolean = false>(
   props: Dict,
   propVariants: CSSModifierObject | CSSModifierObject<CSSSlotObject>,
   style: Style<Y> | undefined = {},
 ) {
   const variants = Object.entries(propVariants)
 
-  return function (options: GetStyleOptions<M>) {
+  return function (options: GetStyleOptions) {
     if (!variants.length) return style
 
     variants.forEach(([name, variants]) => {
       const prop = props[name as keyof typeof props]
 
       if (prop) {
-        const propStyle = getModifierStyle<Y, M>(prop, variants)(options)
+        const propStyle = getModifierStyle<Y>(prop, variants)(options)
 
         if (propStyle)
-          style = merge(style, wrapStyle<Y, M>("props", propStyle)(options))
+          style = merge(style, wrapStyle<Y>("props", propStyle)(options))
       } else {
         const boolean = Object.keys(variants).every((key) => isBooleanish(key))
 
         if (boolean) {
-          const propStyle = getModifierStyle<Y, M>("false", variants)(options)
+          const propStyle = getModifierStyle<Y>("false", variants)(options)
 
           if (propStyle)
-            style = merge(style, wrapStyle<Y, M>("props", propStyle)(options))
+            style = merge(style, wrapStyle<Y>("props", propStyle)(options))
         }
       }
     })
@@ -260,18 +253,15 @@ function getPropStyle<
   }
 }
 
-function getCompoundStyle<
-  Y extends boolean = false,
-  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
->(
+function getCompoundStyle<Y extends boolean = false>(
   props: Dict,
   compounds: ComponentCompound<CSSSlotObject>[] | ComponentCompound[],
   style: Style<Y> | undefined = {},
 ) {
-  return function (options: GetStyleOptions<M>) {
+  return function (options: GetStyleOptions) {
     if (!compounds.length) return style
 
-    compounds.forEach(({ css, ...rest }) => {
+    compounds.forEach(({ css, layer, ...rest }) => {
       const conditions = Object.entries(rest)
 
       if (!conditions.length) return
@@ -284,7 +274,7 @@ function getCompoundStyle<
 
       style = merge(
         style,
-        wrapStyle<Y, M>("compounds", css as Style<Y>)(options),
+        wrapStyle<Y>(layer ?? "compounds", css as Style<Y>)(options),
       )
     })
 
@@ -292,21 +282,21 @@ function getCompoundStyle<
   }
 }
 
-function getModifierStyle<
-  Y extends boolean = false,
-  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
->(value: UIValue<number | string> | undefined, mergedStyle: MergedStyle) {
-  return function (options: GetStyleOptions<M>): Style<Y> | undefined {
+function getModifierStyle<Y extends boolean = false>(
+  value: UIValue<number | string> | undefined,
+  mergedStyle: MergedStyle,
+) {
+  return function (options: GetStyleOptions): Style<Y> | undefined {
     let style: Style<Y> | undefined = undefined
 
     if (!value) return style
 
     if (isArray(value)) {
-      style = getColorModeStyle<Y, M>(value, mergedStyle)(options)
+      style = getColorModeStyle<Y>(value, mergedStyle)(options)
     } else if (isObject(value)) {
-      style = getResponsiveStyle<Y, M>(value, mergedStyle)(options)
+      style = getResponsiveStyle<Y>(value, mergedStyle)(options)
     } else {
-      style = getStyle<Y, M>(mergedStyle[value])(options)
+      style = getStyle<Y>(mergedStyle[value])(options)
     }
 
     return style
@@ -315,7 +305,7 @@ function getModifierStyle<
 
 export function getSlotClassName<Y extends number | string | symbol>(
   className?: string,
-  slot?: Slot<Y>,
+  slot?: ComponentSlot<Y>,
 ) {
   if (!className || !slot) return className
 
@@ -339,11 +329,11 @@ function omitThemeProps<
   return omitObject(props, omitKeys) as unknown as WithoutThemeProps<Y, M, D>
 }
 
-function wrapStyle<
-  Y extends boolean = false,
-  M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
->(layer: LayerScheme, style?: Style<Y>) {
-  return function ({ hasSlot, wrap }: GetStyleOptions<M>) {
+function wrapStyle<Y extends boolean = false>(
+  layer: LayerScheme,
+  style?: Style<Y>,
+) {
+  return function ({ hasSlot, wrap }: GetStyleOptions) {
     if (hasSlot) {
       if (!style) return undefined
 
@@ -391,7 +381,6 @@ interface UseStyleOptions<
   className?: string
   style?: M
   hasSlot?: H
-  slot?: Slot<SlotName<M>>
   transferProps?: D[]
 }
 
@@ -406,7 +395,6 @@ function useStyle<
     className,
     style: componentStyle,
     hasSlot,
-    slot,
     transferProps,
   }: UseStyleOptions<Y, M, D, H> = {},
 ) {
@@ -415,7 +403,7 @@ function useStyle<
   const rootColorScheme = useColorSchemeContext()
   const { queries = [] } = theme.__breakpoints ?? {}
   const { direction = "down", identifier } = theme.__config?.breakpoint ?? {}
-  const options = { direction, hasSlot, identifier, queries, slot, wrap }
+  const options = { direction, hasSlot, identifier, queries, wrap }
 
   const propsRef = useRef({} as WithoutThemeProps<Y, M, D>)
   const styleRef = useRef<Style<H>>({})
@@ -449,42 +437,50 @@ function useStyle<
     if (variants) omitProps.push("variant")
     if (sizes) omitProps.push("size")
 
-    const computedProps = omitThemeProps(props, omitProps, transferProps) as Y
+    if (props.variant)
+      props = Object.assign(props, { "data-variant": props.variant })
+    if (props.size) props = Object.assign(props, { "data-size": props.size })
+
+    const computedProps = omitThemeProps(
+      mergedProps,
+      omitProps,
+      transferProps,
+    ) as Y
 
     computedProps.className = cx(
-      getSlotClassName(className ?? customClassName, slot),
+      className ?? customClassName,
       computedProps.className,
     )
 
     let style: Style<H> = {}
 
     if (base) {
-      const baseStyle = getStyle<H, M>(base)(options)
+      const baseStyle = getStyle<H>(base)(options)
 
-      style = merge(style, wrapStyle<H, M>("base", baseStyle)(options))
+      style = merge(style, wrapStyle<H>("base", baseStyle)(options))
     }
 
     if (sizes && !hasSize) {
-      const sizeStyle = getModifierStyle<H, M>(mergedProps.size, sizes)(options)
+      const sizeStyle = getModifierStyle<H>(mergedProps.size, sizes)(options)
 
-      style = merge(style, wrapStyle<H, M>("size", sizeStyle)(options))
+      style = merge(style, wrapStyle<H>("size", sizeStyle)(options))
     }
 
     if (variants && !hasVariant) {
-      const variantStyle = getModifierStyle<H, M>(
+      const variantStyle = getModifierStyle<H>(
         mergedProps.variant,
         variants,
       )(options)
 
-      style = merge(style, wrapStyle<H, M>("variant", variantStyle)(options))
+      style = merge(style, wrapStyle<H>("variant", variantStyle)(options))
     }
 
     if (propVariants) {
-      style = getPropStyle<H, M>(mergedProps, propVariants, style)(options)
+      style = getPropStyle<H>(mergedProps, propVariants, style)(options)
     }
 
     if (compounds) {
-      style = getCompoundStyle<H, M>(mergedProps, compounds, style)(options)
+      style = getCompoundStyle<H>(mergedProps, compounds, style)(options)
     }
 
     const styleEqual = isEqual(styleRef.current, style)
@@ -496,7 +492,7 @@ function useStyle<
     if (!propsEqual)
       propsRef.current = computedProps as unknown as WithoutThemeProps<Y, M, D>
   } else {
-    props.className = cx(getSlotClassName(className, slot), props.className)
+    props.className = cx(className, props.className)
 
     const propsEqual = isEqual(propsRef.current, props)
 
@@ -531,17 +527,6 @@ export interface UseComponentSlotStyleOptions<
 > extends Omit<UseStyleOptions<Y, M, D, true>, "hasSlot"> {}
 
 export function useComponentSlotStyle<
-  Y extends Dict = Dict,
-  M extends ComponentSlotStyle = ComponentSlotStyle,
-  D extends keyof Y = keyof Y,
->(props: Y, options: UseComponentSlotStyleOptions<Y, M, D> = {}) {
-  return useStyle<Y, M, D, true>(props, { ...options, hasSlot: true })
-}
-
-/**
- * @deprecated
- */
-export function useComponentMultiStyle<
   Y extends Dict = Dict,
   M extends ComponentSlotStyle = ComponentSlotStyle,
   D extends keyof Y = keyof Y,

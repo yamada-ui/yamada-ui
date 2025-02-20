@@ -1,19 +1,18 @@
 import type { DependencyList } from "react"
 import type { LoadingOptions } from "../../components/loading"
-import type { LoadingComponent } from "../../core"
+import type { LoadingMethod } from "../../components/loading/utils"
 import { useCallback, useMemo } from "react"
 import { useLoading } from "../../components/loading"
 import { useProcessing } from "../../hooks/use-processing"
-import { useTheme } from "../../providers/theme-provider"
 
 type Callback = (...args: any[]) => any
 
 export interface UseAsyncCallbackOptions {
   /**
-   * Overrides the `loading.defaultComponent` set in the config.
+   * The method to use for loading.
    * If `false`, the loading will not be shown.
    */
-  loading?: false | LoadingComponent
+  loading?: false | LoadingMethod
   /**
    * The options to pass to the loading component.
    */
@@ -35,30 +34,25 @@ export const useAsyncCallback = <Y extends Callback>(
   callback: Y,
   deps: DependencyList,
   {
-    loading: customLoadingComponent,
+    loading: method = false,
     loadingOptions,
     processing: shouldProcessing = true,
   }: UseAsyncCallbackOptions = {},
 ): UseAsyncCallbackReturn<Y> => {
-  const { theme } = useTheme()
-  const loadingContext = useLoading()
-  const { finish, isLoading, start } = useProcessing()
-  const shouldLoading = customLoadingComponent !== false
-  const defaultLoadingComponent = theme.__config?.loading?.defaultComponent
-  const loadingComponent = customLoadingComponent || defaultLoadingComponent
+  const context = useLoading()
+  const { finish, loading, start } = useProcessing()
+  const shouldLoading = !!method
 
   const asyncCallback = useCallback(
     async (...args: Parameters<Y>) => {
       try {
         if (shouldProcessing) start()
-        if (shouldLoading && loadingComponent)
-          loadingContext[loadingComponent].start(loadingOptions)
+        if (shouldLoading) context[method].start(loadingOptions)
 
         return await callback(...args)
       } finally {
         if (shouldProcessing) finish()
-        if (shouldLoading && loadingComponent)
-          loadingContext[loadingComponent].finish()
+        if (shouldLoading) context[method].finish()
       }
     },
     [
@@ -66,8 +60,8 @@ export const useAsyncCallback = <Y extends Callback>(
       ...deps,
       shouldProcessing,
       shouldLoading,
-      loadingContext,
-      loadingComponent,
+      context,
+      method,
       loadingOptions,
       callback,
       start,
@@ -77,11 +71,11 @@ export const useAsyncCallback = <Y extends Callback>(
 
   const control = useMemo(() => ({ finish, start }), [finish, start])
 
-  return [isLoading, asyncCallback, control]
+  return [loading, asyncCallback, control]
 }
 
 export type UseAsyncCallbackReturn<Y extends Callback> = [
-  isLoading: boolean,
+  loading: boolean,
   callback: (...args: Parameters<Y>) => Promise<Awaited<ReturnType<Y>>>,
   control: { finish: () => void; start: () => void },
 ]

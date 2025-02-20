@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { isString, toPascalCase } from "../../utils"
-import * as Loading from "./namespace"
+import { Loading } from "./"
 
 export const useLoadingComponent = (scheme: Loading.Scheme) => {
   const Component = useMemo(

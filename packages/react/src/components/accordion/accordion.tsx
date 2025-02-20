@@ -1,7 +1,6 @@
 import type { HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
-import type { Merge } from "../../utils"
-import type { UseCollapseProps } from "../collapse"
+import type { CollapseProps } from "../collapse"
 import type { WithTransitionProps } from "../motion"
 import type { AccordionStyle } from "./accordion.style"
 import type {
@@ -35,6 +34,10 @@ interface AccordionCallBackProps {
   expanded?: boolean
 }
 
+interface AccordionContext
+  extends Omit<UseAccordionReturn, "descendants" | "getRootProps">,
+    Pick<AccordionRootProps, "icon" | "iconHidden"> {}
+
 export interface AccordionRootProps
   extends Omit<HTMLUIProps, "onChange">,
     ThemeProps<AccordionStyle>,
@@ -51,10 +54,6 @@ export interface AccordionRootProps
   iconHidden?: boolean
 }
 
-interface AccordionContext
-  extends Omit<UseAccordionReturn, "descendants" | "getRootProps">,
-    Pick<AccordionRootProps, "icon" | "iconHidden"> {}
-
 export const {
   ComponentContext: AccordionContext,
   PropsContext: AccordionPropsContext,
@@ -70,7 +69,7 @@ export const {
 /**
  * `Accordion` is a component for a list that displays information in an expandable or collapsible manner.
  *
- * @see Docs https://yamada-ui.com/components/disclosure/accordion
+ * @see Docs https://yamada-ui.com/components/accordion
  */
 export const AccordionRoot = withProvider<"div", AccordionRootProps>(
   ({ icon, iconHidden, ...props }) => {
@@ -244,17 +243,15 @@ export const AccordionIcon = withContext<"svg", AccordionIconProps>(
   "icon",
 )()
 
-interface CollapseProps
-  extends Pick<
-    UseCollapseProps,
-    | "animationOpacity"
-    | "endingHeight"
-    | "startingHeight"
-    | keyof WithTransitionProps
-  > {}
-
 export interface AccordionPanelProps
-  extends Merge<HTMLUIProps, CollapseProps> {}
+  extends Omit<HTMLUIProps, "transition">,
+    Pick<
+      CollapseProps,
+      | "animationOpacity"
+      | "endingHeight"
+      | "startingHeight"
+      | keyof WithTransitionProps
+    > {}
 
 export const AccordionPanel = withContext<"div", AccordionPanelProps>(
   ({

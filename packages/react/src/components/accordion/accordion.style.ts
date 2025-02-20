@@ -25,11 +25,11 @@ export const accordionStyle = defineComponentSlotStyle({
       transformOrigin: "center",
       transitionDuration: "moderate",
       transitionProperty: "transform",
-      _disabled: {
-        layerStyle: "disabled",
-      },
       _expanded: {
         transform: "rotate(180deg)",
+      },
+      _disabled: {
+        layerStyle: "disabled",
       },
     },
     item: {

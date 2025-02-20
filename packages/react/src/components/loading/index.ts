@@ -1,27 +1,7 @@
-export type { LoadingScheme } from "./loading"
-export {
-  LoadingAudio,
-  LoadingCircles,
-  LoadingDots,
-  LoadingGrid,
-  LoadingOval,
-  LoadingPropsContext,
-  LoadingPuff,
-  LoadingRings,
-  useLoadingPropsContext,
-} from "./loading"
-export type {
-  LoadingAudioProps,
-  LoadingCirclesProps,
-  LoadingDotsProps,
-  LoadingGridProps,
-  LoadingOvalProps,
-  LoadingProps,
-  LoadingPuffProps,
-  LoadingRingsProps,
-} from "./loading"
 export * from "./loading-provider"
 export * from "./use-loading-component"
+export type { LoadingProps, LoadingScheme } from "./utils"
+export { LoadingPropsContext, useLoadingPropsContext } from "./utils"
 
 export * from "./loading.style"
 

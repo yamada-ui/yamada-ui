@@ -22,7 +22,7 @@ export const Basic = () => {
 
   return (
     <UIProvider theme={theme}>
-      <Heading textStyle="gradient" isTruncated>
+      <Heading textStyle="gradient" truncated>
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Heading>
     </UIProvider>

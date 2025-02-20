@@ -1,7 +1,9 @@
-import type { HTMLUIProps, StatusScheme, ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { StatusStyle } from "./status.style"
 import { createSlotComponent, ui } from "../../core"
 import { statusStyle } from "./status.style"
+
+export type StatusScheme = "error" | "info" | "success" | "warning"
 
 export interface StatusProps extends HTMLUIProps, ThemeProps<StatusStyle> {
   /**
@@ -30,7 +32,7 @@ export const {
 /**
  * `Status` is component that indicate the status of a process or state.
  *
- * @see Docs https://yamada-ui.com/components/data-display/status
+ * @see Docs https://yamada-ui.com/components/status
  */
 export const Status = withProvider<"div", StatusProps>(
   ({ children, indicatorProps, labelProps, ...rest }) => {

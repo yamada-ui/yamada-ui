@@ -22,7 +22,7 @@ export const Basic: Story = () => {
   return (
     <Card.Root>
       <Card.Header>
-        <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+        <Heading size="xl">『SLAM DUNK』（スラムダンク）</Heading>
       </Card.Header>
 
       <Card.Body color="fg.muted">
@@ -41,7 +41,7 @@ export const Variant: Story = () => {
       {(variant, index) => (
         <Card.Root key={index} variant={variant}>
           <Card.Header>
-            <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+            <Heading size="xl">『SLAM DUNK』（スラムダンク）</Heading>
           </Card.Header>
 
           <Card.Body>
@@ -62,7 +62,7 @@ export const Size: Story = () => {
       {(size, index) => (
         <Card.Root key={index} size={size}>
           <Card.Header>
-            <Heading size={transformSize(size, 1)}>
+            <Heading size={transformSize(size, 2)}>
               『SLAM DUNK』（スラムダンク）
             </Heading>
           </Card.Header>
@@ -89,7 +89,7 @@ export const ColorScheme: Story = () => {
         return (
           <Card.Root key={key} colorScheme={row} variant={column}>
             <Card.Header>
-              <Heading size="md">Card</Heading>
+              <Heading size="xl">Card</Heading>
             </Card.Header>
 
             <Card.Body>
@@ -118,7 +118,7 @@ export const Horizontal: Story = () => {
 
       <VStack gap="0">
         <Card.Header>
-          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+          <Heading size="xl">『SLAM DUNK』（スラムダンク）</Heading>
         </Card.Header>
 
         <Card.Body color="fg.muted">

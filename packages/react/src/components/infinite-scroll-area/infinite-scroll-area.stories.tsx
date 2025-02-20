@@ -3,9 +3,9 @@ import { useRef, useState } from "react"
 import { noop } from "../../utils"
 import { Button } from "../button"
 import { Card } from "../card"
-import { Container } from "../container"
 import { Heading } from "../heading"
 import { Loading } from "../loading"
+import { VStack } from "../stack"
 import { Text } from "../text"
 import { InfiniteScrollArea } from "./"
 
@@ -42,7 +42,7 @@ export const Basic: Story = () => {
         .map((_, index) => (
           <Card.Root key={index}>
             <Card.Header>
-              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
             </Card.Header>
 
             <Card.Body>
@@ -64,13 +64,13 @@ export const Root: Story = () => {
 
   return (
     <>
-      <Container.Root
+      <VStack
         ref={rootRef}
         borderWidth="1px"
         maxH="xl"
         overflowY="auto"
-        p="md"
-        rounded="md"
+        p="lg"
+        rounded="l3"
       >
         <InfiniteScrollArea
           loading={<Loading.Oval fontSize="2xl" />}
@@ -89,7 +89,7 @@ export const Root: Story = () => {
             .map((_, index) => (
               <Card.Root key={index}>
                 <Card.Header>
-                  <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+                  <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
                 </Card.Header>
 
                 <Card.Body>
@@ -101,7 +101,7 @@ export const Root: Story = () => {
               </Card.Root>
             ))}
         </InfiniteScrollArea>
-      </Container.Root>
+      </VStack>
 
       <Button onClick={() => resetRef.current()}>Reset</Button>
     </>
@@ -128,7 +128,7 @@ export const RootMargin: Story = () => {
         .map((_, index) => (
           <Card.Root key={index}>
             <Card.Header>
-              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
             </Card.Header>
 
             <Card.Body>
@@ -163,7 +163,7 @@ export const Threshold: Story = () => {
         .map((_, index) => (
           <Card.Root key={index}>
             <Card.Header>
-              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
             </Card.Header>
 
             <Card.Body>
@@ -200,7 +200,7 @@ export const InitialLoad: Story = () => {
         .map((_, index) => (
           <Card.Root key={index}>
             <Card.Header>
-              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
             </Card.Header>
 
             <Card.Body>
@@ -224,8 +224,8 @@ export const Overflow: Story = () => {
       loading={<Loading.Oval fontSize="2xl" />}
       maxH="xl"
       overflowY="auto"
-      p="md"
-      rounded="md"
+      p="lg"
+      rounded="l3"
       onLoad={({ finish, index }) => {
         setCount((prev) => prev + 50)
 
@@ -235,9 +235,9 @@ export const Overflow: Story = () => {
       {Array(count)
         .fill(0)
         .map((_, index) => (
-          <Card.Root key={index} minW="lg">
+          <Card.Root key={index}>
             <Card.Header>
-              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
             </Card.Header>
 
             <Card.Body>
@@ -261,8 +261,8 @@ export const Orientation: Story = () => {
       loading={<Loading.Oval fontSize="2xl" />}
       orientation="horizontal"
       overflowX="auto"
-      p="md"
-      rounded="md"
+      p="lg"
+      rounded="l3"
       onLoad={({ finish, index }) => {
         setCount((prev) => prev + 50)
 
@@ -274,7 +274,7 @@ export const Orientation: Story = () => {
         .map((_, index) => (
           <Card.Root key={index} minW="lg">
             <Card.Header>
-              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
             </Card.Header>
 
             <Card.Body>
@@ -309,7 +309,7 @@ export const StartIndex: Story = () => {
         .map((_, index) => (
           <Card.Root key={index}>
             <Card.Header>
-              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
             </Card.Header>
 
             <Card.Body>
@@ -344,7 +344,7 @@ export const Finish: Story = () => {
         .map((_, index) => (
           <Card.Root key={index}>
             <Card.Header>
-              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
             </Card.Header>
 
             <Card.Body>
@@ -379,7 +379,7 @@ export const Reverse: Story = () => {
         .map((_, index) => (
           <Card.Root key={index}>
             <Card.Header>
-              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
             </Card.Header>
 
             <Card.Body>
@@ -406,8 +406,8 @@ export const Disabled: Story = () => {
         loading={<Loading.Oval fontSize="2xl" />}
         maxH="xl"
         overflowY="auto"
-        p="md"
-        rounded="md"
+        p="lg"
+        rounded="l3"
         onLoad={({ finish, index }) => {
           console.log("load", index)
 
@@ -421,7 +421,7 @@ export const Disabled: Story = () => {
           .map((_, index) => (
             <Card.Root key={index}>
               <Card.Header>
-                <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+                <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
               </Card.Header>
 
               <Card.Body>
@@ -455,9 +455,9 @@ export const Reset: Story = () => {
         loading={<Loading.Oval fontSize="2xl" />}
         maxH="xl"
         overflowY="auto"
-        p="md"
+        p="lg"
         resetRef={resetRef}
-        rounded="md"
+        rounded="l3"
         onLoad={({ finish, index }) => {
           console.log("load", index)
 
@@ -471,7 +471,7 @@ export const Reset: Story = () => {
           .map((_, index) => (
             <Card.Root key={index}>
               <Card.Header>
-                <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+                <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
               </Card.Header>
 
               <Card.Body>
@@ -511,7 +511,7 @@ export const CustomTrigger: Story = () => {
         .map((_, index) => (
           <Card.Root key={index}>
             <Card.Header>
-              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
             </Card.Header>
 
             <Card.Body>
@@ -532,8 +532,10 @@ export const CustomLoading: Story = () => {
   return (
     <InfiniteScrollArea
       loading={<>Loading…</>}
-      onLoad={({ finish, index }) => {
+      onLoad={async ({ finish, index }) => {
         console.log("load", index)
+
+        await wait(5000)
 
         setCount((prev) => prev + 50)
 
@@ -545,7 +547,7 @@ export const CustomLoading: Story = () => {
         .map((_, index) => (
           <Card.Root key={index}>
             <Card.Header>
-              <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
             </Card.Header>
 
             <Card.Body>

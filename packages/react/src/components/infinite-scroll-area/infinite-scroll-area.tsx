@@ -11,7 +11,7 @@ import { infiniteScrollAreaStyle } from "./infinite-scroll-area.style"
 export interface InfiniteScrollAreaProps
   extends Omit<HTMLUIProps, keyof UseInfiniteScrollProps>,
     UseInfiniteScrollProps,
-    Omit<ThemeProps<InfiniteScrollAreaStyle>, "orientation"> {
+    ThemeProps<InfiniteScrollAreaStyle> {
   /**
    * The infinite scroll area finish to use.
    */
@@ -40,7 +40,7 @@ export const {
  * `InfiniteScrollArea` is for providing infinite scroll functionality.
  * This feature provides a smooth scrolling experience by automatically loading and displaying the next dataset when the user reaches the end of the page.
  *
- * @see Docs https://yamada-ui.com/components/data-display/infinite-scroll-area
+ * @see Docs https://yamada-ui.com/components/infinite-scroll-area
  */
 export const InfiniteScrollArea = withProvider(
   ({

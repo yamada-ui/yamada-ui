@@ -5,15 +5,14 @@ export const infiniteScrollAreaStyle = defineComponentSlotStyle({
     root: {
       display: "flex",
       flexDirection: "row",
-      gap: "1rem",
-      w: "100%",
+      w: "full",
     },
     trigger: {
       alignItems: "center",
       display: "flex",
       flex: 1,
       justifyContent: "center",
-      w: "100%",
+      w: "full",
     },
   },
 
@@ -24,11 +23,15 @@ export const infiniteScrollAreaStyle = defineComponentSlotStyle({
      * @default 'vertical'
      */
     orientation: {
+      horizontal: {
+        root: { flexDirection: "row", gap: "md" },
+      },
       vertical: {
-        root: { flexDirection: "column" },
+        root: { flexDirection: "column", gap: "lg" },
       },
     },
   },
+
   defaultProps: {
     orientation: "vertical",
   },

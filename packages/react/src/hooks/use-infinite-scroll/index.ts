@@ -1,4 +1,5 @@
 import type { RefObject } from "react"
+import type { Orientation, UIValue } from "../../core"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   assignRef,
@@ -6,6 +7,7 @@ import {
   useCallbackRef,
   useUnmountEffect,
 } from "../../utils"
+import { useValue } from "../use-value"
 
 const isScrollable = (el: HTMLElement, vertical: boolean) => {
   const style = getComputedStyle(el)
@@ -90,7 +92,7 @@ export interface UseInfiniteScrollProps
    *
    * @default 'vertical'
    */
-  orientation?: "horizontal" | "vertical"
+  orientation?: UIValue<Orientation>
   /**
    * Ref to a reset function.
    */
@@ -146,7 +148,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   disabled = false,
   indexRef: indexRefProp,
   initialLoad = false,
-  orientation = "vertical",
+  orientation: orientationProp = "vertical",
   resetRef,
   reverse = false,
   rootMargin,
@@ -162,6 +164,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   const mountedRef = useRef<boolean>(false)
   const prevScrollPosition = useRef<number>(0)
   const [finish, setFinish] = useState<boolean>(false)
+  const orientation = useValue(orientationProp)
   const onLoad = useCallbackRef(onLoadProp)
   const vertical = orientation === "vertical"
   const options: IntersectionObserverInit = useMemo(() => {

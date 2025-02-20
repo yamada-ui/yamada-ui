@@ -1,11 +1,6 @@
-export {
-  Highlight,
-  Mark,
-  MarkPropsContext,
-  useMarkPropsContext,
-} from "./highlight"
-export type { HighlightProps, MarkProps } from "./highlight"
+export { Highlight } from "./highlight"
+export type { HighlightProps } from "./highlight"
 
-export * from "./highlight.style"
+export * from "../mark/mark.style"
 
-export { useHighlight } from "./use-highlight"
+export * from "./use-highlight"

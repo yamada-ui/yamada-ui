@@ -1,10 +1,5 @@
 import { useMemo } from "react"
-import { isArray } from "../../utils"
-
-interface Options {
-  query: string | string[]
-  text: string
-}
+import { toArray } from "../../utils"
 
 export interface Chunk {
   match: boolean
@@ -14,22 +9,30 @@ export interface Chunk {
 const escapeRegexp = (term: string): string =>
   term.replace(/[|\\{}()[\]^$+*?.-]/g, (char: string) => `\\${char}`)
 
-const buildRegex = (query: string[]): RegExp | undefined => {
+const createRegexp = (query: string[]): RegExp | undefined => {
   query = query.filter(Boolean).map((text) => escapeRegexp(text.trim()))
 
   if (query.length) return new RegExp(`(${query.join("|")})`, "ig")
 }
 
-const highlightWords = ({ query, text }: Options): Chunk[] => {
-  const regex = buildRegex(isArray(query) ? query : [query])
-
-  if (!regex) return [{ match: false, text }]
-
-  return text
-    .split(regex)
-    .filter(Boolean)
-    .map((text) => ({ match: regex.test(text), text }))
+export interface UseHighlightProps {
+  query: string | string[]
+  text: string
 }
 
-export const useHighlight = ({ query, text }: Options): Chunk[] =>
-  useMemo(() => highlightWords({ query, text }), [text, query])
+export const useHighlight = ({ query, text }: UseHighlightProps) => {
+  const chunks = useMemo(() => {
+    const regexp = createRegexp(toArray(query))
+
+    if (!regexp) return [{ match: false, text }]
+
+    return text
+      .split(regexp)
+      .filter(Boolean)
+      .map((text) => ({ match: regexp.test(text), text }))
+  }, [text, query])
+
+  return chunks
+}
+
+export type UseHighlightReturn = ReturnType<typeof useHighlight>

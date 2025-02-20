@@ -29,11 +29,8 @@ export const infiniteScrollAreaStyle = defineComponentSlotStyle({
       },
     },
   },
-
   defaultProps: {
-    props: {
-      orientation: "vertical",
-    },
+    orientation: "vertical",
   },
 })
 

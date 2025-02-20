@@ -42,7 +42,7 @@ export const {
 /**
  * `Stack` is a component that groups elements and provides space between child elements.
  *
- * @see Docs https://yamada-ui.com/components/layouts/stack
+ * @see Docs https://yamada-ui.com/components/stack
  */
 export const Stack = withContext(
   ({

@@ -23,7 +23,7 @@ export interface Dict<Y = any> {
 
 export interface ObjectLiteral {}
 
-export type StringLiteral = {} & string
+export type StringLiteral = string & {}
 
 export type Union<Y> = StringLiteral | Y
 

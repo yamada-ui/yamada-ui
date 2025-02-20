@@ -4,6 +4,6 @@ import { component, Icon } from "../icon"
 /**
  * `WrenchIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/media-and-icons/lucide
+ * @see Docs https://yamada-ui.com/components/icon
  */
 export const WrenchIcon = component(Icon)({ as: Wrench })

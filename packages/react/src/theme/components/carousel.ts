@@ -13,17 +13,17 @@ export const Carousel: ComponentMultiStyle<"Carousel"> = {
       rounded: "full",
       transitionDuration: "slower",
       transitionProperty: "common",
+      _selected: {
+        bg: [`whiteAlpha.700`, `blackAlpha.700`],
+      },
+      _hover: {
+        bg: ["whiteAlpha.500", "blackAlpha.500"],
+      },
       _active: {
         bg: [`whiteAlpha.600`, `blackAlpha.600`],
       },
       _focusVisible: {
         boxShadow: "outline",
-      },
-      _hover: {
-        bg: ["whiteAlpha.500", "blackAlpha.500"],
-      },
-      _selected: {
-        bg: [`whiteAlpha.700`, `blackAlpha.700`],
       },
       ...(o === "vertical" ? { h: "8", right: "4" } : { bottom: "4", w: "8" }),
     }),

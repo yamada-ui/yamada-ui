@@ -5,7 +5,7 @@ export const globalStyle = defineStyles.globalStyle({
     borderColor: "border",
     borderStyle: "solid",
     borderWidth: "0",
-    focusVisibleRing: "outside",
+    focusVisibleRing: "outline",
     fontFeatureSettings: '"cv11"',
     wordWrap: "break-word",
   },

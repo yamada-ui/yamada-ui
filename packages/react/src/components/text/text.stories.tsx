@@ -14,43 +14,43 @@ export default meta
 export const Basic: Story = () => {
   return (
     <VStack gap="md">
-      <Text fontSize="6xl" isTruncated>
+      <Text fontSize="6xl" truncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
 
-      <Text fontSize="5xl" isTruncated>
+      <Text fontSize="5xl" truncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
 
-      <Text fontSize="4xl" isTruncated>
+      <Text fontSize="4xl" truncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
 
-      <Text fontSize="3xl" isTruncated>
+      <Text fontSize="3xl" truncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
 
-      <Text fontSize="2xl" isTruncated>
+      <Text fontSize="2xl" truncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
 
-      <Text fontSize="xl" isTruncated>
+      <Text fontSize="xl" truncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
 
-      <Text fontSize="lg" isTruncated>
+      <Text fontSize="lg" truncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
 
-      <Text fontSize="md" isTruncated>
+      <Text fontSize="md" truncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
 
-      <Text fontSize="sm" isTruncated>
+      <Text fontSize="sm" truncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
 
-      <Text fontSize="xs" isTruncated>
+      <Text fontSize="xs" truncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
     </VStack>

@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { Fieldset } from "."
 import { Field } from "../field"
 import { For } from "../for"
 import { Input } from "../input"
-import { Fieldset } from "."
 
 type Story = StoryFn<typeof Fieldset.Root>
 
@@ -192,7 +192,7 @@ export const CustomContent: Story = () => {
       invalid
       legend="Contact details"
     >
-      <Fieldset.Content borderWidth="1px" p="md" rounded="lg">
+      <Fieldset.Content borderWidth="1px" p="md" rounded="l2">
         <Field.Root label="Name">
           <Input type="text" placeholder="Your name" />
         </Field.Root>

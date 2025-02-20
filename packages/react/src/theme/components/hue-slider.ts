@@ -6,11 +6,11 @@ export const HueSlider: ComponentMultiStyle<"HueSlider"> = {
       cursor: "pointer",
       rounded: "full",
       w: "100%",
+      _readOnly: { cursor: "auto" },
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.6,
       },
-      _readOnly: { cursor: "auto" },
     },
     overlay: {
       rounded: "full",

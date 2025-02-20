@@ -1,4 +1,4 @@
-import type { As, Component } from "./component.types"
+import type { As, Component } from "./index.types"
 import * as React from "react"
 
 export function memo<Y extends object, M extends As = "div">(

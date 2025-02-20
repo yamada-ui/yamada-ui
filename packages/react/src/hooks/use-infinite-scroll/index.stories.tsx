@@ -2,11 +2,11 @@ import type { Meta } from "@storybook/react"
 import { useRef, useState } from "react"
 import { useInfiniteScroll } from "."
 import { Button } from "../../components/button"
-import { Card, CardBody, CardHeader } from "../../components/card"
+import { Card } from "../../components/card"
 import { Center } from "../../components/center"
-import { Container } from "../../components/container"
 import { Heading } from "../../components/heading"
 import { Loading } from "../../components/loading"
+import { VStack } from "../../components/stack"
 import { Text } from "../../components/text"
 import { noop } from "../../utils"
 
@@ -33,30 +33,30 @@ export const Basic = () => {
       {Array(count)
         .fill(0)
         .map((_, index) => (
-          <Card key={index}>
-            <CardHeader>
+          <Card.Root key={index}>
+            <Card.Header>
               <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
-            </CardHeader>
+            </Card.Header>
 
-            <CardBody>
+            <Card.Body>
               <Text>
                 『ドラゴンボール』（DRAGON
                 BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
               </Text>
-            </CardBody>
-          </Card>
+            </Card.Body>
+          </Card.Root>
         ))}
 
       {!finish ? (
         <Center ref={ref} w="full">
-          <Loading fontSize="2xl" />
+          <Loading.Oval fontSize="2xl" />
         </Center>
       ) : null}
     </>
   )
 }
 
-export const WithRoot = () => {
+export const Root = () => {
   const rootRef = useRef<HTMLDivElement | null>(null)
   const resetRef = useRef<() => void>(noop)
   const [count, setCount] = useState<number>(50)
@@ -74,7 +74,7 @@ export const WithRoot = () => {
 
   return (
     <>
-      <Container
+      <VStack
         ref={rootRef}
         borderWidth="1px"
         maxH="xl"
@@ -85,33 +85,33 @@ export const WithRoot = () => {
         {Array(count)
           .fill(0)
           .map((_, index) => (
-            <Card key={index}>
-              <CardHeader>
+            <Card.Root key={index}>
+              <Card.Header>
                 <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
-              </CardHeader>
+              </Card.Header>
 
-              <CardBody>
+              <Card.Body>
                 <Text>
                   『ドラゴンボール』（DRAGON
                   BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
                 </Text>
-              </CardBody>
-            </Card>
+              </Card.Body>
+            </Card.Root>
           ))}
 
         {!finish ? (
           <Center ref={ref} w="full">
-            <Loading fontSize="2xl" />
+            <Loading.Oval fontSize="2xl" />
           </Center>
         ) : null}
-      </Container>
+      </VStack>
 
       <Button onClick={() => resetRef.current()}>Reset</Button>
     </>
   )
 }
 
-export const WithRootMargin = () => {
+export const RootMargin = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, finish } = useInfiniteScroll({
     rootMargin: "300px 0px 0px 0px",
@@ -129,30 +129,30 @@ export const WithRootMargin = () => {
       {Array(count)
         .fill(0)
         .map((_, index) => (
-          <Card key={index}>
-            <CardHeader>
+          <Card.Root key={index}>
+            <Card.Header>
               <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
-            </CardHeader>
+            </Card.Header>
 
-            <CardBody>
+            <Card.Body>
               <Text>
                 『ドラゴンボール』（DRAGON
                 BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
               </Text>
-            </CardBody>
-          </Card>
+            </Card.Body>
+          </Card.Root>
         ))}
 
       {!finish ? (
         <Center ref={ref} w="full">
-          <Loading fontSize="2xl" />
+          <Loading.Oval fontSize="2xl" />
         </Center>
       ) : null}
     </>
   )
 }
 
-export const WithThreshold = () => {
+export const Threshold = () => {
   const [count, setCount] = useState<number>(50)
   const { ref, finish } = useInfiniteScroll({
     threshold: 1,
@@ -170,30 +170,30 @@ export const WithThreshold = () => {
       {Array(count)
         .fill(0)
         .map((_, index) => (
-          <Card key={index}>
-            <CardHeader>
+          <Card.Root key={index}>
+            <Card.Header>
               <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
-            </CardHeader>
+            </Card.Header>
 
-            <CardBody>
+            <Card.Body>
               <Text>
                 『ドラゴンボール』（DRAGON
                 BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
               </Text>
-            </CardBody>
-          </Card>
+            </Card.Body>
+          </Card.Root>
         ))}
 
       {!finish ? (
         <Center ref={ref} w="full">
-          <Loading fontSize="2xl" />
+          <Loading.Oval fontSize="2xl" />
         </Center>
       ) : null}
     </>
   )
 }
 
-export const WithInitialLoad = () => {
+export const InitialLoad = () => {
   const [count, setCount] = useState<number>(0)
   const { ref, finish } = useInfiniteScroll({
     initialLoad: true,
@@ -211,23 +211,23 @@ export const WithInitialLoad = () => {
       {Array(count)
         .fill(0)
         .map((_, index) => (
-          <Card key={index}>
-            <CardHeader>
+          <Card.Root key={index}>
+            <Card.Header>
               <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
-            </CardHeader>
+            </Card.Header>
 
-            <CardBody>
+            <Card.Body>
               <Text>
                 『ドラゴンボール』（DRAGON
                 BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
               </Text>
-            </CardBody>
-          </Card>
+            </Card.Body>
+          </Card.Root>
         ))}
 
       {!finish ? (
         <Center ref={ref} w="full">
-          <Loading fontSize="2xl" />
+          <Loading.Oval fontSize="2xl" />
         </Center>
       ) : null}
     </>
@@ -251,25 +251,25 @@ export const Reverse = () => {
     <>
       {!finish ? (
         <Center ref={ref} w="full">
-          <Loading fontSize="2xl" />
+          <Loading.Oval fontSize="2xl" />
         </Center>
       ) : null}
 
       {Array(count)
         .fill(0)
         .map((_, index) => (
-          <Card key={index}>
-            <CardHeader>
+          <Card.Root key={index}>
+            <Card.Header>
               <Heading size="md">『ドラゴンボール』（DRAGON BALL）</Heading>
-            </CardHeader>
+            </Card.Header>
 
-            <CardBody>
+            <Card.Body>
               <Text>
                 『ドラゴンボール』（DRAGON
                 BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
               </Text>
-            </CardBody>
-          </Card>
+            </Card.Body>
+          </Card.Root>
         ))}
     </>
   )

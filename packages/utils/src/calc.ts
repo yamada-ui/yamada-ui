@@ -1,4 +1,4 @@
-type Operator = "*" | "+" | "/" | "-"
+type Operator = "*" | "+" | "-" | "/"
 
 export type Operand = number | string
 

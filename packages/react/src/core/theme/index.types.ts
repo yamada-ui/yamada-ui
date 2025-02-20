@@ -1,9 +1,7 @@
-import type { HTMLMotionProps, MotionConfigProps, Variants } from "motion/react"
-import type { ReactNode, RefAttributes, RefObject } from "react"
+import type { RefObject } from "react"
 import type { PortalProps } from "../../components/portal"
 import type { DefaultTheme } from "../../theme"
 import type { Dict, StringLiteral, Union } from "../../utils"
-import type { HTMLUIProps } from "../components"
 import type {
   AnimationStyle,
   CreateBreakpointsReturn,
@@ -11,7 +9,6 @@ import type {
   CSSModifierObject,
   CSSObject,
   CSSPropObject,
-  CSSProps,
   CSSSlotObject,
   UIValue,
 } from "../css"
@@ -49,19 +46,6 @@ export type Placement =
   | "start-end"
   | "start-start"
 
-export type LoadingVariant =
-  | "audio"
-  | "circles"
-  | "dots"
-  | "grid"
-  | "oval"
-  | "puff"
-  | "rings"
-
-export type LoadingComponent = "background" | "custom" | "page" | "screen"
-
-export type StatusScheme = "error" | "info" | "success" | "warning"
-
 export type NoticePlacement = Extract<
   Placement,
   | "end"
@@ -74,7 +58,7 @@ export type NoticePlacement = Extract<
   | "start-start"
 >
 
-export interface BreakpointOptions {
+export interface BreakpointConfig {
   /**
    * The base value for the `breakpoint` when `direction` is "down".
    * This is treated as the largest `breakpoint`.
@@ -109,55 +93,37 @@ export interface BreakpointOptions {
   identifier?: "@media screen" | `@container ${string}` | `@container`
 }
 
-export interface NoticeComponentProps extends NoticeConfigOptions {
-  onClose: () => void
-}
-
-export interface NoticeConfigOptions {
+export interface NoticeConfig {
   /**
-   * The custom style to use.
-   */
-  style?: CSSObject
-  /**
-   * The strategy to remove the notice when `isClosable` is set to `true`
+   * If `true`, the portal will check if it is within a parent portal
+   * and append itself to the parent's portal node.
+   * This provides nesting for portals.
    *
-   * @default 'button'
-   */
-  closeStrategy?: "both" | "button" | "element"
-  /**
-   * The custom notice component to use.
-   */
-  component?: (props: NoticeComponentProps) => ReactNode
-  /**
-   * The description of the notice.
-   */
-  description?: ReactNode
-  /**
-   * The number of `ms` the notice will continue to be displayed.
+   * If `false`, the portal will always append to `document.body`
+   * regardless of nesting. It is used to opt out of portal nesting.
    *
-   * If `null`, the notice will continue to display.
-   * Please use in conjunction with `isClosable`.
-   *
-   * @default 5000
+   * @default true
    */
-  duration?: null | number
-  /**
-   * The loading icon to use.
-   */
-  icon?: {
-    variant?: LoadingVariant
-    children?: ReactNode
-    /**
-     * The CSS `color` property.
-     */
-    color?: CSSProps["color"]
-  }
+  appendToParentPortal?: PortalProps["appendToParentPortal"]
   /**
    * If `true`, allows the notice to be removed.
    *
    * @default false
    */
-  isClosable?: boolean
+  closable?: boolean
+  /**
+   * The `ref` to the component where the portal will be attached to.
+   */
+  containerRef?: PortalProps["containerRef"]
+  /**
+   * The number of `ms` the notice will continue to be displayed.
+   *
+   * If `null`, the notice will continue to display.
+   * Please use in conjunction with `closable`.
+   *
+   * @default 5000
+   */
+  duration?: null | number
   /**
    * The maximum value at which notice will be displayed.
    */
@@ -168,50 +134,17 @@ export interface NoticeConfigOptions {
    * @default 'top'
    */
   placement?: NoticePlacement
-  /**
-   * The status of the notice.
-   *
-   * @default 'info'
-   */
-  status?: "loading" | StatusScheme
-  /**
-   * The title of the notice.
-   */
-  title?: ReactNode
 }
 
 export type SnackDirection = "bottom" | "top"
 
-export interface SnackComponentProps extends SnackConfigOptions {
-  index: number
-  onClose: () => void
-}
-
-export interface SnackConfigOptions {
+export interface SnacksConfig {
   /**
-   * The custom style to use.
-   */
-  style?: CSSObject
-  /**
-   * The CSS `box-shadow` property.
+   * If `true`, allows the snack to be removed.
    *
-   * @default '["base", "dark-sm"]'
+   * @default true
    */
-  boxShadow?: CSSProps["boxShadow"]
-  /**
-   * The strategy to remove the snack when `isClosable` is set to `true`
-   *
-   * @default 'button'
-   */
-  closeStrategy?: "both" | "button" | "element"
-  /**
-   * The custom snack component to use.
-   */
-  component?: (props: SnackComponentProps) => ReactNode
-  /**
-   * The description of the snack.
-   */
-  description?: ReactNode
+  closable?: boolean
   /**
    * The direction of the snacks.
    *
@@ -222,28 +155,11 @@ export interface SnackConfigOptions {
    * The number of `ms` the snack will continue to be displayed.
    *
    * If `null`, the snack will continue to display.
-   * Please use in conjunction with `isClosable`.
+   * Please use in conjunction with `closable`.
    *
    * @default null
    */
   duration?: null | number
-  /**
-   * The loading icon to use.
-   */
-  icon?: {
-    variant?: LoadingVariant
-    children?: ReactNode
-    /**
-     * The CSS `color` property.
-     */
-    color?: CSSProps["color"]
-  }
-  /**
-   * If `true`, allows the snack to be removed.
-   *
-   * @default true
-   */
-  isClosable?: boolean
   /**
    * The maximum value at which snack will be displayed.
    *
@@ -256,28 +172,9 @@ export interface SnackConfigOptions {
    * @default 0
    */
   startIndex?: number
-  /**
-   * The status of the snack.
-   *
-   * @default 'info'
-   */
-  status?: "loading" | StatusScheme
-  /**
-   * The title of the snack.
-   */
-  title?: ReactNode
 }
 
-export interface LoadingComponentProps extends RefAttributes<any> {
-  duration: null | number
-  icon: LoadingConfigOptions["icon"]
-  message: ReactNode | undefined
-  text: LoadingConfigOptions["text"]
-  onFinish: () => void
-  initialState?: boolean
-}
-
-export interface LoadingConfigOptions {
+export interface LoadingConfig {
   /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
    *
@@ -302,10 +199,6 @@ export interface LoadingConfigOptions {
    */
   blockScrollOnMount?: boolean
   /**
-   * The custom loading component to use.
-   */
-  component?: (props: LoadingComponentProps) => ReactNode
-  /**
    * The `ref` to the component where the portal will be attached to.
    */
   containerRef?: PortalProps["containerRef"]
@@ -318,58 +211,11 @@ export interface LoadingConfigOptions {
    */
   duration?: null | number
   /**
-   * Props for loading icon element.
-   */
-  icon?: {
-    /**
-     * The CSS `box-size` property.
-     */
-    size?: CSSProps["boxSize"]
-    variant?: LoadingVariant
-    /**
-     * The CSS `color` property.
-     */
-    color?: CSSProps["color"]
-    /**
-     * The CSS `color` property.
-     */
-    secondaryColor?: CSSProps["color"]
-  }
-  /**
    * If `true`, loaded from the initial rendering.
    *
    * @default false
    */
   initialState?: boolean
-  /**
-   * Props for loading text element.
-   */
-  text?: {
-    /**
-     * The CSS `color` property.
-     */
-    color?: CSSProps["color"]
-    /**
-     * The CSS `font-family` property.
-     */
-    fontFamily?: CSSProps["fontFamily"]
-    /**
-     * The CSS `font-size` property.
-     */
-    fontSize?: CSSProps["fontSize"]
-    /**
-     * The CSS `font-weight` property.
-     */
-    fontWeight?: CSSProps["fontWeight"]
-    /**
-     * The CSS `letter-spacing` property.
-     */
-    letterSpacing?: CSSProps["letterSpacing"]
-    /**
-     * The CSS `line-height` property.
-     */
-    lineHeight?: CSSProps["letterSpacing"]
-  }
 }
 
 export interface ThemeConfig {
@@ -395,7 +241,7 @@ export interface ThemeConfig {
   /**
    * The config of breakpoint.
    */
-  breakpoint?: BreakpointOptions
+  breakpoint?: BreakpointConfig
   /**
    * The text direction to apply to the application.
    *
@@ -428,25 +274,17 @@ export interface ThemeConfig {
    */
   loading?: {
     /**
-     * The options of the background loading.
+     * The config of the background loading.
      */
-    background?: LoadingConfigOptions
+    background?: LoadingConfig
     /**
-     * The options of the custom loading.
+     * The config of the page loading.
      */
-    custom?: LoadingConfigOptions
+    page?: LoadingConfig
     /**
-     * The default component to use for `useAsyncCallback` and similar hooks.
+     * The config of the screen loading.
      */
-    defaultComponent?: LoadingComponent
-    /**
-     * The options of the page loading.
-     */
-    page?: LoadingConfigOptions
-    /**
-     * The options of the screen loading.
-     */
-    screen?: LoadingConfigOptions
+    screen?: LoadingConfig
   }
   /**
    * The locale to apply to the application.
@@ -455,95 +293,13 @@ export interface ThemeConfig {
    */
   locale?: string
   /**
-   * The config of the `motion`.
-   */
-  motion?: {
-    /**
-     * Set configuration options for `motion`.
-     *
-     * @see Docs https://motion.dev/docs/react-motion-config
-     */
-    config?: Omit<MotionConfigProps, "children">
-  }
-  /**
    * The config of the notice.
    */
-  notice?: {
-    /**
-     * If `true`, the portal will check if it is within a parent portal
-     * and append itself to the parent's portal node.
-     * This provides nesting for portals.
-     *
-     * If `false`, the portal will always append to `document.body`
-     * regardless of nesting. It is used to opt out of portal nesting.
-     *
-     * @default true
-     */
-    appendToParentPortal?: PortalProps["appendToParentPortal"]
-    /**
-     * The `ref` to the component where the portal will be attached to.
-     */
-    containerRef?: PortalProps["containerRef"]
-    /**
-     * The CSS `gap` property.
-     *
-     * @default 'md'
-     */
-    gap?: CSSProps["gap"]
-    /**
-     * The options of the notice.
-     */
-    options?: NoticeConfigOptions
-    /**
-     * The variants of the notice.
-     * Check the docs to see the variants of possible modifiers you can pass.
-     *
-     * @see Docs https://motion.dev/docs/react-animation#variants
-     */
-    variants?: Variants
-    /**
-     * Props for notice item element.
-     */
-    itemProps?: HTMLMotionProps<"li">
-    /**
-     * Props for notice list element.
-     */
-    listProps?: HTMLUIProps<"ul">
-  }
+  notice?: NoticeConfig
   /**
    * The config of the snacks.
    */
-  snacks?: {
-    /**
-     * The CSS `gap` property.
-     *
-     * @default 'md'
-     */
-    gap?: CSSProps["gap"]
-    /**
-     * A property that provides spacing between the top and bottom.
-     *
-     * @default "[0, 0]"
-     */
-    gutter?: [CSSProps["paddingTop"], CSSProps["paddingBottom"]]
-    /**
-     * If `true`, apply gutter value to negative margin
-     *
-     * @default true
-     */
-    negateMargin?: boolean
-    /**
-     * The options of the snack.
-     */
-    options?: SnackConfigOptions
-    /**
-     * The variants of the snack.
-     * Check the docs to see the variants of possible modifiers you can pass.
-     *
-     * @see Docs https://motion.dev/docs/react-animation#variants
-     */
-    variants?: Variants
-  }
+  snacks?: SnacksConfig
   /**
    * The config of the theme.
    */
@@ -659,6 +415,7 @@ export type DefineThemeColorSemanticValue =
 export interface DefineThemeColorSemanticToken {
   [key: string]: any
   base?: DefineThemeColorSemanticValue
+  bg?: DefineThemeColorSemanticValue
   contrast?: DefineThemeColorSemanticValue
   default?: DefineThemeColorSemanticValue
   emphasized?: DefineThemeColorSemanticValue
@@ -769,7 +526,13 @@ export type ComponentDefaultProps<
   Y extends Dict = Dict,
   M extends Dict = Dict,
   D extends Dict = Dict,
-> = {
+> = (string extends keyof Y
+  ? {}
+  : {
+      [key in keyof Y]?: UIValue<
+        keyof Y[key] extends "false" | "true" ? boolean : boolean | keyof Y[key]
+      >
+    }) & {
   /**
    * The color scheme of the component.
    */
@@ -782,13 +545,7 @@ export type ComponentDefaultProps<
    * The variant of the component.
    */
   variant?: UIValue<keyof D>
-} & (string extends keyof Y
-  ? {}
-  : {
-      [key in keyof Y]?: UIValue<
-        keyof Y[key] extends "false" | "true" ? boolean : boolean | keyof Y[key]
-      >
-    })
+}
 
 interface ComponentSharedStyle<
   Y extends Dict = Dict,
@@ -810,11 +567,7 @@ export type ComponentCompound<
   M extends CSSPropObject = CSSPropObject,
   D extends CSSModifierObject = CSSModifierObject,
   H extends CSSModifierObject = CSSModifierObject,
-> = {
-  css: Y
-  size?: UIValue<keyof D>
-  variant?: UIValue<keyof H> | UIValue<keyof H>[]
-} & (string extends keyof M
+> = (string extends keyof M
   ? {}
   : {
       [key in keyof M]?:
@@ -828,7 +581,14 @@ export type ComponentCompound<
               ? boolean
               : boolean | keyof M[key]
           >[]
-    })
+    }) & {
+  css: Y
+  [key: string]: any
+  colorScheme?: ThemeTokens["colorSchemes"] | ThemeTokens["colorSchemes"][]
+  size?: (keyof D)[] | keyof D
+  variant?: (keyof H)[] | keyof H
+  layer?: LayerScheme
+}
 
 export interface ComponentStyle<
   Y extends CSSPropObject = CSSPropObject,
@@ -911,7 +671,7 @@ export type ChangeThemeScheme = (
   themeScheme: ThemeTokens["themeSchemes"],
 ) => void
 
-export type StyledTheme<Y extends UsageTheme = Theme> = {
+export type StyledTheme<Y extends UsageTheme = Theme> = Y & {
   changeThemeScheme: ChangeThemeScheme
   themeScheme: ThemeTokens["themeSchemes"]
   __breakpoints?: CreateBreakpointsReturn
@@ -919,4 +679,4 @@ export type StyledTheme<Y extends UsageTheme = Theme> = {
   __cssMap?: CSSMap
   __cssVars?: Dict
   __layers?: CreateLayersReturn
-} & Y
+}

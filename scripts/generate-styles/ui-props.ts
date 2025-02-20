@@ -72,7 +72,7 @@ export const additionalProps = {
   },
 
   focusRing: {
-    type: "'outside' | 'inside' | 'mixed' | 'none'",
+    type: "'outside' | 'inside' | 'mixed' | 'outline' | 'inline' | 'none'",
     description: [
       "The focus ring is used to identify the currently focused element.",
     ],
@@ -95,7 +95,7 @@ export const additionalProps = {
     properties: "--focus-ring-width",
   },
   focusVisibleRing: {
-    type: "'outside' | 'inside' | 'mixed' | 'none'",
+    type: "'outside' | 'inside' | 'mixed' | 'outline' | 'inline' | 'none'",
     description: [
       "The focus ring is used to identify the currently focused element.",
     ],

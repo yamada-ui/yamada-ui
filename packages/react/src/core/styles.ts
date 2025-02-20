@@ -50,7 +50,11 @@ export const standardStyles = {
     transform: transforms.token("easings"),
   },
   appearance: true,
-  aspectRatio: true,
+  aspectRatio: {
+    properties: "aspectRatio",
+    token: "aspectRatios",
+    transform: transforms.token("aspectRatios"),
+  },
   azimuth: true,
   backdropBlur: {
     properties: "--backdrop-blur",
@@ -1961,7 +1965,7 @@ export const animationProperties = ["animation"] as const
 
 export type AspectRatioProperty = (typeof aspectRatioProperties)[number]
 
-export const aspectRatioProperties = [] as const
+export const aspectRatioProperties = ["aspectRatio"] as const
 
 export type BlurProperty = (typeof blurProperties)[number]
 
@@ -2528,7 +2532,7 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
    */
-  aspectRatio?: Token<CSS.Property.AspectRatio>
+  aspectRatio?: Token<CSS.Property.AspectRatio, "aspectRatios">
   /**
    * The CSS `azimuth` property.
    *
@@ -3817,7 +3821,9 @@ export interface StyleProps {
   /**
    * The focus ring is used to identify the currently focused element.
    */
-  focusRing?: Token<"inside" | "mixed" | "none" | "outside">
+  focusRing?: Token<
+    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
+  >
   /**
    * Sets the value of `--focus-ring-color`.
    */
@@ -3837,7 +3843,9 @@ export interface StyleProps {
   /**
    * The focus ring is used to identify the currently focused element.
    */
-  focusVisibleRing?: Token<"inside" | "mixed" | "none" | "outside">
+  focusVisibleRing?: Token<
+    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
+  >
   /**
    * The CSS `font` property.
    *
@@ -6333,7 +6341,7 @@ export interface StyleProps {
       | StringLiteral
     dynamicRange?: "high" | "standard" | StringLiteral
     forcedColors?: "active" | "none" | StringLiteral
-    grid?: "StringLiteral" | 0 | 1
+    grid?: 0 | 1 | "StringLiteral"
     h?: CSS.Property.Height | number | ThemeTokens["sizes"]
     height?: CSS.Property.Height | number | ThemeTokens["sizes"]
     hover?: "hover" | "none" | StringLiteral

@@ -92,7 +92,7 @@ export const Pseudo = () => {
   )
 }
 
-export const WithMulti = () => {
+export const Multiple = () => {
   const animation = useAnimation([
     {
       duration: "10s",
@@ -156,7 +156,7 @@ export const WithMulti = () => {
   return <Box animation={animation} h="xs" w="full" />
 }
 
-export const WithDynamic = () => {
+export const Dynamic = () => {
   const [animation, setAnimation] = useDynamicAnimation<{
     [key in "moveLeft" | "moveRight"]: AnimationStyle
   }>({
@@ -207,7 +207,7 @@ export const WithDynamic = () => {
   )
 }
 
-export const WithDynamicAndMulti = () => {
+export const DynamicAndMultiple = () => {
   const [animation, setAnimation] = useDynamicAnimation<{
     [key in "moveLeft" | "moveRight"]: AnimationStyle[]
   }>({

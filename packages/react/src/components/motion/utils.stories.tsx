@@ -1,12 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { AnimatePresence, useScroll, useTransform } from "motion/react"
+import { App } from "../../../storybook/components"
 import { useBoolean } from "../../hooks/use-boolean"
 import { UIProvider } from "../../providers/ui-provider"
 import { defaultConfig } from "../../theme"
 import { merge } from "../../utils"
 import { Box } from "../box"
 import { Button } from "../button"
-import { Center } from "../center"
 import { Text } from "../text"
 import { Motion } from "./motion"
 
@@ -30,8 +30,8 @@ export const ExitPresenceAnimation: Story = () => {
         {visible ? (
           <Motion
             animate={{ opacity: 1 }}
-            bg="primary"
-            color="white"
+            bg="mono"
+            color="mono.contrast"
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             p="md"
@@ -52,22 +52,22 @@ export const MotionConfig: Story = () => {
 
   return (
     <UIProvider config={config}>
-      <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <App>
         <Motion
           animate={{ x: 100 }}
-          bg="primary"
-          color="white"
+          bg="mono"
+          color="mono.contrast"
           p="md"
           rounded="md"
         >
           Motion
         </Motion>
-      </Center>
+      </App>
     </UIProvider>
   )
 }
 
-export const UseScrollAndTransform: Story = () => {
+export const ScrollAndTransform: Story = () => {
   const { scrollYProgress } = useScroll()
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 400])
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -400])
@@ -80,7 +80,7 @@ export const UseScrollAndTransform: Story = () => {
 
       <Motion
         style={{ y: y1 }}
-        bg="primary"
+        bg="info"
         boxSize="2xs"
         left="0"
         position="absolute"
@@ -90,7 +90,7 @@ export const UseScrollAndTransform: Story = () => {
 
       <Motion
         style={{ y: y2 }}
-        bg="warning"
+        bg="success"
         boxSize="sm"
         left="20%"
         position="absolute"
@@ -100,7 +100,7 @@ export const UseScrollAndTransform: Story = () => {
 
       <Motion
         style={{ y: y3 }}
-        bg="danger"
+        bg="warning"
         boxSize="3xs"
         position="absolute"
         right="30%"
@@ -110,7 +110,7 @@ export const UseScrollAndTransform: Story = () => {
 
       <Motion
         style={{ y: y4 }}
-        bg="secondary"
+        bg="danger"
         boxSize="xs"
         position="absolute"
         right="0"

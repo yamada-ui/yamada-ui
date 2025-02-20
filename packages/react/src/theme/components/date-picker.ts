@@ -17,11 +17,11 @@ export const DatePicker: ComponentMultiStyle<"DatePicker"> = mergeMultiStyle(
       field: {
         cursor: "text",
         pb: "px",
-        _focus: {
-          zIndex: "unset",
-        },
         _notAllowed: {
           cursor: "pointer",
+        },
+        _focus: {
+          zIndex: "unset",
         },
         _readOnly: {
           pointerEvents: "none",

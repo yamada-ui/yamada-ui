@@ -1,8 +1,0 @@
-export { Input } from "./input"
-export type { InputProps } from "./input"
-export { InputLeftAddon, InputRightAddon } from "./input-addon"
-export type { InputAddonProps } from "./input-addon"
-export { InputLeftElement, InputRightElement } from "./input-element"
-export type { InputElementProps } from "./input-element"
-export { InputGroup } from "./input-group"
-export type { InputGroupProps } from "./input-group"

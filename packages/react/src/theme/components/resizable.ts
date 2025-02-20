@@ -61,18 +61,6 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
       },
       trigger: {
         ...(o === "vertical" ? { p: "1" } : { p: "1" }),
-        _active: {
-          _after: {
-            bg: isGray(c) ? "border" : `${c}.50`,
-          },
-          _dark: {
-            _after: {
-              bg: isGray(c)
-                ? "border"
-                : transparentizeColor(`${c}.600`, 0.12)(t, m),
-            },
-          },
-        },
         _after: {
           bg: "transparent",
           content: "''",
@@ -85,6 +73,18 @@ export const Resizable: ComponentMultiStyle<"Resizable"> = {
         _dark: {
           _after: {
             bg: "transparent",
+          },
+        },
+        _active: {
+          _after: {
+            bg: isGray(c) ? "border" : `${c}.50`,
+          },
+          _dark: {
+            _after: {
+              bg: isGray(c)
+                ? "border"
+                : transparentizeColor(`${c}.600`, 0.12)(t, m),
+            },
           },
         },
         _focus: {

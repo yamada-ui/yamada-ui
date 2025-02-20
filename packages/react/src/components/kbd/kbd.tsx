@@ -14,6 +14,6 @@ export const {
 /**
  * `Kbd` is a component that represents keyboard input.
  *
- * @see Docs https://yamada-ui.com/components/data-display/kbd
+ * @see Docs https://yamada-ui.com/components/kbd
  */
 export const Kbd = withContext("kbd")()

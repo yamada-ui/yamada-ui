@@ -23,7 +23,7 @@ export const alertStyle = defineComponentSlotStyle({
       position: "relative",
       px: "4",
       py: "3",
-      rounded: "md",
+      rounded: "l2",
       w: "full",
     },
     title: {
@@ -40,8 +40,7 @@ export const alertStyle = defineComponentSlotStyle({
       },
       icon: { color: "colorScheme.solid" },
       root: {
-        bg: "bg",
-        borderWidth: "1px",
+        layerStyle: "panel",
         pl: 7,
         _before: {
           bg: "colorScheme.solid",
@@ -63,8 +62,7 @@ export const alertStyle = defineComponentSlotStyle({
         color: "colorScheme.solid",
       },
       root: {
-        bg: "bg",
-        borderWidth: "1px",
+        layerStyle: "panel",
       },
     },
     solid: {
@@ -92,6 +90,18 @@ export const alertStyle = defineComponentSlotStyle({
       },
     },
   },
+
+  compounds: [
+    {
+      css: {
+        icon: {
+          color: ["colorScheme.600", "colorScheme.400"],
+        },
+      },
+      colorScheme: ["secondary", "gray"],
+      variant: "plain",
+    },
+  ],
 
   defaultProps: {
     variant: "plain",

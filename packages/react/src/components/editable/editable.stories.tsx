@@ -40,7 +40,7 @@ export const StartWithEditView: Story = () => {
   return (
     <Editable.Root defaultValue="オッス！オラ悟空！" startWithEditView>
       <Editable.Preview />
-      <Editable.Input aria-legend="Input character serif" />
+      <Editable.Input aria-label="Input character serif" />
     </Editable.Root>
   )
 }
@@ -185,7 +185,7 @@ export const Control: Story = () => {
           <IconButton
             size="xs"
             variant="outline"
-            aria-legend="Submit"
+            aria-label="Submit"
             icon={<CheckIcon />}
           />
         </Editable.SubmitTrigger>
@@ -220,7 +220,7 @@ export const CustomControl: Story = () => {
           icon={<CheckIcon />}
           {...getSubmitProps()}
           variant="outline"
-          aria-legend="Submit"
+          aria-label="Submit"
         />
 
         <IconButton

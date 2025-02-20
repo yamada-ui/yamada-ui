@@ -27,7 +27,7 @@ export const {
 /**
  * `Input` is a component used to obtain text input from the user.
  *
- * @see Docs https://yamada-ui.com/components/forms/input
+ * @see Docs https://yamada-ui.com/components/input
  */
 export const Input: FC<InputProps> = withContext("input")(
   undefined,

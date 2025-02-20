@@ -31,7 +31,14 @@ const App: FC<PropsWithChildren> = ({ children }) => {
   })
 
   return (
-    <VStack align="start" p="md">
+    <VStack
+      align="start"
+      minH={{
+        base: "calc(100dvh - {spaces.lg} * 2)",
+        md: "calc(100dvh - {spaces.md} * 2)",
+      }}
+      p={{ base: "lg", md: "md" }}
+    >
       {children}
     </VStack>
   )

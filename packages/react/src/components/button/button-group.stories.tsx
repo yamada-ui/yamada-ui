@@ -34,7 +34,7 @@ export const Variant: Story = () => {
 
       <ButtonGroup variant="surface">
         <IconButton aria-label="Edit" icon={<PencilIcon />} />
-        <IconButton aria-legend="Submit" icon={<CheckIcon />} />
+        <IconButton aria-label="Submit" icon={<CheckIcon />} />
         <IconButton aria-label="Cancel" icon={<XIcon />} />
       </ButtonGroup>
     </>
@@ -52,7 +52,7 @@ export const Size: Story = () => {
 
       <ButtonGroup size="sm">
         <IconButton aria-label="Edit" icon={<PencilIcon />} />
-        <IconButton aria-legend="Submit" icon={<CheckIcon />} />
+        <IconButton aria-label="Submit" icon={<CheckIcon />} />
         <IconButton aria-label="Cancel" icon={<XIcon />} />
       </ButtonGroup>
     </>
@@ -70,7 +70,7 @@ export const ColorScheme: Story = () => {
 
       <ButtonGroup colorScheme="blue">
         <IconButton aria-label="Edit" icon={<PencilIcon />} />
-        <IconButton aria-legend="Submit" icon={<CheckIcon />} />
+        <IconButton aria-label="Submit" icon={<CheckIcon />} />
         <IconButton aria-label="Cancel" icon={<XIcon />} />
       </ButtonGroup>
     </>
@@ -94,7 +94,7 @@ export const Disabled: Story = () => {
 
       <ButtonGroup disabled>
         <IconButton aria-label="Edit" icon={<PencilIcon />} />
-        <IconButton aria-legend="Submit" icon={<CheckIcon />} />
+        <IconButton aria-label="Submit" icon={<CheckIcon />} />
         <IconButton aria-label="Cancel" icon={<XIcon />} />
       </ButtonGroup>
     </>

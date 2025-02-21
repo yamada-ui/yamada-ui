@@ -12,16 +12,14 @@ describe("<List />", () => {
     await a11y(container)
   })
 
-  test("should render list with an icon", async () => {
+  test("should render list with an icon", () => {
     render(
       <List.Root>
-        <List.Item>
-          <List.Icon as={BoxIcon} aria-label="icon" />
-        </List.Item>
+        <List.Item icon={<BoxIcon data-testid="box-icon" />} />
       </List.Root>,
     )
 
-    const icon = await screen.findByLabelText(/icon/i)
+    const icon = screen.getByTestId("box-icon")
 
     expect(icon).toBeInTheDocument()
   })

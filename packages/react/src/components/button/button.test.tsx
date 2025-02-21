@@ -6,6 +6,21 @@ describe("<Button />", () => {
     await a11y(<Button>test</Button>)
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Button.displayName).toBe("Button")
+    expect(Button.__ui__).toBe("Button")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Button>test</Button>)
+    expect(screen.getByText("test")).toHaveClass("ui-button")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Button>test</Button>)
+    expect(screen.getByText("test").tagName).toBe("BUTTON")
+  })
+
   test("renders with icon", () => {
     const { getByText, rerender } = render(<Button endIcon={<>end icon</>} />)
     expect(getByText("end icon")).toBeTruthy()

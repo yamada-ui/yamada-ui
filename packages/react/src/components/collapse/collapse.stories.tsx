@@ -30,7 +30,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithDuration: Story = () => {
+export const Duration: Story = () => {
   const [open, { toggle }] = useBoolean()
 
   return (
@@ -46,7 +46,7 @@ export const WithDuration: Story = () => {
   )
 }
 
-export const ExitUnmount: Story = () => {
+export const UnmountOnExit: Story = () => {
   const [open, { toggle }] = useBoolean()
 
   return (
@@ -66,7 +66,7 @@ export const ExitUnmount: Story = () => {
   )
 }
 
-export const DisabledOpacity: Story = () => {
+export const AnimationOpacity: Story = () => {
   const [open, { toggle }] = useBoolean()
 
   return (

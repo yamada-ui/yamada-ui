@@ -11,6 +11,7 @@ export const SEMANTIC_COLOR_SCHEMES = [
   "success",
   "warning",
   "danger",
+  "error",
   "link",
 ] as const
 

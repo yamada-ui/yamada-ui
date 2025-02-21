@@ -2,7 +2,7 @@ import { defineComponentStyle } from "../../core"
 
 export const collapseStyle = defineComponentStyle({
   base: {
-    w: "100%",
+    w: "full",
   },
 })
 

@@ -1,5 +1,6 @@
 import type { Meta } from "@storybook/react"
 import { Button } from "../../components/button"
+import { Modal } from "../../components/modal"
 // import { Dialog } from "../../components/modal"
 import { Text } from "../../components/text"
 import { useDisclosure } from "./use-disclosure"
@@ -51,11 +52,7 @@ export const Toggle = () => {
 }
 
 export const Chain = () => {
-  const {
-    // open,
-    //  onClose,
-    onOpen,
-  } = useDisclosure({
+  const { open, onClose, onOpen } = useDisclosure({
     onClose: (...args: string[]) => {
       console.log("Args:", args)
     },
@@ -68,19 +65,17 @@ export const Chain = () => {
     <>
       <Button onClick={() => onOpen("This is arg")}>Open Dialog</Button>
 
-      {/* TODO: Fix this */}
-      {/* <Dialog
+      <Modal.Root
+        body="だ…大地よ海よ　そして生きているすべての　みんな…
+        このオラにほんのちょっとずつだけ元気をわけてくれ…！！！"
         cancel="わけない"
-        header="孫悟空"
         open={open}
         success="わける"
+        title="孫悟空"
         onCancel={() => onClose("This is arg")}
         onClose={() => onClose("This is arg")}
         onSuccess={() => onClose("This is arg")}
-      >
-        だ…大地よ海よ　そして生きているすべての　みんな…
-        このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
-      </Dialog> */}
+      />
     </>
   )
 }

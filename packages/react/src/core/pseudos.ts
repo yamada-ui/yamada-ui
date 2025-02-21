@@ -64,10 +64,6 @@ export const attributes = {
    */
   _grid: "&:is([role=grid], [data-grid])",
   /**
-   * The CSS `&:is([hidden], [data-hidden])` attribute selector.
-   */
-  _hidden: "&:is([hidden], [data-hidden])",
-  /**
    * The CSS `&[data-holiday]` attribute selector.
    */
   _holiday: "&[data-holiday]",
@@ -139,6 +135,14 @@ export const attributes = {
    * The CSS `&:where([data-weekend])` attribute selector.
    */
   _weekend: "&:where([data-weekend])",
+  /**
+   * The CSS `&:is([hidden], [data-hidden])` attribute selector.
+   */
+  _hidden: "&:is([hidden], [data-hidden])",
+  /**
+   * The CSS `&[data-never]` attribute selector.
+   */
+  _never: "&[data-never]",
 } as const
 
 export type Attributes = typeof attributes

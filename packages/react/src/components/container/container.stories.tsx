@@ -60,7 +60,7 @@ export const Size: Story = () => {
       {(size, index) => (
         <Container.Root key={index} size={size}>
           <Container.Header>
-            <Heading size={transformSize(size, 1)}>
+            <Heading size={transformSize(size, 2)}>
               『ドラゴンボール』（DRAGON BALL）
             </Heading>
           </Container.Header>

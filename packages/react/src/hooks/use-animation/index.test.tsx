@@ -317,15 +317,15 @@ describe("useDynamicAnimation", () => {
 
 describe("useAnimationObserver", () => {
   test("should handle open and close animations correctly", () => {
-    let isOpen = false
+    let open = false
     const ref = { current: document.createElement("div") }
     const { rerender, result } = renderHook(() =>
-      useAnimationObserver({ ref, isOpen }),
+      useAnimationObserver({ ref, open }),
     )
 
     expect(result.current.present).toBeFalsy()
 
-    isOpen = true
+    open = true
     rerender()
 
     act(() => {
@@ -334,7 +334,7 @@ describe("useAnimationObserver", () => {
 
     expect(result.current.present).toBeTruthy()
 
-    isOpen = false
+    open = false
     rerender()
 
     act(() => {

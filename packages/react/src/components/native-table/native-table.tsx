@@ -29,7 +29,7 @@ export const {
 /**
  * `NativeTable` is a component for efficiently organizing and displaying data.
  *
- * @see Docs https://yamada-ui.com/components/data-display/native-table
+ * @see Docs https://yamada-ui.com/components/native-table
  */
 export const NativeTableRoot = withProvider("table", "root")(
   undefined,

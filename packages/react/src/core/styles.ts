@@ -50,7 +50,11 @@ export const standardStyles = {
     transform: transforms.token("easings"),
   },
   appearance: true,
-  aspectRatio: true,
+  aspectRatio: {
+    properties: "aspectRatio",
+    token: "aspectRatios",
+    transform: transforms.token("aspectRatios"),
+  },
   azimuth: true,
   backdropBlur: {
     properties: "--backdrop-blur",
@@ -1961,7 +1965,7 @@ export const animationProperties = ["animation"] as const
 
 export type AspectRatioProperty = (typeof aspectRatioProperties)[number]
 
-export const aspectRatioProperties = [] as const
+export const aspectRatioProperties = ["aspectRatio"] as const
 
 export type BlurProperty = (typeof blurProperties)[number]
 
@@ -2528,7 +2532,7 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
    */
-  aspectRatio?: Token<CSS.Property.AspectRatio>
+  aspectRatio?: Token<CSS.Property.AspectRatio, "aspectRatios">
   /**
    * The CSS `azimuth` property.
    *

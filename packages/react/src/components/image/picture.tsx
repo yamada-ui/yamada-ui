@@ -64,7 +64,7 @@ export interface PictureProps extends ImageProps, PictureOptions {}
 /**
  * `Picture` is a component that uses the `picture` element to provide alternative images for different display or device scenarios.
  *
- * @see Docs https://yamada-ui.com/components/media-and-icons/picture
+ * @see Docs https://yamada-ui.com/components/picture
  */
 export const Picture: FC<PictureProps> = ({
   children,

@@ -47,16 +47,16 @@
     "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
-    "@tanstack/react-table": "^8.20.5",
+    "@tanstack/react-table": "^8.21.2",
     "@yamada-ui/checkbox": "workspace:*",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/native-table": "workspace:*",
-    "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/pagination": "workspace:*",
     "@yamada-ui/select": "workspace:*",
     "@yamada-ui/use-clickable": "workspace:*",
     "@yamada-ui/use-controllable-state": "workspace:*",
+    "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {

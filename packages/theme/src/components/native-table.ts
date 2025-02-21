@@ -89,6 +89,7 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
     },
     lg: {
       caption: {
+        fontSize: "md",
         mt: 3,
         px: 4,
         py: 3,
@@ -97,11 +98,13 @@ export const NativeTable: ComponentMultiStyle<"NativeTable"> = {
         gap: 6,
       },
       td: {
+        fontSize: "md",
         lineHeight: 6,
         px: 4,
         py: 3,
       },
       th: {
+        fontSize: "md",
         lineHeight: 6,
         px: 4,
         py: 3,

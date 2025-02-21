@@ -6,6 +6,7 @@ import type {
 import type { HTMLProps, HTMLUIProps, PropGetter } from "../../core"
 import { dataAttr, handlerAll } from "@yamada-ui/utils"
 import { useCallback, useState } from "react"
+import { useI18n } from "../../providers/i18n-provider"
 
 const defaultFormat = (name: string) => {
   const names = name.trim().split(" ")
@@ -80,6 +81,8 @@ export const useAvatar = ({
 }: UseAvatarProps = {}) => {
   if (name) name = format(name)
 
+  const { t } = useI18n()
+
   const [loaded, setLoaded] = useState<boolean>(false)
   const fallback = !src || !loaded
 
@@ -114,12 +117,14 @@ export const useAvatar = ({
   const getFallbackProps: PropGetter = useCallback(
     (props) => ({
       ...props,
-      "aria-label": !fallbackMessage ? name || alt || "Avatar icon" : undefined,
+      "aria-label": !fallbackMessage
+        ? name || alt || t("avatar.avatarIcon")
+        : undefined,
       children: fallbackMessage || name || icon,
       hidden: !fallback,
       role: "img",
     }),
-    [name, fallback, icon, fallbackMessage, alt],
+    [name, fallback, icon, fallbackMessage, alt, t],
   )
 
   return {

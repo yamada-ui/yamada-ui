@@ -7,12 +7,52 @@ describe("<Breadcrumb />", () => {
       <Breadcrumb.Root>
         <Breadcrumb.Link href="/">1</Breadcrumb.Link>
         <Breadcrumb.Link href="/">2</Breadcrumb.Link>
-        <Breadcrumb.Link href="/">3</Breadcrumb.Link>
+        <Breadcrumb.Ellipsis />
+        <Breadcrumb.Link href="/">4</Breadcrumb.Link>
         <Breadcrumb.Link href="/" currentPage>
-          4
+          5
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
+  })
+
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Breadcrumb.Root.displayName).toBe("BreadcrumbRoot")
+    expect(Breadcrumb.Root.__ui__).toBe("BreadcrumbRoot")
+
+    expect(Breadcrumb.Link.displayName).toBe("BreadcrumbLink")
+    expect(Breadcrumb.Link.__ui__).toBe("BreadcrumbLink")
+
+    expect(Breadcrumb.Ellipsis.displayName).toBe("BreadcrumbEllipsis")
+    expect(Breadcrumb.Ellipsis.__ui__).toBe("BreadcrumbEllipsis")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <Breadcrumb.Root data-testid="root">
+        <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
+        <Breadcrumb.Ellipsis data-testid="ellipsis" />
+      </Breadcrumb.Root>,
+    )
+
+    expect(screen.getByTestId("root")).toHaveClass("ui-breadcrumb__root")
+    expect(screen.getByText("Link 1")).toHaveClass("ui-breadcrumb__link")
+    expect(screen.getByTestId("ellipsis")).toHaveClass(
+      "ui-breadcrumb__ellipsis",
+    )
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <Breadcrumb.Root data-testid="root">
+        <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
+        <Breadcrumb.Ellipsis data-testid="ellipsis" />
+      </Breadcrumb.Root>,
+    )
+
+    expect(screen.getByTestId("root").tagName).toBe("NAV")
+    expect(screen.getByText("Link 1").tagName).toBe("A")
+    expect(screen.getByTestId("ellipsis").tagName).toBe("svg")
   })
 
   test("separator property is being passed accurately", () => {

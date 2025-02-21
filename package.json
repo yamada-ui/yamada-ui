@@ -173,7 +173,7 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-testing-library": "^7.1.1",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "execa": "9.5.2",
+    "execa": "9.3.1",
     "find-packages": "^10.0.4",
     "glob": "^11.0.1",
     "globals": "^16.0.0",

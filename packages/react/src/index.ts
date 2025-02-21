@@ -99,6 +99,7 @@ export * from "./components/text"
 export * from "./components/textarea"
 // export * from "./components/toggle"
 // export * from "./components/tooltip"
+export * from "./components/transitions"
 // export * from "./components/visually-hidden"
 
 /**

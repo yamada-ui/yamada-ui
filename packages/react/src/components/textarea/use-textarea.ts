@@ -1,36 +1,17 @@
 import type { ForwardedRef } from "react"
-import type { CSSObject, HTMLUIProps, PropGetter } from "../../core"
+import type { HTMLProps, PropGetter } from "../../core"
+import type { UseAutosizeProps } from "./use-autosize"
 import { useCallback, useRef } from "react"
-import {
-  addDomEvent,
-  assignRef,
-  createdDom,
-  handlerAll,
-  mergeRefs,
-  noop,
-  useSafeLayoutEffect,
-  useUpdateEffect,
-} from "../../utils"
+import { assignRef, handlerAll, mergeRefs, noop } from "../../utils"
 import { useAutosize } from "./use-autosize"
 
 export interface UseTextareaProps
-  extends Omit<HTMLUIProps<"textarea">, "disabled" | "readOnly" | "required"> {
+  extends HTMLProps<"textarea">,
+    Omit<UseAutosizeProps, "disabled" | "ref"> {
   /**
    * If `true`, the Textarea height auto-adjusts to text height.
    */
   autosize?: boolean
-  /**
-   * Autosize up to maxRows rows.
-   *
-   * @default Infinity
-   */
-  maxRows?: number
-  /**
-   * Autosize up to minRows rows.
-   *
-   * @default 1
-   */
-  minRows?: number
   /**
    * Ref to a resize function.
    */
@@ -38,74 +19,41 @@ export interface UseTextareaProps
 }
 
 export const useTextarea = ({
-  ref,
-  css: cssProp,
   autosize,
-  h,
-  height,
-  maxH,
-  maxHeight,
-  maxRows = Infinity,
-  minH,
-  minHeight,
-  minRows = 1,
-  resize = "none",
+  maxRows,
+  minRows,
   resizeRef,
-  rows,
-  onChange,
+  ...rest
 }: UseTextareaProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
-  const value = textareaRef.current?.value ?? ""
 
-  const resizeTextarea = useAutosize({ ref: textareaRef, maxRows, minRows })
+  const { onResizeTextarea } = useAutosize({
+    ref: textareaRef,
+    disabled: !autosize,
+    maxRows,
+    minRows,
+  })
 
-  let css: CSSObject | CSSObject[] | undefined
+  assignRef(resizeRef, onResizeTextarea)
 
-  if (rows || autosize) {
-    css = cssProp
-  } else {
-    css = { h, height, maxH, maxHeight, minH, minHeight, ...cssProp }
-  }
-
-  useSafeLayoutEffect(() => {
-    if (!createdDom() || !autosize) return
-
-    resizeTextarea()
-
-    const unsubscribeResize = addDomEvent(window, "resize", resizeTextarea)
-    const unsubscribeLoadingdone = addDomEvent(
-      document.fonts,
-      "loadingdone",
-      resizeTextarea,
-    )
-
-    return () => {
-      unsubscribeResize()
-      unsubscribeLoadingdone()
-    }
-  }, [])
-
-  useUpdateEffect(() => {
-    if (!autosize) return
-    resizeTextarea()
-  }, [value])
-
-  assignRef(resizeRef, resizeTextarea)
-
-  const getRootProps: PropGetter<"textarea"> = useCallback(
-    (props) => ({
-      ref: mergeRefs(ref, textareaRef),
-      css,
-      resize,
-      rows,
-      onChange: handlerAll(autosize ? resizeTextarea : noop, onChange),
+  const getTextareaProps: PropGetter<"textarea"> = useCallback(
+    ({ ref, style, ...props } = {}) => ({
+      ...rest,
       ...props,
+      ref: mergeRefs(ref, rest.ref, textareaRef),
+      style: { resize: autosize ? "none" : undefined, ...rest.style, ...style },
+      onChange: handlerAll(
+        props.onChange,
+        rest.onChange,
+        autosize ? onResizeTextarea : noop,
+      ),
     }),
-    [ref, textareaRef, css, resize, rows, autosize, onChange, resizeTextarea],
+    [autosize, onResizeTextarea, rest],
   )
 
   return {
-    getRootProps,
+    getTextareaProps,
+    onResizeTextarea,
   }
 }
 

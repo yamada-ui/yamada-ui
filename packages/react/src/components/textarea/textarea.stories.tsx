@@ -28,7 +28,7 @@ export const Size: Story = () => {
     <PropsTable
       variant="column"
       columns={["xs", "sm", "md", "lg", "xl"]}
-      rows={["outline", "filled", "flushed", "unstyled"]}
+      rows={["outline", "filled", "flushed"]}
     >
       {(column, row, key) => {
         return (
@@ -48,7 +48,7 @@ export const Variant: Story = () => {
   return (
     <PropsTable
       variant="column"
-      columns={["outline", "filled", "flushed", "unstyled"]}
+      columns={["outline", "filled", "flushed"]}
       rows={COLOR_SCHEMES}
     >
       {(column, row, key) => {
@@ -65,48 +65,10 @@ export const Variant: Story = () => {
   )
 }
 
-export const Resize: Story = () => {
-  return (
-    <For each={["block", "horizontal", "vertical", "none"] as const}>
-      {(resize, index) => (
-        <Textarea key={index} placeholder={resize} resize={resize} />
-      )}
-    </For>
-  )
-}
-
-export const Autosize: Story = () => {
-  return (
-    <>
-      <Textarea autosize placeholder="autosize" />
-      <Textarea autosize minRows={4} placeholder="autosize, min rows 4" />
-      <Textarea autosize maxRows={4} placeholder="autosize, max rows 4" />
-      <Textarea placeholder="rows 4" rows={4} />
-    </>
-  )
-}
-
-export const BorderColor: Story = () => {
-  return (
-    <>
-      <Textarea placeholder="default border color" />
-      <Textarea
-        focusBorderColor="green.500"
-        placeholder="custom border color"
-      />
-      <Textarea
-        errorBorderColor="orange.500"
-        invalid
-        placeholder="custom border color"
-      />
-    </>
-  )
-}
-
 export const Disabled: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed", "unstyled"]}>
+      <For each={["outline", "filled", "flushed"]}>
         {(variant, index) => (
           <Textarea
             key={index}
@@ -131,7 +93,7 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed", "unstyled"]}>
+      <For each={["outline", "filled", "flushed"]}>
         {(variant, index) => (
           <Textarea
             key={index}
@@ -156,7 +118,7 @@ export const Readonly: Story = () => {
 export const Invalid: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed", "unstyled"]}>
+      <For each={["outline", "filled", "flushed"]}>
         {(variant, index) => (
           <Textarea
             key={index}
@@ -174,7 +136,24 @@ export const Invalid: Story = () => {
   )
 }
 
-export const StylingPlaceholder: Story = () => {
+export const BorderColor: Story = () => {
+  return (
+    <>
+      <Textarea placeholder="default border color" />
+      <Textarea
+        focusBorderColor="green.500"
+        placeholder="custom border color"
+      />
+      <Textarea
+        errorBorderColor="orange.500"
+        invalid
+        placeholder="custom border color"
+      />
+    </>
+  )
+}
+
+export const Placeholder: Story = () => {
   return (
     <>
       <Textarea placeholder="default placeholder" />
@@ -191,7 +170,28 @@ export const StylingPlaceholder: Story = () => {
   )
 }
 
-export const UseResize: Story = () => {
+export const Resize: Story = () => {
+  return (
+    <For each={["block", "horizontal", "vertical", "none"] as const}>
+      {(resize, index) => (
+        <Textarea key={index} placeholder={resize} resize={resize} />
+      )}
+    </For>
+  )
+}
+
+export const Autosize: Story = () => {
+  return (
+    <>
+      <Textarea autosize placeholder="autosize" />
+      <Textarea autosize minRows={4} placeholder="autosize, min rows 4" />
+      <Textarea autosize maxRows={4} placeholder="autosize, max rows 4" />
+      <Textarea placeholder="rows 4" rows={4} />
+    </>
+  )
+}
+
+export const ControlResize: Story = () => {
   const resizeRef = useRef<() => void>(null)
   const onResize = () => {
     resizeRef.current?.()

@@ -1,41 +1,18 @@
 import type { RefObject } from "react"
-import { useRef } from "react"
-import { pickObject } from "../../utils"
+import type { PropGetter } from "../../core"
+import { useCallback, useRef } from "react"
+import {
+  addDomEvent,
+  createdDom,
+  handlerAll,
+  mergeRefs,
+  noop,
+  pickObject,
+  useSafeLayoutEffect,
+  useUpdateEffect,
+} from "../../utils"
 
-export interface UseAutosizeProps {
-  ref: RefObject<HTMLTextAreaElement | null>
-  maxRows: number
-  minRows: number
-}
-
-export const useAutosize = ({ ref, maxRows, minRows }: UseAutosizeProps) => {
-  const valueRef = useRef<string>(null)
-
-  const resizeTextarea = () => {
-    const el = ref.current
-    if (!el) return
-
-    let { placeholder, value } = el
-    if (value === valueRef.current) return
-    else valueRef.current = value
-
-    value ||= placeholder || "x"
-
-    const nodeSizeData = getSizingData(el)
-
-    if (!nodeSizeData) return
-
-    const rows = calcRows(el, nodeSizeData, value, maxRows, minRows)
-
-    el.rows = rows
-  }
-
-  return resizeTextarea
-}
-
-export type UseAutosizeReturn = ReturnType<typeof useAutosize>
-
-const SIZING_STYLE = [
+const SIZING_STYLE_PROPERTIES = [
   "borderBottomWidth",
   "borderLeftWidth",
   "borderRightWidth",
@@ -61,82 +38,7 @@ const SIZING_STYLE = [
   "wordBreak",
 ] as const
 
-type SizingProps = Extract<
-  (typeof SIZING_STYLE)[number],
-  keyof CSSStyleDeclaration
->
-
-interface SizingStyle extends Pick<CSSStyleDeclaration, SizingProps> {}
-
-interface SizingData {
-  borderSize: number
-  paddingSize: number
-  singleRowHeight: number
-  sizingStyle: SizingStyle
-}
-
-const getSizingData = (el: HTMLElement): null | SizingData => {
-  const style = window.getComputedStyle(el) as CSSStyleDeclaration | undefined
-
-  if (style == null) return null
-
-  const sizingStyle = pickObject(
-    style,
-    SIZING_STYLE as unknown as SizingProps[],
-  )
-  const { boxSizing } = sizingStyle
-
-  if (boxSizing === "") return null
-
-  const paddingSize =
-    parseFloat(sizingStyle.paddingBottom!) + parseFloat(sizingStyle.paddingTop!)
-
-  const borderSize =
-    parseFloat(sizingStyle.borderBottomWidth!) +
-    parseFloat(sizingStyle.borderTopWidth!)
-
-  const singleRowHeight = parseFloat(sizingStyle.lineHeight!)
-
-  return {
-    borderSize,
-    paddingSize,
-    singleRowHeight,
-    sizingStyle,
-  }
-}
-
-const calcRows = (
-  el: HTMLTextAreaElement,
-  sizingData: SizingData,
-  value: string,
-  maxRows: number,
-  minRows: number,
-) => {
-  const clone = el.cloneNode() as HTMLTextAreaElement
-  Object.assign(clone.style, sizingData.sizingStyle)
-  forceHiddenStyles(clone)
-
-  clone.value = value
-  document.body.appendChild(clone)
-
-  let rows
-  if (clone.scrollHeight) {
-    const rowHeight = sizingData.singleRowHeight
-    rows = Math.min(
-      maxRows,
-      Math.max(minRows, Math.floor(clone.scrollHeight / rowHeight)),
-    )
-  } else {
-    const lineBreaks = (value.match(/\n/g) || []).length
-    rows = Math.min(maxRows, Math.max(minRows, lineBreaks + 1))
-  }
-
-  document.body.removeChild(clone)
-
-  return rows
-}
-
-const HIDDEN_TEXTAREA_STYLE = {
+const HIDDEN_STYLE = {
   height: "0",
   "max-height": "none",
   "min-height": "0",
@@ -148,12 +50,183 @@ const HIDDEN_TEXTAREA_STYLE = {
   "z-index": "-1000",
 } as const
 
-const forceHiddenStyles = (el: HTMLElement) => {
-  Object.keys(HIDDEN_TEXTAREA_STYLE).forEach((key) => {
+type SizingProperties = Extract<
+  (typeof SIZING_STYLE_PROPERTIES)[number],
+  keyof CSSStyleDeclaration
+>
+
+interface SizingStyle {
+  style: Pick<CSSStyleDeclaration, SizingProperties>
+  border: number
+  padding: number
+  rowHeight: number
+}
+
+const getSizingStyle = (el: HTMLElement): null | SizingStyle => {
+  const style = window.getComputedStyle(el) as CSSStyleDeclaration | undefined
+
+  if (style == null) return null
+
+  const computedStyle = pickObject(style, SIZING_STYLE_PROPERTIES)
+
+  if (computedStyle.boxSizing === "") return null
+
+  const padding =
+    parseFloat(computedStyle.paddingBottom!) +
+    parseFloat(computedStyle.paddingTop!)
+
+  const border =
+    parseFloat(computedStyle.borderBottomWidth!) +
+    parseFloat(computedStyle.borderTopWidth!)
+
+  const rowHeight = parseFloat(computedStyle.lineHeight!)
+
+  return {
+    style: computedStyle,
+    border,
+    padding,
+    rowHeight,
+  }
+}
+
+const setHiddenStyle = (el: HTMLElement) => {
+  Object.keys(HIDDEN_STYLE).forEach((key) => {
     el.style.setProperty(
       key,
-      HIDDEN_TEXTAREA_STYLE[key as keyof typeof HIDDEN_TEXTAREA_STYLE],
+      HIDDEN_STYLE[key as keyof typeof HIDDEN_STYLE],
       "important",
     )
   })
 }
+
+const calcRows = (
+  el: HTMLTextAreaElement,
+  sizingStyle: SizingStyle,
+  value: string,
+  maxRows: number,
+  minRows: number,
+) => {
+  const cloneEl = el.cloneNode() as HTMLTextAreaElement
+
+  Object.assign(cloneEl.style, sizingStyle.style)
+
+  setHiddenStyle(cloneEl)
+
+  cloneEl.value = value
+
+  document.body.appendChild(cloneEl)
+
+  let rows: number
+
+  if (cloneEl.scrollHeight) {
+    const rowHeight = sizingStyle.rowHeight
+
+    rows = Math.min(
+      maxRows,
+      Math.max(minRows, Math.floor(cloneEl.scrollHeight / rowHeight)),
+    )
+  } else {
+    const lineBreaks = (value.match(/\n/g) || []).length
+
+    rows = Math.min(maxRows, Math.max(minRows, lineBreaks + 1))
+  }
+
+  document.body.removeChild(cloneEl)
+
+  return rows
+}
+
+export interface UseAutosizeProps {
+  /**
+   * Ref to a textarea element.
+   */
+  ref: RefObject<HTMLTextAreaElement | null>
+  /**
+   * If `true`, the Textarea height will not be adjusted.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
+   * Autosize up to maxRows rows.
+   *
+   * @default Infinity
+   */
+  maxRows?: number
+  /**
+   * Autosize up to minRows rows.
+   *
+   * @default 2
+   */
+  minRows?: number
+}
+
+export const useAutosize = ({
+  ref,
+  disabled = false,
+  maxRows = Infinity,
+  minRows = 2,
+}: UseAutosizeProps) => {
+  const beforeValueRef = useRef<string>(null)
+  const value = ref.current?.value ?? ""
+
+  const onResizeTextarea = useCallback(() => {
+    const el = ref.current
+
+    if (!el) return
+
+    let { placeholder, value } = el
+
+    if (value === beforeValueRef.current) return
+
+    beforeValueRef.current = value
+
+    value ||= placeholder || "x"
+
+    const sizingStyle = getSizingStyle(el)
+
+    if (!sizingStyle) return
+
+    const rows = calcRows(el, sizingStyle, value, maxRows, minRows)
+
+    el.rows = rows
+  }, [ref, maxRows, minRows])
+
+  const getTextareaProps: PropGetter<"textarea"> = useCallback(
+    (props = {}) => ({
+      ...props,
+      ref: mergeRefs(props.ref, ref),
+      style: { resize: !disabled ? "none" : undefined, ...props.style },
+      onChange: handlerAll(props.onChange, !disabled ? onResizeTextarea : noop),
+    }),
+    [ref, onResizeTextarea, disabled],
+  )
+
+  useSafeLayoutEffect(() => {
+    if (!createdDom() || disabled) return
+
+    onResizeTextarea()
+
+    const unsubscribeResize = addDomEvent(window, "resize", onResizeTextarea)
+    const unsubscribeLoadingdone = addDomEvent(
+      document.fonts,
+      "loadingdone",
+      onResizeTextarea,
+    )
+
+    return () => {
+      unsubscribeResize()
+      unsubscribeLoadingdone()
+    }
+  }, [])
+
+  useUpdateEffect(() => {
+    if (disabled) return
+
+    onResizeTextarea()
+  }, [value])
+
+  return { getTextareaProps, onResizeTextarea }
+}
+
+export type UseAutosizeReturn = ReturnType<typeof useAutosize>

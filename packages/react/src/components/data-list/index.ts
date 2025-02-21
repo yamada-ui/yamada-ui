@@ -1,12 +1,18 @@
-export {
-  DataList,
-  DataListDescription,
-  DataListItem,
-  DataListTerm,
-} from "./data-list"
 export type {
   DataListDescriptionProps,
   DataListItemProps,
-  DataListProps,
+  DataListRootProps,
   DataListTermProps,
 } from "./data-list"
+export {
+  DataListDescription,
+  DataListItem,
+  DataListPropsContext,
+  DataListRoot,
+  DataListTerm,
+  useDataListPropsContext,
+} from "./data-list"
+
+export * from "./data-list.style"
+
+export * as DataList from "./namespace"

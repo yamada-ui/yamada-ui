@@ -1,165 +1,148 @@
-import type { Length, Replace } from "../utils"
+import type { Length } from "../utils"
 import type { CSSObject } from "./css"
 
 type ReplaceSelectors<
   Y extends string[],
   M extends string,
   D extends string,
-  H extends string,
-> = Y extends [infer R extends string, ...infer T extends string[]]
-  ? `${Replace<Replace<M, D, R>, ",", `${H},`>}${Length<T> extends 0 ? "" : `${H}, `}${ReplaceSelectors<T, M, D, H>}`
-  : H
+> = Y extends [infer H extends string, ...infer R extends string[]]
+  ? `${H}${M extends `&${infer T}` ? `${T} ${D}` : `${M} ${D}`}${Length<R> extends 0 ? "" : `, `}${ReplaceSelectors<R, M, D>}`
+  : ""
 
-const toGroup = <Y extends string>(selectors: Y) =>
+const toGroup = <Y extends string>(selector: Y) =>
   ["[role=group]", "[data-group]", ".group"]
-    .map((prefix) => merge(parse(selectors), prefix, " &"))
+    .map((prefix) => `${prefix}${selector.slice(1)} &`)
     .join(", ") as ReplaceSelectors<
     ["[role=group]", "[data-group]", ".group"],
     Y,
-    "&",
-    " &"
+    "&"
   >
 
-const toPeer = <Y extends string>(selectors: Y) =>
+const toPeer = <Y extends string>(selector: Y) =>
   ["[data-peer]", ".peer"]
-    .map((prefix) => merge(parse(selectors), prefix, " ~ &"))
-    .join(", ") as ReplaceSelectors<["[data-peer]", ".peer"], Y, "&", " ~ &">
-
-const parse = (selectors: string) =>
-  selectors.split(",").map((selector) => selector.trim().slice(1))
-
-const merge = (selectors: string[], prefix = "&", suffix = "") =>
-  selectors.map((selector) => `${prefix}${selector}${suffix}`).join(", ")
+    .flatMap((prefix) => [
+      `&:has(~ ${prefix}${selector.slice(1)})`,
+      `${prefix}${selector.slice(1)} ~ &`,
+    ])
+    .join(", ") as ReplaceSelectors<["[data-peer]", ".peer"], Y, "~ &">
 
 export const attributes = {
   /**
-   * The CSS `[data-accept]` attribute selector.
+   * The CSS `&[data-accept]` attribute selector.
    */
   _accept: "&[data-accept]",
   /**
-   * The CSS `[data-between]` attribute selector.
+   * The CSS `&[data-between]` attribute selector.
    */
   _between: "&[data-between]",
   /**
-   * The CSS `[aria-current]:not([aria-current='false'])` attribute selector.
+   * The CSS `&[aria-current]:not([aria-current='false'])` attribute selector.
    */
   _current: "&[aria-current]:not([aria-current='false'])",
   /**
-   * The CSS `[data-end]` attribute selector.
+   * The CSS `&[data-end]` attribute selector.
    */
   _end: "&[data-end]",
   /**
-   * The CSS `[aria-selected=true]` attribute selector.
-   *
-   * - `[aria-expanded=true]`
-   * - `[data-expanded]`
+   * The CSS `&:is([data-expanded], [aria-expanded=true])` attribute selector.
    */
-  _expanded: "&[data-expanded], &[aria-expanded=true]",
+  _expanded: "&:is([data-expanded], [aria-expanded=true])",
   /**
-   * The CSS `[data-fallback]` attribute selector.
+   * The CSS `&[data-fallback]` attribute selector.
    */
   _fallback: "&[data-fallback]",
   /**
-   * The CSS `[data-filled]` attribute selector.
+   * The CSS `&[data-filled]` attribute selector.
    */
   _filled: "&[data-filled]",
   /**
-   * The CSS `[data-grabbed]` attribute selector.
-   *
-   * - `[data-grabbed]`
-   * - `[aria-grabbed=true]`
+   * The CSS `&:is([data-grabbed], [aria-grabbed=true])` attribute selector.
    */
-  _grabbed: "&[data-grabbed], &[aria-grabbed=true]",
+  _grabbed: "&:is([data-grabbed], [aria-grabbed=true])",
   /**
-   * The CSS `[data-grid]` attribute selector.
+   * The CSS `&:is([role=grid], [data-grid])` attribute selector.
    */
-  _grid: "[role=grid], &[data-grid]",
+  _grid: "&:is([role=grid], [data-grid])",
   /**
-   * The CSS `[hidden]` attribute selector.
-   *
-   * - `[hidden]`
-   * - `[data-hidden]`
-   */
-  _hidden: "&[hidden], &[data-hidden]",
-  /**
-   * The CSS `[data-holiday]` attribute selector.
+   * The CSS `&[data-holiday]` attribute selector.
    */
   _holiday: "&[data-holiday]",
   /**
-   * The CSS `[data-idle]` attribute selector.
+   * The CSS `&[data-idle]` attribute selector.
    */
   _idle: "&[data-idle]",
   /**
-   * The CSS `[data-loaded]` attribute selector.
+   * The CSS `&[data-loaded]` attribute selector.
    */
   _loaded: "&[data-loaded]",
   /**
-   * The CSS `[aria-busy=true]` attribute selector.
-   *
-   * - `[data-loading]`
-   * - `[aria-busy=true]`
+   * The CSS `&:is([data-loading], [aria-busy=true])` attribute selector.
    */
-  _loading: "&[data-loading], &[aria-busy=true]",
+  _loading: "&:is([data-loading], [aria-busy=true])",
   /**
-   * The CSS `[hidden]` attribute selector.
+   * The CSS `&[hidden]` attribute selector.
    */
   _nativeHidden: "&[hidden]",
   /**
-   * The CSS `[data-not-allowed]` attribute selector.
-   *
-   * - `[data-not-allowed]`
+   * The CSS `&[data-not-allowed]` attribute selector.
    */
   _notAllowed: "&[data-not-allowed]",
   /**
-   * The CSS `[aria-current='false']` attribute selector.
+   * The CSS `&[aria-current='false']` attribute selector.
    */
   _notCurrent: "&:not([aria-current]), &[aria-current='false']",
   /**
-   * The CSS `:not([data-fallback])` attribute selector.
+   * The CSS `&:not([data-fallback])` attribute selector.
    */
   _notFallback: "&:not([data-fallback])",
   /**
-   * The CSS `:not(:selected)` attribute selector.
-   *
-   * - `:not([data-selected])`
-   * - `:not([aria-selected=true])`
+   * The CSS `&:not([data-selected]):not([aria-selected=true])` attribute selector.
    */
   _notSelected: "&:not([data-selected]):not([aria-selected=true])",
   /**
-   * The CSS `:where([data-outside])` attribute selector.
+   * The CSS `&[data-numeric]` attribute selector.
+   */
+  _numeric: "&[data-numeric]",
+  /**
+   * The CSS `&:where([data-outside])` attribute selector.
    */
   _outside: "&:where([data-outside])",
   /**
-   * The CSS `[data-pressed]` attribute selector.
-   *
-   * - `[data-pressed]`
-   * - `[aria-pressed=true]`
+   * The CSS `&:is([data-pressed], [aria-pressed=true])` attribute selector.
    */
-  _pressed: "&[data-pressed], &[aria-pressed=true]",
+  _pressed: "&:is([data-pressed], [aria-pressed=true])",
   /**
-   * The CSS `[data-reject]` attribute selector.
+   * The CSS `&[data-reject]` attribute selector.
    */
   _reject: "&[data-reject]",
+  /**
+   * The CSS `& .ui-ripple` attribute selector.
+   */
   _ripple: "& .ui-ripple",
   /**
-   * The CSS `:selected` attribute selector.
-   *
-   * - `[data-selected]`
-   * - `[aria-selected=true]`
+   * The CSS `&:is([data-selected], [aria-selected=true])` attribute selector.
    */
-  _selected: "&[data-selected], &[aria-selected=true]",
+  _selected: "&:is([data-selected], [aria-selected=true])",
   /**
-   * The CSS `[data-start]` attribute selector.
+   * The CSS `&[data-start]` attribute selector.
    */
   _start: "&[data-start]",
   /**
-   * The CSS `[data-today]` attribute selector.
+   * The CSS `&[data-today]` attribute selector.
    */
   _today: "&[data-today]",
   /**
-   * The CSS `:where([data-weekend])` attribute selector.
+   * The CSS `&:where([data-weekend])` attribute selector.
    */
   _weekend: "&:where([data-weekend])",
+  /**
+   * The CSS `&:is([hidden], [data-hidden])` attribute selector.
+   */
+  _hidden: "&:is([hidden], [data-hidden])",
+  /**
+   * The CSS `&[data-never]` attribute selector.
+   */
+  _never: "&[data-never]",
 } as const
 
 export type Attributes = typeof attributes
@@ -176,77 +159,71 @@ export const attributeSelectors = Object.values(attributes)
 
 export const pseudoElements = {
   /**
-   * The CSS `::after` pseudo-element.
+   * The CSS `&::after` pseudo-element.
    */
   _after: "&::after",
   /**
-   * The CSS `::backdrop` pseudo-element.
+   * The CSS `&::backdrop` pseudo-element.
    */
   _backdrop: "&::backdrop",
   /**
-   * The CSS `::before` pseudo-element.
+   * The CSS `&::before` pseudo-element.
    */
   _before: "&::before",
   /**
-   * The CSS `::cue` pseudo-element.
+   * The CSS `&::cue` pseudo-element.
    */
   _cue: "&::cue",
   /**
-   * The CSS `::cue-region` pseudo-element.
+   * The CSS `&::cue-region` pseudo-element.
    */
   _cueRegion: "&::cue-region",
   /**
-   * The CSS `::file-selector-button` pseudo-element.
+   * The CSS `&::file-selector-button` pseudo-element.
    */
   _fileSelector: "&::file-selector-button",
   /**
-   * The CSS `::first-letter` pseudo-element.
+   * The CSS `&::first-letter` pseudo-element.
    */
   _firstLetter: "&::first-letter",
   /**
-   * The CSS `::first-line` pseudo-element.
+   * The CSS `&::first-line` pseudo-element.
    */
   _firstLine: "&::first-line",
   /**
-   * The CSS `::marker` pseudo-element.
+   * The CSS `&::marker` pseudo-element.
    */
   _marker: "&::marker",
   /**
-   * The CSS `::placeholder` pseudo-element.
-   *
-   * - `::placeholder`
-   * - `[data-placeholder]`
+   * The CSS `&::placeholder, &[data-placeholder]` pseudo-element.
    */
   _placeholder: "&::placeholder, &[data-placeholder]",
   /**
-   * The CSS `::-webkit-scrollbar` pseudo-element.
-   *
-   * - `::-webkit-scrollbar`
-   * - `[data-scrollbar]`
+   * The CSS `&::-webkit-scrollbar, &[data-scrollbar]` pseudo-element.
    */
   _scrollbar: "&::-webkit-scrollbar, &[data-scrollbar]",
   /**
-   * The CSS `::-webkit-scrollbar-button` pseudo-element.
+   * The CSS `&::-webkit-scrollbar-button` pseudo-element.
    */
   _scrollbarButton: "&::-webkit-scrollbar-button",
   /**
-   * The CSS `::-webkit-scrollbar-corner` pseudo-element.
+   * The CSS `&::-webkit-scrollbar-corner` pseudo-element.
    */
   _scrollbarCorner: "&::-webkit-scrollbar-corner",
   /**
-   * The CSS `::-webkit-scrollbar-thumb` pseudo-element.
+   * The CSS `&::-webkit-scrollbar-thumb` pseudo-element.
    */
   _scrollbarThumb: "&::-webkit-scrollbar-thumb",
   /**
-   * The CSS `::-webkit-scrollbar-track` pseudo-element.
+   * The CSS `&::-webkit-scrollbar-track` pseudo-element.
    */
   _scrollbarTrack: "&::-webkit-scrollbar-track",
   /**
-   * The CSS `::-webkit-scrollbar-track-piece` pseudo-element.
+   * The CSS `&::-webkit-scrollbar-track-piece` pseudo-element.
    */
   _scrollbarTrackPiece: "&::-webkit-scrollbar-track-piece",
   /**
-   * The CSS `::selection` pseudo-element.
+   * The CSS `&::selection` pseudo-element.
    */
   _selection: "&::selection",
 } as const
@@ -265,328 +242,246 @@ export const pseudoElementSelectors = Object.values(pseudoElements)
 
 export const pseudoClasses = {
   /**
-   * The CSS `:active` pseudo-class.
-   *
-   * - `:active`
-   * - `[data-active]`
-   */
-  _active: "&:active, &[data-active]",
-  /**
    * The CSS `:any-link` pseudo-class.
-   *
-   * - `:any-link`
-   * - `[data-any-link]`
    */
-  _anyLink: "&:any-link, &[data-any-link]",
+  _anyLink: "&:is(:any-link, [data-any-link])",
   /**
-   * The CSS `:autofill` pseudo-class.
+   * The CSS `&:autofill` pseudo-class.
    */
-  _autofill: "&:autofill, &:-webkit-autofill",
+  _autofill: "&:autofill",
   /**
-   * The CSS `:blank` pseudo-class.
-   *
-   * - `:blank`
-   * - `[data-blank]`
+   * The CSS `&:is(:blank, [data-blank])` pseudo-class.
    */
-  _blank: "&:blank, &[data-blank]",
+  _blank: "&:is(:blank, [data-blank])",
   /**
-   * The CSS `:checked` pseudo-class.
-   *
-   * - `:checked`
-   * - `[data-checked]`
-   * - `[aria-checked=true]`
+   * The CSS `&:is(:checked, [data-checked], [aria-checked=true])` pseudo-class.
    */
-  _checked: "&:checked, &[data-checked], &[aria-checked=true]",
+  _checked: "&:is(:checked, [data-checked], [aria-checked=true])",
   /**
-   * The CSS `> *` child combinator selector.
+   * The CSS `& > *` child combinator selector.
    */
   _child: "& > *",
   /**
-   * The CSS `:default` pseudo-class.
+   * The CSS `&:default` pseudo-class.
    */
   _default: "&:default",
   /**
-   * The CSS `:disabled` pseudo-class.
-   *
-   * - `:disabled`
-   * - `[disabled]`
-   * - `[aria-disabled=true]`
-   * - `[data-disabled]`
-   */
-  _disabled: "&:disabled, &[disabled], &[aria-disabled=true], &[data-disabled]",
-  /**
-   * The CSS `:empty` pseudo-class.
+   * The CSS `&:empty` pseudo-class.
    */
   _empty: "&:empty",
   /**
-   * The CSS `:enabled` pseudo-class.
+   * The CSS `&:is(:enabled, [data-enabled])` pseudo-class.
    */
-  _enabled: "&:enabled, &[data-enabled]",
+  _enabled: "&:is(:enabled, [data-enabled])",
   /**
-   * The CSS `:nth-of-type(even)` pseudo-class.
+   * The CSS `&:nth-of-type(even)` pseudo-class.
    */
   _even: "&:nth-of-type(even)",
   /**
-   * The CSS `:first-of-type` pseudo-class.
+   * The CSS `&:first-of-type` pseudo-class.
    */
   _first: "&:first-of-type",
   /**
-   * The CSS `:first-child` pseudo-class.
+   * The CSS `& > *:first-child` pseudo-class.
    */
   _firstChild: "& > *:first-child",
   /**
-   * The CSS `:focus` pseudo-class.
-   *
-   * - `:focus`
-   * - `[data-focus]`
+   * The CSS `&:not(:focus-within, [data-focus-within])` pseudo-class.
    */
-  _focus: "&:focus, &[data-focus]",
+  _focusWithin: "&:not(:focus-within, [data-focus-within])",
   /**
-   * The CSS `:focus-visible` pseudo-class.
-   *
-   * - `:focus-visible`
-   * - `[data-focus-visible]`
-   */
-  _focusVisible: "&:focus-visible, &[data-focus-visible]",
-  /**
-   * The CSS `:focus-within` pseudo-class.
-   *
-   * - `:focus-within`
-   * - `[data-focus-within]`
-   */
-  _focusWithin: "&:focus-within, &[data-focus-within]",
-  /**
-   * The CSS `:fullscreen` pseudo-class.
+   * The CSS `&:fullscreen` pseudo-class.
    */
   _fullScreen: "&:fullscreen",
   /**
-   * The CSS `:horizontal` pseudo-class.
-   *
-   * - `[aria-orientation=horizontal]`
-   * - `[data-orientation=horizontal]`
+   * The CSS `&:is([data-orientation=horizontal], [aria-orientation=horizontal])` pseudo-class.
    */
-  _horizontal: "&[data-orientation=horizontal], &[aria-orientation=horizontal]",
+  _horizontal:
+    "&:is([data-orientation=horizontal], [aria-orientation=horizontal])",
   /**
-   * The CSS `:hover` pseudo-class.
-   *
-   * - `:hover`
-   * - `[data-hover]`
+   * The CSS `& :where(svg:not([data-loading]))` pseudo-class.
    */
-  _hover: "&:hover, &[data-hover]",
+  _icon: "& :where(svg:not([data-loading]))",
   /**
-   * The CSS `:indeterminate` pseudo-class.
-   *
-   * - `:indeterminate`
-   * - `[aria-checked=mixed]`
-   * - `[data-indeterminate]`
+   * The CSS `&:is(:indeterminate, [data-indeterminate], [aria-checked=mixed])` pseudo-class.
    */
   _indeterminate:
-    "&:indeterminate, &[data-indeterminate], &[aria-checked=mixed]",
+    "&:is(:indeterminate, [data-indeterminate], [aria-checked=mixed])",
   /**
-   * The CSS `:in-range` pseudo-class.
-   *
-   * - `:in-range`
-   * - `[data-in-range]`
+   * The CSS `&:is(:in-range, [data-in-range])` pseudo-class.
    */
-  _inRange: "&:in-range, &[data-in-range]",
+  _inRange: "&:is(:in-range, [data-in-range])",
   /**
-   * The CSS `:invalid` attribute selector.
-   *
-   * - `[data-invalid]`
-   * - `[aria-invalid=true]`
+   * The CSS `&:is([data-invalid], [aria-invalid=true])` attribute selector.
    */
-  _invalid: "&[data-invalid], &[aria-invalid=true]",
+  _invalid: "&:is([data-invalid], [aria-invalid=true])",
   /**
-   * The CSS `:last-of-type` pseudo-class.
+   * The CSS `&:last-of-type` pseudo-class.
    */
   _last: "&:last-of-type",
   /**
-   * The CSS `:last-child` pseudo-class.
+   * The CSS `& > *:last-child` pseudo-class.
    */
   _lastChild: "& > *:last-child",
   /**
-   * The CSS `:link` pseudo-class.
-   *
-   * - `:link`
-   * - `[data-link]`
+   * The CSS `&:is(:link, [data-link])` pseudo-class.
    */
-  _link: "&:link, &[data-link]",
+  _link: "&:is(:link, [data-link])",
   /**
-   * The CSS `:modal` pseudo-class.
+   * The CSS `&:modal` pseudo-class.
    */
   _modal: "&:modal",
   /**
-   * The CSS `:active` pseudo-class.
+   * The CSS `&:active` pseudo-class.
    */
   _nativeActive: "&:active",
   /**
-   * The CSS `:checked` pseudo-class.
+   * The CSS `&:checked` pseudo-class.
    */
   _nativeChecked: "&:checked",
   /**
-   * The CSS `:disabled` pseudo-class.
-   *
-   * - `:disabled`
-   * - `[disabled]`
+   * The CSS `&:is(disabled, [disabled])` pseudo-class.
    */
-  _nativeDisabled: "&:disabled, &[disabled]",
+  _nativeDisabled: "&:is(disabled, [disabled])",
   /**
-   * The CSS `:focus` pseudo-class.
+   * The CSS `&:focus` pseudo-class.
    */
   _nativeFocus: "&:focus",
   /**
-   * The CSS `:focus-visible` pseudo-class.
+   * The CSS `&:focus-visible` pseudo-class.
    */
   _nativeFocusVisible: "&:focus-visible",
   /**
-   * The CSS `:focus-within` pseudo-class.
+   * The CSS `&:focus-within` pseudo-class.
    */
   _nativeFocusWithin: "&:focus-within",
   /**
-   * The CSS `:hover` pseudo-class.
+   * The CSS `&:hover` pseudo-class.
    */
   _nativeHover: "&:hover",
   /**
-   * The CSS `:read-only` pseudo-class.
-   *
-   * - `[readonly]`
-   * - `[aria-readonly=true]`
+   * The CSS `&:is([readonly], [aria-readonly=true])` pseudo-class.
    */
-  _nativeReadOnly: "&[readonly], &[aria-readonly=true]",
+  _nativeReadOnly: "&:is([readonly], [aria-readonly=true])",
   /**
-   * The CSS `:target` pseudo-class.
+   * The CSS `&:target` pseudo-class.
    */
   _nativeTarget: "&:target",
   /**
-   * The CSS `:valid` pseudo-class.
+   * The CSS `&:valid` pseudo-class.
    */
   _nativeValid: "&:valid",
   /**
-   * The CSS `:checked` pseudo-class.
-   *
-   * - `:not(:checked)`
-   * - `:not([data-checked])`
-   * - `:not([aria-checked=true])`
+   * The CSS `&:not(:checked):not([data-checked]):not([aria-checked=true])` pseudo-class.
    */
   _notChecked: "&:not(:checked):not([data-checked]):not([aria-checked=true])",
   /**
-   * The CSS `:not(:first-of-type)` pseudo-class.
+   * The CSS `&:not(:first-of-type)` pseudo-class.
    */
   _notFirst: "&:not(:first-of-type)",
   /**
-   * The CSS `:not(:first-child)` pseudo-class.
+   * The CSS `& > *:not(:first-child)` pseudo-class.
    */
-  _notFirstChild: "& > *:not(:first-of-type)",
+  _notFirstChild: "& > *:not(:first-child)",
   /**
-   * The CSS `:not(:last-of-type)` pseudo-class.
+   * The CSS `&:not(:last-of-type)` pseudo-class.
    */
   _notLast: "&:not(:last-of-type)",
   /**
-   * The CSS `:not(:last-child)` pseudo-class.
+   * The CSS `& > *:not(:last-child)` pseudo-class.
    */
-  _notLastChild: "& > *:not(:last-of-type)",
+  _notLastChild: "& > *:not(:last-child)",
   /**
-   * The CSS `:not(:target)` pseudo-class.
+   * The CSS `&:not(:target)` pseudo-class.
    */
   _notTarget: "&:not(:target)",
   /**
-   * The CSS `:nth-of-type(odd)` pseudo-class.
+   * The CSS `&:nth-of-type(odd)` pseudo-class.
    */
   _odd: "&:nth-of-type(odd)",
   /**
-   * The CSS `:only-of-type` pseudo-class.
+   * The CSS `&:only-of-type` pseudo-class.
    */
   _only: "&:only-of-type",
   /**
-   * The CSS `:optional` pseudo-class.
-   *
-   * - `:optional`
-   * - `[data-optional]`
+   * The CSS `&:is(:optional, [data-optional])` pseudo-class.
    */
-  _optional: "&:optional, &[data-optional]",
+  _optional: "&:is(:optional, [data-optional])",
   /**
-   * The CSS `:out-of-range` pseudo-class.
-   *
-   * - `:out-of-range`
-   * - `[data-out-of-range]`
+   * The CSS `&:is(:out-of-range, [data-out-of-range])` pseudo-class.
    */
-  _outRange: "&:out-of-range, &[data-out-of-range]",
+  _outRange: "&:is(:out-of-range, [data-out-of-range])",
   /**
-   * The CSS `:paused` pseudo-class.
-   *
-   * - `:paused`
-   * - `[data-paused]`
+   * The CSS `&:is(:paused, [data-paused])` pseudo-class.
    */
-  _paused: "&:paused, &[data-paused]",
+  _paused: "&:is(:paused, [data-paused])",
   /**
-   * The CSS `:picture-in-picture` pseudo-class.
+   * The CSS `&:picture-in-picture` pseudo-class.
    */
   _picture: "&:picture-in-picture",
   /**
-   * The CSS `:placeholder-shown` pseudo-class.
+   * The CSS `&:placeholder-shown` pseudo-class.
    */
   _placeholderShown: "&:placeholder-shown",
   /**
-   * The CSS `:playing` pseudo-class.
-   *
-   * - `:playing`
-   * - `[data-playing]`
+   * The CSS `&:is(:playing, [data-playing])` pseudo-class.
    */
-  _playing: "&:playing, &[data-playing]",
+  _playing: "&:is(:playing, [data-playing])",
   /**
-   * The CSS `:read-only` pseudo-class.
-   *
-   * - `[readonly]`
-   * - `[aria-readonly=true]`
-   * - `[data-readonly]`
+   * The CSS `&:is(:read-write, [data-read-write])` pseudo-class.
    */
-  _readOnly: "&[readonly], &[data-readonly], &[aria-readonly=true]",
+  _readWrite: "&:is(:read-write, [data-read-write])",
   /**
-   * The CSS `:read-write` pseudo-class.
-   *
-   * - `:read-write`
-   * - `[data-read-write]`
+   * The CSS `&:is(:required, [required])` pseudo-class.
    */
-  _readWrite: "&:read-write, &[data-read-write]",
+  _required: "&:is(:required, [required])",
   /**
-   * The CSS `:required` pseudo-class.
-   *
-   * - `:required`
-   * - `[required]`
+   * The CSS `&:is(:target, [data-target])` pseudo-class.
    */
-  _required: "&:required, &[required]",
+  _target: "&:is(:target, [data-target])",
   /**
-   * The CSS `:target` pseudo-class.
-   *
-   * - `:target`
-   * - `[data-target]`
+   * The CSS `&:is(:user-invalid, [data-user-invalid])` pseudo-class.
    */
-  _target: "&:target, &[data-target]",
+  _userInvalid: "&:is(:user-invalid, [data-user-invalid])",
   /**
-   * The CSS `:user-invalid` pseudo-class.
-   *
-   * - `:user-invalid`
-   * - `[data-user-invalid]`
+   * The CSS `&:is(:valid, [data-valid])` pseudo-class.
    */
-  _userInvalid: "&:user-invalid, &[data-user-invalid]",
+  _valid: "&:is(:valid, [data-valid])",
   /**
-   * The CSS `:valid` pseudo-class.
-   *
-   * - `:valid`
-   * - `[data-valid]`
+   * The CSS `&:is([data-orientation=vertical], [aria-orientation=vertical])` pseudo-class.
    */
-  _valid: "&:valid, &[data-valid]",
+  _vertical: "&:is([data-orientation=vertical], [aria-orientation=vertical])",
   /**
-   * The CSS `:vertical` pseudo-class.
-   *
-   * - `[aria-orientation=vertical]`
-   * - `[data-orientation=vertical]`
-   */
-  _vertical: "&[data-orientation=vertical], &[aria-orientation=vertical]",
-  /**
-   * The CSS `:visited` pseudo-class.
+   * The CSS `&:visited` pseudo-class.
    */
   _visited: "&:visited",
+  /**
+   * The CSS `&:is(:hover, [data-hover])` pseudo-class.
+   */
+  _hover:
+    "&:is(:hover, [data-hover]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
+  /**
+   * The CSS `&:is(:active, [data-active]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])` pseudo-class.
+   */
+  _active:
+    "&:is(:active, [data-active]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
+  /**
+   * The CSS `&:is(:focus, [data-focus])` pseudo-class.
+   */
+  _focus: "&:is(:focus, [data-focus])",
+  /**
+   * The CSS `&:is(:focus-visible, [data-focus-visible])` pseudo-class.
+   */
+  _focusVisible: "&:is(:focus-visible, [data-focus-visible])",
+  /**
+   * The CSS `&:is([readonly], [data-readonly], [aria-readonly=true])` pseudo-class.
+   */
+  _readOnly: "&:is([readonly], [data-readonly], [aria-readonly=true])",
+  /**
+   * The CSS `&:is(:disabled, [disabled], [aria-disabled=true], [data-disabled])` pseudo-class.
+   */
+  _disabled:
+    "&:is(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
 } as const
 
 export type PseudoClasses = typeof pseudoClasses

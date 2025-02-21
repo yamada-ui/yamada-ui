@@ -1,21 +1,17 @@
-import type { FC, HTMLUIProps, StatusValue, ThemeProps } from "../../core"
-import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
-import { cx } from "../../utils"
+import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { StatusStyle } from "./status.style"
+import { createSlotComponent, ui } from "../../core"
+import { statusStyle } from "./status.style"
 
-const statuses = {
-  error: { colorScheme: "danger" },
-  info: { colorScheme: "info" },
-  success: { colorScheme: "success" },
-  warning: { colorScheme: "warning" },
-} as const
+export type StatusScheme = "error" | "info" | "success" | "warning"
 
-interface StatusOptions {
+export interface StatusProps extends HTMLUIProps, ThemeProps<StatusStyle> {
   /**
    * The type of the status
    *
    * @default 'info'
    * */
-  value?: StatusValue
+  value?: StatusScheme
   /**
    * The props for the status indicator component
    */
@@ -26,52 +22,41 @@ interface StatusOptions {
   labelProps?: HTMLUIProps
 }
 
-export interface StatusProps
-  extends HTMLUIProps,
-    ThemeProps<"Status">,
-    StatusOptions {}
+export const {
+  PropsContext: StatusPropsContext,
+  usePropsContext: useStatusPropsContext,
+  withContext,
+  withProvider,
+} = createSlotComponent<StatusProps, StatusStyle>("status", statusStyle)
 
 /**
  * `Status` is component that indicate the status of a process or state.
  *
- * @see Docs https://yamada-ui.com/components/data-display/status
+ * @see Docs https://yamada-ui.com/components/status
  */
-export const Status: FC<StatusProps> = ({
-  colorScheme,
-  value = "info",
-  indicatorProps,
-  labelProps,
-  ...props
-}) => {
-  colorScheme ??= statuses[value].colorScheme
+export const Status = withProvider<"div", StatusProps>(
+  ({ children, indicatorProps, labelProps, ...rest }) => {
+    return (
+      <ui.div {...rest}>
+        <StatusIndicator {...indicatorProps} />
 
-  const [styles, mergedProps] = useComponentMultiStyle("Status", {
-    ...props,
-    colorScheme,
-  })
-  const { className, children, ...rest } = omitThemeProps(mergedProps)
+        <StatusLabel {...labelProps}>{children}</StatusLabel>
+      </ui.div>
+    )
+  },
+  "root",
+)(({ colorScheme, value = "info" }) => ({
+  colorScheme: colorScheme ?? value,
+  value,
+}))
 
-  return (
-    <ui.div
-      className={cx("ui-status", className)}
-      __css={{ ...styles.container }}
-      {...rest}
-    >
-      <ui.div
-        className="ui-status__indicator"
-        __css={{ ...styles.indicator }}
-        {...indicatorProps}
-      />
+interface StatusIndicatorProps extends HTMLUIProps {}
 
-      <ui.p
-        className="ui-status__label"
-        __css={{ ...styles.label }}
-        {...labelProps}
-      >
-        {children}
-      </ui.p>
-    </ui.div>
-  )
-}
+const StatusIndicator = withContext<"div", StatusIndicatorProps>(
+  "div",
+  "indicator",
+)()
 
-Status.__ui__ = "Status"
+interface StatusLabelProps extends HTMLUIProps<"p"> {}
+
+const StatusLabel = withContext<"p", StatusLabelProps>("p", "label")()

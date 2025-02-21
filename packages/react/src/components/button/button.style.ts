@@ -10,16 +10,17 @@ export const buttonStyle = defineComponentStyle({
     justifyContent: "center",
     overflow: "hidden",
     position: "relative",
+    rounded: "l2",
     transitionDuration: "moderate",
     transitionProperty: "common",
     userSelect: "none",
     verticalAlign: "middle",
     whiteSpace: "nowrap",
-    _disabled: {
-      layerStyle: "disabled",
-    },
     _readOnly: {
       layerStyle: "readOnly",
+    },
+    _disabled: {
+      layerStyle: "disabled",
     },
   },
 
@@ -76,8 +77,10 @@ export const buttonStyle = defineComponentStyle({
       h: "8",
       lineHeight: "{sizes.8}",
       minW: "8",
-      px: "2.5",
-      rounded: "md",
+      px: "2",
+      _icon: {
+        fontSize: "md",
+      },
     },
     sm: {
       fontSize: "sm",
@@ -85,8 +88,10 @@ export const buttonStyle = defineComponentStyle({
       h: "9",
       lineHeight: "{sizes.9}",
       minW: "9",
-      px: "3.5",
-      rounded: "md",
+      px: "3",
+      _icon: {
+        fontSize: "md",
+      },
     },
     md: {
       fontSize: "md",
@@ -95,25 +100,31 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.10}",
       minW: "10",
       px: "4",
-      rounded: "md",
+      _icon: {
+        fontSize: "lg",
+      },
     },
     lg: {
       fontSize: "lg",
-      gap: "3",
+      gap: "2.5",
       h: "11",
       lineHeight: "{sizes.11}",
       minW: "11",
-      px: "5",
-      rounded: "md",
+      px: "4.5",
+      _icon: {
+        fontSize: "2xl",
+      },
     },
     xl: {
       fontSize: "xl",
-      gap: "4",
+      gap: "3",
       h: "12",
       lineHeight: "{sizes.12}",
       minW: "12",
-      px: "6",
-      rounded: "lg",
+      px: "5",
+      _icon: {
+        fontSize: "2xl",
+      },
     },
     "2xl": {
       fontSize: "xl",
@@ -121,8 +132,10 @@ export const buttonStyle = defineComponentStyle({
       h: "14",
       lineHeight: "{sizes.14}",
       minW: "14",
-      px: "7",
-      rounded: "lg",
+      px: "5",
+      _icon: {
+        fontSize: "2xl",
+      },
     },
   },
 

@@ -18,15 +18,15 @@ interface PropsTableProps<Y extends string, M extends string> {
     colIndex: number,
     rowIndex: number,
   ) => ReactNode
-  columns: Y[]
   rows: M[]
   variant?: "column" | "grid"
+  columns?: Y[]
 }
 
 export const PropsTable = <Y extends string, M extends string>({
   variant = "grid",
   children,
-  columns,
+  columns = [],
   rows,
 }: PropsTableProps<Y, M>) => {
   if (variant === "grid") {
@@ -37,7 +37,8 @@ export const PropsTable = <Y extends string, M extends string>({
         {columns.map((column, colIndex) => (
           <GridItem
             key={colIndex}
-            fontWeight="semibold"
+            color="fg.emphasized"
+            fontWeight="medium"
             p="md"
             textAlign="center"
           >
@@ -50,8 +51,8 @@ export const PropsTable = <Y extends string, M extends string>({
             <Fragment key={rowIndex}>
               <Flex
                 align="center"
-                color="fg.muted"
-                fontWeight="semibold"
+                color="fg.emphasized"
+                fontWeight="medium"
                 p="md"
               >
                 {toTitleCase(row)}
@@ -59,7 +60,33 @@ export const PropsTable = <Y extends string, M extends string>({
 
               <For each={columns}>
                 {(column, colIndex) => (
-                  <GridItem key={colIndex} as={Center} p="md">
+                  <GridItem
+                    key={colIndex}
+                    as={Center}
+                    borderBottomWidth="1px"
+                    borderColor="purple.ghost"
+                    borderLeftWidth={!colIndex ? "1px" : undefined}
+                    borderRightWidth="1px"
+                    borderTopWidth={!rowIndex ? "1px" : undefined}
+                    p="md"
+                    roundedBottomLeft={
+                      !colIndex && rowIndex === rows.length - 1
+                        ? "l3"
+                        : undefined
+                    }
+                    roundedBottomRight={
+                      colIndex === columns.length - 1 &&
+                      rowIndex === rows.length - 1
+                        ? "l3"
+                        : undefined
+                    }
+                    roundedTopLeft={!colIndex && !rowIndex ? "l3" : undefined}
+                    roundedTopRight={
+                      colIndex === columns.length - 1 && !rowIndex
+                        ? "l3"
+                        : undefined
+                    }
+                  >
                     {children(
                       column,
                       row,
@@ -75,7 +102,7 @@ export const PropsTable = <Y extends string, M extends string>({
         </For>
       </Grid>
     )
-  } else {
+  } else if (!!columns.length) {
     return (
       <For each={columns}>
         {(column, colIndex) => (
@@ -84,26 +111,42 @@ export const PropsTable = <Y extends string, M extends string>({
               {toTitleCase(column)}
             </Heading>
 
-            <Grid gapX="lg" gapY="md" templateColumns="auto 1fr" w="full">
+            <Grid
+              borderColor="purple.ghost"
+              borderWidth="1px"
+              rounded="l3"
+              templateColumns="auto 1fr"
+              w="full"
+            >
               <For each={rows}>
                 {(row, rowIndex) => (
                   <Fragment key={rowIndex}>
                     <GridItem
                       alignItems="center"
-                      color="fg.muted"
+                      borderColor="purple.ghost"
+                      borderRightWidth="1px"
+                      borderTopWidth={!!rowIndex ? "1px" : undefined}
+                      color="fg.emphasized"
                       display="flex"
-                      fontWeight="semibold"
+                      fontWeight="medium"
+                      p="md"
                     >
                       {toTitleCase(row)}
                     </GridItem>
 
-                    {children(
-                      column,
-                      row,
-                      `${colIndex}-${rowIndex}`,
-                      colIndex,
-                      rowIndex,
-                    )}
+                    <GridItem
+                      borderColor="purple.ghost"
+                      borderTopWidth={!!rowIndex ? "1px" : undefined}
+                      p="md"
+                    >
+                      {children(
+                        column,
+                        row,
+                        `${colIndex}-${rowIndex}`,
+                        colIndex,
+                        rowIndex,
+                      )}
+                    </GridItem>
                   </Fragment>
                 )}
               </For>
@@ -111,6 +154,49 @@ export const PropsTable = <Y extends string, M extends string>({
           </Fragment>
         )}
       </For>
+    )
+  } else {
+    return (
+      <Grid
+        borderColor="purple.ghost"
+        borderWidth="1px"
+        rounded="l3"
+        templateColumns="auto 1fr"
+        w="full"
+      >
+        <For each={rows}>
+          {(row, rowIndex) => (
+            <Fragment key={rowIndex}>
+              <GridItem
+                alignItems="center"
+                borderColor="purple.ghost"
+                borderRightWidth="1px"
+                borderTopWidth={!!rowIndex ? "1px" : undefined}
+                color="fg.emphasized"
+                display="flex"
+                fontWeight="medium"
+                p="md"
+              >
+                {toTitleCase(row)}
+              </GridItem>
+
+              <GridItem
+                borderColor="purple.ghost"
+                borderTopWidth={!!rowIndex ? "1px" : undefined}
+                p="md"
+              >
+                {children(
+                  undefined as unknown as Y,
+                  row,
+                  rowIndex.toString(),
+                  0,
+                  rowIndex,
+                )}
+              </GridItem>
+            </Fragment>
+          )}
+        </For>
+      </Grid>
     )
   }
 }

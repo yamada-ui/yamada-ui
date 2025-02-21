@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { FormatByte } from "./"
+import { FormatByte } from "."
 
 type Story = StoryFn<typeof FormatByte>
 
@@ -21,11 +21,11 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithBits: Story = () => {
+export const Bits: Story = () => {
   return <FormatByte unit="bit" value={1450} />
 }
 
-export const WithLocale: Story = () => {
+export const Locale: Story = () => {
   return (
     <>
       <FormatByte locale="de-DE" value={1450} />
@@ -34,7 +34,7 @@ export const WithLocale: Story = () => {
   )
 }
 
-export const WithUnitDisplay: Story = () => {
+export const UnitDisplay: Story = () => {
   return (
     <>
       <FormatByte unitDisplay="short" value={50300} />

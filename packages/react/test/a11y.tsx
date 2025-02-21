@@ -10,12 +10,12 @@ declare module "vitest" {
   export interface Assertion extends AxeMatchers {}
 }
 
-type A11yConfigureOptions = {
+type A11yConfigureOptions = AxeCore.RunOptions & {
   globalOptions?: AxeCore.Spec
   impactLevels?: AxeCore.ImpactValue[]
-} & AxeCore.RunOptions
+}
 
-export type A11yProps = { axeOptions?: A11yConfigureOptions } & RenderOptions
+export type A11yProps = RenderOptions & { axeOptions?: A11yConfigureOptions }
 
 export async function a11y(
   ui: HTMLElement | ReactElement,

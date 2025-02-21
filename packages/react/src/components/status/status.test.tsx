@@ -1,5 +1,5 @@
+import { Status } from "."
 import { a11y, render, screen } from "../../../test"
-import { Status } from "./"
 
 describe("<Status />", () => {
   test("Status renders correctly", async () => {

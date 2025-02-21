@@ -9,11 +9,11 @@ export const Switch: ComponentMultiStyle<"Switch"> = {
       display: "inline-flex",
       position: "relative",
       verticalAlign: "top",
+      _readOnly: { cursor: "auto" },
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.4,
       },
-      _readOnly: { cursor: "auto" },
     },
     label: {
       userSelect: "none",

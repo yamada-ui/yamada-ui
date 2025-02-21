@@ -1,24 +1,14 @@
 import type { ReactNode } from "react"
-import type { FC, HTMLUIProps, ThemeProps } from "../../core"
-import type { StatHelperMessageProps } from "./stat-helper-message"
-import type { StatIconProps } from "./stat-icon"
-import type { StatLabelProps } from "./stat-label"
-import type { StatNumberProps } from "./stat-number"
-import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
-import {
-  cx,
-  findChild,
-  getValidChildren,
-  isEmpty,
-  omitChildren,
-} from "../../utils"
-import { StatContext } from "./stat-context"
-import { StatHelperMessage } from "./stat-helper-message"
-import { StatIcon } from "./stat-icon"
-import { StatLabel } from "./stat-label"
-import { StatNumber } from "./stat-number"
+import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { StatStyle } from "./stat.style"
+import { createSlotComponent, ui } from "../../core"
+import { findChild, getValidChildren, isEmpty, omitChildren } from "../../utils"
+import { TriangleIcon } from "../icon"
+import { statStyle } from "./stat.style"
 
-interface StatOptions {
+export interface StatRootProps
+  extends HTMLUIProps<"dl">,
+    ThemeProps<StatStyle> {
   /**
    * If `true`, container will center its children regardless of their width.
    *
@@ -38,9 +28,9 @@ interface StatOptions {
    */
   label?: ReactNode
   /**
-   * The stat number to use.
+   * The stat value to use.
    */
-  number?: ReactNode
+  value?: ReactNode
   /**
    * Props for stat helper message component.
    */
@@ -54,71 +44,96 @@ interface StatOptions {
    */
   labelProps?: StatLabelProps
   /**
-   * Props for stat number component.
+   * Props for stat value component.
    */
-  numberProps?: StatNumberProps
+  valueProps?: StatValueProps
 }
 
-export interface StatProps
-  extends HTMLUIProps<"dl">,
-    ThemeProps<"Stat">,
-    StatOptions {}
+export const {
+  PropsContext: StatPropsContext,
+  usePropsContext: useStatPropsContext,
+  withContext,
+  withProvider,
+} = createSlotComponent<StatRootProps, StatStyle>("stat", statStyle)
 
 /**
  * `Stat` is used to show numbers and data in a box.
  *
- * @see Docs https://yamada-ui.com/components/data-display/stat
+ * @see Docs https://yamada-ui.com/components/stat
  */
-export const Stat: FC<StatProps> = (props) => {
-  const [styles, mergedProps] = useComponentMultiStyle("Stat", props)
-  const {
-    className,
-    centerContent = false,
+export const StatRoot = withProvider<"dl", StatRootProps>(
+  ({
     children,
     helperMessage,
     icon,
     label,
-    number,
+    value,
     helperMessageProps,
     iconProps,
     labelProps,
-    numberProps,
+    valueProps,
     ...rest
-  } = omitThemeProps(mergedProps)
+  }) => {
+    const validChildren = getValidChildren(children)
+    const customStatLabel = findChild(validChildren, StatLabel)
+    const customStatValue = findChild(validChildren, StatValue)
+    const customStatHelperMessage = findChild(validChildren, StatHelperMessage)
+    const cloneChildren = !isEmpty(validChildren)
+      ? omitChildren(validChildren, StatLabel, StatValue, StatHelperMessage)
+      : children
 
-  const validChildren = getValidChildren(children)
-
-  const customStatLabel = findChild(validChildren, StatLabel)
-  const customStatNumber = findChild(validChildren, StatNumber)
-  const customStatHelperMessage = findChild(validChildren, StatHelperMessage)
-
-  const cloneChildren = !isEmpty(validChildren)
-    ? omitChildren(validChildren, StatLabel, StatNumber, StatHelperMessage)
-    : children
-
-  return (
-    <StatContext value={styles}>
-      <ui.dl
-        className={cx("ui-stat", className)}
-        __css={{
-          alignItems: centerContent ? "center" : "flex-start",
-          ...styles.container,
-        }}
-        {...rest}
-      >
+    return (
+      <ui.dl {...rest}>
         {customStatLabel ?? <StatLabel {...labelProps}>{label}</StatLabel>}
-        {customStatNumber ?? <StatNumber {...numberProps}>{number}</StatNumber>}
+        {customStatValue ?? <StatValue {...valueProps}>{value}</StatValue>}
         {customStatHelperMessage ?? (
           <StatHelperMessage {...helperMessageProps}>
             {icon ? <StatIcon type={icon} {...iconProps} /> : null}
             {helperMessage}
           </StatHelperMessage>
         )}
-
         {cloneChildren}
       </ui.dl>
-    </StatContext>
-  )
+    )
+  },
+  "root",
+)()
+
+export interface StatIconProps extends HTMLUIProps<"svg"> {
+  /**
+   * @default "increase"
+   */
+  type?: "decrease" | "increase"
 }
 
-Stat.__ui__ = "Stat"
+export const StatIcon = withContext<"svg", StatIconProps>(
+  ({ type = "increase", ...rest }) => {
+    return (
+      <TriangleIcon
+        aria-label={type === "increase" ? "Increased by" : "Decreased by"}
+        data-type={type}
+        {...rest}
+      />
+    )
+  },
+  "icon",
+)()
+
+export interface StatLabelProps extends HTMLUIProps<"dt"> {}
+
+export const StatLabel = withContext<"dt", StatLabelProps>("dt", "label")()
+
+export interface StatValueProps extends HTMLUIProps<"dd"> {}
+
+export const StatValue = withContext<"dd", StatValueProps>("dd", "value")()
+
+export interface StatUnitProps extends HTMLUIProps<"span"> {}
+
+export const StatUnit = withContext<"span", StatUnitProps>("span", "unit")()
+
+export interface StatHelperMessageProps extends HTMLUIProps<"dd"> {}
+
+export const StatHelperMessage = withContext<"dd", StatValueProps>(
+  "dd",
+  "helperMessage",
+)()

@@ -20,7 +20,7 @@ describe("<Button />", () => {
         data-testid="btn"
         loading
         loadingIcon={<>loading start</>}
-        loadingText="Submitting"
+        loadingMessage="Submitting"
       >
         Submit
       </Button>,
@@ -42,8 +42,8 @@ describe("<Button />", () => {
       <Button
         loading
         loadingIcon={<>loading end</>}
+        loadingMessage="Test if loading placement"
         loadingPlacement="end"
-        loadingText="Test if loading placement"
       >
         Submit
       </Button>,

@@ -5,13 +5,12 @@ export const globalStyle = defineStyles.globalStyle({
     borderColor: "border",
     borderStyle: "solid",
     borderWidth: "0",
+    focusVisibleRing: "outline",
+    fontFeatureSettings: '"cv11"',
     wordWrap: "break-word",
   },
   "*::placeholder, *[data-placeholder]": {
     color: "fg.subtle",
-  },
-  "*:focus-visible, *[data-focus-visible]": {
-    outline: "outside",
   },
   body: {
     colorScheme: "mono",

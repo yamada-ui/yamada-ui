@@ -1,10 +1,10 @@
 import { renderHook } from "../../../test"
 import { useEyeDropper } from "./"
 
-type WindowWithEyeDropper = {
-  EyeDropper: any
-} & typeof globalThis &
-  Window
+type WindowWithEyeDropper = typeof globalThis &
+  Window & {
+    EyeDropper: any
+  }
 
 describe("useEyeDropper", () => {
   const defaultEyeDropper =

@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { Variants } from "motion/react"
 import { useMemo } from "react"
-import { Center } from "../center"
+import { App } from "../../../storybook/components"
 import { Motion } from "./motion"
 
 type Story = StoryFn<typeof Motion>
@@ -15,12 +15,12 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         h="2xs"
-        rounded="3xl"
+        rounded="l3"
         w="2xs"
         whileFocus={{ scale: 1.2 }}
         whileHover={{ scale: 1.2 }}
@@ -30,27 +30,27 @@ export const Basic: Story = () => {
         onTapCancel={(_, info) => console.log("Tap cancels", info)}
         onTapStart={(_, info) => console.log("Tap starts", info)}
       />
-    </Center>
+    </App>
   )
 }
 
-export const WithTransition: Story = () => {
+export const Transition: Story = () => {
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         h="2xs"
-        rounded="3xl"
+        rounded="l3"
         w="2xs"
         whileHover={{ scale: 1.2, transition: { duration: 1 } }}
         whileTap={{ scale: 0.9 }}
       />
-    </Center>
+    </App>
   )
 }
 
-export const WithVariants: Story = () => {
+export const Variant: Story = () => {
   const variants: Variants = useMemo(
     () => ({
       enlarge: { scale: 1.2 },
@@ -60,22 +60,22 @@ export const WithVariants: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         h="2xs"
-        rounded="3xl"
+        rounded="l3"
         variants={variants}
         w="2xs"
         whileHover="enlarge"
         whileTap="reduce"
       />
-    </Center>
+    </App>
   )
 }
 
-export const UseStopPropagation: Story = () => {
+export const StopPropagation: Story = () => {
   const variants: Variants = useMemo(
     () => ({
       enlarge: { scale: 1.2 },
@@ -85,28 +85,28 @@ export const UseStopPropagation: Story = () => {
   )
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <App>
       <Motion
-        bg="primary"
+        bg="mono"
         cursor="pointer"
         display="flex"
         h="2xs"
         placeContent="center"
         placeItems="center"
-        rounded="3xl"
+        rounded="l3"
         variants={variants}
         w="2xs"
         whileHover="enlarge"
         whileTap="reduce"
       >
         <Motion
-          bg="white"
+          bg="mono.contrast"
           h="4xs"
-          rounded="2xl"
+          rounded="l3"
           w="4xs"
           onPointerDownCapture={(ev) => ev.stopPropagation()}
         />
       </Motion>
-    </Center>
+    </App>
   )
 }

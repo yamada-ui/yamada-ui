@@ -1,87 +1,88 @@
-import type { CSSUIProps, FC, HTMLUIProps, ThemeProps } from "../../core"
-import { cloneElement } from "react"
-import {
-  omitThemeProps,
-  ui,
-  useComponentMultiStyle,
-  useCreateVars,
-} from "../../core"
-import { cx, filterUndefined, getValidChildren } from "../../utils"
-import { InputLeftAddon, InputRightAddon } from "./input-addon"
-import { InputGroupContext } from "./input-context"
-import { InputLeftElement, InputRightElement } from "./input-element"
+import type { FC, ThemeProps } from "../../core"
+import type { Merge } from "../../utils"
+import type { FieldProps } from "../field"
+import type { GroupProps } from "../group"
+import type { InputProps } from "./input"
+import type { InputStyle } from "./input.style"
+import { cloneElement, useMemo } from "react"
+import { getValidChildren, isSomeElement } from "../../utils"
+import { useFieldProps } from "../field"
+import { Group } from "../group"
+import { InputPropsContext } from "./input"
+import { InputAddonPropsContext } from "./input-addon"
+import { InputElement } from "./input-element"
 
-export interface InputGroupProps extends HTMLUIProps, ThemeProps<"Input"> {}
+export interface InputGroupRootProps
+  extends Merge<GroupProps, ThemeProps<InputStyle>>,
+    Pick<InputProps, "errorBorderColor" | "focusBorderColor">,
+    FieldProps {}
 
-export const InputGroup: FC<InputGroupProps> = (props) => {
-  const [styles] = useComponentMultiStyle("Input", props)
-  const { className, children, ...rest } = omitThemeProps(props)
-
-  const [vars, variableProps] = useCreateVars({ ...styles.field, ...rest }, [
-    "minHeight",
-    "minH",
-    "height",
-    "h",
-    "fontSize",
-  ])
-  const minHeight = variableProps.minHeight ?? variableProps.minH
-  const height = variableProps.height ?? variableProps.h
-  const fieldHeight = minHeight ?? height
-  const fieldFontSize = variableProps.fontSize
-
-  const groupProps: CSSUIProps = {}
-
+export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
+  const {
+    props: {
+      size,
+      variant,
+      children,
+      disabled,
+      errorBorderColor,
+      focusBorderColor,
+      readOnly,
+      required,
+      ...rest
+    },
+    dataProps,
+  } = useFieldProps(props)
   const validChildren = getValidChildren(children)
+  const cloneChildren = useMemo(
+    () =>
+      validChildren.map((child, index) => {
+        const first = !index
 
-  validChildren.forEach((child: any) => {
-    if (fieldHeight && child.type === InputLeftElement)
-      groupProps.paddingStart = `${fieldHeight} !important`
+        if (isSomeElement(child, InputElement)) {
+          return cloneElement(child, {
+            "data-ungrouped": "",
+            placement: first ? "start" : "end",
+            ...child.props,
+          })
+        } else {
+          return child
+        }
+      }),
+    [validChildren],
+  )
 
-    if (fieldHeight && child.type === InputRightElement)
-      groupProps.paddingEnd = `${fieldHeight} !important`
-
-    if (child.type === InputLeftAddon) groupProps.roundedLeft = "0px !important"
-
-    if (child.type === InputRightAddon)
-      groupProps.roundedRight = "0px !important"
-  })
-
-  const cloneChildren = validChildren.map((child) => {
-    const addonElement = [
-      InputLeftAddon,
-      InputRightAddon,
-      InputLeftElement,
-      InputRightElement,
-    ].some((type) => child.type === type)
-
-    if (addonElement) {
-      return child
-    } else {
-      const childProps = filterUndefined({
-        size: child.props?.size ?? props.size,
-        variant: child.props?.variant ?? props.variant,
-        ...child.props,
-      })
-
-      return cloneElement(child, Object.assign(childProps, groupProps))
-    }
-  })
+  const context = useMemo(
+    () => ({
+      size,
+      variant,
+      disabled,
+      errorBorderColor,
+      focusBorderColor,
+      readOnly,
+      required,
+      ...dataProps,
+    }),
+    [
+      size,
+      variant,
+      disabled,
+      errorBorderColor,
+      focusBorderColor,
+      readOnly,
+      required,
+      dataProps,
+    ],
+  )
 
   return (
-    <InputGroupContext value={{ fieldFontSize, fieldHeight, styles }}>
-      <ui.div
-        className={cx("ui-input-group", className)}
-        role="group"
-        __css={{
-          vars,
-          ...styles.container,
-        }}
-        {...rest}
-      >
-        {cloneChildren}
-      </ui.div>
-    </InputGroupContext>
+    <InputPropsContext value={context}>
+      <InputAddonPropsContext value={context}>
+        <Group attached {...rest}>
+          {cloneChildren}
+        </Group>
+      </InputAddonPropsContext>
+    </InputPropsContext>
   )
 }
 
-InputGroup.__ui__ = "InputGroup"
+InputGroupRoot.__ui__ = "InputGroupRoot"

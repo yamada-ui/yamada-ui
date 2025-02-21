@@ -1,19 +1,19 @@
-import type { FC, HTMLUIProps, ThemeProps } from "../../core"
-import { omitThemeProps, ui, useComponentStyle } from "../../core"
-import { cx } from "../../utils"
+import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { EmStyle } from "./em.style"
+import { createComponent } from "../../core"
+import { emStyle } from "./em.style"
 
-export interface EmProps extends HTMLUIProps<"em">, ThemeProps<"Em"> {}
+export interface EmProps extends HTMLUIProps<"em">, ThemeProps<EmStyle> {}
+
+export const {
+  PropsContext: EmPropsContext,
+  usePropsContext: useEmPropsContext,
+  withContext,
+} = createComponent<EmProps, EmStyle>("em", emStyle)
 
 /**
  * `Em` is a component that represents emphasized text. By default, it renders a `em` element.
  *
- * @see Docs https://yamada-ui.com/components/typography/em
+ * @see Docs https://yamada-ui.com/components/em
  */
-export const Em: FC<EmProps> = (props) => {
-  const [css, mergedProps] = useComponentStyle("Em", props)
-  const { className, ...rest } = omitThemeProps(mergedProps)
-
-  return <ui.em className={cx("ui-em", className)} __css={css} {...rest} />
-}
-
-Em.__ui__ = "Em"
+export const Em = withContext("em")()

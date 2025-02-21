@@ -14,7 +14,7 @@ export const Basic = () => {
   return <Text>{flg ? "larger than 1280px" : "smaller than 1280px"}</Text>
 }
 
-export const UseMulti = () => {
+export const Multiple = () => {
   const [isLarge, isDark] = useMediaQuery([
     "(min-width: 1280px)",
     "(prefers-color-scheme: dark)",

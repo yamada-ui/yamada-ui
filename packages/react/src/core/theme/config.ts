@@ -20,7 +20,7 @@ import type {
 import type { ComponentSlotStyle } from "./index.types"
 
 interface DefineConfig {
-  <T extends ThemeConfig>(value: T): T
+  (value: ThemeConfig): ThemeConfig
 }
 
 export const defineConfig: DefineConfig = (value) => value

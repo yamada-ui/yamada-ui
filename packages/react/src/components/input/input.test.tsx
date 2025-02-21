@@ -1,12 +1,5 @@
 import { a11y, render, screen } from "../../../test"
-import {
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  InputLeftElement,
-  InputRightAddon,
-  InputRightElement,
-} from "./"
+import { Input, InputGroup } from "./"
 
 describe("<Input />", () => {
   test("passes a11y test", async () => {
@@ -21,15 +14,11 @@ describe("<Input />", () => {
 
   test("Elements inside input render correctly", async () => {
     render(
-      <InputGroup>
-        <InputLeftElement>
-          <span>Hello</span>
-        </InputLeftElement>
+      <InputGroup.Root>
+        <InputGroup.Element>Hello</InputGroup.Element>
         <Input />
-        <InputRightElement>
-          <span>World</span>
-        </InputRightElement>
-      </InputGroup>,
+        <InputGroup.Element>World</InputGroup.Element>
+      </InputGroup.Root>,
     )
 
     const hello = await screen.findByText(/Hello/i)
@@ -40,10 +29,11 @@ describe("<Input />", () => {
 
   test("Elements inside input-addon render correctly", async () => {
     render(
-      <InputGroup>
-        <InputLeftAddon>https:</InputLeftAddon>
-        <InputRightAddon>.com</InputRightAddon>
-      </InputGroup>,
+      <InputGroup.Root>
+        <InputGroup.Addon>https:</InputGroup.Addon>
+        <Input />
+        <InputGroup.Addon>.com</InputGroup.Addon>
+      </InputGroup.Root>,
     )
 
     const scheme = await screen.findByText(/https:/i)

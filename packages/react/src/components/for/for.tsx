@@ -2,7 +2,7 @@ import type { ReactNode } from "react"
 import type { HTMLUIProps } from "../../core"
 import { isArray } from "../../utils"
 
-interface ForOptions<T> {
+export interface ForProps<T> extends Omit<HTMLUIProps, "children"> {
   /**
    * The render function to render each item in the array.
    */
@@ -17,17 +17,13 @@ interface ForOptions<T> {
   fallback?: ReactNode
 }
 
-export interface ForProps<T>
-  extends Omit<HTMLUIProps, "children">,
-    ForOptions<T> {}
-
 /**
  * `For` is a component used to loop over an array and render a component for each item.
  *
- * @see Docs https://yamada-ui.com/components/other/for
+ * @see Docs https://yamada-ui.com/components/for
  */
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
-export const For = <T extends unknown>({
+export const For = <T extends any>({
   children,
   each,
   fallback,

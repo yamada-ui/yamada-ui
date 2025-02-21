@@ -1,4 +1,4 @@
-import type { DataListItemProps } from "./"
+import type { DataListItemProps } from "."
 import { a11y } from "../../../test"
 import { DataList } from "./"
 
@@ -14,6 +14,6 @@ describe("<DataList />", () => {
       { description: "記憶操作の魔女", term: "西園寺リカ" },
     ]
 
-    await a11y(<DataList items={items} />)
+    await a11y(<DataList.Root items={items} />)
   })
 })

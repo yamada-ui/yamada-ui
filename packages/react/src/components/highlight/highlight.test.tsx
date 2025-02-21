@@ -1,6 +1,6 @@
+import { Highlight, useHighlight } from "."
 import { render, renderHook } from "../../../test"
 import { noop } from "../../utils"
-import { Highlight, useHighlight } from "./"
 
 describe("<Highlight />", () => {
   test.each([[], ""])(

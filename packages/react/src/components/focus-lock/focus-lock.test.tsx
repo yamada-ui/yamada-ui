@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { render, renderHook, screen, waitFor } from "../../../test"
-import { FocusLock } from "./"
+import { FocusLock } from "./focus-lock"
 
 describe("<FocusLock />", () => {
   test("correctly focuses on elements within the lock", () => {

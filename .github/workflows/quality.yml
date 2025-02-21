@@ -65,7 +65,7 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/.*/(src|tests|package.json|tsconfig.json),scripts/setup-test.ts,vitest.config.mts"
+          file_patterns: "packages/.*/(src|package.json|tsconfig.json|vitest.config.mts),scripts/setup-test.ts"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
@@ -88,7 +88,6 @@ jobs:
 
   eslint:
     name: ESLint
-    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -110,7 +109,6 @@ jobs:
 
   type_script:
     name: TypeScript
-    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -120,7 +118,7 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/,stories/,scripts/,tsconfig.json"
+          file_patterns: "packages/,scripts/,tsconfig.json"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
@@ -141,7 +139,7 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/,stories/,scripts/,.prettierrc.json,.prettierignore"
+          file_patterns: "packages/,scripts/,.prettierrc.json,.prettierignore"
 
       - name: Check docs modified files
         id: check-docs-modified
@@ -159,4 +157,4 @@ jobs:
 
       - name: Run docs format
         if: steps.check-docs-modified.outputs.changed == 'true'
-        run: pnpm docs:format
+        run: pnpm format:docs

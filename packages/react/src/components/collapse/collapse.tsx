@@ -1,15 +1,74 @@
+import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
+import type {
+  MotionProps,
+  MotionTransitionVariants,
+  WithTransitionProps,
+} from "../motion"
 import type { CollapseStyle } from "./collapse.style"
-import type { UseCollapseProps } from "./use-collapse"
 import { AnimatePresence } from "motion/react"
+import { useEffect, useMemo, useState } from "react"
 import { createComponent } from "../../core"
-import { motion } from "../motion"
+import { createdDom, isNumeric } from "../../utils"
+import { Motion } from "../motion"
+import { createTransition } from "../motion"
 import { collapseStyle } from "./collapse.style"
-import { useCollapse } from "./use-collapse"
+
+const variants: Variants = {
+  enter: ({
+    animationOpacity,
+    delay,
+    duration,
+    endingHeight: height,
+    enter,
+    transition,
+    transitionEnd,
+  } = {}) => ({
+    ...(animationOpacity ? { opacity: 1 } : {}),
+    height,
+    transition: createTransition.enter(transition?.enter)(delay, duration),
+    transitionEnd: transitionEnd?.enter,
+    ...enter,
+  }),
+  exit: ({
+    animationOpacity,
+    delay,
+    duration,
+    exit,
+    startingHeight: height,
+    transition,
+    transitionEnd,
+  } = {}) => ({
+    ...(animationOpacity ? { opacity: isNumeric(height) ? 1 : 0 } : {}),
+    height,
+    transition: createTransition.exit(transition?.exit)(delay, duration),
+    transitionEnd: transitionEnd?.exit,
+    ...exit,
+  }),
+} satisfies MotionTransitionVariants
 
 export interface CollapseProps
-  extends UseCollapseProps,
-    ThemeProps<CollapseStyle> {}
+  extends WithTransitionProps<MotionProps>,
+    ThemeProps<CollapseStyle> {
+  /**
+   * If `true`, the opacity of the content will be animated.
+   *
+   * @default true
+   */
+  animationOpacity?: boolean
+  /**
+   * The height you want the content in its expanded state.
+   *
+   * @default "auto"
+   */
+  endingHeight?: number | string
+  /**
+   * The height you want the content in its collapsed state.
+   *
+   * @default 0
+   */
+  startingHeight?: number | string
+}
 
 export const {
   PropsContext: CollapsePropsContext,
@@ -20,14 +79,96 @@ export const {
 /**
  * `Collapse` is a component that allows you to expand or collapse an element for display.
  *
- * @see Docs https://yamada-ui.com/components/transitions/collapse
+ * @see Docs https://yamada-ui.com/components/collapse
  */
-export const Collapse = withContext((props) => {
-  const { custom, open, getRootProps } = useCollapse(props)
+export const Collapse = withContext(
+  ({
+    style,
+    animationOpacity = true,
+    delay,
+    duration,
+    endingHeight = "auto",
+    open: openProp,
+    startingHeight = 0,
+    transition: transitionProp,
+    transitionEnd,
+    unmountOnExit,
+    ...rest
+  }) => {
+    const [mounted, setMounted] = useState(false)
+    const animate = openProp || unmountOnExit ? "enter" : "exit"
+    const open = unmountOnExit ? openProp : true
 
-  return (
-    <AnimatePresence custom={custom} initial={false}>
-      {open ? <motion.div {...getRootProps()} /> : null}
-    </AnimatePresence>
-  )
-})()
+    const transition = useMemo(() => {
+      if (!mounted) {
+        return { enter: { duration: 0 } }
+      } else if (transitionProp) {
+        return transitionProp
+      } else {
+        return {
+          enter: {
+            height: {
+              duration: duration ?? 0.3,
+              ease: [0.25, 0.1, 0.25, 1],
+            },
+            opacity: {
+              duration: duration ?? 0.4,
+              ease: [0.25, 0.1, 0.25, 1],
+            },
+          },
+          exit: {
+            height: {
+              duration: duration ?? 0.3,
+              ease: [0.25, 0.1, 0.25, 1],
+            },
+            opacity: {
+              duration: duration ?? 0.4,
+              ease: [0.25, 0.1, 0.25, 1],
+            },
+          },
+        }
+      }
+    }, [mounted, duration, transitionProp])
+
+    const custom = useMemo(
+      () => ({
+        animationOpacity,
+        delay,
+        duration,
+        endingHeight,
+        startingHeight,
+        transition,
+        transitionEnd,
+      }),
+      [
+        animationOpacity,
+        delay,
+        duration,
+        endingHeight,
+        startingHeight,
+        transition,
+        transitionEnd,
+      ],
+    )
+
+    useEffect(() => {
+      if (createdDom()) setMounted(true)
+    }, [])
+
+    return (
+      <AnimatePresence custom={custom} initial={false}>
+        {open ? (
+          <Motion
+            style={{ overflow: "hidden", ...style }}
+            animate={animate}
+            custom={custom}
+            exit="exit"
+            initial={unmountOnExit ? "exit" : false}
+            variants={variants}
+            {...rest}
+          />
+        ) : null}
+      </AnimatePresence>
+    )
+  },
+)()

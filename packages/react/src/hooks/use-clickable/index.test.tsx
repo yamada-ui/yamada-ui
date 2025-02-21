@@ -73,7 +73,7 @@ describe("useClickable", () => {
 
   test("does not call onMouseDown when disabled", () => {
     const onMouseDown = vi.fn()
-    const { button } = setup({ isDisabled: true, onMouseDown })
+    const { button } = setup({ disabled: true, onMouseDown })
     act(() => {
       fireEvent.mouseDown(button)
     })
@@ -130,7 +130,7 @@ describe("useClickable", () => {
 
   test("does not call onMouseOver when disabled", () => {
     const onMouseOver = vi.fn()
-    const { button } = setup({ isDisabled: true, onMouseOver })
+    const { button } = setup({ disabled: true, onMouseOver })
     act(() => {
       fireEvent.mouseOver(button)
     })
@@ -139,7 +139,7 @@ describe("useClickable", () => {
 
   test("does not call onClick when disabled", () => {
     const onClick = vi.fn()
-    const { button } = setup({ isDisabled: true, onClick })
+    const { button } = setup({ disabled: true, onClick })
     act(() => {
       fireEvent.click(button)
     })
@@ -148,7 +148,7 @@ describe("useClickable", () => {
 
   test("does not call onClick when disabled but isFocusable", () => {
     const onClick = vi.fn()
-    const { button } = setup({ isDisabled: true, isFocusable: true, onClick })
+    const { button } = setup({ disabled: true, focusable: true, onClick })
     act(() => {
       fireEvent.click(button)
     })

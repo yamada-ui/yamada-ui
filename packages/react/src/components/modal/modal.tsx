@@ -1,40 +1,42 @@
-import type { KeyboardEvent } from "react"
-import type {
-  CSSUIObject,
-  CSSUIProps,
-  FC,
-  HTMLUIProps,
-  ThemeProps,
-  Token,
-} from "../../core"
+import type { PropsWithChildren, ReactNode } from "react"
+import type { FC, HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { ButtonProps, CloseButtonProps } from "../button"
 import type { FocusLockProps } from "../focus-lock"
-import type { MotionTransitionProps } from "../motion"
+import type { MotionProps, MotionTransitionProps } from "../motion"
 import type { PortalProps } from "../portal"
-import type { ModalContentProps } from "./modal-content"
+import type { ModalStyle } from "./modal.style"
+import type { UseModalProps, UseModalReturn } from "./use-modal"
 import { AnimatePresence } from "motion/react"
-import { cloneElement, useCallback, useRef } from "react"
+import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
-import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
-import { useValue } from "../../hooks/use-value"
-import { findChild, findChildren, getValidChildren } from "../../utils"
+import { createSlotComponent, ui } from "../../core"
+import { findChildren, getValidChildren, wrapOrPassProps } from "../../utils"
+import { Button, CloseButton } from "../button"
+import { fadeScaleVariants, fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
+import { Motion } from "../motion"
 import { Portal } from "../portal"
-import { DialogOverlay } from "./dialog-overlay"
-import { DrawerContent } from "./drawer-content"
-import { DrawerOverlay } from "./drawer-overlay"
-import { ModalContent } from "./modal-content"
-import { ModalProvider } from "./modal-context"
-import { ModalOverlay } from "./modal-overlay"
+import { slideFadeVariants } from "../slide"
+import { Slot } from "../slot"
+import { modalStyle } from "./modal.style"
+import { useModal } from "./use-modal"
 
-export interface ModalOptions
-  extends Pick<
-    FocusLockProps,
-    | "autoFocus"
-    | "finalFocusRef"
-    | "initialFocusRef"
-    | "lockFocusAcrossFrames"
-    | "restoreFocus"
-  > {
+interface ModalContext
+  extends Omit<UseModalReturn, "getRootProps">,
+    Pick<ModalRootProps, "animationScheme" | "duration" | "withCloseButton"> {}
+
+export interface ModalRootProps
+  extends ThemeProps<ModalStyle>,
+    Omit<UseModalProps, "title">,
+    Pick<
+      FocusLockProps,
+      | "autoFocus"
+      | "finalFocusRef"
+      | "initialFocusRef"
+      | "lockFocusAcrossFrames"
+      | "restoreFocus"
+    >,
+    ShorthandModalContentProps {
   /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
    *
@@ -42,11 +44,11 @@ export interface ModalOptions
    */
   allowPinchZoom?: boolean
   /**
-   * The animation of the tooltip.
+   * The animation of the modal.
    *
    * @default 'scale'
    */
-  animation?: "bottom" | "left" | "none" | "right" | "scale" | "top"
+  animationScheme?: "bottom" | "left" | "none" | "right" | "scale" | "top"
   /**
    * If `true`, scrolling will be disabled on the `body` when the modal opens.
    *
@@ -54,54 +56,13 @@ export interface ModalOptions
    */
   blockScrollOnMount?: boolean
   /**
-   * If `true`, the modal will close when the `Esc` key is pressed.
-   *
-   * @default true
-   */
-  closeOnEsc?: boolean
-  /**
-   * If `true`, the modal will close when the overlay is clicked.
-   *
-   * @default true
-   */
-  closeOnOverlay?: boolean
-  /**
    * The animation duration.
    */
   duration?: MotionTransitionProps["duration"]
   /**
-   * If `true`, the open will be opened.
+   * The modal trigger to use.
    */
-  open?: boolean
-  /**
-   * The CSS `padding` property.
-   */
-  outside?: CSSUIProps["p"]
-  /**
-   * The placement of the modal.
-   *
-   * @default 'center'
-   */
-  placement?: Token<
-    | "bottom"
-    | "bottom-left"
-    | "bottom-right"
-    | "center"
-    | "left"
-    | "right"
-    | "top"
-    | "top-left"
-    | "top-right"
-  >
-  /**
-   * Where scroll behavior should originate.
-   *
-   * - `inside`: scroll only occurs within the `ModalBody`.
-   * - `outside`: the entire `ModalContent` will scroll within the viewport.
-   *
-   * @default 'inside'
-   */
-  scrollBehavior?: "inside" | "outside"
+  trigger?: ReactNode
   /**
    * If `true`, display the modal close button.
    *
@@ -115,173 +76,395 @@ export interface ModalOptions
    */
   withOverlay?: boolean
   /**
-   * Props for modal container element.
-   */
-  containerProps?: HTMLUIProps
-  /**
    * Props to be forwarded to the portal component.
    */
   portalProps?: Omit<PortalProps, "children">
   /**
-   * Callback invoked to close the modal.
-   */
-  onClose?: () => void
-  /**
    * Callback function to run side effects after the modal has closed.
    */
   onCloseComplete?: () => void
-  /**
-   * Callback fired when the escape key is pressed and focus is within modal.
-   */
-  onEsc?(): void
-  /**
-   * Callback fired when the overlay is clicked.
-   */
-  onOverlayClick?: () => void
 }
 
-export interface ModalProps
-  extends ModalContentProps,
-    ThemeProps<"Modal">,
-    ModalOptions {}
+export const {
+  component,
+  ComponentContext: ModalContext,
+  PropsContext: ModalPropsContext,
+  useComponentContext: useModalContext,
+  usePropsContext: useModalPropsContext,
+  withContext,
+  withProvider,
+} = createSlotComponent<ModalRootProps, ModalStyle, ModalContext>(
+  "modal",
+  modalStyle,
+)
 
 /**
  * `Modal` is a component that is displayed over the main content to focus the user's attention solely on the information.
  *
  * @see Docs https://yamada-ui.com/components/overlay/modal
  */
-export const Modal: FC<ModalProps> = ({ size, ...props }) => {
-  const [styles, mergedProps] = useComponentMultiStyle("Modal", {
-    size,
-    ...props,
-  })
-  const {
-    className,
+export const ModalRoot = withProvider<"div", ModalRootProps>(
+  ({
     allowPinchZoom = false,
-    animation = "scale",
+    animationScheme = "scale",
     autoFocus,
     blockScrollOnMount = true,
+    body,
+    cancel,
     children,
-    closeOnEsc = true,
-    closeOnOverlay = true,
     duration,
     finalFocusRef,
+    footer,
+    header,
     initialFocusRef,
     lockFocusAcrossFrames = true,
-    open,
-    outside = "fallback(4, 1rem)",
-    placement: _placement = "center",
+    middle,
     restoreFocus,
-    scrollBehavior = "inside",
+    success,
+    title,
+    trigger,
     withCloseButton = true,
     withOverlay = true,
-    containerProps,
     portalProps,
-    onClose,
+    onCancel,
     onCloseComplete,
-    onEsc,
-    onOverlayClick,
-    ...rest
-  } = omitThemeProps(mergedProps)
-  const headerRef = useRef<HTMLElement>(null)
-  const bodyRef = useRef<HTMLElement>(null)
-  const placement = useValue(_placement)
-  const validChildren = getValidChildren(children)
-  const [customModalOverlay, ...cloneChildren] = findChildren(
-    validChildren,
-    ModalOverlay,
-    DialogOverlay,
-    DrawerOverlay,
-  )
-  const css: CSSUIObject = {
-    alignItems: placement.includes("top")
-      ? "flex-start"
-      : placement.includes("bottom")
-        ? "flex-end"
-        : "center",
-    display: "flex",
-    h: "100dvh",
-    justifyContent: placement.includes("left")
-      ? "flex-start"
-      : placement.includes("right")
-        ? "flex-end"
-        : "center",
-    left: 0,
-    p: size !== "full" ? outside : undefined,
-    position: "fixed",
-    top: 0,
-    w: "100vw",
-    zIndex: "fallback(jeice, 110)",
-  }
+    onMiddle,
+    onSuccess,
+    ...props
+  }) => {
+    const validChildren = getValidChildren(children)
+    const [openTrigger, ...omittedChildren] = findChildren(
+      validChildren,
+      ModalOpenTrigger,
+    )
+    const [customOverlay, ...cloneChildren] = findChildren(
+      omittedChildren,
+      ModalOverlay,
+    )
+    const { open, getRootProps, ...rest } = useModal(props)
+    const hasChildren = !!cloneChildren.length
+    const customOpenTrigger = trigger ? (
+      <ModalOpenTrigger>{trigger}</ModalOpenTrigger>
+    ) : null
 
-  const onKeyDown = useCallback(
-    (ev: KeyboardEvent) => {
-      if (ev.key !== "Escape") return
+    const context = useMemo(
+      () => ({
+        animationScheme,
+        duration,
+        open,
+        withCloseButton,
+        ...rest,
+      }),
+      [animationScheme, duration, open, withCloseButton, rest],
+    )
 
-      ev.stopPropagation()
+    return (
+      <ModalContext value={context}>
+        {openTrigger ?? customOpenTrigger}
 
-      if (closeOnEsc) onClose?.()
+        <AnimatePresence onExitComplete={onCloseComplete}>
+          {open ? (
+            <Portal {...portalProps}>
+              <FocusLock
+                autoFocus={autoFocus}
+                finalFocusRef={finalFocusRef}
+                initialFocusRef={initialFocusRef}
+                lockFocusAcrossFrames={lockFocusAcrossFrames}
+                restoreFocus={restoreFocus}
+              >
+                <RemoveScroll
+                  allowPinchZoom={allowPinchZoom}
+                  enabled={blockScrollOnMount}
+                  forwardProps
+                >
+                  <ui.div {...getRootProps()}>
+                    {customOverlay ?? (withOverlay ? <ModalOverlay /> : null)}
 
-      onEsc?.()
-    },
-    [closeOnEsc, onClose, onEsc],
-  )
+                    {hasChildren ? (
+                      cloneChildren
+                    ) : (
+                      <ShorthandModalContent
+                        body={body}
+                        cancel={cancel}
+                        footer={footer}
+                        header={header}
+                        middle={middle}
+                        success={success}
+                        title={title}
+                        onCancel={onCancel}
+                        onMiddle={onMiddle}
+                        onSuccess={onSuccess}
+                      />
+                    )}
+                  </ui.div>
+                </RemoveScroll>
+              </FocusLock>
+            </Portal>
+          ) : null}
+        </AnimatePresence>
+      </ModalContext>
+    )
+  },
+  "root",
+)()
 
-  let drawerContent = findChild(validChildren, DrawerContent)
+export interface ModalOpenTriggerProps extends PropsWithChildren {}
 
-  if (drawerContent)
-    drawerContent = cloneElement<any>(drawerContent, { onKeyDown })
+export const ModalOpenTrigger = component<"fragment", ModalOpenTriggerProps>(
+  (props) => {
+    const { getOpenTriggerProps } = useModalContext()
+
+    return <Slot {...getOpenTriggerProps(props)} />
+  },
+  "openTrigger",
+)()
+
+export interface ModalCloseTriggerProps extends PropsWithChildren {}
+
+export const ModalCloseTrigger = component<"fragment", ModalCloseTriggerProps>(
+  (props) => {
+    const { getCloseTriggerProps } = useModalContext()
+
+    return <Slot {...getCloseTriggerProps(props)} />
+  },
+  "closeTrigger",
+)()
+
+export interface ModalCloseButtonProps extends CloseButtonProps {}
+
+export const ModalCloseButton = withContext<"button", ModalCloseButtonProps>(
+  CloseButton,
+  "closeButton",
+)(undefined, (props) => {
+  const { getCloseButtonProps } = useModalContext()
+
+  return { ...getCloseButtonProps(props) }
+})
+
+export interface ModalOverlayProps extends MotionProps {}
+
+export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
+  const { animationScheme, duration, getOverlayProps } = useModalContext()
 
   return (
-    <ModalProvider
-      value={{
-        animation,
-        bodyRef,
-        closeOnOverlay,
-        duration,
-        headerRef,
-        open,
-        scrollBehavior,
-        styles,
-        withCloseButton,
-        onClose,
-        onOverlayClick,
-      }}
-    >
-      <AnimatePresence onExitComplete={onCloseComplete}>
-        {open ? (
-          <Portal {...portalProps}>
-            <FocusLock
-              autoFocus={autoFocus}
-              finalFocusRef={finalFocusRef}
-              initialFocusRef={initialFocusRef}
-              lockFocusAcrossFrames={lockFocusAcrossFrames}
-              restoreFocus={restoreFocus}
-            >
-              <RemoveScroll
-                allowPinchZoom={allowPinchZoom}
-                enabled={blockScrollOnMount}
-                forwardProps
-              >
-                <ui.div __css={css} {...containerProps}>
-                  {customModalOverlay ??
-                    (withOverlay && size !== "full" ? <ModalOverlay /> : null)}
+    <Motion
+      custom={{ duration }}
+      {...(animationScheme !== "none"
+        ? {
+            animate: "enter",
+            exit: "exit",
+            initial: "exit",
+            variants: fadeVariants,
+          }
+        : {})}
+      {...(getOverlayProps(props as HTMLProps) as MotionProps)}
+    />
+  )
+}, "overlay")()
 
-                  {drawerContent ?? (
-                    <ModalContent
-                      className={className}
-                      onKeyDown={onKeyDown}
-                      {...rest}
-                    >
-                      {cloneChildren}
-                    </ModalContent>
-                  )}
-                </ui.div>
-              </RemoveScroll>
-            </FocusLock>
-          </Portal>
-        ) : null}
-      </AnimatePresence>
-    </ModalProvider>
+const getAnimationProps = (
+  animation: ModalRootProps["animationScheme"] = "scale",
+  duration?: MotionTransitionProps["duration"],
+) => {
+  const sharedProps = { animate: "enter", exit: "exit", initial: "exit" }
+
+  switch (animation) {
+    case "scale":
+      return {
+        ...sharedProps,
+        custom: { duration, reverse: true, scale: 0.95 },
+        variants: fadeScaleVariants,
+      }
+    case "top":
+      return {
+        ...sharedProps,
+        custom: { duration, offsetY: -16, reverse: true },
+        variants: slideFadeVariants,
+      }
+    case "right":
+      return {
+        ...sharedProps,
+        custom: { duration, offsetX: 16, reverse: true },
+        variants: slideFadeVariants,
+      }
+    case "left":
+      return {
+        ...sharedProps,
+        custom: { duration, offsetX: -16, reverse: true },
+        variants: slideFadeVariants,
+      }
+    case "bottom":
+      return {
+        ...sharedProps,
+        custom: { duration, offsetY: 16, reverse: true },
+        variants: slideFadeVariants,
+      }
+    default:
+      return {}
+  }
+}
+
+export interface ModalContentProps
+  extends Omit<MotionProps<"section">, "children">,
+    PropsWithChildren {}
+
+export const ModalContent = withContext<"div", ModalContentProps>(
+  ({ children, ...rest }) => {
+    const { animationScheme, duration, withCloseButton, getContentProps } =
+      useModalContext()
+    const validChildren = getValidChildren(children)
+    const [customCloseButton, ...cloneChildren] = findChildren(
+      validChildren,
+      ModalCloseButton,
+    )
+
+    return (
+      <Motion
+        as="section"
+        {...getAnimationProps(animationScheme, duration)}
+        {...(getContentProps(
+          rest as HTMLProps<"section">,
+        ) as MotionProps<"section">)}
+      >
+        {customCloseButton ?? (withCloseButton ? <ModalCloseButton /> : null)}
+
+        {cloneChildren}
+      </Motion>
+    )
+  },
+  "content",
+)()
+
+interface ShorthandModalContentProps {
+  /**
+   * The modal body to use.
+   */
+  body?: ModalBodyProps | ReactNode
+  /**
+   * The modal cancel button to use.
+   */
+  cancel?: ButtonProps | ReactNode
+  /**
+   * The modal footer to use.
+   */
+  footer?: ModalFooterProps | ReactNode
+  /**
+   * The modal header to use.
+   */
+  header?: ModalHeaderProps | ReactNode
+  /**
+   * The modal middle button to use.
+   */
+  middle?: ButtonProps | ReactNode
+  /**
+   * The modal success button to use.
+   */
+  success?: ButtonProps | ReactNode
+  /**
+   * The modal title to use.
+   */
+  title?: ModalTitleProps | ReactNode
+  /**
+   * The callback invoked when cancel button clicked.
+   */
+  onCancel?: (onClose: () => void) => void
+  /**
+   * The callback invoked when middle button clicked.
+   */
+  onMiddle?: (onClose: () => void) => void
+  /**
+   * The callback invoked when success button clicked.
+   */
+  onSuccess?: (onClose: () => void) => void
+}
+
+export const ShorthandModalContent: FC<ShorthandModalContentProps> = ({
+  body,
+  cancel,
+  footer,
+  header,
+  middle,
+  success,
+  title,
+  onCancel,
+  onMiddle,
+  onSuccess,
+}) => {
+  const { onClose } = useModalContext()
+  const customHeader = wrapOrPassProps(ModalHeader, header)
+  const customTitle = wrapOrPassProps(ModalTitle, title)
+  const customBody = wrapOrPassProps(ModalBody, body)
+  const customFooter = wrapOrPassProps(ModalFooter, footer)
+  const customCancel = wrapOrPassProps(Button, cancel, {
+    variant: "ghost",
+    onClick: () => (onCancel ? onCancel(onClose) : onClose()),
+  })
+  const customMiddle = wrapOrPassProps(Button, middle, {
+    colorScheme: "secondary",
+    onClick: () => (onMiddle ? onMiddle(onClose) : onClose()),
+  })
+  const customSuccess = wrapOrPassProps(Button, success, {
+    colorScheme: "primary",
+    onClick: () => (onSuccess ? onSuccess(onClose) : onClose()),
+  })
+
+  return (
+    <ModalContent>
+      {customHeader ??
+        (customTitle ? <ModalHeader>{customTitle}</ModalHeader> : null)}
+      {customBody}
+      {customFooter ??
+        (customCancel || customMiddle || customSuccess ? (
+          <ModalFooter>
+            {customCancel}
+            {customMiddle}
+            {customSuccess}
+          </ModalFooter>
+        ) : null)}
+    </ModalContent>
   )
 }
+
+export interface ModalHeaderProps extends HTMLUIProps<"header"> {}
+
+export const ModalHeader = withContext<"header", ModalHeaderProps>(
+  "header",
+  "header",
+)(undefined, (props) => {
+  const { getHeaderProps } = useModalContext()
+
+  return { ...getHeaderProps(props) }
+})
+
+export interface ModalTitleProps extends HTMLUIProps<"h2"> {}
+
+export const ModalTitle = withContext<"h2", ModalTitleProps>("h2", "title")(
+  undefined,
+  (props) => {
+    const { getTitleProps } = useModalContext()
+
+    return { ...getTitleProps(props) }
+  },
+)
+
+export interface ModalBodyProps extends HTMLUIProps {}
+
+export const ModalBody = withContext<"div", ModalBodyProps>("div", "body")(
+  undefined,
+  (props) => {
+    const { getBodyProps } = useModalContext()
+
+    return { ...getBodyProps(props) }
+  },
+)
+
+export interface ModalFooterProps extends HTMLUIProps<"footer"> {}
+
+export const ModalFooter = withContext<"footer", ModalFooterProps>(
+  "footer",
+  "footer",
+)(undefined, (props) => {
+  const { getFooterProps } = useModalContext()
+
+  return { ...getFooterProps(props) }
+})

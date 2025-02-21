@@ -24,25 +24,25 @@ export const ColorPicker: ComponentMultiStyle<"ColorPicker"> = mergeMultiStyle(
         transitionDuration: "moderate",
         transitionProperty: "common",
         w: "6",
-        _disabled: {
-          opacity: 0.4,
-          pointerEvents: "none",
+        _hover: {
+          color: ["blackAlpha.500", "whiteAlpha.600"],
         },
         _focusVisible: {
           boxShadow: "outline",
         },
-        _hover: {
-          color: ["blackAlpha.500", "whiteAlpha.600"],
+        _disabled: {
+          opacity: 0.4,
+          pointerEvents: "none",
         },
       },
       field: {
         pb: "px",
         pr: "8",
-        _focus: {
-          zIndex: "unset",
-        },
         _notAllowed: {
           cursor: "pointer",
+        },
+        _focus: {
+          zIndex: "unset",
         },
         _readOnly: {
           pointerEvents: "none",

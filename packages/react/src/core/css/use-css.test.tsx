@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { renderHook, screen } from "../../../test"
+import { render, screen } from "../../../test"
 import { ui } from "../factory"
 import { useCSS } from "./use-css"
 
@@ -16,7 +16,7 @@ describe("useCSS", () => {
       return <ui.div className={className} data-testid="component" />
     }
 
-    renderHook(() => <Component />)
+    render(<Component />)
 
     expect(screen.getByTestId("component")).toHaveStyle({
       color: "var(--ui-colors-gray-500)",

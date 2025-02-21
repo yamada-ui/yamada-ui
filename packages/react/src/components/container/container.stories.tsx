@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
+import { For } from "../../components/for"
 import { COLOR_SCHEMES, transformSize } from "../../utils"
-import { For } from "../for"
 import { Heading } from "../heading"
 import { Image } from "../image"
 import { Text } from "../text"
@@ -60,7 +60,7 @@ export const Size: Story = () => {
       {(size, index) => (
         <Container.Root key={index} size={size}>
           <Container.Header>
-            <Heading size={transformSize(size, 1)}>
+            <Heading size={transformSize(size, 2)}>
               『ドラゴンボール』（DRAGON BALL）
             </Heading>
           </Container.Header>

@@ -1,74 +1,43 @@
-import type { FC, HTMLUIProps } from "../../core"
-import { ui } from "../../core"
-import { cx } from "../../utils"
-import { useInputGroup } from "./input-context"
+import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { InputProps } from "./input"
+import type { InputAddonStyle } from "./input-addon.style"
+import { createComponent, mergeVars } from "../../core"
+import { inputAddonStyle } from "./input-addon.style"
 
-interface InputAddonOptions {
-  /**
-   * The placement of the element.
-   *
-   * @default 'left'
-   */
-  placement?: "left" | "right"
-}
+export interface InputAddonProps
+  extends HTMLUIProps,
+    ThemeProps<InputAddonStyle>,
+    Pick<InputProps, "errorBorderColor" | "focusBorderColor"> {}
 
-export interface InputAddonProps extends HTMLUIProps, InputAddonOptions {}
+export const {
+  PropsContext: InputAddonPropsContext,
+  usePropsContext: useInputAddonPropsContext,
+  withContext,
+} = createComponent<InputAddonProps, InputAddonStyle>(
+  "input-addon",
+  inputAddonStyle,
+)
 
-const InputAddon: FC<InputAddonProps> = ({
-  className,
-  placement = "left",
-  ...rest
-}) => {
-  const { styles } = useInputGroup()
-
-  const placementStyles = {
-    left: {
-      me: "-1px",
-      roundedRight: "0px !important",
-    },
-    right: {
-      ms: "-1px",
-      roundedLeft: "0px !important",
-    },
-  }
-
-  return (
-    <ui.div
-      className={cx("ui-input__addon", className)}
-      __css={{
-        ...styles.addon,
-        ...placementStyles[placement],
-      }}
-      {...rest}
-    />
-  )
-}
-
-InputAddon.__ui__ = "InputAddon"
-
-export const InputLeftAddon: FC<InputAddonProps> = ({ className, ...rest }) => {
-  return (
-    <InputAddon
-      className={cx("ui-input__addon--left", className)}
-      placement="left"
-      {...rest}
-    />
-  )
-}
-
-InputLeftAddon.__ui__ = "InputLeftAddon"
-
-export const InputRightAddon: FC<InputAddonProps> = ({
-  className,
-  ...rest
-}) => {
-  return (
-    <InputAddon
-      className={cx("ui-input__addon--right", className)}
-      placement="right"
-      {...rest}
-    />
-  )
-}
-
-InputRightAddon.__ui__ = "InputRightAddon"
+export const InputAddon = withContext("div")(
+  undefined,
+  ({ errorBorderColor, focusBorderColor, vars, ...rest }) => ({
+    vars: mergeVars(
+      vars,
+      errorBorderColor
+        ? {
+            name: "errorBorderColor",
+            token: "colors",
+            value: errorBorderColor,
+          }
+        : undefined,
+      focusBorderColor
+        ? {
+            name: "focusBorderColor",
+            token: "colors",
+            value: focusBorderColor,
+          }
+        : undefined,
+    ),
+    ...rest,
+  }),
+)

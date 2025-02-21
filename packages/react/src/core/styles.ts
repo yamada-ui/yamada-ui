@@ -50,7 +50,12 @@ export const standardStyles = {
     transform: transforms.token("easings"),
   },
   appearance: true,
-  aspectRatio: true,
+  aspectRatio: {
+    properties: "aspectRatio",
+    token: "aspectRatios",
+    transform: transforms.token("aspectRatios"),
+  },
+  azimuth: true,
   backdropBlur: {
     properties: "--backdrop-blur",
     token: "blurs",
@@ -659,6 +664,32 @@ export const standardStyles = {
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   floodOpacity: true,
+  focusRing: {
+    processResult: true,
+    transform: transforms.focusRing("&:is(:focus, [data-focus])"),
+  },
+  focusRingColor: {
+    properties: "--focus-ring-color",
+    token: "colors",
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
+  },
+  focusRingOffset: {
+    properties: "--focus-ring-offset",
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
+  focusRingStyle: { properties: "--focus-ring-style" },
+  focusRingWidth: { properties: "--focus-ring-width" },
+  focusVisibleRing: {
+    processResult: true,
+    transform: transforms.focusRing(
+      "&:is(:focus-visible, [data-focus-visible])",
+    ),
+  },
   font: true,
   fontFamily: {
     properties: "fontFamily",
@@ -1184,7 +1215,7 @@ export const standardStyles = {
   opacity: true,
   order: true,
   orphans: true,
-  outline: { processResult: true, transform: transforms.outline },
+  outline: true,
   outlineColor: {
     properties: "outlineColor",
     token: "colors",
@@ -1934,7 +1965,7 @@ export const animationProperties = ["animation"] as const
 
 export type AspectRatioProperty = (typeof aspectRatioProperties)[number]
 
-export const aspectRatioProperties = [] as const
+export const aspectRatioProperties = ["aspectRatio"] as const
 
 export type BlurProperty = (typeof blurProperties)[number]
 
@@ -1996,6 +2027,7 @@ export const colorProperties = [
   "stroke",
   "textDecorationColor",
   "textEmphasisColor",
+  "focusRingColor",
 ] as const
 
 export type DurationProperty = (typeof durationProperties)[number]
@@ -2181,6 +2213,7 @@ export const spaceProperties = [
   "scrollMarginY",
   "scrollPaddingX",
   "scrollPaddingY",
+  "focusRingOffset",
   "translateX",
   "translateY",
 ] as const
@@ -2776,7 +2809,7 @@ export interface StyleProps {
    * - safari : 15
    * - safari_ios : 15
    */
-  aspectRatio?: Token<CSS.Property.AspectRatio>
+  aspectRatio?: Token<CSS.Property.AspectRatio, "aspectRatios">
   /**
    * Sets the value of `--backdrop-blur`.
    */
@@ -6332,6 +6365,34 @@ export interface StyleProps {
    */
   floodOpacity?: Token<CSS.Property.FloodOpacity>
   /**
+   * The focus ring is used to identify the currently focused element.
+   */
+  focusRing?: Token<
+    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
+  >
+  /**
+   * Sets the value of `--focus-ring-color`.
+   */
+  focusRingColor?: Token<StringLiteral, "colors">
+  /**
+   * Sets the value of `--focus-ring-offset`.
+   */
+  focusRingOffset?: Token<number | StringLiteral, "spaces">
+  /**
+   * Sets the value of `--focus-ring-style`.
+   */
+  focusRingStyle?: Token<StringLiteral>
+  /**
+   * Sets the value of `--focus-ring-width`.
+   */
+  focusRingWidth?: Token<StringLiteral>
+  /**
+   * The focus ring is used to identify the currently focused element.
+   */
+  focusVisibleRing?: Token<
+    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
+  >
+  /**
    * The CSS `font` property.
    *
    * @see Docs https://developer.mozilla.org/docs/Web/CSS/font
@@ -9364,7 +9425,7 @@ export interface StyleProps {
    *
    * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline
    */
-  outline?: Token<"inside" | "mixed" | "outside" | CSS.Property.Outline>
+  outline?: Token<CSS.Property.Outline>
   /**
    * The CSS `outline-color` property.
    *
@@ -13521,7 +13582,7 @@ export interface StyleProps {
      * - safari : 3
      * - safari_ios : 1
      */
-    grid?: "StringLiteral" | 0 | 1
+    grid?: 0 | 1 | "StringLiteral"
     h?: CSS.Property.Height | number | ThemeTokens["sizes"]
     /**
      * The feature height of media.

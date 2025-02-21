@@ -1,19 +1,19 @@
-import type { FC, HTMLUIProps, ThemeProps } from "../../core"
-import { omitThemeProps, ui, useComponentStyle } from "../../core"
-import { cx } from "../../utils"
+import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { CodeStyle } from "./code.style"
+import { createComponent } from "../../core"
+import { codeStyle } from "./code.style"
 
-export interface CodeProps extends HTMLUIProps<"code">, ThemeProps<"Code"> {}
+export interface CodeProps extends HTMLUIProps<"code">, ThemeProps<CodeStyle> {}
+
+export const {
+  PropsContext: CodePropsContext,
+  usePropsContext: useCodePropsContext,
+  withContext,
+} = createComponent<CodeProps, CodeStyle>("code", codeStyle)
 
 /**
  * `Code` is a component that represents a code block. By default, it renders a `code` element.
  *
- * @see Docs https://yamada-ui.com/components/typography/code
+ * @see Docs https://yamada-ui.com/components/code
  */
-export const Code: FC<CodeProps> = (props) => {
-  const [css, mergedProps] = useComponentStyle("Code", props)
-  const { className, ...rest } = omitThemeProps(mergedProps)
-
-  return <ui.code className={cx("ui-code", className)} __css={css} {...rest} />
-}
-
-Code.__ui__ = "Code"
+export const Code = withContext("code")()

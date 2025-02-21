@@ -5,6 +5,7 @@ type Tokens = { [key in ThemeToken]?: (CSSProperties | UIProperties)[] }
 
 export const tokens: Tokens = {
   animations: ["animation"],
+  aspectRatios: ["aspectRatio"],
   blurs: ["blur", "backdropBlur"],
   borders: [
     "border",
@@ -48,6 +49,7 @@ export const tokens: Tokens = {
     "borderBlockStartColor",
     "borderBlockEndColor",
     "columnRuleColor",
+    "focusRingColor",
   ],
   durations: ["animationDuration", "transitionDuration"],
   easings: ["transitionTimingFunction", "animationTimingFunction"],
@@ -165,6 +167,7 @@ export const tokens: Tokens = {
     "insetInlineEnd",
     "translateX",
     "translateY",
+    "focusRingOffset",
   ],
   zIndices: ["zIndex"],
 }

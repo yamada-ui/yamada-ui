@@ -12,7 +12,8 @@ export const config: StorybookConfig = {
   ],
   core: { disableTelemetry: true },
   framework: "@storybook/react-vite",
-  stories: ["../src/**/*.@(mdx|stories.@(tsx))"],
+  // TODO: Remove legacy-components
+  stories: ["../src/!(legacy-components)/**/*.@(mdx|stories.@(tsx))"],
   typescript: { reactDocgen: false },
 }
 

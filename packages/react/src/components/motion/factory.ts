@@ -1,6 +1,6 @@
 import type { ComponentType, ForwardRefExoticComponent } from "react"
 import type { DOMElement, StyledOptions } from "../../core"
-import type { MotionComponents, MotionFactory } from "./motion.types"
+import type { MotionComponents, MotionFactory } from "./index.types"
 import { motion as _motion } from "motion/react"
 import { styled } from "../../core"
 
@@ -31,6 +31,6 @@ function factory() {
 /**
  * `motion` is a component that allows for the easy implementation of a wide variety of animations.
  *
- * @see Docs https://yamada-ui.com/components/other/motion
+ * @see Docs https://yamada-ui.com/components/motion
  */
 export const motion = factory()

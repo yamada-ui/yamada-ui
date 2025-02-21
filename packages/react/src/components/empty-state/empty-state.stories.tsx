@@ -1,17 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Button } from "../button"
 import { ShoppingCartIcon } from "../icon"
-import {
-  EmptyState,
-  EmptyStateDescription,
-  EmptyStateIndicator,
-  EmptyStateTitle,
-} from "./"
+import { EmptyState } from "./"
 
-type Story = StoryFn<typeof EmptyState>
+type Story = StoryFn<typeof EmptyState.Root>
 
-const meta: Meta<typeof EmptyState> = {
-  component: EmptyState,
+const meta: Meta<typeof EmptyState.Root> = {
+  component: EmptyState.Root,
   title: "Components / EmptyState",
 }
 
@@ -19,7 +14,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <EmptyState
+    <EmptyState.Root
       description="Explore our products and add items to your cart"
       indicator={<ShoppingCartIcon />}
       title="Your cart is empty"
@@ -27,22 +22,22 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
     <>
-      <EmptyState
+      <EmptyState.Root
         size="sm"
         description="Explore our products and add items to your cart"
         indicator={<ShoppingCartIcon />}
         title="Your cart is empty"
       />
-      <EmptyState
+      <EmptyState.Root
         size="md"
         description="Explore our products and add items to your cart"
         indicator={<ShoppingCartIcon />}
         title="Your cart is empty"
       />
-      <EmptyState
+      <EmptyState.Root
         size="lg"
         description="Explore our products and add items to your cart"
         indicator={<ShoppingCartIcon />}
@@ -52,30 +47,30 @@ export const WithSize: Story = () => {
   )
 }
 
-export const WithChildren: Story = () => {
+export const Children: Story = () => {
   return (
-    <EmptyState
+    <EmptyState.Root
       description="Explore our products and add items to your cart"
       indicator={<ShoppingCartIcon />}
       title="Your cart is empty"
     >
       <Button>Back to home</Button>
-    </EmptyState>
+    </EmptyState.Root>
   )
 }
 
 export const Custom: Story = () => {
   return (
-    <EmptyState>
-      <EmptyStateIndicator>
+    <EmptyState.Root>
+      <EmptyState.Indicator>
         <ShoppingCartIcon />
-      </EmptyStateIndicator>
+      </EmptyState.Indicator>
 
-      <EmptyStateTitle>Your cart is empty</EmptyStateTitle>
+      <EmptyState.Title>Your cart is empty</EmptyState.Title>
 
-      <EmptyStateDescription>
+      <EmptyState.Description>
         Explore our products and add items to your cart
-      </EmptyStateDescription>
-    </EmptyState>
+      </EmptyState.Description>
+    </EmptyState.Root>
   )
 }

@@ -2,8 +2,8 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { AvatarProps } from "./"
 import { COLOR_SCHEMES } from "@yamada-ui/utils"
 import { PropsTable } from "../../../storybook/components/props-table"
+import { For } from "../../components/for"
 import { Wrap } from "../flex"
-import { For } from "../for"
 import { GhostIcon } from "../icon"
 import { Avatar, AvatarGroup } from "./"
 
@@ -146,7 +146,7 @@ export const Group: Story = () => {
         )}
       </For>
 
-      <For each={["circle", "square", "rounded"]}>
+      <For each={["circle", "square", "rounded"] as const}>
         {(shape, index) => (
           <AvatarGroup key={index} shape={shape}>
             {Array(5)
@@ -188,7 +188,7 @@ export const GroupMax: Story = () => {
         )}
       </For>
 
-      <For each={["circle", "square", "rounded"]}>
+      <For each={["circle", "square", "rounded"] as const}>
         {(shape, index) => (
           <AvatarGroup key={index} max={3} shape={shape}>
             {Array(5)

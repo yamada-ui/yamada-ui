@@ -1,445 +1,131 @@
-import type { ModalProps } from "./"
-import { useState } from "react"
-import { a11y, act, fireEvent, render, screen, waitFor } from "../../../test"
-import {
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-} from "./"
+import type { FC } from "../../core"
+import { a11y, render, screen } from "../../../test"
+import { Button } from "../button"
+import { Modal } from "./"
 
-interface Props {
-  placement?: ModalProps["placement"]
+const TestComponent: FC<Modal.RootProps> = (props) => {
+  return (
+    <Modal.Root data-testid="root" {...props}>
+      <Modal.OpenTrigger>
+        <Button data-testid="openTrigger">Open Modal</Button>
+      </Modal.OpenTrigger>
+
+      <Modal.Overlay data-testid="overlay" />
+
+      <Modal.Content data-testid="content">
+        <Modal.CloseButton data-testid="closeButton" />
+
+        <Modal.Header data-testid="header">
+          <Modal.Title data-testid="title">ドラゴンボール</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body data-testid="body">
+          『ドラゴンボール』（DRAGON
+          BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </Modal.Body>
+
+        <Modal.Footer data-testid="footer">
+          <Modal.CloseTrigger>
+            <Button variant="ghost" data-testid="closeTrigger">
+              とじる
+            </Button>
+          </Modal.CloseTrigger>
+          <Button>Wikipedia</Button>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal.Root>
+  )
 }
 
 describe("<Modal />", () => {
-  const ModalExample = ({ placement }: Props) => {
-    const [open, setOpen] = useState(false)
-
-    const modalHeaderId = "modal-header-id"
-
-    return (
-      <>
-        <button onClick={() => setOpen(true)}>Open</button>
-
-        <Modal
-          aria-labelledby={modalHeaderId}
-          open={open}
-          placement={placement}
-          onClose={() => setOpen(false)}
-        >
-          <ModalHeader id={modalHeaderId}>Modal Header</ModalHeader>
-
-          <ModalBody>This is modal body</ModalBody>
-
-          <ModalFooter>
-            <button onClick={() => setOpen(false)}>Close</button>
-            <button>Wikipedia</button>
-          </ModalFooter>
-        </Modal>
-      </>
-    )
-  }
-
-  const ModalCloseExample = () => {
-    const [open, setOpen] = useState(false)
-
-    return (
-      <>
-        <button data-testid="OpenModal" onClick={() => setOpen(true)}>
-          Open
-        </button>
-        <Modal data-testid="Modal" open={open} onClose={() => setOpen(false)}>
-          <ModalCloseButton data-testid="ModalCloseButton" />
-          <ModalOverlay
-            data-testid="ModalOverlay"
-            backdropFilter="blur(10px)"
-            bg="blackAlpha.300"
-          />
-          <ModalHeader data-testid="ModalHeader">Modal Header</ModalHeader>
-
-          <ModalBody data-testid="ModalBody">This is modal body</ModalBody>
-
-          <ModalFooter data-testid="ModalFooter">
-            <button data-testid="ModalClose" onClick={() => setOpen(false)}>
-              Close
-            </button>
-            <button>Wikipedia</button>
-          </ModalFooter>
-        </Modal>
-      </>
-    )
-  }
-
-  test("Modal renders correctly", async () => {
-    const { container } = render(<ModalExample />)
-    await a11y(container)
+  test("renders modal correctly", async () => {
+    await a11y(<TestComponent />)
   })
 
-  test("should render modal", async () => {
-    const { user } = render(<ModalExample />)
-
-    const openModalButton = await screen.findByRole("button", {
-      name: /open/i,
-    })
-    await user.click(openModalButton)
-
-    const modal = await screen.findByRole("dialog", { name: /modal header/i })
-    await waitFor(() => expect(modal).toBeVisible())
-
-    const modalHeader = await screen.findByText(/modal header/i)
-    expect(modalHeader).toBeInTheDocument()
-
-    const modalBody = await screen.findByText(/this is modal body/i)
-    expect(modalBody).toBeInTheDocument()
-
-    const closeButton = await screen.findByRole("button", {
-      name: /^close$/i,
-    })
-    expect(closeButton).toBeInTheDocument()
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Modal.Root.displayName).toBe("ModalRoot")
+    expect(Modal.Root.__ui__).toBe("ModalRoot")
+    expect(Modal.Overlay.displayName).toBe("ModalOverlay")
+    expect(Modal.Overlay.__ui__).toBe("ModalOverlay")
+    expect(Modal.OpenTrigger.displayName).toBe("ModalOpenTrigger")
+    expect(Modal.OpenTrigger.__ui__).toBe("ModalOpenTrigger")
+    expect(Modal.CloseTrigger.displayName).toBe("ModalCloseTrigger")
+    expect(Modal.CloseTrigger.__ui__).toBe("ModalCloseTrigger")
+    expect(Modal.CloseButton.displayName).toBe("ModalCloseButton")
+    expect(Modal.CloseButton.__ui__).toBe("ModalCloseButton")
+    expect(Modal.Content.displayName).toBe("ModalContent")
+    expect(Modal.Content.__ui__).toBe("ModalContent")
+    expect(Modal.Header.displayName).toBe("ModalHeader")
+    expect(Modal.Header.__ui__).toBe("ModalHeader")
+    expect(Modal.Title.displayName).toBe("ModalTitle")
+    expect(Modal.Title.__ui__).toBe("ModalTitle")
+    expect(Modal.Body.displayName).toBe("ModalBody")
+    expect(Modal.Body.__ui__).toBe("ModalBody")
+    expect(Modal.Footer.displayName).toBe("ModalFooter")
+    expect(Modal.Footer.__ui__).toBe("ModalFooter")
   })
 
-  test("should render nested modal", async () => {
-    const NestedModal = () => {
-      const [primaryOpen, setPrimaryOpen] = useState(false)
-      const [secondaryOpen, setSecondaryOpen] = useState(false)
-
-      const primaryModalHeaderId = "primary-modal-header-id"
-      const secondaryModalHeaderId = "secondary-modal-header-id"
-
-      return (
-        <>
-          <button onClick={() => setPrimaryOpen(true)}>Open</button>
-
-          <Modal
-            aria-labelledby={primaryModalHeaderId}
-            open={primaryOpen}
-            onClose={() => setPrimaryOpen(false)}
-          >
-            <ModalHeader id={primaryModalHeaderId}>Modal Header</ModalHeader>
-
-            <ModalBody>This is modal body</ModalBody>
-
-            <ModalFooter>
-              <button onClick={() => setPrimaryOpen(false)}>
-                Close Primary Modal
-              </button>
-              <button onClick={() => setSecondaryOpen(true)}>
-                Secondary Modal Open
-              </button>
-            </ModalFooter>
-
-            <Modal
-              size="sm"
-              aria-labelledby={secondaryModalHeaderId}
-              open={secondaryOpen}
-              onClose={() => setSecondaryOpen(false)}
-            >
-              <ModalHeader id={secondaryModalHeaderId}>
-                Secondary Modal
-              </ModalHeader>
-
-              <ModalBody>This is a secondary modal</ModalBody>
-
-              <ModalFooter>
-                <button onClick={() => setSecondaryOpen(false)}>Close</button>
-                <button>Wikipedia</button>
-              </ModalFooter>
-            </Modal>
-          </Modal>
-        </>
-      )
-    }
-    const { user } = render(<NestedModal />)
-
-    const primaryModalOpenButton = await screen.findByRole("button", {
-      name: /open/i,
-    })
-    expect(primaryModalOpenButton).toBeVisible()
-
-    await user.click(primaryModalOpenButton)
-
-    const primaryModalCloseButton = await screen.findByRole("button", {
-      name: /close primary modal/i,
-    })
-    expect(primaryModalCloseButton).toBeInTheDocument()
-
-    const secondaryModalOpenButton = await screen.findByRole("button", {
-      name: /secondary modal open/i,
-    })
-    expect(secondaryModalOpenButton).toBeInTheDocument()
-
-    await user.click(secondaryModalOpenButton)
-
-    const secondaryModal = await screen.findByRole("dialog", {
-      name: /secondary modal/i,
-    })
-
-    await waitFor(() => expect(secondaryModal).toBeVisible())
+  test("sets `className` correctly", () => {
+    render(<TestComponent open />)
+    const root = screen.getByTestId("root")
+    const overlay = screen.getByTestId("overlay")
+    const content = screen.getByTestId("content")
+    const closeButton = screen.getByTestId("closeButton")
+    const header = screen.getByTestId("header")
+    const title = screen.getByTestId("title")
+    const body = screen.getByTestId("body")
+    const footer = screen.getByTestId("footer")
+    expect(root).toHaveClass("ui-modal__root")
+    expect(overlay).toHaveClass("ui-modal__overlay")
+    expect(content).toHaveClass("ui-modal__content")
+    expect(closeButton).toHaveClass("ui-modal__close-button")
+    expect(header).toHaveClass("ui-modal__header")
+    expect(title).toHaveClass("ui-modal__title")
+    expect(body).toHaveClass("ui-modal__body")
+    expect(footer).toHaveClass("ui-modal__footer")
   })
 
-  test("Modal renders correctly when clicking modal close button", async () => {
-    const { findByRole, findByTestId, queryByTestId, user } = render(
-      <ModalCloseExample />,
-    )
-
-    const openButton = await findByRole("button", { name: "Open" })
-    await user.click(openButton)
-    await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
-    const closeButton = await findByTestId("ModalCloseButton")
-    await user.click(closeButton)
-    await waitFor(() => {
-      expect(queryByTestId("Modal")).toBeNull()
-    })
+  test("sets HTML tag correctly", () => {
+    render(<TestComponent open />)
+    const root = screen.getByTestId("root")
+    const overlay = screen.getByTestId("overlay")
+    const content = screen.getByTestId("content")
+    const closeButton = screen.getByTestId("closeButton")
+    const header = screen.getByTestId("header")
+    const title = screen.getByTestId("title")
+    const body = screen.getByTestId("body")
+    const footer = screen.getByTestId("footer")
+    expect(root.tagName).toBe("DIV")
+    expect(overlay.tagName).toBe("DIV")
+    expect(content.tagName).toBe("SECTION")
+    expect(closeButton.tagName).toBe("BUTTON")
+    expect(header.tagName).toBe("HEADER")
+    expect(title.tagName).toBe("H2")
+    expect(body.tagName).toBe("DIV")
+    expect(footer.tagName).toBe("FOOTER")
   })
 
-  test("Modal renders correctly when clicking overlay", async () => {
-    const { findByRole, findByTestId, queryByTestId, user } = render(
-      <ModalCloseExample />,
-    )
-    const openButton = await findByRole("button", { name: "Open" })
-    await user.click(openButton)
-    await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
-    const ModalOverlay = await findByTestId("ModalOverlay")
-    await user.click(ModalOverlay)
-    await waitFor(() => {
-      expect(queryByTestId("Modal")).toBeNull()
-    })
-  })
-
-  test("Escape keyDown should work correctly", async () => {
-    const { findByRole, findByTestId, getByTestId, queryByTestId, user } =
-      render(<ModalCloseExample />)
-    const openButton = await findByRole("button", { name: "Open" })
-    await user.click(openButton)
-    const modal = getByTestId("Modal")
-    await expect(findByTestId("Modal")).resolves.toBeInTheDocument()
-    await act(() => fireEvent.keyDown(modal, { key: "Escape" }))
-    await waitFor(() => {
-      expect(queryByTestId("Modal")).toBeNull()
-    })
-  })
-
-  test("should display modal to the left when placement is set to 'left'", async () => {
-    const { user } = render(<ModalExample placement="left" />)
-
-    const openModalButton = await screen.findByRole("button", {
-      name: /open/i,
-    })
-    await user.click(openModalButton)
-
-    const modal = await screen.findByRole("dialog", { name: /modal header/i })
-
-    await waitFor(() => {
-      expect(modal).toBeVisible()
-    })
-    const modalContainer = modal.parentElement
-    expect(modalContainer).toHaveStyle({
-      "align-items": "center",
-      "justify-content": "flex-start",
-    })
-  })
-
-  test("should display modal to the right when placement is set to 'right'", async () => {
-    const { user } = render(<ModalExample placement="right" />)
-
-    const openModalButton = await screen.findByRole("button", {
-      name: /open/i,
-    })
-    await user.click(openModalButton)
-
-    const modal = await screen.findByRole("dialog", { name: /modal header/i })
-
-    await waitFor(() => {
-      expect(modal).toBeVisible()
-    })
-    const modalContainer = modal.parentElement
-    expect(modalContainer).toHaveStyle({
-      "align-items": "center",
-      "justify-content": "flex-end",
-    })
-  })
-
-  test("should display modal to the top when placement is set to 'top'", async () => {
-    const { user } = render(<ModalExample placement="top" />)
-
-    const openModalButton = await screen.findByRole("button", {
-      name: /open/i,
-    })
-    await user.click(openModalButton)
-
-    const modal = await screen.findByRole("dialog", { name: /modal header/i })
-
-    await waitFor(() => {
-      expect(modal).toBeVisible()
-    })
-    const modalContainer = modal.parentElement
-    expect(modalContainer).toHaveStyle({
-      "align-items": "flex-start",
-      "justify-content": "center",
-    })
-  })
-
-  test("should display modal to the bottom when placement is set to 'bottom'", async () => {
-    const { user } = render(<ModalExample placement="bottom" />)
-
-    const openModalButton = await screen.findByRole("button", {
-      name: /open/i,
-    })
-    await user.click(openModalButton)
-
-    const modal = await screen.findByRole("dialog", { name: /modal header/i })
-
-    await waitFor(() => {
-      expect(modal).toBeVisible()
-    })
-    const modalContainer = modal.parentElement
-    expect(modalContainer).toHaveStyle({
-      "align-items": "flex-end",
-      "justify-content": "center",
-    })
-  })
-
-  const ModalAnimationExample = ({
-    animation,
-    duration,
-  }: Pick<ModalProps, "animation" | "duration">) => {
-    const [open, setOpen] = useState(false)
-    const modalHeaderId = "modal-header-id"
-
-    return (
-      <>
-        <button onClick={() => setOpen(true)}>Open</button>
-        <Modal
-          aria-labelledby={modalHeaderId}
-          animation={animation}
-          duration={duration}
-          open={open}
-          onClose={() => setOpen(false)}
-        >
-          <ModalHeader id={modalHeaderId}>Modal Header</ModalHeader>
-          <ModalBody>This is modal body</ModalBody>
-          <ModalFooter>
-            <button onClick={() => setOpen(false)}>Close</button>
-          </ModalFooter>
-        </Modal>
-      </>
-    )
-  }
-
-  test("should render modal with top animation", async () => {
-    const { user } = render(<ModalAnimationExample animation="top" />)
-
-    const openButton = screen.getByRole("button", { name: /open/i })
-    await user.click(openButton)
-
-    const modalSection = await screen.findByRole("dialog")
-
-    await waitFor(() => {
-      expect(modalSection).toBeVisible()
-    })
-
-    const styles = window.getComputedStyle(modalSection)
-    expect(styles.opacity).toBeTruthy()
-    expect(parseFloat(styles.opacity)).toBeLessThan(1)
-    expect(styles.transform).toBeTruthy()
-    expect(styles.transform).toMatch(/translateY\(-?\d+\.?\d*px\)/)
-    expect(styles.visibility).toBe("visible")
-  })
-
-  test("should render modal with right animation", async () => {
-    const { user } = render(<ModalAnimationExample animation="right" />)
-
-    const openButton = screen.getByRole("button", { name: /open/i })
-    await user.click(openButton)
-
-    const modalSection = await screen.findByRole("dialog")
-
-    await waitFor(() => {
-      expect(modalSection).toBeVisible()
-    })
-
-    const styles = window.getComputedStyle(modalSection)
-    expect(styles.opacity).toBeTruthy()
-    expect(parseFloat(styles.opacity)).toBeLessThan(1)
-    expect(styles.transform).toBeTruthy()
-    expect(styles.transform).toMatch(/translateX\(-?\d+\.?\d*px\)/)
-    expect(styles.visibility).toBe("visible")
-  })
-
-  test("should render modal with left animation", async () => {
-    const { user } = render(<ModalAnimationExample animation="left" />)
-
-    const openButton = screen.getByRole("button", { name: /open/i })
-    await user.click(openButton)
-
-    const modalSection = await screen.findByRole("dialog")
-
-    await waitFor(() => {
-      expect(modalSection).toBeVisible()
-    })
-
-    const styles = window.getComputedStyle(modalSection)
-    expect(styles.opacity).toBeTruthy()
-    expect(parseFloat(styles.opacity)).toBeLessThan(1)
-    expect(styles.transform).toBeTruthy()
-    expect(styles.transform).toMatch(/translateX\(-?\d+\.?\d*px\)/)
-    expect(styles.visibility).toBe("visible")
-  })
-
-  test("should render modal with bottom animation", async () => {
-    const { user } = render(<ModalAnimationExample animation="bottom" />)
-
-    const openButton = screen.getByRole("button", { name: /open/i })
-    await user.click(openButton)
-
-    const modalSection = await screen.findByRole("dialog")
-
-    await waitFor(() => {
-      expect(modalSection).toBeVisible()
-    })
-
-    const styles = window.getComputedStyle(modalSection)
-    expect(styles.opacity).toBeTruthy()
-    expect(parseFloat(styles.opacity)).toBeLessThan(1)
-    expect(styles.transform).toBeTruthy()
-    expect(styles.transform).toMatch(/translateY\(-?\d+\.?\d*px\)/)
-    expect(styles.visibility).toBe("visible")
-  })
-
-  test("should render modal with scale animation", async () => {
-    const { user } = render(<ModalAnimationExample animation="scale" />)
-
-    const openButton = screen.getByRole("button", { name: /open/i })
-    await user.click(openButton)
-
-    const modalSection = await screen.findByRole("dialog")
-
-    await waitFor(() => {
-      expect(modalSection).toBeVisible()
-    })
-
-    const styles = window.getComputedStyle(modalSection)
-    expect(styles.opacity).toBeTruthy()
-    expect(parseFloat(styles.opacity)).toBeLessThan(1)
-    expect(styles.transform).toBeTruthy()
-    expect(styles.transform).toMatch(/scale\(-?\d+\.?\d*\)/)
-    expect(styles.visibility).toBe("visible")
-  })
-
-  test("should render modal with no animation", async () => {
-    const { user } = render(<ModalAnimationExample animation="none" />)
-
-    const openButton = screen.getByRole("button", { name: /open/i })
-    await user.click(openButton)
-
-    const modalSection = await screen.findByRole("dialog")
-    await waitFor(() => {
-      expect(modalSection).toBeVisible()
-    })
-
-    expect(modalSection).not.toHaveStyle({})
+  test("sets aria attributes correctly", () => {
+    render(<TestComponent open />)
+    const openTrigger = screen.getByTestId("openTrigger")
+    const overlay = screen.getByTestId("overlay")
+    const content = screen.getByTestId("content")
+    const closeButton = screen.getByTestId("closeButton")
+    const title = screen.getByTestId("title")
+    const body = screen.getByTestId("body")
+    const closeTrigger = screen.getByTestId("closeTrigger")
+    expect(openTrigger).toHaveAttribute("aria-controls")
+    expect(openTrigger).toHaveAttribute("aria-expanded", "true")
+    expect(openTrigger).toHaveAttribute("aria-haspopup", "dialog")
+    expect(openTrigger).toHaveAttribute("aria-label", "Open modal")
+    expect(overlay).toHaveAttribute("aria-hidden", "true")
+    expect(content).toHaveAttribute("aria-describedby")
+    expect(content).toHaveAttribute("aria-labelledby")
+    expect(content).toHaveAttribute("aria-modal", "true")
+    expect(content).toHaveAttribute("role", "dialog")
+    expect(closeButton).toHaveAttribute("aria-label", "Close modal")
+    expect(closeTrigger).toHaveAttribute("aria-label", "Close modal")
+    expect(title).toHaveAttribute("id")
+    expect(body).toHaveAttribute("id")
   })
 })

@@ -1,19 +1,16 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
+import { COLOR_SCHEMES, toTitleCase } from "@yamada-ui/utils"
 import { useForm } from "react-hook-form"
-import { useBoolean } from "../../hooks/use-boolean"
+import { withMask } from "use-mask-input"
+import { PropsTable } from "../../../storybook/components/props-table"
 import { Button } from "../button"
-import { FormControl } from "../form-control"
-import { CheckIcon, MailIcon, PhoneIcon } from "../icon"
+import { Center } from "../center"
+import { Field } from "../field"
+import { For } from "../for"
+import { MailIcon, SearchIcon } from "../icon"
 import { VStack } from "../stack"
-import {
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  InputLeftElement,
-  InputRightAddon,
-  InputRightElement,
-} from "./"
+import { Input, InputGroup } from "./"
 
 type Story = StoryFn<typeof Input>
 
@@ -25,64 +22,96 @@ const meta: Meta<typeof Input> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <Input placeholder="basic" />
+  return <Input placeholder="Placeholder" />
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
-    <>
-      <Input size="xs" placeholder="extra small size" />
-      <Input size="sm" placeholder="small size" />
-      <Input size="md" placeholder="medium size" />
-      <Input size="lg" placeholder="large size" />
-    </>
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return (
+          <Input
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithVariant: Story = () => {
+export const Variant: Story = () => {
   return (
-    <>
-      <Input variant="outline" placeholder="outline" />
-      <Input variant="filled" placeholder="filled" />
-      <Input variant="flushed" placeholder="flushed" />
-      <Input variant="unstyled" placeholder="unstyled" />
-    </>
+    <PropsTable
+      variant="column"
+      columns={["outline", "filled", "flushed"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <Input
+            key={key}
+            colorScheme={row}
+            variant={column}
+            placeholder={toTitleCase(column)}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithHTMLSize: Story = () => {
+export const HTMLSize: Story = () => {
   return <Input aria-label="Input" htmlSize={4} width="auto" />
-}
-
-export const WithBorderColor: Story = () => {
-  return (
-    <>
-      <Input placeholder="default border color" />
-      <Input focusBorderColor="green.500" placeholder="custom border color" />
-      <Input
-        errorBorderColor="orange.500"
-        invalid
-        placeholder="custom border color"
-      />
-    </>
-  )
 }
 
 export const Disabled: Story = () => {
   return (
     <>
-      <Input variant="outline" disabled placeholder="outline" />
-      <Input variant="filled" disabled placeholder="filled" />
-      <Input variant="flushed" disabled placeholder="flushed" />
-      <Input variant="unstyled" disabled placeholder="unstyled" />
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <Input
+            key={index}
+            variant={variant}
+            disabled
+            placeholder={toTitleCase(variant)}
+          />
+        )}
+      </For>
 
-      <FormControl
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} disabled>
+            <InputGroup.Addon>+81</InputGroup.Addon>
+            <Input type="tel" placeholder="Your phone number" />
+          </InputGroup.Root>
+        )}
+      </For>
+
+      <Field.Root
         disabled
         helperMessage="We'll never share your email."
         label="Email address"
       >
-        <Input type="email" placeholder="your email address" />
-      </FormControl>
+        <Input type="email" placeholder="Your email address" />
+      </Field.Root>
+
+      <Field.Root
+        disabled
+        helperMessage="We'll never share Your phone number."
+        label="Phone number"
+      >
+        <InputGroup.Root>
+          <InputGroup.Addon>+81</InputGroup.Addon>
+          <Input type="tel" placeholder="Your phone number" />
+        </InputGroup.Root>
+      </Field.Root>
     </>
   )
 }
@@ -90,18 +119,24 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <Input variant="outline" placeholder="outline" readOnly />
-      <Input variant="filled" placeholder="filled" readOnly />
-      <Input variant="flushed" placeholder="flushed" readOnly />
-      <Input variant="unstyled" placeholder="unstyled" readOnly />
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <Input
+            key={index}
+            variant={variant}
+            placeholder={toTitleCase(variant)}
+            readOnly
+          />
+        )}
+      </For>
 
-      <FormControl
+      <Field.Root
         helperMessage="We'll never share your email."
         label="Email address"
         readOnly
       >
-        <Input type="email" placeholder="your email address" />
-      </FormControl>
+        <Input type="email" placeholder="Your email address" />
+      </Field.Root>
     </>
   )
 }
@@ -109,89 +144,127 @@ export const Readonly: Story = () => {
 export const Invalid: Story = () => {
   return (
     <>
-      <Input variant="outline" invalid placeholder="outline" />
-      <Input variant="filled" invalid placeholder="filled" />
-      <Input variant="flushed" invalid placeholder="flushed" />
-      <Input variant="unstyled" invalid placeholder="unstyled" />
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <Input
+            key={index}
+            variant={variant}
+            invalid
+            placeholder={toTitleCase(variant)}
+          />
+        )}
+      </For>
 
-      <FormControl
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} invalid>
+            <InputGroup.Addon>+81</InputGroup.Addon>
+            <Input type="tel" placeholder="Your phone number" />
+          </InputGroup.Root>
+        )}
+      </For>
+
+      <Field.Root
         errorMessage="Email is required."
         invalid
         label="Email address"
       >
-        <Input type="email" placeholder="your email address" />
-      </FormControl>
+        <Input type="email" placeholder="Your email address" />
+      </Field.Root>
+
+      <Field.Root
+        helperMessage="We'll never share Your phone number."
+        invalid
+        label="Phone number"
+      >
+        <InputGroup.Root>
+          <InputGroup.Addon>+81</InputGroup.Addon>
+          <Input type="tel" placeholder="Your phone number" />
+        </InputGroup.Root>
+      </Field.Root>
     </>
   )
 }
 
-export const UseAddon: Story = () => {
+export const Addon: Story = () => {
   return (
     <>
-      <InputGroup>
-        <InputLeftAddon>+81</InputLeftAddon>
-        <Input type="tel" placeholder="your phone number" />
-      </InputGroup>
+      <InputGroup.Root>
+        <InputGroup.Addon>+81</InputGroup.Addon>
+        <Input type="tel" placeholder="Your phone number" />
+      </InputGroup.Root>
 
-      <InputGroup>
-        <InputLeftAddon>https://</InputLeftAddon>
-        <Input placeholder="your site address" />
-        <InputRightAddon>.com</InputRightAddon>
-      </InputGroup>
+      <InputGroup.Root variant="filled">
+        <InputGroup.Addon>+81</InputGroup.Addon>
+        <Input type="tel" placeholder="Your phone number" />
+      </InputGroup.Root>
+
+      <InputGroup.Root variant="flushed">
+        <InputGroup.Addon>+81</InputGroup.Addon>
+        <Input type="tel" placeholder="Your phone number" />
+      </InputGroup.Root>
+
+      <InputGroup.Root>
+        <InputGroup.Addon>https://</InputGroup.Addon>
+        <Input placeholder="Your site address" />
+        <InputGroup.Addon>.com</InputGroup.Addon>
+      </InputGroup.Root>
     </>
   )
 }
 
-export const UseElement: Story = () => {
-  const [show, { toggle }] = useBoolean()
-
+export const Element: Story = () => {
   return (
     <>
-      <InputGroup>
-        <InputLeftElement>
-          <PhoneIcon />
-        </InputLeftElement>
-        <Input type="tel" placeholder="your phone number" />
-      </InputGroup>
+      <InputGroup.Root>
+        <InputGroup.Element w="auto">https://</InputGroup.Element>
+        <Input placeholder="Search contacts" ps="4.75rem" />
+        <InputGroup.Addon>.com</InputGroup.Addon>
+      </InputGroup.Root>
 
-      <InputGroup>
-        <InputLeftElement>
-          <MailIcon />
-        </InputLeftElement>
-        <Input type="email" placeholder="your email address" />
-        <InputRightElement>
-          <CheckIcon color="green.500" />
-        </InputRightElement>
-      </InputGroup>
-
-      <InputGroup size="md">
-        <Input
-          type={show ? "text" : "password"}
-          placeholder="your password"
-          pr="4.5rem"
-        />
-        <InputRightElement clickable w="4.5rem">
-          <Button size="sm" h="1.75rem" onClick={toggle}>
-            {show ? "Hide" : "Show"}
-          </Button>
-        </InputRightElement>
-      </InputGroup>
+      <InputGroup.Root
+        as="form"
+        onSubmit={(ev) => {
+          ev.preventDefault()
+        }}
+      >
+        <Input type="search" name="q" placeholder="Search user names" />
+        <InputGroup.Element clickable px="2">
+          <Center as="button" focusVisibleRing="outside" p="0.5" rounded="xs">
+            <SearchIcon fontSize="xl" />
+          </Center>
+        </InputGroup.Element>
+      </InputGroup.Root>
     </>
   )
 }
 
-export const StylingPlaceholder: Story = () => {
+export const BorderColor: Story = () => {
   return (
     <>
-      <Input placeholder="default placeholder" />
+      <Input placeholder="Default border color" />
+      <Input focusBorderColor="green.500" placeholder="Custom border color" />
       <Input
-        placeholder="custom placeholder"
+        errorBorderColor="orange.500"
+        invalid
+        placeholder="Custom border color"
+      />
+    </>
+  )
+}
+
+export const Placeholder: Story = () => {
+  return (
+    <>
+      <Input placeholder="Default placeholder" />
+      <Input
+        placeholder="Custom placeholder"
         _dark={{ _placeholder: { color: "blue.500", opacity: 1 } }}
         _placeholder={{ color: "blue.500", opacity: 1 }}
       />
       <Input
         color="green.500"
-        placeholder="custom placeholder"
+        placeholder="Custom placeholder"
         _dark={{
           _placeholder: { color: "inherit" },
         }}
@@ -201,9 +274,52 @@ export const StylingPlaceholder: Story = () => {
   )
 }
 
-export const CustomType: Story = () => {
+export const Type: Story = () => {
+  return <Input type="datetime-local" placeholder="Select Date and Time" />
+}
+
+export const Mask: Story = () => {
   return (
-    <Input type="datetime-local" size="md" placeholder="Select Date and Time" />
+    <Input ref={withMask("(99) 99999-9999")} placeholder="(99) 99999-9999" />
+  )
+}
+
+export const FloatingLabel: Story = () => {
+  return (
+    <Field.Root>
+      <Input type="email" data-peer placeholder="" />
+      <Field.Label
+        css={{
+          bg: "bg",
+          fontSize: "sm",
+          fontWeight: "normal",
+          insetStart: "2",
+          pointerEvents: "none",
+          position: "absolute",
+          px: "1",
+          top: "-12.5px",
+          transitionDuration: "moderate",
+          transitionProperty: "top, color, font-size",
+          transitionTimingFunction: "ease-in-out",
+          zIndex: "1",
+          _peerPlaceholderShown: {
+            color: "fg.subtle",
+            fontSize: "md",
+            insetStart: "2",
+            top: "8px",
+          },
+          // eslint-disable-next-line perfectionist/sort-objects
+          _peerFocusVisible: {
+            color: "fg",
+            fontSize: "sm",
+            insetStart: "2",
+            top: "-12.5px",
+          },
+        }}
+      >
+        Email
+      </Field.Label>
+    </Field.Root>
   )
 }
 
@@ -227,7 +343,7 @@ export const ReactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Field.Root
         errorMessage={errors.name?.message}
         invalid={!!errors.name}
         label="Name"
@@ -238,15 +354,15 @@ export const ReactHookForm: Story = () => {
             required: { message: "This is required.", value: true },
           })}
         />
-      </FormControl>
+      </Field.Root>
 
-      <FormControl
+      <Field.Root
         errorMessage={errors.cellphone?.message}
         invalid={!!errors.cellphone}
         label="Cellphone"
       >
-        <InputGroup>
-          <InputLeftAddon>+81</InputLeftAddon>
+        <InputGroup.Root>
+          <InputGroup.Addon>+81</InputGroup.Addon>
           <Input
             type="tel"
             placeholder="0000-0000"
@@ -254,18 +370,18 @@ export const ReactHookForm: Story = () => {
               required: { message: "This is required.", value: true },
             })}
           />
-        </InputGroup>
-      </FormControl>
+        </InputGroup.Root>
+      </Field.Root>
 
-      <FormControl
+      <Field.Root
         errorMessage={errors.email?.message}
         invalid={!!errors.email}
         label="Email"
       >
-        <InputGroup>
-          <InputLeftElement>
+        <InputGroup.Root>
+          <InputGroup.Element>
             <MailIcon />
-          </InputLeftElement>
+          </InputGroup.Element>
           <Input
             type="email"
             placeholder="your-address@example.com"
@@ -273,8 +389,8 @@ export const ReactHookForm: Story = () => {
               required: { message: "This is required.", value: true },
             })}
           />
-        </InputGroup>
-      </FormControl>
+        </InputGroup.Root>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit
@@ -309,7 +425,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Field.Root
         errorMessage={errors.name?.message}
         invalid={!!errors.name}
         label="Name"
@@ -320,15 +436,15 @@ export const ReactHookFormWithDefaultValue: Story = () => {
             required: { message: "This is required.", value: true },
           })}
         />
-      </FormControl>
+      </Field.Root>
 
-      <FormControl
+      <Field.Root
         errorMessage={errors.cellphone?.message}
         invalid={!!errors.cellphone}
         label="Cellphone"
       >
-        <InputGroup>
-          <InputLeftAddon>+81</InputLeftAddon>
+        <InputGroup.Root>
+          <InputGroup.Addon>+81</InputGroup.Addon>
           <Input
             type="tel"
             placeholder="090-0000-0000"
@@ -336,18 +452,18 @@ export const ReactHookFormWithDefaultValue: Story = () => {
               required: { message: "This is required.", value: true },
             })}
           />
-        </InputGroup>
-      </FormControl>
+        </InputGroup.Root>
+      </Field.Root>
 
-      <FormControl
+      <Field.Root
         errorMessage={errors.email?.message}
         invalid={!!errors.email}
         label="Email"
       >
-        <InputGroup>
-          <InputLeftElement>
+        <InputGroup.Root>
+          <InputGroup.Element>
             <MailIcon />
-          </InputLeftElement>
+          </InputGroup.Element>
           <Input
             type="email"
             placeholder="your-address@example.com"
@@ -355,8 +471,8 @@ export const ReactHookFormWithDefaultValue: Story = () => {
               required: { message: "This is required.", value: true },
             })}
           />
-        </InputGroup>
-      </FormControl>
+        </InputGroup.Root>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

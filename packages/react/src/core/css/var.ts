@@ -30,7 +30,9 @@ export function getVar(token: string) {
   return function (theme: StyledTheme<UsageTheme>) {
     const prefix = theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
 
-    return `var(--${prefix}-${token})`
+    return token.startsWith("--")
+      ? `var(${token})`
+      : `var(--${prefix}-${token})`
   }
 }
 

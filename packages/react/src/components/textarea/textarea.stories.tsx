@@ -1,11 +1,14 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
+import { COLOR_SCHEMES, toTitleCase } from "@yamada-ui/utils"
 import { useRef } from "react"
 import { useForm } from "react-hook-form"
 import { Textarea } from "."
-import { Button } from "../../components/button"
-import { FormControl } from "../../components/form-control"
-import { VStack } from "../../components/stack"
+import { PropsTable } from "../../../storybook/components"
+import { Button } from "../button"
+import { Field } from "../field"
+import { For } from "../for"
+import { VStack } from "../stack"
 
 type Story = StoryFn<typeof Textarea>
 
@@ -20,40 +23,59 @@ export const Basic: Story = () => {
   return <Textarea placeholder="basic" />
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
-    <>
-      <Textarea size="xs" placeholder="extra small size" />
-      <Textarea size="sm" placeholder="small size" />
-      <Textarea size="md" placeholder="medium size" />
-      <Textarea size="lg" placeholder="large size" />
-    </>
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed", "unstyled"]}
+    >
+      {(column, row, key) => {
+        return (
+          <Textarea
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithVariant: Story = () => {
+export const Variant: Story = () => {
   return (
-    <>
-      <Textarea variant="outline" placeholder="outline" />
-      <Textarea variant="filled" placeholder="filled" />
-      <Textarea variant="flushed" placeholder="flushed" />
-      <Textarea variant="unstyled" placeholder="unstyled" />
-    </>
+    <PropsTable
+      variant="column"
+      columns={["outline", "filled", "flushed", "unstyled"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <Textarea
+            key={key}
+            colorScheme={row}
+            variant={column}
+            placeholder={toTitleCase(column)}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithResize: Story = () => {
+export const Resize: Story = () => {
   return (
-    <>
-      <Textarea placeholder="block" resize="block" />
-      <Textarea placeholder="horizontal" resize="horizontal" />
-      <Textarea placeholder="vertical" resize="vertical" />
-      <Textarea placeholder="none" resize="none" />
-    </>
+    <For each={["block", "horizontal", "vertical", "none"] as const}>
+      {(resize, index) => (
+        <Textarea key={index} placeholder={resize} resize={resize} />
+      )}
+    </For>
   )
 }
 
-export const WithAutosize: Story = () => {
+export const Autosize: Story = () => {
   return (
     <>
       <Textarea autosize placeholder="autosize" />
@@ -64,7 +86,7 @@ export const WithAutosize: Story = () => {
   )
 }
 
-export const WithBorderColor: Story = () => {
+export const BorderColor: Story = () => {
   return (
     <>
       <Textarea placeholder="default border color" />
@@ -84,18 +106,24 @@ export const WithBorderColor: Story = () => {
 export const Disabled: Story = () => {
   return (
     <>
-      <Textarea variant="outline" disabled placeholder="outline" />
-      <Textarea variant="filled" disabled placeholder="filled" />
-      <Textarea variant="flushed" disabled placeholder="flushed" />
-      <Textarea variant="unstyled" disabled placeholder="unstyled" />
+      <For each={["outline", "filled", "flushed", "unstyled"]}>
+        {(variant, index) => (
+          <Textarea
+            key={index}
+            variant={variant}
+            disabled
+            placeholder={variant}
+          />
+        )}
+      </For>
 
-      <FormControl
+      <Field.Root
         disabled
         helperMessage="We would like to get your feedback."
         label="Feedback"
       >
         <Textarea variant="outline" placeholder="your feedback" />
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -103,18 +131,24 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <Textarea variant="outline" placeholder="outline" readOnly />
-      <Textarea variant="filled" placeholder="filled" readOnly />
-      <Textarea variant="flushed" placeholder="flushed" readOnly />
-      <Textarea variant="unstyled" placeholder="unstyled" readOnly />
+      <For each={["outline", "filled", "flushed", "unstyled"]}>
+        {(variant, index) => (
+          <Textarea
+            key={index}
+            variant={variant}
+            placeholder={variant}
+            readOnly
+          />
+        )}
+      </For>
 
-      <FormControl
+      <Field.Root
         helperMessage="We would like to get your feedback."
         label="Feedback"
         readOnly
       >
         <Textarea variant="outline" placeholder="your feedback" />
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -122,18 +156,20 @@ export const Readonly: Story = () => {
 export const Invalid: Story = () => {
   return (
     <>
-      <Textarea variant="outline" invalid placeholder="outline" />
-      <Textarea variant="filled" invalid placeholder="filled" />
-      <Textarea variant="flushed" invalid placeholder="flushed" />
-      <Textarea variant="unstyled" invalid placeholder="unstyled" />
+      <For each={["outline", "filled", "flushed", "unstyled"]}>
+        {(variant, index) => (
+          <Textarea
+            key={index}
+            variant={variant}
+            invalid
+            placeholder={variant}
+          />
+        )}
+      </For>
 
-      <FormControl
-        errorMessage="Feedback is required."
-        invalid
-        label="Feedback"
-      >
+      <Field.Root errorMessage="Feedback is required." invalid label="Feedback">
         <Textarea variant="outline" placeholder="your feedback" />
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -164,6 +200,7 @@ export const UseResize: Story = () => {
   return (
     <VStack>
       <Textarea placeholder="use resize" resizeRef={resizeRef} />
+
       <Button alignSelf="flex-end" onClick={onResize}>
         Resize
       </Button>
@@ -189,7 +226,7 @@ export const ReactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Field.Root
         errorMessage={errors.textarea?.message}
         invalid={!!errors.textarea}
         label="Feedback"
@@ -200,7 +237,7 @@ export const ReactHookForm: Story = () => {
             required: { message: "This is required.", value: true },
           })}
         />
-      </FormControl>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit
@@ -209,7 +246,7 @@ export const ReactHookForm: Story = () => {
   )
 }
 
-export const ReactHookFormWithDefaultValue: Story = () => {
+export const ReactHookFormDefaultValue: Story = () => {
   interface Data {
     textarea: string
   }
@@ -231,7 +268,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Field.Root
         errorMessage={errors.textarea?.message}
         invalid={!!errors.textarea}
         label="Feedback"
@@ -242,7 +279,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
             required: { message: "This is required.", value: true },
           })}
         />
-      </FormControl>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

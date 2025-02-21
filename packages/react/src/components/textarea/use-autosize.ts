@@ -2,11 +2,13 @@ import type { RefObject } from "react"
 import { useRef } from "react"
 import { pickObject } from "../../utils"
 
-const useAutosize = (
-  ref: RefObject<HTMLTextAreaElement | null>,
-  maxRows: number,
-  minRows: number,
-) => {
+export interface UseAutosizeProps {
+  ref: RefObject<HTMLTextAreaElement | null>
+  maxRows: number
+  minRows: number
+}
+
+export const useAutosize = ({ ref, maxRows, minRows }: UseAutosizeProps) => {
   const valueRef = useRef<string>(null)
 
   const resizeTextarea = () => {
@@ -30,6 +32,8 @@ const useAutosize = (
 
   return resizeTextarea
 }
+
+export type UseAutosizeReturn = ReturnType<typeof useAutosize>
 
 const SIZING_STYLE = [
   "borderBottomWidth",
@@ -153,5 +157,3 @@ const forceHiddenStyles = (el: HTMLElement) => {
     )
   })
 }
-
-export default useAutosize

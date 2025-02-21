@@ -94,11 +94,18 @@ const setGlobalFocusEvents = () => {
 
   const { focus } = HTMLElement.prototype
 
-  HTMLElement.prototype.focus = function customFocus(...args) {
-    hasEventBeforeFocus = true
+  if (process.env.NODE_ENV !== "test") {
+    Object.defineProperties(HTMLElement.prototype, {
+      focus: {
+        configurable: false,
+        value: function customFocus(...args: [FocusOptions]) {
+          hasEventBeforeFocus = true
 
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    if (this) focus.apply(this, args)
+          if (this) focus.apply(this, args)
+        },
+        writable: false,
+      },
+    })
   }
 
   document.addEventListener("keydown", onKeyboard, true)

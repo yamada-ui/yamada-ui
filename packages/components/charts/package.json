@@ -48,7 +48,7 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "recharts": "^2.14.1"
+    "recharts": "^2.15.1"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

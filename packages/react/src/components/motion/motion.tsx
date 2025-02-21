@@ -14,7 +14,7 @@ const Component = ui<"div", Dict>("div", { forwardProps })
 /**
  * `Motion` is a component that allows for the easy implementation of a wide variety of animations.
  *
- * @see Docs https://yamada-ui.com/components/other/motion
+ * @see Docs https://yamada-ui.com/components/motion
  */
 export const Motion = (({
   ref,

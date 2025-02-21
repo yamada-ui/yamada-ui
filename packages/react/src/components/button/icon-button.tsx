@@ -19,6 +19,10 @@ export interface IconButtonProps
     >,
     ThemeProps<IconButtonStyle> {
   /**
+   * The label for the button.
+   */
+  "aria-label": string
+  /**
    * The icon to be used in the button.
    */
   icon?: ReactNode
@@ -36,7 +40,7 @@ export const {
 /**
  * `IconButton` is a component that displays an icon within a button.
  *
- * @see Docs https://yamada-ui.com/components/forms/icon-button
+ * @see Docs https://yamada-ui.com/components/icon-button
  */
 export const IconButton = withContext(Button)(
   undefined,

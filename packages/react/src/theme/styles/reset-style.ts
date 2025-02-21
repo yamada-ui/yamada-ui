@@ -206,6 +206,11 @@ export const resetStyle = defineStyles.resetStyle({
     padding: 0,
   },
 
+  mark: {
+    backgroundColor: "inherit",
+    color: "inherit",
+  },
+
   "p, table, blockquote, address, pre, iframe, form, figure, dl": {
     margin: 0,
   },

@@ -79,7 +79,7 @@ describe("<Breadcrumb />", () => {
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
-    expect(screen.getByLabelText("ellipsis")).toBeInTheDocument()
+    expect(screen.getByLabelText("Ellipsis")).toBeInTheDocument()
   })
 
   test("renders breadcrumb correctly with items", () => {
@@ -92,7 +92,7 @@ describe("<Breadcrumb />", () => {
 
     render(<Breadcrumb.Root items={items} />)
 
-    expect(screen.getAllByRole("listitem")).toHaveLength(4)
+    expect(screen.getAllByRole("listitem")).toHaveLength(7)
   })
 
   test("is correctly truncated", () => {
@@ -109,7 +109,7 @@ describe("<Breadcrumb />", () => {
 
     const listItems = screen.getAllByRole("listitem")
 
-    expect(listItems).toHaveLength(3)
+    expect(listItems).toHaveLength(5)
     expect(listItems[0]?.querySelector("a")).toHaveAttribute("href", "/1")
     expect(
       listItems[listItems.length - 1]?.querySelector("span"),
@@ -157,7 +157,7 @@ describe("<Breadcrumb />", () => {
     ).toHaveLength(3)
     expect(
       screen.getByTestId("breadCrumb3").querySelectorAll("li"),
-    ).toHaveLength(3)
+    ).toHaveLength(7)
   })
 
   test("retrieve omitted items correctly", () => {

@@ -12,6 +12,64 @@ describe("<EmptyState />", () => {
     )
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(EmptyState.Root.displayName).toBe("EmptyStateRoot")
+    expect(EmptyState.Root.__ui__).toBe("EmptyStateRoot")
+
+    expect(EmptyState.Title.displayName).toBe("EmptyStateTitle")
+    expect(EmptyState.Title.__ui__).toBe("EmptyStateTitle")
+
+    expect(EmptyState.Description.displayName).toBe("EmptyStateDescription")
+    expect(EmptyState.Description.__ui__).toBe("EmptyStateDescription")
+
+    expect(EmptyState.Indicator.displayName).toBe("EmptyStateIndicator")
+    expect(EmptyState.Indicator.__ui__).toBe("EmptyStateIndicator")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <EmptyState.Root data-testid="root">
+        <EmptyState.Indicator data-testid="indicator">
+          <ShoppingCartIcon />
+        </EmptyState.Indicator>
+        <EmptyState.Title data-testid="title">
+          Your cart is empty
+        </EmptyState.Title>
+        <EmptyState.Description data-testid="description">
+          Explore our products and add items to your cart
+        </EmptyState.Description>
+      </EmptyState.Root>,
+    )
+    expect(screen.getByTestId("root")).toHaveClass("ui-empty-state__root")
+    expect(screen.getByTestId("indicator")).toHaveClass(
+      "ui-empty-state__indicator",
+    )
+    expect(screen.getByTestId("title")).toHaveClass("ui-empty-state__title")
+    expect(screen.getByTestId("description")).toHaveClass(
+      "ui-empty-state__description",
+    )
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <EmptyState.Root data-testid="root">
+        <EmptyState.Indicator data-testid="indicator">
+          <ShoppingCartIcon />
+        </EmptyState.Indicator>
+        <EmptyState.Title data-testid="title">
+          Your cart is empty
+        </EmptyState.Title>
+        <EmptyState.Description data-testid="description">
+          Explore our products and add items to your cart
+        </EmptyState.Description>
+      </EmptyState.Root>,
+    )
+    expect(screen.getByTestId("root").tagName).toBe("DIV")
+    expect(screen.getByTestId("indicator").tagName).toBe("DIV")
+    expect(screen.getByTestId("title").tagName).toBe("H3")
+    expect(screen.getByTestId("description").tagName).toBe("P")
+  })
+
   test("EmptyState renders correctly with a given title", async () => {
     const title = "Cart is empty"
     const description = "Please add items to the cart"

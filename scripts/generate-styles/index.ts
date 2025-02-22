@@ -1,8 +1,14 @@
+import type { CompatData, CompatStatement } from "@mdn/browser-compat-data"
 import type * as CSS from "csstype"
 import type { additionalProps, atRuleProps, uiProps } from "./ui-props"
 import * as p from "@clack/prompts"
 import bcd from "@mdn/browser-compat-data"
-import { isArray, isUndefined, toCamelCase } from "@yamada-ui/utils"
+import {
+  getMemoizedObject as get,
+  isUndefined,
+  toArray,
+  toCamelCase,
+} from "@yamada-ui/utils"
 import c from "chalk"
 import { writeFile } from "fs/promises"
 import { glob } from "glob"
@@ -12,21 +18,11 @@ import {
   isInterfaceDeclaration,
   isTypeAliasDeclaration,
 } from "typescript"
+import { features } from "web-features"
 import { excludeProps } from "./exclude-props"
 import { generateStyles } from "./styles"
 
 export const OUT_PATH = "packages/react/src/core/styles.ts"
-
-export interface CSSProperty {
-  name: string
-  prop: CSSProperties
-  property_type: string
-  url: string
-  features?: ({
-    deprecated: boolean
-  } & Omit<CSSProperty, "features" | "isSkip">)[]
-  isSkip?: boolean
-}
 
 export type Properties = CSSProperties | UIProperties
 export type CSSProperties =
@@ -38,7 +34,25 @@ export type UIProperties =
   | keyof typeof atRuleProps
   | keyof typeof uiProps
 
-const omittedList = new ListIt({
+export type FeatureData = (typeof features)[number]
+export type BrowserIdentifier = keyof FeatureData["status"]["support"]
+
+export interface CSSCompatStatement extends CompatStatement {
+  name: string
+  type?: string
+  feature?: FeatureData
+}
+
+export interface CSSCompatData {
+  [key: string]: CSSCompatStatement
+}
+
+const deprecatedList = new ListIt({
+  headerColor: "gray",
+  headerUnderline: true,
+})
+
+const notFoundList = new ListIt({
   headerColor: "gray",
   headerUnderline: true,
 })
@@ -53,96 +67,75 @@ const duplicatedList = new ListIt({
   headerUnderline: true,
 })
 
-const getCSSProperties = (): CSSProperty[] => {
-  const { css, svg } = bcd
-  const cssProperties = Object.keys(css.properties as object)
-  const atRuleProperties = Object.keys(css["at-rules"] as object)
-  const svgAttributes = Object.keys(svg.global_attributes as object)
+const transformCompatData = (
+  path: string,
+  omitProps: string[] = [],
+): CSSCompatData => {
+  const data = get<CompatData>(bcd, path)
 
-  const cssData = cssProperties
-    .filter((property) => !/^(-moz|-webkit)/.test(property))
-    .map((property) => {
-      const prop = property.includes("-") ? toCamelCase(property) : property
-      const { mdn_url, spec_url } = css.properties?.[property]?.__compat ?? {}
-      const url = mdn_url ?? (isArray(spec_url) ? spec_url[0] : spec_url) ?? ""
+  return Object.fromEntries(
+    Object.entries(data)
+      .map(([name, value]) => {
+        if (!("__compat" in value) || !value.__compat) return
 
-      return {
-        name: property,
-        prop: prop as CSSProperties,
-        property_type: "css",
-        url,
-      }
-    })
+        if (/^(-moz|-webkit|xml_)/.test(name)) return
 
-  const svgData = svgAttributes.map((attribute) => {
-    const prop = attribute.includes("-") ? toCamelCase(attribute) : attribute
-    const { mdn_url, spec_url } =
-      svg.global_attributes?.[attribute]?.__compat ?? {}
-    const url = mdn_url ?? (isArray(spec_url) ? spec_url[0] : spec_url) ?? ""
+        const prop = /(-|_)/.test(name) ? toCamelCase(name) : name
 
-    return {
-      name: attribute,
-      prop: prop as CSSProperties,
-      property_type: "svg",
-      url,
-    }
-  })
+        if (omitProps.includes(prop)) return
 
-  const atRuleData = atRuleProperties.map((atRule) => {
-    const prop = atRule.includes("-") ? toCamelCase(atRule) : atRule
-    const { mdn_url, spec_url } = css["at-rules"]?.[atRule]?.__compat ?? {}
-    const url = mdn_url ?? (isArray(spec_url) ? spec_url[0] : spec_url) ?? ""
+        const feature = Object.values(features).find(({ compat_features }) =>
+          compat_features?.includes(`${path}.${name}`),
+        )
 
-    const features = Object.keys(css["at-rules"]?.[atRule] as object).map(
-      (key) => {
-        const prop = key.includes("-") ? toCamelCase(key) : key
-        const { mdn_url, spec_url, status } =
-          css["at-rules"]?.[atRule]?.[key]?.__compat ?? {}
-        const url =
-          mdn_url ?? (isArray(spec_url) ? spec_url[0] : spec_url) ?? ""
+        return [prop, { ...value.__compat, name, feature }]
+      })
+      .filter((data) => !isUndefined(data)),
+  )
+}
 
-        return {
-          name: key,
-          deprecated: status?.deprecated ?? false,
-          prop,
-          property_type: "feature",
-          url,
-        }
-      },
-    )
+const getCSSCompatData = () => {
+  const { html } = bcd
 
-    return {
-      name: atRule,
-      features,
-      isSkip: true,
-      prop: ("_" + prop) as CSSProperties,
-      property_type: "at-rule",
-      url,
-    }
-  })
-
-  return [
-    ...cssData,
-    ...svgData.filter((attr) => !cssProperties.includes(attr.name)),
-    ...atRuleData,
+  const htmlAttributes = Object.keys(html.global_attributes!).map((name) =>
+    toCamelCase(name),
+  )
+  const omitAttributes = [
+    ...htmlAttributes,
+    "alt",
+    "dataAttributes",
+    "customProperty",
+    "requiredExtensions",
   ]
+
+  const cssCompatData = transformCompatData("css.properties", omitAttributes)
+  const svgCompatData = transformCompatData(
+    "svg.global_attributes",
+    omitAttributes,
+  )
+  const atRuleCompatData = transformCompatData("css.at-rules", omitAttributes)
+
+  return {
+    atRuleCompatData,
+    cssCompatData: { ...svgCompatData, ...cssCompatData },
+  }
 }
 
 const getCSSTypes = async () => {
-  const typeInfo: { [key: string]: { type: string; deprecated: boolean } } = {}
+  const data: { [key: string]: { type: string; deprecated: boolean } } = {}
 
   const paths = await glob("node_modules/**/csstype/index.d.ts")
 
   const path = paths[0]
 
-  if (!path) return typeInfo
+  if (!path) return data
 
   const { getSourceFile, getTypeChecker } = createProgram([path], {})
 
   const sourceFile = getSourceFile(path)
   const typeChecker = getTypeChecker()
 
-  if (!sourceFile) return typeInfo
+  if (!sourceFile) return data
 
   const typeStatements = sourceFile.statements.filter(
     (statement) =>
@@ -172,62 +165,81 @@ const getCSSTypes = async () => {
           ? `CSS.Globals`
           : `CSS.Property.${value.replace(/<.*?>$/, "")}`
 
-      typeInfo[name] = { type: resolvedValue, deprecated }
+      data[name] = { type: resolvedValue, deprecated }
     }
   }
 
-  return typeInfo
+  return data
 }
 
-const omitProperties = (
-  cssProperties: CSSProperty[],
+const checkProperties = (
+  cssCompatData: CSSCompatData,
   typeProperties: string[],
-  callback?: (message: string) => void,
+  callback?: (message: string, isDeprecated: boolean) => void,
 ) => {
-  let pickedProperties: CSSProperty[] = []
+  const deprecatedProperties: { name: string; url?: string }[] = []
+  const notFoundProperties: { name: string; url?: string }[] = []
 
-  const omittedProperties = cssProperties.filter((property) => {
-    const hasType = typeProperties.includes(property.prop)
+  Object.entries(cssCompatData).forEach(([name, data]) => {
+    const url = data.mdn_url ?? toArray(data.spec_url)[0]
 
-    if (!hasType && !property.isSkip)
-      pickedProperties = [...pickedProperties, property]
+    if (!typeProperties.includes(name)) notFoundProperties.push({ name, url })
 
-    return hasType || property.isSkip
+    if (data.status?.deprecated) deprecatedProperties.push({ name, url })
   })
 
-  if (pickedProperties.length) {
-    const table = pickedProperties.map(({ name, url }, index) => ({
-      name,
+  if (notFoundProperties.length) {
+    const table = notFoundProperties.map(({ name, url }, index) => ({
       row: index + 1,
+      // eslint-disable-next-line perfectionist/sort-objects
+      name,
       url,
     }))
 
-    const message = omittedList.d(table).toString()
+    const message = notFoundList.d(table).toString()
 
-    callback?.(message)
+    callback?.(message, false)
   }
 
-  return omittedProperties
+  if (deprecatedProperties.length) {
+    const table = deprecatedProperties.map(({ name, url }, index) => ({
+      row: index + 1,
+      // eslint-disable-next-line perfectionist/sort-objects
+      name,
+      url,
+    }))
+
+    const message = deprecatedList.d(table).toString()
+
+    callback?.(message, true)
+  }
 }
 
 const excludeProperties = (
-  cssProperties: CSSProperty[],
+  cssCompatData: CSSCompatData,
   callback?: (message: string) => void,
 ) => {
-  let pickedProperties: CSSProperty[] = []
+  const excludedProperties: { name: string; url?: string }[] = []
 
-  const excludedProperties = cssProperties.filter((property) => {
-    const isExclude = excludeProps.includes(property.prop)
+  const computedCSSCompatData = Object.fromEntries(
+    Object.entries(cssCompatData).filter(([name, data]) => {
+      if (excludeProps.includes(name as CSSProperties)) {
+        const url = data.mdn_url ?? toArray(data.spec_url)[0]
 
-    if (isExclude) pickedProperties = [...pickedProperties, property]
+        excludedProperties.push({ name, url })
 
-    return !isExclude
-  })
+        return false
+      } else {
+        return true
+      }
+    }),
+  )
 
-  if (pickedProperties.length) {
-    const table = pickedProperties.map(({ name, url }, index) => ({
-      name,
+  if (excludedProperties.length) {
+    const table = excludedProperties.map(({ name, url }, index) => ({
       row: index + 1,
+      // eslint-disable-next-line perfectionist/sort-objects
+      name,
       url,
     }))
 
@@ -236,10 +248,12 @@ const excludeProperties = (
     callback?.(message)
   }
 
-  return excludedProperties
+  return computedCSSCompatData
 }
 
 const main = async () => {
+  await writeFile("test.json", JSON.stringify(features, null, 2))
+
   p.intro(c.magenta(`Generating Yamada UI styles`))
 
   const s = p.spinner()
@@ -250,51 +264,54 @@ const main = async () => {
     s.start(`Getting the "csstype" module`)
 
     const cssTypes = await getCSSTypes()
+    const typeProperties = Object.keys(cssTypes)
 
     s.stop(`Got the "csstype" module`)
 
-    const properties = getCSSProperties()
+    const { atRuleCompatData, cssCompatData } = getCSSCompatData()
 
-    const typeProperties = Object.keys(cssTypes)
-    const omittedProperties = omitProperties(
-      properties,
-      typeProperties,
-      (message) => {
-        p.note(message, `Omitted properties that are not present in "csstype"`)
-      },
-    )
+    checkProperties(cssCompatData, typeProperties, (message, isDeprecated) => {
+      p.note(
+        message,
+        isDeprecated
+          ? `Deprecated properties`
+          : `Properties that are not present in "csstype"`,
+      )
+    })
 
-    const excludedProperties = excludeProperties(
-      omittedProperties,
+    const excludedCSSCompatData = excludeProperties(
+      cssCompatData,
       (message) => {
         p.note(message, `Excluded properties`)
       },
     )
 
-    const styles = excludedProperties
-      .map((property) => {
-        const isAtRule = property.property_type === "at-rule"
-        const { type, deprecated = false } = cssTypes[property.prop] ?? {}
+    const computedCSSCompatData = Object.fromEntries(
+      Object.entries(excludedCSSCompatData).map(([name, data]) => {
+        const { type = "string & {}" } = cssTypes[name] ?? {}
 
-        if (!type && !isAtRule) return
-        if (isAtRule) return { ...property, type: "", deprecated }
+        const computedData = { ...data, type }
 
-        return { ...property, type: type as string, deprecated }
-      })
-      .filter((style) => !isUndefined(style))
+        return [name, computedData]
+      }),
+    )
 
     s.start(`Writing file "${OUT_PATH}"`)
 
-    const { data, pickedStyles } = await generateStyles(styles)
+    const { data, excludedProperties } = await generateStyles(
+      computedCSSCompatData,
+      atRuleCompatData,
+    )
 
     await writeFile(OUT_PATH, data)
 
     s.stop(`Wrote file "${OUT_PATH}"`)
 
-    if (pickedStyles.length) {
-      const table = pickedStyles.map(({ name, url }, index) => ({
-        name,
+    if (excludedProperties.length) {
+      const table = excludedProperties.map(({ name, url }, index) => ({
         row: index + 1,
+        // eslint-disable-next-line perfectionist/sort-objects
+        name,
         url,
       }))
 

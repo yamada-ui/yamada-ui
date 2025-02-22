@@ -2,10 +2,8 @@ import type { EmotionCSSObject, Union } from "@yamada-ui/react"
 import type { CSSProperties } from "."
 
 export interface StyleConfig {
-  type?: string | string[]
+  type?: string
   description?: string[]
-  processResult?: boolean
-  processSkip?: boolean
   properties?: Union<CSSProperties> | Union<CSSProperties>[]
   static?: EmotionCSSObject
   variableLength?: boolean
@@ -35,11 +33,6 @@ export const additionalProps = {
   boxSize: { properties: ["width", "height"] },
   colorMode: {
     type: "CSS.Property.ColorScheme",
-    description: [
-      "The CSS `color-scheme` property.",
-      "",
-      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme",
-    ],
     properties: "colorScheme",
   },
   insetX: { properties: ["left", "right"] },
@@ -48,6 +41,9 @@ export const additionalProps = {
   marginY: { properties: ["marginTop", "marginBottom"] },
   maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
   minBoxSize: { properties: ["minWidth", "minHeight"] },
+  outline: {
+    type: "CSS.Property.Outline | 'outside' | 'inside' | 'mixed'",
+  },
   paddingX: { properties: ["paddingInlineStart", "paddingInlineEnd"] },
   paddingY: { properties: ["paddingTop", "paddingBottom"] },
   scrollMarginX: { properties: ["scrollMarginLeft", "scrollMarginRight"] },
@@ -56,19 +52,9 @@ export const additionalProps = {
   scrollPaddingY: { properties: ["scrollPaddingTop", "scrollPaddingBottom"] },
   transition: {
     type: "CSS.Property.Transition | 'all' | 'common' | 'colors' | 'size' | 'position' | 'backgrounds' | 'opacity' | 'shadow'",
-    description: [
-      "The CSS `transition` property.",
-      "",
-      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition",
-    ],
   },
   transitionProperty: {
     type: "CSS.Property.TransitionProperty | 'all' | 'common' | 'colors' | 'size' | 'position' | 'backgrounds' | 'opacity' | 'shadow'",
-    description: [
-      "The CSS `transition-property` property.",
-      "",
-      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property",
-    ],
   },
 
   focusRing: {
@@ -76,7 +62,6 @@ export const additionalProps = {
     description: [
       "The focus ring is used to identify the currently focused element.",
     ],
-    processResult: true,
   },
   focusRingColor: {
     description: ["Sets the value of `--focus-ring-color`."],
@@ -99,7 +84,6 @@ export const additionalProps = {
     description: [
       "The focus ring is used to identify the currently focused element.",
     ],
-    processResult: true,
   },
 
   blur: {
@@ -235,17 +219,14 @@ export const uiProps = {
       "",
       "This will apply styles defined in `theme.styles.mdx.h1`",
     ],
-    processResult: true,
   },
   layerStyle: {
     type: `StringLiteral, "layerStyles"`,
     description: ["Apply layer styles defined in `theme.layerStyles`."],
-    processResult: true,
   },
   textStyle: {
     type: `StringLiteral, "textStyles"`,
     description: ["Apply text styles defined in `theme.textStyles`."],
-    processResult: true,
   },
   colorScheme: {
     type: `ColorScheme`,
@@ -282,23 +263,17 @@ export const uiProps = {
       "</Box>",
       "```",
     ],
-    processSkip: true,
     variableLength: true,
   },
 } as const satisfies { [key: string]: StyleConfig }
 
 export const atRuleProps = {
   keyframes: {
-    type: "StringLiteral | CSSObject",
-    description: [
-      "The `@keyframes` of CSS at-rule.",
-      "",
-      "@see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes",
-    ],
-    processSkip: true,
+    type: "StringLiteral | { [key: string]: CSSObject }",
+    properties: "animationName",
   },
   _container: {
-    type: [
+    type: `{ ${[
       "name?: StringLiteral",
       "query?: StringLiteral",
       'w?: CSS.Property.Width | number | ThemeTokens["sizes"]',
@@ -325,24 +300,15 @@ export const atRuleProps = {
       'orientation?: "portrait" | "landscape" | StringLiteral',
       "css?: CSSObject",
       "[key: string]: any",
-    ],
-    description: [
-      "The `@container` of CSS at-rule.",
-      "",
-      "@example",
-      "```jsx",
-      '<Box containerType="size">',
-      '  <Text _container={[{ maxW: "1200px", css: { color: "red" } }]}>',
-      "    Box",
-      "  </Text>",
-      "</Box>",
-      "```",
-    ],
-    processSkip: true,
+    ].join(";")}}[]`,
     variableLength: true,
   },
+  _landscape: {
+    type: "CSSObject",
+    properties: "@media (orientation: landscape)",
+  },
   _media: {
-    type: [
+    type: `{ ${[
       'type?: "all" | "print" | "screen" | "speech" | StringLiteral',
       "query?: StringLiteral",
       'w?: CSS.Property.Width | number | ThemeTokens["sizes"]',
@@ -389,7 +355,7 @@ export const atRuleProps = {
       'overflowBlock?: "none" | "scroll" | "paged" | "optional-paged" | StringLiteral',
       'overflowInline?: "none" | "scroll" | StringLiteral',
       'pointer?: "none" | "coarse" | "fine" | StringLiteral',
-      'prefersColorMode?: "light" | "dark" | StringLiteral',
+      'prefersColorScheme?: "light" | "dark" | StringLiteral',
       'prefersContrast?: "no-preference" | "high" | "low" | "custom" | StringLiteral',
       'prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral',
       "resolution?: StringLiteral",
@@ -401,37 +367,31 @@ export const atRuleProps = {
       'videoDynamicRange?: "standard" | "high" | StringLiteral',
       "css?: CSSObject",
       "[key: string]: any",
-    ],
-    description: [
-      "The `@media` of CSS at-rule.",
-      "",
-      "@example",
-      "```jsx",
-      "<Box",
-      '  _media={[{ maxW: "1200px", css: { color: "red" } }]',
-      ">",
-      "  Box",
-      "</Box>",
-      "```",
-    ],
-    processSkip: true,
+    ].join(";")} }[]`,
     variableLength: true,
   },
+  _mediaDark: {
+    type: "CSSObject",
+    properties: "@media (prefers-color-scheme: dark)",
+  },
+  _mediaLight: {
+    type: "CSSObject",
+    properties: "@media (prefers-color-scheme: light)",
+  },
+  _mediaReduceMotion: {
+    type: "CSSObject",
+    properties: "@media (prefers-reduced-motion: reduce)",
+  },
+  _portrait: {
+    type: "CSSObject",
+    properties: "@media (orientation: portrait)",
+  },
+  _print: {
+    type: "CSSObject",
+    properties: "@media print",
+  },
   _supports: {
-    type: ["query?: StringLiteral", "css?: CSSObject"],
-    description: [
-      "The `@supports` of CSS at-rule.",
-      "",
-      "@example",
-      "```jsx",
-      '<Box containerType="size">',
-      '  <Text _supports={[{ display: "flex", css: { display: "flex" } }]}>',
-      "    Box",
-      "  </Text>",
-      "</Box>",
-      "```",
-    ],
-    processSkip: true,
+    type: `{ ${["query?: StringLiteral", "css?: CSSObject"].join(";")} }[]`,
     variableLength: true,
   },
 } as const satisfies { [key: string]: StyleConfig }

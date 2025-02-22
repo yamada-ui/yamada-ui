@@ -200,7 +200,13 @@ export const Dynamic = () => {
         Please Click
       </Button>
 
-      <Box animation={animation} bg="primary" color="white" p="md" rounded="md">
+      <Box
+        animation={animation}
+        bg="mono"
+        color="mono.contrast"
+        p="md"
+        rounded="md"
+      >
         Box
       </Box>
     </>
@@ -281,7 +287,13 @@ export const DynamicAndMultiple = () => {
         Please Click
       </Button>
 
-      <Box animation={animation} bg="primary" color="white" p="md" rounded="md">
+      <Box
+        animation={animation}
+        bg="mono"
+        color="mono.contrast"
+        p="md"
+        rounded="md"
+      >
         Box
       </Box>
     </>

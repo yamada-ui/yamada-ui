@@ -75,8 +75,8 @@ export function keyframes(value: any, { css, theme }: TransformOptions) {
 
     const name = insertKeyframes(value)
 
-    return { animationName: name }
+    return name
   } else {
-    return { animationName: value }
+    return value
   }
 }

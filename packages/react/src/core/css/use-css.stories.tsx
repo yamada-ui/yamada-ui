@@ -11,8 +11,8 @@ export default meta
 
 export const Basic = () => {
   const className = useCSS({
-    bg: "primary",
-    color: "white",
+    bg: "mono",
+    color: "mono.contrast",
     p: "md",
     rounded: "md",
   })
@@ -23,8 +23,8 @@ export const Basic = () => {
 export const Memoization = () => {
   const css = useMemo(
     () => ({
-      bg: "primary",
-      color: "white",
+      bg: "mono",
+      color: "mono.contrast",
       p: "md",
       rounded: "md",
     }),

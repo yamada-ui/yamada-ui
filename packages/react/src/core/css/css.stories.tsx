@@ -35,10 +35,10 @@ export const Variable = () => {
   return (
     <Box
       bg="{bg}"
-      color="white"
+      color="fg.contrast"
       p="md"
       rounded="md"
-      vars={[{ name: "bg", token: "colors", value: "primary" }]}
+      vars={[{ name: "bg", token: "colors", value: "bg.contrast" }]}
     >
       Box
     </Box>

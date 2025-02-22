@@ -1,7 +1,7 @@
 import type { Merge } from "@yamada-ui/utils"
 import type { PropGetter } from "../../core"
 import type { MotionProps } from "../motion"
-import { cx, dataAttr } from "@yamada-ui/utils"
+import { cx, dataAttr, handlerAll } from "@yamada-ui/utils"
 import { useAnimation } from "motion/react"
 import { useCallback } from "react"
 import { useCreateVars } from "../../core"
@@ -89,7 +89,7 @@ export const useAiry = ({
   }, [animate, setValue, readOnly, opacity, duration, delay])
 
   const getRootProps: PropGetter<MotionProps<"button">> = useCallback(
-    (props) => ({
+    (props = {}) => ({
       ...rest,
       ...props,
       type: "button",
@@ -102,7 +102,7 @@ export const useAiry = ({
       disabled,
       initial: { opacity },
       vars,
-      onClick,
+      onClick: handlerAll(props.onClick, rest.onClick, onClick),
     }),
     [
       className,

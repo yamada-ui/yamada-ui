@@ -27,7 +27,7 @@ export const {
 /**
  * `Airy` is a component that creates an airy animation, switching between two elements when one is clicked.
  *
- * @see Docs https://yamada-ui.com/components/transitions/airy
+ * @see Docs https://yamada-ui.com/components/airy
  */
 export const Airy = withContext(({ from, to, ...rest }) => {
   const { value, getRootProps } = useAiry(rest)

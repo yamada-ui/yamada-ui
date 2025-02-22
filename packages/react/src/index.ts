@@ -9,6 +9,10 @@ export * from "./utils"
  * COMPONENTS
  */
 export * from "./components/accordion"
+// export * from "./components/textarea"
+// export * from "./components/toggle"
+// export * from "./components/tooltip"
+export * from "./components/airy"
 export * from "./components/alert"
 export * from "./components/aspect-ratio"
 // export * from "./components/autocomplete"
@@ -96,10 +100,6 @@ export * from "./components/status"
 // export * from "./components/tabs"
 export * from "./components/tag"
 export * from "./components/text"
-// export * from "./components/textarea"
-// export * from "./components/toggle"
-// export * from "./components/tooltip"
-export * from "./components/transitions"
 // export * from "./components/visually-hidden"
 
 /**

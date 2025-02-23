@@ -53,11 +53,13 @@ export function toCSSObject({
       (prop) => prop in styleProps,
     )
 
-    return filterEmpty([
+    const result = filterEmpty([
       base,
       ...toArray(themeStyles),
       filterUndefined(propsStyle),
     ]).map((cssObj) => css(cssObj)(theme, forwardProps))
+
+    return result
   }
 }
 

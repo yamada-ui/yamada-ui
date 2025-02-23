@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-descendant",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "description": "Yamada UI useDescendant custom hook",
   "keywords": [
     "use-descendant"

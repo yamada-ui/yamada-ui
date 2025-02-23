@@ -1,5 +1,23 @@
 # @yamada-ui/select
 
+## 1.8.9
+
+### Patch Changes
+
+- Updated dependencies [[`99279fa`](https://github.com/yamada-ui/yamada-ui/commit/99279fa1742c76ed573e6df0397c13e07bc718ff)]:
+  - @yamada-ui/motion@2.3.2
+  - @yamada-ui/utils@1.7.1
+  - @yamada-ui/core@1.17.2
+  - @yamada-ui/popover@1.5.2
+  - @yamada-ui/form-control@2.1.14
+  - @yamada-ui/icon@1.1.20
+  - @yamada-ui/portal@1.0.29
+  - @yamada-ui/use-clickable@1.2.20
+  - @yamada-ui/use-controllable-state@1.0.28
+  - @yamada-ui/use-descendant@1.0.30
+  - @yamada-ui/use-disclosure@1.1.5
+  - @yamada-ui/use-outside-click@1.0.28
+
 ## 1.8.8
 
 ### Patch Changes

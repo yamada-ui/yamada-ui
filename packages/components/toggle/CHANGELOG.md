@@ -1,5 +1,15 @@
 # @yamada-ui/toggle
 
+## 1.0.35
+
+### Patch Changes
+
+- Updated dependencies [[`99279fa`](https://github.com/yamada-ui/yamada-ui/commit/99279fa1742c76ed573e6df0397c13e07bc718ff)]:
+  - @yamada-ui/utils@1.7.1
+  - @yamada-ui/core@1.17.2
+  - @yamada-ui/ripple@1.0.51
+  - @yamada-ui/use-controllable-state@1.0.28
+
 ## 1.0.34
 
 ### Patch Changes

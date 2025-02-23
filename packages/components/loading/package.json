@@ -52,7 +52,7 @@
     "@yamada-ui/portal": "workspace:*",
     "@yamada-ui/use-timeout": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "react-remove-scroll": "^2.6.0"
+    "react-remove-scroll": "^2.6.3"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

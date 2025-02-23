@@ -1,12 +1,18 @@
 import type { ThemeToken, Transforms } from "@yamada-ui/react"
-import type { CSSProperty, Properties } from "."
+import type {
+  CSSCompatData,
+  CSSCompatStatement,
+  CSSProperties,
+  FeatureData,
+  Properties,
+  UIProperties,
+} from "."
 import type { TransformOptions } from "./transform-props"
 import type { StyleConfig } from "./ui-props"
-import { pseudoSelectors, toKebabCase } from "@yamada-ui/react"
+import { isUndefined, pseudoSelectors, toArray } from "@yamada-ui/react"
 import { prettier } from "../utils"
 import { checkProps } from "./check"
 import { generateConfig } from "./config"
-import { layoutStyleProperties } from "./layout-props"
 import { overrideTypes } from "./override-types"
 import { shorthandProps } from "./shorthand-props"
 import { tokenMap, tokenPropertyMap } from "./tokens"
@@ -28,7 +34,7 @@ const generateType = ({
   transforms,
   variableLength = false,
 }: {
-  type: string | string[]
+  type?: string | string[]
   prop?: Properties
   token?: ThemeToken
   transforms?: TransformOptions[]
@@ -36,7 +42,7 @@ const generateType = ({
 }) => {
   const overrideType = prop ? overrideTypes[prop] : undefined
 
-  let result = !variableLength ? "Token<>" : ""
+  let result = !variableLength || token ? "Token<>" : ""
 
   if (overrideType) {
     result = addType(result, overrideType)
@@ -48,7 +54,7 @@ const generateType = ({
     if (typeof type === "string") {
       result = addType(result, type)
     } else {
-      if (type.length) {
+      if (type?.length) {
         result = addType(result, type.join(" | "))
       } else {
         result = addType(result, "StringLiteral")
@@ -63,45 +69,75 @@ const generateType = ({
   return result
 }
 
-const generateDocs = ({
-  deprecated,
-  description = [],
-  properties,
-  urls = [],
-}: {
-  properties: string | string[] | undefined
-  deprecated?: boolean
-  description?: string[]
-  urls?: string[]
-}) => {
-  if (!description.length) {
-    if (!properties) return ""
+const getBaseline = (feature?: FeatureData) => {
+  if (!feature) return
 
-    if (typeof properties === "string") {
-      properties = `\`${properties}\``
-    } else {
-      properties = properties
-        .map((property) => `\`${toKebabCase(property)}\``)
-        .join(" and ")
-    }
+  const rows: string[] = []
 
-    description = [...description, `The CSS ${properties} property.`]
+  switch (feature.status.baseline) {
+    case "high":
+      rows.push("@baseline `Widely available`")
+      break
 
-    if (urls.length)
-      description = [
-        ...description,
-        "",
-        ...urls.map((url) => `@see Docs ${url}`),
-      ]
+    case "low":
+      rows.push("@baseline `Newly available`")
+      break
+
+    default:
+      if (!feature.discouraged) rows.push("@baseline `Limited available`")
   }
 
-  if (deprecated) description = [...description, "", `@deprecated`]
+  if (feature.status.baseline_high_date)
+    rows.push(`@widely_available_date ${feature.status.baseline_high_date}`)
 
-  return `/**\n${description.map((row) => `* ${row}`).join("\n")}\n*/`
+  if (feature.status.baseline_low_date)
+    rows.push(`@newly_available_date ${feature.status.baseline_low_date}`)
+
+  return rows
 }
 
+const generateDoc =
+  (...data: CSSCompatStatement[]) =>
+  (rows: string[] = []) => {
+    const deprecated = data.some(({ status }) => status?.deprecated)
+    const experimental = data.some(({ status }) => status?.experimental)
+
+    data.forEach(({ name, feature, mdn_url, spec_url, ...data }, index) => {
+      if (!!index) {
+        rows.push("", "------------------------------------", "")
+      }
+      let description = feature?.description_html ?? data.description
+
+      if (description) {
+        // description = description.replace(/(@\w+)/g, "`$1`")
+      } else {
+        description = `The CSS \`${name}\` property.`
+      }
+
+      const url = mdn_url ?? toArray(spec_url)[0]
+      const baseline = getBaseline(feature)
+
+      rows.push(`### ${name}`, "", description)
+
+      if (baseline) rows.push("", ...baseline)
+
+      if (url) rows.push("", `@see ${url}`)
+    })
+
+    if (experimental && deprecated) {
+      rows.push("", `@experimental`, `@deprecated`)
+    } else if (experimental) {
+      rows.push("", `@experimental`)
+    } else if (deprecated) {
+      rows.push("", `@deprecated`)
+    }
+
+    return `/**\n${rows.map((row) => `* ${row}`).join("\n")}\n*/`
+  }
+
 export const generateStyles = async (
-  styles: ({ type: string; deprecated: boolean } & CSSProperty)[],
+  cssCompatData: CSSCompatData,
+  atRuleCompatData: CSSCompatData,
 ) => {
   const standardStyles: string[] = []
   const shorthandStyles: string[] = []
@@ -111,9 +147,9 @@ export const generateStyles = async (
   const styleProps: string[] = []
   const variableLengthProps: string[] = []
   const tokenProps: { [key in ThemeToken]?: string[] } = {}
-  const pickedStyles: ({ type: string } & CSSProperty)[] = []
+  const excludedProperties: { name: string; url?: string }[] = []
 
-  checkProps(styles)
+  checkProps(cssCompatData)
 
   pseudoSelectors.forEach((selector) => {
     const transforms = transformMap[selector]
@@ -125,28 +161,37 @@ export const generateStyles = async (
     pseudoStyles.push(`"${selector}": ${config}`)
   })
 
-  styles = styles.filter((style) => {
-    const isExists = [
-      ...Object.keys(additionalProps),
-      ...Object.keys(atRuleProps),
-      ...Object.keys(uiProps),
-    ].includes(style.prop)
+  const omittedCssCompatData = Object.fromEntries(
+    Object.entries(cssCompatData).filter(([name, data]) => {
+      const isExists = [
+        ...Object.keys(additionalProps),
+        ...Object.keys(uiProps),
+      ].includes(name)
 
-    if (isExists) pickedStyles.push(style)
+      if (isExists) {
+        const url = data.mdn_url ?? toArray(data.spec_url)[0]
 
-    return !isExists
-  })
+        excludedProperties.push({ name, url })
 
-  styles.forEach(({ type, name, deprecated, prop, url }) => {
+        return false
+      } else {
+        return true
+      }
+    }),
+  )
+
+  Object.entries(omittedCssCompatData).forEach(([_prop, data]) => {
+    const prop = _prop as CSSProperties | UIProperties
+    const type = data.type
     const token = tokenMap[prop]
     const shorthands = shorthandProps[prop]
     const transforms = transformMap[prop]
     const config = generateConfig({ properties: prop, token, transforms })()
-    const docs = generateDocs({ deprecated, properties: name, urls: [url] })
+    const doc = generateDoc(data)()
+    const computedType = generateType({ type, prop, token, transforms })
 
-    type = generateType({ type, prop, token, transforms })
     standardStyles.push(`${prop}: ${config}`)
-    styleProps.push(...[docs, `${prop}?: ${type}`])
+    styleProps.push(...[doc, `${prop}?: ${computedType}`])
 
     if (token) {
       tokenProps[token] ??= []
@@ -162,36 +207,51 @@ export const generateStyles = async (
         if (token) tokenProps[token]?.push(shorthandProp)
 
         shorthandStyles.push(`${shorthandProp}: ${shorthandStyle}`)
-        styleProps.push(docs, `${shorthandProp}?: ${type}`)
+        styleProps.push(doc, `${shorthandProp}?: ${computedType}`)
       })
     }
   })
 
+  const getRelatedCompatData = (
+    properties: string | string[] | undefined,
+    prop: string,
+    isAtRule = false,
+  ) => {
+    if (isAtRule) {
+      const computedProp = prop.replace(/^_/, "")
+      const computedName = toArray(properties)[0]
+        ?.replace(/^@/, "")
+        .split(" ")[0]
+
+      return Object.entries(atRuleCompatData).filter(
+        ([relatedProp, { name }]) =>
+          relatedProp === computedProp || name === computedName,
+      )
+    } else {
+      return Object.entries(cssCompatData).filter(
+        ([relatedProp]) =>
+          (typeof properties === "string"
+            ? relatedProp === properties
+            : properties?.includes(relatedProp)) || relatedProp === prop,
+      )
+    }
+  }
+
   const addStyles = (
-    [
-      prop,
-      {
-        type,
-        description,
-        processResult,
-        processSkip,
-        properties,
-        static: css,
-        variableLength,
-      },
-    ]: [string, StyleConfig],
+    [prop, { type, description, properties, static: css, variableLength }]: [
+      string,
+      StyleConfig,
+    ],
     targetStyles: string[],
+    isAtRule = false,
   ) => {
     if (variableLength) variableLengthProps.push(prop)
 
-    const relatedStyles = styles.filter(({ prop }) =>
-      typeof properties === "string"
-        ? prop === properties
-        : properties?.includes(prop),
-    )
-    const deprecated = relatedStyles.some(({ deprecated }) => deprecated)
-    const urls = relatedStyles.map(({ url }) => url)
-    const types = relatedStyles.map(({ type }) => type)
+    const relatedCompatData = getRelatedCompatData(properties, prop, isAtRule)
+    const relatedData = relatedCompatData.map(([_, data]) => data)
+    const types = relatedCompatData
+      .map(([_, { type }]) => type)
+      .filter((type) => !isUndefined(type))
     const token = tokenMap[prop as Properties]
     const shorthands = shorthandProps[prop as Properties]
     const transforms = transformMap[prop as Properties]
@@ -205,17 +265,15 @@ export const generateStyles = async (
 
     const config = generateConfig({
       css,
-      processResult,
-      processSkip,
       properties,
       token,
       transforms,
     })(true)
 
-    const docs = generateDocs({ deprecated, description, properties, urls })
+    const doc = generateDoc(...relatedData)(description)
 
     targetStyles.push(`${prop}: ${config}`)
-    styleProps.push(...[docs, `${prop}?: ${type}`])
+    styleProps.push(...[doc, `${prop}?: ${type}`])
 
     if (token) {
       tokenProps[token] ??= []
@@ -231,7 +289,7 @@ export const generateStyles = async (
         if (token) tokenProps[token]?.push(shorthandProp)
 
         shorthandStyles.push(`${shorthandProp}: ${shorthandStyle}`)
-        styleProps.push(docs, `${shorthandProp}?: ${type}`)
+        styleProps.push(doc, `${shorthandProp}?: ${type}`)
       })
     }
   }
@@ -243,7 +301,7 @@ export const generateStyles = async (
     addStyles(entry, uiStyles),
   )
   Object.entries<StyleConfig>(atRuleProps).forEach((entry) =>
-    addStyles(entry, atRuleStyles),
+    addStyles(entry, atRuleStyles, true),
   )
 
   const variableLengthProperties = variableLengthProps.map(
@@ -316,10 +374,6 @@ export const generateStyles = async (
 
     ${tokenProperties.join("\n\n")}
 
-    export type LayoutStyleProperty = typeof layoutStyleProperties[number]
-
-    export const layoutStyleProperties = [${layoutStyleProperties.join(", ")}] as const
-
     export interface StyleProps {
       ${styleProps.join("\n")}
     }
@@ -327,5 +381,5 @@ export const generateStyles = async (
 
   const data = await prettier(content)
 
-  return { data, pickedStyles }
+  return { data, excludedProperties }
 }

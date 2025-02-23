@@ -1,4 +1,3 @@
-import type { RefObject } from "react"
 import type { PropGetter } from "../../core"
 import { useCallback, useRef } from "react"
 import {
@@ -138,10 +137,6 @@ const calcRows = (
 
 export interface UseAutosizeProps {
   /**
-   * Ref to a textarea element.
-   */
-  ref: RefObject<HTMLTextAreaElement | null>
-  /**
    * If `true`, the Textarea height will not be adjusted.
    *
    * @default false
@@ -162,11 +157,11 @@ export interface UseAutosizeProps {
 }
 
 export const useAutosize = ({
-  ref,
   disabled = false,
   maxRows = Infinity,
   minRows = 2,
-}: UseAutosizeProps) => {
+}: UseAutosizeProps = {}) => {
+  const ref = useRef<HTMLTextAreaElement>(null)
   const beforeValueRef = useRef<string>(null)
   const value = ref.current?.value ?? ""
 
@@ -226,7 +221,7 @@ export const useAutosize = ({
     onResizeTextarea()
   }, [value])
 
-  return { getTextareaProps, onResizeTextarea }
+  return { ref, getTextareaProps, onResizeTextarea }
 }
 
 export type UseAutosizeReturn = ReturnType<typeof useAutosize>

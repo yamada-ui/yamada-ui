@@ -86,6 +86,7 @@
     "@faker-js/faker": "^9.3.0",
     "@koralle/vitest-axe": "^0.1.1",
     "@lucide/lab": "^0.1.2",
+    "@mdn/browser-compat-data": "^5.6.31",
     "@octokit/request-error": "^6.1.5",
     "@octokit/rest": "^21.0.2",
     "@storybook/addon-a11y": "^8.4.7",
@@ -163,7 +164,8 @@
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.1",
     "vite": "^5.4.11",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "web-features": "^2.19.0"
   },
   "pnpm": {
     "overrides": {

@@ -1,7 +1,7 @@
 import type { ForwardedRef } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { UseAutosizeProps } from "./use-autosize"
-import { useCallback, useRef } from "react"
+import { useCallback } from "react"
 import { assignRef, handlerAll, mergeRefs, noop } from "../../utils"
 import { useAutosize } from "./use-autosize"
 
@@ -25,10 +25,7 @@ export const useTextarea = ({
   resizeRef,
   ...rest
 }: UseTextareaProps) => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
-
-  const { onResizeTextarea } = useAutosize({
-    ref: textareaRef,
+  const { ref, onResizeTextarea } = useAutosize({
     disabled: !autosize,
     maxRows,
     minRows,
@@ -37,10 +34,10 @@ export const useTextarea = ({
   assignRef(resizeRef, onResizeTextarea)
 
   const getTextareaProps: PropGetter<"textarea"> = useCallback(
-    ({ ref, style, ...props } = {}) => ({
+    ({ style, ...props } = {}) => ({
       ...rest,
       ...props,
-      ref: mergeRefs(ref, rest.ref, textareaRef),
+      ref: mergeRefs(props.ref, rest.ref, ref),
       style: { resize: autosize ? "none" : undefined, ...rest.style, ...style },
       onChange: handlerAll(
         props.onChange,
@@ -48,7 +45,7 @@ export const useTextarea = ({
         autosize ? onResizeTextarea : noop,
       ),
     }),
-    [autosize, onResizeTextarea, rest],
+    [autosize, onResizeTextarea, rest, ref],
   )
 
   return {

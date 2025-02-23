@@ -1,10 +1,10 @@
-import type { AnimationStyle } from "../../core"
+import type { CSSAnimationObject } from "../../core"
 import { useAnimation, useAnimationObserver, useDynamicAnimation } from "."
 import { act, renderHook, waitFor } from "../../../test"
 
 describe("useAnimation", () => {
   test("should generate a single animation string", () => {
-    const style: AnimationStyle = {
+    const style: CSSAnimationObject = {
       duration: "10s",
       iterationCount: "infinite",
       keyframes: {
@@ -38,7 +38,7 @@ describe("useAnimation", () => {
   })
 
   test("should generate a multi animation string", () => {
-    const style: AnimationStyle[] = [
+    const style: CSSAnimationObject[] = [
       {
         duration: "10s",
         iterationCount: "infinite",
@@ -108,7 +108,7 @@ describe("useAnimation", () => {
 
 describe("useDynamicAnimation", () => {
   test("A animation should be changed dynamically", async () => {
-    const style: { [key: string]: AnimationStyle } = {
+    const style: { [key: string]: CSSAnimationObject } = {
       moveLeft: {
         duration: "slower",
         fillMode: "forwards",
@@ -153,7 +153,7 @@ describe("useDynamicAnimation", () => {
   })
 
   test("Multi animation should be changed dynamically", async () => {
-    const style: { [key: string]: AnimationStyle[] } = {
+    const style: { [key: string]: CSSAnimationObject[] } = {
       moveLeft: [
         {
           duration: "slower",
@@ -228,7 +228,7 @@ describe("useDynamicAnimation", () => {
   })
 
   test("Should accept multiple keys", async () => {
-    const style: { [key: string]: AnimationStyle } = {
+    const style: { [key: string]: CSSAnimationObject } = {
       gradients: {
         duration: "10s",
         iterationCount: "infinite",
@@ -300,7 +300,7 @@ describe("useDynamicAnimation", () => {
   })
 
   test("Should be undefined if no default key is set", () => {
-    const style: { [key: string]: AnimationStyle } = {
+    const style: { [key: string]: CSSAnimationObject } = {
       moveLeft: {
         keyframes: {},
       },

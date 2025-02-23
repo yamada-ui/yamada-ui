@@ -1,4 +1,9 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps, Token } from "../../core"
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeProps,
+  StyleValue,
+} from "../../core"
 import type { UseSaturationSliderProps } from "./use-saturation-slider"
 import {
   forwardRef,
@@ -15,7 +20,7 @@ interface SaturationSliderOptions {
    *
    * @default '16 / 9'
    */
-  ratio?: Token<number>
+  ratio?: StyleValue<number>
   /**
    * Props for saturation slider inner element.
    */

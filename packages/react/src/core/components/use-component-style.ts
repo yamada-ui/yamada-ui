@@ -7,7 +7,7 @@ import type {
   CSSObject,
   CSSSlotObject,
   ResponsiveObject,
-  UIValue,
+  StyleValue,
 } from "../css"
 import type {
   BreakpointDirection,
@@ -283,7 +283,7 @@ function getCompoundStyle<Y extends boolean = false>(
 }
 
 function getModifierStyle<Y extends boolean = false>(
-  value: UIValue<number | string> | undefined,
+  value: StyleValue<number | string> | undefined,
   mergedStyle: MergedStyle,
 ) {
   return function (options: GetStyleOptions): Style<Y> | undefined {

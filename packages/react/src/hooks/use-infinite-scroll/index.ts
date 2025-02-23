@@ -1,5 +1,5 @@
 import type { RefObject } from "react"
-import type { Orientation, UIValue } from "../../core"
+import type { Orientation, StyleValue } from "../../core"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   assignRef,
@@ -92,7 +92,7 @@ export interface UseInfiniteScrollProps
    *
    * @default 'vertical'
    */
-  orientation?: UIValue<Orientation>
+  orientation?: StyleValue<Orientation>
   /**
    * Ref to a reset function.
    */

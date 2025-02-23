@@ -1,5 +1,5 @@
 import type { Variants } from "motion/react"
-import type { ThemeProps, UIValue } from "../../core"
+import type { StyleValue, ThemeProps } from "../../core"
 import type {
   MotionProps,
   MotionTransitionVariants,
@@ -65,13 +65,13 @@ export interface SlideFadeProps
    *
    * @default 0
    */
-  offsetX?: UIValue<number | string>
+  offsetX?: StyleValue<number | string>
   /**
    * The offset on the vertical or `y` axis.
    *
    * @default 8
    */
-  offsetY?: UIValue<number | string>
+  offsetY?: StyleValue<number | string>
   /**
    * If `true`, the element will be transitioned back to the offset when it leaves. Otherwise, it'll only fade out.
    *

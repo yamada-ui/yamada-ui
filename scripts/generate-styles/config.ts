@@ -20,8 +20,6 @@ const generateTransform = (...transforms: TransformOptions[]) => {
 
 interface GetConfigOptions {
   css?: EmotionCSSObject
-  processResult?: boolean
-  processSkip?: boolean
   properties?:
     | Union<CSSProperties | UIProperties>
     | Union<CSSProperties | UIProperties>[]
@@ -30,14 +28,7 @@ interface GetConfigOptions {
 }
 
 export const generateConfig =
-  ({
-    css,
-    processResult,
-    processSkip,
-    properties,
-    token,
-    transforms,
-  }: GetConfigOptions) =>
+  ({ css, properties, token, transforms }: GetConfigOptions) =>
   (isConfig?: boolean) => {
     if (!isConfig && !token && !transforms && !css) return true
 
@@ -56,8 +47,6 @@ export const generateConfig =
     }
 
     if (token) config.push(`token: "${token}"`)
-    if (processResult) config.push(`processResult: true`)
-    if (processSkip) config.push(`processSkip: true`)
     if (css) config.push(`static: ${JSON.stringify(css)}`)
 
     if (transforms || token) {

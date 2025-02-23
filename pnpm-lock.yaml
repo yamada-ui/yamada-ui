@@ -54,6 +54,9 @@ importers:
       '@lucide/lab':
         specifier: ^0.1.2
         version: 0.1.2
+      '@mdn/browser-compat-data':
+        specifier: ^5.6.31
+        version: 5.6.41
       '@octokit/request-error':
         specifier: ^6.1.5
         version: 6.1.5
@@ -137,7 +140,7 @@ importers:
         version: 2.1.8(vitest@2.1.8)
       '@vitest/eslint-plugin':
         specifier: ^1.1.19
-        version: 1.1.20(@typescript-eslint/utils@8.18.2)(eslint@9.17.0)(typescript@5.7.2)(vitest@2.1.8)
+        version: 1.1.20(@typescript-eslint/utils@8.24.0)(eslint@9.17.0)(typescript@5.7.2)(vitest@2.1.8)
       '@vitest/ui':
         specifier: ^2.1.8
         version: 2.1.8(vitest@2.1.8)
@@ -200,7 +203,7 @@ importers:
         version: 6.10.2(eslint@9.17.0)
       eslint-plugin-perfectionist:
         specifier: ^4.8.0
-        version: 4.8.0(eslint@9.17.0)(typescript@5.7.2)
+        version: 4.9.0(eslint@9.17.0)(typescript@5.7.2)
       eslint-plugin-react:
         specifier: ^7.37.2
         version: 7.37.3(eslint@9.17.0)
@@ -288,6 +291,9 @@ importers:
       vitest:
         specifier: ^2.1.8
         version: 2.1.8(@types/node@22.10.2)(@vitest/ui@2.1.8)(jsdom@25.0.1)
+      web-features:
+        specifier: ^2.19.0
+        version: 2.23.0
 
   docs:
     dependencies:
@@ -4685,6 +4691,10 @@ packages:
       read-yaml-file: 1.1.0
     dev: false
 
+  /@mdn/browser-compat-data@5.6.41:
+    resolution: {integrity: sha512-zsWm+JSL/0+Dbrvlp+IG/2hbB3/3+WeSbxaEVoFdIJNqKyJsyf1Dn95xYLKHGcs9q18bDTJo39Bv9T10YHzg6w==, tarball: https://registry.npmjs.org/@mdn/browser-compat-data/-/browser-compat-data-5.6.41.tgz}
+    dev: false
+
   /@mdx-js/mdx@2.3.0:
     resolution: {integrity: sha512-jLuwRlz8DQfQNiUCJR50Y09CGPq3fLtmtUQfVrj79E0JWu3dvsVcxVIcfhR5h0iXu+/z++zDrYeiJqifRynJkA==, tarball: https://registry.npmjs.org/@mdx-js/mdx/-/mdx-2.3.0.tgz}
     dependencies:
@@ -6766,7 +6776,7 @@ packages:
       - supports-color
     dev: false
 
-  /@vitest/eslint-plugin@1.1.20(@typescript-eslint/utils@8.18.2)(eslint@9.17.0)(typescript@5.7.2)(vitest@2.1.8):
+  /@vitest/eslint-plugin@1.1.20(@typescript-eslint/utils@8.24.0)(eslint@9.17.0)(typescript@5.7.2)(vitest@2.1.8):
     resolution: {integrity: sha512-2eLsgUm+GVOpDfNyH2do//MiNO/WZkXrPi+EjDmXEdUt6Jwnziq4H221L8vJE0aJys+l1FRfSkm4QbaIyDCfBg==, tarball: https://registry.npmjs.org/@vitest/eslint-plugin/-/eslint-plugin-1.1.20.tgz}
     peerDependencies:
       '@typescript-eslint/utils': '>= 8.0'
@@ -6779,7 +6789,7 @@ packages:
       vitest:
         optional: true
     dependencies:
-      '@typescript-eslint/utils': 8.18.2(eslint@9.17.0)(typescript@5.7.2)
+      '@typescript-eslint/utils': 8.24.0(eslint@9.17.0)(typescript@5.7.2)
       eslint: 9.17.0(jiti@2.4.2)
       typescript: 5.7.2
       vitest: 2.1.8(@types/node@22.10.2)(@vitest/ui@2.1.8)(jsdom@25.0.1)
@@ -9328,8 +9338,8 @@ packages:
       - typescript
     dev: true
 
-  /eslint-plugin-perfectionist@4.8.0(eslint@9.17.0)(typescript@5.7.2):
-    resolution: {integrity: sha512-ZF04IAPGItYMlj9xjgvvl/QpksZf79g0dkxbNcuxDjbcUSZ4CwucJ7h5Yzt5JuHe+i6igQbUYEp40j4ndfbvWQ==, tarball: https://registry.npmjs.org/eslint-plugin-perfectionist/-/eslint-plugin-perfectionist-4.8.0.tgz}
+  /eslint-plugin-perfectionist@4.9.0(eslint@9.17.0)(typescript@5.7.2):
+    resolution: {integrity: sha512-76lDfJnonOcXGW3bEXuqhEGId0LrOlvIE1yLHvK/eKMMPOc0b43KchAIR2Bdbqlg+LPXU5/Q+UzuzkO+cWHT6w==, tarball: https://registry.npmjs.org/eslint-plugin-perfectionist/-/eslint-plugin-perfectionist-4.9.0.tgz}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       eslint: '>=8.0.0'
@@ -17477,6 +17487,10 @@ packages:
       util: 0.12.5
     optionalDependencies:
       '@zxing/text-encoding': 0.9.0
+
+  /web-features@2.23.0:
+    resolution: {integrity: sha512-QlQxkjr6mHriSez8gYK1I8OI7asv4cIxx/VNNqFtvN1GvTQXLU5/BJoaWA2wnfoeFfY0nEyx+Qz9Ty0601GLDw==, tarball: https://registry.npmjs.org/web-features/-/web-features-2.23.0.tgz}
+    dev: false
 
   /web-streams-polyfill@3.3.3:
     resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==, tarball: https://registry.npmjs.org/web-streams-polyfill/-/web-streams-polyfill-3.3.3.tgz}

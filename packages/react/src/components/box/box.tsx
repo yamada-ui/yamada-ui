@@ -10,4 +10,5 @@ export interface BoxProps extends HTMLUIProps {}
  */
 export const Box = ui("div")
 
+Box.displayName = "Box"
 Box.__ui__ = "Box"

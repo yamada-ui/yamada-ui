@@ -204,13 +204,58 @@ function valueToVar(value: any, theme: StyledTheme<UsageTheme>) {
   })
 }
 
+function mergeCSS(
+  prev: Dict,
+  value: any,
+  prop: string,
+  properties?: string | string[],
+) {
+  if (properties) {
+    if (isArray(properties)) {
+      for (const property of properties) {
+        prev[property] = prev[property] ?? {}
+        prev[property] = merge(prev[property], value)
+      }
+    } else {
+      prev[properties] = prev[properties] ?? {}
+      prev[properties] = merge(prev[properties], value)
+    }
+  } else {
+    prev[prop] = prev[prop] ?? {}
+    prev[prop] = merge(prev[prop], value)
+  }
+
+  return prev
+}
+
+function insertCSS(
+  prev: Dict,
+  value: any,
+  prop: string,
+  properties?: string | string[],
+) {
+  if (properties) {
+    if (isArray(properties)) {
+      for (const property of properties) {
+        prev[property] = value
+      }
+    } else {
+      prev[properties] = value
+    }
+  } else {
+    prev[prop] = value
+  }
+
+  return prev
+}
+
 export function css(cssOrFunc: CSSObjectOrFunc) {
   return function (theme: StyledTheme<UsageTheme>, forwardProps?: string[]) {
-    function createCSS(cssOrFunc: CSSObjectOrFunc, nested = false): Dict {
+    function createCSS(cssOrFunc: CSSObjectOrFunc): Dict {
       const cssObj = runIfFunc(cssOrFunc, theme)
       const computedCSS = expandCSS(cssObj)(theme)
 
-      let resolvedCSS: Dict = {}
+      let prev: Dict = {}
 
       for (let [prop, value] of Object.entries(computedCSS)) {
         if (forwardProps?.includes(prop)) continue
@@ -228,17 +273,16 @@ export function css(cssOrFunc: CSSObjectOrFunc) {
 
         if (style === true) style = { properties: prop }
 
-        if (isObject(value) && !style?.processSkip) {
-          value =
-            style?.transform?.(value, {
-              css,
-              prev: resolvedCSS,
-              properties: style.properties,
-              theme,
-            }) ?? value
+        const options = { css, prev, properties: style?.properties, theme }
 
-          resolvedCSS[prop] = resolvedCSS[prop] ?? {}
-          resolvedCSS[prop] = merge(resolvedCSS[prop], createCSS(value, true))
+        if (isObject(value)) {
+          value = style?.transform?.(value, options) ?? value
+
+          if (isObject(value)) {
+            prev = mergeCSS(prev, createCSS(value), prop, style?.properties)
+          } else {
+            prev = insertCSS(prev, value, prop, style?.properties)
+          }
 
           continue
         }
@@ -246,51 +290,22 @@ export function css(cssOrFunc: CSSObjectOrFunc) {
         const important = isImportant(value)
 
         value = omitImportant(value)
-
-        value =
-          style?.transform?.(value, {
-            css,
-            prev: resolvedCSS,
-            properties: style.properties,
-            theme,
-          }) ?? value
+        value = style?.transform?.(value, options) ?? value
 
         if (important) value = insertImportant(value, style)
 
-        if (isObject(value) && (style?.processResult || style?.processSkip))
-          value = createCSS(value, true)
-
-        if (!nested && style?.static)
-          resolvedCSS = merge(resolvedCSS, style.static)
-
-        if (style?.properties) {
-          if (isArray(style.properties)) {
-            for (const property of style.properties) {
-              resolvedCSS[property] = value
-            }
-
-            continue
-          } else if (isObject(value)) {
-            resolvedCSS = merge(resolvedCSS, value)
-
-            continue
-          } else {
-            resolvedCSS[style.properties] = value
-
-            continue
-          }
-        }
+        if (style?.static) prev = merge(prev, style.static)
 
         if (isObject(value)) {
-          resolvedCSS = merge(resolvedCSS, value)
+          prev = merge(prev, createCSS(value))
 
           continue
         }
 
-        resolvedCSS[prop] = value
+        prev = insertCSS(prev, value, prop, style?.properties)
       }
 
-      return resolvedCSS
+      return prev
     }
 
     return createCSS(cssOrFunc)

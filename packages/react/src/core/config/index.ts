@@ -30,8 +30,6 @@ type CSSProperties = Union<
 >
 
 export interface StyleConfig {
-  processResult?: boolean
-  processSkip?: boolean
   properties?: CSSProperties | CSSProperties[]
   static?: CSSObject
   token?: ThemeToken

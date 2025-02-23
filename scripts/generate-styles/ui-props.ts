@@ -250,19 +250,7 @@ export const uiProps = {
   },
   vars: {
     type: "{ name: string; token?: ThemeToken, value?: Token<any> }[]",
-    description: [
-      "Set CSS variables.",
-      "",
-      "@example",
-      "```jsx",
-      "<Box",
-      '  vars={[{ name:"space", token: "spaces", value: "md" }]',
-      '  m="calc({space} * 2)"',
-      ">",
-      "  Box",
-      "</Box>",
-      "```",
-    ],
+    description: ["Set CSS variables."],
     variableLength: true,
   },
 } as const satisfies { [key: string]: StyleConfig }

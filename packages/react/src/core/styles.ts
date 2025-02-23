@@ -10198,18 +10198,8 @@ export interface StyleProps {
   truncated?: Token<boolean>
   /**
    * Set CSS variables.
-   *
-   * @example
-   * ```jsx
-   * <Box
-   *   vars={[{ name:"space", token: "spaces", value: "md" }]
-   *   m="calc({space} * 2)"
-   * >
-   *   Box
-   * </Box>
-   * ```
    */
-  vars?: Token<{ name: string; token?: ThemeToken; value?: Token<any> }[]>
+  vars?: { name: string; token?: ThemeToken; value?: Token<any> }[]
   /**
    * ### container
    *
@@ -10259,7 +10249,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _landscape?: CSSObject
+  _landscape?: Token<CSSObject>
   /**
    * ### media
    *
@@ -10359,7 +10349,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaDark?: CSSObject
+  _mediaDark?: Token<CSSObject>
   /**
    * ### media
    *
@@ -10371,7 +10361,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaLight?: CSSObject
+  _mediaLight?: Token<CSSObject>
   /**
    * ### media
    *
@@ -10383,7 +10373,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaReduceMotion?: CSSObject
+  _mediaReduceMotion?: Token<CSSObject>
   /**
    * ### media
    *
@@ -10395,7 +10385,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _portrait?: CSSObject
+  _portrait?: Token<CSSObject>
   /**
    * ### media
    *
@@ -10407,7 +10397,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _print?: CSSObject
+  _print?: Token<CSSObject>
   /**
    * ### supports
    *

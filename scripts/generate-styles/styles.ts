@@ -29,20 +29,20 @@ const addType = (result: string, value: string) =>
 
 const generateType = ({
   type,
-  isAtRule = false,
   prop,
   token,
   transforms,
+  variableLength = false,
 }: {
   type?: string | string[]
-  isAtRule?: boolean
   prop?: Properties
   token?: ThemeToken
   transforms?: TransformOptions[]
+  variableLength?: boolean
 }) => {
   const overrideType = prop ? overrideTypes[prop] : undefined
 
-  let result = !isAtRule || token ? "Token<>" : ""
+  let result = !variableLength || token ? "Token<>" : ""
 
   if (overrideType) {
     result = addType(result, overrideType)
@@ -258,9 +258,9 @@ export const generateStyles = async (
 
     type = generateType({
       type: type ?? types,
-      isAtRule,
       token,
       transforms,
+      variableLength,
     })
 
     const config = generateConfig({

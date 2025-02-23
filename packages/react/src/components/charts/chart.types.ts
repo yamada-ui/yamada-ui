@@ -117,7 +117,7 @@ export interface RadialBarProps
     }
   > {}
 export interface DotProps
-  extends Merge<Omit<Recharts.DotProps, "ref">, CSSProps> {}
+  extends Merge<Omit<Recharts.DotProps, "ref">, Omit<CSSProps, "r">> {}
 export interface XAxisProps
   extends Merge<
     CSSProps,

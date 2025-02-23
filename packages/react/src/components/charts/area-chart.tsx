@@ -1,19 +1,19 @@
-import type { HTMLUIProps } from "../../core"
-import type { LineChartStyle } from "./line-chart.style"
+import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { AreaChartStyle } from "./area-chart.style"
+import type { UseAreaChartOptions } from "./use-area-chart"
 import type { UseChartProps } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
 import type { UseChartGridOptions } from "./use-chart-grid"
 import type { UseChartLegendProps } from "./use-chart-legend"
 import type { UseChartReferenceLineOptions } from "./use-chart-reference-line"
 import type { UseChartTooltipOptions } from "./use-chart-tooltip"
-import type { UseLineChartOptions, UseLineChartReturn } from "./use-line-chart"
 import { useMemo } from "react"
 import {
+  Area,
   CartesianGrid,
   Label,
   Legend,
-  Line,
-  LineChart as ReChartsLineChart,
+  AreaChart as ReChartsAreaChart,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
@@ -21,26 +21,29 @@ import {
   YAxis,
 } from "recharts"
 import { createSlotComponent, ui } from "../../core"
+import { AreaGradient } from "./area-chart-gradient"
+import { AreaSplit } from "./area-chart-split"
+import { areaChartStyle } from "./area-chart.style"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
-import { lineChartStyle } from "./line-chart.style"
+import { useAreaChart } from "./use-area-chart"
 import { useChart } from "./use-chart"
 import { useChartAxis } from "./use-chart-axis"
 import { useChartGrid } from "./use-chart-grid"
 import { useChartLegend } from "./use-chart-legend"
 import { useChartReferenceLine } from "./use-chart-reference-line"
 import { useChartTooltip } from "./use-chart-tooltip"
-import { useLineChart } from "./use-line-chart"
 
-export interface LineChartProps
+export interface AreaChartProps
   extends Omit<HTMLUIProps, "fillOpacity" | "strokeDasharray" | "strokeWidth">,
-    UseLineChartOptions,
+    ThemeProps<AreaChartStyle>,
+    UseAreaChartOptions,
     UseChartProps,
     UseChartAxisOptions,
-    UseChartLegendProps,
-    UseChartTooltipOptions,
     UseChartReferenceLineOptions,
-    UseChartGridOptions {
+    UseChartGridOptions,
+    UseChartTooltipOptions,
+    UseChartLegendProps {
   /**
    * If `true`, legend is visible.
    *
@@ -55,27 +58,25 @@ export interface LineChartProps
   withTooltip?: boolean
 }
 
-interface LineChartContext
-  extends Pick<UseLineChartReturn, "getLineChartProps"> {}
-
 export const {
-  PropsContext: LineChartPropsContext,
-  usePropsContext: useLineChartPropsContext,
+  PropsContext: AreaChartPropsContext,
+  usePropsContext: useAreaChartPropsContext,
   useStyleContext,
   withContext,
   withProvider,
-} = createSlotComponent<LineChartProps, LineChartStyle, LineChartContext>(
-  "line-chart",
-  lineChartStyle,
+} = createSlotComponent<AreaChartProps, AreaChartStyle>(
+  "area-chart",
+  areaChartStyle,
 )
 
 /**
- * `LineChart` is a component for drawing line charts to compare multiple sets of data.
+ * `AreaChart` is a component for drawing area charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/line-chart
+ * @see Docs https://yamada-ui.com/components/area-chart
  */
-export const LineChart = withProvider<"div", LineChartProps>(
+export const AreaChart = withProvider<"div", AreaChartProps>(
   ({
+    type = "default",
     fillOpacity,
     labelFormatter,
     series,
@@ -91,15 +92,22 @@ export const LineChart = withProvider<"div", LineChartProps>(
     const styles = useStyleContext()
 
     const { getContainerProps } = useChart(rest)
-    const { lineVars, setHighlightedArea, getLineChartProps, getLineProps } =
-      useLineChart({
-        fillOpacity,
-        series,
-        strokeWidth,
-        styles,
-        referenceLineProps,
-        ...rest,
-      })
+    const {
+      areaVars,
+      setHighlightedArea,
+      getAreaChartProps,
+      getAreaGradientProps,
+      getAreaProps,
+      getAreaSplitProps,
+    } = useAreaChart({
+      type,
+      fillOpacity,
+      series,
+      strokeWidth,
+      styles,
+      referenceLineProps,
+      ...rest,
+    })
     const { getGridProps } = useChartGrid({
       strokeDasharray,
       styles,
@@ -122,20 +130,34 @@ export const LineChart = withProvider<"div", LineChartProps>(
       getYAxisLabelProps,
       getYAxisProps,
     } = useChartAxis({
+      type,
       styles,
       unit,
       ...rest,
     })
 
-    const lines = useMemo(
+    const gradients = useMemo(
       () =>
-        series.map(({ dataKey }, index) => (
-          <Line
-            key={`line-${dataKey}`}
-            {...getLineProps({ className: "ui-line-chart__line", index })}
+        series.map((_, index) => (
+          <defs key={index}>
+            <AreaGradient {...getAreaGradientProps({ index })} />
+          </defs>
+        )),
+      [getAreaGradientProps, series],
+    )
+
+    const areas = useMemo(
+      () =>
+        series.map((_, index) => (
+          <Area
+            key={index}
+            {...getAreaProps({
+              className: "ui-area-chart__area",
+              index,
+            })}
           />
         )),
-      [getLineProps, series],
+      [getAreaProps, series],
     )
 
     const referenceLinesItems = useMemo(
@@ -144,7 +166,7 @@ export const LineChart = withProvider<"div", LineChartProps>(
           <ReferenceLine
             key={`referenceLine-${index}`}
             {...getReferenceLineProps({
-              className: "ui-line-chart__reference-line",
+              className: "ui-area-chart__reference-line",
               index,
             })}
           />
@@ -153,29 +175,29 @@ export const LineChart = withProvider<"div", LineChartProps>(
     )
 
     return (
-      <ui.div vars={lineVars} {...rest}>
+      <ui.div vars={areaVars} {...rest}>
         <ResponsiveContainer
-          {...getContainerProps({ className: "ui-line-chart__container" })}
+          {...getContainerProps({ className: "ui-area-chart__container" })}
         >
-          <ReChartsLineChart
-            {...getLineChartProps({ className: "ui-line-chart__chart" })}
+          <ReChartsAreaChart
+            {...getAreaChartProps({ className: "ui-area-chart__chart" })}
           >
             <CartesianGrid
-              {...getGridProps({ className: "ui-line-chart__grid" })}
+              {...getGridProps({ className: "ui-area-chart__grid" })}
             />
 
-            <XAxis {...getXAxisProps({ className: "ui-line-chart__x-axis" })}>
+            <XAxis {...getXAxisProps({ className: "ui-area-chart__x-axis" })}>
               <Label
                 {...getXAxisLabelProps({
-                  className: "ui-line-chart__x-axis-label",
+                  className: "ui-area-chart__x-axis-label",
                 })}
               />
             </XAxis>
 
-            <YAxis {...getYAxisProps({ className: "ui-line-chart__y-axis" })}>
+            <YAxis {...getYAxisProps({ className: "ui-area-chart__y-axis" })}>
               <Label
                 {...getYAxisLabelProps({
-                  className: "ui-line-chart__y-axis-label",
+                  className: "ui-area-chart__y-axis-label",
                 })}
               />
             </YAxis>
@@ -184,7 +206,7 @@ export const LineChart = withProvider<"div", LineChartProps>(
               <Legend
                 content={({ payload }) => (
                   <ChartLegend
-                    className="ui-line-chart__legend"
+                    className="ui-area-chart__legend"
                     payload={payload}
                     styles={styles}
                     onHighlight={setHighlightedArea}
@@ -199,7 +221,7 @@ export const LineChart = withProvider<"div", LineChartProps>(
               <Tooltip
                 content={({ label, payload }) => (
                   <ChartTooltip
-                    className="ui-line-chart__tooltip"
+                    className="ui-area-chart__tooltip"
                     label={label}
                     labelFormatter={labelFormatter}
                     payload={payload}
@@ -213,9 +235,16 @@ export const LineChart = withProvider<"div", LineChartProps>(
               />
             ) : null}
 
-            {lines}
+            {type === "split" ? (
+              <defs>
+                <AreaSplit {...getAreaSplitProps()} />
+              </defs>
+            ) : null}
+
+            {gradients}
+            {areas}
             {referenceLinesItems}
-          </ReChartsLineChart>
+          </ReChartsAreaChart>
         </ResponsiveContainer>
       </ui.div>
     )

@@ -99,7 +99,7 @@ export interface UseChartAxisOptions {
   yAxisProps?: YAxisProps
 }
 
-export interface UseChartAxisProps extends UseChartAxisOptions {
+interface UseChartAxisProps extends UseChartAxisOptions {
   styles: Dict<CSSObject | undefined>
 }
 

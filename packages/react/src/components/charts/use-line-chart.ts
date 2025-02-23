@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef } from "react"
 import type * as Recharts from "recharts"
-import type { PropGetter, RequiredPropGetter } from "../../core"
+import type { CSSObject, PropGetter, RequiredPropGetter } from "../../core"
 import type { CSSProps, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type {
@@ -16,14 +16,13 @@ import { getVar } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
 import { cx, runIfFunc } from "../../utils"
 import { getComponentProps } from "./chart-utils"
-import { useStyleContext } from "./line-chart"
 import {
   dotProperties,
   lineChartProperties,
   lineProperties,
 } from "./rechart-properties"
 
-export interface UseLineChartProps extends ThemeProps<LineChartStyle> {
+export interface UseLineChartOptions extends ThemeProps<LineChartStyle> {
   /**
    * Chart data.
    */
@@ -105,6 +104,10 @@ export interface UseLineChartProps extends ThemeProps<LineChartStyle> {
   referenceLineProps?: ReferenceLineProps[]
 }
 
+interface UseLineChartProps extends UseLineChartOptions {
+  styles: Dict<CSSObject | undefined>
+}
+
 export const useLineChart = ({
   connectNulls = true,
   curveType = "monotone",
@@ -113,6 +116,7 @@ export const useLineChart = ({
   layoutType = "horizontal",
   series,
   strokeWidth = 2,
+  styles,
   syncId,
   withActiveDots = true,
   withDots = true,
@@ -122,7 +126,6 @@ export const useLineChart = ({
   ...rest
 }: UseLineChartProps) => {
   const { theme } = useTheme()
-  const styles = useStyleContext()
   const [highlightedArea, setHighlightedArea] = useState<null | string>(null)
   const shouldHighlight = highlightedArea !== null
   const {

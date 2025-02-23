@@ -1,3 +1,9 @@
+export type { AreaChartProps } from "./area-chart"
+export {
+  AreaChart,
+  AreaChartPropsContext,
+  useAreaChartPropsContext,
+} from "./area-chart"
 export type { LineChartProps } from "./line-chart"
 export {
   LineChart,
@@ -5,9 +11,12 @@ export {
   useLineChartPropsContext,
 } from "./line-chart"
 
+export * from "./area-chart.style"
 export * from "./line-chart.style"
 
-export type { UseLineChartProps, UseLineChartReturn } from "./use-line-chart"
+export type { UseAreaChartOptions, UseAreaChartReturn } from "./use-area-chart"
+export { useAreaChart } from "./use-area-chart"
+export type { UseLineChartOptions, UseLineChartReturn } from "./use-line-chart"
 export { useLineChart } from "./use-line-chart"
 
 export type {

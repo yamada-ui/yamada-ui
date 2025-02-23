@@ -13,7 +13,7 @@ export const Basic = () => {
       boxSize="3xs"
       p="md"
       rounded="md"
-      _media={[{ type: "print", css: { color: "red" } }]}
+      _print={{ color: "success" }}
     >
       <Text>Print me</Text>
     </Center>
@@ -33,7 +33,7 @@ export const Container = () => {
     >
       <Text
         _container={[
-          { css: { color: "primary" }, maxW: "560px", minW: "320px" },
+          { css: { color: "success" }, maxW: "560px", minW: "320px" },
         ]}
       >
         Resize me
@@ -68,7 +68,7 @@ export const WithContainerName = () => {
           _container={[
             {
               name: "parent",
-              css: { color: "primary" },
+              css: { color: "success" },
               orientation: "portrait",
             },
             {
@@ -87,7 +87,7 @@ export const WithContainerName = () => {
 
 export const Supports = () => {
   return (
-    <Box _supports={[{ css: { color: "red" }, query: "(display: flex)" }]}>
+    <Box _supports={[{ css: { color: "success" }, query: "(display: flex)" }]}>
       <Text>Supported flex</Text>
     </Box>
   )

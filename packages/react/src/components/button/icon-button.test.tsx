@@ -13,6 +13,27 @@ describe("<IconButton />", () => {
     )
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(IconButton.displayName).toBe("IconButton")
+    expect(IconButton.__ui__).toBe("IconButton")
+  })
+
+  test("sets `className` correctly", () => {
+    const { getByRole } = render(
+      <IconButton colorScheme="primary" aria-label="Open menu" />,
+    )
+
+    expect(getByRole("button")).toHaveClass("ui-icon-button")
+  })
+
+  test("renders HTML tag correctly", () => {
+    const { getByRole } = render(
+      <IconButton colorScheme="primary" aria-label="Open menu" />,
+    )
+
+    expect(getByRole("button").tagName).toBe("BUTTON")
+  })
+
   test("renders children correctly", () => {
     const { getByTestId } = render(
       <IconButton colorScheme="primary" aria-label="Open menu">

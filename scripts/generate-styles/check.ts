@@ -1,12 +1,10 @@
-import type { CSSProperty } from "."
+import type { CSSCompatDataWithType } from "."
 import { shorthandProps } from "./shorthand-props"
 import { tokens } from "./tokens"
 import { additionalProps, atRuleProps, uiProps } from "./ui-props"
 
-export const checkProps = (
-  styles: ({ type: string; deprecated: boolean } & CSSProperty)[],
-) => {
-  const propMap = styles.map(({ prop }) => prop) as string[]
+export const checkProps = (cssCompatData: CSSCompatDataWithType) => {
+  const propMap = Object.keys(cssCompatData)
   const uiPropMap = [
     ...Object.keys(additionalProps),
     ...Object.keys(uiProps),

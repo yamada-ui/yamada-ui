@@ -6,6 +6,21 @@ describe("<CloseButton />", () => {
     await a11y(<CloseButton />)
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(CloseButton.displayName).toBe("CloseButton")
+    expect(CloseButton.__ui__).toBe("CloseButton")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<CloseButton />)
+    expect(screen.getByRole("button")).toHaveClass("ui-close-button")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<CloseButton />)
+    expect(screen.getByRole("button").tagName).toBe("BUTTON")
+  })
+
   test("has the proper aria attributes", () => {
     render(<CloseButton />)
     expect(screen.getByLabelText("Close")).toBeInTheDocument()

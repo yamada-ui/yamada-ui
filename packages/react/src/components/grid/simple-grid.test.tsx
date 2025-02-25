@@ -13,7 +13,7 @@ describe("<SimpleGrid />", () => {
 
   test("sets `className` correctly", () => {
     render(<SimpleGrid>SimpleGrid</SimpleGrid>)
-    expect(screen.getByText("SimpleGrid")).toHaveClass("ui-grid")
+    expect(screen.getByText("SimpleGrid")).toHaveClass("ui-simple-grid")
   })
 
   test("minChildWidth - prop works correctly(minChildWidth prop takes precedence over the columns prop)", () => {

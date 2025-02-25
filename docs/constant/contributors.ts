@@ -6,6 +6,12 @@ export const CONTRIBUTORS = [
     url: "https://github.com/hoshico",
   },
   {
+    id: 111425090,
+    name: "uraaaa24",
+    icon: "https://avatars.githubusercontent.com/u/111425090?v=4",
+    url: "https://github.com/uraaaa24",
+  },
+  {
     id: 166319111,
     name: "Haru-0001",
     icon: "https://avatars.githubusercontent.com/u/166319111?v=4",

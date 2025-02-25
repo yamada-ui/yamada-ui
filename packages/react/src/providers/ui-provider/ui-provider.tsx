@@ -3,7 +3,7 @@ import type { ColorModeProviderProps } from "../color-mode-provider"
 import type { Environment } from "../environment-provider"
 import type { ThemeProviderProps } from "../theme-provider"
 import { LoadingProvider } from "../../components/loading"
-// import { NoticeProvider } from "../../components/notice"
+import { NoticeProvider } from "../../components/notice"
 import { defaultTheme } from "../../theme"
 import { defaultConfig } from "../../theme"
 import { ColorModeProvider } from "../color-mode-provider"
@@ -81,9 +81,7 @@ export const UIProvider: FC<UIProviderProps> = ({
             storageKey={colorModeStorageKey}
           >
             <LoadingProvider {...config.loading}>
-              {children}
-
-              {/* <NoticeProvider {...config.notice} /> */}
+              <NoticeProvider {...config.notice}>{children}</NoticeProvider>
             </LoadingProvider>
           </ColorModeProvider>
         </ThemeProvider>

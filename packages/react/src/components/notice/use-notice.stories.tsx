@@ -60,7 +60,7 @@ export const KeepStay = () => {
         onClick={() =>
           notice({
             description: "オッス！オラ悟空！",
-            duration: null,
+            duration: Infinity,
             isClosable: true,
             title: "孫悟空",
           })
@@ -153,7 +153,7 @@ export const WithLoadingVariant = () => {
             notice({
               variant: "subtle",
               description: "オッス！オラ悟空！",
-              icon: { variant: "oval" },
+              icon: { loadingScheme: "oval" },
               status: "loading",
               title: "孫悟空",
             })
@@ -167,7 +167,7 @@ export const WithLoadingVariant = () => {
             notice({
               variant: "solid",
               description: "オッス！オラ悟空！",
-              icon: { variant: "grid" },
+              icon: { loadingScheme: "grid" },
               status: "loading",
               title: "孫悟空",
             })
@@ -181,7 +181,7 @@ export const WithLoadingVariant = () => {
             notice({
               variant: "subtle",
               description: "オッス！オラ悟空！",
-              icon: { variant: "puff" },
+              icon: { loadingScheme: "puff" },
               status: "loading",
               title: "孫悟空",
             })
@@ -195,7 +195,7 @@ export const WithLoadingVariant = () => {
             notice({
               variant: "solid",
               description: "オッス！オラ悟空！",
-              icon: { variant: "dots" },
+              icon: { loadingScheme: "dots" },
               status: "loading",
               title: "孫悟空",
             })
@@ -287,7 +287,7 @@ export const WithColorScheme = () => {
         <Button
           onClick={() =>
             notice({
-              colorScheme: "green",
+              style: { colorScheme: "green" },
               description: "オッス！オラ悟空！",
               status: "info",
               title: "孫悟空",
@@ -300,7 +300,7 @@ export const WithColorScheme = () => {
         <Button
           onClick={() =>
             notice({
-              colorScheme: "purple",
+              style: { colorScheme: "purple" },
               description: "オッス！オラ悟空！",
               status: "success",
               title: "孫悟空",
@@ -313,7 +313,7 @@ export const WithColorScheme = () => {
         <Button
           onClick={() =>
             notice({
-              colorScheme: "gray",
+              style: { colorScheme: "gray" },
               description: "オッス！オラ悟空！",
               status: "warning",
               title: "孫悟空",
@@ -326,7 +326,7 @@ export const WithColorScheme = () => {
         <Button
           onClick={() =>
             notice({
-              colorScheme: "pink",
+              style: { colorScheme: "pink" },
               description: "オッス！オラ悟空！",
               status: "error",
               title: "孫悟空",
@@ -355,7 +355,7 @@ export const WithPlacement = () => {
           onClick={() =>
             notice({
               description: "オッス！オラ悟空！",
-              placement: "top-left",
+              placement: "start-start",
             })
           }
         >
@@ -366,7 +366,7 @@ export const WithPlacement = () => {
           onClick={() =>
             notice({
               description: "オッス！オラ悟空！",
-              placement: "top",
+              placement: "start-center",
             })
           }
         >
@@ -377,7 +377,7 @@ export const WithPlacement = () => {
           onClick={() =>
             notice({
               description: "オッス！オラ悟空！",
-              placement: "top-right",
+              placement: "start-end",
             })
           }
         >
@@ -390,7 +390,7 @@ export const WithPlacement = () => {
           onClick={() =>
             notice({
               description: "オッス！オラ悟空！",
-              placement: "bottom-left",
+              placement: "end-start",
             })
           }
         >
@@ -401,7 +401,7 @@ export const WithPlacement = () => {
           onClick={() =>
             notice({
               description: "オッス！オラ悟空！",
-              placement: "bottom",
+              placement: "end-center",
             })
           }
         >
@@ -412,7 +412,7 @@ export const WithPlacement = () => {
           onClick={() =>
             notice({
               description: "オッス！オラ悟空！",
-              placement: "bottom-right",
+              placement: "end-end",
             })
           }
         >
@@ -452,7 +452,7 @@ export const WithCloseStrategy = () => {
       <Button
         onClick={() =>
           notice({
-            closeStrategy: "element",
+            closeStrategy: "both",
             description: "オッス！オラ悟空！",
             isClosable: true,
             title: "孫悟空",
@@ -531,7 +531,7 @@ export const UseUpdate = () => {
 }
 
 export const UseLimit = () => {
-  const notice = useNotice({ limit: 3 })
+  const notice = useNotice({ limit: 5 })
 
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
@@ -540,7 +540,6 @@ export const UseLimit = () => {
           notice({
             description: "オッス！オラ悟空！",
             title: "孫悟空",
-            limit: 3,
           })
         }
       >
@@ -578,6 +577,7 @@ export const CustomStyle = () => {
       maxW: "100%",
       minW: "100%",
     },
+    duration: Infinity,
   })
 
   return (

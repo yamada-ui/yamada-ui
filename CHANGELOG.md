@@ -2,9 +2,11 @@
 
 ## Latest Release
 
-### January 25, 2025: [v1.7.4](/.changelog/v1.7.4.mdx)
+### February 25, 2025: [v1.7.5](/.changelog/v1.7.5.mdx)
 
 ## Previous Releases
+
+### January 25, 2025: [v1.7.4](/.changelog/v1.7.4.mdx)
 
 ### January 7, 2025: [v1.7.3](/.changelog/v1.7.3.mdx)
 

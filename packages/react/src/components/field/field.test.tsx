@@ -1,12 +1,6 @@
-import type { ComponentProps, FC } from "react"
-import { Field, useFieldProps } from "."
+import { Field } from "."
 import { a11y, filterVisuallyHidden, render, screen } from "../../../test"
-
-const Input: FC<ComponentProps<"input">> = (props) => {
-  const fieldProps = useFieldProps(props)
-
-  return <input {...props} {...fieldProps} />
-}
+import { Input } from "../input"
 
 describe("<FormControl />", () => {
   test("FormControl renders correctly", async () => {

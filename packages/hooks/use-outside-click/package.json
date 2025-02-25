@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-outside-click",
-  "version": "1.0.27",
+  "version": "1.0.28",
   "description": "Yamada UI useOutsideClick custom hook",
   "keywords": [
     "use-outside-click"

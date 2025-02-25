@@ -1,5 +1,14 @@
 # @yamada-ui/focus-lock
 
+## 1.0.30
+
+### Patch Changes
+
+- [#4494](https://github.com/yamada-ui/yamada-ui/pull/4494) [`99279fa`](https://github.com/yamada-ui/yamada-ui/commit/99279fa1742c76ed573e6df0397c13e07bc718ff) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`99279fa`](https://github.com/yamada-ui/yamada-ui/commit/99279fa1742c76ed573e6df0397c13e07bc718ff)]:
+  - @yamada-ui/utils@1.7.1
+
 ## 1.0.29
 
 ### Patch Changes

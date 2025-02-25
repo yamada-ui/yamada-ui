@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-breakpoint",
-  "version": "1.4.19",
+  "version": "1.4.20",
   "description": "Yamada UI useBreakpoint custom hook",
   "keywords": [
     "use-breakpoint"

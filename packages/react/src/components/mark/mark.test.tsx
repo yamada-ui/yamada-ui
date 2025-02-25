@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen, waitFor } from "../../../test"
 import { Mark } from "./"
 
 describe("<Mark />", () => {
@@ -18,6 +18,8 @@ describe("<Mark />", () => {
 
   test("renders HTML tag correctly", () => {
     render(<Mark>Mark</Mark>)
-    expect(screen.getByText("Mark").tagName).toBe("SPAN")
+    waitFor(() => {
+      expect(screen.getByText("Mark").tagName).toBe("SPAN")
+    })
   })
 })

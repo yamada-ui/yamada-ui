@@ -1,1 +1,0 @@
-import{w as n}from"./factory-D0ba2aB7.js";import{m as e}from"./proxy-DYgA1A03.js";function m(){const o=new Map;return new Proxy(n,{apply:(a,t,[r,c])=>{const s=n(r,c);return e.create(s)},get:(a,t)=>{if(!o.has(t)){const r=n(t);o.set(t,e.create(r))}return o.get(t)}})}const f=m();export{f as m};

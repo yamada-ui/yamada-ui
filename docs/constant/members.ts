@@ -80,20 +80,6 @@ export const MEMBERS = [
     x: { url: "https://x.com/zaki_ise" },
   },
   {
-    name: { en: "Yuto Urashima", ja: "Yuto Urashima" },
-    description: {
-      en: "Web engineer living in Tokyo.",
-      ja: "東京在住のWebエンジニア。",
-    },
-    discord: { id: "1006851963188686868" },
-    github: {
-      id: "uraaaa24",
-      icon: "https://avatars.githubusercontent.com/u/111425090?v=4",
-      url: "https://github.com/uraaaa24",
-    },
-    x: { url: "https://x.com/__ars____24" },
-  },
-  {
     name: { en: "Kurakake Kaito", ja: "Kurakake Kaito" },
     description: {
       en: "A student engineer who enjoys front-end and back-end development.",

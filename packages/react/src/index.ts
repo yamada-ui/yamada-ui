@@ -100,6 +100,9 @@ export * from "./components/status"
 // export * from "./components/tabs"
 export * from "./components/tag"
 export * from "./components/text"
+export * from "./components/textarea"
+// export * from "./components/toggle"
+// export * from "./components/tooltip"
 // export * from "./components/visually-hidden"
 
 /**

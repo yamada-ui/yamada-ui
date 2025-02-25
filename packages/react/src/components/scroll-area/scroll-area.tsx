@@ -1,4 +1,4 @@
-import type { ThemeProps } from "../../core"
+import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { ScrollAreaStyle } from "./scroll-area.style"
 import type { UseScrollAreaProps } from "./use-scroll-area"
 import { createComponent, ui } from "../../core"
@@ -6,7 +6,8 @@ import { scrollAreaStyle } from "./scroll-area.style"
 import { useScrollArea } from "./use-scroll-area"
 
 export interface ScrollAreaProps
-  extends ThemeProps<ScrollAreaStyle>,
+  extends HTMLUIProps,
+    ThemeProps<ScrollAreaStyle>,
     UseScrollAreaProps {}
 
 export const {

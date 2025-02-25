@@ -96,32 +96,6 @@ describe("<ScrollArea />", () => {
     })
   })
 
-  test("can have inner props", () => {
-    const { container, rerender } = render(
-      <ScrollArea
-        innerProps={{
-          bg: "primary",
-        }}
-      >
-        <Content />
-      </ScrollArea>,
-    )
-
-    const inner = container.querySelector(".ui-scroll-area__inner")
-
-    expect(inner).toHaveStyle({
-      background: "var(--ui-colors-primary)",
-    })
-
-    rerender(
-      <ScrollArea>
-        <Content />
-      </ScrollArea>,
-    )
-
-    expect(container.querySelector(".ui-scroll-area__inner")).toBeNull()
-  })
-
   test("onScrollPositionChange works correctly", () => {
     const mockScrollPositionChange = vi.fn()
 

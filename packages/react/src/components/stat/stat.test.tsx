@@ -6,7 +6,7 @@ describe("<Stat />", () => {
     await a11y(
       <Stat.Root>
         <Stat.Label>Total Page Views</Stat.Label>
-        <Stat.Number>1,993,818</Stat.Number>
+        <Stat.Value>1,993,818</Stat.Value>
         <Stat.HelperMessage>
           <Stat.Icon type="increase" />
           21% more than last month
@@ -23,7 +23,7 @@ describe("<Stat />", () => {
         helperMessage="21% more than last month"
         icon="decrease"
         label="Total Page Views"
-        number="1,993,818"
+        value="1,993,818"
       />,
     )
     expect(

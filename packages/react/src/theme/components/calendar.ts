@@ -252,15 +252,15 @@ export const Calendar: ComponentMultiStyle<"Calendar"> = {
         fontSize: "inherit",
         h: "auto",
         w: "auto",
-        _hidden: {
-          opacity: "inherit",
-          pointerEvents: "inherit",
-        },
         _hover: {
           bg: "inherit",
         },
         _active: {
           bg: "inherit",
+        },
+        _hidden: {
+          opacity: "inherit",
+          pointerEvents: "inherit",
         },
       },
       day: {

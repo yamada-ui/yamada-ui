@@ -71,20 +71,6 @@ export const HTMLSize: Story = () => {
   return <Input aria-label="Input" htmlSize={4} width="auto" />
 }
 
-export const BorderColor: Story = () => {
-  return (
-    <>
-      <Input placeholder="Default border color" />
-      <Input focusBorderColor="green.500" placeholder="Custom border color" />
-      <Input
-        errorBorderColor="orange.500"
-        invalid
-        placeholder="Custom border color"
-      />
-    </>
-  )
-}
-
 export const Disabled: Story = () => {
   return (
     <>
@@ -249,6 +235,20 @@ export const Element: Story = () => {
           </Center>
         </InputGroup.Element>
       </InputGroup.Root>
+    </>
+  )
+}
+
+export const BorderColor: Story = () => {
+  return (
+    <>
+      <Input placeholder="Default border color" />
+      <Input focusBorderColor="green.500" placeholder="Custom border color" />
+      <Input
+        errorBorderColor="orange.500"
+        invalid
+        placeholder="Custom border color"
+      />
     </>
   )
 }

@@ -13,6 +13,35 @@ describe("<Button />", () => {
     )
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(ButtonGroup.displayName).toBe("ButtonGroup")
+    expect(ButtonGroup.__ui__).toBe("ButtonGroup")
+  })
+
+  test("sets `className` correctly", () => {
+    const { getByRole } = render(
+      <ButtonGroup>
+        <Button>Button</Button>
+        <Button>Button</Button>
+        <Button>Button</Button>
+      </ButtonGroup>,
+    )
+
+    expect(getByRole("group")).toHaveClass("ui-group")
+  })
+
+  test("renders HTML tag correctly", () => {
+    const { getByRole } = render(
+      <ButtonGroup>
+        <Button>Button</Button>
+        <Button>Button</Button>
+        <Button>Button</Button>
+      </ButtonGroup>,
+    )
+
+    expect(getByRole("group").tagName).toBe("DIV")
+  })
+
   test("`attached` style is applied correctly", () => {
     const { getByRole } = render(
       <ButtonGroup variant="outline" attached>

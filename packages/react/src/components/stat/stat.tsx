@@ -133,7 +133,7 @@ export const StatUnit = withContext<"span", StatUnitProps>("span", "unit")()
 
 export interface StatHelperMessageProps extends HTMLUIProps<"dd"> {}
 
-export const StatHelperMessage = withContext<"dd", StatValueProps>(
+export const StatHelperMessage = withContext<"dd", StatHelperMessageProps>(
   "dd",
   "helperMessage",
 )()

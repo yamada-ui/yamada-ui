@@ -1,4 +1,4 @@
-import type { ThemeProps, Token, WithoutThemeProps } from "../../core"
+import type { StyleValue, ThemeProps, WithoutThemeProps } from "../../core"
 import type { GridProps } from "./grid"
 import type { SimpleGridStyle } from "./simple-grid.style"
 import { useMemo } from "react"
@@ -11,7 +11,7 @@ interface SimpleGridOptions {
   /**
    * The number of columns.
    */
-  columns?: Token<number>
+  columns?: StyleValue<number>
   /**
    * The width at which child elements will break into columns.
    * Pass a number for pixel values or a string for any other valid CSS length.

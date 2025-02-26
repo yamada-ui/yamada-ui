@@ -42,7 +42,7 @@ const generateType = ({
 }) => {
   const overrideType = prop ? overrideTypes[prop] : undefined
 
-  let result = !variableLength || token ? "Token<>" : ""
+  let result = !variableLength || token ? "CSSToken<>" : ""
 
   if (overrideType) {
     result = addType(result, overrideType)
@@ -325,7 +325,7 @@ export const generateStyles = async (
     import type { StringLiteral } from "@yamada-ui/utils"
     import type * as CSS from "csstype"
     import type { StyleConfigs } from "./config"
-    import type { CSSObject, Token } from "./css"
+    import type { CSSObject, CSSToken } from "./css"
     import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"
     import { transforms } from "./config"
     import { pipe } from "./config/utils"

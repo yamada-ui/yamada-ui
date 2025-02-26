@@ -1,13 +1,18 @@
-import type { ComponentType } from "react"
-import type {
-  DOMElement,
-  HTMLUIComponents,
-  StyledOptions,
-  UIFactory,
-} from "./components"
+import type { ComponentType, FC } from "react"
+import type { As, DOMElement, UIComponent } from "./components"
+import type { StyledOptions } from "./styled"
 import { styled } from "./styled"
 
-interface Factory extends UIFactory, HTMLUIComponents {}
+type Components = {
+  [Y in DOMElement]: UIComponent<Y>
+}
+
+interface Factory extends Components {
+  <Y extends As, M extends object = {}>(
+    el: FC<M> | Y,
+    options?: StyledOptions,
+  ): UIComponent<Y, M>
+}
 
 function factory() {
   const cache = new Map<DOMElement, ComponentType>()

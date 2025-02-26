@@ -127,7 +127,7 @@ export const GlobalStyles: FC = () => {
 
     if (!style || isEmptyObject(style)) return undefined
 
-    return css(style)(theme)
+    return css(theme)(style)
   }, [theme])
 
   const globalStyle = useMemo(() => {
@@ -135,7 +135,7 @@ export const GlobalStyles: FC = () => {
 
     if (!style || isEmptyObject(style)) return undefined
 
-    return css(style)(theme)
+    return css(theme)(style)
   }, [theme])
 
   const cssVars = useMemo(() => {

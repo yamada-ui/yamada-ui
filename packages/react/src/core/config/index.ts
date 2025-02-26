@@ -1,4 +1,4 @@
-import type { CSSObject } from "@emotion/react"
+import type { CSSObject } from "@emotion/styled"
 import type * as CSS from "csstype"
 import type { Union } from "../../utils"
 import type { ThemeToken } from "../theme"

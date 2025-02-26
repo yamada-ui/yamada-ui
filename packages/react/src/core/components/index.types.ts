@@ -1,43 +1,26 @@
 import type * as React from "react"
 import type { Merge } from "../../utils"
-import type { CSSModifierObject, CSSPropObject, CSSProps } from "../css"
-import type { ComponentStyle, StyledTheme, UsageTheme } from "../theme"
+import type { CSSProps } from "../css"
+import type { PseudoProps } from "../pseudos"
+import type { StyleProps } from "../styles"
+import type { StyledTheme, UsageTheme } from "../theme"
 
 export type DOMElement = keyof React.JSX.IntrinsicElements
-
-export type ShouldForwardProp = (prop: string) => boolean
-
-export interface StyledOptions<
-  Y extends CSSPropObject = CSSPropObject,
-  M extends CSSModifierObject = CSSModifierObject,
-  D extends CSSModifierObject = CSSModifierObject,
-  H extends number | string | symbol = string,
-> extends ComponentStyle<Y, M, D> {
-  name?: string
-  target?: string
-  label?: string
-  shouldForwardProp?: boolean | ShouldForwardProp
-  forwardProps?: string[]
-  transferProps?: H[]
-}
-
-export interface UIFactory {
-  <Y extends As, M extends object = {}>(
-    el: React.FC<M> | Y,
-    options?: StyledOptions,
-  ): UIComponent<Y, M>
-}
 
 export interface UIProps extends CSSProps {
   /**
    * The HTML element to render.
    */
   as?: As
+  /**
+   * Merges its props onto its immediate child.
+   */
+  asChild?: boolean
 }
 
 export type WithoutAs<Y extends object> = Omit<Y, "as">
 
-export type InterpolationProps = CSSProps & {
+export interface InterpolationProps extends StyleProps, PseudoProps {
   theme: StyledTheme<UsageTheme>
 }
 
@@ -77,10 +60,6 @@ export interface FunctionComponent<Y = {}> extends ComponentArgs {
 }
 
 export type As = React.ElementType
-
-export type HTMLUIComponents = {
-  [Y in DOMElement]: UIComponent<Y>
-}
 
 export interface UIComponent<Y extends As = As, M extends object = {}>
   extends Component<Y, Merge<UIProps, M>> {}

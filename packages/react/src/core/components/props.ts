@@ -8,6 +8,8 @@ import {
   merge,
   mergeRefs,
 } from "../../utils"
+import { pseudoProperties } from "../pseudos"
+import { styleProperties } from "../styles"
 
 type MergeAll<Y extends Dict[]> = Y extends [infer M]
   ? M
@@ -19,6 +21,23 @@ type MergeAll<Y extends Dict[]> = Y extends [infer M]
 
 function isEvent(key: string) {
   return /^on[A-Z]/.test(key)
+}
+
+export const styleProps = new Set<string>([
+  ...pseudoProperties,
+  ...styleProperties,
+])
+
+export type ShouldForwardProp = (prop: string) => boolean
+
+export function createShouldForwardProp(
+  forwardProps?: string[],
+): ShouldForwardProp {
+  return function (prop: string): boolean {
+    if (forwardProps?.includes(prop)) return true
+
+    return !styleProps.has(prop)
+  }
 }
 
 interface MergePropsOptions {

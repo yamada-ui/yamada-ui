@@ -1,4 +1,4 @@
-import type { ExternalToast, ToastT } from "sonner"
+import type { ExternalToast } from "sonner"
 import type { CSSObject, NoticeConfig } from "../../core"
 import type {
   AlertDescriptionProps,
@@ -107,13 +107,13 @@ export const useNotice = (options?: NoticeOptions) => {
 
   const onAutoClose = useCallback(
     (
-      notice: ToastT,
+      id: NoticeExtraInfoProps["id"],
       description: NoticeExtraInfoProps["description"],
       title: NoticeExtraInfoProps["title"],
       hookOnAutoClose?: (info: NoticeExtraInfoProps) => void,
     ) => {
       const info = {
-        id: notice.id,
+        id,
         description,
         title,
       }
@@ -129,13 +129,13 @@ export const useNotice = (options?: NoticeOptions) => {
 
   const onDismiss = useCallback(
     (
-      notice: ToastT,
+      id: NoticeExtraInfoProps["id"],
       description: NoticeExtraInfoProps["description"],
       title: NoticeExtraInfoProps["title"],
       hookOnDismiss?: (info: NoticeExtraInfoProps) => void,
     ) => {
       const info = {
-        id: notice.id,
+        id,
         description,
         title,
       }
@@ -187,9 +187,9 @@ export const useNotice = (options?: NoticeOptions) => {
       position: mapPlacementToPosition(placement),
       ...(id ? { id } : {}),
       onAutoClose: (notice) =>
-        onAutoClose(notice, description, title, hookOnAutoClose),
+        onAutoClose(notice.id, description, title, hookOnAutoClose),
       onDismiss: (notice) =>
-        onDismiss(notice, description, title, hookOnDismiss),
+        onDismiss(notice.id, description, title, hookOnDismiss),
     }
 
     if (hookComponent) {

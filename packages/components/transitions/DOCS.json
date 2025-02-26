@@ -156,7 +156,7 @@
       "required": false
     },
     "transition": {
-      "type": "MotionLifecycleProps<Transition$1>",
+      "type": "MotionLifecycleProps<Transition>",
       "description": "Custom `transition` definition for `enter` and `exit`.",
       "required": false
     },
@@ -219,7 +219,7 @@
       "required": false
     },
     "transition": {
-      "type": "MotionLifecycleProps<Transition$1>",
+      "type": "MotionLifecycleProps<Transition>",
       "description": "Custom `transition` definition for `enter` and `exit`.",
       "required": false
     },
@@ -316,7 +316,7 @@
       "required": false
     },
     "transition": {
-      "type": "Transition$1",
+      "type": "Transition",
       "description": "The animation transition.",
       "required": false
     },
@@ -488,7 +488,7 @@
       "required": false
     },
     "transition": {
-      "type": "MotionLifecycleProps<Transition$1>",
+      "type": "MotionLifecycleProps<Transition>",
       "description": "Custom `transition` definition for `enter` and `exit`.",
       "required": false
     },
@@ -567,7 +567,7 @@
       "required": false
     },
     "transition": {
-      "type": "MotionLifecycleProps<Transition$1>",
+      "type": "MotionLifecycleProps<Transition>",
       "description": "Custom `transition` definition for `enter` and `exit`.",
       "required": false
     },
@@ -658,7 +658,7 @@
       "required": false
     },
     "transition": {
-      "type": "MotionLifecycleProps<Transition$1>",
+      "type": "MotionLifecycleProps<Transition>",
       "description": "Custom `transition` definition for `enter` and `exit`.",
       "required": false
     },

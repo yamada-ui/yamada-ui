@@ -2,10 +2,6 @@ export type LazyMode = "keepMounted" | "unmount"
 
 export interface UseLazyDisclosureProps {
   enabled?: boolean
-  /**
-   * @deprecated Use `selected` instead.
-   */
-  isSelected?: boolean
   mode?: LazyMode
   selected?: boolean
   wasSelected?: boolean
@@ -13,9 +9,8 @@ export interface UseLazyDisclosureProps {
 
 export const useLazyDisclosure = ({
   enabled,
-  isSelected,
   mode = "unmount",
-  selected = isSelected,
+  selected,
   wasSelected,
 }: UseLazyDisclosureProps) => {
   if (!enabled) return true

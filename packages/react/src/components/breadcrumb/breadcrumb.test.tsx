@@ -7,12 +7,52 @@ describe("<Breadcrumb />", () => {
       <Breadcrumb.Root>
         <Breadcrumb.Link href="/">1</Breadcrumb.Link>
         <Breadcrumb.Link href="/">2</Breadcrumb.Link>
-        <Breadcrumb.Link href="/">3</Breadcrumb.Link>
+        <Breadcrumb.Ellipsis />
+        <Breadcrumb.Link href="/">4</Breadcrumb.Link>
         <Breadcrumb.Link href="/" currentPage>
-          4
+          5
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
+  })
+
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Breadcrumb.Root.displayName).toBe("BreadcrumbRoot")
+    expect(Breadcrumb.Root.__ui__).toBe("BreadcrumbRoot")
+
+    expect(Breadcrumb.Link.displayName).toBe("BreadcrumbLink")
+    expect(Breadcrumb.Link.__ui__).toBe("BreadcrumbLink")
+
+    expect(Breadcrumb.Ellipsis.displayName).toBe("BreadcrumbEllipsis")
+    expect(Breadcrumb.Ellipsis.__ui__).toBe("BreadcrumbEllipsis")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <Breadcrumb.Root data-testid="root">
+        <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
+        <Breadcrumb.Ellipsis data-testid="ellipsis" />
+      </Breadcrumb.Root>,
+    )
+
+    expect(screen.getByTestId("root")).toHaveClass("ui-breadcrumb__root")
+    expect(screen.getByText("Link 1")).toHaveClass("ui-breadcrumb__link")
+    expect(screen.getByTestId("ellipsis")).toHaveClass(
+      "ui-breadcrumb__ellipsis",
+    )
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <Breadcrumb.Root data-testid="root">
+        <Breadcrumb.Link href="/">Link 1</Breadcrumb.Link>
+        <Breadcrumb.Ellipsis data-testid="ellipsis" />
+      </Breadcrumb.Root>,
+    )
+
+    expect(screen.getByTestId("root").tagName).toBe("NAV")
+    expect(screen.getByText("Link 1").tagName).toBe("A")
+    expect(screen.getByTestId("ellipsis").tagName).toBe("svg")
   })
 
   test("separator property is being passed accurately", () => {
@@ -79,7 +119,7 @@ describe("<Breadcrumb />", () => {
         </Breadcrumb.Link>
       </Breadcrumb.Root>,
     )
-    expect(screen.getByLabelText("ellipsis")).toBeInTheDocument()
+    expect(screen.getByLabelText("Ellipsis")).toBeInTheDocument()
   })
 
   test("renders breadcrumb correctly with items", () => {
@@ -92,7 +132,7 @@ describe("<Breadcrumb />", () => {
 
     render(<Breadcrumb.Root items={items} />)
 
-    expect(screen.getAllByRole("listitem")).toHaveLength(4)
+    expect(screen.getAllByRole("listitem")).toHaveLength(7)
   })
 
   test("is correctly truncated", () => {
@@ -109,7 +149,7 @@ describe("<Breadcrumb />", () => {
 
     const listItems = screen.getAllByRole("listitem")
 
-    expect(listItems).toHaveLength(3)
+    expect(listItems).toHaveLength(5)
     expect(listItems[0]?.querySelector("a")).toHaveAttribute("href", "/1")
     expect(
       listItems[listItems.length - 1]?.querySelector("span"),
@@ -157,7 +197,7 @@ describe("<Breadcrumb />", () => {
     ).toHaveLength(3)
     expect(
       screen.getByTestId("breadCrumb3").querySelectorAll("li"),
-    ).toHaveLength(3)
+    ).toHaveLength(7)
   })
 
   test("retrieve omitted items correctly", () => {

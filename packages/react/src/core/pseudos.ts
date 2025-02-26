@@ -40,6 +40,11 @@ export const attributes = {
    */
   _current: "&[aria-current]:not([aria-current='false'])",
   /**
+   * Styles for when `data-mode` is applied to any parent of this component or element.
+   */
+  _dark:
+    ".ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
+  /**
    * The CSS `&[data-end]` attribute selector.
    */
   _end: "&[data-end]",
@@ -64,10 +69,6 @@ export const attributes = {
    */
   _grid: "&:is([role=grid], [data-grid])",
   /**
-   * The CSS `&:is([hidden], [data-hidden])` attribute selector.
-   */
-  _hidden: "&:is([hidden], [data-hidden])",
-  /**
    * The CSS `&[data-holiday]` attribute selector.
    */
   _holiday: "&[data-holiday]",
@@ -75,6 +76,11 @@ export const attributes = {
    * The CSS `&[data-idle]` attribute selector.
    */
   _idle: "&[data-idle]",
+  /**
+   * Styles for when `data-mode` is applied to any parent of this component or element.
+   */
+  _light:
+    ".ui-light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]",
   /**
    * The CSS `&[data-loaded]` attribute selector.
    */
@@ -139,6 +145,14 @@ export const attributes = {
    * The CSS `&:where([data-weekend])` attribute selector.
    */
   _weekend: "&:where([data-weekend])",
+  /**
+   * The CSS `&:is([hidden], [data-hidden])` attribute selector.
+   */
+  _hidden: "&:is([hidden], [data-hidden])",
+  /**
+   * The CSS `&[data-never]` attribute selector.
+   */
+  _never: "&[data-never]",
 } as const
 
 export type Attributes = typeof attributes
@@ -492,53 +506,6 @@ export const pseudoClassProperties = Object.keys(
 ) as PseudoClassProperty[]
 export const pseudoClassSelectors = Object.values(pseudoClasses)
 
-export const atRules = {
-  /**
-   * Styles for when `data-mode` is applied to any parent of this component or element.
-   */
-  _dark:
-    ".ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
-  /**
-   * The CSS `@media (orientation: landscape)` media query.
-   */
-  _landscape: "@media (orientation: landscape)",
-  /**
-   * Styles for when `data-mode` is applied to any parent of this component or element.
-   */
-  _light:
-    ".ui-light &:not([data-mode]), [data-mode=light] &:not([data-mode]), &[data-mode=light]",
-  /**
-   * The CSS `@media (prefers-color-scheme: dark)` media query.
-   */
-  _mediaDark: "@media (prefers-color-scheme: dark)",
-  /**
-   * The CSS `@media (prefers-color-scheme: light)` media query.
-   */
-  _mediaLight: "@media (prefers-color-scheme: light)",
-  /**
-   * The CSS `@media (prefers-reduced-motion: reduce)` media query.
-   */
-  _mediaReduceMotion: "@media (prefers-reduced-motion: reduce)",
-  /**
-   * The CSS `@media (orientation: portrait)` media query.
-   */
-  _portrait: "@media (orientation: portrait)",
-  /**
-   * The CSS `@media print` media query.
-   */
-  _print: "@media print",
-} as const
-
-export type AtRules = typeof atRules
-export type AtRuleProperty = keyof AtRules
-export type AtRuleSelector = AtRules[AtRuleProperty]
-export type AtRuleProps = {
-  [K in keyof AtRules]?: CSSObject
-}
-
-export const atRuleProperties = Object.keys(atRules) as AtRuleProperty[]
-export const atRuleSelectors = Object.values(atRules)
-
 export const groupAttributes = {
   /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is accepted.
@@ -797,7 +764,6 @@ export const pseudos = {
   ...pseudoElements,
   ...attributes,
   ...pseudoClasses,
-  ...atRules,
   ...groupAttributes,
   ...peerAttributes,
 } as const

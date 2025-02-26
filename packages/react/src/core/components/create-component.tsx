@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import type { Dict, Merge } from "../../utils"
+import type { Dict, Merge, StringLiteral } from "../../utils"
 import type { CSSObject, CSSSlotObject } from "../css"
 import type {
   ComponentSlotStyle,
@@ -8,11 +8,13 @@ import type {
 } from "../theme"
 import type {
   As,
-  Component,
   DOMElement,
+  FunctionComponent,
   HTMLUIProps,
+  Component as OriginalComponent,
   StyledOptions,
 } from "./index.types"
+import { Fragment } from "react"
 import {
   createContext,
   cx,
@@ -35,11 +37,20 @@ import {
 } from "./use-component-style"
 import { getClassName, getDisplayName } from "./utils"
 
-export type SlotName<
-  Y extends ComponentSlotStyle | ComponentStyle = ComponentSlotStyle,
-> = keyof Required<Y>["base"]
+type AsWithFragment = "fragment" | As
 
-export type Slot<Y extends number | string | symbol> =
+type Component<
+  Y extends AsWithFragment = AsWithFragment,
+  M extends object = {},
+> = Y extends "fragment"
+  ? FunctionComponent<M>
+  : OriginalComponent<Exclude<Y, "fragment">, M>
+
+export type ComponentSlotName<
+  Y extends ComponentSlotStyle | ComponentStyle = ComponentSlotStyle,
+> = keyof Required<Y>["base"] | StringLiteral
+
+export type ComponentSlot<Y extends number | string | symbol> =
   | [Y, Y]
   | Y
   | { name: string; slot: [Y, Y] | Y }
@@ -71,15 +82,17 @@ export interface ComponentWithContextOptions<
 > extends ComponentOptions,
     UseComponentPropsOptions<Y> {}
 
-function createProxyComponent<Y extends As = "div", M extends Dict = Dict>(
-  el: FC<M> | Y,
-  { shouldStyleProps, ...options }: ComponentOptions = {},
-) {
+function createProxyComponent<
+  Y extends AsWithFragment = "div",
+  M extends Dict = Dict,
+>(el: FC<M> | Y, { shouldStyleProps, ...options }: ComponentOptions = {}) {
   options.shouldForwardProp ??= isFunction(el)
   shouldStyleProps ??= !isFunction(el)
 
+  if (el === "fragment") el = Fragment
+
   if (shouldStyleProps || isString(el)) {
-    const ProxyComponent = ui(el, options)
+    const ProxyComponent = ui(el as As, options)
 
     ProxyComponent.displayName = "ProxyComponent"
 
@@ -87,12 +100,12 @@ function createProxyComponent<Y extends As = "div", M extends Dict = Dict>(
   } else {
     el.displayName ??= "ProxyComponent"
 
-    return el
+    return el as FC<M>
   }
 }
 
 function getSlotCSS<Y extends number | string | symbol>(
-  slot?: Slot<Y>,
+  slot?: ComponentSlot<Y>,
   slotCSS?: CSSSlotObject<Y>,
 ): CSSObject[] {
   if (!slotCSS || !slot) return []
@@ -111,7 +124,7 @@ function getSlotCSS<Y extends number | string | symbol>(
 }
 
 function mergeSlotCSS<Y extends number | string | symbol>(
-  slot?: Slot<Y>,
+  slot?: ComponentSlot<Y>,
   slotCSS?: CSSSlotObject<Y>,
   css?: CSSObject | CSSObject[],
 ) {
@@ -126,7 +139,9 @@ function mergeSlotCSS<Y extends number | string | symbol>(
   return result
 }
 
-function getSlotKey<Y extends number | string | symbol>(slot?: Slot<Y>) {
+function getSlotKey<Y extends number | string | symbol>(
+  slot?: ComponentSlot<Y>,
+) {
   if (!slot) return "unknown"
   if (isArray(slot) || !isObject(slot)) {
     return toCamelCase(toArray(slot).join("-"))
@@ -135,7 +150,9 @@ function getSlotKey<Y extends number | string | symbol>(slot?: Slot<Y>) {
   }
 }
 
-function getSlotName<Y extends number | string | symbol>(slot?: Slot<Y>) {
+function getSlotName<Y extends number | string | symbol>(
+  slot?: ComponentSlot<Y>,
+) {
   if (!slot) return ""
 
   if (isArray(slot)) {
@@ -181,7 +198,7 @@ export function createComponent<
     }
   }
 
-  function component<D extends As = "div", H extends Dict = Y>(
+  function component<D extends AsWithFragment = "div", H extends Dict = Y>(
     el: D | FC<H>,
     {
       name,
@@ -212,7 +229,7 @@ export function createComponent<
   }
 
   function withContext<
-    D extends As = "div",
+    D extends AsWithFragment = "div",
     H extends Y = Y,
     R extends keyof H = keyof H,
   >(
@@ -274,7 +291,7 @@ export function createSlotComponent<
   const classNameMap = new Map<string, string>()
 
   const [StyleContext, useStyleContext] = createContext<
-    CSSSlotObject<SlotName<M>>
+    CSSSlotObject<ComponentSlotName<M>>
   >({
     name: `${rootDisplayName}StyleContext`,
   })
@@ -297,7 +314,7 @@ export function createSlotComponent<
     R extends keyof Y = keyof Y,
   >(
     props: Y,
-    slot?: Slot<SlotName<M>>,
+    slot?: ComponentSlot<ComponentSlotName<M>>,
     {
       className = rootClassName,
       withContext = true,
@@ -319,14 +336,14 @@ export function createSlotComponent<
       css,
       {
         ...rest,
-        css: mergeSlotCSS<SlotName<M>>(slot, css, mergedProps.css),
+        css: mergeSlotCSS<ComponentSlotName<M>>(slot, css, mergedProps.css),
       },
     ]
   }
 
   function useSlotComponentProps<Y extends Dict = Dict>(
     props: Y,
-    slot?: Slot<SlotName<M>>,
+    slot?: ComponentSlot<ComponentSlotName<M>>,
     {
       className = getSlotClassName(rootClassName, slot),
       withContext = true,
@@ -343,9 +360,9 @@ export function createSlotComponent<
     }
   }
 
-  function component<H extends As = "div", R extends Dict = Dict>(
+  function component<H extends AsWithFragment = "div", R extends Dict = Dict>(
     el: FC<R> | H,
-    slot?: Slot<SlotName<M>>,
+    slot?: ComponentSlot<ComponentSlotName<M>>,
     {
       name,
       className = getSlotClassName(rootClassName, slot),
@@ -379,12 +396,14 @@ export function createSlotComponent<
   }
 
   function withProvider<
-    H extends As = "div",
+    H extends AsWithFragment = "div",
     R extends Y = Y,
     T extends keyof R = keyof R,
   >(
     el: FC<WithoutThemeProps<R, M, T>> | H,
-    slot: Slot<SlotName<M>> = "root" as Slot<SlotName<M>>,
+    slot: ComponentSlot<ComponentSlotName<M>> = "root" as ComponentSlot<
+      ComponentSlotName<M>
+    >,
     {
       name,
       className = getSlotClassName(rootClassName, slot),
@@ -435,11 +454,11 @@ export function createSlotComponent<
   }
 
   function withContext<
-    H extends As = "div",
+    H extends AsWithFragment = "div",
     R extends Dict = H extends DOMElement ? HTMLUIProps<H> : Dict,
   >(
     el: FC<R> | H,
-    slot?: Slot<SlotName<M>>,
+    slot?: ComponentSlot<ComponentSlotName<M>>,
     {
       name,
       className = getSlotClassName(rootClassName, slot),

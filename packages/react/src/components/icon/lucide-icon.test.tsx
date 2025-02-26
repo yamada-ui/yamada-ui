@@ -25,6 +25,6 @@ describe("Lucide icon", () => {
 
 describe("<LucideIcon />", () => {
   test("renders Icon correctly", () => {
-    render(<LucideIcon icon={burger} />)
+    render(<LucideIcon iconNode={burger} />)
   })
 })

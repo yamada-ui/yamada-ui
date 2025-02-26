@@ -20,7 +20,7 @@ export const {
 /**
  * `Container` is a component used as a general division element. By default, it renders the `section` element.
  *
- * @see Docs https://yamada-ui.com/components/layouts/container
+ * @see Docs https://yamada-ui.com/components/container
  */
 export const ContainerRoot = withProvider("section", "root")()
 

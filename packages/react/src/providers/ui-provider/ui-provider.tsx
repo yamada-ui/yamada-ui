@@ -24,7 +24,7 @@ export interface UIProviderProps
    */
   colorModeStorageKey?: string
   /**
-   * If `true`,  the use of automatic window and document detection will be disabled.
+   * If `true`, the use of automatic window and document detection will be disabled.
    *
    * @default false
    */

@@ -32,8 +32,8 @@ const semanticSizes = {
 const sortPseudos = [
   ["^_hover$"],
   ["^_active$", "^_focus$", "^_focusVisible$"],
-  ["^_readOnly$"],
-  ["^_disabled$"],
+  ["^_readOnly$", "^_hidden$"],
+  ["^_disabled$", "^_never$"],
 ]
 
 const otherPseudos = sortPseudos

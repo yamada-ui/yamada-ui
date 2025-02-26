@@ -78,10 +78,11 @@ export const NoticeProvider = withProvider(
     const placementRef = useRef<NoticePlacement>("start-center")
     const onChangeLimitRef = useRef<(limit: number) => void>(() => void 0)
 
-    const onChangeLimit = useCallback(
-      (limit: number) => onChangeLimitRef.current(limit),
-      [],
-    )
+    const onChangeLimit = useCallback((limit: number) => {
+      if (limit >= 0) {
+        onChangeLimitRef.current(limit)
+      }
+    }, [])
 
     const context = useMemo(
       () => ({

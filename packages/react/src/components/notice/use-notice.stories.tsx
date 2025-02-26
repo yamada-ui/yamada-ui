@@ -1,8 +1,9 @@
 import type { Meta } from "@storybook/react"
+import { useRef } from "react"
 import { Button } from "../button"
 import { Center } from "../center"
 import { Wrap } from "../flex"
-import { dismiss, dismissAll, Notice, useNotice } from "./"
+import { Notice, useNotice } from "./"
 
 const meta: Meta = {
   title: "Hooks / useNotice",
@@ -463,7 +464,9 @@ export const WithCloseButton = () => {
         <Button
           onClick={() =>
             notice({
-              closeButton: () => <Notice.CloseButton variant="outline" />,
+              closeButton: (notice) => (
+                <Notice.CloseButton variant="outline" noticeId={notice.id} />
+              ),
               description: "オッス！オラ悟空！",
               title: "孫悟空",
             })
@@ -524,7 +527,7 @@ export const OnDismiss = () => {
   )
 }
 
-export const UseClose = () => {
+export const UseDismiss = () => {
   const notice = useNotice()
 
   const onOpen = () => {
@@ -535,51 +538,73 @@ export const UseClose = () => {
     })
   }
 
-  const onClose = () => {
-    dismiss()
+  const onDismiss = () => {
+    notice.dismiss()
   }
 
-  const onCloseAll = () => {
-    dismissAll()
+  const onDismissAll = () => {
+    notice.dismissAll()
   }
 
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button onClick={onOpen}>Show Notice</Button>
-        <Button onClick={onClose}>Close last Notice</Button>
-        <Button onClick={onCloseAll}>Close all Notice</Button>
+        <Button onClick={onDismiss}>Dismiss last Notice</Button>
+        <Button onClick={onDismissAll}>Dismiss all Notice</Button>
+      </Wrap>
+    </Center>
+  )
+}
+
+export const UseUpdate = () => {
+  const notice = useNotice()
+  const ref = useRef<number | string | undefined>(undefined)
+
+  const onOpen = () => {
+    ref.current = notice({
+      colorScheme: "orange",
+      description: "オッス！オラ悟空！",
+      duration: 30000,
+      title: "孫悟空",
+    })
+  }
+
+  const onUpdate = () => {
+    if (ref.current)
+      notice.update(ref.current, {
+        colorScheme: "blue",
+        description: "よくも…よくも…オレの…ブルマを!!",
+        duration: 30000,
+        title: "ベジータ",
+      })
+  }
+
+  return (
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Wrap gap="md">
+        <Button onClick={onOpen}>Show Notice</Button>
+        <Button onClick={onUpdate}>Update last Notice</Button>
       </Wrap>
     </Center>
   )
 }
 
 export const UseLimit = () => {
-  const notice = useNotice({ limit: 5 })
+  const notice = useNotice({ limit: 3 })
 
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Wrap gap="md">
         <Button
-          onClick={() =>
+          onClick={() => {
             notice({
               description: "オッス！オラ悟空！",
               title: "孫悟空",
             })
-          }
+          }}
         >
           Show Notice
-        </Button>
-        <Button
-          onClick={() =>
-            notice({
-              description: "オッス！オラ悟空！",
-              limit: 1,
-              title: "孫悟空",
-            })
-          }
-        >
-          Limit to 1
         </Button>
       </Wrap>
     </Center>
@@ -596,7 +621,11 @@ export const CustomComponent = () => {
           <Notice.CloseButton
             top="50%"
             translateY="-50%"
-            onClick={() => dismiss(notice.id)}
+            onClick={() => {
+              if (notice.dismiss && notice.id) {
+                notice.dismiss(notice.id)
+              }
+            }}
           />
         </Notice.Root>
       )

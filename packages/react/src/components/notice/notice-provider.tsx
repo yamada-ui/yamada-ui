@@ -30,7 +30,7 @@ export interface NoticeContext {
   onChangeLimit: (limit: number) => void
 }
 
-type PositionMapping =
+type NoticePosition =
   | "bottom-center"
   | "bottom-left"
   | "bottom-right"
@@ -38,27 +38,27 @@ type PositionMapping =
   | "top-left"
   | "top-right"
 
-const createPositionMapping = (
+const createPositionFromPlacement = (
   vertical: "bottom" | "top",
   horizontal: "center" | "left" | "right",
-): PositionMapping => {
-  return `${vertical}-${horizontal}` as PositionMapping
+): NoticePosition => {
+  return `${vertical}-${horizontal}` as NoticePosition
 }
 
 const placementMapping = {
-  end: createPositionMapping("bottom", "right"),
-  "end-center": createPositionMapping("bottom", "center"),
-  "end-end": createPositionMapping("bottom", "right"),
-  "end-start": createPositionMapping("bottom", "left"),
-  start: createPositionMapping("top", "right"),
-  "start-center": createPositionMapping("top", "center"),
-  "start-end": createPositionMapping("top", "right"),
-  "start-start": createPositionMapping("top", "left"),
+  end: createPositionFromPlacement("bottom", "right"),
+  "end-center": createPositionFromPlacement("bottom", "center"),
+  "end-end": createPositionFromPlacement("bottom", "right"),
+  "end-start": createPositionFromPlacement("bottom", "left"),
+  start: createPositionFromPlacement("top", "right"),
+  "start-center": createPositionFromPlacement("top", "center"),
+  "start-end": createPositionFromPlacement("top", "right"),
+  "start-start": createPositionFromPlacement("top", "left"),
 } as const
 
 export const mapPlacementToPosition = (
   placement: NoticePlacement = "start-center",
-): PositionMapping => placementMapping[placement]
+): NoticePosition => placementMapping[placement]
 
 export const {
   component,
@@ -78,11 +78,10 @@ export const NoticeProvider = withProvider(
     const placementRef = useRef<NoticePlacement>("start-center")
     const onChangeLimitRef = useRef<(limit: number) => void>(() => void 0)
 
-    const onChangeLimit = useCallback((limit: number) => {
-      if (limit >= 0) {
-        onChangeLimitRef.current(limit)
-      }
-    }, [])
+    const onChangeLimit = useCallback(
+      (limit: number) => onChangeLimitRef.current(limit),
+      [],
+    )
 
     const context = useMemo(
       () => ({

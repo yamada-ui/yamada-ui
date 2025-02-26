@@ -11,13 +11,13 @@ import type { CloseButtonProps } from "../button"
 import { useCallback } from "react"
 import { toast } from "sonner"
 import { ui } from "../../core"
-import { isFunction } from "../../utils"
+import { handlerAll, isFunction } from "../../utils"
 import { Alert } from "../alert"
 import { CloseButton } from "../button"
 import { useNoticeContext, withContext } from "./notice-provider"
 import { mapPlacementToPosition } from "./notice-provider"
 
-export interface NoticeExtraInfoProps {
+export interface NoticeExtraProps {
   /**
    * The id of the notice.
    */
@@ -26,6 +26,14 @@ export interface NoticeExtraInfoProps {
    * The description of the notice.
    */
   description?: React.ReactNode
+  /**
+   * Function to dismiss one or the most recent toast.
+   */
+  dismiss?: (id: number | string) => number | string | undefined
+  /**
+   * Function to dismiss all toasts.
+   */
+  dismissAll?: () => void
   /**
    * The title of the notice.
    */
@@ -36,7 +44,7 @@ export interface ExternalNotice extends ExternalToast {}
 
 export interface UseNoticeOptions
   extends Omit<NoticeConfig, "onChangeLimit" | "placementRef">,
-    NoticeExtraInfoProps {
+    NoticeExtraProps {
   /**
    * The style of the alert.
    */
@@ -51,11 +59,11 @@ export interface UseNoticeOptions
    *
    * @default false
    */
-  closeButton?: ((notice: NoticeExtraInfoProps) => React.JSX.Element) | boolean
+  closeButton?: ((notice: NoticeExtraProps) => React.JSX.Element) | boolean
   /**
    * A function that returns the component of the notice.
    */
-  component?: (notice: NoticeExtraInfoProps) => React.JSX.Element
+  component?: (notice: NoticeExtraProps) => React.JSX.Element
   /**
    * The icon of the alert.
    */
@@ -68,18 +76,38 @@ export interface UseNoticeOptions
   /**
    * A function that is called when the notice closes automatically.
    */
-  onAutoClose?: (notice: NoticeExtraInfoProps) => void
+  onAutoClose?: (notice: NoticeExtraProps) => void
   /**
    * A function that is called when the notice is dismissed.
    */
-  onDismiss?: (notice: NoticeExtraInfoProps) => void
+  onDismiss?: (notice: NoticeExtraProps) => void
 }
 
 export interface NoticeOptions
   extends Omit<AlertRootProps, keyof UseNoticeOptions>,
     UseNoticeOptions {}
 
-export const useNotice = (options?: NoticeOptions) => {
+export interface NoticeFunction {
+  (props?: NoticeOptions): number | string
+  /**
+   * Dismiss one or the most recent notice.
+   * @param id Optional id of the notice to dismiss
+   */
+  dismiss: (id?: NoticeExtraProps["id"]) => number | string | undefined
+  /**
+   * Dismiss all notices.
+   */
+  dismissAll: () => void
+  /**
+   * Update an existing notice with new properties.
+   * @param id The id of the notice to update
+   * @param props New properties to update the notice with
+   */
+  update: (id: number | string, props: Partial<NoticeOptions>) => void
+  _call: (props: NoticeOptions) => number | string
+}
+
+export const useNotice = (options?: NoticeOptions): NoticeFunction => {
   const {
     id: useNoticeId,
     style: useNoticeStyle,
@@ -107,10 +135,10 @@ export const useNotice = (options?: NoticeOptions) => {
 
   const onAutoClose = useCallback(
     (
-      id: NoticeExtraInfoProps["id"],
-      description: NoticeExtraInfoProps["description"],
-      title: NoticeExtraInfoProps["title"],
-      hookOnAutoClose?: (info: NoticeExtraInfoProps) => void,
+      id: NoticeExtraProps["id"],
+      description: NoticeExtraProps["description"],
+      title: NoticeExtraProps["title"],
+      hookOnAutoClose?: (info: NoticeExtraProps) => void,
     ) => {
       const info = {
         id,
@@ -129,10 +157,10 @@ export const useNotice = (options?: NoticeOptions) => {
 
   const onDismiss = useCallback(
     (
-      id: NoticeExtraInfoProps["id"],
-      description: NoticeExtraInfoProps["description"],
-      title: NoticeExtraInfoProps["title"],
-      hookOnDismiss?: (info: NoticeExtraInfoProps) => void,
+      id: NoticeExtraProps["id"],
+      description: NoticeExtraProps["description"],
+      title: NoticeExtraProps["title"],
+      hookOnDismiss?: (info: NoticeExtraProps) => void,
     ) => {
       const info = {
         id,
@@ -149,7 +177,14 @@ export const useNotice = (options?: NoticeOptions) => {
     [noticeOnDismiss],
   )
 
-  return (props: NoticeOptions) => {
+  const noticeFn = function (specificProps?: NoticeOptions): number | string {
+    if (specificProps) {
+      return noticeFn._call({ ...options, ...specificProps })
+    }
+    return noticeFn._call(options ?? {})
+  } as NoticeFunction
+
+  noticeFn._call = (callProps: NoticeOptions): number | string => {
     const {
       id: hookId,
       style: hookStyle,
@@ -167,7 +202,7 @@ export const useNotice = (options?: NoticeOptions) => {
       title: hookTitle,
       onAutoClose: hookOnAutoClose,
       onDismiss: hookOnDismiss,
-    } = props
+    } = callProps
 
     const currentLimit = hookLimit ?? useNoticeLimit
     const placement = hookPlacement ?? useNoticePlacement
@@ -194,14 +229,28 @@ export const useNotice = (options?: NoticeOptions) => {
 
     if (hookComponent) {
       return toast.custom(
-        (id) => hookComponent({ id, description, title }),
+        (id) =>
+          hookComponent({
+            id,
+            description,
+            dismiss: noticeFn.dismiss,
+            dismissAll: noticeFn.dismissAll,
+            title,
+          }),
         options,
       )
     }
 
     if (noticeComponent) {
       return toast.custom(
-        (id) => noticeComponent({ id, description, title }),
+        (id) =>
+          noticeComponent({
+            id,
+            description,
+            dismiss: noticeFn.dismiss,
+            dismissAll: noticeFn.dismissAll,
+            title,
+          }),
         options,
       )
     }
@@ -247,19 +296,32 @@ export const useNotice = (options?: NoticeOptions) => {
       options,
     )
   }
-}
 
-export const dismiss = (id?: NoticeExtraInfoProps["id"]) => {
-  const toasts = toast.getToasts()
-  const idToDismiss = id ?? toasts[toasts.length - 1]?.id
-  if (idToDismiss) {
-    toast.dismiss(idToDismiss)
-    return toasts[toasts.length - 2]?.id
+  noticeFn.dismiss = (
+    id?: NoticeExtraProps["id"],
+  ): number | string | undefined => {
+    const toasts = toast.getToasts()
+    const idToDismiss = id ?? toasts[toasts.length - 1]?.id
+    if (idToDismiss) {
+      toast.dismiss(idToDismiss)
+      return toasts[toasts.length - 2]?.id
+    }
   }
-}
 
-export const dismissAll = () => {
-  return toast.dismiss()
+  noticeFn.dismissAll = (): void => {
+    toast.dismiss()
+  }
+
+  noticeFn.update = (
+    id: number | string,
+    props: Partial<NoticeOptions>,
+  ): void => {
+    const updatedProps = { ...options, ...props, id }
+
+    noticeFn._call(updatedProps)
+  }
+
+  return noticeFn
 }
 
 interface NoticeRootOptions
@@ -335,13 +397,17 @@ export interface NoticeCloseButtonProps
 }
 
 export const NoticeCloseButton = withContext<"button", NoticeCloseButtonProps>(
-  ({ noticeId, ...props }) => {
+  ({ noticeId, onClick, ...props }) => {
     return (
       <CloseButton
         colorScheme="gray"
         onClick={(e) => {
-          e.stopPropagation()
-          dismiss(noticeId)
+          handlerAll(onClick, () => {
+            e.stopPropagation()
+            if (noticeId) {
+              toast.dismiss(noticeId)
+            }
+          })(e)
         }}
         {...props}
       />

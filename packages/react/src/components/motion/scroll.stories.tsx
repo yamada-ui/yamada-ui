@@ -23,12 +23,12 @@ export const Basic: Story = () => {
       <Text>Please scroll</Text>
 
       <Motion
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         initial={{ opacity: 0 }}
         mt="100vh"
         p="md"
-        rounded="md"
+        rounded="l2"
         whileInView={{ opacity: 1 }}
         onViewportEnter={(entry) => console.log("Element entries", entry)}
       >
@@ -38,18 +38,18 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithTransition: Story = () => {
+export const Transition: Story = () => {
   return (
     <>
       <Text>Please scroll</Text>
 
       <Motion
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         initial={{ opacity: 0 }}
         mt="100vh"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ duration: 1 }}
         whileInView={{ opacity: 1 }}
         onViewportEnter={(entry) => console.log("Element entries", entry)}
@@ -60,18 +60,18 @@ export const WithTransition: Story = () => {
   )
 }
 
-export const WithOnce: Story = () => {
+export const Once: Story = () => {
   return (
     <>
       <Text>Please scroll</Text>
 
       <Motion
-        bg="primary"
-        color="white"
+        bg="mono"
+        color="mono.contrast"
         initial={{ opacity: 0 }}
         mt="100vh"
         p="md"
-        rounded="md"
+        rounded="l2"
         transition={{ duration: 1 }}
         viewport={{ once: true }}
         whileInView={{ opacity: 1 }}
@@ -82,7 +82,7 @@ export const WithOnce: Story = () => {
   )
 }
 
-export const UseViewport: Story = () => {
+export const Viewport: Story = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
   return (
     <>
@@ -94,16 +94,16 @@ export const UseViewport: Story = () => {
         h="xs"
         overflow="scroll"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         <Motion
-          bg="primary"
-          color="white"
+          bg="mono"
+          color="mono.contrast"
           initial={{ opacity: 0 }}
           mt="96"
           p="md"
-          rounded="md"
+          rounded="l2"
           transition={{ duration: 2 }}
           viewport={{ margin: "50px 0px 0px 0px", root: scrollRef }}
           whileInView={{ opacity: 1 }}
@@ -115,7 +115,7 @@ export const UseViewport: Story = () => {
   )
 }
 
-export const UseHook: Story = () => {
+export const UseScroll: Story = () => {
   const { scrollYProgress } = useScroll()
   const scale = useTransform(scrollYProgress, [0, 1], [0.2, 2])
 
@@ -131,15 +131,15 @@ export const UseHook: Story = () => {
       >
         <Motion
           style={{ scale }}
-          bg={["blackAlpha.200", "whiteAlpha.200"]}
+          bg="mono.subtle"
           h="full"
           overflow="hidden"
-          rounded="3xl"
+          rounded="l3"
           w="full"
         >
           <Motion
             style={{ scaleY: scrollYProgress }}
-            bg="primary"
+            bg="mono"
             h="inherit"
             transformOrigin="50% 100%"
             w="inherit"
@@ -162,7 +162,7 @@ export const CustomScrollBar: Story = () => {
     <>
       <Motion
         style={{ scaleX }}
-        bg="primary"
+        bg="mono"
         h="3"
         left="0"
         position="fixed"
@@ -284,8 +284,8 @@ export const CustomScrollBar: Story = () => {
   )
 }
 
-export const WithVariants: Story = () => {
-  const card: Variants = useMemo(
+export const Variant: Story = () => {
+  const variants: Variants = useMemo(
     () => ({
       offscreen: {
         y: 300,
@@ -354,9 +354,9 @@ export const WithVariants: Story = () => {
             h="430px"
             placeContent="center"
             placeItems="center"
-            rounded="20px"
+            rounded="3xl"
             transformOrigin="10% 60%"
-            variants={card}
+            variants={variants}
             w="300px"
           >
             {emoji}

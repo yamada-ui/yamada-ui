@@ -1,49 +1,16 @@
-import type { ReactNode } from "react"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC } from "../../core"
+import type { MarkProps } from "../mark"
 import type { TextProps } from "../text"
-import { Fragment, useMemo } from "react"
-import { forwardRef, omitThemeProps, ui, useComponentStyle } from "../../core"
-import { cx, isArray } from "../../utils"
+import { Fragment } from "react"
+import { Mark } from "../mark"
 import { Text } from "../text"
-
-interface Options {
-  query: string | string[]
-  text: string
-}
-
-interface Chunk {
-  match: boolean
-  text: string
-}
-
-const escapeRegexp = (term: string): string =>
-  term.replace(/[|\\{}()[\]^$+*?.-]/g, (char: string) => `\\${char}`)
-
-const buildRegex = (query: string[]): RegExp | undefined => {
-  query = query.filter(Boolean).map((text) => escapeRegexp(text.trim()))
-
-  if (query.length) return new RegExp(`(${query.join("|")})`, "ig")
-}
-
-const highlightWords = ({ query, text }: Options): Chunk[] => {
-  const regex = buildRegex(isArray(query) ? query : [query])
-
-  if (!regex) return [{ match: false, text }]
-
-  return text
-    .split(regex)
-    .filter(Boolean)
-    .map((text) => ({ match: regex.test(text), text }))
-}
-
-export const useHighlight = ({ query, text }: Options): Chunk[] =>
-  useMemo(() => highlightWords({ query, text }), [text, query])
+import { useHighlight } from "./use-highlight"
 
 export interface HighlightProps extends Omit<TextProps, "children"> {
   /**
-   * Accepts a string or a function. If it's a function, it should return a `ReactNode` and accept an array of `Chunk` objects as its argument.
+   * The text used for searching.
    */
-  children: ((props: Chunk[]) => ReactNode) | string
+  children: string
   /**
    * Can be a single string or an array of strings. These are the terms that are highlighted in the text.
    */
@@ -63,62 +30,30 @@ export interface HighlightProps extends Omit<TextProps, "children"> {
 /**
  * `Highlight` is a component that highlights specified strings within text. By default, it renders a `p` element.
  *
- * @see Docs https://yamada-ui.com/components/typography/highlight
+ * @see Docs https://yamada-ui.com/components/highlight
  */
 export const Highlight: FC<HighlightProps> = ({
   children: text,
   fragment = false,
-  lineHeight = "tall",
   query,
   markProps,
   ...rest
 }) => {
-  if (typeof text !== "string")
-    throw new Error("The children prop of Highlight must be a string")
-
   const chunks = useHighlight({ query, text })
 
   const Component: FC = fragment ? Fragment : Text
 
   return (
-    <Component {...(!fragment ? { lineHeight } : {})} {...rest}>
-      {chunks.map(({ match, text }, i) =>
+    <Component {...rest}>
+      {chunks.map(({ match, text }, index) =>
         match ? (
-          <Mark key={i} {...markProps}>
+          <Mark key={index} {...markProps}>
             {text}
           </Mark>
         ) : (
-          <Fragment key={i}>{text}</Fragment>
+          <Fragment key={index}>{text}</Fragment>
         ),
       )}
     </Component>
   )
 }
-
-Highlight.displayName = "Highlight"
-Highlight.__ui__ = "Highlight"
-
-export interface MarkProps extends HTMLUIProps<"mark">, ThemeProps<"Mark"> {}
-
-export const Mark = forwardRef<MarkProps, "mark">((props, ref) => {
-  const [styles, mergedProps] = useComponentStyle("Mark", props)
-  const { className, ...rest } = omitThemeProps(mergedProps)
-
-  const css: CSSUIObject = {
-    bg: "transparent",
-    whiteSpace: "nowrap",
-    ...styles,
-  }
-
-  return (
-    <ui.mark
-      ref={ref}
-      className={cx("ui-mark", className)}
-      __css={css}
-      {...rest}
-    />
-  )
-})
-
-Mark.displayName = "Mark"
-Mark.__ui__ = "Mark"

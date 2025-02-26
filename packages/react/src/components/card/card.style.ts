@@ -21,6 +21,7 @@ export const cardStyle = defineComponentSlotStyle({
     root: {
       display: "flex",
       flexDirection: "column",
+      rounded: "l2",
       w: "full",
       wordWrap: "break-word",
     },
@@ -29,17 +30,18 @@ export const cardStyle = defineComponentSlotStyle({
   variants: {
     elevated: {
       root: {
-        boxShadow: ["md", "dark-md"],
+        bg: "bg.panel",
+        boxShadow: "md",
       },
     },
     outline: {
       root: {
-        borderWidth: "1px",
+        layerStyle: "outline",
       },
     },
     panel: {
       root: {
-        bg: "bg.panel",
+        layerStyle: "panel",
       },
     },
     solid: {
@@ -57,38 +59,28 @@ export const cardStyle = defineComponentSlotStyle({
         layerStyle: "surface",
       },
     },
-    unstyled: {
-      body: { p: 0 },
-      footer: { p: 0 },
-      header: { p: 0 },
-      root: { rounded: 0 },
-    },
   },
 
   sizes: {
     sm: {
-      body: { gap: "sm", px: "sm", py: "sm" },
-      footer: { gap: "sm", pb: "sm", px: "sm" },
-      header: { gap: "sm", pt: "sm", px: "sm" },
-      root: { rounded: "base" },
+      body: { gap: "3", px: "3", py: "3" },
+      footer: { gap: "3", pb: "3", px: "3" },
+      header: { fontSize: "lg", gap: "3", pt: "3", px: "3" },
     },
     md: {
-      body: { gap: "md", px: "md", py: "md" },
-      footer: { gap: "md", pb: "md", px: "md" },
-      header: { gap: "md", pt: "md", px: "md" },
-      root: { rounded: "md" },
-    },
-    normal: {
-      body: { gap: "normal", px: "normal", py: "normal" },
-      footer: { gap: "normal", pb: "normal", px: "normal" },
-      header: { gap: "normal", pt: "normal", px: "normal" },
-      root: { rounded: "lg" },
+      body: { gap: "4", px: "4", py: "4" },
+      footer: { gap: "4", pb: "4", px: "4" },
+      header: { fontSize: "xl", gap: "4", pt: "4", px: "4" },
     },
     lg: {
-      body: { gap: "lg", px: "lg", py: "lg" },
-      footer: { gap: "lg", pb: "lg", px: "lg" },
-      header: { gap: "lg", pt: "lg", px: "lg" },
-      root: { rounded: "xl" },
+      body: { gap: "6", px: "6", py: "6" },
+      footer: { gap: "6", pb: "6", px: "6" },
+      header: { fontSize: "2xl", gap: "6", pt: "6", px: "6" },
+    },
+    xl: {
+      body: { gap: "8", px: "8", py: "8" },
+      footer: { gap: "8", pb: "8", px: "8" },
+      header: { fontSize: "2xl", gap: "8", pt: "8", px: "8" },
     },
   },
 

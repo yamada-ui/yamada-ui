@@ -1,5 +1,5 @@
 import type { DependencyList } from "react"
-import type { Theme } from "../../core"
+import type { ThemeTokens } from "../../core"
 import { useUpdateEffect } from "../../utils"
 import { useBreakpoint } from "./use-breakpoint"
 
@@ -9,7 +9,7 @@ import { useBreakpoint } from "./use-breakpoint"
  * @see Docs https://yamada-ui.com/hooks/use-update-breakpoint-effect
  */
 export const useUpdateBreakpointEffect = (
-  callback: (breakpoint: Theme["breakpoints"]) => void,
+  callback: (breakpoint: ThemeTokens["breakpoints"]) => void,
   deps: DependencyList,
 ) => {
   const breakpoint = useBreakpoint()

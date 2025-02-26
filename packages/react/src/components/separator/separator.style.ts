@@ -35,7 +35,7 @@ export const separatorStyle = defineComponentStyle({
     },
   },
 
-  defaultProps: { variant: "solid", props: { orientation: "horizontal" } },
+  defaultProps: { variant: "solid", orientation: "horizontal" },
 })
 
 export type SeparatorStyle = typeof separatorStyle

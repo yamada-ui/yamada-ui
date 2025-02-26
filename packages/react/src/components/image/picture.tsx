@@ -1,4 +1,4 @@
-import type { FC, HTMLUIProps, Theme } from "../../core"
+import type { FC, HTMLUIProps, ThemeTokens } from "../../core"
 import type { ImageProps } from "./image"
 import { useCallback, useMemo } from "react"
 import { ui } from "../../core"
@@ -33,13 +33,13 @@ export interface PictureSource extends SourceProps {
    *
    * If media is set, media takes precedence.
    */
-  maxW?: number | Theme["sizes"]
+  maxW?: number | ThemeTokens["sizes"]
   /**
    * The minimum width for the source.
    *
    * If media is set, media takes precedence.
    */
-  minW?: number | Theme["sizes"]
+  minW?: number | ThemeTokens["sizes"]
 }
 
 interface PictureOptions {
@@ -64,7 +64,7 @@ export interface PictureProps extends ImageProps, PictureOptions {}
 /**
  * `Picture` is a component that uses the `picture` element to provide alternative images for different display or device scenarios.
  *
- * @see Docs https://yamada-ui.com/components/media-and-icons/picture
+ * @see Docs https://yamada-ui.com/components/picture
  */
 export const Picture: FC<PictureProps> = ({
   children,
@@ -150,7 +150,7 @@ export interface SourceProps extends HTMLUIProps<"source"> {
   /**
    * The media query for the source.
    */
-  media?: Theme["breakpoints"]
+  media?: ThemeTokens["breakpoints"]
 }
 
 export const Source: FC<SourceProps> = ({ media, ...rest }) => {

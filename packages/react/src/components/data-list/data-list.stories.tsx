@@ -1,20 +1,79 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { DataListProps } from "./"
 import { useMemo } from "react"
+import { PropsTable } from "../../../storybook/components"
 import { Separator } from "../separator"
-import { DataList, DataListDescription, DataListItem, DataListTerm } from "./"
+import { VStack } from "../stack"
+import { DataList } from "./"
 
-type Story = StoryFn<typeof DataList>
+type Story = StoryFn<typeof DataList.Root>
 
-const meta: Meta<typeof DataList> = {
-  component: DataList,
+const meta: Meta<typeof DataList.Root> = {
+  component: DataList.Root,
   title: "Components / DataList",
 }
 
 export default meta
 
 export const Basic: Story = () => {
-  const items = useMemo<DataListProps["items"]>(
+  const items = useMemo<DataList.RootProps["items"]>(
+    () => [
+      { description: "入れ替わりの魔女", term: "白石うらら" },
+      { description: "虜の魔女", term: "小田切寧々" },
+      { description: "思念（テレパシー）の魔女", term: "大塚芽子" },
+      { description: "未来視の魔女", term: "猿島マリア" },
+      { description: "過去視の魔女", term: "滝川ノア" },
+      { description: "透明の魔女", term: "飛鳥美琴" },
+      { description: "記憶操作の魔女", term: "西園寺リカ" },
+    ],
+    [],
+  )
+
+  return <DataList.Root items={items} />
+}
+
+export const Children: Story = () => {
+  return (
+    <DataList.Root col={2}>
+      <DataList.Item>
+        <DataList.Term>白石うらら</DataList.Term>
+        <DataList.Description>入れ替わりの魔女</DataList.Description>
+      </DataList.Item>
+
+      <DataList.Item>
+        <DataList.Term>小田切寧々</DataList.Term>
+        <DataList.Description>虜の魔女</DataList.Description>
+      </DataList.Item>
+
+      <DataList.Item>
+        <DataList.Term>大塚芽子</DataList.Term>
+        <DataList.Description>思念（テレパシー）の魔女</DataList.Description>
+      </DataList.Item>
+
+      <DataList.Item>
+        <DataList.Term>猿島マリア</DataList.Term>
+        <DataList.Description>未来視の魔女</DataList.Description>
+      </DataList.Item>
+
+      <DataList.Item>
+        <DataList.Term>滝川ノア</DataList.Term>
+        <DataList.Description>過去視の魔女</DataList.Description>
+      </DataList.Item>
+
+      <DataList.Item>
+        <DataList.Term>飛鳥美琴</DataList.Term>
+        <DataList.Description>透明の魔女</DataList.Description>
+      </DataList.Item>
+
+      <DataList.Item>
+        <DataList.Term>西園寺リカ</DataList.Term>
+        <DataList.Description>記憶操作の魔女</DataList.Description>
+      </DataList.Item>
+    </DataList.Root>
+  )
+}
+
+export const Variant: Story = () => {
+  const items = useMemo<DataList.RootProps["items"]>(
     () => [
       { description: "入れ替わりの魔女", term: "白石うらら" },
       { description: "虜の魔女", term: "小田切寧々" },
@@ -28,53 +87,27 @@ export const Basic: Story = () => {
   )
 
   return (
-    <>
-      <DataList items={items} />
-
-      <Separator />
-
-      <DataList col={2}>
-        <DataListItem>
-          <DataListTerm>白石うらら</DataListTerm>
-          <DataListDescription>入れ替わりの魔女</DataListDescription>
-        </DataListItem>
-
-        <DataListItem>
-          <DataListTerm>小田切寧々</DataListTerm>
-          <DataListDescription>虜の魔女</DataListDescription>
-        </DataListItem>
-
-        <DataListItem>
-          <DataListTerm>大塚芽子</DataListTerm>
-          <DataListDescription>思念（テレパシー）の魔女</DataListDescription>
-        </DataListItem>
-
-        <DataListItem>
-          <DataListTerm>猿島マリア</DataListTerm>
-          <DataListDescription>未来視の魔女</DataListDescription>
-        </DataListItem>
-
-        <DataListItem>
-          <DataListTerm>滝川ノア</DataListTerm>
-          <DataListDescription>過去視の魔女</DataListDescription>
-        </DataListItem>
-
-        <DataListItem>
-          <DataListTerm>飛鳥美琴</DataListTerm>
-          <DataListDescription>透明の魔女</DataListDescription>
-        </DataListItem>
-
-        <DataListItem>
-          <DataListTerm>西園寺リカ</DataListTerm>
-          <DataListDescription>記憶操作の魔女</DataListDescription>
-        </DataListItem>
-      </DataList>
-    </>
+    <PropsTable
+      variant="column"
+      columns={["subtle", "bold", "grid"]}
+      rows={["horizontal", "vertical"]}
+    >
+      {(column, row, key) => {
+        return (
+          <DataList.Root
+            key={key}
+            variant={column}
+            items={items}
+            orientation={row}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithSize: Story = () => {
-  const items = useMemo<DataListProps["items"]>(
+export const Size: Story = () => {
+  const items = useMemo<DataList.RootProps["items"]>(
     () => [
       { description: "入れ替わりの魔女", term: "白石うらら" },
       { description: "虜の魔女", term: "小田切寧々" },
@@ -88,34 +121,27 @@ export const WithSize: Story = () => {
   )
 
   return (
-    <>
-      <DataList size="sm" items={items} />
-
-      <Separator />
-
-      <DataList size="md" items={items} />
-
-      <Separator />
-
-      <DataList size="lg" items={items} />
-
-      <Separator />
-
-      <DataList size="sm" items={items} orientation="vertical" />
-
-      <Separator />
-
-      <DataList size="md" items={items} orientation="vertical" />
-
-      <Separator />
-
-      <DataList size="lg" items={items} orientation="vertical" />
-    </>
+    <PropsTable
+      variant="column"
+      columns={["sm", "md", "lg"]}
+      rows={["horizontal", "vertical"]}
+    >
+      {(column, row, key) => {
+        return (
+          <DataList.Root
+            key={key}
+            size={column}
+            items={items}
+            orientation={row}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithVariant: Story = () => {
-  const items = useMemo<DataListProps["items"]>(
+export const Orientation: Story = () => {
+  const items = useMemo<DataList.RootProps["items"]>(
     () => [
       { description: "入れ替わりの魔女", term: "白石うらら" },
       { description: "虜の魔女", term: "小田切寧々" },
@@ -129,47 +155,15 @@ export const WithVariant: Story = () => {
   )
 
   return (
-    <>
-      <DataList variant="subtle" items={items} />
-
-      <Separator />
-
-      <DataList variant="bold" items={items} />
-
-      <Separator />
-
-      <DataList variant="grid" items={items} />
-    </>
+    <VStack separator={<Separator />}>
+      <DataList.Root items={items} orientation="horizontal" />
+      <DataList.Root items={items} orientation="vertical" />
+    </VStack>
   )
 }
 
-export const WithOrientation: Story = () => {
-  const items = useMemo<DataListProps["items"]>(
-    () => [
-      { description: "入れ替わりの魔女", term: "白石うらら" },
-      { description: "虜の魔女", term: "小田切寧々" },
-      { description: "思念（テレパシー）の魔女", term: "大塚芽子" },
-      { description: "未来視の魔女", term: "猿島マリア" },
-      { description: "過去視の魔女", term: "滝川ノア" },
-      { description: "透明の魔女", term: "飛鳥美琴" },
-      { description: "記憶操作の魔女", term: "西園寺リカ" },
-    ],
-    [],
-  )
-
-  return (
-    <>
-      <DataList items={items} orientation="horizontal" />
-
-      <Separator />
-
-      <DataList items={items} orientation="vertical" />
-    </>
-  )
-}
-
-export const UseMultipleTerms: Story = () => {
-  const items = useMemo<DataListProps["items"]>(
+export const MultipleTerms: Story = () => {
+  const items = useMemo<DataList.RootProps["items"]>(
     () => [
       { description: "入れ替わりの魔女", term: ["白石うらら", "清集院桃子"] },
       { description: "虜の魔女", term: ["小田切寧々", "紺野つばさ"] },
@@ -186,60 +180,58 @@ export const UseMultipleTerms: Story = () => {
   )
 
   return (
-    <>
-      <DataList items={items} />
+    <VStack separator={<Separator />}>
+      <DataList.Root items={items} />
 
-      <Separator />
+      <DataList.Root orientation="vertical">
+        <DataList.Item>
+          <DataList.Term>白石うらら</DataList.Term>
+          <DataList.Term>清集院桃子</DataList.Term>
+          <DataList.Description>入れ替わりの魔女</DataList.Description>
+        </DataList.Item>
 
-      <DataList orientation="vertical">
-        <DataListItem>
-          <DataListTerm>白石うらら</DataListTerm>
-          <DataListTerm>清集院桃子</DataListTerm>
-          <DataListDescription>入れ替わりの魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>小田切寧々</DataList.Term>
+          <DataList.Term>紺野つばさ</DataList.Term>
+          <DataList.Description>虜の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>小田切寧々</DataListTerm>
-          <DataListTerm>紺野つばさ</DataListTerm>
-          <DataListDescription>虜の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>大塚芽子</DataList.Term>
+          <DataList.Term>萌黄ことり</DataList.Term>
+          <DataList.Description>思念（テレパシー）の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>大塚芽子</DataListTerm>
-          <DataListTerm>萌黄ことり</DataListTerm>
-          <DataListDescription>思念（テレパシー）の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>猿島マリア</DataList.Term>
+          <DataList.Term>筑紫愛子</DataList.Term>
+          <DataList.Description>未来視の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>猿島マリア</DataListTerm>
-          <DataListTerm>筑紫愛子</DataListTerm>
-          <DataListDescription>未来視の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>滝川ノア</DataList.Term>
+          <DataList.Term>姫川そら</DataList.Term>
+          <DataList.Description>過去視の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>滝川ノア</DataListTerm>
-          <DataListTerm>姫川そら</DataListTerm>
-          <DataListDescription>過去視の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>飛鳥美琴</DataList.Term>
+          <DataList.Term>菊池アカネ</DataList.Term>
+          <DataList.Description>透明の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>飛鳥美琴</DataListTerm>
-          <DataListTerm>菊池アカネ</DataListTerm>
-          <DataListDescription>透明の魔女</DataListDescription>
-        </DataListItem>
-
-        <DataListItem>
-          <DataListTerm>西園寺リカ</DataListTerm>
-          <DataListTerm>虹野晴子</DataListTerm>
-          <DataListDescription>記憶操作の魔女</DataListDescription>
-        </DataListItem>
-      </DataList>
-    </>
+        <DataList.Item>
+          <DataList.Term>西園寺リカ</DataList.Term>
+          <DataList.Term>虹野晴子</DataList.Term>
+          <DataList.Description>記憶操作の魔女</DataList.Description>
+        </DataList.Item>
+      </DataList.Root>
+    </VStack>
   )
 }
 
-export const UseMultipleDescriptions: Story = () => {
-  const items = useMemo<DataListProps["items"]>(
+export const MultipleDescriptions: Story = () => {
+  const items = useMemo<DataList.RootProps["items"]>(
     () => [
       {
         description: ["入れ替わりの魔女", "絶望的味覚音痴"],
@@ -268,67 +260,67 @@ export const UseMultipleDescriptions: Story = () => {
   )
 
   return (
-    <>
-      <DataList items={items} />
+    <VStack separator={<Separator />}>
+      <DataList.Root items={items} />
 
-      <Separator />
+      <DataList.Root orientation="vertical">
+        <DataList.Item>
+          <DataList.Term>白石うらら</DataList.Term>
+          <DataList.Description>入れ替わりの魔女</DataList.Description>
+          <DataList.Description>絶望的味覚音痴</DataList.Description>
+        </DataList.Item>
 
-      <DataList orientation="vertical">
-        <DataListItem>
-          <DataListTerm>白石うらら</DataListTerm>
-          <DataListDescription>入れ替わりの魔女</DataListDescription>
-          <DataListDescription>絶望的味覚音痴</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>小田切寧々</DataList.Term>
+          <DataList.Description>虜の魔女</DataList.Description>
+          <DataList.Description>得意教科は自称全教科</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>小田切寧々</DataListTerm>
-          <DataListDescription>虜の魔女</DataListDescription>
-          <DataListDescription>得意教科は自称全教科</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>大塚芽子</DataList.Term>
+          <DataList.Description>思念（テレパシー）の魔女</DataList.Description>
+          <DataList.Description>若干腐女子の気がある</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>大塚芽子</DataListTerm>
-          <DataListDescription>思念（テレパシー）の魔女</DataListDescription>
-          <DataListDescription>若干腐女子の気がある</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>猿島マリア</DataList.Term>
+          <DataList.Description>未来視の魔女</DataList.Description>
+          <DataList.Description>
+            服のセンスが独特な弟がいる
+          </DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>猿島マリア</DataListTerm>
-          <DataListDescription>未来視の魔女</DataListDescription>
-          <DataListDescription>服のセンスが独特な弟がいる</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>滝川ノア</DataList.Term>
+          <DataList.Description>過去視の魔女</DataList.Description>
+          <DataList.Description>数々の問題を起こしている</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>滝川ノア</DataListTerm>
-          <DataListDescription>過去視の魔女</DataListDescription>
-          <DataListDescription>数々の問題を起こしている</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>飛鳥美琴</DataList.Term>
+          <DataList.Description>透明の魔女</DataList.Description>
+          <DataList.Description>サディストの気がある</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>飛鳥美琴</DataListTerm>
-          <DataListDescription>透明の魔女</DataListDescription>
-          <DataListDescription>サディストの気がある</DataListDescription>
-        </DataListItem>
-
-        <DataListItem>
-          <DataListTerm>西園寺リカ</DataListTerm>
-          <DataListDescription>記憶操作の魔女</DataListDescription>
-          <DataListDescription>
+        <DataList.Item>
+          <DataList.Term>西園寺リカ</DataList.Term>
+          <DataList.Description>記憶操作の魔女</DataList.Description>
+          <DataList.Description>
             学校でもノーパンで過ごしている
-          </DataListDescription>
-        </DataListItem>
-      </DataList>
-    </>
+          </DataList.Description>
+        </DataList.Item>
+      </DataList.Root>
+    </VStack>
   )
 }
 
 export const CustomTerm: Story = () => {
-  const items = useMemo<DataListProps["items"]>(
+  const items = useMemo<DataList.RootProps["items"]>(
     () => [
       {
         description: "入れ替わりの魔女",
         term: "白石うらら",
-        termProps: { color: "primary" },
+        termProps: { color: "blue" },
       },
       { description: "虜の魔女", term: "小田切寧々" },
       { description: "思念（テレパシー）の魔女", term: "大塚芽子" },
@@ -341,58 +333,59 @@ export const CustomTerm: Story = () => {
   )
 
   return (
-    <>
-      <DataList items={items} termProps={{ textDecoration: "line-through" }} />
+    <VStack separator={<Separator />}>
+      <DataList.Root
+        items={items}
+        termProps={{ textDecoration: "line-through" }}
+      />
 
-      <Separator />
+      <DataList.Root col={2}>
+        <DataList.Item>
+          <DataList.Term color="blue">白石うらら</DataList.Term>
+          <DataList.Description>入れ替わりの魔女</DataList.Description>
+        </DataList.Item>
 
-      <DataList col={2}>
-        <DataListItem>
-          <DataListTerm color="primary">白石うらら</DataListTerm>
-          <DataListDescription>入れ替わりの魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>小田切寧々</DataList.Term>
+          <DataList.Description>虜の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>小田切寧々</DataListTerm>
-          <DataListDescription>虜の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>大塚芽子</DataList.Term>
+          <DataList.Description>思念（テレパシー）の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>大塚芽子</DataListTerm>
-          <DataListDescription>思念（テレパシー）の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>猿島マリア</DataList.Term>
+          <DataList.Description>未来視の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>猿島マリア</DataListTerm>
-          <DataListDescription>未来視の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>滝川ノア</DataList.Term>
+          <DataList.Description>過去視の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>滝川ノア</DataListTerm>
-          <DataListDescription>過去視の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>飛鳥美琴</DataList.Term>
+          <DataList.Description>透明の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>飛鳥美琴</DataListTerm>
-          <DataListDescription>透明の魔女</DataListDescription>
-        </DataListItem>
-
-        <DataListItem>
-          <DataListTerm>西園寺リカ</DataListTerm>
-          <DataListDescription>記憶操作の魔女</DataListDescription>
-        </DataListItem>
-      </DataList>
-    </>
+        <DataList.Item>
+          <DataList.Term>西園寺リカ</DataList.Term>
+          <DataList.Description>記憶操作の魔女</DataList.Description>
+        </DataList.Item>
+      </DataList.Root>
+    </VStack>
   )
 }
 
 export const CustomDescription: Story = () => {
-  const items = useMemo<DataListProps["items"]>(
+  const items = useMemo<DataList.RootProps["items"]>(
     () => [
       {
         description: "入れ替わりの魔女",
         term: "白石うらら",
-        descriptionProps: { color: "primary" },
+        descriptionProps: { color: "blue" },
       },
       { description: "虜の魔女", term: "小田切寧々" },
       { description: "思念（テレパシー）の魔女", term: "大塚芽子" },
@@ -405,52 +398,50 @@ export const CustomDescription: Story = () => {
   )
 
   return (
-    <>
-      <DataList
+    <VStack separator={<Separator />}>
+      <DataList.Root
         items={items}
         descriptionProps={{ textDecoration: "line-through" }}
       />
 
-      <Separator />
-
-      <DataList col={2}>
-        <DataListItem>
-          <DataListTerm>白石うらら</DataListTerm>
-          <DataListDescription color="primary">
+      <DataList.Root col={2}>
+        <DataList.Item>
+          <DataList.Term>白石うらら</DataList.Term>
+          <DataList.Description color="blue">
             入れ替わりの魔女
-          </DataListDescription>
-        </DataListItem>
+          </DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>小田切寧々</DataListTerm>
-          <DataListDescription>虜の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>小田切寧々</DataList.Term>
+          <DataList.Description>虜の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>大塚芽子</DataListTerm>
-          <DataListDescription>思念（テレパシー）の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>大塚芽子</DataList.Term>
+          <DataList.Description>思念（テレパシー）の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>猿島マリア</DataListTerm>
-          <DataListDescription>未来視の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>猿島マリア</DataList.Term>
+          <DataList.Description>未来視の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>滝川ノア</DataListTerm>
-          <DataListDescription>過去視の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>滝川ノア</DataList.Term>
+          <DataList.Description>過去視の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>飛鳥美琴</DataListTerm>
-          <DataListDescription>透明の魔女</DataListDescription>
-        </DataListItem>
+        <DataList.Item>
+          <DataList.Term>飛鳥美琴</DataList.Term>
+          <DataList.Description>透明の魔女</DataList.Description>
+        </DataList.Item>
 
-        <DataListItem>
-          <DataListTerm>西園寺リカ</DataListTerm>
-          <DataListDescription>記憶操作の魔女</DataListDescription>
-        </DataListItem>
-      </DataList>
-    </>
+        <DataList.Item>
+          <DataList.Term>西園寺リカ</DataList.Term>
+          <DataList.Description>記憶操作の魔女</DataList.Description>
+        </DataList.Item>
+      </DataList.Root>
+    </VStack>
   )
 }

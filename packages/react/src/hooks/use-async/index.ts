@@ -94,9 +94,9 @@ export function useAsyncFunc<T extends FunctionReturningPromise>(
   return [state, callback as unknown as T]
 }
 
-export type AsyncStateRetry<T> = {
+export type AsyncStateRetry<T> = AsyncState<T> & {
   retry(): void
-} & AsyncState<T>
+}
 
 export function useAsyncRetry<T>(
   func: () => Promise<T>,

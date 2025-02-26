@@ -55,9 +55,9 @@ export const {
 /**
  * `Tag` is a component used to categorize or organize items using keywords that describe them.
  *
- * @see Docs https://yamada-ui.com/components/data-display/tag
+ * @see Docs https://yamada-ui.com/components/tag
  */
-export const Tag = withProvider<"span", TagProps>(
+export const Tag = withProvider(
   ({
     children,
     disabled,
@@ -85,33 +85,30 @@ export const Tag = withProvider<"span", TagProps>(
           {endIcon ? <TagEndIcon {...iconProps}>{endIcon}</TagEndIcon> : null}
 
           {onClose ? (
-            <TagCloseButton
-              disabled={disabled}
-              onClick={onClose}
-              {...closeButtonProps}
-            />
+            <TagCloseButton onClick={onClose} {...closeButtonProps} />
           ) : null}
         </ui.span>
       </TagContext>
     )
   },
   "root",
+  { transferProps: ["disabled"] },
 )()
 
-export interface TagContentProps extends HTMLUIProps<"span"> {}
+interface TagContentProps extends HTMLUIProps<"span"> {}
 
-export const TagContent = withContext<"span", TagContentProps>(
-  "span",
-  "content",
-)(undefined, (props) => {
-  const { disabled } = useTagContext()
+const TagContent = withContext<"span", TagContentProps>("span", "content")(
+  undefined,
+  (props) => {
+    const { disabled } = useTagContext()
 
-  return { "data-disabled": dataAttr(disabled), ...props }
-})
+    return { "data-disabled": dataAttr(disabled), ...props }
+  },
+)
 
-export interface TagStartIconProps extends HTMLUIProps<"span"> {}
+interface TagStartIconProps extends HTMLUIProps<"span"> {}
 
-export const TagStartIcon = withContext<"span", TagStartIconProps>("span", [
+const TagStartIcon = withContext<"span", TagStartIconProps>("span", [
   "icon",
   "startIcon",
 ])(undefined, (props) => {
@@ -120,9 +117,9 @@ export const TagStartIcon = withContext<"span", TagStartIconProps>("span", [
   return { "data-disabled": dataAttr(disabled), ...props }
 })
 
-export interface TagEndIconProps extends HTMLUIProps<"span"> {}
+interface TagEndIconProps extends HTMLUIProps<"span"> {}
 
-export const TagEndIcon = withContext<"span", TagEndIconProps>("span", [
+const TagEndIcon = withContext<"span", TagEndIconProps>("span", [
   "icon",
   "endIcon",
 ])(undefined, (props) => {
@@ -131,16 +128,20 @@ export const TagEndIcon = withContext<"span", TagEndIconProps>("span", [
   return { "data-disabled": dataAttr(disabled), ...props }
 })
 
-export interface TagCloseButtonProps extends HTMLUIProps<"span"> {
-  disabled?: boolean
-}
+interface TagCloseButtonProps extends HTMLUIProps<"span"> {}
 
-export const TagCloseButton = withContext<"span", TagCloseButtonProps>("span", [
+const TagCloseButton = withContext<"span", TagCloseButtonProps>("span", [
   "icon",
   "closeButton",
 ])(undefined, ({ children, ...props }) => {
   const ref = useRef<HTMLSpanElement>(null)
-  const rest = useClickable<HTMLSpanElement>({ ref, ...props })
+  const { disabled } = useTagContext()
+  const rest = useClickable<HTMLSpanElement>({ ref, disabled, ...props })
 
-  return { "aria-label": "Close tag", children: children || <XIcon />, ...rest }
+  return {
+    "aria-label": "Close tag",
+    "data-disabled": dataAttr(disabled),
+    children: children || <XIcon />,
+    ...rest,
+  }
 })

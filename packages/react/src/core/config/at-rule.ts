@@ -25,6 +25,7 @@ export const generateAtRule =
           minHeight,
           minW,
           minWidth,
+          prefersColorMode,
           query,
           w,
           width,
@@ -45,13 +46,14 @@ export const generateAtRule =
             maxWidth,
             minHeight,
             minWidth,
+            prefersColorScheme: prefersColorMode,
             width,
             ...rest,
           })
 
           query = Object.entries(resolvedRest)
             .map(([key, value]) => {
-              value = tokenToVar("sizes", value)(theme)
+              value = tokenToVar(theme)("sizes", value)
 
               return `(${toKebabCase(key)}: ${value})`
             })

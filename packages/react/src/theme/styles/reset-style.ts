@@ -1,6 +1,6 @@
-import type { CSSObject } from "../../core"
+import { defineStyles } from "../../core"
 
-export const resetStyle: CSSObject = {
+export const resetStyle = defineStyles.resetStyle({
   "*, *::before, *::after": {
     boxSizing: "border-box",
     margin: 0,
@@ -154,4 +154,4 @@ export const resetStyle: CSSObject = {
   ":where(dialog:not([open], [popover]), [popover]:not(:popover-open))": {
     display: "none !important",
   },
-}
+})

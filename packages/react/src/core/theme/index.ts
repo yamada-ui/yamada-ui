@@ -1,5 +1,3 @@
 export * from "./config"
-export * from "./merge-style"
-export * from "./omit-theme-props"
-export * from "./pick-style"
+export type * from "./index.types"
 export * from "./transform-theme"

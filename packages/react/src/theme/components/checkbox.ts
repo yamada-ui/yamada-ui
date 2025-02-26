@@ -3,14 +3,14 @@ import type { ComponentMultiStyle } from "../../core"
 export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
   baseStyle: {
     container: {
-      _disabled: { cursor: "not-allowed" },
       _readOnly: { cursor: "auto" },
+      _disabled: { cursor: "not-allowed" },
     },
     icon: ({ colorScheme: c = "primary" }) => ({
       border: "2px solid",
       borderColor: "inherit",
       color: ["white", "black"],
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "box-shadow",
       _checked: {
         bg: [`${c}.500`, `${c}.600`],
@@ -20,22 +20,15 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
           bg: [`${c}.600`, `${c}.700`],
           borderColor: [`${c}.600`, `${c}.700`],
         },
-        // eslint-disable-next-line perfectionist/sort-objects
-        _disabled: {
-          bg: ["blackAlpha.400", "whiteAlpha.300"],
-          borderColor: ["transparent", "transparent"],
-        },
+
         _readOnly: {
           bg: [`${c}.500`, `${c}.600`],
           borderColor: [`${c}.500`, `${c}.600`],
         },
-      },
-      _disabled: {
-        bg: ["blackAlpha.200", "whiteAlpha.100"],
-        borderColor: ["transparent", "transparent"],
-      },
-      _focusVisible: {
-        boxShadow: "outline",
+        _disabled: {
+          bg: ["blackAlpha.400", "whiteAlpha.300"],
+          borderColor: ["transparent", "transparent"],
+        },
       },
       _indeterminate: {
         bg: [`${c}.500`, `${c}.600`],
@@ -50,6 +43,13 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
             borderColor: [`${c}.500`, `${c}.600`],
           },
         },
+      },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
+      _disabled: {
+        bg: ["blackAlpha.200", "whiteAlpha.100"],
+        borderColor: ["transparent", "transparent"],
       },
     }),
     label: {

@@ -1,25 +1,22 @@
 import type { HTMLUIProps } from "../../core"
-import { ui } from "../../core"
+import type { VisuallyHiddenStyle } from "./visually-hidden.style"
+import { createComponent } from "../../core"
+import { visuallyHiddenStyle } from "./visually-hidden.style"
 
 export interface VisuallyHiddenProps extends HTMLUIProps<"span"> {}
+
+export const {
+  PropsContext: visuallyHiddenPropsContext,
+  usePropsContext: useVisuallyHiddenPropsContext,
+  withContext,
+} = createComponent<VisuallyHiddenProps, VisuallyHiddenStyle>(
+  "visually-hidden",
+  visuallyHiddenStyle,
+)
 
 /**
  * `VisuallyHidden` is a common technique used in web accessibility to hide content from the visual client, but keep it readable for screen readers.
  *
- * @see Docs https://yamada-ui.com/components/other/visually-hidden
+ * @see Docs https://yamada-ui.com/components/visually-hidden
  */
-export const VisuallyHidden = ui("span", {
-  baseStyle: {
-    border: "0",
-    clip: "rect(0, 0, 0, 0)",
-    height: "1px",
-    margin: "-1px",
-    overflow: "hidden",
-    padding: "0",
-    position: "absolute",
-    whiteSpace: "nowrap",
-    width: "1px",
-  },
-})
-
-VisuallyHidden.__ui__ = "VisuallyHidden"
+export const VisuallyHidden = withContext("span")()

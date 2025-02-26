@@ -2,10 +2,11 @@ import type { ThemeProviderProps as EmotionThemeProviderProps } from "@emotion/r
 import type { FC, ReactNode } from "react"
 import type {
   ChangeThemeScheme,
-  InternalTheme,
   StyledTheme,
   Theme,
   ThemeConfig,
+  ThemeTokens,
+  UsageTheme,
 } from "../../core"
 import type { Dict } from "../../utils"
 import type { ThemeSchemeManager } from "./theme-manager"
@@ -13,7 +14,7 @@ import { ThemeProvider as EmotionThemeProvider, Global } from "@emotion/react"
 import { ThemeContext } from "@emotion/react"
 import { use, useCallback, useEffect, useMemo, useState } from "react"
 import { css, transformTheme } from "../../core"
-import { isEmptyObject, isUndefined, merge } from "../../utils"
+import { isEmptyObject, isObject, isUndefined, merge } from "../../utils"
 import { getPreventTransition } from "../color-mode-provider"
 import { useEnvironment } from "../environment-provider"
 import { themeSchemeManager } from "./theme-manager"
@@ -73,7 +74,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   themeSchemeManager = localStorage,
 }) => {
   const environment = useEnvironment()
-  const [themeScheme, setThemeScheme] = useState<Theme["themeSchemes"]>(
+  const [themeScheme, setThemeScheme] = useState<ThemeTokens["themeSchemes"]>(
     themeSchemeManager.get(config?.initialThemeScheme)(storageKey),
   )
 
@@ -118,7 +119,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 }
 
 export const GlobalStyles: FC = () => {
-  const { theme } = useTheme()
+  const { theme } = useTheme<UsageTheme>()
   const { atRule, wrap } = theme.__layers ?? {}
 
   const resetStyle = useMemo(() => {
@@ -126,7 +127,7 @@ export const GlobalStyles: FC = () => {
 
     if (!style || isEmptyObject(style)) return undefined
 
-    return css(style)(theme)
+    return css(theme)(style)
   }, [theme])
 
   const globalStyle = useMemo(() => {
@@ -134,7 +135,7 @@ export const GlobalStyles: FC = () => {
 
     if (!style || isEmptyObject(style)) return undefined
 
-    return css(style)(theme)
+    return css(theme)(style)
   }, [theme])
 
   const cssVars = useMemo(() => {
@@ -158,7 +159,7 @@ export const GlobalStyles: FC = () => {
  *
  * @see Docs https://yamada-ui.com/hooks/use-theme
  */
-export const useTheme = <T extends InternalTheme>() => {
+export const useTheme = <T extends UsageTheme = Theme>() => {
   const internalTheme = use(ThemeContext) as StyledTheme<T>
 
   const theme = useMemo(() => {
@@ -166,7 +167,10 @@ export const useTheme = <T extends InternalTheme>() => {
 
     if (isUndefined(themeScheme) || themeScheme === "base") return internalTheme
 
-    const nestedTheme = internalTheme.themeSchemes?.[themeScheme]
+    const nestedTheme =
+      "themeSchemes" in internalTheme && isObject(internalTheme.themeSchemes)
+        ? internalTheme.themeSchemes[themeScheme]
+        : undefined
 
     if (!nestedTheme) return internalTheme
 

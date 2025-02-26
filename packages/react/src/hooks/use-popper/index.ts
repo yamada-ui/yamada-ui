@@ -4,7 +4,7 @@ import type {
   Placement,
   VirtualElement,
 } from "@popperjs/core"
-import type { PropGetter, Token } from "../../core"
+import type { PropGetter, StyleValue } from "../../core"
 import { createPopper } from "@popperjs/core"
 import { useCallback, useEffect, useRef } from "react"
 import { mergeRefs, noop } from "../../utils"
@@ -44,7 +44,7 @@ export interface UsePopperProps {
    *
    * @default true
    */
-  eventListeners?: { resize?: boolean; scroll?: boolean } | boolean
+  eventListeners?: boolean | { resize?: boolean; scroll?: boolean }
   /**
    * If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.
    *
@@ -57,7 +57,7 @@ export interface UsePopperProps {
    *
    * @default 8
    */
-  gutter?: Token<number>
+  gutter?: StyleValue<number>
   /**
    * If `true`, the popper will match the width of the reference at all times.
    * It's useful for `autocomplete`, `date-picker` and `select` patterns.
@@ -81,7 +81,7 @@ export interface UsePopperProps {
    *
    * @default 'bottom'
    */
-  placement?: Token<Placement>
+  placement?: StyleValue<Placement>
   /**
    * If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.
    *

@@ -6,18 +6,18 @@ describe("<Separator />", () => {
     render(<Separator />)
   })
 
-  test("overrides the theming props", () => {
-    render(<Separator variant="dashed" />)
-
-    expect(screen.getByRole("separator")).toHaveStyle({ borderStyle: "dashed" })
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Separator.displayName).toBe("Separator")
+    expect(Separator.__ui__).toBe("Separator")
   })
 
-  test("renders vertically correctly", () => {
-    render(<Separator orientation="vertical" />)
+  test("sets `className` correctly", () => {
+    render(<Separator />)
+    expect(screen.getByRole("separator")).toHaveClass("ui-separator")
+  })
 
-    expect(screen.getByRole("separator")).toHaveStyle({
-      borderLeftWidth: "1px",
-      height: "100%",
-    })
+  test("renders HTML tag correctly", () => {
+    render(<Separator />)
+    expect(screen.getByRole("separator").tagName).toBe("HR")
   })
 })

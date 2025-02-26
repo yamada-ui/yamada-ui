@@ -1,2 +1,6 @@
-export { DecimalList, DiscList, List, ListItem } from "./list"
-export type { ListItemProps, ListProps } from "./list"
+export type { ListIconProps, ListItemProps, ListRootProps } from "./list"
+export { ListItem, ListItemIcon, ListRoot, useListPropsContext } from "./list"
+
+export * from "./list.style"
+
+export * as List from "./namespace"

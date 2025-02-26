@@ -1,4 +1,4 @@
-import type { FC, HTMLUIProps, Token } from "../../core"
+import type { FC, HTMLUIProps, StyleValue } from "../../core"
 import type { AspectRatioStyle } from "./aspect-ratio.style"
 import { Children } from "react"
 import { createComponent } from "../../core"
@@ -11,7 +11,7 @@ interface AspectRatioOptions {
    *
    * @default '4 / 3'
    */
-  ratio?: Token<number>
+  ratio?: StyleValue<number>
 }
 
 export interface AspectRatioProps extends AspectRatioOptions, HTMLUIProps {}
@@ -28,7 +28,7 @@ export const {
 /**
  * `AspectRatio` is a component for embedding things like videos and maps while maintaining the aspect ratio.
  *
- * @see Docs https://yamada-ui.com/components/layouts/aspect-ratio
+ * @see Docs https://yamada-ui.com/components/aspect-ratio
  */
 export const AspectRatio: FC<AspectRatioProps> = withContext("div")(
   undefined,

@@ -1,6 +1,5 @@
+import { Highlight, useHighlight } from "."
 import { render, renderHook } from "../../../test"
-import { noop } from "../../utils"
-import { Highlight, useHighlight } from "./"
 
 describe("<Highlight />", () => {
   test.each([[], ""])(
@@ -20,18 +19,6 @@ describe("<Highlight />", () => {
       expect(result.current[0]?.text).toBe(text)
     },
   )
-
-  test("throws error if children is not string", () => {
-    const renderResult = () =>
-      render(<Highlight query="Highlight">{1 as any}</Highlight>)
-
-    const consoleSpy = vi.spyOn(console, "error")
-    consoleSpy.mockImplementation(noop)
-    expect(renderResult).toThrow(
-      "The children prop of Highlight must be a string",
-    )
-    consoleSpy.mockRestore()
-  })
 
   test("fragment prop works correctly", () => {
     const { container } = render(

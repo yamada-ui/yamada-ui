@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { For } from "../../components/for"
 import { DEFAULT_COLOR_SCHEMES } from "../../utils"
 import { Box } from "../box"
-import { For } from "../for"
 import { Wrap } from "./"
 
 type Story = StoryFn<typeof Wrap>
@@ -23,7 +23,7 @@ export const Basic: Story = () => {
             bg={`${colorScheme}.500`}
             color="white"
             p="md"
-            rounded="md"
+            rounded="l2"
           >
             Box
           </Box>

@@ -6,8 +6,14 @@ import { findChild, getValidChildren } from "../../utils"
 
 export interface SlotProps
   extends HTMLAttributes<HTMLElement>,
+    RefAttributes<HTMLElement>,
     PropsWithChildren {}
 
+/**
+ * `Slot` is a component that merges its props onto its immediate child.
+ *
+ * @see Docs https://yamada-ui.com/components/slot
+ */
 export const Slot: FC<SlotProps> = ({ children, ...rest }) => {
   const validChildren = getValidChildren(children)
   const slottable = findChild(validChildren, Slottable)

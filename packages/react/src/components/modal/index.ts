@@ -1,36 +1,30 @@
-export { Dialog } from "./dialog"
-export type { DialogProps } from "./dialog"
-export { DialogBody } from "./dialog-body"
-export type { DialogBodyProps } from "./dialog-body"
-export { DialogCloseButton } from "./dialog-close-button"
-export type { DialogCloseButtonProps } from "./dialog-close-button"
-export { DialogFooter } from "./dialog-footer"
-export type { DialogFooterProps } from "./dialog-footer"
-export { DialogHeader } from "./dialog-header"
-export type { DialogHeaderProps } from "./dialog-header"
-export { DialogOverlay } from "./dialog-overlay"
-export type { DialogOverlayProps } from "./dialog-overlay"
-export { Drawer } from "./drawer"
-export type { DrawerProps } from "./drawer"
-export { DrawerBody } from "./drawer-body"
-export type { DrawerBodyProps } from "./drawer-body"
-export { DrawerCloseButton } from "./drawer-close-button"
-export type { DrawerCloseButtonProps } from "./drawer-close-button"
-export { DrawerFooter } from "./drawer-footer"
-export type { DrawerFooterProps } from "./drawer-footer"
-export { DrawerHeader } from "./drawer-header"
-export type { DrawerHeaderProps } from "./drawer-header"
-export { DrawerOverlay } from "./drawer-overlay"
-export type { DrawerOverlayProps } from "./drawer-overlay"
-export { Modal } from "./modal"
-export type { ModalProps } from "./modal"
-export { ModalBody } from "./modal-body"
-export type { ModalBodyProps } from "./modal-body"
-export { ModalCloseButton } from "./modal-close-button"
-export type { ModalCloseButtonProps } from "./modal-close-button"
-export { ModalFooter } from "./modal-footer"
-export type { ModalFooterProps } from "./modal-footer"
-export { ModalHeader } from "./modal-header"
-export type { ModalHeaderProps } from "./modal-header"
-export { ModalOverlay } from "./modal-overlay"
-export type { ModalOverlayProps } from "./modal-overlay"
+export {
+  ModalBody,
+  ModalCloseButton,
+  ModalCloseTrigger,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOpenTrigger,
+  ModalOverlay,
+  ModalRoot,
+  ModalTitle,
+} from "./modal"
+export type {
+  ModalBodyProps,
+  ModalCloseButtonProps,
+  ModalCloseTriggerProps,
+  ModalContentProps,
+  ModalFooterProps,
+  ModalHeaderProps,
+  ModalOpenTriggerProps,
+  ModalOverlayProps,
+  ModalRootProps,
+  ModalTitleProps,
+} from "./modal"
+
+export * from "./modal.style"
+
+export * from "./use-modal"
+
+export * as Modal from "./namespace"

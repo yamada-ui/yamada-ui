@@ -8,26 +8,17 @@ export const tagStyle = defineComponentSlotStyle({
       cursor: "pointer",
       display: "inline-flex",
       justifyContent: "center",
-      outline: "0",
       rounded: "full",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
+      _hover: {
+        layerStyle: "hover",
+      },
       _active: {
-        opacity: 1,
+        layerStyle: "active",
       },
       _disabled: {
-        opacity: 0.4,
-      },
-      _focusVisible: {
-        bg: "rgba(0, 0, 0, 0.14)",
-        boxShadow: "outline",
-      },
-      _hover: {
-        opacity: 0.8,
-        _disabled: {
-          cursor: "not-allowed",
-          opacity: 0.4,
-        },
+        layerStyle: "disabled",
       },
     },
     content: {
@@ -45,13 +36,9 @@ export const tagStyle = defineComponentSlotStyle({
       display: "inline-flex",
       gap: "1",
       maxW: "full",
-      outline: 0,
-      rounded: "md",
+      rounded: "l2",
       userSelect: "none",
       verticalAlign: "top",
-      _focusVisible: {
-        boxShadow: "outline",
-      },
     },
     startIcon: {},
   },
@@ -86,7 +73,7 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "xs",
-        lineHeight: "$sizes.6",
+        lineHeight: "{sizes.6}",
         minH: "6",
         minW: "6",
         px: "2",
@@ -98,7 +85,7 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "sm",
-        lineHeight: "$sizes.7",
+        lineHeight: "{sizes.7}",
         minH: "7",
         minW: "7",
         px: "2",
@@ -110,7 +97,7 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "md",
-        lineHeight: "$sizes.8",
+        lineHeight: "{sizes.8}",
         minH: "8",
         minW: "8",
         px: "3",
@@ -119,7 +106,6 @@ export const tagStyle = defineComponentSlotStyle({
   },
 
   defaultProps: {
-    colorScheme: "primary",
     size: "md",
     variant: "subtle",
   },

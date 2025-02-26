@@ -31,5 +31,5 @@ export const Basic: Story = () => {
 }
 
 export const CustomIcon: Story = () => {
-  return <LucideIcon fontSize="4xl" icon={burger} />
+  return <LucideIcon fontSize="4xl" iconNode={burger} />
 }

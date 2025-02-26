@@ -1,20 +1,15 @@
-export {
-  LoadingAudio as Audio,
-  LoadingCircles as Circles,
-  LoadingDots as Dots,
-  LoadingGrid as Grid,
-  LoadingOval as Oval,
-  LoadingPuff as Puff,
-  LoadingRings as Rings,
-} from "./loading"
-export type {
-  LoadingAudioProps as AudioProps,
-  LoadingCirclesProps as CirclesProps,
-  LoadingDotsProps as DotsProps,
-  LoadingGridProps as GridProps,
-  LoadingOvalProps as OvalProps,
-  LoadingProps as Props,
-  LoadingPuffProps as PuffProps,
-  LoadingRingsProps as RingsProps,
-  LoadingScheme as Scheme,
-} from "./loading"
+export { Audio } from "./audio"
+export type { AudioProps } from "./audio"
+export { Circles } from "./circles"
+export type { CirclesProps } from "./circles"
+export { Dots } from "./dots"
+export type { DotsProps } from "./dots"
+export { Grid } from "./grid"
+export type { GridProps } from "./grid"
+export { Oval } from "./oval"
+export type { OvalProps } from "./oval"
+export { Puff } from "./puff"
+export type { PuffProps } from "./puff"
+export { Rings } from "./rings"
+export type { RingsProps } from "./rings"
+export type { LoadingProps as Props, LoadingScheme as Scheme } from "./utils"

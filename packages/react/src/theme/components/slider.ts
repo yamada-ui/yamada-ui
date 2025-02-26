@@ -7,11 +7,11 @@ export const Slider: ComponentMultiStyle<"Slider"> = {
       cursor: "pointer",
       display: "inline-block",
       position: "relative",
+      _readOnly: { cursor: "auto" },
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.6,
       },
-      _readOnly: { cursor: "auto" },
       ...(o === "vertical" ? { h: "100%" } : { w: "100%" }),
     }),
     filledTrack: ({ colorScheme: c = "primary" }) => ({
@@ -36,14 +36,14 @@ export const Slider: ComponentMultiStyle<"Slider"> = {
       outline: 0,
       position: "absolute",
       rounded: "full",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "transform",
       zIndex: "yamcha",
-      _disabled: {
-        bg: [tintColor("black", 72)(t, m), shadeColor("white", 64)],
-      },
       _focusVisible: {
         boxShadow: "outline",
+      },
+      _disabled: {
+        bg: [tintColor("black", 72)(t, m), shadeColor("white", 64)],
       },
       ...(o === "vertical"
         ? {

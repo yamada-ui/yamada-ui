@@ -6,11 +6,11 @@ export const SaturationSlider: ComponentMultiStyle<"SaturationSlider"> = {
       cursor: "pointer",
       rounded: "md",
       w: "full",
+      _readOnly: { cursor: "auto" },
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.6,
       },
-      _readOnly: { cursor: "auto" },
     },
     inner: {
       rounded: "md",
@@ -24,7 +24,7 @@ export const SaturationSlider: ComponentMultiStyle<"SaturationSlider"> = {
       boxShadow: ["md", "dark-md"],
       outline: 0,
       rounded: "full",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "transform",
       _active: {
         transform: `scale(1.15)`,

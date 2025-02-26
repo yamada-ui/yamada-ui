@@ -14,17 +14,17 @@ export interface UseControllableStateProps<Y>
 }
 
 export function useControllableState<Y>(
-  props: {
+  props: UseControllableStateMethods<Y> & {
     value: Y
     defaultValue?: (() => Y) | Y
-  } & UseControllableStateMethods<Y>,
+  },
 ): [Y, Dispatch<SetStateAction<Y>>]
 
 export function useControllableState<Y>(
-  props: {
+  props: UseControllableStateMethods<Y> & {
     defaultValue: (() => Y) | Y
     value?: Y
-  } & UseControllableStateMethods<Y>,
+  },
 ): [Y, Dispatch<SetStateAction<Y>>]
 
 export function useControllableState<Y>(

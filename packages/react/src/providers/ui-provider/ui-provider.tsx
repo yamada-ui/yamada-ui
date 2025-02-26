@@ -2,9 +2,8 @@ import type { FC, ReactNode } from "react"
 import type { ColorModeProviderProps } from "../color-mode-provider"
 import type { Environment } from "../environment-provider"
 import type { ThemeProviderProps } from "../theme-provider"
-import { MotionConfig } from "motion/react"
 import { LoadingProvider } from "../../components/loading"
-import { NoticeProvider } from "../../components/notice"
+// import { NoticeProvider } from "../../components/notice"
 import { defaultTheme } from "../../theme"
 import { defaultConfig } from "../../theme"
 import { ColorModeProvider } from "../color-mode-provider"
@@ -25,7 +24,7 @@ export interface UIProviderProps
    */
   colorModeStorageKey?: string
   /**
-   * If `true`,  the use of automatic window and document detection will be disabled.
+   * If `true`, the use of automatic window and document detection will be disabled.
    *
    * @default false
    */
@@ -81,13 +80,11 @@ export const UIProvider: FC<UIProviderProps> = ({
             config={config}
             storageKey={colorModeStorageKey}
           >
-            <MotionConfig {...config.motion?.config}>
-              <LoadingProvider {...config.loading}>
-                {children}
+            <LoadingProvider {...config.loading}>
+              {children}
 
-                <NoticeProvider {...config.notice} />
-              </LoadingProvider>
-            </MotionConfig>
+              {/* <NoticeProvider {...config.notice} /> */}
+            </LoadingProvider>
           </ColorModeProvider>
         </ThemeProvider>
       </I18nProvider>

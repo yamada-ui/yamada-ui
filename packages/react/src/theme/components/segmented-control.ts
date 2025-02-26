@@ -15,25 +15,25 @@ export const SegmentedControl: ComponentMultiStyle<"SegmentedControl"> = {
       transitionDuration: "ultra-slow",
       transitionProperty: "common",
       whiteSpace: "nowrap",
-      _disabled: { cursor: "not-allowed", opacity: 0.4 },
-      _focusVisible: {
-        boxShadow: "outline",
-      },
       _hover: {
         opacity: 0.7,
         _checked: {
           opacity: 1,
         },
       },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
       _readOnly: { cursor: "default" },
+      _disabled: { cursor: "not-allowed", opacity: 0.4 },
     },
     container: {
       alignItems: "center",
       bg: ["blackAlpha.100", "whiteAlpha.100"],
       display: "inline-flex",
       p: "1",
-      _disabled: { cursor: "not-allowed" },
       _readOnly: { cursor: "default" },
+      _disabled: { cursor: "not-allowed" },
     },
     cursor: {
       boxShadow: ["md", "dark-md"],

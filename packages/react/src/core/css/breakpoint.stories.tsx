@@ -2,12 +2,13 @@ import type { FC } from "react"
 import { useRef } from "react"
 import { Box } from "../../components/box"
 import { Button } from "../../components/button"
-import { Calendar } from "../../components/calendar"
+// import { Calendar } from "../../components/calendar"
 import { Tag } from "../../components/tag"
 import { Text } from "../../components/text"
 import { useBreakpoint, useBreakpointValue } from "../../hooks/use-breakpoint"
 import { UIProvider } from "../../providers/ui-provider"
-import { extendConfig } from "../../tools"
+import { defaultConfig } from "../../theme"
+import { merge } from "../../utils"
 
 export default {
   title: "Styled System / Responsive",
@@ -66,7 +67,7 @@ export const WithContainer = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const breakpoint = useBreakpoint()
 
-  const config = extendConfig({
+  const config = merge(defaultConfig, {
     breakpoint: {
       containerRef,
       identifier: "@container",
@@ -134,7 +135,8 @@ export const Components = () => {
 
       <Tag size={{ base: "lg", md: "md" }}>Tag</Tag>
 
-      <Calendar size={{ base: "lg", md: "md" }} />
+      {/* TODO: Fix this */}
+      {/* <Calendar size={{ base: "lg", md: "md" }} /> */}
     </>
   )
 }

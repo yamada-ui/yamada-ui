@@ -1,9 +1,8 @@
+import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
-import type { StringLiteral } from "../utils"
 import type { StyleConfigs } from "./config"
-import type { CSSObject, Token } from "./css"
-import type { ThemeToken } from "./theme"
-import type { ColorScheme, Theme } from "./theme.types"
+import type { CSSObject, CSSToken } from "./css"
+import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"
 import { transforms } from "./config"
 import { pipe } from "./config/utils"
 
@@ -20,6 +19,8 @@ export const standardStyles = {
   alignmentBaseline: true,
   alignSelf: true,
   all: true,
+  anchorName: true,
+  anchorScope: true,
   animation: {
     properties: "animation",
     token: "animations",
@@ -30,12 +31,16 @@ export const standardStyles = {
   animationDirection: true,
   animationDuration: {
     properties: "animationDuration",
-    token: "transitions.duration",
-    transform: transforms.token("transitions.duration"),
+    token: "durations",
+    transform: transforms.token("durations"),
   },
   animationFillMode: true,
   animationIterationCount: true,
-  animationName: true,
+  animationName: {
+    properties: "animationName",
+    token: "keyframes",
+    transform: transforms.token("keyframes"),
+  },
   animationPlayState: true,
   animationRange: true,
   animationRangeEnd: true,
@@ -43,53 +48,83 @@ export const standardStyles = {
   animationTimeline: true,
   animationTimingFunction: {
     properties: "animationTimingFunction",
-    token: "transitions.easing",
-    transform: transforms.token("transitions.easing"),
+    token: "easings",
+    transform: transforms.token("easings"),
   },
   appearance: true,
-  aspectRatio: true,
-  azimuth: true,
+  aspectRatio: {
+    properties: "aspectRatio",
+    token: "aspectRatios",
+    transform: transforms.token("aspectRatios"),
+  },
   backdropBlur: {
-    properties: "--ui-backdrop-blur",
+    properties: "--backdrop-blur",
     token: "blurs",
-    transform: pipe(transforms.token("blurs"), transforms.function("blur")),
+    transform: pipe(
+      transforms.token("blurs"),
+      transforms.function("blur"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropBrightness: {
-    properties: "--ui-backdrop-brightness",
-    transform: transforms.function("brightness"),
+    properties: "--backdrop-brightness",
+    transform: pipe(
+      transforms.function("brightness"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropContrast: {
-    properties: "--ui-backdrop-contrast",
-    transform: transforms.function("contrast"),
+    properties: "--backdrop-contrast",
+    transform: pipe(
+      transforms.function("contrast"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropDropShadow: {
-    properties: "--ui-backdrop-drop-shadow",
+    properties: "--backdrop-drop-shadow",
     token: "shadows",
     transform: pipe(
       transforms.token("shadows"),
       transforms.function("drop-shadow"),
+      transforms.filter("backdropFilter"),
     ),
   },
-  backdropFilter: { transform: transforms.filter("backdrop") },
+  backdropFilter: true,
   backdropGrayscale: {
-    properties: "--ui-backdrop-grayscale",
-    transform: transforms.function("grayscale"),
+    properties: "--backdrop-grayscale",
+    transform: pipe(
+      transforms.function("grayscale"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropHueRotate: {
-    properties: "--ui-backdrop-hue-rotate",
-    transform: pipe(transforms.deg, transforms.function("hue-rotate")),
+    properties: "--backdrop-hue-rotate",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("hue-rotate"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropInvert: {
-    properties: "--ui-backdrop-invert",
-    transform: transforms.function("invert"),
+    properties: "--backdrop-invert",
+    transform: pipe(
+      transforms.function("invert"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropSaturate: {
-    properties: "--ui-backdrop-saturate",
-    transform: transforms.function("saturate"),
+    properties: "--backdrop-saturate",
+    transform: pipe(
+      transforms.function("saturate"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backdropSepia: {
-    properties: "--ui-backdrop-sepia",
-    transform: transforms.function("sepia"),
+    properties: "--backdrop-sepia",
+    transform: pipe(
+      transforms.function("sepia"),
+      transforms.filter("backdropFilter"),
+    ),
   },
   backfaceVisibility: {
     properties: "backfaceVisibility",
@@ -129,6 +164,7 @@ export const standardStyles = {
   backgroundRepeat: true,
   backgroundSize: true,
   baselineShift: true,
+  baselineSource: true,
   blockSize: {
     properties: "blockSize",
     token: "sizes",
@@ -140,9 +176,13 @@ export const standardStyles = {
     ),
   },
   blur: {
-    properties: "--ui-blur",
+    properties: "--blur",
     token: "blurs",
-    transform: pipe(transforms.token("blurs"), transforms.function("blur")),
+    transform: pipe(
+      transforms.token("blurs"),
+      transforms.function("blur"),
+      transforms.filter(),
+    ),
   },
   border: {
     properties: "border",
@@ -502,8 +542,8 @@ export const standardStyles = {
   breakBefore: true,
   breakInside: true,
   brightness: {
-    properties: "--ui-brightness",
-    transform: transforms.function("brightness"),
+    properties: "--brightness",
+    transform: pipe(transforms.function("brightness"), transforms.filter()),
   },
   captionSide: true,
   caretColor: {
@@ -520,7 +560,9 @@ export const standardStyles = {
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
+  colorAdjust: true,
   colorInterpolation: true,
+  colorInterpolationFilters: true,
   colorMode: { properties: "colorScheme" },
   columnCount: true,
   columnFill: true,
@@ -574,25 +616,31 @@ export const standardStyles = {
   content: true,
   contentVisibility: true,
   contrast: {
-    properties: "--ui-contrast",
-    transform: transforms.function("contrast"),
+    properties: "--contrast",
+    transform: pipe(transforms.function("contrast"), transforms.filter()),
   },
   counterIncrement: true,
   counterReset: true,
   counterSet: true,
   cursor: true,
+  cx: true,
+  cy: true,
+  d: true,
   direction: true,
   display: true,
   dominantBaseline: true,
   dropShadow: {
-    properties: "--ui-drop-shadow",
+    properties: "--drop-shadow",
     token: "shadows",
     transform: pipe(
       transforms.token("shadows"),
       transforms.function("drop-shadow"),
+      transforms.filter(),
     ),
   },
+  dynamicRangeLimit: true,
   emptyCells: true,
+  fieldSizing: true,
   fill: {
     properties: "fill",
     token: "colors",
@@ -600,7 +648,7 @@ export const standardStyles = {
   },
   fillOpacity: true,
   fillRule: true,
-  filter: { transform: transforms.filter() },
+  filter: true,
   flex: true,
   flexBasis: {
     properties: "flexBasis",
@@ -624,6 +672,28 @@ export const standardStyles = {
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   floodOpacity: true,
+  focusRing: { transform: transforms.focusRing("&:is(:focus, [data-focus])") },
+  focusRingColor: {
+    properties: "--focus-ring-color",
+    token: "colors",
+    transform: pipe(transforms.token("colors"), transforms.colorMix),
+  },
+  focusRingOffset: {
+    properties: "--focus-ring-offset",
+    token: "spaces",
+    transform: pipe(
+      transforms.token("spaces"),
+      transforms.px,
+      transforms.calc("spaces"),
+    ),
+  },
+  focusRingStyle: { properties: "--focus-ring-style" },
+  focusRingWidth: { properties: "--focus-ring-width" },
+  focusVisibleRing: {
+    transform: transforms.focusRing(
+      "&:is(:focus-visible, [data-focus-visible])",
+    ),
+  },
   font: true,
   fontFamily: {
     properties: "fontFamily",
@@ -677,10 +747,11 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  glyphOrientationHorizontal: true,
   glyphOrientationVertical: true,
   grayscale: {
-    properties: "--ui-grayscale",
-    transform: transforms.function("grayscale"),
+    properties: "--grayscale",
+    transform: pipe(transforms.function("grayscale"), transforms.filter()),
   },
   grid: true,
   gridArea: true,
@@ -745,15 +816,19 @@ export const standardStyles = {
     ),
   },
   hueRotate: {
-    properties: "--ui-hue-rotate",
-    transform: pipe(transforms.deg, transforms.function("hue-rotate")),
+    properties: "--hue-rotate",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("hue-rotate"),
+      transforms.filter(),
+    ),
   },
   hyphenateCharacter: true,
   hyphenateLimitChars: true,
   hyphens: true,
   imageOrientation: true,
   imageRendering: true,
-  imageResolution: true,
+  imeMode: true,
   initialLetter: true,
   inlineSize: {
     properties: "inlineSize",
@@ -846,9 +921,10 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  interpolateSize: true,
   invert: {
-    properties: "--ui-invert",
-    transform: transforms.function("invert"),
+    properties: "--invert",
+    transform: pipe(transforms.function("invert"), transforms.filter()),
   },
   isolation: true,
   justifyContent: true,
@@ -1012,7 +1088,6 @@ export const standardStyles = {
   markerStart: true,
   mask: true,
   maskBorder: true,
-  maskBorderMode: true,
   maskBorderOutset: true,
   maskBorderRepeat: true,
   maskBorderSlice: true,
@@ -1031,7 +1106,6 @@ export const standardStyles = {
   maskRepeat: true,
   maskSize: true,
   maskType: true,
-  masonryAutoFlow: true,
   mathDepth: true,
   mathShift: true,
   mathStyle: true,
@@ -1138,6 +1212,7 @@ export const standardStyles = {
   mixBlendMode: true,
   objectFit: true,
   objectPosition: true,
+  objectViewBox: true,
   offset: true,
   offsetAnchor: true,
   offsetDistance: true,
@@ -1147,7 +1222,7 @@ export const standardStyles = {
   opacity: true,
   order: true,
   orphans: true,
-  outline: true,
+  outline: {},
   outlineColor: {
     properties: "outlineColor",
     token: "colors",
@@ -1299,8 +1374,16 @@ export const standardStyles = {
   placeSelf: true,
   pointerEvents: true,
   position: true,
+  positionAnchor: true,
+  positionArea: true,
+  positionTry: true,
+  positionTryFallbacks: true,
+  positionTryOrder: true,
+  positionVisibility: true,
   printColorAdjust: true,
   quotes: true,
+  r: true,
+  readingFlow: true,
   resize: true,
   right: {
     properties: "right",
@@ -1311,7 +1394,31 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
-  rotate: { properties: "--ui-rotate", transform: transforms.deg },
+  rotate: { properties: "rotate", transform: transforms.deg },
+  rotateX: {
+    properties: "--rotate-x",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("rotateX"),
+      transforms.transform,
+    ),
+  },
+  rotateY: {
+    properties: "--rotate-y",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("rotateY"),
+      transforms.transform,
+    ),
+  },
+  rotateZ: {
+    properties: "--rotate-z",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("rotateZ"),
+      transforms.transform,
+    ),
+  },
   rowGap: {
     properties: "rowGap",
     token: "spaces",
@@ -1322,14 +1429,27 @@ export const standardStyles = {
     ),
   },
   rubyAlign: true,
+  rubyOverhang: true,
   rubyPosition: true,
+  rx: true,
+  ry: true,
   saturate: {
-    properties: "--ui-saturate",
-    transform: transforms.function("saturate"),
+    properties: "--saturate",
+    transform: pipe(transforms.function("saturate"), transforms.filter()),
   },
-  scale: { properties: ["--ui-scale-x", "--ui-scale-y"] },
-  scaleX: { properties: "--ui-scale-x" },
-  scaleY: { properties: "--ui-scale-y" },
+  scale: true,
+  scaleX: {
+    properties: "--scale-x",
+    transform: pipe(transforms.function("scaleX"), transforms.transform),
+  },
+  scaleY: {
+    properties: "--scale-y",
+    transform: pipe(transforms.function("scaleY"), transforms.transform),
+  },
+  scaleZ: {
+    properties: "--scale-z",
+    transform: pipe(transforms.function("scaleZ"), transforms.transform),
+  },
   scrollbarColor: {
     properties: "scrollbarColor",
     token: "colors",
@@ -1338,6 +1458,7 @@ export const standardStyles = {
   scrollbarGutter: true,
   scrollbarWidth: { properties: "scrollbarWidth", transform: transforms.px },
   scrollBehavior: true,
+  scrollInitialTarget: true,
   scrollMargin: {
     properties: "scrollMargin",
     token: "spaces",
@@ -1482,13 +1603,32 @@ export const standardStyles = {
   scrollTimeline: true,
   scrollTimelineAxis: true,
   scrollTimelineName: true,
-  sepia: { properties: "--ui-sepia", transform: transforms.function("sepia") },
+  sepia: {
+    properties: "--sepia",
+    transform: pipe(transforms.function("sepia"), transforms.filter()),
+  },
   shapeImageThreshold: true,
   shapeMargin: true,
   shapeOutside: true,
   shapeRendering: true,
-  skewX: { properties: "--ui-skew-x", transform: transforms.deg },
-  skewY: { properties: "--ui-skew-y", transform: transforms.deg },
+  skewX: {
+    properties: "--skew-x",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("skewX"),
+      transforms.transform,
+    ),
+  },
+  skewY: {
+    properties: "--skew-y",
+    transform: pipe(
+      transforms.deg,
+      transforms.function("skewY"),
+      transforms.transform,
+    ),
+  },
+  speak: true,
+  speakAs: true,
   stopColor: true,
   stopOpacity: true,
   stroke: {
@@ -1496,6 +1636,7 @@ export const standardStyles = {
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
+  strokeColor: true,
   strokeDasharray: true,
   strokeDashoffset: true,
   strokeLinecap: true,
@@ -1508,6 +1649,9 @@ export const standardStyles = {
   textAlign: true,
   textAlignLast: true,
   textAnchor: true,
+  textBox: true,
+  textBoxEdge: true,
+  textBoxTrim: true,
   textCombineUpright: true,
   textDecoration: true,
   textDecorationColor: {
@@ -1539,10 +1683,13 @@ export const standardStyles = {
     transform: transforms.token("shadows"),
   },
   textSizeAdjust: true,
+  textSpacingTrim: true,
   textTransform: true,
   textUnderlineOffset: true,
   textUnderlinePosition: true,
   textWrap: true,
+  textWrapMode: true,
+  textWrapStyle: true,
   timelineScope: true,
   top: {
     properties: "top",
@@ -1554,48 +1701,52 @@ export const standardStyles = {
     ),
   },
   touchAction: true,
-  transform: { properties: "transform", transform: transforms.transform },
+  transform: true,
   transformBox: true,
   transformOrigin: true,
   transformStyle: true,
-  transition: true,
+  transition: { transform: transforms.transition() },
   transitionBehavior: true,
   transitionDelay: true,
   transitionDuration: {
     properties: "transitionDuration",
-    token: "transitions.duration",
-    transform: transforms.token("transitions.duration"),
+    token: "durations",
+    transform: transforms.token("durations"),
   },
-  transitionProperty: {
-    properties: "transitionProperty",
-    token: "transitions.property",
-    transform: transforms.token("transitions.property"),
-  },
+  transitionProperty: { transform: transforms.transition("property") },
   transitionTimingFunction: {
     properties: "transitionTimingFunction",
-    token: "transitions.easing",
-    transform: transforms.token("transitions.easing"),
+    token: "easings",
+    transform: transforms.token("easings"),
   },
-  translate: true,
   translateX: {
-    properties: "--ui-translate-x",
+    properties: "--translate-x",
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
       transforms.px,
+      transforms.function("translateX"),
       transforms.calc("spaces"),
+      transforms.transform,
     ),
   },
   translateY: {
-    properties: "--ui-translate-y",
+    properties: "--translate-y",
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
       transforms.px,
+      transforms.function("translateY"),
       transforms.calc("spaces"),
+      transforms.transform,
     ),
   },
+  translateZ: {
+    properties: "--translate-z",
+    transform: pipe(transforms.function("translateZ"), transforms.transform),
+  },
   unicodeBidi: true,
+  userModify: true,
   userSelect: true,
   vectorEffect: true,
   verticalAlign: true,
@@ -1603,6 +1754,7 @@ export const standardStyles = {
   viewTimelineAxis: true,
   viewTimelineInset: true,
   viewTimelineName: true,
+  viewTransitionClass: true,
   viewTransitionName: true,
   visibility: true,
   whiteSpace: true,
@@ -1622,6 +1774,8 @@ export const standardStyles = {
   wordBreak: true,
   wordSpacing: true,
   writingMode: true,
+  x: true,
+  y: true,
   zIndex: {
     properties: "zIndex",
     token: "zIndices",
@@ -1742,39 +1896,41 @@ export const pseudoStyles = {
 export type UIStyleProperty = keyof typeof uiStyles
 
 export const uiStyles = {
-  apply: { processResult: true, transform: transforms.styles() },
-  layerStyle: {
-    processResult: true,
-    transform: transforms.styles("layerStyles"),
-  },
-  textStyle: {
-    processResult: true,
-    transform: transforms.styles("textStyles"),
-  },
-  colorScheme: {
-    processResult: true,
-    transform: transforms.colorScheme,
-  },
-  isTruncated: { transform: transforms.isTruncated },
+  apply: { transform: transforms.styles() },
+  layerStyle: { transform: transforms.styles("layerStyles") },
+  textStyle: { transform: transforms.styles("textStyles") },
+  colorScheme: { transform: transforms.colorScheme },
   lineClamp: {
-    properties: "--ui-line-clamp",
+    properties: "--line-clamp",
     static: {
       display: "-webkit-box",
       overflow: "hidden",
       textOverflow: "ellipsis",
       WebkitBoxOrient: "vertical",
-      WebkitLineClamp: "var(--ui-line-clamp)",
+      WebkitLineClamp: "var(--line-clamp)",
     },
   },
-  vars: { processSkip: true, transform: transforms.vars },
+  truncated: { transform: transforms.truncated },
+  vars: { transform: transforms.vars },
 } as const satisfies StyleConfigs
 
 export type AtRuleStyleProperty = keyof typeof atRuleStyles
 
 export const atRuleStyles = {
-  _container: { processSkip: true, transform: transforms.container },
-  _media: { processSkip: true, transform: transforms.media },
-  _supports: { processSkip: true, transform: transforms.supports },
+  keyframes: {
+    properties: "animationName",
+    token: "keyframes",
+    transform: pipe(transforms.token("keyframes"), transforms.keyframes),
+  },
+  _container: { transform: transforms.container },
+  _landscape: { properties: "@media (orientation: landscape)" },
+  _media: { transform: transforms.media },
+  _mediaDark: { properties: "@media (prefers-color-scheme: dark)" },
+  _mediaLight: { properties: "@media (prefers-color-scheme: light)" },
+  _mediaReduceMotion: { properties: "@media (prefers-reduced-motion: reduce)" },
+  _portrait: { properties: "@media (orientation: portrait)" },
+  _print: { properties: "@media print" },
+  _supports: { transform: transforms.supports },
 } as const satisfies StyleConfigs
 
 export type Styles = typeof styles
@@ -1791,156 +1947,13 @@ export type StyleProperty = keyof typeof styles
 
 export const styleProperties = Object.keys(styles) as StyleProperty[]
 
-export type ProcessSkipProperty = (typeof processSkipProperties)[number]
+export type VariableLengthProperty = (typeof variableLengthProperties)[number]
 
-export const processSkipProperties = [
+export const variableLengthProperties = [
   "vars",
-  "_media",
   "_container",
+  "_media",
   "_supports",
-] as const
-
-export type AnimationProperty = (typeof animationProperties)[number]
-
-export const animationProperties = ["animation"] as const
-
-export type BlurProperty = (typeof blurProperties)[number]
-
-export const blurProperties = ["blur", "backdropBlur"] as const
-
-export type BorderProperty = (typeof borderProperties)[number]
-
-export const borderProperties = [
-  "border",
-  "borderBlock",
-  "borderBlockEnd",
-  "borderBlockStart",
-  "borderBottom",
-  "borderImage",
-  "borderInline",
-  "borderInlineEnd",
-  "borderEnd",
-  "borderInlineStart",
-  "borderStart",
-  "borderLeft",
-  "borderRight",
-  "borderTop",
-  "borderY",
-  "borderX",
-] as const
-
-export type ColorProperty = (typeof colorProperties)[number]
-
-export const colorProperties = [
-  "accentColor",
-  "accent",
-  "background",
-  "bg",
-  "backgroundColor",
-  "bgColor",
-  "borderBlockColor",
-  "borderBlockEndColor",
-  "borderBlockStartColor",
-  "borderBottomColor",
-  "borderColor",
-  "borderInlineColor",
-  "borderInlineEndColor",
-  "borderEndColor",
-  "borderInlineStartColor",
-  "borderStartColor",
-  "borderLeftColor",
-  "borderRightColor",
-  "borderTopColor",
-  "caretColor",
-  "caret",
-  "color",
-  "textColor",
-  "columnRuleColor",
-  "fill",
-  "outlineColor",
-  "scrollbarColor",
-  "stroke",
-  "textDecorationColor",
-  "textEmphasisColor",
-  "floodColor",
-  "lightingColor",
-] as const
-
-export type FontProperty = (typeof fontProperties)[number]
-
-export const fontProperties = [
-  "fontFamily",
-  "fontSize",
-  "text",
-  "fontWeight",
-  "lineHeight",
-  "leading",
-  "letterSpacing",
-  "tracking",
-] as const
-
-export type GradientProperty = (typeof gradientProperties)[number]
-
-export const gradientProperties = [
-  "backgroundImage",
-  "bgImage",
-  "bgImg",
-  "bgGradient",
-  "borderImageSource",
-  "listStyleImage",
-  "listStyleImg",
-  "maskImage",
-] as const
-
-export type RadiusProperty = (typeof radiusProperties)[number]
-
-export const radiusProperties = [
-  "borderBottomLeftRadius",
-  "roundedBottomLeft",
-  "borderBottomRightRadius",
-  "roundedBottomRight",
-  "borderEndEndRadius",
-  "borderBottomEndRadius",
-  "roundedBottomEnd",
-  "borderEndStartRadius",
-  "borderBottomStartRadius",
-  "roundedBottomStart",
-  "borderRadius",
-  "rounded",
-  "borderStartEndRadius",
-  "borderTopEndRadius",
-  "roundedTopEnd",
-  "borderStartStartRadius",
-  "borderTopStartRadius",
-  "roundedTopStart",
-  "borderTopLeftRadius",
-  "roundedTopLeft",
-  "borderTopRightRadius",
-  "roundedTopRight",
-  "borderTopRadius",
-  "roundedTop",
-  "borderBottomRadius",
-  "roundedBottom",
-  "borderRightRadius",
-  "roundedRight",
-  "borderLeftRadius",
-  "roundedLeft",
-  "borderInlineStartRadius",
-  "borderStartRadius",
-  "roundedStart",
-  "borderInlineEndRadius",
-  "borderEndRadius",
-  "roundedEnd",
-] as const
-
-export type ShadowProperty = (typeof shadowProperties)[number]
-
-export const shadowProperties = [
-  "boxShadow",
-  "shadow",
-  "textShadow",
-  "dropShadow",
-  "backdropDropShadow",
 ] as const
 
 export type SizeProperty = (typeof sizeProperties)[number]
@@ -1973,8 +1986,174 @@ export const sizeProperties = [
   "width",
   "w",
   "boxSize",
-  "minBoxSize",
   "maxBoxSize",
+  "minBoxSize",
+] as const
+
+export type AnimationProperty = (typeof animationProperties)[number]
+
+export const animationProperties = ["animation"] as const
+
+export type AspectRatioProperty = (typeof aspectRatioProperties)[number]
+
+export const aspectRatioProperties = ["aspectRatio"] as const
+
+export type BlurProperty = (typeof blurProperties)[number]
+
+export const blurProperties = ["blur", "backdropBlur"] as const
+
+export type BorderProperty = (typeof borderProperties)[number]
+
+export const borderProperties = [
+  "border",
+  "borderBlock",
+  "borderBlockEnd",
+  "borderBlockStart",
+  "borderBottom",
+  "borderImage",
+  "borderInline",
+  "borderInlineEnd",
+  "borderEnd",
+  "borderInlineStart",
+  "borderStart",
+  "borderLeft",
+  "borderRight",
+  "borderTop",
+  "borderX",
+  "borderY",
+] as const
+
+export type ColorProperty = (typeof colorProperties)[number]
+
+export const colorProperties = [
+  "color",
+  "textColor",
+  "floodColor",
+  "lightingColor",
+  "stroke",
+  "accentColor",
+  "accent",
+  "background",
+  "bg",
+  "backgroundColor",
+  "bgColor",
+  "borderBlockColor",
+  "borderBlockEndColor",
+  "borderBlockStartColor",
+  "borderBottomColor",
+  "borderColor",
+  "borderInlineColor",
+  "borderInlineEndColor",
+  "borderEndColor",
+  "borderInlineStartColor",
+  "borderStartColor",
+  "borderLeftColor",
+  "borderRightColor",
+  "borderTopColor",
+  "caretColor",
+  "caret",
+  "columnRuleColor",
+  "fill",
+  "outlineColor",
+  "scrollbarColor",
+  "textDecorationColor",
+  "textEmphasisColor",
+  "focusRingColor",
+] as const
+
+export type DurationProperty = (typeof durationProperties)[number]
+
+export const durationProperties = [
+  "animationDuration",
+  "transitionDuration",
+] as const
+
+export type EasingProperty = (typeof easingProperties)[number]
+
+export const easingProperties = [
+  "animationTimingFunction",
+  "transitionTimingFunction",
+] as const
+
+export type FontProperty = (typeof fontProperties)[number]
+
+export const fontProperties = [
+  "fontFamily",
+  "fontSize",
+  "text",
+  "fontWeight",
+  "lineHeight",
+  "leading",
+  "letterSpacing",
+  "tracking",
+] as const
+
+export type GradientProperty = (typeof gradientProperties)[number]
+
+export const gradientProperties = [
+  "backgroundImage",
+  "bgImage",
+  "bgImg",
+  "bgGradient",
+  "borderImageSource",
+  "listStyleImage",
+  "listStyleImg",
+  "maskImage",
+] as const
+
+export type KeyframeProperty = (typeof keyframeProperties)[number]
+
+export const keyframeProperties = ["animationName", "keyframes"] as const
+
+export type RadiusProperty = (typeof radiusProperties)[number]
+
+export const radiusProperties = [
+  "borderBottomLeftRadius",
+  "roundedBottomLeft",
+  "borderBottomRightRadius",
+  "roundedBottomRight",
+  "borderEndEndRadius",
+  "borderBottomEndRadius",
+  "roundedBottomEnd",
+  "borderEndStartRadius",
+  "borderBottomStartRadius",
+  "roundedBottomStart",
+  "borderRadius",
+  "rounded",
+  "borderStartEndRadius",
+  "borderTopEndRadius",
+  "roundedTopEnd",
+  "borderStartStartRadius",
+  "borderTopStartRadius",
+  "roundedTopStart",
+  "borderTopLeftRadius",
+  "roundedTopLeft",
+  "borderTopRightRadius",
+  "roundedTopRight",
+  "borderBottomRadius",
+  "roundedBottom",
+  "borderInlineEndRadius",
+  "borderEndRadius",
+  "roundedEnd",
+  "borderInlineStartRadius",
+  "borderStartRadius",
+  "roundedStart",
+  "borderLeftRadius",
+  "roundedLeft",
+  "borderRightRadius",
+  "roundedRight",
+  "borderTopRadius",
+  "roundedTop",
+] as const
+
+export type ShadowProperty = (typeof shadowProperties)[number]
+
+export const shadowProperties = [
+  "boxShadow",
+  "shadow",
+  "textShadow",
+  "dropShadow",
+  "backdropDropShadow",
 ] as const
 
 export type SpaceProperty = (typeof spaceProperties)[number]
@@ -2051,6 +2230,8 @@ export const spaceProperties = [
   "scrollPaddingRight",
   "scrollPaddingTop",
   "top",
+  "insetX",
+  "insetY",
   "marginX",
   "mx",
   "marginY",
@@ -2063,171 +2244,14 @@ export const spaceProperties = [
   "scrollMarginY",
   "scrollPaddingX",
   "scrollPaddingY",
-  "insetX",
-  "insetY",
+  "focusRingOffset",
   "translateX",
   "translateY",
-] as const
-
-export type TransitionProperty = (typeof transitionProperties)[number]
-
-export const transitionProperties = [
-  "transitionProperty",
-  "animationTimingFunction",
-  "transitionTimingFunction",
-  "animationDuration",
-  "transitionDuration",
 ] as const
 
 export type ZIndexProperty = (typeof zIndexProperties)[number]
 
 export const zIndexProperties = ["zIndex", "z"] as const
-
-export type LayoutStyleProperty = (typeof layoutStyleProperties)[number]
-
-export const layoutStyleProperties = [
-  "width",
-  "inlineSize",
-  "height",
-  "backfaceVisibility",
-  "blockSize",
-  "boxSize",
-  "minWidth",
-  "minInlineSize",
-  "minHeight",
-  "minBlockSize",
-  "maxWidth",
-  "maxInlineSize",
-  "maxHeight",
-  "maxBlockSize",
-  "overflow",
-  "overflowX",
-  "overflowY",
-  "overscrollBehavior",
-  "overscroll",
-  "overscrollX",
-  "textDecor",
-  "overscrollBehaviorY",
-  "overscrollY",
-  "display",
-  "aspectRatio",
-  "verticalAlign",
-  "boxSizing",
-  "boxDecorationBreak",
-  "float",
-  "objectFit",
-  "objectPosition",
-  "visibility",
-  "isolation",
-  "w",
-  "h",
-  "minW",
-  "maxW",
-  "minH",
-  "maxH",
-  "position",
-  "pos",
-  "zIndex",
-  "inset",
-  "insetX",
-  "insetInline",
-  "insetY",
-  "insetBlock",
-  "top",
-  "insetBlockStart",
-  "bottom",
-  "insetBlockEnd",
-  "left",
-  "insetInlineStart",
-  "right",
-  "insetInlineEnd",
-  "insetStart",
-  "insetEnd",
-  "margin",
-  "marginTop",
-  "marginBlockStart",
-  "marginRight",
-  "marginInlineEnd",
-  "marginBottom",
-  "marginBlockEnd",
-  "marginLeft",
-  "marginInlineStart",
-  "marginX",
-  "marginInline",
-  "marginY",
-  "marginBlock",
-  "padding",
-  "paddingTop",
-  "paddingBlockStart",
-  "paddingRight",
-  "paddingBottom",
-  "paddingBlockEnd",
-  "paddingLeft",
-  "paddingInlineStart",
-  "paddingInlineEnd",
-  "paddingX",
-  "paddingInline",
-  "paddingY",
-  "paddingBlock",
-  "m",
-  "mt",
-  "mr",
-  "me",
-  "marginEnd",
-  "mb",
-  "ml",
-  "ms",
-  "marginStart",
-  "mx",
-  "my",
-  "p",
-  "pt",
-  "py",
-  "px",
-  "pb",
-  "pl",
-  "ps",
-  "paddingStart",
-  "pr",
-  "pe",
-  "paddingEnd",
-  "alignItems",
-  "alignContent",
-  "justifyItems",
-  "justifyContent",
-  "flexWrap",
-  "flexDirection",
-  "flexDir",
-  "flex",
-  "flexFlow",
-  "flexGrow",
-  "flexShrink",
-  "flexBasis",
-  "justifySelf",
-  "alignSelf",
-  "order",
-  "placeItems",
-  "placeContent",
-  "placeSelf",
-  "gap",
-  "rowGap",
-  "columnGap",
-  "grid",
-  "gridColumn",
-  "gridRow",
-  "gridAutoFlow",
-  "gridAutoColumns",
-  "gridColumnStart",
-  "gridColumnEnd",
-  "gridRowStart",
-  "gridRowEnd",
-  "gridAutoRows",
-  "gridTemplate",
-  "gridTemplateColumns",
-  "gridTemplateRows",
-  "gridTemplateAreas",
-  "gridArea",
-] as const
 
 export interface StyleProps {
   /**
@@ -2240,3888 +2264,8046 @@ export interface StyleProps {
    *
    * This will apply styles defined in `theme.styles.mdx.h1`
    */
-  apply?: Token<StringLiteral>
+  apply?: CSSToken<StringLiteral, "apply">
   /**
    * Apply layer styles defined in `theme.layerStyles`.
    */
-  layerStyle?: Token<StringLiteral, "layerStyles">
+  layerStyle?: CSSToken<StringLiteral, "layerStyles">
   /**
    * Apply text styles defined in `theme.textStyles`.
    */
-  textStyle?: Token<StringLiteral, "textStyles">
+  textStyle?: CSSToken<StringLiteral, "textStyles">
   /**
    * Set color scheme variables.
    */
-  colorScheme?: ColorScheme
+  colorScheme?: CSSToken<ColorScheme>
   /**
-   * The CSS `accent-color` property.
+   * ### accent-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color
+   * The <code>accent-color</code> CSS property sets a color for checkboxes, radio buttons, and other form controls.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/accent-color
    */
-  accent?: Token<CSS.Property.AccentColor, "colors">
+  accent?: CSSToken<CSS.Property.AccentColor, "colors">
   /**
-   * The CSS `accent-color` property.
+   * ### accent-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color
+   * The <code>accent-color</code> CSS property sets a color for checkboxes, radio buttons, and other form controls.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/accent-color
    */
-  accentColor?: Token<CSS.Property.AccentColor, "colors">
+  accentColor?: CSSToken<CSS.Property.AccentColor, "colors">
   /**
-   * The CSS `align-content` property.
+   * ### align-content
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/align-content
    */
-  alignContent?: Token<CSS.Property.AlignContent>
+  alignContent?: CSSToken<CSS.Property.AlignContent>
   /**
-   * The CSS `align-items` property.
+   * ### align-items
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/align-items
    */
-  alignItems?: Token<CSS.Property.AlignItems>
+  alignItems?: CSSToken<CSS.Property.AlignItems>
   /**
-   * The CSS `alignment-baseline` property.
+   * ### alignment-baseline
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/alignment-baseline
+   * The <code>alignment-baseline</code> CSS property sets which baseline of an element is aligned with the corresponding baseline of its parent.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/alignment-baseline
    */
-  alignmentBaseline?: Token<CSS.Property.AlignmentBaseline>
+  alignmentBaseline?: CSSToken<CSS.Property.AlignmentBaseline>
   /**
-   * The CSS `align-self` property.
+   * ### align-self
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/align-self
    */
-  alignSelf?: Token<CSS.Property.AlignSelf>
+  alignSelf?: CSSToken<CSS.Property.AlignSelf>
   /**
-   * The CSS `all` property.
+   * ### all
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/all
+   * The <code>all</code> CSS property is a shorthand for all CSS properties, except for <code>direction</code> and <code>unicode-bidi</code>. It accepts only the keywords for explicit defaulting (such as <code>initial</code> and <code>inherit</code>), since they are the only values supported on all CSS properties.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/all
    */
-  all?: Token<CSS.Globals>
+  all?: CSSToken<CSS.Globals>
   /**
-   * The CSS `animation` property.
+   * ### anchor-name
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation
+   * Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/anchor-name
+   *
+   * @experimental
    */
-  animation?: Token<CSS.Property.Animation, "animations">
+  anchorName?: CSSToken<string & {}>
   /**
-   * The CSS `animation-composition` property.
+   * ### anchor-scope
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-composition
+   * Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-anchor-position-1/#propdef-anchor-scope
+   *
+   * @experimental
    */
-  animationComposition?: Token<CSS.Property.AnimationComposition>
+  anchorScope?: CSSToken<string & {}>
   /**
-   * The CSS `animation-delay` property.
+   * ### animation
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-delay
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation
    */
-  animationDelay?: Token<CSS.Property.AnimationDelay>
+  animation?: CSSToken<CSS.Property.Animation, "animations">
   /**
-   * The CSS `animation-direction` property.
+   * ### animation-composition
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-direction
+   * The <code>animation-composition</code> CSS property chooses how to combine animations that affect the same property.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-07-04
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-composition
    */
-  animationDirection?: Token<CSS.Property.AnimationDirection>
+  animationComposition?: CSSToken<CSS.Property.AnimationComposition>
   /**
-   * The CSS `animation-duration` property.
+   * ### animation-delay
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-delay
    */
-  animationDuration?: Token<
-    CSS.Property.AnimationDuration,
-    "transitionDuration"
-  >
+  animationDelay?: CSSToken<CSS.Property.AnimationDelay>
   /**
-   * The CSS `animation-fill-mode` property.
+   * ### animation-direction
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-direction
    */
-  animationFillMode?: Token<CSS.Property.AnimationFillMode>
+  animationDirection?: CSSToken<CSS.Property.AnimationDirection>
   /**
-   * The CSS `animation-iteration-count` property.
+   * ### animation-duration
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-iteration-count
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-duration
    */
-  animationIterationCount?: Token<CSS.Property.AnimationIterationCount>
+  animationDuration?: CSSToken<CSS.Property.AnimationDuration, "durations">
   /**
-   * The CSS `animation-name` property.
+   * ### animation-fill-mode
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode
    */
-  animationName?: Token<CSS.Property.AnimationName>
+  animationFillMode?: CSSToken<CSS.Property.AnimationFillMode>
   /**
-   * The CSS `animation-play-state` property.
+   * ### animation-iteration-count
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-play-state
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-iteration-count
    */
-  animationPlayState?: Token<CSS.Property.AnimationPlayState>
+  animationIterationCount?: CSSToken<CSS.Property.AnimationIterationCount>
   /**
-   * The CSS `animation-range` property.
+   * ### animation-name
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-name
    */
-  animationRange?: Token<CSS.Property.AnimationRange>
+  animationName?: CSSToken<CSS.Property.AnimationName, "keyframes">
   /**
-   * The CSS `animation-range-end` property.
+   * ### animation-play-state
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range-end
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-play-state
    */
-  animationRangeEnd?: Token<CSS.Property.AnimationRangeEnd>
+  animationPlayState?: CSSToken<CSS.Property.AnimationPlayState>
   /**
-   * The CSS `animation-range-start` property.
+   * ### animation-range
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range-start
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-range
+   *
+   * @experimental
    */
-  animationRangeStart?: Token<CSS.Property.AnimationRangeStart>
+  animationRange?: CSSToken<CSS.Property.AnimationRange>
   /**
-   * The CSS `animation-timeline` property.
+   * ### animation-range-end
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-range-end
+   *
+   * @experimental
    */
-  animationTimeline?: Token<CSS.Property.AnimationTimeline>
+  animationRangeEnd?: CSSToken<CSS.Property.AnimationRangeEnd>
   /**
-   * The CSS `animation-timing-function` property.
+   * ### animation-range-start
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-range-start
+   *
+   * @experimental
    */
-  animationTimingFunction?: Token<
+  animationRangeStart?: CSSToken<CSS.Property.AnimationRangeStart>
+  /**
+   * ### animation-timeline
+   *
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-timeline
+   *
+   * @experimental
+   */
+  animationTimeline?: CSSToken<CSS.Property.AnimationTimeline>
+  /**
+   * ### animation-timing-function
+   *
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/animation-timing-function
+   */
+  animationTimingFunction?: CSSToken<
     CSS.Property.AnimationTimingFunction,
-    "transitionEasing"
+    "easings"
   >
   /**
-   * The CSS `appearance` property.
+   * ### appearance
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
-   */
-  appearance?: Token<CSS.Property.Appearance>
-  /**
-   * The CSS `aspect-ratio` property.
+   * The <code>appearance</code> CSS property controls the appearance of form controls. Using <code>appearance: none</code> disables any default native appearance and allows the elements to be styled with CSS.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
-   */
-  aspectRatio?: Token<CSS.Property.AspectRatio>
-  /**
-   * The CSS `azimuth` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-14
+   * @newly_available_date 2022-03-14
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/azimuth
+   * @see https://developer.mozilla.org/docs/Web/CSS/appearance
+   */
+  appearance?: CSSToken<CSS.Property.Appearance>
+  /**
+   * ### aspect-ratio
    *
-   * @deprecated
-   */
-  azimuth?: Token<CSS.Property.Azimuth>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-blur`.
-   */
-  backdropBlur?: Token<StringLiteral, "blurs">
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-brightness`.
-   */
-  backdropBrightness?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-contrast`.
-   */
-  backdropContrast?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-drop-shadow`.
-   */
-  backdropDropShadow?: Token<StringLiteral, "shadows">
-  /**
-   * The CSS `backdrop-filter` property.
+   * The <code>aspect-ratio</code> CSS property controls the width-to-height ratio of elements. For <code>&#x3C;img></code> and <code>&#x3C;video></code> elements, the <code>width</code> and <code>height</code> attributes used together with <code>height: auto</code> control the aspect ratio while the image/video is loading.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter
-   */
-  backdropFilter?: Token<"auto" | CSS.Property.BackdropFilter>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-grayscale`.
-   */
-  backdropGrayscale?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-hue-rotate`.
-   */
-  backdropHueRotate?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-invert`.
-   */
-  backdropInvert?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-saturate`.
-   */
-  backdropSaturate?: Token<StringLiteral>
-  /**
-   * If `backdropBlur=auto`, sets the value of `--ui-backdrop-sepia`.
-   */
-  backdropSepia?: Token<StringLiteral>
-  /**
-   * The CSS `backface-visibility` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/backface-visibility
+   * @see https://developer.mozilla.org/docs/Web/CSS/aspect-ratio
    */
-  backfaceVisibility?: Token<CSS.Property.BackfaceVisibility | number, "sizes">
+  aspectRatio?: CSSToken<CSS.Property.AspectRatio, "aspectRatios">
   /**
-   * The CSS `background` property.
+   * Sets the value of `--backdrop-blur`.
+   */
+  backdropBlur?: CSSToken<StringLiteral, "blurs">
+  /**
+   * Sets the value of `--backdrop-brightness`.
+   */
+  backdropBrightness?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--backdrop-contrast`.
+   */
+  backdropContrast?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--backdrop-drop-shadow`.
+   */
+  backdropDropShadow?: CSSToken<StringLiteral, "shadows">
+  /**
+   * ### backdrop-filter
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background
-   */
-  background?: Token<CSS.Property.Background, "colors">
-  /**
-   * The CSS `background-attachment` property.
+   * The <code>backdrop-filter</code> CSS property applies graphical effects such as blurring or color shifting to the area behind an element.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
-   */
-  backgroundAttachment?: Token<CSS.Property.BackgroundAttachment>
-  /**
-   * The CSS `background-blend-mode` property.
+   * @baseline `Newly available`
+   * @newly_available_date 2024-09-16
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
+   * @see https://developer.mozilla.org/docs/Web/CSS/backdrop-filter
    */
-  backgroundBlendMode?: Token<CSS.Property.BackgroundBlendMode>
+  backdropFilter?: CSSToken<CSS.Property.BackdropFilter>
   /**
-   * The CSS `background-clip` property.
+   * Sets the value of `--backdrop-grayscale`.
+   */
+  backdropGrayscale?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--backdrop-hue-rotate`.
+   */
+  backdropHueRotate?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--backdrop-invert`.
+   */
+  backdropInvert?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--backdrop-saturate`.
+   */
+  backdropSaturate?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--backdrop-sepia`.
+   */
+  backdropSepia?: CSSToken<StringLiteral>
+  /**
+   * ### backface-visibility
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
-   */
-  backgroundClip?: Token<CSS.Property.BackgroundClip>
-  /**
-   * The CSS `background-color` property.
+   * The <code>transform</code> CSS property and its 3D transform functions allow rotations and other transforms in three dimensions, including perspective transforms.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
-   */
-  backgroundColor?: Token<CSS.Property.BackgroundColor, "colors">
-  /**
-   * The CSS `background-image` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-14
+   * @newly_available_date 2022-03-14
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
+   * @see https://developer.mozilla.org/docs/Web/CSS/backface-visibility
    */
-  backgroundImage?: Token<CSS.Property.BackgroundImage, "gradients">
+  backfaceVisibility?: CSSToken<
+    CSS.Property.BackfaceVisibility | number,
+    "sizes"
+  >
   /**
-   * The CSS `background-origin` property.
+   * ### background
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
-   */
-  backgroundOrigin?: Token<CSS.Property.BackgroundOrigin>
-  /**
-   * The CSS `background-position` property.
+   * The <code>background</code> CSS property is a shorthand that sets several background properties at once.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
-   */
-  backgroundPosition?: Token<CSS.Property.BackgroundPosition>
-  /**
-   * The CSS `background-position-x` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
+   * @see https://developer.mozilla.org/docs/Web/CSS/background
    */
-  backgroundPositionX?: Token<CSS.Property.BackgroundPositionX>
+  background?: CSSToken<CSS.Property.Background, "colors">
   /**
-   * The CSS `background-position-y` property.
+   * ### background-attachment
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
-   */
-  backgroundPositionY?: Token<CSS.Property.BackgroundPositionY>
-  /**
-   * The CSS `background-repeat` property.
+   * The <code>background-attachment</code> CSS property sets whether an element's background image or gradient moves as the element scrolls.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
-   */
-  backgroundRepeat?: Token<CSS.Property.BackgroundRepeat>
-  /**
-   * The CSS `background-size` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-14
+   * @newly_available_date 2022-03-14
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-attachment
    */
-  backgroundSize?: Token<CSS.Property.BackgroundSize>
+  backgroundAttachment?: CSSToken<CSS.Property.BackgroundAttachment>
   /**
-   * The CSS `baseline-shift` property.
+   * ### background-blend-mode
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/baseline-shift
-   */
-  baselineShift?: Token<CSS.Property.BaselineShift>
-  /**
-   * The CSS `background` property.
+   * The <code>background-blend-mode</code> CSS property blends an element's background image and background color using blend modes like <code>multiply</code>, <code>difference</code>, or <code>color</code>.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background
-   */
-  bg?: Token<CSS.Property.Background, "colors">
-  /**
-   * The CSS `background-attachment` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
    */
-  bgAttachment?: Token<CSS.Property.BackgroundAttachment>
+  backgroundBlendMode?: CSSToken<CSS.Property.BackgroundBlendMode>
   /**
-   * The CSS `background-blend-mode` property.
+   * ### background-clip
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode
-   */
-  bgBlendMode?: Token<CSS.Property.BackgroundBlendMode>
-  /**
-   * The CSS `background-clip` property.
+   * The <code>background-clip</code> CSS property sets the extent of the background: the padding box, the content box, or the default border box.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip
-   */
-  bgClip?: Token<CSS.Property.BackgroundClip>
-  /**
-   * The CSS `background-color` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-clip
    */
-  bgColor?: Token<CSS.Property.BackgroundColor, "colors">
+  backgroundClip?: CSSToken<CSS.Property.BackgroundClip>
   /**
-   * The CSS `background-image` property.
+   * ### background-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
-   */
-  bgGradient?: Token<CSS.Property.BackgroundImage, "gradients">
-  /**
-   * The CSS `background-image` property.
+   * The <code>background-color</code> CSS property sets the fill color of an element, behind any content and background images or gradients.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
-   */
-  bgImage?: Token<CSS.Property.BackgroundImage, "gradients">
-  /**
-   * The CSS `background-image` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-image
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-color
    */
-  bgImg?: Token<CSS.Property.BackgroundImage, "gradients">
+  backgroundColor?: CSSToken<CSS.Property.BackgroundColor, "colors">
   /**
-   * The CSS `background-origin` property.
+   * ### background-image
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin
-   */
-  bgOrigin?: Token<CSS.Property.BackgroundOrigin>
-  /**
-   * The CSS `background-position` property.
+   * The <code>background-image</code> CSS property sets the graphics to display behind the content of an element and in front of the background color. Graphics may be any combination of images or gradients.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
-   */
-  bgPosition?: Token<CSS.Property.BackgroundPosition>
-  /**
-   * The CSS `background-position-x` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  bgPositionX?: Token<CSS.Property.BackgroundPositionX>
+  backgroundImage?: CSSToken<CSS.Property.BackgroundImage, "gradients">
   /**
-   * The CSS `background-position-y` property.
+   * ### background-origin
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
-   */
-  bgPositionY?: Token<CSS.Property.BackgroundPositionY>
-  /**
-   * The CSS `background-position-x` property.
+   * The <code>background-origin</code> CSS property sets the background starting position relative to the border and padding of an element.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-x
-   */
-  bgPosX?: Token<CSS.Property.BackgroundPositionX>
-  /**
-   * The CSS `background-position-y` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-position-y
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-origin
    */
-  bgPosY?: Token<CSS.Property.BackgroundPositionY>
+  backgroundOrigin?: CSSToken<CSS.Property.BackgroundOrigin>
   /**
-   * The CSS `background-repeat` property.
+   * ### background-position
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
-   */
-  bgRepeat?: Token<CSS.Property.BackgroundRepeat>
-  /**
-   * The CSS `background-size` property.
+   * The <code>background-position</code> CSS property offsets the initial position of background images relative to the background origin.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
-   */
-  bgSize?: Token<CSS.Property.BackgroundSize>
-  /**
-   * The CSS `mix-blend-mode` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-position
    */
-  blendMode?: Token<CSS.Property.MixBlendMode>
+  backgroundPosition?: CSSToken<CSS.Property.BackgroundPosition>
   /**
-   * The CSS `block-size` property.
+   * ### background-position-x
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/block-size
-   */
-  blockSize?: Token<CSS.Property.BlockSize | number, "sizes">
-  /**
-   * If `filter=auto`, sets the value of `--ui-blur`.
-   */
-  blur?: Token<StringLiteral, "blurs">
-  /**
-   * The CSS `border` property.
+   * The <code>background-position</code> CSS property offsets the initial position of background images relative to the background origin.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border
-   */
-  border?: Token<CSS.Property.Border | number, "borders">
-  /**
-   * The CSS `border-block` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
    */
-  borderBlock?: Token<CSS.Property.BorderBlock | number, "borders">
+  backgroundPositionX?: CSSToken<CSS.Property.BackgroundPositionX>
   /**
-   * The CSS `border-block-color` property.
+   * ### background-position-y
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-color
+   * The <code>background-position</code> CSS property offsets the initial position of background images relative to the background origin.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
-  borderBlockColor?: Token<CSS.Property.BorderBlockColor, "colors">
+  backgroundPositionY?: CSSToken<CSS.Property.BackgroundPositionY>
   /**
-   * The CSS `border-block-end` property.
+   * ### background-repeat
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end
+   * The <code>background-repeat</code> CSS property sets how a background image is tiled.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-03-20
+   * @newly_available_date 2016-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-repeat
    */
-  borderBlockEnd?: Token<CSS.Property.BorderBlockEnd | number, "borders">
+  backgroundRepeat?: CSSToken<CSS.Property.BackgroundRepeat>
   /**
-   * The CSS `border-block-end-color` property.
+   * ### background-size
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end-color
+   * The <code>background-size</code> CSS property scales or stretches a background based on the size of the element (with the <code>contain</code> and <code>cover</code> keywords), a length, or percentage.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-size
    */
-  borderBlockEndColor?: Token<CSS.Property.BorderBlockEndColor, "colors">
+  backgroundSize?: CSSToken<CSS.Property.BackgroundSize>
   /**
-   * The CSS `border-block-end-style` property.
+   * ### baseline-shift
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end-style
+   * The <code>baseline-shift</code> CSS property sets the position of an element relative to its dominant baseline.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-inline/#baseline-shift-property
    */
-  borderBlockEndStyle?: Token<CSS.Property.BorderBlockEndStyle>
+  baselineShift?: CSSToken<CSS.Property.BaselineShift>
   /**
-   * The CSS `border-block-end-width` property.
+   * ### baseline-source
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-end-width
+   * The <code>baseline-source</code> CSS property controls how inline-level boxes with multiple lines of text are aligned with the surrounding text. By default, which typographic baseline is used depends on the <code>display</code> property value.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-inline/#baseline-source
    */
-  borderBlockEndWidth?: Token<CSS.Property.BorderBlockEndWidth | number>
+  baselineSource?: CSSToken<string & {}>
   /**
-   * The CSS `border-block-start` property.
+   * ### background
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start
+   * The <code>background</code> CSS property is a shorthand that sets several background properties at once.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background
    */
-  borderBlockStart?: Token<CSS.Property.BorderBlockStart | number, "borders">
+  bg?: CSSToken<CSS.Property.Background, "colors">
   /**
-   * The CSS `border-block-start-color` property.
+   * ### background-attachment
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start-color
+   * The <code>background-attachment</code> CSS property sets whether an element's background image or gradient moves as the element scrolls.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-14
+   * @newly_available_date 2022-03-14
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-attachment
    */
-  borderBlockStartColor?: Token<CSS.Property.BorderBlockStartColor, "colors">
+  bgAttachment?: CSSToken<CSS.Property.BackgroundAttachment>
   /**
-   * The CSS `border-block-start-style` property.
+   * ### background-blend-mode
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start-style
+   * The <code>background-blend-mode</code> CSS property blends an element's background image and background color using blend modes like <code>multiply</code>, <code>difference</code>, or <code>color</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
    */
-  borderBlockStartStyle?: Token<CSS.Property.BorderBlockStartStyle>
+  bgBlendMode?: CSSToken<CSS.Property.BackgroundBlendMode>
   /**
-   * The CSS `border-block-start-width` property.
+   * ### background-clip
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-start-width
+   * The <code>background-clip</code> CSS property sets the extent of the background: the padding box, the content box, or the default border box.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-clip
    */
-  borderBlockStartWidth?: Token<CSS.Property.BorderBlockStartWidth | number>
+  bgClip?: CSSToken<CSS.Property.BackgroundClip>
   /**
-   * The CSS `border-block-style` property.
+   * ### background-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-style
+   * The <code>background-color</code> CSS property sets the fill color of an element, behind any content and background images or gradients.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-color
    */
-  borderBlockStyle?: Token<CSS.Property.BorderBlockStyle>
+  bgColor?: CSSToken<CSS.Property.BackgroundColor, "colors">
   /**
-   * The CSS `border-block-width` property.
+   * ### background-image
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-block-width
+   * The <code>background-image</code> CSS property sets the graphics to display behind the content of an element and in front of the background color. Graphics may be any combination of images or gradients.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  borderBlockWidth?: Token<CSS.Property.BorderBlockWidth | number>
+  bgGradient?: CSSToken<CSS.Property.BackgroundImage, "gradients">
   /**
-   * The CSS `border-bottom` property.
+   * ### background-image
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom
+   * The <code>background-image</code> CSS property sets the graphics to display behind the content of an element and in front of the background color. Graphics may be any combination of images or gradients.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  borderBottom?: Token<CSS.Property.BorderBottom | number, "borders">
+  bgImage?: CSSToken<CSS.Property.BackgroundImage, "gradients">
   /**
-   * The CSS `border-bottom-color` property.
+   * ### background-image
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color
+   * The <code>background-image</code> CSS property sets the graphics to display behind the content of an element and in front of the background color. Graphics may be any combination of images or gradients.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  borderBottomColor?: Token<CSS.Property.BorderBottomColor, "colors">
+  bgImg?: CSSToken<CSS.Property.BackgroundImage, "gradients">
   /**
-   * The CSS `border-end-end-radius` property.
+   * ### background-origin
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * The <code>background-origin</code> CSS property sets the background starting position relative to the border and padding of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-origin
    */
-  borderBottomEndRadius?: Token<
+  bgOrigin?: CSSToken<CSS.Property.BackgroundOrigin>
+  /**
+   * ### background-position
+   *
+   * The <code>background-position</code> CSS property offsets the initial position of background images relative to the background origin.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-position
+   */
+  bgPosition?: CSSToken<CSS.Property.BackgroundPosition>
+  /**
+   * ### background-position-x
+   *
+   * The <code>background-position</code> CSS property offsets the initial position of background images relative to the background origin.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
+   */
+  bgPositionX?: CSSToken<CSS.Property.BackgroundPositionX>
+  /**
+   * ### background-position-y
+   *
+   * The <code>background-position</code> CSS property offsets the initial position of background images relative to the background origin.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
+   */
+  bgPositionY?: CSSToken<CSS.Property.BackgroundPositionY>
+  /**
+   * ### background-position-x
+   *
+   * The <code>background-position</code> CSS property offsets the initial position of background images relative to the background origin.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
+   */
+  bgPosX?: CSSToken<CSS.Property.BackgroundPositionX>
+  /**
+   * ### background-position-y
+   *
+   * The <code>background-position</code> CSS property offsets the initial position of background images relative to the background origin.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
+   */
+  bgPosY?: CSSToken<CSS.Property.BackgroundPositionY>
+  /**
+   * ### background-repeat
+   *
+   * The <code>background-repeat</code> CSS property sets how a background image is tiled.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-03-20
+   * @newly_available_date 2016-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-repeat
+   */
+  bgRepeat?: CSSToken<CSS.Property.BackgroundRepeat>
+  /**
+   * ### background-size
+   *
+   * The <code>background-size</code> CSS property scales or stretches a background based on the size of the element (with the <code>contain</code> and <code>cover</code> keywords), a length, or percentage.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/background-size
+   */
+  bgSize?: CSSToken<CSS.Property.BackgroundSize>
+  /**
+   * ### mix-blend-mode
+   *
+   * The <code>mix-blend-mode</code> CSS property blends an element's content with its background or parent elements using blend modes like <code>multiply</code>, <code>difference</code>, or <code>color</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
+   */
+  blendMode?: CSSToken<CSS.Property.MixBlendMode>
+  /**
+   * ### block-size
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/block-size
+   */
+  blockSize?: CSSToken<CSS.Property.BlockSize | number, "sizes">
+  /**
+   * Sets the value of `--blur`.
+   */
+  blur?: CSSToken<StringLiteral, "blurs">
+  /**
+   * ### border
+   *
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border
+   */
+  border?: CSSToken<CSS.Property.Border | number, "borders">
+  /**
+   * ### border-block
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block
+   */
+  borderBlock?: CSSToken<CSS.Property.BorderBlock | number, "borders">
+  /**
+   * ### border-block-color
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-color
+   */
+  borderBlockColor?: CSSToken<CSS.Property.BorderBlockColor, "colors">
+  /**
+   * ### border-block-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end
+   */
+  borderBlockEnd?: CSSToken<CSS.Property.BorderBlockEnd | number, "borders">
+  /**
+   * ### border-block-end-color
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-color
+   */
+  borderBlockEndColor?: CSSToken<CSS.Property.BorderBlockEndColor, "colors">
+  /**
+   * ### border-block-end-style
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-style
+   */
+  borderBlockEndStyle?: CSSToken<CSS.Property.BorderBlockEndStyle>
+  /**
+   * ### border-block-end-width
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-width
+   */
+  borderBlockEndWidth?: CSSToken<CSS.Property.BorderBlockEndWidth | number>
+  /**
+   * ### border-block-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start
+   */
+  borderBlockStart?: CSSToken<CSS.Property.BorderBlockStart | number, "borders">
+  /**
+   * ### border-block-start-color
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-color
+   */
+  borderBlockStartColor?: CSSToken<CSS.Property.BorderBlockStartColor, "colors">
+  /**
+   * ### border-block-start-style
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-style
+   */
+  borderBlockStartStyle?: CSSToken<CSS.Property.BorderBlockStartStyle>
+  /**
+   * ### border-block-start-width
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-width
+   */
+  borderBlockStartWidth?: CSSToken<CSS.Property.BorderBlockStartWidth | number>
+  /**
+   * ### border-block-style
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-style
+   */
+  borderBlockStyle?: CSSToken<CSS.Property.BorderBlockStyle>
+  /**
+   * ### border-block-width
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-block-width
+   */
+  borderBlockWidth?: CSSToken<CSS.Property.BorderBlockWidth | number>
+  /**
+   * ### border-bottom
+   *
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom
+   */
+  borderBottom?: CSSToken<CSS.Property.BorderBottom | number, "borders">
+  /**
+   * ### border-bottom-color
+   *
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-color
+   */
+  borderBottomColor?: CSSToken<CSS.Property.BorderBottomColor, "colors">
+  /**
+   * ### border-end-end-radius
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   */
+  borderBottomEndRadius?: CSSToken<
     CSS.Property.BorderEndEndRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-bottom-left-radius` property.
+   * ### border-bottom-left-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
    */
-  borderBottomLeftRadius?: Token<
+  borderBottomLeftRadius?: CSSToken<
     CSS.Property.BorderBottomLeftRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-bottom-left-radius` and `border-bottom-right-radius` property.
+   * ### border-bottom-left-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-bottom-right-radius
+   *
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  borderBottomRadius?: Token<
+  borderBottomRadius?: CSSToken<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-bottom-right-radius` property.
+   * ### border-bottom-right-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  borderBottomRightRadius?: Token<
+  borderBottomRightRadius?: CSSToken<
     CSS.Property.BorderBottomRightRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-end-start-radius` property.
+   * ### border-end-start-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderBottomStartRadius?: Token<
+  borderBottomStartRadius?: CSSToken<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-bottom-style` property.
+   * ### border-bottom-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-style
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-style
    */
-  borderBottomStyle?: Token<CSS.Property.BorderBottomStyle>
+  borderBottomStyle?: CSSToken<CSS.Property.BorderBottomStyle>
   /**
-   * The CSS `border-bottom-width` property.
+   * ### border-bottom-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-width
    */
-  borderBottomWidth?: Token<CSS.Property.BorderBottomWidth | number>
+  borderBottomWidth?: CSSToken<CSS.Property.BorderBottomWidth | number>
   /**
-   * The CSS `border-collapse` property.
+   * ### border-collapse
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-collapse
+   * The <code>&#x3C;table></code> HTML element, with several related elements, represents tabular data in rows and columns of cells.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-collapse
    */
-  borderCollapse?: Token<CSS.Property.BorderCollapse>
+  borderCollapse?: CSSToken<CSS.Property.BorderCollapse>
   /**
-   * The CSS `border-color` property.
+   * ### border-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-color
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-color
    */
-  borderColor?: Token<CSS.Property.BorderColor, "colors">
+  borderColor?: CSSToken<CSS.Property.BorderColor, "colors">
   /**
-   * The CSS `border-inline-end` property.
+   * ### border-inline-end
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end
    */
-  borderEnd?: Token<CSS.Property.BorderInlineEnd | number, "borders">
+  borderEnd?: CSSToken<CSS.Property.BorderInlineEnd | number, "borders">
   /**
-   * The CSS `border-inline-end-color` property.
+   * ### border-inline-end-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-color
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
    */
-  borderEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
+  borderEndColor?: CSSToken<CSS.Property.BorderInlineEndColor, "colors">
   /**
-   * The CSS `border-end-end-radius` property.
+   * ### border-end-end-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
    */
-  borderEndEndRadius?: Token<CSS.Property.BorderEndEndRadius | number, "radii">
+  borderEndEndRadius?: CSSToken<
+    CSS.Property.BorderEndEndRadius | number,
+    "radii"
+  >
   /**
-   * The CSS `border-end-start-radius` and `border-end-end-radius` property.
+   * ### border-end-end-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-end-start-radius
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderEndRadius?: Token<
+  borderEndRadius?: CSSToken<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-end-start-radius` property.
+   * ### border-end-start-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderEndStartRadius?: Token<
+  borderEndStartRadius?: CSSToken<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-inline-end-style` property.
+   * ### border-inline-end-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-style
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
    */
-  borderEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
+  borderEndStyle?: CSSToken<CSS.Property.BorderInlineEndStyle>
   /**
-   * The CSS `border-inline-end-width` property.
+   * ### border-inline-end-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-width
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
    */
-  borderEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
+  borderEndWidth?: CSSToken<CSS.Property.BorderInlineEndWidth | number>
   /**
-   * The CSS `border-image` property.
+   * ### border-image
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image
+   * The <code>border-image</code> CSS property draws an image around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-08-01
+   * @newly_available_date 2017-02-01
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-image
    */
-  borderImage?: Token<CSS.Property.BorderImage | number, "borders">
+  borderImage?: CSSToken<CSS.Property.BorderImage | number, "borders">
   /**
-   * The CSS `border-image-outset` property.
+   * ### border-image-outset
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-outset
+   * The <code>border-image</code> CSS property draws an image around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-08-01
+   * @newly_available_date 2017-02-01
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-image-outset
    */
-  borderImageOutset?: Token<CSS.Property.BorderImageOutset>
+  borderImageOutset?: CSSToken<CSS.Property.BorderImageOutset>
   /**
-   * The CSS `border-image-repeat` property.
+   * ### border-image-repeat
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat
+   * The <code>border-image</code> CSS property draws an image around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-08-01
+   * @newly_available_date 2017-02-01
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-image-repeat
    */
-  borderImageRepeat?: Token<CSS.Property.BorderImageRepeat>
+  borderImageRepeat?: CSSToken<CSS.Property.BorderImageRepeat>
   /**
-   * The CSS `border-image-slice` property.
+   * ### border-image-slice
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice
+   * The <code>border-image</code> CSS property draws an image around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-08-01
+   * @newly_available_date 2017-02-01
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-image-slice
    */
-  borderImageSlice?: Token<CSS.Property.BorderImageSlice>
+  borderImageSlice?: CSSToken<CSS.Property.BorderImageSlice>
   /**
-   * The CSS `border-image-source` property.
+   * ### border-image-source
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-source
+   * The <code>border-image</code> CSS property draws an image around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-08-01
+   * @newly_available_date 2017-02-01
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-image-source
    */
-  borderImageSource?: Token<CSS.Property.BorderImageSource, "gradients">
+  borderImageSource?: CSSToken<CSS.Property.BorderImageSource, "gradients">
   /**
-   * The CSS `border-image-width` property.
+   * ### border-image-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width
+   * The <code>border-image</code> CSS property draws an image around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-08-01
+   * @newly_available_date 2017-02-01
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-image-width
    */
-  borderImageWidth?: Token<CSS.Property.BorderImageWidth | number>
+  borderImageWidth?: CSSToken<CSS.Property.BorderImageWidth | number>
   /**
-   * The CSS `border-inline` property.
+   * ### border-inline
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline
    */
-  borderInline?: Token<CSS.Property.BorderInline | number, "borders">
+  borderInline?: CSSToken<CSS.Property.BorderInline | number, "borders">
   /**
-   * The CSS `border-inline-color` property.
+   * ### border-inline-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-color
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-color
    */
-  borderInlineColor?: Token<CSS.Property.BorderInlineColor, "colors">
+  borderInlineColor?: CSSToken<CSS.Property.BorderInlineColor, "colors">
   /**
-   * The CSS `border-inline-end` property.
+   * ### border-inline-end
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end
    */
-  borderInlineEnd?: Token<CSS.Property.BorderInlineEnd | number, "borders">
+  borderInlineEnd?: CSSToken<CSS.Property.BorderInlineEnd | number, "borders">
   /**
-   * The CSS `border-inline-end-color` property.
+   * ### border-inline-end-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-color
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
    */
-  borderInlineEndColor?: Token<CSS.Property.BorderInlineEndColor, "colors">
+  borderInlineEndColor?: CSSToken<CSS.Property.BorderInlineEndColor, "colors">
   /**
-   * The CSS `border-end-start-radius` and `border-end-end-radius` property.
+   * ### border-end-end-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-end-start-radius
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderInlineEndRadius?: Token<
+  borderInlineEndRadius?: CSSToken<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-inline-end-style` property.
+   * ### border-inline-end-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-style
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
    */
-  borderInlineEndStyle?: Token<CSS.Property.BorderInlineEndStyle>
+  borderInlineEndStyle?: CSSToken<CSS.Property.BorderInlineEndStyle>
   /**
-   * The CSS `border-inline-end-width` property.
+   * ### border-inline-end-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end-width
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
    */
-  borderInlineEndWidth?: Token<CSS.Property.BorderInlineEndWidth | number>
+  borderInlineEndWidth?: CSSToken<CSS.Property.BorderInlineEndWidth | number>
   /**
-   * The CSS `border-inline-start` property.
+   * ### border-inline-start
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start
    */
-  borderInlineStart?: Token<CSS.Property.BorderInlineStart | number, "borders">
+  borderInlineStart?: CSSToken<
+    CSS.Property.BorderInlineStart | number,
+    "borders"
+  >
   /**
-   * The CSS `border-inline-start-color` property.
+   * ### border-inline-start-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-color
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
    */
-  borderInlineStartColor?: Token<CSS.Property.BorderInlineStartColor, "colors">
+  borderInlineStartColor?: CSSToken<
+    CSS.Property.BorderInlineStartColor,
+    "colors"
+  >
   /**
-   * The CSS `border-start-start-radius` and `border-start-end-radius` property.
+   * ### border-start-end-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-start-start-radius
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderInlineStartRadius?: Token<
+  borderInlineStartRadius?: CSSToken<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-inline-start-style` property.
+   * ### border-inline-start-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-style
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
    */
-  borderInlineStartStyle?: Token<CSS.Property.BorderInlineStartStyle>
+  borderInlineStartStyle?: CSSToken<CSS.Property.BorderInlineStartStyle>
   /**
-   * The CSS `border-inline-start-width` property.
+   * ### border-inline-start-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-width
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
    */
-  borderInlineStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number>
+  borderInlineStartWidth?: CSSToken<
+    CSS.Property.BorderInlineStartWidth | number
+  >
   /**
-   * The CSS `border-inline-style` property.
+   * ### border-inline-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-style
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-style
    */
-  borderInlineStyle?: Token<CSS.Property.BorderInlineStyle>
+  borderInlineStyle?: CSSToken<CSS.Property.BorderInlineStyle>
   /**
-   * The CSS `border-inline-width` property.
+   * ### border-inline-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-width
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-width
    */
-  borderInlineWidth?: Token<CSS.Property.BorderInlineWidth | number>
+  borderInlineWidth?: CSSToken<CSS.Property.BorderInlineWidth | number>
   /**
-   * The CSS `border-left` property.
+   * ### border-left
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-left
    */
-  borderLeft?: Token<CSS.Property.BorderLeft | number, "borders">
+  borderLeft?: CSSToken<CSS.Property.BorderLeft | number, "borders">
   /**
-   * The CSS `border-left-color` property.
+   * ### border-left-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-color
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-left-color
    */
-  borderLeftColor?: Token<CSS.Property.BorderLeftColor, "colors">
+  borderLeftColor?: CSSToken<CSS.Property.BorderLeftColor, "colors">
   /**
-   * The CSS `border-top-left-radius` and `border-bottom-left-radius` property.
+   * ### border-bottom-left-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-top-left-radius
+   *
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  borderLeftRadius?: Token<
+  borderLeftRadius?: CSSToken<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-left-style` property.
+   * ### border-left-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-style
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-left-style
    */
-  borderLeftStyle?: Token<CSS.Property.BorderLeftStyle>
+  borderLeftStyle?: CSSToken<CSS.Property.BorderLeftStyle>
   /**
-   * The CSS `border-left-width` property.
+   * ### border-left-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-left-width
    */
-  borderLeftWidth?: Token<CSS.Property.BorderLeftWidth | number>
+  borderLeftWidth?: CSSToken<CSS.Property.BorderLeftWidth | number>
   /**
-   * The CSS `border-radius` property.
+   * ### border-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
    */
-  borderRadius?: Token<CSS.Property.BorderRadius | number, "radii">
+  borderRadius?: CSSToken<CSS.Property.BorderRadius | number, "radii">
   /**
-   * The CSS `border-right` property.
+   * ### border-right
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-right
    */
-  borderRight?: Token<CSS.Property.BorderRight | number, "borders">
+  borderRight?: CSSToken<CSS.Property.BorderRight | number, "borders">
   /**
-   * The CSS `border-right-color` property.
+   * ### border-right-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-right-color
    */
-  borderRightColor?: Token<CSS.Property.BorderRightColor, "colors">
+  borderRightColor?: CSSToken<CSS.Property.BorderRightColor, "colors">
   /**
-   * The CSS `border-top-right-radius` and `border-bottom-right-radius` property.
+   * ### border-bottom-right-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-top-right-radius
+   *
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderRightRadius?: Token<
+  borderRightRadius?: CSSToken<
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-right-style` property.
+   * ### border-right-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-style
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-right-style
    */
-  borderRightStyle?: Token<CSS.Property.BorderRightStyle>
+  borderRightStyle?: CSSToken<CSS.Property.BorderRightStyle>
   /**
-   * The CSS `border-right-width` property.
+   * ### border-right-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-right-width
    */
-  borderRightWidth?: Token<CSS.Property.BorderRightWidth | number>
+  borderRightWidth?: CSSToken<CSS.Property.BorderRightWidth | number>
   /**
-   * The CSS `border-spacing` property.
+   * ### border-spacing
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-spacing
+   * The <code>&#x3C;table></code> HTML element, with several related elements, represents tabular data in rows and columns of cells.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-spacing
    */
-  borderSpacing?: Token<CSS.Property.BorderSpacing>
+  borderSpacing?: CSSToken<CSS.Property.BorderSpacing>
   /**
-   * The CSS `border-inline-start` property.
+   * ### border-inline-start
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start
    */
-  borderStart?: Token<CSS.Property.BorderInlineStart | number, "borders">
+  borderStart?: CSSToken<CSS.Property.BorderInlineStart | number, "borders">
   /**
-   * The CSS `border-inline-start-color` property.
+   * ### border-inline-start-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-color
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
    */
-  borderStartColor?: Token<CSS.Property.BorderInlineStartColor, "colors">
+  borderStartColor?: CSSToken<CSS.Property.BorderInlineStartColor, "colors">
   /**
-   * The CSS `border-start-end-radius` property.
+   * ### border-start-end-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  borderStartEndRadius?: Token<
+  borderStartEndRadius?: CSSToken<
     CSS.Property.BorderStartEndRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-start-start-radius` and `border-start-end-radius` property.
+   * ### border-start-end-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-start-start-radius
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderStartRadius?: Token<
+  borderStartRadius?: CSSToken<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-start-start-radius` property.
+   * ### border-start-start-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderStartStartRadius?: Token<
+  borderStartStartRadius?: CSSToken<
     CSS.Property.BorderStartStartRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-inline-start-style` property.
+   * ### border-inline-start-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-style
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
    */
-  borderStartStyle?: Token<CSS.Property.BorderInlineStartStyle>
+  borderStartStyle?: CSSToken<CSS.Property.BorderInlineStartStyle>
   /**
-   * The CSS `border-inline-start-width` property.
+   * ### border-inline-start-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start-width
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
    */
-  borderStartWidth?: Token<CSS.Property.BorderInlineStartWidth | number>
+  borderStartWidth?: CSSToken<CSS.Property.BorderInlineStartWidth | number>
   /**
-   * The CSS `border-style` property.
+   * ### border-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-style
    */
-  borderStyle?: Token<CSS.Property.BorderStyle>
+  borderStyle?: CSSToken<CSS.Property.BorderStyle>
   /**
-   * The CSS `border-top` property.
+   * ### border-top
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top
    */
-  borderTop?: Token<CSS.Property.BorderTop | number, "borders">
+  borderTop?: CSSToken<CSS.Property.BorderTop | number, "borders">
   /**
-   * The CSS `border-top-color` property.
+   * ### border-top-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-color
    */
-  borderTopColor?: Token<CSS.Property.BorderTopColor, "colors">
+  borderTopColor?: CSSToken<CSS.Property.BorderTopColor, "colors">
   /**
-   * The CSS `border-start-end-radius` property.
+   * ### border-start-end-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  borderTopEndRadius?: Token<
+  borderTopEndRadius?: CSSToken<
     CSS.Property.BorderStartEndRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-top-left-radius` property.
+   * ### border-top-left-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  borderTopLeftRadius?: Token<
+  borderTopLeftRadius?: CSSToken<
     CSS.Property.BorderTopLeftRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-top-left-radius` and `border-top-right-radius` property.
+   * ### border-top-left-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-top-right-radius
+   *
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderTopRadius?: Token<
+  borderTopRadius?: CSSToken<
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-top-right-radius` property.
+   * ### border-top-right-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderTopRightRadius?: Token<
+  borderTopRightRadius?: CSSToken<
     CSS.Property.BorderTopRightRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-start-start-radius` property.
+   * ### border-start-start-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderTopStartRadius?: Token<
+  borderTopStartRadius?: CSSToken<
     CSS.Property.BorderStartStartRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-top-style` property.
+   * ### border-top-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-style
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-style
    */
-  borderTopStyle?: Token<CSS.Property.BorderTopStyle>
+  borderTopStyle?: CSSToken<CSS.Property.BorderTopStyle>
   /**
-   * The CSS `border-top-width` property.
+   * ### border-top-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-width
    */
-  borderTopWidth?: Token<CSS.Property.BorderTopWidth | number>
+  borderTopWidth?: CSSToken<CSS.Property.BorderTopWidth | number>
   /**
-   * The CSS `border-width` property.
+   * ### border-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-width
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-width
    */
-  borderWidth?: Token<CSS.Property.BorderWidth | number>
+  borderWidth?: CSSToken<CSS.Property.BorderWidth | number>
   /**
-   * The CSS `border-left` and `border-right` property.
+   * ### border-left
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-right
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-left
+   *
+   * ------------------------------------
+   *
+   * ### border-right
+   *
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-right
    */
-  borderX?: Token<
+  borderX?: CSSToken<
     CSS.Property.BorderLeft | CSS.Property.BorderRight | number,
     "borders"
   >
   /**
-   * The CSS `border-top` and `border-bottom` property.
+   * ### border-bottom
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom
+   *
+   * ------------------------------------
+   *
+   * ### border-top
+   *
+   * The <code>border</code> CSS property sets the color, style, and width of the line around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top
    */
-  borderY?: Token<
+  borderY?: CSSToken<
     CSS.Property.BorderBottom | CSS.Property.BorderTop | number,
     "borders"
   >
   /**
-   * The CSS `bottom` property.
+   * ### bottom
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/bottom
    */
-  bottom?: Token<CSS.Property.Bottom | number, "spaces">
+  bottom?: CSSToken<CSS.Property.Bottom | number, "spaces">
   /**
+   * ### box-align
+   *
    * The CSS `box-align` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-align
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-align
    *
    * @deprecated
    */
-  boxAlign?: Token<CSS.Property.BoxAlign>
+  boxAlign?: CSSToken<CSS.Property.BoxAlign>
   /**
-   * The CSS `box-decoration-break` property.
+   * ### box-decoration-break
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-decoration-break
+   * The <code>box-decoration-break</code> CSS property sets whether box decorations, such as borders or backgrounds, of an element divided across a page, column, or region wraps each fragment or splits across the break.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-decoration-break
    */
-  boxDecorationBreak?: Token<CSS.Property.BoxDecorationBreak>
+  boxDecorationBreak?: CSSToken<CSS.Property.BoxDecorationBreak>
   /**
+   * ### box-direction
+   *
    * The CSS `box-direction` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-direction
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-direction
    *
    * @deprecated
    */
-  boxDirection?: Token<CSS.Property.BoxDirection>
+  boxDirection?: CSSToken<CSS.Property.BoxDirection>
   /**
+   * ### box-flex
+   *
    * The CSS `box-flex` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-flex
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-flex
    *
    * @deprecated
    */
-  boxFlex?: Token<CSS.Property.BoxFlex>
+  boxFlex?: CSSToken<CSS.Property.BoxFlex>
   /**
+   * ### box-flex-group
+   *
    * The CSS `box-flex-group` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-flex-group
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-flex-group
    *
    * @deprecated
    */
-  boxFlexGroup?: Token<CSS.Property.BoxFlexGroup>
+  boxFlexGroup?: CSSToken<CSS.Property.BoxFlexGroup>
   /**
+   * ### box-lines
+   *
    * The CSS `box-lines` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-lines
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-lines
    *
    * @deprecated
    */
-  boxLines?: Token<CSS.Property.BoxLines>
+  boxLines?: CSSToken<CSS.Property.BoxLines>
   /**
+   * ### box-ordinal-group
+   *
    * The CSS `box-ordinal-group` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-ordinal-group
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-ordinal-group
    *
    * @deprecated
    */
-  boxOrdinalGroup?: Token<CSS.Property.BoxOrdinalGroup>
+  boxOrdinalGroup?: CSSToken<CSS.Property.BoxOrdinalGroup>
   /**
+   * ### box-orient
+   *
    * The CSS `box-orient` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-orient
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-orient
    *
    * @deprecated
    */
-  boxOrient?: Token<CSS.Property.BoxOrient>
+  boxOrient?: CSSToken<CSS.Property.BoxOrient>
   /**
+   * ### box-pack
+   *
    * The CSS `box-pack` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-pack
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-pack
    *
    * @deprecated
    */
-  boxPack?: Token<CSS.Property.BoxPack>
+  boxPack?: CSSToken<CSS.Property.BoxPack>
   /**
-   * The CSS `box-shadow` property.
+   * ### box-shadow
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
-   */
-  boxShadow?: Token<CSS.Property.BoxShadow, "shadows">
-  /**
-   * The CSS `width` and `height` property.
+   * The <code>box-shadow</code> CSS property applies shadow effects around an element's frame. This can create drop shadow and inner shadow effects.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
-   */
-  boxSize?: Token<CSS.Property.Height | CSS.Property.Width | number, "sizes">
-  /**
-   * The CSS `box-sizing` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-shadow
    */
-  boxSizing?: Token<CSS.Property.BoxSizing>
+  boxShadow?: CSSToken<CSS.Property.BoxShadow, "shadows">
   /**
-   * The CSS `break-after` property.
+   * ### height
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/break-after
-   */
-  breakAfter?: Token<CSS.Property.BreakAfter>
-  /**
-   * The CSS `break-before` property.
+   * The <code>width</code> and <code>height</code> CSS properties set the preferred physical size of an element.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/break-before
-   */
-  breakBefore?: Token<CSS.Property.BreakBefore>
-  /**
-   * The CSS `break-inside` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside
-   */
-  breakInside?: Token<CSS.Property.BreakInside>
-  /**
-   * If `filter=auto`, sets the value of `--ui-brightness`.
-   */
-  brightness?: Token<StringLiteral>
-  /**
-   * The CSS `caption-side` property.
+   * @see https://developer.mozilla.org/docs/Web/CSS/height
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caption-side
-   */
-  captionSide?: Token<CSS.Property.CaptionSide>
-  /**
-   * The CSS `caret-color` property.
+   * ------------------------------------
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color
-   */
-  caret?: Token<CSS.Property.CaretColor, "colors">
-  /**
-   * The CSS `caret-color` property.
+   * ### width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/caret-color
-   */
-  caretColor?: Token<CSS.Property.CaretColor, "colors">
-  /**
-   * The CSS `clear` property.
+   * The <code>width</code> and <code>height</code> CSS properties set the preferred physical size of an element.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clear
-   */
-  clear?: Token<CSS.Property.Clear>
-  /**
-   * The CSS `clip` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clip
+   * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  clip?: Token<CSS.Property.Clip>
+  boxSize?: CSSToken<CSS.Property.Height | CSS.Property.Width | number, "sizes">
   /**
-   * The CSS `clip-path` property.
+   * ### box-sizing
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path
+   * The <code>box-sizing</code> CSS property sets whether an element's width and height are calculated based on the <code>content-box</code>, which does not count the size of borders or padding, or <code>border-box</code>, which does count them.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-sizing
    */
-  clipPath?: Token<CSS.Property.ClipPath>
+  boxSizing?: CSSToken<CSS.Property.BoxSizing>
   /**
-   * The CSS `clip-rule` property.
+   * ### break-after
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/clip-rule
+   * In printed page layouts, the <code>break-after</code>, <code>break-before</code>, <code>break-inside</code> CSS properties control where printed pages start and end. Also known as pagination or page breaking.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2021-07-29
+   * @newly_available_date 2019-01-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/break-after
    */
-  clipRule?: Token<CSS.Property.ClipRule>
+  breakAfter?: CSSToken<CSS.Property.BreakAfter>
   /**
-   * The CSS `color` property.
+   * ### break-before
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
+   * In printed page layouts, the <code>break-after</code>, <code>break-before</code>, <code>break-inside</code> CSS properties control where printed pages start and end. Also known as pagination or page breaking.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2021-07-29
+   * @newly_available_date 2019-01-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/break-before
    */
-  color?: Token<CSS.Property.Color, "colors">
+  breakBefore?: CSSToken<CSS.Property.BreakBefore>
   /**
-   * The CSS `color-interpolation` property.
+   * ### break-inside
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-interpolation
+   * In printed page layouts, the <code>break-after</code>, <code>break-before</code>, <code>break-inside</code> CSS properties control where printed pages start and end. Also known as pagination or page breaking.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2021-07-29
+   * @newly_available_date 2019-01-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/break-inside
    */
-  colorInterpolation?: Token<CSS.Property.ColorInterpolation>
+  breakInside?: CSSToken<CSS.Property.BreakInside>
   /**
-   * The CSS `color-scheme` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
+   * Sets the value of `--brightness`.
    */
-  colorMode?: Token<CSS.Property.ColorScheme>
+  brightness?: CSSToken<StringLiteral>
   /**
-   * The CSS `column-count` property.
+   * ### caption-side
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-count
+   * The <code>&#x3C;table></code> HTML element, with several related elements, represents tabular data in rows and columns of cells.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/caption-side
    */
-  columnCount?: Token<CSS.Property.ColumnCount>
+  captionSide?: CSSToken<CSS.Property.CaptionSide>
   /**
-   * The CSS `column-fill` property.
+   * ### caret-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-fill
+   * The <code>caret-color</code> CSS property sets the color of the text insertion pointer in a text input.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/caret-color
    */
-  columnFill?: Token<CSS.Property.ColumnFill>
+  caret?: CSSToken<CSS.Property.CaretColor, "colors">
   /**
-   * The CSS `column-gap` property.
+   * ### caret-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
+   * The <code>caret-color</code> CSS property sets the color of the text insertion pointer in a text input.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/caret-color
    */
-  columnGap?: Token<CSS.Property.ColumnGap | number, "spaces">
+  caretColor?: CSSToken<CSS.Property.CaretColor, "colors">
   /**
-   * The CSS `column-rule` property.
+   * ### clear
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule
+   * The <code>float</code> CSS property aligns an element to either side of its container, allowing text and inline elements to flow around it. The <code>clear</code> CSS property sets whether an element is moved below floating elements that proceed it.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/clear
    */
-  columnRule?: Token<CSS.Property.ColumnRule | number>
+  clear?: CSSToken<CSS.Property.Clear>
   /**
-   * The CSS `column-rule-color` property.
+   * ### clip
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-color
+   * The <code>clip</code> CSS property sets the visible area of an absolutely positioned element.
+   *
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/clip
+   *
+   * @deprecated
    */
-  columnRuleColor?: Token<CSS.Property.ColumnRuleColor, "colors">
+  clip?: CSSToken<CSS.Property.Clip>
   /**
-   * The CSS `column-rule-style` property.
+   * ### clip-path
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-style
+   * The <code>clip-path</code> CSS property and SVG attribute set the visible area of an element. Everything outside the area will be hidden.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2023-07-21
+   * @newly_available_date 2021-01-21
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/clip-path
    */
-  columnRuleStyle?: Token<CSS.Property.ColumnRuleStyle>
+  clipPath?: CSSToken<CSS.Property.ClipPath>
   /**
-   * The CSS `column-rule-width` property.
+   * ### clip-rule
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule-width
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/clip-rule
    */
-  columnRuleWidth?: Token<CSS.Property.ColumnRuleWidth | number>
+  clipRule?: CSSToken<CSS.Property.ClipRule>
   /**
-   * The CSS `columns` property.
+   * ### color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/columns
+   * The <code>color</code> CSS property sets the primary foreground color of an element, which is used for text, the default border color, and text decorations.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/color
    */
-  columns?: Token<CSS.Property.Columns>
+  color?: CSSToken<CSS.Property.Color, "colors">
   /**
-   * The CSS `column-span` property.
+   * ### color-adjust
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-span
+   * The <code>color-adjust</code> shorthand CSS property allows multiple performance related color adjustments to be set at once. Setting the <code>print-color-adjust</code> CSS property directly is preferred, as it is the only such adjustment so far defined.
+   *
+   *
+   * @see https://drafts.csswg.org/css-color-adjust-1/#color-adjust
+   *
+   * @deprecated
    */
-  columnSpan?: Token<CSS.Property.ColumnSpan>
+  colorAdjust?: CSSToken<CSS.Property.PrintColorAdjust>
   /**
-   * The CSS `column-width` property.
+   * ### color-interpolation
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-width
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation
    */
-  columnWidth?: Token<CSS.Property.ColumnWidth | number, "sizes">
+  colorInterpolation?: CSSToken<CSS.Property.ColorInterpolation>
   /**
-   * The CSS `contain` property.
+   * ### color-interpolation-filters
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain
+   * The <code>&#x3C;filter></code> SVG element applies custom effects such as color manipulation, blurring, or morphing to SVG elements.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation-filters
    */
-  contain?: Token<CSS.Property.Contain>
+  colorInterpolationFilters?: CSSToken<string & {}>
   /**
-   * The CSS `container` property.
+   * ### column-count
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container
+   * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-07
+   * @newly_available_date 2017-03-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/column-count
    */
-  container?: Token<CSS.Property.Container>
+  columnCount?: CSSToken<CSS.Property.ColumnCount>
   /**
-   * The CSS `container-name` property.
+   * ### column-fill
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container-name
+   * The <code>column-fill</code> CSS property sets the distribution of content across columns in a multi-column layout.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-07
+   * @newly_available_date 2017-03-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/column-fill
    */
-  containerName?: Token<CSS.Property.ContainerName>
+  columnFill?: CSSToken<CSS.Property.ColumnFill>
   /**
-   * The CSS `container-type` property.
+   * ### column-gap
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/container-type
+   * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-07
+   * @newly_available_date 2017-03-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  containerType?: Token<CSS.Property.ContainerType>
+  columnGap?: CSSToken<CSS.Property.ColumnGap | number, "spaces">
   /**
-   * The CSS `contain-intrinsic-block-size` property.
+   * ### column-rule
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-block-size
+   * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-07
+   * @newly_available_date 2017-03-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/column-rule
    */
-  containIntrinsicBlockSize?: Token<CSS.Property.ContainIntrinsicBlockSize>
+  columnRule?: CSSToken<CSS.Property.ColumnRule | number>
   /**
-   * The CSS `contain-intrinsic-height` property.
+   * ### column-rule-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-height
+   * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-07
+   * @newly_available_date 2017-03-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-color
    */
-  containIntrinsicHeight?: Token<CSS.Property.ContainIntrinsicHeight>
+  columnRuleColor?: CSSToken<CSS.Property.ColumnRuleColor, "colors">
   /**
-   * The CSS `contain-intrinsic-inline-size` property.
+   * ### column-rule-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-inline-size
+   * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-07
+   * @newly_available_date 2017-03-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-style
    */
-  containIntrinsicInlineSize?: Token<CSS.Property.ContainIntrinsicInlineSize>
+  columnRuleStyle?: CSSToken<CSS.Property.ColumnRuleStyle>
   /**
-   * The CSS `contain-intrinsic-size` property.
+   * ### column-rule-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-size
+   * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-07
+   * @newly_available_date 2017-03-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-width
    */
-  containIntrinsicSize?: Token<CSS.Property.ContainIntrinsicSize>
+  columnRuleWidth?: CSSToken<CSS.Property.ColumnRuleWidth | number>
   /**
-   * The CSS `contain-intrinsic-width` property.
+   * ### columns
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-width
+   * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-07
+   * @newly_available_date 2017-03-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/columns
    */
-  containIntrinsicWidth?: Token<
+  columns?: CSSToken<CSS.Property.Columns>
+  /**
+   * ### column-span
+   *
+   * The <code>column-span</code> CSS property controls whether a child element extends across all columns of a multi-column parent.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2023-01-28
+   * @newly_available_date 2020-07-28
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/column-span
+   */
+  columnSpan?: CSSToken<CSS.Property.ColumnSpan>
+  /**
+   * ### column-width
+   *
+   * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-07
+   * @newly_available_date 2017-03-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/column-width
+   */
+  columnWidth?: CSSToken<CSS.Property.ColumnWidth | number, "sizes">
+  /**
+   * ### contain
+   *
+   * The <code>contain</code> CSS property sets limits to the scope of styles, layout, and paint rendering for speed and efficiency. The <code>none</code> keyword value disables containment, <code>strict</code> is equivalent to <code>contain: size layout style paint</code>, and <code>content</code> is equivalent to <code>contain: layout style paint</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-14
+   * @newly_available_date 2022-03-14
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/contain
+   */
+  contain?: CSSToken<CSS.Property.Contain>
+  /**
+   * ### container
+   *
+   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-02-14
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/container
+   */
+  container?: CSSToken<CSS.Property.Container>
+  /**
+   * ### container-name
+   *
+   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-02-14
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/container-name
+   */
+  containerName?: CSSToken<CSS.Property.ContainerName>
+  /**
+   * ### container-type
+   *
+   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-02-14
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/container-type
+   */
+  containerType?: CSSToken<CSS.Property.ContainerType>
+  /**
+   * ### contain-intrinsic-block-size
+   *
+   * The <code>contain-intrinsic-size</code> CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-09-18
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-block-size
+   */
+  containIntrinsicBlockSize?: CSSToken<CSS.Property.ContainIntrinsicBlockSize>
+  /**
+   * ### contain-intrinsic-height
+   *
+   * The <code>contain-intrinsic-size</code> CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-09-18
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-height
+   */
+  containIntrinsicHeight?: CSSToken<CSS.Property.ContainIntrinsicHeight>
+  /**
+   * ### contain-intrinsic-inline-size
+   *
+   * The <code>contain-intrinsic-size</code> CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-09-18
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-inline-size
+   */
+  containIntrinsicInlineSize?: CSSToken<CSS.Property.ContainIntrinsicInlineSize>
+  /**
+   * ### contain-intrinsic-size
+   *
+   * The <code>contain-intrinsic-size</code> CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-09-18
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-size
+   */
+  containIntrinsicSize?: CSSToken<CSS.Property.ContainIntrinsicSize>
+  /**
+   * ### contain-intrinsic-width
+   *
+   * The <code>contain-intrinsic-size</code> CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-09-18
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-width
+   */
+  containIntrinsicWidth?: CSSToken<
     CSS.Property.ContainIntrinsicWidth | number,
     "sizes"
   >
   /**
-   * The CSS `content` property.
+   * ### content
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/content
-   */
-  content?: Token<CSS.Property.Content>
-  /**
-   * The CSS `content-visibility` property.
+   * The <code>content</code> CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the <code>::before</code> and <code>::after</code> pseudo-elements to generate cosmetic content.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility
-   */
-  contentVisibility?: Token<CSS.Property.ContentVisibility>
-  /**
-   * If `filter=auto`, sets the value of `--ui-contrast`.
-   */
-  contrast?: Token<StringLiteral>
-  /**
-   * The CSS `counter-increment` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/counter-increment
+   * @see https://developer.mozilla.org/docs/Web/CSS/content
    */
-  counterIncrement?: Token<CSS.Property.CounterIncrement>
+  content?: CSSToken<CSS.Property.Content>
   /**
-   * The CSS `counter-reset` property.
+   * ### content-visibility
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/counter-reset
-   */
-  counterReset?: Token<CSS.Property.CounterReset>
-  /**
-   * The CSS `counter-set` property.
+   * The <code>content-visibility</code> CSS property delays rendering an element, including layout and painting, until it is needed.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/counter-set
-   */
-  counterSet?: Token<CSS.Property.CounterSet>
-  /**
-   * The CSS `cursor` property.
+   * @baseline `Limited available`
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/cursor
+   * @see https://developer.mozilla.org/docs/Web/CSS/content-visibility
    */
-  cursor?: Token<CSS.Property.Cursor>
+  contentVisibility?: CSSToken<CSS.Property.ContentVisibility>
   /**
-   * The CSS `direction` property.
+   * ### counter-increment
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/direction
-   */
-  direction?: Token<CSS.Property.Direction>
-  /**
-   * The CSS `display` property.
+   * The <code>counter-reset</code> and <code>counter-increment</code> CSS properties and the <code>counter()</code> and <code>counters()</code> functions automatically number headings or ordered list items.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/display
-   */
-  display?: Token<CSS.Property.Display>
-  /**
-   * The CSS `dominant-baseline` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/dominant-baseline
+   * @see https://developer.mozilla.org/docs/Web/CSS/counter-increment
    */
-  dominantBaseline?: Token<CSS.Property.DominantBaseline>
+  counterIncrement?: CSSToken<CSS.Property.CounterIncrement>
   /**
-   * If `filter=auto`, sets the value of `--ui-drop-shadow`.
-   */
-  dropShadow?: Token<StringLiteral, "shadows">
-  /**
-   * The CSS `empty-cells` property.
+   * ### counter-reset
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/empty-cells
-   */
-  emptyCells?: Token<CSS.Property.EmptyCells>
-  /**
-   * The CSS `fill` property.
+   * The <code>counter-reset</code> and <code>counter-increment</code> CSS properties and the <code>counter()</code> and <code>counters()</code> functions automatically number headings or ordered list items.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill
-   */
-  fill?: Token<CSS.Property.Fill, "colors">
-  /**
-   * The CSS `fill-opacity` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill-opacity
+   * @see https://developer.mozilla.org/docs/Web/CSS/counter-reset
    */
-  fillOpacity?: Token<CSS.Property.FillOpacity>
+  counterReset?: CSSToken<CSS.Property.CounterReset>
   /**
-   * The CSS `fill-rule` property.
+   * ### counter-set
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/fill-rule
-   */
-  fillRule?: Token<CSS.Property.FillRule>
-  /**
-   * The CSS `filter` property.
+   * The <code>counter-set</code> CSS property creates (and optionally sets a value for) a counter, the numbers for a series of headings or ordered list items.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/filter
-   */
-  filter?: Token<"auto" | CSS.Property.Filter>
-  /**
-   * The CSS `flex` property.
+   * @baseline `Newly available`
+   * @newly_available_date 2023-12-11
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex
+   * @see https://developer.mozilla.org/docs/Web/CSS/counter-set
    */
-  flex?: Token<CSS.Property.Flex>
+  counterSet?: CSSToken<CSS.Property.CounterSet>
   /**
-   * The CSS `flex-basis` property.
+   * ### cursor
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis
-   */
-  flexBasis?: Token<CSS.Property.FlexBasis | number, "sizes">
-  /**
-   * The CSS `flex-direction` property.
+   * The <code>cursor</code> CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
-   */
-  flexDir?: Token<CSS.Property.FlexDirection>
-  /**
-   * The CSS `flex-direction` property.
+   * @baseline `Limited available`
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
+   * @see https://developer.mozilla.org/docs/Web/CSS/cursor
    */
-  flexDirection?: Token<CSS.Property.FlexDirection>
+  cursor?: CSSToken<CSS.Property.Cursor>
   /**
-   * The CSS `flex-flow` property.
+   * ### cx
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-flow
-   */
-  flexFlow?: Token<CSS.Property.FlexFlow>
-  /**
-   * The CSS `flex-grow` property.
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow
-   */
-  flexGrow?: Token<CSS.Property.FlexGrow>
-  /**
-   * The CSS `flex-shrink` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink
+   * @see https://developer.mozilla.org/docs/Web/CSS/cx
    */
-  flexShrink?: Token<CSS.Property.FlexShrink>
+  cx?: CSSToken<string & {}>
   /**
-   * The CSS `flex-wrap` property.
+   * ### cy
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
-   */
-  flexWrap?: Token<CSS.Property.FlexWrap>
-  /**
-   * The CSS `float` property.
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/float
-   */
-  float?: Token<CSS.Property.Float>
-  /**
-   * The CSS `flood-color` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/cy
    */
-  floodColor?: Token<CSS.Property.FloodColor, "colors">
+  cy?: CSSToken<string & {}>
   /**
-   * The CSS `flood-opacity` property.
+   * ### d
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/flood-opacity
-   */
-  floodOpacity?: Token<CSS.Property.FloodOpacity>
-  /**
-   * The CSS `font` property.
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font
-   */
-  font?: Token<CSS.Property.Font>
-  /**
-   * The CSS `font-family` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-family
+   * @see https://developer.mozilla.org/docs/Web/CSS/d
    */
-  fontFamily?: Token<CSS.Property.FontFamily, "fonts">
+  d?: CSSToken<string & {}>
   /**
-   * The CSS `font-feature-settings` property.
+   * ### direction
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-feature-settings
-   */
-  fontFeatureSettings?: Token<CSS.Property.FontFeatureSettings>
-  /**
-   * The CSS `font-kerning` property.
+   * The <code>unicode-bidi</code> and <code>direction</code> CSS properties override the Unicode layout algorithm. They are intended for Document Type Definition (DTD) designers. For HTML documents, you should use the <code>dir</code> global HTML attribute and <code>&#x3C;bdo></code> HTML element instead.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-kerning
-   */
-  fontKerning?: Token<CSS.Property.FontKerning>
-  /**
-   * The CSS `font-language-override` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-language-override
+   * @see https://developer.mozilla.org/docs/Web/CSS/direction
    */
-  fontLanguageOverride?: Token<CSS.Property.FontLanguageOverride>
+  direction?: CSSToken<CSS.Property.Direction>
   /**
-   * The CSS `font-optical-sizing` property.
+   * ### display
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-optical-sizing
-   */
-  fontOpticalSizing?: Token<CSS.Property.FontOpticalSizing>
-  /**
-   * The CSS `font-palette` property.
+   * The <code>display</code> CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-palette
-   */
-  fontPalette?: Token<CSS.Property.FontPalette>
-  /**
-   * The CSS `font-size` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
+   * @see https://developer.mozilla.org/docs/Web/CSS/display
    */
-  fontSize?: Token<CSS.Property.FontSize | number, "fontSizes">
+  display?: CSSToken<CSS.Property.Display>
   /**
-   * The CSS `font-size-adjust` property.
+   * ### dominant-baseline
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size-adjust
+   * The <code>dominant-baseline</code> CSS property sets the specific baseline used to align an elements's text and inline-level contents.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date ≤2022-09-24
+   * @newly_available_date ≤2020-03-24
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/dominant-baseline
    */
-  fontSizeAdjust?: Token<CSS.Property.FontSizeAdjust>
+  dominantBaseline?: CSSToken<CSS.Property.DominantBaseline>
   /**
+   * ### dynamic-range-limit
+   *
+   * The CSS `dynamic-range-limit` property.
+   *
+   * @see https://drafts.csswg.org/css-color-hdr/#the-dynamic-range-limit-property
+   *
+   * @experimental
+   */
+  dynamicRangeLimit?: CSSToken<string & {}>
+  /**
+   * ### empty-cells
+   *
+   * The <code>&#x3C;table></code> HTML element, with several related elements, represents tabular data in rows and columns of cells.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/empty-cells
+   */
+  emptyCells?: CSSToken<CSS.Property.EmptyCells>
+  /**
+   * ### field-sizing
+   *
+   * The <code>field-sizing</code> CSS property allows form controls such as <code>&#x3C;textarea></code> to be sized based on their content.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/field-sizing
+   *
+   * @experimental
+   */
+  fieldSizing?: CSSToken<string & {}>
+  /**
+   * ### fill
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/fill
+   */
+  fill?: CSSToken<CSS.Property.Fill, "colors">
+  /**
+   * ### fill-opacity
+   *
+   * The <code>fill-opacity</code>, and <code>stroke-opacity</code> SVG attributes and CSS properties control the transparency of a stroke or fill of an SVG element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date ≤2022-09-24
+   * @newly_available_date ≤2020-03-24
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/fill-opacity
+   */
+  fillOpacity?: CSSToken<CSS.Property.FillOpacity>
+  /**
+   * ### fill-rule
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/fill-rule
+   */
+  fillRule?: CSSToken<CSS.Property.FillRule>
+  /**
+   * ### filter
+   *
+   * The <code>filter</code> CSS property applies one or more graphic effects to an element. You can use filter functions, such as <code>blur()</code> and <code>drop-shadow()</code>, alone or combined to produce different effects.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-03-07
+   * @newly_available_date 2016-09-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/filter
+   */
+  filter?: CSSToken<CSS.Property.Filter>
+  /**
+   * ### flex
+   *
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/flex
+   */
+  flex?: CSSToken<CSS.Property.Flex>
+  /**
+   * ### flex-basis
+   *
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/flex-basis
+   */
+  flexBasis?: CSSToken<CSS.Property.FlexBasis | number, "sizes">
+  /**
+   * ### flex-direction
+   *
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/flex-direction
+   */
+  flexDir?: CSSToken<CSS.Property.FlexDirection>
+  /**
+   * ### flex-direction
+   *
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/flex-direction
+   */
+  flexDirection?: CSSToken<CSS.Property.FlexDirection>
+  /**
+   * ### flex-flow
+   *
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/flex-flow
+   */
+  flexFlow?: CSSToken<CSS.Property.FlexFlow>
+  /**
+   * ### flex-grow
+   *
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/flex-grow
+   */
+  flexGrow?: CSSToken<CSS.Property.FlexGrow>
+  /**
+   * ### flex-shrink
+   *
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/flex-shrink
+   */
+  flexShrink?: CSSToken<CSS.Property.FlexShrink>
+  /**
+   * ### flex-wrap
+   *
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/flex-wrap
+   */
+  flexWrap?: CSSToken<CSS.Property.FlexWrap>
+  /**
+   * ### float
+   *
+   * The <code>float</code> CSS property aligns an element to either side of its container, allowing text and inline elements to flow around it. The <code>clear</code> CSS property sets whether an element is moved below floating elements that proceed it.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/float
+   */
+  float?: CSSToken<CSS.Property.Float>
+  /**
+   * ### flood-color
+   *
+   * The <code>&#x3C;filter></code> SVG element applies custom effects such as color manipulation, blurring, or morphing to SVG elements.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/flood-color
+   */
+  floodColor?: CSSToken<CSS.Property.FloodColor, "colors">
+  /**
+   * ### flood-opacity
+   *
+   * The <code>&#x3C;filter></code> SVG element applies custom effects such as color manipulation, blurring, or morphing to SVG elements.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/flood-opacity
+   */
+  floodOpacity?: CSSToken<CSS.Property.FloodOpacity>
+  /**
+   * ### font
+   *
+   * The <code>font</code> CSS property shorthand sets multiple font properties, including style, weight, size, and font family.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font
+   */
+  font?: CSSToken<CSS.Property.Font>
+  /**
+   * ### font-family
+   *
+   * The <code>font-family</code> CSS property sets the desired font face for text, along with optional fallback font faces.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-family
+   */
+  fontFamily?: CSSToken<CSS.Property.FontFamily, "fonts">
+  /**
+   * ### font-feature-settings
+   *
+   * The <code>font-feature-settings</code> CSS property sets low-level OpenType feature tags for a font. When possible, use <code>font-variant</code> instead.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-10-05
+   * @newly_available_date 2017-04-05
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-feature-settings
+   */
+  fontFeatureSettings?: CSSToken<CSS.Property.FontFeatureSettings>
+  /**
+   * ### font-kerning
+   *
+   * The <code>font-kerning</code> CSS property sets whether kerning data from a font is used to adjust the space between letters.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-kerning
+   */
+  fontKerning?: CSSToken<CSS.Property.FontKerning>
+  /**
+   * ### font-language-override
+   *
+   * The <code>font-language-override</code> CSS property sets which language-specific glyphs are displayed.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-language-override
+   */
+  fontLanguageOverride?: CSSToken<CSS.Property.FontLanguageOverride>
+  /**
+   * ### font-optical-sizing
+   *
+   * The <code>font-optical-sizing</code> CSS property sets whether text rendering is optimized for viewing at different sizes.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-09-24
+   * @newly_available_date 2020-03-24
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-optical-sizing
+   */
+  fontOpticalSizing?: CSSToken<CSS.Property.FontOpticalSizing>
+  /**
+   * ### font-palette
+   *
+   * The <code>font-palette</code> CSS property selects a color palette from the font, optionally overriding individual colors in the <code>@font-palette-values</code> at-rule.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-11-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-palette
+   */
+  fontPalette?: CSSToken<CSS.Property.FontPalette>
+  /**
+   * ### font-size
+   *
+   * The <code>font-size</code> CSS property sets the text height.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-size
+   */
+  fontSize?: CSSToken<CSS.Property.FontSize | number, "fontSizes">
+  /**
+   * ### font-size-adjust
+   *
+   * The <code>font-size-adjust</code> CSS property preserves apparent text size, regardless of the font used, by scaling fonts to the same size with respect to a specific metric, such as x-height. This can help make fallback fonts look the same size.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-07-25
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-size-adjust
+   */
+  fontSizeAdjust?: CSSToken<CSS.Property.FontSizeAdjust>
+  /**
+   * ### font-smooth
+   *
    * The CSS `font-smooth` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-smooth
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-smooth
    */
-  fontSmooth?: Token<CSS.Property.FontSmooth>
+  fontSmooth?: CSSToken<CSS.Property.FontSmooth>
   /**
-   * The CSS `font-stretch` property.
+   * ### font-stretch
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-stretch
-   */
-  fontStretch?: Token<CSS.Property.FontStretch>
-  /**
-   * The CSS `font-style` property.
+   * The <code>font-stretch</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-style
-   */
-  fontStyle?: Token<CSS.Property.FontStyle>
-  /**
-   * The CSS `font-synthesis` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2020-03-19
+   * @newly_available_date 2017-09-19
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-stretch
    */
-  fontSynthesis?: Token<CSS.Property.FontSynthesis>
+  fontStretch?: CSSToken<CSS.Property.FontStretch>
   /**
-   * The CSS `font-synthesis-position` property.
+   * ### font-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-position
-   */
-  fontSynthesisPosition?: Token<CSS.Property.FontSynthesisPosition>
-  /**
-   * The CSS `font-synthesis-small-caps` property.
+   * The <code>font-style</code> CSS property sets the text style, with <code>normal</code>, <code>italic</code>, and <code>oblique</code> options.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-small-caps
-   */
-  fontSynthesisSmallCaps?: Token<CSS.Property.FontSynthesisSmallCaps>
-  /**
-   * The CSS `font-synthesis-style` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-style
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-style
    */
-  fontSynthesisStyle?: Token<CSS.Property.FontSynthesisStyle>
+  fontStyle?: CSSToken<CSS.Property.FontStyle>
   /**
-   * The CSS `font-synthesis-weight` property.
+   * ### font-synthesis
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-synthesis-weight
-   */
-  fontSynthesisWeight?: Token<CSS.Property.FontSynthesisWeight>
-  /**
-   * The CSS `font-variant` property.
+   * The <code>font-synthesis</code> CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as <code>font-synthesis-style</code> and <code>font-synthesis-weight</code>.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant
-   */
-  fontVariant?: Token<CSS.Property.FontVariant>
-  /**
-   * The CSS `font-variant-alternates` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-07-06
+   * @newly_available_date 2022-01-06
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-alternates
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis
    */
-  fontVariantAlternates?: Token<CSS.Property.FontVariantAlternates>
+  fontSynthesis?: CSSToken<CSS.Property.FontSynthesis>
   /**
-   * The CSS `font-variant-caps` property.
+   * ### font-synthesis-position
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-caps
-   */
-  fontVariantCaps?: Token<CSS.Property.FontVariantCaps>
-  /**
-   * The CSS `font-variant-east-asian` property.
+   * The <code>font-synthesis-position</code> CSS property sets whether or not the browser should synthesize subscript and superscript typefaces when they're missing from the font.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-east-asian
-   */
-  fontVariantEastAsian?: Token<CSS.Property.FontVariantEastAsian>
-  /**
-   * The CSS `font-variant-emoji` property.
+   * @baseline `Limited available`
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-emoji
-   */
-  fontVariantEmoji?: Token<CSS.Property.FontVariantEmoji>
-  /**
-   * The CSS `font-variant-ligatures` property.
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-position
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-ligatures
+   * @experimental
    */
-  fontVariantLigatures?: Token<CSS.Property.FontVariantLigatures>
+  fontSynthesisPosition?: CSSToken<CSS.Property.FontSynthesisPosition>
   /**
-   * The CSS `font-variant-numeric` property.
+   * ### font-synthesis-small-caps
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric
-   */
-  fontVariantNumeric?: Token<CSS.Property.FontVariantNumeric>
-  /**
-   * The CSS `font-variant-position` property.
+   * The <code>font-synthesis-small-caps</code> CSS property sets whether or not the browser should synthesize small caps typefaces when they're missing from the font.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-position
-   */
-  fontVariantPosition?: Token<CSS.Property.FontVariantPosition>
-  /**
-   * The CSS `font-variation-settings` property.
+   * @baseline `Newly available`
+   * @newly_available_date 2023-03-27
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-variation-settings
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-small-caps
    */
-  fontVariationSettings?: Token<CSS.Property.FontVariationSettings>
+  fontSynthesisSmallCaps?: CSSToken<CSS.Property.FontSynthesisSmallCaps>
   /**
-   * The CSS `font-weight` property.
+   * ### font-synthesis-style
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight
-   */
-  fontWeight?: Token<CSS.Property.FontWeight, "fontWeights">
-  /**
-   * The CSS `forced-color-adjust` property.
+   * The <code>font-synthesis-style</code> CSS property sets whether or not the browser should synthesize italic and oblique typefaces when they're missing from the font.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/forced-color-adjust
-   */
-  forcedColorAdjust?: Token<CSS.Property.ForcedColorAdjust>
-  /**
-   * The CSS `gap` property.
+   * @baseline `Newly available`
+   * @newly_available_date 2023-03-27
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/gap
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-style
    */
-  g?: Token<CSS.Property.Gap | number, "spaces">
+  fontSynthesisStyle?: CSSToken<CSS.Property.FontSynthesisStyle>
   /**
-   * The CSS `gap` property.
+   * ### font-synthesis-weight
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/gap
-   */
-  gap?: Token<CSS.Property.Gap | number, "spaces">
-  /**
-   * The CSS `column-gap` property.
+   * The <code>font-synthesis-weight</code> CSS property sets whether or not the browser should synthesize bold typefaces when they're missing from the font.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
-   */
-  gapX?: Token<CSS.Property.ColumnGap | number, "spaces">
-  /**
-   * The CSS `row-gap` property.
+   * @baseline `Newly available`
+   * @newly_available_date 2023-03-27
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-weight
    */
-  gapY?: Token<CSS.Property.RowGap | number, "spaces">
+  fontSynthesisWeight?: CSSToken<CSS.Property.FontSynthesisWeight>
   /**
-   * The CSS `glyph-orientation-vertical` property.
+   * ### font-variant
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/glyph-orientation-vertical
-   */
-  glyphOrientationVertical?: Token<CSS.Property.GlyphOrientationVertical>
-  /**
-   * If `filter=auto`, sets the value of `--ui-grayscale`.
-   */
-  grayscale?: Token<StringLiteral>
-  /**
-   * The CSS `grid` property.
+   * The <code>font-variant</code> CSS property is a shorthand for <code>font-variant-alternates</code>, <code>font-variant-caps</code>, <code>font-variant-east-asian</code>, <code>font-variant-emoji</code>, <code>font-variant-ligatures</code>, <code>font-variant-numeric</code>, and <code>font-variant-position</code>.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid
-   */
-  grid?: Token<CSS.Property.Grid>
-  /**
-   * The CSS `grid-area` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant
    */
-  gridArea?: Token<CSS.Property.GridArea>
+  fontVariant?: CSSToken<CSS.Property.FontVariant>
   /**
-   * The CSS `grid-auto-columns` property.
+   * ### font-variant-alternates
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns
+   * The <code>font-variant-alternates</code> CSS property, along with the <code>@font-feature-values</code> at-rule, chooses when to use a font's alternate glyphs.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-03-13
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-alternates
    */
-  gridAutoColumns?: Token<CSS.Property.GridAutoColumns | number, "sizes">
+  fontVariantAlternates?: CSSToken<CSS.Property.FontVariantAlternates>
   /**
-   * The CSS `grid-auto-flow` property.
+   * ### font-variant-caps
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow
+   * The <code>font-variant-caps</code> CSS property sets whether text should be displayed in small caps, petite caps, or with capital letters designed for titles.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-caps
    */
-  gridAutoFlow?: Token<CSS.Property.GridAutoFlow>
+  fontVariantCaps?: CSSToken<CSS.Property.FontVariantCaps>
   /**
-   * The CSS `grid-auto-rows` property.
+   * ### font-variant-east-asian
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows
+   * The <code>font-variant-east-asian</code> CSS property controls glyph substitution and sizing in East Asian text.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-east-asian
    */
-  gridAutoRows?: Token<CSS.Property.GridAutoRows | number, "sizes">
+  fontVariantEastAsian?: CSSToken<CSS.Property.FontVariantEastAsian>
   /**
-   * The CSS `grid-column` property.
+   * ### font-variant-emoji
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+   * The <code>font-variant-emoji</code> CSS property sets the default presentation for emoji characters.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-emoji
    */
-  gridColumn?: Token<CSS.Property.GridColumn>
+  fontVariantEmoji?: CSSToken<CSS.Property.FontVariantEmoji>
   /**
-   * The CSS `grid-column-end` property.
+   * ### font-variant-ligatures
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-end
+   * The <code>font-variant-ligatures</code> CSS property sets how characters can be visually combined for readability or stylistic reasons.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-ligatures
    */
-  gridColumnEnd?: Token<CSS.Property.GridColumnEnd>
+  fontVariantLigatures?: CSSToken<CSS.Property.FontVariantLigatures>
   /**
-   * The CSS `grid-column-start` property.
+   * ### font-variant-numeric
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column-start
+   * The <code>font-variant-numeric</code> CSS property sets how numeric characters are displayed. For example, you can align columns of numbers or use zeroes that have a slash.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-numeric
    */
-  gridColumnStart?: Token<CSS.Property.GridColumnStart>
+  fontVariantNumeric?: CSSToken<CSS.Property.FontVariantNumeric>
   /**
-   * The CSS `grid-row` property.
+   * ### font-variant-position
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row
+   * The <code>font-variant-position</code> CSS property sets whether to use alternate glyphs for subscript and superscript text.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-position
    */
-  gridRow?: Token<CSS.Property.GridRow>
+  fontVariantPosition?: CSSToken<CSS.Property.FontVariantPosition>
   /**
-   * The CSS `grid-row-end` property.
+   * ### font-variation-settings
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-end
+   * The <code>font-variation-settings</code> CSS property sets an "axis of variability" on a variable font, such as weight, optical size, or a custom axis defined by the typeface designer. When possible, use other CSS font properties, such as <code>font-weight: bold</code>. Also known as variable fonts.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2021-03-05
+   * @newly_available_date 2018-09-05
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-variation-settings
    */
-  gridRowEnd?: Token<CSS.Property.GridRowEnd>
+  fontVariationSettings?: CSSToken<CSS.Property.FontVariationSettings>
   /**
-   * The CSS `grid-row-start` property.
+   * ### font-weight
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row-start
+   * The <code>font-weight</code> CSS property controls the thickness of a font. It is set explicitly with the keyword <code>bold</code> or a number, or relative to the inherited thickness with the keywords <code>bolder</code> or <code>lighter</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-weight
    */
-  gridRowStart?: Token<CSS.Property.GridRowStart>
+  fontWeight?: CSSToken<CSS.Property.FontWeight, "fontWeights">
   /**
-   * The CSS `grid-template` property.
+   * ### forced-color-adjust
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template
+   * The <code>forced-colors</code> CSS @media rule detects when a user has chosen to use a forced colors mode, also known as high-contrast mode, and the <code>forced-color-adjust</code> CSS property sets whether forced colors apply to an element.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/forced-color-adjust
    */
-  gridTemplate?: Token<CSS.Property.GridTemplate>
+  forcedColorAdjust?: CSSToken<CSS.Property.ForcedColorAdjust>
   /**
-   * The CSS `grid-template-areas` property.
+   * ### gap
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/gap
    */
-  gridTemplateAreas?: Token<CSS.Property.GridTemplateAreas>
+  g?: CSSToken<CSS.Property.Gap | number, "spaces">
   /**
-   * The CSS `grid-template-columns` property.
+   * ### gap
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/gap
    */
-  gridTemplateColumns?: Token<
+  gap?: CSSToken<CSS.Property.Gap | number, "spaces">
+  /**
+   * ### column-gap
+   *
+   * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-07
+   * @newly_available_date 2017-03-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
+   */
+  gapX?: CSSToken<CSS.Property.ColumnGap | number, "spaces">
+  /**
+   * ### row-gap
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
+   */
+  gapY?: CSSToken<CSS.Property.RowGap | number, "spaces">
+  /**
+   * ### glyph-orientation-horizontal
+   *
+   * The SVG 1.1 image format has several components that were excluded from SVG 2, such as fonts, alternate glyphs, and the <code>xlink</code> namespace.
+   *
+   *
+   * @see https://developer.mozilla.org/docs/Web/SVG/Attribute/glyph-orientation-horizontal
+   *
+   * @deprecated
+   */
+  glyphOrientationHorizontal?: CSSToken<string & {}>
+  /**
+   * ### glyph-orientation-vertical
+   *
+   * The <code>glyph-orientation-vertical</code> CSS property sets the orientation of glyphs in text rendered in a vertical writing mode.
+   *
+   *
+   * @see https://drafts.csswg.org/css-writing-modes-4/#glyph-orientation
+   *
+   * @deprecated
+   */
+  glyphOrientationVertical?: CSSToken<CSS.Property.GlyphOrientationVertical>
+  /**
+   * ### grid
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid
+   */
+  grid?: CSSToken<CSS.Property.Grid>
+  /**
+   * ### grid-area
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-area
+   */
+  gridArea?: CSSToken<CSS.Property.GridArea>
+  /**
+   * ### grid-auto-columns
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-columns
+   */
+  gridAutoColumns?: CSSToken<CSS.Property.GridAutoColumns | number, "sizes">
+  /**
+   * ### grid-auto-flow
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-flow
+   */
+  gridAutoFlow?: CSSToken<CSS.Property.GridAutoFlow>
+  /**
+   * ### grid-auto-rows
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-rows
+   */
+  gridAutoRows?: CSSToken<CSS.Property.GridAutoRows | number, "sizes">
+  /**
+   * ### grid-column
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-column
+   */
+  gridColumn?: CSSToken<CSS.Property.GridColumn>
+  /**
+   * ### grid-column-end
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-column-end
+   */
+  gridColumnEnd?: CSSToken<CSS.Property.GridColumnEnd>
+  /**
+   * ### grid-column-start
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-column-start
+   */
+  gridColumnStart?: CSSToken<CSS.Property.GridColumnStart>
+  /**
+   * ### grid-row
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-row
+   */
+  gridRow?: CSSToken<CSS.Property.GridRow>
+  /**
+   * ### grid-row-end
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-row-end
+   */
+  gridRowEnd?: CSSToken<CSS.Property.GridRowEnd>
+  /**
+   * ### grid-row-start
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-row-start
+   */
+  gridRowStart?: CSSToken<CSS.Property.GridRowStart>
+  /**
+   * ### grid-template
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-template
+   */
+  gridTemplate?: CSSToken<CSS.Property.GridTemplate>
+  /**
+   * ### grid-template-areas
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-areas
+   */
+  gridTemplateAreas?: CSSToken<CSS.Property.GridTemplateAreas>
+  /**
+   * ### grid-template-columns
+   *
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-columns
+   */
+  gridTemplateColumns?: CSSToken<
     CSS.Property.GridTemplateColumns | number,
     "sizes"
   >
   /**
-   * The CSS `grid-template-rows` property.
+   * ### grid-template-rows
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows
-   */
-  gridTemplateRows?: Token<CSS.Property.GridTemplateRows | number, "sizes">
-  /**
-   * The CSS `column-gap` property.
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap
-   */
-  gx?: Token<CSS.Property.ColumnGap | number, "spaces">
-  /**
-   * The CSS `row-gap` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
+   * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-rows
    */
-  gy?: Token<CSS.Property.RowGap | number, "spaces">
+  gridTemplateRows?: CSSToken<CSS.Property.GridTemplateRows | number, "sizes">
   /**
-   * The CSS `height` property.
+   * ### column-gap
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
-   */
-  h?: Token<CSS.Property.Height | number, "sizes">
-  /**
-   * The CSS `hanging-punctuation` property.
+   * Multi-column layout flows an element's content across one or more columns in a single row, without affecting the <code>display</code> property of its children.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hanging-punctuation
-   */
-  hangingPunctuation?: Token<CSS.Property.HangingPunctuation>
-  /**
-   * The CSS `height` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-07
+   * @newly_available_date 2017-03-07
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/height
+   * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  height?: Token<CSS.Property.Height | number, "sizes">
+  gx?: CSSToken<CSS.Property.ColumnGap | number, "spaces">
   /**
-   * If `filter=auto`, sets the value of `--ui-hue-rotate`.
-   */
-  hueRotate?: Token<StringLiteral>
-  /**
-   * The CSS `hyphenate-character` property.
+   * ### row-gap
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hyphenate-character
-   */
-  hyphenateCharacter?: Token<CSS.Property.HyphenateCharacter>
-  /**
-   * The CSS `hyphenate-limit-chars` property.
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hyphenate-limit-chars
-   */
-  hyphenateLimitChars?: Token<CSS.Property.HyphenateLimitChars>
-  /**
-   * The CSS `hyphens` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
+   * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
-  hyphens?: Token<CSS.Property.Hyphens>
+  gy?: CSSToken<CSS.Property.RowGap | number, "spaces">
   /**
-   * The CSS `image-orientation` property.
+   * ### height
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/image-orientation
-   */
-  imageOrientation?: Token<CSS.Property.ImageOrientation>
-  /**
-   * The CSS `image-rendering` property.
+   * The <code>width</code> and <code>height</code> CSS properties set the preferred physical size of an element.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/image-rendering
-   */
-  imageRendering?: Token<CSS.Property.ImageRendering>
-  /**
-   * The CSS `image-resolution` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/image-resolution
+   * @see https://developer.mozilla.org/docs/Web/CSS/height
    */
-  imageResolution?: Token<CSS.Property.ImageResolution>
+  h?: CSSToken<CSS.Property.Height | number, "sizes">
   /**
-   * The CSS `initial-letter` property.
+   * ### hanging-punctuation
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/initial-letter
-   */
-  initialLetter?: Token<CSS.Property.InitialLetter>
-  /**
-   * The CSS `inline-size` property.
+   * The <code>hanging-punctuation</code> CSS property puts punctuation characters outside of the box to align the text with the rest of the document.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inline-size
-   */
-  inlineSize?: Token<CSS.Property.InlineSize | number, "sizes">
-  /**
-   * The CSS `inset` property.
+   * @baseline `Limited available`
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset
+   * @see https://developer.mozilla.org/docs/Web/CSS/hanging-punctuation
    */
-  inset?: Token<CSS.Property.Inset | number, "spaces">
+  hangingPunctuation?: CSSToken<CSS.Property.HangingPunctuation>
   /**
-   * The CSS `inset-block` property.
+   * ### height
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block
-   */
-  insetBlock?: Token<CSS.Property.InsetBlock | number, "spaces">
-  /**
-   * The CSS `inset-block-end` property.
+   * The <code>width</code> and <code>height</code> CSS properties set the preferred physical size of an element.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-end
-   */
-  insetBlockEnd?: Token<CSS.Property.InsetBlockEnd | number, "spaces">
-  /**
-   * The CSS `inset-block-start` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-block-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/height
    */
-  insetBlockStart?: Token<CSS.Property.InsetBlockStart | number, "spaces">
+  height?: CSSToken<CSS.Property.Height | number, "sizes">
   /**
-   * The CSS `inset-inline-end` property.
+   * ### hyphenate-character
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end
-   */
-  insetEnd?: Token<CSS.Property.InsetInlineEnd | number, "spaces">
-  /**
-   * The CSS `inset-inline` property.
+   * The <code>hyphenate-character</code> CSS property sets the character or string to use at the end of a line before a line break.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline
-   */
-  insetInline?: Token<CSS.Property.InsetInline | number, "spaces">
-  /**
-   * The CSS `inset-inline-end` property.
+   * @baseline `Newly available`
+   * @newly_available_date 2023-09-18
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/hyphenate-character
    */
-  insetInlineEnd?: Token<CSS.Property.InsetInlineEnd | number, "spaces">
+  hyphenateCharacter?: CSSToken<CSS.Property.HyphenateCharacter>
   /**
-   * The CSS `inset-inline-start` property.
+   * ### hyphenate-limit-chars
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start
-   */
-  insetInlineStart?: Token<CSS.Property.InsetInlineStart | number, "spaces">
-  /**
-   * The CSS `inset-inline-start` property.
+   * The <code>hyphenate-limit-chars</code> CSS property sets the number of characters in a word before it is hyphenated and the minimum number of characters on either side of the hyphen.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/inset-inline-start
-   */
-  insetStart?: Token<CSS.Property.InsetInlineStart | number, "spaces">
-  /**
-   * The CSS `left` and `right` property.
+   * @baseline `Limited available`
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/right
+   * @see https://developer.mozilla.org/docs/Web/CSS/hyphenate-limit-chars
    */
-  insetX?: Token<CSS.Property.Left | CSS.Property.Right | number, "spaces">
+  hyphenateLimitChars?: CSSToken<CSS.Property.HyphenateLimitChars>
   /**
-   * The CSS `top` and `bottom` property.
+   * ### hyphens
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/top
-   */
-  insetY?: Token<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
-  /**
-   * If `filter=auto`, sets the value of `--ui-invert`.
-   */
-  invert?: Token<StringLiteral>
-  /**
-   * The CSS `isolation` property.
+   * The <code>hyphens</code> CSS property controls when long words are broken by line wrapping. Although called <code>hyphens</code>, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/isolation
-   */
-  isolation?: Token<CSS.Property.Isolation>
-  /**
-   * If `true`, it clamps truncate a text after one line.
-   */
-  isTruncated?: Token<boolean>
-  /**
-   * The CSS `justify-content` property.
+   * @baseline `Newly available`
+   * @newly_available_date 2023-09-18
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
+   * @see https://developer.mozilla.org/docs/Web/CSS/hyphens
    */
-  justifyContent?: Token<CSS.Property.JustifyContent>
+  hyphens?: CSSToken<CSS.Property.Hyphens>
   /**
-   * The CSS `justify-items` property.
+   * ### image-orientation
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items
-   */
-  justifyItems?: Token<CSS.Property.JustifyItems>
-  /**
-   * The CSS `justify-self` property.
+   * The <code>image-orientation</code> CSS property corrects the rotation of an image using the image's metadata, such as EXIF.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
-   */
-  justifySelf?: Token<CSS.Property.JustifySelf>
-  /**
-   * The CSS `line-height` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2022-10-13
+   * @newly_available_date 2020-04-13
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+   * @see https://developer.mozilla.org/docs/Web/CSS/image-orientation
    */
-  leading?: Token<CSS.Property.LineHeight, "lineHeights">
+  imageOrientation?: CSSToken<CSS.Property.ImageOrientation>
   /**
-   * The CSS `left` property.
+   * ### image-rendering
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/left
-   */
-  left?: Token<CSS.Property.Left | number, "spaces">
-  /**
-   * The CSS `letter-spacing` property.
+   * The <code>image-rendering</code> CSS property sets how images are scaled, retaining smoothness for photos, or hard edges for pixel art and QR codes.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
-   */
-  letterSpacing?: Token<CSS.Property.LetterSpacing, "letterSpacings">
-  /**
-   * The CSS `lighting-color` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-04-05
+   * @newly_available_date 2021-10-05
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/lighting-color
+   * @see https://developer.mozilla.org/docs/Web/CSS/image-rendering
    */
-  lightingColor?: Token<CSS.Property.LightingColor, "colors">
+  imageRendering?: CSSToken<CSS.Property.ImageRendering>
   /**
-   * The CSS `line-break` property.
+   * ### ime-mode
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-break
-   */
-  lineBreak?: Token<CSS.Property.LineBreak>
-  /**
-   * Used to visually truncate a text after a number of lines.
-   */
-  lineClamp?: Token<number>
-  /**
-   * The CSS `line-height` property.
+   * The <code>ime-mode</code> CSS property sets the state of the input method editor for text fields.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
-   */
-  lineHeight?: Token<CSS.Property.LineHeight, "lineHeights">
-  /**
-   * The CSS `line-height-step` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/line-height-step
-   */
-  lineHeightStep?: Token<CSS.Property.LineHeightStep>
-  /**
-   * The CSS `list-style` property.
+   * @see https://drafts.csswg.org/css-ui/#input-method-editor
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style
+   * @deprecated
    */
-  listStyle?: Token<CSS.Property.ListStyle>
+  imeMode?: CSSToken<CSS.Property.ImeMode>
   /**
-   * The CSS `list-style-image` property.
+   * ### initial-letter
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
+   * The <code>initial-letter</code> CSS property sets the number of lines the first letter of an element occupies. You can use the property to make a raised capital or drop cap.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/initial-letter
    */
-  listStyleImage?: Token<CSS.Property.ListStyleImage, "gradients">
+  initialLetter?: CSSToken<CSS.Property.InitialLetter>
   /**
-   * The CSS `list-style-image` property.
+   * ### inline-size
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-image
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/inline-size
    */
-  listStyleImg?: Token<CSS.Property.ListStyleImage, "gradients">
+  inlineSize?: CSSToken<CSS.Property.InlineSize | number, "sizes">
   /**
-   * The CSS `list-style-position` property.
+   * ### inset
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/inset
    */
-  listStylePos?: Token<CSS.Property.ListStylePosition>
+  inset?: CSSToken<CSS.Property.Inset | number, "spaces">
   /**
-   * The CSS `list-style-position` property.
+   * ### inset-block
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-position
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/inset-block
    */
-  listStylePosition?: Token<CSS.Property.ListStylePosition>
+  insetBlock?: CSSToken<CSS.Property.InsetBlock | number, "spaces">
   /**
-   * The CSS `list-style-type` property.
+   * ### inset-block-end
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-end
    */
-  listStyleType?: Token<CSS.Property.ListStyleType>
+  insetBlockEnd?: CSSToken<CSS.Property.InsetBlockEnd | number, "spaces">
   /**
-   * The CSS `margin` property.
+   * ### inset-block-start
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-start
    */
-  m?: Token<CSS.Property.Margin | number, "spaces">
+  insetBlockStart?: CSSToken<CSS.Property.InsetBlockStart | number, "spaces">
   /**
-   * The CSS `margin` property.
+   * ### inset-inline-end
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
    */
-  margin?: Token<CSS.Property.Margin | number, "spaces">
+  insetEnd?: CSSToken<CSS.Property.InsetInlineEnd | number, "spaces">
   /**
-   * The CSS `margin-block` property.
+   * ### inset-inline
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline
    */
-  marginBlock?: Token<CSS.Property.MarginBlock | number, "spaces">
+  insetInline?: CSSToken<CSS.Property.InsetInline | number, "spaces">
   /**
-   * The CSS `margin-block-end` property.
+   * ### inset-inline-end
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block-end
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
    */
-  marginBlockEnd?: Token<CSS.Property.MarginBlockEnd | number, "spaces">
+  insetInlineEnd?: CSSToken<CSS.Property.InsetInlineEnd | number, "spaces">
   /**
-   * The CSS `margin-block-start` property.
+   * ### inset-inline-start
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block-start
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
    */
-  marginBlockStart?: Token<CSS.Property.MarginBlockStart | number, "spaces">
+  insetInlineStart?: CSSToken<CSS.Property.InsetInlineStart | number, "spaces">
   /**
-   * The CSS `margin-bottom` property.
+   * ### inset-inline-start
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
    */
-  marginBottom?: Token<CSS.Property.MarginBottom | number, "spaces">
+  insetStart?: CSSToken<CSS.Property.InsetInlineStart | number, "spaces">
   /**
-   * The CSS `margin-inline-end` property.
+   * ### interpolate-size
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
+   * The <code>interpolate-size</code> CSS property sets whether animations and transitions interpolate between a numeric value and a keyword value, such as from a fixed length to <code>auto</code> or <code>fit-content</code>.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/interpolate-size
+   *
+   * @experimental
    */
-  marginEnd?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
+  interpolateSize?: CSSToken<string & {}>
   /**
-   * The CSS `margin-inline` property.
+   * ### isolation
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline
+   * The <code>isolation</code> CSS property creates a new stacking context, which impacts <code>z-index</code> ordering and blend modes.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/isolation
    */
-  marginInline?: Token<CSS.Property.MarginInline | number, "spaces">
+  isolation?: CSSToken<CSS.Property.Isolation>
   /**
-   * The CSS `margin-inline-end` property.
+   * ### justify-content
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/justify-content
    */
-  marginInlineEnd?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
+  justifyContent?: CSSToken<CSS.Property.JustifyContent>
   /**
-   * The CSS `margin-inline-start` property.
+   * ### justify-items
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/justify-items
    */
-  marginInlineStart?: Token<CSS.Property.MarginInlineStart | number, "spaces">
+  justifyItems?: CSSToken<CSS.Property.JustifyItems>
   /**
-   * The CSS `margin-left` property.
+   * ### justify-self
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/justify-self
    */
-  marginLeft?: Token<CSS.Property.MarginLeft | number, "spaces">
+  justifySelf?: CSSToken<CSS.Property.JustifySelf>
   /**
-   * The CSS `margin-right` property.
+   * ### line-height
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right
+   * The <code>line-height</code> CSS property sets the spacing between text baselines, oriented to the horizontal or vertical writing mode.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/line-height
    */
-  marginRight?: Token<CSS.Property.MarginRight | number, "spaces">
+  leading?: CSSToken<CSS.Property.LineHeight, "lineHeights">
   /**
-   * The CSS `margin-inline-start` property.
+   * ### left
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/left
    */
-  marginStart?: Token<CSS.Property.MarginInlineStart | number, "spaces">
+  left?: CSSToken<CSS.Property.Left | number, "spaces">
   /**
-   * The CSS `margin-top` property.
+   * ### letter-spacing
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
+   * The <code>letter-spacing</code> CSS property controls the amount of space between each letter in an element or block of text.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
    */
-  marginTop?: Token<CSS.Property.MarginTop | number, "spaces">
+  letterSpacing?: CSSToken<CSS.Property.LetterSpacing, "letterSpacings">
   /**
-   * The CSS `margin-trim` property.
+   * ### lighting-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-trim
+   * The <code>&#x3C;filter></code> SVG element applies custom effects such as color manipulation, blurring, or morphing to SVG elements.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/lighting-color
    */
-  marginTrim?: Token<CSS.Property.MarginTrim>
+  lightingColor?: CSSToken<CSS.Property.LightingColor, "colors">
   /**
-   * The CSS `margin-inline-start` and `margin-inline-end` property.
+   * ### line-break
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
+   * The <code>line-break</code> CSS property sets how strictly to apply rules for wrapping text to new lines, especially for symbols and punctuation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2023-01-28
+   * @newly_available_date 2020-07-28
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/line-break
    */
-  marginX?: Token<
-    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
+  lineBreak?: CSSToken<CSS.Property.LineBreak>
+  /**
+   * ### line-height
+   *
+   * The <code>line-height</code> CSS property sets the spacing between text baselines, oriented to the horizontal or vertical writing mode.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/line-height
+   */
+  lineHeight?: CSSToken<CSS.Property.LineHeight, "lineHeights">
+  /**
+   * ### line-height-step
+   *
+   * The <code>line-height-step</code> CSS property creates consistent vertical rhythm by setting the spacing between body text baselines. It rounds taller lines like headings up to the next multiple of the body text spacing.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/line-height-step
+   *
+   * @experimental
+   */
+  lineHeightStep?: CSSToken<CSS.Property.LineHeightStep>
+  /**
+   * ### list-style
+   *
+   * The <code>list-style</code> shorthand CSS property and the <code>list-style-image</code>, <code>list-style-position</code>, and <code>list-style-type</code> longhand properties set the position and appearance of a list item's marker.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/list-style
+   */
+  listStyle?: CSSToken<CSS.Property.ListStyle>
+  /**
+   * ### list-style-image
+   *
+   * The <code>list-style</code> shorthand CSS property and the <code>list-style-image</code>, <code>list-style-position</code>, and <code>list-style-type</code> longhand properties set the position and appearance of a list item's marker.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/list-style-image
+   */
+  listStyleImage?: CSSToken<CSS.Property.ListStyleImage, "gradients">
+  /**
+   * ### list-style-image
+   *
+   * The <code>list-style</code> shorthand CSS property and the <code>list-style-image</code>, <code>list-style-position</code>, and <code>list-style-type</code> longhand properties set the position and appearance of a list item's marker.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/list-style-image
+   */
+  listStyleImg?: CSSToken<CSS.Property.ListStyleImage, "gradients">
+  /**
+   * ### list-style-position
+   *
+   * The <code>list-style</code> shorthand CSS property and the <code>list-style-image</code>, <code>list-style-position</code>, and <code>list-style-type</code> longhand properties set the position and appearance of a list item's marker.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/list-style-position
+   */
+  listStylePos?: CSSToken<CSS.Property.ListStylePosition>
+  /**
+   * ### list-style-position
+   *
+   * The <code>list-style</code> shorthand CSS property and the <code>list-style-image</code>, <code>list-style-position</code>, and <code>list-style-type</code> longhand properties set the position and appearance of a list item's marker.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/list-style-position
+   */
+  listStylePosition?: CSSToken<CSS.Property.ListStylePosition>
+  /**
+   * ### list-style-type
+   *
+   * The <code>list-style</code> shorthand CSS property and the <code>list-style-image</code>, <code>list-style-position</code>, and <code>list-style-type</code> longhand properties set the position and appearance of a list item's marker.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/list-style-type
+   */
+  listStyleType?: CSSToken<CSS.Property.ListStyleType>
+  /**
+   * ### margin
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin
+   */
+  m?: CSSToken<CSS.Property.Margin | number, "spaces">
+  /**
+   * ### margin
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin
+   */
+  margin?: CSSToken<CSS.Property.Margin | number, "spaces">
+  /**
+   * ### margin-block
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-block
+   */
+  marginBlock?: CSSToken<CSS.Property.MarginBlock | number, "spaces">
+  /**
+   * ### margin-block-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-end
+   */
+  marginBlockEnd?: CSSToken<CSS.Property.MarginBlockEnd | number, "spaces">
+  /**
+   * ### margin-block-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-start
+   */
+  marginBlockStart?: CSSToken<CSS.Property.MarginBlockStart | number, "spaces">
+  /**
+   * ### margin-bottom
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   */
+  marginBottom?: CSSToken<CSS.Property.MarginBottom | number, "spaces">
+  /**
+   * ### margin-inline-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   */
+  marginEnd?: CSSToken<CSS.Property.MarginInlineEnd | number, "spaces">
+  /**
+   * ### margin-inline
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline
+   */
+  marginInline?: CSSToken<CSS.Property.MarginInline | number, "spaces">
+  /**
+   * ### margin-inline-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   */
+  marginInlineEnd?: CSSToken<CSS.Property.MarginInlineEnd | number, "spaces">
+  /**
+   * ### margin-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   */
+  marginInlineStart?: CSSToken<
+    CSS.Property.MarginInlineStart | number,
     "spaces"
   >
   /**
-   * The CSS `margin-top` and `margin-bottom` property.
+   * ### margin-left
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
    */
-  marginY?: Token<
-    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
+  marginLeft?: CSSToken<CSS.Property.MarginLeft | number, "spaces">
+  /**
+   * ### margin-right
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
+   */
+  marginRight?: CSSToken<CSS.Property.MarginRight | number, "spaces">
+  /**
+   * ### margin-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   */
+  marginStart?: CSSToken<CSS.Property.MarginInlineStart | number, "spaces">
+  /**
+   * ### margin-top
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
+   */
+  marginTop?: CSSToken<CSS.Property.MarginTop | number, "spaces">
+  /**
+   * ### margin-trim
+   *
+   * The <code>margin-trim</code> CSS property removes the margins of child elements when they meet the edges of the container.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-trim
+   *
+   * @experimental
+   */
+  marginTrim?: CSSToken<CSS.Property.MarginTrim>
+  /**
+   * ### marker
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/marker
+   */
+  marker?: CSSToken<CSS.Property.Marker>
+  /**
+   * ### marker-end
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/marker-end
+   */
+  markerEnd?: CSSToken<CSS.Property.MarkerEnd>
+  /**
+   * ### marker-mid
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/marker-mid
+   */
+  markerMid?: CSSToken<CSS.Property.MarkerMid>
+  /**
+   * ### marker-start
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/marker-start
+   */
+  markerStart?: CSSToken<CSS.Property.MarkerStart>
+  /**
+   * ### mask
+   *
+   * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-12-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask
+   */
+  mask?: CSSToken<CSS.Property.Mask>
+  /**
+   * ### mask-border
+   *
+   * The <code>mask-border</code> CSS property sets how the edges of an element are masked. It is a shorthand for <code>mask-border-outset</code>, <code>mask-border-repeat</code>, <code>mask-border-slice</code>, <code>mask-border-source</code>, and <code>mask-border-width</code>.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border
+   */
+  maskBorder?: CSSToken<CSS.Property.MaskBorder>
+  /**
+   * ### mask-border-outset
+   *
+   * The <code>mask-border</code> CSS property sets how the edges of an element are masked. It is a shorthand for <code>mask-border-outset</code>, <code>mask-border-repeat</code>, <code>mask-border-slice</code>, <code>mask-border-source</code>, and <code>mask-border-width</code>.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-outset
+   */
+  maskBorderOutset?: CSSToken<CSS.Property.MaskBorderOutset>
+  /**
+   * ### mask-border-repeat
+   *
+   * The <code>mask-border</code> CSS property sets how the edges of an element are masked. It is a shorthand for <code>mask-border-outset</code>, <code>mask-border-repeat</code>, <code>mask-border-slice</code>, <code>mask-border-source</code>, and <code>mask-border-width</code>.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-repeat
+   */
+  maskBorderRepeat?: CSSToken<CSS.Property.MaskBorderRepeat>
+  /**
+   * ### mask-border-slice
+   *
+   * The <code>mask-border</code> CSS property sets how the edges of an element are masked. It is a shorthand for <code>mask-border-outset</code>, <code>mask-border-repeat</code>, <code>mask-border-slice</code>, <code>mask-border-source</code>, and <code>mask-border-width</code>.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-slice
+   */
+  maskBorderSlice?: CSSToken<CSS.Property.MaskBorderSlice>
+  /**
+   * ### mask-border-source
+   *
+   * The <code>mask-border</code> CSS property sets how the edges of an element are masked. It is a shorthand for <code>mask-border-outset</code>, <code>mask-border-repeat</code>, <code>mask-border-slice</code>, <code>mask-border-source</code>, and <code>mask-border-width</code>.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-source
+   */
+  maskBorderSource?: CSSToken<CSS.Property.MaskBorderSource>
+  /**
+   * ### mask-border-width
+   *
+   * The <code>mask-border</code> CSS property sets how the edges of an element are masked. It is a shorthand for <code>mask-border-outset</code>, <code>mask-border-repeat</code>, <code>mask-border-slice</code>, <code>mask-border-source</code>, and <code>mask-border-width</code>.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-width
+   */
+  maskBorderWidth?: CSSToken<CSS.Property.MaskBorderWidth | number>
+  /**
+   * ### mask-clip
+   *
+   * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-12-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-clip
+   */
+  maskClip?: CSSToken<CSS.Property.MaskClip>
+  /**
+   * ### mask-composite
+   *
+   * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-12-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-composite
+   */
+  maskComposite?: CSSToken<CSS.Property.MaskComposite>
+  /**
+   * ### mask-image
+   *
+   * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-12-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-image
+   */
+  maskImage?: CSSToken<CSS.Property.MaskImage, "gradients">
+  /**
+   * ### mask-mode
+   *
+   * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-12-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-mode
+   */
+  maskMode?: CSSToken<CSS.Property.MaskMode>
+  /**
+   * ### mask-origin
+   *
+   * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-12-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-origin
+   */
+  maskOrigin?: CSSToken<CSS.Property.MaskOrigin>
+  /**
+   * ### mask-position
+   *
+   * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-12-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-position
+   */
+  maskPosition?: CSSToken<CSS.Property.MaskPosition>
+  /**
+   * ### mask-repeat
+   *
+   * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-12-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-repeat
+   */
+  maskRepeat?: CSSToken<CSS.Property.MaskRepeat>
+  /**
+   * ### mask-size
+   *
+   * The <code>mask</code> CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-12-07
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-size
+   */
+  maskSize?: CSSToken<CSS.Property.MaskSize>
+  /**
+   * ### mask-type
+   *
+   * The <code>mask-type</code> CSS property on an SVG <code>&#x3C;mask></code> element sets whether the mask is a <code>luminance</code> or <code>alpha</code> mask.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mask-type
+   */
+  maskType?: CSSToken<CSS.Property.MaskType>
+  /**
+   * ### math-depth
+   *
+   * MathML, or the Mathematical Markup Language, describes mathematical notation, such as expressions and formulas. Also known as MathML Core.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-01-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/math-depth
+   */
+  mathDepth?: CSSToken<CSS.Property.MathDepth>
+  /**
+   * ### math-shift
+   *
+   * MathML, or the Mathematical Markup Language, describes mathematical notation, such as expressions and formulas. Also known as MathML Core.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-01-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/math-shift
+   *
+   * @experimental
+   */
+  mathShift?: CSSToken<CSS.Property.MathShift>
+  /**
+   * ### math-style
+   *
+   * MathML, or the Mathematical Markup Language, describes mathematical notation, such as expressions and formulas. Also known as MathML Core.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-01-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/math-style
+   */
+  mathStyle?: CSSToken<CSS.Property.MathStyle>
+  /**
+   * ### max-block-size
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/max-block-size
+   */
+  maxBlockSize?: CSSToken<CSS.Property.MaxBlockSize | number, "sizes">
+  /**
+   * ### max-height
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/max-height
+   */
+  maxH?: CSSToken<CSS.Property.MaxHeight | number, "sizes">
+  /**
+   * ### max-height
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/max-height
+   */
+  maxHeight?: CSSToken<CSS.Property.MaxHeight | number, "sizes">
+  /**
+   * ### max-inline-size
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/max-inline-size
+   */
+  maxInlineSize?: CSSToken<CSS.Property.MaxInlineSize | number, "sizes">
+  /**
+   * ### max-width
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/max-width
+   */
+  maxW?: CSSToken<CSS.Property.MaxWidth | number, "sizes">
+  /**
+   * ### max-width
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/max-width
+   */
+  maxWidth?: CSSToken<CSS.Property.MaxWidth | number, "sizes">
+  /**
+   * ### margin-bottom
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   */
+  mb?: CSSToken<CSS.Property.MarginBottom | number, "spaces">
+  /**
+   * ### margin-inline-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   */
+  me?: CSSToken<CSS.Property.MarginInlineEnd | number, "spaces">
+  /**
+   * ### min-block-size
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/min-block-size
+   */
+  minBlockSize?: CSSToken<CSS.Property.MinBlockSize | number, "sizes">
+  /**
+   * ### min-height
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/min-height
+   */
+  minH?: CSSToken<CSS.Property.MinHeight | number, "sizes">
+  /**
+   * ### min-height
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/min-height
+   */
+  minHeight?: CSSToken<CSS.Property.MinHeight | number, "sizes">
+  /**
+   * ### min-inline-size
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/min-inline-size
+   */
+  minInlineSize?: CSSToken<CSS.Property.MinInlineSize | number, "sizes">
+  /**
+   * ### min-width
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/min-width
+   */
+  minW?: CSSToken<CSS.Property.MinWidth | number, "sizes">
+  /**
+   * ### min-width
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/min-width
+   */
+  minWidth?: CSSToken<CSS.Property.MinWidth | number, "sizes">
+  /**
+   * ### mix-blend-mode
+   *
+   * The <code>mix-blend-mode</code> CSS property blends an element's content with its background or parent elements using blend modes like <code>multiply</code>, <code>difference</code>, or <code>color</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
+   */
+  mixBlendMode?: CSSToken<CSS.Property.MixBlendMode>
+  /**
+   * ### margin-left
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
+   */
+  ml?: CSSToken<CSS.Property.MarginLeft | number, "spaces">
+  /**
+   * ### margin-right
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
+   */
+  mr?: CSSToken<CSS.Property.MarginRight | number, "spaces">
+  /**
+   * ### margin-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   */
+  ms?: CSSToken<CSS.Property.MarginInlineStart | number, "spaces">
+  /**
+   * ### margin-top
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
+   */
+  mt?: CSSToken<CSS.Property.MarginTop | number, "spaces">
+  /**
+   * ### object-fit
+   *
+   * The <code>object-fit</code> CSS property sets how images, videos, and other replaced elements are scaled within their container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/object-fit
+   */
+  objectFit?: CSSToken<CSS.Property.ObjectFit>
+  /**
+   * ### object-position
+   *
+   * The <code>object-position</code> CSS property places images, videos, and other replaced elements within their boxes.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/object-position
+   */
+  objectPosition?: CSSToken<CSS.Property.ObjectPosition>
+  /**
+   * ### object-view-box
+   *
+   * The <code>object-view-box</code> CSS property crops and zooms to an inset area of an image.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-images-5/#propdef-object-view-box
+   *
+   * @experimental
+   */
+  objectViewBox?: CSSToken<string & {}>
+  /**
+   * ### offset
+   *
+   * The <code>offset</code> CSS property animates an element along a defined motion path.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/offset
+   */
+  offset?: CSSToken<CSS.Property.Offset>
+  /**
+   * ### offset-anchor
+   *
+   * The <code>offset</code> CSS property animates an element along a defined motion path.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/offset-anchor
+   */
+  offsetAnchor?: CSSToken<CSS.Property.OffsetAnchor>
+  /**
+   * ### offset-distance
+   *
+   * The <code>offset</code> CSS property animates an element along a defined motion path.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/offset-distance
+   */
+  offsetDistance?: CSSToken<CSS.Property.OffsetDistance>
+  /**
+   * ### offset-path
+   *
+   * The <code>offset</code> CSS property animates an element along a defined motion path.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/offset-path
+   */
+  offsetPath?: CSSToken<CSS.Property.OffsetPath>
+  /**
+   * ### offset-position
+   *
+   * The <code>offset</code> CSS property animates an element along a defined motion path.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/offset-position
+   */
+  offsetPosition?: CSSToken<CSS.Property.OffsetPosition>
+  /**
+   * ### offset-rotate
+   *
+   * The <code>offset</code> CSS property animates an element along a defined motion path.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/offset-rotate
+   */
+  offsetRotate?: CSSToken<CSS.Property.OffsetRotate>
+  /**
+   * ### opacity
+   *
+   * The <code>opacity</code> CSS property sets the transparency of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/opacity
+   */
+  opacity?: CSSToken<CSS.Property.Opacity>
+  /**
+   * ### order
+   *
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/order
+   */
+  order?: CSSToken<CSS.Property.Order>
+  /**
+   * ### orphans
+   *
+   * The <code>widows</code> and <code>orphans</code> CSS properties set the minimum lines included in a text fragment created by page, column, or region breaks.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/orphans
+   */
+  orphans?: CSSToken<CSS.Property.Orphans>
+  /**
+   * ### outline-color
+   *
+   * The <code>outline-color</code>, <code>outline-style</code>, and <code>outline-width</code> and <code>outline-offset</code> CSS properties style a line around an element, outside of the border.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-10-05
+   * @newly_available_date 2017-04-05
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/outline-color
+   */
+  outlineColor?: CSSToken<CSS.Property.OutlineColor, "colors">
+  /**
+   * ### outline-offset
+   *
+   * The <code>outline-color</code>, <code>outline-style</code>, and <code>outline-width</code> and <code>outline-offset</code> CSS properties style a line around an element, outside of the border.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-10-05
+   * @newly_available_date 2017-04-05
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/outline-offset
+   */
+  outlineOffset?: CSSToken<CSS.Property.OutlineOffset>
+  /**
+   * ### outline-style
+   *
+   * The <code>outline-color</code>, <code>outline-style</code>, and <code>outline-width</code> and <code>outline-offset</code> CSS properties style a line around an element, outside of the border.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-10-05
+   * @newly_available_date 2017-04-05
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/outline-style
+   */
+  outlineStyle?: CSSToken<CSS.Property.OutlineStyle>
+  /**
+   * ### outline-width
+   *
+   * The <code>outline-color</code>, <code>outline-style</code>, and <code>outline-width</code> and <code>outline-offset</code> CSS properties style a line around an element, outside of the border.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-10-05
+   * @newly_available_date 2017-04-05
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/outline-width
+   */
+  outlineWidth?: CSSToken<CSS.Property.OutlineWidth | number>
+  /**
+   * ### overflow
+   *
+   * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overflow
+   */
+  overflow?: CSSToken<CSS.Property.Overflow>
+  /**
+   * ### overflow-anchor
+   *
+   * The <code>overflow-anchor</code> CSS property sets an element as a possible scroll anchor, reducing unintended scrolling when document changes occur above the current scrollport. This is enabled by default where supported.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-anchor
+   */
+  overflowAnchor?: CSSToken<CSS.Property.OverflowAnchor>
+  /**
+   * ### overflow-block
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-block
+   */
+  overflowBlock?: CSSToken<CSS.Property.OverflowBlock>
+  /**
+   * ### overflow-clip-margin
+   *
+   * The <code>overflow-clip-margin</code> CSS property sets how far overflow content may appear outside the bounds of an element before it's clipped by effects such as <code>overflow: clip</code>.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-clip-margin
+   */
+  overflowClipMargin?: CSSToken<CSS.Property.OverflowClipMargin>
+  /**
+   * ### overflow-inline
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-inline
+   */
+  overflowInline?: CSSToken<CSS.Property.OverflowInline>
+  /**
+   * ### overflow-wrap
+   *
+   * The <code>overflow-wrap</code> CSS property breaks a line of text onto multiple lines inside the targeted element in an otherwise unbreakable place to prevent overflow. The legacy property is <code>word-wrap</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2021-04-02
+   * @newly_available_date 2018-10-02
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-wrap
+   */
+  overflowWrap?: CSSToken<CSS.Property.OverflowWrap>
+  /**
+   * ### overflow-x
+   *
+   * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-x
+   */
+  overflowX?: CSSToken<CSS.Property.OverflowX>
+  /**
+   * ### overflow-y
+   *
+   * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overflow-y
+   */
+  overflowY?: CSSToken<CSS.Property.OverflowY>
+  /**
+   * ### overlay
+   *
+   * The <code>overlay</code> CSS property, used as an <code>allow-discrete</code> CSS transition, prevents a top layer element, such as a popover or a <code>&#x3C;dialog></code>, from being removed from the top layer before it has finished animating. You can't set the value of the <code>overlay</code> property; only use it as transition property.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overlay
+   *
+   * @experimental
+   */
+  overlay?: CSSToken<CSS.Property.Overlay>
+  /**
+   * ### overscroll-behavior
+   *
+   * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
+   */
+  overscroll?: CSSToken<CSS.Property.OverscrollBehavior>
+  /**
+   * ### overscroll-behavior
+   *
+   * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
+   */
+  overscrollBehavior?: CSSToken<CSS.Property.OverscrollBehavior>
+  /**
+   * ### overscroll-behavior-block
+   *
+   * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-block
+   */
+  overscrollBehaviorBlock?: CSSToken<CSS.Property.OverscrollBehaviorBlock>
+  /**
+   * ### overscroll-behavior-inline
+   *
+   * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-inline
+   */
+  overscrollBehaviorInline?: CSSToken<CSS.Property.OverscrollBehaviorInline>
+  /**
+   * ### overscroll-behavior-x
+   *
+   * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
+   */
+  overscrollBehaviorX?: CSSToken<CSS.Property.OverscrollBehaviorX>
+  /**
+   * ### overscroll-behavior-y
+   *
+   * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
+   */
+  overscrollBehaviorY?: CSSToken<CSS.Property.OverscrollBehaviorY>
+  /**
+   * ### overscroll-behavior-x
+   *
+   * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
+   */
+  overscrollX?: CSSToken<CSS.Property.OverscrollBehaviorX>
+  /**
+   * ### overscroll-behavior-y
+   *
+   * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
+   */
+  overscrollY?: CSSToken<CSS.Property.OverscrollBehaviorY>
+  /**
+   * ### padding
+   *
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding
+   */
+  p?: CSSToken<CSS.Property.Padding | number, "spaces">
+  /**
+   * ### padding
+   *
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding
+   */
+  padding?: CSSToken<CSS.Property.Padding | number, "spaces">
+  /**
+   * ### padding-block
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-block
+   */
+  paddingBlock?: CSSToken<CSS.Property.PaddingBlock | number, "spaces">
+  /**
+   * ### padding-block-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-block-end
+   */
+  paddingBlockEnd?: CSSToken<CSS.Property.PaddingBlockEnd | number, "spaces">
+  /**
+   * ### padding-block-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-block-start
+   */
+  paddingBlockStart?: CSSToken<
+    CSS.Property.PaddingBlockStart | number,
     "spaces"
   >
   /**
-   * The CSS `marker` property.
+   * ### padding-bottom
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
    */
-  marker?: Token<CSS.Property.Marker>
+  paddingBottom?: CSSToken<CSS.Property.PaddingBottom | number, "spaces">
   /**
-   * The CSS `marker-end` property.
+   * ### padding-inline-end
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-end
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  markerEnd?: Token<CSS.Property.MarkerEnd>
+  paddingEnd?: CSSToken<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
-   * The CSS `marker-mid` property.
+   * ### padding-inline
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-mid
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline
    */
-  markerMid?: Token<CSS.Property.MarkerMid>
+  paddingInline?: CSSToken<CSS.Property.PaddingInline | number, "spaces">
   /**
-   * The CSS `marker-start` property.
+   * ### padding-inline-end
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/marker-start
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  markerStart?: Token<CSS.Property.MarkerStart>
+  paddingInlineEnd?: CSSToken<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
-   * The CSS `mask` property.
+   * ### padding-inline-start
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask
-   */
-  mask?: Token<CSS.Property.Mask>
-  /**
-   * The CSS `mask-border` property.
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border
-   */
-  maskBorder?: Token<CSS.Property.MaskBorder>
-  /**
-   * The CSS `mask-border-mode` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-mode
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  maskBorderMode?: Token<CSS.Property.MaskBorderMode>
-  /**
-   * The CSS `mask-border-outset` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-outset
-   */
-  maskBorderOutset?: Token<CSS.Property.MaskBorderOutset>
-  /**
-   * The CSS `mask-border-repeat` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-repeat
-   */
-  maskBorderRepeat?: Token<CSS.Property.MaskBorderRepeat>
-  /**
-   * The CSS `mask-border-slice` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-slice
-   */
-  maskBorderSlice?: Token<CSS.Property.MaskBorderSlice>
-  /**
-   * The CSS `mask-border-source` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-source
-   */
-  maskBorderSource?: Token<CSS.Property.MaskBorderSource>
-  /**
-   * The CSS `mask-border-width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-border-width
-   */
-  maskBorderWidth?: Token<CSS.Property.MaskBorderWidth | number>
-  /**
-   * The CSS `mask-clip` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-clip
-   */
-  maskClip?: Token<CSS.Property.MaskClip>
-  /**
-   * The CSS `mask-composite` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-composite
-   */
-  maskComposite?: Token<CSS.Property.MaskComposite>
-  /**
-   * The CSS `mask-image` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image
-   */
-  maskImage?: Token<CSS.Property.MaskImage, "gradients">
-  /**
-   * The CSS `mask-mode` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-mode
-   */
-  maskMode?: Token<CSS.Property.MaskMode>
-  /**
-   * The CSS `mask-origin` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-origin
-   */
-  maskOrigin?: Token<CSS.Property.MaskOrigin>
-  /**
-   * The CSS `mask-position` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-position
-   */
-  maskPosition?: Token<CSS.Property.MaskPosition>
-  /**
-   * The CSS `mask-repeat` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-repeat
-   */
-  maskRepeat?: Token<CSS.Property.MaskRepeat>
-  /**
-   * The CSS `mask-size` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-size
-   */
-  maskSize?: Token<CSS.Property.MaskSize>
-  /**
-   * The CSS `mask-type` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mask-type
-   */
-  maskType?: Token<CSS.Property.MaskType>
-  /**
-   * The CSS `masonry-auto-flow` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/masonry-auto-flow
-   */
-  masonryAutoFlow?: Token<CSS.Property.MasonryAutoFlow>
-  /**
-   * The CSS `math-depth` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/math-depth
-   */
-  mathDepth?: Token<CSS.Property.MathDepth>
-  /**
-   * The CSS `math-shift` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/math-shift
-   */
-  mathShift?: Token<CSS.Property.MathShift>
-  /**
-   * The CSS `math-style` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/math-style
-   */
-  mathStyle?: Token<CSS.Property.MathStyle>
-  /**
-   * The CSS `max-block-size` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-block-size
-   */
-  maxBlockSize?: Token<CSS.Property.MaxBlockSize | number, "sizes">
-  /**
-   * The CSS `max-width` and `max-height` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
-   */
-  maxBoxSize?: Token<
-    CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
-    "sizes"
-  >
-  /**
-   * The CSS `max-height` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
-   */
-  maxH?: Token<CSS.Property.MaxHeight | number, "sizes">
-  /**
-   * The CSS `max-height` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-height
-   */
-  maxHeight?: Token<CSS.Property.MaxHeight | number, "sizes">
-  /**
-   * The CSS `max-inline-size` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-inline-size
-   */
-  maxInlineSize?: Token<CSS.Property.MaxInlineSize | number, "sizes">
-  /**
-   * The CSS `max-width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
-   */
-  maxW?: Token<CSS.Property.MaxWidth | number, "sizes">
-  /**
-   * The CSS `max-width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/max-width
-   */
-  maxWidth?: Token<CSS.Property.MaxWidth | number, "sizes">
-  /**
-   * The CSS `margin-bottom` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
-   */
-  mb?: Token<CSS.Property.MarginBottom | number, "spaces">
-  /**
-   * The CSS `margin-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
-   */
-  me?: Token<CSS.Property.MarginInlineEnd | number, "spaces">
-  /**
-   * The CSS `min-block-size` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-block-size
-   */
-  minBlockSize?: Token<CSS.Property.MinBlockSize | number, "sizes">
-  /**
-   * The CSS `min-width` and `min-height` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
-   */
-  minBoxSize?: Token<
-    CSS.Property.MinHeight | CSS.Property.MinWidth | number,
-    "sizes"
-  >
-  /**
-   * The CSS `min-height` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
-   */
-  minH?: Token<CSS.Property.MinHeight | number, "sizes">
-  /**
-   * The CSS `min-height` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-height
-   */
-  minHeight?: Token<CSS.Property.MinHeight | number, "sizes">
-  /**
-   * The CSS `min-inline-size` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-inline-size
-   */
-  minInlineSize?: Token<CSS.Property.MinInlineSize | number, "sizes">
-  /**
-   * The CSS `min-width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
-   */
-  minW?: Token<CSS.Property.MinWidth | number, "sizes">
-  /**
-   * The CSS `min-width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/min-width
-   */
-  minWidth?: Token<CSS.Property.MinWidth | number, "sizes">
-  /**
-   * The CSS `mix-blend-mode` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode
-   */
-  mixBlendMode?: Token<CSS.Property.MixBlendMode>
-  /**
-   * The CSS `margin-left` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left
-   */
-  ml?: Token<CSS.Property.MarginLeft | number, "spaces">
-  /**
-   * The CSS `margin-right` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right
-   */
-  mr?: Token<CSS.Property.MarginRight | number, "spaces">
-  /**
-   * The CSS `margin-inline-start` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
-   */
-  ms?: Token<CSS.Property.MarginInlineStart | number, "spaces">
-  /**
-   * The CSS `margin-top` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
-   */
-  mt?: Token<CSS.Property.MarginTop | number, "spaces">
-  /**
-   * The CSS `margin-inline-start` and `margin-inline-end` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start
-   */
-  mx?: Token<
-    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
+  paddingInlineStart?: CSSToken<
+    CSS.Property.PaddingInlineStart | number,
     "spaces"
   >
   /**
-   * The CSS `margin-top` and `margin-bottom` property.
+   * ### padding-left
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top
-   */
-  my?: Token<
-    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
-    "spaces"
-  >
-  /**
-   * The CSS `object-fit` property.
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
-   */
-  objectFit?: Token<CSS.Property.ObjectFit>
-  /**
-   * The CSS `object-position` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/object-position
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
    */
-  objectPosition?: Token<CSS.Property.ObjectPosition>
+  paddingLeft?: CSSToken<CSS.Property.PaddingLeft | number, "spaces">
   /**
-   * The CSS `offset` property.
+   * ### padding-right
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset
-   */
-  offset?: Token<CSS.Property.Offset>
-  /**
-   * The CSS `offset-anchor` property.
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-anchor
-   */
-  offsetAnchor?: Token<CSS.Property.OffsetAnchor>
-  /**
-   * The CSS `offset-distance` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-distance
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
    */
-  offsetDistance?: Token<CSS.Property.OffsetDistance>
+  paddingRight?: CSSToken<CSS.Property.PaddingRight | number, "spaces">
   /**
-   * The CSS `offset-path` property.
+   * ### padding-inline-start
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-path
-   */
-  offsetPath?: Token<CSS.Property.OffsetPath>
-  /**
-   * The CSS `offset-position` property.
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-position
-   */
-  offsetPosition?: Token<CSS.Property.OffsetPosition>
-  /**
-   * The CSS `offset-rotate` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/offset-rotate
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  offsetRotate?: Token<CSS.Property.OffsetRotate>
+  paddingStart?: CSSToken<CSS.Property.PaddingInlineStart | number, "spaces">
   /**
-   * The CSS `opacity` property.
+   * ### padding-top
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
-   */
-  opacity?: Token<CSS.Property.Opacity>
-  /**
-   * The CSS `order` property.
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/order
-   */
-  order?: Token<CSS.Property.Order>
-  /**
-   * The CSS `orphans` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/orphans
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  orphans?: Token<CSS.Property.Orphans>
+  paddingTop?: CSSToken<CSS.Property.PaddingTop | number, "spaces">
   /**
-   * The CSS `outline` property.
+   * ### page
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline
-   */
-  outline?: Token<CSS.Property.Outline>
-  /**
-   * The CSS `outline-color` property.
+   * The <code>:first</code>, <code>:left</code>, and <code>:right</code> pseudo-classes select pages based on their position in sequence after pagination. They're often used with the <code>page</code> CSS property, to choose a print layout defined by the <code>@page</code> rule.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-color
-   */
-  outlineColor?: Token<CSS.Property.OutlineColor, "colors">
-  /**
-   * The CSS `outline-offset` property.
+   * @baseline `Limited available`
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset
+   * @see https://developer.mozilla.org/docs/Web/CSS/page
    */
-  outlineOffset?: Token<CSS.Property.OutlineOffset>
+  page?: CSSToken<CSS.Property.Page>
   /**
-   * The CSS `outline-style` property.
+   * ### page-break-after
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-style
-   */
-  outlineStyle?: Token<CSS.Property.OutlineStyle>
-  /**
-   * The CSS `outline-width` property.
+   * The <code>page-break-before</code>, <code>page-break-inside</code>, and <code>page-break-after</code> CSS properties are aliases to the <code>break-before</code>, <code>break-inside</code>, and <code>break-after</code> properties.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/outline-width
-   */
-  outlineWidth?: Token<CSS.Property.OutlineWidth | number>
-  /**
-   * The CSS `overflow` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow
-   */
-  overflow?: Token<CSS.Property.Overflow>
-  /**
-   * The CSS `overflow-anchor` property.
+   * @see https://developer.mozilla.org/docs/Web/CSS/page-break-after
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-anchor
+   * @deprecated
    */
-  overflowAnchor?: Token<CSS.Property.OverflowAnchor>
+  pageBreakAfter?: CSSToken<CSS.Property.PageBreakAfter>
   /**
-   * The CSS `overflow-block` property.
+   * ### page-break-before
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-block
-   */
-  overflowBlock?: Token<CSS.Property.OverflowBlock>
-  /**
-   * The CSS `overflow-clip-margin` property.
+   * The <code>page-break-before</code>, <code>page-break-inside</code>, and <code>page-break-after</code> CSS properties are aliases to the <code>break-before</code>, <code>break-inside</code>, and <code>break-after</code> properties.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-clip-margin
-   */
-  overflowClipMargin?: Token<CSS.Property.OverflowClipMargin>
-  /**
-   * The CSS `overflow-inline` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-inline
-   */
-  overflowInline?: Token<CSS.Property.OverflowInline>
-  /**
-   * The CSS `overflow-wrap` property.
+   * @see https://developer.mozilla.org/docs/Web/CSS/page-break-before
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-wrap
+   * @deprecated
    */
-  overflowWrap?: Token<CSS.Property.OverflowWrap>
+  pageBreakBefore?: CSSToken<CSS.Property.PageBreakBefore>
   /**
-   * The CSS `overflow-x` property.
+   * ### page-break-inside
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-x
-   */
-  overflowX?: Token<CSS.Property.OverflowX>
-  /**
-   * The CSS `overflow-y` property.
+   * The <code>page-break-before</code>, <code>page-break-inside</code>, and <code>page-break-after</code> CSS properties are aliases to the <code>break-before</code>, <code>break-inside</code>, and <code>break-after</code> properties.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-y
-   */
-  overflowY?: Token<CSS.Property.OverflowY>
-  /**
-   * The CSS `overlay` property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overlay
-   */
-  overlay?: Token<CSS.Property.Overlay>
-  /**
-   * The CSS `overscroll-behavior` property.
+   * @see https://developer.mozilla.org/docs/Web/CSS/page-break-inside
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior
+   * @deprecated
    */
-  overscroll?: Token<CSS.Property.OverscrollBehavior>
+  pageBreakInside?: CSSToken<CSS.Property.PageBreakInside>
   /**
-   * The CSS `overscroll-behavior` property.
+   * ### paint-order
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior
-   */
-  overscrollBehavior?: Token<CSS.Property.OverscrollBehavior>
-  /**
-   * The CSS `overscroll-behavior-block` property.
+   * The <code>paint-order</code> CSS property sets the z-order of strokes, fills, and (in SVG content) markers. For example, <code>paint-order: markers stroke fill;</code> draws the markers, then stroke on top of markers, then fill on top of both markers and stroke.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-block
-   */
-  overscrollBehaviorBlock?: Token<CSS.Property.OverscrollBehaviorBlock>
-  /**
-   * The CSS `overscroll-behavior-inline` property.
+   * @baseline `Limited available`
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-inline
+   * @see https://developer.mozilla.org/docs/Web/CSS/paint-order
    */
-  overscrollBehaviorInline?: Token<CSS.Property.OverscrollBehaviorInline>
+  paintOrder?: CSSToken<CSS.Property.PaintOrder>
   /**
-   * The CSS `overscroll-behavior-x` property.
+   * ### padding-bottom
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
-   */
-  overscrollBehaviorX?: Token<CSS.Property.OverscrollBehaviorX>
-  /**
-   * The CSS `overscroll-behavior-y` property.
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
-   */
-  overscrollBehaviorY?: Token<CSS.Property.OverscrollBehaviorY>
-  /**
-   * The CSS `overscroll-behavior-x` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-x
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
    */
-  overscrollX?: Token<CSS.Property.OverscrollBehaviorX>
+  pb?: CSSToken<CSS.Property.PaddingBottom | number, "spaces">
   /**
-   * The CSS `overscroll-behavior-y` property.
+   * ### padding-inline-end
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior-y
-   */
-  overscrollY?: Token<CSS.Property.OverscrollBehaviorY>
-  /**
-   * The CSS `padding` property.
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding
-   */
-  p?: Token<CSS.Property.Padding | number, "spaces">
-  /**
-   * The CSS `padding` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  padding?: Token<CSS.Property.Padding | number, "spaces">
+  pe?: CSSToken<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
-   * The CSS `padding-block` property.
+   * ### perspective
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block
-   */
-  paddingBlock?: Token<CSS.Property.PaddingBlock | number, "spaces">
-  /**
-   * The CSS `padding-block-end` property.
+   * The <code>transform</code> CSS property and its 3D transform functions allow rotations and other transforms in three dimensions, including perspective transforms.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block-end
-   */
-  paddingBlockEnd?: Token<CSS.Property.PaddingBlockEnd | number, "spaces">
-  /**
-   * The CSS `padding-block-start` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-14
+   * @newly_available_date 2022-03-14
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/perspective
    */
-  paddingBlockStart?: Token<CSS.Property.PaddingBlockStart | number, "spaces">
+  perspective?: CSSToken<CSS.Property.Perspective>
   /**
-   * The CSS `padding-bottom` property.
+   * ### perspective-origin
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
-   */
-  paddingBottom?: Token<CSS.Property.PaddingBottom | number, "spaces">
-  /**
-   * The CSS `padding-inline-end` property.
+   * The <code>transform</code> CSS property and its 3D transform functions allow rotations and other transforms in three dimensions, including perspective transforms.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
-   */
-  paddingEnd?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
-  /**
-   * The CSS `padding-inline` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-14
+   * @newly_available_date 2022-03-14
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline
+   * @see https://developer.mozilla.org/docs/Web/CSS/perspective-origin
    */
-  paddingInline?: Token<CSS.Property.PaddingInline | number, "spaces">
+  perspectiveOrigin?: CSSToken<CSS.Property.PerspectiveOrigin>
   /**
-   * The CSS `padding-inline-end` property.
+   * ### padding-left
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
-   */
-  paddingInlineEnd?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
-  /**
-   * The CSS `padding-inline-start` property.
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
-   */
-  paddingInlineStart?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
-  /**
-   * The CSS `padding-left` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
    */
-  paddingLeft?: Token<CSS.Property.PaddingLeft | number, "spaces">
+  pl?: CSSToken<CSS.Property.PaddingLeft | number, "spaces">
   /**
-   * The CSS `padding-right` property.
+   * ### place-content
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right
-   */
-  paddingRight?: Token<CSS.Property.PaddingRight | number, "spaces">
-  /**
-   * The CSS `padding-inline-start` property.
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
-   */
-  paddingStart?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
-  /**
-   * The CSS `padding-top` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
+   * @see https://developer.mozilla.org/docs/Web/CSS/place-content
    */
-  paddingTop?: Token<CSS.Property.PaddingTop | number, "spaces">
+  placeContent?: CSSToken<CSS.Property.PlaceContent>
   /**
-   * The CSS `padding-inline-start` and `padding-inline-end` property.
+   * ### place-items
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
-   */
-  paddingX?: Token<
-    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
-    "spaces"
-  >
-  /**
-   * The CSS `padding-top` and `padding-bottom` property.
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
-   */
-  paddingY?: Token<
-    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
-    "spaces"
-  >
-  /**
-   * The CSS `page` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page
+   * @see https://developer.mozilla.org/docs/Web/CSS/place-items
    */
-  page?: Token<CSS.Property.Page>
+  placeItems?: CSSToken<CSS.Property.PlaceItems>
   /**
-   * The CSS `page-break-after` property.
+   * ### place-self
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-after
-   */
-  pageBreakAfter?: Token<CSS.Property.PageBreakAfter>
-  /**
-   * The CSS `page-break-before` property.
+   * Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-before
-   */
-  pageBreakBefore?: Token<CSS.Property.PageBreakBefore>
-  /**
-   * The CSS `page-break-inside` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/page-break-inside
+   * @see https://developer.mozilla.org/docs/Web/CSS/place-self
    */
-  pageBreakInside?: Token<CSS.Property.PageBreakInside>
+  placeSelf?: CSSToken<CSS.Property.PlaceSelf>
   /**
-   * The CSS `paint-order` property.
+   * ### pointer-events
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/paint-order
-   */
-  paintOrder?: Token<CSS.Property.PaintOrder>
-  /**
-   * The CSS `padding-bottom` property.
+   * The <code>pointer-events</code> CSS property sets whether a user can interact with an element using a mouse, touch, or other pointing input device.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
-   */
-  pb?: Token<CSS.Property.PaddingBottom | number, "spaces">
-  /**
-   * The CSS `padding-inline-end` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
+   * @see https://developer.mozilla.org/docs/Web/CSS/pointer-events
    */
-  pe?: Token<CSS.Property.PaddingInlineEnd | number, "spaces">
+  pointerEvents?: CSSToken<CSS.Property.PointerEvents>
   /**
-   * The CSS `perspective` property.
+   * ### position
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/perspective
-   */
-  perspective?: Token<CSS.Property.Perspective>
-  /**
-   * The CSS `perspective-origin` property.
+   * The <code>position</code> CSS property sets the origin position of an element to an element, the element's scrollport, or the viewport.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/perspective-origin
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/position
    */
-  perspectiveOrigin?: Token<CSS.Property.PerspectiveOrigin>
+  pos?: CSSToken<CSS.Property.Position>
   /**
-   * The CSS `padding-left` property.
+   * ### position
+   *
+   * The <code>position</code> CSS property sets the origin position of an element to an element, the element's scrollport, or the viewport.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/position
    */
-  pl?: Token<CSS.Property.PaddingLeft | number, "spaces">
+  position?: CSSToken<CSS.Property.Position>
   /**
-   * The CSS `place-content` property.
+   * ### position-anchor
+   *
+   * Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/position-anchor
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/place-content
+   * @experimental
    */
-  placeContent?: Token<CSS.Property.PlaceContent>
+  positionAnchor?: CSSToken<string & {}>
   /**
-   * The CSS `place-items` property.
+   * ### position-area
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/place-items
+   * Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/position-area
+   *
+   * @experimental
    */
-  placeItems?: Token<CSS.Property.PlaceItems>
+  positionArea?: CSSToken<string & {}>
   /**
-   * The CSS `place-self` property.
+   * ### position-try
+   *
+   * Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/place-self
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/position-try
+   *
+   * @experimental
    */
-  placeSelf?: Token<CSS.Property.PlaceSelf>
+  positionTry?: CSSToken<string & {}>
   /**
-   * The CSS `pointer-events` property.
+   * ### position-try-fallbacks
+   *
+   * Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
+   *
+   * @baseline `Limited available`
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events
+   * @see https://developer.mozilla.org/docs/Web/CSS/position-try-fallbacks
+   *
+   * @experimental
    */
-  pointerEvents?: Token<CSS.Property.PointerEvents>
+  positionTryFallbacks?: CSSToken<string & {}>
   /**
-   * The CSS `position` property.
+   * ### position-try-order
+   *
+   * Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/position
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/position-try-order
+   *
+   * @experimental
    */
-  pos?: Token<CSS.Property.Position>
+  positionTryOrder?: CSSToken<string & {}>
   /**
-   * The CSS `position` property.
+   * ### position-visibility
+   *
+   * Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/position
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/position-visibility
+   *
+   * @experimental
    */
-  position?: Token<CSS.Property.Position>
+  positionVisibility?: CSSToken<string & {}>
   /**
-   * The CSS `padding-right` property.
+   * ### padding-right
+   *
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
    */
-  pr?: Token<CSS.Property.PaddingRight | number, "spaces">
+  pr?: CSSToken<CSS.Property.PaddingRight | number, "spaces">
   /**
-   * The CSS `print-color-adjust` property.
+   * ### print-color-adjust
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/print-color-adjust
+   * The <code>print-color-adjust</code> CSS property sets whether styles of printed pages should be adjusted to use less ink, in cases such as light text on a dark background.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/print-color-adjust
    */
-  printColorAdjust?: Token<CSS.Property.PrintColorAdjust>
+  printColorAdjust?: CSSToken<CSS.Property.PrintColorAdjust>
   /**
-   * The CSS `padding-inline-start` property.
+   * ### padding-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  ps?: Token<CSS.Property.PaddingInlineStart | number, "spaces">
+  ps?: CSSToken<CSS.Property.PaddingInlineStart | number, "spaces">
   /**
-   * The CSS `padding-top` property.
+   * ### padding-top
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  pt?: Token<CSS.Property.PaddingTop | number, "spaces">
+  pt?: CSSToken<CSS.Property.PaddingTop | number, "spaces">
   /**
-   * The CSS `padding-inline-start` and `padding-inline-end` property.
+   * ### quotes
+   *
+   * The <code>quotes</code> CSS property sets the quotation marks inserted via the <code>content</code> CSS property or <code>&#x3C;q></code> element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2023-10-26
+   * @newly_available_date 2021-04-26
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-end
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline-start
+   * @see https://developer.mozilla.org/docs/Web/CSS/quotes
    */
-  px?: Token<
-    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
-    "spaces"
-  >
+  quotes?: CSSToken<CSS.Property.Quotes>
   /**
-   * The CSS `padding-top` and `padding-bottom` property.
+   * ### r
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/r
    */
-  py?: Token<
-    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
-    "spaces"
-  >
+  r?: CSSToken<string & {}>
   /**
-   * The CSS `quotes` property.
+   * ### reading-flow
+   *
+   * The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation.
+   *
+   * @baseline `Limited available`
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/quotes
+   * @see https://drafts.csswg.org/css-display-4/#reading-flow
+   *
+   * @experimental
    */
-  quotes?: Token<CSS.Property.Quotes>
+  readingFlow?: CSSToken<string & {}>
   /**
-   * The CSS `resize` property.
+   * ### resize
+   *
+   * The <code>resize</code> CSS property sets whether an element can be resized by the user, and on which axes.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/resize
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/resize
    */
-  resize?: Token<CSS.Property.Resize>
+  resize?: CSSToken<CSS.Property.Resize>
   /**
-   * The CSS `right` property.
+   * ### right
+   *
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/right
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/right
    */
-  right?: Token<CSS.Property.Right | number, "spaces">
+  right?: CSSToken<CSS.Property.Right | number, "spaces">
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-rotate`.
+   * ### rotate
+   *
+   * The <code>translate</code>, <code>rotate</code>, and <code>scale</code> CSS properties apply single transformations independently, as opposed to applying multiple transformations with the <code>transform</code> CSS property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2025-02-05
+   * @newly_available_date 2022-08-05
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/rotate
    */
-  rotate?: Token<StringLiteral>
+  rotate?: CSSToken<CSS.Property.Rotate>
   /**
-   * The CSS `border-radius` property.
+   * ### border-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
    */
-  rounded?: Token<CSS.Property.BorderRadius | number, "radii">
+  rounded?: CSSToken<CSS.Property.BorderRadius | number, "radii">
   /**
-   * The CSS `border-bottom-left-radius` and `border-bottom-right-radius` property.
+   * ### border-bottom-left-radius
+   *
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-bottom-right-radius
+   *
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  roundedBottom?: Token<
+  roundedBottom?: CSSToken<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-end-end-radius` property.
+   * ### border-end-end-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
    */
-  roundedBottomEnd?: Token<CSS.Property.BorderEndEndRadius | number, "radii">
+  roundedBottomEnd?: CSSToken<CSS.Property.BorderEndEndRadius | number, "radii">
   /**
-   * The CSS `border-bottom-left-radius` property.
+   * ### border-bottom-left-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
    */
-  roundedBottomLeft?: Token<
+  roundedBottomLeft?: CSSToken<
     CSS.Property.BorderBottomLeftRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-bottom-right-radius` property.
+   * ### border-bottom-right-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  roundedBottomRight?: Token<
+  roundedBottomRight?: CSSToken<
     CSS.Property.BorderBottomRightRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-end-start-radius` property.
+   * ### border-end-start-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  roundedBottomStart?: Token<
+  roundedBottomStart?: CSSToken<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
   /**
-   * The CSS `border-end-start-radius` and `border-end-end-radius` property.
+   * ### border-end-end-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-end-start-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-end-start-radius
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  roundedEnd?: Token<
+  roundedEnd?: CSSToken<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-top-left-radius` and `border-bottom-left-radius` property.
+   * ### border-bottom-left-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-top-left-radius
+   *
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  roundedLeft?: Token<
+  roundedLeft?: CSSToken<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-top-right-radius` and `border-bottom-right-radius` property.
+   * ### border-bottom-right-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-right-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-top-right-radius
+   *
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  roundedRight?: Token<
+  roundedRight?: CSSToken<
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-start-start-radius` and `border-start-end-radius` property.
+   * ### border-start-end-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-start-start-radius
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  roundedStart?: Token<
+  roundedStart?: CSSToken<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-top-left-radius` and `border-top-right-radius` property.
+   * ### border-top-left-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
+   *
+   * ------------------------------------
+   *
+   * ### border-top-right-radius
+   *
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  roundedTop?: Token<
+  roundedTop?: CSSToken<
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
     | number,
     "radii"
   >
   /**
-   * The CSS `border-start-end-radius` property.
+   * ### border-start-end-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-end-radius
-   */
-  roundedTopEnd?: Token<CSS.Property.BorderStartEndRadius | number, "radii">
-  /**
-   * The CSS `border-top-left-radius` property.
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-left-radius
-   */
-  roundedTopLeft?: Token<CSS.Property.BorderTopLeftRadius | number, "radii">
-  /**
-   * The CSS `border-top-right-radius` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-right-radius
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  roundedTopRight?: Token<CSS.Property.BorderTopRightRadius | number, "radii">
+  roundedTopEnd?: CSSToken<CSS.Property.BorderStartEndRadius | number, "radii">
   /**
-   * The CSS `border-start-start-radius` property.
+   * ### border-top-left-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/border-start-start-radius
-   */
-  roundedTopStart?: Token<CSS.Property.BorderStartStartRadius | number, "radii">
-  /**
-   * The CSS `row-gap` property.
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap
-   */
-  rowGap?: Token<CSS.Property.RowGap | number, "spaces">
-  /**
-   * The CSS `ruby-align` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/ruby-align
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  rubyAlign?: Token<CSS.Property.RubyAlign>
+  roundedTopLeft?: CSSToken<CSS.Property.BorderTopLeftRadius | number, "radii">
   /**
-   * The CSS `ruby-position` property.
+   * ### border-top-right-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/ruby-position
-   */
-  rubyPosition?: Token<CSS.Property.RubyPosition>
-  /**
-   * If `filter=auto`, sets the value of `--ui-saturate`.
-   */
-  saturate?: Token<StringLiteral>
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x` and `--ui-scale-y`.
-   */
-  scale?: Token<StringLiteral>
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-x`.
-   */
-  scaleX?: Token<StringLiteral>
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-scale-y`.
-   */
-  scaleY?: Token<StringLiteral>
-  /**
-   * The CSS `scrollbar-color` property.
+   * The <code>border-radius</code> CSS property rounds the corners of the border drawn around an element.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color
-   */
-  scrollbarColor?: Token<CSS.Property.ScrollbarColor, "colors">
-  /**
-   * The CSS `scrollbar-gutter` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  scrollbarGutter?: Token<CSS.Property.ScrollbarGutter>
+  roundedTopRight?: CSSToken<
+    CSS.Property.BorderTopRightRadius | number,
+    "radii"
+  >
   /**
-   * The CSS `scrollbar-width` property.
+   * ### border-start-start-radius
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-width
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  scrollbarWidth?: Token<CSS.Property.ScrollbarWidth | number>
+  roundedTopStart?: CSSToken<
+    CSS.Property.BorderStartStartRadius | number,
+    "radii"
+  >
   /**
-   * The CSS `scroll-behavior` property.
+   * ### row-gap
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior
+   * CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2020-04-17
+   * @newly_available_date 2017-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
-  scrollBehavior?: Token<CSS.Property.ScrollBehavior>
+  rowGap?: CSSToken<CSS.Property.RowGap | number, "spaces">
   /**
-   * The CSS `scroll-margin` property.
+   * ### ruby-align
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin
+   * The <code>ruby-align</code> CSS property sets the spacing and alignment of ruby annotation text when it does not fill its available space.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-12-11
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/ruby-align
    */
-  scrollMargin?: Token<CSS.Property.ScrollMargin | number, "spaces">
+  rubyAlign?: CSSToken<CSS.Property.RubyAlign>
   /**
-   * The CSS `scroll-margin-block` property.
+   * ### ruby-overhang
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-block
+   * The <code>ruby-overhang</code> CSS property sets whether ruby annotations may overlap adjacent text.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-ruby/#propdef-ruby-overhang
    */
-  scrollMarginBlock?: Token<CSS.Property.ScrollMarginBlock>
+  rubyOverhang?: CSSToken<string & {}>
   /**
-   * The CSS `scroll-margin-block-end` property.
+   * ### ruby-position
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-block-end
+   * The <code>ruby-position</code> CSS property sets the position of a ruby annotation in relation to its base text. Annotations can display over, under, or interleaved with the base text.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-12-11
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/ruby-position
    */
-  scrollMarginBlockEnd?: Token<CSS.Property.ScrollMarginBlockEnd>
+  rubyPosition?: CSSToken<CSS.Property.RubyPosition>
   /**
-   * The CSS `scroll-margin-block-start` property.
+   * ### rx
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-block-start
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/rx
    */
-  scrollMarginBlockStart?: Token<CSS.Property.ScrollMarginBlockStart>
+  rx?: CSSToken<string & {}>
   /**
-   * The CSS `scroll-margin-bottom` property.
+   * ### ry
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/ry
    */
-  scrollMarginBottom?: Token<CSS.Property.ScrollMarginBottom | number, "spaces">
+  ry?: CSSToken<string & {}>
   /**
-   * The CSS `scroll-margin-inline` property.
+   * ### scale
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-inline
+   * The <code>translate</code>, <code>rotate</code>, and <code>scale</code> CSS properties apply single transformations independently, as opposed to applying multiple transformations with the <code>transform</code> CSS property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2025-02-05
+   * @newly_available_date 2022-08-05
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scale
    */
-  scrollMarginInline?: Token<CSS.Property.ScrollMarginInline>
+  scale?: CSSToken<CSS.Property.Scale>
   /**
-   * The CSS `scroll-margin-inline-end` property.
+   * ### scrollbar-color
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-inline-end
+   * The <code>scrollbar-color</code> CSS property sets the color of the scrollbar track and thumb.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-color
    */
-  scrollMarginInlineEnd?: Token<CSS.Property.ScrollMarginInlineEnd>
+  scrollbarColor?: CSSToken<CSS.Property.ScrollbarColor, "colors">
   /**
-   * The CSS `scroll-margin-inline-start` property.
+   * ### scrollbar-gutter
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-inline-start
+   * The <code>scrollbar-gutter</code> CSS property reserves space for the scrollbar, preventing unwanted layout changes as the scrollbar appears and disappears.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-12-11
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-gutter
    */
-  scrollMarginInlineStart?: Token<CSS.Property.ScrollMarginInlineStart>
+  scrollbarGutter?: CSSToken<CSS.Property.ScrollbarGutter>
   /**
-   * The CSS `scroll-margin-left` property.
+   * ### scrollbar-width
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-left
+   * The <code>scrollbar-width</code> CSS property sets the width of the scrollbar.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-12-11
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-width
    */
-  scrollMarginLeft?: Token<CSS.Property.ScrollMarginLeft | number, "spaces">
+  scrollbarWidth?: CSSToken<CSS.Property.ScrollbarWidth | number>
   /**
-   * The CSS `scroll-margin-right` property.
+   * ### scroll-behavior
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-right
+   * The <code>scroll-behavior</code> CSS property controls whether scrolling is smooth or snaps, for scroll actions not performed by the user such as those triggered by navigation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-14
+   * @newly_available_date 2022-03-14
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-behavior
    */
-  scrollMarginRight?: Token<CSS.Property.ScrollMarginRight | number, "spaces">
+  scrollBehavior?: CSSToken<CSS.Property.ScrollBehavior>
   /**
-   * The CSS `scroll-margin-top` property.
+   * ### scroll-initial-target
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
+   * The CSS `scroll-initial-target` property.
+   *
+   * @see https://drafts.csswg.org/css-scroll-snap-2/#propdef-scroll-initial-target
+   *
+   * @experimental
    */
-  scrollMarginTop?: Token<CSS.Property.ScrollMarginTop | number, "spaces">
+  scrollInitialTarget?: CSSToken<string & {}>
   /**
-   * The CSS `scroll-margin-left` and `scroll-margin-right` property.
+   * ### scroll-margin
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-right
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin
    */
-  scrollMarginX?: Token<
-    CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
+  scrollMargin?: CSSToken<CSS.Property.ScrollMargin | number, "spaces">
+  /**
+   * ### scroll-margin-block
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block
+   */
+  scrollMarginBlock?: CSSToken<CSS.Property.ScrollMarginBlock>
+  /**
+   * ### scroll-margin-block-end
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-end
+   */
+  scrollMarginBlockEnd?: CSSToken<CSS.Property.ScrollMarginBlockEnd>
+  /**
+   * ### scroll-margin-block-start
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-start
+   */
+  scrollMarginBlockStart?: CSSToken<CSS.Property.ScrollMarginBlockStart>
+  /**
+   * ### scroll-margin-bottom
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom
+   */
+  scrollMarginBottom?: CSSToken<
+    CSS.Property.ScrollMarginBottom | number,
     "spaces"
   >
   /**
-   * The CSS `scroll-margin-top` and `scroll-margin-bottom` property.
+   * ### scroll-margin-inline
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline
    */
-  scrollMarginY?: Token<
-    CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
+  scrollMarginInline?: CSSToken<CSS.Property.ScrollMarginInline>
+  /**
+   * ### scroll-margin-inline-end
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-end
+   */
+  scrollMarginInlineEnd?: CSSToken<CSS.Property.ScrollMarginInlineEnd>
+  /**
+   * ### scroll-margin-inline-start
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-start
+   */
+  scrollMarginInlineStart?: CSSToken<CSS.Property.ScrollMarginInlineStart>
+  /**
+   * ### scroll-margin-left
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left
+   */
+  scrollMarginLeft?: CSSToken<CSS.Property.ScrollMarginLeft | number, "spaces">
+  /**
+   * ### scroll-margin-right
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
+   */
+  scrollMarginRight?: CSSToken<
+    CSS.Property.ScrollMarginRight | number,
     "spaces"
   >
   /**
-   * The CSS `scroll-padding` property.
+   * ### scroll-margin-top
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
    */
-  scrollPadding?: Token<CSS.Property.ScrollPadding | number, "spaces">
+  scrollMarginTop?: CSSToken<CSS.Property.ScrollMarginTop | number, "spaces">
   /**
-   * The CSS `scroll-padding-block` property.
+   * ### scroll-padding
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-block
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding
    */
-  scrollPaddingBlock?: Token<CSS.Property.ScrollPaddingBlock>
+  scrollPadding?: CSSToken<CSS.Property.ScrollPadding | number, "spaces">
   /**
-   * The CSS `scroll-padding-block-end` property.
+   * ### scroll-padding-block
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-block-end
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block
    */
-  scrollPaddingBlockEnd?: Token<CSS.Property.ScrollPaddingBlockEnd>
+  scrollPaddingBlock?: CSSToken<CSS.Property.ScrollPaddingBlock>
   /**
-   * The CSS `scroll-padding-block-start` property.
+   * ### scroll-padding-block-end
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-block-start
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-end
    */
-  scrollPaddingBlockStart?: Token<CSS.Property.ScrollPaddingBlockStart>
+  scrollPaddingBlockEnd?: CSSToken<CSS.Property.ScrollPaddingBlockEnd>
   /**
-   * The CSS `scroll-padding-bottom` property.
+   * ### scroll-padding-block-start
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-start
    */
-  scrollPaddingBottom?: Token<
+  scrollPaddingBlockStart?: CSSToken<CSS.Property.ScrollPaddingBlockStart>
+  /**
+   * ### scroll-padding-bottom
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom
+   */
+  scrollPaddingBottom?: CSSToken<
     CSS.Property.ScrollPaddingBottom | number,
     "spaces"
   >
   /**
-   * The CSS `scroll-padding-inline` property.
+   * ### scroll-padding-inline
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-inline
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline
    */
-  scrollPaddingInline?: Token<CSS.Property.ScrollPaddingInline>
+  scrollPaddingInline?: CSSToken<CSS.Property.ScrollPaddingInline>
   /**
-   * The CSS `scroll-padding-inline-end` property.
+   * ### scroll-padding-inline-end
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-inline-end
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-end
    */
-  scrollPaddingInlineEnd?: Token<CSS.Property.ScrollPaddingInlineEnd>
+  scrollPaddingInlineEnd?: CSSToken<CSS.Property.ScrollPaddingInlineEnd>
   /**
-   * The CSS `scroll-padding-inline-start` property.
+   * ### scroll-padding-inline-start
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-inline-start
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-start
    */
-  scrollPaddingInlineStart?: Token<CSS.Property.ScrollPaddingInlineStart>
+  scrollPaddingInlineStart?: CSSToken<CSS.Property.ScrollPaddingInlineStart>
   /**
-   * The CSS `scroll-padding-left` property.
+   * ### scroll-padding-left
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-left
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left
    */
-  scrollPaddingLeft?: Token<CSS.Property.ScrollPaddingLeft | number, "spaces">
+  scrollPaddingLeft?: CSSToken<
+    CSS.Property.ScrollPaddingLeft | number,
+    "spaces"
+  >
   /**
-   * The CSS `scroll-padding-right` property.
+   * ### scroll-padding-right
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-right
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
    */
-  scrollPaddingRight?: Token<CSS.Property.ScrollPaddingRight | number, "spaces">
+  scrollPaddingRight?: CSSToken<
+    CSS.Property.ScrollPaddingRight | number,
+    "spaces"
+  >
   /**
-   * The CSS `scroll-padding-top` property.
+   * ### scroll-padding-top
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
    */
-  scrollPaddingTop?: Token<CSS.Property.ScrollPaddingTop | number, "spaces">
+  scrollPaddingTop?: CSSToken<CSS.Property.ScrollPaddingTop | number, "spaces">
   /**
-   * The CSS `scroll-padding-left` and `scroll-padding-right` property.
+   * ### scroll-snap-align
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-left
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-right
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align
    */
-  scrollPaddingX?: Token<
+  scrollSnapAlign?: CSSToken<CSS.Property.ScrollSnapAlign>
+  /**
+   * ### scroll-snap-stop
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop
+   */
+  scrollSnapStop?: CSSToken<CSS.Property.ScrollSnapStop>
+  /**
+   * ### scroll-snap-type
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type
+   */
+  scrollSnapType?: CSSToken<CSS.Property.ScrollSnapType>
+  /**
+   * ### scroll-timeline
+   *
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-timeline
+   *
+   * @experimental
+   */
+  scrollTimeline?: CSSToken<CSS.Property.ScrollTimeline>
+  /**
+   * ### scroll-timeline-axis
+   *
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-timeline-axis
+   *
+   * @experimental
+   */
+  scrollTimelineAxis?: CSSToken<CSS.Property.ScrollTimelineAxis>
+  /**
+   * ### scroll-timeline-name
+   *
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-timeline-name
+   *
+   * @experimental
+   */
+  scrollTimelineName?: CSSToken<CSS.Property.ScrollTimelineName>
+  /**
+   * ### box-shadow
+   *
+   * The <code>box-shadow</code> CSS property applies shadow effects around an element's frame. This can create drop shadow and inner shadow effects.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/box-shadow
+   */
+  shadow?: CSSToken<CSS.Property.BoxShadow, "shadows">
+  /**
+   * ### shape-image-threshold
+   *
+   * The <code>shape-outside</code> CSS property, along with <code>shape-margin</code> and <code>shape-image-threshold</code>, sets the shape around which adjacent content will wrap.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/shape-image-threshold
+   */
+  shapeImageThreshold?: CSSToken<CSS.Property.ShapeImageThreshold>
+  /**
+   * ### shape-margin
+   *
+   * The <code>shape-outside</code> CSS property, along with <code>shape-margin</code> and <code>shape-image-threshold</code>, sets the shape around which adjacent content will wrap.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/shape-margin
+   */
+  shapeMargin?: CSSToken<CSS.Property.ShapeMargin>
+  /**
+   * ### shape-outside
+   *
+   * The <code>shape-outside</code> CSS property, along with <code>shape-margin</code> and <code>shape-image-threshold</code>, sets the shape around which adjacent content will wrap.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/shape-outside
+   */
+  shapeOutside?: CSSToken<CSS.Property.ShapeOutside>
+  /**
+   * ### shape-rendering
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/shape-rendering
+   */
+  shapeRendering?: CSSToken<CSS.Property.ShapeRendering>
+  /**
+   * ### speak
+   *
+   * The <code>speak</code> CSS property sets whether or not text should be spoken.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-speech-1/#speaking-props-speak
+   */
+  speak?: CSSToken<string & {}>
+  /**
+   * ### speak-as
+   *
+   * The <code>speak-as</code> CSS property sets how any element's content is spoken. Not to be confused with the <code>speak-as</code> descriptor of <code>@counter-style</code> at-rules.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-speech-1/#speaking-props-speak-as
+   *
+   * @experimental
+   */
+  speakAs?: CSSToken<string & {}>
+  /**
+   * ### stop-color
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/stop-color
+   */
+  stopColor?: CSSToken<CSS.Property.StopColor>
+  /**
+   * ### stop-opacity
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/stop-opacity
+   */
+  stopOpacity?: CSSToken<CSS.Property.StopOpacity>
+  /**
+   * ### stroke
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/stroke
+   */
+  stroke?: CSSToken<CSS.Property.Stroke, "colors">
+  /**
+   * ### stroke-color
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://drafts.fxtf.org/fill-stroke-3/#stroke-color
+   *
+   * @experimental
+   */
+  strokeColor?: CSSToken<string & {}>
+  /**
+   * ### stroke-dasharray
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-dasharray
+   */
+  strokeDasharray?: CSSToken<CSS.Property.StrokeDasharray>
+  /**
+   * ### stroke-dashoffset
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-dashoffset
+   */
+  strokeDashoffset?: CSSToken<CSS.Property.StrokeDashoffset | number>
+  /**
+   * ### stroke-linecap
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-linecap
+   */
+  strokeLinecap?: CSSToken<CSS.Property.StrokeLinecap>
+  /**
+   * ### stroke-linejoin
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-linejoin
+   */
+  strokeLinejoin?: CSSToken<CSS.Property.StrokeLinejoin>
+  /**
+   * ### stroke-miterlimit
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-miterlimit
+   */
+  strokeMiterlimit?: CSSToken<CSS.Property.StrokeMiterlimit>
+  /**
+   * ### stroke-opacity
+   *
+   * The <code>fill-opacity</code>, and <code>stroke-opacity</code> SVG attributes and CSS properties control the transparency of a stroke or fill of an SVG element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date ≤2022-09-24
+   * @newly_available_date ≤2020-03-24
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-opacity
+   */
+  strokeOpacity?: CSSToken<CSS.Property.StrokeOpacity>
+  /**
+   * ### stroke-width
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/stroke-width
+   */
+  strokeWidth?: CSSToken<CSS.Property.StrokeWidth | number>
+  /**
+   * ### table-layout
+   *
+   * The <code>&#x3C;table></code> HTML element, with several related elements, represents tabular data in rows and columns of cells.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/table-layout
+   */
+  tableLayout?: CSSToken<CSS.Property.TableLayout>
+  /**
+   * ### tab-size
+   *
+   * The <code>tab-size</code> CSS property sets the width of the tab character.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-02-10
+   * @newly_available_date 2021-08-10
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/tab-size
+   */
+  tabSize?: CSSToken<CSS.Property.TabSize>
+  /**
+   * ### font-size
+   *
+   * The <code>font-size</code> CSS property sets the text height.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/font-size
+   */
+  text?: CSSToken<CSS.Property.FontSize | number, "fontSizes">
+  /**
+   * ### text-align
+   *
+   * The <code>text-align</code> CSS property sets the horizontal placement of the inner content of a block element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-align
+   */
+  textAlign?: CSSToken<CSS.Property.TextAlign>
+  /**
+   * ### text-align-last
+   *
+   * The <code>text-align-last</code> CSS property sets the alignment of the last line of text before a forced line break.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2022-09-12
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-align-last
+   */
+  textAlignLast?: CSSToken<CSS.Property.TextAlignLast>
+  /**
+   * ### text-anchor
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-anchor
+   */
+  textAnchor?: CSSToken<CSS.Property.TextAnchor>
+  /**
+   * ### text-box
+   *
+   * The <code>text-box</code> CSS property sets the spacing above and below text based on a font's typographic features. For example, <code>text-box: trim-both ex alphabetic</code> trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-inline-3/#text-box-shorthand
+   */
+  textBox?: CSSToken<string & {}>
+  /**
+   * ### text-box-edge
+   *
+   * The <code>text-box</code> CSS property sets the spacing above and below text based on a font's typographic features. For example, <code>text-box: trim-both ex alphabetic</code> trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-inline-3/#text-box-edge
+   */
+  textBoxEdge?: CSSToken<string & {}>
+  /**
+   * ### text-box-trim
+   *
+   * The <code>text-box</code> CSS property sets the spacing above and below text based on a font's typographic features. For example, <code>text-box: trim-both ex alphabetic</code> trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-inline-3/#text-box-trim
+   */
+  textBoxTrim?: CSSToken<string & {}>
+  /**
+   * ### color
+   *
+   * The <code>color</code> CSS property sets the primary foreground color of an element, which is used for text, the default border color, and text decorations.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/color
+   */
+  textColor?: CSSToken<CSS.Property.Color, "colors">
+  /**
+   * ### text-combine-upright
+   *
+   * The <code>text-combine-upright</code> CSS property displays multiple characters in the space of a single character in vertical text. This is used in East Asian documents to display Latin-based strings such as components of a date or letters of an initialism.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-14
+   * @newly_available_date 2022-03-14
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-combine-upright
+   */
+  textCombineUpright?: CSSToken<CSS.Property.TextCombineUpright>
+  /**
+   * ### text-decoration
+   *
+   * The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration
+   */
+  textDecor?: CSSToken<CSS.Property.TextDecoration>
+  /**
+   * ### text-decoration
+   *
+   * The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration
+   */
+  textDecoration?: CSSToken<CSS.Property.TextDecoration>
+  /**
+   * ### text-decoration-color
+   *
+   * The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-color
+   */
+  textDecorationColor?: CSSToken<CSS.Property.TextDecorationColor, "colors">
+  /**
+   * ### text-decoration-line
+   *
+   * The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-line
+   */
+  textDecorationLine?: CSSToken<CSS.Property.TextDecorationLine>
+  /**
+   * ### text-decoration-skip
+   *
+   * The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip
+   *
+   * @experimental
+   */
+  textDecorationSkip?: CSSToken<CSS.Property.TextDecorationSkip>
+  /**
+   * ### text-decoration-skip-ink
+   *
+   * The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip-ink
+   */
+  textDecorationSkipInk?: CSSToken<CSS.Property.TextDecorationSkipInk>
+  /**
+   * ### text-decoration-style
+   *
+   * The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-style
+   */
+  textDecorationStyle?: CSSToken<CSS.Property.TextDecorationStyle>
+  /**
+   * ### text-decoration-thickness
+   *
+   * The <code>text-decoration</code> CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-thickness
+   */
+  textDecorationThickness?: CSSToken<CSS.Property.TextDecorationThickness>
+  /**
+   * ### text-emphasis
+   *
+   * The <code>text-emphasis</code> CSS property sets position and style for text emphasis marks, especially for East Asian languages.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-03
+   * @newly_available_date 2022-03-03
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis
+   */
+  textEmphasis?: CSSToken<CSS.Property.TextEmphasis>
+  /**
+   * ### text-emphasis-color
+   *
+   * The <code>text-emphasis</code> CSS property sets position and style for text emphasis marks, especially for East Asian languages.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-03
+   * @newly_available_date 2022-03-03
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-color
+   */
+  textEmphasisColor?: CSSToken<CSS.Property.TextEmphasisColor, "colors">
+  /**
+   * ### text-emphasis-position
+   *
+   * The <code>text-emphasis</code> CSS property sets position and style for text emphasis marks, especially for East Asian languages.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-03
+   * @newly_available_date 2022-03-03
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-position
+   */
+  textEmphasisPosition?: CSSToken<CSS.Property.TextEmphasisPosition>
+  /**
+   * ### text-emphasis-style
+   *
+   * The <code>text-emphasis</code> CSS property sets position and style for text emphasis marks, especially for East Asian languages.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-03
+   * @newly_available_date 2022-03-03
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-style
+   */
+  textEmphasisStyle?: CSSToken<CSS.Property.TextEmphasisStyle>
+  /**
+   * ### text-indent
+   *
+   * The <code>text-indent</code> CSS property sets the size of the empty space (indentation) at the beginning of lines in a text.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-indent
+   */
+  textIndent?: CSSToken<CSS.Property.TextIndent>
+  /**
+   * ### text-justify
+   *
+   * The <code>text-justify</code> CSS property sets the justification method of text when <code>text-align: justify</code> is set.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-justify
+   */
+  textJustify?: CSSToken<CSS.Property.TextJustify>
+  /**
+   * ### text-orientation
+   *
+   * The <code>text-orientation</code> CSS property sets the how text is typeset within a line when the writing mode is vertical.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2023-03-16
+   * @newly_available_date 2020-09-16
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-orientation
+   */
+  textOrientation?: CSSToken<CSS.Property.TextOrientation>
+  /**
+   * ### text-overflow
+   *
+   * The <code>text-overflow</code> CSS property sets how hidden overflow content appears to users. The property can clip content, truncate content with an ellipsis (…), or truncate with a custom string.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-overflow
+   */
+  textOverflow?: CSSToken<CSS.Property.TextOverflow>
+  /**
+   * ### text-rendering
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-rendering
+   */
+  textRendering?: CSSToken<CSS.Property.TextRendering>
+  /**
+   * ### text-shadow
+   *
+   * The <code>text-shadow</code> CSS property sets the position and styles of shadow on text.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-shadow
+   */
+  textShadow?: CSSToken<CSS.Property.TextShadow, "shadows">
+  /**
+   * ### text-size-adjust
+   *
+   * The <code>text-size-adjust</code> CSS property disables or modifies the browser's default text size adjustment for small screen sizes.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-size-adjust
+   *
+   * @experimental
+   */
+  textSizeAdjust?: CSSToken<CSS.Property.TextSizeAdjust>
+  /**
+   * ### text-spacing-trim
+   *
+   * The <code>text-spacing-trim</code> CSS property controls spacing around CJK characters, avoiding excessive whitespace when using full-width punctuation characters.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-spacing-trim
+   *
+   * @experimental
+   */
+  textSpacingTrim?: CSSToken<string & {}>
+  /**
+   * ### text-transform
+   *
+   * The <code>text-transform</code> CSS property sets text case and capitalization.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-transform
+   */
+  textTransform?: CSSToken<CSS.Property.TextTransform>
+  /**
+   * ### text-underline-offset
+   *
+   * The <code>text-underline-position</code> and <code>text-underline-offset</code> CSS properties set the position and distance from initial position of text underlines on text with <code>text-decoration: underline</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2023-05-19
+   * @newly_available_date 2020-11-19
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-offset
+   */
+  textUnderlineOffset?: CSSToken<CSS.Property.TextUnderlineOffset>
+  /**
+   * ### text-underline-position
+   *
+   * The <code>text-underline-position</code> and <code>text-underline-offset</code> CSS properties set the position and distance from initial position of text underlines on text with <code>text-decoration: underline</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2023-05-19
+   * @newly_available_date 2020-11-19
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-position
+   */
+  textUnderlinePosition?: CSSToken<CSS.Property.TextUnderlinePosition>
+  /**
+   * ### text-wrap
+   *
+   * The <code>text-wrap</code> CSS property sets how lines break in text that overflows the container. It is a shorthand for <code>text-wrap-style</code> and <code>text-wrap-mode</code>.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-03-19
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap
+   */
+  textWrap?: CSSToken<CSS.Property.TextWrap>
+  /**
+   * ### text-wrap-mode
+   *
+   * The <code>text-wrap-mode</code> CSS property sets whether lines may wrap with the values <code>wrap</code> and <code>nowrap</code>. It is a longhand property for both <code>white-space</code> and <code>text-wrap</code>.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-10-17
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-mode
+   */
+  textWrapMode?: CSSToken<string & {}>
+  /**
+   * ### text-wrap-style
+   *
+   * The <code>text-wrap-style</code> CSS property sets how lines break in text that overflows the container. It can also be set with the <code>text-wrap</code> shorthand.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-style
+   */
+  textWrapStyle?: CSSToken<string & {}>
+  /**
+   * ### timeline-scope
+   *
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/timeline-scope
+   *
+   * @experimental
+   */
+  timelineScope?: CSSToken<CSS.Property.TimelineScope>
+  /**
+   * ### top
+   *
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/top
+   */
+  top?: CSSToken<CSS.Property.Top | number, "spaces">
+  /**
+   * ### touch-action
+   *
+   * The <code>touch-action</code> CSS property sets whether an element on a touch screen can be panned or pinched to zoom.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-03-19
+   * @newly_available_date 2019-09-19
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/touch-action
+   */
+  touchAction?: CSSToken<CSS.Property.TouchAction>
+  /**
+   * ### letter-spacing
+   *
+   * The <code>letter-spacing</code> CSS property controls the amount of space between each letter in an element or block of text.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
+   */
+  tracking?: CSSToken<CSS.Property.LetterSpacing, "letterSpacings">
+  /**
+   * ### transform
+   *
+   * The <code>transform</code> CSS property and its 2D transform functions allow rotating, scaling, skewing, and translating an element. Arbitrary 2D transforms are also possible using a transformation matrix.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/transform
+   */
+  transform?: CSSToken<CSS.Property.Transform>
+  /**
+   * ### transform-box
+   *
+   * The <code>transform-box</code> CSS property sets the position and dimensions of the reference box relative to which an element's transformations are calculated.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-04-16
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/transform-box
+   */
+  transformBox?: CSSToken<CSS.Property.TransformBox>
+  /**
+   * ### transform-origin
+   *
+   * The <code>transform</code> CSS property and its 2D transform functions allow rotating, scaling, skewing, and translating an element. Arbitrary 2D transforms are also possible using a transformation matrix.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/transform-origin
+   */
+  transformOrigin?: CSSToken<CSS.Property.TransformOrigin>
+  /**
+   * ### transform-style
+   *
+   * The <code>transform</code> CSS property and its 3D transform functions allow rotations and other transforms in three dimensions, including perspective transforms.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-09-14
+   * @newly_available_date 2022-03-14
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/transform-style
+   */
+  transformStyle?: CSSToken<CSS.Property.TransformStyle>
+  /**
+   * ### transition-behavior
+   *
+   * The <code>transition-behavior: allow-discrete</code> CSS declaration allows transitions for properties whose animation behavior is discrete. Such properties can't be interpolated and swap from their start value to the end value at 50%.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-08-06
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/transition-behavior
+   */
+  transitionBehavior?: CSSToken<CSS.Property.TransitionBehavior>
+  /**
+   * ### transition-delay
+   *
+   * The <code>transition</code> shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/transition-delay
+   */
+  transitionDelay?: CSSToken<CSS.Property.TransitionDelay>
+  /**
+   * ### transition-duration
+   *
+   * The <code>transition</code> shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/transition-duration
+   */
+  transitionDuration?: CSSToken<CSS.Property.TransitionDuration, "durations">
+  /**
+   * ### transition-timing-function
+   *
+   * The <code>transition</code> shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/transition-timing-function
+   */
+  transitionTimingFunction?: CSSToken<
+    CSS.Property.TransitionTimingFunction,
+    "easings"
+  >
+  /**
+   * ### unicode-bidi
+   *
+   * The <code>unicode-bidi</code> and <code>direction</code> CSS properties override the Unicode layout algorithm. They are intended for Document Type Definition (DTD) designers. For HTML documents, you should use the <code>dir</code> global HTML attribute and <code>&#x3C;bdo></code> HTML element instead.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/unicode-bidi
+   */
+  unicodeBidi?: CSSToken<CSS.Property.UnicodeBidi>
+  /**
+   * ### user-modify
+   *
+   * The CSS `user-modify` property.
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/user-modify
+   *
+   * @deprecated
+   */
+  userModify?: CSSToken<string & {}>
+  /**
+   * ### user-select
+   *
+   * The <code>user-select</code> CSS property controls which elements can be selected by the user.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/user-select
+   */
+  userSelect?: CSSToken<CSS.Property.UserSelect>
+  /**
+   * ### vector-effect
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/vector-effect
+   */
+  vectorEffect?: CSSToken<CSS.Property.VectorEffect>
+  /**
+   * ### vertical-align
+   *
+   * The <code>vertical-align</code> CSS property sets the vertical alignment of inline, inline-block, and table cell elements. It has no effect on block-level elements.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/vertical-align
+   */
+  verticalAlign?: CSSToken<CSS.Property.VerticalAlign>
+  /**
+   * ### view-timeline
+   *
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/view-timeline
+   *
+   * @experimental
+   */
+  viewTimeline?: CSSToken<CSS.Property.ViewTimeline>
+  /**
+   * ### view-timeline-axis
+   *
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/view-timeline-axis
+   *
+   * @experimental
+   */
+  viewTimelineAxis?: CSSToken<CSS.Property.ViewTimelineAxis>
+  /**
+   * ### view-timeline-inset
+   *
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/view-timeline-inset
+   *
+   * @experimental
+   */
+  viewTimelineInset?: CSSToken<CSS.Property.ViewTimelineInset>
+  /**
+   * ### view-timeline-name
+   *
+   * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/view-timeline-name
+   *
+   * @experimental
+   */
+  viewTimelineName?: CSSToken<CSS.Property.ViewTimelineName>
+  /**
+   * ### view-transition-class
+   *
+   * The <code>view-transition-class</code> CSS property sets a name that can be used to apply styles to multiple named view transition pseudo-elements.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-view-transitions-2/#view-transition-class-prop
+   */
+  viewTransitionClass?: CSSToken<string & {}>
+  /**
+   * ### view-transition-name
+   *
+   * View transitions allow you to create animated visual transitions between different states of a document.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/view-transition-name
+   */
+  viewTransitionName?: CSSToken<CSS.Property.ViewTransitionName>
+  /**
+   * ### visibility
+   *
+   * The <code>visibility</code> CSS property sets whether an element is shown. Invisible elements still affect the document layout.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/visibility
+   */
+  visibility?: CSSToken<CSS.Property.Visibility>
+  /**
+   * ### width
+   *
+   * The <code>width</code> and <code>height</code> CSS properties set the preferred physical size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/width
+   */
+  w?: CSSToken<CSS.Property.Width | number, "sizes">
+  /**
+   * ### white-space
+   *
+   * The <code>white-space</code> CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for <code>white-space-collapse</code> and <code>text-wrap-mode</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/white-space
+   */
+  whiteSpace?: CSSToken<CSS.Property.WhiteSpace>
+  /**
+   * ### white-space-collapse
+   *
+   * The <code>white-space-collapse</code> CSS property sets whether new line characters are shown as line breaks, and whether multiple consecutive spaces are all displayed or combined.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-03-19
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/white-space-collapse
+   */
+  whiteSpaceCollapse?: CSSToken<CSS.Property.WhiteSpaceCollapse>
+  /**
+   * ### widows
+   *
+   * The <code>widows</code> and <code>orphans</code> CSS properties set the minimum lines included in a text fragment created by page, column, or region breaks.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/widows
+   */
+  widows?: CSSToken<CSS.Property.Widows>
+  /**
+   * ### width
+   *
+   * The <code>width</code> and <code>height</code> CSS properties set the preferred physical size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/width
+   */
+  width?: CSSToken<CSS.Property.Width | number, "sizes">
+  /**
+   * ### will-change
+   *
+   * The <code>will-change</code> CSS property gives hints to the browser about expected changes to an element's scroll position, contents, or style. These hints allow browsers to optimize for upcoming style changes.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/will-change
+   */
+  willChange?: CSSToken<CSS.Property.WillChange>
+  /**
+   * ### word-break
+   *
+   * The <code>word-break</code> CSS property sets how lines break within words.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/word-break
+   */
+  wordBreak?: CSSToken<CSS.Property.WordBreak>
+  /**
+   * ### word-spacing
+   *
+   * The <code>word-spacing</code> CSS property sets the amount of white space between words.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/word-spacing
+   */
+  wordSpacing?: CSSToken<CSS.Property.WordSpacing>
+  /**
+   * ### writing-mode
+   *
+   * The <code>writing-mode</code> CSS property sets whether text is laid out horizontally or vertically, and left to right, or right to left.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2019-09-27
+   * @newly_available_date 2017-03-27
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/writing-mode
+   */
+  writingMode?: CSSToken<CSS.Property.WritingMode>
+  /**
+   * ### x
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/x
+   */
+  x?: CSSToken<string & {}>
+  /**
+   * ### y
+   *
+   * The SVG image format, represented by the <code>&#x3C;svg></code> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/y
+   */
+  y?: CSSToken<string & {}>
+  /**
+   * ### z-index
+   *
+   * The <code>z-index</code> CSS property orders overlapping elements, with higher values appearing in front of or on top of lower values.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/z-index
+   */
+  z?: CSSToken<CSS.Property.ZIndex, "zIndices">
+  /**
+   * ### z-index
+   *
+   * The <code>z-index</code> CSS property orders overlapping elements, with higher values appearing in front of or on top of lower values.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/z-index
+   */
+  zIndex?: CSSToken<CSS.Property.ZIndex, "zIndices">
+  /**
+   * ### zoom
+   *
+   * The <code>zoom</code> CSS property scales the size of an element. Unlike the <code>transform</code> property, a zoomed element affects page layout.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2024-05-14
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/zoom
+   */
+  zoom?: CSSToken<CSS.Property.Zoom>
+  /**
+
+*/
+  colorMode?: CSSToken<CSS.Property.ColorScheme>
+  /**
+   * Sets the value of `--contrast`.
+   */
+  contrast?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--drop-shadow`.
+   */
+  dropShadow?: CSSToken<StringLiteral, "shadows">
+  /**
+   * The focus ring is used to identify the currently focused element.
+   */
+  focusRing?: CSSToken<
+    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
+  >
+  /**
+   * Sets the value of `--focus-ring-color`.
+   */
+  focusRingColor?: CSSToken<StringLiteral, "colors">
+  /**
+   * Sets the value of `--focus-ring-offset`.
+   */
+  focusRingOffset?: CSSToken<number | StringLiteral, "spaces">
+  /**
+   * Sets the value of `--focus-ring-style`.
+   */
+  focusRingStyle?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--focus-ring-width`.
+   */
+  focusRingWidth?: CSSToken<StringLiteral>
+  /**
+   * The focus ring is used to identify the currently focused element.
+   */
+  focusVisibleRing?: CSSToken<
+    "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
+  >
+  /**
+   * Sets the value of `--grayscale`.
+   */
+  grayscale?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--hue-rotate`.
+   */
+  hueRotate?: CSSToken<StringLiteral>
+  /**
+   * ### left
+   *
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/left
+   *
+   * ------------------------------------
+   *
+   * ### right
+   *
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/right
+   */
+  insetX?: CSSToken<CSS.Property.Left | CSS.Property.Right | number, "spaces">
+  /**
+   * ### bottom
+   *
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/bottom
+   *
+   * ------------------------------------
+   *
+   * ### top
+   *
+   * The physical CSS properties, <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code>, set the inset position of an element relative to the corresponding side of a container determined by the element's <code>position</code> property.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/top
+   */
+  insetY?: CSSToken<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
+  /**
+   * Sets the value of `--invert`.
+   */
+  invert?: CSSToken<StringLiteral>
+  /**
+   * ### keyframes
+   *
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/@keyframes
+   */
+  keyframes?: CSSToken<
+    StringLiteral | { [key: string]: CSSObject },
+    "keyframes"
+  >
+  /**
+   * Used to visually truncate a text after a number of lines.
+   * ### line-clamp
+   *
+   * The <code>line-clamp</code> CSS property limits the text in a block container to a certain number of lines. The prefixed <code>-webkit-line-clamp</code> is widely supported but only works with <code>-webkit-box-orient: vertical</code> in combination with <code>display: -webkit-box</code> or <code>display: -webkit-inline-box</code>.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/line-clamp
+   */
+  lineClamp?: CSSToken<number>
+  /**
+   * ### margin-inline-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   *
+   * ------------------------------------
+   *
+   * ### margin-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   */
+  marginX?: CSSToken<
+    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
+    "spaces"
+  >
+  /**
+   * ### margin-bottom
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   *
+   * ------------------------------------
+   *
+   * ### margin-top
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
+   */
+  marginY?: CSSToken<
+    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
+    "spaces"
+  >
+  /**
+   * ### max-height
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/max-height
+   *
+   * ------------------------------------
+   *
+   * ### max-width
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/max-width
+   */
+  maxBoxSize?: CSSToken<
+    CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
+    "sizes"
+  >
+  /**
+   * ### min-height
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/min-height
+   *
+   * ------------------------------------
+   *
+   * ### min-width
+   *
+   * The <code>min-width</code>, <code>min-height</code>, <code>max-width</code>, and <code>max-height</code> CSS properties set the minimum and maximum size of an element.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/min-width
+   */
+  minBoxSize?: CSSToken<
+    CSS.Property.MinHeight | CSS.Property.MinWidth | number,
+    "sizes"
+  >
+  /**
+   * ### margin-inline-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
+   *
+   * ------------------------------------
+   *
+   * ### margin-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
+   */
+  mx?: CSSToken<
+    CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
+    "spaces"
+  >
+  /**
+   * ### margin-bottom
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
+   *
+   * ------------------------------------
+   *
+   * ### margin-top
+   *
+   * The <code>margin</code> CSS property sets space around an element. It is a shorthand for <code>margin-top</code>, <code>margin-right</code>, <code>margin-bottom</code>, and <code>margin-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
+   */
+  my?: CSSToken<
+    CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
+    "spaces"
+  >
+  /**
+   * ### outline
+   *
+   * The <code>outline</code> CSS shorthand sets the color, style, and width of a line around an element, outside of the border.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-03-27
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/outline
+   */
+  outline?: CSSToken<"inside" | "mixed" | "outside" | CSS.Property.Outline>
+  /**
+   * ### padding-inline-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   *
+   * ------------------------------------
+   *
+   * ### padding-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   */
+  paddingX?: CSSToken<
+    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
+    "spaces"
+  >
+  /**
+   * ### padding-bottom
+   *
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   *
+   * ------------------------------------
+   *
+   * ### padding-top
+   *
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
+   */
+  paddingY?: CSSToken<
+    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
+    "spaces"
+  >
+  /**
+   * ### padding-inline-end
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
+   *
+   * ------------------------------------
+   *
+   * ### padding-inline-start
+   *
+   * CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, <code>block-end</code> refers to the bottom. Also known as flow relative.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2024-03-20
+   * @newly_available_date 2021-09-20
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
+   */
+  px?: CSSToken<
+    CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
+    "spaces"
+  >
+  /**
+   * ### padding-bottom
+   *
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
+   *
+   * ------------------------------------
+   *
+   * ### padding-top
+   *
+   * The <code>padding</code> CSS property sets space between an element's edge and its contents. It is a shorthand for <code>padding-top</code>, <code>padding-right</code>, <code>padding-bottom</code>, and <code>padding-left</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
+   */
+  py?: CSSToken<
+    CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
+    "spaces"
+  >
+  /**
+   * Sets the value of `--rotate-x`.
+   */
+  rotateX?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--rotate-y`.
+   */
+  rotateY?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--rotate-z`.
+   */
+  rotateZ?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--saturate`.
+   */
+  saturate?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--scale-x`.
+   */
+  scaleX?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--scale-y`.
+   */
+  scaleY?: CSSToken<StringLiteral>
+  /**
+   * Sets the value of `--scale-z`.
+   */
+  scaleZ?: CSSToken<StringLiteral>
+  /**
+   * ### scroll-margin-left
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left
+   *
+   * ------------------------------------
+   *
+   * ### scroll-margin-right
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
+   */
+  scrollMarginX?: CSSToken<
+    CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
+    "spaces"
+  >
+  /**
+   * ### scroll-margin-bottom
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom
+   *
+   * ------------------------------------
+   *
+   * ### scroll-margin-top
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
+   */
+  scrollMarginY?: CSSToken<
+    CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
+    "spaces"
+  >
+  /**
+   * ### scroll-padding-left
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left
+   *
+   * ------------------------------------
+   *
+   * ### scroll-padding-right
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
+   */
+  scrollPaddingX?: CSSToken<
     CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
     "spaces"
   >
   /**
-   * The CSS `scroll-padding-top` and `scroll-padding-bottom` property.
+   * ### scroll-padding-bottom
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-bottom
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom
+   *
+   * ------------------------------------
+   *
+   * ### scroll-padding-top
+   *
+   * CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
    */
-  scrollPaddingY?: Token<
+  scrollPaddingY?: CSSToken<
     CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
     "spaces"
   >
   /**
-   * The CSS `scroll-snap-align` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-align
-   */
-  scrollSnapAlign?: Token<CSS.Property.ScrollSnapAlign>
-  /**
-   * The CSS `scroll-snap-stop` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-stop
-   */
-  scrollSnapStop?: Token<CSS.Property.ScrollSnapStop>
-  /**
-   * The CSS `scroll-snap-type` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type
-   */
-  scrollSnapType?: Token<CSS.Property.ScrollSnapType>
-  /**
-   * The CSS `scroll-timeline` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline
-   */
-  scrollTimeline?: Token<CSS.Property.ScrollTimeline>
-  /**
-   * The CSS `scroll-timeline-axis` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline-axis
-   */
-  scrollTimelineAxis?: Token<CSS.Property.ScrollTimelineAxis>
-  /**
-   * The CSS `scroll-timeline-name` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-timeline-name
-   */
-  scrollTimelineName?: Token<CSS.Property.ScrollTimelineName>
-  /**
-   * If `filter=auto`, sets the value of `--ui-sepia`.
-   */
-  sepia?: Token<StringLiteral>
-  /**
-   * The CSS `box-shadow` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
-   */
-  shadow?: Token<CSS.Property.BoxShadow, "shadows">
-  /**
-   * The CSS `shape-image-threshold` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-image-threshold
-   */
-  shapeImageThreshold?: Token<CSS.Property.ShapeImageThreshold>
-  /**
-   * The CSS `shape-margin` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-margin
-   */
-  shapeMargin?: Token<CSS.Property.ShapeMargin>
-  /**
-   * The CSS `shape-outside` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-outside
-   */
-  shapeOutside?: Token<CSS.Property.ShapeOutside>
-  /**
-   * The CSS `shape-rendering` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/shape-rendering
-   */
-  shapeRendering?: Token<CSS.Property.ShapeRendering>
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-x`.
-   */
-  skewX?: Token<StringLiteral>
-  /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-skew-y`.
-   */
-  skewY?: Token<StringLiteral>
-  /**
-   * The CSS `stop-color` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stop-color
-   */
-  stopColor?: Token<CSS.Property.StopColor>
-  /**
-   * The CSS `stop-opacity` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stop-opacity
-   */
-  stopOpacity?: Token<CSS.Property.StopOpacity>
-  /**
-   * The CSS `stroke` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke
-   */
-  stroke?: Token<CSS.Property.Stroke, "colors">
-  /**
-   * The CSS `stroke-dasharray` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-dasharray
-   */
-  strokeDasharray?: Token<CSS.Property.StrokeDasharray>
-  /**
-   * The CSS `stroke-dashoffset` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-dashoffset
-   */
-  strokeDashoffset?: Token<CSS.Property.StrokeDashoffset | number>
-  /**
-   * The CSS `stroke-linecap` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-linecap
-   */
-  strokeLinecap?: Token<CSS.Property.StrokeLinecap>
-  /**
-   * The CSS `stroke-linejoin` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-linejoin
-   */
-  strokeLinejoin?: Token<CSS.Property.StrokeLinejoin>
-  /**
-   * The CSS `stroke-miterlimit` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-miterlimit
-   */
-  strokeMiterlimit?: Token<CSS.Property.StrokeMiterlimit>
-  /**
-   * The CSS `stroke-opacity` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-opacity
-   */
-  strokeOpacity?: Token<CSS.Property.StrokeOpacity>
-  /**
-   * The CSS `stroke-width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/stroke-width
-   */
-  strokeWidth?: Token<CSS.Property.StrokeWidth | number>
-  /**
-   * The CSS `table-layout` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
-   */
-  tableLayout?: Token<CSS.Property.TableLayout>
-  /**
-   * The CSS `tab-size` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/tab-size
-   */
-  tabSize?: Token<CSS.Property.TabSize>
-  /**
-   * The CSS `font-size` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/font-size
-   */
-  text?: Token<CSS.Property.FontSize | number, "fontSizes">
-  /**
-   * The CSS `text-align` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-align
-   */
-  textAlign?: Token<CSS.Property.TextAlign>
-  /**
-   * The CSS `text-align-last` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-align-last
-   */
-  textAlignLast?: Token<CSS.Property.TextAlignLast>
-  /**
-   * The CSS `text-anchor` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-anchor
-   */
-  textAnchor?: Token<CSS.Property.TextAnchor>
-  /**
-   * The CSS `color` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/color
-   */
-  textColor?: Token<CSS.Property.Color, "colors">
-  /**
-   * The CSS `text-combine-upright` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-combine-upright
-   */
-  textCombineUpright?: Token<CSS.Property.TextCombineUpright>
-  /**
-   * The CSS `text-decoration` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
-   */
-  textDecor?: Token<CSS.Property.TextDecoration>
-  /**
-   * The CSS `text-decoration` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration
-   */
-  textDecoration?: Token<CSS.Property.TextDecoration>
-  /**
-   * The CSS `text-decoration-color` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-color
-   */
-  textDecorationColor?: Token<CSS.Property.TextDecorationColor, "colors">
-  /**
-   * The CSS `text-decoration-line` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-line
-   */
-  textDecorationLine?: Token<CSS.Property.TextDecorationLine>
-  /**
-   * The CSS `text-decoration-skip` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
-   */
-  textDecorationSkip?: Token<CSS.Property.TextDecorationSkip>
-  /**
-   * The CSS `text-decoration-skip-ink` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip-ink
-   */
-  textDecorationSkipInk?: Token<CSS.Property.TextDecorationSkipInk>
-  /**
-   * The CSS `text-decoration-style` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
-   */
-  textDecorationStyle?: Token<CSS.Property.TextDecorationStyle>
-  /**
-   * The CSS `text-decoration-thickness` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-thickness
-   */
-  textDecorationThickness?: Token<CSS.Property.TextDecorationThickness>
-  /**
-   * The CSS `text-emphasis` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis
-   */
-  textEmphasis?: Token<CSS.Property.TextEmphasis>
-  /**
-   * The CSS `text-emphasis-color` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-color
-   */
-  textEmphasisColor?: Token<CSS.Property.TextEmphasisColor, "colors">
-  /**
-   * The CSS `text-emphasis-position` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-position
-   */
-  textEmphasisPosition?: Token<CSS.Property.TextEmphasisPosition>
-  /**
-   * The CSS `text-emphasis-style` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-emphasis-style
-   */
-  textEmphasisStyle?: Token<CSS.Property.TextEmphasisStyle>
-  /**
-   * The CSS `text-indent` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-indent
-   */
-  textIndent?: Token<CSS.Property.TextIndent>
-  /**
-   * The CSS `text-justify` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-justify
-   */
-  textJustify?: Token<CSS.Property.TextJustify>
-  /**
-   * The CSS `text-orientation` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-orientation
-   */
-  textOrientation?: Token<CSS.Property.TextOrientation>
-  /**
-   * The CSS `text-overflow` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
-   */
-  textOverflow?: Token<CSS.Property.TextOverflow>
-  /**
-   * The CSS `text-rendering` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-rendering
-   */
-  textRendering?: Token<CSS.Property.TextRendering>
-  /**
-   * The CSS `text-shadow` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
-   */
-  textShadow?: Token<CSS.Property.TextShadow, "shadows">
-  /**
-   * The CSS `text-size-adjust` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
-   */
-  textSizeAdjust?: Token<CSS.Property.TextSizeAdjust>
-  /**
-   * The CSS `text-transform` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform
-   */
-  textTransform?: Token<CSS.Property.TextTransform>
-  /**
-   * The CSS `text-underline-offset` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-offset
-   */
-  textUnderlineOffset?: Token<CSS.Property.TextUnderlineOffset>
-  /**
-   * The CSS `text-underline-position` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-position
-   */
-  textUnderlinePosition?: Token<CSS.Property.TextUnderlinePosition>
-  /**
-   * The CSS `text-wrap` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap
-   */
-  textWrap?: Token<CSS.Property.TextWrap>
-  /**
-   * The CSS `timeline-scope` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/timeline-scope
+   * Sets the value of `--sepia`.
    */
-  timelineScope?: Token<CSS.Property.TimelineScope>
+  sepia?: CSSToken<StringLiteral>
   /**
-   * The CSS `top` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/top
-   */
-  top?: Token<CSS.Property.Top | number, "spaces">
-  /**
-   * The CSS `touch-action` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action
-   */
-  touchAction?: Token<CSS.Property.TouchAction>
-  /**
-   * The CSS `letter-spacing` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing
-   */
-  tracking?: Token<CSS.Property.LetterSpacing, "letterSpacings">
-  /**
-   * The CSS `transform` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform
-   */
-  transform?: Token<CSS.Property.Transform>
-  /**
-   * The CSS `transform-box` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform-box
-   */
-  transformBox?: Token<CSS.Property.TransformBox>
-  /**
-   * The CSS `transform-origin` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin
-   */
-  transformOrigin?: Token<CSS.Property.TransformOrigin>
-  /**
-   * The CSS `transform-style` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transform-style
+   * Sets the value of `--skew-x`.
    */
-  transformStyle?: Token<CSS.Property.TransformStyle>
+  skewX?: CSSToken<StringLiteral>
   /**
-   * The CSS `transition` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+   * Sets the value of `--skew-y`.
    */
-  transition?: Token<CSS.Property.Transition>
+  skewY?: CSSToken<StringLiteral>
   /**
-   * The CSS `transition-behavior` property.
+   * ### transition
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-behavior
-   */
-  transitionBehavior?: Token<CSS.Property.TransitionBehavior>
-  /**
-   * The CSS `transition-delay` property.
+   * The <code>transition</code> shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay
-   */
-  transitionDelay?: Token<CSS.Property.TransitionDelay>
-  /**
-   * The CSS `transition-duration` property.
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration
+   * @see https://developer.mozilla.org/docs/Web/CSS/transition
    */
-  transitionDuration?: Token<
-    CSS.Property.TransitionDuration,
-    "transitionDuration"
+  transition?: CSSToken<
+    | "all"
+    | "backgrounds"
+    | "colors"
+    | "common"
+    | "opacity"
+    | "position"
+    | "shadow"
+    | "size"
+    | CSS.Property.Transition
   >
   /**
-   * The CSS `transition-property` property.
+   * ### transition-property
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property
+   * The <code>transition</code> shorthand CSS property sets how changes to an element's styles may occur over time. Transitions can be applied to specific CSS properties, all properties, or none.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/transition-property
    */
-  transitionProperty?: Token<
-    CSS.Property.TransitionProperty,
-    "transitionProperty"
+  transitionProperty?: CSSToken<
+    | "all"
+    | "backgrounds"
+    | "colors"
+    | "common"
+    | "opacity"
+    | "position"
+    | "shadow"
+    | "size"
+    | CSS.Property.TransitionProperty
   >
   /**
-   * The CSS `transition-timing-function` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function
+   * Sets the value of `--translate-x`.
    */
-  transitionTimingFunction?: Token<
-    CSS.Property.TransitionTimingFunction,
-    "transitionEasing"
-  >
+  translateX?: CSSToken<number | StringLiteral, "spaces">
   /**
-   * The CSS `translate` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/translate
+   * Sets the value of `--translate-y`.
    */
-  translate?: Token<"no" | "yes" | CSS.Property.Translate>
+  translateY?: CSSToken<number | StringLiteral, "spaces">
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-x`.
+   * Sets the value of `--translate-z`.
    */
-  translateX?: Token<number | StringLiteral, "spaces">
+  translateZ?: CSSToken<StringLiteral>
   /**
-   * If `transform=auto` or `transform=auto-3d`, sets the value of `--ui-translate-y`.
+   * If `true`, it clamps truncate a text after one line.
    */
-  translateY?: Token<number | StringLiteral, "spaces">
-  /**
-   * The CSS `unicode-bidi` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/unicode-bidi
-   */
-  unicodeBidi?: Token<CSS.Property.UnicodeBidi>
-  /**
-   * The CSS `user-select` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
-   */
-  userSelect?: Token<CSS.Property.UserSelect>
+  truncated?: CSSToken<boolean>
   /**
    * Set CSS variables.
-   * @experimental
-   *
-   * @example
-   * ```jsx
-   * <Box
-   *   vars={[{ name:"space", token: "spaces", value: "md" }]
-   *   m="calc($space * 2)"
-   * >
-   *   Box
-   * </Box>
-   * ```
    */
-  vars?: {
-    name: string
-    token?: ThemeToken
-    value?: Token<any>
-  }[]
+  vars?: { name: string; token?: ThemeToken; value?: CSSToken<any> }[]
   /**
-   * The CSS `vector-effect` property.
+   * ### container
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/vector-effect
-   */
-  vectorEffect?: Token<CSS.Property.VectorEffect>
-  /**
-   * The CSS `vertical-align` property.
+   * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
-   */
-  verticalAlign?: Token<CSS.Property.VerticalAlign>
-  /**
-   * The CSS `view-timeline` property.
+   * @baseline `Newly available`
+   * @newly_available_date 2023-02-14
    *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline
-   */
-  viewTimeline?: Token<CSS.Property.ViewTimeline>
-  /**
-   * The CSS `view-timeline-axis` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline-axis
-   */
-  viewTimelineAxis?: Token<CSS.Property.ViewTimelineAxis>
-  /**
-   * The CSS `view-timeline-inset` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline-inset
-   */
-  viewTimelineInset?: Token<CSS.Property.ViewTimelineInset>
-  /**
-   * The CSS `view-timeline-name` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-timeline-name
-   */
-  viewTimelineName?: Token<CSS.Property.ViewTimelineName>
-  /**
-   * The CSS `view-transition-name` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/view-transition-name
-   */
-  viewTransitionName?: Token<CSS.Property.ViewTransitionName>
-  /**
-   * The CSS `visibility` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
-   */
-  visibility?: Token<CSS.Property.Visibility>
-  /**
-   * The CSS `width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
-   */
-  w?: Token<CSS.Property.Width | number, "sizes">
-  /**
-   * The CSS `white-space` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/white-space
-   */
-  whiteSpace?: Token<CSS.Property.WhiteSpace>
-  /**
-   * The CSS `white-space-collapse` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/white-space-collapse
-   */
-  whiteSpaceCollapse?: Token<CSS.Property.WhiteSpaceCollapse>
-  /**
-   * The CSS `widows` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/widows
-   */
-  widows?: Token<CSS.Property.Widows>
-  /**
-   * The CSS `width` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/width
-   */
-  width?: Token<CSS.Property.Width | number, "sizes">
-  /**
-   * The CSS `will-change` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/will-change
-   */
-  willChange?: Token<CSS.Property.WillChange>
-  /**
-   * The CSS `word-break` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/word-break
-   */
-  wordBreak?: Token<CSS.Property.WordBreak>
-  /**
-   * The CSS `word-spacing` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/word-spacing
-   */
-  wordSpacing?: Token<CSS.Property.WordSpacing>
-  /**
-   * The CSS `writing-mode` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode
-   */
-  writingMode?: Token<CSS.Property.WritingMode>
-  /**
-   * The CSS `z-index` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
-   */
-  z?: Token<CSS.Property.ZIndex, "zIndices">
-  /**
-   * The CSS `z-index` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/z-index
-   */
-  zIndex?: Token<CSS.Property.ZIndex, "zIndices">
-  /**
-   * The CSS `zoom` property.
-   *
-   * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/zoom
-   */
-  zoom?: Token<CSS.Property.Zoom>
-  /**
-   * The `@container` of CSS at-rule.
-   * @experimental
-   *
-   * @example
-   * ```jsx
-   * <Box containerType="size">
-   *   <Text _container={[{ maxW: "1200px", css: { color: "red" } }]}>
-   *     Box
-   *   </Text>
-   * </Box>
-   * ```
+   * @see https://developer.mozilla.org/docs/Web/CSS/@container
    */
   _container?: {
     [key: string]: any
     name?: StringLiteral
     css?: CSSObject
     aspectRatio?: CSS.Property.AspectRatio
-    blockSize?: CSS.Property.BlockSize | number | Theme["sizes"]
-    h?: CSS.Property.Height | number | Theme["sizes"]
-    height?: CSS.Property.Height | number | Theme["sizes"]
-    inlineSize?: CSS.Property.InlineSize | number | Theme["sizes"]
+    blockSize?: CSS.Property.BlockSize | number | ThemeTokens["sizes"]
+    h?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    height?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    inlineSize?: CSS.Property.InlineSize | number | ThemeTokens["sizes"]
     maxAspectRatio?: CSS.Property.AspectRatio
-    maxBlockSize?: CSS.Property.MaxBlockSize | number | Theme["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxInlineSize?: CSS.Property.MaxInlineSize | number | Theme["sizes"]
-    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
+    maxBlockSize?: CSS.Property.MaxBlockSize | number | ThemeTokens["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxInlineSize?: CSS.Property.MaxInlineSize | number | ThemeTokens["sizes"]
+    maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
     minAspectRatio?: CSS.Property.AspectRatio
-    minBlockSize?: CSS.Property.MinBlockSize | number | Theme["sizes"]
-    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minInlineSize?: CSS.Property.MinInlineSize | number | Theme["sizes"]
-    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
+    minBlockSize?: CSS.Property.MinBlockSize | number | ThemeTokens["sizes"]
+    minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minInlineSize?: CSS.Property.MinInlineSize | number | ThemeTokens["sizes"]
+    minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
     orientation?: "landscape" | "portrait" | StringLiteral
     query?: StringLiteral
-    w?: CSS.Property.Width | number | Theme["sizes"]
-    width?: CSS.Property.Width | number | Theme["sizes"]
+    w?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    width?: CSS.Property.Width | number | ThemeTokens["sizes"]
   }[]
   /**
-   * The `@media` of CSS at-rule.
-   * @experimental
+   * ### media
    *
-   * @example
-   * ```jsx
-   * <Box
-   *   _media={[{ maxW: "1200px", css: { color: "red" } }]
-   * >
-   *   Box
-   * </Box>
-   * ```
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   */
+  _landscape?: CSSToken<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
   _media?: {
     [key: string]: any
@@ -6134,8 +10316,8 @@ export interface StyleProps {
     colorGamut?: "p3" | "rec2020" | "srgb" | StringLiteral
     colorIndex?: number | StringLiteral
     deviceAspectRatio?: CSS.Property.AspectRatio
-    deviceHeight?: CSS.Property.Height | number | Theme["sizes"]
-    deviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    deviceHeight?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    deviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
     displayMode?:
       | "browser"
       | "fullscreen"
@@ -6146,33 +10328,33 @@ export interface StyleProps {
       | StringLiteral
     dynamicRange?: "high" | "standard" | StringLiteral
     forcedColors?: "active" | "none" | StringLiteral
-    grid?: "StringLiteral" | 0 | 1
-    h?: CSS.Property.Height | number | Theme["sizes"]
-    height?: CSS.Property.Height | number | Theme["sizes"]
+    grid?: 0 | 1 | "StringLiteral"
+    h?: CSS.Property.Height | number | ThemeTokens["sizes"]
+    height?: CSS.Property.Height | number | ThemeTokens["sizes"]
     hover?: "hover" | "none" | StringLiteral
     invertedColors?: "inverted" | "none" | StringLiteral
     maxColor?: number | StringLiteral
     maxColorIndex?: number | StringLiteral
     maxDeviceAspectRatio?: CSS.Property.AspectRatio
-    maxDeviceHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxH?: CSS.Property.MaxHeight | number | Theme["sizes"]
-    maxHeight?: CSS.Property.MaxHeight | number | Theme["sizes"]
+    maxDeviceHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
+    maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
     maxMonochrome?: number | StringLiteral
     maxResolution?: StringLiteral
-    maxW?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    maxWidth?: CSS.Property.MaxWidth | number | Theme["sizes"]
-    mazDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
+    maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
+    maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
+    mazDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
     minColor?: number | StringLiteral
     minColorIndex?: number | StringLiteral
     minDeviceAspectRatio?: CSS.Property.AspectRatio
-    minDeviceHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minDeviceWidth?: CSS.Property.Width | number | Theme["sizes"]
-    minH?: CSS.Property.MinHeight | number | Theme["sizes"]
-    minHeight?: CSS.Property.MinHeight | number | Theme["sizes"]
+    minDeviceHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
+    minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
     minMonochrome?: number | StringLiteral
     minResolution?: StringLiteral
-    minW?: CSS.Property.MinWidth | number | Theme["sizes"]
-    minWidth?: CSS.Property.MinWidth | number | Theme["sizes"]
+    minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
+    minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
     monochrome?: number | StringLiteral
     orientation?: "landscape" | "portrait" | StringLiteral
     overflowBlock?:
@@ -6197,21 +10379,79 @@ export interface StyleProps {
     scripting?: "enabled" | "initial-only" | "none" | StringLiteral
     update?: "fast" | "none" | "slow" | StringLiteral
     videoDynamicRange?: "high" | "standard" | StringLiteral
-    w?: CSS.Property.Width | number | Theme["sizes"]
-    width?: CSS.Property.Width | number | Theme["sizes"]
+    w?: CSS.Property.Width | number | ThemeTokens["sizes"]
+    width?: CSS.Property.Width | number | ThemeTokens["sizes"]
   }[]
   /**
-   * The `@supports` of CSS at-rule.
-   * @experimental
+   * ### media
    *
-   * @example
-   * ```jsx
-   * <Box containerType="size">
-   *   <Text _supports={[{ display: "flex", css: { display: "flex" } }]}>
-   *     Box
-   *   </Text>
-   * </Box>
-   * ```
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   */
+  _mediaDark?: CSSToken<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   */
+  _mediaLight?: CSSToken<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   */
+  _mediaReduceMotion?: CSSToken<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   */
+  _portrait?: CSSToken<CSSObject>
+  /**
+   * ### media
+   *
+   * The <code>@media</code> CSS rule conditionally applies styles based on the output device type, its capabilities, and the user's preferences. Media queries are composed of an optional media type such as <code>screen</code> or <code>print</code>, and one or more mandatory media features, such as <code>prefers-reduced-animations</code>.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-01-29
+   * @newly_available_date 2015-07-29
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/@media
+   */
+  _print?: CSSToken<CSSObject>
+  /**
+   * ### supports
+   *
+   * The <code>@supports</code> at-rule applies styles based on a browser's support for CSS features, such as a CSS property and value. Also known as feature queries.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/@supports
    */
   _supports?: { css?: CSSObject; query?: StringLiteral }[]
 }

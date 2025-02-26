@@ -10,16 +10,10 @@ export const breadcrumbStyle = defineComponentSlotStyle({
       display: "inline-flex",
     },
     link: {
-      outline: "none",
+      rounded: "l1",
       textDecoration: "none",
-      transitionDuration: "fast",
+      transitionDuration: "moderate",
       transitionProperty: "common",
-      transitionTimingFunction: "ease-out",
-      _notCurrent: {
-        _focusVisible: {
-          boxShadow: "outline",
-        },
-      },
     },
     list: {
       alignItems: "center",

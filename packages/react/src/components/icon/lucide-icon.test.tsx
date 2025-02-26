@@ -13,7 +13,7 @@ describe("Lucide icon", () => {
   })
 
   test("renders icons correctly", () => {
-    const Icon: FC<{ name: IconNames } & IconProps> = ({ name, ...rest }) => {
+    const Icon: FC<IconProps & { name: IconNames }> = ({ name, ...rest }) => {
       const Icon = icons[name]
 
       return <Icon {...rest} />
@@ -25,6 +25,6 @@ describe("Lucide icon", () => {
 
 describe("<LucideIcon />", () => {
   test("renders Icon correctly", () => {
-    render(<LucideIcon icon={burger} />)
+    render(<LucideIcon iconNode={burger} />)
   })
 })

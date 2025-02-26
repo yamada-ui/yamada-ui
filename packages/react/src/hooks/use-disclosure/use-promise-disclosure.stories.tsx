@@ -1,6 +1,7 @@
 import type { Meta } from "@storybook/react"
 import { Button } from "../../components/button"
-import { Dialog } from "../../components/modal"
+import { Modal } from "../../components/modal"
+// import { Dialog } from "../../components/modal"
 import { Text } from "../../components/text"
 import { usePromiseDisclosure } from "./use-promise-disclosure"
 
@@ -11,7 +12,7 @@ const meta: Meta = {
 export default meta
 
 export const Basic = () => {
-  const { isOpen, onClose, onOpen, onSuccess } = usePromiseDisclosure()
+  const { open, onClose, onOpen, onSuccess } = usePromiseDisclosure()
 
   const onClick = async () => {
     try {
@@ -32,22 +33,25 @@ export const Basic = () => {
 
       <Button onClick={onClick}>わけない</Button>
 
-      <Dialog
+      <Modal.Root
         size="2xl"
+        body={
+          <>
+            <Text>き、きさまらいいかげんにしろーーーっ!!!</Text>
+            <Text>さっさと協力しないかーーーっ!!!</Text>
+            <Text>
+              このミスター・サタンさまのたのみも、きけんというのかーーーっ!!!
+            </Text>
+          </>
+        }
         cancel="わけない"
-        header="ミスター・サタン"
-        open={isOpen}
+        open={open}
         success="わける"
+        title="ミスター・サタン"
         onCancel={onClose}
         onClose={onClose}
         onSuccess={onSuccess}
-      >
-        <Text>き、きさまらいいかげんにしろーーーっ!!!</Text>
-        <Text>さっさと協力しないかーーーっ!!!</Text>
-        <Text>
-          このミスター・サタンさまのたのみも、きけんというのかーーーっ!!!
-        </Text>
-      </Dialog>
+      />
     </>
   )
 }

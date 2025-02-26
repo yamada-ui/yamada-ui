@@ -1,4 +1,4 @@
-import type { AnimationStyle, Theme } from "../../core"
+import type { CSSAnimationObject, Token } from "../../core"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { animation, css } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
@@ -6,23 +6,22 @@ import { getOwnerWindow, isArray, isUndefined, runIfFunc } from "../../utils"
 import { useBoolean } from "../use-boolean"
 import { useEventListener } from "../use-event-listener"
 
-type Styles =
-  | (AnimationStyle | Theme["animations"])[]
-  | AnimationStyle
-  | Theme["animations"]
+type CSSObject =
+  | Token<CSSAnimationObject, "animations">
+  | Token<CSSAnimationObject, "animations">[]
 
 /**
  * `useAnimation` is a custom hook that implements animations similar to CSS `keyframes`.
  *
  * @see Docs https://yamada-ui.com/hooks/use-animation
  */
-export const useAnimation = (styles: Styles): string => {
+export const useAnimation = (cssObj: CSSObject): string => {
   const { theme } = useTheme()
 
-  if (isArray(styles)) {
-    return styles.map((style) => animation(style, { css, theme })).join(", ")
+  if (isArray(cssObj)) {
+    return cssObj.map((cssObj) => animation(cssObj, { css, theme })).join(", ")
   } else {
-    return animation(styles, { css, theme })
+    return animation(cssObj, { css, theme })
   }
 }
 
@@ -33,8 +32,8 @@ export const useAnimation = (styles: Styles): string => {
  */
 export const useDynamicAnimation = <
   T extends
-    | (AnimationStyle | Theme["animations"])[]
-    | { [key: string]: Styles },
+    | Token<CSSAnimationObject, "animations">[]
+    | { [key: string]: CSSObject },
 >(
   arrayOrObj: T,
   init?: (keyof T)[] | keyof T,
@@ -118,17 +117,12 @@ export const useDynamicAnimation = <
 
 export interface UseAnimationObserverProps {
   ref: React.RefObject<HTMLElement | null>
-  /**
-   * @deprecated Use `open` instead
-   */
-  isOpen?: boolean
   open?: boolean
 }
 
 export const useAnimationObserver = ({
   ref,
-  isOpen,
-  open = isOpen,
+  open,
 }: UseAnimationObserverProps) => {
   const [mounted, setMounted] = useState(open)
   const [flg, { on }] = useBoolean()

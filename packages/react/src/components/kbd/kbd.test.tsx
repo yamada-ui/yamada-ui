@@ -1,5 +1,5 @@
+import { Kbd } from "."
 import { a11y, render, screen } from "../../../test"
-import { Kbd } from "./"
 
 describe("<Kbd />", () => {
   test("Kbd renders a11y correctly", async () => {

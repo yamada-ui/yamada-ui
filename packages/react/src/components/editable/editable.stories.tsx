@@ -1,22 +1,16 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
+import { Editable } from "."
 import { Button, ButtonGroup, IconButton } from "../button"
-import { Fieldset } from "../form-control"
+import { Field } from "../field"
 import { CheckIcon, PencilIcon, XIcon } from "../icon"
 import { VStack } from "../stack"
-import {
-  Editable,
-  EditableInput,
-  EditablePreview,
-  EditableTextarea,
-  useEditableControl,
-} from "./"
 
-type Story = StoryFn<typeof Editable>
+type Story = StoryFn<typeof Editable.Root>
 
-const meta: Meta<typeof Editable> = {
-  component: Editable,
+const meta: Meta<typeof Editable.Root> = {
+  component: Editable.Root,
   title: "Components / Editable",
 }
 
@@ -24,91 +18,84 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Editable defaultValue="オッス！オラ悟空！">
-      <EditablePreview />
-      <EditableInput />
-    </Editable>
+    <Editable.Root defaultValue="オッス！オラ悟空！">
+      <Editable.Preview />
+      <Editable.Input />
+    </Editable.Root>
   )
 }
 
-export const WithTextarea: Story = () => {
+export const Textarea: Story = () => {
   return (
-    <Editable
+    <Editable.Root
       defaultValue={`私の戦闘力は530000です。\nですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……`}
-      h="4lh"
     >
-      <EditablePreview />
-      <EditableTextarea h="4lh" />
-    </Editable>
+      <Editable.Preview />
+      <Editable.Textarea />
+    </Editable.Root>
   )
 }
 
-export const WithStartWithEditView: Story = () => {
+export const StartWithEditView: Story = () => {
   return (
-    <Editable defaultValue="オッス！オラ悟空！" startWithEditView>
-      <EditablePreview />
-      <EditableInput aria-legend="Input character serif" />
-    </Editable>
+    <Editable.Root defaultValue="オッス！オラ悟空！" startWithEditView>
+      <Editable.Preview />
+      <Editable.Input aria-label="Input character serif" />
+    </Editable.Root>
   )
 }
 
-export const WithIsPreviewFocusable: Story = () => {
+export const PreviewFocusable: Story = () => {
   return (
-    <Editable defaultValue="オッス！オラ悟空！" previewFocusable={false}>
-      <EditablePreview />
-      <EditableInput />
-    </Editable>
+    <Editable.Root defaultValue="オッス！オラ悟空！" previewFocusable={false}>
+      <Editable.Preview />
+      <Editable.Input />
+    </Editable.Root>
   )
 }
 
-export const WithSubmitOnBlur: Story = () => {
+export const SubmitOnBlur: Story = () => {
   return (
-    <Editable defaultValue="オッス！オラ悟空！" submitOnBlur={false}>
-      <EditablePreview />
-      <EditableInput />
-    </Editable>
+    <Editable.Root defaultValue="オッス！オラ悟空！" submitOnBlur={false}>
+      <Editable.Preview />
+      <Editable.Input />
+    </Editable.Root>
   )
 }
 
-export const WithSelectAllOnFocus: Story = () => {
+export const SelectAllOnFocus: Story = () => {
   return (
-    <Editable defaultValue="オッス！オラ悟空！" selectAllOnFocus={false}>
-      <EditablePreview />
-      <EditableInput />
-    </Editable>
+    <Editable.Root defaultValue="オッス！オラ悟空！" selectAllOnFocus={false}>
+      <Editable.Preview />
+      <Editable.Input />
+    </Editable.Root>
   )
 }
 
-export const WithPlaceholder: Story = () => {
-  return (
-    <Editable placeholder="オッス！オラ悟空！">
-      <EditablePreview />
-      <EditableInput />
-    </Editable>
-  )
-}
-
-export const WithBorderColor: Story = () => {
+export const BorderColor: Story = () => {
   return (
     <>
-      <Editable defaultValue="default border color">
-        <EditablePreview />
-        <EditableInput />
-      </Editable>
+      <Editable.Root defaultValue="Default border color">
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
 
-      <Editable defaultValue="custom border color" focusBorderColor="green.500">
-        <EditablePreview />
-        <EditableInput />
-      </Editable>
+      <Editable.Root
+        defaultValue="Custom border color"
+        focusBorderColor="green.500"
+      >
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
 
-      <Editable
-        defaultValue="custom border color"
+      <Editable.Root
+        defaultValue="Custom border color"
         errorBorderColor="orange.500"
         invalid
       >
-        <EditablePreview />
-        <EditableInput />
-      </Editable>
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
     </>
   )
 }
@@ -116,21 +103,21 @@ export const WithBorderColor: Story = () => {
 export const Disabled: Story = () => {
   return (
     <>
-      <Editable defaultValue="your email address" disabled>
-        <EditablePreview />
-        <EditableInput />
-      </Editable>
+      <Editable.Root defaultValue="Your email address" disabled>
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
 
-      <Fieldset
+      <Field.Root
         disabled
         helperMessage="We'll never share your email."
-        legend="Email address"
+        label="Email address"
       >
-        <Editable defaultValue="your email address">
-          <EditablePreview />
-          <EditableInput />
-        </Editable>
-      </Fieldset>
+        <Editable.Root defaultValue="Your email address">
+          <Editable.Preview />
+          <Editable.Input />
+        </Editable.Root>
+      </Field.Root>
     </>
   )
 }
@@ -138,21 +125,21 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <Editable defaultValue="your email address" readOnly>
-        <EditablePreview />
-        <EditableInput />
-      </Editable>
+      <Editable.Root defaultValue="Your email address" readOnly>
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
 
-      <Fieldset
+      <Field.Root
         helperMessage="We'll never share your email."
-        legend="Email address"
+        label="Email address"
         readOnly
       >
-        <Editable defaultValue="your email address">
-          <EditablePreview />
-          <EditableInput />
-        </Editable>
-      </Fieldset>
+        <Editable.Root defaultValue="Your email address">
+          <Editable.Preview />
+          <Editable.Input />
+        </Editable.Root>
+      </Field.Root>
     </>
   )
 }
@@ -160,66 +147,98 @@ export const Readonly: Story = () => {
 export const Invalid: Story = () => {
   return (
     <>
-      <Editable defaultValue="your email address" invalid>
-        <EditablePreview />
-        <EditableInput />
-      </Editable>
+      <Editable.Root defaultValue="Your email address" invalid>
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
 
-      <Fieldset
+      <Field.Root
         errorMessage="Email is required."
         invalid
-        legend="Email address"
+        label="Email address"
       >
-        <Editable defaultValue="your email address">
-          <EditablePreview />
-          <EditableInput />
-        </Editable>
-      </Fieldset>
+        <Editable.Root defaultValue="Your email address">
+          <Editable.Preview />
+          <Editable.Input />
+        </Editable.Root>
+      </Field.Root>
     </>
+  )
+}
+
+export const Control: Story = () => {
+  return (
+    <Editable.Root defaultValue="オッス！オラ悟空！">
+      <Editable.Preview />
+      <Editable.Input />
+
+      <Editable.Control>
+        <Editable.EditTrigger>
+          <IconButton
+            size="xs"
+            variant="ghost"
+            aria-label="Edit"
+            icon={<PencilIcon />}
+          />
+        </Editable.EditTrigger>
+        <Editable.SubmitTrigger>
+          <IconButton
+            size="xs"
+            variant="outline"
+            aria-label="Submit"
+            icon={<CheckIcon />}
+          />
+        </Editable.SubmitTrigger>
+        <Editable.CancelTrigger>
+          <IconButton
+            size="xs"
+            variant="outline"
+            aria-label="Cancel"
+            icon={<XIcon />}
+          />
+        </Editable.CancelTrigger>
+      </Editable.Control>
+    </Editable.Root>
   )
 }
 
 export const CustomControl: Story = () => {
   const CustomControls = () => {
-    const { editing, getCancelProps, getEditProps, getSubmitProps } =
-      useEditableControl()
+    const { getCancelProps, getEditProps, getSubmitProps } =
+      Editable.useContext()
 
-    return editing ? (
-      <ButtonGroup size="sm" gap="sm">
+    return (
+      <ButtonGroup size="xs">
+        <IconButton
+          icon={<PencilIcon />}
+          {...getEditProps()}
+          variant="ghost"
+          aria-label="Edit"
+        />
+
         <IconButton
           icon={<CheckIcon />}
           {...getSubmitProps()}
-          aria-legend="Submit"
+          variant="outline"
+          aria-label="Submit"
         />
 
         <IconButton
           icon={<XIcon />}
           {...getCancelProps()}
+          variant="outline"
           aria-label="Cancel"
-        />
-      </ButtonGroup>
-    ) : (
-      <ButtonGroup size="sm" gap="sm">
-        <IconButton
-          icon={<PencilIcon />}
-          {...getEditProps()}
-          aria-label="Edit"
         />
       </ButtonGroup>
     )
   }
 
   return (
-    <Editable
-      defaultValue="オッス！オラ悟空！"
-      display="flex"
-      gap="sm"
-      previewFocusable={false}
-    >
-      <EditablePreview w="full" />
-      <EditableInput />
+    <Editable.Root defaultValue="オッス！オラ悟空！" previewFocusable={false}>
+      <Editable.Preview />
+      <Editable.Input />
       <CustomControls />
-    </Editable>
+    </Editable.Root>
   )
 }
 
@@ -247,41 +266,41 @@ export const ReactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <Fieldset
+      <Field.Root
         errorMessage={errors.input?.message}
         invalid={!!errors.input}
-        legend="Name"
+        label="Name"
       >
         <Controller
           name="input"
           control={control}
           render={({ field }) => (
-            <Editable placeholder="孫悟空" {...field}>
-              <EditablePreview />
-              <EditableInput />
-            </Editable>
+            <Editable.Root placeholder="孫悟空" {...field}>
+              <Editable.Preview />
+              <Editable.Input />
+            </Editable.Root>
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </Fieldset>
+      </Field.Root>
 
-      <Fieldset
+      <Field.Root
         errorMessage={errors.textarea?.message}
         invalid={!!errors.textarea}
-        legend="Feedback"
+        label="Feedback"
       >
         <Controller
           name="textarea"
           control={control}
           render={({ field }) => (
-            <Editable placeholder="オッス！オラ悟空！" {...field}>
-              <EditablePreview />
-              <EditableTextarea />
-            </Editable>
+            <Editable.Root placeholder="オッス！オラ悟空！" {...field}>
+              <Editable.Preview />
+              <Editable.Textarea />
+            </Editable.Root>
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </Fieldset>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

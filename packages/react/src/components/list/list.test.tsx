@@ -1,75 +1,25 @@
 import { a11y, render, screen } from "../../../test"
 import { BoxIcon } from "../icon"
-import { DecimalList, DiscList, List, ListIcon, ListItem } from "./"
+import { List } from "./"
 
 describe("<List />", () => {
   test("List renders correctly", async () => {
     const { container } = render(
-      <List>
-        <ListItem>Item one</ListItem>
-      </List>,
+      <List.Root>
+        <List.Item>Item one</List.Item>
+      </List.Root>,
     )
     await a11y(container)
   })
 
-  test("should render an unordered list", async () => {
+  test("should render list with an icon", () => {
     render(
-      <DiscList aria-label="DiscList">
-        <ListItem>List item</ListItem>
-        <ListItem>List item</ListItem>
-      </DiscList>,
+      <List.Root>
+        <List.Item icon={<BoxIcon data-testid="box-icon" />} />
+      </List.Root>,
     )
 
-    const list = await screen.findByRole("list", {
-      name: /DiscList/i,
-    })
-    expect(list).toHaveStyle({
-      "list-style-type": "disc",
-    })
-  })
-
-  test("should render an ordered list", async () => {
-    render(
-      <DecimalList aria-label="DecimalList">
-        <ListItem>One</ListItem>
-        <ListItem>Two</ListItem>
-      </DecimalList>,
-    )
-
-    const list = await screen.findByRole("list", {
-      name: /DecimalList/i,
-    })
-    expect(list).toHaveStyle({
-      "list-style-type": "decimal",
-    })
-  })
-
-  test("should render list with a gap", async () => {
-    render(
-      <List aria-label="List" gap="lg">
-        <ListItem>Item one</ListItem>
-        <ListItem>Item two</ListItem>
-      </List>,
-    )
-
-    const list = await screen.findByRole("list", {
-      name: /List/i,
-    })
-    expect(list).toHaveStyle({
-      gap: "var(--ui-spaces-lg)",
-    })
-  })
-
-  test("should render list with an icon", async () => {
-    render(
-      <List>
-        <ListItem>
-          <ListIcon as={BoxIcon} aria-label="icon" />
-        </ListItem>
-      </List>,
-    )
-
-    const icon = await screen.findByLabelText(/icon/i)
+    const icon = screen.getByTestId("box-icon")
 
     expect(icon).toBeInTheDocument()
   })
@@ -77,23 +27,32 @@ describe("<List />", () => {
   test("should render list with different style types", async () => {
     render(
       <>
-        <List aria-label="list-square" styleType="square">
-          <ListItem>Item</ListItem>
-        </List>
-
-        <List aria-label="list-circle" styleType="circle">
-          <ListItem>Item</ListItem>
-        </List>
+        <List.Root data-testid="disc" styleType="disc">
+          <List.Item>List item</List.Item>
+        </List.Root>
+        <List.Root data-testid="decimal" styleType="decimal">
+          <List.Item>List item</List.Item>
+        </List.Root>
+        <List.Root data-testid="square" styleType="square">
+          <List.Item>Item</List.Item>
+        </List.Root>
+        <List.Root data-testid="circle" styleType="circle">
+          <List.Item>Item</List.Item>
+        </List.Root>
       </>,
     )
 
-    const listSquare = await screen.findByRole("list", {
-      name: /list-square/i,
-    })
-    const listCircle = await screen.findByRole("list", {
-      name: /list-circle/i,
-    })
+    const listDisc = await screen.findByTestId("disc")
+    const listDecimal = await screen.findByTestId("decimal")
+    const listSquare = await screen.findByTestId("square")
+    const listCircle = await screen.findByTestId("circle")
 
+    expect(listDisc).toHaveStyle({
+      "list-style-type": "disc",
+    })
+    expect(listDecimal).toHaveStyle({
+      "list-style-type": "decimal",
+    })
     expect(listSquare).toHaveStyle({
       "list-style-type": "square",
     })

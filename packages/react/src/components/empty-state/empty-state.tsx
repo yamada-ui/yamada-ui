@@ -1,26 +1,13 @@
 import type { ReactNode } from "react"
-import type { CSSUIObject, FC, HTMLUIProps, ThemeProps } from "../../core"
-import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
-import {
-  createContext,
-  cx,
-  findChild,
-  getValidChildren,
-  isEmpty,
-  omitChildren,
-} from "../../utils"
+import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { EmptyState } from "./empty-state.style"
+import { createSlotComponent, ui } from "../../core"
+import { findChild, getValidChildren, isEmpty, omitChildren } from "../../utils"
+import { emptyState } from "./empty-state.style"
 
-interface EmptyStateContext {
-  [key: string]: CSSUIObject | undefined
-}
-
-const [EmptyStateContext, useEmptyStateContext] =
-  createContext<EmptyStateContext>({
-    name: "EmptyStateContext",
-    errorMessage: `useEmptyStateContext returned is 'undefined'. Seems you forgot to wrap the components in "<EmptyState />"`,
-  })
-
-interface EmptyStateOptions {
+export interface EmptyStateRootProps
+  extends Omit<HTMLUIProps, "title">,
+    ThemeProps<EmptyState> {
   /**
    * The empty state description to use.
    */
@@ -51,20 +38,23 @@ interface EmptyStateOptions {
   titleProps?: EmptyStateTitleProps
 }
 
-export interface EmptyStateProps
-  extends Omit<HTMLUIProps, "title">,
-    ThemeProps<"EmptyState">,
-    EmptyStateOptions {}
+export const {
+  PropsContext: EmptyStatePropsContext,
+  usePropsContext: useEmptyStatePropsContext,
+  withContext,
+  withProvider,
+} = createSlotComponent<EmptyStateRootProps, EmptyState>(
+  "empty-state",
+  emptyState,
+)
 
 /**
  * `EmptyState` is used to display when a resource is empty or not available.
  *
- * @see Docs https://yamada-ui.com/components/other/empty-state
+ * @see Docs https://yamada-ui.com/components/empty-state
  */
-export const EmptyState: FC<EmptyStateProps> = (props) => {
-  const [styles, mergedProps] = useComponentMultiStyle("EmptyState", props)
-  const {
-    className,
+export const EmptyStateRoot = withProvider<"div", EmptyStateRootProps>(
+  ({
     children,
     description,
     indicator,
@@ -74,31 +64,25 @@ export const EmptyState: FC<EmptyStateProps> = (props) => {
     indicatorProps,
     titleProps,
     ...rest
-  } = omitThemeProps(mergedProps)
+  }) => {
+    const validChildren = getValidChildren(children)
+    const customIndicator = findChild(validChildren, EmptyStateIndicator)
+    const customContent = findChild(validChildren, EmptyStateContent)
+    const customTitle = findChild(validChildren, EmptyStateTitle)
+    const customDescription = findChild(validChildren, EmptyStateDescription)
 
-  const validChildren = getValidChildren(children)
-  const customIndicator = findChild(validChildren, EmptyStateIndicator)
-  const customContent = findChild(validChildren, EmptyStateContent)
-  const customTitle = findChild(validChildren, EmptyStateTitle)
-  const customDescription = findChild(validChildren, EmptyStateDescription)
+    const computedChildren = !isEmpty(validChildren)
+      ? omitChildren(
+          validChildren,
+          EmptyStateIndicator,
+          EmptyStateTitle,
+          EmptyStateContent,
+          EmptyStateDescription,
+        )
+      : children
 
-  const computedChildren = !isEmpty(validChildren)
-    ? omitChildren(
-        validChildren,
-        EmptyStateIndicator,
-        EmptyStateTitle,
-        EmptyStateContent,
-        EmptyStateDescription,
-      )
-    : children
-
-  const css: CSSUIObject = {
-    ...styles.container,
-  }
-
-  return (
-    <EmptyStateContext value={styles}>
-      <ui.div className={cx("ui-empty-state", className)} __css={css} {...rest}>
+    return (
+      <ui.div {...rest}>
         {customIndicator ?? (
           <EmptyStateIndicator {...indicatorProps}>
             {indicator}
@@ -121,92 +105,35 @@ export const EmptyState: FC<EmptyStateProps> = (props) => {
 
         {computedChildren}
       </ui.div>
-    </EmptyStateContext>
-  )
-}
-
-EmptyState.__ui__ = "EmptyState"
+    )
+  },
+  "root",
+)()
 
 export interface EmptyStateIndicatorProps extends HTMLUIProps {}
 
-export const EmptyStateIndicator: FC<EmptyStateIndicatorProps> = ({
-  className,
-  ...rest
-}) => {
-  const styles = useEmptyStateContext()
-
-  const css: CSSUIObject = { ...styles.indicator }
-
-  return (
-    <ui.div
-      className={cx("ui-empty-state__indicator", className)}
-      __css={css}
-      {...rest}
-    />
-  )
-}
-
-EmptyStateIndicator.__ui__ = "EmptyStateIndicator"
+export const EmptyStateIndicator = withContext<"div", EmptyStateIndicatorProps>(
+  "div",
+  "indicator",
+)()
 
 export interface EmptyStateContentProps extends HTMLUIProps {}
 
-export const EmptyStateContent: FC<EmptyStateContentProps> = ({
-  className,
-  ...rest
-}) => {
-  const styles = useEmptyStateContext()
-
-  const css: CSSUIObject = { ...styles.content }
-
-  return (
-    <ui.div
-      className={cx("ui-empty-state__content", className)}
-      __css={css}
-      {...rest}
-    />
-  )
-}
-
-EmptyStateContent.__ui__ = "EmptyStateContent"
+export const EmptyStateContent = withContext<"div", EmptyStateContentProps>(
+  "div",
+  "content",
+)()
 
 export interface EmptyStateTitleProps extends HTMLUIProps<"h3"> {}
 
-export const EmptyStateTitle: FC<EmptyStateTitleProps> = ({
-  className,
-  ...rest
-}) => {
-  const styles = useEmptyStateContext()
-
-  const css: CSSUIObject = { ...styles.title }
-
-  return (
-    <ui.h3
-      className={cx("ui-empty-state__title", className)}
-      __css={css}
-      {...rest}
-    />
-  )
-}
-
-EmptyStateTitle.__ui__ = "EmptyStateTitle"
+export const EmptyStateTitle = withContext<"h3", EmptyStateTitleProps>(
+  "h3",
+  "title",
+)()
 
 export interface EmptyStateDescriptionProps extends HTMLUIProps<"p"> {}
 
-export const EmptyStateDescription: FC<EmptyStateDescriptionProps> = ({
-  className,
-  ...rest
-}) => {
-  const styles = useEmptyStateContext()
-
-  const css: CSSUIObject = { ...styles.description }
-
-  return (
-    <ui.p
-      className={cx("ui-empty-state__description", className)}
-      __css={css}
-      {...rest}
-    />
-  )
-}
-
-EmptyStateDescription.__ui__ = "EmptyStateDescription"
+export const EmptyStateDescription = withContext<
+  "p",
+  EmptyStateDescriptionProps
+>("p", "description")()

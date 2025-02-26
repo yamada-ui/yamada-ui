@@ -1,9 +1,9 @@
-import type { Dict } from "../src"
 import { themes } from "@storybook/theming"
 import { defaultTheme } from "../src"
 
-const fonts = defaultTheme.fonts as Dict
-const colors = defaultTheme.colors as Dict
+const fonts = defaultTheme.fonts
+const colors = defaultTheme.colors
+const semanticColors = defaultTheme.semanticTokens.colors
 
 const sharedTheme = {
   appBorderRadius: 0,
@@ -23,12 +23,13 @@ export const customThemes = {
       "https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-black@2x.png",
     ...sharedTheme,
     base: "light",
-    appBg: colors.white[950],
-    appContentBg: colors.white[950],
-    barBg: colors.white[950],
-    barTextColor: colors.blackAlpha[700],
-    textColor: colors.black[950],
-    textInverseColor: colors.black[700],
+    appBg: semanticColors.bg.panel[0],
+    appContentBg: semanticColors.bg.base[0],
+    barBg: semanticColors.bg.panel[0],
+    barTextColor: semanticColors.fg.base[0],
+    textColor: semanticColors.fg.base[0],
+    textInverseColor: semanticColors.fg.base[0],
+    textMutedColor: "#7f7f7f",
   },
   dark: {
     ...themes.dark,
@@ -36,11 +37,12 @@ export const customThemes = {
       "https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-white@2x.png",
     ...sharedTheme,
     base: "dark",
-    appBg: colors.black[950],
-    appContentBg: colors.black[950],
-    barBg: colors.black[950],
-    barTextColor: colors.whiteAlpha[700],
-    textColor: colors.white[950],
-    textInverseColor: colors.white[700],
+    appBg: semanticColors.bg.panel[1],
+    appContentBg: semanticColors.bg.base[1],
+    barBg: semanticColors.bg.panel[1],
+    barTextColor: semanticColors.fg.base[1],
+    textColor: semanticColors.fg.base[1],
+    textInverseColor: semanticColors.fg.base[1],
+    textMutedColor: "#999999",
   },
 }

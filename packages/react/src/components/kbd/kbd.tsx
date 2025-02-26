@@ -1,27 +1,19 @@
 import type { HTMLUIProps, ThemeProps } from "../../core"
-import { forwardRef, omitThemeProps, ui, useComponentStyle } from "../../core"
-import { cx } from "../../utils"
+import type { KbdStyle } from "./kbd.style"
+import { createComponent } from "../../core"
+import { kbdStyle } from "./kbd.style"
 
-export interface KbdProps extends HTMLUIProps<"kbd">, ThemeProps<"Kbd"> {}
+export interface KbdProps extends HTMLUIProps<"kbd">, ThemeProps<KbdStyle> {}
+
+export const {
+  PropsContext: KbdPropsContext,
+  usePropsContext: useKbdPropsContext,
+  withContext,
+} = createComponent<KbdProps, KbdStyle>("kbd", kbdStyle)
 
 /**
  * `Kbd` is a component that represents keyboard input.
  *
- * @see Docs https://yamada-ui.com/components/data-display/kbd
+ * @see Docs https://yamada-ui.com/components/kbd
  */
-export const Kbd = forwardRef<KbdProps, "kbd">((props, ref) => {
-  const [css, mergedProps] = useComponentStyle("Kbd", props)
-  const { className, ...rest } = omitThemeProps(mergedProps)
-
-  return (
-    <ui.kbd
-      ref={ref}
-      className={cx("ui-kbd", className)}
-      __css={css}
-      {...rest}
-    />
-  )
-})
-
-Kbd.displayName = "Kbd"
-Kbd.__ui__ = "Kbd"
+export const Kbd = withContext("kbd")()

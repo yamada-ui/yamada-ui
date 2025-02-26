@@ -1,28 +1,28 @@
-import type { FunctionInterpolation } from "@emotion/styled"
-import type { ComponentType } from "react"
+import type { EmotionCache, SerializedStyles } from "@emotion/utils"
+import type { FC } from "react"
 import type { Dict } from "../utils"
-import type {
-  As,
-  FC,
-  InterpolationProps,
-  ShouldForwardProp,
-  StyledOptions,
-  UIComponent,
-} from "./components"
-import type {
-  CSSModifierObject,
-  CSSObject,
-  CSSPropObject,
-  CSSProps,
-} from "./css"
-import type { ColorScheme } from "./theme.types"
-import createStyled from "@emotion/styled"
+import type { As, ShouldForwardProp, UIComponent } from "./components"
+import type { CSSModifierObject, CSSPropObject } from "./css"
+import type { ColorScheme, ComponentStyle, StyledTheme } from "./theme"
+import { ThemeContext, withEmotionCache } from "@emotion/react"
+import { serializeStyles } from "@emotion/serialize"
+import { useInsertionEffectAlwaysWithSyncFallback } from "@emotion/use-insertion-effect-with-fallbacks"
+import {
+  getRegisteredStyles,
+  insertStyles,
+  registerStyles,
+} from "@emotion/utils"
+import { use, useMemo, useRef } from "react"
+import isEqual from "react-fast-compare"
+import { Slot } from "../components/slot"
 import {
   createContext,
-  filterEmpty,
-  filterObject,
+  createdDom,
+  cx,
   filterUndefined,
-  interopDefault,
+  isString,
+  isUndefined,
+  splitObject,
   toArray,
 } from "../utils"
 import {
@@ -31,34 +31,56 @@ import {
   getDisplayName,
   useComponentStyle,
 } from "./components"
-import { css, mergeCSS } from "./css"
-import { pseudos } from "./pseudos"
-import { styles } from "./styles"
+import { css } from "./css"
 
-const emotionStyled = interopDefault(createStyled)
+interface InsertionProps {
+  cache: EmotionCache
+  htmlTag: boolean
+  serialized: SerializedStyles
+}
 
-const styleProps = { ...styles, ...pseudos }
+const Insertion: FC<InsertionProps> = ({ cache, htmlTag, serialized }) => {
+  registerStyles(cache, serialized, htmlTag)
 
-interface ToCSSObjectOptions
-  extends Pick<StyledOptions, "base" | "forwardProps"> {}
+  const style = useInsertionEffectAlwaysWithSyncFallback(() =>
+    insertStyles(cache, serialized, htmlTag),
+  )
 
-export function toCSSObject({
-  base,
-  forwardProps,
-}: ToCSSObjectOptions): FunctionInterpolation<InterpolationProps> {
-  return function (props: InterpolationProps) {
-    const { css: themeStyles, theme, ...rest } = props
-    const propsStyle = filterObject<CSSProps, CSSObject>(
-      rest,
-      (prop) => prop in styleProps,
+  if (!createdDom() && !isUndefined(style)) {
+    let className = serialized.name
+    let next = serialized.next
+
+    while (next !== undefined) {
+      className = cx(className, next.name)
+      next = next.next
+    }
+
+    return (
+      <style
+        data-emotion={cx(cache.key, className)}
+        dangerouslySetInnerHTML={{ __html: style }}
+        nonce={cache.sheet.nonce}
+      />
     )
-
-    return filterEmpty([
-      base,
-      ...toArray(themeStyles),
-      filterUndefined(propsStyle),
-    ]).map((cssObj) => css(cssObj)(theme, forwardProps))
+  } else {
+    return null
   }
+}
+
+const useSplitProps = <Y extends Dict, M extends Dict>(
+  props: Dict,
+  shouldForwardProp?: ShouldForwardProp,
+) => {
+  const propsRef = useRef(props)
+
+  if (!isEqual(propsRef.current, props)) propsRef.current = props
+
+  const computedProps = propsRef.current
+
+  return useMemo(
+    () => splitObject<Y, M>(computedProps, shouldForwardProp),
+    [computedProps, shouldForwardProp],
+  )
 }
 
 export const [ColorSchemeContext, useColorSchemeContext] =
@@ -66,6 +88,21 @@ export const [ColorSchemeContext, useColorSchemeContext] =
     name: "ColorSchemeContext",
     strict: false,
   })
+
+export interface StyledOptions<
+  Y extends CSSPropObject = CSSPropObject,
+  M extends CSSModifierObject = CSSModifierObject,
+  D extends CSSModifierObject = CSSModifierObject,
+  H extends number | string | symbol = string,
+> extends ComponentStyle<Y, M, D> {
+  name?: string
+  target?: string
+  displayName?: string
+  forwardAsChild?: boolean
+  shouldForwardProp?: boolean | ShouldForwardProp
+  forwardProps?: string[]
+  transferProps?: H[]
+}
 
 export function styled<
   Y extends As,
@@ -76,51 +113,101 @@ export function styled<
 >(
   el: Y,
   {
-    name = "",
-    target,
-    className = getClassName(name),
     base,
-    label,
-    shouldForwardProp: shouldForwardPropOption,
-    forwardProps,
+    compounds,
+    props,
+    sizes,
+    variants,
+    defaultProps,
     transferProps,
-    ...style
+    ...styledOptions
   }: StyledOptions<D, H, R, keyof M> = {},
 ): UIComponent<Y, M> {
-  const displayName = getDisplayName(name, "")
-  let shouldForwardProp: ShouldForwardProp | undefined = undefined
+  const className = styledOptions.className ?? getClassName(styledOptions.name)
+  const displayName =
+    styledOptions.displayName ?? getDisplayName(styledOptions.name, "")
+  const shouldForwardProp = !styledOptions.shouldForwardProp
+    ? createShouldForwardProp(styledOptions.forwardProps)
+    : undefined
+  const style = filterUndefined({
+    base,
+    compounds,
+    props,
+    sizes,
+    variants,
+    defaultProps,
+  })
+  const componentStyleOptions = { className, style, transferProps }
 
-  if (!shouldForwardPropOption)
-    shouldForwardProp = createShouldForwardProp(forwardProps)
+  const StyledComponent = withEmotionCache<Dict>(
+    ({ as: Component = el, asChild, ...props }, cache, ref) => {
+      let className = ""
 
-  const CSSObject = toCSSObject({ base, forwardProps })
+      const registered = useRef<string[]>([])
+      const htmlTag = isString(Component)
+      const forwardAsChild =
+        styledOptions.forwardAsChild ||
+        styledOptions.forwardProps?.includes("asChild")
+      const theme = use(ThemeContext) as StyledTheme
+      const [omittedProps, styleProps] = useSplitProps(props, shouldForwardProp)
+      const [, rest] = useComponentStyle<any, {}>(
+        omittedProps,
+        componentStyleOptions,
+      )
+      const [cssArray, colorScheme, forwardProps] = useMemo(() => {
+        const { css, colorScheme, ...forwardProps } = rest
 
-  const ProxyComponent = emotionStyled(el as ComponentType, {
-    target,
-    label,
-    shouldForwardProp,
-  })(CSSObject)
+        return [toArray(css), colorScheme, forwardProps]
+      }, [rest])
 
-  const StyledComponent: FC<Dict> = (props) => {
-    const colorScheme = useColorSchemeContext()
-    const { css, ...rest } = useComponentStyle<any, {}>(props, {
-      className,
-      style,
-      transferProps,
-    })
+      styleProps.colorScheme ??= colorScheme
 
-    rest.colorScheme ??= colorScheme
+      if (forwardProps.className)
+        className = getRegisteredStyles(
+          cache.registered,
+          registered.current,
+          forwardProps.className,
+        ).trim()
 
-    return (
-      <ColorSchemeContext.Provider value={rest.colorScheme}>
-        <ProxyComponent {...rest} css={mergeCSS(css, props.css)} />
-      </ColorSchemeContext.Provider>
-    )
-  }
+      const interpolations = useMemo(
+        () => [
+          ...[...cssArray, styleProps].map(css(theme)),
+          ...registered.current,
+        ],
+        [cssArray, theme, styleProps],
+      )
+
+      const serialized = useMemo(
+        () =>
+          serializeStyles(interpolations, cache.registered, {
+            theme,
+            ...forwardProps,
+          }),
+        [interpolations, cache.registered, theme, forwardProps],
+      )
+
+      className = cx(className, `${cache.key}-${serialized.name}`)
+      className = cx(className, styledOptions.target)
+
+      const mergedProps = { ...forwardProps, className }
+
+      return (
+        <ColorSchemeContext value={styleProps.colorScheme}>
+          <Insertion cache={cache} htmlTag={htmlTag} serialized={serialized} />
+
+          {asChild && !forwardAsChild ? (
+            <Slot ref={ref} {...mergedProps} />
+          ) : (
+            <Component ref={ref} {...mergedProps} />
+          )}
+        </ColorSchemeContext>
+      )
+    },
+  ) as UIComponent<Y, M>
 
   StyledComponent.displayName = displayName || "StyledComponent"
 
-  if (name) StyledComponent.__ui__ = displayName
+  if (styledOptions.name) StyledComponent.__ui__ = displayName
 
-  return StyledComponent as unknown as UIComponent<Y, M>
+  return StyledComponent
 }

@@ -1,10 +1,25 @@
 import { useState } from "react"
-import { a11y, render, screen, waitFor } from "../../../test"
+import { a11y, render, screen, wait, waitFor } from "../../../test"
 import { Collapse } from "./collapse"
 
 describe("<Collapse />", () => {
   test("passes a11y test", async () => {
     await a11y(<Collapse />)
+  })
+
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Collapse.displayName).toBe("Collapse")
+    expect(Collapse.__ui__).toBe("Collapse")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Collapse data-testid="collapse" />)
+    expect(screen.getByTestId("collapse")).toHaveClass("ui-collapse")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Collapse data-testid="collapse" />)
+    expect(screen.getByTestId("collapse").tagName).toBe("DIV")
   })
 
   test("toggles visibility on open change", async () => {
@@ -21,15 +36,28 @@ describe("<Collapse />", () => {
 
     const { user } = render(<TestComponent />)
 
-    const button = await screen.findByRole("button", { name: /button/i })
-    const collapse = await screen.findByText("Collapse")
-    expect(collapse).not.toBeVisible()
+    const button = screen.getByRole("button", { name: /button/i })
+    const collapse = screen.getByText("Collapse")
+
+    expect(collapse).toHaveStyle({
+      height: "0px",
+    })
 
     await user.click(button)
-    await waitFor(() => expect(collapse).toBeVisible())
+    await waitFor(() => {
+      expect(collapse).toHaveStyle({
+        height: "auto",
+      })
+    })
+
+    await wait(300)
 
     await user.click(button)
-    await waitFor(() => expect(collapse).not.toBeVisible())
+    await waitFor(() => {
+      expect(collapse).toHaveStyle({
+        height: "0px",
+      })
+    })
   })
 
   test("animationOpacity set to true by default", async () => {

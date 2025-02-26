@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { For } from "../for"
+import { PropsTable } from "../../../storybook/components"
+import { toTitleCase } from "../../utils"
 import { HStack, VStack } from "../stack"
 import { Status } from "./"
 
@@ -23,7 +24,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithLabel: Story = () => {
+export const Label: Story = () => {
   return (
     <HStack>
       <Status value="info">Info</Status>
@@ -34,30 +35,19 @@ export const WithLabel: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
     <VStack>
-      <For each={["sm", "md", "lg"]}>
-        {(size) => (
-          <HStack>
-            <Status size={size} value="info">
-              Info
-            </Status>
-
-            <Status size={size} value="success">
-              Success
-            </Status>
-
-            <Status size={size} value="warning">
-              Warning
-            </Status>
-
-            <Status size={size} value="error">
-              Error
-            </Status>
-          </HStack>
+      <PropsTable
+        columns={["info", "success", "warning", "error"]}
+        rows={["sm", "md", "lg"]}
+      >
+        {(column, row, key) => (
+          <Status key={key} size={row} value={column}>
+            {toTitleCase(column)}
+          </Status>
         )}
-      </For>
+      </PropsTable>
     </VStack>
   )
 }

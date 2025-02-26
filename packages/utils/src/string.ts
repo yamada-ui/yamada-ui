@@ -1,7 +1,11 @@
 import type { StringLiteral } from "./index.types"
+import { isString, isUndefined } from "./assertion"
 
 export function cx(...classNames: (string | undefined)[]) {
-  return classNames.filter(Boolean).join(" ")
+  return classNames
+    .filter((className) => !isUndefined(className))
+    .map((className) => className.trim())
+    .join(" ")
 }
 
 export function escape(value: string, replaceValue = ""): string {
@@ -75,7 +79,6 @@ const sizeMap: StringLiteral[] = [
   "xs",
   "sm",
   "md",
-  "normal",
   "lg",
   "xl",
   "2xl",
@@ -88,10 +91,14 @@ const sizeMap: StringLiteral[] = [
   "9xl",
 ]
 
+export function isSize(value: any): boolean {
+  return isString(value) && sizeMap.includes(value)
+}
+
 export function transformSize(
   token: string | undefined,
   value: number,
-  omitTokens: null | string[] = ["normal"],
+  omitTokens: null | string[] = null,
 ): string | undefined {
   if (!token) return undefined
 
@@ -111,7 +118,9 @@ export function toCamelCase(value: StringLiteral): string {
 }
 
 export function toPascalCase(value: StringLiteral): string {
-  return toCamelCase(value).replace(/^(.)/, (_, val) => val.toUpperCase())
+  return value
+    .replace(/[_-](.)/g, (_, val) => val.toUpperCase())
+    .replace(/^(.)/, (_, val) => val.toUpperCase())
 }
 
 export function toKebabCase(value: StringLiteral): string {

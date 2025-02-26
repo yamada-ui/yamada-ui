@@ -71,13 +71,25 @@ export function pickObject<
 
 export function splitObject<Y extends Dict, M extends keyof Y>(
   obj: Y,
-  keys: M[] | readonly M[],
+  funcOrKeys?: M[] | readonly M[],
+): [{ [P in M]: Y[P] }, Omit<Y, M>]
+
+export function splitObject<Y extends Dict, M extends Dict>(
+  obj: Dict,
+  funcOrKeys?: (key: string) => boolean,
+): [Y, M]
+
+export function splitObject<Y extends Dict, M extends keyof Y>(
+  obj: Y,
+  funcOrKeys?: ((key: string) => boolean) | M[] | readonly M[],
 ) {
   const picked: Dict = {}
   const omitted: Dict = {}
 
   for (const [key, value] of Object.entries(obj)) {
-    if (keys.includes(key as Y[M])) {
+    if (
+      isFunction(funcOrKeys) ? funcOrKeys(key) : funcOrKeys?.includes(key as M)
+    ) {
       picked[key] = value
     } else {
       omitted[key] = value
@@ -140,7 +152,6 @@ export function merge<Y extends Dict>(
 
 export interface FlattenObjectOptions {
   maxDepth?: number
-  omitKeys?: string[]
   separator?: string
   shouldProcess?: (obj: any) => boolean
 }
@@ -149,23 +160,17 @@ export function flattenObject<Y extends Dict>(
   obj: any,
   {
     maxDepth = Infinity,
-    omitKeys = [],
     separator = ".",
-    shouldProcess,
+    shouldProcess = () => true,
   }: FlattenObjectOptions = {},
 ): Y {
-  if ((!isObject(obj) && !isArray(obj)) || !maxDepth) return obj
+  if (!isObject(obj) && !isArray(obj)) return obj
 
   return Object.entries(obj).reduce<any>((result, [key, value]) => {
-    if (
-      isObject(value) &&
-      !Object.keys(value).some((key) => omitKeys.includes(key)) &&
-      (!shouldProcess || shouldProcess(value))
-    ) {
+    if (isObject(value) && shouldProcess(value) && maxDepth > 1) {
       Object.entries(
         flattenObject(value, {
           maxDepth: maxDepth - 1,
-          omitKeys,
           separator,
           shouldProcess,
         }),

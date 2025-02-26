@@ -1,7 +1,7 @@
-import type { InfiniteScrollAreaProps } from "./"
+import type { InfiniteScrollAreaProps } from "."
 import { useRef, useState } from "react"
+import { InfiniteScrollArea } from "."
 import { a11y, fireEvent, render, waitFor } from "../../../test"
-import { InfiniteScrollArea } from "./"
 
 describe("<InfiniteScrollArea />", () => {
   const defaultIntersectionObserver = global.IntersectionObserver

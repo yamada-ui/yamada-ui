@@ -1,25 +1,27 @@
-import type { CSSObject } from "@emotion/react"
+import type { CSSObject } from "@emotion/styled"
 import type * as CSS from "csstype"
 import type { Union } from "../../utils"
 import type { ThemeToken } from "../theme"
 import type { Transform } from "./utils"
 import { isNumber, isObject } from "../../utils"
-import { animation } from "./animation"
+import { animation, insertKeyframes, keyframes } from "./animation"
 import { generateAtRule } from "./at-rule"
 import { generateCalc } from "./calc"
 import { colorMix } from "./color-mix"
 import { colorScheme } from "./color-scheme"
 import { generateFilter } from "./filter"
+import { generateFocusRing } from "./focus-ring"
 import { generateFunction } from "./function"
 import { gradient } from "./gradient"
 import { grid } from "./grid"
 import { generateStyles } from "./styles"
 import { generateToken } from "./token"
 import { transform } from "./transform"
-import { analyzeCSSValue, isCSSVar, keyframes, mode } from "./utils"
+import { generateTransition } from "./transition"
+import { analyzeCSSValue, isCSSVar } from "./utils"
 import { vars } from "./vars"
 
-export { animation, gradient, keyframes, mode }
+export { animation, colorMix, gradient, insertKeyframes, keyframes }
 
 type CSSProperties = Union<
   | keyof CSS.ObsoleteProperties
@@ -28,8 +30,6 @@ type CSSProperties = Union<
 >
 
 export interface StyleConfig {
-  processResult?: boolean
-  processSkip?: boolean
   properties?: CSSProperties | CSSProperties[]
   static?: CSSObject
   token?: ThemeToken
@@ -68,6 +68,7 @@ export const transforms = {
     return isUnitless || isNumber(value) ? `${value}deg` : value
   },
   filter: generateFilter,
+  focusRing: generateFocusRing,
   fraction: (value: any) => {
     if (isNumber(value) && value <= 1) value = `${value * 100}%`
 
@@ -76,7 +77,21 @@ export const transforms = {
   function: generateFunction,
   gradient,
   grid,
-  isTruncated: (value: boolean) => {
+  keyframes,
+  media: generateAtRule("media"),
+  px: (value: any) => {
+    if (value == null) return value
+
+    const { unitless } = analyzeCSSValue(value)
+
+    return unitless || isNumber(value) ? `${value}px` : value
+  },
+  styles: generateStyles,
+  supports: generateAtRule("supports"),
+  token: generateToken,
+  transform,
+  transition: generateTransition,
+  truncated: (value: boolean) => {
     if (value) {
       return {
         overflow: "hidden",
@@ -85,18 +100,6 @@ export const transforms = {
       }
     }
   },
-  media: generateAtRule("media"),
-  px: (value: any) => {
-    if (value == null) return value
-
-    const { isUnitless } = analyzeCSSValue(value)
-
-    return isUnitless || isNumber(value) ? `${value}px` : value
-  },
-  styles: generateStyles,
-  supports: generateAtRule("supports"),
-  token: generateToken,
-  transform,
   vars,
 }
 

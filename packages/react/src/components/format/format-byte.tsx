@@ -1,9 +1,12 @@
-import type { CSSUIObject, HTMLUIProps, ThemeProps } from "../../core"
-import { forwardRef, omitThemeProps, ui, useComponentStyle } from "../../core"
-import { cx } from "../../utils"
+import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { FormatByteStyle } from "./format-byte.style"
+import { createComponent, ui } from "../../core"
+import { formatByteStyle } from "./format-byte.style"
 import { useFormatByte } from "./use-format-byte"
 
-interface FormatByteOptions {
+export interface FormatByteProps
+  extends HTMLUIProps,
+    ThemeProps<FormatByteStyle> {
   /**
    * The byte size to format
    */
@@ -24,36 +27,24 @@ interface FormatByteOptions {
   unitDisplay?: "long" | "narrow" | "short"
 }
 
-export interface FormatByteProps
-  extends HTMLUIProps,
-    ThemeProps<"FormatByte">,
-    FormatByteOptions {}
+export const {
+  PropsContext: FormatBytePropsContext,
+  usePropsContext: useFormatBytePropsContext,
+  withContext,
+} = createComponent<FormatByteProps, FormatByteStyle>(
+  "format-byte",
+  formatByteStyle,
+)
 
 /**
  * `FormatByte` is used to format bytes to a human-readable format.
  *
- * @see Docs https://yamada-ui.com/components/other/format-byte
+ * @see Docs https://yamada-ui.com/components/format-byte
  */
-export const FormatByte = forwardRef<FormatByteProps, "span">((props, ref) => {
-  const [styles, mergedProps] = useComponentStyle("FormatByte", props)
-  const { className, locale, unit, unitDisplay, value, ...rest } =
-    omitThemeProps(mergedProps)
+export const FormatByte = withContext(
+  ({ locale, unit, unitDisplay, value, ...rest }) => {
+    const text = useFormatByte(value, { locale, unit, unitDisplay })
 
-  const text = useFormatByte(value, { locale, unit, unitDisplay })
-
-  const css: CSSUIObject = { ...styles }
-
-  return (
-    <ui.span
-      ref={ref}
-      className={cx("ui-format-byte", className)}
-      __css={css}
-      {...rest}
-    >
-      {text}
-    </ui.span>
-  )
-})
-
-FormatByte.displayName = "FormatByte"
-FormatByte.__ui__ = "FormatByte"
+    return <ui.span {...rest}>{text}</ui.span>
+  },
+)()

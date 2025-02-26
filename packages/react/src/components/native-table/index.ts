@@ -1,18 +1,32 @@
-export { NativeTable, TableStyleProvider, useTableStyles } from "./native-table"
-export type { NativeTableProps } from "./native-table"
-export { TableCaption } from "./table-caption"
-export type { TableCaptionProps } from "./table-caption"
-export { TableContainer } from "./table-container"
-export type { TableContainerProps } from "./table-container"
-export { Tbody } from "./tbody"
-export type { TableBodyProps } from "./tbody"
-export { Td } from "./td"
-export type { TdProps } from "./td"
-export { Tfoot } from "./tfoot"
-export type { TableFootProps } from "./tfoot"
-export { Th } from "./th"
-export type { ThProps } from "./th"
-export { Thead } from "./thead"
-export type { TableHeadProps } from "./thead"
-export { Tr } from "./tr"
-export type { TrProps } from "./tr"
+export type {
+  CaptionProps,
+  ColgroupProps,
+  ColProps,
+  NativeTableRootProps,
+  TableScrollAreaProps,
+  TbodyProps,
+  TdProps,
+  TfootProps,
+  TheadProps,
+  ThProps,
+  TrProps,
+} from "./native-table"
+export {
+  Caption,
+  Col,
+  Colgroup,
+  NativeTablePropsContext,
+  NativeTableRoot,
+  TableScrollArea,
+  Tbody,
+  Td,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
+  useNativeTablePropsContext,
+} from "./native-table"
+
+export * from "./native-table.style"
+
+export * as NativeTable from "./namespace"

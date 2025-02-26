@@ -15,20 +15,12 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
       p: "md",
       position: "relative",
       rounded: "md",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       w: "100%",
       _accept: {
         bg: ["success.50", transparentizeColor("success.400", 0.12)(t, m)],
         borderColor: ["success.500", "success.400"],
-      },
-      _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
-      },
-      _hover: {
-        bg: ["blackAlpha.100", "whiteAlpha.100"],
-        cursor: "pointer",
       },
       _loading: {
         bg: ["blackAlpha.100", "whiteAlpha.100"],
@@ -37,6 +29,14 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
       _reject: {
         bg: ["danger.50", transparentizeColor("danger.400", 0.12)(t, m)],
         borderColor: ["danger.500", "danger.400"],
+      },
+      _hover: {
+        bg: ["blackAlpha.100", "whiteAlpha.100"],
+        cursor: "pointer",
+      },
+      _disabled: {
+        cursor: "not-allowed",
+        opacity: 0.4,
       },
     },
     overlay: {
@@ -89,6 +89,10 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
         container: {
           borderStyle: "dashed",
           borderWidth: "1px",
+          _invalid: {
+            borderColor: errorBorderColor,
+            boxShadow: `0 0 0 1px ${errorBorderColor}`,
+          },
           _focus: {
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
@@ -98,10 +102,6 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
             zIndex: "yamcha",
-          },
-          _invalid: {
-            borderColor: errorBorderColor,
-            boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
         },
       }
@@ -123,6 +123,10 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
         container: {
           borderStyle: "solid",
           borderWidth: "1px",
+          _invalid: {
+            borderColor: errorBorderColor,
+            boxShadow: `0 0 0 1px ${errorBorderColor}`,
+          },
           _focus: {
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
@@ -132,10 +136,6 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
             borderColor: focusBorderColor,
             boxShadow: `0 0 0 1px ${focusBorderColor}`,
             zIndex: "yamcha",
-          },
-          _invalid: {
-            borderColor: errorBorderColor,
-            boxShadow: `0 0 0 1px ${errorBorderColor}`,
           },
         },
       }
@@ -150,10 +150,6 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
           bg: "transparent",
           borderColor: "inherit",
         },
-        _hover: {
-          bg: "transparent",
-          cursor: "inherit",
-        },
         _loading: {
           bg: "transparent",
           cursor: "auto",
@@ -161,6 +157,10 @@ export const Dropzone: ComponentMultiStyle<"Dropzone"> = {
         _reject: {
           bg: "transparent",
           borderColor: "inherit",
+        },
+        _hover: {
+          bg: "transparent",
+          cursor: "inherit",
         },
       },
       overlay: {

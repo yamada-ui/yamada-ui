@@ -14,7 +14,7 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
         flex: "1",
         flexDirection: "column",
         position: "relative",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "common",
         _checked: {
           zIndex: "yamcha",
@@ -34,11 +34,11 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
             },
           },
         },
-        _disabled: {
-          bg: "inherit",
-        },
         _focusVisible: {
           boxShadow: "inherit",
+        },
+        _disabled: {
+          bg: "inherit",
         },
       },
       label: {
@@ -73,9 +73,6 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
               boxShadow: "0 0 0 3px $color",
             },
           },
-          _focusVisible: {
-            boxShadow: "0 0 0 3px $color",
-          },
           _invalid: {
             borderColor: "$errorColor",
             boxShadow: "0 0 0 1px $errorColor",
@@ -84,9 +81,17 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
               boxShadow: "0 0 0 3px $color",
             },
           },
+          _focusVisible: {
+            boxShadow: "0 0 0 3px $color",
+          },
         },
         icon: {
           _checked: {
+            _invalid: {
+              _focusVisible: {
+                borderColor: ["inherit", "inherit"],
+              },
+            },
             _disabled: {
               _before: {
                 bg: `${c}.500`,
@@ -95,11 +100,6 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
                 _before: {
                   bg: `${c}.600`,
                 },
-              },
-            },
-            _invalid: {
-              _focusVisible: {
-                borderColor: ["inherit", "inherit"],
               },
             },
           },
@@ -128,9 +128,6 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
             bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
             borderColor: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
           },
-          _focusVisible: {
-            boxShadow: "0 0 0 3px $color",
-          },
           _invalid: {
             borderColor: "$errorColor",
             boxShadow: "0 0 0 1px $errorColor",
@@ -139,10 +136,18 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
               boxShadow: "0 0 0 3px $color",
             },
           },
+          _focusVisible: {
+            boxShadow: "0 0 0 3px $color",
+          },
         },
         icon: {
           _checked: {
             borderColor: [`${c}.500`, `${c}.600`],
+            _invalid: {
+              _focusVisible: {
+                borderColor: [`${c}.500`, `${c}.600`],
+              },
+            },
             _disabled: {
               borderColor: [`${c}.500`, `${c}.600`],
               _before: {
@@ -152,11 +157,6 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
                 _before: {
                   bg: `${c}.600`,
                 },
-              },
-            },
-            _invalid: {
-              _focusVisible: {
-                borderColor: [`${c}.500`, `${c}.600`],
               },
             },
           },
@@ -190,10 +190,6 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
               boxShadow: "0 0 0 3px $color",
             },
           },
-          _focusVisible: {
-            borderColor: "$color",
-            boxShadow: "0 0 0 3px $color",
-          },
           _invalid: {
             borderColor: "$errorColor",
             boxShadow: "0 0 0 1px $errorColor",
@@ -202,10 +198,19 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
               boxShadow: "0 0 0 3px $color",
             },
           },
+          _focusVisible: {
+            borderColor: "$color",
+            boxShadow: "0 0 0 3px $color",
+          },
         },
         icon: {
           _checked: {
             borderColor: [`${c}.500`, `${c}.600`],
+            _invalid: {
+              _focusVisible: {
+                borderColor: [`${c}.500`, `${c}.600`],
+              },
+            },
             _disabled: {
               borderColor: [`${c}.500`, `${c}.600`],
               _before: {
@@ -215,11 +220,6 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
                 _before: {
                   bg: `${c}.600`,
                 },
-              },
-            },
-            _invalid: {
-              _focusVisible: {
-                borderColor: [`${c}.500`, `${c}.600`],
               },
             },
           },

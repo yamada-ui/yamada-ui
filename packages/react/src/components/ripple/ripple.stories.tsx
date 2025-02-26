@@ -19,12 +19,13 @@ export const Basic: Story = () => {
     <Box
       as="button"
       type="button"
-      bg="primary"
-      color="white"
+      bg="mono"
+      color="mono.contrast"
+      h="10"
       overflow="hidden"
-      p="md"
       position="relative"
-      rounded="md"
+      px="md"
+      rounded="l2"
       onClick={onClick}
     >
       <Text>Button</Text>
@@ -41,12 +42,13 @@ export const Disabled: Story = () => {
     <Box
       as="button"
       type="button"
-      bg="primary"
-      color="white"
+      bg="mono"
+      color="mono.contrast"
+      h="10"
       overflow="hidden"
-      p="md"
       position="relative"
-      rounded="md"
+      px="md"
+      rounded="l2"
       onClick={onClick}
     >
       <Text>Button</Text>

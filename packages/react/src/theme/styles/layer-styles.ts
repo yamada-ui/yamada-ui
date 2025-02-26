@@ -1,24 +1,44 @@
-import type { CSSModifierObject } from "../../core"
+import { defineStyles } from "../../core"
 
-export const layerStyles: CSSModifierObject = {
+export const layerStyles = defineStyles.layerStyle({
+  active: {
+    opacity: 1,
+  },
   disabled: {
     cursor: "not-allowed",
     opacity: 0.4,
+    _ripple: {
+      display: "none",
+    },
   },
   ghost: {
     bg: "transparent",
-    color: "colorScheme.fg",
+    color: "colorScheme.outline",
   },
   "ghost.hover": {
-    bg: "colorScheme.subtle",
+    bg: "colorScheme.ghost",
+  },
+  hover: {
+    opacity: 0.8,
   },
   outline: {
     bg: "transparent",
-    border: "1px solid $colorScheme.outline",
+    border: "1px solid {colorScheme.outline}",
     color: "colorScheme.outline",
   },
   "outline.hover": {
-    bg: "colorScheme.subtle",
+    bg: "colorScheme.ghost",
+  },
+  panel: {
+    bg: "bg.panel",
+    borderColor: "border.subtle",
+    borderWidth: "1px",
+  },
+  readOnly: {
+    cursor: "default",
+    _ripple: {
+      display: "none",
+    },
   },
   solid: {
     bg: "colorScheme.solid",
@@ -36,10 +56,10 @@ export const layerStyles: CSSModifierObject = {
   },
   surface: {
     bg: "colorScheme.subtle",
-    border: "1px solid $colorScheme.muted",
+    border: "1px solid {colorScheme.muted}",
     color: "colorScheme.fg",
   },
   "surface.hover": {
     bg: "colorScheme.muted",
   },
-}
+})

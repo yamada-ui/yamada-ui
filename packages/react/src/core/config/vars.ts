@@ -6,11 +6,11 @@ import { getVarName } from "../css"
 import { colorMix } from "./color-mix"
 import { tokenToVar } from "./utils"
 
-function transformValue(token: ThemeToken, value: Dict) {
-  return function ({ theme, ...rest }: TransformOptions) {
+function transformValue({ theme, ...rest }: TransformOptions) {
+  return function (token: ThemeToken, value: Dict) {
     if (token === "colors") value = colorMix(value, { theme, ...rest })
 
-    return tokenToVar(token, value)(theme)
+    return tokenToVar(theme)(token, value)
   }
 }
 
@@ -24,17 +24,17 @@ function insertObject(obj: Dict, segments: string[], value: any): any {
   return obj
 }
 
-function valueToToken(token: ThemeToken, value: Dict) {
-  return function (options: TransformOptions) {
+function valueToToken(options: TransformOptions) {
+  return function (token: ThemeToken, value: Dict) {
     const flattedObj = flattenObject(value)
 
     return Object.entries(flattedObj).reduce<Dict>((prev, [path, value]) => {
       const segments = path.split(".")
 
       if (isArray(value)) {
-        value = value.map((value) => transformValue(token, value)(options))
+        value = value.map((value) => transformValue(options)(token, value))
       } else {
-        value = transformValue(token, value)(options)
+        value = transformValue(options)(token, value)
       }
 
       insertObject(prev, segments, value)
@@ -44,24 +44,24 @@ function valueToToken(token: ThemeToken, value: Dict) {
   }
 }
 
-function replaceValue(token: ThemeToken | undefined, value: any) {
-  return function (options: TransformOptions) {
+function replaceValue(options: TransformOptions) {
+  return function (token: ThemeToken | undefined, value: any) {
     if (!token) return value
 
     if (isObject(value)) {
       value = Object.entries(value).reduce<Dict>((prev, [key, value]) => {
         if (isObject(value)) {
-          prev[key] = valueToToken(token, value)(options)
+          prev[key] = valueToToken(options)(token, value)
         } else if (isArray(value)) {
           prev[key] = value.map((value) => {
             if (isObject(value)) {
-              return valueToToken(token, value)(options)
+              return valueToToken(options)(token, value)
             } else {
-              return transformValue(token, value)(options)
+              return transformValue(options)(token, value)
             }
           })
         } else {
-          prev[key] = transformValue(token, value)(options)
+          prev[key] = transformValue(options)(token, value)
         }
 
         return prev
@@ -69,13 +69,13 @@ function replaceValue(token: ThemeToken | undefined, value: any) {
     } else if (isArray(value)) {
       value = value.map((value) => {
         if (isObject(value)) {
-          return valueToToken(token, value)(options)
+          return valueToToken(options)(token, value)
         } else {
-          return transformValue(token, value)(options)
+          return transformValue(options)(token, value)
         }
       })
     } else {
-      value = transformValue(token, value)(options)
+      value = transformValue(options)(token, value)
     }
 
     return value
@@ -85,10 +85,10 @@ function replaceValue(token: ThemeToken | undefined, value: any) {
 export function vars(values: any, { theme, ...rest }: TransformOptions) {
   if (!isArray(values)) return values
 
-  return values.reduce<Dict>((prev, { name, token, value, __prefix }) => {
-    name = getVarName(name, __prefix)(theme)
+  return values.reduce<Dict>((prev, { name, token, value }) => {
+    name = getVarName(theme)(name)
 
-    prev[name] = replaceValue(token, value)({ theme, ...rest })
+    prev[name] = replaceValue({ theme, ...rest })(token, value)
 
     return prev
   }, {})

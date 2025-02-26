@@ -15,7 +15,7 @@ export const Table: ComponentMultiStyle<"Table"> = mergeMultiStyle(
       },
       td: {
         outline: "none",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "common",
         _focusVisible: {
           boxShadow: "inline",
@@ -23,7 +23,7 @@ export const Table: ComponentMultiStyle<"Table"> = mergeMultiStyle(
       },
       th: {
         outline: "none",
-        transitionDuration: "normal",
+        transitionDuration: "moderate",
         transitionProperty: "common",
         _focusVisible: {
           boxShadow: "inline",

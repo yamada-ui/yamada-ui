@@ -1,5 +1,4 @@
 import type { Meta } from "@storybook/react"
-import type { AnimationStyle } from "../../core"
 import { useAnimation, useDynamicAnimation } from "."
 import { Box } from "../../components/box"
 import { Button } from "../../components/button"
@@ -92,7 +91,7 @@ export const Pseudo = () => {
   )
 }
 
-export const WithMulti = () => {
+export const Multiple = () => {
   const animation = useAnimation([
     {
       duration: "10s",
@@ -156,10 +155,8 @@ export const WithMulti = () => {
   return <Box animation={animation} h="xs" w="full" />
 }
 
-export const WithDynamic = () => {
-  const [animation, setAnimation] = useDynamicAnimation<{
-    [key in "moveLeft" | "moveRight"]: AnimationStyle
-  }>({
+export const Dynamic = () => {
+  const [animation, setAnimation] = useDynamicAnimation({
     moveLeft: {
       duration: "slower",
       fillMode: "forwards",
@@ -200,17 +197,21 @@ export const WithDynamic = () => {
         Please Click
       </Button>
 
-      <Box animation={animation} bg="primary" color="white" p="md" rounded="md">
+      <Box
+        animation={animation}
+        bg="mono"
+        color="mono.contrast"
+        p="md"
+        rounded="md"
+      >
         Box
       </Box>
     </>
   )
 }
 
-export const WithDynamicAndMulti = () => {
-  const [animation, setAnimation] = useDynamicAnimation<{
-    [key in "moveLeft" | "moveRight"]: AnimationStyle[]
-  }>({
+export const DynamicAndMultiple = () => {
+  const [animation, setAnimation] = useDynamicAnimation({
     moveLeft: [
       {
         duration: "slower",
@@ -281,7 +282,13 @@ export const WithDynamicAndMulti = () => {
         Please Click
       </Button>
 
-      <Box animation={animation} bg="primary" color="white" p="md" rounded="md">
+      <Box
+        animation={animation}
+        bg="mono"
+        color="mono.contrast"
+        p="md"
+        rounded="md"
+      >
         Box
       </Box>
     </>

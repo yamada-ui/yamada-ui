@@ -1,4 +1,4 @@
-import type { ColorScheme, StyledTheme } from "../theme.types"
+import type { ColorScheme } from "../theme"
 import type { TransformOptions } from "./utils"
 import { isArray, TONES } from "../../utils"
 import { getVarName } from "../css"
@@ -6,12 +6,12 @@ import { pseudos } from "../pseudos"
 import { tokenToVar } from "./utils"
 
 function createColorSchemeVariables(value: ColorScheme) {
-  return function (theme: StyledTheme) {
+  return function ({ theme }: TransformOptions) {
     return {
       ...Object.fromEntries(
         TONES.map((tone) => [
-          getVarName(`colorScheme-${tone}`)(theme),
-          tokenToVar("colors", `${value}.${tone}`)(theme),
+          getVarName(theme)(`colorScheme-${tone}`),
+          tokenToVar(theme)("colors", `${value}.${tone}`),
         ]),
       ),
       ...Object.fromEntries(
@@ -21,26 +21,28 @@ function createColorSchemeVariables(value: ColorScheme) {
           "subtle",
           "muted",
           "emphasized",
+          "bg",
+          "ghost",
           "solid",
           "outline",
         ].map((token) => [
-          getVarName(`colorScheme-${token}`)(theme),
-          tokenToVar("colors", `${value}.${token}`)(theme),
+          getVarName(theme)(`colorScheme-${token}`),
+          tokenToVar(theme)("colors", `${value}.${token}`),
         ]),
       ),
     }
   }
 }
 
-export function colorScheme(value: any, { theme }: TransformOptions) {
+export function colorScheme(value: any, options: TransformOptions) {
   if (isArray(value)) {
     const [lightValue, darkValue] = value
 
     return {
-      ...createColorSchemeVariables(lightValue)(theme),
-      [pseudos._dark]: createColorSchemeVariables(darkValue)(theme),
+      ...createColorSchemeVariables(lightValue)(options),
+      [pseudos._dark]: createColorSchemeVariables(darkValue)(options),
     }
   } else {
-    return createColorSchemeVariables(value)(theme)
+    return createColorSchemeVariables(value)(options)
   }
 }

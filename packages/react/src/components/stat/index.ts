@@ -1,10 +1,22 @@
-export { Stat } from "./stat"
-export type { StatProps } from "./stat"
-export { StatHelperMessage } from "./stat-helper-message"
-export type { StatHelperMessageProps } from "./stat-helper-message"
-export { StatIcon } from "./stat-icon"
-export type { StatIconProps } from "./stat-icon"
-export { StatLabel } from "./stat-label"
-export type { StatLabelProps } from "./stat-label"
-export { StatNumber } from "./stat-number"
-export type { StatNumberProps } from "./stat-number"
+export {
+  StatHelperMessage,
+  StatIcon,
+  StatLabel,
+  StatPropsContext,
+  StatRoot,
+  StatUnit,
+  StatValue,
+  useStatPropsContext,
+} from "./stat"
+export type {
+  StatHelperMessageProps,
+  StatIconProps,
+  StatLabelProps,
+  StatRootProps,
+  StatUnitProps,
+  StatValueProps,
+} from "./stat"
+
+export * from "./stat.style"
+
+export * as Stat from "./namespace"

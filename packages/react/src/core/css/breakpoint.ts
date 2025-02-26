@@ -1,10 +1,10 @@
 import type { Dict } from "../../utils"
 import type {
+  BreakpointConfig,
   BreakpointDirection,
-  BreakpointOptions,
-  ThemeBreakpointTokens,
-} from "../theme.types"
-import { getPx } from "../../utils"
+  DefineThemeBreakpointTokens,
+} from "../theme"
+import { getPx, isObject } from "../../utils"
 
 interface BreakpointQuery {
   breakpoint: string
@@ -19,7 +19,8 @@ interface BreakpointQuery {
 export type BreakpointQueries = BreakpointQuery[]
 
 export interface Breakpoints {
-  isResponsive: (obj: Dict, strict?: boolean) => boolean
+  getQuery: (key: string) => string | undefined
+  isResponsive: (obj: any, strict?: boolean) => boolean
   keys: string[]
   queries: BreakpointQueries
 }
@@ -41,9 +42,9 @@ export function createQuery(
 
 function createQueries(
   breakpoints: Dict,
-  options: BreakpointOptions,
+  config: BreakpointConfig,
 ): BreakpointQueries {
-  const { direction, identifier } = options
+  const { direction, identifier } = config
   const isDown = direction !== "up"
 
   return Object.entries(breakpoints).map(([breakpoint, width], i, entry) => {
@@ -84,13 +85,13 @@ function createQueries(
 
 function transformBreakpoints(
   breakpoints: Dict,
-  options: BreakpointOptions,
+  config: BreakpointConfig,
 ): Dict {
   return Object.fromEntries(
     Object.entries(breakpoints)
       .map(([name, value]) => [name, getPx(value)] as const)
       .sort((a, b) => {
-        if (options.direction !== "up") {
+        if (config.direction !== "up") {
           return b[1] - a[1]
         } else {
           return a[1] - b[1]
@@ -100,23 +101,25 @@ function transformBreakpoints(
 }
 
 export function createBreakpoints(
-  breakpoints: ThemeBreakpointTokens | undefined,
-  options: BreakpointOptions = {},
+  breakpoints: DefineThemeBreakpointTokens | undefined,
+  config: BreakpointConfig = {},
 ): Breakpoints | undefined {
   if (!breakpoints) return
 
-  options.base ??= "9999px"
-  options.direction ??= "down"
+  config.base ??= "9999px"
+  config.direction ??= "down"
 
-  breakpoints.base = options.direction !== "up" ? options.base : "0px"
+  breakpoints.base = config.direction !== "up" ? config.base : "0px"
 
-  breakpoints = transformBreakpoints(breakpoints, options)
+  breakpoints = transformBreakpoints(breakpoints, config)
 
   const keys = Object.keys(breakpoints)
 
-  const queries = createQueries(breakpoints, options)
+  const queries = createQueries(breakpoints, config)
 
-  const isResponsive = (obj: Dict, strict = false) => {
+  function isResponsive(obj: any, strict = false) {
+    if (!isObject(obj)) return false
+
     const providedKeys = Object.keys(obj)
 
     if (!providedKeys.length) return false
@@ -126,7 +129,12 @@ export function createBreakpoints(
     return providedKeys.every((key) => keys.includes(key))
   }
 
+  function getQuery(key: string) {
+    return queries.find(({ breakpoint }) => breakpoint === key)?.query
+  }
+
   return {
+    getQuery,
     isResponsive,
     keys,
     queries,

@@ -6,6 +6,21 @@ describe("<Button />", () => {
     await a11y(<Button>test</Button>)
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Button.displayName).toBe("Button")
+    expect(Button.__ui__).toBe("Button")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Button>test</Button>)
+    expect(screen.getByText("test")).toHaveClass("ui-button")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Button>test</Button>)
+    expect(screen.getByText("test").tagName).toBe("BUTTON")
+  })
+
   test("renders with icon", () => {
     const { getByText, rerender } = render(<Button endIcon={<>end icon</>} />)
     expect(getByText("end icon")).toBeTruthy()
@@ -20,7 +35,7 @@ describe("<Button />", () => {
         data-testid="btn"
         loading
         loadingIcon={<>loading start</>}
-        loadingText="Submitting"
+        loadingMessage="Submitting"
       >
         Submit
       </Button>,
@@ -42,8 +57,8 @@ describe("<Button />", () => {
       <Button
         loading
         loadingIcon={<>loading end</>}
+        loadingMessage="Test if loading placement"
         loadingPlacement="end"
-        loadingText="Test if loading placement"
       >
         Submit
       </Button>,

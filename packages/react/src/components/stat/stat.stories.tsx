@@ -1,12 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { COLOR_SCHEMES } from "@yamada-ui/utils"
-import { Grid } from "../grid"
-import { Stat, StatHelperMessage, StatIcon, StatLabel, StatNumber } from "./"
+import { PropsTable } from "../../../storybook/components"
+import { Stat } from "./"
 
-type Story = StoryFn<typeof Stat>
+type Story = StoryFn<typeof Stat.Root>
 
-const meta: Meta<typeof Stat> = {
-  component: Stat,
+const meta: Meta<typeof Stat.Root> = {
+  component: Stat.Root,
   title: "Components / Stat",
 }
 
@@ -14,81 +14,120 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <>
-      <Stat
-        helperMessage="21% more than last month"
-        icon="increase"
-        label="Total Page Views"
-        number="1,993,818"
-      />
-
-      <Stat>
-        <StatLabel>Total Page Views</StatLabel>
-        <StatNumber>1,993,818</StatNumber>
-        <StatHelperMessage>
-          <StatIcon type="increase" />
-          21% more than last month
-        </StatHelperMessage>
-      </Stat>
-    </>
+    <Stat.Root>
+      <Stat.Label>Total Page Views</Stat.Label>
+      <Stat.Value>1,993,818</Stat.Value>
+      <Stat.HelperMessage>
+        <Stat.Icon type="increase" />
+        21% more than last month
+      </Stat.HelperMessage>
+    </Stat.Root>
   )
 }
 
-export const WithColorScheme: Story = () => {
+export const PropsPattern: Story = () => {
   return (
-    <Grid
-      gap="md"
-      templateColumns={{
-        base: "repeat(4, 1fr)",
-        sm: "repeat(1, 1fr)",
-        md: "repeat(2, 1fr)",
-        lg: "repeat(3, 1fr)",
-      }}
-      w="full"
-    >
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Stat
-          key={colorScheme}
-          colorScheme={colorScheme}
-          helperMessage="21% more than last month"
-          label="Total Likes"
-          number="818K"
-        />
-      ))}
-    </Grid>
-  )
-}
-
-export const WithCenterContent: Story = () => {
-  return (
-    <Stat
-      centerContent
-      helperMessage="From August 1 to August 18"
+    <Stat.Root
+      helperMessage="21% more than last month"
       icon="increase"
-      label="Downloads"
-      number="18K"
+      label="Total Page Views"
+      value="1,993,818"
     />
   )
 }
 
-export const WithDecrease: Story = () => {
+export const Size: Story = () => {
+  return (
+    <PropsTable columns={["xs", "sm", "md", "lg"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => (
+        <Stat.Root
+          key={key}
+          colorScheme={row}
+          size={column}
+          helperMessage="Time to complete"
+          label="Downloads"
+          value={
+            <>
+              8<Stat.Unit>hr</Stat.Unit>
+              18<Stat.Unit>min</Stat.Unit>
+            </>
+          }
+        />
+      )}
+    </PropsTable>
+  )
+}
+
+export const ColorScheme: Story = () => {
+  return (
+    <PropsTable variant="column" rows={COLOR_SCHEMES}>
+      {(_, row, key) => (
+        <Stat.Root
+          key={key}
+          colorScheme={row}
+          helperMessage="21% more than last month"
+          label="Total Likes"
+          value="818K"
+        />
+      )}
+    </PropsTable>
+  )
+}
+
+export const CenterContent: Story = () => {
+  return (
+    <Stat.Root
+      centerContent
+      helperMessage="From August 1 to August 18"
+      icon="increase"
+      label="Downloads"
+      value="18K"
+    />
+  )
+}
+
+export const Unit: Story = () => {
   return (
     <>
-      <Stat
+      <Stat.Root
+        label="Time to complete"
+        value={
+          <>
+            8<Stat.Unit>hr</Stat.Unit>
+            18<Stat.Unit>min</Stat.Unit>
+          </>
+        }
+      />
+
+      <Stat.Root>
+        <Stat.Label>Time to complete</Stat.Label>
+        <Stat.Value>
+          8<Stat.Unit>hr</Stat.Unit>
+          18<Stat.Unit>min</Stat.Unit>
+        </Stat.Value>
+      </Stat.Root>
+    </>
+  )
+}
+
+export const Decrease: Story = () => {
+  return (
+    <>
+      <Stat.Root
         helperMessage="21% more than last month"
         icon="decrease"
         label="Total Page Views"
-        number="1,993,818"
+        value="1,993,818"
       />
 
-      <Stat>
-        <StatLabel>Total Page Views</StatLabel>
-        <StatNumber>1,993,818</StatNumber>
-        <StatHelperMessage>
-          <StatIcon type="decrease" />
+      <Stat.Root>
+        <Stat.Label>Total Page Views</Stat.Label>
+        <Stat.Value>1,993,818</Stat.Value>
+        <Stat.HelperMessage>
+          <Stat.Icon type="decrease" />
           21% more than last month
-        </StatHelperMessage>
-      </Stat>
+        </Stat.HelperMessage>
+      </Stat.Root>
     </>
   )
 }

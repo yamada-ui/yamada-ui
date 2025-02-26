@@ -8,31 +8,28 @@ export const accordionStyle = defineComponentSlotStyle({
       },
       alignItems: "center",
       display: "inline-flex",
-      outline: "none",
+      focusVisibleRing: "inside",
       px: "4",
       py: "3",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "common",
       w: "100%",
-      _focusVisible: {
-        boxShadow: "outline",
-      },
       _nativeDisabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
+        layerStyle: "disabled",
       },
     },
     icon: {
       color: "fg.subtle",
-      fontSize: "1.25em",
+      fontSize: "xl",
       ml: "auto",
       transformOrigin: "center",
-      transition: "transform 0.2s",
-      _disabled: {
-        opacity: 0.4,
-      },
+      transitionDuration: "moderate",
+      transitionProperty: "transform",
       _expanded: {
-        transform: "rotate(-180deg)",
+        transform: "rotate(180deg)",
+      },
+      _disabled: {
+        layerStyle: "disabled",
       },
     },
     item: {
@@ -46,7 +43,19 @@ export const accordionStyle = defineComponentSlotStyle({
   },
 
   variants: {
-    basic: {
+    panel: {
+      button: {
+        rounded: "l2",
+      },
+      item: {
+        layerStyle: "panel",
+        rounded: "l2",
+        _notFirst: {
+          mt: "md",
+        },
+      },
+    },
+    plain: {
       item: {
         borderTopWidth: "1px",
         _last: {
@@ -54,21 +63,10 @@ export const accordionStyle = defineComponentSlotStyle({
         },
       },
     },
-    panel: {
-      item: {
-        bg: "bg.panel",
-        borderWidth: "1px",
-        rounded: "md",
-        _notFirst: {
-          mt: "md",
-        },
-      },
-    },
-    unstyled: {},
   },
 
   defaultProps: {
-    variant: "basic",
+    variant: "plain",
   },
 })
 

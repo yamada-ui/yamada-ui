@@ -3,8 +3,8 @@ import type { ComponentMultiStyle } from "../../core"
 export const Radio: ComponentMultiStyle<"Radio"> = {
   baseStyle: {
     container: {
-      _disabled: { cursor: "not-allowed" },
       _readOnly: { cursor: "auto" },
+      _disabled: { cursor: "not-allowed" },
     },
     icon: ({ colorScheme: c = "primary" }) => ({
       alignItems: "center",
@@ -14,7 +14,7 @@ export const Radio: ComponentMultiStyle<"Radio"> = {
       display: "inline-flex",
       justifyContent: "center",
       rounded: "full",
-      transitionDuration: "normal",
+      transitionDuration: "moderate",
       transitionProperty: "box-shadow",
       _checked: {
         _before: {
@@ -28,7 +28,7 @@ export const Radio: ComponentMultiStyle<"Radio"> = {
             bg: [`${c}.600`, `${c}.700`],
           },
         },
-        // eslint-disable-next-line perfectionist/sort-objects
+
         _disabled: {
           _before: {
             bg: "blackAlpha.400",
@@ -40,17 +40,17 @@ export const Radio: ComponentMultiStyle<"Radio"> = {
           },
         },
       },
-      _disabled: {
-        bg: ["blackAlpha.200", "whiteAlpha.100"],
-      },
-      _focusVisible: {
-        boxShadow: "outline",
-      },
       _invalid: {
         borderColor: ["danger.500", "danger.400"],
         _focusVisible: {
           borderColor: ["inherit", "inherit"],
         },
+      },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
+      _disabled: {
+        bg: ["blackAlpha.200", "whiteAlpha.100"],
       },
     }),
     label: {

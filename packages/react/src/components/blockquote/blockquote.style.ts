@@ -9,10 +9,10 @@ export const blockquoteStyle = defineComponentSlotStyle({
     cite: {},
     content: {},
     icon: {
-      fontSize: "2xl",
+      fontSize: "xl",
       left: "0",
       position: "absolute",
-      top: "0",
+      top: "0.5",
     },
     root: {
       display: "flex",
@@ -66,7 +66,7 @@ export const blockquoteStyle = defineComponentSlotStyle({
         color: "colorScheme.solid",
       },
       root: {
-        borderStart: "4px solid $colorScheme.solid",
+        borderStart: "4px solid {colorScheme.solid}",
         px: "md",
       },
     },
@@ -75,7 +75,7 @@ export const blockquoteStyle = defineComponentSlotStyle({
         color: "colorScheme.fg",
       },
       root: {
-        borderStart: "4px solid $colorScheme.muted",
+        borderStart: "4px solid {colorScheme.muted}",
         px: "md",
       },
     },
@@ -83,9 +83,7 @@ export const blockquoteStyle = defineComponentSlotStyle({
 
   defaultProps: {
     variant: "subtle",
-    props: {
-      justify: "start",
-    },
+    justify: "start",
   },
 })
 

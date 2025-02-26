@@ -20,9 +20,9 @@ export default meta
 export const Vertical: Story = () => {
   return (
     <VStack>
-      <For each={["primary", "secondary", "warning", "error"]}>
+      <For each={["info", "success", "warning", "error"]}>
         {(bg, index) => (
-          <Box key={index} bg={bg} color="white" p="md" rounded="4">
+          <Box key={index} bg={bg} color="white" p="md" rounded="l2">
             Box
           </Box>
         )}
@@ -34,9 +34,9 @@ export const Vertical: Story = () => {
 export const Horizontal: Story = () => {
   return (
     <HStack>
-      <For each={["primary", "secondary", "warning", "error"]}>
+      <For each={["info", "success", "warning", "error"]}>
         {(bg, index) => (
-          <Box key={index} bg={bg} color="white" p="md" rounded="4">
+          <Box key={index} bg={bg} color="white" p="md" rounded="l2">
             Box
           </Box>
         )}
@@ -48,60 +48,60 @@ export const Horizontal: Story = () => {
 export const Depth: Story = () => {
   return (
     <ZStack>
-      <Box bg="primary" color="white" p="md" rounded="4">
+      <Box bg="info" color="white" p="md" rounded="l2">
         Box
       </Box>
 
-      <Box bg="secondary" color="white" p="md" rounded="4">
+      <Box bg="success" color="white" p="md" rounded="l2">
         Box
       </Box>
 
-      <Box bg="warning" color="white" p="md" rounded="4">
+      <Box bg="warning" color="white" p="md" rounded="l2">
         Box
       </Box>
 
-      <Box bg="error" color="white" p="md" rounded="4">
+      <Box bg="error" color="white" p="md" rounded="l2">
         Box
       </Box>
     </ZStack>
   )
 }
 
-export const WithBorder: Story = () => {
+export const Border: Story = () => {
   return (
     <>
       <VStack separator={<Separator />}>
-        <Box bg="primary" color="white" p="md" rounded="4">
+        <Box bg="info" color="white" p="md" rounded="l2">
           Box
         </Box>
 
-        <Box bg="secondary" color="white" p="md" rounded="4">
+        <Box bg="success" color="white" p="md" rounded="l2">
           Box
         </Box>
 
-        <Box bg="warning" color="white" p="md" rounded="4">
+        <Box bg="warning" color="white" p="md" rounded="l2">
           Box
         </Box>
 
-        <Box bg="error" color="white" p="md" rounded="4">
+        <Box bg="error" color="white" p="md" rounded="l2">
           Box
         </Box>
       </VStack>
 
       <HStack h="2xs" separator={<Separator />}>
-        <Center bg="primary" color="white" h="full" p="md" rounded="4">
+        <Center bg="info" color="white" h="full" p="md" rounded="l2">
           Center
         </Center>
 
-        <Center bg="secondary" color="white" h="full" p="md" rounded="4">
+        <Center bg="success" color="white" h="full" p="md" rounded="l2">
           Center
         </Center>
 
-        <Center bg="warning" color="white" h="full" p="md" rounded="4">
+        <Center bg="warning" color="white" h="full" p="md" rounded="l2">
           Center
         </Center>
 
-        <Center bg="error" color="white" h="full" p="md" rounded="4">
+        <Center bg="error" color="white" h="full" p="md" rounded="l2">
           Center
         </Center>
       </HStack>

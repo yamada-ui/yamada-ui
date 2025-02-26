@@ -1,61 +1,61 @@
-import type {
-  ColorModeToken,
-  CSS,
-  FC,
-  HTMLUIProps,
-  ThemeProps,
-} from "../../core"
-import type { FormControlOptions } from "../form-control"
-import { omitThemeProps, ui, useComponentMultiStyle } from "../../core"
-import { cx } from "../../utils"
-import { useFormControlProps } from "../form-control"
+import type { FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FieldProps } from "../field"
+import type { InputStyle } from "./input.style"
+import type { UseInputBorderProps } from "./use-input-border"
+import { createComponent } from "../../core"
+import { useFieldProps } from "../field"
+import { inputStyle } from "./input.style"
+import { useInputBorder } from "./use-input-border"
 
-interface InputOptions {
-  /**
-   * The border color when the input is invalid.
-   */
-  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
-  /**
-   * The border color when the input is focused.
-   */
-  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+export interface InputProps
+  extends Omit<HTMLUIProps<"input">, "size">,
+    ThemeProps<InputStyle>,
+    UseInputBorderProps,
+    FieldProps {
   /**
    * The native HTML `size` attribute to be passed to the `input`.
    */
   htmlSize?: number
 }
 
-export interface InputProps
-  extends Omit<
-      HTMLUIProps<"input">,
-      "disabled" | "readOnly" | "required" | "size"
-    >,
-    ThemeProps<"Input">,
-    InputOptions,
-    FormControlOptions {}
+export const {
+  PropsContext: InputPropsContext,
+  usePropsContext: useInputPropsContext,
+  withContext,
+} = createComponent<InputProps, InputStyle>("input", inputStyle)
 
 /**
  * `Input` is a component used to obtain text input from the user.
  *
- * @see Docs https://yamada-ui.com/components/forms/input
+ * @see Docs https://yamada-ui.com/components/input
  */
-export const Input: FC<InputProps> = (props) => {
-  const [styles, mergedProps] = useComponentMultiStyle("Input", props)
-  const computedProps = omitThemeProps(mergedProps)
-  const { className, htmlSize, __css, ...rest } =
-    useFormControlProps(computedProps)
+export const Input: FC<InputProps> = withContext("input")(
+  undefined,
+  (props) => {
+    const {
+      props: {
+        errorBorderColor,
+        focusBorderColor,
+        htmlSize,
+        vars: varsProp,
+        ...rest
+      },
+      ariaProps,
+      dataProps,
+      eventProps,
+    } = useFieldProps(props)
+    const vars = useInputBorder(varsProp, {
+      errorBorderColor,
+      focusBorderColor,
+    })
 
-  return (
-    <ui.input
-      className={cx("ui-input", className)}
-      size={htmlSize}
-      __css={{
-        ...styles.field,
-        ...__css,
-      }}
-      {...rest}
-    />
-  )
-}
-
-Input.__ui__ = "Input"
+    return {
+      size: htmlSize,
+      vars,
+      ...ariaProps,
+      ...dataProps,
+      ...eventProps,
+      ...rest,
+    }
+  },
+)

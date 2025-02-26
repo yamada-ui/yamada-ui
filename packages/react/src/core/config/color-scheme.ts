@@ -10,8 +10,8 @@ function createColorSchemeVariables(value: ColorScheme) {
     return {
       ...Object.fromEntries(
         TONES.map((tone) => [
-          getVarName(`colorScheme-${tone}`)(theme),
-          tokenToVar("colors", `${value}.${tone}`)(theme),
+          getVarName(theme)(`colorScheme-${tone}`),
+          tokenToVar(theme)("colors", `${value}.${tone}`),
         ]),
       ),
       ...Object.fromEntries(
@@ -26,8 +26,8 @@ function createColorSchemeVariables(value: ColorScheme) {
           "solid",
           "outline",
         ].map((token) => [
-          getVarName(`colorScheme-${token}`)(theme),
-          tokenToVar("colors", `${value}.${token}`)(theme),
+          getVarName(theme)(`colorScheme-${token}`),
+          tokenToVar(theme)("colors", `${value}.${token}`),
         ]),
       ),
     }

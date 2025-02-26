@@ -53,7 +53,7 @@ export function animation(value: any, { css, theme }: TransformOptions) {
       .map((value: string) => {
         value = value.trim()
 
-        value = tokenToVar("animations", value)(theme)
+        value = tokenToVar(theme)("animations", value)
 
         return value
       })
@@ -61,7 +61,7 @@ export function animation(value: any, { css, theme }: TransformOptions) {
 
     return value
   } else {
-    value = tokenToVar("animations", value)(theme)
+    value = tokenToVar(theme)("animations", value)
 
     return value
   }

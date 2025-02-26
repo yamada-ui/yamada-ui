@@ -17,17 +17,21 @@ interface Variable {
 
 export function transformInterpolation(
   value: any,
-  callback: (value: string) => string,
+  callback: (value: string, fallbackValue?: string) => string,
 ) {
   if (isString(value)) {
-    return value.replace(/\{(.*?)\}/g, (_, value) => callback(value))
+    return value.replace(/\{(.*?)\}/g, (_, value) => {
+      const [token, fallbackValue] = value.split(/,(.+)/)
+
+      return callback(token.trim(), fallbackValue?.trim())
+    })
   } else {
     return value
   }
 }
 
-export function getVar(token: string) {
-  return function (theme: StyledTheme<UsageTheme>) {
+export function getVar(theme: StyledTheme<UsageTheme>) {
+  return function (token: string) {
     const prefix = theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
 
     return token.startsWith("--")
@@ -36,21 +40,21 @@ export function getVar(token: string) {
   }
 }
 
-export function getVarName(token: string) {
-  return function (theme: StyledTheme<UsageTheme>) {
+export function getVarName(theme: StyledTheme<UsageTheme>) {
+  return function (token: string) {
     const prefix = theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
 
     return `--${prefix}-${token}`
   }
 }
 
-export function getColorSchemeVar(value: any) {
-  return function (theme: StyledTheme<UsageTheme>) {
+export function getColorSchemeVar(theme: StyledTheme<UsageTheme>) {
+  return function (value: any) {
     if (!isString(value)) return value
 
     const [, token] = value.split(".")
 
-    return getVar(`colorScheme-${token}`)(theme)
+    return getVar(theme)(`colorScheme-${token}`)
   }
 }
 
@@ -109,11 +113,11 @@ export function getCreateThemeVars(
       }
 
       function valueToVar(value: any) {
-        return transformInterpolation(value, (value) => {
+        return transformInterpolation(value, (value, fallbackValue) => {
           if (value.includes("colors.") || value.includes("colorScheme.")) {
-            if (isColorScheme(value)) return getColorSchemeVar(value)(theme)
+            if (isColorScheme(value)) return getColorSchemeVar(theme)(value)
 
-            return colorMix(value, { theme })
+            return colorMix(value, { fallback: fallbackValue, theme })
           } else {
             const token = tokens[value] ?? prevTokens?.[value]
 
@@ -122,7 +126,7 @@ export function getCreateThemeVars(
             } else if (value in cssMap && cssMap[value]?.ref) {
               return cssMap[value].ref
             } else {
-              return `var(--${prefix}-${value})`
+              return fallbackValue || `var(--${prefix}-${value})`
             }
           }
         })

@@ -12,7 +12,7 @@ import {
   merge,
   omitObject,
 } from "../../utils"
-import { styleProps } from "../components"
+import { cssProps } from "../components"
 import { styles } from "../styles"
 import { getVar } from "./var"
 
@@ -100,7 +100,7 @@ export const createVars =
         })
 
         if (transform) {
-          result[name] = getVar(formattedName)(theme)
+          result[name] = getVar(theme)(formattedName)
         } else {
           result[name] = `{${formattedName}}`
         }
@@ -127,7 +127,7 @@ export const insertVars = <Y extends Dict | Dict[] | undefined>(
   const createCSSObject = (props: Dict) =>
     Object.fromEntries(
       Object.entries(props).flatMap(([prop, value]) => {
-        if (!styleProps.has(prop) && !isValidProps(prop)) {
+        if (!cssProps.has(prop) && !isValidProps(prop)) {
           return [[prop, value]]
         } else if (isObject(value)) {
           return [[prop, insertVars(value, options)]]

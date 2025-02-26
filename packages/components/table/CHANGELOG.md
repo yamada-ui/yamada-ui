@@ -1,5 +1,55 @@
 # @yamada-ui/table
 
+## 1.3.12
+
+### Patch Changes
+
+- [#4494](https://github.com/yamada-ui/yamada-ui/pull/4494) [`99279fa`](https://github.com/yamada-ui/yamada-ui/commit/99279fa1742c76ed573e6df0397c13e07bc718ff) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`99279fa`](https://github.com/yamada-ui/yamada-ui/commit/99279fa1742c76ed573e6df0397c13e07bc718ff)]:
+  - @yamada-ui/utils@1.7.1
+  - @yamada-ui/core@1.17.2
+  - @yamada-ui/checkbox@1.3.5
+  - @yamada-ui/select@1.8.9
+  - @yamada-ui/icon@1.1.20
+  - @yamada-ui/native-table@1.0.51
+  - @yamada-ui/pagination@1.1.11
+  - @yamada-ui/use-clickable@1.2.20
+  - @yamada-ui/use-controllable-state@1.0.28
+  - @yamada-ui/use-value@1.1.37
+
+## 1.3.11
+
+### Patch Changes
+
+- [#4321](https://github.com/yamada-ui/yamada-ui/pull/4321) [`fa1971f`](https://github.com/yamada-ui/yamada-ui/commit/fa1971fb46f9b7d15b4fe342c2da42615cd7742b) Thanks [@bmthd](https://github.com/bmthd)! - added HeaderContext and TableMeta types to export
+
+- Updated dependencies [[`607044c`](https://github.com/yamada-ui/yamada-ui/commit/607044c89d060cc2b8875ef17889290af8679b9e)]:
+  - @yamada-ui/core@1.17.1
+  - @yamada-ui/checkbox@1.3.4
+  - @yamada-ui/icon@1.1.19
+  - @yamada-ui/native-table@1.0.50
+  - @yamada-ui/pagination@1.1.10
+  - @yamada-ui/select@1.8.8
+  - @yamada-ui/use-clickable@1.2.19
+  - @yamada-ui/use-value@1.1.36
+
+## 1.3.10
+
+### Patch Changes
+
+- Updated dependencies [[`1f879aa`](https://github.com/yamada-ui/yamada-ui/commit/1f879aa92efc1156332cc3b5b2c20438e6c1a4a5), [`0162445`](https://github.com/yamada-ui/yamada-ui/commit/0162445e5700764b3be2b9f9c0a5ad0afbfd9578), [`a170da9`](https://github.com/yamada-ui/yamada-ui/commit/a170da9ad8f186926d955c5f6882ea3d378b5002), [`4e8038e`](https://github.com/yamada-ui/yamada-ui/commit/4e8038e1de7a5c08764efd615f87720dce74febf)]:
+  - @yamada-ui/core@1.17.0
+  - @yamada-ui/checkbox@1.3.3
+  - @yamada-ui/utils@1.7.0
+  - @yamada-ui/select@1.8.7
+  - @yamada-ui/icon@1.1.18
+  - @yamada-ui/native-table@1.0.49
+  - @yamada-ui/pagination@1.1.9
+  - @yamada-ui/use-clickable@1.2.18
+  - @yamada-ui/use-value@1.1.35
+  - @yamada-ui/use-controllable-state@1.0.27
+
 ## 1.3.9
 
 ### Patch Changes

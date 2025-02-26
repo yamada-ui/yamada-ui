@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/loading",
-  "version": "1.1.28",
+  "version": "1.1.31",
   "description": "Yamada UI loading components",
   "keywords": [
     "yamada",
@@ -52,7 +52,7 @@
     "@yamada-ui/portal": "workspace:*",
     "@yamada-ui/use-timeout": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "react-remove-scroll": "^2.6.0"
+    "react-remove-scroll": "^2.6.3"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

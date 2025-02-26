@@ -7,7 +7,7 @@ import type {
 import type { MotionProps, MotionTransitionProps } from "@yamada-ui/motion"
 import type { PortalProps } from "@yamada-ui/portal"
 import type { UsePopperProps } from "@yamada-ui/use-popper"
-import type { ReactElement, ReactNode, Ref } from "react"
+import type { ReactElement, ReactNode } from "react"
 import { omitThemeProps, ui, useComponentStyle } from "@yamada-ui/core"
 import { AnimatePresence, motion, motionForwardRef } from "@yamada-ui/motion"
 import { Portal } from "@yamada-ui/portal"
@@ -20,6 +20,7 @@ import {
   cx,
   getOwnerDocument,
   getOwnerWindow,
+  getRef,
   handlerAll,
   mergeRefs,
 } from "@yamada-ui/utils"
@@ -369,13 +370,14 @@ export const Tooltip = motionForwardRef<TooltipProps, "div">(
     // eslint-disable-next-line react/jsx-no-useless-fragment
     if (!label) return <>{children}</>
 
-    const child = Children.only(children) as {
-      ref?: Ref<HTMLElement>
-    } & ReactElement
+    const child = Children.only(children) as ReactElement
 
     const trigger = cloneElement(
       child,
-      getTriggerProps({ ...child.props, "aria-describedby": id }, child.ref),
+      getTriggerProps(
+        { ...child.props, "aria-describedby": id },
+        getRef(child),
+      ),
     )
 
     const css: CSSUIObject = {

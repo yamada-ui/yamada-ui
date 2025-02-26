@@ -1,5 +1,17 @@
 # @yamada-ui/utils
 
+## 1.7.1
+
+### Patch Changes
+
+- [#4494](https://github.com/yamada-ui/yamada-ui/pull/4494) [`99279fa`](https://github.com/yamada-ui/yamada-ui/commit/99279fa1742c76ed573e6df0397c13e07bc718ff) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+## 1.7.0
+
+### Minor Changes
+
+- [#4200](https://github.com/yamada-ui/yamada-ui/pull/4200) [`a170da9`](https://github.com/yamada-ui/yamada-ui/commit/a170da9ad8f186926d955c5f6882ea3d378b5002) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Added getRef function to react utils.
+
 ## 1.6.2
 
 ### Patch Changes

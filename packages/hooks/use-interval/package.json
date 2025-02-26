@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-interval",
-  "version": "1.0.26",
+  "version": "1.0.28",
   "description": "Yamada UI useInterval custom hook",
   "keywords": [
     "use-interval"

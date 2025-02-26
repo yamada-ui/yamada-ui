@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/modal",
-  "version": "1.4.9",
+  "version": "1.4.12",
   "description": "Yamada UI modal component",
   "keywords": [
     "yamada",
@@ -55,7 +55,7 @@
     "@yamada-ui/transitions": "workspace:*",
     "@yamada-ui/use-value": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "react-remove-scroll": "^2.6.0"
+    "react-remove-scroll": "^2.6.3"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

@@ -372,10 +372,10 @@ By default, the calendar automatically closes on blur. To prevent the calendar f
 
 ### Disable Clearing
 
-To disable clearing, set `isClearable` to `false`.
+To disable clearing, set `clearable` to `false`.
 
 ```tsx
-<RangeDatePicker placeholder="YYYY/MM/DD" isClearable={false} />
+<RangeDatePicker placeholder="YYYY/MM/DD" clearable={false} />
 ```
 
 ### Disallow Input
@@ -431,7 +431,7 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
 <VStack>
   <RangeDatePicker focusBorderColor="green.500" placeholder="YYYY/MM/DD" />
   <RangeDatePicker
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="YYYY/MM/DD"
   />
@@ -456,37 +456,37 @@ To set the maximum number of range values, set a number to `maxSelectValues`.
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <RangeDatePicker isDisabled variant="outline" placeholder="YYYY/MM/DD" />
-  <RangeDatePicker isDisabled variant="filled" placeholder="YYYY/MM/DD" />
-  <RangeDatePicker isDisabled variant="flushed" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker disabled variant="outline" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker disabled variant="filled" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker disabled variant="flushed" placeholder="YYYY/MM/DD" />
 </VStack>
 ```
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <RangeDatePicker isReadOnly variant="outline" placeholder="YYYY/MM/DD" />
-  <RangeDatePicker isReadOnly variant="filled" placeholder="YYYY/MM/DD" />
-  <RangeDatePicker isReadOnly variant="flushed" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker readOnly variant="outline" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker readOnly variant="filled" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker readOnly variant="flushed" placeholder="YYYY/MM/DD" />
 </VStack>
 ```
 
 ### Make Input Invalid
 
-To make input invalid, set `isInvalid` to `true`.
+To make input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <RangeDatePicker isInvalid variant="outline" placeholder="YYYY/MM/DD" />
-  <RangeDatePicker isInvalid variant="filled" placeholder="YYYY/MM/DD" />
-  <RangeDatePicker isInvalid variant="flushed" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker invalid variant="outline" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker invalid variant="filled" placeholder="YYYY/MM/DD" />
+  <RangeDatePicker invalid variant="flushed" placeholder="YYYY/MM/DD" />
 </VStack>
 ```
 
@@ -520,7 +520,7 @@ The `children` are provided with `value` and `onClose` methods, which can be use
   <RangeDatePicker placeholder="YYYY/MM/DD" closeOnSelect={false}>
     {({ value, onClose }) => (
       <VStack mt="sm">
-        <Button isDisabled={!value} onClick={onClose}>
+        <Button disabled={!value} onClick={onClose}>
           Submit
           {value[0]
             ? ` ${String(value[0].getMonth() + 1).padStart(2, "0")}/${String(value[0].getDate()).padStart(2, "0")} -`
@@ -588,7 +588,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.rangeDatePicker}
+      invalid={!!errors.rangeDatePicker}
       label="Birthday"
       errorMessage={
         errors.rangeDatePicker ? errors.rangeDatePicker.message : undefined

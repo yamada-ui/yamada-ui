@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/test",
-  "version": "1.5.13",
+  "version": "1.5.16",
   "description": "Yamada UI test",
   "keywords": [],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",
@@ -17,7 +17,7 @@
     "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "dependencies": {
-    "@testing-library/user-event": "^14.5.2",
+    "@testing-library/user-event": "^14.6.1",
     "@yamada-ui/providers": "workspace:*",
     "@yamada-ui/theme": "workspace:*",
     "@yamada-ui/utils": "workspace:*",

@@ -52,10 +52,7 @@ type ComponentProps<Y extends As, M extends As, D extends object = {}> = {
 } & ComponentConditionalProps<Y, M, D>
 
 export interface ComponentArgs
-  extends Pick<
-    React.FunctionComponent,
-    "contextTypes" | "defaultProps" | "displayName" | "propTypes"
-  > {
+  extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {
   __ui__?: string
 }
 
@@ -80,14 +77,14 @@ export interface UIComponent<Y extends As = As, M extends object = {}>
   extends Component<Y, Merge<UIProps, M>> {}
 
 export type HTMLRef<Y extends DOMElement = "div"> =
-  JSX.IntrinsicElements[Y]["ref"]
+  React.JSX.IntrinsicElements[Y]["ref"]
 
 export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
   ref?: HTMLRef<Y> | undefined
 }
 
 export type HTMLProps<Y extends DOMElement = "div"> = Omit<
-  JSX.IntrinsicElements[Y],
+  React.JSX.IntrinsicElements[Y],
   "ref" | "size" | keyof UIProps
 >
 

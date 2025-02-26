@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/focus-lock",
-  "version": "1.0.28",
+  "version": "1.0.30",
   "description": "Yamada UI focus lock component",
   "keywords": [
     "yamada",
@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@yamada-ui/utils": "workspace:*",
-    "react-focus-lock": "^2.13.2"
+    "react-focus-lock": "^2.13.6"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

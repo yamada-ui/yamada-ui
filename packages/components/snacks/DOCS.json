@@ -5,7 +5,7 @@
       "required": true
     },
     "as": {
-      "type": "keyof ReactDOM",
+      "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
       "required": false
     },

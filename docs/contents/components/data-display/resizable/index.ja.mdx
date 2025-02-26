@@ -420,11 +420,11 @@ return (
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。また、`ResizableTrigger`に設定することで個別に無効化することができます。
+無効化する場合は、`disabled`を`true`に設定します。また、`ResizableTrigger`に設定することで個別に無効化することができます。
 
 ```tsx
 <VStack>
-  <Resizable isDisabled h="md" rounded="md" borderWidth="1px">
+  <Resizable disabled h="md" rounded="md" borderWidth="1px">
     <ResizableItem as={Center}>One</ResizableItem>
 
     <ResizableTrigger />
@@ -439,7 +439,7 @@ return (
   <Resizable h="md" rounded="md" borderWidth="1px">
     <ResizableItem as={Center}>One</ResizableItem>
 
-    <ResizableTrigger isDisabled />
+    <ResizableTrigger disabled />
 
     <ResizableItem as={Center}>Two</ResizableItem>
 

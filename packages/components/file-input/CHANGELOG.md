@@ -1,5 +1,36 @@
 # @yamada-ui/file-input
 
+## 1.0.54
+
+### Patch Changes
+
+- Updated dependencies [[`99279fa`](https://github.com/yamada-ui/yamada-ui/commit/99279fa1742c76ed573e6df0397c13e07bc718ff)]:
+  - @yamada-ui/utils@1.7.1
+  - @yamada-ui/core@1.17.2
+  - @yamada-ui/form-control@2.1.14
+  - @yamada-ui/use-clickable@1.2.20
+  - @yamada-ui/use-controllable-state@1.0.28
+
+## 1.0.53
+
+### Patch Changes
+
+- Updated dependencies [[`607044c`](https://github.com/yamada-ui/yamada-ui/commit/607044c89d060cc2b8875ef17889290af8679b9e)]:
+  - @yamada-ui/core@1.17.1
+  - @yamada-ui/form-control@2.1.13
+  - @yamada-ui/use-clickable@1.2.19
+
+## 1.0.52
+
+### Patch Changes
+
+- Updated dependencies [[`1f879aa`](https://github.com/yamada-ui/yamada-ui/commit/1f879aa92efc1156332cc3b5b2c20438e6c1a4a5), [`a170da9`](https://github.com/yamada-ui/yamada-ui/commit/a170da9ad8f186926d955c5f6882ea3d378b5002), [`4e8038e`](https://github.com/yamada-ui/yamada-ui/commit/4e8038e1de7a5c08764efd615f87720dce74febf)]:
+  - @yamada-ui/core@1.17.0
+  - @yamada-ui/utils@1.7.0
+  - @yamada-ui/form-control@2.1.12
+  - @yamada-ui/use-clickable@1.2.18
+  - @yamada-ui/use-controllable-state@1.0.27
+
 ## 1.0.51
 
 ### Patch Changes

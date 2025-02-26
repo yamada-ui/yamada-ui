@@ -2,9 +2,15 @@
 
 ## Latest Release
 
-### December 15, 2024: [v1.7.2](/.changelog/v1.7.2.mdx)
+### February 25, 2025: [v1.7.5](/.changelog/v1.7.5.mdx)
 
 ## Previous Releases
+
+### January 25, 2025: [v1.7.4](/.changelog/v1.7.4.mdx)
+
+### January 7, 2025: [v1.7.3](/.changelog/v1.7.3.mdx)
+
+### December 15, 2024: [v1.7.2](/.changelog/v1.7.2.mdx)
 
 ### December 11, 2024: [v1.7.1](/.changelog/v1.7.1.mdx)
 

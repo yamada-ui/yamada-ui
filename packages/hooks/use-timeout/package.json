@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-timeout",
-  "version": "1.0.26",
+  "version": "1.0.28",
   "description": "Yamada UI useTimeout custom hook",
   "keywords": [
     "use-timeout"

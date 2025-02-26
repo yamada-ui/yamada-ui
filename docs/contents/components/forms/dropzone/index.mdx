@@ -46,17 +46,13 @@ import {
 
 ```tsx
 <VStack>
-  <Dropzone variant="dashed">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone variant="solid">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone variant="unstyled">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
+  <For each={["dashed", "solid", "unstyled"]}>
+    {(variant, index) => (
+      <Dropzone key={index} variant="dashed">
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -64,21 +60,13 @@ import {
 
 ```tsx
 <VStack>
-  <Dropzone size="xs">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone size="sm">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone size="md">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
-
-  <Dropzone size="lg">
-    <Text>Drag file here or click to select file</Text>
-  </Dropzone>
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size, index) => (
+      <Dropzone key={index} size={size}>
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone>
+    )}
+  </For>
 </VStack>
 ```
 
@@ -304,7 +292,7 @@ To change the border color, set `focusBorderColor` or `errorBorderColor` to a co
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <Dropzone isInvalid errorBorderColor="orange.500">
+  <Dropzone invalid errorBorderColor="orange.500">
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 </VStack>
@@ -312,15 +300,15 @@ To change the border color, set `focusBorderColor` or `errorBorderColor` to a co
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <Dropzone isDisabled>
+  <Dropzone disabled>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <FormControl label="Upload file" isDisabled>
+  <FormControl label="Upload file" disabled>
     <Dropzone>
       <Text>Drag file here or click to select file</Text>
     </Dropzone>
@@ -330,15 +318,15 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <Dropzone isReadOnly>
+  <Dropzone readOnly>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <FormControl label="Upload file" isReadOnly>
+  <FormControl label="Upload file" readOnly>
     <Dropzone>
       <Text>Drag file here or click to select file</Text>
     </Dropzone>
@@ -348,15 +336,15 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <Dropzone isInvalid>
+  <Dropzone invalid>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <FormControl label="Upload file" isInvalid errorMessage="File is required.">
+  <FormControl label="Upload file" invalid errorMessage="File is required.">
     <Dropzone>
       <Text>Drag file here or click to select file</Text>
     </Dropzone>
@@ -366,19 +354,19 @@ To make the input invalid, set `isInvalid` to `true`.
 
 ### Use Loading Animation
 
-To use a loading animation, set `isLoading` to `true`.
+To use a loading animation, set `loading` to `true`.
 
 ```tsx
 <VStack>
-  <Dropzone isLoading>
+  <Dropzone loading>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <Dropzone isLoading loadingProps={{ variant: "grid" }}>
+  <Dropzone loading loadingProps={{ variant: "grid" }}>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <Dropzone isLoading loadingProps={{ color: "secondary" }}>
+  <Dropzone loading loadingProps={{ color: "secondary" }}>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 </VStack>

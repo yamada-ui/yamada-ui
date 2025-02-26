@@ -1,5 +1,35 @@
 # @yamada-ui/core
 
+## 1.17.2
+
+### Patch Changes
+
+- [#4494](https://github.com/yamada-ui/yamada-ui/pull/4494) [`99279fa`](https://github.com/yamada-ui/yamada-ui/commit/99279fa1742c76ed573e6df0397c13e07bc718ff) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`99279fa`](https://github.com/yamada-ui/yamada-ui/commit/99279fa1742c76ed573e6df0397c13e07bc718ff)]:
+  - @yamada-ui/utils@1.7.1
+  - @yamada-ui/portal@1.0.29
+
+## 1.17.1
+
+### Patch Changes
+
+- [#4326](https://github.com/yamada-ui/yamada-ui/pull/4326) [`607044c`](https://github.com/yamada-ui/yamada-ui/commit/607044c89d060cc2b8875ef17889290af8679b9e) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Removed unused `ComponentArgs` properties.
+
+## 1.17.0
+
+### Minor Changes
+
+- [#4200](https://github.com/yamada-ui/yamada-ui/pull/4200) [`4e8038e`](https://github.com/yamada-ui/yamada-ui/commit/4e8038e1de7a5c08764efd615f87720dce74febf) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Supported React 19.
+
+### Patch Changes
+
+- [#4272](https://github.com/yamada-ui/yamada-ui/pull/4272) [`1f879aa`](https://github.com/yamada-ui/yamada-ui/commit/1f879aa92efc1156332cc3b5b2c20438e6c1a4a5) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated dependencies.
+
+- Updated dependencies [[`a170da9`](https://github.com/yamada-ui/yamada-ui/commit/a170da9ad8f186926d955c5f6882ea3d378b5002)]:
+  - @yamada-ui/utils@1.7.0
+  - @yamada-ui/portal@1.0.28
+
 ## 1.16.2
 
 ### Patch Changes

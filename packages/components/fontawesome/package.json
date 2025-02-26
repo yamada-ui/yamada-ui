@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/fontawesome",
-  "version": "1.0.51",
+  "version": "1.0.54",
   "description": "Yamada UI fontawesome components",
   "keywords": [
     "yamada",
@@ -47,14 +47,14 @@
     "gen:docs": "tsx ../../../scripts/generate-docs"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.1",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/icon": "workspace:*",
     "@yamada-ui/utils": "workspace:*"
   },
   "devDependencies": {
-    "@fortawesome/free-solid-svg-icons": "^6.7.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "clean-package": "2.2.0",
     "react": "^18.3.1"
   },

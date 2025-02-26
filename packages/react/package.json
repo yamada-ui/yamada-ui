@@ -73,7 +73,7 @@
     "react-remove-scroll": "^2.6.2",
     "react-resizable-panels": "^2.1.7",
     "recharts": "^2.15.0",
-    "sonner": "^1.4.3"
+    "sonner": "^2.0.1"
   },
   "devDependencies": {
     "@types/react": "^19.0.2",

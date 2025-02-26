@@ -8,107 +8,29 @@ import type {
 import type { NoticeStyle } from "./notice.style"
 import { useCallback, useMemo, useRef, useState } from "react"
 import { Toaster } from "sonner"
-import { createComponent, ui } from "../../core"
-import { assignRef, cx } from "../../utils"
+import { createSlotComponent } from "../../core"
+import { assignRef } from "../../utils"
 import { Portal } from "../portal"
 import { noticeStyle } from "./notice.style"
 
 export interface NoticeProviderProps
   extends HTMLUIProps,
     Omit<Required<ThemeConfig>["notice"], "options">,
-    ThemeProps<NoticeStyle> {
-  limitRef: RefObject<number>
+    ThemeProps<NoticeStyle> {}
+
+export interface NoticeContext {
+  /**
+   * This is the reference to the placement of the toaster.
+   */
+  placementRef: React.RefObject<NoticePlacement>
+  /**
+   * Update the limit of notices.
+   * @param limit The new limit.
+   */
   onChangeLimit: (limit: number) => void
 }
 
-// const placements = [
-//   "start-start",
-//   "start-center",
-//   "start-end",
-//   "end-start",
-//   "end-center",
-//   "end-end",
-// ]
-
-export const mapPlacementToPosition = (
-  placement: NoticePlacement | undefined,
-):
-  | "bottom-center"
-  | "bottom-left"
-  | "bottom-right"
-  | "top-center"
-  | "top-left"
-  | "top-right" => {
-  if (!placement) return "top-center"
-
-  const mapping: {
-    [key in NoticePlacement]: ReturnType<typeof mapPlacementToPosition>
-  } = {
-    end: "bottom-right",
-    "end-center": "bottom-center",
-    "end-end": "bottom-right",
-    "end-start": "bottom-left",
-    start: "top-right",
-    "start-center": "top-center",
-    "start-end": "top-right",
-    "start-start": "top-left",
-  }
-
-  return mapping[placement]
-}
-
-export const {
-  component,
-  PropsContext: NoticeProviderPropsContext,
-  usePropsContext: useNoticeProviderContext,
-  withContext,
-} = createComponent<NoticeProviderProps, NoticeStyle>("notice", noticeStyle)
-
-export const NoticeProvider = withContext(
-  ({ appendToParentPortal, children, containerRef }) => {
-    const placement = "start-center"
-    const onChangeLimitRef = useRef<(limit: number) => void>(() => void 0)
-
-    const onChangeLimit = useCallback(
-      (limit: number) => onChangeLimitRef.current(limit),
-      [],
-    )
-
-    const limitRef = useRef(3)
-
-    const context = useMemo(
-      () => ({
-        limitRef,
-        onChangeLimit,
-      }),
-      [onChangeLimit],
-    )
-
-    const position = mapPlacementToPosition(placement)
-
-    return (
-      <NoticeProviderPropsContext.Provider value={context}>
-        {children}
-        <Portal
-          appendToParentPortal={appendToParentPortal}
-          containerRef={containerRef}
-        >
-          <ui.ul
-            className={cx("ui-notice__list", `ui-notice__list--${placement}`)}
-          >
-            <ToasterComponent
-              limitRef={limitRef}
-              position={position}
-              onChangeLimitRef={onChangeLimitRef}
-            />
-          </ui.ul>
-        </Portal>
-      </NoticeProviderPropsContext.Provider>
-    )
-  },
-)()
-
-type Position =
+type PositionMapping =
   | "bottom-center"
   | "bottom-left"
   | "bottom-right"
@@ -116,17 +38,91 @@ type Position =
   | "top-left"
   | "top-right"
 
-const ToasterComponent = ({
-  limitRef,
-  position,
-  onChangeLimitRef,
-}: {
-  limitRef: RefObject<number>
-  position: Position
+const createPositionMapping = (
+  vertical: "bottom" | "top",
+  horizontal: "center" | "left" | "right",
+): PositionMapping => {
+  return `${vertical}-${horizontal}` as PositionMapping
+}
+
+const placementMapping = {
+  end: createPositionMapping("bottom", "right"),
+  "end-center": createPositionMapping("bottom", "center"),
+  "end-end": createPositionMapping("bottom", "right"),
+  "end-start": createPositionMapping("bottom", "left"),
+  start: createPositionMapping("top", "right"),
+  "start-center": createPositionMapping("top", "center"),
+  "start-end": createPositionMapping("top", "right"),
+  "start-start": createPositionMapping("top", "left"),
+} as const
+
+export const mapPlacementToPosition = (
+  placement: NoticePlacement = "start-center",
+): PositionMapping => placementMapping[placement]
+
+export const {
+  component,
+  ComponentContext: NoticeContext,
+  PropsContext: NoticePropsContext,
+  useComponentContext: useNoticeContext,
+  usePropsContext: useNoticePropsContext,
+  withContext,
+  withProvider,
+} = createSlotComponent<NoticeProviderProps, NoticeStyle, NoticeContext>(
+  "notice",
+  noticeStyle,
+)
+
+export const NoticeProvider = withProvider(
+  ({ appendToParentPortal, children, containerRef }) => {
+    const placementRef = useRef<NoticePlacement>("start-center")
+    const onChangeLimitRef = useRef<(limit: number) => void>(() => void 0)
+
+    const onChangeLimit = useCallback(
+      (limit: number) => onChangeLimitRef.current(limit),
+      [],
+    )
+
+    const context = useMemo(
+      () => ({
+        placementRef,
+        onChangeLimit,
+      }),
+      [onChangeLimit, placementRef],
+    )
+
+    return (
+      <NoticeContext value={context}>
+        {children}
+        <Portal
+          appendToParentPortal={appendToParentPortal}
+          containerRef={containerRef}
+        >
+          <NoticeProviderComponent
+            placementRef={placementRef}
+            onChangeLimitRef={onChangeLimitRef}
+          />
+        </Portal>
+      </NoticeContext>
+    )
+  },
+)()
+
+interface NoticeProviderComponentProps
+  extends HTMLUIProps,
+    ThemeProps<NoticeStyle> {
+  placementRef: RefObject<NoticePlacement>
   onChangeLimitRef: RefObject<(limit: number) => void>
-}) => {
-  const [limit, setLimit] = useState(limitRef.current)
+}
+
+const NoticeProviderComponent = withContext<
+  "section",
+  NoticeProviderComponentProps
+>(({ placementRef, onChangeLimitRef }) => {
+  const [limit, setLimit] = useState<number>(3)
+  const position = mapPlacementToPosition(placementRef.current)
 
   assignRef(onChangeLimitRef, setLimit)
+
   return <Toaster position={position} visibleToasts={limit} />
-}
+})()

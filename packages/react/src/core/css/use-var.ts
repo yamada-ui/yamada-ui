@@ -30,7 +30,7 @@ export const useCreateVars = <Y extends Dict, M extends keyof Y = keyof Y>(
   const { theme } = useTheme()
 
   return useMemo(
-    () => createVars(obj, keys, options)(theme),
+    () => createVars(theme)(obj, keys, options),
     [obj, keys, options, theme],
   )
 }
@@ -41,12 +41,12 @@ interface CreateVarsOptions<M> {
 }
 
 export const createVars =
+  (theme: StyledTheme<UsageTheme>) =>
   <Y extends Dict, M extends keyof Y = keyof Y>(
     obj: Y,
     keys: M[] | readonly M[],
     { format = defaultFormat, transform = false }: CreateVarsOptions<M> = {},
-  ) =>
-  (theme: StyledTheme<UsageTheme>): [Variable[], { [key in M]?: string }] => {
+  ): [Variable[], { [key in M]?: string }] => {
     const map = new Map<M, Variable>()
     const result: { [key in M]?: string } = {}
 

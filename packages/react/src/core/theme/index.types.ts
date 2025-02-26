@@ -1,7 +1,7 @@
 import type { RefObject } from "react"
 import type { PortalProps } from "../../components/portal"
 import type { DefaultTheme } from "../../theme"
-import type { Dict, StringLiteral, Union } from "../../utils"
+import type { Booleanish, Dict, StringLiteral, Union } from "../../utils"
 import type {
   CreateBreakpointsReturn,
   CreateLayersReturn,
@@ -338,9 +338,7 @@ type ThemeComponentProps<Y extends Dict = Dict> =
     ? {}
     : {
         [K in keyof Required<Y>["props"]]?: StyleValue<
-          keyof Required<Y>["props"][K] extends "false" | "true"
-            ? boolean
-            : keyof Required<Y>["props"][K]
+          Booleanish<keyof Required<Y>["props"][K]>
         >
       }
 
@@ -529,9 +527,7 @@ export type ComponentDefaultProps<
 > = (string extends keyof Y
   ? {}
   : {
-      [key in keyof Y]?: StyleValue<
-        keyof Y[key] extends "false" | "true" ? boolean : boolean | keyof Y[key]
-      >
+      [key in keyof Y]?: StyleValue<Booleanish<keyof Y[key]>>
     }) & {
   /**
    * The color scheme of the component.
@@ -567,28 +563,28 @@ export type ComponentCompound<
   M extends CSSPropObject = CSSPropObject,
   D extends CSSModifierObject = CSSModifierObject,
   H extends CSSModifierObject = CSSModifierObject,
-> = (string extends keyof M
+> = (string extends keyof D
   ? {}
   : {
-      [key in keyof M]?:
-        | StyleValue<
-            keyof M[key] extends "false" | "true"
-              ? boolean
-              : boolean | keyof M[key]
-          >
-        | StyleValue<
-            keyof M[key] extends "false" | "true"
-              ? boolean
-              : boolean | keyof M[key]
-          >[]
-    }) & {
-  css: Y
-  [key: string]: any
-  colorScheme?: ThemeTokens["colorSchemes"] | ThemeTokens["colorSchemes"][]
-  size?: (keyof D)[] | keyof D
-  variant?: (keyof H)[] | keyof H
-  layer?: LayerScheme
-}
+      size?: (keyof D)[] | keyof D
+    }) &
+  (string extends keyof H
+    ? {}
+    : {
+        variant?: (keyof H)[] | keyof H
+      }) &
+  (string extends keyof M
+    ? {}
+    : {
+        [key in keyof M]?:
+          | StyleValue<Booleanish<keyof M[key]>>
+          | StyleValue<Booleanish<keyof M[key]>>[]
+      }) & {
+    css: Y
+    [key: string]: any
+    colorScheme?: ThemeTokens["colorSchemes"] | ThemeTokens["colorSchemes"][]
+    layer?: LayerScheme
+  }
 
 export interface ComponentStyle<
   Y extends CSSPropObject = CSSPropObject,

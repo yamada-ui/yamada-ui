@@ -18,7 +18,7 @@ import type {
   ThemeProps,
   WithoutThemeProps,
 } from "../theme"
-import type { ComponentSlot } from "./create-component"
+import type { ComponentSlot, ComponentSlotName } from "./create-component"
 import type { HTMLUIProps } from "./index.types"
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
@@ -36,7 +36,7 @@ import {
   toArray,
   toKebabCase,
 } from "../../utils"
-import { createQuery } from "../css"
+import { createQuery, mergeCSS } from "../css"
 import { pseudos } from "../pseudos"
 import { useColorSchemeContext } from "../styled"
 
@@ -318,6 +318,41 @@ export function getSlotClassName<Y extends number | string | symbol>(
   }
 }
 
+function getSlotCSS<Y extends number | string | symbol>(
+  slot?: ComponentSlot<Y>,
+  slotCSS?: CSSSlotObject<Y>,
+): CSSObject[] {
+  if (!slotCSS || !slot) return []
+
+  if (isArray(slot)) {
+    return slot.map((slot) => slotCSS[slot]!)
+  } else if (isObject(slot)) {
+    if (isArray(slot.slot)) {
+      return slot.slot.map((slot) => slotCSS[slot]!)
+    } else {
+      return [slotCSS[slot.slot]!]
+    }
+  } else {
+    return [slotCSS[slot]!]
+  }
+}
+
+export function mergeSlotCSS<Y extends number | string | symbol>(
+  slot?: ComponentSlot<Y>,
+  slotCSS?: CSSSlotObject<Y>,
+  css?: CSSObject | CSSObject[],
+) {
+  if (!slotCSS || !slot) return css
+
+  const result: CSSObject[] = []
+
+  result.push(...getSlotCSS(slot, slotCSS))
+
+  if (css) result.push(...toArray(css))
+
+  return result
+}
+
 function omitThemeProps<
   Y extends Dict = Dict,
   M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
@@ -381,6 +416,7 @@ interface UseStyleOptions<
   className?: string
   style?: M
   hasSlot?: H
+  slot?: ComponentSlot<ComponentSlotName<M>>
   transferProps?: D[]
 }
 
@@ -395,9 +431,10 @@ function useStyle<
     className,
     style: componentStyle,
     hasSlot,
+    slot,
     transferProps,
   }: UseStyleOptions<Y, M, D, H> = {},
-) {
+): [Style<H>, WithoutThemeProps<Y, M, D>] {
   const { theme } = useTheme()
   const { getAtRule, wrap } = theme.__layers ?? {}
   const rootColorScheme = useColorSchemeContext()
@@ -405,7 +442,7 @@ function useStyle<
   const { direction = "down", identifier } = theme.__config?.breakpoint ?? {}
   const options = { direction, hasSlot, identifier, queries, wrap }
 
-  const propsRef = useRef({} as WithoutThemeProps<Y, M, D>)
+  const propsRef = useRef<Dict>({})
   const styleRef = useRef<Style<H>>({})
 
   props = filterUndefined(props)
@@ -475,35 +512,36 @@ function useStyle<
       style = merge(style, wrapStyle<H>("variant", variantStyle)(options))
     }
 
-    if (propVariants) {
+    if (propVariants)
       style = getPropStyle<H>(mergedProps, propVariants, style)(options)
-    }
 
-    if (compounds) {
+    if (compounds)
       style = getCompoundStyle<H>(mergedProps, compounds, style)(options)
-    }
 
-    const styleEqual = isEqual(styleRef.current, style)
-
-    if (!styleEqual) styleRef.current = style
-
-    const propsEqual = isEqual(propsRef.current, computedProps)
-
-    if (!propsEqual)
+    if (!isEqual(propsRef.current, computedProps))
       propsRef.current = computedProps as unknown as WithoutThemeProps<Y, M, D>
+
+    if (!isEqual(styleRef.current, style)) {
+      styleRef.current = style
+
+      if (hasSlot) {
+        propsRef.current.css = mergeSlotCSS<ComponentSlotName<M>>(
+          slot,
+          styleRef.current as CSSSlotObject,
+          propsRef.current.css,
+        )
+      } else {
+        propsRef.current.css = mergeCSS(styleRef.current, propsRef.current.css)
+      }
+    }
   } else {
     props.className = cx(className, props.className)
 
-    const propsEqual = isEqual(propsRef.current, props)
-
-    if (!propsEqual)
+    if (!isEqual(propsRef.current, props))
       propsRef.current = props as unknown as WithoutThemeProps<Y, M, D>
   }
 
-  return {
-    ...propsRef.current,
-    css: styleRef.current,
-  }
+  return [styleRef.current, propsRef.current as WithoutThemeProps<Y, M, D>]
 }
 
 export interface UseComponentStyleOptions<

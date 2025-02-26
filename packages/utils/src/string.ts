@@ -1,8 +1,11 @@
 import type { StringLiteral } from "./index.types"
-import { isString } from "./assertion"
+import { isString, isUndefined } from "./assertion"
 
 export function cx(...classNames: (string | undefined)[]) {
-  return classNames.filter(Boolean).join(" ")
+  return classNames
+    .filter((className) => !isUndefined(className))
+    .map((className) => className.trim())
+    .join(" ")
 }
 
 export function escape(value: string, replaceValue = ""): string {

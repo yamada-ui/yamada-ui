@@ -164,11 +164,11 @@ export function getCreateThemeVars(
       function createKeyframesVar(token: string, value: any) {
         return function (semantic: boolean) {
           if (!semantic) {
-            return insertKeyframes(css(value)(theme))
+            return insertKeyframes(css(theme)(value))
           } else {
             const [variable, reference] = getRelatedReference(token, value)
 
-            return variable ? reference : insertKeyframes(css(value)(theme))
+            return variable ? reference : insertKeyframes(css(theme)(value))
           }
         }
       }

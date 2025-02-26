@@ -27,6 +27,8 @@ export type StringLiteral = string & {}
 
 export type Union<Y> = StringLiteral | Y
 
+export type Booleanish<Y> = Y extends "false" | "true" ? boolean : Y
+
 export type Length<T extends any[]> = T["length"]
 
 export type Merge<Y, M> = M & Omit<Y, keyof M>

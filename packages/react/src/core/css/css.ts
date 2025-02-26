@@ -249,8 +249,8 @@ function insertCSS(
   return prev
 }
 
-export function css(cssOrFunc: CSSObjectOrFunc) {
-  return function (theme: StyledTheme<UsageTheme>, forwardProps?: string[]) {
+export function css(theme: StyledTheme<UsageTheme>) {
+  return function (cssOrFunc: CSSObjectOrFunc) {
     function createCSS(cssOrFunc: CSSObjectOrFunc): Dict {
       const cssObj = runIfFunc(cssOrFunc, theme)
       const computedCSS = expandCSS(cssObj)(theme)
@@ -258,8 +258,6 @@ export function css(cssOrFunc: CSSObjectOrFunc) {
       let prev: Dict = {}
 
       for (let [prop, value] of Object.entries(computedCSS)) {
-        if (forwardProps?.includes(prop)) continue
-
         value = valueToVar(value, theme)
 
         if (value == null) continue

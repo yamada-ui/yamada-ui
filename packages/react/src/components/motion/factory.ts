@@ -1,10 +1,19 @@
 import type { ComponentType, ForwardRefExoticComponent } from "react"
 import type { DOMElement, StyledOptions } from "../../core"
-import type { MotionComponents, MotionFactory } from "./index.types"
+import type { MotionUIComponent } from "./index.types"
 import { motion as _motion } from "motion/react"
 import { styled } from "../../core"
 
-interface Factory extends MotionFactory, MotionComponents {}
+type Components = {
+  [Y in DOMElement]: MotionUIComponent<Y>
+}
+
+interface Factory extends Components {
+  <T extends DOMElement = DOMElement, M extends object = {}>(
+    el: T,
+    options?: StyledOptions,
+  ): MotionUIComponent<T, M>
+}
 
 function factory() {
   const cache = new Map<DOMElement, ComponentType<any>>()

@@ -422,11 +422,11 @@ To add icons, set a `ReactElement` to `icon`.
 
 ### Disable
 
-To disable, set `isDisabled` to `true`. You can also disable individually by setting it on `ResizableTrigger`.
+To disable, set `disabled` to `true`. You can also disable individually by setting it on `ResizableTrigger`.
 
 ```tsx
 <VStack>
-  <Resizable isDisabled h="md" rounded="md" borderWidth="1px">
+  <Resizable disabled h="md" rounded="md" borderWidth="1px">
     <ResizableItem as={Center}>One</ResizableItem>
 
     <ResizableTrigger />
@@ -441,7 +441,7 @@ To disable, set `isDisabled` to `true`. You can also disable individually by set
   <Resizable h="md" rounded="md" borderWidth="1px">
     <ResizableItem as={Center}>One</ResizableItem>
 
-    <ResizableTrigger isDisabled />
+    <ResizableTrigger disabled />
 
     <ResizableItem as={Center}>Two</ResizableItem>
 

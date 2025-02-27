@@ -116,7 +116,7 @@ import {
     {(styleType, index) => (
       <List
         styleType={styleType}
-        ms={styleType === "lower-alpha" ? "1.2em" : "0em"}
+        ms={styleType === "lower-alpha" ? "1.2em" : undefined}
       >
         <For
           each={[
@@ -130,7 +130,7 @@ import {
           {(text, index) => (
             <ListItem
               key={index}
-              ps={styleType === "lower-alpha" ? "0.2em" : "0em"}
+              ps={styleType === "lower-alpha" ? "0.2em" : undefined}
             >
               {text}
             </ListItem>

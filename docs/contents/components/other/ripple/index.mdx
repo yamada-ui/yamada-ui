@@ -78,10 +78,10 @@ return (
 
 ### Disabling
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx functional=true
-const { onPointerDown, ripples, onClear } = useRipple({ isDisabled: true })
+const { onPointerDown, ripples, onClear } = useRipple({ disabled: true })
 
 return (
   <Box
@@ -103,7 +103,7 @@ return (
 )
 ```
 
-Alternatively, you can disable in the same way by setting `isDisabled` to `true` on the `Ripple` component.
+Alternatively, you can disable in the same way by setting `disabled` to `true` on the `Ripple` component.
 
 ```tsx functional=true
 const { onPointerDown, ripples, onClear } = useRipple()
@@ -123,7 +123,7 @@ return (
   >
     <Text>Button</Text>
 
-    <Ripple isDisabled ripples={ripples} onClear={onClear} />
+    <Ripple disabled ripples={ripples} onClear={onClear} />
   </Box>
 )
 ```

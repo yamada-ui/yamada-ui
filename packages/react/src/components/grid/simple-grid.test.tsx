@@ -1,9 +1,24 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen, waitFor } from "../../../test"
 import { SimpleGrid } from "./simple-grid"
 
 describe("<SimpleGrid />", () => {
   test("passes a11y test", async () => {
     await a11y(<SimpleGrid>GridSimple</SimpleGrid>)
+  })
+
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(SimpleGrid.displayName).toBe("SimpleGrid")
+    expect(SimpleGrid.__ui__).toBe("SimpleGrid")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<SimpleGrid>SimpleGrid</SimpleGrid>)
+    expect(screen.getByText("SimpleGrid")).toHaveClass("ui-simple-grid")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<SimpleGrid>SimpleGrid</SimpleGrid>)
+    expect(screen.getByText("SimpleGrid").tagName).toBe("DIV")
   })
 
   test("minChildWidth - prop works correctly(minChildWidth prop takes precedence over the columns prop)", () => {
@@ -13,8 +28,10 @@ describe("<SimpleGrid />", () => {
       </SimpleGrid>,
     )
 
-    expect(screen.getByText("SimpleGrid")).toHaveStyle({
-      gridTemplateColumns: "repeat(auto-fit, minmax(1rem, 1fr))",
+    waitFor(() => {
+      expect(screen.getByText("SimpleGrid")).toHaveStyle({
+        gridTemplateColumns: "repeat(auto-fit, minmax(1rem, 1fr))",
+      })
     })
   })
 

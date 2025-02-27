@@ -12,7 +12,7 @@ import {
   merge,
   omitObject,
 } from "../../utils"
-import { styleProps } from "../components"
+import { cssProps } from "../components"
 import { styles } from "../styles"
 import { getVar } from "./var"
 
@@ -30,7 +30,7 @@ export const useCreateVars = <Y extends Dict, M extends keyof Y = keyof Y>(
   const { theme } = useTheme()
 
   return useMemo(
-    () => createVars(obj, keys, options)(theme),
+    () => createVars(theme)(obj, keys, options),
     [obj, keys, options, theme],
   )
 }
@@ -41,12 +41,12 @@ interface CreateVarsOptions<M> {
 }
 
 export const createVars =
+  (theme: StyledTheme<UsageTheme>) =>
   <Y extends Dict, M extends keyof Y = keyof Y>(
     obj: Y,
     keys: M[] | readonly M[],
     { format = defaultFormat, transform = false }: CreateVarsOptions<M> = {},
-  ) =>
-  (theme: StyledTheme<UsageTheme>): [Variable[], { [key in M]?: string }] => {
+  ): [Variable[], { [key in M]?: string }] => {
     const map = new Map<M, Variable>()
     const result: { [key in M]?: string } = {}
 
@@ -100,7 +100,7 @@ export const createVars =
         })
 
         if (transform) {
-          result[name] = getVar(formattedName)(theme)
+          result[name] = getVar(theme)(formattedName)
         } else {
           result[name] = `{${formattedName}}`
         }
@@ -127,7 +127,7 @@ export const insertVars = <Y extends Dict | Dict[] | undefined>(
   const createCSSObject = (props: Dict) =>
     Object.fromEntries(
       Object.entries(props).flatMap(([prop, value]) => {
-        if (!styleProps.has(prop) && !isValidProps(prop)) {
+        if (!cssProps.has(prop) && !isValidProps(prop)) {
           return [[prop, value]]
         } else if (isObject(value)) {
           return [[prop, insertVars(value, options)]]

@@ -1,5 +1,10 @@
 import type { FC } from "react"
-import type { CSSUIObject, HTMLUIProps, ThemeProps, Token } from "../../core"
+import type {
+  CSSUIObject,
+  HTMLUIProps,
+  ThemeProps,
+  StyleValue,
+} from "../../core"
 import type { PaginationItemProps } from "./pagination-item"
 import type { UsePaginationProps } from "./use-pagination"
 import { useMemo } from "react"
@@ -24,13 +29,13 @@ interface PaginationOptions {
    *
    * @default true
    */
-  withControls?: Token<boolean>
+  withControls?: StyleValue<boolean>
   /**
    * If `true`, display the edge buttons.
    *
    * @default false
    */
-  withEdges?: Token<boolean>
+  withEdges?: StyleValue<boolean>
   /**
    * Props for container element.
    */

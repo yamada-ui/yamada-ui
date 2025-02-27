@@ -1,4 +1,4 @@
-import type { CSSProps, HTMLUIProps, Token } from "../../core"
+import type { CSSProps, HTMLUIProps, StyleValue } from "../../core"
 import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"
 
@@ -14,7 +14,7 @@ interface GridItemOptions {
   /**
    * The number of columns the grid item should `span`.
    */
-  colSpan?: Token<number>
+  colSpan?: StyleValue<number>
   /**
    * The CSS `grid-column-start` property.
    */
@@ -26,7 +26,7 @@ interface GridItemOptions {
   /**
    * The number of rows the grid item should `span`.
    */
-  rowSpan?: Token<number>
+  rowSpan?: StyleValue<number>
   /**
    * The CSS `grid-row-start` property.
    */

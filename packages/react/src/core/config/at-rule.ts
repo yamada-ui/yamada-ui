@@ -53,7 +53,7 @@ export const generateAtRule =
 
           query = Object.entries(resolvedRest)
             .map(([key, value]) => {
-              value = tokenToVar("sizes", value)(theme)
+              value = tokenToVar(theme)("sizes", value)
 
               return `(${toKebabCase(key)}: ${value})`
             })

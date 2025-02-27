@@ -1,11 +1,11 @@
-import type { CSSUIObject, Token } from "../../core"
+import type { CSSObject, StyleValue } from "../../core"
 import { useCallback, useMemo } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useValue } from "../../hooks/use-value"
 import { createContext } from "../../utils"
 
 interface PaginationContext {
-  [key: string]: CSSUIObject | undefined
+  [key: string]: CSSObject | undefined
 }
 
 export const [PaginationProvider, usePaginationContext] =
@@ -27,7 +27,7 @@ export interface UsePaginationProps {
    *
    * @default 1
    */
-  boundaries?: Token<number>
+  boundaries?: StyleValue<number>
   /**
    * The initial page of the pagination.
    * Should be less than `total` and greater than `1`.
@@ -50,7 +50,7 @@ export interface UsePaginationProps {
    *
    * @default 1
    */
-  siblings?: Token<number>
+  siblings?: StyleValue<number>
   /**
    * The callback invoked when the page changes.
    */

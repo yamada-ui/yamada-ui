@@ -93,7 +93,7 @@ export const Gap: Story = () => {
 
 export const MinChildWidth: Story = () => {
   return (
-    <SimpleGrid gap="md" minChildWidth={{ base: "3xs", lg: 100 }} w="full">
+    <SimpleGrid gap="md" minChildWidth={{ base: "3xs", md: "8rem" }} w="full">
       <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
       </GridItem>

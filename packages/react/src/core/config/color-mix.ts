@@ -20,24 +20,26 @@ const methods: { [key: string]: string } = {
   "xyz-d65": "in xyz-d65",
 }
 
-function getColor(value: string | undefined, theme: StyledTheme<UsageTheme>) {
-  if (!value) return ""
+function getColor(theme: StyledTheme<UsageTheme>) {
+  return function (value: string | undefined, fallbackColor?: string) {
+    if (!value) return ""
 
-  let [color, percent, ...rest] = value.split(" ").filter(Boolean)
+    let [color, percent, ...rest] = value.split(" ").filter(Boolean)
 
-  if (rest.length) return value
+    if (rest.length) return value
 
-  if (color?.startsWith("colors.")) color = color.replace("colors.", "")
+    if (color?.startsWith("colors.")) color = color.replace("colors.", "")
 
-  if (isColorScheme(color)) {
-    color = getColorSchemeVar(color)(theme)
-  } else {
-    color = tokenToVar("colors", color)(theme)
+    if (isColorScheme(color)) {
+      color = getColorSchemeVar(theme)(color)
+    } else {
+      color = tokenToVar(theme)("colors", color, fallbackColor)
+    }
+
+    if (percent && !percent.endsWith("%")) percent = `${percent}%`
+
+    return !percent ? color : `${color} ${percent}`
   }
-
-  if (percent && !percent.endsWith("%")) percent = `${percent}%`
-
-  return !percent ? color : `${color} ${percent}`
 }
 
 function omitPercent(value?: string) {
@@ -73,7 +75,10 @@ function createVariable(
   return result
 }
 
-export function colorMix(value: any, { properties, theme }: TransformOptions) {
+export function colorMix(
+  value: any,
+  { fallback, properties, theme }: TransformOptions,
+) {
   if (value == null || globalValues.has(value)) return value
 
   if (value.includes("/")) {
@@ -84,7 +89,7 @@ export function colorMix(value: any, { properties, theme }: TransformOptions) {
 
   const { type, values } = getCSSFunction(value)
 
-  if (!values) return getColor(value, theme)
+  if (!values) return getColor(theme)(value, fallback)
 
   switch (type) {
     case "mix":
@@ -97,8 +102,8 @@ export function colorMix(value: any, { properties, theme }: TransformOptions) {
         method = DEFAULT_METHOD
       }
 
-      color1 = getColor(color1, theme)
-      color2 = getColor(color2, theme)
+      color1 = getColor(theme)(color1, fallback)
+      color2 = getColor(theme)(color2, fallback)
 
       return createVariable(
         `color-mix(${method}` +
@@ -115,7 +120,10 @@ export function colorMix(value: any, { properties, theme }: TransformOptions) {
     case "transparentize": {
       const [color, percent] = splitValues(values)
 
-      const color1 = getColor(percent ? `${color} ${percent}` : color, theme)
+      const color1 = getColor(theme)(
+        percent ? `${color} ${percent}` : color,
+        fallback,
+      )
       const color2 =
         type === "transparentize"
           ? "transparent"
@@ -133,7 +141,7 @@ export function colorMix(value: any, { properties, theme }: TransformOptions) {
     case "tone": {
       const [color, tone] = splitValues(values)
 
-      const color1 = getColor(color, theme)
+      const color1 = getColor(theme)(color, fallback)
 
       if (!tone) return color1
 

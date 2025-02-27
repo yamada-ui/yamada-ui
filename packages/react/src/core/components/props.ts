@@ -23,7 +23,7 @@ function isEvent(key: string) {
   return /^on[A-Z]/.test(key)
 }
 
-export const styleProps = new Set<string>([
+export const cssProps = new Set<string>([
   ...pseudoProperties,
   ...styleProperties,
 ])
@@ -36,7 +36,7 @@ export function createShouldForwardProp(
   return function (prop: string): boolean {
     if (forwardProps?.includes(prop)) return true
 
-    return !styleProps.has(prop)
+    return !cssProps.has(prop)
   }
 }
 

@@ -134,8 +134,8 @@ function expandAdditionalObject(
   }, {})
 }
 
-function expandCSS(css: Dict) {
-  return function (theme: StyledTheme<UsageTheme>): Dict {
+function expandCSS(theme: StyledTheme<UsageTheme>) {
+  return function (css: Dict): Dict {
     if (!theme.__breakpoints) return css
 
     const { isResponsive, keys } = theme.__breakpoints
@@ -185,23 +185,25 @@ function expandCSS(css: Dict) {
   }
 }
 
-function valueToVar(value: any, theme: StyledTheme<UsageTheme>) {
-  return transformInterpolation(value, (value) => {
-    if (value.includes("colorScheme.")) {
-      return getColorSchemeVar(value)(theme)
-    } else if (value.includes("colors.")) {
-      return colorMix(value, { theme })
-    } else {
-      if (
-        isObject(theme.__cssMap) &&
-        value in theme.__cssMap &&
-        theme.__cssMap[value]?.ref
-      )
-        return theme.__cssMap[value].ref
+function valueToVar(theme: StyledTheme<UsageTheme>) {
+  return function (value: any) {
+    return transformInterpolation(value, (value, fallbackValue) => {
+      if (value.includes("colorScheme.")) {
+        return getColorSchemeVar(theme)(value)
+      } else if (value.includes("colors.")) {
+        return colorMix(value, { fallback: fallbackValue, theme })
+      } else {
+        if (
+          isObject(theme.__cssMap) &&
+          value in theme.__cssMap &&
+          theme.__cssMap[value]?.ref
+        )
+          return theme.__cssMap[value].ref
 
-      return getVar(value)(theme)
-    }
-  })
+        return fallbackValue || getVar(theme)(value)
+      }
+    })
+  }
 }
 
 function mergeCSS(
@@ -253,12 +255,12 @@ export function css(theme: StyledTheme<UsageTheme>) {
   return function (cssOrFunc: CSSObjectOrFunc) {
     function createCSS(cssOrFunc: CSSObjectOrFunc): Dict {
       const cssObj = runIfFunc(cssOrFunc, theme)
-      const computedCSS = expandCSS(cssObj)(theme)
+      const computedCSS = expandCSS(theme)(cssObj)
 
       let prev: Dict = {}
 
       for (let [prop, value] of Object.entries(computedCSS)) {
-        value = valueToVar(value, theme)
+        value = valueToVar(theme)(value)
 
         if (value == null) continue
 

@@ -7,6 +7,7 @@ import { getColorSchemeVar, isColorScheme } from "../css"
 export interface TransformOptions {
   theme: StyledTheme<UsageTheme>
   css?: CSSFunction
+  fallback?: any
   prev?: Dict
   properties?: string | string[]
 }
@@ -83,16 +84,16 @@ export function analyzeCSSValue(value: any) {
   return { unit, unitless: !unit, value }
 }
 
-export function tokenToVar(token: ThemeToken, value: any) {
-  return function (theme: StyledTheme<UsageTheme>) {
-    if (isColorScheme(value)) return getColorSchemeVar(value)(theme)
+export function tokenToVar(theme: StyledTheme<UsageTheme>) {
+  return function (token: ThemeToken, value: any, fallbackValue?: any) {
+    if (isColorScheme(value)) return getColorSchemeVar(theme)(value)
 
     const resolvedToken = `${token}.${value}`
 
     if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
       return theme.__cssMap[resolvedToken]?.ref
     } else {
-      return value
+      return fallbackValue || value
     }
   }
 }

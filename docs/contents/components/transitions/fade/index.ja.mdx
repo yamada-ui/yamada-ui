@@ -15,16 +15,16 @@ import { Fade } from "@yamada-ui/react"
 
 ## 使い方
 
-表示または非表示を制御するために、`isOpen`を設定します。
+表示または非表示を制御するために、`open`を設定します。
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Fade isOpen={isOpen}>
+    <Fade open={open}>
       <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>
@@ -38,13 +38,13 @@ return (
 所要時間を変更する場合は、`duration`に数値(秒)を設定します。
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Fade isOpen={isOpen} duration={0.4}>
+    <Fade open={open} duration={0.4}>
       <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>
@@ -58,13 +58,13 @@ return (
 非表示時にアンマウントする場合は、`unmountOnExit`を`true`に設定します。
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Fade isOpen={isOpen} unmountOnExit>
+    <Fade open={open} unmountOnExit>
       <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>

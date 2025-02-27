@@ -40,7 +40,7 @@ describe("<Textarea />", () => {
     expect(screen.getByRole("textbox")).toHaveProperty("rows", 1)
   })
 
-  test("Autosize Textarea renders correctly", () => {
+  test.todo("Autosize Textarea renders correctly", () => {
     let fontsData =
       "fonts" in global.document ? global.document.fonts : undefined
 

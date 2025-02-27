@@ -7,6 +7,21 @@ describe("<Fade />", () => {
     await a11y(<Fade />)
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Fade.displayName).toBe("Fade")
+    expect(Fade.__ui__).toBe("Fade")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Fade>Fade</Fade>)
+    expect(screen.getByText("Fade")).toHaveClass("ui-fade")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Fade>Fade</Fade>)
+    expect(screen.getByText("Fade").tagName).toBe("DIV")
+  })
+
   test("toggles visibility on open change", async () => {
     const TestComponent = () => {
       const [open, setOpen] = useState(false)

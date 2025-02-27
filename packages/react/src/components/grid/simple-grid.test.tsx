@@ -16,6 +16,11 @@ describe("<SimpleGrid />", () => {
     expect(screen.getByText("SimpleGrid")).toHaveClass("ui-simple-grid")
   })
 
+  test("renders HTML tag correctly", () => {
+    render(<SimpleGrid>SimpleGrid</SimpleGrid>)
+    expect(screen.getByText("SimpleGrid").tagName).toBe("DIV")
+  })
+
   test("minChildWidth - prop works correctly(minChildWidth prop takes precedence over the columns prop)", () => {
     render(
       <SimpleGrid columns={2} minChildWidth={{ base: "4" }}>

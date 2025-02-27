@@ -1,9 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
-import { Button, IconButton } from "../button"
-import { FormControl } from "../form-control"
+import { PropsTable } from "../../../storybook/components"
+import { COLOR_SCHEMES, toTitleCase } from "../../utils"
+import { Button } from "../button"
+import { Field } from "../field"
 import { MinusIcon, PlusIcon } from "../icon"
+import { IconButton } from "../icon-button"
 import { Input } from "../input"
 import { HStack, VStack } from "../stack"
 import { NumberInput, useNumberInput } from "./"
@@ -21,29 +24,49 @@ export const Basic: Story = () => {
   return <NumberInput placeholder="basic" />
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
-    <>
-      <NumberInput size="xs" placeholder="extra small size" />
-      <NumberInput size="sm" placeholder="small size" />
-      <NumberInput size="md" placeholder="medium size" />
-      <NumberInput size="lg" placeholder="large size" />
-    </>
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return (
+          <NumberInput
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithVariant: Story = () => {
+export const Variant: Story = () => {
   return (
-    <>
-      <NumberInput variant="outline" placeholder="outline" />
-      <NumberInput variant="filled" placeholder="filled" />
-      <NumberInput variant="flushed" placeholder="flushed" />
-      <NumberInput variant="unstyled" placeholder="unstyled" />
-    </>
+    <PropsTable
+      variant="column"
+      columns={["outline", "filled", "flushed"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <NumberInput
+            key={key}
+            colorScheme={row}
+            variant={column}
+            placeholder={toTitleCase(column)}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithBorderColor: Story = () => {
+export const BorderColor: Story = () => {
   return (
     <>
       <NumberInput disabled placeholder="default border color" />
@@ -60,17 +83,17 @@ export const WithBorderColor: Story = () => {
   )
 }
 
-export const WithDefaultValue: Story = () => {
+export const DefaultValue: Story = () => {
   return <NumberInput aria-label="Number input" defaultValue={18} />
 }
 
-export const WithMinMax: Story = () => {
+export const MinMax: Story = () => {
   return (
     <NumberInput aria-label="Number input" defaultValue={18} max={31} min={8} />
   )
 }
 
-export const WithStep: Story = () => {
+export const Step: Story = () => {
   return (
     <NumberInput
       aria-label="Number input"
@@ -82,7 +105,7 @@ export const WithStep: Story = () => {
   )
 }
 
-export const WithPrecision: Story = () => {
+export const Precision: Story = () => {
   return (
     <NumberInput
       aria-label="Number input"
@@ -124,13 +147,13 @@ export const Disabled: Story = () => {
       <NumberInput variant="flushed" disabled placeholder="flushed" />
       <NumberInput variant="unstyled" disabled placeholder="unstyled" />
 
-      <FormControl
+      <Field.Root
         disabled
         helperMessage="Please enter the quantity you wish to order."
         label="Order quantity"
       >
         <NumberInput />
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -143,13 +166,13 @@ export const Readonly: Story = () => {
       <NumberInput variant="flushed" placeholder="flushed" readOnly />
       <NumberInput variant="unstyled" placeholder="unstyled" readOnly />
 
-      <FormControl
+      <Field.Root
         helperMessage="Please enter the quantity you wish to order."
         label="Order quantity"
         readOnly
       >
         <NumberInput />
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -162,13 +185,13 @@ export const Invalid: Story = () => {
       <NumberInput variant="flushed" invalid placeholder="flushed" />
       <NumberInput variant="unstyled" invalid placeholder="unstyled" />
 
-      <FormControl
+      <Field.Root
         errorMessage="Order quantity is required."
         invalid
         label="Order quantity"
       >
         <NumberInput />
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -177,8 +200,8 @@ export const CustomStepper: Story = () => {
   return (
     <NumberInput
       aria-label="Number input"
-      decrementProps={{ children: "-", px: "xs" }}
-      incrementProps={{ children: "+", px: "xs" }}
+      decrementProps={{ children: "-", overflow: "hidden", px: "xs" }}
+      incrementProps={{ children: "+", overflow: "hidden", px: "xs" }}
     />
   )
 }
@@ -195,11 +218,16 @@ export const CustomComponent: Story = () => {
 
   return (
     <HStack gap="sm" maxW="xs">
-      <IconButton icon={<PlusIcon fontSize="2xl" />} {...getIncrementProps()} />
+      <IconButton
+        icon={<PlusIcon fontSize="2xl" />}
+        {...getIncrementProps()}
+        aria-label="Increment"
+      />
       <Input {...getInputProps()} aria-label="Number input" />
       <IconButton
         icon={<MinusIcon fontSize="2xl" />}
         {...getDecrementProps()}
+        aria-label="Decrement"
       />
     </HStack>
   )
@@ -240,7 +268,7 @@ export const ReactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Field.Root
         errorMessage={errors.numberInput?.message}
         invalid={!!errors.numberInput}
         label="Age"
@@ -254,7 +282,7 @@ export const ReactHookForm: Story = () => {
             required: { message: "This is required.", value: true },
           }}
         />
-      </FormControl>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit
@@ -285,7 +313,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Field.Root
         errorMessage={errors.numberInput?.message}
         invalid={!!errors.numberInput}
         label="Age"
@@ -296,7 +324,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
           render={({ field }) => <NumberInput {...field} />}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

@@ -5,22 +5,9 @@ import type {
   Transition,
 } from "motion/react"
 import type * as React from "react"
-import type {
-  ComponentArgs,
-  OmitProps,
-  StyledOptions,
-  UIProps,
-  WithoutAs,
-} from "../../core"
+import type { ComponentArgs, OmitProps, UIProps, WithoutAs } from "../../core"
 import type { DOMElement } from "../../core"
 import type { Dict, Merge } from "../../utils"
-
-export interface MotionFactory {
-  <T extends DOMElement = DOMElement, M extends object = {}>(
-    el: T,
-    options?: StyledOptions,
-  ): MotionUIComponent<T, M>
-}
 
 type ComponentConditionalProps<
   Y extends DOMElement,
@@ -43,10 +30,6 @@ type ComponentProps<
 export interface MotionComponent<Y extends DOMElement, D extends object = {}>
   extends ComponentArgs {
   <M extends DOMElement = Y>(props: ComponentProps<Y, M, D>): React.ReactElement
-}
-
-export type MotionComponents = {
-  [Y in DOMElement]: MotionUIComponent<Y>
 }
 
 export interface MotionUIComponent<Y extends DOMElement, M extends object = {}>

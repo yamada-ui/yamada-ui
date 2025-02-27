@@ -1,4 +1,4 @@
-import type { HTMLProps, PropGetter, UIValue } from "../../core"
+import type { HTMLProps, PropGetter, StyleValue } from "../../core"
 import type { UseModalProps } from "../modal"
 import type { MotionProps } from "../motion"
 import { handlerAll } from "@yamada-ui/utils"
@@ -44,7 +44,7 @@ export interface UseDrawerProps extends UseModalProps {
    *
    * @default 'right'
    */
-  placement?: UIValue<"bottom" | "left" | "right" | "top">
+  placement?: StyleValue<"bottom" | "left" | "right" | "top">
 }
 
 export const useDrawer = ({

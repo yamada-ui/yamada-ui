@@ -30,8 +30,8 @@ describe("createVars", () => {
     const cssObj: CSSObject = {
       color: "primary",
     }
-    const [vars, variableProps] = createVars(cssObj, ["color"])(styledTheme)
-    const result = css({ vars })(styledTheme)
+    const [vars, variableProps] = createVars(styledTheme)(cssObj, ["color"])
+    const result = css(styledTheme)({ vars })
     expect(vars).toStrictEqual([
       {
         name: "color-0",
@@ -51,8 +51,8 @@ describe("createVars", () => {
     const cssObj: CSSObject = {
       textAlign: "center",
     }
-    const [vars, variableProps] = createVars(cssObj, ["textAlign"])(styledTheme)
-    const result = css({ vars })(styledTheme)
+    const [vars, variableProps] = createVars(styledTheme)(cssObj, ["textAlign"])
+    const result = css(styledTheme)({ vars })
     expect(vars).toStrictEqual([
       {
         name: "textAlign-0",
@@ -72,10 +72,14 @@ describe("createVars", () => {
     const cssObj: CSSObject = {
       transform: "rotate-reverse",
     }
-    const [vars, variableProps] = createVars(cssObj, ["transform"], {
-      format: (name, index) => `${name}-${index}`,
-    })(styledTheme)
-    const result = css({ vars })(styledTheme)
+    const [vars, variableProps] = createVars(styledTheme)(
+      cssObj,
+      ["transform"],
+      {
+        format: (name, index) => `${name}-${index}`,
+      },
+    )
+    const result = css(styledTheme)({ vars })
     expect(vars).toStrictEqual([
       {
         name: "transform-0",
@@ -96,8 +100,8 @@ describe("createVars", () => {
       borderColor: "primary",
       color: "primary",
     }
-    const [vars, variableProps] = createVars(cssObj, ["color"])(styledTheme)
-    const result = css({ vars })(styledTheme)
+    const [vars, variableProps] = createVars(styledTheme)(cssObj, ["color"])
+    const result = css(styledTheme)({ vars })
     expect(vars).toStrictEqual([
       {
         name: "color-1",
@@ -117,8 +121,8 @@ describe("createVars", () => {
     const cssObj: CSSObject = {
       color: ["primary", "secondary"],
     }
-    const [vars, variableProps] = createVars(cssObj, ["color"])(styledTheme)
-    const result = css({ vars })(styledTheme)
+    const [vars, variableProps] = createVars(styledTheme)(cssObj, ["color"])
+    const result = css(styledTheme)({ vars })
     expect(vars).toStrictEqual([
       {
         name: "color-0",
@@ -141,8 +145,8 @@ describe("createVars", () => {
     const cssObj: CSSObject = {
       color: { base: "primary", md: "secondary" },
     }
-    const [vars, variableProps] = createVars(cssObj, ["color"])(styledTheme)
-    const result = css({ vars })(styledTheme)
+    const [vars, variableProps] = createVars(styledTheme)(cssObj, ["color"])
+    const result = css(styledTheme)({ vars })
     expect(vars).toStrictEqual([
       {
         name: "color-0",
@@ -168,8 +172,8 @@ describe("createVars", () => {
         color: "secondary",
       },
     }
-    const [vars, variableProps] = createVars(cssObj, ["color"])(styledTheme)
-    const result = css({ vars })(styledTheme)
+    const [vars, variableProps] = createVars(styledTheme)(cssObj, ["color"])
+    const result = css(styledTheme)({ vars })
     expect(vars).toStrictEqual([
       {
         name: "color-0",
@@ -195,8 +199,8 @@ describe("createVars", () => {
         color: ["warning", "danger"],
       },
     }
-    const [vars, variableProps] = createVars(cssObj, ["color"])(styledTheme)
-    const result = css({ vars })(styledTheme)
+    const [vars, variableProps] = createVars(styledTheme)(cssObj, ["color"])
+    const result = css(styledTheme)({ vars })
     expect(vars).toStrictEqual([
       {
         name: "color-0",
@@ -231,8 +235,8 @@ describe("createVars", () => {
         color: { base: "warning", md: "danger" },
       },
     }
-    const [vars, variableProps] = createVars(cssObj, ["color"])(styledTheme)
-    const result = css({ vars })(styledTheme)
+    const [vars, variableProps] = createVars(styledTheme)(cssObj, ["color"])
+    const result = css(styledTheme)({ vars })
     expect(vars).toStrictEqual([
       {
         name: "color-0",

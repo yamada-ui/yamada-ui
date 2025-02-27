@@ -48,12 +48,12 @@ describe("css", () => {
   })
 
   test("returns system props styles", () => {
-    const result = css({
+    const result = css(theme)({
       color: "gray.500",
       display: "block",
       fontSize: "md",
       mx: "4",
-    })(theme)
+    })
 
     expect(result).toStrictEqual({
       color: "var(--ui-colors-gray-500)",
@@ -65,9 +65,9 @@ describe("css", () => {
   })
 
   test("returns system props responsive styles", () => {
-    const result = css({
+    const result = css(theme)({
       fontSize: { base: "md", md: "sm" },
-    })(theme)
+    })
 
     expect(result).toStrictEqual({
       "@media screen and (max-width: 768px)": {
@@ -78,9 +78,9 @@ describe("css", () => {
   })
 
   test("returns system props color-mode styles", () => {
-    const result = css({
+    const result = css(theme)({
       color: ["blackAlpha.500", "whiteAlpha.500"],
-    })(theme)
+    })
 
     expect(result).toStrictEqual({
       ".ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]":
@@ -92,12 +92,12 @@ describe("css", () => {
   })
 
   test("returns nested system props styles", () => {
-    const result = css({
+    const result = css(theme)({
       color: "gray.500",
       _hover: {
         color: "gray.300",
       },
-    })(theme)
+    })
 
     expect(result).toStrictEqual({
       color: "var(--ui-colors-gray-500)",
@@ -108,31 +108,20 @@ describe("css", () => {
   })
 
   test("works with functional arguments", () => {
-    const result = css((t: Dict) => ({
+    const result = css(theme)((t: Dict) => ({
       color: t.colors?.gray?.[500],
-    }))(theme)
+    }))
 
     expect(result).toStrictEqual({
       color: "#737373",
     })
   })
 
-  test("returns omitted style prop", () => {
-    const result = css({
-      color: "gray.500",
-      fontSize: "md",
-    })(theme, ["color"])
-
-    expect(result).toStrictEqual({
-      fontSize: "var(--ui-fontSizes-md)",
-    })
-  })
-
   test("returns omitted undefined value", () => {
-    const result = css({
+    const result = css(theme)({
       color: "gray.500",
       fontSize: undefined,
-    })(theme)
+    })
 
     expect(result).toStrictEqual({
       color: "var(--ui-colors-gray-500)",
@@ -140,9 +129,9 @@ describe("css", () => {
   })
 
   test("returns line clamp", () => {
-    const result = css({
+    const result = css(theme)({
       lineClamp: 1,
-    })(theme)
+    })
 
     expect(result).toStrictEqual({
       "--line-clamp": 1,
@@ -155,9 +144,9 @@ describe("css", () => {
   })
 
   test("returns css var", () => {
-    const result = css({
+    const result = css(theme)({
       vars: [{ name: "space", token: "spaces", value: "4" }],
-    })(theme)
+    })
 
     expect(result).toStrictEqual({
       "--ui-space": "var(--ui-spaces-4)",
@@ -165,9 +154,9 @@ describe("css", () => {
   })
 
   test("returns apply", () => {
-    const result = css({
+    const result = css(theme)({
       apply: "heading.2xl",
-    })(theme)
+    })
 
     expect(result).toStrictEqual({
       fontSize: "var(--ui-fontSizes-2xl)",
@@ -175,9 +164,9 @@ describe("css", () => {
   })
 
   test("returns layer styles", () => {
-    const result = css({
+    const result = css(theme)({
       layerStyle: "muted",
-    })(theme)
+    })
 
     expect(result).toStrictEqual({
       background: "var(--ui-colors-gray-500)",
@@ -185,9 +174,9 @@ describe("css", () => {
   })
 
   test("returns text styles", () => {
-    const result = css({
+    const result = css(theme)({
       textStyle: "gradient",
-    })(theme)
+    })
 
     expect(result).toStrictEqual({
       backgroundClip: "text",
@@ -199,10 +188,10 @@ describe("css", () => {
   })
 
   test("returns interpolation", () => {
-    const result = css({
+    const result = css(theme)({
       m: "{yamada}",
       p: "{spaces.4} {spaces.4}",
-    })(theme)
+    })
 
     expect(result).toStrictEqual({
       margin: "var(--ui-yamada)",

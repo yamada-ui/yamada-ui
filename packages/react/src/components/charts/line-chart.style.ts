@@ -1,8 +1,7 @@
-import type { ComponentMultiStyle } from "../../core"
-import { getMemoizedObject as get } from "../../utils"
+import { defineComponentSlotStyle } from "../../core"
 
-export const LineChart: ComponentMultiStyle<"LineChart"> = {
-  baseStyle: {
+export const lineChartStyle = defineComponentSlotStyle({
+  base: {
     activeDot: {
       fill: ["white", "black"],
       strokeWidth: 2,
@@ -47,6 +46,7 @@ export const LineChart: ComponentMultiStyle<"LineChart"> = {
       fillOpacity: 1,
       fontSize: "xs",
     },
+    root: {},
     tooltip: {
       bg: ["white", "black"],
       border: "1px solid",
@@ -90,14 +90,14 @@ export const LineChart: ComponentMultiStyle<"LineChart"> = {
       textAlign: "end",
     },
     xAxis: {
-      color: "muted",
+      color: "fg.muted",
       fontSize: "xs",
     },
     xAxisLabel: {
       fontSize: 12,
     },
     yAxis: {
-      color: "muted",
+      color: "fg.muted",
       fontSize: "xs",
     },
     yAxisLabel: {
@@ -106,74 +106,78 @@ export const LineChart: ComponentMultiStyle<"LineChart"> = {
   },
 
   sizes: {
-    sm: ({ theme: t }) => ({
-      container: {
-        h: "xs",
-        w: "xl",
-      },
+    sm: {
       legend: {
         gap: "xs",
         mb: "md",
       },
       legendItem: {
         fontSize: "xs",
-        lineHeight: get(t, "sizes.6"),
+        lineHeight: "{sizes.6}",
         minH: "6",
         minW: "6",
         px: "2",
       },
-    }),
-    md: ({ theme: t }) => ({
-      container: {
-        h: "sm",
-        w: "3xl",
+      root: {
+        container: {},
+        h: "xs",
+        w: "xl",
       },
+    },
+    md: {
       legend: {
         gap: "xs",
         mb: "md",
       },
       legendItem: {
         fontSize: "sm",
-        lineHeight: get(t, "sizes.7"),
+        lineHeight: "{sizes.7}",
         minH: "7",
         minW: "7",
         px: "3",
       },
-    }),
-    lg: ({ theme: t }) => ({
-      container: {
+      root: {
+        container: {},
+        h: "sm",
+        w: "3xl",
+      },
+    },
+    lg: {
+      legend: {
+        gap: "sm",
+        mb: "md",
+      },
+      legendItem: {
+        fontSize: "md",
+        lineHeight: "{sizes.8}",
+        minH: "8",
+        minW: "8",
+        px: "3",
+      },
+      root: {
+        container: {},
         h: "md",
         w: "5xl",
       },
+    },
+    full: {
       legend: {
         gap: "sm",
         mb: "md",
       },
       legendItem: {
         fontSize: "md",
-        lineHeight: get(t, "sizes.8"),
+        lineHeight: "{sizes.8}",
         minH: "8",
         minW: "8",
         px: "3",
       },
-    }),
-    full: ({ theme: t }) => ({
-      container: {
+      root: {
+        container: {},
         h: "md",
         w: "full",
       },
-      legend: {
-        gap: "sm",
-        mb: "md",
-      },
-      legendItem: {
-        fontSize: "md",
-        lineHeight: get(t, "sizes.8"),
-        minH: "8",
-        minW: "8",
-        px: "3",
-      },
-    }),
+    },
   },
 
   variants: {},
@@ -181,4 +185,6 @@ export const LineChart: ComponentMultiStyle<"LineChart"> = {
   defaultProps: {
     size: "full",
   },
-}
+})
+
+export type LineChartStyle = typeof lineChartStyle

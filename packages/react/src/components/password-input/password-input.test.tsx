@@ -1,34 +1,32 @@
 import { useState } from "react"
 import { a11y, render, screen, waitFor } from "../../../test"
 import { EyeIcon, EyeOffIcon } from "../icon"
-import { PasswordInput, PasswordInputStrengthMeter } from "./"
+import { PasswordInput, StrengthMeter } from "./"
 
 describe("<PasswordInput />", () => {
   test("PasswordInput renders correctly", async () => {
-    await a11y(<PasswordInput placeholder="your password" />)
+    await a11y(<PasswordInput placeholder="password" />)
   })
 
-  test("Icons render correctly depending on the visibility", async () => {
+  test("Input type render correctly depending on the visibility", async () => {
     const { user } = render(
       <PasswordInput
-        placeholder="your password"
+        placeholder="password"
         visibilityIcon={{
-          off: <EyeOffIcon data-testid="eyeOffIcon" />,
-          on: <EyeIcon data-testid="eyeIcon" />,
+          off: <EyeOffIcon />,
+          on: <EyeIcon />,
         }}
       />,
     )
 
-    const passwordInput = await screen.findByPlaceholderText("your password")
-    await waitFor(() => expect(passwordInput).toBeVisible())
-    const eyeIcon = await screen.findByTestId("eyeIcon")
+    const input = await screen.findByPlaceholderText("password")
+    const button = await screen.findByRole("button")
 
-    await waitFor(() => expect(eyeIcon).toBeVisible())
+    expect(input).toHaveAttribute("type", "password")
 
-    await user.click(eyeIcon)
-    const eyeOffIcon = await screen.findByTestId("eyeOffIcon")
+    await user.click(button)
 
-    await waitFor(() => expect(eyeOffIcon).toBeVisible())
+    expect(input).toHaveAttribute("type", "text")
   })
 })
 
@@ -49,23 +47,23 @@ describe("<PassWordInputStrengthMeter />", () => {
     return (
       <>
         <PasswordInput
-          placeholder="your password"
+          placeholder="password"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
 
-        <PasswordInputStrengthMeter value={getStrength(value)} />
+        <StrengthMeter value={getStrength(value)} />
       </>
     )
   }
   test("PasswordInputStrengthMeter renders correctly", async () => {
-    await a11y(<PasswordInputStrengthMeter value={3} />)
+    await a11y(<StrengthMeter value={3} />)
   })
 
   test("Could render strength meter with difference value", async () => {
     const { user } = render(<ExampleWithPassWordInputStrengthMeter />)
 
-    const passwordInput = await screen.findByPlaceholderText("your password")
+    const passwordInput = await screen.findByPlaceholderText("password")
     const strengthMeter = await screen.findByRole("meter")
 
     await user.type(passwordInput, "aaaaaaa")

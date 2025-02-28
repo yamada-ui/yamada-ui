@@ -1,17 +1,18 @@
-import type { CSSUIObject, CSSUIProps, FC, HTMLUIProps } from "../../core"
-import { useMemo } from "react"
-import { ui } from "../../core"
-import { cx, isArray } from "../../utils"
+import type { CSSObject, CSSProps, HTMLUIProps } from "../../core"
+import type { FloatStyle } from "./float.style"
+import { createComponent } from "../../core"
+import { isArray } from "../../utils"
+import { floatStyle } from "./float.style"
 
 const getPlacementStyle = (
   placement: FloatPlacement = "start-end",
-  offset: CSSUIProps["inset"] = "0",
-): CSSUIObject => {
+  offset: CSSProps["inset"] = "0",
+): CSSObject => {
   const [block, inline] = placement.split("-")
   const [offsetBlock, offsetInline] = isArray(offset)
     ? offset
     : [offset, offset]
-  const styles: CSSUIObject = {}
+  const styles: CSSObject = {}
   let translateX = "0%"
   let translateY = "0%"
 
@@ -55,11 +56,11 @@ export type FloatPlacement =
   | "start-end"
   | "start-start"
 
-interface FloatOptions {
+export interface FloatProps extends Omit<HTMLUIProps, "offset"> {
   /**
    * Changes position offset, usually used when element has border-radius.
    */
-  offset?: CSSUIProps["inset"]
+  offset?: CSSProps["inset"]
   /**
    * The placement of the float.
    *
@@ -68,31 +69,21 @@ interface FloatOptions {
   placement?: FloatPlacement
 }
 
-export interface FloatProps extends Omit<HTMLUIProps, "offset">, FloatOptions {}
+export const {
+  PropsContext: FloatPropsContext,
+  usePropsContext: useFloatPropsContext,
+  withContext,
+} = createComponent<FloatProps, FloatStyle>("float", floatStyle)
 
 /**
  * `Float` is a component used to anchor an element to the edge of a container.
  *
- * @see Docs https://yamada-ui.com/components/layouts/float
+ * @see Docs https://yamada-ui.com/components/float
  */
-export const Float: FC<FloatProps> = ({
-  className,
-  offset,
-  placement,
-  ...rest
-}) => {
-  const css = useMemo<CSSUIObject>(
-    () => ({
-      alignItems: "center",
-      display: "inline-flex",
-      justifyContent: "center",
-      position: "absolute",
-      ...getPlacementStyle(placement, offset),
-    }),
-    [placement, offset],
-  )
-
-  return <ui.div className={cx("ui-float", className)} __css={css} {...rest} />
-}
-
-Float.__ui__ = "Float"
+export const Float = withContext<"div", FloatProps>("div")(
+  undefined,
+  ({ offset, placement, ...rest }) => ({
+    ...getPlacementStyle(placement, offset),
+    ...rest,
+  }),
+)

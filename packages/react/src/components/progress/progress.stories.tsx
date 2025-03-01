@@ -1,4 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { PropsTable } from "../../../storybook/components"
+import { VStack } from "../stack"
 import { Progress } from "./"
 
 type Story = StoryFn<typeof Progress>
@@ -14,11 +16,11 @@ export const Basic: Story = () => {
   return <Progress aria-label="Storage space" value={88} />
 }
 
-export const WithColorMode: Story = () => {
+export const ColorMode: Story = () => {
   return <Progress colorScheme="purple" aria-label="Storage space" value={18} />
 }
 
-export const WithFilledTrackColor: Story = () => {
+export const FilledTrackColor: Story = () => {
   return (
     <Progress
       aria-label="Storage space"
@@ -28,44 +30,31 @@ export const WithFilledTrackColor: Story = () => {
   )
 }
 
-export const WithStripe: Story = () => {
+export const Stripe: Story = () => {
   return <Progress aria-label="Storage space" hasStripe value={19} />
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
-    <>
-      <Progress
-        colorScheme="pink"
-        size="xs"
-        aria-label="Storage space"
-        value={93}
-      />
-      <Progress
-        colorScheme="pink"
-        size="sm"
-        aria-label="Storage space"
-        value={93}
-      />
-      <Progress
-        colorScheme="pink"
-        size="md"
-        aria-label="Storage space"
-        value={93}
-      />
-      <Progress
-        colorScheme="pink"
-        size="lg"
-        aria-label="Storage space"
-        value={93}
-      />
-    </>
+    <PropsTable variant="column" rows={["xs", "sm", "md", "lg"]}>
+      {(_, row, key) => {
+        return (
+          <Progress
+            key={key}
+            colorScheme="blue"
+            size={row}
+            aria-label="Storage space"
+            value={93}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithBorderRadius: Story = () => {
+export const BorderRadius: Story = () => {
   return (
-    <>
+    <VStack>
       <Progress
         colorScheme="orange"
         aria-label="Storage space"
@@ -78,6 +67,6 @@ export const WithBorderRadius: Story = () => {
         rounded="md"
         value={31}
       />
-    </>
+    </VStack>
   )
 }

@@ -82,7 +82,7 @@ export const fieldProperties = [
  *
  * @see Docs https://yamada-ui.com/components/forms/file-button
  */
-export const FileButton = withProvider<"fragment", FileButtonRootProps>(
+export const FileButton = withProvider<"div", FileButtonRootProps>(
   ({
     id,
     ref,
@@ -140,10 +140,12 @@ export const FileButton = withProvider<"fragment", FileButtonRootProps>(
 
     return (
       <FileButtonPropsContext value={context}>
-        <FileButtonInput ref={mergeRefs(inputRef, ref)} />
-        <FileButtonButton as={as} inputRef={inputRef} {...rest}>
-          {children}
-        </FileButtonButton>
+        <ui.div>
+          <FileButtonInput ref={mergeRefs(inputRef, ref)} />
+          <FileButtonButton as={as} inputRef={inputRef} {...rest}>
+            {children}
+          </FileButtonButton>
+        </ui.div>
       </FileButtonPropsContext>
     )
   },

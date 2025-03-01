@@ -213,7 +213,7 @@ export interface FileButtonButtonProps
 }
 
 const FileButtonButton = withContext<"button", FileButtonButtonProps>(
-  ({ as = undefined, children, inputRef, ...rest }) => {
+  ({ as = undefined, css, children, inputRef, ...rest }) => {
     const {
       disabled,
       invalid,
@@ -245,13 +245,13 @@ const FileButtonButton = withContext<"button", FileButtonButtonProps>(
     ) : (
       <ui.button
         as={as || Button}
-        {...rest}
+        css={as ? undefined : css}
         onClick={handlerAll(onClickProp, onClick)}
+        {...rest}
       >
         {children}
       </ui.button>
     )
   },
   "button",
-  {},
 )()

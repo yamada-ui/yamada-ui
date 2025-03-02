@@ -1,7 +1,8 @@
-export { FileButton } from "./file-button"
-
-export type {
-  FileButtonButtonProps as ButtonProps,
-  FileButtonInputProps as InputProps,
-  FileButtonRootProps as RootProps,
+export {
+  FileButton,
+  FileButtonPropsContext,
+  useFileButtonPropsContext,
 } from "./file-button"
+export type { FileButtonProps } from "./file-button"
+
+export * from "./file-button.style"

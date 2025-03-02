@@ -21,13 +21,13 @@ import { fileButtonStyle } from "./file-button.style"
 
 export interface FileButtonContext
   // TODO: 型の見直し
-  extends Pick<FileButtonRootProps, "children"> {}
+  extends Pick<FileButtonProps, "children"> {}
 
 export interface FileButtonElementProps extends FieldProps {
   onClick: () => void
 }
 
-export interface FileButtonRootProps
+export interface FileButtonProps
   // SEE: なぜrefを排斥するのか
   extends Omit<ButtonProps, "children" | "onChange" | "ref">,
     FieldProps,
@@ -58,11 +58,10 @@ export const {
   usePropsContext: useFileButtonPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<
-  FileButtonRootProps,
-  FileButtonStyle,
-  FileButtonContext
->("file-button", fileButtonStyle)
+} = createSlotComponent<FileButtonProps, FileButtonStyle, FileButtonContext>(
+  "file-button",
+  fileButtonStyle,
+)
 
 export const fieldProperties = [
   "disabled",
@@ -87,7 +86,7 @@ export const fieldProperties = [
  *
  * @see Docs https://yamada-ui.com/components/forms/file-button
  */
-export const FileButton = withProvider<"div", FileButtonRootProps>(
+export const FileButton = withProvider<"div", FileButtonProps>(
   ({
     id,
     ref,

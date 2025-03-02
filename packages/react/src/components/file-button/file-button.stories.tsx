@@ -5,11 +5,10 @@ import { useRef, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { Button, IconButton } from "../../components/button"
 import { Wrap } from "../../components/flex"
-import { FormControl } from "../../components/form-control"
 import { PlusIcon } from "../../components/icon"
 import { HStack, VStack } from "../../components/stack"
 import { Text } from "../../components/text"
-import { Link } from "../link"
+import { Field } from "../field"
 import { FileButton } from "./file-button"
 
 type Story = StoryFn<typeof FileButton>
@@ -32,9 +31,9 @@ export const Basic: Story = () => {
         icon={<PlusIcon fontSize="2xl" />}
       />
 
-      <FileButton>
+      {/* <FileButton>
         {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
-      </FileButton>
+      </FileButton> */}
     </>
   )
 }
@@ -51,9 +50,9 @@ export const WithMultiple: Story = () => {
         multiple
       />
 
-      <FileButton multiple>
+      {/* <FileButton multiple>
         {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
-      </FileButton>
+      </FileButton> */}
     </>
   )
 }
@@ -70,9 +69,9 @@ export const WithAccept: Story = () => {
         icon={<PlusIcon fontSize="2xl" />}
       />
 
-      <FileButton accept="image/png,image/jpeg">
+      {/* <FileButton accept="image/png,image/jpeg">
         {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
-      </FileButton>
+      </FileButton> */}
     </>
   )
 }
@@ -126,7 +125,7 @@ export const WithVariant: Story = () => {
         Ghost
       </FileButton>
 
-      <FileButton colorScheme="danger" variant="link">
+      <FileButton colorScheme="danger" variant="a">
         Link
       </FileButton>
 
@@ -155,7 +154,7 @@ export const Disabled: Story = () => {
         icon={<PlusIcon fontSize="2xl" />}
       />
 
-      <FileButton disabled>
+      {/* <FileButton disabled>
         {({ disabled, onClick }) => (
           <Link
             cursor={disabled ? "not-allowed" : "pointer"}
@@ -170,15 +169,15 @@ export const Disabled: Story = () => {
             Upload
           </Link>
         )}
-      </FileButton>
+      </FileButton> */}
 
-      <FormControl
+      <Field.Root
         disabled
         helperMessage="Please select a file to upload."
         label="Upload file"
       >
         <FileButton>Upload</FileButton>
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -195,7 +194,7 @@ export const Readonly: Story = () => {
         readOnly
       />
 
-      <FileButton readOnly>
+      {/* <FileButton readOnly>
         {({ readOnly, onClick }) => (
           <Link
             cursor={readOnly ? "default" : "pointer"}
@@ -209,15 +208,15 @@ export const Readonly: Story = () => {
             Upload
           </Link>
         )}
-      </FileButton>
+      </FileButton> */}
 
-      <FormControl
+      <Field.Root
         helperMessage="Please select a file to upload."
         label="Upload file"
         readOnly
       >
         <FileButton>Upload</FileButton>
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -234,9 +233,9 @@ export const Invalid: Story = () => {
         invalid
       />
 
-      <FormControl errorMessage="File is required." invalid label="Upload file">
+      <Field.Root errorMessage="File is required." invalid label="Upload file">
         <FileButton>Upload</FileButton>
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -289,7 +288,7 @@ export const ReactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Field.Root
         errorMessage={errors.fileButton?.message}
         invalid={!!errors.fileButton}
         label="Files"
@@ -311,7 +310,7 @@ export const ReactHookForm: Story = () => {
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

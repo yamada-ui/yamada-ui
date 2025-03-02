@@ -16,7 +16,7 @@ import {
   mergeRefs,
   pickObject,
 } from "../../utils"
-import { useFieldProps } from "../field"
+import { fieldProperties, useFieldProps } from "../field"
 import { fileButtonStyle } from "./file-button.style"
 
 export interface FileButtonContext
@@ -63,24 +63,6 @@ export const {
   fileButtonStyle,
 )
 
-export const fieldProperties = [
-  "disabled",
-  "required",
-  "readOnly",
-  "aria-disabled",
-  "aria-readonly",
-  "aria-required",
-  "aria-invalid",
-  "data-readonly",
-  "onFocus",
-  "onBlur",
-  "_hover",
-  "_active",
-  "_focus",
-  "_invalid",
-  "_focusVisible",
-] as const
-
 /**
  * `FileButton` is a button component used for users to select files.
  *
@@ -105,14 +87,9 @@ export const FileButton = withProvider<"div", FileButtonProps>(
     const {
       onBlur: _onBlur,
       onFocus: _onFocus,
-      ...formControlProps
+      ...fieldProps
     } = pickObject(rest, fieldProperties)
-    const {
-      "aria-invalid": invalid,
-      disabled,
-      readOnly,
-      required,
-    } = formControlProps
+    const { "aria-invalid": invalid, disabled, readOnly, required } = fieldProps
     const inputRef = useRef<HTMLInputElement>(null)
 
     const onChange = useCallback(
@@ -161,7 +138,7 @@ export const FileButton = withProvider<"div", FileButtonProps>(
           multiple={multiple}
           tabIndex={-1}
           onChange={onChange}
-          {...formControlProps}
+          {...fieldProps}
         />
         {isFunction(children) ? (
           children({

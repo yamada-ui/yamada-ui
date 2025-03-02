@@ -75,7 +75,8 @@
     "react-focus-lock": "^2.13.6",
     "react-remove-scroll": "^2.6.3",
     "react-resizable-panels": "^2.1.7",
-    "recharts": "^2.15.1"
+    "recharts": "^2.15.1",
+    "sonner": "^1.4.3"
   },
   "devDependencies": {
     "@types/react": "^19.0.10",

@@ -108,7 +108,7 @@ export interface NoticeConfig {
   /**
    * If `true`, allows the notice to be removed.
    *
-   * @default false
+   * @default true
    */
   closable?: boolean
   /**
@@ -126,12 +126,13 @@ export interface NoticeConfig {
   duration?: null | number
   /**
    * The maximum value at which notice will be displayed.
+   * @default 3
    */
   limit?: number
   /**
    * The placement of the notice.
    *
-   * @default 'top'
+   * @default 'start-center'
    */
   placement?: NoticePlacement
 }

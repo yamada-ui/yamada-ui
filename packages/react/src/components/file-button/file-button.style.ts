@@ -2,7 +2,7 @@ import { defineComponentSlotStyle } from "../../core"
 
 export const fileButtonStyle = defineComponentSlotStyle({
   base: {
-    button: {
+    root: {
       alignItems: "center",
       appearance: "none",
       cursor: "pointer",
@@ -15,6 +15,13 @@ export const fileButtonStyle = defineComponentSlotStyle({
       transitionDuration: "moderate",
       transitionProperty: "common",
       userSelect: "none",
+      vars: [
+        {
+          name: "errorBorderColor",
+          token: "colors",
+          value: "red.500",
+        },
+      ],
       verticalAlign: "middle",
       whiteSpace: "nowrap",
       _readOnly: {
@@ -34,7 +41,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
      */
     fullRounded: {
       true: {
-        button: {
+        root: {
           rounded: "full",
         },
       },
@@ -43,40 +50,64 @@ export const fileButtonStyle = defineComponentSlotStyle({
 
   variants: {
     ghost: {
-      button: {
+      root: {
         layerStyle: "ghost",
+        _invalid: {
+          border: "1px solid",
+          borderColor: "{errorBorderColor}",
+          boxShadow: "0 0 0 1px {errorBorderColor}",
+        },
         _hover: {
           layerStyle: "ghost.hover",
         },
       },
     },
     outline: {
-      button: {
+      root: {
         layerStyle: "outline",
+        _invalid: {
+          borderColor: ["{errorBorderColor}", "{errorBorderColor}"],
+          boxShadow: "0 0 0 1px {errorBorderColor}",
+        },
         _hover: {
           layerStyle: "outline.hover",
         },
       },
     },
     solid: {
-      button: {
+      root: {
         layerStyle: "solid",
+        _invalid: {
+          border: "1px solid",
+          borderColor: "{errorBorderColor}",
+          boxShadow: "0 0 0 1px {errorBorderColor}",
+        },
         _hover: {
           layerStyle: "solid.hover",
         },
       },
     },
     subtle: {
-      button: {
+      root: {
         layerStyle: "subtle",
+        _invalid: {
+          border: "1px solid",
+          borderColor: "{errorBorderColor}",
+          boxShadow: "0 0 0 1px {errorBorderColor}",
+        },
         _hover: {
           layerStyle: "subtle.hover",
         },
       },
     },
     surface: {
-      button: {
+      root: {
         layerStyle: "surface",
+        _invalid: {
+          border: "1px solid",
+          borderColor: "{errorBorderColor}",
+          boxShadow: "0 0 0 1px {errorBorderColor}",
+        },
         _hover: {
           layerStyle: "surface.hover",
         },
@@ -86,7 +117,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
 
   sizes: {
     xs: {
-      button: {
+      root: {
         fontSize: "xs",
         gap: "1",
         h: "8",
@@ -99,7 +130,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     sm: {
-      button: {
+      root: {
         fontSize: "sm",
         gap: "2",
         h: "9",
@@ -112,7 +143,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     md: {
-      button: {
+      root: {
         fontSize: "md",
         gap: "2",
         h: "10",
@@ -125,7 +156,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     lg: {
-      button: {
+      root: {
         fontSize: "lg",
         gap: "2.5",
         h: "11",
@@ -138,7 +169,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     xl: {
-      button: {
+      root: {
         fontSize: "xl",
         gap: "3",
         h: "12",
@@ -151,7 +182,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     "2xl": {
-      button: {
+      root: {
         fontSize: "xl",
         gap: "3",
         h: "14",

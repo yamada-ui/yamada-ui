@@ -1,12 +1,12 @@
-import type { ChangeEvent, ForwardedRef, RefAttributes, RefObject } from "react"
+import type { ChangeEvent, ForwardedRef, RefAttributes } from "react"
 import type { ButtonProps } from "../../components/button"
 import type { ColorModeToken, CSS, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { FieldProps } from "../field"
 import type { FileButtonStyle } from "./file-button.style"
-import { useCallback, useMemo, useRef } from "react"
+import { useCallback, useRef } from "react"
 import { Button } from "../../components/button"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, mergeVars, ui } from "../../core"
 import {
   ariaAttr,
   assignRef,
@@ -16,6 +16,7 @@ import {
   mergeRefs,
   pickObject,
 } from "../../utils"
+import { useFieldProps } from "../field"
 import { fileButtonStyle } from "./file-button.style"
 
 export interface FileButtonContext
@@ -29,8 +30,8 @@ export interface FileButtonElementProps extends FieldProps {
 export interface FileButtonRootProps
   // SEE: なぜrefを排斥するのか
   extends Omit<ButtonProps, "children" | "onChange" | "ref">,
-    FileButtonInputProps,
     FieldProps,
+    InputProps,
     ThemeProps<FileButtonStyle> {
   children?: ReactNodeOrFunction<FileButtonElementProps>
   /**
@@ -46,6 +47,10 @@ export interface FileButtonRootProps
    */
   onChange?: (files: File[] | undefined) => void
 }
+
+export interface InputProps
+  extends Partial<Pick<HTMLInputElement, "accept" | "multiple">>,
+    RefAttributes<HTMLInputElement> {}
 
 export const {
   component,
@@ -89,11 +94,13 @@ export const FileButton = withProvider<"div", FileButtonRootProps>(
     as,
     form,
     name,
+    css,
     accept,
     children,
     multiple,
     resetRef,
-    onChange,
+    onChange: onChangeProp,
+    onClick: onClickProp,
     ...rest
   }) => {
     const {
@@ -109,63 +116,6 @@ export const FileButton = withProvider<"div", FileButtonRootProps>(
     } = formControlProps
     const inputRef = useRef<HTMLInputElement>(null)
 
-    const context = useMemo(
-      () => ({
-        id,
-        form,
-        name,
-        "aria-invalid": invalid,
-        accept,
-        disabled,
-        multiple,
-        readOnly,
-        required,
-        resetRef,
-        onChange,
-      }),
-      [
-        id,
-        form,
-        name,
-        invalid,
-        accept,
-        disabled,
-        multiple,
-        readOnly,
-        required,
-        resetRef,
-        onChange,
-      ],
-    )
-
-    return (
-      <FileButtonPropsContext value={context}>
-        <ui.div>
-          <FileButtonInput ref={mergeRefs(inputRef, ref)} />
-          <FileButtonButton as={as} inputRef={inputRef} {...rest}>
-            {children}
-          </FileButtonButton>
-        </ui.div>
-      </FileButtonPropsContext>
-    )
-  },
-  "root",
-)()
-
-export interface FileButtonInputProps
-  extends Partial<Pick<HTMLInputElement, "accept" | "multiple">>,
-    RefAttributes<HTMLInputElement> {}
-
-const FileButtonInput = withContext<"input", FileButtonInputProps>(
-  ({ ref, ...rest }) => {
-    const {
-      id,
-      form,
-      name,
-      accept,
-      multiple,
-      onChange: onChangeProp,
-    } = useFileButtonPropsContext() ?? {}
     const onChange = useCallback(
       (ev: ChangeEvent<HTMLInputElement>) => {
         const files = !isNull(ev.currentTarget.files)
@@ -176,52 +126,6 @@ const FileButtonInput = withContext<"input", FileButtonInputProps>(
       },
       [onChangeProp],
     )
-    return (
-      <ui.input
-        id={id}
-        ref={ref}
-        form={form}
-        type="file"
-        name={name}
-        style={{
-          border: "0px",
-          clip: "rect(0px, 0px, 0px, 0px)",
-          height: "1px",
-          margin: "-1px",
-          overflow: "hidden",
-          padding: "0px",
-          position: "absolute",
-          whiteSpace: "nowrap",
-          width: "1px",
-        }}
-        aria-hidden
-        accept={accept}
-        multiple={multiple}
-        tabIndex={-1}
-        onChange={onChange}
-        {...rest}
-      />
-    )
-  },
-  "input",
-)()
-
-export interface FileButtonButtonProps
-  extends Omit<ButtonProps, "children">,
-    Pick<FileButtonRootProps, "children"> {
-  inputRef: RefObject<HTMLInputElement | null>
-}
-
-const FileButtonButton = withContext<"button", FileButtonButtonProps>(
-  ({ as = undefined, css, children, inputRef, ...rest }) => {
-    const {
-      disabled,
-      invalid,
-      readOnly,
-      required,
-      resetRef,
-      onClick: onClickProp,
-    } = useFileButtonPropsContext() ?? {}
 
     const onClick = useCallback(() => {
       if (disabled || readOnly) return
@@ -234,24 +138,74 @@ const FileButtonButton = withContext<"button", FileButtonButtonProps>(
     }, [inputRef])
 
     assignRef(resetRef, onReset)
-    return isFunction(children) ? (
-      children({
-        disabled,
-        invalid: ariaAttr(invalid),
-        readOnly,
-        required,
-        onClick,
-      })
-    ) : (
-      <ui.button
-        as={as || Button}
-        css={as ? undefined : css}
-        onClick={handlerAll(onClickProp, onClick)}
-        {...rest}
-      >
-        {children}
-      </ui.button>
+    return (
+      <ui.div>
+        <ui.input
+          id={id}
+          ref={mergeRefs(inputRef, ref)}
+          form={form}
+          type="file"
+          name={name}
+          style={{
+            border: "0px",
+            clip: "rect(0px, 0px, 0px, 0px)",
+            height: "1px",
+            margin: "-1px",
+            overflow: "hidden",
+            padding: "0px",
+            position: "absolute",
+            whiteSpace: "nowrap",
+            width: "1px",
+          }}
+          aria-hidden
+          accept={accept}
+          multiple={multiple}
+          tabIndex={-1}
+          onChange={onChange}
+          {...formControlProps}
+        />
+        {isFunction(children) ? (
+          children({
+            disabled,
+            invalid: ariaAttr(invalid),
+            readOnly,
+            required,
+            onClick,
+          })
+        ) : (
+          <ui.button
+            as={as || Button}
+            css={as ? undefined : css}
+            disabled={disabled}
+            onClick={handlerAll(onClickProp, onClick)}
+            {...rest}
+          >
+            {children}
+          </ui.button>
+        )}
+      </ui.div>
     )
   },
-  "button",
-)()
+  "root",
+)(undefined, (props) => {
+  const {
+    props: { errorBorderColor, vars: varsProp, ...rest },
+    ariaProps,
+    dataProps,
+    eventProps,
+  } = useFieldProps(props)
+
+  const vars = mergeVars(varsProp, {
+    name: "errorBorderColor",
+    token: "colors",
+    value: errorBorderColor,
+  })
+
+  return {
+    vars,
+    ...ariaProps,
+    ...dataProps,
+    ...eventProps,
+    ...rest,
+  }
+})

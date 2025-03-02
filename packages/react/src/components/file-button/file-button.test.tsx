@@ -81,7 +81,7 @@ describe("<FileButton />", () => {
     })
   })
 
-  test.skip("should handle file selection correctly", async () => {
+  test("should handle file selection correctly", async () => {
     const handleFileChangeMock = vi.fn()
 
     const TestComponent = () => {
@@ -139,7 +139,7 @@ describe("<FileButton />", () => {
     expect(handleFileChangeMock).toHaveBeenCalledTimes(3)
   })
 
-  test.skip("should handle reset correctly", async () => {
+  test("should handle reset correctly", async () => {
     const TestComponent = () => {
       const [files, setFiles] = useState<File[] | null>(null)
       const resetRef = useRef<() => void>(null)

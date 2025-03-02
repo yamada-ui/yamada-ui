@@ -31,7 +31,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithColor: Story = () => {
+export const Color: Story = () => {
   return (
     <>
       <Skeleton endColor="orange.500" startColor="pink.500" />
@@ -43,7 +43,7 @@ export const WithColor: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
     <>
       <Skeleton h={16} />
@@ -55,7 +55,7 @@ export const WithSize: Story = () => {
   )
 }
 
-export const WithSpeed: Story = () => {
+export const Speed: Story = () => {
   return (
     <>
       <Skeleton speed={2} />
@@ -67,15 +67,15 @@ export const WithSpeed: Story = () => {
   )
 }
 
-export const WithGap: Story = () => {
+export const Gap: Story = () => {
   return <SkeletonText gap={8} />
 }
 
-export const WithLineClamp: Story = () => {
+export const LineClamp: Story = () => {
   return <SkeletonText lineClamp={5} />
 }
 
-export const WithIsLoaded: Story = () => {
+export const IsLoaded: Story = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   useEffect(() => {
@@ -86,38 +86,36 @@ export const WithIsLoaded: Story = () => {
 
   return (
     <>
-      <Skeleton isLoaded={isLoaded} />
+      <Skeleton loaded={isLoaded} />
 
-      <SkeletonCircle isLoaded={isLoaded} />
+      <SkeletonCircle loaded={isLoaded} />
 
-      <SkeletonText isLoaded={isLoaded} />
+      <SkeletonText loaded={isLoaded} />
     </>
   )
 }
 
-export const WithFadeDuration: Story = () => {
+export const FadeDuration: Story = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   useEffect(() => {
-    wait(3000).then(() => {
+    wait(30000).then(() => {
       setIsLoaded(true)
     })
   }, [])
 
   return (
     <>
-      <Skeleton fadeDuration={2} h={12} isLoaded={isLoaded}>
-        <Heading isTruncated>
-          ギャルのパンティーおくれーーーっ！！！！！
-        </Heading>
+      <Skeleton fadeDuration={2} h={12} loaded={isLoaded}>
+        <Heading truncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
       </Skeleton>
 
-      <SkeletonCircle fadeDuration={2} isLoaded={isLoaded}>
+      <SkeletonCircle fadeDuration={2} loaded={isLoaded}>
         <Avatar name="Hirotomo Yamada" />
       </SkeletonCircle>
 
-      <SkeletonText fadeDuration={2} isLoaded={isLoaded}>
-        <Text isTruncated>
+      <SkeletonText fadeDuration={2} loaded={isLoaded}>
+        <Text truncated>
           私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
         </Text>
       </SkeletonText>

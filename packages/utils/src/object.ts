@@ -71,13 +71,25 @@ export function pickObject<
 
 export function splitObject<Y extends Dict, M extends keyof Y>(
   obj: Y,
-  keys: M[] | readonly M[],
+  funcOrKeys?: M[] | readonly M[],
+): [{ [P in M]: Y[P] }, Omit<Y, M>]
+
+export function splitObject<Y extends Dict, M extends Dict>(
+  obj: Dict,
+  funcOrKeys?: (key: string) => boolean,
+): [Y, M]
+
+export function splitObject<Y extends Dict, M extends keyof Y>(
+  obj: Y,
+  funcOrKeys?: ((key: string) => boolean) | M[] | readonly M[],
 ) {
   const picked: Dict = {}
   const omitted: Dict = {}
 
   for (const [key, value] of Object.entries(obj)) {
-    if (keys.includes(key as Y[M])) {
+    if (
+      isFunction(funcOrKeys) ? funcOrKeys(key) : funcOrKeys?.includes(key as M)
+    ) {
       picked[key] = value
     } else {
       omitted[key] = value

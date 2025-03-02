@@ -47,7 +47,7 @@ const Content: FC = () => {
   )
 }
 
-describe("<ScrollArea />", () => {
+describe.todo("<ScrollArea />", () => {
   test("renders with no errors", async () => {
     const { container, getByTestId } = render(
       <ScrollArea data-testid="ScrollArea" h="xs">

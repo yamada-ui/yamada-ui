@@ -8,8 +8,3 @@ export * from "./pseudos"
 export * from "./styled"
 export * from "./styles"
 export * from "./theme"
-export type {
-  CSSObject as EmotionCSSObject,
-  Interpolation,
-  Keyframes,
-} from "@emotion/react"

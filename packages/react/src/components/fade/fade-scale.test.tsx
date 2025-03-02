@@ -7,6 +7,21 @@ describe("<FadeScale />", () => {
     await a11y(<FadeScale />)
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(FadeScale.displayName).toBe("FadeScale")
+    expect(FadeScale.__ui__).toBe("FadeScale")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<FadeScale>FadeScale</FadeScale>)
+    expect(screen.getByText("FadeScale")).toHaveClass("ui-fadeScale")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<FadeScale>FadeScale</FadeScale>)
+    expect(screen.getByText("FadeScale").tagName).toBe("DIV")
+  })
+
   test("toggles visibility on open change", async () => {
     const TestComponent = () => {
       const [open, setOpen] = useState(false)

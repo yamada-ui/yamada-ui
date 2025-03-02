@@ -18,6 +18,6 @@ describe("<Mark />", () => {
 
   test("renders HTML tag correctly", () => {
     render(<Mark>Mark</Mark>)
-    expect(screen.getByText("Mark").tagName).toBe("SPAN")
+    expect(screen.getByText("Mark").tagName).toBe("MARK")
   })
 })

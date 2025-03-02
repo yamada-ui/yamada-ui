@@ -1,6 +1,7 @@
 import type { FC } from "react"
 import type { Dict, Merge, StringLiteral } from "../../utils"
 import type { CSSObject, CSSSlotObject } from "../css"
+import type { StyledOptions } from "../styled"
 import type {
   ComponentSlotStyle,
   ComponentStyle,
@@ -12,7 +13,6 @@ import type {
   FunctionComponent,
   HTMLUIProps,
   Component as OriginalComponent,
-  StyledOptions,
 } from "./index.types"
 import { Fragment } from "react"
 import {
@@ -27,9 +27,8 @@ import {
   toCamelCase,
   toPascalCase,
 } from "../../utils"
-import { mergeCSS } from "../css"
 import { ui } from "../factory"
-import { chainProps, mergeProps } from "./merge-props"
+import { chainProps, mergeProps } from "./props"
 import {
   getSlotClassName,
   useComponentSlotStyle,
@@ -186,16 +185,13 @@ export function createComponent<
   ) {
     const contextProps = usePropsContext() ?? {}
     const mergedProps = withContext ? mergeProps(contextProps, props)() : props
-    const { css, ...rest } = useComponentStyle(mergedProps, {
+    const [, rest] = useComponentStyle(mergedProps, {
       className,
       style,
       transferProps,
     })
 
-    return {
-      ...rest,
-      css: mergeCSS(css, (mergedProps as HTMLUIProps).css),
-    }
+    return rest
   }
 
   function component<D extends AsWithFragment = "div", H extends Dict = Y>(
@@ -326,19 +322,14 @@ export function createSlotComponent<
   ] {
     const contextProps = usePropsContext() ?? {}
     const mergedProps = withContext ? mergeProps(contextProps, props)() : props
-    const { css, ...rest } = useComponentSlotStyle(mergedProps, {
+    const [css, rest] = useComponentSlotStyle(mergedProps, {
       className,
       style,
+      slot,
       transferProps,
     })
 
-    return [
-      css,
-      {
-        ...rest,
-        css: mergeSlotCSS<ComponentSlotName<M>>(slot, css, mergedProps.css),
-      },
-    ]
+    return [css, rest]
   }
 
   function useSlotComponentProps<Y extends Dict = Dict>(

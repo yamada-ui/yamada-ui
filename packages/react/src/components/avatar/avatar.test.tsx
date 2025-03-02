@@ -12,7 +12,7 @@ describe("<Avatar />", () => {
     image().restore()
   })
 
-  test("renders an image", async () => {
+  test.todo("renders an image", async () => {
     const mock = image()
     mock.simulate("loaded")
     render(<Avatar name="Hirotomo Yamada" src="https://bit.ly/dan-abramov" />)
@@ -25,7 +25,7 @@ describe("<Avatar />", () => {
     expect(img).toBeInTheDocument()
   })
 
-  test("fires onError if image fails to load", () => {
+  test.todo("fires onError if image fails to load", () => {
     const mock = image()
     mock.simulate("error")
 

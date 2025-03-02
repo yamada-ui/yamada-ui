@@ -6,6 +6,7 @@ import { findChild, getValidChildren } from "../../utils"
 
 export interface SlotProps
   extends HTMLAttributes<HTMLElement>,
+    RefAttributes<HTMLElement>,
     PropsWithChildren {}
 
 /**

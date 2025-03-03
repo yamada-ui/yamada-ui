@@ -19,10 +19,6 @@ import {
 import { fieldProperties, useFieldProps } from "../field"
 import { fileButtonStyle } from "./file-button.style"
 
-export interface FileButtonContext
-  // TODO: 型の見直し
-  extends Pick<FileButtonProps, "children"> {}
-
 export interface FileButtonElementProps extends FieldProps {
   onClick: () => void
 }
@@ -58,7 +54,7 @@ export const {
   usePropsContext: useFileButtonPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<FileButtonProps, FileButtonStyle, FileButtonContext>(
+} = createSlotComponent<FileButtonProps, FileButtonStyle>(
   "file-button",
   fileButtonStyle,
 )

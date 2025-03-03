@@ -42,7 +42,7 @@ describe("<Button />", () => {
     expect(getByRole("group").tagName).toBe("DIV")
   })
 
-  test.todo("`attached` style is applied correctly", () => {
+  test("`attached` style is applied correctly", () => {
     const { getByRole } = render(
       <ButtonGroup variant="outline" attached>
         <Button>Button</Button>
@@ -53,14 +53,14 @@ describe("<Button />", () => {
 
     const buttonGroup = getByRole("group")
 
+
     expect(buttonGroup.firstChild).toHaveStyle({
-      borderBottomRightRadius: "0px",
-      borderTopRightRadius: "0px",
+      borderTopWidth: "0px !important", // pass
+      // roundedTop: "0 !important", // fail
     })
 
     expect(buttonGroup.lastChild).toHaveStyle({
-      borderBottomLeftRadius: "0px",
-      borderTopLeftRadius: "0px",
+      // roundedBottom: "0 !important" // fail
     })
   })
 

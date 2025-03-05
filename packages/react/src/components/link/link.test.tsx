@@ -2,11 +2,22 @@ import { Link, LinkBox, LinkOverlay } from "."
 import { a11y, render, screen } from "../../../test"
 
 describe("<Link />", () => {
-  test("Link renders correctly", async () => {
+  test("passes a11y test", async () => {
     const url =
       "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
-    const { container } = render(<Link href={url}>Welcome page</Link>)
-    await a11y(container)
+    await a11y(<Link href={url}>Welcome page</Link>)
+  })
+
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Link.displayName).toBe("Link")
+    expect(Link.__ui__).toBe("Link")
+  })
+
+  test("sets `className` correctly", () => {
+    const url =
+      "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
+    render(<Link href={url}>Welcome page</Link>)
+    expect(screen.getByRole("link")).toHaveClass("ui-link")
   })
 
   test("should open link in a new tab", () => {
@@ -26,19 +37,14 @@ describe("<Link />", () => {
 })
 
 describe("<LinkOverlay />", () => {
-  test("renders correctly", () => {
+  test("renders correctly", async () => {
     const url =
       "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
-    render(
+    await a11y(
       <LinkBox>
         <LinkOverlay href={url}>Welcome page</LinkOverlay>
       </LinkBox>,
     )
-    const link = screen.getByRole("link")
-
-    expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute("href", url)
-    expect(link).toHaveTextContent("Welcome page")
   })
 
   test("opens link in a new tab when external is true", () => {
@@ -56,36 +62,20 @@ describe("<LinkOverlay />", () => {
     expect(link).toHaveAttribute("target", "_blank")
     expect(link).toHaveAttribute("rel", "noopener")
   })
-
-  test("applies custom className", () => {
-    const url =
-      "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
-    render(
-      <LinkBox>
-        <LinkOverlay href={url} className="custom-class">
-          Welcome page
-        </LinkOverlay>
-      </LinkBox>,
-    )
-    const link = screen.getByRole("link")
-
-    expect(link).toHaveClass("custom-class")
-  })
 })
 
 describe("<LinkBox />", () => {
-  test("renders correctly", () => {
-    render(<LinkBox>Welcome page Box</LinkBox>)
-    const box = screen.getByText("Welcome page Box")
-
-    expect(box).toBeInTheDocument()
-    expect(box).toHaveTextContent("Welcome page Box")
+  test("passes a11y test", async () => {
+    await a11y(<LinkBox>Link Box</LinkBox>)
   })
 
-  test("applies custom className", () => {
-    render(<LinkBox className="custom-class">Welcome page Box</LinkBox>)
-    const box = screen.getByText("Welcome page Box")
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(LinkBox.displayName).toBe("LinkBoxRoot")
+    expect(LinkBox.__ui__).toBe("LinkBoxRoot")
+  })
 
-    expect(box).toHaveClass("custom-class")
+  test("sets `className` correctly", () => {
+    render(<LinkBox>Link Box</LinkBox>)
+    expect(screen.getByText("Link Box")).toHaveClass("ui-link-box__root")
   })
 })

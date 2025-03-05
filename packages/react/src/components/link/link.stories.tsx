@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Link } from "."
+import { Link } from "./"
 
 type Story = StoryFn<typeof Link>
 

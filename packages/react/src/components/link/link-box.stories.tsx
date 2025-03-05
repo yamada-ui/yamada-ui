@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Link, LinkBox, LinkOverlay } from "."
-import { Heading } from "../../components/heading"
-import { Text } from "../../components/text"
+import { Heading } from "../heading"
+import { Text } from "../text"
 
 type Story = StoryFn<typeof LinkBox>
 

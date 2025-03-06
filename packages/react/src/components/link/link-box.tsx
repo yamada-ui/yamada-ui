@@ -20,6 +20,7 @@ export const {
   PropsContext: LinkBoxPropsContext,
   useComponentContext: useLinkBoxContext,
   usePropsContext: useLinkBoxPropsContext,
+  withContext,
   withProvider,
 } = createSlotComponent<LinkBoxProps, LinkBoxStyle, LinkBoxContext>(
   "link-box",
@@ -50,4 +51,45 @@ export const LinkBox = withProvider(({ children, ...rest }) => {
       </ui.div>
     </LinkBoxContext>
   )
-}, "root")()
+}, "container")()
+
+export interface LinkOverlayProps extends HTMLUIProps<"a"> {
+  /**
+   * If `true`, the link will open in new tab.
+   *
+   * @default false
+   */
+  external?: boolean
+}
+export const LinkOverlay = withContext<"a", LinkOverlayProps>(
+  ({ target, children, external, rel, ...rest }) => {
+    const { variableProps } = useLinkBoxContext()
+    const css: CSSObject = {
+      position: "static",
+      _before: {
+        content: '""',
+        cursor: "inherit",
+        display: "block",
+        height: "100%",
+        left: 0,
+        position: "absolute",
+        top: 0,
+        width: "100%",
+        zIndex: 0,
+        ...variableProps,
+      },
+    }
+
+    return (
+      <ui.a
+        target={external ? "_blank" : target}
+        css={css}
+        rel={external ? "noopener" : rel}
+        {...rest}
+      >
+        {children}
+      </ui.a>
+    )
+  },
+  "overlay",
+)()

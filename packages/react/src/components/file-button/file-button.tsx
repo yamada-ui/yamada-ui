@@ -16,7 +16,7 @@ import {
   mergeRefs,
   pickObject,
 } from "../../utils"
-import { fieldProperties, useFieldProps } from "../field"
+import { fieldProperties } from "../field"
 import { fileButtonStyle } from "./file-button.style"
 
 export interface FileButtonElementProps extends FieldProps {
@@ -24,7 +24,6 @@ export interface FileButtonElementProps extends FieldProps {
 }
 
 export interface FileButtonProps
-  // SEE: なぜrefを排斥するのか
   extends Omit<ButtonProps, "children" | "onChange" | "ref">,
     FieldProps,
     InputProps,
@@ -159,14 +158,7 @@ export const FileButton = withProvider<"div", FileButtonProps>(
     )
   },
   "root",
-)(undefined, (props) => {
-  const {
-    props: { errorBorderColor, vars: varsProp, ...rest },
-    ariaProps,
-    dataProps,
-    eventProps,
-  } = useFieldProps(props)
-
+)(undefined, ({ errorBorderColor, vars: varsProp, ...rest }) => {
   const vars = mergeVars(varsProp, {
     name: "errorBorderColor",
     token: "colors",
@@ -175,9 +167,6 @@ export const FileButton = withProvider<"div", FileButtonProps>(
 
   return {
     vars,
-    ...ariaProps,
-    ...dataProps,
-    ...eventProps,
     ...rest,
   }
 })

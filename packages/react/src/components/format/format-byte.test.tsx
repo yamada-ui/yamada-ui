@@ -1,7 +1,26 @@
-import { render, screen } from "../../../test"
+import { a11y, render, screen } from "../../../test"
 import { FormatByte } from "./format-byte"
 
 describe("<FormatByte />", () => {
+  test("passes a11y test", async () => {
+    await a11y(<FormatByte value={1024} />)
+  })
+
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(FormatByte.displayName).toBe("FormatByte")
+    expect(FormatByte.__ui__).toBe("FormatByte")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<FormatByte data-testid="format" value={1024} />)
+    expect(screen.getByTestId("format")).toHaveClass("ui-format-byte")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<FormatByte data-testid="format" value={1024} />)
+    expect(screen.getByTestId("format").tagName).toBe("SPAN")
+  })
+
   test("FormatByte renders correctly", () => {
     render(<FormatByte locale="en-US" value={1024} />)
     expect(screen.getByText("1.02 kB")).toBeInTheDocument()

@@ -37,7 +37,7 @@ describe("<Link />", () => {
 })
 
 describe("<LinkOverlay />", () => {
-  test("renders correctly", async () => {
+  test("passes a11y test", async () => {
     const url =
       "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
     await a11y(
@@ -45,6 +45,22 @@ describe("<LinkOverlay />", () => {
         <LinkOverlay href={url}>Welcome page</LinkOverlay>
       </LinkBox>,
     )
+  })
+
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(LinkOverlay.displayName).toBe("LinkBoxOverlay")
+    expect(LinkOverlay.__ui__).toBe("LinkBoxOverlay")
+  })
+
+  test("sets `className` correctly", () => {
+    const url =
+      "https://yamada-ui.github.io/yamada-ui/?path=/docs/documents-welcome--docs"
+    render(
+      <LinkBox>
+        <LinkOverlay href={url}>Welcome page</LinkOverlay>
+      </LinkBox>,
+    )
+    expect(screen.getByRole("link")).toHaveClass("ui-link-box__overlay")
   })
 
   test("opens link in a new tab when external is true", () => {
@@ -65,17 +81,13 @@ describe("<LinkOverlay />", () => {
 })
 
 describe("<LinkBox />", () => {
-  test("passes a11y test", async () => {
-    await a11y(<LinkBox>Link Box</LinkBox>)
-  })
-
   test("sets `displayName` and `__ui__` correctly", () => {
-    expect(LinkBox.displayName).toBe("LinkBoxRoot")
-    expect(LinkBox.__ui__).toBe("LinkBoxRoot")
+    expect(LinkBox.displayName).toBe("LinkBoxContainer")
+    expect(LinkBox.__ui__).toBe("LinkBoxContainer")
   })
 
   test("sets `className` correctly", () => {
     render(<LinkBox>Link Box</LinkBox>)
-    expect(screen.getByText("Link Box")).toHaveClass("ui-link-box__root")
+    expect(screen.getByText("Link Box")).toHaveClass("ui-link-box__container")
   })
 })

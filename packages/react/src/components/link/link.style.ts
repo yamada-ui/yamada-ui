@@ -1,7 +1,7 @@
-import type { ComponentStyle } from "../../core"
+import { defineComponentStyle } from "../../core"
 
-export const Link: ComponentStyle<"Link"> = {
-  baseStyle: {
+export const linkStyle = defineComponentStyle({
+  base: {
     color: "link",
     cursor: "pointer",
     outline: "none",
@@ -16,4 +16,6 @@ export const Link: ComponentStyle<"Link"> = {
       boxShadow: "outline",
     },
   },
-}
+})
+
+export type LinkStyle = typeof linkStyle

@@ -66,7 +66,6 @@ export const Group = withContext(
 
     return (
       <Flex
-        aria-orientation={orientation}
         data-attached={dataAttr(attached)}
         data-orientation={orientation}
         role="group"

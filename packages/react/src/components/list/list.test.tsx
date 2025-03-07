@@ -12,6 +12,39 @@ describe("<List />", () => {
     await a11y(container)
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(List.Root.displayName).toBe("ListRoot")
+    expect(List.Root.__ui__).toBe("ListRoot")
+
+    expect(List.Item.displayName).toBe("ListItem")
+    expect(List.Item.__ui__).toBe("ListItem")
+
+    expect(List.Icon.displayName).toBe("ListIcon")
+    expect(List.Icon.__ui__).toBe("ListIcon")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <List.Root data-testid="list-root">
+        <List.Item>Item one</List.Item>
+      </List.Root>,
+    )
+
+    expect(screen.getByTestId("list-root")).toHaveClass("ui-list__root")
+    expect(screen.getByText("Item one")).toHaveClass("ui-list__item")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <List.Root data-testid="list-root">
+        <List.Item>Item one</List.Item>
+      </List.Root>,
+    )
+
+    expect(screen.getByTestId("list-root").tagName).toBe("UL")
+    expect(screen.getByText("Item one").tagName).toBe("LI")
+  })
+
   test("should render list with an icon", () => {
     render(
       <List.Root>

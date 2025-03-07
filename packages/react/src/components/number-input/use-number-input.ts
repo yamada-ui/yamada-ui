@@ -4,39 +4,27 @@ import type {
   KeyboardEvent,
   KeyboardEventHandler,
 } from "react"
-import type {
-  ColorModeToken,
-  CSS,
-  CSSUIObject,
-  HTMLUIProps,
-  PropGetter,
-  ThemeProps,
-} from "../../core"
+import type { HTMLProps, PropGetter } from "../../core"
 import type { UseCounterProps } from "../../hooks/use-counter"
-import type { UseFormControlProps } from "../form-control"
+import type { UseFieldProps } from "../field"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import {
-  forwardRef,
-  omitThemeProps,
-  ui,
-  useComponentMultiStyle,
-} from "../../core"
 import { useCounter } from "../../hooks/use-counter"
 import { useEventListener } from "../../hooks/use-event-listener"
 import { useInterval } from "../../hooks/use-interval"
 import {
   ariaAttr,
-  createContext,
-  cx,
   handlerAll,
   mergeRefs,
-  pickObject,
   useCallbackRef,
   useSafeLayoutEffect,
   useUpdateEffect,
 } from "../../utils"
-import { formControlProperties, useFormControlProps } from "../form-control"
-import { ChevronDownIcon, ChevronUpIcon } from "../icon"
+
+const INTERVAL = 50
+
+const DELAY = 300
+
+type Action = "decrement" | "increment"
 
 const isDefaultValidCharacter = (character: string) =>
   /^[Ee0-9+\-.]$/.test(character)
@@ -67,10 +55,99 @@ const getStep = <Y extends KeyboardEvent | WheelEvent>({
   return ratio
 }
 
+const useSpinner = (increment: Function, decrement: Function) => {
+  const [spinning, setSpinning] = useState(false)
+  const [action, setAction] = useState<Action | null>(null)
+  const [once, setOnce] = useState(true)
+  const timeoutRef = useRef<any>(null)
+
+  const removeTimeout = () => clearTimeout(timeoutRef.current)
+
+  useInterval(
+    () => {
+      if (action === "increment") increment()
+
+      if (action === "decrement") decrement()
+    },
+    spinning ? INTERVAL : null,
+  )
+
+  const up = useCallback(() => {
+    if (once) increment()
+
+    timeoutRef.current = setTimeout(() => {
+      setOnce(false)
+      setSpinning(true)
+      setAction("increment")
+    }, DELAY)
+  }, [increment, once])
+
+  const down = useCallback(() => {
+    if (once) decrement()
+
+    timeoutRef.current = setTimeout(() => {
+      setOnce(false)
+      setSpinning(true)
+      setAction("decrement")
+    }, DELAY)
+  }, [decrement, once])
+
+  const stop = useCallback(() => {
+    setOnce(true)
+    setSpinning(false)
+    removeTimeout()
+  }, [])
+
+  useEffect(() => {
+    return () => removeTimeout()
+  }, [])
+
+  return { down, spinning, stop, up }
+}
+
+const useAttributeObserver = (
+  ref: React.RefObject<HTMLElement | null>,
+  attributeFilter: string[],
+  enabled: boolean,
+  func: () => void,
+) => {
+  useEffect(() => {
+    if (!ref.current || !enabled) return
+
+    const ownerDocument = ref.current.ownerDocument.defaultView ?? window
+
+    const observer = new ownerDocument.MutationObserver((changes) => {
+      for (const { type, attributeName } of changes) {
+        if (
+          type === "attributes" &&
+          attributeName &&
+          attributeFilter.includes(attributeName)
+        )
+          func()
+      }
+    })
+
+    observer.observe(ref.current, { attributeFilter, attributes: true })
+
+    return () => observer.disconnect()
+  })
+}
+
 type ValidityState = "rangeOverflow" | "rangeUnderflow"
 
 export interface UseNumberInputProps
-  extends UseFormControlProps<HTMLInputElement>,
+  extends UseFieldProps<HTMLInputElement>,
+    Omit<
+      HTMLProps<"input">,
+      | "defaultValue"
+      | "max"
+      | "min"
+      | "onChange"
+      | "onInvalid"
+      | "size"
+      | "step"
+      | "value"
+    >,
     UseCounterProps {
   /**
    * The HTML `name` attribute used for forms.
@@ -139,46 +216,42 @@ export interface UseNumberInputProps
   ) => void
 }
 
-export const useNumberInput = (props: UseNumberInputProps = {}) => {
-  const {
-    id,
-    name,
-    allowMouseWheel,
-    clampValueOnBlur = true,
-    defaultValue,
-    focusInputOnChange = true,
-    format: formatProp,
-    getAriaValueText: getAriaValueTextProp,
-    inputMode = "decimal",
-    isValidCharacter: isValidCharacterProp,
-    keepWithinRange = true,
-    max: maxValue = Number.MAX_SAFE_INTEGER,
-    min: minValue = Number.MIN_SAFE_INTEGER,
-    parse: parseProp,
-    pattern = "[0-9]*(.[0-9]+)?",
-    precision,
-    step: stepProp,
-    value: valueProp,
-    onChange: onChangeProp,
-    onInvalid: onInvalidProp,
-    ...rest
-  } = useFormControlProps(props)
-  const {
-    "aria-invalid": invalid,
-    disabled,
-    readOnly,
-    required,
-    onBlur: onBlurProp,
-    onFocus: onFocusProp,
-    ...formControlProps
-  } = pickObject(rest, formControlProperties)
+export const useNumberInput = ({
+  id,
+  name,
+  "aria-invalid": invalid,
+  allowMouseWheel,
+  clampValueOnBlur = true,
+  defaultValue,
+  disabled,
+  focusInputOnChange = true,
+  format: formatProp,
+  getAriaValueText: getAriaValueTextProp,
+  inputMode = "decimal",
+  isValidCharacter: isValidCharacterProp,
+  keepWithinRange = true,
+  max: maxValue = Number.MAX_SAFE_INTEGER,
+  min: minValue = Number.MIN_SAFE_INTEGER,
+  parse: parseProp,
+  pattern = "[0-9]*(.[0-9]+)?",
+  precision,
+  readOnly,
+  required,
+  step: stepProp,
+  value: valueProp,
+  onBlur: onBlurProp,
+  onChange: onChangeProp,
+  onFocus: onFocusProp,
+  onInvalid: onInvalidProp,
+  ...rest
+}: UseNumberInputProps) => {
   const [focused, setFocused] = useState(false)
   const interactive = !(readOnly || disabled)
   const inputRef = useRef<HTMLInputElement>(null)
-  const inputSelectionRef = useRef<{
+  const inputSelectionRef = useRef<null | {
     end: null | number
     start: null | number
-  } | null>(null)
+  }>(null)
   const incrementRef = useRef<HTMLButtonElement>(null)
   const decrementRef = useRef<HTMLButtonElement>(null)
 
@@ -409,7 +482,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    (props = {}, ref = null) => ({
+    ({ ref, ...props } = {}) => ({
       id,
       type: "text",
       name,
@@ -419,7 +492,6 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       readOnly,
       required,
       role: "spinbutton",
-      ...formControlProps,
       ...props,
       ref: mergeRefs(inputRef, ref),
       "aria-invalid": ariaAttr(invalid ?? out),
@@ -446,7 +518,6 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
       required,
       disabled,
       readOnly,
-      formControlProps,
       maxValue,
       minValue,
       stepProp,
@@ -464,7 +535,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
   )
 
   const getIncrementProps: PropGetter<"button"> = useCallback(
-    (props = {}, ref = null) => {
+    ({ ref, ...props } = {}) => {
       const trulyDisabled = disabled || (keepWithinRange && max)
 
       return {
@@ -472,13 +543,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         disabled: trulyDisabled,
         readOnly,
         required,
-        ...formControlProps,
         ...props,
         ref: mergeRefs(ref, incrementRef),
-        style: {
-          ...props.style,
-          cursor: readOnly ? "not-allowed" : props.style?.cursor,
-        },
         tabIndex: -1,
         onPointerDown: handlerAll(props.onPointerDown, (ev) => {
           if (ev.button === 0 && !trulyDisabled) eventUp(ev)
@@ -487,20 +553,11 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         onPointerUp: handlerAll(props.onPointerUp, stop),
       }
     },
-    [
-      disabled,
-      keepWithinRange,
-      max,
-      required,
-      readOnly,
-      formControlProps,
-      stop,
-      eventUp,
-    ],
+    [disabled, keepWithinRange, max, required, readOnly, stop, eventUp],
   )
 
   const getDecrementProps: PropGetter<"button"> = useCallback(
-    (props = {}, ref = null) => {
+    ({ ref, ...props } = {}) => {
       const trulyDisabled = disabled || (keepWithinRange && min)
 
       return {
@@ -508,13 +565,8 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         disabled: trulyDisabled,
         readOnly,
         required,
-        ...formControlProps,
         ...props,
         ref: mergeRefs(ref, decrementRef),
-        style: {
-          ...props.style,
-          cursor: readOnly ? "not-allowed" : props.style?.cursor,
-        },
         tabIndex: -1,
         onPointerDown: handlerAll(props.onPointerDown, (ev) => {
           if (ev.button === 0 && !trulyDisabled) eventDown(ev)
@@ -523,16 +575,7 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
         onPointerUp: handlerAll(props.onPointerUp, stop),
       }
     },
-    [
-      disabled,
-      keepWithinRange,
-      min,
-      required,
-      readOnly,
-      formControlProps,
-      stop,
-      eventDown,
-    ],
+    [disabled, keepWithinRange, min, required, readOnly, stop, eventDown],
   )
 
   return {
@@ -550,301 +593,3 @@ export const useNumberInput = (props: UseNumberInputProps = {}) => {
 }
 
 export type UseNumberInputReturn = ReturnType<typeof useNumberInput>
-
-const INTERVAL = 50
-
-const DELAY = 300
-
-type Action = "decrement" | "increment"
-
-const useSpinner = (increment: Function, decrement: Function) => {
-  const [spinning, setSpinning] = useState(false)
-  const [action, setAction] = useState<Action | null>(null)
-  const [once, setOnce] = useState(true)
-  const timeoutRef = useRef<any>(null)
-
-  const removeTimeout = () => clearTimeout(timeoutRef.current)
-
-  useInterval(
-    () => {
-      if (action === "increment") increment()
-
-      if (action === "decrement") decrement()
-    },
-    spinning ? INTERVAL : null,
-  )
-
-  const up = useCallback(() => {
-    if (once) increment()
-
-    timeoutRef.current = setTimeout(() => {
-      setOnce(false)
-      setSpinning(true)
-      setAction("increment")
-    }, DELAY)
-  }, [increment, once])
-
-  const down = useCallback(() => {
-    if (once) decrement()
-
-    timeoutRef.current = setTimeout(() => {
-      setOnce(false)
-      setSpinning(true)
-      setAction("decrement")
-    }, DELAY)
-  }, [decrement, once])
-
-  const stop = useCallback(() => {
-    setOnce(true)
-    setSpinning(false)
-    removeTimeout()
-  }, [])
-
-  useEffect(() => {
-    return () => removeTimeout()
-  }, [])
-
-  return { down, spinning, stop, up }
-}
-
-const useAttributeObserver = (
-  ref: React.RefObject<HTMLElement | null>,
-  attributeFilter: string[],
-  enabled: boolean,
-  func: () => void,
-) => {
-  useEffect(() => {
-    if (!ref.current || !enabled) return
-
-    const ownerDocument = ref.current.ownerDocument.defaultView ?? window
-
-    const observer = new ownerDocument.MutationObserver((changes) => {
-      for (const { type, attributeName } of changes) {
-        if (
-          type === "attributes" &&
-          attributeName &&
-          attributeFilter.includes(attributeName)
-        )
-          func()
-      }
-    })
-
-    observer.observe(ref.current, { attributeFilter, attributes: true })
-
-    return () => observer.disconnect()
-  })
-}
-
-interface NumberInputOptions {
-  /**
-   * The border color when the input is invalid.
-   */
-  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
-  /**
-   * The border color when the input is focused.
-   */
-  focusBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
-  /**
-   * If `true`, display the addon for the number input.
-   */
-  stepper?: boolean
-  /**
-   * Props for addon component.
-   */
-  addonProps?: HTMLUIProps
-  /**
-   * Props for container element.
-   */
-  containerProps?: HTMLUIProps
-  /**
-   * Props for decrement component.
-   */
-  decrementProps?: NumberDecrementStepperProps
-  /**
-   * Props for increment component.
-   */
-  incrementProps?: NumberIncrementStepperProps
-}
-
-export interface NumberInputProps
-  extends Omit<
-      HTMLUIProps<"input">,
-      | "defaultValue"
-      | "max"
-      | "min"
-      | "onChange"
-      | "onInvalid"
-      | "size"
-      | "step"
-      | "value"
-    >,
-    ThemeProps<"NumberInput">,
-    UseNumberInputProps,
-    NumberInputOptions {}
-
-interface NumberInputContext {
-  styles: { [key: string]: CSSUIObject | undefined }
-  getDecrementProps: PropGetter<"button">
-  getIncrementProps: PropGetter<"button">
-  getInputProps: PropGetter<"input">
-}
-
-const [NumberInputContextProvider, useNumberInputContext] =
-  createContext<NumberInputContext>({
-    name: "NumberInputContext",
-    errorMessage: `useNumberInputContext returned is 'undefined'. Seems you forgot to wrap the components in "<NumberInput />"`,
-  })
-
-/**
- * `NumberInput` is a component used to obtain numeric input from the user.
- *
- * @see Docs https://yamada-ui.com/components/forms/number-input
- */
-export const NumberInput = forwardRef<NumberInputProps, "input">(
-  (props, ref) => {
-    const [styles, mergedProps] = useComponentMultiStyle("NumberInput", props)
-    const {
-      className,
-      stepper = true,
-      addonProps,
-      containerProps,
-      decrementProps,
-      incrementProps,
-      ...computedProps
-    } = omitThemeProps(mergedProps)
-    const {
-      props: rest,
-      getDecrementProps,
-      getIncrementProps,
-      getInputProps,
-    } = useNumberInput(computedProps)
-
-    return (
-      <NumberInputContextProvider
-        value={{ styles, getDecrementProps, getIncrementProps, getInputProps }}
-      >
-        <ui.div
-          className={cx("ui-number-input", className)}
-          role="group"
-          __css={styles.container}
-          {...containerProps}
-        >
-          <NumberInputField {...getInputProps(rest, ref)} />
-
-          {stepper ? (
-            <NumberInputAddon {...addonProps}>
-              <NumberIncrementStepper {...incrementProps} />
-              <NumberDecrementStepper {...decrementProps} />
-            </NumberInputAddon>
-          ) : null}
-        </ui.div>
-      </NumberInputContextProvider>
-    )
-  },
-)
-
-NumberInput.displayName = "NumberInput"
-NumberInput.__ui__ = "NumberInput"
-
-type NumberInputFieldProps = Omit<HTMLUIProps<"input">, "size">
-
-const NumberInputField = forwardRef<NumberInputFieldProps, "input">(
-  ({ className, ...rest }, ref) => {
-    const { styles } = useNumberInputContext()
-
-    return (
-      <ui.input
-        ref={ref}
-        className={cx("ui-number-input__field", className)}
-        __css={styles.field}
-        {...rest}
-      />
-    )
-  },
-)
-
-NumberInputField.displayName = "NumberInputField"
-NumberInputField.__ui__ = "NumberInputField"
-
-type NumberInputAddonProps = HTMLUIProps
-
-const NumberInputAddon = forwardRef<NumberInputAddonProps, "div">(
-  ({ className, ...rest }, ref) => {
-    const { styles } = useNumberInputContext()
-
-    return (
-      <ui.div
-        ref={ref}
-        className={cx("ui-number-input__addon", className)}
-        aria-hidden
-        __css={styles.addon}
-        {...rest}
-      />
-    )
-  },
-)
-
-NumberInputAddon.displayName = "NumberInputAddon"
-NumberInputAddon.__ui__ = "NumberInputAddon"
-
-const Stepper = ui("button", {
-  baseStyle: {
-    alignItems: "center",
-    cursor: "pointer",
-    display: "flex",
-    flex: 1,
-    justifyContent: "center",
-    lineHeight: "moderate",
-    transitionDuration: "moderate",
-    transitionProperty: "common",
-    userSelect: "none",
-  },
-})
-
-type NumberIncrementStepperProps = HTMLUIProps<"button">
-
-const NumberIncrementStepper = forwardRef<
-  NumberIncrementStepperProps,
-  "button"
->(({ className, children, ...rest }, ref) => {
-  const { styles, getIncrementProps } = useNumberInputContext()
-
-  const css: CSSUIObject = { ...styles.stepper }
-
-  return (
-    <Stepper
-      className={cx("ui-number-input__stepper--up", className)}
-      {...getIncrementProps(rest, ref)}
-      __css={css}
-    >
-      {children ?? <ChevronUpIcon fontSize="sm" />}
-    </Stepper>
-  )
-})
-
-NumberIncrementStepper.displayName = "NumberIncrementStepper"
-NumberIncrementStepper.__ui__ = "NumberIncrementStepper"
-
-type NumberDecrementStepperProps = HTMLUIProps<"button">
-
-const NumberDecrementStepper = forwardRef<
-  NumberDecrementStepperProps,
-  "button"
->(({ className, children, ...rest }, ref) => {
-  const { styles, getDecrementProps } = useNumberInputContext()
-
-  const css: CSSUIObject = { ...styles.stepper }
-
-  return (
-    <Stepper
-      className={cx("ui-number-input__stepper--down", className)}
-      {...getDecrementProps(rest, ref)}
-      __css={css}
-    >
-      {children ?? <ChevronDownIcon fontSize="sm" />}
-    </Stepper>
-  )
-})
-
-NumberDecrementStepper.displayName = "NumberDecrementStepper"
-NumberDecrementStepper.__ui__ = "NumberDecrementStepper"

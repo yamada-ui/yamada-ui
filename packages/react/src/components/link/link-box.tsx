@@ -3,6 +3,7 @@ import type { Dict } from "../../utils"
 import type { LinkBoxStyle } from "./link-box.style"
 import {
   createSlotComponent,
+  mergeCSS,
   radiusProperties,
   ui,
   useCreateVars,
@@ -32,7 +33,7 @@ export const {
  *
  * @see Docs https://yamada-ui.com/components/navigation/link-box
  */
-export const LinkBox = withProvider(({ children, ...rest }) => {
+export const LinkBox = withProvider(({ css: cssProp, children, ...rest }) => {
   const [vars, variableProps] = useCreateVars(rest, radiusProperties)
 
   const css: CSSObject = {
@@ -46,7 +47,7 @@ export const LinkBox = withProvider(({ children, ...rest }) => {
 
   return (
     <LinkBoxContext value={{ variableProps }}>
-      <ui.div css={css} {...rest}>
+      <ui.div css={mergeCSS(cssProp, css)} {...rest}>
         {children}
       </ui.div>
     </LinkBoxContext>
@@ -62,7 +63,7 @@ export interface LinkOverlayProps extends HTMLUIProps<"a"> {
   external?: boolean
 }
 export const LinkOverlay = withContext<"a", LinkOverlayProps>(
-  ({ target, children, external, rel, ...rest }) => {
+  ({ target, css: cssProp, children, external, rel, ...rest }) => {
     const { variableProps } = useLinkBoxContext()
     const css: CSSObject = {
       position: "static",
@@ -83,7 +84,7 @@ export const LinkOverlay = withContext<"a", LinkOverlayProps>(
     return (
       <ui.a
         target={external ? "_blank" : target}
-        css={css}
+        css={mergeCSS(cssProp, css)}
         rel={external ? "noopener" : rel}
         {...rest}
       >

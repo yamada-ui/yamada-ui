@@ -1,8 +1,8 @@
-import type { AiryIdent } from "."
+import type { RotateIdent } from "./"
 import { useState } from "react"
-import { Rotate } from "."
 import { a11y, render, waitFor } from "../../../test"
-import { BoxIcon } from "../../components/icon"
+import { BoxIcon } from "../icon"
+import { Rotate } from "./"
 
 describe("<Rotate />", () => {
   test("passes a11y test", () => {
@@ -11,7 +11,7 @@ describe("<Rotate />", () => {
 
   test("should render Rotate with value and onChange", async () => {
     const TestComponent = () => {
-      const [value, onChange] = useState<AiryIdent>("to")
+      const [value, onChange] = useState<RotateIdent>("to")
 
       return (
         <Rotate

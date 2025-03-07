@@ -184,7 +184,8 @@
     "yamcha",
     "Yezi",
     "Yuto",
-    "zarbon"
+    "zarbon",
+    "chromeos"
   ],
   "ignorePaths": [
     "node_modules",

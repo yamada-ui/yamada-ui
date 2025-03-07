@@ -1,5 +1,6 @@
 export type OS =
   | "android"
+  | "chromeos"
   | "ios"
   | "linux"
   | "macos"
@@ -14,12 +15,14 @@ const getOS = (): OS => {
   const ios = /(iPhone)|(iPad)|(iPod)/i
   const android = /Android/i
   const linux = /Linux/i
+  const chromeos = /CrOS/i
 
   if (macos.test(userAgent)) return "macos"
   if (ios.test(userAgent)) return "ios"
   if (windows.test(userAgent)) return "windows"
   if (android.test(userAgent)) return "android"
   if (linux.test(userAgent)) return "linux"
+  if (chromeos.test(userAgent)) return "chromeos"
 
   return "undetermined"
 }

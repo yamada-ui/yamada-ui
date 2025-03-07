@@ -1,17 +1,14 @@
-import type { ComponentMultiStyle } from "../../core"
-import { isAccessible, isGray, shadeColor } from "../../utils"
+import { defineComponentSlotStyle } from "../../core"
 
-export const Tabs: ComponentMultiStyle<"Tabs"> = {
-  baseStyle: {
-    container: ({ orientation }) => ({
+export const tabsStyle = defineComponentSlotStyle({
+  base: {
+    root: {
       display: "flex",
-      flexDirection: orientation === "vertical" ? "row" : "column",
       w: "100%",
-    }),
-    tab: ({ fitted }) => ({
+    },
+    tab: {
       alignItems: "center",
       display: "flex",
-      flex: fitted ? 1 : undefined,
       justifyContent: "center",
       outline: "0",
       overflow: "hidden",
@@ -19,7 +16,11 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
       transitionDuration: "moderate",
       transitionProperty: "common",
       whiteSpace: "nowrap",
-      _selected: { _hover: { opacity: 1 } },
+      _selected: {
+        _hover: {
+          opacity: 1,
+        },
+      },
       _hover: { opacity: 0.7 },
       _focusVisible: {
         boxShadow: "outline",
@@ -29,12 +30,10 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
         cursor: "not-allowed",
         opacity: 0.4,
       },
-    }),
-    tabList: ({ align, orientation }) => ({
+    },
+    tabList: {
       display: "flex",
-      flexDirection: orientation === "vertical" ? "column" : "row",
-      justifyContent: align === "center" ? align : `flex-${align}`,
-    }),
+    },
     tabPanel: {
       p: "md",
     },
@@ -44,81 +43,69 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
   },
 
   variants: {
-    line: ({ colorScheme: c = "primary" }) => {
-      return {
-        tab: {
-          borderColor: "transparent",
-          _horizontal: {
-            borderBottomStyle: "solid",
-            borderBottomWidth: "1px",
-            mb: "-1px",
-          },
-          _ripple: { display: "none" },
-          _selected: {
-            borderColor: "currentColor",
-            color: isGray(c)
-              ? ["blackAlpha.800", "whiteAlpha.700"]
-              : [`${c}.600`, `${c}.500`],
-          },
-          _vertical: {
-            borderEndStyle: "solid",
-            borderEndWidth: "1px",
-            me: "-1px",
-          },
+    line: {
+      tab: {
+        borderColor: "transparent",
+        _horizontal: {
+          borderBottomStyle: "solid",
+          borderBottomWidth: "1px",
+          mb: "-1px",
         },
-        tabList: {
-          borderColor: "inherit",
-          _horizontal: { borderBottomWidth: "1px" },
-          _vertical: { borderEndWidth: "1px" },
+        _ripple: { display: "none" },
+        _selected: {
+          borderColor: "currentColor",
+          color: "colorScheme.solid",
         },
-      }
+        _vertical: {
+          borderEndStyle: "solid",
+          borderEndWidth: "1px",
+          me: "-1px",
+        },
+      },
+      tabList: {
+        borderColor: "inherit",
+        _horizontal: { borderBottomWidth: "1px" },
+        _vertical: { borderEndWidth: "1px" },
+      },
     },
-    rounded: ({ colorScheme: c = "primary" }) => ({
+    rounded: {
       tab: {
         borderRadius: "full",
         vars: [
           {
             name: "color",
             token: "colors",
-            value: [`${c}.600`, `${c}.500`],
+            value: "colorScheme.solid",
           },
         ],
         _selected: {
-          boxShadow: "inset 0 0 0px 1px $color",
-          color: isGray(c)
-            ? ["blackAlpha.800", "whiteAlpha.700"]
-            : [`${c}.600`, `${c}.500`],
+          boxShadow: "inset 0 0 0px 1px {color}",
+          color: "colorScheme.solid",
         },
       },
       tabList: { gap: "sm" },
-    }),
-    "rounded-solid": ({ colorScheme: c = "primary" }) => ({
+    },
+    "rounded-solid": {
       tab: {
         borderRadius: "full",
         _selected: {
-          bg: isGray(c)
-            ? [`${c}.50`, `${c}.700`]
-            : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
-          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
+          bg: "colorScheme.solid",
+          color: "colorScheme.contrast",
         },
       },
       tabList: { gap: "sm" },
-    }),
-    "rounded-subtle": ({
-      colorScheme: c = "primary",
-      colorMode: m,
-      theme: t,
-    }) => ({
+    },
+    "rounded-subtle": {
       tab: {
         borderRadius: "full",
         _selected: {
-          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
-          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
+          bg: "colorScheme.subtle",
+          color: "colorScheme.fg",
         },
       },
       tabList: { gap: "sm" },
-    }),
-    sticky: ({ colorScheme: c = "primary" }) => ({
+    },
+    sticky: {
       tab: {
         borderColor: "transparent",
         _horizontal: {
@@ -130,9 +117,7 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
         _ripple: { display: "none" },
         _selected: {
           borderColor: "inherit",
-          color: isGray(c)
-            ? ["blackAlpha.800", "whiteAlpha.700"]
-            : [`${c}.600`, `${c}.500`],
+          color: "colorScheme.solid",
           _horizontal: { borderBottomColor: ["white", "black"] },
           _vertical: { borderEndColor: ["white", "black"] },
         },
@@ -148,8 +133,8 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
         _horizontal: { borderBottomWidth: "1px" },
         _vertical: { borderEndWidth: "1px" },
       },
-    }),
-    "sticky-solid": ({ colorScheme: c = "primary" }) => ({
+    },
+    "sticky-solid": {
       tab: {
         borderColor: "inherit",
         _horizontal: {
@@ -162,10 +147,8 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
           _vertical: { borderBottom: "none" },
         },
         _selected: {
-          bg: isGray(c)
-            ? [`${c}.50`, `${c}.700`]
-            : [isAccessible(c) ? `${c}.400` : `${c}.500`, `${c}.600`],
-          color: [isGray(c) || isAccessible(c) ? `black` : `white`, `white`],
+          bg: "colorScheme.solid",
+          color: "colorScheme.contrast",
         },
         _vertical: {
           borderStyle: "solid",
@@ -178,12 +161,8 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
         _horizontal: { borderBottomWidth: "1px" },
         _vertical: { borderEndWidth: "1px" },
       },
-    }),
-    "sticky-subtle": ({
-      colorScheme: c = "primary",
-      colorMode: m,
-      theme: t,
-    }) => ({
+    },
+    "sticky-subtle": {
       tab: {
         borderColor: "inherit",
         _horizontal: {
@@ -196,8 +175,8 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
           _vertical: { borderBottom: "none" },
         },
         _selected: {
-          bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
-          color: [`${c}.800`, isGray(c) ? `${c}.50` : `${c}.200`],
+          bg: "colorScheme.subtle",
+          color: "colorScheme.fg",
         },
         _vertical: {
           borderStyle: "solid",
@@ -210,7 +189,7 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
         _horizontal: { borderBottomWidth: "1px" },
         _vertical: { borderEndWidth: "1px" },
       },
-    }),
+    },
     unstyled: {
       tab: {
         _ripple: { display: "none" },
@@ -243,9 +222,68 @@ export const Tabs: ComponentMultiStyle<"Tabs"> = {
     },
   },
 
+  props: {
+    /**
+     * The alignment of the tabs.
+     *
+     * @default 'start'
+     */
+    align: {
+      center: {
+        tabList: {
+          justifyContent: "center",
+        },
+      },
+      end: {
+        tabList: {
+          justifyContent: "flex-end",
+        },
+      },
+      start: {
+        tabList: {
+          justifyContent: "flex-start",
+        },
+      },
+    },
+    /**
+     * If `true`, tabs will stretch to width of the tablist.
+     *
+     * @default false
+     */
+    fitted: {
+      true: {
+        tab: {
+          flex: 1,
+        },
+      },
+    },
+    /**
+     * The orientation of the tab list.
+     *
+     * @default 'horizontal'
+     */
+    orientation: {
+      horizontal: {
+        root: {
+          flexDirection: "column",
+        },
+        tabList: { flexDirection: "row" },
+      },
+      vertical: {
+        root: {
+          flexDirection: "row",
+        },
+        tabList: { flexDirection: "column" },
+      },
+    },
+  },
+
   defaultProps: {
-    colorScheme: "primary",
     size: "md",
     variant: "line",
+    align: "start",
+    orientation: "horizontal",
   },
-}
+})
+
+export type TabsStyle = typeof tabsStyle

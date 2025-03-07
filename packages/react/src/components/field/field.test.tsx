@@ -2,9 +2,69 @@ import { Field } from "."
 import { a11y, filterVisuallyHidden, render, screen } from "../../../test"
 import { Input } from "../input"
 
-describe("<FormControl />", () => {
-  test("FormControl renders correctly", async () => {
+describe("<Field />", () => {
+  test("Field renders correctly", async () => {
     await a11y(<Field.Root />)
+  })
+
+  test("Field sets `displayName` and `__ui__` correctly", () => {
+    expect(Field.Root.displayName).toBe("FieldRoot")
+    expect(Field.Root.__ui__).toBe("FieldRoot")
+
+    expect(Field.Label.displayName).toBe("FieldLabel")
+    expect(Field.Label.__ui__).toBe("FieldLabel")
+
+    expect(Field.HelperMessage.displayName).toBe("FieldHelperMessage")
+    expect(Field.HelperMessage.__ui__).toBe("FieldHelperMessage")
+
+    expect(Field.ErrorMessage.displayName).toBe("FieldErrorMessage")
+    expect(Field.ErrorMessage.__ui__).toBe("FieldErrorMessage")
+  })
+
+  test("Field sets `className` correctly", () => {
+    const { rerender } = render(
+      <Field.Root data-testid="root">
+        <Field.Label data-testid="label">Label</Field.Label>
+        <Field.HelperMessage data-testid="helper">Helper</Field.HelperMessage>
+        <Field.ErrorMessage data-testid="error">Error</Field.ErrorMessage>
+      </Field.Root>,
+    )
+
+    expect(screen.getByTestId("root")).toHaveClass("ui-field__root")
+    expect(screen.getByTestId("label")).toHaveClass("ui-field__label")
+    expect(screen.getByTestId("helper")).toHaveClass("ui-field__helper-message")
+
+    rerender(
+      <Field.Root data-testid="root" invalid>
+        <Field.Label data-testid="label">Label</Field.Label>
+        <Field.HelperMessage data-testid="helper">Helper</Field.HelperMessage>
+        <Field.ErrorMessage data-testid="error">Error</Field.ErrorMessage>
+      </Field.Root>,
+    )
+    expect(screen.getByTestId("error")).toHaveClass("ui-field__error-message")
+  })
+
+  test("Field renders HTML tag correctly", () => {
+    const { rerender } = render(
+      <Field.Root data-testid="root">
+        <Field.Label>Label</Field.Label>
+        <Field.HelperMessage>Helper</Field.HelperMessage>
+        <Field.ErrorMessage>Error</Field.ErrorMessage>
+      </Field.Root>,
+    )
+
+    expect(screen.getByTestId("root").tagName).toBe("DIV")
+    expect(screen.getByText("Label").tagName).toBe("LABEL")
+    expect(screen.getByText("Helper").tagName).toBe("SPAN")
+
+    rerender(
+      <Field.Root data-testid="root" invalid>
+        <Field.Label>Label</Field.Label>
+        <Field.HelperMessage>Helper</Field.HelperMessage>
+        <Field.ErrorMessage>Error</Field.ErrorMessage>
+      </Field.Root>,
+    )
+    expect(screen.getByText("Error").tagName).toBe("SPAN")
   })
 
   test("should render form control", () => {

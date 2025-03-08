@@ -1,10 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { COLOR_SCHEMES } from "@yamada-ui/utils"
 import { useState } from "react"
+import { Pagination } from "."
 import { Wrap } from "../flex"
+import { For } from "../for"
 import { GhostIcon } from "../icon"
 import { VStack } from "../stack"
-import { Pagination } from "./"
 
 type Story = StoryFn<typeof Pagination>
 
@@ -19,7 +20,7 @@ export const Basic: Story = () => {
   return <Pagination total={10} />
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
     <>
       <Pagination size="xs" total={10} />
@@ -31,79 +32,48 @@ export const WithSize: Story = () => {
   )
 }
 
-export const WithVariant: Story = () => {
-  return (
-    <>
-      <Pagination variant="solid" total={10} />
-      <Pagination variant="subtle" total={10} />
-      <Pagination variant="surface" total={10} />
-      <Pagination variant="outline" total={10} />
-      <Pagination variant="ghost" total={10} />
-      <Pagination variant="unstyled" total={10} />
-    </>
-  )
-}
-
-export const WithColorScheme: Story = () => {
+export const Theme: Story = () => {
   return (
     <Wrap gap="md" w="full">
-      <VStack w="auto">
-        {COLOR_SCHEMES.map((colorScheme) => (
-          <Pagination
-            key={colorScheme}
-            colorScheme={colorScheme}
-            variant="solid"
-            total={10}
-          />
-        ))}
-      </VStack>
-
-      <VStack w="auto">
-        {COLOR_SCHEMES.map((colorScheme) => (
-          <Pagination
-            key={colorScheme}
-            colorScheme={colorScheme}
-            variant="outline"
-            total={10}
-          />
-        ))}
-      </VStack>
-
-      <VStack w="auto">
-        {COLOR_SCHEMES.map((colorScheme) => (
-          <Pagination
-            key={colorScheme}
-            colorScheme={colorScheme}
-            variant="ghost"
-            total={10}
-          />
-        ))}
-      </VStack>
+      <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        {(variant) => (
+          <VStack w="auto">
+            {COLOR_SCHEMES.map((colorScheme) => (
+              <Pagination
+                key={colorScheme}
+                colorScheme={colorScheme}
+                variant={variant}
+                total={10}
+              />
+            ))}
+          </VStack>
+        )}
+      </For>
     </Wrap>
   )
 }
 
-export const WithDefaultPage: Story = () => {
+export const DefaultPage: Story = () => {
   return <Pagination defaultPage={3} total={10} />
 }
 
-export const WithTotal: Story = () => {
+export const Total: Story = () => {
   return <Pagination total={77} />
 }
 
-export const WithEdge: Story = () => {
+export const Edge: Story = () => {
   return <Pagination total={10} withEdges />
 }
 
-export const WithSiblings: Story = () => {
+export const Siblings: Story = () => {
   return <Pagination siblings={3} total={77} />
 }
 
-export const WithBoundaries: Story = () => {
+export const Boundaries: Story = () => {
   return <Pagination boundaries={3} total={77} />
 }
 
-export const WithDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
       <Pagination variant="solid" disabled total={10} />

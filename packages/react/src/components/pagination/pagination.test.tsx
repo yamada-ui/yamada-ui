@@ -1,5 +1,5 @@
+import { Pagination } from "."
 import { a11y, fireEvent, render, screen } from "../../../test"
-import { Pagination } from "./"
 
 describe("<Pagination />", () => {
   test("should pass a11y", async () => await a11y(<Pagination total={10} />))

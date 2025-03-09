@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react"
 import type { HTMLUIProps, StyleValue, ThemeProps } from "../../core"
-import type { PaginationStyle } from "./pagenation.style"
+import type { PaginationStyle } from "./pagination.style"
 import type { UsePaginationProps } from "./use-pagination"
 import { useMemo } from "react"
 import { createSlotComponent, mergeCSS, ui } from "../../core"
@@ -14,7 +14,7 @@ import {
   EllipsisIcon,
 } from "../icon"
 import { Ripple, useRipple } from "../ripple"
-import { paginationStyle } from "./pagenation.style"
+import { paginationStyle } from "./pagination.style"
 import { usePagination } from "./use-pagination"
 
 export interface PaginationRootProps

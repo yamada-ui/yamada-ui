@@ -295,9 +295,7 @@ export const PaginationItem = withContext<"button", PaginationItemProps>(
     disableRipple,
     ...rest
   }) => {
-    const { className, css } = !isNumber(page)
-      ? useSlotComponentProps(rest, page)
-      : {}
+    const { css } = !isNumber(page) ? useSlotComponentProps(rest, page) : {}
     const ellipsis = page === "ellipsis"
     const { onClick, ...rippleProps } = useRipple({
       ...rest,
@@ -320,7 +318,7 @@ export const PaginationItem = withContext<"button", PaginationItemProps>(
           : {})}
         className={cx(
           itemClassName,
-          className ? `ui-pagination__item--${page}` : "",
+          !isNumber(page) ? `ui-pagination__item--${page}` : "",
         )}
         css={mergeCSS(cssProp, css)}
         tabIndex={!ellipsis ? 0 : -1}

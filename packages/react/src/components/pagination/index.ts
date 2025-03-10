@@ -1,5 +1,10 @@
-export { Pagination, PaginationItem } from "./pagination"
-export type { PaginationItemProps, PaginationRootProps } from "./pagination"
+export {
+  Pagination,
+  PaginationItem,
+  PaginationPropsContext,
+  usePaginationPropsContext,
+} from "./pagination"
+export type { PaginationItemProps, PaginationProps } from "./pagination"
 export { usePagination } from "./use-pagination"
 export type { UsePaginationProps, UsePaginationReturn } from "./use-pagination"
 

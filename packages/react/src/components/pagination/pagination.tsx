@@ -17,7 +17,7 @@ import { Ripple, useRipple } from "../ripple"
 import { paginationStyle } from "./pagination.style"
 import { usePagination } from "./use-pagination"
 
-export interface PaginationRootProps
+export interface PaginationProps
   extends Omit<HTMLUIProps<"ul">, "children" | "onChange" | "page">,
     ThemeProps<PaginationStyle>,
     UsePaginationProps {
@@ -77,7 +77,7 @@ export const {
   useStyleContext,
   withContext,
   withProvider,
-} = createSlotComponent<PaginationRootProps, PaginationStyle>(
+} = createSlotComponent<PaginationProps, PaginationStyle>(
   "pagination",
   paginationStyle,
 )

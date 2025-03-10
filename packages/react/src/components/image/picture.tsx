@@ -144,6 +144,7 @@ export const Picture: FC<PictureProps> = ({
   )
 }
 
+Picture.displayName = "Picture"
 Picture.__ui__ = "Picture"
 
 export interface SourceProps extends HTMLUIProps<"source"> {
@@ -167,4 +168,5 @@ export const Source: FC<SourceProps> = ({ media, ...rest }) => {
   return <ui.source media={media} {...rest} />
 }
 
+Source.displayName = "Source"
 Source.__ui__ = "Source"

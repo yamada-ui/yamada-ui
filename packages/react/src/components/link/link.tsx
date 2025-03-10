@@ -1,6 +1,6 @@
 import type { HTMLUIProps, ThemeProps } from "../../core"
 import type { LinkStyle } from "./link.style"
-import { createComponent, ui } from "../../core"
+import { createComponent } from "../../core"
 import { linkStyle } from "./link.style"
 
 export interface LinkProps extends HTMLUIProps<"a">, ThemeProps<LinkStyle> {
@@ -21,14 +21,10 @@ export const {
 /**
  * `Link` is a component for creating hyperlinks to different web pages, locations within the same page, or other URLs.
  *
- * @see Docs https://yamada-ui.com/components/navigation/link
+ * @see Docs https://yamada-ui.com/components/link
  */
-export const Link = withContext<"a", LinkProps>(({ external, ...rest }) => {
-  return (
-    <ui.a
-      target={external ? "_blank" : undefined}
-      rel={external ? "noopener" : undefined}
-      {...rest}
-    />
-  )
-})()
+export const Link = withContext("a")(undefined, ({ external, ...rest }) => ({
+  rel: external ? "noopener" : undefined,
+  target: external ? "_blank" : undefined,
+  ...rest,
+}))

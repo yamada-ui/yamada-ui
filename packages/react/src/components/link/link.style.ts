@@ -2,19 +2,34 @@ import { defineComponentStyle } from "../../core"
 
 export const linkStyle = defineComponentStyle({
   base: {
-    color: "link",
+    alignItems: "center",
     cursor: "pointer",
-    outline: "none",
-    textDecoration: "none",
-    transitionDuration: "fast",
-    transitionProperty: "common",
-    transitionTimingFunction: "ease-out",
-    _hover: {
+    display: "inline-flex",
+    focusRing: "outside",
+    gap: "3",
+    rounded: "l1",
+  },
+
+  variants: {
+    plain: {
+      color: "colorScheme.solid",
+      _hover: {
+        textDecoration: "underline",
+        textDecorationColor: "currentColor",
+        textUnderlineOffset: "3px",
+      },
+    },
+    underline: {
+      color: "colorScheme.solid",
       textDecoration: "underline",
+      textDecorationColor: "currentColor",
+      textUnderlineOffset: "3px",
     },
-    _focusVisible: {
-      boxShadow: "outline",
-    },
+  },
+
+  defaultProps: {
+    colorScheme: "link",
+    variant: "plain",
   },
 })
 

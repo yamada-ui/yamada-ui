@@ -1,12 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Link, LinkBox, LinkOverlay } from "."
+import { LinkBox } from "."
 import { Heading } from "../heading"
+import { Link } from "../link"
 import { Text } from "../text"
 
-type Story = StoryFn<typeof LinkBox>
+type Story = StoryFn<typeof LinkBox.Root>
 
-const meta: Meta<typeof LinkBox> = {
-  component: LinkBox,
+const meta: Meta<typeof LinkBox.Root> = {
+  component: LinkBox.Root,
   title: "Components / LinkBox",
 }
 
@@ -14,64 +15,66 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <LinkBox
+    <LinkBox.Root
       as="article"
-      border="1px solid"
-      borderColor="inherit"
-      boxShadow="md"
-      maxW="sm"
+      layerStyle="panel"
+      alignItems="flex-start"
+      display="flex"
+      flexDirection="column"
+      gap="sm"
       p="md"
-      rounded="md"
+      rounded="l2"
     >
-      <Text as="span">鳥山明</Text>
+      <Text>鳥山明</Text>
 
-      <Heading size="md" my="sm">
-        <LinkOverlay
+      <Heading size="2xl">
+        <LinkBox.Overlay
           href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
           external
         >
           ドラゴンボール
-        </LinkOverlay>
+        </LinkBox.Overlay>
       </Heading>
 
       <Text>
         『ドラゴンボール』（DRAGON
         BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。略称は『DB』。
       </Text>
-    </LinkBox>
+    </LinkBox.Root>
   )
 }
 
-export const WithNestedLink: Story = () => {
+export const NestedLink: Story = () => {
   return (
-    <LinkBox
+    <LinkBox.Root
       as="article"
-      border="1px solid"
-      borderColor="inherit"
-      boxShadow="md"
-      maxW="sm"
+      layerStyle="panel"
+      alignItems="flex-start"
+      display="flex"
+      flexDirection="column"
+      gap="sm"
       p="md"
-      rounded="md"
+      rounded="l2"
     >
-      <Text as="span">鳥山明</Text>
+      <Text>鳥山明</Text>
 
-      <Heading size="md" my="sm">
-        <LinkOverlay
+      <Heading size="2xl">
+        <LinkBox.Overlay
           href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
           external
         >
           ドラゴンボール
-        </LinkOverlay>
+        </LinkBox.Overlay>
       </Heading>
 
-      <Text mb="sm">
+      <Text>
         『ドラゴンボール』（DRAGON
         BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。略称は『DB』。
       </Text>
 
-      <Link href="https://dragon-ball-official.com/" external fontWeight="bold">
+      <Link href="https://dragon-ball-official.com/" external>
         オフィシャルサイト
       </Link>
-    </LinkBox>
+    </LinkBox.Root>
   )
 }

@@ -6,6 +6,21 @@ describe("<Grid />", () => {
     render(<Grid>Grid</Grid>)
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Grid.displayName).toBe("Grid")
+    expect(Grid.__ui__).toBe("Grid")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Grid>Grid</Grid>)
+    expect(screen.getByText("Grid")).toHaveClass("ui-grid")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Grid>Grid</Grid>)
+    expect(screen.getByText("Grid").tagName).toBe("DIV")
+  })
+
   test("renders all the allowed shorthand style props", () => {
     render(
       <Grid templateColumns="repeat(2, 1fr)" templateRows="repeat(2, 1fr)">

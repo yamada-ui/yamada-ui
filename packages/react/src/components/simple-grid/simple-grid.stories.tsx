@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { GridItem } from "./grid-item"
+import { GridItem } from "../grid"
 import { SimpleGrid } from "./simple-grid"
 
 type Story = StoryFn<typeof SimpleGrid>

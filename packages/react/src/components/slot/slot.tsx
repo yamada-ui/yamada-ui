@@ -44,6 +44,7 @@ export const Slot: FC<SlotProps> = ({ children, ...rest }) => {
   return <SlotClone {...rest}>{children}</SlotClone>
 }
 
+Slot.displayName = "Slot"
 Slot.__ui__ = "Slot"
 
 interface SlotCloneProps
@@ -62,4 +63,5 @@ export const Slottable: FC<PropsWithChildren> = ({ children }) => {
   return <>{children}</>
 }
 
+Slottable.displayName = "Slottable"
 Slottable.__ui__ = "Slottable"

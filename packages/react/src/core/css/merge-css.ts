@@ -1,5 +1,5 @@
 import type { CSSObject } from "./index.types"
-import { toArray } from "@yamada-ui/utils"
+import { toArray } from "../../utils"
 
 export const mergeCSS = (
   a?: CSSObject | CSSObject[],

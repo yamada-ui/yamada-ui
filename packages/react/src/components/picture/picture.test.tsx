@@ -1,7 +1,7 @@
-import { a11y, render } from "../../../test"
+import { a11y, render, screen } from "../../../test"
 import { ThemeProvider } from "../../providers/theme-provider"
 import { defaultConfig, defaultTheme } from "../../theme"
-import { Image } from "./image"
+import { Image } from "../image"
 import { Picture, Source } from "./picture"
 
 const src = "https://image.xyz/source"
@@ -19,6 +19,25 @@ describe("<Picture />", () => {
         ]}
       />,
     )
+  })
+
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Picture.displayName).toBe("Picture")
+    expect(Picture.__ui__).toBe("Picture")
+
+    expect(Source.displayName).toBe("Source")
+    expect(Source.__ui__).toBe("Source")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <Picture src={src} alt="img" pictureProps={{ "data-testid": "picture" }}>
+        <Source srcSet={src} data-testid="src" media="md" />
+      </Picture>,
+    )
+
+    expect(screen.getByTestId("picture").tagName).toBe("PICTURE")
+    expect(screen.getByTestId("src").tagName).toBe("SOURCE")
   })
 
   test("should render source elements", () => {

@@ -4,12 +4,12 @@ import type {
   ThemeProps,
   WithoutThemeProps,
 } from "../../core"
-import type { GridProps } from "./grid"
+import type { GridProps } from "../grid"
 import type { SimpleGridStyle } from "./simple-grid.style"
 import { useMemo } from "react"
 import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"
-import { Grid } from "./grid"
+import { Grid } from "../grid"
 import { simpleGridStyle } from "./simple-grid.style"
 
 interface SimpleGridOptions {

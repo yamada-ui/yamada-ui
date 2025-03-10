@@ -42,7 +42,7 @@ export interface PictureSource extends SourceProps {
   minW?: number | ThemeTokens["sizes"]
 }
 
-interface PictureOptions {
+export interface PictureProps extends ImageProps {
   /**
    * If `true`, the sources will be sorted by the `minW` and `maxW` properties.
    *
@@ -58,8 +58,6 @@ interface PictureOptions {
    */
   pictureProps?: HTMLUIProps<"picture">
 }
-
-export interface PictureProps extends ImageProps, PictureOptions {}
 
 /**
  * `Picture` is a component that uses the `picture` element to provide alternative images for different display or device scenarios.

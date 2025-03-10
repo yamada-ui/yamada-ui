@@ -1,7 +1,7 @@
 import { a11y, render, screen } from "../../../test"
 import { ThemeProvider } from "../../providers/theme-provider"
 import { defaultConfig, defaultTheme } from "../../theme"
-import { Image } from "./image"
+import { Image } from "../image"
 import { Picture, Source } from "./picture"
 
 const src = "https://image.xyz/source"

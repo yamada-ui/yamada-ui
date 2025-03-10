@@ -1,10 +1,10 @@
 import type { FC, HTMLUIProps, ThemeTokens } from "../../core"
-import type { ImageProps } from "./image"
+import type { ImageProps } from "../image"
 import { useCallback, useMemo } from "react"
 import { ui } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
 import { getPx, isUndefined } from "../../utils"
-import { Image } from "./image"
+import { Image } from "../image"
 
 const createQuery = (
   minW: number | string | undefined,

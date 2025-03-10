@@ -4,8 +4,8 @@ import type {
   ReactNode,
 } from "react"
 import type { HTMLProps, HTMLUIProps, PropGetter } from "../../core"
-import { dataAttr, handlerAll } from "@yamada-ui/utils"
 import { useCallback, useState } from "react"
+import { dataAttr, handlerAll } from "../../utils"
 
 const defaultFormat = (name: string) => {
   const names = name.trim().split(" ")

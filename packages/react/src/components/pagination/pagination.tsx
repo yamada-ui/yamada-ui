@@ -77,7 +77,6 @@ export const {
   useStyleContext,
   withContext,
   withProvider,
-  useSlotComponentProps,
 } = createSlotComponent<PaginationRootProps, PaginationStyle>(
   "pagination",
   paginationStyle,
@@ -91,7 +90,7 @@ export const {
 export const Pagination = withProvider(
   ({
     ref,
-    className: rootClassName,
+    className,
     css,
     boundaries,
     component: Component = PaginationItem,
@@ -113,10 +112,7 @@ export const Pagination = withProvider(
     onChange: onChangeProp,
     ...rest
   }) => {
-    const { className, css: innerStyle } = useSlotComponentProps(
-      { ...rest, css },
-      "inner",
-    )
+    const styles = useStyleContext()
     const withControls = useValue(_withControls)
     const withEdges = useValue(_withEdges)
     const { currentPage, range, onChange, onFirst, onLast, onNext, onPrev } =
@@ -154,20 +150,14 @@ export const Pagination = withProvider(
     return (
       <ui.nav
         ref={ref}
-        className={rootClassName}
+        className={className}
         css={css}
         data-disabled={dataAttr(disabled)}
         {...containerProps}
       >
         <ui.ul
-          className={className}
-          css={mergeCSS(
-            {
-              alignItems: "center",
-              display: "flex",
-            },
-            innerStyle,
-          )}
+          className="ui-pagination__inner"
+          css={{ alignItems: "center", display: "flex", ...styles.inner }}
           data-disabled={dataAttr(disabled)}
           {...rest}
         >
@@ -295,7 +285,7 @@ export const PaginationItem = withContext<"button", PaginationItemProps>(
     disableRipple,
     ...rest
   }) => {
-    const { css } = !isNumber(page) ? useSlotComponentProps(rest, page) : {}
+    const styles = useStyleContext()
     const ellipsis = page === "ellipsis"
     const { onClick, ...rippleProps } = useRipple({
       ...rest,
@@ -320,7 +310,14 @@ export const PaginationItem = withContext<"button", PaginationItemProps>(
           itemClassName,
           !isNumber(page) ? `ui-pagination__item--${page}` : "",
         )}
-        css={mergeCSS(cssProp, css)}
+        css={mergeCSS(
+          cssProp,
+          !isNumber(page)
+            ? {
+                ...styles[page],
+              }
+            : undefined,
+        )}
         tabIndex={!ellipsis ? 0 : -1}
         onClick={onClick}
       >

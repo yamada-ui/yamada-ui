@@ -38,4 +38,5 @@ export const Motion = (({
   ): ReactElement
 }
 
+Motion.displayName = "Motion"
 Motion.__ui__ = "Motion"

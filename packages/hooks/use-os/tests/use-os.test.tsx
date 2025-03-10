@@ -43,6 +43,11 @@ describe("useOS", () => {
         "Mozilla/5.0 (Web0S; Linux/SmartTV) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.6261.105 Safari/537.36 WebAppManager",
     },
     {
+      expected: "chromeos",
+      userAgent:
+        "Mozilla/5.0 (X11; CrOS x86_64 13310.93.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.133 Safari/537.36",
+    },
+    {
       expected: "undetermined",
       // Nintendo Switch
       userAgent:

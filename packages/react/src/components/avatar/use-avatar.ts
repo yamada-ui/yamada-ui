@@ -5,8 +5,8 @@ import type {
 } from "react"
 import type { HTMLProps, HTMLUIProps, PropGetter } from "../../core"
 import { useCallback, useState } from "react"
-import { dataAttr, handlerAll } from "../../utils"
 import { useI18n } from "../../providers/i18n-provider"
+import { dataAttr, handlerAll } from "../../utils"
 
 const defaultFormat = (name: string) => {
   const names = name.trim().split(" ")
@@ -80,12 +80,9 @@ export const useAvatar = ({
   ...rest
 }: UseAvatarProps = {}) => {
   const initials = name ? format(name) : undefined
-  if (name) name = format(name)
-
-  const { t } = useI18n()
-
   const [loaded, setLoaded] = useState<boolean>(false)
   const fallback = !src || !loaded
+  const { t } = useI18n()
 
   const getGroupProps: PropGetter = useCallback((props) => ({ ...props }), [])
 

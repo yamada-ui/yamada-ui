@@ -89,7 +89,7 @@ export function getLanguage(): Language {
 interface I18nContext extends Language {
   t: (
     path: Path<Dict> | StringLiteral,
-    replaceValue?: { [key: string]: number | string } | number | string,
+    replaceValue?: number | string | { [key: string]: number | string },
     pattern?: string,
   ) => string
 }
@@ -138,7 +138,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({
   const t = useCallback(
     (
       path: Path<any> | StringLiteral,
-      replaceValue?: { [key: string]: number | string } | number | string,
+      replaceValue?: number | string | { [key: string]: number | string },
       pattern = "label",
     ) => {
       const messages: IntlMessage = intl ?? defaultIntlMessage

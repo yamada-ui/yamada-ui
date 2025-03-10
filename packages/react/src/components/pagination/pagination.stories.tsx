@@ -2,10 +2,8 @@ import type { Meta, StoryFn } from "@storybook/react"
 import { COLOR_SCHEMES } from "@yamada-ui/utils"
 import { useState } from "react"
 import { Pagination } from "."
-import { Wrap } from "../flex"
-import { For } from "../for"
+import { PropsTable } from "../../../storybook/components"
 import { GhostIcon } from "../icon"
-import { VStack } from "../stack"
 
 type Story = StoryFn<typeof Pagination>
 
@@ -34,22 +32,15 @@ export const Size: Story = () => {
 
 export const Theme: Story = () => {
   return (
-    <Wrap gap="md" w="full">
-      <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
-        {(variant) => (
-          <VStack w="auto">
-            {COLOR_SCHEMES.map((colorScheme) => (
-              <Pagination
-                key={colorScheme}
-                colorScheme={colorScheme}
-                variant={variant}
-                total={10}
-              />
-            ))}
-          </VStack>
-        )}
-      </For>
-    </Wrap>
+    <PropsTable
+      variant="column"
+      columns={["solid", "subtle", "surface", "outline", "ghost"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(col, row, key) => (
+        <Pagination key={key} colorScheme={row} variant={col} total={10} />
+      )}
+    </PropsTable>
   )
 }
 

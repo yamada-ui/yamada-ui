@@ -136,17 +136,17 @@ export const MEMBERS = [
     x: { url: "https://x.com/Curiosi46542428" },
   },
   {
-    name: { en: "Haru", ja: "Haru" },
+    name: { en: "jougen", ja: "じょうげん" },
     description: {
-      en: "University student studying programming and design.",
-      ja: "プログラミングとデザインを学んでいる大学生。",
+      en: "Web engineer. Focused on code readability.",
+      ja: "Webエンジニア。コードの可読性にこだわりあり。",
     },
-    discord: { id: "1063410330153259078" },
+    discord: { id: "217631628380340227" },
     github: {
-      id: "haru-036",
-      icon: "https://avatars.githubusercontent.com/u/105186692?v=4",
-      url: "https://github.com/haru-036",
+      id: "bmthd",
+      icon: "https://avatars.githubusercontent.com/u/81406938?v=4",
+      url: "https://github.com/bmthd",
     },
-    x: { url: "https://x.com/haru_u_de" },
+    x: { url: "https://x.com/j_ktwr" },
   },
 ]

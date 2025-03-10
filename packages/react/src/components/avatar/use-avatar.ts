@@ -78,8 +78,7 @@ export const useAvatar = ({
   referrerPolicy = "no-referrer",
   ...rest
 }: UseAvatarProps = {}) => {
-  if (name) name = format(name)
-
+  const initials = name ? format(name) : undefined
   const [loaded, setLoaded] = useState<boolean>(false)
   const fallback = !src || !loaded
 
@@ -100,7 +99,7 @@ export const useAvatar = ({
       ...props,
       src,
       srcSet,
-      alt,
+      alt: name || alt,
       crossOrigin,
       draggable: false,
       hidden: fallback,
@@ -108,18 +107,18 @@ export const useAvatar = ({
       referrerPolicy,
       onLoad: handlerAll(onLoad, () => setLoaded(true)),
     }),
-    [src, srcSet, alt, crossOrigin, loading, referrerPolicy, fallback],
+    [src, srcSet, alt, crossOrigin, loading, referrerPolicy, fallback, name],
   )
 
   const getFallbackProps: PropGetter = useCallback(
     (props) => ({
       ...props,
       "aria-label": !fallbackMessage ? name || alt || "Avatar icon" : undefined,
-      children: fallbackMessage || name || icon,
+      children: fallbackMessage || initials || icon,
       hidden: !fallback,
       role: "img",
     }),
-    [name, fallback, icon, fallbackMessage, alt],
+    [name, initials, fallback, icon, fallbackMessage, alt],
   )
 
   return {

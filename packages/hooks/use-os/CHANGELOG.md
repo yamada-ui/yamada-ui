@@ -1,5 +1,11 @@
 # @yamada-ui/use-os
 
+## 1.1.0
+
+### Minor Changes
+
+- [#4586](https://github.com/yamada-ui/yamada-ui/pull/4586) [`e1d27ec`](https://github.com/yamada-ui/yamada-ui/commit/e1d27ecdd1cf29087ae1d14d0498549b485b488f) Thanks [@Kenzo-Wada](https://github.com/Kenzo-Wada)! - added chromeos to return value of use-os
+
 ## 1.0.29
 
 ### Patch Changes

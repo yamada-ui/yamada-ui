@@ -1,5 +1,12 @@
 # @yamada-ui/react
 
+## 1.7.6
+
+### Patch Changes
+
+- Updated dependencies [[`e1d27ec`](https://github.com/yamada-ui/yamada-ui/commit/e1d27ecdd1cf29087ae1d14d0498549b485b488f)]:
+  - @yamada-ui/use-os@1.1.0
+
 ## 1.7.5
 
 ### Patch Changes

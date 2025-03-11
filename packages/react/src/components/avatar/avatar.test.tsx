@@ -21,7 +21,7 @@ describe("<Avatar />", () => {
       vi.runAllTimers()
     })
 
-    const img = await screen.findByText("HY")
+    const img = await screen.findByAltText("Hirotomo Yamada")
     expect(img).toBeInTheDocument()
   })
 

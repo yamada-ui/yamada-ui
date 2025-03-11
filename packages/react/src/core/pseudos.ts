@@ -414,6 +414,10 @@ export const pseudoClasses = {
    */
   _only: "&:only-of-type",
   /**
+   * The CSS `&:only-child` pseudo-class.
+   */
+  _onlyChild: "&:only-child",
+  /**
    * The CSS `&:is(:optional, [data-optional])` pseudo-class.
    */
   _optional: "&:is(:optional, [data-optional])",

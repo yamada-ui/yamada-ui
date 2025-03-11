@@ -1,10 +1,10 @@
 import type { HTMLProps, ThemeProps } from "../../core"
+import type { IconButtonProps } from "../icon-button"
 import type { CloseButtonStyle } from "./close-button.style"
-import type { IconButtonProps } from "./icon-button"
 import { createComponent } from "../../core"
 import { XIcon } from "../icon"
+import { IconButton } from "../icon-button"
 import { closeButtonStyle } from "./close-button.style"
-import { IconButton } from "./icon-button"
 
 export interface CloseButtonProps
   extends Omit<IconButtonProps, "aria-label">,

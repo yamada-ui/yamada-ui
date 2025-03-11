@@ -1,12 +1,11 @@
 import type { FC, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
+import type { ButtonProps, ButtonStyle } from "../button"
 import type { GroupProps } from "../group"
-import type { ButtonProps } from "./button"
-import type { ButtonStyle } from "./button.style"
 import { useMemo } from "react"
+import { ButtonPropsContext } from "../button"
 import { Group } from "../group"
-import { ButtonPropsContext } from "./button"
-import { IconButtonPropsContext } from "./icon-button"
+import { IconButtonPropsContext } from "../icon-button"
 
 export interface ButtonGroupProps
   extends Merge<GroupProps, ThemeProps<ButtonStyle>> {

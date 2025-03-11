@@ -10,6 +10,11 @@ describe("<For />", () => {
     )
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(For.displayName).toBe("For")
+    expect(For.__ui__).toBe("For")
+  })
+
   test("For renders fallback when array is empty", () => {
     render(
       <For each={[]} fallback={<p>There are no items to show</p>}>

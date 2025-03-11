@@ -57,3 +57,6 @@ export const Highlight: FC<HighlightProps> = ({
     </Component>
   )
 }
+
+Highlight.displayName = "Highlight"
+Highlight.__ui__ = "Highlight"

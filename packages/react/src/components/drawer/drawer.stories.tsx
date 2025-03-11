@@ -4,11 +4,11 @@ import { useDisclosure } from "../../hooks/use-disclosure"
 import { noop } from "../../utils"
 import { Button } from "../button"
 import { Container } from "../container"
-import { Wrap } from "../flex"
 import { For } from "../for"
 import { Heading } from "../heading"
 import { Image } from "../image"
 import { Text } from "../text"
+import { Wrap } from "../wrap"
 import { Drawer } from "./"
 
 type Story = StoryFn<typeof Drawer.Root>

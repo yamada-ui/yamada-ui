@@ -1,5 +1,5 @@
-import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
+import type { StringLiteral } from "../utils"
 import type { StyleConfigs } from "./config"
 import type { CSSObject, CSSToken } from "./css"
 import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"

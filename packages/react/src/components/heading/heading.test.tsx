@@ -7,6 +7,21 @@ describe("<Heading />", () => {
     await a11y(<Heading>Heading</Heading>)
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Heading.displayName).toBe("Heading")
+    expect(Heading.__ui__).toBe("Heading")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Heading>Heading</Heading>)
+    expect(screen.getByText("Heading")).toHaveClass("ui-heading")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Heading>Heading</Heading>)
+    expect(screen.getByText("Heading").tagName).toBe("H1")
+  })
+
   test("as - prop works correctly", () => {
     render(
       <Heading as="a" href="www.google.com">

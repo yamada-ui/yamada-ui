@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES, noop } from "../../utils"
-import { Wrap } from "../flex"
 import { For } from "../for"
 import { PlusIcon } from "../icon"
+import { Wrap } from "../wrap"
 import { Tag } from "./"
 
 type Story = StoryFn<typeof Tag>

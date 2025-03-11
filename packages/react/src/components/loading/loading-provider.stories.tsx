@@ -5,7 +5,7 @@ import { UIProvider } from "../../providers/ui-provider"
 import { defaultConfig } from "../../theme"
 import { merge } from "../../utils"
 import { Button } from "../button"
-import { Wrap } from "../flex"
+import { Wrap } from "../wrap"
 import { useLoading } from "./loading-provider"
 
 export default {

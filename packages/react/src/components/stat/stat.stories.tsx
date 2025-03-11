@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { COLOR_SCHEMES } from "@yamada-ui/utils"
 import { PropsTable } from "../../../storybook/components"
+import { COLOR_SCHEMES } from "../../utils"
 import { Stat } from "./"
 
 type Story = StoryFn<typeof Stat.Root>

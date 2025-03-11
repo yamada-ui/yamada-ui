@@ -60,23 +60,42 @@ const noConsoleConfig: Linter.Config = {
   },
 }
 
-const restrictedImportsConfig: Linter.Config = {
-  name: "eslint/restricted-imports",
-  files: [
-    "**/packages/**/*.js",
-    "**/packages/**/*.cjs",
-    "**/packages/**/*.mjs",
-    "**/packages/**/*.jsx",
-    "**/packages/**/*.ts",
-    "**/packages/**/*.cts",
-    "**/packages/**/*.mts",
-    "**/packages/**/*.tsx",
-    "**/packages/**/*.d.ts",
-  ],
-  rules: {
-    "no-restricted-imports": ["error", "@yamada-ui/react"],
+const restrictedImportsConfigArray: Linter.Config[] = [
+  {
+    name: "eslint/restricted-imports/react",
+    files: [
+      "**/packages/(react|test|utils)/**/*.js",
+      "**/packages/(react|test|utils)/**/*.cjs",
+      "**/packages/(react|test|utils)/**/*.mjs",
+      "**/packages/(react|test|utils)/**/*.jsx",
+      "**/packages/(react|test|utils)/**/*.ts",
+      "**/packages/(react|test|utils)/**/*.cts",
+      "**/packages/(react|test|utils)/**/*.mts",
+      "**/packages/(react|test|utils)/**/*.tsx",
+      "**/packages/(react|test|utils)/**/*.d.ts",
+    ],
+    rules: {
+      "no-restricted-imports": ["error", "@yamada-ui/react"],
+    },
   },
-}
+  {
+    name: "eslint/restricted-imports/utils",
+    files: [
+      "**/packages/react/src/!(utils)/**/*.js",
+      "**/packages/react/src/!(utils)/**/*.cjs",
+      "**/packages/react/src/!(utils)/**/*.mjs",
+      "**/packages/react/src/!(utils)/**/*.jsx",
+      "**/packages/react/src/!(utils)/**/*.ts",
+      "**/packages/react/src/!(utils)/**/*.cts",
+      "**/packages/react/src/!(utils)/**/*.mts",
+      "**/packages/react/src/!(utils)/**/*.tsx",
+      "**/packages/react/src/!(utils)/**/*.d.ts",
+    ],
+    rules: {
+      "no-restricted-imports": ["error", "@yamada-ui/utils"],
+    },
+  },
+]
 
 const reactConfig: Linter.Config = {
   ...sharedReactConfig,
@@ -113,7 +132,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   languageOptionConfig,
   baseConfig,
   noConsoleConfig,
-  restrictedImportsConfig,
+  ...restrictedImportsConfigArray,
   typescriptConfig,
   ...importConfigArray,
   perfectionistConfig,

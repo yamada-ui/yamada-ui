@@ -1,10 +1,10 @@
 import type { FC, HTMLUIProps, ThemeTokens } from "../../core"
-import type { ImageProps } from "./image"
+import type { ImageProps } from "../image"
 import { useCallback, useMemo } from "react"
 import { ui } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
 import { getPx, isUndefined } from "../../utils"
-import { Image } from "./image"
+import { Image } from "../image"
 
 const createQuery = (
   minW: number | string | undefined,
@@ -42,7 +42,7 @@ export interface PictureSource extends SourceProps {
   minW?: number | ThemeTokens["sizes"]
 }
 
-interface PictureOptions {
+export interface PictureProps extends ImageProps {
   /**
    * If `true`, the sources will be sorted by the `minW` and `maxW` properties.
    *
@@ -58,8 +58,6 @@ interface PictureOptions {
    */
   pictureProps?: HTMLUIProps<"picture">
 }
-
-export interface PictureProps extends ImageProps, PictureOptions {}
 
 /**
  * `Picture` is a component that uses the `picture` element to provide alternative images for different display or device scenarios.
@@ -144,6 +142,7 @@ export const Picture: FC<PictureProps> = ({
   )
 }
 
+Picture.displayName = "Picture"
 Picture.__ui__ = "Picture"
 
 export interface SourceProps extends HTMLUIProps<"source"> {
@@ -167,4 +166,5 @@ export const Source: FC<SourceProps> = ({ media, ...rest }) => {
   return <ui.source media={media} {...rest} />
 }
 
+Source.displayName = "Source"
 Source.__ui__ = "Source"

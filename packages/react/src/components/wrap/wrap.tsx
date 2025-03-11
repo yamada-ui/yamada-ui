@@ -1,8 +1,8 @@
 import type { ThemeProps, WithoutThemeProps } from "../../core"
-import type { FlexProps } from "./flex"
+import type { FlexProps } from "../flex"
 import type { WrapStyle } from "./wrap.style"
 import { createComponent } from "../../core"
-import { Flex } from "./flex"
+import { Flex } from "../flex"
 import { wrapStyle } from "./wrap.style"
 
 export interface WrapProps

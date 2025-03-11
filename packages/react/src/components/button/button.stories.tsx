@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
-import { Wrap } from "../flex"
 import { ArrowRightIcon, CheckIcon, MailIcon, PlusIcon, XIcon } from "../icon"
 import { Loading } from "../loading"
+import { Wrap } from "../wrap"
 import { Button } from "./button"
 
 type Story = StoryFn<typeof Button>

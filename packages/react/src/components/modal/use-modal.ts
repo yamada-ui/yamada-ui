@@ -3,7 +3,7 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback, useId } from "react"
 import { useDisclosure } from "../../hooks/use-disclosure"
-import { handlerAll } from "../../utils"
+import { cx, handlerAll } from "../../utils"
 
 export interface UseModalProps extends HTMLProps, UseDisclosureProps {
   /**
@@ -100,10 +100,14 @@ export const useModal = ({
   )
 
   const getContentProps: PropGetter<"section"> = useCallback(
-    (props = {}) => ({
+    ({
+      "aria-describedby": ariaDescribedby,
+      "aria-labelledby": ariaLabelledby,
+      ...props
+    } = {}) => ({
       id: contentId,
-      "aria-describedby": bodyId,
-      "aria-labelledby": titleId,
+      "aria-describedby": cx(ariaDescribedby, bodyId),
+      "aria-labelledby": cx(ariaLabelledby, titleId),
       "aria-modal": "true",
       role: "dialog",
       ...props,

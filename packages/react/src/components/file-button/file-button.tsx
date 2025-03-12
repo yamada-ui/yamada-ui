@@ -1,59 +1,40 @@
-import type { ChangeEvent, ForwardedRef, RefAttributes } from "react"
 import type { ButtonProps } from "../../components/button"
-import type { ColorModeToken, CSS, ThemeProps } from "../../core"
+import type { ColorModeToken, CSS, HTMLUIProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { FieldProps } from "../field"
 import type { FileButtonStyle } from "./file-button.style"
-import { useCallback, useRef } from "react"
+import type { UseFileButtonProps, UseFileButtonReturn } from "./use-file-button"
 import { Button } from "../../components/button"
 import { createSlotComponent, mergeVars, ui } from "../../core"
-import {
-  ariaAttr,
-  assignRef,
-  handlerAll,
-  isFunction,
-  isNull,
-  mergeRefs,
-  pickObject,
-} from "../../utils"
-import { fieldProperties } from "../field"
+import { isFunction } from "../../utils"
 import { fileButtonStyle } from "./file-button.style"
+import { useFileButton } from "./use-file-button"
 
-export interface FileButtonElementProps extends FieldProps {
+interface FileButtonContext extends UseFileButtonReturn {}
+
+export interface Props extends FieldProps {
   onClick: () => void
 }
-
 export interface FileButtonProps
   extends Omit<ButtonProps, "children" | "onChange" | "ref">,
-    FieldProps,
-    InputProps,
+    UseFileButtonProps,
     ThemeProps<FileButtonStyle> {
-  children?: ReactNodeOrFunction<FileButtonElementProps>
+  children?: ReactNodeOrFunction<Props>
   /**
    * The border color when the button is invalid.
    */
   errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
-  /**
-   * Ref to a reset function.
-   */
-  resetRef?: ForwardedRef<() => void>
-  /**
-   * Function to be called when a file change event occurs.
-   */
-  onChange?: (files: File[] | undefined) => void
 }
-
-export interface InputProps
-  extends Partial<Pick<HTMLInputElement, "accept" | "multiple">>,
-    RefAttributes<HTMLInputElement> {}
 
 export const {
   component,
+  ComponentContext: FileButtonContext,
   PropsContext: FileButtonPropsContext,
+  useComponentContext: useFileButtonContext,
   usePropsContext: useFileButtonPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<FileButtonProps, FileButtonStyle>(
+} = createSlotComponent<FileButtonProps, FileButtonStyle, FileButtonContext>(
   "file-button",
   fileButtonStyle,
 )
@@ -64,109 +45,55 @@ export const {
  * @see Docs https://yamada-ui.com/components/forms/file-button
  */
 export const FileButton = withProvider<"div", FileButtonProps>(
-  ({
-    id,
-    ref,
-    as,
-    form,
-    name,
-    css,
-    accept,
-    children,
-    multiple,
-    resetRef,
-    onChange: onChangeProp,
-    onClick: onClickProp,
-    ...rest
-  }) => {
-    const {
-      onBlur: _onBlur,
-      onFocus: _onFocus,
-      ...fieldProps
-    } = pickObject(rest, fieldProperties)
-    const { "aria-invalid": invalid, disabled, readOnly, required } = fieldProps
-    const inputRef = useRef<HTMLInputElement>(null)
-
-    const onChange = useCallback(
-      (ev: ChangeEvent<HTMLInputElement>) => {
-        const files = !isNull(ev.currentTarget.files)
-          ? Array.from(ev.currentTarget.files)
-          : undefined
-
-        onChangeProp?.(files)
-      },
-      [onChangeProp],
-    )
-
-    const onClick = useCallback(() => {
-      if (disabled || readOnly) return
-
-      inputRef.current?.click()
-    }, [disabled, readOnly, inputRef])
-
-    const onReset = useCallback(() => {
-      if (inputRef.current) inputRef.current.value = ""
-    }, [inputRef])
-
-    assignRef(resetRef, onReset)
+  ({ children, ...rest }) => {
+    const context = useFileButton(rest)
     return (
-      <ui.div>
-        <ui.input
-          id={id}
-          ref={mergeRefs(inputRef, ref)}
-          form={form}
-          type="file"
-          name={name}
-          style={{
-            border: "0px",
-            clip: "rect(0px, 0px, 0px, 0px)",
-            height: "1px",
-            margin: "-1px",
-            overflow: "hidden",
-            padding: "0px",
-            position: "absolute",
-            whiteSpace: "nowrap",
-            width: "1px",
-          }}
-          aria-hidden
-          accept={accept}
-          multiple={multiple}
-          tabIndex={-1}
-          onChange={onChange}
-          {...fieldProps}
-        />
-        {isFunction(children) ? (
-          children({
-            disabled,
-            invalid: ariaAttr(invalid),
-            readOnly,
-            required,
-            onClick,
-          })
-        ) : (
-          <ui.button
-            as={as || Button}
-            css={as ? undefined : css}
-            disabled={disabled}
-            onClick={handlerAll(onClickProp, onClick)}
-            {...rest}
-          >
-            {children}
-          </ui.button>
-        )}
-      </ui.div>
+      <FileButtonContext value={context}>
+        <ui.div>
+          <FileButtonInput />
+          <CustomButton>{children}</CustomButton>
+        </ui.div>
+      </FileButtonContext>
     )
   },
   "root",
-)(undefined, ({ errorBorderColor, vars: varsProp, ...rest }) => {
-  const vars = mergeVars(varsProp, {
-    name: "errorBorderColor",
-    token: "colors",
-    value: errorBorderColor,
-  })
-
+)(undefined, ({ as, css, errorBorderColor, vars: varsProp, ...rest }) => {
   return {
-    vars,
+    as: as || Button,
+    css: as ? undefined : css,
+    vars: mergeVars(varsProp, {
+      name: "errorBorderColor",
+      token: "colors",
+      value: errorBorderColor,
+    }),
     ...rest,
   }
 })
+
+interface FileButtonInputProps extends HTMLUIProps<"input"> {}
+const FileButtonInput = withContext<"input", FileButtonInputProps>(
+  "input",
+  "input",
+)(undefined, (props) => {
+  const { getInputProps } = useFileButtonContext()
+
+  return { ...getInputProps(props) }
+})
+
+interface CustomButtonProps extends Omit<HTMLUIProps<"button">, "children"> {
+  children: ReactNodeOrFunction<Props>
+}
+
+const CustomButton = withContext<"button", CustomButtonProps>(
+  ({ as, css, children, ...rest }) => {
+    const { getButtonProps, getCustomButtonProps } = useFileButtonContext()
+    return isFunction(children) ? (
+      children(getCustomButtonProps(rest))
+    ) : (
+      <ui.button as={as} css={css} {...getButtonProps()}>
+        {children}
+      </ui.button>
+    )
+  },
+  "button",
+)()

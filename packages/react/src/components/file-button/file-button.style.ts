@@ -2,7 +2,7 @@ import { defineComponentSlotStyle } from "../../core"
 
 export const fileButtonStyle = defineComponentSlotStyle({
   base: {
-    root: {
+    button: {
       alignItems: "center",
       appearance: "none",
       cursor: "pointer",
@@ -31,6 +31,18 @@ export const fileButtonStyle = defineComponentSlotStyle({
         layerStyle: "disabled",
       },
     },
+    field: {
+      border: "none",
+      clip: "rect(0px, 0px, 0px, 0px)",
+      height: "1px",
+      margin: "-1px",
+      overflow: "hidden",
+      padding: "0px",
+      position: "absolute",
+      whiteSpace: "nowrap",
+      width: "1px",
+    },
+    root: {},
   },
 
   props: {
@@ -41,7 +53,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
      */
     fullRounded: {
       true: {
-        root: {
+        button: {
           rounded: "full",
         },
       },
@@ -50,7 +62,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
 
   variants: {
     ghost: {
-      root: {
+      button: {
         layerStyle: "ghost",
         _invalid: {
           border: "1px solid",
@@ -63,7 +75,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     outline: {
-      root: {
+      button: {
         layerStyle: "outline",
         _invalid: {
           borderColor: ["{errorBorderColor}", "{errorBorderColor}"],
@@ -75,7 +87,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     solid: {
-      root: {
+      button: {
         layerStyle: "solid",
         _invalid: {
           border: "1px solid",
@@ -88,7 +100,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     subtle: {
-      root: {
+      button: {
         layerStyle: "subtle",
         _invalid: {
           border: "1px solid",
@@ -101,7 +113,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     surface: {
-      root: {
+      button: {
         layerStyle: "surface",
         _invalid: {
           border: "1px solid",
@@ -117,7 +129,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
 
   sizes: {
     xs: {
-      root: {
+      button: {
         fontSize: "xs",
         gap: "1",
         h: "8",
@@ -130,7 +142,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     sm: {
-      root: {
+      button: {
         fontSize: "sm",
         gap: "2",
         h: "9",
@@ -143,7 +155,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     md: {
-      root: {
+      button: {
         fontSize: "md",
         gap: "2",
         h: "10",
@@ -156,7 +168,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     lg: {
-      root: {
+      button: {
         fontSize: "lg",
         gap: "2.5",
         h: "11",
@@ -169,7 +181,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     xl: {
-      root: {
+      button: {
         fontSize: "xl",
         gap: "3",
         h: "12",
@@ -182,7 +194,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
       },
     },
     "2xl": {
-      root: {
+      button: {
         fontSize: "xl",
         gap: "3",
         h: "14",

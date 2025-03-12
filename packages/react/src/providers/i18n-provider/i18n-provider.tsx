@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from "react"
 import type { TextDirection } from "../../core"
+import type { Dict, Path, StringLiteral } from "../../utils"
 import {
   createContext,
   useCallback,
@@ -9,7 +10,21 @@ import {
   useState,
 } from "react"
 import { DEFAULT_DIRECTION, DEFAULT_LOCALE } from "../../core"
-import { createdDom, isEmptyObject, useSsr } from "../../utils"
+import {
+  createdDom,
+  getMemoizedObject as get,
+  isEmptyObject,
+  isObject,
+  isUndefined,
+  useSsr,
+} from "../../utils"
+import INTL_MESSAGE from "./data.json"
+
+export interface IntlMessage {
+  [key: string]: Dict
+}
+
+export const defaultIntlMessage: IntlMessage = INTL_MESSAGE
 
 export interface Language {
   direction: TextDirection
@@ -71,9 +86,18 @@ export function getLanguage(): Language {
   return { direction, locale }
 }
 
-interface I18nContext extends Language {}
+interface I18nContext extends Language {
+  t: (
+    path: Path<Dict> | StringLiteral,
+    replaceValue?: number | string | { [key: string]: number | string },
+    pattern?: string,
+  ) => string
+}
 
-export const I18nContext = createContext<I18nContext>({ ...DEFAULT_LANGUAGE })
+export const I18nContext = createContext<I18nContext>({
+  ...DEFAULT_LANGUAGE,
+  t: () => "",
+})
 
 export interface I18nProviderProps {
   children?: ReactNode
@@ -83,6 +107,13 @@ export interface I18nProviderProps {
    * @default 'ltr'
    */
   direction?: TextDirection
+  /**
+   * The internationalization messages to apply to the application.
+   *
+   * This prop expects a dictionary object where the keys are locale strings (e.g., "en-US").
+   *
+   */
+  intl?: IntlMessage
   /**
    * The locale to apply to the application.
    *
@@ -94,6 +125,7 @@ export interface I18nProviderProps {
 export const I18nProvider: FC<I18nProviderProps> = ({
   children,
   direction: directionProp,
+  intl,
   locale,
 }) => {
   const ssr = useSsr()
@@ -103,15 +135,46 @@ export const I18nProvider: FC<I18nProviderProps> = ({
     setLanguage(getLanguage())
   }, [])
 
-  const value = useMemo(() => {
-    if (ssr) return DEFAULT_LANGUAGE
+  const t = useCallback(
+    (
+      path: Path<any> | StringLiteral,
+      replaceValue?: number | string | { [key: string]: number | string },
+      pattern = "label",
+    ) => {
+      const messages: IntlMessage = intl ?? defaultIntlMessage
+      const currentLocale = locale ?? DEFAULT_LOCALE
+      const translations = messages[currentLocale] ?? messages["en-US"]
+      let value = get<string>(translations!, path, "")
 
-    if (!locale) return language
+      if (isUndefined(replaceValue)) return value
+
+      if (!isObject(replaceValue)) {
+        value = value.replace(
+          new RegExp(`{${pattern}}`, "g"),
+          `${replaceValue}`,
+        )
+      } else {
+        value = Object.entries(replaceValue).reduce(
+          (prev, [pattern, value]) =>
+            prev.replace(new RegExp(`{${pattern}}`, "g"), `${value}`),
+          value,
+        )
+      }
+
+      return value
+    },
+    [locale, intl],
+  )
+
+  const value = useMemo(() => {
+    if (ssr) return { ...DEFAULT_LANGUAGE, t }
+
+    if (!locale) return { ...language, t }
 
     const direction = directionProp ?? (isRtl(locale) ? "rtl" : "ltr")
 
-    return { direction, locale }
-  }, [locale, ssr, language, directionProp])
+    return { direction, locale, t }
+  }, [locale, ssr, language, directionProp, t])
 
   useEffect(() => {
     window.addEventListener("languagechange", onChangeLanguage)
@@ -127,7 +190,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({
 export function useI18n() {
   const context = useContext(I18nContext)
 
-  if (isEmptyObject(context)) return DEFAULT_LANGUAGE
+  if (isEmptyObject(context)) return { ...DEFAULT_LANGUAGE, t: () => "" }
 
   return context
 }

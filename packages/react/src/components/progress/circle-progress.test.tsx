@@ -1,14 +1,14 @@
 import { a11y, render, screen } from "../../../test"
-import { CircleProgress, CircleProgressLabel } from "./"
+import { CircleProgress } from "./"
 
 describe("<CircleProgress />", () => {
   test("CircleProgress renders correctly", async () => {
-    await a11y(<CircleProgress aria-label="Storage space" />)
+    await a11y(<CircleProgress.Root aria-label="Storage space" />)
   })
 
   test("renders correctly without animation", () => {
     render(
-      <CircleProgress
+      <CircleProgress.Root
         data-testid="circle-progress-a"
         boxSize="8rem"
         color="green.500"
@@ -26,8 +26,11 @@ describe("<CircleProgress />", () => {
   test("render correctly with animation", () => {
     render(
       <>
-        <CircleProgress data-testid="circle-progress-b" speed={["1s", "3s"]} />
-        <CircleProgress data-testid="circle-progress-c" speed={[1, 3]} />
+        <CircleProgress.Root
+          data-testid="circle-progress-b"
+          speed={["1s", "3s"]}
+        />
+        <CircleProgress.Root data-testid="circle-progress-c" speed={[1, 3]} />
       </>,
     )
     expect(screen.getByTestId("circle-progress-b")).toBeInTheDocument()
@@ -36,7 +39,7 @@ describe("<CircleProgress />", () => {
 
   test("Whether the boxSize is render correctly", () => {
     render(
-      <CircleProgress
+      <CircleProgress.Root
         data-testid="circle-progress"
         boxSize="120px"
         value={50}
@@ -53,9 +56,9 @@ describe("<CircleProgress />", () => {
 
   test("Whether CircleProgressLabel is render correctly", () => {
     render(
-      <CircleProgress value={50}>
-        <CircleProgressLabel>50%</CircleProgressLabel>
-      </CircleProgress>,
+      <CircleProgress.Root value={50}>
+        <CircleProgress.Label>50%</CircleProgress.Label>
+      </CircleProgress.Root>,
     )
 
     expect(screen.getByText("50%")).toBeInTheDocument()

@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { FlipIdent } from "."
+import type { FlipIdent } from "./"
 import { useState } from "react"
-import { Flip } from "."
-import { Avatar } from "../../components/avatar"
-import { Center } from "../../components/center"
-import { AppleIcon, CherryIcon } from "../../components/icon"
-import { Text } from "../../components/text"
+import { Avatar } from "../avatar"
+import { Center } from "../center"
+import { AppleIcon, CherryIcon } from "../icon"
+import { Text } from "../text"
+import { Flip } from "./"
 
 type Story = StoryFn<typeof Flip>
 
@@ -75,7 +75,7 @@ export const FlipVertical: Story = () => {
   )
 }
 
-export const WithDuration: Story = () => {
+export const Duration: Story = () => {
   return (
     <Center
       display="flex"
@@ -94,7 +94,7 @@ export const WithDuration: Story = () => {
   )
 }
 
-export const WithDelay: Story = () => {
+export const Delay: Story = () => {
   return (
     <Center
       display="flex"

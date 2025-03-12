@@ -1,9 +1,9 @@
-import type { AiryIdent } from "."
+import type { FlipIdent } from "./"
 import { useState } from "react"
-import { Flip } from "."
 import { a11y, render, waitFor } from "../../../test"
-import { BoxIcon } from "../../components/icon"
 import { noop } from "../../utils"
+import { BoxIcon } from "../icon"
+import { Flip } from "./"
 
 describe("<Flip />", () => {
   test("passes a11y test", () => {
@@ -12,7 +12,7 @@ describe("<Flip />", () => {
 
   test("should render Flip with value and onChange", async () => {
     const TestComponent = () => {
-      const [value, onChange] = useState<AiryIdent>("to")
+      const [value, onChange] = useState<FlipIdent>("to")
 
       return (
         <Flip

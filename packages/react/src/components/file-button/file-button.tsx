@@ -1,5 +1,5 @@
 import type { ButtonProps } from "../../components/button"
-import type { ColorModeToken, CSS, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { FieldProps } from "../field"
 import type { FileButtonStyle } from "./file-button.style"
@@ -23,7 +23,7 @@ export interface FileButtonProps
   /**
    * The border color when the button is invalid.
    */
-  errorBorderColor?: ColorModeToken<CSS.Property.BorderColor, "colors">
+  errorBorderColor?: CSSProps["borderColor"]
 }
 
 export const {
@@ -45,28 +45,26 @@ export const {
  * @see Docs https://yamada-ui.com/components/forms/file-button
  */
 export const FileButton = withProvider<"div", FileButtonProps>(
-  ({ as, css, children, ...rest }) => {
+  ({ as, css, children, errorBorderColor, vars: varsProp, ...rest }) => {
     const context = useFileButton(rest)
+    const vars = mergeVars(varsProp, {
+      name: "errorBorderColor",
+      token: "colors",
+      value: errorBorderColor,
+    })
     return (
       <FileButtonContext value={context}>
         <ui.div css={css}>
           <FileButtonInput />
-          <CustomButton as={as}>{children}</CustomButton>
+          <CustomButton as={as} vars={vars}>
+            {children}
+          </CustomButton>
         </ui.div>
       </FileButtonContext>
     )
   },
   "root",
-)(undefined, ({ errorBorderColor, vars: varsProp, ...rest }) => {
-  return {
-    vars: mergeVars(varsProp, {
-      name: "errorBorderColor",
-      token: "colors",
-      value: errorBorderColor,
-    }),
-    ...rest,
-  }
-})
+)()
 
 interface FileButtonInputProps extends HTMLUIProps<"input"> {}
 const FileButtonInput = withContext<"input", FileButtonInputProps>(
@@ -92,8 +90,7 @@ const CustomButton = withContext<"button", CustomButtonProps>(
     )
   },
   "button",
-)(undefined, ({ as, css, ...rest }) => ({
+)(undefined, ({ as, ...rest }) => ({
   as: as || Button,
-  css: as ? undefined : css,
   ...rest,
 }))

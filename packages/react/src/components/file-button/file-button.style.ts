@@ -149,6 +149,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
         lineHeight: "{sizes.9}",
         minW: "9",
         px: "3",
+        rounded: "sm",
         _icon: {
           fontSize: "md",
         },
@@ -162,6 +163,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
         lineHeight: "{sizes.10}",
         minW: "10",
         px: "4",
+        rounded: "md",
         _icon: {
           fontSize: "lg",
         },
@@ -175,6 +177,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
         lineHeight: "{sizes.11}",
         minW: "11",
         px: "4.5",
+        rounded: "lg",
         _icon: {
           fontSize: "2xl",
         },
@@ -188,6 +191,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
         lineHeight: "{sizes.12}",
         minW: "12",
         px: "5",
+        rounded: "xl",
         _icon: {
           fontSize: "2xl",
         },
@@ -201,6 +205,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
         lineHeight: "{sizes.14}",
         minW: "14",
         px: "5",
+        rounded: "2xl",
         _icon: {
           fontSize: "2xl",
         },
@@ -209,6 +214,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
   },
 
   defaultProps: {
+    colorScheme: "primary",
     size: "md",
     variant: "solid",
   },

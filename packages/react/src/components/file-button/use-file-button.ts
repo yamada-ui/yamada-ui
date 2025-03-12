@@ -3,13 +3,16 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import type { Props } from "./file-button"
 import { useCallback, useRef } from "react"
-import { ariaAttr, assignRef, handlerAll, isNull, mergeRefs } from "../../utils"
+import { assignRef, handlerAll, isNull, mergeRefs } from "../../utils"
 import { useFieldProps } from "../field"
+
+interface InputProps
+  extends Partial<Pick<HTMLInputElement, "accept" | "multiple">>,
+    RefAttributes<HTMLInputElement> {}
 
 export interface UseFileButtonProps
   extends Omit<HTMLProps<"button">, "children" | "onChange" | "ref">,
-    Partial<Pick<HTMLInputElement, "accept" | "multiple">>,
-    RefAttributes<HTMLInputElement>,
+    InputProps,
     FieldProps {
   /**
    * Ref to a reset function.
@@ -18,6 +21,7 @@ export interface UseFileButtonProps
   /**
    * Function to be called when a file change event occurs.
    */
+
   onChange?: (files: File[] | undefined) => void
 }
 
@@ -69,8 +73,8 @@ export const useFileButton = (props: UseFileButtonProps) => {
 
   const getInputProps: PropGetter<"input"> = useCallback(
     (props) => ({
-      ...dataProps,
       ...ariaProps,
+      ...dataProps,
       ...props,
       id,
       ref: mergeRefs(inputRef, ref),
@@ -90,27 +94,25 @@ export const useFileButton = (props: UseFileButtonProps) => {
     (props) => ({
       ...rest,
       ...props,
+      ...ariaProps,
+      ...dataProps,
       disabled,
       onClick: handlerAll(onClickProp, onClick),
     }),
-    [rest, disabled, onClickProp, onClick],
+    [rest, disabled, onClickProp, onClick, ariaProps, dataProps],
   )
 
-  const getCustomButtonProps: PropGetter<
-    HTMLProps<"button">,
-    undefined,
-    Props
-  > = useCallback(
-    (props) => ({
-      ...props,
-      disabled,
-      invalid: ariaAttr(ariaProps["aria-invalid"]),
-      readOnly,
-      required,
-      onClick,
-    }),
-    [disabled, ariaProps, readOnly, required, onClick],
-  )
+  const getCustomButtonProps: PropGetter<"button", undefined, Props> =
+    useCallback(
+      (props) => ({
+        ...props,
+        disabled,
+        readOnly,
+        required,
+        onClick,
+      }),
+      [disabled, readOnly, required, onClick],
+    )
 
   return {
     getButtonProps,

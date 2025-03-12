@@ -312,7 +312,7 @@ export function createSlotComponent<
     props: Y,
     slot?: ComponentSlot<ComponentSlotName<M>>,
     {
-      className = rootClassName,
+      className,
       withContext = true,
       transferProps,
     }: UseComponentPropsOptions<R> = {},

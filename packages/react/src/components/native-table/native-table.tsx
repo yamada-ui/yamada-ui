@@ -1,7 +1,6 @@
 import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
 import type { NativeTableStyle } from "./native-table.style"
-import { ui } from "../../core"
-import { createSlotComponent } from "../../core"
+import { createSlotComponent, ui } from "../../core"
 import { nativeTableStyle } from "./native-table.style"
 
 export interface NativeTableRootProps
@@ -11,10 +10,19 @@ export interface NativeTableRootProps
    * The CSS `table-layout` property.
    */
   layout?: CSSProps["tableLayout"]
+  /**
+   * Whether to enable the scroll area.
+   *
+   * @default false
+   */
+  withScrollArea?: boolean
+  /**
+   * The props for the scroll area.
+   */
+  scrollAreaProps?: NativeTableAreaProps
 }
 
 export const {
-  component,
   PropsContext: NativeTablePropsContext,
   usePropsContext: useNativeTablePropsContext,
   withContext,
@@ -31,21 +39,30 @@ export const {
  *
  * @see Docs https://yamada-ui.com/components/native-table
  */
-export const NativeTableRoot = withProvider("table", "root")(
-  undefined,
-  ({ layout: tableLayout, ...rest }) => ({ tableLayout, ...rest }),
-)
+export const NativeTableRoot = withProvider(
+  ({ withScrollArea, scrollAreaProps, ...rest }) => {
+    if (withScrollArea) {
+      return (
+        <NativeTableScrollArea {...scrollAreaProps}>
+          <ui.table {...rest} />
+        </NativeTableScrollArea>
+      )
+    } else {
+      return <ui.table {...rest} />
+    }
+  },
+  "root",
+)(undefined, ({ layout: tableLayout, ...rest }) => ({
+  tableLayout,
+  ...rest,
+}))
 
-export interface TableScrollAreaProps
+interface NativeTableAreaProps
   extends HTMLUIProps,
     ThemeProps<NativeTableStyle> {}
 
-export const TableScrollArea = component<"div", TableScrollAreaProps>(
-  (props) => {
-    const [, rest] = useRootComponentProps(props, "scrollArea")
-
-    return <ui.div {...rest} />
-  },
+const NativeTableScrollArea = withContext<"div", NativeTableAreaProps>(
+  "div",
   "scrollArea",
 )()
 

@@ -1,10 +1,45 @@
-import { render, screen } from "../../../test"
+import { a11y, render, screen } from "../../../test"
 import { Box } from "../box"
 import { ZStack } from "./z-stack"
 
 describe("<ZStack />", () => {
+  test("passes a11y test", async () => {
+    await a11y(
+      <ZStack>
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
+  })
+
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(ZStack.displayName).toBe("StackDepth")
+    expect(ZStack.__ui__).toBe("StackDepth")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <ZStack data-testid="z-stack">
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
+    expect(screen.getByTestId("z-stack")).toHaveClass("ui-stack--depth")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <ZStack data-testid="z-stack">
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
+    expect(screen.getByTestId("z-stack").tagName).toBe("DIV")
+  })
+
   test("ZStack renders correctly", () => {
-    render(<ZStack>ZStack</ZStack>)
+    render(
+      <ZStack>
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
   })
 
   test("startIndex property works correctly", () => {

@@ -23,12 +23,6 @@ export const nativeTableStyle = defineComponentSlotStyle({
       w: "full",
     },
     scrollArea: {
-      "&:has([data-variant='outline'])": {
-        "& > table": {
-          borderWidth: "0 !important",
-        },
-        borderWidth: "1px",
-      },
       display: "block",
       maxW: "full",
       overflow: "auto",
@@ -197,6 +191,9 @@ export const nativeTableStyle = defineComponentSlotStyle({
       root: {
         borderWidth: "1px",
       },
+      scrollArea: {
+        borderWidth: "1px",
+      },
       tbody: {
         "& tr": {
           _last: {
@@ -299,6 +296,15 @@ export const nativeTableStyle = defineComponentSlotStyle({
       variant: "outline",
       layer: "props",
       striped: true,
+    },
+    {
+      css: {
+        root: {
+          borderWidth: "0",
+        },
+      },
+      variant: "outline",
+      withScrollArea: true,
     },
   ],
 

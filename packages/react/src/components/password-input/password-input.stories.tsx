@@ -2,12 +2,14 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { PropsTable } from "../../../storybook/components"
+import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Button } from "../button"
-import { FormControl } from "../form-control"
+import { Field } from "../field"
 import { FrownIcon, SmileIcon } from "../icon"
 import { VStack } from "../stack"
 import { Text } from "../text"
-import { PasswordInput, PasswordInputStrengthMeter } from "./"
+import { PasswordInput, StrengthMeter } from "./"
 
 type Story = StoryFn<typeof PasswordInput>
 
@@ -22,29 +24,49 @@ export const Basic: Story = () => {
   return <PasswordInput placeholder="your password" />
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
-    <>
-      <PasswordInput size="xs" placeholder="extra small size" />
-      <PasswordInput size="sm" placeholder="small size" />
-      <PasswordInput size="md" placeholder="medium size" />
-      <PasswordInput size="lg" placeholder="large size" />
-    </>
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return (
+          <PasswordInput
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithVariants: Story = () => {
+export const Variants: Story = () => {
   return (
-    <>
-      <PasswordInput variant="outline" placeholder="outline" />
-      <PasswordInput variant="filled" placeholder="filled" />
-      <PasswordInput variant="flushed" placeholder="flushed" />
-      <PasswordInput variant="unstyled" placeholder="unstyled" />
-    </>
+    <PropsTable
+      variant="column"
+      columns={["outline", "filled", "flushed"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <PasswordInput
+            key={key}
+            colorScheme={row}
+            variant={column}
+            placeholder={toTitleCase(column)}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithDefaultVisible: Story = () => {
+export const DefaultVisible: Story = () => {
   return (
     <PasswordInput
       defaultValue="password"
@@ -54,7 +76,7 @@ export const WithDefaultVisible: Story = () => {
   )
 }
 
-export const WithBorderColor: Story = () => {
+export const BorderColor: Story = () => {
   return (
     <>
       <PasswordInput placeholder="default border color" />
@@ -71,7 +93,7 @@ export const WithBorderColor: Story = () => {
   )
 }
 
-export const WithStrengthMeter: Story = () => {
+export const Meter: Story = () => {
   const [value, setValue] = useState("Password")
 
   const getStrength = (password: string): number => {
@@ -86,15 +108,15 @@ export const WithStrengthMeter: Story = () => {
   }
 
   return (
-    <>
+    <VStack>
       <PasswordInput
         placeholder="your password"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
 
-      <PasswordInputStrengthMeter value={getStrength(value)} />
-    </>
+      <StrengthMeter value={getStrength(value)} />
+    </VStack>
   )
 }
 
@@ -106,13 +128,13 @@ export const Disabled: Story = () => {
       <PasswordInput variant="flushed" disabled placeholder="flushed" />
       <PasswordInput variant="unstyled" disabled placeholder="unstyled" />
 
-      <FormControl
+      <Field.Root
         disabled
         helperMessage="We'll never share your password."
         label="Password"
       >
         <PasswordInput placeholder="your password" />
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -125,13 +147,13 @@ export const Readonly: Story = () => {
       <PasswordInput variant="flushed" placeholder="flushed" readOnly />
       <PasswordInput variant="unstyled" placeholder="unstyled" readOnly />
 
-      <FormControl
+      <Field.Root
         helperMessage="We'll never share your password."
         label="Password"
         readOnly
       >
         <PasswordInput placeholder="your password" />
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -144,9 +166,9 @@ export const Invalid: Story = () => {
       <PasswordInput variant="flushed" invalid placeholder="flushed" />
       <PasswordInput variant="unstyled" invalid placeholder="unstyled" />
 
-      <FormControl errorMessage="Email is required." invalid label="Password">
+      <Field.Root errorMessage="Email is required." invalid label="Password">
         <PasswordInput placeholder="your password" />
-      </FormControl>
+      </Field.Root>
     </>
   )
 }
@@ -191,7 +213,7 @@ export const ReactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Field.Root
         errorMessage={errors.password?.message}
         invalid={!!errors.password}
         label="Password"
@@ -201,7 +223,7 @@ export const ReactHookForm: Story = () => {
             required: { message: "Password is required.", value: true },
           })}
         />
-      </FormControl>
+      </Field.Root>
 
       <Button type="submit">Submit</Button>
     </VStack>
@@ -227,7 +249,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Field.Root
         errorMessage={errors.password?.message}
         invalid={!!errors.password}
         label="Password"
@@ -237,7 +259,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
             required: { message: "Password is required.", value: true },
           })}
         />
-      </FormControl>
+      </Field.Root>
 
       <Button type="submit">Submit</Button>
     </VStack>

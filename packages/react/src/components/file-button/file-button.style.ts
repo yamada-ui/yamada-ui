@@ -68,6 +68,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
           border: "1px solid",
           borderColor: "{errorBorderColor}",
           boxShadow: "0 0 0 1px {errorBorderColor}",
+          focusRingColor: "{errorBorderColor}",
         },
         _hover: {
           layerStyle: "ghost.hover",
@@ -80,6 +81,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
         _invalid: {
           borderColor: ["{errorBorderColor}", "{errorBorderColor}"],
           boxShadow: "0 0 0 1px {errorBorderColor}",
+          focusRingColor: "{errorBorderColor}",
         },
         _hover: {
           layerStyle: "outline.hover",
@@ -93,6 +95,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
           border: "1px solid",
           borderColor: "{errorBorderColor}",
           boxShadow: "0 0 0 1px {errorBorderColor}",
+          focusRingColor: "{errorBorderColor}",
         },
         _hover: {
           layerStyle: "solid.hover",
@@ -106,6 +109,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
           border: "1px solid",
           borderColor: "{errorBorderColor}",
           boxShadow: "0 0 0 1px {errorBorderColor}",
+          focusRingColor: "{errorBorderColor}",
         },
         _hover: {
           layerStyle: "subtle.hover",
@@ -119,6 +123,7 @@ export const fileButtonStyle = defineComponentSlotStyle({
           border: "1px solid",
           borderColor: "{errorBorderColor}",
           boxShadow: "0 0 0 1px {errorBorderColor}",
+          focusRingColor: "{errorBorderColor}",
         },
         _hover: {
           layerStyle: "surface.hover",

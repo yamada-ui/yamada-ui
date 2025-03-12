@@ -45,22 +45,20 @@ export const {
  * @see Docs https://yamada-ui.com/components/forms/file-button
  */
 export const FileButton = withProvider<"div", FileButtonProps>(
-  ({ children, ...rest }) => {
+  ({ as, css, children, ...rest }) => {
     const context = useFileButton(rest)
     return (
       <FileButtonContext value={context}>
-        <ui.div>
+        <ui.div css={css}>
           <FileButtonInput />
-          <CustomButton>{children}</CustomButton>
+          <CustomButton as={as}>{children}</CustomButton>
         </ui.div>
       </FileButtonContext>
     )
   },
   "root",
-)(undefined, ({ as, css, errorBorderColor, vars: varsProp, ...rest }) => {
+)(undefined, ({ errorBorderColor, vars: varsProp, ...rest }) => {
   return {
-    as: as || Button,
-    css: as ? undefined : css,
     vars: mergeVars(varsProp, {
       name: "errorBorderColor",
       token: "colors",
@@ -73,7 +71,7 @@ export const FileButton = withProvider<"div", FileButtonProps>(
 interface FileButtonInputProps extends HTMLUIProps<"input"> {}
 const FileButtonInput = withContext<"input", FileButtonInputProps>(
   "input",
-  "input",
+  "field",
 )(undefined, (props) => {
   const { getInputProps } = useFileButtonContext()
 
@@ -85,15 +83,17 @@ interface CustomButtonProps extends Omit<HTMLUIProps<"button">, "children"> {
 }
 
 const CustomButton = withContext<"button", CustomButtonProps>(
-  ({ as, css, children, ...rest }) => {
+  ({ children, ...rest }) => {
     const { getButtonProps, getCustomButtonProps } = useFileButtonContext()
     return isFunction(children) ? (
       children(getCustomButtonProps(rest))
     ) : (
-      <ui.button as={as} css={css} {...getButtonProps()}>
-        {children}
-      </ui.button>
+      <ui.button {...getButtonProps(rest)}>{children}</ui.button>
     )
   },
   "button",
-)()
+)(undefined, ({ as, css, ...rest }) => ({
+  as: as || Button,
+  css: as ? undefined : css,
+  ...rest,
+}))

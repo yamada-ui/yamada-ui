@@ -39,7 +39,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithMultiple: Story = () => {
+export const Multiple: Story = () => {
   return (
     <>
       <FileButton multiple>Upload</FileButton>
@@ -58,7 +58,7 @@ export const WithMultiple: Story = () => {
   )
 }
 
-export const WithAccept: Story = () => {
+export const Accept: Story = () => {
   return (
     <>
       <FileButton accept="image/png,image/jpeg">Upload</FileButton>
@@ -77,7 +77,7 @@ export const WithAccept: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
     <Wrap gap="md">
       <FileButton colorScheme="primary" size="xs">
@@ -99,7 +99,7 @@ export const WithSize: Story = () => {
   )
 }
 
-export const WithColorScheme: Story = () => {
+export const ColorScheme: Story = () => {
   return (
     <Wrap gap="md">
       {COLOR_SCHEMES.map((colorScheme) => (
@@ -111,7 +111,7 @@ export const WithColorScheme: Story = () => {
   )
 }
 
-export const WithVariant: Story = () => {
+export const Variant: Story = () => {
   return (
     <Wrap gap="md">
       <FileButton colorScheme="primary" variant="solid">
@@ -135,7 +135,7 @@ export const WithVariant: Story = () => {
   )
 }
 
-export const WithBorderColor: Story = () => {
+export const BorderColor: Story = () => {
   return (
     <FileButton errorBorderColor="orange.500" invalid>
       Upload

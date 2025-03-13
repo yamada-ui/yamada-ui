@@ -1,16 +1,14 @@
 import type { ButtonProps } from "../../components/button"
-import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { FieldProps } from "../field"
 import type { FileButtonStyle } from "./file-button.style"
-import type { UseFileButtonProps, UseFileButtonReturn } from "./use-file-button"
+import type { UseFileButtonProps } from "./use-file-button"
 import { Button } from "../../components/button"
-import { createSlotComponent, mergeVars, ui } from "../../core"
+import { createComponent, mergeVars, ui } from "../../core"
 import { isFunction } from "../../utils"
 import { fileButtonStyle } from "./file-button.style"
 import { useFileButton } from "./use-file-button"
-
-interface FileButtonContext extends UseFileButtonReturn {}
 
 export interface Props extends FieldProps {
   onClick: () => void
@@ -27,14 +25,10 @@ export interface FileButtonProps
 }
 
 export const {
-  component,
-  ComponentContext: FileButtonContext,
   PropsContext: FileButtonPropsContext,
-  useComponentContext: useFileButtonContext,
   usePropsContext: useFileButtonPropsContext,
   withContext,
-  withProvider,
-} = createSlotComponent<FileButtonProps, FileButtonStyle, FileButtonContext>(
+} = createComponent<FileButtonProps, FileButtonStyle>(
   "file-button",
   fileButtonStyle,
 )
@@ -44,52 +38,29 @@ export const {
  *
  * @see Docs https://yamada-ui.com/components/forms/file-button
  */
-export const FileButton = withProvider<"div", FileButtonProps>(
-  ({ as, css, children, errorBorderColor, vars: varsProp, ...rest }) => {
-    const context = useFileButton(rest)
+export const FileButton = withContext<"div", FileButtonProps>(
+  ({ children, errorBorderColor, vars: varsProp, ...rest }) => {
+    const { getButtonProps, getCustomButtonProps, getInputProps } =
+      useFileButton(rest)
     const vars = mergeVars(varsProp, {
       name: "errorBorderColor",
       token: "colors",
       value: errorBorderColor,
     })
     return (
-      <FileButtonContext value={context}>
-        <ui.div css={css}>
-          <FileButtonInput />
-          <CustomButton as={as} vars={vars}>
+      <ui.div>
+        <ui.input {...getInputProps()} />
+
+        {isFunction(children) ? (
+          children(getCustomButtonProps())
+        ) : (
+          <ui.button vars={vars} {...getButtonProps()}>
             {children}
-          </CustomButton>
-        </ui.div>
-      </FileButtonContext>
+          </ui.button>
+        )}
+      </ui.div>
     )
   },
-  "root",
-)()
-
-interface FileButtonInputProps extends HTMLUIProps<"input"> {}
-const FileButtonInput = withContext<"input", FileButtonInputProps>(
-  "input",
-  "field",
-)(undefined, (props) => {
-  const { getInputProps } = useFileButtonContext()
-
-  return { ...getInputProps(props) }
-})
-
-interface CustomButtonProps extends Omit<HTMLUIProps<"button">, "children"> {
-  children: ReactNodeOrFunction<Props>
-}
-
-const CustomButton = withContext<"button", CustomButtonProps>(
-  ({ children, ...rest }) => {
-    const { getButtonProps, getCustomButtonProps } = useFileButtonContext()
-    return isFunction(children) ? (
-      children(getCustomButtonProps(rest))
-    ) : (
-      <ui.button {...getButtonProps(rest)}>{children}</ui.button>
-    )
-  },
-  "button",
 )(undefined, ({ as, ...rest }) => ({
   as: as || Button,
   ...rest,

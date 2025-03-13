@@ -12,7 +12,7 @@ describe("<Avatar />", () => {
     image().restore()
   })
 
-  test.todo("renders an image", async () => {
+  test("renders an image", async () => {
     const mock = image()
     mock.simulate("loaded")
     render(<Avatar name="Hirotomo Yamada" src="https://bit.ly/dan-abramov" />)
@@ -23,22 +23,6 @@ describe("<Avatar />", () => {
 
     const img = await screen.findByAltText("Hirotomo Yamada")
     expect(img).toBeInTheDocument()
-  })
-
-  test.todo("fires onError if image fails to load", () => {
-    const mock = image()
-    mock.simulate("error")
-
-    const src = "https://bit.ly/dan-abramov"
-    const name = "Hirotomo Yamada"
-    const onErrorFn = vi.fn()
-    render(<Avatar name={name} src={src} onError={onErrorFn} />)
-
-    act(() => {
-      vi.runAllTimers()
-    })
-
-    expect(onErrorFn).toHaveBeenCalledTimes(1)
   })
 
   test("renders a name avatar if no src", async () => {

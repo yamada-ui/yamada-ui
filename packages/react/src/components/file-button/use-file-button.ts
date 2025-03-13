@@ -21,7 +21,6 @@ export interface UseFileButtonProps
   /**
    * Function to be called when a file change event occurs.
    */
-
   onChange?: (files: File[] | undefined) => void
 }
 

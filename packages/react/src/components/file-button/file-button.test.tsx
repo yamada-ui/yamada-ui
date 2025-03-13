@@ -7,8 +7,26 @@ describe("<FileButton />", () => {
     vi.restoreAllMocks()
   })
 
-  test("FileButton renders correctly", async () => {
+  test("pass a11y test", async () => {
     await a11y(<FileButton>Upload</FileButton>)
+  })
+
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(FileButton.displayName).toBe("FileButton")
+    expect(FileButton.__ui__).toBe("FileButton")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<FileButton>Upload</FileButton>)
+
+    const fileButton = screen.getByRole("button", { name: /Upload/i })
+    expect(fileButton).toHaveClass("ui-file-button")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<FileButton>Upload</FileButton>)
+    const fileButton = screen.getByRole("button", { name: /Upload/i })
+    expect(fileButton.tagName).toBe("BUTTON")
   })
 
   test("should render FileButton", async () => {

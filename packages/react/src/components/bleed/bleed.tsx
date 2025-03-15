@@ -1,4 +1,4 @@
-import type { CSSProps, HTMLUIProps } from "../../core"
+import type { CSSProps, HTMLStyledProps } from "../../core"
 import type { BleedStyle } from "./bleed.style"
 import { createComponent, mergeVars } from "../../core"
 import { calc } from "../../utils"
@@ -6,7 +6,7 @@ import { bleedStyle } from "./bleed.style"
 
 interface BleedOptions {}
 
-export interface BleedProps extends HTMLUIProps, BleedOptions {
+export interface BleedProps extends HTMLStyledProps, BleedOptions {
   /**
    * The CSS `margin-block` property.
    */

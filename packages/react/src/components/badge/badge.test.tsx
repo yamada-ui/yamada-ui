@@ -6,9 +6,9 @@ describe("<Badge />", () => {
     await a11y(<Badge>Badge</Badge>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Badge.displayName).toBe("Badge")
-    expect(Badge.__ui__).toBe("Badge")
+    expect(Badge.__styled__).toBe("Badge")
   })
 
   test("sets `className` correctly", () => {

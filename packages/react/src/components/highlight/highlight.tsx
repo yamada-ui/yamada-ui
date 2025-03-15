@@ -59,4 +59,4 @@ export const Highlight: FC<HighlightProps> = ({
 }
 
 Highlight.displayName = "Highlight"
-Highlight.__ui__ = "Highlight"
+Highlight.__styled__ = "Highlight"

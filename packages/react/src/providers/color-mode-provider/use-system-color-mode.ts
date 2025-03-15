@@ -1,7 +1,7 @@
 import type { ColorMode } from "../../core"
 import type { Environment } from "../environment-provider"
 import { useEffect, useMemo, useState } from "react"
-import { funcAll, useCallbackRef, useSafeLayoutEffect } from "../../utils"
+import { fnAll, useCallbackRef, useSafeLayoutEffect } from "../../utils"
 import { getColorModeUtils } from "./color-mode-utils"
 
 export interface UseSystemColorModeProps {
@@ -33,7 +33,7 @@ export const useSystemColorMode = ({
   }, [getSystemColorMode])
 
   useEffect(() => {
-    return systemColorModeObserver(funcAll(setColorMode, callbackRef))
+    return systemColorModeObserver(fnAll(setColorMode, callbackRef))
   }, [systemColorModeObserver, getSystemColorMode, callbackRef])
 
   return colorMode

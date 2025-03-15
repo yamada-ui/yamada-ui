@@ -24,18 +24,18 @@ describe("<Container />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Container.Root.displayName).toBe("ContainerRoot")
-    expect(Container.Root.__ui__).toBe("ContainerRoot")
+    expect(Container.Root.__styled__).toBe("ContainerRoot")
 
     expect(Container.Header.displayName).toBe("ContainerHeader")
-    expect(Container.Header.__ui__).toBe("ContainerHeader")
+    expect(Container.Header.__styled__).toBe("ContainerHeader")
 
     expect(Container.Body.displayName).toBe("ContainerBody")
-    expect(Container.Body.__ui__).toBe("ContainerBody")
+    expect(Container.Body.__styled__).toBe("ContainerBody")
 
     expect(Container.Footer.displayName).toBe("ContainerFooter")
-    expect(Container.Footer.__ui__).toBe("ContainerFooter")
+    expect(Container.Footer.__styled__).toBe("ContainerFooter")
   })
 
   test.todo("sets `className` correctly", () => {

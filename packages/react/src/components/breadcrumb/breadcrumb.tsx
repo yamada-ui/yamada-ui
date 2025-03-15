@@ -1,9 +1,9 @@
 import type { ReactElement } from "react"
-import type { HTMLUIProps, PropGetter, ThemeProps } from "../../core"
+import type { HTMLStyledProps, PropGetter, ThemeProps } from "../../core"
 import type { BreadcrumbStyle } from "./breadcrumb.style"
 import type { UseBreadcrumbProps } from "./use-breadcrumb"
 import { Fragment, useMemo } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { ChevronRightIcon, EllipsisIcon } from "../icon"
 import { breadcrumbStyle } from "./breadcrumb.style"
 import { useBreadcrumb } from "./use-breadcrumb"
@@ -14,7 +14,7 @@ interface BreadcrumbContext {
 }
 
 export interface BreadcrumbRootProps
-  extends HTMLUIProps<"nav">,
+  extends HTMLStyledProps<"nav">,
     ThemeProps<BreadcrumbStyle>,
     UseBreadcrumbProps {
   /**
@@ -30,7 +30,7 @@ export interface BreadcrumbRootProps
   /**
    * Props for ol element.
    */
-  listProps?: HTMLUIProps<"ol">
+  listProps?: HTMLStyledProps<"ol">
   /**
    * Props for separator element.
    */
@@ -76,7 +76,7 @@ export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
 
     return (
       <BreadcrumbContext value={context}>
-        <ui.nav {...getRootProps()}>
+        <styled.nav {...getRootProps()}>
           <BreadcrumbList {...getListProps({ gap, ...listProps })}>
             {children.map((child, index) => {
               const last = index === children.length - 1
@@ -94,29 +94,29 @@ export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
               )
             })}
           </BreadcrumbList>
-        </ui.nav>
+        </styled.nav>
       </BreadcrumbContext>
     )
   },
   "root",
 )()
 
-interface BreadcrumbListProps extends HTMLUIProps<"ol"> {}
+interface BreadcrumbListProps extends HTMLStyledProps<"ol"> {}
 
 const BreadcrumbList = withContext<"ol", BreadcrumbListProps>("ol", "list")()
 
-interface BreadcrumbItemProps extends HTMLUIProps<"li"> {}
+interface BreadcrumbItemProps extends HTMLStyledProps<"li"> {}
 
 const BreadcrumbItem = withContext<"li", BreadcrumbItemProps>("li", "item")()
 
-interface BreadcrumbSeparatorProps extends HTMLUIProps<"li"> {}
+interface BreadcrumbSeparatorProps extends HTMLStyledProps<"li"> {}
 
 const BreadcrumbSeparator = withContext<"li", BreadcrumbSeparatorProps>(
   BreadcrumbItem,
   "separator",
 )({ children: <ChevronRightIcon /> })
 
-export interface BreadcrumbLinkProps extends HTMLUIProps<"a"> {
+export interface BreadcrumbLinkProps extends HTMLStyledProps<"a"> {
   /**
    * If `true`, change to span element.
    *
@@ -137,7 +137,7 @@ export const BreadcrumbLink = withContext<"a", BreadcrumbLinkProps>(
   }
 })
 
-export interface BreadcrumbEllipsisProps extends HTMLUIProps<"svg"> {}
+export interface BreadcrumbEllipsisProps extends HTMLStyledProps<"svg"> {}
 
 export const BreadcrumbEllipsis = withContext<"svg", BreadcrumbEllipsisProps>(
   EllipsisIcon,

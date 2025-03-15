@@ -19,7 +19,7 @@ import type {
   WithoutThemeProps,
 } from "../theme"
 import type { ComponentSlot, ComponentSlotName } from "./create-component"
-import type { HTMLUIProps } from "./index.types"
+import type { HTMLStyledProps } from "./index.types"
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
 import { useTheme } from "../../providers/theme-provider"
@@ -422,7 +422,7 @@ interface UseStyleOptions<
 }
 
 function useStyle<
-  Y extends HTMLUIProps & ThemeProps<{}> = Dict,
+  Y extends HTMLStyledProps & ThemeProps<{}> = Dict,
   M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
   D extends keyof Y = keyof Y,
   H extends boolean = false,

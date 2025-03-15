@@ -17,17 +17,17 @@ describe("<Stat />", () => {
     await a11y(<TestComponent />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Stat.Root.displayName).toBe("StatRoot")
-    expect(Stat.Root.__ui__).toBe("StatRoot")
+    expect(Stat.Root.__styled__).toBe("StatRoot")
     expect(Stat.Label.displayName).toBe("StatLabel")
-    expect(Stat.Label.__ui__).toBe("StatLabel")
+    expect(Stat.Label.__styled__).toBe("StatLabel")
     expect(Stat.Value.displayName).toBe("StatValue")
-    expect(Stat.Value.__ui__).toBe("StatValue")
+    expect(Stat.Value.__styled__).toBe("StatValue")
     expect(Stat.HelperMessage.displayName).toBe("StatHelperMessage")
-    expect(Stat.HelperMessage.__ui__).toBe("StatHelperMessage")
+    expect(Stat.HelperMessage.__styled__).toBe("StatHelperMessage")
     expect(Stat.Icon.displayName).toBe("StatIcon")
-    expect(Stat.Icon.__ui__).toBe("StatIcon")
+    expect(Stat.Icon.__styled__).toBe("StatIcon")
   })
 
   test("sets `className` correctly", () => {

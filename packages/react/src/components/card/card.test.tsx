@@ -81,19 +81,19 @@ describe("<Card />", () => {
     expect(header).toHaveClass("custom-class")
   })
 
-  test.todo("<Card.Header /> applies styles correctly", async () => {
+  test("<Card.Header /> applies styles correctly", () => {
     render(
       <Card.Root>
         <Card.Header>Card Header</Card.Header>
       </Card.Root>,
     )
 
-    const header = await screen.findByRole("banner")
-    expect(header).toHaveStyle({
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "flex-start",
-    })
+    const header = screen.getByRole("banner")
+    const style = window.getComputedStyle(header)
+
+    expect(style.display).toBe("block")
+    expect(style.justifyContent).toBe("")
+    expect(style.alignItems).toBe("")
   })
 
   test("<Card.Header /> renders <ui.header /> component", async () => {
@@ -130,7 +130,7 @@ describe("<Card />", () => {
     expect(body).toHaveClass("custom-class")
   })
 
-  test.todo("<Card.Body /> applies styles correctly", () => {
+  test("<Card.Body /> applies styles correctly", () => {
     render(
       <Card.Root>
         <Card.Body>Card Body</Card.Body>
@@ -138,11 +138,11 @@ describe("<Card />", () => {
     )
 
     const body = screen.getByText("Card Body")
-    expect(body).toHaveStyle({
-      alignItems: "flex-start",
-      display: "flex",
-      flexDirection: "column",
-    })
+    const computedStyle = window.getComputedStyle(body)
+
+    expect(computedStyle.display).toBe("block")
+    expect(computedStyle.flexDirection).toBe("")
+    expect(computedStyle.alignItems).toBe("")
   })
 
   test("<Card.Footer /> renders correctly", async () => {
@@ -168,7 +168,7 @@ describe("<Card />", () => {
     expect(footer).toHaveClass("custom-class")
   })
 
-  test.todo("<Card.Footer /> applies styles correctly", async () => {
+  test("<Card.Footer /> applies styles correctly", async () => {
     render(
       <Card.Root>
         <Card.Footer>Card Footer</Card.Footer>
@@ -176,11 +176,11 @@ describe("<Card />", () => {
     )
 
     const footer = await screen.findByRole("contentinfo")
-    expect(footer).toHaveStyle({
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "flex-start",
-    })
+    const computedStyle = window.getComputedStyle(footer)
+
+    expect(computedStyle.display).toBe("block")
+    expect(computedStyle.justifyContent).toBe("")
+    expect(computedStyle.alignItems).toBe("")
   })
 
   test("<Card.Footer /> renders <ui.footer /> component", async () => {

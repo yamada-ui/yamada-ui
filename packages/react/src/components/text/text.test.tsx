@@ -6,6 +6,23 @@ describe("<Text />", () => {
     await a11y(<Text>Text</Text>)
   })
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Text.displayName).toBe("Text")
+    expect(Text.__ui__).toBe("Text")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Text data-testid="text">Text</Text>)
+    const el = screen.getByTestId("text")
+    expect(el).toHaveClass("ui-text")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Text data-testid="text">Text</Text>)
+    const el = screen.getByTestId("text")
+    expect(el.tagName).toBe("P")
+  })
+
   test("as - prop works correctly", () => {
     render(
       <Text as="a" href="www.google.com">

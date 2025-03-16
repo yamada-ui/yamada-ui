@@ -35,7 +35,7 @@ export const withChildren: Story = () => {
       <MonthPicker closeOnSelect={false} placeholder="MMM YYYY">
         {({ value, onClose }) => (
           <VStack mt="sm">
-            <Button isDisabled={!value} onClick={onClose}>
+            <Button disabled={!value} onClick={onClose}>
               Submit{value ? ` ${dayjs(value).format("MMM YYYY")}` : ""}
             </Button>
           </VStack>
@@ -141,7 +141,7 @@ export const withBorderColor: Story = () => {
 
       <MonthPicker
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
@@ -189,47 +189,47 @@ export const withDuration: Story = () => {
   return <MonthPicker duration={0.4} placeholder="YYYY/MM" />
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <MonthPicker variant="outline" isDisabled placeholder="outline" />
-      <MonthPicker variant="filled" isDisabled placeholder="filled" />
-      <MonthPicker variant="flushed" isDisabled placeholder="flushed" />
-      <MonthPicker variant="unstyled" isDisabled placeholder="unstyled" />
+      <MonthPicker variant="outline" disabled placeholder="outline" />
+      <MonthPicker variant="filled" disabled placeholder="filled" />
+      <MonthPicker variant="flushed" disabled placeholder="flushed" />
+      <MonthPicker variant="unstyled" disabled placeholder="unstyled" />
 
-      <FormControl isDisabled label="What is your birthday?">
+      <FormControl disabled label="What is your birthday?">
         <MonthPicker placeholder="YYYY/MM" />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <MonthPicker variant="outline" isReadOnly placeholder="outline" />
-      <MonthPicker variant="filled" isReadOnly placeholder="filled" />
-      <MonthPicker variant="flushed" isReadOnly placeholder="flushed" />
-      <MonthPicker variant="unstyled" isReadOnly placeholder="unstyled" />
+      <MonthPicker variant="outline" placeholder="outline" readOnly />
+      <MonthPicker variant="filled" placeholder="filled" readOnly />
+      <MonthPicker variant="flushed" placeholder="flushed" readOnly />
+      <MonthPicker variant="unstyled" placeholder="unstyled" readOnly />
 
-      <FormControl isReadOnly label="What is your birthday?">
+      <FormControl label="What is your birthday?" readOnly>
         <MonthPicker placeholder="YYYY/MM" />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <MonthPicker variant="outline" isInvalid placeholder="outline" />
-      <MonthPicker variant="filled" isInvalid placeholder="filled" />
-      <MonthPicker variant="flushed" isInvalid placeholder="flushed" />
-      <MonthPicker variant="unstyled" isInvalid placeholder="unstyled" />
+      <MonthPicker variant="outline" invalid placeholder="outline" />
+      <MonthPicker variant="filled" invalid placeholder="filled" />
+      <MonthPicker variant="flushed" invalid placeholder="flushed" />
+      <MonthPicker variant="unstyled" invalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."
-        isInvalid
+        invalid
         label="What is your birthday?"
       >
         <MonthPicker placeholder="YYYY/MM" />
@@ -289,8 +289,8 @@ export const disabledCloseOnBlur: Story = () => {
   return <MonthPicker closeOnBlur={false} placeholder="YYYY/MM" />
 }
 
-export const disabledIsClearable: Story = () => {
-  return <MonthPicker isClearable={false} placeholder="YYYY/MM" />
+export const disabledClearable: Story = () => {
+  return <MonthPicker clearable={false} placeholder="YYYY/MM" />
 }
 
 export const disabledAllowInput: Story = () => {
@@ -364,7 +364,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.monthPicker?.message}
-        isInvalid={!!errors.monthPicker}
+        invalid={!!errors.monthPicker}
         label="Birthday"
       >
         <Controller
@@ -408,7 +408,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.monthPicker?.message}
-        isInvalid={!!errors.monthPicker}
+        invalid={!!errors.monthPicker}
         label="Birthday"
       >
         <Controller

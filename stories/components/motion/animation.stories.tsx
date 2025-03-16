@@ -208,7 +208,7 @@ export const withLayout: Story = () => {
 
 export const useLayoutGroup: Story = () => {
   const Accordion: FC = () => {
-    const [isOpen, { toggle }] = useBoolean(false)
+    const [open, { toggle }] = useBoolean(false)
 
     return (
       <Motion
@@ -220,7 +220,7 @@ export const useLayoutGroup: Story = () => {
         p="md"
         placeContent="center"
         rounded="md"
-        w={isOpen ? "32" : "16"}
+        w={open ? "32" : "16"}
         onClick={toggle}
       />
     )

@@ -46,7 +46,7 @@ export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
       {colorSchemes.map((colorScheme) => (
-        <Checkbox key={colorScheme} colorScheme={colorScheme} defaultIsChecked>
+        <Checkbox key={colorScheme} colorScheme={colorScheme} defaultChecked>
           {colorScheme}
         </Checkbox>
       ))}
@@ -55,34 +55,34 @@ export const withColorScheme: Story = () => {
 }
 
 export const withDefaultIsChecked: Story = () => {
-  return <Checkbox defaultIsChecked>孫悟空</Checkbox>
+  return <Checkbox defaultChecked>孫悟空</Checkbox>
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <Checkbox isDisabled>All Notifications</Checkbox>
-      <Checkbox defaultIsChecked isDisabled>
+      <Checkbox disabled>All Notifications</Checkbox>
+      <Checkbox defaultChecked disabled>
         All Notifications
       </Checkbox>
 
       <CheckboxGroup defaultValue={["all"]}>
         <Checkbox value="all">All Notifications</Checkbox>
-        <Checkbox isDisabled value="important">
+        <Checkbox disabled value="important">
           Important Notifications
         </Checkbox>
         <Checkbox value="service">Service Notifications</Checkbox>
       </CheckboxGroup>
 
       <Fieldset
-        isDisabled
+        disabled
         legend="Which notifications would you like to receive?"
       >
-        <Checkbox defaultIsChecked>All Notifications</Checkbox>
+        <Checkbox defaultChecked>All Notifications</Checkbox>
       </Fieldset>
 
       <Fieldset
-        isDisabled
+        disabled
         legend="Which notifications would you like to receive?"
       >
         <CheckboxGroup defaultValue={["all"]}>
@@ -95,32 +95,32 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <Checkbox isReadOnly>All Notifications</Checkbox>
-      <Checkbox defaultIsChecked isReadOnly>
+      <Checkbox readOnly>All Notifications</Checkbox>
+      <Checkbox defaultChecked readOnly>
         All Notifications
       </Checkbox>
 
       <CheckboxGroup defaultValue={["all"]}>
         <Checkbox value="all">All Notifications</Checkbox>
-        <Checkbox isReadOnly value="important">
+        <Checkbox readOnly value="important">
           Important Notifications
         </Checkbox>
         <Checkbox value="service">Service Notifications</Checkbox>
       </CheckboxGroup>
 
       <Fieldset
-        isReadOnly
         legend="Which notifications would you like to receive?"
+        readOnly
       >
-        <Checkbox defaultIsChecked>All Notifications</Checkbox>
+        <Checkbox defaultChecked>All Notifications</Checkbox>
       </Fieldset>
 
       <Fieldset
-        isReadOnly
         legend="Which notifications would you like to receive?"
+        readOnly
       >
         <CheckboxGroup defaultValue={["all"]}>
           <Checkbox value="all">All Notifications</Checkbox>
@@ -132,17 +132,17 @@ export const isReadonly: Story = () => {
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <Checkbox isInvalid>All Notifications</Checkbox>
-      <Checkbox defaultIsChecked isInvalid>
+      <Checkbox invalid>All Notifications</Checkbox>
+      <Checkbox defaultChecked invalid>
         All Notifications
       </Checkbox>
 
       <CheckboxGroup defaultValue={["all"]}>
         <Checkbox value="all">All Notifications</Checkbox>
-        <Checkbox isInvalid value="important">
+        <Checkbox invalid value="important">
           Important Notifications
         </Checkbox>
         <Checkbox value="service">Service Notifications</Checkbox>
@@ -150,7 +150,7 @@ export const isInvalid: Story = () => {
 
       <Fieldset
         errorMessage="This is required."
-        isInvalid
+        invalid
         legend="Which notifications would you like to receive?"
       >
         <Checkbox>All Notifications</Checkbox>
@@ -158,7 +158,7 @@ export const isInvalid: Story = () => {
 
       <Fieldset
         errorMessage="This is required."
-        isInvalid
+        invalid
         legend="Which notifications would you like to receive?"
       >
         <CheckboxGroup defaultValue={["all"]}>
@@ -180,8 +180,8 @@ export const indeterminate: Story = () => {
   return (
     <VStack gap="sm">
       <Checkbox
-        isChecked={allChecked}
-        isIndeterminate={isIndeterminate}
+        checked={allChecked}
+        indeterminate={isIndeterminate}
         onChange={(e) => setValues([e.target.checked, e.target.checked])}
       >
         地球人
@@ -189,14 +189,14 @@ export const indeterminate: Story = () => {
 
       <VStack gap="sm" pl="md">
         <Checkbox
-          isChecked={values[0]}
+          checked={values[0]}
           onChange={(e) => setValues([e.target.checked, values[1]!])}
         >
           孫悟空
         </Checkbox>
 
         <Checkbox
-          isChecked={values[1]}
+          checked={values[1]}
           onChange={(e) => setValues([values[0]!, e.target.checked])}
         >
           孫悟飯
@@ -236,7 +236,7 @@ export const customControl: Story = () => {
   const [isChecked, { toggle }] = useBoolean(false)
 
   return (
-    <Checkbox isChecked={isChecked} onChange={toggle}>
+    <Checkbox checked={isChecked} onChange={toggle}>
       孫悟空
     </Checkbox>
   )
@@ -317,14 +317,14 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.checkbox?.message}
-        isInvalid={!!errors.checkbox}
+        invalid={!!errors.checkbox}
         legend="Who is your favorite character?"
       >
         <Controller
           name="checkbox"
           control={control}
           render={({ field: { value, ...rest } }) => (
-            <Checkbox isChecked={value} {...rest}>
+            <Checkbox checked={value} {...rest}>
               孫悟空
             </Checkbox>
           )}
@@ -334,7 +334,7 @@ export const reactHookForm: Story = () => {
 
       <Fieldset
         errorMessage={errors.checkboxGroup?.message}
-        isInvalid={!!errors.checkboxGroup}
+        invalid={!!errors.checkboxGroup}
         legend="Who is your favorite character?"
       >
         <Controller
@@ -384,14 +384,14 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.checkbox?.message}
-        isInvalid={!!errors.checkbox}
+        invalid={!!errors.checkbox}
         legend="Who is your favorite character?"
       >
         <Controller
           name="checkbox"
           control={control}
           render={({ field: { value, ...rest } }) => (
-            <Checkbox isChecked={value} {...rest}>
+            <Checkbox checked={value} {...rest}>
               孫悟空
             </Checkbox>
           )}
@@ -401,7 +401,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
       <Fieldset
         errorMessage={errors.checkboxGroup?.message}
-        isInvalid={!!errors.checkboxGroup}
+        invalid={!!errors.checkboxGroup}
         legend="Who is your favorite character?"
       >
         <Controller

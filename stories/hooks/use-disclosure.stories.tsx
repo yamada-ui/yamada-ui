@@ -14,7 +14,7 @@ const meta: Meta = {
 export default meta
 
 export const basic = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -23,7 +23,7 @@ export const basic = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}
@@ -37,19 +37,19 @@ export const basic = () => {
 }
 
 export const useToggle = () => {
-  const { isOpen, onToggle } = useDisclosure()
+  const { open, onToggle } = useDisclosure()
 
   return (
     <>
       <Button onClick={onToggle}>Please Click</Button>
 
-      {isOpen ? <Text>Hey!</Text> : null}
+      {open ? <Text>Hey!</Text> : null}
     </>
   )
 }
 
 export const withChain = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure({
+  const { open, onClose, onOpen } = useDisclosure({
     onClose: (...args: string[]) => {
       console.log("Args:", args)
     },
@@ -65,7 +65,7 @@ export const withChain = () => {
       <Dialog
         cancel="わけない"
         header="孫悟空"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={() => onClose("This is arg")}
         onClose={() => onClose("This is arg")}
@@ -79,7 +79,7 @@ export const withChain = () => {
 }
 
 export const withPromise = () => {
-  const { isOpen, onClose, onOpen, onSuccess } = usePromiseDisclosure()
+  const { open, onClose, onOpen, onSuccess } = usePromiseDisclosure()
 
   const onClick = async () => {
     try {
@@ -104,7 +104,7 @@ export const withPromise = () => {
         size="2xl"
         cancel="わけない"
         header="ミスター・サタン"
-        open={isOpen}
+        open={open}
         success="わける"
         onCancel={onClose}
         onClose={onClose}

@@ -39,9 +39,15 @@ export const withLabel: Story = () => {
 }
 
 export const withRounded: Story = () => {
-  return <CircleProgress aria-label="Storage space" isRounded value={18} />
+  return <CircleProgress aria-label="Storage space" fullRounded value={18} />
 }
 
 export const useAnimation: Story = () => {
-  return <CircleProgress isAnimation value={18} />
+  return (
+    <CircleProgress
+      // eslint-disable-next-line @typescript-eslint/no-deprecated
+      isAnimation
+      value={18}
+    />
+  )
 }

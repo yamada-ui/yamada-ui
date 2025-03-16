@@ -35,7 +35,7 @@ describe("<Highlight />", () => {
 
   test("isFragment prop works correctly", () => {
     const { container } = render(
-      <Highlight isFragment query="">
+      <Highlight fragment query="">
         Highlight
       </Highlight>,
     )

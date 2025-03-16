@@ -7,19 +7,19 @@ describe("<Textarea />", () => {
   })
 
   test("Disabled Textarea renders correctly", () => {
-    render(<Textarea isDisabled />)
+    render(<Textarea disabled />)
 
     expect(screen.getByRole("textbox")).toHaveAttribute("disabled")
   })
 
   test("Readonly Textarea renders correctly", () => {
-    render(<Textarea isReadOnly />)
+    render(<Textarea readOnly />)
 
     expect(screen.getByRole("textbox")).toHaveAttribute("aria-readonly", "true")
   })
 
   test("Invalid Textarea renders correctly", () => {
-    render(<Textarea isInvalid />)
+    render(<Textarea invalid />)
 
     expect(screen.getByRole("textbox")).toHaveAttribute("aria-invalid", "true")
   })

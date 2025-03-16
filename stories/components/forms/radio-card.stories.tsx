@@ -310,7 +310,7 @@ export const withDefaultValue: Story = () => {
   return <RadioCardGroup defaultValue="フローラ" items={items} />
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   const items = useMemo<RadioCardItem[]>(
     () => [
       { label: "ビアンカ", value: "ビアンカ" },
@@ -330,7 +330,7 @@ export const isDisabled: Story = () => {
           </RadioCardDescription>
         </RadioCard>
 
-        <RadioCard isDisabled value="フローラ">
+        <RadioCard disabled value="フローラ">
           <RadioCardLabel>フローラ</RadioCardLabel>
           <RadioCardDescription>
             大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。
@@ -345,16 +345,16 @@ export const isDisabled: Story = () => {
         </RadioCard>
       </RadioCardGroup>
 
-      <RadioCardGroup isDisabled items={items} />
+      <RadioCardGroup disabled items={items} />
 
-      <Fieldset isDisabled legend="Which characters would you like to select?">
+      <Fieldset disabled legend="Which characters would you like to select?">
         <RadioCardGroup items={items} />
       </Fieldset>
     </>
   )
 }
 
-export const isReadOnly: Story = () => {
+export const readOnly: Story = () => {
   const items = useMemo<RadioCardItem[]>(
     () => [
       { label: "ビアンカ", value: "ビアンカ" },
@@ -374,7 +374,7 @@ export const isReadOnly: Story = () => {
           </RadioCardDescription>
         </RadioCard>
 
-        <RadioCard isReadOnly value="フローラ">
+        <RadioCard readOnly value="フローラ">
           <RadioCardLabel>フローラ</RadioCardLabel>
           <RadioCardDescription>
             大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。
@@ -389,16 +389,16 @@ export const isReadOnly: Story = () => {
         </RadioCard>
       </RadioCardGroup>
 
-      <RadioCardGroup isReadOnly items={items} />
+      <RadioCardGroup items={items} readOnly />
 
-      <Fieldset isReadOnly legend="Which characters would you like to select?">
+      <Fieldset legend="Which characters would you like to select?" readOnly>
         <RadioCardGroup items={items} />
       </Fieldset>
     </>
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   const items = useMemo<RadioCardItem[]>(
     () => [
       { label: "ビアンカ", value: "ビアンカ" },
@@ -411,7 +411,7 @@ export const isInvalid: Story = () => {
   return (
     <>
       <RadioCardGroup defaultValue="フローラ">
-        <RadioCard isInvalid value="ビアンカ">
+        <RadioCard invalid value="ビアンカ">
           <RadioCardLabel>ビアンカ</RadioCardLabel>
           <RadioCardDescription>
             パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。
@@ -433,11 +433,11 @@ export const isInvalid: Story = () => {
         </RadioCard>
       </RadioCardGroup>
 
-      <RadioCardGroup variant="surface" isInvalid items={items} />
+      <RadioCardGroup variant="surface" invalid items={items} />
 
       <Fieldset
         errorMessage="This is required."
-        isInvalid
+        invalid
         legend="Which characters would you like to select?"
       >
         <RadioCardGroup items={items} />

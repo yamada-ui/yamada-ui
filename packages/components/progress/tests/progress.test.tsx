@@ -14,6 +14,7 @@ describe("<Progress />", () => {
           data-testid="progress-a"
           borderRadius="md"
           filledTrackColor="green.500"
+          // eslint-disable-next-line @typescript-eslint/no-deprecated
           isAnimation
           value={50}
         />
@@ -21,6 +22,7 @@ describe("<Progress />", () => {
           colorScheme="purple"
           data-testid="progress-b"
           hasStripe
+          // eslint-disable-next-line @typescript-eslint/no-deprecated
           isStripeAnimation
           rounded="md"
           value={100}

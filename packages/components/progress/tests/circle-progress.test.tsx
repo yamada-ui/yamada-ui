@@ -12,7 +12,7 @@ describe("<CircleProgress />", () => {
         data-testid="circle-progress-a"
         boxSize="8rem"
         color="green.500"
-        isRounded
+        fullRounded
         max={100}
         min={0}
         thickness="0.5rem"
@@ -28,11 +28,13 @@ describe("<CircleProgress />", () => {
       <>
         <CircleProgress
           data-testid="circle-progress-b"
+          // eslint-disable-next-line @typescript-eslint/no-deprecated
           isAnimation
           speed={["1s", "3s"]}
         />
         <CircleProgress
           data-testid="circle-progress-c"
+          // eslint-disable-next-line @typescript-eslint/no-deprecated
           isAnimation
           speed={[1, 3]}
         />

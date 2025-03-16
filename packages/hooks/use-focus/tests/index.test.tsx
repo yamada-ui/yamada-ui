@@ -117,7 +117,9 @@ describe("useFocusOnShow", () => {
 })
 
 describe("useFocusOnPointerDown", () => {
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   const defaultPlatform = window.navigator.platform
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
   const defaultVendor = window.navigator.vendor
 
   beforeAll(() => {

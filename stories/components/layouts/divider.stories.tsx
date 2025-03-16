@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-deprecated */
 import type { Meta, StoryFn } from "@storybook/react"
 import { Divider, Flex } from "@yamada-ui/react"
 

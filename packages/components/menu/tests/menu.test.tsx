@@ -12,7 +12,6 @@ import {
   ContextMenuTrigger,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuItemButton,
@@ -90,12 +89,12 @@ describe("<Menu />", () => {
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Add item</MenuItem>
-          <MenuDivider data-testid="MenuDivider" />
+          <MenuSeparator data-testid="MenuSeparator" />
           <MenuItem>Edit item</MenuItem>
         </MenuList>
       </Menu>,
     )
-    expect(screen.getByTestId("MenuDivider")).toBeInTheDocument()
+    expect(screen.getByTestId("MenuSeparator")).toBeInTheDocument()
   })
 
   test("should render the menu with menu group", () => {
@@ -240,7 +239,7 @@ describe("<Menu />", () => {
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Set status</MenuItem>
-          <MenuItem data-testid="MenuItem" isDisabled>
+          <MenuItem data-testid="MenuItem" disabled>
             Edit Profile
           </MenuItem>
           <MenuItem>Preferences</MenuItem>

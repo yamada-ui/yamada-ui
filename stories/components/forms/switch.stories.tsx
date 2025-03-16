@@ -66,7 +66,7 @@ export const withColorScheme: Story = () => {
   return (
     <Wrap gap="md">
       {colorSchemes.map((colorScheme) => (
-        <Switch key={colorScheme} colorScheme={colorScheme} defaultIsChecked>
+        <Switch key={colorScheme} colorScheme={colorScheme} defaultChecked>
           {colorScheme}
         </Switch>
       ))}
@@ -74,22 +74,22 @@ export const withColorScheme: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <Switch isDisabled>disabled</Switch>
-      <Switch defaultIsChecked isDisabled>
+      <Switch disabled>disabled</Switch>
+      <Switch defaultChecked disabled>
         disabled
       </Switch>
     </>
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <Switch isReadOnly>read only</Switch>
-      <Switch defaultIsChecked isReadOnly>
+      <Switch readOnly>read only</Switch>
+      <Switch defaultChecked readOnly>
         read only
       </Switch>
     </>
@@ -100,7 +100,7 @@ export const customControl: Story = () => {
   const [isChecked, { toggle }] = useBoolean(false)
 
   return (
-    <Switch isChecked={isChecked} onChange={toggle}>
+    <Switch checked={isChecked} onChange={toggle}>
       custom control
     </Switch>
   )
@@ -123,7 +123,7 @@ export const reactHookForm: Story = () => {
         name="switch"
         control={control}
         render={({ field: { value, ...rest } }) => (
-          <Switch isChecked={value} {...rest}>
+          <Switch checked={value} {...rest}>
             Dark mode
           </Switch>
         )}
@@ -157,7 +157,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
         name="switch"
         control={control}
         render={({ field: { value, ...rest } }) => (
-          <Switch isChecked={value} {...rest}>
+          <Switch checked={value} {...rest}>
             Dark mode
           </Switch>
         )}

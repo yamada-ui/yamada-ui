@@ -40,7 +40,7 @@ export const withErrorMessage: Story = () => {
   return (
     <Fieldset
       errorMessage="Agreement is required."
-      isInvalid
+      invalid
       legend="Terms and Conditions"
     >
       <Checkbox>I agree to the Terms and Conditions.</Checkbox>
@@ -54,9 +54,9 @@ export const isReplace: Story = () => {
       <Fieldset
         errorMessage="Agreement is required."
         helperMessage="Please review the terms carefully before agreeing."
-        isInvalid
-        isReplace
+        invalid
         legend="Terms and Conditions"
+        replace
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>
@@ -64,9 +64,9 @@ export const isReplace: Story = () => {
       <Fieldset
         errorMessage="Agreement is required."
         helperMessage="Please review the terms carefully before agreeing."
-        isInvalid
-        isReplace={false}
+        invalid
         legend="Terms and Conditions"
+        replace={false}
       >
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>
@@ -79,7 +79,20 @@ export const isRequired: Story = () => {
     <Fieldset
       errorMessage="Agreement is required."
       helperMessage="Please review the terms carefully before agreeing."
-      isRequired
+      legend="Terms and Conditions"
+      required
+    >
+      <Checkbox>I agree to the Terms and Conditions.</Checkbox>
+    </Fieldset>
+  )
+}
+
+export const disabled: Story = () => {
+  return (
+    <Fieldset
+      disabled
+      errorMessage="Agreement is required."
+      helperMessage="Please review the terms carefully before agreeing."
       legend="Terms and Conditions"
     >
       <Checkbox>I agree to the Terms and Conditions.</Checkbox>
@@ -87,26 +100,13 @@ export const isRequired: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const readOnly: Story = () => {
   return (
     <Fieldset
       errorMessage="Agreement is required."
       helperMessage="Please review the terms carefully before agreeing."
-      isDisabled
       legend="Terms and Conditions"
-    >
-      <Checkbox>I agree to the Terms and Conditions.</Checkbox>
-    </Fieldset>
-  )
-}
-
-export const isReadonly: Story = () => {
-  return (
-    <Fieldset
-      errorMessage="Agreement is required."
-      helperMessage="Please review the terms carefully before agreeing."
-      isReadOnly
-      legend="Terms and Conditions"
+      readOnly
     >
       <Checkbox>I agree to the Terms and Conditions.</Checkbox>
     </Fieldset>
@@ -135,7 +135,7 @@ export const customHelperMessage: Story = () => {
 
 export const customErrorMessage: Story = () => {
   return (
-    <Fieldset isInvalid legend="Terms and Conditions">
+    <Fieldset invalid legend="Terms and Conditions">
       <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       <ErrorMessage color="gray.300">Agreement is required.</ErrorMessage>
     </Fieldset>
@@ -146,8 +146,8 @@ export const customRequiredIndicator: Story = () => {
   return (
     <>
       <Fieldset
-        isRequired
         legend="Terms and Conditions"
+        required
         requiredIndicator={
           <Tag colorScheme="red" size="sm" ms={2}>
             required
@@ -157,7 +157,7 @@ export const customRequiredIndicator: Story = () => {
         <Checkbox>I agree to the Terms and Conditions.</Checkbox>
       </Fieldset>
 
-      <Fieldset isRequired>
+      <Fieldset required>
         <Legend
           requiredIndicator={
             <Tag colorScheme="red" size="sm" ms={2}>

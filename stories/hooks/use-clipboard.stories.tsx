@@ -66,7 +66,7 @@ export const directCopy = () => {
 
   return (
     <HStack gap="md">
-      <Input isReadOnly value={value} />
+      <Input readOnly value={value} />
       <Button onClick={() => onCopy(value)}>
         {hasCopied ? "Copied!" : "Copy"}
       </Button>

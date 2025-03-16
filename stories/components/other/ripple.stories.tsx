@@ -32,7 +32,7 @@ export const basic: Story = () => {
   )
 }
 
-export const withIsDisabled: Story = () => {
+export const disabled: Story = () => {
   const { onPointerDown, ...rippleProps } = useRipple()
 
   return (

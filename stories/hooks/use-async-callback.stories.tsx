@@ -19,19 +19,19 @@ const wait = async (ms: number) =>
   })
 
 export const basic = () => {
-  const [isLoading, onClick] = useAsyncCallback(async () => {
+  const [loading, onClick] = useAsyncCallback(async () => {
     await wait(3000)
   }, [])
 
   return (
-    <Button isLoading={isLoading} onClick={onClick}>
+    <Button loading={loading} onClick={onClick}>
       Click me
     </Button>
   )
 }
 
 export const withLoading = () => {
-  const [isLoading, onClick] = useAsyncCallback(
+  const [loading, onClick] = useAsyncCallback(
     async () => {
       await wait(3000)
     },
@@ -40,7 +40,7 @@ export const withLoading = () => {
   )
 
   return (
-    <Button isLoading={isLoading} onClick={onClick}>
+    <Button loading={loading} onClick={onClick}>
       Click me
     </Button>
   )
@@ -61,12 +61,12 @@ export const withConfig = () => {
 }
 
 const App: FC = () => {
-  const [isLoading, onClick] = useAsyncCallback(async () => {
+  const [loading, onClick] = useAsyncCallback(async () => {
     await wait(3000)
   }, [])
 
   return (
-    <Button isLoading={isLoading} onClick={onClick}>
+    <Button loading={loading} onClick={onClick}>
       Click me
     </Button>
   )

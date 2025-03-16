@@ -71,24 +71,24 @@ export const withBorderColor: Story = () => {
       />
       <Textarea
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <Textarea variant="outline" isDisabled placeholder="outline" />
-      <Textarea variant="filled" isDisabled placeholder="filled" />
-      <Textarea variant="flushed" isDisabled placeholder="flushed" />
-      <Textarea variant="unstyled" isDisabled placeholder="unstyled" />
+      <Textarea variant="outline" disabled placeholder="outline" />
+      <Textarea variant="filled" disabled placeholder="filled" />
+      <Textarea variant="flushed" disabled placeholder="flushed" />
+      <Textarea variant="unstyled" disabled placeholder="unstyled" />
 
       <FormControl
+        disabled
         helperMessage="We would like to get your feedback."
-        isDisabled
         label="Feedback"
       >
         <Textarea variant="outline" placeholder="your feedback" />
@@ -97,18 +97,18 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <Textarea variant="outline" isReadOnly placeholder="outline" />
-      <Textarea variant="filled" isReadOnly placeholder="filled" />
-      <Textarea variant="flushed" isReadOnly placeholder="flushed" />
-      <Textarea variant="unstyled" isReadOnly placeholder="unstyled" />
+      <Textarea variant="outline" placeholder="outline" readOnly />
+      <Textarea variant="filled" placeholder="filled" readOnly />
+      <Textarea variant="flushed" placeholder="flushed" readOnly />
+      <Textarea variant="unstyled" placeholder="unstyled" readOnly />
 
       <FormControl
         helperMessage="We would like to get your feedback."
-        isReadOnly
         label="Feedback"
+        readOnly
       >
         <Textarea variant="outline" placeholder="your feedback" />
       </FormControl>
@@ -116,17 +116,17 @@ export const isReadonly: Story = () => {
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <Textarea variant="outline" isInvalid placeholder="outline" />
-      <Textarea variant="filled" isInvalid placeholder="filled" />
-      <Textarea variant="flushed" isInvalid placeholder="flushed" />
-      <Textarea variant="unstyled" isInvalid placeholder="unstyled" />
+      <Textarea variant="outline" invalid placeholder="outline" />
+      <Textarea variant="filled" invalid placeholder="filled" />
+      <Textarea variant="flushed" invalid placeholder="flushed" />
+      <Textarea variant="unstyled" invalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="Feedback is required."
-        isInvalid
+        invalid
         label="Feedback"
       >
         <Textarea variant="outline" placeholder="your feedback" />
@@ -188,7 +188,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.textarea?.message}
-        isInvalid={!!errors.textarea}
+        invalid={!!errors.textarea}
         label="Feedback"
       >
         <Textarea
@@ -230,7 +230,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.textarea?.message}
-        isInvalid={!!errors.textarea}
+        invalid={!!errors.textarea}
         label="Feedback"
       >
         <Textarea

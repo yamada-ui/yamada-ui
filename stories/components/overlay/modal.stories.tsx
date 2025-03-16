@@ -27,13 +27,13 @@ const meta: Meta<typeof Modal> = {
 export default meta
 
 export const basic: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal open={isOpen} onClose={onClose}>
+      <Modal open={open} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -53,13 +53,13 @@ export const basic: Story = () => {
 }
 
 export const withDuration: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal duration={0.4} open={isOpen} onClose={onClose}>
+      <Modal duration={0.4} open={open} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -80,7 +80,7 @@ export const withDuration: Story = () => {
 
 export const withSize: Story = () => {
   const [size, setSize] = useState<ModalProps["size"]>("md")
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -131,7 +131,7 @@ export const withSize: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal size={size} open={isOpen} onClose={onClose}>
+      <Modal size={size} open={open} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -152,7 +152,7 @@ export const withSize: Story = () => {
 
 export const withPlacement: Story = () => {
   const [placement, setPlacement] = useState<ModalProps["placement"]>("center")
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -239,7 +239,7 @@ export const withPlacement: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal open={isOpen} placement={placement} onClose={onClose}>
+      <Modal open={open} placement={placement} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -260,7 +260,7 @@ export const withPlacement: Story = () => {
 
 export const withAnimation: Story = () => {
   const [animation, setAnimation] = useState<ModalProps["animation"]>("scale")
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -311,7 +311,7 @@ export const withAnimation: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal animation={animation} open={isOpen} onClose={onClose}>
+      <Modal animation={animation} open={open} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -338,7 +338,7 @@ export const nestedModal: Story = () => {
     <>
       <Button onClick={firstControls.onOpen}>Open Modal</Button>
 
-      <Modal open={firstControls.isOpen} onClose={firstControls.onClose}>
+      <Modal open={firstControls.open} onClose={firstControls.onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -357,7 +357,7 @@ export const nestedModal: Story = () => {
 
         <Modal
           size="sm"
-          open={secondControls.isOpen}
+          open={secondControls.open}
           onClose={secondControls.onClose}
         >
           <ModalHeader>あらすじ</ModalHeader>
@@ -379,13 +379,13 @@ export const nestedModal: Story = () => {
 }
 
 export const disabledCloseButton: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal open={isOpen}>
+      <Modal open={open}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -405,13 +405,13 @@ export const disabledCloseButton: Story = () => {
 }
 
 export const customCloseButton: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal open={isOpen} onClose={onClose}>
+      <Modal open={open} onClose={onClose}>
         <ModalCloseButton color="gray.400" />
 
         <ModalHeader>ドラゴンボール</ModalHeader>
@@ -433,13 +433,13 @@ export const customCloseButton: Story = () => {
 }
 
 export const disabledOverlay: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal open={isOpen} withOverlay={false} onClose={onClose}>
+      <Modal open={open} withOverlay={false} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -459,13 +459,13 @@ export const disabledOverlay: Story = () => {
 }
 
 export const customOverlay: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
 
-      <Modal open={isOpen} onClose={onClose}>
+      <Modal open={open} onClose={onClose}>
         <ModalOverlay backdropFilter="blur(10px)" bg="blackAlpha.300" />
 
         <ModalHeader>ドラゴンボール</ModalHeader>
@@ -489,7 +489,7 @@ export const customOverlay: Story = () => {
 export const scrollBehavior: Story = () => {
   const [scrollBehavior, setScrollBehavior] =
     useState<ModalProps["scrollBehavior"]>("inside")
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -513,7 +513,7 @@ export const scrollBehavior: Story = () => {
         </Button>
       </Wrap>
 
-      <Modal open={isOpen} scrollBehavior={scrollBehavior} onClose={onClose}>
+      <Modal open={open} scrollBehavior={scrollBehavior} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>
@@ -557,7 +557,7 @@ export const scrollBehavior: Story = () => {
 }
 
 export const scrollOnMount: Story = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
@@ -609,7 +609,7 @@ export const scrollOnMount: Story = () => {
         </Text>
       </Container>
 
-      <Modal blockScrollOnMount={false} open={isOpen} onClose={onClose}>
+      <Modal blockScrollOnMount={false} open={open} onClose={onClose}>
         <ModalHeader>ドラゴンボール</ModalHeader>
 
         <ModalBody>

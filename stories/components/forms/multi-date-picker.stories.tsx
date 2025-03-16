@@ -41,7 +41,7 @@ export const withChildren: Story = () => {
       <MultiDatePicker placeholder="YYYY/MM/DD">
         {({ value, onClose }) => (
           <VStack mt="sm">
-            <Button isDisabled={!value} onClick={onClose}>
+            <Button disabled={!value} onClick={onClose}>
               Submit {value.length} dates
             </Button>
           </VStack>
@@ -164,7 +164,7 @@ export const withBorderColor: Story = () => {
 
       <MultiDatePicker
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
@@ -242,47 +242,47 @@ export const withDuration: Story = () => {
   return <MultiDatePicker duration={0.4} placeholder="YYYY/MM/DD" />
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <MultiDatePicker variant="outline" isDisabled placeholder="outline" />
-      <MultiDatePicker variant="filled" isDisabled placeholder="filled" />
-      <MultiDatePicker variant="flushed" isDisabled placeholder="flushed" />
-      <MultiDatePicker variant="unstyled" isDisabled placeholder="unstyled" />
+      <MultiDatePicker variant="outline" disabled placeholder="outline" />
+      <MultiDatePicker variant="filled" disabled placeholder="filled" />
+      <MultiDatePicker variant="flushed" disabled placeholder="flushed" />
+      <MultiDatePicker variant="unstyled" disabled placeholder="unstyled" />
 
-      <FormControl isDisabled label="What date would you like to reserve?">
+      <FormControl disabled label="What date would you like to reserve?">
         <MultiDatePicker placeholder="YYYY/MM/DD" />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <MultiDatePicker variant="outline" isReadOnly placeholder="outline" />
-      <MultiDatePicker variant="filled" isReadOnly placeholder="filled" />
-      <MultiDatePicker variant="flushed" isReadOnly placeholder="flushed" />
-      <MultiDatePicker variant="unstyled" isReadOnly placeholder="unstyled" />
+      <MultiDatePicker variant="outline" placeholder="outline" readOnly />
+      <MultiDatePicker variant="filled" placeholder="filled" readOnly />
+      <MultiDatePicker variant="flushed" placeholder="flushed" readOnly />
+      <MultiDatePicker variant="unstyled" placeholder="unstyled" readOnly />
 
-      <FormControl isReadOnly label="What date would you like to reserve?">
+      <FormControl label="What date would you like to reserve?" readOnly>
         <MultiDatePicker placeholder="YYYY/MM/DD" />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <MultiDatePicker variant="outline" isInvalid placeholder="outline" />
-      <MultiDatePicker variant="filled" isInvalid placeholder="filled" />
-      <MultiDatePicker variant="flushed" isInvalid placeholder="flushed" />
-      <MultiDatePicker variant="unstyled" isInvalid placeholder="unstyled" />
+      <MultiDatePicker variant="outline" invalid placeholder="outline" />
+      <MultiDatePicker variant="filled" invalid placeholder="filled" />
+      <MultiDatePicker variant="flushed" invalid placeholder="flushed" />
+      <MultiDatePicker variant="unstyled" invalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."
-        isInvalid
+        invalid
         label="What date would you like to reserve?"
       >
         <MultiDatePicker placeholder="YYYY/MM/DD" />
@@ -474,8 +474,8 @@ export const disabledCloseOnBlur: Story = () => {
   return <MultiDatePicker closeOnBlur={false} placeholder="YYYY/MM/DD" />
 }
 
-export const disabledIsClearable: Story = () => {
-  return <MultiDatePicker isClearable={false} placeholder="YYYY/MM/DD" />
+export const disabledClearable: Story = () => {
+  return <MultiDatePicker clearable={false} placeholder="YYYY/MM/DD" />
 }
 
 export const disabledAllowInput: Story = () => {
@@ -570,7 +570,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.multiDatePicker?.message}
-        isInvalid={!!errors.multiDatePicker}
+        invalid={!!errors.multiDatePicker}
         label="Date to reserve"
       >
         <Controller
@@ -614,7 +614,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.multiDatePicker?.message}
-        isInvalid={!!errors.multiDatePicker}
+        invalid={!!errors.multiDatePicker}
         label="Date to reserve"
       >
         <Controller

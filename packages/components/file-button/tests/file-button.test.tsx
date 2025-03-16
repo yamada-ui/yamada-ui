@@ -49,7 +49,7 @@ describe("<FileButton />", () => {
     const onClickMock = vi.fn()
 
     const { user } = render(
-      <FileButton isReadOnly onClick={onClickMock}>
+      <FileButton readOnly onClick={onClickMock}>
         Upload
       </FileButton>,
     )
@@ -63,7 +63,7 @@ describe("<FileButton />", () => {
     const onClickMock = vi.fn()
 
     const { user } = render(
-      <FileButton isDisabled onClick={onClickMock}>
+      <FileButton disabled onClick={onClickMock}>
         Upload
       </FileButton>,
     )

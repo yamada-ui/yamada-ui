@@ -87,11 +87,18 @@ export const useStripeAnimation: Story = () => {
     <Progress
       aria-label="Storage space"
       hasStripe
+      // eslint-disable-next-line @typescript-eslint/no-deprecated
       isStripeAnimation
       value={20}
     />
   )
 }
 export const useAnimation: Story = () => {
-  return <Progress colorScheme="green" isAnimation />
+  return (
+    <Progress
+      colorScheme="green"
+      // eslint-disable-next-line @typescript-eslint/no-deprecated
+      isAnimation
+    />
+  )
 }

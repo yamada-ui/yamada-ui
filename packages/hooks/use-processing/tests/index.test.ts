@@ -4,7 +4,7 @@ import { useProcessing } from "../src"
 describe("useProcessing", () => {
   test("should initialize with the given initial state", () => {
     const { result } = renderHook(() => useProcessing(true))
-    expect(result.current.isLoading).toBeTruthy()
+    expect(result.current.loading).toBeTruthy()
   })
 
   test("should start processing", () => {
@@ -14,7 +14,7 @@ describe("useProcessing", () => {
       result.current.start()
     })
 
-    expect(result.current.isLoading).toBeTruthy()
+    expect(result.current.loading).toBeTruthy()
   })
 
   test("should finish processing", () => {
@@ -25,7 +25,7 @@ describe("useProcessing", () => {
       result.current.finish()
     })
 
-    expect(result.current.isLoading).toBeFalsy()
+    expect(result.current.loading).toBeFalsy()
   })
 
   test("should handle multiple starts and finishes correctly", () => {
@@ -37,12 +37,12 @@ describe("useProcessing", () => {
       result.current.finish()
     })
 
-    expect(result.current.isLoading).toBeTruthy()
+    expect(result.current.loading).toBeTruthy()
 
     act(() => {
       result.current.finish()
     })
 
-    expect(result.current.isLoading).toBeFalsy()
+    expect(result.current.loading).toBeFalsy()
   })
 })

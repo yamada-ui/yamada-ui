@@ -4,7 +4,10 @@ export const paginationStyle = defineComponentSlotStyle({
   base: {
     ellipsis: { pointerEvents: "none" },
     first: {},
-    inner: {},
+    inner: {
+      alignItems: "center",
+      display: "flex",
+    },
     item: {
       alignItems: "center",
       color: ["blackAlpha.600", "whiteAlpha.700"],

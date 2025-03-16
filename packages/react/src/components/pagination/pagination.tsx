@@ -87,7 +87,7 @@ export const {
  *
  * @see Docs https://yamada-ui.com/components/navigation/pagination
  */
-export const Pagination = withProvider(
+export const Pagination = withProvider<"nav", PaginationProps>(
   ({
     ref,
     className,
@@ -157,7 +157,7 @@ export const Pagination = withProvider(
       >
         <ui.ul
           className="ui-pagination__inner"
-          css={{ alignItems: "center", display: "flex", ...styles.inner }}
+          css={styles.inner}
           data-disabled={dataAttr(disabled)}
           {...rest}
         >
@@ -273,19 +273,14 @@ const iconMap: {
   prev: <ChevronLeftIcon />,
 }
 
-export const PaginationItem = withContext<"button", PaginationItemProps>(
+const PaginationItem = withContext<"button", PaginationItemProps>(
   ({
-    ref,
-    className: itemClassName,
-    css: cssProp,
-    active,
     page,
     children = iconMap[page] ?? page,
     disabled,
     disableRipple,
     ...rest
   }) => {
-    const styles = useStyleContext()
     const ellipsis = page === "ellipsis"
     const { onClick, ...rippleProps } = useRipple({
       ...rest,
@@ -295,32 +290,7 @@ export const PaginationItem = withContext<"button", PaginationItemProps>(
     const Component = ui[ellipsis ? "span" : "button"]
 
     return (
-      <Component
-        ref={ref}
-        {...rest}
-        {...(!ellipsis
-          ? {
-              type: "button",
-              "data-disabled": dataAttr(disabled),
-              "data-selected": dataAttr(active),
-              disabled,
-            }
-          : {})}
-        className={cx(
-          itemClassName,
-          !isNumber(page) ? `ui-pagination__item--${page}` : "",
-        )}
-        css={mergeCSS(
-          cssProp,
-          !isNumber(page)
-            ? {
-                ...styles[page],
-              }
-            : undefined,
-        )}
-        tabIndex={!ellipsis ? 0 : -1}
-        onClick={onClick}
-      >
+      <Component {...rest} disabled={disabled} onClick={onClick}>
         {children}
 
         <Ripple {...rippleProps} />
@@ -328,4 +298,33 @@ export const PaginationItem = withContext<"button", PaginationItemProps>(
     )
   },
   "item",
-)()
+)(
+  undefined,
+  ({
+    className: classNameProp,
+    css: cssProp,
+    active,
+    disabled,
+    page,
+    ...rest
+  }) => {
+    const props =
+      page !== "ellipsis"
+        ? {
+            type: "button",
+            "data-disabled": dataAttr(disabled),
+            "data-selected": dataAttr(active),
+            tabIndex: 0,
+          }
+        : {
+            tabIndex: -1,
+          }
+
+    const styles = useStyleContext()
+    const css = !isNumber(page) ? mergeCSS(cssProp, styles[page]) : cssProp
+    const className = !isNumber(page)
+      ? cx(classNameProp, `ui-pagination__item--${page}`)
+      : classNameProp
+    return { ...rest, ...props, className, css, active, disabled, page }
+  },
+)

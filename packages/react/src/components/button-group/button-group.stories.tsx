@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { Button } from "../button"
 import { CheckIcon, PencilIcon, PlusIcon, XIcon } from "../icon"
-import { Button } from "./button"
+import { IconButton } from "../icon-button"
 import { ButtonGroup } from "./button-group"
-import { IconButton } from "./icon-button"
 
 type Story = StoryFn<typeof ButtonGroup>
 

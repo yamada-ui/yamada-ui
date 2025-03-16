@@ -6,6 +6,25 @@ describe("<FormatNumber />", () => {
     await a11y(<FormatNumber value={1000} />)
   })
 
+  test("FormatNumber sets `displayName` and `__ui__` correctly", () => {
+    expect(FormatNumber.displayName).toBe("FormatNumber")
+    expect(FormatNumber.__ui__).toBe("FormatNumber")
+  })
+
+  test("FormatNumber sets `className` correctly", () => {
+    const { getByTestId } = render(
+      <FormatNumber data-testid="format" value={1000} />,
+    )
+    expect(getByTestId("format")).toHaveClass("ui-format-number")
+  })
+
+  test("FormatNumber renders HTML tag correctly", () => {
+    const { getByTestId } = render(
+      <FormatNumber data-testid="format" value={1000} />,
+    )
+    expect(getByTestId("format").tagName).toBe("SPAN")
+  })
+
   test("FormatNumber renders correctly with different values", () => {
     const { getByText } = render(<FormatNumber value={1234.56} />)
     expect(getByText("1,234.56")).toBeInTheDocument()

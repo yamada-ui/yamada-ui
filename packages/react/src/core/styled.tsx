@@ -140,7 +140,7 @@ export function styled<
   const componentStyleOptions = { className, style, transferProps }
 
   const StyledComponent = withEmotionCache<Dict>(
-    ({ as: Component = el, asChild, ...props }, cache, ref) => {
+    ({ as: Component = el, asChild, children, ...props }, cache, ref) => {
       let className = ""
 
       const registered = useRef<string[]>([])
@@ -189,7 +189,7 @@ export function styled<
       className = cx(className, `${cache.key}-${serialized.name}`)
       className = cx(className, styledOptions.target)
 
-      const mergedProps = { ...forwardProps, className }
+      const mergedProps = { ...forwardProps, className, children }
 
       return (
         <ColorSchemeContext value={styleProps.colorScheme}>

@@ -4,6 +4,21 @@ import { a11y, fireEvent, render, screen } from "../../../test"
 describe("<Pagination />", () => {
   test("should pass a11y", async () => await a11y(<Pagination total={10} />))
 
+  test("sets `displayName` and `__ui__` correctly", () => {
+    expect(Pagination.displayName).toBe("PaginationRoot")
+    expect(Pagination.__ui__).toBe("PaginationRoot")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Pagination total={10} />)
+    expect(screen.getByRole("navigation")).toHaveClass("ui-pagination__root")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Pagination total={10} />)
+    expect(screen.getByRole("navigation").tagName).toBe("NAV")
+  })
+
   test("should render edges control button correctly", () => {
     render(
       <Pagination

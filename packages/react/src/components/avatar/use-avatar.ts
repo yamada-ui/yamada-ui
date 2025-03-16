@@ -82,7 +82,7 @@ export const useAvatar = ({
   const initials = name ? format(name) : undefined
   const [loaded, setLoaded] = useState<boolean>(false)
   const fallback = !src || !loaded
-  const { t } = useI18n()
+  const { t } = useI18n("avatar")
 
   const getGroupProps: PropGetter = useCallback((props) => ({ ...props }), [])
 
@@ -116,7 +116,7 @@ export const useAvatar = ({
     (props) => ({
       ...props,
       "aria-label": !fallbackMessage
-        ? name || alt || t("avatar.avatarIcon")
+        ? name || alt || t("Avatar Icon")
         : undefined,
       children: fallbackMessage || initials || icon,
       hidden: !fallback,

@@ -90,6 +90,10 @@ export const attributes = {
    */
   _loading: "&:is([data-loading], [aria-busy=true])",
   /**
+   * The CSS `&[dir=ltr]` attribute selector.
+   */
+  _ltr: "[dir=ltr] &",
+  /**
    * The CSS `&[hidden]` attribute selector.
    */
   _nativeHidden: "&[hidden]",
@@ -129,6 +133,10 @@ export const attributes = {
    * The CSS `& .ui-ripple` attribute selector.
    */
   _ripple: "& .ui-ripple",
+  /**
+   * The CSS `&[dir=rtl]` attribute selector.
+   */
+  _rtl: "[dir=rtl] &",
   /**
    * The CSS `&:is([data-selected], [aria-selected=true])` attribute selector.
    */

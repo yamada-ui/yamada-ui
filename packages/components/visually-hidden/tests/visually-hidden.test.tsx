@@ -11,7 +11,7 @@ describe("<VisuallyHidden />", () => {
   test("VisuallyHidden is visually hidden", () => {
     render(<VisuallyHidden>Test</VisuallyHidden>)
     const style = window.getComputedStyle(screen.getByText("Test"))
-    expect(style.clip).toBe("rect(0px, 0px, 0px, 0px)")
+    expect(style.clipPath).toBe("rect(0px 0px 0px 0px)")
     expect(style.border).toBe("0px")
     expect(style.height).toBe("1px")
     expect(style.width).toBe("1px")

@@ -81,21 +81,6 @@ describe("<Card />", () => {
     expect(header).toHaveClass("custom-class")
   })
 
-  test.todo("<Card.Header /> applies styles correctly", async () => {
-    render(
-      <Card.Root>
-        <Card.Header>Card Header</Card.Header>
-      </Card.Root>,
-    )
-
-    const header = await screen.findByRole("banner")
-    expect(header).toHaveStyle({
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "flex-start",
-    })
-  })
-
   test("<Card.Header /> renders <ui.header /> component", async () => {
     render(
       <Card.Root>
@@ -130,21 +115,6 @@ describe("<Card />", () => {
     expect(body).toHaveClass("custom-class")
   })
 
-  test.todo("<Card.Body /> applies styles correctly", () => {
-    render(
-      <Card.Root>
-        <Card.Body>Card Body</Card.Body>
-      </Card.Root>,
-    )
-
-    const body = screen.getByText("Card Body")
-    expect(body).toHaveStyle({
-      alignItems: "flex-start",
-      display: "flex",
-      flexDirection: "column",
-    })
-  })
-
   test("<Card.Footer /> renders correctly", async () => {
     render(
       <Card.Root>
@@ -166,21 +136,6 @@ describe("<Card />", () => {
 
     const footer = await screen.findByRole("contentinfo")
     expect(footer).toHaveClass("custom-class")
-  })
-
-  test.todo("<Card.Footer /> applies styles correctly", async () => {
-    render(
-      <Card.Root>
-        <Card.Footer>Card Footer</Card.Footer>
-      </Card.Root>,
-    )
-
-    const footer = await screen.findByRole("contentinfo")
-    expect(footer).toHaveStyle({
-      alignItems: "center",
-      display: "flex",
-      justifyContent: "flex-start",
-    })
   })
 
   test("<Card.Footer /> renders <ui.footer /> component", async () => {

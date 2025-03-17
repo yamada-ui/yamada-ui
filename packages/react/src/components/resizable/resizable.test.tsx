@@ -1,6 +1,6 @@
 import { a11y, render } from "../../../test"
 import { GripVerticalIcon } from "../icon"
-import { Resizable, ResizableItem, ResizableTrigger } from "./"
+import { Resizable } from "./"
 
 export function assert(
   expectedCondition: any,
@@ -15,13 +15,13 @@ export function assert(
 describe("<Resizable />", () => {
   test.skip("Resizable renders correctly", async () => {
     const { container } = render(
-      <Resizable borderWidth="1px" h="md" rounded="md">
-        <ResizableItem>One</ResizableItem>
+      <Resizable.Root borderWidth="1px" h="md" rounded="md">
+        <Resizable.Item>One</Resizable.Item>
 
-        <ResizableTrigger />
+        <Resizable.Trigger />
 
-        <ResizableItem>Two</ResizableItem>
-      </Resizable>,
+        <Resizable.Item>Two</Resizable.Item>
+      </Resizable.Root>,
     )
 
     await a11y(container)
@@ -29,17 +29,17 @@ describe("<Resizable />", () => {
 
   test("The default size of the left panel should be 30 and 70", () => {
     const { container } = render(
-      <Resizable borderWidth="1px" h="md" rounded="md">
-        <ResizableItem id="left-item" defaultSize={30}>
+      <Resizable.Root borderWidth="1px" h="md" rounded="md">
+        <Resizable.Item id="left-item" defaultSize={30}>
           One
-        </ResizableItem>
+        </Resizable.Item>
 
-        <ResizableTrigger />
+        <Resizable.Trigger />
 
-        <ResizableItem id="right-item" defaultSize={70}>
+        <Resizable.Item id="right-item" defaultSize={70}>
           Two
-        </ResizableItem>
-      </Resizable>,
+        </Resizable.Item>
+      </Resizable.Root>,
     )
 
     const leftItem = container.querySelector("#left-item")
@@ -59,16 +59,16 @@ describe("<Resizable />", () => {
 describe("<ResizableTriggerIcon />", () => {
   test("icon renders correctly", () => {
     const { getByTestId } = render(
-      <Resizable>
-        <ResizableItem defaultSize={50}>One</ResizableItem>
+      <Resizable.Root>
+        <Resizable.Item defaultSize={50}>One</Resizable.Item>
 
-        <ResizableTrigger
+        <Resizable.Trigger
           data-testid="resizable"
           icon={<GripVerticalIcon data-testid="resizable-icon" />}
         />
 
-        <ResizableItem defaultSize={50}>Two</ResizableItem>
-      </Resizable>,
+        <Resizable.Item defaultSize={50}>Two</Resizable.Item>
+      </Resizable.Root>,
     )
 
     expect(getByTestId("resizable")).toBeInTheDocument()

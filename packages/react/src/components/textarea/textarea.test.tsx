@@ -6,7 +6,7 @@ describe("<Textarea />", () => {
     await a11y(<Textarea aria-label="Enter notes" defaultValue="hello" />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Textarea.displayName).toBe("Textarea")
     expect(Textarea.__styled__).toBe("Textarea")
   })

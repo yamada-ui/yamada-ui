@@ -6,7 +6,7 @@ describe("<Text />", () => {
     await a11y(<Text>Text</Text>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Text.displayName).toBe("Text")
     expect(Text.__styled__).toBe("Text")
   })

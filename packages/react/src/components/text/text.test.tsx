@@ -8,7 +8,7 @@ describe("<Text />", () => {
 
   test("sets `displayName` and `__ui__` correctly", () => {
     expect(Text.displayName).toBe("Text")
-    expect(Text.__ui__).toBe("Text")
+    expect(Text.__styled__).toBe("Text")
   })
 
   test("sets `className` correctly", () => {

@@ -8,7 +8,7 @@ describe("<Textarea />", () => {
 
   test("sets `displayName` and `__ui__` correctly", () => {
     expect(Textarea.displayName).toBe("Textarea")
-    expect(Textarea.__ui__).toBe("Textarea")
+    expect(Textarea.__styled__).toBe("Textarea")
   })
 
   test("sets `className` correctly", () => {

@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react"
 import type { TextDirection } from "../../core"
-import type { Dict, Path } from "../../utils"
+import type { Dict, Path, Value } from "../../utils"
 import {
   createContext,
   useCallback,
@@ -47,24 +47,27 @@ export function getLanguage(locale?: string, dir?: TextDirection): Language {
   return { dir, locale }
 }
 
-type Pattern<T extends string> = T extends `${string}{${infer P}}${infer R}`
-  ? P | Pattern<R>
+type Pattern<Y> = Y extends `${string}{${infer M}}${infer D}`
+  ? M | Pattern<D>
   : never
 
-type Value = number | string
+type PatternValue = number | string
 
-type ReplaceValue<T extends string> =
-  Pattern<T> extends never ? never : Value | { [K in Pattern<T>]: Value }
+type ReplaceValue<Y> =
+  Pattern<Y> extends never
+    ? never
+    : PatternValue | { [M in Pattern<Y>]: PatternValue }
 
 type IntlData = (typeof DEFAULT_INTL)["en-US"]
 type IntlKey = keyof IntlData
 type IntlPath = Path<IntlData>
 
-interface I18nContext<Y extends string = IntlPath> extends Language {
+interface I18nContext<Y extends object = IntlData, M extends string = IntlPath>
+  extends Language {
   changeLanguage: (locale?: string, dir?: TextDirection) => void
-  t: <M extends Y>(
-    path: M,
-    replaceValue?: ReplaceValue<M>,
+  t: <D extends M>(
+    path: D,
+    replaceValue?: ReplaceValue<Value<Y, D>>,
     pattern?: string,
   ) => string
 }
@@ -121,7 +124,7 @@ export const I18nProvider: FC<I18nProviderProps> = ({
   const translate = useCallback(
     <Y extends IntlPath>(
       path: Y,
-      replaceValue?: ReplaceValue<Y>,
+      replaceValue?: ReplaceValue<Value<IntlData, Y>>,
       pattern = "label",
     ) => {
       let value = get<string>(messages, path, "")
@@ -175,7 +178,7 @@ export function useI18n(): I18nContext
 
 export function useI18n<Y extends IntlKey>(
   key: Y,
-): I18nContext<Path<IntlData[Y]>>
+): I18nContext<IntlData[Y], Path<IntlData[Y]>>
 
 export function useI18n<Y extends IntlKey>(key?: Y) {
   const context = useContext(I18nContext)

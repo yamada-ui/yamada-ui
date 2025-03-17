@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { COLOR_SCHEMES } from "@yamada-ui/utils"
 import { useState } from "react"
 import { Pagination } from "."
 import { PropsTable } from "../../../storybook/components"
+import { COLOR_SCHEMES } from "../../utils"
 import { GhostIcon } from "../icon"
 
 type Story = StoryFn<typeof Pagination>

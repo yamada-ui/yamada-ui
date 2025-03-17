@@ -6,9 +6,9 @@ describe("<SimpleGrid />", () => {
     await a11y(<SimpleGrid>GridSimple</SimpleGrid>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(SimpleGrid.displayName).toBe("SimpleGrid")
-    expect(SimpleGrid.__ui__).toBe("SimpleGrid")
+    expect(SimpleGrid.__styled__).toBe("SimpleGrid")
   })
 
   test("sets `className` correctly", () => {

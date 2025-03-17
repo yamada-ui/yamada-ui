@@ -10,9 +10,9 @@ describe("<AspectRatio />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(AspectRatio.displayName).toBe("AspectRatio")
-    expect(AspectRatio.__ui__).toBe("AspectRatio")
+    expect(AspectRatio.__styled__).toBe("AspectRatio")
   })
 
   test("sets `className` correctly", () => {

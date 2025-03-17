@@ -1,7 +1,7 @@
 import type { EmotionCache, SerializedStyles } from "@emotion/utils"
 import type { FC } from "react"
 import type { Dict } from "../utils"
-import type { As, ShouldForwardProp, UIComponent } from "./components"
+import type { As, ShouldForwardProp, StyledComponent } from "./components"
 import type { CSSModifierObject, CSSPropObject } from "./css"
 import type { ColorScheme, ComponentStyle, StyledTheme } from "./theme"
 import { ThemeContext, withEmotionCache } from "@emotion/react"
@@ -104,7 +104,7 @@ export interface StyledOptions<
   transferProps?: H[]
 }
 
-export function styled<
+export function createStyled<
   Y extends As,
   M extends object = {},
   D extends CSSPropObject = CSSPropObject,
@@ -122,7 +122,7 @@ export function styled<
     transferProps,
     ...styledOptions
   }: StyledOptions<D, H, R, keyof M> = {},
-): UIComponent<Y, M> {
+): StyledComponent<Y, M> {
   const className = styledOptions.className ?? getClassName(styledOptions.name)
   const displayName =
     styledOptions.displayName ?? getDisplayName(styledOptions.name, "")
@@ -203,11 +203,11 @@ export function styled<
         </ColorSchemeContext>
       )
     },
-  ) as UIComponent<Y, M>
+  ) as StyledComponent<Y, M>
 
   StyledComponent.displayName = displayName || "StyledComponent"
 
-  if (styledOptions.name) StyledComponent.__ui__ = displayName
+  if (styledOptions.name) StyledComponent.__styled__ = displayName
 
   return StyledComponent
 }

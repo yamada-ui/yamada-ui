@@ -1,4 +1,4 @@
-import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { GridStyle } from "./grid.style"
 import { createComponent } from "../../core"
 import { gridStyle } from "./grid.style"
@@ -43,7 +43,7 @@ interface GridOptions {
 }
 
 export interface GridProps
-  extends HTMLUIProps,
+  extends HTMLStyledProps,
     ThemeProps<GridStyle>,
     GridOptions {}
 

@@ -1,10 +1,10 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { SeparatorStyle } from "./separator.style"
 import { createComponent } from "../../core"
 import { separatorStyle } from "./separator.style"
 
 export interface SeparatorProps
-  extends HTMLUIProps<"hr">,
+  extends HTMLStyledProps<"hr">,
     ThemeProps<SeparatorStyle> {}
 
 export const {

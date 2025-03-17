@@ -1,11 +1,11 @@
 import type { PropsWithChildren } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { UseInputBorderProps } from "../input"
 import type { EditableStyle } from "./editable.style"
 import type { UseEditableProps, UseEditableReturn } from "./use-editable"
-import { createSlotComponent, ui } from "../../core"
-import { runIfFunc } from "../../utils"
+import { createSlotComponent, styled } from "../../core"
+import { runIfFn } from "../../utils"
 import { useInputBorder } from "../input"
 import { Slot } from "../slot"
 import { editableStyle } from "./editable.style"
@@ -25,7 +25,7 @@ interface EditableElementProps
 
 export interface EditableRootProps
   extends Omit<
-      HTMLUIProps,
+      HTMLStyledProps,
       "children" | "defaultValue" | "onChange" | "onSubmit" | "value"
     >,
     ThemeProps<EditableStyle>,
@@ -73,7 +73,7 @@ export const EditableRoot = withProvider(
       errorBorderColor,
       focusBorderColor,
     })
-    const cloneChildren = runIfFunc(children, {
+    const cloneChildren = runIfFn(children, {
       editing,
       onCancel,
       onEdit,
@@ -82,15 +82,15 @@ export const EditableRoot = withProvider(
 
     return (
       <EditableContext value={{ editing, ...rest }}>
-        <ui.div {...getRootProps()} vars={vars}>
+        <styled.div {...getRootProps()} vars={vars}>
           {cloneChildren}
-        </ui.div>
+        </styled.div>
       </EditableContext>
     )
   },
 )()
 
-export interface EditablePreviewProps extends HTMLUIProps<"span"> {}
+export interface EditablePreviewProps extends HTMLStyledProps<"span"> {}
 
 export const EditablePreview = withContext<"span", EditablePreviewProps>(
   "span",
@@ -101,7 +101,7 @@ export const EditablePreview = withContext<"span", EditablePreviewProps>(
   return { ...getPreviewProps(props) }
 })
 
-export interface EditableInputProps extends HTMLUIProps<"input"> {}
+export interface EditableInputProps extends HTMLStyledProps<"input"> {}
 
 export const EditableInput = withContext<"input", EditableInputProps>(
   "input",
@@ -112,7 +112,7 @@ export const EditableInput = withContext<"input", EditableInputProps>(
   return { ...getInputProps(props) }
 })
 
-export interface EditableTextareaProps extends HTMLUIProps<"textarea"> {}
+export interface EditableTextareaProps extends HTMLStyledProps<"textarea"> {}
 
 export const EditableTextarea = withContext<"textarea", EditableTextareaProps>(
   "textarea",
@@ -123,7 +123,7 @@ export const EditableTextarea = withContext<"textarea", EditableTextareaProps>(
   return { ...getTextareaProps(props) }
 })
 
-export interface EditableControlProps extends HTMLUIProps {}
+export interface EditableControlProps extends HTMLStyledProps {}
 
 export const EditableControl = withContext<"div", EditableControlProps>(
   "div",

@@ -1,7 +1,7 @@
 import type { Variants } from "motion/react"
 import type { StyleValue, ThemeProps } from "../../core"
 import type {
-  MotionProps,
+  HTMLMotionProps,
   MotionTransitionVariants,
   WithTransitionProps,
 } from "../motion"
@@ -58,7 +58,7 @@ export const slideFadeVariants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface SlideFadeProps
-  extends WithTransitionProps<MotionProps>,
+  extends WithTransitionProps<HTMLMotionProps>,
     ThemeProps<SlideFadeStyle> {
   /**
    * The offset on the horizontal or `x` axis.

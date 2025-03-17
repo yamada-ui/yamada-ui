@@ -10,9 +10,9 @@ describe("<Flex />", () => {
     await a11y(<Flex>Flex</Flex>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Flex.displayName).toBe("Flex")
-    expect(Flex.__ui__).toBe("Flex")
+    expect(Flex.__styled__).toBe("Flex")
   })
 
   test("sets `className` correctly", () => {

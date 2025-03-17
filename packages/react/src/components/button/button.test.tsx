@@ -6,9 +6,9 @@ describe("<Button />", () => {
     await a11y(<Button>test</Button>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Button.displayName).toBe("Button")
-    expect(Button.__ui__).toBe("Button")
+    expect(Button.__styled__).toBe("Button")
   })
 
   test("sets `className` correctly", () => {

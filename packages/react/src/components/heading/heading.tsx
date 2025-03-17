@@ -1,10 +1,10 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { HeadingStyle } from "./heading.style"
 import { createComponent } from "../../core"
 import { headingStyle } from "./heading.style"
 
 export interface HeadingProps
-  extends HTMLUIProps<"h1">,
+  extends HTMLStyledProps<"h1">,
     ThemeProps<HeadingStyle> {}
 
 export const {

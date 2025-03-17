@@ -7,9 +7,9 @@ describe("<Slide />", () => {
     await a11y(<Slide />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Slide.displayName).toBe("Slide")
-    expect(Slide.__ui__).toBe("Slide")
+    expect(Slide.__styled__).toBe("Slide")
   })
 
   test("sets `className` correctly", () => {

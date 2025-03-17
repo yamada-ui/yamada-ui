@@ -1,11 +1,11 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FormatByteStyle } from "./format-byte.style"
-import { createComponent, ui } from "../../core"
+import { createComponent, styled } from "../../core"
 import { formatByteStyle } from "./format-byte.style"
 import { useFormatByte } from "./use-format-byte"
 
 export interface FormatByteProps
-  extends HTMLUIProps,
+  extends HTMLStyledProps,
     ThemeProps<FormatByteStyle> {
   /**
    * The byte size to format
@@ -45,6 +45,6 @@ export const FormatByte = withContext(
   ({ locale, unit, unitDisplay, value, ...rest }) => {
     const text = useFormatByte(value, { locale, unit, unitDisplay })
 
-    return <ui.span {...rest}>{text}</ui.span>
+    return <styled.span {...rest}>{text}</styled.span>
   },
 )()

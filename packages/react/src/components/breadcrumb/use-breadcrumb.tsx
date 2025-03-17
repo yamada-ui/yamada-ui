@@ -3,7 +3,7 @@ import type { HTMLProps, PropGetter, StyleValue } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import { cloneElement, useCallback, useMemo } from "react"
 import { useValue } from "../../hooks/use-value"
-import { getValidChildren, runIfFunc } from "../../utils"
+import { getValidChildren, runIfFn } from "../../utils"
 
 interface BreadcrumbItem extends HTMLProps<"a"> {
   currentPage?: boolean
@@ -66,7 +66,7 @@ export const useBreadcrumb = ({
     (items: BreadcrumbItem[]) => {
       if (!ellipsis) return null
 
-      return runIfFunc(ellipsis, { items })
+      return runIfFn(ellipsis, { items })
     },
     [ellipsis],
   )

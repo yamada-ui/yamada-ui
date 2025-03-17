@@ -103,8 +103,8 @@ describe("<AvatarGroup />", () => {
     expect(moreLabel).not.toBeInTheDocument()
   })
 
-  test("should have the correct displayName and __ui__", () => {
+  test("should have the correct displayName and __styled__", () => {
     expect(AvatarGroup.displayName).toBe("AvatarGroup")
-    expect(AvatarGroup.__ui__).toBe("AvatarGroup")
+    expect(AvatarGroup.__styled__).toBe("AvatarGroup")
   })
 })

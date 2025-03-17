@@ -1,8 +1,8 @@
 import type { MouseEventHandler, ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { TagStyle } from "./tag.style"
 import { useMemo, useRef } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
 import { dataAttr } from "../../utils"
 import { XIcon } from "../icon"
@@ -10,7 +10,9 @@ import { tagStyle } from "./tag.style"
 
 export interface TagContext extends Pick<TagProps, "disabled"> {}
 
-export interface TagProps extends HTMLUIProps<"span">, ThemeProps<TagStyle> {
+export interface TagProps
+  extends HTMLStyledProps<"span">,
+    ThemeProps<TagStyle> {
   /**
    * If `true`, the tag is disabled.
    *
@@ -36,7 +38,7 @@ export interface TagProps extends HTMLUIProps<"span">, ThemeProps<TagStyle> {
   /**
    * Props for icon element.
    */
-  iconProps?: HTMLUIProps<"span">
+  iconProps?: HTMLStyledProps<"span">
   /**
    * Function to be executed when the close button is clicked.
    */
@@ -73,7 +75,7 @@ export const Tag = withProvider(
 
     return (
       <TagContext value={context}>
-        <ui.span data-disabled={dataAttr(disabled)} {...rest}>
+        <styled.span data-disabled={dataAttr(disabled)} {...rest}>
           {startIcon ? (
             <TagStartIcon {...iconProps}>{startIcon}</TagStartIcon>
           ) : null}
@@ -87,7 +89,7 @@ export const Tag = withProvider(
           {onClose ? (
             <TagCloseButton onClick={onClose} {...closeButtonProps} />
           ) : null}
-        </ui.span>
+        </styled.span>
       </TagContext>
     )
   },
@@ -95,7 +97,7 @@ export const Tag = withProvider(
   { transferProps: ["disabled"] },
 )()
 
-interface TagContentProps extends HTMLUIProps<"span"> {}
+interface TagContentProps extends HTMLStyledProps<"span"> {}
 
 const TagContent = withContext<"span", TagContentProps>("span", "content")(
   undefined,
@@ -106,7 +108,7 @@ const TagContent = withContext<"span", TagContentProps>("span", "content")(
   },
 )
 
-interface TagStartIconProps extends HTMLUIProps<"span"> {}
+interface TagStartIconProps extends HTMLStyledProps<"span"> {}
 
 const TagStartIcon = withContext<"span", TagStartIconProps>("span", [
   "icon",
@@ -117,7 +119,7 @@ const TagStartIcon = withContext<"span", TagStartIconProps>("span", [
   return { "data-disabled": dataAttr(disabled), ...props }
 })
 
-interface TagEndIconProps extends HTMLUIProps<"span"> {}
+interface TagEndIconProps extends HTMLStyledProps<"span"> {}
 
 const TagEndIcon = withContext<"span", TagEndIconProps>("span", [
   "icon",
@@ -128,7 +130,7 @@ const TagEndIcon = withContext<"span", TagEndIconProps>("span", [
   return { "data-disabled": dataAttr(disabled), ...props }
 })
 
-interface TagCloseButtonProps extends HTMLUIProps<"span"> {}
+interface TagCloseButtonProps extends HTMLStyledProps<"span"> {}
 
 const TagCloseButton = withContext<"span", TagCloseButtonProps>("span", [
   "icon",

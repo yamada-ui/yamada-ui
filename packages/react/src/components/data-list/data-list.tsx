@@ -1,8 +1,8 @@
 import type { ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { DataListStyle } from "./data-list.style"
 import { useMemo, useState } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import {
   getValidChildren,
   isArray,
@@ -32,7 +32,7 @@ const getComputeCol = (items: DataListItemProps[]) => {
 }
 
 export interface DataListRootProps
-  extends HTMLUIProps<"dl">,
+  extends HTMLStyledProps<"dl">,
     ThemeProps<DataListStyle> {
   /**
    * The number of columns.
@@ -113,16 +113,16 @@ export const DataListRoot = withProvider(
 
     return (
       <DataListContext value={context}>
-        <ui.dl style={{ "--col": col, ...style }} {...rest}>
+        <styled.dl style={{ "--col": col, ...style }} {...rest}>
           {children ?? computedChildren}
-        </ui.dl>
+        </styled.dl>
       </DataListContext>
     )
   },
   "root",
 )()
 
-export interface DataListItemProps extends HTMLUIProps {
+export interface DataListItemProps extends HTMLStyledProps {
   /**
    * The data list description to use.
    */
@@ -160,7 +160,7 @@ export const DataListItem = withContext<"div", DataListItemProps>(
       : children
 
     return (
-      <ui.div {...rest}>
+      <styled.div {...rest}>
         {!isEmpty(customTerms) ? (
           customTerms
         ) : isArray(term) ? (
@@ -197,17 +197,17 @@ export const DataListItem = withContext<"div", DataListItemProps>(
         )}
 
         {computedChildren}
-      </ui.div>
+      </styled.div>
     )
   },
   "item",
 )()
 
-export interface DataListTermProps extends HTMLUIProps<"dt"> {}
+export interface DataListTermProps extends HTMLStyledProps<"dt"> {}
 
 export const DataListTerm = withContext<"dt", DataListTermProps>("dt", "term")()
 
-export interface DataListDescriptionProps extends HTMLUIProps<"dd"> {}
+export interface DataListDescriptionProps extends HTMLStyledProps<"dd"> {}
 
 export const DataListDescription = withContext<"dd", DataListDescriptionProps>(
   "dd",

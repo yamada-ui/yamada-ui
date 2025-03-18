@@ -157,6 +157,7 @@
     "rimraf": "^6.0.1",
     "storybook": "^8.4.7",
     "storybook-dark-mode": "^4.0.2",
+    "storybook-i18n": "^3.1.1",
     "tslib": "^2.8.1",
     "tsup": "^8.3.5",
     "tsx": "^4.19.2",

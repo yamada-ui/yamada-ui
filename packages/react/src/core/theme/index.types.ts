@@ -243,12 +243,6 @@ export interface ThemeConfig {
    */
   breakpoint?: BreakpointConfig
   /**
-   * The text direction to apply to the application.
-   *
-   * @default 'ltr'
-   */
-  direction?: TextDirection
-  /**
    * If `true`, temporarily disable transitions.
    * This is used to avoid unnecessary movements caused by transitions during color mode switching, for example.
    *
@@ -286,12 +280,6 @@ export interface ThemeConfig {
      */
     screen?: LoadingConfig
   }
-  /**
-   * The locale to apply to the application.
-   *
-   * @default 'en-US'
-   */
-  locale?: string
   /**
    * The config of the notice.
    */

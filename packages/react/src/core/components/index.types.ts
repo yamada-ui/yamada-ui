@@ -8,10 +8,10 @@ import type { StyledTheme, UsageTheme } from "../theme"
 export type DOMElement = keyof React.JSX.IntrinsicElements
 
 export interface StyledProps extends CSSProps {
-  // /**
-  //  * The HTML element to render.
-  //  */
-  // as?: As
+  /**
+   * The HTML element to render.
+   */
+  as?: As
   /**
    * Merges its props onto its immediate child.
    */
@@ -26,8 +26,11 @@ export interface InterpolationProps extends StyleProps, PseudoProps {
   theme: StyledTheme<UsageTheme>
 }
 
-export type OmitProps<Y extends object = {}, M extends object = {}> = M &
-  Omit<Y, "as" | keyof M>
+export type OmitProps<Y extends object = {}, M extends object = {}> = Omit<
+  Y,
+  "as" | keyof M
+> &
+  WithoutAs<M>
 
 type ComponentConditionalProps<
   Y extends As,
@@ -70,12 +73,11 @@ export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
   ref?: React.Ref<React.ComponentRef<Y>>
 }
 
-export interface HTMLDataAttributes {
-  [key: `data-${string}`]: boolean | string
-}
-
-export type HTMLProps<Y extends DOMElement = "div"> = HTMLDataAttributes &
-  Omit<React.JSX.IntrinsicElements[Y], "size" | keyof StyledProps>
+export type HTMLProps<Y extends DOMElement = "div"> = Omit<
+  React.JSX.IntrinsicElements[Y],
+  "size" | keyof StyledProps
+> &
+  React.DataAttributes
 
 export type HTMLStyledProps<Y extends DOMElement = "div"> = Merge<
   HTMLProps<Y>,

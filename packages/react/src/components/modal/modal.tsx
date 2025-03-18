@@ -3,7 +3,11 @@ import type { FC, HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ButtonProps } from "../button"
 import type { CloseButtonProps } from "../close-button"
 import type { FocusLockProps } from "../focus-lock"
-import type { HTMLMotionProps, MotionTransitionProps } from "../motion"
+import type {
+  HTMLMotionProps,
+  HTMLMotionPropsWithoutAs,
+  MotionTransitionProps,
+} from "../motion"
 import type { PortalProps } from "../portal"
 import type { ModalStyle } from "./modal.style"
 import type { UseModalProps, UseModalReturn } from "./use-modal"
@@ -259,7 +263,7 @@ export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
             variants: fadeVariants,
           }
         : {})}
-      {...(getOverlayProps(props as HTMLProps) as HTMLMotionProps)}
+      {...(getOverlayProps(props as HTMLProps) as HTMLMotionPropsWithoutAs)}
     />
   )
 }, "overlay")()
@@ -326,7 +330,7 @@ export const ModalContent = withContext<"section", ModalContentProps>(
         {...getAnimationProps(animationScheme, duration)}
         {...(getContentProps(
           rest as HTMLProps<"section">,
-        ) as HTMLMotionProps<"section">)}
+        ) as HTMLMotionPropsWithoutAs<"section">)}
       >
         {customCloseButton ?? (withCloseButton ? <ModalCloseButton /> : null)}
 

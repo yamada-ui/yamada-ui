@@ -1,1 +1,0 @@
-import{u as a}from"./index-qZwaV1-B.js";import{r as s}from"./index-BwPxMuoB.js";import{a2 as f}from"./factory-DbNU74ts.js";const b=u=>{const[r,{off:t,on:n}]=a(u),o=s.useRef(0),e=s.useCallback(()=>{o.current+=1,n()},[n]),c=s.useCallback(()=>{o.current-=1,o.current<=0&&t()},[t]);return f(()=>{o.current=0}),s.useMemo(()=>({finish:c,isLoading:r,start:e}),[c,r,e])};export{b as u};

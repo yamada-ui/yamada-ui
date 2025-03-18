@@ -1,1 +1,0 @@
-const s=()=>{const{userAgent:n}=window.navigator,i=/(Macintosh)|(MacIntel)|(MacPPC)|(Mac68K)/i,t=/(Win32)|(Win64)|(Windows)|(WinCE)/i,e=/(iPhone)|(iPad)|(iPod)/i,o=/Android/i,r=/Linux/i;return i.test(n)?"macos":e.test(n)?"ios":t.test(n)?"windows":o.test(n)?"android":r.test(n)?"linux":"undetermined"},d=()=>typeof window<"u"?s():"undetermined";export{d as u};

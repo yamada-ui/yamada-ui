@@ -39,7 +39,7 @@ export const {
  * @see Docs https://yamada-ui.com/components/forms/file-button
  */
 export const FileButton = withContext<"div", FileButtonProps>(
-  ({ children, errorBorderColor, vars: varsProp, ...rest }) => {
+  ({ as, children, errorBorderColor, vars: varsProp, ...rest }) => {
     const { getButtonProps, getCustomButtonProps, getInputProps } =
       useFileButton(rest)
     const vars = mergeVars(varsProp, {
@@ -54,14 +54,11 @@ export const FileButton = withContext<"div", FileButtonProps>(
         {isFunction(children) ? (
           children(getCustomButtonProps())
         ) : (
-          <ui.button vars={vars} {...getButtonProps()}>
+          <ui.button as={as || Button} vars={vars} {...getButtonProps()}>
             {children}
           </ui.button>
         )}
       </ui.div>
     )
   },
-)(undefined, ({ as, ...rest }) => ({
-  as: as || Button,
-  ...rest,
-}))
+)()

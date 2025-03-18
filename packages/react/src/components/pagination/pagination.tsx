@@ -17,6 +17,8 @@ import { Ripple, useRipple } from "../ripple"
 import { paginationStyle } from "./pagination.style"
 import { usePagination } from "./use-pagination"
 
+interface PaginationContext extends Omit<PaginationProps, "containerProps"> {}
+
 export interface PaginationProps
   extends Omit<HTMLUIProps<"ul">, "children" | "onChange" | "page">,
     ThemeProps<PaginationStyle>,
@@ -72,12 +74,14 @@ export interface PaginationProps
 }
 
 export const {
+  ComponentContext: PaginationContext,
   PropsContext: PaginationPropsContext,
+  useComponentContext: usePaginationContext,
   usePropsContext: usePaginationPropsContext,
   useStyleContext,
   withContext,
   withProvider,
-} = createSlotComponent<PaginationProps, PaginationStyle>(
+} = createSlotComponent<PaginationProps, PaginationStyle, PaginationContext>(
   "pagination",
   paginationStyle,
 )
@@ -88,10 +92,28 @@ export const {
  * @see Docs https://yamada-ui.com/components/navigation/pagination
  */
 export const Pagination = withProvider<"nav", PaginationProps>(
-  ({
-    ref,
-    className,
-    css,
+  ({ as, className, css, disabled, containerProps, ...rest }) => {
+    return (
+      <PaginationContext value={{ disabled, ...rest }}>
+        <ui.nav
+          as={as}
+          className={className}
+          css={css}
+          data-disabled={dataAttr(disabled)}
+          {...containerProps}
+        >
+          <PaginationInner />
+        </ui.nav>
+      </PaginationContext>
+    )
+  },
+  "root",
+)()
+
+interface PaginationInnerProps extends HTMLUIProps<"ul"> {}
+
+const PaginationInner = withContext<"ul", PaginationInnerProps>((props) => {
+  const {
     boundaries,
     component: Component = PaginationItem,
     defaultPage,
@@ -101,7 +123,6 @@ export const Pagination = withProvider<"nav", PaginationProps>(
     total,
     withControls: _withControls = true,
     withEdges: _withEdges = false,
-    containerProps,
     controlNextProps,
     controlPrevProps,
     controlProps,
@@ -111,131 +132,113 @@ export const Pagination = withProvider<"nav", PaginationProps>(
     itemProps,
     onChange: onChangeProp,
     ...rest
-  }) => {
-    const styles = useStyleContext()
-    const withControls = useValue(_withControls)
-    const withEdges = useValue(_withEdges)
-    const { currentPage, range, onChange, onFirst, onLast, onNext, onPrev } =
-      usePagination({
-        boundaries,
-        defaultPage,
-        disabled,
-        page,
-        siblings,
-        total,
-        onChange: onChangeProp,
-      })
+  } = usePaginationContext()
+  const withControls = useValue(_withControls)
+  const withEdges = useValue(_withEdges)
+  const { currentPage, range, onChange, onFirst, onLast, onNext, onPrev } =
+    usePagination({
+      boundaries,
+      defaultPage,
+      disabled,
+      page,
+      siblings,
+      total,
+      onChange: onChangeProp,
+    })
 
-    const children = useMemo(
-      () =>
-        range.map((page, key) => (
-          <ui.li key={key}>
-            <Component
-              aria-label={
-                page !== "ellipsis" ? `Go to page ${page}` : undefined
-              }
-              active={currentPage === page}
-              disabled={disabled}
-              {...itemProps}
-              page={page}
-              onClick={handlerAll(
-                itemProps?.onClick,
-                page !== "ellipsis" ? () => onChange(page) : undefined,
-              )}
-            />
-          </ui.li>
-        )),
-      [Component, currentPage, disabled, onChange, range, itemProps],
-    )
-    return (
-      <ui.nav
-        ref={ref}
-        className={className}
-        css={css}
-        data-disabled={dataAttr(disabled)}
-        {...containerProps}
-      >
-        <ui.ul
-          className="ui-pagination__inner"
-          css={styles.inner}
-          data-disabled={dataAttr(disabled)}
-          {...rest}
-        >
-          {withEdges ? (
-            <ui.li>
-              <Component
-                aria-label="Go to first page"
-                disabled={disabled || currentPage === 1}
-                page="first"
-                {...edgeProps}
-                {...edgeFirstProps}
-                onClick={handlerAll(
-                  edgeProps?.onClick,
-                  edgeFirstProps?.onClick,
-                  onFirst,
-                )}
-              />
-            </ui.li>
-          ) : null}
+  const children = useMemo(
+    () =>
+      range.map((page, key) => (
+        <ui.li key={key}>
+          <Component
+            aria-label={page !== "ellipsis" ? `Go to page ${page}` : undefined}
+            active={currentPage === page}
+            disabled={disabled}
+            {...itemProps}
+            page={page}
+            onClick={handlerAll(
+              itemProps?.onClick,
+              page !== "ellipsis" ? () => onChange(page) : undefined,
+            )}
+          />
+        </ui.li>
+      )),
+    [Component, currentPage, disabled, onChange, range, itemProps],
+  )
+  return (
+    <ui.ul data-disabled={dataAttr(disabled)} {...rest} {...props}>
+      {withEdges ? (
+        <ui.li>
+          <Component
+            aria-label="Go to first page"
+            disabled={disabled || currentPage === 1}
+            page="first"
+            {...edgeProps}
+            {...edgeFirstProps}
+            onClick={handlerAll(
+              edgeProps?.onClick,
+              edgeFirstProps?.onClick,
+              onFirst,
+            )}
+          />
+        </ui.li>
+      ) : null}
 
-          {withControls ? (
-            <ui.li>
-              <Component
-                aria-label="Go to previous page"
-                disabled={disabled || currentPage === 1}
-                page="prev"
-                {...controlProps}
-                {...controlPrevProps}
-                onClick={handlerAll(
-                  controlProps?.onClick,
-                  controlPrevProps?.onClick,
-                  onPrev,
-                )}
-              />
-            </ui.li>
-          ) : null}
+      {withControls ? (
+        <ui.li>
+          <Component
+            aria-label="Go to previous page"
+            disabled={disabled || currentPage === 1}
+            page="prev"
+            {...controlProps}
+            {...controlPrevProps}
+            onClick={handlerAll(
+              controlProps?.onClick,
+              controlPrevProps?.onClick,
+              onPrev,
+            )}
+          />
+        </ui.li>
+      ) : null}
 
-          {children}
+      {children}
 
-          {withControls ? (
-            <ui.li>
-              <Component
-                aria-label="Go to next page"
-                disabled={disabled || currentPage === total}
-                page="next"
-                {...controlProps}
-                {...controlNextProps}
-                onClick={handlerAll(
-                  controlProps?.onClick,
-                  controlNextProps?.onClick,
-                  onNext,
-                )}
-              />
-            </ui.li>
-          ) : null}
+      {withControls ? (
+        <ui.li>
+          <Component
+            aria-label="Go to next page"
+            disabled={disabled || currentPage === total}
+            page="next"
+            {...controlProps}
+            {...controlNextProps}
+            onClick={handlerAll(
+              controlProps?.onClick,
+              controlNextProps?.onClick,
+              onNext,
+            )}
+          />
+        </ui.li>
+      ) : null}
 
-          {withEdges ? (
-            <ui.li>
-              <Component
-                aria-label="Go to last page"
-                disabled={disabled || currentPage === total}
-                page="last"
-                {...edgeProps}
-                {...edgeLastProps}
-                onClick={handlerAll(
-                  edgeProps?.onClick,
-                  edgeLastProps?.onClick,
-                  onLast,
-                )}
-              />
-            </ui.li>
-          ) : null}
-        </ui.ul>
-      </ui.nav>
-    )
-  },
-  "root",
-)()
+      {withEdges ? (
+        <ui.li>
+          <Component
+            aria-label="Go to last page"
+            disabled={disabled || currentPage === total}
+            page="last"
+            {...edgeProps}
+            {...edgeLastProps}
+            onClick={handlerAll(
+              edgeProps?.onClick,
+              edgeLastProps?.onClick,
+              onLast,
+            )}
+          />
+        </ui.li>
+      ) : null}
+    </ui.ul>
+  )
+}, "inner")()
 
 export interface PaginationItemProps
   extends Omit<HTMLUIProps<"button">, "page"> {
@@ -325,6 +328,6 @@ const PaginationItem = withContext<"button", PaginationItemProps>(
     const className = !isNumber(page)
       ? cx(classNameProp, `ui-pagination__item--${page}`)
       : classNameProp
-    return { ...rest, ...props, className, css, active, disabled, page }
+    return { ...rest, ...props, className, css, disabled, page }
   },
 )

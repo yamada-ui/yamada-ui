@@ -12,6 +12,7 @@ export const paginationStyle = defineComponentSlotStyle({
       alignItems: "center",
       color: ["blackAlpha.600", "whiteAlpha.700"],
       display: "flex",
+      focusVisibleRing: "outline",
       justifyContent: "center",
       overflow: "hidden",
       position: "relative",
@@ -28,12 +29,6 @@ export const paginationStyle = defineComponentSlotStyle({
       },
       _active: {
         bg: ["blackAlpha.100", "whiteAlpha.100"],
-      },
-      _focus: {
-        outline: "none",
-      },
-      _focusVisible: {
-        boxShadow: "outline",
       },
       _disabled: {
         boxShadow: "none",
@@ -173,7 +168,6 @@ export const paginationStyle = defineComponentSlotStyle({
   },
 
   defaultProps: {
-    colorScheme: "primary",
     size: "sm",
     variant: "solid",
   },

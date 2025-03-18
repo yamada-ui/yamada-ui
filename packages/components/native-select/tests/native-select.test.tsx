@@ -54,12 +54,12 @@ describe("<NativeSelect />", () => {
   })
 
   test("should disable select", () => {
-    render(<NativeSelect data-testid="select" isDisabled />)
+    render(<NativeSelect data-testid="select" disabled />)
     expect(screen.getByTestId("select")).toBeDisabled()
   })
 
   test("should be read only", () => {
-    render(<NativeSelect data-testid="select" isReadOnly />)
+    render(<NativeSelect data-testid="select" readOnly />)
     expect(screen.getByTestId("select")).not.toHaveAttribute(
       "aria-readonly",
       "true",
@@ -68,7 +68,7 @@ describe("<NativeSelect />", () => {
   })
 
   test("should be invalid", () => {
-    render(<NativeSelect data-testid="select" isInvalid />)
+    render(<NativeSelect data-testid="select" invalid />)
     expect(screen.getByTestId("select")).toHaveAttribute("aria-invalid", "true")
   })
 

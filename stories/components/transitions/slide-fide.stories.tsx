@@ -11,13 +11,13 @@ const meta: Meta<typeof SlideFade> = {
 export default meta
 
 export const basic: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <SlideFade open={isOpen}>
+      <SlideFade open={open}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -31,13 +31,13 @@ export const basic: Story = () => {
 }
 
 export const withDuration: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <SlideFade duration={0.4} open={isOpen}>
+      <SlideFade duration={0.4} open={open}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -51,13 +51,13 @@ export const withDuration: Story = () => {
 }
 
 export const withOffsetX: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <SlideFade offsetX={20} offsetY={0} open={isOpen}>
+      <SlideFade offsetX={20} offsetY={0} open={open}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -71,13 +71,13 @@ export const withOffsetX: Story = () => {
 }
 
 export const withOffsetY: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <SlideFade offsetY={-20} open={isOpen}>
+      <SlideFade offsetY={-20} open={open}>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>
@@ -91,13 +91,13 @@ export const withOffsetY: Story = () => {
 }
 
 export const exitUnmount: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <SlideFade open={isOpen} unmountOnExit>
+      <SlideFade open={open} unmountOnExit>
         <Box bg="orange.500" color="white" p="md" rounded="md" w="full">
           クリリンのことか……クリリンのことかーーーっ！！！！！
         </Box>

@@ -130,7 +130,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("with readOnly", () => {
-      render(<Autocomplete isReadOnly items={ITEMS} />)
+      render(<Autocomplete items={ITEMS} readOnly />)
 
       expect(
         screen.getByRole("combobox").querySelector("input"),
@@ -138,7 +138,7 @@ describe("<Autocomplete />", () => {
     })
 
     test("with invalid", () => {
-      render(<Autocomplete isInvalid items={ITEMS} />)
+      render(<Autocomplete invalid items={ITEMS} />)
 
       expect(
         screen.getByRole("combobox").querySelector("input"),

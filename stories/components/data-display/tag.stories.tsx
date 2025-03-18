@@ -128,7 +128,7 @@ export const withDisabled: Story = () => {
       <Tag
         colorScheme="primary"
         variant="solid"
-        isDisabled
+        disabled
         rounded="full"
         onClose={noop}
       >
@@ -138,7 +138,7 @@ export const withDisabled: Story = () => {
       <Tag
         colorScheme="secondary"
         variant="solid"
-        isDisabled
+        disabled
         rounded="full"
         onClose={noop}
       >
@@ -148,7 +148,7 @@ export const withDisabled: Story = () => {
       <Tag
         colorScheme="warning"
         variant="solid"
-        isDisabled
+        disabled
         rounded="full"
         onClose={noop}
       >
@@ -158,7 +158,7 @@ export const withDisabled: Story = () => {
       <Tag
         colorScheme="danger"
         variant="solid"
-        isDisabled
+        disabled
         rounded="full"
         onClose={noop}
       >

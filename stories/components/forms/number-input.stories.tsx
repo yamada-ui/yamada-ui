@@ -58,7 +58,7 @@ export const withBorderColor: Story = () => {
       />
       <NumberInput
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
@@ -121,17 +121,17 @@ export const disabledKeepWithinRange: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <NumberInput variant="outline" isDisabled placeholder="outline" />
-      <NumberInput variant="filled" isDisabled placeholder="filled" />
-      <NumberInput variant="flushed" isDisabled placeholder="flushed" />
-      <NumberInput variant="unstyled" isDisabled placeholder="unstyled" />
+      <NumberInput variant="outline" disabled placeholder="outline" />
+      <NumberInput variant="filled" disabled placeholder="filled" />
+      <NumberInput variant="flushed" disabled placeholder="flushed" />
+      <NumberInput variant="unstyled" disabled placeholder="unstyled" />
 
       <FormControl
+        disabled
         helperMessage="Please enter the quantity you wish to order."
-        isDisabled
         label="Order quantity"
       >
         <NumberInput />
@@ -140,18 +140,18 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <NumberInput variant="outline" isReadOnly placeholder="outline" />
-      <NumberInput variant="filled" isReadOnly placeholder="filled" />
-      <NumberInput variant="flushed" isReadOnly placeholder="flushed" />
-      <NumberInput variant="unstyled" isReadOnly placeholder="unstyled" />
+      <NumberInput variant="outline" placeholder="outline" readOnly />
+      <NumberInput variant="filled" placeholder="filled" readOnly />
+      <NumberInput variant="flushed" placeholder="flushed" readOnly />
+      <NumberInput variant="unstyled" placeholder="unstyled" readOnly />
 
       <FormControl
         helperMessage="Please enter the quantity you wish to order."
-        isReadOnly
         label="Order quantity"
+        readOnly
       >
         <NumberInput />
       </FormControl>
@@ -159,17 +159,17 @@ export const isReadonly: Story = () => {
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <NumberInput variant="outline" isInvalid placeholder="outline" />
-      <NumberInput variant="filled" isInvalid placeholder="filled" />
-      <NumberInput variant="flushed" isInvalid placeholder="flushed" />
-      <NumberInput variant="unstyled" isInvalid placeholder="unstyled" />
+      <NumberInput variant="outline" invalid placeholder="outline" />
+      <NumberInput variant="filled" invalid placeholder="filled" />
+      <NumberInput variant="flushed" invalid placeholder="flushed" />
+      <NumberInput variant="unstyled" invalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="Order quantity is required."
-        isInvalid
+        invalid
         label="Order quantity"
       >
         <NumberInput />
@@ -247,7 +247,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.numberInput?.message}
-        isInvalid={!!errors.numberInput}
+        invalid={!!errors.numberInput}
         label="Age"
       >
         <Controller
@@ -292,7 +292,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.numberInput?.message}
-        isInvalid={!!errors.numberInput}
+        invalid={!!errors.numberInput}
         label="Age"
       >
         <Controller

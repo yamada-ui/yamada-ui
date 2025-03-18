@@ -236,7 +236,7 @@ export const horizonCard: Story = () => {
   return (
     <Card
       variant="outline"
-      direction={{ base: "row", md: "column" }}
+      flexDirection={{ base: "row", md: "column" }}
       overflow="hidden"
     >
       <Image

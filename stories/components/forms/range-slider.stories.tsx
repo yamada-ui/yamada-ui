@@ -65,11 +65,11 @@ export const withOrientation: Story = () => {
 export const withReversed: Story = () => {
   return (
     <>
-      <RangeSlider isReversed />
+      <RangeSlider reversed />
       <RangeSlider
         h="calc(100vh - 16px * 3 - 14px)"
-        isReversed
         orientation="vertical"
+        reversed
       />
     </>
   )
@@ -121,7 +121,7 @@ export const withFocusThumbOnChange: Story = () => {
 
           <Center gap="md">
             <Button
-              isDisabled={value[0] === 0}
+              disabled={value[0] === 0}
               onClick={() =>
                 setValue((prev) =>
                   prev[0] !== 0 ? [prev[0] - 5, prev[1]] : prev,
@@ -133,7 +133,7 @@ export const withFocusThumbOnChange: Story = () => {
 
             <Button
               colorScheme="blue"
-              isDisabled={value[0] === 100 || value[0] === value[1]}
+              disabled={value[0] === 100 || value[0] === value[1]}
               onClick={() =>
                 setValue((prev) =>
                   prev[0] !== 100 && value[0] !== value[1]
@@ -152,7 +152,7 @@ export const withFocusThumbOnChange: Story = () => {
 
           <Center gap="md">
             <Button
-              isDisabled={value[1] === 0 || value[0] === value[1]}
+              disabled={value[1] === 0 || value[0] === value[1]}
               onClick={() =>
                 setValue((prev) =>
                   prev[1] !== 0 && value[0] !== value[1]
@@ -166,7 +166,7 @@ export const withFocusThumbOnChange: Story = () => {
 
             <Button
               colorScheme="blue"
-              isDisabled={value[1] === 100}
+              disabled={value[1] === 100}
               onClick={() =>
                 setValue((prev) =>
                   prev[1] !== 100 ? [prev[0], prev[1] + 5] : prev,
@@ -226,7 +226,7 @@ export const withMark: Story = () => {
 
 export const withTooltip: Story = () => {
   const [value, onChange] = useState<[number, number]>([25, 75])
-  const [isOpen, { off, on }] = useBoolean(false)
+  const [open, { off, on }] = useBoolean(false)
 
   return (
     <RangeSlider
@@ -246,25 +246,25 @@ export const withTooltip: Story = () => {
         75%
       </RangeSliderMark>
 
-      <Tooltip label={`${value[0]}%`} open={isOpen} placement="top">
+      <Tooltip label={`${value[0]}%`} open={open} placement="top">
         <RangeSliderStartThumb />
       </Tooltip>
 
-      <Tooltip label={`${value[1]}%`} open={isOpen} placement="top">
+      <Tooltip label={`${value[1]}%`} open={open} placement="top">
         <RangeSliderEndThumb />
       </Tooltip>
     </RangeSlider>
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <RangeSlider isDisabled />
+      <RangeSlider disabled />
 
       <Fieldset
+        disabled
         helperMessage="Please select your preferred price range."
-        isDisabled
         legend="Hotel Price Range"
       >
         <RangeSlider />
@@ -273,15 +273,15 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <RangeSlider isReadOnly />
+      <RangeSlider readOnly />
 
       <Fieldset
         helperMessage="Please select your preferred price range."
-        isReadOnly
         legend="Hotel Price Range"
+        readOnly
       >
         <RangeSlider />
       </Fieldset>
@@ -289,20 +289,16 @@ export const isReadonly: Story = () => {
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   const [value, onChange] = useState<[number, number]>([15, 45])
 
   return (
     <>
-      <RangeSlider
-        isInvalid={value[0] < 20}
-        value={value}
-        onChange={onChange}
-      />
+      <RangeSlider invalid={value[0] < 20} value={value} onChange={onChange} />
 
       <Fieldset
         errorMessage="Minimum price should be set to 20 or higher."
-        isInvalid={value[0] < 20}
+        invalid={value[0] < 20}
         legend="Hotel Price Range"
       >
         <RangeSlider value={value} onChange={onChange} />
@@ -485,7 +481,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.rangeSlider?.message}
-        isInvalid={!!errors.rangeSlider}
+        invalid={!!errors.rangeSlider}
         legend="Hotel Price Range"
       >
         <Controller

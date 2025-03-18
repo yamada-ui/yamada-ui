@@ -2,18 +2,18 @@ import { act, renderHook } from "@yamada-ui/test"
 import { usePromiseDisclosure } from "../src"
 
 describe("usePromiseDisclosure", () => {
-  test("should initialize with isOpen as false", () => {
+  test("should initialize with open as false", () => {
     const { result } = renderHook(() => usePromiseDisclosure())
 
-    expect(result.current.isOpen).toBeFalsy()
+    expect(result.current.open).toBeFalsy()
   })
 
-  test("should initialize with isOpen as true", () => {
+  test("should initialize with open as true", () => {
     const { result } = renderHook(() =>
-      usePromiseDisclosure({ defaultIsOpen: true }),
+      usePromiseDisclosure({ defaultOpen: true }),
     )
 
-    expect(result.current.isOpen).toBeTruthy()
+    expect(result.current.open).toBeTruthy()
   })
 
   test("should open and close correctly with onSuccess", () => {
@@ -23,13 +23,13 @@ describe("usePromiseDisclosure", () => {
       result.current.onOpen()
     })
 
-    expect(result.current.isOpen).toBeTruthy()
+    expect(result.current.open).toBeTruthy()
 
     act(() => {
       result.current.onSuccess()
     })
 
-    expect(result.current.isOpen).toBeFalsy()
+    expect(result.current.open).toBeFalsy()
   })
 
   test("should handle disableCloseOnSuccess correctly", () => {
@@ -41,12 +41,12 @@ describe("usePromiseDisclosure", () => {
       result.current.onOpen()
     })
 
-    expect(result.current.isOpen).toBeTruthy()
+    expect(result.current.open).toBeTruthy()
 
     act(() => {
       result.current.onSuccess()
     })
 
-    expect(result.current.isOpen).toBeTruthy()
+    expect(result.current.open).toBeTruthy()
   })
 })

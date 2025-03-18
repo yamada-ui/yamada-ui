@@ -16,26 +16,26 @@ interface Props {
 
 describe("<Modal />", () => {
   const ModalExample = ({ placement }: Props) => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [open, setOpen] = useState(false)
 
     const modalHeaderId = "modal-header-id"
 
     return (
       <>
-        <button onClick={() => setIsOpen(true)}>Open</button>
+        <button onClick={() => setOpen(true)}>Open</button>
 
         <Modal
           aria-labelledby={modalHeaderId}
-          open={isOpen}
+          open={open}
           placement={placement}
-          onClose={() => setIsOpen(false)}
+          onClose={() => setOpen(false)}
         >
           <ModalHeader id={modalHeaderId}>Modal Header</ModalHeader>
 
           <ModalBody>This is modal body</ModalBody>
 
           <ModalFooter>
-            <button onClick={() => setIsOpen(false)}>Close</button>
+            <button onClick={() => setOpen(false)}>Close</button>
             <button>Wikipedia</button>
           </ModalFooter>
         </Modal>
@@ -44,18 +44,14 @@ describe("<Modal />", () => {
   }
 
   const ModalCloseExample = () => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [open, setOpen] = useState(false)
 
     return (
       <>
-        <button data-testid="OpenModal" onClick={() => setIsOpen(true)}>
+        <button data-testid="OpenModal" onClick={() => setOpen(true)}>
           Open
         </button>
-        <Modal
-          data-testid="Modal"
-          open={isOpen}
-          onClose={() => setIsOpen(false)}
-        >
+        <Modal data-testid="Modal" open={open} onClose={() => setOpen(false)}>
           <ModalCloseButton data-testid="ModalCloseButton" />
           <ModalOverlay
             data-testid="ModalOverlay"
@@ -67,7 +63,7 @@ describe("<Modal />", () => {
           <ModalBody data-testid="ModalBody">This is modal body</ModalBody>
 
           <ModalFooter data-testid="ModalFooter">
-            <button data-testid="ModalClose" onClick={() => setIsOpen(false)}>
+            <button data-testid="ModalClose" onClick={() => setOpen(false)}>
               Close
             </button>
             <button>Wikipedia</button>
@@ -310,23 +306,23 @@ describe("<Modal />", () => {
     animation,
     duration,
   }: Pick<ModalProps, "animation" | "duration">) => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [open, setOpen] = useState(false)
     const modalHeaderId = "modal-header-id"
 
     return (
       <>
-        <button onClick={() => setIsOpen(true)}>Open</button>
+        <button onClick={() => setOpen(true)}>Open</button>
         <Modal
           aria-labelledby={modalHeaderId}
           animation={animation}
           duration={duration}
-          open={isOpen}
-          onClose={() => setIsOpen(false)}
+          open={open}
+          onClose={() => setOpen(false)}
         >
           <ModalHeader id={modalHeaderId}>Modal Header</ModalHeader>
           <ModalBody>This is modal body</ModalBody>
           <ModalFooter>
-            <button onClick={() => setIsOpen(false)}>Close</button>
+            <button onClick={() => setOpen(false)}>Close</button>
           </ModalFooter>
         </Modal>
       </>

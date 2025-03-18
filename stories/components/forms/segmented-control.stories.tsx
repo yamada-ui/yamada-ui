@@ -150,10 +150,10 @@ export const withColorScheme: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <SegmentedControl isDisabled>
+      <SegmentedControl disabled>
         <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
         <SegmentedControlButton value="ベジータ">
           ベジータ
@@ -165,7 +165,7 @@ export const isDisabled: Story = () => {
 
       <SegmentedControl>
         <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
-        <SegmentedControlButton isDisabled value="ベジータ">
+        <SegmentedControlButton disabled value="ベジータ">
           ベジータ
         </SegmentedControlButton>
         <SegmentedControlButton value="フリーザ">
@@ -176,10 +176,10 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadOnly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <SegmentedControl isReadOnly>
+      <SegmentedControl readOnly>
         <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
         <SegmentedControlButton value="ベジータ">
           ベジータ
@@ -191,7 +191,7 @@ export const isReadOnly: Story = () => {
 
       <SegmentedControl>
         <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
-        <SegmentedControlButton isReadOnly value="ベジータ">
+        <SegmentedControlButton readOnly value="ベジータ">
           ベジータ
         </SegmentedControlButton>
         <SegmentedControlButton value="フリーザ">
@@ -238,7 +238,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.segmentedControl?.message}
-        isInvalid={!!errors.segmentedControl}
+        invalid={!!errors.segmentedControl}
         legend="Who is your favorite character?"
       >
         <Controller

@@ -39,7 +39,7 @@ describe("<Indicator />", () => {
 
   test("should not render indicator", () => {
     render(
-      <Indicator data-testid="Indicator" isDisabled label="new">
+      <Indicator data-testid="Indicator" disabled label="new">
         <div />
       </Indicator>,
     )

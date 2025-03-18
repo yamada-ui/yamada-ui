@@ -74,24 +74,24 @@ export const withHighlightSelectedOnly: Story = () => {
   return <Rating defaultValue={3} highlightSelectedOnly />
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <Rating defaultValue={3} isDisabled />
+      <Rating defaultValue={3} disabled />
 
-      <Fieldset isDisabled legend="How satisfied are you with Yamada UI?">
+      <Fieldset disabled legend="How satisfied are you with Yamada UI?">
         <Rating defaultValue={3} />
       </Fieldset>
     </>
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <Rating defaultValue={3} isReadOnly />
+      <Rating defaultValue={3} readOnly />
 
-      <Fieldset isReadOnly legend="How satisfied are you with Yamada UI?">
+      <Fieldset legend="How satisfied are you with Yamada UI?" readOnly>
         <Rating defaultValue={3} />
       </Fieldset>
     </>
@@ -234,7 +234,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.rating?.message}
-        isInvalid={!!errors.rating}
+        invalid={!!errors.rating}
         legend="How satisfied are you with Yamada UI?"
       >
         <Controller

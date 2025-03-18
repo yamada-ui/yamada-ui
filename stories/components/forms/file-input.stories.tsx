@@ -103,56 +103,52 @@ export const withBorderColor: Story = () => {
       />
       <FileInput
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <FileInput variant="outline" isDisabled placeholder="outline" />
-      <FileInput variant="filled" isDisabled placeholder="filled" />
-      <FileInput variant="flushed" isDisabled placeholder="flushed" />
-      <FileInput variant="unstyled" isDisabled placeholder="unstyled" />
+      <FileInput variant="outline" disabled placeholder="outline" />
+      <FileInput variant="filled" disabled placeholder="filled" />
+      <FileInput variant="flushed" disabled placeholder="flushed" />
+      <FileInput variant="unstyled" disabled placeholder="unstyled" />
 
-      <FormControl isDisabled label="Upload file">
+      <FormControl disabled label="Upload file">
         <FileInput type="email" placeholder="your file" />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <FileInput variant="outline" isReadOnly placeholder="outline" />
-      <FileInput variant="filled" isReadOnly placeholder="filled" />
-      <FileInput variant="flushed" isReadOnly placeholder="flushed" />
-      <FileInput variant="unstyled" isReadOnly placeholder="unstyled" />
+      <FileInput variant="outline" placeholder="outline" readOnly />
+      <FileInput variant="filled" placeholder="filled" readOnly />
+      <FileInput variant="flushed" placeholder="flushed" readOnly />
+      <FileInput variant="unstyled" placeholder="unstyled" readOnly />
 
-      <FormControl isReadOnly label="Upload file">
+      <FormControl label="Upload file" readOnly>
         <FileInput type="email" placeholder="your file" />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <FileInput variant="outline" isInvalid placeholder="outline" />
-      <FileInput variant="filled" isInvalid placeholder="filled" />
-      <FileInput variant="flushed" isInvalid placeholder="flushed" />
-      <FileInput variant="unstyled" isInvalid placeholder="unstyled" />
+      <FileInput variant="outline" invalid placeholder="outline" />
+      <FileInput variant="filled" invalid placeholder="filled" />
+      <FileInput variant="flushed" invalid placeholder="flushed" />
+      <FileInput variant="unstyled" invalid placeholder="unstyled" />
 
-      <FormControl
-        errorMessage="File is required."
-        isInvalid
-        label="Upload file"
-      >
+      <FormControl errorMessage="File is required." invalid label="Upload file">
         <FileInput type="email" placeholder="your file" />
       </FormControl>
     </>
@@ -203,7 +199,7 @@ export const useReset: Story = () => {
         />
 
         {value?.length ? (
-          <InputRightElement isClickable onClick={onReset}>
+          <InputRightElement clickable onClick={onReset}>
             <XIcon color="gray.500" />
           </InputRightElement>
         ) : null}
@@ -250,7 +246,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.fileInput?.message}
-        isInvalid={!!errors.fileInput}
+        invalid={!!errors.fileInput}
         label="Files"
       >
         <Controller
@@ -261,7 +257,7 @@ export const reactHookForm: Story = () => {
               <FileInput multiple {...field} resetRef={resetRef} />
 
               {field.value?.length ? (
-                <InputRightElement isClickable onClick={onReset}>
+                <InputRightElement clickable onClick={onReset}>
                   <XIcon color="gray.500" />
                 </InputRightElement>
               ) : null}

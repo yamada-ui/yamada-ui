@@ -163,7 +163,7 @@ export const withBorderColor: Story = () => {
       />
       <MultiSelect
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
@@ -258,9 +258,9 @@ export const withCloseOnSelect: Story = () => {
   )
 }
 
-export const disabledIsClearable: Story = () => {
+export const disabledClearable: Story = () => {
   return (
-    <MultiSelect isClearable={false} placeholder="キャラクターを選択">
+    <MultiSelect clearable={false} placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
       <Option value="ベジータ">ベジータ</Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -326,16 +326,16 @@ export const withDuration: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <MultiSelect variant="outline" isDisabled placeholder="outline" />
-      <MultiSelect variant="filled" isDisabled placeholder="filled" />
-      <MultiSelect variant="flushed" isDisabled placeholder="flushed" />
-      <MultiSelect variant="unstyled" isDisabled placeholder="unstyled" />
+      <MultiSelect variant="outline" disabled placeholder="outline" />
+      <MultiSelect variant="filled" disabled placeholder="filled" />
+      <MultiSelect variant="flushed" disabled placeholder="flushed" />
+      <MultiSelect variant="unstyled" disabled placeholder="unstyled" />
 
       <FormControl
-        isDisabled
+        disabled
         label="Which notifications would you like to receive?"
       >
         <MultiSelect placeholder="Select notifications" />
@@ -344,17 +344,17 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <MultiSelect variant="outline" isReadOnly placeholder="outline" />
-      <MultiSelect variant="filled" isReadOnly placeholder="filled" />
-      <MultiSelect variant="flushed" isReadOnly placeholder="flushed" />
-      <MultiSelect variant="unstyled" isReadOnly placeholder="unstyled" />
+      <MultiSelect variant="outline" placeholder="outline" readOnly />
+      <MultiSelect variant="filled" placeholder="filled" readOnly />
+      <MultiSelect variant="flushed" placeholder="flushed" readOnly />
+      <MultiSelect variant="unstyled" placeholder="unstyled" readOnly />
 
       <FormControl
-        isReadOnly
         label="Which notifications would you like to receive?"
+        readOnly
       >
         <MultiSelect placeholder="Select notifications" />
       </FormControl>
@@ -362,17 +362,17 @@ export const isReadonly: Story = () => {
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <MultiSelect variant="outline" isInvalid placeholder="outline" />
-      <MultiSelect variant="filled" isInvalid placeholder="filled" />
-      <MultiSelect variant="flushed" isInvalid placeholder="flushed" />
-      <MultiSelect variant="unstyled" isInvalid placeholder="unstyled" />
+      <MultiSelect variant="outline" invalid placeholder="outline" />
+      <MultiSelect variant="filled" invalid placeholder="filled" />
+      <MultiSelect variant="flushed" invalid placeholder="flushed" />
+      <MultiSelect variant="unstyled" invalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."
-        isInvalid
+        invalid
         label="Which notifications would you like to receive?"
       >
         <MultiSelect placeholder="Select notifications" />
@@ -385,7 +385,7 @@ export const isOptionDisabled: Story = () => {
   return (
     <MultiSelect placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
-      <Option isDisabled value="ベジータ">
+      <Option disabled value="ベジータ">
         ベジータ
       </Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -397,7 +397,7 @@ export const isOptionFocusable: Story = () => {
   return (
     <MultiSelect placeholder="キャラクターを選択">
       <Option value="孫悟空">孫悟空</Option>
-      <Option isDisabled isFocusable value="ベジータ">
+      <Option disabled focusable value="ベジータ">
         ベジータ
       </Option>
       <Option value="フリーザ">フリーザ</Option>
@@ -527,7 +527,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.select1?.message}
-        isInvalid={!!errors.select1}
+        invalid={!!errors.select1}
         label="Who is your favorite character?"
       >
         <Controller
@@ -546,7 +546,7 @@ export const reactHookForm: Story = () => {
 
       <FormControl
         errorMessage={errors.select2?.message}
-        isInvalid={!!errors.select2}
+        invalid={!!errors.select2}
         label="Who is your favorite character?"
       >
         <Controller
@@ -576,7 +576,7 @@ export const reactHookForm: Story = () => {
 
       <FormControl
         errorMessage={errors.select3?.message}
-        isInvalid={!!errors.select3}
+        invalid={!!errors.select3}
         label="Who is your favorite character?"
       >
         <Controller
@@ -651,7 +651,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.select1?.message}
-        isInvalid={!!errors.select1}
+        invalid={!!errors.select1}
         label="Who is your favorite character?"
       >
         <Controller
@@ -670,7 +670,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
       <FormControl
         errorMessage={errors.select2?.message}
-        isInvalid={!!errors.select2}
+        invalid={!!errors.select2}
         label="Who is your favorite character?"
       >
         <Controller
@@ -700,7 +700,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
       <FormControl
         errorMessage={errors.select3?.message}
-        isInvalid={!!errors.select3}
+        invalid={!!errors.select3}
         label="Who is your favorite character?"
       >
         <Controller

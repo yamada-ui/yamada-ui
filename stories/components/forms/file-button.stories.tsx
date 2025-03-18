@@ -141,31 +141,70 @@ export const withVariant: Story = () => {
 
 export const withBorderColor: Story = () => {
   return (
-    <FileButton errorBorderColor="orange.500" isInvalid>
+    <FileButton errorBorderColor="orange.500" invalid>
       Upload
     </FileButton>
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <FileButton isDisabled>Upload</FileButton>
+      <FileButton disabled>Upload</FileButton>
+
+      <FileButton
+        as={IconButton}
+        aria-label="Upload file"
+        disabled
+        icon={<PlusIcon fontSize="2xl" />}
+      />
+
+      <FileButton disabled>
+        {({ disabled, onClick }) => (
+          <Link
+            cursor={disabled ? "not-allowed" : "pointer"}
+            opacity={disabled ? 0.4 : 1}
+            _hover={
+              disabled
+                ? { textDecoration: "inherit" }
+                : { textDecoration: "underline" }
+            }
+            onClick={onClick}
+          >
+            Upload
+          </Link>
+        )}
+      </FileButton>
+
+      <FormControl
+        disabled
+        helperMessage="Please select a file to upload."
+        label="Upload file"
+      >
+        <FileButton>Upload</FileButton>
+      </FormControl>
+    </>
+  )
+}
+
+export const readOnly: Story = () => {
+  return (
+    <>
+      <FileButton readOnly>Upload</FileButton>
 
       <FileButton
         as={IconButton}
         aria-label="Upload file"
         icon={<PlusIcon fontSize="2xl" />}
-        isDisabled
+        readOnly
       />
 
-      <FileButton isDisabled>
-        {({ isDisabled, onClick }) => (
+      <FileButton readOnly>
+        {({ readOnly, onClick }) => (
           <Link
-            cursor={isDisabled ? "not-allowed" : "pointer"}
-            opacity={isDisabled ? 0.4 : 1}
+            cursor={readOnly ? "default" : "pointer"}
             _hover={
-              isDisabled
+              readOnly
                 ? { textDecoration: "inherit" }
                 : { textDecoration: "underline" }
             }
@@ -178,8 +217,8 @@ export const isDisabled: Story = () => {
 
       <FormControl
         helperMessage="Please select a file to upload."
-        isDisabled
         label="Upload file"
+        readOnly
       >
         <FileButton>Upload</FileButton>
       </FormControl>
@@ -187,62 +226,19 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <FileButton isReadOnly>Upload</FileButton>
+      <FileButton invalid>Upload</FileButton>
 
       <FileButton
         as={IconButton}
         aria-label="Upload file"
         icon={<PlusIcon fontSize="2xl" />}
-        isReadOnly
+        invalid
       />
 
-      <FileButton isReadOnly>
-        {({ isReadOnly, onClick }) => (
-          <Link
-            cursor={isReadOnly ? "default" : "pointer"}
-            _hover={
-              isReadOnly
-                ? { textDecoration: "inherit" }
-                : { textDecoration: "underline" }
-            }
-            onClick={onClick}
-          >
-            Upload
-          </Link>
-        )}
-      </FileButton>
-
-      <FormControl
-        helperMessage="Please select a file to upload."
-        isReadOnly
-        label="Upload file"
-      >
-        <FileButton>Upload</FileButton>
-      </FormControl>
-    </>
-  )
-}
-
-export const isInvalid: Story = () => {
-  return (
-    <>
-      <FileButton isInvalid>Upload</FileButton>
-
-      <FileButton
-        as={IconButton}
-        aria-label="Upload file"
-        icon={<PlusIcon fontSize="2xl" />}
-        isInvalid
-      />
-
-      <FormControl
-        errorMessage="File is required."
-        isInvalid
-        label="Upload file"
-      >
+      <FormControl errorMessage="File is required." invalid label="Upload file">
         <FileButton>Upload</FileButton>
       </FormControl>
     </>
@@ -299,7 +295,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.fileButton?.message}
-        isInvalid={!!errors.fileButton}
+        invalid={!!errors.fileButton}
         label="Files"
       >
         <Controller

@@ -77,25 +77,19 @@ describe("<FileInput />", () => {
   })
 
   test("should be disabled", () => {
-    const { container } = render(
-      <FileInput data-testid="FileInput" isDisabled />,
-    )
+    const { container } = render(<FileInput data-testid="FileInput" disabled />)
     expect(container.querySelector('input[type="file"]')).toBeDisabled()
   })
 
   test("should be read only", () => {
-    const { container } = render(
-      <FileInput data-testid="FileInput" isReadOnly />,
-    )
+    const { container } = render(<FileInput data-testid="FileInput" readOnly />)
     expect(container.querySelector('input[type="file"]')).toHaveAttribute(
       "readonly",
     )
   })
 
   test("should be invalid", () => {
-    const { container } = render(
-      <FileInput data-testid="FileInput" isInvalid />,
-    )
+    const { container } = render(<FileInput data-testid="FileInput" invalid />)
     expect(container.querySelector('input[type="file"]')).toHaveAttribute(
       "aria-invalid",
       "true",
@@ -255,7 +249,7 @@ describe("<FileInput />", () => {
 
   test("click should not be called in the inner input element after click when disabled", () => {
     const { container } = render(
-      <FileInput data-testid="file-input" isDisabled />,
+      <FileInput data-testid="file-input" disabled />,
     )
     const fileInputElement = container.querySelector('input[type="file"]')
     const listener = vi.fn()
@@ -268,7 +262,7 @@ describe("<FileInput />", () => {
 
   test("click should not be called in the inner input element after click when readonly", () => {
     const { container } = render(
-      <FileInput data-testid="file-input" isReadOnly />,
+      <FileInput data-testid="file-input" readOnly />,
     )
     const fileInputElement = container.querySelector('input[type="file"]')
     const listener = vi.fn()

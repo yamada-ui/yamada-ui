@@ -57,31 +57,31 @@ export const withDefaultChecked: Story = () => {
   return <Radio defaultChecked>孫悟空</Radio>
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <Radio isDisabled>All Notifications</Radio>
-      <Radio defaultChecked isDisabled>
+      <Radio disabled>All Notifications</Radio>
+      <Radio defaultChecked disabled>
         All Notifications
       </Radio>
 
       <RadioGroup defaultValue="all">
         <Radio value="all">All Notifications</Radio>
-        <Radio isDisabled value="important">
+        <Radio disabled value="important">
           Important Notifications
         </Radio>
         <Radio value="service">Service Notifications</Radio>
       </RadioGroup>
 
       <Fieldset
-        isDisabled
+        disabled
         legend="Which notifications would you like to receive?"
       >
         <Radio defaultChecked>All Notifications</Radio>
       </Fieldset>
 
       <Fieldset
-        isDisabled
+        disabled
         legend="Which notifications would you like to receive?"
       >
         <RadioGroup defaultValue="all">
@@ -94,32 +94,32 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <Radio isReadOnly>All Notifications</Radio>
-      <Radio defaultChecked isReadOnly>
+      <Radio readOnly>All Notifications</Radio>
+      <Radio defaultChecked readOnly>
         All Notifications
       </Radio>
 
       <RadioGroup defaultValue="all">
         <Radio value="all">All Notifications</Radio>
-        <Radio isReadOnly value="important">
+        <Radio readOnly value="important">
           Important Notifications
         </Radio>
         <Radio value="service">Service Notifications</Radio>
       </RadioGroup>
 
       <Fieldset
-        isReadOnly
         legend="Which notifications would you like to receive?"
+        readOnly
       >
         <Radio defaultChecked>All Notifications</Radio>
       </Fieldset>
 
       <Fieldset
-        isReadOnly
         legend="Which notifications would you like to receive?"
+        readOnly
       >
         <RadioGroup defaultValue="all">
           <Radio value="all">All Notifications</Radio>
@@ -131,17 +131,17 @@ export const isReadonly: Story = () => {
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <Radio isInvalid>All Notifications</Radio>
-      <Radio defaultChecked isInvalid>
+      <Radio invalid>All Notifications</Radio>
+      <Radio defaultChecked invalid>
         All Notifications
       </Radio>
 
       <RadioGroup defaultValue="all">
         <Radio value="all">All Notifications</Radio>
-        <Radio isInvalid value="important">
+        <Radio invalid value="important">
           Important Notifications
         </Radio>
         <Radio value="service">Service Notifications</Radio>
@@ -149,7 +149,7 @@ export const isInvalid: Story = () => {
 
       <Fieldset
         errorMessage="This is required."
-        isInvalid
+        invalid
         legend="Which notifications would you like to receive?"
       >
         <Radio>All Notifications</Radio>
@@ -157,7 +157,7 @@ export const isInvalid: Story = () => {
 
       <Fieldset
         errorMessage="This is required."
-        isInvalid
+        invalid
         legend="Which notifications would you like to receive?"
       >
         <RadioGroup defaultValue="all">
@@ -271,7 +271,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.radio?.message}
-        isInvalid={!!errors.radio}
+        invalid={!!errors.radio}
         legend="Who is your favorite character?"
       >
         <Controller
@@ -319,7 +319,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.radio?.message}
-        isInvalid={!!errors.radio}
+        invalid={!!errors.radio}
         legend="Who is your favorite character?"
       >
         <Controller

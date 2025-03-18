@@ -125,7 +125,7 @@ const PropControlItem = <K extends PropControlComponent>({
   item,
 }: PropControlItemProps<K>) => {
   const { label, ...rest } = item
-  const { isOpen, onClose, onOpen } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   switch (component) {
     case "Select":
@@ -150,7 +150,7 @@ const PropControlItem = <K extends PropControlComponent>({
             onMouseLeave={onClose}
             {...(rest as SliderProps)}
           >
-            <Tooltip label={rest.value} open={isOpen} placement="top">
+            <Tooltip label={rest.value} open={open} placement="top">
               <SliderThumb />
             </Tooltip>
           </Slider>

@@ -185,7 +185,7 @@ export const withBorder: Story = () => {
 
 export const hidden: Story = () => {
   return (
-    <Indicator isDisabled label="new">
+    <Indicator disabled label="new">
       <Avatar
         name="Hirotomo Yamada"
         src="https://avatars.githubusercontent.com/u/84060430?v=4"

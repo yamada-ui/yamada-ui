@@ -79,48 +79,48 @@ export const withLineClamp: Story = () => {
   return <SkeletonText lineClamp={5} />
 }
 
-export const withIsLoaded: Story = () => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+export const withLoaded: Story = () => {
+  const [loaded, setLoaded] = useState<boolean>(false)
 
   useEffect(() => {
     wait(3000).then(() => {
-      setIsLoaded(true)
+      setLoaded(true)
     })
   }, [])
 
   return (
     <>
-      <Skeleton isLoaded={isLoaded} />
+      <Skeleton loaded={loaded} />
 
-      <SkeletonCircle isLoaded={isLoaded} />
+      <SkeletonCircle loaded={loaded} />
 
-      <SkeletonText isLoaded={isLoaded} />
+      <SkeletonText loaded={loaded} />
     </>
   )
 }
 
 export const withFadeDuration: Story = () => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+  const [loaded, setLoaded] = useState<boolean>(false)
 
   useEffect(() => {
     wait(3000).then(() => {
-      setIsLoaded(true)
+      setLoaded(true)
     })
   }, [])
 
   return (
     <>
-      <Skeleton fadeDuration={2} h={12} isLoaded={isLoaded}>
+      <Skeleton fadeDuration={2} h={12} loaded={loaded}>
         <Heading isTruncated>
           ギャルのパンティーおくれーーーっ！！！！！
         </Heading>
       </Skeleton>
 
-      <SkeletonCircle fadeDuration={2} isLoaded={isLoaded}>
+      <SkeletonCircle fadeDuration={2} loaded={loaded}>
         <Avatar name="Hirotomo Yamada" />
       </SkeletonCircle>
 
-      <SkeletonText fadeDuration={2} isLoaded={isLoaded}>
+      <SkeletonText fadeDuration={2} loaded={loaded}>
         <Text isTruncated>
           私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
         </Text>

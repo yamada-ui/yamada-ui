@@ -9,36 +9,36 @@ describe("<Toggle />", () => {
     expect(screen.getByRole("button", { name: /toggle/i })).toBeInTheDocument()
   })
 
-  test("should handle isSelected prop", () => {
-    const { rerender } = render(<Toggle isSelected>Toggle</Toggle>)
+  test("should handle selected prop", () => {
+    const { rerender } = render(<Toggle selected>Toggle</Toggle>)
 
     expect(screen.getByRole("button", { name: /toggle/i })).toHaveAttribute(
       "data-selected",
     )
 
-    rerender(<Toggle isSelected={false}>Toggle</Toggle>)
+    rerender(<Toggle selected={false}>Toggle</Toggle>)
 
     expect(screen.getByRole("button", { name: /toggle/i })).not.toHaveAttribute(
       "data-selected",
     )
   })
 
-  test("should handle isDisabled prop", () => {
-    render(<Toggle isDisabled>Toggle</Toggle>)
+  test("should handle disabled prop", () => {
+    render(<Toggle disabled>Toggle</Toggle>)
 
     expect(screen.getByRole("button", { name: /toggle/i })).toBeDisabled()
   })
 
-  test("should handle isReadOnly prop", () => {
-    render(<Toggle isReadOnly>Toggle</Toggle>)
+  test("should handle readOnly prop", () => {
+    render(<Toggle readOnly>Toggle</Toggle>)
 
     expect(screen.getByRole("button", { name: /toggle/i })).toHaveAttribute(
       "data-readonly",
     )
   })
 
-  test("should handle isRounded prop", () => {
-    render(<Toggle isRounded>Toggle</Toggle>)
+  test("should handle fullRounded prop", () => {
+    render(<Toggle fullRounded>Toggle</Toggle>)
 
     expect(screen.getByRole("button", { name: /toggle/i })).toHaveStyle({
       borderRadius: "var(--ui-radii-full)",

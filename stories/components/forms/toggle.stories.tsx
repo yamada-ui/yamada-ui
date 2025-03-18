@@ -603,7 +603,7 @@ export const isRounded: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
       <Toggle
@@ -633,7 +633,7 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
       <Toggle

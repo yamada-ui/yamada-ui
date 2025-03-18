@@ -1,5 +1,4 @@
-import { ChevronIcon } from "@yamada-ui/icon"
-import { a11y, render } from "@yamada-ui/test"
+import { a11y, render, TestIcon } from "@yamada-ui/test"
 import { IconButton } from "../src"
 
 describe("<IconButton />", () => {
@@ -8,7 +7,7 @@ describe("<IconButton />", () => {
       <IconButton
         colorScheme="primary"
         aria-label="Open menu"
-        icon={<ChevronIcon />}
+        icon={<TestIcon />}
       />,
     )
   })
@@ -16,7 +15,7 @@ describe("<IconButton />", () => {
   test("renders children correctly", () => {
     const { getByTestId } = render(
       <IconButton colorScheme="primary" aria-label="Open menu">
-        <ChevronIcon data-testid="icon" />
+        <TestIcon data-testid="icon" />
       </IconButton>,
     )
 

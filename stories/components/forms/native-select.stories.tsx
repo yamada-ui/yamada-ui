@@ -149,7 +149,7 @@ export const withBorderColor: Story = () => {
       <NativeSelect
         aria-label="Native Select"
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
@@ -170,36 +170,36 @@ export const disabledPlaceholderInOptions: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
       <NativeSelect
         variant="outline"
         aria-label="Native Select"
-        isDisabled
+        disabled
         placeholder="outline"
       />
       <NativeSelect
         variant="filled"
         aria-label="Native Select"
-        isDisabled
+        disabled
         placeholder="filled"
       />
       <NativeSelect
         variant="flushed"
         aria-label="Native Select"
-        isDisabled
+        disabled
         placeholder="flushed"
       />
       <NativeSelect
         variant="unstyled"
         aria-label="Native Select"
-        isDisabled
+        disabled
         placeholder="unstyled"
       />
 
       <FormControl
-        isDisabled
+        disabled
         label="Which notifications would you like to receive?"
       >
         <NativeSelect placeholder="Select notifications" />
@@ -208,37 +208,37 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
       <NativeSelect
         variant="outline"
         aria-label="Native Select"
-        isReadOnly
         placeholder="outline"
+        readOnly
       />
       <NativeSelect
         variant="filled"
         aria-label="Native Select"
-        isReadOnly
         placeholder="filled"
+        readOnly
       />
       <NativeSelect
         variant="flushed"
         aria-label="Native Select"
-        isReadOnly
         placeholder="flushed"
+        readOnly
       />
       <NativeSelect
         variant="unstyled"
         aria-label="Native Select"
-        isReadOnly
         placeholder="unstyled"
+        readOnly
       />
 
       <FormControl
-        isReadOnly
         label="Which notifications would you like to receive?"
+        readOnly
       >
         <NativeSelect placeholder="Select notifications" />
       </FormControl>
@@ -246,37 +246,37 @@ export const isReadonly: Story = () => {
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
       <NativeSelect
         variant="outline"
         aria-label="Native Select"
-        isInvalid
+        invalid
         placeholder="outline"
       />
       <NativeSelect
         variant="filled"
         aria-label="Native Select"
-        isInvalid
+        invalid
         placeholder="filled"
       />
       <NativeSelect
         variant="flushed"
         aria-label="Native Select"
-        isInvalid
+        invalid
         placeholder="flushed"
       />
       <NativeSelect
         variant="unstyled"
         aria-label="Native Select"
-        isInvalid
+        invalid
         placeholder="unstyled"
       />
 
       <FormControl
         errorMessage="This is required."
-        isInvalid
+        invalid
         label="Which notifications would you like to receive?"
       >
         <NativeSelect placeholder="Select notifications" />
@@ -348,7 +348,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.select?.message}
-        isInvalid={!!errors.select}
+        invalid={!!errors.select}
         label="Who is your favorite character?"
       >
         <NativeSelect
@@ -394,7 +394,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.select?.message}
-        isInvalid={!!errors.select}
+        invalid={!!errors.select}
         label="Who is your favorite character?"
       >
         <NativeSelect

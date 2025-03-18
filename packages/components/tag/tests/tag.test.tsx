@@ -10,6 +10,7 @@ describe("<Tag />", () => {
 
   test("Tag with icon renders correctly", () => {
     const { getByTestId } = render(
+      // eslint-disable-next-line @typescript-eslint/no-deprecated
       <Tag startIcon={<CheckIcon data-testid="icon" />}>Tag</Tag>,
     )
 

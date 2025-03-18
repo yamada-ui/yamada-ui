@@ -86,7 +86,7 @@ export const withFocusThumbOnChange: Story = () => {
 
       <Center gap="md" w="full">
         <Button
-          isDisabled={value === 0}
+          disabled={value === 0}
           onClick={() =>
             setValue((prev) =>
               prev !== 0 ? Math.round((prev - 0.1) * 10) / 10 : prev,
@@ -98,7 +98,7 @@ export const withFocusThumbOnChange: Story = () => {
 
         <Button
           colorScheme="blue"
-          isDisabled={value === 1}
+          disabled={value === 1}
           onClick={() =>
             setValue((prev) =>
               prev !== 1 ? Math.round((prev + 0.1) * 10) / 10 : prev,
@@ -116,14 +116,14 @@ export const disabledShadow: Story = () => {
   return <AlphaSlider withShadow={false} />
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <AlphaSlider color="#4387f4" isDisabled />
+      <AlphaSlider color="#4387f4" disabled />
 
       <Fieldset
+        disabled
         helperMessage="Please select your favorite color"
-        isDisabled
         legend="Pick color"
       >
         <AlphaSlider color="#4387f4" />
@@ -132,15 +132,15 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <AlphaSlider color="#4387f4" isReadOnly />
+      <AlphaSlider color="#4387f4" readOnly />
 
       <Fieldset
         helperMessage="Please select your favorite color"
-        isReadOnly
         legend="Pick color"
+        readOnly
       >
         <AlphaSlider color="#4387f4" />
       </Fieldset>
@@ -221,7 +221,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.alphaSlider?.message}
-        isInvalid={!!errors.alphaSlider}
+        invalid={!!errors.alphaSlider}
         legend="Pick color"
       >
         <Controller

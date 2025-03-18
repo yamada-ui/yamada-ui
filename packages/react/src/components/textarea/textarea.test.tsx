@@ -6,6 +6,21 @@ describe("<Textarea />", () => {
     await a11y(<Textarea aria-label="Enter notes" defaultValue="hello" />)
   })
 
+  test("sets `displayName` and `__styled__` correctly", () => {
+    expect(Textarea.displayName).toBe("Textarea")
+    expect(Textarea.__styled__).toBe("Textarea")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Textarea />)
+    expect(screen.getByRole("textbox")).toHaveClass("ui-textarea")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Textarea />)
+    expect(screen.getByRole("textbox").tagName).toBe("TEXTAREA")
+  })
+
   test("Disabled Textarea renders correctly", () => {
     render(<Textarea disabled />)
 

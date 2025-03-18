@@ -267,6 +267,9 @@ importers:
       storybook-dark-mode:
         specifier: ^4.0.2
         version: 4.0.2(react-dom@19.0.0)(react@19.0.0)(storybook@8.4.7)
+      storybook-i18n:
+        specifier: ^3.1.1
+        version: 3.1.1
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -16037,6 +16040,10 @@ packages:
       - react
       - react-dom
       - storybook
+    dev: false
+
+  /storybook-i18n@3.1.1:
+    resolution: {integrity: sha512-k1/lS+Rx6l5mJEYAHQWEgXuwU5IyWk7kjcJtm2FDIn1UqZwbEraGlrp/fEZKK2e/7+SXEQdKeCaTz7+63WTQxw==, tarball: https://registry.npmjs.org/storybook-i18n/-/storybook-i18n-3.1.1.tgz}
     dev: false
 
   /storybook@8.4.7(prettier@3.4.2):

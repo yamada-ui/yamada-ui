@@ -35,7 +35,7 @@ export const withChildren: Story = () => {
       <RangeDatePicker closeOnSelect={false} placeholder="YYYY/MM/DD">
         {({ value, onClose }) => (
           <VStack mt="sm">
-            <Button isDisabled={!value} onClick={onClose}>
+            <Button disabled={!value} onClick={onClose}>
               Submit
               {value[0] ? ` ${dayjs(value[0]).format("MM/DD")} -` : ""}
               {value[1] ? ` ${dayjs(value[1]).format("MM/DD")}` : ""}
@@ -170,7 +170,7 @@ export const withBorderColor: Story = () => {
 
       <RangeDatePicker
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="YYYY/MM/DD"
       />
     </>
@@ -230,47 +230,47 @@ export const withDuration: Story = () => {
   return <RangeDatePicker duration={0.4} placeholder="YYYY/MM/DD" />
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <RangeDatePicker variant="outline" isDisabled placeholder="YYYY/MM/DD" />
-      <RangeDatePicker variant="filled" isDisabled placeholder="YYYY/MM/DD" />
-      <RangeDatePicker variant="flushed" isDisabled placeholder="YYYY/MM/DD" />
-      <RangeDatePicker variant="unstyled" isDisabled placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="outline" disabled placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="filled" disabled placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="flushed" disabled placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="unstyled" disabled placeholder="YYYY/MM/DD" />
 
-      <FormControl isDisabled label="What date would you like to reserve?">
+      <FormControl disabled label="What date would you like to reserve?">
         <RangeDatePicker placeholder="YYYY/MM/DD" />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <RangeDatePicker variant="outline" isReadOnly placeholder="YYYY/MM/DD" />
-      <RangeDatePicker variant="filled" isReadOnly placeholder="YYYY/MM/DD" />
-      <RangeDatePicker variant="flushed" isReadOnly placeholder="YYYY/MM/DD" />
-      <RangeDatePicker variant="unstyled" isReadOnly placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="outline" placeholder="YYYY/MM/DD" readOnly />
+      <RangeDatePicker variant="filled" placeholder="YYYY/MM/DD" readOnly />
+      <RangeDatePicker variant="flushed" placeholder="YYYY/MM/DD" readOnly />
+      <RangeDatePicker variant="unstyled" placeholder="YYYY/MM/DD" readOnly />
 
-      <FormControl isReadOnly label="What date would you like to reserve?">
+      <FormControl label="What date would you like to reserve?" readOnly>
         <RangeDatePicker placeholder="YYYY/MM/DD" />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <RangeDatePicker variant="outline" isInvalid placeholder="YYYY/MM/DD" />
-      <RangeDatePicker variant="filled" isInvalid placeholder="YYYY/MM/DD" />
-      <RangeDatePicker variant="flushed" isInvalid placeholder="YYYY/MM/DD" />
-      <RangeDatePicker variant="unstyled" isInvalid placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="outline" invalid placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="filled" invalid placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="flushed" invalid placeholder="YYYY/MM/DD" />
+      <RangeDatePicker variant="unstyled" invalid placeholder="YYYY/MM/DD" />
 
       <FormControl
         errorMessage="This is required."
-        isInvalid
+        invalid
         label="What date would you like to reserve?"
       >
         <RangeDatePicker placeholder="YYYY/MM/DD" />
@@ -466,8 +466,8 @@ export const disabledCloseOnBlur: Story = () => {
   return <RangeDatePicker closeOnBlur={false} placeholder="YYYY/MM/DD" />
 }
 
-export const disabledIsClearable: Story = () => {
-  return <RangeDatePicker isClearable={false} placeholder="YYYY/MM/DD" />
+export const disabledClearable: Story = () => {
+  return <RangeDatePicker clearable={false} placeholder="YYYY/MM/DD" />
 }
 
 export const disabledAllowInput: Story = () => {
@@ -562,7 +562,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.multiDatePicker?.message}
-        isInvalid={!!errors.multiDatePicker}
+        invalid={!!errors.multiDatePicker}
         label="Date to reserve"
       >
         <Controller
@@ -606,7 +606,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.multiDatePicker?.message}
-        isInvalid={!!errors.multiDatePicker}
+        invalid={!!errors.multiDatePicker}
         label="Date to reserve"
       >
         <Controller

@@ -64,7 +64,7 @@ describe("<NumberInput />", () => {
   })
 
   test("should render an invalid input", async () => {
-    render(<NumberInput isInvalid />)
+    render(<NumberInput invalid />)
 
     const numberInput = await screen.findByRole("spinbutton")
     expect(numberInput).toBeInvalid()

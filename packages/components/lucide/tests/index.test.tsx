@@ -3,11 +3,11 @@ import type { FC } from "react"
 import type { IconNames } from "../src"
 import { burger } from "@lucide/lab"
 import { render } from "@yamada-ui/test"
-import { Ghost, Icon, icons } from "../src"
+import { GhostIcon, icons, LucideIcon } from "../src"
 
 describe("Lucide icon", () => {
   test("renders icon correctly", () => {
-    render(<Ghost />)
+    render(<GhostIcon />)
   })
 
   test("renders icons correctly", () => {
@@ -21,8 +21,8 @@ describe("Lucide icon", () => {
   })
 })
 
-describe("<Icon />", () => {
-  test("renders Icon correctly", () => {
-    render(<Icon icon={burger} />)
+describe("<LucideIcon />", () => {
+  test("renders LucideIcon correctly", () => {
+    render(<LucideIcon icon={burger} />)
   })
 })

@@ -79,7 +79,7 @@ export const withFocusThumbOnChange: Story = () => {
 
           <Wrap gap="md">
             <Button
-              isDisabled={s === 0}
+              disabled={s === 0}
               onClick={() => onChange("s", "decrement")}
             >
               -0.1
@@ -87,7 +87,7 @@ export const withFocusThumbOnChange: Story = () => {
 
             <Button
               colorScheme="blue"
-              isDisabled={s === 1}
+              disabled={s === 1}
               onClick={() => onChange("s", "increment")}
             >
               +0.1
@@ -100,7 +100,7 @@ export const withFocusThumbOnChange: Story = () => {
 
           <Wrap gap="md">
             <Button
-              isDisabled={v === 0}
+              disabled={v === 0}
               onClick={() => onChange("v", "decrement")}
             >
               -0.1
@@ -108,7 +108,7 @@ export const withFocusThumbOnChange: Story = () => {
 
             <Button
               colorScheme="blue"
-              isDisabled={v === 1}
+              disabled={v === 1}
               onClick={() => onChange("v", "increment")}
             >
               +0.1
@@ -124,14 +124,14 @@ export const disabledShadow: Story = () => {
   return <SaturationSlider withShadow={false} />
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <SaturationSlider isDisabled />
+      <SaturationSlider disabled />
 
       <Fieldset
+        disabled
         helperMessage="Please select your favorite color"
-        isDisabled
         legend="Pick color"
       >
         <SaturationSlider />
@@ -140,15 +140,15 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <SaturationSlider isReadOnly />
+      <SaturationSlider readOnly />
 
       <Fieldset
         helperMessage="Please select your favorite color"
-        isReadOnly
         legend="Pick color"
+        readOnly
       >
         <SaturationSlider />
       </Fieldset>
@@ -228,7 +228,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.saturationSlider?.message}
-        isInvalid={!!errors.saturationSlider}
+        invalid={!!errors.saturationSlider}
         legend="Pick color"
       >
         <Controller

@@ -8,7 +8,7 @@ describe("<Card />", () => {
 
   test("renders all the allowed shorthand style props", async () => {
     render(
-      <Card align="start" direction="row" justify="start">
+      <Card align="start" flexDirection="row" justify="start">
         Flex
       </Card>,
     )

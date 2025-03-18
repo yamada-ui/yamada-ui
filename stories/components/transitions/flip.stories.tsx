@@ -141,7 +141,7 @@ export const useSpring: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <Center
       display="flex"
@@ -154,7 +154,7 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadOnly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <Center
       display="flex"

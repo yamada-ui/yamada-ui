@@ -142,7 +142,7 @@ export const withIconHidden: Story = () => {
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <Accordion>
       <AccordionItem label="孫悟空少年編">

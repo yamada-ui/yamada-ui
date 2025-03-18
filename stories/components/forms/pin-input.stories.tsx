@@ -93,7 +93,7 @@ export const withBorderColor: Story = () => {
 
       <PinInput focusBorderColor="green.500" />
 
-      <PinInput errorBorderColor="orange.500" isInvalid />
+      <PinInput errorBorderColor="orange.500" invalid />
     </>
   )
 }
@@ -140,22 +140,22 @@ export const disabledFocusManagement: Story = () => {
   return <PinInput manageFocus={false} />
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <PinInput isDisabled />
+      <PinInput disabled />
 
       <PinInput>
-        <PinInputField isDisabled />
-        <PinInputField isDisabled />
-        <PinInputField isDisabled />
-        <PinInputField isDisabled />
+        <PinInputField disabled />
+        <PinInputField disabled />
+        <PinInputField disabled />
+        <PinInputField disabled />
       </PinInput>
 
       <Fieldset
+        disabled
         errorMessage="one-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
-        isDisabled
         legend="Please one-time password"
       >
         <PinInput />
@@ -164,23 +164,23 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <PinInput isReadOnly />
+      <PinInput readOnly />
 
       <PinInput>
-        <PinInputField isReadOnly />
-        <PinInputField isReadOnly />
-        <PinInputField isReadOnly />
-        <PinInputField isReadOnly />
+        <PinInputField readOnly />
+        <PinInputField readOnly />
+        <PinInputField readOnly />
+        <PinInputField readOnly />
       </PinInput>
 
       <Fieldset
         errorMessage="one-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
-        isReadOnly
         legend="Please one-time password"
+        readOnly
       >
         <PinInput />
       </Fieldset>
@@ -188,22 +188,22 @@ export const isReadonly: Story = () => {
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <PinInput isInvalid />
+      <PinInput invalid />
 
       <PinInput>
-        <PinInputField isInvalid />
-        <PinInputField isInvalid />
-        <PinInputField isInvalid />
-        <PinInputField isInvalid />
+        <PinInputField invalid />
+        <PinInputField invalid />
+        <PinInputField invalid />
+        <PinInputField invalid />
       </PinInput>
 
       <Fieldset
         errorMessage="one-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
-        isInvalid
+        invalid
         legend="Please one-time password"
       >
         <PinInput />
@@ -232,7 +232,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.pinInput?.message}
-        isInvalid={!!errors.pinInput}
+        invalid={!!errors.pinInput}
         legend="Token"
       >
         <Controller
@@ -277,7 +277,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Fieldset
         errorMessage={errors.pinInput?.message}
-        isInvalid={!!errors.pinInput}
+        invalid={!!errors.pinInput}
         legend="Token"
       >
         <Controller

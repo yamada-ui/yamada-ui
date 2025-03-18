@@ -69,7 +69,7 @@ describe("<RadioGroup />", () => {
     )
     const props = result.current.getRadioProps()
 
-    expect(props).toHaveProperty("isChecked")
+    expect(props).toHaveProperty("checked")
   })
 
   test("renders Radio components from items when validChildren is empty and items is not empty", async () => {

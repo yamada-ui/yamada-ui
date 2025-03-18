@@ -34,7 +34,7 @@ export const withChildren: Story = () => {
       <YearPicker closeOnSelect={false} placeholder="YYYY">
         {({ value, onClose }) => (
           <VStack mt="sm">
-            <Button isDisabled={!value} onClick={onClose}>
+            <Button disabled={!value} onClick={onClose}>
               Submit{value ? ` ${dayjs(value).format("YYYY")}` : ""}
             </Button>
           </VStack>
@@ -124,7 +124,7 @@ export const withBorderColor: Story = () => {
 
       <YearPicker
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
@@ -172,47 +172,47 @@ export const withDuration: Story = () => {
   return <YearPicker duration={0.4} placeholder="YYYY" />
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <YearPicker variant="outline" isDisabled placeholder="outline" />
-      <YearPicker variant="filled" isDisabled placeholder="filled" />
-      <YearPicker variant="flushed" isDisabled placeholder="flushed" />
-      <YearPicker variant="unstyled" isDisabled placeholder="unstyled" />
+      <YearPicker variant="outline" disabled placeholder="outline" />
+      <YearPicker variant="filled" disabled placeholder="filled" />
+      <YearPicker variant="flushed" disabled placeholder="flushed" />
+      <YearPicker variant="unstyled" disabled placeholder="unstyled" />
 
-      <FormControl isDisabled label="What is your birthday?">
+      <FormControl disabled label="What is your birthday?">
         <YearPicker placeholder="YYYY" />
       </FormControl>
     </>
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <YearPicker variant="outline" isReadOnly placeholder="outline" />
-      <YearPicker variant="filled" isReadOnly placeholder="filled" />
-      <YearPicker variant="flushed" isReadOnly placeholder="flushed" />
-      <YearPicker variant="unstyled" isReadOnly placeholder="unstyled" />
+      <YearPicker variant="outline" placeholder="outline" readOnly />
+      <YearPicker variant="filled" placeholder="filled" readOnly />
+      <YearPicker variant="flushed" placeholder="flushed" readOnly />
+      <YearPicker variant="unstyled" placeholder="unstyled" readOnly />
 
-      <FormControl isReadOnly label="What is your birthday?">
+      <FormControl label="What is your birthday?" readOnly>
         <YearPicker placeholder="YYYY" />
       </FormControl>
     </>
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <YearPicker variant="outline" isInvalid placeholder="outline" />
-      <YearPicker variant="filled" isInvalid placeholder="filled" />
-      <YearPicker variant="flushed" isInvalid placeholder="flushed" />
-      <YearPicker variant="unstyled" isInvalid placeholder="unstyled" />
+      <YearPicker variant="outline" invalid placeholder="outline" />
+      <YearPicker variant="filled" invalid placeholder="filled" />
+      <YearPicker variant="flushed" invalid placeholder="flushed" />
+      <YearPicker variant="unstyled" invalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="This is required."
-        isInvalid
+        invalid
         label="What is your birthday?"
       >
         <YearPicker placeholder="YYYY" />
@@ -257,7 +257,7 @@ export const disabledCloseOnBlur: Story = () => {
 }
 
 export const disabledIsClearable: Story = () => {
-  return <YearPicker isClearable={false} placeholder="YYYY" />
+  return <YearPicker clearable={false} placeholder="YYYY" />
 }
 
 export const disabledAllowInput: Story = () => {
@@ -304,7 +304,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.yearPicker?.message}
-        isInvalid={!!errors.yearPicker}
+        invalid={!!errors.yearPicker}
         label="Birthday"
       >
         <Controller
@@ -346,7 +346,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.yearPicker?.message}
-        isInvalid={!!errors.yearPicker}
+        invalid={!!errors.yearPicker}
         label="Birthday"
       >
         <Controller

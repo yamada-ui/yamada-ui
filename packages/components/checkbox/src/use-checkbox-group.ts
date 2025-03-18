@@ -95,6 +95,9 @@ export const useCheckboxGroup = <
       [isNative ? "checked" : "isChecked"]: value.some(
         (val) => String(props.value) === String(val),
       ),
+      ...(!isNative
+        ? { checked: value.some((val) => String(props.value) === String(val)) }
+        : {}),
       onChange,
     }),
     [onChange, isNative, value],

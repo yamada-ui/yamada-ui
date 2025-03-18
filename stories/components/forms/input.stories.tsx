@@ -61,24 +61,24 @@ export const withBorderColor: Story = () => {
       <Input focusBorderColor="green.500" placeholder="custom border color" />
       <Input
         errorBorderColor="orange.500"
-        isInvalid
+        invalid
         placeholder="custom border color"
       />
     </>
   )
 }
 
-export const isDisabled: Story = () => {
+export const disabled: Story = () => {
   return (
     <>
-      <Input variant="outline" isDisabled placeholder="outline" />
-      <Input variant="filled" isDisabled placeholder="filled" />
-      <Input variant="flushed" isDisabled placeholder="flushed" />
-      <Input variant="unstyled" isDisabled placeholder="unstyled" />
+      <Input variant="outline" disabled placeholder="outline" />
+      <Input variant="filled" disabled placeholder="filled" />
+      <Input variant="flushed" disabled placeholder="flushed" />
+      <Input variant="unstyled" disabled placeholder="unstyled" />
 
       <FormControl
+        disabled
         helperMessage="We'll never share your email."
-        isDisabled
         label="Email address"
       >
         <Input type="email" placeholder="your email address" />
@@ -87,18 +87,18 @@ export const isDisabled: Story = () => {
   )
 }
 
-export const isReadonly: Story = () => {
+export const readOnly: Story = () => {
   return (
     <>
-      <Input variant="outline" isReadOnly placeholder="outline" />
-      <Input variant="filled" isReadOnly placeholder="filled" />
-      <Input variant="flushed" isReadOnly placeholder="flushed" />
-      <Input variant="unstyled" isReadOnly placeholder="unstyled" />
+      <Input variant="outline" placeholder="outline" readOnly />
+      <Input variant="filled" placeholder="filled" readOnly />
+      <Input variant="flushed" placeholder="flushed" readOnly />
+      <Input variant="unstyled" placeholder="unstyled" readOnly />
 
       <FormControl
         helperMessage="We'll never share your email."
-        isReadOnly
         label="Email address"
+        readOnly
       >
         <Input type="email" placeholder="your email address" />
       </FormControl>
@@ -106,17 +106,17 @@ export const isReadonly: Story = () => {
   )
 }
 
-export const isInvalid: Story = () => {
+export const invalid: Story = () => {
   return (
     <>
-      <Input variant="outline" isInvalid placeholder="outline" />
-      <Input variant="filled" isInvalid placeholder="filled" />
-      <Input variant="flushed" isInvalid placeholder="flushed" />
-      <Input variant="unstyled" isInvalid placeholder="unstyled" />
+      <Input variant="outline" invalid placeholder="outline" />
+      <Input variant="filled" invalid placeholder="filled" />
+      <Input variant="flushed" invalid placeholder="flushed" />
+      <Input variant="unstyled" invalid placeholder="unstyled" />
 
       <FormControl
         errorMessage="Email is required."
-        isInvalid
+        invalid
         label="Email address"
       >
         <Input type="email" placeholder="your email address" />
@@ -170,7 +170,7 @@ export const useElement: Story = () => {
           placeholder="your password"
           pr="4.5rem"
         />
-        <InputRightElement isClickable w="4.5rem">
+        <InputRightElement clickable w="4.5rem">
           <Button size="sm" h="1.75rem" onClick={toggle}>
             {show ? "Hide" : "Show"}
           </Button>
@@ -229,7 +229,7 @@ export const reactHookForm: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.name?.message}
-        isInvalid={!!errors.name}
+        invalid={!!errors.name}
         label="Name"
       >
         <Input
@@ -242,7 +242,7 @@ export const reactHookForm: Story = () => {
 
       <FormControl
         errorMessage={errors.cellphone?.message}
-        isInvalid={!!errors.cellphone}
+        invalid={!!errors.cellphone}
         label="Cellphone"
       >
         <InputGroup>
@@ -259,7 +259,7 @@ export const reactHookForm: Story = () => {
 
       <FormControl
         errorMessage={errors.email?.message}
-        isInvalid={!!errors.email}
+        invalid={!!errors.email}
         label="Email"
       >
         <InputGroup>
@@ -311,7 +311,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <FormControl
         errorMessage={errors.name?.message}
-        isInvalid={!!errors.name}
+        invalid={!!errors.name}
         label="Name"
       >
         <Input
@@ -324,7 +324,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
       <FormControl
         errorMessage={errors.cellphone?.message}
-        isInvalid={!!errors.cellphone}
+        invalid={!!errors.cellphone}
         label="Cellphone"
       >
         <InputGroup>
@@ -341,7 +341,7 @@ export const reactHookFormWithDefaultValue: Story = () => {
 
       <FormControl
         errorMessage={errors.email?.message}
-        isInvalid={!!errors.email}
+        invalid={!!errors.email}
         label="Email"
       >
         <InputGroup>

@@ -22,7 +22,7 @@ describe("<Switch />", () => {
   })
 
   test("should be checked by default", async () => {
-    render(<Switch defaultIsChecked>basic</Switch>)
+    render(<Switch defaultChecked>basic</Switch>)
 
     const switchElement = await screen.findByRole("switch", { name: /basic/i })
 

@@ -125,6 +125,8 @@ export const useRadioGroup = <
         [isNative ? "checked" : "isChecked"]:
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           value != null ? checked : undefined,
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        ...(!isNative ? { checked: value != null ? checked : undefined } : {}),
         onChange,
       }
     },

@@ -5,7 +5,6 @@ import {
   AspectRatio,
   Box,
   Container,
-  Divider,
   Flex,
   Grid,
   GridItem,
@@ -227,7 +226,7 @@ describe("<Stack />", () => {
             delete character
           </Box>
 
-          <Stack divider={<Divider />}>
+          <Stack separator={<Separator />}>
             {characters.map(({ name }) => (
               <Component key={name} name={name} onUnmount={unMountMock} />
             ))}

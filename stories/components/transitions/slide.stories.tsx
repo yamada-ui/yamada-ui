@@ -11,13 +11,13 @@ const meta: Meta<typeof Slide> = {
 export default meta
 
 export const basic: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide open={isOpen} placement="bottom">
+      <Slide open={open} placement="bottom">
         <VStack bg="orange.500" p="md" w="full">
           <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -33,13 +33,13 @@ export const basic: Story = () => {
 }
 
 export const withDuration: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide duration={0.7} open={isOpen} placement="bottom">
+      <Slide duration={0.7} open={open} placement="bottom">
         <VStack bg="orange.500" p="md" w="full">
           <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -55,13 +55,13 @@ export const withDuration: Story = () => {
 }
 
 export const withPlacement: Story = () => {
-  const [isOpen, { toggle }] = useBoolean()
+  const [open, { toggle }] = useBoolean()
 
   return (
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide open={isOpen} placement="left">
+      <Slide open={open} placement="left">
         <VStack bg="orange.500" p="md" w="full">
           <Text color="white">
             クリリンのことか……クリリンのことかーーーっ！！！！！

@@ -66,18 +66,39 @@ const storybookConfig: Linter.Config = {
   },
 }
 
+const deprecatedConfig: Linter.Config = {
+  name: "eslint/deprecated",
+  files: [
+    "packages/**/tests/**/*.js",
+    "packages/**/tests/**/*.cjs",
+    "packages/**/tests/**/*.mjs",
+    "packages/**/tests/**/*.jsx",
+    "packages/**/tests/**/*.ts",
+    "packages/**/tests/**/*.cts",
+    "packages/**/tests/**/*.mts",
+    "packages/**/tests/**/*.tsx",
+    "packages/**/tests/**/*.d.ts",
+    "stories/**/*.ts",
+    "stories/**/*.tsx",
+    "stories/**/*.d.ts",
+  ],
+  rules: {
+    "@typescript-eslint/no-deprecated": "warn",
+  },
+}
+
 const restrictedImportsConfig: Linter.Config = {
   name: "eslint/restricted-imports",
   files: [
-    "**/packages/**/*.js",
-    "**/packages/**/*.cjs",
-    "**/packages/**/*.mjs",
-    "**/packages/**/*.jsx",
-    "**/packages/**/*.ts",
-    "**/packages/**/*.cts",
-    "**/packages/**/*.mts",
-    "**/packages/**/*.tsx",
-    "**/packages/**/*.d.ts",
+    "packages/**/*.js",
+    "packages/**/*.cjs",
+    "packages/**/*.mjs",
+    "packages/**/*.jsx",
+    "packages/**/*.ts",
+    "packages/**/*.cts",
+    "packages/**/*.mts",
+    "packages/**/*.tsx",
+    "packages/**/*.d.ts",
   ],
   rules: {
     "no-restricted-imports": ["error", "@yamada-ui/react"],
@@ -119,6 +140,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   languageOptionConfig,
   baseConfig,
   noConsoleConfig,
+  deprecatedConfig,
   restrictedImportsConfig,
   typescriptConfig,
   ...importConfigArray,

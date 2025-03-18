@@ -8,7 +8,7 @@ import { useCallback, useMemo, useRef } from "react"
  * @see Docs https://yamada-ui.com/hooks/use-processing
  */
 export const useProcessing = (init?: boolean) => {
-  const [isLoading, { off, on }] = useBoolean(init)
+  const [loading, { off, on }] = useBoolean(init)
   const countRef = useRef<number>(0)
 
   const start = useCallback(() => {
@@ -30,10 +30,14 @@ export const useProcessing = (init?: boolean) => {
   const controls = useMemo(
     () => ({
       finish,
-      isLoading,
+      /**
+       * @deprecated Use `loading` instead.
+       */
+      isLoading: loading,
+      loading,
       start,
     }),
-    [finish, isLoading, start],
+    [finish, loading, start],
   )
 
   return controls

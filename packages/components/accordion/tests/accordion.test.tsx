@@ -40,7 +40,7 @@ describe("<Accordion />", () => {
 
   test("should work correctly with isToggle", async () => {
     const { user } = render(
-      <Accordion isToggle>
+      <Accordion toggle>
         <AccordionItem label="Accordion Label 1">
           This is an accordion item 1
         </AccordionItem>
@@ -61,7 +61,7 @@ describe("<Accordion />", () => {
 
   test("should show multiple items", async () => {
     const { user } = render(
-      <Accordion defaultIndex={[0, 1]} isMultiple>
+      <Accordion defaultIndex={[0, 1]} multiple>
         <AccordionItem label="Accordion Label 1">
           This is an accordion item 1
         </AccordionItem>
@@ -89,7 +89,7 @@ describe("<Accordion />", () => {
   test("should render a disabled item", () => {
     render(
       <Accordion>
-        <AccordionItem isDisabled label="Accordion Label">
+        <AccordionItem disabled label="Accordion Label">
           This is an accordion item
         </AccordionItem>
       </Accordion>,
@@ -116,9 +116,9 @@ describe("<Accordion />", () => {
   test("should render item with custom icon", async () => {
     const { user } = render(
       <Accordion
-        icon={({ isExpanded }) => (
+        icon={({ expanded }) => (
           <TestIcon
-            data-icon={!isExpanded ? "plus" : "minus"}
+            data-icon={!expanded ? "plus" : "minus"}
             data-testid="custom-icon"
           />
         )}
@@ -144,9 +144,9 @@ describe("<Accordion />", () => {
     const { user } = render(
       <Accordion>
         <AccordionItem
-          icon={({ isExpanded }) => (
+          icon={({ expanded }) => (
             <TestIcon
-              data-icon={!isExpanded ? "plus" : "minus"}
+              data-icon={!expanded ? "plus" : "minus"}
               data-testid="custom-icon"
             />
           )}
@@ -173,9 +173,9 @@ describe("<Accordion />", () => {
       <Accordion>
         <AccordionItem>
           <AccordionLabel
-            icon={({ isExpanded }) => (
+            icon={({ expanded }) => (
               <TestIcon
-                data-icon={!isExpanded ? "plus" : "minus"}
+                data-icon={!expanded ? "plus" : "minus"}
                 data-testid="custom-icon"
               />
             )}
@@ -216,10 +216,10 @@ describe("<Accordion />", () => {
     const { user } = render(
       <Accordion>
         <AccordionItem
-          label={({ isDisabled, isExpanded }) => {
-            if (isDisabled) return <p>Is disabled</p>
+          label={({ disabled, expanded }) => {
+            if (disabled) return <p>Is disabled</p>
 
-            if (isExpanded) return <p>Is expanded</p>
+            if (expanded) return <p>Is expanded</p>
             else return <p>Not expanded</p>
           }}
         >
@@ -350,7 +350,7 @@ describe("<Accordion />", () => {
     const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
     render(
-      <Accordion isMultiple isToggle>
+      <Accordion multiple toggle>
         <AccordionItem label="Accordion Label">
           This is an accordion item
         </AccordionItem>
@@ -366,7 +366,7 @@ describe("<Accordion />", () => {
     const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
 
     render(
-      <Accordion defaultIndex={1} isMultiple>
+      <Accordion defaultIndex={1} multiple>
         <AccordionItem label="Accordion Label">
           This is an accordion item
         </AccordionItem>

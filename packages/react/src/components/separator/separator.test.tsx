@@ -6,9 +6,9 @@ describe("<Separator />", () => {
     render(<Separator />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Separator.displayName).toBe("Separator")
-    expect(Separator.__ui__).toBe("Separator")
+    expect(Separator.__styled__).toBe("Separator")
   })
 
   test("sets `className` correctly", () => {

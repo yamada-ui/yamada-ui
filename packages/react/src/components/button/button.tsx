@@ -1,5 +1,10 @@
 import type { ElementType, ReactNode } from "react"
-import type { CSSObject, HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
+import type {
+  CSSObject,
+  HTMLProps,
+  HTMLStyledProps,
+  ThemeProps,
+} from "../../core"
 import type { Loading } from "../loading"
 import type { ButtonStyle } from "./button.style"
 import {
@@ -10,7 +15,7 @@ import {
   useMemo,
   useRef,
 } from "react"
-import { createComponent, mergeCSS, ui } from "../../core"
+import { createComponent, mergeCSS, styled } from "../../core"
 import { createContext, dataAttr, mergeRefs } from "../../utils"
 import { getLoadingComponent, isLoadingScheme } from "../loading"
 import { Ripple, useRipple } from "../ripple"
@@ -39,7 +44,7 @@ const useButtonType = (value?: ElementType) => {
 }
 
 export interface ButtonProps
-  extends HTMLUIProps<"button">,
+  extends HTMLStyledProps<"button">,
     ThemeProps<ButtonStyle> {
   /**
    * The type of button. Accepts `button`, `reset`, or `submit`.
@@ -151,7 +156,7 @@ export const Button = withContext(
 
     return (
       <ButtonContext.Provider value={context}>
-        <ui.button
+        <styled.button
           ref={mergeRefs(ref, buttonRef)}
           as={as}
           type={type}
@@ -165,9 +170,9 @@ export const Button = withContext(
 
           {loading ? (
             loadingMessage || (
-              <ui.span opacity={0}>
+              <styled.span opacity={0}>
                 <ButtonContent>{children}</ButtonContent>
-              </ui.span>
+              </styled.span>
             )
           ) : (
             <ButtonContent>{children}</ButtonContent>
@@ -176,7 +181,7 @@ export const Button = withContext(
           {endLoading ? <ButtonEndLoading {...loadingProps} /> : null}
 
           <Ripple {...rippleProps} />
-        </ui.button>
+        </styled.button>
       </ButtonContext.Provider>
     )
   },
@@ -201,7 +206,7 @@ const ButtonContent = component(
   { name: "button__content" },
 )()
 
-interface ButtonLoadingProps extends HTMLUIProps<"svg"> {}
+interface ButtonLoadingProps extends HTMLStyledProps<"svg"> {}
 
 const ButtonLoading = component<"svg", ButtonLoadingProps>(
   (props) => {
@@ -227,9 +232,9 @@ const ButtonLoading = component<"svg", ButtonLoadingProps>(
     }
 
     return (
-      <ui.div {...props} css={mergeCSS(css, props.css)}>
+      <styled.svg {...props} css={mergeCSS(css, props.css)}>
         {loadingIcon}
-      </ui.div>
+      </styled.svg>
     )
   },
   { name: "button__loading" },
@@ -243,7 +248,7 @@ const ButtonEndLoading = component<"svg", ButtonLoadingProps>(ButtonLoading, {
   name: "button__loading--end",
 })()
 
-interface ButtonIconProps extends HTMLUIProps<"svg"> {}
+interface ButtonIconProps extends HTMLStyledProps<"svg"> {}
 
 const ButtonIcon = component<"svg", ButtonIconProps>(
   ({ children, ...rest }) => {

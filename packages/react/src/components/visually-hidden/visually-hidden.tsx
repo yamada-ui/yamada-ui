@@ -1,9 +1,9 @@
-import type { HTMLUIProps } from "../../core"
+import type { HTMLStyledProps } from "../../core"
 import type { VisuallyHiddenStyle } from "./visually-hidden.style"
 import { createComponent } from "../../core"
 import { visuallyHiddenStyle } from "./visually-hidden.style"
 
-export interface VisuallyHiddenProps extends HTMLUIProps<"span"> {}
+export interface VisuallyHiddenProps extends HTMLStyledProps<"span"> {}
 
 export const {
   PropsContext: visuallyHiddenPropsContext,

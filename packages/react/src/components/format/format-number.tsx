@@ -1,11 +1,11 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FormatNumberStyle } from "./format-number.style"
-import { createComponent, ui } from "../../core"
+import { createComponent, styled } from "../../core"
 import { formatNumberStyle } from "./format-number.style"
 import { useFormatNumber } from "./use-format-number"
 
 export interface FormatNumberProps
-  extends Omit<HTMLUIProps, "style">,
+  extends Omit<HTMLStyledProps, "style">,
     ThemeProps<FormatNumberStyle>,
     Intl.NumberFormatOptions {
   /**
@@ -85,6 +85,6 @@ export const FormatNumber = withContext<"span", FormatNumberProps>(
       useGrouping,
     })
 
-    return <ui.span {...rest}>{text}</ui.span>
+    return <styled.span {...rest}>{text}</styled.span>
   },
 )()

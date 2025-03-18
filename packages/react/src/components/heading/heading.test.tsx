@@ -7,9 +7,9 @@ describe("<Heading />", () => {
     await a11y(<Heading>Heading</Heading>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Heading.displayName).toBe("Heading")
-    expect(Heading.__ui__).toBe("Heading")
+    expect(Heading.__styled__).toBe("Heading")
   })
 
   test("sets `className` correctly", () => {

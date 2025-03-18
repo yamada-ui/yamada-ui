@@ -1,18 +1,18 @@
-import type { ComponentType, ForwardRefExoticComponent } from "react"
+import type { ComponentType } from "react"
 import type { DOMElement, StyledOptions } from "../../core"
-import type { MotionUIComponent } from "./index.types"
+import type { MotionStyledComponent } from "./index.types"
 import { motion as _motion } from "motion/react"
 import { styled } from "../../core"
 
 type Components = {
-  [Y in DOMElement]: MotionUIComponent<Y>
+  [Y in DOMElement]: MotionStyledComponent<Y>
 }
 
 interface Factory extends Components {
   <T extends DOMElement = DOMElement, M extends object = {}>(
     el: T,
     options?: StyledOptions,
-  ): MotionUIComponent<T, M>
+  ): MotionStyledComponent<T, M>
 }
 
 function factory() {
@@ -20,7 +20,7 @@ function factory() {
 
   return new Proxy(styled, {
     apply: (_target, _thisArg, [el, options]: [DOMElement, StyledOptions]) => {
-      const component = styled(el, options) as ForwardRefExoticComponent<any>
+      const component = styled(el, options)
 
       return _motion.create(component)
     },

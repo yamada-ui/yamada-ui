@@ -7,18 +7,18 @@ describe("<Field />", () => {
     await a11y(<Field.Root />)
   })
 
-  test("Field sets `displayName` and `__ui__` correctly", () => {
+  test("Field sets `displayName` and `__styled__` correctly", () => {
     expect(Field.Root.displayName).toBe("FieldRoot")
-    expect(Field.Root.__ui__).toBe("FieldRoot")
+    expect(Field.Root.__styled__).toBe("FieldRoot")
 
     expect(Field.Label.displayName).toBe("FieldLabel")
-    expect(Field.Label.__ui__).toBe("FieldLabel")
+    expect(Field.Label.__styled__).toBe("FieldLabel")
 
     expect(Field.HelperMessage.displayName).toBe("FieldHelperMessage")
-    expect(Field.HelperMessage.__ui__).toBe("FieldHelperMessage")
+    expect(Field.HelperMessage.__styled__).toBe("FieldHelperMessage")
 
     expect(Field.ErrorMessage.displayName).toBe("FieldErrorMessage")
-    expect(Field.ErrorMessage.__ui__).toBe("FieldErrorMessage")
+    expect(Field.ErrorMessage.__styled__).toBe("FieldErrorMessage")
   })
 
   test("Field sets `className` correctly", () => {

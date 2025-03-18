@@ -16,9 +16,9 @@ describe("<Status />", () => {
     await a11y(<TestComponent />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Status.displayName).toBe("StatusRoot")
-    expect(Status.__ui__).toBe("StatusRoot")
+    expect(Status.__styled__).toBe("StatusRoot")
   })
 
   test("sets `className` correctly", () => {

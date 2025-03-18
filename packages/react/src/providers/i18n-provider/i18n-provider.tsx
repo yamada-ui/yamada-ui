@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from "react"
 import type { TextDirection } from "../../core"
+import type { Dict, Path, Value } from "../../utils"
 import {
   createContext,
   useCallback,
@@ -9,56 +10,31 @@ import {
   useState,
 } from "react"
 import { DEFAULT_DIRECTION, DEFAULT_LOCALE } from "../../core"
-import { createdDom, isEmptyObject, useSsr } from "../../utils"
+import {
+  createdDom,
+  getMemoizedObject as get,
+  isEmptyObject,
+  isObject,
+  isRtl,
+  isUndefined,
+  noop,
+  useSsr,
+  useUpdateEffect,
+} from "../../utils"
+import DEFAULT_INTL from "./intl"
 
 export interface Language {
-  direction: TextDirection
+  dir: TextDirection
   locale: string
 }
 
-const RTL_SCRIPTS = new Set([
-  "Adlm",
-  "Arab",
-  "Hebr",
-  "Mand",
-  "Mend",
-  "Nkoo",
-  "Rohg",
-  "Samr",
-  "Syrc",
-  "Thaa",
-  "Yezi",
-])
-
-const RTL_LANGS = new Set([
-  "ae",
-  "ar",
-  "arc",
-  "bcc",
-  "bqi",
-  "ckb",
-  "dv",
-  "fa",
-  "glk",
-  "he",
-  "ku",
-  "mzn",
-  "nqo",
-  "pnb",
-  "ps",
-  "sd",
-  "ug",
-  "ur",
-  "yi",
-])
-
 const DEFAULT_LANGUAGE: Language = {
-  direction: DEFAULT_DIRECTION,
+  dir: DEFAULT_DIRECTION,
   locale: DEFAULT_LOCALE,
 }
 
-export function getLanguage(): Language {
-  let locale = createdDom() ? navigator.language : DEFAULT_LOCALE
+export function getLanguage(locale?: string, dir?: TextDirection): Language {
+  locale ??= createdDom() ? navigator.language : DEFAULT_LOCALE
 
   try {
     Intl.DateTimeFormat.supportedLocalesOf([locale])
@@ -66,80 +42,166 @@ export function getLanguage(): Language {
     locale = DEFAULT_LOCALE
   }
 
-  const direction = isRtl(locale) ? "rtl" : "ltr"
+  dir ??= isRtl(locale) ? "rtl" : "ltr"
 
-  return { direction, locale }
+  return { dir, locale }
 }
 
-interface I18nContext extends Language {}
+type Pattern<Y> = Y extends `${string}{${infer M}}${infer D}`
+  ? M | Pattern<D>
+  : never
 
-export const I18nContext = createContext<I18nContext>({ ...DEFAULT_LANGUAGE })
+type PatternValue = number | string
+
+type ReplaceValue<Y> =
+  Pattern<Y> extends never
+    ? never
+    : PatternValue | { [M in Pattern<Y>]: PatternValue }
+
+type IntlData = (typeof DEFAULT_INTL)["en-US"]
+type IntlKey = keyof IntlData
+type IntlPath = Path<IntlData>
+
+interface I18nContext<Y extends object = IntlData, M extends string = IntlPath>
+  extends Language {
+  changeLanguage: (locale?: string, dir?: TextDirection) => void
+  t: <D extends M>(
+    path: D,
+    replaceValue?: ReplaceValue<Value<Y, D>>,
+    pattern?: string,
+  ) => string
+}
+
+export const I18nContext = createContext<I18nContext>({
+  ...DEFAULT_LANGUAGE,
+  changeLanguage: noop,
+  t: () => "",
+})
 
 export interface I18nProviderProps {
   children?: ReactNode
   /**
    * The text direction to apply to the application.
    *
-   * @default 'ltr'
+   * If not provided, the direction will be determined by the locale.
    */
-  direction?: TextDirection
+  dir?: TextDirection
+  /**
+   * The internationalization messages to apply to the application.
+   *
+   * This prop expects a dictionary object where the keys are locale strings (e.g., "en-US").
+   */
+  intl?: Dict
   /**
    * The locale to apply to the application.
    *
-   * @default 'en-US'
+   * If not provided, the locale will be determined by the browser.
    */
   locale?: string
 }
 
 export const I18nProvider: FC<I18nProviderProps> = ({
   children,
-  direction: directionProp,
-  locale,
+  dir: forcedDir,
+  intl = DEFAULT_INTL as Dict,
+  locale: forcedLocale,
 }) => {
   const ssr = useSsr()
-  const [language, setLanguage] = useState(getLanguage())
+  const [language, setLanguage] = useState(getLanguage(forcedLocale, forcedDir))
+  const controlled = !isUndefined(forcedLocale)
+  const { locale } = language
 
-  const onChangeLanguage = useCallback(() => {
+  const messages = useMemo(() => intl[locale], [intl, locale])
+
+  const changeSystemLanguage = useCallback(() => {
     setLanguage(getLanguage())
   }, [])
 
+  const changeLanguage = useCallback((locale?: string, dir?: TextDirection) => {
+    setLanguage(getLanguage(locale, dir))
+  }, [])
+
+  const translate = useCallback(
+    <Y extends IntlPath>(
+      path: Y,
+      replaceValue?: ReplaceValue<Value<IntlData, Y>>,
+      pattern = "label",
+    ) => {
+      let value = get<string>(messages, path, "")
+
+      if (isUndefined(replaceValue)) return value
+
+      if (!isObject(replaceValue)) {
+        value = value.replace(
+          new RegExp(`{${pattern}}`, "g"),
+          `${replaceValue}`,
+        )
+      } else {
+        value = Object.entries(replaceValue).reduce(
+          (prev, [pattern, value]) =>
+            prev.replace(new RegExp(`{${pattern}}`, "g"), `${value}`),
+          value,
+        )
+      }
+
+      return value
+    },
+    [messages],
+  )
+
   const value = useMemo(() => {
-    if (ssr) return DEFAULT_LANGUAGE
+    const rest = { changeLanguage, t: translate }
 
-    if (!locale) return language
+    if (ssr) return { ...DEFAULT_LANGUAGE, ...rest }
 
-    const direction = directionProp ?? (isRtl(locale) ? "rtl" : "ltr")
-
-    return { direction, locale }
-  }, [locale, ssr, language, directionProp])
+    return { ...language, ...rest }
+  }, [changeLanguage, translate, ssr, language])
 
   useEffect(() => {
-    window.addEventListener("languagechange", onChangeLanguage)
+    if (controlled) return
+
+    window.addEventListener("languagechange", changeSystemLanguage)
 
     return () => {
-      window.removeEventListener("languagechange", onChangeLanguage)
+      window.removeEventListener("languagechange", changeSystemLanguage)
     }
-  }, [onChangeLanguage])
+  }, [controlled, changeSystemLanguage])
+
+  useUpdateEffect(() => {
+    setLanguage(getLanguage(forcedLocale, forcedDir))
+  }, [forcedLocale, forcedDir])
 
   return <I18nContext value={value}>{children}</I18nContext>
 }
 
-export function useI18n() {
+export function useI18n(): I18nContext
+
+export function useI18n<Y extends IntlKey>(
+  key: Y,
+): I18nContext<IntlData[Y], Path<IntlData[Y]>>
+
+export function useI18n<Y extends IntlKey>(key?: Y) {
   const context = useContext(I18nContext)
 
-  if (isEmptyObject(context)) return DEFAULT_LANGUAGE
+  const translate = useCallback(
+    <M extends Path<IntlData[Y]>>(
+      path: M,
+      replaceValue?: ReplaceValue<M>,
+      pattern = "label",
+    ) => context.t(`${key!}.${path}` as any, replaceValue, pattern),
+    [key, context],
+  )
 
-  return context
-}
+  if (isEmptyObject(context))
+    return {
+      ...DEFAULT_LANGUAGE,
+      changeLanguage: noop,
+      t: () => "",
+    }
 
-export function isRtl(_locale: string) {
-  const locale = new Intl.Locale(_locale).maximize()
-
-  if ("textInfo" in locale) return (locale.textInfo as any).direction === "rtl"
-
-  if (locale.script) {
-    return RTL_SCRIPTS.has(locale.script)
+  if (key) {
+    return { ...context, t: translate }
   } else {
-    return RTL_LANGS.has(_locale.split("-")[0]!)
+    return context
   }
 }

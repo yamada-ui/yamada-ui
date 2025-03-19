@@ -307,7 +307,7 @@ const PaginationItem = withContext<"button", PaginationItemProps>(
         css={css}
         disabled={disabled}
         onClick={onClick}
-        {...(ellipsis
+        {...(!ellipsis
           ? {
               type: "button",
               "data-disabled": dataAttr(disabled),

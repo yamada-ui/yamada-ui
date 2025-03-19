@@ -278,12 +278,21 @@ const iconMap: {
 
 const PaginationItem = withContext<"button", PaginationItemProps>(
   ({
+    className: classNameProp,
+    css: cssProp,
+    active,
     page,
     children = iconMap[page] ?? page,
     disabled,
     disableRipple,
     ...rest
   }) => {
+    const styles = useStyleContext()
+    const css = !isNumber(page) ? mergeCSS(cssProp, styles[page]) : cssProp
+    const className = !isNumber(page)
+      ? cx(classNameProp, `ui-pagination__item--${page}`)
+      : classNameProp
+
     const ellipsis = page === "ellipsis"
     const { onClick, ...rippleProps } = useRipple({
       ...rest,
@@ -293,7 +302,23 @@ const PaginationItem = withContext<"button", PaginationItemProps>(
     const Component = ui[ellipsis ? "span" : "button"]
 
     return (
-      <Component {...rest} disabled={disabled} onClick={onClick}>
+      <Component
+        className={className}
+        css={css}
+        disabled={disabled}
+        onClick={onClick}
+        {...(ellipsis
+          ? {
+              type: "button",
+              "data-disabled": dataAttr(disabled),
+              "data-selected": dataAttr(active),
+              tabIndex: 0,
+            }
+          : {
+              tabIndex: -1,
+            })}
+        {...rest}
+      >
         {children}
 
         <Ripple {...rippleProps} />
@@ -301,33 +326,4 @@ const PaginationItem = withContext<"button", PaginationItemProps>(
     )
   },
   "item",
-)(
-  undefined,
-  ({
-    className: classNameProp,
-    css: cssProp,
-    active,
-    disabled,
-    page,
-    ...rest
-  }) => {
-    const props =
-      page !== "ellipsis"
-        ? {
-            type: "button",
-            "data-disabled": dataAttr(disabled),
-            "data-selected": dataAttr(active),
-            tabIndex: 0,
-          }
-        : {
-            tabIndex: -1,
-          }
-
-    const styles = useStyleContext()
-    const css = !isNumber(page) ? mergeCSS(cssProp, styles[page]) : cssProp
-    const className = !isNumber(page)
-      ? cx(classNameProp, `ui-pagination__item--${page}`)
-      : classNameProp
-    return { ...rest, ...props, className, css, disabled, page }
-  },
-)
+)()

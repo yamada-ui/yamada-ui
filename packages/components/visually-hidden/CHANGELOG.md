@@ -1,5 +1,14 @@
 # @yamada-ui/visually-hidden
 
+## 1.0.24
+
+### Patch Changes
+
+- [#4607](https://github.com/yamada-ui/yamada-ui/pull/4607) [`1ce254b`](https://github.com/yamada-ui/yamada-ui/commit/1ce254baa134068bc56deec5d01d0dc03442750d) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated `clip` to `clipPath` for hiding elements.
+
+- Updated dependencies [[`d5eb415`](https://github.com/yamada-ui/yamada-ui/commit/d5eb41569423579497c0908dfac79a8ddab9edf8)]:
+  - @yamada-ui/core@1.17.3
+
 ## 1.0.23
 
 ### Patch Changes

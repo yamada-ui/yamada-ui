@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import defaultTheme from "../../theme"
-import { Wrap } from "../flex"
+import { defaultTheme } from "../../theme"
+import { Wrap } from "../wrap"
 import { ColorSwatch } from "./"
 
 type Story = StoryFn<typeof ColorSwatch>
@@ -22,25 +22,21 @@ export const Basic: Story = () => {
       </Wrap>
 
       <Wrap gap="md">
-        {Object.entries(defaultTheme.colors.whiteAlpha ?? {}).map(
-          ([key, color]) => (
-            <ColorSwatch key={key} color={color} />
-          ),
-        )}
+        {Object.entries(defaultTheme.colors.whiteAlpha).map(([key, color]) => (
+          <ColorSwatch key={key} color={color} />
+        ))}
       </Wrap>
 
       <Wrap gap="md">
-        {Object.entries(defaultTheme.colors.blackAlpha ?? {}).map(
-          ([key, color]) => (
-            <ColorSwatch key={key} color={color} />
-          ),
-        )}
+        {Object.entries(defaultTheme.colors.blackAlpha).map(([key, color]) => (
+          <ColorSwatch key={key} color={color} />
+        ))}
       </Wrap>
     </>
   )
 }
 
-export const WithVariant: Story = () => {
+export const Variant: Story = () => {
   return (
     <Wrap gap="md">
       <ColorSwatch variant="basic" color="#4387f4" />
@@ -49,7 +45,7 @@ export const WithVariant: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
     <Wrap gap="md">
       <ColorSwatch size="sm" color="#4387f4" />

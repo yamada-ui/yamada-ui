@@ -48,7 +48,7 @@
   "dependencies": {
     "@yamada-ui/core": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
-    "motion": "^12.4.7"
+    "motion": "12.5.0"
   },
   "devDependencies": {
     "clean-package": "2.2.0",

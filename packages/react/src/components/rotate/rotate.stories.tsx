@@ -1,8 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { RotateIdent } from "."
+import type { RotateIdent } from "./"
 import { useState } from "react"
-import { Rotate } from "."
-import { Center } from "../../components/center"
+import { Center } from "../center"
 import {
   AppleIcon,
   CherryIcon,
@@ -10,7 +9,8 @@ import {
   HandMetalIcon,
   MoonIcon,
   SunIcon,
-} from "../../components/icon"
+} from "../icon"
+import { Rotate } from "./"
 
 type Story = StoryFn<typeof Rotate>
 
@@ -42,7 +42,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithRotate: Story = () => {
+export const RotateDegree: Story = () => {
   return (
     <Center
       display="flex"
@@ -65,7 +65,7 @@ export const WithRotate: Story = () => {
   )
 }
 
-export const WithDuration: Story = () => {
+export const Duration: Story = () => {
   return (
     <Center
       display="flex"
@@ -88,7 +88,7 @@ export const WithDuration: Story = () => {
   )
 }
 
-export const WithDelay: Story = () => {
+export const Delay: Story = () => {
   return (
     <Center
       display="flex"

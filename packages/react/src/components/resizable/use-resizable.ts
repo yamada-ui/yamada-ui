@@ -1,9 +1,4 @@
-import type {
-  ForwardedRef,
-  MouseEvent,
-  MouseEventHandler,
-  RefObject,
-} from "react"
+import type { MouseEvent, MouseEventHandler, Ref, RefObject } from "react"
 import type {
   ImperativePanelGroupHandle,
   ImperativePanelHandle,
@@ -14,9 +9,8 @@ import type {
   PanelResizeHandleProps,
 } from "react-resizable-panels"
 import type {
-  CSSUIObject,
-  HTMLUIProps,
-  HTMLUIPropsWithoutAs,
+  HTMLStyledProps,
+  HTMLStyledPropsWithoutAs,
   PropGetter,
 } from "../../core"
 import type { Merge } from "../../utils"
@@ -26,15 +20,10 @@ import {
   getPanelGroupElement,
   getResizeHandleElement,
 } from "react-resizable-panels"
-import {
-  createContext,
-  dataAttr,
-  handlerAll,
-  isRefObject,
-  mergeRefs,
-} from "../../utils"
+import { dataAttr, handlerAll, isRefObject, mergeRefs } from "../../utils"
+import { useResizableContext } from "./resizable"
 
-type ResizableOrientation = "horizontal" | "vertical"
+export type ResizableOrientation = "horizontal" | "vertical"
 
 export type As = keyof HTMLElementTagNameMap
 
@@ -55,19 +44,6 @@ export interface ResizableStorage extends PanelGroupStorage {}
 export interface ResizableGroupControl extends ImperativePanelGroupHandle {}
 export interface ResizableItemControl extends ImperativePanelHandle {}
 
-interface ResizableContext {
-  controlRef: RefObject<null | ResizableGroupControl>
-  disabled: boolean
-  orientation: ResizableOrientation
-  styles: { [key: string]: CSSUIObject | undefined }
-}
-
-export const [ResizableProvider, useResizableContext] =
-  createContext<ResizableContext>({
-    name: "ResizableContext",
-    errorMessage: `useResizableContext returned is 'undefined'. Seems you forgot to wrap the components in "<Resizable />"`,
-  })
-
 export interface UseResizableProps {
   /**
    * id assigned to resizable element.
@@ -76,29 +52,15 @@ export interface UseResizableProps {
   /**
    * Ref for resizable element.
    */
-  ref?: ForwardedRef<HTMLElement>
+  ref?: Ref<HTMLElement>
   /**
    * Ref of the resizable item callback.
    */
   controlRef?: RefObject<ResizableGroupControl>
   /**
-   * The direction of the resizable.
-   *
-   * @default "horizontal"
-   *
-   * @deprecated Use `orientation` instead.
-   */
-  direction?: ResizableOrientation
-  /**
    * If `true`, the resizable trigger will be disabled.
    */
   disabled?: boolean
-  /**
-   * If `true`, the resizable trigger will be disabled.
-   *
-   * @deprecated Use `Disabled` instead.
-   */
-  isDisabled?: boolean
   /**
    * Unit to resize by keyboard operation.
    *
@@ -134,11 +96,9 @@ export const useResizable = ({
   id,
   ref,
   controlRef: controlRefProp,
-  direction = "horizontal",
-  isDisabled = false,
-  disabled = isDisabled,
+  disabled,
   keyboardStep,
-  orientation = direction,
+  orientation = "horizontal",
   storage,
   storageKey,
   groupProps,
@@ -150,8 +110,8 @@ export const useResizable = ({
 
   id ??= uuid
 
-  const getContainerProps: PropGetter = useCallback(
-    (props = {}, ref = null) => ({ ...props, ref, ...rest }),
+  const getRootProps: PropGetter = useCallback(
+    (props = {}) => ({ ...props, ...rest }),
     [rest],
   )
 
@@ -196,73 +156,73 @@ export const useResizable = ({
     controlRef,
     disabled,
     orientation,
-    getContainerProps,
     getGroupProps,
+    getRootProps,
   }
 }
 
 export type UseResizableReturn = ReturnType<typeof useResizable>
 
-interface UseResizableItemOptions {
-  /**
-   * id assigned to resizable item element.
-   */
-  id?: string
-  /**
-   * Ref for resizable item element.
-   */
-  ref?: ForwardedRef<HTMLElement>
-  /**
-   * The collapsed size of the resizable item.
-   */
-  collapsedSize?: number
-  /**
-   * If `true`, the resizable item can be collapsed.
-   *
-   * @default false
-   */
-  collapsible?: boolean
-  /**
-   * Ref of the resizable item callback.
-   */
-  controlRef?: RefObject<null | ResizableItemControl>
-  /**
-   * The initial size of the resizable item.
-   */
-  defaultSize?: number
-  /**
-   * The maximum allowed value of the resizable item.
-   */
-  maxSize?: number
-  /**
-   * The minimum allowed value of the resizable item.
-   */
-  minSize?: number
-  /**
-   * Order for the resizable item.
-   */
-  order?: number
-  /**
-   * Props for resizable item container element.
-   */
-  containerProps?: Omit<HTMLUIProps, "as"> & ResizableItemProps
-  /**
-   * The callback invoked when resizable item are collapsed.
-   */
-  onCollapse?: () => void
-  /**
-   * The callback invoked when resizable item are expanded.
-   */
-  onExpand?: () => void
-  /**
-   * The callback invoked when resizable item are resized.
-   */
-  onResize?: (size: number, prevSize: number | undefined) => void
-}
-
 export interface UseResizableItemProps
-  extends Omit<HTMLUIProps, keyof UseResizableItemOptions>,
-    UseResizableItemOptions {}
+  extends Merge<
+    HTMLStyledProps,
+    {
+      /**
+       * id assigned to resizable item element.
+       */
+      id?: string
+      /**
+       * Ref for resizable item element.
+       */
+      ref?: Ref<HTMLElement>
+      /**
+       * The collapsed size of the resizable item.
+       */
+      collapsedSize?: number
+      /**
+       * If `true`, the resizable item can be collapsed.
+       *
+       * @default false
+       */
+      collapsible?: boolean
+      /**
+       * Ref of the resizable item callback.
+       */
+      controlRef?: RefObject<null | ResizableItemControl>
+      /**
+       * The initial size of the resizable item.
+       */
+      defaultSize?: number
+      /**
+       * The maximum allowed value of the resizable item.
+       */
+      maxSize?: number
+      /**
+       * The minimum allowed value of the resizable item.
+       */
+      minSize?: number
+      /**
+       * Order for the resizable item.
+       */
+      order?: number
+      /**
+       * Props for resizable item container element.
+       */
+      containerProps?: Omit<HTMLStyledProps, "as"> & ResizableItemProps
+      /**
+       * The callback invoked when resizable item are collapsed.
+       */
+      onCollapse?: () => void
+      /**
+       * The callback invoked when resizable item are expanded.
+       */
+      onExpand?: () => void
+      /**
+       * The callback invoked when resizable item are resized.
+       */
+      onResize?: (size: number, prevSize: number | undefined) => void
+    }
+  > {}
 
 export const useResizableItem = ({
   id,
@@ -285,7 +245,8 @@ export const useResizableItem = ({
   id ??= uuid
 
   const getPanelProps: PropGetter<
-    Merge<HTMLUIProps, PanelProps>,
+    Merge<HTMLStyledProps, PanelProps>,
+    undefined,
     PanelProps
   > = useCallback(
     (props = {}) => {
@@ -325,7 +286,7 @@ export const useResizableItem = ({
   )
 
   const getItemProps: PropGetter = useCallback(
-    (props = {}, ref = null) => ({ ...props, ref, ...innerProps }),
+    (props = {}) => ({ ...props, ...innerProps }),
     [innerProps],
   )
 
@@ -345,7 +306,11 @@ export const useResizableItem = ({
 
 export type UseResizableItemReturn = ReturnType<typeof useResizableItem>
 
-interface UseResizableTriggerOptions {
+export interface UseResizableTriggerProps
+  extends Merge<
+    ResizableTriggerProps,
+    Omit<HTMLStyledPropsWithoutAs, "id" | "onBlur" | "onFocus" | "ref">
+  > {
   /**
    * id assigned to resizable trigger element.
    */
@@ -353,7 +318,7 @@ interface UseResizableTriggerOptions {
   /**
    * Ref for resizable trigger element.
    */
-  ref?: RefObject<HTMLElement | null>
+  ref?: Ref<HTMLElement>
   /**
    * If `true`, the resizable trigger will be disabled.
    *
@@ -361,32 +326,16 @@ interface UseResizableTriggerOptions {
    */
   disabled?: boolean
   /**
-   * If `true`, the resizable trigger will be disabled.
-   *
-   * @default false
-   *
-   * @deprecated Use `disabled` instead.
-   */
-  isDisabled?: boolean
-  /**
    * The callback invoked when resizable trigger are dragged.
    */
   onDragging?: (isDragging: boolean) => void
 }
 
-export interface UseResizableTriggerProps
-  extends Merge<
-      ResizableTriggerProps,
-      Omit<HTMLUIPropsWithoutAs, "id" | "onBlur" | "onFocus" | "ref">
-    >,
-    UseResizableTriggerOptions {}
-
 export const useResizableTrigger = ({
   id,
   ref,
   as,
-  isDisabled,
-  disabled = isDisabled,
+  disabled,
   ...rest
 }: UseResizableTriggerProps) => {
   const uuid = useId()
@@ -419,10 +368,7 @@ export const useResizableTrigger = ({
     [controlRef],
   )
 
-  const getTriggerProps: PropGetter<
-    PanelResizeHandleProps,
-    PanelResizeHandleProps
-  > = useCallback(
+  const getTriggerProps: PropGetter<PanelResizeHandleProps> = useCallback(
     (props = {}) =>
       ({
         ...props,
@@ -447,9 +393,8 @@ export const useResizableTrigger = ({
   )
 
   const getIconProps: PropGetter = useCallback(
-    (props = {}, ref = null) => ({
+    (props = {}) => ({
       ...props,
-      ref,
       "data-active": dataAttr(active),
     }),
     [active],

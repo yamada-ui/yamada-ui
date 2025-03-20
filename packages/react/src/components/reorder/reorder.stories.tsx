@@ -1,16 +1,16 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { ReorderGenerateItem } from "./"
+import type { ReorderGenerateItem } from "."
 import { useMemo } from "react"
+import { ReorderItem, ReorderRoot, ReorderTrigger } from "."
 import { GhostIcon } from "../icon"
 import { Separator } from "../separator"
 import { HStack } from "../stack"
 import { Text } from "../text"
-import { Reorder, ReorderItem, ReorderTrigger } from "./"
 
-type Story = StoryFn<typeof Reorder>
+type Story = StoryFn<typeof ReorderRoot>
 
-const meta: Meta<typeof Reorder> = {
-  component: Reorder,
+const meta: Meta<typeof ReorderRoot> = {
+  component: ReorderRoot,
   title: "Components / Reorder",
 }
 
@@ -18,13 +18,13 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Reorder>
+    <ReorderRoot>
       <ReorderItem value="ギニュー">ギニュー</ReorderItem>
       <ReorderItem value="リクーム">リクーム</ReorderItem>
       <ReorderItem value="バータ">バータ</ReorderItem>
       <ReorderItem value="ジース">ジース</ReorderItem>
       <ReorderItem value="グルド">グルド</ReorderItem>
-    </Reorder>
+    </ReorderRoot>
   )
 }
 
@@ -40,29 +40,29 @@ export const WithItems: Story = () => {
     [],
   )
 
-  return <Reorder items={items} />
+  return <ReorderRoot items={items} />
 }
 
 export const WithOrientation: Story = () => {
   return (
     <>
-      <Reorder orientation="vertical">
+      <ReorderRoot orientation="vertical">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
         <ReorderItem value="リクーム">リクーム</ReorderItem>
         <ReorderItem value="バータ">バータ</ReorderItem>
         <ReorderItem value="ジース">ジース</ReorderItem>
         <ReorderItem value="グルド">グルド</ReorderItem>
-      </Reorder>
+      </ReorderRoot>
 
       <Separator />
 
-      <Reorder orientation="horizontal">
+      <ReorderRoot orientation="horizontal">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
         <ReorderItem value="リクーム">リクーム</ReorderItem>
         <ReorderItem value="バータ">バータ</ReorderItem>
         <ReorderItem value="ジース">ジース</ReorderItem>
         <ReorderItem value="グルド">グルド</ReorderItem>
-      </Reorder>
+      </ReorderRoot>
     </>
   )
 }
@@ -70,43 +70,43 @@ export const WithOrientation: Story = () => {
 export const WithSize: Story = () => {
   return (
     <>
-      <Reorder size="sm">
+      <ReorderRoot size="sm">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
         <ReorderItem value="リクーム">リクーム</ReorderItem>
         <ReorderItem value="バータ">バータ</ReorderItem>
         <ReorderItem value="ジース">ジース</ReorderItem>
         <ReorderItem value="グルド">グルド</ReorderItem>
-      </Reorder>
+      </ReorderRoot>
 
       <Separator />
 
-      <Reorder size="md">
+      <ReorderRoot size="md">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
         <ReorderItem value="リクーム">リクーム</ReorderItem>
         <ReorderItem value="バータ">バータ</ReorderItem>
         <ReorderItem value="ジース">ジース</ReorderItem>
         <ReorderItem value="グルド">グルド</ReorderItem>
-      </Reorder>
+      </ReorderRoot>
 
       <Separator />
 
-      <Reorder size="normal">
+      <ReorderRoot size="normal">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
         <ReorderItem value="リクーム">リクーム</ReorderItem>
         <ReorderItem value="バータ">バータ</ReorderItem>
         <ReorderItem value="ジース">ジース</ReorderItem>
         <ReorderItem value="グルド">グルド</ReorderItem>
-      </Reorder>
+      </ReorderRoot>
 
       <Separator />
 
-      <Reorder size="lg">
+      <ReorderRoot size="lg">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
         <ReorderItem value="リクーム">リクーム</ReorderItem>
         <ReorderItem value="バータ">バータ</ReorderItem>
         <ReorderItem value="ジース">ジース</ReorderItem>
         <ReorderItem value="グルド">グルド</ReorderItem>
-      </Reorder>
+      </ReorderRoot>
     </>
   )
 }
@@ -114,40 +114,40 @@ export const WithSize: Story = () => {
 export const WithVariant: Story = () => {
   return (
     <>
-      <Reorder variant="outline">
+      <ReorderRoot variant="outline">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
         <ReorderItem value="リクーム">リクーム</ReorderItem>
         <ReorderItem value="バータ">バータ</ReorderItem>
         <ReorderItem value="ジース">ジース</ReorderItem>
         <ReorderItem value="グルド">グルド</ReorderItem>
-      </Reorder>
+      </ReorderRoot>
 
       <Separator />
 
-      <Reorder variant="elevated">
+      <ReorderRoot variant="elevated">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
         <ReorderItem value="リクーム">リクーム</ReorderItem>
         <ReorderItem value="バータ">バータ</ReorderItem>
         <ReorderItem value="ジース">ジース</ReorderItem>
         <ReorderItem value="グルド">グルド</ReorderItem>
-      </Reorder>
+      </ReorderRoot>
 
       <Separator />
 
-      <Reorder variant="unstyled">
+      <ReorderRoot variant="unstyled">
         <ReorderItem value="ギニュー">ギニュー</ReorderItem>
         <ReorderItem value="リクーム">リクーム</ReorderItem>
         <ReorderItem value="バータ">バータ</ReorderItem>
         <ReorderItem value="ジース">ジース</ReorderItem>
         <ReorderItem value="グルド">グルド</ReorderItem>
-      </Reorder>
+      </ReorderRoot>
     </>
   )
 }
 
 export const WithTrigger: Story = () => {
   return (
-    <Reorder>
+    <ReorderRoot>
       <ReorderItem value="孫悟空">
         <HStack>
           <ReorderTrigger />
@@ -163,13 +163,13 @@ export const WithTrigger: Story = () => {
           <Text>ベジータ</Text>
         </HStack>
       </ReorderItem>
-    </Reorder>
+    </ReorderRoot>
   )
 }
 
 export const WithOnChange: Story = () => {
   return (
-    <Reorder
+    <ReorderRoot
       onChange={(labels) => console.log(`changed '${labels.join(`', '`)}'`)}
     >
       <ReorderItem value="ギニュー">ギニュー</ReorderItem>
@@ -177,13 +177,13 @@ export const WithOnChange: Story = () => {
       <ReorderItem value="バータ">バータ</ReorderItem>
       <ReorderItem value="ジース">ジース</ReorderItem>
       <ReorderItem value="グルド">グルド</ReorderItem>
-    </Reorder>
+    </ReorderRoot>
   )
 }
 
 export const WithOnCompleteChange: Story = () => {
   return (
-    <Reorder
+    <ReorderRoot
       onCompleteChange={(labels) =>
         console.log(`completed '${labels.join(`', '`)}'`)
       }
@@ -193,13 +193,13 @@ export const WithOnCompleteChange: Story = () => {
       <ReorderItem value="バータ">バータ</ReorderItem>
       <ReorderItem value="ジース">ジース</ReorderItem>
       <ReorderItem value="グルド">グルド</ReorderItem>
-    </Reorder>
+    </ReorderRoot>
   )
 }
 
 export const UseContainerScroll: Story = () => {
   return (
-    <Reorder
+    <ReorderRoot
       borderWidth="1px"
       h="xs"
       layoutScroll
@@ -215,6 +215,6 @@ export const UseContainerScroll: Story = () => {
       <ReorderItem value="バータ">バータ</ReorderItem>
       <ReorderItem value="ジース">ジース</ReorderItem>
       <ReorderItem value="グルド">グルド</ReorderItem>
-    </Reorder>
+    </ReorderRoot>
   )
 }

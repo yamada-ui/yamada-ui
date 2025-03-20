@@ -1,11 +1,7 @@
-import type { ComponentMultiStyle } from "../../core"
+import { defineComponentSlotStyle } from "../../core"
 
-export const Reorder: ComponentMultiStyle<"Reorder"> = {
-  baseStyle: {
-    container: {
-      display: "flex",
-      w: "100%",
-    },
+export const reorderStyle = defineComponentSlotStyle({
+  base: {
     item: {
       h: "100%",
       w: "100%",
@@ -13,6 +9,10 @@ export const Reorder: ComponentMultiStyle<"Reorder"> = {
         boxShadow: ["md", "dark-md"],
         cursor: "grabbing",
       },
+    },
+    root: {
+      display: "flex",
+      w: "100%",
     },
     trigger: {
       alignItems: "center",
@@ -34,24 +34,23 @@ export const Reorder: ComponentMultiStyle<"Reorder"> = {
       item: { p: "md", rounded: "md" },
     },
     normal: {
-      item: { p: "normal", rounded: "lg" },
+      item: { p: "lg", rounded: "lg" },
     },
     lg: {
-      item: { p: "lg", rounded: "xl" },
+      item: { p: "xl", rounded: "xl" },
     },
   },
 
   variants: {
     elevated: {
       item: {
-        bg: ["white", "black"],
-        boxShadow: ["base", "dark-md"],
+        bg: "bg.panel",
+        boxShadow: "md",
       },
     },
     outline: {
       item: {
-        bg: ["white", "black"],
-        borderWidth: "1px",
+        layerStyle: "panel",
       },
     },
     unstyled: {
@@ -59,8 +58,31 @@ export const Reorder: ComponentMultiStyle<"Reorder"> = {
     },
   },
 
+  props: {
+    /**
+     * The orientation of the reorder.
+     *
+     * @default 'vertical'
+     */
+    orientation: {
+      horizontal: {
+        root: {
+          flexDirection: "row",
+        },
+      },
+      vertical: {
+        root: {
+          flexDirection: "column",
+        },
+      },
+    },
+  },
+
   defaultProps: {
     size: "md",
     variant: "outline",
+    orientation: "vertical",
   },
-}
+})
+
+export type ReorderStyle = typeof reorderStyle

@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Box } from "../../components/box"
-import { Center } from "../../components/center"
-import { Grid, GridItem } from "../../components/grid"
+import { Box } from "../box"
+import { Center } from "../center"
+import { Grid, GridItem } from "../grid"
 import { Float } from "./float"
 
 type Story = StoryFn<typeof Float>
@@ -16,12 +16,18 @@ export default meta
 export const Basic: Story = () => {
   return (
     <Box
-      bg={["blackAlpha.50", "whiteAlpha.50"]}
+      bg={["blackAlpha.50", "whiteAlpha.100"]}
       boxSize="3xs"
       position="relative"
     >
       <Float>
-        <Center bg="primary" color="white" fontSize="sm" px="1.5" rounded="md">
+        <Center
+          bg="primary"
+          color="fg.contrast"
+          fontSize="sm"
+          px="1.5"
+          rounded="md"
+        >
           New
         </Center>
       </Float>
@@ -29,7 +35,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithPlacement: Story = () => {
+export const Placement: Story = () => {
   const placements = [
     "start-start",
     "start-center",
@@ -47,14 +53,14 @@ export const WithPlacement: Story = () => {
       {placements.map((placement) => (
         <GridItem
           key={placement}
-          bg={["blackAlpha.50", "whiteAlpha.50"]}
+          bg={["blackAlpha.50", "whiteAlpha.100"]}
           boxSize="3xs"
           position="relative"
         >
           <Float placement={placement}>
             <Center
               bg="primary"
-              color="white"
+              color="fg.contrast"
               fontSize="sm"
               px="1.5"
               rounded="md"
@@ -68,18 +74,18 @@ export const WithPlacement: Story = () => {
   )
 }
 
-export const WithOffset: Story = () => {
+export const Offset: Story = () => {
   return (
     <Grid gap="md" p="md" templateColumns="repeat(3, 1fr)">
       <GridItem
-        bg={["blackAlpha.50", "whiteAlpha.50"]}
+        bg={["blackAlpha.50", "whiteAlpha.100"]}
         boxSize="3xs"
         position="relative"
       >
         <Float offset="md" placement="start-start">
           <Center
             bg="primary"
-            color="white"
+            color="fg.contrast"
             fontSize="sm"
             px="1.5"
             rounded="md"
@@ -90,14 +96,14 @@ export const WithOffset: Story = () => {
       </GridItem>
 
       <GridItem
-        bg={["blackAlpha.50", "whiteAlpha.50"]}
+        bg={["blackAlpha.50", "whiteAlpha.100"]}
         boxSize="3xs"
         position="relative"
       >
         <Float offset={["0", "md"]} placement="center-start">
           <Center
             bg="primary"
-            color="white"
+            color="fg.contrast"
             fontSize="sm"
             px="1.5"
             rounded="md"
@@ -108,14 +114,14 @@ export const WithOffset: Story = () => {
       </GridItem>
 
       <GridItem
-        bg={["blackAlpha.50", "whiteAlpha.50"]}
+        bg={["blackAlpha.50", "whiteAlpha.100"]}
         boxSize="3xs"
         position="relative"
       >
         <Float offset={["md", "0"]} placement="end-end">
           <Center
             bg="primary"
-            color="white"
+            color="fg.contrast"
             fontSize="sm"
             px="1.5"
             rounded="md"

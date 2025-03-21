@@ -11,9 +11,9 @@ describe("<Icon />", () => {
     await a11y(<Icon as={FaMarkdown} />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Icon.displayName).toBe("Icon")
-    expect(Icon.__ui__).toBe("Icon")
+    expect(Icon.__styled__).toBe("Icon")
   })
 
   test("sets `className` correctly", () => {

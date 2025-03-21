@@ -1,10 +1,10 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { BadgeStyle } from "./badge.style"
 import { createComponent } from "../../core"
 import { badgeStyle } from "./badge.style"
 
 export interface BadgeProps
-  extends HTMLUIProps<"span">,
+  extends HTMLStyledProps<"span">,
     ThemeProps<BadgeStyle> {}
 
 export const {

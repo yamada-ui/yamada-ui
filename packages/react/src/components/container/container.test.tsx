@@ -24,21 +24,21 @@ describe("<Container />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Container.Root.displayName).toBe("ContainerRoot")
-    expect(Container.Root.__ui__).toBe("ContainerRoot")
+    expect(Container.Root.__styled__).toBe("ContainerRoot")
 
     expect(Container.Header.displayName).toBe("ContainerHeader")
-    expect(Container.Header.__ui__).toBe("ContainerHeader")
+    expect(Container.Header.__styled__).toBe("ContainerHeader")
 
     expect(Container.Body.displayName).toBe("ContainerBody")
-    expect(Container.Body.__ui__).toBe("ContainerBody")
+    expect(Container.Body.__styled__).toBe("ContainerBody")
 
     expect(Container.Footer.displayName).toBe("ContainerFooter")
-    expect(Container.Footer.__ui__).toBe("ContainerFooter")
+    expect(Container.Footer.__styled__).toBe("ContainerFooter")
   })
 
-  test.todo("sets `className` correctly", () => {
+  test("sets `className` correctly", () => {
     render(
       <Container.Root data-testid="root">
         <Container.Header data-testid="header">
@@ -51,7 +51,7 @@ describe("<Container />", () => {
             BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
           </Text>
         </Container.Body>
-        <Container.Footer>
+        <Container.Footer data-testid="footer">
           <Text>© 鳥山明／集英社</Text>
         </Container.Footer>
       </Container.Root>,
@@ -60,9 +60,7 @@ describe("<Container />", () => {
     expect(screen.getByTestId("root")).toHaveClass("ui-container__root")
     expect(screen.getByTestId("header")).toHaveClass("ui-container__header")
     expect(screen.getByTestId("body")).toHaveClass("ui-container__body")
-    expect(screen.getByText("© 鳥山明／集英社")).toHaveClass(
-      "ui-container__footer",
-    )
+    expect(screen.getByTestId("footer")).toHaveClass("ui-container__footer")
   })
 
   test("renders HTML tag correctly", () => {
@@ -88,11 +86,5 @@ describe("<Container />", () => {
     expect(screen.getByTestId("header").tagName).toBe("HEADER")
     expect(screen.getByTestId("body").tagName).toBe("DIV")
     expect(screen.getByTestId("footer").tagName).toBe("FOOTER")
-  })
-
-  test.todo("centerContent - prop works correctly", () => {
-    render(<Container.Root centerContent>Container</Container.Root>)
-
-    expect(screen.getByText("Container")).toHaveStyle({ alignItems: "center" })
   })
 })

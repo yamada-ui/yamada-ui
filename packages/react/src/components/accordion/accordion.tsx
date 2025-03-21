@@ -1,4 +1,4 @@
-import type { HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { CollapseProps } from "../collapse"
 import type { WithTransitionProps } from "../motion"
@@ -9,13 +9,13 @@ import type {
   UseAccordionReturn,
 } from "./use-accordion"
 import { Children, cloneElement, isValidElement, useMemo } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import {
   findChild,
   getValidChildren,
   isEmpty,
   omitChildren,
-  runIfFunc,
+  runIfFn,
 } from "../../utils"
 import { isString } from "../../utils"
 import { Collapse } from "../collapse"
@@ -39,7 +39,7 @@ interface AccordionContext
     Pick<AccordionRootProps, "icon" | "iconHidden"> {}
 
 export interface AccordionRootProps
-  extends Omit<HTMLUIProps, "onChange">,
+  extends Omit<HTMLStyledProps, "onChange">,
     ThemeProps<AccordionStyle>,
     UseAccordionProps {
   /**
@@ -110,7 +110,7 @@ export const AccordionRoot = withProvider<"div", AccordionRootProps>(
     return (
       <AccordionDescendantsContext value={descendants}>
         <AccordionContext value={context}>
-          <ui.div {...getRootProps()} />
+          <styled.div {...getRootProps()} />
         </AccordionContext>
       </AccordionDescendantsContext>
     )
@@ -119,7 +119,7 @@ export const AccordionRoot = withProvider<"div", AccordionRootProps>(
 )()
 
 export interface AccordionItemProps
-  extends Omit<HTMLUIProps, "children">,
+  extends Omit<HTMLStyledProps, "children">,
     Omit<UseAccordionItemProps, "children"> {
   /**
    * The accordion button to use.
@@ -142,7 +142,7 @@ export const AccordionItem = withContext<"div", AccordionItemProps>(
       getItemProps,
       getPanelProps,
     } = useAccordionItem(rest)
-    children = runIfFunc(children, { disabled, expanded: open })
+    children = runIfFn(children, { disabled, expanded: open })
 
     const validChildren = getValidChildren(children)
     const customAccordionButton = findChild(validChildren, AccordionButton)
@@ -165,23 +165,23 @@ export const AccordionItem = withContext<"div", AccordionItemProps>(
 
     return (
       <AccordionItemContext value={context}>
-        <ui.div {...getItemProps()}>
+        <styled.div {...getItemProps()}>
           {customAccordionButton ?? (
             <AccordionButton>
-              {runIfFunc(button, { disabled, expanded: open })}
+              {runIfFn(button, { disabled, expanded: open })}
             </AccordionButton>
           )}
           {customAccordionPanel ?? (
             <AccordionPanel>{cloneChildren}</AccordionPanel>
           )}
-        </ui.div>
+        </styled.div>
       </AccordionItemContext>
     )
   },
   "item",
 )()
 
-export interface AccordionButtonProps extends HTMLUIProps<"button"> {
+export interface AccordionButtonProps extends HTMLStyledProps<"button"> {
   /**
    * The accordion icon to use.
    */
@@ -189,7 +189,7 @@ export interface AccordionButtonProps extends HTMLUIProps<"button"> {
   /**
    * Props the container element.
    */
-  containerProps?: HTMLUIProps
+  containerProps?: HTMLStyledProps
 }
 
 export const AccordionButton = withContext<"button", AccordionButtonProps>(
@@ -204,23 +204,23 @@ export const AccordionButton = withContext<"button", AccordionButtonProps>(
     const props = { disabled, expanded: open }
 
     return (
-      <ui.h3 {...containerProps}>
-        <ui.button {...getButtonProps(rest)}>
+      <styled.h3 {...containerProps}>
+        <styled.button {...getButtonProps(rest)}>
           {children}
 
           <AccordionIcon>
-            {runIfFunc(itemIcon, props) ??
-              runIfFunc(rootIcon, props) ??
-              runIfFunc(customIcon, props)}
+            {runIfFn(itemIcon, props) ??
+              runIfFn(rootIcon, props) ??
+              runIfFn(customIcon, props)}
           </AccordionIcon>
-        </ui.button>
-      </ui.h3>
+        </styled.button>
+      </styled.h3>
     )
   },
   "button",
 )()
 
-interface AccordionIconProps extends HTMLUIProps<"svg"> {}
+interface AccordionIconProps extends HTMLStyledProps<"svg"> {}
 
 export const AccordionIcon = withContext<"svg", AccordionIconProps>(
   ({ children = <ChevronDownIcon />, ...rest }) => {
@@ -244,7 +244,7 @@ export const AccordionIcon = withContext<"svg", AccordionIconProps>(
 )()
 
 export interface AccordionPanelProps
-  extends Omit<HTMLUIProps, "transition">,
+  extends Omit<HTMLStyledProps, "transition">,
     Pick<
       CollapseProps,
       | "animationOpacity"
@@ -282,9 +282,9 @@ export const AccordionPanel = withContext<"div", AccordionPanelProps>(
           unmountOnExit,
         }}
       >
-        <ui.div {...getPanelProps(rest)}>
-          {isString(children) ? <ui.p>{children}</ui.p> : children}
-        </ui.div>
+        <styled.div {...getPanelProps(rest)}>
+          {isString(children) ? <styled.p>{children}</styled.p> : children}
+        </styled.div>
       </Collapse>
     )
   },

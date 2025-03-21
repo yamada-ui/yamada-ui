@@ -1,9 +1,9 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { EmStyle } from "./em.style"
 import { createComponent } from "../../core"
 import { emStyle } from "./em.style"
 
-export interface EmProps extends HTMLUIProps<"em">, ThemeProps<EmStyle> {}
+export interface EmProps extends HTMLStyledProps<"em">, ThemeProps<EmStyle> {}
 
 export const {
   PropsContext: EmPropsContext,

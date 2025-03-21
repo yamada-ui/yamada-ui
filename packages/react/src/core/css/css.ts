@@ -5,7 +5,7 @@ import type { StyleProperty, VariableLengthProperty } from "../styles"
 import type { StyledTheme, UsageTheme } from "../theme"
 import type { Breakpoints } from "./breakpoint"
 import type { CSSObjectOrFunc } from "./index.types"
-import { isArray, isObject, isString, merge, runIfFunc } from "../../utils"
+import { isArray, isObject, isString, merge, runIfFn } from "../../utils"
 import { colorMix } from "../config"
 import { pseudos } from "../pseudos"
 import { styles, variableLengthProperties } from "../styles"
@@ -143,7 +143,7 @@ function expandCSS(theme: StyledTheme<UsageTheme>) {
     let computedCSS: Dict = {}
 
     for (let [key, value] of Object.entries(css)) {
-      value = runIfFunc(value, theme)
+      value = runIfFn(value, theme)
 
       if (value == null) continue
 
@@ -254,7 +254,7 @@ function insertCSS(
 export function css(theme: StyledTheme<UsageTheme>) {
   return function (cssOrFunc: CSSObjectOrFunc) {
     function createCSS(cssOrFunc: CSSObjectOrFunc): Dict {
-      const cssObj = runIfFunc(cssOrFunc, theme)
+      const cssObj = runIfFn(cssOrFunc, theme)
       const computedCSS = expandCSS(theme)(cssObj)
 
       let prev: Dict = {}

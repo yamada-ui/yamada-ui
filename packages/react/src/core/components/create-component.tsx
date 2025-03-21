@@ -11,7 +11,7 @@ import type {
   As,
   DOMElement,
   FunctionComponent,
-  HTMLUIProps,
+  HTMLStyledProps,
   Component as OriginalComponent,
 } from "./index.types"
 import { Fragment } from "react"
@@ -22,12 +22,12 @@ import {
   isFunction,
   isObject,
   isString,
-  runIfFunc,
+  runIfFn,
   toArray,
   toCamelCase,
   toPascalCase,
 } from "../../utils"
-import { ui } from "../factory"
+import { styled } from "../factory"
 import { chainProps, mergeProps } from "./props"
 import {
   getSlotClassName,
@@ -91,7 +91,7 @@ function createProxyComponent<
   if (el === "fragment") el = Fragment
 
   if (shouldStyleProps || isString(el)) {
-    const ProxyComponent = ui(el as As, options)
+    const ProxyComponent = styled(el as As, options)
 
     ProxyComponent.displayName = "ProxyComponent"
 
@@ -218,7 +218,7 @@ export function createComponent<
       }
 
       Component.displayName = displayName
-      Component.__ui__ = displayName
+      Component.__styled__ = displayName
 
       return Component as Component<D, H>
     }
@@ -247,7 +247,7 @@ export function createComponent<
     ) {
       const Component = (props: H) => {
         const computedProps = mergeProps(
-          runIfFunc(initialProps, props) ?? {},
+          runIfFn(initialProps, props) ?? {},
           props,
         )() as H
         const mergedProps = useComponentProps(computedProps, {
@@ -261,7 +261,7 @@ export function createComponent<
       }
 
       Component.displayName = displayName
-      Component.__ui__ = displayName
+      Component.__styled__ = displayName
 
       return Component as Component<D, H>
     }
@@ -380,7 +380,7 @@ export function createSlotComponent<
       }
 
       Component.displayName = displayName
-      Component.__ui__ = displayName
+      Component.__styled__ = displayName
 
       return Component as Component<H, R>
     }
@@ -416,7 +416,7 @@ export function createSlotComponent<
     ) {
       const Component = (props: R) => {
         const computedProps = mergeProps(
-          runIfFunc(initialProps, props) ?? {},
+          runIfFn(initialProps, props) ?? {},
           props,
         )()
         const [context, mergedProps] = useRootComponentProps(
@@ -438,7 +438,7 @@ export function createSlotComponent<
       }
 
       Component.displayName = displayName
-      Component.__ui__ = displayName
+      Component.__styled__ = displayName
 
       return Component as Component<H, R>
     }
@@ -446,7 +446,7 @@ export function createSlotComponent<
 
   function withContext<
     H extends AsWithFragment = "div",
-    R extends Dict = H extends DOMElement ? HTMLUIProps<H> : Dict,
+    R extends Dict = H extends DOMElement ? HTMLStyledProps<H> : Dict,
   >(
     el: FC<R> | H,
     slot?: ComponentSlot<ComponentSlotName<M>>,
@@ -470,7 +470,7 @@ export function createSlotComponent<
     ) {
       const Component = (props: R) => {
         const computedProps = mergeProps(
-          runIfFunc(initialProps, props) ?? {},
+          runIfFn(initialProps, props) ?? {},
           props,
         )()
         const mergedProps = useSlotComponentProps(computedProps, slot, {
@@ -483,7 +483,7 @@ export function createSlotComponent<
       }
 
       Component.displayName = displayName
-      Component.__ui__ = displayName
+      Component.__styled__ = displayName
 
       return Component as Component<H, R>
     }

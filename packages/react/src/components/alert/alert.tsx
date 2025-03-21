@@ -1,10 +1,10 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { IconProps } from "../icon"
 import type { Loading } from "../loading"
 import type { StatusScheme } from "../status"
 import type { AlertStyle } from "./alert.style"
 import { useMemo } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { CircleCheckBigIcon, InfoIcon, TriangleAlertIcon } from "../icon"
 import { useLoadingComponent } from "../loading"
 import { alertStyle } from "./alert.style"
@@ -30,7 +30,7 @@ interface AlertRootOptions {
 }
 
 export interface AlertRootProps
-  extends HTMLUIProps,
+  extends HTMLStyledProps,
     ThemeProps<AlertStyle>,
     AlertRootOptions {}
 
@@ -59,7 +59,7 @@ export const AlertRoot = withProvider<"div", AlertRootProps>(
 
     return (
       <AlertContext value={context}>
-        <ui.div role="alert" {...props} />
+        <styled.div role="alert" {...props} />
       </AlertContext>
     )
   },
@@ -96,11 +96,11 @@ export const AlertLoading = withContext<"svg", AlertLoadingProps>(
   ["icon", "loading"],
 )()
 
-export interface AlertTitleProps extends HTMLUIProps<"p"> {}
+export interface AlertTitleProps extends HTMLStyledProps<"p"> {}
 
 export const AlertTitle = withContext<"p", AlertTitleProps>("p", "title")()
 
-export interface AlertDescriptionProps extends HTMLUIProps<"span"> {}
+export interface AlertDescriptionProps extends HTMLStyledProps<"span"> {}
 
 export const AlertDescription = withContext<"span", AlertDescriptionProps>(
   "span",

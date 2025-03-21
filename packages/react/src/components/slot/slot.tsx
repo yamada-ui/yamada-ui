@@ -45,7 +45,7 @@ export const Slot: FC<SlotProps> = ({ children, ...rest }) => {
 }
 
 Slot.displayName = "Slot"
-Slot.__ui__ = "Slot"
+Slot.__styled__ = "Slot"
 
 interface SlotCloneProps
   extends RefAttributes<HTMLElement>,
@@ -64,4 +64,4 @@ export const Slottable: FC<PropsWithChildren> = ({ children }) => {
 }
 
 Slottable.displayName = "Slottable"
-Slottable.__ui__ = "Slottable"
+Slottable.__styled__ = "Slottable"

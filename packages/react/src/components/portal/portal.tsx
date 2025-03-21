@@ -50,4 +50,4 @@ export const Portal: FC<PortalProps> = ({
 }
 
 Portal.displayName = "Portal"
-Portal.__ui__ = "Portal"
+Portal.__styled__ = "Portal"

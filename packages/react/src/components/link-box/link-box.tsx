@@ -1,11 +1,11 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { LinkBoxStyle } from "./link-box.style"
 import {
   createSlotComponent,
   mergeVars,
   radiusProperties,
-  ui,
+  styled,
   useCreateVars,
 } from "../../core"
 import { linkBoxStyle } from "./link-box.style"
@@ -15,7 +15,7 @@ interface LinkBoxContext {
 }
 
 export interface LinkBoxRootProps
-  extends HTMLUIProps,
+  extends HTMLStyledProps,
     ThemeProps<LinkBoxStyle> {}
 
 export const {
@@ -41,16 +41,16 @@ export const LinkBoxRoot = withProvider<"div", LinkBoxRootProps>(
 
     return (
       <LinkBoxContext value={{ variableProps }}>
-        <ui.div {...rest} vars={mergeVars(vars, varsProp)}>
+        <styled.div {...rest} vars={mergeVars(vars, varsProp)}>
           {children}
-        </ui.div>
+        </styled.div>
       </LinkBoxContext>
     )
   },
   "root",
 )()
 
-export interface LinkBoxOverlayProps extends HTMLUIProps<"a"> {
+export interface LinkBoxOverlayProps extends HTMLStyledProps<"a"> {
   /**
    * If `true`, the link will open in new tab.
    *

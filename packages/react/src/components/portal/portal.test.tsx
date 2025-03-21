@@ -7,9 +7,9 @@ describe("<Portal />", () => {
     await a11y(<Portal>Hello</Portal>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Portal.displayName).toBe("Portal")
-    expect(Portal.__ui__).toBe("Portal")
+    expect(Portal.__styled__).toBe("Portal")
   })
 
   test("sets `className` correctly", () => {

@@ -5,15 +5,15 @@ import type {
   MouseEvent,
   RefObject,
 } from "react"
-import type { IconButtonProps } from "../../components/button"
 import type {
-  CSSUIObject,
-  CSSUIProps,
+  CSSProps,
   HTMLProps,
   HTMLUIProps,
   PropGetter,
   RequiredPropGetter,
 } from "../../core"
+import type { ButtonProps } from "../button"
+import type { IconButtonProps } from "../icon-button"
 import useEmblaCarousel from "embla-carousel-react"
 import {
   Children,
@@ -24,18 +24,17 @@ import {
   useRef,
   useState,
 } from "react"
-import { layoutStyleProperties, mergeVars } from "../../core"
+import { mergeVars } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   assignRef,
-  createContext,
   dataAttr,
   handlerAll,
   mergeRefs,
-  splitObject,
   useUnmountEffect,
   useUpdateEffect,
 } from "../../utils"
+import { useCarouselContext } from "./carousel"
 
 export type AlignmentOptionType = EmblaOptionsType["align"]
 export type ScrollContainOptionType = EmblaOptionsType["containScroll"]
@@ -44,23 +43,6 @@ export type DragHandlerOptionType = EmblaOptionsType["watchDrag"]
 export type ResizeHandlerOptionType = EmblaOptionsType["watchResize"]
 export type SlidesHandlerOptionType = EmblaOptionsType["watchSlides"]
 export type CarouselControl = EmblaCarouselType
-
-interface CarouselContext {
-  id: string
-  carousel: CarouselControl | undefined
-  includeGapInSize: boolean
-  indexes: number[]
-  orientation: "horizontal" | "vertical"
-  selectedIndex: number
-  slidesToScroll: number
-  styles: { [key: string]: CSSUIObject | undefined }
-}
-
-export const [CarouselProvider, useCarouselContext] =
-  createContext<CarouselContext>({
-    name: "CarouselContext",
-    errorMessage: `useCarouselContext returned is 'undefined'. Seems you forgot to wrap the components in "<Carousel />"`,
-  })
 
 export interface UseCarouselProps
   extends Omit<HTMLUIProps, "draggable" | "gap" | "onChange"> {
@@ -124,7 +106,7 @@ export interface UseCarouselProps
    *
    * @default '4'
    */
-  gap?: CSSUIProps["gap"]
+  gap?: CSSProps["gap"]
   /**
    * If `true`, gap will be treated as part of the carousel slide size.
    *
@@ -166,7 +148,7 @@ export interface UseCarouselProps
    *
    * @default '100%'
    */
-  slideSize?: CSSUIProps["width"]
+  slideSize?: CSSProps["width"]
   /**
    * The number of slides that should be scrolled with next or previous buttons.
    *
@@ -222,6 +204,7 @@ export const useCarousel = ({
   dragFree = false,
   draggable = true,
   duration = 25,
+  gap = "{4, 1rem}",
   includeGapInSize = true,
   index,
   inViewThreshold = 0,
@@ -231,6 +214,7 @@ export const useCarousel = ({
   slideSize = "100%",
   slidesToScroll = 1,
   stopMouseEnterAutoplay = true,
+  vars,
   watchDrag = draggable,
   watchResize = true,
   watchSlides = true,
@@ -238,10 +222,6 @@ export const useCarousel = ({
   onScrollProgress,
   ...rest
 }: UseCarouselProps) => {
-  const [
-    { gap = "fallback(4, 1rem)", ...containerProps },
-    { vars, ...slidesProps },
-  ] = splitObject(rest, layoutStyleProperties)
   const [selectedIndex, setSelectedIndex] = useControllableState({
     defaultValue: defaultIndex,
     value: index,
@@ -377,12 +357,11 @@ export const useCarousel = ({
 
   assignRef(controlRef, carousel)
 
-  const getContainerProps: PropGetter = useCallback(
-    (props = {}, ref = null) => ({
+  const getRootProps: PropGetter = useCallback(
+    (props = {}) => ({
       "aria-roledescription": "carousel",
-      ...containerProps,
+      ...rest,
       ...props,
-      ref,
       vars: mergeVars(vars, [
         { name: "gap", token: "spaces", value: gap },
         { name: "slideSize", token: "sizes", value: slideSize },
@@ -394,18 +373,17 @@ export const useCarousel = ({
         setMouseEnter(false)
       }),
     }),
-    [containerProps, gap, slideSize, vars],
+    [gap, rest, slideSize, vars],
   )
 
   const getSlidesProps: PropGetter = useCallback(
     (props = {}) => ({
       id,
       "aria-live": autoplay ? "off" : "polite",
-      ...slidesProps,
       ...props,
       ref: carouselRef,
     }),
-    [slidesProps, id, carouselRef, autoplay],
+    [id, carouselRef, autoplay],
   )
 
   return {
@@ -417,7 +395,7 @@ export const useCarousel = ({
     orientation,
     selectedIndex,
     slidesToScroll,
-    getContainerProps,
+    getRootProps,
     getSlidesProps,
   }
 }
@@ -441,7 +419,7 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
       id: `${id}-${index + 1}`,
       "aria-label": `${index + 1} of ${totalSlides}`,
       "aria-roledescription": "slide",
-      "data-index": index,
+      "data-index": `${index}`,
       "data-selected": dataAttr(selected),
       role: "tabpanel",
       ...props,
@@ -454,7 +432,7 @@ export const useCarouselSlide = ({ index }: UseCarouselSlideProps) => {
 
 export type UseCarouselSlideReturn = ReturnType<typeof useCarouselSlide>
 
-export interface UseCarouselControlProps extends IconButtonProps {
+export interface UseCarouselControlProps extends ButtonProps {
   operation: "next" | "prev"
 }
 
@@ -480,17 +458,17 @@ export const useCarouselControl = ({
     }
   }, [carousel, prev])
 
-  const getControlProps: PropGetter<"button"> = useCallback(
-    (props = {}, ref = null) => ({
-      "aria-controls": id,
-      "aria-label": `Go to ${prev ? "previous" : "next"} slide`,
-      ...props,
-      ref,
-      disabled,
-      onClick: handlerAll(props.onClick, onClick),
-    }),
-    [disabled, id, onClick, prev],
-  )
+  const getControlProps: PropGetter<"button", undefined, IconButtonProps> =
+    useCallback(
+      (props = {}) => ({
+        "aria-controls": id,
+        "aria-label": `Go to ${prev ? "previous" : "next"} slide`,
+        ...props,
+        disabled,
+        onClick: handlerAll(props.onClick, onClick),
+      }),
+      [disabled, id, onClick, prev],
+    )
 
   return { getControlProps }
 }
@@ -592,21 +570,20 @@ export const useCarouselIndicators = () => {
   })
 
   const getIndicatorsProps: PropGetter = useCallback(
-    (props = {}, ref = null) => ({
+    (props = {}) => ({
       "aria-label": "Sliders",
       "aria-orientation": orientation,
       role: "tablist",
       ...props,
-      ref,
     }),
     [orientation],
   )
 
   const getIndicatorProps: RequiredPropGetter<
-    { index: number } & HTMLProps<"button">,
-    HTMLProps<"button">
+    HTMLProps<"button">,
+    { index: number }
   > = useCallback(
-    ({ index, ...props }, ref) => {
+    ({ ref, index, ...props }) => {
       const selected = index === selectedIndex
       const internalRef = createRef<HTMLButtonElement>()
 
@@ -617,7 +594,7 @@ export const useCarouselIndicators = () => {
         "aria-controls": `${id}-${index + 1}`,
         "aria-label": `Go to ${index + 1} slide`,
         "aria-selected": selected,
-        "data-index": index,
+        "data-index": `${index}`,
         "data-selected": dataAttr(selected),
         role: "tab",
         tabIndex: selected ? 0 : -1,

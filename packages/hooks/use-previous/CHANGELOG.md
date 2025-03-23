@@ -1,5 +1,12 @@
 # @yamada-ui/use-previous
 
+## 1.0.29
+
+### Patch Changes
+
+- Updated dependencies [[`a168939`](https://github.com/yamada-ui/yamada-ui/commit/a1689390b37774d89a2f06cadd150017ff48eb9c)]:
+  - @yamada-ui/utils@1.7.2
+
 ## 1.0.28
 
 ### Patch Changes

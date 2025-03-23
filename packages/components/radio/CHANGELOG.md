@@ -1,5 +1,19 @@
 # @yamada-ui/radio
 
+## 1.3.6
+
+### Patch Changes
+
+- [#4609](https://github.com/yamada-ui/yamada-ui/pull/4609) [`44d856a`](https://github.com/yamada-ui/yamada-ui/commit/44d856a590487901fb32673797645670ea1f74ec) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Improved `useCheckboxGroup` and `useRadioGroup` logic.
+
+- Updated dependencies [[`a168939`](https://github.com/yamada-ui/yamada-ui/commit/a1689390b37774d89a2f06cadd150017ff48eb9c), [`d5eb415`](https://github.com/yamada-ui/yamada-ui/commit/d5eb41569423579497c0908dfac79a8ddab9edf8)]:
+  - @yamada-ui/utils@1.7.2
+  - @yamada-ui/core@1.17.3
+  - @yamada-ui/form-control@2.1.15
+  - @yamada-ui/layouts@1.4.3
+  - @yamada-ui/use-controllable-state@1.0.29
+  - @yamada-ui/use-focus-visible@1.1.16
+
 ## 1.3.5
 
 ### Patch Changes

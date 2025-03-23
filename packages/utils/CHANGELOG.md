@@ -1,5 +1,11 @@
 # @yamada-ui/utils
 
+## 1.7.2
+
+### Patch Changes
+
+- [#4624](https://github.com/yamada-ui/yamada-ui/pull/4624) [`a168939`](https://github.com/yamada-ui/yamada-ui/commit/a1689390b37774d89a2f06cadd150017ff48eb9c) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Updated element comparison functions.
+
 ## 1.7.1
 
 ### Patch Changes

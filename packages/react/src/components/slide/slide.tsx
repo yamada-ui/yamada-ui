@@ -69,7 +69,7 @@ export const {
 /**
  * `Slide` is a component that shows or hides an element from the corners of the page.
  *
- * @see Docs https://yamada-ui.com/components/slide
+ * @see https://yamada-ui.com/components/slide
  */
 export const Slide = withContext(
   ({

@@ -64,7 +64,7 @@ export const {
 /**
  * `FadeScale` is a component that gradually scales up to reveal or scales down to hide an element.
  *
- * @see Docs https://yamada-ui.com/components/fade-scale
+ * @see https://yamada-ui.com/components/fade-scale
  */
 export const FadeScale = withContext(
   ({

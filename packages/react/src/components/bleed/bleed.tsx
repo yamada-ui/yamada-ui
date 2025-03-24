@@ -42,7 +42,7 @@ export const {
 /**
  * `Bleed` is a component used to break an element from the boundaries of its container.
  *
- * @see Docs https://yamada-ui.com/components/bleed
+ * @see https://yamada-ui.com/components/bleed
  */
 export const Bleed = withContext("div")(
   undefined,

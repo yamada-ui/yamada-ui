@@ -35,6 +35,7 @@ describe("DOM", () => {
 
   describe("getPlatform", () => {
     test("should return the platform of the user agent", () => {
+       
       expect(getPlatform()).toBe(navigator.platform)
     })
   })
@@ -42,6 +43,7 @@ describe("DOM", () => {
   describe("vendor", () => {
     test("should return true if the vendor matches", () => {
       expect(vendor(/apple/i)).toBe(
+         
         navigator.vendor.toLowerCase().includes("apple"),
       )
     })
@@ -71,6 +73,7 @@ describe("DOM", () => {
   describe("isSafari", () => {
     test("should return true if the browser is Safari on an Apple device", () => {
       const isAppleDevice = /mac|iphone|ipad|ipod/i.test(getPlatform())
+       
       const isSafariBrowser = /apple/i.test(navigator.vendor)
       expect(isSafari()).toBe(isAppleDevice && isSafariBrowser)
     })
@@ -114,7 +117,7 @@ describe("DOM", () => {
     })
   })
 
-  describe("isDisabled", () => {
+  describe("disabled", () => {
     test("should return true if the element is disabled", () => {
       const el = document.createElement("button")
       el.setAttribute("disabled", true as any)

@@ -9,26 +9,29 @@
     "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config"
   },
   "dependencies": {
-    "@remix-run/node": "^2.15.1",
-    "@remix-run/react": "^2.15.1",
-    "@remix-run/serve": "^2.15.1",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@remix-run/node": "^2.15.3",
+    "@remix-run/react": "^2.15.3",
+    "@remix-run/serve": "^2.15.3",
     "@yamada-ui/react": "workspace:*",
-    "isbot": "^5.1.18",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "remix-utils": "^7.7.0"
+    "isbot": "^5.1.23",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remix-utils": "^8.1.0"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.15.1",
-    "@types/react": "^18.3.17",
-    "@types/react-dom": "^18.3.5",
-    "eslint": "^9.17.0",
-    "eslint-config-prettier": "^9.1.0",
-    "globals": "^15.14.0",
+    "@remix-run/dev": "^2.15.3",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "globals": "^16.0.0",
     "jiti": "^2.4.2",
-    "typescript": "^5.7.2",
-    "typescript-eslint": "^8.18.1",
-    "vite": "^6.0.4"
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.1.1"
   },
   "engines": {
     "node": ">=20.0.0"

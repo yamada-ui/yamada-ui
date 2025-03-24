@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/test",
   "type": "module",
-  "version": "1.5.14",
+  "version": "1.5.17",
   "description": "Yamada UI test",
   "keywords": [],
   "author": "Hirotomo Yamada <hirotomo.yamada@avap.co.jp>",

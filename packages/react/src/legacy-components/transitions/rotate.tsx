@@ -73,7 +73,7 @@ export interface RotateProps
 /**
  * `Rotate` is an animation component that alternately rotates two elements as they switch.
  *
- * @see Docs https://yamada-ui.com/components/transitions/rotate
+ * @see https://yamada-ui.com/components/transitions/rotate
  */
 export const Rotate: FC<RotateProps> = (props) => {
   const [styles, mergedProps] = useComponentStyle("Rotate", props)

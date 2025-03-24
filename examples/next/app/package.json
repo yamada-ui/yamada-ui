@@ -7,22 +7,25 @@
     "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config"
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@yamada-ui/react": "workspace:*",
-    "next": "^15.1.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "next": "^15.1.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^15.1.2",
-    "@types/node": "^22.10.2",
-    "@types/react": "^18.3.17",
-    "@types/react-dom": "^18.3.5",
-    "eslint": "^9.17.0",
-    "eslint-config-prettier": "^9.1.0",
-    "globals": "^15.14.0",
+    "@next/eslint-plugin-next": "^15.1.7",
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "globals": "^16.0.0",
     "jiti": "^2.4.2",
-    "prettier": "^3.4.2",
-    "typescript": "^5.7.2",
-    "typescript-eslint": "^8.18.1"
+    "prettier": "^3.5.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1"
   }
 }

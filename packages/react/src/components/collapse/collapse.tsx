@@ -79,7 +79,7 @@ export const {
 /**
  * `Collapse` is a component that allows you to expand or collapse an element for display.
  *
- * @see Docs https://yamada-ui.com/components/collapse
+ * @see https://yamada-ui.com/components/collapse
  */
 export const Collapse = withContext(
   ({

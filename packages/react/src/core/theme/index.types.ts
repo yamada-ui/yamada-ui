@@ -228,7 +228,7 @@ export interface ThemeConfig {
      * This allows you to define custom names for each layer type in your theme.
      * Set to `false` to disable the use of CSS layers.
      *
-     * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
+     * @see https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
      */
     layers?: false | Layers
     /**

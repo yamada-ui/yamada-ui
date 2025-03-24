@@ -97,6 +97,27 @@ const restrictedImportsConfigArray: Linter.Config[] = [
   },
 ]
 
+const deprecatedConfig: Linter.Config = {
+  name: "eslint/deprecated",
+  files: [
+    "packages/**/tests/**/*.js",
+    "packages/**/tests/**/*.cjs",
+    "packages/**/tests/**/*.mjs",
+    "packages/**/tests/**/*.jsx",
+    "packages/**/tests/**/*.ts",
+    "packages/**/tests/**/*.cts",
+    "packages/**/tests/**/*.mts",
+    "packages/**/tests/**/*.tsx",
+    "packages/**/tests/**/*.d.ts",
+    "stories/**/*.ts",
+    "stories/**/*.tsx",
+    "stories/**/*.d.ts",
+  ],
+  rules: {
+    "@typescript-eslint/no-deprecated": "warn",
+  },
+}
+
 const reactConfig: Linter.Config = {
   ...sharedReactConfig,
   files: sharedFiles,
@@ -133,6 +154,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   baseConfig,
   noConsoleConfig,
   ...restrictedImportsConfigArray,
+  deprecatedConfig,
   typescriptConfig,
   ...importConfigArray,
   perfectionistConfig,

@@ -19,7 +19,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@yamada-ui/react"
 
 ## 使い方
 
-現在のパスと一致する場合は、`isCurrentPage`を`true`に設定します。その場合、`a`要素ではなく`span`要素でレンダリングされます。
+現在のパスと一致する場合は、`currentPage`を`true`に設定します。その場合、`a`要素ではなく`span`要素でレンダリングされます。
 
 ```tsx
 <Breadcrumb>
@@ -32,7 +32,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@yamada-ui/react"
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
@@ -46,7 +46,7 @@ const items = useMemo<BreadcrumbGenerateItem[]>(
     { href: "/", name: "サイヤ人編" },
     { href: "/", name: "ナメック星編" },
     { href: "/", name: "人造人間編" },
-    { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    { href: "/", name: "魔人ブウ編", currentPage: true },
   ],
   [],
 )
@@ -67,7 +67,7 @@ return <Breadcrumb items={items} />
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
@@ -86,7 +86,7 @@ return <Breadcrumb items={items} />
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
@@ -105,13 +105,13 @@ return <Breadcrumb items={items} />
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
 ```
 
-または、`startBoundaries`と`endBoundaries`に数値を設定か、`items`に`isEllipsisPage`を`true`にすることで省略できます。
+または、`startBoundaries`と`endBoundaries`に数値を設定か、`items`に`ellipsisPage`を`true`にすることで省略できます。
 
 ```tsx functional=true
 const items = useMemo<BreadcrumbGenerateItem[]>(
@@ -119,7 +119,7 @@ const items = useMemo<BreadcrumbGenerateItem[]>(
     { href: "/", name: "サイヤ人編" },
     { href: "/", name: "ナメック星編" },
     { href: "/", name: "人造人間編" },
-    { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    { href: "/", name: "魔人ブウ編", currentPage: true },
   ],
   [],
 )
@@ -131,9 +131,9 @@ return <Breadcrumb items={items} startBoundaries={1} endBoundaries={1} />
 const items = useMemo<BreadcrumbGenerateItem[]>(
   () => [
     { href: "/", name: "サイヤ人編" },
-    { href: "/", name: "ナメック星編", isEllipsisPage: true },
-    { href: "/", name: "人造人間編", isEllipsisPage: true },
-    { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    { href: "/", name: "ナメック星編", ellipsisPage: true },
+    { href: "/", name: "人造人間編", ellipsisPage: true },
+    { href: "/", name: "魔人ブウ編", currentPage: true },
   ],
   [],
 )
@@ -170,7 +170,7 @@ return <Breadcrumb items={items} />
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
@@ -189,7 +189,7 @@ return <Breadcrumb items={items} />
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
@@ -201,7 +201,7 @@ const items = useMemo<BreadcrumbGenerateItem[]>(
     { href: "/", name: "サイヤ人編" },
     { href: "/", name: "ナメック星編" },
     { href: "/", name: "人造人間編" },
-    { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    { href: "/", name: "魔人ブウ編", currentPage: true },
   ],
   [],
 )

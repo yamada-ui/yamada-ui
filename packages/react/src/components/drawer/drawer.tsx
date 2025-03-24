@@ -107,7 +107,7 @@ export const {
 /**
  * `Drawer` is a component for a panel that appears from the edge of the screen.
  *
- * @see Docs https://yamada-ui.com/components/drawer
+ * @see https://yamada-ui.com/components/drawer
  */
 export const DrawerRoot = withProvider(
   ({

@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/react",
   "type": "module",
-  "version": "1.7.3",
+  "version": "1.7.6",
   "description": "React UI components of the Yamada, by the Yamada, for the Yamada built with React and Emotion",
   "keywords": [
     "yamada",
@@ -68,7 +68,7 @@
     "embla-carousel": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
     "framesync": "6.1.2",
-    "lucide-react": "0.475.0",
+    "lucide-react": "0.483.0",
     "motion": "^12.4.7",
     "react-dropzone-esm": "^15.2.0",
     "react-fast-compare": "^3.2.2",

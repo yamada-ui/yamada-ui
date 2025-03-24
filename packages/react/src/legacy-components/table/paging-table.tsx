@@ -132,7 +132,7 @@ export interface PagingTableProps<Y extends RowData = unknown>
 /**
  * `PagingTable` is a table component with pagination functionality.
  *
- * @see Docs https://yamada-ui.com/components/data-display/paging-table
+ * @see https://yamada-ui.com/components/data-display/paging-table
  */
 export const PagingTable = forwardRef(
   <Y extends RowData>(

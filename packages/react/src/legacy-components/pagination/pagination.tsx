@@ -79,7 +79,7 @@ export interface PaginationProps
 /**
  * `Pagination` is a component for managing the pagination and navigation of content.
  *
- * @see Docs https://yamada-ui.com/components/navigation/pagination
+ * @see https://yamada-ui.com/components/navigation/pagination
  */
 export const Pagination = forwardRef<PaginationProps, "ul">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Pagination", props)

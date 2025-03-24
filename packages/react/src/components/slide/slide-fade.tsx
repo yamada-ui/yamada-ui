@@ -92,7 +92,7 @@ export const {
 /**
  * `SlideFade` is a component that gradually shows or hides an element while moving it from a specified position.
  *
- * @see Docs https://yamada-ui.com/components/slide-fade
+ * @see https://yamada-ui.com/components/slide-fade
  */
 export const SlideFade = withContext(
   ({

@@ -68,7 +68,7 @@ export interface AreaChartProps
 /**
  * `AreaChart` is a component for drawing area charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/data-display/area-chart
+ * @see https://yamada-ui.com/components/data-display/area-chart
  */
 export const AreaChart = forwardRef<AreaChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("AreaChart", props)

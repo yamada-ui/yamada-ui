@@ -29,7 +29,6 @@ export const typescriptConfig: TSESLint.FlatConfig.Config = {
     ],
     "@typescript-eslint/consistent-type-exports": "error",
     "@typescript-eslint/consistent-type-imports": "error",
-    // "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/no-array-constructor": "error",
     "@typescript-eslint/no-duplicate-enum-values": "error",
     "@typescript-eslint/no-extra-non-null-assertion": "error",
@@ -58,7 +57,6 @@ export const typescriptConfig: TSESLint.FlatConfig.Config = {
     "@typescript-eslint/triple-slash-reference": "error",
 
     "@typescript-eslint/dot-notation": "warn",
-    // "@typescript-eslint/no-deprecated": "warn",
     "@typescript-eslint/no-unnecessary-boolean-literal-compare": "warn",
     "@typescript-eslint/no-unnecessary-condition": "warn",
     "@typescript-eslint/no-unnecessary-template-expression": "warn",

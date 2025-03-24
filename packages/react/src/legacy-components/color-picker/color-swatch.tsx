@@ -79,7 +79,7 @@ export interface ColorSwatchProps
 /**
  * `ColorSwatch` is a component that displays color samples.
  *
- * @see Docs https://yamada-ui.com/components/data-display/color-swatch
+ * @see https://yamada-ui.com/components/data-display/color-swatch
  */
 export const ColorSwatch = forwardRef<ColorSwatchProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("ColorSwatch", props)

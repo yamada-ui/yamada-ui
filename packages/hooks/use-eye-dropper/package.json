@@ -1,6 +1,6 @@
 {
   "name": "@yamada-ui/use-eye-dropper",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "description": "Yamada UI useEyeDropper custom hook",
   "keywords": [
     "use-eye-dropper"

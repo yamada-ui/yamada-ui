@@ -4,6 +4,7 @@ import { createRequire } from "node:module"
 import {
   actionAdd,
   actionInit,
+  actionMigrate,
   actionTheme,
   actionTokens,
 } from "./command/index.js"
@@ -36,6 +37,8 @@ export const run = async () => {
     .option("--cwd <path>", "Current working directory")
     .option("-r, --replace", "Force replace the theme")
     .action(actionTheme)
+
+  program.command("migrate").action(actionMigrate)
 
   program.parse()
 }

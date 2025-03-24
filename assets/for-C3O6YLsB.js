@@ -1,1 +1,0 @@
-import{u as n}from"./use-component-style-CpB_lyT3.js";import{Q as a}from"./factory-DbNU74ts.js";const m=o=>{const[,{children:t,each:r,fallback:e}]=n("For",o);return!r||!a(r)||!r.length?e||null:r.map(t)};export{m as F};

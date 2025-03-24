@@ -1,5 +1,18 @@
 # @yamada-ui/accordion
 
+## 2.0.24
+
+### Patch Changes
+
+- Updated dependencies [[`a168939`](https://github.com/yamada-ui/yamada-ui/commit/a1689390b37774d89a2f06cadd150017ff48eb9c), [`d5eb415`](https://github.com/yamada-ui/yamada-ui/commit/d5eb41569423579497c0908dfac79a8ddab9edf8)]:
+  - @yamada-ui/utils@1.7.2
+  - @yamada-ui/motion@2.3.3
+  - @yamada-ui/core@1.17.3
+  - @yamada-ui/icon@1.1.21
+  - @yamada-ui/transitions@1.1.19
+  - @yamada-ui/use-controllable-state@1.0.29
+  - @yamada-ui/use-descendant@1.0.31
+
 ## 2.0.23
 
 ### Patch Changes

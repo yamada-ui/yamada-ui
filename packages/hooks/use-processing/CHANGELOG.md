@@ -1,5 +1,14 @@
 # @yamada-ui/use-processing
 
+## 1.0.7
+
+### Patch Changes
+
+- [#4608](https://github.com/yamada-ui/yamada-ui/pull/4608) [`743beed`](https://github.com/yamada-ui/yamada-ui/commit/743beed90f7d7dd88bb8fd07959b8bab1b3cbb14) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - Renamed `isLoading` to `loading`.
+
+- Updated dependencies [[`a168939`](https://github.com/yamada-ui/yamada-ui/commit/a1689390b37774d89a2f06cadd150017ff48eb9c)]:
+  - @yamada-ui/utils@1.7.2
+
 ## 1.0.6
 
 ### Patch Changes

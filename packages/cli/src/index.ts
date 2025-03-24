@@ -1,7 +1,7 @@
 import c from "chalk"
 import { Command } from "commander"
 import { createRequire } from "node:module"
-import { actionTheme, actionTokens } from "./command/index.js"
+import { actionAdd, actionTheme, actionTokens } from "./command/index.js"
 import { initCLI } from "./utils/index.js"
 
 const pkg = createRequire(import.meta.url)("@yamada-ui/cli/package.json")
@@ -27,6 +27,8 @@ export const run = async () => {
     .option("--cwd <path>", "Current working directory")
     .option("-r, --replace", "Force replace the theme")
     .action(actionTheme)
+
+  program.command("add <components...>").action(actionAdd)
 
   program.parse()
 }

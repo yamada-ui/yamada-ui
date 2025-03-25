@@ -64,15 +64,15 @@ const restrictedImportsConfigArray: Linter.Config[] = [
   {
     name: "eslint/restricted-imports/react",
     files: [
-      "**/packages/(react|test|utils)/**/*.js",
-      "**/packages/(react|test|utils)/**/*.cjs",
-      "**/packages/(react|test|utils)/**/*.mjs",
-      "**/packages/(react|test|utils)/**/*.jsx",
-      "**/packages/(react|test|utils)/**/*.ts",
-      "**/packages/(react|test|utils)/**/*.cts",
-      "**/packages/(react|test|utils)/**/*.mts",
-      "**/packages/(react|test|utils)/**/*.tsx",
-      "**/packages/(react|test|utils)/**/*.d.ts",
+      "**/packages/(react|utils)/**/*.js",
+      "**/packages/(react|utils)/**/*.cjs",
+      "**/packages/(react|utils)/**/*.mjs",
+      "**/packages/(react|utils)/**/*.jsx",
+      "**/packages/(react|utils)/**/*.ts",
+      "**/packages/(react|utils)/**/*.cts",
+      "**/packages/(react|utils)/**/*.mts",
+      "**/packages/(react|utils)/**/*.tsx",
+      "**/packages/(react|utils)/**/*.d.ts",
     ],
     rules: {
       "no-restricted-imports": ["error", "@yamada-ui/react"],
@@ -96,27 +96,6 @@ const restrictedImportsConfigArray: Linter.Config[] = [
     },
   },
 ]
-
-const deprecatedConfig: Linter.Config = {
-  name: "eslint/deprecated",
-  files: [
-    "packages/**/tests/**/*.js",
-    "packages/**/tests/**/*.cjs",
-    "packages/**/tests/**/*.mjs",
-    "packages/**/tests/**/*.jsx",
-    "packages/**/tests/**/*.ts",
-    "packages/**/tests/**/*.cts",
-    "packages/**/tests/**/*.mts",
-    "packages/**/tests/**/*.tsx",
-    "packages/**/tests/**/*.d.ts",
-    "stories/**/*.ts",
-    "stories/**/*.tsx",
-    "stories/**/*.d.ts",
-  ],
-  rules: {
-    "@typescript-eslint/no-deprecated": "warn",
-  },
-}
 
 const reactConfig: Linter.Config = {
   ...sharedReactConfig,
@@ -154,7 +133,6 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   baseConfig,
   noConsoleConfig,
   ...restrictedImportsConfigArray,
-  deprecatedConfig,
   typescriptConfig,
   ...importConfigArray,
   perfectionistConfig,

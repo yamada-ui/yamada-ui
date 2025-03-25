@@ -56,9 +56,9 @@
     "test:issue": "tsx scripts/coverage-issues",
     "spellcheck": "cspell \"**/*.{js,jsx,mjs,ts,tsx,mts,md,mdx}\" --quiet",
     "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
-    "gen:styles": "tsx scripts/generate-styles && eslint packages/react/src/core/styles.ts --fix --flag unstable_ts_config",
-    "gen:tokens": "yamada-cli tokens packages/react/src/theme/index.ts --internal --out packages/react/src/core/generated-theme-tokens.types.ts && eslint packages/react/src/core/generated-theme-tokens.types.ts --fix --flag unstable_ts_config",
-    "gen:icons": "tsx scripts/generate-icons && eslint packages/react/src/components/icon/icons/index.ts packages/react/src/components/icon/icons/index.types.ts --fix --flag unstable_ts_config",
+    "gen:styles": "tsx scripts/generate-styles && eslint packages/react/src/core/styles.ts --fix",
+    "gen:tokens": "yamada-cli tokens packages/react/src/theme/index.ts --internal --out packages/react/src/core/generated-theme-tokens.types.ts && eslint packages/react/src/core/generated-theme-tokens.types.ts --fix",
+    "gen:icons": "tsx scripts/generate-icons && eslint packages/react/src/components/icon/icons/index.ts packages/react/src/components/icon/icons/index.types.ts --fix",
     "gen:docs": "pnpm --filter=./packages/components/** gen:docs",
     "changelog": "tsx scripts/changelog",
     "changelog:ci": "tsx scripts/changelog --current",
@@ -124,7 +124,6 @@
     "@vitest/eslint-plugin": "^1.1.31",
     "@vitest/ui": "^3.0.6",
     "@yamada-ui/cli": "workspace:*",
-    "@yamada-ui/test": "workspace:*",
     "@yamada-ui/react": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "axe-playwright": "^2.1.0",
@@ -157,7 +156,6 @@
     "list-it": "^1.3.13",
     "lucide-react": "^0.483.0",
     "node-fetch": "^3.3.2",
-    "plop": "^4.0.1",
     "prettier": "^3.5.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -175,7 +173,8 @@
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.1.1",
-    "vitest": "^3.0.6"
+    "vitest": "^3.0.6",
+    "vitest-matchmedia-mock": "^1.0.6"
   },
   "pnpm": {
     "overrides": {

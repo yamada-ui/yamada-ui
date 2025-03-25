@@ -142,9 +142,6 @@ export const Picture: FC<PictureProps> = ({
   )
 }
 
-Picture.displayName = "Picture"
-Picture.__styled__ = "Picture"
-
 export interface SourceProps extends HTMLStyledProps<"source"> {
   /**
    * The media query for the source.
@@ -165,6 +162,3 @@ export const Source: FC<SourceProps> = ({ media, ...rest }) => {
 
   return <styled.source media={media} {...rest} />
 }
-
-Source.displayName = "Source"
-Source.__styled__ = "Source"

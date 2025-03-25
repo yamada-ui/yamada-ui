@@ -57,6 +57,3 @@ export const Highlight: FC<HighlightProps> = ({
     </Component>
   )
 }
-
-Highlight.displayName = "Highlight"
-Highlight.__styled__ = "Highlight"

@@ -12,9 +12,8 @@ describe("Lucide icon", () => {
     await a11y(<GhostIcon />)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(GhostIcon.displayName).toBe("Icon")
-    expect(GhostIcon.__styled__).toBe("Icon")
   })
 
   test("sets `className` correctly", () => {

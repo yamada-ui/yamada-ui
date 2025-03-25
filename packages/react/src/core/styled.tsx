@@ -207,7 +207,5 @@ export function createStyled<
 
   StyledComponent.displayName = displayName || "StyledComponent"
 
-  if (styledOptions.name) StyledComponent.__styled__ = displayName
-
   return StyledComponent
 }

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config"
+    "lint": "eslint . --max-warnings=0 --cache"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.7.2",

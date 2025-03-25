@@ -9,6 +9,3 @@ export interface BoxProps extends HTMLStyledProps {}
  * @see https://yamada-ui.com/components/box
  */
 export const Box = styled("div")
-
-Box.displayName = "Box"
-Box.__styled__ = "Box"

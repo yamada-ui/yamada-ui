@@ -37,8 +37,3 @@ function factory() {
  * @see https://yamada-ui.com/styled-system/styled
  */
 export const styled = factory()
-
-/**
- * @deprecated Use `styled` instead.
- */
-export const ui = factory()

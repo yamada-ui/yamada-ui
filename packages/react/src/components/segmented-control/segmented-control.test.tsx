@@ -1,15 +1,15 @@
-import type { SegmentedControlItem } from "."
-import { SegmentedControl, SegmentedControlButton } from "."
+import type { SegmentedControlItem } from "./"
 import { a11y, fireEvent, render, screen, waitFor } from "../../../test"
+import { SegmentedControl } from "./"
 
 describe("<SegmentedControl />", () => {
   test("SegmentedControl renders correctly", async () => {
     const { container } = render(
-      <SegmentedControl>
-        <SegmentedControlButton value="one">One</SegmentedControlButton>
-        <SegmentedControlButton value="two">Two</SegmentedControlButton>
-        <SegmentedControlButton value="three">Three</SegmentedControlButton>
-      </SegmentedControl>,
+      <SegmentedControl.Root>
+        <SegmentedControl.Button value="one">One</SegmentedControl.Button>
+        <SegmentedControl.Button value="two">Two</SegmentedControl.Button>
+        <SegmentedControl.Button value="three">Three</SegmentedControl.Button>
+      </SegmentedControl.Root>,
     )
     await a11y(container)
   })
@@ -25,13 +25,16 @@ describe("<SegmentedControl />", () => {
     ]
     render(
       <>
-        <SegmentedControl data-testid="SegmentedControl">
-          <SegmentedControlButton value="one">One</SegmentedControlButton>
-          <SegmentedControlButton value="two">Two</SegmentedControlButton>
-          <SegmentedControlButton value="three">Three</SegmentedControlButton>
-        </SegmentedControl>
+        <SegmentedControl.Root data-testid="SegmentedControl">
+          <SegmentedControl.Button value="one">One</SegmentedControl.Button>
+          <SegmentedControl.Button value="two">Two</SegmentedControl.Button>
+          <SegmentedControl.Button value="three">Three</SegmentedControl.Button>
+        </SegmentedControl.Root>
 
-        <SegmentedControl data-testid="SegmentedControlItems" items={items} />
+        <SegmentedControl.Root
+          data-testid="SegmentedControlItems"
+          items={items}
+        />
       </>,
     )
     expect(screen.getByTestId("SegmentedControl")).toBeInTheDocument()
@@ -40,16 +43,16 @@ describe("<SegmentedControl />", () => {
 
   test("should render segmented control with default value", () => {
     render(
-      <SegmentedControl data-testid="SegmentedControl" defaultValue="one">
-        <SegmentedControlButton
+      <SegmentedControl.Root data-testid="SegmentedControl" defaultValue="one">
+        <SegmentedControl.Button
           data-testid="SegmentedControlButton"
           value="one"
         >
           One
-        </SegmentedControlButton>
-        <SegmentedControlButton value="two">Two</SegmentedControlButton>
-        <SegmentedControlButton value="three">Three</SegmentedControlButton>
-      </SegmentedControl>,
+        </SegmentedControl.Button>
+        <SegmentedControl.Button value="two">Two</SegmentedControl.Button>
+        <SegmentedControl.Button value="three">Three</SegmentedControl.Button>
+      </SegmentedControl.Root>,
     )
     const label = screen.getByTestId("SegmentedControlButton")
     expect(label).toHaveAttribute("data-checked")
@@ -58,11 +61,11 @@ describe("<SegmentedControl />", () => {
 
   test("should disable segmented control", () => {
     render(
-      <SegmentedControl data-testid="SegmentedControl" disabled>
-        <SegmentedControlButton value="one">One</SegmentedControlButton>
-        <SegmentedControlButton value="two">Two</SegmentedControlButton>
-        <SegmentedControlButton value="three">Three</SegmentedControlButton>
-      </SegmentedControl>,
+      <SegmentedControl.Root data-testid="SegmentedControl" disabled>
+        <SegmentedControl.Button value="one">One</SegmentedControl.Button>
+        <SegmentedControl.Button value="two">Two</SegmentedControl.Button>
+        <SegmentedControl.Button value="three">Three</SegmentedControl.Button>
+      </SegmentedControl.Root>,
     )
     const segmentedControl = screen.getByTestId("SegmentedControl")
     Array.from(segmentedControl.getElementsByTagName("input")).forEach(
@@ -74,13 +77,13 @@ describe("<SegmentedControl />", () => {
 
   test("focus moves correctly between buttons", async () => {
     const { user } = render(
-      <SegmentedControl>
-        <SegmentedControlButton value="one">One</SegmentedControlButton>
-        <SegmentedControlButton disabled value="two">
+      <SegmentedControl.Root>
+        <SegmentedControl.Button value="one">One</SegmentedControl.Button>
+        <SegmentedControl.Button disabled value="two">
           Two
-        </SegmentedControlButton>
-        <SegmentedControlButton value="three">Three</SegmentedControlButton>
-      </SegmentedControl>,
+        </SegmentedControl.Button>
+        <SegmentedControl.Button value="three">Three</SegmentedControl.Button>
+      </SegmentedControl.Root>,
     )
     const firstButton = screen.getByRole("radio", { name: /one/i })
     const secondButton = screen.getByRole("radio", { name: /two/i })
@@ -99,11 +102,11 @@ describe("<SegmentedControl />", () => {
 
   test("SegmentedControl with non-SegmentedControlButton children renders correctly", async () => {
     const { container } = render(
-      <SegmentedControl data-testid="SegmentedControl" disabled>
+      <SegmentedControl.Root data-testid="SegmentedControl" disabled>
         <option>one</option>
         <option>two</option>
         <option>three</option>
-      </SegmentedControl>,
+      </SegmentedControl.Root>,
     )
 
     await a11y(container)
@@ -111,13 +114,13 @@ describe("<SegmentedControl />", () => {
 
   test("focus moves to the next element when the focused element is disabled", () => {
     render(
-      <SegmentedControl>
-        <SegmentedControlButton value="one">One</SegmentedControlButton>
-        <SegmentedControlButton disabled value="two">
+      <SegmentedControl.Root>
+        <SegmentedControl.Button value="one">One</SegmentedControl.Button>
+        <SegmentedControl.Button disabled value="two">
           Two
-        </SegmentedControlButton>
-        <SegmentedControlButton value="three">Three</SegmentedControlButton>
-      </SegmentedControl>,
+        </SegmentedControl.Button>
+        <SegmentedControl.Button value="three">Three</SegmentedControl.Button>
+      </SegmentedControl.Root>,
     )
 
     const secondButton = screen.getByRole("radio", { name: /two/i })

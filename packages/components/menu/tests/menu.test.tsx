@@ -12,6 +12,7 @@ import {
   ContextMenuTrigger,
   Menu,
   MenuButton,
+  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuItemButton,
@@ -95,6 +96,22 @@ describe("<Menu />", () => {
       </Menu>,
     )
     expect(screen.getByTestId("MenuSeparator")).toBeInTheDocument()
+  })
+
+  test("should render the menu with MenuDivider", () => {
+    render(
+      <Menu>
+        <MenuButton>Menu</MenuButton>
+        <MenuList>
+          <MenuItem>Add item</MenuItem>
+          {/* eslint-disable-next-line @typescript-eslint/no-deprecated */}
+          <MenuDivider data-testid="MenuDivider" />
+          <MenuItem>Edit item</MenuItem>
+        </MenuList>
+      </Menu>,
+    )
+
+    expect(screen.getByTestId("MenuDivider")).toBeInTheDocument()
   })
 
   test("should render the menu with menu group", () => {

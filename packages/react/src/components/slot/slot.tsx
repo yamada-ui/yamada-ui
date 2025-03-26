@@ -44,9 +44,6 @@ export const Slot: FC<SlotProps> = ({ children, ...rest }) => {
   return <SlotClone {...rest}>{children}</SlotClone>
 }
 
-Slot.displayName = "Slot"
-Slot.__styled__ = "Slot"
-
 interface SlotCloneProps
   extends RefAttributes<HTMLElement>,
     PropsWithChildren {}
@@ -62,6 +59,3 @@ export const Slottable: FC<PropsWithChildren> = ({ children }) => {
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{children}</>
 }
-
-Slottable.displayName = "Slottable"
-Slottable.__styled__ = "Slottable"

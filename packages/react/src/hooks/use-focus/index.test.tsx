@@ -117,9 +117,7 @@ describe("useFocusOnShow", () => {
 })
 
 describe("useFocusOnPointerDown", () => {
-   
   const defaultPlatform = window.navigator.platform
-   
   const defaultVendor = window.navigator.vendor
 
   beforeAll(() => {

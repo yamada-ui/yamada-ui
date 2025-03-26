@@ -42,6 +42,3 @@ export const ButtonGroup: FC<ButtonGroupProps> = ({
     </ButtonPropsContext>
   )
 }
-
-ButtonGroup.displayName = "ButtonGroup"
-ButtonGroup.__styled__ = "ButtonGroup"

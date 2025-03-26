@@ -6,9 +6,8 @@ describe("<Mark />", () => {
     await a11y(<Mark>Mark</Mark>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Mark.displayName).toBe("Mark")
-    expect(Mark.__styled__).toBe("Mark")
   })
 
   test("sets `className` correctly", () => {

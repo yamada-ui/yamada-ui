@@ -48,6 +48,3 @@ export const Portal: FC<PortalProps> = ({
     <DefaultPortal {...{ appendToParentPortal, children }} />
   )
 }
-
-Portal.displayName = "Portal"
-Portal.__styled__ = "Portal"

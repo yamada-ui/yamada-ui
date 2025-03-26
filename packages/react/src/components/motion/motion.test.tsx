@@ -6,9 +6,8 @@ describe("<Motion />", () => {
     await a11y(<Motion />)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
-    expect(Motion.displayName).toBe("Motion")
-    expect(Motion.__styled__).toBe("Motion")
+  test("sets `displayName` correctly", () => {
+    expect(Motion.name).toBe("Motion")
   })
 
   test("sets `className` correctly", () => {

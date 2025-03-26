@@ -49,9 +49,7 @@ type ComponentProps<
 }
 
 export interface ComponentArgs
-  extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {
-  __styled__?: string
-}
+  extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {}
 
 export interface Component<Y extends As, D extends object = {}>
   extends ComponentArgs {

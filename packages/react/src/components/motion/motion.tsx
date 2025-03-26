@@ -31,6 +31,3 @@ export const Motion = (({
     />
   )
 }) as MotionStyledComponent<"div">
-
-Motion.displayName = "Motion"
-Motion.__styled__ = "Motion"

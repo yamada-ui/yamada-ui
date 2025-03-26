@@ -40,8 +40,8 @@
     "clean": "rimraf dist .turbo .eslintcache",
     "build": "tsup",
     "typecheck": " tsc --noEmit",
-    "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config",
-    "format": "prettier --ignore-path ../../.prettierignore --check . --cache"
+    "lint": "eslint . --max-warnings=0 --cache",
+    "format": "prettier . --ignore-path ../../.prettierignore --check --cache"
   },
   "dependencies": {
     "@clack/prompts": "^0.10.0",

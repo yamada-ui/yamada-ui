@@ -104,5 +104,3 @@ export const FocusLock: FC<FocusLockProps> = ({
     </InternalFocusLock>
   )
 }
-
-FocusLock.__styled__ = "FocusLock"

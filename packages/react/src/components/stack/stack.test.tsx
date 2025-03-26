@@ -15,9 +15,8 @@ describe("<Stack />", () => {
     )
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Stack.displayName).toBe("Stack")
-    expect(Stack.__styled__).toBe("Stack")
   })
 
   test("sets `className` correctly", () => {

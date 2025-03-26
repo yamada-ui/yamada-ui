@@ -32,6 +32,3 @@ export const For = <T extends any>({
 
   return each.map(children)
 }
-
-For.displayName = "For"
-For.__styled__ = "For"

@@ -1,12 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { COLOR_SCHEMES } from "@yamada-ui/utils"
 import { useId } from "react"
 import { Controller, useForm } from "react-hook-form"
+import { PropsTable } from "../../../storybook/components"
 import { useBoolean } from "../../hooks/use-boolean"
+import { COLOR_SCHEMES } from "../../utils"
 import { Button } from "../button"
-import { Wrap } from "../flex"
-import { Label } from "../form-control"
+import { FieldLabel } from "../field"
 import { HStack } from "../stack"
 import { VStack } from "../stack"
 import { Switch } from "./"
@@ -24,51 +24,50 @@ export const Basic: Story = () => {
   return <Switch>basic</Switch>
 }
 
-export const WithReverse: Story = () => {
+export const Reverse: Story = () => {
   return <Switch reverse>basic</Switch>
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
-    <>
-      <Switch size="sm">small size</Switch>
-      <Switch size="md">medium size</Switch>
-      <Switch size="lg">large size</Switch>
-    </>
+    <PropsTable variant="column" rows={["sm", "md", "lg"]}>
+      {(_, row, key) => <Switch key={key} size={row}>{`${row} size`}</Switch>}
+    </PropsTable>
   )
 }
 
-export const WithVariant: Story = () => {
+export const Variant: Story = () => {
   return (
-    <>
-      <Switch variant="thick">thick</Switch>
-      <Switch variant="thin">thin</Switch>
-    </>
+    <PropsTable variant="column" rows={["thick", "thin"]}>
+      {(_, row, key) => (
+        <Switch key={key} variant={row}>
+          {row}
+        </Switch>
+      )}
+    </PropsTable>
   )
 }
 
-export const WithLabel: Story = () => {
+export const Label: Story = () => {
   const id = useId()
 
   return (
     <HStack gap="sm">
-      <Label htmlFor={id} userSelect="none">
+      <FieldLabel htmlFor={id} userSelect="none">
         Please Click
-      </Label>
+      </FieldLabel>
       <Switch id={id} />
     </HStack>
   )
 }
 
-export const WithColorScheme: Story = () => {
+export const ColorScheme: Story = () => {
   return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Switch key={colorScheme} colorScheme={colorScheme} defaultIsChecked>
-          {colorScheme}
-        </Switch>
-      ))}
-    </Wrap>
+    <PropsTable columns={["thick", "thin"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => (
+        <Switch key={key} colorScheme={row} variant={column} defaultChecked />
+      )}
+    </PropsTable>
   )
 }
 

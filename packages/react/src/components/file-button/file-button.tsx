@@ -39,7 +39,7 @@ export const {
  * @see Docs https://yamada-ui.com/components/forms/file-button
  */
 export const FileButton = withContext<"div", FileButtonProps>(
-  ({ as,children, errorBorderColor, vars: varsProp, ...rest }) => {
+  ({ as, children, errorBorderColor, vars: varsProp, ...rest }) => {
     const { getButtonProps, getCustomButtonProps, getInputProps } =
       useFileButton(rest)
     const vars = mergeVars(varsProp, {

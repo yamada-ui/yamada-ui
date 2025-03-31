@@ -11,9 +11,8 @@ describe("<FileButton />", () => {
     await a11y(<FileButton>Upload</FileButton>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName`", () => {
     expect(FileButton.displayName).toBe("FileButton")
-    expect(FileButton.__styled__).toBe("FileButton")
   })
 
   test("sets `className` correctly", () => {

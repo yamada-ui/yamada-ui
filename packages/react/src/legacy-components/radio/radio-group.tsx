@@ -34,7 +34,7 @@ export interface RadioGroupProps<Y extends number | string = string>
 /**
  * `RadioGroup` is a component that groups `Radio` components.
  *
- * @see Docs https://yamada-ui.com/components/forms/radio
+ * @see https://yamada-ui.com/components/forms/radio
  */
 export const RadioGroup = forwardRef(
   <Y extends number | string = string>(

@@ -5,7 +5,7 @@ import type { FieldProps } from "../field"
 import type { FileButtonStyle } from "./file-button.style"
 import type { UseFileButtonProps } from "./use-file-button"
 import { Button } from "../../components/button"
-import { createComponent, mergeVars, ui } from "../../core"
+import { createComponent, mergeVars, styled } from "../../core"
 import { isFunction } from "../../utils"
 import { fileButtonStyle } from "./file-button.style"
 import { useFileButton } from "./use-file-button"
@@ -39,7 +39,7 @@ export const {
  * @see Docs https://yamada-ui.com/components/forms/file-button
  */
 export const FileButton = withContext<"div", FileButtonProps>(
-  ({ as, children, errorBorderColor, vars: varsProp, ...rest }) => {
+  ({ as,children, errorBorderColor, vars: varsProp, ...rest }) => {
     const { getButtonProps, getCustomButtonProps, getInputProps } =
       useFileButton(rest)
     const vars = mergeVars(varsProp, {
@@ -48,17 +48,17 @@ export const FileButton = withContext<"div", FileButtonProps>(
       value: errorBorderColor,
     })
     return (
-      <ui.div>
-        <ui.input {...getInputProps()} />
+      <styled.div>
+        <styled.input {...getInputProps()} />
 
         {isFunction(children) ? (
           children(getCustomButtonProps())
         ) : (
-          <ui.button as={as || Button} vars={vars} {...getButtonProps()}>
+          <styled.button as={as || Button} vars={vars} {...getButtonProps()}>
             {children}
-          </ui.button>
+          </styled.button>
         )}
-      </ui.div>
+      </styled.div>
     )
   },
 )()

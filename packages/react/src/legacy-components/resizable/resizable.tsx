@@ -21,7 +21,7 @@ interface ResizableOptions {
 /**
  * `Resizable` is accessible resizable panel groups and layouts with keyboard support.
  *
- * @see Docs https://yamada-ui.com/components/data-display/resizable
+ * @see https://yamada-ui.com/components/data-display/resizable
  */
 export interface ResizableProps
   extends Omit<HTMLUIProps, "direction">,

@@ -59,7 +59,7 @@ export const {
 /**
  * `Stat` is used to show numbers and data in a box.
  *
- * @see Docs https://yamada-ui.com/components/stat
+ * @see https://yamada-ui.com/components/stat
  */
 export const StatRoot = withProvider<"dl", StatRootProps>(
   ({

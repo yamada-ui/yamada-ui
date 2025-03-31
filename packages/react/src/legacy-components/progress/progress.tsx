@@ -68,7 +68,7 @@ export interface ProgressProps
 /**
  * `Progress` is a component for visually indicating progress.
  *
- * @see Docs https://yamada-ui.com/components/feedback/progress
+ * @see https://yamada-ui.com/components/feedback/progress
  */
 export const Progress = forwardRef<ProgressProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Progress", props)

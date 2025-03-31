@@ -9,7 +9,7 @@ type Options = AddEventListenerOptions | boolean
 /**
  * `useWindowEvent` is a custom hook that assigns an event listener to `window`.
  *
- * @see Docs https://yamada-ui.com/hooks/use-window-event
+ * @see https://yamada-ui.com/hooks/use-window-event
  */
 export const useWindowEvent = <E extends string>(
   event: E,

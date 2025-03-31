@@ -1,25 +1,9 @@
-import { image } from "@yamada-ui/test"
-import { a11y, act, render, screen } from "../../../test"
+import { a11y, render, screen } from "../../../test"
 import { Avatar, AvatarGroup } from "./"
 
 describe("<Avatar />", () => {
-  beforeEach(() => {
-    vi.useFakeTimers({ shouldAdvanceTime: true })
-  })
-
-  afterEach(() => {
-    vi.useRealTimers()
-    image().restore()
-  })
-
   test("renders an image", async () => {
-    const mock = image()
-    mock.simulate("loaded")
     render(<Avatar name="Hirotomo Yamada" src="https://bit.ly/dan-abramov" />)
-
-    act(() => {
-      vi.runAllTimers()
-    })
 
     const img = await screen.findByAltText("Hirotomo Yamada")
     expect(img).toBeInTheDocument()
@@ -51,15 +35,8 @@ describe("<AvatarGroup />", () => {
   test("passes a11y test", async () => {
     await a11y(
       <AvatarGroup>
-        <Avatar />
+        <Avatar name="Hirotomo Yamada" />
       </AvatarGroup>,
-      {
-        axeOptions: {
-          rules: {
-            "svg-img-alt": { enabled: false },
-          },
-        },
-      },
     )
   })
 
@@ -103,8 +80,7 @@ describe("<AvatarGroup />", () => {
     expect(moreLabel).not.toBeInTheDocument()
   })
 
-  test("should have the correct displayName and __styled__", () => {
+  test("should have the correct displayName", () => {
     expect(AvatarGroup.displayName).toBe("AvatarGroup")
-    expect(AvatarGroup.__styled__).toBe("AvatarGroup")
   })
 })

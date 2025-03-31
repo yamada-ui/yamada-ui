@@ -15,7 +15,7 @@ export interface RatingProps extends ThemeProps<"Rating">, UseRatingProps {}
 /**
  * `Rating` is a component used to allow users to provide ratings.
  *
- * @see Docs https://yamada-ui.com/components/forms/rating
+ * @see https://yamada-ui.com/components/forms/rating
  */
 export const Rating = forwardRef<RatingProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Rating", props)

@@ -5,34 +5,6 @@ import { drag, render, waitFor } from "../../../test"
 import { usePanEvent } from "./"
 
 describe("usePanEvent", () => {
-  beforeAll(() => {
-    Object.defineProperties(MouseEvent.prototype, {
-      pageX: {
-        configurable: true,
-        get() {
-          return this.clientX
-        },
-      },
-      pageY: {
-        configurable: true,
-        get() {
-          return this.clientY
-        },
-      },
-    })
-  })
-
-  afterAll(() => {
-    Object.defineProperty(MouseEvent.prototype, "pageX", {
-      configurable: true,
-      value: undefined,
-    })
-    Object.defineProperty(MouseEvent.prototype, "pageY", {
-      configurable: true,
-      value: undefined,
-    })
-  })
-
   const Component: FC<UsePanEventProps> = (props) => {
     const ref = useRef<HTMLDivElement>(null)
     usePanEvent(ref, props)

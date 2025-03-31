@@ -206,7 +206,7 @@ export { usePopover }
 /**
  * `Popover` is a component that floats around an element to display information.
  *
- * @see Docs https://yamada-ui.com/components/overlay/popover
+ * @see https://yamada-ui.com/components/overlay/popover
  */
 export const Popover: FC<PopoverProps> = (props) => {
   const [styles, mergedProps] = useComponentMultiStyle("Popover", props)

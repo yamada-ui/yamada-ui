@@ -69,10 +69,10 @@ import {
 
 ### エラーメッセージを表示する
 
-エラーメッセージを表示する場合は、`isInvalid`を`true`に設定し、`errorMessage`に`ReactNode`を設定します。
+エラーメッセージを表示する場合は、`invalid`を`true`に設定し、`errorMessage`に`ReactNode`を設定します。
 
 ```tsx
-<FormControl isInvalid label="Email address" errorMessage="Email is required.">
+<FormControl invalid label="Email address" errorMessage="Email is required.">
   <Input type="email" placeholder="your email address" />
 </FormControl>
 ```
@@ -80,7 +80,7 @@ import {
 または、`ErrorMessage`を使用してカスタマイズすることも可能です。
 
 ```tsx
-<FormControl isInvalid label="Email address">
+<FormControl invalid label="Email address">
   <Input type="email" placeholder="your email address" />
   <ErrorMessage color="gray.300">Email is required.</ErrorMessage>
 </FormControl>
@@ -88,17 +88,17 @@ import {
 
 ### ヘルプメッセージとエラーメッセージの置き換える
 
-エラーメッセージは、`isInvalid`が`true`の場合のみ表示されます。エラーメッセージが表示されたときに、ヘルプメッセージとエラーメッセージの置き換える場合は、`isReplace`を`true`に設定します。
+エラーメッセージは、`invalid`が`true`の場合のみ表示されます。エラーメッセージが表示されたときに、ヘルプメッセージとエラーメッセージの置き換える場合は、`replace`を`true`に設定します。
 
-`isReplace`プロパティを使用して、ヘルプメッセージとエラーメッセージを置き換えます。
+`replace`プロパティを使用して、ヘルプメッセージとエラーメッセージを置き換えます。
 
 ```tsx
 <FormControl
-  isInvalid
+  invalid
   label="Email address"
   helperMessage="We'll never share your email."
   errorMessage="Email is required."
-  isReplace={true}
+  replace={true}
 >
   <Input type="email" placeholder="your email address" />
 </FormControl>
@@ -106,11 +106,11 @@ import {
 
 ### 必須化する
 
-必須化する場合は、`isRequired`を`true`に設定します。
+必須化する場合は、`required`を`true`に設定します。
 
 ```tsx
 <FormControl
-  isRequired
+  required
   label="Email address"
   helperMessage="We'll never share your email."
   errorMessage="Email is required."
@@ -121,11 +121,11 @@ import {
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <FormControl
-  isDisabled
+  disabled
   label="Email address"
   helperMessage="We'll never share your email."
   errorMessage="Email is required."
@@ -136,11 +136,11 @@ import {
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <FormControl
-  isReadOnly
+  readOnly
   label="Email address"
   helperMessage="We'll never share your email."
   errorMessage="Email is required."
@@ -156,7 +156,7 @@ import {
 ```tsx
 <VStack>
   <FormControl
-    isRequired
+    required
     label="Email address"
     requiredIndicator={
       <Tag size="sm" colorScheme="red" ms={2}>
@@ -167,7 +167,7 @@ import {
     <Input type="email" placeholder="your email address" />
   </FormControl>
 
-  <FormControl isRequired>
+  <FormControl required>
     <Label
       requiredIndicator={
         <Tag size="sm" colorScheme="red" ms={2}>

@@ -186,7 +186,7 @@ export interface CarouselProps
 /**
  * `Carousel` is a component that displays multiple elements like a slideshow.
  *
- * @see Docs https://yamada-ui.com/components/data-display/carousel
+ * @see https://yamada-ui.com/components/data-display/carousel
  */
 export const Carousel = forwardRef<CarouselProps, "div">(
   ({ h, height = h, minH, minHeight = minH, ...props }, ref) => {

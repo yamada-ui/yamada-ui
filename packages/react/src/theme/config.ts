@@ -3,7 +3,7 @@ import { defineConfig } from "../core"
 /**
  * The default config of Yamada UI.
  *
- * @see Docs https://yamada-ui.com/styled-system/configure/default-config
+ * @see https://yamada-ui.com/styled-system/configure/default-config
  */
 export const config = defineConfig({
   css: { varPrefix: "ui" },

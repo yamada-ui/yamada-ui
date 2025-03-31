@@ -1,12 +1,12 @@
 import type { HTMLAttributes, KeyboardEvent, MouseEvent, Ref } from "react"
-import type { UIProps } from "../../core"
+import type { StyledProps } from "../../core"
 import { useCallback, useState } from "react"
 import { dataAttr, isTouchDevice, mergeRefs } from "../../utils"
 import { useEventListeners } from "../use-event-listener"
 
 type Props<Y extends HTMLElement = HTMLElement> = Omit<
   HTMLAttributes<Y>,
-  "ref" | "size" | keyof UIProps
+  "ref" | "size" | keyof StyledProps
 >
 
 export type UseClickableProps<
@@ -76,7 +76,7 @@ export const useClickable = <
     disableTouchBehavior = true,
     focusable,
     focusOnClick = true,
-    tabIndex: _tabIndex,
+    tabIndex: tabIndexProp,
     onClick,
     onKeyDown,
     onKeyUp,
@@ -92,7 +92,7 @@ export const useClickable = <
 
   const listeners = useEventListeners()
 
-  const tabIndex = button ? _tabIndex : _tabIndex || 0
+  const tabIndex = button ? tabIndexProp : tabIndexProp || 0
   const trulyDisabled = disabled && !focusable
 
   const refCb = (node: any) => {

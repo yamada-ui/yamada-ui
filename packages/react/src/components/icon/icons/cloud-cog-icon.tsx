@@ -4,6 +4,6 @@ import { component, Icon } from "../icon"
 /**
  * `CloudCogIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const CloudCogIcon = component(Icon)({ as: CloudCog })

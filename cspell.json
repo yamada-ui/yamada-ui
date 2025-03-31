@@ -5,6 +5,7 @@
     "activedescendant",
     "Adebayo",
     "Adlm",
+    "autospace",
     "arrowdown",
     "arrowleft",
     "arrowright",
@@ -197,7 +198,9 @@
     "yamcha",
     "Yezi",
     "Yuto",
-    "zarbon"
+    "zarbon",
+    "العربية",
+    "chromeos"
   ],
   "ignorePaths": [
     "node_modules",

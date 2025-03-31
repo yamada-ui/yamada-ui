@@ -113,6 +113,8 @@ export const useRadioGroup = <
         checked:
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           value != null ? checked : undefined,
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        ...(!isNative ? { checked: value != null ? checked : undefined } : {}),
         onChange,
       }
     },

@@ -79,7 +79,7 @@ export interface MonthPickerProps
 /**
  * `MonthPicker` is a component used for users to select a month.
  *
- * @see Docs https://yamada-ui.com/components/forms/month-picker
+ * @see https://yamada-ui.com/components/forms/month-picker
  */
 export const MonthPicker = forwardRef<MonthPickerProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("MonthPicker", props)

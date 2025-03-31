@@ -6,9 +6,8 @@ describe("<Center />", () => {
     await a11y(<Center>Center</Center>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Center.displayName).toBe("Center")
-    expect(Center.__styled__).toBe("Center")
   })
 
   test("sets `className` correctly", () => {

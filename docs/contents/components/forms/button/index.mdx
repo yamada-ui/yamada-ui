@@ -253,23 +253,23 @@ import { Button, ButtonGroup } from "@yamada-ui/react"
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <Wrap gap="md">
-  <Button colorScheme="primary" variant="solid" isDisabled>
+  <Button colorScheme="primary" variant="solid" disabled>
     Solid
   </Button>
-  <Button colorScheme="secondary" variant="outline" isDisabled>
+  <Button colorScheme="secondary" variant="outline" disabled>
     Outline
   </Button>
-  <Button colorScheme="warning" variant="ghost" isDisabled>
+  <Button colorScheme="warning" variant="ghost" disabled>
     Ghost
   </Button>
-  <Button colorScheme="danger" variant="link" isDisabled>
+  <Button colorScheme="danger" variant="link" disabled>
     Link
   </Button>
-  <Button variant="unstyled" isDisabled>
+  <Button variant="unstyled" disabled>
     Unstyle
   </Button>
 </Wrap>
@@ -302,27 +302,27 @@ To add an icon, set a `ReactElement` to `leftIcon` or `rightIcon`.
 
 ### Use Loading Animation
 
-To use a loading animation, set `isLoading` to `true`. If you want to change the text during loading, use `loadingText`.
+To use a loading animation, set `loading` to `true`. If you want to change the text during loading, use `loadingText`.
 
 ```tsx
 <Wrap gap="md">
-  <Button isLoading colorScheme="primary">
+  <Button loading colorScheme="primary">
     Button
   </Button>
-  <Button isLoading colorScheme="secondary" loadingIcon="dots">
+  <Button loading colorScheme="secondary" loadingIcon="dots">
     Button
   </Button>
-  <Button isLoading colorScheme="warning" variant="outline">
+  <Button loading colorScheme="warning" variant="outline">
     Button
   </Button>
-  <Button isLoading colorScheme="danger" variant="ghost">
+  <Button loading colorScheme="danger" variant="ghost">
     Button
   </Button>
-  <Button isLoading loadingText="Loading..." colorScheme="primary">
+  <Button loading loadingText="Loading..." colorScheme="primary">
     Button
   </Button>
   <Button
-    isLoading
+    loading
     loadingText="Loading..."
     loadingPlacement="end"
     loadingIcon="grid"
@@ -340,11 +340,11 @@ The loading animation for `Button` internally uses [Loading](/components/feedbac
 
 ### Grouping
 
-To group buttons, use `ButtonGroup`. `ButtonGroup` allows you to set `variant`, `size`, `colorScheme`, `isDisabled` for child elements (`Button`) in bulk.
+To group buttons, use `ButtonGroup`. `ButtonGroup` allows you to set `variant`, `size`, `colorScheme`, `disabled` for child elements (`Button`) in bulk.
 
 ```tsx
 <VStack>
-  <ButtonGroup isAttached variant="outline">
+  <ButtonGroup attached variant="outline">
     <Button>Button</Button>
     <IconButton icon={<PlusIcon />} />
   </ButtonGroup>
@@ -356,7 +356,7 @@ To group buttons, use `ButtonGroup`. `ButtonGroup` allows you to set `variant`, 
       <Button>Button</Button>
     </ButtonGroup>
 
-    <ButtonGroup isAttached isDisabled variant="outline">
+    <ButtonGroup attached disabled variant="outline">
       <Button>Button</Button>
       <Button>Button</Button>
       <Button>Button</Button>
@@ -370,7 +370,7 @@ To group buttons, use `ButtonGroup`. `ButtonGroup` allows you to set `variant`, 
       <Button>Button</Button>
     </ButtonGroup>
 
-    <ButtonGroup direction="column" isAttached variant="outline">
+    <ButtonGroup direction="column" attached variant="outline">
       <Button>Button</Button>
       <Button>Button</Button>
       <Button>Button</Button>

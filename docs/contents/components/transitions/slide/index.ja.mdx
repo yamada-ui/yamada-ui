@@ -15,16 +15,16 @@ import { Slide } from "@yamada-ui/react"
 
 ## 使い方
 
-表示または非表示を制御するために、`isOpen`を設定します。
+表示または非表示を制御するために、`open`を設定します。
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Slide isOpen={isOpen} placement="bottom">
+    <Slide open={open} placement="bottom">
       <VStack w="full" bg="orange.500" p="md">
         <Text color="white">
           クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -44,13 +44,13 @@ return (
 所要時間を変更する場合は、`duration`に数値(秒)を設定します。
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Slide isOpen={isOpen} placement="bottom" duration={0.7}>
+    <Slide open={open} placement="bottom" duration={0.7}>
       <VStack w="full" bg="orange.500" p="md">
         <Text color="white">
           クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -70,13 +70,13 @@ return (
 所要時間を変更する場合は、`placement`に`top`, `right`, `bottom`, `left`を設定します。デフォルトでは、`right`が設定されています。
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Slide isOpen={isOpen} placement="left" zIndex="sonGoku">
+    <Slide open={open} placement="left" zIndex="sonGoku">
       <VStack w="full" bg="orange.500" p="md">
         <Text color="white">
           クリリンのことか……クリリンのことかーーーっ！！！！！

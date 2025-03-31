@@ -17,7 +17,7 @@ export const {
 /**
  * `Icon` is a general icon component that can be used in your projects.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const Icon = withContext("svg")(
   {

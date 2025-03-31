@@ -12,7 +12,7 @@ export function useUnmountEffect(callback: () => void) {
 /**
  * `useUpdateEffect` is a custom hook that skips side effects on the initial render, and only runs them when the dependency array changes.
  *
- * @see Docs https://yamada-ui.com/hooks/use-update-effect
+ * @see https://yamada-ui.com/hooks/use-update-effect
  */
 export function useUpdateEffect(
   callback: React.EffectCallback,

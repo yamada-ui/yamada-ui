@@ -47,7 +47,7 @@ export interface SaturationSliderProps
 /**
  * `SaturationSlider` is a component used to allow the user to select a color saturation.
  *
- * @see Docs https://yamada-ui.com/components/forms/saturation-slider
+ * @see https://yamada-ui.com/components/forms/saturation-slider
  */
 export const SaturationSlider = forwardRef<SaturationSliderProps, "input">(
   (props, ref) => {

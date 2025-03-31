@@ -1,25 +1,25 @@
-import type { MatchMediaMock } from "@yamada-ui/test"
-import { matchMedia } from "@yamada-ui/test"
+import MatchMediaMock from "vitest-matchmedia-mock"
 import { useMediaQuery } from "."
 import { act, renderHook } from "../../../test"
 import { EnvironmentProvider } from "../../providers/environment-provider"
 
 describe("useMediaQuery", () => {
-  let mock: MatchMediaMock
-  let defaultMatchMedia: typeof window.matchMedia
+  let matchMediaMock: MatchMediaMock
 
   beforeAll(() => {
-    mock = matchMedia()
-    defaultMatchMedia = window.matchMedia
+    matchMediaMock = new MatchMediaMock()
   })
 
   afterEach(() => {
-    mock.clear()
-    window.matchMedia = defaultMatchMedia
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
   })
 
   test("`(prefers-color-scheme: dark)` should be truthy", () => {
-    mock.useMediaQuery("(prefers-color-scheme: dark)")
+    matchMediaMock.useMediaQuery("(prefers-color-scheme: dark)")
 
     const { result } = renderHook(() =>
       useMediaQuery("(prefers-color-scheme: dark)"),
@@ -29,7 +29,7 @@ describe("useMediaQuery", () => {
   })
 
   test("should correctly accept an array", () => {
-    mock.useMediaQuery("(max-width: 480px)")
+    matchMediaMock.useMediaQuery("(max-width: 480px)")
 
     const { result } = renderHook(() =>
       useMediaQuery(["(max-width: 480px)", "(max-width: 768px)"]),
@@ -40,7 +40,7 @@ describe("useMediaQuery", () => {
   })
 
   test("should disable server-side rendering", () => {
-    mock.useMediaQuery("(prefers-color-scheme: dark)")
+    matchMediaMock.useMediaQuery("(prefers-color-scheme: dark)")
 
     const { result } = renderHook(() =>
       useMediaQuery("(prefers-color-scheme: dark)", { ssr: false }),
@@ -86,7 +86,7 @@ describe("useMediaQuery", () => {
     )
 
     act(() => {
-      mock.useMediaQuery("(prefers-color-scheme: dark)")
+      matchMediaMock.useMediaQuery("(prefers-color-scheme: dark)")
     })
 
     expect(result.current[0]).toBeTruthy()

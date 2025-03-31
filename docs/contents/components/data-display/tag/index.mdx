@@ -124,28 +124,28 @@ To add an icon, set a `ReactElement` to `icon`.
         name: "Small",
         colorScheme: "primary",
         size: "sm",
-        leftIcon: <PlusIcon />,
+        startIcon: <PlusIcon />,
       },
       {
         name: "Medium",
         colorScheme: "secondary",
         size: "md",
-        leftIcon: <PlusIcon />,
+        startIcon: <PlusIcon />,
       },
       {
         name: "Large",
         colorScheme: "warning",
         size: "lg",
-        leftIcon: <PlusIcon />,
+        startIcon: <PlusIcon />,
       },
     ]}
   >
-    {({ name, colorScheme, size, leftIcon }, index) => (
+    {({ name, colorScheme, size, startIcon }, index) => (
       <Tag
         key={index}
         colorScheme={colorScheme}
         size={size}
-        leftIcon={leftIcon}
+        startIcon={startIcon}
       >
         {name}
       </Tag>
@@ -177,7 +177,7 @@ To add a close button, set `onClose`.
 
 ### Disable the Close Button
 
-To disable the close button, set `isDisabled` to `true`.
+To disable the close button, set `disabled` to `true`.
 
 ```tsx
 <Wrap gap="md" alignItems="flex-start">
@@ -189,7 +189,7 @@ To disable the close button, set `isDisabled` to `true`.
         colorScheme={colorScheme}
         rounded="full"
         onClose={() => {}}
-        isDisabled
+        disabled
       >
         {toTitleCase(colorScheme)}
       </Tag>

@@ -90,7 +90,7 @@ export interface DropzoneProps
 /**
  * `Dropzone` is a component used for uploading files via drag and drop.
  *
- * @see Docs https://yamada-ui.com/components/forms/dropzone
+ * @see https://yamada-ui.com/components/forms/dropzone
  */
 export const Dropzone = forwardRef<DropzoneProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Dropzone", props)

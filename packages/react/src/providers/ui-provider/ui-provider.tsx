@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from "react"
 import type { ColorModeProviderProps } from "../color-mode-provider"
 import type { Environment } from "../environment-provider"
+import type { I18nProviderProps } from "../i18n-provider"
 import type { ThemeProviderProps } from "../theme-provider"
 import { LoadingProvider } from "../../components/loading"
 // import { NoticeProvider } from "../../components/notice"
@@ -13,7 +14,8 @@ import { ThemeProvider } from "../theme-provider"
 
 export interface UIProviderProps
   extends Omit<ThemeProviderProps, "storageKey">,
-    Pick<ColorModeProviderProps, "colorMode" | "colorModeManager"> {
+    Pick<ColorModeProviderProps, "colorMode" | "colorModeManager">,
+    I18nProviderProps {
   /**
    * Application content.
    */
@@ -52,10 +54,13 @@ export const UIProvider: FC<UIProviderProps> = ({
   colorModeManager,
   colorModeStorageKey,
   config = defaultConfig,
+  dir,
   disableEnvironment,
   disableGlobalStyle,
   disableResetStyle,
   environment,
+  intl,
+  locale,
   theme = defaultTheme,
   themeSchemeManager,
   themeSchemeStorageKey,
@@ -65,7 +70,7 @@ export const UIProvider: FC<UIProviderProps> = ({
       disabled={disableEnvironment}
       environment={environment}
     >
-      <I18nProvider direction={config.direction} locale={config.locale}>
+      <I18nProvider dir={dir} intl={intl} locale={locale}>
         <ThemeProvider
           config={config}
           disableGlobalStyle={disableGlobalStyle}

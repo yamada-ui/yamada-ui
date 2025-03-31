@@ -80,7 +80,7 @@ export interface RadarChartProps
 /**
  * `RadarChart` is a component for drawing radar charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/data-display/radar-chart
+ * @see https://yamada-ui.com/components/data-display/radar-chart
  */
 export const RadarChart = forwardRef<RadarChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("RadarChart", props)

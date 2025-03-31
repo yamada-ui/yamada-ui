@@ -21,7 +21,7 @@ export const {
 /**
  * `Image` is a component that displays images with fallback support.
  *
- * @see Docs https://yamada-ui.com/components/image
+ * @see https://yamada-ui.com/components/image
  */
 export const Image: FC<ImageProps> = withContext("img")(
   undefined,

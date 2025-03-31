@@ -307,7 +307,7 @@ export const useAutocomplete = <T extends MaybeValue = string>(
     gutter,
     insertPositionItem = "first",
     items,
-    lazy,
+    lazy = isLazy,
     lazyBehavior,
     matchWidth = true,
     maxSelectValues,

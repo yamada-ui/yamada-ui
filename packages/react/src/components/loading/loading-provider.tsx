@@ -226,7 +226,7 @@ const Controller: FC<ControllerProps> = ({
 /**
  * `useLoading` is a custom hook for controlling the loading of the application.
  *
- * @see Docs https://yamada-ui.com/hooks/use-loading
+ * @see https://yamada-ui.com/hooks/use-loading
  */
 export const useLoading = (): LoadingContext => {
   const { background, page, screen } = use(LoadingContext)

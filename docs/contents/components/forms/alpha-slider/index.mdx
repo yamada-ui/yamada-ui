@@ -114,7 +114,7 @@ return (
 
     <Center w="full" gap="md">
       <Button
-        isDisabled={value === 0}
+        disabled={value === 0}
         onClick={() =>
           setValue((prev) =>
             prev !== 0 ? Math.round((prev - 0.1) * 10) / 10 : prev,
@@ -125,7 +125,7 @@ return (
       </Button>
 
       <Button
-        isDisabled={value === 1}
+        disabled={value === 1}
         colorScheme="blue"
         onClick={() =>
           setValue((prev) =>
@@ -142,14 +142,14 @@ return (
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <AlphaSlider color="#4387f4" isDisabled />
+  <AlphaSlider color="#4387f4" disabled />
 
   <Fieldset
-    isDisabled
+    disabled
     legend="Pick color"
     helperMessage="Please select your favorite color"
   >
@@ -160,14 +160,14 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <AlphaSlider color="#4387f4" isReadOnly />
+  <AlphaSlider color="#4387f4" readOnly />
 
   <Fieldset
-    isReadOnly
+    readOnly
     legend="Pick color"
     helperMessage="Please select your favorite color"
   >
@@ -225,7 +225,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.alphaSlider}
+      invalid={!!errors.alphaSlider}
       legend="Pick color"
       errorMessage={errors.alphaSlider ? errors.alphaSlider.message : undefined}
     >

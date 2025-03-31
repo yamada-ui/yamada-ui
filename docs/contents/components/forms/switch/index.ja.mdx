@@ -43,10 +43,10 @@ import { Switch } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Switch colorScheme="secondary" defaultIsChecked>
+  <Switch colorScheme="secondary" defaultChecked>
     Secondary
   </Switch>
-  <Switch colorScheme="green" defaultIsChecked>
+  <Switch colorScheme="green" defaultChecked>
     Green
   </Switch>
 </Wrap>
@@ -54,20 +54,20 @@ import { Switch } from "@yamada-ui/react"
 
 ### ラベルの位置を変更する
 
-ラベルの位置を変更する場合は、`isReverse`を`true`に設定します。
+ラベルの位置を変更する場合は、`reverse`を`true`に設定します。
 
 ```tsx
-<Switch isReverse>basic</Switch>
+<Switch reverse>basic</Switch>
 ```
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <Wrap gap="md">
-  <Switch isDisabled>disabled</Switch>
-  <Switch isDisabled defaultIsChecked>
+  <Switch disabled>disabled</Switch>
+  <Switch disabled defaultChecked>
     disabled
   </Switch>
 </Wrap>
@@ -75,12 +75,12 @@ import { Switch } from "@yamada-ui/react"
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <Wrap gap="md">
-  <Switch isReadOnly>read only</Switch>
-  <Switch isReadOnly defaultIsChecked>
+  <Switch readOnly>read only</Switch>
+  <Switch readOnly defaultChecked>
     read only
   </Switch>
 </Wrap>
@@ -106,10 +106,10 @@ return (
 ### 制御する
 
 ```tsx functional=true
-const [isChecked, { toggle }] = useBoolean(false)
+const [checked, { toggle }] = useBoolean(false)
 
 return (
-  <Switch isChecked={isChecked} onChange={toggle}>
+  <Switch checked={checked} onChange={toggle}>
     custom control
   </Switch>
 )
@@ -132,7 +132,7 @@ return (
       name="switch"
       control={control}
       render={({ field: { value, ...rest } }) => (
-        <Switch isChecked={value} {...rest}>
+        <Switch checked={value} {...rest}>
           Dark mode
         </Switch>
       )}

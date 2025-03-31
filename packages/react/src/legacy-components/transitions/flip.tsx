@@ -99,7 +99,7 @@ export interface FlipProps
 /**
  * `Flip` is an animation component that alternates between flipping two elements.
  *
- * @see Docs https://yamada-ui.com/components/transitions/flip
+ * @see https://yamada-ui.com/components/transitions/flip
  */
 export const Flip: FC<FlipProps> = (props) => {
   const [dimensions, setDimensions] = useState<{

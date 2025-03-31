@@ -317,10 +317,10 @@ By setting `orientation` to `horizontal` or `vertical`, you can change the orien
 
 ### Stretch to Container Width
 
-By setting `isFitted` to `true`, you can stretch the tabs evenly to the width of the container.
+By setting `fitted` to `true`, you can stretch the tabs evenly to the width of the container.
 
 ```tsx
-<Tabs variant="sticky" isFitted>
+<Tabs variant="sticky" fitted>
   <Tab>孫悟空</Tab>
   <Tab>ベジータ</Tab>
   <Tab>フリーザ</Tab>
@@ -335,12 +335,12 @@ By setting `isFitted` to `true`, you can stretch the tabs evenly to the width of
 
 ### Disable
 
-If you want to disable a specific tab, set `isDisabled`.
+If you want to disable a specific tab, set `disabled`.
 
 ```tsx
 <Tabs>
   <Tab>孫悟空</Tab>
-  <Tab isDisabled>ベジータ</Tab>
+  <Tab disabled>ベジータ</Tab>
   <Tab>フリーザ</Tab>
 
   <TabPanel>クリリンのことか……クリリンのことかーーーっ！！！！！</TabPanel>
@@ -353,10 +353,10 @@ If you want to disable a specific tab, set `isDisabled`.
 
 ### Manual Activation
 
-By default, the focused tab is automatically activated. If you want to activate the tab at a specific time (when `Enter` or `Space` is pressed), set `isManual` to `true`.
+By default, the focused tab is automatically activated. If you want to activate the tab at a specific time (when `Enter` or `Space` is pressed), set `manual` to `true`.
 
 ```tsx
-<Tabs isManual>
+<Tabs manual>
   <Tab>孫悟空</Tab>
   <Tab>ベジータ</Tab>
   <Tab>フリーザ</Tab>
@@ -373,10 +373,10 @@ By default, the focused tab is automatically activated. If you want to activate 
 
 By default, all panels are rendered in the DOM regardless of whether they are active. This means that even hidden panels are rendered but are invisible due to styling.
 
-If you want to delay the rendering of each panel until the tab becomes active, set `isLazy` to `true`.
+If you want to delay the rendering of each panel until the tab becomes active, set `lazy` to `true`.
 
 ```tsx
-<Tabs isLazy lazyBehavior="unmount">
+<Tabs lazy lazyBehavior="unmount">
   <Tab>孫悟空</Tab>
   <Tab>ベジータ</Tab>
   <Tab>フリーザ</Tab>

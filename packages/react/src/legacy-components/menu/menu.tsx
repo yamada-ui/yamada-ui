@@ -32,7 +32,7 @@ export interface MenuProps
 /**
  * `Menu` is a component that displays a common dropdown menu.
  *
- * @see Docs https://yamada-ui.com/components/overlay/menu
+ * @see https://yamada-ui.com/components/overlay/menu
  */
 export const Menu: FC<MenuProps> = (props) => {
   const { styles: contextMenuStyles } = useContextMenu() ?? {}

@@ -4,6 +4,6 @@ import { component, Icon } from "../icon"
 /**
  * `ShieldCheckIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @sees://yamada-ui.com/components/icon
  */
 export const ShieldCheckIcon = component(Icon)({ as: ShieldCheck })

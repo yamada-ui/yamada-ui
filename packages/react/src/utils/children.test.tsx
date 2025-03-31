@@ -75,7 +75,7 @@ describe("includesChildren", () => {
 })
 
 describe("omitChildren", () => {
-  test("should omit children of specified types", () => {
+  test("should omit children of specified type", () => {
     const children = [
       <div key="1">Div</div>,
       <span key="2">Span</span>,
@@ -85,10 +85,22 @@ describe("omitChildren", () => {
     expect(omittedChildren).toHaveLength(2)
     expect(omittedChildren.some((child) => child.type === "span")).toBeFalsy()
   })
+
+  test("should omit children of specified types", () => {
+    const children = [
+      <div key="1">Div</div>,
+      <span key="2">Span</span>,
+      <section key="3">Section</section>,
+    ]
+    const omittedChildren = omitChildren(children, "span", "div")
+    expect(omittedChildren).toHaveLength(1)
+    expect(omittedChildren.some((child) => child.type === "span")).toBeFalsy()
+    expect(omittedChildren.some((child) => child.type === "div")).toBeFalsy()
+  })
 })
 
 describe("pickChildren", () => {
-  test("should pick only children of specified types", () => {
+  test("should pick children of specified type", () => {
     const children = [
       <div key="1">Div</div>,
       <span key="2">Span</span>,
@@ -97,5 +109,17 @@ describe("pickChildren", () => {
     const pickedChildren = pickChildren(children, "span")
     expect(pickedChildren).toHaveLength(1)
     expect(pickedChildren[0]?.type).toBe("span")
+  })
+
+  test("should pick children of specified types", () => {
+    const children = [
+      <div key="1">Div</div>,
+      <span key="2">Span</span>,
+      <section key="3">Section</section>,
+    ]
+    const pickedChildren = pickChildren(children, "span", "div")
+    expect(pickedChildren).toHaveLength(2)
+    expect(pickedChildren.some((child) => child.type === "span")).toBeTruthy()
+    expect(pickedChildren.some((child) => child.type === "div")).toBeTruthy()
   })
 })

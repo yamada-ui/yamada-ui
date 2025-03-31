@@ -4,6 +4,6 @@ import { component, Icon } from "../icon"
 /**
  * `BlendIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const BlendIcon = component(Icon)({ as: Blend })

@@ -17,7 +17,7 @@ export const {
 /**
  * `Card` is a component that groups and displays related information. By default, it renders a `article` element.
  *
- * @see Docs https://yamada-ui.com/components/card
+ * @see https://yamada-ui.com/components/card
  */
 export const CardRoot = withProvider("article", "root")()
 

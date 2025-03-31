@@ -70,7 +70,7 @@ export interface SkeletonProps
 /**
  * `Skeleton` is a component that acts as a placeholder until content is loaded.
  *
- * @see Docs https://yamada-ui.com/components/feedback/skeleton
+ * @see https://yamada-ui.com/components/feedback/skeleton
  */
 export const Skeleton = forwardRef<SkeletonProps, "div">((props, ref) => {
   const [styles, { children, ...mergedProps }] = useComponentStyle(

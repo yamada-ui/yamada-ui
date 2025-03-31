@@ -8,7 +8,7 @@ export type FunctionReturningPromise = (...args: any[]) => Promise<any>
 /**
  * `useAsync` is a custom hook that executes an asynchronous function and tracks its state.
  *
- * @see Docs https://yamada-ui.com/hooks/use-async
+ * @see https://yamada-ui.com/hooks/use-async
  */
 export function useAsync<T extends FunctionReturningPromise>(
   func: T,

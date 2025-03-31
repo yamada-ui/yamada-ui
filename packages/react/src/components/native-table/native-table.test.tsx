@@ -41,30 +41,15 @@ describe("<NativeTable />", () => {
     await a11y(<Table />)
   })
 
-  test("NativeTable sets `displayName` and `__styled__` correctly", () => {
+  test("NativeTable sets `displayName` correctly", () => {
     expect(NativeTable.Root.displayName).toBe("NativeTableRoot")
-    expect(NativeTable.Root.__styled__).toBe("NativeTableRoot")
-
     expect(NativeTable.Caption.displayName).toBe("NativeTableCaption")
-    expect(NativeTable.Caption.__styled__).toBe("NativeTableCaption")
-
     expect(NativeTable.Thead.displayName).toBe("NativeTableThead")
-    expect(NativeTable.Thead.__styled__).toBe("NativeTableThead")
-
     expect(NativeTable.Tbody.displayName).toBe("NativeTableTbody")
-    expect(NativeTable.Tbody.__styled__).toBe("NativeTableTbody")
-
     expect(NativeTable.Tfoot.displayName).toBe("NativeTableTfoot")
-    expect(NativeTable.Tfoot.__styled__).toBe("NativeTableTfoot")
-
     expect(NativeTable.Tr.displayName).toBe("NativeTableTr")
-    expect(NativeTable.Tr.__styled__).toBe("NativeTableTr")
-
     expect(NativeTable.Th.displayName).toBe("NativeTableTh")
-    expect(NativeTable.Th.__styled__).toBe("NativeTableTh")
-
     expect(NativeTable.Td.displayName).toBe("NativeTableTd")
-    expect(NativeTable.Td.__styled__).toBe("NativeTableTd")
   })
 
   test("NativeTable sets `className` correctly", () => {

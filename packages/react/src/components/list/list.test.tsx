@@ -12,15 +12,10 @@ describe("<List />", () => {
     await a11y(container)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(List.Root.displayName).toBe("ListRoot")
-    expect(List.Root.__styled__).toBe("ListRoot")
-
     expect(List.Item.displayName).toBe("ListItem")
-    expect(List.Item.__styled__).toBe("ListItem")
-
     expect(List.Icon.displayName).toBe("ListIcon")
-    expect(List.Icon.__styled__).toBe("ListIcon")
   })
 
   test("sets `className` correctly", () => {

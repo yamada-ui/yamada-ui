@@ -16,6 +16,6 @@ export const {
 /**
  * `Heading` is a component that represents section headings. By default, it renders an `h1` element.
  *
- * @see Docs https://yamada-ui.com/components/heading
+ * @see https://yamada-ui.com/components/heading
  */
 export const Heading = withContext("h1")()

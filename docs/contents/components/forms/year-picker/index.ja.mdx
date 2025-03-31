@@ -167,10 +167,10 @@ import "dayjs/locale/ja"
 
 ### クリアを無効化する
 
-クリアを無効化する場合は、`isClearable`を`false`に設定します。
+クリアを無効化する場合は、`clearable`を`false`に設定します。
 
 ```tsx
-<YearPicker placeholder="YYYY" isClearable={false} />
+<YearPicker placeholder="YYYY" clearable={false} />
 ```
 
 ### 入力を許可しない
@@ -210,7 +210,7 @@ import "dayjs/locale/ja"
 <VStack>
   <YearPicker focusBorderColor="green.500" placeholder="custom border color" />
   <YearPicker
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -219,37 +219,37 @@ import "dayjs/locale/ja"
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <YearPicker isDisabled variant="outline" placeholder="outline" />
-  <YearPicker isDisabled variant="filled" placeholder="filled" />
-  <YearPicker isDisabled variant="flushed" placeholder="flushed" />
+  <YearPicker disabled variant="outline" placeholder="outline" />
+  <YearPicker disabled variant="filled" placeholder="filled" />
+  <YearPicker disabled variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <YearPicker isReadOnly variant="outline" placeholder="outline" />
-  <YearPicker isReadOnly variant="filled" placeholder="filled" />
-  <YearPicker isReadOnly variant="flushed" placeholder="flushed" />
+  <YearPicker readOnly variant="outline" placeholder="outline" />
+  <YearPicker readOnly variant="filled" placeholder="filled" />
+  <YearPicker readOnly variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <YearPicker isInvalid variant="outline" placeholder="outline" />
-  <YearPicker isInvalid variant="filled" placeholder="filled" />
-  <YearPicker isInvalid variant="flushed" placeholder="flushed" />
+  <YearPicker invalid variant="outline" placeholder="outline" />
+  <YearPicker invalid variant="filled" placeholder="filled" />
+  <YearPicker invalid variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
@@ -280,7 +280,7 @@ import "dayjs/locale/ja"
   <YearPicker placeholder="YYYY" closeOnSelect={false}>
     {({ value, onClose }) => (
       <VStack mt="sm">
-        <Button isDisabled={!value} onClick={onClose}>
+        <Button disabled={!value} onClick={onClose}>
           Submit
           {value ? ` ${value.getFullYear()}` : ""}
         </Button>
@@ -317,7 +317,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.yearPicker}
+      invalid={!!errors.yearPicker}
       label="Birthday"
       errorMessage={errors.yearPicker ? errors.yearPicker.message : undefined}
     >

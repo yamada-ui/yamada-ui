@@ -4,7 +4,7 @@ import { useCallbackRef } from "../../utils"
 /**
  * `useInterval` is a custom hook that runs a function at a specified interval.
  *
- * @see Docs https://yamada-ui.com/hooks/use-interval
+ * @see https://yamada-ui.com/hooks/use-interval
  */
 export const useInterval = (callback: () => void, delay: null | number) => {
   const func = useCallbackRef(callback)

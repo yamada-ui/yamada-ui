@@ -86,7 +86,7 @@ export const {
 /**
  * `Fieldset` is a component used to group multiple controls.
  *
- * @see Docs https://yamada-ui.com/components/fieldset
+ * @see https://yamada-ui.com/components/fieldset
  */
 export const FieldsetRoot = withProvider<"fieldset", FieldsetRootProps>(
   ({

@@ -85,7 +85,7 @@ export interface CheckboxCardProps<Y extends number | string = string>
 /**
  * `CheckboxCard` is a component used for allowing users to select multiple values from multiple options.
  *
- * @see Docs https://yamada-ui.com/components/forms/checkbox-card
+ * @see https://yamada-ui.com/components/forms/checkbox-card
  */
 export const CheckboxCard = forwardRef(
   <Y extends number | string = string>(

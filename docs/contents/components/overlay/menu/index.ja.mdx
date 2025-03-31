@@ -50,14 +50,14 @@ import {
 
 ### 内部状態へアクセスする
 
-`children`には、`isOpen`や`onClose`などのメソッドが提供されます。これを利用して、内部状態にアクセスすることができます。
+`children`には、`open`や`onClose`などのメソッドが提供されます。これを利用して、内部状態にアクセスすることができます。
 
 ```tsx
 <Menu>
-  {({ isOpen }) => (
+  {({ open }) => (
     <>
       <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
-        {isOpen ? "Close" : "Open"} Menu
+        {open ? "Close" : "Open"} Menu
       </MenuButton>
 
       <MenuList>
@@ -373,7 +373,7 @@ return (
 
 ### 項目を無効にする
 
-項目を無効にする場合は、`isDisabled`を`true`に設定します。
+項目を無効にする場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <Menu>
@@ -383,7 +383,7 @@ return (
 
   <MenuList>
     <MenuItem>Set status</MenuItem>
-    <MenuItem isDisabled>Edit Profile</MenuItem>
+    <MenuItem disabled>Edit Profile</MenuItem>
     <MenuItem>Preferences</MenuItem>
   </MenuList>
 </Menu>
@@ -391,7 +391,7 @@ return (
 
 ### 無効な項目のフォーカスを許可する
 
-無効な項目のフォーカスを許可する場合は、`isFocusable`を`true`に設定します。
+無効な項目のフォーカスを許可する場合は、`focusable`を`true`に設定します。
 
 ```tsx
 <Menu>
@@ -401,7 +401,7 @@ return (
 
   <MenuList>
     <MenuItem>Set status</MenuItem>
-    <MenuItem isDisabled isFocusable>
+    <MenuItem disabled focusable>
       Edit Profile
     </MenuItem>
     <MenuItem>Preferences</MenuItem>
@@ -413,10 +413,10 @@ return (
 
 デフォルトでは、アクティブに関わらずDOMにレンダリングされます。つまり、非表示もレンダリングされているが、スタイルによって非表示になっていることになります。
 
-アクティブになるまで、レンダリングを遅延させたい場合は、`isLazy`を`true`に設定します。
+アクティブになるまで、レンダリングを遅延させたい場合は、`lazy`を`true`に設定します。
 
 ```tsx
-<Menu isLazy>
+<Menu lazy>
   <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
@@ -432,10 +432,10 @@ return (
 ### 制御する
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
-  <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+  <Menu open={open} onOpen={onOpen} onClose={onClose}>
     <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
       Menu
     </MenuButton>

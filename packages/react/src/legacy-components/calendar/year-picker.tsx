@@ -79,7 +79,7 @@ export interface YearPickerProps
 /**
  * `YearPicker` is a component used for users to select a year.
  *
- * @see Docs https://yamada-ui.com/components/forms/year-picker
+ * @see https://yamada-ui.com/components/forms/year-picker
  */
 export const YearPicker = forwardRef<YearPickerProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("YearPicker", props)

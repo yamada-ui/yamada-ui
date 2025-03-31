@@ -1,20 +1,24 @@
-import type { MatchMediaMock } from "@yamada-ui/test"
-import { matchMedia } from "@yamada-ui/test"
+import MatchMediaMock from "vitest-matchmedia-mock"
 import { renderHook } from "../../../test"
 import { useBreakpointState } from "./use-breakpoint-state"
 
 describe("useBreakpointState", () => {
-  let mock: MatchMediaMock
+  let matchMediaMock: MatchMediaMock
 
   beforeAll(() => {
-    mock = matchMedia()
+    matchMediaMock = new MatchMediaMock()
   })
+
   afterEach(() => {
-    mock.clear()
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
   })
 
   test("Returns the state corresponding to the current breakpoint", () => {
-    mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
+    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
     const { result } = renderHook(() =>
       useBreakpointState({ base: "base", md: "md" }),
     )

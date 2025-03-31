@@ -100,7 +100,7 @@ export interface UseCalendarProps<Y extends MaybeValue = Date> {
    * The format used for conversion.
    * Check the docs to see the format of possible modifiers you can pass.
    *
-   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
+   * @see https://day.js.org/docs/en/display/format#list-of-localized-formats
    * @default 'MMMM YYYY'
    */
   dateFormat?: string
@@ -158,7 +158,7 @@ export interface UseCalendarProps<Y extends MaybeValue = Date> {
    * The locale of the calendar.
    * Check the docs to see the locale of possible modifiers you can pass.
    *
-   * @see Docs https://day.js.org/docs/en/i18n/instance-locale
+   * @see https://day.js.org/docs/en/i18n/instance-locale
    * @default 'en-US'
    */
   locale?: string
@@ -186,7 +186,7 @@ export interface UseCalendarProps<Y extends MaybeValue = Date> {
    * The format used for conversion.
    * Check the docs to see the format of possible modifiers you can pass.
    *
-   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
+   * @see https://day.js.org/docs/en/display/format#list-of-localized-formats
    * @default 'MM'
    */
   monthFormat?: string
@@ -222,7 +222,7 @@ export interface UseCalendarProps<Y extends MaybeValue = Date> {
    * The format used for conversion.
    * Check the docs to see the format of possible modifiers you can pass.
    *
-   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
+   * @see https://day.js.org/docs/en/display/format#list-of-localized-formats
    * @default 'dd'
    */
   weekdayFormat?: string
@@ -260,7 +260,7 @@ export interface UseCalendarProps<Y extends MaybeValue = Date> {
    * The format used for conversion.
    * Check the docs to see the format of possible modifiers you can pass.
    *
-   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
+   * @see https://day.js.org/docs/en/display/format#list-of-localized-formats
    * @default 'YYYY'
    */
   yearFormat?: string

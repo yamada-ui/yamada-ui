@@ -6,9 +6,8 @@ describe("<Code />", () => {
     await a11y(<Code>console.log("Hello, Yamada!")</Code>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Code.displayName).toBe("Code")
-    expect(Code.__styled__).toBe("Code")
   })
 
   test("sets `className` correctly", () => {

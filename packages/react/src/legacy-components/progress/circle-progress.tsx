@@ -67,7 +67,7 @@ export interface CircleProgressProps
 /**
  * `CircleProgress` is a component that displays progress in a circular progress bar.
  *
- * @see Docs https://yamada-ui.com/components/feedback/circle-progress
+ * @see https://yamada-ui.com/components/feedback/circle-progress
  */
 export const CircleProgress = forwardRef<CircleProgressProps, "div">(
   (props, ref) => {

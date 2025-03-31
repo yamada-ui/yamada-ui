@@ -6,9 +6,8 @@ describe("<Kbd />", () => {
     await a11y(<Kbd>enter</Kbd>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Kbd.displayName).toBe("Kbd")
-    expect(Kbd.__styled__).toBe("Kbd")
   })
 
   test("sets `className` correctly", () => {

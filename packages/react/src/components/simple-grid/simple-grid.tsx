@@ -41,7 +41,7 @@ export const {
 /**
  * `SimpleGrid` is a component that makes `Grid` simpler and more user-friendly.
  *
- * @see Docs https://yamada-ui.com/components/simple-grid
+ * @see https://yamada-ui.com/components/simple-grid
  */
 export const SimpleGrid = withContext(Grid)(
   undefined,

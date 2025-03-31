@@ -71,10 +71,10 @@ Or, you can customize it using `HelperMessage`.
 
 ### Displaying an Error Message
 
-To display an error message, set `isInvalid` to `true` and assign a `ReactNode` to `errorMessage`.
+To display an error message, set `invalid` to `true` and assign a `ReactNode` to `errorMessage`.
 
 ```tsx
-<FormControl isInvalid label="Email address" errorMessage="Email is required.">
+<FormControl invalid label="Email address" errorMessage="Email is required.">
   <Input type="email" placeholder="your email address" />
 </FormControl>
 ```
@@ -82,7 +82,7 @@ To display an error message, set `isInvalid` to `true` and assign a `ReactNode` 
 Or, you can customize it using `ErrorMessage`.
 
 ```tsx
-<FormControl isInvalid label="Email address">
+<FormControl invalid label="Email address">
   <Input type="email" placeholder="your email address" />
   <ErrorMessage color="gray.300">Email is required.</ErrorMessage>
 </FormControl>
@@ -90,17 +90,17 @@ Or, you can customize it using `ErrorMessage`.
 
 ### Replacing Help Message with Error Message
 
-Error messages are displayed only when `isInvalid` is `true`. To replace the help message with the error message when the error message is displayed, set `isReplace` to `true`.
+Error messages are displayed only when `invalid` is `true`. To replace the help message with the error message when the error message is displayed, set `replace` to `true`.
 
-Use the `isReplace` property to replace the help message with the error message.
+Use the `replace` property to replace the help message with the error message.
 
 ```tsx
 <FormControl
-  isInvalid
+  invalid
   label="Email address"
   helperMessage="We'll never share your email."
   errorMessage="Email is required."
-  isReplace={true}
+  replace={true}
 >
   <Input type="email" placeholder="your email address" />
 </FormControl>
@@ -108,11 +108,11 @@ Use the `isReplace` property to replace the help message with the error message.
 
 ### Making it Required
 
-To make it required, set `isRequired` to `true`.
+To make it required, set `required` to `true`.
 
 ```tsx
 <FormControl
-  isRequired
+  required
   label="Email address"
   helperMessage="We'll never share your email."
   errorMessage="Email is required."
@@ -123,11 +123,11 @@ To make it required, set `isRequired` to `true`.
 
 ### Disabling
 
-To disable it, set `isDisabled` to `true`.
+To disable it, set `disabled` to `true`.
 
 ```tsx
 <FormControl
-  isDisabled
+  disabled
   label="Email address"
   helperMessage="We'll never share your email."
   errorMessage="Email is required."
@@ -138,11 +138,11 @@ To disable it, set `isDisabled` to `true`.
 
 ### Making it Read-Only
 
-To make it read-only, set `isReadOnly` to `true`.
+To make it read-only, set `readOnly` to `true`.
 
 ```tsx
 <FormControl
-  isReadOnly
+  readOnly
   label="Email address"
   helperMessage="We'll never share your email."
   errorMessage="Email is required."
@@ -158,7 +158,7 @@ To customize the required indicator, set a `ReactNode` to `requiredIndicator`.
 ```tsx
 <VStack>
   <FormControl
-    isRequired
+    required
     label="Email address"
     requiredIndicator={
       <Tag size="sm" colorScheme="red" ms={2}>
@@ -169,7 +169,7 @@ To customize the required indicator, set a `ReactNode` to `requiredIndicator`.
     <Input type="email" placeholder="your email address" />
   </FormControl>
 
-  <FormControl isRequired>
+  <FormControl required>
     <Label
       requiredIndicator={
         <Tag size="sm" colorScheme="red" ms={2}>

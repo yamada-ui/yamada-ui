@@ -61,9 +61,11 @@ export { createColumnHelper, flexRender as render } from "@tanstack/react-table"
 export type {
   Cell,
   CellContext,
+  HeaderContext,
   Row,
   RowData,
   SortDirection,
+  TableMeta,
 } from "@tanstack/react-table"
 
 export type CellMap = Map<string, RefObject<HTMLTableCellElement | null>>

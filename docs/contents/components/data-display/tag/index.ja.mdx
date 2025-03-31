@@ -122,28 +122,28 @@ import { Tag } from "@yamada-ui/react"
         name: "Small",
         colorScheme: "primary",
         size: "sm",
-        leftIcon: <PlusIcon />,
+        startIcon: <PlusIcon />,
       },
       {
         name: "Medium",
         colorScheme: "secondary",
         size: "md",
-        leftIcon: <PlusIcon />,
+        startIcon: <PlusIcon />,
       },
       {
         name: "Large",
         colorScheme: "warning",
         size: "lg",
-        leftIcon: <PlusIcon />,
+        startIcon: <PlusIcon />,
       },
     ]}
   >
-    {({ name, colorScheme, size, leftIcon }, index) => (
+    {({ name, colorScheme, size, startIcon }, index) => (
       <Tag
         key={index}
         colorScheme={colorScheme}
         size={size}
-        leftIcon={leftIcon}
+        startIcon={startIcon}
       >
         {name}
       </Tag>
@@ -175,7 +175,7 @@ import { Tag } from "@yamada-ui/react"
 
 ### 閉じるボタンを無効にする
 
-閉じるボタンを無効にする場合は、`isDisabled`を`true`に設定します。
+閉じるボタンを無効にする場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <Wrap gap="md" alignItems="flex-start">
@@ -187,7 +187,7 @@ import { Tag } from "@yamada-ui/react"
         colorScheme={colorScheme}
         rounded="full"
         onClose={() => {}}
-        isDisabled
+        disabled
       >
         {toTitleCase(colorScheme)}
       </Tag>

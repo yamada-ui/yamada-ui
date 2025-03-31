@@ -6,9 +6,8 @@ describe("<Group />", () => {
     await a11y(<Group>Group</Group>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Group.displayName).toBe("Group")
-    expect(Group.__styled__).toBe("Group")
   })
 
   test("sets `className` correctly", () => {

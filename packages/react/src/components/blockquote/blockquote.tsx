@@ -54,7 +54,7 @@ export const {
 /**
  * `Blockquote` is a component that represents a blockquote. By default, it renders a `blockquote` element.
  *
- * @see Docs https://yamada-ui.com/components/blockquote
+ * @see https://yamada-ui.com/components/blockquote
  */
 export const BlockquoteRoot = withProvider<"figure", BlockquoteRootProps>(
   ({

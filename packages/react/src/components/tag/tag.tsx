@@ -57,7 +57,7 @@ export const {
 /**
  * `Tag` is a component used to categorize or organize items using keywords that describe them.
  *
- * @see Docs https://yamada-ui.com/components/tag
+ * @see https://yamada-ui.com/components/tag
  */
 export const Tag = withProvider(
   ({

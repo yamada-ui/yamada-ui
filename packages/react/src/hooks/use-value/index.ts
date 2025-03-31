@@ -17,7 +17,7 @@ import { getBreakpointValue, useBreakpoint } from "../use-breakpoint"
 /**
  * `useValue` is a custom hook that combines `useBreakpointValue` and `useColorModeValue`.
  *
- * @see Docs https://yamada-ui.com/hooks/use-value
+ * @see https://yamada-ui.com/hooks/use-value
  */
 export const useValue = <T>(
   value: ColorModeArray<T> | ResponsiveObject<T> | T,

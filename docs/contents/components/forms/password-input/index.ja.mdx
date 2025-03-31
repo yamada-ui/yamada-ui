@@ -98,7 +98,7 @@ return (
   />
   <PasswordInput
     errorBorderColor="orange.500"
-    isInvalid
+    invalid
     placeholder="custom border color"
   />
 </VStack>
@@ -128,18 +128,18 @@ return (
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <PasswordInput variant="outline" isDisabled placeholder="outline" />
-  <PasswordInput variant="filled" isDisabled placeholder="filled" />
-  <PasswordInput variant="flushed" isDisabled placeholder="flushed" />
-  <PasswordInput variant="unstyled" isDisabled placeholder="unstyled" />
+  <PasswordInput variant="outline" disabled placeholder="outline" />
+  <PasswordInput variant="filled" disabled placeholder="filled" />
+  <PasswordInput variant="flushed" disabled placeholder="flushed" />
+  <PasswordInput variant="unstyled" disabled placeholder="unstyled" />
 
   <FormControl
     helperMessage="We'll never share your password."
-    isDisabled
+    disabled
     label="Password"
   >
     <PasswordInput placeholder="your password" />
@@ -149,18 +149,18 @@ return (
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <PasswordInput variant="outline" isReadOnly placeholder="outline" />
-  <PasswordInput variant="filled" isReadOnly placeholder="filled" />
-  <PasswordInput variant="flushed" isReadOnly placeholder="flushed" />
-  <PasswordInput variant="unstyled" isReadOnly placeholder="unstyled" />
+  <PasswordInput variant="outline" readOnly placeholder="outline" />
+  <PasswordInput variant="filled" readOnly placeholder="filled" />
+  <PasswordInput variant="flushed" readOnly placeholder="flushed" />
+  <PasswordInput variant="unstyled" readOnly placeholder="unstyled" />
 
   <FormControl
     helperMessage="We'll never share your password."
-    isReadOnly
+    readOnly
     label="Password"
   >
     <PasswordInput placeholder="your password" />
@@ -170,16 +170,16 @@ return (
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <PasswordInput variant="outline" isInvalid placeholder="outline" />
-  <PasswordInput variant="filled" isInvalid placeholder="filled" />
-  <PasswordInput variant="flushed" isInvalid placeholder="flushed" />
-  <PasswordInput variant="unstyled" isInvalid placeholder="unstyled" />
+  <PasswordInput variant="outline" invalid placeholder="outline" />
+  <PasswordInput variant="filled" invalid placeholder="filled" />
+  <PasswordInput variant="flushed" invalid placeholder="flushed" />
+  <PasswordInput variant="unstyled" invalid placeholder="unstyled" />
 
-  <FormControl errorMessage="Email is required." isInvalid label="Password">
+  <FormControl errorMessage="Email is required." invalid label="Password">
     <PasswordInput placeholder="your password" />
   </FormControl>
 </VStack>
@@ -221,7 +221,7 @@ return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
       errorMessage={errors.password?.message}
-      isInvalid={!!errors.password}
+      invalid={!!errors.password}
       label="Password"
     >
       <PasswordInput

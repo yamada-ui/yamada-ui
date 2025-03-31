@@ -4,6 +4,6 @@ import { component, Icon } from "../icon"
 /**
  * `SendHorizontalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @sees://yamada-ui.com/components/icon
  */
 export const SendHorizontalIcon = component(Icon)({ as: SendHorizontal })

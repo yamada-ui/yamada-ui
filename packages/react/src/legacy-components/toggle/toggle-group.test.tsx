@@ -131,9 +131,9 @@ describe("<ToggleGroup />", () => {
     expect(onChange).toHaveBeenCalledWith(["opt1", "opt2"])
   })
 
-  test("should set all toggles to readonly when isReadOnly prop is true", () => {
+  test("should set all toggles to readonly when readOnly prop is true", () => {
     render(
-      <ToggleGroup isReadOnly>
+      <ToggleGroup readOnly>
         <Toggle value="opt1">Option 1</Toggle>
         <Toggle value="opt2">Option 2</Toggle>
       </ToggleGroup>,

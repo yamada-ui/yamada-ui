@@ -317,10 +317,10 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 
 ### コンテナ幅まで引き伸ばす
 
-`isFitted`を`true`にすることで、タブをコンテナ幅まで均等に引き伸ばします。
+`fitted`を`true`にすることで、タブをコンテナ幅まで均等に引き伸ばします。
 
 ```tsx
-<Tabs variant="sticky" isFitted>
+<Tabs variant="sticky" fitted>
   <Tab>孫悟空</Tab>
   <Tab>ベジータ</Tab>
   <Tab>フリーザ</Tab>
@@ -335,12 +335,12 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 
 ### 無効にする
 
-特定のタブを無効にしたい場合は、`isDisabled`を設定します。
+特定のタブを無効にしたい場合は、`disabled`を設定します。
 
 ```tsx
 <Tabs>
   <Tab>孫悟空</Tab>
-  <Tab isDisabled>ベジータ</Tab>
+  <Tab disabled>ベジータ</Tab>
   <Tab>フリーザ</Tab>
 
   <TabPanel>クリリンのことか……クリリンのことかーーーっ！！！！！</TabPanel>
@@ -353,10 +353,10 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 
 ### アクティブをマニュアル化する
 
-デフォルトでは、フォーカスされたタブは自動的にアクティブ化されます。任意のタイミング(`Enter`や`Space`が押されたとき)でタブをアクティブ化したい場合は、`isManual`を`true`に設定します。
+デフォルトでは、フォーカスされたタブは自動的にアクティブ化されます。任意のタイミング(`Enter`や`Space`が押されたとき)でタブをアクティブ化したい場合は、`manual`を`true`に設定します。
 
 ```tsx
-<Tabs isManual>
+<Tabs manual>
   <Tab>孫悟空</Tab>
   <Tab>ベジータ</Tab>
   <Tab>フリーザ</Tab>
@@ -373,10 +373,10 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@yamada-ui/react"
 
 デフォルトでは、すべてのパネルはアクティブに関わらずDOMにレンダリングされます。つまり、非表示のパネルもレンダリングされているが、スタイルによって非表示になっていることになります。
 
-タブがアクティブになるまで、各パネルのレンダリングを遅延させたい場合は、`isLazy`を`true`に設定します。
+タブがアクティブになるまで、各パネルのレンダリングを遅延させたい場合は、`lazy`を`true`に設定します。
 
 ```tsx
-<Tabs isLazy lazyBehavior="unmount">
+<Tabs lazy lazyBehavior="unmount">
   <Tab>孫悟空</Tab>
   <Tab>ベジータ</Tab>
   <Tab>フリーザ</Tab>

@@ -36,16 +36,16 @@ import {
 
 ## Usage
 
-To control the display or hide, set `isOpen` and `onClose`.
+To control the display or hide, set `open` and `onClose`.
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal open={open} onClose={onClose}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -81,7 +81,7 @@ const sizeMap = [
   "full",
 ]
 const [size, setSize] = useState("md")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -99,7 +99,7 @@ return (
       ))}
     </Wrap>
 
-    <Modal isOpen={isOpen} onClose={onClose} size={size}>
+    <Modal open={open} onClose={onClose} size={size}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -135,7 +135,7 @@ const placementMap = [
   "bottom-right",
 ]
 const [placement, setPlacement] = useState("center")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -153,7 +153,7 @@ return (
       ))}
     </Wrap>
 
-    <Modal isOpen={isOpen} onClose={onClose} placement={placement}>
+    <Modal open={open} onClose={onClose} placement={placement}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -179,7 +179,7 @@ To change the show or hide animation, set `animation` to `top`, `left`, etc. By 
 ```tsx functional=true
 const animationMap = ["scale", "top", "left", "bottom", "right"]
 const [animation, setAnimation] = useState("scale")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -197,7 +197,7 @@ return (
       ))}
     </Wrap>
 
-    <Modal isOpen={isOpen} onClose={onClose} animation={animation}>
+    <Modal open={open} onClose={onClose} animation={animation}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -221,13 +221,13 @@ return (
 To change the duration, set `duration` to a numerical value (seconds).
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose} duration={0.4}>
+    <Modal open={open} onClose={onClose} duration={0.4}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -252,7 +252,7 @@ By default, `inside` is set, and scrolling only occurs within `ModalBody`. If yo
 
 ```tsx functional=true
 const [scrollBehavior, setScrollBehavior] = useState("inside")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -275,12 +275,7 @@ return (
       </Button>
     </Wrap>
 
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      scrollBehavior={scrollBehavior}
-      h="xl"
-    >
+    <Modal open={open} onClose={onClose} scrollBehavior={scrollBehavior} h="xl">
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -328,13 +323,13 @@ return (
 By default, when the modal opens, it blocks the scroll of the main content to ensure accessibility. If you do not want to block the scroll of the main content, set `blockScrollOnMount` to `false`.
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose} blockScrollOnMount={false}>
+    <Modal open={open} onClose={onClose} blockScrollOnMount={false}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -358,13 +353,13 @@ return (
 If you want to customize `ModalOverlay` by passing `props`, etc., set it without omitting.
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal open={open} onClose={onClose}>
       <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
 
       <ModalHeader>ドラゴンボール</ModalHeader>
@@ -390,13 +385,13 @@ return (
 To disable (hide) the modal's overlay, set `withOverlay` to `false`.
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose} withOverlay={false}>
+    <Modal open={open} onClose={onClose} withOverlay={false}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -420,13 +415,13 @@ return (
 If you want to customize `ModalCloseButton` by passing `props`, etc., set it without omitting.
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal open={open} onClose={onClose}>
       <ModalCloseButton color="red.500" />
 
       <ModalHeader>ドラゴンボール</ModalHeader>
@@ -456,13 +451,13 @@ By default, clicking on the overlay will close the modal. Please note that if `o
 :::
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen}>
+    <Modal open={open}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -491,7 +486,7 @@ return (
   <>
     <Button onClick={firstControls.onOpen}>Open Modal</Button>
 
-    <Modal isOpen={firstControls.isOpen} onClose={firstControls.onClose}>
+    <Modal open={firstControls.open} onClose={firstControls.onClose}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -509,7 +504,7 @@ return (
       </ModalFooter>
 
       <Modal
-        isOpen={secondControls.isOpen}
+        open={secondControls.open}
         onClose={secondControls.onClose}
         size="sm"
       >

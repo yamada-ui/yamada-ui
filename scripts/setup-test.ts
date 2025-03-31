@@ -7,7 +7,7 @@ expect.extend({ toHaveNoViolations })
 
 const { getComputedStyle } = window
 
-window.getComputedStyle = (elt) => getComputedStyle(elt)
+window.getComputedStyle = (el) => getComputedStyle(el)
 window.Element.prototype.scrollTo = noop
 window.scrollTo = noop
 

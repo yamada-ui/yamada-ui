@@ -110,7 +110,7 @@ export interface MultiDatePickerProps
 /**
  * `MultiDatePicker` is a component used for users to select multiple dates.
  *
- * @see Docs https://yamada-ui.com/components/forms/multi-date-picker
+ * @see https://yamada-ui.com/components/forms/multi-date-picker
  */
 export const MultiDatePicker = forwardRef<MultiDatePickerProps, "input">(
   (props, ref) => {

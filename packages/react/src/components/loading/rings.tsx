@@ -8,7 +8,7 @@ export interface RingsProps extends LoadingProps {}
 /**
  * `Loading` is a component displayed during waiting times, such as when data is being loaded.
  *
- * @see Docs https://yamada-ui.com/components/feedback/loading
+ * @see https://yamada-ui.com/components/feedback/loading
  */
 export const Rings = withContext<"svg", RingsProps>(
   ({ dur = "3s", ...rest }) => {

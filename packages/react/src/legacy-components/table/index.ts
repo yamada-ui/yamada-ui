@@ -8,7 +8,9 @@ export type {
   CellContext,
   Column,
   ColumnSort,
+  HeaderContext,
   Row,
   RowData,
   Sort,
+  TableMeta,
 } from "./use-table"

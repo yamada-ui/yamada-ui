@@ -32,7 +32,7 @@ export interface CheckboxCardGroupProps<Y extends number | string = string>
 /**
  * `CheckboxCardGroup` is a component that groups `CheckboxCard` components.
  *
- * @see Docs https://yamada-ui.com/components/forms/checkbox-card
+ * @see https://yamada-ui.com/components/forms/checkbox-card
  */
 export const CheckboxCardGroup = forwardRef(
   <Y extends number | string = string>(

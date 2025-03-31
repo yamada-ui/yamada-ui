@@ -82,7 +82,7 @@ To change the border color, use the `focusBorderColor` or `errorBorderColor` pro
 ```tsx
 <VStack>
   <PinInput focusBorderColor="green.500" />
-  <PinInput isInvalid errorBorderColor="orange.500" />
+  <PinInput invalid errorBorderColor="orange.500" />
 </VStack>
 ```
 
@@ -151,21 +151,21 @@ By default, when a field is entered, the focus automatically moves to the next f
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <PinInput isDisabled />
+  <PinInput disabled />
 
   <PinInput>
-    <PinInputField isDisabled />
-    <PinInputField isDisabled />
-    <PinInputField isDisabled />
-    <PinInputField isDisabled />
+    <PinInputField disabled />
+    <PinInputField disabled />
+    <PinInputField disabled />
+    <PinInputField disabled />
   </PinInput>
 
   <FormControl
-    isDisabled
+    disabled
     label="Please one-time password"
     helperMessage="Just sent you a one-time password to your e-mail address."
     errorMessage="one-time password is required."
@@ -177,19 +177,19 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <PinInput isReadOnly />
+  <PinInput readOnly />
   <PinInput>
-    <PinInputField isReadOnly />
-    <PinInputField isReadOnly />
-    <PinInputField isReadOnly />
-    <PinInputField isReadOnly />
+    <PinInputField readOnly />
+    <PinInputField readOnly />
+    <PinInputField readOnly />
+    <PinInputField readOnly />
   </PinInput>
   <FormControl
-    isReadOnly
+    readOnly
     label="Please one-time password"
     helperMessage="Just sent you a one-time password to your e-mail address."
     errorMessage="one-time password is required."
@@ -201,19 +201,19 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <PinInput isInvalid />
+  <PinInput invalid />
   <PinInput>
-    <PinInputField isInvalid />
-    <PinInputField isInvalid />
-    <PinInputField isInvalid />
-    <PinInputField isInvalid />
+    <PinInputField invalid />
+    <PinInputField invalid />
+    <PinInputField invalid />
+    <PinInputField invalid />
   </PinInput>
   <FormControl
-    isInvalid
+    invalid
     label="Please one-time password"
     helperMessage="Just sent you a one-time password to your e-mail address."
     errorMessage="one-time password is required."
@@ -253,7 +253,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.pinInput}
+      invalid={!!errors.pinInput}
       label="Token"
       errorMessage={errors.pinInput ? errors.pinInput.message : undefined}
     >

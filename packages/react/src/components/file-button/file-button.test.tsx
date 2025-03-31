@@ -13,7 +13,7 @@ describe("<FileButton />", () => {
 
   test("sets `displayName` and `__ui__` correctly", () => {
     expect(FileButton.displayName).toBe("FileButton")
-    expect(FileButton.__ui__).toBe("FileButton")
+    expect(FileButton.__styled__).toBe("FileButton")
   })
 
   test("sets `className` correctly", () => {

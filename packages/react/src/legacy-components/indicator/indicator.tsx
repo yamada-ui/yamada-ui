@@ -156,7 +156,7 @@ const getPlacementStyle = (
 /**
  * `Indicator` is a component that displays at the corner of elements such as avatars.
  *
- * @see Docs https://yamada-ui.com/components/media-and-icons/indicator
+ * @see https://yamada-ui.com/components/media-and-icons/indicator
  */
 export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Indicator", props)

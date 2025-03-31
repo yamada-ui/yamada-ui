@@ -14,7 +14,7 @@ type OmittedTheme = Omit<ThemeTokens, "colorSchemes" | "themeSchemes">
 /**
  * `useToken` is a custom hook for retrieving tokens from the theme.
  *
- * @see Docs https://yamada-ui.com/hooks/use-token
+ * @see https://yamada-ui.com/hooks/use-token
  */
 export const useToken = <
   Y extends number | string = string,

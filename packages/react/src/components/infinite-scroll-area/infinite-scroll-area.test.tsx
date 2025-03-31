@@ -35,9 +35,8 @@ describe("<InfiniteScrollArea />", () => {
     await a11y(container)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(InfiniteScrollArea.displayName).toBe("InfiniteScrollAreaRoot")
-    expect(InfiniteScrollArea.__styled__).toBe("InfiniteScrollAreaRoot")
   })
 
   test("sets `className` correctly", () => {

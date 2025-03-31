@@ -77,7 +77,7 @@ export interface RadioCardProps<Y extends number | string = string>
 /**
  * `RadioCard` is a component used for allowing users to select one option from multiple choices.
  *
- * @see Docs https://yamada-ui.com/components/forms/radio-card
+ * @see https://yamada-ui.com/components/forms/radio-card
  */
 export const RadioCard = forwardRef(
   <Y extends number | string = string>(

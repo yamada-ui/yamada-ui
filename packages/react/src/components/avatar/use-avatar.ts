@@ -5,6 +5,7 @@ import type {
 } from "react"
 import type { HTMLProps, HTMLStyledProps, PropGetter } from "../../core"
 import { useCallback, useState } from "react"
+import { useI18n } from "../../providers/i18n-provider"
 import { dataAttr, handlerAll } from "../../utils"
 
 const defaultFormat = (name: string) => {
@@ -81,6 +82,7 @@ export const useAvatar = ({
   const initials = name ? format(name) : undefined
   const [loaded, setLoaded] = useState<boolean>(false)
   const fallback = !src || !loaded
+  const { t } = useI18n("avatar")
 
   const getGroupProps: PropGetter = useCallback((props) => ({ ...props }), [])
 
@@ -113,12 +115,14 @@ export const useAvatar = ({
   const getFallbackProps: PropGetter = useCallback(
     (props) => ({
       ...props,
-      "aria-label": !fallbackMessage ? name || alt || "Avatar icon" : undefined,
+      "aria-label": !fallbackMessage
+        ? name || alt || t("Avatar Icon")
+        : undefined,
       children: fallbackMessage || initials || icon,
       hidden: !fallback,
       role: "img",
     }),
-    [name, initials, fallback, icon, fallbackMessage, alt],
+    [name, initials, fallback, icon, fallbackMessage, alt, t],
   )
 
   return {

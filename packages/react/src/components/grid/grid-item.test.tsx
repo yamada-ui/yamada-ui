@@ -7,9 +7,8 @@ describe("<GridItem />", () => {
     await a11y(<GridItem>GridItem</GridItem>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(GridItem.displayName).toBe("GridItem")
-    expect(GridItem.__styled__).toBe("GridItem")
   })
 
   test("sets `className` correctly", () => {

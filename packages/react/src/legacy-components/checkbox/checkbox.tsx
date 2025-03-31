@@ -55,7 +55,7 @@ export interface CheckboxProps<Y extends number | string = string>
 /**
  * `Checkbox` is a component used for allowing users to select multiple values from multiple options.
  *
- * @see Docs https://yamada-ui.com/components/forms/checkbox
+ * @see https://yamada-ui.com/components/forms/checkbox
  */
 export const Checkbox = forwardRef(
   <Y extends number | string = string>(

@@ -102,7 +102,7 @@ export const {
 /**
  * `Field` is a component used to group form elements with label, helper message, error message, etc.
  *
- * @see Docs https://yamada-ui.com/components/field
+ * @see https://yamada-ui.com/components/field
  */
 export const FieldRoot = withProvider<"div", FieldRootProps>(
   ({

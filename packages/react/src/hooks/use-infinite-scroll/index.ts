@@ -141,7 +141,7 @@ export interface UseInfiniteScrollProps
 /**
  * `useInfiniteScroll` is a custom hook for providing infinite scroll functionality.
  *
- * @see Docs https://yamada-ui.com/hooks/use-infinite-scroll
+ * @see https://yamada-ui.com/hooks/use-infinite-scroll
  */
 export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   behavior,

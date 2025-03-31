@@ -56,7 +56,7 @@ export const {
 /**
  * `Grid` is a component for managing grid layouts. It also comes with handy style shorthand.
  *
- * @see Docs https://yamada-ui.com/components/grid
+ * @see https://yamada-ui.com/components/grid
  */
 export const Grid = withContext("div")(
   undefined,

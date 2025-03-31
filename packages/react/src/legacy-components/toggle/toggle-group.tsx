@@ -84,7 +84,7 @@ interface ToggleGroupOptions<
 /**
  * `ToggleGroup` is a set of two-state buttons that can be toggled on or off.
  *
- * @see Docs https://yamada-ui.com/components/forms/toggle
+ * @see https://yamada-ui.com/components/forms/toggle
  */
 export interface ToggleGroupProps<
   Y extends (number | string)[] | number | string = string,

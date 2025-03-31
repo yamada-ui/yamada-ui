@@ -75,7 +75,7 @@ export interface StepperProps
 /**
  * `Stepper` is a component that displays the progress of a multi-step process.
  *
- * @see Docs https://yamada-ui.com/components/navigation/stepper
+ * @see https://yamada-ui.com/components/navigation/stepper
  */
 export const Stepper = forwardRef<StepperProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Stepper", props)

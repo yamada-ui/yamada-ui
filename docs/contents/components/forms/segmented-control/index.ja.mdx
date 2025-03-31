@@ -111,11 +111,11 @@ return <SegmentedControl items={items} />
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack alignItems="flex-start">
-  <SegmentedControl isDisabled>
+  <SegmentedControl disabled>
     <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
     <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
     <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
@@ -123,7 +123,7 @@ return <SegmentedControl items={items} />
 
   <SegmentedControl>
     <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
-    <SegmentedControlButton value="ベジータ" isDisabled>
+    <SegmentedControlButton value="ベジータ" disabled>
       ベジータ
     </SegmentedControlButton>
     <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
@@ -133,11 +133,11 @@ return <SegmentedControl items={items} />
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack alignItems="flex-start">
-  <SegmentedControl isReadOnly>
+  <SegmentedControl readOnly>
     <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
     <SegmentedControlButton value="ベジータ">ベジータ</SegmentedControlButton>
     <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
@@ -145,7 +145,7 @@ return <SegmentedControl items={items} />
 
   <SegmentedControl>
     <SegmentedControlButton value="孫悟空">孫悟空</SegmentedControlButton>
-    <SegmentedControlButton value="ベジータ" isReadOnly>
+    <SegmentedControlButton value="ベジータ" readOnly>
       ベジータ
     </SegmentedControlButton>
     <SegmentedControlButton value="フリーザ">フリーザ</SegmentedControlButton>
@@ -190,7 +190,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.segmentedControl}
+      invalid={!!errors.segmentedControl}
       legend="Who is your favorite character?"
       errorMessage={
         errors.segmentedControl ? errors.segmentedControl.message : undefined

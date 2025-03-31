@@ -1,20 +1,24 @@
-import type { MatchMediaMock } from "@yamada-ui/test"
-import { matchMedia } from "@yamada-ui/test"
+import MatchMediaMock from "vitest-matchmedia-mock"
 import { act, renderHook } from "../../../test"
 import { useUpdateBreakpointEffect } from "./use-update-breakpoint-effect"
 
 describe("useUpdateBreakpointEffect", () => {
-  let mock: MatchMediaMock
+  let matchMediaMock: MatchMediaMock
 
   beforeAll(() => {
-    mock = matchMedia()
+    matchMediaMock = new MatchMediaMock()
   })
+
   afterEach(() => {
-    mock.clear()
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
   })
 
   test("Executes callback when breakpoint changes, skipping initial render", () => {
-    mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
+    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const callback = vi.fn()
 
@@ -25,7 +29,7 @@ describe("useUpdateBreakpointEffect", () => {
     expect(callback).not.toHaveBeenCalled()
 
     act(() => {
-      mock.useMediaQuery("(min-width: 769px) and (max-width: 976px)")
+      matchMediaMock.useMediaQuery("(min-width: 769px) and (max-width: 976px)")
       rerender()
     })
 

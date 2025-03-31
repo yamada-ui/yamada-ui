@@ -103,7 +103,7 @@ To change the border color, set the color to `focusBorderColor` or `errorBorderC
 <VStack>
   <Textarea focusBorderColor="green.500" placeholder="custom border color" />
   <Textarea
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -130,17 +130,17 @@ To change the placeholder color, set `props` to `_placeholder`.
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <Textarea isDisabled variant="outline" placeholder="outline" />
-  <Textarea isDisabled variant="filled" placeholder="filled" />
-  <Textarea isDisabled variant="flushed" placeholder="flushed" />
-  <Textarea isDisabled variant="unstyled" placeholder="unstyled" />
+  <Textarea disabled variant="outline" placeholder="outline" />
+  <Textarea disabled variant="filled" placeholder="filled" />
+  <Textarea disabled variant="flushed" placeholder="flushed" />
+  <Textarea disabled variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isDisabled
+    disabled
     label="Feedback"
     helperMessage="We would like to get your feedback."
   >
@@ -151,17 +151,17 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <Textarea isReadOnly variant="outline" placeholder="outline" />
-  <Textarea isReadOnly variant="filled" placeholder="filled" />
-  <Textarea isReadOnly variant="flushed" placeholder="flushed" />
-  <Textarea isReadOnly variant="unstyled" placeholder="unstyled" />
+  <Textarea readOnly variant="outline" placeholder="outline" />
+  <Textarea readOnly variant="filled" placeholder="filled" />
+  <Textarea readOnly variant="flushed" placeholder="flushed" />
+  <Textarea readOnly variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isReadOnly
+    readOnly
     label="Feedback"
     helperMessage="We would like to get your feedback."
   >
@@ -172,16 +172,16 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <Textarea isInvalid variant="outline" placeholder="outline" />
-  <Textarea isInvalid variant="filled" placeholder="filled" />
-  <Textarea isInvalid variant="flushed" placeholder="flushed" />
-  <Textarea isInvalid variant="unstyled" placeholder="unstyled" />
+  <Textarea invalid variant="outline" placeholder="outline" />
+  <Textarea invalid variant="filled" placeholder="filled" />
+  <Textarea invalid variant="flushed" placeholder="flushed" />
+  <Textarea invalid variant="unstyled" placeholder="unstyled" />
 
-  <FormControl isInvalid label="Feedback" errorMessage="Feedback is required.">
+  <FormControl invalid label="Feedback" errorMessage="Feedback is required.">
     <Textarea variant="outline" placeholder="your feedback" />
   </FormControl>
 </VStack>
@@ -204,7 +204,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.textarea}
+      invalid={!!errors.textarea}
       label="Feedback"
       errorMessage={errors.textarea ? errors.textarea.message : undefined}
     >

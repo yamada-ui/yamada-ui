@@ -98,7 +98,7 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
   />
   <PasswordInput
     errorBorderColor="orange.500"
-    isInvalid
+    invalid
     placeholder="custom border color"
   />
 </VStack>
@@ -128,18 +128,18 @@ To change the placeholder color, set `props` to `_placeholder`.
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <PasswordInput variant="outline" isDisabled placeholder="outline" />
-  <PasswordInput variant="filled" isDisabled placeholder="filled" />
-  <PasswordInput variant="flushed" isDisabled placeholder="flushed" />
-  <PasswordInput variant="unstyled" isDisabled placeholder="unstyled" />
+  <PasswordInput variant="outline" disabled placeholder="outline" />
+  <PasswordInput variant="filled" disabled placeholder="filled" />
+  <PasswordInput variant="flushed" disabled placeholder="flushed" />
+  <PasswordInput variant="unstyled" disabled placeholder="unstyled" />
 
   <FormControl
     helperMessage="We'll never share your password."
-    isDisabled
+    disabled
     label="Password"
   >
     <PasswordInput placeholder="your password" />
@@ -149,18 +149,18 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <PasswordInput variant="outline" isReadOnly placeholder="outline" />
-  <PasswordInput variant="filled" isReadOnly placeholder="filled" />
-  <PasswordInput variant="flushed" isReadOnly placeholder="flushed" />
-  <PasswordInput variant="unstyled" isReadOnly placeholder="unstyled" />
+  <PasswordInput variant="outline" readOnly placeholder="outline" />
+  <PasswordInput variant="filled" readOnly placeholder="filled" />
+  <PasswordInput variant="flushed" readOnly placeholder="flushed" />
+  <PasswordInput variant="unstyled" readOnly placeholder="unstyled" />
 
   <FormControl
     helperMessage="We'll never share your password."
-    isReadOnly
+    readOnly
     label="Password"
   >
     <PasswordInput placeholder="your password" />
@@ -170,16 +170,16 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <PasswordInput variant="outline" isInvalid placeholder="outline" />
-  <PasswordInput variant="filled" isInvalid placeholder="filled" />
-  <PasswordInput variant="flushed" isInvalid placeholder="flushed" />
-  <PasswordInput variant="unstyled" isInvalid placeholder="unstyled" />
+  <PasswordInput variant="outline" invalid placeholder="outline" />
+  <PasswordInput variant="filled" invalid placeholder="filled" />
+  <PasswordInput variant="flushed" invalid placeholder="flushed" />
+  <PasswordInput variant="unstyled" invalid placeholder="unstyled" />
 
-  <FormControl errorMessage="Email is required." isInvalid label="Password">
+  <FormControl errorMessage="Email is required." invalid label="Password">
     <PasswordInput placeholder="your password" />
   </FormControl>
 </VStack>
@@ -221,7 +221,7 @@ return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
       errorMessage={errors.password?.message}
-      isInvalid={!!errors.password}
+      invalid={!!errors.password}
       label="Password"
     >
       <PasswordInput

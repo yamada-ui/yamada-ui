@@ -13,7 +13,7 @@ export interface LucideIconProps extends IconProps {
 /**
  * `LucideIcon` is a component for using [Lucide lab](https://github.com/lucide-icons/lucide-lab) icons.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const LucideIcon = withContext<"svg", LucideIconProps>((props) => (
   <Icon as={OriginalIcon} {...props} />

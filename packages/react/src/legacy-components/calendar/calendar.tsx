@@ -40,7 +40,7 @@ export interface CalendarProps<Y extends MaybeValue = Date>
 /**
  * `Calendar` is a component for displaying or selecting dates in a calendar.
  *
- * @see Docs https://yamada-ui.com/components/data-display/calendar
+ * @see https://yamada-ui.com/components/data-display/calendar
  */
 export const Calendar = forwardRef(
   <T extends MaybeValue = Date>(

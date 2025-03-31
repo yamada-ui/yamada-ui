@@ -67,7 +67,7 @@ export interface AiryProps
 /**
  * `Airy` is a component that creates an airy animation, switching between two elements when one is clicked.
  *
- * @see Docs https://yamada-ui.com/components/transitions/airy
+ * @see https://yamada-ui.com/components/transitions/airy
  */
 export const Airy: FC<AiryProps> = (props) => {
   const [styles, mergedProps] = useComponentStyle("Airy", props)

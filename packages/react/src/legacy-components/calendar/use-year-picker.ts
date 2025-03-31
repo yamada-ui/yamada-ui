@@ -34,7 +34,7 @@ interface UseYearPickerOptions {
    * The format used for conversion.
    * Check the docs to see the format of possible modifiers you can pass.
    *
-   * @see Docs https://day.js.org/docs/en/display/format#list-of-localized-formats
+   * @see https://day.js.org/docs/en/display/format#list-of-localized-formats
    * @default 'YYYY'
    */
   inputFormat?: string

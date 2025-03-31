@@ -72,7 +72,7 @@ import {
 <VStack>
   <Input focusBorderColor="green.500" placeholder="custom border color" />
   <Input
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -103,17 +103,17 @@ import {
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Input isDisabled variant="outline" placeholder="outline" />
-  <Input isDisabled variant="filled" placeholder="filled" />
-  <Input isDisabled variant="flushed" placeholder="flushed" />
-  <Input isDisabled variant="unstyled" placeholder="unstyled" />
+  <Input disabled variant="outline" placeholder="outline" />
+  <Input disabled variant="filled" placeholder="filled" />
+  <Input disabled variant="flushed" placeholder="flushed" />
+  <Input disabled variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isDisabled
+    disabled
     label="Email address"
     helperMessage="We'll never share your email."
   >
@@ -124,17 +124,17 @@ import {
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Input isReadOnly variant="outline" placeholder="outline" />
-  <Input isReadOnly variant="filled" placeholder="filled" />
-  <Input isReadOnly variant="flushed" placeholder="flushed" />
-  <Input isReadOnly variant="unstyled" placeholder="unstyled" />
+  <Input readOnly variant="outline" placeholder="outline" />
+  <Input readOnly variant="filled" placeholder="filled" />
+  <Input readOnly variant="flushed" placeholder="flushed" />
+  <Input readOnly variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isReadOnly
+    readOnly
     label="Email address"
     helperMessage="We'll never share your email."
   >
@@ -145,20 +145,16 @@ import {
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Input isInvalid variant="outline" placeholder="outline" />
-  <Input isInvalid variant="filled" placeholder="filled" />
-  <Input isInvalid variant="flushed" placeholder="flushed" />
-  <Input isInvalid variant="unstyled" placeholder="unstyled" />
+  <Input invalid variant="outline" placeholder="outline" />
+  <Input invalid variant="filled" placeholder="filled" />
+  <Input invalid variant="flushed" placeholder="flushed" />
+  <Input invalid variant="unstyled" placeholder="unstyled" />
 
-  <FormControl
-    isInvalid
-    label="Email address"
-    errorMessage="Email is required."
-  >
+  <FormControl invalid label="Email address" errorMessage="Email is required.">
     <Input type="email" placeholder="your email address" />
   </FormControl>
 </VStack>
@@ -219,7 +215,7 @@ return (
         placeholder="your password"
       />
 
-      <InputRightElement w="4.5rem" isClickable>
+      <InputRightElement w="4.5rem" clickable>
         <Button h="1.75rem" size="sm" onClick={toggle}>
           {show ? "Hide" : "Show"}
         </Button>
@@ -266,7 +262,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.name}
+      invalid={!!errors.name}
       label="Name"
       errorMessage={errors.name ? errors.name.message : undefined}
     >
@@ -279,7 +275,7 @@ return (
     </FormControl>
 
     <FormControl
-      isInvalid={!!errors.cellphone}
+      invalid={!!errors.cellphone}
       label="Cellphone"
       errorMessage={errors.cellphone ? errors.cellphone.message : undefined}
     >
@@ -296,7 +292,7 @@ return (
     </FormControl>
 
     <FormControl
-      isInvalid={!!errors.email}
+      invalid={!!errors.email}
       label="Email"
       errorMessage={errors.email ? errors.email.message : undefined}
     >

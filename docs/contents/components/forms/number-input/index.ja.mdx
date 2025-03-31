@@ -50,7 +50,7 @@ import { NumberInput } from "@yamada-ui/react"
 <VStack>
   <NumberInput focusBorderColor="green.500" placeholder="custom border color" />
   <NumberInput
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -130,17 +130,17 @@ import { NumberInput } from "@yamada-ui/react"
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <NumberInput isDisabled variant="outline" placeholder="outline" />
-  <NumberInput isDisabled variant="filled" placeholder="filled" />
-  <NumberInput isDisabled variant="flushed" placeholder="flushed" />
-  <NumberInput isDisabled variant="unstyled" placeholder="unstyled" />
+  <NumberInput disabled variant="outline" placeholder="outline" />
+  <NumberInput disabled variant="filled" placeholder="filled" />
+  <NumberInput disabled variant="flushed" placeholder="flushed" />
+  <NumberInput disabled variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isDisabled
+    disabled
     label="Order quantity"
     helperMessage="Please enter the quantity you wish to order."
   >
@@ -151,17 +151,17 @@ import { NumberInput } from "@yamada-ui/react"
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <NumberInput isReadOnly variant="outline" placeholder="outline" />
-  <NumberInput isReadOnly variant="filled" placeholder="filled" />
-  <NumberInput isReadOnly variant="flushed" placeholder="flushed" />
-  <NumberInput isReadOnly variant="unstyled" placeholder="unstyled" />
+  <NumberInput readOnly variant="outline" placeholder="outline" />
+  <NumberInput readOnly variant="filled" placeholder="filled" />
+  <NumberInput readOnly variant="flushed" placeholder="flushed" />
+  <NumberInput readOnly variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isReadOnly
+    readOnly
     label="Order quantity"
     helperMessage="Please enter the quantity you wish to order."
   >
@@ -172,17 +172,17 @@ import { NumberInput } from "@yamada-ui/react"
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <NumberInput isInvalid variant="outline" placeholder="outline" />
-  <NumberInput isInvalid variant="filled" placeholder="filled" />
-  <NumberInput isInvalid variant="flushed" placeholder="flushed" />
-  <NumberInput isInvalid variant="unstyled" placeholder="unstyled" />
+  <NumberInput invalid variant="outline" placeholder="outline" />
+  <NumberInput invalid variant="filled" placeholder="filled" />
+  <NumberInput invalid variant="flushed" placeholder="flushed" />
+  <NumberInput invalid variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isInvalid
+    invalid
     label="Order quantity"
     errorMessage="Order quantity is required."
   >
@@ -243,7 +243,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.numberInput}
+      invalid={!!errors.numberInput}
       label="Age"
       errorMessage={errors.numberInput ? errors.numberInput.message : undefined}
     >

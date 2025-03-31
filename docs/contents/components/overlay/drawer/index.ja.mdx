@@ -34,20 +34,20 @@ import {
 
 ## 使い方
 
-表示または非表示を制御するために、`isOpen`と`onClose`を設定します。
+表示または非表示を制御するために、`open`と`onClose`を設定します。
 
 :::note
 `Drawer`は、内部的に[Modal](/components/overlay/modal)を使用しています。
 :::
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose}>
+    <Drawer open={open} onClose={onClose}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -70,7 +70,7 @@ return (
 ```tsx functional=true
 const sizeMap = ["xs", "sm", "md", "lg", "xl", "full"]
 const [size, setSize] = useState("md")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -88,7 +88,7 @@ return (
       ))}
     </Wrap>
 
-    <Drawer isOpen={isOpen} onClose={onClose} size={size}>
+    <Drawer open={open} onClose={onClose} size={size}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -113,7 +113,7 @@ return (
 ```tsx functional=true
 const placementMap = ["top", "right", "bottom", "left"]
 const [placement, setPlacement] = useState("center")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -131,7 +131,7 @@ return (
       ))}
     </Wrap>
 
-    <Drawer isOpen={isOpen} onClose={onClose} placement={placement}>
+    <Drawer open={open} onClose={onClose} placement={placement}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -154,13 +154,13 @@ return (
 所要時間を変更する場合は、`duration`に数値(秒)を設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} duration={0.7}>
+    <Drawer open={open} onClose={onClose} duration={0.7}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -180,16 +180,16 @@ return (
 
 ### 画面の高さに合わせる
 
-パネルを画面の高さに合わせたい場合は、`isFullHeight`を`true`に設定します。
+パネルを画面の高さに合わせたい場合は、`fullHeight`を`true`に設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} placement="bottom" isFullHeight>
+    <Drawer open={open} onClose={onClose} placement="bottom" fullHeight>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -212,13 +212,13 @@ return (
 デフォルトでは、パネルを開いた際に主要なコンテンツのスクロールをブロックしています。これは、アクセシビリティを確保するためです。もし、主要なコンテンツのスクロールをブロックしたくない場合は、`blockScrollOnMount`を`false`に設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} blockScrollOnMount={false}>
+    <Drawer open={open} onClose={onClose} blockScrollOnMount={false}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -241,13 +241,13 @@ return (
 `DrawerCloseButton`に`props`などを渡して、カスタマイズしたい場合は、省略せずに設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose}>
+    <Drawer open={open} onClose={onClose}>
       <DrawerCloseButton color="red.500" />
 
       <DrawerHeader>ドラゴンボール</DrawerHeader>
@@ -276,13 +276,13 @@ return (
 :::
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen}>
+    <Drawer open={open}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -307,7 +307,7 @@ return (
 ```tsx functional=true
 const placementMap = ["top", "right", "bottom", "left"]
 const [placement, setPlacement] = useState("center")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -325,7 +325,7 @@ return (
       ))}
     </Wrap>
 
-    <Drawer closeOnDrag isOpen={isOpen} onClose={onClose} placement={placement}>
+    <Drawer closeOnDrag open={open} onClose={onClose} placement={placement}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -348,14 +348,14 @@ return (
 ドラッグバーを非表示にする場合は、`withDragBar`を`false`に設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
     <Drawer
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       closeOnDrag
       withDragBar={false}
@@ -383,13 +383,13 @@ return (
 `DrawerOverlay`に`props`などを渡して、カスタマイズしたい場合は、省略せずに設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose}>
+    <Drawer open={open} onClose={onClose}>
       <DrawerOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
 
       <DrawerHeader>ドラゴンボール</DrawerHeader>
@@ -414,13 +414,13 @@ return (
 パネルのオーバーレイを無効(非表示)にする場合は、`withOverlay`を`false`にします。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} withOverlay={false}>
+    <Drawer open={open} onClose={onClose} withOverlay={false}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>

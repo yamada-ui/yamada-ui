@@ -77,7 +77,7 @@ export interface RadialChartProps
 /**
  * `RadialChart` is a component for drawing radial charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/data-display/radial-chart
+ * @see https://yamada-ui.com/components/data-display/radial-chart
  */
 export const RadialChart = forwardRef<RadialChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("RadialChart", props)

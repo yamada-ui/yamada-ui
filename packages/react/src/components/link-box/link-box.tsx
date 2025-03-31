@@ -33,7 +33,7 @@ export const {
 /**
  * `LinkBox` is a component that allows elements such as articles or cards to function as a single link.
  *
- * @see Docs https://yamada-ui.com/components/link-box
+ * @see https://yamada-ui.com/components/link-box
  */
 export const LinkBoxRoot = withProvider<"div", LinkBoxRootProps>(
   ({ children, vars: varsProp, ...rest }) => {

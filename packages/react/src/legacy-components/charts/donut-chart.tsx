@@ -44,7 +44,7 @@ export interface DonutChartProps
 /**
  * `DonutChart` is a component for drawing donut charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/data-display/donut-chart
+ * @see https://yamada-ui.com/components/data-display/donut-chart
  */
 export const DonutChart = forwardRef<DonutChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("DonutChart", props)

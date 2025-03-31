@@ -41,7 +41,7 @@ export function useControllableState<Y>({
   const onUpdate = useCallbackRef(onUpdateProp)
 
   const [defaultValue, setDefaultValue] = useState(defaultValueProp)
-  const controlled = value !== undefined
+  const controlled = !isUndefined(value)
   const resolvedValue = controlled ? value : defaultValue
 
   const setValue = useCallbackRef(

@@ -336,7 +336,7 @@ return <RadioCardGroup items={items} />
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx functional=true
 const items = useMemo<RadioCardItem[]>(
@@ -351,7 +351,7 @@ const items = useMemo<RadioCardItem[]>(
 return (
   <VStack>
     <RadioCardGroup defaultValue="ビアンカ">
-      <RadioCard isDisabled value="ビアンカ">
+      <RadioCard disabled value="ビアンカ">
         <RadioCardLabel>ビアンカ</RadioCardLabel>
         <RadioCardDescription>
           パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。
@@ -373,9 +373,9 @@ return (
       </RadioCard>
     </RadioCardGroup>
 
-    <RadioCardGroup isDisabled items={items} />
+    <RadioCardGroup disabled items={items} />
 
-    <Fieldset isDisabled legend="Which characters would you like to select?">
+    <Fieldset disabled legend="Which characters would you like to select?">
       <RadioCardGroup items={items} />
     </Fieldset>
   </VStack>
@@ -384,7 +384,7 @@ return (
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx functional=true
 const items = useMemo<RadioCardItem[]>(
@@ -399,7 +399,7 @@ const items = useMemo<RadioCardItem[]>(
 return (
   <VStack>
     <RadioCardGroup defaultValue="ビアンカ">
-      <RadioCard isReadOnly value="ビアンカ">
+      <RadioCard readOnly value="ビアンカ">
         <RadioCardLabel>ビアンカ</RadioCardLabel>
         <RadioCardDescription>
           パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。
@@ -421,9 +421,9 @@ return (
       </RadioCard>
     </RadioCardGroup>
 
-    <RadioCardGroup isReadOnly items={items} />
+    <RadioCardGroup readOnly items={items} />
 
-    <Fieldset isReadOnly legend="Which characters would you like to select?">
+    <Fieldset readOnly legend="Which characters would you like to select?">
       <RadioCardGroup items={items} />
     </Fieldset>
   </VStack>
@@ -432,7 +432,7 @@ return (
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx functional=true
 const items = useMemo<RadioCardItem[]>(
@@ -447,7 +447,7 @@ const items = useMemo<RadioCardItem[]>(
 return (
   <VStack>
     <RadioCardGroup defaultValue="ビアンカ">
-      <RadioCard isInvalid value="ビアンカ">
+      <RadioCard invalid value="ビアンカ">
         <RadioCardLabel>ビアンカ</RadioCardLabel>
         <RadioCardDescription>
           パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。
@@ -469,11 +469,11 @@ return (
       </RadioCard>
     </RadioCardGroup>
 
-    <RadioCardGroup variant="surface" isInvalid items={items} />
+    <RadioCardGroup variant="surface" invalid items={items} />
 
     <Fieldset
       errorMessage="This is required."
-      isInvalid
+      invalid
       legend="Which characters would you like to select?"
     >
       <RadioCardGroup items={items} />
@@ -644,7 +644,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.radioCard}
+      invalid={!!errors.radioCard}
       legend="Who is your favorite character?"
       errorMessage={errors.radioCard ? errors.radioCard.message : undefined}
     >

@@ -9,6 +9,7 @@ export const config: StorybookConfig = {
     "@storybook/addon-measure",
     "@storybook/addon-storysource",
     "storybook-dark-mode",
+    "storybook-i18n",
   ],
   core: { disableTelemetry: true },
   framework: "@storybook/react-vite",

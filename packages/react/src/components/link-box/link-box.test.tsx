@@ -27,11 +27,9 @@ describe("<LinkBox />", () => {
     await a11y(<Component />)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(LinkBox.Root.displayName).toBe("LinkBoxRoot")
-    expect(LinkBox.Root.__styled__).toBe("LinkBoxRoot")
     expect(LinkBox.Overlay.displayName).toBe("LinkBoxOverlay")
-    expect(LinkBox.Overlay.__styled__).toBe("LinkBoxOverlay")
   })
 
   test("sets `className` correctly", () => {

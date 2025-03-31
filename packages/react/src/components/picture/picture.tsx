@@ -62,7 +62,7 @@ export interface PictureProps extends ImageProps {
 /**
  * `Picture` is a component that uses the `picture` element to provide alternative images for different display or device scenarios.
  *
- * @see Docs https://yamada-ui.com/components/picture
+ * @see https://yamada-ui.com/components/picture
  */
 export const Picture: FC<PictureProps> = ({
   children,
@@ -142,9 +142,6 @@ export const Picture: FC<PictureProps> = ({
   )
 }
 
-Picture.displayName = "Picture"
-Picture.__styled__ = "Picture"
-
 export interface SourceProps extends HTMLStyledProps<"source"> {
   /**
    * The media query for the source.
@@ -165,6 +162,3 @@ export const Source: FC<SourceProps> = ({ media, ...rest }) => {
 
   return <styled.source media={media} {...rest} />
 }
-
-Source.displayName = "Source"
-Source.__styled__ = "Source"

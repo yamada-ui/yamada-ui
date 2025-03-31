@@ -7,7 +7,7 @@ import { tokens } from "./tokens"
 /**
  * The default theme of Yamada UI.
  *
- * @see Docs https://yamada-ui.com/styled-system/theming/default-theme
+ * @see https://yamada-ui.com/styled-system/theming/default-theme
  */
 export const defaultTheme = defineTheme({
   styles,

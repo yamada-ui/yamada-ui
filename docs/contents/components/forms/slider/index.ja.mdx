@@ -91,10 +91,10 @@ import {
 
 ### 逆方向にする
 
-逆方向にする場合は、`isReversed`を`true`に設定します。
+逆方向にする場合は、`reversed`を`true`に設定します。
 
 ```tsx
-<Slider isReversed />
+<Slider reversed />
 ```
 
 ### 最小値と最大値を設定する
@@ -144,13 +144,13 @@ return (
 
     <ButtonGroup as={Center} gap="md" w="full">
       <Button
-        isDisabled={value === 0}
+        disabled={value === 0}
         onClick={() => setValue((prev) => (prev !== 0 ? prev - 10 : prev))}
       >
         -10
       </Button>
       <Button
-        isDisabled={value === 100}
+        disabled={value === 100}
         colorScheme="blue"
         onClick={() => setValue((prev) => (prev !== 100 ? prev + 10 : prev))}
       >
@@ -163,14 +163,14 @@ return (
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Slider isDisabled />
+  <Slider disabled />
 
   <Fieldset
-    isDisabled
+    disabled
     legend="Sound volume"
     helperMessage="Please select your preferred volume."
   >
@@ -181,14 +181,14 @@ return (
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Slider isReadOnly />
+  <Slider readOnly />
 
   <Fieldset
-    isReadOnly
+    readOnly
     legend="Sound volume"
     helperMessage="Please select your preferred volume."
   >
@@ -199,17 +199,17 @@ return (
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx functional=true
 const [value, onChange] = useState<number>(15)
 
 return (
   <VStack>
-    <Slider isInvalid={value < 20} value={value} onChange={onChange} />
+    <Slider invalid={value < 20} value={value} onChange={onChange} />
 
     <Fieldset
-      isInvalid={value < 20}
+      invalid={value < 20}
       legend="Sound volume"
       errorMessage="Volume should be set to 20 or higher."
     >
@@ -247,7 +247,7 @@ return (
 
 ```tsx functional=true
 const [value, onChange] = useState<number>(50)
-const [isOpen, { on, off }] = useBoolean(false)
+const [open, { on, off }] = useBoolean(false)
 
 return (
   <Slider
@@ -265,7 +265,7 @@ return (
       )}
     </For>
 
-    <Tooltip placement="top" label={`${value}%`} isOpen={isOpen}>
+    <Tooltip placement="top" label={`${value}%`} open={open}>
       <SliderThumb />
     </Tooltip>
   </Slider>
@@ -397,7 +397,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.slider}
+      invalid={!!errors.slider}
       legend="Sound volume"
       errorMessage={errors.slider ? errors.slider.message : undefined}
     >

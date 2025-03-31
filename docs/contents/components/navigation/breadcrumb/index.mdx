@@ -21,7 +21,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@yamada-ui/react"
 
 ## Usage
 
-If it matches the current path, set `isCurrentPage` to `true`. In that case, it will be rendered as a `span` element instead of an `a` element.
+If it matches the current path, set `currentPage` to `true`. In that case, it will be rendered as a `span` element instead of an `a` element.
 
 ```tsx
 <Breadcrumb>
@@ -34,7 +34,7 @@ If it matches the current path, set `isCurrentPage` to `true`. In that case, it 
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
@@ -48,7 +48,7 @@ const items = useMemo<BreadcrumbGenerateItem[]>(
     { href: "/", name: "サイヤ人編" },
     { href: "/", name: "ナメック星編" },
     { href: "/", name: "人造人間編" },
-    { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    { href: "/", name: "魔人ブウ編", currentPage: true },
   ],
   [],
 )
@@ -69,7 +69,7 @@ return <Breadcrumb items={items} />
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
@@ -88,7 +88,7 @@ return <Breadcrumb items={items} />
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
@@ -107,13 +107,13 @@ return <Breadcrumb items={items} />
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
 ```
 
-Or, you can use ellipsis by setting a number to `startBoundaries` and `endBoundaries`, or by setting `isEllipsisPage` to `true` in `items`.
+Or, you can use ellipsis by setting a number to `startBoundaries` and `endBoundaries`, or by setting `ellipsisPage` to `true` in `items`.
 
 ```tsx functional=true
 const items = useMemo<BreadcrumbGenerateItem[]>(
@@ -121,7 +121,7 @@ const items = useMemo<BreadcrumbGenerateItem[]>(
     { href: "/", name: "サイヤ人編" },
     { href: "/", name: "ナメック星編" },
     { href: "/", name: "人造人間編" },
-    { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    { href: "/", name: "魔人ブウ編", currentPage: true },
   ],
   [],
 )
@@ -133,9 +133,9 @@ return <Breadcrumb items={items} startBoundaries={1} endBoundaries={1} />
 const items = useMemo<BreadcrumbGenerateItem[]>(
   () => [
     { href: "/", name: "サイヤ人編" },
-    { href: "/", name: "ナメック星編", isEllipsisPage: true },
-    { href: "/", name: "人造人間編", isEllipsisPage: true },
-    { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    { href: "/", name: "ナメック星編", ellipsisPage: true },
+    { href: "/", name: "人造人間編", ellipsisPage: true },
+    { href: "/", name: "魔人ブウ編", currentPage: true },
   ],
   [],
 )
@@ -172,7 +172,7 @@ return <Breadcrumb items={items} />
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
@@ -191,7 +191,7 @@ return <Breadcrumb items={items} />
   <BreadcrumbItem>
     <BreadcrumbLink href="/">人造人間編</BreadcrumbLink>
   </BreadcrumbItem>
-  <BreadcrumbItem isCurrentPage>
+  <BreadcrumbItem currentPage>
     <BreadcrumbLink href="/">魔人ブウ編</BreadcrumbLink>
   </BreadcrumbItem>
 </Breadcrumb>
@@ -203,7 +203,7 @@ const items = useMemo<BreadcrumbGenerateItem[]>(
     { href: "/", name: "サイヤ人編" },
     { href: "/", name: "ナメック星編" },
     { href: "/", name: "人造人間編" },
-    { href: "/", name: "魔人ブウ編", isCurrentPage: true },
+    { href: "/", name: "魔人ブウ編", currentPage: true },
   ],
   [],
 )

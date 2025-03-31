@@ -59,14 +59,14 @@ If the `children` of `PopoverTrigger` or `PopoverAnchor` are function components
 
 ### Accessing Internal State
 
-The `children` are provided with methods such as `isOpen` and `onClose`. You can use these to access the internal state.
+The `children` are provided with methods such as `open` and `onClose`. You can use these to access the internal state.
 
 ```tsx
 <Popover>
-  {({ isOpen }) => (
+  {({ open }) => (
     <>
       <PopoverTrigger>
-        <Button>{isOpen ? "Close" : "Open"} Popover</Button>
+        <Button>{open ? "Close" : "Open"} Popover</Button>
       </PopoverTrigger>
 
       <PopoverContent>
@@ -376,10 +376,10 @@ By default, it becomes active when the `PopoverTrigger` element is clicked. If y
 
 By default, it is rendered in the DOM regardless of whether it is active. In other words, it is rendered but hidden by style.
 
-If you want to delay rendering until it becomes active, set `isLazy` to `true`.
+If you want to delay rendering until it becomes active, set `lazy` to `true`.
 
 ```tsx
-<Popover isLazy>
+<Popover lazy>
   <PopoverTrigger>
     <Button>Open Popover</Button>
   </PopoverTrigger>
@@ -429,7 +429,7 @@ If you want to customize the `PopoverCloseButton` by passing `props`, etc., set 
 ### Controlling
 
 ```tsx functional=true
-const { isOpen, onClose, onToggle } = useDisclosure()
+const { open, onClose, onToggle } = useDisclosure()
 
 return (
   <>
@@ -437,7 +437,7 @@ return (
       Open Popover
     </Button>
 
-    <Popover isOpen={isOpen} onClose={onClose} closeOnBlur={false}>
+    <Popover open={open} onClose={onClose} closeOnBlur={false}>
       <PopoverTrigger>
         <Button colorScheme="primary">Target Popover</Button>
       </PopoverTrigger>

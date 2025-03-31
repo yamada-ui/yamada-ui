@@ -87,7 +87,7 @@ export interface AutocompleteProps
 /**
  * `Autocomplete` is a component used to display suggestions in response to user text input.
  *
- * @see Docs https://yamada-ui.com/components/forms/autocomplete
+ * @see https://yamada-ui.com/components/forms/autocomplete
  */
 export const Autocomplete: FC<AutocompleteProps> = ({ ref, ...props }) => {
   const [styles, mergedProps] = useComponentMultiStyle("Autocomplete", props)

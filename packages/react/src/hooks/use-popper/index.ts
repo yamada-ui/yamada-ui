@@ -69,7 +69,7 @@ export interface UsePopperProps {
    * Array of popper.js modifiers.
    * Check the docs to see the list of possible modifiers you can pass.
    *
-   * @see Docs https://popper.js.org/docs/v2/modifiers/
+   * @see https://popper.js.org/docs/v2/modifiers/
    */
   modifiers?: Partial<Modifier<string, any>>[]
   /**

@@ -50,14 +50,14 @@ import {
 
 ### Accessing Internal State
 
-`children` is provided with methods such as `isOpen` and `onClose`. You can use these to access the internal state.
+`children` is provided with methods such as `open` and `onClose`. You can use these to access the internal state.
 
 ```tsx
 <Menu>
-  {({ isOpen }) => (
+  {({ open }) => (
     <>
       <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
-        {isOpen ? "Close" : "Open"} Menu
+        {open ? "Close" : "Open"} Menu
       </MenuButton>
 
       <MenuList>
@@ -377,7 +377,7 @@ If you do not want the menu to close when focus is lost, set `closeOnSelect` to 
 
 ### Disabling Items
 
-To disable items, set `isDisabled` to `true`.
+To disable items, set `disabled` to `true`.
 
 ```tsx
 <Menu>
@@ -387,7 +387,7 @@ To disable items, set `isDisabled` to `true`.
 
   <MenuList>
     <MenuItem>Set status</MenuItem>
-    <MenuItem isDisabled>Edit Profile</MenuItem>
+    <MenuItem disabled>Edit Profile</MenuItem>
     <MenuItem>Preferences</MenuItem>
   </MenuList>
 </Menu>
@@ -395,7 +395,7 @@ To disable items, set `isDisabled` to `true`.
 
 ### Allowing Focus on Disabled Items
 
-To allow focus on disabled items, set `isFocusable` to `true`.
+To allow focus on disabled items, set `focusable` to `true`.
 
 ```tsx
 <Menu>
@@ -405,7 +405,7 @@ To allow focus on disabled items, set `isFocusable` to `true`.
 
   <MenuList>
     <MenuItem>Set status</MenuItem>
-    <MenuItem isDisabled isFocusable>
+    <MenuItem disabled focusable>
       Edit Profile
     </MenuItem>
     <MenuItem>Preferences</MenuItem>
@@ -417,10 +417,10 @@ To allow focus on disabled items, set `isFocusable` to `true`.
 
 By default, it is rendered in the DOM regardless of being active. In other words, it is rendered but hidden by style.
 
-If you want to delay rendering until it becomes active, set `isLazy` to `true`.
+If you want to delay rendering until it becomes active, set `lazy` to `true`.
 
 ```tsx
-<Menu isLazy>
+<Menu lazy>
   <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
     Menu
   </MenuButton>
@@ -436,10 +436,10 @@ If you want to delay rendering until it becomes active, set `isLazy` to `true`.
 ### Controlling
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
-  <Menu isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+  <Menu open={open} onOpen={onOpen} onClose={onClose}>
     <MenuButton as={Button} rightIcon={<ChevronDownIcon fontSize="xl" />}>
       Menu
     </MenuButton>

@@ -17,6 +17,11 @@ export type Path<Y> = {
   [M in keyof Y]-?: PathImpl<M, Y[M]>
 }[keyof Y]
 
+export type Value<
+  Y extends Dict,
+  M extends string,
+> = M extends `${infer D}.${infer H}` ? Value<Y[D], H> : Y[M]
+
 export interface Dict<Y = any> {
   [key: string]: Y
 }

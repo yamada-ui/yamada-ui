@@ -72,22 +72,22 @@ export const WithColorScheme: Story = () => {
   )
 }
 
-export const IsDisabled: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
-      <Switch isDisabled>disabled</Switch>
-      <Switch defaultIsChecked isDisabled>
+      <Switch disabled>disabled</Switch>
+      <Switch defaultChecked disabled>
         disabled
       </Switch>
     </>
   )
 }
 
-export const IsReadonly: Story = () => {
+export const Readonly: Story = () => {
   return (
     <>
-      <Switch isReadOnly>read only</Switch>
-      <Switch defaultIsChecked isReadOnly>
+      <Switch readOnly>read only</Switch>
+      <Switch defaultChecked readOnly>
         read only
       </Switch>
     </>
@@ -98,7 +98,7 @@ export const CustomControl: Story = () => {
   const [isChecked, { toggle }] = useBoolean(false)
 
   return (
-    <Switch isChecked={isChecked} onChange={toggle}>
+    <Switch checked={isChecked} onChange={toggle}>
       custom control
     </Switch>
   )
@@ -121,7 +121,7 @@ export const ReactHookForm: Story = () => {
         name="switch"
         control={control}
         render={({ field: { value, ...rest } }) => (
-          <Switch isChecked={value} {...rest}>
+          <Switch checked={value} {...rest}>
             Dark mode
           </Switch>
         )}
@@ -155,7 +155,7 @@ export const ReactHookFormWithDefaultValue: Story = () => {
         name="switch"
         control={control}
         render={({ field: { value, ...rest } }) => (
-          <Switch isChecked={value} {...rest}>
+          <Switch checked={value} {...rest}>
             Dark mode
           </Switch>
         )}

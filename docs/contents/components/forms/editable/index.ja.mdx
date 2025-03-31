@@ -56,10 +56,10 @@ import {
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
-<Editable isDisabled defaultValue="your email address">
+<Editable disabled defaultValue="your email address">
   <EditablePreview />
   <EditableInput />
 </Editable>
@@ -67,10 +67,10 @@ import {
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
-<Editable isReadOnly defaultValue="your email address">
+<Editable readOnly defaultValue="your email address">
   <EditablePreview />
   <EditableInput />
 </Editable>
@@ -78,10 +78,10 @@ import {
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
-<Editable isInvalid defaultValue="your email address">
+<Editable invalid defaultValue="your email address">
   <EditablePreview />
   <EditableInput />
 </Editable>
@@ -91,10 +91,10 @@ import {
 
 ```tsx functional=true
 const CustomControls = () => {
-  const { isEditing, getSubmitProps, getCancelProps, getEditProps } =
+  const { editing, getSubmitProps, getCancelProps, getEditProps } =
     useEditableControl()
 
-  return isEditing ? (
+  return editing ? (
     <ButtonGroup size="sm" gap="sm">
       <IconButton icon={<CheckIcon />} {...getSubmitProps()} />
       <IconButton icon={<XIcon />} {...getCancelProps()} />
@@ -110,7 +110,7 @@ return (
   <Editable
     display="flex"
     gap="sm"
-    isPreviewFocusable={false}
+    previewFocusable={false}
     defaultValue="オッス！オラ悟空！"
   >
     <EditablePreview w="full" />
@@ -144,7 +144,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.input}
+      invalid={!!errors.input}
       legend="Name"
       errorMessage={errors.input ? errors.input.message : undefined}
     >
@@ -162,7 +162,7 @@ return (
     </Fieldset>
 
     <Fieldset
-      isInvalid={!!errors.textarea}
+      invalid={!!errors.textarea}
       legend="Feedback"
       errorMessage={errors.textarea ? errors.textarea.message : undefined}
     >

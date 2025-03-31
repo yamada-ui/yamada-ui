@@ -3,6 +3,10 @@ import { render, renderHook, screen, waitFor } from "../../../test"
 import { FocusLock } from "./focus-lock"
 
 describe("<FocusLock />", () => {
+  test("sets `displayName` correctly", () => {
+    expect(FocusLock.name).toBe("FocusLock")
+  })
+
   test("correctly focuses on elements within the lock", () => {
     render(
       <>

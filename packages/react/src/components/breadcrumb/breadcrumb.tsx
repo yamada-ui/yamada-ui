@@ -53,7 +53,7 @@ export const {
 /**
  * `Breadcrumb` is a component that helps users understand the hierarchy of a website.
  *
- * @see Docs https://yamada-ui.com/components/breadcrumb
+ * @see https://yamada-ui.com/components/breadcrumb
  */
 export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
   ({ gap, separator, itemProps, listProps, separatorProps, ...rest }) => {

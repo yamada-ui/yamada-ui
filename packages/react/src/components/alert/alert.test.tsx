@@ -12,18 +12,11 @@ describe("<Alert />", () => {
     )
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Alert.Root.displayName).toBe("AlertRoot")
-    expect(Alert.Root.__styled__).toBe("AlertRoot")
-
     expect(Alert.Icon.displayName).toBe("AlertIcon")
-    expect(Alert.Icon.__styled__).toBe("AlertIcon")
-
     expect(Alert.Title.displayName).toBe("AlertTitle")
-    expect(Alert.Title.__styled__).toBe("AlertTitle")
-
     expect(Alert.Description.displayName).toBe("AlertDescription")
-    expect(Alert.Description.__styled__).toBe("AlertDescription")
   })
 
   test("sets `className` correctly", () => {

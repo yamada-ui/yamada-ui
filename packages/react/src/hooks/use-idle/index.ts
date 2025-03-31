@@ -21,7 +21,7 @@ export interface IdleOptions {
 /**
  * `useIdle` is a custom hook that detects whether the user has been idle for a certain amount of time in milliseconds.
  *
- * @see Docs https://yamada-ui.com/hooks/use-idle
+ * @see https://yamada-ui.com/hooks/use-idle
  */
 export const useIdle = (timeout: number, options?: IdleOptions) => {
   const { events, initialState } = { ...DEFAULT_OPTIONS, ...options }

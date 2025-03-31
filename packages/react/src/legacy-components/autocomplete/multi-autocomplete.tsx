@@ -134,7 +134,7 @@ export interface MultiAutocompleteProps
 /**
  * `MultiAutocomplete` is a component used to display suggestions based on user text input and to obtain multiple values.
  *
- * @see Docs https://yamada-ui.com/components/forms/multi-autocomplete
+ * @see https://yamada-ui.com/components/forms/multi-autocomplete
  */
 export const MultiAutocomplete: FC<MultiAutocompleteProps> = ({
   ref,

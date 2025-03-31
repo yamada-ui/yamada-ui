@@ -4,6 +4,6 @@ import { component, Icon } from "../icon"
 /**
  * `CircuitBoardIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const CircuitBoardIcon = component(Icon)({ as: CircuitBoard })

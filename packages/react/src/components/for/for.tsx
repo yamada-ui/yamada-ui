@@ -1,8 +1,8 @@
 import type { ReactNode } from "react"
-import type { HTMLUIProps } from "../../core"
+import type { HTMLStyledProps } from "../../core"
 import { isArray } from "../../utils"
 
-export interface ForProps<T> extends Omit<HTMLUIProps, "children"> {
+export interface ForProps<T> extends Omit<HTMLStyledProps, "children"> {
   /**
    * The render function to render each item in the array.
    */
@@ -34,4 +34,4 @@ export const For = <T extends any>({
 }
 
 For.displayName = "For"
-For.__ui__ = "For"
+For.__styled__ = "For"

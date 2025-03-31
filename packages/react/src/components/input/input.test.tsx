@@ -19,18 +19,18 @@ describe("<Input />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Input.displayName).toBe("Input")
-    expect(Input.__ui__).toBe("Input")
+    expect(Input.__styled__).toBe("Input")
 
     expect(InputGroup.Root.displayName).toBe("InputGroupRoot")
-    expect(InputGroup.Root.__ui__).toBe("InputGroupRoot")
+    expect(InputGroup.Root.__styled__).toBe("InputGroupRoot")
 
     expect(InputGroup.Element.displayName).toBe("InputElement")
-    expect(InputGroup.Element.__ui__).toBe("InputElement")
+    expect(InputGroup.Element.__styled__).toBe("InputElement")
 
     expect(InputGroup.Addon.displayName).toBe("InputAddon")
-    expect(InputGroup.Addon.__ui__).toBe("InputAddon")
+    expect(InputGroup.Addon.__styled__).toBe("InputAddon")
   })
 
   test("sets `className` correctly", () => {

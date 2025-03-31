@@ -8,9 +8,9 @@ describe("<Image />", () => {
     await a11y(<Image src={src} alt="image" />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Image.displayName).toBe("Image")
-    expect(Image.__ui__).toBe("Image")
+    expect(Image.__styled__).toBe("Image")
   })
 
   test("sets `className` correctly", () => {

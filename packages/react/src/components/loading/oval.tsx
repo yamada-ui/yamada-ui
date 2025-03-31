@@ -1,5 +1,5 @@
 import type { LoadingProps } from "./utils"
-import { ui } from "../../core"
+import { styled } from "../../core"
 import { Icon } from "../icon"
 import { initialProps, superProps, withContext } from "./utils"
 
@@ -16,7 +16,7 @@ export const Oval = withContext<"svg", OvalProps>(
       <Icon stroke="currentColor" viewBox="0 0 38 38" {...rest}>
         <g fill="none" fillRule="evenodd">
           <g strokeWidth="2" transform="translate(1 1)">
-            <ui.circle
+            <styled.circle
               {...(secondaryColor
                 ? { stroke: "{secondaryColor}" }
                 : { strokeOpacity: ".5" })}

@@ -6,9 +6,9 @@ describe("<Highlight />", () => {
     await a11y(<Highlight query="highlight">Highlight</Highlight>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Highlight.displayName).toBe("Highlight")
-    expect(Highlight.__ui__).toBe("Highlight")
+    expect(Highlight.__styled__).toBe("Highlight")
   })
 
   test("renders HTML tag correctly", () => {

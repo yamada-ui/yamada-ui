@@ -1,9 +1,11 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { CodeStyle } from "./code.style"
 import { createComponent } from "../../core"
 import { codeStyle } from "./code.style"
 
-export interface CodeProps extends HTMLUIProps<"code">, ThemeProps<CodeStyle> {}
+export interface CodeProps
+  extends HTMLStyledProps<"code">,
+    ThemeProps<CodeStyle> {}
 
 export const {
   PropsContext: CodePropsContext,

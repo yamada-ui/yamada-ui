@@ -1,4 +1,4 @@
-import { funcAll, handlerAll, noop, runIfFunc } from "./function"
+import { fnAll, handlerAll, noop, runIfFn } from "./function"
 
 describe("Function", () => {
   describe("noop", () => {
@@ -7,14 +7,14 @@ describe("Function", () => {
     })
   })
 
-  describe("runIfFunc", () => {
+  describe("runIfFn", () => {
     test("should run function if passed a function", () => {
-      const result = runIfFunc((a: number, b: number) => a + b, 2, 3)
+      const result = runIfFn((a: number, b: number) => a + b, 2, 3)
       expect(result).toBe(5)
     })
 
     test("should return value if passed a non-function", () => {
-      const result = runIfFunc("test")
+      const result = runIfFn("test")
       expect(result).toBe("test")
     })
   })
@@ -57,13 +57,13 @@ describe("Function", () => {
     })
   })
 
-  describe("funcAll", () => {
+  describe("fnAll", () => {
     test("should call all passed functions with the argument", () => {
       const mockFn1 = vi.fn()
       const mockFn2 = vi.fn()
       const arg = "test"
 
-      funcAll(mockFn1, mockFn2)(arg)
+      fnAll(mockFn1, mockFn2)(arg)
 
       expect(mockFn1).toHaveBeenCalledWith(arg)
       expect(mockFn2).toHaveBeenCalledWith(arg)
@@ -74,7 +74,7 @@ describe("Function", () => {
       const mockFn2 = vi.fn()
       const args = ["test1", "test2"]
 
-      funcAll(mockFn1, mockFn2)(...args)
+      fnAll(mockFn1, mockFn2)(...args)
 
       expect(mockFn1).toHaveBeenCalledWith(...args)
       expect(mockFn2).toHaveBeenCalledWith(...args)

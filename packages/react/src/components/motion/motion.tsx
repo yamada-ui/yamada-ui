@@ -1,15 +1,13 @@
-import type { ReactElement } from "react"
-import type { ComponentArgs, DOMElement } from "../../core"
 import type { Dict } from "../../utils"
-import type { MotionProps } from "./index.types"
+import type { HTMLMotionProps, MotionStyledComponent } from "./index.types"
 import { motion } from "motion/react"
 import { useMemo } from "react"
-import { ui } from "../../core"
+import { styled } from "../../core"
 import { cx } from "../../utils"
 
 const forwardProps = ["transition"]
 
-const Component = ui<"div", Dict>("div", { forwardProps })
+const Component = styled<"div", Dict>("div", { forwardProps })
 
 /**
  * `Motion` is a component that allows for the easy implementation of a wide variety of animations.
@@ -21,7 +19,7 @@ export const Motion = (({
   as: asProp = "div",
   className,
   ...rest
-}: MotionProps) => {
+}: HTMLMotionProps) => {
   const as = useMemo(() => motion.create(asProp), [asProp])
 
   return (
@@ -32,11 +30,7 @@ export const Motion = (({
       {...rest}
     />
   )
-}) as ComponentArgs & {
-  <Y extends DOMElement = "div">(
-    props: MotionProps<Y> & { as?: Y },
-  ): ReactElement
-}
+}) as MotionStyledComponent<"div">
 
 Motion.displayName = "Motion"
-Motion.__ui__ = "Motion"
+Motion.__styled__ = "Motion"

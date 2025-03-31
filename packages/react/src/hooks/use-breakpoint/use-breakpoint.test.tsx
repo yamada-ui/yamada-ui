@@ -3,7 +3,7 @@ import type { FC } from "react"
 import type { ThemeConfig } from "../../core"
 import { matchMedia } from "@yamada-ui/test"
 import { render, renderHook, screen, waitFor } from "../../../test"
-import { ui } from "../../core"
+import { styled } from "../../core"
 import { ThemeProvider } from "../../providers/theme-provider"
 import { defaultConfig, defaultTheme } from "../../theme"
 import { noop } from "../../utils"
@@ -70,14 +70,14 @@ describe("useBreakpoint", () => {
     const Component: FC = () => {
       const breakpoint = useBreakpoint()
 
-      return <ui.p>{breakpoint}</ui.p>
+      return <styled.p>{breakpoint}</styled.p>
     }
 
     render(
       <ThemeProvider config={config} theme={defaultTheme}>
-        <ui.div ref={containerRef} containerType="inline-size">
+        <styled.div ref={containerRef} containerType="inline-size">
           <Component />
-        </ui.div>
+        </styled.div>
       </ThemeProvider>,
     )
 

@@ -1,9 +1,9 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { CenterStyle } from "./center.style"
 import { createComponent } from "../../core"
 import { centerStyle } from "./center.style"
 
-export interface CenterProps extends HTMLUIProps, ThemeProps<CenterStyle> {}
+export interface CenterProps extends HTMLStyledProps, ThemeProps<CenterStyle> {}
 
 export const {
   PropsContext: CenterPropsContext,

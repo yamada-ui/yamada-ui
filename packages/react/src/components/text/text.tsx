@@ -1,4 +1,4 @@
-import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { TextStyle } from "./text.style"
 import { createComponent } from "../../core"
 import { textStyle } from "./text.style"
@@ -19,7 +19,7 @@ interface TextOptions {
 }
 
 export interface TextProps
-  extends HTMLUIProps<"p">,
+  extends HTMLStyledProps<"p">,
     ThemeProps<TextStyle>,
     TextOptions {}
 

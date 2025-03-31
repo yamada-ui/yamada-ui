@@ -1,4 +1,4 @@
-import type { FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { InputStyle } from "./input.style"
 import type { UseInputBorderProps } from "./use-input-border"
@@ -8,7 +8,7 @@ import { inputStyle } from "./input.style"
 import { useInputBorder } from "./use-input-border"
 
 export interface InputProps
-  extends Omit<HTMLUIProps<"input">, "size">,
+  extends Omit<HTMLStyledProps<"input">, "size">,
     ThemeProps<InputStyle>,
     UseInputBorderProps,
     FieldProps {

@@ -3,7 +3,7 @@ import type {
   ReactElement,
   ReactNode,
 } from "react"
-import type { HTMLProps, HTMLUIProps, PropGetter } from "../../core"
+import type { HTMLProps, HTMLStyledProps, PropGetter } from "../../core"
 import { useCallback, useState } from "react"
 import { dataAttr, handlerAll } from "../../utils"
 
@@ -28,19 +28,19 @@ export interface UseAvatarProps extends HTMLProps {
   /**
    * The image url of the avatar.
    */
-  src?: HTMLUIProps<"img">["src"]
+  src?: HTMLStyledProps<"img">["src"]
   /**
    * List of sources to use for different screen resolutions.
    */
-  srcSet?: HTMLUIProps<"img">["srcSet"]
+  srcSet?: HTMLStyledProps<"img">["srcSet"]
   /**
    * The `HTMLImageElement` property `alt`.
    */
-  alt?: HTMLUIProps<"img">["alt"]
+  alt?: HTMLStyledProps<"img">["alt"]
   /**
    * The `HTMLImageElement` property `crossOrigin`.
    */
-  crossOrigin?: HTMLUIProps<"img">["crossOrigin"]
+  crossOrigin?: HTMLStyledProps<"img">["crossOrigin"]
   /**
    * The fallback text to display if the image is not provided.
    */
@@ -56,7 +56,7 @@ export interface UseAvatarProps extends HTMLProps {
   /**
    * Defines loading strategy.
    */
-  loading?: HTMLUIProps<"img">["loading"]
+  loading?: HTMLStyledProps<"img">["loading"]
   /**
    * Defining which referrer is sent when fetching the resource.
    *

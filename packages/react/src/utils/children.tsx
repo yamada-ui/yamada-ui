@@ -16,14 +16,14 @@ export function isValidElement(child: any): child is React.ReactNode {
 export function isSomeElement(child: any, type: any): boolean {
   if (child.type === type) return true
 
-  if (!!child.__ui__ && !!type.__ui__) {
-    if (child.__ui__ === type.__ui__) return true
+  if (!!child.__styled__ && !!type.__styled__) {
+    if (child.__styled__ === type.__styled__) return true
   }
 
   const payload = child.type._payload
 
-  if (!!payload?.value?.__ui__ && !!type.__ui__) {
-    if (payload?.value?.__ui__ === type.__ui__) return true
+  if (!!payload?.value?.__styled__ && !!type.__styled__) {
+    if (payload?.value?.__styled__ === type.__styled__) return true
   }
 
   return false

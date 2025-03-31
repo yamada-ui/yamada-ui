@@ -1,9 +1,11 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { KbdStyle } from "./kbd.style"
 import { createComponent } from "../../core"
 import { kbdStyle } from "./kbd.style"
 
-export interface KbdProps extends HTMLUIProps<"kbd">, ThemeProps<KbdStyle> {}
+export interface KbdProps
+  extends HTMLStyledProps<"kbd">,
+    ThemeProps<KbdStyle> {}
 
 export const {
   PropsContext: KbdPropsContext,

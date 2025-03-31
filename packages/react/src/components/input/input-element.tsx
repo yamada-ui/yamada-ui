@@ -1,11 +1,11 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { InputProps } from "./input"
 import type { InputElementStyle } from "./input-element.style"
 import { createComponent, mergeVars } from "../../core"
 import { inputElementStyle } from "./input-element.style"
 
 export interface InputElementProps
-  extends HTMLUIProps,
+  extends HTMLStyledProps,
     ThemeProps<InputElementStyle>,
     Pick<InputProps, "errorBorderColor" | "focusBorderColor"> {}
 

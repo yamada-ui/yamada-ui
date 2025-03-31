@@ -2,7 +2,7 @@ import type { CSSAnimationObject, Token } from "../../core"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { animation, css } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
-import { getOwnerWindow, isArray, isUndefined, runIfFunc } from "../../utils"
+import { getOwnerWindow, isArray, isUndefined, runIfFn } from "../../utils"
 import { useBoolean } from "../use-boolean"
 import { useEventListener } from "../use-event-listener"
 
@@ -95,7 +95,7 @@ export const useDynamicAnimation = <
         }
       })() as (keyof T)[] | keyof T | undefined
 
-      const keyOrArray = runIfFunc(keysOrFunc, args)
+      const keyOrArray = runIfFn(keysOrFunc, args)
 
       keys.current = isArray(keyOrArray)
         ? keyOrArray.map(String)

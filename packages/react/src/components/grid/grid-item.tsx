@@ -1,4 +1,4 @@
-import type { CSSProps, HTMLUIProps, StyleValue } from "../../core"
+import type { CSSProps, HTMLStyledProps, StyleValue } from "../../core"
 import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"
 
@@ -33,7 +33,7 @@ interface GridItemOptions {
   rowStart?: CSSProps["gridRowStart"]
 }
 
-export interface GridItemProps extends HTMLUIProps, GridItemOptions {}
+export interface GridItemProps extends HTMLStyledProps, GridItemOptions {}
 
 export const {
   PropsContext: GridItemPropsContext,

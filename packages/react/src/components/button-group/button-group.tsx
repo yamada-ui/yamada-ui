@@ -44,4 +44,4 @@ export const ButtonGroup: FC<ButtonGroupProps> = ({
 }
 
 ButtonGroup.displayName = "ButtonGroup"
-ButtonGroup.__ui__ = "ButtonGroup"
+ButtonGroup.__styled__ = "ButtonGroup"

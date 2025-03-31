@@ -13,9 +13,9 @@ describe("<HStack />", () => {
     await a11y(<TestComponent />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(HStack.displayName).toBe("StackHorizontal")
-    expect(HStack.__ui__).toBe("StackHorizontal")
+    expect(HStack.__styled__).toBe("StackHorizontal")
   })
 
   test("sets `className` correctly", () => {

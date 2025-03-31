@@ -1,10 +1,10 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { ContainerStyle } from "./container.style"
 import { createSlotComponent } from "../../core"
 import { containerStyle } from "./container.style"
 
 export interface ContainerRootProps
-  extends HTMLUIProps<"section">,
+  extends HTMLStyledProps<"section">,
     ThemeProps<ContainerStyle> {}
 
 export const {
@@ -24,14 +24,14 @@ export const {
  */
 export const ContainerRoot = withProvider("section", "root")()
 
-export interface ContainerHeaderProps extends HTMLUIProps<"header"> {}
+export interface ContainerHeaderProps extends HTMLStyledProps<"header"> {}
 
 export const ContainerHeader = withContext("header", "header")()
 
-export interface ContainerBodyProps extends HTMLUIProps {}
+export interface ContainerBodyProps extends HTMLStyledProps {}
 
 export const ContainerBody = withContext("div", "body")()
 
-export interface ContainerFooterProps extends HTMLUIProps<"footer"> {}
+export interface ContainerFooterProps extends HTMLStyledProps<"footer"> {}
 
 export const ContainerFooter = withContext("footer", "footer")()

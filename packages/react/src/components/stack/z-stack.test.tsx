@@ -11,9 +11,9 @@ describe("<ZStack />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(ZStack.displayName).toBe("StackDepth")
-    expect(ZStack.__ui__).toBe("StackDepth")
+    expect(ZStack.__styled__).toBe("StackDepth")
   })
 
   test("sets `className` correctly", () => {

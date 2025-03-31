@@ -13,9 +13,9 @@ describe("<Button />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(ButtonGroup.displayName).toBe("ButtonGroup")
-    expect(ButtonGroup.__ui__).toBe("ButtonGroup")
+    expect(ButtonGroup.__styled__).toBe("ButtonGroup")
   })
 
   test("sets `className` correctly", () => {

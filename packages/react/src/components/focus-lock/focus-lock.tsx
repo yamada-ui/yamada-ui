@@ -105,4 +105,4 @@ export const FocusLock: FC<FocusLockProps> = ({
   )
 }
 
-FocusLock.__ui__ = "FocusLock"
+FocusLock.__styled__ = "FocusLock"

@@ -7,9 +7,9 @@ describe("<FadeScale />", () => {
     await a11y(<FadeScale />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(FadeScale.displayName).toBe("FadeScale")
-    expect(FadeScale.__ui__).toBe("FadeScale")
+    expect(FadeScale.__styled__).toBe("FadeScale")
   })
 
   test("sets `className` correctly", () => {

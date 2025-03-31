@@ -7,9 +7,9 @@ describe("<Box />", () => {
     await a11y(<Box>Box</Box>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Box.displayName).toBe("Box")
-    expect(Box.__ui__).toBe("Box")
+    expect(Box.__styled__).toBe("Box")
   })
 
   test("renders HTML tag correctly", () => {

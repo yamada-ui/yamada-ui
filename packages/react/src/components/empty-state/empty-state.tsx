@@ -1,12 +1,12 @@
 import type { ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { EmptyState } from "./empty-state.style"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { findChild, getValidChildren, isEmpty, omitChildren } from "../../utils"
 import { emptyState } from "./empty-state.style"
 
 export interface EmptyStateRootProps
-  extends Omit<HTMLUIProps, "title">,
+  extends Omit<HTMLStyledProps, "title">,
     ThemeProps<EmptyState> {
   /**
    * The empty state description to use.
@@ -82,7 +82,7 @@ export const EmptyStateRoot = withProvider<"div", EmptyStateRootProps>(
       : children
 
     return (
-      <ui.div {...rest}>
+      <styled.div {...rest}>
         {customIndicator ?? (
           <EmptyStateIndicator {...indicatorProps}>
             {indicator}
@@ -104,34 +104,34 @@ export const EmptyStateRoot = withProvider<"div", EmptyStateRootProps>(
         )}
 
         {computedChildren}
-      </ui.div>
+      </styled.div>
     )
   },
   "root",
 )()
 
-export interface EmptyStateIndicatorProps extends HTMLUIProps {}
+export interface EmptyStateIndicatorProps extends HTMLStyledProps {}
 
 export const EmptyStateIndicator = withContext<"div", EmptyStateIndicatorProps>(
   "div",
   "indicator",
 )()
 
-export interface EmptyStateContentProps extends HTMLUIProps {}
+export interface EmptyStateContentProps extends HTMLStyledProps {}
 
 export const EmptyStateContent = withContext<"div", EmptyStateContentProps>(
   "div",
   "content",
 )()
 
-export interface EmptyStateTitleProps extends HTMLUIProps<"h3"> {}
+export interface EmptyStateTitleProps extends HTMLStyledProps<"h3"> {}
 
 export const EmptyStateTitle = withContext<"h3", EmptyStateTitleProps>(
   "h3",
   "title",
 )()
 
-export interface EmptyStateDescriptionProps extends HTMLUIProps<"p"> {}
+export interface EmptyStateDescriptionProps extends HTMLStyledProps<"p"> {}
 
 export const EmptyStateDescription = withContext<
   "p",

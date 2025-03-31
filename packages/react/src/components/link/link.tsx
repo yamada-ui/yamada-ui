@@ -1,9 +1,9 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { LinkStyle } from "./link.style"
 import { createComponent } from "../../core"
 import { linkStyle } from "./link.style"
 
-export interface LinkProps extends HTMLUIProps<"a">, ThemeProps<LinkStyle> {
+export interface LinkProps extends HTMLStyledProps<"a">, ThemeProps<LinkStyle> {
   /**
    * If `true`, the link will open in new tab.
    *

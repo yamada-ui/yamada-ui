@@ -7,11 +7,11 @@ import type { StyledTheme, UsageTheme } from "../theme"
 
 export type DOMElement = keyof React.JSX.IntrinsicElements
 
-export interface UIProps extends CSSProps {
-  /**
-   * The HTML element to render.
-   */
-  as?: As
+export interface StyledProps extends CSSProps {
+  // /**
+  //  * The HTML element to render.
+  //  */
+  // as?: As
   /**
    * Merges its props onto its immediate child.
    */
@@ -19,6 +19,8 @@ export interface UIProps extends CSSProps {
 }
 
 export type WithoutAs<Y extends object> = Omit<Y, "as">
+
+export type WithoutRef<Y extends object> = Omit<Y, "ref">
 
 export interface InterpolationProps extends StyleProps, PseudoProps {
   theme: StyledTheme<UsageTheme>
@@ -31,21 +33,21 @@ type ComponentConditionalProps<
   Y extends As,
   M extends As,
   D extends object = {},
-> =
-  | OmitProps<React.ComponentProps<M>, D>
-  | OmitProps<React.ComponentProps<Y>, D>
+> = Y extends M
+  ? OmitProps<React.ComponentProps<Y>, D>
+  : OmitProps<React.ComponentProps<M>, D>
 
 type ComponentProps<
   Y extends As,
   M extends As,
   D extends object = {},
-> = ComponentConditionalProps<Y, M, D> & {
+> = ComponentConditionalProps<Y, M, WithoutRef<D>> & {
   as?: M
 }
 
 export interface ComponentArgs
   extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {
-  __ui__?: string
+  __styled__?: string
 }
 
 export interface Component<Y extends As, D extends object = {}>
@@ -61,11 +63,11 @@ export interface FunctionComponent<Y = {}> extends ComponentArgs {
 
 export type As = React.ElementType
 
-export interface UIComponent<Y extends As = As, M extends object = {}>
-  extends Component<Y, Merge<UIProps, M>> {}
+export interface StyledComponent<Y extends As = As, M extends object = {}>
+  extends Component<Y, Merge<StyledProps, M>> {}
 
 export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
-  ref?: React.ComponentRef<Y>
+  ref?: React.Ref<React.ComponentRef<Y>>
 }
 
 export interface HTMLDataAttributes {
@@ -73,19 +75,19 @@ export interface HTMLDataAttributes {
 }
 
 export type HTMLProps<Y extends DOMElement = "div"> = HTMLDataAttributes &
-  Omit<React.JSX.IntrinsicElements[Y], "size" | keyof UIProps>
+  Omit<React.JSX.IntrinsicElements[Y], "size" | keyof StyledProps>
 
-export type HTMLUIProps<Y extends DOMElement = "div"> = Merge<
+export type HTMLStyledProps<Y extends DOMElement = "div"> = Merge<
   HTMLProps<Y>,
-  UIProps
+  StyledProps
 >
 
-export type HTMLUIPropsWithoutAs<Y extends DOMElement = "div"> = WithoutAs<
-  HTMLUIProps<Y>
+export type HTMLStyledPropsWithoutAs<Y extends DOMElement = "div"> = WithoutAs<
+  HTMLStyledProps<Y>
 >
 
-export type HTMLUIPropsWithoutRef<Y extends DOMElement = "div"> = Omit<
-  HTMLUIProps<Y>,
+export type HTMLStyledPropsWithoutRef<Y extends DOMElement = "div"> = Omit<
+  HTMLStyledProps<Y>,
   "ref"
 >
 

@@ -1,7 +1,7 @@
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
-  MotionProps,
+  HTMLMotionProps,
   MotionTransitionVariants,
   WithTransitionProps,
 } from "../motion"
@@ -39,7 +39,7 @@ export const fadeScaleVariants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface FadeScaleProps
-  extends WithTransitionProps<MotionProps>,
+  extends WithTransitionProps<HTMLMotionProps>,
     ThemeProps<FadeScaleStyle> {
   /**
    * If `true`, the element will transition back to exit state.

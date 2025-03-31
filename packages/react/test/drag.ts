@@ -1,5 +1,5 @@
 import type { UserEvent } from "@testing-library/user-event"
-import { runIfFunc } from "@yamada-ui/utils"
+import { runIfFn } from "@yamada-ui/utils"
 import { wait } from "./utils"
 
 const DEFAULT_COUNT = 11
@@ -65,8 +65,8 @@ export const drag =
 
     for (const i of timeline) {
       const isStart = i === 0
-      const keys = runIfFunc(_keys, i)
-      const coords = runIfFunc(_coords, i)
+      const keys = runIfFn(_keys, i)
+      const coords = runIfFn(_coords, i)
 
       const input: PointerInput = {}
 

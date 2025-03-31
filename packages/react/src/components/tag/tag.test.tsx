@@ -8,9 +8,9 @@ describe("<Tag />", () => {
     await a11y(<Tag>Tag</Tag>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Tag.displayName).toBe("TagRoot")
-    expect(Tag.__ui__).toBe("TagRoot")
+    expect(Tag.__styled__).toBe("TagRoot")
   })
 
   test("sets `className` correctly", () => {

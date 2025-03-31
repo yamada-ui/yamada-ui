@@ -1,16 +1,16 @@
 import type { PropsWithChildren, ReactNode } from "react"
-import type { FC, HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { FC, HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ButtonProps } from "../button"
 import type { CloseButtonProps } from "../close-button"
 import type { FocusLockProps } from "../focus-lock"
-import type { MotionProps, MotionTransitionProps } from "../motion"
+import type { HTMLMotionProps, MotionTransitionProps } from "../motion"
 import type { PortalProps } from "../portal"
 import type { ModalStyle } from "./modal.style"
 import type { UseModalProps, UseModalReturn } from "./use-modal"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { findChildren, getValidChildren, wrapOrPassProps } from "../../utils"
 import { Button } from "../button"
 import { CloseButton } from "../close-button"
@@ -179,7 +179,7 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
                   enabled={blockScrollOnMount}
                   forwardProps
                 >
-                  <ui.div {...getRootProps()}>
+                  <styled.div {...getRootProps()}>
                     {customOverlay ?? (withOverlay ? <ModalOverlay /> : null)}
 
                     {hasChildren ? (
@@ -198,7 +198,7 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
                         onSuccess={onSuccess}
                       />
                     )}
-                  </ui.div>
+                  </styled.div>
                 </RemoveScroll>
               </FocusLock>
             </Portal>
@@ -243,7 +243,7 @@ export const ModalCloseButton = withContext<"button", ModalCloseButtonProps>(
   return { ...getCloseButtonProps(props) }
 })
 
-export interface ModalOverlayProps extends MotionProps {}
+export interface ModalOverlayProps extends HTMLMotionProps {}
 
 export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
   const { animationScheme, duration, getOverlayProps } = useModalContext()
@@ -259,7 +259,7 @@ export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
             variants: fadeVariants,
           }
         : {})}
-      {...(getOverlayProps(props as HTMLProps) as MotionProps)}
+      {...(getOverlayProps(props as HTMLProps) as HTMLMotionProps)}
     />
   )
 }, "overlay")()
@@ -307,10 +307,10 @@ const getAnimationProps = (
 }
 
 export interface ModalContentProps
-  extends Omit<MotionProps<"section">, "children">,
+  extends Omit<HTMLMotionProps<"section">, "children">,
     PropsWithChildren {}
 
-export const ModalContent = withContext<"div", ModalContentProps>(
+export const ModalContent = withContext<"section", ModalContentProps>(
   ({ children, ...rest }) => {
     const { animationScheme, duration, withCloseButton, getContentProps } =
       useModalContext()
@@ -326,7 +326,7 @@ export const ModalContent = withContext<"div", ModalContentProps>(
         {...getAnimationProps(animationScheme, duration)}
         {...(getContentProps(
           rest as HTMLProps<"section">,
-        ) as MotionProps<"section">)}
+        ) as HTMLMotionProps<"section">)}
       >
         {customCloseButton ?? (withCloseButton ? <ModalCloseButton /> : null)}
 
@@ -427,7 +427,7 @@ export const ShorthandModalContent: FC<ShorthandModalContentProps> = ({
   )
 }
 
-export interface ModalHeaderProps extends HTMLUIProps<"header"> {}
+export interface ModalHeaderProps extends HTMLStyledProps<"header"> {}
 
 export const ModalHeader = withContext<"header", ModalHeaderProps>(
   "header",
@@ -438,7 +438,7 @@ export const ModalHeader = withContext<"header", ModalHeaderProps>(
   return { ...getHeaderProps(props) }
 })
 
-export interface ModalTitleProps extends HTMLUIProps<"h2"> {}
+export interface ModalTitleProps extends HTMLStyledProps<"h2"> {}
 
 export const ModalTitle = withContext<"h2", ModalTitleProps>("h2", "title")(
   undefined,
@@ -449,7 +449,7 @@ export const ModalTitle = withContext<"h2", ModalTitleProps>("h2", "title")(
   },
 )
 
-export interface ModalBodyProps extends HTMLUIProps {}
+export interface ModalBodyProps extends HTMLStyledProps {}
 
 export const ModalBody = withContext<"div", ModalBodyProps>("div", "body")(
   undefined,
@@ -460,7 +460,7 @@ export const ModalBody = withContext<"div", ModalBodyProps>("div", "body")(
   },
 )
 
-export interface ModalFooterProps extends HTMLUIProps<"footer"> {}
+export interface ModalFooterProps extends HTMLStyledProps<"footer"> {}
 
 export const ModalFooter = withContext<"footer", ModalFooterProps>(
   "footer",

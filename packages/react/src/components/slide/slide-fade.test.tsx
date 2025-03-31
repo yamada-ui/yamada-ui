@@ -7,9 +7,9 @@ describe("<SlideFade />", () => {
     await a11y(<SlideFade />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(SlideFade.displayName).toBe("SlideFade")
-    expect(SlideFade.__ui__).toBe("SlideFade")
+    expect(SlideFade.__styled__).toBe("SlideFade")
   })
 
   test("sets `className` correctly", () => {

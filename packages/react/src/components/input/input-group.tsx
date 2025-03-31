@@ -86,4 +86,4 @@ export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
 }
 
 InputGroupRoot.displayName = "InputGroupRoot"
-InputGroupRoot.__ui__ = "InputGroupRoot"
+InputGroupRoot.__styled__ = "InputGroupRoot"

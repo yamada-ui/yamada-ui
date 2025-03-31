@@ -13,9 +13,9 @@ describe("<IconButton />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(IconButton.displayName).toBe("IconButton")
-    expect(IconButton.__ui__).toBe("IconButton")
+    expect(IconButton.__styled__).toBe("IconButton")
   })
 
   test("sets `className` correctly", () => {

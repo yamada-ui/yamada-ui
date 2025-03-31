@@ -1,9 +1,11 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { MarkStyle } from "./mark.style"
 import { createComponent } from "../../core"
 import { markStyle } from "./mark.style"
 
-export interface MarkProps extends HTMLUIProps<"mark">, ThemeProps<MarkStyle> {}
+export interface MarkProps
+  extends HTMLStyledProps<"mark">,
+    ThemeProps<MarkStyle> {}
 
 export const {
   PropsContext: MarkPropsContext,

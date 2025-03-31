@@ -1,7 +1,7 @@
-import type { FC, HTMLUIProps, ThemeTokens } from "../../core"
+import type { FC, HTMLStyledProps, ThemeTokens } from "../../core"
 import type { ImageProps } from "../image"
 import { useCallback, useMemo } from "react"
-import { ui } from "../../core"
+import { styled } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
 import { getPx, isUndefined } from "../../utils"
 import { Image } from "../image"
@@ -56,7 +56,7 @@ export interface PictureProps extends ImageProps {
   /**
    * The props for the picture element.
    */
-  pictureProps?: HTMLUIProps<"picture">
+  pictureProps?: HTMLStyledProps<"picture">
 }
 
 /**
@@ -124,13 +124,13 @@ export const Picture: FC<PictureProps> = ({
   const sourceElements = useMemo(
     () =>
       sources.map(({ maxW: _maxW, minW: _minW, ...rest }, index) => (
-        <ui.source key={index} {...rest} />
+        <styled.source key={index} {...rest} />
       )),
     [sources],
   )
 
   return (
-    <ui.picture {...pictureProps}>
+    <styled.picture {...pictureProps}>
       {children ?? (
         <>
           {sourceElements}
@@ -138,14 +138,14 @@ export const Picture: FC<PictureProps> = ({
           <Image {...rest} />
         </>
       )}
-    </ui.picture>
+    </styled.picture>
   )
 }
 
 Picture.displayName = "Picture"
-Picture.__ui__ = "Picture"
+Picture.__styled__ = "Picture"
 
-export interface SourceProps extends HTMLUIProps<"source"> {
+export interface SourceProps extends HTMLStyledProps<"source"> {
   /**
    * The media query for the source.
    */
@@ -163,8 +163,8 @@ export const Source: FC<SourceProps> = ({ media, ...rest }) => {
 
   if (query) media = query.replace(searchValue, "")
 
-  return <ui.source media={media} {...rest} />
+  return <styled.source media={media} {...rest} />
 }
 
 Source.displayName = "Source"
-Source.__ui__ = "Source"
+Source.__styled__ = "Source"

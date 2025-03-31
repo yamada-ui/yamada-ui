@@ -6,9 +6,9 @@ describe("<Bleed />", () => {
     await a11y(<Bleed>Box</Bleed>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` and `__styled__` correctly", () => {
     expect(Bleed.displayName).toBe("Bleed")
-    expect(Bleed.__ui__).toBe("Bleed")
+    expect(Bleed.__styled__).toBe("Bleed")
   })
 
   test("sets `className` correctly", () => {

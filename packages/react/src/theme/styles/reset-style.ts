@@ -61,8 +61,9 @@ export const resetStyle = defineStyles.resetStyle({
     fontSize: "1em",
   },
 
-  "img, svg, video, canvas, audio, iframe, embed, object": {
-    display: "block",
+  fieldset: {
+    border: 0,
+    minWidth: 0,
   },
 
   "h1, h2, h3, h4, h5, h6": {
@@ -86,6 +87,10 @@ export const resetStyle = defineStyles.resetStyle({
     WebkitTextSizeAdjust: "100%",
   },
 
+  "img, svg, video, canvas, audio, iframe, embed, object": {
+    display: "block",
+  },
+
   "input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-outer-spin-button":
     {
       display: "none",
@@ -93,6 +98,12 @@ export const resetStyle = defineStyles.resetStyle({
 
   "input[type='search']": {
     outlineOffset: "-2px",
+  },
+
+  legend: {
+    display: "table",
+    float: "left",
+    width: "100%",
   },
 
   mark: {

@@ -10,7 +10,7 @@ export interface UseMediaQueryOptions {
 /**
  * `useMediaQuery` is a custom hook that detects whether it matches a single or multiple media queries.
  *
- * @see Docs https://yamada-ui.com/hooks/use-media-query
+ * @see https://yamada-ui.com/hooks/use-media-query
  */
 export const useMediaQuery = (
   query: string | string[],

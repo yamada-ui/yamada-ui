@@ -1,4 +1,4 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
 import type { TextareaStyle } from "./textarea.style"
@@ -10,7 +10,7 @@ import { textareaStyle } from "./textarea.style"
 import { useTextarea } from "./use-textarea"
 
 export interface TextareaProps
-  extends HTMLUIProps<"textarea">,
+  extends HTMLStyledProps<"textarea">,
     ThemeProps<TextareaStyle>,
     UseInputBorderProps,
     FieldProps,
@@ -25,7 +25,7 @@ export const {
 /**
  * `Textarea` is a component used to obtain multi-line text input.
  *
- * @see Docs https://yamada-ui.com/components/textarea
+ * @see https://yamada-ui.com/components/textarea
  */
 export const Textarea = withContext("textarea")({ rows: 2 }, (props) => {
   const {

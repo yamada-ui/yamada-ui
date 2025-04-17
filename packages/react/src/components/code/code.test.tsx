@@ -6,9 +6,8 @@ describe("<Code />", () => {
     await a11y(<Code>console.log("Hello, Yamada!")</Code>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Code.displayName).toBe("Code")
-    expect(Code.__ui__).toBe("Code")
   })
 
   test("sets `className` correctly", () => {

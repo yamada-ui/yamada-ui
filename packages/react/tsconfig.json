@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src"],
+  "include": ["@types", "src"],
   "exclude": [
     // TODO: Remove legacy-components
     "src/legacy-components/**/*",

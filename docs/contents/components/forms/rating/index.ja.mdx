@@ -199,13 +199,13 @@ return (
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Rating isDisabled defaultValue={3} />
+  <Rating disabled defaultValue={3} />
 
-  <Fieldset isDisabled legend="How satisfied are you with Yamada UI?">
+  <Fieldset disabled legend="How satisfied are you with Yamada UI?">
     <Rating defaultValue={3} />
   </Fieldset>
 </VStack>
@@ -213,13 +213,13 @@ return (
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Rating isReadOnly defaultValue={3} />
+  <Rating readOnly defaultValue={3} />
 
-  <Fieldset isReadOnly legend="How satisfied are you with Yamada UI?">
+  <Fieldset readOnly legend="How satisfied are you with Yamada UI?">
     <Rating defaultValue={3} />
   </Fieldset>
 </VStack>
@@ -252,7 +252,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.rating}
+      invalid={!!errors.rating}
       legend="How satisfied are you with Yamada UI?"
       errorMessage={errors.rating ? errors.rating.message : undefined}
     >

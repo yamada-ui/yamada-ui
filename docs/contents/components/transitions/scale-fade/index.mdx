@@ -17,16 +17,16 @@ import { ScaleFade } from "@yamada-ui/react"
 
 ## Usage
 
-To control the visibility, set `isOpen`.
+To control the visibility, set `open`.
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <ScaleFade isOpen={isOpen}>
+    <ScaleFade open={open}>
       <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>
@@ -40,13 +40,13 @@ return (
 To change the initial scale value, set a number to `scale`. The element will scale based on this value, starting from and shrinking to it. The default is `0.95`.
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <ScaleFade isOpen={isOpen} scale={0.75}>
+    <ScaleFade open={open} scale={0.75}>
       <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>
@@ -60,13 +60,13 @@ return (
 To change the duration, set a number (in seconds) to `duration`.
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <ScaleFade isOpen={isOpen} duration={0.4}>
+    <ScaleFade open={open} duration={0.4}>
       <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>
@@ -80,13 +80,13 @@ return (
 To unmount the component when it is not visible, set `unmountOnExit` to `true`.
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <ScaleFade isOpen={isOpen} unmountOnExit>
+    <ScaleFade open={open} unmountOnExit>
       <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>

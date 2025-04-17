@@ -1,17 +1,17 @@
 import type { ReactElement } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { AvatarStyle } from "./avatar.style"
 import type { UseAvatarProps } from "./use-avatar"
 import type { UseAvatarGroupProps } from "./use-avatar-group"
 import { useMemo } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { UserRoundIcon } from "../icon"
 import { avatarStyle } from "./avatar.style"
 import { useAvatar } from "./use-avatar"
 import { useAvatarGroup } from "./use-avatar-group"
 
 export interface AvatarProps
-  extends HTMLUIProps,
+  extends HTMLStyledProps,
     ThemeProps<AvatarStyle>,
     UseAvatarProps {
   /**
@@ -32,24 +32,24 @@ export const {
 /**
  * `Avatar` is a component that displays a profile picture or an icon with initials representing a user.
  *
- * @see Docs https://yamada-ui.com/components/avatar
+ * @see https://yamada-ui.com/components/avatar
  */
 export const Avatar = withProvider<"div", AvatarProps>((props) => {
   const { getFallbackProps, getImageProps, getRootProps } = useAvatar(props)
 
   return (
-    <ui.div {...getRootProps()}>
+    <styled.div {...getRootProps()}>
       <AvatarFallback {...getFallbackProps()} />
       <AvatarImage {...getImageProps()} />
-    </ui.div>
+    </styled.div>
   )
 }, "root")({ icon: <UserRoundIcon fontSize="1.2em" /> })
 
-interface AvatarImageProps extends HTMLUIProps<"img"> {}
+interface AvatarImageProps extends HTMLStyledProps<"img"> {}
 
 const AvatarImage = withContext<"img", AvatarImageProps>("img", "image")()
 
-interface AvatarFallbackProps extends HTMLUIProps {}
+interface AvatarFallbackProps extends HTMLStyledProps {}
 
 const AvatarFallback = withContext<"div", AvatarFallbackProps>(
   "div",
@@ -57,7 +57,7 @@ const AvatarFallback = withContext<"div", AvatarFallbackProps>(
 )()
 
 export interface AvatarGroupProps
-  extends HTMLUIProps,
+  extends HTMLStyledProps,
     ThemeProps<AvatarStyle>,
     UseAvatarGroupProps {}
 
@@ -74,10 +74,10 @@ export const AvatarGroup = component<"div", AvatarGroupProps>((props) => {
 
   return (
     <AvatarPropsContext value={context}>
-      <ui.div {...getRootProps()}>
+      <styled.div {...getRootProps()}>
         {excess > 0 ? <Avatar fallback={`+${excess}`} /> : null}
         {children}
-      </ui.div>
+      </styled.div>
     </AvatarPropsContext>
   )
 }, "group")()

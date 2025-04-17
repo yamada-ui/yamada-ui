@@ -1,6 +1,6 @@
 import type { Dict } from "../../utils"
 import type { Layers, LayerScheme } from "../theme"
-import { runIfFunc } from "../../utils"
+import { runIfFn } from "../../utils"
 import { DEFAULT_LAYERS } from "../constant"
 
 export function createLayers(layers: false | Layers = DEFAULT_LAYERS) {
@@ -9,7 +9,7 @@ export function createLayers(layers: false | Layers = DEFAULT_LAYERS) {
       atRule: undefined,
       names: [] as string[],
       wrap: function (_: LayerScheme, style?: (() => Dict) | Dict) {
-        return runIfFunc(style)
+        return runIfFn(style)
       },
     }
 
@@ -23,7 +23,7 @@ export function createLayers(layers: false | Layers = DEFAULT_LAYERS) {
   const wrap = (name: LayerScheme, style?: (() => Dict) | Dict) => {
     const atRule = getAtRule(name)
 
-    return { [atRule]: runIfFunc(style) }
+    return { [atRule]: runIfFn(style) }
   }
 
   return {

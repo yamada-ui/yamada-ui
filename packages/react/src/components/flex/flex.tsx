@@ -1,4 +1,4 @@
-import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FlexStyle } from "./flex.style"
 import { createComponent } from "../../core"
 import { flexStyle } from "./flex.style"
@@ -35,7 +35,7 @@ interface FlexOptions {
 }
 
 export interface FlexProps
-  extends Omit<HTMLUIProps, "direction">,
+  extends Omit<HTMLStyledProps, "direction">,
     ThemeProps<FlexStyle>,
     FlexOptions {}
 
@@ -48,7 +48,7 @@ export const {
 /**
  * `Flex` is a component that sets `flex` to `Box`. Also, convenient style shorthand is available.
  *
- * @see Docs https://yamada-ui.com/components/flex
+ * @see https://yamada-ui.com/components/flex
  */
 export const Flex = withContext("div")(
   undefined,

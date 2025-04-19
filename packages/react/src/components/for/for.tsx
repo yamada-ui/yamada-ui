@@ -1,5 +1,4 @@
 import type { ReactNode } from "react"
-import type { HTMLStyledProps } from "../../core"
 import { isArray } from "../../utils"
 
 interface ForGeneratorOptions<T> {
@@ -49,17 +48,23 @@ export interface ForProps<T> extends ForGeneratorOptions<T> {
 function* generateItems<T>(
   each: T[],
   options: ForGeneratorOptions<T>,
-): Generator<[T, number]> {
+): Generator<[number, T]> {
   const { filterBy, limitBy, offsetBy = 0, reverse = false, sortBy } = options
-  const filtered = filterBy ? each.filter(filterBy) : each
-  const sorted = sortBy ? filtered.sort(sortBy) : filtered
-  const reversed = reverse ? sorted.reverse() : sorted
-  const sliced = limitBy
-    ? reversed.slice(offsetBy, offsetBy + limitBy)
-    : reversed.slice(offsetBy)
-  for (const [index, item] of sliced.entries()) {
-    yield [item, index]
-  }
+
+  const filtered = filterBy
+    ? (function* () {
+        for (const [index, item] of each.entries()) {
+          if (filterBy(item, index, each)) yield item
+        }
+      })()
+    : each
+
+  const sorted = sortBy ? Array.from(filtered).sort(sortBy) : filtered
+  const reversed = reverse ? Array.from(sorted).reverse() : sorted
+
+  return yield* Array.from(reversed)
+    .slice(offsetBy, limitBy ? offsetBy + limitBy : undefined)
+    .entries()
 }
 
 /**
@@ -71,7 +76,7 @@ export const For = <T,>(props: ForProps<T>): ReactNode => {
   const { children, each, fallback, ...generatorProps } = props
   if (!each || !isArray(each) || !each.length) return fallback || null
 
-  return Array.from(generateItems(each, generatorProps), ([item, index]) =>
+  return Array.from(generateItems(each, generatorProps), ([index, item]) =>
     children(item, index),
   )
 }

@@ -115,11 +115,11 @@ describe("<For />", () => {
     render(
       <For
         each={["One", "Two", "Three", "Four"]}
-        filterBy={(item) => item !== "Two"}
-        limitBy={2}
-        offsetBy={1}
-        reverse
-        sortBy={(a, b) => a.localeCompare(b)}
+        filterBy={(item) => item !== "Two"} // One, Three, Four
+        limitBy={2} // One, Four
+        offsetBy={1} // One, Four
+        reverse // Three, One, Four
+        sortBy={(a, b) => a.localeCompare(b)} // Four, One, Three
       >
         {(item, index) => <p key={index}>{item}</p>}
       </For>,

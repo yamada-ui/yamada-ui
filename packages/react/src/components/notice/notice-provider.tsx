@@ -9,7 +9,7 @@ import type {
 import type { HTMLMotionProps, MotionStyledComponent } from "../motion"
 import type { NoticeOptions } from "./notice"
 import type { NoticeStyle } from "./notice.style"
-import type { NoticePlacement } from "./types"
+import type { DragEndEventHandler, NoticePlacement } from "./types"
 import { AnimatePresence, useIsPresent } from "motion/react"
 import {
   useCallback,
@@ -55,8 +55,6 @@ export interface NoticeProviderProps
 interface NoticeProviderContext extends NoticeProviderProps {
   children?: ReactNode
 }
-
-type DragEndEventHandler = Required<HTMLMotionProps>["onDragEnd"]
 
 export const {
   ComponentContext: NoticeContext,
@@ -209,7 +207,7 @@ const getPlacementInitialValues = (placement: string): PlacementValues => {
 }
 
 const getPlacementExitValues = (
-  closeOnDrag = false,
+  closeOnDrag: boolean,
   placement: string,
 ): PlacementValues => {
   const convertedPlacement = convertFromNoticePlacement(placement)
@@ -468,17 +466,27 @@ interface NoticeListProps
       NoticeProviderProps,
       "itemProps" | "listProps" | "placement" | "variants"
     > {
-  customCSS: CSSObject | CSSObject[] | undefined
+  customCSS: CSSObject | undefined
   notices: NoticeOptions[]
 }
 
 const NoticeListComponent = withContext<"ul", NoticeListProps>(
-  ({ css, customCSS, notices, variants, itemProps, listProps, ...props }) => {
+  ({
+    css,
+    customCSS,
+    notices,
+    placement,
+    variants,
+    itemProps,
+    listProps,
+    ...props
+  }) => {
     const [isExpanded, { off, on }] = useBoolean()
 
     return (
       <styled.ul
         css={css}
+        data-placement={placement}
         onMouseEnter={on}
         onMouseLeave={off}
         onMouseMove={on}
@@ -493,7 +501,9 @@ const NoticeListComponent = withContext<"ul", NoticeListProps>(
                 ...customCSS,
                 filter: `brightness(${1 - index * (isExpanded ? 0 : 0.05)})`,
                 position: "absolute",
-                transform: `translateY(${isExpanded ? index * 80 : index * 16}px) scale(${isExpanded ? 1 : 1 - index * 0.02})`,
+                transform: isExpanded
+                  ? `translateY(${index * 80 + 30}px) scale(1)`
+                  : `translateY(${(index + 1) * 16}px) `,
                 transformOrigin: "top",
                 transition: "all 0.3s ease-in-out",
                 zIndex: notices.length - index,

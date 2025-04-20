@@ -21,7 +21,7 @@ import { Alert } from "../alert"
 import { CloseButton } from "../close-button"
 import { withContext } from "./notice-provider"
 
-export interface UseNoticeOptions extends NoticeConfig {}
+export interface UseNoticeOptions extends Omit<NoticeConfig, "onDragEnd"> {}
 
 export interface NoticeOptions extends UseNoticeOptions {
   id: number | string
@@ -215,7 +215,9 @@ const createNoticeStore = (initialState: State): Store => {
         return {
           ...prev,
           [placement]: prev[placement].map((notice) =>
-            notice.id == id ? { ...notice, isDelete: true } : notice,
+            notice.id.toString() === id.toString()
+              ? { ...notice, isDelete: true }
+              : notice,
           ),
         }
       })
@@ -294,7 +296,9 @@ const createNoticeStore = (initialState: State): Store => {
     remove: (id, placement) => {
       setState((prevState) => ({
         ...prevState,
-        [placement]: prevState[placement].filter((notice) => notice.id != id),
+        [placement]: prevState[placement].filter(
+          (notice) => notice.id.toString() !== id.toString(),
+        ),
       }))
     },
 
@@ -329,8 +333,8 @@ const createNoticeStore = (initialState: State): Store => {
 export const noticeStore = createNoticeStore(initialState)
 
 export interface NoticeProps
-  extends Omit<HTMLStyledProps, keyof Omit<UseNoticeOptions, "onDragEnd">>,
-    Omit<UseNoticeOptions, "onDragEnd"> {
+  extends Omit<HTMLStyledProps, keyof UseNoticeOptions>,
+    UseNoticeOptions {
   onClose?: () => void
 }
 

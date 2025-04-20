@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 import type { CSSObject, CSSProps, Placement } from "../../core"
 import type { AlertLoadingProps, AlertRootProps } from "../alert"
+import type { HTMLMotionProps } from "../motion"
 import type { PortalProps } from "../portal"
 import type { StatusScheme } from "../status"
 
@@ -16,12 +17,14 @@ export type NoticePlacement = Extract<
   | "start-start"
 >
 
-export interface NoticeComponentProps extends NoticeConfig {
+export interface NoticeComponentProps extends Omit<NoticeConfig, "onDragEnd"> {
   onClose: () => void
 }
 
+export type DragEndEventHandler = Required<HTMLMotionProps>["onDragEnd"]
+
 export interface NoticeConfig {
-  css?: CSSObject | CSSObject[] | undefined
+  css?: CSSObject | undefined
   style?: React.CSSProperties | undefined
   colorScheme?: AlertRootProps["colorScheme"]
   variant?: AlertRootProps["variant"]
@@ -125,5 +128,5 @@ export interface NoticeConfig {
    * The title of the notice.
    */
   title?: ReactNode
-  onDragEnd?: (event: MouseEvent | TouchEvent) => void
+  onDragEnd?: DragEndEventHandler
 }

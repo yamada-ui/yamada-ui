@@ -265,13 +265,13 @@ describe("useNotice()", () => {
     expect(queryNoticeTitle()).toBeNull()
   })
 
-  test("Close notice with using isClosable", async () => {
+  test("Close notice with using closable", async () => {
     const CloseNoticeExample = () => {
       const notice = useNotice()
       const onOpen = () => {
         notice({
+          closable: true,
           description: "NoticeDescription",
-          isClosable: true,
           title: "NoticeTitle",
         })
       }

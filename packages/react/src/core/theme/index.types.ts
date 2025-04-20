@@ -1,4 +1,5 @@
 import type { RefObject } from "react"
+import type { NoticeConfig } from "../../components/notice/types"
 import type { PortalProps } from "../../components/portal"
 import type { DefaultTheme } from "../../theme"
 import type { Booleanish, Dict, StringLiteral, Union } from "../../utils"
@@ -46,18 +47,6 @@ export type Placement =
   | "start-end"
   | "start-start"
 
-export type NoticePlacement = Extract<
-  Placement,
-  | "end"
-  | "end-center"
-  | "end-end"
-  | "end-start"
-  | "start"
-  | "start-center"
-  | "start-end"
-  | "start-start"
->
-
 export interface BreakpointConfig {
   /**
    * The base value for the `breakpoint` when `direction` is "down".
@@ -91,49 +80,6 @@ export interface BreakpointConfig {
    * @default "@media screen"
    */
   identifier?: "@media screen" | `@container ${string}` | `@container`
-}
-
-export interface NoticeConfig {
-  /**
-   * If `true`, the portal will check if it is within a parent portal
-   * and append itself to the parent's portal node.
-   * This provides nesting for portals.
-   *
-   * If `false`, the portal will always append to `document.body`
-   * regardless of nesting. It is used to opt out of portal nesting.
-   *
-   * @default true
-   */
-  appendToParentPortal?: PortalProps["appendToParentPortal"]
-  /**
-   * If `true`, allows the notice to be removed.
-   *
-   * @default false
-   */
-  closable?: boolean
-  /**
-   * The `ref` to the component where the portal will be attached to.
-   */
-  containerRef?: PortalProps["containerRef"]
-  /**
-   * The number of `ms` the notice will continue to be displayed.
-   *
-   * If `null`, the notice will continue to display.
-   * Please use in conjunction with `closable`.
-   *
-   * @default 5000
-   */
-  duration?: null | number
-  /**
-   * The maximum value at which notice will be displayed.
-   */
-  limit?: number
-  /**
-   * The placement of the notice.
-   *
-   * @default 'top'
-   */
-  placement?: NoticePlacement
 }
 
 export type SnackDirection = "bottom" | "top"

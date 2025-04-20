@@ -113,6 +113,30 @@ export function transformSize(
   return size ?? token
 }
 
+export function convertFromNoticePlacement(placement: string): string {
+  if (!placement) return "top-left"
+
+  const [vertical, horizontal] = placement.split("-")
+
+  const verticalMap: { [key: string]: string } = {
+    end: "bottom",
+    start: "top",
+  }
+
+  const horizontalMap: { [key: string]: string } = {
+    center: "center",
+    end: "right",
+    start: "left",
+  }
+
+  const mappedVertical = vertical ? verticalMap[vertical] || vertical : "top"
+
+  if (!horizontal) return mappedVertical
+
+  const mappedHorizontal = horizontalMap[horizontal] || horizontal
+  return `${mappedVertical}-${mappedHorizontal}`
+}
+
 export function toCamelCase(value: StringLiteral): string {
   return value.toLowerCase().replace(/[_-](.)/g, (_, val) => val.toUpperCase())
 }

@@ -357,6 +357,7 @@ export const WithPlacement = () => {
         <For each={["start-start", "start-center", "start-end"]}>
           {(placement) => (
             <Button
+              key={placement}
               onClick={() =>
                 notice({
                   description: "オッス！オラ悟空！",
@@ -373,6 +374,7 @@ export const WithPlacement = () => {
         <For each={["end-start", "end-center", "end-end"]}>
           {(placement) => (
             <Button
+              key={placement}
               onClick={() =>
                 notice({
                   description: "オッス！オラ悟空！",

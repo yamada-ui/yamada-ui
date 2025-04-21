@@ -45,7 +45,7 @@ export const noticeStyle = defineComponentSlotStyle({
       zIndex: "calc(var(--length) - var(--index))",
       _groupHover: {
         _first: {
-          _firstChild: {
+          "& > *:first-of-type": {
             '&[data-placement-bottom="true"]': {
               paddingBottom: "xs",
             },
@@ -55,7 +55,7 @@ export const noticeStyle = defineComponentSlotStyle({
           },
         },
         _notFirst: {
-          _firstChild: {
+          "& > *:first-of-type": {
             '&[data-placement-bottom="true"]': {
               paddingBottom: "66px",
             },
@@ -67,7 +67,7 @@ export const noticeStyle = defineComponentSlotStyle({
         },
       },
       _notFirst: {
-        _firstChild: {
+        "& > *:first-of-type": {
           '&[data-placement-bottom="true"]': {
             marginBottom: "-46px",
           },

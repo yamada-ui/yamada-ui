@@ -519,7 +519,7 @@ export const UseUpdate = () => {
 }
 
 export const UseLimit = () => {
-  const notice = useNotice({ limit: 3 })
+  const notice = useNotice({ closable: true, limit: 3 })
 
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
@@ -545,6 +545,8 @@ export const CustomComponent = () => {
       <Button
         onClick={() =>
           notice({
+            closable: true,
+            closeOnDrag: true,
             component: () => (
               <Box bg="purple.500" color="white" px={4} py={3}>
                 ギャルのパンティーおくれーーーっ！！！！！
@@ -579,8 +581,7 @@ export const CustomComponent = () => {
 export const CustomStyle = () => {
   const notice = useNotice({
     css: {
-      maxW: "100%",
-      minW: "100%",
+      bg: "red",
     },
   })
 

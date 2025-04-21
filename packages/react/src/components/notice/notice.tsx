@@ -348,7 +348,6 @@ const Notice = withContext<"div", NoticeProps>(
     closeStrategy = "button",
     description,
     icon,
-    // placement = "start-center",
     status,
     title,
     onClose,

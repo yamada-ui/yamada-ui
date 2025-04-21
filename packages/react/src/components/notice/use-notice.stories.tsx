@@ -1,8 +1,11 @@
 import type { Meta } from "@storybook/react"
+import type { NoticePlacement } from "./types"
 import { useRef } from "react"
+import { Notice } from "."
 import { Box } from "../box"
 import { Button } from "../button"
 import { Center } from "../center"
+import { For } from "../for"
 import { Wrap } from "../wrap"
 import { useNotice } from "./notice"
 
@@ -341,7 +344,7 @@ export const WithColorScheme = () => {
 }
 
 export const WithPlacement = () => {
-  const notice = useNotice()
+  const notice = useNotice({ duration: null })
 
   return (
     <Center
@@ -351,73 +354,36 @@ export const WithPlacement = () => {
       w="calc(100vw - 16px * 2)"
     >
       <Wrap gap="md">
-        <Button
-          onClick={() =>
-            notice({
-              description: "オッス！オラ悟空！",
-              placement: "start-start",
-            })
-          }
-        >
-          Show top left Notice
-        </Button>
-
-        <Button
-          onClick={() =>
-            notice({
-              description: "オッス！オラ悟空！",
-              placement: "start-center",
-            })
-          }
-        >
-          Show top Notice
-        </Button>
-
-        <Button
-          onClick={() =>
-            notice({
-              description: "オッス！オラ悟空！",
-              placement: "start-end",
-            })
-          }
-        >
-          Show top right Notice
-        </Button>
+        <For each={["start-start", "start-center", "start-end"]}>
+          {(placement) => (
+            <Button
+              onClick={() =>
+                notice({
+                  description: "オッス！オラ悟空！",
+                  placement: placement as NoticePlacement,
+                })
+              }
+            >
+              Show {placement} Notice
+            </Button>
+          )}
+        </For>
       </Wrap>
-
       <Wrap gap="md">
-        <Button
-          onClick={() =>
-            notice({
-              description: "オッス！オラ悟空！",
-              placement: "end-start",
-            })
-          }
-        >
-          Show bottom left Notice
-        </Button>
-
-        <Button
-          onClick={() =>
-            notice({
-              description: "オッス！オラ悟空！",
-              placement: "end-center",
-            })
-          }
-        >
-          Show bottom Notice
-        </Button>
-
-        <Button
-          onClick={() =>
-            notice({
-              description: "オッス！オラ悟空！",
-              placement: "end-end",
-            })
-          }
-        >
-          Show bottom right Notice
-        </Button>
+        <For each={["end-start", "end-center", "end-end"]}>
+          {(placement) => (
+            <Button
+              onClick={() =>
+                notice({
+                  description: "オッス！オラ悟空！",
+                  placement: placement as NoticePlacement,
+                })
+              }
+            >
+              Show {placement} Notice
+            </Button>
+          )}
+        </For>
       </Wrap>
     </Center>
   )
@@ -454,6 +420,28 @@ export const WithCloseStrategy = () => {
           notice({
             closable: true,
             closeStrategy: "element",
+            description: "オッス！オラ悟空！",
+            title: "孫悟空",
+          })
+        }
+      >
+        Show Notice
+      </Button>
+    </Center>
+  )
+}
+
+export const CloseOnDrag = () => {
+  const notice = useNotice({
+    closable: true,
+    closeOnDrag: true,
+  })
+
+  return (
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Button
+        onClick={() =>
+          notice({
             description: "オッス！オラ悟空！",
             title: "孫悟空",
           })
@@ -553,7 +541,7 @@ export const CustomComponent = () => {
   const notice = useNotice()
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <Center gap="md" h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button
         onClick={() =>
           notice({
@@ -561,6 +549,23 @@ export const CustomComponent = () => {
               <Box bg="purple.500" color="white" px={4} py={3}>
                 ギャルのパンティーおくれーーーっ！！！！！
               </Box>
+            ),
+          })
+        }
+      >
+        Show Notice
+      </Button>
+      <Button
+        onClick={() =>
+          notice({
+            component: ({ onClose }) => (
+              <Notice.Root>
+                <Notice.Content>
+                  <Notice.Title>Notice Title</Notice.Title>
+                  <Notice.Description>Notice Description</Notice.Description>
+                </Notice.Content>
+                <Notice.CloseButton onClose={onClose} />
+              </Notice.Root>
             ),
           })
         }
@@ -609,28 +614,6 @@ export const CustomStyle = () => {
           Show individual style Notice
         </Button>
       </Wrap>
-    </Center>
-  )
-}
-
-export const CloseOnDrag = () => {
-  const notice = useNotice({
-    closable: true,
-    closeOnDrag: true,
-  })
-
-  return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
-      <Button
-        onClick={() =>
-          notice({
-            description: "オッス！オラ悟空！",
-            title: "孫悟空",
-          })
-        }
-      >
-        Show Notice
-      </Button>
     </Center>
   )
 }

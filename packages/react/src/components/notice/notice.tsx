@@ -380,12 +380,12 @@ const Notice = withContext<"div", NoticeProps>(
         ) : (
           <NoticeIcon {...(icon?.color ? { color: icon.color } : {})} />
         )}
-        <styled.div flex="1">
+        <NoticeContent>
           {title ? <NoticeTitle>{title}</NoticeTitle> : null}
           {description ? (
             <NoticeDescription>{description}</NoticeDescription>
           ) : null}
-        </styled.div>
+        </NoticeContent>
 
         {closable && isButtonClosable ? (
           <NoticeCloseButton id={id} onClose={() => onClose?.()} />
@@ -397,14 +397,8 @@ const Notice = withContext<"div", NoticeProps>(
 )()
 
 interface NoticeRootOptions
-  extends Omit<AlertRootProps, "placement" | "status">,
-    Pick<
-      NoticeOptions,
-      // | "closable"
-      // | "closeButton"
-      // | "placement"
-      "description" | "icon" | "status"
-    > {}
+  extends Omit<AlertRootProps, "status">,
+    Pick<NoticeOptions, "description" | "icon" | "status"> {}
 
 export interface NoticeRootProps extends NoticeRootOptions {}
 
@@ -418,6 +412,15 @@ export const NoticeRoot = withContext<"div", NoticeRootProps>(
     )
   },
   "root",
+)()
+
+interface NoticeContentProps extends HTMLStyledProps {}
+
+export const NoticeContent = withContext<"div", NoticeContentProps>(
+  ({ ...props }) => {
+    return <styled.div {...props} />
+  },
+  "content",
 )()
 
 export interface NoticeIconProps extends AlertIconProps {}

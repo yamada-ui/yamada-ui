@@ -1,4 +1,4 @@
-import type { MotionStyle, Variants } from "motion/react"
+import type { Variants } from "motion/react"
 import type { ReactNode } from "react"
 import type {
   CSSObject,
@@ -9,7 +9,7 @@ import type {
 import type { HTMLMotionProps, MotionStyledComponent } from "../motion"
 import type { NoticeOptions } from "./notice"
 import type { NoticeStyle } from "./notice.style"
-import type { DragEndEventHandler, NoticePlacement } from "./types"
+import type { DragEndEventHandler } from "./types"
 import { AnimatePresence, useIsPresent } from "motion/react"
 import {
   useCallback,
@@ -19,7 +19,6 @@ import {
   useSyncExternalStore,
 } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { useBoolean } from "../../hooks/use-boolean"
 import { useTimeout } from "../../hooks/use-timeout"
 import {
   convertFromNoticePlacement,
@@ -122,48 +121,32 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
       noticeStore.getSnapshot,
     )
 
-    const components = Object.entries(state).map(([placement, notices]) => {
-      const top = convertFromNoticePlacement(placement).includes("top")
-        ? "env(safe-area-inset-top, 0px)"
-        : undefined
-      const bottom = convertFromNoticePlacement(placement).includes("bottom")
-        ? "env(safe-area-inset-bottom, 0px)"
-        : undefined
-      const right = !convertFromNoticePlacement(placement).includes("left")
-        ? "env(safe-area-inset-right, 0px)"
-        : undefined
-      const left = !convertFromNoticePlacement(placement).includes("right")
-        ? "env(safe-area-inset-left, 0px)"
-        : undefined
+    const components = useMemo(
+      () =>
+        Object.entries(state).map(([placement, notices]) => {
+          const convertedPlacement = convertFromNoticePlacement(placement)
 
-      const customCSS: CSSObject = {
-        bottom,
-        gap,
-        left,
-        margin: gap,
-        right,
-        top,
-        // display: "flex",
-        // flexDirection: "column",
-        // pointerEvents: "none",
-        // position: "fixed",
-        // zIndex: "160",
-      }
+          const customCSS: CSSObject = {
+            gap,
+            margin: gap,
+          }
 
-      return (
-        <NoticeListComponent
-          key={placement}
-          css={customCSS}
-          data-placement={placement}
-          customCSS={css}
-          notices={notices}
-          placement={placement as NoticePlacement}
-          variants={variants}
-          itemProps={itemProps}
-          listProps={listProps}
-        />
-      )
-    })
+          return (
+            <NoticeListComponent
+              key={placement}
+              css={customCSS}
+              data-placement={placement}
+              convertedPlacement={convertedPlacement}
+              innerCSS={css}
+              notices={notices}
+              variants={variants}
+              itemProps={itemProps}
+              listProps={listProps}
+            />
+          )
+        }),
+      [state, gap, css, variants, itemProps, listProps],
+    )
 
     return (
       <NoticeContext value={context}>
@@ -283,20 +266,23 @@ interface NoticeComponentProps
   extends Omit<MotionStyledComponent<"li">, "children" | keyof NoticeOptions>,
     NoticeOptions,
     Pick<NoticeProviderProps, "itemProps" | "variants"> {
-  customCSS: CSSObject | CSSObject[] | undefined
+  convertedPlacement: string
+  innerCSS: CSSObject | CSSObject[] | undefined
 }
 
 const NoticeComponent = withContext<"li", NoticeComponentProps>(
   ({
     id,
+    style,
     closable,
     closeOnDrag,
-    customCSS,
+    convertedPlacement,
     dragConstraints = 0,
     dragElastic = 0.1,
     dragOffset = 80,
     dragVelocity = 100,
     duration = 5000,
+    innerCSS,
     isDelete = false,
     message,
     placement = "start-center",
@@ -335,11 +321,6 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
     }, [isPresent, isDelete, onDelete])
 
     useTimeout(onClose, delay)
-
-    const convertedPlacement = useMemo(
-      () => convertFromNoticePlacement(placement),
-      [placement],
-    )
 
     const drag = useMemo<HTMLMotionProps["drag"]>(() => {
       if (!dragClosable) return false
@@ -412,20 +393,11 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
     return (
       <motion.li
         id={id.toString()}
-        style={
-          {
-            display: "flex",
-            justifyContent: convertFromNoticePlacement(placement).includes(
-              "left",
-            )
-              ? "flex-start"
-              : convertFromNoticePlacement(placement).includes("right")
-                ? "flex-end"
-                : "center",
-          } as MotionStyle
-        }
+        style={{
+          ...style,
+        }}
         animate="animate"
-        custom={{ closeOnDrag, placement }}
+        custom={{ closeOnDrag, convertedPlacement, placement }}
         drag={drag}
         dragConstraints={getDragRestriction(dragConstraints)}
         dragElastic={getDragRestriction(dragElastic)}
@@ -442,7 +414,14 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
         {...itemProps}
         {...props}
       >
-        <NoticeListInnerItemComponent css={customCSS}>
+        <NoticeListInnerItemComponent
+          css={innerCSS}
+          data-placement-bottom={convertedPlacement.includes("bottom")}
+          data-placement-center={convertedPlacement.includes("center")}
+          data-placement-left={convertedPlacement.includes("left")}
+          data-placement-right={convertedPlacement.includes("right")}
+          data-placement-top={convertedPlacement.includes("top")}
+        >
           {runIfFn(message, { onClose })}
         </NoticeListInnerItemComponent>
       </motion.li>
@@ -462,34 +441,33 @@ const NoticeListInnerItemComponent = withContext<
 
 interface NoticeListProps
   extends Omit<HTMLStyledProps<"ul">, "children" | "gap">,
-    Pick<
-      NoticeProviderProps,
-      "itemProps" | "listProps" | "placement" | "variants"
-    > {
-  customCSS: CSSObject | undefined
+    Pick<NoticeProviderProps, "itemProps" | "listProps" | "variants"> {
+  convertedPlacement: string
+  innerCSS: CSSObject | undefined
   notices: NoticeOptions[]
 }
 
 const NoticeListComponent = withContext<"ul", NoticeListProps>(
   ({
-    css,
-    customCSS,
+    convertedPlacement,
+    innerCSS,
     notices,
-    placement,
     variants,
     itemProps,
     listProps,
     ...props
   }) => {
-    const [isExpanded, { off, on }] = useBoolean()
-
     return (
       <styled.ul
-        css={css}
-        data-placement={placement}
-        onMouseEnter={on}
-        onMouseLeave={off}
-        onMouseMove={on}
+        style={{
+          "--length": notices.length,
+        }}
+        data-group=""
+        data-placement-bottom={convertedPlacement.includes("bottom")}
+        data-placement-center={convertedPlacement.includes("center")}
+        data-placement-left={convertedPlacement.includes("left")}
+        data-placement-right={convertedPlacement.includes("right")}
+        data-placement-top={convertedPlacement.includes("top")}
         {...listProps}
         {...props}
       >
@@ -497,17 +475,16 @@ const NoticeListComponent = withContext<"ul", NoticeListProps>(
           {notices.map((notice, index) => (
             <NoticeComponent
               key={notice.id}
-              customCSS={{
-                ...customCSS,
-                filter: `brightness(${1 - index * (isExpanded ? 0 : 0.05)})`,
-                position: "absolute",
-                transform: isExpanded
-                  ? `translateY(${index * 80 + 30}px) scale(1)`
-                  : `translateY(${(index + 1) * 16}px) `,
-                transformOrigin: "top",
-                transition: "all 0.3s ease-in-out",
-                zIndex: notices.length - index,
+              style={{
+                "--index": index,
               }}
+              data-placement-bottom={convertedPlacement.includes("bottom")}
+              data-placement-center={convertedPlacement.includes("center")}
+              data-placement-left={convertedPlacement.includes("left")}
+              data-placement-right={convertedPlacement.includes("right")}
+              data-placement-top={convertedPlacement.includes("top")}
+              convertedPlacement={convertedPlacement}
+              innerCSS={{ ...innerCSS }}
               variants={variants}
               itemProps={itemProps}
               {...notice}

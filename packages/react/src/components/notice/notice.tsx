@@ -67,7 +67,7 @@ interface CreateNoticeOptions
   extends Partial<
     Pick<
       NoticeOptions,
-      "css" | "duration" | "id" | "onCloseComplete" | "placement" | "status"
+      "duration" | "id" | "onCloseComplete" | "placement" | "status"
     >
   > {}
 
@@ -77,7 +77,6 @@ const createNotice = (
   message: (props: NoticeComponentProps) => ReactNode,
   {
     id,
-    css,
     duration,
     placement = "start-center",
     status,
@@ -91,7 +90,6 @@ const createNotice = (
 
   return {
     id,
-    css,
     duration,
     isDelete: false,
     message,
@@ -103,14 +101,18 @@ const createNotice = (
   }
 }
 
-const createRender = (options: UseNoticeOptions): FC<NoticeComponentProps> => {
-  const { component } = options
+interface createRenderOptions extends Omit<NoticeConfig, "itemProps"> {}
+
+const createRender = (
+  options: createRenderOptions,
+): FC<NoticeComponentProps> => {
+  const { component, ...rest } = options
 
   const Render: FC<NoticeComponentProps> = (props) => {
     if (isFunction(component)) {
-      return component({ ...props, ...options })
+      return component({ ...props, ...rest })
     }
-    return <Notice {...props} {...options} />
+    return <Notice {...props} {...rest} />
   }
 
   return Render
@@ -334,7 +336,7 @@ export const noticeStore = createNoticeStore(initialState)
 
 export interface NoticeProps
   extends Omit<HTMLStyledProps, keyof UseNoticeOptions>,
-    UseNoticeOptions {
+    Omit<UseNoticeOptions, "itemProps"> {
   onClose?: () => void
 }
 

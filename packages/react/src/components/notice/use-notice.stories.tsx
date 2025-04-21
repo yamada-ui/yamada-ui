@@ -580,8 +580,11 @@ export const CustomComponent = () => {
 
 export const CustomStyle = () => {
   const notice = useNotice({
-    css: {
-      bg: "red",
+    closable: true,
+    closeOnDrag: true,
+    duration: null,
+    itemProps: {
+      dragConstraints: 500,
     },
   })
 
@@ -591,7 +594,6 @@ export const CustomStyle = () => {
         <Button
           onClick={() =>
             notice({
-              closable: true,
               description: "オッス！オラ悟空！",
               title: "孫悟空",
             })
@@ -599,20 +601,18 @@ export const CustomStyle = () => {
         >
           Show Notice
         </Button>
-
         <Button
           onClick={() =>
             notice({
-              css: {
-                minW: "60%",
-              },
-              closable: true,
               description: "オッス！オラ悟空！",
               title: "孫悟空",
+              itemProps: {
+                dragConstraints: 2,
+              },
             })
           }
         >
-          Show individual style Notice
+          Show Notice with individual style
         </Button>
       </Wrap>
     </Center>

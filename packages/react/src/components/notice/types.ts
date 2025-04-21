@@ -1,5 +1,6 @@
+import type { Variants } from "motion/react"
 import type { ReactNode } from "react"
-import type { CSSObject, CSSProps, Placement } from "../../core"
+import type { CSSProps, HTMLStyledProps, Placement } from "../../core"
 import type { AlertLoadingProps, AlertRootProps } from "../alert"
 import type { HTMLMotionProps } from "../motion"
 import type { PortalProps } from "../portal"
@@ -17,15 +18,14 @@ export type NoticePlacement = Extract<
   | "start-start"
 >
 
-export interface NoticeComponentProps extends Omit<NoticeConfig, "onDragEnd"> {
+export interface NoticeComponentProps
+  extends Omit<NoticeConfig, "itemProps" | "onDragEnd"> {
   onClose: () => void
 }
 
 export type DragEndEventHandler = Required<HTMLMotionProps>["onDragEnd"]
 
 export interface NoticeConfig {
-  css?: CSSObject | undefined
-  style?: React.CSSProperties | undefined
   colorScheme?: AlertRootProps["colorScheme"]
   variant?: AlertRootProps["variant"]
   /**
@@ -64,30 +64,6 @@ export interface NoticeConfig {
    * The description of the notice.
    */
   description?: ReactNode
-  /**
-   * Applies constraints on the permitted draggable area.
-   *
-   * @default 0
-   */
-  dragConstraints?: number
-  /**
-   * The degree of movement allowed outside constraints. 0 = no movement, 1 = full movement.
-   *
-   * @default 0.1
-   */
-  dragElastic?: number
-  /**
-   * Offset from being dragged to closing.
-   *
-   * @default 80
-   */
-  dragOffset?: number
-  /**
-   * Velocity of the drag that triggers close.
-   *
-   * @default 100
-   */
-  dragVelocity?: number
   /**
    * The number of `ms` the notice will continue to be displayed.
    *
@@ -128,5 +104,44 @@ export interface NoticeConfig {
    * The title of the notice.
    */
   title?: ReactNode
-  onDragEnd?: DragEndEventHandler
+  /**
+   * The variants of the notice.
+   * Check the docs to see the variants of possible modifiers you can pass.
+   *
+   * @see Docs https://motion.dev/docs/react-animation#variants
+   */
+  variants?: Variants
+  /**
+   * Props for notice item element.
+   */
+  itemProps?: {
+    /**
+     * Applies constraints on the permitted draggable area.
+     *
+     * @default 0
+     */
+    dragConstraints?: number
+    /**
+     * The degree of movement allowed outside constraints. 0 = no movement, 1 = full movement.
+     *
+     * @default 0.1
+     */
+    dragElastic?: number
+    /**
+     * Offset from being dragged to closing.
+     *
+     * @default 80
+     */
+    dragOffset?: number
+    /**
+     * Velocity of the drag that triggers close.
+     *
+     * @default 100
+     */
+    dragVelocity?: number
+  }
+  /**
+   * Props for notice list element.
+   */
+  listProps?: HTMLStyledProps<"ul">
 }

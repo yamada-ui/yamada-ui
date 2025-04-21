@@ -33,23 +33,7 @@ import { noticeStyle } from "./notice.style"
 export interface NoticeProviderProps
   extends Omit<HTMLStyledProps, keyof Required<ThemeConfig>["notice"]>,
     Omit<Required<ThemeConfig>["notice"], "options">,
-    ThemeProps<NoticeStyle> {
-  /**
-   * The variants of the notice.
-   * Check the docs to see the variants of possible modifiers you can pass.
-   *
-   * @see Docs https://motion.dev/docs/react-animation#variants
-   */
-  variants?: Variants
-  /**
-   * Props for notice item element.
-   */
-  itemProps?: MotionStyledComponent<"li">
-  /**
-   * Props for notice list element.
-   */
-  listProps?: HTMLStyledProps<"ul">
-}
+    ThemeProps<NoticeStyle> {}
 
 interface NoticeProviderContext extends NoticeProviderProps {
   children?: ReactNode
@@ -76,10 +60,6 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
     closeOnDrag,
     closeStrategy,
     containerRef,
-    dragConstraints,
-    dragElastic,
-    dragOffset,
-    dragVelocity,
     gap = "0",
     variants,
     itemProps,
@@ -91,10 +71,6 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
         closeOnDrag,
         closeStrategy,
         containerRef,
-        dragConstraints,
-        dragElastic,
-        dragOffset,
-        dragVelocity,
         gap,
         variants,
         itemProps,
@@ -109,10 +85,6 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
         variants,
         closeOnDrag,
         closeStrategy,
-        dragConstraints,
-        dragElastic,
-        dragOffset,
-        dragVelocity,
       ],
     )
     const state = useSyncExternalStore(
@@ -127,6 +99,7 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
           const convertedPlacement = convertFromNoticePlacement(placement)
 
           const customCSS: CSSObject = {
+            css,
             gap,
             margin: gap,
           }
@@ -137,7 +110,6 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
               css={customCSS}
               data-placement={placement}
               convertedPlacement={convertedPlacement}
-              innerCSS={css}
               notices={notices}
               variants={variants}
               itemProps={itemProps}
@@ -145,7 +117,7 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
             />
           )
         }),
-      [state, gap, css, variants, itemProps, listProps],
+      [state, gap, variants, itemProps, listProps, css],
     )
 
     return (
@@ -262,27 +234,20 @@ const defaultVariants: Variants = {
   }),
 }
 
-interface NoticeComponentProps
+export interface NoticeComponentProps
   extends Omit<MotionStyledComponent<"li">, "children" | keyof NoticeOptions>,
     NoticeOptions,
     Pick<NoticeProviderProps, "itemProps" | "variants"> {
   convertedPlacement: string
-  innerCSS: CSSObject | CSSObject[] | undefined
 }
 
 const NoticeComponent = withContext<"li", NoticeComponentProps>(
   ({
     id,
-    style,
     closable,
     closeOnDrag,
     convertedPlacement,
-    dragConstraints = 0,
-    dragElastic = 0.1,
-    dragOffset = 80,
-    dragVelocity = 100,
     duration = 5000,
-    innerCSS,
     isDelete = false,
     message,
     placement = "start-center",
@@ -295,6 +260,14 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
   }) => {
     const [delay, setDelay] = useState(duration)
     const isPresent = useIsPresent()
+
+    const {
+      dragConstraints = 0,
+      dragElastic = 0.1,
+      dragOffset = 80,
+      dragVelocity = 100,
+      ...rest
+    } = itemProps ?? {}
 
     const context = useNoticeContext()
 
@@ -355,8 +328,8 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
       [convertedPlacement],
     )
 
-    const onDragEnd: DragEndEventHandler = useCallback(
-      (_, info) => {
+    const handleDragEnd: DragEndEventHandler = useCallback(
+      (event, info) => {
         switch (convertedPlacement) {
           case "top-center":
             if (
@@ -386,6 +359,7 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
               onDelete()
             break
         }
+        return { event, info }
       },
       [convertedPlacement, dragVelocity, dragOffset, onDelete],
     )
@@ -393,9 +367,6 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
     return (
       <motion.li
         id={id.toString()}
-        style={{
-          ...style,
-        }}
         animate="animate"
         custom={{ closeOnDrag, convertedPlacement, placement }}
         drag={drag}
@@ -408,14 +379,13 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
         layout
         title={title?.toString()}
         variants={variants}
-        onDragEnd={onDragEnd}
+        onDragEnd={handleDragEnd}
         onHoverEnd={onMouseLeave}
         onHoverStart={onMouseEnter}
-        {...itemProps}
+        {...rest}
         {...props}
       >
         <NoticeListInnerItemComponent
-          css={innerCSS}
           data-placement-bottom={convertedPlacement.includes("bottom")}
           data-placement-center={convertedPlacement.includes("center")}
           data-placement-left={convertedPlacement.includes("left")}
@@ -443,14 +413,12 @@ interface NoticeListProps
   extends Omit<HTMLStyledProps<"ul">, "children" | "gap">,
     Pick<NoticeProviderProps, "itemProps" | "listProps" | "variants"> {
   convertedPlacement: string
-  innerCSS: CSSObject | undefined
   notices: NoticeOptions[]
 }
 
 const NoticeListComponent = withContext<"ul", NoticeListProps>(
   ({
     convertedPlacement,
-    innerCSS,
     notices,
     variants,
     itemProps,
@@ -484,7 +452,6 @@ const NoticeListComponent = withContext<"ul", NoticeListProps>(
               data-placement-right={convertedPlacement.includes("right")}
               data-placement-top={convertedPlacement.includes("top")}
               convertedPlacement={convertedPlacement}
-              innerCSS={{ ...innerCSS }}
               variants={variants}
               itemProps={itemProps}
               {...notice}

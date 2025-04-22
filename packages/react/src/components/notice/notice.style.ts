@@ -17,9 +17,10 @@ export const noticeStyle = defineComponentSlotStyle({
     list: {
       '&[data-placement-bottom="true"]': {
         bottom: "max(env(safe-area-inset-bottom, 16px), 16px)",
-        flexDirection: "column-reverse",
+        placeContent: "end",
       },
       '&[data-placement-center="true"]': {
+        justifyContent: "center",
         left: "max(env(safe-area-inset-left, 16px), 16px)",
         right: "max(env(safe-area-inset-right, 16px), 16px)",
       },
@@ -32,36 +33,37 @@ export const noticeStyle = defineComponentSlotStyle({
       '&[data-placement-top="true"]': {
         top: "max(env(safe-area-inset-top, 16px), 16px)",
       },
-      display: "flex",
-      flexDirection: "column",
+      display: "grid",
+      gridTemplateRows: "repeat(var(--length), 0%)",
       pointerEvents: "none",
       position: "fixed",
+      transition: "all 0.5s ease",
       zIndex: "160",
+      _hover: {
+        gridTemplateRows: "repeat(var(--length), calc(100%/var(--length)))",
+      },
     },
     listItem: {
+      "&[data-placement-bottom='true']": {
+        order: "calc(var(--length) - var(--index))",
+        placeSelf: "end center",
+      },
       alignItems: "center",
-      display: "flex",
+      display: "grid",
       justifyContent: "center",
+      placeSelf: "start center",
       zIndex: "calc(var(--length) - var(--index))",
       _groupHover: {
-        _first: {
-          "& > *:first-of-type": {
-            '&[data-placement-bottom="true"]': {
-              paddingBottom: "xs",
-            },
-            '&[data-placement-top="true"]': {
-              paddingTop: "xs",
-            },
+        "& > *:first-of-type": {
+          "&[data-placement-bottom='true']": {
+            paddingBottom: "md",
+          },
+          "&[data-placement-top='true']": {
+            paddingTop: "md",
           },
         },
         _notFirst: {
           "& > *:first-of-type": {
-            '&[data-placement-bottom="true"]': {
-              paddingBottom: "66px",
-            },
-            '&[data-placement-top="true"]': {
-              paddingTop: "66px",
-            },
             transform: "scaleX(1)",
           },
         },
@@ -69,10 +71,14 @@ export const noticeStyle = defineComponentSlotStyle({
       _notFirst: {
         "& > *:first-of-type": {
           '&[data-placement-bottom="true"]': {
-            marginBottom: "-46px",
+            // paddingBottom: "sm",
+            // paddingBottom: "min(calc(3px + (var(--index) * 12px)), 49px)",
+            paddingBottom: "calc(3px + (var(--index) * 12px))",
           },
           '&[data-placement-top="true"]': {
-            marginTop: "-46px",
+            // paddingTop: "sm",
+            // paddingTop: "min(calc(3px + (var(--index) * 12px)), 49px)",
+            paddingTop: "calc(3px + (var(--index) * 12px))",
           },
           transform: "scaleX(max(calc(1 - var(--index) * 0.1), 0))",
         },
@@ -80,17 +86,20 @@ export const noticeStyle = defineComponentSlotStyle({
     },
     loading: {},
     noticeWrapper: {
+      "&[data-placement-bottom='true']": {
+        transformOrigin: "bottom",
+      },
       display: "flex",
       maxW: "36rem",
       minW: "20rem",
       pointerEvents: "auto",
       transformOrigin: "top",
-      transition: "all 0.3s ease-in-out",
+      transition: "all 0.5s ease",
     },
     root: {
       "&>*": {
         opacity: "calc(1 - var(--index) * 1)",
-        transition: "opacity 0.3s ease-in-out",
+        transition: "opacity 0.5s ease",
         _groupHover: {
           opacity: 1,
         },

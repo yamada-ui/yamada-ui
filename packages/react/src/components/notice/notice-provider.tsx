@@ -135,8 +135,8 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
 )()
 
 interface PlacementValues {
-  x: number
-  y: number
+  x: number | string
+  y: number | string
 }
 
 const getPlacementInitialValues = (placement: string): PlacementValues => {
@@ -144,21 +144,34 @@ const getPlacementInitialValues = (placement: string): PlacementValues => {
 
   switch (convertedPlacement) {
     case "top-left":
-      return { x: -24, y: 0 }
     case "top-center":
-      return { x: 0, y: -24 }
     case "top-right":
-      return { x: 24, y: 0 }
+      return { x: 0, y: "-100%" }
     case "bottom-left":
-      return { x: -24, y: 0 }
     case "bottom-center":
-      return { x: 0, y: 24 }
     case "bottom-right":
-      return { x: 24, y: 0 }
+      return { x: 0, y: "100%" }
     default:
       console.warn(`Unexpected placement value: ${convertedPlacement}`)
-      return { x: 0, y: -24 }
+      return { x: 0, y: "-100%" }
   }
+  // switch (convertedPlacement) {
+  //   case "top-left":
+  //     return { x: "-100%", y: 0 }
+  //   case "top-center":
+  //     return { x: 0, y: "-100%" }
+  //   case "top-right":
+  //     return { x: "100%", y: 0 }
+  //   case "bottom-left":
+  //     return { x: "-100%", y: 0 }
+  //   case "bottom-center":
+  //     return { x: 0, y: "100%" }
+  //   case "bottom-right":
+  //     return { x: "100%", y: 0 }
+  //   default:
+  //     console.warn(`Unexpected placement value: ${convertedPlacement}`)
+  //     return { x: 0, y: -24 }
+  // }
 }
 
 const getPlacementExitValues = (
@@ -167,45 +180,42 @@ const getPlacementExitValues = (
 ): PlacementValues => {
   const convertedPlacement = convertFromNoticePlacement(placement)
 
-  // If closeOnDrag is enabled, simulate a "swipe away" exit animation
-  // with more pronounced movement in the natural drag direction
-  if (closeOnDrag) {
-    switch (convertedPlacement) {
-      case "top-left":
-        return { x: -100, y: 0 }
-      case "top-center":
-        return { x: 0, y: -100 }
-      case "top-right":
-        return { x: 100, y: 0 }
-      case "bottom-left":
-        return { x: -100, y: 0 }
-      case "bottom-center":
-        return { x: 0, y: 100 }
-      case "bottom-right":
-        return { x: 100, y: 0 }
-      default:
-        return { x: 0, y: -100 }
-    }
-  }
-
-  // If closeOnDrag is not enabled, use more subtle exit animations
-  // that still respect the natural direction based on placement
+  // if (closeOnDrag) {
   switch (convertedPlacement) {
     case "top-left":
-      return { x: -40, y: -10 }
+      return { x: -200, y: 0 }
     case "top-center":
-      return { x: 0, y: -40 }
+      return { x: 0, y: -200 }
     case "top-right":
-      return { x: 40, y: -10 }
+      return { x: 200, y: 0 }
     case "bottom-left":
-      return { x: -40, y: 10 }
+      return { x: -200, y: 0 }
     case "bottom-center":
-      return { x: 0, y: 40 }
+      return { x: 0, y: 200 }
     case "bottom-right":
-      return { x: 40, y: 10 }
+      return { x: 200, y: 0 }
     default:
-      return { x: 0, y: -40 }
+      return { x: 0, y: -200 }
   }
+
+  // }
+
+  // switch (convertedPlacement) {
+  //   case "top-left":
+  //     return { x: -40, y: -10 }
+  //   case "top-center":
+  //     return { x: 0, y: -40 }
+  //   case "top-right":
+  //     return { x: 40, y: -10 }
+  //   case "bottom-left":
+  //     return { x: -40, y: 10 }
+  //   case "bottom-center":
+  //     return { x: 0, y: 40 }
+  //   case "bottom-right":
+  //     return { x: 40, y: 10 }
+  //   default:
+  //     return { x: 0, y: -40 }
+  // }
 }
 
 const defaultVariants: Variants = {
@@ -229,7 +239,11 @@ const defaultVariants: Variants = {
     ...getPlacementExitValues(closeOnDrag, placement),
   }),
   initial: ({ placement }) => ({
-    opacity: 0,
+    // opacity: 0.5,
+    // transition: {
+    //   duration: 0.4,
+    //   ease: [0.4, 0, 0.2, 1],
+    // },
     ...getPlacementInitialValues(placement),
   }),
 }
@@ -425,10 +439,17 @@ const NoticeListComponent = withContext<"ul", NoticeListProps>(
     listProps,
     ...props
   }) => {
+    const sortedNotices = useMemo(() => {
+      return notices.sort((a, b) => {
+        const idA = Number.isNaN(Number(a.id)) ? Number(a.id) : Number(a.id)
+        const idB = Number.isNaN(Number(b.id)) ? Number(b.id) : Number(b.id)
+        return idB - idA
+      })
+    }, [notices])
     return (
       <styled.ul
         style={{
-          "--length": notices.length,
+          "--length": sortedNotices.length,
         }}
         data-group=""
         data-placement-bottom={convertedPlacement.includes("bottom")}
@@ -440,7 +461,7 @@ const NoticeListComponent = withContext<"ul", NoticeListProps>(
         {...props}
       >
         <AnimatePresence initial={false}>
-          {notices.map((notice, index) => (
+          {sortedNotices.map((notice, index) => (
             <NoticeComponent
               key={notice.id}
               style={{

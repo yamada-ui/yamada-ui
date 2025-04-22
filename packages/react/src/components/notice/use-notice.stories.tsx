@@ -344,7 +344,11 @@ export const WithColorScheme = () => {
 }
 
 export const WithPlacement = () => {
-  const notice = useNotice({ duration: null })
+  const notice = useNotice({
+    closable: true,
+    closeOnDrag: true,
+    duration: null,
+  })
 
   return (
     <Center
@@ -379,6 +383,7 @@ export const WithPlacement = () => {
                 notice({
                   description: "オッス！オラ悟空！",
                   placement: placement as NoticePlacement,
+                  title: "孫悟空",
                 })
               }
             >

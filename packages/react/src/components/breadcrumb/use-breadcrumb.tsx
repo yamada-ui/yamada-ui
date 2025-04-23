@@ -3,7 +3,7 @@ import type { HTMLProps, PropGetter, StyleValue } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import { cloneElement, useCallback, useMemo } from "react"
 import { useValue } from "../../hooks/use-value"
-import { getValidChildren, runIfFn } from "../../utils"
+import { cx, getValidChildren, runIfFn } from "../../utils"
 
 interface BreadcrumbItem extends HTMLProps<"a"> {
   currentPage?: boolean
@@ -109,8 +109,8 @@ export const useBreadcrumb = ({
   ])
 
   const getRootProps: PropGetter<"nav"> = useCallback(
-    (props) => ({
-      "aria-label": "Breadcrumb",
+    ({ "aria-label": ariaLabel, ...props } = {}) => ({
+      "aria-label": cx("Breadcrumb", ariaLabel),
       ...rest,
       ...props,
     }),
@@ -123,17 +123,19 @@ export const useBreadcrumb = ({
   )
 
   const getLinkProps: PropGetter<"a", { currentPage?: boolean }> = useCallback(
-    ({ href, currentPage, ...props } = {}) => ({
-      href: !currentPage ? href : undefined,
-      "aria-current": currentPage ? "page" : undefined,
+    ({ href, "aria-current": ariaCurrent, currentPage, ...props } = {}) => ({
+      href: currentPage ? undefined : href,
+      "aria-current": currentPage
+        ? cx("page", ariaCurrent as string)
+        : undefined,
       ...props,
     }),
     [],
   )
 
   const getEllipsisProps: PropGetter<"svg"> = useCallback(
-    (props) => ({
-      "aria-label": "Ellipsis",
+    ({ "aria-label": ariaLabel, ...props } = {}) => ({
+      "aria-label": cx("Ellipsis", ariaLabel),
       role: "presentation",
       ...props,
     }),

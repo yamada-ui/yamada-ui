@@ -123,11 +123,9 @@ export const useBreadcrumb = ({
   )
 
   const getLinkProps: PropGetter<"a", { currentPage?: boolean }> = useCallback(
-    ({ href, "aria-current": ariaCurrent, currentPage, ...props } = {}) => ({
-      href: currentPage ? undefined : href,
-      "aria-current": currentPage
-        ? cx("page", ariaCurrent as string)
-        : undefined,
+    ({ href, currentPage, ...props } = {}) => ({
+      href: !currentPage ? href : undefined,
+      "aria-current": currentPage ? "page" : undefined,
       ...props,
     }),
     [],

@@ -3,7 +3,7 @@ import type { HTMLProps, PropGetter, StyleValue } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import { cloneElement, useCallback, useMemo } from "react"
 import { useValue } from "../../hooks/use-value"
-import { cx, getValidChildren, runIfFn } from "../../utils"
+import { getValidChildren, runIfFn } from "../../utils"
 
 interface BreadcrumbItem extends HTMLProps<"a"> {
   currentPage?: boolean
@@ -109,8 +109,8 @@ export const useBreadcrumb = ({
   ])
 
   const getRootProps: PropGetter<"nav"> = useCallback(
-    ({ "aria-label": ariaLabel, ...props } = {}) => ({
-      "aria-label": cx("Breadcrumb", ariaLabel),
+    (props) => ({
+      "aria-label": "Breadcrumb",
       ...rest,
       ...props,
     }),
@@ -132,8 +132,8 @@ export const useBreadcrumb = ({
   )
 
   const getEllipsisProps: PropGetter<"svg"> = useCallback(
-    ({ "aria-label": ariaLabel, ...props } = {}) => ({
-      "aria-label": cx("Ellipsis", ariaLabel),
+    (props) => ({
+      "aria-label": "Ellipsis",
       role: "presentation",
       ...props,
     }),

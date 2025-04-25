@@ -7,11 +7,10 @@ export const airyStyle = defineComponentStyle({
     userSelect: "none",
     width: "fit-content",
     _readOnly: {
-      cursor: "default",
+      layerStyle: "readOnly",
     },
     _disabled: {
-      cursor: "not-allowed",
-      opacity: 0.4,
+      layerStyle: "disabled",
     },
   },
 })

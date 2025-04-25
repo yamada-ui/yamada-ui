@@ -7,7 +7,7 @@ import { useCallback } from "react"
 import { createComponent, insertVars, useVarName } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { dataAttr, handlerAll } from "../../utils"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { airyStyle } from "./airy.style"
 
 export type AiryIdent = "from" | "to"
@@ -76,7 +76,6 @@ export const {
  */
 export const Airy = withContext(
   ({
-    as = "button",
     defaultValue = "from",
     delay = 0,
     disabled,
@@ -108,8 +107,7 @@ export const Airy = withContext(
     }, [animate, setValue, readOnly, opacity, duration, delay])
 
     return (
-      <Motion
-        as={as as "button"}
+      <motion.button
         type="button"
         data-disabled={dataAttr(disabled)}
         data-readonly={dataAttr(readOnly)}
@@ -121,7 +119,7 @@ export const Airy = withContext(
         {...rest}
       >
         {value === "from" ? from : to}
-      </Motion>
+      </motion.button>
     )
   },
 )(undefined, ({ css, ...rest }) => {

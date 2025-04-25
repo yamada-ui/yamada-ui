@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { AiryIdent } from "."
+import type { KeyframeIdent } from "../../core"
 import { useState } from "react"
 import { Airy } from "."
 import { MenuIcon, XIcon } from "../icon"
@@ -60,7 +60,7 @@ export const Readonly: Story = () => {
 }
 
 export const CustomControl: Story = () => {
-  const [value, onChange] = useState<AiryIdent>("to")
+  const [value, onChange] = useState<KeyframeIdent>("to")
 
   return (
     <Airy

@@ -1,6 +1,6 @@
 import type { Variants } from "motion/react"
 import type { ReactNode } from "react"
-import type { Orientation, ThemeProps } from "../../core"
+import type { KeyframeIdent, Orientation, ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"
 import type { FlipStyle } from "./flip.style"
 import { useMemo, useRef, useState } from "react"
@@ -20,8 +20,6 @@ const flipVariants: Variants = {
       ident === "from" ? 0 : 180,
   }),
 }
-
-export type FlipIdent = "from" | "to"
 
 interface Rect {
   height?: number
@@ -44,7 +42,7 @@ export interface FlipProps
    *
    * @default 'from'
    */
-  defaultValue?: FlipIdent
+  defaultValue?: KeyframeIdent
   /**
    *　The animation delay.
    *
@@ -78,11 +76,11 @@ export interface FlipProps
   /**
    * Use this when you want to control the animation from outside the component.
    */
-  value?: FlipIdent
+  value?: KeyframeIdent
   /**
    * This is a callback function that is called when the animation state changes.
    */
-  onChange?: (value: FlipIdent) => void
+  onChange?: (value: KeyframeIdent) => void
 }
 
 export const {

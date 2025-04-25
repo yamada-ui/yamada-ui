@@ -1,18 +1,18 @@
 import type { ReactNode } from "react"
 import type { KeyframeIdent, ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"
-import type { AiryStyle } from "./airy.style"
+import type { RotateStyle } from "./rotate.style"
 import { useAnimation } from "motion/react"
 import { useCallback } from "react"
 import { createComponent, insertVars, useVarName } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { dataAttr, handlerAll } from "../../utils"
 import { motion } from "../motion"
-import { airyStyle } from "./airy.style"
+import { rotateStyle } from "./rotate.style"
 
-export interface AiryProps
-  extends Omit<HTMLMotionProps<"button">, "onChange">,
-    ThemeProps<AiryStyle> {
+export interface RotateProps
+  extends Omit<HTMLMotionProps<"button">, "onChange" | "rotate">,
+    ThemeProps<RotateStyle> {
   /**
    * Passing React elements to "from" is required.
    */
@@ -42,7 +42,7 @@ export interface AiryProps
   /**
    * The animation duration.
    *
-   * @default 0.2
+   * @default 0.4
    */
   duration?: number
   /**
@@ -51,6 +51,12 @@ export interface AiryProps
    * @default false
    */
   readOnly?: boolean
+  /**
+   * The animation rotation.
+   *
+   * @default 45
+   */
+  rotate?: number
   /**
    * Use this when you want to control the animation from outside the component.
    */
@@ -62,24 +68,25 @@ export interface AiryProps
 }
 
 export const {
-  PropsContext: AiryPropsContext,
-  usePropsContext: useAiryPropsContext,
+  PropsContext: RotatePropsContext,
+  usePropsContext: useRotatePropsContext,
   withContext,
-} = createComponent<AiryProps, AiryStyle>("airy", airyStyle)
+} = createComponent<RotateProps, RotateStyle>("rotate", rotateStyle)
 
 /**
- * `Airy` is a component that creates an airy animation, switching between two elements when one is clicked.
+ * `Rotate` is an animation component that alternately rotates two elements as they switch.
  *
- * @see https://yamada-ui.com/components/airy
+ * @see https://yamada-ui.com/components/rotate
  */
-export const Airy = withContext(
+export const Rotate = withContext<"button", RotateProps>(
   ({
     defaultValue = "from",
     delay = 0,
     disabled,
-    duration = 0.2,
+    duration = 0.4,
     from,
     readOnly,
+    rotate = 45,
     to,
     value: valueProp,
     onChange,
@@ -97,12 +104,20 @@ export const Airy = withContext(
     const onClick = useCallback(async () => {
       if (readOnly) return
 
-      await animate.start({ opacity: 0, transition: { delay, duration } })
+      await animate.start({
+        opacity: 0,
+        rotate: `${rotate}deg`,
+        transition: { delay, duration },
+      })
 
       setValue((prev) => (prev === "from" ? "to" : "from"))
 
-      await animate.start({ opacity, transition: { duration } })
-    }, [animate, setValue, readOnly, opacity, duration, delay])
+      await animate.start({
+        opacity: opacity,
+        rotate: "0deg",
+        transition: { duration },
+      })
+    }, [readOnly, animate, rotate, duration, delay, setValue, opacity])
 
     return (
       <motion.button
@@ -111,8 +126,9 @@ export const Airy = withContext(
         data-readonly={dataAttr(readOnly)}
         data-value={value}
         animate={animate}
+        custom={{ rotate }}
         disabled={disabled}
-        initial={{ opacity }}
+        initial={{ opacity, rotate: "0deg" }}
         onClick={handlerAll(onClickProp, onClick)}
         {...rest}
       >

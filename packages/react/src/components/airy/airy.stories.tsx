@@ -33,7 +33,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithDuration: Story = () => {
+export const Duration: Story = () => {
   return (
     <Center
       flexDirection="column"
@@ -56,7 +56,7 @@ export const WithDuration: Story = () => {
   )
 }
 
-export const WithDelay: Story = () => {
+export const Delay: Story = () => {
   return (
     <Center
       flexDirection="column"

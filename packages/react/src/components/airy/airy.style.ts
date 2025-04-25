@@ -2,6 +2,8 @@ import { defineComponentStyle } from "../../core"
 
 export const airyStyle = defineComponentStyle({
   base: {
+    opacity: 1,
+    rounded: "l1",
     userSelect: "none",
     width: "fit-content",
     _readOnly: {
@@ -12,12 +14,6 @@ export const airyStyle = defineComponentStyle({
       opacity: 0.4,
     },
   },
-
-  variants: {},
-
-  sizes: {},
-
-  defaultProps: {},
 })
 
 export type AiryStyle = typeof airyStyle

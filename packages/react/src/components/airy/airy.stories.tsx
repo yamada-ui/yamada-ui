@@ -2,9 +2,9 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { AiryIdent } from "."
 import { useState } from "react"
 import { Airy } from "."
-import { Center } from "../../components/center"
-import { MenuIcon, XIcon } from "../../components/icon"
-import { Text } from "../../components/text"
+import { Center } from "../center"
+import { MenuIcon, XIcon } from "../icon"
+import { Text } from "../text"
 
 type Story = StoryFn<typeof Airy>
 
@@ -33,7 +33,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithDuration: Story = () => {
+export const Duration: Story = () => {
   return (
     <Center
       flexDirection="column"
@@ -56,7 +56,7 @@ export const WithDuration: Story = () => {
   )
 }
 
-export const WithDelay: Story = () => {
+export const Delay: Story = () => {
   return (
     <Center
       flexDirection="column"

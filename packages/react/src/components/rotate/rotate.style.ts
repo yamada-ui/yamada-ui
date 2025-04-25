@@ -2,14 +2,15 @@ import { defineComponentStyle } from "../../core"
 
 export const rotateStyle = defineComponentStyle({
   base: {
+    opacity: 1,
+    rounded: "l1",
     userSelect: "none",
     width: "fit-content",
     _readOnly: {
-      cursor: "default",
+      layerStyle: "readOnly",
     },
     _disabled: {
-      cursor: "not-allowed",
-      opacity: 0.4,
+      layerStyle: "disabled",
     },
   },
 })

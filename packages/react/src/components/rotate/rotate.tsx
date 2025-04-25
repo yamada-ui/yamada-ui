@@ -1,77 +1,71 @@
-import type { ReactElement } from "react"
-import type { ThemeProps } from "../../core"
-import type { Merge } from "../../utils"
-import type { MotionProps } from "../motion"
+import type { ReactNode } from "react"
+import type { KeyframeIdent, ThemeProps } from "../../core"
+import type { HTMLMotionProps } from "../motion"
 import type { RotateStyle } from "./rotate.style"
 import { useAnimation } from "motion/react"
 import { useCallback } from "react"
-import { createComponent, useCreateVars } from "../../core"
+import { createComponent, insertVars, useVarName } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { cx, dataAttr } from "../../utils"
+import { dataAttr, handlerAll } from "../../utils"
 import { motion } from "../motion"
 import { rotateStyle } from "./rotate.style"
 
-export type RotateIdent = "from" | "to"
-
 export interface RotateProps
-  extends Merge<
-      MotionProps<"button">,
-      {
-        /**
-         * Passing React elements to "from" is required.
-         */
-        from: ReactElement
-        /**
-         * Passing React elements to "to" is required.
-         */
-        to: ReactElement
-        /**
-         * You can set the initial state.
-         *
-         * @default 'from'
-         */
-        defaultValue?: RotateIdent
-        /**
-         *　The animation delay.
-         *
-         * @default 0
-         */
-        delay?: number
-        /**
-         * If `true`, the component is disabled.
-         *
-         * @default false
-         */
-        disabled?: boolean
-        /**
-         * The animation duration.
-         *
-         * @default 0.4
-         */
-        duration?: number
-        /**
-         * If `true`, the component is readonly.
-         *
-         * @default false
-         */
-        readOnly?: boolean
-        /**
-         * The animation rotation.
-         *
-         * @default 45
-         */
-        rotate?: number
-        /**
-         * Use this when you want to control the animation from outside the component.
-         */
-        value?: RotateIdent
-        /**
-         * This is a callback function that is called when the animation state changes.
-         */
-        onChange?: (value: RotateIdent) => void
-      }
-    >,
-    ThemeProps<RotateStyle> {}
+  extends Omit<HTMLMotionProps<"button">, "onChange" | "rotate">,
+    ThemeProps<RotateStyle> {
+  /**
+   * Passing React elements to "from" is required.
+   */
+  from: ReactNode
+  /**
+   * Passing React elements to "to" is required.
+   */
+  to: ReactNode
+  /**
+   * You can set the initial state.
+   *
+   * @default 'from'
+   */
+  defaultValue?: KeyframeIdent
+  /**
+   *　The animation delay.
+   *
+   * @default 0
+   */
+  delay?: number
+  /**
+   * If `true`, the component is disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
+  /**
+   * The animation duration.
+   *
+   * @default 0.4
+   */
+  duration?: number
+  /**
+   * If `true`, the component is readonly.
+   *
+   * @default false
+   */
+  readOnly?: boolean
+  /**
+   * The animation rotation.
+   *
+   * @default 45
+   */
+  rotate?: number
+  /**
+   * Use this when you want to control the animation from outside the component.
+   */
+  value?: KeyframeIdent
+  /**
+   * This is a callback function that is called when the animation state changes.
+   */
+  onChange?: (value: KeyframeIdent) => void
+}
 
 export const {
   PropsContext: RotatePropsContext,
@@ -82,12 +76,10 @@ export const {
 /**
  * `Rotate` is an animation component that alternately rotates two elements as they switch.
  *
- * @see Docs https://yamada-ui.com/components/rotate
+ * @see https://yamada-ui.com/components/rotate
  */
 export const Rotate = withContext<"button", RotateProps>(
   ({
-    className,
-    css,
     defaultValue = "from",
     delay = 0,
     disabled,
@@ -97,19 +89,16 @@ export const Rotate = withContext<"button", RotateProps>(
     rotate = 45,
     to,
     value: valueProp,
-    onChange: onChangeProp,
+    onChange,
+    onClick: onClickProp,
     ...rest
   }) => {
-    const [vars, { opacity }] = useCreateVars(
-      { opacity: 1, ...css, ...rest },
-      ["opacity"],
-      { transform: true },
-    )
+    const opacity = useVarName("opacity")
     const animate = useAnimation()
-    const [value, setValue] = useControllableState<RotateIdent>({
+    const [value, setValue] = useControllableState<KeyframeIdent>({
       defaultValue,
       value: valueProp,
-      onChange: onChangeProp,
+      onChange,
     })
 
     const onClick = useCallback(async () => {
@@ -133,21 +122,38 @@ export const Rotate = withContext<"button", RotateProps>(
     return (
       <motion.button
         type="button"
-        className={cx(`ui-rotate--${value}`, className)}
-        css={css}
         data-disabled={dataAttr(disabled)}
         data-readonly={dataAttr(readOnly)}
         data-value={value}
         animate={animate}
-        custom={rotate}
+        custom={{ rotate }}
         disabled={disabled}
         initial={{ opacity, rotate: "0deg" }}
-        vars={vars}
-        onClick={onClick}
+        onClick={handlerAll(onClickProp, onClick)}
         {...rest}
       >
         {value === "from" ? from : to}
       </motion.button>
     )
   },
-)()
+)(undefined, ({ css, ...rest }) => {
+  css = insertVars(css, [
+    {
+      name: "opacity",
+      property: "opacity",
+    },
+  ])
+
+  rest = insertVars(rest, [
+    {
+      name: "opacity",
+      property: "opacity",
+    },
+  ])
+
+  return {
+    ...rest,
+    css,
+    opacity: "{opacity}",
+  }
+})

@@ -1,17 +1,31 @@
-import type { RotateIdent } from "./"
+import type { KeyframeIdent } from "../../core"
 import { useState } from "react"
-import { a11y, render, waitFor } from "../../../test"
+import { a11y, render, screen, waitFor } from "../../../test"
 import { BoxIcon } from "../icon"
 import { Rotate } from "./"
 
 describe("<Rotate />", () => {
   test("passes a11y test", () => {
-    a11y(<Rotate from={<p>ON</p>} to={<p>OFF</p>} />)
+    a11y(<Rotate from="ON" to="OFF" />)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Rotate.displayName).toBe("Rotate")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Rotate from="ON" to="OFF" />)
+    expect(screen.getByText("ON")).toHaveClass("ui-rotate")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Rotate from="ON" to="OFF" />)
+    expect(screen.getByText("ON").tagName).toBe("BUTTON")
   })
 
   test("should render Rotate with value and onChange", async () => {
     const TestComponent = () => {
-      const [value, onChange] = useState<RotateIdent>("to")
+      const [value, onChange] = useState<KeyframeIdent>("to")
 
       return (
         <Rotate

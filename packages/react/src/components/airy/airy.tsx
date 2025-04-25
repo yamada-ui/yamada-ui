@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { ThemeProps } from "../../core"
+import type { KeyframeIdent, ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"
 import type { AiryStyle } from "./airy.style"
 import { useAnimation } from "motion/react"
@@ -9,8 +9,6 @@ import { useControllableState } from "../../hooks/use-controllable-state"
 import { dataAttr, handlerAll } from "../../utils"
 import { motion } from "../motion"
 import { airyStyle } from "./airy.style"
-
-export type AiryIdent = "from" | "to"
 
 export interface AiryProps
   extends Omit<HTMLMotionProps<"button">, "onChange">,
@@ -28,7 +26,7 @@ export interface AiryProps
    *
    * @default 'from'
    */
-  defaultValue?: AiryIdent
+  defaultValue?: KeyframeIdent
   /**
    *　The animation delay.
    *
@@ -56,11 +54,11 @@ export interface AiryProps
   /**
    * Use this when you want to control the animation from outside the component.
    */
-  value?: AiryIdent
+  value?: KeyframeIdent
   /**
    * This is a callback function that is called when the animation state changes.
    */
-  onChange?: (value: AiryIdent) => void
+  onChange?: (value: KeyframeIdent) => void
 }
 
 export const {
@@ -90,7 +88,7 @@ export const Airy = withContext(
   }) => {
     const opacity = useVarName("opacity")
     const animate = useAnimation()
-    const [value, setValue] = useControllableState<AiryIdent>({
+    const [value, setValue] = useControllableState<KeyframeIdent>({
       defaultValue,
       value: valueProp,
       onChange,

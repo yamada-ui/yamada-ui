@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { FlipIdent } from "./"
+import type { KeyframeIdent } from "../../core"
 import { useState } from "react"
 import { AppleIcon, CherryIcon } from "../icon"
 import { Flip } from "./"
@@ -87,7 +87,7 @@ export const ReadOnly: Story = () => {
 }
 
 export const CustomControl: Story = () => {
-  const [value, onChange] = useState<FlipIdent>("from")
+  const [value, onChange] = useState<KeyframeIdent>("from")
 
   return (
     <Flip

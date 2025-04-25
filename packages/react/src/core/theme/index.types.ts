@@ -30,6 +30,8 @@ export type TextDirection = "ltr" | "rtl"
 
 export type BreakpointDirection = "down" | "up"
 
+export type KeyframeIdent = "from" | "to"
+
 export type Orientation = "horizontal" | "vertical"
 
 export type Placement =

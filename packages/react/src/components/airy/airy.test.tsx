@@ -1,4 +1,4 @@
-import type { AiryIdent } from "."
+import type { KeyframeIdent } from "../../core"
 import { useState } from "react"
 import { Airy } from "."
 import { a11y, render, screen, waitFor } from "../../../test"
@@ -24,7 +24,7 @@ describe("<Airy />", () => {
 
   test("should render Airy with value and onChange", async () => {
     const TestComponent = () => {
-      const [value, onChange] = useState<AiryIdent>("to")
+      const [value, onChange] = useState<KeyframeIdent>("to")
 
       return <Airy from="ON" to="OFF" value={value} onChange={onChange} />
     }

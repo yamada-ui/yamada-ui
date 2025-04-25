@@ -4,6 +4,6 @@ import { component, Icon } from "../icon"
 /**
  * `Axis3dIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const Axis3dIcon = component(Icon)({ as: Axis3d })

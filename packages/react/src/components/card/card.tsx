@@ -1,10 +1,10 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { CardStyle } from "./card.style"
 import { createSlotComponent } from "../../core"
 import { cardStyle } from "./card.style"
 
 export interface CardRootProps
-  extends HTMLUIProps<"article">,
+  extends HTMLStyledProps<"article">,
     ThemeProps<CardStyle> {}
 
 export const {
@@ -17,18 +17,18 @@ export const {
 /**
  * `Card` is a component that groups and displays related information. By default, it renders a `article` element.
  *
- * @see Docs https://yamada-ui.com/components/card
+ * @see https://yamada-ui.com/components/card
  */
 export const CardRoot = withProvider("article", "root")()
 
-export interface CardHeaderProps extends HTMLUIProps<"header"> {}
+export interface CardHeaderProps extends HTMLStyledProps<"header"> {}
 
 export const CardHeader = withContext("header", "header")()
 
-export interface CardBodyProps extends HTMLUIProps {}
+export interface CardBodyProps extends HTMLStyledProps {}
 
 export const CardBody = withContext("div", "body")()
 
-export interface CardFooterProps extends HTMLUIProps<"footer"> {}
+export interface CardFooterProps extends HTMLStyledProps<"footer"> {}
 
 export const CardFooter = withContext("footer", "footer")()

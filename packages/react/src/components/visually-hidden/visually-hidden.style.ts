@@ -3,14 +3,13 @@ import { defineComponentStyle } from "../../core"
 export const visuallyHiddenStyle = defineComponentStyle({
   base: {
     border: "0",
-    clip: "rect(0, 0, 0, 0)",
-    height: "1px",
+    boxSize: "1px",
+    clipPath: "rect(0px 0px 0px 0px)",
     margin: "-1px",
     overflow: "hidden",
     padding: "0",
     position: "absolute",
     whiteSpace: "nowrap",
-    width: "1px",
   },
 })
 

@@ -17,18 +17,11 @@ describe("<DataList />", () => {
     await a11y(<DataList.Root items={items} />)
   })
 
-  test("DataList sets `displayName` and `__ui__` correctly", () => {
+  test("DataList sets `displayName` correctly", () => {
     expect(DataList.Root.displayName).toBe("DataListRoot")
-    expect(DataList.Root.__ui__).toBe("DataListRoot")
-
     expect(DataList.Item.displayName).toBe("DataListItem")
-    expect(DataList.Item.__ui__).toBe("DataListItem")
-
     expect(DataList.Term.displayName).toBe("DataListTerm")
-    expect(DataList.Term.__ui__).toBe("DataListTerm")
-
     expect(DataList.Description.displayName).toBe("DataListDescription")
-    expect(DataList.Description.__ui__).toBe("DataListDescription")
   })
 
   test("DataList sets `className` correctly", () => {

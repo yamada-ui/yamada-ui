@@ -6,9 +6,8 @@ describe("<FormatByte />", () => {
     await a11y(<FormatByte value={1024} />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(FormatByte.displayName).toBe("FormatByte")
-    expect(FormatByte.__ui__).toBe("FormatByte")
   })
 
   test("sets `className` correctly", () => {

@@ -1,7 +1,7 @@
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
-  MotionProps,
+  HTMLMotionProps,
   MotionTransitionVariants,
   WithTransitionProps,
 } from "../motion"
@@ -39,7 +39,7 @@ export const fadeScaleVariants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface FadeScaleProps
-  extends WithTransitionProps<MotionProps>,
+  extends WithTransitionProps<HTMLMotionProps>,
     ThemeProps<FadeScaleStyle> {
   /**
    * If `true`, the element will transition back to exit state.
@@ -64,7 +64,7 @@ export const {
 /**
  * `FadeScale` is a component that gradually scales up to reveal or scales down to hide an element.
  *
- * @see Docs https://yamada-ui.com/components/fade-scale
+ * @see https://yamada-ui.com/components/fade-scale
  */
 export const FadeScale = withContext(
   ({

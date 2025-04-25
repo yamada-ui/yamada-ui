@@ -1,8 +1,9 @@
 import type { FC, PropsWithChildren, ReactNode } from "react"
-import type { HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
-import type { ButtonProps, CloseButtonProps } from "../button"
+import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
+import type { ButtonProps } from "../button"
+import type { CloseButtonProps } from "../close-button"
 import type { FocusLockProps } from "../focus-lock"
-import type { MotionProps, MotionTransitionProps } from "../motion"
+import type { HTMLMotionProps, MotionTransitionProps } from "../motion"
 import type { PortalProps } from "../portal"
 import type { SlideProps } from "../slide"
 import type { DrawerStyle } from "./drawer.style"
@@ -10,9 +11,10 @@ import type { UseDrawerProps, UseDrawerReturn } from "./use-drawer"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { findChildren, getValidChildren, wrapOrPassProps } from "../../utils"
-import { Button, CloseButton } from "../button"
+import { Button } from "../button"
+import { CloseButton } from "../close-button"
 import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { Motion } from "../motion"
@@ -105,7 +107,7 @@ export const {
 /**
  * `Drawer` is a component for a panel that appears from the edge of the screen.
  *
- * @see Docs https://yamada-ui.com/components/drawer
+ * @see https://yamada-ui.com/components/drawer
  */
 export const DrawerRoot = withProvider(
   ({
@@ -196,7 +198,7 @@ export const DrawerRoot = withProvider(
                   enabled={blockScrollOnMount}
                   forwardProps
                 >
-                  <ui.div {...getRootProps()}>
+                  <styled.div {...getRootProps()}>
                     {customOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
 
                     {hasChildren ? (
@@ -215,7 +217,7 @@ export const DrawerRoot = withProvider(
                         onSuccess={onSuccess}
                       />
                     )}
-                  </ui.div>
+                  </styled.div>
                 </RemoveScroll>
               </FocusLock>
             </Portal>
@@ -261,7 +263,7 @@ export const DrawerCloseButton = withContext<"button", DrawerCloseButtonProps>(
   return { ...getCloseButtonProps(props) }
 })
 
-export interface DrawerOverlayProps extends MotionProps {}
+export interface DrawerOverlayProps extends HTMLMotionProps {}
 
 export const DrawerOverlay = withContext<"div", DrawerOverlayProps>((props) => {
   const { duration, getOverlayProps } = useDrawerContext()
@@ -273,13 +275,13 @@ export const DrawerOverlay = withContext<"div", DrawerOverlayProps>((props) => {
       exit="exit"
       initial="exit"
       variants={fadeVariants}
-      {...(getOverlayProps(props as HTMLProps) as MotionProps)}
+      {...(getOverlayProps(props as HTMLProps) as HTMLMotionProps)}
     />
   )
 }, "overlay")()
 
 export interface DrawerContentProps
-  extends Omit<MotionProps<"section">, "children">,
+  extends Omit<HTMLMotionProps<"section">, "children">,
     PropsWithChildren {}
 
 export const DrawerContent = withContext<"div", DrawerContentProps>(
@@ -412,7 +414,7 @@ export const ShorthandDrawerContent: FC<ShorthandDrawerContentProps> = ({
   )
 }
 
-export interface DrawerDragBarProps extends HTMLUIProps {}
+export interface DrawerDragBarProps extends HTMLStyledProps {}
 
 export const DrawerDragBar = withContext<"div", DrawerDragBarProps>(
   "div",
@@ -423,7 +425,7 @@ export const DrawerDragBar = withContext<"div", DrawerDragBarProps>(
   return { ...getDragBarProps(props) }
 })
 
-export interface DrawerHeaderProps extends HTMLUIProps<"header"> {}
+export interface DrawerHeaderProps extends HTMLStyledProps<"header"> {}
 
 export const DrawerHeader = withContext<"header", DrawerHeaderProps>(
   "header",
@@ -434,7 +436,7 @@ export const DrawerHeader = withContext<"header", DrawerHeaderProps>(
   return { ...getHeaderProps(props) }
 })
 
-export interface DrawerTitleProps extends HTMLUIProps<"h2"> {}
+export interface DrawerTitleProps extends HTMLStyledProps<"h2"> {}
 
 export const DrawerTitle = withContext<"h2", DrawerTitleProps>("h2", "title")(
   undefined,
@@ -445,7 +447,7 @@ export const DrawerTitle = withContext<"h2", DrawerTitleProps>("h2", "title")(
   },
 )
 
-export interface DrawerBodyProps extends HTMLUIProps {}
+export interface DrawerBodyProps extends HTMLStyledProps {}
 
 export const DrawerBody = withContext<"div", DrawerBodyProps>("div", "body")(
   undefined,
@@ -456,7 +458,7 @@ export const DrawerBody = withContext<"div", DrawerBodyProps>("div", "body")(
   },
 )
 
-export interface DrawerFooterProps extends HTMLUIProps<"footer"> {}
+export interface DrawerFooterProps extends HTMLStyledProps<"footer"> {}
 
 export const DrawerFooter = withContext<"footer", DrawerFooterProps>(
   "footer",

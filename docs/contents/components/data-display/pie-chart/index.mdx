@@ -354,7 +354,7 @@ return <PieChart data={mewtwo} withLabels withLabelLines labelOffset={35} />
 
 ### Make Proportional
 
-To display the label as a percentage, set `isPercent` to `true`. The default is `false`.
+To display the label as a percentage, set `percent` to `true`. The default is `false`.
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -393,7 +393,7 @@ const mewtwo: CellProps[] = useMemo(
   [],
 )
 
-return <PieChart data={mewtwo} withLabels isPercent />
+return <PieChart data={mewtwo} withLabels percent />
 ```
 
 ### Switching the data displayed in the tooltip

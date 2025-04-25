@@ -2,20 +2,21 @@ import { defineComponentSlotStyle } from "../../core"
 
 export const flipStyle = defineComponentSlotStyle({
   base: {
-    flipIdent: {
+    from: {},
+    item: {
       backfaceVisibility: "hidden",
       position: "absolute",
       top: 0,
     },
-    from: {},
     root: {
       position: "relative",
+      rounded: "l1",
       userSelect: "none",
       _readOnly: {
-        cursor: "default",
+        layerStyle: "readOnly",
       },
       _disabled: {
-        cursor: "not-allowed",
+        layerStyle: "disabled",
       },
     },
     to: {},

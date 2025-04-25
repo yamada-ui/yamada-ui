@@ -1,44 +1,12 @@
-import { image } from "@yamada-ui/test"
-import { a11y, act, render, screen } from "../../../test"
+import { a11y, render, screen } from "../../../test"
 import { Avatar, AvatarGroup } from "./"
 
 describe("<Avatar />", () => {
-  beforeEach(() => {
-    vi.useFakeTimers({ shouldAdvanceTime: true })
-  })
-
-  afterEach(() => {
-    vi.useRealTimers()
-    image().restore()
-  })
-
-  test.todo("renders an image", async () => {
-    const mock = image()
-    mock.simulate("loaded")
+  test("renders an image", async () => {
     render(<Avatar name="Hirotomo Yamada" src="https://bit.ly/dan-abramov" />)
-
-    act(() => {
-      vi.runAllTimers()
-    })
 
     const img = await screen.findByAltText("Hirotomo Yamada")
     expect(img).toBeInTheDocument()
-  })
-
-  test.todo("fires onError if image fails to load", () => {
-    const mock = image()
-    mock.simulate("error")
-
-    const src = "https://bit.ly/dan-abramov"
-    const name = "Hirotomo Yamada"
-    const onErrorFn = vi.fn()
-    render(<Avatar name={name} src={src} onError={onErrorFn} />)
-
-    act(() => {
-      vi.runAllTimers()
-    })
-
-    expect(onErrorFn).toHaveBeenCalledTimes(1)
   })
 
   test("renders a name avatar if no src", async () => {
@@ -67,15 +35,8 @@ describe("<AvatarGroup />", () => {
   test("passes a11y test", async () => {
     await a11y(
       <AvatarGroup>
-        <Avatar />
+        <Avatar name="Hirotomo Yamada" />
       </AvatarGroup>,
-      {
-        axeOptions: {
-          rules: {
-            "svg-img-alt": { enabled: false },
-          },
-        },
-      },
     )
   })
 
@@ -119,8 +80,7 @@ describe("<AvatarGroup />", () => {
     expect(moreLabel).not.toBeInTheDocument()
   })
 
-  test("should have the correct displayName and __ui__", () => {
+  test("should have the correct displayName", () => {
     expect(AvatarGroup.displayName).toBe("AvatarGroup")
-    expect(AvatarGroup.__ui__).toBe("AvatarGroup")
   })
 })

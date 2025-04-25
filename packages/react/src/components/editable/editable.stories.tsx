@@ -2,9 +2,11 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 import { Editable } from "."
-import { Button, ButtonGroup, IconButton } from "../button"
+import { Button } from "../button"
+import { ButtonGroup } from "../button-group"
 import { Field } from "../field"
 import { CheckIcon, PencilIcon, XIcon } from "../icon"
+import { IconButton } from "../icon-button"
 import { VStack } from "../stack"
 
 type Story = StoryFn<typeof Editable.Root>

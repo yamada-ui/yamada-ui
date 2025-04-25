@@ -1,17 +1,20 @@
-import type { MatchMediaMock } from "@yamada-ui/test"
-import { matchMedia } from "@yamada-ui/test"
+import MatchMediaMock from "vitest-matchmedia-mock"
 import { renderHook, styledTheme } from "../../../test"
 import { getValue, useValue } from "./"
 
 describe("useValue", () => {
-  let mock: MatchMediaMock
+  let matchMediaMock: MatchMediaMock
 
   beforeAll(() => {
-    mock = matchMedia()
+    matchMediaMock = new MatchMediaMock()
   })
 
   afterEach(() => {
-    mock.clear()
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
   })
 
   test("Returns the base value when passing a responsive object", () => {
@@ -20,7 +23,7 @@ describe("useValue", () => {
   })
 
   test("Returns the correct breakpoint value based on the current screen width", () => {
-    mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
+    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
     const { result } = renderHook(() => useValue({ base: "base", md: "md" }))
     expect(result.current).toBe("md")
   })
@@ -64,14 +67,18 @@ describe("useValue", () => {
 })
 
 describe("getValue", () => {
-  let mock: MatchMediaMock
+  let matchMediaMock: MatchMediaMock
 
   beforeAll(() => {
-    mock = matchMedia()
+    matchMediaMock = new MatchMediaMock()
   })
 
   afterEach(() => {
-    mock.clear()
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
   })
 
   test("Returns the base value when passed a responsive object", () => {
@@ -84,7 +91,7 @@ describe("getValue", () => {
   })
 
   test("Returns the correct breakpoint value based on the current screen width", () => {
-    mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
+    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const value = getValue({ base: "base", md: "md" })(
       styledTheme,

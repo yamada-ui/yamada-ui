@@ -1,5 +1,5 @@
-import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
+import type { StringLiteral } from "../utils"
 import type { StyleConfigs } from "./config"
 import type { CSSObject, CSSToken } from "./css"
 import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"
@@ -737,6 +737,7 @@ export const standardStyles = {
     token: "fontWeights",
     transform: transforms.token("fontWeights"),
   },
+  fontWidth: true,
   forcedColorAdjust: true,
   gap: {
     properties: "gap",
@@ -921,6 +922,7 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  interactivity: true,
   interpolateSize: true,
   invert: {
     properties: "--invert",
@@ -1528,6 +1530,7 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  scrollMarkerGroup: true,
   scrollPadding: {
     properties: "scrollPadding",
     token: "spaces",
@@ -1649,6 +1652,7 @@ export const standardStyles = {
   textAlign: true,
   textAlignLast: true,
   textAnchor: true,
+  textAutospace: true,
   textBox: true,
   textBoxEdge: true,
   textBoxTrim: true,
@@ -5238,11 +5242,10 @@ export interface StyleProps {
    *
    * The <code>font-stretch</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2020-03-19
-   * @newly_available_date 2017-09-19
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-stretch
+   *
+   * @deprecated
    */
   fontStretch?: CSSToken<CSS.Property.FontStretch>
   /**
@@ -5430,11 +5433,24 @@ export interface StyleProps {
    */
   fontWeight?: CSSToken<CSS.Property.FontWeight, "fontWeights">
   /**
+   * ### font-width
+   *
+   * The <code>font-width</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-fonts/#propdef-font-width
+   *
+   * @experimental
+   */
+  fontWidth?: CSSToken<string & {}>
+  /**
    * ### forced-color-adjust
    *
    * The <code>forced-colors</code> CSS @media rule detects when a user has chosen to use a forced colors mode, also known as high-contrast mode, and the <code>forced-color-adjust</code> CSS property sets whether forced colors apply to an element.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/forced-color-adjust
@@ -5948,6 +5964,16 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
    */
   insetStart?: CSSToken<CSS.Property.InsetInlineStart | number, "spaces">
+  /**
+   * ### interactivity
+   *
+   * The CSS `interactivity` property.
+   *
+   * @see https://drafts.csswg.org/css-ui-4/#propdef-interactivity
+   *
+   * @experimental
+   */
+  interactivity?: CSSToken<string & {}>
   /**
    * ### interpolate-size
    *
@@ -6870,7 +6896,8 @@ export interface StyleProps {
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset
@@ -6881,7 +6908,8 @@ export interface StyleProps {
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-anchor
@@ -6892,7 +6920,8 @@ export interface StyleProps {
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-distance
@@ -6903,7 +6932,8 @@ export interface StyleProps {
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-path
@@ -6914,7 +6944,8 @@ export interface StyleProps {
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-position
@@ -6925,7 +6956,8 @@ export interface StyleProps {
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-rotate
@@ -7018,8 +7050,9 @@ export interface StyleProps {
    *
    * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
    *
-   * @baseline `Newly available`
-   * @newly_available_date 2022-09-12
+   * @baseline `Widely available`
+   * @widely_available_date 2022-09-24
+   * @newly_available_date 2020-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow
    */
@@ -7085,8 +7118,9 @@ export interface StyleProps {
    *
    * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
    *
-   * @baseline `Newly available`
-   * @newly_available_date 2022-09-12
+   * @baseline `Widely available`
+   * @widely_available_date 2022-09-24
+   * @newly_available_date 2020-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-x
    */
@@ -7096,8 +7130,9 @@ export interface StyleProps {
    *
    * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
    *
-   * @baseline `Newly available`
-   * @newly_available_date 2022-09-12
+   * @baseline `Widely available`
+   * @widely_available_date 2022-09-24
+   * @newly_available_date 2020-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-y
    */
@@ -7119,7 +7154,8 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
@@ -7130,7 +7166,8 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
@@ -7141,7 +7178,8 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-block
@@ -7152,7 +7190,8 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-inline
@@ -7163,7 +7202,8 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
@@ -7174,7 +7214,8 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
@@ -7185,7 +7226,8 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
@@ -7196,7 +7238,8 @@ export interface StyleProps {
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
@@ -8173,7 +8216,9 @@ export interface StyleProps {
   /**
    * ### scroll-initial-target
    *
-   * The CSS `scroll-initial-target` property.
+   * The <code>scroll-initial-target: nearest</code> CSS declaration sets the initial scroll position of its scroll container to the top of the element, much like scrolling to a URL fragment.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-scroll-snap-2/#propdef-scroll-initial-target
    *
@@ -8318,6 +8363,16 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
    */
   scrollMarginTop?: CSSToken<CSS.Property.ScrollMarginTop | number, "spaces">
+  /**
+   * ### scroll-marker-group
+   *
+   * The CSS `scroll-marker-group` property.
+   *
+   * @see https://drafts.csswg.org/css-overflow-5/#scroll-marker-group-property
+   *
+   * @experimental
+   */
+  scrollMarkerGroup?: CSSToken<string & {}>
   /**
    * ### scroll-padding
    *
@@ -8608,7 +8663,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-speech-1/#speaking-props-speak-as
+   * @see https://developer.mozilla.org/docs/Web/CSS/speak-as
    *
    * @experimental
    */
@@ -8800,7 +8855,8 @@ export interface StyleProps {
    *
    * The <code>text-align-last</code> CSS property sets the alignment of the last line of text before a forced line break.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-align-last
@@ -8819,13 +8875,25 @@ export interface StyleProps {
    */
   textAnchor?: CSSToken<CSS.Property.TextAnchor>
   /**
+   * ### text-autospace
+   *
+   * The <code>text-autospace</code> CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-text-4/#propdef-text-autospace
+   *
+   * @experimental
+   */
+  textAutospace?: CSSToken<string & {}>
+  /**
    * ### text-box
    *
    * The <code>text-box</code> CSS property sets the spacing above and below text based on a font's typographic features. For example, <code>text-box: trim-both ex alphabetic</code> trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline-3/#text-box-shorthand
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-box
    */
   textBox?: CSSToken<string & {}>
   /**
@@ -8835,7 +8903,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline-3/#text-box-edge
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-box-edge
    */
   textBoxEdge?: CSSToken<string & {}>
   /**
@@ -8845,7 +8913,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline-3/#text-box-trim
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-box-trim
    */
   textBoxTrim?: CSSToken<string & {}>
   /**
@@ -9127,7 +9195,7 @@ export interface StyleProps {
   /**
    * ### text-underline-offset
    *
-   * The <code>text-underline-position</code> and <code>text-underline-offset</code> CSS properties set the position and distance from initial position of text underlines on text with <code>text-decoration: underline</code>.
+   * The <code>text-underline-offset</code> CSS property shifts underlines on text from the initial position by a given distance. The initial position is affected by the <code>text-underline-position</code> property.
    *
    * @baseline `Widely available`
    * @widely_available_date 2023-05-19
@@ -9139,11 +9207,11 @@ export interface StyleProps {
   /**
    * ### text-underline-position
    *
-   * The <code>text-underline-position</code> and <code>text-underline-offset</code> CSS properties set the position and distance from initial position of text underlines on text with <code>text-decoration: underline</code>.
+   * The <code>text-underline-position</code> CSS property sets the position of underlines on text. For example, <code>text-underline-position: under</code> places the underline below the text, avoiding crossing descenders. The underline may be further adjusted by the <code>text-underline-offset</code> property.
    *
    * @baseline `Widely available`
-   * @widely_available_date 2023-05-19
-   * @newly_available_date 2020-11-19
+   * @widely_available_date 2023-01-28
+   * @newly_available_date 2020-07-28
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-position
    */

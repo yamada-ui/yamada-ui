@@ -1,6 +1,6 @@
 import type { StyledTheme, UsageTheme } from "../theme"
 import type { TransformOptions } from "./utils"
-import { isArray } from "@yamada-ui/utils"
+import { isArray } from "../../utils"
 import { getColorSchemeVar, isColorScheme } from "../css"
 import { getCSSFunction, globalValues, splitValues, tokenToVar } from "./utils"
 

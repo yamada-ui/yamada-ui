@@ -1,9 +1,9 @@
-import { dataAttr, toTitleCase } from "@yamada-ui/utils"
 import { Fragment } from "react/jsx-runtime"
 import { Button, ButtonPropsContext } from "../../components/button"
 import { For } from "../../components/for"
 import { Grid } from "../../components/grid"
 import { Text } from "../../components/text"
+import { dataAttr, toTitleCase } from "../../utils"
 
 export default {
   title: "Styled System / Focus Ring",

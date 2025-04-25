@@ -1,9 +1,9 @@
 import { Box } from "../components/box"
 import { Center } from "../components/center"
-import { Wrap } from "../components/flex"
 import { HStack } from "../components/stack"
 import { VStack } from "../components/stack"
 import { Text } from "../components/text"
+import { Wrap } from "../components/wrap"
 
 export default {
   title: "Styled System / Pseudo",

@@ -31,7 +31,7 @@ describe("<Skeleton />", () => {
     expect(screen.getByTestId("SkeletonText")).toBeInTheDocument()
   })
   test("should render with isLoaded", () => {
-    render(<Skeleton data-testid="Skeleton" isLoaded />)
+    render(<Skeleton data-testid="Skeleton" loaded />)
     expect(screen.getByTestId("Skeleton")).toHaveClass("ui-skeleton--loaded")
   })
 })

@@ -73,7 +73,7 @@ export interface FloatProps extends Omit<HTMLUIProps, "offset">, FloatOptions {}
 /**
  * `Float` is a component used to anchor an element to the edge of a container.
  *
- * @see Docs https://yamada-ui.com/components/layouts/float
+ * @see https://yamada-ui.com/components/layouts/float
  */
 export const Float: FC<FloatProps> = ({
   className,

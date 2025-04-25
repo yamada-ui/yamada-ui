@@ -66,11 +66,11 @@ import { Fieldset, Legend, HelperMessage, ErrorMessage } from "@yamada-ui/react"
 
 ### エラーメッセージを表示する
 
-エラーメッセージを表示する場合は、`isInvalid`を`true`に設定し、`errorMessage`に`ReactNode`を設定します。
+エラーメッセージを表示する場合は、`invalid`を`true`に設定し、`errorMessage`に`ReactNode`を設定します。
 
 ```tsx
 <Fieldset
-  isInvalid
+  invalid
   legend="Terms and Conditions"
   errorMessage="Agreement is required."
 >
@@ -81,7 +81,7 @@ import { Fieldset, Legend, HelperMessage, ErrorMessage } from "@yamada-ui/react"
 または、`ErrorMessage`を使用してカスタマイズすることも可能です。
 
 ```tsx
-<Fieldset isInvalid legend="Terms and Conditions">
+<Fieldset invalid legend="Terms and Conditions">
   <Checkbox>I agree to the Terms and Conditions.</Checkbox>
   <ErrorMessage color="gray.300">Agreement is required.</ErrorMessage>
 </Fieldset>
@@ -89,17 +89,17 @@ import { Fieldset, Legend, HelperMessage, ErrorMessage } from "@yamada-ui/react"
 
 ### ヘルプメッセージとエラーメッセージの置き換える
 
-エラーメッセージは、`isInvalid`が`true`の場合のみ表示されます。エラーメッセージが表示されたときに、ヘルプメッセージとエラーメッセージの置き換える場合は、`isReplace`を`true`に設定します。
+エラーメッセージは、`invalid`が`true`の場合のみ表示されます。エラーメッセージが表示されたときに、ヘルプメッセージとエラーメッセージの置き換える場合は、`replace`を`true`に設定します。
 
-`isReplace`プロパティを使用して、ヘルプメッセージとエラーメッセージを置き換えます。
+`replace`プロパティを使用して、ヘルプメッセージとエラーメッセージを置き換えます。
 
 ```tsx
 <Fieldset
-  isInvalid
+  invalid
   legend="Terms and Conditions"
   helperMessage="Please review the terms carefully before agreeing."
   errorMessage="Agreement is required."
-  isReplace={true}
+  replace={true}
 >
   <Checkbox>I agree to the Terms and Conditions.</Checkbox>
 </Fieldset>
@@ -107,11 +107,11 @@ import { Fieldset, Legend, HelperMessage, ErrorMessage } from "@yamada-ui/react"
 
 ### 必須化する
 
-必須化する場合は、`isRequired`を`true`に設定します。
+必須化する場合は、`required`を`true`に設定します。
 
 ```tsx
 <Fieldset
-  isRequired
+  required
   legend="Terms and Conditions"
   helperMessage="Please review the terms carefully before agreeing."
   errorMessage="Agreement is required."
@@ -122,11 +122,11 @@ import { Fieldset, Legend, HelperMessage, ErrorMessage } from "@yamada-ui/react"
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <Fieldset
-  isDisabled
+  disabled
   legend="Terms and Conditions"
   helperMessage="Please review the terms carefully before agreeing."
   errorMessage="Agreement is required."
@@ -137,11 +137,11 @@ import { Fieldset, Legend, HelperMessage, ErrorMessage } from "@yamada-ui/react"
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <Fieldset
-  isReadOnly
+  readOnly
   legend="Terms and Conditions"
   helperMessage="Please review the terms carefully before agreeing."
   errorMessage="Agreement is required."
@@ -157,7 +157,7 @@ import { Fieldset, Legend, HelperMessage, ErrorMessage } from "@yamada-ui/react"
 ```tsx
 <VStack>
   <Fieldset
-    isRequired
+    required
     legend="Terms and Conditions"
     requiredIndicator={
       <Tag size="sm" colorScheme="red" ms={2}>
@@ -168,7 +168,7 @@ import { Fieldset, Legend, HelperMessage, ErrorMessage } from "@yamada-ui/react"
     <Checkbox>I agree to the Terms and Conditions.</Checkbox>
   </Fieldset>
 
-  <Fieldset isRequired>
+  <Fieldset required>
     <Legend
       requiredIndicator={
         <Tag size="sm" colorScheme="red" ms={2}>

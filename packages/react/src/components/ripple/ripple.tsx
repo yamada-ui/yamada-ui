@@ -1,6 +1,6 @@
 import type { Key } from "react"
 import type { FC, ThemeProps } from "../../core"
-import type { MotionProps } from "../motion"
+import type { HTMLMotionProps } from "../motion"
 import type { RippleStyle } from "./ripple.style"
 import type { RippleOptions } from "./use-ripple"
 import { AnimatePresence } from "motion/react"
@@ -13,7 +13,7 @@ const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max)
 
 export interface RippleProps
-  extends MotionProps<"span">,
+  extends HTMLMotionProps<"span">,
     ThemeProps<RippleStyle> {
   ripples: RippleOptions[]
   onClear: (key: Key) => void
@@ -34,7 +34,7 @@ export const {
 /**
  * `Ripple` is a component that adds a ripple effect to elements, allowing users to recognize when they have clicked.
  *
- * @see Docs https://yamada-ui.com/components/ripple
+ * @see https://yamada-ui.com/components/ripple
  */
 export const Ripple: FC<RippleProps> = withContext(
   ({

@@ -36,14 +36,14 @@ interface SnacksOptions {
    * The variants of the snacks container.
    * Check the docs to see the variants of possible modifiers you can pass.
    *
-   * @see Docs https://motion.dev/docs/react-animation#variants
+   * @see https://motion.dev/docs/react-animation#variants
    */
   containerVariants?: Variants
   /**
    * The variants of the snacks list.
    * Check the docs to see the variants of possible modifiers you can pass.
    *
-   * @see Docs https://motion.dev/docs/react-animation#variants
+   * @see https://motion.dev/docs/react-animation#variants
    */
   listVariants?: Variants
   /**

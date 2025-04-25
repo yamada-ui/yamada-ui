@@ -1,9 +1,9 @@
 import type { ReactElement, ReactNode } from "react"
-import type { HTMLProps, PropGetter, Token } from "../../core"
+import type { HTMLProps, PropGetter, StyleValue } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import { cloneElement, useCallback, useMemo } from "react"
 import { useValue } from "../../hooks/use-value"
-import { getValidChildren, runIfFunc } from "../../utils"
+import { getValidChildren, runIfFn } from "../../utils"
 
 interface BreadcrumbItem extends HTMLProps<"a"> {
   currentPage?: boolean
@@ -18,7 +18,7 @@ export interface UseBreadcrumbProps extends HTMLProps<"nav"> {
   /**
    * Number of elements visible on the end(right) edges.
    */
-  endBoundaries?: Token<number>
+  endBoundaries?: StyleValue<number>
   /**
    * If provided, generate breadcrumb items based on items.
    */
@@ -30,7 +30,7 @@ export interface UseBreadcrumbProps extends HTMLProps<"nav"> {
   /**
    * Number of elements visible on the start(left) edges.
    */
-  startBoundaries?: Token<number>
+  startBoundaries?: StyleValue<number>
 }
 
 export const useBreadcrumb = ({
@@ -66,7 +66,7 @@ export const useBreadcrumb = ({
     (items: BreadcrumbItem[]) => {
       if (!ellipsis) return null
 
-      return runIfFunc(ellipsis, { items })
+      return runIfFn(ellipsis, { items })
     },
     [ellipsis],
   )

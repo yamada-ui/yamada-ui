@@ -1,13 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { toTitleCase } from "@yamada-ui/utils"
 import { Fragment, useRef } from "react"
 import { ScrollArea } from "."
+import { toTitleCase } from "../../utils"
 import { Button } from "../button"
-import { Wrap } from "../flex"
 import { For } from "../for"
 import { Heading } from "../heading"
 import { VStack } from "../stack"
 import { Text } from "../text"
+import { Wrap } from "../wrap"
 
 type Story = StoryFn<typeof ScrollArea>
 

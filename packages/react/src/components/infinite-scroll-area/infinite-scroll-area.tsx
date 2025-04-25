@@ -1,15 +1,15 @@
 import type { ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { UseInfiniteScrollProps } from "../../hooks/use-infinite-scroll"
 import type { InfiniteScrollAreaStyle } from "./infinite-scroll-area.style"
 import { useRef } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { useInfiniteScroll } from "../../hooks/use-infinite-scroll"
 import { mergeRefs } from "../../utils"
 import { infiniteScrollAreaStyle } from "./infinite-scroll-area.style"
 
 export interface InfiniteScrollAreaProps
-  extends Omit<HTMLUIProps, keyof UseInfiniteScrollProps>,
+  extends Omit<HTMLStyledProps, keyof UseInfiniteScrollProps>,
     UseInfiniteScrollProps,
     ThemeProps<InfiniteScrollAreaStyle> {
   /**
@@ -23,7 +23,7 @@ export interface InfiniteScrollAreaProps
   /**
    * Props for infinite scroll area trigger component.
    */
-  triggerProps?: HTMLUIProps
+  triggerProps?: HTMLStyledProps
 }
 
 export const {
@@ -40,7 +40,7 @@ export const {
  * `InfiniteScrollArea` is for providing infinite scroll functionality.
  * This feature provides a smooth scrolling experience by automatically loading and displaying the next dataset when the user reaches the end of the page.
  *
- * @see Docs https://yamada-ui.com/components/infinite-scroll-area
+ * @see https://yamada-ui.com/components/infinite-scroll-area
  */
 export const InfiniteScrollArea = withProvider(
   ({
@@ -80,7 +80,7 @@ export const InfiniteScrollArea = withProvider(
     const showTrigger = !disabled && (hasFinish || !finish)
 
     return (
-      <ui.div
+      <styled.div
         ref={mergeRefs(rootRef, ref)}
         aria-busy="false"
         role="feed"
@@ -99,14 +99,14 @@ export const InfiniteScrollArea = withProvider(
             {finish ? finishProp : loading}
           </InfiniteScrollTrigger>
         ) : null}
-      </ui.div>
+      </styled.div>
     )
   },
   "root",
   { transferProps: ["orientation"] },
 )()
 
-interface InfiniteScrollTriggerProps extends HTMLUIProps {}
+interface InfiniteScrollTriggerProps extends HTMLStyledProps {}
 
 const InfiniteScrollTrigger = withContext<"div", InfiniteScrollTriggerProps>(
   "div",

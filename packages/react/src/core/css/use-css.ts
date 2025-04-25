@@ -8,10 +8,10 @@ import { css } from "./css"
 export const useCSS = (cssObject: CSSObject | CSSObjectOrFunc = {}) => {
   const { theme } = useTheme()
 
-  return useMemo(() => getCSS(cssObject)(theme), [cssObject, theme])
+  return useMemo(() => getCSS(theme)(cssObject), [cssObject, theme])
 }
 
 export const getCSS =
-  (cssObject: CSSObject | CSSObjectOrFunc = {}) =>
   (theme: StyledTheme) =>
-    emotionCSS(css(cssObject)(theme))
+  (cssObject: CSSObject | CSSObjectOrFunc = {}) =>
+    emotionCSS(css(theme)(cssObject))

@@ -1,7 +1,24 @@
 import { Highlight, useHighlight } from "."
-import { render, renderHook } from "../../../test"
+import { a11y, render, renderHook, screen } from "../../../test"
 
 describe("<Highlight />", () => {
+  test("passes a11y test", async () => {
+    await a11y(<Highlight query="highlight">Highlight</Highlight>)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Highlight.name).toBe("Highlight")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <Highlight data-testid="highlight" query="highlight">
+        Highlight
+      </Highlight>,
+    )
+    expect(screen.getByTestId("highlight").tagName).toBe("P")
+  })
+
   test.each([[], ""])(
     "useHighlight returns no matches if queries is empty but returns original value",
     (query) => {

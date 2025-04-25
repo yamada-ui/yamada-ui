@@ -159,7 +159,7 @@ export const useSelect = <T extends MaybeValue = string>(
     flip,
     gutter,
     items = [],
-    lazy,
+    lazy = isLazy,
     lazyBehavior,
     matchWidth = true,
     maxSelectValues,

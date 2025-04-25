@@ -1,7 +1,7 @@
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
-  MotionProps,
+  HTMLMotionProps,
   MotionTransitionVariants,
   WithTransitionProps,
 } from "../motion"
@@ -48,7 +48,7 @@ const variants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface CollapseProps
-  extends WithTransitionProps<MotionProps>,
+  extends WithTransitionProps<HTMLMotionProps>,
     ThemeProps<CollapseStyle> {
   /**
    * If `true`, the opacity of the content will be animated.
@@ -79,7 +79,7 @@ export const {
 /**
  * `Collapse` is a component that allows you to expand or collapse an element for display.
  *
- * @see Docs https://yamada-ui.com/components/collapse
+ * @see https://yamada-ui.com/components/collapse
  */
 export const Collapse = withContext(
   ({

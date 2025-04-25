@@ -1,7 +1,7 @@
 import type { Variants } from "motion/react"
-import type { ThemeProps, UIValue } from "../../core"
+import type { StyleValue, ThemeProps } from "../../core"
 import type {
-  MotionProps,
+  HTMLMotionProps,
   MotionTransitionVariants,
   WithTransitionProps,
 } from "../motion"
@@ -58,20 +58,20 @@ export const slideFadeVariants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface SlideFadeProps
-  extends WithTransitionProps<MotionProps>,
+  extends WithTransitionProps<HTMLMotionProps>,
     ThemeProps<SlideFadeStyle> {
   /**
    * The offset on the horizontal or `x` axis.
    *
    * @default 0
    */
-  offsetX?: UIValue<number | string>
+  offsetX?: StyleValue<number | string>
   /**
    * The offset on the vertical or `y` axis.
    *
    * @default 8
    */
-  offsetY?: UIValue<number | string>
+  offsetY?: StyleValue<number | string>
   /**
    * If `true`, the element will be transitioned back to the offset when it leaves. Otherwise, it'll only fade out.
    *
@@ -92,7 +92,7 @@ export const {
 /**
  * `SlideFade` is a component that gradually shows or hides an element while moving it from a specified position.
  *
- * @see Docs https://yamada-ui.com/components/slide-fade
+ * @see https://yamada-ui.com/components/slide-fade
  */
 export const SlideFade = withContext(
   ({

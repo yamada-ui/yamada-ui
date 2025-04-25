@@ -45,34 +45,34 @@ import { IconButton } from "@yamada-ui/react"
 
 ### 無効にする
 
-無効にする場合は、`isDisabled`を`true`にします。
+無効にする場合は、`disabled`を`true`にします。
 
 ```tsx
 <Wrap gap="md">
   <IconButton
-    isDisabled
+    disabled
     colorScheme="primary"
     variant="primary"
     icon={<PlusIcon />}
   />
   <IconButton
-    isDisabled
+    disabled
     colorScheme="secondary"
     variant="outline"
     icon={<MinusIcon />}
   />
   <IconButton
-    isDisabled
+    disabled
     colorScheme="warning"
     variant="ghost"
     icon={<SunIcon />}
   />
   <IconButton
-    isDisabled
+    disabled
     colorScheme="danger"
     variant="link"
     icon={<MoonIcon />}
   />
-  <IconButton isDisabled variant="unstyled" icon={<CheckIcon />} />
+  <IconButton disabled variant="unstyled" icon={<CheckIcon />} />
 </Wrap>
 ```

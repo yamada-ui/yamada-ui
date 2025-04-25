@@ -1,10 +1,10 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { BadgeStyle } from "./badge.style"
 import { createComponent } from "../../core"
 import { badgeStyle } from "./badge.style"
 
 export interface BadgeProps
-  extends HTMLUIProps<"span">,
+  extends HTMLStyledProps<"span">,
     ThemeProps<BadgeStyle> {}
 
 export const {
@@ -16,6 +16,6 @@ export const {
 /**
  * `Badge` is a component that emphasizes the status of an item to make it immediately recognizable.
  *
- * @see Docs https://yamada-ui.com/components/badge
+ * @see https://yamada-ui.com/components/badge
  */
 export const Badge = withContext("span")()

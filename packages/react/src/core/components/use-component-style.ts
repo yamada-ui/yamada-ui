@@ -7,7 +7,7 @@ import type {
   CSSObject,
   CSSSlotObject,
   ResponsiveObject,
-  UIValue,
+  StyleValue,
 } from "../css"
 import type {
   BreakpointDirection,
@@ -18,8 +18,8 @@ import type {
   ThemeProps,
   WithoutThemeProps,
 } from "../theme"
-import type { ComponentSlot } from "./create-component"
-import type { HTMLUIProps } from "./index.types"
+import type { ComponentSlot, ComponentSlotName } from "./create-component"
+import type { HTMLStyledProps } from "./index.types"
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
 import { useTheme } from "../../providers/theme-provider"
@@ -36,9 +36,10 @@ import {
   toArray,
   toKebabCase,
 } from "../../utils"
-import { createQuery } from "../css"
+import { createQuery, mergeCSS } from "../css"
 import { pseudos } from "../pseudos"
 import { useColorSchemeContext } from "../styled"
+import { isEqualProps } from "./props"
 
 type Style<Y extends boolean = false> = Y extends false
   ? CSSObject
@@ -283,7 +284,7 @@ function getCompoundStyle<Y extends boolean = false>(
 }
 
 function getModifierStyle<Y extends boolean = false>(
-  value: UIValue<number | string> | undefined,
+  value: StyleValue<number | string> | undefined,
   mergedStyle: MergedStyle,
 ) {
   return function (options: GetStyleOptions): Style<Y> | undefined {
@@ -316,6 +317,41 @@ export function getSlotClassName<Y extends number | string | symbol>(
   } else {
     return `${className}__${toKebabCase(slot as string)}`
   }
+}
+
+function getSlotCSS<Y extends number | string | symbol>(
+  slot?: ComponentSlot<Y>,
+  slotCSS?: CSSSlotObject<Y>,
+): CSSObject[] {
+  if (!slotCSS || !slot) return []
+
+  if (isArray(slot)) {
+    return slot.map((slot) => slotCSS[slot]!)
+  } else if (isObject(slot)) {
+    if (isArray(slot.slot)) {
+      return slot.slot.map((slot) => slotCSS[slot]!)
+    } else {
+      return [slotCSS[slot.slot]!]
+    }
+  } else {
+    return [slotCSS[slot]!]
+  }
+}
+
+export function mergeSlotCSS<Y extends number | string | symbol>(
+  slot?: ComponentSlot<Y>,
+  slotCSS?: CSSSlotObject<Y>,
+  css?: CSSObject | CSSObject[],
+) {
+  if (!slotCSS || !slot) return css
+
+  const result: CSSObject[] = []
+
+  result.push(...getSlotCSS(slot, slotCSS))
+
+  if (css) result.push(...toArray(css))
+
+  return result
 }
 
 function omitThemeProps<
@@ -381,23 +417,25 @@ interface UseStyleOptions<
   className?: string
   style?: M
   hasSlot?: H
+  slot?: ComponentSlot<ComponentSlotName<M>>
   transferProps?: D[]
 }
 
 function useStyle<
-  Y extends HTMLUIProps & ThemeProps<{}> = Dict,
+  Y extends HTMLStyledProps & ThemeProps<{}> = Dict,
   M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
   D extends keyof Y = keyof Y,
   H extends boolean = false,
 >(
   props: Y,
   {
-    className,
+    className: defaultClassName,
     style: componentStyle,
     hasSlot,
+    slot,
     transferProps,
   }: UseStyleOptions<Y, M, D, H> = {},
-) {
+): [Style<H>, WithoutThemeProps<Y, M, D>] {
   const { theme } = useTheme()
   const { getAtRule, wrap } = theme.__layers ?? {}
   const rootColorScheme = useColorSchemeContext()
@@ -405,7 +443,7 @@ function useStyle<
   const { direction = "down", identifier } = theme.__config?.breakpoint ?? {}
   const options = { direction, hasSlot, identifier, queries, wrap }
 
-  const propsRef = useRef({} as WithoutThemeProps<Y, M, D>)
+  const propsRef = useRef<Dict>({})
   const styleRef = useRef<Style<H>>({})
 
   props = filterUndefined(props)
@@ -424,22 +462,14 @@ function useStyle<
       defaultProps = {},
     } = componentStyle
 
-    props.colorScheme ??= rootColorScheme ?? defaultProps.colorScheme
-
-    const mergedProps = { ...defaultProps, ...props }
-
-    props.variant ??= mergedProps.variant
-    props.size ??= mergedProps.size
-
+    const colorScheme = props.colorScheme ?? rootColorScheme
+    const className = cx(defaultClassName ?? customClassName, props.className)
+    const mergedProps = { ...defaultProps, ...props, className, colorScheme }
     const omitProps = Object.keys(propVariants ?? {})
-    const { hasSize, hasVariant } = getHasAtRuleStyle(props.css)(getAtRule)
+    const { size, variant } = mergedProps
 
     if (variants) omitProps.push("variant")
     if (sizes) omitProps.push("size")
-
-    if (props.variant)
-      props = Object.assign(props, { "data-variant": props.variant })
-    if (props.size) props = Object.assign(props, { "data-size": props.size })
 
     const computedProps = omitThemeProps(
       mergedProps,
@@ -447,63 +477,64 @@ function useStyle<
       transferProps,
     ) as Y
 
-    computedProps.className = cx(
-      className ?? customClassName,
-      computedProps.className,
-    )
+    if (!isEqualProps(propsRef.current, computedProps, ["css", "children"])) {
+      const { hasSize, hasVariant } = getHasAtRuleStyle(props.css)(getAtRule)
 
-    let style: Style<H> = {}
+      let style: Style<H> = {}
 
-    if (base) {
-      const baseStyle = getStyle<H>(base)(options)
+      if (base) {
+        const baseStyle = getStyle<H>(base)(options)
 
-      style = merge(style, wrapStyle<H>("base", baseStyle)(options))
+        style = merge(style, wrapStyle<H>("base", baseStyle)(options))
+      }
+
+      if (sizes && !hasSize) {
+        const sizeStyle = getModifierStyle<H>(size, sizes)(options)
+
+        style = merge(style, wrapStyle<H>("size", sizeStyle)(options))
+      }
+
+      if (variants && !hasVariant) {
+        const variantStyle = getModifierStyle<H>(variant, variants)(options)
+
+        style = merge(style, wrapStyle<H>("variant", variantStyle)(options))
+      }
+
+      if (propVariants)
+        style = getPropStyle<H>(mergedProps, propVariants, style)(options)
+
+      if (compounds)
+        style = getCompoundStyle<H>(mergedProps, compounds, style)(options)
+
+      if (!isEqual(styleRef.current, style)) {
+        styleRef.current = style
+
+        if (hasSlot) {
+          computedProps.css = mergeSlotCSS<ComponentSlotName<M>>(
+            slot,
+            style as CSSSlotObject,
+            computedProps.css,
+          )
+        } else {
+          computedProps.css = mergeCSS(style, computedProps.css)
+        }
+      } else {
+        computedProps.css = propsRef.current.css
+      }
+    } else {
+      computedProps.css = propsRef.current.css
     }
 
-    if (sizes && !hasSize) {
-      const sizeStyle = getModifierStyle<H>(mergedProps.size, sizes)(options)
-
-      style = merge(style, wrapStyle<H>("size", sizeStyle)(options))
-    }
-
-    if (variants && !hasVariant) {
-      const variantStyle = getModifierStyle<H>(
-        mergedProps.variant,
-        variants,
-      )(options)
-
-      style = merge(style, wrapStyle<H>("variant", variantStyle)(options))
-    }
-
-    if (propVariants) {
-      style = getPropStyle<H>(mergedProps, propVariants, style)(options)
-    }
-
-    if (compounds) {
-      style = getCompoundStyle<H>(mergedProps, compounds, style)(options)
-    }
-
-    const styleEqual = isEqual(styleRef.current, style)
-
-    if (!styleEqual) styleRef.current = style
-
-    const propsEqual = isEqual(propsRef.current, computedProps)
-
-    if (!propsEqual)
-      propsRef.current = computedProps as unknown as WithoutThemeProps<Y, M, D>
+    if (!isEqualProps(propsRef.current, computedProps))
+      propsRef.current = computedProps
   } else {
-    props.className = cx(className, props.className)
+    props.className = cx(defaultClassName, props.className)
 
-    const propsEqual = isEqual(propsRef.current, props)
-
-    if (!propsEqual)
+    if (!isEqualProps(propsRef.current, props))
       propsRef.current = props as unknown as WithoutThemeProps<Y, M, D>
   }
 
-  return {
-    ...propsRef.current,
-    css: styleRef.current,
-  }
+  return [styleRef.current, propsRef.current as WithoutThemeProps<Y, M, D>]
 }
 
 export interface UseComponentStyleOptions<

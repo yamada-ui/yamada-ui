@@ -1,11 +1,11 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FormatNumberStyle } from "./format-number.style"
-import { createComponent, ui } from "../../core"
+import { createComponent, styled } from "../../core"
 import { formatNumberStyle } from "./format-number.style"
 import { useFormatNumber } from "./use-format-number"
 
 export interface FormatNumberProps
-  extends Omit<HTMLUIProps, "style">,
+  extends Omit<HTMLStyledProps, "style">,
     ThemeProps<FormatNumberStyle>,
     Intl.NumberFormatOptions {
   /**
@@ -31,7 +31,7 @@ export const {
 /**
  * `FormatNumber` is used to format numbers to a specific locale and options.
  *
- * @see Docs https://yamada-ui.com/components/format-number
+ * @see https://yamada-ui.com/components/format-number
  */
 export const FormatNumber = withContext<"span", FormatNumberProps>(
   ({
@@ -85,6 +85,6 @@ export const FormatNumber = withContext<"span", FormatNumberProps>(
       useGrouping,
     })
 
-    return <ui.span {...rest}>{text}</ui.span>
+    return <styled.span {...rest}>{text}</styled.span>
   },
 )()

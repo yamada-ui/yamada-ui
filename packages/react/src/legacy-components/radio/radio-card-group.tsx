@@ -32,7 +32,7 @@ export interface RadioCardGroupProps<Y extends number | string = string>
 /**
  * `RadioCardGroup` is a component that groups `RadioCard` components.
  *
- * @see Docs https://yamada-ui.com/components/forms/radio-card
+ * @see https://yamada-ui.com/components/forms/radio-card
  */
 export const RadioCardGroup = forwardRef(
   <Y extends number | string = string>(

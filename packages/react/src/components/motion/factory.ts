@@ -1,17 +1,26 @@
-import type { ComponentType, ForwardRefExoticComponent } from "react"
+import type { ComponentType } from "react"
 import type { DOMElement, StyledOptions } from "../../core"
-import type { MotionComponents, MotionFactory } from "./index.types"
+import type { MotionStyledComponent } from "./index.types"
 import { motion as _motion } from "motion/react"
 import { styled } from "../../core"
 
-interface Factory extends MotionFactory, MotionComponents {}
+type Components = {
+  [Y in DOMElement]: MotionStyledComponent<Y>
+}
+
+interface Factory extends Components {
+  <T extends DOMElement = DOMElement, M extends object = {}>(
+    el: T,
+    options?: StyledOptions,
+  ): MotionStyledComponent<T, M>
+}
 
 function factory() {
   const cache = new Map<DOMElement, ComponentType<any>>()
 
   return new Proxy(styled, {
     apply: (_target, _thisArg, [el, options]: [DOMElement, StyledOptions]) => {
-      const component = styled(el, options) as ForwardRefExoticComponent<any>
+      const component = styled(el, options)
 
       return _motion.create(component)
     },
@@ -31,6 +40,6 @@ function factory() {
 /**
  * `motion` is a component that allows for the easy implementation of a wide variety of animations.
  *
- * @see Docs https://yamada-ui.com/components/motion
+ * @see https://yamada-ui.com/components/motion
  */
 export const motion = factory()

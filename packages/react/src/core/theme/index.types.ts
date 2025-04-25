@@ -1,16 +1,16 @@
 import type { RefObject } from "react"
 import type { PortalProps } from "../../components/portal"
 import type { DefaultTheme } from "../../theme"
-import type { Dict, StringLiteral, Union } from "../../utils"
+import type { Booleanish, Dict, StringLiteral, Union } from "../../utils"
 import type {
-  AnimationStyle,
   CreateBreakpointsReturn,
   CreateLayersReturn,
+  CSSAnimationObject,
   CSSModifierObject,
   CSSObject,
   CSSPropObject,
   CSSSlotObject,
-  UIValue,
+  StyleValue,
 } from "../css"
 import type { GeneratedThemeTokens } from "../generated-theme-tokens.types"
 
@@ -228,7 +228,7 @@ export interface ThemeConfig {
      * This allows you to define custom names for each layer type in your theme.
      * Set to `false` to disable the use of CSS layers.
      *
-     * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
+     * @see https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
      */
     layers?: false | Layers
     /**
@@ -242,12 +242,6 @@ export interface ThemeConfig {
    * The config of breakpoint.
    */
   breakpoint?: BreakpointConfig
-  /**
-   * The text direction to apply to the application.
-   *
-   * @default 'ltr'
-   */
-  direction?: TextDirection
   /**
    * If `true`, temporarily disable transitions.
    * This is used to avoid unnecessary movements caused by transitions during color mode switching, for example.
@@ -287,12 +281,6 @@ export interface ThemeConfig {
     screen?: LoadingConfig
   }
   /**
-   * The locale to apply to the application.
-   *
-   * @default 'en-US'
-   */
-  locale?: string
-  /**
    * The config of the notice.
    */
   notice?: NoticeConfig
@@ -320,7 +308,7 @@ type ThemeVariantProps<Y extends Dict = Dict> =
         /**
          * The variant of the component.
          */
-        variant?: UIValue<Union<keyof Required<Y>["variants"]>>
+        variant?: StyleValue<Union<keyof Required<Y>["variants"]>>
       }
 
 type ThemeSizeProps<Y extends Dict = Dict> =
@@ -330,17 +318,15 @@ type ThemeSizeProps<Y extends Dict = Dict> =
         /**
          * The size of the component.
          */
-        size?: UIValue<Union<keyof Required<Y>["sizes"]>>
+        size?: StyleValue<Union<keyof Required<Y>["sizes"]>>
       }
 
 type ThemeComponentProps<Y extends Dict = Dict> =
   string extends keyof Required<Y>["props"]
     ? {}
     : {
-        [K in keyof Required<Y>["props"]]?: UIValue<
-          keyof Required<Y>["props"][K] extends "false" | "true"
-            ? boolean
-            : keyof Required<Y>["props"][K]
+        [K in keyof Required<Y>["props"]]?: StyleValue<
+          Booleanish<keyof Required<Y>["props"][K]>
         >
       }
 
@@ -390,7 +376,7 @@ export interface DefineThemeKeyframeTokens {
 }
 
 export interface DefineThemeAnimationTokens<
-  T extends AnimationStyle | string = AnimationStyle,
+  T extends CSSAnimationObject | string = CSSAnimationObject,
 > {
   [key: DefineThemeValue]: DefineThemeAnimationTokens<T> | T | T[]
 }
@@ -444,7 +430,7 @@ export interface DefineThemeSemanticTokens
     | "styles"
     | "themeSchemes"
   > {
-  animations?: DefineThemeAnimationTokens<AnimationStyle | string>
+  animations?: DefineThemeAnimationTokens<CSSAnimationObject | string>
   colors?: DefineThemeColorSemanticTokens
   colorSchemes?: DefineThemeColorSchemeSemanticTokens
 }
@@ -529,9 +515,7 @@ export type ComponentDefaultProps<
 > = (string extends keyof Y
   ? {}
   : {
-      [key in keyof Y]?: UIValue<
-        keyof Y[key] extends "false" | "true" ? boolean : boolean | keyof Y[key]
-      >
+      [key in keyof Y]?: StyleValue<Booleanish<keyof Y[key]>>
     }) & {
   /**
    * The color scheme of the component.
@@ -540,11 +524,11 @@ export type ComponentDefaultProps<
   /**
    * The size of the component.
    */
-  size?: UIValue<keyof M>
+  size?: StyleValue<keyof M>
   /**
    * The variant of the component.
    */
-  variant?: UIValue<keyof D>
+  variant?: StyleValue<keyof D>
 }
 
 interface ComponentSharedStyle<
@@ -567,28 +551,28 @@ export type ComponentCompound<
   M extends CSSPropObject = CSSPropObject,
   D extends CSSModifierObject = CSSModifierObject,
   H extends CSSModifierObject = CSSModifierObject,
-> = (string extends keyof M
+> = (string extends keyof D
   ? {}
   : {
-      [key in keyof M]?:
-        | UIValue<
-            keyof M[key] extends "false" | "true"
-              ? boolean
-              : boolean | keyof M[key]
-          >
-        | UIValue<
-            keyof M[key] extends "false" | "true"
-              ? boolean
-              : boolean | keyof M[key]
-          >[]
-    }) & {
-  css: Y
-  [key: string]: any
-  colorScheme?: ThemeTokens["colorSchemes"] | ThemeTokens["colorSchemes"][]
-  size?: (keyof D)[] | keyof D
-  variant?: (keyof H)[] | keyof H
-  layer?: LayerScheme
-}
+      size?: (keyof D)[] | keyof D
+    }) &
+  (string extends keyof H
+    ? {}
+    : {
+        variant?: (keyof H)[] | keyof H
+      }) &
+  (string extends keyof M
+    ? {}
+    : {
+        [key in keyof M]?:
+          | StyleValue<Booleanish<keyof M[key]>>
+          | StyleValue<Booleanish<keyof M[key]>>[]
+      }) & {
+    css: Y
+    [key: string]: any
+    colorScheme?: ThemeTokens["colorSchemes"] | ThemeTokens["colorSchemes"][]
+    layer?: LayerScheme
+  }
 
 export interface ComponentStyle<
   Y extends CSSPropObject = CSSPropObject,

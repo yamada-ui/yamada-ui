@@ -3,9 +3,10 @@ import type {
   ReactElement,
   ReactNode,
 } from "react"
-import type { HTMLProps, HTMLUIProps, PropGetter } from "../../core"
-import { dataAttr, handlerAll } from "@yamada-ui/utils"
+import type { HTMLProps, HTMLStyledProps, PropGetter } from "../../core"
 import { useCallback, useState } from "react"
+import { useI18n } from "../../providers/i18n-provider"
+import { dataAttr, handlerAll } from "../../utils"
 
 const defaultFormat = (name: string) => {
   const names = name.trim().split(" ")
@@ -28,19 +29,19 @@ export interface UseAvatarProps extends HTMLProps {
   /**
    * The image url of the avatar.
    */
-  src?: HTMLUIProps<"img">["src"]
+  src?: HTMLStyledProps<"img">["src"]
   /**
    * List of sources to use for different screen resolutions.
    */
-  srcSet?: HTMLUIProps<"img">["srcSet"]
+  srcSet?: HTMLStyledProps<"img">["srcSet"]
   /**
    * The `HTMLImageElement` property `alt`.
    */
-  alt?: HTMLUIProps<"img">["alt"]
+  alt?: HTMLStyledProps<"img">["alt"]
   /**
    * The `HTMLImageElement` property `crossOrigin`.
    */
-  crossOrigin?: HTMLUIProps<"img">["crossOrigin"]
+  crossOrigin?: HTMLStyledProps<"img">["crossOrigin"]
   /**
    * The fallback text to display if the image is not provided.
    */
@@ -56,7 +57,7 @@ export interface UseAvatarProps extends HTMLProps {
   /**
    * Defines loading strategy.
    */
-  loading?: HTMLUIProps<"img">["loading"]
+  loading?: HTMLStyledProps<"img">["loading"]
   /**
    * Defining which referrer is sent when fetching the resource.
    *
@@ -78,10 +79,10 @@ export const useAvatar = ({
   referrerPolicy = "no-referrer",
   ...rest
 }: UseAvatarProps = {}) => {
-  if (name) name = format(name)
-
+  const initials = name ? format(name) : undefined
   const [loaded, setLoaded] = useState<boolean>(false)
   const fallback = !src || !loaded
+  const { t } = useI18n("avatar")
 
   const getGroupProps: PropGetter = useCallback((props) => ({ ...props }), [])
 
@@ -100,7 +101,7 @@ export const useAvatar = ({
       ...props,
       src,
       srcSet,
-      alt,
+      alt: name || alt,
       crossOrigin,
       draggable: false,
       hidden: fallback,
@@ -108,18 +109,20 @@ export const useAvatar = ({
       referrerPolicy,
       onLoad: handlerAll(onLoad, () => setLoaded(true)),
     }),
-    [src, srcSet, alt, crossOrigin, loading, referrerPolicy, fallback],
+    [src, srcSet, alt, crossOrigin, loading, referrerPolicy, fallback, name],
   )
 
   const getFallbackProps: PropGetter = useCallback(
     (props) => ({
       ...props,
-      "aria-label": !fallbackMessage ? name || alt || "Avatar icon" : undefined,
-      children: fallbackMessage || name || icon,
+      "aria-label": !fallbackMessage
+        ? name || alt || t("Avatar Icon")
+        : undefined,
+      children: fallbackMessage || initials || icon,
       hidden: !fallback,
       role: "img",
     }),
-    [name, fallback, icon, fallbackMessage, alt],
+    [name, initials, fallback, icon, fallbackMessage, alt, t],
   )
 
   return {

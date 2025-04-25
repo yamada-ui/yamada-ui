@@ -249,7 +249,7 @@ export const uiProps = {
     description: ["If `true`, it clamps truncate a text after one line."],
   },
   vars: {
-    type: "{ name: string; token?: ThemeToken, value?: Token<any> }[]",
+    type: "{ name: string; token?: ThemeToken, value?: CSSToken<any> }[]",
     description: ["Set CSS variables."],
     variableLength: true,
   },

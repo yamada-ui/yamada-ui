@@ -1,12 +1,17 @@
 import type { ReactElement } from "react"
-import type { CSSProps, HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
+import type {
+  CSSProps,
+  HTMLProps,
+  HTMLStyledProps,
+  ThemeProps,
+} from "../../core"
 import type { ListStyle } from "./list.style"
 import { cloneElement, isValidElement } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { listStyle } from "./list.style"
 
 export interface ListRootProps
-  extends HTMLUIProps<"ul">,
+  extends HTMLStyledProps<"ul">,
     Omit<ThemeProps<ListStyle>, "styleType"> {
   /**
    * If provided, generate elements based on items.
@@ -33,7 +38,7 @@ export const {
 /**
  * `List` is a component for displaying lists. By default, it renders a `ul` element.
  *
- * @see Docs https://yamada-ui.com/components/list
+ * @see https://yamada-ui.com/components/list
  */
 export const ListRoot = withProvider(
   ({
@@ -47,7 +52,7 @@ export const ListRoot = withProvider(
     const as = asProp ?? (listStyleType == "decimal" ? "ol" : undefined)
 
     return (
-      <ui.ul
+      <styled.ul
         as={as}
         listStylePosition={listStylePosition}
         listStyleType={listStyleType}
@@ -56,29 +61,29 @@ export const ListRoot = withProvider(
       >
         {children ??
           items?.map((props, index) => <ListItem key={index} {...props} />)}
-      </ui.ul>
+      </styled.ul>
     )
   },
   "root",
   { transferProps: ["styleType"] },
 )()
 
-export interface ListItemProps extends HTMLUIProps<"li"> {
+export interface ListItemProps extends HTMLStyledProps<"li"> {
   icon?: ReactElement<any>
 }
 
 export const ListItem = withContext<"li", ListItemProps>(
   ({ children, icon, ...rest }) => (
-    <ui.li {...rest}>
+    <styled.li {...rest}>
       <ListItemIcon>{icon}</ListItemIcon>
 
       {children}
-    </ui.li>
+    </styled.li>
   ),
   "item",
 )()
 
-export interface ListIconProps extends HTMLUIProps<"svg"> {}
+export interface ListIconProps extends HTMLStyledProps<"svg"> {}
 
 export const ListItemIcon = withContext<"svg", ListIconProps>(
   ({ children, ...rest }) => {

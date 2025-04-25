@@ -1,5 +1,5 @@
 import type {
-  AnimationStyle,
+  CSSAnimationObject,
   CSSModifierObject,
   CSSObject,
   CSSPropObject,
@@ -138,7 +138,9 @@ export const defineTokens = {
 interface DefineSemanticTokens extends DefineTokens {}
 
 interface DefineAnimationSemanticTokens {
-  <T extends DefineThemeAnimationTokens<AnimationStyle | string>>(value: T): T
+  <T extends DefineThemeAnimationTokens<CSSAnimationObject | string>>(
+    value: T,
+  ): T
 }
 
 interface DefineColorSemanticTokens {

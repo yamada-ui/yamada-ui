@@ -1,7 +1,7 @@
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
-  MotionProps,
+  HTMLMotionProps,
   MotionTransitionVariants,
   WithTransitionProps,
 } from "../motion"
@@ -28,7 +28,7 @@ export const fadeVariants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface FadeProps
-  extends WithTransitionProps<MotionProps>,
+  extends WithTransitionProps<HTMLMotionProps>,
     ThemeProps<FadeStyle> {}
 
 export const {
@@ -40,7 +40,7 @@ export const {
 /**
  * `Fade` is a component that gradually shows or hides an element.
  *
- * @see Docs https://yamada-ui.com/components/fade
+ * @see https://yamada-ui.com/components/fade
  */
 export const Fade = withContext(
   ({

@@ -1,5 +1,5 @@
 import type { RefObject } from "react"
-import type { CSSObject, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSObject, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ZStackStyle } from "./z-stack.style"
 import {
   cloneElement,
@@ -11,12 +11,12 @@ import {
   useRef,
   useState,
 } from "react"
-import { createComponent, insertVars, mergeCSS, ui } from "../../core"
+import { createComponent, insertVars, mergeCSS, styled } from "../../core"
 import { getValidChildren, mergeRefs } from "../../utils"
 import { zStackStyle } from "./z-stack.style"
 
 export interface ZStackProps
-  extends Omit<HTMLUIProps, "direction">,
+  extends Omit<HTMLStyledProps, "direction">,
     ThemeProps<ZStackStyle> {
   /**
    * Stack in the specified direction.
@@ -61,7 +61,7 @@ export const {
 /**
  * `ZStack` is a component that groups elements and provides space between child elements.
  *
- * @see Docs https://yamada-ui.com/components/stack
+ * @see https://yamada-ui.com/components/stack
  */
 export const ZStack = withContext(
   ({
@@ -187,14 +187,14 @@ export const ZStack = withContext(
     }, [cloneChildren, direction, reverse, fit])
 
     return (
-      <ui.div
+      <styled.div
         css={css}
         minHeight={fit ? `${rect.height}px` : undefined}
         minWidth={fit ? `${rect.width}px` : undefined}
         {...rest}
       >
         {cloneChildren}
-      </ui.div>
+      </styled.div>
     )
   },
 )(undefined, ({ css, ...rest }) => {

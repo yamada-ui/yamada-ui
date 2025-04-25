@@ -1,13 +1,13 @@
 import type { ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { StatStyle } from "./stat.style"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { findChild, getValidChildren, isEmpty, omitChildren } from "../../utils"
 import { TriangleIcon } from "../icon"
 import { statStyle } from "./stat.style"
 
 export interface StatRootProps
-  extends HTMLUIProps<"dl">,
+  extends HTMLStyledProps<"dl">,
     ThemeProps<StatStyle> {
   /**
    * If `true`, container will center its children regardless of their width.
@@ -59,7 +59,7 @@ export const {
 /**
  * `Stat` is used to show numbers and data in a box.
  *
- * @see Docs https://yamada-ui.com/components/stat
+ * @see https://yamada-ui.com/components/stat
  */
 export const StatRoot = withProvider<"dl", StatRootProps>(
   ({
@@ -83,7 +83,7 @@ export const StatRoot = withProvider<"dl", StatRootProps>(
       : children
 
     return (
-      <ui.dl {...rest}>
+      <styled.dl {...rest}>
         {customStatLabel ?? <StatLabel {...labelProps}>{label}</StatLabel>}
         {customStatValue ?? <StatValue {...valueProps}>{value}</StatValue>}
         {customStatHelperMessage ?? (
@@ -93,13 +93,13 @@ export const StatRoot = withProvider<"dl", StatRootProps>(
           </StatHelperMessage>
         )}
         {cloneChildren}
-      </ui.dl>
+      </styled.dl>
     )
   },
   "root",
 )()
 
-export interface StatIconProps extends HTMLUIProps<"svg"> {
+export interface StatIconProps extends HTMLStyledProps<"svg"> {
   /**
    * @default "increase"
    */
@@ -119,21 +119,21 @@ export const StatIcon = withContext<"svg", StatIconProps>(
   "icon",
 )()
 
-export interface StatLabelProps extends HTMLUIProps<"dt"> {}
+export interface StatLabelProps extends HTMLStyledProps<"dt"> {}
 
 export const StatLabel = withContext<"dt", StatLabelProps>("dt", "label")()
 
-export interface StatValueProps extends HTMLUIProps<"dd"> {}
+export interface StatValueProps extends HTMLStyledProps<"dd"> {}
 
 export const StatValue = withContext<"dd", StatValueProps>("dd", "value")()
 
-export interface StatUnitProps extends HTMLUIProps<"span"> {}
+export interface StatUnitProps extends HTMLStyledProps<"span"> {}
 
 export const StatUnit = withContext<"span", StatUnitProps>("span", "unit")()
 
-export interface StatHelperMessageProps extends HTMLUIProps<"dd"> {}
+export interface StatHelperMessageProps extends HTMLStyledProps<"dd"> {}
 
-export const StatHelperMessage = withContext<"dd", StatValueProps>(
+export const StatHelperMessage = withContext<"dd", StatHelperMessageProps>(
   "dd",
   "helperMessage",
 )()

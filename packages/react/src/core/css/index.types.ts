@@ -109,4 +109,4 @@ export interface FunctionCSSInterpolation {
   (theme: StyledTheme<UsageTheme>): CSSObject
 }
 
-export type CSSObjectOrFunc = CSSObject | FunctionCSSInterpolation
+export type CSSObjectOrFunction = CSSObject | FunctionCSSInterpolation

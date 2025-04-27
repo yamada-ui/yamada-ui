@@ -1,6 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { Box } from "../box"
-import { Center } from "../center"
 import { Grid, GridItem } from "../grid"
 import { Float } from "./float"
 
@@ -15,21 +14,15 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Box
-      bg={["blackAlpha.50", "whiteAlpha.100"]}
-      boxSize="3xs"
-      position="relative"
-    >
-      <Float>
-        <Center
-          bg="primary"
-          color="fg.contrast"
-          fontSize="sm"
-          px="1.5"
-          rounded="md"
-        >
-          New
-        </Center>
+    <Box bg="bg.panel" boxSize="3xs" position="relative">
+      <Float
+        bg="bg.contrast"
+        color="fg.contrast"
+        fontSize="sm"
+        px="1.5"
+        rounded="l1"
+      >
+        New
       </Float>
     </Box>
   )
@@ -53,20 +46,19 @@ export const Placement: Story = () => {
       {placements.map((placement) => (
         <GridItem
           key={placement}
-          bg={["blackAlpha.50", "whiteAlpha.100"]}
+          bg="bg.panel"
           boxSize="3xs"
           position="relative"
         >
-          <Float placement={placement}>
-            <Center
-              bg="primary"
-              color="fg.contrast"
-              fontSize="sm"
-              px="1.5"
-              rounded="md"
-            >
-              New
-            </Center>
+          <Float
+            bg="bg.contrast"
+            color="fg.contrast"
+            fontSize="sm"
+            placement={placement}
+            px="1.5"
+            rounded="md"
+          >
+            New
           </Float>
         </GridItem>
       ))}
@@ -77,57 +69,45 @@ export const Placement: Story = () => {
 export const Offset: Story = () => {
   return (
     <Grid gap="md" p="md" templateColumns="repeat(3, 1fr)">
-      <GridItem
-        bg={["blackAlpha.50", "whiteAlpha.100"]}
-        boxSize="3xs"
-        position="relative"
-      >
-        <Float offset="md" placement="start-start">
-          <Center
-            bg="primary"
-            color="fg.contrast"
-            fontSize="sm"
-            px="1.5"
-            rounded="md"
-          >
-            New
-          </Center>
+      <GridItem bg="bg.panel" boxSize="3xs" position="relative">
+        <Float
+          bg="bg.contrast"
+          color="fg.contrast"
+          fontSize="sm"
+          offset="md"
+          placement="start-start"
+          px="1.5"
+          rounded="md"
+        >
+          New
         </Float>
       </GridItem>
 
-      <GridItem
-        bg={["blackAlpha.50", "whiteAlpha.100"]}
-        boxSize="3xs"
-        position="relative"
-      >
-        <Float offset={["0", "md"]} placement="center-start">
-          <Center
-            bg="primary"
-            color="fg.contrast"
-            fontSize="sm"
-            px="1.5"
-            rounded="md"
-          >
-            New
-          </Center>
+      <GridItem bg="bg.panel" boxSize="3xs" position="relative">
+        <Float
+          bg="bg.contrast"
+          color="fg.contrast"
+          fontSize="sm"
+          offset={["0", "md"]}
+          placement="center-start"
+          px="1.5"
+          rounded="md"
+        >
+          New
         </Float>
       </GridItem>
 
-      <GridItem
-        bg={["blackAlpha.50", "whiteAlpha.100"]}
-        boxSize="3xs"
-        position="relative"
-      >
-        <Float offset={["md", "0"]} placement="end-end">
-          <Center
-            bg="primary"
-            color="fg.contrast"
-            fontSize="sm"
-            px="1.5"
-            rounded="md"
-          >
-            New
-          </Center>
+      <GridItem bg="bg.panel" boxSize="3xs" position="relative">
+        <Float
+          bg="bg.contrast"
+          color="fg.contrast"
+          fontSize="sm"
+          offset={["md", "0"]}
+          placement="end-end"
+          px="1.5"
+          rounded="md"
+        >
+          New
         </Float>
       </GridItem>
     </Grid>

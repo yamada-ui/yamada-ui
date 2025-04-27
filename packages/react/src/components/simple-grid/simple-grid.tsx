@@ -12,7 +12,9 @@ import { replaceObject } from "../../utils"
 import { Grid } from "../grid"
 import { simpleGridStyle } from "./simple-grid.style"
 
-interface SimpleGridOptions {
+export interface SimpleGridProps
+  extends WithoutThemeProps<GridProps, "columns">,
+    ThemeProps<SimpleGridStyle> {
   /**
    * The number of columns.
    */
@@ -23,11 +25,6 @@ interface SimpleGridOptions {
    */
   minChildWidth?: CSSProps["minWidth"]
 }
-
-export interface SimpleGridProps
-  extends WithoutThemeProps<GridProps, "columns">,
-    ThemeProps<SimpleGridStyle>,
-    SimpleGridOptions {}
 
 export const {
   PropsContext: SimpleGridPropsContext,

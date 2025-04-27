@@ -150,7 +150,7 @@ return <NativeSelect placeholder="キャラクターを選択" items={items} />
     placeholder="custom border color"
   />
   <NativeSelect
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -159,19 +159,16 @@ return <NativeSelect placeholder="キャラクターを選択" items={items} />
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <NativeSelect isDisabled variant="outline" placeholder="outline" />
-  <NativeSelect isDisabled variant="filled" placeholder="filled" />
-  <NativeSelect isDisabled variant="flushed" placeholder="flushed" />
-  <NativeSelect isDisabled variant="unstyled" placeholder="unstyled" />
+  <NativeSelect disabled variant="outline" placeholder="outline" />
+  <NativeSelect disabled variant="filled" placeholder="filled" />
+  <NativeSelect disabled variant="flushed" placeholder="flushed" />
+  <NativeSelect disabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl
-    isDisabled
-    label="Which notifications would you like to receive?"
-  >
+  <FormControl disabled label="Which notifications would you like to receive?">
     <NativeSelect placeholder="Select notifications" />
   </FormControl>
 </VStack>
@@ -179,19 +176,16 @@ return <NativeSelect placeholder="キャラクターを選択" items={items} />
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <NativeSelect isReadOnly variant="outline" placeholder="outline" />
-  <NativeSelect isReadOnly variant="filled" placeholder="filled" />
-  <NativeSelect isReadOnly variant="flushed" placeholder="flushed" />
-  <NativeSelect isReadOnly variant="unstyled" placeholder="unstyled" />
+  <NativeSelect readOnly variant="outline" placeholder="outline" />
+  <NativeSelect readOnly variant="filled" placeholder="filled" />
+  <NativeSelect readOnly variant="flushed" placeholder="flushed" />
+  <NativeSelect readOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl
-    isReadOnly
-    label="Which notifications would you like to receive?"
-  >
+  <FormControl readOnly label="Which notifications would you like to receive?">
     <NativeSelect placeholder="Select notifications" />
   </FormControl>
 </VStack>
@@ -199,17 +193,17 @@ return <NativeSelect placeholder="キャラクターを選択" items={items} />
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <NativeSelect isInvalid variant="outline" placeholder="outline" />
-  <NativeSelect isInvalid variant="filled" placeholder="filled" />
-  <NativeSelect isInvalid variant="flushed" placeholder="flushed" />
-  <NativeSelect isInvalid variant="unstyled" placeholder="unstyled" />
+  <NativeSelect invalid variant="outline" placeholder="outline" />
+  <NativeSelect invalid variant="filled" placeholder="filled" />
+  <NativeSelect invalid variant="flushed" placeholder="flushed" />
+  <NativeSelect invalid variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isInvalid
+    invalid
     label="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -281,7 +275,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.select}
+      invalid={!!errors.select}
       label="Who is your favorite character?"
       errorMessage={errors.select ? errors.select.message : undefined}
     >

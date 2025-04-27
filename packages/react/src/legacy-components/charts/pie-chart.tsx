@@ -64,7 +64,7 @@ export interface PieChartProps
 /**
  * `PieChart` is a component for drawing pie charts to compare multiple sets of data.
  *
- * @see Docs https://yamada-ui.com/components/data-display/pie-chart
+ * @see https://yamada-ui.com/components/data-display/pie-chart
  */
 export const PieChart = forwardRef<PieChartProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("PieChart", props)

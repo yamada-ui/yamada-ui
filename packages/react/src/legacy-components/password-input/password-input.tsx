@@ -54,7 +54,7 @@ export interface PasswordInputProps
 /**
  * `PasswordInput` is a component that allows users to input passwords with a visibility toggle.
  *
- * @see Docs https://yamada-ui.com/components/forms/password-input
+ * @see https://yamada-ui.com/components/forms/password-input
  */
 export const PasswordInput = forwardRef<PasswordInputProps, "div">(
   (props, ref) => {

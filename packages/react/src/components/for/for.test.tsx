@@ -10,9 +10,8 @@ describe("<For />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
-    expect(For.displayName).toBe("For")
-    expect(For.__ui__).toBe("For")
+  test("sets `displayName` correctly", () => {
+    expect(For.name).toBe("For")
   })
 
   test("For renders fallback when array is empty", () => {

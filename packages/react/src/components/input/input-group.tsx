@@ -84,6 +84,3 @@ export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
     </InputPropsContext>
   )
 }
-
-InputGroupRoot.displayName = "InputGroupRoot"
-InputGroupRoot.__ui__ = "InputGroupRoot"

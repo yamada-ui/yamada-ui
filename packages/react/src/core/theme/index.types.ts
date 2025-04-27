@@ -30,6 +30,8 @@ export type TextDirection = "ltr" | "rtl"
 
 export type BreakpointDirection = "down" | "up"
 
+export type KeyframeIdent = "from" | "to"
+
 export type Orientation = "horizontal" | "vertical"
 
 export type Placement =
@@ -228,7 +230,7 @@ export interface ThemeConfig {
      * This allows you to define custom names for each layer type in your theme.
      * Set to `false` to disable the use of CSS layers.
      *
-     * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
+     * @see https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
      */
     layers?: false | Layers
     /**
@@ -242,12 +244,6 @@ export interface ThemeConfig {
    * The config of breakpoint.
    */
   breakpoint?: BreakpointConfig
-  /**
-   * The text direction to apply to the application.
-   *
-   * @default 'ltr'
-   */
-  direction?: TextDirection
   /**
    * If `true`, temporarily disable transitions.
    * This is used to avoid unnecessary movements caused by transitions during color mode switching, for example.
@@ -286,12 +282,6 @@ export interface ThemeConfig {
      */
     screen?: LoadingConfig
   }
-  /**
-   * The locale to apply to the application.
-   *
-   * @default 'en-US'
-   */
-  locale?: string
   /**
    * The config of the notice.
    */

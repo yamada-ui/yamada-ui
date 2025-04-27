@@ -1,8 +1,8 @@
 import type { ReactNode } from "react"
-import type { HTMLUIProps } from "../../core"
+import type { HTMLStyledProps } from "../../core"
 import { isArray } from "../../utils"
 
-export interface ForProps<T> extends Omit<HTMLUIProps, "children"> {
+export interface ForProps<T> extends Omit<HTMLStyledProps, "children"> {
   /**
    * The render function to render each item in the array.
    */
@@ -20,7 +20,7 @@ export interface ForProps<T> extends Omit<HTMLUIProps, "children"> {
 /**
  * `For` is a component used to loop over an array and render a component for each item.
  *
- * @see Docs https://yamada-ui.com/components/for
+ * @see https://yamada-ui.com/components/for
  */
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
 export const For = <T extends any>({
@@ -32,6 +32,3 @@ export const For = <T extends any>({
 
   return each.map(children)
 }
-
-For.displayName = "For"
-For.__ui__ = "For"

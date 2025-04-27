@@ -1,8 +1,8 @@
 import type { ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldsetStyle } from "./fieldset.style"
 import { useId, useMemo } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import {
   createContext,
   dataAttr,
@@ -25,7 +25,7 @@ export const [FieldsetContext, useFieldsetContext] =
   })
 
 export interface FieldsetRootProps
-  extends HTMLUIProps<"fieldset">,
+  extends HTMLStyledProps<"fieldset">,
     ThemeProps<FieldsetStyle> {
   /**
    * If `true`, the fieldset will be disabled.
@@ -86,7 +86,7 @@ export const {
 /**
  * `Fieldset` is a component used to group multiple controls.
  *
- * @see Docs https://yamada-ui.com/components/fieldset
+ * @see https://yamada-ui.com/components/fieldset
  */
 export const FieldsetRoot = withProvider<"fieldset", FieldsetRootProps>(
   ({
@@ -135,7 +135,7 @@ export const FieldsetRoot = withProvider<"fieldset", FieldsetRootProps>(
 
     return (
       <FieldsetContext value={context}>
-        <ui.fieldset {...rest}>
+        <styled.fieldset {...rest}>
           {customHeader || (
             <FieldsetHeader {...headerProps}>
               {customLegend ||
@@ -162,14 +162,14 @@ export const FieldsetRoot = withProvider<"fieldset", FieldsetRootProps>(
                 {errorMessage}
               </FieldsetErrorMessage>
             ) : null)}
-        </ui.fieldset>
+        </styled.fieldset>
       </FieldsetContext>
     )
   },
   "root",
 )()
 
-export interface FieldsetLegendProps extends HTMLUIProps<"legend"> {}
+export interface FieldsetLegendProps extends HTMLStyledProps<"legend"> {}
 
 export const FieldsetLegend = withContext<"legend", FieldsetLegendProps>(
   "legend",
@@ -185,21 +185,21 @@ export const FieldsetLegend = withContext<"legend", FieldsetLegendProps>(
   }
 })
 
-export interface FieldsetHeaderProps extends HTMLUIProps {}
+export interface FieldsetHeaderProps extends HTMLStyledProps {}
 
 export const FieldsetHeader = withContext<"div", FieldsetHeaderProps>(
   "div",
   "header",
 )()
 
-export interface FieldsetContentProps extends HTMLUIProps {}
+export interface FieldsetContentProps extends HTMLStyledProps {}
 
 export const FieldsetContent = withContext<"div", FieldsetContentProps>(
   "div",
   "content",
 )()
 
-export interface FieldsetHelperMessageProps extends HTMLUIProps<"span"> {}
+export interface FieldsetHelperMessageProps extends HTMLStyledProps<"span"> {}
 
 export const FieldsetHelperMessage = withContext<
   "span",
@@ -210,7 +210,7 @@ export const FieldsetHelperMessage = withContext<
   return { "aria-describedby": id, ...props }
 })
 
-export interface FieldsetErrorMessageProps extends HTMLUIProps<"span"> {}
+export interface FieldsetErrorMessageProps extends HTMLStyledProps<"span"> {}
 
 export const FieldsetErrorMessage = withContext<
   "span",
@@ -220,5 +220,5 @@ export const FieldsetErrorMessage = withContext<
 
   if (!invalid) return null
 
-  return <ui.span aria-live="polite" {...props} />
+  return <styled.span aria-live="polite" {...props} />
 }, "errorMessage")()

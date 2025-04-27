@@ -34,20 +34,20 @@ import {
 
 ## Usage
 
-To control the visibility, set `isOpen` and `onClose`.
+To control the visibility, set `open` and `onClose`.
 
 :::note
 `Drawer` internally uses [Modal](/components/overlay/modal).
 :::
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose}>
+    <Drawer open={open} onClose={onClose}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -70,7 +70,7 @@ return (
 ```tsx functional=true
 const sizeMap = ["xs", "sm", "md", "lg", "xl", "full"]
 const [size, setSize] = useState("md")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -88,7 +88,7 @@ return (
       ))}
     </Wrap>
 
-    <Drawer isOpen={isOpen} onClose={onClose} size={size}>
+    <Drawer open={open} onClose={onClose} size={size}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -113,7 +113,7 @@ To change the display position, set `placement` to values like `top` or `left-st
 ```tsx functional=true
 const placementMap = ["top", "right", "bottom", "left"]
 const [placement, setPlacement] = useState("center")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -131,7 +131,7 @@ return (
       ))}
     </Wrap>
 
-    <Drawer isOpen={isOpen} onClose={onClose} placement={placement}>
+    <Drawer open={open} onClose={onClose} placement={placement}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -154,13 +154,13 @@ return (
 To change the duration, set `duration` to a numerical value (seconds).
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} duration={0.7}>
+    <Drawer open={open} onClose={onClose} duration={0.7}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -180,16 +180,16 @@ return (
 
 ### Fit to Screen Height
 
-If you want the panel to fit the height of the screen, set `isFullHeight` to `true`.
+If you want the panel to fit the height of the screen, set `fullHeight` to `true`.
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} placement="bottom" isFullHeight>
+    <Drawer open={open} onClose={onClose} placement="bottom" fullHeight>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -212,13 +212,13 @@ return (
 By default, scrolling of the main content is blocked when the panel is opened to ensure accessibility. If you do not want to block the scroll of the main content, set `blockScrollOnMount` to `false`.
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} blockScrollOnMount={false}>
+    <Drawer open={open} onClose={onClose} blockScrollOnMount={false}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -241,13 +241,13 @@ return (
 If you want to customize the `DrawerCloseButton` by passing `props`, etc., set it without omitting.
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose}>
+    <Drawer open={open} onClose={onClose}>
       <DrawerCloseButton color="red.500" />
 
       <DrawerHeader>ドラゴンボール</DrawerHeader>
@@ -276,13 +276,13 @@ By default, clicking on the overlay will close the modal. Please note that if `o
 :::
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen}>
+    <Drawer open={open}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -307,7 +307,7 @@ If you want to close the `Drawer` on drag, set `closeOnDrag` to `true`.
 ```tsx functional=true
 const placementMap = ["top", "right", "bottom", "left"]
 const [placement, setPlacement] = useState("center")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -325,7 +325,7 @@ return (
       ))}
     </Wrap>
 
-    <Drawer closeOnDrag isOpen={isOpen} onClose={onClose} placement={placement}>
+    <Drawer closeOnDrag open={open} onClose={onClose} placement={placement}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>
@@ -348,14 +348,14 @@ return (
 To hide the drag bar, set `withDragBar` to `false`.
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
     <Drawer
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       closeOnDrag
       withDragBar={false}
@@ -383,13 +383,13 @@ return (
 If you want to customize the `DrawerOverlay` by passing `props`, etc., set it without omitting.
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose}>
+    <Drawer open={open} onClose={onClose}>
       <DrawerOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
 
       <DrawerHeader>ドラゴンボール</DrawerHeader>
@@ -414,13 +414,13 @@ return (
 To disable (hide) the overlay of the panel, set `withOverlay` to `false`.
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Drawer</Button>
 
-    <Drawer isOpen={isOpen} onClose={onClose} withOverlay={false}>
+    <Drawer open={open} onClose={onClose} withOverlay={false}>
       <DrawerHeader>ドラゴンボール</DrawerHeader>
 
       <DrawerBody>

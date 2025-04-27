@@ -200,7 +200,7 @@ function valueToVar(theme: StyledTheme<UsageTheme>) {
         )
           return theme.__cssMap[value].ref
 
-        return fallbackValue || getVar(theme)(value)
+        return getVar(theme)(value, fallbackValue)
       }
     })
   }

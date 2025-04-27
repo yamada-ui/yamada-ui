@@ -42,6 +42,10 @@ export function isNull(value: any): value is null {
   return value === null
 }
 
+export function isRegExp(value: any): value is RegExp {
+  return value instanceof RegExp
+}
+
 export function isObject<T extends Dict>(value: any): value is T {
   return (
     value !== null &&

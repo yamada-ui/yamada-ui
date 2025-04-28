@@ -17,7 +17,7 @@ import { Button } from "../button"
 import { CloseButton } from "../close-button"
 import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { Portal } from "../portal"
 import { Slide } from "../slide"
 import { Slot } from "../slot"
@@ -269,7 +269,7 @@ export const DrawerOverlay = withContext<"div", DrawerOverlayProps>((props) => {
   const { duration, getOverlayProps } = useDrawerContext()
 
   return (
-    <Motion
+    <motion.div
       animate="enter"
       custom={{ duration }}
       exit="exit"

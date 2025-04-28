@@ -20,7 +20,9 @@ interface AlertContext {
   status: StatusScheme
 }
 
-interface AlertRootOptions {
+export interface AlertRootProps
+  extends HTMLStyledProps,
+    ThemeProps<AlertStyle> {
   /**
    * The status of the alert.
    *
@@ -28,11 +30,6 @@ interface AlertRootOptions {
    */
   status?: StatusScheme
 }
-
-export interface AlertRootProps
-  extends HTMLStyledProps,
-    ThemeProps<AlertStyle>,
-    AlertRootOptions {}
 
 export const {
   ComponentContext: AlertContext,

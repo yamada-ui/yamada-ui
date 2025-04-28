@@ -4,5 +4,7 @@ export default {
   },
   tag: {
     "Close tag": "タグを閉じる",
+  closeButton: {
+    Close: "閉じる",
   },
 } as const

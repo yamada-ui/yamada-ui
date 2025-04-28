@@ -1,18 +1,40 @@
-import type { AiryIdent } from "."
+import type { KeyframeIdent } from "../../core"
 import { useState } from "react"
-import { Flip } from "."
-import { a11y, render, waitFor } from "../../../test"
-import { BoxIcon } from "../../components/icon"
+import { a11y, render, screen, waitFor } from "../../../test"
 import { noop } from "../../utils"
+import { BoxIcon } from "../icon"
+import { Flip } from "./"
 
 describe("<Flip />", () => {
   test("passes a11y test", () => {
-    a11y(<Flip from={<p>ON</p>} to={<p>OFF</p>} />)
+    a11y(<Flip from="ON" to="OFF" />)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Flip.displayName).toBe("FlipRoot")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Flip from="ON" to="OFF" />)
+    expect(screen.getByText("ON").parentElement).toHaveClass("ui-flip__root")
+    expect(screen.getByText("ON")).toHaveClass(
+      "ui-flip__item",
+      "ui-flip__item--from",
+    )
+    expect(screen.getByText("OFF")).toHaveClass(
+      "ui-flip__item",
+      "ui-flip__item--to",
+    )
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Flip from="ON" to="OFF" />)
+    expect(screen.getByText("ON").parentElement?.tagName).toBe("BUTTON")
   })
 
   test("should render Flip with value and onChange", async () => {
     const TestComponent = () => {
-      const [value, onChange] = useState<AiryIdent>("to")
+      const [value, onChange] = useState<KeyframeIdent>("to")
 
       return (
         <Flip
@@ -73,7 +95,7 @@ describe("<Flip />", () => {
     )
 
     const button = container.querySelector("button") as HTMLButtonElement
-    expect(button).toHaveClass("ui-flip__vertical")
+    expect(button).toHaveAttribute("data-orientation", "vertical")
   })
 
   test("should warn when dimensions of from element and to element don't match", () => {
@@ -84,7 +106,7 @@ describe("<Flip />", () => {
       Object.defineProperty(HTMLElement.prototype, "offsetHeight", {
         configurable: true,
         get() {
-          return this.className.includes("ui-flip__from")
+          return this.className.includes("ui-flip__item--from")
             ? height.from
             : height.to
         },
@@ -93,7 +115,7 @@ describe("<Flip />", () => {
       Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
         configurable: true,
         get() {
-          return this.className.includes("ui-flip__from")
+          return this.className.includes("ui-flip__item--from")
             ? width.from
             : width.to
         },

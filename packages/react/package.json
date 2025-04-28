@@ -68,6 +68,7 @@
     "embla-carousel": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
     "framesync": "6.1.2",
+    "intl-messageformat": "^10.7.16",
     "lucide-react": "0.483.0",
     "motion": "^12.4.7",
     "react-dropzone-esm": "^15.2.0",

@@ -5,4 +5,7 @@ export default {
   closeButton: {
     Close: "Close",
   },
+  tag: {
+    "Close tag": "Close tag",
+  },
 } as const

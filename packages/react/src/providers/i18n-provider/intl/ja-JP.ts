@@ -4,6 +4,6 @@ export default {
   },
   breadcrumb: {
     Breadcrumb: "パンくずリスト",
-    "Breadcrumb Ellipsis": "省略記号",
+    Ellipsis: "省略記号",
   },
 } as const

@@ -135,7 +135,7 @@ export const useBreadcrumb = ({
 
   const getEllipsisProps: PropGetter<"svg"> = useCallback(
     (props) => ({
-      "aria-label": t("Breadcrumb Ellipsis"),
+      "aria-label": t("Ellipsis"),
       role: "presentation",
       ...props,
     }),

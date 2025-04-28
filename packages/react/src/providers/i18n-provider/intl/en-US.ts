@@ -4,6 +4,6 @@ export default {
   },
   breadcrumb: {
     Breadcrumb: "Breadcrumb",
-    "Breadcrumb Ellipsis": "Ellipsis",
+    Ellipsis: "Ellipsis",
   },
 } as const

@@ -2,7 +2,13 @@ import type * as CSS from "csstype"
 import type { ObjectLiteral, StringLiteral } from "../../utils"
 import type { PseudoProperty, PseudoProps } from "../pseudos"
 import type { StyleProps } from "../styles"
-import type { Breakpoint, StyledTheme, ThemeTokens, UsageTheme } from "../theme"
+import type {
+  Breakpoint,
+  KeyframeIdent,
+  StyledTheme,
+  ThemeTokens,
+  UsageTheme,
+} from "../theme"
 
 export type { CSS }
 
@@ -78,7 +84,7 @@ export interface CSSModifierObject<
 }
 
 export type CSSKeyframesObject = {
-  [key in "from" | "to" | `${number}%`]?: CSSInternalObject
+  [key in `${number}%` | KeyframeIdent]?: CSSInternalObject
 }
 
 export interface CSSAnimationObject {
@@ -103,4 +109,4 @@ export interface FunctionCSSInterpolation {
   (theme: StyledTheme<UsageTheme>): CSSObject
 }
 
-export type CSSObjectOrFunc = CSSObject | FunctionCSSInterpolation
+export type CSSObjectOrFunction = CSSObject | FunctionCSSInterpolation

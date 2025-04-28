@@ -21,7 +21,8 @@ import { themeSchemeManager } from "./theme-manager"
 
 const { localStorage } = themeSchemeManager
 
-interface ThemeProviderOptions {
+export interface ThemeProviderProps
+  extends Omit<EmotionThemeProviderProps, "children" | "theme"> {
   /**
    * Application content.
    */
@@ -61,10 +62,6 @@ interface ThemeProviderOptions {
    */
   themeSchemeManager?: ThemeSchemeManager
 }
-
-export interface ThemeProviderProps
-  extends Omit<EmotionThemeProviderProps, "children" | "theme">,
-    ThemeProviderOptions {}
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({
   children,

@@ -9,6 +9,10 @@ export default {
   closeButton: {
     Close: "閉じる",
   },
+  modal: {
+    "Close modal": "モーダルを閉じる",
+    "Open modal": "モーダルを開く",
+  },
   tag: {
     "Close tag": "タグを閉じる",
   },

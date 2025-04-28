@@ -9,6 +9,10 @@ export default {
   closeButton: {
     Close: "Close",
   },
+  modal: {
+    "Close modal": "Close modal",
+    "Open modal": "Open modal",
+  },
   tag: {
     "Close tag": "Close tag",
   },

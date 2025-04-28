@@ -30,6 +30,7 @@ import {
   isBooleanish,
   isEmptyObject,
   isObject,
+  isRegExp,
   keysFormObject,
   merge,
   omitObject,
@@ -268,7 +269,11 @@ function getCompoundStyle<Y extends boolean = false>(
       if (!conditions.length) return
 
       const apply = conditions.every(([key, value]) =>
-        isArray(value) ? value.includes(props[key]) : props[key] === value,
+        isArray(value)
+          ? value.includes(props[key])
+          : isRegExp(value)
+            ? value.test(props[key])
+            : props[key] === value,
       )
 
       if (!apply) return

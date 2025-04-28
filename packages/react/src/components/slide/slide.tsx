@@ -10,7 +10,7 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { createComponent } from "../../core"
 import { useValue } from "../../hooks/use-value"
-import { createTransition, Motion } from "../motion"
+import { createTransition, motion } from "../motion"
 import { slideStyle } from "./slide.style"
 
 const getAnimationProps = (placement: SlideProps["placement"]) => {
@@ -100,7 +100,7 @@ export const Slide = withContext(
     return (
       <AnimatePresence custom={custom}>
         {open ? (
-          <Motion
+          <motion.div
             animate={animate}
             custom={custom}
             exit="exit"

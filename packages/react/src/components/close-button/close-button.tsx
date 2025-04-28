@@ -2,6 +2,7 @@ import type { HTMLProps, ThemeProps } from "../../core"
 import type { IconButtonProps } from "../icon-button"
 import type { CloseButtonStyle } from "./close-button.style"
 import { createComponent } from "../../core"
+import { useI18n } from "../../providers/i18n-provider"
 import { XIcon } from "../icon"
 import { IconButton } from "../icon-button"
 import { closeButtonStyle } from "./close-button.style"
@@ -27,9 +28,13 @@ export const {
  */
 export const CloseButton = withContext(IconButton)(
   undefined,
-  ({ children, icon, ...rest }) => ({
-    "aria-label": "Close",
-    children: children || icon || <XIcon />,
-    ...rest,
-  }),
+  ({ children, icon, ...rest }) => {
+    const { t } = useI18n("closeButton")
+
+    return {
+      "aria-label": t("Close"),
+      children: children || icon || <XIcon />,
+      ...rest,
+    }
+  },
 )

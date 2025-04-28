@@ -16,6 +16,10 @@ export interface StyledProps extends CSSProps {
    * Merges its props onto its immediate child.
    */
   asChild?: boolean
+  /**
+   * Debug mode.
+   */
+  __debug?: boolean
 }
 
 export type WithoutAs<Y extends object> = Omit<Y, "as">

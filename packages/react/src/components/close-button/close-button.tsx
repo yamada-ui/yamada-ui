@@ -30,6 +30,7 @@ export const CloseButton = withContext(IconButton)(
   undefined,
   ({ children, icon, ...rest }) => {
     const { t } = useI18n("closeButton")
+
     return {
       "aria-label": t("Close"),
       children: children || icon || <XIcon />,

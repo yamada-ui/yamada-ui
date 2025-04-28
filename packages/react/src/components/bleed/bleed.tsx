@@ -4,9 +4,7 @@ import { createComponent, mergeVars } from "../../core"
 import { calc } from "../../utils"
 import { bleedStyle } from "./bleed.style"
 
-interface BleedOptions {}
-
-export interface BleedProps extends HTMLStyledProps, BleedOptions {
+export interface BleedProps extends HTMLStyledProps {
   /**
    * The CSS `margin-block` property.
    */

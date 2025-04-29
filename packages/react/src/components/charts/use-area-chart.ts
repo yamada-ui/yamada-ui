@@ -210,7 +210,7 @@ export const useAreaChart = ({
       { name: "fill-opacity", value: fillOpacity },
     ]
   }, [areaColors, areaSplitColors, referenceLineColors, fillOpacity])
-  const fillOpacityVar = useMemo(() => getVar("fill-opacity")(theme), [theme])
+  const fillOpacityVar = useMemo(() => getVar(theme)("fill-opacity"), [theme])
 
   const [chartProps, areaChartClassName] = useMemo(
     () =>
@@ -302,7 +302,7 @@ export const useAreaChart = ({
           ...computedProps
         } = props
         const id = `${uuid}-${dataKey}`
-        const color = getVar(`area-${index}`)(theme)
+        const color = getVar(theme)(`area-${index}`)
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const computedDimArea = { ...dimAreaProps, ...dimArea }
 

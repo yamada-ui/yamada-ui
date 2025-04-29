@@ -1,6 +1,6 @@
 import type { CSSObject, FC } from "../../core"
 import type { Dict } from "../../utils"
-import { ui } from "../../core"
+import { styled } from "../../core"
 import { cx, isArray } from "../../utils"
 
 export interface ChartTooltipProps {
@@ -47,54 +47,53 @@ export const ChartTooltip: FC<ChartTooltipProps> = ({
       }
 
       return (
-        <ui.div
+        <styled.div
           key={`tooltip-payload-${index}`}
           className="ui-chart__tooltip-item"
           css={styles.tooltipItem}
         >
-          <ui.div
+          <styled.div
             className="ui-chart__tooltip-swatch"
             css={styles.tooltipSwatch}
             background={color}
           />
 
-          <ui.span
+          <styled.span
             className="ui-chart__tooltip-label"
             css={styles.tooltipLabel}
           >
             {name}
-          </ui.span>
+          </styled.span>
 
-          <ui.span
+          <styled.span
             className="ui-chart__tooltip-value"
             css={styles.tooltipValue}
           >
             {value}
             {unit ? unit : ""}
-          </ui.span>
-        </ui.div>
+          </styled.span>
+        </styled.div>
       )
     },
   )
 
   return (
-    <ui.div
+    <styled.div
       className={cx("ui-chart__tooltip", className)}
       css={styles.tooltip}
       {...rest}
     >
       {label ? (
-        <ui.p className="ui-chart__tooltip-title" css={styles.tooltipTitle}>
+        <styled.p className="ui-chart__tooltip-title" css={styles.tooltipTitle}>
           {labelFormatter?.(label) ?? label}
-        </ui.p>
+        </styled.p>
       ) : null}
 
-      <ui.div className="ui-chart__tooltip-list" css={styles.tooltipList}>
+      <styled.div className="ui-chart__tooltip-list" css={styles.tooltipList}>
         {items}
-      </ui.div>
-    </ui.div>
+      </styled.div>
+    </styled.div>
   )
 }
 
 ChartTooltip.displayName = "ChartTooltip"
-ChartTooltip.__ui__ = "ChartTooltip"

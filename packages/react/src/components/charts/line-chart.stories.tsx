@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { Dict } from "@yamada-ui/utils"
+import type { Dict } from "../../utils"
 import type { ChartTooltip, LineProps } from "./"
 import { useMemo } from "react"
 import { Card } from "../card"

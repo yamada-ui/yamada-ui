@@ -1,4 +1,4 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { BarChartStyle } from "./bar-chart.style"
 import type { UseBarChartOptions } from "./use-bar-chart"
 import type { UseChartProps } from "./use-chart"
@@ -19,7 +19,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { barChartStyle } from "./bar-chart.style"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
@@ -32,7 +32,10 @@ import { useChartReferenceLine } from "./use-chart-reference-line"
 import { useChartTooltip } from "./use-chart-tooltip"
 
 export interface BarChartProps
-  extends Omit<HTMLUIProps, "fillOpacity" | "strokeDasharray" | "strokeWidth">,
+  extends Omit<
+      HTMLStyledProps,
+      "fillOpacity" | "strokeDasharray" | "strokeWidth"
+    >,
     ThemeProps<BarChartStyle>,
     UseBarChartOptions,
     Omit<UseChartAxisOptions, "type">,
@@ -135,7 +138,7 @@ export const BarChart = withProvider<"div", BarChartProps>(
     )
 
     return (
-      <ui.div vars={barVars} {...rest}>
+      <styled.div vars={barVars} {...rest}>
         <ResponsiveContainer
           {...getContainerProps({ className: "ui-bar-chart__container" })}
         >
@@ -199,7 +202,7 @@ export const BarChart = withProvider<"div", BarChartProps>(
             {referenceLinesItems}
           </ReChartsBarChart>
         </ResponsiveContainer>
-      </ui.div>
+      </styled.div>
     )
   },
   "root",

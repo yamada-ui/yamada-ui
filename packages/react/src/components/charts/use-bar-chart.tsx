@@ -18,7 +18,7 @@ import { useCallback, useId, useMemo, useState } from "react"
 import { Bar, Cell } from "recharts"
 import { getVar } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
-import { cx, runIfFunc } from "../../utils"
+import { cx, runIfFn } from "../../utils"
 import { getComponentProps } from "./chart-utils"
 import { barChartProperties, barProperties } from "./rechart-properties"
 
@@ -197,7 +197,7 @@ export const useBarChart = ({
           ...computedProps
         } = props
         const id = `${uuid}-${dataKey}`
-        const color = getVar(`bar-${index}`)(theme)
+        const color = getVar(theme)(`bar-${index}`)
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const computedDimBar = { ...dimBarProps, ...dimBar }
         const resolvedProps = {
@@ -299,7 +299,7 @@ export const useBarChart = ({
         >
           {data.map(
             (data, index) =>
-              runIfFunc(cell, {
+              runIfFn(cell, {
                 data,
                 hasStack,
                 index,

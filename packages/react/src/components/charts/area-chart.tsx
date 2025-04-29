@@ -1,4 +1,4 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { AreaChartStyle } from "./area-chart.style"
 import type { UseAreaChartOptions } from "./use-area-chart"
 import type { UseChartProps } from "./use-chart"
@@ -20,7 +20,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { AreaGradient } from "./area-chart-gradient"
 import { AreaSplit } from "./area-chart-split"
 import { areaChartStyle } from "./area-chart.style"
@@ -35,7 +35,10 @@ import { useChartReferenceLine } from "./use-chart-reference-line"
 import { useChartTooltip } from "./use-chart-tooltip"
 
 export interface AreaChartProps
-  extends Omit<HTMLUIProps, "fillOpacity" | "strokeDasharray" | "strokeWidth">,
+  extends Omit<
+      HTMLStyledProps,
+      "fillOpacity" | "strokeDasharray" | "strokeWidth"
+    >,
     ThemeProps<AreaChartStyle>,
     UseAreaChartOptions,
     UseChartProps,
@@ -175,7 +178,7 @@ export const AreaChart = withProvider<"div", AreaChartProps>(
     )
 
     return (
-      <ui.div vars={areaVars} {...rest}>
+      <styled.div vars={areaVars} {...rest}>
         <ResponsiveContainer
           {...getContainerProps({ className: "ui-area-chart__container" })}
         >
@@ -246,7 +249,7 @@ export const AreaChart = withProvider<"div", AreaChartProps>(
             {referenceLinesItems}
           </ReChartsAreaChart>
         </ResponsiveContainer>
-      </ui.div>
+      </styled.div>
     )
   },
   "root",

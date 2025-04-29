@@ -8,7 +8,7 @@ export const getClassName =
   (theme: StyledTheme) =>
     cx(
       ...styles.map((style) =>
-        isString(style) ? style : getCSS(style)(theme),
+        isString(style) ? style : getCSS(theme)(style),
       ),
     )
 

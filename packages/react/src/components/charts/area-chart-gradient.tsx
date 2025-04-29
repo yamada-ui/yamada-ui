@@ -30,4 +30,3 @@ export const AreaGradient: FC<AreaGradientProps> = ({
 }
 
 AreaGradient.displayName = "AreaGradient"
-AreaGradient.__ui__ = "AreaGradient"

@@ -25,7 +25,7 @@ export const useChartReferenceLine = ({
   referenceLineProps = [],
 }: UseChartReferenceLineProps) => {
   const { theme } = useTheme()
-  const styleClassName = getCSS(styles.referenceLine)(theme)
+  const styleClassName = getCSS(theme)(styles.referenceLine)
   const propList = useMemo(
     () =>
       referenceLineProps.map((props, index) => {
@@ -35,7 +35,7 @@ export const useChartReferenceLine = ({
             styleClassName,
           )(theme)
 
-        const color = getVar(`reference-line-${index}`)(theme)
+        const color = getVar(theme)(`reference-line-${index}`)
         const label: Recharts.ReferenceLineProps["label"] = {
           fill: color,
           position: "insideBottomLeft",

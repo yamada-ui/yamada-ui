@@ -1,6 +1,6 @@
-import type { CSSObject, FC, HTMLUIProps } from "../../core"
+import type { CSSObject, FC, HTMLStyledProps } from "../../core"
 import type { Dict } from "../../utils"
-import { ui } from "../../core"
+import { styled } from "../../core"
 import { cx } from "../../utils"
 
 interface ChartLegendOptions {
@@ -9,7 +9,7 @@ interface ChartLegendOptions {
   payload?: Dict[]
 }
 
-export interface ChartLegendProps extends HTMLUIProps, ChartLegendOptions {}
+export interface ChartLegendProps extends HTMLStyledProps, ChartLegendOptions {}
 
 export const ChartLegend: FC<ChartLegendProps> = ({
   ref,
@@ -23,35 +23,32 @@ export const ChartLegend: FC<ChartLegendProps> = ({
     const value = dataKey ?? valueProp
 
     return (
-      <ui.div
+      <styled.div
         key={`legend-${index}`}
         className="ui-chart__legend-item"
         css={styles.legendItem}
         onMouseEnter={() => onHighlight(value)}
         onMouseLeave={() => onHighlight(null)}
       >
-        <ui.div
+        <styled.div
           className="ui-chart__legend-swatch"
           css={styles.legendSwatch}
           background={color}
         />
 
-        <ui.span className="ui-chart__legend-label">{value}</ui.span>
-      </ui.div>
+        <styled.span className="ui-chart__legend-label">{value}</styled.span>
+      </styled.div>
     )
   })
 
   return (
-    <ui.div
+    <styled.div
       ref={ref}
       className={cx("ui-chart__legend", className)}
       css={styles.legend}
       {...rest}
     >
       {items}
-    </ui.div>
+    </styled.div>
   )
 }
-
-ChartLegend.displayName = "ChartLegend"
-ChartLegend.__ui__ = "ChartLegend"

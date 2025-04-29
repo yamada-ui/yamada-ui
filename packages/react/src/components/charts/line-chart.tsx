@@ -1,4 +1,4 @@
-import type { HTMLUIProps } from "../../core"
+import type { HTMLStyledProps } from "../../core"
 import type { LineChartStyle } from "./line-chart.style"
 import type { UseChartProps } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
@@ -20,7 +20,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
 import { lineChartStyle } from "./line-chart.style"
@@ -33,7 +33,10 @@ import { useChartTooltip } from "./use-chart-tooltip"
 import { useLineChart } from "./use-line-chart"
 
 export interface LineChartProps
-  extends Omit<HTMLUIProps, "fillOpacity" | "strokeDasharray" | "strokeWidth">,
+  extends Omit<
+      HTMLStyledProps,
+      "fillOpacity" | "strokeDasharray" | "strokeWidth"
+    >,
     UseLineChartOptions,
     UseChartProps,
     UseChartAxisOptions,
@@ -153,7 +156,7 @@ export const LineChart = withProvider<"div", LineChartProps>(
     )
 
     return (
-      <ui.div vars={lineVars} {...rest}>
+      <styled.div vars={lineVars} {...rest}>
         <ResponsiveContainer
           {...getContainerProps({ className: "ui-line-chart__container" })}
         >
@@ -217,7 +220,7 @@ export const LineChart = withProvider<"div", LineChartProps>(
             {referenceLinesItems}
           </ReChartsLineChart>
         </ResponsiveContainer>
-      </ui.div>
+      </styled.div>
     )
   },
   "root",

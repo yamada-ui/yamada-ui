@@ -15,12 +15,12 @@ export const AreaSplit: FC<AreaSplitProps> = ({ id, fillOpacity, offset }) => {
     <linearGradient id={id} x1="0" x2="0" y1="0" y2="1">
       <stop
         offset={offset}
-        stopColor={getVar(`area-split-0`)(theme)}
+        stopColor={getVar(theme)(`area-split-0`)}
         stopOpacity={fillOpacity ?? 0.4}
       />
       <stop
         offset={offset}
-        stopColor={getVar(`area-split-1`)(theme)}
+        stopColor={getVar(theme)(`area-split-1`)}
         stopOpacity={fillOpacity ?? 0.4}
       />
     </linearGradient>
@@ -28,4 +28,3 @@ export const AreaSplit: FC<AreaSplitProps> = ({ id, fillOpacity, offset }) => {
 }
 
 AreaSplit.displayName = "AreaSplit"
-AreaSplit.__ui__ = "AreaSplit"

@@ -14,7 +14,7 @@ import type { LineChartStyle } from "./line-chart.style"
 import { useCallback, useMemo, useState } from "react"
 import { getVar } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
-import { cx, runIfFunc } from "../../utils"
+import { cx, runIfFn } from "../../utils"
 import { getComponentProps } from "./chart-utils"
 import {
   dotProperties,
@@ -238,7 +238,7 @@ export const useLineChart = ({
           dot = {},
           ...computedProps
         } = props
-        const color = getVar(`line-${index}`)(theme)
+        const color = getVar(theme)(`line-${index}`)
         const dimmed = shouldHighlight && highlightedArea !== dataKey
         const computedDimLine = { ...dimLineProps, ...dimLine }
         const resolvedProps = {
@@ -367,7 +367,7 @@ export const useLineChart = ({
 
       return {
         type: curveType,
-        name: runIfFunc(dataKey, {}),
+        name: runIfFn(dataKey, {}),
         className: cx(classNameProp, className),
         activeDot,
         connectNulls,

@@ -5,7 +5,7 @@ import type {
   SVGProps,
 } from "react"
 import type * as Recharts from "recharts"
-import type { CSSProps, HTMLUIProps } from "../../core"
+import type { CSSProps, HTMLStyledProps } from "../../core"
 import type { Dict, Merge } from "../../utils"
 
 export type ChartLayoutType = "horizontal" | "vertical"
@@ -99,8 +99,8 @@ export interface PieProps
     {
       activeShape?: Partial<PieProps>
       inactiveShape?: Partial<PieProps>
-      label?: HTMLUIProps<"text">
-      labelLine?: HTMLUIProps<"path">
+      label?: HTMLStyledProps<"text">
+      labelLine?: HTMLStyledProps<"path">
     }
   > {}
 export interface CellProps extends CSSProps {

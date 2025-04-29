@@ -1,7 +1,7 @@
 import type { PropsWithChildren, ReactNode } from "react"
 import type { FC, HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ButtonProps } from "../button"
-import type { CloseButtonProps } from "../close-button"
+import type { CloseButtonProps } from "../button"
 import type { FocusLockProps } from "../focus-lock"
 import type {
   HTMLMotionProps,
@@ -17,7 +17,7 @@ import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, styled } from "../../core"
 import { findChildren, getValidChildren, wrapOrPassProps } from "../../utils"
 import { Button } from "../button"
-import { CloseButton } from "../close-button"
+import { CloseButton } from "../button"
 import { fadeScaleVariants, fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { motion } from "../motion"

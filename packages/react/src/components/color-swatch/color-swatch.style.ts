@@ -3,90 +3,64 @@ import { defineComponentSlotStyle } from "../../core"
 export const colorSwatchStyle = defineComponentSlotStyle({
   base: {
     overlay: {
-      bottom: 0,
       boxSize: "full",
-      left: 0,
+      inset: 0,
       position: "absolute",
-      right: 0,
-      top: 0,
     },
-    overlays: {},
     root: {
       "& > *": {
         alignItems: "center",
-        bottom: "0",
+        boxSize: "full",
         display: "flex",
-        h: "100%",
+        inset: 0,
         justifyContent: "center",
-        left: "0",
         overflow: "hidden",
         position: "absolute",
-        right: "0",
-        top: "0",
-        w: "100%",
       },
+      overflow: "hidden",
       position: "relative",
-      _before: {
-        content: `""`,
-        display: "block",
-        h: 0,
-        pb: "100%",
-      },
     },
   },
 
   sizes: {
+    "2xs": {
+      root: { boxSize: "6" },
+    },
     xs: {
-      overlay: { rounded: "sm" },
-      root: { boxSize: "6", rounded: "sm" },
+      root: { boxSize: "8" },
     },
     sm: {
-      overlay: { rounded: "md" },
-      root: { boxSize: "8", rounded: "md" },
+      root: { boxSize: "9" },
     },
     md: {
-      overlay: { rounded: "md" },
-      root: { boxSize: "10", rounded: "md" },
+      root: { boxSize: "10" },
     },
     lg: {
-      overlay: { rounded: "md" },
-      root: { boxSize: "12", rounded: "md" },
+      root: { boxSize: "11" },
+    },
+    xl: {
+      root: { boxSize: "12" },
+    },
+    "2xl": {
+      root: { boxSize: "14" },
     },
   },
 
   variants: {
-    basic: {},
-    rounded: {
-      overlay: { rounded: "full" },
+    circle: {
       root: { rounded: "full" },
     },
-  },
-
-  props: {
-    /**
-     * If `true`, the color swatch will be perfectly round. Else, it'll be slightly round.
-     *
-     * @default false
-     */
-    fullRounded: {
-      false: {},
-      true: {
-        overlay: {
-          rounded: "{full, 9999px}",
-        },
-        overlays: {
-          rounded: "{full, 9999px}",
-        },
-        root: {
-          rounded: "{full, 9999px}",
-        },
-      },
+    plain: {
+      root: { rounded: "l2" },
+    },
+    square: {
+      root: { rounded: "0" },
     },
   },
 
   defaultProps: {
-    size: "sm",
-    variant: "basic",
+    size: "xs",
+    variant: "plain",
   },
 })
 

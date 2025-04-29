@@ -32,7 +32,7 @@ const defaultOverlays = (
 
   if (withShadow)
     overlays.push({
-      boxShadow: `rgba(0, 0, 0, .1) 0 0 0 1px inset, rgb(0, 0, 0, .15) 0 0 4px inset`,
+      boxShadow: "inner",
     })
 
   return overlays
@@ -72,10 +72,11 @@ export const {
 /**
  * `ColorSwatch` is a component that displays color samples.
  *
- * @see Docs https://yamada-ui.com/components/color-swatch
+ * @see https://yamada-ui.com/components/color-swatch
  */
 export const ColorSwatch = withProvider<"div", ColorSwatchProps>(
   ({
+    children,
     color = "#ffffff00",
     withShadow = true,
     overlays = defaultOverlays(color, withShadow),
@@ -88,27 +89,19 @@ export const ColorSwatch = withProvider<"div", ColorSwatchProps>(
         role="img"
         {...rest}
       >
-        <ColorSwatchOverlays>
-          {overlays.map((props, index) => (
-            <ColorSwatchOverlay key={index} {...props} />
-          ))}
-        </ColorSwatchOverlays>
+        {children}
+        {overlays.map((props, index) => (
+          <ColorSwatchOverlay key={index} {...props} />
+        ))}
       </styled.div>
     )
   },
   "root",
 )()
 
-interface ColorSwatchOverlaysProps extends HTMLStyledProps {}
+export interface ColorSwatchOverlayProps extends HTMLStyledProps {}
 
-const ColorSwatchOverlays = withContext<"div", ColorSwatchOverlaysProps>(
-  "div",
-  "overlays",
-)()
-
-interface ColorSwatchOverlayProps extends HTMLStyledProps {}
-
-const ColorSwatchOverlay = withContext<"div", ColorSwatchOverlayProps>(
+export const ColorSwatchOverlay = withContext<"div", ColorSwatchOverlayProps>(
   "div",
   "overlay",
 )()

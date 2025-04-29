@@ -1,7 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react"
+import { PropsTable } from "../../../storybook/components"
 import { defaultTheme } from "../../theme"
 import { Wrap } from "../wrap"
-import { ColorSwatch } from "./"
+import { ColorSwatch, ColorSwatchGroup } from "./"
 
 type Story = StoryFn<typeof ColorSwatch>
 
@@ -38,20 +39,32 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <Wrap gap="md">
-      <ColorSwatch variant="basic" color="#4387f4" />
-      <ColorSwatch variant="rounded" color="rgba(234, 22, 174, 0.5)" />
-    </Wrap>
+    <PropsTable variant="column" rows={["plain", "circle", "square"]}>
+      {(_, row, key) => (
+        <Wrap key={key} gap="md">
+          <ColorSwatch variant={row} color="#4387f4" />
+          <ColorSwatch variant={row} color="rgba(234, 22, 174, 0.5)" />
+          <ColorSwatch variant={row} color="hsla(251, 87%, 67%, 0.7)" />
+        </Wrap>
+      )}
+    </PropsTable>
   )
 }
 
 export const Size: Story = () => {
   return (
-    <Wrap gap="md">
-      <ColorSwatch size="sm" color="#4387f4" />
-      <ColorSwatch size="md" color="rgba(234, 22, 174, 0.5)" />
-      <ColorSwatch size="lg" color="hsla(251, 87%, 67%, 0.7)" />
-    </Wrap>
+    <PropsTable
+      variant="column"
+      rows={["2xs", "xs", "sm", "md", "lg", "xl", "2xl"]}
+    >
+      {(_, row, key) => (
+        <Wrap key={key} gap="md">
+          <ColorSwatch size={row} color="#4387f4" />
+          <ColorSwatch size={row} color="rgba(234, 22, 174, 0.5)" />
+          <ColorSwatch size={row} color="hsla(251, 87%, 67%, 0.7)" />
+        </Wrap>
+      )}
+    </PropsTable>
   )
 }
 
@@ -61,6 +74,18 @@ export const DisabledShadow: Story = () => {
       <ColorSwatch color="#4387f4" withShadow={false} />
       <ColorSwatch color="rgba(234, 22, 174, 0.5)" withShadow={false} />
       <ColorSwatch color="hsla(251, 87%, 67%, 0.7)" withShadow={false} />
+    </Wrap>
+  )
+}
+
+export const Group: Story = () => {
+  return (
+    <Wrap gap="md">
+      <ColorSwatchGroup
+        items={["green.500", "green.600", "green.700", "green.800"]}
+      />
+      <ColorSwatchGroup items={["red.500", "red.400", "red.300"]} />
+      <ColorSwatchGroup items={[]} />
     </Wrap>
   )
 }

@@ -21,7 +21,8 @@ import { themeSchemeManager } from "./theme-manager"
 
 const { localStorage } = themeSchemeManager
 
-interface ThemeProviderOptions {
+export interface ThemeProviderProps
+  extends Omit<EmotionThemeProviderProps, "children" | "theme"> {
   /**
    * Application content.
    */
@@ -61,10 +62,6 @@ interface ThemeProviderOptions {
    */
   themeSchemeManager?: ThemeSchemeManager
 }
-
-export interface ThemeProviderProps
-  extends Omit<EmotionThemeProviderProps, "children" | "theme">,
-    ThemeProviderOptions {}
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({
   children,
@@ -127,7 +124,7 @@ export const GlobalStyles: FC = () => {
 
     if (!style || isEmptyObject(style)) return undefined
 
-    return css(style)(theme)
+    return css(theme)(style)
   }, [theme])
 
   const globalStyle = useMemo(() => {
@@ -135,7 +132,7 @@ export const GlobalStyles: FC = () => {
 
     if (!style || isEmptyObject(style)) return undefined
 
-    return css(style)(theme)
+    return css(theme)(style)
   }, [theme])
 
   const cssVars = useMemo(() => {
@@ -157,7 +154,7 @@ export const GlobalStyles: FC = () => {
 /**
  * `useTheme` is a custom hook that returns a function for retrieving and switching themes.
  *
- * @see Docs https://yamada-ui.com/hooks/use-theme
+ * @see https://yamada-ui.com/hooks/use-theme
  */
 export const useTheme = <T extends UsageTheme = Theme>() => {
   const internalTheme = use(ThemeContext) as StyledTheme<T>

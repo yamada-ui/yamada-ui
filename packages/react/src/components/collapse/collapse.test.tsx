@@ -7,6 +7,20 @@ describe("<Collapse />", () => {
     await a11y(<Collapse />)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(Collapse.displayName).toBe("Collapse")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Collapse data-testid="collapse" />)
+    expect(screen.getByTestId("collapse")).toHaveClass("ui-collapse")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Collapse data-testid="collapse" />)
+    expect(screen.getByTestId("collapse").tagName).toBe("DIV")
+  })
+
   test("toggles visibility on open change", async () => {
     const TestComponent = () => {
       const [open, setOpen] = useState(false)

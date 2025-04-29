@@ -2,6 +2,7 @@ import type { HTMLProps, ThemeProps } from "../../core"
 import type { CloseButtonStyle } from "./close-button.style"
 import type { IconButtonProps } from "./icon-button"
 import { createComponent } from "../../core"
+import { useI18n } from "../../providers/i18n-provider"
 import { XIcon } from "../icon"
 import { closeButtonStyle } from "./close-button.style"
 import { IconButton } from "./icon-button"
@@ -23,13 +24,17 @@ export const {
 /**
  * `CloseButton` is a component used primarily to trigger the close functionality of a component.
  *
- * @see Docs https://yamada-ui.com/components/close-button
+ * @see https://yamada-ui.com/components/close-button
  */
 export const CloseButton = withContext(IconButton)(
   undefined,
-  ({ children, icon, ...rest }) => ({
-    "aria-label": "Close",
-    children: children || icon || <XIcon />,
-    ...rest,
-  }),
+  ({ children, icon, ...rest }) => {
+    const { t } = useI18n("closeButton")
+
+    return {
+      "aria-label": t("Close"),
+      children: children || icon || <XIcon />,
+      ...rest,
+    }
+  },
 )

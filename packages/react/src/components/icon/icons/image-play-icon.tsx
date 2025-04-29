@@ -4,6 +4,6 @@ import { component, Icon } from "../icon"
 /**
  * `ImagePlayIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @sees://yamada-ui.com/components/icon
  */
 export const ImagePlayIcon = component(Icon)({ as: ImagePlay })

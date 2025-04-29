@@ -1,4 +1,4 @@
-import type { CSSObject } from "@emotion/react"
+import type { CSSObject } from "@emotion/styled"
 import type * as CSS from "csstype"
 import type { Union } from "../../utils"
 import type { ThemeToken } from "../theme"
@@ -10,7 +10,7 @@ import { generateCalc } from "./calc"
 import { colorMix } from "./color-mix"
 import { colorScheme } from "./color-scheme"
 import { generateFilter } from "./filter"
-import { generateFocusRing } from "./focus-ring"
+import { focusRingStyle, generateFocusRing } from "./focus-ring"
 import { generateFunction } from "./function"
 import { gradient } from "./gradient"
 import { grid } from "./grid"
@@ -21,7 +21,14 @@ import { generateTransition } from "./transition"
 import { analyzeCSSValue, isCSSVar } from "./utils"
 import { vars } from "./vars"
 
-export { animation, colorMix, gradient, insertKeyframes, keyframes }
+export {
+  animation,
+  colorMix,
+  focusRingStyle,
+  gradient,
+  insertKeyframes,
+  keyframes,
+}
 
 type CSSProperties = Union<
   | keyof CSS.ObsoleteProperties

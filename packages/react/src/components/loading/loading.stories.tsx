@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Wrap } from "../flex"
+import { Wrap } from "../wrap"
 import { Loading } from "./"
 
 type Story = StoryFn<typeof Loading.Oval>

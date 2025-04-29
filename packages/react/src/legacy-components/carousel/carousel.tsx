@@ -4,7 +4,7 @@ import type {
   FC,
   HTMLUIProps,
   ThemeProps,
-  Token,
+  StyleValue,
 } from "../../core"
 import type { CarouselControlProps } from "./carousel-control"
 import type { CarouselIndicatorsProps } from "./carousel-indicators"
@@ -45,38 +45,38 @@ interface CarouselOptions {
    *
    * @default 'center'
    */
-  align?: Token<AlignmentOptionType>
+  align?: StyleValue<AlignmentOptionType>
   /**
    * If `true`, the carousel will be autoplay.
    *
    * @default false
    */
-  autoplay?: Token<boolean>
+  autoplay?: StyleValue<boolean>
   /**
    * Clear leading and trailing empty space that causes excessive scrolling.
    * Use trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.
    *
    * @default ''
    */
-  containScroll?: Token<ScrollContainOptionType>
+  containScroll?: StyleValue<ScrollContainOptionType>
   /**
    * The number for the autoplay interval of the carousel.
    *
    * @default 4000
    */
-  delay?: Token<number>
+  delay?: StyleValue<number>
   /**
    * If `true`, momentum scrolling will be enabled.
    *
    * @default false
    */
-  dragFree?: Token<boolean>
+  dragFree?: StyleValue<boolean>
   /**
    * If `true`, carousel can be scrolled with mouse and touch interactions.
    *
    * @default true
    */
-  draggable?: Token<boolean>
+  draggable?: StyleValue<boolean>
   /**
    * Set scroll duration when triggered by any of the API methods.
    * Higher numbers enables slower scrolling.
@@ -84,39 +84,39 @@ interface CarouselOptions {
    *
    * @default 25
    */
-  duration?: Token<number>
+  duration?: StyleValue<number>
   /**
    * If `true`, gap will be treated as part of the carousel slide size.
    *
    * @default true
    */
-  includeGapInSize?: Token<boolean>
+  includeGapInSize?: StyleValue<boolean>
   /**
    * Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view.
    *
    * @default 0
    */
-  inViewThreshold?: Token<SlidesInViewOptionsType>
+  inViewThreshold?: StyleValue<SlidesInViewOptionsType>
   /**
    * If `true`, infinite looping.
    * Automatically falls back to false if slide content isn't enough to loop.
    *
    * @default true
    */
-  loop?: Token<boolean>
+  loop?: StyleValue<boolean>
   /**
    * The orientation of the carousel.
    *
    * @default 'horizontal'
    */
-  orientation?: Token<"horizontal" | "vertical">
+  orientation?: StyleValue<"horizontal" | "vertical">
   /**
    * If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.
    * Note that this option will be ignored if the dragFree option is set to true.
    *
    * @default false
    */
-  skipSnaps?: Token<boolean>
+  skipSnaps?: StyleValue<boolean>
   /**
    * The CSS `width` property.
    */
@@ -126,25 +126,25 @@ interface CarouselOptions {
    *
    * @default 1
    */
-  slidesToScroll?: Token<number>
+  slidesToScroll?: StyleValue<number>
   /**
    * If `true`, autoplay will pause when the mouse entries over.
    *
    * @default true
    */
-  stopMouseEnterAutoplay?: Token<boolean>
+  stopMouseEnterAutoplay?: StyleValue<boolean>
   /**
    * If `true`, display the carousel control buttons.
    *
    * @default true
    */
-  withControls?: Token<boolean>
+  withControls?: StyleValue<boolean>
   /**
    * If `true`, display the carousel indicator buttons.
    *
    * @default true
    */
-  withIndicators?: Token<boolean>
+  withIndicators?: StyleValue<boolean>
   /**
    * Props for next of the carousel control element.
    */
@@ -186,7 +186,7 @@ export interface CarouselProps
 /**
  * `Carousel` is a component that displays multiple elements like a slideshow.
  *
- * @see Docs https://yamada-ui.com/components/data-display/carousel
+ * @see https://yamada-ui.com/components/data-display/carousel
  */
 export const Carousel = forwardRef<CarouselProps, "div">(
   ({ h, height = h, minH, minHeight = minH, ...props }, ref) => {

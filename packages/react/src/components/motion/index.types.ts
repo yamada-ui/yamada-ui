@@ -8,19 +8,12 @@ import type * as React from "react"
 import type {
   ComponentArgs,
   OmitProps,
-  StyledOptions,
-  UIProps,
+  StyledProps,
   WithoutAs,
+  WithoutRef,
 } from "../../core"
 import type { DOMElement } from "../../core"
 import type { Dict, Merge } from "../../utils"
-
-export interface MotionFactory {
-  <T extends DOMElement = DOMElement, M extends object = {}>(
-    el: T,
-    options?: StyledOptions,
-  ): MotionUIComponent<T, M>
-}
 
 type ComponentConditionalProps<
   Y extends DOMElement,
@@ -28,15 +21,13 @@ type ComponentConditionalProps<
   D extends object = {},
 > = Y extends M
   ? OmitProps<React.ComponentProps<Y>, D>
-  :
-      | OmitProps<React.ComponentProps<M>, D>
-      | OmitProps<React.ComponentProps<Y>, D>
+  : OmitProps<React.ComponentProps<M>, D>
 
 type ComponentProps<
   Y extends DOMElement,
   M extends DOMElement,
   D extends object = {},
-> = ComponentConditionalProps<Y, M, D> & {
+> = ComponentConditionalProps<Y, M, WithoutRef<D>> & {
   as?: M
 }
 
@@ -45,28 +36,29 @@ export interface MotionComponent<Y extends DOMElement, D extends object = {}>
   <M extends DOMElement = Y>(props: ComponentProps<Y, M, D>): React.ReactElement
 }
 
-export type MotionComponents = {
-  [Y in DOMElement]: MotionUIComponent<Y>
-}
+export interface MotionStyledComponent<
+  Y extends DOMElement,
+  M extends object = {},
+> extends MotionComponent<Y, Merge<MotionStyledProps, M>> {}
 
-export interface MotionUIComponent<Y extends DOMElement, M extends object = {}>
-  extends MotionComponent<Y, Merge<MotionUIProps, M>> {}
+interface StyledPropsWithoutAs extends Omit<StyledProps, "as"> {}
 
-interface MotionUIProps extends Merge<UIProps, OriginMotionProps> {
+interface MotionStyledProps
+  extends Merge<StyledPropsWithoutAs, OriginMotionProps> {
   as?: DOMElement
 }
 
-export type MotionProps<Y extends DOMElement = "div"> = Merge<
+export type HTMLMotionProps<Y extends DOMElement = "div"> = Merge<
   React.ComponentProps<Y>,
-  MotionUIProps
+  MotionStyledProps
 >
 
-export type MotionPropsWithoutAs<Y extends DOMElement = "div"> = WithoutAs<
-  MotionProps<Y>
+export type HTMLMotionPropsWithoutAs<Y extends DOMElement = "div"> = WithoutAs<
+  HTMLMotionProps<Y>
 >
 
-export type MotionPropsWithoutChildren<Y extends DOMElement = "div"> = Omit<
-  MotionProps<Y>,
+export type HTMLMotionPropsWithoutChildren<Y extends DOMElement = "div"> = Omit<
+  HTMLMotionProps<Y>,
   "children"
 >
 

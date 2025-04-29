@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { CSSUIObject, HTMLUIProps, Token } from "../../core"
+import type { CSSObject, HTMLUIProps, StyleValue } from "../../core"
 import type { ColorSwatchProps } from "./color-swatch"
 import { forwardRef, ui } from "../../core"
 import { cx, replaceObject } from "../../utils"
@@ -17,7 +17,7 @@ interface ColorSelectorSwatchesOptions {
    *
    * @default 7
    */
-  swatchesColumns?: Token<number>
+  swatchesColumns?: StyleValue<number>
   /**
    * The swatches label to use.
    */
@@ -54,7 +54,7 @@ export const ColorSelectorSwatches = forwardRef<
   ) => {
     const { readOnly, styles, getSwatchProps } = useColorSelectorContext()
 
-    const css: CSSUIObject = {
+    const css: CSSObject = {
       display: "grid",
       gridTemplateColumns: replaceObject(swatchesColumns, (value) =>
         value != null ? `repeat(${value}, minmax(0, 1fr))` : undefined,

@@ -1,8 +1,24 @@
 import { Highlight, useHighlight } from "."
-import { render, renderHook } from "../../../test"
-import { noop } from "../../utils"
+import { a11y, render, renderHook, screen } from "../../../test"
 
 describe("<Highlight />", () => {
+  test("passes a11y test", async () => {
+    await a11y(<Highlight query="highlight">Highlight</Highlight>)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Highlight.name).toBe("Highlight")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <Highlight data-testid="highlight" query="highlight">
+        Highlight
+      </Highlight>,
+    )
+    expect(screen.getByTestId("highlight").tagName).toBe("P")
+  })
+
   test.each([[], ""])(
     "useHighlight returns no matches if queries is empty but returns original value",
     (query) => {
@@ -20,18 +36,6 @@ describe("<Highlight />", () => {
       expect(result.current[0]?.text).toBe(text)
     },
   )
-
-  test("throws error if children is not string", () => {
-    const renderResult = () =>
-      render(<Highlight query="Highlight">{1 as any}</Highlight>)
-
-    const consoleSpy = vi.spyOn(console, "error")
-    consoleSpy.mockImplementation(noop)
-    expect(renderResult).toThrow(
-      "The children prop of Highlight must be a string",
-    )
-    consoleSpy.mockRestore()
-  })
 
   test("fragment prop works correctly", () => {
     const { container } = render(

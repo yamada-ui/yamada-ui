@@ -68,11 +68,11 @@ Alternatively, you can customize using `HelperMessage`.
 
 ### Displaying an Error Message
 
-To display an error message, set `isInvalid` to `true` and assign a `ReactNode` to `errorMessage`.
+To display an error message, set `invalid` to `true` and assign a `ReactNode` to `errorMessage`.
 
 ```tsx
 <Fieldset
-  isInvalid
+  invalid
   legend="Terms and Conditions"
   errorMessage="Agreement is required."
 >
@@ -83,7 +83,7 @@ To display an error message, set `isInvalid` to `true` and assign a `ReactNode` 
 Alternatively, you can customize using `ErrorMessage`.
 
 ```tsx
-<Fieldset isInvalid legend="Terms and Conditions">
+<Fieldset invalid legend="Terms and Conditions">
   <Checkbox>I agree to the Terms and Conditions.</Checkbox>
   <ErrorMessage color="gray.300">Agreement is required.</ErrorMessage>
 </Fieldset>
@@ -91,17 +91,17 @@ Alternatively, you can customize using `ErrorMessage`.
 
 ### Replacing Helper and Error Messages
 
-Error messages are displayed only when `isInvalid` is `true`. To replace the helper message with the error message when the error message is displayed, set `isReplace` to `true`.
+Error messages are displayed only when `invalid` is `true`. To replace the helper message with the error message when the error message is displayed, set `replace` to `true`.
 
-Use the `isReplace` property to replace the helper message with the error message.
+Use the `replace` property to replace the helper message with the error message.
 
 ```tsx
 <Fieldset
-  isInvalid
+  invalid
   legend="Terms and Conditions"
   helperMessage="Please review the terms carefully before agreeing."
   errorMessage="Agreement is required."
-  isReplace={true}
+  replace={true}
 >
   <Checkbox>I agree to the Terms and Conditions.</Checkbox>
 </Fieldset>
@@ -109,11 +109,11 @@ Use the `isReplace` property to replace the helper message with the error messag
 
 ### Making it Required
 
-To make it required, set `isRequired` to `true`.
+To make it required, set `required` to `true`.
 
 ```tsx
 <Fieldset
-  isRequired
+  required
   legend="Terms and Conditions"
   helperMessage="Please review the terms carefully before agreeing."
   errorMessage="Agreement is required."
@@ -124,11 +124,11 @@ To make it required, set `isRequired` to `true`.
 
 ### Disabling
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <Fieldset
-  isDisabled
+  disabled
   legend="Terms and Conditions"
   helperMessage="Please review the terms carefully before agreeing."
   errorMessage="Agreement is required."
@@ -139,11 +139,11 @@ To disable, set `isDisabled` to `true`.
 
 ### Making it Read-Only
 
-To make it read-only, set `isReadOnly` to `true`.
+To make it read-only, set `readOnly` to `true`.
 
 ```tsx
 <Fieldset
-  isReadOnly
+  readOnly
   legend="Terms and Conditions"
   helperMessage="Please review the terms carefully before agreeing."
   errorMessage="Agreement is required."
@@ -159,7 +159,7 @@ To customize the required indicator, set a `ReactNode` to `requiredIndicator`.
 ```tsx
 <VStack>
   <Fieldset
-    isRequired
+    required
     legend="Terms and Conditions"
     requiredIndicator={
       <Tag size="sm" colorScheme="red" ms={2}>
@@ -170,7 +170,7 @@ To customize the required indicator, set a `ReactNode` to `requiredIndicator`.
     <Checkbox>I agree to the Terms and Conditions.</Checkbox>
   </Fieldset>
 
-  <Fieldset isRequired>
+  <Fieldset required>
     <Legend
       requiredIndicator={
         <Tag size="sm" colorScheme="red" ms={2}>

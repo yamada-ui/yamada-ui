@@ -1,8 +1,8 @@
-import type { CSSProps, HTMLUIProps, Token } from "../../core"
+import type { CSSProps, HTMLStyledProps, StyleValue } from "../../core"
 import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"
 
-interface GridItemOptions {
+export interface GridItemProps extends HTMLStyledProps {
   /**
    * The CSS `grid-area` property.
    */
@@ -14,7 +14,7 @@ interface GridItemOptions {
   /**
    * The number of columns the grid item should `span`.
    */
-  colSpan?: Token<number>
+  colSpan?: StyleValue<number>
   /**
    * The CSS `grid-column-start` property.
    */
@@ -26,14 +26,12 @@ interface GridItemOptions {
   /**
    * The number of rows the grid item should `span`.
    */
-  rowSpan?: Token<number>
+  rowSpan?: StyleValue<number>
   /**
    * The CSS `grid-row-start` property.
    */
   rowStart?: CSSProps["gridRowStart"]
 }
-
-export interface GridItemProps extends HTMLUIProps, GridItemOptions {}
 
 export const {
   PropsContext: GridItemPropsContext,

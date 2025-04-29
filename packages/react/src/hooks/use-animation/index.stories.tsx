@@ -1,5 +1,4 @@
 import type { Meta } from "@storybook/react"
-import type { AnimationStyle } from "../../core"
 import { useAnimation, useDynamicAnimation } from "."
 import { Box } from "../../components/box"
 import { Button } from "../../components/button"
@@ -157,9 +156,7 @@ export const Multiple = () => {
 }
 
 export const Dynamic = () => {
-  const [animation, setAnimation] = useDynamicAnimation<{
-    [key in "moveLeft" | "moveRight"]: AnimationStyle
-  }>({
+  const [animation, setAnimation] = useDynamicAnimation({
     moveLeft: {
       duration: "slower",
       fillMode: "forwards",
@@ -214,9 +211,7 @@ export const Dynamic = () => {
 }
 
 export const DynamicAndMultiple = () => {
-  const [animation, setAnimation] = useDynamicAnimation<{
-    [key in "moveLeft" | "moveRight"]: AnimationStyle[]
-  }>({
+  const [animation, setAnimation] = useDynamicAnimation({
     moveLeft: [
       {
         duration: "slower",

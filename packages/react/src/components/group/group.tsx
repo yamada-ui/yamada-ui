@@ -22,7 +22,7 @@ export const {
 /**
  * `Group` is a component that groups and attaches multiple elements together.
  *
- * @see Docs https://yamada-ui.com/components/group
+ * @see https://yamada-ui.com/components/group
  */
 export const Group = withContext(
   ({
@@ -66,7 +66,6 @@ export const Group = withContext(
 
     return (
       <Flex
-        aria-orientation={orientation}
         data-attached={dataAttr(attached)}
         data-orientation={orientation}
         role="group"

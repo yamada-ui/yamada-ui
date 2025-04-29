@@ -4,7 +4,7 @@ import type {
   Placement,
   VirtualElement,
 } from "@popperjs/core"
-import type { PropGetter, Token } from "../../core"
+import type { PropGetter, StyleValue } from "../../core"
 import { createPopper } from "@popperjs/core"
 import { useCallback, useEffect, useRef } from "react"
 import { mergeRefs, noop } from "../../utils"
@@ -57,7 +57,7 @@ export interface UsePopperProps {
    *
    * @default 8
    */
-  gutter?: Token<number>
+  gutter?: StyleValue<number>
   /**
    * If `true`, the popper will match the width of the reference at all times.
    * It's useful for `autocomplete`, `date-picker` and `select` patterns.
@@ -69,7 +69,7 @@ export interface UsePopperProps {
    * Array of popper.js modifiers.
    * Check the docs to see the list of possible modifiers you can pass.
    *
-   * @see Docs https://popper.js.org/docs/v2/modifiers/
+   * @see https://popper.js.org/docs/v2/modifiers/
    */
   modifiers?: Partial<Modifier<string, any>>[]
   /**
@@ -81,7 +81,7 @@ export interface UsePopperProps {
    *
    * @default 'bottom'
    */
-  placement?: Token<Placement>
+  placement?: StyleValue<Placement>
   /**
    * If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.
    *

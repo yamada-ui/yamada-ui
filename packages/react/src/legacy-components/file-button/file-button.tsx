@@ -53,7 +53,7 @@ export interface FileButtonProps
 /**
  * `FileButton` is a button component used for users to select files.
  *
- * @see Docs https://yamada-ui.com/components/forms/file-button
+ * @see https://yamada-ui.com/components/forms/file-button
  */
 export const FileButton: FC<FileButtonProps> = ({ ref, ...props }) => {
   const [styles, mergedProps] = useComponentStyle("FileButton", props)

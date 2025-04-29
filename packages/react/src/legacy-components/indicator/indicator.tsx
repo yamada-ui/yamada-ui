@@ -1,10 +1,10 @@
 import type { ReactNode } from "react"
 import type {
-  AnimationStyle,
+  CSSAnimationObject,
   CSSUIObject,
   HTMLUIProps,
   ThemeProps,
-  Token,
+  StyleValue,
 } from "../../core"
 import { useMemo } from "react"
 import { forwardRef, omitThemeProps, ui, useComponentStyle } from "../../core"
@@ -25,7 +25,7 @@ interface IndicatorOptions {
    *
    * @default false
    * */
-  inline?: Token<boolean>
+  inline?: StyleValue<boolean>
   /**
    * The indicator label to use.
    */
@@ -35,7 +35,7 @@ interface IndicatorOptions {
    *
    * @default 0
    */
-  offset?: Token<number>
+  offset?: StyleValue<number>
   /**
    * If `label` is of type number, the maximum number displayed.
    *
@@ -59,13 +59,13 @@ interface IndicatorOptions {
    *
    * @default "infinite"
    */
-  pingCount?: AnimationStyle["iterationCount"]
+  pingCount?: CSSAnimationObject["iterationCount"]
   /**
    * It is used for the duration of the ping animation.
    *
    * @default "1.4s"
    */
-  pingDuration?: AnimationStyle["direction"]
+  pingDuration?: CSSAnimationObject["direction"]
   /**
    * It is used for the scale of the ping animation.
    *
@@ -77,7 +77,7 @@ interface IndicatorOptions {
    *
    * @default 'top-right'
    */
-  placement?: Token<
+  placement?: StyleValue<
     | "bottom"
     | "bottom-left"
     | "bottom-right"
@@ -156,7 +156,7 @@ const getPlacementStyle = (
 /**
  * `Indicator` is a component that displays at the corner of elements such as avatars.
  *
- * @see Docs https://yamada-ui.com/components/media-and-icons/indicator
+ * @see https://yamada-ui.com/components/media-and-icons/indicator
  */
 export const Indicator = forwardRef<IndicatorProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentStyle("Indicator", props)

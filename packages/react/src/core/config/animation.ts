@@ -44,7 +44,7 @@ export function animation(value: any, { css, theme }: TransformOptions) {
       fillMode = "none",
       iterationCount = "1",
       playState = "running",
-    } = css?.(transformAnimationValue(value))(theme) ?? {}
+    } = css?.(theme)(transformAnimationValue(value)) ?? {}
 
     return `${animationName} ${animationDuration} ${animationTimingFunction} ${delay} ${iterationCount} ${direction} ${fillMode} ${playState}`
   } else if (value.includes(",")) {
@@ -53,7 +53,7 @@ export function animation(value: any, { css, theme }: TransformOptions) {
       .map((value: string) => {
         value = value.trim()
 
-        value = tokenToVar("animations", value)(theme)
+        value = tokenToVar(theme)("animations", value)
 
         return value
       })
@@ -61,7 +61,7 @@ export function animation(value: any, { css, theme }: TransformOptions) {
 
     return value
   } else {
-    value = tokenToVar("animations", value)(theme)
+    value = tokenToVar(theme)("animations", value)
 
     return value
   }
@@ -71,7 +71,7 @@ export function keyframes(value: any, { css, theme }: TransformOptions) {
   if (value == null) return value
 
   if (isObject(value)) {
-    value = css?.(value)(theme)
+    value = css?.(theme)(value)
 
     const name = insertKeyframes(value)
 

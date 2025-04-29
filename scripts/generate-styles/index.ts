@@ -252,8 +252,6 @@ const excludeProperties = (
 }
 
 const main = async () => {
-  await writeFile("test.json", JSON.stringify(features, null, 2))
-
   p.intro(c.magenta(`Generating Yamada UI styles`))
 
   const s = p.spinner()

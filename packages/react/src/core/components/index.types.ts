@@ -1,69 +1,59 @@
 import type * as React from "react"
 import type { Merge } from "../../utils"
-import type { CSSModifierObject, CSSPropObject, CSSProps } from "../css"
-import type { ComponentStyle, StyledTheme, UsageTheme } from "../theme"
+import type { CSSProps } from "../css"
+import type { PseudoProps } from "../pseudos"
+import type { StyleProps } from "../styles"
+import type { StyledTheme, UsageTheme } from "../theme"
 
 export type DOMElement = keyof React.JSX.IntrinsicElements
 
-export type ShouldForwardProp = (prop: string) => boolean
-
-export interface StyledOptions<
-  Y extends CSSPropObject = CSSPropObject,
-  M extends CSSModifierObject = CSSModifierObject,
-  D extends CSSModifierObject = CSSModifierObject,
-  H extends number | string | symbol = string,
-> extends ComponentStyle<Y, M, D> {
-  name?: string
-  target?: string
-  label?: string
-  shouldForwardProp?: boolean | ShouldForwardProp
-  forwardProps?: string[]
-  transferProps?: H[]
-}
-
-export interface UIFactory {
-  <Y extends As, M extends object = {}>(
-    el: React.FC<M> | Y,
-    options?: StyledOptions,
-  ): UIComponent<Y, M>
-}
-
-export interface UIProps extends CSSProps {
+export interface StyledProps extends CSSProps {
   /**
    * The HTML element to render.
    */
   as?: As
+  /**
+   * Merges its props onto its immediate child.
+   */
+  asChild?: boolean
+  /**
+   * Debug mode.
+   */
+  __debug?: boolean
 }
 
 export type WithoutAs<Y extends object> = Omit<Y, "as">
 
-export type InterpolationProps = CSSProps & {
+export type WithoutRef<Y extends object> = Omit<Y, "ref">
+
+export interface InterpolationProps extends StyleProps, PseudoProps {
   theme: StyledTheme<UsageTheme>
 }
 
-export type OmitProps<Y extends object = {}, M extends object = {}> = M &
-  Omit<Y, "as" | keyof M>
+export type OmitProps<Y extends object = {}, M extends object = {}> = Omit<
+  Y,
+  "as" | keyof M
+> &
+  WithoutAs<M>
 
 type ComponentConditionalProps<
   Y extends As,
   M extends As,
   D extends object = {},
-> =
-  | OmitProps<React.ComponentProps<M>, D>
-  | OmitProps<React.ComponentProps<Y>, D>
+> = Y extends M
+  ? OmitProps<React.ComponentProps<Y>, D>
+  : OmitProps<React.ComponentProps<M>, D>
 
 type ComponentProps<
   Y extends As,
   M extends As,
   D extends object = {},
-> = ComponentConditionalProps<Y, M, D> & {
+> = ComponentConditionalProps<Y, M, WithoutRef<D>> & {
   as?: M
 }
 
 export interface ComponentArgs
-  extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {
-  __ui__?: string
-}
+  extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {}
 
 export interface Component<Y extends As, D extends object = {}>
   extends ComponentArgs {
@@ -78,35 +68,30 @@ export interface FunctionComponent<Y = {}> extends ComponentArgs {
 
 export type As = React.ElementType
 
-export type HTMLUIComponents = {
-  [Y in DOMElement]: UIComponent<Y>
-}
-
-export interface UIComponent<Y extends As = As, M extends object = {}>
-  extends Component<Y, Merge<UIProps, M>> {}
+export interface StyledComponent<Y extends As = As, M extends object = {}>
+  extends Component<Y, Merge<StyledProps, M>> {}
 
 export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
-  ref?: React.ComponentRef<Y>
+  ref?: React.Ref<React.ComponentRef<Y>>
 }
 
-export interface HTMLDataAttributes {
-  [key: `data-${string}`]: boolean | string
-}
+export type HTMLProps<Y extends DOMElement = "div"> = Omit<
+  React.JSX.IntrinsicElements[Y],
+  "size" | keyof StyledProps
+> &
+  React.DataAttributes
 
-export type HTMLProps<Y extends DOMElement = "div"> = HTMLDataAttributes &
-  Omit<React.JSX.IntrinsicElements[Y], "size" | keyof UIProps>
-
-export type HTMLUIProps<Y extends DOMElement = "div"> = Merge<
+export type HTMLStyledProps<Y extends DOMElement = "div"> = Merge<
   HTMLProps<Y>,
-  UIProps
+  StyledProps
 >
 
-export type HTMLUIPropsWithoutAs<Y extends DOMElement = "div"> = WithoutAs<
-  HTMLUIProps<Y>
+export type HTMLStyledPropsWithoutAs<Y extends DOMElement = "div"> = WithoutAs<
+  HTMLStyledProps<Y>
 >
 
-export type HTMLUIPropsWithoutRef<Y extends DOMElement = "div"> = Omit<
-  HTMLUIProps<Y>,
+export type HTMLStyledPropsWithoutRef<Y extends DOMElement = "div"> = Omit<
+  HTMLStyledProps<Y>,
   "ref"
 >
 

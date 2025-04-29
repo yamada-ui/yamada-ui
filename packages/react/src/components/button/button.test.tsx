@@ -6,9 +6,8 @@ describe("<Button />", () => {
     await a11y(<Button>test</Button>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Button.displayName).toBe("Button")
-    expect(Button.__styled__).toBe("Button")
   })
 
   test("sets `className` correctly", () => {
@@ -101,11 +100,7 @@ describe("<Button />", () => {
     )
     expect(getByTestId("btn")).toHaveAttribute("type", "submit")
 
-    rerender(
-      <Button as="button" data-testid="btn">
-        Submit
-      </Button>,
-    )
+    rerender(<Button data-testid="btn">Submit</Button>)
     expect(getByTestId("btn")).toHaveAttribute("type")
   })
 

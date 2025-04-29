@@ -25,7 +25,7 @@ export const {
 /**
  * `Textarea` is a component used to obtain multi-line text input.
  *
- * @see Docs https://yamada-ui.com/components/textarea
+ * @see https://yamada-ui.com/components/textarea
  */
 export const Textarea = withContext("textarea")({ rows: 2 }, (props) => {
   const {

@@ -50,7 +50,7 @@ export const {
 /**
  * `Editable` is a component used to obtain inline editable text input.
  *
- * @see Docs https://yamada-ui.com/components/editable
+ * @see https://yamada-ui.com/components/editable
  */
 export const EditableRoot = withProvider(
   ({

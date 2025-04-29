@@ -76,7 +76,7 @@ export const useClickable = <
     disableTouchBehavior = true,
     focusable,
     focusOnClick = true,
-    tabIndex: _tabIndex,
+    tabIndex: tabIndexProp,
     onClick,
     onKeyDown,
     onKeyUp,
@@ -92,7 +92,7 @@ export const useClickable = <
 
   const listeners = useEventListeners()
 
-  const tabIndex = button ? _tabIndex : _tabIndex || 0
+  const tabIndex = button ? tabIndexProp : tabIndexProp || 0
   const trulyDisabled = disabled && !focusable
 
   const refCb = (node: any) => {

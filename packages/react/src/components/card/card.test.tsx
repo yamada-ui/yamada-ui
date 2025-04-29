@@ -6,18 +6,11 @@ describe("<Card />", () => {
     await a11y(<Card.Root>Card</Card.Root>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Card.Root.displayName).toBe("CardRoot")
-    expect(Card.Root.__styled__).toBe("CardRoot")
-
     expect(Card.Header.displayName).toBe("CardHeader")
-    expect(Card.Header.__styled__).toBe("CardHeader")
-
     expect(Card.Body.displayName).toBe("CardBody")
-    expect(Card.Body.__styled__).toBe("CardBody")
-
     expect(Card.Footer.displayName).toBe("CardFooter")
-    expect(Card.Footer.__styled__).toBe("CardFooter")
   })
 
   test("sets `className` correctly", () => {

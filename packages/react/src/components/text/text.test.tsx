@@ -6,9 +6,8 @@ describe("<Text />", () => {
     await a11y(<Text>Text</Text>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Text.displayName).toBe("Text")
-    expect(Text.__styled__).toBe("Text")
   })
 
   test("sets `className` correctly", () => {
@@ -21,17 +20,5 @@ describe("<Text />", () => {
     render(<Text data-testid="text">Text</Text>)
     const el = screen.getByTestId("text")
     expect(el.tagName).toBe("P")
-  })
-
-  test("as - prop works correctly", () => {
-    render(
-      <Text as="a" href="www.google.com">
-        Text
-      </Text>,
-    )
-
-    const link = screen.getByRole("link", { name: /Text/i })
-    expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute("href", "www.google.com")
   })
 })

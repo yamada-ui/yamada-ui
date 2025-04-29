@@ -152,7 +152,7 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
     placeholder="custom border color"
   />
   <NativeSelect
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -161,19 +161,16 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <NativeSelect isDisabled variant="outline" placeholder="outline" />
-  <NativeSelect isDisabled variant="filled" placeholder="filled" />
-  <NativeSelect isDisabled variant="flushed" placeholder="flushed" />
-  <NativeSelect isDisabled variant="unstyled" placeholder="unstyled" />
+  <NativeSelect disabled variant="outline" placeholder="outline" />
+  <NativeSelect disabled variant="filled" placeholder="filled" />
+  <NativeSelect disabled variant="flushed" placeholder="flushed" />
+  <NativeSelect disabled variant="unstyled" placeholder="unstyled" />
 
-  <FormControl
-    isDisabled
-    label="Which notifications would you like to receive?"
-  >
+  <FormControl disabled label="Which notifications would you like to receive?">
     <NativeSelect placeholder="Select notifications" />
   </FormControl>
 </VStack>
@@ -181,19 +178,16 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <NativeSelect isReadOnly variant="outline" placeholder="outline" />
-  <NativeSelect isReadOnly variant="filled" placeholder="filled" />
-  <NativeSelect isReadOnly variant="flushed" placeholder="flushed" />
-  <NativeSelect isReadOnly variant="unstyled" placeholder="unstyled" />
+  <NativeSelect readOnly variant="outline" placeholder="outline" />
+  <NativeSelect readOnly variant="filled" placeholder="filled" />
+  <NativeSelect readOnly variant="flushed" placeholder="flushed" />
+  <NativeSelect readOnly variant="unstyled" placeholder="unstyled" />
 
-  <FormControl
-    isReadOnly
-    label="Which notifications would you like to receive?"
-  >
+  <FormControl readOnly label="Which notifications would you like to receive?">
     <NativeSelect placeholder="Select notifications" />
   </FormControl>
 </VStack>
@@ -201,17 +195,17 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <NativeSelect isInvalid variant="outline" placeholder="outline" />
-  <NativeSelect isInvalid variant="filled" placeholder="filled" />
-  <NativeSelect isInvalid variant="flushed" placeholder="flushed" />
-  <NativeSelect isInvalid variant="unstyled" placeholder="unstyled" />
+  <NativeSelect invalid variant="outline" placeholder="outline" />
+  <NativeSelect invalid variant="filled" placeholder="filled" />
+  <NativeSelect invalid variant="flushed" placeholder="flushed" />
+  <NativeSelect invalid variant="unstyled" placeholder="unstyled" />
 
   <FormControl
-    isInvalid
+    invalid
     label="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -283,7 +277,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.select}
+      invalid={!!errors.select}
       label="Who is your favorite character?"
       errorMessage={errors.select ? errors.select.message : undefined}
     >

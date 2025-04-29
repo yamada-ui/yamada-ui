@@ -36,10 +36,10 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Checkbox colorScheme="secondary" defaultIsChecked>
+  <Checkbox colorScheme="secondary" defaultChecked>
     Secondary
   </Checkbox>
-  <Checkbox colorScheme="green" defaultIsChecked>
+  <Checkbox colorScheme="green" defaultChecked>
     Green
   </Checkbox>
 </Wrap>
@@ -47,36 +47,36 @@ import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
 
 ### Set as Default Checked
 
-To set the checkbox as checked by default, set `defaultIsChecked` to `true`.
+To set the checkbox as checked by default, set `defaultChecked` to `true`.
 
 ```tsx
-<Checkbox defaultIsChecked>孫悟空</Checkbox>
+<Checkbox defaultChecked>孫悟空</Checkbox>
 ```
 
 ### Disable
 
-To disable the checkbox, set `isDisabled` to `true`.
+To disable the checkbox, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <Checkbox isDisabled>All Notifications</Checkbox>
-  <Checkbox isDisabled defaultIsChecked>
+  <Checkbox disabled>All Notifications</Checkbox>
+  <Checkbox disabled defaultChecked>
     All Notifications
   </Checkbox>
 
   <CheckboxGroup defaultValue={["all"]}>
     <Checkbox value="all">All Notifications</Checkbox>
-    <Checkbox value="important" isDisabled>
+    <Checkbox value="important" disabled>
       Important Notifications
     </Checkbox>
     <Checkbox value="service">Service Notifications</Checkbox>
   </CheckboxGroup>
 
-  <Fieldset isDisabled legend="Which notifications would you like to receive?">
-    <Checkbox defaultIsChecked>All Notifications</Checkbox>
+  <Fieldset disabled legend="Which notifications would you like to receive?">
+    <Checkbox defaultChecked>All Notifications</Checkbox>
   </Fieldset>
 
-  <Fieldset isDisabled legend="Which notifications would you like to receive?">
+  <Fieldset disabled legend="Which notifications would you like to receive?">
     <CheckboxGroup defaultValue={["all"]}>
       <Checkbox value="all">All Notifications</Checkbox>
       <Checkbox value="important">Important Notifications</Checkbox>
@@ -88,28 +88,28 @@ To disable the checkbox, set `isDisabled` to `true`.
 
 ### Set as Read-Only
 
-To make the checkbox read-only, set `isReadOnly` to `true`.
+To make the checkbox read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <Checkbox isReadOnly>All Notifications</Checkbox>
-  <Checkbox isReadOnly defaultIsChecked>
+  <Checkbox readOnly>All Notifications</Checkbox>
+  <Checkbox readOnly defaultChecked>
     All Notifications
   </Checkbox>
 
   <CheckboxGroup defaultValue={["all"]}>
     <Checkbox value="all">All Notifications</Checkbox>
-    <Checkbox value="important" isReadOnly>
+    <Checkbox value="important" readOnly>
       Important Notifications
     </Checkbox>
     <Checkbox value="service">Service Notifications</Checkbox>
   </CheckboxGroup>
 
-  <Fieldset isReadOnly legend="Which notifications would you like to receive?">
-    <Checkbox defaultIsChecked>All Notifications</Checkbox>
+  <Fieldset readOnly legend="Which notifications would you like to receive?">
+    <Checkbox defaultChecked>All Notifications</Checkbox>
   </Fieldset>
 
-  <Fieldset isReadOnly legend="Which notifications would you like to receive?">
+  <Fieldset readOnly legend="Which notifications would you like to receive?">
     <CheckboxGroup defaultValue={["all"]}>
       <Checkbox value="all">All Notifications</Checkbox>
       <Checkbox value="important">Important Notifications</Checkbox>
@@ -121,25 +121,25 @@ To make the checkbox read-only, set `isReadOnly` to `true`.
 
 ### Set as Invalid Input
 
-To set the checkbox as an invalid input, set `isInvalid` to `true`.
+To set the checkbox as an invalid input, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <Checkbox isInvalid>All Notifications</Checkbox>
-  <Checkbox isInvalid defaultIsChecked>
+  <Checkbox invalid>All Notifications</Checkbox>
+  <Checkbox invalid defaultChecked>
     All Notifications
   </Checkbox>
 
   <CheckboxGroup defaultValue={["all"]}>
     <Checkbox value="all">All Notifications</Checkbox>
-    <Checkbox value="important" isInvalid>
+    <Checkbox value="important" invalid>
       Important Notifications
     </Checkbox>
     <Checkbox value="service">Service Notifications</Checkbox>
   </CheckboxGroup>
 
   <Fieldset
-    isInvalid
+    invalid
     legend="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -147,7 +147,7 @@ To set the checkbox as an invalid input, set `isInvalid` to `true`.
   </Fieldset>
 
   <Fieldset
-    isInvalid
+    invalid
     legend="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -162,19 +162,19 @@ To set the checkbox as an invalid input, set `isInvalid` to `true`.
 
 ### Set as Indeterminate
 
-To set the checkbox to an indeterminate state, set `isIndeterminate` to `true`.
+To set the checkbox to an indeterminate state, set `indeterminate` to `true`.
 
 ```tsx functional=true
 const [values, setValues] = useState([false, false])
 
 const allChecked = values.every(Boolean)
-const isIndeterminate = values.some(Boolean) && !allChecked
+const indeterminate = values.some(Boolean) && !allChecked
 
 return (
   <VStack gap="sm">
     <Checkbox
-      isChecked={allChecked}
-      isIndeterminate={isIndeterminate}
+      checked={allChecked}
+      indeterminate={indeterminate}
       onChange={(e) => setValues([e.target.checked, e.target.checked])}
     >
       地球人
@@ -182,14 +182,14 @@ return (
 
     <VStack pl="md" gap="sm">
       <Checkbox
-        isChecked={values[0]}
+        checked={values[0]}
         onChange={(e) => setValues([e.target.checked, values[1]])}
       >
         孫悟空
       </Checkbox>
 
       <Checkbox
-        isChecked={values[1]}
+        checked={values[1]}
         onChange={(e) => setValues([values[0], e.target.checked])}
       >
         孫悟飯
@@ -232,10 +232,10 @@ return (
 ### Control
 
 ```tsx functional=true
-const [isChecked, { toggle }] = useBoolean(false)
+const [checked, { toggle }] = useBoolean(false)
 
 return (
-  <Checkbox isChecked={isChecked} onChange={toggle}>
+  <Checkbox checked={checked} onChange={toggle}>
     孫悟空
   </Checkbox>
 )
@@ -306,7 +306,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.checkbox}
+      invalid={!!errors.checkbox}
       legend="Who is your favorite character?"
       errorMessage={errors.checkbox ? errors.checkbox.message : undefined}
     >
@@ -315,7 +315,7 @@ return (
         control={control}
         rules={{ required: { value: true, message: "This is required." } }}
         render={({ field: { value, ...rest } }) => (
-          <Checkbox isChecked={value} {...rest}>
+          <Checkbox checked={value} {...rest}>
             孫悟空
           </Checkbox>
         )}
@@ -323,7 +323,7 @@ return (
     </Fieldset>
 
     <Fieldset
-      isInvalid={!!errors.checkboxGroup}
+      invalid={!!errors.checkboxGroup}
       legend="Who is your favorite character?"
       errorMessage={
         errors.checkboxGroup ? errors.checkboxGroup.message : undefined

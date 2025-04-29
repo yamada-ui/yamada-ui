@@ -16,6 +16,10 @@ export interface StyledProps extends CSSProps {
    * Merges its props onto its immediate child.
    */
   asChild?: boolean
+  /**
+   * Debug mode.
+   */
+  __debug?: boolean
 }
 
 export type WithoutAs<Y extends object> = Omit<Y, "as">
@@ -49,9 +53,7 @@ type ComponentProps<
 }
 
 export interface ComponentArgs
-  extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {
-  __styled__?: string
-}
+  extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {}
 
 export interface Component<Y extends As, D extends object = {}>
   extends ComponentArgs {

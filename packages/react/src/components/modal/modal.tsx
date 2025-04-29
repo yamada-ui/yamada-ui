@@ -20,7 +20,7 @@ import { Button } from "../button"
 import { CloseButton } from "../close-button"
 import { fadeScaleVariants, fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { Portal } from "../portal"
 import { slideFadeVariants } from "../slide"
 import { Slot } from "../slot"
@@ -107,7 +107,7 @@ export const {
 /**
  * `Modal` is a component that is displayed over the main content to focus the user's attention solely on the information.
  *
- * @see Docs https://yamada-ui.com/components/overlay/modal
+ * @see https://yamada-ui.com/components/overlay/modal
  */
 export const ModalRoot = withProvider<"div", ModalRootProps>(
   ({
@@ -253,7 +253,7 @@ export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
   const { animationScheme, duration, getOverlayProps } = useModalContext()
 
   return (
-    <Motion
+    <motion.div
       custom={{ duration }}
       {...(animationScheme !== "none"
         ? {
@@ -325,8 +325,7 @@ export const ModalContent = withContext<"section", ModalContentProps>(
     )
 
     return (
-      <Motion
-        as="section"
+      <motion.section
         {...getAnimationProps(animationScheme, duration)}
         {...(getContentProps(
           rest as HTMLProps<"section">,
@@ -335,7 +334,7 @@ export const ModalContent = withContext<"section", ModalContentProps>(
         {customCloseButton ?? (withCloseButton ? <ModalCloseButton /> : null)}
 
         {cloneChildren}
-      </Motion>
+      </motion.section>
     )
   },
   "content",

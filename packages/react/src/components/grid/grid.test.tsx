@@ -6,9 +6,8 @@ describe("<Grid />", () => {
     render(<Grid>Grid</Grid>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Grid.displayName).toBe("Grid")
-    expect(Grid.__styled__).toBe("Grid")
   })
 
   test("sets `className` correctly", () => {

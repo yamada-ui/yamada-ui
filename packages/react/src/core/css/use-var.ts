@@ -14,7 +14,7 @@ import {
 } from "../../utils"
 import { cssProps } from "../components"
 import { styles } from "../styles"
-import { getVar } from "./var"
+import { getVar, getVarName } from "./var"
 
 type Format<Y> = (name: Y, index: number) => string
 type Variables = Required<CSSProps>["vars"]
@@ -33,6 +33,12 @@ export const useCreateVars = <Y extends Dict, M extends keyof Y = keyof Y>(
     () => createVars(theme)(obj, keys, options),
     [obj, keys, options, theme],
   )
+}
+
+export const useVarName = (name: string) => {
+  const { theme } = useTheme()
+
+  return useMemo(() => `var(${getVarName(theme)(name)})`, [name, theme])
 }
 
 interface CreateVarsOptions<M> {

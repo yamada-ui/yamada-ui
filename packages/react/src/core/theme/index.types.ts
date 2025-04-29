@@ -30,6 +30,8 @@ export type TextDirection = "ltr" | "rtl"
 
 export type BreakpointDirection = "down" | "up"
 
+export type KeyframeIdent = "from" | "to"
+
 export type Orientation = "horizontal" | "vertical"
 
 export type Placement =
@@ -228,7 +230,7 @@ export interface ThemeConfig {
      * This allows you to define custom names for each layer type in your theme.
      * Set to `false` to disable the use of CSS layers.
      *
-     * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
+     * @see https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
      */
     layers?: false | Layers
     /**
@@ -554,23 +556,27 @@ export type ComponentCompound<
 > = (string extends keyof D
   ? {}
   : {
-      size?: (keyof D)[] | keyof D
+      size?: (keyof D)[] | keyof D | RegExp
     }) &
   (string extends keyof H
     ? {}
     : {
-        variant?: (keyof H)[] | keyof H
+        variant?: (keyof H)[] | keyof H | RegExp
       }) &
   (string extends keyof M
     ? {}
     : {
         [key in keyof M]?:
+          | RegExp
           | StyleValue<Booleanish<keyof M[key]>>
           | StyleValue<Booleanish<keyof M[key]>>[]
       }) & {
     css: Y
     [key: string]: any
-    colorScheme?: ThemeTokens["colorSchemes"] | ThemeTokens["colorSchemes"][]
+    colorScheme?:
+      | RegExp
+      | ThemeTokens["colorSchemes"]
+      | ThemeTokens["colorSchemes"][]
     layer?: LayerScheme
   }
 

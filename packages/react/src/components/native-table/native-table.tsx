@@ -37,7 +37,7 @@ export const {
 /**
  * `NativeTable` is a component for efficiently organizing and displaying data.
  *
- * @see Docs https://yamada-ui.com/components/native-table
+ * @see https://yamada-ui.com/components/native-table
  */
 export const NativeTableRoot = withProvider(
   ({ withScrollArea, scrollAreaProps, ...rest }) => {

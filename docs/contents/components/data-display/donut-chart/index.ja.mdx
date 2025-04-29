@@ -401,7 +401,7 @@ return <DonutChart data={mewtwo} withLabels withLabelLines labelOffset={15} />
 
 ### ラベルを割合にする
 
-ラベルの表示を割合にする場合は、`isPercent`を`true`に設定します。デフォルトは、`false`です。
+ラベルの表示を割合にする場合は、`percent`を`true`に設定します。デフォルトは、`false`です。
 
 ```tsx functional=true
 const mewtwo: CellProps[] = useMemo(
@@ -440,7 +440,7 @@ const mewtwo: CellProps[] = useMemo(
   [],
 )
 
-return <DonutChart data={mewtwo} withLabels isPercent />
+return <DonutChart data={mewtwo} withLabels percent />
 ```
 
 ### ツールチップに表示するデータを切り替える

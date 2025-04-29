@@ -44,9 +44,9 @@ describe("<For />", () => {
     )
   })
 
-  test("For renders correctly with filterBy", () => {
+  test("For renders correctly with filter", () => {
     render(
-      <For each={["One", "Two", "Three"]} filterBy={(item) => item !== "Two"}>
+      <For each={["One", "Two", "Three"]} filter={(item) => item !== "Two"}>
         {(item, index) => <p key={index}>{item}</p>}
       </For>,
     )
@@ -55,9 +55,9 @@ describe("<For />", () => {
     expect(screen.queryByText("Two")).not.toBeInTheDocument()
   })
 
-  test("For renders correctly with limitBy", () => {
+  test("For renders correctly with limit", () => {
     render(
-      <For each={["One", "Two", "Three"]} limitBy={2}>
+      <For each={["One", "Two", "Three"]} limit={2}>
         {(item, index) => <div key={index}>{item}</div>}
       </For>,
     )
@@ -66,9 +66,9 @@ describe("<For />", () => {
     expect(screen.queryByText("Three")).not.toBeInTheDocument()
   })
 
-  test("For renders correctly with offsetBy", () => {
+  test("For renders correctly with offset", () => {
     render(
-      <For each={["One", "Two", "Three"]} offsetBy={1}>
+      <For each={["One", "Two", "Three"]} offset={1}>
         {(item, index) => <div key={index}>{item}</div>}
       </For>,
     )
@@ -98,7 +98,7 @@ describe("<For />", () => {
 
   test("For renders correctly with sortBy", () => {
     render(
-      <For each={["One", "Two", "Three"]} sortBy={(a, b) => a.localeCompare(b)}>
+      <For each={["One", "Two", "Three"]} sort={(a, b) => a.localeCompare(b)}>
         {(item, index) => (
           <div key={index} data-testid="for">
             {item}
@@ -114,11 +114,11 @@ describe("<For />", () => {
     render(
       <For
         each={["One", "Two", "Three", "Four"]}
-        filterBy={(item) => item !== "Two"} // One, Three, Four
-        limitBy={2} // One, Four
-        offsetBy={1} // One, Four
-        reverse // Three, One, Four
-        sortBy={(a, b) => a.localeCompare(b)} // Four, One, Three
+        filter={(item) => item !== "Two"}
+        limit={2}
+        offset={1}
+        reverse
+        sort={(a, b) => a.localeCompare(b)}
       >
         {(item, index) => <p key={index}>{item}</p>}
       </For>,

@@ -2,6 +2,7 @@ import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { StatStyle } from "./stat.style"
 import { createSlotComponent, styled } from "../../core"
+import { useI18n } from "../../providers/i18n-provider"
 import { findChild, getValidChildren, isEmpty, omitChildren } from "../../utils"
 import { TriangleIcon } from "../icon"
 import { statStyle } from "./stat.style"
@@ -108,9 +109,10 @@ export interface StatIconProps extends HTMLStyledProps<"svg"> {
 
 export const StatIcon = withContext<"svg", StatIconProps>(
   ({ type = "increase", ...rest }) => {
+    const { t } = useI18n("stat")
     return (
       <TriangleIcon
-        aria-label={type === "increase" ? "Increased by" : "Decreased by"}
+        aria-label={type === "increase" ? t("Increased by") : t("Decreased by")}
         data-type={type}
         {...rest}
       />

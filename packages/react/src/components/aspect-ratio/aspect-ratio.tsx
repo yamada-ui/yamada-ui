@@ -5,7 +5,7 @@ import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"
 import { aspectRatioStyle } from "./aspect-ratio.style"
 
-interface AspectRatioOptions {
+export interface AspectRatioProps extends HTMLStyledProps {
   /**
    * The aspect ratio of the Box.
    *
@@ -13,8 +13,6 @@ interface AspectRatioOptions {
    */
   ratio?: StyleValue<number>
 }
-
-export interface AspectRatioProps extends AspectRatioOptions, HTMLStyledProps {}
 
 export const {
   PropsContext: AspectRatioPropsContext,

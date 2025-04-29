@@ -13,9 +13,11 @@ type PathImpl<Y extends number | string | symbol, M> = Y extends number | string
     : `${Y}.${Path<M>}`
   : ``
 
-export type Path<Y> = {
-  [M in keyof Y]-?: PathImpl<M, Y[M]>
-}[keyof Y]
+export type Path<Y> = Y extends any[]
+  ? `${number}`
+  : {
+      [M in keyof Y]-?: PathImpl<M, Y[M]>
+    }[keyof Y]
 
 export type Value<
   Y extends Dict,

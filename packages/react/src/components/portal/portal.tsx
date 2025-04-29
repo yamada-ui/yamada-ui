@@ -29,7 +29,7 @@ export interface PortalProps {
 /**
  * `Portal` is a component that renders elements outside of the current `DOM` hierarchy.
  *
- * @see Docs https://yamada-ui.com/components/portal
+ * @see https://yamada-ui.com/components/portal
  */
 export const Portal: FC<PortalProps> = ({
   appendToParentPortal = true,
@@ -48,5 +48,3 @@ export const Portal: FC<PortalProps> = ({
     <DefaultPortal {...{ appendToParentPortal, children }} />
   )
 }
-
-Portal.__ui__ = "Portal"

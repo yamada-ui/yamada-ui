@@ -80,7 +80,7 @@ export interface SwitchProps
 /**
  * `Switch` is a component used to toggle between on and off states.
  *
- * @see Docs https://yamada-ui.com/components/forms/switch
+ * @see https://yamada-ui.com/components/forms/switch
  */
 export const Switch = forwardRef<SwitchProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Switch", props)

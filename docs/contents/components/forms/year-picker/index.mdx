@@ -167,10 +167,10 @@ By default, the calendar closes automatically on blur. To prevent the calendar f
 
 ### Disable Clearing
 
-To disable clearing, set `isClearable` to `false`.
+To disable clearing, set `clearable` to `false`.
 
 ```tsx
-<YearPicker placeholder="YYYY" isClearable={false} />
+<YearPicker placeholder="YYYY" clearable={false} />
 ```
 
 ### Disable Input
@@ -210,7 +210,7 @@ To change the color of the border, set a color to `focusBorderColor` or `errorBo
 <VStack>
   <YearPicker focusBorderColor="green.500" placeholder="custom border color" />
   <YearPicker
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -219,37 +219,37 @@ To change the color of the border, set a color to `focusBorderColor` or `errorBo
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <YearPicker isDisabled variant="outline" placeholder="outline" />
-  <YearPicker isDisabled variant="filled" placeholder="filled" />
-  <YearPicker isDisabled variant="flushed" placeholder="flushed" />
+  <YearPicker disabled variant="outline" placeholder="outline" />
+  <YearPicker disabled variant="filled" placeholder="filled" />
+  <YearPicker disabled variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <YearPicker isReadOnly variant="outline" placeholder="outline" />
-  <YearPicker isReadOnly variant="filled" placeholder="filled" />
-  <YearPicker isReadOnly variant="flushed" placeholder="flushed" />
+  <YearPicker readOnly variant="outline" placeholder="outline" />
+  <YearPicker readOnly variant="filled" placeholder="filled" />
+  <YearPicker readOnly variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <YearPicker isInvalid variant="outline" placeholder="outline" />
-  <YearPicker isInvalid variant="filled" placeholder="filled" />
-  <YearPicker isInvalid variant="flushed" placeholder="flushed" />
+  <YearPicker invalid variant="outline" placeholder="outline" />
+  <YearPicker invalid variant="filled" placeholder="filled" />
+  <YearPicker invalid variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
@@ -280,7 +280,7 @@ The `children` are provided with `value` and `onClose` methods, which can be use
   <YearPicker placeholder="YYYY" closeOnSelect={false}>
     {({ value, onClose }) => (
       <VStack mt="sm">
-        <Button isDisabled={!value} onClick={onClose}>
+        <Button disabled={!value} onClick={onClose}>
           Submit
           {value ? ` ${value.getFullYear()}` : ""}
         </Button>
@@ -317,7 +317,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.yearPicker}
+      invalid={!!errors.yearPicker}
       label="Birthday"
       errorMessage={errors.yearPicker ? errors.yearPicker.message : undefined}
     >

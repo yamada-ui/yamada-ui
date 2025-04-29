@@ -34,21 +34,21 @@ import {
 
 ## 使い方
 
-表示または非表示を制御するために、`isOpen`と`onClose`を設定します。
+表示または非表示を制御するために、`open`と`onClose`を設定します。
 
 :::note
 `Dialog`は、内部的に[Modal](/components/overlay/modal)を使用しており、`Modal`を簡素化したコンポーネントです。
 :::
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -66,13 +66,13 @@ return (
 または、`DialogHeader`や`DialogBody`を省略しない場合は、このように記述します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Dialog</Button>
 
-    <Dialog isOpen={isOpen} onClose={onClose}>
+    <Dialog open={open} onClose={onClose}>
       <DialogHeader>孫悟空</DialogHeader>
 
       <DialogBody>
@@ -110,7 +110,7 @@ const sizeMap = [
   "full",
 ]
 const [size, setSize] = useState("md")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -131,7 +131,7 @@ return (
     </Wrap>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       size={size}
       header="孫悟空"
@@ -164,7 +164,7 @@ const placementMap = [
   "bottom-right",
 ]
 const [placement, setPlacement] = useState("center")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -185,7 +185,7 @@ return (
     </Wrap>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       placement={placement}
       header="孫悟空"
@@ -206,14 +206,14 @@ return (
 所要時間を変更する場合は、`duration`に数値(秒)を設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -235,7 +235,7 @@ return (
 
 ```tsx functional=true
 const [scrollBehavior, setScrollBehavior] = useState("inside")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -259,7 +259,7 @@ return (
     </Wrap>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       scrollBehavior={scrollBehavior}
       h="xl"
@@ -305,14 +305,14 @@ return (
 デフォルトでは、ダイアログを開いた際に主要なコンテンツのスクロールをブロックしています。これは、アクセシビリティを確保するためです。もし、主要なコンテンツのスクロールをブロックしたくない場合は、`blockScrollOnMount`を`false`に設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -333,14 +333,14 @@ return (
 `cancel`や`success`以外のボタンを追加する場合は、`other`と`onOther`を設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -362,14 +362,14 @@ return (
 `cancel`や`success`は、`Button`の`props`を設定することができます。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       header="孫悟空"
       cancel={{
@@ -403,14 +403,14 @@ return (
 `DialogCloseButton`に`props`などを渡して、カスタマイズしたい場合は、省略せずに設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -438,14 +438,14 @@ return (
 :::
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       header="孫悟空"
       cancel="わけない"
       onCancel={onClose}
@@ -464,14 +464,14 @@ return (
 `DialogOverlay`に`props`などを渡して、カスタマイズしたい場合は、省略せずに設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       header="孫悟空"
       cancel="わけない"
@@ -495,14 +495,14 @@ return (
 ダイアログのオーバーレイを無効(非表示)にする場合は、`withOverlay`を`false`にします。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Dialog</Button>
 
     <Dialog
-      isOpen={isOpen}
+      open={open}
       onClose={onClose}
       withOverlay={false}
       header="孫悟空"

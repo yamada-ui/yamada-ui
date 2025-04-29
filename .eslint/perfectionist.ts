@@ -57,7 +57,7 @@ const sortObjectGroups = {
     secondary: ["^as$", "^form$", "^type$", "^htmlFor$"],
     senary: ["^layerStyle$", "^textStyle$", "^apply$"],
     septenary: ["^variant$", "^size$", "^colorScheme$"],
-    tertiary: ["^name$", "^src$", "^srcSet$", "^href$", "^target$"],
+    tertiary: ["^name$", "^src$", "^srcSet$", "^href$", "^target$", "^rel$"],
     ...semanticSizes,
   },
   groups: [

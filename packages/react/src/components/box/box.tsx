@@ -1,14 +1,11 @@
-import type { HTMLUIProps } from "../../core"
-import { ui } from "../../core"
+import type { HTMLStyledProps } from "../../core"
+import { styled } from "../../core"
 
-export interface BoxProps extends HTMLUIProps {}
+export interface BoxProps extends HTMLStyledProps {}
 
 /**
  * `Box` is the most abstract component on which all other components are built. By default, it renders a `div` element.
  *
- * @see Docs https://yamada-ui.com/components/box
+ * @see https://yamada-ui.com/components/box
  */
-export const Box = ui("div")
-
-Box.displayName = "Box"
-Box.__ui__ = "Box"
+export const Box = styled("div")

@@ -1,7 +1,7 @@
 import type { EmotionCache, SerializedStyles } from "@emotion/utils"
 import type { FC } from "react"
 import type { Dict } from "../utils"
-import type { As, ShouldForwardProp, UIComponent } from "./components"
+import type { As, ShouldForwardProp, StyledComponent } from "./components"
 import type { CSSModifierObject, CSSPropObject } from "./css"
 import type { ColorScheme, ComponentStyle, StyledTheme } from "./theme"
 import { ThemeContext, withEmotionCache } from "@emotion/react"
@@ -22,6 +22,7 @@ import {
   filterUndefined,
   isString,
   isUndefined,
+  mergeRefs,
   splitObject,
   toArray,
 } from "../utils"
@@ -104,7 +105,7 @@ export interface StyledOptions<
   transferProps?: H[]
 }
 
-export function styled<
+export function createStyled<
   Y extends As,
   M extends object = {},
   D extends CSSPropObject = CSSPropObject,
@@ -122,7 +123,7 @@ export function styled<
     transferProps,
     ...styledOptions
   }: StyledOptions<D, H, R, keyof M> = {},
-): UIComponent<Y, M> {
+): StyledComponent<Y, M> {
   const className = styledOptions.className ?? getClassName(styledOptions.name)
   const displayName =
     styledOptions.displayName ?? getDisplayName(styledOptions.name, "")
@@ -139,75 +140,89 @@ export function styled<
   })
   const componentStyleOptions = { className, style, transferProps }
 
-  const StyledComponent = withEmotionCache<Dict>(
-    ({ as: Component = el, asChild, ...props }, cache, ref) => {
-      let className = ""
+  const StyledComponent = withEmotionCache<Dict>(function (
+    { as: Component = el, asChild, children, __debug, ...props },
+    cache,
+    forwardedRef,
+  ) {
+    let className = ""
 
-      const registered = useRef<string[]>([])
-      const htmlTag = isString(Component)
-      const forwardAsChild =
-        styledOptions.forwardAsChild ||
-        styledOptions.forwardProps?.includes("asChild")
-      const theme = use(ThemeContext) as StyledTheme
-      const [omittedProps, styleProps] = useSplitProps(props, shouldForwardProp)
-      const [, rest] = useComponentStyle<any, {}>(
-        omittedProps,
-        componentStyleOptions,
-      )
-      const [cssArray, colorScheme, forwardProps] = useMemo(() => {
-        const { css, colorScheme, ...forwardProps } = rest
+    const debugRef = useRef<HTMLElement>(null)
+    const registered = useRef<string[]>([])
+    const htmlTag = isString(Component)
+    const forwardAsChild =
+      styledOptions.forwardAsChild ||
+      styledOptions.forwardProps?.includes("asChild")
+    const shouldDebug = __debug && process.env.NODE_ENV === "development"
+    const theme = use(ThemeContext) as StyledTheme
+    const [omittedProps, styleProps] = useSplitProps(props, shouldForwardProp)
+    const [, rest] = useComponentStyle<any, {}>(
+      omittedProps,
+      componentStyleOptions,
+    )
+    const [cssArray, colorScheme, forwardProps] = useMemo(() => {
+      const { css, colorScheme, ...forwardProps } = rest
 
-        return [toArray(css), colorScheme, forwardProps]
-      }, [rest])
+      return [toArray(css), colorScheme, forwardProps]
+    }, [rest])
 
-      styleProps.colorScheme ??= colorScheme
+    styleProps.colorScheme ??= colorScheme
 
-      if (forwardProps.className)
-        className = getRegisteredStyles(
-          cache.registered,
-          registered.current,
-          forwardProps.className,
-        ).trim()
+    if (forwardProps.className)
+      className = getRegisteredStyles(
+        cache.registered,
+        registered.current,
+        forwardProps.className,
+      ).trim()
 
-      const interpolations = useMemo(
-        () => [
-          ...[...cssArray, styleProps].map(css(theme)),
-          ...registered.current,
-        ],
-        [cssArray, theme, styleProps],
-      )
+    const interpolations = useMemo(
+      () => [
+        ...[...cssArray, styleProps].map(css(theme)),
+        ...registered.current,
+      ],
+      [cssArray, theme, styleProps],
+    )
 
-      const serialized = useMemo(
-        () =>
-          serializeStyles(interpolations, cache.registered, {
-            theme,
-            ...forwardProps,
-          }),
-        [interpolations, cache.registered, theme, forwardProps],
-      )
+    const serialized = useMemo(
+      () =>
+        serializeStyles(interpolations, cache.registered, {
+          theme,
+          ...forwardProps,
+        }),
+      [interpolations, cache.registered, theme, forwardProps],
+    )
 
-      className = cx(className, `${cache.key}-${serialized.name}`)
-      className = cx(className, styledOptions.target)
+    className = cx(className, `${cache.key}-${serialized.name}`)
+    className = cx(className, styledOptions.target)
 
-      const mergedProps = { ...forwardProps, className }
+    if (shouldDebug) {
+      // eslint-disable-next-line no-console
+      console.log({
+        ref: debugRef,
+        as: Component,
+        className,
+        css: interpolations,
+        el,
+      })
+    }
 
-      return (
-        <ColorSchemeContext value={styleProps.colorScheme}>
-          <Insertion cache={cache} htmlTag={htmlTag} serialized={serialized} />
+    const ref = shouldDebug ? mergeRefs(forwardedRef, debugRef) : forwardedRef
+    const mergedProps = { ...forwardProps, className, children }
 
-          {asChild && !forwardAsChild ? (
-            <Slot ref={ref} {...mergedProps} />
-          ) : (
-            <Component ref={ref} {...mergedProps} />
-          )}
-        </ColorSchemeContext>
-      )
-    },
-  ) as UIComponent<Y, M>
+    return (
+      <ColorSchemeContext value={styleProps.colorScheme}>
+        <Insertion cache={cache} htmlTag={htmlTag} serialized={serialized} />
+
+        {asChild && !forwardAsChild ? (
+          <Slot ref={ref} {...mergedProps} />
+        ) : (
+          <Component ref={ref} {...mergedProps} />
+        )}
+      </ColorSchemeContext>
+    )
+  }) as StyledComponent<Y, M>
 
   StyledComponent.displayName = displayName || "StyledComponent"
-
-  if (styledOptions.name) StyledComponent.__ui__ = displayName
 
   return StyledComponent
 }

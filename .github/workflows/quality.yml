@@ -55,7 +55,6 @@ jobs:
 
   test:
     name: Test
-    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -73,7 +72,7 @@ jobs:
 
       - name: Run tests
         if: steps.check-modified.outputs.changed == 'true'
-        run: pnpm test --coverage
+        run: pnpm test
 
       - name: Upload coverage
         if: steps.check-modified.outputs.changed == 'true'

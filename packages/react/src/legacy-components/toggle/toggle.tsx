@@ -116,7 +116,7 @@ export interface ToggleProps<Y extends number | string = string>
 /**
  * `Toggle` is a two-state button that can be either on or off.
  *
- * @see Docs https://yamada-ui.com/components/forms/toggle
+ * @see https://yamada-ui.com/components/forms/toggle
  */
 export const Toggle = <Y extends number | string = string>(
   props: ToggleProps<Y>,

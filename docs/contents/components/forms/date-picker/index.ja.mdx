@@ -342,10 +342,10 @@ import "dayjs/locale/ja"
 
 ### クリアを無効化する
 
-クリアを無効化する場合は、`isClearable`を`false`に設定します。
+クリアを無効化する場合は、`clearable`を`false`に設定します。
 
 ```tsx
-<DatePicker placeholder="YYYY/MM/DD" isClearable={false} />
+<DatePicker placeholder="YYYY/MM/DD" clearable={false} />
 ```
 
 ### 入力を許可しない
@@ -401,7 +401,7 @@ import "dayjs/locale/ja"
 <VStack>
   <DatePicker focusBorderColor="green.500" placeholder="custom border color" />
   <DatePicker
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -410,37 +410,37 @@ import "dayjs/locale/ja"
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <DatePicker isDisabled variant="outline" placeholder="outline" />
-  <DatePicker isDisabled variant="filled" placeholder="filled" />
-  <DatePicker isDisabled variant="flushed" placeholder="flushed" />
+  <DatePicker disabled variant="outline" placeholder="outline" />
+  <DatePicker disabled variant="filled" placeholder="filled" />
+  <DatePicker disabled variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <DatePicker isReadOnly variant="outline" placeholder="outline" />
-  <DatePicker isReadOnly variant="filled" placeholder="filled" />
-  <DatePicker isReadOnly variant="flushed" placeholder="flushed" />
+  <DatePicker readOnly variant="outline" placeholder="outline" />
+  <DatePicker readOnly variant="filled" placeholder="filled" />
+  <DatePicker readOnly variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <DatePicker isInvalid variant="outline" placeholder="outline" />
-  <DatePicker isInvalid variant="filled" placeholder="filled" />
-  <DatePicker isInvalid variant="flushed" placeholder="flushed" />
+  <DatePicker invalid variant="outline" placeholder="outline" />
+  <DatePicker invalid variant="filled" placeholder="filled" />
+  <DatePicker invalid variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
@@ -474,7 +474,7 @@ import "dayjs/locale/ja"
   <DatePicker placeholder="YYYY/MM/DD" closeOnSelect={false}>
     {({ value, onClose }) => (
       <VStack mt="sm">
-        <Button isDisabled={!value} onClick={onClose}>
+        <Button disabled={!value} onClick={onClose}>
           Submit{value ? ` ${new Date(value).toLocaleDateString("en-CA")}` : ""}
         </Button>
       </VStack>
@@ -534,7 +534,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.datePicker}
+      invalid={!!errors.datePicker}
       label="Birthday"
       errorMessage={errors.datePicker ? errors.datePicker.message : undefined}
     >

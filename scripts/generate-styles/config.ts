@@ -1,15 +1,16 @@
-import type { EmotionCSSObject, ThemeToken, Union } from "@yamada-ui/react"
+import type { CSSObject } from "@emotion/styled"
+import type { ThemeToken, Union } from "@yamada-ui/react"
 import type { CSSProperties, UIProperties } from "."
 import type { TransformOptions } from "./transform-props"
 
 const generateTransform = (...transforms: TransformOptions[]) => {
   let transform = transforms
     .map(({ args, transform }) => {
-      let func = `transforms.${transform}`
+      let fn = `transforms.${transform}`
 
-      if (args) func += `(${args.map((arg) => `"${arg}"`).join(", ")})`
+      if (args) fn += `(${args.map((arg) => `"${arg}"`).join(", ")})`
 
-      return func
+      return fn
     })
     .join(", ")
 
@@ -19,7 +20,7 @@ const generateTransform = (...transforms: TransformOptions[]) => {
 }
 
 interface GetConfigOptions {
-  css?: EmotionCSSObject
+  css?: CSSObject
   properties?:
     | Union<CSSProperties | UIProperties>
     | Union<CSSProperties | UIProperties>[]

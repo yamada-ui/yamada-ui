@@ -4,8 +4,8 @@ import type { PseudoProperty } from "../pseudos"
 import type { StyleProperty, VariableLengthProperty } from "../styles"
 import type { StyledTheme, UsageTheme } from "../theme"
 import type { Breakpoints } from "./breakpoint"
-import type { CSSObjectOrFunc } from "./index.types"
-import { isArray, isObject, isString, merge, runIfFunc } from "../../utils"
+import type { CSSObjectOrFunction } from "./index.types"
+import { isArray, isObject, isString, merge, runIfFn } from "../../utils"
 import { colorMix } from "../config"
 import { pseudos } from "../pseudos"
 import { styles, variableLengthProperties } from "../styles"
@@ -134,8 +134,8 @@ function expandAdditionalObject(
   }, {})
 }
 
-function expandCSS(css: Dict) {
-  return function (theme: StyledTheme<UsageTheme>): Dict {
+function expandCSS(theme: StyledTheme<UsageTheme>) {
+  return function (css: Dict): Dict {
     if (!theme.__breakpoints) return css
 
     const { isResponsive, keys } = theme.__breakpoints
@@ -143,7 +143,7 @@ function expandCSS(css: Dict) {
     let computedCSS: Dict = {}
 
     for (let [key, value] of Object.entries(css)) {
-      value = runIfFunc(value, theme)
+      value = runIfFn(value, theme)
 
       if (value == null) continue
 
@@ -185,23 +185,25 @@ function expandCSS(css: Dict) {
   }
 }
 
-function valueToVar(value: any, theme: StyledTheme<UsageTheme>) {
-  return transformInterpolation(value, (value) => {
-    if (value.includes("colorScheme.")) {
-      return getColorSchemeVar(value)(theme)
-    } else if (value.includes("colors.")) {
-      return colorMix(value, { theme })
-    } else {
-      if (
-        isObject(theme.__cssMap) &&
-        value in theme.__cssMap &&
-        theme.__cssMap[value]?.ref
-      )
-        return theme.__cssMap[value].ref
+function valueToVar(theme: StyledTheme<UsageTheme>) {
+  return function (value: any) {
+    return transformInterpolation(value, (value, fallbackValue) => {
+      if (value.includes("colorScheme.")) {
+        return getColorSchemeVar(theme)(value)
+      } else if (value.includes("colors.")) {
+        return colorMix(value, { fallback: fallbackValue, theme })
+      } else {
+        if (
+          isObject(theme.__cssMap) &&
+          value in theme.__cssMap &&
+          theme.__cssMap[value]?.ref
+        )
+          return theme.__cssMap[value].ref
 
-      return getVar(value)(theme)
-    }
-  })
+        return getVar(theme)(value, fallbackValue)
+      }
+    })
+  }
 }
 
 function mergeCSS(
@@ -250,15 +252,15 @@ function insertCSS(
 }
 
 export function css(theme: StyledTheme<UsageTheme>) {
-  return function (cssOrFunc: CSSObjectOrFunc) {
-    function createCSS(cssOrFunc: CSSObjectOrFunc): Dict {
-      const cssObj = runIfFunc(cssOrFunc, theme)
-      const computedCSS = expandCSS(cssObj)(theme)
+  return function (cssOrFn: CSSObjectOrFunction) {
+    function createCSS(cssOrFn: CSSObjectOrFunction): Dict {
+      const cssObj = runIfFn(cssOrFn, theme)
+      const computedCSS = expandCSS(theme)(cssObj)
 
       let prev: Dict = {}
 
       for (let [prop, value] of Object.entries(computedCSS)) {
-        value = valueToVar(value, theme)
+        value = valueToVar(theme)(value)
 
         if (value == null) continue
 
@@ -306,7 +308,7 @@ export function css(theme: StyledTheme<UsageTheme>) {
       return prev
     }
 
-    return createCSS(cssOrFunc)
+    return createCSS(cssOrFn)
   }
 }
 

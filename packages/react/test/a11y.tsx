@@ -34,7 +34,7 @@ export function filterVisuallyHidden(targetContent: string) {
     const style = window.getComputedStyle(el)
     const visuallyHiddenStyle = {
       border: ["0", "0px"],
-      clip: ["rect(0, 0, 0, 0)", "rect(0px, 0px, 0px, 0px)"],
+      clipPath: ["rect(0 0 0 0)", "rect(0px 0px 0px 0px)"],
       height: "1px",
       margin: "-1px",
       overflow: "hidden",

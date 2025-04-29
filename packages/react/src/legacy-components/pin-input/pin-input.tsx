@@ -135,7 +135,7 @@ export interface PinInputProps
 /**
  * `PinInput` is a component used to capture pin codes or OTP (One-Time Password) inputs.
  *
- * @see Docs https://yamada-ui.com/components/forms/pin-input
+ * @see https://yamada-ui.com/components/forms/pin-input
  */
 export const PinInput = forwardRef<PinInputProps, "div">(
   ({ errorBorderColor, focusBorderColor, ...props }, ref) => {

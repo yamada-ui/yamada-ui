@@ -6,9 +6,8 @@ describe("<Mark />", () => {
     await a11y(<Mark>Mark</Mark>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Mark.displayName).toBe("Mark")
-    expect(Mark.__ui__).toBe("Mark")
   })
 
   test("sets `className` correctly", () => {
@@ -18,6 +17,6 @@ describe("<Mark />", () => {
 
   test("renders HTML tag correctly", () => {
     render(<Mark>Mark</Mark>)
-    expect(screen.getByText("Mark").tagName).toBe("SPAN")
+    expect(screen.getByText("Mark").tagName).toBe("MARK")
   })
 })

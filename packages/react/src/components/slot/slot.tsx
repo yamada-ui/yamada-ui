@@ -12,7 +12,7 @@ export interface SlotProps
 /**
  * `Slot` is a component that merges its props onto its immediate child.
  *
- * @see Docs https://yamada-ui.com/components/slot
+ * @see https://yamada-ui.com/components/slot
  */
 export const Slot: FC<SlotProps> = ({ children, ...rest }) => {
   const validChildren = getValidChildren(children)
@@ -44,8 +44,6 @@ export const Slot: FC<SlotProps> = ({ children, ...rest }) => {
   return <SlotClone {...rest}>{children}</SlotClone>
 }
 
-Slot.__ui__ = "Slot"
-
 interface SlotCloneProps
   extends RefAttributes<HTMLElement>,
     PropsWithChildren {}
@@ -61,5 +59,3 @@ export const Slottable: FC<PropsWithChildren> = ({ children }) => {
   // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{children}</>
 }
-
-Slottable.__ui__ = "Slottable"

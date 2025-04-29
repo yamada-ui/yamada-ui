@@ -34,10 +34,10 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
 
 ```tsx
 <Wrap gap="md">
-  <Radio colorScheme="secondary" defaultIsChecked>
+  <Radio colorScheme="secondary" defaultChecked>
     Secondary
   </Radio>
-  <Radio colorScheme="green" defaultIsChecked>
+  <Radio colorScheme="green" defaultChecked>
     Green
   </Radio>
 </Wrap>
@@ -45,36 +45,36 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
 
 ### デフォルトで選択された状態にする
 
-デフォルトで選択された状態にする場合は、`defaultIsChecked`を`true`に設定します。
+デフォルトで選択された状態にする場合は、`defaultChecked`を`true`に設定します。
 
 ```tsx
-<Radio defaultIsChecked>孫悟空</Radio>
+<Radio defaultChecked>孫悟空</Radio>
 ```
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Radio isDisabled>All Notifications</Radio>
-  <Radio isDisabled defaultIsChecked>
+  <Radio disabled>All Notifications</Radio>
+  <Radio disabled defaultChecked>
     All Notifications
   </Radio>
 
   <RadioGroup defaultValue="all">
     <Radio value="all">All Notifications</Radio>
-    <Radio value="important" isDisabled>
+    <Radio value="important" disabled>
       Important Notifications
     </Radio>
     <Radio value="service">Service Notifications</Radio>
   </RadioGroup>
 
-  <Fieldset isDisabled legend="Which notifications would you like to receive?">
-    <Radio defaultIsChecked>All Notifications</Radio>
+  <Fieldset disabled legend="Which notifications would you like to receive?">
+    <Radio defaultChecked>All Notifications</Radio>
   </Fieldset>
 
-  <Fieldset isDisabled legend="Which notifications would you like to receive?">
+  <Fieldset disabled legend="Which notifications would you like to receive?">
     <RadioGroup defaultValue="all">
       <Radio value="all">All Notifications</Radio>
       <Radio value="important">Important Notifications</Radio>
@@ -86,28 +86,28 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Radio isReadOnly>All Notifications</Radio>
-  <Radio isReadOnly defaultIsChecked>
+  <Radio readOnly>All Notifications</Radio>
+  <Radio readOnly defaultChecked>
     All Notifications
   </Radio>
 
   <RadioGroup defaultValue="all">
     <Radio value="all">All Notifications</Radio>
-    <Radio value="important" isReadOnly>
+    <Radio value="important" readOnly>
       Important Notifications
     </Radio>
     <Radio value="service">Service Notifications</Radio>
   </RadioGroup>
 
-  <Fieldset isReadOnly legend="Which notifications would you like to receive?">
-    <Radio defaultIsChecked>All Notifications</Radio>
+  <Fieldset readOnly legend="Which notifications would you like to receive?">
+    <Radio defaultChecked>All Notifications</Radio>
   </Fieldset>
 
-  <Fieldset isReadOnly legend="Which notifications would you like to receive?">
+  <Fieldset readOnly legend="Which notifications would you like to receive?">
     <RadioGroup defaultValue="all">
       <Radio value="all">All Notifications</Radio>
       <Radio value="important">Important Notifications</Radio>
@@ -119,25 +119,25 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Radio isInvalid>All Notifications</Radio>
-  <Radio isInvalid defaultIsChecked>
+  <Radio invalid>All Notifications</Radio>
+  <Radio invalid defaultChecked>
     All Notifications
   </Radio>
 
   <RadioGroup defaultValue="all">
     <Radio value="all">All Notifications</Radio>
-    <Radio value="important" isInvalid>
+    <Radio value="important" invalid>
       Important Notifications
     </Radio>
     <Radio value="service">Service Notifications</Radio>
   </RadioGroup>
 
   <Fieldset
-    isInvalid
+    invalid
     legend="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -145,7 +145,7 @@ import { Radio, RadioGroup } from "@yamada-ui/react"
   </Fieldset>
 
   <Fieldset
-    isInvalid
+    invalid
     legend="Which notifications would you like to receive?"
     errorMessage="This is required."
   >
@@ -267,7 +267,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.radio}
+      invalid={!!errors.radio}
       legend="Who is your favorite character?"
       errorMessage={errors.radio ? errors.radio.message : undefined}
     >

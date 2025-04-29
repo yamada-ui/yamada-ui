@@ -1,7 +1,19 @@
 import type { ReactNode } from "react"
 import { isArray } from "../../utils"
 
-interface ForGeneratorOptions<T> {
+export interface ForProps<T> {
+  /**
+   * The render function to render each item in the array.
+   */
+  children: (value: T, index: number, array: T[]) => ReactNode
+  /**
+   * The array to iterate over.
+   */
+  each: readonly T[] | T[] | undefined
+  /**
+   * The fallback content to render when the array is empty.
+   */
+  fallback?: ReactNode
   /**
    * A function that returns a boolean indicating whether the item should be included in the render result.
    */
@@ -30,21 +42,6 @@ interface ForGeneratorOptions<T> {
   sort?: (a: T, b: T) => number
 }
 
-export interface ForProps<T> extends ForGeneratorOptions<T> {
-  /**
-   * The render function to render each item in the array.
-   */
-  children: (value: T, index: number, array: T[]) => ReactNode
-  /**
-   * The array to iterate over.
-   */
-  each: readonly T[] | T[] | undefined
-  /**
-   * The fallback content to render when the array is empty.
-   */
-  fallback?: ReactNode
-}
-
 /**
  * `For` is a component used to loop over an array and render a component for each item.
  *
@@ -62,7 +59,8 @@ export const For = <T,>({
 }: ForProps<T>): ReactNode => {
   if (!each || !isArray(each) || !each.length) return fallback || null
 
-  const filtered = filter ? each.filter(filter) : each
+  const cloned = [...each]
+  const filtered = filter ? cloned.filter(filter) : cloned
   const sorted = sort ? filtered.sort(sort) : filtered
   const reversed = reverse ? sorted.reverse() : sorted
   const sliced = reversed.slice(offset, limit ? offset + limit : undefined)

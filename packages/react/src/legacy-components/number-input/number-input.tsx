@@ -698,7 +698,7 @@ const [NumberInputContextProvider, useNumberInputContext] =
 /**
  * `NumberInput` is a component used to obtain numeric input from the user.
  *
- * @see Docs https://yamada-ui.com/components/forms/number-input
+ * @see https://yamada-ui.com/components/forms/number-input
  */
 export const NumberInput = forwardRef<NumberInputProps, "input">(
   (props, ref) => {

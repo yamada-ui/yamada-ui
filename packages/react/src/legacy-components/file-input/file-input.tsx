@@ -91,7 +91,7 @@ export interface FileInputProps
 /**
  * `FileInput` is a component used for users to select files.
  *
- * @see Docs https://yamada-ui.com/components/forms/file-input
+ * @see https://yamada-ui.com/components/forms/file-input
  */
 export const FileInput: FC<FileInputProps> = ({ ref, children, ...props }) => {
   const [styles, mergedProps] = useComponentMultiStyle("FileInput", props)

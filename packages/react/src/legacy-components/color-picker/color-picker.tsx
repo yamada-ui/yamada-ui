@@ -99,7 +99,7 @@ export interface ColorPickerProps
 /**
  * `ColorPicker` is a component used by the user to select a color or enter an arbitrary color value.
  *
- * @see Docs https://yamada-ui.com/components/forms/color-picker
+ * @see https://yamada-ui.com/components/forms/color-picker
  */
 export const ColorPicker = forwardRef<ColorPickerProps, "input">(
   ({ withSwatch = true, ...props }, ref) => {

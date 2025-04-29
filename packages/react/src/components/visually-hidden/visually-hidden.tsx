@@ -17,6 +17,6 @@ export const {
 /**
  * `VisuallyHidden` is a common technique used in web accessibility to hide content from the visual client, but keep it readable for screen readers.
  *
- * @see Docs https://yamada-ui.com/components/visually-hidden
+ * @see https://yamada-ui.com/components/visually-hidden
  */
 export const VisuallyHidden = withContext("span")()

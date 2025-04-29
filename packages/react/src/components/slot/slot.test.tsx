@@ -1,13 +1,13 @@
 import { a11y } from "../../../test"
-import { Slot } from "./slot"
+import { Slot, Slottable } from "./slot"
 
 describe("<Slot />", () => {
   test("passes a11y test", async () => {
     await a11y(<Slot>Slot</Slot>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
-    expect(Slot.displayName).toBe("Slot")
-    expect(Slot.__styled__).toBe("Slot")
+  test("sets `displayName` correctly", () => {
+    expect(Slot.name).toBe("Slot")
+    expect(Slottable.name).toBe("Slottable")
   })
 })

@@ -9,7 +9,7 @@ import type { FadeScaleStyle } from "./fade-scale.style"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { createComponent } from "../../core"
-import { createTransition, Motion } from "../motion"
+import { createTransition, motion } from "../motion"
 import { fadeScaleStyle } from "./fade-scale.style"
 
 export const fadeScaleVariants: Variants = {
@@ -64,7 +64,7 @@ export const {
 /**
  * `FadeScale` is a component that gradually scales up to reveal or scales down to hide an element.
  *
- * @see Docs https://yamada-ui.com/components/fade-scale
+ * @see https://yamada-ui.com/components/fade-scale
  */
 export const FadeScale = withContext(
   ({
@@ -96,7 +96,7 @@ export const FadeScale = withContext(
     return (
       <AnimatePresence custom={custom}>
         {open ? (
-          <Motion
+          <motion.div
             animate={animate}
             custom={custom}
             exit="exit"

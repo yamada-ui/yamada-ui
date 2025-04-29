@@ -4,6 +4,6 @@ import { component, Icon } from "../icon"
 /**
  * `FileLock2Icon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const FileLock2Icon = component(Icon)({ as: FileLock2 })

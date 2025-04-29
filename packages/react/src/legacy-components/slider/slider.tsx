@@ -664,7 +664,7 @@ export interface SliderProps
 /**
  * `Slider` is a component used for allowing users to select a value from a range.
  *
- * @see Docs https://yamada-ui.com/components/forms/slider
+ * @see https://yamada-ui.com/components/forms/slider
  */
 export const Slider = forwardRef<SliderProps, "input">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("Slider", props)

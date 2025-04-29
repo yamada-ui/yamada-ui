@@ -70,7 +70,7 @@ function* generateItems<T>(
 /**
  * `For` is a component used to loop over an array and render a component for each item.
  *
- * @see Docs https://yamada-ui.com/components/for
+ * @see https://yamada-ui.com/components/for
  */
 export const For = <T,>(props: ForProps<T>): ReactNode => {
   const { children, each, fallback, ...generatorProps } = props
@@ -80,6 +80,3 @@ export const For = <T,>(props: ForProps<T>): ReactNode => {
     children(item, index),
   )
 }
-
-For.displayName = "For"
-For.__styled__ = "For"

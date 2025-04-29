@@ -12,18 +12,11 @@ describe("<EmptyState />", () => {
     )
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(EmptyState.Root.displayName).toBe("EmptyStateRoot")
-    expect(EmptyState.Root.__styled__).toBe("EmptyStateRoot")
-
     expect(EmptyState.Title.displayName).toBe("EmptyStateTitle")
-    expect(EmptyState.Title.__styled__).toBe("EmptyStateTitle")
-
     expect(EmptyState.Description.displayName).toBe("EmptyStateDescription")
-    expect(EmptyState.Description.__styled__).toBe("EmptyStateDescription")
-
     expect(EmptyState.Indicator.displayName).toBe("EmptyStateIndicator")
-    expect(EmptyState.Indicator.__styled__).toBe("EmptyStateIndicator")
   })
 
   test("sets `className` correctly", () => {

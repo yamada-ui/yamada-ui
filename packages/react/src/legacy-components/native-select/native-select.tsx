@@ -107,7 +107,7 @@ export interface NativeSelectProps
 /**
  * `NativeSelect` is a component used for allowing users to select one option from a list. It displays a native dropdown list provided by the browser (user agent).
  *
- * @see Docs https://yamada-ui.com/components/forms/native-select
+ * @see https://yamada-ui.com/components/forms/native-select
  */
 export const NativeSelect = forwardRef<NativeSelectProps, "select">(
   (props, ref) => {

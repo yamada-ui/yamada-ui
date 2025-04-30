@@ -8,7 +8,6 @@ export const areaChartStyle = defineComponentSlotStyle({
     },
     area: {},
     chart: {},
-    container: {},
     cursor: {
       fill: ["blackAlpha.50", "whiteAlpha.50"],
       stroke: ["blackAlpha.400", "whiteAlpha.400"],
@@ -16,10 +15,6 @@ export const areaChartStyle = defineComponentSlotStyle({
     },
     dot: {
       strokeWidth: 2,
-    },
-    grid: {
-      // stroke: ["blackAlpha.400", "whiteAlpha.400"],
-      // strokeWidth: 1,
     },
     legend: {
       display: "flex",

@@ -1,8 +1,5 @@
-import type { ReactElement } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { AreaChartStyle } from "./area-chart.style"
-import type { ChartGridProps } from "./chart-gird"
-import type { ResponsiveContainerProps } from "./chart.types"
 import type { UseAreaChartOptions } from "./use-area-chart"
 import type { UseChartProps } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
@@ -17,7 +14,6 @@ import {
   Legend,
   AreaChart as ReChartsAreaChart,
   ReferenceLine,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -26,11 +22,11 @@ import { createSlotComponent, styled } from "../../core"
 import { AreaGradient } from "./area-chart-gradient"
 import { AreaSplit } from "./area-chart-split"
 import { areaChartStyle } from "./area-chart.style"
+import { ChartContainer } from "./chart-container"
 import { ChartGrid } from "./chart-gird"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
 import { useAreaChart } from "./use-area-chart"
-import { useChart } from "./use-chart"
 import { useChartAxis } from "./use-chart-axis"
 import { useChartLegend } from "./use-chart-legend"
 import { useChartReferenceLine } from "./use-chart-reference-line"
@@ -175,11 +171,11 @@ export const AreaChart = withProvider<"div", AreaChartProps>(
 
     return (
       <styled.div vars={areaVars} {...rest}>
-        <Container containerProps={rest.containerProps}>
+        <ChartContainer containerProps={rest.containerProps}>
           <ReChartsAreaChart
             {...getAreaChartProps({ className: "ui-area-chart__chart" })}
           >
-            <Grid
+            <ChartGrid
               gridAxis={rest.gridAxis}
               strokeDasharray={strokeDasharray}
               gridProps={rest.gridProps}
@@ -244,31 +240,9 @@ export const AreaChart = withProvider<"div", AreaChartProps>(
             {areas}
             {referenceLinesItems}
           </ReChartsAreaChart>
-        </Container>
+        </ChartContainer>
       </styled.div>
     )
   },
   "root",
 )()
-
-interface ContainerProps {
-  children: ReactElement
-  containerProps?: ResponsiveContainerProps
-}
-
-const Container = withContext<"div", ContainerProps>(
-  ({ containerProps, ...props }) => {
-    const { getContainerProps } = useChart({ containerProps })
-    return <ResponsiveContainer {...getContainerProps()} {...props} />
-  },
-  "container",
-)()
-
-const Grid = withContext<"div", ChartGridProps>(ChartGrid, "grid", {
-  name: "CartesianGrid",
-  displayName: "CartesianGrid",
-})(undefined, ({ css: _, ...props }) => {
-  // TODO: cssを含めると、競合してスタイルが当たらなくなる
-  // console.log({ css })
-  return { ...props }
-})

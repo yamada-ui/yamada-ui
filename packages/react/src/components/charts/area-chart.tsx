@@ -1,5 +1,7 @@
+import type { ReactElement } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { AreaChartStyle } from "./area-chart.style"
+import type { ResponsiveContainerProps } from "./chart.types"
 import type { UseAreaChartOptions } from "./use-area-chart"
 import type { UseChartProps } from "./use-chart"
 import type { UseChartAxisOptions } from "./use-chart-axis"
@@ -94,7 +96,6 @@ export const AreaChart = withProvider<"div", AreaChartProps>(
   }) => {
     const styles = useStyleContext()
 
-    const { getContainerProps } = useChart(rest)
     const {
       areaVars,
       setHighlightedArea,
@@ -179,9 +180,7 @@ export const AreaChart = withProvider<"div", AreaChartProps>(
 
     return (
       <styled.div vars={areaVars} {...rest}>
-        <ResponsiveContainer
-          {...getContainerProps({ className: "ui-area-chart__container" })}
-        >
+        <Container containerProps={rest.containerProps}>
           <ReChartsAreaChart
             {...getAreaChartProps({ className: "ui-area-chart__chart" })}
           >
@@ -248,9 +247,22 @@ export const AreaChart = withProvider<"div", AreaChartProps>(
             {areas}
             {referenceLinesItems}
           </ReChartsAreaChart>
-        </ResponsiveContainer>
+        </Container>
       </styled.div>
     )
   },
   "root",
+)()
+
+interface ContainerProps {
+  children: ReactElement
+  containerProps?: ResponsiveContainerProps
+}
+
+const Container = withContext<"div", ContainerProps>(
+  ({ containerProps, ...props }) => {
+    const { getContainerProps } = useChart({ containerProps })
+    return <ResponsiveContainer {...getContainerProps()} {...props} />
+  },
+  "container",
 )()

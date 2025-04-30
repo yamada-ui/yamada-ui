@@ -13,6 +13,10 @@ export default {
     "Close modal": "モーダルを閉じる",
     "Open modal": "モーダルを開く",
   },
+  stat: {
+    "Decreased by": "減少",
+    "Increased by": "増加",
+  },
   tag: {
     "Close tag": "タグを閉じる",
   },

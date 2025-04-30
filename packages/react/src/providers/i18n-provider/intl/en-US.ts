@@ -13,6 +13,10 @@ export default {
     "Close modal": "Close modal",
     "Open modal": "Open modal",
   },
+  stat: {
+    "Decreased by": "Decreased by",
+    "Increased by": "Increased by",
+  },
   tag: {
     "Close tag": "Close tag",
   },

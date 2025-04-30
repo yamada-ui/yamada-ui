@@ -2,18 +2,16 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
 import { useRef, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
-import { Button } from "../../components/button"
-import { FormControl } from "../../components/form-control"
-import { FileIcon, XIcon } from "../../components/icon"
-import {
-  InputGroup,
-  InputLeftAddon,
-  InputLeftElement,
-  InputRightElement,
-} from "../../components/input"
-import { VStack } from "../../components/stack"
-import { Tag } from "../../components/tag"
-import { Text } from "../../components/text"
+import { PropsTable } from "../../../storybook/components"
+import { COLOR_SCHEMES, toTitleCase } from "../../utils"
+import { Button } from "../button"
+import { Center } from "../center"
+import { Field } from "../field"
+import { FileIcon, XIcon } from "../icon"
+import { InputGroup } from "../input"
+import { VStack } from "../stack"
+import { Tag } from "../tag"
+import { Text } from "../text"
 import { FileInput } from "./file-input"
 
 type Story = StoryFn<typeof FileInput>
@@ -26,34 +24,77 @@ const meta: Meta<typeof FileInput> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <FileInput placeholder="basic" />
+  return <FileInput placeholder="placeholder" />
 }
 
-export const WithMultiple: Story = () => {
+export const Size: Story = () => {
+  return (
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return (
+          <FileInput
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const Variant: Story = () => {
+  return (
+    <PropsTable
+      variant="column"
+      columns={["outline", "filled", "flushed"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <FileInput
+            key={key}
+            colorScheme={row}
+            variant={column}
+            placeholder={toTitleCase(column)}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const Multiple: Story = () => {
   return <FileInput multiple placeholder="multiple" />
 }
 
-export const WithAccept: Story = () => {
+export const Accept: Story = () => {
   return (
     <FileInput accept="image/png,image/jpeg" placeholder="only png, jpeg" />
   )
 }
 
-export const WithSeparator: Story = () => {
+export const Separator: Story = () => {
   return <FileInput multiple placeholder="multiple" separator=";" />
 }
 
-export const WithTag: Story = () => {
+export const Component: Story = () => {
   return (
     <FileInput
       component={({ value: { name } }) => <Tag>{name}</Tag>}
+      gapY="xs"
       multiple
       placeholder="multiple"
     />
   )
 }
 
-export const WithFormat: Story = () => {
+export const Format: Story = () => {
   return (
     <FileInput
       format={({ name }) => name.substring(0, name.indexOf("."))}
@@ -63,7 +104,7 @@ export const WithFormat: Story = () => {
   )
 }
 
-export const WithChildren: Story = () => {
+export const Children: Story = () => {
   return (
     <FileInput multiple>
       {(files) => <Text>Selected: {files?.length ?? 0}</Text>}
@@ -71,29 +112,74 @@ export const WithChildren: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
+export const Disabled: Story = () => {
   return (
     <>
-      <FileInput size="xs" placeholder="extra small size" />
-      <FileInput size="sm" placeholder="small size" />
-      <FileInput size="md" placeholder="medium size" />
-      <FileInput size="lg" placeholder="large size" />
+      <FileInput variant="outline" disabled placeholder="outline" />
+      <FileInput variant="filled" disabled placeholder="filled" />
+      <FileInput variant="flushed" disabled placeholder="flushed" />
+      <FileInput variant="unstyled" disabled placeholder="unstyled" />
+
+      <Field.Root disabled label="Upload file">
+        <FileInput placeholder="your file" />
+      </Field.Root>
     </>
   )
 }
 
-export const WithVariant: Story = () => {
+export const Readonly: Story = () => {
   return (
     <>
-      <FileInput variant="outline" placeholder="outline" />
-      <FileInput variant="filled" placeholder="filled" />
-      <FileInput variant="flushed" placeholder="flushed" />
-      <FileInput variant="unstyled" placeholder="unstyled" />
+      <FileInput variant="outline" placeholder="outline" readOnly />
+      <FileInput variant="filled" placeholder="filled" readOnly />
+      <FileInput variant="flushed" placeholder="flushed" readOnly />
+      <FileInput variant="unstyled" placeholder="unstyled" readOnly />
+
+      <Field.Root label="Upload file" readOnly>
+        <FileInput placeholder="your file" />
+      </Field.Root>
     </>
   )
 }
 
-export const WithBorderColor: Story = () => {
+export const Invalid: Story = () => {
+  return (
+    <>
+      <FileInput variant="outline" invalid placeholder="outline" />
+      <FileInput variant="filled" invalid placeholder="filled" />
+      <FileInput variant="flushed" invalid placeholder="flushed" />
+      <FileInput variant="unstyled" invalid placeholder="unstyled" />
+
+      <Field.Root errorMessage="File is required." invalid label="Upload file">
+        <FileInput placeholder="your file" />
+      </Field.Root>
+    </>
+  )
+}
+
+export const Addon: Story = () => {
+  return (
+    <InputGroup.Root>
+      <InputGroup.Addon>
+        <FileIcon />
+      </InputGroup.Addon>
+      <FileInput placeholder="Please upload file" />
+    </InputGroup.Root>
+  )
+}
+
+export const Element: Story = () => {
+  return (
+    <InputGroup.Root>
+      <InputGroup.Element>
+        <FileIcon />
+      </InputGroup.Element>
+      <FileInput placeholder="Please upload file" />
+    </InputGroup.Root>
+  )
+}
+
+export const BorderColor: Story = () => {
   return (
     <>
       <FileInput placeholder="default border color" />
@@ -110,74 +196,7 @@ export const WithBorderColor: Story = () => {
   )
 }
 
-export const Disabled: Story = () => {
-  return (
-    <>
-      <FileInput variant="outline" disabled placeholder="outline" />
-      <FileInput variant="filled" disabled placeholder="filled" />
-      <FileInput variant="flushed" disabled placeholder="flushed" />
-      <FileInput variant="unstyled" disabled placeholder="unstyled" />
-
-      <FormControl disabled label="Upload file">
-        <FileInput type="email" placeholder="your file" />
-      </FormControl>
-    </>
-  )
-}
-
-export const Readonly: Story = () => {
-  return (
-    <>
-      <FileInput variant="outline" placeholder="outline" readOnly />
-      <FileInput variant="filled" placeholder="filled" readOnly />
-      <FileInput variant="flushed" placeholder="flushed" readOnly />
-      <FileInput variant="unstyled" placeholder="unstyled" readOnly />
-
-      <FormControl label="Upload file" readOnly>
-        <FileInput type="email" placeholder="your file" />
-      </FormControl>
-    </>
-  )
-}
-
-export const Invalid: Story = () => {
-  return (
-    <>
-      <FileInput variant="outline" invalid placeholder="outline" />
-      <FileInput variant="filled" invalid placeholder="filled" />
-      <FileInput variant="flushed" invalid placeholder="flushed" />
-      <FileInput variant="unstyled" invalid placeholder="unstyled" />
-
-      <FormControl errorMessage="File is required." invalid label="Upload file">
-        <FileInput type="email" placeholder="your file" />
-      </FormControl>
-    </>
-  )
-}
-
-export const UseAddon: Story = () => {
-  return (
-    <InputGroup>
-      <InputLeftAddon>
-        <FileIcon />
-      </InputLeftAddon>
-      <FileInput type="tel" placeholder="Please upload file" />
-    </InputGroup>
-  )
-}
-
-export const UseElement: Story = () => {
-  return (
-    <InputGroup>
-      <InputLeftElement>
-        <FileIcon color="gray.500" />
-      </InputLeftElement>
-      <FileInput type="email" placeholder="Please upload file" />
-    </InputGroup>
-  )
-}
-
-export const UseReset: Story = () => {
+export const Reset: Story = () => {
   const [value, onChange] = useState<File[] | undefined>(undefined)
   const resetRef = useRef<() => void>(null)
 
@@ -187,24 +206,27 @@ export const UseReset: Story = () => {
   }
 
   return (
-    <>
+    <VStack gap="md">
       <Text>files: {value?.length ?? 0}</Text>
 
-      <InputGroup>
+      <InputGroup.Root>
         <FileInput
           multiple
+          placeholder="placeholder"
           resetRef={resetRef}
           value={value}
           onChange={onChange}
         />
 
         {value?.length ? (
-          <InputRightElement clickable onClick={onReset}>
-            <XIcon color="gray.500" />
-          </InputRightElement>
+          <InputGroup.Element clickable onClick={onReset}>
+            <Center as="button" focusVisibleRing="outside" p="0.5" rounded="xs">
+              <XIcon fontSize="xl" />
+            </Center>
+          </InputGroup.Element>
         ) : null}
-      </InputGroup>
-    </>
+      </InputGroup.Root>
+    </VStack>
   )
 }
 
@@ -212,11 +234,11 @@ export const CustomControl: Story = () => {
   const [value, onChange] = useState<File[] | undefined>(undefined)
 
   return (
-    <>
+    <VStack gap="md">
       <Text>files: {value?.length}</Text>
 
-      <FileInput value={value} onChange={onChange} />
-    </>
+      <FileInput placeholder="placeholder" value={value} onChange={onChange} />
+    </VStack>
   )
 }
 
@@ -244,7 +266,7 @@ export const ReactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <FormControl
+      <Field.Root
         errorMessage={errors.fileInput?.message}
         invalid={!!errors.fileInput}
         label="Files"
@@ -253,19 +275,26 @@ export const ReactHookForm: Story = () => {
           name="fileInput"
           control={control}
           render={({ field }) => (
-            <InputGroup>
+            <InputGroup.Root>
               <FileInput multiple {...field} resetRef={resetRef} />
 
               {field.value?.length ? (
-                <InputRightElement clickable onClick={onReset}>
-                  <XIcon color="gray.500" />
-                </InputRightElement>
+                <InputGroup.Element clickable onClick={onReset}>
+                  <Center
+                    as="button"
+                    focusVisibleRing="outside"
+                    p="0.5"
+                    rounded="xs"
+                  >
+                    <XIcon fontSize="xl" />
+                  </Center>
+                </InputGroup.Element>
               ) : null}
-            </InputGroup>
+            </InputGroup.Root>
           )}
           rules={{ required: { message: "This is required.", value: true } }}
         />
-      </FormControl>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

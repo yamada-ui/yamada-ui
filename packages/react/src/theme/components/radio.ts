@@ -40,14 +40,14 @@ export const Radio: ComponentMultiStyle<"Radio"> = {
           },
         },
       },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
       _invalid: {
         borderColor: ["danger.500", "danger.400"],
         _focusVisible: {
           borderColor: ["inherit", "inherit"],
         },
-      },
-      _focusVisible: {
-        boxShadow: "outline",
       },
       _disabled: {
         bg: ["blackAlpha.200", "whiteAlpha.100"],

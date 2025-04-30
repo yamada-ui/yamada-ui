@@ -217,7 +217,7 @@ export const Element: Story = () => {
   return (
     <>
       <InputGroup.Root>
-        <InputGroup.Element w="auto">https://</InputGroup.Element>
+        <InputGroup.Element px="3">https://</InputGroup.Element>
         <Input placeholder="Search contacts" ps="4.75rem" />
         <InputGroup.Addon>.com</InputGroup.Addon>
       </InputGroup.Root>
@@ -229,7 +229,7 @@ export const Element: Story = () => {
         }}
       >
         <Input type="search" name="q" placeholder="Search user names" />
-        <InputGroup.Element clickable px="2">
+        <InputGroup.Element clickable>
           <Center as="button" focusVisibleRing="outside" p="0.5" rounded="xs">
             <SearchIcon fontSize="xl" />
           </Center>

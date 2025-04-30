@@ -330,10 +330,6 @@ export const pseudoClasses = {
    */
   _inRange: "&:is(:in-range, [data-in-range])",
   /**
-   * The CSS `&:is([data-invalid], [aria-invalid=true])` attribute selector.
-   */
-  _invalid: "&:is([data-invalid], [aria-invalid=true])",
-  /**
    * The CSS `&:last-of-type` pseudo-class.
    */
   _last: "&:last-of-type",
@@ -495,6 +491,10 @@ export const pseudoClasses = {
    * The CSS `&:is(:focus-visible, [data-focus-visible])` pseudo-class.
    */
   _focusVisible: "&:is(:focus-visible, [data-focus-visible])",
+  /**
+   * The CSS `&:is([data-invalid], [aria-invalid=true])` attribute selector.
+   */
+  _invalid: "&:is([data-invalid], [aria-invalid=true])",
   /**
    * The CSS `&:is([readonly], [data-readonly], [aria-readonly=true])` pseudo-class.
    */

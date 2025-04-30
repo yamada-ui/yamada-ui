@@ -7,6 +7,7 @@ export const inputAddonStyle = defineComponentStyle({
     alignSelf: "stretch",
     display: "flex",
     flex: "0 0 auto",
+    rounded: "l2",
     transitionDuration: "moderate",
     transitionProperty: "common",
     vars: [
@@ -36,8 +37,8 @@ export const inputAddonStyle = defineComponentStyle({
     },
     flushed: {
       bg: "transparent",
-      borderBottom: "1px solid",
-      borderColor: "colorScheme.muted",
+      borderBottomColor: "colorScheme.muted",
+      borderBottomWidth: "1px",
       borderRadius: "0",
       _peerFocusVisible: {
         borderColor: "{focusBorderColor}",
@@ -55,9 +56,7 @@ export const inputAddonStyle = defineComponentStyle({
     },
   },
 
-  sizes: {
-    ...inputStyle.sizes,
-  },
+  sizes: inputStyle.sizes,
 
   defaultProps: {
     size: "md",

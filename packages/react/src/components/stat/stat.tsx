@@ -110,6 +110,7 @@ export interface StatIconProps extends HTMLStyledProps<"svg"> {
 export const StatIcon = withContext<"svg", StatIconProps>(
   ({ type = "increase", ...rest }) => {
     const { t } = useI18n("stat")
+
     return (
       <TriangleIcon
         aria-label={type === "increase" ? t("Increased by") : t("Decreased by")}

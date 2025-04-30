@@ -2,14 +2,14 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
 import { useRef, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
+import { PropsTable } from "../../../storybook/components"
 import { Button } from "../../components/button"
 import { PlusIcon } from "../../components/icon"
 import { HStack, VStack } from "../../components/stack"
 import { Text } from "../../components/text"
-import { Wrap } from "../../components/wrap"
 import { COLOR_SCHEMES } from "../../utils"
+import { IconButton } from "../button"
 import { Field } from "../field"
-import { IconButton } from "../icon-button"
 import { FileButton } from "./file-button"
 
 type Story = StoryFn<typeof FileButton>
@@ -31,11 +31,38 @@ export const Basic: Story = () => {
         aria-label="Upload file"
         icon={<PlusIcon fontSize="2xl" />}
       />
-
-      {/* <FileButton>
-        {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
-      </FileButton> */}
     </>
+  )
+}
+
+export const Variant: Story = () => {
+  return (
+    <PropsTable
+      columns={["solid", "subtle", "surface", "outline", "ghost"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <FileButton key={key} colorScheme={row} variant={column}>
+            FileButton
+          </FileButton>
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const Size: Story = () => {
+  return (
+    <PropsTable columns={["xs", "sm", "md", "lg", "xl"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+        return (
+          <FileButton key={key} colorScheme={row} size={column}>
+            FileButton
+          </FileButton>
+        )
+      }}
+    </PropsTable>
   )
 }
 
@@ -50,10 +77,6 @@ export const Multiple: Story = () => {
         icon={<PlusIcon fontSize="2xl" />}
         multiple
       />
-
-      {/* <FileButton multiple>
-        {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
-      </FileButton> */}
     </>
   )
 }
@@ -69,77 +92,7 @@ export const Accept: Story = () => {
         accept="image/png,image/jpeg"
         icon={<PlusIcon fontSize="2xl" />}
       />
-
-      {/* <FileButton accept="image/png,image/jpeg">
-        {({ onClick }) => <Link onClick={onClick}>Upload</Link>}
-      </FileButton> */}
     </>
-  )
-}
-
-export const Size: Story = () => {
-  return (
-    <Wrap gap="md">
-      <FileButton colorScheme="primary" size="xs">
-        X Small
-      </FileButton>
-
-      <FileButton colorScheme="secondary" size="sm">
-        Small
-      </FileButton>
-
-      <FileButton colorScheme="warning" size="md">
-        Medium
-      </FileButton>
-
-      <FileButton colorScheme="danger" size="lg">
-        Large
-      </FileButton>
-    </Wrap>
-  )
-}
-
-export const ColorScheme: Story = () => {
-  return (
-    <Wrap gap="md">
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <FileButton key={colorScheme} colorScheme={colorScheme}>
-          {colorScheme}
-        </FileButton>
-      ))}
-    </Wrap>
-  )
-}
-
-export const Variant: Story = () => {
-  return (
-    <Wrap gap="md">
-      <FileButton colorScheme="primary" variant="solid">
-        Solid
-      </FileButton>
-
-      <FileButton colorScheme="secondary" variant="outline">
-        Outline
-      </FileButton>
-
-      <FileButton colorScheme="warning" variant="ghost">
-        Ghost
-      </FileButton>
-
-      <FileButton colorScheme="danger" variant="a">
-        Link
-      </FileButton>
-
-      <FileButton variant="unstyled">Unstyle</FileButton>
-    </Wrap>
-  )
-}
-
-export const BorderColor: Story = () => {
-  return (
-    <FileButton errorBorderColor="orange.500" invalid>
-      Upload
-    </FileButton>
   )
 }
 
@@ -155,29 +108,12 @@ export const Disabled: Story = () => {
         icon={<PlusIcon fontSize="2xl" />}
       />
 
-      {/* <FileButton disabled>
-        {({ disabled, onClick }) => (
-          <Link
-            cursor={disabled ? "not-allowed" : "pointer"}
-            opacity={disabled ? 0.4 : 1}
-            _hover={
-              disabled
-                ? { textDecoration: "inherit" }
-                : { textDecoration: "underline" }
-            }
-            onClick={onClick}
-          >
-            Upload
-          </Link>
-        )}
-      </FileButton> */}
-
       <Field.Root
         disabled
         helperMessage="Please select a file to upload."
         label="Upload file"
       >
-        <FileButton>Upload</FileButton>
+        <FileButton alignSelf="flex-start">Upload</FileButton>
       </Field.Root>
     </>
   )
@@ -195,28 +131,12 @@ export const Readonly: Story = () => {
         readOnly
       />
 
-      {/* <FileButton readOnly>
-        {({ readOnly, onClick }) => (
-          <Link
-            cursor={readOnly ? "default" : "pointer"}
-            _hover={
-              readOnly
-                ? { textDecoration: "inherit" }
-                : { textDecoration: "underline" }
-            }
-            onClick={onClick}
-          >
-            Upload
-          </Link>
-        )}
-      </FileButton> */}
-
       <Field.Root
         helperMessage="Please select a file to upload."
         label="Upload file"
         readOnly
       >
-        <FileButton>Upload</FileButton>
+        <FileButton alignSelf="flex-start">Upload</FileButton>
       </Field.Root>
     </>
   )
@@ -235,13 +155,21 @@ export const Invalid: Story = () => {
       />
 
       <Field.Root errorMessage="File is required." invalid label="Upload file">
-        <FileButton>Upload</FileButton>
+        <FileButton alignSelf="flex-start">Upload</FileButton>
       </Field.Root>
     </>
   )
 }
 
-export const UseReset: Story = () => {
+export const BorderColor: Story = () => {
+  return (
+    <FileButton errorBorderColor="orange.500" invalid>
+      Upload
+    </FileButton>
+  )
+}
+
+export const Reset: Story = () => {
   const [files, onChange] = useState<File[] | undefined>(undefined)
   const resetRef = useRef<() => void>(null)
 
@@ -251,17 +179,17 @@ export const UseReset: Story = () => {
   }
 
   return (
-    <>
+    <VStack gap="md">
       <Text>files: {files?.length ?? 0}</Text>
 
       <HStack>
-        <FileButton resetRef={resetRef} onChange={onChange}>
+        <FileButton multiple resetRef={resetRef} onChange={onChange}>
           Upload
         </FileButton>
 
         <Button onClick={onReset}>Reset</Button>
       </HStack>
-    </>
+    </VStack>
   )
 }
 

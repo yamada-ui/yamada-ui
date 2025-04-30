@@ -6,7 +6,6 @@ import type { FileInputStyle } from "./file-input.style"
 import type { UseFileInputProps } from "./use-file-input"
 import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { useFieldProps } from "../field"
 import { useInputBorder } from "../input"
 import { Portal } from "../portal"
 import { fileInputStyle } from "./file-input.style"
@@ -59,22 +58,19 @@ export const FileInput = withProvider<"input", FileInputProps>(
   ({
     children,
     component,
+    errorBorderColor,
+    focusBorderColor,
     format = defaultFormat,
     placeholder,
     separator = ",",
+    vars: varsProp,
     ...props
   }) => {
-    const {
-      props: { errorBorderColor, focusBorderColor, vars: varsProp, ...rest },
-      ariaProps,
-      dataProps,
-      eventProps,
-    } = useFieldProps(props)
     const vars = useInputBorder(varsProp, {
       errorBorderColor,
       focusBorderColor,
     })
-    const { values, getFieldProps, getInputProps } = useFileInput(rest)
+    const { values, getFieldProps, getInputProps } = useFileInput(props)
 
     const cloneChildren = useMemo(() => {
       if (!values?.length)
@@ -111,20 +107,10 @@ export const FileInput = withProvider<"input", FileInputProps>(
     return (
       <>
         <Portal>
-          <styled.input
-            {...ariaProps}
-            {...dataProps}
-            {...eventProps}
-            {...getInputProps()}
-          />
+          <styled.input {...getInputProps()} />
         </Portal>
 
-        <styled.div
-          vars={vars}
-          {...dataProps}
-          {...eventProps}
-          {...getFieldProps()}
-        >
+        <styled.div vars={vars} {...getFieldProps()}>
           {cloneChildren}
         </styled.div>
       </>

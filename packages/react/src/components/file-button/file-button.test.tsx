@@ -35,21 +35,6 @@ describe("<FileButton />", () => {
     expect(fileButton).toBeInTheDocument()
   })
 
-  test("should render FileButton with Link", async () => {
-    render(
-      <FileButton>
-        {({ onClick }) => (
-          <a href="https://yamada-ui.com" onClick={onClick}>
-            Upload
-          </a>
-        )}
-      </FileButton>,
-    )
-
-    const fileButtonLink = await screen.findByRole("link", { name: /Upload/i })
-    expect(fileButtonLink).toBeInTheDocument()
-  })
-
   test("should call onClick", async () => {
     const onClickMock = vi.fn()
 
@@ -121,9 +106,10 @@ describe("<FileButton />", () => {
 
     const { user } = render(<TestComponent />)
 
-    const uploadButton = await screen.findByRole("button", { name: /Upload/i })
     const fileCount = screen.getByTestId("file-count")
-    const fileInput = uploadButton.previousSibling as HTMLInputElement
+    const fileInput = document.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement
 
     expect(fileCount).toHaveTextContent("files: 0")
     expect(handleFileChangeMock).not.toHaveBeenCalled()
@@ -151,7 +137,7 @@ describe("<FileButton />", () => {
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 0")
     })
-    expect(handleFileChangeMock).toHaveBeenCalledWith([])
+    expect(handleFileChangeMock).toHaveBeenCalledWith(undefined)
 
     expect(handleFileChangeMock).toHaveBeenCalledTimes(3)
   })
@@ -185,14 +171,15 @@ describe("<FileButton />", () => {
 
     const { user } = render(<TestComponent />)
 
-    const uploadButton = await screen.findByRole("button", { name: /Upload/i })
     const resetButton = await screen.findByRole("button", { name: /Reset/i })
     const fileCount = screen.getByTestId("file-count")
 
     expect(fileCount).toHaveTextContent("files: 0")
 
     const file = new File(["test"], "test.txt", { type: "text/plain" })
-    const fileInput = uploadButton.previousSibling as HTMLInputElement
+    const fileInput = document.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement
     await user.upload(fileInput, file)
 
     await waitFor(() => {

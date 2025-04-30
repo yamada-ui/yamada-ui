@@ -28,7 +28,7 @@ export const textareaStyle = defineComponentStyle({
     },
     lg: {
       ...inputStyle.sizes?.lg,
-      py: "3",
+      py: "2.5",
     },
     xl: {
       ...inputStyle.sizes?.xl,
@@ -36,7 +36,6 @@ export const textareaStyle = defineComponentStyle({
     },
     "2xl": {
       ...inputStyle.sizes?.["2xl"],
-      px: "4",
       py: "3",
     },
   },

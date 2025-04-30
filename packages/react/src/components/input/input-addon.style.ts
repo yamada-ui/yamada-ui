@@ -56,9 +56,7 @@ export const inputAddonStyle = defineComponentStyle({
     },
   },
 
-  sizes: {
-    ...inputStyle.sizes,
-  },
+  sizes: inputStyle.sizes,
 
   defaultProps: {
     size: "md",

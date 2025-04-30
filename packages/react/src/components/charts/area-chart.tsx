@@ -1,6 +1,7 @@
 import type { ReactElement } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { AreaChartStyle } from "./area-chart.style"
+import type { ChartGridProps } from "./chart-gird"
 import type { ResponsiveContainerProps } from "./chart.types"
 import type { UseAreaChartOptions } from "./use-area-chart"
 import type { UseChartProps } from "./use-chart"
@@ -12,7 +13,6 @@ import type { UseChartTooltipOptions } from "./use-chart-tooltip"
 import { useMemo } from "react"
 import {
   Area,
-  CartesianGrid,
   Label,
   Legend,
   AreaChart as ReChartsAreaChart,
@@ -26,12 +26,12 @@ import { createSlotComponent, styled } from "../../core"
 import { AreaGradient } from "./area-chart-gradient"
 import { AreaSplit } from "./area-chart-split"
 import { areaChartStyle } from "./area-chart.style"
+import { ChartGrid } from "./chart-gird"
 import { ChartLegend } from "./chart-legend"
 import { ChartTooltip } from "./chart-tooltip"
 import { useAreaChart } from "./use-area-chart"
 import { useChart } from "./use-chart"
 import { useChartAxis } from "./use-chart-axis"
-import { useChartGrid } from "./use-chart-grid"
 import { useChartLegend } from "./use-chart-legend"
 import { useChartReferenceLine } from "./use-chart-reference-line"
 import { useChartTooltip } from "./use-chart-tooltip"
@@ -112,11 +112,6 @@ export const AreaChart = withProvider<"div", AreaChartProps>(
       referenceLineProps,
       ...rest,
     })
-    const { getGridProps } = useChartGrid({
-      strokeDasharray,
-      styles,
-      ...rest,
-    })
     const { getTooltipProps, tooltipProps: computedTooltipProps } =
       useChartTooltip({
         styles,
@@ -184,8 +179,10 @@ export const AreaChart = withProvider<"div", AreaChartProps>(
           <ReChartsAreaChart
             {...getAreaChartProps({ className: "ui-area-chart__chart" })}
           >
-            <CartesianGrid
-              {...getGridProps({ className: "ui-area-chart__grid" })}
+            <Grid
+              gridAxis={rest.gridAxis}
+              strokeDasharray={strokeDasharray}
+              gridProps={rest.gridProps}
             />
 
             <XAxis {...getXAxisProps({ className: "ui-area-chart__x-axis" })}>
@@ -266,3 +263,12 @@ const Container = withContext<"div", ContainerProps>(
   },
   "container",
 )()
+
+const Grid = withContext<"div", ChartGridProps>(ChartGrid, "grid", {
+  name: "CartesianGrid",
+  displayName: "CartesianGrid",
+})(undefined, ({ css: _, ...props }) => {
+  // TODO: cssを含めると、競合してスタイルが当たらなくなる
+  // console.log({ css })
+  return { ...props }
+})

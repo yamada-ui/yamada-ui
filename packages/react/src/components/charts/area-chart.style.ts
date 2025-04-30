@@ -18,8 +18,8 @@ export const areaChartStyle = defineComponentSlotStyle({
       strokeWidth: 2,
     },
     grid: {
-      stroke: ["blackAlpha.400", "whiteAlpha.400"],
-      strokeWidth: 1,
+      // stroke: ["blackAlpha.400", "whiteAlpha.400"],
+      // strokeWidth: 1,
     },
     legend: {
       display: "flex",

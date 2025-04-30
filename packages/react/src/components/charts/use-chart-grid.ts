@@ -1,6 +1,5 @@
 import type { CartesianGridProps } from "recharts"
 import type { CSSObject, PropGetter } from "../../core"
-import type { Dict } from "../../utils"
 import type { ChartAxisType, GridProps } from "./chart.types"
 import { useCallback } from "react"
 import { useTheme } from "../../providers/theme-provider"
@@ -28,19 +27,19 @@ export interface UseChartGridOptions {
 }
 
 interface UseChartGridProps extends UseChartGridOptions {
-  styles: Dict<CSSObject | undefined>
+  css: CSSObject | CSSObject[] | undefined
 }
 
 export const useChartGrid = ({
+  css,
   gridAxis = "x",
   strokeDasharray = "5 5",
-  styles,
   gridProps = {},
 }: UseChartGridProps) => {
   const { theme } = useTheme()
   const [reChartsProps, propClassName] = getComponentProps(
     [gridProps, gridProperties],
-    styles.grid,
+    css,
   )(theme)
 
   const getGridProps: PropGetter<GridProps, undefined, CartesianGridProps> =

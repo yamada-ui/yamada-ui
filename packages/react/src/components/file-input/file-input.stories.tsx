@@ -27,27 +27,6 @@ export const Basic: Story = () => {
   return <FileInput placeholder="placeholder" />
 }
 
-export const Size: Story = () => {
-  return (
-    <PropsTable
-      variant="column"
-      columns={["xs", "sm", "md", "lg", "xl"]}
-      rows={["outline", "filled", "flushed"]}
-    >
-      {(column, row, key) => {
-        return (
-          <FileInput
-            key={key}
-            size={column}
-            variant={row}
-            placeholder={`Size (${column})`}
-          />
-        )
-      }}
-    </PropsTable>
-  )
-}
-
 export const Variant: Story = () => {
   return (
     <PropsTable
@@ -62,6 +41,27 @@ export const Variant: Story = () => {
             colorScheme={row}
             variant={column}
             placeholder={toTitleCase(column)}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const Size: Story = () => {
+  return (
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return (
+          <FileInput
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
           />
         )
       }}

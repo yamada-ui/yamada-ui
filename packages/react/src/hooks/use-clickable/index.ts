@@ -257,7 +257,7 @@ export const useClickable = <
     return {
       ...props,
       ref: mergeRefs(ref, refCb),
-      type: "button",
+      type: "button" as const,
       "aria-disabled": trulyDisabled ? undefined : disabled,
       disabled: trulyDisabled,
       onClick: handleClick,

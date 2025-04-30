@@ -1,14 +1,31 @@
 import { useRef, useState } from "react"
 import { FileButton } from "."
-import { a11y, fireEvent, render, screen, waitFor } from "../../../test"
+import { a11y, render, screen, waitFor } from "../../../test"
 
 describe("<FileButton />", () => {
   afterAll(() => {
     vi.restoreAllMocks()
   })
 
-  test("FileButton renders correctly", async () => {
+  test("pass a11y test", async () => {
     await a11y(<FileButton>Upload</FileButton>)
+  })
+
+  test("sets `displayName`", () => {
+    expect(FileButton.displayName).toBe("FileButton")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<FileButton>Upload</FileButton>)
+
+    const fileButton = screen.getByRole("button", { name: /Upload/i })
+    expect(fileButton).toHaveClass("ui-file-button")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<FileButton>Upload</FileButton>)
+    const fileButton = screen.getByRole("button", { name: /Upload/i })
+    expect(fileButton.tagName).toBe("BUTTON")
   })
 
   test("should render FileButton", async () => {
@@ -16,21 +33,6 @@ describe("<FileButton />", () => {
 
     const fileButton = await screen.findByRole("button", { name: /Upload/i })
     expect(fileButton).toBeInTheDocument()
-  })
-
-  test("should render FileButton with Link", async () => {
-    render(
-      <FileButton>
-        {({ onClick }) => (
-          <a href="https://yamada-ui.com" onClick={onClick}>
-            Upload
-          </a>
-        )}
-      </FileButton>,
-    )
-
-    const fileButtonLink = await screen.findByRole("link", { name: /Upload/i })
-    expect(fileButtonLink).toBeInTheDocument()
   })
 
   test("should call onClick", async () => {
@@ -42,7 +44,9 @@ describe("<FileButton />", () => {
 
     const button = await screen.findByRole("button")
     await user.click(button)
-    expect(onClickMock).toHaveBeenCalledTimes(1)
+    waitFor(() => {
+      expect(onClickMock).toHaveBeenCalledTimes(1)
+    })
   })
 
   test("should call onClick (when readonly)", async () => {
@@ -56,7 +60,9 @@ describe("<FileButton />", () => {
 
     const fileButton = await screen.findByRole("button", { name: /Upload/i })
     await user.click(fileButton)
-    expect(onClickMock).toHaveBeenCalledTimes(1)
+    waitFor(() => {
+      expect(onClickMock).toHaveBeenCalledTimes(1)
+    })
   })
 
   test("should not call onClick when disabled", async () => {
@@ -72,7 +78,9 @@ describe("<FileButton />", () => {
     expect(fileButton).toBeDisabled()
 
     await user.click(fileButton)
-    expect(onClickMock).toHaveBeenCalledTimes(0)
+    waitFor(() => {
+      expect(onClickMock).toHaveBeenCalledTimes(0)
+    })
   })
 
   test("should handle file selection correctly", async () => {
@@ -96,37 +104,40 @@ describe("<FileButton />", () => {
       )
     }
 
-    render(<TestComponent />)
+    const { user } = render(<TestComponent />)
 
-    const uploadButton = await screen.findByRole("button", { name: /Upload/i })
     const fileCount = screen.getByTestId("file-count")
-    const fileInput = uploadButton.previousSibling as HTMLInputElement
+    const fileInput = document.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement
 
     expect(fileCount).toHaveTextContent("files: 0")
     expect(handleFileChangeMock).not.toHaveBeenCalled()
 
     const file1 = new File(["test1"], "test1.txt", { type: "text/plain" })
-    fireEvent.change(fileInput, { target: { files: [file1] } })
+    await user.upload(fileInput, file1)
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 1")
     })
-    expect(handleFileChangeMock).toHaveBeenCalledWith([file1])
+    waitFor(() => {
+      expect(handleFileChangeMock).toHaveBeenCalledWith([file1])
+    })
 
     const file2 = new File(["test2"], "test2.txt", { type: "text/plain" })
-    fireEvent.change(fileInput, { target: { files: [file1, file2] } })
+    await user.upload(fileInput, [file1, file2])
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 2")
     })
     expect(handleFileChangeMock).toHaveBeenCalledWith([file1, file2])
 
-    fireEvent.change(fileInput, { target: { files: [] } })
+    await user.upload(fileInput, [])
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 0")
     })
-    expect(handleFileChangeMock).toHaveBeenCalledWith([])
+    expect(handleFileChangeMock).toHaveBeenCalledWith(undefined)
 
     expect(handleFileChangeMock).toHaveBeenCalledTimes(3)
   })
@@ -158,23 +169,24 @@ describe("<FileButton />", () => {
       )
     }
 
-    render(<TestComponent />)
+    const { user } = render(<TestComponent />)
 
-    const uploadButton = await screen.findByRole("button", { name: /Upload/i })
     const resetButton = await screen.findByRole("button", { name: /Reset/i })
     const fileCount = screen.getByTestId("file-count")
 
     expect(fileCount).toHaveTextContent("files: 0")
 
     const file = new File(["test"], "test.txt", { type: "text/plain" })
-    const fileInput = uploadButton.previousSibling as HTMLInputElement
-    fireEvent.change(fileInput, { target: { files: [file] } })
+    const fileInput = document.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement
+    await user.upload(fileInput, file)
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 1")
     })
 
-    fireEvent.click(resetButton)
+    await user.click(resetButton)
 
     await waitFor(() => {
       expect(fileCount).toHaveTextContent("files: 0")

@@ -1,5 +1,7 @@
-import type { ChangeEvent, ForwardedRef } from "react"
+import type { ChangeEvent, RefObject } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
+import type { Dict } from "../../utils"
+import type { FieldProps } from "../field"
 import { useCallback, useRef } from "react"
 import { useClickable } from "../../hooks/use-clickable"
 import { useControllableState } from "../../hooks/use-controllable-state"
@@ -11,49 +13,62 @@ import {
   mergeRefs,
   visuallyHiddenAttributes,
 } from "../../utils"
+import { useFieldProps } from "../field"
 
-export interface UseFileInputProps
-  extends Omit<HTMLProps<"input">, "defaultValue" | "onChange" | "value"> {
-  /**
-   * The initial value of the file input.
-   */
-  defaultValue?: File[]
-  /**
-   * Ref to a reset function.
-   */
-  resetRef?: ForwardedRef<() => void>
-  /**
-   * The value of the file input.
-   */
-  value?: File[]
-  /**
-   * Function to be called when a file change event occurs.
-   */
-  onChange?: (files: File[] | undefined) => void
-}
+export type UseFileInputProps<Y extends "button" | "input" = "input"> =
+  FieldProps &
+    Omit<HTMLProps<Y>, "defaultValue" | "onChange" | "ref" | "value"> &
+    Pick<HTMLProps<"input">, "accept" | "multiple" | "ref"> & {
+      /**
+       * The initial value of the file input.
+       */
+      defaultValue?: File[]
+      /**
+       * Ref to a reset function.
+       */
+      resetRef?: RefObject<(() => void) | null>
+      /**
+       * The value of the file input.
+       */
+      value?: File[]
+      /**
+       * Function to be called when a file change event occurs.
+       */
+      onChange?: (files: File[] | undefined) => void
+    }
 
-export const useFileInput = ({
-  id,
-  ref,
-  form,
-  name,
-  accept,
-  defaultValue,
-  disabled,
-  multiple,
-  readOnly,
-  resetRef,
-  value,
-  onChange: onChangeProp,
-  onClick: onClickProp,
-  ...props
-}: UseFileInputProps) => {
+export const useFileInput = <Y extends "button" | "input" = "input">(
+  props: UseFileInputProps<Y>,
+) => {
+  const {
+    props: {
+      id,
+      ref,
+      form,
+      name,
+      accept,
+      defaultValue,
+      disabled,
+      multiple,
+      readOnly,
+      required,
+      resetRef,
+      value,
+      onChange: onChangeProp,
+      onClick: onClickProp,
+      ...rest
+    },
+    ariaProps,
+    dataProps,
+    eventProps,
+  } = useFieldProps<HTMLElement, UseFileInputProps<Y>>(props)
   const inputRef = useRef<HTMLInputElement>(null)
   const [values, setValues] = useControllableState<File[] | undefined>({
     defaultValue,
     value,
     onChange: onChangeProp,
   })
+  const count = values?.length ?? 0
 
   const onClick = useCallback(() => {
     if (disabled || readOnly) return
@@ -78,10 +93,12 @@ export const useFileInput = ({
     [setValues],
   )
 
-  const rest = useClickable<HTMLDivElement>({
+  const clickableProps = useClickable<HTMLElement, Dict>({
+    ...dataProps,
+    ...eventProps,
+    ...rest,
     disabled,
     onClick: handlerAll(onClickProp, onClick),
-    ...props,
   })
 
   assignRef(resetRef, onReset)
@@ -89,6 +106,9 @@ export const useFileInput = ({
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}) => ({
       ...visuallyHiddenAttributes,
+      ...ariaProps,
+      ...dataProps,
+      ...eventProps,
       id,
       form,
       type: "file",
@@ -97,23 +117,46 @@ export const useFileInput = ({
       disabled,
       multiple,
       readOnly,
+      required,
       ...props,
       ref: mergeRefs(inputRef, props.ref, ref),
       onChange: handlerAll(props.onChange, onChange),
     }),
-    [id, ref, name, form, accept, multiple, disabled, readOnly, onChange],
+    [
+      required,
+      ariaProps,
+      dataProps,
+      eventProps,
+      id,
+      form,
+      name,
+      accept,
+      disabled,
+      multiple,
+      readOnly,
+      ref,
+      onChange,
+    ],
   )
 
   const getFieldProps: PropGetter = useCallback(
     (props = {}) => ({
-      "data-placeholder": dataAttr(!values?.length),
+      "data-placeholder": dataAttr(!count),
+      ...clickableProps,
       ...props,
-      ...rest,
     }),
-    [rest, values],
+    [clickableProps, count],
   )
 
-  return { values, getFieldProps, getInputProps }
+  return {
+    disabled,
+    readOnly,
+    required,
+    values,
+    clickableProps,
+    getFieldProps,
+    getInputProps,
+  }
 }
 
 export type UseFileInputReturn = ReturnType<typeof useFileInput>

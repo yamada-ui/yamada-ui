@@ -1,18 +1,19 @@
 import type { ChangeEvent, ForwardedRef } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useRef } from "react"
+import { useClickable } from "../../hooks/use-clickable"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { assignRef, dataAttr, handlerAll, isNull, mergeRefs } from "../../utils"
-
-interface InputProps
-  extends Partial<Pick<HTMLInputElement, "accept" | "multiple">> {}
+import {
+  assignRef,
+  dataAttr,
+  handlerAll,
+  isNull,
+  mergeRefs,
+  visuallyHiddenAttributes,
+} from "../../utils"
 
 export interface UseFileInputProps
-  extends Omit<
-      HTMLProps<"input">,
-      "children" | "defaultValue" | "onChange" | "value"
-    >,
-    InputProps {
+  extends Omit<HTMLProps<"input">, "defaultValue" | "onChange" | "value"> {
   /**
    * The initial value of the file input.
    */
@@ -45,15 +46,14 @@ export const useFileInput = ({
   value,
   onChange: onChangeProp,
   onClick: onClickProp,
-  ...rest
+  ...props
 }: UseFileInputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null)
   const [values, setValues] = useControllableState<File[] | undefined>({
     defaultValue,
     value,
     onChange: onChangeProp,
   })
-
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const onClick = useCallback(() => {
     if (disabled || readOnly) return
@@ -67,61 +67,50 @@ export const useFileInput = ({
     setValues(undefined)
   }, [setValues])
 
-  assignRef(resetRef, onReset)
-
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
-      let files = !isNull(ev.currentTarget.files)
+      const files = !isNull(ev.currentTarget.files)
         ? Array.from(ev.currentTarget.files)
         : undefined
 
-      if (!files?.length) files = undefined
-
-      setValues(files)
+      setValues(files?.length ? files : undefined)
     },
     [setValues],
   )
 
+  const rest = useClickable<HTMLDivElement>({
+    disabled,
+    onClick: handlerAll(onClickProp, onClick),
+    ...props,
+  })
+
+  assignRef(resetRef, onReset)
+
   const getInputProps: PropGetter<"input"> = useCallback(
-    (props) => ({
-      ...props,
+    (props = {}) => ({
+      ...visuallyHiddenAttributes,
       id,
-      ref: mergeRefs(inputRef, ref),
       form,
       type: "file",
       name,
-      style: {
-        border: "0px",
-        clip: "rect(0px, 0px, 0px, 0px)",
-        height: "1px",
-        margin: "-1px",
-        overflow: "hidden",
-        padding: "0px",
-        position: "absolute",
-        whiteSpace: "nowrap",
-        width: "1px",
-      },
-      "aria-hidden": true,
       accept,
       disabled,
       multiple,
       readOnly,
-      tabIndex: -1,
-      onChange,
+      ...props,
+      ref: mergeRefs(inputRef, props.ref, ref),
+      onChange: handlerAll(props.onChange, onChange),
     }),
     [id, ref, name, form, accept, multiple, disabled, readOnly, onChange],
   )
 
   const getFieldProps: PropGetter = useCallback(
-    (props) => ({
+    (props = {}) => ({
+      "data-placeholder": dataAttr(!values?.length),
       ...props,
       ...rest,
-      ref,
-      "data-placeholder": dataAttr(!values?.length),
-      disabled: disabled || readOnly,
-      onClick: handlerAll(onClickProp, onClick),
     }),
-    [ref, rest, values, disabled, readOnly, onClickProp, onClick],
+    [rest, values],
   )
 
   return { values, getFieldProps, getInputProps }

@@ -1,122 +1,57 @@
-import { defineComponentStyle } from "../../core"
+import { defineComponentSlotStyle } from "../../core"
+import { inputStyle } from "../input"
 
-const getInputHeightStyle = (height: string) => ({
-  "&:has(+ [data-input-element])": {
-    pe: height,
-  },
-  "& ~ [data-input-element]": {
-    minW: height,
-  },
-  "[data-input-element] + &": {
-    ps: height,
-  },
-  "[data-input-element]:has(~ &)": {
-    minW: height,
-  },
-  minH: height,
-})
-
-export const fileInputStyle = defineComponentStyle({
+export const fileInputStyle = defineComponentSlotStyle({
   base: {
-    alignItems: "center",
-    appearance: "none",
-    display: "flex",
-    minW: "0",
-    position: "relative",
-    rounded: "l2",
-    textAlign: "start",
-    transitionDuration: "moderate",
-    transitionProperty: "common",
-    vars: [
-      {
-        name: "focusBorderColor",
-        token: "colors",
-        value: "colorScheme.outline",
+    root: {
+      ...inputStyle.base,
+      alignItems: "center",
+      cursor: "pointer",
+      display: "flex",
+      flexWrap: "wrap",
+      gapX: "1",
+      lineHeight: "1",
+      _readOnly: {
+        layerStyle: "readOnly",
       },
-      {
-        name: "errorBorderColor",
-        token: "colors",
-        value: "border.error",
-      },
-    ],
-    w: "full",
-    _disabled: {
-      layerStyle: "disabled",
+    },
+    tag: {
+      display: "inline-block",
+      overflow: "hidden",
+      whiteSpace: "nowrap",
     },
   },
 
   variants: {
     filled: {
-      bg: "bg.panel",
-      borderColor: "transparent",
-      borderWidth: "1px",
-      focusRingColor: "{focusBorderColor}",
-      focusVisibleRing: "inside",
-      _invalid: {
-        borderColor: "{errorBorderColor}",
-        focusRingColor: "{errorBorderColor}",
-      },
+      root: inputStyle.variants?.filled,
     },
     flushed: {
-      bg: "transparent",
-      borderBottomColor: "colorScheme.muted",
-      borderBottomWidth: "1px",
-      borderRadius: "0",
-      px: "0",
-      _invalid: {
-        borderColor: "{errorBorderColor}",
-        _focusVisible: {
-          boxShadow: "0px 1px 0px 0px {errorBorderColor}",
-        },
-      },
-      _focusVisible: {
-        borderColor: "{focusBorderColor}",
-        boxShadow: "0px 1px 0px 0px {focusBorderColor}",
-        outline: "none",
-      },
+      root: inputStyle.variants?.flushed,
     },
     outline: {
-      borderColor: "colorScheme.muted",
-      borderWidth: "1px",
-      focusRingColor: "{focusBorderColor}",
-      focusVisibleRing: "inside",
-      _invalid: {
-        borderColor: "{errorBorderColor}",
-        focusRingColor: "{errorBorderColor}",
-      },
+      root: inputStyle.variants?.outline,
     },
   },
 
   sizes: {
     xs: {
-      fontSize: "xs",
-      px: "2",
-      ...getInputHeightStyle("{sizes.8}"),
+      root: { py: "1.5", ...inputStyle.sizes?.xs },
     },
     sm: {
-      fontSize: "sm",
-      px: "2.5",
-      ...getInputHeightStyle("{sizes.9}"),
+      root: { py: "2", ...inputStyle.sizes?.sm },
     },
     md: {
-      fontSize: "md",
-      px: "3",
-      ...getInputHeightStyle("{sizes.10}"),
+      root: { py: "2", ...inputStyle.sizes?.md },
     },
     lg: {
-      fontSize: "lg",
-      px: "3.5",
-      ...getInputHeightStyle("{sizes.11}"),
+      root: { py: "2.5", ...inputStyle.sizes?.lg },
     },
     xl: {
-      fontSize: "xl",
-      px: "4",
-      ...getInputHeightStyle("{sizes.12}"),
+      root: { py: "3", ...inputStyle.sizes?.xl },
     },
     "2xl": {
-      fontSize: "xl",
-      px: "4",
-      ...getInputHeightStyle("{sizes.14}"),
+      root: { py: "3", ...inputStyle.sizes?.["2xl"] },
     },
   },
 

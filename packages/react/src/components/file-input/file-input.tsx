@@ -1,13 +1,14 @@
-import type { CSSProperties, ReactElement, ReactNode } from "react"
-import type { FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { ReactNode } from "react"
+import type { FC, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
 import type { FileInputStyle } from "./file-input.style"
 import type { UseFileInputProps } from "./use-file-input"
-import { cloneElement, useMemo } from "react"
-import { createComponent, ui } from "../../core"
+import { cloneElement, isValidElement, useMemo } from "react"
+import { createSlotComponent, styled } from "../../core"
 import { useFieldProps } from "../field"
 import { useInputBorder } from "../input"
+import { Portal } from "../portal"
 import { fileInputStyle } from "./file-input.style"
 import { useFileInput } from "./use-file-input"
 
@@ -15,13 +16,13 @@ const defaultFormat: (value: File, index: number) => string = ({ name }) => name
 
 export interface FileInputProps
   extends Omit<
-      HTMLUIProps<"input">,
+      HTMLStyledProps<"input">,
       "children" | "defaultValue" | "onChange" | "value"
     >,
     ThemeProps<FileInputStyle>,
     UseInputBorderProps,
     FieldProps,
-    UseFileInputProps {
+    Omit<UseFileInputProps, "children"> {
   children?: (files: File[] | undefined) => ReactNode
   /**
    * The component that displays uploaded files.
@@ -43,7 +44,8 @@ export const {
   PropsContext: FileInputPropsContext,
   usePropsContext: useFileInputPropsContext,
   withContext,
-} = createComponent<FileInputProps, FileInputStyle>(
+  withProvider,
+} = createSlotComponent<FileInputProps, FileInputStyle>(
   "file-input",
   fileInputStyle,
 )
@@ -53,24 +55,17 @@ export const {
  *
  * @see Docs https://yamada-ui.com/components/file-input
  */
-export const FileInput = withContext(
+export const FileInput = withProvider<"input", FileInputProps>(
   ({
     children,
     component,
     format = defaultFormat,
-    lineClamp = 1,
     placeholder,
     separator = ",",
     ...props
   }) => {
     const {
-      props: {
-        disabled,
-        errorBorderColor,
-        focusBorderColor,
-        readOnly,
-        vars: varsProp,
-      },
+      props: { errorBorderColor, focusBorderColor, vars: varsProp, ...rest },
       ariaProps,
       dataProps,
       eventProps,
@@ -79,74 +74,65 @@ export const FileInput = withContext(
       errorBorderColor,
       focusBorderColor,
     })
-    const { values, getFieldProps, getInputProps } = useFileInput({
-      ...props,
-      disabled,
-      readOnly,
-    })
+    const { values, getFieldProps, getInputProps } = useFileInput(rest)
 
     const cloneChildren = useMemo(() => {
       if (!values?.length)
-        return <ui.span lineClamp={lineClamp}>{placeholder}</ui.span>
+        return (
+          <styled.span overflow="hidden" whiteSpace="nowrap">
+            {placeholder}
+          </styled.span>
+        )
 
       if (children) return children(values)
 
-      if (component) {
-        return (
-          <ui.span lineClamp={lineClamp}>
-            {values.map((value, index) => {
-              const el = component({ index, value })
+      return values.map((value, index) => {
+        const last = values.length === index + 1
 
-              const style: CSSProperties = {
-                marginBlockEnd: "0.125rem",
-                marginBlockStart: "0.125rem",
-                marginInlineEnd: "0.25rem",
-              }
+        if (component) {
+          const node = component({ index, value })
 
-              return el
-                ? cloneElement<any>(el as ReactElement, { key: index, style })
-                : null
-            })}
-          </ui.span>
-        )
-      } else {
-        return (
-          <ui.span lineClamp={lineClamp}>
-            {values.map((value, index) => {
-              const last = values.length === index + 1
-
-              return (
-                <ui.span key={index} display="inline-block" me="0.25rem">
-                  {format(value, index)}
-                  {!last ? separator : null}
-                </ui.span>
-              )
-            })}
-          </ui.span>
-        )
-      }
-    }, [children, format, lineClamp, placeholder, separator, component, values])
-
-    const formControlProps = {
-      ...ariaProps,
-      ...dataProps,
-      ...eventProps,
-    }
+          if (isValidElement(node)) {
+            return cloneElement(node, { key: index })
+          } else {
+            return node
+          }
+        } else {
+          return (
+            <FileInputTag key={index}>
+              {format(value, index)}
+              {!last ? separator : null}
+            </FileInputTag>
+          )
+        }
+      })
+    }, [children, format, placeholder, separator, component, values])
 
     return (
       <>
-        <ui.input {...formControlProps} {...getInputProps()} />
+        <Portal>
+          <styled.input
+            {...ariaProps}
+            {...dataProps}
+            {...eventProps}
+            {...getInputProps()}
+          />
+        </Portal>
 
-        <ui.div
-          cursor={!(disabled || readOnly) ? "pointer" : undefined}
-          py={values?.length && component ? "0.125rem" : undefined}
+        <styled.div
           vars={vars}
-          {...formControlProps}
+          {...dataProps}
+          {...eventProps}
           {...getFieldProps()}
         >
           {cloneChildren}
-        </ui.div>
+        </styled.div>
       </>
     )
   },
+  "root",
 )()
+
+interface FileInputTagProps extends HTMLStyledProps {}
+
+const FileInputTag = withContext<"span", FileInputTagProps>("span", "tag")()

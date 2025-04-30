@@ -5,7 +5,7 @@ export function getEventRelatedTarget(ev: React.FocusEvent | React.MouseEvent) {
     ev.currentTarget.ownerDocument.activeElement) as HTMLElement | null
 }
 
-export const visuallyHiddenStyle = {
+const visuallyHiddenStyle = {
   border: "0px",
   clipPath: "rect(0px 0px 0px 0px)",
   height: "1px",

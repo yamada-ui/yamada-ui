@@ -1,5 +1,5 @@
 import { defineStyles } from "../../core"
-import { visuallyHiddenStyle } from "../../utils"
+import { visuallyHiddenAttributes } from "../../utils"
 
 export const layerStyles = defineStyles.layerStyle({
   active: {
@@ -63,5 +63,5 @@ export const layerStyles = defineStyles.layerStyle({
   "surface.hover": {
     bg: "colorScheme.muted",
   },
-  visuallyHidden: { ...visuallyHiddenStyle },
+  visuallyHidden: visuallyHiddenAttributes.style,
 })

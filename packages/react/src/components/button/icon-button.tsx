@@ -45,7 +45,7 @@ export const {
 export const IconButton = withContext(Button)(
   undefined,
   ({ children, icon, ...rest }) => ({
-    children: children || icon,
+    children: icon || children,
     ...rest,
   }),
 )

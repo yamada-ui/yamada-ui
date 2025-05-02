@@ -62,11 +62,10 @@ describe("<ScrollArea />", () => {
       </ScrollArea>,
     )
 
-    const inner = container.querySelector(".ui-scroll-area__inner")
+    const inner = container.querySelector(".ui-scroll-area__inner")!
 
-    expect(inner).toHaveStyle({
-      background: "var(--ui-colors-primary)",
-    })
+    const style = window.getComputedStyle(inner)
+    expect(style.background).toBe("var(--ui-colors-primary)")
 
     rerender(
       <ScrollArea>

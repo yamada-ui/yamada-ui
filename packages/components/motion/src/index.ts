@@ -4,7 +4,6 @@ export { Motion } from "./motion"
 export type * from "./motion.types"
 export * from "./utils"
 export {
-  AcceleratedAnimation,
   addPointerInfo,
   addScaleCorrector,
   animate,

@@ -1,5 +1,13 @@
 # @yamada-ui/color-picker
 
+## 1.4.19
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/popover@1.5.4
+  - @yamada-ui/button@1.0.59
+
 ## 1.4.18
 
 ### Patch Changes

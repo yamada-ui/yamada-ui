@@ -1,5 +1,12 @@
 # @yamada-ui/pagination
 
+## 1.1.13
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/ripple@1.0.53
+
 ## 1.1.12
 
 ### Patch Changes

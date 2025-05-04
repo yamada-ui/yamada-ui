@@ -8,6 +8,30 @@ describe("<PasswordInput />", () => {
     await a11y(<PasswordInput placeholder="password" />)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(PasswordInput.name).toBe("PasswordInputRoot")
+  })
+
+  test("sets `className` correctly", async () => {
+    const { getByRole } = render(<PasswordInput placeholder="password" />)
+
+    const input = await screen.findByPlaceholderText("password")
+
+    expect(input.parentElement).toHaveClass("ui-password-input__root")
+    expect(input).toHaveClass("ui-password-input__field")
+    expect(getByRole("button")).toHaveClass("ui-password-input__button")
+  })
+
+  test("renders HTML tag correctly", async () => {
+    const { getByRole } = render(<PasswordInput placeholder="password" />)
+
+    const input = await screen.findByPlaceholderText("password")
+
+    expect(input.parentElement?.tagName).toBe("DIV")
+    expect(input.tagName).toBe("INPUT")
+    expect(getByRole("button").tagName).toBe("BUTTON")
+  })
+
   test("Input type render correctly depending on the visibility", async () => {
     const { user } = render(
       <PasswordInput
@@ -56,8 +80,39 @@ describe("<PassWordInputStrengthMeter />", () => {
       </>
     )
   }
+
   test("PasswordInputStrengthMeter renders correctly", async () => {
     await a11y(<StrengthMeter value={3} />)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(StrengthMeter.name).toBe("StrengthMeterRoot")
+  })
+
+  test("sets `className` correctly", () => {
+    const { getByTestId } = render(
+      <StrengthMeter data-testid="strengthMeter" value={3} />,
+    )
+
+    expect(getByTestId("strengthMeter")).toHaveClass("ui-strength-meter__root")
+    expect(getByTestId("strengthMeter").children[0]).toHaveClass(
+      "ui-strength-meter__indicators",
+    )
+    expect(getByTestId("strengthMeter").children[0]?.children[0]).toHaveClass(
+      "ui-strength-meter__indicator",
+    )
+  })
+
+  test("renders HTML tag correctly", () => {
+    const { getByTestId } = render(
+      <StrengthMeter data-testid="strengthMeter" value={3} />,
+    )
+
+    expect(getByTestId("strengthMeter").tagName).toBe("DIV")
+    expect(getByTestId("strengthMeter").children[0]?.tagName).toBe("DIV")
+    expect(getByTestId("strengthMeter").children[0]?.children[0]?.tagName).toBe(
+      "DIV",
+    )
   })
 
   test("Could render strength meter with difference value", async () => {

@@ -230,20 +230,10 @@ export function memoizeObject(func: typeof getObject) {
 
 export const getMemoizedObject = memoizeObject(getObject)
 
-export function assignAfter(target: Dict, ...sources: any[]) {
-  const result: Dict = { ...target }
-
-  for (const nextSource of sources) {
-    if (nextSource == null) continue
-
-    for (const nextKey in nextSource) {
-      if (!Object.prototype.hasOwnProperty.call(nextSource, nextKey)) continue
-
-      if (nextKey in result) delete result[nextKey]
-
-      result[nextKey] = nextSource[nextKey]
-    }
+export function wrapWithKey<T>(obj: T, key?: string) {
+  if (key) {
+    return { [key]: obj }
+  } else {
+    return obj
   }
-
-  return result
 }

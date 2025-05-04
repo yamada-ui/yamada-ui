@@ -19,27 +19,27 @@ export const textareaStyle = defineComponentStyle({
   sizes: {
     xs: {
       ...inputStyle.sizes?.xs,
-      py: "1.5",
+      py: "{--input-space-y}",
     },
     sm: {
       ...inputStyle.sizes?.sm,
-      py: "2",
+      py: "{--input-space-y}",
     },
     md: {
       ...inputStyle.sizes?.md,
-      py: "2",
+      py: "{--input-space-y}",
     },
     lg: {
       ...inputStyle.sizes?.lg,
-      py: "2.5",
+      py: "{--input-space-y}",
     },
     xl: {
       ...inputStyle.sizes?.xl,
-      py: "3",
+      py: "{--input-space-y}",
     },
     "2xl": {
       ...inputStyle.sizes?.["2xl"],
-      py: "3",
+      py: "{--input-space-y}",
     },
   },
 

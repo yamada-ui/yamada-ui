@@ -39,22 +39,22 @@ export const fileInputStyle = defineComponentSlotStyle({
 
   sizes: {
     xs: {
-      root: { py: "1.5", ...inputStyle.sizes?.xs },
+      root: { py: "{--input-space-y}", ...inputStyle.sizes?.xs },
     },
     sm: {
-      root: { py: "2", ...inputStyle.sizes?.sm },
+      root: { py: "{--input-space-y}", ...inputStyle.sizes?.sm },
     },
     md: {
-      root: { py: "2", ...inputStyle.sizes?.md },
+      root: { py: "{--input-space-y}", ...inputStyle.sizes?.md },
     },
     lg: {
-      root: { py: "2.5", ...inputStyle.sizes?.lg },
+      root: { py: "{--input-space-y}", ...inputStyle.sizes?.lg },
     },
     xl: {
-      root: { py: "3", ...inputStyle.sizes?.xl },
+      root: { py: "{--input-space-y}", ...inputStyle.sizes?.xl },
     },
     "2xl": {
-      root: { py: "3", ...inputStyle.sizes?.["2xl"] },
+      root: { py: "{--input-space-y}", ...inputStyle.sizes?.["2xl"] },
     },
   },
 

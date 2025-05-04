@@ -209,11 +209,11 @@ export const Element: Story = () => {
 export const BorderColor: Story = () => {
   return (
     <>
-      <FileInput placeholder="default border color" />
+      <FileInput placeholder="Default border color" />
 
       <FileInput
         focusBorderColor="green.500"
-        placeholder="custom border color"
+        placeholder="Custom border color"
       />
 
       <InputGroup.Root variant="flushed" focusBorderColor="green.500">
@@ -226,7 +226,7 @@ export const BorderColor: Story = () => {
       <FileInput
         errorBorderColor="orange.500"
         invalid
-        placeholder="custom border color"
+        placeholder="Custom border color"
       />
 
       <InputGroup.Root errorBorderColor="orange.500" invalid>

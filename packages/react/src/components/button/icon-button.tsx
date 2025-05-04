@@ -16,6 +16,7 @@ export interface IconButtonProps
       | "loadingPlacement"
       | "loadingProps"
       | "startIcon"
+      | keyof ThemeProps<IconButtonStyle>
     >,
     ThemeProps<IconButtonStyle> {
   /**

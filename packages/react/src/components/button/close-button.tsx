@@ -8,7 +8,10 @@ import { closeButtonStyle } from "./close-button.style"
 import { IconButton } from "./icon-button"
 
 export interface CloseButtonProps
-  extends Omit<IconButtonProps, "aria-label">,
+  extends Omit<
+      IconButtonProps,
+      "aria-label" | keyof ThemeProps<CloseButtonStyle>
+    >,
     Pick<HTMLProps<"button">, "aria-label">,
     ThemeProps<CloseButtonStyle> {}
 

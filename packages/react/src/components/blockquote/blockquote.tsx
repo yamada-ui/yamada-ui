@@ -96,16 +96,12 @@ export const BlockquoteRoot = withProvider<"figure", BlockquoteRootProps>(
   "root",
 )()
 
-interface BlockquoteContentOptions {
+export interface BlockquoteContentProps extends HTMLStyledProps<"blockquote"> {
   /**
    * The URL of the citation of the blockquote.
    */
   citeUrl?: string
 }
-
-export interface BlockquoteContentProps
-  extends HTMLStyledProps<"blockquote">,
-    BlockquoteContentOptions {}
 
 export const BlockquoteContent = withContext<
   "blockquote",
@@ -119,7 +115,7 @@ export const BlockquoteContent = withContext<
   },
 )
 
-interface BlockquoteCaptionOptions {
+export interface BlockquoteCaptionProps extends HTMLStyledProps<"figcaption"> {
   /**
    * If `true`, the dash will be shown.
    *
@@ -127,10 +123,6 @@ interface BlockquoteCaptionOptions {
    */
   withDash?: boolean
 }
-
-export interface BlockquoteCaptionProps
-  extends HTMLStyledProps<"figcaption">,
-    BlockquoteCaptionOptions {}
 
 export const BlockquoteCaption = withContext<
   "figcaption",

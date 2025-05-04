@@ -4,7 +4,7 @@ import type { LoadingSharedProps } from "./utils"
 import { memo } from "react"
 import { useTimeout } from "../../hooks/use-timeout"
 import { isValidElement } from "../../utils"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { Text } from "../text"
 import { Loading } from "./"
 
@@ -59,7 +59,7 @@ export const Page: FC<PageProps> = memo(
     useTimeout(onFinish, duration)
 
     return (
-      <Motion
+      <motion.div
         data-loading
         alignItems="center"
         animate="animate"
@@ -76,7 +76,7 @@ export const Page: FC<PageProps> = memo(
         w="100vw"
         zIndex="beerus"
       >
-        <Motion
+        <motion.div
           alignItems="center"
           animate="animate"
           bg="bg.panel"
@@ -101,8 +101,8 @@ export const Page: FC<PageProps> = memo(
               <Text lineClamp={3}>{message}</Text>
             )
           ) : null}
-        </Motion>
-      </Motion>
+        </motion.div>
+      </motion.div>
     )
   },
 )

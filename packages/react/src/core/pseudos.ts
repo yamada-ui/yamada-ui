@@ -45,9 +45,9 @@ export const attributes = {
   _dark:
     ".ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
   /**
-   * The CSS `&[data-end]` attribute selector.
+   * The CSS `&:is([data-end], [data-group-end])` attribute selector.
    */
-  _end: "&[data-end]",
+  _end: "&:is([data-end], [data-group-end])",
   /**
    * The CSS `&:is([data-expanded], [aria-expanded=true])` attribute selector.
    */
@@ -142,9 +142,9 @@ export const attributes = {
    */
   _selected: "&:is([data-selected], [aria-selected=true])",
   /**
-   * The CSS `&[data-start]` attribute selector.
+   * The CSS `&:is([data-start], [data-group-start])` attribute selector.
    */
-  _start: "&[data-start]",
+  _start: "&:is([data-start], [data-group-start])",
   /**
    * The CSS `&[data-today]` attribute selector.
    */

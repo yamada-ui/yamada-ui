@@ -76,7 +76,6 @@ export * from "./components/native-table"
 // export * from "./components/pagination"
 export * from "./components/password-input"
 export * from "./components/picture"
-
 // export * from "./components/pin-input"
 // export * from "./components/popover"
 export * from "./components/portal"

@@ -30,7 +30,7 @@ export interface HighlightProps extends Omit<TextProps, "children"> {
 /**
  * `Highlight` is a component that highlights specified strings within text. By default, it renders a `p` element.
  *
- * @see Docs https://yamada-ui.com/components/highlight
+ * @see https://yamada-ui.com/components/highlight
  */
 export const Highlight: FC<HighlightProps> = ({
   children: text,
@@ -57,6 +57,3 @@ export const Highlight: FC<HighlightProps> = ({
     </Component>
   )
 }
-
-Highlight.displayName = "Highlight"
-Highlight.__ui__ = "Highlight"

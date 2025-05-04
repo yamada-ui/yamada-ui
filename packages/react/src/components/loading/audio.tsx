@@ -8,7 +8,7 @@ export interface AudioProps extends LoadingProps {}
 /**
  * `Loading` is a component displayed during waiting times, such as when data is being loaded.
  *
- * @see Docs https://yamada-ui.com/components/feedback/loading
+ * @see https://yamada-ui.com/components/feedback/loading
  */
 export const Audio = withContext<"svg", AudioProps>(
   ({ dur = "1.4s", ...rest }) => {

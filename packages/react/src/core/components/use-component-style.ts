@@ -19,7 +19,7 @@ import type {
   WithoutThemeProps,
 } from "../theme"
 import type { ComponentSlot, ComponentSlotName } from "./create-component"
-import type { HTMLUIProps } from "./index.types"
+import type { HTMLStyledProps } from "./index.types"
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
 import { useTheme } from "../../providers/theme-provider"
@@ -30,6 +30,7 @@ import {
   isBooleanish,
   isEmptyObject,
   isObject,
+  isRegExp,
   keysFormObject,
   merge,
   omitObject,
@@ -268,7 +269,11 @@ function getCompoundStyle<Y extends boolean = false>(
       if (!conditions.length) return
 
       const apply = conditions.every(([key, value]) =>
-        isArray(value) ? value.includes(props[key]) : props[key] === value,
+        isArray(value)
+          ? value.includes(props[key])
+          : isRegExp(value)
+            ? value.test(props[key])
+            : props[key] === value,
       )
 
       if (!apply) return
@@ -422,7 +427,7 @@ interface UseStyleOptions<
 }
 
 function useStyle<
-  Y extends HTMLUIProps & ThemeProps<{}> = Dict,
+  Y extends HTMLStyledProps & ThemeProps<{}> = Dict,
   M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
   D extends keyof Y = keyof Y,
   H extends boolean = false,

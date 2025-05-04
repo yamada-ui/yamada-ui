@@ -15,16 +15,16 @@ import { Fade } from "@yamada-ui/react"
 
 ## Usage
 
-To control the visibility, set `isOpen`.
+To control the visibility, set `open`.
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Fade isOpen={isOpen}>
+    <Fade open={open}>
       <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>
@@ -38,13 +38,13 @@ return (
 To change the duration, set a number (in seconds) to `duration`.
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Fade isOpen={isOpen} duration={0.4}>
+    <Fade open={open} duration={0.4}>
       <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>
@@ -58,13 +58,13 @@ return (
 To unmount the component when it is not visible, set `unmountOnExit` to `true`.
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Fade isOpen={isOpen} unmountOnExit>
+    <Fade open={open} unmountOnExit>
       <Box w="full" bg="orange.500" rounded="md" p="md" color="white" mt="md">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>

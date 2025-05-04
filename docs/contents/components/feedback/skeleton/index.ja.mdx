@@ -91,10 +91,10 @@ import { Skeleton, SkeletonCircle, SkeletonText } from "@yamada-ui/react"
 
 ### コンテンツを表示する
 
-`isLoaded`を`true`にすることで、プレースホルダーはフェードアウトしコンテンツを表示します。
+`loaded`を`true`にすることで、プレースホルダーはフェードアウトしコンテンツを表示します。
 
 ```tsx functional=true
-const [isLoaded, { toggle }] = useBoolean()
+const [loaded, { toggle }] = useBoolean()
 
 return (
   <VStack>
@@ -102,15 +102,15 @@ return (
       Toggle
     </Button>
 
-    <SkeletonCircle isLoaded={isLoaded}>
+    <SkeletonCircle loaded={loaded}>
       <Avatar name="Hirotomo Yamada" />
     </SkeletonCircle>
 
-    <Skeleton isLoaded={isLoaded}>
+    <Skeleton loaded={loaded}>
       <Heading isTruncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
     </Skeleton>
 
-    <SkeletonText isLoaded={isLoaded} lineClamp={1} textHeight={6}>
+    <SkeletonText loaded={loaded} lineClamp={1} textHeight={6}>
       <Text isTruncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>
@@ -124,7 +124,7 @@ return (
 プレースホルダーのフェードアウトの所要時間を変更する場合は、`fadeDuration`に数値(秒)を設定します。デフォルトでは、`0.4`が設定されています。
 
 ```tsx functional=true
-const [isLoaded, { toggle }] = useBoolean()
+const [loaded, { toggle }] = useBoolean()
 
 return (
   <VStack>
@@ -132,20 +132,15 @@ return (
       Toggle
     </Button>
 
-    <SkeletonCircle isLoaded={isLoaded} fadeDuration={2}>
+    <SkeletonCircle loaded={loaded} fadeDuration={2}>
       <Avatar name="Hirotomo Yamada" />
     </SkeletonCircle>
 
-    <Skeleton isLoaded={isLoaded} fadeDuration={4}>
+    <Skeleton loaded={loaded} fadeDuration={4}>
       <Heading isTruncated>ギャルのパンティーおくれーーーっ！！！！！</Heading>
     </Skeleton>
 
-    <SkeletonText
-      isLoaded={isLoaded}
-      fadeDuration={6}
-      lineClamp={1}
-      textHeight={6}
-    >
+    <SkeletonText loaded={loaded} fadeDuration={6} lineClamp={1} textHeight={6}>
       <Text isTruncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>

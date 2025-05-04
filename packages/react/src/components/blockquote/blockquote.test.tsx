@@ -19,21 +19,12 @@ describe("<Blockquote />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Blockquote.Root.displayName).toBe("BlockquoteRoot")
-    expect(Blockquote.Root.__ui__).toBe("BlockquoteRoot")
-
     expect(Blockquote.Cite.displayName).toBe("BlockquoteCite")
-    expect(Blockquote.Cite.__ui__).toBe("BlockquoteCite")
-
     expect(Blockquote.Icon.displayName).toBe("BlockquoteIcon")
-    expect(Blockquote.Icon.__ui__).toBe("BlockquoteIcon")
-
     expect(Blockquote.Caption.displayName).toBe("BlockquoteCaption")
-    expect(Blockquote.Caption.__ui__).toBe("BlockquoteCaption")
-
     expect(Blockquote.Content.displayName).toBe("BlockquoteContent")
-    expect(Blockquote.Content.__ui__).toBe("BlockquoteContent")
   })
 
   test("sets `className` correctly", () => {

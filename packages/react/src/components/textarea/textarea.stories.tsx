@@ -8,6 +8,8 @@ import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Button } from "../button"
 import { Field } from "../field"
 import { For } from "../for"
+import { MailIcon } from "../icon"
+import { InputGroup } from "../input"
 import { VStack } from "../stack"
 
 type Story = StoryFn<typeof Textarea>
@@ -133,6 +135,44 @@ export const Invalid: Story = () => {
         <Textarea variant="outline" placeholder="your feedback" />
       </Field.Root>
     </>
+  )
+}
+
+export const Addon: Story = () => {
+  return (
+    <>
+      <InputGroup.Root>
+        <InputGroup.Addon>Email</InputGroup.Addon>
+        <Textarea placeholder="Your email address" />
+      </InputGroup.Root>
+
+      <InputGroup.Root variant="filled">
+        <InputGroup.Addon>Email</InputGroup.Addon>
+        <Textarea placeholder="Your email address" />
+      </InputGroup.Root>
+
+      <InputGroup.Root variant="flushed">
+        <InputGroup.Addon>Email</InputGroup.Addon>
+        <Textarea placeholder="Your email address" />
+      </InputGroup.Root>
+
+      <InputGroup.Root>
+        <InputGroup.Addon>https://</InputGroup.Addon>
+        <Textarea placeholder="Your site address" />
+        <InputGroup.Addon>.com</InputGroup.Addon>
+      </InputGroup.Root>
+    </>
+  )
+}
+
+export const Element: Story = () => {
+  return (
+    <InputGroup.Root>
+      <InputGroup.Element>
+        <MailIcon fontSize="xl" />
+      </InputGroup.Element>
+      <Textarea name="q" placeholder="Your email address" />
+    </InputGroup.Root>
   )
 }
 

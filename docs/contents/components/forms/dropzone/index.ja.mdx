@@ -292,7 +292,7 @@ import {
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <Dropzone isInvalid errorBorderColor="orange.500">
+  <Dropzone invalid errorBorderColor="orange.500">
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 </VStack>
@@ -300,15 +300,15 @@ import {
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Dropzone isDisabled>
+  <Dropzone disabled>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <FormControl label="Upload file" isDisabled>
+  <FormControl label="Upload file" disabled>
     <Dropzone>
       <Text>Drag file here or click to select file</Text>
     </Dropzone>
@@ -318,15 +318,15 @@ import {
 
 ### 読み取り専用にする
 
-読み取り専用にする場合は、`isReadOnly`を`true`に設定します。
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Dropzone isReadOnly>
+  <Dropzone readOnly>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <FormControl label="Upload file" isReadOnly>
+  <FormControl label="Upload file" readOnly>
     <Dropzone>
       <Text>Drag file here or click to select file</Text>
     </Dropzone>
@@ -336,15 +336,15 @@ import {
 
 ### 無効な入力にする
 
-無効な入力にする場合は、`isInvalid`を`true`に設定します。
+無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx
 <VStack>
-  <Dropzone isInvalid>
+  <Dropzone invalid>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <FormControl label="Upload file" isInvalid errorMessage="File is required.">
+  <FormControl label="Upload file" invalid errorMessage="File is required.">
     <Dropzone>
       <Text>Drag file here or click to select file</Text>
     </Dropzone>
@@ -354,19 +354,19 @@ import {
 
 ### ローディングアニメーションを使う
 
-ローディングアニメーションを使う場合は、`isLoading`を`true`にします。
+ローディングアニメーションを使う場合は、`loading`を`true`にします。
 
 ```tsx
 <VStack>
-  <Dropzone isLoading>
+  <Dropzone loading>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <Dropzone isLoading loadingProps={{ variant: "grid" }}>
+  <Dropzone loading loadingProps={{ variant: "grid" }}>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 
-  <Dropzone isLoading loadingProps={{ color: "secondary" }}>
+  <Dropzone loading loadingProps={{ color: "secondary" }}>
     <Text>Drag file here or click to select file</Text>
   </Dropzone>
 </VStack>

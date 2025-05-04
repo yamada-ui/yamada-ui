@@ -767,7 +767,7 @@ export interface RangeSliderProps
 /**
  * `RangeSlider` is a component used for users to select a range of related values.
  *
- * @see Docs https://yamada-ui.com/components/forms/range-slider
+ * @see https://yamada-ui.com/components/forms/range-slider
  */
 export const RangeSlider = forwardRef<RangeSliderProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("RangeSlider", props)

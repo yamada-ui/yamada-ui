@@ -42,27 +42,17 @@ describe("<Modal />", () => {
     await a11y(<TestComponent />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Modal.Root.displayName).toBe("ModalRoot")
-    expect(Modal.Root.__ui__).toBe("ModalRoot")
     expect(Modal.Overlay.displayName).toBe("ModalOverlay")
-    expect(Modal.Overlay.__ui__).toBe("ModalOverlay")
     expect(Modal.OpenTrigger.displayName).toBe("ModalOpenTrigger")
-    expect(Modal.OpenTrigger.__ui__).toBe("ModalOpenTrigger")
     expect(Modal.CloseTrigger.displayName).toBe("ModalCloseTrigger")
-    expect(Modal.CloseTrigger.__ui__).toBe("ModalCloseTrigger")
     expect(Modal.CloseButton.displayName).toBe("ModalCloseButton")
-    expect(Modal.CloseButton.__ui__).toBe("ModalCloseButton")
     expect(Modal.Content.displayName).toBe("ModalContent")
-    expect(Modal.Content.__ui__).toBe("ModalContent")
     expect(Modal.Header.displayName).toBe("ModalHeader")
-    expect(Modal.Header.__ui__).toBe("ModalHeader")
     expect(Modal.Title.displayName).toBe("ModalTitle")
-    expect(Modal.Title.__ui__).toBe("ModalTitle")
     expect(Modal.Body.displayName).toBe("ModalBody")
-    expect(Modal.Body.__ui__).toBe("ModalBody")
     expect(Modal.Footer.displayName).toBe("ModalFooter")
-    expect(Modal.Footer.__ui__).toBe("ModalFooter")
   })
 
   test("sets `className` correctly", () => {

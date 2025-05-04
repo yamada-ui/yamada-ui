@@ -92,13 +92,13 @@ If you want to change the number of pages displayed at the beginning and the end
 
 ### Disable Pagination
 
-If you want to disable pagination, set `isDisabled`.
+If you want to disable pagination, set `disabled`.
 
 ```tsx
 <VStack>
   <For each={["solid", "outline", "ghost", "unstyled"]}>
     {(variant, index) => (
-      <Pagination key={index} total={10} variant={variant} isDisabled />
+      <Pagination key={index} total={10} variant={variant} disabled />
     )}
   </For>
 </VStack>

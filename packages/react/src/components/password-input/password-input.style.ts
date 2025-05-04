@@ -1,192 +1,112 @@
 import { defineComponentSlotStyle } from "../../core"
-
-const getInputHeightStyle = (height: string) => ({
-  "&:has(+ [data-input-element])": {
-    pe: height,
-  },
-  "& ~ [data-input-element]": {
-    minW: height,
-  },
-  "[data-input-element] + &": {
-    ps: height,
-  },
-  "[data-input-element]:has(~ &)": {
-    minW: height,
-  },
-  minH: height,
-})
+import { buttonStyle } from "../button"
+import { getInputHeightStyle, inputStyle } from "../input"
 
 export const passwordInputStyle = defineComponentSlotStyle({
   base: {
-    field: {
-      appearance: "none",
-      minW: "0",
-      position: "relative",
-      rounded: "l2",
-      textAlign: "start",
-      transitionDuration: "moderate",
-      transitionProperty: "common",
-      vars: [
-        {
-          name: "focusBorderColor",
-          token: "colors",
-          value: "colorScheme.outline",
-        },
-        {
-          name: "errorBorderColor",
-          token: "colors",
-          value: "border.error",
-        },
-      ],
-      w: "full",
-      _disabled: {
-        layerStyle: "disabled",
-      },
+    button: {
+      ...buttonStyle.base,
+      rounded: "l1",
+      _readOnly: { cursor: "pointer" },
     },
-    icon: {
-      alignItems: "center",
-      color: ["blackAlpha.600", "whiteAlpha.700"],
-      cursor: "pointer",
-      display: "inline-flex",
-      justifyContent: "center",
-      outline: 0,
-      position: "absolute",
-      rounded: "md",
-      top: "50%",
-      transform: "translateY(-50%)",
-      transitionDuration: "moderate",
-      transitionProperty: "common",
-      zIndex: "yamcha",
-      _hover: {
-        opacity: 0.8,
-      },
-      _readOnly: {
-        pointerEvents: "none",
-      },
-      _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
-      },
-    },
-    root: {
-      h: "fit-content",
-      position: "relative",
-      w: "100%",
-    },
+    field: inputStyle.base,
+    root: {},
   },
 
   variants: {
     filled: {
-      field: {
-        bg: "bg.panel",
-        borderColor: "transparent",
-        borderWidth: "1px",
-        focusRingColor: "{focusBorderColor}",
-        focusVisibleRing: "inside",
-        _invalid: {
-          borderColor: "{errorBorderColor}",
-          focusRingColor: "{errorBorderColor}",
-        },
-      },
-    },
-    flushed: {
-      field: {
-        bg: "transparent",
-        borderBottomColor: "colorScheme.muted",
-        borderBottomWidth: "1px",
-        borderRadius: "0",
-        px: "0",
-        _invalid: {
-          borderColor: "{errorBorderColor}",
-          _focusVisible: {
-            boxShadow: "0px 1px 0px 0px {errorBorderColor}",
-          },
+      button: {
+        layerStyle: "ghost",
+        color: "fg.subtle",
+        focusVisibleRing: "none",
+        _hover: {
+          layerStyle: "ghost.hover",
         },
         _focusVisible: {
-          borderColor: "{focusBorderColor}",
-          boxShadow: "0px 1px 0px 0px {focusBorderColor}",
-          outline: "none",
+          layerStyle: "ghost.hover",
         },
       },
+      field: inputStyle.variants?.filled,
+    },
+    flushed: {
+      button: {
+        layerStyle: "ghost",
+        color: "fg.subtle",
+        focusVisibleRing: "none",
+        _hover: {
+          layerStyle: "ghost.hover",
+        },
+        _focusVisible: {
+          layerStyle: "ghost.hover",
+        },
+      },
+      field: inputStyle.variants?.flushed,
     },
     outline: {
-      field: {
-        borderColor: "colorScheme.muted",
-        borderWidth: "1px",
-        focusRingColor: "{focusBorderColor}",
-        focusVisibleRing: "inside",
-        _invalid: {
-          borderColor: "{errorBorderColor}",
-          focusRingColor: "{errorBorderColor}",
+      button: {
+        layerStyle: "ghost",
+        color: "fg.subtle",
+        focusVisibleRing: "none",
+        _hover: {
+          layerStyle: "ghost.hover",
+        },
+        _focusVisible: {
+          layerStyle: "ghost.hover",
         },
       },
+      field: inputStyle.variants?.outline,
     },
-    unstyled: {},
+    test: {},
   },
 
   sizes: {
     xs: {
-      field: {
-        fontSize: "xs",
-        pe: "7",
-        px: "2",
-        ...getInputHeightStyle("{sizes.8}"),
+      button: {
+        boxSize: `calc({--input-height} - {spaces.2})`,
+        fontSize: inputStyle.sizes?.xs.fontSize,
       },
-      icon: {
-        fontSize: "sm",
-        insetEnd: "1",
-      },
+      field: inputStyle.sizes?.xs,
+      root: getInputHeightStyle(inputStyle.sizes?.xs.minH, "& > input"),
     },
     sm: {
-      field: {
-        fontSize: "sm",
-        pe: "8",
-        px: "2.5",
-        ...getInputHeightStyle("{sizes.9}"),
+      button: {
+        boxSize: `calc({--input-height} - {spaces.2})`,
+        fontSize: inputStyle.sizes?.sm.fontSize,
       },
-      icon: {
-        fontSize: "xl",
-        insetEnd: "1.5",
-      },
+      field: inputStyle.sizes?.sm,
+      root: getInputHeightStyle(inputStyle.sizes?.sm.minH, "& > input"),
     },
     md: {
-      field: {
-        fontSize: "md",
-        pe: "9",
-        px: "3",
-        ...getInputHeightStyle("{sizes.10}"),
+      button: {
+        boxSize: `calc({--input-height} - {spaces.2})`,
+        fontSize: inputStyle.sizes?.md.fontSize,
       },
-      icon: {
-        fontSize: "xl",
-        insetEnd: "2",
-      },
+      field: inputStyle.sizes?.md,
+      root: getInputHeightStyle(inputStyle.sizes?.md.minH, "& > input"),
     },
     lg: {
-      field: {
-        fontSize: "lg",
-        pe: "10",
-        px: "3.5",
-        ...getInputHeightStyle("{sizes.11}"),
+      button: {
+        boxSize: `calc({--input-height} - {spaces.2.5})`,
+        fontSize: inputStyle.sizes?.lg.fontSize,
       },
-      icon: {
-        fontSize: "2xl",
-        insetEnd: "2",
-      },
+      field: inputStyle.sizes?.lg,
+      root: getInputHeightStyle(inputStyle.sizes?.lg.minH, "& > input"),
     },
     xl: {
-      field: {
-        fontSize: "xl",
-        pe: "11",
-        px: "4",
-        ...getInputHeightStyle("{sizes.12}"),
+      button: {
+        boxSize: `calc({--input-height} - {spaces.3})`,
+        fontSize: inputStyle.sizes?.xl.fontSize,
       },
-      icon: {
-        fontSize: "3xl",
-        insetEnd: "3",
-      },
+      field: inputStyle.sizes?.xl,
+      root: getInputHeightStyle(inputStyle.sizes?.xl.minH, "& > input"),
     },
     "2xl": {
-      field: { fontSize: "xl", px: "4", ...getInputHeightStyle("{sizes.14}") },
+      button: {
+        boxSize: `calc({--input-height} - {spaces.3})`,
+        fontSize: inputStyle.sizes?.["2xl"].fontSize,
+      },
+      field: inputStyle.sizes?.["2xl"],
+      root: getInputHeightStyle(inputStyle.sizes?.["2xl"]?.minH, "& > input"),
     },
   },
 

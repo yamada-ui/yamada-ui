@@ -1,26 +1,18 @@
 import type { ReactNode } from "react"
-import type { HTMLUIProps } from "../../core"
+import type { HTMLStyledProps } from "../../core"
 import type { StrengthMeterStyle } from "./strength-meter.style"
 import type { UseStrengthMeterProps } from "./use-strength-meter"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { strengthMeterStyle } from "./strength-meter.style"
 import { useStrengthMeter } from "./use-strength-meter"
 
-interface IndicatorProps extends HTMLUIProps {
+interface IndicatorProps extends HTMLStyledProps {
   label?: ReactNode
 }
 
-const getDefaultIndicatorProps = (percent: number): IndicatorProps => {
-  switch (true) {
-    case percent < 33:
-      return { label: "Low", _selected: { bg: "red.500" } }
-    case percent < 66:
-      return { label: "Medium", _selected: { bg: "orange.500" } }
-    default:
-      return { label: "High", _selected: { bg: "green.500" } }
-  }
-}
-export interface StrengthMeterProps extends HTMLUIProps, UseStrengthMeterProps {
+export interface StrengthMeterProps
+  extends HTMLStyledProps,
+    UseStrengthMeterProps {
   /**
    * If `true`, the password strength meter will display the label.
    *
@@ -48,10 +40,24 @@ export const StrengthMeter = withProvider<"div", StrengthMeterProps>(
     max = 4,
     value,
     withLabel = true,
-    getIndicatorProps: getCustomIndicatorProps = getDefaultIndicatorProps,
+    getIndicatorProps: getCustomIndicatorProps,
     ...rest
   }) => {
     const percent = (value / max) * 100
+
+    const getDefaultIndicatorProps = (percent: number): IndicatorProps => {
+      switch (true) {
+        case percent < 33:
+          return { label: "Low", _selected: { bg: "red.500" } }
+        case percent < 66:
+          return { label: "Medium", _selected: { bg: "orange.500" } }
+        default:
+          return { label: "High", _selected: { bg: "green.500" } }
+      }
+    }
+
+    getCustomIndicatorProps ??= getDefaultIndicatorProps
+
     const { label, ...indicatorProps } = getCustomIndicatorProps(percent)
 
     const { getIndicatorProps, getRootProps } = useStrengthMeter({
@@ -61,31 +67,42 @@ export const StrengthMeter = withProvider<"div", StrengthMeterProps>(
     })
 
     return (
-      <ui.div {...getRootProps()}>
-        <Indicators>
+      <styled.div {...getRootProps()}>
+        <StrengthMeterIndicators>
           {Array.from({ length: max }).map((_, index) => (
-            <Indicator
+            <StrengthMeterIndicator
               key={index}
               {...getIndicatorProps({ index, ...indicatorProps })}
             />
           ))}
-        </Indicators>
+        </StrengthMeterIndicators>
 
-        {withLabel && label ? <Label>{label}</Label> : null}
-      </ui.div>
+        {withLabel && label ? (
+          <StrengthMeterLabel>{label}</StrengthMeterLabel>
+        ) : null}
+      </styled.div>
     )
   },
   "root",
 )()
 
-interface IndicatorProps extends HTMLUIProps {}
+interface StrengthMeterIndicatorsProps extends HTMLStyledProps {}
 
-const Indicator = withContext<"div", IndicatorProps>("div", "indicator")()
+const StrengthMeterIndicators = withContext<
+  "div",
+  StrengthMeterIndicatorsProps
+>("div", "indicators")()
 
-interface IndicatorsProps extends HTMLUIProps {}
+interface StrengthMeterIndicatorProps extends HTMLStyledProps {}
 
-const Indicators = withContext<"div", IndicatorsProps>("div", "indicators")()
+const StrengthMeterIndicator = withContext<"div", StrengthMeterIndicatorProps>(
+  "div",
+  "indicator",
+)()
 
-interface LabelProps extends HTMLUIProps<"span"> {}
+interface StrengthMeterLabelProps extends HTMLStyledProps<"span"> {}
 
-const Label = withContext<"span", LabelProps>("span", "label")()
+const StrengthMeterLabel = withContext<"span", StrengthMeterLabelProps>(
+  "span",
+  "label",
+)()

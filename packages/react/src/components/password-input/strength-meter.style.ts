@@ -3,17 +3,10 @@ import { defineComponentSlotStyle } from "../../core"
 export const strengthMeterStyle = defineComponentSlotStyle({
   base: {
     indicator: {
-      bg: "{bg}",
+      bg: "bg.subtle",
       flex: "1",
       h: "1",
-      rounded: "sm",
-      vars: [
-        {
-          name: "bg",
-          token: "colors",
-          value: ["blackAlpha.200", "whiteAlpha.200"],
-        },
-      ],
+      rounded: "l1",
     },
     indicators: {
       display: "flex",
@@ -23,6 +16,7 @@ export const strengthMeterStyle = defineComponentSlotStyle({
       w: "full",
     },
     label: {
+      color: "fg.muted",
       fontSize: "xs",
     },
     root: {

@@ -20,6 +20,7 @@ export interface InputGroupRootProps
 export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
   const {
     props: {
+      id: _id,
       size,
       variant,
       children,

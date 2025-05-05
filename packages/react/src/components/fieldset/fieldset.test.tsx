@@ -11,24 +11,13 @@ describe("<Fieldset />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Fieldset.Root.displayName).toBe("FieldsetRoot")
-    expect(Fieldset.Root.__ui__).toBe("FieldsetRoot")
-
     expect(Fieldset.Legend.displayName).toBe("FieldsetLegend")
-    expect(Fieldset.Legend.__ui__).toBe("FieldsetLegend")
-
     expect(Fieldset.Content.displayName).toBe("FieldsetContent")
-    expect(Fieldset.Content.__ui__).toBe("FieldsetContent")
-
     expect(Fieldset.ErrorMessage.displayName).toBe("FieldsetErrorMessage")
-    expect(Fieldset.ErrorMessage.__ui__).toBe("FieldsetErrorMessage")
-
     expect(Fieldset.Header.displayName).toBe("FieldsetHeader")
-    expect(Fieldset.Header.__ui__).toBe("FieldsetHeader")
-
     expect(Fieldset.HelperMessage.displayName).toBe("FieldsetHelperMessage")
-    expect(Fieldset.HelperMessage.__ui__).toBe("FieldsetHelperMessage")
   })
 
   test("sets `className` correctly", () => {

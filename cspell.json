@@ -11,6 +11,7 @@
     "arrowup",
     "autosize",
     "autosizing",
+    "autospace",
     "avap",
     "backreference",
     "beerus",
@@ -19,6 +20,7 @@
     "bunx",
     "burter",
     "Chakra",
+    "chromeos",
     "citeurl",
     "codesandbox",
     "colindex",
@@ -104,6 +106,7 @@
     "menuitemcheckbox",
     "menuitemradio",
     "mergeable",
+    "messageformat",
     "metafile",
     "mewtwo",
     "minzip",
@@ -198,7 +201,8 @@
     "yamcha",
     "Yezi",
     "Yuto",
-    "zarbon"
+    "zarbon",
+    "العربية"
   ],
   "ignorePaths": [
     "node_modules",

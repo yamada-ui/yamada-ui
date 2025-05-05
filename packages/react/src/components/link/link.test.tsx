@@ -6,9 +6,8 @@ describe("<Link />", () => {
     await a11y(<Link href="https://yamada-ui.com">Link</Link>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Link.displayName).toBe("Link")
-    expect(Link.__ui__).toBe("Link")
   })
 
   test("sets `className` correctly", () => {

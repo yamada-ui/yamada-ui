@@ -71,29 +71,44 @@ export const groupStyle = defineComponentStyle({
   compounds: [
     {
       css: {
-        "& > *[data-between]": {
+        "& > *[data-group-between]": {
+          "& > *[data-group-propagate]": {
+            borderRightWidth: "0px !important",
+            roundedRight: "0 !important",
+          },
           borderRightWidth: "0px !important",
           rounded: "0 !important",
         },
-        "& > *[data-first]:not([data-last])": {
+        "& > *[data-group-end]:not([data-group-start])": {
+          "& > *[data-group-propagate]": {
+            roundedLeft: "0 !important",
+          },
+          roundedLeft: "0 !important",
+        },
+        "& > *[data-group-start]:not([data-group-end])": {
+          "& > *[data-group-propagate]": {
+            borderRightWidth: "0px !important",
+            roundedRight: "0 !important",
+          },
           borderRightWidth: "0px !important",
           roundedRight: "0 !important",
         },
-        "& > *[data-last]:not([data-first])": { roundedLeft: "0 !important" },
       },
       attached: true,
       orientation: "horizontal",
     },
     {
       css: {
-        "& > *[data-between]": {
+        "& > *[data-group-between]": {
           borderTopWidth: "0px !important",
           rounded: "0 !important",
         },
-        "& > *[data-first]:not([data-last])": { roundedBottom: "0 !important" },
-        "& > *[data-last]:not([data-first])": {
+        "& > *[data-group-end]:not([data-group-start])": {
           borderTopWidth: "0px !important",
           roundedTop: "0 !important",
+        },
+        "& > *[data-group-start]:not([data-group-end])": {
+          roundedBottom: "0 !important",
         },
       },
       attached: true,

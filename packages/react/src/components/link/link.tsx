@@ -1,9 +1,9 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { LinkStyle } from "./link.style"
 import { createComponent } from "../../core"
 import { linkStyle } from "./link.style"
 
-export interface LinkProps extends HTMLUIProps<"a">, ThemeProps<LinkStyle> {
+export interface LinkProps extends HTMLStyledProps<"a">, ThemeProps<LinkStyle> {
   /**
    * If `true`, the link will open in new tab.
    *
@@ -21,7 +21,7 @@ export const {
 /**
  * `Link` is a component for creating hyperlinks to different web pages, locations within the same page, or other URLs.
  *
- * @see Docs https://yamada-ui.com/components/link
+ * @see https://yamada-ui.com/components/link
  */
 export const Link = withContext("a")(undefined, ({ external, ...rest }) => ({
   rel: external ? "noopener" : undefined,

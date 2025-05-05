@@ -61,7 +61,7 @@ export interface ReorderProps<Y = string>
 /**
  * `Reorder` is a component that allows you to change the order of items using drag and drop.
  *
- * @see Docs https://yamada-ui.com/components/data-display/reorder
+ * @see https://yamada-ui.com/components/data-display/reorder
  */
 export const Reorder = forwardRef(
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint

@@ -45,9 +45,9 @@ export const attributes = {
   _dark:
     ".ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
   /**
-   * The CSS `&[data-end]` attribute selector.
+   * The CSS `&:is([data-end], [data-group-end])` attribute selector.
    */
-  _end: "&[data-end]",
+  _end: "&:is([data-end], [data-group-end])",
   /**
    * The CSS `&:is([data-expanded], [aria-expanded=true])` attribute selector.
    */
@@ -90,6 +90,10 @@ export const attributes = {
    */
   _loading: "&:is([data-loading], [aria-busy=true])",
   /**
+   * The CSS `&[dir=ltr]` attribute selector.
+   */
+  _ltr: "[dir=ltr] &",
+  /**
    * The CSS `&[hidden]` attribute selector.
    */
   _nativeHidden: "&[hidden]",
@@ -130,13 +134,17 @@ export const attributes = {
    */
   _ripple: "& .ui-ripple",
   /**
+   * The CSS `&[dir=rtl]` attribute selector.
+   */
+  _rtl: "[dir=rtl] &",
+  /**
    * The CSS `&:is([data-selected], [aria-selected=true])` attribute selector.
    */
   _selected: "&:is([data-selected], [aria-selected=true])",
   /**
-   * The CSS `&[data-start]` attribute selector.
+   * The CSS `&:is([data-start], [data-group-start])` attribute selector.
    */
-  _start: "&[data-start]",
+  _start: "&:is([data-start], [data-group-start])",
   /**
    * The CSS `&[data-today]` attribute selector.
    */
@@ -322,10 +330,6 @@ export const pseudoClasses = {
    */
   _inRange: "&:is(:in-range, [data-in-range])",
   /**
-   * The CSS `&:is([data-invalid], [aria-invalid=true])` attribute selector.
-   */
-  _invalid: "&:is([data-invalid], [aria-invalid=true])",
-  /**
    * The CSS `&:last-of-type` pseudo-class.
    */
   _last: "&:last-of-type",
@@ -487,6 +491,10 @@ export const pseudoClasses = {
    * The CSS `&:is(:focus-visible, [data-focus-visible])` pseudo-class.
    */
   _focusVisible: "&:is(:focus-visible, [data-focus-visible])",
+  /**
+   * The CSS `&:is([data-invalid], [aria-invalid=true])` attribute selector.
+   */
+  _invalid: "&:is([data-invalid], [aria-invalid=true])",
   /**
    * The CSS `&:is([readonly], [data-readonly], [aria-readonly=true])` pseudo-class.
    */

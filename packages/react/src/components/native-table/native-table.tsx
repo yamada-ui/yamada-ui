@@ -1,10 +1,10 @@
-import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { NativeTableStyle } from "./native-table.style"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { nativeTableStyle } from "./native-table.style"
 
 export interface NativeTableRootProps
-  extends HTMLUIProps<"table">,
+  extends HTMLStyledProps<"table">,
     ThemeProps<NativeTableStyle> {
   /**
    * The CSS `table-layout` property.
@@ -37,18 +37,18 @@ export const {
 /**
  * `NativeTable` is a component for efficiently organizing and displaying data.
  *
- * @see Docs https://yamada-ui.com/components/native-table
+ * @see https://yamada-ui.com/components/native-table
  */
 export const NativeTableRoot = withProvider(
   ({ withScrollArea, scrollAreaProps, ...rest }) => {
     if (withScrollArea) {
       return (
         <NativeTableScrollArea {...scrollAreaProps}>
-          <ui.table {...rest} />
+          <styled.table {...rest} />
         </NativeTableScrollArea>
       )
     } else {
-      return <ui.table {...rest} />
+      return <styled.table {...rest} />
     }
   },
   "root",
@@ -58,7 +58,7 @@ export const NativeTableRoot = withProvider(
 }))
 
 interface NativeTableAreaProps
-  extends HTMLUIProps,
+  extends HTMLStyledProps,
     ThemeProps<NativeTableStyle> {}
 
 const NativeTableScrollArea = withContext<"div", NativeTableAreaProps>(
@@ -66,7 +66,7 @@ const NativeTableScrollArea = withContext<"div", NativeTableAreaProps>(
   "scrollArea",
 )()
 
-export interface CaptionProps extends HTMLUIProps<"caption"> {
+export interface CaptionProps extends HTMLStyledProps<"caption"> {
   /**
    * The placement of the table caption.
    *
@@ -84,30 +84,30 @@ export const Caption = withContext<"caption", CaptionProps>(
   ...rest,
 }))
 
-export interface TheadProps extends HTMLUIProps<"thead"> {}
+export interface TheadProps extends HTMLStyledProps<"thead"> {}
 
 export const Thead = withContext<"thead", TheadProps>("thead", "thead")()
 
-export interface TbodyProps extends HTMLUIProps<"tbody"> {}
+export interface TbodyProps extends HTMLStyledProps<"tbody"> {}
 
 export const Tbody = withContext<"tbody", TbodyProps>("tbody", "tbody")()
 
-export interface TfootProps extends HTMLUIProps<"tfoot"> {}
+export interface TfootProps extends HTMLStyledProps<"tfoot"> {}
 
 export const Tfoot = withContext<"tfoot", TfootProps>("tfoot", "tfoot")()
 
-export interface ColgroupProps extends HTMLUIProps<"colgroup"> {}
+export interface ColgroupProps extends HTMLStyledProps<"colgroup"> {}
 
 export const Colgroup = withContext<"colgroup", ColgroupProps>(
   "colgroup",
   "colgroup",
 )()
 
-export interface ColProps extends HTMLUIProps<"col"> {}
+export interface ColProps extends HTMLStyledProps<"col"> {}
 
 export const Col = withContext<"col", ColProps>("col", "col")()
 
-export interface ThProps extends HTMLUIProps<"th"> {
+export interface ThProps extends HTMLStyledProps<"th"> {
   /**
    * Aligns the cell content to the right.
    *
@@ -124,11 +124,11 @@ export const Th = withContext<"th", ThProps>("th", "th")(
   }),
 )
 
-export interface TrProps extends HTMLUIProps<"tr"> {}
+export interface TrProps extends HTMLStyledProps<"tr"> {}
 
 export const Tr = withContext<"tr", TrProps>("tr", "tr")()
 
-export interface TdProps extends HTMLUIProps<"td"> {
+export interface TdProps extends HTMLStyledProps<"td"> {
   /**
    * Aligns the cell content to the right.
    *

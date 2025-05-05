@@ -4,6 +4,6 @@ import { component, Icon } from "../icon"
 /**
  * `TableIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @sees://yamada-ui.com/components/icon
  */
 export const TableIcon = component(Icon)({ as: Table })

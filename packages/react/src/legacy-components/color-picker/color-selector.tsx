@@ -78,7 +78,7 @@ export interface ColorSelectorProps
 /**
  * `ColorSelector` is a component used by the user to select a color.
  *
- * @see Docs https://yamada-ui.com/components/forms/color-selector
+ * @see https://yamada-ui.com/components/forms/color-selector
  */
 export const ColorSelector = forwardRef<ColorSelectorProps, "input">(
   ({ size, ...props }, ref) => {

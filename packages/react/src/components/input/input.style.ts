@@ -2,6 +2,12 @@ import type { CSSObject } from "../../core"
 import { defineComponentStyle } from "../../core"
 import { wrapWithKey } from "../../utils"
 
+export const getInputPaddingResetStyle = (key?: string) =>
+  ({
+    "&:not(:has(+ [data-input-element]))": wrapWithKey({ pe: "0px" }, key),
+    "&:not([data-input-element] + &)": wrapWithKey({ ps: "0px" }, key),
+  }) satisfies CSSObject
+
 export const getInputHeightStyle = (height?: string, key?: string) =>
   ({
     "&:has(+ [data-input-element])": wrapWithKey({ pe: height }, key),
@@ -55,8 +61,7 @@ export const inputStyle = defineComponentStyle({
       bg: "transparent",
       borderBottomColor: "colorScheme.muted",
       borderBottomWidth: "1px",
-      borderRadius: "0",
-      px: "0",
+      rounded: "0px",
       _focusVisible: {
         borderColor: "{focusBorderColor}",
         boxShadow: "0px 1px 0px 0px {focusBorderColor}",
@@ -125,6 +130,14 @@ export const inputStyle = defineComponentStyle({
       ...getInputHeightStyle("{sizes.14}"),
     },
   },
+
+  compounds: [
+    {
+      css: getInputPaddingResetStyle(),
+      variant: "flushed",
+      layer: "variant",
+    },
+  ],
 
   defaultProps: {
     size: "md",

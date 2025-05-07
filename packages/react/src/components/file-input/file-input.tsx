@@ -6,7 +6,7 @@ import type { FileInputStyle } from "./file-input.style"
 import type { UseFileInputProps } from "./use-file-input"
 import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { useInputBorder } from "../input"
+import { useInputBorder, useInputPropsContext } from "../input"
 import { Portal } from "../portal"
 import { fileInputStyle } from "./file-input.style"
 import { useFileInput } from "./use-file-input"
@@ -52,7 +52,7 @@ export const {
 /**
  * `FileInput` is a component used for users to select files.
  *
- * @see Docs https://yamada-ui.com/components/file-input
+ * @see https://yamada-ui.com/components/file-input
  */
 export const FileInput = withProvider<"input", FileInputProps>(
   ({
@@ -117,7 +117,9 @@ export const FileInput = withProvider<"input", FileInputProps>(
     )
   },
   "root",
-)()
+)(() => {
+  return useInputPropsContext()
+})
 
 interface FileInputTagProps extends HTMLStyledProps {}
 

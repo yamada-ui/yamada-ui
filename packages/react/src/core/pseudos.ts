@@ -19,12 +19,16 @@ const toGroup = <Y extends string>(selector: Y) =>
   >
 
 const toPeer = <Y extends string>(selector: Y) =>
-  ["[data-peer]", ".peer"]
-    .flatMap((prefix) => [
+  [
+    ...["[data-peer]", ".peer"].flatMap((prefix) => [
       `&:has(~ ${prefix}${selector.slice(1)})`,
       `${prefix}${selector.slice(1)} ~ &`,
-    ])
-    .join(", ") as ReplaceSelectors<["[data-peer]", ".peer"], Y, "~ &">
+    ]),
+    ...["[data-peer]", ".peer"].flatMap((prefix) => [
+      `&:has(~ ${prefix} *${selector.slice(1)})`,
+      `${prefix}:has(*${selector.slice(1)}) ~ &`,
+    ]),
+  ].join(", ") as ReplaceSelectors<["[data-peer]", ".peer"], Y, "~ &">
 
 export const attributes = {
   /**
@@ -479,7 +483,7 @@ export const pseudoClasses = {
   _hover:
     "&:is(:hover, [data-hover]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
   /**
-   * The CSS `&:is(:active, [data-active]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])` pseudo-class.
+   * The CSS `&:is(:active, [data-active])` pseudo-class.
    */
   _active:
     "&:is(:active, [data-active]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
@@ -500,10 +504,9 @@ export const pseudoClasses = {
    */
   _readOnly: "&:is([readonly], [data-readonly], [aria-readonly=true])",
   /**
-   * The CSS `&:is(:disabled, [disabled], [aria-disabled=true], [data-disabled])` pseudo-class.
+   * The CSS `&:is(:disabled, [disabled], [data-disabled])` pseudo-class.
    */
-  _disabled:
-    "&:is(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
+  _disabled: "&:is(:disabled, [disabled], [data-disabled])",
 } as const
 
 export type PseudoClasses = typeof pseudoClasses

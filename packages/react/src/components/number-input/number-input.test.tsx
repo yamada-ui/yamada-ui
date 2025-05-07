@@ -1,10 +1,13 @@
+import { NumberInput } from "."
 import { a11y, fireEvent, render, screen } from "../../../test"
-import { NumberInput } from "./"
 
 describe("<NumberInput />", () => {
   test("NumberInput renders correctly", async () => {
-    const { container } = render(<NumberInput aria-label="Input number" />)
-    await a11y(container)
+    await a11y(<NumberInput aria-label="Input number" />)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(NumberInput.name).toBe("NumberInputRoot")
   })
 
   test("render input with props", async () => {
@@ -125,12 +128,13 @@ describe("<NumberInput />", () => {
     const { user } = render(<NumberInput defaultValue={10} max={30} min={0} />)
 
     const numberInput = await screen.findByRole("spinbutton")
-    const incrementStepper = document.querySelector(
-      ".ui-number-input__stepper--up",
-    )
-    const decrementStepper = document.querySelector(
-      ".ui-number-input__stepper--down",
-    )
+    const incrementStepper = await screen.findByRole("button", {
+      name: "Increase",
+    })
+    const decrementStepper = await screen.findByRole("button", {
+      name: "Decrease",
+    })
+
     expect(numberInput).toHaveValue("10")
 
     await user.click(incrementStepper!)

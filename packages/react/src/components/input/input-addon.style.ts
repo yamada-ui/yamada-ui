@@ -31,15 +31,15 @@ export const inputAddonStyle = defineComponentStyle({
 
   variants: {
     filled: {
-      bg: "colorScheme.muted",
-      borderColor: "transparent",
-      borderWidth: "1px",
+      layerStyle: "surface",
+      border: "1px solid transparent",
     },
     flushed: {
       bg: "transparent",
       borderBottomColor: "colorScheme.muted",
       borderBottomWidth: "1px",
-      borderRadius: "0",
+      color: "colorScheme.fg",
+      rounded: "0px",
       _peerFocusVisible: {
         borderColor: "{focusBorderColor}",
         boxShadow: "0px 1px 0px 0px {focusBorderColor}",

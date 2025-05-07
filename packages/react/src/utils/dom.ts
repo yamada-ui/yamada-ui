@@ -1,4 +1,79 @@
-import type * as React from "react"
+import type { StringLiteral } from "@yamada-ui/utils"
+import * as React from "react"
+
+type KeyboardNavigationKey =
+  | "ArrowDown"
+  | "ArrowLeft"
+  | "ArrowRight"
+  | "ArrowUp"
+  | "End"
+  | "Home"
+  | "PageDown"
+  | "PageUp"
+
+type KeyboardControlKey =
+  | "Alt"
+  | "Backspace"
+  | "CapsLock"
+  | "Control"
+  | "Delete"
+  | "Enter"
+  | "Escape"
+  | "Insert"
+  | "Meta"
+  | "NumLock"
+  | "Pause"
+  | "PrintScreen"
+  | "ScrollLock"
+  | "Shift"
+  | "Space"
+  | "Tab"
+
+type KeyboardFunctionKey = "Fn" | "FnLock" | `F${number}`
+
+type KeyboardKey =
+  | KeyboardControlKey
+  | KeyboardFunctionKey
+  | KeyboardNavigationKey
+  | StringLiteral
+
+export function runKeyAction<Y>(
+  ev: React.KeyboardEvent<Y>,
+  actions: { [key in KeyboardKey]?: React.KeyboardEventHandler<Y> },
+) {
+  const action = actions[ev.key]
+
+  if (!action) return
+
+  ev.preventDefault()
+
+  action(ev)
+}
+export function useAttributeObserver(
+  ref: React.RefObject<HTMLElement | null>,
+  attributeFilter: string[],
+  enabled: boolean,
+  func: () => void,
+) {
+  React.useEffect(() => {
+    if (!ref.current || !enabled) return
+
+    const ownerDocument = ref.current.ownerDocument.defaultView ?? window
+
+    const observer = new ownerDocument.MutationObserver((changes) => {
+      for (const { type, attributeName } of changes) {
+        if (type !== "attributes") continue
+        if (!attributeName) continue
+
+        if (attributeFilter.includes(attributeName)) func()
+      }
+    })
+
+    observer.observe(ref.current, { attributeFilter, attributes: true })
+
+    return () => observer.disconnect()
+  })
+}
 
 export function getEventRelatedTarget(ev: React.FocusEvent | React.MouseEvent) {
   return (ev.relatedTarget ??

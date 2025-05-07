@@ -54,7 +54,7 @@ export type ComponentSlot<Y extends number | string | symbol> =
   | Y
   | { name: string; slot: [Y, Y] | Y }
 
-export type InitialProps<Y extends Dict = Dict> = SuperProps<Y>
+export type InitialProps<Y extends Dict = Dict> = (() => any) | Y
 export type SuperProps<Y extends Dict = Dict> = ((props: Y) => any) | Y
 
 export type SuperWithoutThemeProps<
@@ -252,7 +252,7 @@ export function createComponent<
     ) {
       return withDisplayName<D, H>((props) => {
         const computedProps = mergeProps(
-          runIfFn(initialProps, props) ?? {},
+          runIfFn(initialProps) ?? {},
           props,
         )() as H
         const mergedProps = useComponentProps(computedProps, {
@@ -410,10 +410,7 @@ export function createSlotComponent<
       ...superProps: SuperWithoutThemeProps<R, M, T>[]
     ) {
       return withDisplayName<H, R>((props) => {
-        const computedProps = mergeProps(
-          runIfFn(initialProps, props) ?? {},
-          props,
-        )()
+        const computedProps = mergeProps(runIfFn(initialProps) ?? {}, props)()
         const [context, mergedProps] = useRootComponentProps(
           computedProps,
           slot,
@@ -459,10 +456,7 @@ export function createSlotComponent<
       ...superProps: SuperProps<R>[]
     ) {
       return withDisplayName<H, R>((props) => {
-        const computedProps = mergeProps(
-          runIfFn(initialProps, props) ?? {},
-          props,
-        )()
+        const computedProps = mergeProps(runIfFn(initialProps) ?? {}, props)()
         const mergedProps = useSlotComponentProps(computedProps, slot, {
           className,
           withContext,

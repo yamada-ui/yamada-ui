@@ -6,14 +6,21 @@ import {
   inputStyle,
 } from "../input"
 
-export const passwordInputStyle = defineComponentSlotStyle({
+export const numberInputStyle = defineComponentSlotStyle({
   base: {
     button: {
       ...buttonStyle.base,
+      flex: "1",
+      lineHeight: "1",
       rounded: "l1",
-      _readOnly: { cursor: "pointer" },
     },
+    control: {
+      display: "flex",
+      flexDirection: "column",
+    },
+    decrement: {},
     field: inputStyle.base,
+    increment: {},
     root: {},
   },
 
@@ -62,7 +69,7 @@ export const passwordInputStyle = defineComponentSlotStyle({
 
   sizes: {
     xs: {
-      button: {
+      control: {
         boxSize: `calc({--input-height} - {spaces.2})`,
         fontSize: inputStyle.sizes?.xs.fontSize,
       },
@@ -70,7 +77,7 @@ export const passwordInputStyle = defineComponentSlotStyle({
       root: getInputHeightStyle(inputStyle.sizes?.xs.minH, "& > input"),
     },
     sm: {
-      button: {
+      control: {
         boxSize: `calc({--input-height} - {spaces.2})`,
         fontSize: inputStyle.sizes?.sm.fontSize,
       },
@@ -78,7 +85,7 @@ export const passwordInputStyle = defineComponentSlotStyle({
       root: getInputHeightStyle(inputStyle.sizes?.sm.minH, "& > input"),
     },
     md: {
-      button: {
+      control: {
         boxSize: `calc({--input-height} - {spaces.2})`,
         fontSize: inputStyle.sizes?.md.fontSize,
       },
@@ -86,7 +93,7 @@ export const passwordInputStyle = defineComponentSlotStyle({
       root: getInputHeightStyle(inputStyle.sizes?.md.minH, "& > input"),
     },
     lg: {
-      button: {
+      control: {
         boxSize: `calc({--input-height} - {spaces.2.5})`,
         fontSize: inputStyle.sizes?.lg.fontSize,
       },
@@ -94,7 +101,7 @@ export const passwordInputStyle = defineComponentSlotStyle({
       root: getInputHeightStyle(inputStyle.sizes?.lg.minH, "& > input"),
     },
     xl: {
-      button: {
+      control: {
         boxSize: `calc({--input-height} - {spaces.3})`,
         fontSize: inputStyle.sizes?.xl.fontSize,
       },
@@ -102,7 +109,7 @@ export const passwordInputStyle = defineComponentSlotStyle({
       root: getInputHeightStyle(inputStyle.sizes?.xl.minH, "& > input"),
     },
     "2xl": {
-      button: {
+      control: {
         boxSize: `calc({--input-height} - {spaces.3})`,
         fontSize: inputStyle.sizes?.["2xl"].fontSize,
       },
@@ -117,4 +124,4 @@ export const passwordInputStyle = defineComponentSlotStyle({
   },
 })
 
-export type PasswordInputStyle = typeof passwordInputStyle
+export type NumberInputStyle = typeof numberInputStyle

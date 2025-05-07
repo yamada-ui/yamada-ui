@@ -141,20 +141,14 @@ export const Invalid: Story = () => {
 export const Addon: Story = () => {
   return (
     <>
-      <InputGroup.Root>
-        <InputGroup.Addon>Email</InputGroup.Addon>
-        <Textarea placeholder="Your email address" />
-      </InputGroup.Root>
-
-      <InputGroup.Root variant="filled">
-        <InputGroup.Addon>Email</InputGroup.Addon>
-        <Textarea placeholder="Your email address" />
-      </InputGroup.Root>
-
-      <InputGroup.Root variant="flushed">
-        <InputGroup.Addon>Email</InputGroup.Addon>
-        <Textarea placeholder="Your email address" />
-      </InputGroup.Root>
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant}>
+            <InputGroup.Addon>Email</InputGroup.Addon>
+            <Textarea placeholder="Your email address" />
+          </InputGroup.Root>
+        )}
+      </For>
 
       <InputGroup.Root>
         <InputGroup.Addon>https://</InputGroup.Addon>
@@ -167,28 +161,46 @@ export const Addon: Story = () => {
 
 export const Element: Story = () => {
   return (
-    <InputGroup.Root>
-      <InputGroup.Element>
-        <MailIcon fontSize="xl" />
-      </InputGroup.Element>
-      <Textarea name="q" placeholder="Your email address" />
-    </InputGroup.Root>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant, index) => (
+        <InputGroup.Root key={index} variant={variant}>
+          <InputGroup.Element>
+            <MailIcon fontSize="xl" />
+          </InputGroup.Element>
+          <Textarea placeholder="Your email address" />
+        </InputGroup.Root>
+      )}
+    </For>
   )
 }
 
 export const BorderColor: Story = () => {
   return (
     <>
-      <Textarea placeholder="default border color" />
+      <Textarea placeholder="Default border color" />
+
       <Textarea
         focusBorderColor="green.500"
-        placeholder="custom border color"
+        placeholder="Custom border color"
       />
+
+      <InputGroup.Root variant="flushed" focusBorderColor="green.500">
+        <InputGroup.Element>
+          <MailIcon fontSize="xl" />
+        </InputGroup.Element>
+        <Textarea placeholder="Custom border color" />
+      </InputGroup.Root>
+
       <Textarea
         errorBorderColor="orange.500"
         invalid
-        placeholder="custom border color"
+        placeholder="Custom border color"
       />
+
+      <InputGroup.Root errorBorderColor="orange.500" invalid>
+        <InputGroup.Addon>Email</InputGroup.Addon>
+        <Textarea placeholder="Custom border color" />
+      </InputGroup.Root>
     </>
   )
 }
@@ -197,10 +209,12 @@ export const Placeholder: Story = () => {
   return (
     <>
       <Textarea placeholder="default placeholder" />
+
       <Textarea
         placeholder="custom placeholder"
         _placeholder={{ color: "gray.500", opacity: 1 }}
       />
+
       <Textarea
         color="green.500"
         placeholder="custom placeholder"

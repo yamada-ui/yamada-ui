@@ -102,11 +102,11 @@ describe("<FileInput />", () => {
       files = newFiles
     })
     render(<FileInput multiple resetRef={resetRef} onChange={onChange} />)
-    const file1 = new File(["foo"], "foo.txt", { type: "text/plain" })
-    const file2 = new File(["images"], "image.png", {
+    const file1 = new File(["hoge"], "hoge.txt", { type: "text/plain" })
+    const file2 = new File(["foo"], "foo.png", {
       type: "image/png",
     })
-    const file3 = new File(["pdf"], "doc.pdf", {
+    const file3 = new File(["bar"], "bar.pdf", {
       type: "application/pdf",
     })
     fireEvent.change(document.querySelector('input[type="file"]')!, {

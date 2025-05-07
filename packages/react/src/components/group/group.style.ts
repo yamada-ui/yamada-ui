@@ -22,7 +22,7 @@ export const groupStyle = defineComponentStyle({
      */
     attached: {
       true: {
-        gap: "0 !important",
+        gap: "0px !important",
       },
     },
     /**
@@ -74,24 +74,24 @@ export const groupStyle = defineComponentStyle({
         "& > *[data-group-between]": {
           "& > *[data-group-propagate]": {
             borderRightWidth: "0px !important",
-            roundedRight: "0 !important",
+            rounded: "0px !important",
           },
           borderRightWidth: "0px !important",
-          rounded: "0 !important",
+          rounded: "0px !important",
         },
         "& > *[data-group-end]:not([data-group-start])": {
           "& > *[data-group-propagate]": {
-            roundedLeft: "0 !important",
+            roundedLeft: "0px !important",
           },
-          roundedLeft: "0 !important",
+          roundedLeft: "0px !important",
         },
         "& > *[data-group-start]:not([data-group-end])": {
           "& > *[data-group-propagate]": {
             borderRightWidth: "0px !important",
-            roundedRight: "0 !important",
+            roundedRight: "0px !important",
           },
           borderRightWidth: "0px !important",
-          roundedRight: "0 !important",
+          roundedRight: "0px !important",
         },
       },
       attached: true,
@@ -101,14 +101,14 @@ export const groupStyle = defineComponentStyle({
       css: {
         "& > *[data-group-between]": {
           borderTopWidth: "0px !important",
-          rounded: "0 !important",
+          rounded: "0px !important",
         },
         "& > *[data-group-end]:not([data-group-start])": {
           borderTopWidth: "0px !important",
-          roundedTop: "0 !important",
+          roundedTop: "0px !important",
         },
         "& > *[data-group-start]:not([data-group-end])": {
-          roundedBottom: "0 !important",
+          roundedBottom: "0px !important",
         },
       },
       attached: true,

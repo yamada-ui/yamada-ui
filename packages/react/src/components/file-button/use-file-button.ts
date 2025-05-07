@@ -2,6 +2,7 @@ import type { PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import type { UseFileInputProps } from "../file-input"
 import { useCallback } from "react"
+import { ariaAttr } from "../../utils"
 import { useFileInput } from "../file-input"
 
 export interface UseFileButtonProps
@@ -9,14 +10,16 @@ export interface UseFileButtonProps
     FieldProps {}
 
 export const useFileButton = (props: UseFileButtonProps) => {
-  const { clickableProps, getInputProps } = useFileInput<"button">(props)
+  const { interactive, clickableProps, getInputProps } =
+    useFileInput<"button">(props)
 
   const getButtonProps: PropGetter<"button"> = useCallback(
     (props) => ({
       ...clickableProps,
+      "aria-disabled": ariaAttr(!interactive),
       ...props,
     }),
-    [clickableProps],
+    [clickableProps, interactive],
   )
 
   return {

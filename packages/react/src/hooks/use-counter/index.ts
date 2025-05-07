@@ -6,6 +6,24 @@ import {
   useCallbackRef,
 } from "../../utils"
 
+const parse = (value: number | string): number =>
+  parseFloat(value.toString().replace(/[^\w.-]+/g, ""))
+
+const getCountDecimal = (value: number, step: number): number =>
+  Math.max(countDecimal(step), countDecimal(value))
+
+const casting = (
+  value: number | string,
+  step: number,
+  precision?: number,
+): string | undefined => {
+  value = parse(value)
+
+  return !Number.isNaN(value)
+    ? toPrecision(value, precision ?? getCountDecimal(value, step))
+    : undefined
+}
+
 export interface UseCounterProps {
   /**
    * The initial value of the counter.
@@ -60,6 +78,7 @@ export const useCounter = ({
   keepWithinRange = true,
   max: maxValue = Number.MAX_SAFE_INTEGER,
   min: minValue = Number.MIN_SAFE_INTEGER,
+  step: stepProp = 1,
   ...props
 }: UseCounterProps = {}) => {
   const onChange = useCallbackRef(props.onChange)
@@ -67,13 +86,13 @@ export const useCounter = ({
   const [defaultValue, setValue] = useState<number | string>(() => {
     if (props.defaultValue == null) return ""
 
-    return casting(props.defaultValue, props.step ?? 1, props.precision) ?? ""
+    return casting(props.defaultValue, stepProp, props.precision) ?? ""
   })
 
   const isControlled = typeof props.value !== "undefined"
   const value = isControlled ? (props.value as number | string) : defaultValue
 
-  const countDecimal = getCountDecimal(parse(value), props.step ?? 1)
+  const countDecimal = getCountDecimal(parse(value), stepProp)
 
   const precision = props.precision ?? countDecimal
 
@@ -101,7 +120,7 @@ export const useCounter = ({
   )
 
   const increment = useCallback(
-    (step = props.step ?? 1) => {
+    (step = stepProp) => {
       let next: number | string
 
       if (value === "") {
@@ -114,11 +133,11 @@ export const useCounter = ({
 
       update(next)
     },
-    [clamp, props.step, update, value],
+    [clamp, stepProp, update, value],
   )
 
   const decrement = useCallback(
-    (step = props.step ?? 1) => {
+    (step = stepProp) => {
       let next: number | string
 
       if (value === "") {
@@ -131,7 +150,7 @@ export const useCounter = ({
 
       update(next)
     },
-    [clamp, props.step, update, value],
+    [clamp, stepProp, update, value],
   )
 
   const reset = useCallback(() => {
@@ -140,21 +159,19 @@ export const useCounter = ({
     if (props.defaultValue == null) {
       next = ""
     } else {
-      next =
-        casting(props.defaultValue, props.step ?? 1, props.precision) ??
-        minValue
+      next = casting(props.defaultValue, stepProp, props.precision) ?? minValue
     }
 
     update(next)
-  }, [props.defaultValue, props.precision, props.step, update, minValue])
+  }, [props.defaultValue, props.precision, stepProp, update, minValue])
 
   const cast = useCallback(
     (value: number | string) => {
-      const nextValue = casting(value, props.step ?? 1, precision) ?? minValue
+      const nextValue = casting(value, stepProp, precision) ?? minValue
 
       update(nextValue)
     },
-    [precision, props.step, update, minValue],
+    [precision, stepProp, update, minValue],
   )
 
   const valueAsNumber = parse(value)
@@ -174,6 +191,7 @@ export const useCounter = ({
     precision,
     reset,
     setValue,
+    step: stepProp,
     update,
     value,
     valueAsNumber,
@@ -181,21 +199,3 @@ export const useCounter = ({
 }
 
 export type UseCounterReturn = ReturnType<typeof useCounter>
-
-const parse = (value: number | string): number =>
-  parseFloat(value.toString().replace(/[^\w.-]+/g, ""))
-
-const getCountDecimal = (value: number, step: number): number =>
-  Math.max(countDecimal(step), countDecimal(value))
-
-const casting = (
-  value: number | string,
-  step: number,
-  precision?: number,
-): string | undefined => {
-  value = parse(value)
-
-  return !Number.isNaN(value)
-    ? toPrecision(value, precision ?? getCountDecimal(value, step))
-    : undefined
-}

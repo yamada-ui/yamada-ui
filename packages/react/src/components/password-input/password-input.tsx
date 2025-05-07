@@ -6,7 +6,7 @@ import type { UsePasswordInputProps } from "./use-password-input"
 import { createSlotComponent } from "../../core"
 import { useGroupItemProps } from "../group"
 import { EyeIcon, EyeOffIcon } from "../icon"
-import { Input, InputGroup } from "../input"
+import { Input, InputGroup, useInputPropsContext } from "../input"
 import { passwordInputStyle } from "./password-input.style"
 import { usePasswordInput } from "./use-password-input"
 
@@ -19,13 +19,13 @@ export interface PasswordInputProps
    */
   visibilityIcon?: { off: ReactNode; on: ReactNode }
   /**
+   * The props for the button element.
+   */
+  buttonProps?: PasswordInputButtonProps
+  /**
    * The props for the end element.
    */
   elementProps?: InputGroup.ElementProps
-  /**
-   * The props for the icon element.
-   */
-  iconProps?: HTMLStyledProps<"button">
   /**
    * The props for the root element.
    */
@@ -47,19 +47,19 @@ export const {
  *
  * @see https://yamada-ui.com/components/password-input
  */
-export const PasswordInput = withProvider<"div", PasswordInputProps>(
+export const PasswordInput = withProvider<"input", PasswordInputProps>(
   ({
     className,
     css,
     colorScheme,
     visibilityIcon = { off: <EyeOffIcon />, on: <EyeIcon /> },
+    buttonProps,
     elementProps,
-    iconProps,
     rootProps,
     ...props
   }) => {
     const [groupItemProps, rest] = useGroupItemProps(props)
-    const { visible, getIconProps, getInputProps } = usePasswordInput(rest)
+    const { visible, getButtonProps, getInputProps } = usePasswordInput(rest)
 
     return (
       <InputGroup.Root
@@ -72,7 +72,7 @@ export const PasswordInput = withProvider<"div", PasswordInputProps>(
         <PasswordInputField {...getInputProps()} />
 
         <InputGroup.Element clickable {...elementProps}>
-          <PasswordInputButton {...getIconProps(iconProps)}>
+          <PasswordInputButton {...getButtonProps(buttonProps)}>
             {visible ? visibilityIcon.off : visibilityIcon.on}
           </PasswordInputButton>
         </InputGroup.Element>
@@ -80,7 +80,9 @@ export const PasswordInput = withProvider<"div", PasswordInputProps>(
     )
   },
   "root",
-)()
+)(() => {
+  return useInputPropsContext()
+})
 
 interface PasswordInputFieldProps extends InputProps {}
 

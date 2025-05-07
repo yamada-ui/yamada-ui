@@ -7,6 +7,7 @@ import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Button } from "../button"
 import { Center } from "../center"
 import { Field } from "../field"
+import { For } from "../for"
 import { FileIcon, XIcon } from "../icon"
 import { InputGroup } from "../input"
 import { VStack } from "../stack"
@@ -115,10 +116,16 @@ export const Children: Story = () => {
 export const Disabled: Story = () => {
   return (
     <>
-      <FileInput variant="outline" disabled placeholder="outline" />
-      <FileInput variant="filled" disabled placeholder="filled" />
-      <FileInput variant="flushed" disabled placeholder="flushed" />
-      <FileInput variant="unstyled" disabled placeholder="unstyled" />
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <FileInput
+            key={index}
+            variant={variant}
+            disabled
+            placeholder={toTitleCase(variant)}
+          />
+        )}
+      </For>
 
       <Field.Root disabled label="Upload file">
         <FileInput placeholder="your file" />
@@ -130,10 +137,16 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <FileInput variant="outline" placeholder="outline" readOnly />
-      <FileInput variant="filled" placeholder="filled" readOnly />
-      <FileInput variant="flushed" placeholder="flushed" readOnly />
-      <FileInput variant="unstyled" placeholder="unstyled" readOnly />
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <FileInput
+            key={index}
+            variant={variant}
+            placeholder={toTitleCase(variant)}
+            readOnly
+          />
+        )}
+      </For>
 
       <Field.Root label="Upload file" readOnly>
         <FileInput placeholder="your file" />
@@ -145,10 +158,16 @@ export const Readonly: Story = () => {
 export const Invalid: Story = () => {
   return (
     <>
-      <FileInput variant="outline" invalid placeholder="outline" />
-      <FileInput variant="filled" invalid placeholder="filled" />
-      <FileInput variant="flushed" invalid placeholder="flushed" />
-      <FileInput variant="unstyled" invalid placeholder="unstyled" />
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <FileInput
+            key={index}
+            variant={variant}
+            invalid
+            placeholder={toTitleCase(variant)}
+          />
+        )}
+      </For>
 
       <Field.Root errorMessage="File is required." invalid label="Upload file">
         <FileInput placeholder="your file" />
@@ -159,23 +178,31 @@ export const Invalid: Story = () => {
 
 export const Addon: Story = () => {
   return (
-    <InputGroup.Root>
-      <InputGroup.Addon>
-        <FileIcon />
-      </InputGroup.Addon>
-      <FileInput placeholder="Please upload file" />
-    </InputGroup.Root>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant, index) => (
+        <InputGroup.Root key={index} variant={variant}>
+          <InputGroup.Addon>
+            <FileIcon />
+          </InputGroup.Addon>
+          <FileInput placeholder="Please upload file" />
+        </InputGroup.Root>
+      )}
+    </For>
   )
 }
 
 export const Element: Story = () => {
   return (
-    <InputGroup.Root>
-      <InputGroup.Element>
-        <FileIcon />
-      </InputGroup.Element>
-      <FileInput placeholder="Please upload file" />
-    </InputGroup.Root>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant, index) => (
+        <InputGroup.Root key={index} variant={variant}>
+          <InputGroup.Element>
+            <FileIcon />
+          </InputGroup.Element>
+          <FileInput placeholder="Please upload file" />
+        </InputGroup.Root>
+      )}
+    </For>
   )
 }
 
@@ -183,15 +210,31 @@ export const BorderColor: Story = () => {
   return (
     <>
       <FileInput placeholder="default border color" />
+
       <FileInput
         focusBorderColor="green.500"
         placeholder="custom border color"
       />
+
+      <InputGroup.Root variant="flushed" focusBorderColor="green.500">
+        <InputGroup.Element>
+          <FileIcon />
+        </InputGroup.Element>
+        <FileInput placeholder="Custom border color" />
+      </InputGroup.Root>
+
       <FileInput
         errorBorderColor="orange.500"
         invalid
         placeholder="custom border color"
       />
+
+      <InputGroup.Root errorBorderColor="orange.500" invalid>
+        <InputGroup.Addon>
+          <FileIcon />
+        </InputGroup.Addon>
+        <FileInput placeholder="Custom border color" />
+      </InputGroup.Root>
     </>
   )
 }
@@ -231,7 +274,7 @@ export const Reset: Story = () => {
 }
 
 export const CustomControl: Story = () => {
-  const [value, onChange] = useState<File[] | undefined>(undefined)
+  const [value, onChange] = useState<File[] | undefined>([])
 
   return (
     <VStack gap="md">

@@ -6,6 +6,7 @@ import { useCallback, useRef } from "react"
 import { useClickable } from "../../hooks/use-clickable"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
+  ariaAttr,
   assignRef,
   dataAttr,
   handlerAll,
@@ -62,6 +63,7 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
     dataProps,
     eventProps,
   } = useFieldProps<HTMLElement, UseFileInputProps<Y>>(props)
+  const interactive = !(readOnly || disabled)
   const inputRef = useRef<HTMLInputElement>(null)
   const [values, setValues] = useControllableState<File[] | undefined>({
     defaultValue,
@@ -71,10 +73,10 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
   const count = values?.length ?? 0
 
   const onClick = useCallback(() => {
-    if (disabled || readOnly) return
+    if (!interactive) return
 
     inputRef.current?.click()
-  }, [disabled, readOnly])
+  }, [interactive])
 
   const onReset = useCallback(() => {
     if (inputRef.current) inputRef.current.value = ""
@@ -143,13 +145,15 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
     (props = {}) => ({
       "data-placeholder": dataAttr(!count),
       ...clickableProps,
+      "aria-disabled": ariaAttr(!interactive),
       ...props,
     }),
-    [clickableProps, count],
+    [clickableProps, count, interactive],
   )
 
   return {
     disabled,
+    interactive,
     readOnly,
     required,
     values,

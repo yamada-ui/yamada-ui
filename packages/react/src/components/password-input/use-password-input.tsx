@@ -3,7 +3,7 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { handlerAll } from "../../utils"
+import { handlerAll, mergeRefs } from "../../utils"
 import { useFieldProps } from "../field"
 
 export interface UsePasswordInputProps extends HTMLProps<"input">, FieldProps {
@@ -44,7 +44,7 @@ export const usePasswordInput = (props: UsePasswordInputProps) => {
     onChange: onVisibleChange,
   })
 
-  const onClick = useCallback(
+  const onChangeVisibility = useCallback(
     (ev: MouseEvent<HTMLButtonElement>) => {
       if (disabled || ev.button !== 0) return
 
@@ -56,7 +56,7 @@ export const usePasswordInput = (props: UsePasswordInputProps) => {
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    (props = {}) => ({
+    ({ ref, ...props } = {}) => ({
       type: visible ? "text" : "password",
       disabled,
       ...ariaProps,
@@ -64,25 +64,27 @@ export const usePasswordInput = (props: UsePasswordInputProps) => {
       ...eventProps,
       ...rest,
       ...props,
+      ref: mergeRefs(ref, rest.ref),
     }),
     [visible, rest, disabled, dataProps, eventProps, ariaProps],
   )
 
-  const getIconProps: PropGetter<"button"> = useCallback(
+  const getButtonProps: PropGetter<"button"> = useCallback(
     (props = {}) => ({
+      type: "button",
       "aria-label": "Toggle password visibility",
       disabled,
       ...dataProps,
       ...props,
-      onClick: handlerAll(props.onClick, onClick),
+      onClick: handlerAll(props.onClick, onChangeVisibility),
     }),
-    [onClick, dataProps, disabled],
+    [onChangeVisibility, dataProps, disabled],
   )
 
   return {
     setVisible,
     visible,
-    getIconProps,
+    getButtonProps,
     getInputProps,
   }
 }

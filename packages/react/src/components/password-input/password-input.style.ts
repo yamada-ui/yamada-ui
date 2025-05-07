@@ -1,6 +1,10 @@
 import { defineComponentSlotStyle } from "../../core"
 import { buttonStyle } from "../button"
-import { getInputHeightStyle, inputStyle } from "../input"
+import {
+  getInputHeightStyle,
+  getInputPaddingResetStyle,
+  inputStyle,
+} from "../input"
 
 export const passwordInputStyle = defineComponentSlotStyle({
   base: {
@@ -17,7 +21,6 @@ export const passwordInputStyle = defineComponentSlotStyle({
     filled: {
       button: {
         layerStyle: "ghost",
-        color: "fg.subtle",
         focusVisibleRing: "none",
         _hover: {
           layerStyle: "ghost.hover",
@@ -31,7 +34,6 @@ export const passwordInputStyle = defineComponentSlotStyle({
     flushed: {
       button: {
         layerStyle: "ghost",
-        color: "fg.subtle",
         focusVisibleRing: "none",
         _hover: {
           layerStyle: "ghost.hover",
@@ -41,11 +43,11 @@ export const passwordInputStyle = defineComponentSlotStyle({
         },
       },
       field: inputStyle.variants?.flushed,
+      root: getInputPaddingResetStyle("& > input"),
     },
     outline: {
       button: {
         layerStyle: "ghost",
-        color: "fg.subtle",
         focusVisibleRing: "none",
         _hover: {
           layerStyle: "ghost.hover",
@@ -56,7 +58,6 @@ export const passwordInputStyle = defineComponentSlotStyle({
       },
       field: inputStyle.variants?.outline,
     },
-    test: {},
   },
 
   sizes: {

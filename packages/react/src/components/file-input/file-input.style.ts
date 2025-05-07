@@ -1,5 +1,5 @@
 import { defineComponentSlotStyle } from "../../core"
-import { inputStyle } from "../input"
+import { getInputPaddingResetStyle, inputStyle } from "../input"
 
 export const fileInputStyle = defineComponentSlotStyle({
   base: {
@@ -27,7 +27,10 @@ export const fileInputStyle = defineComponentSlotStyle({
       root: inputStyle.variants?.filled,
     },
     flushed: {
-      root: inputStyle.variants?.flushed,
+      root: {
+        ...inputStyle.variants?.flushed,
+        ...getInputPaddingResetStyle(),
+      },
     },
     outline: {
       root: inputStyle.variants?.outline,

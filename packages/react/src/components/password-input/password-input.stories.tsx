@@ -151,23 +151,31 @@ export const Invalid: Story = () => {
 
 export const Addon: Story = () => {
   return (
-    <InputGroup.Root>
-      <InputGroup.Addon>
-        <KeyIcon />
-      </InputGroup.Addon>
-      <PasswordInput placeholder="Your password" />
-    </InputGroup.Root>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant, index) => (
+        <InputGroup.Root key={index} variant={variant}>
+          <InputGroup.Addon>
+            <KeyIcon />
+          </InputGroup.Addon>
+          <PasswordInput placeholder="Your password" />
+        </InputGroup.Root>
+      )}
+    </For>
   )
 }
 
 export const Element: Story = () => {
   return (
-    <InputGroup.Root>
-      <InputGroup.Element>
-        <KeyIcon />
-      </InputGroup.Element>
-      <PasswordInput placeholder="Your password" />
-    </InputGroup.Root>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant, index) => (
+        <InputGroup.Root key={index} variant={variant}>
+          <InputGroup.Element>
+            <KeyIcon />
+          </InputGroup.Element>
+          <PasswordInput placeholder="Your password" />
+        </InputGroup.Root>
+      )}
+    </For>
   )
 }
 
@@ -175,15 +183,31 @@ export const BorderColor: Story = () => {
   return (
     <>
       <PasswordInput placeholder="Default border color" />
+
       <PasswordInput
         focusBorderColor="green.500"
         placeholder="Custom border color"
       />
+
+      <InputGroup.Root variant="flushed" focusBorderColor="green.500">
+        <InputGroup.Element>
+          <KeyIcon />
+        </InputGroup.Element>
+        <PasswordInput placeholder="Custom border color" />
+      </InputGroup.Root>
+
       <PasswordInput
         errorBorderColor="orange.500"
         invalid
         placeholder="Custom border color"
       />
+
+      <InputGroup.Root errorBorderColor="orange.500" invalid>
+        <InputGroup.Addon>
+          <KeyIcon />
+        </InputGroup.Addon>
+        <PasswordInput placeholder="Custom border color" />
+      </InputGroup.Root>
     </>
   )
 }

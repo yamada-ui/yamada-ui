@@ -3,8 +3,11 @@ import { a11y, fireEvent, render, screen } from "../../../test"
 
 describe("<NumberInput />", () => {
   test("NumberInput renders correctly", async () => {
-    const { container } = render(<NumberInput aria-label="Input number" />)
-    await a11y(container)
+    await a11y(<NumberInput aria-label="Input number" />)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(NumberInput.name).toBe("NumberInputRoot")
   })
 
   test("render input with props", async () => {

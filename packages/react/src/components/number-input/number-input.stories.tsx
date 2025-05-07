@@ -4,10 +4,11 @@ import { Controller, useForm } from "react-hook-form"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Button } from "../button"
+import { IconButton } from "../button"
 import { Field } from "../field"
-import { MinusIcon, PlusIcon } from "../icon"
-import { IconButton } from "../icon-button"
-import { Input } from "../input"
+import { For } from "../for"
+import { GaugeIcon, MinusIcon, PlusIcon } from "../icon"
+import { Input, InputGroup } from "../input"
 import { HStack, VStack } from "../stack"
 import { NumberInput, useNumberInput } from "./"
 
@@ -21,7 +22,7 @@ const meta: Meta<typeof NumberInput> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <NumberInput placeholder="basic" />
+  return <NumberInput placeholder="Basic" />
 }
 
 export const Size: Story = () => {
@@ -66,40 +67,28 @@ export const Variant: Story = () => {
   )
 }
 
-export const BorderColor: Story = () => {
-  return (
-    <>
-      <NumberInput disabled placeholder="default border color" />
-      <NumberInput
-        focusBorderColor="green.500"
-        placeholder="custom border color"
-      />
-      <NumberInput
-        errorBorderColor="orange.500"
-        invalid
-        placeholder="custom border color"
-      />
-    </>
-  )
-}
-
 export const DefaultValue: Story = () => {
-  return <NumberInput aria-label="Number input" defaultValue={18} />
+  return <NumberInput defaultValue={18} placeholder="Order quantity" />
 }
 
 export const MinMax: Story = () => {
   return (
-    <NumberInput aria-label="Number input" defaultValue={18} max={31} min={8} />
+    <NumberInput
+      defaultValue={18}
+      max={31}
+      min={8}
+      placeholder="Order quantity"
+    />
   )
 }
 
 export const Step: Story = () => {
   return (
     <NumberInput
-      aria-label="Number input"
       defaultValue={15}
       max={30}
       min={5}
+      placeholder="Order quantity"
       step={5}
     />
   )
@@ -108,8 +97,8 @@ export const Step: Story = () => {
 export const Precision: Story = () => {
   return (
     <NumberInput
-      aria-label="Number input"
       defaultValue={15}
+      placeholder="Order quantity"
       precision={2}
       step={0.2}
     />
@@ -119,10 +108,10 @@ export const Precision: Story = () => {
 export const DisabledClampValueOnBlur: Story = () => {
   return (
     <NumberInput
-      aria-label="Number input"
       clampValueOnBlur={false}
       defaultValue={15}
       max={30}
+      placeholder="Order quantity"
     />
   )
 }
@@ -130,11 +119,11 @@ export const DisabledClampValueOnBlur: Story = () => {
 export const DisabledKeepWithinRange: Story = () => {
   return (
     <NumberInput
-      aria-label="Number input"
       clampValueOnBlur={false}
       defaultValue={15}
       keepWithinRange={false}
       max={30}
+      placeholder="Order quantity"
     />
   )
 }
@@ -142,10 +131,16 @@ export const DisabledKeepWithinRange: Story = () => {
 export const Disabled: Story = () => {
   return (
     <>
-      <NumberInput variant="outline" disabled placeholder="outline" />
-      <NumberInput variant="filled" disabled placeholder="filled" />
-      <NumberInput variant="flushed" disabled placeholder="flushed" />
-      <NumberInput variant="unstyled" disabled placeholder="unstyled" />
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <NumberInput
+            key={index}
+            variant={variant}
+            disabled
+            placeholder={toTitleCase(variant)}
+          />
+        )}
+      </For>
 
       <Field.Root
         disabled
@@ -161,10 +156,16 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <NumberInput variant="outline" placeholder="outline" readOnly />
-      <NumberInput variant="filled" placeholder="filled" readOnly />
-      <NumberInput variant="flushed" placeholder="flushed" readOnly />
-      <NumberInput variant="unstyled" placeholder="unstyled" readOnly />
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <NumberInput
+            key={index}
+            variant={variant}
+            placeholder={toTitleCase(variant)}
+            readOnly
+          />
+        )}
+      </For>
 
       <Field.Root
         helperMessage="Please enter the quantity you wish to order."
@@ -180,10 +181,16 @@ export const Readonly: Story = () => {
 export const Invalid: Story = () => {
   return (
     <>
-      <NumberInput variant="outline" invalid placeholder="outline" />
-      <NumberInput variant="filled" invalid placeholder="filled" />
-      <NumberInput variant="flushed" invalid placeholder="flushed" />
-      <NumberInput variant="unstyled" invalid placeholder="unstyled" />
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <NumberInput
+            key={index}
+            variant={variant}
+            invalid
+            placeholder={toTitleCase(variant)}
+          />
+        )}
+      </For>
 
       <Field.Root
         errorMessage="Order quantity is required."
@@ -196,12 +203,75 @@ export const Invalid: Story = () => {
   )
 }
 
+export const Addon: Story = () => {
+  return (
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant, index) => (
+        <InputGroup.Root key={index} variant={variant}>
+          <InputGroup.Addon>
+            <GaugeIcon />
+          </InputGroup.Addon>
+          <NumberInput placeholder="Order quantity" />
+        </InputGroup.Root>
+      )}
+    </For>
+  )
+}
+
+export const Element: Story = () => {
+  return (
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant, index) => (
+        <InputGroup.Root key={index} variant={variant}>
+          <InputGroup.Element>
+            <GaugeIcon />
+          </InputGroup.Element>
+          <NumberInput placeholder="Order quantity" />
+        </InputGroup.Root>
+      )}
+    </For>
+  )
+}
+
+export const BorderColor: Story = () => {
+  return (
+    <>
+      <NumberInput disabled placeholder="Default border color" />
+
+      <NumberInput
+        focusBorderColor="green.500"
+        placeholder="Custom border color"
+      />
+
+      <InputGroup.Root variant="flushed" focusBorderColor="green.500">
+        <InputGroup.Element>
+          <GaugeIcon />
+        </InputGroup.Element>
+        <NumberInput placeholder="Custom border color" />
+      </InputGroup.Root>
+
+      <NumberInput
+        errorBorderColor="orange.500"
+        invalid
+        placeholder="Custom border color"
+      />
+
+      <InputGroup.Root errorBorderColor="orange.500" invalid>
+        <InputGroup.Element>
+          <GaugeIcon />
+        </InputGroup.Element>
+        <NumberInput placeholder="Custom border color" />
+      </InputGroup.Root>
+    </>
+  )
+}
+
 export const CustomStepper: Story = () => {
   return (
     <NumberInput
-      aria-label="Number input"
-      decrementProps={{ children: "-", overflow: "hidden", px: "xs" }}
-      incrementProps={{ children: "+", overflow: "hidden", px: "xs" }}
+      placeholder="Order quantity"
+      decrementProps={{ children: <MinusIcon /> }}
+      incrementProps={{ children: <PlusIcon /> }}
     />
   )
 }
@@ -230,23 +300,6 @@ export const CustomComponent: Story = () => {
         aria-label="Decrement"
       />
     </HStack>
-  )
-}
-
-export const StylingPlaceholder: Story = () => {
-  return (
-    <>
-      <NumberInput placeholder="default placeholder" />
-      <NumberInput
-        placeholder="custom placeholder"
-        _placeholder={{ color: "gray.500", opacity: 1 }}
-      />
-      <NumberInput
-        color="green.500"
-        placeholder="custom placeholder"
-        _placeholder={{ color: "inherit" }}
-      />
-    </>
   )
 }
 

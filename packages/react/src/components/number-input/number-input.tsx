@@ -1,68 +1,49 @@
-import type { FC, HTMLUIProps, PropGetter, ThemeProps } from "../../core"
-import type { FieldProps } from "../field"
-import type { UseInputBorderProps } from "../input"
+import type { FC, HTMLStyledProps, ThemeProps } from "../../core"
+import type { InputProps } from "../input"
 import type { NumberInputStyle } from "./number-input.style"
 import type { UseNumberInputProps } from "./use-number-input"
-import { createSlotComponent, ui } from "../../core"
-import { cx } from "../../utils"
-import { useFieldProps } from "../field"
+import { createSlotComponent } from "../../core"
+import { useGroupItemProps } from "../group"
 import { ChevronDownIcon, ChevronUpIcon } from "../icon"
-import { useInputBorder } from "../input"
+import { Input, InputGroup, useInputPropsContext } from "../input"
 import { numberInputStyle } from "./number-input.style"
 import { useNumberInput } from "./use-number-input"
 
 export interface NumberInputProps
   extends Omit<
-      HTMLUIProps<"input">,
-      | "defaultValue"
-      | "max"
-      | "min"
-      | "onChange"
-      | "onInvalid"
-      | "size"
-      | "step"
-      | "value"
+      InputProps,
+      keyof ThemeProps<NumberInputStyle> | keyof UseNumberInputProps
     >,
-    UseInputBorderProps,
     ThemeProps<NumberInputStyle>,
-    UseNumberInputProps,
-    FieldProps {
+    UseNumberInputProps {
   /**
-   * If `true`, display the addon for the number input.
+   * The props for the control element.
    */
-  stepper?: boolean
+  controlProps?: NumberInputControlProps
   /**
-   * Props for addon component.
+   * The props for the decrement button element.
    */
-  addonProps?: HTMLUIProps
+  decrementProps?: NumberInputDecrementButtonProps
   /**
-   * Props for container element.
+   * The props for the end element.
    */
-  containerProps?: HTMLUIProps
+  elementProps?: InputGroup.ElementProps
   /**
-   * Props for decrement component.
+   * The props for the increment button element.
    */
-  decrementProps?: NumberDecrementStepperProps
+  incrementProps?: NumberInputIncrementButtonProps
   /**
-   * Props for increment component.
+   * The props for the root element.
    */
-  incrementProps?: NumberIncrementStepperProps
-}
-
-interface NumberInputContext {
-  getDecrementProps: PropGetter<"button">
-  getIncrementProps: PropGetter<"button">
-  getInputProps: PropGetter<"input">
+  rootProps?: InputGroup.RootProps
 }
 
 export const {
-  ComponentContext,
   PropsContext: NumberInputPropsContext,
-  useComponentContext,
   usePropsContext: useNumberInputPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<NumberInputProps, NumberInputStyle, NumberInputContext>(
+} = createSlotComponent<NumberInputProps, NumberInputStyle>(
   "number-input",
   numberInputStyle,
 )
@@ -70,133 +51,78 @@ export const {
 /**
  * `NumberInput` is a component used to obtain numeric input from the user.
  *
- * @see Docs https://yamada-ui.com/components/forms/number-input
+ * @see https://yamada-ui.com/components/number-input
  */
 export const NumberInput = withProvider<"input", NumberInputProps>(
   ({
     className,
     css,
-    stepper = true,
-    addonProps,
-    containerProps,
+    colorScheme,
+    controlProps,
     decrementProps,
+    elementProps,
     incrementProps,
+    rootProps,
     ...props
   }) => {
-    const {
-      props: { errorBorderColor, focusBorderColor, vars: varsProp, ...rest },
-      ariaProps,
-      dataProps,
-      eventProps,
-    } = useFieldProps(props)
-    const vars = useInputBorder(varsProp, {
-      errorBorderColor,
-      focusBorderColor,
-    })
-    const {
-      props: computedProps,
-      getDecrementProps,
-      getIncrementProps,
-      getInputProps,
-    } = useNumberInput({
-      "aria-invalid": ariaProps["aria-invalid"],
-      ...eventProps,
-      ...rest,
-    })
-
-    const fieldProps: any = {
-      ...ariaProps,
-      ...dataProps,
-      ...eventProps,
-    }
+    const [groupItemProps, rest] = useGroupItemProps(props)
+    const { getDecrementProps, getIncrementProps, getInputProps } =
+      useNumberInput(rest)
 
     return (
-      <ComponentContext
-        value={{ getDecrementProps, getIncrementProps, getInputProps }}
+      <InputGroup.Root
+        className={className}
+        css={css}
+        colorScheme={colorScheme}
+        {...groupItemProps}
+        {...rootProps}
       >
-        <ui.div
-          className={className}
-          css={css}
-          role="group"
-          {...containerProps}
-        >
-          <NumberInputField
-            vars={vars}
-            {...getInputProps({ ...fieldProps, ...computedProps })}
-          />
+        <NumberInputField {...getInputProps()} />
 
-          {stepper ? (
-            <NumberInputAddon {...fieldProps} {...addonProps}>
-              <NumberIncrementStepper {...fieldProps} {...incrementProps} />
-              <NumberDecrementStepper {...fieldProps} {...decrementProps} />
-            </NumberInputAddon>
-          ) : null}
-        </ui.div>
-      </ComponentContext>
+        <InputGroup.Element clickable {...elementProps}>
+          <NumberInputControl {...controlProps}>
+            <NumberInputIncrementButton
+              {...getIncrementProps(incrementProps)}
+            />
+            <NumberInputDecrementButton
+              {...getDecrementProps(decrementProps)}
+            />
+          </NumberInputControl>
+        </InputGroup.Element>
+      </InputGroup.Root>
     )
   },
   "root",
-)()
+)(() => {
+  return useInputPropsContext()
+})
 
-interface NumberInputFieldProps extends Omit<HTMLUIProps<"input">, "size"> {}
+interface NumberInputFieldProps extends InputProps {}
 
 const NumberInputField = withContext<"input", NumberInputFieldProps>(
-  "input",
+  Input,
   "field",
-)()
+)({ "data-group-propagate": "" })
 
-type NumberInputAddonProps = HTMLUIProps
+interface NumberInputControlProps extends InputGroup.AddonProps {}
 
-const NumberInputAddon = withContext<"div", NumberInputAddonProps>(
+const NumberInputControl = withContext<"div", NumberInputControlProps>(
   "div",
-  "addon",
+  "control",
 )()
 
-type NumberInputStepperProps = HTMLUIProps<"button">
+type NumberInputIncrementButtonProps = HTMLStyledProps<"button">
 
-const NumberInputStepper = withContext<"button", NumberInputStepperProps>(
-  "button",
-  "stepper",
-)()
+const NumberInputIncrementButton: FC<NumberInputIncrementButtonProps> =
+  withContext<"button", NumberInputIncrementButtonProps>("button", [
+    "button",
+    "increment",
+  ])({ children: <ChevronUpIcon /> })
 
-type NumberIncrementStepperProps = HTMLUIProps<"button">
+type NumberInputDecrementButtonProps = HTMLStyledProps<"button">
 
-const NumberIncrementStepper: FC<NumberIncrementStepperProps> = ({
-  className,
-  children,
-  ...rest
-}) => {
-  const { getIncrementProps } = useComponentContext()
-
-  return (
-    <NumberInputStepper
-      {...getIncrementProps({
-        className: cx("ui-number-input__stepper--up", className),
-        ...rest,
-      })}
-    >
-      {children ?? <ChevronUpIcon fontSize="sm" />}
-    </NumberInputStepper>
-  )
-}
-
-type NumberDecrementStepperProps = HTMLUIProps<"button">
-
-const NumberDecrementStepper: FC<NumberDecrementStepperProps> = ({
-  className,
-  children,
-  ...rest
-}) => {
-  const { getDecrementProps } = useComponentContext()
-
-  return (
-    <NumberInputStepper
-      {...getDecrementProps({
-        className: cx("ui-number-input__stepper--down", className),
-        ...rest,
-      })}
-    >
-      {children ?? <ChevronDownIcon fontSize="sm" />}
-    </NumberInputStepper>
-  )
-}
+const NumberInputDecrementButton: FC<NumberInputDecrementButtonProps> =
+  withContext<"button", NumberInputDecrementButtonProps>("button", [
+    "button",
+    "decrement",
+  ])({ children: <ChevronDownIcon /> })

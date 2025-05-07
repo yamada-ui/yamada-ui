@@ -1,5 +1,4 @@
-import type { ReactNode } from "react"
-import type { HTMLProps } from "../../core"
+import type { CSSProperties, DataAttributes, ReactNode } from "react"
 import { cloneElement, useMemo } from "react"
 import { dataAttr, isNull, isUndefined } from "../../utils"
 import { getValidChildren } from "../../utils"
@@ -41,7 +40,11 @@ export const useGroup = (children?: ReactNode) => {
 
 export type UseGroupReturn = ReturnType<typeof useGroup>
 
-export const useGroupItemProps = <Y extends HTMLProps>({
+interface Props extends DataAttributes {
+  style?: CSSProperties
+}
+
+export const useGroupItemProps = <Y extends Props>({
   style: {
     "--group-count": groupCount,
     "--group-index": groupIndex,

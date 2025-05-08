@@ -8,7 +8,7 @@ import { Button } from "../button"
 import { Center } from "../center"
 import { Field } from "../field"
 import { For } from "../for"
-import { MailIcon, SearchIcon } from "../icon"
+import { MailIcon, PhoneIcon, SearchIcon } from "../icon"
 import { VStack } from "../stack"
 import { Input, InputGroup } from "./"
 
@@ -189,20 +189,15 @@ export const Invalid: Story = () => {
 export const Addon: Story = () => {
   return (
     <>
-      <InputGroup.Root>
-        <InputGroup.Addon>+81</InputGroup.Addon>
-        <Input type="tel" placeholder="Your phone number" />
-      </InputGroup.Root>
-
-      <InputGroup.Root variant="filled">
-        <InputGroup.Addon>+81</InputGroup.Addon>
-        <Input type="tel" placeholder="Your phone number" />
-      </InputGroup.Root>
-
-      <InputGroup.Root variant="flushed">
-        <InputGroup.Addon>+81</InputGroup.Addon>
-        <Input type="tel" placeholder="Your phone number" />
-      </InputGroup.Root>
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant}>
+            <InputGroup.Addon>+81</InputGroup.Addon>
+            <Input type="tel" placeholder="Your phone number" />
+            <InputGroup.Addon>+81</InputGroup.Addon>
+          </InputGroup.Root>
+        )}
+      </For>
 
       <InputGroup.Root>
         <InputGroup.Addon>https://</InputGroup.Addon>
@@ -216,21 +211,39 @@ export const Addon: Story = () => {
 export const Element: Story = () => {
   return (
     <>
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant}>
+            <InputGroup.Element>
+              <PhoneIcon />
+            </InputGroup.Element>
+            <Input type="tel" placeholder="Your phone number" />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <InputGroup.Root>
-        <InputGroup.Element w="auto">https://</InputGroup.Element>
+        <InputGroup.Element px="3">https://</InputGroup.Element>
         <Input placeholder="Search contacts" ps="4.75rem" />
         <InputGroup.Addon>.com</InputGroup.Addon>
       </InputGroup.Root>
 
       <InputGroup.Root
         as="form"
+        role="search"
         onSubmit={(ev) => {
           ev.preventDefault()
         }}
       >
         <Input type="search" name="q" placeholder="Search user names" />
-        <InputGroup.Element clickable px="2">
-          <Center as="button" focusVisibleRing="outside" p="0.5" rounded="xs">
+        <InputGroup.Element clickable>
+          <Center
+            as="button"
+            aria-label="Search"
+            focusVisibleRing="outside"
+            p="0.5"
+            rounded="xs"
+          >
             <SearchIcon fontSize="xl" />
           </Center>
         </InputGroup.Element>
@@ -243,12 +256,26 @@ export const BorderColor: Story = () => {
   return (
     <>
       <Input placeholder="Default border color" />
+
       <Input focusBorderColor="green.500" placeholder="Custom border color" />
+
+      <InputGroup.Root variant="flushed" focusBorderColor="green.500">
+        <InputGroup.Element>
+          <PhoneIcon />
+        </InputGroup.Element>
+        <Input type="tel" placeholder="Custom border color" />
+      </InputGroup.Root>
+
       <Input
         errorBorderColor="orange.500"
         invalid
         placeholder="Custom border color"
       />
+
+      <InputGroup.Root errorBorderColor="orange.500" invalid>
+        <InputGroup.Addon>+81</InputGroup.Addon>
+        <Input type="tel" placeholder="Custom border color" />
+      </InputGroup.Root>
     </>
   )
 }
@@ -257,11 +284,13 @@ export const Placeholder: Story = () => {
   return (
     <>
       <Input placeholder="Default placeholder" />
+
       <Input
         placeholder="Custom placeholder"
         _dark={{ _placeholder: { color: "blue.500", opacity: 1 } }}
         _placeholder={{ color: "blue.500", opacity: 1 }}
       />
+
       <Input
         color="green.500"
         placeholder="Custom placeholder"

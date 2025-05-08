@@ -76,10 +76,10 @@ return (
 
 ### 無効化する
 
-無効化する場合は、`isDisabled`を`true`に設定します。
+無効化する場合は、`disabled`を`true`に設定します。
 
 ```tsx functional=true
-const { onPointerDown, ripples, onClear } = useRipple({ isDisabled: true })
+const { onPointerDown, ripples, onClear } = useRipple({ disabled: true })
 
 return (
   <Box
@@ -101,7 +101,7 @@ return (
 )
 ```
 
-または、`Ripple`コンポーネントに`isDisabled`を`true`することで同じように無効化できます。
+または、`Ripple`コンポーネントに`disabled`を`true`することで同じように無効化できます。
 
 ```tsx functional=true
 const { onPointerDown, ripples, onClear } = useRipple()
@@ -121,7 +121,7 @@ return (
   >
     <Text>Button</Text>
 
-    <Ripple isDisabled ripples={ripples} onClear={onClear} />
+    <Ripple disabled ripples={ripples} onClear={onClear} />
   </Box>
 )
 ```

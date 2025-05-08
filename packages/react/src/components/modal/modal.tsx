@@ -1,9 +1,13 @@
 import type { PropsWithChildren, ReactNode } from "react"
 import type { FC, HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ButtonProps } from "../button"
-import type { CloseButtonProps } from "../close-button"
+import type { CloseButtonProps } from "../button"
 import type { FocusLockProps } from "../focus-lock"
-import type { HTMLMotionProps, MotionTransitionProps } from "../motion"
+import type {
+  HTMLMotionProps,
+  HTMLMotionPropsWithoutAs,
+  MotionTransitionProps,
+} from "../motion"
 import type { PortalProps } from "../portal"
 import type { ModalStyle } from "./modal.style"
 import type { UseModalProps, UseModalReturn } from "./use-modal"
@@ -13,10 +17,10 @@ import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, styled } from "../../core"
 import { findChildren, getValidChildren, wrapOrPassProps } from "../../utils"
 import { Button } from "../button"
-import { CloseButton } from "../close-button"
+import { CloseButton } from "../button"
 import { fadeScaleVariants, fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { Portal } from "../portal"
 import { slideFadeVariants } from "../slide"
 import { Slot } from "../slot"
@@ -103,7 +107,7 @@ export const {
 /**
  * `Modal` is a component that is displayed over the main content to focus the user's attention solely on the information.
  *
- * @see Docs https://yamada-ui.com/components/overlay/modal
+ * @see https://yamada-ui.com/components/overlay/modal
  */
 export const ModalRoot = withProvider<"div", ModalRootProps>(
   ({
@@ -249,7 +253,7 @@ export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
   const { animationScheme, duration, getOverlayProps } = useModalContext()
 
   return (
-    <Motion
+    <motion.div
       custom={{ duration }}
       {...(animationScheme !== "none"
         ? {
@@ -259,7 +263,7 @@ export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
             variants: fadeVariants,
           }
         : {})}
-      {...(getOverlayProps(props as HTMLProps) as HTMLMotionProps)}
+      {...(getOverlayProps(props as HTMLProps) as HTMLMotionPropsWithoutAs)}
     />
   )
 }, "overlay")()
@@ -321,17 +325,16 @@ export const ModalContent = withContext<"section", ModalContentProps>(
     )
 
     return (
-      <Motion
-        as="section"
+      <motion.section
         {...getAnimationProps(animationScheme, duration)}
         {...(getContentProps(
           rest as HTMLProps<"section">,
-        ) as HTMLMotionProps<"section">)}
+        ) as HTMLMotionPropsWithoutAs<"section">)}
       >
         {customCloseButton ?? (withCloseButton ? <ModalCloseButton /> : null)}
 
         {cloneChildren}
-      </Motion>
+      </motion.section>
     )
   },
   "content",

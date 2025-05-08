@@ -5,7 +5,7 @@ import type { TextareaStyle } from "./textarea.style"
 import type { UseTextareaProps } from "./use-textarea"
 import { createComponent } from "../../core"
 import { useFieldProps } from "../field"
-import { useInputBorder } from "../input"
+import { useInputBorder, useInputPropsContext } from "../input"
 import { textareaStyle } from "./textarea.style"
 import { useTextarea } from "./use-textarea"
 
@@ -25,26 +25,33 @@ export const {
 /**
  * `Textarea` is a component used to obtain multi-line text input.
  *
- * @see Docs https://yamada-ui.com/components/textarea
+ * @see https://yamada-ui.com/components/textarea
  */
-export const Textarea = withContext("textarea")({ rows: 2 }, (props) => {
-  const {
-    props: { errorBorderColor, focusBorderColor, vars: varsProp, ...rest },
-    ariaProps,
-    dataProps,
-    eventProps,
-  } = useFieldProps(props)
-  const { getTextareaProps } = useTextarea(rest)
-  const vars = useInputBorder(varsProp, {
-    errorBorderColor,
-    focusBorderColor,
-  })
+export const Textarea = withContext("textarea")(
+  () => {
+    const inputProps = useInputPropsContext()
 
-  return {
-    vars,
-    ...ariaProps,
-    ...dataProps,
-    ...eventProps,
-    ...getTextareaProps(),
-  }
-})
+    return { rows: 2, ...inputProps }
+  },
+  (props) => {
+    const {
+      props: { errorBorderColor, focusBorderColor, vars: varsProp, ...rest },
+      ariaProps,
+      dataProps,
+      eventProps,
+    } = useFieldProps(props)
+    const { getTextareaProps } = useTextarea(rest)
+    const vars = useInputBorder(varsProp, {
+      errorBorderColor,
+      focusBorderColor,
+    })
+
+    return {
+      vars,
+      ...ariaProps,
+      ...dataProps,
+      ...eventProps,
+      ...getTextareaProps(),
+    }
+  },
+)

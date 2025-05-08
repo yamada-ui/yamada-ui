@@ -1,6 +1,5 @@
 import type { KeyboardEvent, KeyboardEventHandler } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
-import type { AccordionItemProps } from "./accordion"
 import { useCallback, useEffect, useId, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendant } from "../../hooks/use-descendant"
@@ -13,7 +12,6 @@ import {
   isArray,
   mergeRefs,
 } from "../../utils"
-import { useAccordionContext } from "./accordion"
 
 export const {
   DescendantsContext: AccordionDescendantsContext,
@@ -21,9 +19,16 @@ export const {
   useDescendants: useAccordionDescendants,
 } = createDescendant<HTMLButtonElement>()
 
+interface AccordionContext
+  extends Omit<UseAccordionReturn, "descendants" | "getRootProps"> {}
+
+export const [AccordionContext, useAccordionContext] =
+  createContext<AccordionContext>({
+    name: "AccordionContext",
+  })
+
 interface AccordionItemContext
-  extends Omit<UseAccordionItemReturn, "getItemProps">,
-    Pick<AccordionItemProps, "icon"> {}
+  extends Omit<UseAccordionItemReturn, "getItemProps"> {}
 
 export const [AccordionItemContext, useAccordionItemContext] =
   createContext<AccordionItemContext>({
@@ -265,7 +270,7 @@ export const useAccordionItem = ({
 
   const getIconProps: PropGetter<"svg"> = useCallback(
     (props) => ({
-      "aria-disabled": dataAttr(disabled),
+      "aria-disabled": ariaAttr(disabled),
       "aria-expanded": open,
       "aria-hidden": true,
       role: "presentation",

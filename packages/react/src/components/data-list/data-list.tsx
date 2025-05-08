@@ -71,7 +71,7 @@ export const {
 /**
  * `DataList` is used to display a list of data items.
  *
- * @see Docs https://yamada-ui.com/components/data-list
+ * @see https://yamada-ui.com/components/data-list
  */
 export const DataListRoot = withProvider(
   ({

@@ -20,7 +20,9 @@ interface AlertContext {
   status: StatusScheme
 }
 
-interface AlertRootOptions {
+export interface AlertRootProps
+  extends HTMLStyledProps,
+    ThemeProps<AlertStyle> {
   /**
    * The status of the alert.
    *
@@ -28,11 +30,6 @@ interface AlertRootOptions {
    */
   status?: StatusScheme
 }
-
-export interface AlertRootProps
-  extends HTMLStyledProps,
-    ThemeProps<AlertStyle>,
-    AlertRootOptions {}
 
 export const {
   ComponentContext: AlertContext,
@@ -51,7 +48,7 @@ export const {
 /**
  * `Alert` is a component that conveys information to the user.
  *
- * @see Docs https://yamada-ui.com/components/alert
+ * @see https://yamada-ui.com/components/alert
  */
 export const AlertRoot = withProvider<"div", AlertRootProps>(
   ({ status, ...props }) => {
@@ -64,10 +61,7 @@ export const AlertRoot = withProvider<"div", AlertRootProps>(
     )
   },
   "root",
-)(({ colorScheme, status = "info" }) => ({
-  colorScheme: colorScheme ?? status,
-  status,
-}))
+)({ colorScheme: "info", status: "info" })
 
 export interface AlertIconProps extends IconProps {}
 

@@ -47,7 +47,7 @@ export const Size: Story = () => {
   )
 }
 
-export const Variants: Story = () => {
+export const Variant: Story = () => {
   return (
     <PropsTable
       variant="column"

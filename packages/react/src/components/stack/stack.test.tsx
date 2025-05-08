@@ -15,9 +15,8 @@ describe("<Stack />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Stack.displayName).toBe("Stack")
-    expect(Stack.__ui__).toBe("Stack")
   })
 
   test("sets `className` correctly", () => {

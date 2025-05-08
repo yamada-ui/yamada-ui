@@ -1,18 +1,22 @@
-import type { MatchMediaMock } from "@yamada-ui/test"
 import type { StyledTheme } from "../../core"
-import { matchMedia } from "@yamada-ui/test"
+import MatchMediaMock from "vitest-matchmedia-mock"
 import { renderHook, styledTheme } from "../../../test"
 import { noop } from "../../utils"
 import { getBreakpointValue, useBreakpointValue } from "./use-breakpoint-value"
 
 describe("useBreakpointValue", () => {
-  let mock: MatchMediaMock
+  let matchMediaMock: MatchMediaMock
 
   beforeAll(() => {
-    mock = matchMedia()
+    matchMediaMock = new MatchMediaMock()
   })
+
   afterEach(() => {
-    mock.clear()
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
   })
 
   test("Returns the value of the current breakpoint when base is md", () => {
@@ -23,13 +27,18 @@ describe("useBreakpointValue", () => {
 })
 
 describe("getBreakpointValue", () => {
-  let mock: MatchMediaMock
+  let matchMediaMock: MatchMediaMock
 
   beforeAll(() => {
-    mock = matchMedia()
+    matchMediaMock = new MatchMediaMock()
   })
+
   afterEach(() => {
-    mock.clear()
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
   })
 
   test("Returns the value of base", () => {

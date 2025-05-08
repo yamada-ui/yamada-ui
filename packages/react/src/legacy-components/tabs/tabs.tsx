@@ -125,7 +125,7 @@ export interface TabsProps
 /**
  * `Tabs` is a component for switching between different display areas.
  *
- * @see Docs https://yamada-ui.com/components/disclosure/tabs
+ * @see https://yamada-ui.com/components/disclosure/tabs
  */
 export const Tabs = forwardRef<TabsProps, "div">(
   ({ align = "start", isFitted, fitted = isFitted, ...props }, ref) => {

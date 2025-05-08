@@ -31,12 +31,16 @@ export function transformInterpolation(
 }
 
 export function getVar(theme: StyledTheme<UsageTheme>) {
-  return function (token: string) {
+  return function (token: string, fallback?: string) {
     const prefix = theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
 
     return token.startsWith("--")
-      ? `var(${token})`
-      : `var(--${prefix}-${token})`
+      ? fallback
+        ? `var(${token}, ${fallback})`
+        : `var(${token})`
+      : fallback
+        ? `var(--${prefix}-${token}, ${fallback})`
+        : `var(--${prefix}-${token})`
   }
 }
 
@@ -49,12 +53,12 @@ export function getVarName(theme: StyledTheme<UsageTheme>) {
 }
 
 export function getColorSchemeVar(theme: StyledTheme<UsageTheme>) {
-  return function (value: any) {
+  return function (value: any, fallback?: string) {
     if (!isString(value)) return value
 
     const [, token] = value.split(".")
 
-    return getVar(theme)(`colorScheme-${token}`)
+    return getVar(theme)(`colorScheme-${token}`, fallback)
   }
 }
 
@@ -126,7 +130,9 @@ export function getCreateThemeVars(
             } else if (value in cssMap && cssMap[value]?.ref) {
               return cssMap[value].ref
             } else {
-              return fallbackValue || `var(--${prefix}-${value})`
+              return fallbackValue
+                ? `var(--${prefix}-${value}, ${fallbackValue})`
+                : `var(--${prefix}-${value})`
             }
           }
         })

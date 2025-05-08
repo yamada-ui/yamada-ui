@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/react",
   "type": "module",
-  "version": "1.7.3",
+  "version": "1.7.6",
   "description": "React UI components of the Yamada, by the Yamada, for the Yamada built with React and Emotion",
   "keywords": [
     "yamada",
@@ -46,8 +46,8 @@
     "test:dev": "vitest --coverage --watch --ui",
     "test:ci": "vitest --coverage",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config",
-    "format": "prettier --ignore-path ../../.prettierignore --check . --cache",
+    "lint": "eslint . --max-warnings=0 --cache",
+    "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
@@ -68,7 +68,8 @@
     "embla-carousel": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
     "framesync": "6.1.2",
-    "lucide-react": "0.475.0",
+    "intl-messageformat": "^10.7.16",
+    "lucide-react": "0.483.0",
     "motion": "^12.4.7",
     "react-dropzone-esm": "^15.2.0",
     "react-fast-compare": "^3.2.2",

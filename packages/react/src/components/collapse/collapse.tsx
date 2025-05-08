@@ -1,7 +1,7 @@
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
-  MotionProps,
+  HTMLMotionProps,
   MotionTransitionVariants,
   WithTransitionProps,
 } from "../motion"
@@ -10,7 +10,7 @@ import { AnimatePresence } from "motion/react"
 import { useEffect, useMemo, useState } from "react"
 import { createComponent } from "../../core"
 import { createdDom, isNumeric } from "../../utils"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { createTransition } from "../motion"
 import { collapseStyle } from "./collapse.style"
 
@@ -48,7 +48,7 @@ const variants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface CollapseProps
-  extends WithTransitionProps<MotionProps>,
+  extends WithTransitionProps<HTMLMotionProps>,
     ThemeProps<CollapseStyle> {
   /**
    * If `true`, the opacity of the content will be animated.
@@ -79,7 +79,7 @@ export const {
 /**
  * `Collapse` is a component that allows you to expand or collapse an element for display.
  *
- * @see Docs https://yamada-ui.com/components/collapse
+ * @see https://yamada-ui.com/components/collapse
  */
 export const Collapse = withContext(
   ({
@@ -158,7 +158,7 @@ export const Collapse = withContext(
     return (
       <AnimatePresence custom={custom} initial={false}>
         {open ? (
-          <Motion
+          <motion.div
             style={{ overflow: "hidden", ...style }}
             animate={animate}
             custom={custom}

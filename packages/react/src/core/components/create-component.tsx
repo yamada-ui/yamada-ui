@@ -11,7 +11,7 @@ import type {
   As,
   DOMElement,
   FunctionComponent,
-  HTMLUIProps,
+  HTMLStyledProps,
   Component as OriginalComponent,
 } from "./index.types"
 import { Fragment } from "react"
@@ -22,12 +22,12 @@ import {
   isFunction,
   isObject,
   isString,
-  runIfFunc,
+  runIfFn,
   toArray,
   toCamelCase,
   toPascalCase,
 } from "../../utils"
-import { ui } from "../factory"
+import { styled } from "../factory"
 import { chainProps, mergeProps } from "./props"
 import {
   getSlotClassName,
@@ -54,7 +54,7 @@ export type ComponentSlot<Y extends number | string | symbol> =
   | Y
   | { name: string; slot: [Y, Y] | Y }
 
-export type InitialProps<Y extends Dict = Dict> = SuperProps<Y>
+export type InitialProps<Y extends Dict = Dict> = (() => any) | Y
 export type SuperProps<Y extends Dict = Dict> = ((props: Y) => any) | Y
 
 export type SuperWithoutThemeProps<
@@ -91,7 +91,7 @@ function createProxyComponent<
   if (el === "fragment") el = Fragment
 
   if (shouldStyleProps || isString(el)) {
-    const ProxyComponent = ui(el as As, options)
+    const ProxyComponent = styled(el as As, options)
 
     ProxyComponent.displayName = "ProxyComponent"
 
@@ -101,6 +101,16 @@ function createProxyComponent<
 
     return el as FC<M>
   }
+}
+
+function withDisplayName<
+  Y extends AsWithFragment = AsWithFragment,
+  M extends object = {},
+>(Component: FC<M>, displayName: string) {
+  Object.defineProperty(Component, "name", { value: displayName })
+  Object.defineProperty(Component, "displayName", { value: displayName })
+
+  return Component as Component<Y, M>
 }
 
 function getSlotCSS<Y extends number | string | symbol>(
@@ -206,7 +216,7 @@ export function createComponent<
     const ProxyComponent = createProxyComponent(el, options)
 
     return function (...superProps: SuperProps<H>[]) {
-      const Component = (props: H) => {
+      return withDisplayName<D, H>((props) => {
         const mergedProps = chainProps<any>(...superProps)()(props)
 
         return (
@@ -215,12 +225,7 @@ export function createComponent<
             className={cx(className, mergedProps.className)}
           />
         )
-      }
-
-      Component.displayName = displayName
-      Component.__ui__ = displayName
-
-      return Component as Component<D, H>
+      }, displayName)
     }
   }
 
@@ -245,9 +250,9 @@ export function createComponent<
       initialProps?: InitialProps<H>,
       ...superProps: SuperWithoutThemeProps<H, M, R>[]
     ) {
-      const Component = (props: H) => {
+      return withDisplayName<D, H>((props) => {
         const computedProps = mergeProps(
-          runIfFunc(initialProps, props) ?? {},
+          runIfFn(initialProps) ?? {},
           props,
         )() as H
         const mergedProps = useComponentProps(computedProps, {
@@ -258,12 +263,7 @@ export function createComponent<
         const rest = chainProps<any>(...toArray(superProps))()(mergedProps)
 
         return <ProxyComponent {...rest} />
-      }
-
-      Component.displayName = displayName
-      Component.__ui__ = displayName
-
-      return Component as Component<D, H>
+      }, displayName)
     }
   }
 
@@ -368,7 +368,7 @@ export function createSlotComponent<
     if (className) classNameMap.set(slotKey, className)
 
     return function (...superProps: SuperProps<R>[]) {
-      const Component = (props: R) => {
+      return withDisplayName<H, R>((props) => {
         const mergedProps = chainProps(...superProps)()(props)
 
         return (
@@ -377,12 +377,7 @@ export function createSlotComponent<
             className={cx(className, mergedProps.className)}
           />
         )
-      }
-
-      Component.displayName = displayName
-      Component.__ui__ = displayName
-
-      return Component as Component<H, R>
+      }, displayName)
     }
   }
 
@@ -414,11 +409,8 @@ export function createSlotComponent<
       initialProps?: InitialProps<R>,
       ...superProps: SuperWithoutThemeProps<R, M, T>[]
     ) {
-      const Component = (props: R) => {
-        const computedProps = mergeProps(
-          runIfFunc(initialProps, props) ?? {},
-          props,
-        )()
+      return withDisplayName<H, R>((props) => {
+        const computedProps = mergeProps(runIfFn(initialProps) ?? {}, props)()
         const [context, mergedProps] = useRootComponentProps(
           computedProps,
           slot,
@@ -435,18 +427,13 @@ export function createSlotComponent<
             <ProxyComponent {...rest} />
           </StyleContext>
         )
-      }
-
-      Component.displayName = displayName
-      Component.__ui__ = displayName
-
-      return Component as Component<H, R>
+      }, displayName)
     }
   }
 
   function withContext<
     H extends AsWithFragment = "div",
-    R extends Dict = H extends DOMElement ? HTMLUIProps<H> : Dict,
+    R extends Dict = H extends DOMElement ? HTMLStyledProps<H> : Dict,
   >(
     el: FC<R> | H,
     slot?: ComponentSlot<ComponentSlotName<M>>,
@@ -468,11 +455,8 @@ export function createSlotComponent<
       initialProps?: InitialProps<R>,
       ...superProps: SuperProps<R>[]
     ) {
-      const Component = (props: R) => {
-        const computedProps = mergeProps(
-          runIfFunc(initialProps, props) ?? {},
-          props,
-        )()
+      return withDisplayName<H, R>((props) => {
+        const computedProps = mergeProps(runIfFn(initialProps) ?? {}, props)()
         const mergedProps = useSlotComponentProps(computedProps, slot, {
           className,
           withContext,
@@ -480,12 +464,7 @@ export function createSlotComponent<
         const rest = chainProps(...superProps)()(mergedProps)
 
         return <ProxyComponent {...rest} />
-      }
-
-      Component.displayName = displayName
-      Component.__ui__ = displayName
-
-      return Component as Component<H, R>
+      }, displayName)
     }
   }
 

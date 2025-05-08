@@ -199,13 +199,13 @@ return (
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <Rating isDisabled defaultValue={3} />
+  <Rating disabled defaultValue={3} />
 
-  <Fieldset isDisabled legend="How satisfied are you with Yamada UI?">
+  <Fieldset disabled legend="How satisfied are you with Yamada UI?">
     <Rating defaultValue={3} />
   </Fieldset>
 </VStack>
@@ -213,13 +213,13 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <Rating isReadOnly defaultValue={3} />
+  <Rating readOnly defaultValue={3} />
 
-  <Fieldset isReadOnly legend="How satisfied are you with Yamada UI?">
+  <Fieldset readOnly legend="How satisfied are you with Yamada UI?">
     <Rating defaultValue={3} />
   </Fieldset>
 </VStack>
@@ -252,7 +252,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.rating}
+      invalid={!!errors.rating}
       legend="How satisfied are you with Yamada UI?"
       errorMessage={errors.rating ? errors.rating.message : undefined}
     >

@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react"
 import { useState } from "react"
-import { isNull, isUndefined, runIfFunc, useCallbackRef } from "../../utils"
+import { isNull, isUndefined, runIfFn, useCallbackRef } from "../../utils"
 
 interface UseControllableStateMethods<Y> {
   onChange?: (value: Y) => void
@@ -41,12 +41,12 @@ export function useControllableState<Y>({
   const onUpdate = useCallbackRef(onUpdateProp)
 
   const [defaultValue, setDefaultValue] = useState(defaultValueProp)
-  const controlled = value !== undefined
+  const controlled = !isUndefined(value)
   const resolvedValue = controlled ? value : defaultValue
 
   const setValue = useCallbackRef(
     (next: SetStateAction<Y>) => {
-      const nextValue = runIfFunc(next, resolvedValue as Y)
+      const nextValue = runIfFn(next, resolvedValue as Y)
 
       if (!onUpdate(resolvedValue as Y, nextValue)) return
 

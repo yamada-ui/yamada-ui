@@ -188,18 +188,15 @@ export function getObject(
   obj: Dict | undefined,
   path: number | string,
   fallback?: any,
-  i?: number,
 ) {
   const keys = isString(path)
     ? path.split(/\[(.*?)\]|\./).filter(Boolean)
     : [path]
 
-  for (i = 0; i < keys.length; i += 1) {
+  for (const key of keys) {
     if (!obj) break
 
-    const key = keys[i]
-
-    obj = key ? obj[key] : undefined
+    obj = obj[key]
   }
 
   return obj === undefined ? fallback : obj
@@ -212,7 +209,6 @@ export function memoizeObject(func: typeof getObject) {
     obj: Dict,
     path: number | string,
     fallback?: any,
-    i?: number,
   ): Y {
     if (isUndefined(obj)) return func(obj, path, fallback)
 
@@ -222,7 +218,7 @@ export function memoizeObject(func: typeof getObject) {
 
     if (map.has(path)) return map.get(path)
 
-    const value = func(obj, path, fallback, i)
+    const value = func(obj, path, fallback)
 
     map.set(path, value)
 
@@ -234,20 +230,10 @@ export function memoizeObject(func: typeof getObject) {
 
 export const getMemoizedObject = memoizeObject(getObject)
 
-export function assignAfter(target: Dict, ...sources: any[]) {
-  const result: Dict = { ...target }
-
-  for (const nextSource of sources) {
-    if (nextSource == null) continue
-
-    for (const nextKey in nextSource) {
-      if (!Object.prototype.hasOwnProperty.call(nextSource, nextKey)) continue
-
-      if (nextKey in result) delete result[nextKey]
-
-      result[nextKey] = nextSource[nextKey]
-    }
+export function wrapWithKey<T>(obj: T, key?: string) {
+  if (key) {
+    return { [key]: obj }
+  } else {
+    return obj
   }
-
-  return result
 }

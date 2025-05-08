@@ -19,12 +19,16 @@ const toGroup = <Y extends string>(selector: Y) =>
   >
 
 const toPeer = <Y extends string>(selector: Y) =>
-  ["[data-peer]", ".peer"]
-    .flatMap((prefix) => [
+  [
+    ...["[data-peer]", ".peer"].flatMap((prefix) => [
       `&:has(~ ${prefix}${selector.slice(1)})`,
       `${prefix}${selector.slice(1)} ~ &`,
-    ])
-    .join(", ") as ReplaceSelectors<["[data-peer]", ".peer"], Y, "~ &">
+    ]),
+    ...["[data-peer]", ".peer"].flatMap((prefix) => [
+      `&:has(~ ${prefix} *${selector.slice(1)})`,
+      `${prefix}:has(*${selector.slice(1)}) ~ &`,
+    ]),
+  ].join(", ") as ReplaceSelectors<["[data-peer]", ".peer"], Y, "~ &">
 
 export const attributes = {
   /**
@@ -45,9 +49,9 @@ export const attributes = {
   _dark:
     ".ui-dark &:not([data-mode]), [data-mode=dark] &:not([data-mode]), &[data-mode=dark]",
   /**
-   * The CSS `&[data-end]` attribute selector.
+   * The CSS `&:is([data-end], [data-group-end])` attribute selector.
    */
-  _end: "&[data-end]",
+  _end: "&:is([data-end], [data-group-end])",
   /**
    * The CSS `&:is([data-expanded], [aria-expanded=true])` attribute selector.
    */
@@ -90,6 +94,10 @@ export const attributes = {
    */
   _loading: "&:is([data-loading], [aria-busy=true])",
   /**
+   * The CSS `&[dir=ltr]` attribute selector.
+   */
+  _ltr: "[dir=ltr] &",
+  /**
    * The CSS `&[hidden]` attribute selector.
    */
   _nativeHidden: "&[hidden]",
@@ -130,13 +138,17 @@ export const attributes = {
    */
   _ripple: "& .ui-ripple",
   /**
+   * The CSS `&[dir=rtl]` attribute selector.
+   */
+  _rtl: "[dir=rtl] &",
+  /**
    * The CSS `&:is([data-selected], [aria-selected=true])` attribute selector.
    */
   _selected: "&:is([data-selected], [aria-selected=true])",
   /**
-   * The CSS `&[data-start]` attribute selector.
+   * The CSS `&:is([data-start], [data-group-start])` attribute selector.
    */
-  _start: "&[data-start]",
+  _start: "&:is([data-start], [data-group-start])",
   /**
    * The CSS `&[data-today]` attribute selector.
    */
@@ -322,10 +334,6 @@ export const pseudoClasses = {
    */
   _inRange: "&:is(:in-range, [data-in-range])",
   /**
-   * The CSS `&:is([data-invalid], [aria-invalid=true])` attribute selector.
-   */
-  _invalid: "&:is([data-invalid], [aria-invalid=true])",
-  /**
    * The CSS `&:last-of-type` pseudo-class.
    */
   _last: "&:last-of-type",
@@ -475,7 +483,7 @@ export const pseudoClasses = {
   _hover:
     "&:is(:hover, [data-hover]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
   /**
-   * The CSS `&:is(:active, [data-active]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])` pseudo-class.
+   * The CSS `&:is(:active, [data-active])` pseudo-class.
    */
   _active:
     "&:is(:active, [data-active]):not(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
@@ -488,14 +496,17 @@ export const pseudoClasses = {
    */
   _focusVisible: "&:is(:focus-visible, [data-focus-visible])",
   /**
+   * The CSS `&:is([data-invalid], [aria-invalid=true])` attribute selector.
+   */
+  _invalid: "&:is([data-invalid], [aria-invalid=true])",
+  /**
    * The CSS `&:is([readonly], [data-readonly], [aria-readonly=true])` pseudo-class.
    */
   _readOnly: "&:is([readonly], [data-readonly], [aria-readonly=true])",
   /**
-   * The CSS `&:is(:disabled, [disabled], [aria-disabled=true], [data-disabled])` pseudo-class.
+   * The CSS `&:is(:disabled, [disabled], [data-disabled])` pseudo-class.
    */
-  _disabled:
-    "&:is(:disabled, [disabled], [aria-disabled=true], [data-disabled])",
+  _disabled: "&:is(:disabled, [disabled], [data-disabled])",
 } as const
 
 export type PseudoClasses = typeof pseudoClasses

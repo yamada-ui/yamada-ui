@@ -96,7 +96,7 @@ export const WithColorScheme: Story = () => {
 export const WithDirection: Story = () => {
   return (
     <>
-      <Resizable borderWidth="1px" direction="horizontal" h="md" rounded="md">
+      <Resizable borderWidth="1px" h="md" orientation="horizontal" rounded="md">
         <ResizableItem as={Center}>One</ResizableItem>
 
         <ResizableTrigger />
@@ -104,7 +104,7 @@ export const WithDirection: Story = () => {
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>
 
-      <Resizable borderWidth="1px" direction="vertical" h="md" rounded="md">
+      <Resizable borderWidth="1px" h="md" orientation="vertical" rounded="md">
         <ResizableItem as={Center}>One</ResizableItem>
 
         <ResizableTrigger />
@@ -181,7 +181,7 @@ export const WithCollapsible: Story = () => {
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>
 
-      <Resizable borderWidth="1px" direction="vertical" h="md" rounded="md">
+      <Resizable borderWidth="1px" h="md" orientation="vertical" rounded="md">
         <ResizableItem
           as={Center}
           collapsedSize={10}
@@ -252,7 +252,7 @@ export const WithIcon: Story = () => {
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>
 
-      <Resizable variant="spacer" direction="vertical" h="md">
+      <Resizable variant="spacer" h="md" orientation="vertical">
         <ResizableItem as={Center} borderWidth="1px" rounded="md">
           One
         </ResizableItem>
@@ -278,7 +278,7 @@ export const CustomIcon: Story = () => {
         <ResizableItem as={Center}>Two</ResizableItem>
       </Resizable>
 
-      <Resizable borderWidth="1px" direction="vertical" h="md" rounded="md">
+      <Resizable borderWidth="1px" h="md" orientation="vertical" rounded="md">
         <ResizableItem as={Center}>One</ResizableItem>
 
         <ResizableTrigger icon={<MoveHorizontalIcon />} />
@@ -298,7 +298,7 @@ export const NestedResizable: Story = () => {
         <ResizableTrigger />
 
         <ResizableItem>
-          <Resizable direction="vertical">
+          <Resizable orientation="vertical">
             <ResizableItem as={Center}>Top</ResizableItem>
 
             <ResizableTrigger />
@@ -308,7 +308,7 @@ export const NestedResizable: Story = () => {
         </ResizableItem>
       </Resizable>
 
-      <Resizable borderWidth="1px" direction="vertical" h="md" rounded="md">
+      <Resizable borderWidth="1px" h="md" orientation="vertical" rounded="md">
         <ResizableItem as={Center}>Top</ResizableItem>
 
         <ResizableTrigger />

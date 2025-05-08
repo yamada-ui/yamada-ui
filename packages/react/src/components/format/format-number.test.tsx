@@ -6,9 +6,8 @@ describe("<FormatNumber />", () => {
     await a11y(<FormatNumber value={1000} />)
   })
 
-  test("FormatNumber sets `displayName` and `__ui__` correctly", () => {
+  test("FormatNumber sets `displayName` correctly", () => {
     expect(FormatNumber.displayName).toBe("FormatNumber")
-    expect(FormatNumber.__ui__).toBe("FormatNumber")
   })
 
   test("FormatNumber sets `className` correctly", () => {

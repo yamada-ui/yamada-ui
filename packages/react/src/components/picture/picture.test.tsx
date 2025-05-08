@@ -21,12 +21,9 @@ describe("<Picture />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
-    expect(Picture.displayName).toBe("Picture")
-    expect(Picture.__ui__).toBe("Picture")
-
-    expect(Source.displayName).toBe("Source")
-    expect(Source.__ui__).toBe("Source")
+  test("sets `displayName` correctly", () => {
+    expect(Picture.name).toBe("Picture")
+    expect(Source.name).toBe("Source")
   })
 
   test("renders HTML tag correctly", () => {

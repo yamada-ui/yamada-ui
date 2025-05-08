@@ -20,11 +20,11 @@ export const Basic: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Fade bg="orange.500" color="white" open={open} p="md" rounded="md">
+      <Fade bg="orange.500" color="white" open={open} p="md" rounded="l2">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Fade>
 
-      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
+      <Box bg="purple.500" color="white" p="md" rounded="l2" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>
@@ -44,12 +44,12 @@ export const Duration: Story = () => {
         duration={0.4}
         open={open}
         p="md"
-        rounded="md"
+        rounded="l2"
       >
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Fade>
 
-      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
+      <Box bg="purple.500" color="white" p="md" rounded="l2" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>
@@ -68,13 +68,13 @@ export const UnmountOnExit: Story = () => {
         color="white"
         open={open}
         p="md"
-        rounded="md"
+        rounded="l2"
         unmountOnExit
       >
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Fade>
 
-      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
+      <Box bg="purple.500" color="white" p="md" rounded="l2" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>

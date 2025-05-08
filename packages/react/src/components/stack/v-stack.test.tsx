@@ -13,9 +13,8 @@ describe("<VStack />", () => {
     await a11y(<TestComponent />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(VStack.displayName).toBe("StackVertical")
-    expect(VStack.__ui__).toBe("StackVertical")
   })
 
   test("sets `className` correctly", () => {

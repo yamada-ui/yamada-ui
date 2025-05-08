@@ -59,14 +59,14 @@ import {
 
 ### 内部状態へアクセスする
 
-`children`には、`isOpen`や`onClose`などのメソッドが提供されます。これを利用して、内部状態にアクセスすることができます。
+`children`には、`open`や`onClose`などのメソッドが提供されます。これを利用して、内部状態にアクセスすることができます。
 
 ```tsx
 <Popover>
-  {({ isOpen }) => (
+  {({ open }) => (
     <>
       <PopoverTrigger>
-        <Button>{isOpen ? "Close" : "Open"} Popover</Button>
+        <Button>{open ? "Close" : "Open"} Popover</Button>
       </PopoverTrigger>
 
       <PopoverContent>
@@ -376,10 +376,10 @@ import {
 
 デフォルトでは、アクティブに関わらずDOMにレンダリングされます。つまり、非表示もレンダリングされているが、スタイルによって非表示になっていることになります。
 
-アクティブになるまで、レンダリングを遅延させたい場合は、`isLazy`を`true`に設定します。
+アクティブになるまで、レンダリングを遅延させたい場合は、`lazy`を`true`に設定します。
 
 ```tsx
-<Popover isLazy>
+<Popover lazy>
   <PopoverTrigger>
     <Button>Open Popover</Button>
   </PopoverTrigger>
@@ -429,7 +429,7 @@ import {
 ### 制御する
 
 ```tsx functional=true
-const { isOpen, onClose, onToggle } = useDisclosure()
+const { open, onClose, onToggle } = useDisclosure()
 
 return (
   <>
@@ -437,7 +437,7 @@ return (
       Open Popover
     </Button>
 
-    <Popover isOpen={isOpen} onClose={onClose} closeOnBlur={false}>
+    <Popover open={open} onClose={onClose} closeOnBlur={false}>
       <PopoverTrigger>
         <Button colorScheme="primary">Target Popover</Button>
       </PopoverTrigger>

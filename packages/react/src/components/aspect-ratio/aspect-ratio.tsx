@@ -1,11 +1,11 @@
-import type { FC, HTMLUIProps, StyleValue } from "../../core"
+import type { FC, HTMLStyledProps, StyleValue } from "../../core"
 import type { AspectRatioStyle } from "./aspect-ratio.style"
 import { Children } from "react"
 import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"
 import { aspectRatioStyle } from "./aspect-ratio.style"
 
-interface AspectRatioOptions {
+export interface AspectRatioProps extends HTMLStyledProps {
   /**
    * The aspect ratio of the Box.
    *
@@ -13,8 +13,6 @@ interface AspectRatioOptions {
    */
   ratio?: StyleValue<number>
 }
-
-export interface AspectRatioProps extends AspectRatioOptions, HTMLUIProps {}
 
 export const {
   PropsContext: AspectRatioPropsContext,
@@ -28,7 +26,7 @@ export const {
 /**
  * `AspectRatio` is a component for embedding things like videos and maps while maintaining the aspect ratio.
  *
- * @see Docs https://yamada-ui.com/components/aspect-ratio
+ * @see https://yamada-ui.com/components/aspect-ratio
  */
 export const AspectRatio: FC<AspectRatioProps> = withContext("div")(
   undefined,

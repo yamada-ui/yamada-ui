@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { ReorderGenerateItem } from "."
 import { useMemo } from "react"
-import { ReorderItem, ReorderRoot, ReorderTrigger } from "."
+import { Reorder, ReorderItem, ReorderRoot, ReorderTrigger } from "."
+import { PropsTable } from "../../../storybook/components"
 import { GhostIcon } from "../icon"
 import { Separator } from "../separator"
 import { HStack } from "../stack"
@@ -18,18 +18,30 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <ReorderRoot>
-      <ReorderItem value="ギニュー">ギニュー</ReorderItem>
-      <ReorderItem value="リクーム">リクーム</ReorderItem>
-      <ReorderItem value="バータ">バータ</ReorderItem>
-      <ReorderItem value="ジース">ジース</ReorderItem>
-      <ReorderItem value="グルド">グルド</ReorderItem>
-    </ReorderRoot>
+    <>
+      <Reorder.Root>
+        <Reorder.Item value="ギニュー">ギニュー</Reorder.Item>
+        <Reorder.Item value="リクーム">リクーム</Reorder.Item>
+        <Reorder.Item value="バータ">バータ</Reorder.Item>
+        <Reorder.Item value="ジース">ジース</Reorder.Item>
+        <Reorder.Item value="グルド">グルド</Reorder.Item>
+      </Reorder.Root>
+
+      <Separator />
+
+      <Reorder.Root>
+        <Reorder.Item>ギニュー</Reorder.Item>
+        <Reorder.Item>リクーム</Reorder.Item>
+        <Reorder.Item>バータ</Reorder.Item>
+        <Reorder.Item>ジース</Reorder.Item>
+        <Reorder.Item>グルド</Reorder.Item>
+      </Reorder.Root>
+    </>
   )
 }
 
-export const WithItems: Story = () => {
-  const items = useMemo<ReorderGenerateItem[]>(
+export const Items: Story = () => {
+  const items = useMemo<Reorder.RootProps["items"]>(
     () => [
       { label: "ギニュー", value: "ギニュー" },
       { label: "リクーム", value: "リクーム" },
@@ -43,109 +55,77 @@ export const WithItems: Story = () => {
   return <ReorderRoot items={items} />
 }
 
-export const WithOrientation: Story = () => {
+export const Size: Story = () => {
+  const items = useMemo<Reorder.RootProps["items"]>(
+    () => [
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+    [],
+  )
+
   return (
-    <>
-      <ReorderRoot orientation="vertical">
-        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem value="リクーム">リクーム</ReorderItem>
-        <ReorderItem value="バータ">バータ</ReorderItem>
-        <ReorderItem value="ジース">ジース</ReorderItem>
-        <ReorderItem value="グルド">グルド</ReorderItem>
-      </ReorderRoot>
-
-      <Separator />
-
-      <ReorderRoot orientation="horizontal">
-        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem value="リクーム">リクーム</ReorderItem>
-        <ReorderItem value="バータ">バータ</ReorderItem>
-        <ReorderItem value="ジース">ジース</ReorderItem>
-        <ReorderItem value="グルド">グルド</ReorderItem>
-      </ReorderRoot>
-    </>
+    <PropsTable variant="column" rows={["sm", "md", "lg", "xl"]}>
+      {(_, row, key) => <ReorderRoot key={key} size={row} items={items} />}
+    </PropsTable>
   )
 }
 
-export const WithSize: Story = () => {
+export const Variant: Story = () => {
+  const items = useMemo<Reorder.RootProps["items"]>(
+    () => [
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+    [],
+  )
+
   return (
-    <>
-      <ReorderRoot size="sm">
-        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem value="リクーム">リクーム</ReorderItem>
-        <ReorderItem value="バータ">バータ</ReorderItem>
-        <ReorderItem value="ジース">ジース</ReorderItem>
-        <ReorderItem value="グルド">グルド</ReorderItem>
-      </ReorderRoot>
-
-      <Separator />
-
-      <ReorderRoot size="md">
-        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem value="リクーム">リクーム</ReorderItem>
-        <ReorderItem value="バータ">バータ</ReorderItem>
-        <ReorderItem value="ジース">ジース</ReorderItem>
-        <ReorderItem value="グルド">グルド</ReorderItem>
-      </ReorderRoot>
-
-      <Separator />
-
-      <ReorderRoot size="normal">
-        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem value="リクーム">リクーム</ReorderItem>
-        <ReorderItem value="バータ">バータ</ReorderItem>
-        <ReorderItem value="ジース">ジース</ReorderItem>
-        <ReorderItem value="グルド">グルド</ReorderItem>
-      </ReorderRoot>
-
-      <Separator />
-
-      <ReorderRoot size="lg">
-        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem value="リクーム">リクーム</ReorderItem>
-        <ReorderItem value="バータ">バータ</ReorderItem>
-        <ReorderItem value="ジース">ジース</ReorderItem>
-        <ReorderItem value="グルド">グルド</ReorderItem>
-      </ReorderRoot>
-    </>
+    <PropsTable
+      variant="column"
+      rows={[
+        "panel",
+        "outline",
+        "solid",
+        "subtle",
+        "surface",
+        "elevated",
+        "plain",
+      ]}
+    >
+      {(_, row, key) => <ReorderRoot key={key} variant={row} items={items} />}
+    </PropsTable>
   )
 }
 
-export const WithVariant: Story = () => {
+export const Orientation: Story = () => {
+  const items = useMemo<Reorder.RootProps["items"]>(
+    () => [
+      { label: "ギニュー", value: "ギニュー" },
+      { label: "リクーム", value: "リクーム" },
+      { label: "バータ", value: "バータ" },
+      { label: "ジース", value: "ジース" },
+      { label: "グルド", value: "グルド" },
+    ],
+    [],
+  )
+
   return (
-    <>
-      <ReorderRoot variant="outline">
-        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem value="リクーム">リクーム</ReorderItem>
-        <ReorderItem value="バータ">バータ</ReorderItem>
-        <ReorderItem value="ジース">ジース</ReorderItem>
-        <ReorderItem value="グルド">グルド</ReorderItem>
-      </ReorderRoot>
-
-      <Separator />
-
-      <ReorderRoot variant="elevated">
-        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem value="リクーム">リクーム</ReorderItem>
-        <ReorderItem value="バータ">バータ</ReorderItem>
-        <ReorderItem value="ジース">ジース</ReorderItem>
-        <ReorderItem value="グルド">グルド</ReorderItem>
-      </ReorderRoot>
-
-      <Separator />
-
-      <ReorderRoot variant="unstyled">
-        <ReorderItem value="ギニュー">ギニュー</ReorderItem>
-        <ReorderItem value="リクーム">リクーム</ReorderItem>
-        <ReorderItem value="バータ">バータ</ReorderItem>
-        <ReorderItem value="ジース">ジース</ReorderItem>
-        <ReorderItem value="グルド">グルド</ReorderItem>
-      </ReorderRoot>
-    </>
+    <PropsTable variant="column" rows={["vertical", "horizontal"]}>
+      {(_, row, key) => (
+        <ReorderRoot key={key} items={items} orientation={row} />
+      )}
+    </PropsTable>
   )
 }
 
-export const WithTrigger: Story = () => {
+export const Trigger: Story = () => {
   return (
     <ReorderRoot>
       <ReorderItem value="孫悟空">
@@ -167,10 +147,10 @@ export const WithTrigger: Story = () => {
   )
 }
 
-export const WithOnChange: Story = () => {
+export const OnChange: Story = () => {
   return (
     <ReorderRoot
-      onChange={(labels) => console.log(`changed '${labels.join(`', '`)}'`)}
+      onChange={(values) => console.log(`changed '${values.join(`', '`)}'`)}
     >
       <ReorderItem value="ギニュー">ギニュー</ReorderItem>
       <ReorderItem value="リクーム">リクーム</ReorderItem>
@@ -181,34 +161,12 @@ export const WithOnChange: Story = () => {
   )
 }
 
-export const WithOnCompleteChange: Story = () => {
+export const OnCompleteChange: Story = () => {
   return (
     <ReorderRoot
-      onCompleteChange={(labels) =>
-        console.log(`completed '${labels.join(`', '`)}'`)
+      onCompleteChange={(values) =>
+        console.log(`completed '${values.join(`', '`)}'`)
       }
-    >
-      <ReorderItem value="ギニュー">ギニュー</ReorderItem>
-      <ReorderItem value="リクーム">リクーム</ReorderItem>
-      <ReorderItem value="バータ">バータ</ReorderItem>
-      <ReorderItem value="ジース">ジース</ReorderItem>
-      <ReorderItem value="グルド">グルド</ReorderItem>
-    </ReorderRoot>
-  )
-}
-
-export const UseContainerScroll: Story = () => {
-  return (
-    <ReorderRoot
-      borderWidth="1px"
-      h="xs"
-      layoutScroll
-      outline="0"
-      overflowY="scroll"
-      p="md"
-      rounded="md"
-      tabIndex={0}
-      _focusVisible={{ boxShadow: "outline" }}
     >
       <ReorderItem value="ギニュー">ギニュー</ReorderItem>
       <ReorderItem value="リクーム">リクーム</ReorderItem>

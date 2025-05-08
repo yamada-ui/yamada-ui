@@ -6,8 +6,13 @@ export {
   useReorderPropsContext as usePropsContext,
 } from "./reorder"
 export type {
-  ReorderGenerateItem as GenerateItem,
   ReorderItemProps as ItemProps,
   ReorderRootProps as RootProps,
   ReorderTriggerProps as TriggerProps,
 } from "./reorder"
+export {
+  ReorderContext as Context,
+  ReorderItemContext as ItemContext,
+  useReorderContext as useContext,
+  useReorderItemContext as useItemContext,
+} from "./use-reorder"

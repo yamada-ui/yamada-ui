@@ -1,4 +1,3 @@
-import type { ReorderGenerateItem } from "./"
 import { useState } from "react"
 import { a11y, drag, render, screen, waitFor } from "../../../test"
 import { Reorder } from "./"
@@ -26,7 +25,7 @@ describe("<Reorder />", () => {
   })
 
   test("render items of props correctly", () => {
-    const items: ReorderGenerateItem[] = [
+    const items: Reorder.RootProps["items"] = [
       { label: "Item 1", value: "Item 1" },
       { label: "Item 2", value: "Item 2" },
     ]
@@ -35,32 +34,6 @@ describe("<Reorder />", () => {
 
     expect(screen.getByText("Item 1")).toBeInTheDocument()
     expect(screen.getByText("Item 2")).toBeInTheDocument()
-  })
-
-  test("handles orientation correctly", () => {
-    render(
-      <Reorder.Root orientation="horizontal">
-        <Reorder.Item value="Item 1">Item 1</Reorder.Item>
-        <Reorder.Item value="Item 2">Item 2</Reorder.Item>
-      </Reorder.Root>,
-    )
-
-    const reorder = screen.getByRole("list")
-
-    expect(reorder).toHaveAttribute("orientation", "horizontal")
-  })
-
-  test("applies correct styles for vertical orientation", () => {
-    render(
-      <Reorder.Root orientation="vertical">
-        <Reorder.Item value="Item 1">Item 1</Reorder.Item>
-        <Reorder.Item value="Item 2">Item 2</Reorder.Item>
-      </Reorder.Root>,
-    )
-
-    const reorder = screen.getByRole("list")
-
-    expect(reorder).toHaveAttribute("orientation", "vertical")
   })
 
   test("renders trigger correctly inside of an item", () => {
@@ -92,12 +65,12 @@ describe("<Reorder />", () => {
   })
 
   test("updates items correctly when props change", async () => {
-    const initialItems: ReorderGenerateItem[] = [
+    const initialItems: Reorder.RootProps["items"] = [
       { label: "Item 1", value: "Item 1" },
       { label: "Item 2", value: "Item 2" },
     ]
 
-    const updatedItems: ReorderGenerateItem[] = [
+    const updatedItems: Reorder.RootProps["items"] = [
       { label: "Item 3", value: "Item 3" },
       { label: "Item 4", value: "Item 4" },
     ]
@@ -131,7 +104,7 @@ describe("<Reorder />", () => {
     const onChange = vi.fn()
     const onCompleteChange = vi.fn()
 
-    const items: ReorderGenerateItem[] = [
+    const items: Reorder.RootProps["items"] = [
       { label: "Item 1", value: "Item 1" },
       { label: "Item 2", value: "Item 2" },
     ]

@@ -3,41 +3,54 @@ import { defineComponentSlotStyle } from "../../core"
 export const reorderStyle = defineComponentSlotStyle({
   base: {
     item: {
-      h: "100%",
-      w: "100%",
+      "&[data-has-trigger]": {
+        cursor: "default",
+        userSelect: "none",
+      },
+      cursor: "grab",
+      flex: "1",
+      rounded: "l2",
       _selected: {
-        boxShadow: ["md", "dark-md"],
+        boxShadow: "md",
         cursor: "grabbing",
       },
     },
     root: {
       display: "flex",
-      w: "100%",
+      w: "full",
     },
     trigger: {
       alignItems: "center",
-      color: ["blackAlpha.300", "whiteAlpha.300"],
+      color: "fg.subtle",
       cursor: "grab",
       display: "flex",
+      fontSize: "2xl",
       justifyContent: "center",
       _selected: {
         cursor: "grabbing",
+      },
+      _disabled: {
+        layerStyle: "disabled",
       },
     },
   },
 
   sizes: {
     sm: {
-      item: { p: "sm", rounded: "base" },
+      item: { p: "3" },
+      root: { gap: "3" },
     },
     md: {
-      item: { p: "md", rounded: "md" },
-    },
-    normal: {
-      item: { p: "lg", rounded: "lg" },
+      item: { p: "4" },
+      root: { gap: "4" },
     },
     lg: {
-      item: { p: "xl", rounded: "xl" },
+      item: { p: "6" },
+      root: { gap: "6" },
+    },
+    xl: {
+      item: { p: "8" },
+      root: { gap: "8" },
     },
   },
 
@@ -46,15 +59,45 @@ export const reorderStyle = defineComponentSlotStyle({
       item: {
         bg: "bg.panel",
         boxShadow: "md",
+        _selected: {
+          boxShadow: "lg",
+        },
       },
     },
     outline: {
       item: {
+        layerStyle: "outline",
+        bg: "bg",
+      },
+    },
+    panel: {
+      item: {
         layerStyle: "panel",
       },
     },
-    unstyled: {
-      item: { p: 0, rounded: 0, _selected: { boxShadow: "unset" } },
+    plain: {
+      item: {
+        flex: "inherit",
+        p: "0px",
+        rounded: "0px",
+        _selected: { boxShadow: "unset" },
+      },
+      root: { gap: "0px" },
+    },
+    solid: {
+      item: {
+        layerStyle: "solid",
+      },
+    },
+    subtle: {
+      item: {
+        layerStyle: "subtle",
+      },
+    },
+    surface: {
+      item: {
+        layerStyle: "surface",
+      },
     },
   },
 
@@ -72,6 +115,7 @@ export const reorderStyle = defineComponentSlotStyle({
       },
       vertical: {
         root: {
+          alignItems: "stretch",
           flexDirection: "column",
         },
       },
@@ -80,7 +124,7 @@ export const reorderStyle = defineComponentSlotStyle({
 
   defaultProps: {
     size: "md",
-    variant: "outline",
+    variant: "panel",
     orientation: "vertical",
   },
 })

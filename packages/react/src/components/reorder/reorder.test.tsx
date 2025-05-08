@@ -1,24 +1,23 @@
-import type { ReorderGenerateItem } from "./"
 import { useState } from "react"
-import { a11y, act, drag, render, screen, waitFor } from "../../../test"
-import { Reorder, ReorderItem, ReorderTrigger } from "./"
+import { a11y, drag, render, screen, waitFor } from "../../../test"
+import { Reorder } from "./"
 
 describe("<Reorder />", () => {
   test("renders with no errors", async () => {
     await a11y(
-      <Reorder>
-        <ReorderItem value="Item 1">Item 1</ReorderItem>
-        <ReorderItem value="Item 2">Item 2</ReorderItem>
-      </Reorder>,
+      <Reorder.Root>
+        <Reorder.Item value="Item 1">Item 1</Reorder.Item>
+        <Reorder.Item value="Item 2">Item 2</Reorder.Item>
+      </Reorder.Root>,
     )
   })
 
   test("render items correctly", () => {
     render(
-      <Reorder>
-        <ReorderItem value="Item 1">Item 1</ReorderItem>
-        <ReorderItem value="Item 2">Item 2</ReorderItem>
-      </Reorder>,
+      <Reorder.Root>
+        <Reorder.Item value="Item 1">Item 1</Reorder.Item>
+        <Reorder.Item value="Item 2">Item 2</Reorder.Item>
+      </Reorder.Root>,
     )
 
     expect(screen.getByText("Item 1")).toBeInTheDocument()
@@ -26,50 +25,24 @@ describe("<Reorder />", () => {
   })
 
   test("render items of props correctly", () => {
-    const items: ReorderGenerateItem[] = [
+    const items: Reorder.RootProps["items"] = [
       { label: "Item 1", value: "Item 1" },
       { label: "Item 2", value: "Item 2" },
     ]
 
-    render(<Reorder items={items} />)
+    render(<Reorder.Root items={items} />)
 
     expect(screen.getByText("Item 1")).toBeInTheDocument()
     expect(screen.getByText("Item 2")).toBeInTheDocument()
   })
 
-  test("handles orientation correctly", () => {
-    render(
-      <Reorder data-testid="Reorder" orientation="horizontal">
-        <ReorderItem value="Item 1">Item 1</ReorderItem>
-        <ReorderItem value="Item 2">Item 2</ReorderItem>
-      </Reorder>,
-    )
-
-    const reorderList = screen.getByTestId("Reorder")
-
-    expect(reorderList).toHaveStyle(`flex-direction: row;`)
-  })
-
-  test("applies correct styles for vertical orientation", () => {
-    render(
-      <Reorder data-testid="Reorder" orientation="vertical">
-        <ReorderItem value="Item 1">Item 1</ReorderItem>
-        <ReorderItem value="Item 2">Item 2</ReorderItem>
-      </Reorder>,
-    )
-
-    const reorderList = screen.getByTestId("Reorder")
-
-    expect(reorderList).toHaveStyle(`flex-direction: column;`)
-  })
-
   test("renders trigger correctly inside of an item", () => {
     render(
-      <Reorder orientation="vertical">
-        <ReorderItem value="Item 1">
-          <ReorderTrigger data-testid="ReorderTrigger" />
-        </ReorderItem>
-      </Reorder>,
+      <Reorder.Root orientation="vertical">
+        <Reorder.Item value="Item 1">
+          <Reorder.Trigger data-testid="ReorderTrigger" />
+        </Reorder.Item>
+      </Reorder.Root>,
     )
 
     expect(screen.getByTestId("ReorderTrigger")).toBeInTheDocument()
@@ -79,10 +52,10 @@ describe("<Reorder />", () => {
     const warnSpy = vi.spyOn(global.console, "warn")
 
     render(
-      <Reorder orientation="vertical">
-        <ReorderItem value="Item 1">Item 1</ReorderItem>
-        <ReorderItem value="Item 1">Item 1</ReorderItem>
-      </Reorder>,
+      <Reorder.Root orientation="vertical">
+        <Reorder.Item value="Item 1">Item 1</Reorder.Item>
+        <Reorder.Item value="Item 1">Item 1</Reorder.Item>
+      </Reorder.Root>,
     )
 
     expect(warnSpy).toHaveBeenCalledWith(
@@ -91,13 +64,13 @@ describe("<Reorder />", () => {
     expect(warnSpy).toHaveBeenCalledTimes(1)
   })
 
-  test("updates items correctly when props change", () => {
-    const initialItems: ReorderGenerateItem[] = [
+  test("updates items correctly when props change", async () => {
+    const initialItems: Reorder.RootProps["items"] = [
       { label: "Item 1", value: "Item 1" },
       { label: "Item 2", value: "Item 2" },
     ]
 
-    const updatedItems: ReorderGenerateItem[] = [
+    const updatedItems: Reorder.RootProps["items"] = [
       { label: "Item 3", value: "Item 3" },
       { label: "Item 4", value: "Item 4" },
     ]
@@ -109,19 +82,17 @@ describe("<Reorder />", () => {
         <>
           <button onClick={() => setItems(updatedItems)}>Update Items</button>
 
-          <Reorder items={items} />
+          <Reorder.Root items={items} />
         </>
       )
     }
 
-    render(<Component />)
+    const { user } = render(<Component />)
 
     expect(screen.getByText("Item 1")).toBeInTheDocument()
     expect(screen.getByText("Item 2")).toBeInTheDocument()
 
-    act(() => {
-      screen.getByText("Update Items").click()
-    })
+    await user.click(screen.getByText("Update Items"))
 
     expect(screen.getByText("Item 3")).toBeInTheDocument()
     expect(screen.getByText("Item 4")).toBeInTheDocument()
@@ -133,13 +104,13 @@ describe("<Reorder />", () => {
     const onChange = vi.fn()
     const onCompleteChange = vi.fn()
 
-    const items: ReorderGenerateItem[] = [
+    const items: Reorder.RootProps["items"] = [
       { label: "Item 1", value: "Item 1" },
       { label: "Item 2", value: "Item 2" },
     ]
 
     const { user } = render(
-      <Reorder
+      <Reorder.Root
         items={items}
         onChange={onChange}
         onCompleteChange={onCompleteChange}

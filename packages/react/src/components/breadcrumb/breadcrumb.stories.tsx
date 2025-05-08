@@ -41,27 +41,7 @@ export const Items: Story = () => {
   return <Breadcrumb.Root items={items} />
 }
 
-export const Variants: Story = () => {
-  const items = useMemo<Breadcrumb.RootProps["items"]>(
-    () => [
-      { href: "/", label: "サイヤ人編" },
-      { href: "/", label: "ナメック星編" },
-      { href: "/", label: "人造人間編" },
-      { href: "/", currentPage: true, label: "魔人ブウ編" },
-    ],
-    [],
-  )
-
-  return (
-    <For each={["plain", "underline"] as const}>
-      {(variant, index) => (
-        <Breadcrumb.Root key={index} variant={variant} items={items} />
-      )}
-    </For>
-  )
-}
-
-export const Sizes: Story = () => {
+export const Size: Story = () => {
   const items = useMemo<Breadcrumb.RootProps["items"]>(
     () => [
       { href: "/", label: "サイヤ人編" },
@@ -76,6 +56,26 @@ export const Sizes: Story = () => {
     <For each={["sm", "md", "lg"] as const}>
       {(size, index) => (
         <Breadcrumb.Root key={index} size={size} items={items} />
+      )}
+    </For>
+  )
+}
+
+export const Variant: Story = () => {
+  const items = useMemo<Breadcrumb.RootProps["items"]>(
+    () => [
+      { href: "/", label: "サイヤ人編" },
+      { href: "/", label: "ナメック星編" },
+      { href: "/", label: "人造人間編" },
+      { href: "/", currentPage: true, label: "魔人ブウ編" },
+    ],
+    [],
+  )
+
+  return (
+    <For each={["plain", "underline"] as const}>
+      {(variant, index) => (
+        <Breadcrumb.Root key={index} variant={variant} items={items} />
       )}
     </For>
   )

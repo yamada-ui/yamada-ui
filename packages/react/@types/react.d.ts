@@ -6,6 +6,6 @@ declare module "react" {
   }
 
   interface DataAttributes {
-    [key: `data-${string}`]: boolean | string
+    [key: `data-${string}`]: string | undefined
   }
 }

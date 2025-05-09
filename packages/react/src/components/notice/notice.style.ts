@@ -2,6 +2,7 @@ import { defineComponentSlotStyle } from "../../core"
 
 export const noticeStyle = defineComponentSlotStyle({
   base: {
+    actionButton: {},
     closeButton: {
       position: "absolute",
       right: 2,

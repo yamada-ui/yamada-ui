@@ -545,7 +545,7 @@ export const UseLimit = () => {
 }
 
 export const WithAction = () => {
-  const notice = useNotice({ placement: "end-center" })
+  const notice = useNotice()
 
   return (
     <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
@@ -554,6 +554,7 @@ export const WithAction = () => {
           notice({
             action: ({ id }) => (
               <Notice.Action
+                variant="outline"
                 onClick={() =>
                   notice.update(id, {
                     description: "よくも…よくも…オレの…ブルマを!!",
@@ -561,7 +562,7 @@ export const WithAction = () => {
                   })
                 }
               >
-                Action
+                Update
               </Notice.Action>
             ),
             description: "オッス！オラ悟空！",

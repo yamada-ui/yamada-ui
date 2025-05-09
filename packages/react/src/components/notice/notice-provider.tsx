@@ -296,12 +296,12 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
       setDelay(duration)
     }, [duration])
 
-    const onMouseEnter = () => setDelay(null)
-    const onMouseLeave = () => setDelay(duration)
+    const onMouseEnter = useCallback(() => setDelay(null), [])
+    const onMouseLeave = useCallback(() => setDelay(duration), [duration])
 
-    const onClose = () => {
+    const onClose = useCallback(() => {
       if (isPresent) onDelete()
-    }
+    }, [isPresent, onDelete])
 
     useEffect(() => {
       if (isPresent && isDelete) onDelete()

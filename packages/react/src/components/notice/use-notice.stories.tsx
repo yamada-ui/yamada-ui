@@ -120,25 +120,25 @@ export const WithVariant = () => {
         <Button
           onClick={() =>
             notice({
-              variant: "top-accent",
+              variant: "island",
               description: "オッス！オラ悟空！",
               title: "孫悟空",
             })
           }
         >
-          Show top accent Notice
+          Show island Notice
         </Button>
 
         <Button
           onClick={() =>
             notice({
-              variant: "left-accent",
+              variant: "surface",
               description: "オッス！オラ悟空！",
               title: "孫悟空",
             })
           }
         >
-          Show left accent Notice
+          Show surface Notice
         </Button>
       </Wrap>
     </Center>

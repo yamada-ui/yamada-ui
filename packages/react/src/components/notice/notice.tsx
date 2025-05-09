@@ -7,31 +7,28 @@ import type {
   AlertRootProps,
   AlertTitleProps,
 } from "../alert"
+import type { ButtonProps } from "../button/button"
 import type { CloseButtonProps } from "../close-button"
 import type {
   NoticeComponentProps,
   NoticeConfig,
+  NoticeOptions,
   NoticePlacement,
+  UseNoticeOptions,
 } from "./types"
 import { useMemo } from "react"
 import { styled } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
-import { handlerAll, isFunction, merge } from "../../utils"
+import {
+  convertFromNoticePlacement,
+  handlerAll,
+  isFunction,
+  merge,
+} from "../../utils"
 import { Alert } from "../alert"
+import { Button } from "../button/button"
 import { CloseButton } from "../close-button"
 import { withContext } from "./notice-provider"
-
-export interface UseNoticeOptions extends Omit<NoticeConfig, "onDragEnd"> {}
-
-export interface NoticeOptions extends UseNoticeOptions {
-  id: number | string
-  message: (props: NoticeComponentProps) => ReactNode
-  placement: NoticePlacement
-  onClose: () => void
-  onDelete: () => void
-  isDelete?: boolean
-  onCloseComplete?: () => void
-}
 
 const findId = (
   options: NoticeOptions[],
@@ -264,6 +261,8 @@ const createNoticeStore = (initialState: State): Store => {
       const notice = createNotice(message, options)
       const { id, placement } = notice
 
+      const convertedPlacement = convertFromNoticePlacement(placement)
+
       setState((prev) => {
         let prevNotices = prev[placement]
 
@@ -273,7 +272,7 @@ const createNoticeStore = (initialState: State): Store => {
           prevNotices.length > limit - 1
         ) {
           const n = prevNotices.length - (limit - 1)
-          const notices = placement.includes("top")
+          const notices = convertedPlacement.includes("top")
             ? prevNotices.slice(n * -1)
             : prevNotices.slice(0, n)
 
@@ -284,7 +283,7 @@ const createNoticeStore = (initialState: State): Store => {
           )
         }
 
-        const notices = placement.includes("top")
+        const notices = convertedPlacement.includes("top")
           ? [notice, ...prevNotices]
           : [...prevNotices, notice]
 
@@ -339,9 +338,10 @@ const createNoticeStore = (initialState: State): Store => {
 export const noticeStore = createNoticeStore(initialState)
 
 export interface NoticeProps
-  extends Omit<HTMLStyledProps, keyof UseNoticeOptions>,
+  extends Omit<HTMLStyledProps, "id" | keyof UseNoticeOptions>,
     Omit<UseNoticeOptions, "itemProps"> {
-  onClose?: () => void
+  id: number | string
+  onClose: () => void
 }
 
 const Notice = withContext<"div", NoticeProps>(
@@ -349,6 +349,7 @@ const Notice = withContext<"div", NoticeProps>(
     id,
     colorScheme,
     variant = "plain",
+    action,
     closable,
     closeOnDrag,
     closeStrategy = "button",
@@ -371,14 +372,14 @@ const Notice = withContext<"div", NoticeProps>(
 
     return (
       <NoticeRoot
-        id={id}
+        id={id.toString()}
         colorScheme={colorScheme}
         variant={variant}
         status={status}
         onClick={
           isElementClosable && !dragClosable
             ? () => {
-                onClose?.()
+                onClose()
               }
             : undefined
         }
@@ -397,12 +398,12 @@ const Notice = withContext<"div", NoticeProps>(
             ) : null}
           </NoticeContent>
         ) : null}
-
+        {isFunction(action) ? action({ id, onClose }) : action}
         {closable && isButtonClosable ? (
           <NoticeCloseButton
-            id={id}
+            id={id.toString()}
             onClose={() => {
-              onClose?.()
+              onClose()
             }}
           />
         ) : null}
@@ -497,4 +498,13 @@ export const NoticeCloseButton = withContext<"button", NoticeCloseButtonProps>(
     )
   },
   "closeButton",
+)()
+
+export interface NoticeActionProps extends ButtonProps {}
+
+export const NoticeAction = withContext<"button", NoticeActionProps>(
+  (props) => {
+    return <Button {...props} />
+  },
+  "actionButton",
 )()

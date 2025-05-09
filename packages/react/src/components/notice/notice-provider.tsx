@@ -7,9 +7,8 @@ import type {
   ThemeProps,
 } from "../../core"
 import type { HTMLMotionProps, MotionStyledComponent } from "../motion"
-import type { NoticeOptions } from "./notice"
 import type { NoticeStyle } from "./notice.style"
-import type { DragEndEventHandler } from "./types"
+import type { DragEndEventHandler, NoticeOptions } from "./types"
 import { AnimatePresence, useIsPresent } from "motion/react"
 import {
   useCallback,
@@ -452,7 +451,7 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
           data-placement-right={convertedPlacement.includes("right")}
           data-placement-top={convertedPlacement.includes("top")}
         >
-          {runIfFn(message, { onClose })}
+          {runIfFn(message, { id, onClose })}
         </NoticeListInnerItemComponent>
       </motion.li>
     )

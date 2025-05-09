@@ -544,6 +544,37 @@ export const UseLimit = () => {
   )
 }
 
+export const WithAction = () => {
+  const notice = useNotice({ placement: "end-center" })
+
+  return (
+    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+      <Button
+        onClick={() =>
+          notice({
+            action: ({ id }) => (
+              <Notice.Action
+                onClick={() =>
+                  notice.update(id, {
+                    description: "よくも…よくも…オレの…ブルマを!!",
+                    title: "ベジータ",
+                  })
+                }
+              >
+                Action
+              </Notice.Action>
+            ),
+            description: "オッス！オラ悟空！",
+            title: "孫悟空",
+          })
+        }
+      >
+        Show Notice
+      </Button>
+    </Center>
+  )
+}
+
 export const CustomComponent = () => {
   const notice = useNotice()
 

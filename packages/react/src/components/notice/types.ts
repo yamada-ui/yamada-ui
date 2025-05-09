@@ -19,7 +19,11 @@ export type NoticePlacement = Extract<
 >
 
 export interface NoticeComponentProps
-  extends Omit<NoticeConfig, "itemProps" | "onDragEnd"> {
+  extends Omit<NoticeConfig, "itemProps" | "onDragEnd">,
+    NoticeCommonProps {}
+
+export interface NoticeCommonProps {
+  id: number | string
   onClose: () => void
 }
 
@@ -28,6 +32,10 @@ export type DragEndEventHandler = Required<HTMLMotionProps>["onDragEnd"]
 export interface NoticeConfig {
   colorScheme?: AlertRootProps["colorScheme"]
   variant?: AlertRootProps["variant"]
+  /**
+   * The action to use.
+   */
+  action?: (props: NoticeCommonProps) => ReactNode
   /**
    * If `true`, the portal will check if it is within a parent portal
    * and append itself to the parent's portal node.
@@ -144,4 +152,16 @@ export interface NoticeConfig {
    * Props for notice list element.
    */
   listProps?: HTMLStyledProps<"ul">
+}
+
+export interface UseNoticeOptions extends Omit<NoticeConfig, "onDragEnd"> {}
+
+export interface NoticeOptions extends UseNoticeOptions {
+  id: number | string
+  message: (props: NoticeComponentProps) => ReactNode
+  placement: NoticePlacement
+  onClose: () => void
+  onDelete: () => void
+  isDelete?: boolean
+  onCloseComplete?: () => void
 }

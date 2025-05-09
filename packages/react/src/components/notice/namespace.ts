@@ -1,4 +1,5 @@
 import type {
+  NoticeActionProps,
   NoticeDescriptionProps,
   NoticeIconProps,
   NoticeLoadingProps,
@@ -6,6 +7,7 @@ import type {
   NoticeTitleProps,
 } from "./notice"
 import {
+  NoticeAction,
   NoticeCloseButton,
   NoticeContent,
   NoticeDescription,
@@ -17,6 +19,7 @@ import {
 import { NoticePropsContext, useNoticePropsContext } from "./notice-provider"
 
 export {
+  NoticeAction as Action,
   NoticeCloseButton as CloseButton,
   NoticeContent as Content,
   NoticeDescription as Description,
@@ -29,6 +32,7 @@ export {
 }
 
 export type {
+  NoticeActionProps as ActionProps,
   NoticeDescriptionProps as DescriptionProps,
   NoticeIconProps as IconProps,
   NoticeLoadingProps as LoadingProps,

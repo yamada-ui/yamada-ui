@@ -36,7 +36,9 @@ export interface NoticeOptions extends UseNoticeOptions {
 const findId = (
   options: NoticeOptions[],
   id: number | string,
-): NoticeOptions | undefined => options.find((notice) => notice.id === id)
+): NoticeOptions | undefined => {
+  return options.find((notice) => notice.id === id)
+}
 
 const findNotice = (
   state: State,
@@ -46,11 +48,9 @@ const findNotice = (
   placement: NoticePlacement | undefined
 } => {
   const placement = getNoticePlacement(state, id)
-
   const index = placement
     ? state[placement].findIndex((notice) => notice.id === id)
     : -1
-
   return { index, placement }
 }
 
@@ -59,7 +59,9 @@ const getNoticePlacement = (
   id: number | string,
 ): NoticePlacement | undefined => {
   for (const [placement, values] of Object.entries(state)) {
-    if (findId(values, id)) return placement as NoticePlacement
+    if (findId(values, id)) {
+      return placement as NoticePlacement
+    }
   }
 }
 
@@ -111,8 +113,9 @@ const createRender = (
   const Render: FC<NoticeComponentProps> = (props) => {
     if (isFunction(component)) {
       return component({ ...props, ...rest })
+    } else {
+      return <Notice {...props} {...rest} />
     }
-    return <Notice {...props} {...rest} />
   }
 
   return Render
@@ -124,8 +127,9 @@ const createNoticeFunc = (
 ) => {
   const themeOptions = theme.__config?.notice ?? {}
 
-  const computedOptions = (options: UseNoticeOptions) =>
-    merge(themeOptions, merge(defaultOptions, options))
+  const computedOptions = (options: UseNoticeOptions) => {
+    return merge(themeOptions, merge(defaultOptions, options))
+  }
 
   const notice = (options: UseNoticeOptions = {}) => {
     const mergedOptions = computedOptions(options)
@@ -372,7 +376,11 @@ const Notice = withContext<"div", NoticeProps>(
         variant={variant}
         status={status}
         onClick={
-          isElementClosable && !dragClosable ? () => onClose?.() : undefined
+          isElementClosable && !dragClosable
+            ? () => {
+                onClose?.()
+              }
+            : undefined
         }
         {...props}
       >
@@ -381,15 +389,22 @@ const Notice = withContext<"div", NoticeProps>(
         ) : (
           <NoticeIcon {...(icon?.color ? { color: icon.color } : {})} />
         )}
-        <NoticeContent>
-          {title ? <NoticeTitle>{title}</NoticeTitle> : null}
-          {description ? (
-            <NoticeDescription>{description}</NoticeDescription>
-          ) : null}
-        </NoticeContent>
+        {title || description ? (
+          <NoticeContent>
+            {title ? <NoticeTitle>{title}</NoticeTitle> : null}
+            {description ? (
+              <NoticeDescription>{description}</NoticeDescription>
+            ) : null}
+          </NoticeContent>
+        ) : null}
 
         {closable && isButtonClosable ? (
-          <NoticeCloseButton id={id} onClose={() => onClose?.()} />
+          <NoticeCloseButton
+            id={id}
+            onClose={() => {
+              onClose?.()
+            }}
+          />
         ) : null}
       </NoticeRoot>
     )

@@ -98,11 +98,14 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
         Object.entries(state).map(([placement, notices]) => {
           const convertedPlacement = convertFromNoticePlacement(placement)
 
-          const customCSS: CSSObject = {
-            css,
-            gap,
-            margin: gap,
-          }
+          const customCSS: CSSObject = useMemo(
+            () => ({
+              css,
+              gap,
+              margin: gap,
+            }),
+            [],
+          )
 
           return (
             <NoticeListComponent
@@ -142,35 +145,29 @@ interface PlacementValues {
 const getPlacementInitialValues = (placement: string): PlacementValues => {
   const convertedPlacement = convertFromNoticePlacement(placement)
 
-  // switch (convertedPlacement) {
-  // 	case "top-left":
-  // 	case "top-center":
-  // 	case "top-right":
-  // 		return { x: 0, y: "-100%" };
-  // 	case "bottom-left":
-  // 	case "bottom-center":
-  // 	case "bottom-right":
-  // 		return { x: 0, y: "100%" };
-  // 	default:
-  // 		console.warn(`Unexpected placement value: ${convertedPlacement}`);
-  // 		return { x: 0, y: "-100%" };
-  // }
   switch (convertedPlacement) {
-    case "top-left":
+    case "top-left": {
       return { x: "-100%", y: 0 }
-    case "top-center":
+    }
+    case "top-center": {
       return { x: 0, y: "-100%" }
-    case "top-right":
+    }
+    case "top-right": {
       return { x: "100%", y: 0 }
-    case "bottom-left":
+    }
+    case "bottom-left": {
       return { x: "-100%", y: 0 }
-    case "bottom-center":
+    }
+    case "bottom-center": {
       return { x: 0, y: "100%" }
-    case "bottom-right":
+    }
+    case "bottom-right": {
       return { x: "100%", y: 0 }
-    default:
+    }
+    default: {
       console.warn(`Unexpected placement value: ${convertedPlacement}`)
       return { x: 0, y: -24 }
+    }
   }
 }
 
@@ -182,38 +179,52 @@ const getPlacementExitValues = (
 
   if (closeOnDrag) {
     switch (convertedPlacement) {
-      case "top-left":
+      case "top-left": {
         return { x: -200, y: 0 }
-      case "top-center":
+      }
+      case "top-center": {
         return { x: 0, y: -200 }
-      case "top-right":
+      }
+      case "top-right": {
         return { x: 200, y: 0 }
-      case "bottom-left":
+      }
+      case "bottom-left": {
         return { x: -200, y: 0 }
-      case "bottom-center":
+      }
+      case "bottom-center": {
         return { x: 0, y: 200 }
-      case "bottom-right":
+      }
+      case "bottom-right": {
         return { x: 200, y: 0 }
-      default:
+      }
+      default: {
         return { x: 0, y: -200 }
+      }
     }
   }
 
   switch (convertedPlacement) {
-    case "top-left":
+    case "top-left": {
       return { x: -40, y: -10 }
-    case "top-center":
+    }
+    case "top-center": {
       return { x: 0, y: -40 }
-    case "top-right":
+    }
+    case "top-right": {
       return { x: 40, y: -10 }
-    case "bottom-left":
+    }
+    case "bottom-left": {
       return { x: -40, y: 10 }
-    case "bottom-center":
+    }
+    case "bottom-center": {
       return { x: 0, y: 40 }
-    case "bottom-right":
+    }
+    case "bottom-right": {
       return { x: 40, y: 10 }
-    default:
+    }
+    default: {
       return { x: 0, y: -40 }
+    }
   }
 }
 
@@ -285,58 +296,79 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
 
     const context = useNoticeContext()
 
-    const dragClosable =
-      (closeOnDrag ?? context.closeOnDrag) && (closable ?? context.closable)
+    const dragClosable = useMemo(() => {
+      return (
+        (closeOnDrag ?? context.closeOnDrag) && (closable ?? context.closable)
+      )
+    }, [closeOnDrag, closable, context.closeOnDrag, context.closable])
 
     useUpdateEffect(() => {
-      if (!isPresent) onCloseComplete?.()
+      if (!isPresent) {
+        onCloseComplete?.()
+      }
     }, [isPresent])
 
     useUpdateEffect(() => {
       setDelay(duration)
     }, [duration])
 
-    const onMouseEnter = useCallback(() => setDelay(null), [])
-    const onMouseLeave = useCallback(() => setDelay(duration), [duration])
+    const onMouseEnter = useCallback(() => {
+      setDelay(null)
+    }, [])
+    const onMouseLeave = useCallback(() => {
+      setDelay(duration)
+    }, [duration])
 
     const onClose = useCallback(() => {
-      if (isPresent) onDelete()
+      if (isPresent) {
+        onDelete()
+      }
     }, [isPresent, onDelete])
 
     useEffect(() => {
-      if (isPresent && isDelete) onDelete()
+      if (isPresent && isDelete) {
+        onDelete()
+      }
     }, [isPresent, isDelete, onDelete])
 
     useTimeout(onClose, delay)
 
     const drag = useMemo<HTMLMotionProps["drag"]>(() => {
-      if (!dragClosable) return false
+      if (!dragClosable) {
+        return false
+      }
 
       switch (convertedPlacement) {
         case "top-center":
-        case "bottom-center":
+        case "bottom-center": {
           return "y"
+        }
         case "top-left":
         case "top-right":
         case "bottom-left":
-        case "bottom-right":
+        case "bottom-right": {
           return "x"
+        }
       }
     }, [dragClosable, convertedPlacement])
 
     const getDragRestriction = useCallback(
       (value: number) => {
         switch (convertedPlacement) {
-          case "top-center":
+          case "top-center": {
             return { bottom: value }
-          case "bottom-center":
+          }
+          case "bottom-center": {
             return { top: value }
+          }
           case "top-left":
-          case "bottom-left":
+          case "bottom-left": {
             return { right: value }
+          }
           case "top-right":
-          case "bottom-right":
+          case "bottom-right": {
             return { left: value }
+          }
         }
       },
       [convertedPlacement],
@@ -345,33 +377,47 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
     const handleDragEnd: DragEndEventHandler = useCallback(
       (event, info) => {
         switch (convertedPlacement) {
-          case "top-center":
+          case "top-center": {
             if (
               info.velocity.y <= dragVelocity * -1 ||
               info.offset.y <= dragOffset * -1
-            )
+            ) {
               onDelete()
+            }
             break
+          }
 
-          case "bottom-center":
-            if (info.velocity.y >= dragVelocity || info.offset.y >= dragOffset)
+          case "bottom-center": {
+            if (
+              info.velocity.y >= dragVelocity ||
+              info.offset.y >= dragOffset
+            ) {
               onDelete()
+            }
             break
+          }
 
           case "top-left":
-          case "bottom-left":
+          case "bottom-left": {
             if (
               info.velocity.x <= dragVelocity * -1 ||
               info.offset.x <= dragOffset * -1
-            )
+            ) {
               onDelete()
+            }
             break
+          }
 
           case "top-right":
-          case "bottom-right":
-            if (info.velocity.x >= dragVelocity || info.offset.x >= dragOffset)
+          case "bottom-right": {
+            if (
+              info.velocity.x >= dragVelocity ||
+              info.offset.x >= dragOffset
+            ) {
               onDelete()
+            }
             break
+          }
         }
         return { event, info }
       },

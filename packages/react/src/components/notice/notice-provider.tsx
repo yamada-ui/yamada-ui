@@ -142,36 +142,36 @@ interface PlacementValues {
 const getPlacementInitialValues = (placement: string): PlacementValues => {
   const convertedPlacement = convertFromNoticePlacement(placement)
 
+  // switch (convertedPlacement) {
+  // 	case "top-left":
+  // 	case "top-center":
+  // 	case "top-right":
+  // 		return { x: 0, y: "-100%" };
+  // 	case "bottom-left":
+  // 	case "bottom-center":
+  // 	case "bottom-right":
+  // 		return { x: 0, y: "100%" };
+  // 	default:
+  // 		console.warn(`Unexpected placement value: ${convertedPlacement}`);
+  // 		return { x: 0, y: "-100%" };
+  // }
   switch (convertedPlacement) {
     case "top-left":
+      return { x: "-100%", y: 0 }
     case "top-center":
-    case "top-right":
       return { x: 0, y: "-100%" }
+    case "top-right":
+      return { x: "100%", y: 0 }
     case "bottom-left":
+      return { x: "-100%", y: 0 }
     case "bottom-center":
-    case "bottom-right":
       return { x: 0, y: "100%" }
+    case "bottom-right":
+      return { x: "100%", y: 0 }
     default:
       console.warn(`Unexpected placement value: ${convertedPlacement}`)
-      return { x: 0, y: "-100%" }
+      return { x: 0, y: -24 }
   }
-  // switch (convertedPlacement) {
-  //   case "top-left":
-  //     return { x: "-100%", y: 0 }
-  //   case "top-center":
-  //     return { x: 0, y: "-100%" }
-  //   case "top-right":
-  //     return { x: "100%", y: 0 }
-  //   case "bottom-left":
-  //     return { x: "-100%", y: 0 }
-  //   case "bottom-center":
-  //     return { x: 0, y: "100%" }
-  //   case "bottom-right":
-  //     return { x: "100%", y: 0 }
-  //   default:
-  //     console.warn(`Unexpected placement value: ${convertedPlacement}`)
-  //     return { x: 0, y: -24 }
-  // }
 }
 
 const getPlacementExitValues = (
@@ -180,42 +180,41 @@ const getPlacementExitValues = (
 ): PlacementValues => {
   const convertedPlacement = convertFromNoticePlacement(placement)
 
-  // if (closeOnDrag) {
-  switch (convertedPlacement) {
-    case "top-left":
-      return { x: -200, y: 0 }
-    case "top-center":
-      return { x: 0, y: -200 }
-    case "top-right":
-      return { x: 200, y: 0 }
-    case "bottom-left":
-      return { x: -200, y: 0 }
-    case "bottom-center":
-      return { x: 0, y: 200 }
-    case "bottom-right":
-      return { x: 200, y: 0 }
-    default:
-      return { x: 0, y: -200 }
+  if (closeOnDrag) {
+    switch (convertedPlacement) {
+      case "top-left":
+        return { x: -200, y: 0 }
+      case "top-center":
+        return { x: 0, y: -200 }
+      case "top-right":
+        return { x: 200, y: 0 }
+      case "bottom-left":
+        return { x: -200, y: 0 }
+      case "bottom-center":
+        return { x: 0, y: 200 }
+      case "bottom-right":
+        return { x: 200, y: 0 }
+      default:
+        return { x: 0, y: -200 }
+    }
   }
 
-  // }
-
-  // switch (convertedPlacement) {
-  //   case "top-left":
-  //     return { x: -40, y: -10 }
-  //   case "top-center":
-  //     return { x: 0, y: -40 }
-  //   case "top-right":
-  //     return { x: 40, y: -10 }
-  //   case "bottom-left":
-  //     return { x: -40, y: 10 }
-  //   case "bottom-center":
-  //     return { x: 0, y: 40 }
-  //   case "bottom-right":
-  //     return { x: 40, y: 10 }
-  //   default:
-  //     return { x: 0, y: -40 }
-  // }
+  switch (convertedPlacement) {
+    case "top-left":
+      return { x: -40, y: -10 }
+    case "top-center":
+      return { x: 0, y: -40 }
+    case "top-right":
+      return { x: 40, y: -10 }
+    case "bottom-left":
+      return { x: -40, y: 10 }
+    case "bottom-center":
+      return { x: 0, y: 40 }
+    case "bottom-right":
+      return { x: 40, y: 10 }
+    default:
+      return { x: 0, y: -40 }
+  }
 }
 
 const defaultVariants: Variants = {
@@ -230,6 +229,7 @@ const defaultVariants: Variants = {
     y: 0,
   },
   exit: ({ closeOnDrag, placement }) => ({
+    height: 0,
     opacity: 0,
     scale: 0.95,
     transition: {

@@ -84,13 +84,13 @@ export const WithVariant = () => {
         <Button
           onClick={() =>
             notice({
-              variant: "basic",
+              variant: "plain",
               description: "オッス！オラ悟空！",
               title: "孫悟空",
             })
           }
         >
-          Show basic Notice
+          Show plain Notice
         </Button>
 
         <Button

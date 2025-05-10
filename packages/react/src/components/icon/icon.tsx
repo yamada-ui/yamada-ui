@@ -22,6 +22,7 @@ export const {
 export const Icon = withContext("svg")(
   {
     "aria-hidden": true,
+    "data-icon": "",
     role: "img",
     verticalAlign: "middle",
   },

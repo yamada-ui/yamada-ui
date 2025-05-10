@@ -73,6 +73,10 @@ export const attributes = {
    */
   _grid: "&:is([role=grid], [data-grid])",
   /**
+   * The CSS `&:has(> [data-icon])` attribute selector.
+   */
+  _hasIcon: "&:has(> [data-icon])",
+  /**
    * The CSS `&[data-holiday]` attribute selector.
    */
   _holiday: "&[data-holiday]",
@@ -321,9 +325,9 @@ export const pseudoClasses = {
   _horizontal:
     "&:is([data-orientation=horizontal], [aria-orientation=horizontal])",
   /**
-   * The CSS `& :where(svg:not([data-loading]))` pseudo-class.
+   * The CSS `&:where(svg:not([data-loading])), & > [data-icon]` pseudo-class.
    */
-  _icon: "& :where(svg:not([data-loading]))",
+  _icon: "&:where(svg:not([data-loading])), & > [data-icon]",
   /**
    * The CSS `&:is(:indeterminate, [data-indeterminate], [aria-checked=mixed])` pseudo-class.
    */

@@ -10,8 +10,14 @@ export type {
   ResizableRootProps,
   ResizableTriggerProps,
 } from "./resizable"
-export type { ResizableItemControl, ResizableStorage } from "./use-resizable"
 
 export * from "./resizable.style"
+
+export { ResizableContext, useResizableContext } from "./use-resizable"
+export type {
+  ResizableGroupControl,
+  ResizableItemControl,
+  ResizableStorage,
+} from "./use-resizable"
 
 export * as Resizable from "./namespace"

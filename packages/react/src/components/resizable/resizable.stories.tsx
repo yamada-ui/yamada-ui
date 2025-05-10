@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { ResizableItemControl, ResizableStorage } from "./"
 import { useEffect, useMemo, useRef } from "react"
-import { GripVerticalIcon, MoveHorizontalIcon } from "../icon"
+import { GripVerticalIcon } from "../icon"
 import { Resizable } from "./"
 
 type Story = StoryFn<typeof Resizable.Root>
 
+import { PropsTable } from "../../../storybook/components"
 import { useBoolean } from "../../hooks/use-boolean"
 import { Button } from "../button"
 import { Center } from "../center"
@@ -19,7 +19,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <Resizable.Root borderWidth="1px" h="md" rounded="md">
+    <Resizable.Root borderWidth="1px" h="md" rounded="l2">
       <Resizable.Item as={Center}>One</Resizable.Item>
 
       <Resizable.Trigger />
@@ -31,35 +31,35 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <>
-      <Resizable.Root borderWidth="1px" h="md" rounded="md">
-        <Resizable.Item as={Center}>One</Resizable.Item>
+    <PropsTable variant="column" rows={["border", "spacer", "plain"]}>
+      {(_, row, key) => (
+        <Resizable.Root
+          key={key}
+          variant={row}
+          borderWidth={row === "border" ? "1px" : undefined}
+          h="md"
+          rounded={row === "border" ? "l2" : undefined}
+        >
+          <Resizable.Item
+            as={Center}
+            borderWidth={row === "spacer" ? "1px" : undefined}
+            rounded={row === "spacer" ? "l2" : undefined}
+          >
+            One
+          </Resizable.Item>
 
-        <Resizable.Trigger />
+          <Resizable.Trigger />
 
-        <Resizable.Item as={Center}>Two</Resizable.Item>
-      </Resizable.Root>
-
-      <Resizable.Root variant="spacer" h="md">
-        <Resizable.Item as={Center} borderWidth="1px" rounded="md">
-          One
-        </Resizable.Item>
-
-        <Resizable.Trigger />
-
-        <Resizable.Item as={Center} borderWidth="1px" rounded="md">
-          Two
-        </Resizable.Item>
-      </Resizable.Root>
-
-      <Resizable.Root variant="unstyled" h="md">
-        <Resizable.Item as={Center}>One</Resizable.Item>
-
-        <Resizable.Trigger />
-
-        <Resizable.Item as={Center}>Two</Resizable.Item>
-      </Resizable.Root>
-    </>
+          <Resizable.Item
+            as={Center}
+            borderWidth={row === "spacer" ? "1px" : undefined}
+            rounded={row === "spacer" ? "l2" : undefined}
+          >
+            Two
+          </Resizable.Item>
+        </Resizable.Root>
+      )}
+    </PropsTable>
   )
 }
 
@@ -67,25 +67,25 @@ export const ColorScheme: Story = () => {
   return (
     <>
       <Resizable.Root colorScheme="primary" variant="spacer" h="md">
-        <Resizable.Item as={Center} borderWidth="1px" rounded="md">
+        <Resizable.Item as={Center} borderWidth="1px" rounded="l2">
           One
         </Resizable.Item>
 
         <Resizable.Trigger />
 
-        <Resizable.Item as={Center} borderWidth="1px" rounded="md">
+        <Resizable.Item as={Center} borderWidth="1px" rounded="l2">
           Two
         </Resizable.Item>
       </Resizable.Root>
 
       <Resizable.Root colorScheme="red" variant="spacer" h="md">
-        <Resizable.Item as={Center} borderWidth="1px" rounded="md">
+        <Resizable.Item as={Center} borderWidth="1px" rounded="l2">
           One
         </Resizable.Item>
 
         <Resizable.Trigger />
 
-        <Resizable.Item as={Center} borderWidth="1px" rounded="md">
+        <Resizable.Item as={Center} borderWidth="1px" rounded="l2">
           Two
         </Resizable.Item>
       </Resizable.Root>
@@ -100,7 +100,7 @@ export const Orientation: Story = () => {
         borderWidth="1px"
         h="md"
         orientation="horizontal"
-        rounded="md"
+        rounded="l2"
       >
         <Resizable.Item as={Center}>One</Resizable.Item>
 
@@ -113,7 +113,7 @@ export const Orientation: Story = () => {
         borderWidth="1px"
         h="md"
         orientation="vertical"
-        rounded="md"
+        rounded="l2"
       >
         <Resizable.Item as={Center}>One</Resizable.Item>
 
@@ -127,7 +127,7 @@ export const Orientation: Story = () => {
 
 export const DefaultSize: Story = () => {
   return (
-    <Resizable.Root borderWidth="1px" h="md" rounded="md">
+    <Resizable.Root borderWidth="1px" h="md" rounded="l2">
       <Resizable.Item as={Center} defaultSize={30}>
         One
       </Resizable.Item>
@@ -141,7 +141,7 @@ export const DefaultSize: Story = () => {
 
 export const MinMaxSize: Story = () => {
   return (
-    <Resizable.Root borderWidth="1px" h="md" rounded="md">
+    <Resizable.Root borderWidth="1px" h="md" rounded="l2">
       <Resizable.Item as={Center} maxSize={70} minSize={30}>
         One
       </Resizable.Item>
@@ -155,7 +155,7 @@ export const MinMaxSize: Story = () => {
 
 export const KeyboardStep: Story = () => {
   return (
-    <Resizable.Root borderWidth="1px" h="md" keyboardStep={25} rounded="md">
+    <Resizable.Root borderWidth="1px" h="md" keyboardStep={25} rounded="l2">
       <Resizable.Item as={Center}>One</Resizable.Item>
 
       <Resizable.Trigger />
@@ -168,7 +168,7 @@ export const KeyboardStep: Story = () => {
 export const Collapsible: Story = () => {
   return (
     <>
-      <Resizable.Root borderWidth="1px" h="md" rounded="md">
+      <Resizable.Root borderWidth="1px" h="md" rounded="l2">
         <Resizable.Item
           as={Center}
           collapsedSize={5}
@@ -195,7 +195,7 @@ export const Collapsible: Story = () => {
         borderWidth="1px"
         h="md"
         orientation="vertical"
-        rounded="md"
+        rounded="l2"
       >
         <Resizable.Item
           as={Center}
@@ -223,17 +223,15 @@ export const Collapsible: Story = () => {
 }
 
 export const Refs: Story = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const rootRef = useRef<HTMLDivElement>(null)
   const groupRef = useRef<HTMLDivElement>(null)
   const itemRef = useRef<HTMLDivElement>(null)
-  const innerRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    console.log("Container ref", containerRef)
+    console.log("Root ref", rootRef)
     console.log("Group ref", groupRef)
     console.log("Item ref", itemRef)
-    console.log("Item inner ref", innerRef)
     console.log("Trigger ref", triggerRef)
   }, [])
 
@@ -241,11 +239,11 @@ export const Refs: Story = () => {
     <Resizable.Root
       ref={groupRef}
       borderWidth="1px"
-      containerRef={containerRef}
       h="md"
-      rounded="md"
+      rootRef={rootRef}
+      rounded="l2"
     >
-      <Resizable.Item ref={itemRef} as={Center} innerRef={innerRef}>
+      <Resizable.Item ref={itemRef} as={Center}>
         One
       </Resizable.Item>
 
@@ -259,7 +257,7 @@ export const Refs: Story = () => {
 export const Icon: Story = () => {
   return (
     <>
-      <Resizable.Root borderWidth="1px" h="md" rounded="md">
+      <Resizable.Root borderWidth="1px" h="md" rounded="l2">
         <Resizable.Item as={Center}>One</Resizable.Item>
 
         <Resizable.Trigger icon={<GripVerticalIcon />} />
@@ -268,42 +266,15 @@ export const Icon: Story = () => {
       </Resizable.Root>
 
       <Resizable.Root variant="spacer" h="md" orientation="vertical">
-        <Resizable.Item as={Center} borderWidth="1px" rounded="md">
+        <Resizable.Item as={Center} borderWidth="1px" rounded="l2">
           One
         </Resizable.Item>
 
         <Resizable.Trigger icon={<GripVerticalIcon />} />
 
-        <Resizable.Item as={Center} borderWidth="1px" rounded="md">
+        <Resizable.Item as={Center} borderWidth="1px" rounded="l2">
           Two
         </Resizable.Item>
-      </Resizable.Root>
-    </>
-  )
-}
-
-export const CustomIcon: Story = () => {
-  return (
-    <>
-      <Resizable.Root borderWidth="1px" h="md" rounded="md">
-        <Resizable.Item as={Center}>One</Resizable.Item>
-
-        <Resizable.Trigger icon={<MoveHorizontalIcon />} />
-
-        <Resizable.Item as={Center}>Two</Resizable.Item>
-      </Resizable.Root>
-
-      <Resizable.Root
-        borderWidth="1px"
-        h="md"
-        orientation="vertical"
-        rounded="md"
-      >
-        <Resizable.Item as={Center}>One</Resizable.Item>
-
-        <Resizable.Trigger icon={<MoveHorizontalIcon />} />
-
-        <Resizable.Item as={Center}>Two</Resizable.Item>
       </Resizable.Root>
     </>
   )
@@ -312,7 +283,7 @@ export const CustomIcon: Story = () => {
 export const NestedResizable: Story = () => {
   return (
     <>
-      <Resizable.Root borderWidth="1px" h="md" rounded="md">
+      <Resizable.Root borderWidth="1px" h="md" rounded="l2">
         <Resizable.Item as={Center}>Left</Resizable.Item>
 
         <Resizable.Trigger />
@@ -332,7 +303,7 @@ export const NestedResizable: Story = () => {
         borderWidth="1px"
         h="md"
         orientation="vertical"
-        rounded="md"
+        rounded="l2"
       >
         <Resizable.Item as={Center}>Top</Resizable.Item>
 
@@ -355,7 +326,7 @@ export const NestedResizable: Story = () => {
 export const Disabled: Story = () => {
   return (
     <>
-      <Resizable.Root borderWidth="1px" disabled h="md" rounded="md">
+      <Resizable.Root borderWidth="1px" disabled h="md" rounded="l2">
         <Resizable.Item as={Center}>One</Resizable.Item>
 
         <Resizable.Trigger />
@@ -367,7 +338,7 @@ export const Disabled: Story = () => {
         <Resizable.Item as={Center}>Three</Resizable.Item>
       </Resizable.Root>
 
-      <Resizable.Root borderWidth="1px" h="md" rounded="md">
+      <Resizable.Root borderWidth="1px" h="md" rounded="l2">
         <Resizable.Item as={Center}>One</Resizable.Item>
 
         <Resizable.Trigger disabled />
@@ -384,7 +355,7 @@ export const Disabled: Story = () => {
 
 export const OnResize: Story = () => {
   return (
-    <Resizable.Root borderWidth="1px" h="md" rounded="md">
+    <Resizable.Root borderWidth="1px" h="md" rounded="l2">
       <Resizable.Item
         as={Center}
         onResize={(size, prevSize) => {
@@ -410,7 +381,7 @@ export const LocaleStorage: Story = () => {
       <Resizable.Root
         borderWidth="1px"
         h="md"
-        rounded="md"
+        rounded="l2"
         storageKey="persistence"
       >
         <Resizable.Item id="one" as={Center}>
@@ -436,7 +407,7 @@ export const LocaleStorage: Story = () => {
       <Resizable.Root
         borderWidth="1px"
         h="md"
-        rounded="md"
+        rounded="l2"
         storageKey="conditional"
       >
         {showLeft ? (
@@ -468,7 +439,7 @@ export const LocaleStorage: Story = () => {
 }
 
 export const CookieStorage: Story = () => {
-  const storage: ResizableStorage = useMemo(
+  const storage: Resizable.Storage = useMemo(
     () => ({
       getItem: (key) => {
         const match = document.cookie.match(new RegExp(`(^| )${key}=([^;]+)`))
@@ -486,7 +457,7 @@ export const CookieStorage: Story = () => {
     <Resizable.Root
       borderWidth="1px"
       h="md"
-      rounded="md"
+      rounded="l2"
       storage={storage}
       storageKey="persistence"
     >
@@ -504,7 +475,7 @@ export const CookieStorage: Story = () => {
 }
 
 export const CustomControls: Story = () => {
-  const controlRef = useRef<ResizableItemControl>(null)
+  const controlRef = useRef<Resizable.ItemControl>(null)
 
   return (
     <>
@@ -525,7 +496,7 @@ export const CustomControls: Story = () => {
         </Button>
       </Wrap>
 
-      <Resizable.Root borderWidth="1px" h="md" rounded="md">
+      <Resizable.Root borderWidth="1px" h="md" rounded="l2">
         <Resizable.Item
           as={Center}
           collapsedSize={15}

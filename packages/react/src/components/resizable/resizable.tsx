@@ -1,31 +1,23 @@
+import type { ForwardedRef, ReactElement } from "react"
 import type {
-  ForwardedRef,
-  ReactElement,
-  Ref,
-  RefAttributes,
-  RefObject,
-} from "react"
-import type {
-  ComponentArgs,
   FC,
   HTMLStyledProps,
   HTMLStyledPropsWithoutAs,
   ThemeProps,
 } from "../../core"
-import type { Merge } from "../../utils"
 import type { ResizableStyle } from "./resizable.style"
 import type {
-  ResizableGroupControl,
-  ResizableOrientation,
   UseResizableItemProps,
   UseResizableProps,
   UseResizableTriggerProps,
 } from "./use-resizable"
+import { useMemo } from "react"
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels"
 import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { resizableStyle } from "./resizable.style"
 import {
+  ResizableContext,
   useResizable,
   useResizableItem,
   useResizableTrigger,
@@ -34,49 +26,46 @@ import {
 /**
  * `Resizable` is accessible resizable panel groups and layouts with keyboard support.
  *
- * @see Docs https://yamada-ui.com/components/resizable
+ * @see https://yamada-ui.com/components/resizable
  */
 export interface ResizableRootProps
   extends HTMLStyledProps,
     ThemeProps<ResizableStyle>,
-    Omit<UseResizableProps, "orientation" | "ref"> {
+    Omit<UseResizableProps, "orientation"> {
   /**
-   * Ref for resizable container element.
+   * Ref for resizable root element.
    */
-  containerRef?: ForwardedRef<HTMLDivElement>
-}
-
-interface ResizableContext {
-  controlRef: RefObject<null | ResizableGroupControl>
-  orientation: ResizableOrientation
-  disabled?: boolean
+  rootRef?: ForwardedRef<HTMLDivElement>
 }
 
 export const {
-  ComponentContext: ResizableContext,
   PropsContext: ResizablePropsContext,
-  useComponentContext: useResizableContext,
   usePropsContext: useResizablePropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<ResizableRootProps, ResizableStyle, ResizableContext>(
+} = createSlotComponent<ResizableRootProps, ResizableStyle>(
   "resizable",
   resizableStyle,
 )
 
 export const ResizableRoot: FC<ResizableRootProps> = withProvider(
-  ({ ref, children, containerRef, ...props }) => {
-    const orientation = useValue(props.orientation)
+  ({ children, orientation: orientationProp, rootRef, ...rest }) => {
+    const computedOrientation = useValue(orientationProp)
 
-    const { getGroupProps, getRootProps, ...rest } = useResizable({
-      ref,
-      ...props,
-      orientation,
-    })
+    const { controlRef, disabled, orientation, getGroupProps, getRootProps } =
+      useResizable({
+        ...rest,
+        orientation: computedOrientation,
+      })
+
+    const context = useMemo(
+      () => ({ controlRef, disabled, orientation }),
+      [disabled, orientation, controlRef],
+    )
 
     return (
-      <ResizableContext value={rest}>
-        <styled.div {...getRootProps({ ref: containerRef })}>
+      <ResizableContext value={context}>
+        <styled.div {...getRootProps({ ref: rootRef })}>
           <PanelGroup {...getGroupProps()}>{children}</PanelGroup>
         </styled.div>
       </ResizableContext>
@@ -86,68 +75,21 @@ export const ResizableRoot: FC<ResizableRootProps> = withProvider(
   { transferProps: ["orientation"] },
 )()
 
-const forwardProps = ["order"]
+const StyledPanel = styled(Panel, { forwardProps: ["order"] })
 
-const UIPanel = styled(Panel, { forwardProps })
+export interface ResizableItemProps
+  extends Omit<HTMLStyledPropsWithoutAs, "order">,
+    UseResizableItemProps {}
 
-export interface ResizableItemProps extends UseResizableItemProps {
-  /**
-   * Ref for resizable item inner element.
-   */
-  innerRef?: Ref<HTMLDivElement>
-}
+export const ResizableItem = withContext<"div", ResizableItemProps>((props) => {
+  const { getItemProps } = useResizableItem(props)
 
-export const ResizableItem = withContext<"div", ResizableItemProps>(
-  ({
-    boxSize,
-    children,
-    h,
-    height,
-    innerRef,
-    maxH,
-    maxHeight,
-    maxW,
-    maxWidth,
-    minH,
-    minHeight,
-    minW,
-    minWidth,
-    w,
-    width,
-    ...rest
-  }) => {
-    const { getItemProps, getPanelProps } = useResizableItem(rest)
-
-    return (
-      <UIPanel
-        {...getPanelProps({
-          boxSize,
-          h,
-          height,
-          maxH,
-          maxHeight,
-          maxW,
-          maxWidth,
-          minH,
-          minHeight,
-          minW,
-          minWidth,
-          w,
-          width,
-        })}
-      >
-        <styled.div {...getItemProps({ ref: innerRef })}>{children}</styled.div>
-      </UIPanel>
-    )
-  },
-  "item",
-)()
+  return <StyledPanel {...getItemProps()} />
+}, "item")()
 
 export interface ResizableTriggerProps
-  extends Merge<
-    Omit<UseResizableTriggerProps, "ref">,
-    Omit<HTMLStyledPropsWithoutAs, "id" | "onBlur" | "onFocus">
-  > {
+  extends HTMLStyledPropsWithoutAs,
+    UseResizableTriggerProps {
   /**
    * The resizable trigger icon to use.
    */
@@ -173,9 +115,7 @@ export const ResizableTrigger = withContext<"div", ResizableTriggerProps>(
     )
   },
   "trigger",
-)() as ComponentArgs & {
-  (props: RefAttributes<HTMLElement> & ResizableTriggerProps): ReactElement
-}
+)()
 
 interface ResizableIconProps extends HTMLStyledProps {}
 

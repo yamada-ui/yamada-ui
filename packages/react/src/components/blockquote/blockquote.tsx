@@ -157,4 +157,4 @@ export interface BlockquoteIconProps extends HTMLStyledProps<"svg"> {}
 export const BlockquoteIcon = withContext<"svg", BlockquoteIconProps>(
   QuoteIcon,
   "icon",
-)({ "data-icon": "" })
+)()

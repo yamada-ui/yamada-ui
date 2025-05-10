@@ -4,7 +4,6 @@ export const resizableStyle = defineComponentSlotStyle({
   base: {
     icon: {
       alignItems: "center",
-      color: ["blackAlpha.600", "whiteAlpha.700"],
       display: "flex",
       justifyContent: "center",
       left: "50%",
@@ -14,14 +13,19 @@ export const resizableStyle = defineComponentSlotStyle({
       translateY: "-50%",
     },
     item: {
-      boxSize: "100%",
+      boxSize: "full",
     },
     root: {
-      h: "100%",
-      w: "100%",
+      boxSize: "full",
     },
     trigger: {
       position: "relative",
+      transitionDuration: "moderate",
+      transitionProperty: "common",
+      _after: {
+        transitionDuration: "moderate",
+        transitionProperty: "common",
+      },
     },
   },
 
@@ -29,78 +33,64 @@ export const resizableStyle = defineComponentSlotStyle({
     border: {
       icon: {
         bg: "colorScheme.muted",
-        p: "1",
-        rounded: "full",
+        color: "colorScheme.fg",
+        py: "1",
+        rounded: "l1",
       },
       trigger: {
         bg: "colorScheme.muted",
+        focusVisibleRing: "none",
         _after: {
-          content: "''",
           position: "absolute",
         },
-        _focus: {
-          outline: "none",
+        _hover: {
+          bg: "colorScheme.emphasized",
         },
         _focusVisible: {
-          bg: "focus",
-          outline: "none",
+          bg: "colorScheme.emphasized",
+        },
+      },
+    },
+    plain: {
+      trigger: {
+        focusVisibleRing: "none",
+        _after: {
+          position: "absolute",
         },
       },
     },
     spacer: {
       icon: {
-        transitionDuration: "slower",
+        color: "colorScheme.fg",
+        transitionDuration: "moderate",
         transitionProperty: "common",
         _active: {
-          color: ["transparent", "transparent"],
+          color: "transparent",
         },
       },
       trigger: {
+        focusVisibleRing: "none",
         p: "1",
         _after: {
           bg: "transparent",
-          content: "''",
           display: "block",
           rounded: "full",
-          transitionDuration: "slower",
-          transitionProperty: "common",
         },
-        _dark: {
-          _after: {
-            bg: "transparent",
-          },
-        },
-        _active: {
+        _hover: {
           _after: {
             bg: "colorScheme.bg",
           },
-          _dark: {
-            _after: {
-              bg: "colorScheme.bg",
-            },
+          _icon: {
+            color: "transparent",
           },
-        },
-        _focus: {
-          outline: "none",
         },
         _focusVisible: {
-          outline: "none",
           _after: {
             bg: "colorScheme.bg",
           },
-          _dark: {
-            _after: {
-              bg: "colorScheme.bg",
-            },
+          _icon: {
+            color: "transparent",
           },
-        },
-      },
-    },
-    unstyled: {
-      trigger: {
-        _after: {
-          content: "''",
-          position: "absolute",
         },
       },
     },
@@ -186,7 +176,7 @@ export const resizableStyle = defineComponentSlotStyle({
           },
         },
       },
-      variant: "unstyled",
+      variant: "plain",
       orientation: "vertical",
     },
     {
@@ -200,7 +190,7 @@ export const resizableStyle = defineComponentSlotStyle({
           },
         },
       },
-      variant: "unstyled",
+      variant: "plain",
       orientation: "horizontal",
     },
   ],

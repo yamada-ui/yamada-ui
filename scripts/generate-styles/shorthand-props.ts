@@ -1,6 +1,6 @@
-import type { CSSProperties, UIProperties } from "."
+import type { CSSProperties, StyledProperties } from "."
 
-type ShorthandProps = { [key in CSSProperties | UIProperties]?: string[] }
+type ShorthandProps = { [key in CSSProperties | StyledProperties]?: string[] }
 
 export const shorthandProps: ShorthandProps = {
   accentColor: ["accent"],

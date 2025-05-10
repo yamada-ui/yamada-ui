@@ -1,4 +1,9 @@
-import type { FC, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  FC,
+  HTMLStyledProps,
+  ThemeProps,
+  WithoutThemeProps,
+} from "../../core"
 import type { InputProps } from "../input"
 import type { NumberInputStyle } from "./number-input.style"
 import type { UseNumberInputProps } from "./use-number-input"
@@ -11,8 +16,8 @@ import { useNumberInput } from "./use-number-input"
 
 export interface NumberInputProps
   extends Omit<
-      InputProps,
-      keyof ThemeProps<NumberInputStyle> | keyof UseNumberInputProps
+      WithoutThemeProps<InputProps, NumberInputStyle>,
+      keyof UseNumberInputProps
     >,
     ThemeProps<NumberInputStyle>,
     UseNumberInputProps {

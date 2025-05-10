@@ -1,11 +1,12 @@
-import type { EmotionCSSObject, Union } from "@yamada-ui/react"
+import type { CSSObject } from "@emotion/react"
+import type { Union } from "@yamada-ui/react"
 import type { CSSProperties } from "."
 
 export interface StyleConfig {
   type?: string
   description?: string[]
   properties?: Union<CSSProperties> | Union<CSSProperties>[]
-  static?: EmotionCSSObject
+  static?: CSSObject
   variableLength?: boolean
 }
 
@@ -206,7 +207,7 @@ export const additionalProps = {
   },
 } as const satisfies { [key: string]: StyleConfig }
 
-export const uiProps = {
+export const styledProps = {
   apply: {
     type: `StringLiteral, "apply"`,
     description: [
@@ -249,7 +250,7 @@ export const uiProps = {
     description: ["If `true`, it clamps truncate a text after one line."],
   },
   vars: {
-    type: "{ name: string; token?: ThemeToken, value?: CSSToken<any> }[]",
+    type: "{ name: string; token?: ThemeToken, value?: StyleValue<any> }[]",
     description: ["Set CSS variables."],
     variableLength: true,
   },

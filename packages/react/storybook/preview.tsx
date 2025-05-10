@@ -51,7 +51,6 @@ const preview: Preview = {
     locale: "en-US",
     locales: {
       "en-US": { icon: "🇺🇸", right: "en-US", title: "English" },
-      // eslint-disable-next-line perfectionist/sort-objects
       "ja-JP": { icon: "🇯🇵", right: "ja-JP", title: "日本語" },
       // eslint-disable-next-line perfectionist/sort-objects
       "ar-EG": { icon: "🇸🇦", right: "ar-EG", title: "العربية" },

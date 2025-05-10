@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { HTMLStyledProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps, WithoutThemeProps } from "../../core"
 import type { InputProps } from "../input"
 import type { PasswordInputStyle } from "./password-input.style"
 import type { UsePasswordInputProps } from "./use-password-input"
@@ -11,7 +11,7 @@ import { passwordInputStyle } from "./password-input.style"
 import { usePasswordInput } from "./use-password-input"
 
 export interface PasswordInputProps
-  extends Omit<InputProps, keyof ThemeProps<PasswordInputStyle>>,
+  extends WithoutThemeProps<InputProps, PasswordInputStyle>,
     ThemeProps<PasswordInputStyle>,
     UsePasswordInputProps {
   /**

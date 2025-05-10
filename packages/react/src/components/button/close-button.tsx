@@ -1,4 +1,4 @@
-import type { HTMLProps, ThemeProps } from "../../core"
+import type { HTMLProps, ThemeProps, WithoutThemeProps } from "../../core"
 import type { CloseButtonStyle } from "./close-button.style"
 import type { IconButtonProps } from "./icon-button"
 import { createComponent } from "../../core"
@@ -9,8 +9,8 @@ import { IconButton } from "./icon-button"
 
 export interface CloseButtonProps
   extends Omit<
-      IconButtonProps,
-      "aria-label" | keyof ThemeProps<CloseButtonStyle>
+      WithoutThemeProps<IconButtonProps, CloseButtonStyle>,
+      "aria-label"
     >,
     Pick<HTMLProps<"button">, "aria-label">,
     ThemeProps<CloseButtonStyle> {}

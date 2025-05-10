@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { ThemeProps } from "../../core"
+import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { ButtonProps } from "./button"
 import type { IconButtonStyle } from "./icon-button.style"
 import { createComponent } from "../../core"
@@ -8,7 +8,7 @@ import { iconButtonStyle } from "./icon-button.style"
 
 export interface IconButtonProps
   extends Omit<
-      ButtonProps,
+      WithoutThemeProps<ButtonProps, IconButtonStyle>,
       | "endIcon"
       | "iconProps"
       | "loadingIcon"
@@ -16,7 +16,6 @@ export interface IconButtonProps
       | "loadingPlacement"
       | "loadingProps"
       | "startIcon"
-      | keyof ThemeProps<IconButtonStyle>
     >,
     ThemeProps<IconButtonStyle> {
   /**

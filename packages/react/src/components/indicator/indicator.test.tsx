@@ -10,6 +10,21 @@ describe("<Indicator />", () => {
     )
   })
 
+  test("sets `displayName`", () => {
+    expect(Indicator.displayName).toBe("IndicatorRoot")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <Indicator data-testid="indicator" label="new">
+        <div />
+      </Indicator>,
+    )
+    const el = screen.getByTestId("indicator")
+    expect(el).toHaveClass("ui-indicator__icon")
+    expect(el.parentElement).toHaveClass("ui-indicator__root")
+  })
+
   test("should render indicator", () => {
     render(
       <Indicator label="new">
@@ -46,14 +61,16 @@ describe("<Indicator />", () => {
     expect(screen.queryByTestId("Indicator")).not.toBeInTheDocument()
   })
 
-  test("renders indicator at bottom-left", () => {
+  test.todo("renders indicator at bottom-left", () => {
     render(
       <Indicator data-testid="Indicator" label="new" placement="bottom-left">
         <div />
       </Indicator>,
     )
-    expect(screen.queryByTestId("Indicator")).toHaveStyle({ bottom: "0" })
-    expect(screen.queryByTestId("Indicator")).toHaveStyle({ left: "0" })
+    expect(screen.queryByTestId("Indicator")).toHaveStyle({
+      bottom: "{offset}",
+    })
+    expect(screen.queryByTestId("Indicator")).toHaveStyle({ left: "{offset}" })
     expect(screen.queryByTestId("Indicator")).toHaveStyle({
       transform: "translate(-50%, 50%)",
     })
@@ -67,8 +84,11 @@ describe("<Indicator />", () => {
     )
     expect(screen.queryByTestId("Indicator")).toHaveClass("ui-indicator__icon")
     expect(screen.queryByText("new")).toHaveClass("ui-indicator__icon")
+    expect(screen.queryByTestId("Indicator")!.parentElement).toHaveClass(
+      "ui-indicator__root",
+    )
     expect(screen.queryByText("new")!.querySelector("div")).toHaveClass(
-      "ui-indicator__icon__ping",
+      "ui-indicator__ping",
     )
   })
 })

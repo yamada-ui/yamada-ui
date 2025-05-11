@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { Indicator } from "."
-import { Avatar } from "../../components/avatar"
-import { Box } from "../../components/box"
-import { Wrap } from "../../components/flex"
-import { Grid } from "../../components/grid"
+import { Avatar } from "../avatar"
+import { Box } from "../box"
+import { Grid } from "../grid"
+import { Wrap } from "../wrap"
+import { Indicator } from "./"
 
 type Story = StoryFn<typeof Indicator>
 
@@ -34,7 +34,7 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
     <Wrap gap="md">
       <Indicator size="sm" label="new">
@@ -59,7 +59,7 @@ export const WithSize: Story = () => {
   )
 }
 
-export const WithVariant: Story = () => {
+export const Variant: Story = () => {
   return (
     <Wrap gap="md">
       <Indicator variant="solid" label="new">
@@ -78,9 +78,9 @@ export const WithVariant: Story = () => {
   )
 }
 
-export const WithPlacement: Story = () => {
+export const Placement: Story = () => {
   return (
-    <Grid gap="md" p="md" templateColumns="repeat(3, 1fr)">
+    <Grid templateColumns="repeat(3, 1fr)">
       <Indicator label={99} placement="top-left">
         <Avatar
           name="Hirotomo Yamada"
@@ -134,7 +134,7 @@ export const WithPlacement: Story = () => {
   )
 }
 
-export const WithOffset: Story = () => {
+export const Offset: Story = () => {
   return (
     <Indicator label="new" offset={4}>
       <Avatar
@@ -146,7 +146,7 @@ export const WithOffset: Story = () => {
   )
 }
 
-export const WithOverflowCount: Story = () => {
+export const OverflowCount: Story = () => {
   return (
     <Indicator label={100} overflowCount={99}>
       <Avatar
@@ -157,7 +157,7 @@ export const WithOverflowCount: Story = () => {
   )
 }
 
-export const WithShowZero: Story = () => {
+export const ShowZero: Story = () => {
   return (
     <>
       <Indicator label={0}>
@@ -176,7 +176,7 @@ export const WithShowZero: Story = () => {
   )
 }
 
-export const WithBorder: Story = () => {
+export const Border: Story = () => {
   return (
     <Indicator label={99} withBorder>
       <Avatar
@@ -209,7 +209,7 @@ export const UseInlineBlock: Story = () => {
   )
 }
 
-export const WithPing: Story = () => {
+export const Ping: Story = () => {
   return (
     <Wrap gap="md">
       <Indicator label="new" ping pingScale={1.4}>

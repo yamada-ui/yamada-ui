@@ -2,126 +2,123 @@ import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
 import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
+import { PropsTable } from "../../../storybook/components"
+import { COLOR_SCHEMES } from "../../utils"
 import { Button } from "../button"
-import { Fieldset } from "../form-control"
+import { Field } from "../field"
+import { For } from "../for"
 import { useLoading } from "../loading"
 import { VStack } from "../stack"
-import { PinInput, PinInputField } from "./"
+import { PinInput } from "./"
 
-type Story = StoryFn<typeof PinInput>
+type Story = StoryFn<typeof PinInput.Root>
 
-const meta: Meta<typeof PinInput> = {
-  component: PinInput,
+const meta: Meta<typeof PinInput.Root> = {
+  component: PinInput.Root,
   title: "Components / PinInput",
 }
 
 export default meta
 
 export const Basic: Story = () => {
-  return <PinInput />
+  return <PinInput.Root />
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
+  return (
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return <PinInput.Root key={key} size={column} variant={row} />
+      }}
+    </PropsTable>
+  )
+}
+
+export const Variant: Story = () => {
+  return (
+    <PropsTable
+      variant="column"
+      columns={["outline", "filled", "flushed"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return <PinInput.Root key={key} colorScheme={row} variant={column} />
+      }}
+    </PropsTable>
+  )
+}
+
+export const Fields: Story = () => {
+  return (
+    <For each={[3, 4, 5, 6]}>
+      {(items, index) => <PinInput.Root key={index} items={items} />}
+    </For>
+  )
+}
+
+export const Type: Story = () => {
   return (
     <>
-      <PinInput size="xs" />
+      <PinInput.Root />
 
-      <PinInput size="sm" />
-
-      <PinInput size="md" />
-
-      <PinInput size="lg" />
+      <PinInput.Root type="alphanumeric" />
     </>
   )
 }
 
-export const WithVariant: Story = () => {
+export const DefaultValue: Story = () => {
   return (
     <>
-      <PinInput variant="outline" />
+      <PinInput.Root defaultValue="1234" />
 
-      <PinInput variant="filled" />
-
-      <PinInput variant="flushed" />
-
-      <PinInput variant="unstyled" />
+      <PinInput.Root defaultValue="123" />
     </>
   )
 }
 
-export const WithFields: Story = () => {
+export const BorderColor: Story = () => {
   return (
     <>
-      <PinInput items={3} />
+      <PinInput.Root />
 
-      <PinInput items={4} />
+      <PinInput.Root focusBorderColor="green.500" />
 
-      <PinInput items={5} />
-
-      <PinInput items={6} />
+      <PinInput.Root errorBorderColor="orange.500" invalid />
     </>
   )
 }
 
-export const WithType: Story = () => {
-  return (
-    <>
-      <PinInput />
-
-      <PinInput type="alphanumeric" />
-    </>
-  )
-}
-
-export const WithDefaultValue: Story = () => {
-  return (
-    <>
-      <PinInput defaultValue="1234" />
-
-      <PinInput defaultValue="123" />
-    </>
-  )
-}
-
-export const WithBorderColor: Story = () => {
-  return (
-    <>
-      <PinInput />
-
-      <PinInput focusBorderColor="green.500" />
-
-      <PinInput errorBorderColor="orange.500" invalid />
-    </>
-  )
-}
-
-export const WithOnComplete: Story = () => {
+export const OnComplete: Story = () => {
   const { page } = useLoading()
 
-  return <PinInput onComplete={() => page.start({ duration: 5000 })} />
+  return <PinInput.Root onComplete={() => page.start({ duration: 5000 })} />
 }
 
-export const UseOneTimePassword: Story = () => {
-  return <PinInput otp />
+export const OneTimePassword: Story = () => {
+  return <PinInput.Root otp />
 }
 
 export const MaskingValue: Story = () => {
-  return <PinInput mask />
+  return <PinInput.Root mask />
 }
 
 export const CustomFields: Story = () => {
   return (
-    <PinInput>
-      <PinInputField />
-      <PinInputField />
-      <PinInputField />
-      <PinInputField />
-    </PinInput>
+    <PinInput.Root>
+      <PinInput.Field />
+      <PinInput.Field />
+      <PinInput.Field />
+      <PinInput.Field />
+    </PinInput.Root>
   )
 }
 
 export const CustomPlaceholder: Story = () => {
-  return <PinInput placeholder="💩" />
+  return <PinInput.Root placeholder="💩" />
 }
 
 export const CustomControl: Story = () => {
@@ -130,33 +127,35 @@ export const CustomControl: Story = () => {
 
   const onComplete = () => page.start({ duration: 5000 })
 
-  return <PinInput value={value} onChange={onChange} onComplete={onComplete} />
+  return (
+    <PinInput.Root value={value} onChange={onChange} onComplete={onComplete} />
+  )
 }
 
 export const DisabledFocusManagement: Story = () => {
-  return <PinInput manageFocus={false} />
+  return <PinInput.Root manageFocus={false} />
 }
 
 export const Disabled: Story = () => {
   return (
     <>
-      <PinInput disabled />
+      <PinInput.Root disabled />
 
-      <PinInput>
-        <PinInputField disabled />
-        <PinInputField disabled />
-        <PinInputField disabled />
-        <PinInputField disabled />
-      </PinInput>
+      <PinInput.Root>
+        <PinInput.Field disabled />
+        <PinInput.Field disabled />
+        <PinInput.Field disabled />
+        <PinInput.Field disabled />
+      </PinInput.Root>
 
-      <Fieldset
+      <Field.Root
         disabled
         errorMessage="one-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
-        legend="Please one-time password"
+        label="Please one-time password"
       >
-        <PinInput />
-      </Fieldset>
+        <PinInput.Root />
+      </Field.Root>
     </>
   )
 }
@@ -164,23 +163,23 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <PinInput readOnly />
+      <PinInput.Root readOnly />
 
-      <PinInput>
-        <PinInputField readOnly />
-        <PinInputField readOnly />
-        <PinInputField readOnly />
-        <PinInputField readOnly />
-      </PinInput>
+      <PinInput.Root>
+        <PinInput.Field readOnly />
+        <PinInput.Field readOnly />
+        <PinInput.Field readOnly />
+        <PinInput.Field readOnly />
+      </PinInput.Root>
 
-      <Fieldset
+      <Field.Root
         errorMessage="one-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
-        legend="Please one-time password"
+        label="Please one-time password"
         readOnly
       >
-        <PinInput />
-      </Fieldset>
+        <PinInput.Root />
+      </Field.Root>
     </>
   )
 }
@@ -188,23 +187,23 @@ export const Readonly: Story = () => {
 export const Invalid: Story = () => {
   return (
     <>
-      <PinInput invalid />
+      <PinInput.Root invalid />
 
-      <PinInput>
-        <PinInputField invalid />
-        <PinInputField invalid />
-        <PinInputField invalid />
-        <PinInputField invalid />
-      </PinInput>
+      <PinInput.Root>
+        <PinInput.Field invalid />
+        <PinInput.Field invalid />
+        <PinInput.Field invalid />
+        <PinInput.Field invalid />
+      </PinInput.Root>
 
-      <Fieldset
+      <Field.Root
         errorMessage="one-time password is required."
         helperMessage="Just sent you a one-time password to your e-mail address."
         invalid
-        legend="Please one-time password"
+        label="Please one-time password"
       >
-        <PinInput />
-      </Fieldset>
+        <PinInput.Root />
+      </Field.Root>
     </>
   )
 }
@@ -227,21 +226,21 @@ export const ReactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <Fieldset
+      <Field.Root
         errorMessage={errors.pinInput?.message}
         invalid={!!errors.pinInput}
-        legend="Token"
+        label="Token"
       >
         <Controller
           name="pinInput"
           control={control}
-          render={({ field }) => <PinInput {...field} />}
+          render={({ field }) => <PinInput.Root {...field} />}
           rules={{
             minLength: { message: "This is required.", value: 4 },
             required: { message: "This is required.", value: true },
           }}
         />
-      </Fieldset>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit
@@ -250,7 +249,7 @@ export const ReactHookForm: Story = () => {
   )
 }
 
-export const ReactHookFormWithDefaultValue: Story = () => {
+export const ReactHookFormDefaultValue: Story = () => {
   interface Data {
     pinInput: string
   }
@@ -272,21 +271,21 @@ export const ReactHookFormWithDefaultValue: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <Fieldset
+      <Field.Root
         errorMessage={errors.pinInput?.message}
         invalid={!!errors.pinInput}
-        legend="Token"
+        label="Token"
       >
         <Controller
           name="pinInput"
           control={control}
-          render={({ field }) => <PinInput {...field} />}
+          render={({ field }) => <PinInput.Root {...field} />}
           rules={{
             minLength: { message: "This is required.", value: 4 },
             required: { message: "This is required.", value: true },
           }}
         />
-      </Fieldset>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

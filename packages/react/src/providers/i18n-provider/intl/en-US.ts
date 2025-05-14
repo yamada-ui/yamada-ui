@@ -13,6 +13,10 @@ export default {
     "Close modal": "Close modal",
     "Open modal": "Open modal",
   },
+  numberInput: {
+    Decrease: "Decrease",
+    Increase: "Increase",
+  },
   stat: {
     "Decreased by": "Decreased by",
     "Increased by": "Increased by",

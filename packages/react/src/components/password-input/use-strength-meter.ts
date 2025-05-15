@@ -1,5 +1,6 @@
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import { useCallback } from "react"
+import { useI18n } from "../../providers/i18n-provider"
 import { dataAttr } from "../../utils"
 
 export interface UseStrengthMeterProps extends HTMLProps {
@@ -20,9 +21,10 @@ export const useStrengthMeter = ({
   value,
   ...rest
 }: UseStrengthMeterProps) => {
+  const { t } = useI18n("passwordInput")
   const getRootProps: PropGetter = useCallback(
     (props) => ({
-      "aria-label": "Password strength meter",
+      "aria-label": t("Password strength meter"),
       "aria-valuemax": max,
       "aria-valuemin": 0,
       "aria-valuenow": value,
@@ -30,7 +32,7 @@ export const useStrengthMeter = ({
       ...rest,
       ...props,
     }),
-    [max, rest, value],
+    [max, rest, value, t],
   )
 
   const getIndicatorProps: RequiredPropGetter<"div", { index: number }> =

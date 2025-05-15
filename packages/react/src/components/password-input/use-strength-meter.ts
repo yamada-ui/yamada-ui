@@ -22,6 +22,7 @@ export const useStrengthMeter = ({
   ...rest
 }: UseStrengthMeterProps) => {
   const { t } = useI18n("passwordInput")
+
   const getRootProps: PropGetter = useCallback(
     (props) => ({
       "aria-label": t("Password strength meter"),

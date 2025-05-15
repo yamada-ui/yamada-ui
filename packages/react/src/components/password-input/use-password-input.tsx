@@ -45,6 +45,7 @@ export const usePasswordInput = (props: UsePasswordInputProps) => {
     onChange: onVisibleChange,
   })
   const { t } = useI18n("passwordInput")
+
   const onChangeVisibility = useCallback(
     (ev: MouseEvent<HTMLButtonElement>) => {
       if (disabled || ev.button !== 0) return

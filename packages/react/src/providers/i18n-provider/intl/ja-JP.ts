@@ -14,14 +14,18 @@ export default {
     "Open modal": "モーダルを開く",
   },
   passwordInput: {
-    "Password strength meter": "パスワード強度メーター",
-    "Toggle password visibility": "パスワードの表示切替",
-  },
-  stat: {
-    "Decreased by": "減少",
-    "Increased by": "増加",
-  },
-  tag: {
-    "Close tag": "タグを閉じる",
+    numberInput: {
+      Decrease: "減少",
+      Increase: "増加",
+    },
+    "Password strength meter": "パスワードの強度",
+    stat: {
+      "Decreased by": "減少",
+      "Increased by": "増加",
+    },
+    tag: {
+      "Close tag": "タグを閉じる",
+    },
+    "Toggle password visibility": "パスワードの表示を切り替える",
   },
 } as const

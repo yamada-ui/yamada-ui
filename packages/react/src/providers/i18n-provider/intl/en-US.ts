@@ -14,14 +14,18 @@ export default {
     "Open modal": "Open modal",
   },
   passwordInput: {
+    numberInput: {
+      Decrease: "Decrease",
+      Increase: "Increase",
+    },
     "Password strength meter": "Password strength meter",
+    stat: {
+      "Decreased by": "Decreased by",
+      "Increased by": "Increased by",
+    },
+    tag: {
+      "Close tag": "Close tag",
+    },
     "Toggle password visibility": "Toggle password visibility",
-  },
-  stat: {
-    "Decreased by": "Decreased by",
-    "Increased by": "Increased by",
-  },
-  tag: {
-    "Close tag": "Close tag",
   },
 } as const

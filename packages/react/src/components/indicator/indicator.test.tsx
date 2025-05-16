@@ -10,6 +10,21 @@ describe("<Indicator />", () => {
     )
   })
 
+  test("sets `displayName`", () => {
+    expect(Indicator.displayName).toBe("IndicatorRoot")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <Indicator data-testid="indicator" label="new">
+        <div />
+      </Indicator>,
+    )
+    const el = screen.getByTestId("indicator")
+    expect(el).toHaveClass("ui-indicator__icon")
+    expect(el.parentElement).toHaveClass("ui-indicator__root")
+  })
+
   test("should render indicator", () => {
     render(
       <Indicator label="new">
@@ -67,8 +82,11 @@ describe("<Indicator />", () => {
     )
     expect(screen.queryByTestId("Indicator")).toHaveClass("ui-indicator__icon")
     expect(screen.queryByText("new")).toHaveClass("ui-indicator__icon")
+    expect(screen.queryByTestId("Indicator")!.parentElement).toHaveClass(
+      "ui-indicator__root",
+    )
     expect(screen.queryByText("new")!.querySelector("div")).toHaveClass(
-      "ui-indicator__icon__ping",
+      "ui-indicator__ping",
     )
   })
 })

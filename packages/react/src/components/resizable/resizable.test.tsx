@@ -13,12 +13,15 @@ function assert(
 }
 
 describe("<Resizable />", () => {
-  test.skip("Resizable renders correctly", async () => {
+  test("Resizable renders correctly", async () => {
     await a11y(
       <Resizable.Root>
         <Resizable.Item>One</Resizable.Item>
-
-        <Resizable.Trigger />
+        <Resizable.Trigger
+          aria-valuemax={100}
+          aria-valuemin={0}
+          aria-valuenow={50}
+        />
 
         <Resizable.Item>Two</Resizable.Item>
       </Resizable.Root>,

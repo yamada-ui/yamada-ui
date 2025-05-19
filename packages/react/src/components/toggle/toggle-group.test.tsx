@@ -1,5 +1,5 @@
+import { Toggle, ToggleGroup } from "."
 import { a11y, fireEvent, render, screen } from "../../../test"
-import { Toggle, ToggleGroup } from "./"
 
 describe("<ToggleGroup />", () => {
   test("should render ToggleGroup and its children correctly", async () => {
@@ -13,6 +13,21 @@ describe("<ToggleGroup />", () => {
     expect(screen.getByRole("group")).toBeInTheDocument()
     expect(screen.getByText("Option 1")).toBeInTheDocument()
     expect(screen.getByText("Option 2")).toBeInTheDocument()
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(ToggleGroup.displayName).toBe("ToggleGroup")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <ToggleGroup>
+        <Toggle value="opt1">Option 1</Toggle>
+        <Toggle value="opt2">Option 2</Toggle>
+      </ToggleGroup>,
+    )
+
+    expect(screen.getByRole("group")).toHaveClass("ui-toggle__group")
   })
 
   test("should update selected toggle when controlled value prop changes", () => {
@@ -153,9 +168,5 @@ describe("<ToggleGroup />", () => {
 
     expect(screen.getByText("Option 1")).not.toHaveAttribute("data-selected")
     expect(screen.getByText("Option 2")).toHaveAttribute("data-selected")
-  })
-
-  test("should have correct displayName and __ui__", () => {
-    expect(Toggle.__ui__).toBe("Toggle")
   })
 })

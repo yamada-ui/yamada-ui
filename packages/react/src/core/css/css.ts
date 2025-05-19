@@ -4,8 +4,8 @@ import type { PseudoProperty } from "../pseudos"
 import type { StyleProperty, VariableLengthProperty } from "../styles"
 import type { StyledTheme, UsageTheme } from "../theme"
 import type { Breakpoints } from "./breakpoint"
-import type { CSSObjectOrFunc } from "./index.types"
-import { isArray, isObject, isString, merge, runIfFunc } from "../../utils"
+import type { CSSObjectOrFunction } from "./index.types"
+import { isArray, isObject, isString, merge, runIfFn } from "../../utils"
 import { colorMix } from "../config"
 import { pseudos } from "../pseudos"
 import { styles, variableLengthProperties } from "../styles"
@@ -143,7 +143,7 @@ function expandCSS(theme: StyledTheme<UsageTheme>) {
     let computedCSS: Dict = {}
 
     for (let [key, value] of Object.entries(css)) {
-      value = runIfFunc(value, theme)
+      value = runIfFn(value, theme)
 
       if (value == null) continue
 
@@ -200,7 +200,7 @@ function valueToVar(theme: StyledTheme<UsageTheme>) {
         )
           return theme.__cssMap[value].ref
 
-        return fallbackValue || getVar(theme)(value)
+        return getVar(theme)(value, fallbackValue)
       }
     })
   }
@@ -252,9 +252,9 @@ function insertCSS(
 }
 
 export function css(theme: StyledTheme<UsageTheme>) {
-  return function (cssOrFunc: CSSObjectOrFunc) {
-    function createCSS(cssOrFunc: CSSObjectOrFunc): Dict {
-      const cssObj = runIfFunc(cssOrFunc, theme)
+  return function (cssOrFn: CSSObjectOrFunction) {
+    function createCSS(cssOrFn: CSSObjectOrFunction): Dict {
+      const cssObj = runIfFn(cssOrFn, theme)
       const computedCSS = expandCSS(theme)(cssObj)
 
       let prev: Dict = {}
@@ -308,7 +308,7 @@ export function css(theme: StyledTheme<UsageTheme>) {
       return prev
     }
 
-    return createCSS(cssOrFunc)
+    return createCSS(cssOrFn)
   }
 }
 

@@ -1,20 +1,22 @@
+import type { CSSObject } from "../../core"
 import { defineComponentStyle } from "../../core"
+import { wrapWithKey } from "../../utils"
 
-const getInputHeightStyle = (height: string) => ({
-  "&:has(+ [data-input-element])": {
-    pe: height,
-  },
-  "& ~ [data-input-element]": {
-    minW: height,
-  },
-  "[data-input-element] + &": {
-    ps: height,
-  },
-  "[data-input-element]:has(~ &)": {
-    minW: height,
-  },
-  minH: height,
-})
+export const getInputPaddingResetStyle = (key?: string) =>
+  ({
+    "&:not(:has(+ [data-input-element]))": wrapWithKey({ pe: "0px" }, key),
+    "&:not([data-input-element] + &)": wrapWithKey({ ps: "0px" }, key),
+  }) satisfies CSSObject
+
+export const getInputHeightStyle = (height?: string, key?: string) =>
+  ({
+    "&:has(+ [data-input-element])": wrapWithKey({ pe: height }, key),
+    "& ~ [data-input-element]": { minW: height },
+    "--input-height": height,
+    "[data-input-element] + &": wrapWithKey({ ps: height }, key),
+    "[data-input-element]:has(~ &)": { minW: height },
+    minH: height,
+  }) satisfies CSSObject
 
 export const inputStyle = defineComponentStyle({
   base: {
@@ -59,18 +61,17 @@ export const inputStyle = defineComponentStyle({
       bg: "transparent",
       borderBottomColor: "colorScheme.muted",
       borderBottomWidth: "1px",
-      borderRadius: "0",
-      px: "0",
+      rounded: "0px",
+      _focusVisible: {
+        borderColor: "{focusBorderColor}",
+        boxShadow: "0px 1px 0px 0px {focusBorderColor}",
+        outline: "none",
+      },
       _invalid: {
         borderColor: "{errorBorderColor}",
         _focusVisible: {
           boxShadow: "0px 1px 0px 0px {errorBorderColor}",
         },
-      },
-      _focusVisible: {
-        borderColor: "{focusBorderColor}",
-        boxShadow: "0px 1px 0px 0px {focusBorderColor}",
-        outline: "none",
       },
     },
     outline: {
@@ -87,36 +88,56 @@ export const inputStyle = defineComponentStyle({
 
   sizes: {
     xs: {
+      "--input-space-x": "{spaces.2}",
+      "--input-space-y": "{spaces.1.5}",
       fontSize: "xs",
-      px: "2",
+      px: "{--input-space-x}",
       ...getInputHeightStyle("{sizes.8}"),
     },
     sm: {
+      "--input-space-x": "{spaces.2.5}",
+      "--input-space-y": "{spaces.2}",
       fontSize: "sm",
-      px: "2.5",
+      px: "{--input-space-x}",
       ...getInputHeightStyle("{sizes.9}"),
     },
     md: {
+      "--input-space-x": "{spaces.3}",
+      "--input-space-y": "{spaces.2}",
       fontSize: "md",
-      px: "3",
+      px: "{--input-space-x}",
       ...getInputHeightStyle("{sizes.10}"),
     },
     lg: {
+      "--input-space-x": "{spaces.3.5}",
+      "--input-space-y": "{spaces.2.5}",
       fontSize: "lg",
-      px: "3.5",
+      px: "{--input-space-x}",
       ...getInputHeightStyle("{sizes.11}"),
     },
     xl: {
+      "--input-space-x": "{spaces.4}",
+      "--input-space-y": "{spaces.3}",
       fontSize: "xl",
-      px: "4",
+      px: "{--input-space-x}",
       ...getInputHeightStyle("{sizes.12}"),
     },
     "2xl": {
+      "--input-space-x": "{spaces.4}",
+      "--input-space-y": "{spaces.3}",
       fontSize: "xl",
-      px: "4",
+      px: "{--input-space-x}",
       ...getInputHeightStyle("{sizes.14}"),
     },
   },
+
+  compounds: [
+    {
+      css: getInputPaddingResetStyle(),
+      variant: "flushed",
+      layer: "variant",
+    },
+  ],
 
   defaultProps: {
     size: "md",

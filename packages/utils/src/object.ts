@@ -7,72 +7,42 @@ import {
   isUndefined,
 } from "./assertion"
 
-function omitObjectHelper<Y extends Dict, M extends keyof Y>(
+export function omitObject<Y extends Dict, M extends keyof Y>(
   obj: Y,
-  path: M[] | readonly M[],
-): any {
-  if (!path.length) return obj
+  keys: M[] | readonly M[],
+): Omit<Y, M> {
+  if (!keys.length) return obj
 
-  const [primaryKey, ...restKeys] = path
+  const result: Dict = {}
 
-  if (restKeys.length === 0 && primaryKey && primaryKey in obj) {
-    const { [primaryKey]: _, ...rest } = obj
+  Object.keys(obj).forEach((key) => {
+    if (keys.includes(key as M)) return
 
-    return rest
-  }
+    result[key] = obj[key]
+  })
 
-  if (primaryKey && obj[primaryKey] && isObject(obj[primaryKey])) {
-    return {
-      ...obj,
-      [primaryKey]: omitObjectHelper(obj[primaryKey], restKeys),
-    }
-  }
-
-  return obj
+  return result as Omit<Y, M>
 }
 
-export function omitObject<
-  Y extends Dict,
-  M extends keyof Y = keyof Y,
-  D = any,
->(obj: Y, keys: M[] | readonly M[]) {
-  return (keys as M[]).reduce((prev, key) => {
-    const path = (isString(key) ? key.split(".") : []) as M[]
+export function pickObject<Y extends Dict, M extends keyof Y>(
+  obj: Y,
+  keys: M[] | readonly M[],
+): { [D in M]: Y[D] } {
+  if (!keys.length) return {} as { [D in M]: Y[D] }
 
-    return omitObjectHelper(prev, path)
-  }, obj) as unknown as D extends unknown ? Omit<Y, M> : D
-}
+  const result = {} as { [D in M]: Y[D] }
 
-export function pickObject<
-  Y extends Dict,
-  M extends keyof Y = keyof Y,
-  D = any,
->(obj: Y, keys: M[] | readonly M[], fallbackValue = "__fallback") {
-  return (keys as M[]).reduce((prev, key) => {
-    const path = isString(key) ? key.split(".") : []
+  keys.forEach((key) => {
+    if (key in obj) result[key] = obj[key]
+  })
 
-    if (!path.length) return prev
-
-    const value = getMemoizedObject(obj, key as string, fallbackValue)
-
-    if (value === fallbackValue) return prev
-
-    prev = merge(
-      prev,
-      path.reduceRight(
-        (prev, key) => ({ [key]: key === path.at(-1) ? value : prev }),
-        {},
-      ),
-    )
-
-    return prev
-  }, {}) as D extends unknown ? { [H in M]: Y[H] } : D
+  return result
 }
 
 export function splitObject<Y extends Dict, M extends keyof Y>(
   obj: Y,
   funcOrKeys?: M[] | readonly M[],
-): [{ [P in M]: Y[P] }, Omit<Y, M>]
+): [{ [D in M]: Y[D] }, Omit<Y, M>]
 
 export function splitObject<Y extends Dict, M extends Dict>(
   obj: Dict,
@@ -96,7 +66,7 @@ export function splitObject<Y extends Dict, M extends keyof Y>(
     }
   }
 
-  return [picked, omitted] as [{ [P in M]: Y[P] }, Omit<Y, M>]
+  return [picked, omitted] as [{ [D in M]: Y[D] }, Omit<Y, M>]
 }
 
 export function filterObject<Y extends Dict, M extends Dict>(
@@ -218,18 +188,15 @@ export function getObject(
   obj: Dict | undefined,
   path: number | string,
   fallback?: any,
-  i?: number,
 ) {
   const keys = isString(path)
     ? path.split(/\[(.*?)\]|\./).filter(Boolean)
     : [path]
 
-  for (i = 0; i < keys.length; i += 1) {
+  for (const key of keys) {
     if (!obj) break
 
-    const key = keys[i]
-
-    obj = key ? obj[key] : undefined
+    obj = obj[key]
   }
 
   return obj === undefined ? fallback : obj
@@ -242,7 +209,6 @@ export function memoizeObject(func: typeof getObject) {
     obj: Dict,
     path: number | string,
     fallback?: any,
-    i?: number,
   ): Y {
     if (isUndefined(obj)) return func(obj, path, fallback)
 
@@ -252,7 +218,7 @@ export function memoizeObject(func: typeof getObject) {
 
     if (map.has(path)) return map.get(path)
 
-    const value = func(obj, path, fallback, i)
+    const value = func(obj, path, fallback)
 
     map.set(path, value)
 
@@ -264,20 +230,10 @@ export function memoizeObject(func: typeof getObject) {
 
 export const getMemoizedObject = memoizeObject(getObject)
 
-export function assignAfter(target: Dict, ...sources: any[]) {
-  const result: Dict = { ...target }
-
-  for (const nextSource of sources) {
-    if (nextSource == null) continue
-
-    for (const nextKey in nextSource) {
-      if (!Object.prototype.hasOwnProperty.call(nextSource, nextKey)) continue
-
-      if (nextKey in result) delete result[nextKey]
-
-      result[nextKey] = nextSource[nextKey]
-    }
+export function wrapWithKey<T>(obj: T, key?: string) {
+  if (key) {
+    return { [key]: obj }
+  } else {
+    return obj
   }
-
-  return result
 }

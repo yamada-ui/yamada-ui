@@ -2,7 +2,13 @@ import type * as CSS from "csstype"
 import type { ObjectLiteral, StringLiteral } from "../../utils"
 import type { PseudoProperty, PseudoProps } from "../pseudos"
 import type { StyleProps } from "../styles"
-import type { Breakpoint, StyledTheme, ThemeTokens, UsageTheme } from "../theme"
+import type {
+  Breakpoint,
+  KeyframeIdent,
+  StyledTheme,
+  ThemeTokens,
+  UsageTheme,
+} from "../theme"
 
 export type { CSS }
 
@@ -24,31 +30,28 @@ export type ResponsiveWithPseudoObject<
   ? { [key in Breakpoint | PseudoProperty]?: ColorModeArray<Y, false> | Y }
   : { [key in Breakpoint | PseudoProperty]?: Y }
 
-export type StyleValue<Y> =
-  | ColorModeArray<Y>
-  | ResponsiveWithPseudoObject<Y>
-  | Y
-
 export type Token<Y, M = unknown> = M extends keyof ThemeTokens
   ? ThemeTokens[M] | Y
   : Y
 
-export type ColorModeToken<Y, M = unknown> = M extends keyof ThemeTokens
+export type ColorModeValue<Y, M = unknown> = M extends keyof ThemeTokens
   ? ColorModeArray<ThemeTokens[M] | Y> | ThemeTokens[M] | Y
   : ColorModeArray<Y> | Y
 
-export type ResponsiveToken<Y, M = unknown> = M extends keyof ThemeTokens
+export type ResponsiveValue<Y, M = unknown> = M extends keyof ThemeTokens
   ? ResponsiveObject<ThemeTokens[M] | Y> | ThemeTokens[M] | Y
   : ResponsiveObject<Y> | Y
 
-export type CSSToken<Y, M = unknown> = M extends keyof ThemeTokens
-  ? StyleValue<ThemeTokens[M] | Y>
-  : StyleValue<Y>
-
-type CSSValue<Y extends keyof StyleProps> = StyleValue<StyleProps[Y]>
+export type StyleValue<Y, M = unknown> = M extends keyof ThemeTokens
+  ?
+      | ColorModeArray<ThemeTokens[M] | Y>
+      | ResponsiveWithPseudoObject<ThemeTokens[M] | Y>
+      | ThemeTokens[M]
+      | Y
+  : ColorModeArray<Y> | ResponsiveWithPseudoObject<Y> | Y
 
 type CSSInternalObject = {
-  [Y in keyof StyleProps]?: CSSValue<Y>
+  [Y in keyof StyleProps]?: StyleValue<StyleProps[Y]>
 }
 
 type CSSRecursiveObject<Y> = {
@@ -78,7 +81,7 @@ export interface CSSModifierObject<
 }
 
 export type CSSKeyframesObject = {
-  [key in "from" | "to" | `${number}%`]?: CSSInternalObject
+  [key in `${number}%` | KeyframeIdent]?: CSSInternalObject
 }
 
 export interface CSSAnimationObject {
@@ -103,4 +106,4 @@ export interface FunctionCSSInterpolation {
   (theme: StyledTheme<UsageTheme>): CSSObject
 }
 
-export type CSSObjectOrFunc = CSSObject | FunctionCSSInterpolation
+export type CSSObjectOrFunction = CSSObject | FunctionCSSInterpolation

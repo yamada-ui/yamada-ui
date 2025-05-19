@@ -6,7 +6,7 @@ import { Stack } from "./stack"
 import { vStackStyle } from "./v-stack.style"
 
 export interface VStackProps
-  extends WithoutThemeProps<StackProps>,
+  extends WithoutThemeProps<StackProps, VStackStyle>,
     ThemeProps<VStackStyle> {}
 
 export const {
@@ -18,7 +18,7 @@ export const {
 /**
  * `VStack` is a component that groups elements and provides space between child elements.
  *
- * @see Docs https://yamada-ui.com/components/stack
+ * @see https://yamada-ui.com/components/stack
  */
 export const VStack = withContext(Stack)(undefined, {
   direction: "column",

@@ -322,7 +322,7 @@ return <CheckboxCardGroup defaultValue={["ドラえもん"]} items={items} />
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx functional=true
 const items = useMemo<CheckboxCardItem[]>(
@@ -344,7 +344,7 @@ return (
         </CheckboxCardDescription>
       </CheckboxCard>
 
-      <CheckboxCard isDisabled value="ドラミ">
+      <CheckboxCard disabled value="ドラミ">
         <CheckboxCardLabel>ドラミ</CheckboxCardLabel>
         <CheckboxCardDescription>
           ドラえもんの妹のロボット。
@@ -357,9 +357,9 @@ return (
       </CheckboxCard>
     </CheckboxCardGroup>
 
-    <CheckboxCardGroup isDisabled items={items} />
+    <CheckboxCardGroup disabled items={items} />
 
-    <Fieldset isDisabled legend="Which characters would you like to select?">
+    <Fieldset disabled legend="Which characters would you like to select?">
       <CheckboxCardGroup items={items} />
     </Fieldset>
   </VStack>
@@ -368,7 +368,7 @@ return (
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx functional=true
 const items = useMemo<CheckboxCardItem[]>(
@@ -390,7 +390,7 @@ return (
         </CheckboxCardDescription>
       </CheckboxCard>
 
-      <CheckboxCard isReadOnly value="ドラミ">
+      <CheckboxCard readOnly value="ドラミ">
         <CheckboxCardLabel>ドラミ</CheckboxCardLabel>
         <CheckboxCardDescription>
           ドラえもんの妹のロボット。
@@ -403,9 +403,9 @@ return (
       </CheckboxCard>
     </CheckboxCardGroup>
 
-    <CheckboxCardGroup isReadOnly items={items} />
+    <CheckboxCardGroup readOnly items={items} />
 
-    <Fieldset isReadOnly legend="Which characters would you like to select?">
+    <Fieldset readOnly legend="Which characters would you like to select?">
       <CheckboxCardGroup items={items} />
     </Fieldset>
   </VStack>
@@ -414,7 +414,7 @@ return (
 
 ### Make Input Invalid
 
-To make the input invalid, set `isInvalid` to `true`.
+To make the input invalid, set `invalid` to `true`.
 
 ```tsx functional=true
 const items = useMemo<CheckboxCardItem[]>(
@@ -429,7 +429,7 @@ const items = useMemo<CheckboxCardItem[]>(
 return (
   <VStack>
     <CheckboxCardGroup defaultValue={["ドラえもん"]}>
-      <CheckboxCard isInvalid value="ドラえもん">
+      <CheckboxCard invalid value="ドラえもん">
         <CheckboxCardLabel>ドラえもん</CheckboxCardLabel>
         <CheckboxCardDescription>
           22世紀の未来から来たネコ型ロボット。
@@ -449,11 +449,11 @@ return (
       </CheckboxCard>
     </CheckboxCardGroup>
 
-    <CheckboxCardGroup isInvalid items={items} />
+    <CheckboxCardGroup invalid items={items} />
 
     <Fieldset
       errorMessage="This is required."
-      isInvalid
+      invalid
       legend="Which characters would you like to select?"
     >
       <CheckboxCardGroup items={items} />
@@ -625,7 +625,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.checkboxCard}
+      invalid={!!errors.checkboxCard}
       legend="Who is your favorite character?"
       errorMessage={
         errors.checkboxCard ? errors.checkboxCard.message : undefined

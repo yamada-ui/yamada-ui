@@ -1,10 +1,10 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { AvatarProps } from "./"
-import { COLOR_SCHEMES } from "@yamada-ui/utils"
-import { PropsTable } from "../../../storybook/components/props-table"
-import { For } from "../../components/for"
-import { Wrap } from "../flex"
+import { PropsTable } from "../../../storybook/components"
+import { COLOR_SCHEMES } from "../../utils"
+import { For } from "../for"
 import { GhostIcon } from "../icon"
+import { Wrap } from "../wrap"
 import { Avatar, AvatarGroup } from "./"
 
 type Story = StoryFn<typeof Avatar>
@@ -128,7 +128,11 @@ export const Group: Story = () => {
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar key={index} name="Hirotomo Yamada" />
+                <Avatar
+                  key={index}
+                  name="Hirotomo Yamada"
+                  bg={variant === "outline" ? "bg" : undefined}
+                />
               ))}
           </AvatarGroup>
         )}
@@ -170,7 +174,11 @@ export const GroupMax: Story = () => {
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar key={index} name="Hirotomo Yamada" />
+                <Avatar
+                  key={index}
+                  name="Hirotomo Yamada"
+                  bg={variant === "outline" ? "bg" : undefined}
+                />
               ))}
           </AvatarGroup>
         )}

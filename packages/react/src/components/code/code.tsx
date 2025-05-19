@@ -1,9 +1,11 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { CodeStyle } from "./code.style"
 import { createComponent } from "../../core"
 import { codeStyle } from "./code.style"
 
-export interface CodeProps extends HTMLUIProps<"code">, ThemeProps<CodeStyle> {}
+export interface CodeProps
+  extends HTMLStyledProps<"code">,
+    ThemeProps<CodeStyle> {}
 
 export const {
   PropsContext: CodePropsContext,
@@ -14,6 +16,6 @@ export const {
 /**
  * `Code` is a component that represents a code block. By default, it renders a `code` element.
  *
- * @see Docs https://yamada-ui.com/components/code
+ * @see https://yamada-ui.com/components/code
  */
 export const Code = withContext("code")()

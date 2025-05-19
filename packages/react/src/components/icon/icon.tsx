@@ -1,9 +1,11 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { IconStyle } from "./icon.style"
 import { createComponent, insertVars } from "../../core"
 import { iconStyle } from "./icon.style"
 
-export interface IconProps extends HTMLUIProps<"svg">, ThemeProps<IconStyle> {}
+export interface IconProps
+  extends HTMLStyledProps<"svg">,
+    ThemeProps<IconStyle> {}
 
 export const {
   component,
@@ -15,11 +17,12 @@ export const {
 /**
  * `Icon` is a general icon component that can be used in your projects.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const Icon = withContext("svg")(
   {
     "aria-hidden": true,
+    "data-icon": "",
     role: "img",
     verticalAlign: "middle",
   },

@@ -1,7 +1,7 @@
 import type { UIEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
-import { dataAttr, handlerAll, isMac, vendor } from "@yamada-ui/utils"
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
+import { dataAttr, handlerAll, isMac, vendor } from "../../utils"
 import { mergeRefs, useSafeLayoutEffect } from "../../utils"
 
 export interface UseScrollAreaProps extends HTMLProps {

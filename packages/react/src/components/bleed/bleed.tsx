@@ -1,12 +1,10 @@
-import type { CSSProps, HTMLUIProps } from "../../core"
+import type { CSSProps, HTMLStyledProps } from "../../core"
 import type { BleedStyle } from "./bleed.style"
 import { createComponent, mergeVars } from "../../core"
 import { calc } from "../../utils"
 import { bleedStyle } from "./bleed.style"
 
-interface BleedOptions {}
-
-export interface BleedProps extends HTMLUIProps, BleedOptions {
+export interface BleedProps extends HTMLStyledProps {
   /**
    * The CSS `margin-block` property.
    */
@@ -42,7 +40,7 @@ export const {
 /**
  * `Bleed` is a component used to break an element from the boundaries of its container.
  *
- * @see Docs https://yamada-ui.com/components/bleed
+ * @see https://yamada-ui.com/components/bleed
  */
 export const Bleed = withContext("div")(
   undefined,

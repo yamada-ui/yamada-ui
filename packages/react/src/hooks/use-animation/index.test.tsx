@@ -143,13 +143,13 @@ describe("useDynamicAnimation", () => {
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
     )
 
-    await waitFor(() => {
-      result.current[1]("moveRight")
-    })
+    result.current[1]("moveRight")
 
-    expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running/,
-    )
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
+        /animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running/,
+      )
+    })
   })
 
   test("Multi animation should be changed dynamically", async () => {
@@ -218,13 +218,13 @@ describe("useDynamicAnimation", () => {
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
     )
 
-    await waitFor(() => {
-      result.current[1]("moveRight")
-    })
+    result.current[1]("moveRight")
 
-    expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
-    )
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
+        /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
+      )
+    })
   })
 
   test("Should accept multiple keys", async () => {
@@ -290,13 +290,13 @@ describe("useDynamicAnimation", () => {
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
     )
 
-    await waitFor(() => {
-      result.current[1](["moveRight", "gradients"])
-    })
+    result.current[1](["moveRight", "gradients"])
 
-    expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
-    )
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
+        /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
+      )
+    })
   })
 
   test("Should be undefined if no default key is set", () => {

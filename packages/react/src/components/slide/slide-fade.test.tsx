@@ -7,6 +7,20 @@ describe("<SlideFade />", () => {
     await a11y(<SlideFade />)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(SlideFade.displayName).toBe("SlideFade")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<SlideFade>SlideFade</SlideFade>)
+    expect(screen.getByText("SlideFade")).toHaveClass("ui-slide-fade")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<SlideFade>SlideFade</SlideFade>)
+    expect(screen.getByText("SlideFade").tagName).toBe("DIV")
+  })
+
   test("fade-in and fade-out work correctly", async () => {
     const TestComponent = () => {
       const [open, setOpen] = useState(false)

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { ThemeProps } from "../../core"
+import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { ButtonProps } from "./button"
 import type { IconButtonStyle } from "./icon-button.style"
 import { createComponent } from "../../core"
@@ -8,7 +8,7 @@ import { iconButtonStyle } from "./icon-button.style"
 
 export interface IconButtonProps
   extends Omit<
-      ButtonProps,
+      WithoutThemeProps<ButtonProps, IconButtonStyle>,
       | "endIcon"
       | "iconProps"
       | "loadingIcon"
@@ -40,12 +40,12 @@ export const {
 /**
  * `IconButton` is a component that displays an icon within a button.
  *
- * @see Docs https://yamada-ui.com/components/icon-button
+ * @see https://yamada-ui.com/components/icon-button
  */
 export const IconButton = withContext(Button)(
   undefined,
   ({ children, icon, ...rest }) => ({
-    children: children || icon,
+    children: icon || children,
     ...rest,
   }),
 )

@@ -1,7 +1,7 @@
-import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
+import type { StringLiteral } from "../utils"
 import type { StyleConfigs } from "./config"
-import type { CSSObject, CSSToken } from "./css"
+import type { CSSObject, StyleValue } from "./css"
 import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"
 import { transforms } from "./config"
 import { pipe } from "./config/utils"
@@ -737,6 +737,7 @@ export const standardStyles = {
     token: "fontWeights",
     transform: transforms.token("fontWeights"),
   },
+  fontWidth: true,
   forcedColorAdjust: true,
   gap: {
     properties: "gap",
@@ -921,6 +922,7 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  interactivity: true,
   interpolateSize: true,
   invert: {
     properties: "--invert",
@@ -955,7 +957,6 @@ export const standardStyles = {
     token: "lineHeights",
     transform: transforms.token("lineHeights"),
   },
-  lineHeightStep: true,
   listStyle: true,
   listStyleImage: {
     properties: "listStyleImage",
@@ -1384,6 +1385,7 @@ export const standardStyles = {
   quotes: true,
   r: true,
   readingFlow: true,
+  readingOrder: true,
   resize: true,
   right: {
     properties: "right",
@@ -1528,6 +1530,7 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  scrollMarkerGroup: true,
   scrollPadding: {
     properties: "scrollPadding",
     token: "spaces",
@@ -1649,6 +1652,7 @@ export const standardStyles = {
   textAlign: true,
   textAlignLast: true,
   textAnchor: true,
+  textAutospace: true,
   textBox: true,
   textBoxEdge: true,
   textBoxTrim: true,
@@ -2264,19 +2268,19 @@ export interface StyleProps {
    *
    * This will apply styles defined in `theme.styles.mdx.h1`
    */
-  apply?: CSSToken<StringLiteral, "apply">
+  apply?: StyleValue<StringLiteral, "apply">
   /**
    * Apply layer styles defined in `theme.layerStyles`.
    */
-  layerStyle?: CSSToken<StringLiteral, "layerStyles">
+  layerStyle?: StyleValue<StringLiteral, "layerStyles">
   /**
    * Apply text styles defined in `theme.textStyles`.
    */
-  textStyle?: CSSToken<StringLiteral, "textStyles">
+  textStyle?: StyleValue<StringLiteral, "textStyles">
   /**
    * Set color scheme variables.
    */
-  colorScheme?: CSSToken<ColorScheme>
+  colorScheme?: StyleValue<ColorScheme>
   /**
    * ### accent-color
    *
@@ -2286,7 +2290,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/accent-color
    */
-  accent?: CSSToken<CSS.Property.AccentColor, "colors">
+  accent?: StyleValue<CSS.Property.AccentColor, "colors">
   /**
    * ### accent-color
    *
@@ -2296,7 +2300,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/accent-color
    */
-  accentColor?: CSSToken<CSS.Property.AccentColor, "colors">
+  accentColor?: StyleValue<CSS.Property.AccentColor, "colors">
   /**
    * ### align-content
    *
@@ -2308,7 +2312,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-content
    */
-  alignContent?: CSSToken<CSS.Property.AlignContent>
+  alignContent?: StyleValue<CSS.Property.AlignContent>
   /**
    * ### align-items
    *
@@ -2320,7 +2324,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-items
    */
-  alignItems?: CSSToken<CSS.Property.AlignItems>
+  alignItems?: StyleValue<CSS.Property.AlignItems>
   /**
    * ### alignment-baseline
    *
@@ -2330,7 +2334,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/alignment-baseline
    */
-  alignmentBaseline?: CSSToken<CSS.Property.AlignmentBaseline>
+  alignmentBaseline?: StyleValue<CSS.Property.AlignmentBaseline>
   /**
    * ### align-self
    *
@@ -2342,7 +2346,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-self
    */
-  alignSelf?: CSSToken<CSS.Property.AlignSelf>
+  alignSelf?: StyleValue<CSS.Property.AlignSelf>
   /**
    * ### all
    *
@@ -2354,7 +2358,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/all
    */
-  all?: CSSToken<CSS.Globals>
+  all?: StyleValue<CSS.Globals>
   /**
    * ### anchor-name
    *
@@ -2366,7 +2370,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  anchorName?: CSSToken<string & {}>
+  anchorName?: StyleValue<string & {}>
   /**
    * ### anchor-scope
    *
@@ -2378,7 +2382,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  anchorScope?: CSSToken<string & {}>
+  anchorScope?: StyleValue<string & {}>
   /**
    * ### animation
    *
@@ -2390,7 +2394,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation
    */
-  animation?: CSSToken<CSS.Property.Animation, "animations">
+  animation?: StyleValue<CSS.Property.Animation, "animations">
   /**
    * ### animation-composition
    *
@@ -2401,7 +2405,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-composition
    */
-  animationComposition?: CSSToken<CSS.Property.AnimationComposition>
+  animationComposition?: StyleValue<CSS.Property.AnimationComposition>
   /**
    * ### animation-delay
    *
@@ -2413,7 +2417,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-delay
    */
-  animationDelay?: CSSToken<CSS.Property.AnimationDelay>
+  animationDelay?: StyleValue<CSS.Property.AnimationDelay>
   /**
    * ### animation-direction
    *
@@ -2425,7 +2429,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-direction
    */
-  animationDirection?: CSSToken<CSS.Property.AnimationDirection>
+  animationDirection?: StyleValue<CSS.Property.AnimationDirection>
   /**
    * ### animation-duration
    *
@@ -2437,7 +2441,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-duration
    */
-  animationDuration?: CSSToken<CSS.Property.AnimationDuration, "durations">
+  animationDuration?: StyleValue<CSS.Property.AnimationDuration, "durations">
   /**
    * ### animation-fill-mode
    *
@@ -2449,7 +2453,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode
    */
-  animationFillMode?: CSSToken<CSS.Property.AnimationFillMode>
+  animationFillMode?: StyleValue<CSS.Property.AnimationFillMode>
   /**
    * ### animation-iteration-count
    *
@@ -2461,7 +2465,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-iteration-count
    */
-  animationIterationCount?: CSSToken<CSS.Property.AnimationIterationCount>
+  animationIterationCount?: StyleValue<CSS.Property.AnimationIterationCount>
   /**
    * ### animation-name
    *
@@ -2473,7 +2477,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-name
    */
-  animationName?: CSSToken<CSS.Property.AnimationName, "keyframes">
+  animationName?: StyleValue<CSS.Property.AnimationName, "keyframes">
   /**
    * ### animation-play-state
    *
@@ -2485,7 +2489,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-play-state
    */
-  animationPlayState?: CSSToken<CSS.Property.AnimationPlayState>
+  animationPlayState?: StyleValue<CSS.Property.AnimationPlayState>
   /**
    * ### animation-range
    *
@@ -2497,7 +2501,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationRange?: CSSToken<CSS.Property.AnimationRange>
+  animationRange?: StyleValue<CSS.Property.AnimationRange>
   /**
    * ### animation-range-end
    *
@@ -2509,7 +2513,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationRangeEnd?: CSSToken<CSS.Property.AnimationRangeEnd>
+  animationRangeEnd?: StyleValue<CSS.Property.AnimationRangeEnd>
   /**
    * ### animation-range-start
    *
@@ -2521,7 +2525,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationRangeStart?: CSSToken<CSS.Property.AnimationRangeStart>
+  animationRangeStart?: StyleValue<CSS.Property.AnimationRangeStart>
   /**
    * ### animation-timeline
    *
@@ -2533,7 +2537,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationTimeline?: CSSToken<CSS.Property.AnimationTimeline>
+  animationTimeline?: StyleValue<CSS.Property.AnimationTimeline>
   /**
    * ### animation-timing-function
    *
@@ -2545,7 +2549,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-timing-function
    */
-  animationTimingFunction?: CSSToken<
+  animationTimingFunction?: StyleValue<
     CSS.Property.AnimationTimingFunction,
     "easings"
   >
@@ -2560,7 +2564,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/appearance
    */
-  appearance?: CSSToken<CSS.Property.Appearance>
+  appearance?: StyleValue<CSS.Property.Appearance>
   /**
    * ### aspect-ratio
    *
@@ -2572,23 +2576,23 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/aspect-ratio
    */
-  aspectRatio?: CSSToken<CSS.Property.AspectRatio, "aspectRatios">
+  aspectRatio?: StyleValue<CSS.Property.AspectRatio, "aspectRatios">
   /**
    * Sets the value of `--backdrop-blur`.
    */
-  backdropBlur?: CSSToken<StringLiteral, "blurs">
+  backdropBlur?: StyleValue<StringLiteral, "blurs">
   /**
    * Sets the value of `--backdrop-brightness`.
    */
-  backdropBrightness?: CSSToken<StringLiteral>
+  backdropBrightness?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--backdrop-contrast`.
    */
-  backdropContrast?: CSSToken<StringLiteral>
+  backdropContrast?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--backdrop-drop-shadow`.
    */
-  backdropDropShadow?: CSSToken<StringLiteral, "shadows">
+  backdropDropShadow?: StyleValue<StringLiteral, "shadows">
   /**
    * ### backdrop-filter
    *
@@ -2599,27 +2603,27 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/backdrop-filter
    */
-  backdropFilter?: CSSToken<CSS.Property.BackdropFilter>
+  backdropFilter?: StyleValue<CSS.Property.BackdropFilter>
   /**
    * Sets the value of `--backdrop-grayscale`.
    */
-  backdropGrayscale?: CSSToken<StringLiteral>
+  backdropGrayscale?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--backdrop-hue-rotate`.
    */
-  backdropHueRotate?: CSSToken<StringLiteral>
+  backdropHueRotate?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--backdrop-invert`.
    */
-  backdropInvert?: CSSToken<StringLiteral>
+  backdropInvert?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--backdrop-saturate`.
    */
-  backdropSaturate?: CSSToken<StringLiteral>
+  backdropSaturate?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--backdrop-sepia`.
    */
-  backdropSepia?: CSSToken<StringLiteral>
+  backdropSepia?: StyleValue<StringLiteral>
   /**
    * ### backface-visibility
    *
@@ -2631,7 +2635,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/backface-visibility
    */
-  backfaceVisibility?: CSSToken<
+  backfaceVisibility?: StyleValue<
     CSS.Property.BackfaceVisibility | number,
     "sizes"
   >
@@ -2646,7 +2650,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background
    */
-  background?: CSSToken<CSS.Property.Background, "colors">
+  background?: StyleValue<CSS.Property.Background, "colors">
   /**
    * ### background-attachment
    *
@@ -2658,7 +2662,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-attachment
    */
-  backgroundAttachment?: CSSToken<CSS.Property.BackgroundAttachment>
+  backgroundAttachment?: StyleValue<CSS.Property.BackgroundAttachment>
   /**
    * ### background-blend-mode
    *
@@ -2670,7 +2674,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
    */
-  backgroundBlendMode?: CSSToken<CSS.Property.BackgroundBlendMode>
+  backgroundBlendMode?: StyleValue<CSS.Property.BackgroundBlendMode>
   /**
    * ### background-clip
    *
@@ -2682,7 +2686,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-clip
    */
-  backgroundClip?: CSSToken<CSS.Property.BackgroundClip>
+  backgroundClip?: StyleValue<CSS.Property.BackgroundClip>
   /**
    * ### background-color
    *
@@ -2694,7 +2698,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-color
    */
-  backgroundColor?: CSSToken<CSS.Property.BackgroundColor, "colors">
+  backgroundColor?: StyleValue<CSS.Property.BackgroundColor, "colors">
   /**
    * ### background-image
    *
@@ -2706,7 +2710,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  backgroundImage?: CSSToken<CSS.Property.BackgroundImage, "gradients">
+  backgroundImage?: StyleValue<CSS.Property.BackgroundImage, "gradients">
   /**
    * ### background-origin
    *
@@ -2718,7 +2722,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-origin
    */
-  backgroundOrigin?: CSSToken<CSS.Property.BackgroundOrigin>
+  backgroundOrigin?: StyleValue<CSS.Property.BackgroundOrigin>
   /**
    * ### background-position
    *
@@ -2730,7 +2734,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position
    */
-  backgroundPosition?: CSSToken<CSS.Property.BackgroundPosition>
+  backgroundPosition?: StyleValue<CSS.Property.BackgroundPosition>
   /**
    * ### background-position-x
    *
@@ -2742,7 +2746,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
    */
-  backgroundPositionX?: CSSToken<CSS.Property.BackgroundPositionX>
+  backgroundPositionX?: StyleValue<CSS.Property.BackgroundPositionX>
   /**
    * ### background-position-y
    *
@@ -2754,7 +2758,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
-  backgroundPositionY?: CSSToken<CSS.Property.BackgroundPositionY>
+  backgroundPositionY?: StyleValue<CSS.Property.BackgroundPositionY>
   /**
    * ### background-repeat
    *
@@ -2766,7 +2770,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-repeat
    */
-  backgroundRepeat?: CSSToken<CSS.Property.BackgroundRepeat>
+  backgroundRepeat?: StyleValue<CSS.Property.BackgroundRepeat>
   /**
    * ### background-size
    *
@@ -2778,7 +2782,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-size
    */
-  backgroundSize?: CSSToken<CSS.Property.BackgroundSize>
+  backgroundSize?: StyleValue<CSS.Property.BackgroundSize>
   /**
    * ### baseline-shift
    *
@@ -2788,7 +2792,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-inline/#baseline-shift-property
    */
-  baselineShift?: CSSToken<CSS.Property.BaselineShift>
+  baselineShift?: StyleValue<CSS.Property.BaselineShift>
   /**
    * ### baseline-source
    *
@@ -2798,7 +2802,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-inline/#baseline-source
    */
-  baselineSource?: CSSToken<string & {}>
+  baselineSource?: StyleValue<string & {}>
   /**
    * ### background
    *
@@ -2810,7 +2814,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background
    */
-  bg?: CSSToken<CSS.Property.Background, "colors">
+  bg?: StyleValue<CSS.Property.Background, "colors">
   /**
    * ### background-attachment
    *
@@ -2822,7 +2826,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-attachment
    */
-  bgAttachment?: CSSToken<CSS.Property.BackgroundAttachment>
+  bgAttachment?: StyleValue<CSS.Property.BackgroundAttachment>
   /**
    * ### background-blend-mode
    *
@@ -2834,7 +2838,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
    */
-  bgBlendMode?: CSSToken<CSS.Property.BackgroundBlendMode>
+  bgBlendMode?: StyleValue<CSS.Property.BackgroundBlendMode>
   /**
    * ### background-clip
    *
@@ -2846,7 +2850,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-clip
    */
-  bgClip?: CSSToken<CSS.Property.BackgroundClip>
+  bgClip?: StyleValue<CSS.Property.BackgroundClip>
   /**
    * ### background-color
    *
@@ -2858,7 +2862,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-color
    */
-  bgColor?: CSSToken<CSS.Property.BackgroundColor, "colors">
+  bgColor?: StyleValue<CSS.Property.BackgroundColor, "colors">
   /**
    * ### background-image
    *
@@ -2870,7 +2874,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  bgGradient?: CSSToken<CSS.Property.BackgroundImage, "gradients">
+  bgGradient?: StyleValue<CSS.Property.BackgroundImage, "gradients">
   /**
    * ### background-image
    *
@@ -2882,7 +2886,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  bgImage?: CSSToken<CSS.Property.BackgroundImage, "gradients">
+  bgImage?: StyleValue<CSS.Property.BackgroundImage, "gradients">
   /**
    * ### background-image
    *
@@ -2894,7 +2898,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  bgImg?: CSSToken<CSS.Property.BackgroundImage, "gradients">
+  bgImg?: StyleValue<CSS.Property.BackgroundImage, "gradients">
   /**
    * ### background-origin
    *
@@ -2906,7 +2910,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-origin
    */
-  bgOrigin?: CSSToken<CSS.Property.BackgroundOrigin>
+  bgOrigin?: StyleValue<CSS.Property.BackgroundOrigin>
   /**
    * ### background-position
    *
@@ -2918,7 +2922,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position
    */
-  bgPosition?: CSSToken<CSS.Property.BackgroundPosition>
+  bgPosition?: StyleValue<CSS.Property.BackgroundPosition>
   /**
    * ### background-position-x
    *
@@ -2930,7 +2934,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
    */
-  bgPositionX?: CSSToken<CSS.Property.BackgroundPositionX>
+  bgPositionX?: StyleValue<CSS.Property.BackgroundPositionX>
   /**
    * ### background-position-y
    *
@@ -2942,7 +2946,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
-  bgPositionY?: CSSToken<CSS.Property.BackgroundPositionY>
+  bgPositionY?: StyleValue<CSS.Property.BackgroundPositionY>
   /**
    * ### background-position-x
    *
@@ -2954,7 +2958,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
    */
-  bgPosX?: CSSToken<CSS.Property.BackgroundPositionX>
+  bgPosX?: StyleValue<CSS.Property.BackgroundPositionX>
   /**
    * ### background-position-y
    *
@@ -2966,7 +2970,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
-  bgPosY?: CSSToken<CSS.Property.BackgroundPositionY>
+  bgPosY?: StyleValue<CSS.Property.BackgroundPositionY>
   /**
    * ### background-repeat
    *
@@ -2978,7 +2982,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-repeat
    */
-  bgRepeat?: CSSToken<CSS.Property.BackgroundRepeat>
+  bgRepeat?: StyleValue<CSS.Property.BackgroundRepeat>
   /**
    * ### background-size
    *
@@ -2990,7 +2994,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-size
    */
-  bgSize?: CSSToken<CSS.Property.BackgroundSize>
+  bgSize?: StyleValue<CSS.Property.BackgroundSize>
   /**
    * ### mix-blend-mode
    *
@@ -3002,7 +3006,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
    */
-  blendMode?: CSSToken<CSS.Property.MixBlendMode>
+  blendMode?: StyleValue<CSS.Property.MixBlendMode>
   /**
    * ### block-size
    *
@@ -3014,11 +3018,11 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/block-size
    */
-  blockSize?: CSSToken<CSS.Property.BlockSize | number, "sizes">
+  blockSize?: StyleValue<CSS.Property.BlockSize | number, "sizes">
   /**
    * Sets the value of `--blur`.
    */
-  blur?: CSSToken<StringLiteral, "blurs">
+  blur?: StyleValue<StringLiteral, "blurs">
   /**
    * ### border
    *
@@ -3030,7 +3034,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border
    */
-  border?: CSSToken<CSS.Property.Border | number, "borders">
+  border?: StyleValue<CSS.Property.Border | number, "borders">
   /**
    * ### border-block
    *
@@ -3042,7 +3046,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block
    */
-  borderBlock?: CSSToken<CSS.Property.BorderBlock | number, "borders">
+  borderBlock?: StyleValue<CSS.Property.BorderBlock | number, "borders">
   /**
    * ### border-block-color
    *
@@ -3054,7 +3058,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-color
    */
-  borderBlockColor?: CSSToken<CSS.Property.BorderBlockColor, "colors">
+  borderBlockColor?: StyleValue<CSS.Property.BorderBlockColor, "colors">
   /**
    * ### border-block-end
    *
@@ -3066,7 +3070,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end
    */
-  borderBlockEnd?: CSSToken<CSS.Property.BorderBlockEnd | number, "borders">
+  borderBlockEnd?: StyleValue<CSS.Property.BorderBlockEnd | number, "borders">
   /**
    * ### border-block-end-color
    *
@@ -3078,7 +3082,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-color
    */
-  borderBlockEndColor?: CSSToken<CSS.Property.BorderBlockEndColor, "colors">
+  borderBlockEndColor?: StyleValue<CSS.Property.BorderBlockEndColor, "colors">
   /**
    * ### border-block-end-style
    *
@@ -3090,7 +3094,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-style
    */
-  borderBlockEndStyle?: CSSToken<CSS.Property.BorderBlockEndStyle>
+  borderBlockEndStyle?: StyleValue<CSS.Property.BorderBlockEndStyle>
   /**
    * ### border-block-end-width
    *
@@ -3102,7 +3106,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-width
    */
-  borderBlockEndWidth?: CSSToken<CSS.Property.BorderBlockEndWidth | number>
+  borderBlockEndWidth?: StyleValue<CSS.Property.BorderBlockEndWidth | number>
   /**
    * ### border-block-start
    *
@@ -3114,7 +3118,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start
    */
-  borderBlockStart?: CSSToken<CSS.Property.BorderBlockStart | number, "borders">
+  borderBlockStart?: StyleValue<
+    CSS.Property.BorderBlockStart | number,
+    "borders"
+  >
   /**
    * ### border-block-start-color
    *
@@ -3126,7 +3133,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-color
    */
-  borderBlockStartColor?: CSSToken<CSS.Property.BorderBlockStartColor, "colors">
+  borderBlockStartColor?: StyleValue<
+    CSS.Property.BorderBlockStartColor,
+    "colors"
+  >
   /**
    * ### border-block-start-style
    *
@@ -3138,7 +3148,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-style
    */
-  borderBlockStartStyle?: CSSToken<CSS.Property.BorderBlockStartStyle>
+  borderBlockStartStyle?: StyleValue<CSS.Property.BorderBlockStartStyle>
   /**
    * ### border-block-start-width
    *
@@ -3150,7 +3160,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-width
    */
-  borderBlockStartWidth?: CSSToken<CSS.Property.BorderBlockStartWidth | number>
+  borderBlockStartWidth?: StyleValue<
+    CSS.Property.BorderBlockStartWidth | number
+  >
   /**
    * ### border-block-style
    *
@@ -3162,7 +3174,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-style
    */
-  borderBlockStyle?: CSSToken<CSS.Property.BorderBlockStyle>
+  borderBlockStyle?: StyleValue<CSS.Property.BorderBlockStyle>
   /**
    * ### border-block-width
    *
@@ -3174,7 +3186,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-width
    */
-  borderBlockWidth?: CSSToken<CSS.Property.BorderBlockWidth | number>
+  borderBlockWidth?: StyleValue<CSS.Property.BorderBlockWidth | number>
   /**
    * ### border-bottom
    *
@@ -3186,7 +3198,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom
    */
-  borderBottom?: CSSToken<CSS.Property.BorderBottom | number, "borders">
+  borderBottom?: StyleValue<CSS.Property.BorderBottom | number, "borders">
   /**
    * ### border-bottom-color
    *
@@ -3198,7 +3210,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-color
    */
-  borderBottomColor?: CSSToken<CSS.Property.BorderBottomColor, "colors">
+  borderBottomColor?: StyleValue<CSS.Property.BorderBottomColor, "colors">
   /**
    * ### border-end-end-radius
    *
@@ -3210,7 +3222,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
    */
-  borderBottomEndRadius?: CSSToken<
+  borderBottomEndRadius?: StyleValue<
     CSS.Property.BorderEndEndRadius | number,
     "radii"
   >
@@ -3225,7 +3237,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
    */
-  borderBottomLeftRadius?: CSSToken<
+  borderBottomLeftRadius?: StyleValue<
     CSS.Property.BorderBottomLeftRadius | number,
     "radii"
   >
@@ -3252,7 +3264,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  borderBottomRadius?: CSSToken<
+  borderBottomRadius?: StyleValue<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
@@ -3269,7 +3281,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  borderBottomRightRadius?: CSSToken<
+  borderBottomRightRadius?: StyleValue<
     CSS.Property.BorderBottomRightRadius | number,
     "radii"
   >
@@ -3284,7 +3296,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderBottomStartRadius?: CSSToken<
+  borderBottomStartRadius?: StyleValue<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
@@ -3299,7 +3311,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-style
    */
-  borderBottomStyle?: CSSToken<CSS.Property.BorderBottomStyle>
+  borderBottomStyle?: StyleValue<CSS.Property.BorderBottomStyle>
   /**
    * ### border-bottom-width
    *
@@ -3311,7 +3323,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-width
    */
-  borderBottomWidth?: CSSToken<CSS.Property.BorderBottomWidth | number>
+  borderBottomWidth?: StyleValue<CSS.Property.BorderBottomWidth | number>
   /**
    * ### border-collapse
    *
@@ -3323,7 +3335,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-collapse
    */
-  borderCollapse?: CSSToken<CSS.Property.BorderCollapse>
+  borderCollapse?: StyleValue<CSS.Property.BorderCollapse>
   /**
    * ### border-color
    *
@@ -3335,7 +3347,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-color
    */
-  borderColor?: CSSToken<CSS.Property.BorderColor, "colors">
+  borderColor?: StyleValue<CSS.Property.BorderColor, "colors">
   /**
    * ### border-inline-end
    *
@@ -3347,7 +3359,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end
    */
-  borderEnd?: CSSToken<CSS.Property.BorderInlineEnd | number, "borders">
+  borderEnd?: StyleValue<CSS.Property.BorderInlineEnd | number, "borders">
   /**
    * ### border-inline-end-color
    *
@@ -3359,7 +3371,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
    */
-  borderEndColor?: CSSToken<CSS.Property.BorderInlineEndColor, "colors">
+  borderEndColor?: StyleValue<CSS.Property.BorderInlineEndColor, "colors">
   /**
    * ### border-end-end-radius
    *
@@ -3371,7 +3383,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
    */
-  borderEndEndRadius?: CSSToken<
+  borderEndEndRadius?: StyleValue<
     CSS.Property.BorderEndEndRadius | number,
     "radii"
   >
@@ -3398,7 +3410,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderEndRadius?: CSSToken<
+  borderEndRadius?: StyleValue<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -3415,7 +3427,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderEndStartRadius?: CSSToken<
+  borderEndStartRadius?: StyleValue<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
@@ -3430,7 +3442,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
    */
-  borderEndStyle?: CSSToken<CSS.Property.BorderInlineEndStyle>
+  borderEndStyle?: StyleValue<CSS.Property.BorderInlineEndStyle>
   /**
    * ### border-inline-end-width
    *
@@ -3442,7 +3454,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
    */
-  borderEndWidth?: CSSToken<CSS.Property.BorderInlineEndWidth | number>
+  borderEndWidth?: StyleValue<CSS.Property.BorderInlineEndWidth | number>
   /**
    * ### border-image
    *
@@ -3454,7 +3466,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image
    */
-  borderImage?: CSSToken<CSS.Property.BorderImage | number, "borders">
+  borderImage?: StyleValue<CSS.Property.BorderImage | number, "borders">
   /**
    * ### border-image-outset
    *
@@ -3466,7 +3478,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-outset
    */
-  borderImageOutset?: CSSToken<CSS.Property.BorderImageOutset>
+  borderImageOutset?: StyleValue<CSS.Property.BorderImageOutset>
   /**
    * ### border-image-repeat
    *
@@ -3478,7 +3490,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-repeat
    */
-  borderImageRepeat?: CSSToken<CSS.Property.BorderImageRepeat>
+  borderImageRepeat?: StyleValue<CSS.Property.BorderImageRepeat>
   /**
    * ### border-image-slice
    *
@@ -3490,7 +3502,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-slice
    */
-  borderImageSlice?: CSSToken<CSS.Property.BorderImageSlice>
+  borderImageSlice?: StyleValue<CSS.Property.BorderImageSlice>
   /**
    * ### border-image-source
    *
@@ -3502,7 +3514,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-source
    */
-  borderImageSource?: CSSToken<CSS.Property.BorderImageSource, "gradients">
+  borderImageSource?: StyleValue<CSS.Property.BorderImageSource, "gradients">
   /**
    * ### border-image-width
    *
@@ -3514,7 +3526,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-width
    */
-  borderImageWidth?: CSSToken<CSS.Property.BorderImageWidth | number>
+  borderImageWidth?: StyleValue<CSS.Property.BorderImageWidth | number>
   /**
    * ### border-inline
    *
@@ -3526,7 +3538,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline
    */
-  borderInline?: CSSToken<CSS.Property.BorderInline | number, "borders">
+  borderInline?: StyleValue<CSS.Property.BorderInline | number, "borders">
   /**
    * ### border-inline-color
    *
@@ -3538,7 +3550,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-color
    */
-  borderInlineColor?: CSSToken<CSS.Property.BorderInlineColor, "colors">
+  borderInlineColor?: StyleValue<CSS.Property.BorderInlineColor, "colors">
   /**
    * ### border-inline-end
    *
@@ -3550,7 +3562,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end
    */
-  borderInlineEnd?: CSSToken<CSS.Property.BorderInlineEnd | number, "borders">
+  borderInlineEnd?: StyleValue<CSS.Property.BorderInlineEnd | number, "borders">
   /**
    * ### border-inline-end-color
    *
@@ -3562,7 +3574,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
    */
-  borderInlineEndColor?: CSSToken<CSS.Property.BorderInlineEndColor, "colors">
+  borderInlineEndColor?: StyleValue<CSS.Property.BorderInlineEndColor, "colors">
   /**
    * ### border-end-end-radius
    *
@@ -3586,7 +3598,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderInlineEndRadius?: CSSToken<
+  borderInlineEndRadius?: StyleValue<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -3603,7 +3615,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
    */
-  borderInlineEndStyle?: CSSToken<CSS.Property.BorderInlineEndStyle>
+  borderInlineEndStyle?: StyleValue<CSS.Property.BorderInlineEndStyle>
   /**
    * ### border-inline-end-width
    *
@@ -3615,7 +3627,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
    */
-  borderInlineEndWidth?: CSSToken<CSS.Property.BorderInlineEndWidth | number>
+  borderInlineEndWidth?: StyleValue<CSS.Property.BorderInlineEndWidth | number>
   /**
    * ### border-inline-start
    *
@@ -3627,7 +3639,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start
    */
-  borderInlineStart?: CSSToken<
+  borderInlineStart?: StyleValue<
     CSS.Property.BorderInlineStart | number,
     "borders"
   >
@@ -3642,7 +3654,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
    */
-  borderInlineStartColor?: CSSToken<
+  borderInlineStartColor?: StyleValue<
     CSS.Property.BorderInlineStartColor,
     "colors"
   >
@@ -3669,7 +3681,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderInlineStartRadius?: CSSToken<
+  borderInlineStartRadius?: StyleValue<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
@@ -3686,7 +3698,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
    */
-  borderInlineStartStyle?: CSSToken<CSS.Property.BorderInlineStartStyle>
+  borderInlineStartStyle?: StyleValue<CSS.Property.BorderInlineStartStyle>
   /**
    * ### border-inline-start-width
    *
@@ -3698,7 +3710,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
    */
-  borderInlineStartWidth?: CSSToken<
+  borderInlineStartWidth?: StyleValue<
     CSS.Property.BorderInlineStartWidth | number
   >
   /**
@@ -3712,7 +3724,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-style
    */
-  borderInlineStyle?: CSSToken<CSS.Property.BorderInlineStyle>
+  borderInlineStyle?: StyleValue<CSS.Property.BorderInlineStyle>
   /**
    * ### border-inline-width
    *
@@ -3724,7 +3736,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-width
    */
-  borderInlineWidth?: CSSToken<CSS.Property.BorderInlineWidth | number>
+  borderInlineWidth?: StyleValue<CSS.Property.BorderInlineWidth | number>
   /**
    * ### border-left
    *
@@ -3736,7 +3748,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left
    */
-  borderLeft?: CSSToken<CSS.Property.BorderLeft | number, "borders">
+  borderLeft?: StyleValue<CSS.Property.BorderLeft | number, "borders">
   /**
    * ### border-left-color
    *
@@ -3748,7 +3760,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left-color
    */
-  borderLeftColor?: CSSToken<CSS.Property.BorderLeftColor, "colors">
+  borderLeftColor?: StyleValue<CSS.Property.BorderLeftColor, "colors">
   /**
    * ### border-bottom-left-radius
    *
@@ -3772,7 +3784,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  borderLeftRadius?: CSSToken<
+  borderLeftRadius?: StyleValue<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
     | number,
@@ -3789,7 +3801,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left-style
    */
-  borderLeftStyle?: CSSToken<CSS.Property.BorderLeftStyle>
+  borderLeftStyle?: StyleValue<CSS.Property.BorderLeftStyle>
   /**
    * ### border-left-width
    *
@@ -3801,7 +3813,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left-width
    */
-  borderLeftWidth?: CSSToken<CSS.Property.BorderLeftWidth | number>
+  borderLeftWidth?: StyleValue<CSS.Property.BorderLeftWidth | number>
   /**
    * ### border-radius
    *
@@ -3813,7 +3825,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
    */
-  borderRadius?: CSSToken<CSS.Property.BorderRadius | number, "radii">
+  borderRadius?: StyleValue<CSS.Property.BorderRadius | number, "radii">
   /**
    * ### border-right
    *
@@ -3825,7 +3837,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right
    */
-  borderRight?: CSSToken<CSS.Property.BorderRight | number, "borders">
+  borderRight?: StyleValue<CSS.Property.BorderRight | number, "borders">
   /**
    * ### border-right-color
    *
@@ -3837,7 +3849,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right-color
    */
-  borderRightColor?: CSSToken<CSS.Property.BorderRightColor, "colors">
+  borderRightColor?: StyleValue<CSS.Property.BorderRightColor, "colors">
   /**
    * ### border-bottom-right-radius
    *
@@ -3861,7 +3873,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderRightRadius?: CSSToken<
+  borderRightRadius?: StyleValue<
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -3878,7 +3890,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right-style
    */
-  borderRightStyle?: CSSToken<CSS.Property.BorderRightStyle>
+  borderRightStyle?: StyleValue<CSS.Property.BorderRightStyle>
   /**
    * ### border-right-width
    *
@@ -3890,7 +3902,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right-width
    */
-  borderRightWidth?: CSSToken<CSS.Property.BorderRightWidth | number>
+  borderRightWidth?: StyleValue<CSS.Property.BorderRightWidth | number>
   /**
    * ### border-spacing
    *
@@ -3902,7 +3914,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-spacing
    */
-  borderSpacing?: CSSToken<CSS.Property.BorderSpacing>
+  borderSpacing?: StyleValue<CSS.Property.BorderSpacing>
   /**
    * ### border-inline-start
    *
@@ -3914,7 +3926,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start
    */
-  borderStart?: CSSToken<CSS.Property.BorderInlineStart | number, "borders">
+  borderStart?: StyleValue<CSS.Property.BorderInlineStart | number, "borders">
   /**
    * ### border-inline-start-color
    *
@@ -3926,7 +3938,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
    */
-  borderStartColor?: CSSToken<CSS.Property.BorderInlineStartColor, "colors">
+  borderStartColor?: StyleValue<CSS.Property.BorderInlineStartColor, "colors">
   /**
    * ### border-start-end-radius
    *
@@ -3938,7 +3950,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  borderStartEndRadius?: CSSToken<
+  borderStartEndRadius?: StyleValue<
     CSS.Property.BorderStartEndRadius | number,
     "radii"
   >
@@ -3965,7 +3977,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderStartRadius?: CSSToken<
+  borderStartRadius?: StyleValue<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
@@ -3982,7 +3994,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderStartStartRadius?: CSSToken<
+  borderStartStartRadius?: StyleValue<
     CSS.Property.BorderStartStartRadius | number,
     "radii"
   >
@@ -3997,7 +4009,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
    */
-  borderStartStyle?: CSSToken<CSS.Property.BorderInlineStartStyle>
+  borderStartStyle?: StyleValue<CSS.Property.BorderInlineStartStyle>
   /**
    * ### border-inline-start-width
    *
@@ -4009,7 +4021,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
    */
-  borderStartWidth?: CSSToken<CSS.Property.BorderInlineStartWidth | number>
+  borderStartWidth?: StyleValue<CSS.Property.BorderInlineStartWidth | number>
   /**
    * ### border-style
    *
@@ -4021,7 +4033,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-style
    */
-  borderStyle?: CSSToken<CSS.Property.BorderStyle>
+  borderStyle?: StyleValue<CSS.Property.BorderStyle>
   /**
    * ### border-top
    *
@@ -4033,7 +4045,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top
    */
-  borderTop?: CSSToken<CSS.Property.BorderTop | number, "borders">
+  borderTop?: StyleValue<CSS.Property.BorderTop | number, "borders">
   /**
    * ### border-top-color
    *
@@ -4045,7 +4057,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-color
    */
-  borderTopColor?: CSSToken<CSS.Property.BorderTopColor, "colors">
+  borderTopColor?: StyleValue<CSS.Property.BorderTopColor, "colors">
   /**
    * ### border-start-end-radius
    *
@@ -4057,7 +4069,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  borderTopEndRadius?: CSSToken<
+  borderTopEndRadius?: StyleValue<
     CSS.Property.BorderStartEndRadius | number,
     "radii"
   >
@@ -4072,7 +4084,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  borderTopLeftRadius?: CSSToken<
+  borderTopLeftRadius?: StyleValue<
     CSS.Property.BorderTopLeftRadius | number,
     "radii"
   >
@@ -4099,7 +4111,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderTopRadius?: CSSToken<
+  borderTopRadius?: StyleValue<
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -4116,7 +4128,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderTopRightRadius?: CSSToken<
+  borderTopRightRadius?: StyleValue<
     CSS.Property.BorderTopRightRadius | number,
     "radii"
   >
@@ -4131,7 +4143,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderTopStartRadius?: CSSToken<
+  borderTopStartRadius?: StyleValue<
     CSS.Property.BorderStartStartRadius | number,
     "radii"
   >
@@ -4146,7 +4158,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-style
    */
-  borderTopStyle?: CSSToken<CSS.Property.BorderTopStyle>
+  borderTopStyle?: StyleValue<CSS.Property.BorderTopStyle>
   /**
    * ### border-top-width
    *
@@ -4158,7 +4170,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-width
    */
-  borderTopWidth?: CSSToken<CSS.Property.BorderTopWidth | number>
+  borderTopWidth?: StyleValue<CSS.Property.BorderTopWidth | number>
   /**
    * ### border-width
    *
@@ -4170,7 +4182,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-width
    */
-  borderWidth?: CSSToken<CSS.Property.BorderWidth | number>
+  borderWidth?: StyleValue<CSS.Property.BorderWidth | number>
   /**
    * ### border-left
    *
@@ -4194,7 +4206,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right
    */
-  borderX?: CSSToken<
+  borderX?: StyleValue<
     CSS.Property.BorderLeft | CSS.Property.BorderRight | number,
     "borders"
   >
@@ -4221,7 +4233,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top
    */
-  borderY?: CSSToken<
+  borderY?: StyleValue<
     CSS.Property.BorderBottom | CSS.Property.BorderTop | number,
     "borders"
   >
@@ -4236,7 +4248,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/bottom
    */
-  bottom?: CSSToken<CSS.Property.Bottom | number, "spaces">
+  bottom?: StyleValue<CSS.Property.Bottom | number, "spaces">
   /**
    * ### box-align
    *
@@ -4246,7 +4258,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxAlign?: CSSToken<CSS.Property.BoxAlign>
+  boxAlign?: StyleValue<CSS.Property.BoxAlign>
   /**
    * ### box-decoration-break
    *
@@ -4256,7 +4268,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-decoration-break
    */
-  boxDecorationBreak?: CSSToken<CSS.Property.BoxDecorationBreak>
+  boxDecorationBreak?: StyleValue<CSS.Property.BoxDecorationBreak>
   /**
    * ### box-direction
    *
@@ -4266,7 +4278,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxDirection?: CSSToken<CSS.Property.BoxDirection>
+  boxDirection?: StyleValue<CSS.Property.BoxDirection>
   /**
    * ### box-flex
    *
@@ -4276,7 +4288,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxFlex?: CSSToken<CSS.Property.BoxFlex>
+  boxFlex?: StyleValue<CSS.Property.BoxFlex>
   /**
    * ### box-flex-group
    *
@@ -4286,7 +4298,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxFlexGroup?: CSSToken<CSS.Property.BoxFlexGroup>
+  boxFlexGroup?: StyleValue<CSS.Property.BoxFlexGroup>
   /**
    * ### box-lines
    *
@@ -4296,7 +4308,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxLines?: CSSToken<CSS.Property.BoxLines>
+  boxLines?: StyleValue<CSS.Property.BoxLines>
   /**
    * ### box-ordinal-group
    *
@@ -4306,7 +4318,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxOrdinalGroup?: CSSToken<CSS.Property.BoxOrdinalGroup>
+  boxOrdinalGroup?: StyleValue<CSS.Property.BoxOrdinalGroup>
   /**
    * ### box-orient
    *
@@ -4316,7 +4328,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxOrient?: CSSToken<CSS.Property.BoxOrient>
+  boxOrient?: StyleValue<CSS.Property.BoxOrient>
   /**
    * ### box-pack
    *
@@ -4326,7 +4338,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxPack?: CSSToken<CSS.Property.BoxPack>
+  boxPack?: StyleValue<CSS.Property.BoxPack>
   /**
    * ### box-shadow
    *
@@ -4338,7 +4350,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-shadow
    */
-  boxShadow?: CSSToken<CSS.Property.BoxShadow, "shadows">
+  boxShadow?: StyleValue<CSS.Property.BoxShadow, "shadows">
   /**
    * ### height
    *
@@ -4362,7 +4374,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  boxSize?: CSSToken<CSS.Property.Height | CSS.Property.Width | number, "sizes">
+  boxSize?: StyleValue<
+    CSS.Property.Height | CSS.Property.Width | number,
+    "sizes"
+  >
   /**
    * ### box-sizing
    *
@@ -4374,7 +4389,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-sizing
    */
-  boxSizing?: CSSToken<CSS.Property.BoxSizing>
+  boxSizing?: StyleValue<CSS.Property.BoxSizing>
   /**
    * ### break-after
    *
@@ -4386,7 +4401,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/break-after
    */
-  breakAfter?: CSSToken<CSS.Property.BreakAfter>
+  breakAfter?: StyleValue<CSS.Property.BreakAfter>
   /**
    * ### break-before
    *
@@ -4398,7 +4413,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/break-before
    */
-  breakBefore?: CSSToken<CSS.Property.BreakBefore>
+  breakBefore?: StyleValue<CSS.Property.BreakBefore>
   /**
    * ### break-inside
    *
@@ -4410,11 +4425,11 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/break-inside
    */
-  breakInside?: CSSToken<CSS.Property.BreakInside>
+  breakInside?: StyleValue<CSS.Property.BreakInside>
   /**
    * Sets the value of `--brightness`.
    */
-  brightness?: CSSToken<StringLiteral>
+  brightness?: StyleValue<StringLiteral>
   /**
    * ### caption-side
    *
@@ -4426,7 +4441,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/caption-side
    */
-  captionSide?: CSSToken<CSS.Property.CaptionSide>
+  captionSide?: StyleValue<CSS.Property.CaptionSide>
   /**
    * ### caret-color
    *
@@ -4438,7 +4453,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/caret-color
    */
-  caret?: CSSToken<CSS.Property.CaretColor, "colors">
+  caret?: StyleValue<CSS.Property.CaretColor, "colors">
   /**
    * ### caret-color
    *
@@ -4450,7 +4465,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/caret-color
    */
-  caretColor?: CSSToken<CSS.Property.CaretColor, "colors">
+  caretColor?: StyleValue<CSS.Property.CaretColor, "colors">
   /**
    * ### clear
    *
@@ -4462,7 +4477,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/clear
    */
-  clear?: CSSToken<CSS.Property.Clear>
+  clear?: StyleValue<CSS.Property.Clear>
   /**
    * ### clip
    *
@@ -4473,7 +4488,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  clip?: CSSToken<CSS.Property.Clip>
+  clip?: StyleValue<CSS.Property.Clip>
   /**
    * ### clip-path
    *
@@ -4485,7 +4500,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/clip-path
    */
-  clipPath?: CSSToken<CSS.Property.ClipPath>
+  clipPath?: StyleValue<CSS.Property.ClipPath>
   /**
    * ### clip-rule
    *
@@ -4497,7 +4512,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/clip-rule
    */
-  clipRule?: CSSToken<CSS.Property.ClipRule>
+  clipRule?: StyleValue<CSS.Property.ClipRule>
   /**
    * ### color
    *
@@ -4509,7 +4524,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color
    */
-  color?: CSSToken<CSS.Property.Color, "colors">
+  color?: StyleValue<CSS.Property.Color, "colors">
   /**
    * ### color-adjust
    *
@@ -4520,7 +4535,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  colorAdjust?: CSSToken<CSS.Property.PrintColorAdjust>
+  colorAdjust?: StyleValue<CSS.Property.PrintColorAdjust>
   /**
    * ### color-interpolation
    *
@@ -4532,7 +4547,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation
    */
-  colorInterpolation?: CSSToken<CSS.Property.ColorInterpolation>
+  colorInterpolation?: StyleValue<CSS.Property.ColorInterpolation>
   /**
    * ### color-interpolation-filters
    *
@@ -4544,7 +4559,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation-filters
    */
-  colorInterpolationFilters?: CSSToken<string & {}>
+  colorInterpolationFilters?: StyleValue<string & {}>
   /**
    * ### column-count
    *
@@ -4556,7 +4571,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-count
    */
-  columnCount?: CSSToken<CSS.Property.ColumnCount>
+  columnCount?: StyleValue<CSS.Property.ColumnCount>
   /**
    * ### column-fill
    *
@@ -4568,7 +4583,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-fill
    */
-  columnFill?: CSSToken<CSS.Property.ColumnFill>
+  columnFill?: StyleValue<CSS.Property.ColumnFill>
   /**
    * ### column-gap
    *
@@ -4580,7 +4595,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  columnGap?: CSSToken<CSS.Property.ColumnGap | number, "spaces">
+  columnGap?: StyleValue<CSS.Property.ColumnGap | number, "spaces">
   /**
    * ### column-rule
    *
@@ -4592,7 +4607,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule
    */
-  columnRule?: CSSToken<CSS.Property.ColumnRule | number>
+  columnRule?: StyleValue<CSS.Property.ColumnRule | number>
   /**
    * ### column-rule-color
    *
@@ -4604,7 +4619,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-color
    */
-  columnRuleColor?: CSSToken<CSS.Property.ColumnRuleColor, "colors">
+  columnRuleColor?: StyleValue<CSS.Property.ColumnRuleColor, "colors">
   /**
    * ### column-rule-style
    *
@@ -4616,7 +4631,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-style
    */
-  columnRuleStyle?: CSSToken<CSS.Property.ColumnRuleStyle>
+  columnRuleStyle?: StyleValue<CSS.Property.ColumnRuleStyle>
   /**
    * ### column-rule-width
    *
@@ -4628,7 +4643,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-width
    */
-  columnRuleWidth?: CSSToken<CSS.Property.ColumnRuleWidth | number>
+  columnRuleWidth?: StyleValue<CSS.Property.ColumnRuleWidth | number>
   /**
    * ### columns
    *
@@ -4640,7 +4655,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/columns
    */
-  columns?: CSSToken<CSS.Property.Columns>
+  columns?: StyleValue<CSS.Property.Columns>
   /**
    * ### column-span
    *
@@ -4652,7 +4667,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-span
    */
-  columnSpan?: CSSToken<CSS.Property.ColumnSpan>
+  columnSpan?: StyleValue<CSS.Property.ColumnSpan>
   /**
    * ### column-width
    *
@@ -4664,7 +4679,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-width
    */
-  columnWidth?: CSSToken<CSS.Property.ColumnWidth | number, "sizes">
+  columnWidth?: StyleValue<CSS.Property.ColumnWidth | number, "sizes">
   /**
    * ### contain
    *
@@ -4676,7 +4691,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain
    */
-  contain?: CSSToken<CSS.Property.Contain>
+  contain?: StyleValue<CSS.Property.Contain>
   /**
    * ### container
    *
@@ -4687,7 +4702,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container
    */
-  container?: CSSToken<CSS.Property.Container>
+  container?: StyleValue<CSS.Property.Container>
   /**
    * ### container-name
    *
@@ -4698,7 +4713,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container-name
    */
-  containerName?: CSSToken<CSS.Property.ContainerName>
+  containerName?: StyleValue<CSS.Property.ContainerName>
   /**
    * ### container-type
    *
@@ -4709,7 +4724,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container-type
    */
-  containerType?: CSSToken<CSS.Property.ContainerType>
+  containerType?: StyleValue<CSS.Property.ContainerType>
   /**
    * ### contain-intrinsic-block-size
    *
@@ -4720,7 +4735,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-block-size
    */
-  containIntrinsicBlockSize?: CSSToken<CSS.Property.ContainIntrinsicBlockSize>
+  containIntrinsicBlockSize?: StyleValue<CSS.Property.ContainIntrinsicBlockSize>
   /**
    * ### contain-intrinsic-height
    *
@@ -4731,7 +4746,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-height
    */
-  containIntrinsicHeight?: CSSToken<CSS.Property.ContainIntrinsicHeight>
+  containIntrinsicHeight?: StyleValue<CSS.Property.ContainIntrinsicHeight>
   /**
    * ### contain-intrinsic-inline-size
    *
@@ -4742,7 +4757,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-inline-size
    */
-  containIntrinsicInlineSize?: CSSToken<CSS.Property.ContainIntrinsicInlineSize>
+  containIntrinsicInlineSize?: StyleValue<CSS.Property.ContainIntrinsicInlineSize>
   /**
    * ### contain-intrinsic-size
    *
@@ -4753,7 +4768,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-size
    */
-  containIntrinsicSize?: CSSToken<CSS.Property.ContainIntrinsicSize>
+  containIntrinsicSize?: StyleValue<CSS.Property.ContainIntrinsicSize>
   /**
    * ### contain-intrinsic-width
    *
@@ -4764,7 +4779,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-width
    */
-  containIntrinsicWidth?: CSSToken<
+  containIntrinsicWidth?: StyleValue<
     CSS.Property.ContainIntrinsicWidth | number,
     "sizes"
   >
@@ -4779,7 +4794,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/content
    */
-  content?: CSSToken<CSS.Property.Content>
+  content?: StyleValue<CSS.Property.Content>
   /**
    * ### content-visibility
    *
@@ -4789,7 +4804,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/content-visibility
    */
-  contentVisibility?: CSSToken<CSS.Property.ContentVisibility>
+  contentVisibility?: StyleValue<CSS.Property.ContentVisibility>
   /**
    * ### counter-increment
    *
@@ -4801,7 +4816,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/counter-increment
    */
-  counterIncrement?: CSSToken<CSS.Property.CounterIncrement>
+  counterIncrement?: StyleValue<CSS.Property.CounterIncrement>
   /**
    * ### counter-reset
    *
@@ -4813,7 +4828,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/counter-reset
    */
-  counterReset?: CSSToken<CSS.Property.CounterReset>
+  counterReset?: StyleValue<CSS.Property.CounterReset>
   /**
    * ### counter-set
    *
@@ -4824,7 +4839,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/counter-set
    */
-  counterSet?: CSSToken<CSS.Property.CounterSet>
+  counterSet?: StyleValue<CSS.Property.CounterSet>
   /**
    * ### cursor
    *
@@ -4834,7 +4849,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cursor
    */
-  cursor?: CSSToken<CSS.Property.Cursor>
+  cursor?: StyleValue<CSS.Property.Cursor>
   /**
    * ### cx
    *
@@ -4846,7 +4861,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cx
    */
-  cx?: CSSToken<string & {}>
+  cx?: StyleValue<string & {}>
   /**
    * ### cy
    *
@@ -4858,7 +4873,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cy
    */
-  cy?: CSSToken<string & {}>
+  cy?: StyleValue<string & {}>
   /**
    * ### d
    *
@@ -4870,7 +4885,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/d
    */
-  d?: CSSToken<string & {}>
+  d?: StyleValue<string & {}>
   /**
    * ### direction
    *
@@ -4882,7 +4897,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/direction
    */
-  direction?: CSSToken<CSS.Property.Direction>
+  direction?: StyleValue<CSS.Property.Direction>
   /**
    * ### display
    *
@@ -4894,19 +4909,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/display
    */
-  display?: CSSToken<CSS.Property.Display>
+  display?: StyleValue<CSS.Property.Display>
   /**
    * ### dominant-baseline
    *
    * The <code>dominant-baseline</code> CSS property sets the specific baseline used to align an elements's text and inline-level contents.
    *
    * @baseline `Widely available`
-   * @widely_available_date ≤2022-09-24
-   * @newly_available_date ≤2020-03-24
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/dominant-baseline
    */
-  dominantBaseline?: CSSToken<CSS.Property.DominantBaseline>
+  dominantBaseline?: StyleValue<CSS.Property.DominantBaseline>
   /**
    * ### dynamic-range-limit
    *
@@ -4916,7 +4931,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  dynamicRangeLimit?: CSSToken<string & {}>
+  dynamicRangeLimit?: StyleValue<string & {}>
   /**
    * ### empty-cells
    *
@@ -4928,7 +4943,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/empty-cells
    */
-  emptyCells?: CSSToken<CSS.Property.EmptyCells>
+  emptyCells?: StyleValue<CSS.Property.EmptyCells>
   /**
    * ### field-sizing
    *
@@ -4940,7 +4955,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  fieldSizing?: CSSToken<string & {}>
+  fieldSizing?: StyleValue<string & {}>
   /**
    * ### fill
    *
@@ -4952,7 +4967,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/fill
    */
-  fill?: CSSToken<CSS.Property.Fill, "colors">
+  fill?: StyleValue<CSS.Property.Fill, "colors">
   /**
    * ### fill-opacity
    *
@@ -4964,7 +4979,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/fill-opacity
    */
-  fillOpacity?: CSSToken<CSS.Property.FillOpacity>
+  fillOpacity?: StyleValue<CSS.Property.FillOpacity>
   /**
    * ### fill-rule
    *
@@ -4976,7 +4991,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/fill-rule
    */
-  fillRule?: CSSToken<CSS.Property.FillRule>
+  fillRule?: StyleValue<CSS.Property.FillRule>
   /**
    * ### filter
    *
@@ -4988,7 +5003,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/filter
    */
-  filter?: CSSToken<CSS.Property.Filter>
+  filter?: StyleValue<CSS.Property.Filter>
   /**
    * ### flex
    *
@@ -5000,7 +5015,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex
    */
-  flex?: CSSToken<CSS.Property.Flex>
+  flex?: StyleValue<CSS.Property.Flex>
   /**
    * ### flex-basis
    *
@@ -5012,7 +5027,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-basis
    */
-  flexBasis?: CSSToken<CSS.Property.FlexBasis | number, "sizes">
+  flexBasis?: StyleValue<CSS.Property.FlexBasis | number, "sizes">
   /**
    * ### flex-direction
    *
@@ -5024,7 +5039,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-direction
    */
-  flexDir?: CSSToken<CSS.Property.FlexDirection>
+  flexDir?: StyleValue<CSS.Property.FlexDirection>
   /**
    * ### flex-direction
    *
@@ -5036,7 +5051,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-direction
    */
-  flexDirection?: CSSToken<CSS.Property.FlexDirection>
+  flexDirection?: StyleValue<CSS.Property.FlexDirection>
   /**
    * ### flex-flow
    *
@@ -5048,7 +5063,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-flow
    */
-  flexFlow?: CSSToken<CSS.Property.FlexFlow>
+  flexFlow?: StyleValue<CSS.Property.FlexFlow>
   /**
    * ### flex-grow
    *
@@ -5060,7 +5075,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-grow
    */
-  flexGrow?: CSSToken<CSS.Property.FlexGrow>
+  flexGrow?: StyleValue<CSS.Property.FlexGrow>
   /**
    * ### flex-shrink
    *
@@ -5072,7 +5087,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-shrink
    */
-  flexShrink?: CSSToken<CSS.Property.FlexShrink>
+  flexShrink?: StyleValue<CSS.Property.FlexShrink>
   /**
    * ### flex-wrap
    *
@@ -5084,7 +5099,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-wrap
    */
-  flexWrap?: CSSToken<CSS.Property.FlexWrap>
+  flexWrap?: StyleValue<CSS.Property.FlexWrap>
   /**
    * ### float
    *
@@ -5096,7 +5111,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/float
    */
-  float?: CSSToken<CSS.Property.Float>
+  float?: StyleValue<CSS.Property.Float>
   /**
    * ### flood-color
    *
@@ -5108,7 +5123,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flood-color
    */
-  floodColor?: CSSToken<CSS.Property.FloodColor, "colors">
+  floodColor?: StyleValue<CSS.Property.FloodColor, "colors">
   /**
    * ### flood-opacity
    *
@@ -5120,7 +5135,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flood-opacity
    */
-  floodOpacity?: CSSToken<CSS.Property.FloodOpacity>
+  floodOpacity?: StyleValue<CSS.Property.FloodOpacity>
   /**
    * ### font
    *
@@ -5132,7 +5147,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font
    */
-  font?: CSSToken<CSS.Property.Font>
+  font?: StyleValue<CSS.Property.Font>
   /**
    * ### font-family
    *
@@ -5144,7 +5159,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-family
    */
-  fontFamily?: CSSToken<CSS.Property.FontFamily, "fonts">
+  fontFamily?: StyleValue<CSS.Property.FontFamily, "fonts">
   /**
    * ### font-feature-settings
    *
@@ -5156,7 +5171,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-feature-settings
    */
-  fontFeatureSettings?: CSSToken<CSS.Property.FontFeatureSettings>
+  fontFeatureSettings?: StyleValue<CSS.Property.FontFeatureSettings>
   /**
    * ### font-kerning
    *
@@ -5168,7 +5183,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-kerning
    */
-  fontKerning?: CSSToken<CSS.Property.FontKerning>
+  fontKerning?: StyleValue<CSS.Property.FontKerning>
   /**
    * ### font-language-override
    *
@@ -5178,7 +5193,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-language-override
    */
-  fontLanguageOverride?: CSSToken<CSS.Property.FontLanguageOverride>
+  fontLanguageOverride?: StyleValue<CSS.Property.FontLanguageOverride>
   /**
    * ### font-optical-sizing
    *
@@ -5190,7 +5205,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-optical-sizing
    */
-  fontOpticalSizing?: CSSToken<CSS.Property.FontOpticalSizing>
+  fontOpticalSizing?: StyleValue<CSS.Property.FontOpticalSizing>
   /**
    * ### font-palette
    *
@@ -5201,7 +5216,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-palette
    */
-  fontPalette?: CSSToken<CSS.Property.FontPalette>
+  fontPalette?: StyleValue<CSS.Property.FontPalette>
   /**
    * ### font-size
    *
@@ -5213,7 +5228,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-size
    */
-  fontSize?: CSSToken<CSS.Property.FontSize | number, "fontSizes">
+  fontSize?: StyleValue<CSS.Property.FontSize | number, "fontSizes">
   /**
    * ### font-size-adjust
    *
@@ -5224,7 +5239,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-size-adjust
    */
-  fontSizeAdjust?: CSSToken<CSS.Property.FontSizeAdjust>
+  fontSizeAdjust?: StyleValue<CSS.Property.FontSizeAdjust>
   /**
    * ### font-smooth
    *
@@ -5232,19 +5247,18 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-smooth
    */
-  fontSmooth?: CSSToken<CSS.Property.FontSmooth>
+  fontSmooth?: StyleValue<CSS.Property.FontSmooth>
   /**
    * ### font-stretch
    *
    * The <code>font-stretch</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2020-03-19
-   * @newly_available_date 2017-09-19
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-stretch
+   *
+   * @deprecated
    */
-  fontStretch?: CSSToken<CSS.Property.FontStretch>
+  fontStretch?: StyleValue<CSS.Property.FontStretch>
   /**
    * ### font-style
    *
@@ -5256,7 +5270,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-style
    */
-  fontStyle?: CSSToken<CSS.Property.FontStyle>
+  fontStyle?: StyleValue<CSS.Property.FontStyle>
   /**
    * ### font-synthesis
    *
@@ -5268,7 +5282,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis
    */
-  fontSynthesis?: CSSToken<CSS.Property.FontSynthesis>
+  fontSynthesis?: StyleValue<CSS.Property.FontSynthesis>
   /**
    * ### font-synthesis-position
    *
@@ -5280,7 +5294,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  fontSynthesisPosition?: CSSToken<CSS.Property.FontSynthesisPosition>
+  fontSynthesisPosition?: StyleValue<CSS.Property.FontSynthesisPosition>
   /**
    * ### font-synthesis-small-caps
    *
@@ -5291,7 +5305,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-small-caps
    */
-  fontSynthesisSmallCaps?: CSSToken<CSS.Property.FontSynthesisSmallCaps>
+  fontSynthesisSmallCaps?: StyleValue<CSS.Property.FontSynthesisSmallCaps>
   /**
    * ### font-synthesis-style
    *
@@ -5302,7 +5316,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-style
    */
-  fontSynthesisStyle?: CSSToken<CSS.Property.FontSynthesisStyle>
+  fontSynthesisStyle?: StyleValue<CSS.Property.FontSynthesisStyle>
   /**
    * ### font-synthesis-weight
    *
@@ -5313,7 +5327,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-weight
    */
-  fontSynthesisWeight?: CSSToken<CSS.Property.FontSynthesisWeight>
+  fontSynthesisWeight?: StyleValue<CSS.Property.FontSynthesisWeight>
   /**
    * ### font-variant
    *
@@ -5325,7 +5339,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant
    */
-  fontVariant?: CSSToken<CSS.Property.FontVariant>
+  fontVariant?: StyleValue<CSS.Property.FontVariant>
   /**
    * ### font-variant-alternates
    *
@@ -5336,7 +5350,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-alternates
    */
-  fontVariantAlternates?: CSSToken<CSS.Property.FontVariantAlternates>
+  fontVariantAlternates?: StyleValue<CSS.Property.FontVariantAlternates>
   /**
    * ### font-variant-caps
    *
@@ -5348,7 +5362,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-caps
    */
-  fontVariantCaps?: CSSToken<CSS.Property.FontVariantCaps>
+  fontVariantCaps?: StyleValue<CSS.Property.FontVariantCaps>
   /**
    * ### font-variant-east-asian
    *
@@ -5360,7 +5374,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-east-asian
    */
-  fontVariantEastAsian?: CSSToken<CSS.Property.FontVariantEastAsian>
+  fontVariantEastAsian?: StyleValue<CSS.Property.FontVariantEastAsian>
   /**
    * ### font-variant-emoji
    *
@@ -5370,7 +5384,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-emoji
    */
-  fontVariantEmoji?: CSSToken<CSS.Property.FontVariantEmoji>
+  fontVariantEmoji?: StyleValue<CSS.Property.FontVariantEmoji>
   /**
    * ### font-variant-ligatures
    *
@@ -5382,7 +5396,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-ligatures
    */
-  fontVariantLigatures?: CSSToken<CSS.Property.FontVariantLigatures>
+  fontVariantLigatures?: StyleValue<CSS.Property.FontVariantLigatures>
   /**
    * ### font-variant-numeric
    *
@@ -5394,7 +5408,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-numeric
    */
-  fontVariantNumeric?: CSSToken<CSS.Property.FontVariantNumeric>
+  fontVariantNumeric?: StyleValue<CSS.Property.FontVariantNumeric>
   /**
    * ### font-variant-position
    *
@@ -5404,7 +5418,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-position
    */
-  fontVariantPosition?: CSSToken<CSS.Property.FontVariantPosition>
+  fontVariantPosition?: StyleValue<CSS.Property.FontVariantPosition>
   /**
    * ### font-variation-settings
    *
@@ -5416,7 +5430,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variation-settings
    */
-  fontVariationSettings?: CSSToken<CSS.Property.FontVariationSettings>
+  fontVariationSettings?: StyleValue<CSS.Property.FontVariationSettings>
   /**
    * ### font-weight
    *
@@ -5428,18 +5442,31 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-weight
    */
-  fontWeight?: CSSToken<CSS.Property.FontWeight, "fontWeights">
+  fontWeight?: StyleValue<CSS.Property.FontWeight, "fontWeights">
+  /**
+   * ### font-width
+   *
+   * The <code>font-width</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-fonts/#propdef-font-width
+   *
+   * @experimental
+   */
+  fontWidth?: StyleValue<string & {}>
   /**
    * ### forced-color-adjust
    *
    * The <code>forced-colors</code> CSS @media rule detects when a user has chosen to use a forced colors mode, also known as high-contrast mode, and the <code>forced-color-adjust</code> CSS property sets whether forced colors apply to an element.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/forced-color-adjust
    */
-  forcedColorAdjust?: CSSToken<CSS.Property.ForcedColorAdjust>
+  forcedColorAdjust?: StyleValue<CSS.Property.ForcedColorAdjust>
   /**
    * ### gap
    *
@@ -5451,7 +5478,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/gap
    */
-  g?: CSSToken<CSS.Property.Gap | number, "spaces">
+  g?: StyleValue<CSS.Property.Gap | number, "spaces">
   /**
    * ### gap
    *
@@ -5463,7 +5490,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/gap
    */
-  gap?: CSSToken<CSS.Property.Gap | number, "spaces">
+  gap?: StyleValue<CSS.Property.Gap | number, "spaces">
   /**
    * ### column-gap
    *
@@ -5475,7 +5502,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  gapX?: CSSToken<CSS.Property.ColumnGap | number, "spaces">
+  gapX?: StyleValue<CSS.Property.ColumnGap | number, "spaces">
   /**
    * ### row-gap
    *
@@ -5487,18 +5514,18 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
-  gapY?: CSSToken<CSS.Property.RowGap | number, "spaces">
+  gapY?: StyleValue<CSS.Property.RowGap | number, "spaces">
   /**
    * ### glyph-orientation-horizontal
    *
    * The SVG 1.1 image format has several components that were excluded from SVG 2, such as fonts, alternate glyphs, and the <code>xlink</code> namespace.
    *
    *
-   * @see https://developer.mozilla.org/docs/Web/SVG/Attribute/glyph-orientation-horizontal
+   * @see https://developer.mozilla.org/docs/Web/SVG/Reference/Attribute/glyph-orientation-horizontal
    *
    * @deprecated
    */
-  glyphOrientationHorizontal?: CSSToken<string & {}>
+  glyphOrientationHorizontal?: StyleValue<string & {}>
   /**
    * ### glyph-orientation-vertical
    *
@@ -5509,7 +5536,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  glyphOrientationVertical?: CSSToken<CSS.Property.GlyphOrientationVertical>
+  glyphOrientationVertical?: StyleValue<CSS.Property.GlyphOrientationVertical>
   /**
    * ### grid
    *
@@ -5521,7 +5548,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid
    */
-  grid?: CSSToken<CSS.Property.Grid>
+  grid?: StyleValue<CSS.Property.Grid>
   /**
    * ### grid-area
    *
@@ -5533,7 +5560,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-area
    */
-  gridArea?: CSSToken<CSS.Property.GridArea>
+  gridArea?: StyleValue<CSS.Property.GridArea>
   /**
    * ### grid-auto-columns
    *
@@ -5545,7 +5572,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-columns
    */
-  gridAutoColumns?: CSSToken<CSS.Property.GridAutoColumns | number, "sizes">
+  gridAutoColumns?: StyleValue<CSS.Property.GridAutoColumns | number, "sizes">
   /**
    * ### grid-auto-flow
    *
@@ -5557,7 +5584,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-flow
    */
-  gridAutoFlow?: CSSToken<CSS.Property.GridAutoFlow>
+  gridAutoFlow?: StyleValue<CSS.Property.GridAutoFlow>
   /**
    * ### grid-auto-rows
    *
@@ -5569,7 +5596,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-rows
    */
-  gridAutoRows?: CSSToken<CSS.Property.GridAutoRows | number, "sizes">
+  gridAutoRows?: StyleValue<CSS.Property.GridAutoRows | number, "sizes">
   /**
    * ### grid-column
    *
@@ -5581,7 +5608,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-column
    */
-  gridColumn?: CSSToken<CSS.Property.GridColumn>
+  gridColumn?: StyleValue<CSS.Property.GridColumn>
   /**
    * ### grid-column-end
    *
@@ -5593,7 +5620,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-column-end
    */
-  gridColumnEnd?: CSSToken<CSS.Property.GridColumnEnd>
+  gridColumnEnd?: StyleValue<CSS.Property.GridColumnEnd>
   /**
    * ### grid-column-start
    *
@@ -5605,7 +5632,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-column-start
    */
-  gridColumnStart?: CSSToken<CSS.Property.GridColumnStart>
+  gridColumnStart?: StyleValue<CSS.Property.GridColumnStart>
   /**
    * ### grid-row
    *
@@ -5617,7 +5644,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-row
    */
-  gridRow?: CSSToken<CSS.Property.GridRow>
+  gridRow?: StyleValue<CSS.Property.GridRow>
   /**
    * ### grid-row-end
    *
@@ -5629,7 +5656,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-row-end
    */
-  gridRowEnd?: CSSToken<CSS.Property.GridRowEnd>
+  gridRowEnd?: StyleValue<CSS.Property.GridRowEnd>
   /**
    * ### grid-row-start
    *
@@ -5641,7 +5668,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-row-start
    */
-  gridRowStart?: CSSToken<CSS.Property.GridRowStart>
+  gridRowStart?: StyleValue<CSS.Property.GridRowStart>
   /**
    * ### grid-template
    *
@@ -5653,7 +5680,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template
    */
-  gridTemplate?: CSSToken<CSS.Property.GridTemplate>
+  gridTemplate?: StyleValue<CSS.Property.GridTemplate>
   /**
    * ### grid-template-areas
    *
@@ -5665,7 +5692,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-areas
    */
-  gridTemplateAreas?: CSSToken<CSS.Property.GridTemplateAreas>
+  gridTemplateAreas?: StyleValue<CSS.Property.GridTemplateAreas>
   /**
    * ### grid-template-columns
    *
@@ -5677,7 +5704,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-columns
    */
-  gridTemplateColumns?: CSSToken<
+  gridTemplateColumns?: StyleValue<
     CSS.Property.GridTemplateColumns | number,
     "sizes"
   >
@@ -5692,7 +5719,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-rows
    */
-  gridTemplateRows?: CSSToken<CSS.Property.GridTemplateRows | number, "sizes">
+  gridTemplateRows?: StyleValue<CSS.Property.GridTemplateRows | number, "sizes">
   /**
    * ### column-gap
    *
@@ -5704,7 +5731,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  gx?: CSSToken<CSS.Property.ColumnGap | number, "spaces">
+  gx?: StyleValue<CSS.Property.ColumnGap | number, "spaces">
   /**
    * ### row-gap
    *
@@ -5716,7 +5743,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
-  gy?: CSSToken<CSS.Property.RowGap | number, "spaces">
+  gy?: StyleValue<CSS.Property.RowGap | number, "spaces">
   /**
    * ### height
    *
@@ -5728,7 +5755,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/height
    */
-  h?: CSSToken<CSS.Property.Height | number, "sizes">
+  h?: StyleValue<CSS.Property.Height | number, "sizes">
   /**
    * ### hanging-punctuation
    *
@@ -5738,7 +5765,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hanging-punctuation
    */
-  hangingPunctuation?: CSSToken<CSS.Property.HangingPunctuation>
+  hangingPunctuation?: StyleValue<CSS.Property.HangingPunctuation>
   /**
    * ### height
    *
@@ -5750,7 +5777,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/height
    */
-  height?: CSSToken<CSS.Property.Height | number, "sizes">
+  height?: StyleValue<CSS.Property.Height | number, "sizes">
   /**
    * ### hyphenate-character
    *
@@ -5761,7 +5788,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hyphenate-character
    */
-  hyphenateCharacter?: CSSToken<CSS.Property.HyphenateCharacter>
+  hyphenateCharacter?: StyleValue<CSS.Property.HyphenateCharacter>
   /**
    * ### hyphenate-limit-chars
    *
@@ -5771,7 +5798,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hyphenate-limit-chars
    */
-  hyphenateLimitChars?: CSSToken<CSS.Property.HyphenateLimitChars>
+  hyphenateLimitChars?: StyleValue<CSS.Property.HyphenateLimitChars>
   /**
    * ### hyphens
    *
@@ -5782,7 +5809,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hyphens
    */
-  hyphens?: CSSToken<CSS.Property.Hyphens>
+  hyphens?: StyleValue<CSS.Property.Hyphens>
   /**
    * ### image-orientation
    *
@@ -5794,7 +5821,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/image-orientation
    */
-  imageOrientation?: CSSToken<CSS.Property.ImageOrientation>
+  imageOrientation?: StyleValue<CSS.Property.ImageOrientation>
   /**
    * ### image-rendering
    *
@@ -5806,7 +5833,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/image-rendering
    */
-  imageRendering?: CSSToken<CSS.Property.ImageRendering>
+  imageRendering?: StyleValue<CSS.Property.ImageRendering>
   /**
    * ### ime-mode
    *
@@ -5817,7 +5844,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  imeMode?: CSSToken<CSS.Property.ImeMode>
+  imeMode?: StyleValue<CSS.Property.ImeMode>
   /**
    * ### initial-letter
    *
@@ -5827,7 +5854,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/initial-letter
    */
-  initialLetter?: CSSToken<CSS.Property.InitialLetter>
+  initialLetter?: StyleValue<CSS.Property.InitialLetter>
   /**
    * ### inline-size
    *
@@ -5839,7 +5866,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inline-size
    */
-  inlineSize?: CSSToken<CSS.Property.InlineSize | number, "sizes">
+  inlineSize?: StyleValue<CSS.Property.InlineSize | number, "sizes">
   /**
    * ### inset
    *
@@ -5851,7 +5878,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset
    */
-  inset?: CSSToken<CSS.Property.Inset | number, "spaces">
+  inset?: StyleValue<CSS.Property.Inset | number, "spaces">
   /**
    * ### inset-block
    *
@@ -5863,7 +5890,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-block
    */
-  insetBlock?: CSSToken<CSS.Property.InsetBlock | number, "spaces">
+  insetBlock?: StyleValue<CSS.Property.InsetBlock | number, "spaces">
   /**
    * ### inset-block-end
    *
@@ -5875,7 +5902,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-end
    */
-  insetBlockEnd?: CSSToken<CSS.Property.InsetBlockEnd | number, "spaces">
+  insetBlockEnd?: StyleValue<CSS.Property.InsetBlockEnd | number, "spaces">
   /**
    * ### inset-block-start
    *
@@ -5887,7 +5914,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-start
    */
-  insetBlockStart?: CSSToken<CSS.Property.InsetBlockStart | number, "spaces">
+  insetBlockStart?: StyleValue<CSS.Property.InsetBlockStart | number, "spaces">
   /**
    * ### inset-inline-end
    *
@@ -5899,7 +5926,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
    */
-  insetEnd?: CSSToken<CSS.Property.InsetInlineEnd | number, "spaces">
+  insetEnd?: StyleValue<CSS.Property.InsetInlineEnd | number, "spaces">
   /**
    * ### inset-inline
    *
@@ -5911,7 +5938,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline
    */
-  insetInline?: CSSToken<CSS.Property.InsetInline | number, "spaces">
+  insetInline?: StyleValue<CSS.Property.InsetInline | number, "spaces">
   /**
    * ### inset-inline-end
    *
@@ -5923,7 +5950,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
    */
-  insetInlineEnd?: CSSToken<CSS.Property.InsetInlineEnd | number, "spaces">
+  insetInlineEnd?: StyleValue<CSS.Property.InsetInlineEnd | number, "spaces">
   /**
    * ### inset-inline-start
    *
@@ -5935,7 +5962,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
    */
-  insetInlineStart?: CSSToken<CSS.Property.InsetInlineStart | number, "spaces">
+  insetInlineStart?: StyleValue<
+    CSS.Property.InsetInlineStart | number,
+    "spaces"
+  >
   /**
    * ### inset-inline-start
    *
@@ -5947,7 +5977,17 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
    */
-  insetStart?: CSSToken<CSS.Property.InsetInlineStart | number, "spaces">
+  insetStart?: StyleValue<CSS.Property.InsetInlineStart | number, "spaces">
+  /**
+   * ### interactivity
+   *
+   * The CSS `interactivity` property.
+   *
+   * @see https://drafts.csswg.org/css-ui-4/#propdef-interactivity
+   *
+   * @experimental
+   */
+  interactivity?: StyleValue<string & {}>
   /**
    * ### interpolate-size
    *
@@ -5959,7 +5999,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  interpolateSize?: CSSToken<string & {}>
+  interpolateSize?: StyleValue<string & {}>
   /**
    * ### isolation
    *
@@ -5971,7 +6011,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/isolation
    */
-  isolation?: CSSToken<CSS.Property.Isolation>
+  isolation?: StyleValue<CSS.Property.Isolation>
   /**
    * ### justify-content
    *
@@ -5983,7 +6023,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-content
    */
-  justifyContent?: CSSToken<CSS.Property.JustifyContent>
+  justifyContent?: StyleValue<CSS.Property.JustifyContent>
   /**
    * ### justify-items
    *
@@ -5995,7 +6035,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-items
    */
-  justifyItems?: CSSToken<CSS.Property.JustifyItems>
+  justifyItems?: StyleValue<CSS.Property.JustifyItems>
   /**
    * ### justify-self
    *
@@ -6007,7 +6047,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-self
    */
-  justifySelf?: CSSToken<CSS.Property.JustifySelf>
+  justifySelf?: StyleValue<CSS.Property.JustifySelf>
   /**
    * ### line-height
    *
@@ -6019,7 +6059,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-height
    */
-  leading?: CSSToken<CSS.Property.LineHeight, "lineHeights">
+  leading?: StyleValue<CSS.Property.LineHeight, "lineHeights">
   /**
    * ### left
    *
@@ -6031,7 +6071,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/left
    */
-  left?: CSSToken<CSS.Property.Left | number, "spaces">
+  left?: StyleValue<CSS.Property.Left | number, "spaces">
   /**
    * ### letter-spacing
    *
@@ -6043,7 +6083,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
    */
-  letterSpacing?: CSSToken<CSS.Property.LetterSpacing, "letterSpacings">
+  letterSpacing?: StyleValue<CSS.Property.LetterSpacing, "letterSpacings">
   /**
    * ### lighting-color
    *
@@ -6055,7 +6095,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/lighting-color
    */
-  lightingColor?: CSSToken<CSS.Property.LightingColor, "colors">
+  lightingColor?: StyleValue<CSS.Property.LightingColor, "colors">
   /**
    * ### line-break
    *
@@ -6067,7 +6107,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-break
    */
-  lineBreak?: CSSToken<CSS.Property.LineBreak>
+  lineBreak?: StyleValue<CSS.Property.LineBreak>
   /**
    * ### line-height
    *
@@ -6079,19 +6119,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-height
    */
-  lineHeight?: CSSToken<CSS.Property.LineHeight, "lineHeights">
-  /**
-   * ### line-height-step
-   *
-   * The <code>line-height-step</code> CSS property creates consistent vertical rhythm by setting the spacing between body text baselines. It rounds taller lines like headings up to the next multiple of the body text spacing.
-   *
-   * @baseline `Limited available`
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/line-height-step
-   *
-   * @experimental
-   */
-  lineHeightStep?: CSSToken<CSS.Property.LineHeightStep>
+  lineHeight?: StyleValue<CSS.Property.LineHeight, "lineHeights">
   /**
    * ### list-style
    *
@@ -6103,7 +6131,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style
    */
-  listStyle?: CSSToken<CSS.Property.ListStyle>
+  listStyle?: StyleValue<CSS.Property.ListStyle>
   /**
    * ### list-style-image
    *
@@ -6115,7 +6143,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-image
    */
-  listStyleImage?: CSSToken<CSS.Property.ListStyleImage, "gradients">
+  listStyleImage?: StyleValue<CSS.Property.ListStyleImage, "gradients">
   /**
    * ### list-style-image
    *
@@ -6127,7 +6155,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-image
    */
-  listStyleImg?: CSSToken<CSS.Property.ListStyleImage, "gradients">
+  listStyleImg?: StyleValue<CSS.Property.ListStyleImage, "gradients">
   /**
    * ### list-style-position
    *
@@ -6139,7 +6167,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-position
    */
-  listStylePos?: CSSToken<CSS.Property.ListStylePosition>
+  listStylePos?: StyleValue<CSS.Property.ListStylePosition>
   /**
    * ### list-style-position
    *
@@ -6151,7 +6179,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-position
    */
-  listStylePosition?: CSSToken<CSS.Property.ListStylePosition>
+  listStylePosition?: StyleValue<CSS.Property.ListStylePosition>
   /**
    * ### list-style-type
    *
@@ -6163,7 +6191,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-type
    */
-  listStyleType?: CSSToken<CSS.Property.ListStyleType>
+  listStyleType?: StyleValue<CSS.Property.ListStyleType>
   /**
    * ### margin
    *
@@ -6175,7 +6203,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin
    */
-  m?: CSSToken<CSS.Property.Margin | number, "spaces">
+  m?: StyleValue<CSS.Property.Margin | number, "spaces">
   /**
    * ### margin
    *
@@ -6187,7 +6215,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin
    */
-  margin?: CSSToken<CSS.Property.Margin | number, "spaces">
+  margin?: StyleValue<CSS.Property.Margin | number, "spaces">
   /**
    * ### margin-block
    *
@@ -6199,7 +6227,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block
    */
-  marginBlock?: CSSToken<CSS.Property.MarginBlock | number, "spaces">
+  marginBlock?: StyleValue<CSS.Property.MarginBlock | number, "spaces">
   /**
    * ### margin-block-end
    *
@@ -6211,7 +6239,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-end
    */
-  marginBlockEnd?: CSSToken<CSS.Property.MarginBlockEnd | number, "spaces">
+  marginBlockEnd?: StyleValue<CSS.Property.MarginBlockEnd | number, "spaces">
   /**
    * ### margin-block-start
    *
@@ -6223,7 +6251,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-start
    */
-  marginBlockStart?: CSSToken<CSS.Property.MarginBlockStart | number, "spaces">
+  marginBlockStart?: StyleValue<
+    CSS.Property.MarginBlockStart | number,
+    "spaces"
+  >
   /**
    * ### margin-bottom
    *
@@ -6235,7 +6266,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
    */
-  marginBottom?: CSSToken<CSS.Property.MarginBottom | number, "spaces">
+  marginBottom?: StyleValue<CSS.Property.MarginBottom | number, "spaces">
   /**
    * ### margin-inline-end
    *
@@ -6247,7 +6278,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
    */
-  marginEnd?: CSSToken<CSS.Property.MarginInlineEnd | number, "spaces">
+  marginEnd?: StyleValue<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
    * ### margin-inline
    *
@@ -6259,7 +6290,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline
    */
-  marginInline?: CSSToken<CSS.Property.MarginInline | number, "spaces">
+  marginInline?: StyleValue<CSS.Property.MarginInline | number, "spaces">
   /**
    * ### margin-inline-end
    *
@@ -6271,7 +6302,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
    */
-  marginInlineEnd?: CSSToken<CSS.Property.MarginInlineEnd | number, "spaces">
+  marginInlineEnd?: StyleValue<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
    * ### margin-inline-start
    *
@@ -6283,7 +6314,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  marginInlineStart?: CSSToken<
+  marginInlineStart?: StyleValue<
     CSS.Property.MarginInlineStart | number,
     "spaces"
   >
@@ -6298,7 +6329,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
    */
-  marginLeft?: CSSToken<CSS.Property.MarginLeft | number, "spaces">
+  marginLeft?: StyleValue<CSS.Property.MarginLeft | number, "spaces">
   /**
    * ### margin-right
    *
@@ -6310,7 +6341,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
    */
-  marginRight?: CSSToken<CSS.Property.MarginRight | number, "spaces">
+  marginRight?: StyleValue<CSS.Property.MarginRight | number, "spaces">
   /**
    * ### margin-inline-start
    *
@@ -6322,7 +6353,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  marginStart?: CSSToken<CSS.Property.MarginInlineStart | number, "spaces">
+  marginStart?: StyleValue<CSS.Property.MarginInlineStart | number, "spaces">
   /**
    * ### margin-top
    *
@@ -6334,7 +6365,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  marginTop?: CSSToken<CSS.Property.MarginTop | number, "spaces">
+  marginTop?: StyleValue<CSS.Property.MarginTop | number, "spaces">
   /**
    * ### margin-trim
    *
@@ -6346,7 +6377,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  marginTrim?: CSSToken<CSS.Property.MarginTrim>
+  marginTrim?: StyleValue<CSS.Property.MarginTrim>
   /**
    * ### marker
    *
@@ -6358,7 +6389,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker
    */
-  marker?: CSSToken<CSS.Property.Marker>
+  marker?: StyleValue<CSS.Property.Marker>
   /**
    * ### marker-end
    *
@@ -6370,7 +6401,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker-end
    */
-  markerEnd?: CSSToken<CSS.Property.MarkerEnd>
+  markerEnd?: StyleValue<CSS.Property.MarkerEnd>
   /**
    * ### marker-mid
    *
@@ -6382,7 +6413,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker-mid
    */
-  markerMid?: CSSToken<CSS.Property.MarkerMid>
+  markerMid?: StyleValue<CSS.Property.MarkerMid>
   /**
    * ### marker-start
    *
@@ -6394,7 +6425,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker-start
    */
-  markerStart?: CSSToken<CSS.Property.MarkerStart>
+  markerStart?: StyleValue<CSS.Property.MarkerStart>
   /**
    * ### mask
    *
@@ -6405,7 +6436,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask
    */
-  mask?: CSSToken<CSS.Property.Mask>
+  mask?: StyleValue<CSS.Property.Mask>
   /**
    * ### mask-border
    *
@@ -6415,7 +6446,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border
    */
-  maskBorder?: CSSToken<CSS.Property.MaskBorder>
+  maskBorder?: StyleValue<CSS.Property.MaskBorder>
   /**
    * ### mask-border-outset
    *
@@ -6425,7 +6456,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-outset
    */
-  maskBorderOutset?: CSSToken<CSS.Property.MaskBorderOutset>
+  maskBorderOutset?: StyleValue<CSS.Property.MaskBorderOutset>
   /**
    * ### mask-border-repeat
    *
@@ -6435,7 +6466,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-repeat
    */
-  maskBorderRepeat?: CSSToken<CSS.Property.MaskBorderRepeat>
+  maskBorderRepeat?: StyleValue<CSS.Property.MaskBorderRepeat>
   /**
    * ### mask-border-slice
    *
@@ -6445,7 +6476,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-slice
    */
-  maskBorderSlice?: CSSToken<CSS.Property.MaskBorderSlice>
+  maskBorderSlice?: StyleValue<CSS.Property.MaskBorderSlice>
   /**
    * ### mask-border-source
    *
@@ -6455,7 +6486,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-source
    */
-  maskBorderSource?: CSSToken<CSS.Property.MaskBorderSource>
+  maskBorderSource?: StyleValue<CSS.Property.MaskBorderSource>
   /**
    * ### mask-border-width
    *
@@ -6465,7 +6496,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-width
    */
-  maskBorderWidth?: CSSToken<CSS.Property.MaskBorderWidth | number>
+  maskBorderWidth?: StyleValue<CSS.Property.MaskBorderWidth | number>
   /**
    * ### mask-clip
    *
@@ -6476,7 +6507,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-clip
    */
-  maskClip?: CSSToken<CSS.Property.MaskClip>
+  maskClip?: StyleValue<CSS.Property.MaskClip>
   /**
    * ### mask-composite
    *
@@ -6487,7 +6518,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-composite
    */
-  maskComposite?: CSSToken<CSS.Property.MaskComposite>
+  maskComposite?: StyleValue<CSS.Property.MaskComposite>
   /**
    * ### mask-image
    *
@@ -6498,7 +6529,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-image
    */
-  maskImage?: CSSToken<CSS.Property.MaskImage, "gradients">
+  maskImage?: StyleValue<CSS.Property.MaskImage, "gradients">
   /**
    * ### mask-mode
    *
@@ -6509,7 +6540,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-mode
    */
-  maskMode?: CSSToken<CSS.Property.MaskMode>
+  maskMode?: StyleValue<CSS.Property.MaskMode>
   /**
    * ### mask-origin
    *
@@ -6520,7 +6551,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-origin
    */
-  maskOrigin?: CSSToken<CSS.Property.MaskOrigin>
+  maskOrigin?: StyleValue<CSS.Property.MaskOrigin>
   /**
    * ### mask-position
    *
@@ -6531,7 +6562,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-position
    */
-  maskPosition?: CSSToken<CSS.Property.MaskPosition>
+  maskPosition?: StyleValue<CSS.Property.MaskPosition>
   /**
    * ### mask-repeat
    *
@@ -6542,7 +6573,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-repeat
    */
-  maskRepeat?: CSSToken<CSS.Property.MaskRepeat>
+  maskRepeat?: StyleValue<CSS.Property.MaskRepeat>
   /**
    * ### mask-size
    *
@@ -6553,7 +6584,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-size
    */
-  maskSize?: CSSToken<CSS.Property.MaskSize>
+  maskSize?: StyleValue<CSS.Property.MaskSize>
   /**
    * ### mask-type
    *
@@ -6565,7 +6596,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-type
    */
-  maskType?: CSSToken<CSS.Property.MaskType>
+  maskType?: StyleValue<CSS.Property.MaskType>
   /**
    * ### math-depth
    *
@@ -6576,7 +6607,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/math-depth
    */
-  mathDepth?: CSSToken<CSS.Property.MathDepth>
+  mathDepth?: StyleValue<CSS.Property.MathDepth>
   /**
    * ### math-shift
    *
@@ -6589,7 +6620,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  mathShift?: CSSToken<CSS.Property.MathShift>
+  mathShift?: StyleValue<CSS.Property.MathShift>
   /**
    * ### math-style
    *
@@ -6600,7 +6631,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/math-style
    */
-  mathStyle?: CSSToken<CSS.Property.MathStyle>
+  mathStyle?: StyleValue<CSS.Property.MathStyle>
   /**
    * ### max-block-size
    *
@@ -6612,7 +6643,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-block-size
    */
-  maxBlockSize?: CSSToken<CSS.Property.MaxBlockSize | number, "sizes">
+  maxBlockSize?: StyleValue<CSS.Property.MaxBlockSize | number, "sizes">
   /**
    * ### max-height
    *
@@ -6624,7 +6655,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-height
    */
-  maxH?: CSSToken<CSS.Property.MaxHeight | number, "sizes">
+  maxH?: StyleValue<CSS.Property.MaxHeight | number, "sizes">
   /**
    * ### max-height
    *
@@ -6636,7 +6667,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-height
    */
-  maxHeight?: CSSToken<CSS.Property.MaxHeight | number, "sizes">
+  maxHeight?: StyleValue<CSS.Property.MaxHeight | number, "sizes">
   /**
    * ### max-inline-size
    *
@@ -6648,7 +6679,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-inline-size
    */
-  maxInlineSize?: CSSToken<CSS.Property.MaxInlineSize | number, "sizes">
+  maxInlineSize?: StyleValue<CSS.Property.MaxInlineSize | number, "sizes">
   /**
    * ### max-width
    *
@@ -6660,7 +6691,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxW?: CSSToken<CSS.Property.MaxWidth | number, "sizes">
+  maxW?: StyleValue<CSS.Property.MaxWidth | number, "sizes">
   /**
    * ### max-width
    *
@@ -6672,7 +6703,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxWidth?: CSSToken<CSS.Property.MaxWidth | number, "sizes">
+  maxWidth?: StyleValue<CSS.Property.MaxWidth | number, "sizes">
   /**
    * ### margin-bottom
    *
@@ -6684,7 +6715,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
    */
-  mb?: CSSToken<CSS.Property.MarginBottom | number, "spaces">
+  mb?: StyleValue<CSS.Property.MarginBottom | number, "spaces">
   /**
    * ### margin-inline-end
    *
@@ -6696,7 +6727,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
    */
-  me?: CSSToken<CSS.Property.MarginInlineEnd | number, "spaces">
+  me?: StyleValue<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
    * ### min-block-size
    *
@@ -6708,7 +6739,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-block-size
    */
-  minBlockSize?: CSSToken<CSS.Property.MinBlockSize | number, "sizes">
+  minBlockSize?: StyleValue<CSS.Property.MinBlockSize | number, "sizes">
   /**
    * ### min-height
    *
@@ -6720,7 +6751,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-height
    */
-  minH?: CSSToken<CSS.Property.MinHeight | number, "sizes">
+  minH?: StyleValue<CSS.Property.MinHeight | number, "sizes">
   /**
    * ### min-height
    *
@@ -6732,7 +6763,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-height
    */
-  minHeight?: CSSToken<CSS.Property.MinHeight | number, "sizes">
+  minHeight?: StyleValue<CSS.Property.MinHeight | number, "sizes">
   /**
    * ### min-inline-size
    *
@@ -6744,7 +6775,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-inline-size
    */
-  minInlineSize?: CSSToken<CSS.Property.MinInlineSize | number, "sizes">
+  minInlineSize?: StyleValue<CSS.Property.MinInlineSize | number, "sizes">
   /**
    * ### min-width
    *
@@ -6756,7 +6787,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-width
    */
-  minW?: CSSToken<CSS.Property.MinWidth | number, "sizes">
+  minW?: StyleValue<CSS.Property.MinWidth | number, "sizes">
   /**
    * ### min-width
    *
@@ -6768,7 +6799,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-width
    */
-  minWidth?: CSSToken<CSS.Property.MinWidth | number, "sizes">
+  minWidth?: StyleValue<CSS.Property.MinWidth | number, "sizes">
   /**
    * ### mix-blend-mode
    *
@@ -6780,7 +6811,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
    */
-  mixBlendMode?: CSSToken<CSS.Property.MixBlendMode>
+  mixBlendMode?: StyleValue<CSS.Property.MixBlendMode>
   /**
    * ### margin-left
    *
@@ -6792,7 +6823,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
    */
-  ml?: CSSToken<CSS.Property.MarginLeft | number, "spaces">
+  ml?: StyleValue<CSS.Property.MarginLeft | number, "spaces">
   /**
    * ### margin-right
    *
@@ -6804,7 +6835,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
    */
-  mr?: CSSToken<CSS.Property.MarginRight | number, "spaces">
+  mr?: StyleValue<CSS.Property.MarginRight | number, "spaces">
   /**
    * ### margin-inline-start
    *
@@ -6816,7 +6847,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  ms?: CSSToken<CSS.Property.MarginInlineStart | number, "spaces">
+  ms?: StyleValue<CSS.Property.MarginInlineStart | number, "spaces">
   /**
    * ### margin-top
    *
@@ -6828,7 +6859,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  mt?: CSSToken<CSS.Property.MarginTop | number, "spaces">
+  mt?: StyleValue<CSS.Property.MarginTop | number, "spaces">
   /**
    * ### object-fit
    *
@@ -6840,7 +6871,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/object-fit
    */
-  objectFit?: CSSToken<CSS.Property.ObjectFit>
+  objectFit?: StyleValue<CSS.Property.ObjectFit>
   /**
    * ### object-position
    *
@@ -6852,7 +6883,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/object-position
    */
-  objectPosition?: CSSToken<CSS.Property.ObjectPosition>
+  objectPosition?: StyleValue<CSS.Property.ObjectPosition>
   /**
    * ### object-view-box
    *
@@ -6864,73 +6895,79 @@ export interface StyleProps {
    *
    * @experimental
    */
-  objectViewBox?: CSSToken<string & {}>
+  objectViewBox?: StyleValue<string & {}>
   /**
    * ### offset
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset
    */
-  offset?: CSSToken<CSS.Property.Offset>
+  offset?: StyleValue<CSS.Property.Offset>
   /**
    * ### offset-anchor
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-anchor
    */
-  offsetAnchor?: CSSToken<CSS.Property.OffsetAnchor>
+  offsetAnchor?: StyleValue<CSS.Property.OffsetAnchor>
   /**
    * ### offset-distance
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-distance
    */
-  offsetDistance?: CSSToken<CSS.Property.OffsetDistance>
+  offsetDistance?: StyleValue<CSS.Property.OffsetDistance>
   /**
    * ### offset-path
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-path
    */
-  offsetPath?: CSSToken<CSS.Property.OffsetPath>
+  offsetPath?: StyleValue<CSS.Property.OffsetPath>
   /**
    * ### offset-position
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-position
    */
-  offsetPosition?: CSSToken<CSS.Property.OffsetPosition>
+  offsetPosition?: StyleValue<CSS.Property.OffsetPosition>
   /**
    * ### offset-rotate
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-rotate
    */
-  offsetRotate?: CSSToken<CSS.Property.OffsetRotate>
+  offsetRotate?: StyleValue<CSS.Property.OffsetRotate>
   /**
    * ### opacity
    *
@@ -6942,7 +6979,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/opacity
    */
-  opacity?: CSSToken<CSS.Property.Opacity>
+  opacity?: StyleValue<CSS.Property.Opacity>
   /**
    * ### order
    *
@@ -6954,7 +6991,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/order
    */
-  order?: CSSToken<CSS.Property.Order>
+  order?: StyleValue<CSS.Property.Order>
   /**
    * ### orphans
    *
@@ -6964,7 +7001,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/orphans
    */
-  orphans?: CSSToken<CSS.Property.Orphans>
+  orphans?: StyleValue<CSS.Property.Orphans>
   /**
    * ### outline-color
    *
@@ -6976,7 +7013,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-color
    */
-  outlineColor?: CSSToken<CSS.Property.OutlineColor, "colors">
+  outlineColor?: StyleValue<CSS.Property.OutlineColor, "colors">
   /**
    * ### outline-offset
    *
@@ -6988,7 +7025,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-offset
    */
-  outlineOffset?: CSSToken<CSS.Property.OutlineOffset>
+  outlineOffset?: StyleValue<CSS.Property.OutlineOffset>
   /**
    * ### outline-style
    *
@@ -7000,7 +7037,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-style
    */
-  outlineStyle?: CSSToken<CSS.Property.OutlineStyle>
+  outlineStyle?: StyleValue<CSS.Property.OutlineStyle>
   /**
    * ### outline-width
    *
@@ -7012,18 +7049,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-width
    */
-  outlineWidth?: CSSToken<CSS.Property.OutlineWidth | number>
+  outlineWidth?: StyleValue<CSS.Property.OutlineWidth | number>
   /**
    * ### overflow
    *
    * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
    *
-   * @baseline `Newly available`
-   * @newly_available_date 2022-09-12
+   * @baseline `Widely available`
+   * @widely_available_date 2022-09-24
+   * @newly_available_date 2020-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow
    */
-  overflow?: CSSToken<CSS.Property.Overflow>
+  overflow?: StyleValue<CSS.Property.Overflow>
   /**
    * ### overflow-anchor
    *
@@ -7033,7 +7071,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-anchor
    */
-  overflowAnchor?: CSSToken<CSS.Property.OverflowAnchor>
+  overflowAnchor?: StyleValue<CSS.Property.OverflowAnchor>
   /**
    * ### overflow-block
    *
@@ -7045,7 +7083,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-block
    */
-  overflowBlock?: CSSToken<CSS.Property.OverflowBlock>
+  overflowBlock?: StyleValue<CSS.Property.OverflowBlock>
   /**
    * ### overflow-clip-margin
    *
@@ -7055,7 +7093,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-clip-margin
    */
-  overflowClipMargin?: CSSToken<CSS.Property.OverflowClipMargin>
+  overflowClipMargin?: StyleValue<CSS.Property.OverflowClipMargin>
   /**
    * ### overflow-inline
    *
@@ -7067,7 +7105,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-inline
    */
-  overflowInline?: CSSToken<CSS.Property.OverflowInline>
+  overflowInline?: StyleValue<CSS.Property.OverflowInline>
   /**
    * ### overflow-wrap
    *
@@ -7079,29 +7117,31 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-wrap
    */
-  overflowWrap?: CSSToken<CSS.Property.OverflowWrap>
+  overflowWrap?: StyleValue<CSS.Property.OverflowWrap>
   /**
    * ### overflow-x
    *
    * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
    *
-   * @baseline `Newly available`
-   * @newly_available_date 2022-09-12
+   * @baseline `Widely available`
+   * @widely_available_date 2022-09-24
+   * @newly_available_date 2020-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-x
    */
-  overflowX?: CSSToken<CSS.Property.OverflowX>
+  overflowX?: StyleValue<CSS.Property.OverflowX>
   /**
    * ### overflow-y
    *
    * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
    *
-   * @baseline `Newly available`
-   * @newly_available_date 2022-09-12
+   * @baseline `Widely available`
+   * @widely_available_date 2022-09-24
+   * @newly_available_date 2020-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-y
    */
-  overflowY?: CSSToken<CSS.Property.OverflowY>
+  overflowY?: StyleValue<CSS.Property.OverflowY>
   /**
    * ### overlay
    *
@@ -7113,95 +7153,103 @@ export interface StyleProps {
    *
    * @experimental
    */
-  overlay?: CSSToken<CSS.Property.Overlay>
+  overlay?: StyleValue<CSS.Property.Overlay>
   /**
    * ### overscroll-behavior
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
    */
-  overscroll?: CSSToken<CSS.Property.OverscrollBehavior>
+  overscroll?: StyleValue<CSS.Property.OverscrollBehavior>
   /**
    * ### overscroll-behavior
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
    */
-  overscrollBehavior?: CSSToken<CSS.Property.OverscrollBehavior>
+  overscrollBehavior?: StyleValue<CSS.Property.OverscrollBehavior>
   /**
    * ### overscroll-behavior-block
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-block
    */
-  overscrollBehaviorBlock?: CSSToken<CSS.Property.OverscrollBehaviorBlock>
+  overscrollBehaviorBlock?: StyleValue<CSS.Property.OverscrollBehaviorBlock>
   /**
    * ### overscroll-behavior-inline
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-inline
    */
-  overscrollBehaviorInline?: CSSToken<CSS.Property.OverscrollBehaviorInline>
+  overscrollBehaviorInline?: StyleValue<CSS.Property.OverscrollBehaviorInline>
   /**
    * ### overscroll-behavior-x
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
    */
-  overscrollBehaviorX?: CSSToken<CSS.Property.OverscrollBehaviorX>
+  overscrollBehaviorX?: StyleValue<CSS.Property.OverscrollBehaviorX>
   /**
    * ### overscroll-behavior-y
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
    */
-  overscrollBehaviorY?: CSSToken<CSS.Property.OverscrollBehaviorY>
+  overscrollBehaviorY?: StyleValue<CSS.Property.OverscrollBehaviorY>
   /**
    * ### overscroll-behavior-x
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
    */
-  overscrollX?: CSSToken<CSS.Property.OverscrollBehaviorX>
+  overscrollX?: StyleValue<CSS.Property.OverscrollBehaviorX>
   /**
    * ### overscroll-behavior-y
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
    */
-  overscrollY?: CSSToken<CSS.Property.OverscrollBehaviorY>
+  overscrollY?: StyleValue<CSS.Property.OverscrollBehaviorY>
   /**
    * ### padding
    *
@@ -7213,7 +7261,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding
    */
-  p?: CSSToken<CSS.Property.Padding | number, "spaces">
+  p?: StyleValue<CSS.Property.Padding | number, "spaces">
   /**
    * ### padding
    *
@@ -7225,7 +7273,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding
    */
-  padding?: CSSToken<CSS.Property.Padding | number, "spaces">
+  padding?: StyleValue<CSS.Property.Padding | number, "spaces">
   /**
    * ### padding-block
    *
@@ -7237,7 +7285,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-block
    */
-  paddingBlock?: CSSToken<CSS.Property.PaddingBlock | number, "spaces">
+  paddingBlock?: StyleValue<CSS.Property.PaddingBlock | number, "spaces">
   /**
    * ### padding-block-end
    *
@@ -7249,7 +7297,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-block-end
    */
-  paddingBlockEnd?: CSSToken<CSS.Property.PaddingBlockEnd | number, "spaces">
+  paddingBlockEnd?: StyleValue<CSS.Property.PaddingBlockEnd | number, "spaces">
   /**
    * ### padding-block-start
    *
@@ -7261,7 +7309,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-block-start
    */
-  paddingBlockStart?: CSSToken<
+  paddingBlockStart?: StyleValue<
     CSS.Property.PaddingBlockStart | number,
     "spaces"
   >
@@ -7276,7 +7324,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
    */
-  paddingBottom?: CSSToken<CSS.Property.PaddingBottom | number, "spaces">
+  paddingBottom?: StyleValue<CSS.Property.PaddingBottom | number, "spaces">
   /**
    * ### padding-inline-end
    *
@@ -7288,7 +7336,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  paddingEnd?: CSSToken<CSS.Property.PaddingInlineEnd | number, "spaces">
+  paddingEnd?: StyleValue<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
    * ### padding-inline
    *
@@ -7300,7 +7348,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline
    */
-  paddingInline?: CSSToken<CSS.Property.PaddingInline | number, "spaces">
+  paddingInline?: StyleValue<CSS.Property.PaddingInline | number, "spaces">
   /**
    * ### padding-inline-end
    *
@@ -7312,7 +7360,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  paddingInlineEnd?: CSSToken<CSS.Property.PaddingInlineEnd | number, "spaces">
+  paddingInlineEnd?: StyleValue<
+    CSS.Property.PaddingInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### padding-inline-start
    *
@@ -7324,7 +7375,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  paddingInlineStart?: CSSToken<
+  paddingInlineStart?: StyleValue<
     CSS.Property.PaddingInlineStart | number,
     "spaces"
   >
@@ -7339,7 +7390,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
    */
-  paddingLeft?: CSSToken<CSS.Property.PaddingLeft | number, "spaces">
+  paddingLeft?: StyleValue<CSS.Property.PaddingLeft | number, "spaces">
   /**
    * ### padding-right
    *
@@ -7351,7 +7402,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
    */
-  paddingRight?: CSSToken<CSS.Property.PaddingRight | number, "spaces">
+  paddingRight?: StyleValue<CSS.Property.PaddingRight | number, "spaces">
   /**
    * ### padding-inline-start
    *
@@ -7363,7 +7414,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  paddingStart?: CSSToken<CSS.Property.PaddingInlineStart | number, "spaces">
+  paddingStart?: StyleValue<CSS.Property.PaddingInlineStart | number, "spaces">
   /**
    * ### padding-top
    *
@@ -7375,7 +7426,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  paddingTop?: CSSToken<CSS.Property.PaddingTop | number, "spaces">
+  paddingTop?: StyleValue<CSS.Property.PaddingTop | number, "spaces">
   /**
    * ### page
    *
@@ -7385,7 +7436,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/page
    */
-  page?: CSSToken<CSS.Property.Page>
+  page?: StyleValue<CSS.Property.Page>
   /**
    * ### page-break-after
    *
@@ -7396,7 +7447,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  pageBreakAfter?: CSSToken<CSS.Property.PageBreakAfter>
+  pageBreakAfter?: StyleValue<CSS.Property.PageBreakAfter>
   /**
    * ### page-break-before
    *
@@ -7407,7 +7458,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  pageBreakBefore?: CSSToken<CSS.Property.PageBreakBefore>
+  pageBreakBefore?: StyleValue<CSS.Property.PageBreakBefore>
   /**
    * ### page-break-inside
    *
@@ -7418,7 +7469,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  pageBreakInside?: CSSToken<CSS.Property.PageBreakInside>
+  pageBreakInside?: StyleValue<CSS.Property.PageBreakInside>
   /**
    * ### paint-order
    *
@@ -7428,7 +7479,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/paint-order
    */
-  paintOrder?: CSSToken<CSS.Property.PaintOrder>
+  paintOrder?: StyleValue<CSS.Property.PaintOrder>
   /**
    * ### padding-bottom
    *
@@ -7440,7 +7491,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
    */
-  pb?: CSSToken<CSS.Property.PaddingBottom | number, "spaces">
+  pb?: StyleValue<CSS.Property.PaddingBottom | number, "spaces">
   /**
    * ### padding-inline-end
    *
@@ -7452,7 +7503,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  pe?: CSSToken<CSS.Property.PaddingInlineEnd | number, "spaces">
+  pe?: StyleValue<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
    * ### perspective
    *
@@ -7464,7 +7515,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/perspective
    */
-  perspective?: CSSToken<CSS.Property.Perspective>
+  perspective?: StyleValue<CSS.Property.Perspective>
   /**
    * ### perspective-origin
    *
@@ -7476,7 +7527,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/perspective-origin
    */
-  perspectiveOrigin?: CSSToken<CSS.Property.PerspectiveOrigin>
+  perspectiveOrigin?: StyleValue<CSS.Property.PerspectiveOrigin>
   /**
    * ### padding-left
    *
@@ -7488,7 +7539,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
    */
-  pl?: CSSToken<CSS.Property.PaddingLeft | number, "spaces">
+  pl?: StyleValue<CSS.Property.PaddingLeft | number, "spaces">
   /**
    * ### place-content
    *
@@ -7500,7 +7551,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/place-content
    */
-  placeContent?: CSSToken<CSS.Property.PlaceContent>
+  placeContent?: StyleValue<CSS.Property.PlaceContent>
   /**
    * ### place-items
    *
@@ -7512,7 +7563,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/place-items
    */
-  placeItems?: CSSToken<CSS.Property.PlaceItems>
+  placeItems?: StyleValue<CSS.Property.PlaceItems>
   /**
    * ### place-self
    *
@@ -7524,7 +7575,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/place-self
    */
-  placeSelf?: CSSToken<CSS.Property.PlaceSelf>
+  placeSelf?: StyleValue<CSS.Property.PlaceSelf>
   /**
    * ### pointer-events
    *
@@ -7536,7 +7587,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/pointer-events
    */
-  pointerEvents?: CSSToken<CSS.Property.PointerEvents>
+  pointerEvents?: StyleValue<CSS.Property.PointerEvents>
   /**
    * ### position
    *
@@ -7548,7 +7599,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/position
    */
-  pos?: CSSToken<CSS.Property.Position>
+  pos?: StyleValue<CSS.Property.Position>
   /**
    * ### position
    *
@@ -7560,7 +7611,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/position
    */
-  position?: CSSToken<CSS.Property.Position>
+  position?: StyleValue<CSS.Property.Position>
   /**
    * ### position-anchor
    *
@@ -7572,7 +7623,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionAnchor?: CSSToken<string & {}>
+  positionAnchor?: StyleValue<string & {}>
   /**
    * ### position-area
    *
@@ -7584,7 +7635,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionArea?: CSSToken<string & {}>
+  positionArea?: StyleValue<string & {}>
   /**
    * ### position-try
    *
@@ -7596,7 +7647,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTry?: CSSToken<string & {}>
+  positionTry?: StyleValue<string & {}>
   /**
    * ### position-try-fallbacks
    *
@@ -7608,7 +7659,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTryFallbacks?: CSSToken<string & {}>
+  positionTryFallbacks?: StyleValue<string & {}>
   /**
    * ### position-try-order
    *
@@ -7620,7 +7671,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTryOrder?: CSSToken<string & {}>
+  positionTryOrder?: StyleValue<string & {}>
   /**
    * ### position-visibility
    *
@@ -7632,7 +7683,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionVisibility?: CSSToken<string & {}>
+  positionVisibility?: StyleValue<string & {}>
   /**
    * ### padding-right
    *
@@ -7644,7 +7695,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
    */
-  pr?: CSSToken<CSS.Property.PaddingRight | number, "spaces">
+  pr?: StyleValue<CSS.Property.PaddingRight | number, "spaces">
   /**
    * ### print-color-adjust
    *
@@ -7654,7 +7705,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/print-color-adjust
    */
-  printColorAdjust?: CSSToken<CSS.Property.PrintColorAdjust>
+  printColorAdjust?: StyleValue<CSS.Property.PrintColorAdjust>
   /**
    * ### padding-inline-start
    *
@@ -7666,7 +7717,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  ps?: CSSToken<CSS.Property.PaddingInlineStart | number, "spaces">
+  ps?: StyleValue<CSS.Property.PaddingInlineStart | number, "spaces">
   /**
    * ### padding-top
    *
@@ -7678,7 +7729,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  pt?: CSSToken<CSS.Property.PaddingTop | number, "spaces">
+  pt?: StyleValue<CSS.Property.PaddingTop | number, "spaces">
   /**
    * ### quotes
    *
@@ -7690,7 +7741,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/quotes
    */
-  quotes?: CSSToken<CSS.Property.Quotes>
+  quotes?: StyleValue<CSS.Property.Quotes>
   /**
    * ### r
    *
@@ -7702,7 +7753,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/r
    */
-  r?: CSSToken<string & {}>
+  r?: StyleValue<string & {}>
   /**
    * ### reading-flow
    *
@@ -7714,7 +7765,17 @@ export interface StyleProps {
    *
    * @experimental
    */
-  readingFlow?: CSSToken<string & {}>
+  readingFlow?: StyleValue<string & {}>
+  /**
+   * ### reading-order
+   *
+   * The CSS `reading-order` property.
+   *
+   * @see https://drafts.csswg.org/css-display-4/#propdef-reading-order
+   *
+   * @experimental
+   */
+  readingOrder?: StyleValue<string & {}>
   /**
    * ### resize
    *
@@ -7724,7 +7785,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/resize
    */
-  resize?: CSSToken<CSS.Property.Resize>
+  resize?: StyleValue<CSS.Property.Resize>
   /**
    * ### right
    *
@@ -7736,7 +7797,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/right
    */
-  right?: CSSToken<CSS.Property.Right | number, "spaces">
+  right?: StyleValue<CSS.Property.Right | number, "spaces">
   /**
    * ### rotate
    *
@@ -7748,7 +7809,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/rotate
    */
-  rotate?: CSSToken<CSS.Property.Rotate>
+  rotate?: StyleValue<CSS.Property.Rotate>
   /**
    * ### border-radius
    *
@@ -7760,7 +7821,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
    */
-  rounded?: CSSToken<CSS.Property.BorderRadius | number, "radii">
+  rounded?: StyleValue<CSS.Property.BorderRadius | number, "radii">
   /**
    * ### border-bottom-left-radius
    *
@@ -7784,7 +7845,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  roundedBottom?: CSSToken<
+  roundedBottom?: StyleValue<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
@@ -7801,7 +7862,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
    */
-  roundedBottomEnd?: CSSToken<CSS.Property.BorderEndEndRadius | number, "radii">
+  roundedBottomEnd?: StyleValue<
+    CSS.Property.BorderEndEndRadius | number,
+    "radii"
+  >
   /**
    * ### border-bottom-left-radius
    *
@@ -7813,7 +7877,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
    */
-  roundedBottomLeft?: CSSToken<
+  roundedBottomLeft?: StyleValue<
     CSS.Property.BorderBottomLeftRadius | number,
     "radii"
   >
@@ -7828,7 +7892,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  roundedBottomRight?: CSSToken<
+  roundedBottomRight?: StyleValue<
     CSS.Property.BorderBottomRightRadius | number,
     "radii"
   >
@@ -7843,7 +7907,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  roundedBottomStart?: CSSToken<
+  roundedBottomStart?: StyleValue<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
@@ -7870,7 +7934,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  roundedEnd?: CSSToken<
+  roundedEnd?: StyleValue<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -7899,7 +7963,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  roundedLeft?: CSSToken<
+  roundedLeft?: StyleValue<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
     | number,
@@ -7928,7 +7992,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  roundedRight?: CSSToken<
+  roundedRight?: StyleValue<
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -7957,7 +8021,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  roundedStart?: CSSToken<
+  roundedStart?: StyleValue<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
@@ -7986,7 +8050,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  roundedTop?: CSSToken<
+  roundedTop?: StyleValue<
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -8003,7 +8067,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  roundedTopEnd?: CSSToken<CSS.Property.BorderStartEndRadius | number, "radii">
+  roundedTopEnd?: StyleValue<
+    CSS.Property.BorderStartEndRadius | number,
+    "radii"
+  >
   /**
    * ### border-top-left-radius
    *
@@ -8015,7 +8082,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  roundedTopLeft?: CSSToken<CSS.Property.BorderTopLeftRadius | number, "radii">
+  roundedTopLeft?: StyleValue<
+    CSS.Property.BorderTopLeftRadius | number,
+    "radii"
+  >
   /**
    * ### border-top-right-radius
    *
@@ -8027,7 +8097,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  roundedTopRight?: CSSToken<
+  roundedTopRight?: StyleValue<
     CSS.Property.BorderTopRightRadius | number,
     "radii"
   >
@@ -8042,7 +8112,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  roundedTopStart?: CSSToken<
+  roundedTopStart?: StyleValue<
     CSS.Property.BorderStartStartRadius | number,
     "radii"
   >
@@ -8057,7 +8127,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
-  rowGap?: CSSToken<CSS.Property.RowGap | number, "spaces">
+  rowGap?: StyleValue<CSS.Property.RowGap | number, "spaces">
   /**
    * ### ruby-align
    *
@@ -8068,7 +8138,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/ruby-align
    */
-  rubyAlign?: CSSToken<CSS.Property.RubyAlign>
+  rubyAlign?: StyleValue<CSS.Property.RubyAlign>
   /**
    * ### ruby-overhang
    *
@@ -8078,7 +8148,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-ruby/#propdef-ruby-overhang
    */
-  rubyOverhang?: CSSToken<string & {}>
+  rubyOverhang?: StyleValue<string & {}>
   /**
    * ### ruby-position
    *
@@ -8089,7 +8159,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/ruby-position
    */
-  rubyPosition?: CSSToken<CSS.Property.RubyPosition>
+  rubyPosition?: StyleValue<CSS.Property.RubyPosition>
   /**
    * ### rx
    *
@@ -8101,7 +8171,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/rx
    */
-  rx?: CSSToken<string & {}>
+  rx?: StyleValue<string & {}>
   /**
    * ### ry
    *
@@ -8113,7 +8183,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/ry
    */
-  ry?: CSSToken<string & {}>
+  ry?: StyleValue<string & {}>
   /**
    * ### scale
    *
@@ -8125,7 +8195,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scale
    */
-  scale?: CSSToken<CSS.Property.Scale>
+  scale?: StyleValue<CSS.Property.Scale>
   /**
    * ### scrollbar-color
    *
@@ -8135,7 +8205,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-color
    */
-  scrollbarColor?: CSSToken<CSS.Property.ScrollbarColor, "colors">
+  scrollbarColor?: StyleValue<CSS.Property.ScrollbarColor, "colors">
   /**
    * ### scrollbar-gutter
    *
@@ -8146,7 +8216,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-gutter
    */
-  scrollbarGutter?: CSSToken<CSS.Property.ScrollbarGutter>
+  scrollbarGutter?: StyleValue<CSS.Property.ScrollbarGutter>
   /**
    * ### scrollbar-width
    *
@@ -8157,7 +8227,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-width
    */
-  scrollbarWidth?: CSSToken<CSS.Property.ScrollbarWidth | number>
+  scrollbarWidth?: StyleValue<CSS.Property.ScrollbarWidth | number>
   /**
    * ### scroll-behavior
    *
@@ -8169,17 +8239,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-behavior
    */
-  scrollBehavior?: CSSToken<CSS.Property.ScrollBehavior>
+  scrollBehavior?: StyleValue<CSS.Property.ScrollBehavior>
   /**
    * ### scroll-initial-target
    *
-   * The CSS `scroll-initial-target` property.
+   * The <code>scroll-initial-target: nearest</code> CSS declaration sets the initial scroll position of its scroll container to the top of the element, much like scrolling to a URL fragment.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-scroll-snap-2/#propdef-scroll-initial-target
    *
    * @experimental
    */
-  scrollInitialTarget?: CSSToken<string & {}>
+  scrollInitialTarget?: StyleValue<string & {}>
   /**
    * ### scroll-margin
    *
@@ -8191,7 +8263,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin
    */
-  scrollMargin?: CSSToken<CSS.Property.ScrollMargin | number, "spaces">
+  scrollMargin?: StyleValue<CSS.Property.ScrollMargin | number, "spaces">
   /**
    * ### scroll-margin-block
    *
@@ -8203,7 +8275,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block
    */
-  scrollMarginBlock?: CSSToken<CSS.Property.ScrollMarginBlock>
+  scrollMarginBlock?: StyleValue<CSS.Property.ScrollMarginBlock>
   /**
    * ### scroll-margin-block-end
    *
@@ -8215,7 +8287,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-end
    */
-  scrollMarginBlockEnd?: CSSToken<CSS.Property.ScrollMarginBlockEnd>
+  scrollMarginBlockEnd?: StyleValue<CSS.Property.ScrollMarginBlockEnd>
   /**
    * ### scroll-margin-block-start
    *
@@ -8227,7 +8299,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-start
    */
-  scrollMarginBlockStart?: CSSToken<CSS.Property.ScrollMarginBlockStart>
+  scrollMarginBlockStart?: StyleValue<CSS.Property.ScrollMarginBlockStart>
   /**
    * ### scroll-margin-bottom
    *
@@ -8239,7 +8311,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom
    */
-  scrollMarginBottom?: CSSToken<
+  scrollMarginBottom?: StyleValue<
     CSS.Property.ScrollMarginBottom | number,
     "spaces"
   >
@@ -8254,7 +8326,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline
    */
-  scrollMarginInline?: CSSToken<CSS.Property.ScrollMarginInline>
+  scrollMarginInline?: StyleValue<CSS.Property.ScrollMarginInline>
   /**
    * ### scroll-margin-inline-end
    *
@@ -8266,7 +8338,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-end
    */
-  scrollMarginInlineEnd?: CSSToken<CSS.Property.ScrollMarginInlineEnd>
+  scrollMarginInlineEnd?: StyleValue<CSS.Property.ScrollMarginInlineEnd>
   /**
    * ### scroll-margin-inline-start
    *
@@ -8278,7 +8350,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-start
    */
-  scrollMarginInlineStart?: CSSToken<CSS.Property.ScrollMarginInlineStart>
+  scrollMarginInlineStart?: StyleValue<CSS.Property.ScrollMarginInlineStart>
   /**
    * ### scroll-margin-left
    *
@@ -8290,7 +8362,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left
    */
-  scrollMarginLeft?: CSSToken<CSS.Property.ScrollMarginLeft | number, "spaces">
+  scrollMarginLeft?: StyleValue<
+    CSS.Property.ScrollMarginLeft | number,
+    "spaces"
+  >
   /**
    * ### scroll-margin-right
    *
@@ -8302,7 +8377,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
    */
-  scrollMarginRight?: CSSToken<
+  scrollMarginRight?: StyleValue<
     CSS.Property.ScrollMarginRight | number,
     "spaces"
   >
@@ -8317,7 +8392,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
    */
-  scrollMarginTop?: CSSToken<CSS.Property.ScrollMarginTop | number, "spaces">
+  scrollMarginTop?: StyleValue<CSS.Property.ScrollMarginTop | number, "spaces">
+  /**
+   * ### scroll-marker-group
+   *
+   * A scroll container can be navigated by activating <code>::scroll-marker</code> pseudo-elements which appear in a generated <code>::scroll-marker-group</code> pseudo-element, either before or after the scroll container.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-marker-group
+   *
+   * @experimental
+   */
+  scrollMarkerGroup?: StyleValue<string & {}>
   /**
    * ### scroll-padding
    *
@@ -8329,7 +8416,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding
    */
-  scrollPadding?: CSSToken<CSS.Property.ScrollPadding | number, "spaces">
+  scrollPadding?: StyleValue<CSS.Property.ScrollPadding | number, "spaces">
   /**
    * ### scroll-padding-block
    *
@@ -8341,7 +8428,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block
    */
-  scrollPaddingBlock?: CSSToken<CSS.Property.ScrollPaddingBlock>
+  scrollPaddingBlock?: StyleValue<CSS.Property.ScrollPaddingBlock>
   /**
    * ### scroll-padding-block-end
    *
@@ -8353,7 +8440,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-end
    */
-  scrollPaddingBlockEnd?: CSSToken<CSS.Property.ScrollPaddingBlockEnd>
+  scrollPaddingBlockEnd?: StyleValue<CSS.Property.ScrollPaddingBlockEnd>
   /**
    * ### scroll-padding-block-start
    *
@@ -8365,7 +8452,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-start
    */
-  scrollPaddingBlockStart?: CSSToken<CSS.Property.ScrollPaddingBlockStart>
+  scrollPaddingBlockStart?: StyleValue<CSS.Property.ScrollPaddingBlockStart>
   /**
    * ### scroll-padding-bottom
    *
@@ -8377,7 +8464,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom
    */
-  scrollPaddingBottom?: CSSToken<
+  scrollPaddingBottom?: StyleValue<
     CSS.Property.ScrollPaddingBottom | number,
     "spaces"
   >
@@ -8392,7 +8479,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline
    */
-  scrollPaddingInline?: CSSToken<CSS.Property.ScrollPaddingInline>
+  scrollPaddingInline?: StyleValue<CSS.Property.ScrollPaddingInline>
   /**
    * ### scroll-padding-inline-end
    *
@@ -8404,7 +8491,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-end
    */
-  scrollPaddingInlineEnd?: CSSToken<CSS.Property.ScrollPaddingInlineEnd>
+  scrollPaddingInlineEnd?: StyleValue<CSS.Property.ScrollPaddingInlineEnd>
   /**
    * ### scroll-padding-inline-start
    *
@@ -8416,7 +8503,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-start
    */
-  scrollPaddingInlineStart?: CSSToken<CSS.Property.ScrollPaddingInlineStart>
+  scrollPaddingInlineStart?: StyleValue<CSS.Property.ScrollPaddingInlineStart>
   /**
    * ### scroll-padding-left
    *
@@ -8428,7 +8515,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left
    */
-  scrollPaddingLeft?: CSSToken<
+  scrollPaddingLeft?: StyleValue<
     CSS.Property.ScrollPaddingLeft | number,
     "spaces"
   >
@@ -8443,7 +8530,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
    */
-  scrollPaddingRight?: CSSToken<
+  scrollPaddingRight?: StyleValue<
     CSS.Property.ScrollPaddingRight | number,
     "spaces"
   >
@@ -8458,7 +8545,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
    */
-  scrollPaddingTop?: CSSToken<CSS.Property.ScrollPaddingTop | number, "spaces">
+  scrollPaddingTop?: StyleValue<
+    CSS.Property.ScrollPaddingTop | number,
+    "spaces"
+  >
   /**
    * ### scroll-snap-align
    *
@@ -8470,7 +8560,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align
    */
-  scrollSnapAlign?: CSSToken<CSS.Property.ScrollSnapAlign>
+  scrollSnapAlign?: StyleValue<CSS.Property.ScrollSnapAlign>
   /**
    * ### scroll-snap-stop
    *
@@ -8482,7 +8572,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop
    */
-  scrollSnapStop?: CSSToken<CSS.Property.ScrollSnapStop>
+  scrollSnapStop?: StyleValue<CSS.Property.ScrollSnapStop>
   /**
    * ### scroll-snap-type
    *
@@ -8494,7 +8584,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type
    */
-  scrollSnapType?: CSSToken<CSS.Property.ScrollSnapType>
+  scrollSnapType?: StyleValue<CSS.Property.ScrollSnapType>
   /**
    * ### scroll-timeline
    *
@@ -8506,7 +8596,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollTimeline?: CSSToken<CSS.Property.ScrollTimeline>
+  scrollTimeline?: StyleValue<CSS.Property.ScrollTimeline>
   /**
    * ### scroll-timeline-axis
    *
@@ -8518,7 +8608,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollTimelineAxis?: CSSToken<CSS.Property.ScrollTimelineAxis>
+  scrollTimelineAxis?: StyleValue<CSS.Property.ScrollTimelineAxis>
   /**
    * ### scroll-timeline-name
    *
@@ -8530,7 +8620,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollTimelineName?: CSSToken<CSS.Property.ScrollTimelineName>
+  scrollTimelineName?: StyleValue<CSS.Property.ScrollTimelineName>
   /**
    * ### box-shadow
    *
@@ -8542,7 +8632,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-shadow
    */
-  shadow?: CSSToken<CSS.Property.BoxShadow, "shadows">
+  shadow?: StyleValue<CSS.Property.BoxShadow, "shadows">
   /**
    * ### shape-image-threshold
    *
@@ -8554,7 +8644,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-image-threshold
    */
-  shapeImageThreshold?: CSSToken<CSS.Property.ShapeImageThreshold>
+  shapeImageThreshold?: StyleValue<CSS.Property.ShapeImageThreshold>
   /**
    * ### shape-margin
    *
@@ -8566,7 +8656,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-margin
    */
-  shapeMargin?: CSSToken<CSS.Property.ShapeMargin>
+  shapeMargin?: StyleValue<CSS.Property.ShapeMargin>
   /**
    * ### shape-outside
    *
@@ -8578,7 +8668,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-outside
    */
-  shapeOutside?: CSSToken<CSS.Property.ShapeOutside>
+  shapeOutside?: StyleValue<CSS.Property.ShapeOutside>
   /**
    * ### shape-rendering
    *
@@ -8590,7 +8680,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-rendering
    */
-  shapeRendering?: CSSToken<CSS.Property.ShapeRendering>
+  shapeRendering?: StyleValue<CSS.Property.ShapeRendering>
   /**
    * ### speak
    *
@@ -8600,7 +8690,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-speech-1/#speaking-props-speak
    */
-  speak?: CSSToken<string & {}>
+  speak?: StyleValue<string & {}>
   /**
    * ### speak-as
    *
@@ -8608,11 +8698,11 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-speech-1/#speaking-props-speak-as
+   * @see https://developer.mozilla.org/docs/Web/CSS/speak-as
    *
    * @experimental
    */
-  speakAs?: CSSToken<string & {}>
+  speakAs?: StyleValue<string & {}>
   /**
    * ### stop-color
    *
@@ -8624,7 +8714,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stop-color
    */
-  stopColor?: CSSToken<CSS.Property.StopColor>
+  stopColor?: StyleValue<CSS.Property.StopColor>
   /**
    * ### stop-opacity
    *
@@ -8636,7 +8726,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stop-opacity
    */
-  stopOpacity?: CSSToken<CSS.Property.StopOpacity>
+  stopOpacity?: StyleValue<CSS.Property.StopOpacity>
   /**
    * ### stroke
    *
@@ -8648,7 +8738,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke
    */
-  stroke?: CSSToken<CSS.Property.Stroke, "colors">
+  stroke?: StyleValue<CSS.Property.Stroke, "colors">
   /**
    * ### stroke-color
    *
@@ -8662,7 +8752,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  strokeColor?: CSSToken<string & {}>
+  strokeColor?: StyleValue<string & {}>
   /**
    * ### stroke-dasharray
    *
@@ -8674,7 +8764,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-dasharray
    */
-  strokeDasharray?: CSSToken<CSS.Property.StrokeDasharray>
+  strokeDasharray?: StyleValue<CSS.Property.StrokeDasharray>
   /**
    * ### stroke-dashoffset
    *
@@ -8686,7 +8776,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-dashoffset
    */
-  strokeDashoffset?: CSSToken<CSS.Property.StrokeDashoffset | number>
+  strokeDashoffset?: StyleValue<CSS.Property.StrokeDashoffset | number>
   /**
    * ### stroke-linecap
    *
@@ -8698,7 +8788,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-linecap
    */
-  strokeLinecap?: CSSToken<CSS.Property.StrokeLinecap>
+  strokeLinecap?: StyleValue<CSS.Property.StrokeLinecap>
   /**
    * ### stroke-linejoin
    *
@@ -8710,7 +8800,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-linejoin
    */
-  strokeLinejoin?: CSSToken<CSS.Property.StrokeLinejoin>
+  strokeLinejoin?: StyleValue<CSS.Property.StrokeLinejoin>
   /**
    * ### stroke-miterlimit
    *
@@ -8722,7 +8812,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-miterlimit
    */
-  strokeMiterlimit?: CSSToken<CSS.Property.StrokeMiterlimit>
+  strokeMiterlimit?: StyleValue<CSS.Property.StrokeMiterlimit>
   /**
    * ### stroke-opacity
    *
@@ -8734,7 +8824,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-opacity
    */
-  strokeOpacity?: CSSToken<CSS.Property.StrokeOpacity>
+  strokeOpacity?: StyleValue<CSS.Property.StrokeOpacity>
   /**
    * ### stroke-width
    *
@@ -8746,7 +8836,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-width
    */
-  strokeWidth?: CSSToken<CSS.Property.StrokeWidth | number>
+  strokeWidth?: StyleValue<CSS.Property.StrokeWidth | number>
   /**
    * ### table-layout
    *
@@ -8758,7 +8848,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/table-layout
    */
-  tableLayout?: CSSToken<CSS.Property.TableLayout>
+  tableLayout?: StyleValue<CSS.Property.TableLayout>
   /**
    * ### tab-size
    *
@@ -8770,7 +8860,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/tab-size
    */
-  tabSize?: CSSToken<CSS.Property.TabSize>
+  tabSize?: StyleValue<CSS.Property.TabSize>
   /**
    * ### font-size
    *
@@ -8782,7 +8872,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-size
    */
-  text?: CSSToken<CSS.Property.FontSize | number, "fontSizes">
+  text?: StyleValue<CSS.Property.FontSize | number, "fontSizes">
   /**
    * ### text-align
    *
@@ -8794,18 +8884,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-align
    */
-  textAlign?: CSSToken<CSS.Property.TextAlign>
+  textAlign?: StyleValue<CSS.Property.TextAlign>
   /**
    * ### text-align-last
    *
    * The <code>text-align-last</code> CSS property sets the alignment of the last line of text before a forced line break.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-align-last
    */
-  textAlignLast?: CSSToken<CSS.Property.TextAlignLast>
+  textAlignLast?: StyleValue<CSS.Property.TextAlignLast>
   /**
    * ### text-anchor
    *
@@ -8817,7 +8908,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-anchor
    */
-  textAnchor?: CSSToken<CSS.Property.TextAnchor>
+  textAnchor?: StyleValue<CSS.Property.TextAnchor>
+  /**
+   * ### text-autospace
+   *
+   * The <code>text-autospace</code> CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-text-4/#propdef-text-autospace
+   *
+   * @experimental
+   */
+  textAutospace?: StyleValue<string & {}>
   /**
    * ### text-box
    *
@@ -8825,9 +8928,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline-3/#text-box-shorthand
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-box
    */
-  textBox?: CSSToken<string & {}>
+  textBox?: StyleValue<string & {}>
   /**
    * ### text-box-edge
    *
@@ -8835,9 +8938,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline-3/#text-box-edge
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-box-edge
    */
-  textBoxEdge?: CSSToken<string & {}>
+  textBoxEdge?: StyleValue<string & {}>
   /**
    * ### text-box-trim
    *
@@ -8845,9 +8948,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline-3/#text-box-trim
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-box-trim
    */
-  textBoxTrim?: CSSToken<string & {}>
+  textBoxTrim?: StyleValue<string & {}>
   /**
    * ### color
    *
@@ -8859,7 +8962,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color
    */
-  textColor?: CSSToken<CSS.Property.Color, "colors">
+  textColor?: StyleValue<CSS.Property.Color, "colors">
   /**
    * ### text-combine-upright
    *
@@ -8871,7 +8974,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-combine-upright
    */
-  textCombineUpright?: CSSToken<CSS.Property.TextCombineUpright>
+  textCombineUpright?: StyleValue<CSS.Property.TextCombineUpright>
   /**
    * ### text-decoration
    *
@@ -8883,7 +8986,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration
    */
-  textDecor?: CSSToken<CSS.Property.TextDecoration>
+  textDecor?: StyleValue<CSS.Property.TextDecoration>
   /**
    * ### text-decoration
    *
@@ -8895,7 +8998,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration
    */
-  textDecoration?: CSSToken<CSS.Property.TextDecoration>
+  textDecoration?: StyleValue<CSS.Property.TextDecoration>
   /**
    * ### text-decoration-color
    *
@@ -8907,7 +9010,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-color
    */
-  textDecorationColor?: CSSToken<CSS.Property.TextDecorationColor, "colors">
+  textDecorationColor?: StyleValue<CSS.Property.TextDecorationColor, "colors">
   /**
    * ### text-decoration-line
    *
@@ -8919,7 +9022,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-line
    */
-  textDecorationLine?: CSSToken<CSS.Property.TextDecorationLine>
+  textDecorationLine?: StyleValue<CSS.Property.TextDecorationLine>
   /**
    * ### text-decoration-skip
    *
@@ -8933,7 +9036,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textDecorationSkip?: CSSToken<CSS.Property.TextDecorationSkip>
+  textDecorationSkip?: StyleValue<CSS.Property.TextDecorationSkip>
   /**
    * ### text-decoration-skip-ink
    *
@@ -8945,7 +9048,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip-ink
    */
-  textDecorationSkipInk?: CSSToken<CSS.Property.TextDecorationSkipInk>
+  textDecorationSkipInk?: StyleValue<CSS.Property.TextDecorationSkipInk>
   /**
    * ### text-decoration-style
    *
@@ -8957,7 +9060,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-style
    */
-  textDecorationStyle?: CSSToken<CSS.Property.TextDecorationStyle>
+  textDecorationStyle?: StyleValue<CSS.Property.TextDecorationStyle>
   /**
    * ### text-decoration-thickness
    *
@@ -8969,7 +9072,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-thickness
    */
-  textDecorationThickness?: CSSToken<CSS.Property.TextDecorationThickness>
+  textDecorationThickness?: StyleValue<CSS.Property.TextDecorationThickness>
   /**
    * ### text-emphasis
    *
@@ -8981,7 +9084,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis
    */
-  textEmphasis?: CSSToken<CSS.Property.TextEmphasis>
+  textEmphasis?: StyleValue<CSS.Property.TextEmphasis>
   /**
    * ### text-emphasis-color
    *
@@ -8993,7 +9096,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-color
    */
-  textEmphasisColor?: CSSToken<CSS.Property.TextEmphasisColor, "colors">
+  textEmphasisColor?: StyleValue<CSS.Property.TextEmphasisColor, "colors">
   /**
    * ### text-emphasis-position
    *
@@ -9005,7 +9108,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-position
    */
-  textEmphasisPosition?: CSSToken<CSS.Property.TextEmphasisPosition>
+  textEmphasisPosition?: StyleValue<CSS.Property.TextEmphasisPosition>
   /**
    * ### text-emphasis-style
    *
@@ -9017,7 +9120,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-style
    */
-  textEmphasisStyle?: CSSToken<CSS.Property.TextEmphasisStyle>
+  textEmphasisStyle?: StyleValue<CSS.Property.TextEmphasisStyle>
   /**
    * ### text-indent
    *
@@ -9029,7 +9132,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-indent
    */
-  textIndent?: CSSToken<CSS.Property.TextIndent>
+  textIndent?: StyleValue<CSS.Property.TextIndent>
   /**
    * ### text-justify
    *
@@ -9039,7 +9142,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-justify
    */
-  textJustify?: CSSToken<CSS.Property.TextJustify>
+  textJustify?: StyleValue<CSS.Property.TextJustify>
   /**
    * ### text-orientation
    *
@@ -9051,7 +9154,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-orientation
    */
-  textOrientation?: CSSToken<CSS.Property.TextOrientation>
+  textOrientation?: StyleValue<CSS.Property.TextOrientation>
   /**
    * ### text-overflow
    *
@@ -9063,7 +9166,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-overflow
    */
-  textOverflow?: CSSToken<CSS.Property.TextOverflow>
+  textOverflow?: StyleValue<CSS.Property.TextOverflow>
   /**
    * ### text-rendering
    *
@@ -9075,7 +9178,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-rendering
    */
-  textRendering?: CSSToken<CSS.Property.TextRendering>
+  textRendering?: StyleValue<CSS.Property.TextRendering>
   /**
    * ### text-shadow
    *
@@ -9087,7 +9190,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-shadow
    */
-  textShadow?: CSSToken<CSS.Property.TextShadow, "shadows">
+  textShadow?: StyleValue<CSS.Property.TextShadow, "shadows">
   /**
    * ### text-size-adjust
    *
@@ -9099,7 +9202,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textSizeAdjust?: CSSToken<CSS.Property.TextSizeAdjust>
+  textSizeAdjust?: StyleValue<CSS.Property.TextSizeAdjust>
   /**
    * ### text-spacing-trim
    *
@@ -9111,7 +9214,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textSpacingTrim?: CSSToken<string & {}>
+  textSpacingTrim?: StyleValue<string & {}>
   /**
    * ### text-transform
    *
@@ -9123,11 +9226,11 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-transform
    */
-  textTransform?: CSSToken<CSS.Property.TextTransform>
+  textTransform?: StyleValue<CSS.Property.TextTransform>
   /**
    * ### text-underline-offset
    *
-   * The <code>text-underline-position</code> and <code>text-underline-offset</code> CSS properties set the position and distance from initial position of text underlines on text with <code>text-decoration: underline</code>.
+   * The <code>text-underline-offset</code> CSS property shifts underlines on text from the initial position by a given distance. The initial position is affected by the <code>text-underline-position</code> property.
    *
    * @baseline `Widely available`
    * @widely_available_date 2023-05-19
@@ -9135,19 +9238,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-offset
    */
-  textUnderlineOffset?: CSSToken<CSS.Property.TextUnderlineOffset>
+  textUnderlineOffset?: StyleValue<CSS.Property.TextUnderlineOffset>
   /**
    * ### text-underline-position
    *
-   * The <code>text-underline-position</code> and <code>text-underline-offset</code> CSS properties set the position and distance from initial position of text underlines on text with <code>text-decoration: underline</code>.
+   * The <code>text-underline-position</code> CSS property sets the position of underlines on text. For example, <code>text-underline-position: under</code> places the underline below the text, avoiding crossing descenders. The underline may be further adjusted by the <code>text-underline-offset</code> property.
    *
    * @baseline `Widely available`
-   * @widely_available_date 2023-05-19
-   * @newly_available_date 2020-11-19
+   * @widely_available_date 2023-01-28
+   * @newly_available_date 2020-07-28
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-position
    */
-  textUnderlinePosition?: CSSToken<CSS.Property.TextUnderlinePosition>
+  textUnderlinePosition?: StyleValue<CSS.Property.TextUnderlinePosition>
   /**
    * ### text-wrap
    *
@@ -9158,7 +9261,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap
    */
-  textWrap?: CSSToken<CSS.Property.TextWrap>
+  textWrap?: StyleValue<CSS.Property.TextWrap>
   /**
    * ### text-wrap-mode
    *
@@ -9169,7 +9272,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-mode
    */
-  textWrapMode?: CSSToken<string & {}>
+  textWrapMode?: StyleValue<string & {}>
   /**
    * ### text-wrap-style
    *
@@ -9179,7 +9282,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-style
    */
-  textWrapStyle?: CSSToken<string & {}>
+  textWrapStyle?: StyleValue<string & {}>
   /**
    * ### timeline-scope
    *
@@ -9191,7 +9294,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  timelineScope?: CSSToken<CSS.Property.TimelineScope>
+  timelineScope?: StyleValue<CSS.Property.TimelineScope>
   /**
    * ### top
    *
@@ -9203,7 +9306,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/top
    */
-  top?: CSSToken<CSS.Property.Top | number, "spaces">
+  top?: StyleValue<CSS.Property.Top | number, "spaces">
   /**
    * ### touch-action
    *
@@ -9215,7 +9318,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/touch-action
    */
-  touchAction?: CSSToken<CSS.Property.TouchAction>
+  touchAction?: StyleValue<CSS.Property.TouchAction>
   /**
    * ### letter-spacing
    *
@@ -9227,7 +9330,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
    */
-  tracking?: CSSToken<CSS.Property.LetterSpacing, "letterSpacings">
+  tracking?: StyleValue<CSS.Property.LetterSpacing, "letterSpacings">
   /**
    * ### transform
    *
@@ -9239,7 +9342,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform
    */
-  transform?: CSSToken<CSS.Property.Transform>
+  transform?: StyleValue<CSS.Property.Transform>
   /**
    * ### transform-box
    *
@@ -9250,7 +9353,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform-box
    */
-  transformBox?: CSSToken<CSS.Property.TransformBox>
+  transformBox?: StyleValue<CSS.Property.TransformBox>
   /**
    * ### transform-origin
    *
@@ -9262,7 +9365,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform-origin
    */
-  transformOrigin?: CSSToken<CSS.Property.TransformOrigin>
+  transformOrigin?: StyleValue<CSS.Property.TransformOrigin>
   /**
    * ### transform-style
    *
@@ -9274,7 +9377,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform-style
    */
-  transformStyle?: CSSToken<CSS.Property.TransformStyle>
+  transformStyle?: StyleValue<CSS.Property.TransformStyle>
   /**
    * ### transition-behavior
    *
@@ -9285,7 +9388,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-behavior
    */
-  transitionBehavior?: CSSToken<CSS.Property.TransitionBehavior>
+  transitionBehavior?: StyleValue<CSS.Property.TransitionBehavior>
   /**
    * ### transition-delay
    *
@@ -9297,7 +9400,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-delay
    */
-  transitionDelay?: CSSToken<CSS.Property.TransitionDelay>
+  transitionDelay?: StyleValue<CSS.Property.TransitionDelay>
   /**
    * ### transition-duration
    *
@@ -9309,7 +9412,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-duration
    */
-  transitionDuration?: CSSToken<CSS.Property.TransitionDuration, "durations">
+  transitionDuration?: StyleValue<CSS.Property.TransitionDuration, "durations">
   /**
    * ### transition-timing-function
    *
@@ -9321,7 +9424,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-timing-function
    */
-  transitionTimingFunction?: CSSToken<
+  transitionTimingFunction?: StyleValue<
     CSS.Property.TransitionTimingFunction,
     "easings"
   >
@@ -9336,7 +9439,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/unicode-bidi
    */
-  unicodeBidi?: CSSToken<CSS.Property.UnicodeBidi>
+  unicodeBidi?: StyleValue<CSS.Property.UnicodeBidi>
   /**
    * ### user-modify
    *
@@ -9346,7 +9449,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  userModify?: CSSToken<string & {}>
+  userModify?: StyleValue<string & {}>
   /**
    * ### user-select
    *
@@ -9356,7 +9459,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/user-select
    */
-  userSelect?: CSSToken<CSS.Property.UserSelect>
+  userSelect?: StyleValue<CSS.Property.UserSelect>
   /**
    * ### vector-effect
    *
@@ -9368,7 +9471,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/vector-effect
    */
-  vectorEffect?: CSSToken<CSS.Property.VectorEffect>
+  vectorEffect?: StyleValue<CSS.Property.VectorEffect>
   /**
    * ### vertical-align
    *
@@ -9380,7 +9483,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/vertical-align
    */
-  verticalAlign?: CSSToken<CSS.Property.VerticalAlign>
+  verticalAlign?: StyleValue<CSS.Property.VerticalAlign>
   /**
    * ### view-timeline
    *
@@ -9392,7 +9495,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimeline?: CSSToken<CSS.Property.ViewTimeline>
+  viewTimeline?: StyleValue<CSS.Property.ViewTimeline>
   /**
    * ### view-timeline-axis
    *
@@ -9404,7 +9507,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimelineAxis?: CSSToken<CSS.Property.ViewTimelineAxis>
+  viewTimelineAxis?: StyleValue<CSS.Property.ViewTimelineAxis>
   /**
    * ### view-timeline-inset
    *
@@ -9416,7 +9519,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimelineInset?: CSSToken<CSS.Property.ViewTimelineInset>
+  viewTimelineInset?: StyleValue<CSS.Property.ViewTimelineInset>
   /**
    * ### view-timeline-name
    *
@@ -9428,7 +9531,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimelineName?: CSSToken<CSS.Property.ViewTimelineName>
+  viewTimelineName?: StyleValue<CSS.Property.ViewTimelineName>
   /**
    * ### view-transition-class
    *
@@ -9438,7 +9541,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-view-transitions-2/#view-transition-class-prop
    */
-  viewTransitionClass?: CSSToken<string & {}>
+  viewTransitionClass?: StyleValue<string & {}>
   /**
    * ### view-transition-name
    *
@@ -9448,7 +9551,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/view-transition-name
    */
-  viewTransitionName?: CSSToken<CSS.Property.ViewTransitionName>
+  viewTransitionName?: StyleValue<CSS.Property.ViewTransitionName>
   /**
    * ### visibility
    *
@@ -9460,7 +9563,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/visibility
    */
-  visibility?: CSSToken<CSS.Property.Visibility>
+  visibility?: StyleValue<CSS.Property.Visibility>
   /**
    * ### width
    *
@@ -9472,7 +9575,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  w?: CSSToken<CSS.Property.Width | number, "sizes">
+  w?: StyleValue<CSS.Property.Width | number, "sizes">
   /**
    * ### white-space
    *
@@ -9484,7 +9587,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/white-space
    */
-  whiteSpace?: CSSToken<CSS.Property.WhiteSpace>
+  whiteSpace?: StyleValue<CSS.Property.WhiteSpace>
   /**
    * ### white-space-collapse
    *
@@ -9495,7 +9598,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/white-space-collapse
    */
-  whiteSpaceCollapse?: CSSToken<CSS.Property.WhiteSpaceCollapse>
+  whiteSpaceCollapse?: StyleValue<CSS.Property.WhiteSpaceCollapse>
   /**
    * ### widows
    *
@@ -9505,7 +9608,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/widows
    */
-  widows?: CSSToken<CSS.Property.Widows>
+  widows?: StyleValue<CSS.Property.Widows>
   /**
    * ### width
    *
@@ -9517,7 +9620,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  width?: CSSToken<CSS.Property.Width | number, "sizes">
+  width?: StyleValue<CSS.Property.Width | number, "sizes">
   /**
    * ### will-change
    *
@@ -9529,7 +9632,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/will-change
    */
-  willChange?: CSSToken<CSS.Property.WillChange>
+  willChange?: StyleValue<CSS.Property.WillChange>
   /**
    * ### word-break
    *
@@ -9541,7 +9644,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/word-break
    */
-  wordBreak?: CSSToken<CSS.Property.WordBreak>
+  wordBreak?: StyleValue<CSS.Property.WordBreak>
   /**
    * ### word-spacing
    *
@@ -9553,7 +9656,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/word-spacing
    */
-  wordSpacing?: CSSToken<CSS.Property.WordSpacing>
+  wordSpacing?: StyleValue<CSS.Property.WordSpacing>
   /**
    * ### writing-mode
    *
@@ -9565,7 +9668,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/writing-mode
    */
-  writingMode?: CSSToken<CSS.Property.WritingMode>
+  writingMode?: StyleValue<CSS.Property.WritingMode>
   /**
    * ### x
    *
@@ -9577,7 +9680,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/x
    */
-  x?: CSSToken<string & {}>
+  x?: StyleValue<string & {}>
   /**
    * ### y
    *
@@ -9589,7 +9692,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/y
    */
-  y?: CSSToken<string & {}>
+  y?: StyleValue<string & {}>
   /**
    * ### z-index
    *
@@ -9601,7 +9704,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/z-index
    */
-  z?: CSSToken<CSS.Property.ZIndex, "zIndices">
+  z?: StyleValue<CSS.Property.ZIndex, "zIndices">
   /**
    * ### z-index
    *
@@ -9613,7 +9716,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/z-index
    */
-  zIndex?: CSSToken<CSS.Property.ZIndex, "zIndices">
+  zIndex?: StyleValue<CSS.Property.ZIndex, "zIndices">
   /**
    * ### zoom
    *
@@ -9624,55 +9727,55 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/zoom
    */
-  zoom?: CSSToken<CSS.Property.Zoom>
+  zoom?: StyleValue<CSS.Property.Zoom>
   /**
 
 */
-  colorMode?: CSSToken<CSS.Property.ColorScheme>
+  colorMode?: StyleValue<CSS.Property.ColorScheme>
   /**
    * Sets the value of `--contrast`.
    */
-  contrast?: CSSToken<StringLiteral>
+  contrast?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--drop-shadow`.
    */
-  dropShadow?: CSSToken<StringLiteral, "shadows">
+  dropShadow?: StyleValue<StringLiteral, "shadows">
   /**
    * The focus ring is used to identify the currently focused element.
    */
-  focusRing?: CSSToken<
+  focusRing?: StyleValue<
     "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
   >
   /**
    * Sets the value of `--focus-ring-color`.
    */
-  focusRingColor?: CSSToken<StringLiteral, "colors">
+  focusRingColor?: StyleValue<StringLiteral, "colors">
   /**
    * Sets the value of `--focus-ring-offset`.
    */
-  focusRingOffset?: CSSToken<number | StringLiteral, "spaces">
+  focusRingOffset?: StyleValue<number | StringLiteral, "spaces">
   /**
    * Sets the value of `--focus-ring-style`.
    */
-  focusRingStyle?: CSSToken<StringLiteral>
+  focusRingStyle?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--focus-ring-width`.
    */
-  focusRingWidth?: CSSToken<StringLiteral>
+  focusRingWidth?: StyleValue<StringLiteral>
   /**
    * The focus ring is used to identify the currently focused element.
    */
-  focusVisibleRing?: CSSToken<
+  focusVisibleRing?: StyleValue<
     "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
   >
   /**
    * Sets the value of `--grayscale`.
    */
-  grayscale?: CSSToken<StringLiteral>
+  grayscale?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--hue-rotate`.
    */
-  hueRotate?: CSSToken<StringLiteral>
+  hueRotate?: StyleValue<StringLiteral>
   /**
    * ### left
    *
@@ -9696,7 +9799,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/right
    */
-  insetX?: CSSToken<CSS.Property.Left | CSS.Property.Right | number, "spaces">
+  insetX?: StyleValue<CSS.Property.Left | CSS.Property.Right | number, "spaces">
   /**
    * ### bottom
    *
@@ -9720,11 +9823,11 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/top
    */
-  insetY?: CSSToken<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
+  insetY?: StyleValue<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
   /**
    * Sets the value of `--invert`.
    */
-  invert?: CSSToken<StringLiteral>
+  invert?: StyleValue<StringLiteral>
   /**
    * ### keyframes
    *
@@ -9736,7 +9839,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@keyframes
    */
-  keyframes?: CSSToken<
+  keyframes?: StyleValue<
     StringLiteral | { [key: string]: CSSObject },
     "keyframes"
   >
@@ -9750,7 +9853,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-clamp
    */
-  lineClamp?: CSSToken<number>
+  lineClamp?: StyleValue<number>
   /**
    * ### margin-inline-end
    *
@@ -9774,7 +9877,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  marginX?: CSSToken<
+  marginX?: StyleValue<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
     "spaces"
   >
@@ -9801,7 +9904,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  marginY?: CSSToken<
+  marginY?: StyleValue<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
   >
@@ -9828,7 +9931,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxBoxSize?: CSSToken<
+  maxBoxSize?: StyleValue<
     CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
     "sizes"
   >
@@ -9855,7 +9958,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-width
    */
-  minBoxSize?: CSSToken<
+  minBoxSize?: StyleValue<
     CSS.Property.MinHeight | CSS.Property.MinWidth | number,
     "sizes"
   >
@@ -9882,7 +9985,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  mx?: CSSToken<
+  mx?: StyleValue<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
     "spaces"
   >
@@ -9909,7 +10012,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  my?: CSSToken<
+  my?: StyleValue<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
   >
@@ -9923,7 +10026,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline
    */
-  outline?: CSSToken<"inside" | "mixed" | "outside" | CSS.Property.Outline>
+  outline?: StyleValue<"inside" | "mixed" | "outside" | CSS.Property.Outline>
   /**
    * ### padding-inline-end
    *
@@ -9947,7 +10050,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  paddingX?: CSSToken<
+  paddingX?: StyleValue<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
     "spaces"
   >
@@ -9974,7 +10077,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  paddingY?: CSSToken<
+  paddingY?: StyleValue<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
     "spaces"
   >
@@ -10001,7 +10104,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  px?: CSSToken<
+  px?: StyleValue<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
     "spaces"
   >
@@ -10028,38 +10131,38 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  py?: CSSToken<
+  py?: StyleValue<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
     "spaces"
   >
   /**
    * Sets the value of `--rotate-x`.
    */
-  rotateX?: CSSToken<StringLiteral>
+  rotateX?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--rotate-y`.
    */
-  rotateY?: CSSToken<StringLiteral>
+  rotateY?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--rotate-z`.
    */
-  rotateZ?: CSSToken<StringLiteral>
+  rotateZ?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--saturate`.
    */
-  saturate?: CSSToken<StringLiteral>
+  saturate?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--scale-x`.
    */
-  scaleX?: CSSToken<StringLiteral>
+  scaleX?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--scale-y`.
    */
-  scaleY?: CSSToken<StringLiteral>
+  scaleY?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--scale-z`.
    */
-  scaleZ?: CSSToken<StringLiteral>
+  scaleZ?: StyleValue<StringLiteral>
   /**
    * ### scroll-margin-left
    *
@@ -10083,7 +10186,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
    */
-  scrollMarginX?: CSSToken<
+  scrollMarginX?: StyleValue<
     CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
     "spaces"
   >
@@ -10110,7 +10213,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
    */
-  scrollMarginY?: CSSToken<
+  scrollMarginY?: StyleValue<
     CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
     "spaces"
   >
@@ -10137,7 +10240,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
    */
-  scrollPaddingX?: CSSToken<
+  scrollPaddingX?: StyleValue<
     CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
     "spaces"
   >
@@ -10164,22 +10267,22 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
    */
-  scrollPaddingY?: CSSToken<
+  scrollPaddingY?: StyleValue<
     CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
     "spaces"
   >
   /**
    * Sets the value of `--sepia`.
    */
-  sepia?: CSSToken<StringLiteral>
+  sepia?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--skew-x`.
    */
-  skewX?: CSSToken<StringLiteral>
+  skewX?: StyleValue<StringLiteral>
   /**
    * Sets the value of `--skew-y`.
    */
-  skewY?: CSSToken<StringLiteral>
+  skewY?: StyleValue<StringLiteral>
   /**
    * ### transition
    *
@@ -10191,7 +10294,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition
    */
-  transition?: CSSToken<
+  transition?: StyleValue<
     | "all"
     | "backgrounds"
     | "colors"
@@ -10213,7 +10316,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-property
    */
-  transitionProperty?: CSSToken<
+  transitionProperty?: StyleValue<
     | "all"
     | "backgrounds"
     | "colors"
@@ -10227,23 +10330,23 @@ export interface StyleProps {
   /**
    * Sets the value of `--translate-x`.
    */
-  translateX?: CSSToken<number | StringLiteral, "spaces">
+  translateX?: StyleValue<number | StringLiteral, "spaces">
   /**
    * Sets the value of `--translate-y`.
    */
-  translateY?: CSSToken<number | StringLiteral, "spaces">
+  translateY?: StyleValue<number | StringLiteral, "spaces">
   /**
    * Sets the value of `--translate-z`.
    */
-  translateZ?: CSSToken<StringLiteral>
+  translateZ?: StyleValue<StringLiteral>
   /**
    * If `true`, it clamps truncate a text after one line.
    */
-  truncated?: CSSToken<boolean>
+  truncated?: StyleValue<boolean>
   /**
    * Set CSS variables.
    */
-  vars?: { name: string; token?: ThemeToken; value?: CSSToken<any> }[]
+  vars?: { name: string; token?: ThemeToken; value?: StyleValue<any> }[]
   /**
    * ### container
    *
@@ -10293,7 +10396,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _landscape?: CSSToken<CSSObject>
+  _landscape?: StyleValue<CSSObject>
   /**
    * ### media
    *
@@ -10393,7 +10496,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaDark?: CSSToken<CSSObject>
+  _mediaDark?: StyleValue<CSSObject>
   /**
    * ### media
    *
@@ -10405,7 +10508,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaLight?: CSSToken<CSSObject>
+  _mediaLight?: StyleValue<CSSObject>
   /**
    * ### media
    *
@@ -10417,7 +10520,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaReduceMotion?: CSSToken<CSSObject>
+  _mediaReduceMotion?: StyleValue<CSSObject>
   /**
    * ### media
    *
@@ -10429,7 +10532,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _portrait?: CSSToken<CSSObject>
+  _portrait?: StyleValue<CSSObject>
   /**
    * ### media
    *
@@ -10441,7 +10544,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _print?: CSSToken<CSSObject>
+  _print?: StyleValue<CSSObject>
   /**
    * ### supports
    *

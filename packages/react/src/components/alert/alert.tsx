@@ -1,10 +1,10 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { IconProps } from "../icon"
 import type { Loading } from "../loading"
 import type { StatusScheme } from "../status"
 import type { AlertStyle } from "./alert.style"
 import { useMemo } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { CircleCheckBigIcon, InfoIcon, TriangleAlertIcon } from "../icon"
 import { useLoadingComponent } from "../loading"
 import { alertStyle } from "./alert.style"
@@ -20,7 +20,9 @@ interface AlertContext {
   status: StatusScheme
 }
 
-interface AlertRootOptions {
+export interface AlertRootProps
+  extends HTMLStyledProps,
+    ThemeProps<AlertStyle> {
   /**
    * The status of the alert.
    *
@@ -28,11 +30,6 @@ interface AlertRootOptions {
    */
   status?: StatusScheme
 }
-
-export interface AlertRootProps
-  extends HTMLUIProps,
-    ThemeProps<AlertStyle>,
-    AlertRootOptions {}
 
 export const {
   ComponentContext: AlertContext,
@@ -51,7 +48,7 @@ export const {
 /**
  * `Alert` is a component that conveys information to the user.
  *
- * @see Docs https://yamada-ui.com/components/alert
+ * @see https://yamada-ui.com/components/alert
  */
 export const AlertRoot = withProvider<"div", AlertRootProps>(
   ({ status, ...props }) => {
@@ -59,15 +56,12 @@ export const AlertRoot = withProvider<"div", AlertRootProps>(
 
     return (
       <AlertContext value={context}>
-        <ui.div role="alert" {...props} />
+        <styled.div role="alert" {...props} />
       </AlertContext>
     )
   },
   "root",
-)(({ colorScheme, status = "info" }) => ({
-  colorScheme: colorScheme ?? status,
-  status,
-}))
+)({ colorScheme: "info", status: "info" })
 
 export interface AlertIconProps extends IconProps {}
 
@@ -96,11 +90,11 @@ export const AlertLoading = withContext<"svg", AlertLoadingProps>(
   ["icon", "loading"],
 )()
 
-export interface AlertTitleProps extends HTMLUIProps<"p"> {}
+export interface AlertTitleProps extends HTMLStyledProps<"p"> {}
 
 export const AlertTitle = withContext<"p", AlertTitleProps>("p", "title")()
 
-export interface AlertDescriptionProps extends HTMLUIProps<"span"> {}
+export interface AlertDescriptionProps extends HTMLStyledProps<"span"> {}
 
 export const AlertDescription = withContext<"span", AlertDescriptionProps>(
   "span",

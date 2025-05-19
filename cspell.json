@@ -2,6 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "language": "en",
   "words": [
+    "hoge",
     "activedescendant",
     "Adebayo",
     "Adlm",
@@ -11,6 +12,7 @@
     "arrowup",
     "autosize",
     "autosizing",
+    "autospace",
     "avap",
     "backreference",
     "beerus",
@@ -19,6 +21,7 @@
     "bunx",
     "burter",
     "Chakra",
+    "chromeos",
     "citeurl",
     "codesandbox",
     "colindex",
@@ -104,6 +107,7 @@
     "menuitemcheckbox",
     "menuitemradio",
     "mergeable",
+    "messageformat",
     "metafile",
     "mewtwo",
     "minzip",
@@ -156,6 +160,7 @@
     "Shintaro",
     "Shirai",
     "SMACSS",
+    "spinbutton",
     "spreadsheetml",
     "storysource",
     "svmax",
@@ -197,7 +202,8 @@
     "yamcha",
     "Yezi",
     "Yuto",
-    "zarbon"
+    "zarbon",
+    "العربية"
   ],
   "ignorePaths": [
     "node_modules",

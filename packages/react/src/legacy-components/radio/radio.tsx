@@ -42,7 +42,7 @@ export interface RadioProps<Y extends number | string = string>
 /**
  * `Radio` is a component used for allowing users to select one option from multiple choices.
  *
- * @see Docs https://yamada-ui.com/components/forms/radio
+ * @see https://yamada-ui.com/components/forms/radio
  */
 export const Radio = forwardRef(
   <Y extends number | string = string>(

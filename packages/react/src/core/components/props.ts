@@ -1,4 +1,5 @@
 import type { Dict, Merge } from "../../utils"
+import isEqual from "react-fast-compare"
 import {
   cx,
   handlerAll,
@@ -7,6 +8,7 @@ import {
   isUndefined,
   merge,
   mergeRefs,
+  omitObject,
 } from "../../utils"
 import { pseudoProperties } from "../pseudos"
 import { styleProperties } from "../styles"
@@ -140,4 +142,15 @@ export function chainProps<Y extends Dict = Dict>(
       }
     }) as CallbackProps<Y>
   }
+}
+
+export function isEqualProps<
+  Y extends Dict,
+  M extends Dict,
+  D extends keyof M | keyof Y,
+>(a: Y, b: M, omitKeys: D[] = []) {
+  return isEqual(
+    omitObject(a, omitKeys as (keyof Y)[]),
+    omitObject(b, omitKeys as (keyof M)[]),
+  )
 }

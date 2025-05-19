@@ -1,9 +1,9 @@
-import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { TextStyle } from "./text.style"
 import { createComponent } from "../../core"
 import { textStyle } from "./text.style"
 
-interface TextOptions {
+export interface TextProps extends HTMLStyledProps<"p">, ThemeProps<TextStyle> {
   /**
    * The CSS `text-align` property.
    */
@@ -18,11 +18,6 @@ interface TextOptions {
   decoration?: CSSProps["textDecoration"]
 }
 
-export interface TextProps
-  extends HTMLUIProps<"p">,
-    ThemeProps<TextStyle>,
-    TextOptions {}
-
 export const {
   PropsContext: TextPropsContext,
   usePropsContext: useTextPropsContext,
@@ -32,7 +27,7 @@ export const {
 /**
  * `Text` is a component that represents a paragraph of text. By default, it renders a `p` element.
  *
- * @see Docs https://yamada-ui.com/components/text
+ * @see https://yamada-ui.com/components/text
  */
 export const Text = withContext("p")(
   undefined,

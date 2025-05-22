@@ -1,5 +1,5 @@
 import type { CSSObject } from "@emotion/styled"
-import type { ThemeToken, Union } from "@yamada-ui/react"
+import type { AnyString, ThemeToken } from "@yamada-ui/react"
 import type { CSSProperties, StyledProperties } from "."
 import type { TransformOptions } from "./transform-props"
 
@@ -21,9 +21,7 @@ const generateTransform = (...transforms: TransformOptions[]) => {
 
 interface GetConfigOptions {
   css?: CSSObject
-  properties?:
-    | Union<CSSProperties | StyledProperties>
-    | Union<CSSProperties | StyledProperties>[]
+  properties?: (AnyString | CSSProperties | StyledProperties)[]
   token?: ThemeToken
   transforms?: TransformOptions[]
 }
@@ -36,15 +34,9 @@ export const generateConfig =
     const config: string[] = []
 
     if (properties) {
-      if (typeof properties === "string") {
-        const value = `"${properties}"`
+      const value = `[${properties.map((p) => `"${p}"`).join(", ")}]`
 
-        config.push(`properties: ${value}`)
-      } else {
-        const value = `[${properties.map((p) => `"${p}"`).join(", ")}]`
-
-        config.push(`properties: ${value}`)
-      }
+      config.push(`properties: ${value}`)
     }
 
     if (token) config.push(`token: "${token}"`)

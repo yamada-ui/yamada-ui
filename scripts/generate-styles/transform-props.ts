@@ -1,8 +1,8 @@
-import type { PseudoSelector, Transforms } from "@yamada-ui/react"
+import type { ConditionSelector, Transforms } from "@yamada-ui/react"
 import type { Properties } from "."
 import { tokens } from "./tokens"
 
-type TransformProperties = Properties | PseudoSelector
+type TransformProperties = ConditionSelector | Properties
 
 export interface TransformOptions {
   transform: Transforms
@@ -36,8 +36,6 @@ export const transformProps: TransformProps = {
     { args: ["layerStyles"], properties: "layerStyle" },
     { args: ["textStyles"], properties: "textStyle" },
   ],
-
-  vars: ["vars"],
 
   truncated: ["truncated"],
 

@@ -1,7 +1,7 @@
 import type * as React from "react"
 import type { Merge } from "../../utils"
+import type { ConditionProps } from "../conditions"
 import type { CSSProps } from "../css"
-import type { PseudoProps } from "../pseudos"
 import type { StyleProps } from "../styles"
 import type { StyledTheme, UsageTheme } from "../theme"
 
@@ -26,7 +26,7 @@ export type WithoutAs<Y extends object> = Omit<Y, "as">
 
 export type WithoutRef<Y extends object> = Omit<Y, "ref">
 
-export interface InterpolationProps extends StyleProps, PseudoProps {
+export interface InterpolationProps extends StyleProps, ConditionProps {
   theme: StyledTheme<UsageTheme>
 }
 

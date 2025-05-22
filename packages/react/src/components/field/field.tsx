@@ -5,6 +5,7 @@ import { isValidElement, useId, useMemo, useState } from "react"
 import { createSlotComponent, styled } from "../../core"
 import {
   createContext,
+  cx,
   dataAttr,
   findChild,
   getValidChildren,
@@ -267,12 +268,12 @@ const FieldRequiredIndicator = withContext<"span", FieldRequiredIndicatorProps>(
 export interface FieldHelperMessageProps extends HTMLStyledProps<"span"> {}
 
 export const FieldHelperMessage = withContext<"span", FieldHelperMessageProps>(
-  (props) => {
+  ({ "aria-describedby": ariaDescribedby, ...props } = {}) => {
     const { id, invalid, replace } = useFieldContext() ?? {}
 
     if (replace && invalid) return null
 
-    return <styled.span aria-describedby={id} {...props} />
+    return <styled.span aria-describedby={cx(id, ariaDescribedby)} {...props} />
   },
   "helperMessage",
 )()

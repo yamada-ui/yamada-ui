@@ -1,7 +1,7 @@
 import type { RefObject } from "react"
 import type { PortalProps } from "../../components/portal"
 import type { DefaultTheme } from "../../theme"
-import type { Booleanish, Dict, StringLiteral, Union } from "../../utils"
+import type { AnyString, Booleanish, Dict } from "../../utils"
 import type {
   CreateBreakpointsReturn,
   CreateLayersReturn,
@@ -238,7 +238,7 @@ export interface ThemeConfig {
      *
      * @default 'ui'
      */
-    varPrefix?: StringLiteral
+    varPrefix?: AnyString
   }
   /**
    * The config of breakpoint.
@@ -310,7 +310,7 @@ type ThemeVariantProps<Y extends Dict = Dict> =
         /**
          * The variant of the component.
          */
-        variant?: StyleValue<Union<keyof Required<Y>["variants"]>>
+        variant?: StyleValue<AnyString | keyof Required<Y>["variants"]>
       }
 
 type ThemeSizeProps<Y extends Dict = Dict> =
@@ -320,7 +320,7 @@ type ThemeSizeProps<Y extends Dict = Dict> =
         /**
          * The size of the component.
          */
-        size?: StyleValue<Union<keyof Required<Y>["sizes"]>>
+        size?: StyleValue<AnyString | keyof Required<Y>["sizes"]>
       }
 
 type ThemeComponentProps<Y extends Dict = Dict> =
@@ -549,7 +549,7 @@ interface ComponentSharedStyle<
 }
 
 export type ComponentCompound<
-  Y extends CSSObject = CSSObject,
+  Y extends CSSObject | CSSSlotObject = CSSObject,
   M extends CSSPropObject = CSSPropObject,
   D extends CSSModifierObject = CSSModifierObject,
   H extends CSSModifierObject = CSSModifierObject,
@@ -656,6 +656,25 @@ export type Theme =
 export type ThemeTokens = CustomThemeTokens extends UsageThemeTokens
   ? CustomThemeTokens
   : GeneratedThemeTokens
+
+type OmittedThemeTokens = Exclude<
+  keyof ThemeTokens,
+  | "apply"
+  | "breakpoints"
+  | "colorSchemes"
+  | "layerStyles"
+  | "textStyles"
+  | "themeSchemes"
+>
+
+export type ThemePath =
+  | AnyString
+  | Extract<ThemeTokens["colors"], `colorScheme.${string}`>
+  | {
+      [Y in OmittedThemeTokens]: {
+        [M in ThemeTokens[Y]]: M extends object ? never : `${Y}.${M}`
+      }[ThemeTokens[Y]]
+    }[OmittedThemeTokens]
 
 export type ChangeThemeScheme = (
   themeScheme: ThemeTokens["themeSchemes"],

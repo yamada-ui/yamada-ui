@@ -1,18 +1,19 @@
 import type { Length } from "../utils"
+import type { DOMElement } from "./components"
 import type { CSSObject } from "./css"
 
-type ReplaceSelectors<
+type ReplaceSelector<
   Y extends string[],
   M extends string,
   D extends string,
 > = Y extends [infer H extends string, ...infer R extends string[]]
-  ? `${H}${M extends `&${infer T}` ? `${T} ${D}` : `${M} ${D}`}${Length<R> extends 0 ? "" : `, `}${ReplaceSelectors<R, M, D>}`
+  ? `${H}${M extends `&${infer T}` ? `${T} ${D}` : `${M} ${D}`}${Length<R> extends 0 ? "" : `, `}${ReplaceSelector<R, M, D>}`
   : ""
 
 const toGroup = <Y extends string>(selector: Y) =>
   ["[role=group]", "[data-group]", ".group"]
     .map((prefix) => `${prefix}${selector.slice(1)} &`)
-    .join(", ") as ReplaceSelectors<
+    .join(", ") as ReplaceSelector<
     ["[role=group]", "[data-group]", ".group"],
     Y,
     "&"
@@ -28,7 +29,11 @@ const toPeer = <Y extends string>(selector: Y) =>
       `&:has(~ ${prefix} *${selector.slice(1)})`,
       `${prefix}:has(*${selector.slice(1)}) ~ &`,
     ]),
-  ].join(", ") as ReplaceSelectors<["[data-peer]", ".peer"], Y, "~ &">
+  ].join(", ") as ReplaceSelector<["[data-peer]", ".peer"], Y, "~ &">
+
+export type AnySelector =
+  | `${string}${" " | "#" | "*" | "+" | "," | "." | ":" | ">" | "@" | "[" | "]" | "~"}${string}`
+  | DOMElement
 
 export const attributes = {
   /**
@@ -173,7 +178,6 @@ export const attributes = {
 
 export type Attributes = typeof attributes
 export type AttributeProperty = keyof Attributes
-export type AttributeSelector = Attributes[AttributeProperty]
 export type AttributeProps = {
   [K in AttributeProperty]?: CSSObject
 }
@@ -256,7 +260,6 @@ export const pseudoElements = {
 
 export type PseudoElements = typeof pseudoElements
 export type PseudoElementProperty = keyof PseudoElements
-export type PseudoElementSelector = PseudoElements[PseudoElementProperty]
 export type PseudoElementProps = {
   [K in PseudoElementProperty]?: CSSObject
 }
@@ -515,7 +518,6 @@ export const pseudoClasses = {
 
 export type PseudoClasses = typeof pseudoClasses
 export type PseudoClassProperty = keyof PseudoClasses
-export type PseudoClassSelector = PseudoClasses[PseudoClassProperty]
 export type PseudoClassProps = {
   [K in PseudoClassProperty]?: CSSObject
 }
@@ -642,7 +644,6 @@ export const groupAttributes = {
 
 export type GroupAttributes = typeof groupAttributes
 export type GroupAttributeProperty = keyof GroupAttributes
-export type GroupAttributeSelector = GroupAttributes[GroupAttributeProperty]
 export type GroupAttributeProps = {
   [K in GroupAttributeProperty]?: CSSObject
 }
@@ -769,7 +770,6 @@ export const peerAttributes = {
 
 export type PeerAttributes = typeof peerAttributes
 export type PeerAttributeProperty = keyof PeerAttributes
-export type PeerAttributeSelector = PeerAttributes[PeerAttributeProperty]
 export type PeerAttributeProps = {
   [K in PeerAttributeProperty]?: CSSObject
 }
@@ -779,7 +779,7 @@ export const peerAttributeProperties = Object.keys(
 ) as PeerAttributeProperty[]
 export const peerAttributeSelectors = Object.values(peerAttributes)
 
-export const pseudos = {
+export const conditions = {
   ...pseudoElements,
   ...attributes,
   ...pseudoClasses,
@@ -787,12 +787,14 @@ export const pseudos = {
   ...peerAttributes,
 } as const
 
-export type Pseudos = typeof pseudos
-export type PseudoProperty = keyof Pseudos
-export type PseudoSelector = Pseudos[PseudoProperty]
-export type PseudoProps = {
-  [K in keyof Pseudos]?: CSSObject
+export type Conditions = typeof conditions
+export type ConditionProperty = keyof Conditions
+export type ConditionSelector = Conditions[ConditionProperty]
+export type ConditionProps = {
+  [K in keyof Conditions]?: CSSObject
 }
 
-export const pseudoProperties = Object.keys(pseudos) as PseudoProperty[]
-export const pseudoSelectors = Object.values(pseudos)
+export const conditionProperties = Object.keys(
+  conditions,
+) as ConditionProperty[]
+export const conditionSelectors = Object.values(conditions)

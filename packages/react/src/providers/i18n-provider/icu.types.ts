@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { StringLiteral } from "../../utils"
+import type { AnyString } from "../../utils"
 
 type FindElements<Y> = Y extends `${string}<${infer M}>${infer D}`
   ? M extends `/${string}`
@@ -41,7 +41,7 @@ type ExcludeEscape<Y> = Y extends `${infer M}'${string}'${infer D}`
 
 type ExcludeEmptyObject<Y> = Y extends { [key: string]: never } ? never : Y
 
-type TransformOther<Y> = Y extends "other" ? StringLiteral : Y
+type TransformOther<Y> = Y extends "other" ? AnyString : Y
 
 type ArgumentValue<Y, M extends string = string> = Y extends "select"
   ? never
@@ -53,7 +53,7 @@ type ArgumentValue<Y, M extends string = string> = Y extends "select"
         ? Date
         : Y extends "time"
           ? Date
-          : M | number | StringLiteral
+          : AnyString | M | number
 
 type ParseSelectBlock<
   Y,
@@ -84,7 +84,7 @@ type ParseBlock<
       }
   : Y extends `${infer D},${infer H}`
     ? { [T in Trim<D>]: ArgumentValue<Trim<H>, M> }
-    : { [T in Trim<Y>]: M | number | StringLiteral }
+    : { [T in Trim<Y>]: AnyString | M | number }
 
 type ParseBlocks<Y, M extends string = string> = Y extends [infer D, ...infer H]
   ? {

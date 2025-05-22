@@ -2,7 +2,7 @@ import type { MockInstance } from "vitest"
 import type { Dict } from "../../utils"
 import type { StyledTheme } from "../theme"
 import { defaultConfig, defaultTheme } from "../../theme"
-import { pseudos } from "../pseudos"
+import { conditions } from "../conditions"
 import { transformTheme } from "../theme"
 import { css } from "./css"
 
@@ -101,7 +101,7 @@ describe("css", () => {
 
     expect(result).toStrictEqual({
       color: "var(--ui-colors-gray-500)",
-      [pseudos._hover]: {
+      [conditions._hover]: {
         color: "var(--ui-colors-gray-300)",
       },
     })
@@ -143,16 +143,6 @@ describe("css", () => {
     })
   })
 
-  test("returns css var", () => {
-    const result = css(theme)({
-      vars: [{ name: "space", token: "spaces", value: "4" }],
-    })
-
-    expect(result).toStrictEqual({
-      "--ui-space": "var(--ui-spaces-4)",
-    })
-  })
-
   test("returns apply", () => {
     const result = css(theme)({
       apply: "heading.2xl",
@@ -173,7 +163,7 @@ describe("css", () => {
     })
   })
 
-  test.todo("returns text styles", () => {
+  test("returns text styles", () => {
     const result = css(theme)({
       textStyle: "gradient",
     })
@@ -194,7 +184,7 @@ describe("css", () => {
     })
 
     expect(result).toStrictEqual({
-      margin: "var(--ui-yamada)",
+      margin: "var(--yamada)",
       padding: "var(--ui-spaces-4) var(--ui-spaces-4)",
     })
   })

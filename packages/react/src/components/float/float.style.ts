@@ -35,14 +35,14 @@ export const floatStyle = defineComponentStyle({
     {
       css: {
         insetBlockEnd: "auto",
-        insetBlockStart: "{offsetBlock, 0px}",
+        insetBlockStart: "{offset-block, 0px}",
         translateY: "-50%",
       },
       placement: /^start/,
     },
     {
       css: {
-        insetBlockEnd: "{offsetBlock, 0px}",
+        insetBlockEnd: "{offset-block, 0px}",
         insetBlockStart: "auto",
         translateY: "50%",
       },
@@ -58,14 +58,14 @@ export const floatStyle = defineComponentStyle({
     {
       css: {
         insetInlineEnd: "auto",
-        insetInlineStart: "{offsetInline, 0px}",
+        insetInlineStart: "{offset-inline, 0px}",
         translateX: "-50%",
       },
       placement: /start$/,
     },
     {
       css: {
-        insetInlineEnd: "{offsetInline, 0px}",
+        insetInlineEnd: "{offset-inline, 0px}",
         insetInlineStart: "auto",
         translateX: "50%",
       },

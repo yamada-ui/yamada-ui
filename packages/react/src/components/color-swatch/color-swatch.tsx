@@ -10,22 +10,12 @@ const defaultOverlays = (
 ): HTMLStyledProps[] => {
   const overlays: HTMLStyledProps[] = [
     {
+      "--body": ["colors.whiteAlpha.500", "colors.blackAlpha.500"],
+      "--checkers": ["colors.blackAlpha.300", "colors.whiteAlpha.300"],
       bgImage:
         "linear-gradient(45deg, {checkers} 25%, transparent 25%), linear-gradient(-45deg, {checkers} 25%, transparent 25%), linear-gradient(45deg, transparent 75%, {checkers} 75%), linear-gradient(-45deg, {body} 75%, {checkers} 75%)",
       bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
       bgSize: `8px 8px`,
-      vars: [
-        {
-          name: "checkers",
-          token: "colors",
-          value: ["blackAlpha.300", "whiteAlpha.300"],
-        },
-        {
-          name: "body",
-          token: "colors",
-          value: ["whiteAlpha.500", "blackAlpha.500"],
-        },
-      ],
     },
     { background },
   ]

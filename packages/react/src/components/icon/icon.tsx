@@ -1,6 +1,10 @@
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { IconStyle } from "./icon.style"
-import { createComponent, insertVars } from "../../core"
+import {
+  createComponent,
+  useInjectVarsIntoCss,
+  useInjectVarsIntoProps,
+} from "../../core"
 import { iconStyle } from "./icon.style"
 
 export interface IconProps
@@ -26,27 +30,10 @@ export const Icon = withContext("svg")(
     role: "img",
     verticalAlign: "middle",
   },
-  ({ css, ...rest }) => {
-    css = insertVars(css, [
-      {
-        name: "boxSize",
-        property: "fontSize",
-        token: "fontSizes",
-      },
-    ])
+  (props) => {
+    const css = useInjectVarsIntoCss(props.css, { fontSize: "size" })
+    const rest = useInjectVarsIntoProps(props, { fontSize: "size" })
 
-    rest = insertVars(rest, [
-      {
-        name: "boxSize",
-        property: "fontSize",
-        token: "fontSizes",
-      },
-    ])
-
-    return {
-      css,
-      boxSize: "{boxSize}",
-      ...rest,
-    }
+    return { ...rest, css, boxSize: "{size}" }
   },
 )

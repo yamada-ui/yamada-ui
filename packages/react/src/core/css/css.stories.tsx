@@ -34,11 +34,12 @@ export const Interpolation = () => {
 export const Variable = () => {
   return (
     <Box
+      css={{ "--bg": "colors.bg.contrast" }}
       bg="{bg}"
-      color="fg.contrast"
+      color="{fg}"
       p="md"
       rounded="md"
-      vars={[{ name: "bg", token: "colors", value: "bg.contrast" }]}
+      {...{ "--fg": "colors.fg.contrast" }}
     >
       Box
     </Box>

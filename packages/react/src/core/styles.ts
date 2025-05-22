@@ -1,8 +1,8 @@
 import type * as CSS from "csstype"
-import type { StringLiteral } from "../utils"
+import type { AnyString } from "../utils"
 import type { StyleConfigs } from "./config"
 import type { CSSObject, StyleValue } from "./css"
-import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"
+import type { ColorScheme, ThemeTokens } from "./theme"
 import { transforms } from "./config"
 import { pipe } from "./config/utils"
 
@@ -10,7 +10,7 @@ export type StandardStyleProperty = keyof typeof standardStyles
 
 export const standardStyles = {
   accentColor: {
-    properties: "accentColor",
+    properties: ["accentColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -22,7 +22,7 @@ export const standardStyles = {
   anchorName: true,
   anchorScope: true,
   animation: {
-    properties: "animation",
+    properties: ["animation"],
     token: "animations",
     transform: pipe(transforms.token("animations"), transforms.animation),
   },
@@ -30,14 +30,14 @@ export const standardStyles = {
   animationDelay: true,
   animationDirection: true,
   animationDuration: {
-    properties: "animationDuration",
+    properties: ["animationDuration"],
     token: "durations",
     transform: transforms.token("durations"),
   },
   animationFillMode: true,
   animationIterationCount: true,
   animationName: {
-    properties: "animationName",
+    properties: ["animationName"],
     token: "keyframes",
     transform: transforms.token("keyframes"),
   },
@@ -47,18 +47,18 @@ export const standardStyles = {
   animationRangeStart: true,
   animationTimeline: true,
   animationTimingFunction: {
-    properties: "animationTimingFunction",
+    properties: ["animationTimingFunction"],
     token: "easings",
     transform: transforms.token("easings"),
   },
   appearance: true,
   aspectRatio: {
-    properties: "aspectRatio",
+    properties: ["aspectRatio"],
     token: "aspectRatios",
     transform: transforms.token("aspectRatios"),
   },
   backdropBlur: {
-    properties: "--backdrop-blur",
+    properties: ["--backdrop-blur"],
     token: "blurs",
     transform: pipe(
       transforms.token("blurs"),
@@ -67,21 +67,21 @@ export const standardStyles = {
     ),
   },
   backdropBrightness: {
-    properties: "--backdrop-brightness",
+    properties: ["--backdrop-brightness"],
     transform: pipe(
       transforms.function("brightness"),
       transforms.filter("backdropFilter"),
     ),
   },
   backdropContrast: {
-    properties: "--backdrop-contrast",
+    properties: ["--backdrop-contrast"],
     transform: pipe(
       transforms.function("contrast"),
       transforms.filter("backdropFilter"),
     ),
   },
   backdropDropShadow: {
-    properties: "--backdrop-drop-shadow",
+    properties: ["--backdrop-drop-shadow"],
     token: "shadows",
     transform: pipe(
       transforms.token("shadows"),
@@ -91,14 +91,14 @@ export const standardStyles = {
   },
   backdropFilter: true,
   backdropGrayscale: {
-    properties: "--backdrop-grayscale",
+    properties: ["--backdrop-grayscale"],
     transform: pipe(
       transforms.function("grayscale"),
       transforms.filter("backdropFilter"),
     ),
   },
   backdropHueRotate: {
-    properties: "--backdrop-hue-rotate",
+    properties: ["--backdrop-hue-rotate"],
     transform: pipe(
       transforms.deg,
       transforms.function("hue-rotate"),
@@ -106,28 +106,28 @@ export const standardStyles = {
     ),
   },
   backdropInvert: {
-    properties: "--backdrop-invert",
+    properties: ["--backdrop-invert"],
     transform: pipe(
       transforms.function("invert"),
       transforms.filter("backdropFilter"),
     ),
   },
   backdropSaturate: {
-    properties: "--backdrop-saturate",
+    properties: ["--backdrop-saturate"],
     transform: pipe(
       transforms.function("saturate"),
       transforms.filter("backdropFilter"),
     ),
   },
   backdropSepia: {
-    properties: "--backdrop-sepia",
+    properties: ["--backdrop-sepia"],
     transform: pipe(
       transforms.function("sepia"),
       transforms.filter("backdropFilter"),
     ),
   },
   backfaceVisibility: {
-    properties: "backfaceVisibility",
+    properties: ["backfaceVisibility"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -137,23 +137,23 @@ export const standardStyles = {
     ),
   },
   background: {
-    properties: "background",
+    properties: ["background"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   backgroundAttachment: true,
   backgroundBlendMode: true,
   backgroundClip: {
-    properties: "backgroundClip",
+    properties: ["backgroundClip"],
     transform: transforms.bgClip,
   },
   backgroundColor: {
-    properties: "backgroundColor",
+    properties: ["backgroundColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   backgroundImage: {
-    properties: "backgroundImage",
+    properties: ["backgroundImage"],
     token: "gradients",
     transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
@@ -166,7 +166,7 @@ export const standardStyles = {
   baselineShift: true,
   baselineSource: true,
   blockSize: {
-    properties: "blockSize",
+    properties: ["blockSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -176,7 +176,7 @@ export const standardStyles = {
     ),
   },
   blur: {
-    properties: "--blur",
+    properties: ["--blur"],
     token: "blurs",
     transform: pipe(
       transforms.token("blurs"),
@@ -185,67 +185,67 @@ export const standardStyles = {
     ),
   },
   border: {
-    properties: "border",
+    properties: ["border"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlock: {
-    properties: "borderBlock",
+    properties: ["borderBlock"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlockColor: {
-    properties: "borderBlockColor",
+    properties: ["borderBlockColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBlockEnd: {
-    properties: "borderBlockEnd",
+    properties: ["borderBlockEnd"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlockEndColor: {
-    properties: "borderBlockEndColor",
+    properties: ["borderBlockEndColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBlockEndStyle: true,
   borderBlockEndWidth: {
-    properties: "borderBlockEndWidth",
+    properties: ["borderBlockEndWidth"],
     transform: transforms.px,
   },
   borderBlockStart: {
-    properties: "borderBlockStart",
+    properties: ["borderBlockStart"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlockStartColor: {
-    properties: "borderBlockStartColor",
+    properties: ["borderBlockStartColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBlockStartStyle: true,
   borderBlockStartWidth: {
-    properties: "borderBlockStartWidth",
+    properties: ["borderBlockStartWidth"],
     transform: transforms.px,
   },
   borderBlockStyle: true,
   borderBlockWidth: {
-    properties: "borderBlockWidth",
+    properties: ["borderBlockWidth"],
     transform: transforms.px,
   },
   borderBottom: {
-    properties: "borderBottom",
+    properties: ["borderBottom"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBottomColor: {
-    properties: "borderBottomColor",
+    properties: ["borderBottomColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBottomLeftRadius: {
-    properties: "borderBottomLeftRadius",
+    properties: ["borderBottomLeftRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -263,7 +263,7 @@ export const standardStyles = {
     ),
   },
   borderBottomRightRadius: {
-    properties: "borderBottomRightRadius",
+    properties: ["borderBottomRightRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -273,17 +273,17 @@ export const standardStyles = {
   },
   borderBottomStyle: true,
   borderBottomWidth: {
-    properties: "borderBottomWidth",
+    properties: ["borderBottomWidth"],
     transform: transforms.px,
   },
   borderCollapse: true,
   borderColor: {
-    properties: "borderColor",
+    properties: ["borderColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderEndEndRadius: {
-    properties: "borderEndEndRadius",
+    properties: ["borderEndEndRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -292,7 +292,7 @@ export const standardStyles = {
     ),
   },
   borderEndStartRadius: {
-    properties: "borderEndStartRadius",
+    properties: ["borderEndStartRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -301,7 +301,7 @@ export const standardStyles = {
     ),
   },
   borderImage: {
-    properties: "borderImage",
+    properties: ["borderImage"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
@@ -309,31 +309,31 @@ export const standardStyles = {
   borderImageRepeat: true,
   borderImageSlice: true,
   borderImageSource: {
-    properties: "borderImageSource",
+    properties: ["borderImageSource"],
     token: "gradients",
     transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
   borderImageWidth: {
-    properties: "borderImageWidth",
+    properties: ["borderImageWidth"],
     transform: transforms.px,
   },
   borderInline: {
-    properties: "borderInline",
+    properties: ["borderInline"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderInlineColor: {
-    properties: "borderInlineColor",
+    properties: ["borderInlineColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderInlineEnd: {
-    properties: "borderInlineEnd",
+    properties: ["borderInlineEnd"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderInlineEndColor: {
-    properties: "borderInlineEndColor",
+    properties: ["borderInlineEndColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -348,16 +348,16 @@ export const standardStyles = {
   },
   borderInlineEndStyle: true,
   borderInlineEndWidth: {
-    properties: "borderInlineEndWidth",
+    properties: ["borderInlineEndWidth"],
     transform: transforms.px,
   },
   borderInlineStart: {
-    properties: "borderInlineStart",
+    properties: ["borderInlineStart"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderInlineStartColor: {
-    properties: "borderInlineStartColor",
+    properties: ["borderInlineStartColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -372,21 +372,21 @@ export const standardStyles = {
   },
   borderInlineStartStyle: true,
   borderInlineStartWidth: {
-    properties: "borderInlineStartWidth",
+    properties: ["borderInlineStartWidth"],
     transform: transforms.px,
   },
   borderInlineStyle: true,
   borderInlineWidth: {
-    properties: "borderInlineWidth",
+    properties: ["borderInlineWidth"],
     transform: transforms.px,
   },
   borderLeft: {
-    properties: "borderLeft",
+    properties: ["borderLeft"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderLeftColor: {
-    properties: "borderLeftColor",
+    properties: ["borderLeftColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -400,9 +400,12 @@ export const standardStyles = {
     ),
   },
   borderLeftStyle: true,
-  borderLeftWidth: { properties: "borderLeftWidth", transform: transforms.px },
+  borderLeftWidth: {
+    properties: ["borderLeftWidth"],
+    transform: transforms.px,
+  },
   borderRadius: {
-    properties: "borderRadius",
+    properties: ["borderRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -411,12 +414,12 @@ export const standardStyles = {
     ),
   },
   borderRight: {
-    properties: "borderRight",
+    properties: ["borderRight"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderRightColor: {
-    properties: "borderRightColor",
+    properties: ["borderRightColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -431,12 +434,12 @@ export const standardStyles = {
   },
   borderRightStyle: true,
   borderRightWidth: {
-    properties: "borderRightWidth",
+    properties: ["borderRightWidth"],
     transform: transforms.px,
   },
   borderSpacing: true,
   borderStartEndRadius: {
-    properties: "borderStartEndRadius",
+    properties: ["borderStartEndRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -445,7 +448,7 @@ export const standardStyles = {
     ),
   },
   borderStartStartRadius: {
-    properties: "borderStartStartRadius",
+    properties: ["borderStartStartRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -455,17 +458,17 @@ export const standardStyles = {
   },
   borderStyle: true,
   borderTop: {
-    properties: "borderTop",
+    properties: ["borderTop"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderTopColor: {
-    properties: "borderTopColor",
+    properties: ["borderTopColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderTopLeftRadius: {
-    properties: "borderTopLeftRadius",
+    properties: ["borderTopLeftRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -483,7 +486,7 @@ export const standardStyles = {
     ),
   },
   borderTopRightRadius: {
-    properties: "borderTopRightRadius",
+    properties: ["borderTopRightRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -492,8 +495,8 @@ export const standardStyles = {
     ),
   },
   borderTopStyle: true,
-  borderTopWidth: { properties: "borderTopWidth", transform: transforms.px },
-  borderWidth: { properties: "borderWidth", transform: transforms.px },
+  borderTopWidth: { properties: ["borderTopWidth"], transform: transforms.px },
+  borderWidth: { properties: ["borderWidth"], transform: transforms.px },
   borderX: {
     properties: ["borderLeft", "borderRight"],
     token: "borders",
@@ -505,7 +508,7 @@ export const standardStyles = {
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   bottom: {
-    properties: "bottom",
+    properties: ["bottom"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -523,7 +526,7 @@ export const standardStyles = {
   boxOrient: true,
   boxPack: true,
   boxShadow: {
-    properties: "boxShadow",
+    properties: ["boxShadow"],
     token: "shadows",
     transform: transforms.token("shadows"),
   },
@@ -542,12 +545,12 @@ export const standardStyles = {
   breakBefore: true,
   breakInside: true,
   brightness: {
-    properties: "--brightness",
+    properties: ["--brightness"],
     transform: pipe(transforms.function("brightness"), transforms.filter()),
   },
   captionSide: true,
   caretColor: {
-    properties: "caretColor",
+    properties: ["caretColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -556,18 +559,18 @@ export const standardStyles = {
   clipPath: true,
   clipRule: true,
   color: {
-    properties: "color",
+    properties: ["color"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   colorAdjust: true,
   colorInterpolation: true,
   colorInterpolationFilters: true,
-  colorMode: { properties: "colorScheme" },
+  colorMode: { properties: ["colorScheme"] },
   columnCount: true,
   columnFill: true,
   columnGap: {
-    properties: "columnGap",
+    properties: ["columnGap"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -575,18 +578,21 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
-  columnRule: { properties: "columnRule", transform: transforms.px },
+  columnRule: { properties: ["columnRule"], transform: transforms.px },
   columnRuleColor: {
-    properties: "columnRuleColor",
+    properties: ["columnRuleColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   columnRuleStyle: true,
-  columnRuleWidth: { properties: "columnRuleWidth", transform: transforms.px },
+  columnRuleWidth: {
+    properties: ["columnRuleWidth"],
+    transform: transforms.px,
+  },
   columns: true,
   columnSpan: true,
   columnWidth: {
-    properties: "columnWidth",
+    properties: ["columnWidth"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -604,7 +610,7 @@ export const standardStyles = {
   containIntrinsicInlineSize: true,
   containIntrinsicSize: true,
   containIntrinsicWidth: {
-    properties: "containIntrinsicWidth",
+    properties: ["containIntrinsicWidth"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -616,7 +622,7 @@ export const standardStyles = {
   content: true,
   contentVisibility: true,
   contrast: {
-    properties: "--contrast",
+    properties: ["--contrast"],
     transform: pipe(transforms.function("contrast"), transforms.filter()),
   },
   counterIncrement: true,
@@ -630,7 +636,7 @@ export const standardStyles = {
   display: true,
   dominantBaseline: true,
   dropShadow: {
-    properties: "--drop-shadow",
+    properties: ["--drop-shadow"],
     token: "shadows",
     transform: pipe(
       transforms.token("shadows"),
@@ -642,7 +648,7 @@ export const standardStyles = {
   emptyCells: true,
   fieldSizing: true,
   fill: {
-    properties: "fill",
+    properties: ["fill"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -651,7 +657,7 @@ export const standardStyles = {
   filter: true,
   flex: true,
   flexBasis: {
-    properties: "flexBasis",
+    properties: ["flexBasis"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -667,19 +673,19 @@ export const standardStyles = {
   flexWrap: true,
   float: true,
   floodColor: {
-    properties: "floodColor",
+    properties: ["floodColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   floodOpacity: true,
   focusRing: { transform: transforms.focusRing("&:is(:focus, [data-focus])") },
   focusRingColor: {
-    properties: "--focus-ring-color",
+    properties: ["--focus-ring-color"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   focusRingOffset: {
-    properties: "--focus-ring-offset",
+    properties: ["--focus-ring-offset"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -687,8 +693,8 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
-  focusRingStyle: { properties: "--focus-ring-style" },
-  focusRingWidth: { properties: "--focus-ring-width" },
+  focusRingStyle: { properties: ["--focus-ring-style"] },
+  focusRingWidth: { properties: ["--focus-ring-width"] },
   focusVisibleRing: {
     transform: transforms.focusRing(
       "&:is(:focus-visible, [data-focus-visible])",
@@ -696,7 +702,7 @@ export const standardStyles = {
   },
   font: true,
   fontFamily: {
-    properties: "fontFamily",
+    properties: ["fontFamily"],
     token: "fonts",
     transform: transforms.token("fonts"),
   },
@@ -706,7 +712,7 @@ export const standardStyles = {
   fontOpticalSizing: true,
   fontPalette: true,
   fontSize: {
-    properties: "fontSize",
+    properties: ["fontSize"],
     token: "fontSizes",
     transform: pipe(
       transforms.token("fontSizes"),
@@ -733,14 +739,14 @@ export const standardStyles = {
   fontVariantPosition: true,
   fontVariationSettings: true,
   fontWeight: {
-    properties: "fontWeight",
+    properties: ["fontWeight"],
     token: "fontWeights",
     transform: transforms.token("fontWeights"),
   },
   fontWidth: true,
   forcedColorAdjust: true,
   gap: {
-    properties: "gap",
+    properties: ["gap"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -751,13 +757,13 @@ export const standardStyles = {
   glyphOrientationHorizontal: true,
   glyphOrientationVertical: true,
   grayscale: {
-    properties: "--grayscale",
+    properties: ["--grayscale"],
     transform: pipe(transforms.function("grayscale"), transforms.filter()),
   },
   grid: true,
   gridArea: true,
   gridAutoColumns: {
-    properties: "gridAutoColumns",
+    properties: ["gridAutoColumns"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -768,7 +774,7 @@ export const standardStyles = {
   },
   gridAutoFlow: true,
   gridAutoRows: {
-    properties: "gridAutoRows",
+    properties: ["gridAutoRows"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -786,7 +792,7 @@ export const standardStyles = {
   gridTemplate: true,
   gridTemplateAreas: true,
   gridTemplateColumns: {
-    properties: "gridTemplateColumns",
+    properties: ["gridTemplateColumns"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -796,7 +802,7 @@ export const standardStyles = {
     ),
   },
   gridTemplateRows: {
-    properties: "gridTemplateRows",
+    properties: ["gridTemplateRows"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -807,7 +813,7 @@ export const standardStyles = {
   },
   hangingPunctuation: true,
   height: {
-    properties: "height",
+    properties: ["height"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -817,7 +823,7 @@ export const standardStyles = {
     ),
   },
   hueRotate: {
-    properties: "--hue-rotate",
+    properties: ["--hue-rotate"],
     transform: pipe(
       transforms.deg,
       transforms.function("hue-rotate"),
@@ -832,7 +838,7 @@ export const standardStyles = {
   imeMode: true,
   initialLetter: true,
   inlineSize: {
-    properties: "inlineSize",
+    properties: ["inlineSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -842,7 +848,7 @@ export const standardStyles = {
     ),
   },
   inset: {
-    properties: "inset",
+    properties: ["inset"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -851,7 +857,7 @@ export const standardStyles = {
     ),
   },
   insetBlock: {
-    properties: "insetBlock",
+    properties: ["insetBlock"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -860,7 +866,7 @@ export const standardStyles = {
     ),
   },
   insetBlockEnd: {
-    properties: "insetBlockEnd",
+    properties: ["insetBlockEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -869,7 +875,7 @@ export const standardStyles = {
     ),
   },
   insetBlockStart: {
-    properties: "insetBlockStart",
+    properties: ["insetBlockStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -878,7 +884,7 @@ export const standardStyles = {
     ),
   },
   insetInline: {
-    properties: "insetInline",
+    properties: ["insetInline"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -887,7 +893,7 @@ export const standardStyles = {
     ),
   },
   insetInlineEnd: {
-    properties: "insetInlineEnd",
+    properties: ["insetInlineEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -896,7 +902,7 @@ export const standardStyles = {
     ),
   },
   insetInlineStart: {
-    properties: "insetInlineStart",
+    properties: ["insetInlineStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -925,7 +931,7 @@ export const standardStyles = {
   interactivity: true,
   interpolateSize: true,
   invert: {
-    properties: "--invert",
+    properties: ["--invert"],
     transform: pipe(transforms.function("invert"), transforms.filter()),
   },
   isolation: true,
@@ -933,7 +939,7 @@ export const standardStyles = {
   justifyItems: true,
   justifySelf: true,
   left: {
-    properties: "left",
+    properties: ["left"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -942,31 +948,31 @@ export const standardStyles = {
     ),
   },
   letterSpacing: {
-    properties: "letterSpacing",
+    properties: ["letterSpacing"],
     token: "letterSpacings",
     transform: transforms.token("letterSpacings"),
   },
   lightingColor: {
-    properties: "lightingColor",
+    properties: ["lightingColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   lineBreak: true,
   lineHeight: {
-    properties: "lineHeight",
+    properties: ["lineHeight"],
     token: "lineHeights",
     transform: transforms.token("lineHeights"),
   },
   listStyle: true,
   listStyleImage: {
-    properties: "listStyleImage",
+    properties: ["listStyleImage"],
     token: "gradients",
     transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
   listStylePosition: true,
   listStyleType: true,
   margin: {
-    properties: "margin",
+    properties: ["margin"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -975,7 +981,7 @@ export const standardStyles = {
     ),
   },
   marginBlock: {
-    properties: "marginBlock",
+    properties: ["marginBlock"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -984,7 +990,7 @@ export const standardStyles = {
     ),
   },
   marginBlockEnd: {
-    properties: "marginBlockEnd",
+    properties: ["marginBlockEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -993,7 +999,7 @@ export const standardStyles = {
     ),
   },
   marginBlockStart: {
-    properties: "marginBlockStart",
+    properties: ["marginBlockStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1002,7 +1008,7 @@ export const standardStyles = {
     ),
   },
   marginBottom: {
-    properties: "marginBottom",
+    properties: ["marginBottom"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1011,7 +1017,7 @@ export const standardStyles = {
     ),
   },
   marginInline: {
-    properties: "marginInline",
+    properties: ["marginInline"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1020,7 +1026,7 @@ export const standardStyles = {
     ),
   },
   marginInlineEnd: {
-    properties: "marginInlineEnd",
+    properties: ["marginInlineEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1029,7 +1035,7 @@ export const standardStyles = {
     ),
   },
   marginInlineStart: {
-    properties: "marginInlineStart",
+    properties: ["marginInlineStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1038,7 +1044,7 @@ export const standardStyles = {
     ),
   },
   marginLeft: {
-    properties: "marginLeft",
+    properties: ["marginLeft"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1047,7 +1053,7 @@ export const standardStyles = {
     ),
   },
   marginRight: {
-    properties: "marginRight",
+    properties: ["marginRight"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1056,7 +1062,7 @@ export const standardStyles = {
     ),
   },
   marginTop: {
-    properties: "marginTop",
+    properties: ["marginTop"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1093,11 +1099,14 @@ export const standardStyles = {
   maskBorderRepeat: true,
   maskBorderSlice: true,
   maskBorderSource: true,
-  maskBorderWidth: { properties: "maskBorderWidth", transform: transforms.px },
+  maskBorderWidth: {
+    properties: ["maskBorderWidth"],
+    transform: transforms.px,
+  },
   maskClip: true,
   maskComposite: true,
   maskImage: {
-    properties: "maskImage",
+    properties: ["maskImage"],
     token: "gradients",
     transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
@@ -1111,7 +1120,7 @@ export const standardStyles = {
   mathShift: true,
   mathStyle: true,
   maxBlockSize: {
-    properties: "maxBlockSize",
+    properties: ["maxBlockSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1131,7 +1140,7 @@ export const standardStyles = {
     ),
   },
   maxHeight: {
-    properties: "maxHeight",
+    properties: ["maxHeight"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1141,7 +1150,7 @@ export const standardStyles = {
     ),
   },
   maxInlineSize: {
-    properties: "maxInlineSize",
+    properties: ["maxInlineSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1151,7 +1160,7 @@ export const standardStyles = {
     ),
   },
   maxWidth: {
-    properties: "maxWidth",
+    properties: ["maxWidth"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1161,7 +1170,7 @@ export const standardStyles = {
     ),
   },
   minBlockSize: {
-    properties: "minBlockSize",
+    properties: ["minBlockSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1181,7 +1190,7 @@ export const standardStyles = {
     ),
   },
   minHeight: {
-    properties: "minHeight",
+    properties: ["minHeight"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1191,7 +1200,7 @@ export const standardStyles = {
     ),
   },
   minInlineSize: {
-    properties: "minInlineSize",
+    properties: ["minInlineSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1201,7 +1210,7 @@ export const standardStyles = {
     ),
   },
   minWidth: {
-    properties: "minWidth",
+    properties: ["minWidth"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1225,13 +1234,13 @@ export const standardStyles = {
   orphans: true,
   outline: {},
   outlineColor: {
-    properties: "outlineColor",
+    properties: ["outlineColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   outlineOffset: true,
   outlineStyle: true,
-  outlineWidth: { properties: "outlineWidth", transform: transforms.px },
+  outlineWidth: { properties: ["outlineWidth"], transform: transforms.px },
   overflow: true,
   overflowAnchor: true,
   overflowBlock: true,
@@ -1247,7 +1256,7 @@ export const standardStyles = {
   overscrollBehaviorX: true,
   overscrollBehaviorY: true,
   padding: {
-    properties: "padding",
+    properties: ["padding"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1256,7 +1265,7 @@ export const standardStyles = {
     ),
   },
   paddingBlock: {
-    properties: "paddingBlock",
+    properties: ["paddingBlock"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1265,7 +1274,7 @@ export const standardStyles = {
     ),
   },
   paddingBlockEnd: {
-    properties: "paddingBlockEnd",
+    properties: ["paddingBlockEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1274,7 +1283,7 @@ export const standardStyles = {
     ),
   },
   paddingBlockStart: {
-    properties: "paddingBlockStart",
+    properties: ["paddingBlockStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1283,7 +1292,7 @@ export const standardStyles = {
     ),
   },
   paddingBottom: {
-    properties: "paddingBottom",
+    properties: ["paddingBottom"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1292,7 +1301,7 @@ export const standardStyles = {
     ),
   },
   paddingInline: {
-    properties: "paddingInline",
+    properties: ["paddingInline"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1301,7 +1310,7 @@ export const standardStyles = {
     ),
   },
   paddingInlineEnd: {
-    properties: "paddingInlineEnd",
+    properties: ["paddingInlineEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1310,7 +1319,7 @@ export const standardStyles = {
     ),
   },
   paddingInlineStart: {
-    properties: "paddingInlineStart",
+    properties: ["paddingInlineStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1319,7 +1328,7 @@ export const standardStyles = {
     ),
   },
   paddingLeft: {
-    properties: "paddingLeft",
+    properties: ["paddingLeft"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1328,7 +1337,7 @@ export const standardStyles = {
     ),
   },
   paddingRight: {
-    properties: "paddingRight",
+    properties: ["paddingRight"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1337,7 +1346,7 @@ export const standardStyles = {
     ),
   },
   paddingTop: {
-    properties: "paddingTop",
+    properties: ["paddingTop"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1388,7 +1397,7 @@ export const standardStyles = {
   readingOrder: true,
   resize: true,
   right: {
-    properties: "right",
+    properties: ["right"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1396,9 +1405,9 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
-  rotate: { properties: "rotate", transform: transforms.deg },
+  rotate: { properties: ["rotate"], transform: transforms.deg },
   rotateX: {
-    properties: "--rotate-x",
+    properties: ["--rotate-x"],
     transform: pipe(
       transforms.deg,
       transforms.function("rotateX"),
@@ -1406,7 +1415,7 @@ export const standardStyles = {
     ),
   },
   rotateY: {
-    properties: "--rotate-y",
+    properties: ["--rotate-y"],
     transform: pipe(
       transforms.deg,
       transforms.function("rotateY"),
@@ -1414,7 +1423,7 @@ export const standardStyles = {
     ),
   },
   rotateZ: {
-    properties: "--rotate-z",
+    properties: ["--rotate-z"],
     transform: pipe(
       transforms.deg,
       transforms.function("rotateZ"),
@@ -1422,7 +1431,7 @@ export const standardStyles = {
     ),
   },
   rowGap: {
-    properties: "rowGap",
+    properties: ["rowGap"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1436,33 +1445,33 @@ export const standardStyles = {
   rx: true,
   ry: true,
   saturate: {
-    properties: "--saturate",
+    properties: ["--saturate"],
     transform: pipe(transforms.function("saturate"), transforms.filter()),
   },
   scale: true,
   scaleX: {
-    properties: "--scale-x",
+    properties: ["--scale-x"],
     transform: pipe(transforms.function("scaleX"), transforms.transform),
   },
   scaleY: {
-    properties: "--scale-y",
+    properties: ["--scale-y"],
     transform: pipe(transforms.function("scaleY"), transforms.transform),
   },
   scaleZ: {
-    properties: "--scale-z",
+    properties: ["--scale-z"],
     transform: pipe(transforms.function("scaleZ"), transforms.transform),
   },
   scrollbarColor: {
-    properties: "scrollbarColor",
+    properties: ["scrollbarColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   scrollbarGutter: true,
-  scrollbarWidth: { properties: "scrollbarWidth", transform: transforms.px },
+  scrollbarWidth: { properties: ["scrollbarWidth"], transform: transforms.px },
   scrollBehavior: true,
   scrollInitialTarget: true,
   scrollMargin: {
-    properties: "scrollMargin",
+    properties: ["scrollMargin"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1474,7 +1483,7 @@ export const standardStyles = {
   scrollMarginBlockEnd: true,
   scrollMarginBlockStart: true,
   scrollMarginBottom: {
-    properties: "scrollMarginBottom",
+    properties: ["scrollMarginBottom"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1486,7 +1495,7 @@ export const standardStyles = {
   scrollMarginInlineEnd: true,
   scrollMarginInlineStart: true,
   scrollMarginLeft: {
-    properties: "scrollMarginLeft",
+    properties: ["scrollMarginLeft"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1495,7 +1504,7 @@ export const standardStyles = {
     ),
   },
   scrollMarginRight: {
-    properties: "scrollMarginRight",
+    properties: ["scrollMarginRight"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1504,7 +1513,7 @@ export const standardStyles = {
     ),
   },
   scrollMarginTop: {
-    properties: "scrollMarginTop",
+    properties: ["scrollMarginTop"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1532,7 +1541,7 @@ export const standardStyles = {
   },
   scrollMarkerGroup: true,
   scrollPadding: {
-    properties: "scrollPadding",
+    properties: ["scrollPadding"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1544,7 +1553,7 @@ export const standardStyles = {
   scrollPaddingBlockEnd: true,
   scrollPaddingBlockStart: true,
   scrollPaddingBottom: {
-    properties: "scrollPaddingBottom",
+    properties: ["scrollPaddingBottom"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1556,7 +1565,7 @@ export const standardStyles = {
   scrollPaddingInlineEnd: true,
   scrollPaddingInlineStart: true,
   scrollPaddingLeft: {
-    properties: "scrollPaddingLeft",
+    properties: ["scrollPaddingLeft"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1565,7 +1574,7 @@ export const standardStyles = {
     ),
   },
   scrollPaddingRight: {
-    properties: "scrollPaddingRight",
+    properties: ["scrollPaddingRight"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1574,7 +1583,7 @@ export const standardStyles = {
     ),
   },
   scrollPaddingTop: {
-    properties: "scrollPaddingTop",
+    properties: ["scrollPaddingTop"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1607,7 +1616,7 @@ export const standardStyles = {
   scrollTimelineAxis: true,
   scrollTimelineName: true,
   sepia: {
-    properties: "--sepia",
+    properties: ["--sepia"],
     transform: pipe(transforms.function("sepia"), transforms.filter()),
   },
   shapeImageThreshold: true,
@@ -1615,7 +1624,7 @@ export const standardStyles = {
   shapeOutside: true,
   shapeRendering: true,
   skewX: {
-    properties: "--skew-x",
+    properties: ["--skew-x"],
     transform: pipe(
       transforms.deg,
       transforms.function("skewX"),
@@ -1623,7 +1632,7 @@ export const standardStyles = {
     ),
   },
   skewY: {
-    properties: "--skew-y",
+    properties: ["--skew-y"],
     transform: pipe(
       transforms.deg,
       transforms.function("skewY"),
@@ -1635,7 +1644,7 @@ export const standardStyles = {
   stopColor: true,
   stopOpacity: true,
   stroke: {
-    properties: "stroke",
+    properties: ["stroke"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -1646,7 +1655,7 @@ export const standardStyles = {
   strokeLinejoin: true,
   strokeMiterlimit: true,
   strokeOpacity: true,
-  strokeWidth: { properties: "strokeWidth", transform: transforms.px },
+  strokeWidth: { properties: ["strokeWidth"], transform: transforms.px },
   tableLayout: true,
   tabSize: true,
   textAlign: true,
@@ -1659,7 +1668,7 @@ export const standardStyles = {
   textCombineUpright: true,
   textDecoration: true,
   textDecorationColor: {
-    properties: "textDecorationColor",
+    properties: ["textDecorationColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -1670,7 +1679,7 @@ export const standardStyles = {
   textDecorationThickness: true,
   textEmphasis: true,
   textEmphasisColor: {
-    properties: "textEmphasisColor",
+    properties: ["textEmphasisColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -1682,7 +1691,7 @@ export const standardStyles = {
   textOverflow: true,
   textRendering: true,
   textShadow: {
-    properties: "textShadow",
+    properties: ["textShadow"],
     token: "shadows",
     transform: transforms.token("shadows"),
   },
@@ -1696,7 +1705,7 @@ export const standardStyles = {
   textWrapStyle: true,
   timelineScope: true,
   top: {
-    properties: "top",
+    properties: ["top"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1713,18 +1722,18 @@ export const standardStyles = {
   transitionBehavior: true,
   transitionDelay: true,
   transitionDuration: {
-    properties: "transitionDuration",
+    properties: ["transitionDuration"],
     token: "durations",
     transform: transforms.token("durations"),
   },
   transitionProperty: { transform: transforms.transition("property") },
   transitionTimingFunction: {
-    properties: "transitionTimingFunction",
+    properties: ["transitionTimingFunction"],
     token: "easings",
     transform: transforms.token("easings"),
   },
   translateX: {
-    properties: "--translate-x",
+    properties: ["--translate-x"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1735,7 +1744,7 @@ export const standardStyles = {
     ),
   },
   translateY: {
-    properties: "--translate-y",
+    properties: ["--translate-y"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1746,7 +1755,7 @@ export const standardStyles = {
     ),
   },
   translateZ: {
-    properties: "--translate-z",
+    properties: ["--translate-z"],
     transform: pipe(transforms.function("translateZ"), transforms.transform),
   },
   unicodeBidi: true,
@@ -1765,7 +1774,7 @@ export const standardStyles = {
   whiteSpaceCollapse: true,
   widows: true,
   width: {
-    properties: "width",
+    properties: ["width"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1781,7 +1790,7 @@ export const standardStyles = {
   x: true,
   y: true,
   zIndex: {
-    properties: "zIndex",
+    properties: ["zIndex"],
     token: "zIndices",
     transform: transforms.token("zIndices"),
   },
@@ -1793,38 +1802,38 @@ export type ShorthandStyleProperty = keyof typeof shorthandStyles
 export const shorthandStyles = {
   accent: standardStyles.accentColor,
   bg: standardStyles.background,
-  bgAttachment: { properties: "backgroundAttachment" },
-  bgBlendMode: { properties: "backgroundBlendMode" },
+  bgAttachment: { properties: ["backgroundAttachment"] },
+  bgBlendMode: { properties: ["backgroundBlendMode"] },
   bgClip: standardStyles.backgroundClip,
   bgColor: standardStyles.backgroundColor,
   bgGradient: standardStyles.backgroundImage,
   bgImage: standardStyles.backgroundImage,
   bgImg: standardStyles.backgroundImage,
-  bgOrigin: { properties: "backgroundOrigin" },
-  bgPosition: { properties: "backgroundPosition" },
-  bgPositionX: { properties: "backgroundPositionX" },
-  bgPositionY: { properties: "backgroundPositionY" },
-  bgPosX: { properties: "backgroundPositionX" },
-  bgPosY: { properties: "backgroundPositionY" },
-  bgRepeat: { properties: "backgroundRepeat" },
-  bgSize: { properties: "backgroundSize" },
-  blendMode: { properties: "mixBlendMode" },
+  bgOrigin: { properties: ["backgroundOrigin"] },
+  bgPosition: { properties: ["backgroundPosition"] },
+  bgPositionX: { properties: ["backgroundPositionX"] },
+  bgPositionY: { properties: ["backgroundPositionY"] },
+  bgPosX: { properties: ["backgroundPositionX"] },
+  bgPosY: { properties: ["backgroundPositionY"] },
+  bgRepeat: { properties: ["backgroundRepeat"] },
+  bgSize: { properties: ["backgroundSize"] },
+  blendMode: { properties: ["mixBlendMode"] },
   borderBottomEndRadius: standardStyles.borderEndEndRadius,
   borderBottomStartRadius: standardStyles.borderEndStartRadius,
   borderEnd: standardStyles.borderInlineEnd,
   borderEndColor: standardStyles.borderInlineEndColor,
   borderEndRadius: standardStyles.borderInlineEndRadius,
-  borderEndStyle: { properties: "borderInlineEndStyle" },
+  borderEndStyle: { properties: ["borderInlineEndStyle"] },
   borderEndWidth: standardStyles.borderInlineEndWidth,
   borderStart: standardStyles.borderInlineStart,
   borderStartColor: standardStyles.borderInlineStartColor,
   borderStartRadius: standardStyles.borderInlineStartRadius,
-  borderStartStyle: { properties: "borderInlineStartStyle" },
+  borderStartStyle: { properties: ["borderInlineStartStyle"] },
   borderStartWidth: standardStyles.borderInlineStartWidth,
   borderTopEndRadius: standardStyles.borderStartEndRadius,
   borderTopStartRadius: standardStyles.borderStartStartRadius,
   caret: standardStyles.caretColor,
-  flexDir: { properties: "flexDirection" },
+  flexDir: { properties: ["flexDirection"] },
   g: standardStyles.gap,
   gapX: standardStyles.columnGap,
   gapY: standardStyles.rowGap,
@@ -1835,7 +1844,7 @@ export const shorthandStyles = {
   insetStart: standardStyles.insetInlineStart,
   leading: standardStyles.lineHeight,
   listStyleImg: standardStyles.listStyleImage,
-  listStylePos: { properties: "listStylePosition" },
+  listStylePos: { properties: ["listStylePosition"] },
   m: standardStyles.margin,
   marginEnd: standardStyles.marginInlineEnd,
   marginStart: standardStyles.marginInlineStart,
@@ -1851,16 +1860,16 @@ export const shorthandStyles = {
   mt: standardStyles.marginTop,
   mx: standardStyles.marginX,
   my: standardStyles.marginY,
-  overscroll: { properties: "overscrollBehavior" },
-  overscrollX: { properties: "overscrollBehaviorX" },
-  overscrollY: { properties: "overscrollBehaviorY" },
+  overscroll: { properties: ["overscrollBehavior"] },
+  overscrollX: { properties: ["overscrollBehaviorX"] },
+  overscrollY: { properties: ["overscrollBehaviorY"] },
   p: standardStyles.padding,
   paddingEnd: standardStyles.paddingInlineEnd,
   paddingStart: standardStyles.paddingInlineStart,
   pb: standardStyles.paddingBottom,
   pe: standardStyles.paddingInlineEnd,
   pl: standardStyles.paddingLeft,
-  pos: { properties: "position" },
+  pos: { properties: ["position"] },
   pr: standardStyles.paddingRight,
   ps: standardStyles.paddingInlineStart,
   pt: standardStyles.paddingTop,
@@ -1884,7 +1893,7 @@ export const shorthandStyles = {
   shadow: standardStyles.boxShadow,
   text: standardStyles.fontSize,
   textColor: standardStyles.color,
-  textDecor: { properties: "textDecoration" },
+  textDecor: { properties: ["textDecoration"] },
   tracking: standardStyles.letterSpacing,
   w: standardStyles.width,
   z: standardStyles.zIndex,
@@ -1893,8 +1902,8 @@ export const shorthandStyles = {
 export type PseudoStyleProperty = keyof typeof pseudoStyles
 
 export const pseudoStyles = {
-  "&::after": { properties: "&::after", transform: transforms.content },
-  "&::before": { properties: "&::before", transform: transforms.content },
+  "&::after": { properties: ["&::after"], transform: transforms.content },
+  "&::before": { properties: ["&::before"], transform: transforms.content },
 } as const satisfies StyleConfigs
 
 export type UIStyleProperty = keyof typeof uiStyles
@@ -1905,7 +1914,7 @@ export const uiStyles = {
   textStyle: { transform: transforms.styles("textStyles") },
   colorScheme: { transform: transforms.colorScheme },
   lineClamp: {
-    properties: "--line-clamp",
+    properties: ["--line-clamp"],
     static: {
       display: "-webkit-box",
       overflow: "hidden",
@@ -1915,25 +1924,26 @@ export const uiStyles = {
     },
   },
   truncated: { transform: transforms.truncated },
-  vars: { transform: transforms.vars },
 } as const satisfies StyleConfigs
 
 export type AtRuleStyleProperty = keyof typeof atRuleStyles
 
 export const atRuleStyles = {
   keyframes: {
-    properties: "animationName",
+    properties: ["animationName"],
     token: "keyframes",
     transform: pipe(transforms.token("keyframes"), transforms.keyframes),
   },
   _container: { transform: transforms.container },
-  _landscape: { properties: "@media (orientation: landscape)" },
+  _landscape: { properties: ["@media (orientation: landscape)"] },
   _media: { transform: transforms.media },
-  _mediaDark: { properties: "@media (prefers-color-scheme: dark)" },
-  _mediaLight: { properties: "@media (prefers-color-scheme: light)" },
-  _mediaReduceMotion: { properties: "@media (prefers-reduced-motion: reduce)" },
-  _portrait: { properties: "@media (orientation: portrait)" },
-  _print: { properties: "@media print" },
+  _mediaDark: { properties: ["@media (prefers-color-scheme: dark)"] },
+  _mediaLight: { properties: ["@media (prefers-color-scheme: light)"] },
+  _mediaReduceMotion: {
+    properties: ["@media (prefers-reduced-motion: reduce)"],
+  },
+  _portrait: { properties: ["@media (orientation: portrait)"] },
+  _print: { properties: ["@media print"] },
   _supports: { transform: transforms.supports },
 } as const satisfies StyleConfigs
 
@@ -1954,7 +1964,6 @@ export const styleProperties = Object.keys(styles) as StyleProperty[]
 export type VariableLengthProperty = (typeof variableLengthProperties)[number]
 
 export const variableLengthProperties = [
-  "vars",
   "_container",
   "_media",
   "_supports",
@@ -2268,15 +2277,15 @@ export interface StyleProps {
    *
    * This will apply styles defined in `theme.styles.mdx.h1`
    */
-  apply?: StyleValue<StringLiteral, "apply">
+  apply?: StyleValue<AnyString, "apply">
   /**
    * Apply layer styles defined in `theme.layerStyles`.
    */
-  layerStyle?: StyleValue<StringLiteral, "layerStyles">
+  layerStyle?: StyleValue<AnyString, "layerStyles">
   /**
    * Apply text styles defined in `theme.textStyles`.
    */
-  textStyle?: StyleValue<StringLiteral, "textStyles">
+  textStyle?: StyleValue<AnyString, "textStyles">
   /**
    * Set color scheme variables.
    */
@@ -2370,7 +2379,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  anchorName?: StyleValue<string & {}>
+  anchorName?: StyleValue<AnyString>
   /**
    * ### anchor-scope
    *
@@ -2382,7 +2391,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  anchorScope?: StyleValue<string & {}>
+  anchorScope?: StyleValue<AnyString>
   /**
    * ### animation
    *
@@ -2580,19 +2589,19 @@ export interface StyleProps {
   /**
    * Sets the value of `--backdrop-blur`.
    */
-  backdropBlur?: StyleValue<StringLiteral, "blurs">
+  backdropBlur?: StyleValue<AnyString, "blurs">
   /**
    * Sets the value of `--backdrop-brightness`.
    */
-  backdropBrightness?: StyleValue<StringLiteral>
+  backdropBrightness?: StyleValue<AnyString>
   /**
    * Sets the value of `--backdrop-contrast`.
    */
-  backdropContrast?: StyleValue<StringLiteral>
+  backdropContrast?: StyleValue<AnyString>
   /**
    * Sets the value of `--backdrop-drop-shadow`.
    */
-  backdropDropShadow?: StyleValue<StringLiteral, "shadows">
+  backdropDropShadow?: StyleValue<AnyString, "shadows">
   /**
    * ### backdrop-filter
    *
@@ -2607,23 +2616,23 @@ export interface StyleProps {
   /**
    * Sets the value of `--backdrop-grayscale`.
    */
-  backdropGrayscale?: StyleValue<StringLiteral>
+  backdropGrayscale?: StyleValue<AnyString>
   /**
    * Sets the value of `--backdrop-hue-rotate`.
    */
-  backdropHueRotate?: StyleValue<StringLiteral>
+  backdropHueRotate?: StyleValue<AnyString>
   /**
    * Sets the value of `--backdrop-invert`.
    */
-  backdropInvert?: StyleValue<StringLiteral>
+  backdropInvert?: StyleValue<AnyString>
   /**
    * Sets the value of `--backdrop-saturate`.
    */
-  backdropSaturate?: StyleValue<StringLiteral>
+  backdropSaturate?: StyleValue<AnyString>
   /**
    * Sets the value of `--backdrop-sepia`.
    */
-  backdropSepia?: StyleValue<StringLiteral>
+  backdropSepia?: StyleValue<AnyString>
   /**
    * ### backface-visibility
    *
@@ -2802,7 +2811,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-inline/#baseline-source
    */
-  baselineSource?: StyleValue<string & {}>
+  baselineSource?: StyleValue<AnyString>
   /**
    * ### background
    *
@@ -3022,7 +3031,7 @@ export interface StyleProps {
   /**
    * Sets the value of `--blur`.
    */
-  blur?: StyleValue<StringLiteral, "blurs">
+  blur?: StyleValue<AnyString, "blurs">
   /**
    * ### border
    *
@@ -4429,7 +4438,7 @@ export interface StyleProps {
   /**
    * Sets the value of `--brightness`.
    */
-  brightness?: StyleValue<StringLiteral>
+  brightness?: StyleValue<AnyString>
   /**
    * ### caption-side
    *
@@ -4559,7 +4568,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation-filters
    */
-  colorInterpolationFilters?: StyleValue<string & {}>
+  colorInterpolationFilters?: StyleValue<AnyString>
   /**
    * ### column-count
    *
@@ -4861,7 +4870,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cx
    */
-  cx?: StyleValue<string & {}>
+  cx?: StyleValue<AnyString>
   /**
    * ### cy
    *
@@ -4873,7 +4882,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cy
    */
-  cy?: StyleValue<string & {}>
+  cy?: StyleValue<AnyString>
   /**
    * ### d
    *
@@ -4885,7 +4894,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/d
    */
-  d?: StyleValue<string & {}>
+  d?: StyleValue<AnyString>
   /**
    * ### direction
    *
@@ -4931,7 +4940,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  dynamicRangeLimit?: StyleValue<string & {}>
+  dynamicRangeLimit?: StyleValue<AnyString>
   /**
    * ### empty-cells
    *
@@ -4955,7 +4964,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  fieldSizing?: StyleValue<string & {}>
+  fieldSizing?: StyleValue<AnyString>
   /**
    * ### fill
    *
@@ -5454,7 +5463,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  fontWidth?: StyleValue<string & {}>
+  fontWidth?: StyleValue<AnyString>
   /**
    * ### forced-color-adjust
    *
@@ -5525,7 +5534,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  glyphOrientationHorizontal?: StyleValue<string & {}>
+  glyphOrientationHorizontal?: StyleValue<AnyString>
   /**
    * ### glyph-orientation-vertical
    *
@@ -5987,7 +5996,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  interactivity?: StyleValue<string & {}>
+  interactivity?: StyleValue<AnyString>
   /**
    * ### interpolate-size
    *
@@ -5999,7 +6008,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  interpolateSize?: StyleValue<string & {}>
+  interpolateSize?: StyleValue<AnyString>
   /**
    * ### isolation
    *
@@ -6895,7 +6904,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  objectViewBox?: StyleValue<string & {}>
+  objectViewBox?: StyleValue<AnyString>
   /**
    * ### offset
    *
@@ -7623,7 +7632,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionAnchor?: StyleValue<string & {}>
+  positionAnchor?: StyleValue<AnyString>
   /**
    * ### position-area
    *
@@ -7635,7 +7644,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionArea?: StyleValue<string & {}>
+  positionArea?: StyleValue<AnyString>
   /**
    * ### position-try
    *
@@ -7647,7 +7656,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTry?: StyleValue<string & {}>
+  positionTry?: StyleValue<AnyString>
   /**
    * ### position-try-fallbacks
    *
@@ -7659,7 +7668,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTryFallbacks?: StyleValue<string & {}>
+  positionTryFallbacks?: StyleValue<AnyString>
   /**
    * ### position-try-order
    *
@@ -7671,7 +7680,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTryOrder?: StyleValue<string & {}>
+  positionTryOrder?: StyleValue<AnyString>
   /**
    * ### position-visibility
    *
@@ -7683,7 +7692,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionVisibility?: StyleValue<string & {}>
+  positionVisibility?: StyleValue<AnyString>
   /**
    * ### padding-right
    *
@@ -7753,7 +7762,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/r
    */
-  r?: StyleValue<string & {}>
+  r?: StyleValue<AnyString>
   /**
    * ### reading-flow
    *
@@ -7765,7 +7774,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  readingFlow?: StyleValue<string & {}>
+  readingFlow?: StyleValue<AnyString>
   /**
    * ### reading-order
    *
@@ -7775,7 +7784,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  readingOrder?: StyleValue<string & {}>
+  readingOrder?: StyleValue<AnyString>
   /**
    * ### resize
    *
@@ -8148,7 +8157,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-ruby/#propdef-ruby-overhang
    */
-  rubyOverhang?: StyleValue<string & {}>
+  rubyOverhang?: StyleValue<AnyString>
   /**
    * ### ruby-position
    *
@@ -8171,7 +8180,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/rx
    */
-  rx?: StyleValue<string & {}>
+  rx?: StyleValue<AnyString>
   /**
    * ### ry
    *
@@ -8183,7 +8192,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/ry
    */
-  ry?: StyleValue<string & {}>
+  ry?: StyleValue<AnyString>
   /**
    * ### scale
    *
@@ -8251,7 +8260,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollInitialTarget?: StyleValue<string & {}>
+  scrollInitialTarget?: StyleValue<AnyString>
   /**
    * ### scroll-margin
    *
@@ -8404,7 +8413,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollMarkerGroup?: StyleValue<string & {}>
+  scrollMarkerGroup?: StyleValue<AnyString>
   /**
    * ### scroll-padding
    *
@@ -8690,7 +8699,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-speech-1/#speaking-props-speak
    */
-  speak?: StyleValue<string & {}>
+  speak?: StyleValue<AnyString>
   /**
    * ### speak-as
    *
@@ -8702,7 +8711,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  speakAs?: StyleValue<string & {}>
+  speakAs?: StyleValue<AnyString>
   /**
    * ### stop-color
    *
@@ -8752,7 +8761,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  strokeColor?: StyleValue<string & {}>
+  strokeColor?: StyleValue<AnyString>
   /**
    * ### stroke-dasharray
    *
@@ -8920,7 +8929,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textAutospace?: StyleValue<string & {}>
+  textAutospace?: StyleValue<AnyString>
   /**
    * ### text-box
    *
@@ -8930,7 +8939,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-box
    */
-  textBox?: StyleValue<string & {}>
+  textBox?: StyleValue<AnyString>
   /**
    * ### text-box-edge
    *
@@ -8940,7 +8949,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-box-edge
    */
-  textBoxEdge?: StyleValue<string & {}>
+  textBoxEdge?: StyleValue<AnyString>
   /**
    * ### text-box-trim
    *
@@ -8950,7 +8959,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-box-trim
    */
-  textBoxTrim?: StyleValue<string & {}>
+  textBoxTrim?: StyleValue<AnyString>
   /**
    * ### color
    *
@@ -9214,7 +9223,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textSpacingTrim?: StyleValue<string & {}>
+  textSpacingTrim?: StyleValue<AnyString>
   /**
    * ### text-transform
    *
@@ -9272,7 +9281,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-mode
    */
-  textWrapMode?: StyleValue<string & {}>
+  textWrapMode?: StyleValue<AnyString>
   /**
    * ### text-wrap-style
    *
@@ -9282,7 +9291,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-style
    */
-  textWrapStyle?: StyleValue<string & {}>
+  textWrapStyle?: StyleValue<AnyString>
   /**
    * ### timeline-scope
    *
@@ -9449,7 +9458,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  userModify?: StyleValue<string & {}>
+  userModify?: StyleValue<AnyString>
   /**
    * ### user-select
    *
@@ -9541,7 +9550,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-view-transitions-2/#view-transition-class-prop
    */
-  viewTransitionClass?: StyleValue<string & {}>
+  viewTransitionClass?: StyleValue<AnyString>
   /**
    * ### view-transition-name
    *
@@ -9680,7 +9689,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/x
    */
-  x?: StyleValue<string & {}>
+  x?: StyleValue<AnyString>
   /**
    * ### y
    *
@@ -9692,7 +9701,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/y
    */
-  y?: StyleValue<string & {}>
+  y?: StyleValue<AnyString>
   /**
    * ### z-index
    *
@@ -9735,11 +9744,11 @@ export interface StyleProps {
   /**
    * Sets the value of `--contrast`.
    */
-  contrast?: StyleValue<StringLiteral>
+  contrast?: StyleValue<AnyString>
   /**
    * Sets the value of `--drop-shadow`.
    */
-  dropShadow?: StyleValue<StringLiteral, "shadows">
+  dropShadow?: StyleValue<AnyString, "shadows">
   /**
    * The focus ring is used to identify the currently focused element.
    */
@@ -9749,19 +9758,19 @@ export interface StyleProps {
   /**
    * Sets the value of `--focus-ring-color`.
    */
-  focusRingColor?: StyleValue<StringLiteral, "colors">
+  focusRingColor?: StyleValue<AnyString, "colors">
   /**
    * Sets the value of `--focus-ring-offset`.
    */
-  focusRingOffset?: StyleValue<number | StringLiteral, "spaces">
+  focusRingOffset?: StyleValue<AnyString | number, "spaces">
   /**
    * Sets the value of `--focus-ring-style`.
    */
-  focusRingStyle?: StyleValue<StringLiteral>
+  focusRingStyle?: StyleValue<AnyString>
   /**
    * Sets the value of `--focus-ring-width`.
    */
-  focusRingWidth?: StyleValue<StringLiteral>
+  focusRingWidth?: StyleValue<AnyString>
   /**
    * The focus ring is used to identify the currently focused element.
    */
@@ -9771,11 +9780,11 @@ export interface StyleProps {
   /**
    * Sets the value of `--grayscale`.
    */
-  grayscale?: StyleValue<StringLiteral>
+  grayscale?: StyleValue<AnyString>
   /**
    * Sets the value of `--hue-rotate`.
    */
-  hueRotate?: StyleValue<StringLiteral>
+  hueRotate?: StyleValue<AnyString>
   /**
    * ### left
    *
@@ -9827,7 +9836,7 @@ export interface StyleProps {
   /**
    * Sets the value of `--invert`.
    */
-  invert?: StyleValue<StringLiteral>
+  invert?: StyleValue<AnyString>
   /**
    * ### keyframes
    *
@@ -9839,10 +9848,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@keyframes
    */
-  keyframes?: StyleValue<
-    StringLiteral | { [key: string]: CSSObject },
-    "keyframes"
-  >
+  keyframes?: StyleValue<AnyString | { [key: string]: CSSObject }, "keyframes">
   /**
    * Used to visually truncate a text after a number of lines.
    * ### line-clamp
@@ -10138,31 +10144,31 @@ export interface StyleProps {
   /**
    * Sets the value of `--rotate-x`.
    */
-  rotateX?: StyleValue<StringLiteral>
+  rotateX?: StyleValue<AnyString>
   /**
    * Sets the value of `--rotate-y`.
    */
-  rotateY?: StyleValue<StringLiteral>
+  rotateY?: StyleValue<AnyString>
   /**
    * Sets the value of `--rotate-z`.
    */
-  rotateZ?: StyleValue<StringLiteral>
+  rotateZ?: StyleValue<AnyString>
   /**
    * Sets the value of `--saturate`.
    */
-  saturate?: StyleValue<StringLiteral>
+  saturate?: StyleValue<AnyString>
   /**
    * Sets the value of `--scale-x`.
    */
-  scaleX?: StyleValue<StringLiteral>
+  scaleX?: StyleValue<AnyString>
   /**
    * Sets the value of `--scale-y`.
    */
-  scaleY?: StyleValue<StringLiteral>
+  scaleY?: StyleValue<AnyString>
   /**
    * Sets the value of `--scale-z`.
    */
-  scaleZ?: StyleValue<StringLiteral>
+  scaleZ?: StyleValue<AnyString>
   /**
    * ### scroll-margin-left
    *
@@ -10274,15 +10280,15 @@ export interface StyleProps {
   /**
    * Sets the value of `--sepia`.
    */
-  sepia?: StyleValue<StringLiteral>
+  sepia?: StyleValue<AnyString>
   /**
    * Sets the value of `--skew-x`.
    */
-  skewX?: StyleValue<StringLiteral>
+  skewX?: StyleValue<AnyString>
   /**
    * Sets the value of `--skew-y`.
    */
-  skewY?: StyleValue<StringLiteral>
+  skewY?: StyleValue<AnyString>
   /**
    * ### transition
    *
@@ -10330,23 +10336,19 @@ export interface StyleProps {
   /**
    * Sets the value of `--translate-x`.
    */
-  translateX?: StyleValue<number | StringLiteral, "spaces">
+  translateX?: StyleValue<AnyString | number, "spaces">
   /**
    * Sets the value of `--translate-y`.
    */
-  translateY?: StyleValue<number | StringLiteral, "spaces">
+  translateY?: StyleValue<AnyString | number, "spaces">
   /**
    * Sets the value of `--translate-z`.
    */
-  translateZ?: StyleValue<StringLiteral>
+  translateZ?: StyleValue<AnyString>
   /**
    * If `true`, it clamps truncate a text after one line.
    */
   truncated?: StyleValue<boolean>
-  /**
-   * Set CSS variables.
-   */
-  vars?: { name: string; token?: ThemeToken; value?: StyleValue<any> }[]
   /**
    * ### container
    *
@@ -10359,7 +10361,7 @@ export interface StyleProps {
    */
   _container?: {
     [key: string]: any
-    name?: StringLiteral
+    name?: AnyString
     css?: CSSObject
     aspectRatio?: CSS.Property.AspectRatio
     blockSize?: CSS.Property.BlockSize | number | ThemeTokens["sizes"]
@@ -10380,8 +10382,8 @@ export interface StyleProps {
     minInlineSize?: CSS.Property.MinInlineSize | number | ThemeTokens["sizes"]
     minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
     minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    orientation?: "landscape" | "portrait" | StringLiteral
-    query?: StringLiteral
+    orientation?: "landscape" | "portrait" | AnyString
+    query?: AnyString
     w?: CSS.Property.Width | number | ThemeTokens["sizes"]
     width?: CSS.Property.Width | number | ThemeTokens["sizes"]
   }[]
@@ -10410,14 +10412,14 @@ export interface StyleProps {
    */
   _media?: {
     [key: string]: any
-    type?: "all" | "print" | "screen" | "speech" | StringLiteral
+    type?: "all" | "print" | "screen" | "speech" | AnyString
     css?: CSSObject
-    anyHover?: "hover" | "none" | StringLiteral
-    anyPointer?: "coarse" | "fine" | "none" | StringLiteral
+    anyHover?: "hover" | "none" | AnyString
+    anyPointer?: "coarse" | "fine" | "none" | AnyString
     aspectRatio?: CSS.Property.AspectRatio
-    color?: number | StringLiteral
-    colorGamut?: "p3" | "rec2020" | "srgb" | StringLiteral
-    colorIndex?: number | StringLiteral
+    color?: AnyString | number
+    colorGamut?: "p3" | "rec2020" | "srgb" | AnyString
+    colorIndex?: AnyString | number
     deviceAspectRatio?: CSS.Property.AspectRatio
     deviceHeight?: CSS.Property.Height | number | ThemeTokens["sizes"]
     deviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
@@ -10428,60 +10430,50 @@ export interface StyleProps {
       | "picture-in-picture"
       | "standalone"
       | "window-controls-overlay"
-      | StringLiteral
-    dynamicRange?: "high" | "standard" | StringLiteral
-    forcedColors?: "active" | "none" | StringLiteral
-    grid?: 0 | 1 | "StringLiteral"
+      | AnyString
+    dynamicRange?: "high" | "standard" | AnyString
+    forcedColors?: "active" | "none" | AnyString
+    grid?: 0 | 1 | "AnyString"
     h?: CSS.Property.Height | number | ThemeTokens["sizes"]
     height?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    hover?: "hover" | "none" | StringLiteral
-    invertedColors?: "inverted" | "none" | StringLiteral
-    maxColor?: number | StringLiteral
-    maxColorIndex?: number | StringLiteral
+    hover?: "hover" | "none" | AnyString
+    invertedColors?: "inverted" | "none" | AnyString
+    maxColor?: AnyString | number
+    maxColorIndex?: AnyString | number
     maxDeviceAspectRatio?: CSS.Property.AspectRatio
     maxDeviceHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
     maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
     maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxMonochrome?: number | StringLiteral
-    maxResolution?: StringLiteral
+    maxMonochrome?: AnyString | number
+    maxResolution?: AnyString
     maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
     maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
     mazDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    minColor?: number | StringLiteral
-    minColorIndex?: number | StringLiteral
+    minColor?: AnyString | number
+    minColorIndex?: AnyString | number
     minDeviceAspectRatio?: CSS.Property.AspectRatio
     minDeviceHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
     minDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
     minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
     minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minMonochrome?: number | StringLiteral
-    minResolution?: StringLiteral
+    minMonochrome?: AnyString | number
+    minResolution?: AnyString
     minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
     minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    monochrome?: number | StringLiteral
-    orientation?: "landscape" | "portrait" | StringLiteral
-    overflowBlock?:
-      | "none"
-      | "optional-paged"
-      | "paged"
-      | "scroll"
-      | StringLiteral
-    overflowInline?: "none" | "scroll" | StringLiteral
-    pointer?: "coarse" | "fine" | "none" | StringLiteral
-    prefersColorScheme?: "dark" | "light" | StringLiteral
-    prefersContrast?:
-      | "custom"
-      | "high"
-      | "low"
-      | "no-preference"
-      | StringLiteral
-    prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral
-    query?: StringLiteral
-    resolution?: StringLiteral
-    scan?: "interlace" | "progressive" | StringLiteral
-    scripting?: "enabled" | "initial-only" | "none" | StringLiteral
-    update?: "fast" | "none" | "slow" | StringLiteral
-    videoDynamicRange?: "high" | "standard" | StringLiteral
+    monochrome?: AnyString | number
+    orientation?: "landscape" | "portrait" | AnyString
+    overflowBlock?: "none" | "optional-paged" | "paged" | "scroll" | AnyString
+    overflowInline?: "none" | "scroll" | AnyString
+    pointer?: "coarse" | "fine" | "none" | AnyString
+    prefersColorScheme?: "dark" | "light" | AnyString
+    prefersContrast?: "custom" | "high" | "low" | "no-preference" | AnyString
+    prefersReducedMotion?: "no-preference" | "reduce" | AnyString
+    query?: AnyString
+    resolution?: AnyString
+    scan?: "interlace" | "progressive" | AnyString
+    scripting?: "enabled" | "initial-only" | "none" | AnyString
+    update?: "fast" | "none" | "slow" | AnyString
+    videoDynamicRange?: "high" | "standard" | AnyString
     w?: CSS.Property.Width | number | ThemeTokens["sizes"]
     width?: CSS.Property.Width | number | ThemeTokens["sizes"]
   }[]
@@ -10556,5 +10548,5 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@supports
    */
-  _supports?: { css?: CSSObject; query?: StringLiteral }[]
+  _supports?: { css?: CSSObject; query?: AnyString }[]
 }

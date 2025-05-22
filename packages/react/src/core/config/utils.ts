@@ -1,5 +1,5 @@
 import type { Dict } from "../../utils"
-import type { ColorMode, CSSFunction } from "../css"
+import type { ColorMode, CSSFunction, CSSProperties } from "../css"
 import type { StyledTheme, ThemeToken, UsageTheme } from "../theme"
 import { isObject, isString, isUndefined } from "../../utils"
 import { getColorSchemeVar, isColorScheme } from "../css"
@@ -9,7 +9,7 @@ export interface TransformOptions {
   css?: CSSFunction
   fallback?: any
   prev?: Dict
-  properties?: string | string[]
+  properties?: CSSProperties[]
 }
 
 export interface Transform {
@@ -77,6 +77,16 @@ export function isCSSVar(value: string) {
   return /^var\(--.+\)$/.test(value)
 }
 
+export function isCSSToken(theme: StyledTheme<UsageTheme>) {
+  return function (value: any) {
+    return (
+      isObject(theme.__cssMap) &&
+      value in theme.__cssMap &&
+      !!theme.__cssMap[value]?.ref
+    )
+  }
+}
+
 export function analyzeCSSValue(value: any) {
   let n = parseFloat(value.toString())
   const unit = value.toString().replace(String(n), "")
@@ -90,8 +100,8 @@ export function tokenToVar(theme: StyledTheme<UsageTheme>) {
 
     const resolvedToken = `${token}.${value}`
 
-    if (isObject(theme.__cssMap) && resolvedToken in theme.__cssMap) {
-      return theme.__cssMap[resolvedToken]?.ref
+    if (isCSSToken(theme)(resolvedToken)) {
+      return theme.__cssMap![resolvedToken]!.ref
     } else {
       return fallbackValue || value
     }

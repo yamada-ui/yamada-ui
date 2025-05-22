@@ -1,11 +1,11 @@
 import type { CSSObject } from "@emotion/react"
-import type { Union } from "@yamada-ui/react"
+import type { AnyString } from "@yamada-ui/react"
 import type { CSSProperties } from "."
 
 export interface StyleConfig {
   type?: string
   description?: string[]
-  properties?: Union<CSSProperties> | Union<CSSProperties>[]
+  properties?: (AnyString | CSSProperties)[]
   static?: CSSObject
   variableLength?: boolean
 }
@@ -34,7 +34,7 @@ export const additionalProps = {
   boxSize: { properties: ["width", "height"] },
   colorMode: {
     type: "CSS.Property.ColorScheme",
-    properties: "colorScheme",
+    properties: ["colorScheme"],
   },
   insetX: { properties: ["left", "right"] },
   insetY: { properties: ["top", "bottom"] },
@@ -66,19 +66,19 @@ export const additionalProps = {
   },
   focusRingColor: {
     description: ["Sets the value of `--focus-ring-color`."],
-    properties: "--focus-ring-color",
+    properties: ["--focus-ring-color"],
   },
   focusRingOffset: {
     description: ["Sets the value of `--focus-ring-offset`."],
-    properties: "--focus-ring-offset",
+    properties: ["--focus-ring-offset"],
   },
   focusRingStyle: {
     description: ["Sets the value of `--focus-ring-style`."],
-    properties: "--focus-ring-style",
+    properties: ["--focus-ring-style"],
   },
   focusRingWidth: {
     description: ["Sets the value of `--focus-ring-width`."],
-    properties: "--focus-ring-width",
+    properties: ["--focus-ring-width"],
   },
   focusVisibleRing: {
     type: "'outside' | 'inside' | 'mixed' | 'outline' | 'inline' | 'none'",
@@ -89,127 +89,127 @@ export const additionalProps = {
 
   blur: {
     description: ["Sets the value of `--blur`."],
-    properties: "--blur",
+    properties: ["--blur"],
   },
   brightness: {
     description: ["Sets the value of `--brightness`."],
-    properties: "--brightness",
+    properties: ["--brightness"],
   },
   contrast: {
     description: ["Sets the value of `--contrast`."],
-    properties: "--contrast",
+    properties: ["--contrast"],
   },
   dropShadow: {
     description: ["Sets the value of `--drop-shadow`."],
-    properties: "--drop-shadow",
+    properties: ["--drop-shadow"],
   },
   grayscale: {
     description: ["Sets the value of `--grayscale`."],
-    properties: "--grayscale",
+    properties: ["--grayscale"],
   },
   hueRotate: {
     description: ["Sets the value of `--hue-rotate`."],
-    properties: "--hue-rotate",
+    properties: ["--hue-rotate"],
   },
   invert: {
     description: ["Sets the value of `--invert`."],
-    properties: "--invert",
+    properties: ["--invert"],
   },
   saturate: {
     description: ["Sets the value of `--saturate`."],
-    properties: "--saturate",
+    properties: ["--saturate"],
   },
   sepia: {
     description: ["Sets the value of `--sepia`."],
-    properties: "--sepia",
+    properties: ["--sepia"],
   },
 
   backdropBlur: {
     description: ["Sets the value of `--backdrop-blur`."],
-    properties: "--backdrop-blur",
+    properties: ["--backdrop-blur"],
   },
   backdropBrightness: {
     description: ["Sets the value of `--backdrop-brightness`."],
-    properties: "--backdrop-brightness",
+    properties: ["--backdrop-brightness"],
   },
   backdropContrast: {
     description: ["Sets the value of `--backdrop-contrast`."],
-    properties: "--backdrop-contrast",
+    properties: ["--backdrop-contrast"],
   },
   backdropDropShadow: {
     description: ["Sets the value of `--backdrop-drop-shadow`."],
-    properties: "--backdrop-drop-shadow",
+    properties: ["--backdrop-drop-shadow"],
   },
   backdropGrayscale: {
     description: ["Sets the value of `--backdrop-grayscale`."],
-    properties: "--backdrop-grayscale",
+    properties: ["--backdrop-grayscale"],
   },
   backdropHueRotate: {
     description: ["Sets the value of `--backdrop-hue-rotate`."],
-    properties: "--backdrop-hue-rotate",
+    properties: ["--backdrop-hue-rotate"],
   },
   backdropInvert: {
     description: ["Sets the value of `--backdrop-invert`."],
-    properties: "--backdrop-invert",
+    properties: ["--backdrop-invert"],
   },
   backdropSaturate: {
     description: ["Sets the value of `--backdrop-saturate`."],
-    properties: "--backdrop-saturate",
+    properties: ["--backdrop-saturate"],
   },
   backdropSepia: {
     description: ["Sets the value of `--backdrop-sepia`."],
-    properties: "--backdrop-sepia",
+    properties: ["--backdrop-sepia"],
   },
 
   rotateX: {
     description: ["Sets the value of `--rotate-x`."],
-    properties: "--rotate-x",
+    properties: ["--rotate-x"],
   },
   rotateY: {
     description: ["Sets the value of `--rotate-y`."],
-    properties: "--rotate-y",
+    properties: ["--rotate-y"],
   },
   rotateZ: {
     description: ["Sets the value of `--rotate-z`."],
-    properties: "--rotate-z",
+    properties: ["--rotate-z"],
   },
   scaleX: {
     description: ["Sets the value of `--scale-x`."],
-    properties: "--scale-x",
+    properties: ["--scale-x"],
   },
   scaleY: {
     description: ["Sets the value of `--scale-y`."],
-    properties: "--scale-y",
+    properties: ["--scale-y"],
   },
   scaleZ: {
     description: ["Sets the value of `--scale-z`."],
-    properties: "--scale-z",
+    properties: ["--scale-z"],
   },
   skewX: {
     description: ["Sets the value of `--skew-x`."],
-    properties: "--skew-x",
+    properties: ["--skew-x"],
   },
   skewY: {
     description: ["Sets the value of `--skew-y`."],
-    properties: "--skew-y",
+    properties: ["--skew-y"],
   },
   translateX: {
     description: ["Sets the value of `--translate-x`."],
-    properties: "--translate-x",
+    properties: ["--translate-x"],
   },
   translateY: {
     description: ["Sets the value of `--translate-y`."],
-    properties: "--translate-y",
+    properties: ["--translate-y"],
   },
   translateZ: {
     description: ["Sets the value of `--translate-z`."],
-    properties: "--translate-z",
+    properties: ["--translate-z"],
   },
 } as const satisfies { [key: string]: StyleConfig }
 
 export const styledProps = {
   apply: {
-    type: `StringLiteral, "apply"`,
+    type: `AnyString, "apply"`,
     description: [
       "Apply other styles defined in `theme.styles`.",
       "",
@@ -222,11 +222,11 @@ export const styledProps = {
     ],
   },
   layerStyle: {
-    type: `StringLiteral, "layerStyles"`,
+    type: `AnyString, "layerStyles"`,
     description: ["Apply layer styles defined in `theme.layerStyles`."],
   },
   textStyle: {
-    type: `StringLiteral, "textStyles"`,
+    type: `AnyString, "textStyles"`,
     description: ["Apply text styles defined in `theme.textStyles`."],
   },
   colorScheme: {
@@ -236,7 +236,7 @@ export const styledProps = {
   lineClamp: {
     type: "number",
     description: ["Used to visually truncate a text after a number of lines."],
-    properties: "--line-clamp",
+    properties: ["--line-clamp"],
     static: {
       display: "-webkit-box",
       overflow: "hidden",
@@ -249,22 +249,17 @@ export const styledProps = {
     type: "boolean",
     description: ["If `true`, it clamps truncate a text after one line."],
   },
-  vars: {
-    type: "{ name: string; token?: ThemeToken, value?: StyleValue<any> }[]",
-    description: ["Set CSS variables."],
-    variableLength: true,
-  },
 } as const satisfies { [key: string]: StyleConfig }
 
 export const atRuleProps = {
   keyframes: {
-    type: "StringLiteral | { [key: string]: CSSObject }",
-    properties: "animationName",
+    type: "AnyString | { [key: string]: CSSObject }",
+    properties: ["animationName"],
   },
   _container: {
     type: `{ ${[
-      "name?: StringLiteral",
-      "query?: StringLiteral",
+      "name?: AnyString",
+      "query?: AnyString",
       'w?: CSS.Property.Width | number | ThemeTokens["sizes"]',
       'width?: CSS.Property.Width | number | ThemeTokens["sizes"]',
       'minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]',
@@ -286,7 +281,7 @@ export const atRuleProps = {
       'inlineSize?: CSS.Property.InlineSize | number | ThemeTokens["sizes"]',
       'minInlineSize?: CSS.Property.MinInlineSize | number | ThemeTokens["sizes"]',
       'maxInlineSize?: CSS.Property.MaxInlineSize | number | ThemeTokens["sizes"]',
-      'orientation?: "portrait" | "landscape" | StringLiteral',
+      'orientation?: "portrait" | "landscape" | AnyString',
       "css?: CSSObject",
       "[key: string]: any",
     ].join(";")}}[]`,
@@ -294,12 +289,12 @@ export const atRuleProps = {
   },
   _landscape: {
     type: "CSSObject",
-    properties: "@media (orientation: landscape)",
+    properties: ["@media (orientation: landscape)"],
   },
   _media: {
     type: `{ ${[
-      'type?: "all" | "print" | "screen" | "speech" | StringLiteral',
-      "query?: StringLiteral",
+      'type?: "all" | "print" | "screen" | "speech" | AnyString',
+      "query?: AnyString",
       'w?: CSS.Property.Width | number | ThemeTokens["sizes"]',
       'width?: CSS.Property.Width | number | ThemeTokens["sizes"]',
       'minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]',
@@ -312,16 +307,16 @@ export const atRuleProps = {
       'minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]',
       'maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]',
       'maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]',
-      'anyHover?: "none" | "hover" | StringLiteral',
-      'anyPointer?: "none" | "coarse" | "fine" | StringLiteral',
+      'anyHover?: "none" | "hover" | AnyString',
+      'anyPointer?: "none" | "coarse" | "fine" | AnyString',
       "aspectRatio?: CSS.Property.AspectRatio",
-      "color?: number | StringLiteral",
-      "minColor?: number | StringLiteral",
-      "maxColor?: number | StringLiteral",
-      'colorGamut?: "srgb" | "p3" | "rec2020" | StringLiteral',
-      "colorIndex?: number | StringLiteral",
-      "minColorIndex?: number | StringLiteral",
-      "maxColorIndex?: number | StringLiteral",
+      "color?: number | AnyString",
+      "minColor?: number | AnyString",
+      "maxColor?: number | AnyString",
+      'colorGamut?: "srgb" | "p3" | "rec2020" | AnyString',
+      "colorIndex?: number | AnyString",
+      "minColorIndex?: number | AnyString",
+      "maxColorIndex?: number | AnyString",
       "deviceAspectRatio?: CSS.Property.AspectRatio",
       "minDeviceAspectRatio?: CSS.Property.AspectRatio",
       "maxDeviceAspectRatio?: CSS.Property.AspectRatio",
@@ -331,29 +326,29 @@ export const atRuleProps = {
       'deviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]',
       'minDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]',
       'mazDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]',
-      'displayMode?: "browser" | "fullscreen" | "minimal-ui" | "picture-in-picture" | "standalone" | "window-controls-overlay" | StringLiteral',
-      'dynamicRange?: "standard" | "high" | StringLiteral',
-      'forcedColors?: "none" | "active" | StringLiteral',
-      'grid?: 0 | 1 | "StringLiteral"',
-      'hover?: "none" | "hover" | StringLiteral',
-      'invertedColors?: "none" | "inverted" | StringLiteral',
-      "monochrome?: number | StringLiteral",
-      "minMonochrome?: number | StringLiteral",
-      "maxMonochrome?: number | StringLiteral",
-      'orientation?: "portrait" | "landscape" | StringLiteral',
-      'overflowBlock?: "none" | "scroll" | "paged" | "optional-paged" | StringLiteral',
-      'overflowInline?: "none" | "scroll" | StringLiteral',
-      'pointer?: "none" | "coarse" | "fine" | StringLiteral',
-      'prefersColorScheme?: "light" | "dark" | StringLiteral',
-      'prefersContrast?: "no-preference" | "high" | "low" | "custom" | StringLiteral',
-      'prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral',
-      "resolution?: StringLiteral",
-      "minResolution?: StringLiteral",
-      "maxResolution?: StringLiteral",
-      'scan?: "interlace" | "progressive" | StringLiteral',
-      'scripting?: "none" | "initial-only" | "enabled" | StringLiteral',
-      'update?: "none" | "slow" | "fast" | StringLiteral',
-      'videoDynamicRange?: "standard" | "high" | StringLiteral',
+      'displayMode?: "browser" | "fullscreen" | "minimal-ui" | "picture-in-picture" | "standalone" | "window-controls-overlay" | AnyString',
+      'dynamicRange?: "standard" | "high" | AnyString',
+      'forcedColors?: "none" | "active" | AnyString',
+      'grid?: 0 | 1 | "AnyString"',
+      'hover?: "none" | "hover" | AnyString',
+      'invertedColors?: "none" | "inverted" | AnyString',
+      "monochrome?: number | AnyString",
+      "minMonochrome?: number | AnyString",
+      "maxMonochrome?: number | AnyString",
+      'orientation?: "portrait" | "landscape" | AnyString',
+      'overflowBlock?: "none" | "scroll" | "paged" | "optional-paged" | AnyString',
+      'overflowInline?: "none" | "scroll" | AnyString',
+      'pointer?: "none" | "coarse" | "fine" | AnyString',
+      'prefersColorScheme?: "light" | "dark" | AnyString',
+      'prefersContrast?: "no-preference" | "high" | "low" | "custom" | AnyString',
+      'prefersReducedMotion?: "no-preference" | "reduce" | AnyString',
+      "resolution?: AnyString",
+      "minResolution?: AnyString",
+      "maxResolution?: AnyString",
+      'scan?: "interlace" | "progressive" | AnyString',
+      'scripting?: "none" | "initial-only" | "enabled" | AnyString',
+      'update?: "none" | "slow" | "fast" | AnyString',
+      'videoDynamicRange?: "standard" | "high" | AnyString',
       "css?: CSSObject",
       "[key: string]: any",
     ].join(";")} }[]`,
@@ -361,26 +356,26 @@ export const atRuleProps = {
   },
   _mediaDark: {
     type: "CSSObject",
-    properties: "@media (prefers-color-scheme: dark)",
+    properties: ["@media (prefers-color-scheme: dark)"],
   },
   _mediaLight: {
     type: "CSSObject",
-    properties: "@media (prefers-color-scheme: light)",
+    properties: ["@media (prefers-color-scheme: light)"],
   },
   _mediaReduceMotion: {
     type: "CSSObject",
-    properties: "@media (prefers-reduced-motion: reduce)",
+    properties: ["@media (prefers-reduced-motion: reduce)"],
   },
   _portrait: {
     type: "CSSObject",
-    properties: "@media (orientation: portrait)",
+    properties: ["@media (orientation: portrait)"],
   },
   _print: {
     type: "CSSObject",
-    properties: "@media print",
+    properties: ["@media print"],
   },
   _supports: {
-    type: `{ ${["query?: StringLiteral", "css?: CSSObject"].join(";")} }[]`,
+    type: `{ ${["query?: AnyString", "css?: CSSObject"].join(";")} }[]`,
     variableLength: true,
   },
 } as const satisfies { [key: string]: StyleConfig }

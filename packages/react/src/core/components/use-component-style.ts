@@ -5,6 +5,7 @@ import type {
   CreateLayersReturn,
   CSSModifierObject,
   CSSObject,
+  CSSPropObject,
   CSSSlotObject,
   ResponsiveObject,
   StyleValue,
@@ -37,8 +38,8 @@ import {
   toArray,
   toKebabCase,
 } from "../../utils"
+import { conditions } from "../conditions"
 import { createQuery, mergeCSS } from "../css"
-import { pseudos } from "../pseudos"
 import { useColorSchemeContext } from "../styled"
 import { isEqualProps } from "./props"
 
@@ -85,7 +86,7 @@ function getStyle<Y extends boolean = false>(
             return [name, style]
           }
         }),
-      )
+      ) as Style<Y>
     } else if (selectors.length) {
       return getSelectorStyle(selectors, style) as Style<Y>
     } else {
@@ -104,12 +105,12 @@ function getColorModeStyle<Y extends boolean = false>(
     const lightStyle = getModifierStyle<Y>(
       lightValue,
       mergedStyle,
-    )({ ...rest, selectors: [...selectors, pseudos._light] })
+    )({ ...rest, selectors: [...selectors, conditions._light] })
 
     const darkStyle = getModifierStyle<Y>(
       darkValue,
       mergedStyle,
-    )({ ...rest, selectors: [...selectors, pseudos._dark] })
+    )({ ...rest, selectors: [...selectors, conditions._dark] })
 
     return merge(lightStyle, darkStyle)
   }
@@ -223,7 +224,7 @@ function getResponsiveStyle<Y extends boolean = false>(
 
 function getPropStyle<Y extends boolean = false>(
   props: Dict,
-  propVariants: CSSModifierObject | CSSModifierObject<CSSSlotObject>,
+  propVariants: CSSPropObject | CSSPropObject<CSSSlotObject>,
   style: Style<Y> | undefined = {},
 ) {
   const variants = Object.entries(propVariants)
@@ -521,7 +522,7 @@ function useStyle<
             computedProps.css,
           )
         } else {
-          computedProps.css = mergeCSS(style, computedProps.css)
+          computedProps.css = mergeCSS(style as CSSObject, computedProps.css)
         }
       } else {
         computedProps.css = propsRef.current.css

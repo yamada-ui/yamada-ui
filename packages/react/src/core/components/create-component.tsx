@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import type { Dict, Merge, StringLiteral } from "../../utils"
+import type { AnyString, Dict, Merge } from "../../utils"
 import type { CSSObject, CSSSlotObject } from "../css"
 import type { StyledOptions } from "../styled"
 import type {
@@ -47,7 +47,7 @@ type Component<
 
 export type ComponentSlotName<
   Y extends ComponentSlotStyle | ComponentStyle = ComponentSlotStyle,
-> = keyof Required<Y>["base"] | StringLiteral
+> = AnyString | keyof Required<Y>["base"]
 
 export type ComponentSlot<Y extends number | string | symbol> =
   | [Y, Y]

@@ -18,7 +18,7 @@ export const Oval = withContext<"svg", OvalProps>(
           <g strokeWidth="2" transform="translate(1 1)">
             <styled.circle
               {...(secondaryColor
-                ? { stroke: "{secondaryColor}" }
+                ? { stroke: "{secondary-color}" }
                 : { strokeOpacity: ".5" })}
               cx="18"
               cy="18"
@@ -40,14 +40,13 @@ export const Oval = withContext<"svg", OvalProps>(
     )
   },
 )(initialProps, ({ secondaryColor, ...props }) => {
-  const { vars = [], ...rest } = superProps(props)
+  const rest = superProps(props)
 
-  if (secondaryColor)
-    vars.push({
-      name: "secondaryColor",
-      token: "colors",
-      value: secondaryColor,
-    })
-
-  return { vars, ...rest }
+  return {
+    "--secondary-color": secondaryColor
+      ? `colors.${secondaryColor}`
+      : undefined,
+    secondaryColor,
+    ...rest,
+  }
 })

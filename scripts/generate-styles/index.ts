@@ -25,10 +25,7 @@ import { generateStyles } from "./styles"
 export const OUT_PATH = "packages/react/src/core/styles.ts"
 
 export type Properties = CSSProperties | StyledProperties
-export type CSSProperties =
-  | keyof CSS.ObsoleteProperties
-  | keyof CSS.StandardProperties
-  | keyof CSS.SvgProperties
+export type CSSProperties = keyof CSS.PropertiesFallback
 export type StyledProperties =
   | keyof typeof additionalProps
   | keyof typeof atRuleProps
@@ -286,7 +283,7 @@ const main = async () => {
 
     const computedCSSCompatData = Object.fromEntries(
       Object.entries(excludedCSSCompatData).map(([name, data]) => {
-        const { type = "string & {}" } = cssTypes[name] ?? {}
+        const { type = "AnyString" } = cssTypes[name] ?? {}
 
         const computedData = { ...data, type }
 

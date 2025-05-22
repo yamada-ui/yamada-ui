@@ -28,11 +28,7 @@ export interface Dict<Y = any> {
   [key: string]: Y
 }
 
-export interface ObjectLiteral {}
-
-export type StringLiteral = string & {}
-
-export type Union<Y> = StringLiteral | Y
+export type AnyString = string & {}
 
 export type Booleanish<Y> = Y extends "false" | "true" ? boolean : Y
 

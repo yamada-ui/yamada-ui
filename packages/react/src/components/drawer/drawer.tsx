@@ -12,7 +12,12 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, styled } from "../../core"
-import { findChildren, getValidChildren, wrapOrPassProps } from "../../utils"
+import {
+  cast,
+  findChildren,
+  getValidChildren,
+  wrapOrPassProps,
+} from "../../utils"
 import { Button } from "../button"
 import { CloseButton } from "../button"
 import { fadeVariants } from "../fade"
@@ -275,7 +280,7 @@ export const DrawerOverlay = withContext<"div", DrawerOverlayProps>((props) => {
       exit="exit"
       initial="exit"
       variants={fadeVariants}
-      {...(getOverlayProps(props as HTMLProps) as HTMLMotionProps)}
+      {...cast<HTMLMotionProps>(getOverlayProps(cast<HTMLProps>(props)))}
     />
   )
 }, "overlay")()

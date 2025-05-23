@@ -3,6 +3,8 @@ import { inputStyle } from "./input.style"
 
 export const inputAddonStyle = defineComponentStyle({
   base: {
+    "--error-border-color": "colors.border.error",
+    "--focus-border-color": "colorScheme.outline",
     alignItems: "center",
     alignSelf: "stretch",
     display: "flex",
@@ -10,18 +12,6 @@ export const inputAddonStyle = defineComponentStyle({
     rounded: "l2",
     transitionDuration: "moderate",
     transitionProperty: "common",
-    vars: [
-      {
-        name: "focusBorderColor",
-        token: "colors",
-        value: "colorScheme.outline",
-      },
-      {
-        name: "errorBorderColor",
-        token: "colors",
-        value: "border.error",
-      },
-    ],
     w: "auto",
     whiteSpace: "nowrap",
     _disabled: {
@@ -41,13 +31,13 @@ export const inputAddonStyle = defineComponentStyle({
       color: "colorScheme.fg",
       rounded: "0px",
       _peerFocusVisible: {
-        borderColor: "{focusBorderColor}",
-        boxShadow: "0px 1px 0px 0px {focusBorderColor}",
+        borderColor: "{focus-border-color}",
+        boxShadow: "0px 1px 0px 0px {focus-border-color}",
       },
       _peerInvalid: {
-        borderColor: "{errorBorderColor}",
+        borderColor: "{error-border-color}",
         _peerFocusVisible: {
-          boxShadow: "0px 1px 0px 0px {errorBorderColor}",
+          boxShadow: "0px 1px 0px 0px {error-border-color}",
         },
       },
     },

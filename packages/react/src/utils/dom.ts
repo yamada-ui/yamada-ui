@@ -1,4 +1,4 @@
-import type { StringLiteral } from "@yamada-ui/utils"
+import type { AnyString } from "@yamada-ui/utils"
 import * as React from "react"
 
 type KeyboardNavigationKey =
@@ -32,10 +32,10 @@ type KeyboardControlKey =
 type KeyboardFunctionKey = "Fn" | "FnLock" | `F${number}`
 
 type KeyboardKey =
+  | AnyString
   | KeyboardControlKey
   | KeyboardFunctionKey
   | KeyboardNavigationKey
-  | StringLiteral
 
 export function runKeyAction<Y>(
   ev: React.KeyboardEvent<Y>,

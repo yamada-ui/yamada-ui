@@ -13,6 +13,14 @@ export default {
     "Close modal": "Close modal",
     "Open modal": "Open modal",
   },
+  numberInput: {
+    Decrease: "Decrease",
+    Increase: "Increase",
+  },
+  passwordInput: {
+    "Password strength meter": "Password strength meter",
+    "Toggle password visibility": "Toggle password visibility",
+  },
   stat: {
     "Decreased by": "Decreased by",
     "Increased by": "Increased by",

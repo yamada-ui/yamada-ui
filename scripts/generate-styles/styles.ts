@@ -9,7 +9,7 @@ import type {
 } from "."
 import type { StyleConfig } from "./styled-props"
 import type { TransformOptions } from "./transform-props"
-import { isUndefined, pseudoSelectors, toArray } from "@yamada-ui/react"
+import { conditionSelectors, isUndefined, toArray } from "@yamada-ui/react"
 import { prettier } from "../utils"
 import { checkProps } from "./check"
 import { generateConfig } from "./config"
@@ -57,7 +57,7 @@ const generateType = ({
       if (type?.length) {
         result = addType(result, type.join(" | "))
       } else {
-        result = addType(result, "StringLiteral")
+        result = addType(result, "AnyString")
       }
     }
 
@@ -151,12 +151,12 @@ export const generateStyles = async (
 
   checkProps(cssCompatData)
 
-  pseudoSelectors.forEach((selector) => {
+  conditionSelectors.forEach((selector) => {
     const transforms = transformMap[selector]
 
     if (!transforms) return
 
-    const config = generateConfig({ properties: selector, transforms })()
+    const config = generateConfig({ properties: [selector], transforms })()
 
     pseudoStyles.push(`"${selector}": ${config}`)
   })
@@ -186,7 +186,7 @@ export const generateStyles = async (
     const token = tokenMap[prop]
     const shorthands = shorthandProps[prop]
     const transforms = transformMap[prop]
-    const config = generateConfig({ properties: prop, token, transforms })()
+    const config = generateConfig({ properties: [prop], token, transforms })()
     const doc = generateDoc(data)()
     const computedType = generateType({ type, prop, token, transforms })
 
@@ -201,7 +201,9 @@ export const generateStyles = async (
 
     if (shorthands) {
       const shorthandStyle =
-        config === true ? `{ properties: "${prop}" }` : `standardStyles.${prop}`
+        config === true
+          ? `{ properties: ["${prop}"] }`
+          : `standardStyles.${prop}`
 
       shorthands.forEach((shorthandProp) => {
         if (token) tokenProps[token]?.push(shorthandProp)
@@ -283,7 +285,9 @@ export const generateStyles = async (
 
     if (shorthands) {
       const shorthandStyle =
-        config === true ? `{ properties: "${prop}" }` : `standardStyles.${prop}`
+        config === true
+          ? `{ properties: ["${prop}"] }`
+          : `standardStyles.${prop}`
 
       shorthands.forEach((shorthandProp) => {
         if (token) tokenProps[token]?.push(shorthandProp)
@@ -323,7 +327,7 @@ export const generateStyles = async (
 
   const content = `
     import type * as CSS from "csstype"
-    import type { StringLiteral } from "../utils"
+    import type { AnyString } from "../utils"
     import type { StyleConfigs } from "./config"
     import type { CSSObject, StyleValue } from "./css"
     import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"

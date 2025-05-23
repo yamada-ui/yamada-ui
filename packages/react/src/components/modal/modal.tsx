@@ -15,7 +15,12 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, styled } from "../../core"
-import { findChildren, getValidChildren, wrapOrPassProps } from "../../utils"
+import {
+  cast,
+  findChildren,
+  getValidChildren,
+  wrapOrPassProps,
+} from "../../utils"
 import { Button } from "../button"
 import { CloseButton } from "../button"
 import { fadeScaleVariants, fadeVariants } from "../fade"
@@ -263,7 +268,7 @@ export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
             variants: fadeVariants,
           }
         : {})}
-      {...(getOverlayProps(props as HTMLProps) as HTMLMotionPropsWithoutAs)}
+      {...cast<HTMLMotionProps>(getOverlayProps(cast<HTMLProps>(props)))}
     />
   )
 }, "overlay")()

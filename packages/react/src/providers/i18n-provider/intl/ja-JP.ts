@@ -13,6 +13,14 @@ export default {
     "Close modal": "モーダルを閉じる",
     "Open modal": "モーダルを開く",
   },
+  numberInput: {
+    Decrease: "減少",
+    Increase: "増加",
+  },
+  passwordInput: {
+    "Password strength meter": "パスワードの強度",
+    "Toggle password visibility": "パスワードの表示を切り替える",
+  },
   stat: {
     "Decreased by": "減少",
     "Increased by": "増加",

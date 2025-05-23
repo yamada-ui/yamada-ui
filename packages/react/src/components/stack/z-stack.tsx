@@ -11,7 +11,13 @@ import {
   useRef,
   useState,
 } from "react"
-import { createComponent, insertVars, mergeCSS, styled } from "../../core"
+import {
+  createComponent,
+  mergeCSS,
+  styled,
+  useInjectVarsIntoCss,
+  useInjectVarsIntoProps,
+} from "../../core"
 import { getValidChildren, mergeRefs } from "../../utils"
 import { zStackStyle } from "./z-stack.style"
 
@@ -197,22 +203,9 @@ export const ZStack = withContext(
       </styled.div>
     )
   },
-)(undefined, ({ css, ...rest }) => {
-  css = insertVars(css, [
-    {
-      name: "space",
-      property: "gap",
-      token: "spaces",
-    },
-  ])
+)(undefined, (props) => {
+  const css = useInjectVarsIntoCss(props.css, { gap: "space" })
+  const rest = useInjectVarsIntoProps(props, { gap: "space" })
 
-  rest = insertVars(rest, [
-    {
-      name: "space",
-      property: "gap",
-      token: "spaces",
-    },
-  ])
-
-  return { css, ...rest }
+  return { ...rest, css }
 })

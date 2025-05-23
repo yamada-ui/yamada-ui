@@ -1,5 +1,13 @@
 # @yamada-ui/tabs
 
+## 1.0.55
+
+### Patch Changes
+
+- Updated dependencies [[`dd2fafe`](https://github.com/yamada-ui/yamada-ui/commit/dd2fafe963d09bd4e9f31f3d730c9c6301bdb134)]:
+  - @yamada-ui/use-clickable@1.2.22
+  - @yamada-ui/ripple@1.0.53
+
 ## 1.0.54
 
 ### Patch Changes

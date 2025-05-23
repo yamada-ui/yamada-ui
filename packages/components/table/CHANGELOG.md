@@ -1,5 +1,17 @@
 # @yamada-ui/table
 
+## 1.3.14
+
+### Patch Changes
+
+- [#4657](https://github.com/yamada-ui/yamada-ui/pull/4657) [`dd2fafe`](https://github.com/yamada-ui/yamada-ui/commit/dd2fafe963d09bd4e9f31f3d730c9c6301bdb134) Thanks [@bmthd](https://github.com/bmthd)! - fixed focus on click issue
+
+- Updated dependencies [[`dd2fafe`](https://github.com/yamada-ui/yamada-ui/commit/dd2fafe963d09bd4e9f31f3d730c9c6301bdb134)]:
+  - @yamada-ui/use-clickable@1.2.22
+  - @yamada-ui/select@1.8.11
+  - @yamada-ui/checkbox@1.3.7
+  - @yamada-ui/pagination@1.1.13
+
 ## 1.3.13
 
 ### Patch Changes

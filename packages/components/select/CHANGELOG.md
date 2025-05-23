@@ -1,5 +1,14 @@
 # @yamada-ui/select
 
+## 1.8.11
+
+### Patch Changes
+
+- Updated dependencies [[`dd2fafe`](https://github.com/yamada-ui/yamada-ui/commit/dd2fafe963d09bd4e9f31f3d730c9c6301bdb134), [`f0541e3`](https://github.com/yamada-ui/yamada-ui/commit/f0541e310d0509e073b714170020e10e741300d9)]:
+  - @yamada-ui/use-clickable@1.2.22
+  - @yamada-ui/motion@2.3.4
+  - @yamada-ui/popover@1.5.4
+
 ## 1.8.10
 
 ### Patch Changes

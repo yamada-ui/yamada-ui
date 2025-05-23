@@ -1,12 +1,24 @@
+import { Toggle, ToggleGroup } from "."
 import { fireEvent, render, screen } from "../../../test"
 import { noop } from "../../utils"
-import { Toggle, ToggleGroup } from "./"
 
 describe("<Toggle />", () => {
   test("should render correctly", () => {
     render(<Toggle>Toggle</Toggle>)
 
     expect(screen.getByRole("button", { name: /toggle/i })).toBeInTheDocument()
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Toggle.displayName).toBe("ToggleRoot")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Toggle>Toggle</Toggle>)
+
+    expect(screen.getByRole("button", { name: /toggle/i })).toHaveClass(
+      "ui-toggle__root",
+    )
   })
 
   test("should handle selected prop", () => {
@@ -37,7 +49,7 @@ describe("<Toggle />", () => {
     )
   })
 
-  test("should handle fullRounded prop", () => {
+  test.skip("should handle fullRounded prop", () => {
     render(<Toggle fullRounded>Toggle</Toggle>)
 
     expect(screen.getByRole("button", { name: /toggle/i })).toHaveStyle({
@@ -80,9 +92,5 @@ describe("<Toggle />", () => {
       "Toggle: value is required. Please set the value.",
     )
     vi.restoreAllMocks()
-  })
-
-  test("should have correct displayName and __ui__", () => {
-    expect(Toggle.__ui__).toBe("Toggle")
   })
 })

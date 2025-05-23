@@ -390,14 +390,12 @@ const Notice = withContext<"div", NoticeProps>(
         ) : (
           <NoticeIcon {...(icon?.color ? { color: icon.color } : {})} />
         )}
-        {title || description ? (
-          <NoticeContent>
-            {title ? <NoticeTitle>{title}</NoticeTitle> : null}
-            {description ? (
-              <NoticeDescription>{description}</NoticeDescription>
-            ) : null}
-          </NoticeContent>
-        ) : null}
+        <NoticeContent>
+          {title ? <NoticeTitle>{title}</NoticeTitle> : null}
+          {description ? (
+            <NoticeDescription>{description}</NoticeDescription>
+          ) : null}
+        </NoticeContent>
         {isFunction(action) ? action({ id, onClose }) : action}
         {closable && isButtonClosable ? (
           <NoticeCloseButton
@@ -476,9 +474,7 @@ export const NoticeDescription = withContext<"div", NoticeDescriptionProps>(
   "description",
 )()
 
-export interface NoticeCloseButtonProps
-  extends Pick<NoticeOptions, "description">,
-    CloseButtonProps {
+export interface NoticeCloseButtonProps extends CloseButtonProps {
   onClose: () => void
 }
 

@@ -603,11 +603,11 @@ export const CustomComponent = () => {
               <Notice.Root>
                 <Notice.Content>
                   <Notice.Title>Notice Title</Notice.Title>
-                  <Notice.Description>Notice Description</Notice.Description>
                 </Notice.Content>
                 <Notice.CloseButton onClose={onClose} />
               </Notice.Root>
             ),
+            duration: null,
           })
         }
       >

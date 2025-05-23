@@ -24,8 +24,8 @@ import {
   runIfFn,
   useUpdateEffect,
 } from "../../utils"
-import { motion } from "../motion"
 import { Portal } from "../portal"
+import { SlideFade } from "../slide"
 import { noticeStore } from "./notice"
 import { noticeStyle } from "./notice.style"
 
@@ -97,14 +97,11 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
         Object.entries(state).map(([placement, notices]) => {
           const convertedPlacement = convertFromNoticePlacement(placement)
 
-          const customCSS: CSSObject = useMemo(
-            () => ({
-              css,
-              gap,
-              margin: gap,
-            }),
-            [],
-          )
+          const customCSS: CSSObject = {
+            css,
+            gap,
+            margin: gap,
+          }
 
           return (
             <NoticeListComponent
@@ -136,98 +133,73 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
   },
 )()
 
-interface PlacementValues {
-  x: number | string
-  y: number | string
-}
-
-const getPlacementInitialValues = (placement: string): PlacementValues => {
+const getPlacementInitialValues = (placement: string) => {
   const convertedPlacement = convertFromNoticePlacement(placement)
 
   switch (convertedPlacement) {
-    case "top-left": {
-      return { x: "-100%", y: 0 }
-    }
-    case "top-center": {
-      return { x: 0, y: "-100%" }
-    }
-    case "top-right": {
-      return { x: "100%", y: 0 }
-    }
-    case "bottom-left": {
-      return { x: "-100%", y: 0 }
-    }
-    case "bottom-center": {
-      return { x: 0, y: "100%" }
-    }
-    case "bottom-right": {
-      return { x: "100%", y: 0 }
-    }
-    default: {
+    case "top-left":
+      return { x: -100, y: 0 }
+    case "top-center":
+      return { x: 0, y: -100 }
+    case "top-right":
+      return { x: 100, y: 0 }
+    case "bottom-left":
+      return { x: -100, y: 0 }
+    case "bottom-center":
+      return { x: 0, y: 100 }
+    case "bottom-right":
+      return { x: 100, y: 0 }
+    default:
       console.warn(`Unexpected placement value: ${convertedPlacement}`)
-      return { x: 0, y: -24 }
-    }
+      return { x: 0, y: -100 }
   }
 }
 
-const getPlacementExitValues = (
-  closeOnDrag: boolean,
-  placement: string,
-): PlacementValues => {
+const getPlacementExitValues = (closeOnDrag: boolean, placement: string) => {
   const convertedPlacement = convertFromNoticePlacement(placement)
 
+  // If closeOnDrag is enabled, simulate a "swipe away" exit animation
+  // with more pronounced movement in the natural drag direction
   if (closeOnDrag) {
     switch (convertedPlacement) {
-      case "top-left": {
-        return { x: -200, y: 0 }
-      }
-      case "top-center": {
-        return { x: 0, y: -200 }
-      }
-      case "top-right": {
-        return { x: 200, y: 0 }
-      }
-      case "bottom-left": {
-        return { x: -200, y: 0 }
-      }
-      case "bottom-center": {
-        return { x: 0, y: 200 }
-      }
-      case "bottom-right": {
-        return { x: 200, y: 0 }
-      }
-      default: {
-        return { x: 0, y: -200 }
-      }
+      case "top-left":
+        return { x: -100, y: 0 }
+      case "top-center":
+        return { x: 0, y: -100 }
+      case "top-right":
+        return { x: 100, y: 0 }
+      case "bottom-left":
+        return { x: -100, y: 0 }
+      case "bottom-center":
+        return { x: 0, y: 100 }
+      case "bottom-right":
+        return { x: 100, y: 0 }
+      default:
+        return { x: 0, y: -100 }
     }
   }
 
+  // If closeOnDrag is not enabled, use more subtle exit animations
+  // that still respect the natural direction based on placement
   switch (convertedPlacement) {
-    case "top-left": {
+    case "top-left":
       return { x: -40, y: -10 }
-    }
-    case "top-center": {
+    case "top-center":
       return { x: 0, y: -40 }
-    }
-    case "top-right": {
+    case "top-right":
       return { x: 40, y: -10 }
-    }
-    case "bottom-left": {
+    case "bottom-left":
       return { x: -40, y: 10 }
-    }
-    case "bottom-center": {
+    case "bottom-center":
       return { x: 0, y: 40 }
-    }
-    case "bottom-right": {
+    case "bottom-right":
       return { x: 40, y: 10 }
-    }
-    default: {
+    default:
       return { x: 0, y: -40 }
-    }
   }
 }
 
-const defaultVariants: Variants = {
+const _: Variants = {
   animate: {
     opacity: 1,
     scale: 1,
@@ -239,7 +211,6 @@ const defaultVariants: Variants = {
     y: 0,
   },
   exit: ({ closeOnDrag, placement }) => ({
-    height: 0,
     opacity: 0,
     scale: 0.95,
     transition: {
@@ -249,11 +220,7 @@ const defaultVariants: Variants = {
     ...getPlacementExitValues(closeOnDrag, placement),
   }),
   initial: ({ placement }) => ({
-    // opacity: 0.5,
-    // transition: {
-    //   duration: 0.4,
-    //   ease: [0.4, 0, 0.2, 1],
-    // },
+    opacity: 0,
     ...getPlacementInitialValues(placement),
   }),
 }
@@ -274,9 +241,9 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
     duration = 5000,
     isDelete = false,
     message,
-    placement = "start-center",
+    // placement = "start-center",
     title,
-    variants = defaultVariants,
+    // variants = defaultVariants,
     itemProps,
     onCloseComplete,
     onDelete,
@@ -423,21 +390,43 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
       [convertedPlacement, dragVelocity, dragOffset, onDelete],
     )
 
+    const offsetX = useMemo(() => {
+      switch (convertedPlacement) {
+        case "top-left":
+        case "bottom-left":
+          return -100
+        case "top-right":
+        case "bottom-right":
+          return 100
+        default:
+          return 0
+      }
+    }, [convertedPlacement])
+
+    const offsetY = useMemo(() => {
+      switch (convertedPlacement) {
+        case "top-center":
+          return -100
+        case "bottom-center":
+          return 100
+        default:
+          return 0
+      }
+    }, [convertedPlacement])
+
     return (
-      <motion.li
+      <SlideFade
         id={id.toString()}
-        animate="animate"
-        custom={{ closeOnDrag, convertedPlacement, placement }}
         drag={drag}
         dragConstraints={getDragRestriction(dragConstraints)}
         dragElastic={getDragRestriction(dragElastic)}
         dragMomentum={false}
         dragSnapToOrigin={dragClosable}
-        exit="exit"
-        initial="initial"
         layout
+        offsetX={offsetX}
+        offsetY={offsetY}
+        open
         title={title?.toString()}
-        variants={variants}
         onDragEnd={handleDragEnd}
         onHoverEnd={onMouseLeave}
         onHoverStart={onMouseEnter}
@@ -453,8 +442,41 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
         >
           {runIfFn(message, { id, onClose })}
         </NoticeListInnerItemComponent>
-      </motion.li>
+      </SlideFade>
     )
+
+    // return (
+    //   <motion.li
+    //     id={id.toString()}
+    //     animate="animate"
+    //     custom={{ closeOnDrag, convertedPlacement, placement }}
+    //     drag={drag}
+    //     dragConstraints={getDragRestriction(dragConstraints)}
+    //     dragElastic={getDragRestriction(dragElastic)}
+    //     dragMomentum={false}
+    //     dragSnapToOrigin={dragClosable}
+    //     exit="exit"
+    //     initial="initial"
+    //     layout
+    //     title={title?.toString()}
+    //     variants={variants}
+    //     onDragEnd={handleDragEnd}
+    //     onHoverEnd={onMouseLeave}
+    //     onHoverStart={onMouseEnter}
+    //     {...rest}
+    //     {...props}
+    //   >
+    //     <NoticeListInnerItemComponent
+    //       data-placement-bottom={convertedPlacement.includes("bottom")}
+    //       data-placement-center={convertedPlacement.includes("center")}
+    //       data-placement-left={convertedPlacement.includes("left")}
+    //       data-placement-right={convertedPlacement.includes("right")}
+    //       data-placement-top={convertedPlacement.includes("top")}
+    //     >
+    //       {runIfFn(message, { id, onClose })}
+    //     </NoticeListInnerItemComponent>
+    //   </motion.li>
+    // )
   },
   "listItem",
 )()

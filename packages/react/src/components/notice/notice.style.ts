@@ -4,6 +4,8 @@ export const noticeStyle = defineComponentSlotStyle({
   base: {
     actionButton: {},
     closeButton: {
+      size: "sm",
+      bg: "red",
       position: "absolute",
       right: 2,
       top: 2,
@@ -18,10 +20,9 @@ export const noticeStyle = defineComponentSlotStyle({
     list: {
       '&[data-placement-bottom="true"]': {
         bottom: "max(env(safe-area-inset-bottom, 16px), 16px)",
-        placeContent: "end",
+        flexDirection: "column-reverse",
       },
       '&[data-placement-center="true"]': {
-        justifyContent: "center",
         left: "max(env(safe-area-inset-left, 16px), 16px)",
         right: "max(env(safe-area-inset-right, 16px), 16px)",
       },
@@ -34,73 +35,82 @@ export const noticeStyle = defineComponentSlotStyle({
       '&[data-placement-top="true"]': {
         top: "max(env(safe-area-inset-top, 16px), 16px)",
       },
-      display: "grid",
-      gridTemplateRows: "repeat(var(--length), 0%)",
+      display: "flex",
+      flexDirection: "column",
       pointerEvents: "none",
       position: "fixed",
-      transition: "all 0.5s ease",
       zIndex: "160",
-      _hover: {
-        gridTemplateRows: "repeat(var(--length), calc(100%/var(--length)))",
-      },
     },
     listItem: {
-      "&[data-placement-bottom='true']": {
-        order: "calc(var(--length) - var(--index))",
-        placeSelf: "end center",
-      },
       alignItems: "center",
-      display: "grid",
+      display: "flex",
       justifyContent: "center",
-      placeSelf: "start center",
       zIndex: "calc(var(--length) - var(--index))",
+      // overflow: "hidden",
+      // transition: "height 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
       _groupHover: {
-        "& > *:first-of-type": {
-          "&[data-placement-bottom='true']": {
-            paddingBottom: "md",
+        _first: {
+          "& > *:first-of-type": {
+            '&[data-placement-bottom="true"]': {
+              // height: "auto",
+              paddingBottom: "md",
+            },
+            '&[data-placement-top="true"]': {
+              // height: "auto",
+              paddingTop: "md",
+            },
           },
-          "&[data-placement-top='true']": {
+          _notFirst: {
             paddingTop: "md",
           },
         },
         _notFirst: {
           "& > *:first-of-type": {
-            transform: "scaleX(1)",
+            '&[data-placement-bottom="true"]': {
+              // height: "66px",
+              paddingBottom: "md",
+            },
+            '&[data-placement-top="true"]': {
+              // height: "66px",
+              paddingTop: "md",
+            },
+            transform: "scale(1) translateY(0)",
           },
+          paddingTop: "0",
         },
       },
       _notFirst: {
         "& > *:first-of-type": {
           '&[data-placement-bottom="true"]': {
-            // paddingBottom: "sm",
-            // paddingBottom: "min(calc(3px + (var(--index) * 12px)), 49px)",
-            paddingBottom: "calc(3px + (var(--index) * 12px))",
+            // height: "20px",
+            paddingBottom: "md",
+            transform:
+              "translateY(calc((var(--index) * 100%) - (var(--index) * 20px))) scale(max(calc(1 - var(--index) * 0.1), 0))",
           },
           '&[data-placement-top="true"]': {
-            // paddingTop: "sm",
-            // paddingTop: "min(calc(3px + (var(--index) * 12px)), 49px)",
-            paddingTop: "calc(3px + (var(--index) * 12px))",
+            paddingTop: "md",
+            transform:
+              "translateY(calc((var(--index) * -100%) + (var(--index) * 20px))) scale(max(calc(1 - var(--index) * 0.1), 0))",
+            // height: "20px",
           },
-          transform: "scaleX(max(calc(1 - var(--index) * 0.1), 0))",
+          // transform: "scaleX(max(calc(1 - var(--index) * 0.1), 0))",
+          // transition: "padding 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         },
       },
     },
     loading: {},
     noticeWrapper: {
-      "&[data-placement-bottom='true']": {
-        transformOrigin: "bottom",
-      },
       display: "flex",
       maxW: "36rem",
       minW: "20rem",
       pointerEvents: "auto",
       transformOrigin: "top",
-      transition: "all 0.5s ease",
+      transition: "padding 400ms ease, transform 400ms ease",
     },
     root: {
       "&>*": {
         opacity: "calc(1 - var(--index) * 1)",
-        transition: "opacity 0.5s ease",
+        transition: "opacity 300ms ease",
         _groupHover: {
           opacity: 1,
         },

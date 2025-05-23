@@ -29,6 +29,7 @@ import { Alert } from "../alert"
 import { Button } from "../button/button"
 import { CloseButton } from "../close-button"
 import { withContext } from "./notice-provider"
+import { useNoticeState } from "./use-notice-state"
 
 const findId = (
   options: NoticeOptions[],
@@ -344,8 +345,8 @@ export interface NoticeProps
   onClose: () => void
 }
 
-const Notice = withContext<"div", NoticeProps>(
-  ({
+const Notice = withContext<"div", NoticeProps>((props) => {
+  const {
     id,
     colorScheme,
     variant = "plain",
@@ -358,58 +359,69 @@ const Notice = withContext<"div", NoticeProps>(
     status,
     title,
     onClose,
-    ...props
-  }) => {
-    const isButtonClosable =
-      closable &&
-      (closeStrategy === "button" || closeStrategy === "both") &&
-      !closeOnDrag
-    const isElementClosable =
-      closable &&
-      (closeStrategy === "element" || closeStrategy === "both") &&
-      !closeOnDrag
-    const dragClosable = closeOnDrag && closable
+    ...rest
+  } = props
 
-    return (
-      <NoticeRoot
-        id={id.toString()}
-        colorScheme={colorScheme}
-        variant={variant}
-        status={status}
-        onClick={
-          isElementClosable && !dragClosable
-            ? () => {
-                onClose()
-              }
-            : undefined
-        }
-        {...props}
-      >
-        {status === "loading" ? (
-          <NoticeLoading loadingScheme={icon?.loadingScheme} />
-        ) : (
-          <NoticeIcon {...(icon?.color ? { color: icon.color } : {})} />
-        )}
-        <NoticeContent>
-          {title ? <NoticeTitle>{title}</NoticeTitle> : null}
-          {description ? (
-            <NoticeDescription>{description}</NoticeDescription>
-          ) : null}
-        </NoticeContent>
-        {isFunction(action) ? action({ id, onClose }) : action}
-        {closable && isButtonClosable ? (
-          <NoticeCloseButton
-            id={id.toString()}
-            onClose={() => {
-              onClose()
-            }}
-          />
+  // Use the new composable hook
+  const noticeState = useNoticeState({
+    id,
+    closable,
+    closeOnDrag,
+    closeStrategy,
+    title,
+    onDelete: onClose,
+  })
+
+  const isButtonClosable =
+    noticeState.closable &&
+    (noticeState.closeStrategy === "button" ||
+      noticeState.closeStrategy === "both") &&
+    !noticeState.closeOnDrag
+  const isElementClosable =
+    noticeState.closable &&
+    (noticeState.closeStrategy === "element" ||
+      noticeState.closeStrategy === "both") &&
+    !noticeState.closeOnDrag
+  const dragClosable = noticeState.closeOnDrag && noticeState.closable
+
+  return (
+    <NoticeRoot
+      id={id.toString()}
+      colorScheme={colorScheme}
+      variant={variant}
+      status={status}
+      onClick={
+        isElementClosable && !dragClosable
+          ? () => {
+              noticeState.onClose()
+            }
+          : undefined
+      }
+      {...noticeState.getRootProps(rest)}
+    >
+      {status === "loading" ? (
+        <NoticeLoading loadingScheme={icon?.loadingScheme} />
+      ) : (
+        <NoticeIcon {...(icon?.color ? { color: icon.color } : {})} />
+      )}
+      <NoticeContent>
+        {title ? <NoticeTitle>{title}</NoticeTitle> : null}
+        {description ? (
+          <NoticeDescription>{description}</NoticeDescription>
         ) : null}
-      </NoticeRoot>
-    )
-  },
-  "root",
-)()
+      </NoticeContent>
+      {isFunction(action)
+        ? action({ id, onClose: noticeState.onClose })
+        : action}
+      {noticeState.closable && isButtonClosable ? (
+        <NoticeCloseButton
+          id={id.toString()}
+          {...noticeState.getCloseButtonProps()}
+        />
+      ) : null}
+    </NoticeRoot>
+  )
+}, "root")()
 
 interface NoticeRootOptions
   extends Omit<AlertRootProps, "status">,
@@ -475,7 +487,7 @@ export const NoticeDescription = withContext<"div", NoticeDescriptionProps>(
 )()
 
 export interface NoticeCloseButtonProps extends CloseButtonProps {
-  onClose: () => void
+  onClose?: (...args: any[]) => void
 }
 
 export const NoticeCloseButton = withContext<"button", NoticeCloseButtonProps>(
@@ -486,7 +498,7 @@ export const NoticeCloseButton = withContext<"button", NoticeCloseButtonProps>(
         onClick={(e) => {
           handlerAll(onClick, () => {
             e.stopPropagation()
-            onClose()
+            onClose?.()
           })(e)
         }}
         {...props}

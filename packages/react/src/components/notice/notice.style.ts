@@ -76,7 +76,18 @@ export const noticeStyle = defineComponentSlotStyle({
             },
             transform: "scale(1) translateY(0)",
           },
-          paddingTop: "0",
+        },
+        _onlyChild: {
+          "& > *:first-of-type": {
+            '&[data-placement-bottom="true"]': {
+              // height: "auto",
+              paddingBottom: "0",
+            },
+            '&[data-placement-top="true"]': {
+              // height: "auto",
+              paddingTop: "0",
+            },
+          },
         },
       },
       _notFirst: {

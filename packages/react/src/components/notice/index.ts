@@ -1,4 +1,5 @@
 export * as Notice from "./namespace"
 export { noticeStore, useNotice } from "./notice"
-export type { NoticeOptions, NoticeProps, UseNoticeOptions } from "./notice"
 export * from "./notice-provider"
+export type { NoticeOptions, UseNoticeOptions } from "./types"
+export * from "./use-notice-state"

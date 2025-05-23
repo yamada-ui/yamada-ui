@@ -221,13 +221,13 @@ export const useClickable = <
 
       if (!button) setPressed(true)
 
-      ev.currentTarget.focus({ preventScroll: true })
+      if (focusOnClick) ev.currentTarget.focus({ preventScroll: true })
 
       listeners.add(document, "mouseup", onDocumentMouseUp, false)
 
       onMouseDown?.(ev)
     },
-    [disabled, button, onMouseDown, listeners, onDocumentMouseUp],
+    [disabled, button, focusOnClick, onMouseDown, listeners, onDocumentMouseUp],
   )
 
   const handleMouseUp = useCallback(

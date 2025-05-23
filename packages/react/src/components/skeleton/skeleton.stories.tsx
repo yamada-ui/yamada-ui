@@ -1,7 +1,10 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import { useEffect, useState } from "react"
+import { PropsTable } from "../../../storybook/components"
+import { useAsync } from "../../hooks/use-async"
 import { Avatar } from "../avatar"
+import { Badge } from "../badge"
 import { Heading } from "../heading"
+import { HStack, VStack } from "../stack"
 import { Text } from "../text"
 import { Skeleton, SkeletonCircle, SkeletonText } from "./"
 
@@ -31,96 +34,188 @@ export const Basic: Story = () => {
   )
 }
 
-export const Color: Story = () => {
+export const Variant: Story = () => {
   return (
-    <>
-      <Skeleton endColor="orange.500" startColor="pink.500" />
+    <PropsTable variant="column" rows={["pulse", "shine"]}>
+      {(_, row, key) => (
+        <VStack key={key} gap="md">
+          <HStack>
+            <SkeletonCircle variant={row} />
 
-      <SkeletonCircle endColor="orange.500" startColor="pink.500" />
+            <SkeletonText variant={row} lineClamp={2} />
+          </HStack>
 
-      <SkeletonText endColor="orange.500" startColor="pink.500" />
-    </>
+          <Skeleton variant={row} h="4xs" />
+        </VStack>
+      )}
+    </PropsTable>
   )
 }
 
+export const Children: Story = () => {
+  return (
+    <>
+      <HStack>
+        <Skeleton>
+          <Badge>Badge</Badge>
+        </Skeleton>
+
+        <Skeleton loading={false}>
+          <Badge>Badge</Badge>
+        </Skeleton>
+      </HStack>
+
+      <HStack>
+        <SkeletonCircle>
+          <Avatar
+            name="Hirotomo Yamada"
+            src="https://avatars.githubusercontent.com/u/84060430?v=4"
+          />
+        </SkeletonCircle>
+
+        <SkeletonCircle loading={false}>
+          <Avatar
+            name="Hirotomo Yamada"
+            src="https://avatars.githubusercontent.com/u/84060430?v=4"
+          />
+        </SkeletonCircle>
+      </HStack>
+    </>
+  )
+}
 export const Size: Story = () => {
   return (
-    <>
-      <Skeleton h={16} />
+    <VStack gap="md">
+      <HStack>
+        <SkeletonCircle boxSize="14" />
 
-      <SkeletonCircle boxSize={16} />
+        <SkeletonText h="6" lineClamp={2} />
+      </HStack>
 
-      <SkeletonText textHeight={4} />
-    </>
+      <Skeleton h="20" />
+    </VStack>
   )
 }
 
-export const Speed: Story = () => {
+export const StartAndEndColor: Story = () => {
+  return (
+    <VStack gap="md">
+      <HStack>
+        <SkeletonCircle
+          variant="shine"
+          endColor="pink.500"
+          startColor="orange.500"
+        />
+
+        <SkeletonText
+          variant="shine"
+          endColor="pink.500"
+          lineClamp={2}
+          startColor="orange.500"
+        />
+      </HStack>
+
+      <Skeleton
+        variant="shine"
+        endColor="pink.500"
+        h="4xs"
+        startColor="orange.500"
+      />
+    </VStack>
+  )
+}
+
+export const Duration: Story = () => {
   return (
     <>
-      <Skeleton speed={2} />
+      <Skeleton duration={2} />
 
-      <SkeletonCircle speed={2} />
+      <SkeletonCircle duration={2} />
 
-      <SkeletonText speed={2} />
+      <SkeletonText duration={2} />
     </>
   )
 }
 
-export const Gap: Story = () => {
-  return <SkeletonText gap={8} />
+export const TextGap: Story = () => {
+  return <SkeletonText gap="md" />
 }
 
-export const LineClamp: Story = () => {
+export const TextLineClamp: Story = () => {
   return <SkeletonText lineClamp={5} />
 }
 
-export const IsLoaded: Story = () => {
-  const [loaded, setLoaded] = useState<boolean>(false)
-
-  useEffect(() => {
-    wait(3000).then(() => {
-      setLoaded(true)
-    })
-  }, [])
+export const Loaded: Story = () => {
+  const { loading } = useAsync(async () => {
+    await wait(3000)
+  })
 
   return (
-    <>
-      <Skeleton loaded={loaded} />
+    <VStack gap="md">
+      <HStack>
+        <SkeletonCircle loading={loading}>
+          <Avatar
+            name="Hirotomo Yamada"
+            src="https://avatars.githubusercontent.com/u/84060430?v=4"
+            size="xl"
+          />
+        </SkeletonCircle>
 
-      <SkeletonCircle loaded={loaded} />
+        <SkeletonText lineClamp={2} loading={loading} _loading={{ h: "5" }}>
+          <Text fontWeight="bold" lineClamp={1}>
+            Hirotomo Yamada
+          </Text>
+          <Text lineClamp={1}>
+            Developer of Yamada UI. Designer, design system and UI engineer.
+          </Text>
+        </SkeletonText>
+      </HStack>
 
-      <SkeletonText loaded={loaded} />
-    </>
+      <Skeleton loading={loading}>
+        <Heading lineClamp={1}>
+          ギャルのパンティーおくれーーーっ！！！！！
+        </Heading>
+      </Skeleton>
+    </VStack>
   )
 }
 
 export const FadeDuration: Story = () => {
-  const [loaded, setLoaded] = useState<boolean>(false)
-
-  useEffect(() => {
-    wait(3000).then(() => {
-      setLoaded(true)
-    })
-  }, [])
+  const { loading } = useAsync(async () => {
+    await wait(3000)
+  })
 
   return (
-    <>
-      <Skeleton fadeDuration={2} h={12} loaded={loaded}>
-        <Heading isTruncated>
+    <VStack gap="md">
+      <HStack>
+        <SkeletonCircle fadeDuration={2} loading={loading}>
+          <Avatar
+            name="Hirotomo Yamada"
+            src="https://avatars.githubusercontent.com/u/84060430?v=4"
+            size="xl"
+          />
+        </SkeletonCircle>
+
+        <SkeletonText
+          fadeDuration={2}
+          lineClamp={2}
+          loading={loading}
+          _loading={{ h: "5" }}
+        >
+          <Text fontWeight="bold" lineClamp={1}>
+            Hirotomo Yamada
+          </Text>
+          <Text lineClamp={1}>
+            Developer of Yamada UI. Designer, design system and UI engineer.
+          </Text>
+        </SkeletonText>
+      </HStack>
+
+      <Skeleton fadeDuration={2} loading={loading}>
+        <Heading lineClamp={1}>
           ギャルのパンティーおくれーーーっ！！！！！
         </Heading>
       </Skeleton>
-
-      <SkeletonCircle fadeDuration={2} loaded={loaded}>
-        <Avatar name="Hirotomo Yamada" />
-      </SkeletonCircle>
-
-      <SkeletonText fadeDuration={2} loaded={loaded}>
-        <Text isTruncated>
-          私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-        </Text>
-      </SkeletonText>
-    </>
+    </VStack>
   )
 }

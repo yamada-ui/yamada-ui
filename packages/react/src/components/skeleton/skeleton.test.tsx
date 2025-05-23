@@ -12,27 +12,37 @@ describe("<Skeleton />", () => {
     )
   })
 
-  test("should render with given props", () => {
-    render(
-      <>
-        <Skeleton data-testid="Skeleton" h={8} speed={2} />
-        <SkeletonCircle data-testid="SkeletonCircle" boxSize={8} speed={2} />
-        <SkeletonText
-          data-testid="SkeletonText"
-          gap={4}
-          lineClamp={2}
-          speed={2}
-          textHeight={4}
-        />
-      </>,
-    )
-    expect(screen.getByTestId("Skeleton")).toBeInTheDocument()
-    expect(screen.getByTestId("SkeletonCircle")).toBeInTheDocument()
-    expect(screen.getByTestId("SkeletonText")).toBeInTheDocument()
+  test("sets `displayName` correctly", () => {
+    expect(Skeleton.displayName).toBe("Skeleton")
+    expect(SkeletonCircle.name).toBe("SkeletonCircle")
+    expect(SkeletonText.name).toBe("SkeletonText")
   })
 
-  test("should render with isLoaded", () => {
-    render(<Skeleton data-testid="Skeleton" loaded />)
-    expect(screen.getByTestId("Skeleton")).toHaveClass("ui-skeleton--loaded")
+  test("sets `className` correctly", () => {
+    render(
+      <>
+        <Skeleton data-testid="skeleton" />
+        <SkeletonCircle data-testid="skeletonCircle" />
+        <SkeletonText rootProps={{ "data-testid": "skeletonText" }} />
+      </>,
+    )
+    expect(screen.getByTestId("skeleton")).toHaveClass("ui-skeleton")
+    expect(screen.getByTestId("skeletonCircle")).toHaveClass("ui-skeleton")
+    expect(screen.getByTestId("skeletonText").children[0]).toHaveClass(
+      "ui-skeleton",
+    )
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <>
+        <Skeleton data-testid="skeleton" />
+        <SkeletonCircle data-testid="skeletonCircle" />
+        <SkeletonText rootProps={{ "data-testid": "skeletonText" }} />
+      </>,
+    )
+    expect(screen.getByTestId("skeleton").tagName).toBe("DIV")
+    expect(screen.getByTestId("skeletonCircle").tagName).toBe("DIV")
+    expect(screen.getByTestId("skeletonText").children[0]?.tagName).toBe("DIV")
   })
 })

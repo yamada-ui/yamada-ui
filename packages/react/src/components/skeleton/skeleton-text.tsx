@@ -1,72 +1,50 @@
-import type { CSSProps, FC } from "../../core"
+import type { FC, HTMLStyledProps } from "../../core"
 import type { SkeletonProps } from "./skeleton"
-import { ui } from "../../core"
+import { mergeCSS, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
-import { cx } from "../../utils"
 import { Skeleton } from "./skeleton"
 
 export interface SkeletonTextProps extends SkeletonProps {
   /**
-   * The CSS `gap` property.
+   * Props for the root element.
    */
-  gap?: CSSProps["gap"]
-  /**
-   * The CSS `height` property.
-   */
-  textHeight?: CSSProps["height"]
+  rootProps?: HTMLStyledProps
 }
 
 export const SkeletonText: FC<SkeletonTextProps> = ({
-  className,
+  css,
   children,
-  endColor,
-  fadeDuration,
-  gap = "{2, 0.5rem}",
-  lineClamp: _lineClamp = 3,
-  loaded,
-  speed,
-  startColor,
-  textHeight = "{2, 0.5rem}",
+  gap = "2",
+  lineClamp: lineClampProp = 3,
+  loading = true,
+  _loading,
+  _notFirst,
+  rootProps,
   ...rest
 }) => {
-  const lineClamp = useValue(_lineClamp)
+  const lineClamp = useValue(lineClampProp)
 
   return (
-    <ui.div className={cx("ui-skeleton__text", className)} w="100%" {...rest}>
-      {Array(lineClamp)
-        .fill(0)
-        .map((_, index) => {
-          if (loaded && index > 0) return null
+    <styled.div w="full" {...rootProps}>
+      {Array.from({ length: lineClamp }).map((_, index) => {
+        if (!loading && index > 0) return null
 
-          const last = index + 1 === lineClamp
-
-          const props: SkeletonProps = !loaded
-            ? {
-                h: textHeight,
-                mb: !last ? gap : undefined,
-                w: lineClamp > 1 ? (!last ? "100%" : "80%") : "100%",
-              }
-            : {}
-
-          return (
-            <Skeleton
-              key={index}
-              {...{
-                endColor,
-                fadeDuration,
-                loaded,
-                speed,
-                startColor,
-                ...props,
-              }}
-            >
-              {index === 0 ? children : undefined}
-            </Skeleton>
-          )
-        })}
-    </ui.div>
+        return (
+          <Skeleton
+            key={index}
+            css={mergeCSS(css, { "--height": "sizes.4" })}
+            loading={loading}
+            _loading={{
+              _last: { maxW: lineClamp > 1 ? "80%" : "100%" },
+              ..._loading,
+            }}
+            _notFirst={{ mt: gap, ..._notFirst }}
+            {...rest}
+          >
+            {!loading && index === 0 ? children : undefined}
+          </Skeleton>
+        )
+      })}
+    </styled.div>
   )
 }
-
-SkeletonText.displayName = "SkeletonText"
-SkeletonText.__ui__ = "SkeletonText"

@@ -1,22 +1,23 @@
-import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { SkeletonStyle } from "./skeleton.style"
-import { createComponent, mergeCSS, ui } from "../../core"
-import { useAnimation } from "../../hooks/use-animation"
-import { useMounted } from "../../hooks/use-mounted"
-import { usePrevious } from "../../hooks/use-previous"
-import { useValue } from "../../hooks/use-value"
-import { cx, getValidChildren } from "../../utils"
+import { useMemo } from "react"
+import { createComponent } from "../../core"
+import { dataAttr, getValidChildren, isString, isUndefined } from "../../utils"
 import { skeletonStyle } from "./skeleton.style"
 
-export interface SkeletonProps extends HTMLUIProps, ThemeProps<SkeletonStyle> {
+export interface SkeletonProps
+  extends HTMLStyledProps,
+    ThemeProps<SkeletonStyle> {
+  /**
+   * The animation duration in seconds.
+   */
+  duration?: number | string
   /**
    * The color at the animation end.
    */
   endColor?: CSSProps["color"]
   /**
-   * The fadeIn duration in seconds. Requires `isLoaded` toggled to `true` in order to see the transition.
-   *
-   * @default 0.4
+   * The fade in duration in seconds. Requires `loaded` toggled to `true` in order to see the transition.
    */
   fadeDuration?: number | string
   /**
@@ -25,18 +26,6 @@ export interface SkeletonProps extends HTMLUIProps, ThemeProps<SkeletonStyle> {
    * @default false
    */
   fitContent?: boolean
-  /**
-   * If `true`, it'll render its children with a nice fade transition.
-   *
-   * @default false
-   */
-  loaded?: boolean
-  /**
-   * The animation speed in seconds.
-   *
-   * @default 0.8
-   */
-  speed?: number | string
   /**
    * The color at the animation start.
    */
@@ -52,103 +41,45 @@ export const {
 /**
  * `Skeleton` is a component that acts as a placeholder until content is loaded.
  *
- * @see Docs https://yamada-ui.com/components/feedback/skeleton
+ * @see https://yamada-ui.com/components/skeleton
  */
-export const Skeleton = withContext<"div", SkeletonProps>(
+export const Skeleton = withContext("div", { transferProps: ["loading"] })(
+  undefined,
   ({
-    className,
-    css: cssProp,
     children,
-    endColor: _endColor = ["rgba(0, 0, 0, 0.24)", "rgba(255, 255, 255, 0.24)"],
-    fadeDuration = 0.4,
+    duration,
+    endColor,
+    fadeDuration,
     fitContent,
-    loaded,
-    speed = 0.8,
-    startColor: _startColor = [
-      "rgba(0, 0, 0, 0.16)",
-      "rgba(255, 255, 255, 0.16)",
-    ],
+    loading,
+    startColor,
     ...rest
   }) => {
-    const validChildren = getValidChildren(children)
+    const validChildren = useMemo(() => getValidChildren(children), [children])
     const hasChildren = !!validChildren.length
 
     fitContent ??= hasChildren
 
-    const [mounted] = useMounted()
-    const prevIsLoaded = usePrevious(loaded)
-    const startColor = useValue(_startColor)
-    const endColor = useValue(_endColor)
-
-    const fadeIn = useAnimation({
-      duration:
-        typeof fadeDuration === "string" ? fadeDuration : `${fadeDuration}s`,
-      keyframes: {
-        "0%": {
-          opacity: 0,
-        },
-        "100%": {
-          opacity: 1,
-        },
-      },
-    })
-
-    const animation = useAnimation({
-      direction: "alternate",
-      duration: typeof speed === "string" ? speed : `${speed}s`,
-      iterationCount: "infinite",
-      keyframes: {
-        "0%": {
-          background: startColor,
-          borderColor: startColor,
-        },
-        "100%": {
-          background: endColor,
-          borderColor: endColor,
-        },
-      },
-      timingFunction: "linear",
-    })
-
-    const css = mergeCSS(cssProp, {
-      "&::before, &::after, *": {
-        visibility: "hidden",
-      },
-      boxShadow: "none",
-      color: "transparent",
-      cursor: "default",
-      h: fitContent ? "fit-content" : "{4, 1rem}",
-      maxW: "100%",
-      pointerEvents: "none",
-      userSelect: "none",
-      w: fitContent ? "fit-content" : "100%",
-    })
-
-    if (loaded) {
-      const animation = !mounted() || prevIsLoaded ? "none" : fadeIn
-
-      return (
-        <ui.div
-          className={cx("ui-skeleton--loaded", className)}
-          {...rest}
-          aria-busy="false"
-          animation={animation}
-        >
-          {validChildren}
-        </ui.div>
-      )
-    } else {
-      return (
-        <ui.div
-          className={className}
-          css={css}
-          {...rest}
-          aria-busy="true"
-          animation={animation}
-        >
-          {validChildren}
-        </ui.div>
-      )
+    return {
+      "aria-busy": loading,
+      "data-loaded": dataAttr(!loading),
+      "data-loading": dataAttr(loading),
+      "--duration": !isUndefined(duration)
+        ? isString(duration)
+          ? duration
+          : `${duration}s`
+        : undefined,
+      "--end-color": endColor ? `colors.${endColor}` : undefined,
+      "--fade-duration": !isUndefined(fadeDuration)
+        ? isString(fadeDuration)
+          ? fadeDuration
+          : `${fadeDuration}s`
+        : undefined,
+      "--height": fitContent ? "fit-content" : undefined,
+      "--start-color": startColor ? `colors.${startColor}` : undefined,
+      "--width": fitContent ? "fit-content" : undefined,
+      children,
+      ...rest,
     }
   },
-)()
+)

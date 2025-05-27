@@ -10344,7 +10344,7 @@ export interface StyleProps {
   /**
    * Sets the value of `--translate-z`.
    */
-  translateZ?: StyleValue<AnyString>
+  translateZ?: StyleValue<AnyString | number>
   /**
    * If `true`, it clamps truncate a text after one line.
    */

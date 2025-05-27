@@ -28,10 +28,10 @@ export const {
  * @see https://yamada-ui.com/components/textarea
  */
 export const Textarea = withContext("textarea")(
-  () => {
-    const inputProps = useInputPropsContext()
+  (props) => {
+    const context = useInputPropsContext()
 
-    return { rows: 2, ...inputProps }
+    return { rows: 2, ...context, ...props }
   },
   (props) => {
     const {

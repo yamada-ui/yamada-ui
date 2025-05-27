@@ -1,12 +1,27 @@
 import type { Dict } from "../../utils"
 import type { StyleConfig } from "../config"
 import type { StyleProperty } from "../styles"
-import type { UsageTheme, VariableTokens, VariableValue } from "../theme"
+import type {
+  ThemeToken,
+  UsageTheme,
+  VariableTokens,
+  VariableValue,
+} from "../theme"
 import type { CSSMap, DefineThemeValue, StyledTheme } from "../theme"
 import type { Breakpoints } from "./breakpoint"
-import type { CSSObject, CSSProperties } from "./index.types"
+import type { CSSObject, CSSProperties, StyleValue } from "./index.types"
 import { useMemo, useRef } from "react"
-import { calc, escape, isArray, isObject, isString, merge } from "../../utils"
+import {
+  calc,
+  escape,
+  isArray,
+  isNull,
+  isObject,
+  isString,
+  isUndefined,
+  merge,
+  replaceObject,
+} from "../../utils"
 import { cssProps } from "../components"
 import { conditions } from "../conditions"
 import { animation, colorMix, gradient, insertKeyframes } from "../config"
@@ -285,6 +300,19 @@ export function getCreateThemeVars(
 }
 
 export type CreateThemeVars = ReturnType<ReturnType<typeof getCreateThemeVars>>
+
+export function varAttr(
+  value: StyleValue<number | string> | undefined,
+  token?: ThemeToken,
+): StyleValue<number | string> | undefined {
+  if (isUndefined(value) || isNull(value)) return value
+
+  if (isObject(value) || isArray(value)) {
+    return replaceObject(value, (value) => varAttr(value, token))
+  } else {
+    return token ? `{${token}.${value}, ${value}}` : value
+  }
+}
 
 export function injectVars<Y extends Dict | Dict[] | undefined>(
   objOrArray: Y,

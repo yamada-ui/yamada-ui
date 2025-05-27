@@ -2,28 +2,18 @@ import { defineComponentSlotStyle } from "../../core"
 
 export const indicatorStyle = defineComponentSlotStyle({
   base: {
-    icon: {
+    float: {
+      zIndex: "yamcha",
+    },
+    label: {
       alignItems: "center",
-      display: "flex",
-      h: "fit-content",
-      justifyContent: "center",
-      outline: 0,
-      position: "absolute",
+      display: "inline-flex",
       rounded: "full",
-      w: "fit-content",
+      verticalAlign: "middle",
       whiteSpace: "nowrap",
-      zIndex: "kurillin",
       _numeric: {
         fontWeight: "medium",
       },
-    },
-    ping: {
-      bg: "{pingColor}",
-      boxSize: "100%",
-      opacity: 0.75,
-      position: "absolute",
-      rounded: "{full, 9999px}",
-      zIndex: -1,
     },
     root: {
       position: "relative",
@@ -49,19 +39,33 @@ export const indicatorStyle = defineComponentSlotStyle({
       },
     },
     /**
-     * The placement of the indicator.
+     * If `true`, make an element scale and fade like a radar ping or ripple of water.
      *
-     * @default 'top-right'
+     * @default false
      */
-    placement: {
-      bottom: {},
-      "bottom-left": {},
-      "bottom-right": {},
-      left: {},
-      right: {},
-      top: {},
-      "top-left": {},
-      "top-right": {},
+    ping: {
+      true: {
+        label: {
+          _before: {
+            animationDuration: "{duration, 1.4s}",
+            animationFillMode: "forwards",
+            animationIterationCount: "{iteration-count, infinite}",
+            animationName: "ping",
+            animationTimingFunction:
+              "{timing-function, cubic-bezier(0, 0, 0.2, 1)}",
+            bg: "{ping-color}",
+            boxSize: "100%",
+            inset: "0",
+            opacity: 0.7,
+            position: "absolute",
+            rounded: "full",
+            zIndex: -1,
+          },
+        },
+        root: {
+          "--animation-scale": "1.8",
+        },
+      },
     },
     /**
      * If `true`, display the border of the indicator.
@@ -70,7 +74,7 @@ export const indicatorStyle = defineComponentSlotStyle({
      */
     withBorder: {
       true: {
-        icon: {
+        label: {
           borderColor: ["white", "black"],
           borderWidth: "0.2em",
         },
@@ -80,123 +84,53 @@ export const indicatorStyle = defineComponentSlotStyle({
 
   variants: {
     solid: {
-      icon: {
+      label: {
         layerStyle: "solid",
-        vars: [
-          {
-            name: "ping",
-            token: "colors",
-            value: "colorScheme.emphasized",
-          },
-        ],
+        "--ping-color": "colorScheme.outline",
       },
     },
     subtle: {
-      icon: {
+      label: {
         layerStyle: "subtle",
-        vars: [
-          {
-            name: "ping",
-            token: "colors",
-            value: "colorScheme.emphasized",
-          },
-        ],
+        "--ping-color": "colorScheme.outline",
+      },
+    },
+    surface: {
+      label: {
+        layerStyle: "surface",
+        "--ping-color": "colorScheme.outline",
       },
     },
   },
 
-  compounds: [
-    {
-      css: {
-        icon: {
-          top: "{offset}",
-          translateY: "-50%",
-        },
-      },
-      placement: /^top/,
-    },
-    {
-      css: {
-        icon: {
-          bottom: "{offset}",
-          translateY: "50%",
-        },
-      },
-      placement: /^bottom/,
-    },
-    {
-      css: {
-        icon: {
-          top: "50%",
-          translateY: "-50%",
-        },
-      },
-      placement: /^(?:left|right)$/,
-    },
-    {
-      css: {
-        icon: {
-          left: "{offset}",
-          translateX: "-50%",
-        },
-      },
-      placement: /left$/,
-    },
-    {
-      css: {
-        icon: {
-          right: "{offset}",
-          translateX: "50%",
-        },
-      },
-      placement: /right$/,
-    },
-    {
-      css: {
-        icon: {
-          left: "50%",
-          translateX: "-50%",
-        },
-      },
-      placement: /^(?:top|bottom)$/,
-    },
-  ],
-
   sizes: {
     sm: {
-      icon: {
+      label: {
         fontSize: "xs",
-        lineHeight: 1.6,
-        minH: 2,
-        minW: 2,
-        px: 1,
+        minBoxSize: "3",
+        px: "1.5",
       },
     },
     md: {
-      icon: {
+      label: {
         fontSize: "sm",
-        lineHeight: 1.5,
-        minH: 3,
-        minW: 3,
-        px: 1.5,
+        minBoxSize: "4",
+        px: "2",
       },
     },
     lg: {
-      icon: {
+      label: {
         fontSize: "md",
-        lineHeight: 1.4,
-        minH: 4,
-        minW: 4,
-        px: 2,
+        minBoxSize: "5",
+        px: "2.5",
       },
     },
   },
 
   defaultProps: {
-    colorScheme: "primary",
-    size: "md",
+    size: "sm",
     variant: "solid",
-    placement: "top-right",
+    ping: false,
   },
 })
 

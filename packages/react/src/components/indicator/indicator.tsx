@@ -1,22 +1,40 @@
 import type { ReactNode } from "react"
-import type {
-  CSSAnimationObject,
-  HTMLStyledProps,
-  PropGetter,
-  StyleValue,
-  ThemeProps,
-} from "../../core"
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
+import type { FloatProps } from "../float"
 import type { IndicatorStyle } from "./indicator.style"
 import { useMemo } from "react"
-import { createSlotComponent, mergeVars, styled } from "../../core"
-import { useAnimation } from "../../hooks/use-animation"
-import { useValue } from "../../hooks/use-value"
-import { dataAttr } from "../../utils"
+import { createSlotComponent, styled } from "../../core"
+import { dataAttr, isNumber, isObject } from "../../utils"
+import { Float } from "../float"
 import { indicatorStyle } from "./indicator.style"
+
+interface PingOptions {
+  /**
+   * It is used for the color of the ping animation.
+   */
+  color?: CSSProps["backgroundColor"]
+  /**
+   * It is used for the duration of the ping animation.
+   */
+  duration?: CSSProps["animationDuration"]
+  /**
+   * It is used for the count of the ping animation.
+   */
+  iterationCount?: CSSProps["animationIterationCount"]
+  /**
+   * It is used for the scale of the ping animation.
+   */
+  scale?: CSSProps["scale"]
+  /**
+   * It is used for the timing function of the ping animation.
+   */
+  timingFunction?: CSSProps["animationTimingFunction"]
+}
 
 export interface IndicatorProps
   extends Omit<HTMLStyledProps, "offset">,
-    ThemeProps<IndicatorStyle> {
+    Omit<ThemeProps<IndicatorStyle>, "ping">,
+    Pick<FloatProps, "offset" | "placement"> {
   /**
    * If `true`, the indicator will be disabled.
    *
@@ -28,12 +46,6 @@ export interface IndicatorProps
    */
   label?: ReactNode
   /**
-   * Changes position offset, usually used when element has border-radius.
-   *
-   * @default 0
-   */
-  offset?: StyleValue<number>
-  /**
    * If `label` is of type number, the maximum number displayed.
    *
    * @default 99
@@ -44,31 +56,7 @@ export interface IndicatorProps
    *
    * @default false
    */
-  ping?: boolean
-  /**
-   * It is used for the color of the ping animation.
-   *
-   * @default "var(--ui-ping)"
-   */
-  pingColor?: HTMLStyledProps["backgroundColor"]
-  /**
-   * It is used for the count of the ping animation.
-   *
-   * @default "infinite"
-   */
-  pingCount?: CSSAnimationObject["iterationCount"]
-  /**
-   * It is used for the duration of the ping animation.
-   *
-   * @default "1.4s"
-   */
-  pingDuration?: CSSAnimationObject["direction"]
-  /**
-   * It is used for the scale of the ping animation.
-   *u
-   * @default 1.8
-   */
-  pingScale?: number
+  ping?: boolean | PingOptions
   /**
    * If `true`, display 0.
    *
@@ -76,14 +64,17 @@ export interface IndicatorProps
    */
   showZero?: boolean
   /**
-   * Props for indicator wrapper element.
+   * Props for the float element.
    */
-  containerProps?: Omit<HTMLStyledProps, "children">
+  floatProps?: IndicatorFloatProps
+  /**
+   * Props for the label element.
+   */
+  labelProps?: IndicatorLabelProps
 }
 
 export const {
   PropsContext: IndicatorPropsContext,
-  useComponentContext: useIndicatorContext,
   usePropsContext: useIndicatorPropsContext,
   withContext,
   withProvider,
@@ -95,113 +86,80 @@ export const {
 /**
  * `Indicator` is a component that displays at the corner of elements such as avatars.
  *
- * @see Docs https://yamada-ui.com/components/indicator
+ * @see https://yamada-ui.com/components/indicator
  */
-export const Indicator = withProvider<"div", IndicatorProps>(
+export const Indicator = withProvider(
   ({
-    className,
-    css: rootCssProps,
     children,
     disabled,
     label,
-    offset = 0,
+    offset,
     overflowCount = 99,
-    ping,
-    pingColor = "{ping}",
-    pingCount = "infinite",
-    pingDuration = "1.4s",
-    pingScale = 1.8,
+    placement,
     showZero = true,
-    vars,
-    containerProps,
+    floatProps,
+    labelProps,
     ...rest
   }) => {
-    const animation = useAnimation({
-      duration: pingDuration,
-      fillMode: "forwards",
-      iterationCount: pingCount,
-      keyframes: {
-        "75%": {
-          opacity: 0,
-          transform: `scale(${pingScale})`,
-        },
-        "100%": {
-          opacity: 0,
-          transform: `scale(${pingScale})`,
-        },
-      },
-      timingFunction: "cubic-bezier(0, 0, 0.2, 1)",
-    })
-    const numeric = typeof label === "number"
-    const trulyDisabled =
-      disabled ?? (numeric && !showZero && (label as number) <= 0)
+    const numeric = isNumber(label)
 
-    const computedOffset = useValue(offset)
+    disabled ??= numeric && !showZero && (label as number) <= 0
 
-    const renderLabel = useMemo(() => {
-      if (numeric) {
-        if ((label as number) > overflowCount) {
-          return (
-            <>
-              {overflowCount}
-              <styled.span lineHeight={1}>+</styled.span>
-            </>
-          )
-        } else {
-          return label
-        }
+    const computedLabel = useMemo(() => {
+      if (numeric && label > overflowCount) {
+        return (
+          <>
+            {overflowCount}
+            <styled.span>+</styled.span>
+          </>
+        )
       } else {
         return label
       }
     }, [numeric, label, overflowCount])
 
-    const getRootProps: PropGetter = (props) => ({
-      className,
-      css: rootCssProps,
-      ...containerProps,
-      ...props,
-    })
-
-    const getIconProps: PropGetter = (props) => ({
-      ...rest,
-      "data-numeric": dataAttr(numeric),
-      ...props,
-      vars: mergeVars(vars, {
-        name: "offset",
-        token: "spaces",
-        value: computedOffset,
-      }),
-    })
-
-    const getPingProps: PropGetter = (props) => ({
-      animation,
-      ...props,
-      vars: mergeVars(vars, {
-        name: "pingColor",
-        token: "colors",
-        value: pingColor,
-      }),
-    })
-
     return (
-      <styled.div {...getRootProps()}>
-        {!trulyDisabled ? (
-          <IndicatorIcon {...getIconProps()}>
-            {renderLabel}
-            {ping ? <IndicatorPing {...getPingProps()} /> : null}
-          </IndicatorIcon>
-        ) : null}
+      <styled.div {...rest}>
         {children}
+
+        {!disabled ? (
+          <IndicatorFloat offset={offset} placement={placement} {...floatProps}>
+            <IndicatorLabel data-numeric={dataAttr(numeric)} {...labelProps}>
+              {computedLabel}
+            </IndicatorLabel>
+          </IndicatorFloat>
+        ) : null}
       </styled.div>
     )
   },
   "root",
+)(({ ping, ...rest }) => {
+  if (isObject(ping)) {
+    const { color, duration, iterationCount, scale, timingFunction } = ping
+
+    return {
+      ...rest,
+      "--animation-scale": scale,
+      "--duration": duration ? `durations.${duration}` : undefined,
+      "--iteration-count": iterationCount,
+      "--ping-color": color ? `colors.${color}` : undefined,
+      "--timing-function": timingFunction
+        ? `easings.${timingFunction}`
+        : undefined,
+      ping: true,
+    }
+  } else {
+    return { ...rest, ping }
+  }
+})
+
+interface IndicatorFloatProps extends FloatProps {}
+
+const IndicatorFloat = withContext<"div", IndicatorFloatProps>(Float, "float")()
+
+interface IndicatorLabelProps extends HTMLStyledProps<"span"> {}
+
+const IndicatorLabel = withContext<"span", IndicatorLabelProps>(
+  "span",
+  "label",
 )()
-
-interface IndicatorIconProps extends HTMLStyledProps {}
-
-const IndicatorIcon = withContext<"div", IndicatorIconProps>("div", "icon")()
-
-interface IndicatorPingProps extends HTMLStyledProps {}
-
-const IndicatorPing = withContext<"div", IndicatorPingProps>("div", "ping")()

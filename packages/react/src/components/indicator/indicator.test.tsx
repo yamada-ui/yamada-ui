@@ -4,7 +4,7 @@ import { a11y, render, screen } from "../../../test"
 describe("<Indicator />", () => {
   test("Indicator renders correctly", async () => {
     await a11y(
-      <Indicator label="new">
+      <Indicator label="New">
         <div />
       </Indicator>,
     )
@@ -16,79 +16,61 @@ describe("<Indicator />", () => {
 
   test("sets `className` correctly", () => {
     render(
-      <Indicator data-testid="indicator" label="new">
+      <Indicator data-testid="indicator" label="New">
         <div />
       </Indicator>,
     )
-    const el = screen.getByTestId("indicator")
-    expect(el).toHaveClass("ui-indicator__icon")
-    expect(el.parentElement).toHaveClass("ui-indicator__root")
+    const el = screen.getByText("New")
+    expect(el).toHaveClass("ui-indicator__label")
+    expect(el.parentElement).toHaveClass("ui-indicator__float")
+    expect(el.parentElement?.parentElement).toHaveClass("ui-indicator__root")
   })
 
-  test("should render indicator", () => {
+  test("should render", () => {
     render(
-      <Indicator label="new">
+      <Indicator label="New">
         <div />
       </Indicator>,
     )
-    expect(screen.getByText("new")).toBeInTheDocument()
+    expect(screen.getByText("New")).toBeInTheDocument()
   })
 
-  test("should render indicator (with overflowCount)", () => {
+  test("should render (with overflowCount)", () => {
     render(
-      <Indicator data-testid="Indicator" label={100} overflowCount={99}>
+      <Indicator
+        label={100}
+        overflowCount={99}
+        labelProps={{ "data-testid": "indicator" }}
+      >
         <div />
       </Indicator>,
     )
-    expect(screen.getByTestId("Indicator")).toHaveTextContent("+")
+    expect(screen.getByTestId("indicator")).toHaveTextContent("+")
   })
 
   test("should not render zero when showZero is false", () => {
     render(
-      <Indicator data-testid="Indicator" label={0} showZero={false}>
+      <Indicator
+        label={0}
+        showZero={false}
+        labelProps={{ "data-testid": "indicator" }}
+      >
         <div />
       </Indicator>,
     )
-    expect(screen.queryByTestId("Indicator")).not.toBeInTheDocument()
+    expect(screen.queryByTestId("indicator")).not.toBeInTheDocument()
   })
 
-  test("should not render indicator", () => {
+  test("should not render", () => {
     render(
-      <Indicator data-testid="Indicator" disabled label="new">
+      <Indicator
+        disabled
+        label="New"
+        labelProps={{ "data-testid": "indicator" }}
+      >
         <div />
       </Indicator>,
     )
-    expect(screen.queryByTestId("Indicator")).not.toBeInTheDocument()
-  })
-
-  test.todo("renders indicator at bottom-left", () => {
-    render(
-      <Indicator data-testid="Indicator" label="new" placement="bottom-left">
-        <div />
-      </Indicator>,
-    )
-    expect(screen.queryByTestId("Indicator")).toHaveStyle({
-      bottom: "{offset}",
-    })
-    expect(screen.queryByTestId("Indicator")).toHaveStyle({ left: "{offset}" })
-    expect(screen.queryByTestId("Indicator")).toHaveStyle({
-      transform: "translate(-50%, 50%)",
-    })
-  })
-
-  test("renders indicator with ping element", () => {
-    render(
-      <Indicator data-testid="Indicator" label="new" ping>
-        <div />
-      </Indicator>,
-    )
-    expect(screen.queryByTestId("Indicator")).toHaveClass("ui-indicator__icon")
-    expect(screen.queryByText("new")).toHaveClass("ui-indicator__icon")
-    expect(screen.queryByTestId("Indicator")!.parentElement).toHaveClass(
-      "ui-indicator__root",
-    )
-    expect(screen.queryByText("new")!.querySelector("div")).toHaveClass(
-      "ui-indicator__ping",
-    )
+    expect(screen.queryByTestId("indicator")).not.toBeInTheDocument()
   })
 })

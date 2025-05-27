@@ -57,7 +57,7 @@ export type StyleValue<Y, M = unknown> = M extends keyof ThemeTokens
 
 export type CSSVariable = `--${string}`
 interface CSSVariableProps {
-  [key: CSSVariable]: StyleValue<ThemePath> | undefined
+  [key: CSSVariable]: StyleValue<number | ThemePath> | undefined
 }
 
 type VendorProps = {

@@ -1,7 +1,7 @@
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { SkeletonStyle } from "./skeleton.style"
 import { useMemo } from "react"
-import { createComponent } from "../../core"
+import { createComponent, varAttr } from "../../core"
 import { dataAttr, getValidChildren, isString, isUndefined } from "../../utils"
 import { skeletonStyle } from "./skeleton.style"
 
@@ -69,14 +69,14 @@ export const Skeleton = withContext("div", { transferProps: ["loading"] })(
           ? duration
           : `${duration}s`
         : undefined,
-      "--end-color": endColor ? `colors.${endColor}` : undefined,
+      "--end-color": varAttr(endColor, "colors"),
       "--fade-duration": !isUndefined(fadeDuration)
         ? isString(fadeDuration)
           ? fadeDuration
           : `${fadeDuration}s`
         : undefined,
       "--height": fitContent ? "fit-content" : undefined,
-      "--start-color": startColor ? `colors.${startColor}` : undefined,
+      "--start-color": varAttr(startColor, "colors"),
       "--width": fitContent ? "fit-content" : undefined,
       children,
       ...rest,

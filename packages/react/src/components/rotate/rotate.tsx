@@ -4,7 +4,11 @@ import type { HTMLMotionProps } from "../motion"
 import type { RotateStyle } from "./rotate.style"
 import { useAnimation } from "motion/react"
 import { useCallback } from "react"
-import { createComponent, insertVars, useVarName } from "../../core"
+import {
+  createComponent,
+  useInjectVarsIntoCss,
+  useInjectVarsIntoProps,
+} from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { dataAttr, handlerAll } from "../../utils"
 import { motion } from "../motion"
@@ -93,7 +97,7 @@ export const Rotate = withContext<"button", RotateProps>(
     onClick: onClickProp,
     ...rest
   }) => {
-    const opacity = useVarName("opacity")
+    const opacity = "var(--opacity)"
     const animate = useAnimation()
     const [value, setValue] = useControllableState<KeyframeIdent>({
       defaultValue,
@@ -113,11 +117,11 @@ export const Rotate = withContext<"button", RotateProps>(
       setValue((prev) => (prev === "from" ? "to" : "from"))
 
       await animate.start({
-        opacity: opacity,
+        opacity: "var(--opacity)",
         rotate: "0deg",
         transition: { duration },
       })
-    }, [readOnly, animate, rotate, duration, delay, setValue, opacity])
+    }, [readOnly, animate, rotate, duration, delay, setValue])
 
     return (
       <motion.button
@@ -136,24 +140,9 @@ export const Rotate = withContext<"button", RotateProps>(
       </motion.button>
     )
   },
-)(undefined, ({ css, ...rest }) => {
-  css = insertVars(css, [
-    {
-      name: "opacity",
-      property: "opacity",
-    },
-  ])
+)(undefined, (props) => {
+  const css = useInjectVarsIntoCss(props.css, { opacity: "opacity" })
+  const rest = useInjectVarsIntoProps(props, { opacity: "opacity" })
 
-  rest = insertVars(rest, [
-    {
-      name: "opacity",
-      property: "opacity",
-    },
-  ])
-
-  return {
-    ...rest,
-    css,
-    opacity: "{opacity}",
-  }
+  return { ...rest, css, opacity: "{opacity}" }
 })

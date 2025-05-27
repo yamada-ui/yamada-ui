@@ -28,29 +28,26 @@ export const {
  * @see https://yamada-ui.com/components/textarea
  */
 export const Textarea = withContext("textarea")(
-  () => {
-    const inputProps = useInputPropsContext()
+  (props) => {
+    const context = useInputPropsContext()
 
-    return { rows: 2, ...inputProps }
+    return { rows: 2, ...context, ...props }
   },
   (props) => {
     const {
-      props: { errorBorderColor, focusBorderColor, vars: varsProp, ...rest },
+      props: { errorBorderColor, focusBorderColor, ...rest },
       ariaProps,
       dataProps,
       eventProps,
     } = useFieldProps(props)
     const { getTextareaProps } = useTextarea(rest)
-    const vars = useInputBorder(varsProp, {
-      errorBorderColor,
-      focusBorderColor,
-    })
+    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
 
     return {
-      vars,
       ...ariaProps,
       ...dataProps,
       ...eventProps,
+      ...varProps,
       ...getTextareaProps(),
     }
   },

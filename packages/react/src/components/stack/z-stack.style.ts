@@ -2,7 +2,7 @@ import { defineComponentStyle } from "../../core"
 
 export const zStackStyle = defineComponentStyle({
   base: {
-    gap: "md",
+    gap: "lg",
     overflow: "hidden",
     position: "relative",
   },

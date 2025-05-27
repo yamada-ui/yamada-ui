@@ -31,15 +31,9 @@ export const {
  * @see https://yamada-ui.com/components/file-button
  */
 export const FileButton = withContext<"div", FileButtonProps>(
-  ({
-    as: As = Button,
-    children,
-    errorBorderColor,
-    vars: varsProp,
-    ...rest
-  }) => {
+  ({ as: As = Button, children, errorBorderColor, ...rest }) => {
     const { getButtonProps, getInputProps } = useFileButton(rest)
-    const vars = useInputBorder(varsProp, { errorBorderColor })
+    const varProps = useInputBorder({ errorBorderColor })
 
     return (
       <>
@@ -47,7 +41,7 @@ export const FileButton = withContext<"div", FileButtonProps>(
           <styled.input {...getInputProps()} />
         </Portal>
 
-        <As vars={vars} {...getButtonProps()}>
+        <As {...varProps} {...getButtonProps()}>
           {children}
         </As>
       </>

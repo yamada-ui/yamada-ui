@@ -63,13 +63,9 @@ export const FileInput = withProvider<"input", FileInputProps>(
     format = defaultFormat,
     placeholder,
     separator = ",",
-    vars: varsProp,
     ...props
   }) => {
-    const vars = useInputBorder(varsProp, {
-      errorBorderColor,
-      focusBorderColor,
-    })
+    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
     const { values, getFieldProps, getInputProps } = useFileInput(props)
 
     const cloneChildren = useMemo(() => {
@@ -110,15 +106,17 @@ export const FileInput = withProvider<"input", FileInputProps>(
           <styled.input {...getInputProps()} />
         </Portal>
 
-        <styled.div vars={vars} {...getFieldProps()}>
+        <styled.div {...varProps} {...getFieldProps()}>
           {cloneChildren}
         </styled.div>
       </>
     )
   },
   "root",
-)(() => {
-  return useInputPropsContext()
+)((props) => {
+  const context = useInputPropsContext()
+
+  return { ...context, ...props }
 })
 
 interface FileInputTagProps extends HTMLStyledProps {}

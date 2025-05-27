@@ -20,7 +20,7 @@ function factory() {
 
   return new Proxy(styled, {
     apply: (_target, _thisArg, [el, options]: [DOMElement, StyledOptions]) => {
-      const component = styled(el, options)
+      const component = styled(el, options) as ComponentType<any>
 
       return _motion.create(component)
     },

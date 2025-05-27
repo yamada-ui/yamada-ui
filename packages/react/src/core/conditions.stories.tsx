@@ -6,7 +6,7 @@ import { Text } from "../components/text"
 import { Wrap } from "../components/wrap"
 
 export default {
-  title: "Styled System / Pseudo",
+  title: "Styled System / Conditions",
 }
 
 export const After = () => {

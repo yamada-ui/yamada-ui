@@ -113,8 +113,10 @@ export const FileInput = withProvider<"input", FileInputProps>(
     )
   },
   "root",
-)(() => {
-  return useInputPropsContext()
+)((props) => {
+  const context = useInputPropsContext()
+
+  return { ...context, ...props }
 })
 
 interface FileInputTagProps extends HTMLStyledProps {}

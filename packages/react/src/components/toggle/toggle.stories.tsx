@@ -3,7 +3,11 @@ import { useState } from "react"
 import { Toggle } from "."
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
+import { Field } from "../field"
+import { For } from "../for"
 import { BoldIcon, ItalicIcon } from "../icon"
+import { Text } from "../text"
+import { Wrap } from "../wrap"
 
 type Story = StoryFn<typeof Toggle>
 
@@ -18,37 +22,21 @@ export const Basic: Story = () => {
   return <Toggle aria-label="Toggle bold" icon={<BoldIcon />} />
 }
 
-export const Text: Story = () => {
+export const WithText: Story = () => {
   return (
     <Toggle px="4">
       <ItalicIcon />
-      Italic
+      <Text as="span" fontSize="md">
+        Italic
+      </Text>
     </Toggle>
-  )
-}
-
-export const Size: Story = () => {
-  return (
-    <PropsTable columns={["xs", "sm", "md", "lg"]} rows={COLOR_SCHEMES}>
-      {(column, row, key) => {
-        return (
-          <Toggle
-            key={key}
-            colorScheme={row}
-            size={column}
-            aria-label="Toggle bold"
-            icon={<BoldIcon />}
-          />
-        )
-      }}
-    </PropsTable>
   )
 }
 
 export const Variant: Story = () => {
   return (
     <PropsTable
-      columns={["solid", "subtle", "surface", "outline"]}
+      columns={["ghost", "subtle", "surface", "outline", "solid"]}
       rows={COLOR_SCHEMES}
     >
       {(column, row, key) => {
@@ -66,43 +54,62 @@ export const Variant: Story = () => {
   )
 }
 
+export const Size: Story = () => {
+  return (
+    <PropsTable columns={["xs", "sm", "md", "lg", "xl"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+        return (
+          <Toggle
+            key={key}
+            colorScheme={row}
+            size={column}
+            aria-label="Toggle bold"
+            icon={<BoldIcon />}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
 export const Rounded: Story = () => {
   return (
-    <Toggle
-      aria-label="Toggle bold"
-      defaultSelected
-      fullRounded
-      icon={<BoldIcon />}
-    />
+    <Wrap gap="md">
+      <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+        {(variant, index) => (
+          <Toggle
+            key={index}
+            variant={variant}
+            aria-label="Toggle bold"
+            fullRounded
+            icon={<BoldIcon />}
+          />
+        )}
+      </For>
+    </Wrap>
   )
 }
 
 export const Disabled: Story = () => {
   return (
     <>
-      <Toggle
-        colorScheme="primary"
-        variant="subtle"
-        aria-label="Toggle bold"
-        defaultSelected
-        disabled
-        icon={<BoldIcon />}
-      />
-      <Toggle
-        colorScheme="secondary"
-        variant="solid"
-        aria-label="Toggle bold"
-        defaultSelected
-        disabled
-        icon={<BoldIcon />}
-      />
-      <Toggle
-        variant="outline"
-        aria-label="Toggle bold"
-        defaultSelected
-        disabled
-        icon={<BoldIcon />}
-      />
+      <Wrap gap="md">
+        <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+          {(variant, index) => (
+            <Toggle
+              key={index}
+              variant={variant}
+              aria-label="Toggle bold"
+              disabled
+              icon={<BoldIcon />}
+            />
+          )}
+        </For>
+      </Wrap>
+
+      <Field.Root disabled label="Bold">
+        <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+      </Field.Root>
     </>
   )
 }
@@ -110,42 +117,71 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <Toggle
-        colorScheme="primary"
-        variant="subtle"
-        aria-label="Toggle bold"
-        defaultSelected
-        icon={<BoldIcon />}
-        readOnly
-      />
-      <Toggle
-        colorScheme="secondary"
-        variant="solid"
-        aria-label="Toggle bold"
-        defaultSelected
-        icon={<BoldIcon />}
-        readOnly
-      />
-      <Toggle
-        variant="outline"
-        aria-label="Toggle bold"
-        defaultSelected
-        icon={<BoldIcon />}
-        readOnly
-      />
+      <Wrap gap="md">
+        <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+          {(variant, index) => (
+            <Toggle
+              key={index}
+              variant={variant}
+              aria-label="Toggle bold"
+              icon={<BoldIcon />}
+              readOnly
+            />
+          )}
+        </For>
+      </Wrap>
+
+      <Field.Root label="Bold" readOnly>
+        <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+      </Field.Root>
     </>
   )
 }
 
+export const Invalid: Story = () => {
+  return (
+    <>
+      <Wrap gap="md">
+        <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+          {(variant, index) => (
+            <Toggle
+              key={index}
+              variant={variant}
+              aria-label="Toggle bold"
+              icon={<BoldIcon />}
+              invalid
+            />
+          )}
+        </For>
+      </Wrap>
+
+      <Field.Root invalid label="Bold">
+        <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+      </Field.Root>
+    </>
+  )
+}
+
+export const BorderColor: Story = () => {
+  return (
+    <Toggle
+      aria-label="Toggle bold"
+      errorBorderColor="orange.500"
+      icon={<BoldIcon />}
+      invalid
+    />
+  )
+}
+
 export const CustomControl: Story = () => {
-  const [isSelected, setIsSelected] = useState<boolean>(false)
+  const [checked, setChecked] = useState<boolean>(false)
 
   return (
     <Toggle
       aria-label="Toggle bold"
+      checked={checked}
       icon={<BoldIcon />}
-      selected={isSelected}
-      onChange={setIsSelected}
+      onChange={setChecked}
     />
   )
 }

@@ -1,39 +1,12 @@
 import { defineComponentSlotStyle } from "../../core"
+import { iconButtonStyle } from "../button"
 
 export const toggleStyle = defineComponentSlotStyle({
   base: {
-    group: {
-      display: "inline-flex",
-      gap: "0.5rem",
-    },
+    group: {},
     root: {
-      alignItems: "center",
-      appearance: "none",
-      cursor: "pointer",
-      display: "inline-flex",
-      gap: "{2, 0.5rem}",
-      justifyContent: "center",
-      outline: "none",
-      overflow: "hidden",
-      pointerEvents: "auto",
-      position: "relative",
-      rounded: "md",
-      transitionDuration: "slower",
-      transitionProperty: "common",
-      userSelect: "none",
-      verticalAlign: "middle",
-      _readOnly: {
-        cursor: "default",
-        pointerEvents: "none",
-        _ripple: {
-          display: "none",
-        },
-      },
-      _disabled: {
-        boxShadow: "none",
-        cursor: "not-allowed",
-        opacity: 0.4,
-      },
+      "--error-border-color": "colors.border.error",
+      gap: "2",
     },
   },
 
@@ -46,7 +19,7 @@ export const toggleStyle = defineComponentSlotStyle({
     fullRounded: {
       true: {
         root: {
-          borderRadius: "full",
+          rounded: "full",
         },
       },
     },
@@ -55,57 +28,93 @@ export const toggleStyle = defineComponentSlotStyle({
   variants: {
     ghost: {
       root: {
-        layerStyle: "ghost",
-        _selected: {
-          layerStyle: "ghost.hover",
+        _checked: {
+          layerStyle: "solid",
         },
-        _hover: {
-          layerStyle: "ghost.hover",
+        _notChecked: {
+          layerStyle: "ghost",
+          _hover: {
+            layerStyle: "ghost.hover",
+          },
+        },
+        _invalid: {
+          borderColor: "{error-border-color}",
+          borderWidth: "1px",
         },
       },
     },
     outline: {
       root: {
-        layerStyle: "outline",
-        _selected: {
-          layerStyle: "subtle.hover",
-          color: "colorScheme.fg",
+        _checked: {
+          layerStyle: "solid",
+          borderColor: "colorScheme.solid",
+          borderWidth: "1px",
+          _invalid: {
+            borderColor: "{error-border-color}",
+          },
         },
-        _hover: {
-          layerStyle: "outline.hover",
+        _notChecked: {
+          layerStyle: "outline",
+          _hover: {
+            layerStyle: "outline.hover",
+          },
+          _invalid: {
+            borderColor: "{error-border-color}",
+          },
         },
       },
     },
     solid: {
       root: {
-        layerStyle: "solid",
-        _selected: {
-          layerStyle: "solid.hover",
+        _checked: {
+          layerStyle: "subtle",
         },
-        _hover: {
-          layerStyle: "solid.hover",
+        _notChecked: {
+          layerStyle: "solid",
+          _hover: {
+            layerStyle: "solid.hover",
+          },
+        },
+        _invalid: {
+          borderColor: "{error-border-color}",
+          borderWidth: "1px",
         },
       },
     },
     subtle: {
       root: {
-        layerStyle: "subtle",
-        _selected: {
-          layerStyle: "subtle.hover",
+        _checked: {
+          layerStyle: "solid",
         },
-        _hover: {
-          layerStyle: "subtle.hover",
+        _notChecked: {
+          layerStyle: "subtle",
+          _hover: {
+            layerStyle: "subtle.hover",
+          },
+        },
+        _invalid: {
+          borderColor: "{error-border-color}",
+          borderWidth: "1px",
         },
       },
     },
     surface: {
       root: {
-        layerStyle: "surface",
-        _selected: {
-          layerStyle: "surface.hover",
+        _checked: {
+          layerStyle: "solid",
+          _invalid: {
+            borderColor: "{error-border-color}",
+            borderWidth: "1px",
+          },
         },
-        _hover: {
-          layerStyle: "surface.hover",
+        _notChecked: {
+          layerStyle: "surface",
+          _hover: {
+            layerStyle: "surface.hover",
+          },
+          _invalid: {
+            borderColor: "{error-border-color}",
+          },
         },
       },
     },
@@ -114,37 +123,45 @@ export const toggleStyle = defineComponentSlotStyle({
   sizes: {
     xs: {
       root: {
-        fontSize: "xs",
-        lineHeight: "{sizes.6}",
-        minBoxSize: 6,
+        ...iconButtonStyle.sizes?.xs,
+        gap: "1",
       },
     },
     sm: {
       root: {
-        fontSize: "sm",
-        lineHeight: "{sizes.8}",
-        minBoxSize: 8,
+        ...iconButtonStyle.sizes?.sm,
+        gap: "2",
       },
     },
     md: {
       root: {
-        fontSize: "md",
-        lineHeight: "{sizes.10}",
-        minBoxSize: 10,
+        ...iconButtonStyle.sizes?.md,
+        gap: "2",
       },
     },
     lg: {
       root: {
-        fontSize: "lg",
-        lineHeight: "{sizes.12}",
-        minBoxSize: 12,
+        ...iconButtonStyle.sizes?.lg,
+        gap: "2.5",
+      },
+    },
+    xl: {
+      root: {
+        ...iconButtonStyle.sizes?.xl,
+        gap: "3",
+      },
+    },
+    "2xl": {
+      root: {
+        ...iconButtonStyle.sizes?.["2xl"],
+        gap: "3",
       },
     },
   },
 
   defaultProps: {
     size: "md",
-    variant: "subtle",
+    variant: "ghost",
   },
 })
 

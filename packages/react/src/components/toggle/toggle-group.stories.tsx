@@ -29,12 +29,15 @@ export const Basic: Story = () => {
   )
 }
 
-export const Size: Story = () => {
+export const Variant: Story = () => {
   return (
-    <PropsTable columns={["xs", "sm", "md", "lg"]} rows={COLOR_SCHEMES}>
+    <PropsTable
+      columns={["ghost", "subtle", "surface", "outline", "solid"]}
+      rows={COLOR_SCHEMES}
+    >
       {(column, row, key) => {
         return (
-          <ToggleGroup key={key} colorScheme={row} size={column}>
+          <ToggleGroup key={key} colorScheme={row} variant={column} attached>
             <Toggle aria-label="Toggle bold" icon={<BoldIcon />} value="bold" />
             <Toggle
               aria-label="Toggle italic"
@@ -53,15 +56,12 @@ export const Size: Story = () => {
   )
 }
 
-export const Variant: Story = () => {
+export const Size: Story = () => {
   return (
-    <PropsTable
-      columns={["solid", "subtle", "surface", "outline"]}
-      rows={COLOR_SCHEMES}
-    >
+    <PropsTable columns={["xs", "sm", "md", "lg", "xl"]} rows={COLOR_SCHEMES}>
       {(column, row, key) => {
         return (
-          <ToggleGroup key={key} colorScheme={row} variant={column}>
+          <ToggleGroup key={key} colorScheme={row} size={column} attached>
             <Toggle aria-label="Toggle bold" icon={<BoldIcon />} value="bold" />
             <Toggle
               aria-label="Toggle italic"
@@ -82,9 +82,9 @@ export const Variant: Story = () => {
 
 export const Disabled: Story = () => {
   return (
-    <For each={["solid", "subtle", "surface", "outline"]}>
+    <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
       {(variant, index) => (
-        <ToggleGroup key={index} variant={variant} disabled>
+        <ToggleGroup key={index} variant={variant} attached disabled>
           <Toggle aria-label="Toggle bold" icon={<BoldIcon />} value="bold" />
           <Toggle
             aria-label="Toggle italic"
@@ -104,9 +104,9 @@ export const Disabled: Story = () => {
 
 export const Readonly: Story = () => {
   return (
-    <For each={["solid", "subtle", "surface", "outline"]}>
+    <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
       {(variant, index) => (
-        <ToggleGroup key={index} variant={variant} readOnly>
+        <ToggleGroup key={index} variant={variant} attached readOnly>
           <Toggle aria-label="Toggle bold" icon={<BoldIcon />} value="bold" />
           <Toggle
             aria-label="Toggle italic"

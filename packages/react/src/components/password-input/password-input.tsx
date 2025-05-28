@@ -80,8 +80,10 @@ export const PasswordInput = withProvider<"input", PasswordInputProps>(
     )
   },
   "root",
-)(() => {
-  return useInputPropsContext()
+)((props) => {
+  const context = useInputPropsContext()
+
+  return { ...context, ...props }
 })
 
 interface PasswordInputFieldProps extends InputProps {}

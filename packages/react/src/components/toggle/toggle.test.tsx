@@ -1,64 +1,60 @@
+import { Toggle, ToggleGroup } from "."
 import { fireEvent, render, screen } from "../../../test"
 import { noop } from "../../utils"
-import { Toggle, ToggleGroup } from "./"
 
 describe("<Toggle />", () => {
   test("should render correctly", () => {
     render(<Toggle>Toggle</Toggle>)
 
-    expect(screen.getByRole("button", { name: /toggle/i })).toBeInTheDocument()
+    expect(screen.getByRole("button")).toBeInTheDocument()
   })
 
-  test("should handle selected prop", () => {
-    const { rerender } = render(<Toggle selected>Toggle</Toggle>)
+  test("sets `displayName` correctly", () => {
+    expect(Toggle.displayName).toBe("ToggleRoot")
+  })
 
-    expect(screen.getByRole("button", { name: /toggle/i })).toHaveAttribute(
-      "data-selected",
-    )
+  test("sets `className` correctly", () => {
+    render(<Toggle>Toggle</Toggle>)
 
-    rerender(<Toggle selected={false}>Toggle</Toggle>)
+    expect(screen.getByRole("button")).toHaveClass("ui-toggle__root")
+  })
 
-    expect(screen.getByRole("button", { name: /toggle/i })).not.toHaveAttribute(
-      "data-selected",
-    )
+  test("should handle checked prop", () => {
+    const { rerender } = render(<Toggle checked>Toggle</Toggle>)
+
+    expect(screen.getByRole("button")).toHaveAttribute("data-checked")
+
+    rerender(<Toggle checked={false}>Toggle</Toggle>)
+
+    expect(screen.getByRole("button")).not.toHaveAttribute("data-checked")
   })
 
   test("should handle disabled prop", () => {
     render(<Toggle disabled>Toggle</Toggle>)
 
-    expect(screen.getByRole("button", { name: /toggle/i })).toBeDisabled()
+    expect(screen.getByRole("button")).toBeDisabled()
   })
 
   test("should handle readOnly prop", () => {
     render(<Toggle readOnly>Toggle</Toggle>)
 
-    expect(screen.getByRole("button", { name: /toggle/i })).toHaveAttribute(
-      "data-readonly",
-    )
-  })
-
-  test("should handle fullRounded prop", () => {
-    render(<Toggle fullRounded>Toggle</Toggle>)
-
-    expect(screen.getByRole("button", { name: /toggle/i })).toHaveStyle({
-      borderRadius: "var(--ui-radii-full)",
-    })
+    expect(screen.getByRole("button")).toHaveAttribute("data-readonly")
   })
 
   test("should handle icon prop", () => {
     render(<Toggle icon={<div>Icon</div>} />)
-    expect(screen.getByRole("button", { name: /icon/i })).toBeInTheDocument()
+    expect(screen.getByText("Icon")).toBeInTheDocument()
   })
 
   test("should handle onChange callback", () => {
     const onChange = vi.fn()
     render(<Toggle onChange={onChange}>Toggle</Toggle>)
 
-    fireEvent.click(screen.getByRole("button", { name: /toggle/i }))
+    fireEvent.click(screen.getByRole("button"))
     expect(onChange).toHaveBeenCalledTimes(1)
     expect(onChange).toHaveBeenCalledWith(true)
 
-    fireEvent.click(screen.getByRole("button", { name: /toggle/i }))
+    fireEvent.click(screen.getByRole("button"))
     expect(onChange).toHaveBeenCalledTimes(2)
     expect(onChange).toHaveBeenCalledWith(false)
   })
@@ -80,9 +76,5 @@ describe("<Toggle />", () => {
       "Toggle: value is required. Please set the value.",
     )
     vi.restoreAllMocks()
-  })
-
-  test("should have correct displayName and __ui__", () => {
-    expect(Toggle.__ui__).toBe("Toggle")
   })
 })

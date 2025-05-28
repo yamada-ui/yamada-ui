@@ -202,6 +202,7 @@ export const additionalProps = {
     properties: ["--translate-y"],
   },
   translateZ: {
+    type: "AnyString | number",
     description: ["Sets the value of `--translate-z`."],
     properties: ["--translate-z"],
   },

@@ -8,7 +8,7 @@ export const groupStyle = defineComponentStyle({
       },
     },
     display: "inline-flex",
-    gap: "2",
+    gap: "sm",
     isolation: "isolate",
     justifyContent: "start",
     position: "relative",

@@ -1,5 +1,5 @@
+import { Toggle, ToggleGroup } from "."
 import { a11y, fireEvent, render, screen } from "../../../test"
-import { Toggle, ToggleGroup } from "./"
 
 describe("<ToggleGroup />", () => {
   test("should render ToggleGroup and its children correctly", async () => {
@@ -15,7 +15,22 @@ describe("<ToggleGroup />", () => {
     expect(screen.getByText("Option 2")).toBeInTheDocument()
   })
 
-  test("should update selected toggle when controlled value prop changes", () => {
+  test("sets `displayName` correctly", () => {
+    expect(ToggleGroup.displayName).toBe("ToggleGroup")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <ToggleGroup>
+        <Toggle value="opt1">Option 1</Toggle>
+        <Toggle value="opt2">Option 2</Toggle>
+      </ToggleGroup>,
+    )
+
+    expect(screen.getByRole("group")).toHaveClass("ui-toggle__group")
+  })
+
+  test("should update checked toggle when controlled value prop changes", () => {
     const { rerender } = render(
       <ToggleGroup value="opt1">
         <Toggle value="opt1">Option 1</Toggle>
@@ -23,8 +38,8 @@ describe("<ToggleGroup />", () => {
       </ToggleGroup>,
     )
 
-    expect(screen.getByText("Option 1")).toHaveAttribute("data-selected")
-    expect(screen.getByText("Option 2")).not.toHaveAttribute("data-selected")
+    expect(screen.getByText("Option 1")).toHaveAttribute("data-checked")
+    expect(screen.getByText("Option 2")).not.toHaveAttribute("data-checked")
 
     rerender(
       <ToggleGroup value="opt2">
@@ -33,8 +48,8 @@ describe("<ToggleGroup />", () => {
       </ToggleGroup>,
     )
 
-    expect(screen.getByText("Option 1")).not.toHaveAttribute("data-selected")
-    expect(screen.getByText("Option 2")).toHaveAttribute("data-selected")
+    expect(screen.getByText("Option 1")).not.toHaveAttribute("data-checked")
+    expect(screen.getByText("Option 2")).toHaveAttribute("data-checked")
 
     rerender(
       <ToggleGroup value={undefined}>
@@ -43,11 +58,11 @@ describe("<ToggleGroup />", () => {
       </ToggleGroup>,
     )
 
-    expect(screen.getByText("Option 1")).not.toHaveAttribute("data-selected")
-    expect(screen.getByText("Option 2")).not.toHaveAttribute("data-selected")
+    expect(screen.getByText("Option 1")).not.toHaveAttribute("data-checked")
+    expect(screen.getByText("Option 2")).not.toHaveAttribute("data-checked")
   })
 
-  test("should update selected toggles when controlled array value prop changes", () => {
+  test("should update checked toggles when controlled array value prop changes", () => {
     const { rerender } = render(
       <ToggleGroup value={[]}>
         <Toggle value="opt1">Option 1</Toggle>
@@ -55,8 +70,8 @@ describe("<ToggleGroup />", () => {
       </ToggleGroup>,
     )
 
-    expect(screen.getByText("Option 1")).not.toHaveAttribute("data-selected")
-    expect(screen.getByText("Option 2")).not.toHaveAttribute("data-selected")
+    expect(screen.getByText("Option 1")).not.toHaveAttribute("data-checked")
+    expect(screen.getByText("Option 2")).not.toHaveAttribute("data-checked")
 
     rerender(
       <ToggleGroup value={["opt1", "opt2"]}>
@@ -65,8 +80,8 @@ describe("<ToggleGroup />", () => {
       </ToggleGroup>,
     )
 
-    expect(screen.getByText("Option 1")).toHaveAttribute("data-selected")
-    expect(screen.getByText("Option 2")).toHaveAttribute("data-selected")
+    expect(screen.getByText("Option 1")).toHaveAttribute("data-checked")
+    expect(screen.getByText("Option 2")).toHaveAttribute("data-checked")
   })
 
   test("should call onChange callback with the correct value when a toggle is clicked", () => {
@@ -93,7 +108,7 @@ describe("<ToggleGroup />", () => {
     expect(onChange).toHaveBeenCalledTimes(2)
   })
 
-  test("should call onChange callback with undefined when a selected toggle is clicked", () => {
+  test("should call onChange callback with undefined when a checked toggle is clicked", () => {
     const onChange = vi.fn()
 
     render(
@@ -143,7 +158,7 @@ describe("<ToggleGroup />", () => {
     expect(screen.getByText("Option 2")).toHaveAttribute("data-readonly")
   })
 
-  test("should set the initial selected toggle based on the defaultValue prop", () => {
+  test("should set the initial checked toggle based on the defaultValue prop", () => {
     render(
       <ToggleGroup defaultValue="opt2">
         <Toggle value="opt1">Option 1</Toggle>
@@ -151,11 +166,7 @@ describe("<ToggleGroup />", () => {
       </ToggleGroup>,
     )
 
-    expect(screen.getByText("Option 1")).not.toHaveAttribute("data-selected")
-    expect(screen.getByText("Option 2")).toHaveAttribute("data-selected")
-  })
-
-  test("should have correct displayName and __ui__", () => {
-    expect(Toggle.__ui__).toBe("Toggle")
+    expect(screen.getByText("Option 1")).not.toHaveAttribute("data-checked")
+    expect(screen.getByText("Option 2")).toHaveAttribute("data-checked")
   })
 })

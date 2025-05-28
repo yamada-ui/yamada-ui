@@ -1,4 +1,4 @@
-import type { PropsWithChildren, ReactElement, RefAttributes } from "react"
+import type { PropsWithChildren, ReactElement } from "react"
 import type { ComponentArgs, HTMLStyledProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
 import type { HTMLMotionProps } from "../motion"
@@ -66,9 +66,7 @@ export const ReorderRoot = withProvider<"ul", ReorderRootProps>(
   "root",
   { transferProps: ["orientation"] },
 )() as ComponentArgs & {
-  <Y = string>(
-    props: RefAttributes<HTMLUListElement> & ReorderRootProps<Y>,
-  ): ReactElement
+  <Y = string>(props: ReorderRootProps<Y>): ReactElement
 }
 
 export interface ReorderItemProps<Y = string>
@@ -94,9 +92,7 @@ export const ReorderItem = withContext<"li", ReorderItemProps>(
   },
   "item",
 )() as ComponentArgs & {
-  <Y = string>(
-    props: RefAttributes<HTMLLIElement> & ReorderItemProps<Y>,
-  ): ReactElement
+  <Y = string>(props: ReorderItemProps<Y>): ReactElement
 }
 
 export interface ReorderTriggerProps extends HTMLStyledProps {}

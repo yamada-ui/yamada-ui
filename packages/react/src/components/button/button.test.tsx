@@ -1,4 +1,5 @@
 import { a11y, render, screen } from "../../../test"
+import { LoaderIcon } from "../icon"
 import { Button } from "./button"
 
 describe("<Button />", () => {
@@ -33,7 +34,7 @@ describe("<Button />", () => {
       <Button
         data-testid="btn"
         loading
-        loadingIcon={<>loading start</>}
+        loadingIcon={<LoaderIcon data-testid="loadingIcon" />}
         loadingMessage="Submitting"
       >
         Submit
@@ -48,14 +49,14 @@ describe("<Button />", () => {
     expect(screen.getByText("Submitting")).toBeInTheDocument()
 
     // Confirm loading position
-    expect(screen.getByText(/loading start/i)).toHaveClass(
+    expect(screen.getByTestId("loadingIcon")).toHaveClass(
       "ui-button__loading--start",
     )
 
     rerender(
       <Button
         loading
-        loadingIcon={<>loading end</>}
+        loadingIcon={<LoaderIcon data-testid="loadingIcon" />}
         loadingMessage="Test if loading placement"
         loadingPlacement="end"
       >
@@ -63,7 +64,7 @@ describe("<Button />", () => {
       </Button>,
     )
 
-    expect(screen.getByText(/loading end/i)).toHaveClass(
+    expect(screen.getByTestId("loadingIcon")).toHaveClass(
       "ui-button__loading--end",
     )
   })

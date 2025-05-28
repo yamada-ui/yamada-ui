@@ -450,7 +450,7 @@ function useStyle<
   const options = { direction, hasSlot, identifier, queries, wrap }
 
   const propsRef = useRef<Dict>({})
-  const styleRef = useRef<Style<H>>({})
+  const styleRef = useRef<Style<H> | undefined>(undefined)
 
   props = filterUndefined(props)
 
@@ -540,7 +540,10 @@ function useStyle<
       propsRef.current = props as unknown as WithoutThemeProps<Y, M, D>
   }
 
-  return [styleRef.current, propsRef.current as WithoutThemeProps<Y, M, D>]
+  return [
+    styleRef.current ?? {},
+    propsRef.current as WithoutThemeProps<Y, M, D>,
+  ]
 }
 
 export interface UseComponentStyleOptions<

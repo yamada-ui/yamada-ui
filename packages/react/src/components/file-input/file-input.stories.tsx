@@ -127,6 +127,17 @@ export const Disabled: Story = () => {
         )}
       </For>
 
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} disabled>
+            <InputGroup.Addon>
+              <FileIcon />
+            </InputGroup.Addon>
+            <FileInput placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <Field.Root disabled label="Upload file">
         <FileInput placeholder="your file" />
       </Field.Root>
@@ -148,6 +159,17 @@ export const Readonly: Story = () => {
         )}
       </For>
 
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} readOnly>
+            <InputGroup.Addon>
+              <FileIcon />
+            </InputGroup.Addon>
+            <FileInput placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <Field.Root label="Upload file" readOnly>
         <FileInput placeholder="your file" />
       </Field.Root>
@@ -166,6 +188,17 @@ export const Invalid: Story = () => {
             invalid
             placeholder={toTitleCase(variant)}
           />
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} invalid>
+            <InputGroup.Addon>
+              <FileIcon />
+            </InputGroup.Addon>
+            <FileInput placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
         )}
       </For>
 

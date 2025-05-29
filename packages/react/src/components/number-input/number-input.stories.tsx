@@ -142,6 +142,17 @@ export const Disabled: Story = () => {
         )}
       </For>
 
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} disabled>
+            <InputGroup.Addon>
+              <GaugeIcon />
+            </InputGroup.Addon>
+            <NumberInput placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <Field.Root
         disabled
         helperMessage="Please enter the quantity you wish to order."
@@ -167,6 +178,17 @@ export const Readonly: Story = () => {
         )}
       </For>
 
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} readOnly>
+            <InputGroup.Addon>
+              <GaugeIcon />
+            </InputGroup.Addon>
+            <NumberInput placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <Field.Root
         helperMessage="Please enter the quantity you wish to order."
         label="Order quantity"
@@ -189,6 +211,17 @@ export const Invalid: Story = () => {
             invalid
             placeholder={toTitleCase(variant)}
           />
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} invalid>
+            <InputGroup.Addon>
+              <GaugeIcon />
+            </InputGroup.Addon>
+            <NumberInput placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
         )}
       </For>
 

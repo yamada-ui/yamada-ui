@@ -74,6 +74,14 @@ export const inputStyle = defineComponentStyle({
         focusRingColor: "{error-border-color}",
       },
     },
+    plain: {
+      focusRingColor: "{focus-border-color}",
+      focusVisibleRing: "inside",
+      _invalid: {
+        borderColor: "{error-border-color}",
+        focusRingColor: "{error-border-color}",
+      },
+    },
   },
 
   sizes: {

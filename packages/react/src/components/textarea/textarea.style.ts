@@ -14,6 +14,7 @@ export const textareaStyle = defineComponentStyle({
       ...getInputPaddingResetStyle(),
     },
     outline: { ...inputStyle.variants?.outline },
+    plain: { ...inputStyle.variants?.plain },
   },
 
   sizes: {

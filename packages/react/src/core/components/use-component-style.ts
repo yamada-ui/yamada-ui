@@ -495,13 +495,19 @@ function useStyle<
       }
 
       if (sizes && !hasSize) {
-        const sizeStyle = getModifierStyle<H>(size, sizes)(options)
+        const sizeStyle = merge(
+          sizes.base,
+          getModifierStyle<H>(size, sizes)(options),
+        )
 
         style = merge(style, wrapStyle<H>("size", sizeStyle)(options))
       }
 
       if (variants && !hasVariant) {
-        const variantStyle = getModifierStyle<H>(variant, variants)(options)
+        const variantStyle = merge(
+          variants.base,
+          getModifierStyle<H>(variant, variants)(options),
+        )
 
         style = merge(style, wrapStyle<H>("variant", variantStyle)(options))
       }

@@ -1,8 +1,9 @@
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { InputProps } from "./input"
 import type { InputElementStyle } from "./input-element.style"
-import { createComponent, mergeVars } from "../../core"
+import { createComponent } from "../../core"
 import { inputElementStyle } from "./input-element.style"
+import { useInputBorder } from "./use-input-border"
 
 export interface InputElementProps
   extends HTMLStyledProps,
@@ -21,24 +22,9 @@ export const {
 
 export const InputElement = withContext("div")(
   { "data-input-element": "" },
-  ({ errorBorderColor, focusBorderColor, vars, ...rest }) => ({
-    vars: mergeVars(
-      vars,
-      errorBorderColor
-        ? {
-            name: "errorBorderColor",
-            token: "colors",
-            value: errorBorderColor,
-          }
-        : undefined,
-      focusBorderColor
-        ? {
-            name: "focusBorderColor",
-            token: "colors",
-            value: focusBorderColor,
-          }
-        : undefined,
-    ),
-    ...rest,
-  }),
+  ({ errorBorderColor, focusBorderColor, ...rest }) => {
+    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
+
+    return { ...varProps, ...rest }
+  },
 )

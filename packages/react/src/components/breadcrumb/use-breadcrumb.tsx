@@ -3,6 +3,7 @@ import type { HTMLProps, PropGetter, StyleValue } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import { cloneElement, useCallback, useMemo } from "react"
 import { useValue } from "../../hooks/use-value"
+import { useI18n } from "../../providers/i18n-provider"
 import { getValidChildren, runIfFn } from "../../utils"
 
 interface BreadcrumbItem extends HTMLProps<"a"> {
@@ -46,6 +47,7 @@ export const useBreadcrumb = ({
   const endBoundaries = useValue(endBoundariesProp) ?? 0
   const startBoundaries = useValue(startBoundariesProp) ?? 0
   const length = validChildren.length || items.length
+  const { t } = useI18n("breadcrumb")
 
   const hasBoundaries =
     startBoundaries + endBoundaries > 0 &&
@@ -110,11 +112,11 @@ export const useBreadcrumb = ({
 
   const getRootProps: PropGetter<"nav"> = useCallback(
     (props) => ({
-      "aria-label": "Breadcrumb",
+      "aria-label": t("Breadcrumb"),
       ...rest,
       ...props,
     }),
-    [rest],
+    [rest, t],
   )
 
   const getListProps: PropGetter<"ol"> = useCallback(
@@ -133,11 +135,11 @@ export const useBreadcrumb = ({
 
   const getEllipsisProps: PropGetter<"svg"> = useCallback(
     (props) => ({
-      "aria-label": "Ellipsis",
+      "aria-label": t("Ellipsis"),
       role: "presentation",
       ...props,
     }),
-    [],
+    [t],
   )
 
   return {

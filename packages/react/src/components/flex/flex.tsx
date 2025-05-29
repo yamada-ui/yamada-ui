@@ -3,7 +3,9 @@ import type { FlexStyle } from "./flex.style"
 import { createComponent } from "../../core"
 import { flexStyle } from "./flex.style"
 
-interface FlexOptions {
+export interface FlexProps
+  extends Omit<HTMLStyledProps, "direction">,
+    ThemeProps<FlexStyle> {
   /**
    * The CSS `align-items` property.
    */
@@ -33,11 +35,6 @@ interface FlexOptions {
    */
   wrap?: CSSProps["flexWrap"]
 }
-
-export interface FlexProps
-  extends Omit<HTMLStyledProps, "direction">,
-    ThemeProps<FlexStyle>,
-    FlexOptions {}
 
 export const {
   PropsContext: FlexPropsContext,

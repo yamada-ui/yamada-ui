@@ -1,12 +1,6 @@
 import type { CSSObject } from "./index.types"
-import { toArray } from "../../utils"
+import { filterEmpty } from "../../utils"
 
-export const mergeCSS = (
-  a?: CSSObject | CSSObject[],
-  b?: CSSObject | CSSObject[],
-) => {
-  if (!a) return b
-  if (!b) return a
-
-  return [...toArray(a), ...toArray(b)]
+export const mergeCSS = (...css: (CSSObject | CSSObject[] | undefined)[]) => {
+  return filterEmpty(css).flat()
 }

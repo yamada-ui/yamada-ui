@@ -3,7 +3,7 @@ import type { GridStyle } from "./grid.style"
 import { createComponent } from "../../core"
 import { gridStyle } from "./grid.style"
 
-interface GridOptions {
+export interface GridProps extends HTMLStyledProps, ThemeProps<GridStyle> {
   /**
    * The CSS `grid-area` property.
    */
@@ -41,11 +41,6 @@ interface GridOptions {
    */
   templateRows?: CSSProps["gridTemplateRows"]
 }
-
-export interface GridProps
-  extends HTMLStyledProps,
-    ThemeProps<GridStyle>,
-    GridOptions {}
 
 export const {
   PropsContext: GridPropsContext,

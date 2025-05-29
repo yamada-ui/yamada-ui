@@ -128,7 +128,11 @@ export const Group: Story = () => {
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar key={index} name="Hirotomo Yamada" />
+                <Avatar
+                  key={index}
+                  name="Hirotomo Yamada"
+                  bg={variant === "outline" ? "bg" : undefined}
+                />
               ))}
           </AvatarGroup>
         )}
@@ -170,7 +174,11 @@ export const GroupMax: Story = () => {
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar key={index} name="Hirotomo Yamada" />
+                <Avatar
+                  key={index}
+                  name="Hirotomo Yamada"
+                  bg={variant === "outline" ? "bg" : undefined}
+                />
               ))}
           </AvatarGroup>
         )}

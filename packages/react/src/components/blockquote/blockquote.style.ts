@@ -56,7 +56,7 @@ export const blockquoteStyle = defineComponentSlotStyle({
         color: "colorScheme.solid",
       },
       root: {
-        "&:has(> [data-icon])": {
+        _hasIcon: {
           ps: "lg",
         },
       },

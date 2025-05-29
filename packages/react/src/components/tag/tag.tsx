@@ -4,6 +4,7 @@ import type { TagStyle } from "./tag.style"
 import { useMemo, useRef } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
+import { useI18n } from "../../providers/i18n-provider"
 import { dataAttr } from "../../utils"
 import { XIcon } from "../icon"
 import { tagStyle } from "./tag.style"
@@ -139,9 +140,10 @@ const TagCloseButton = withContext<"span", TagCloseButtonProps>("span", [
   const ref = useRef<HTMLSpanElement>(null)
   const { disabled } = useTagContext()
   const rest = useClickable<HTMLSpanElement>({ ref, disabled, ...props })
+  const { t } = useI18n("tag")
 
   return {
-    "aria-label": "Close tag",
+    "aria-label": t("Close tag"),
     "data-disabled": dataAttr(disabled),
     children: children || <XIcon />,
     ...rest,

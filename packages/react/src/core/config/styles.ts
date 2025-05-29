@@ -1,12 +1,13 @@
+import type { Dict } from "../../utils"
 import type { CSSObject } from "../css"
 import type { Transform } from "./utils"
 import { isString } from "../../utils"
 
 export function generateStyles(prefix?: string): Transform {
   return function (value, { prev = {}, theme }) {
-    const result: CSSObject = {}
+    const result: Dict = {}
 
-    let style: CSSObject = {}
+    let style: Dict = {}
 
     if (prefix) {
       style = theme.styles?.[prefix]?.[value] ?? {}
@@ -22,6 +23,6 @@ export function generateStyles(prefix?: string): Transform {
       if (!done) result[prop] = style[prop]
     }
 
-    return result
+    return result as CSSObject
   }
 }

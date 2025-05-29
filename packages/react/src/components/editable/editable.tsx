@@ -53,13 +53,7 @@ export const {
  * @see https://yamada-ui.com/components/editable
  */
 export const EditableRoot = withProvider(
-  ({
-    children,
-    errorBorderColor,
-    focusBorderColor,
-    vars: varsProp,
-    ...props
-  }) => {
+  ({ children, errorBorderColor, focusBorderColor, ...props }) => {
     const {
       editing,
       value: _value,
@@ -69,10 +63,7 @@ export const EditableRoot = withProvider(
       onSubmit,
       ...rest
     } = useEditable(props)
-    const vars = useInputBorder(varsProp, {
-      errorBorderColor,
-      focusBorderColor,
-    })
+    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
     const cloneChildren = runIfFn(children, {
       editing,
       onCancel,
@@ -82,7 +73,7 @@ export const EditableRoot = withProvider(
 
     return (
       <EditableContext value={{ editing, ...rest }}>
-        <styled.div {...getRootProps()} vars={vars}>
+        <styled.div {...getRootProps()} {...varProps}>
           {cloneChildren}
         </styled.div>
       </EditableContext>

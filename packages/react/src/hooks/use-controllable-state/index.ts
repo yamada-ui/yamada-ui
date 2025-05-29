@@ -42,13 +42,13 @@ export function useControllableState<Y>({
 
   const [defaultValue, setDefaultValue] = useState(defaultValueProp)
   const controlled = !isUndefined(value)
-  const resolvedValue = controlled ? value : defaultValue
+  const resolvedValue = (controlled ? value : defaultValue) as Y
 
   const setValue = useCallbackRef(
     (next: SetStateAction<Y>) => {
-      const nextValue = runIfFn(next, resolvedValue as Y)
+      const nextValue = runIfFn(next, resolvedValue)
 
-      if (!onUpdate(resolvedValue as Y, nextValue)) return
+      if (!onUpdate(resolvedValue, nextValue)) return
 
       if (!controlled || isUndefined(nextValue) || isNull(nextValue))
         setDefaultValue(nextValue)

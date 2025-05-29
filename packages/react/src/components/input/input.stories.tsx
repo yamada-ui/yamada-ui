@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form"
 import { withMask } from "use-mask-input"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
-import { Button } from "../button"
-import { Center } from "../center"
+import { Button, IconButton } from "../button"
 import { Field } from "../field"
 import { For } from "../for"
-import { MailIcon, SearchIcon } from "../icon"
+import { MailIcon, PhoneIcon, SearchIcon } from "../icon"
+import { NativeSelect } from "../native-select"
 import { VStack } from "../stack"
 import { Input, InputGroup } from "./"
 
@@ -25,27 +25,6 @@ export const Basic: Story = () => {
   return <Input placeholder="Placeholder" />
 }
 
-export const Size: Story = () => {
-  return (
-    <PropsTable
-      variant="column"
-      columns={["xs", "sm", "md", "lg", "xl"]}
-      rows={["outline", "filled", "flushed"]}
-    >
-      {(column, row, key) => {
-        return (
-          <Input
-            key={key}
-            size={column}
-            variant={row}
-            placeholder={`Size (${column})`}
-          />
-        )
-      }}
-    </PropsTable>
-  )
-}
-
 export const Variant: Story = () => {
   return (
     <PropsTable
@@ -60,6 +39,27 @@ export const Variant: Story = () => {
             colorScheme={row}
             variant={column}
             placeholder={toTitleCase(column)}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const Size: Story = () => {
+  return (
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return (
+          <Input
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
           />
         )
       }}
@@ -89,7 +89,7 @@ export const Disabled: Story = () => {
         {(variant, index) => (
           <InputGroup.Root key={index} variant={variant} disabled>
             <InputGroup.Addon>+81</InputGroup.Addon>
-            <Input type="tel" placeholder="Your phone number" />
+            <Input type="tel" placeholder={toTitleCase(variant)} />
           </InputGroup.Root>
         )}
       </For>
@@ -130,6 +130,15 @@ export const Readonly: Story = () => {
         )}
       </For>
 
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} readOnly>
+            <InputGroup.Addon>+81</InputGroup.Addon>
+            <Input type="tel" placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <Field.Root
         helperMessage="We'll never share your email."
         label="Email address"
@@ -159,7 +168,7 @@ export const Invalid: Story = () => {
         {(variant, index) => (
           <InputGroup.Root key={index} variant={variant} invalid>
             <InputGroup.Addon>+81</InputGroup.Addon>
-            <Input type="tel" placeholder="Your phone number" />
+            <Input type="tel" placeholder={toTitleCase(variant)} />
           </InputGroup.Root>
         )}
       </For>
@@ -189,20 +198,15 @@ export const Invalid: Story = () => {
 export const Addon: Story = () => {
   return (
     <>
-      <InputGroup.Root>
-        <InputGroup.Addon>+81</InputGroup.Addon>
-        <Input type="tel" placeholder="Your phone number" />
-      </InputGroup.Root>
-
-      <InputGroup.Root variant="filled">
-        <InputGroup.Addon>+81</InputGroup.Addon>
-        <Input type="tel" placeholder="Your phone number" />
-      </InputGroup.Root>
-
-      <InputGroup.Root variant="flushed">
-        <InputGroup.Addon>+81</InputGroup.Addon>
-        <Input type="tel" placeholder="Your phone number" />
-      </InputGroup.Root>
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant}>
+            <InputGroup.Addon>+81</InputGroup.Addon>
+            <Input type="tel" placeholder="Your phone number" />
+            <InputGroup.Addon>+81</InputGroup.Addon>
+          </InputGroup.Root>
+        )}
+      </For>
 
       <InputGroup.Root>
         <InputGroup.Addon>https://</InputGroup.Addon>
@@ -216,23 +220,55 @@ export const Addon: Story = () => {
 export const Element: Story = () => {
   return (
     <>
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant}>
+            <InputGroup.Element>
+              <PhoneIcon />
+            </InputGroup.Element>
+            <Input type="tel" placeholder="Your phone number" />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <InputGroup.Root>
-        <InputGroup.Element w="auto">https://</InputGroup.Element>
-        <Input placeholder="Search contacts" ps="4.75rem" />
-        <InputGroup.Addon>.com</InputGroup.Addon>
+        <InputGroup.Addon>https://</InputGroup.Addon>
+        <Input pe="20" placeholder="Search contacts" />
+        <InputGroup.Element clickable insetInlineEnd="1">
+          <NativeSelect.Root
+            size="xs"
+            variant="plain"
+            defaultValue=".com"
+            fontSize="md"
+            items={[
+              { label: ".com", value: ".com" },
+              { label: ".org", value: ".org" },
+              { label: ".net", value: ".net" },
+            ]}
+            pe="6"
+            w="auto"
+          />
+        </InputGroup.Element>
       </InputGroup.Root>
 
       <InputGroup.Root
         as="form"
+        role="search"
         onSubmit={(ev) => {
           ev.preventDefault()
         }}
       >
         <Input type="search" name="q" placeholder="Search user names" />
-        <InputGroup.Element clickable px="2">
-          <Center as="button" focusVisibleRing="outside" p="0.5" rounded="xs">
+        <InputGroup.Element clickable>
+          <IconButton
+            type="submit"
+            size="xs"
+            variant="ghost"
+            aria-label="Search"
+            focusVisibleRing="inside"
+          >
             <SearchIcon fontSize="xl" />
-          </Center>
+          </IconButton>
         </InputGroup.Element>
       </InputGroup.Root>
     </>
@@ -243,12 +279,26 @@ export const BorderColor: Story = () => {
   return (
     <>
       <Input placeholder="Default border color" />
+
       <Input focusBorderColor="green.500" placeholder="Custom border color" />
+
+      <InputGroup.Root variant="flushed" focusBorderColor="green.500">
+        <InputGroup.Element>
+          <PhoneIcon />
+        </InputGroup.Element>
+        <Input type="tel" placeholder="Custom border color" />
+      </InputGroup.Root>
+
       <Input
         errorBorderColor="orange.500"
         invalid
         placeholder="Custom border color"
       />
+
+      <InputGroup.Root errorBorderColor="orange.500" invalid>
+        <InputGroup.Addon>+81</InputGroup.Addon>
+        <Input type="tel" placeholder="Custom border color" />
+      </InputGroup.Root>
     </>
   )
 }
@@ -257,11 +307,13 @@ export const Placeholder: Story = () => {
   return (
     <>
       <Input placeholder="Default placeholder" />
+
       <Input
         placeholder="Custom placeholder"
         _dark={{ _placeholder: { color: "blue.500", opacity: 1 } }}
         _placeholder={{ color: "blue.500", opacity: 1 }}
       />
+
       <Input
         color="green.500"
         placeholder="Custom placeholder"

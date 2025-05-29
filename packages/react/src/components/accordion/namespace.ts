@@ -1,11 +1,9 @@
 export {
   AccordionButton as Button,
-  AccordionContext as Context,
   AccordionItem as Item,
   AccordionPanel as Panel,
   AccordionPropsContext as PropsContext,
   AccordionRoot as Root,
-  useAccordionContext as useContext,
   useAccordionPropsContext as usePropsContext,
 } from "./accordion"
 export type {
@@ -15,8 +13,10 @@ export type {
   AccordionRootProps as RootProps,
 } from "./accordion"
 export {
+  AccordionContext as Context,
   AccordionDescendantsContext as DescendantsContext,
   AccordionItemContext as ItemContext,
+  useAccordionContext as useContext,
   useAccordionDescendant as useDescendant,
   useAccordionDescendants as useDescendants,
   useAccordionItemContext as useItemContext,

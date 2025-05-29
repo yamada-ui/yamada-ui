@@ -41,7 +41,7 @@ export const Items: Story = () => {
   return <Breadcrumb.Root items={items} />
 }
 
-export const Variants: Story = () => {
+export const Variant: Story = () => {
   const items = useMemo<Breadcrumb.RootProps["items"]>(
     () => [
       { href: "/", label: "サイヤ人編" },
@@ -61,7 +61,7 @@ export const Variants: Story = () => {
   )
 }
 
-export const Sizes: Story = () => {
+export const Size: Story = () => {
   const items = useMemo<Breadcrumb.RootProps["items"]>(
     () => [
       { href: "/", label: "サイヤ人編" },

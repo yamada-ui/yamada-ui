@@ -73,6 +73,9 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
               boxShadow: "0 0 0 3px $color",
             },
           },
+          _focusVisible: {
+            boxShadow: "0 0 0 3px $color",
+          },
           _invalid: {
             borderColor: "$errorColor",
             boxShadow: "0 0 0 1px $errorColor",
@@ -80,9 +83,6 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
               borderColor: "$color",
               boxShadow: "0 0 0 3px $color",
             },
-          },
-          _focusVisible: {
-            boxShadow: "0 0 0 3px $color",
           },
         },
         icon: {
@@ -128,6 +128,9 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
             bg: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
             borderColor: [`${c}.50`, shadeColor(`${c}.300`, 68)(t, m)],
           },
+          _focusVisible: {
+            boxShadow: "0 0 0 3px $color",
+          },
           _invalid: {
             borderColor: "$errorColor",
             boxShadow: "0 0 0 1px $errorColor",
@@ -135,9 +138,6 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
               borderColor: "$color",
               boxShadow: "0 0 0 3px $color",
             },
-          },
-          _focusVisible: {
-            boxShadow: "0 0 0 3px $color",
           },
         },
         icon: {
@@ -190,6 +190,10 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
               boxShadow: "0 0 0 3px $color",
             },
           },
+          _focusVisible: {
+            borderColor: "$color",
+            boxShadow: "0 0 0 3px $color",
+          },
           _invalid: {
             borderColor: "$errorColor",
             boxShadow: "0 0 0 1px $errorColor",
@@ -197,10 +201,6 @@ export const RadioCard: ComponentMultiStyle<"RadioCard"> = mergeMultiStyle(
               borderColor: "$color",
               boxShadow: "0 0 0 3px $color",
             },
-          },
-          _focusVisible: {
-            borderColor: "$color",
-            boxShadow: "0 0 0 3px $color",
           },
         },
         icon: {

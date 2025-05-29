@@ -4,7 +4,6 @@ export const noticeStyle = defineComponentSlotStyle({
   base: {
     actionButton: {},
     closeButton: {
-      size: "sm",
       bg: "red",
       position: "absolute",
       right: 2,

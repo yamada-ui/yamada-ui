@@ -49,7 +49,6 @@ export const {
 
 export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
   ({
-    css,
     appendToParentPortal,
     children,
     closeOnDrag,
@@ -94,7 +93,6 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
           const convertedPlacement = toDirectionalPlacement(placement)
 
           const customCSS: CSSObject = {
-            css,
             gap,
             margin: gap,
           }
@@ -112,7 +110,7 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
             />
           )
         }),
-      [state, gap, variants, itemProps, listProps, css],
+      [state, gap, variants, itemProps, listProps],
     )
 
     return (

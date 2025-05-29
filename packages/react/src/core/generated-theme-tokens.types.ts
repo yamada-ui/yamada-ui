@@ -827,6 +827,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "subtle.hover"
     | "surface"
     | "surface.hover"
+    | "visuallyHidden"
     | (string & {})
   letterSpacings:
     | "tight"

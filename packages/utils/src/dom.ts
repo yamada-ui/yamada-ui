@@ -104,14 +104,17 @@ export function getPx(value: number | string | undefined): number {
   return parseFloat(value) * fontSize
 }
 
-type Booleanish = "false" | "true" | boolean
-
 export function dataAttr(condition: any) {
-  return (condition ? "" : undefined) as Booleanish
+  return (condition ? "" : undefined) as string | undefined
 }
 
-export function ariaAttr(condition: any): boolean | undefined {
-  return condition ? true : undefined
+type Booleanish = "false" | "true" | boolean
+
+export function ariaAttr(condition: any): Booleanish | undefined {
+  if (condition === "true") return "true"
+  if (condition === "false") return "false"
+
+  return !!condition ? true : undefined
 }
 
 export interface FocusableElement {

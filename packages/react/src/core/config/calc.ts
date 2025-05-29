@@ -5,6 +5,7 @@ import {
   getCSSFunction,
   globalValues,
   isCSSFunction,
+  isCSSToken,
   splitValues,
 } from "./utils"
 
@@ -23,9 +24,11 @@ function getValue(value: string | undefined, fallbackValue = ""): Transform {
 
       const resolvedToken = `${token}.${value}`
 
-      return theme.__cssMap && resolvedToken in theme.__cssMap
-        ? theme.__cssMap[resolvedToken]?.ref
-        : value
+      if (isCSSToken(theme)(resolvedToken)) {
+        return theme.__cssMap![resolvedToken]!.ref
+      } else {
+        return value
+      }
     }
   }
 }

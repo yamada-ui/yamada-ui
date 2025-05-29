@@ -67,27 +67,27 @@ export const createStorage = <T>(type: StorageType, name: string) => {
     )
 
     const setStorageValue = useCallback(
-      (valOrFunc: ((prevState: T) => T) | T) => {
-        if (isFunction(valOrFunc)) {
+      (valOrFn: ((prevState: T) => T) | T) => {
+        if (isFunction(valOrFn)) {
           setValue((current) => {
-            const result = valOrFunc(current)
+            const result = valOrFn(current)
 
             window[type].setItem(key, serialize(result))
             window.dispatchEvent(
               new CustomEvent(eventName, {
-                detail: { key, value: valOrFunc(current) },
+                detail: { key, value: valOrFn(current) },
               }),
             )
 
             return result
           })
         } else {
-          window[type].setItem(key, serialize(valOrFunc))
+          window[type].setItem(key, serialize(valOrFn))
           window.dispatchEvent(
-            new CustomEvent(eventName, { detail: { key, value: valOrFunc } }),
+            new CustomEvent(eventName, { detail: { key, value: valOrFn } }),
           )
 
-          setValue(valOrFunc)
+          setValue(valOrFn)
         }
       },
       [key, serialize],

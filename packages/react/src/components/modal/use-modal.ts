@@ -3,6 +3,7 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback, useId } from "react"
 import { useDisclosure } from "../../hooks/use-disclosure"
+import { useI18n } from "../../providers/i18n-provider"
 import { cx, handlerAll } from "../../utils"
 
 export interface UseModalProps extends HTMLProps, UseDisclosureProps {
@@ -34,6 +35,7 @@ export const useModal = ({
   const contentId = useId()
   const titleId = useId()
   const bodyId = useId()
+  const { t } = useI18n("modal")
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent) => {
@@ -74,29 +76,29 @@ export const useModal = ({
       "aria-controls": contentId,
       "aria-expanded": open,
       "aria-haspopup": "dialog",
-      "aria-label": "Open modal",
+      "aria-label": t("Open modal"),
       ...props,
       onClick: handlerAll(props.onClick, onOpen),
     }),
-    [contentId, onOpen, open],
+    [contentId, onOpen, open, t],
   )
 
   const getCloseTriggerProps: PropGetter<"button"> = useCallback(
     (props = {}) => ({
-      "aria-label": "Close modal",
+      "aria-label": t("Close modal"),
       ...props,
       onClick: handlerAll(props.onClick, onClose),
     }),
-    [onClose],
+    [onClose, t],
   )
 
   const getCloseButtonProps: PropGetter<"button"> = useCallback(
     (props = {}) => ({
-      "aria-label": "Close modal",
+      "aria-label": t("Close modal"),
       ...props,
       onClick: handlerAll(props.onClick, onClose),
     }),
-    [onClose],
+    [onClose, t],
   )
 
   const getContentProps: PropGetter<"section"> = useCallback(

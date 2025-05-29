@@ -8,6 +8,8 @@ import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Button } from "../button"
 import { Field } from "../field"
 import { For } from "../for"
+import { MailIcon } from "../icon"
+import { InputGroup } from "../input"
 import { VStack } from "../stack"
 
 type Story = StoryFn<typeof Textarea>
@@ -21,27 +23,6 @@ export default meta
 
 export const Basic: Story = () => {
   return <Textarea placeholder="basic" />
-}
-
-export const Size: Story = () => {
-  return (
-    <PropsTable
-      variant="column"
-      columns={["xs", "sm", "md", "lg", "xl"]}
-      rows={["outline", "filled", "flushed"]}
-    >
-      {(column, row, key) => {
-        return (
-          <Textarea
-            key={key}
-            size={column}
-            variant={row}
-            placeholder={`Size (${column})`}
-          />
-        )
-      }}
-    </PropsTable>
-  )
 }
 
 export const Variant: Story = () => {
@@ -65,6 +46,27 @@ export const Variant: Story = () => {
   )
 }
 
+export const Size: Story = () => {
+  return (
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return (
+          <Textarea
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
 export const Disabled: Story = () => {
   return (
     <>
@@ -76,6 +78,15 @@ export const Disabled: Story = () => {
             disabled
             placeholder={variant}
           />
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} disabled>
+            <InputGroup.Addon>Email</InputGroup.Addon>
+            <Textarea placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
         )}
       </For>
 
@@ -104,6 +115,15 @@ export const Readonly: Story = () => {
         )}
       </For>
 
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} readOnly>
+            <InputGroup.Addon>Email</InputGroup.Addon>
+            <Textarea placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <Field.Root
         helperMessage="We would like to get your feedback."
         label="Feedback"
@@ -129,6 +149,15 @@ export const Invalid: Story = () => {
         )}
       </For>
 
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} invalid>
+            <InputGroup.Addon>Email</InputGroup.Addon>
+            <Textarea placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <Field.Root errorMessage="Feedback is required." invalid label="Feedback">
         <Textarea variant="outline" placeholder="your feedback" />
       </Field.Root>
@@ -136,19 +165,69 @@ export const Invalid: Story = () => {
   )
 }
 
+export const Addon: Story = () => {
+  return (
+    <>
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant}>
+            <InputGroup.Addon>Email</InputGroup.Addon>
+            <Textarea placeholder="Your email address" />
+          </InputGroup.Root>
+        )}
+      </For>
+
+      <InputGroup.Root>
+        <InputGroup.Addon>https://</InputGroup.Addon>
+        <Textarea placeholder="Your site address" />
+        <InputGroup.Addon>.com</InputGroup.Addon>
+      </InputGroup.Root>
+    </>
+  )
+}
+
+export const Element: Story = () => {
+  return (
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant, index) => (
+        <InputGroup.Root key={index} variant={variant}>
+          <InputGroup.Element>
+            <MailIcon fontSize="xl" />
+          </InputGroup.Element>
+          <Textarea placeholder="Your email address" />
+        </InputGroup.Root>
+      )}
+    </For>
+  )
+}
+
 export const BorderColor: Story = () => {
   return (
     <>
-      <Textarea placeholder="default border color" />
+      <Textarea placeholder="Default border color" />
+
       <Textarea
         focusBorderColor="green.500"
-        placeholder="custom border color"
+        placeholder="Custom border color"
       />
+
+      <InputGroup.Root variant="flushed" focusBorderColor="green.500">
+        <InputGroup.Element>
+          <MailIcon fontSize="xl" />
+        </InputGroup.Element>
+        <Textarea placeholder="Custom border color" />
+      </InputGroup.Root>
+
       <Textarea
         errorBorderColor="orange.500"
         invalid
-        placeholder="custom border color"
+        placeholder="Custom border color"
       />
+
+      <InputGroup.Root errorBorderColor="orange.500" invalid>
+        <InputGroup.Addon>Email</InputGroup.Addon>
+        <Textarea placeholder="Custom border color" />
+      </InputGroup.Root>
     </>
   )
 }
@@ -157,10 +236,12 @@ export const Placeholder: Story = () => {
   return (
     <>
       <Textarea placeholder="default placeholder" />
+
       <Textarea
         placeholder="custom placeholder"
         _placeholder={{ color: "gray.500", opacity: 1 }}
       />
+
       <Textarea
         color="green.500"
         placeholder="custom placeholder"

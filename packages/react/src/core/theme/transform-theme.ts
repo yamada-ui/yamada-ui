@@ -315,13 +315,13 @@ function getCreateThemeTokens(breakpoints?: Breakpoints, responsive?: boolean) {
   }
 }
 
-function mergeVars(...funcs: CreateThemeVars[]) {
+function mergeVars(...fns: CreateThemeVars[]) {
   return function (prevTokens?: VariableTokens) {
     let resolvedCSSMap: CSSMap = {}
     let resolvedCSSVars: Dict = {}
 
-    for (const func of funcs) {
-      const { cssMap, cssVars } = func({
+    for (const fn of fns) {
+      const { cssMap, cssVars } = fn({
         cssMap: resolvedCSSMap,
         cssVars: resolvedCSSVars,
         prevTokens,

@@ -7,7 +7,7 @@ export const globalStyle = defineStyles.globalStyle({
     borderWidth: "0",
     focusVisibleRing: "outline",
     fontFeatureSettings: '"cv11"',
-    wordWrap: "break-word",
+    overflowWrap: "break-word",
   },
   "*::placeholder, *[data-placeholder]": {
     color: "fg.subtle",

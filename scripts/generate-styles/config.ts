@@ -1,15 +1,16 @@
-import type { EmotionCSSObject, ThemeToken, Union } from "@yamada-ui/react"
-import type { CSSProperties, UIProperties } from "."
+import type { CSSObject } from "@emotion/styled"
+import type { AnyString, ThemeToken } from "@yamada-ui/react"
+import type { CSSProperties, StyledProperties } from "."
 import type { TransformOptions } from "./transform-props"
 
 const generateTransform = (...transforms: TransformOptions[]) => {
   let transform = transforms
     .map(({ args, transform }) => {
-      let func = `transforms.${transform}`
+      let fn = `transforms.${transform}`
 
-      if (args) func += `(${args.map((arg) => `"${arg}"`).join(", ")})`
+      if (args) fn += `(${args.map((arg) => `"${arg}"`).join(", ")})`
 
-      return func
+      return fn
     })
     .join(", ")
 
@@ -19,10 +20,8 @@ const generateTransform = (...transforms: TransformOptions[]) => {
 }
 
 interface GetConfigOptions {
-  css?: EmotionCSSObject
-  properties?:
-    | Union<CSSProperties | UIProperties>
-    | Union<CSSProperties | UIProperties>[]
+  css?: CSSObject
+  properties?: (AnyString | CSSProperties | StyledProperties)[]
   token?: ThemeToken
   transforms?: TransformOptions[]
 }
@@ -35,15 +34,9 @@ export const generateConfig =
     const config: string[] = []
 
     if (properties) {
-      if (typeof properties === "string") {
-        const value = `"${properties}"`
+      const value = `[${properties.map((p) => `"${p}"`).join(", ")}]`
 
-        config.push(`properties: ${value}`)
-      } else {
-        const value = `[${properties.map((p) => `"${p}"`).join(", ")}]`
-
-        config.push(`properties: ${value}`)
-      }
+      config.push(`properties: ${value}`)
     }
 
     if (token) config.push(`token: "${token}"`)

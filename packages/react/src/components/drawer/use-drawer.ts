@@ -3,7 +3,7 @@ import type { UseModalProps } from "../modal"
 import type { HTMLMotionProps } from "../motion"
 import { useCallback, useMemo } from "react"
 import { useValue } from "../../hooks/use-value"
-import { handlerAll } from "../../utils"
+import { cast, handlerAll } from "../../utils"
 import { useModal } from "../modal"
 
 type DragEndEventHandler = Required<HTMLMotionProps>["onDragEnd"]
@@ -140,9 +140,9 @@ export const useDrawer = ({
       dragElastic: getDragRestriction(dragElastic),
       dragMomentum: false,
       dragSnapToOrigin: true,
-      ...(getModalContentProps(
-        props as HTMLProps<"section">,
-      ) as HTMLMotionProps<"section">),
+      ...cast<HTMLMotionProps<"section">>(
+        getModalContentProps(cast<HTMLProps<"section">>(props)),
+      ),
       onDragEnd: handlerAll(props.onDragEnd, onDragEnd),
     }),
     [

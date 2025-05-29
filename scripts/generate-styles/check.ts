@@ -1,13 +1,13 @@
-import type { CSSCompatDataWithType } from "."
+import type { CSSCompatData } from "."
 import { shorthandProps } from "./shorthand-props"
+import { additionalProps, atRuleProps, styledProps } from "./styled-props"
 import { tokens } from "./tokens"
-import { additionalProps, atRuleProps, uiProps } from "./ui-props"
 
-export const checkProps = (cssCompatData: CSSCompatDataWithType) => {
+export const checkProps = (cssCompatData: CSSCompatData) => {
   const propMap = Object.keys(cssCompatData)
-  const uiPropMap = [
+  const styledPropMap = [
     ...Object.keys(additionalProps),
-    ...Object.keys(uiProps),
+    ...Object.keys(styledProps),
     ...Object.keys(atRuleProps),
   ] as string[]
 
@@ -52,7 +52,7 @@ export const checkProps = (cssCompatData: CSSCompatDataWithType) => {
           `Shorthand Prop already exists in "CSS Properties", please check "${property}" in "${relatedProperty}"`,
         )
 
-      if (uiPropMap.includes(property))
+      if (styledPropMap.includes(property))
         throw new Error(
           `Shorthand Prop already exists in "UI Props", please check "${property}" in "${relatedProperty}"`,
         )

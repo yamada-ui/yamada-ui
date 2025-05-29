@@ -49,7 +49,6 @@ describe("useAsyncRetry", () => {
       result.current.retry()
     })
     await waitFor(() => expect(result.current.loading).toBeFalsy())
-
-    expect(result.current.value).toBe("success")
+    await waitFor(() => expect(result.current.value).toBe("success"))
   })
 })

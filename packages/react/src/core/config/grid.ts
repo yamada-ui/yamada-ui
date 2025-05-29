@@ -4,6 +4,7 @@ import {
   getCSSFunction,
   globalValues,
   isCSSFunction,
+  isCSSToken,
   splitValues,
 } from "./utils"
 
@@ -25,9 +26,11 @@ export function grid(value: any, { theme, ...rest }: TransformOptions) {
     if (!prevent) {
       const token = `sizes.${value}`
 
-      return theme.__cssMap && token in theme.__cssMap
-        ? (theme.__cssMap[token]?.ref ?? value)
-        : value
+      if (isCSSToken(theme)(token)) {
+        return theme.__cssMap![token]!.ref
+      } else {
+        return value
+      }
     }
 
     const { type, values } = getCSSFunction(value)

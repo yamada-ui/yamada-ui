@@ -5,7 +5,7 @@ import { memo } from "react"
 import { useTimeout } from "../../hooks/use-timeout"
 import { isValidElement } from "../../utils"
 import { Center } from "../center"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { Text } from "../text"
 import { Loading } from "./"
 
@@ -36,7 +36,7 @@ export const Screen: FC<ScreenProps> = memo(
     useTimeout(onFinish, duration)
 
     return (
-      <Motion
+      <motion.div
         data-loading
         alignItems="center"
         animate="animate"
@@ -64,7 +64,7 @@ export const Screen: FC<ScreenProps> = memo(
             )
           ) : null}
         </Center>
-      </Motion>
+      </motion.div>
     )
   },
 )

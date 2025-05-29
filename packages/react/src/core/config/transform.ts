@@ -1,14 +1,14 @@
+import type { Dict } from "../../utils"
 import type { CSSObject } from "../css"
 import type { TransformOptions } from "./utils"
-import { toArray } from "../../utils"
 
 export function transform(value: any, { prev, properties }: TransformOptions) {
-  const result: CSSObject = {}
+  const result: Dict = {}
 
-  toArray(properties).forEach((property) => {
+  properties?.forEach((property) => {
     result.transform = [prev?.transform ?? "", `var(${property})`].join(" ")
     result[property] = value
   })
 
-  return result
+  return result as CSSObject
 }

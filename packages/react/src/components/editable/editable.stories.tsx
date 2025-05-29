@@ -3,10 +3,10 @@ import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 import { Editable } from "."
 import { Button } from "../button"
-import { ButtonGroup } from "../button-group"
+import { ButtonGroup } from "../button"
+import { IconButton } from "../button"
 import { Field } from "../field"
 import { CheckIcon, PencilIcon, XIcon } from "../icon"
-import { IconButton } from "../icon-button"
 import { VStack } from "../stack"
 
 type Story = StoryFn<typeof Editable.Root>
@@ -74,34 +74,6 @@ export const SelectAllOnFocus: Story = () => {
   )
 }
 
-export const BorderColor: Story = () => {
-  return (
-    <>
-      <Editable.Root defaultValue="Default border color">
-        <Editable.Preview />
-        <Editable.Input />
-      </Editable.Root>
-
-      <Editable.Root
-        defaultValue="Custom border color"
-        focusBorderColor="green.500"
-      >
-        <Editable.Preview />
-        <Editable.Input />
-      </Editable.Root>
-
-      <Editable.Root
-        defaultValue="Custom border color"
-        errorBorderColor="orange.500"
-        invalid
-      >
-        <Editable.Preview />
-        <Editable.Input />
-      </Editable.Root>
-    </>
-  )
-}
-
 export const Disabled: Story = () => {
   return (
     <>
@@ -164,6 +136,34 @@ export const Invalid: Story = () => {
           <Editable.Input />
         </Editable.Root>
       </Field.Root>
+    </>
+  )
+}
+
+export const BorderColor: Story = () => {
+  return (
+    <>
+      <Editable.Root defaultValue="Default border color">
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
+
+      <Editable.Root
+        defaultValue="Custom border color"
+        focusBorderColor="green.500"
+      >
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
+
+      <Editable.Root
+        defaultValue="Custom border color"
+        errorBorderColor="orange.500"
+        invalid
+      >
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
     </>
   )
 }

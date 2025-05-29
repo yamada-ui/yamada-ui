@@ -99,7 +99,7 @@ export const buttonStyle = defineComponentStyle({
       h: "10",
       lineHeight: "{sizes.10}",
       minW: "10",
-      px: "4",
+      px: "3",
       _icon: {
         fontSize: "lg",
       },
@@ -110,7 +110,7 @@ export const buttonStyle = defineComponentStyle({
       h: "11",
       lineHeight: "{sizes.11}",
       minW: "11",
-      px: "4.5",
+      px: "4",
       _icon: {
         fontSize: "2xl",
       },

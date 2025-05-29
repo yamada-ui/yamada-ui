@@ -10,17 +10,17 @@ export const useTimeout = (
   callback: (...args: any[]) => void,
   delay: null | number,
 ) => {
-  const func = useCallbackRef(callback)
+  const callbackRef = useCallbackRef(callback)
 
   useEffect(() => {
     if (delay == null) return undefined
 
     let timeoutId: null | number = null
 
-    timeoutId = window.setTimeout(func, delay)
+    timeoutId = window.setTimeout(callbackRef, delay)
 
     return () => {
       if (timeoutId) window.clearTimeout(timeoutId)
     }
-  }, [delay, func])
+  }, [delay, callbackRef])
 }

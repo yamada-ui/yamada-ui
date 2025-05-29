@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES, noop } from "../../utils"
-import { CloseButton } from "../close-button"
+import { CloseButton } from "../button"
 import { VStack } from "../stack"
 import { Alert } from "./"
 

@@ -1,8 +1,8 @@
 import type { ColorScheme } from "../theme"
 import type { TransformOptions } from "./utils"
 import { isArray, TONES } from "../../utils"
+import { conditions } from "../conditions"
 import { getVarName } from "../css"
-import { pseudos } from "../pseudos"
 import { tokenToVar } from "./utils"
 
 function createColorSchemeVariables(value: ColorScheme) {
@@ -40,7 +40,7 @@ export function colorScheme(value: any, options: TransformOptions) {
 
     return {
       ...createColorSchemeVariables(lightValue)(options),
-      [pseudos._dark]: createColorSchemeVariables(darkValue)(options),
+      [conditions._dark]: createColorSchemeVariables(darkValue)(options),
     }
   } else {
     return createColorSchemeVariables(value)(options)

@@ -1,11 +1,32 @@
 import type { Dict } from "../../utils"
-import type { UsageTheme, VariableTokens, VariableValue } from "../theme"
+import type { StyleConfig } from "../config"
+import type { StyleProperty } from "../styles"
+import type {
+  ThemeToken,
+  UsageTheme,
+  VariableTokens,
+  VariableValue,
+} from "../theme"
 import type { CSSMap, DefineThemeValue, StyledTheme } from "../theme"
 import type { Breakpoints } from "./breakpoint"
-import { calc, escape, isArray, isObject, isString, merge } from "../../utils"
+import type { CSSObject, CSSProperties, StyleValue } from "./index.types"
+import { useMemo, useRef } from "react"
+import {
+  calc,
+  escape,
+  isArray,
+  isNull,
+  isObject,
+  isString,
+  isUndefined,
+  merge,
+  replaceObject,
+} from "../../utils"
+import { cssProps } from "../components"
+import { conditions } from "../conditions"
 import { animation, colorMix, gradient, insertKeyframes } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
-import { pseudos } from "../pseudos"
+import { styles } from "../styles"
 import { css } from "./css"
 
 type ParsedValue = number | string | undefined
@@ -30,14 +51,10 @@ export function transformInterpolation(
   }
 }
 
-export function getVar(theme: StyledTheme<UsageTheme>) {
-  return function (token: string) {
-    const prefix = theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
+export function getVar(token: string, fallback?: string) {
+  if (!token.startsWith("--")) token = `--${token}`
 
-    return token.startsWith("--")
-      ? `var(${token})`
-      : `var(--${prefix}-${token})`
-  }
+  return fallback ? `var(${token}, ${fallback})` : `var(${token})`
 }
 
 export function getVarName(theme: StyledTheme<UsageTheme>) {
@@ -49,12 +66,14 @@ export function getVarName(theme: StyledTheme<UsageTheme>) {
 }
 
 export function getColorSchemeVar(theme: StyledTheme<UsageTheme>) {
-  return function (value: any) {
+  return function (value: any, fallback?: string) {
     if (!isString(value)) return value
+
+    const prefix = theme.__config?.css?.varPrefix ?? DEFAULT_VAR_PREFIX
 
     const [, token] = value.split(".")
 
-    return getVar(theme)(`colorScheme-${token}`)
+    return getVar(`${prefix}-colorScheme-${token}`, fallback)
   }
 }
 
@@ -126,7 +145,9 @@ export function getCreateThemeVars(
             } else if (value in cssMap && cssMap[value]?.ref) {
               return cssMap[value].ref
             } else {
-              return fallbackValue || `var(--${prefix}-${value})`
+              return fallbackValue
+                ? `var(--${prefix}-${value}, ${fallbackValue})`
+                : `var(--${prefix}-${value})`
             }
           }
         })
@@ -179,7 +200,7 @@ export function getCreateThemeVars(
 
       function createColorVar(
         token: string,
-        properties: string,
+        properties: string[],
         value: DefineThemeValue,
       ) {
         return function (semantic: boolean) {
@@ -209,7 +230,7 @@ export function getCreateThemeVars(
               token,
               darkValue,
               variable,
-            )(semantic, [...queries, pseudos._dark])
+            )(semantic, [...queries, conditions._dark])
           } else if (isResponsive?.(value, true)) {
             Object.entries(value).forEach(([key, value]) => {
               if (key === "base") {
@@ -234,7 +255,7 @@ export function getCreateThemeVars(
             } else if (isColor(token)) {
               resolvedValue = createColorVar(
                 token,
-                variable,
+                [variable],
                 computedValue,
               )(semantic)
             } else if (semantic) {
@@ -279,3 +300,81 @@ export function getCreateThemeVars(
 }
 
 export type CreateThemeVars = ReturnType<ReturnType<typeof getCreateThemeVars>>
+
+export function varAttr(
+  value: StyleValue<number | string> | undefined,
+  token?: ThemeToken,
+): StyleValue<number | string> | undefined {
+  if (isUndefined(value) || isNull(value)) return value
+
+  if (isObject(value) || isArray(value)) {
+    return replaceObject(value, (value) => varAttr(value, token))
+  } else {
+    return token ? `{${token}.${value}, ${value}}` : value
+  }
+}
+
+export function injectVars<Y extends Dict | Dict[] | undefined>(
+  objOrArray: Y,
+  targets: { [key in CSSProperties]?: string },
+  isInvalidProp?: (prop: string) => boolean,
+): Y {
+  if (!objOrArray) return objOrArray
+
+  function callback(objOrArray: Dict) {
+    return Object.fromEntries(
+      Object.entries(objOrArray).flatMap(function ([prop, value]) {
+        if (isInvalidProp?.(prop)) return [[prop, value]]
+
+        const target = targets[prop]
+        const result: [string, any][] = []
+
+        if (target) {
+          const style: StyleConfig | true | undefined =
+            styles[prop as StyleProperty]
+          const token = isObject(style) ? style.token : undefined
+
+          result.push([
+            `--${target}`,
+            token ? `{${token}.${value}, ${value}}` : value,
+          ])
+        } else if (isObject(value)) {
+          result.push([prop, injectVars(value, targets)])
+        } else {
+          result.push([prop, value])
+        }
+
+        return result
+      }),
+    )
+  }
+
+  if (isArray(objOrArray)) {
+    return objOrArray.map(callback) as Y
+  } else {
+    return callback(objOrArray) as Y
+  }
+}
+
+export const insertVars = injectVars
+
+export function useInjectVarsIntoCss(
+  css: CSSObject | CSSObject[] | undefined,
+  targets: { [key in CSSProperties]?: string },
+) {
+  const targetsRef = useRef(targets)
+
+  return useMemo(() => injectVars(css, targetsRef.current), [css])
+}
+
+export function useInjectVarsIntoProps<Y extends Dict | undefined>(
+  props: Y,
+  targets: { [key in CSSProperties]?: string },
+) {
+  const targetsRef = useRef(targets)
+
+  return useMemo(
+    () => injectVars(props, targetsRef.current, (prop) => !cssProps.has(prop)),
+    [props],
+  )
+}

@@ -21,9 +21,9 @@ export const cardStyle = defineComponentSlotStyle({
     root: {
       display: "flex",
       flexDirection: "column",
+      overflowWrap: "break-word",
       rounded: "l2",
       w: "full",
-      wordWrap: "break-word",
     },
   },
 

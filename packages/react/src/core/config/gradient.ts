@@ -4,6 +4,7 @@ import {
   getCSSFunction,
   globalValues,
   isCSSFunction,
+  isCSSToken,
   splitValues,
 } from "./utils"
 
@@ -58,10 +59,7 @@ export function gradient(value: any, { theme }: TransformOptions) {
 
     const token = `colors.${color}`
 
-    color =
-      theme.__cssMap && token in theme.__cssMap
-        ? (theme.__cssMap[token]?.ref ?? color)
-        : color
+    color = isCSSToken(theme)(token) ? theme.__cssMap![token]!.ref : color
 
     if (ratio) {
       return [color, ...(isArray(ratio) ? ratio : [ratio])].join(" ")

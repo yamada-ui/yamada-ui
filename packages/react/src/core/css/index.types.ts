@@ -1,11 +1,16 @@
 import type * as CSS from "csstype"
-import type { ObjectLiteral, StringLiteral } from "../../utils"
-import type { PseudoProperty, PseudoProps } from "../pseudos"
+import type { AnyString } from "../../utils"
+import type {
+  AnySelector,
+  ConditionProperty,
+  ConditionProps,
+} from "../conditions"
 import type { StyleProps } from "../styles"
 import type {
   Breakpoint,
   KeyframeIdent,
   StyledTheme,
+  ThemePath,
   ThemeTokens,
   UsageTheme,
 } from "../theme"
@@ -20,15 +25,15 @@ export type ColorModeArray<Y, M extends boolean = true> = M extends true
   : [Y, Y]
 
 export type ResponsiveObject<Y, M extends boolean = true> = M extends true
-  ? { [key in Breakpoint]?: ColorModeArray<Y, false> | Y }
-  : { [key in Breakpoint]?: Y }
+  ? { [D in Breakpoint]?: ColorModeArray<Y, false> | Y }
+  : { [D in Breakpoint]?: Y }
 
-export type ResponsiveWithPseudoObject<
+export type ResponsiveWithConditionObject<
   Y,
   M extends boolean = true,
 > = M extends true
-  ? { [key in Breakpoint | PseudoProperty]?: ColorModeArray<Y, false> | Y }
-  : { [key in Breakpoint | PseudoProperty]?: Y }
+  ? { [D in Breakpoint | ConditionProperty]?: ColorModeArray<Y, false> | Y }
+  : { [D in Breakpoint | ConditionProperty]?: Y }
 
 export type Token<Y, M = unknown> = M extends keyof ThemeTokens
   ? ThemeTokens[M] | Y
@@ -45,24 +50,30 @@ export type ResponsiveValue<Y, M = unknown> = M extends keyof ThemeTokens
 export type StyleValue<Y, M = unknown> = M extends keyof ThemeTokens
   ?
       | ColorModeArray<ThemeTokens[M] | Y>
-      | ResponsiveWithPseudoObject<ThemeTokens[M] | Y>
+      | ResponsiveWithConditionObject<ThemeTokens[M] | Y>
       | ThemeTokens[M]
       | Y
-  : ColorModeArray<Y> | ResponsiveWithPseudoObject<Y> | Y
+  : ColorModeArray<Y> | ResponsiveWithConditionObject<Y> | Y
 
-type CSSInternalObject = {
-  [Y in keyof StyleProps]?: StyleValue<StyleProps[Y]>
+export type CSSVariable = `--${string}`
+interface CSSVariableProps {
+  [key: CSSVariable]: StyleValue<number | ThemePath> | undefined
 }
 
-type CSSRecursiveObject<Y> = {
-  [K in keyof CSS.Pseudos | PseudoProperty | StringLiteral]?:
-    | (CSSRecursiveObject<Y> & Y)
-    | ObjectLiteral
+type VendorProps = {
+  [Y in keyof CSS.VendorPropertiesFallback]?: StyleValue<
+    AnyString | CSS.VendorPropertiesFallback[Y]
+  >
 }
 
-export interface CSSObject
-  extends CSSInternalObject,
-    CSSRecursiveObject<CSSInternalObject> {}
+interface CSSFlatObject extends StyleProps, VendorProps, CSSVariableProps {}
+
+export type CSSObject = CSSFlatObject & {
+  [D in AnySelector | ConditionProperty]?: D extends keyof CSSFlatObject
+    ? CSSFlatObject[D]
+    : CSSObject
+}
+export type CSSProperties = AnyString | keyof CSSFlatObject
 
 export interface CSSPropObject<
   Y extends CSSObject | CSSSlotObject = CSSObject,
@@ -71,21 +82,20 @@ export interface CSSPropObject<
 }
 
 export type CSSSlotObject<Y extends number | string | symbol = string> = {
-  [key in Y]?: CSSObject
+  [M in Y]?: CSSObject
 }
 
-export interface CSSModifierObject<
-  Y extends CSSObject | CSSSlotObject = CSSObject,
-> {
-  [key: string]: Y
-}
+export type CSSModifierObject<Y extends CSSObject | CSSSlotObject = CSSObject> =
+  {
+    [M in "base" | AnyString | number]?: Y
+  }
 
-export type CSSKeyframesObject = {
-  [key in `${number}%` | KeyframeIdent]?: CSSInternalObject
+export type CSSKeyframeObject = {
+  [M in `${number}%` | KeyframeIdent]?: CSSFlatObject
 }
 
 export interface CSSAnimationObject {
-  keyframes: Token<CSSKeyframesObject, "keyframes">
+  keyframes: Token<CSSKeyframeObject, "keyframes">
   delay?: Token<CSS.Property.AnimationDelay>
   direction?: Token<CSS.Property.AnimationDirection>
   duration?: Token<CSS.Property.AnimationDuration, "durations">
@@ -95,7 +105,11 @@ export interface CSSAnimationObject {
   timingFunction?: Token<CSS.Property.AnimationTimingFunction, "easings">
 }
 
-export interface CSSProps extends StyleProps, PseudoProps {
+export interface CSSProps
+  extends StyleProps,
+    ConditionProps,
+    VendorProps,
+    CSSVariableProps {
   /**
    * The CSS object.
    */

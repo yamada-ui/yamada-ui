@@ -42,7 +42,7 @@ export const Placement: Story = () => {
   ] as const
 
   return (
-    <Grid gap="md" p="md" templateColumns="repeat(3, 1fr)">
+    <Grid gap="lg" p="lg" templateColumns="repeat(3, 1fr)">
       {placements.map((placement) => (
         <GridItem
           key={placement}

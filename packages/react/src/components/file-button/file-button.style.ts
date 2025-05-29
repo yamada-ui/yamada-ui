@@ -3,47 +3,41 @@ import { buttonStyle } from "../button"
 
 export const fileButtonStyle = defineComponentStyle({
   base: {
-    vars: [
-      {
-        name: "errorBorderColor",
-        token: "colors",
-        value: "border.error",
-      },
-    ],
+    "--error-border-color": "colors.border.error",
   },
 
   variants: {
     ghost: {
       ...buttonStyle.variants?.ghost,
       _invalid: {
-        borderColor: "{errorBorderColor}",
+        borderColor: "{error-border-color}",
         borderWidth: "1px",
       },
     },
     outline: {
       ...buttonStyle.variants?.outline,
       _invalid: {
-        borderColor: "{errorBorderColor}",
+        borderColor: "{error-border-color}",
       },
     },
     solid: {
       ...buttonStyle.variants?.solid,
       _invalid: {
-        borderColor: "{errorBorderColor}",
+        borderColor: "{error-border-color}",
         borderWidth: "1px",
       },
     },
     subtle: {
       ...buttonStyle.variants?.subtle,
       _invalid: {
-        borderColor: "{errorBorderColor}",
+        borderColor: "{error-border-color}",
         borderWidth: "1px",
       },
     },
     surface: {
       ...buttonStyle.variants?.surface,
       _invalid: {
-        borderColor: "{errorBorderColor}",
+        borderColor: "{error-border-color}",
       },
     },
   },

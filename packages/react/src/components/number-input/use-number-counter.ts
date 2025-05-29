@@ -2,6 +2,7 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { UseCounterProps, UseCounterReturn } from "../../hooks/use-counter"
 import type { UseSpinnerProps } from "./use-spinner"
 import { useCallback, useRef } from "react"
+import { useI18n } from "../../providers/i18n-provider"
 import { handlerAll, mergeRefs, useAttributeObserver } from "../../utils"
 import { useSpinner } from "./use-spinner"
 
@@ -23,6 +24,7 @@ export const useNumberCounter = ({
   const incrementRef = useRef<HTMLButtonElement>(null)
   const decrementRef = useRef<HTMLButtonElement>(null)
   const { down, spinning, stop, up } = useSpinner({ decrement, increment })
+  const { t } = useI18n("numberInput")
 
   useAttributeObserver(incrementRef, ["disabled"], spinning, stop)
   useAttributeObserver(decrementRef, ["disabled"], spinning, stop)
@@ -46,7 +48,7 @@ export const useNumberCounter = ({
 
       return {
         ref: mergeRefs(ref, incrementRef),
-        "aria-label": "Increase",
+        "aria-label": t("Increase"),
         ...getButtonProps({ disabled: trulyDisabled, ...props }),
         onPointerDown: handlerAll(props.onPointerDown, (ev) => {
           if (ev.button !== 0 || trulyDisabled) return
@@ -56,7 +58,7 @@ export const useNumberCounter = ({
         }),
       }
     },
-    [getButtonProps, disabled, keepWithinRange, max, up],
+    [getButtonProps, disabled, keepWithinRange, max, up, t],
   )
 
   const getDecrementProps: PropGetter<"button"> = useCallback(
@@ -65,7 +67,7 @@ export const useNumberCounter = ({
 
       return {
         ref: mergeRefs(ref, decrementRef),
-        "aria-label": "Decrease",
+        "aria-label": t("Decrease"),
         ...getButtonProps({ disabled: trulyDisabled, ...props }),
         onPointerDown: handlerAll(props.onPointerDown, (ev) => {
           if (ev.button !== 0 || trulyDisabled) return
@@ -75,7 +77,7 @@ export const useNumberCounter = ({
         }),
       }
     },
-    [getButtonProps, disabled, keepWithinRange, min, down],
+    [getButtonProps, disabled, keepWithinRange, min, down, t],
   )
 
   return { getDecrementProps, getIncrementProps }

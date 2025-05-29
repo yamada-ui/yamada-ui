@@ -25,27 +25,6 @@ export const Basic: Story = () => {
   return <Textarea placeholder="basic" />
 }
 
-export const Size: Story = () => {
-  return (
-    <PropsTable
-      variant="column"
-      columns={["xs", "sm", "md", "lg", "xl"]}
-      rows={["outline", "filled", "flushed"]}
-    >
-      {(column, row, key) => {
-        return (
-          <Textarea
-            key={key}
-            size={column}
-            variant={row}
-            placeholder={`Size (${column})`}
-          />
-        )
-      }}
-    </PropsTable>
-  )
-}
-
 export const Variant: Story = () => {
   return (
     <PropsTable
@@ -67,6 +46,27 @@ export const Variant: Story = () => {
   )
 }
 
+export const Size: Story = () => {
+  return (
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return (
+          <Textarea
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
 export const Disabled: Story = () => {
   return (
     <>
@@ -78,6 +78,15 @@ export const Disabled: Story = () => {
             disabled
             placeholder={variant}
           />
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} disabled>
+            <InputGroup.Addon>Email</InputGroup.Addon>
+            <Textarea placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
         )}
       </For>
 
@@ -106,6 +115,15 @@ export const Readonly: Story = () => {
         )}
       </For>
 
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} readOnly>
+            <InputGroup.Addon>Email</InputGroup.Addon>
+            <Textarea placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <Field.Root
         helperMessage="We would like to get your feedback."
         label="Feedback"
@@ -128,6 +146,15 @@ export const Invalid: Story = () => {
             invalid
             placeholder={variant}
           />
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} invalid>
+            <InputGroup.Addon>Email</InputGroup.Addon>
+            <Textarea placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
         )}
       </For>
 

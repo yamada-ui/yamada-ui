@@ -5,6 +5,7 @@ import type {
   CreateLayersReturn,
   CSSModifierObject,
   CSSObject,
+  CSSPropObject,
   CSSSlotObject,
   ResponsiveObject,
   StyleValue,
@@ -37,8 +38,8 @@ import {
   toArray,
   toKebabCase,
 } from "../../utils"
+import { conditions } from "../conditions"
 import { createQuery, mergeCSS } from "../css"
-import { pseudos } from "../pseudos"
 import { useColorSchemeContext } from "../styled"
 import { isEqualProps } from "./props"
 
@@ -85,7 +86,7 @@ function getStyle<Y extends boolean = false>(
             return [name, style]
           }
         }),
-      )
+      ) as Style<Y>
     } else if (selectors.length) {
       return getSelectorStyle(selectors, style) as Style<Y>
     } else {
@@ -104,12 +105,12 @@ function getColorModeStyle<Y extends boolean = false>(
     const lightStyle = getModifierStyle<Y>(
       lightValue,
       mergedStyle,
-    )({ ...rest, selectors: [...selectors, pseudos._light] })
+    )({ ...rest, selectors: [...selectors, conditions._light] })
 
     const darkStyle = getModifierStyle<Y>(
       darkValue,
       mergedStyle,
-    )({ ...rest, selectors: [...selectors, pseudos._dark] })
+    )({ ...rest, selectors: [...selectors, conditions._dark] })
 
     return merge(lightStyle, darkStyle)
   }
@@ -223,7 +224,7 @@ function getResponsiveStyle<Y extends boolean = false>(
 
 function getPropStyle<Y extends boolean = false>(
   props: Dict,
-  propVariants: CSSModifierObject | CSSModifierObject<CSSSlotObject>,
+  propVariants: CSSPropObject | CSSPropObject<CSSSlotObject>,
   style: Style<Y> | undefined = {},
 ) {
   const variants = Object.entries(propVariants)
@@ -449,7 +450,7 @@ function useStyle<
   const options = { direction, hasSlot, identifier, queries, wrap }
 
   const propsRef = useRef<Dict>({})
-  const styleRef = useRef<Style<H>>({})
+  const styleRef = useRef<Style<H> | undefined>(undefined)
 
   props = filterUndefined(props)
 
@@ -494,13 +495,19 @@ function useStyle<
       }
 
       if (sizes && !hasSize) {
-        const sizeStyle = getModifierStyle<H>(size, sizes)(options)
+        const sizeStyle = merge(
+          sizes.base,
+          getModifierStyle<H>(size, sizes)(options),
+        )
 
         style = merge(style, wrapStyle<H>("size", sizeStyle)(options))
       }
 
       if (variants && !hasVariant) {
-        const variantStyle = getModifierStyle<H>(variant, variants)(options)
+        const variantStyle = merge(
+          variants.base,
+          getModifierStyle<H>(variant, variants)(options),
+        )
 
         style = merge(style, wrapStyle<H>("variant", variantStyle)(options))
       }
@@ -521,7 +528,7 @@ function useStyle<
             computedProps.css,
           )
         } else {
-          computedProps.css = mergeCSS(style, computedProps.css)
+          computedProps.css = mergeCSS(style as CSSObject, computedProps.css)
         }
       } else {
         computedProps.css = propsRef.current.css
@@ -539,7 +546,10 @@ function useStyle<
       propsRef.current = props as unknown as WithoutThemeProps<Y, M, D>
   }
 
-  return [styleRef.current, propsRef.current as WithoutThemeProps<Y, M, D>]
+  return [
+    styleRef.current ?? {},
+    propsRef.current as WithoutThemeProps<Y, M, D>,
+  ]
 }
 
 export interface UseComponentStyleOptions<

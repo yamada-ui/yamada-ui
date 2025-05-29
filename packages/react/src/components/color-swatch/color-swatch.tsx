@@ -1,6 +1,6 @@
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ColorSwatchStyle } from "./color-swatch.style"
-import { createSlotComponent, styled } from "../../core"
+import { createSlotComponent, styled, varAttr } from "../../core"
 import { isString } from "../../utils"
 import { colorSwatchStyle } from "./color-swatch.style"
 
@@ -10,22 +10,12 @@ const defaultOverlays = (
 ): HTMLStyledProps[] => {
   const overlays: HTMLStyledProps[] = [
     {
+      "--body": varAttr(["whiteAlpha.500", "blackAlpha.500"], "colors"),
+      "--checkers": varAttr(["blackAlpha.300", "whiteAlpha.300"], "colors"),
       bgImage:
         "linear-gradient(45deg, {checkers} 25%, transparent 25%), linear-gradient(-45deg, {checkers} 25%, transparent 25%), linear-gradient(45deg, transparent 75%, {checkers} 75%), linear-gradient(-45deg, {body} 75%, {checkers} 75%)",
       bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
       bgSize: `8px 8px`,
-      vars: [
-        {
-          name: "checkers",
-          token: "colors",
-          value: ["blackAlpha.300", "whiteAlpha.300"],
-        },
-        {
-          name: "body",
-          token: "colors",
-          value: ["whiteAlpha.500", "blackAlpha.500"],
-        },
-      ],
     },
     { background },
   ]

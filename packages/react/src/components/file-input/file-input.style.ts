@@ -35,6 +35,9 @@ export const fileInputStyle = defineComponentSlotStyle({
     outline: {
       root: inputStyle.variants?.outline,
     },
+    plain: {
+      root: inputStyle.variants?.plain,
+    },
   },
 
   sizes: {

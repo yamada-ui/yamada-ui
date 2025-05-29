@@ -231,11 +231,14 @@ const ButtonLoading = component<"svg", ButtonLoadingProps>(
       )
     }
 
-    return (
-      <styled.svg {...props} css={mergeCSS(css, props.css)}>
-        {loadingIcon}
-      </styled.svg>
-    )
+    if (isValidElement<HTMLStyledProps<"svg">>(loadingIcon))
+      return cloneElement(loadingIcon, {
+        ...props,
+        ...loadingIcon.props,
+        css: mergeCSS(css, props.css, loadingIcon.props.css),
+      })
+
+    return null
   },
   { name: "button__loading" },
 )()

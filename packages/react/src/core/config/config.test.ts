@@ -78,33 +78,6 @@ const theme = transformTheme(
 ) as StyledTheme
 
 describe("transforms", () => {
-  test("var transform", () => {
-    const result1 = transforms.vars(
-      [{ name: "space", token: "spaces", value: "4" }],
-      { theme },
-    )
-    const result2 = transforms.vars(
-      [{ name: "space", token: "spaces", value: { base: "4", md: "2" } }],
-      { theme },
-    )
-    const result3 = transforms.vars(
-      [{ name: "color", token: "colors", value: ["gray.500", "gray.300"] }],
-      { theme },
-    )
-    expect(result1).toStrictEqual({
-      "--ui-space": "var(--ui-spaces-4)",
-    })
-    expect(result2).toStrictEqual({
-      "--ui-space": {
-        base: "var(--ui-spaces-4)",
-        md: "var(--ui-spaces-2)",
-      },
-    })
-    expect(result3).toStrictEqual({
-      "--ui-color": ["var(--ui-colors-gray-500)", "var(--ui-colors-gray-300)"],
-    })
-  })
-
   test("token transform", () => {
     const result = transforms.token("colors")("gray.500", { css, theme })
     expect(result).toBe("var(--ui-colors-gray-500)")
@@ -148,15 +121,10 @@ describe("transforms", () => {
   })
 
   test("bgClip transform", () => {
-    const result1 = transforms.bgClip("text")
-    const result2 = transforms.bgClip("content-box")
-    expect(result1).toStrictEqual({
-      backgroundClip: "text",
-      color: "transparent",
-    })
-    expect(result2).toStrictEqual({
-      backgroundClip: "content-box",
-    })
+    const result1 = transforms.bgClip("text", { css, theme })
+    const result2 = transforms.bgClip("content-box", { css, theme })
+    expect(result1).toBe("text")
+    expect(result2).toBe("content-box")
   })
 
   test("function transform", () => {

@@ -1,5 +1,4 @@
-import type { FC, ThemeProps } from "../../core"
-import type { Merge } from "../../utils"
+import type { FC, ThemeProps, WithoutThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { GroupProps } from "../group"
 import type { InputProps } from "./input"
@@ -10,16 +9,18 @@ import { useFieldProps } from "../field"
 import { Group } from "../group"
 import { InputPropsContext } from "./input"
 import { InputAddonPropsContext } from "./input-addon"
-import { InputElement } from "./input-element"
+import { InputElement, InputElementPropsContext } from "./input-element"
 
 export interface InputGroupRootProps
-  extends Merge<GroupProps, ThemeProps<InputStyle>>,
+  extends WithoutThemeProps<GroupProps, InputStyle>,
+    ThemeProps<InputStyle>,
     Pick<InputProps, "errorBorderColor" | "focusBorderColor">,
     FieldProps {}
 
 export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
   const {
     props: {
+      id: _id,
       size,
       variant,
       children,
@@ -38,7 +39,7 @@ export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
       validChildren.map((child, index) => {
         const first = !index
 
-        if (isSomeElement(child, InputElement)) {
+        if (isSomeElement(child.type, InputElement)) {
           return cloneElement(child, {
             "data-ungrouped": "",
             placement: first ? "start" : "end",
@@ -58,6 +59,7 @@ export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
       disabled,
       errorBorderColor,
       focusBorderColor,
+      invalid: props.invalid,
       readOnly,
       required,
       ...dataProps,
@@ -70,6 +72,7 @@ export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
       focusBorderColor,
       readOnly,
       required,
+      props.invalid,
       dataProps,
     ],
   )
@@ -77,9 +80,11 @@ export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
   return (
     <InputPropsContext value={context}>
       <InputAddonPropsContext value={context}>
-        <Group attached {...rest}>
-          {cloneChildren}
-        </Group>
+        <InputElementPropsContext value={context}>
+          <Group attached w="full" {...rest}>
+            {cloneChildren}
+          </Group>
+        </InputElementPropsContext>
       </InputAddonPropsContext>
     </InputPropsContext>
   )

@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren, ReactNode } from "react"
 import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ButtonProps } from "../button"
-import type { CloseButtonProps } from "../close-button"
+import type { CloseButtonProps } from "../button"
 import type { FocusLockProps } from "../focus-lock"
 import type { HTMLMotionProps, MotionTransitionProps } from "../motion"
 import type { PortalProps } from "../portal"
@@ -12,9 +12,14 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, styled } from "../../core"
-import { findChildren, getValidChildren, wrapOrPassProps } from "../../utils"
+import {
+  cast,
+  findChildren,
+  getValidChildren,
+  wrapOrPassProps,
+} from "../../utils"
 import { Button } from "../button"
-import { CloseButton } from "../close-button"
+import { CloseButton } from "../button"
 import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { motion } from "../motion"
@@ -275,7 +280,7 @@ export const DrawerOverlay = withContext<"div", DrawerOverlayProps>((props) => {
       exit="exit"
       initial="exit"
       variants={fadeVariants}
-      {...(getOverlayProps(props as HTMLProps) as HTMLMotionProps)}
+      {...cast<HTMLMotionProps>(getOverlayProps(cast<HTMLProps>(props)))}
     />
   )
 }, "overlay")()

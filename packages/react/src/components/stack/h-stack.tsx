@@ -6,7 +6,7 @@ import { hStackStyle } from "./h-stack.style"
 import { Stack } from "./stack"
 
 export interface HStackProps
-  extends WithoutThemeProps<StackProps>,
+  extends WithoutThemeProps<StackProps, HStackStyle>,
     ThemeProps<HStackStyle> {}
 
 export const {

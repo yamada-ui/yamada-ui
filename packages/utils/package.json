@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^19.0.0"
+    "react": "^19.1.0"
   },
   "peerDependencies": {
     "react": ">=19"

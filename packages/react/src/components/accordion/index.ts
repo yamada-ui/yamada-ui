@@ -6,21 +6,21 @@ export type {
 } from "./accordion"
 export {
   AccordionButton,
-  AccordionContext,
   AccordionItem,
   AccordionPanel,
   AccordionPropsContext,
   AccordionRoot,
-  useAccordionContext,
   useAccordionPropsContext,
 } from "./accordion"
 
 export * from "./accordion.style"
 
 export {
+  AccordionContext,
   AccordionDescendantsContext,
   AccordionItemContext,
   useAccordion,
+  useAccordionContext,
   useAccordionDescendant,
   useAccordionDescendants,
   useAccordionItem,

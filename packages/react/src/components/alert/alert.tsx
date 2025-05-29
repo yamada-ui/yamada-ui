@@ -61,10 +61,7 @@ export const AlertRoot = withProvider<"div", AlertRootProps>(
     )
   },
   "root",
-)(({ colorScheme, status = "info" }) => ({
-  colorScheme: colorScheme ?? status,
-  status,
-}))
+)({ colorScheme: "info", status: "info" })
 
 export interface AlertIconProps extends IconProps {}
 

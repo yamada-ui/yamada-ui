@@ -40,12 +40,13 @@ type KeyboardKey =
 export function runKeyAction<Y>(
   ev: React.KeyboardEvent<Y>,
   actions: { [key in KeyboardKey]?: React.KeyboardEventHandler<Y> },
+  { preventDefault = true }: { preventDefault?: boolean } = {},
 ) {
   const action = actions[ev.key]
 
   if (!action) return
 
-  ev.preventDefault()
+  if (preventDefault) ev.preventDefault()
 
   action(ev)
 }

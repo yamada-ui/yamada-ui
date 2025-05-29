@@ -1,27 +1,36 @@
-import type { Ref } from "react"
-import type { HTMLStyledProps, ThemeProps } from "../../core"
-import type { InputProps } from "../input"
+import type {
+  RequiredPropGetter,
+  ThemeProps,
+  WithoutThemeProps,
+} from "../../core"
+import type { GroupProps } from "../group"
+import type { InputProps, UseInputBorderProps } from "../input"
 import type { PinInputStyle } from "./pin-input.style"
 import type { UsePinInputProps } from "./use-pin-input"
-import { createSlotComponent, styled } from "../../core"
+import { useMemo } from "react"
+import { createSlotComponent } from "../../core"
 import { getValidChildren, mergeRefs } from "../../utils"
 import { useFieldProps } from "../field"
+import { Group } from "../group"
 import { Input } from "../input"
 import { pinInputStyle } from "./pin-input.style"
-import { DescendantsContext, useDescendant, usePinInput } from "./use-pin-input"
+import {
+  PinInputDescendantsContext,
+  usePinInput,
+  usePinInputDescendant,
+} from "./use-pin-input"
 
-interface PinInputContext {
-  getInputProps: (
-    props: PinInputFieldProps & {
-      index: number
-      ref?: Ref<HTMLInputElement>
-    },
-  ) => PinInputFieldProps
+interface PinInputContext extends UseInputBorderProps {
+  getInputProps: RequiredPropGetter<"input", { index: number }>
 }
 
 export interface PinInputRootProps
-  extends Omit<HTMLStyledProps, "defaultValue" | "mask" | "onChange">,
+  extends Omit<
+      WithoutThemeProps<GroupProps, PinInputStyle>,
+      "defaultValue" | "mask" | "onChange"
+    >,
     ThemeProps<PinInputStyle>,
+    UseInputBorderProps,
     UsePinInputProps {
   /**
    * The number of inputs to display.
@@ -49,22 +58,30 @@ export const {
  * @see https://yamada-ui.com/components/pin-input
  */
 export const PinInputRoot = withProvider<"div", PinInputRootProps>(
-  ({ ref, children, items = 4, ...props }) => {
-    const { descendants, getInputProps, getRootProps } = usePinInput(props)
+  ({ children, errorBorderColor, focusBorderColor, items = 4, ...rest }) => {
+    const { descendants, getInputProps, getRootProps } = usePinInput(rest)
+    const cloneChildren = useMemo(() => {
+      const validChildren = getValidChildren(children)
 
-    let cloneChildren = getValidChildren(children)
-
-    if (!cloneChildren.length)
-      for (let i = 0; i < items; i++) {
-        cloneChildren.push(<PinInputField key={i} />)
+      if (validChildren.length) {
+        return validChildren
+      } else {
+        return Array.from({ length: items }, (_, i) => (
+          <PinInputField key={i} />
+        ))
       }
+    }, [children, items])
+    const context = useMemo(
+      () => ({ errorBorderColor, focusBorderColor, getInputProps }),
+      [getInputProps, errorBorderColor, focusBorderColor],
+    )
 
     return (
-      <DescendantsContext value={descendants}>
-        <PinInputComponentContext value={{ getInputProps }}>
-          <styled.div {...getRootProps({ ref })}>{cloneChildren}</styled.div>
+      <PinInputDescendantsContext value={descendants}>
+        <PinInputComponentContext value={context}>
+          <Group {...getRootProps()}>{cloneChildren}</Group>
         </PinInputComponentContext>
-      </DescendantsContext>
+      </PinInputDescendantsContext>
     )
   },
   "root",
@@ -73,29 +90,24 @@ export const PinInputRoot = withProvider<"div", PinInputRootProps>(
 export interface PinInputFieldProps extends InputProps {}
 
 export const PinInputField = withContext<"input", PinInputFieldProps>(
-  ({ ref, ...props }) => {
-    const { getInputProps } = usePinInputComponentContext()
-    const { index, register } = useDescendant()
-
-    const {
-      props: rest,
-      ariaProps,
-      dataProps,
-      eventProps,
-    } = useFieldProps(props)
-
-    return (
-      <Input
-        {...getInputProps({
-          ...ariaProps,
-          ...dataProps,
-          ...eventProps,
-          ...rest,
-          ref: mergeRefs(register, ref),
-          index,
-        })}
-      />
-    )
-  },
+  Input,
   "field",
-)()
+)(undefined, ({ ref, ...rest }) => {
+  const { errorBorderColor, focusBorderColor, getInputProps } =
+    usePinInputComponentContext()
+  const { index, register } = usePinInputDescendant()
+  const { props, ariaProps, dataProps, eventProps } = useFieldProps(rest)
+
+  return {
+    ...getInputProps({
+      errorBorderColor,
+      focusBorderColor,
+      ...ariaProps,
+      ...dataProps,
+      ...eventProps,
+      ...props,
+      ref: mergeRefs(register, ref),
+      index,
+    }),
+  }
+})

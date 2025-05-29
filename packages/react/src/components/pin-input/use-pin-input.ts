@@ -1,15 +1,17 @@
-import type { ChangeEvent, KeyboardEvent, Ref } from "react"
+import type { ChangeEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { FieldProps } from "../field"
-import type { InputProps, UseInputBorderProps } from "../input"
 import { useCallback, useEffect, useId, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendant } from "../../hooks/use-descendant"
-import { filterUndefined, handlerAll } from "../../utils"
+import { filterUndefined, handlerAll, runKeyAction } from "../../utils"
 import { useFieldProps } from "../field"
 
-export const { DescendantsContext, useDescendant, useDescendants } =
-  createDescendant<HTMLInputElement>()
+export const {
+  DescendantsContext: PinInputDescendantsContext,
+  useDescendant: usePinInputDescendant,
+  useDescendants: usePinInputDescendants,
+} = createDescendant<HTMLInputElement>()
 
 const toArray = (value?: string) => value?.split("")
 
@@ -23,9 +25,8 @@ const validate = (value: string, type: UsePinInputProps["type"]) => {
 }
 
 export interface UsePinInputProps
-  extends Omit<HTMLProps, "defaultValue" | "mask" | "onChange">,
-    FieldProps,
-    UseInputBorderProps {
+  extends Omit<HTMLProps, "defaultValue" | "mask" | "onChange" | "value">,
+    FieldProps {
   /**
    * The top-level id string that will be applied to the input fields.
    * The index of the input will be appended to this top-level id.
@@ -96,8 +97,6 @@ export const usePinInput = (props: UsePinInputProps) => {
       autoFocus,
       defaultValue,
       disabled,
-      errorBorderColor,
-      focusBorderColor,
       manageFocus = true,
       mask,
       otp = false,
@@ -112,8 +111,7 @@ export const usePinInput = (props: UsePinInputProps) => {
     dataProps,
     eventProps,
   } = useFieldProps(props)
-
-  const descendants = useDescendants()
+  const descendants = usePinInputDescendants()
   const [moveFocus, setMoveFocus] = useState<boolean>(true)
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const [values, setValues] = useControllableState<string[]>({
@@ -232,35 +230,33 @@ export const usePinInput = (props: UsePinInputProps) => {
     (index: number) => (ev: KeyboardEvent<HTMLInputElement>) => {
       if (!manageFocus) return
 
-      const actions: { [key: string]: Function | undefined } = {
-        ArrowLeft: () => {
-          ev.preventDefault()
-          focusInputField("prev", index)
+      runKeyAction(
+        ev,
+        {
+          ArrowLeft: (ev) => {
+            ev.preventDefault()
+            focusInputField("prev", index)
+          },
+          ArrowRight: (ev) => {
+            ev.preventDefault()
+            focusInputField("next", index)
+          },
+          Backspace: (ev) => {
+            if ((ev.target as HTMLInputElement).value === "") {
+              const prevInput = descendants.prevValue(index, undefined, false)
+
+              if (!prevInput) return
+
+              setValue("", index - 1, false)
+              prevInput.node.focus()
+              setMoveFocus(true)
+            } else {
+              setMoveFocus(false)
+            }
+          },
         },
-        ArrowRight: () => {
-          ev.preventDefault()
-          focusInputField("next", index)
-        },
-        Backspace: () => {
-          if ((ev.target as HTMLInputElement).value === "") {
-            const prevInput = descendants.prevValue(index, undefined, false)
-
-            if (!prevInput) return
-
-            setValue("", index - 1, false)
-            prevInput.node.focus()
-            setMoveFocus(true)
-          } else {
-            setMoveFocus(false)
-          }
-        },
-      }
-
-      const action = actions[ev.key]
-
-      if (!action) return
-
-      action()
+        { preventDefault: false },
+      )
     },
     [descendants, focusInputField, manageFocus, setValue],
   )
@@ -285,63 +281,54 @@ export const usePinInput = (props: UsePinInputProps) => {
   const getRootProps: PropGetter = useCallback(
     (props) => ({
       role: "group",
-      ...ariaProps,
-      ...dataProps,
-      ...eventProps,
       ...rest,
       ...props,
     }),
-    [ariaProps, dataProps, eventProps, rest],
+    [rest],
   )
 
-  const getInputProps: RequiredPropGetter<
-    InputProps,
-    { index: number; ref?: Ref<HTMLInputElement> }
-  > = useCallback(
-    ({ index, ...props }) => ({
-      ...ariaProps,
-      ...dataProps,
-      ...eventProps,
-      type: mask ? "password" : type === "number" ? "tel" : "text",
-      disabled,
-      errorBorderColor,
-      focusBorderColor,
-      inputMode: type === "number" ? "numeric" : "text",
-      readOnly,
-      ...filterUndefined(props),
-      id: `${id}-${index}`,
-      autoComplete: otp ? "one-time-code" : "off",
-      placeholder:
-        focusedIndex === index && !readOnly && !props.readOnly
-          ? ""
-          : placeholder,
-      value: values[index] || "",
-      onBlur: handlerAll(props.onBlur, onBlur),
-      onChange: handlerAll(props.onChange, onChange(index)),
-      onFocus: handlerAll(props.onFocus, onFocus(index)),
-      onKeyDown: handlerAll(props.onKeyDown, onKeyDown(index)),
-    }),
-    [
-      ariaProps,
-      dataProps,
-      eventProps,
-      mask,
-      type,
-      disabled,
-      errorBorderColor,
-      focusBorderColor,
-      readOnly,
-      id,
-      otp,
-      focusedIndex,
-      placeholder,
-      values,
-      onBlur,
-      onChange,
-      onFocus,
-      onKeyDown,
-    ],
-  )
+  const getInputProps: RequiredPropGetter<"input", { index: number }> =
+    useCallback(
+      ({ index, ...props }) => ({
+        ...ariaProps,
+        ...dataProps,
+        ...eventProps,
+        type: mask ? "password" : type === "number" ? "tel" : "text",
+        autoComplete: otp ? "one-time-code" : "off",
+        disabled,
+        inputMode: type === "number" ? "numeric" : "text",
+        placeholder:
+          focusedIndex === index && !readOnly && !props.readOnly
+            ? ""
+            : placeholder,
+        readOnly,
+        value: values[index] || "",
+        ...filterUndefined(props),
+        id: `${id}${index ? `-${index}` : ""}`,
+        onBlur: handlerAll(props.onBlur, onBlur),
+        onChange: handlerAll(props.onChange, onChange(index)),
+        onFocus: handlerAll(props.onFocus, onFocus(index)),
+        onKeyDown: handlerAll(props.onKeyDown, onKeyDown(index)),
+      }),
+      [
+        ariaProps,
+        dataProps,
+        eventProps,
+        mask,
+        type,
+        disabled,
+        readOnly,
+        id,
+        otp,
+        focusedIndex,
+        placeholder,
+        values,
+        onBlur,
+        onChange,
+        onFocus,
+        onKeyDown,
+      ],
+    )
 
   return {
     descendants,

@@ -8,3 +8,8 @@ export type {
   PinInputFieldProps as FieldProps,
   PinInputRootProps as RootProps,
 } from "./pin-input"
+export {
+  PinInputDescendantsContext as DescendantsContext,
+  usePinInputDescendant as useDescendant,
+  usePinInputDescendants as useDescendants,
+} from "./use-pin-input"

@@ -42,7 +42,7 @@ describe("<PinInput />", () => {
     const testId = "test"
     const { container } = render(<PinInput.Root id={testId} />)
 
-    expect(container.querySelector(`#${testId}-0`)).toBeInTheDocument()
+    expect(container.querySelector(`#${testId}`)).toBeInTheDocument()
     expect(container.querySelector(`#${testId}-1`)).toBeInTheDocument()
     expect(container.querySelector(`#${testId}-2`)).toBeInTheDocument()
     expect(container.querySelector(`#${testId}-3`)).toBeInTheDocument()

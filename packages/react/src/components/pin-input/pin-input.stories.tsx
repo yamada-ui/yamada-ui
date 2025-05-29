@@ -24,17 +24,11 @@ export const Basic: Story = () => {
   return <PinInput.Root />
 }
 
-export const Size: Story = () => {
+export const Items: Story = () => {
   return (
-    <PropsTable
-      variant="column"
-      columns={["xs", "sm", "md", "lg"]}
-      rows={["outline", "filled", "flushed"]}
-    >
-      {(column, row, key) => {
-        return <PinInput.Root key={key} size={column} variant={row} />
-      }}
-    </PropsTable>
+    <For each={[3, 4, 5, 6]}>
+      {(items, index) => <PinInput.Root key={index} items={items} />}
+    </For>
   )
 }
 
@@ -52,11 +46,17 @@ export const Variant: Story = () => {
   )
 }
 
-export const Fields: Story = () => {
+export const Size: Story = () => {
   return (
-    <For each={[3, 4, 5, 6]}>
-      {(items, index) => <PinInput.Root key={index} items={items} />}
-    </For>
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return <PinInput.Root key={key} size={column} variant={row} />
+      }}
+    </PropsTable>
   )
 }
 
@@ -80,19 +80,7 @@ export const DefaultValue: Story = () => {
   )
 }
 
-export const BorderColor: Story = () => {
-  return (
-    <>
-      <PinInput.Root />
-
-      <PinInput.Root focusBorderColor="green.500" />
-
-      <PinInput.Root errorBorderColor="orange.500" invalid />
-    </>
-  )
-}
-
-export const OnComplete: Story = () => {
+export const HandleComplete: Story = () => {
   const { page } = useLoading()
 
   return <PinInput.Root onComplete={() => page.start({ duration: 5000 })} />
@@ -104,6 +92,118 @@ export const OneTimePassword: Story = () => {
 
 export const MaskingValue: Story = () => {
   return <PinInput.Root mask />
+}
+
+export const DisabledFocusManagement: Story = () => {
+  return <PinInput.Root manageFocus={false} />
+}
+
+export const Disabled: Story = () => {
+  return (
+    <>
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <PinInput.Root key={index} variant={variant} disabled />
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <PinInput.Root key={index} variant={variant}>
+            <PinInput.Field disabled />
+            <PinInput.Field disabled />
+            <PinInput.Field disabled />
+            <PinInput.Field disabled />
+          </PinInput.Root>
+        )}
+      </For>
+
+      <Field.Root
+        disabled
+        errorMessage="one-time password is required."
+        helperMessage="Just sent you a one-time password to your e-mail address."
+        label="Please one-time password"
+      >
+        <PinInput.Root />
+      </Field.Root>
+    </>
+  )
+}
+
+export const Readonly: Story = () => {
+  return (
+    <>
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <PinInput.Root key={index} variant={variant} readOnly />
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <PinInput.Root key={index} variant={variant}>
+            <PinInput.Field readOnly />
+            <PinInput.Field readOnly />
+            <PinInput.Field readOnly />
+            <PinInput.Field readOnly />
+          </PinInput.Root>
+        )}
+      </For>
+
+      <Field.Root
+        errorMessage="one-time password is required."
+        helperMessage="Just sent you a one-time password to your e-mail address."
+        label="Please one-time password"
+        readOnly
+      >
+        <PinInput.Root />
+      </Field.Root>
+    </>
+  )
+}
+
+export const Invalid: Story = () => {
+  return (
+    <>
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <PinInput.Root key={index} variant={variant} invalid />
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <PinInput.Root key={index} variant={variant}>
+            <PinInput.Field invalid />
+            <PinInput.Field invalid />
+            <PinInput.Field invalid />
+            <PinInput.Field invalid />
+          </PinInput.Root>
+        )}
+      </For>
+
+      <Field.Root
+        errorMessage="one-time password is required."
+        helperMessage="Just sent you a one-time password to your e-mail address."
+        invalid
+        label="Please one-time password"
+      >
+        <PinInput.Root />
+      </Field.Root>
+    </>
+  )
+}
+
+export const BorderColor: Story = () => {
+  return (
+    <>
+      <PinInput.Root />
+
+      <PinInput.Root focusBorderColor="green.500" />
+
+      <PinInput.Root errorBorderColor="orange.500" invalid />
+    </>
+  )
 }
 
 export const CustomFields: Story = () => {
@@ -129,82 +229,6 @@ export const CustomControl: Story = () => {
 
   return (
     <PinInput.Root value={value} onChange={onChange} onComplete={onComplete} />
-  )
-}
-
-export const DisabledFocusManagement: Story = () => {
-  return <PinInput.Root manageFocus={false} />
-}
-
-export const Disabled: Story = () => {
-  return (
-    <>
-      <PinInput.Root disabled />
-
-      <PinInput.Root>
-        <PinInput.Field disabled />
-        <PinInput.Field disabled />
-        <PinInput.Field disabled />
-        <PinInput.Field disabled />
-      </PinInput.Root>
-
-      <Field.Root
-        disabled
-        errorMessage="one-time password is required."
-        helperMessage="Just sent you a one-time password to your e-mail address."
-        label="Please one-time password"
-      >
-        <PinInput.Root />
-      </Field.Root>
-    </>
-  )
-}
-
-export const Readonly: Story = () => {
-  return (
-    <>
-      <PinInput.Root readOnly />
-
-      <PinInput.Root>
-        <PinInput.Field readOnly />
-        <PinInput.Field readOnly />
-        <PinInput.Field readOnly />
-        <PinInput.Field readOnly />
-      </PinInput.Root>
-
-      <Field.Root
-        errorMessage="one-time password is required."
-        helperMessage="Just sent you a one-time password to your e-mail address."
-        label="Please one-time password"
-        readOnly
-      >
-        <PinInput.Root />
-      </Field.Root>
-    </>
-  )
-}
-
-export const Invalid: Story = () => {
-  return (
-    <>
-      <PinInput.Root invalid />
-
-      <PinInput.Root>
-        <PinInput.Field invalid />
-        <PinInput.Field invalid />
-        <PinInput.Field invalid />
-        <PinInput.Field invalid />
-      </PinInput.Root>
-
-      <Field.Root
-        errorMessage="one-time password is required."
-        helperMessage="Just sent you a one-time password to your e-mail address."
-        invalid
-        label="Please one-time password"
-      >
-        <PinInput.Root />
-      </Field.Root>
-    </>
   )
 }
 

@@ -7,11 +7,7 @@ export const pinInputStyle = defineComponentSlotStyle({
       ...inputStyle.base,
       textAlign: "center",
     },
-    root: {
-      alignItems: "center",
-      display: "flex",
-      gap: "sm",
-    },
+    root: {},
   },
 
   variants: {
@@ -24,46 +20,53 @@ export const pinInputStyle = defineComponentSlotStyle({
     outline: {
       field: inputStyle.variants?.outline,
     },
-    unstyled: {
-      field: {
-        h: "auto",
-      },
+    plain: {
+      field: inputStyle.variants?.plain,
     },
   },
 
   sizes: {
     xs: {
       field: {
-        boxSize: "6",
-        fontSize: "xs",
-        rounded: "sm",
+        boxSize: inputStyle.sizes?.xs.minH,
+        fontSize: inputStyle.sizes?.xs.fontSize,
       },
     },
     sm: {
       field: {
-        boxSize: "8",
-        fontSize: "sm",
-        rounded: "md",
+        boxSize: inputStyle.sizes?.sm.minH,
+        fontSize: inputStyle.sizes?.sm.fontSize,
       },
     },
     md: {
       field: {
-        boxSize: "10",
-        fontSize: "md",
-        rounded: "md",
+        boxSize: inputStyle.sizes?.md.minH,
+        fontSize: inputStyle.sizes?.md.fontSize,
       },
     },
     lg: {
       field: {
-        boxSize: "12",
-        fontSize: "lg",
-        rounded: "md",
+        boxSize: inputStyle.sizes?.lg.minH,
+        fontSize: inputStyle.sizes?.lg.fontSize,
+      },
+    },
+    xl: {
+      field: {
+        boxSize: inputStyle.sizes?.xl.minH,
+        fontSize: inputStyle.sizes?.xl.fontSize,
+      },
+    },
+    "2xl": {
+      field: {
+        boxSize: inputStyle.sizes?.["2xl"].minH,
+        fontSize: inputStyle.sizes?.["2xl"].fontSize,
       },
     },
   },
 
   defaultProps: {
     size: "md",
+    variant: "outline",
   },
 })
 

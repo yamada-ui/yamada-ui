@@ -8,6 +8,7 @@ import { useFieldContext } from "./field"
 
 export interface UseFieldProps<Y extends HTMLElement> extends FieldProps {
   id?: string
+  notSupportReadOnly?: boolean
   onBlur?: FocusEventHandler<Y>
   onFocus?: FocusEventHandler<Y>
 }
@@ -17,6 +18,7 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
     id,
     disabled,
     invalid,
+    notSupportReadOnly,
     readOnly,
     required,
     onBlur,
@@ -37,11 +39,11 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
     () => ({
       id,
       disabled,
-      readOnly,
+      readOnly: notSupportReadOnly ? undefined : readOnly,
       required,
       ...rest,
     }),
-    [id, disabled, readOnly, required, rest],
+    [id, disabled, readOnly, required, rest, notSupportReadOnly],
   )
   const dataProps = useMemo(
     () => ({
@@ -54,12 +56,14 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
   )
   const ariaProps = useMemo(
     () => ({
-      "aria-disabled": ariaAttr(disabled),
+      "aria-disabled": ariaAttr(
+        notSupportReadOnly ? readOnly || disabled : disabled,
+      ),
       "aria-invalid": ariaAttr(invalid),
-      "aria-readonly": ariaAttr(readOnly),
+      "aria-readonly": notSupportReadOnly ? undefined : ariaAttr(readOnly),
       "aria-required": ariaAttr(required),
     }),
-    [disabled, invalid, readOnly, required],
+    [disabled, invalid, readOnly, required, notSupportReadOnly],
   )
   const eventProps = useMemo(
     () => ({

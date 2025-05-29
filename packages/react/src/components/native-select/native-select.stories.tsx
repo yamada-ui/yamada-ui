@@ -3,10 +3,13 @@ import type { SubmitHandler } from "react-hook-form"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { NativeSelect } from "."
+import { PropsTable } from "../../../storybook/components"
+import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Button } from "../button"
 import { Field } from "../field"
 import { For } from "../for"
-import { ChevronsDownIcon } from "../icon"
+import { BellIcon, ChevronsDownIcon } from "../icon"
+import { InputGroup } from "../input"
 import { VStack } from "../stack"
 
 type Story = StoryFn<typeof NativeSelect.Root>
@@ -19,6 +22,37 @@ const meta: Meta<typeof NativeSelect.Root> = {
 export default meta
 
 export const Basic: Story = () => {
+  return (
+    <NativeSelect.Root placeholder="キャラクターを選択">
+      <NativeSelect.Option value="孫悟空">孫悟空</NativeSelect.Option>
+      <NativeSelect.Option value="ベジータ">ベジータ</NativeSelect.Option>
+      <NativeSelect.Option value="フリーザ">フリーザ</NativeSelect.Option>
+    </NativeSelect.Root>
+  )
+}
+
+export const Group: Story = () => {
+  return (
+    <NativeSelect.Root placeholder="キャラクターを選択">
+      <NativeSelect.OptionGroup label="地球人">
+        <NativeSelect.Option value="孫悟空">孫悟空</NativeSelect.Option>
+        <NativeSelect.Option value="孫悟飯">孫悟飯</NativeSelect.Option>
+        <NativeSelect.Option value="クリリン">クリリン</NativeSelect.Option>
+      </NativeSelect.OptionGroup>
+
+      <NativeSelect.OptionGroup label="フリーザ軍">
+        <NativeSelect.Option value="フリーザ">フリーザ</NativeSelect.Option>
+        <NativeSelect.Option value="ギニュー">ギニュー</NativeSelect.Option>
+        <NativeSelect.Option value="リクーム">リクーム</NativeSelect.Option>
+        <NativeSelect.Option value="バータ">バータ</NativeSelect.Option>
+        <NativeSelect.Option value="ジース">ジース</NativeSelect.Option>
+        <NativeSelect.Option value="グルド">グルド</NativeSelect.Option>
+      </NativeSelect.OptionGroup>
+    </NativeSelect.Root>
+  )
+}
+
+export const Items: Story = () => {
   const items: NativeSelect.Item[] = [
     { label: "ベジータ", value: "ベジータ" },
     {
@@ -42,102 +76,54 @@ export const Basic: Story = () => {
     },
   ]
 
+  return <NativeSelect.Root items={items} placeholder="キャラクターを選択" />
+}
+
+export const Variant: Story = () => {
   return (
-    <>
-      <NativeSelect.Root
-        aria-label="Native Select"
-        placeholder="キャラクターを選択"
-      >
-        <NativeSelect.Option value="孫悟空">孫悟空</NativeSelect.Option>
-        <NativeSelect.Option value="ベジータ">ベジータ</NativeSelect.Option>
-        <NativeSelect.Option value="フリーザ">フリーザ</NativeSelect.Option>
-      </NativeSelect.Root>
-
-      <NativeSelect.Root
-        aria-label="Native Select"
-        placeholder="キャラクターを選択"
-      >
-        <NativeSelect.OptionGroup label="地球人">
-          <NativeSelect.Option value="孫悟空">孫悟空</NativeSelect.Option>
-          <NativeSelect.Option value="孫悟飯">孫悟飯</NativeSelect.Option>
-          <NativeSelect.Option value="クリリン">クリリン</NativeSelect.Option>
-        </NativeSelect.OptionGroup>
-
-        <NativeSelect.OptionGroup label="フリーザ軍">
-          <NativeSelect.Option value="フリーザ">フリーザ</NativeSelect.Option>
-          <NativeSelect.Option value="ギニュー">ギニュー</NativeSelect.Option>
-          <NativeSelect.Option value="リクーム">リクーム</NativeSelect.Option>
-          <NativeSelect.Option value="バータ">バータ</NativeSelect.Option>
-          <NativeSelect.Option value="ジース">ジース</NativeSelect.Option>
-          <NativeSelect.Option value="グルド">グルド</NativeSelect.Option>
-        </NativeSelect.OptionGroup>
-      </NativeSelect.Root>
-
-      <NativeSelect.Root
-        aria-label="Native Select"
-        items={items}
-        placeholder="キャラクターを選択"
-      />
-    </>
+    <PropsTable
+      variant="column"
+      columns={["outline", "filled", "flushed"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <NativeSelect.Root
+            key={key}
+            colorScheme={row}
+            variant={column}
+            placeholder={toTitleCase(column)}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
 export const Size: Story = () => {
   return (
-    <For each={["xs", "sm", "md", "lg"]}>
-      {(size, index) => (
-        <NativeSelect.Root
-          key={index}
-          size={size}
-          aria-label="Native Select"
-          placeholder={size}
-        />
-      )}
-    </For>
-  )
-}
-
-export const Variant: Story = () => {
-  return (
-    <For each={["outline", "filled", "flushed"]}>
-      {(variant, index) => (
-        <NativeSelect.Root
-          key={index}
-          variant={variant}
-          aria-label="Native Select"
-          placeholder={variant}
-        />
-      )}
-    </For>
-  )
-}
-
-export const BorderColor: Story = () => {
-  return (
-    <>
-      <NativeSelect.Root
-        aria-label="Native Select"
-        placeholder="default border color"
-      />
-      <NativeSelect.Root
-        aria-label="Native Select"
-        focusBorderColor="green.500"
-        placeholder="custom border color"
-      />
-      <NativeSelect.Root
-        aria-label="Native Select"
-        errorBorderColor="orange.500"
-        invalid
-        placeholder="custom border color"
-      />
-    </>
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return (
+          <NativeSelect.Root
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
+          />
+        )
+      }}
+    </PropsTable>
   )
 }
 
 export const DisabledPlaceholderInOptions: Story = () => {
   return (
     <NativeSelect.Root
-      aria-label="Native Select"
       placeholder="キャラクターを選択"
       placeholderInOptions={false}
     >
@@ -156,10 +142,20 @@ export const Disabled: Story = () => {
           <NativeSelect.Root
             key={index}
             variant={variant}
-            aria-label="Native Select"
             disabled
-            placeholder={variant}
+            placeholder={toTitleCase(variant)}
           />
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} disabled>
+            <InputGroup.Addon>
+              <BellIcon />
+            </InputGroup.Addon>
+            <NativeSelect.Root placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
         )}
       </For>
 
@@ -181,10 +177,24 @@ export const Readonly: Story = () => {
           <NativeSelect.Root
             key={index}
             variant={variant}
-            aria-label="Native Select"
-            placeholder={variant}
+            placeholder={toTitleCase(variant)}
             readOnly
-          />
+          >
+            <NativeSelect.Option value="孫悟空">孫悟空</NativeSelect.Option>
+            <NativeSelect.Option value="ベジータ">ベジータ</NativeSelect.Option>
+            <NativeSelect.Option value="フリーザ">フリーザ</NativeSelect.Option>
+          </NativeSelect.Root>
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} readOnly>
+            <InputGroup.Addon>
+              <BellIcon />
+            </InputGroup.Addon>
+            <NativeSelect.Root placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
         )}
       </For>
 
@@ -206,10 +216,20 @@ export const Invalid: Story = () => {
           <NativeSelect.Root
             key={index}
             variant={variant}
-            aria-label="Native Select"
             invalid
-            placeholder={variant}
+            placeholder={toTitleCase(variant)}
           />
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} invalid>
+            <InputGroup.Addon>
+              <BellIcon />
+            </InputGroup.Addon>
+            <NativeSelect.Root placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
         )}
       </For>
 
@@ -224,13 +244,75 @@ export const Invalid: Story = () => {
   )
 }
 
+export const Addon: Story = () => {
+  return (
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant, index) => (
+        <InputGroup.Root key={index} variant={variant}>
+          <InputGroup.Addon>
+            <BellIcon />
+          </InputGroup.Addon>
+          <NativeSelect.Root placeholder="Select notifications" />
+        </InputGroup.Root>
+      )}
+    </For>
+  )
+}
+
+export const Element: Story = () => {
+  return (
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant, index) => (
+        <InputGroup.Root key={index} variant={variant}>
+          <InputGroup.Element>
+            <BellIcon />
+          </InputGroup.Element>
+          <NativeSelect.Root placeholder="Select notifications" />
+        </InputGroup.Root>
+      )}
+    </For>
+  )
+}
+
+export const BorderColor: Story = () => {
+  return (
+    <>
+      <NativeSelect.Root placeholder="Default border color" />
+
+      <NativeSelect.Root
+        focusBorderColor="green.500"
+        placeholder="Custom border color"
+      />
+
+      <InputGroup.Root variant="flushed" focusBorderColor="green.500">
+        <InputGroup.Element>
+          <BellIcon />
+        </InputGroup.Element>
+        <NativeSelect.Root placeholder="Custom border color" />
+      </InputGroup.Root>
+
+      <NativeSelect.Root
+        errorBorderColor="orange.500"
+        invalid
+        placeholder="Custom border color"
+      />
+
+      <InputGroup.Root errorBorderColor="orange.500" invalid>
+        <InputGroup.Addon>
+          <BellIcon />
+        </InputGroup.Addon>
+        <NativeSelect.Root placeholder="Custom border color" />
+      </InputGroup.Root>
+    </>
+  )
+}
+
 export const CustomIcon: Story = () => {
   return (
     <>
       <NativeSelect.Root
-        aria-label="Native Select"
         placeholder="キャラクターを選択"
-        iconProps={{ color: "primary" }}
+        iconProps={{ color: "orange" }}
       >
         <NativeSelect.Option value="孫悟空">孫悟空</NativeSelect.Option>
         <NativeSelect.Option value="ベジータ">ベジータ</NativeSelect.Option>
@@ -238,7 +320,6 @@ export const CustomIcon: Story = () => {
       </NativeSelect.Root>
 
       <NativeSelect.Root
-        aria-label="Native Select"
         placeholder="キャラクターを選択"
         iconProps={{ children: <ChevronsDownIcon /> }}
       >
@@ -255,7 +336,6 @@ export const CustomControl: Story = () => {
 
   return (
     <NativeSelect.Root
-      aria-label="Native Select"
       placeholder="キャラクターを選択"
       value={value}
       onChange={(e) => setValue(e.target.value)}

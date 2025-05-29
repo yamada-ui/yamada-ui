@@ -1,28 +1,18 @@
-import type {
-  DetailedHTMLProps,
-  OptionHTMLAttributes,
-  ReactElement,
-} from "react"
-import type { HTMLStyledProps, ThemeProps } from "../../core"
+import type { DetailedHTMLProps, OptionHTMLAttributes, ReactNode } from "react"
+import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
 import type { NativeSelectStyle } from "./native-select.style"
-import { cloneElement } from "react"
-import { createSlotComponent, styled } from "../../core"
-import { getValidChildren, isValidElement } from "../../utils"
+import { cloneElement, useMemo } from "react"
+import { createSlotComponent } from "../../core"
 import { useFieldProps } from "../field"
+import { useGroupItemProps } from "../group"
 import { ChevronDownIcon } from "../icon"
-import { useInputBorder } from "../input"
+import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
 import { nativeSelectStyle } from "./native-select.style"
 
-interface NativeSelectBaseItem
-  extends Omit<
-    DetailedHTMLProps<
-      OptionHTMLAttributes<HTMLOptionElement>,
-      HTMLOptionElement
-    >,
-    "children" | "label" | "value"
-  > {
+interface NativeSelectSharedItem
+  extends Omit<HTMLProps<"option">, "children" | "label" | "value"> {
   label?: string
 }
 
@@ -31,23 +21,27 @@ type Value = DetailedHTMLProps<
   HTMLOptionElement
 >["value"]
 
-interface NativeSelectItemWithValue extends NativeSelectBaseItem {
+interface NativeSelectItemWithValue extends NativeSelectSharedItem {
   value?: Value
 }
 
-interface NativeSelectItemWithItems extends NativeSelectBaseItem {
+interface NativeSelectItemWithItems extends NativeSelectSharedItem {
   items?: NativeSelectItemWithValue[]
 }
 
-export interface NativeSelectItem
-  extends NativeSelectItemWithValue,
-    NativeSelectItemWithItems {}
+export type NativeSelectItem =
+  | NativeSelectItemWithItems
+  | NativeSelectItemWithValue
 
 export interface NativeSelectRootProps
   extends Omit<HTMLStyledProps<"select">, "size">,
     ThemeProps<NativeSelectStyle>,
     FieldProps,
     UseInputBorderProps {
+  /**
+   * The icon to be used in the select.
+   */
+  icon?: ReactNode
   /**
    * If provided, generate options based on items.
    *
@@ -65,13 +59,17 @@ export interface NativeSelectRootProps
    */
   placeholderInOptions?: boolean
   /**
+   * The props for the end element.
+   */
+  elementProps?: InputGroup.ElementProps
+  /**
    * Props for icon element.
    */
-  iconProps?: HTMLStyledProps
+  iconProps?: NativeSelectIconProps
   /**
-   * Props for container element.
+   * Props for root element.
    */
-  rootProps?: Omit<HTMLStyledProps, "children">
+  rootProps?: InputGroup.RootProps
 }
 
 export const {
@@ -91,72 +89,79 @@ export const {
  */
 export const NativeSelectRoot = withProvider<"select", NativeSelectRootProps>(
   (props) => {
+    const [groupItemProps, computedProps] = useGroupItemProps(props)
     const {
       props: {
         ref,
         className,
         css,
+        colorScheme,
         children,
         errorBorderColor,
         focusBorderColor,
+        icon,
         items = [],
         placeholder,
         placeholderInOptions = true,
+        elementProps,
         iconProps,
         rootProps,
         ...rest
       },
-      ariaProps: { "aria-readonly": _ariaReadonly, ...ariaProps },
+      ariaProps,
       dataProps,
-    } = useFieldProps(props)
-    const vars = useInputBorder({
+      eventProps,
+    } = useFieldProps({ ...computedProps, notSupportReadOnly: true })
+    const varProps = useInputBorder({
       errorBorderColor,
       focusBorderColor,
     })
+    const computedChildren = useMemo(() => {
+      if (children || !items.length) return
 
-    let computedChildren: ReactElement[] = []
+      return items.map((item, index) => {
+        if ("value" in item) {
+          const { label, ...props } = item
 
-    if (!children && items.length) {
-      computedChildren = items
-        .map((item, i) => {
-          if ("value" in item) {
-            const { label, value, ...props } = item
+          return cloneElement(<NativeOption />, {
+            key: index,
+            children: label,
+            ...props,
+          })
+        } else if ("items" in item) {
+          const { items = [], label, ...props } = item
 
-            return (
-              <NativeOption key={i} value={value} {...props}>
-                {label}
-              </NativeOption>
-            )
-          } else if ("items" in item) {
-            const { items = [], label, ...props } = item
-
-            return (
-              <NativeOptionGroup key={i} label={label} {...props}>
-                {items.map(({ label, value, ...props }, i) => (
-                  <NativeOption key={i} value={value} {...props}>
-                    {label}
-                  </NativeOption>
-                ))}
-              </NativeOptionGroup>
-            )
-          }
-        })
-        .filter(Boolean) as ReactElement[]
-    }
+          return cloneElement(<NativeOptionGroup />, {
+            key: index,
+            children: items.map(({ label, ...props }, index) =>
+              cloneElement(<NativeOption />, {
+                key: index,
+                children: label,
+                ...props,
+              }),
+            ),
+            label,
+            ...props,
+          })
+        }
+      })
+    }, [children, items])
 
     return (
-      <styled.div
+      <InputGroup.Root
         className={className}
         css={css}
-        {...ariaProps}
-        {...dataProps}
+        colorScheme={colorScheme}
+        {...groupItemProps}
         {...rootProps}
       >
         <NativeSelectField
           ref={ref}
-          {...vars}
+          aria-label={placeholder}
+          {...varProps}
           {...ariaProps}
           {...dataProps}
+          {...eventProps}
           {...rest}
         >
           {placeholder ? (
@@ -164,49 +169,41 @@ export const NativeSelectRoot = withProvider<"select", NativeSelectRootProps>(
               {placeholder}
             </NativeOption>
           ) : null}
+
           {children ?? computedChildren}
         </NativeSelectField>
 
-        <NativeSelectIcon {...iconProps} {...ariaProps} {...dataProps} />
-      </styled.div>
+        <InputGroup.Element {...elementProps}>
+          <NativeSelectIcon icon={icon} {...dataProps} {...iconProps} />
+        </InputGroup.Element>
+      </InputGroup.Root>
     )
   },
   "root",
-)()
+)((props) => {
+  const context = useInputPropsContext()
+
+  return { ...context, ...props }
+})
 
 interface NativeSelectFieldProps extends HTMLStyledProps<"select"> {}
 
 const NativeSelectField = withContext<"select", NativeSelectFieldProps>(
   "select",
   "field",
-)()
+)({ "data-group-propagate": "" })
 
-interface NativeSelectIconProps extends HTMLStyledProps {}
+interface NativeSelectIconProps extends HTMLStyledProps {
+  icon?: ReactNode
+}
 
 const NativeSelectIcon = withContext<"div", NativeSelectIconProps>(
-  ({ children, ...rest }) => {
-    const validChildren = getValidChildren(children)
-
-    const cloneChildren = validChildren.map((child) =>
-      cloneElement(child, {
-        style: {
-          color: "currentColor",
-          height: "1em",
-          width: "1em",
-        },
-        "aria-hidden": true,
-        focusable: false,
-      }),
-    )
-
-    return (
-      <styled.div {...rest}>
-        {isValidElement(children) ? cloneChildren : <ChevronDownIcon />}
-      </styled.div>
-    )
-  },
+  "div",
   "icon",
-)()
+)(undefined, ({ children, icon, ...rest }) => ({
+  children: icon || children || <ChevronDownIcon />,
+  ...rest,
+}))
 
 export interface NativeOptionGroupProps extends HTMLStyledProps<"optgroup"> {}
 

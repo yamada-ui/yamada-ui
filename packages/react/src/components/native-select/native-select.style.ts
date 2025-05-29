@@ -1,48 +1,25 @@
 import { defineComponentSlotStyle } from "../../core"
-import { inputStyle } from "../input"
+import {
+  getInputHeightStyle,
+  getInputPaddingResetStyle,
+  inputStyle,
+} from "../input"
 
 export const nativeSelectStyle = defineComponentSlotStyle({
   base: {
-    field: {
-      "& > option, optgroup": {
-        bg: ["white", "black"],
-      },
-      cursor: "pointer",
-      pb: "px",
-      pe: "2rem",
-      pr: "8",
-      _focus: {
-        zIndex: "unset",
-      },
-      _readOnly: {
-        pointerEvents: "none",
-      },
-      ...inputStyle.base,
-    },
+    field: { ...inputStyle.base, _readOnly: { pointerEvents: "none" } },
     icon: {
       alignItems: "center",
-      color: ["blackAlpha.600", "whiteAlpha.700"],
+      color: "colorScheme.outline",
       display: "inline-flex",
       justifyContent: "center",
-      outline: 0,
-      pointerEvents: "none",
-      position: "absolute",
-      py: "2",
-      rounded: "md",
-      top: "50%",
-      transform: "translateY(-50%)",
-      w: "6",
       _disabled: {
-        opacity: 0.4,
+        layerStyle: "disabled",
       },
     },
     option: {},
     optionGroup: {},
-    root: {
-      h: "fit-content",
-      position: "relative",
-      w: "100%",
-    },
+    root: {},
   },
 
   variants: {
@@ -51,9 +28,13 @@ export const nativeSelectStyle = defineComponentSlotStyle({
     },
     flushed: {
       field: inputStyle.variants?.flushed,
+      root: getInputPaddingResetStyle("& > select"),
     },
     outline: {
       field: inputStyle.variants?.outline,
+    },
+    plain: {
+      field: inputStyle.variants?.plain,
     },
   },
 
@@ -61,38 +42,37 @@ export const nativeSelectStyle = defineComponentSlotStyle({
     xs: {
       field: inputStyle.sizes?.xs,
       icon: {
-        fontSize: "lg",
-        insetEnd: "1",
-        pt: "2",
+        fontSize: inputStyle.sizes?.xs.fontSize,
       },
+      root: getInputHeightStyle(inputStyle.sizes?.xs.minH, "& > select"),
     },
     sm: {
       field: inputStyle.sizes?.sm,
       icon: {
-        fontSize: "xl",
-        insetEnd: "1.5",
+        fontSize: inputStyle.sizes?.sm.fontSize,
       },
+      root: getInputHeightStyle(inputStyle.sizes?.sm.minH, "& > select"),
     },
     md: {
       field: inputStyle.sizes?.md,
       icon: {
-        fontSize: "xl",
-        insetEnd: "2",
+        fontSize: inputStyle.sizes?.md.fontSize,
       },
+      root: getInputHeightStyle(inputStyle.sizes?.md.minH, "& > select"),
     },
     lg: {
       field: inputStyle.sizes?.lg,
       icon: {
-        fontSize: "2xl",
-        insetEnd: "2",
+        fontSize: inputStyle.sizes?.lg.fontSize,
       },
+      root: getInputHeightStyle(inputStyle.sizes?.lg.minH, "& > select"),
     },
     xl: {
       field: inputStyle.sizes?.xl,
       icon: {
-        fontSize: "3xl",
-        insetEnd: "3",
+        fontSize: inputStyle.sizes?.xl.fontSize,
       },
+      root: getInputHeightStyle(inputStyle.sizes?.xl.minH, "& > select"),
     },
   },
 

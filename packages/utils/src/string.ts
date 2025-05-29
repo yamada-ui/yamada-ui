@@ -113,7 +113,7 @@ export function transformSize(
   return size ?? token
 }
 
-export function convertFromNoticePlacement(placement: string): string {
+export function toDirectionalPlacement(placement: string): string {
   if (!placement) return "top-left"
 
   const [vertical, horizontal] = placement.split("-")

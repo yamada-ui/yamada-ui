@@ -19,11 +19,7 @@ import {
 } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { useTimeout } from "../../hooks/use-timeout"
-import {
-  convertFromNoticePlacement,
-  runIfFn,
-  useUpdateEffect,
-} from "../../utils"
+import { runIfFn, toDirectionalPlacement, useUpdateEffect } from "../../utils"
 import { Portal } from "../portal"
 import { SlideFade } from "../slide"
 import { noticeStore } from "./notice"
@@ -95,7 +91,7 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
     const components = useMemo(
       () =>
         Object.entries(state).map(([placement, notices]) => {
-          const convertedPlacement = convertFromNoticePlacement(placement)
+          const convertedPlacement = toDirectionalPlacement(placement)
 
           const customCSS: CSSObject = {
             css,
@@ -134,7 +130,7 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
 )()
 
 const getPlacementInitialValues = (placement: string) => {
-  const convertedPlacement = convertFromNoticePlacement(placement)
+  const convertedPlacement = toDirectionalPlacement(placement)
 
   switch (convertedPlacement) {
     case "top-left":
@@ -156,7 +152,7 @@ const getPlacementInitialValues = (placement: string) => {
 }
 
 const getPlacementExitValues = (closeOnDrag: boolean, placement: string) => {
-  const convertedPlacement = convertFromNoticePlacement(placement)
+  const convertedPlacement = toDirectionalPlacement(placement)
 
   // If closeOnDrag is enabled, simulate a "swipe away" exit animation
   // with more pronounced movement in the natural drag direction

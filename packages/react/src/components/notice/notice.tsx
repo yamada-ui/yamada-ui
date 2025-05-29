@@ -20,10 +20,10 @@ import { useMemo } from "react"
 import { styled } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
 import {
-  convertFromNoticePlacement,
   handlerAll,
   isFunction,
   merge,
+  toDirectionalPlacement,
 } from "../../utils"
 import { Alert } from "../alert"
 import { Button } from "../button/button"
@@ -261,7 +261,7 @@ const createNoticeStore = (initialState: State): Store => {
       const notice = createNotice(message, options)
       const { id, placement } = notice
 
-      const convertedPlacement = convertFromNoticePlacement(placement)
+      const convertedPlacement = toDirectionalPlacement(placement)
 
       setState((prev) => {
         let prevNotices = prev[placement]

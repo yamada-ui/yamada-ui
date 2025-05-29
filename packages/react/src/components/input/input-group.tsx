@@ -1,5 +1,4 @@
-import type { FC, ThemeProps } from "../../core"
-import type { Merge } from "../../utils"
+import type { FC, ThemeProps, WithoutThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { GroupProps } from "../group"
 import type { InputProps } from "./input"
@@ -13,7 +12,8 @@ import { InputAddonPropsContext } from "./input-addon"
 import { InputElement, InputElementPropsContext } from "./input-element"
 
 export interface InputGroupRootProps
-  extends Merge<GroupProps, ThemeProps<InputStyle>>,
+  extends WithoutThemeProps<GroupProps, InputStyle>,
+    ThemeProps<InputStyle>,
     Pick<InputProps, "errorBorderColor" | "focusBorderColor">,
     FieldProps {}
 
@@ -59,6 +59,7 @@ export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
       disabled,
       errorBorderColor,
       focusBorderColor,
+      invalid: props.invalid,
       readOnly,
       required,
       ...dataProps,
@@ -71,6 +72,7 @@ export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
       focusBorderColor,
       readOnly,
       required,
+      props.invalid,
       dataProps,
     ],
   )

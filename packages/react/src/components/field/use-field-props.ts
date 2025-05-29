@@ -2,7 +2,8 @@ import type { FocusEventHandler } from "react"
 import type { Dict } from "../../utils"
 import type { FieldProps } from "./field"
 import { useMemo } from "react"
-import { ariaAttr, dataAttr, handlerAll } from "../../utils"
+import { useEnvironment } from "../../providers/environment-provider"
+import { ariaAttr, cx, dataAttr, handlerAll } from "../../utils"
 import { useFieldsetContext } from "../fieldset"
 import { useFieldContext } from "./field"
 
@@ -16,6 +17,7 @@ export interface UseFieldProps<Y extends HTMLElement> extends FieldProps {
 export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
   {
     id,
+    "aria-describedby": ariaDescribedby,
     disabled,
     invalid,
     notSupportReadOnly,
@@ -26,6 +28,7 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
     ...rest
   }: M & UseFieldProps<Y> = {} as M & UseFieldProps<Y>,
 ) => {
+  const { getDocument } = useEnvironment()
   const fieldsetContext = useFieldsetContext()
   const fieldContext = useFieldContext()
 
@@ -38,12 +41,21 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
   const props = useMemo(
     () => ({
       id,
+      "aria-describedby": ariaDescribedby,
       disabled,
       readOnly: notSupportReadOnly ? undefined : readOnly,
       required,
       ...rest,
     }),
-    [id, disabled, readOnly, required, rest, notSupportReadOnly],
+    [
+      id,
+      disabled,
+      readOnly,
+      required,
+      rest,
+      notSupportReadOnly,
+      ariaDescribedby,
+    ],
   )
   const dataProps = useMemo(
     () => ({
@@ -54,17 +66,39 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
     }),
     [disabled, invalid, readOnly, required],
   )
-  const ariaProps = useMemo(
-    () => ({
+  const ariaProps = useMemo(() => {
+    const hasErrorMessage =
+      !!fieldContext?.errorMessageId &&
+      !!getDocument()?.getElementById(fieldContext.errorMessageId)
+    const hasHelperMessage =
+      !!fieldContext?.helperMessageId &&
+      !!getDocument()?.getElementById(fieldContext.helperMessageId)
+    const errorMessageId =
+      invalid && hasErrorMessage ? fieldContext.errorMessageId : undefined
+    const helperMessageId =
+      (!fieldContext?.replace || !invalid) && hasHelperMessage
+        ? fieldContext.helperMessageId
+        : undefined
+
+    return {
+      "aria-describedby": cx(errorMessageId, helperMessageId, ariaDescribedby),
       "aria-disabled": ariaAttr(
         notSupportReadOnly ? readOnly || disabled : disabled,
       ),
       "aria-invalid": ariaAttr(invalid),
       "aria-readonly": notSupportReadOnly ? undefined : ariaAttr(readOnly),
       "aria-required": ariaAttr(required),
-    }),
-    [disabled, invalid, readOnly, required, notSupportReadOnly],
-  )
+    }
+  }, [
+    fieldContext,
+    getDocument,
+    invalid,
+    ariaDescribedby,
+    notSupportReadOnly,
+    readOnly,
+    disabled,
+    required,
+  ])
   const eventProps = useMemo(
     () => ({
       onBlur: handlerAll(fieldContext?.onBlur, onBlur),

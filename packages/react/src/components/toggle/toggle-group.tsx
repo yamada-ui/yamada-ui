@@ -1,5 +1,5 @@
 import type { ReactElement } from "react"
-import type { ComponentArgs, ThemeProps } from "../../core"
+import type { ComponentArgs, ThemeProps, WithoutThemeProps } from "../../core"
 import type { GroupProps } from "../group"
 import type { ToggleProps } from "./toggle"
 import type { ToggleStyle } from "./toggle.style"
@@ -16,7 +16,10 @@ import { ToggleGroupContext, useToggleGroup } from "./use-toggle-group"
  */
 export interface ToggleGroupProps<
   Y extends (number | string)[] | number | string = string,
-> extends Omit<GroupProps, "defaultValue" | "onChange" | "value">,
+> extends Omit<
+      WithoutThemeProps<GroupProps, ToggleStyle>,
+      "defaultValue" | "onChange" | "value"
+    >,
     UseToggleGroupProps<Y>,
     ThemeProps<ToggleStyle> {}
 

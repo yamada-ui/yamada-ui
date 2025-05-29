@@ -2,29 +2,56 @@ import { PinInput } from "."
 import { a11y, act, render, screen, waitFor } from "../../../test"
 
 describe("<PinInput />", () => {
-  test("renders with no errors", async () => {
-    const { container } = render(<PinInput />)
-    await a11y(container)
+  test("PinInput renders correctly", async () => {
+    await a11y(<PinInput.Root />)
+  })
+
+  test("custom fields renders correctly", async () => {
+    await a11y(
+      <PinInput.Root>
+        <PinInput.Field />
+        <PinInput.Field />
+        <PinInput.Field />
+        <PinInput.Field />
+      </PinInput.Root>,
+    )
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(PinInput.Root.name).toBe("PinInputRoot")
+    expect(PinInput.Field.name).toBe("PinInputField")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <PinInput.Root data-testid="root">
+        <PinInput.Field data-testid="field" />
+      </PinInput.Root>,
+    )
+    expect(screen.getByTestId("root")).toHaveClass("ui-pin-input__root")
+    expect(screen.getByTestId("field")).toHaveClass("ui-pin-input__field")
   })
 
   test("renders the correct number of input elements", () => {
-    render(<PinInput items={5} />)
+    render(<PinInput.Root items={5} />)
     const inputs = screen.getAllByRole("textbox")
     expect(inputs).toHaveLength(5)
   })
 
   test("id prop applies correctly", () => {
     const testId = "test"
-    const { container } = render(<PinInput id={testId} />)
+    const { container } = render(<PinInput.Root id={testId} />)
 
-    expect(container.querySelector(`#${testId}-0`)).toBeInTheDocument()
+    expect(container.querySelector(`#${testId}`)).toBeInTheDocument()
     expect(container.querySelector(`#${testId}-1`)).toBeInTheDocument()
     expect(container.querySelector(`#${testId}-2`)).toBeInTheDocument()
     expect(container.querySelector(`#${testId}-3`)).toBeInTheDocument()
   })
 
   test('allows alphanumeric input when type is "alphanumeric"', async () => {
-    const { findAllByRole, user } = render(<PinInput type="alphanumeric" />)
+    const { findAllByRole, user } = render(
+      <PinInput.Root type="alphanumeric" />,
+    )
 
     const inputs = await findAllByRole("textbox")
     const firstInput = inputs[0]
@@ -41,7 +68,7 @@ describe("<PinInput />", () => {
     const handleChange = vi.fn()
     const handleComplete = vi.fn()
     const { findAllByRole, user } = render(
-      <PinInput
+      <PinInput.Root
         items={2}
         onChange={handleChange}
         onComplete={handleComplete}
@@ -65,7 +92,7 @@ describe("<PinInput />", () => {
   })
 
   test('input type should be "password" when mask is true', () => {
-    render(<PinInput mask />)
+    render(<PinInput.Root mask />)
 
     const inputs = screen.getAllByPlaceholderText("○")
 
@@ -76,7 +103,9 @@ describe("<PinInput />", () => {
 
   test("correctly applies custom placeholder to each input", () => {
     const customPlaceholder = "t"
-    const { container } = render(<PinInput placeholder={customPlaceholder} />)
+    const { container } = render(
+      <PinInput.Root placeholder={customPlaceholder} />,
+    )
 
     const inputs = container.querySelectorAll(
       `input[placeholder="${customPlaceholder}"]`,
@@ -86,7 +115,7 @@ describe("<PinInput />", () => {
   })
 
   test('sets autoComplete to "one-time-code" when otp is true', () => {
-    render(<PinInput otp />)
+    render(<PinInput.Root otp />)
 
     const inputs = screen.getAllByRole("textbox")
     inputs.forEach((input) => {
@@ -95,7 +124,7 @@ describe("<PinInput />", () => {
   })
 
   test('does not set autoComplete to "one-time-code" when otp is false', () => {
-    render(<PinInput otp={false} />)
+    render(<PinInput.Root otp={false} />)
 
     const inputs = screen.getAllByRole("textbox")
     inputs.forEach((input) => {
@@ -106,7 +135,7 @@ describe("<PinInput />", () => {
   test("correctly sets defaultValue into each input", () => {
     const defaultValue = "1234"
 
-    render(<PinInput defaultValue={defaultValue} />)
+    render(<PinInput.Root defaultValue={defaultValue} />)
 
     const inputs = screen.getAllByRole("textbox")
 
@@ -118,7 +147,7 @@ describe("<PinInput />", () => {
   })
 
   test("correct behavior on input focus", async () => {
-    const { findAllByRole, user } = render(<PinInput />)
+    const { findAllByRole, user } = render(<PinInput.Root />)
 
     const inputs = (await findAllByRole("textbox")) as HTMLInputElement[]
     const firstInput = inputs[0]
@@ -150,7 +179,7 @@ describe("<PinInput />", () => {
 
   test("focus moves to previous input on backspace if current input is empty and manageFocus is true", async () => {
     const { findAllByRole, user } = render(
-      <PinInput defaultValue="123" manageFocus />,
+      <PinInput.Root defaultValue="123" manageFocus />,
     )
 
     const inputs = await findAllByRole("textbox")
@@ -169,7 +198,7 @@ describe("<PinInput />", () => {
 
   test("does not move focus on backspace if manageFocus is false", async () => {
     const { findAllByRole, user } = render(
-      <PinInput defaultValue="123" manageFocus={false} />,
+      <PinInput.Root defaultValue="123" manageFocus={false} />,
     )
 
     const inputs = await findAllByRole("textbox")
@@ -187,7 +216,7 @@ describe("<PinInput />", () => {
 
   test("focus move input on arrowRight or arrowLeft if manageFocus is true", async () => {
     const { findAllByRole, user } = render(
-      <PinInput defaultValue="1234" manageFocus />,
+      <PinInput.Root defaultValue="1234" manageFocus />,
     )
 
     const inputs = await findAllByRole("textbox")
@@ -211,7 +240,7 @@ describe("<PinInput />", () => {
   })
 
   test("automatically focuses the first input on mount if autoFocus is true", async () => {
-    const { findAllByRole } = render(<PinInput autoFocus />)
+    const { findAllByRole } = render(<PinInput.Root autoFocus />)
 
     await act(async () => {
       await new Promise((resolve) => requestAnimationFrame(resolve))
@@ -226,7 +255,7 @@ describe("<PinInput />", () => {
   })
 
   test("does not focus the first input on mount if autoFocus is false", async () => {
-    const { findAllByRole } = render(<PinInput autoFocus={false} />)
+    const { findAllByRole } = render(<PinInput.Root autoFocus={false} />)
 
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
@@ -239,7 +268,7 @@ describe("<PinInput />", () => {
   })
 
   test("correct input behavior when pasting a value of 2 characters", async () => {
-    const { findAllByRole, user } = render(<PinInput />)
+    const { findAllByRole, user } = render(<PinInput.Root />)
 
     const inputs = await findAllByRole("textbox")
     const firstInput = inputs[0]
@@ -254,7 +283,7 @@ describe("<PinInput />", () => {
 
   test("correct input behavior when pasting a value of more than 2 characters", async () => {
     const testValue = "1234"
-    const { findAllByRole, user } = render(<PinInput />)
+    const { findAllByRole, user } = render(<PinInput.Root />)
 
     const inputs = await findAllByRole("textbox")
 
@@ -273,7 +302,7 @@ describe("<PinInput />", () => {
   test("the change in value does not impact other values", async () => {
     const defaultValue = "1234"
     const { findAllByRole, user } = render(
-      <PinInput defaultValue={defaultValue} />,
+      <PinInput.Root defaultValue={defaultValue} />,
     )
 
     const inputs = await findAllByRole("textbox")

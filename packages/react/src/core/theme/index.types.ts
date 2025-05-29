@@ -310,7 +310,9 @@ type ThemeVariantProps<Y extends Dict = Dict> =
         /**
          * The variant of the component.
          */
-        variant?: StyleValue<AnyString | keyof Required<Y>["variants"]>
+        variant?: StyleValue<
+          AnyString | Exclude<keyof Required<Y>["variants"], "base">
+        >
       }
 
 type ThemeSizeProps<Y extends Dict = Dict> =
@@ -320,7 +322,9 @@ type ThemeSizeProps<Y extends Dict = Dict> =
         /**
          * The size of the component.
          */
-        size?: StyleValue<AnyString | keyof Required<Y>["sizes"]>
+        size?: StyleValue<
+          AnyString | Exclude<keyof Required<Y>["sizes"], "base">
+        >
       }
 
 type ThemeComponentProps<Y extends Dict = Dict> =

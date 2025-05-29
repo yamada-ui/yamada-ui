@@ -85,11 +85,10 @@ export type CSSSlotObject<Y extends number | string | symbol = string> = {
   [M in Y]?: CSSObject
 }
 
-export interface CSSModifierObject<
-  Y extends CSSObject | CSSSlotObject = CSSObject,
-> {
-  [key: string]: Y
-}
+export type CSSModifierObject<Y extends CSSObject | CSSSlotObject = CSSObject> =
+  {
+    [M in "base" | AnyString | number]?: Y
+  }
 
 export type CSSKeyframeObject = {
   [M in `${number}%` | KeyframeIdent]?: CSSFlatObject

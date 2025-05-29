@@ -9,8 +9,6 @@ export * from "./utils"
  * COMPONENTS
  */
 export * from "./components/accordion"
-// export * from "./components/textarea"
-// export * from "./components/toggle"
 // export * from "./components/tooltip"
 export * from "./components/airy"
 export * from "./components/alert"

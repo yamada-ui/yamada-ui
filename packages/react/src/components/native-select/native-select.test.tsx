@@ -43,7 +43,7 @@ describe("<NativeSelect />", () => {
 
     expect(screen.getByTestId("root")).toHaveClass("ui-native-select__root")
     expect(
-      screen.getByRole("combobox", { name: /native select/i }),
+      screen.getByRole("combobox", { name: /キャラクターを選択/i }),
     ).toHaveClass("ui-native-select__field")
     expect(screen.getByRole("option", { name: "孫悟空" })).toHaveClass(
       "ui-native-select__option",

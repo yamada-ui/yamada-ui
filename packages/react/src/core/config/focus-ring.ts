@@ -17,6 +17,7 @@ export const focusRingStyle = {
   },
   mixed: {
     borderColor: "{focus-ring-color}",
+    outlineColor: "{focus-ring-color}",
     outlineOffset: "{focus-ring-offset, 0px}",
     outlineStyle: "{focus-ring-style, solid}",
     outlineWidth: "{focus-ring-width, 2px}",
@@ -25,6 +26,7 @@ export const focusRingStyle = {
     outline: "none",
   },
   outline: {
+    outlineColor: "{focus-ring-color}",
     outlineOffset: "{focus-ring-offset, 2px}",
     outlineStyle: "{focus-ring-style, solid}",
     outlineWidth: "{focus-ring-width, 2px}",
@@ -32,6 +34,7 @@ export const focusRingStyle = {
   outside: {
     borderColor: "{focus-ring-color}",
     boxShadow: "0 0 0 1px {focus-ring-color}",
+    outlineColor: "{focus-ring-color}",
     outlineOffset: "inherit",
     outlineStyle: "inherit",
     outlineWidth: "inherit",
@@ -50,10 +53,6 @@ export function generateFocusRing(selector: string): Transform {
           ? focusRingStyle[value as keyof typeof focusRingStyle]
           : focusRingStyle.none),
       },
-    }
-
-    if (["mixed", "outline", "outside"].includes(value)) {
-      result[selector].outlineColor = "{focus-ring-color}"
     }
 
     return result

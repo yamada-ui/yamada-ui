@@ -308,7 +308,6 @@ export const useNumberInput = (props: UseNumberInputProps) => {
     ({ ref, ...props } = {}) => ({
       ...ariaProps,
       ...dataProps,
-      ...eventProps,
       type: "text",
       "aria-invalid": ariaAttr(ariaProps["aria-invalid"] ?? out),
       "aria-valuemax": maxValue,

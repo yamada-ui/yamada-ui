@@ -63,10 +63,11 @@ export const usePasswordInput = (props: UsePasswordInputProps) => {
       disabled,
       ...ariaProps,
       ...dataProps,
-      ...eventProps,
       ...rest,
       ...props,
       ref: mergeRefs(ref, rest.ref),
+      onBlur: handlerAll(eventProps.onBlur, props.onBlur),
+      onFocus: handlerAll(eventProps.onFocus, props.onFocus),
     }),
     [visible, rest, disabled, dataProps, eventProps, ariaProps],
   )

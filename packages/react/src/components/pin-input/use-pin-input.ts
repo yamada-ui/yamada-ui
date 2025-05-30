@@ -292,7 +292,6 @@ export const usePinInput = (props: UsePinInputProps) => {
       ({ index, ...props }) => ({
         ...ariaProps,
         ...dataProps,
-        ...eventProps,
         type: mask ? "password" : type === "number" ? "tel" : "text",
         autoComplete: otp ? "one-time-code" : "off",
         disabled,
@@ -305,9 +304,9 @@ export const usePinInput = (props: UsePinInputProps) => {
         value: values[index] || "",
         ...filterUndefined(props),
         id: `${id}${index ? `-${index}` : ""}`,
-        onBlur: handlerAll(props.onBlur, onBlur),
+        onBlur: handlerAll(eventProps.onBlur, props.onBlur, onBlur),
         onChange: handlerAll(props.onChange, onChange(index)),
-        onFocus: handlerAll(props.onFocus, onFocus(index)),
+        onFocus: handlerAll(eventProps.onFocus, props.onFocus, onFocus(index)),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown(index)),
       }),
       [

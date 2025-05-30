@@ -40,13 +40,15 @@ export const Textarea = withContext("textarea")(
       dataProps,
       eventProps,
     } = useFieldProps(props)
-    const { getTextareaProps } = useTextarea(rest)
-    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
-
-    return {
+    const { getTextareaProps } = useTextarea({
       ...ariaProps,
       ...dataProps,
       ...eventProps,
+      ...rest,
+    })
+    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
+
+    return {
       ...varProps,
       ...getTextareaProps(),
     }

@@ -28,4 +28,7 @@ export default {
   tag: {
     "Close tag": "Close tag",
   },
+  toggle: {
+    "Toggle button": "Toggle button",
+  },
 } as const

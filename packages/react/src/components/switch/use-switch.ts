@@ -3,25 +3,23 @@ import type {
   ChangeEventHandler,
   FocusEventHandler,
   KeyboardEvent,
-  SyntheticEvent,
 } from "react"
-import type { PropGetter } from "../../core"
-import type { Dict } from "../../utils"
+import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
-import { trackFocusVisible } from "../../hooks/use-focus-visible"
+import { useCallback, useId, useRef } from "react"
+import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   dataAttr,
   handlerAll,
   mergeRefs,
-  useCallbackRef,
-  useSafeLayoutEffect,
-  useUpdateEffect,
+  visuallyHiddenAttributes,
 } from "../../utils"
 import { useFieldProps } from "../field"
 
 export interface UseSwitchProps<Y extends number | string = string>
-  extends FieldProps {
+  extends Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
+    HTMLRefAttributes<"input">,
+    FieldProps {
   /**
    * id assigned to input.
    */
@@ -37,23 +35,17 @@ export interface UseSwitchProps<Y extends number | string = string>
    */
   checked?: boolean
   /**
+   * If `true`, the switch will be checked when the Enter key is pressed.
+   *
+   * @default true
+   */
+  checkOnEnter?: boolean
+  /**
    * If `true`, the switch will be initially checked.
    *
    * @default false
    */
   defaultChecked?: boolean
-  /**
-   * If `true`, the switch will be indeterminate.
-   *
-   * @default false
-   */
-  indeterminate?: boolean
-  /**
-   * If `true`, the switch will be selected when the Enter key is pressed.
-   *
-   * @default false
-   */
-  selectOnEnter?: boolean
   /**
    * The tab-index property of the underlying input element.
    */
@@ -76,254 +68,139 @@ export interface UseSwitchProps<Y extends number | string = string>
   onFocus?: FocusEventHandler<HTMLInputElement>
 }
 
-export const useSwitch = <
-  Y extends number | string = string,
-  M extends Dict = Dict,
->({
-  id,
-  ...props
-}: M & UseSwitchProps<Y>) => {
+export const useSwitch = <Y extends number | string = string>(
+  props: UseSwitchProps<Y>,
+) => {
   const uuid = useId()
-
-  id ??= uuid
-
   const {
     props: {
-      id: _id,
+      id = uuid,
+      ref,
       name,
       checked: checkedProp,
-      defaultChecked,
+      checkOnEnter = true,
+      defaultChecked = false,
       disabled,
-      indeterminate,
       readOnly,
       required,
-      selectOnEnter,
-      tabIndex,
       value,
       onChange: onChangeProp,
       ...rest
     },
-    ariaProps: { "aria-readonly": _ariaReadonly, ...ariaProps },
+    ariaProps,
     dataProps,
-    eventProps: { onBlur: onBlurProp, onFocus: onFocusProp },
-  } = useFieldProps({
-    id,
-    ...props,
+    eventProps,
+  } = useFieldProps(props)
+  const interactive = !(readOnly || disabled)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [checked, setChecked] = useControllableState({
+    defaultValue: defaultChecked,
+    value: checkedProp,
   })
 
-  const formControlProps = useMemo(
-    () => ({
-      ...ariaProps,
-      ...dataProps,
-    }),
-    [ariaProps, dataProps],
-  )
-
-  const [focusVisible, setFocusVisible] = useState<boolean>(false)
-  const [focused, setFocused] = useState<boolean>(false)
-  const [hovered, setHovered] = useState<boolean>(false)
-  const [active, setActive] = useState<boolean>(false)
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [label, setLabel] = useState<boolean>(true)
-  const [checked, setIsChecked] = useState<boolean>(!!defaultChecked)
-  const controlled = checkedProp !== undefined
-  const resolvedChecked = controlled ? (checkedProp as boolean) : checked
-
-  const onChange = useCallbackRef(
+  const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
-      if (readOnly || disabled) {
-        ev.preventDefault()
+      if (!interactive) return ev.preventDefault()
 
-        return
-      }
-
-      if (!controlled)
-        setIsChecked(
-          !resolvedChecked || indeterminate ? true : ev.target.checked,
-        )
-
+      setChecked(ev.target.checked)
       onChangeProp?.(ev)
     },
-    [readOnly, disabled, controlled, resolvedChecked, indeterminate],
+    [onChangeProp, setChecked, interactive],
   )
-  const onFocus = useCallbackRef(onFocusProp)
-  const onBlur = useCallbackRef(onBlurProp)
 
   const onKeyDown = useCallback(
-    ({ key }: KeyboardEvent) => {
-      if (key === " ") setActive(true)
-
-      if (selectOnEnter && key === "Enter") inputRef.current?.click()
+    (ev: KeyboardEvent<HTMLInputElement>) => {
+      if (interactive && checkOnEnter && ev.key === "Enter")
+        inputRef.current?.click()
     },
-    [setActive, selectOnEnter],
+    [interactive, checkOnEnter],
   )
-
-  const onKeyUp = useCallback(
-    ({ key }: KeyboardEvent) => {
-      if (key === " ") setActive(false)
-    },
-    [setActive],
-  )
-
-  useEffect(() => {
-    return trackFocusVisible(setFocusVisible)
-  }, [])
-
-  useSafeLayoutEffect(() => {
-    if (inputRef.current)
-      inputRef.current.indeterminate = Boolean(indeterminate)
-  }, [indeterminate])
-
-  useUpdateEffect(() => {
-    if (disabled) setFocused(false)
-  }, [disabled, setFocused])
-
-  useSafeLayoutEffect(() => {
-    if (!inputRef.current?.form) return
-
-    inputRef.current.form.onreset = () => setIsChecked(!!defaultChecked)
-  }, [])
-
-  useSafeLayoutEffect(() => {
-    if (!inputRef.current) return
-
-    if (inputRef.current.checked !== resolvedChecked)
-      setIsChecked(inputRef.current.checked)
-  }, [inputRef.current])
 
   const getRootProps: PropGetter<"label"> = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ...formControlProps,
-      ...props,
+    (props = {}) => ({
+      ...dataProps,
+      htmlFor: id,
+      "data-checked": dataAttr(checked),
       ...rest,
-      ref: mergeRefs(ref, (el: HTMLElement | undefined) => {
-        if (el) setLabel(el.tagName === "LABEL")
-      }),
-      "data-checked": dataAttr(resolvedChecked),
-      "data-focus": dataAttr(focused),
-      "data-focus-visible": dataAttr(focused && focusVisible),
-      onClick: handlerAll(props.onClick, () => {
-        if (label) return
-
-        inputRef.current?.click()
-
-        requestAnimationFrame(() => inputRef.current?.focus())
-      }),
+      ...props,
     }),
-    [formControlProps, rest, resolvedChecked, focused, focusVisible, label],
+    [checked, rest, id, dataProps],
   )
 
-  const getIconProps: PropGetter = useCallback(
+  const getTrackProps: PropGetter = useCallback(
     (props = {}) => ({
-      ...formControlProps,
+      "data-checked": dataAttr(checked),
+      ...dataProps,
       ...props,
-      "aria-hidden": true,
-      "data-active": dataAttr(active),
-      "data-checked": dataAttr(resolvedChecked),
-      "data-focus": dataAttr(focused),
-      "data-focus-visible": dataAttr(focused && focusVisible),
-      "data-hover": dataAttr(hovered),
-      "data-indeterminate": dataAttr(indeterminate),
-      onMouseDown: handlerAll(props.onMouseDown, (ev: React.MouseEvent) => {
-        if (focused) ev.preventDefault()
-
-        setActive(true)
-      }),
-      onMouseEnter: handlerAll(props.onMouseEnter, () => setHovered(true)),
-      onMouseLeave: handlerAll(props.onMouseLeave, () => setHovered(false)),
-      onMouseUp: handlerAll(props.onMouseUp, () => setActive(false)),
     }),
-    [
-      active,
-      resolvedChecked,
-      focused,
-      hovered,
-      focusVisible,
-      indeterminate,
-      formControlProps,
-    ],
+    [checked, dataProps],
+  )
+
+  const getThumbProps: PropGetter = useCallback(
+    (props = {}) => ({
+      "data-checked": dataAttr(checked),
+      ...dataProps,
+      ...props,
+    }),
+    [checked, dataProps],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    ({ ref, ...props } = {}) => ({
-      ...formControlProps,
-      ...props,
+    (props = {}) => ({
+      ...ariaProps,
+      ...dataProps,
       id,
-      ref: mergeRefs(inputRef, ref),
       type: "checkbox",
       name,
-      style: {
-        border: "0px",
-        clip: "rect(0px, 0px, 0px, 0px)",
-        height: "1px",
-        margin: "-1px",
-        overflow: "hidden",
-        padding: "0px",
-        position: "absolute",
-        whiteSpace: "nowrap",
-        width: "1px",
-      },
-      "aria-checked": indeterminate ? "mixed" : resolvedChecked,
-      checked: resolvedChecked,
+      style: visuallyHiddenAttributes.style,
+      checked,
       disabled,
       readOnly,
       required,
       role: "switch",
-      tabIndex,
+      tabIndex: interactive ? 0 : -1,
       value,
-      onBlur: handlerAll(props.onBlur, onBlur, () => setFocused(false)),
+      ...props,
+      ref: mergeRefs(inputRef, props.ref, ref),
+      onBlur: handlerAll(eventProps.onBlur, props.onBlur),
       onChange: handlerAll(props.onChange, onChange),
-      onFocus: handlerAll(props.onFocus, onFocus, () => setFocused(true)),
+      onFocus: handlerAll(eventProps.onFocus, props.onFocus),
       onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
-      onKeyUp: handlerAll(props.onKeyUp, onKeyUp),
     }),
     [
-      indeterminate,
-      formControlProps,
+      ariaProps,
+      dataProps,
       id,
       name,
-      value,
-      tabIndex,
-      required,
+      checked,
       disabled,
       readOnly,
-      resolvedChecked,
+      required,
+      interactive,
+      value,
+      ref,
+      eventProps,
       onChange,
-      onBlur,
-      onFocus,
       onKeyDown,
-      onKeyUp,
     ],
   )
 
   const getLabelProps: PropGetter<"span"> = useCallback(
     (props = {}) => ({
-      ...formControlProps,
+      ...dataProps,
+      "data-checked": dataAttr(checked),
       ...props,
-      "data-checked": dataAttr(resolvedChecked),
-      onMouseDown: handlerAll(props.onMouseDown, (ev: SyntheticEvent) => {
-        ev.preventDefault()
-        ev.stopPropagation()
-      }),
-      onTouchStart: handlerAll(props.onTouchStart, (ev: SyntheticEvent) => {
-        ev.preventDefault()
-        ev.stopPropagation()
-      }),
     }),
-    [resolvedChecked, formControlProps],
+    [dataProps, checked],
   )
 
   return {
-    active,
-    checked: resolvedChecked,
-    focused,
-    focusVisible,
-    hovered,
-    indeterminate,
-    getIconProps,
+    checked,
     getInputProps,
     getLabelProps,
     getRootProps,
+    getThumbProps,
+    getTrackProps,
   }
 }
 

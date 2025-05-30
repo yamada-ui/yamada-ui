@@ -1,14 +1,16 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import type { SubmitHandler } from "react-hook-form"
-import { useId } from "react"
+import { Fragment, useId } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { PropsTable } from "../../../storybook/components"
 import { useBoolean } from "../../hooks/use-boolean"
-import { COLOR_SCHEMES } from "../../utils"
+import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Button } from "../button"
-import { FieldLabel } from "../field"
+import { For } from "../for"
+import { MoonIcon, SunIcon } from "../icon"
 import { HStack } from "../stack"
 import { VStack } from "../stack"
+import { Text } from "../text"
 import { Switch } from "./"
 
 type Story = StoryFn<typeof Switch>
@@ -21,51 +23,28 @@ const meta: Meta<typeof Switch> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <Switch>basic</Switch>
-}
-
-export const Reverse: Story = () => {
-  return <Switch reverse>basic</Switch>
-}
-
-export const Size: Story = () => {
-  return (
-    <PropsTable variant="column" rows={["sm", "md", "lg"]}>
-      {(_, row, key) => <Switch key={key} size={row}>{`${row} size`}</Switch>}
-    </PropsTable>
-  )
+  return <Switch>Switch</Switch>
 }
 
 export const Variant: Story = () => {
   return (
-    <PropsTable variant="column" rows={["thick", "thin"]}>
-      {(_, row, key) => (
-        <Switch key={key} variant={row}>
-          {row}
+    <PropsTable columns={["thick", "thin"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => (
+        <Switch key={key} colorScheme={row} variant={column} defaultChecked>
+          Switch
         </Switch>
       )}
     </PropsTable>
   )
 }
 
-export const Label: Story = () => {
-  const id = useId()
-
+export const Size: Story = () => {
   return (
-    <HStack gap="sm">
-      <FieldLabel htmlFor={id} userSelect="none">
-        Please Click
-      </FieldLabel>
-      <Switch id={id} />
-    </HStack>
-  )
-}
-
-export const ColorScheme: Story = () => {
-  return (
-    <PropsTable columns={["thick", "thin"]} rows={COLOR_SCHEMES}>
+    <PropsTable columns={["sm", "md", "lg"]} rows={COLOR_SCHEMES}>
       {(column, row, key) => (
-        <Switch key={key} colorScheme={row} variant={column} defaultChecked />
+        <Switch key={key} colorScheme={row} size={column} defaultChecked>
+          Switch
+        </Switch>
       )}
     </PropsTable>
   )
@@ -73,32 +52,89 @@ export const ColorScheme: Story = () => {
 
 export const Disabled: Story = () => {
   return (
-    <>
-      <Switch disabled>disabled</Switch>
-      <Switch defaultChecked disabled>
-        disabled
-      </Switch>
-    </>
+    <For each={["thick", "thin"]}>
+      {(variant, index) => (
+        <Fragment key={index}>
+          <Switch variant={variant} disabled>
+            {toTitleCase(variant)}
+          </Switch>
+
+          <Switch variant={variant} defaultChecked disabled>
+            {toTitleCase(variant)}
+          </Switch>
+        </Fragment>
+      )}
+    </For>
   )
 }
 
 export const Readonly: Story = () => {
   return (
-    <>
-      <Switch readOnly>read only</Switch>
-      <Switch defaultChecked readOnly>
-        read only
-      </Switch>
-    </>
+    <For each={["thick", "thin"]}>
+      {(variant, index) => (
+        <Fragment key={index}>
+          <Switch variant={variant} readOnly>
+            {toTitleCase(variant)}
+          </Switch>
+
+          <Switch variant={variant} defaultChecked readOnly>
+            {toTitleCase(variant)}
+          </Switch>
+        </Fragment>
+      )}
+    </For>
+  )
+}
+
+export const Shape: Story = () => {
+  return (
+    <For each={["square", "rounded", "circle"] as const}>
+      {(shape, index) => (
+        <Fragment key={index}>
+          <Switch defaultChecked shape={shape}>
+            {toTitleCase(shape)}
+          </Switch>
+        </Fragment>
+      )}
+    </For>
+  )
+}
+
+export const Reverse: Story = () => {
+  return <Switch reverse>Switch</Switch>
+}
+
+export const Icon: Story = () => {
+  return (
+    <Switch
+      size="lg"
+      icon={{ off: <MoonIcon fontSize="sm" />, on: <SunIcon fontSize="sm" /> }}
+    >
+      Switch
+    </Switch>
+  )
+}
+
+export const CustomLabel: Story = () => {
+  const id = useId()
+
+  return (
+    <HStack gap="sm">
+      <Text as="label" htmlFor={id} userSelect="none">
+        Please Click
+      </Text>
+
+      <Switch id={id} />
+    </HStack>
   )
 }
 
 export const CustomControl: Story = () => {
-  const [isChecked, { toggle }] = useBoolean(false)
+  const [checked, { toggle }] = useBoolean(false)
 
   return (
-    <Switch checked={isChecked} onChange={toggle}>
-      custom control
+    <Switch checked={checked} onChange={toggle}>
+      Custom control
     </Switch>
   )
 }

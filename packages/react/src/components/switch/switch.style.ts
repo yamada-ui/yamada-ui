@@ -1,8 +1,7 @@
-import { defineComponentSlotStyle } from "../../core"
+import { defineComponentSlotStyle, focusRingStyle } from "../../core"
 
 export const switchStyle = defineComponentSlotStyle({
   base: {
-    input: {},
     label: {
       userSelect: "none",
     },
@@ -10,69 +9,41 @@ export const switchStyle = defineComponentSlotStyle({
       alignItems: "center",
       cursor: "pointer",
       display: "inline-flex",
-      gap: "0.5rem",
-      position: "relative",
-      verticalAlign: "top",
-      _readOnly: { cursor: "auto" },
+      gap: "2",
+      _readOnly: {
+        layerStyle: "readOnly",
+        pointerEvents: "none",
+      },
       _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
+        layerStyle: "disabled",
       },
     },
     thumb: {
+      alignItems: "center",
       bg: "white",
+      display: "inline-flex",
+      justifyContent: "center",
       position: "absolute",
       rounded: "inherit",
       transitionDuration: "fast",
-      transitionProperty: "transform",
+      transitionProperty: "background, transform",
       _checked: {
         transform: "translateX(100%)",
       },
     },
     track: {
+      "--focus-ring-color": "{colorScheme.outline}",
       alignItems: "center",
-      bg: ["blackAlpha.400", "whiteAlpha.300"],
+      bg: "bg.muted",
       boxSizing: "content-box",
       display: "inline-flex",
       flexShrink: 0,
+      position: "relative",
       rounded: "full",
       transitionDuration: "fast",
-      transitionProperty: "background-color, position",
-      _focusVisible: {
-        boxShadow: "outline",
-      },
-    },
-  },
-
-  sizes: {
-    sm: {
-      label: { fontSize: "sm" },
-      thumb: {
-        h: "3",
-        w: "3",
-      },
-      track: {
-        w: "6",
-      },
-    },
-    md: {
-      label: { fontSize: "md" },
-      thumb: {
-        h: "4",
-        w: "4",
-      },
-      track: {
-        w: "8",
-      },
-    },
-    lg: {
-      label: { fontSize: "lg" },
-      thumb: {
-        h: "5",
-        w: "5",
-      },
-      track: {
-        w: "10",
+      transitionProperty: "background",
+      _peerFocusVisible: {
+        ...focusRingStyle.outline,
       },
     },
   },
@@ -80,14 +51,15 @@ export const switchStyle = defineComponentSlotStyle({
   variants: {
     thin: {
       thumb: {
-        boxShadow: "dark-md",
+        boxShadow: "2xl",
         _checked: {
           bg: "colorScheme.solid",
         },
       },
       track: {
+        "--focus-ring-offset": "4px",
         _checked: {
-          bg: "colorScheme.bg",
+          bg: ["colorScheme.muted", "colorScheme.subtle"],
         },
       },
     },
@@ -106,6 +78,24 @@ export const switchStyle = defineComponentSlotStyle({
     },
   },
 
+  sizes: {
+    sm: {
+      label: { fontSize: "sm" },
+      thumb: { boxSize: "3" },
+      track: { w: "6" },
+    },
+    md: {
+      label: { fontSize: "md" },
+      thumb: { boxSize: "4" },
+      track: { w: "8" },
+    },
+    lg: {
+      label: { fontSize: "lg" },
+      thumb: { boxSize: "5" },
+      track: { w: "10" },
+    },
+  },
+
   props: {
     /**
      * Change switch label from right to left.
@@ -118,6 +108,23 @@ export const switchStyle = defineComponentSlotStyle({
       },
       true: {
         root: { flexDirection: "row-reverse" },
+      },
+    },
+    /**
+     * The shape of the switch.
+     *
+     * @default circle
+     */
+    shape: {
+      circle: {
+        track: { rounded: "full" },
+      },
+      rounded: {
+        thumb: { rounded: "l1" },
+        track: { rounded: "l2" },
+      },
+      square: {
+        track: { rounded: "0" },
       },
     },
   },
@@ -170,6 +177,7 @@ export const switchStyle = defineComponentSlotStyle({
   defaultProps: {
     size: "md",
     variant: "thick",
+    shape: "circle",
   },
 })
 

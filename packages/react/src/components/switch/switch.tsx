@@ -1,11 +1,10 @@
-import type { InputHTMLAttributes, ReactElement, Ref } from "react"
+import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
 import type { SwitchStyle } from "./switch.style"
 import type { UseSwitchProps } from "./use-switch"
-import { cloneElement } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { dataAttr } from "../../utils"
+import { isObject } from "../../utils"
 import { switchStyle } from "./switch.style"
 import { useSwitch } from "./use-switch"
 
@@ -17,23 +16,16 @@ export interface SwitchIconProps {
 }
 
 export interface SwitchProps
-  extends Merge<
-      Omit<HTMLStyledProps<"label">, "ref">,
-      Omit<UseSwitchProps, "isIndeterminate">
-    >,
+  extends Merge<HTMLStyledProps<"label">, UseSwitchProps>,
     ThemeProps<SwitchStyle> {
-  /**
-   * Ref of input element.
-   */
-  ref?: Ref<HTMLInputElement>
   /**
    * The switch icon to use.
    */
-  icon?: ReactElement<SwitchIconProps>
+  icon?: ReactNode | { off: ReactNode; on: ReactNode }
   /**
    * Props for switch input element.
    */
-  inputProps?: InputHTMLAttributes<HTMLInputElement>
+  inputProps?: HTMLStyledProps<"input">
   /**
    * Props for switch label element.
    */
@@ -53,35 +45,29 @@ export const {
  * @see https://yamada-ui.com/components/switch
  */
 export const Switch = withProvider<"input", SwitchProps>(
-  ({ ref, children, icon, inputProps, labelProps, ...computedProps }) => {
+  ({ children, icon, inputProps, labelProps, ...props }) => {
     const {
-      active,
       checked,
-      focused,
-      hovered,
-      getIconProps,
       getInputProps,
       getLabelProps,
       getRootProps,
-    } = useSwitch({ selectOnEnter: true, ...computedProps })
-    const cloneIcon = icon
-      ? cloneElement(icon, {
-          active,
-          checked,
-          focused,
-          hovered,
-        })
-      : null
+      getThumbProps,
+      getTrackProps,
+    } = useSwitch(props)
 
     return (
       <styled.label {...getRootProps()}>
-        <SwitchInput {...getInputProps({ ref, ...inputProps })} />
+        <styled.input data-peer {...getInputProps(inputProps)} />
 
-        {cloneIcon ?? (
-          <SwitchTrack {...getIconProps()}>
-            <SwitchThumb data-checked={dataAttr(checked)} />
-          </SwitchTrack>
-        )}
+        <SwitchTrack {...getTrackProps()}>
+          <SwitchThumb {...getThumbProps()}>
+            {icon && isObject(icon) && "on" in icon
+              ? checked
+                ? icon.on
+                : icon.off
+              : icon}
+          </SwitchThumb>
+        </SwitchTrack>
 
         {children ? (
           <SwitchLabel {...getLabelProps(labelProps)}>{children}</SwitchLabel>
@@ -95,10 +81,6 @@ export const Switch = withProvider<"input", SwitchProps>(
 interface SwitchThumbProps extends HTMLStyledProps {}
 
 const SwitchThumb = withContext<"div", SwitchThumbProps>("div", "thumb")()
-
-interface SwitchInputProps extends HTMLStyledProps<"input"> {}
-
-const SwitchInput = withContext<"input", SwitchInputProps>("input", "input")()
 
 interface SwitchTrackProps extends HTMLStyledProps {}
 

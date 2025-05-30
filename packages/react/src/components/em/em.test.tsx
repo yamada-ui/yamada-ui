@@ -6,9 +6,8 @@ describe("<Em />", () => {
     await a11y(<Em>Unleash the Power</Em>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Em.displayName).toBe("Em")
-    expect(Em.__ui__).toBe("Em")
   })
 
   test("sets `className` correctly", () => {

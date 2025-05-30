@@ -20,13 +20,13 @@ import { FocusLock } from "@yamada-ui/react"
 `FocusLock`は、子要素のフォーカスを制御して、フォーカスをその範囲内にロックします。
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Collapse isOpen={isOpen}>
+    <Collapse open={open}>
       <FocusLock>
         <VStack py="md" px="px">
           <Input placeholder="This is Input" />

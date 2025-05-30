@@ -5,19 +5,19 @@ import type {
   CSSProperties,
   FeatureData,
   Properties,
-  UIProperties,
+  StyledProperties,
 } from "."
+import type { StyleConfig } from "./styled-props"
 import type { TransformOptions } from "./transform-props"
-import type { StyleConfig } from "./ui-props"
-import { isUndefined, pseudoSelectors, toArray } from "@yamada-ui/react"
+import { conditionSelectors, isUndefined, toArray } from "@yamada-ui/react"
 import { prettier } from "../utils"
 import { checkProps } from "./check"
 import { generateConfig } from "./config"
 import { overrideTypes } from "./override-types"
 import { shorthandProps } from "./shorthand-props"
+import { additionalProps, atRuleProps, styledProps } from "./styled-props"
 import { tokenMap, tokenPropertyMap } from "./tokens"
 import { transformMap } from "./transform-props"
-import { additionalProps, atRuleProps, uiProps } from "./ui-props"
 
 const hasTransform = (
   targetTransform: Transforms,
@@ -42,7 +42,7 @@ const generateType = ({
 }) => {
   const overrideType = prop ? overrideTypes[prop] : undefined
 
-  let result = !variableLength || token ? "CSSToken<>" : ""
+  let result = !variableLength || token ? "StyleValue<>" : ""
 
   if (overrideType) {
     result = addType(result, overrideType)
@@ -57,7 +57,7 @@ const generateType = ({
       if (type?.length) {
         result = addType(result, type.join(" | "))
       } else {
-        result = addType(result, "StringLiteral")
+        result = addType(result, "AnyString")
       }
     }
 
@@ -151,12 +151,12 @@ export const generateStyles = async (
 
   checkProps(cssCompatData)
 
-  pseudoSelectors.forEach((selector) => {
+  conditionSelectors.forEach((selector) => {
     const transforms = transformMap[selector]
 
     if (!transforms) return
 
-    const config = generateConfig({ properties: selector, transforms })()
+    const config = generateConfig({ properties: [selector], transforms })()
 
     pseudoStyles.push(`"${selector}": ${config}`)
   })
@@ -165,7 +165,7 @@ export const generateStyles = async (
     Object.entries(cssCompatData).filter(([name, data]) => {
       const isExists = [
         ...Object.keys(additionalProps),
-        ...Object.keys(uiProps),
+        ...Object.keys(styledProps),
       ].includes(name)
 
       if (isExists) {
@@ -181,12 +181,12 @@ export const generateStyles = async (
   )
 
   Object.entries(omittedCssCompatData).forEach(([_prop, data]) => {
-    const prop = _prop as CSSProperties | UIProperties
+    const prop = _prop as CSSProperties | StyledProperties
     const type = data.type
     const token = tokenMap[prop]
     const shorthands = shorthandProps[prop]
     const transforms = transformMap[prop]
-    const config = generateConfig({ properties: prop, token, transforms })()
+    const config = generateConfig({ properties: [prop], token, transforms })()
     const doc = generateDoc(data)()
     const computedType = generateType({ type, prop, token, transforms })
 
@@ -201,7 +201,9 @@ export const generateStyles = async (
 
     if (shorthands) {
       const shorthandStyle =
-        config === true ? `{ properties: "${prop}" }` : `standardStyles.${prop}`
+        config === true
+          ? `{ properties: ["${prop}"] }`
+          : `standardStyles.${prop}`
 
       shorthands.forEach((shorthandProp) => {
         if (token) tokenProps[token]?.push(shorthandProp)
@@ -283,7 +285,9 @@ export const generateStyles = async (
 
     if (shorthands) {
       const shorthandStyle =
-        config === true ? `{ properties: "${prop}" }` : `standardStyles.${prop}`
+        config === true
+          ? `{ properties: ["${prop}"] }`
+          : `standardStyles.${prop}`
 
       shorthands.forEach((shorthandProp) => {
         if (token) tokenProps[token]?.push(shorthandProp)
@@ -297,7 +301,7 @@ export const generateStyles = async (
   Object.entries<StyleConfig>(additionalProps).forEach((entry) =>
     addStyles(entry, standardStyles),
   )
-  Object.entries<StyleConfig>(uiProps).forEach((entry) =>
+  Object.entries<StyleConfig>(styledProps).forEach((entry) =>
     addStyles(entry, uiStyles),
   )
   Object.entries<StyleConfig>(atRuleProps).forEach((entry) =>
@@ -322,10 +326,10 @@ export const generateStyles = async (
   )
 
   const content = `
-    import type { StringLiteral } from "@yamada-ui/utils"
     import type * as CSS from "csstype"
+    import type { AnyString } from "../utils"
     import type { StyleConfigs } from "./config"
-    import type { CSSObject, CSSToken } from "./css"
+    import type { CSSObject, StyleValue } from "./css"
     import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"
     import { transforms } from "./config"
     import { pipe } from "./config/utils"

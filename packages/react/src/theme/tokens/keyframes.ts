@@ -3,18 +3,18 @@ import { defineTokens } from "../../core"
 export const keyframes = defineTokens.keyframes({
   bounce: {
     "0%, 100%": {
-      animationTimingFunction: "cubic-bezier(0.8,0,1,1)",
+      animationTimingFunction: "cubic-bezier(0.8, 0, 1, 1)",
       transform: "translateY(-25%)",
     },
     "50%": {
-      animationTimingFunction: "cubic-bezier(0,0,0.2,1)",
+      animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
       transform: "none",
     },
   },
   ping: {
     "75%, 100%": {
       opacity: "0",
-      transform: "scale(2)",
+      transform: "scale(var(--animation-scale, 2))",
     },
   },
   pulse: {

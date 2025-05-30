@@ -2,11 +2,11 @@ import type { DocsContainerProps } from "@storybook/blocks"
 import type { Preview } from "@storybook/react"
 import type { FC, PropsWithChildren } from "react"
 import { DocsContainer } from "@storybook/blocks"
-import { addons } from "@storybook/preview-api"
+import { addons, useGlobals } from "@storybook/preview-api"
 import { themes } from "@storybook/theming"
 import { useEffect, useState } from "react"
 import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
-import { UIProvider, useColorMode, VStack } from "../src"
+import { isRtl, UIProvider, useColorMode, VStack } from "../src"
 import { customThemes } from "./themes"
 
 const channel = addons.getChannel()
@@ -46,6 +46,16 @@ const App: FC<PropsWithChildren> = ({ children }) => {
 }
 
 const preview: Preview = {
+  globalTypes: {},
+  initialGlobals: {
+    locale: "en-US",
+    locales: {
+      "en-US": { icon: "🇺🇸", right: "en-US", title: "English" },
+      "ja-JP": { icon: "🇯🇵", right: "ja-JP", title: "日本語" },
+      // eslint-disable-next-line perfectionist/sort-objects
+      "ar-EG": { icon: "🇸🇦", right: "ar-EG", title: "العربية" },
+    },
+  },
   parameters: {
     backgrounds: { disable: true },
     controls: { expanded: true },
@@ -79,8 +89,13 @@ const preview: Preview = {
 
   decorators: [
     (Story) => {
+      const [{ locale }] = useGlobals()
+      const dir = isRtl(locale) ? "rtl" : "ltr"
+
+      document.documentElement.dir = dir
+
       return (
-        <UIProvider>
+        <UIProvider dir={dir} locale={locale}>
           <App>
             <Story />
           </App>

@@ -7,6 +7,20 @@ describe("<Slide />", () => {
     await a11y(<Slide />)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(Slide.displayName).toBe("Slide")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Slide>Slide</Slide>)
+    expect(screen.getByText("Slide")).toHaveClass("ui-slide")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Slide>Slide</Slide>)
+    expect(screen.getByText("Slide").tagName).toBe("DIV")
+  })
+
   test("applies default styles correctly", async () => {
     render(<Slide>Slide</Slide>)
 

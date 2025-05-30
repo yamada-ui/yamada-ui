@@ -1,13 +1,13 @@
 import type { Dict } from "../../utils"
+import type { ConditionProperty } from "../conditions"
 import type { StyleConfig } from "../config"
-import type { PseudoProperty } from "../pseudos"
 import type { StyleProperty, VariableLengthProperty } from "../styles"
 import type { StyledTheme, UsageTheme } from "../theme"
 import type { Breakpoints } from "./breakpoint"
-import type { CSSObjectOrFunc } from "./index.types"
-import { isArray, isObject, isString, merge, runIfFunc } from "../../utils"
-import { colorMix } from "../config"
-import { pseudos } from "../pseudos"
+import type { CSSObjectOrFunction } from "./index.types"
+import { isArray, isObject, isString, merge, runIfFn } from "../../utils"
+import { conditions } from "../conditions"
+import { colorMix, isCSSToken } from "../config"
 import { styles, variableLengthProperties } from "../styles"
 import { getColorSchemeVar, getVar, transformInterpolation } from "./var"
 
@@ -29,12 +29,8 @@ function insertImportant(value: any, style?: StyleConfig): any {
   } else if (isObject(value)) {
     if (!style?.properties) return value
 
-    if (isArray(style.properties)) {
-      for (const property of style.properties) {
-        value[property] += " !important"
-      }
-    } else {
-      value[style.properties] += " !important"
+    for (const property of style.properties) {
+      value[property] += " !important"
     }
   }
 
@@ -72,7 +68,7 @@ function expandColorModeArray(
     computedCSS[key] = value[0]
   }
 
-  computedCSS[pseudos._dark] = { [key]: value[1] }
+  computedCSS[conditions._dark] = { [key]: value[1] }
 
   return computedCSS
 }
@@ -143,7 +139,7 @@ function expandCSS(theme: StyledTheme<UsageTheme>) {
     let computedCSS: Dict = {}
 
     for (let [key, value] of Object.entries(css)) {
-      value = runIfFunc(value, theme)
+      value = runIfFn(value, theme)
 
       if (value == null) continue
 
@@ -186,41 +182,43 @@ function expandCSS(theme: StyledTheme<UsageTheme>) {
 }
 
 function valueToVar(theme: StyledTheme<UsageTheme>) {
-  return function (value: any) {
-    return transformInterpolation(value, (value, fallbackValue) => {
-      if (value.includes("colorScheme.")) {
-        return getColorSchemeVar(theme)(value)
-      } else if (value.includes("colors.")) {
-        return colorMix(value, { fallback: fallbackValue, theme })
-      } else {
-        if (
-          isObject(theme.__cssMap) &&
-          value in theme.__cssMap &&
-          theme.__cssMap[value]?.ref
-        )
-          return theme.__cssMap[value].ref
+  return function (prop: string, value: any) {
+    const result = transformInterpolation(
+      value,
+      function (value: string, fallbackValue?: string) {
+        if (value.includes("colorScheme.")) {
+          return getColorSchemeVar(theme)(value)
+        } else if (value.includes("colors.")) {
+          return colorMix(value, { fallback: fallbackValue, theme })
+        } else if (isCSSToken(theme)(value)) {
+          return theme.__cssMap![value]!.ref
+        } else {
+          return getVar(value.replace(".", "-"), fallbackValue)
+        }
+      },
+    )
 
-        return fallbackValue || getVar(theme)(value)
+    if (prop.startsWith("--") && isString(result)) {
+      if (result.includes("colorScheme.")) {
+        return getColorSchemeVar(theme)(result)
+      } else if (result.includes("colors.")) {
+        return colorMix(result, { theme })
+      } else if (isCSSToken(theme)(result)) {
+        return theme.__cssMap![result]!.ref
+      } else {
+        return result
       }
-    })
+    } else {
+      return result
+    }
   }
 }
 
-function mergeCSS(
-  prev: Dict,
-  value: any,
-  prop: string,
-  properties?: string | string[],
-) {
+function mergeCSS(prev: Dict, value: any, prop: string, properties?: string[]) {
   if (properties) {
-    if (isArray(properties)) {
-      for (const property of properties) {
-        prev[property] = prev[property] ?? {}
-        prev[property] = merge(prev[property], value)
-      }
-    } else {
-      prev[properties] = prev[properties] ?? {}
-      prev[properties] = merge(prev[properties], value)
+    for (const property of properties) {
+      prev[property] = prev[property] ?? {}
+      prev[property] = merge(prev[property], value)
     }
   } else {
     prev[prop] = prev[prop] ?? {}
@@ -234,15 +232,11 @@ function insertCSS(
   prev: Dict,
   value: any,
   prop: string,
-  properties?: string | string[],
+  properties?: string[],
 ) {
   if (properties) {
-    if (isArray(properties)) {
-      for (const property of properties) {
-        prev[property] = value
-      }
-    } else {
-      prev[properties] = value
+    for (const property of properties) {
+      prev[property] = value
     }
   } else {
     prev[prop] = value
@@ -252,26 +246,26 @@ function insertCSS(
 }
 
 export function css(theme: StyledTheme<UsageTheme>) {
-  return function (cssOrFunc: CSSObjectOrFunc) {
-    function createCSS(cssOrFunc: CSSObjectOrFunc): Dict {
-      const cssObj = runIfFunc(cssOrFunc, theme)
+  return function (cssOrFn: CSSObjectOrFunction) {
+    function createCSS(cssOrFn: CSSObjectOrFunction): Dict {
+      const cssObj = runIfFn(cssOrFn, theme)
       const computedCSS = expandCSS(theme)(cssObj)
 
       let prev: Dict = {}
 
       for (let [prop, value] of Object.entries(computedCSS)) {
-        value = valueToVar(theme)(value)
+        value = valueToVar(theme)(prop, value)
 
         if (value == null) continue
 
-        if (prop in pseudos) prop = pseudos[prop as PseudoProperty]
+        if (prop in conditions) prop = conditions[prop as ConditionProperty]
 
         let style = styles[prop as StyleProperty] as
           | StyleConfig
           | true
           | undefined
 
-        if (style === true) style = { properties: prop }
+        if (style === true) style = { properties: [prop] }
 
         const options = { css, prev, properties: style?.properties, theme }
 
@@ -308,7 +302,7 @@ export function css(theme: StyledTheme<UsageTheme>) {
       return prev
     }
 
-    return createCSS(cssOrFunc)
+    return createCSS(cssOrFn)
   }
 }
 

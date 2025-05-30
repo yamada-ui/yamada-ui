@@ -1,12 +1,12 @@
 import type { HTMLProps, PropGetter, StyleValue } from "../../core"
 import type { UseModalProps } from "../modal"
-import type { MotionProps } from "../motion"
-import { handlerAll } from "@yamada-ui/utils"
+import type { HTMLMotionProps } from "../motion"
 import { useCallback, useMemo } from "react"
 import { useValue } from "../../hooks/use-value"
+import { cast, handlerAll } from "../../utils"
 import { useModal } from "../modal"
 
-type DragEndEventHandler = Required<MotionProps>["onDragEnd"]
+type DragEndEventHandler = Required<HTMLMotionProps>["onDragEnd"]
 
 export interface UseDrawerProps extends UseModalProps {
   /**
@@ -71,7 +71,7 @@ export const useDrawer = ({
     ...rest,
   })
 
-  const drag = useMemo<MotionProps["drag"]>(() => {
+  const drag = useMemo<HTMLMotionProps["drag"]>(() => {
     if (!closeOnDrag) return false
 
     switch (placement) {
@@ -133,16 +133,16 @@ export const useDrawer = ({
     [placement, dragVelocity, dragOffset, onClose],
   )
 
-  const getContentProps: PropGetter<MotionProps<"section">> = useCallback(
+  const getContentProps: PropGetter<HTMLMotionProps<"section">> = useCallback(
     (props = {}) => ({
       drag,
       dragConstraints: getDragRestriction(dragConstraints),
       dragElastic: getDragRestriction(dragElastic),
       dragMomentum: false,
       dragSnapToOrigin: true,
-      ...(getModalContentProps(
-        props as HTMLProps<"section">,
-      ) as MotionProps<"section">),
+      ...cast<HTMLMotionProps<"section">>(
+        getModalContentProps(cast<HTMLProps<"section">>(props)),
+      ),
       onDragEnd: handlerAll(props.onDragEnd, onDragEnd),
     }),
     [

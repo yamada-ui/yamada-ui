@@ -11,7 +11,7 @@ export interface ContextMenuProps
 /**
  * `ContextMenu` is triggered by a right click and displays a menu at the pointer's position.
  *
- * @see Docs https://yamada-ui.com/components/overlay/context-menu
+ * @see https://yamada-ui.com/components/overlay/context-menu
  */
 export const ContextMenu: FC<ContextMenuProps> = (props) => {
   const [styles, mergedProps] = useComponentMultiStyle("ContextMenu", props)

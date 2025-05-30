@@ -4,6 +4,6 @@ import { component, Icon } from "../icon"
 /**
  * `TouchpadOffIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const TouchpadOffIcon = component(Icon)({ as: TouchpadOff })

@@ -1,12 +1,12 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { ScrollAreaStyle } from "./scroll-area.style"
 import type { UseScrollAreaProps } from "./use-scroll-area"
-import { createComponent, ui } from "../../core"
+import { createComponent, styled } from "../../core"
 import { scrollAreaStyle } from "./scroll-area.style"
 import { useScrollArea } from "./use-scroll-area"
 
 export interface ScrollAreaProps
-  extends HTMLUIProps,
+  extends HTMLStyledProps,
     ThemeProps<ScrollAreaStyle>,
     UseScrollAreaProps {}
 
@@ -22,10 +22,10 @@ export const {
 /**
  * `ScrollArea` is a component that displays a customized scrollbar.
  *
- * @see Docs https://yamada-ui.com/components/scroll-area
+ * @see https://yamada-ui.com/components/scroll-area
  */
 export const ScrollArea = withContext(({ children, ...rest }) => {
   const { getRootProps } = useScrollArea(rest)
 
-  return <ui.div {...getRootProps()}>{children}</ui.div>
+  return <styled.div {...getRootProps()}>{children}</styled.div>
 })()

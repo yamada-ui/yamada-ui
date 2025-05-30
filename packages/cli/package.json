@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/cli",
   "type": "module",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "The official CLI for Yamada UI projects",
   "keywords": [
     "theme",
@@ -40,25 +40,25 @@
     "clean": "rimraf dist .turbo .eslintcache",
     "build": "tsup",
     "typecheck": " tsc --noEmit",
-    "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config",
-    "format": "prettier --ignore-path ../../.prettierignore --check . --cache"
+    "lint": "eslint . --max-warnings=0 --cache",
+    "format": "prettier . --ignore-path ../../.prettierignore --check --cache"
   },
   "dependencies": {
-    "@clack/prompts": "^0.8.2",
+    "@clack/prompts": "^0.10.1",
     "chokidar": "^4.0.3",
     "cli-check-node": "^1.3.4",
-    "cli-handle-unhandled": "^1.1.1",
-    "commander": "^12.1.0",
-    "esbuild": "^0.24.0",
-    "glob": "^11.0.0",
+    "cli-handle-unhandled": "^1.1.2",
+    "commander": "^13.1.0",
+    "esbuild": "^0.25.4",
+    "glob": "^11.0.2",
     "node-eval": "^2.0.0",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.3",
     "tar": "^7.4.3",
-    "typescript": "^5.7.2"
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@types/update-notifier": "6.0.8",
-    "chalk": "^5.4.0",
+    "chalk": "^5.4.1",
     "update-notifier": "^7.3.1"
   },
   "tsup": {

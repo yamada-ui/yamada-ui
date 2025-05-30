@@ -1,7 +1,7 @@
 import type { Options } from "prettier"
 import { RequestError } from "@octokit/request-error"
 import { Octokit } from "@octokit/rest"
-import { isArray, toCamelCase } from "@yamada-ui/react"
+import { isArray, toCamelCase } from "@yamada-ui/utils"
 import { config } from "dotenv"
 import path from "path"
 import { format, resolveConfig } from "prettier"

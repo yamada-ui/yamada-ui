@@ -1,6 +1,6 @@
 import type { CompatData, CompatStatement } from "@mdn/browser-compat-data"
 import type * as CSS from "csstype"
-import type { additionalProps, atRuleProps, uiProps } from "./ui-props"
+import type { additionalProps, atRuleProps, styledProps } from "./styled-props"
 import * as p from "@clack/prompts"
 import bcd from "@mdn/browser-compat-data"
 import {
@@ -24,15 +24,12 @@ import { generateStyles } from "./styles"
 
 export const OUT_PATH = "packages/react/src/core/styles.ts"
 
-export type Properties = CSSProperties | UIProperties
-export type CSSProperties =
-  | keyof CSS.ObsoleteProperties
-  | keyof CSS.StandardProperties
-  | keyof CSS.SvgProperties
-export type UIProperties =
+export type Properties = CSSProperties | StyledProperties
+export type CSSProperties = keyof CSS.PropertiesFallback
+export type StyledProperties =
   | keyof typeof additionalProps
   | keyof typeof atRuleProps
-  | keyof typeof uiProps
+  | keyof typeof styledProps
 
 export type FeatureData = (typeof features)[number]
 export type BrowserIdentifier = keyof FeatureData["status"]["support"]
@@ -252,8 +249,6 @@ const excludeProperties = (
 }
 
 const main = async () => {
-  await writeFile("test.json", JSON.stringify(features, null, 2))
-
   p.intro(c.magenta(`Generating Yamada UI styles`))
 
   const s = p.spinner()
@@ -288,7 +283,7 @@ const main = async () => {
 
     const computedCSSCompatData = Object.fromEntries(
       Object.entries(excludedCSSCompatData).map(([name, data]) => {
-        const { type = "string & {}" } = cssTypes[name] ?? {}
+        const { type = "AnyString" } = cssTypes[name] ?? {}
 
         const computedData = { ...data, type }
 
@@ -317,7 +312,7 @@ const main = async () => {
 
       const message = duplicatedList.d(table).toString()
 
-      p.note(message, `Duplicated properties that are present in "UIProps"`)
+      p.note(message, `Duplicated properties that are present in "StyledProps"`)
     }
 
     const end = process.hrtime.bigint()

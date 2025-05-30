@@ -1,5 +1,4 @@
-import type { FC, ThemeProps } from "../../core"
-import type { Merge } from "../../utils"
+import type { FC, ThemeProps, WithoutThemeProps } from "../../core"
 import type { GroupProps } from "../group"
 import type { ButtonProps } from "./button"
 import type { ButtonStyle } from "./button.style"
@@ -9,7 +8,8 @@ import { ButtonPropsContext } from "./button"
 import { IconButtonPropsContext } from "./icon-button"
 
 export interface ButtonGroupProps
-  extends Merge<GroupProps, ThemeProps<ButtonStyle>> {
+  extends WithoutThemeProps<GroupProps, ButtonStyle>,
+    ThemeProps<ButtonStyle> {
   /**
    * If `true`, all wrapped button will be disabled.
    *
@@ -43,6 +43,3 @@ export const ButtonGroup: FC<ButtonGroupProps> = ({
     </ButtonPropsContext>
   )
 }
-
-ButtonGroup.displayName = "ButtonGroup"
-ButtonGroup.__ui__ = "ButtonGroup"

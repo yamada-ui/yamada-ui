@@ -35,6 +35,36 @@ describe("<InfiniteScrollArea />", () => {
     await a11y(container)
   })
 
+  test("sets `displayName` correctly", () => {
+    expect(InfiniteScrollArea.displayName).toBe("InfiniteScrollAreaRoot")
+  })
+
+  test("sets `className` correctly", () => {
+    const { container } = render(
+      <InfiniteScrollArea loading={<>Loading…</>}>
+        {Array(50)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index}>{index}</div>
+          ))}
+      </InfiniteScrollArea>,
+    )
+    expect(container.firstChild).toHaveClass("ui-infinite-scroll-area__root")
+  })
+
+  test("renders HTML tag correctly", () => {
+    const { container } = render(
+      <InfiniteScrollArea loading={<>Loading…</>}>
+        {Array(50)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index}>{index}</div>
+          ))}
+      </InfiniteScrollArea>,
+    )
+    expect(container.firstChild?.nodeName).toBe("DIV")
+  })
+
   test("InfiniteScrollArea renders with initialLoad correctly", () => {
     const MyComponent = () => {
       const [count, setCount] = useState<number>(50)

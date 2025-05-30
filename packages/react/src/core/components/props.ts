@@ -1,14 +1,19 @@
 import type { Dict, Merge } from "../../utils"
+import { useMemo } from "react"
+import isEqual from "react-fast-compare"
 import {
   cx,
   handlerAll,
   isArray,
+  isEmptyObject,
   isFunction,
+  isObject,
   isUndefined,
   merge,
   mergeRefs,
+  omitObject,
 } from "../../utils"
-import { pseudoProperties } from "../pseudos"
+import { conditionProperties } from "../conditions"
 import { styleProperties } from "../styles"
 
 type MergeAll<Y extends Dict[]> = Y extends [infer M]
@@ -24,7 +29,7 @@ function isEvent(key: string) {
 }
 
 export const cssProps = new Set<string>([
-  ...pseudoProperties,
+  ...conditionProperties,
   ...styleProperties,
 ])
 
@@ -35,6 +40,8 @@ export function createShouldForwardProp(
 ): ShouldForwardProp {
   return function (prop: string): boolean {
     if (forwardProps?.includes(prop)) return true
+
+    if (prop.startsWith("--")) return false
 
     return !cssProps.has(prop)
   }
@@ -140,4 +147,42 @@ export function chainProps<Y extends Dict = Dict>(
       }
     }) as CallbackProps<Y>
   }
+}
+
+export function isEqualProps<
+  Y extends Dict,
+  M extends Dict,
+  D extends keyof M | keyof Y,
+>(a: Y, b: M, omitKeys: D[] = []) {
+  return isEqual(
+    omitObject(a, omitKeys as (keyof Y)[]),
+    omitObject(b, omitKeys as (keyof M)[]),
+  )
+}
+
+export function extractProps(props: Dict, keys: readonly string[] | string[]) {
+  let result: Dict = {}
+
+  Object.entries(props).forEach(([key, value]) => {
+    if (!cssProps.has(key)) return
+
+    if (keys.includes(key)) {
+      result = merge(result, { [key]: value })
+    } else if (isObject(value)) {
+      value = extractProps(value, keys)
+
+      if (isEmptyObject(value)) return
+
+      result = merge(result, { [key]: value })
+    }
+  })
+
+  return result
+}
+
+export function useExtractProps(
+  props: Dict,
+  keys: readonly string[] | string[],
+) {
+  return useMemo(() => extractProps(props, keys), [props, keys])
 }

@@ -7,9 +7,8 @@ describe("<Collapse />", () => {
     await a11y(<Collapse />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Collapse.displayName).toBe("Collapse")
-    expect(Collapse.__ui__).toBe("Collapse")
   })
 
   test("sets `className` correctly", () => {

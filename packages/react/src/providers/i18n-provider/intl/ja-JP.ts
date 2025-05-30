@@ -28,4 +28,7 @@ export default {
   tag: {
     "Close tag": "タグを閉じる",
   },
+  toggle: {
+    "Toggle button": "トグルボタン",
+  },
 } as const

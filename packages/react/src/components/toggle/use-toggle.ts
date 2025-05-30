@@ -4,6 +4,7 @@ import type { Merge } from "../../utils"
 import type { FieldProps } from "../field"
 import { useCallback, useMemo, useRef } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
+import { useI18n } from "../../providers/i18n-provider"
 import {
   ariaAttr,
   dataAttr,
@@ -56,6 +57,9 @@ export const useToggle = <Y extends number | string = string>(
     onChange: onChangeGroup,
     onChangeMapRef,
   } = useToggleGroupContext() ?? {}
+
+  const { t } = useI18n("toggle")
+
   const {
     props: {
       id,
@@ -163,7 +167,7 @@ export const useToggle = <Y extends number | string = string>(
       ...dataProps,
       type: "button",
       "aria-disabled": ariaAttr(!interactive),
-      "aria-label": value?.toString() ?? "Toggle button",
+      "aria-label": value?.toString() ?? t("Toggle button"),
       "aria-pressed": trulyChecked,
       "data-active": dataAttr(active),
       "data-checked": dataAttr(trulyChecked),
@@ -182,6 +186,7 @@ export const useToggle = <Y extends number | string = string>(
       rest,
       onClick,
       interactive,
+      t,
     ],
   )
 

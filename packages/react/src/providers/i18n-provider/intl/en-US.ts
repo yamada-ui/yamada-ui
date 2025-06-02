@@ -9,6 +9,10 @@ export default {
   closeButton: {
     Close: "Close",
   },
+  loading: {
+    "loading...": "loading...",
+    percent: "percent",
+  },
   modal: {
     "Close modal": "Close modal",
     "Open modal": "Open modal",

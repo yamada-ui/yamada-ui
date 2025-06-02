@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useRef } from "react"
 import { Button } from "../button"
 import { FormControl } from "../form-control"

@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { Box } from "../../components/box"
 import { useBreakpointState } from "./use-breakpoint-state"
 import { useUpdateBreakpointEffect } from "./use-update-breakpoint-effect"

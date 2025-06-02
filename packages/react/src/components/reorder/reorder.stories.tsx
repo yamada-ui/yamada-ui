@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useMemo } from "react"
 import { Reorder, ReorderItem, ReorderRoot, ReorderTrigger } from "."
 import { PropsTable } from "../../../storybook/components"

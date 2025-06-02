@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { burger } from "@lucide/lab"
 import { HStack } from "../stack"
 import { GhostIcon, LucideIcon } from "./"

@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { For } from "../for"
 import { Mark } from "../mark"
 import { Text } from "../text"

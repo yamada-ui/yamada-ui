@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useEffect, useMemo, useRef } from "react"
 import { GripVerticalIcon } from "../icon"
 import { Resizable } from "./"

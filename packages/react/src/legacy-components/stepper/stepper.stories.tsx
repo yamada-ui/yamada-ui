@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { Steps } from "./"
 import { COLOR_SCHEMES } from "@yamada-ui/utils"
 import { Box } from "../box"

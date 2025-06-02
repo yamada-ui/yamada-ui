@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useOS } from "."
 import { Tag } from "../../components/tag"
 import { Text } from "../../components/text"

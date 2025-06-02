@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Fragment, useRef } from "react"
 import { ScrollArea } from "."
 import { toTitleCase } from "../../utils"

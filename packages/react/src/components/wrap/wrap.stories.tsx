@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { DEFAULT_COLOR_SCHEMES } from "../../utils"
 import { Box } from "../box"
 import { For } from "../for"

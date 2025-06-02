@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useMemo } from "react"
 import { Box } from "../../components/box"
 import { useCSS } from "./use-css"

@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useRef, useState } from "react"
 import { useOutsideClick } from "."
 import { Button } from "../../components/button"

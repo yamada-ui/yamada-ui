@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
 import type { SegmentedControlItem } from "."
 import { COLOR_SCHEMES } from "@yamada-ui/utils"

@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useRef, useState } from "react"
 import { useInfiniteScroll } from "."
 import { Button } from "../../components/button"

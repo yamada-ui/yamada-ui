@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { FC, HTMLAttributes, ReactNode } from "react"
 import { Slot, Slottable } from "./"
 

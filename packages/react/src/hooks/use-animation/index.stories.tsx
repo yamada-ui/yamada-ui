@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useAnimation, useDynamicAnimation } from "."
 import { Box } from "../../components/box"
 import { Button } from "../../components/button"

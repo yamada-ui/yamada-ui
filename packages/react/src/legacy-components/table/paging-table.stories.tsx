@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { Column } from "."
 import { faker } from "@faker-js/faker"
 import { COLOR_SCHEMES } from "@yamada-ui/utils"

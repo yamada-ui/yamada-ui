@@ -35,9 +35,7 @@ export const useProgress = <Y extends "div" | "svg" = "div">({
 
   const getRootProps = useCallback(
     (props?: HTMLProps<Y>) => ({
-      "aria-label": indeterminate
-        ? t("loading...")
-        : `${percent} ${t("percent")}`,
+      "aria-label": indeterminate ? t("loading") : `${percent} ${t("percent")}`,
       "aria-valuemax": max,
       "aria-valuemin": min,
       "aria-valuenow": value ?? undefined,

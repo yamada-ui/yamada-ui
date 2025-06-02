@@ -10,7 +10,7 @@ export default {
     Close: "Close",
   },
   loading: {
-    "loading...": "loading...",
+    loading: "loading...",
     percent: "percent",
   },
   modal: {

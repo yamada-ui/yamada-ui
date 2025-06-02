@@ -10,7 +10,7 @@ export default {
     Close: "閉じる",
   },
   loading: {
-    "loading...": "ローディング...",
+    loading: "ローディング...",
     percent: "パーセント",
   },
   modal: {

@@ -14,7 +14,7 @@ export const keyframes = defineTokens.keyframes({
   ping: {
     "75%, 100%": {
       opacity: "0",
-      transform: "scale(var(--animation-scale, 2))",
+      transform: "scale({animation-scale, 2})",
     },
   },
   pulse: {
@@ -29,124 +29,132 @@ export const keyframes = defineTokens.keyframes({
     },
   },
 
-  position: {
+  "bg-position": {
     from: {
-      insetBlockStart: "var(--animation-from-y)",
-      insetInlineStart: "var(--animation-from-x)",
+      bgPosition: "var(--animation-from, 1rem) 0",
     },
     to: {
-      insetBlockStart: "var(--animation-to-y)",
-      insetInlineStart: "var(--animation-to-x)",
+      bgPosition: "var(--animation-to, 0) 0",
+    },
+  },
+  position: {
+    from: {
+      insetBlockStart: "{animation-from-y}",
+      insetInlineStart: "{animation-from-x}",
+    },
+    to: {
+      insetBlockStart: "{animation-to-y}",
+      insetInlineStart: "{animation-to-x}",
     },
   },
 
   translate: {
     from: {
-      translate: "var(--animation-from-x, 0) var(--animation-from-y, 0)",
+      translate: "{animation-from-x, 0} {animation-from-y, 0}",
     },
     to: {
-      translate: "var(--animation-to-x, 0) var(--animation-to-y, 0)",
+      translate: "{animation-to-x, 0} {animation-to-y, 0}",
     },
   },
 
   "fade-in": {
-    from: { opacity: "var(--animation-from-opacity, 0)" },
-    to: { opacity: "var(--animation-to-opacity, 1)" },
+    from: { opacity: "{animation-from-opacity, 0}" },
+    to: { opacity: "{animation-to-opacity, 1}" },
   },
   "fade-out": {
-    from: { opacity: "var(--animation-from-opacity, 1)" },
-    to: { opacity: "var(--animation-to-opacity, 0)" },
+    from: { opacity: "{animation-from-opacity, 1}" },
+    to: { opacity: "{animation-to-opacity, 0}" },
   },
 
   "scale-in": {
-    from: { scale: "var(--animation-from-scale, 0.95)" },
-    to: { scale: "var(--animation-to-scale, 1)" },
+    from: { scale: "{animation-from-scale, 0.95}" },
+    to: { scale: "{animation-to-scale, 1}" },
   },
   "scale-out": {
-    from: { scale: "var(--animation-from-scale, 1)" },
-    to: { scale: "var(--animation-to-scale, 0.95)" },
+    from: { scale: "{animation-from-scale, 1}" },
+    to: { scale: "{animation-to-scale, 0.95}" },
   },
 
   "collapse-height": {
-    from: { height: "var(--animation-height)" },
+    from: { height: "{animation-height}" },
     to: { height: "0" },
   },
   "collapse-width": {
-    from: { width: "var(--animation-width)" },
+    from: { width: "{animation-width}" },
     to: { width: "0" },
   },
   "expand-height": {
     from: { height: "0" },
-    to: { height: "var(--animation-height)" },
+    to: { height: "{animation-height}" },
   },
   "expand-width": {
     from: { width: "0" },
-    to: { width: "var(--animation-width)" },
+    to: { width: "{animation-width}" },
   },
 
   "slide-from-bottom-full": {
-    from: { translate: "0 var(--animation-from, 100%)" },
-    to: { translate: "0 var(--animation-to, 0)" },
+    from: { translate: "0 {animation-from, 100%}" },
+    to: { translate: "0 {animation-to, 0}" },
   },
   "slide-from-left-full": {
-    from: { translate: "var(--animation-from, -100%) 0" },
-    to: { translate: "var(--animation-to, 0) 0" },
+    from: { translate: "{animation-from, -100%} 0" },
+    to: { translate: "{animation-to, 0} 0" },
   },
   "slide-from-right-full": {
-    from: { translate: "var(--animation-from, 100%) 0" },
-    to: { translate: "var(--animation-to, 0) 0" },
+    from: { translate: "{animation-from, 100%} 0" },
+    to: { translate: "{animation-to, 0} 0" },
   },
   "slide-from-top-full": {
-    from: { translate: "0 var(--animation-from, -100%)" },
-    to: { translate: "0 var(--animation-to, 0)" },
+    from: { translate: "0 {animation-from, -100%}" },
+    to: { translate: "0 {animation-to, 0}" },
   },
   "slide-to-bottom-full": {
-    from: { translate: "0 var(--animation-from, 0)" },
-    to: { translate: "0 var(--animation-to, 100%)" },
+    from: { translate: "0 {animation-from, 0}" },
+    to: { translate: "0 {animation-to, 100%}" },
   },
   "slide-to-left-full": {
-    from: { translate: "var(--animation-from, 0) 0" },
-    to: { translate: "var(--animation-to, -100%) 0" },
+    from: { translate: "{animation-from, 0} 0" },
+    to: { translate: "{animation-to, -100%} 0" },
   },
   "slide-to-right-full": {
-    from: { translate: "var(--animation-from, 0) 0" },
-    to: { translate: "var(--animation-to, 100%) 0" },
+    from: { translate: "{animation-from, 0} 0" },
+    to: { translate: "{animation-to, 100%} 0" },
   },
   "slide-to-top-full": {
-    from: { translate: "0 var(--animation-from, 0)" },
-    to: { translate: "0 var(--animation-to, -100%)" },
+    from: { translate: "0 {animation-from, 0}" },
+    to: { translate: "0 {animation-to, -100%}" },
   },
 
   "slide-from-bottom": {
-    from: { translate: "0 var(--animation-from, 0.5rem)" },
-    to: { translate: "0 var(--animation-to, 0)" },
+    from: { translate: "0 {animation-from, 0.5rem}" },
+    to: { translate: "0 {animation-to, 0}" },
   },
   "slide-from-left": {
-    from: { translate: "var(--animation-from, -0.5rem) 0" },
-    to: { translate: "var(--animation-to, 0) 0" },
+    from: { translate: "{animation-from, -0.5rem} 0" },
+    to: { translate: "{animation-to, 0} 0" },
   },
   "slide-from-right": {
-    from: { translate: "var(--animation-from, 0.5rem) 0" },
-    to: { translate: "var(--animation-to, 0) 0" },
+    from: { translate: "{animation-from, 0.5rem} 0" },
+    to: { translate: "{animation-to, 0} 0" },
   },
   "slide-from-top": {
-    from: { translate: "0 var(--animation-from, -0.5rem)" },
-    to: { translate: "0 var(--animation-to, 0)" },
+    from: { translate: "0 {animation-from, -0.5rem}" },
+    to: { translate: "0 {animation-to, 0}" },
   },
   "slide-to-bottom": {
-    from: { translate: "0 var(--animation-from, 0)" },
-    to: { translate: "0 var(--animation-to, 0.5rem)" },
+    from: { translate: "0 {animation-from, 0}" },
+    to: { translate: "0 {animation-to, 0.5rem}" },
   },
   "slide-to-left": {
-    from: { translate: "var(--animation-from, 0) 0" },
-    to: { translate: "var(--animation-to, -0.5rem) 0" },
+    from: { translate: "{animation-from, 0} 0" },
+    to: { translate: "{animation-to, -0.5rem} 0" },
   },
   "slide-to-right": {
-    from: { translate: "var(--animation-from, 0) 0" },
-    to: { translate: "var(--animation-to, 0.5rem) 0" },
+    from: { translate: "{animation-from, 0} 0" },
+    to: { translate: "{animation-to, 0.5rem} 0" },
   },
   "slide-to-top": {
-    from: { translate: "0 var(--animation-from, 0)" },
-    to: { translate: "0 var(--animation-to, -0.5rem)" },
+    from: { translate: "0 {animation-from, 0}" },
+    to: { translate: "0 {animation-to, -0.5rem}" },
   },
 })

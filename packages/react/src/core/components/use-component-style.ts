@@ -26,7 +26,6 @@ import isEqual from "react-fast-compare"
 import { useTheme } from "../../providers/theme-provider"
 import {
   cx,
-  filterUndefined,
   isArray,
   isBooleanish,
   isEmptyObject,
@@ -451,8 +450,6 @@ function useStyle<
 
   const propsRef = useRef<Dict>({})
   const styleRef = useRef<Style<H> | undefined>(undefined)
-
-  props = filterUndefined(props)
 
   const hasComponentStyle =
     componentStyle && !!Object.keys(componentStyle).length

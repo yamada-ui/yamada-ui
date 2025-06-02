@@ -49,24 +49,17 @@ export const skeletonStyle = defineComponentStyle({
       bg: "bg.muted",
     },
     shine: {
-      "--animate-from": "200%",
-      "--animate-to": "-200%",
+      "--animation-from": "200%",
+      "--animation-to": "-200%",
       "--end-color": "colors.bg.muted",
       "--start-color": "colors.bg.subtle",
       animationDuration: "{duration, 5s}",
       animationIterationCount: "infinite",
+      animationName: "bg-position",
       animationTimingFunction: "ease-in-out",
       bgImage:
         "linear-gradient(270deg, {start-color}, {end-color}, {end-color}, {start-color})",
       bgSize: "400% 100%",
-      keyframes: {
-        from: {
-          bgPosition: "var(--animate-from, 1rem) 0",
-        },
-        to: {
-          bgPosition: "var(--animate-to, 0) 0",
-        },
-      },
     },
   },
 

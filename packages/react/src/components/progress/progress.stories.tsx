@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
-import { VStack } from "../stack"
+import { COLOR_SCHEMES } from "../../utils"
+import { For } from "../for"
 import { Progress } from "./"
 
 type Story = StoryFn<typeof Progress>
@@ -13,60 +14,55 @@ const meta: Meta<typeof Progress> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <Progress aria-label="Storage space" value={88} />
+  return <Progress value={50} />
 }
 
-export const ColorMode: Story = () => {
-  return <Progress colorScheme="purple" aria-label="Storage space" value={18} />
-}
-
-export const FilledTrackColor: Story = () => {
+export const Variant: Story = () => {
   return (
-    <Progress
-      aria-label="Storage space"
-      filledTrackColor="green.500"
-      value={18}
-    />
-  )
-}
-
-export const Stripe: Story = () => {
-  return <Progress aria-label="Storage space" hasStripe value={19} />
-}
-
-export const Size: Story = () => {
-  return (
-    <PropsTable variant="column" rows={["xs", "sm", "md", "lg"]}>
-      {(_, row, key) => {
+    <PropsTable columns={["outline", "subtle"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
         return (
-          <Progress
-            key={key}
-            colorScheme="blue"
-            size={row}
-            aria-label="Storage space"
-            value={93}
-          />
+          <Progress key={key} colorScheme={row} variant={column} value={50} />
         )
       }}
     </PropsTable>
   )
 }
 
-export const BorderRadius: Story = () => {
+export const Size: Story = () => {
   return (
-    <VStack>
-      <Progress
-        colorScheme="orange"
-        aria-label="Storage space"
-        borderRadius="md"
-        value={10}
-      />
-      <Progress
-        colorScheme="yellow"
-        aria-label="Storage space"
-        rounded="md"
-        value={31}
-      />
-    </VStack>
+    <PropsTable variant="column" rows={["xs", "sm", "md", "lg", "xl"]}>
+      {(_, row, key) => {
+        return <Progress key={key} size={row} value={50} />
+      }}
+    </PropsTable>
   )
+}
+
+export const Shape: Story = () => {
+  return (
+    <For each={["rounded", "square", "circle"] as const}>
+      {(shape, index) => <Progress key={index} shape={shape} value={50} />}
+    </For>
+  )
+}
+
+export const Indeterminate: Story = () => {
+  return <Progress value={null} />
+}
+
+export const Striped: Story = () => {
+  return <Progress striped value={50} />
+}
+
+export const Animated: Story = () => {
+  return <Progress animated striped value={50} />
+}
+
+export const Duration: Story = () => {
+  return <Progress animated duration={2} striped value={50} />
+}
+
+export const CustomColor: Story = () => {
+  return <Progress rangeColor="red.500" trackColor="blue.500" value={50} />
 }

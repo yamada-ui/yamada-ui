@@ -7,8 +7,7 @@ import type {
   AlertRootProps,
   AlertTitleProps,
 } from "../alert"
-import type { ButtonProps } from "../button/button"
-import type { CloseButtonProps } from "../close-button"
+import type { ButtonProps, CloseButtonProps } from "../button"
 import type {
   NoticeComponentProps,
   NoticeConfig,
@@ -26,8 +25,7 @@ import {
   toDirectionalPlacement,
 } from "../../utils"
 import { Alert } from "../alert"
-import { Button } from "../button/button"
-import { CloseButton } from "../close-button"
+import { Button, CloseButton } from "../button"
 import { withContext } from "./notice-provider"
 
 const findId = (

@@ -346,7 +346,7 @@ export const WithColorScheme = () => {
 export const WithPlacement = () => {
   const notice = useNotice({
     closable: true,
-    closeOnDrag: true,
+    closeStrategy: "element",
     duration: null,
   })
 

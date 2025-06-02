@@ -45,17 +45,13 @@ export const noticeStyle = defineComponentSlotStyle({
       display: "flex",
       justifyContent: "center",
       zIndex: "calc(var(--length) - var(--index))",
-      // overflow: "hidden",
-      // transition: "height 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
       _groupHover: {
         _first: {
           "& > *:first-of-type": {
             '&[data-placement-bottom="true"]': {
-              // height: "auto",
               paddingBottom: "md",
             },
             '&[data-placement-top="true"]': {
-              // height: "auto",
               paddingTop: "md",
             },
           },
@@ -66,11 +62,9 @@ export const noticeStyle = defineComponentSlotStyle({
         _notFirst: {
           "& > *:first-of-type": {
             '&[data-placement-bottom="true"]': {
-              // height: "66px",
               paddingBottom: "md",
             },
             '&[data-placement-top="true"]': {
-              // height: "66px",
               paddingTop: "md",
             },
             transform: "scale(1) translateY(0)",
@@ -81,7 +75,6 @@ export const noticeStyle = defineComponentSlotStyle({
       _notFirst: {
         "& > *:first-of-type": {
           '&[data-placement-bottom="true"]': {
-            // height: "20px",
             paddingBottom: "md",
             transform:
               "translateY(calc((var(--index) * 100%) - (var(--index) * 20px))) scale(max(calc(1 - var(--index) * 0.1), 0))",
@@ -90,10 +83,7 @@ export const noticeStyle = defineComponentSlotStyle({
             paddingTop: "md",
             transform:
               "translateY(calc((var(--index) * -100%) + (var(--index) * 20px))) scale(max(calc(1 - var(--index) * 0.1), 0))",
-            // height: "20px",
           },
-          // transform: "scaleX(max(calc(1 - var(--index) * 0.1), 0))",
-          // transition: "padding 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         },
       },
     },

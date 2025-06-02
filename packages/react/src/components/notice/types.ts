@@ -94,6 +94,7 @@ export interface NoticeConfig {
   }
   /**
    * The maximum value at which notice will be displayed.
+   * @default 5
    */
   limit?: number
   /**

@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useState } from "react"
 import { PropsTable } from "../../../storybook/components"
 import { GhostIcon, MinusIcon, PlusIcon } from "../icon"

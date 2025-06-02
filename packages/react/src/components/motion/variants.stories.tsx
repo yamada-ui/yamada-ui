@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { Variants } from "motion/react"
 import { useMemo } from "react"
 import { App } from "../../../storybook/components"

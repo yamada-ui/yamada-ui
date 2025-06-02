@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useClipboard } from "."
 import { Button } from "../../components/button"
 import { Editable } from "../../components/editable"

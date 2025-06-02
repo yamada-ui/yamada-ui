@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { AnimatePresence, useScroll, useTransform } from "motion/react"
 import { App } from "../../../storybook/components"
 import { useBoolean } from "../../hooks/use-boolean"

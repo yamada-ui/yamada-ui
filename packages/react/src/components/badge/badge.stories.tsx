@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { BadgeProps } from "./badge"
 import { useMemo } from "react"
 import { PropsTable } from "../../../storybook/components"

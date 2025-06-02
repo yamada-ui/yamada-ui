@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { LinkBox } from "."
 import { Heading } from "../heading"
 import { Link } from "../link"

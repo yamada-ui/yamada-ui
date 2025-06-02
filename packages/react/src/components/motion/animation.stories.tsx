@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { FC } from "react"
 import { AnimatePresence, LayoutGroup } from "motion/react"
 import { App } from "../../../storybook/components"

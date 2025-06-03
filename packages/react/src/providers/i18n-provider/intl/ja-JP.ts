@@ -9,10 +9,6 @@ export default {
   closeButton: {
     Close: "閉じる",
   },
-  loading: {
-    loading: "ローディング...",
-    percent: "パーセント",
-  },
   modal: {
     "Close modal": "モーダルを閉じる",
     "Open modal": "モーダルを開く",
@@ -24,6 +20,10 @@ export default {
   passwordInput: {
     "Password strength meter": "パスワードの強度",
     "Toggle password visibility": "パスワードの表示を切り替える",
+  },
+  progress: {
+    loading: "ローディング...",
+    percent: "パーセント",
   },
   stat: {
     "Decreased by": "減少",

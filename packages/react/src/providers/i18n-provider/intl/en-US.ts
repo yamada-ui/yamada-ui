@@ -9,10 +9,6 @@ export default {
   closeButton: {
     Close: "Close",
   },
-  loading: {
-    loading: "loading...",
-    percent: "percent",
-  },
   modal: {
     "Close modal": "Close modal",
     "Open modal": "Open modal",
@@ -24,6 +20,10 @@ export default {
   passwordInput: {
     "Password strength meter": "Password strength meter",
     "Toggle password visibility": "Toggle password visibility",
+  },
+  progress: {
+    loading: "loading...",
+    percent: "percent",
   },
   stat: {
     "Decreased by": "Decreased by",

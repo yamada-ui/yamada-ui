@@ -1,0 +1,60 @@
+{
+  "Highlight": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "children": {
+      "type": "string",
+      "description": "The text used for searching.",
+      "required": true
+    },
+    "query": {
+      "type": "string | string[]",
+      "description": "Can be a single string or an array of strings. These are the terms that are highlighted in the text.",
+      "required": true
+    },
+    "fragment": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, `Fragment` is used for rendering.",
+      "required": false
+    },
+    "markProps": {
+      "type": "MarkProps",
+      "description": "Properties passed to the Mark component which is used to highlight the matched terms.",
+      "required": false
+    },
+    "align": {
+      "type": "TextAlign | [TextAlign | { [x: string & {}]: TextAlign | undefined; base?: TextAlign | undefined; \"2xl\"?: TextAlign | undefined; lg?: TextAlign | undefined; md?: TextAlign | undefined; sm?: TextAlign | undefined; xl?: TextAlign | undefined; }, TextAlign | { ...; }] | { ...; }",
+      "description": "The CSS `text-align` property.",
+      "required": false
+    },
+    "casing": {
+      "type": "TextTransform | [TextTransform | { [x: string & {}]: TextTransform | undefined; base?: TextTransform | undefined; ... 4 more ...; xl?: TextTransform | undefined; }, TextTransform | { ...; }] | { ...; }",
+      "description": "The CSS `text-transform` property.",
+      "required": false
+    },
+    "decoration": {
+      "type": "TextDecoration<0 | (string & {})> | [TextDecoration<0 | (string & {})> | { [x: string & {}]: TextDecoration<0 | (string & {})> | undefined; ... 5 more ...; xl?: TextDecoration<...> | undefined; }, TextDecoration<...> | { ...; }] | { ...; }",
+      "description": "The CSS `text-decoration` property.",
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "Ellipsis": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Link": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "currentPage": {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "If `true`, change to span element.",
+      "required": false
+    }
+  },
+  "Root": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | [AnyString | \"lg\" | \"md\" | \"sm\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; base?: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; ... 4 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"underline\" | \"plain\" | [AnyString | \"underline\" | \"plain\" | { [x: string & {}]: AnyString | \"underline\" | \"plain\" | undefined; ... 5 more ...; xl?: AnyString | ... 2 more ... | undefined; }, AnyString | ... 2 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "separator": {
+      "type": "type ONLY_FOR_FORMAT =\n  | string\n  | ReactElement<unknown, string | JSXElementConstructor<any>>",
+      "defaultValue": "'/'",
+      "description": "The visual separator between each breadcrumb item.",
+      "required": false
+    },
+    "itemProps": {
+      "type": "BreadcrumbItemProps",
+      "description": "Props for item element.",
+      "required": false
+    },
+    "listProps": {
+      "type": "HTMLStyledProps<\"ol\">",
+      "description": "Props for ol element.",
+      "required": false
+    },
+    "separatorProps": {
+      "type": "BreadcrumbSeparatorProps",
+      "description": "Props for separator element.",
+      "required": false
+    },
+    "ellipsis": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: { ...; }) => ReactNode)",
+      "description": "The icon to be used in the ellipsis.",
+      "required": false
+    },
+    "endBoundaries": {
+      "type": "number | [number | { [x: string & {}]: number | undefined; base?: number | undefined; \"2xl\"?: number | undefined; lg?: number | undefined; md?: number | undefined; sm?: number | undefined; xl?: number | undefined; }, number | { ...; }] | { ...; }",
+      "description": "Number of elements visible on the end(right) edges.",
+      "required": false
+    },
+    "items": {
+      "type": "BreadcrumbItem[]",
+      "description": "If provided, generate breadcrumb items based on items.",
+      "required": false
+    },
+    "link": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "The component to be used for the link.",
+      "required": false
+    },
+    "startBoundaries": {
+      "type": "number | [number | { [x: string & {}]: number | undefined; base?: number | undefined; \"2xl\"?: number | undefined; lg?: number | undefined; md?: number | undefined; sm?: number | undefined; xl?: number | undefined; }, number | { ...; }] | { ...; }",
+      "description": "Number of elements visible on the start(left) edges.",
+      "required": false
+    }
+  }
+}

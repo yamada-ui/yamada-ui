@@ -354,6 +354,10 @@ async function main() {
 
         spinner.start("Generating props types")
       } else {
+        data = Object.fromEntries(
+          Object.entries(data).sort(([a], [b]) => a.localeCompare(b)),
+        )
+
         const content = await prettier(JSON.stringify(data), {
           parser: "json",
         })

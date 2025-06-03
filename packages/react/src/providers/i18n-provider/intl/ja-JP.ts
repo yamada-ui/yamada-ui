@@ -23,7 +23,7 @@ export default {
   },
   progress: {
     loading: "ローディング...",
-    percent: "パーセント",
+    percent: "{value}パーセント",
   },
   stat: {
     "Decreased by": "減少",

@@ -23,7 +23,7 @@ export default {
   },
   progress: {
     loading: "loading...",
-    percent: "percent",
+    percent: "{value} percent",
   },
   stat: {
     "Decreased by": "Decreased by",

@@ -1,10 +1,12 @@
-import type { Options } from "prettier"
 import { parse } from "@babel/parser"
 import traverse from "@babel/traverse"
 import { interopDefault, toKebabCase } from "@yamada-ui/utils"
+import { execa } from "execa"
 import { readdir, readFile, unlink, writeFile } from "fs/promises"
+import ora from "ora"
 import path from "path"
-import { format, resolveConfig } from "prettier"
+import c from "picocolors"
+import { prettier } from "../../utils"
 
 const resolvedTraverse = interopDefault(traverse)
 
@@ -16,23 +18,8 @@ const DIST_PATH = path.join(
   process.cwd(),
   "packages/react/src/components/icon/icons",
 )
-const PRETTIER_CONFIG_PATH = path.join(process.cwd(), ".prettierrc")
 
-const prettier = async (content: string, options?: Options) => {
-  const prettierConfig = await resolveConfig(PRETTIER_CONFIG_PATH)
-
-  try {
-    return format(content, {
-      ...prettierConfig,
-      parser: "typescript",
-      ...options,
-    })
-  } catch {
-    return content
-  }
-}
-
-const clearIcons = async () => {
+async function clearIcons() {
   const fileNames = await readdir(DIST_PATH)
 
   await Promise.all(
@@ -42,7 +29,7 @@ const clearIcons = async () => {
   )
 }
 
-const getIconNames = async () => {
+async function getIconNames() {
   const data = await readFile(path.resolve(ENTRY_PATH), "utf-8")
 
   const ast = parse(data, {
@@ -63,8 +50,8 @@ const getIconNames = async () => {
   return iconNames
 }
 
-const createIcons = async (iconNames: string[]) =>
-  Promise.all(
+async function createIcons(iconNames: string[]) {
+  return Promise.all(
     iconNames.map(async (iconName) => {
       const fileName = toKebabCase(iconName)
       let data = [
@@ -85,8 +72,9 @@ const createIcons = async (iconNames: string[]) =>
       await writeFile(path.resolve(DIST_PATH, `${fileName}-icon.tsx`), data)
     }),
   )
+}
 
-const createTypes = async (iconNames: string[]) => {
+async function createTypes(iconNames: string[]) {
   const fileName = "index.types.ts"
   let data = [
     `export type IconNames = ${iconNames.map((iconName) => `\"${iconName}Icon\"`).join(" | ")}`,
@@ -97,10 +85,24 @@ const createTypes = async (iconNames: string[]) => {
   await writeFile(path.resolve(DIST_PATH, fileName), data)
 }
 
-const main = async () => {
+async function main() {
+  const spinner = ora()
+
+  const start = process.hrtime.bigint()
+
+  spinner.start(`Clearing icons`)
+
   await clearIcons()
 
+  spinner.succeed(`Cleared icons`)
+
+  spinner.start(`Getting icon names`)
+
   const iconNames = await getIconNames()
+
+  spinner.succeed(`Got icon names`)
+
+  spinner.start(`Creating icons`)
 
   await createIcons(iconNames)
   await createTypes(iconNames)
@@ -116,6 +118,23 @@ const main = async () => {
   data = await prettier(data)
 
   await writeFile(path.resolve(DIST_PATH, "index.ts"), data)
+
+  spinner.succeed(`Created icons`)
+
+  spinner.start(`Fixing eslint`)
+
+  await execa("eslint", [
+    "packages/react/src/components/icon/icons/index.ts",
+    "packages/react/src/components/icon/icons/index.types.ts",
+    "--fix",
+  ])
+
+  spinner.succeed(`Fixed eslint`)
+
+  const end = process.hrtime.bigint()
+  const duration = (Number(end - start) / 1e9).toFixed(2)
+
+  console.log("\n", c.green(`Done in ${duration}s`))
 }
 
 main()

@@ -8,13 +8,6 @@ import { isObject } from "../../utils"
 import { switchStyle } from "./switch.style"
 import { useSwitch } from "./use-switch"
 
-export interface SwitchIconProps {
-  active?: boolean
-  checked?: boolean
-  focused?: boolean
-  hovered?: boolean
-}
-
 export interface SwitchProps
   extends Merge<HTMLStyledProps<"label">, UseSwitchProps>,
     ThemeProps<SwitchStyle> {

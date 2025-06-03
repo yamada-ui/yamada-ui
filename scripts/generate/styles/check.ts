@@ -3,7 +3,7 @@ import { shorthandProps } from "./shorthand-props"
 import { additionalProps, atRuleProps, styledProps } from "./styled-props"
 import { tokens } from "./tokens"
 
-export const checkProps = (cssCompatData: CSSCompatData) => {
+export function checkProps(cssCompatData: CSSCompatData) {
   const propMap = Object.keys(cssCompatData)
   const styledPropMap = [
     ...Object.keys(additionalProps),

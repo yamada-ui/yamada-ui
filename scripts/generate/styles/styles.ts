@@ -10,7 +10,7 @@ import type {
 import type { StyleConfig } from "./styled-props"
 import type { TransformOptions } from "./transform-props"
 import { conditionSelectors, isUndefined, toArray } from "@yamada-ui/react"
-import { prettier } from "../utils"
+import { prettier } from "../../utils"
 import { checkProps } from "./check"
 import { generateConfig } from "./config"
 import { overrideTypes } from "./override-types"
@@ -19,15 +19,20 @@ import { additionalProps, atRuleProps, styledProps } from "./styled-props"
 import { tokenMap, tokenPropertyMap } from "./tokens"
 import { transformMap } from "./transform-props"
 
-const hasTransform = (
+function hasTransform(
   targetTransform: Transforms,
   transforms: TransformOptions[] | undefined,
-) => !!transforms?.some(({ transform }) => transform === targetTransform)
+) {
+  return !!transforms?.some(({ transform }) => transform === targetTransform)
+}
 
-const addType = (result: string, value: string) =>
-  result.endsWith(">") ? result.replace(/>$/, `${value}>`) : result + value
+function addType(result: string, value: string) {
+  return result.endsWith(">")
+    ? result.replace(/>$/, `${value}>`)
+    : result + value
+}
 
-const generateType = ({
+function generateType({
   type,
   prop,
   token,
@@ -39,7 +44,7 @@ const generateType = ({
   token?: ThemeToken
   transforms?: TransformOptions[]
   variableLength?: boolean
-}) => {
+}) {
   const overrideType = prop ? overrideTypes[prop] : undefined
 
   let result = !variableLength || token ? "StyleValue<>" : ""
@@ -69,7 +74,7 @@ const generateType = ({
   return result
 }
 
-const getBaseline = (feature?: FeatureData) => {
+function getBaseline(feature?: FeatureData) {
   if (!feature) return
 
   const rows: string[] = []
@@ -96,9 +101,8 @@ const getBaseline = (feature?: FeatureData) => {
   return rows
 }
 
-const generateDoc =
-  (...data: CSSCompatStatement[]) =>
-  (rows: string[] = []) => {
+function generateDoc(...data: CSSCompatStatement[]) {
+  return function (rows: string[] = []) {
     const deprecated = data.some(({ status }) => status?.deprecated)
     const experimental = data.some(({ status }) => status?.experimental)
 
@@ -134,11 +138,12 @@ const generateDoc =
 
     return `/**\n${rows.map((row) => `* ${row}`).join("\n")}\n*/`
   }
+}
 
-export const generateStyles = async (
+export async function generateStyles(
   cssCompatData: CSSCompatData,
   atRuleCompatData: CSSCompatData,
-) => {
+) {
   const standardStyles: string[] = []
   const shorthandStyles: string[] = []
   const pseudoStyles: string[] = []
@@ -147,7 +152,7 @@ export const generateStyles = async (
   const styleProps: string[] = []
   const variableLengthProps: string[] = []
   const tokenProps: { [key in ThemeToken]?: string[] } = {}
-  const excludedProperties: { name: string; url?: string }[] = []
+  const duplicatedProperties: { name: string; url?: string }[] = []
 
   checkProps(cssCompatData)
 
@@ -161,7 +166,7 @@ export const generateStyles = async (
     pseudoStyles.push(`"${selector}": ${config}`)
   })
 
-  const omittedCssCompatData = Object.fromEntries(
+  const excludedCSSCompatData = Object.fromEntries(
     Object.entries(cssCompatData).filter(([name, data]) => {
       const isExists = [
         ...Object.keys(additionalProps),
@@ -171,7 +176,7 @@ export const generateStyles = async (
       if (isExists) {
         const url = data.mdn_url ?? toArray(data.spec_url)[0]
 
-        excludedProperties.push({ name, url })
+        duplicatedProperties.push({ name, url })
 
         return false
       } else {
@@ -180,7 +185,7 @@ export const generateStyles = async (
     }),
   )
 
-  Object.entries(omittedCssCompatData).forEach(([_prop, data]) => {
+  Object.entries(excludedCSSCompatData).forEach(([_prop, data]) => {
     const prop = _prop as CSSProperties | StyledProperties
     const type = data.type
     const token = tokenMap[prop]
@@ -385,5 +390,5 @@ export const generateStyles = async (
 
   const data = await prettier(content)
 
-  return { data, excludedProperties }
+  return { data, duplicatedProperties }
 }

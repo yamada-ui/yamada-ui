@@ -3,7 +3,7 @@ import type { AnyString, ThemeToken } from "@yamada-ui/react"
 import type { CSSProperties, StyledProperties } from "."
 import type { TransformOptions } from "./transform-props"
 
-const generateTransform = (...transforms: TransformOptions[]) => {
+function generateTransform(...transforms: TransformOptions[]) {
   let transform = transforms
     .map(({ args, transform }) => {
       let fn = `transforms.${transform}`
@@ -26,9 +26,13 @@ interface GetConfigOptions {
   transforms?: TransformOptions[]
 }
 
-export const generateConfig =
-  ({ css, properties, token, transforms }: GetConfigOptions) =>
-  (isConfig?: boolean) => {
+export function generateConfig({
+  css,
+  properties,
+  token,
+  transforms,
+}: GetConfigOptions) {
+  return function (isConfig?: boolean) {
     if (!isConfig && !token && !transforms && !css) return true
 
     const config: string[] = []
@@ -52,3 +56,4 @@ export const generateConfig =
 
     return `{ ${config.join(", ")} }`
   }
+}

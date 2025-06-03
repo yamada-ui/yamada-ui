@@ -18,6 +18,8 @@ export interface StyledProps extends CSSProps {
   asChild?: boolean
   /**
    * Debug mode.
+   *
+   * @private
    */
   __debug?: boolean
 }

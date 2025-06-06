@@ -22,7 +22,7 @@ export default {
     "Toggle password visibility": "Toggle password visibility",
   },
   progress: {
-    loading: "loading...",
+    loading: "Loading...",
     percent: "{value} percent",
   },
   stat: {

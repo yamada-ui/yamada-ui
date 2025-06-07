@@ -2,7 +2,6 @@
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "language": "en",
   "words": [
-    "hoge",
     "activedescendant",
     "Adebayo",
     "Adlm",
@@ -71,6 +70,7 @@
     "Hiragino",
     "hirotomo",
     "hirotomoyamada",
+    "hoge",
     "hono",
     "HTMLUI",
     "Hydrateable",
@@ -187,6 +187,7 @@
     "unhover",
     "unitless",
     "unittests",
+    "unstub",
     "valuemax",
     "valuemin",
     "valuenow",

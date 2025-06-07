@@ -3,7 +3,7 @@ import { useRef, useState } from "react"
 import {
   cast,
   createContext,
-  isElement,
+  isHTMLElement,
   mergeRefs,
   useSafeLayoutEffect,
 } from "../../utils"
@@ -107,7 +107,7 @@ const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
   const register = (nodeOrOptions?: DescendantOptions<T, K> | null | T) => {
     if (nodeOrOptions == null) return
 
-    if (isElement(nodeOrOptions)) return setDescendants(nodeOrOptions)
+    if (isHTMLElement(nodeOrOptions)) return setDescendants(nodeOrOptions)
 
     return (node: null | T) => setDescendants(node, nodeOrOptions)
   }

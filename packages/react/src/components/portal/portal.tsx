@@ -1,21 +1,21 @@
 import type { ReactNode, RefObject } from "react"
 import type { FC } from "../../core"
-import { ContainerPortal } from "./container-portal"
-import { DefaultPortal } from "./default-portal"
+import type { RootNode } from "../../providers/environment-provider"
+import { Children, useEffect, useState } from "react"
+import { createPortal } from "react-dom"
+import { useEnvironment } from "../../providers/environment-provider"
+import { getDocument, isShadowRoot, useSsr } from "../../utils"
+
+const getPortalNode = (node: RootNode) => {
+  const rootNode = node.getRootNode()
+
+  if (isShadowRoot(rootNode)) return rootNode
+
+  return getDocument(node).body
+}
 
 export interface PortalProps {
   children: ReactNode
-  /**
-   * If `true`, the portal will check if it is within a parent portal
-   * and append itself to the parent's portal node.
-   * This provides nesting for portals.
-   *
-   * If `false`, the portal will always append to `document.body`
-   * regardless of nesting. It is used to opt out of portal nesting.
-   *
-   * @default true
-   */
-  appendToParentPortal?: boolean
   /**
    * The `ref` to the component where the portal will be attached to.
    */
@@ -32,19 +32,23 @@ export interface PortalProps {
  * @see https://yamada-ui.com/components/portal
  */
 export const Portal: FC<PortalProps> = ({
-  appendToParentPortal = true,
   children,
-  containerRef,
+  containerRef: ref,
   disabled,
 }) => {
-  if (disabled) return children
+  const [target, setTarget] = useState(ref?.current)
+  const ssr = useSsr()
+  const { getRootNode } = useEnvironment()
 
-  return containerRef ? (
-    <ContainerPortal
-      containerRef={containerRef}
-      {...{ appendToParentPortal, children }}
-    />
-  ) : (
-    <DefaultPortal {...{ appendToParentPortal, children }} />
+  useEffect(() => {
+    setTarget(() => ref?.current)
+  }, [ref])
+
+  if (ssr || disabled) return children
+
+  const container = target ?? getPortalNode(getRootNode())
+
+  return (
+    <>{Children.map(children, (child) => createPortal(child, container))}</>
   )
 }

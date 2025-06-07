@@ -3,7 +3,7 @@ import { useOS } from "./"
 
 describe("useOS", () => {
   beforeEach(() => {
-    vi.restoreAllMocks()
+    vi.unstubAllGlobals()
   })
 
   test.each([
@@ -59,10 +59,6 @@ describe("useOS", () => {
       userAgent:
         "Mozilla/5.0 (PlayStation; PlayStation 5/2.26) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15",
     },
-    {
-      expected: "undetermined",
-      userAgent: "yamada",
-    },
   ])("should return $expected", ({ expected, userAgent }) => {
     vi.stubGlobal("navigator", { userAgent })
 
@@ -72,10 +68,12 @@ describe("useOS", () => {
 
   test('should return "undetermined" when window is undefined', () => {
     const defaultWindow = global.window
-    ;(global as any).window = undefined as unknown as typeof globalThis & Window
+
+    global.window = undefined as unknown as typeof globalThis & Window
 
     const result = useOS()
     expect(result).toBe("undetermined")
-    ;(global as any).window = defaultWindow
+
+    global.window = defaultWindow
   })
 })

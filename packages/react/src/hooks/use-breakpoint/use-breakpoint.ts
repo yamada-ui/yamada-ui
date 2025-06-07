@@ -56,12 +56,12 @@ export const useBreakpoint = () => {
       if (isUndefined(width)) {
         const win = getWindow()
 
-        if (!win || hasContainer || !hasQueries) return "base"
+        if (hasContainer || !hasQueries) return "base"
 
         for (const { breakpoint, query } of queries) {
-          const mql = win.matchMedia(query)
+          const mql = win?.matchMedia(query)
 
-          if (mql.matches) return breakpoint
+          if (mql?.matches) return breakpoint
         }
       } else {
         for (const { breakpoint, maxW, minW } of queries) {

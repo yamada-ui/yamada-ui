@@ -1,9 +1,18 @@
 import type { RefObject } from "react"
-import type { AnyPointerEvent, Point, PointerEventInfo } from "../../utils"
+import type { AnyPointerEvent, Point } from "../../utils"
 import sync, { cancelSync, getFrameData } from "framesync"
 import { useEffect, useRef } from "react"
-import { addPointerEvent, getEventPoint, isMultiTouchEvent } from "../../utils"
+import {
+  addDomEvent,
+  getEventPoint,
+  isMouseEvent,
+  isMultiTouchEvent,
+} from "../../utils"
 import { useLatestRef } from "../use-latest-ref"
+
+interface PointerEventInfo {
+  point: Point
+}
 
 interface PanEventInfo {
   delta: Point
@@ -13,6 +22,10 @@ interface PanEventInfo {
 }
 
 type PanEventHandler = (ev: AnyPointerEvent, info: PanEventInfo) => void
+type PointerEventListener = (
+  ev: AnyPointerEvent,
+  info: PointerEventInfo,
+) => void
 
 interface TimestampedPoint extends Point {
   timestamp: number
@@ -28,12 +41,15 @@ interface PanEventHandlers {
   onStart: PanEventHandler
 }
 
-const subtract = (a: Point, b?: Point) => ({
+const subtract = (a: Point, b?: Point): Point => ({
   x: a.x - (b?.x ?? 0),
   y: a.y - (b?.y ?? 0),
 })
 
-const getPanInfo = (info: PointerEventInfo, history: PanEventHistory) => ({
+const getPanInfo = (
+  info: PointerEventInfo,
+  history: PanEventHistory,
+): PanEventInfo => ({
   delta: subtract(info.point, history[history.length - 1]),
   offset: subtract(info.point, history[0]),
   point: info.point,
@@ -82,6 +98,34 @@ const getVelocity = (history: TimestampedPoint[], timeDelta: number): Point => {
 
   return currentVelocity
 }
+
+const filter = (cb: EventListener): EventListener => {
+  return function (ev: Event) {
+    const isMouse = isMouseEvent(ev)
+
+    if (!isMouse || ev.button === 0) cb(ev)
+  }
+}
+
+const wrap = (
+  cb: PointerEventListener,
+  filterPrimary = false,
+): EventListener => {
+  function listener(ev: any) {
+    return cb(ev, { point: getEventPoint(ev) })
+  }
+
+  const fn = filterPrimary ? filter(listener) : listener
+
+  return fn as EventListener
+}
+
+const addPointerEvent = (
+  target: EventTarget,
+  type: "pointercancel" | "pointerdown" | "pointermove" | "pointerup",
+  cb: PointerEventListener,
+  options?: AddEventListenerOptions,
+) => addDomEvent(target, type, wrap(cb, type === "pointerdown"), options)
 
 const pipe =
   <Y>(...fns: ((a: Y) => Y)[]) =>
@@ -195,7 +239,7 @@ const panEvent = (
   }
 }
 
-type ReturnPanEvent = ReturnType<typeof panEvent>
+type PanEvent = ReturnType<typeof panEvent>
 
 export interface UsePanEventProps {
   threshold?: number
@@ -220,7 +264,7 @@ export const usePanEvent = (
   const hasPanEvents =
     !!onMove || !!onStart || !!onEnd || !!onSessionStart || !!onSessionEnd
 
-  const panSession = useRef<null | ReturnPanEvent>(null)
+  const panSession = useRef<null | PanEvent>(null)
 
   const handlersRef = useLatestRef<Partial<PanEventHandlers>>({
     onEnd: (ev, info) => {

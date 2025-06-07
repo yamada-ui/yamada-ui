@@ -3,7 +3,7 @@ import type { Orientation, StyleValue } from "../../core"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   assignRef,
-  isElement,
+  isHTMLElement,
   useCallbackRef,
   useUnmountEffect,
 } from "../../utils"
@@ -36,7 +36,7 @@ const onScroll = ({
 }) => {
   let options: ScrollToOptions
   const el =
-    isElement(root) && isScrollable(root, vertical) ? root : document.body
+    isHTMLElement(root) && isScrollable(root, vertical) ? root : document.body
 
   if (vertical) {
     options = { behavior, top: position ?? (reverse ? el.scrollHeight : 0) }
@@ -56,7 +56,7 @@ const getScrollPosition = (
   vertical: boolean,
 ) => {
   const el =
-    isElement(root) && isScrollable(root, vertical) ? root : document.body
+    isHTMLElement(root) && isScrollable(root, vertical) ? root : document.body
 
   if (vertical) {
     return el.scrollHeight - el.scrollTop

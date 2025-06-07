@@ -2,7 +2,7 @@ import type { CSSAnimationObject, Token } from "../../core"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { animation, css } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
-import { getOwnerWindow, isArray, isUndefined, runIfFn } from "../../utils"
+import { getWindow, isArray, isUndefined, runIfFn } from "../../utils"
 import { useBoolean } from "../use-boolean"
 import { useEventListener } from "../use-event-listener"
 
@@ -145,7 +145,7 @@ export const useAnimationObserver = ({
   return {
     present: !hidden,
     onAnimationComplete() {
-      const ownerWindow = getOwnerWindow(ref.current)
+      const ownerWindow = getWindow(ref.current)
       const ev = new ownerWindow.CustomEvent("animationend", {
         bubbles: true,
       })

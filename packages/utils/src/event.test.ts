@@ -1,6 +1,5 @@
 import {
   addDomEvent,
-  addPointerEvent,
   getEventPoint,
   getEventWindow,
   isMouseEvent,
@@ -140,27 +139,5 @@ describe("Event", () => {
 
     window.dispatchEvent(new MouseEvent("click"))
     expect(mockCallback).not.toHaveBeenCalled()
-  })
-
-  test("addPointerEvent adds and removes pointer event listeners", () => {
-    const mockCallback = vi.fn()
-    const removeEventListener = addPointerEvent(
-      window,
-      "pointerdown",
-      mockCallback,
-    )
-
-    window.dispatchEvent(
-      new PointerEvent("pointerdown", { pointerType: "mouse" }),
-    )
-
-    expect(mockCallback).toHaveBeenCalledWith(
-      expect.any(PointerEvent),
-      expect.objectContaining({
-        point: expect.objectContaining({ x: 0, y: 0 }),
-      }),
-    )
-
-    removeEventListener()
   })
 })

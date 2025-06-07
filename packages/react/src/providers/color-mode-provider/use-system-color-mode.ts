@@ -1,12 +1,11 @@
 import type { ColorMode } from "../../core"
-import type { Environment } from "../environment-provider"
 import { useEffect, useMemo, useState } from "react"
 import { fnAll, useCallbackRef, useSafeLayoutEffect } from "../../utils"
+import { useEnvironment } from "../environment-provider"
 import { getColorModeUtils } from "./color-mode-utils"
 
 export interface UseSystemColorModeProps {
   callback?: (colorMode: ColorMode) => void
-  environment?: Environment
   initialColorMode?: ColorMode
 }
 
@@ -15,9 +14,9 @@ export interface UseSystemColorModeProps {
  */
 export const useSystemColorMode = ({
   callback,
-  environment,
   initialColorMode,
 }: UseSystemColorModeProps = {}) => {
+  const environment = useEnvironment()
   const callbackRef = useCallbackRef(callback)
   const [colorMode, setColorMode] = useState<ColorMode | undefined>(
     initialColorMode,

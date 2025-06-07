@@ -52,6 +52,20 @@ export const Variant: Story = () => {
   )
 }
 
+export const Size: Story = () => {
+  return (
+    <VStack gap="md">
+      <HStack>
+        <SkeletonCircle boxSize="14" />
+
+        <SkeletonText h="6" lineClamp={2} />
+      </HStack>
+
+      <Skeleton h="20" />
+    </VStack>
+  )
+}
+
 export const Children: Story = () => {
   return (
     <>
@@ -81,19 +95,6 @@ export const Children: Story = () => {
         </SkeletonCircle>
       </HStack>
     </>
-  )
-}
-export const Size: Story = () => {
-  return (
-    <VStack gap="md">
-      <HStack>
-        <SkeletonCircle boxSize="14" />
-
-        <SkeletonText h="6" lineClamp={2} />
-      </HStack>
-
-      <Skeleton h="20" />
-    </VStack>
   )
 }
 

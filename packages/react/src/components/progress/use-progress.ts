@@ -1,5 +1,6 @@
 import type { HTMLProps } from "../../core"
 import { useCallback } from "react"
+import { useI18n } from "../../providers/i18n-provider"
 import { dataAttr, valueToPercent } from "../../utils"
 
 export interface UseProgressProps {
@@ -30,10 +31,13 @@ export const useProgress = <Y extends "div" | "svg" = "div">({
 }: UseProgressProps) => {
   const indeterminate = value === null
   const percent = valueToPercent(value ?? 0, min, max)
+  const { t } = useI18n("progress")
 
   const getRootProps = useCallback(
     (props?: HTMLProps<Y>) => ({
-      "aria-label": indeterminate ? "loading..." : `${percent} percent`,
+      "aria-label": indeterminate
+        ? t("loading")
+        : t("percent", { value: percent }),
       "aria-valuemax": max,
       "aria-valuemin": min,
       "aria-valuenow": value ?? undefined,
@@ -41,7 +45,7 @@ export const useProgress = <Y extends "div" | "svg" = "div">({
       role: "progressbar",
       ...props,
     }),
-    [max, min, percent, value, indeterminate],
+    [max, min, percent, value, indeterminate, t],
   )
 
   const getTrackProps = useCallback(

@@ -1,44 +1,36 @@
 import type { Meta, StoryFn } from "@storybook/react"
-import type { Steps } from "./"
-import { COLOR_SCHEMES } from "@yamada-ui/utils"
+import { PropsTable } from "../../../storybook/components"
+import { COLOR_SCHEMES } from "../../utils"
 import { Box } from "../box"
 import { Button } from "../button"
 import { GhostIcon } from "../icon"
 import { HStack } from "../stack"
-import {
-  Step,
-  StepDescription,
-  Stepper,
-  StepSeparator,
-  StepStatus,
-  StepTitle,
-  useSteps,
-} from "./"
+import { Stepper, useStepperSteps } from "./"
 
-type Story = StoryFn<typeof Stepper>
+type Story = StoryFn<typeof Stepper.Root>
 
-const meta: Meta<typeof Stepper> = {
-  component: Stepper,
+const meta: Meta<typeof Stepper.Root> = {
+  component: Stepper.Root,
   title: "Components / Stepper",
 }
 
 export default meta
 
 export const Basic: Story = () => {
-  const steps: Steps = [
+  const steps: Stepper.Steps = [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
     { description: "ベジータ・ナッパ", title: "サイヤ人編" },
   ]
 
-  const { activeStep, onStepNext, onStepPrev } = useSteps({
+  const { activeStep, onStepNext, onStepPrev } = useStepperSteps({
     count: steps.length,
     index: 1,
   })
 
   return (
     <>
-      <Stepper index={activeStep} steps={steps} />
+      <Stepper.Root index={activeStep} steps={steps} />
 
       <HStack>
         <Button onClick={onStepPrev}>Prev</Button>
@@ -48,62 +40,62 @@ export const Basic: Story = () => {
   )
 }
 
-export const WithSize: Story = () => {
-  const steps: Steps = [
+export const Size: Story = () => {
+  const steps: Stepper.Steps = [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
     { description: "ベジータ・ナッパ", title: "サイヤ人編" },
   ]
 
   return (
-    <>
-      <Stepper size="sm" index={1} steps={steps} />
-
-      <Stepper size="md" index={1} steps={steps} />
-
-      <Stepper size="lg" index={1} steps={steps} />
-    </>
+    <PropsTable variant="column" rows={["sm", "md", "lg"]}>
+      {(_, row, key) => {
+        return <Stepper.Root key={key} size={row} index={1} steps={steps} />
+      }}
+    </PropsTable>
   )
 }
 
-export const WithColorScheme: Story = () => {
-  const steps: Steps = [
+export const ColorScheme: Story = () => {
+  const steps: Stepper.Steps = [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
     { description: "ベジータ・ナッパ", title: "サイヤ人編" },
   ]
 
   return (
-    <>
-      {COLOR_SCHEMES.map((colorScheme) => (
-        <Stepper
-          key={colorScheme}
-          colorScheme={colorScheme}
-          index={1}
-          steps={steps}
-        />
-      ))}
-    </>
+    <PropsTable variant="column" rows={COLOR_SCHEMES}>
+      {(_, row, key) => {
+        return (
+          <Stepper.Root key={key} colorScheme={row} index={1} steps={steps} />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithOrientation: Story = () => {
-  const steps: Steps = [
+export const Orientation: Story = () => {
+  const steps: Stepper.Steps = [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
     { description: "ベジータ・ナッパ", title: "サイヤ人編" },
   ]
 
-  const { activeStep, onStepNext, onStepPrev } = useSteps({
+  const { activeStep, onStepNext, onStepPrev } = useStepperSteps({
     count: steps.length,
     index: 1,
   })
 
   return (
     <>
-      <Stepper index={activeStep} orientation="horizontal" steps={steps} />
+      <Stepper.Root index={activeStep} orientation="horizontal" steps={steps} />
 
-      <Stepper h="sm" index={activeStep} orientation="vertical" steps={steps} />
+      <Stepper.Root
+        h="sm"
+        index={activeStep}
+        orientation="vertical"
+        steps={steps}
+      />
 
       <HStack>
         <Button onClick={onStepPrev}>Prev</Button>
@@ -114,33 +106,33 @@ export const WithOrientation: Story = () => {
 }
 
 export const CustomStep: Story = () => {
-  const steps: Steps = [
+  const steps: Stepper.Steps = [
     { description: "レッドリボン軍", title: "孫悟空少年編" },
     { description: "ピッコロ大魔王", title: "ピッコロ大魔王編" },
     { description: "ベジータ・ナッパ", title: "サイヤ人編" },
   ]
 
-  const { activeStep, onStepNext, onStepPrev } = useSteps({
+  const { activeStep, onStepNext, onStepPrev } = useStepperSteps({
     count: steps.length,
     index: 1,
   })
 
   return (
     <>
-      <Stepper index={activeStep}>
+      <Stepper.Root index={activeStep}>
         {steps.map(({ description, title }, index) => (
-          <Step key={index}>
-            <StepStatus />
+          <Stepper.Step key={index}>
+            <Stepper.StepStatus />
 
             <Box flexShrink="0">
-              <StepTitle>{title}</StepTitle>
-              <StepDescription>{description}</StepDescription>
+              <Stepper.StepTitle>{title}</Stepper.StepTitle>
+              <Stepper.StepDescription>{description}</Stepper.StepDescription>
             </Box>
 
-            <StepSeparator />
-          </Step>
+            <Stepper.StepSeparator />
+          </Stepper.Step>
         ))}
-      </Stepper>
+      </Stepper.Root>
 
       <HStack>
         <Button onClick={onStepPrev}>Prev</Button>
@@ -151,7 +143,7 @@ export const CustomStep: Story = () => {
 }
 
 export const CustomStatus: Story = () => {
-  const steps: Steps = [
+  const steps: Stepper.Steps = [
     {
       description: "レッドリボン軍",
       title: "孫悟空少年編",
@@ -169,29 +161,29 @@ export const CustomStatus: Story = () => {
     },
   ]
 
-  const { activeStep, onStepNext, onStepPrev } = useSteps({
+  const { activeStep, onStepNext, onStepPrev } = useStepperSteps({
     count: steps.length,
     index: 1,
   })
 
   return (
     <>
-      <Stepper index={activeStep} steps={steps} />
+      <Stepper.Root index={activeStep} steps={steps} />
 
-      <Stepper index={activeStep}>
+      <Stepper.Root index={activeStep}>
         {steps.map(({ description, title }, index) => (
-          <Step key={index}>
-            <StepStatus complete={<GhostIcon fontSize="xl" />} />
+          <Stepper.Step key={index}>
+            <Stepper.StepStatus complete={<GhostIcon fontSize="xl" />} />
 
             <Box flexShrink="0">
-              <StepTitle>{title}</StepTitle>
-              <StepDescription>{description}</StepDescription>
+              <Stepper.StepTitle>{title}</Stepper.StepTitle>
+              <Stepper.StepDescription>{description}</Stepper.StepDescription>
             </Box>
 
-            <StepSeparator />
-          </Step>
+            <Stepper.StepSeparator />
+          </Stepper.Step>
         ))}
-      </Stepper>
+      </Stepper.Root>
 
       <HStack>
         <Button onClick={onStepPrev}>Prev</Button>

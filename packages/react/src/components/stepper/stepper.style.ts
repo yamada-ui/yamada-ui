@@ -1,8 +1,7 @@
-import type { ComponentMultiStyle } from "../../core"
-import { getMemoizedObject as get } from "../../utils"
+import { defineComponentSlotStyle } from "../../core"
 
-export const Stepper: ComponentMultiStyle<"Stepper"> = {
-  baseStyle: ({ colorScheme: c = "primary" }) => ({
+export const stepperStyle = defineComponentSlotStyle({
+  base: {
     description: {
       color: "muted",
     },
@@ -10,9 +9,24 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
       flexShrink: 0,
     },
     number: {},
+    root: {
+      display: "flex",
+      justifyContent: "space-between",
+      w: "100%",
+      _horizontal: {
+        alignItems: "center",
+        flexDirection: "row",
+        gap: 4,
+      },
+      _vertical: {
+        alignItems: "flex-start",
+        flexDirection: "column",
+        gap: 0,
+      },
+    },
     separator: {
       "&[data-status=complete]": {
-        bg: [`${c}.500`, `${c}.400`],
+        bg: ["colorScheme.500", "colorScheme.400"],
       },
       bg: "border",
       flex: 1,
@@ -31,11 +45,11 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
     },
     status: {
       "&[data-status=active]": {
-        borderColor: [`${c}.500`, `${c}.400`],
+        borderColor: ["colorScheme.500", "colorScheme.400"],
         borderWidth: "2px",
       },
       "&[data-status=complete]": {
-        bg: [`${c}.500`, `${c}.400`],
+        bg: ["colorScheme.500", "colorScheme.400"],
         color: ["white", "black"],
       },
       "&[data-status=incomplete]": {
@@ -62,28 +76,13 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
         alignItems: "center",
       },
     },
-    stepper: {
-      display: "flex",
-      justifyContent: "space-between",
-      w: "100%",
-      _horizontal: {
-        alignItems: "center",
-        flexDirection: "row",
-        gap: 4,
-      },
-      _vertical: {
-        alignItems: "flex-start",
-        flexDirection: "column",
-        gap: 0,
-      },
-    },
     title: {
       fontWeight: "medium",
     },
-  }),
+  },
 
   sizes: {
-    sm: ({ theme: t }) => ({
+    sm: {
       description: {
         fontSize: "xs",
       },
@@ -95,9 +94,9 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
         fontSize: "sm",
       },
       separator: {
-        insetStart: `calc(${get(t, "sizes.6")} / 2 - 1px)`,
-        maxHeight: `calc(100% - ${get(t, "sizes.6")} - 8px)`,
-        top: `calc(${get(t, "sizes.6")} + 4px)`,
+        insetStart: `calc({sizes.6} / 2 - 1px)`,
+        maxHeight: `calc(100% - {sizes.6} - 8px)`,
+        top: `calc({sizes.6} + 4px)`,
       },
       status: {
         h: 6,
@@ -106,8 +105,8 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
       title: {
         fontSize: "sm",
       },
-    }),
-    md: ({ theme: t }) => ({
+    },
+    md: {
       description: {
         fontSize: "sn",
       },
@@ -119,9 +118,9 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
         fontSize: "md",
       },
       separator: {
-        insetStart: `calc(${get(t, "sizes.8")} / 2 - 1px)`,
-        maxHeight: `calc(100% - ${get(t, "sizes.8")} - 8px)`,
-        top: `calc(${get(t, "sizes.8")} + 4px)`,
+        insetStart: `calc({sizes.8} / 2 - 1px)`,
+        maxHeight: `calc(100% - {sizes.8} - 8px)`,
+        top: `calc({sizes.8} + 4px)`,
       },
       status: {
         h: 8,
@@ -130,8 +129,8 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
       title: {
         fontSize: "md",
       },
-    }),
-    lg: ({ theme: t }) => ({
+    },
+    lg: {
       description: {
         fontSize: "md",
       },
@@ -143,9 +142,9 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
         fontSize: "lg",
       },
       separator: {
-        insetStart: `calc(${get(t, "sizes.10")} / 2 - 1px)`,
-        maxHeight: `calc(100% - ${get(t, "sizes.10")} - 8px)`,
-        top: `calc(${get(t, "sizes.10")} + 4px)`,
+        insetStart: `calc({sizes.10} / 2 - 1px)`,
+        maxHeight: `calc(100% - {sizes.10} - 8px)`,
+        top: `calc({sizes.10} + 4px)`,
       },
       status: {
         h: 10,
@@ -154,11 +153,13 @@ export const Stepper: ComponentMultiStyle<"Stepper"> = {
       title: {
         fontSize: "lg",
       },
-    }),
+    },
   },
 
   defaultProps: {
     colorScheme: "primary",
     size: "md",
   },
-}
+})
+
+export type StepperStyle = typeof stepperStyle

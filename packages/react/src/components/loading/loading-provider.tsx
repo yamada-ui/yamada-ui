@@ -130,7 +130,6 @@ interface ControllerProps extends LoadingConfig {
 const Controller: FC<ControllerProps> = ({
   ref,
   allowPinchZoom = false,
-  appendToParentPortal,
   blockScrollOnMount = true,
   component: Component,
   containerRef,
@@ -206,10 +205,7 @@ const Controller: FC<ControllerProps> = ({
   return (
     <AnimatePresence initial={false}>
       {loadingCount ? (
-        <Portal
-          appendToParentPortal={appendToParentPortal}
-          containerRef={containerRef}
-        >
+        <Portal containerRef={containerRef}>
           <RemoveScroll
             allowPinchZoom={allowPinchZoom}
             enabled={blockScrollOnMount}

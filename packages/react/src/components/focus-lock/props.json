@@ -23,12 +23,12 @@
       "required": false
     },
     "finalFocusRef": {
-      "type": "RefObject<FocusableElement | null>",
+      "type": "RefObject<HTMLElement | null>",
       "description": "`ref` of the element to return focus to when `FocusLock` unmounts.",
       "required": false
     },
     "initialFocusRef": {
-      "type": "RefObject<FocusableElement | null>",
+      "type": "RefObject<HTMLElement | null>",
       "description": "`ref` of the element to receive focus initially.",
       "required": false
     },

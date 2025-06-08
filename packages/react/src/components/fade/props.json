@@ -47,6 +47,11 @@
       "description": "Custom `duration` definition for `enter` and `exit`.",
       "required": false
     },
+    "open": {
+      "type": "boolean",
+      "description": "Show the component. triggers when enter or exit states.",
+      "required": false
+    },
     "transition": {
       "type": "MotionLifecycleProps<Transition>",
       "description": "Custom `transition` definition for `enter` and `exit`.",
@@ -55,11 +60,6 @@
     "transitionEnd": {
       "type": "MotionLifecycleProps<Target>",
       "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
-      "required": false
-    },
-    "open": {
-      "type": "boolean",
-      "description": "Show the component. triggers when enter or exit states.",
       "required": false
     },
     "unmountOnExit": {
@@ -104,18 +104,6 @@
       "description": "Custom `initial`.\n\nProperties, variant label or array of variant labels to start in.\n\nSet to `false` to initialise with the values in `animate` (disabling the mount animation)\n\n```jsx\n// As values\n<motion.div initial={{ opacity: 1 }} />\n\n// As variant\n<motion.div initial=\"visible\" variants={variants} />\n\n// Multiple variants\n<motion.div initial={[\"visible\", \"active\"]} variants={variants} />\n\n// As false (disable mount animation)\n<motion.div initial={false} animate={{ opacity: 0 }} />\n```",
       "required": true
     },
-    "reverse": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `true`, the element will transition back to exit state.",
-      "required": false
-    },
-    "scale": {
-      "type": "number",
-      "defaultValue": "0.95",
-      "description": "The initial scale of the element.",
-      "required": false
-    },
     "delay": {
       "type": "number | MotionLifecycleProps<number>",
       "defaultValue": "0",
@@ -128,6 +116,23 @@
       "description": "Custom `duration` definition for `enter` and `exit`.",
       "required": false
     },
+    "open": {
+      "type": "boolean",
+      "description": "Show the component. triggers when enter or exit states.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the element will transition back to exit state.",
+      "required": false
+    },
+    "scale": {
+      "type": "number",
+      "defaultValue": "0.95",
+      "description": "The initial scale of the element.",
+      "required": false
+    },
     "transition": {
       "type": "MotionLifecycleProps<Transition>",
       "description": "Custom `transition` definition for `enter` and `exit`.",
@@ -136,11 +141,6 @@
     "transitionEnd": {
       "type": "MotionLifecycleProps<Target>",
       "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
-      "required": false
-    },
-    "open": {
-      "type": "boolean",
-      "description": "Show the component. triggers when enter or exit states.",
       "required": false
     },
     "unmountOnExit": {

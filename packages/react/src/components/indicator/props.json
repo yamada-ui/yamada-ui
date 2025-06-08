@@ -32,13 +32,34 @@
     },
     "disabled": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the indicator will be disabled.",
+      "required": false
+    },
+    "floatProps": {
+      "type": "IndicatorFloatProps",
+      "description": "Props for the float element.",
+      "required": false
+    },
+    "inline": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, set the indicator as an inline element.",
       "required": false
     },
     "label": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
       "description": "The indicator label to use.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "IndicatorLabelProps",
+      "description": "Props for the label element.",
+      "required": false
+    },
+    "offset": {
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | \"7\" | ... 93 more ... | { ...; }",
+      "description": "Changes position offset.",
       "required": false
     },
     "overflowCount": {
@@ -49,47 +70,26 @@
     },
     "ping": {
       "type": "boolean | PingOptions",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, make an element scale and fade like a radar ping or ripple of water.",
-      "required": false
-    },
-    "showZero": {
-      "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, display 0.",
-      "required": false
-    },
-    "floatProps": {
-      "type": "IndicatorFloatProps",
-      "description": "Props for the float element.",
-      "required": false
-    },
-    "labelProps": {
-      "type": "IndicatorLabelProps",
-      "description": "Props for the label element.",
-      "required": false
-    },
-    "inline": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
-      "description": "If `true`, set the indicator as an inline element.",
-      "required": false
-    },
-    "withBorder": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
-      "description": "If `true`, display the border of the indicator.",
-      "required": false
-    },
-    "offset": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | \"7\" | ... 93 more ... | { ...; }",
-      "description": "Changes position offset.",
       "required": false
     },
     "placement": {
       "type": "\"center\" | \"end\" | \"start\" | \"center-center\" | \"center-end\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" | \"start-end\" | \"start-start\" | [\"center\" | ... 11 more ... | { ...; }, \"center\" | ... 11 more ... | { ...; }] | { ...; }",
-      "defaultValue": "start-end",
+      "defaultValue": "\"start-end\"",
       "description": "The placement of the float.",
+      "required": false
+    },
+    "showZero": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, display 0.",
+      "required": false
+    },
+    "withBorder": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, display the border of the indicator.",
       "required": false
     }
   }

@@ -52,39 +52,14 @@
       "description": "The variant of the component.",
       "required": false
     },
-    "duration": {
-      "type": "string | number",
-      "description": "The animation duration in seconds.",
-      "required": false
-    },
-    "rangeColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
-      "description": "The color of the progress range.",
-      "required": false
-    },
-    "thickness": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 100 more ... | { ...; }",
-      "description": "The thickness of the progress bar.",
-      "required": false
-    },
-    "trackColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
-      "description": "The color of the progress track.",
-      "required": false
-    },
     "circleProps": {
       "type": "CircleProgressCircleProps",
       "description": "Props for the progress circle element.",
       "required": false
     },
-    "rangeProps": {
-      "type": "CircleProgressRangeProps",
-      "description": "Props for the progress range element.",
-      "required": false
-    },
-    "trackProps": {
-      "type": "CircleProgressTrackProps",
-      "description": "Props for the progress track element.",
+    "duration": {
+      "type": "string | number",
+      "description": "The animation duration in seconds.",
       "required": false
     },
     "max": {
@@ -99,16 +74,41 @@
       "description": "The minimum value of the progress.",
       "required": false
     },
-    "value": {
-      "type": "number",
-      "defaultValue": "0",
-      "description": "The value of the progress. If `null`, the progress will be indeterminate.",
+    "rangeColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color of the progress range.",
+      "required": false
+    },
+    "rangeProps": {
+      "type": "CircleProgressRangeProps",
+      "description": "Props for the progress range element.",
       "required": false
     },
     "shape": {
       "type": "\"square\" | \"rounded\" | [\"square\" | \"rounded\" | { [x: string & {}]: \"square\" | \"rounded\" | undefined; base?: \"square\" | \"rounded\" | undefined; \"2xl\"?: \"square\" | \"rounded\" | undefined; lg?: \"square\" | ... 1 more ... | undefined; md?: \"square\" | ... 1 more ... | undefined; sm?: \"square\" | ... 1 more ... | undefined; x...",
       "defaultValue": "rounded",
       "description": "The shape of the progress bar.",
+      "required": false
+    },
+    "thickness": {
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 100 more ... | { ...; }",
+      "description": "The thickness of the progress bar.",
+      "required": false
+    },
+    "trackColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color of the progress track.",
+      "required": false
+    },
+    "trackProps": {
+      "type": "CircleProgressTrackProps",
+      "description": "Props for the progress track element.",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The value of the progress. If `null`, the progress will be indeterminate.",
       "required": false
     }
   }

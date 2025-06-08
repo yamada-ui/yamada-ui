@@ -20,29 +20,9 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "direction": {
-      "type": "FlexDirection | [FlexDirection | { [x: string & {}]: FlexDirection | undefined; base?: FlexDirection | undefined; ... 4 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; }",
-      "description": "The CSS `flex-direction` property.",
-      "required": false
-    },
     "align": {
       "type": "AlignItems | [AlignItems | { [x: string & {}]: AlignItems | undefined; base?: AlignItems | undefined; \"2xl\"?: AlignItems | undefined; lg?: AlignItems | undefined; md?: AlignItems | undefined; sm?: AlignItems | undefined; xl?: AlignItems | undefined; }, AlignItems | { ...; }] | { ...; }",
       "description": "The CSS `align-items` property.",
-      "required": false
-    },
-    "wrap": {
-      "type": "FlexWrap | [FlexWrap | { [x: string & {}]: FlexWrap | undefined; base?: FlexWrap | undefined; \"2xl\"?: FlexWrap | undefined; lg?: FlexWrap | undefined; md?: FlexWrap | undefined; sm?: FlexWrap | undefined; xl?: FlexWrap | undefined; }, FlexWrap | { ...; }] | { ...; }",
-      "description": "The CSS `flex-wrap` property.",
-      "required": false
-    },
-    "justify": {
-      "type": "JustifyContent | [JustifyContent | { [x: string & {}]: JustifyContent | undefined; base?: JustifyContent | undefined; ... 4 more ...; xl?: JustifyContent | undefined; }, JustifyContent | { ...; }] | { ...; }",
-      "description": "The CSS `justify-content` property.",
-      "required": false
-    },
-    "grow": {
-      "type": "FlexGrow | [FlexGrow | { [x: string & {}]: FlexGrow | undefined; base?: FlexGrow | undefined; \"2xl\"?: FlexGrow | undefined; lg?: FlexGrow | undefined; md?: FlexGrow | undefined; sm?: FlexGrow | undefined; xl?: FlexGrow | undefined; }, FlexGrow | { ...; }] | { ...; }",
-      "description": "The CSS `flex-grow` property.",
       "required": false
     },
     "basis": {
@@ -50,9 +30,29 @@
       "description": "The CSS `flex-basis` property.",
       "required": false
     },
+    "direction": {
+      "type": "FlexDirection | [FlexDirection | { [x: string & {}]: FlexDirection | undefined; base?: FlexDirection | undefined; ... 4 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; }",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
+    },
+    "grow": {
+      "type": "FlexGrow | [FlexGrow | { [x: string & {}]: FlexGrow | undefined; base?: FlexGrow | undefined; \"2xl\"?: FlexGrow | undefined; lg?: FlexGrow | undefined; md?: FlexGrow | undefined; sm?: FlexGrow | undefined; xl?: FlexGrow | undefined; }, FlexGrow | { ...; }] | { ...; }",
+      "description": "The CSS `flex-grow` property.",
+      "required": false
+    },
+    "justify": {
+      "type": "JustifyContent | [JustifyContent | { [x: string & {}]: JustifyContent | undefined; base?: JustifyContent | undefined; ... 4 more ...; xl?: JustifyContent | undefined; }, JustifyContent | { ...; }] | { ...; }",
+      "description": "The CSS `justify-content` property.",
+      "required": false
+    },
     "shrink": {
       "type": "FlexShrink | [FlexShrink | { [x: string & {}]: FlexShrink | undefined; base?: FlexShrink | undefined; \"2xl\"?: FlexShrink | undefined; lg?: FlexShrink | undefined; md?: FlexShrink | undefined; sm?: FlexShrink | undefined; xl?: FlexShrink | undefined; }, FlexShrink | { ...; }] | { ...; }",
       "description": "The CSS `flex-shrink` property.",
+      "required": false
+    },
+    "wrap": {
+      "type": "FlexWrap | [FlexWrap | { [x: string & {}]: FlexWrap | undefined; base?: FlexWrap | undefined; \"2xl\"?: FlexWrap | undefined; lg?: FlexWrap | undefined; md?: FlexWrap | undefined; sm?: FlexWrap | undefined; xl?: FlexWrap | undefined; }, FlexWrap | { ...; }] | { ...; }",
+      "description": "The CSS `flex-wrap` property.",
       "required": false
     }
   }

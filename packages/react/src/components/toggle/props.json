@@ -30,39 +30,10 @@
       "description": "The variant of the component.",
       "required": false
     },
-    "type": {
-      "type": "\"button\" | \"reset\" | \"submit\"",
-      "defaultValue": "'button'",
-      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
-      "required": false
-    },
-    "disabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the button is disabled.",
-      "required": false
-    },
-    "loading": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the loading state of the button is represented.",
-      "required": false
-    },
     "active": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the button is represented as active.",
-      "required": false
-    },
-    "icon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The icon to be used in the button.",
-      "required": false
-    },
-    "disableRipple": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
     "checked": {
@@ -70,32 +41,16 @@
       "description": "If `true`, the toggle button will be checked.",
       "required": false
     },
-    "value": {
-      "type": "Y",
-      "description": "The value of the toggle button.",
-      "required": false
-    },
-    "onChange": {
-      "type": "(checked: boolean) => void",
-      "description": "The callback invoked when checked state changes.",
-      "required": false
-    },
-    "invalid": {
+    "disabled": {
       "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the field will be invalid.",
+      "defaultValue": "false",
+      "description": "If `true`, the button is disabled.",
       "required": false
     },
-    "readOnly": {
+    "disableRipple": {
       "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the field will be readonly.",
-      "required": false
-    },
-    "required": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the field will be required.",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
     "errorBorderColor": {
@@ -105,8 +60,53 @@
     },
     "fullRounded": {
       "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "icon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The icon to be used in the button.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(checked: boolean) => void",
+      "description": "The callback invoked when checked state changes.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "type": {
+      "type": "\"button\" | \"reset\" | \"submit\"",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+      "required": false
+    },
+    "value": {
+      "type": "Y",
+      "description": "The value of the toggle button.",
       "required": false
     }
   },
@@ -141,36 +141,15 @@
       "description": "The variant of the component.",
       "required": false
     },
-    "direction": {
-      "type": "FlexDirection | [FlexDirection | { [x: string & {}]: FlexDirection | undefined; base?: FlexDirection | undefined; ... 4 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; }",
-      "description": "The CSS `flex-direction` property.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\" | [\"horizontal\" | \"vertical\" | { [x: string & {}]: \"horizontal\" | \"vertical\" | undefined; base?: \"horizontal\" | \"vertical\" | undefined; \"2xl\"?: \"horizontal\" | \"vertical\" | undefined; lg?: \"horizontal\" | ... 1 more ... | undefined; md?: \"horizontal\" | ... 1 more ... | undefined; sm?: \"horizo...",
-      "defaultValue": "horizontal",
-      "description": "The orientation of the group.",
-      "required": false
-    },
     "align": {
       "type": "AlignItems | [AlignItems | { [x: string & {}]: AlignItems | undefined; base?: AlignItems | undefined; \"2xl\"?: AlignItems | undefined; lg?: AlignItems | undefined; md?: AlignItems | undefined; sm?: AlignItems | undefined; xl?: AlignItems | undefined; }, AlignItems | { ...; }] | { ...; }",
       "description": "The CSS `align-items` property.",
       "required": false
     },
-    "wrap": {
-      "type": "FlexWrap | [FlexWrap | { [x: string & {}]: FlexWrap | undefined; base?: FlexWrap | undefined; \"2xl\"?: FlexWrap | undefined; lg?: FlexWrap | undefined; md?: FlexWrap | undefined; sm?: FlexWrap | undefined; xl?: FlexWrap | undefined; }, FlexWrap | { ...; }] | { ...; }",
-      "description": "The CSS `flex-wrap` property.",
-      "required": false
-    },
-    "justify": {
-      "type": "JustifyContent | [JustifyContent | { [x: string & {}]: JustifyContent | undefined; base?: JustifyContent | undefined; ... 4 more ...; xl?: JustifyContent | undefined; }, JustifyContent | { ...; }] | { ...; }",
-      "description": "The CSS `justify-content` property.",
-      "required": false
-    },
-    "grow": {
+    "attached": {
       "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
-      "description": "If `true`, the children will grow to fill the available space.",
+      "defaultValue": "false",
+      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
       "required": false
     },
     "basis": {
@@ -178,42 +157,37 @@
       "description": "The CSS `flex-basis` property.",
       "required": false
     },
-    "shrink": {
-      "type": "FlexShrink | [FlexShrink | { [x: string & {}]: FlexShrink | undefined; base?: FlexShrink | undefined; \"2xl\"?: FlexShrink | undefined; lg?: FlexShrink | undefined; md?: FlexShrink | undefined; sm?: FlexShrink | undefined; xl?: FlexShrink | undefined; }, FlexShrink | { ...; }] | { ...; }",
-      "description": "The CSS `flex-shrink` property.",
-      "required": false
-    },
-    "attached": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
-      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
-      "required": false
-    },
-    "stacking": {
-      "type": "\"first-on-top\" | \"last-on-top\" | [\"first-on-top\" | \"last-on-top\" | { [x: string & {}]: \"first-on-top\" | \"last-on-top\" | undefined; base?: \"first-on-top\" | \"last-on-top\" | undefined; ... 4 more ...; xl?: \"first-on-top\" | ... 1 more ... | undefined; }, \"first-on-top\" | ... 1 more ... | { ...; }] | { ...; }",
-      "description": "The stacking order of the group.",
-      "required": false
-    },
     "defaultValue": {
       "type": "NonNullable<Y extends any[] ? Y : Y | undefined>",
       "description": "The initial value of the toggle button group.",
       "required": false
     },
+    "direction": {
+      "type": "FlexDirection | [FlexDirection | { [x: string & {}]: FlexDirection | undefined; base?: FlexDirection | undefined; ... 4 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; }",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
+    },
     "disabled": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, all wrapped toggle button will be disabled.",
       "required": false
     },
-    "readOnly": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, all wrapped toggle button will be readonly.",
+    "fullRounded": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
-    "value": {
-      "type": "NonNullable<Y extends any[] ? Y : Y | undefined>",
-      "description": "The value of the toggle button group.",
+    "grow": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the children will grow to fill the available space.",
+      "required": false
+    },
+    "justify": {
+      "type": "JustifyContent | [JustifyContent | { [x: string & {}]: JustifyContent | undefined; base?: JustifyContent | undefined; ... 4 more ...; xl?: JustifyContent | undefined; }, JustifyContent | { ...; }] | { ...; }",
+      "description": "The CSS `justify-content` property.",
       "required": false
     },
     "onChange": {
@@ -221,10 +195,36 @@
       "description": "The callback fired when any children toggle button is selected or unselected.",
       "required": false
     },
-    "fullRounded": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
-      "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\" | [\"horizontal\" | \"vertical\" | { [x: string & {}]: \"horizontal\" | \"vertical\" | undefined; base?: \"horizontal\" | \"vertical\" | undefined; \"2xl\"?: \"horizontal\" | \"vertical\" | undefined; lg?: \"horizontal\" | ... 1 more ... | undefined; md?: \"horizontal\" | ... 1 more ... | undefined; sm?: \"horizo...",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the group.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, all wrapped toggle button will be readonly.",
+      "required": false
+    },
+    "shrink": {
+      "type": "FlexShrink | [FlexShrink | { [x: string & {}]: FlexShrink | undefined; base?: FlexShrink | undefined; \"2xl\"?: FlexShrink | undefined; lg?: FlexShrink | undefined; md?: FlexShrink | undefined; sm?: FlexShrink | undefined; xl?: FlexShrink | undefined; }, FlexShrink | { ...; }] | { ...; }",
+      "description": "The CSS `flex-shrink` property.",
+      "required": false
+    },
+    "stacking": {
+      "type": "\"first-on-top\" | \"last-on-top\" | [\"first-on-top\" | \"last-on-top\" | { [x: string & {}]: \"first-on-top\" | \"last-on-top\" | undefined; base?: \"first-on-top\" | \"last-on-top\" | undefined; ... 4 more ...; xl?: \"first-on-top\" | ... 1 more ... | undefined; }, \"first-on-top\" | ... 1 more ... | { ...; }] | { ...; }",
+      "description": "The stacking order of the group.",
+      "required": false
+    },
+    "value": {
+      "type": "NonNullable<Y extends any[] ? Y : Y | undefined>",
+      "description": "The value of the toggle button group.",
+      "required": false
+    },
+    "wrap": {
+      "type": "FlexWrap | [FlexWrap | { [x: string & {}]: FlexWrap | undefined; base?: FlexWrap | undefined; \"2xl\"?: FlexWrap | undefined; lg?: FlexWrap | undefined; md?: FlexWrap | undefined; sm?: FlexWrap | undefined; xl?: FlexWrap | undefined; }, FlexWrap | { ...; }] | { ...; }",
+      "description": "The CSS `flex-wrap` property.",
       "required": false
     }
   }

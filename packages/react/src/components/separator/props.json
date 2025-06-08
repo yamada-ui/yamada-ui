@@ -27,7 +27,7 @@
     },
     "orientation": {
       "type": "\"horizontal\" | \"vertical\" | [\"horizontal\" | \"vertical\" | { [x: string & {}]: \"horizontal\" | \"vertical\" | undefined; base?: \"horizontal\" | \"vertical\" | undefined; \"2xl\"?: \"horizontal\" | \"vertical\" | undefined; lg?: \"horizontal\" | ... 1 more ... | undefined; md?: \"horizontal\" | ... 1 more ... | undefined; sm?: \"horizo...",
-      "defaultValue": "'horizontal'",
+      "defaultValue": "\"horizontal\"",
       "description": "The orientation of the divider.",
       "required": false
     }

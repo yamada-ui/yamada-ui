@@ -20,10 +20,9 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "type": {
-      "type": "\"scroll\" | \"hover\" | \"always\" | \"never\"",
-      "defaultValue": "'hover'",
-      "description": "Scrollbar visibility type.",
+    "onScrollPositionChange": {
+      "type": "({ x, y }: { x: number; y: number }) => void",
+      "description": "Callback function for when the scroll position changes.",
       "required": false
     },
     "scrollHideDelay": {
@@ -32,9 +31,10 @@
       "description": "Delay in milliseconds before scrollbars are hidden.",
       "required": false
     },
-    "onScrollPositionChange": {
-      "type": "({ x, y }: { x: number; y: number }) => void",
-      "description": "Callback function for when the scroll position changes.",
+    "type": {
+      "type": "\"scroll\" | \"hover\" | \"always\" | \"never\"",
+      "defaultValue": "\"hover\"",
+      "description": "Scrollbar visibility type.",
       "required": false
     }
   }

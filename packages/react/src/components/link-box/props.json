@@ -22,7 +22,7 @@
     },
     "external": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the link will open in new tab.",
       "required": false
     }

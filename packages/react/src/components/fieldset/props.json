@@ -140,36 +140,20 @@
       "description": "The variant of the component.",
       "required": false
     },
+    "contentProps": {
+      "type": "FieldsetContentProps",
+      "description": "Props the content component.",
+      "required": false
+    },
     "disabled": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the fieldset will be disabled.",
       "required": false
     },
     "errorMessage": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
       "description": "The fieldset error message to use.",
-      "required": false
-    },
-    "helperMessage": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The fieldset helper message to use.",
-      "required": false
-    },
-    "invalid": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the fieldset will be invalid.",
-      "required": false
-    },
-    "legend": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The fieldset legend to use.",
-      "required": false
-    },
-    "contentProps": {
-      "type": "FieldsetContentProps",
-      "description": "Props the content component.",
       "required": false
     },
     "errorMessageProps": {
@@ -182,9 +166,25 @@
       "description": "Props the header component.",
       "required": false
     },
+    "helperMessage": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The fieldset helper message to use.",
+      "required": false
+    },
     "helperMessageProps": {
       "type": "FieldsetHelperMessageProps",
       "description": "Props the helper message component.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the fieldset will be invalid.",
+      "required": false
+    },
+    "legend": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The fieldset legend to use.",
       "required": false
     },
     "legendProps": {

@@ -1,13 +1,8 @@
 {
   "FocusLock": {
-    "children": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "",
-      "required": false
-    },
     "autoFocus": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the first focusable element within the `children` will auto-focused once `FocusLock` mounts.",
       "required": false
     },
@@ -18,7 +13,7 @@
     },
     "disabled": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, focus trapping will be disabled.",
       "required": false
     },
@@ -34,19 +29,19 @@
     },
     "lockFocusAcrossFrames": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "Enables aggressive focus capturing within iframes.\n\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`: allows focus to move outside of iframe.",
       "required": false
     },
     "persistentFocus": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, disables text selections inside, and outside focus lock.",
       "required": false
     },
     "restoreFocus": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts.",
       "required": false
     }

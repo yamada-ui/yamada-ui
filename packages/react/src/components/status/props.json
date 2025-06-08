@@ -25,12 +25,6 @@
       "description": "The size of the component.",
       "required": false
     },
-    "value": {
-      "type": "StatusScheme",
-      "defaultValue": "'info'",
-      "description": "The type of the status",
-      "required": false
-    },
     "indicatorProps": {
       "type": "HTMLStyledProps",
       "description": "The props for the status indicator component",
@@ -39,6 +33,12 @@
     "labelProps": {
       "type": "HTMLStyledProps",
       "description": "The props for the status label component",
+      "required": false
+    },
+    "value": {
+      "type": "StatusScheme",
+      "defaultValue": "\"info\"",
+      "description": "The type of the status",
       "required": false
     }
   }

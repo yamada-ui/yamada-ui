@@ -44,8 +44,8 @@
     },
     "type": {
       "type": "\"decrease\" | \"increase\"",
-      "defaultValue": "increase",
-      "description": "",
+      "defaultValue": "\"increase\"",
+      "description": "The type of the icon.",
       "required": false
     }
   },
@@ -99,7 +99,7 @@
     },
     "centerContent": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, container will center its children regardless of their width.",
       "required": false
     },
@@ -108,24 +108,14 @@
       "description": "The stat helper message to use.",
       "required": false
     },
-    "icon": {
-      "type": "\"decrease\" | \"increase\"",
-      "description": "The stat icon to use.",
-      "required": false
-    },
-    "label": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The stat label to use.",
-      "required": false
-    },
-    "value": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The stat value to use.",
-      "required": false
-    },
     "helperMessageProps": {
       "type": "StatHelperMessageProps",
       "description": "Props for stat helper message component.",
+      "required": false
+    },
+    "icon": {
+      "type": "\"decrease\" | \"increase\"",
+      "description": "The stat icon to use.",
       "required": false
     },
     "iconProps": {
@@ -133,9 +123,19 @@
       "description": "Props for stat icon component.",
       "required": false
     },
+    "label": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The stat label to use.",
+      "required": false
+    },
     "labelProps": {
       "type": "StatLabelProps",
       "description": "Props for stat label component.",
+      "required": false
+    },
+    "value": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The stat value to use.",
       "required": false
     },
     "valueProps": {

@@ -30,22 +30,6 @@
       "description": "The variant of the component.",
       "required": false
     },
-    "disabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the tag is disabled.",
-      "required": false
-    },
-    "endIcon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "Icon to be displayed to the end of the tag.",
-      "required": false
-    },
-    "startIcon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "Icon to be displayed to the start of the tag.",
-      "required": false
-    },
     "closeButtonProps": {
       "type": "TagCloseButtonProps",
       "description": "Props for tag close button element.",
@@ -56,6 +40,17 @@
       "description": "Props for content element.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the tag is disabled.",
+      "required": false
+    },
+    "endIcon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "Icon to be displayed to the end of the tag.",
+      "required": false
+    },
     "iconProps": {
       "type": "HTMLStyledProps<\"span\">",
       "description": "Props for icon element.",
@@ -64,6 +59,11 @@
     "onClose": {
       "type": "MouseEventHandler<HTMLElement>",
       "description": "Function to be executed when the close button is clicked.",
+      "required": false
+    },
+    "startIcon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "Icon to be displayed to the start of the tag.",
       "required": false
     }
   }

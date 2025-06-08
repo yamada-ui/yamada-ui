@@ -913,9 +913,9 @@ importers:
       '@emotion/utils':
         specifier: ^1.4.2
         version: 1.4.2
-      '@popperjs/core':
-        specifier: ^2.11.8
-        version: 2.11.8
+      '@floating-ui/react-dom':
+        specifier: ^2.1.3
+        version: 2.1.3(react-dom@19.1.0)(react@19.1.0)
       '@tanstack/react-table':
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.1.0)(react@19.1.0)
@@ -3873,6 +3873,34 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
     dev: false
 
+  /@floating-ui/core@1.7.1:
+    resolution: {integrity: sha512-azI0DrjMMfIug/ExbBaeDVJXcY0a7EPvPjb2xAJPa4HeimBX+Z18HK8QQR3jb6356SnDDdxx+hinMLcJEDdOjw==, tarball: https://registry.npmjs.org/@floating-ui/core/-/core-1.7.1.tgz}
+    dependencies:
+      '@floating-ui/utils': 0.2.9
+    dev: false
+
+  /@floating-ui/dom@1.7.1:
+    resolution: {integrity: sha512-cwsmW/zyw5ltYTUeeYJ60CnQuPqmGwuGVhG9w0PRaRKkAyi38BT5CKrpIbb+jtahSwUl04cWzSx9ZOIxeS6RsQ==, tarball: https://registry.npmjs.org/@floating-ui/dom/-/dom-1.7.1.tgz}
+    dependencies:
+      '@floating-ui/core': 1.7.1
+      '@floating-ui/utils': 0.2.9
+    dev: false
+
+  /@floating-ui/react-dom@2.1.3(react-dom@19.1.0)(react@19.1.0):
+    resolution: {integrity: sha512-huMBfiU9UnQ2oBwIhgzyIiSpVgvlDstU8CX0AF+wS+KzmYMs0J2a3GwuFHV1Lz+jlrQGeC1fF+Nv0QoumyV0bA==, tarball: https://registry.npmjs.org/@floating-ui/react-dom/-/react-dom-2.1.3.tgz}
+    peerDependencies:
+      react: ^19.0.0
+      react-dom: ^19.0.0
+    dependencies:
+      '@floating-ui/dom': 1.7.1
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+    dev: false
+
+  /@floating-ui/utils@0.2.9:
+    resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==, tarball: https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.9.tgz}
+    dev: false
+
   /@formatjs/ecma402-abstract@2.3.4:
     resolution: {integrity: sha512-qrycXDeaORzIqNhBOx0btnhpD1c+/qFIHAN9znofuMJX6QBwtbrmlpWfD4oiUUD2vJUOIYFA/gYtg2KAMGG7sA==, tarball: https://registry.npmjs.org/@formatjs/ecma402-abstract/-/ecma402-abstract-2.3.4.tgz}
     dependencies:
@@ -4987,10 +5015,6 @@ packages:
 
   /@polka/url@1.0.0-next.29:
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==, tarball: https://registry.npmjs.org/@polka/url/-/url-1.0.0-next.29.tgz}
-
-  /@popperjs/core@2.11.8:
-    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==, tarball: https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz}
-    dev: false
 
   /@remix-run/dev@2.16.6(@remix-run/react@2.16.6)(@remix-run/serve@2.16.6)(@types/node@22.15.17)(jiti@2.4.2)(tsx@4.19.4)(typescript@5.8.3)(vite@6.3.5):
     resolution: {integrity: sha512-vddzv6IY+4KFDNhTj7yvMi5BmBpEVSe6meq9Z7/yM5mjv03F5Ywsci41Sdri2RU5Nitplrj2o9iXOtQOnTBS3g==, tarball: https://registry.npmjs.org/@remix-run/dev/-/dev-2.16.6.tgz}

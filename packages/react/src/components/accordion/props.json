@@ -69,7 +69,7 @@
     },
     "disabled": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the accordion item will be disabled.",
       "required": false
     }
@@ -122,13 +122,13 @@
     },
     "animationOpacity": {
       "type": "boolean",
-      "defaultValue": true,
+      "defaultValue": "true",
       "description": "If `true`, the opacity of the content will be animated.",
       "required": false
     },
     "endingHeight": {
       "type": "string | number",
-      "defaultValue": "auto",
+      "defaultValue": "\"auto\"",
       "description": "The height you want the content in its expanded state.",
       "required": false
     },
@@ -140,11 +140,13 @@
     },
     "delay": {
       "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0",
       "description": "Custom `delay` definition for `enter` and `exit`.",
       "required": false
     },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
       "description": "Custom `duration` definition for `enter` and `exit`.",
       "required": false
     },
@@ -192,7 +194,7 @@
     },
     "iconHidden": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, hide the accordion icon for all items.",
       "required": false
     },
@@ -208,13 +210,13 @@
     },
     "multiple": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, multiple accordion items can be expanded at once.",
       "required": false
     },
     "toggle": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, any expanded accordion item can be collapsed again.",
       "required": false
     },

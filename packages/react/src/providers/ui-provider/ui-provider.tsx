@@ -1,6 +1,5 @@
 import type { FC, ReactNode } from "react"
 import type { ColorModeProviderProps } from "../color-mode-provider"
-import type { Environment } from "../environment-provider"
 import type { I18nProviderProps } from "../i18n-provider"
 import type { ThemeProviderProps } from "../theme-provider"
 import { LoadingProvider } from "../../components/loading"
@@ -26,19 +25,6 @@ export interface UIProviderProps
    */
   colorModeStorageKey?: string
   /**
-   * If `true`, the use of automatic window and document detection will be disabled.
-   *
-   * @default false
-   */
-  disableEnvironment?: boolean
-  /**
-   * The environment `window` and `document` to be used by all components and hooks.
-   *
-   * By default, we smartly determine the ownerDocument and defaultView
-   * based on where `UIProvider` is rendered.
-   */
-  environment?: Environment
-  /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
    */
@@ -55,10 +41,8 @@ export const UIProvider: FC<UIProviderProps> = ({
   colorModeStorageKey,
   config = defaultConfig,
   dir,
-  disableEnvironment,
   disableGlobalStyle,
   disableResetStyle,
-  environment,
   intl,
   locale,
   theme = defaultTheme,
@@ -66,10 +50,7 @@ export const UIProvider: FC<UIProviderProps> = ({
   themeSchemeStorageKey,
 }) => {
   return (
-    <EnvironmentProvider
-      disabled={disableEnvironment}
-      environment={environment}
-    >
+    <EnvironmentProvider>
       <I18nProvider dir={dir} intl={intl} locale={locale}>
         <ThemeProvider
           config={config}

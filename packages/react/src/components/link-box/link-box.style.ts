@@ -10,7 +10,6 @@ export const linkBoxStyle = defineComponentSlotStyle({
         cursor: "inherit",
         display: "block",
         inset: "0",
-        outlineColor: "{--focus-ring-color}",
         position: "absolute",
         zIndex: "0",
       },

@@ -73,7 +73,7 @@ export const useModal = ({
 
   const getOpenTriggerProps: PropGetter<"button"> = useCallback(
     (props = {}) => ({
-      "aria-controls": contentId,
+      "aria-controls": open ? contentId : undefined,
       "aria-expanded": open,
       "aria-haspopup": "dialog",
       "aria-label": t("Open modal"),

@@ -1,0 +1,146 @@
+{
+  "Description": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Item": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "description": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ReactNode[]",
+      "description": "The data list description to use.",
+      "required": false
+    },
+    "descriptionProps": {
+      "type": "DataListDescriptionProps",
+      "description": "The props for the data list description component.",
+      "required": false
+    },
+    "term": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ReactNode[]",
+      "description": "The data list term to use.",
+      "required": false
+    },
+    "termProps": {
+      "type": "DataListTermProps",
+      "description": "The props for the data list term component.",
+      "required": false
+    }
+  },
+  "Root": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | [AnyString | \"lg\" | \"md\" | \"sm\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; base?: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; ... 4 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"subtle\" | \"bold\" | \"grid\" | [AnyString | \"subtle\" | \"bold\" | \"grid\" | { [x: string & {}]: AnyString | \"subtle\" | \"bold\" | \"grid\" | undefined; ... 5 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "col": {
+      "type": "number",
+      "description": "The number of columns.\nIf `orientation` is `\"horizontal\"` and `items` is not set, please set this.",
+      "required": false
+    },
+    "descriptionProps": {
+      "type": "DataListDescriptionProps",
+      "description": "The props for the data list description component.",
+      "required": false
+    },
+    "items": {
+      "type": "DataListItemProps[]",
+      "description": "If provided, generate elements based on items.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\" | [\"horizontal\" | \"vertical\" | { [x: string & {}]: \"horizontal\" | \"vertical\" | undefined; base?: \"horizontal\" | \"vertical\" | undefined; \"2xl\"?: \"horizontal\" | \"vertical\" | undefined; lg?: \"horizontal\" | ... 1 more ... | undefined; md?: \"horizontal\" | ... 1 more ... | undefined; sm?: \"horizo...",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the data list.",
+      "required": false
+    },
+    "termProps": {
+      "type": "DataListTermProps",
+      "description": "The props for the data list term component.",
+      "required": false
+    }
+  },
+  "Term": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import type { CSSProps, HTMLStyledProps } from "../../core"
 import type { BleedStyle } from "./bleed.style"
-import { createComponent } from "../../core"
+import { createComponent, varAttr } from "../../core"
 import { calc } from "../../utils"
 import { bleedStyle } from "./bleed.style"
 
@@ -72,10 +72,10 @@ export const Bleed = withContext("div")(
 
     return {
       ...rest,
-      "--block-end": blockEnd ? `spaces.${blockEnd}` : undefined,
-      "--block-start": blockStart ? `spaces.${blockStart}` : undefined,
-      "--inline-end": inlineEnd ? `spaces.${inlineEnd}` : undefined,
-      "--inline-start": inlineStart ? `spaces.${inlineStart}` : undefined,
+      "--block-end": varAttr(blockEnd, "spaces"),
+      "--block-start": varAttr(blockStart, "spaces"),
+      "--inline-end": varAttr(inlineEnd, "spaces"),
+      "--inline-start": varAttr(inlineStart, "spaces"),
       marginBlockEnd,
       marginBlockStart,
       marginInlineEnd,

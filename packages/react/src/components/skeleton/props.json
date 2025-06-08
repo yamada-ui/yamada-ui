@@ -1,0 +1,184 @@
+{
+  "Skeleton": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"pulse\" | \"none\" | \"shine\" | [AnyString | \"pulse\" | \"none\" | \"shine\" | { [x: string & {}]: AnyString | \"pulse\" | \"none\" | \"shine\" | undefined; ... 5 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "duration": {
+      "type": "string | number",
+      "description": "The animation duration in seconds.",
+      "required": false
+    },
+    "endColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color at the animation end.",
+      "required": false
+    },
+    "fadeDuration": {
+      "type": "string | number",
+      "description": "The fade in duration in seconds. Requires `loaded` toggled to `true` in order to see the transition.",
+      "required": false
+    },
+    "fitContent": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the skeleton will take the width of it's children.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "true",
+      "description": "If `false`, it'll render its children with a nice fade transition.",
+      "required": false
+    },
+    "startColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color at the animation start.",
+      "required": false
+    }
+  },
+  "SkeletonCircle": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"pulse\" | \"none\" | \"shine\" | [AnyString | \"pulse\" | \"none\" | \"shine\" | { [x: string & {}]: AnyString | \"pulse\" | \"none\" | \"shine\" | undefined; ... 5 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "duration": {
+      "type": "string | number",
+      "description": "The animation duration in seconds.",
+      "required": false
+    },
+    "endColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color at the animation end.",
+      "required": false
+    },
+    "fadeDuration": {
+      "type": "string | number",
+      "description": "The fade in duration in seconds. Requires `loaded` toggled to `true` in order to see the transition.",
+      "required": false
+    },
+    "fitContent": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the skeleton will take the width of it's children.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "true",
+      "description": "If `false`, it'll render its children with a nice fade transition.",
+      "required": false
+    },
+    "startColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color at the animation start.",
+      "required": false
+    }
+  },
+  "SkeletonText": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"pulse\" | \"none\" | \"shine\" | [AnyString | \"pulse\" | \"none\" | \"shine\" | { [x: string & {}]: AnyString | \"pulse\" | \"none\" | \"shine\" | undefined; ... 5 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "duration": {
+      "type": "string | number",
+      "description": "The animation duration in seconds.",
+      "required": false
+    },
+    "endColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color at the animation end.",
+      "required": false
+    },
+    "fadeDuration": {
+      "type": "string | number",
+      "description": "The fade in duration in seconds. Requires `loaded` toggled to `true` in order to see the transition.",
+      "required": false
+    },
+    "fitContent": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the skeleton will take the width of it's children.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "true",
+      "description": "If `false`, it'll render its children with a nice fade transition.",
+      "required": false
+    },
+    "rootProps": {
+      "type": "HTMLStyledProps",
+      "description": "Props for the root element.",
+      "required": false
+    },
+    "startColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color at the animation start.",
+      "required": false
+    }
+  }
+}

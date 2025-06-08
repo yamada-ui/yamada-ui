@@ -1,0 +1,93 @@
+{
+  "Root": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | undefined; ... 5 more ...; xl?: AnyString | ... 5 more ... | undefined; }, AnyString | ... 5 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"outline\" | \"plain\" | \"filled\" | \"flushed\" | [AnyString | \"outline\" | \"plain\" | \"filled\" | \"flushed\" | { [x: string & {}]: AnyString | ... 4 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 4 more ... | undefined; }, AnyString | ... 4 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "elementProps": {
+      "type": "InputElementProps",
+      "description": "The props for the end element.",
+      "required": false
+    },
+    "errorBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The border color when the input is invalid.",
+      "required": false
+    },
+    "focusBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The border color when the input is focused.",
+      "required": false
+    },
+    "icon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The icon to be used in the select.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "NativeSelectIconProps",
+      "description": "Props for icon element.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "items": {
+      "type": "NativeSelectItem[]",
+      "defaultValue": "\"[]\"",
+      "description": "If provided, generate options based on items.",
+      "required": false
+    },
+    "placeholder": {
+      "type": "string",
+      "description": "The placeholder for select.",
+      "required": false
+    },
+    "placeholderInOptions": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, include placeholders in options.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "rootProps": {
+      "type": "InputGroupRootProps",
+      "description": "Props for root element.",
+      "required": false
+    }
+  }
+}

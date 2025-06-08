@@ -26,27 +26,6 @@ export const Basic: Story = () => {
   return <PasswordInput placeholder="Your password" />
 }
 
-export const Size: Story = () => {
-  return (
-    <PropsTable
-      variant="column"
-      columns={["xs", "sm", "md", "lg", "xl"]}
-      rows={["outline", "filled", "flushed"]}
-    >
-      {(column, row, key) => {
-        return (
-          <PasswordInput
-            key={key}
-            size={column}
-            variant={row}
-            placeholder={`Size (${column})`}
-          />
-        )
-      }}
-    </PropsTable>
-  )
-}
-
 export const Variant: Story = () => {
   return (
     <PropsTable
@@ -61,6 +40,27 @@ export const Variant: Story = () => {
             colorScheme={row}
             variant={column}
             placeholder={toTitleCase(column)}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const Size: Story = () => {
+  return (
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return (
+          <PasswordInput
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
           />
         )
       }}
@@ -92,6 +92,17 @@ export const Disabled: Story = () => {
         )}
       </For>
 
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} disabled>
+            <InputGroup.Addon>
+              <KeyIcon />
+            </InputGroup.Addon>
+            <PasswordInput placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <Field.Root
         disabled
         helperMessage="We'll never share your password."
@@ -117,6 +128,17 @@ export const Readonly: Story = () => {
         )}
       </For>
 
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} readOnly>
+            <InputGroup.Addon>
+              <KeyIcon />
+            </InputGroup.Addon>
+            <PasswordInput placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <Field.Root
         helperMessage="We'll never share your password."
         label="Password"
@@ -139,6 +161,17 @@ export const Invalid: Story = () => {
             invalid
             placeholder={toTitleCase(variant)}
           />
+        )}
+      </For>
+
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} invalid>
+            <InputGroup.Addon>
+              <KeyIcon />
+            </InputGroup.Addon>
+            <PasswordInput placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
         )}
       </For>
 

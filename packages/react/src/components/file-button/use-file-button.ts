@@ -17,6 +17,7 @@ export const useFileButton = (props: UseFileButtonProps) => {
     (props) => ({
       ...clickableProps,
       "aria-disabled": ariaAttr(!interactive),
+      tabIndex: interactive ? clickableProps.tabIndex : -1,
       ...props,
     }),
     [clickableProps, interactive],

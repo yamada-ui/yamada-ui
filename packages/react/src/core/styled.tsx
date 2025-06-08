@@ -19,6 +19,7 @@ import {
   createContext,
   createdDom,
   cx,
+  filterEmpty,
   filterUndefined,
   isString,
   isUndefined,
@@ -177,8 +178,8 @@ export function createStyled<
 
     const interpolations = useMemo(
       () => [
-        ...[...cssArray, styleProps].map(css(theme)),
         ...registered.current,
+        ...filterEmpty([...cssArray, styleProps].map(css(theme))),
       ],
       [cssArray, theme, styleProps],
     )

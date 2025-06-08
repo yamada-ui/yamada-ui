@@ -1,0 +1,138 @@
+{
+  "Switch": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | [AnyString | \"lg\" | \"md\" | \"sm\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; base?: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; ... 4 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"thin\" | \"thick\" | [AnyString | \"thin\" | \"thick\" | { [x: string & {}]: AnyString | \"thin\" | \"thick\" | undefined; base?: AnyString | \"thin\" | \"thick\" | undefined; ... 4 more ...; xl?: AnyString | ... 2 more ... | undefined; }, AnyString | ... 2 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "checked": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the switch will be checked.",
+      "required": false
+    },
+    "checkOnEnter": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the switch will be checked when the Enter key is pressed.",
+      "required": false
+    },
+    "defaultChecked": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the switch will be initially checked.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "icon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | { ...; }",
+      "description": "The switch icon to use.",
+      "required": false
+    },
+    "id": {
+      "type": "string",
+      "description": "id assigned to input.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "HTMLStyledProps<\"input\">",
+      "description": "Props for switch input element.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "HTMLStyledProps<\"span\">",
+      "description": "Props for switch label element.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The HTML `name` attribute used for forms.",
+      "required": false
+    },
+    "onBlur": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the switch is blurred.",
+      "required": false
+    },
+    "onChange": {
+      "type": "ChangeEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the checked state changes.",
+      "required": false
+    },
+    "onFocus": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the switch is focused.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "Change switch label from right to left.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"square\" | \"rounded\" | [\"circle\" | \"square\" | \"rounded\" | { [x: string & {}]: \"circle\" | \"square\" | \"rounded\" | undefined; base?: \"circle\" | \"square\" | \"rounded\" | undefined; ... 4 more ...; xl?: \"circle\" | ... 2 more ... | undefined; }, \"circle\" | ... 2 more ... | { ...; }] | { ...; }",
+      "defaultValue": "circle",
+      "description": "The shape of the switch.",
+      "required": false
+    },
+    "tabIndex": {
+      "type": "number",
+      "description": "The tab-index property of the underlying input element.",
+      "required": false
+    },
+    "value": {
+      "type": "string",
+      "description": "The value to be used in the switch input.",
+      "required": false
+    }
+  }
+}

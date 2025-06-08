@@ -1,0 +1,34 @@
+{
+  "Code": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | \"xs\" | [AnyString | \"lg\" | \"md\" | \"sm\" | \"xs\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | \"xs\" | undefined; ... 5 more ...; xl?: AnyString | ... 4 more ... | undefined; }, AnyString | ... 4 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [AnyString | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | { [x: string & {}]: AnyString | ... 4 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 4 more ... | undefined; }, AnyString | ... 4 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    }
+  }
+}

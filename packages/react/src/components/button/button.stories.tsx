@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
-import { COLOR_SCHEMES } from "../../utils"
+import { COLOR_SCHEMES, toTitleCase } from "../../utils"
+import { For } from "../for"
 import { ArrowRightIcon, CheckIcon, MailIcon, PlusIcon, XIcon } from "../icon"
 import { Loading } from "../loading"
 import { Wrap } from "../wrap"
@@ -53,25 +54,13 @@ export const Size: Story = () => {
 export const FullRounded: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" variant="solid" fullRounded>
-        Solid
-      </Button>
-
-      <Button colorScheme="secondary" variant="subtle" fullRounded>
-        Subtle
-      </Button>
-
-      <Button colorScheme="info" variant="surface" fullRounded>
-        Surface
-      </Button>
-
-      <Button colorScheme="warning" variant="outline" fullRounded>
-        Outline
-      </Button>
-
-      <Button colorScheme="danger" variant="ghost" fullRounded>
-        Ghost
-      </Button>
+      <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        {(variant, index) => (
+          <Button key={index} variant={variant} fullRounded>
+            {toTitleCase(variant)}
+          </Button>
+        )}
+      </For>
     </Wrap>
   )
 }
@@ -79,25 +68,13 @@ export const FullRounded: Story = () => {
 export const Disabled: Story = () => {
   return (
     <Wrap gap="md">
-      <Button colorScheme="primary" variant="solid" disabled>
-        Solid
-      </Button>
-
-      <Button colorScheme="secondary" variant="subtle" disabled>
-        Subtle
-      </Button>
-
-      <Button colorScheme="info" variant="surface" disabled>
-        Surface
-      </Button>
-
-      <Button colorScheme="warning" variant="outline" disabled>
-        Outline
-      </Button>
-
-      <Button colorScheme="danger" variant="ghost" disabled>
-        Ghost
-      </Button>
+      <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        {(variant, index) => (
+          <Button key={index} variant={variant} disabled>
+            {toTitleCase(variant)}
+          </Button>
+        )}
+      </For>
     </Wrap>
   )
 }

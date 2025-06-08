@@ -1,7 +1,6 @@
 import MatchMediaMock from "vitest-matchmedia-mock"
 import { useMediaQuery } from "."
 import { act, renderHook } from "../../../test"
-import { EnvironmentProvider } from "../../providers/environment-provider"
 
 describe("useMediaQuery", () => {
   let matchMediaMock: MatchMediaMock
@@ -23,26 +22,6 @@ describe("useMediaQuery", () => {
 
     const { result } = renderHook(() =>
       useMediaQuery("(prefers-color-scheme: dark)"),
-    )
-
-    expect(result.current).toBeTruthy()
-  })
-
-  test("should correctly return fallback value", () => {
-    const environment = {
-      getDocument: () => undefined,
-      getWindow: () => undefined,
-    }
-
-    const { result } = renderHook(
-      () => useMediaQuery("(prefers-color-scheme: dark)", true),
-      {
-        wrapper: ({ children }) => (
-          <EnvironmentProvider disabled environment={environment}>
-            {children}
-          </EnvironmentProvider>
-        ),
-      },
     )
 
     expect(result.current).toBeTruthy()

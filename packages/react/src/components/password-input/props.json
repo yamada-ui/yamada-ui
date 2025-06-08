@@ -1,0 +1,136 @@
+{
+  "PasswordInput": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [AnyString | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | { [x: string & {}]: AnyString | \"2xl\" | ... 5 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 6 more ... | undefined; }, AnyString | ... 6 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"outline\" | \"plain\" | \"filled\" | \"flushed\" | [AnyString | \"outline\" | \"plain\" | \"filled\" | \"flushed\" | { [x: string & {}]: AnyString | ... 4 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 4 more ... | undefined; }, AnyString | ... 4 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "buttonProps": {
+      "type": "PasswordInputButtonProps",
+      "description": "The props for the button element.",
+      "required": false
+    },
+    "defaultVisible": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "Determines whether the password input is visible by default.",
+      "required": false
+    },
+    "elementProps": {
+      "type": "InputElementProps",
+      "description": "The props for the end element.",
+      "required": false
+    },
+    "errorBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The border color when the input is invalid.",
+      "required": false
+    },
+    "focusBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The border color when the input is focused.",
+      "required": false
+    },
+    "htmlSize": {
+      "type": "number",
+      "description": "The native HTML `size` attribute to be passed to the `input`.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "onVisibleChange": {
+      "type": "(visible: boolean) => void",
+      "description": "Callback function that is triggered when the visibility of the password input changes.",
+      "required": false
+    },
+    "rootProps": {
+      "type": "InputGroupRootProps",
+      "description": "The props for the root element.",
+      "required": false
+    },
+    "visibilityIcon": {
+      "type": "{ off: ReactNode; on: ReactNode }",
+      "description": "The icons to be used for the visibility toggle.",
+      "required": false
+    },
+    "visible": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "Determines the visibility of the password input.",
+      "required": false
+    }
+  },
+  "StrengthMeter": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "description": "The value of the password strength meter.",
+      "required": true
+    },
+    "getIndicatorProps": {
+      "type": "(percent: number) => IndicatorProps",
+      "description": "The props of the password strength meter indicator.",
+      "required": false
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "4",
+      "description": "The maximum value of the password strength meter.",
+      "required": false
+    },
+    "withLabel": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the password strength meter will display the label.",
+      "required": false
+    }
+  }
+}

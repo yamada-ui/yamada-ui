@@ -1,0 +1,340 @@
+{
+  "Button": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [AnyString | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | { [x: string & {}]: AnyString | \"2xl\" | ... 5 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 6 more ... | undefined; }, AnyString | ... 6 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [AnyString | \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | { [x: string & {}]: AnyString | ... 5 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 5 more ... | undefined; }, AnyString | ... 5 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is disabled.",
+      "required": false
+    },
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "endIcon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The icon to display at the end side of the button.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "ButtonIconProps",
+      "description": "The props of the icon element.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "loadingIcon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "defaultValue": "\"oval\"",
+      "description": "The icon to display when the button is loading.",
+      "required": false
+    },
+    "loadingMessage": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The message to display when the button is loading.",
+      "required": false
+    },
+    "loadingPlacement": {
+      "type": "\"end\" | \"start\"",
+      "defaultValue": "\"start\"",
+      "description": "The placement of the loading indicator. Accepts `start` or `end`.",
+      "required": false
+    },
+    "loadingProps": {
+      "type": "ButtonLoadingProps",
+      "description": "The props of the loading icon element.",
+      "required": false
+    },
+    "startIcon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The icon to display at the start side of the button.",
+      "required": false
+    },
+    "type": {
+      "type": "\"button\" | \"reset\" | \"submit\"",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+      "required": false
+    }
+  },
+  "ButtonGroup": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [AnyString | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | { [x: string & {}]: AnyString | \"2xl\" | ... 5 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 6 more ... | undefined; }, AnyString | ... 6 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [AnyString | \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | { [x: string & {}]: AnyString | ... 5 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 5 more ... | undefined; }, AnyString | ... 5 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "align": {
+      "type": "AlignItems | [AlignItems | { [x: string & {}]: AlignItems | undefined; base?: AlignItems | undefined; \"2xl\"?: AlignItems | undefined; lg?: AlignItems | undefined; md?: AlignItems | undefined; sm?: AlignItems | undefined; xl?: AlignItems | undefined; }, AlignItems | { ...; }] | { ...; }",
+      "description": "The CSS `align-items` property.",
+      "required": false
+    },
+    "attached": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
+      "required": false
+    },
+    "basis": {
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 98 more ... | { ...; }",
+      "description": "The CSS `flex-basis` property.",
+      "required": false
+    },
+    "direction": {
+      "type": "FlexDirection | [FlexDirection | { [x: string & {}]: FlexDirection | undefined; base?: FlexDirection | undefined; ... 4 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; }",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, all wrapped button will be disabled.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "grow": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the children will grow to fill the available space.",
+      "required": false
+    },
+    "justify": {
+      "type": "JustifyContent | [JustifyContent | { [x: string & {}]: JustifyContent | undefined; base?: JustifyContent | undefined; ... 4 more ...; xl?: JustifyContent | undefined; }, JustifyContent | { ...; }] | { ...; }",
+      "description": "The CSS `justify-content` property.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\" | [\"horizontal\" | \"vertical\" | { [x: string & {}]: \"horizontal\" | \"vertical\" | undefined; base?: \"horizontal\" | \"vertical\" | undefined; \"2xl\"?: \"horizontal\" | \"vertical\" | undefined; lg?: \"horizontal\" | ... 1 more ... | undefined; md?: \"horizontal\" | ... 1 more ... | undefined; sm?: \"horizo...",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the group.",
+      "required": false
+    },
+    "shrink": {
+      "type": "FlexShrink | [FlexShrink | { [x: string & {}]: FlexShrink | undefined; base?: FlexShrink | undefined; \"2xl\"?: FlexShrink | undefined; lg?: FlexShrink | undefined; md?: FlexShrink | undefined; sm?: FlexShrink | undefined; xl?: FlexShrink | undefined; }, FlexShrink | { ...; }] | { ...; }",
+      "description": "The CSS `flex-shrink` property.",
+      "required": false
+    },
+    "stacking": {
+      "type": "\"first-on-top\" | \"last-on-top\" | [\"first-on-top\" | \"last-on-top\" | { [x: string & {}]: \"first-on-top\" | \"last-on-top\" | undefined; base?: \"first-on-top\" | \"last-on-top\" | undefined; ... 4 more ...; xl?: \"first-on-top\" | ... 1 more ... | undefined; }, \"first-on-top\" | ... 1 more ... | { ...; }] | { ...; }",
+      "description": "The stacking order of the group.",
+      "required": false
+    },
+    "wrap": {
+      "type": "FlexWrap | [FlexWrap | { [x: string & {}]: FlexWrap | undefined; base?: FlexWrap | undefined; \"2xl\"?: FlexWrap | undefined; lg?: FlexWrap | undefined; md?: FlexWrap | undefined; sm?: FlexWrap | undefined; xl?: FlexWrap | undefined; }, FlexWrap | { ...; }] | { ...; }",
+      "description": "The CSS `flex-wrap` property.",
+      "required": false
+    }
+  },
+  "CloseButton": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is disabled.",
+      "required": false
+    },
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "icon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The icon to be used in the button.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "type": {
+      "type": "\"button\" | \"reset\" | \"submit\"",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+      "required": false
+    }
+  },
+  "IconButton": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [AnyString | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | { [x: string & {}]: AnyString | \"2xl\" | ... 5 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 6 more ... | undefined; }, AnyString | ... 6 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "aria-label": {
+      "type": "string",
+      "description": "The label for the button.",
+      "required": true
+    },
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is disabled.",
+      "required": false
+    },
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "icon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The icon to be used in the button.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "type": {
+      "type": "\"button\" | \"reset\" | \"submit\"",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+      "required": false
+    }
+  }
+}

@@ -95,28 +95,13 @@ export interface BreakpointConfig {
   identifier?: "@media screen" | `@container ${string}` | `@container`
 }
 
-export interface NoticeConfig {
-  /**
-   * If `true`, the portal will check if it is within a parent portal
-   * and append itself to the parent's portal node.
-   * This provides nesting for portals.
-   *
-   * If `false`, the portal will always append to `document.body`
-   * regardless of nesting. It is used to opt out of portal nesting.
-   *
-   * @default true
-   */
-  appendToParentPortal?: PortalProps["appendToParentPortal"]
+export interface NoticeConfig extends Pick<PortalProps, "containerRef"> {
   /**
    * If `true`, allows the notice to be removed.
    *
    * @default false
    */
   closable?: boolean
-  /**
-   * The `ref` to the component where the portal will be attached to.
-   */
-  containerRef?: PortalProps["containerRef"]
   /**
    * The number of `ms` the notice will continue to be displayed.
    *
@@ -176,7 +161,7 @@ export interface SnacksConfig {
   startIndex?: number
 }
 
-export interface LoadingConfig {
+export interface LoadingConfig extends Pick<PortalProps, "containerRef"> {
   /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
    *
@@ -184,26 +169,11 @@ export interface LoadingConfig {
    */
   allowPinchZoom?: boolean
   /**
-   * If `true`, the portal will check if it is within a parent portal
-   * and append itself to the parent's portal node.
-   * This provides nesting for portals.
-   *
-   * If `false`, the portal will always append to `document.body`
-   * regardless of nesting. It is used to opt out of portal nesting.
-   *
-   * @default true
-   */
-  appendToParentPortal?: PortalProps["appendToParentPortal"]
-  /**
    * If `true`, scrolling will be disabled on the `body` when the modal opens.
    *
    * @default true
    */
   blockScrollOnMount?: boolean
-  /**
-   * The `ref` to the component where the portal will be attached to.
-   */
-  containerRef?: PortalProps["containerRef"]
   /**
    * The number of `ms` the loading will continue to be displayed.
    *
@@ -310,7 +280,9 @@ type ThemeVariantProps<Y extends Dict = Dict> =
         /**
          * The variant of the component.
          */
-        variant?: StyleValue<AnyString | keyof Required<Y>["variants"]>
+        variant?: StyleValue<
+          AnyString | Exclude<keyof Required<Y>["variants"], "base">
+        >
       }
 
 type ThemeSizeProps<Y extends Dict = Dict> =
@@ -320,7 +292,9 @@ type ThemeSizeProps<Y extends Dict = Dict> =
         /**
          * The size of the component.
          */
-        size?: StyleValue<AnyString | keyof Required<Y>["sizes"]>
+        size?: StyleValue<
+          AnyString | Exclude<keyof Required<Y>["sizes"], "base">
+        >
       }
 
 type ThemeComponentProps<Y extends Dict = Dict> =

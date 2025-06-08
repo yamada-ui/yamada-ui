@@ -1,0 +1,29 @@
+{
+  "Mark": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"text\" | AnyString | \"solid\" | \"subtle\" | \"accent\" | [\"text\" | AnyString | \"solid\" | \"subtle\" | \"accent\" | { [x: string & {}]: \"text\" | AnyString | \"solid\" | \"subtle\" | \"accent\" | undefined; ... 5 more ...; xl?: \"text\" | ... 4 more ... | undefined; }, \"text\" | ... 4 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    }
+  }
+}

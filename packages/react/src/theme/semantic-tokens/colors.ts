@@ -68,13 +68,13 @@ export const colors = defineSemanticTokens.colors({
   gray: {
     base: "gray.500",
     bg: ["black.100", "white.100"],
-    contrast: ["black", "white"],
+    contrast: ["white", "white"],
     emphasized: ["black.300", "white.300"],
     fg: ["black.800", "white.900"],
     ghost: ["black.100", "white.100"],
     muted: ["black.200", "white.200"],
     outline: ["black.900", "white.800"],
-    solid: ["gray.50", "gray.800"],
+    solid: ["gray.500", "gray.800"],
     subtle: ["black.100", "white.100"],
   },
 

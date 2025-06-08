@@ -57,7 +57,7 @@ export type StyleValue<Y, M = unknown> = M extends keyof ThemeTokens
 
 export type CSSVariable = `--${string}`
 interface CSSVariableProps {
-  [key: CSSVariable]: StyleValue<ThemePath> | undefined
+  [key: CSSVariable]: StyleValue<number | ThemePath> | undefined
 }
 
 type VendorProps = {
@@ -85,11 +85,10 @@ export type CSSSlotObject<Y extends number | string | symbol = string> = {
   [M in Y]?: CSSObject
 }
 
-export interface CSSModifierObject<
-  Y extends CSSObject | CSSSlotObject = CSSObject,
-> {
-  [key: string]: Y
-}
+export type CSSModifierObject<Y extends CSSObject | CSSSlotObject = CSSObject> =
+  {
+    [M in "base" | AnyString | number]?: Y
+  }
 
 export type CSSKeyframeObject = {
   [M in `${number}%` | KeyframeIdent]?: CSSFlatObject

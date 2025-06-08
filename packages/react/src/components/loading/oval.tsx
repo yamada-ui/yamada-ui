@@ -1,5 +1,5 @@
 import type { LoadingProps } from "./utils"
-import { styled } from "../../core"
+import { styled, varAttr } from "../../core"
 import { Icon } from "../icon"
 import { initialProps, superProps, withContext } from "./utils"
 
@@ -43,9 +43,7 @@ export const Oval = withContext<"svg", OvalProps>(
   const rest = superProps(props)
 
   return {
-    "--secondary-color": secondaryColor
-      ? `colors.${secondaryColor}`
-      : undefined,
+    "--secondary-color": varAttr(secondaryColor, "colors"),
     secondaryColor,
     ...rest,
   }

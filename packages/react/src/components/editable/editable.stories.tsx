@@ -74,34 +74,6 @@ export const SelectAllOnFocus: Story = () => {
   )
 }
 
-export const BorderColor: Story = () => {
-  return (
-    <>
-      <Editable.Root defaultValue="Default border color">
-        <Editable.Preview />
-        <Editable.Input />
-      </Editable.Root>
-
-      <Editable.Root
-        defaultValue="Custom border color"
-        focusBorderColor="green.500"
-      >
-        <Editable.Preview />
-        <Editable.Input />
-      </Editable.Root>
-
-      <Editable.Root
-        defaultValue="Custom border color"
-        errorBorderColor="orange.500"
-        invalid
-      >
-        <Editable.Preview />
-        <Editable.Input />
-      </Editable.Root>
-    </>
-  )
-}
-
 export const Disabled: Story = () => {
   return (
     <>
@@ -164,6 +136,34 @@ export const Invalid: Story = () => {
           <Editable.Input />
         </Editable.Root>
       </Field.Root>
+    </>
+  )
+}
+
+export const BorderColor: Story = () => {
+  return (
+    <>
+      <Editable.Root defaultValue="Default border color">
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
+
+      <Editable.Root
+        defaultValue="Custom border color"
+        focusBorderColor="green.500"
+      >
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
+
+      <Editable.Root
+        defaultValue="Custom border color"
+        errorBorderColor="orange.500"
+        invalid
+      >
+        <Editable.Preview />
+        <Editable.Input />
+      </Editable.Root>
     </>
   )
 }

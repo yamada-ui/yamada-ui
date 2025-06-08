@@ -7,9 +7,11 @@ import { Button } from "../../components/button"
 import { PlusIcon } from "../../components/icon"
 import { HStack, VStack } from "../../components/stack"
 import { Text } from "../../components/text"
-import { COLOR_SCHEMES } from "../../utils"
+import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { IconButton } from "../button"
 import { Field } from "../field"
+import { For } from "../for"
+import { Wrap } from "../wrap"
 import { FileButton } from "./file-button"
 
 type Story = StoryFn<typeof FileButton>
@@ -99,14 +101,30 @@ export const Accept: Story = () => {
 export const Disabled: Story = () => {
   return (
     <>
-      <FileButton disabled>Upload</FileButton>
+      <Wrap gap="md">
+        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+          {(variant, index) => (
+            <FileButton key={index} variant={variant} disabled>
+              {toTitleCase(variant)}
+            </FileButton>
+          )}
+        </For>
+      </Wrap>
 
-      <FileButton
-        as={IconButton}
-        aria-label="Upload file"
-        disabled
-        icon={<PlusIcon fontSize="2xl" />}
-      />
+      <Wrap gap="md">
+        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+          {(variant, index) => (
+            <FileButton
+              key={index}
+              as={IconButton}
+              variant={variant}
+              aria-label="Upload file"
+              disabled
+              icon={<PlusIcon fontSize="2xl" />}
+            />
+          )}
+        </For>
+      </Wrap>
 
       <Field.Root
         disabled
@@ -122,14 +140,30 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <FileButton readOnly>Upload</FileButton>
+      <Wrap gap="md">
+        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+          {(variant, index) => (
+            <FileButton key={index} variant={variant} readOnly>
+              {toTitleCase(variant)}
+            </FileButton>
+          )}
+        </For>
+      </Wrap>
 
-      <FileButton
-        as={IconButton}
-        aria-label="Upload file"
-        icon={<PlusIcon fontSize="2xl" />}
-        readOnly
-      />
+      <Wrap gap="md">
+        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+          {(variant, index) => (
+            <FileButton
+              key={index}
+              as={IconButton}
+              variant={variant}
+              aria-label="Upload file"
+              icon={<PlusIcon fontSize="2xl" />}
+              readOnly
+            />
+          )}
+        </For>
+      </Wrap>
 
       <Field.Root
         helperMessage="Please select a file to upload."
@@ -145,14 +179,30 @@ export const Readonly: Story = () => {
 export const Invalid: Story = () => {
   return (
     <>
-      <FileButton invalid>Upload</FileButton>
+      <Wrap gap="md">
+        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+          {(variant, index) => (
+            <FileButton key={index} variant={variant} invalid>
+              {toTitleCase(variant)}
+            </FileButton>
+          )}
+        </For>
+      </Wrap>
 
-      <FileButton
-        as={IconButton}
-        aria-label="Upload file"
-        icon={<PlusIcon fontSize="2xl" />}
-        invalid
-      />
+      <Wrap gap="md">
+        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+          {(variant, index) => (
+            <FileButton
+              key={index}
+              as={IconButton}
+              variant={variant}
+              aria-label="Upload file"
+              icon={<PlusIcon fontSize="2xl" />}
+              invalid
+            />
+          )}
+        </For>
+      </Wrap>
 
       <Field.Root errorMessage="File is required." invalid label="Upload file">
         <FileButton alignSelf="flex-start">Upload</FileButton>

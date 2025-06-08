@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form"
 import { withMask } from "use-mask-input"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
-import { Button } from "../button"
-import { Center } from "../center"
+import { Button, IconButton } from "../button"
 import { Field } from "../field"
 import { For } from "../for"
 import { MailIcon, PhoneIcon, SearchIcon } from "../icon"
+import { NativeSelect } from "../native-select"
 import { VStack } from "../stack"
 import { Input, InputGroup } from "./"
 
@@ -25,27 +25,6 @@ export const Basic: Story = () => {
   return <Input placeholder="Placeholder" />
 }
 
-export const Size: Story = () => {
-  return (
-    <PropsTable
-      variant="column"
-      columns={["xs", "sm", "md", "lg", "xl"]}
-      rows={["outline", "filled", "flushed"]}
-    >
-      {(column, row, key) => {
-        return (
-          <Input
-            key={key}
-            size={column}
-            variant={row}
-            placeholder={`Size (${column})`}
-          />
-        )
-      }}
-    </PropsTable>
-  )
-}
-
 export const Variant: Story = () => {
   return (
     <PropsTable
@@ -60,6 +39,27 @@ export const Variant: Story = () => {
             colorScheme={row}
             variant={column}
             placeholder={toTitleCase(column)}
+          />
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const Size: Story = () => {
+  return (
+    <PropsTable
+      variant="column"
+      columns={["xs", "sm", "md", "lg", "xl"]}
+      rows={["outline", "filled", "flushed"]}
+    >
+      {(column, row, key) => {
+        return (
+          <Input
+            key={key}
+            size={column}
+            variant={row}
+            placeholder={`Size (${column})`}
           />
         )
       }}
@@ -89,7 +89,7 @@ export const Disabled: Story = () => {
         {(variant, index) => (
           <InputGroup.Root key={index} variant={variant} disabled>
             <InputGroup.Addon>+81</InputGroup.Addon>
-            <Input type="tel" placeholder="Your phone number" />
+            <Input type="tel" placeholder={toTitleCase(variant)} />
           </InputGroup.Root>
         )}
       </For>
@@ -130,6 +130,15 @@ export const Readonly: Story = () => {
         )}
       </For>
 
+      <For each={["outline", "filled", "flushed"]}>
+        {(variant, index) => (
+          <InputGroup.Root key={index} variant={variant} readOnly>
+            <InputGroup.Addon>+81</InputGroup.Addon>
+            <Input type="tel" placeholder={toTitleCase(variant)} />
+          </InputGroup.Root>
+        )}
+      </For>
+
       <Field.Root
         helperMessage="We'll never share your email."
         label="Email address"
@@ -159,7 +168,7 @@ export const Invalid: Story = () => {
         {(variant, index) => (
           <InputGroup.Root key={index} variant={variant} invalid>
             <InputGroup.Addon>+81</InputGroup.Addon>
-            <Input type="tel" placeholder="Your phone number" />
+            <Input type="tel" placeholder={toTitleCase(variant)} />
           </InputGroup.Root>
         )}
       </For>
@@ -223,9 +232,23 @@ export const Element: Story = () => {
       </For>
 
       <InputGroup.Root>
-        <InputGroup.Element px="3">https://</InputGroup.Element>
-        <Input placeholder="Search contacts" ps="4.75rem" />
-        <InputGroup.Addon>.com</InputGroup.Addon>
+        <InputGroup.Addon>https://</InputGroup.Addon>
+        <Input pe="20" placeholder="Search contacts" />
+        <InputGroup.Element clickable insetInlineEnd="1">
+          <NativeSelect.Root
+            size="xs"
+            variant="plain"
+            defaultValue=".com"
+            fontSize="md"
+            items={[
+              { label: ".com", value: ".com" },
+              { label: ".org", value: ".org" },
+              { label: ".net", value: ".net" },
+            ]}
+            pe="6"
+            w="auto"
+          />
+        </InputGroup.Element>
       </InputGroup.Root>
 
       <InputGroup.Root
@@ -237,15 +260,15 @@ export const Element: Story = () => {
       >
         <Input type="search" name="q" placeholder="Search user names" />
         <InputGroup.Element clickable>
-          <Center
-            as="button"
+          <IconButton
+            type="submit"
+            size="xs"
+            variant="ghost"
             aria-label="Search"
-            focusVisibleRing="outside"
-            p="0.5"
-            rounded="xs"
+            focusVisibleRing="inside"
           >
             <SearchIcon fontSize="xl" />
-          </Center>
+          </IconButton>
         </InputGroup.Element>
       </InputGroup.Root>
     </>

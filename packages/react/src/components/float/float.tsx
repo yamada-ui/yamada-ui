@@ -1,6 +1,6 @@
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FloatStyle } from "./float.style"
-import { createComponent } from "../../core"
+import { createComponent, varAttr } from "../../core"
 import { isArray } from "../../utils"
 import { floatStyle } from "./float.style"
 
@@ -8,7 +8,7 @@ export interface FloatProps
   extends Omit<HTMLStyledProps, "offset">,
     ThemeProps<FloatStyle> {
   /**
-   * Changes position offset, usually used when element has border-radius.
+   * Changes position offset.
    */
   offset?: CSSProps["inset"]
 }
@@ -30,8 +30,8 @@ export const Float = withContext("div")(undefined, ({ offset, ...rest }) => {
     : [offset, offset]
 
   return {
-    "--offset-block": offsetBlock ? `spaces.${offsetBlock}` : undefined,
-    "--offset-inline": offsetInline ? `spaces.${offsetInline}` : undefined,
+    "--offset-block": varAttr(offsetBlock, "spaces"),
+    "--offset-inline": varAttr(offsetInline, "spaces"),
     ...rest,
   }
 })

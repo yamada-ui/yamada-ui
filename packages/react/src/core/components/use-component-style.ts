@@ -26,7 +26,6 @@ import isEqual from "react-fast-compare"
 import { useTheme } from "../../providers/theme-provider"
 import {
   cx,
-  filterUndefined,
   isArray,
   isBooleanish,
   isEmptyObject,
@@ -450,9 +449,7 @@ function useStyle<
   const options = { direction, hasSlot, identifier, queries, wrap }
 
   const propsRef = useRef<Dict>({})
-  const styleRef = useRef<Style<H>>({})
-
-  props = filterUndefined(props)
+  const styleRef = useRef<Style<H> | undefined>(undefined)
 
   const hasComponentStyle =
     componentStyle && !!Object.keys(componentStyle).length
@@ -495,13 +492,19 @@ function useStyle<
       }
 
       if (sizes && !hasSize) {
-        const sizeStyle = getModifierStyle<H>(size, sizes)(options)
+        const sizeStyle = merge(
+          sizes.base,
+          getModifierStyle<H>(size, sizes)(options),
+        )
 
         style = merge(style, wrapStyle<H>("size", sizeStyle)(options))
       }
 
       if (variants && !hasVariant) {
-        const variantStyle = getModifierStyle<H>(variant, variants)(options)
+        const variantStyle = merge(
+          variants.base,
+          getModifierStyle<H>(variant, variants)(options),
+        )
 
         style = merge(style, wrapStyle<H>("variant", variantStyle)(options))
       }
@@ -540,7 +543,10 @@ function useStyle<
       propsRef.current = props as unknown as WithoutThemeProps<Y, M, D>
   }
 
-  return [styleRef.current, propsRef.current as WithoutThemeProps<Y, M, D>]
+  return [
+    styleRef.current ?? {},
+    propsRef.current as WithoutThemeProps<Y, M, D>,
+  ]
 }
 
 export interface UseComponentStyleOptions<

@@ -24,7 +24,7 @@ export const layerStyles = defineStyles.layerStyle({
   },
   outline: {
     bg: "transparent",
-    border: "1px solid {colorScheme.outline}",
+    border: "1px solid {colorScheme.muted}",
     color: "colorScheme.outline",
   },
   "outline.hover": {

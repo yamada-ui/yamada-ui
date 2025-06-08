@@ -91,7 +91,6 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
       setClassName(systemColorMode === "dark")
       setDataset(systemColorMode)
     },
-    environment,
   })
 
   const computedColorMode = initialColorMode === "dark" ? "dark" : "light"

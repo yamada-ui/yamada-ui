@@ -22,6 +22,9 @@ export interface FileInputProps
     UseInputBorderProps,
     FieldProps,
     Omit<UseFileInputProps, "children"> {
+  /**
+   * A callback that returns a React node.
+   */
   children?: (files: File[] | undefined) => ReactNode
   /**
    * The component that displays uploaded files.

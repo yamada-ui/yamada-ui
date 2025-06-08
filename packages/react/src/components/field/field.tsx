@@ -213,8 +213,19 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
 )()
 
 export interface FieldLabelProps extends HTMLStyledProps<"label"> {
+  /**
+   * The optional indicator to use.
+   */
   optionalIndicator?: ReactNode
+  /**
+   * If `true`, the field will be required.
+   *
+   * @default false
+   */
   required?: boolean
+  /**
+   * The required indicator to use.
+   */
   requiredIndicator?: ReactNode
 }
 

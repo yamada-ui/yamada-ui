@@ -22,13 +22,13 @@
     },
     "enableSorting": {
       "type": "boolean",
-      "defaultValue": true,
+      "defaultValue": "true",
       "description": "If `true`, the sources will be sorted by the `minW` and `maxW` properties.",
       "required": false
     },
-    "sources": {
-      "type": "PictureSource[]",
-      "description": "The sources for the picture element.",
+    "fit": {
+      "type": "ObjectFit | [ObjectFit | { [x: string & {}]: ObjectFit | undefined; base?: ObjectFit | undefined; \"2xl\"?: ObjectFit | undefined; lg?: ObjectFit | undefined; md?: ObjectFit | undefined; sm?: ObjectFit | undefined; xl?: ObjectFit | undefined; }, ObjectFit | { ...; }] | { ...; }",
+      "description": "The CSS `object-fit` property.",
       "required": false
     },
     "pictureProps": {
@@ -36,9 +36,9 @@
       "description": "The props for the picture element.",
       "required": false
     },
-    "fit": {
-      "type": "ObjectFit | [ObjectFit | { [x: string & {}]: ObjectFit | undefined; base?: ObjectFit | undefined; \"2xl\"?: ObjectFit | undefined; lg?: ObjectFit | undefined; md?: ObjectFit | undefined; sm?: ObjectFit | undefined; xl?: ObjectFit | undefined; }, ObjectFit | { ...; }] | { ...; }",
-      "description": "The CSS `object-fit` property.",
+    "sources": {
+      "type": "PictureSource[]",
+      "description": "The sources for the picture element.",
       "required": false
     }
   },

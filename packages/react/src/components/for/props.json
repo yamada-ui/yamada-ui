@@ -33,7 +33,7 @@
     },
     "reverse": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "The boolean value to determine the order of the items in the array.\nIf `true`, the items will be reversed.\nIf `sortBy` is provided, inversion is applied to the sorted array.",
       "required": false
     },

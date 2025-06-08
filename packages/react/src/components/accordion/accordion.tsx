@@ -137,6 +137,9 @@ export interface AccordionItemProps
    * The accordion button to use.
    */
   button?: ReactNodeOrFunction<AccordionCallBackProps>
+  /**
+   * The accordion children to use.
+   */
   children?: ReactNodeOrFunction<AccordionCallBackProps>
   /**
    * The accordion icon to use.

@@ -66,13 +66,18 @@
     },
     "optionalIndicator": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "",
+      "description": "The optional indicator to use.",
       "required": false
     },
-    "required": { "type": "boolean", "description": "", "required": false },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
     "requiredIndicator": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "",
+      "description": "The required indicator to use.",
       "required": false
     }
   },
@@ -97,25 +102,15 @@
       "description": "Set color scheme variables.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
     "errorMessage": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
       "description": "The field error message to use.",
-      "required": false
-    },
-    "helperMessage": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The field helper message to use.",
-      "required": false
-    },
-    "label": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The field label to use.",
-      "required": false
-    },
-    "replace": {
-      "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, switch between helper message and error message using invalid.",
       "required": false
     },
     "errorMessageProps": {
@@ -123,9 +118,25 @@
       "description": "Props the error message component.",
       "required": false
     },
+    "helperMessage": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The field helper message to use.",
+      "required": false
+    },
     "helperMessageProps": {
       "type": "FieldHelperMessageProps",
       "description": "Props the helper message component.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "label": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The field label to use.",
       "required": false
     },
     "labelProps": {
@@ -133,38 +144,32 @@
       "description": "Props the label component.",
       "required": false
     },
-    "requiredIndicator": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "",
-      "required": false
-    },
     "optionalIndicator": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "",
-      "required": false
-    },
-    "disabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the field will be disabled.",
-      "required": false
-    },
-    "invalid": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the field will be invalid.",
+      "description": "The optional indicator to use.",
       "required": false
     },
     "readOnly": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "replace": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, switch between helper message and error message using invalid.",
       "required": false
     },
     "required": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "requiredIndicator": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The required indicator to use.",
       "required": false
     }
   }

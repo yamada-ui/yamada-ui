@@ -1,5 +1,5 @@
 import type { JSDocTagInfo, SourceFile, Symbol, TypeChecker } from "typescript"
-import { isEmptyObject, merge } from "@yamada-ui/utils"
+import { isEmptyObject, isString } from "@yamada-ui/utils"
 import { readdir, readFile, writeFile } from "fs/promises"
 import ora from "ora"
 import path from "path"
@@ -23,7 +23,7 @@ interface Prop {
   type: string
   description: string
   required: boolean
-  defaultValue?: boolean | string
+  defaultValue?: string
   deprecated?: string
   see?: string
 }
@@ -75,7 +75,10 @@ function shouldIgnoreProperty(property: Symbol) {
 
   if (included) return false
 
-  const sourceFileName = getSourceFileName(property) ?? ""
+  const sourceFileName = getSourceFileName(property)
+
+  if (!sourceFileName) return true
+
   const external = new RegExp(EXCLUDED_MODULES.join("|")).test(sourceFileName)
   const excluded = IGNORED_PROPS.includes(property.getName())
 
@@ -143,13 +146,7 @@ function getDefaultValue(tags: JSDocTagInfo[]) {
 
   if (!value) return
 
-  const omittedValue = value.replace(/^"(.*)"$/, "$1")
-
-  return omittedValue === "true"
-    ? true
-    : omittedValue === "false"
-      ? false
-      : omittedValue
+  return value.replace(/^'(.*)'$/, '"$1"')
 }
 
 function getDeprecated(tags: JSDocTagInfo[]) {
@@ -190,20 +187,22 @@ function getType(sourceFile: SourceFile, typeChecker: TypeChecker) {
 
 function sortByRequiredProps(props: Props) {
   return Object.fromEntries(
-    Object.entries(props).sort(([aName, aProps], [bName, bProps]) => {
-      const aIndex = INCLUDED_PROPS.indexOf(aName)
-      const bIndex = INCLUDED_PROPS.indexOf(bName)
+    Object.entries(props)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .sort(([aName, aProps], [bName, bProps]) => {
+        const aIndex = INCLUDED_PROPS.indexOf(aName)
+        const bIndex = INCLUDED_PROPS.indexOf(bName)
 
-      if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex
+        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex
 
-      if (aIndex !== -1) return -1
-      if (bIndex !== -1) return 1
+        if (aIndex !== -1) return -1
+        if (bIndex !== -1) return 1
 
-      const aRequired = aProps.required
-      const bRequired = bProps.required
+        const aRequired = aProps.required
+        const bRequired = bProps.required
 
-      return aRequired === bRequired ? 0 : aRequired ? -1 : 1
-    }),
+        return aRequired === bRequired ? 0 : aRequired ? -1 : 1
+      }),
   )
 }
 
@@ -211,56 +210,50 @@ function extractPropsOfTypeName(
   sourceFile: SourceFile,
   typeChecker: TypeChecker,
 ) {
-  return async function (name: string, as?: string) {
+  return async function (name: string) {
     const regexp = new RegExp(`^${name}$`)
-    const statements = sourceFile.statements.filter(
+    const statement = sourceFile.statements.find(
       (statement) =>
         (isInterfaceDeclaration(statement) ||
           isTypeAliasDeclaration(statement)) &&
         regexp.test(statement.name.getText()),
     )
 
-    const data: { [key: string]: Props } = {}
+    const props: Props = {}
 
-    for (const statement of statements) {
-      const props: Props = {}
-      const type = typeChecker.getTypeAtLocation(statement)
-      const typeName = (statement as any).name.getText()
+    if (!statement) return props
 
-      for (const property of type.getProperties()) {
-        if (shouldIgnoreProperty(property)) continue
+    const type = typeChecker.getTypeAtLocation(statement)
+    const typeName = (statement as any).name.getText()
 
-        const tags = property.getJsDocTags()
+    for (const property of type.getProperties()) {
+      if (shouldIgnoreProperty(property)) continue
 
-        if (isPrivate(tags)) continue
+      const tags = property.getJsDocTags()
 
-        const see = getSee(tags)
-        const defaultValue = getDefaultValue(tags)
-        const deprecated = getDeprecated(tags)
-        const prop = property.getName()
-        const description = await getDescription(typeChecker)(property)
-        const { type, required } = await getType(sourceFile, typeChecker)(
-          property,
-          typeName,
-        )
+      if (isPrivate(tags)) continue
 
-        props[prop] = {
-          type,
-          defaultValue,
-          deprecated,
-          description,
-          required,
-          see,
-        }
+      const see = getSee(tags)
+      const defaultValue = getDefaultValue(tags)
+      const deprecated = getDeprecated(tags)
+      const prop = property.getName()
+      const description = await getDescription(typeChecker)(property)
+      const { type, required } = await getType(sourceFile, typeChecker)(
+        property,
+        typeName,
+      )
+
+      props[prop] = {
+        type,
+        defaultValue,
+        deprecated,
+        description,
+        required,
+        see,
       }
-
-      const componentName = (as ?? typeName).replace(/Props$/, "")
-
-      if (!isEmptyObject(props))
-        data[componentName] = sortByRequiredProps(props)
     }
 
-    return data
+    return sortByRequiredProps(props)
   }
 }
 
@@ -289,7 +282,7 @@ async function main() {
       if (!dirent.isDirectory()) return
 
       const dirPath = path.join(dirent.parentPath, dirent.name)
-      const relativePath = dirPath.replace(process.cwd(), "")
+      const relativePath = dirPath.replace(process.cwd() + "/", "")
       const filePaths = fileNames.filter((fileName) =>
         fileName.startsWith(dirPath + "/"),
       )
@@ -310,7 +303,7 @@ async function main() {
         exportedTypes.push(...extractTypeExports(index))
       }
 
-      let data: { [key: string]: Props } = {}
+      const data: { [key: string]: Props } = {}
 
       await Promise.all(
         exportedTypes.map(async ({ as, name }) => {
@@ -327,12 +320,20 @@ async function main() {
 
                 if (!sourceFile) return
 
-                const exportedProps = await extractPropsOfTypeName(
+                const componentName = (as ?? name).replace(/Props$/, "")
+                const props = await extractPropsOfTypeName(
                   sourceFile,
                   getTypeChecker(),
-                )(name, as)
+                )(name)
 
-                data = merge(data, exportedProps)
+                Object.entries(props).forEach(([prop, { description }]) => {
+                  if (isString(description) && !description)
+                    spinner.fail(
+                      `Empty description: ${c.yellow(name)} ${c.red(prop)} (${path.join(relativePath, "index.ts")})`,
+                    )
+                })
+
+                if (!isEmptyObject(props)) data[componentName] = props
               }),
             )
           }
@@ -341,7 +342,7 @@ async function main() {
 
       if (!namespace && Object.keys(data).length > 1) {
         spinner.warn(
-          ` Multiple components: ${c.yellow(Object.keys(data).join(", "))} (${path.join(relativePath, "index.ts")})`,
+          `Multiple components: ${c.yellow(Object.keys(data).join(", "))} (${path.join(relativePath, "index.ts")})`,
         )
 
         spinner.start("Generating props types")
@@ -354,11 +355,11 @@ async function main() {
 
         spinner.start("Generating props types")
       } else {
-        data = Object.fromEntries(
+        const sortedData = Object.fromEntries(
           Object.entries(data).sort(([a], [b]) => a.localeCompare(b)),
         )
 
-        const content = await prettier(JSON.stringify(data), {
+        const content = await prettier(JSON.stringify(sortedData), {
           parser: "json",
         })
 

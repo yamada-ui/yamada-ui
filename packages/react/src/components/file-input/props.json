@@ -32,7 +32,7 @@
     },
     "children": {
       "type": "(files: File[] | undefined) => ReactNode",
-      "description": "",
+      "description": "A callback that returns a React node.",
       "required": false
     },
     "component": {
@@ -40,15 +40,9 @@
       "description": "The component that displays uploaded files.",
       "required": false
     },
-    "format": {
-      "type": "(value: File, index: number) => string",
-      "description": "A callback that formats the name of the uploaded file.",
-      "required": false
-    },
-    "separator": {
-      "type": "string",
-      "defaultValue": "','",
-      "description": "The string to separate uploaded files.",
+    "defaultValue": {
+      "type": "File[]",
+      "description": "The initial value of the file input.",
       "required": false
     },
     "errorBorderColor": {
@@ -61,9 +55,14 @@
       "description": "The border color when the input is focused.",
       "required": false
     },
+    "format": {
+      "type": "(value: File, index: number) => string",
+      "description": "A callback that formats the name of the uploaded file.",
+      "required": false
+    },
     "invalid": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the field will be invalid.",
       "required": false
     },
@@ -72,19 +71,20 @@
       "description": "Function to be called when a file change event occurs.",
       "required": false
     },
-    "defaultValue": {
-      "type": "File[]",
-      "description": "The initial value of the file input.",
+    "resetRef": {
+      "type": "RefObject<(() => void) | null>",
+      "description": "Ref to a reset function.",
+      "required": false
+    },
+    "separator": {
+      "type": "string",
+      "defaultValue": "\",\"",
+      "description": "The string to separate uploaded files.",
       "required": false
     },
     "value": {
       "type": "File[]",
       "description": "The value of the file input.",
-      "required": false
-    },
-    "resetRef": {
-      "type": "RefObject<(() => void) | null>",
-      "description": "Ref to a reset function.",
       "required": false
     }
   }

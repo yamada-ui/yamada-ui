@@ -20,29 +20,9 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "columns": {
-      "type": "number | [number | { [x: string & {}]: number | undefined; base?: number | undefined; \"2xl\"?: number | undefined; lg?: number | undefined; md?: number | undefined; sm?: number | undefined; xl?: number | undefined; }, number | { ...; }] | { ...; }",
-      "description": "The number of columns.",
-      "required": false
-    },
-    "minChildWidth": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 102 more ... | { ...; }",
-      "description": "The width at which child elements will break into columns.\nPass a number for pixel values or a string for any other valid CSS length.",
-      "required": false
-    },
     "area": {
       "type": "GridArea | [GridArea | { [x: string & {}]: GridArea | undefined; base?: GridArea | undefined; \"2xl\"?: GridArea | undefined; lg?: GridArea | undefined; md?: GridArea | undefined; sm?: GridArea | undefined; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; }",
       "description": "The CSS `grid-area` property.",
-      "required": false
-    },
-    "row": {
-      "type": "GridRow | [GridRow | { [x: string & {}]: GridRow | undefined; base?: GridRow | undefined; \"2xl\"?: GridRow | undefined; lg?: GridRow | undefined; md?: GridRow | undefined; sm?: GridRow | undefined; xl?: GridRow | undefined; }, GridRow | { ...; }] | { ...; }",
-      "description": "The CSS `grid-row` property.",
-      "required": false
-    },
-    "column": {
-      "type": "GridColumn | [GridColumn | { [x: string & {}]: GridColumn | undefined; base?: GridColumn | undefined; \"2xl\"?: GridColumn | undefined; lg?: GridColumn | undefined; md?: GridColumn | undefined; sm?: GridColumn | undefined; xl?: GridColumn | undefined; }, GridColumn | { ...; }] | { ...; }",
-      "description": "The CSS `grid-column` property.",
       "required": false
     },
     "autoColumns": {
@@ -58,6 +38,26 @@
     "autoRows": {
       "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 92 more ... | { ...; }",
       "description": "The CSS `grid-auto-rows` property.",
+      "required": false
+    },
+    "column": {
+      "type": "GridColumn | [GridColumn | { [x: string & {}]: GridColumn | undefined; base?: GridColumn | undefined; \"2xl\"?: GridColumn | undefined; lg?: GridColumn | undefined; md?: GridColumn | undefined; sm?: GridColumn | undefined; xl?: GridColumn | undefined; }, GridColumn | { ...; }] | { ...; }",
+      "description": "The CSS `grid-column` property.",
+      "required": false
+    },
+    "columns": {
+      "type": "number | [number | { [x: string & {}]: number | undefined; base?: number | undefined; \"2xl\"?: number | undefined; lg?: number | undefined; md?: number | undefined; sm?: number | undefined; xl?: number | undefined; }, number | { ...; }] | { ...; }",
+      "description": "The number of columns.",
+      "required": false
+    },
+    "minChildWidth": {
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 102 more ... | { ...; }",
+      "description": "The width at which child elements will break into columns.\nPass a number for pixel values or a string for any other valid CSS length.",
+      "required": false
+    },
+    "row": {
+      "type": "GridRow | [GridRow | { [x: string & {}]: GridRow | undefined; base?: GridRow | undefined; \"2xl\"?: GridRow | undefined; lg?: GridRow | undefined; md?: GridRow | undefined; sm?: GridRow | undefined; xl?: GridRow | undefined; }, GridRow | { ...; }] | { ...; }",
+      "description": "The CSS `grid-row` property.",
       "required": false
     },
     "templateAreas": {

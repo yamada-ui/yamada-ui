@@ -77,6 +77,12 @@ export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
   ref?: React.Ref<React.ComponentRef<Y>>
 }
 
+export interface HTMLElementProps
+  extends React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLElement>,
+    HTMLElement
+  > {}
+
 export type HTMLProps<Y extends DOMElement = "div"> = Omit<
   React.JSX.IntrinsicElements[Y],
   "size" | keyof StyledProps

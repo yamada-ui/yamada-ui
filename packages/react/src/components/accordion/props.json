@@ -20,14 +20,14 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "icon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: { ...; }) => ReactNode)",
-      "description": "The accordion icon to use.",
-      "required": false
-    },
     "containerProps": {
       "type": "HTMLStyledProps",
       "description": "Props the container element.",
+      "required": false
+    },
+    "icon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: { ...; }) => ReactNode)",
+      "description": "The accordion icon to use.",
       "required": false
     }
   },
@@ -59,18 +59,18 @@
     },
     "children": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: AccordionCallBackProps) => ReactNode)",
-      "description": "",
+      "description": "The accordion children to use.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the accordion item will be disabled.",
       "required": false
     },
     "icon": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: AccordionCallBackProps) => ReactNode)",
       "description": "The accordion icon to use.",
-      "required": false
-    },
-    "disabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the accordion item will be disabled.",
       "required": false
     }
   },
@@ -110,26 +110,33 @@
       "description": "Custom `initial`.\n\nProperties, variant label or array of variant labels to start in.\n\nSet to `false` to initialise with the values in `animate` (disabling the mount animation)\n\n```jsx\n// As values\n<motion.div initial={{ opacity: 1 }} />\n\n// As variant\n<motion.div initial=\"visible\" variants={variants} />\n\n// Multiple variants\n<motion.div initial={[\"visible\", \"active\"]} variants={variants} />\n\n// As false (disable mount animation)\n<motion.div initial={false} animate={{ opacity: 0 }} />\n```",
       "required": true
     },
-    "transition": {
-      "type": "MotionLifecycleProps<Transition>",
-      "description": "Custom `transition` definition for `enter` and `exit`.",
+    "animationOpacity": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the opacity of the content will be animated.",
+      "required": false
+    },
+    "delay": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0",
+      "description": "Custom `delay` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "duration": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
+      "description": "Custom `duration` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "endingHeight": {
+      "type": "string | number",
+      "defaultValue": "\"auto\"",
+      "description": "The height you want the content in its expanded state.",
       "required": false
     },
     "open": {
       "type": "boolean",
       "description": "Show the component. triggers when enter or exit states.",
-      "required": false
-    },
-    "animationOpacity": {
-      "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, the opacity of the content will be animated.",
-      "required": false
-    },
-    "endingHeight": {
-      "type": "string | number",
-      "defaultValue": "auto",
-      "description": "The height you want the content in its expanded state.",
       "required": false
     },
     "startingHeight": {
@@ -138,14 +145,9 @@
       "description": "The height you want the content in its collapsed state.",
       "required": false
     },
-    "delay": {
-      "type": "number | MotionLifecycleProps<number>",
-      "description": "Custom `delay` definition for `enter` and `exit`.",
-      "required": false
-    },
-    "duration": {
-      "type": "number | MotionLifecycleProps<number>",
-      "description": "Custom `duration` definition for `enter` and `exit`.",
+    "transition": {
+      "type": "MotionLifecycleProps<Transition>",
+      "description": "Custom `transition` definition for `enter` and `exit`.",
       "required": false
     },
     "transitionEnd": {
@@ -185,6 +187,11 @@
       "description": "The variant of the component.",
       "required": false
     },
+    "defaultIndex": {
+      "type": "number | number[]",
+      "description": "The initial index(es) of the accordion item to expand.",
+      "required": false
+    },
     "icon": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: AccordionCallBackProps) => ReactNode)",
       "description": "The accordion icon for all items to use.",
@@ -192,13 +199,8 @@
     },
     "iconHidden": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, hide the accordion icon for all items.",
-      "required": false
-    },
-    "defaultIndex": {
-      "type": "number | number[]",
-      "description": "The initial index(es) of the accordion item to expand.",
       "required": false
     },
     "index": {
@@ -208,19 +210,19 @@
     },
     "multiple": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, multiple accordion items can be expanded at once.",
-      "required": false
-    },
-    "toggle": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, any expanded accordion item can be collapsed again.",
       "required": false
     },
     "onChange": {
       "type": "(index: number | number[]) => void",
       "description": "The callback invoked when accordion items are expanded or collapsed.",
+      "required": false
+    },
+    "toggle": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, any expanded accordion item can be collapsed again.",
       "required": false
     }
   }

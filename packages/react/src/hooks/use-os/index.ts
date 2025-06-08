@@ -1,3 +1,5 @@
+import { isUndefined } from "../../utils"
+
 export type OS =
   | "android"
   | "chromeos"
@@ -33,7 +35,7 @@ const getOS = (): OS => {
  * @see https://yamada-ui.com/hooks/use-os
  */
 export const useOS = (): OS => {
-  if (typeof window !== "undefined") return getOS()
+  if (!isUndefined(window)) return getOS()
 
   return "undetermined"
 }

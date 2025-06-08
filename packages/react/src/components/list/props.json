@@ -44,7 +44,7 @@
     },
     "icon": {
       "type": "ReactElement<any, string | JSXElementConstructor<any>>",
-      "description": "",
+      "description": "The icon to use.",
       "required": false
     }
   },

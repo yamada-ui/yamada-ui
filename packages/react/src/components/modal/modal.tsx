@@ -3,11 +3,8 @@ import type { FC, HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ButtonProps } from "../button"
 import type { CloseButtonProps } from "../button"
 import type { FocusLockProps } from "../focus-lock"
-import type {
-  HTMLMotionProps,
-  HTMLMotionPropsWithoutAs,
-  MotionTransitionProps,
-} from "../motion"
+import type { HTMLMotionProps, HTMLMotionPropsWithoutAs } from "../motion"
+import type { PopupAnimationProps } from "../popover"
 import type { PortalProps } from "../portal"
 import type { ModalStyle } from "./modal.style"
 import type { UseModalProps, UseModalReturn } from "./use-modal"
@@ -23,18 +20,19 @@ import {
 } from "../../utils"
 import { Button } from "../button"
 import { CloseButton } from "../button"
-import { fadeScaleVariants, fadeVariants } from "../fade"
+import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { motion } from "../motion"
+import { getPopupAnimationProps } from "../popover"
 import { Portal } from "../portal"
-import { slideFadeVariants } from "../slide"
 import { Slot } from "../slot"
 import { modalStyle } from "./modal.style"
 import { useModal } from "./use-modal"
 
 interface ModalContext
   extends Omit<UseModalReturn, "getRootProps">,
-    Pick<ModalRootProps, "animationScheme" | "duration" | "withCloseButton"> {}
+    PopupAnimationProps,
+    Pick<ModalRootProps, "withCloseButton"> {}
 
 export interface ModalRootProps
   extends ThemeProps<ModalStyle>,
@@ -47,6 +45,7 @@ export interface ModalRootProps
       | "lockFocusAcrossFrames"
       | "restoreFocus"
     >,
+    PopupAnimationProps,
     ShorthandModalContentProps {
   /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
@@ -55,21 +54,11 @@ export interface ModalRootProps
    */
   allowPinchZoom?: boolean
   /**
-   * The animation of the modal.
-   *
-   * @default 'scale'
-   */
-  animationScheme?: "bottom" | "left" | "none" | "right" | "scale" | "top"
-  /**
    * If `true`, scrolling will be disabled on the `body` when the modal opens.
    *
    * @default true
    */
   blockScrollOnMount?: boolean
-  /**
-   * The animation duration.
-   */
-  duration?: MotionTransitionProps["duration"]
   /**
    * The modal trigger to use.
    */
@@ -273,48 +262,6 @@ export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
   )
 }, "overlay")()
 
-const getAnimationProps = (
-  animation: ModalRootProps["animationScheme"] = "scale",
-  duration?: MotionTransitionProps["duration"],
-) => {
-  const sharedProps = { animate: "enter", exit: "exit", initial: "exit" }
-
-  switch (animation) {
-    case "scale":
-      return {
-        ...sharedProps,
-        custom: { duration, reverse: true, scale: 0.95 },
-        variants: fadeScaleVariants,
-      }
-    case "top":
-      return {
-        ...sharedProps,
-        custom: { duration, offsetY: -16, reverse: true },
-        variants: slideFadeVariants,
-      }
-    case "right":
-      return {
-        ...sharedProps,
-        custom: { duration, offsetX: 16, reverse: true },
-        variants: slideFadeVariants,
-      }
-    case "left":
-      return {
-        ...sharedProps,
-        custom: { duration, offsetX: -16, reverse: true },
-        variants: slideFadeVariants,
-      }
-    case "bottom":
-      return {
-        ...sharedProps,
-        custom: { duration, offsetY: 16, reverse: true },
-        variants: slideFadeVariants,
-      }
-    default:
-      return {}
-  }
-}
-
 export interface ModalContentProps
   extends Omit<HTMLMotionProps<"section">, "children">,
     PropsWithChildren {}
@@ -331,10 +278,10 @@ export const ModalContent = withContext<"section", ModalContentProps>(
 
     return (
       <motion.section
-        {...getAnimationProps(animationScheme, duration)}
-        {...(getContentProps(
-          rest as HTMLProps<"section">,
-        ) as HTMLMotionPropsWithoutAs<"section">)}
+        {...getPopupAnimationProps(animationScheme, duration)}
+        {...cast<HTMLMotionPropsWithoutAs<"section">>(
+          getContentProps(cast<HTMLProps<"section">>(rest)),
+        )}
       >
         {customCloseButton ?? (withCloseButton ? <ModalCloseButton /> : null)}
 

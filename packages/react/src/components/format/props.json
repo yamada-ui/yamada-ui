@@ -27,7 +27,7 @@
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en-US'",
+      "defaultValue": "\"en-US\"",
       "description": "The locale string to use for formatting.",
       "required": false
     },
@@ -70,7 +70,7 @@
     },
     "locale": {
       "type": "string",
-      "defaultValue": "'en-US'",
+      "defaultValue": "\"en-US\"",
       "description": "The locale string to use for formatting.",
       "required": false
     }

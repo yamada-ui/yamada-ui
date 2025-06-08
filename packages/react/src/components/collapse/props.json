@@ -2,7 +2,7 @@
   "Collapse": {
     "as": {
       "type": "keyof IntrinsicElements",
-      "description": "",
+      "description": "The HTML element to render.",
       "required": false
     },
     "asChild": {
@@ -37,30 +37,37 @@
     },
     "animationOpacity": {
       "type": "boolean",
-      "defaultValue": true,
+      "defaultValue": "true",
       "description": "If `true`, the opacity of the content will be animated.",
+      "required": false
+    },
+    "delay": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0",
+      "description": "Custom `delay` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "duration": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
+      "description": "Custom `duration` definition for `enter` and `exit`.",
       "required": false
     },
     "endingHeight": {
       "type": "string | number",
-      "defaultValue": "auto",
+      "defaultValue": "\"auto\"",
       "description": "The height you want the content in its expanded state.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Show the component. triggers when enter or exit states.",
       "required": false
     },
     "startingHeight": {
       "type": "string | number",
       "defaultValue": "0",
       "description": "The height you want the content in its collapsed state.",
-      "required": false
-    },
-    "delay": {
-      "type": "number | MotionLifecycleProps<number>",
-      "description": "Custom `delay` definition for `enter` and `exit`.",
-      "required": false
-    },
-    "duration": {
-      "type": "number | MotionLifecycleProps<number>",
-      "description": "Custom `duration` definition for `enter` and `exit`.",
       "required": false
     },
     "transition": {
@@ -71,11 +78,6 @@
     "transitionEnd": {
       "type": "MotionLifecycleProps<Target>",
       "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
-      "required": false
-    },
-    "open": {
-      "type": "boolean",
-      "description": "Show the component. triggers when enter or exit states.",
       "required": false
     },
     "unmountOnExit": {

@@ -64,14 +64,8 @@
     },
     "clickable": {
       "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the element clickable.",
-      "required": false
-    },
-    "placement": {
-      "type": "\"end\" | \"start\" | [\"end\" | \"start\" | { [x: string & {}]: \"end\" | \"start\" | undefined; base?: \"end\" | \"start\" | undefined; \"2xl\"?: \"end\" | \"start\" | undefined; lg?: \"end\" | \"start\" | undefined; md?: \"end\" | ... 1 more ... | undefined; sm?: \"end\" | ... 1 more ... | undefined; xl?: \"end\" | ... 1 more ... | undefined; }...",
-      "defaultValue": "'start'",
-      "description": "The placement of the element.",
       "required": false
     },
     "errorBorderColor": {
@@ -82,6 +76,12 @@
     "focusBorderColor": {
       "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
       "description": "The border color when the input is focused.",
+      "required": false
+    },
+    "placement": {
+      "type": "\"end\" | \"start\" | [\"end\" | \"start\" | { [x: string & {}]: \"end\" | \"start\" | undefined; base?: \"end\" | \"start\" | undefined; \"2xl\"?: \"end\" | \"start\" | undefined; lg?: \"end\" | \"start\" | undefined; md?: \"end\" | ... 1 more ... | undefined; sm?: \"end\" | ... 1 more ... | undefined; xl?: \"end\" | ... 1 more ... | undefined; }...",
+      "defaultValue": "\"start\"",
+      "description": "The placement of the element.",
       "required": false
     }
   },
@@ -116,36 +116,15 @@
       "description": "The variant of the component.",
       "required": false
     },
-    "direction": {
-      "type": "FlexDirection | [FlexDirection | { [x: string & {}]: FlexDirection | undefined; base?: FlexDirection | undefined; ... 4 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; }",
-      "description": "The CSS `flex-direction` property.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\" | [\"horizontal\" | \"vertical\" | { [x: string & {}]: \"horizontal\" | \"vertical\" | undefined; base?: \"horizontal\" | \"vertical\" | undefined; \"2xl\"?: \"horizontal\" | \"vertical\" | undefined; lg?: \"horizontal\" | ... 1 more ... | undefined; md?: \"horizontal\" | ... 1 more ... | undefined; sm?: \"horizo...",
-      "defaultValue": "horizontal",
-      "description": "The orientation of the group.",
-      "required": false
-    },
     "align": {
       "type": "AlignItems | [AlignItems | { [x: string & {}]: AlignItems | undefined; base?: AlignItems | undefined; \"2xl\"?: AlignItems | undefined; lg?: AlignItems | undefined; md?: AlignItems | undefined; sm?: AlignItems | undefined; xl?: AlignItems | undefined; }, AlignItems | { ...; }] | { ...; }",
       "description": "The CSS `align-items` property.",
       "required": false
     },
-    "wrap": {
-      "type": "FlexWrap | [FlexWrap | { [x: string & {}]: FlexWrap | undefined; base?: FlexWrap | undefined; \"2xl\"?: FlexWrap | undefined; lg?: FlexWrap | undefined; md?: FlexWrap | undefined; sm?: FlexWrap | undefined; xl?: FlexWrap | undefined; }, FlexWrap | { ...; }] | { ...; }",
-      "description": "The CSS `flex-wrap` property.",
-      "required": false
-    },
-    "justify": {
-      "type": "JustifyContent | [JustifyContent | { [x: string & {}]: JustifyContent | undefined; base?: JustifyContent | undefined; ... 4 more ...; xl?: JustifyContent | undefined; }, JustifyContent | { ...; }] | { ...; }",
-      "description": "The CSS `justify-content` property.",
-      "required": false
-    },
-    "grow": {
+    "attached": {
       "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
-      "description": "If `true`, the children will grow to fill the available space.",
+      "defaultValue": "false",
+      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
       "required": false
     },
     "basis": {
@@ -153,20 +132,15 @@
       "description": "The CSS `flex-basis` property.",
       "required": false
     },
-    "shrink": {
-      "type": "FlexShrink | [FlexShrink | { [x: string & {}]: FlexShrink | undefined; base?: FlexShrink | undefined; \"2xl\"?: FlexShrink | undefined; lg?: FlexShrink | undefined; md?: FlexShrink | undefined; sm?: FlexShrink | undefined; xl?: FlexShrink | undefined; }, FlexShrink | { ...; }] | { ...; }",
-      "description": "The CSS `flex-shrink` property.",
+    "direction": {
+      "type": "FlexDirection | [FlexDirection | { [x: string & {}]: FlexDirection | undefined; base?: FlexDirection | undefined; ... 4 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; }",
+      "description": "The CSS `flex-direction` property.",
       "required": false
     },
-    "attached": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
-      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
-      "required": false
-    },
-    "stacking": {
-      "type": "\"first-on-top\" | \"last-on-top\" | [\"first-on-top\" | \"last-on-top\" | { [x: string & {}]: \"first-on-top\" | \"last-on-top\" | undefined; base?: \"first-on-top\" | \"last-on-top\" | undefined; ... 4 more ...; xl?: \"first-on-top\" | ... 1 more ... | undefined; }, \"first-on-top\" | ... 1 more ... | { ...; }] | { ...; }",
-      "description": "The stacking order of the group.",
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
       "required": false
     },
     "errorBorderColor": {
@@ -179,28 +153,54 @@
       "description": "The border color when the input is focused.",
       "required": false
     },
-    "disabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the field will be disabled.",
+    "grow": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the children will grow to fill the available space.",
       "required": false
     },
     "invalid": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "justify": {
+      "type": "JustifyContent | [JustifyContent | { [x: string & {}]: JustifyContent | undefined; base?: JustifyContent | undefined; ... 4 more ...; xl?: JustifyContent | undefined; }, JustifyContent | { ...; }] | { ...; }",
+      "description": "The CSS `justify-content` property.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\" | [\"horizontal\" | \"vertical\" | { [x: string & {}]: \"horizontal\" | \"vertical\" | undefined; base?: \"horizontal\" | \"vertical\" | undefined; \"2xl\"?: \"horizontal\" | \"vertical\" | undefined; lg?: \"horizontal\" | ... 1 more ... | undefined; md?: \"horizontal\" | ... 1 more ... | undefined; sm?: \"horizo...",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the group.",
       "required": false
     },
     "readOnly": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the field will be readonly.",
       "required": false
     },
     "required": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "shrink": {
+      "type": "FlexShrink | [FlexShrink | { [x: string & {}]: FlexShrink | undefined; base?: FlexShrink | undefined; \"2xl\"?: FlexShrink | undefined; lg?: FlexShrink | undefined; md?: FlexShrink | undefined; sm?: FlexShrink | undefined; xl?: FlexShrink | undefined; }, FlexShrink | { ...; }] | { ...; }",
+      "description": "The CSS `flex-shrink` property.",
+      "required": false
+    },
+    "stacking": {
+      "type": "\"first-on-top\" | \"last-on-top\" | [\"first-on-top\" | \"last-on-top\" | { [x: string & {}]: \"first-on-top\" | \"last-on-top\" | undefined; base?: \"first-on-top\" | \"last-on-top\" | undefined; ... 4 more ...; xl?: \"first-on-top\" | ... 1 more ... | undefined; }, \"first-on-top\" | ... 1 more ... | { ...; }] | { ...; }",
+      "description": "The stacking order of the group.",
+      "required": false
+    },
+    "wrap": {
+      "type": "FlexWrap | [FlexWrap | { [x: string & {}]: FlexWrap | undefined; base?: FlexWrap | undefined; \"2xl\"?: FlexWrap | undefined; lg?: FlexWrap | undefined; md?: FlexWrap | undefined; sm?: FlexWrap | undefined; xl?: FlexWrap | undefined; }, FlexWrap | { ...; }] | { ...; }",
+      "description": "The CSS `flex-wrap` property.",
       "required": false
     }
   }

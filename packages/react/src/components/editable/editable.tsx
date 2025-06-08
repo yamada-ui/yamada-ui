@@ -31,6 +31,9 @@ export interface EditableRootProps
     ThemeProps<EditableStyle>,
     UseInputBorderProps,
     UseEditableProps {
+  /**
+   * The editable children to use.
+   */
   children?: ReactNodeOrFunction<EditableElementProps>
 }
 

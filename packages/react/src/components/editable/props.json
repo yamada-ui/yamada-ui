@@ -88,7 +88,18 @@
     },
     "children": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: EditableElementProps) => ReactNode)",
-      "description": "",
+      "description": "The editable children to use.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "string",
+      "description": "The initial value of the Editable in both edit & preview mode.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
       "required": false
     },
     "errorBorderColor": {
@@ -101,42 +112,10 @@
       "description": "The border color when the input is focused.",
       "required": false
     },
-    "defaultValue": {
-      "type": "string",
-      "description": "The initial value of the Editable in both edit & preview mode.",
-      "required": false
-    },
-    "placeholder": {
-      "type": "string",
-      "description": "The placeholder text when the value is empty.",
-      "required": false
-    },
-    "previewFocusable": {
+    "invalid": {
       "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, the read only view, has a `tabIndex` set to `0`\nso it can receive focus via the keyboard or click.",
-      "required": false
-    },
-    "selectAllOnFocus": {
-      "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, the input's text will be highlighted on focus.",
-      "required": false
-    },
-    "startWithEditView": {
-      "type": "boolean",
-      "description": "If `true`, the Editable will start with edit mode by default.",
-      "required": false
-    },
-    "submitOnBlur": {
-      "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, it'll update the value onBlur and turn off the edit mode.",
-      "required": false
-    },
-    "value": {
-      "type": "string",
-      "description": "The value of the Editable in both edit & preview mode.",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
       "required": false
     },
     "onCancel": {
@@ -159,28 +138,49 @@
       "description": "A callback invoked when user confirms value with `enter` key or by blurring input.",
       "required": false
     },
-    "disabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the field will be disabled.",
+    "placeholder": {
+      "type": "string",
+      "description": "The placeholder text when the value is empty.",
       "required": false
     },
-    "invalid": {
+    "previewFocusable": {
       "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the field will be invalid.",
+      "defaultValue": "true",
+      "description": "If `true`, the read only view, has a `tabIndex` set to `0`\nso it can receive focus via the keyboard or click.",
       "required": false
     },
     "readOnly": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the field will be readonly.",
       "required": false
     },
     "required": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "selectAllOnFocus": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the input's text will be highlighted on focus.",
+      "required": false
+    },
+    "startWithEditView": {
+      "type": "boolean",
+      "description": "If `true`, the Editable will start with edit mode by default.",
+      "required": false
+    },
+    "submitOnBlur": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, it'll update the value onBlur and turn off the edit mode.",
+      "required": false
+    },
+    "value": {
+      "type": "string",
+      "description": "The value of the Editable in both edit & preview mode.",
       "required": false
     }
   },

@@ -27,7 +27,7 @@
     },
     "placement": {
       "type": "\"center\" | \"end\" | \"start\" | \"center-center\" | \"center-end\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" | \"start-end\" | \"start-start\" | [\"center\" | ... 11 more ... | { ...; }, \"center\" | ... 11 more ... | { ...; }] | { ...; }",
-      "defaultValue": "start-end",
+      "defaultValue": "\"start-end\"",
       "description": "The placement of the float.",
       "required": false
     }

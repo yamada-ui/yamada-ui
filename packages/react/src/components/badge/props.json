@@ -32,7 +32,7 @@
     },
     "fullRounded": {
       "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     }

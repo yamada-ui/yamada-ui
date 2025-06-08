@@ -64,15 +64,15 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "loadingScheme": {
-      "type": "LoadingScheme",
-      "defaultValue": "'oval'",
-      "description": "The loading scheme.",
-      "required": false
-    },
     "duration": {
       "type": "string | number",
       "description": "The CSS `dur` property.",
+      "required": false
+    },
+    "loadingScheme": {
+      "type": "LoadingScheme",
+      "defaultValue": "\"oval\"",
+      "description": "The loading scheme.",
       "required": false
     },
     "secondaryColor": {
@@ -109,7 +109,7 @@
     },
     "status": {
       "type": "StatusScheme",
-      "defaultValue": "'info'",
+      "defaultValue": "\"info\"",
       "description": "The status of the alert.",
       "required": false
     }

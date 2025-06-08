@@ -22,7 +22,7 @@
     },
     "placement": {
       "type": "\"bottom\" | \"top\"",
-      "defaultValue": "'bottom'",
+      "defaultValue": "\"bottom\"",
       "description": "The placement of the table caption.",
       "required": false
     }
@@ -102,15 +102,21 @@
       "description": "The variant of the component.",
       "required": false
     },
+    "highlightOnHover": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, highlight the row when the table row is hovered.",
+      "required": false
+    },
+    "highlightOnSelected": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, highlight the row when the table row is selected.",
+      "required": false
+    },
     "layout": {
       "type": "TableLayout | [TableLayout | { [x: string & {}]: TableLayout | undefined; base?: TableLayout | undefined; \"2xl\"?: TableLayout | undefined; lg?: TableLayout | undefined; md?: TableLayout | undefined; sm?: TableLayout | undefined; xl?: TableLayout | undefined; }, TableLayout | { ...; }] | { ...; }",
       "description": "The CSS `table-layout` property.",
-      "required": false
-    },
-    "withScrollArea": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "Whether to enable the scroll area.",
       "required": false
     },
     "scrollAreaProps": {
@@ -118,46 +124,40 @@
       "description": "The props for the scroll area.",
       "required": false
     },
-    "highlightOnHover": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
-      "description": "If `true`, highlight the row when the table row is hovered.",
-      "required": false
-    },
-    "highlightOnSelected": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
-      "description": "If `true`, highlight the row when the table row is selected.",
-      "required": false
-    },
     "stickyFooter": {
       "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, display the sticky footer.",
       "required": false
     },
     "stickyHeader": {
       "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, display the sticky header.",
       "required": false
     },
     "striped": {
       "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, display striped rows.",
       "required": false
     },
     "withBorder": {
       "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, display the outer border of the table.",
       "required": false
     },
     "withColumnBorders": {
       "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, display line on the columns of the table.",
+      "required": false
+    },
+    "withScrollArea": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "Whether to enable the scroll area.",
       "required": false
     }
   },
@@ -206,7 +206,7 @@
     },
     "numeric": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "Aligns the cell content to the right.",
       "required": false
     }
@@ -256,7 +256,7 @@
     },
     "numeric": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "Aligns the cell content to the right.",
       "required": false
     }

@@ -2,7 +2,7 @@
   "Slide": {
     "as": {
       "type": "keyof IntrinsicElements",
-      "description": "",
+      "description": "The HTML element to render.",
       "required": false
     },
     "asChild": {
@@ -37,12 +37,25 @@
     },
     "delay": {
       "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0",
       "description": "Custom `delay` definition for `enter` and `exit`.",
       "required": false
     },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
       "description": "Custom `duration` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Show the component. triggers when enter or exit states.",
+      "required": false
+    },
+    "placement": {
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | [\"bottom\" | \"left\" | \"right\" | \"top\" | { [x: string & {}]: \"bottom\" | \"left\" | \"right\" | \"top\" | undefined; base?: \"bottom\" | \"left\" | \"right\" | \"top\" | undefined; ... 4 more ...; xl?: \"bottom\" | ... 3 more ... | undefined; }, \"bottom\" | ... 3 more ... | { ...; }] | { ...; }",
+      "defaultValue": "\"right\"",
+      "description": "The placement of the slide.",
       "required": false
     },
     "transition": {
@@ -55,27 +68,16 @@
       "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
       "required": false
     },
-    "open": {
-      "type": "boolean",
-      "description": "Show the component. triggers when enter or exit states.",
-      "required": false
-    },
     "unmountOnExit": {
       "type": "boolean",
       "description": "If `true`, the element will unmount when `open={false}` and animation is done.",
-      "required": false
-    },
-    "placement": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | [\"bottom\" | \"left\" | \"right\" | \"top\" | { [x: string & {}]: \"bottom\" | \"left\" | \"right\" | \"top\" | undefined; base?: \"bottom\" | \"left\" | \"right\" | \"top\" | undefined; ... 4 more ...; xl?: \"bottom\" | ... 3 more ... | undefined; }, \"bottom\" | ... 3 more ... | { ...; }] | { ...; }",
-      "defaultValue": "'right'",
-      "description": "The placement of the slide.",
       "required": false
     }
   },
   "SlideFade": {
     "as": {
       "type": "keyof IntrinsicElements",
-      "description": "",
+      "description": "The HTML element to render.",
       "required": false
     },
     "asChild": {
@@ -107,6 +109,18 @@
       "type": "any",
       "description": "Custom `initial`.\n\nProperties, variant label or array of variant labels to start in.\n\nSet to `false` to initialise with the values in `animate` (disabling the mount animation)\n\n```jsx\n// As values\n<motion.div initial={{ opacity: 1 }} />\n\n// As variant\n<motion.div initial=\"visible\" variants={variants} />\n\n// Multiple variants\n<motion.div initial={[\"visible\", \"active\"]} variants={variants} />\n\n// As false (disable mount animation)\n<motion.div initial={false} animate={{ opacity: 0 }} />\n```",
       "required": true
+    },
+    "delay": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0",
+      "description": "Custom `delay` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "duration": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
+      "description": "Custom `duration` definition for `enter` and `exit`.",
+      "required": false
     },
     "offsetX": {
       "type": "string | number | [string | number | { [x: string & {}]: string | number | undefined; base?: string | number | undefined; \"2xl\"?: string | number | undefined; lg?: string | number | undefined; md?: string | ... 1 more ... | undefined; sm?: string | ... 1 more ... | undefined; xl?: string | ... 1 more ... | undefined...",
@@ -120,20 +134,15 @@
       "description": "The offset on the vertical or `y` axis.",
       "required": false
     },
+    "open": {
+      "type": "boolean",
+      "description": "Show the component. triggers when enter or exit states.",
+      "required": false
+    },
     "reverse": {
       "type": "boolean",
-      "defaultValue": true,
+      "defaultValue": "true",
       "description": "If `true`, the element will be transitioned back to the offset when it leaves. Otherwise, it'll only fade out.",
-      "required": false
-    },
-    "delay": {
-      "type": "number | MotionLifecycleProps<number>",
-      "description": "Custom `delay` definition for `enter` and `exit`.",
-      "required": false
-    },
-    "duration": {
-      "type": "number | MotionLifecycleProps<number>",
-      "description": "Custom `duration` definition for `enter` and `exit`.",
       "required": false
     },
     "transition": {
@@ -144,11 +153,6 @@
     "transitionEnd": {
       "type": "MotionLifecycleProps<Target>",
       "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
-      "required": false
-    },
-    "open": {
-      "type": "boolean",
-      "description": "Show the component. triggers when enter or exit states.",
       "required": false
     },
     "unmountOnExit": {

@@ -20,28 +20,28 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "type": {
-      "type": "\"button\" | \"reset\" | \"submit\"",
-      "defaultValue": "'button'",
-      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
       "required": false
     },
     "disabled": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the button is disabled.",
       "required": false
     },
-    "loading": {
+    "disableRipple": {
       "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the loading state of the button is represented.",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
-    "active": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the button is represented as active.",
+    "fullRounded": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "icon": {
@@ -49,23 +49,23 @@
       "description": "The icon to be used in the button.",
       "required": false
     },
-    "fullRounded": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
-      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
       "required": false
     },
-    "disableRipple": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, disable ripple effects when pressing a element.",
+    "type": {
+      "type": "\"button\" | \"reset\" | \"submit\"",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
       "required": false
     }
   },
   "Content": {
     "as": {
       "type": "keyof IntrinsicElements",
-      "description": "",
+      "description": "The HTML element to render.",
       "required": false
     },
     "asChild": {
@@ -153,7 +153,7 @@
   "Overlay": {
     "as": {
       "type": "keyof IntrinsicElements",
-      "description": "",
+      "description": "The HTML element to render.",
       "required": false
     },
     "asChild": {
@@ -186,62 +186,41 @@
     },
     "blockScrollOnMount": {
       "type": "boolean",
-      "defaultValue": true,
+      "defaultValue": "true",
       "description": "If `true`, scrolling will be disabled on the `body` when the drawer opens.",
       "required": false
     },
-    "duration": {
-      "type": "number | MotionLifecycleProps<number>",
-      "description": "The animation duration.",
+    "body": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerBodyProps",
+      "description": "The drawer body to use.",
       "required": false
     },
-    "trigger": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The modal trigger to use.",
+    "cancel": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+      "description": "The drawer cancel button to use.",
       "required": false
     },
-    "withCloseButton": {
+    "closeOnDrag": {
       "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, display the drawer close button.",
+      "defaultValue": "false",
+      "description": "If `true`, then the drawer will close on drag.",
       "required": false
     },
-    "withDragBar": {
+    "closeOnEsc": {
       "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, display the drag bar when `closeOnDrag` is `true`.",
+      "defaultValue": "true",
+      "description": "If `true`, the modal will close when the `Esc` key is pressed.",
       "required": false
     },
-    "withOverlay": {
+    "closeOnOverlay": {
       "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, display the drawer overlay.",
+      "defaultValue": "true",
+      "description": "If `true`, the modal will close when the overlay is clicked.",
       "required": false
     },
-    "portalProps": {
-      "type": "Omit<PortalProps, \"children\">",
-      "description": "Props to be forwarded to the portal component.",
-      "required": false
-    },
-    "onCloseComplete": {
-      "type": "() => void",
-      "description": "Callback function to run side effects after the drawer has closed.",
-      "required": false
-    },
-    "placement": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | [\"bottom\" | \"left\" | \"right\" | \"top\" | { [x: string & {}]: \"bottom\" | \"left\" | \"right\" | \"top\" | undefined; base?: \"bottom\" | \"left\" | \"right\" | \"top\" | undefined; ... 4 more ...; xl?: \"bottom\" | ... 3 more ... | undefined; }, \"bottom\" | ... 3 more ... | { ...; }] | { ...; }",
-      "defaultValue": "'right'",
-      "description": "The placement of the drawer.",
-      "required": false
-    },
-    "open": {
+    "defaultOpen": {
       "type": "boolean",
-      "description": "If `true`, the element will be opened.",
-      "required": false
-    },
-    "onClose": {
-      "type": "() => void",
-      "description": "Callback invoked to close the element.",
+      "description": "If `true`, the element will be initially opened.",
       "required": false
     },
     "dragConstraints": {
@@ -256,12 +235,6 @@
       "description": "The degree of movement allowed outside constraints. 0 = no movement, 1 = full movement.",
       "required": false
     },
-    "closeOnDrag": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, then the drawer will close on drag.",
-      "required": false
-    },
     "dragOffset": {
       "type": "number",
       "defaultValue": "80",
@@ -274,69 +247,14 @@
       "description": "Velocity of the drag that triggers close.",
       "required": false
     },
-    "closeOnEsc": {
-      "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, the modal will close when the `Esc` key is pressed.",
-      "required": false
-    },
-    "closeOnOverlay": {
-      "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, the modal will close when the overlay is clicked.",
-      "required": false
-    },
-    "onEsc": {
-      "type": "() => void",
-      "description": "Callback invoked when the escape key is pressed and focus is within modal.",
-      "required": false
-    },
-    "defaultOpen": {
-      "type": "boolean",
-      "description": "If `true`, the element will be initially opened.",
-      "required": false
-    },
-    "timing": {
-      "type": "\"after\" | \"before\"",
-      "defaultValue": "'after'",
-      "description": "The timing of the open and close.",
-      "required": false
-    },
-    "onOpen": {
-      "type": "() => void",
-      "description": "Callback invoked to open the element.",
+    "duration": {
+      "type": "number | MotionLifecycleProps<number>",
+      "description": "The animation duration.",
       "required": false
     },
     "finalFocusRef": {
-      "type": "RefObject<FocusableElement | null>",
+      "type": "RefObject<HTMLElement | null>",
       "description": "`ref` of the element to return focus to when `FocusLock` unmounts.",
-      "required": false
-    },
-    "initialFocusRef": {
-      "type": "RefObject<FocusableElement | null>",
-      "description": "`ref` of the element to receive focus initially.",
-      "required": false
-    },
-    "lockFocusAcrossFrames": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "Enables aggressive focus capturing within iframes.\n\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`: allows focus to move outside of iframe.",
-      "required": false
-    },
-    "restoreFocus": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts.",
-      "required": false
-    },
-    "body": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerBodyProps",
-      "description": "The drawer body to use.",
-      "required": false
-    },
-    "cancel": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
-      "description": "The drawer cancel button to use.",
       "required": false
     },
     "footer": {
@@ -349,19 +267,20 @@
       "description": "The drawer header to use.",
       "required": false
     },
+    "initialFocusRef": {
+      "type": "RefObject<HTMLElement | null>",
+      "description": "`ref` of the element to receive focus initially.",
+      "required": false
+    },
+    "lockFocusAcrossFrames": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "Enables aggressive focus capturing within iframes.\n\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`: allows focus to move outside of iframe.",
+      "required": false
+    },
     "middle": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
       "description": "The drawer middle button to use.",
-      "required": false
-    },
-    "success": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
-      "description": "The drawer success button to use.",
-      "required": false
-    },
-    "title": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerTitleProps",
-      "description": "The drawer title to use.",
       "required": false
     },
     "onCancel": {
@@ -369,14 +288,95 @@
       "description": "The callback invoked when cancel button clicked.",
       "required": false
     },
+    "onClose": {
+      "type": "() => void",
+      "description": "Callback invoked to close the element.",
+      "required": false
+    },
+    "onCloseComplete": {
+      "type": "() => void",
+      "description": "Callback function to run side effects after the drawer has closed.",
+      "required": false
+    },
+    "onEsc": {
+      "type": "() => void",
+      "description": "Callback invoked when the escape key is pressed and focus is within modal.",
+      "required": false
+    },
     "onMiddle": {
       "type": "(onClose: () => void) => void",
       "description": "The callback invoked when middle button clicked.",
       "required": false
     },
+    "onOpen": {
+      "type": "() => void",
+      "description": "Callback invoked to open the element.",
+      "required": false
+    },
     "onSuccess": {
       "type": "(onClose: () => void) => void",
       "description": "The callback invoked when success button clicked.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the element will be opened.",
+      "required": false
+    },
+    "placement": {
+      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | [\"bottom\" | \"left\" | \"right\" | \"top\" | { [x: string & {}]: \"bottom\" | \"left\" | \"right\" | \"top\" | undefined; base?: \"bottom\" | \"left\" | \"right\" | \"top\" | undefined; ... 4 more ...; xl?: \"bottom\" | ... 3 more ... | undefined; }, \"bottom\" | ... 3 more ... | { ...; }] | { ...; }",
+      "defaultValue": "\"right\"",
+      "description": "The placement of the drawer.",
+      "required": false
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "description": "Props to be forwarded to the portal component.",
+      "required": false
+    },
+    "restoreFocus": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts.",
+      "required": false
+    },
+    "success": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+      "description": "The drawer success button to use.",
+      "required": false
+    },
+    "timing": {
+      "type": "\"after\" | \"before\"",
+      "defaultValue": "\"after\"",
+      "description": "The timing of the open and close.",
+      "required": false
+    },
+    "title": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerTitleProps",
+      "description": "The drawer title to use.",
+      "required": false
+    },
+    "trigger": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The modal trigger to use.",
+      "required": false
+    },
+    "withCloseButton": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, display the drawer close button.",
+      "required": false
+    },
+    "withDragBar": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, display the drag bar when `closeOnDrag` is `true`.",
+      "required": false
+    },
+    "withOverlay": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, display the drawer overlay.",
       "required": false
     }
   },

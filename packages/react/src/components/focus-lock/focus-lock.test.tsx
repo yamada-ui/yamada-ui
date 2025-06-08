@@ -1,5 +1,5 @@
-import { useRef } from "react"
-import { render, renderHook, screen, waitFor } from "../../../test"
+import { useRef, useState } from "react"
+import { act, render, renderHook, screen, waitFor } from "../../../test"
 import { FocusLock } from "./focus-lock"
 
 describe("<FocusLock />", () => {
@@ -61,7 +61,52 @@ describe("<FocusLock />", () => {
     })
   })
 
-  test.todo(
-    "correctly focuses on the finalFocusRef when the FocusLock is unmounted",
-  )
+  test("correctly focuses on the finalFocusRef when the FocusLock is unmounted", async () => {
+    const TestComponent = () => {
+      const [isMounted, setIsMounted] = useState(true)
+      const outsideButtonRef = useRef<HTMLButtonElement>(null)
+
+      return (
+        <div>
+          <button ref={outsideButtonRef}>Outside Button</button>
+
+          {isMounted ? (
+            <FocusLock finalFocusRef={outsideButtonRef}>
+              <button>Focus Lock Button</button>
+            </FocusLock>
+          ) : null}
+
+          <button onClick={() => setIsMounted(false)}>
+            Unmount FocusLock Button
+          </button>
+        </div>
+      )
+    }
+
+    const { user } = render(<TestComponent />)
+
+    const focusLockButton = screen.getByRole("button", {
+      name: "Focus Lock Button",
+    })
+    const outsideButton = screen.getByRole("button", { name: "Outside Button" })
+    const unmountButton = screen.getByRole("button", {
+      name: "Unmount FocusLock Button",
+    })
+
+    // Focus on a button inside the FocusLock
+    act(() => {
+      focusLockButton.focus()
+    })
+    expect(document.activeElement).toStrictEqual(focusLockButton)
+
+    // Unmount the FocusLock
+    act(() => {
+      user.click(unmountButton)
+    })
+
+    // Check that focus returns to the outside button
+    await waitFor(() => {
+      expect(document.activeElement).toStrictEqual(outsideButton)
+    })
+  })
 })

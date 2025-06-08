@@ -2,12 +2,7 @@
   "Item": {
     "as": {
       "type": "keyof HTMLElementTagNameMap",
-      "description": "",
-      "required": false
-    },
-    "ref": {
-      "type": "RefObject<ResizableItemControl>",
-      "description": "",
+      "description": "The HTML element to render.",
       "required": false
     },
     "asChild": {
@@ -32,7 +27,7 @@
     },
     "collapsible": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the resizable item can be collapsed.",
       "required": false
     },
@@ -56,11 +51,6 @@
       "description": "The minimum allowed value of the resizable item.",
       "required": false
     },
-    "order": {
-      "type": "number",
-      "description": "Order for the resizable item.",
-      "required": false
-    },
     "onCollapse": {
       "type": "() => void",
       "description": "The callback invoked when resizable item are collapsed.",
@@ -74,6 +64,11 @@
     "onResize": {
       "type": "(size: number, prevSize: number | undefined) => void",
       "description": "The callback invoked when resizable item are resized.",
+      "required": false
+    },
+    "order": {
+      "type": "number",
+      "description": "Order for the resizable item.",
       "required": false
     }
   },
@@ -103,15 +98,9 @@
       "description": "The variant of the component.",
       "required": false
     },
-    "rootRef": {
-      "type": "type ONLY_FOR_FORMAT =\n  | RefObject<HTMLDivElement | null>\n  | ((instance: HTMLDivElement | null) => void)",
-      "description": "Ref for resizable root element.",
-      "required": false
-    },
-    "orientation": {
-      "type": "\"horizontal\" | \"vertical\" | [\"horizontal\" | \"vertical\" | { [x: string & {}]: \"horizontal\" | \"vertical\" | undefined; base?: \"horizontal\" | \"vertical\" | undefined; \"2xl\"?: \"horizontal\" | \"vertical\" | undefined; lg?: \"horizontal\" | ... 1 more ... | undefined; md?: \"horizontal\" | ... 1 more ... | undefined; sm?: \"horizo...",
-      "defaultValue": "'horizontal'",
-      "description": "The orientation of the resizable.",
+    "controlRef": {
+      "type": "RefObject<ResizableGroupControl | null>",
+      "description": "Ref of the resizable item callback.",
       "required": false
     },
     "disabled": {
@@ -119,15 +108,31 @@
       "description": "If `true`, the resizable trigger will be disabled.",
       "required": false
     },
-    "controlRef": {
-      "type": "RefObject<ResizableGroupControl | null>",
-      "description": "Ref of the resizable item callback.",
+    "groupProps": {
+      "type": "ResizableGroupProps",
+      "description": "Props for resizable component.",
       "required": false
     },
     "keyboardStep": {
       "type": "number",
       "defaultValue": "10",
       "description": "Unit to resize by keyboard operation.",
+      "required": false
+    },
+    "onLayout": {
+      "type": "PanelGroupOnLayout",
+      "description": "The callback invoked when resizable items are resized.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\" | [\"horizontal\" | \"vertical\" | { [x: string & {}]: \"horizontal\" | \"vertical\" | undefined; base?: \"horizontal\" | \"vertical\" | undefined; \"2xl\"?: \"horizontal\" | \"vertical\" | undefined; lg?: \"horizontal\" | ... 1 more ... | undefined; md?: \"horizontal\" | ... 1 more ... | undefined; sm?: \"horizo...",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the resizable.",
+      "required": false
+    },
+    "rootRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | RefObject<HTMLDivElement | null>\n  | ((instance: HTMLDivElement | null) => void)",
+      "description": "Ref for resizable root element.",
       "required": false
     },
     "storage": {
@@ -139,22 +144,12 @@
       "type": "string",
       "description": "Key of value saved in storage.\nBy default, it is saved to `local storage`.",
       "required": false
-    },
-    "groupProps": {
-      "type": "ResizableGroupProps",
-      "description": "Props for resizable component.",
-      "required": false
-    },
-    "onLayout": {
-      "type": "PanelGroupOnLayout",
-      "description": "The callback invoked when resizable items are resized.",
-      "required": false
     }
   },
   "Trigger": {
     "as": {
       "type": "keyof HTMLElementTagNameMap",
-      "description": "",
+      "description": "The HTML element to render.",
       "required": false
     },
     "asChild": {
@@ -172,6 +167,12 @@
       "description": "Set color scheme variables.",
       "required": false
     },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the resizable trigger will be disabled.",
+      "required": false
+    },
     "icon": {
       "type": "ReactElement<\n  unknown,\n  string | JSXElementConstructor<any>\n>",
       "description": "The resizable trigger icon to use.",
@@ -180,12 +181,6 @@
     "iconProps": {
       "type": "HTMLStyledProps",
       "description": "Props for resizable trigger icon component.",
-      "required": false
-    },
-    "disabled": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the resizable trigger will be disabled.",
       "required": false
     },
     "onDragging": {

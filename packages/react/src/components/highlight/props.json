@@ -30,17 +30,6 @@
       "description": "Can be a single string or an array of strings. These are the terms that are highlighted in the text.",
       "required": true
     },
-    "fragment": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, `Fragment` is used for rendering.",
-      "required": false
-    },
-    "markProps": {
-      "type": "MarkProps",
-      "description": "Properties passed to the Mark component which is used to highlight the matched terms.",
-      "required": false
-    },
     "align": {
       "type": "TextAlign | [TextAlign | { [x: string & {}]: TextAlign | undefined; base?: TextAlign | undefined; \"2xl\"?: TextAlign | undefined; lg?: TextAlign | undefined; md?: TextAlign | undefined; sm?: TextAlign | undefined; xl?: TextAlign | undefined; }, TextAlign | { ...; }] | { ...; }",
       "description": "The CSS `text-align` property.",
@@ -54,6 +43,17 @@
     "decoration": {
       "type": "TextDecoration<0 | (string & {})> | [TextDecoration<0 | (string & {})> | { [x: string & {}]: TextDecoration<0 | (string & {})> | undefined; ... 5 more ...; xl?: TextDecoration<...> | undefined; }, TextDecoration<...> | { ...; }] | { ...; }",
       "description": "The CSS `text-decoration` property.",
+      "required": false
+    },
+    "fragment": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, `Fragment` is used for rendering.",
+      "required": false
+    },
+    "markProps": {
+      "type": "MarkProps",
+      "description": "Properties passed to the Mark component which is used to highlight the matched terms.",
       "required": false
     }
   }

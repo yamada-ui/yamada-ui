@@ -1,4 +1,4 @@
-import type { ReactNode, RefObject } from "react"
+import type { PropsWithChildren, RefObject } from "react"
 import type { FC } from "../../core"
 import { useCallback } from "react"
 import ReactFocusLock from "react-focus-lock"
@@ -6,8 +6,7 @@ import { getFocusableElements, interopDefault } from "../../utils"
 
 const InternalFocusLock = interopDefault(ReactFocusLock)
 
-export interface FocusLockProps {
-  children: ReactNode
+export interface FocusLockProps extends PropsWithChildren {
   /**
    * If `true`, the first focusable element within the `children` will auto-focused once `FocusLock` mounts.
    *

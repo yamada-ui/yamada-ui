@@ -30,24 +30,15 @@
       "description": "The variant of the component.",
       "required": false
     },
+    "animated": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the progress bar will animate.",
+      "required": false
+    },
     "duration": {
       "type": "string | number",
       "description": "The animation duration in seconds.",
-      "required": false
-    },
-    "rangeColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
-      "description": "The color of the progress range.",
-      "required": false
-    },
-    "trackColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
-      "description": "The color of the progress track.",
-      "required": false
-    },
-    "rangeProps": {
-      "type": "ProgressRangeProps",
-      "description": "Props for the progress range element.",
       "required": false
     },
     "max": {
@@ -62,16 +53,14 @@
       "description": "The minimum value of the progress.",
       "required": false
     },
-    "value": {
-      "type": "number",
-      "defaultValue": "0",
-      "description": "The value of the progress. If `null`, the progress will be indeterminate.",
+    "rangeColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color of the progress range.",
       "required": false
     },
-    "animated": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
-      "description": "If `true`, the progress bar will animate.",
+    "rangeProps": {
+      "type": "ProgressRangeProps",
+      "description": "Props for the progress range element.",
       "required": false
     },
     "shape": {
@@ -82,8 +71,19 @@
     },
     "striped": {
       "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the progress bar will show stripe.",
+      "required": false
+    },
+    "trackColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color of the progress track.",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The value of the progress. If `null`, the progress will be indeterminate.",
       "required": false
     }
   }

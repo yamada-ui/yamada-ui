@@ -120,21 +120,10 @@
       "description": "The size of the component.",
       "required": false
     },
-    "children": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: { ...; }) => ReactNode)",
-      "description": "The children of the popover.",
-      "required": false
-    },
-    "duration": {
-      "type": "number | MotionLifecycleProps<number>",
-      "defaultValue": "0.2",
-      "description": "The animation duration.",
-      "required": false
-    },
-    "withCloseButton": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `true`, display the popover close button.",
+    "animationScheme": {
+      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "defaultValue": "\"scale\"",
+      "description": "The animation of the element.",
       "required": false
     },
     "autoFocus": {
@@ -143,10 +132,21 @@
       "description": "If `true`, focus will be transferred to the first interactive element when the popover opens.",
       "required": false
     },
+    "autoUpdate": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, automatically updates the position of the floating element when necessary.",
+      "required": false
+    },
     "blockScrollOnMount": {
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, scrolling will be disabled on the `body` when the modal opens.",
+      "required": false
+    },
+    "children": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: { ...; }) => ReactNode)",
+      "description": "The children of the popover.",
       "required": false
     },
     "closeDelay": {
@@ -173,53 +173,21 @@
       "description": "If `true`, the popover will hide on scroll.",
       "required": false
     },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the element will be initially opened.",
+      "required": false
+    },
     "disabled": {
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the popover will be disabled.",
       "required": false
     },
-    "initialFocusRef": {
-      "type": "RefObject<HTMLElement | null>",
-      "description": "The `ref` of the element that should receive focus when the popover opens.",
-      "required": false
-    },
-    "modal": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the popover will be modal.\n\n- scrolling is blocked.\n- focus is trapped within the popover.",
-      "required": false
-    },
-    "openDelay": {
-      "type": "number",
-      "defaultValue": "0",
-      "description": "The delay before showing the popover.",
-      "required": false
-    },
-    "open": {
-      "type": "boolean",
-      "description": "If `true`, the element will be opened.",
-      "required": false
-    },
-    "onClose": {
-      "type": "() => void",
-      "description": "Callback invoked to close the element.",
-      "required": false
-    },
-    "defaultOpen": {
-      "type": "boolean",
-      "description": "If `true`, the element will be initially opened.",
-      "required": false
-    },
-    "onOpen": {
-      "type": "() => void",
-      "description": "Callback invoked to open the element.",
-      "required": false
-    },
-    "autoUpdate": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `true`, automatically updates the position of the floating element when necessary.",
+    "duration": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
+      "description": "The animation duration.",
       "required": false
     },
     "elements": {
@@ -239,6 +207,11 @@
       "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier.",
       "required": false
     },
+    "initialFocusRef": {
+      "type": "RefObject<HTMLElement | null>",
+      "description": "The `ref` of the element that should receive focus when the popover opens.",
+      "required": false
+    },
     "matchWidth": {
       "type": "boolean",
       "defaultValue": "false",
@@ -250,9 +223,36 @@
       "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
       "required": false
     },
+    "modal": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the popover will be modal.\n\n- scrolling is blocked.\n- focus is trapped within the popover.",
+      "required": false
+    },
     "offset": {
       "type": "[number, number]",
       "description": "The main and cross-axis offset to displace popper element from its reference element.",
+      "required": false
+    },
+    "onClose": {
+      "type": "() => void",
+      "description": "Callback invoked to close the element.",
+      "required": false
+    },
+    "onOpen": {
+      "type": "() => void",
+      "description": "Callback invoked to open the element.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the element will be opened.",
+      "required": false
+    },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The delay before showing the popover.",
       "required": false
     },
     "placement": {
@@ -289,10 +289,10 @@
       "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
       "required": false
     },
-    "animationScheme": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
-      "defaultValue": "\"scale\"",
-      "description": "The animation of the element.",
+    "withCloseButton": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, display the popover close button.",
       "required": false
     }
   },

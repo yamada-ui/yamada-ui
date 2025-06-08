@@ -1,10 +1,5 @@
 {
   "Portal": {
-    "children": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "",
-      "required": false
-    },
     "containerRef": {
       "type": "RefObject<HTMLElement | null>",
       "description": "The `ref` to the component where the portal will be attached to.",

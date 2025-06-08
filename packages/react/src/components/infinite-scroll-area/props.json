@@ -20,21 +20,6 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "finish": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The infinite scroll area finish to use.",
-      "required": false
-    },
-    "loading": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The infinite scroll area loading to use.",
-      "required": false
-    },
-    "triggerProps": {
-      "type": "HTMLStyledProps",
-      "description": "Props for infinite scroll area trigger component.",
-      "required": false
-    },
     "behavior": {
       "type": "ScrollBehavior",
       "description": "Determines whether scrolling is instant or animates smoothly.",
@@ -42,8 +27,13 @@
     },
     "disabled": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, the infinite scroll is disabled.",
+      "required": false
+    },
+    "finish": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The infinite scroll area finish to use.",
       "required": false
     },
     "indexRef": {
@@ -53,13 +43,23 @@
     },
     "initialLoad": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, invoke `onLoad` function for the first time.",
+      "required": false
+    },
+    "loading": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The infinite scroll area loading to use.",
+      "required": false
+    },
+    "onLoad": {
+      "type": "({\n  entry,\n  finish,\n  index,\n}: {\n  finish: () => void\n  index: number\n  entry?: IntersectionObserverEntry | undefined\n}) => void | Promise<void>",
+      "description": "The callback invoked when trigger is intersect.",
       "required": false
     },
     "orientation": {
       "type": "Orientation | [Orientation | { [x: string & {}]: Orientation | undefined; base?: Orientation | undefined; \"2xl\"?: Orientation | undefined; lg?: Orientation | undefined; md?: Orientation | undefined; sm?: Orientation | undefined; xl?: Orientation | undefined; }, Orientation | { ...; }] | { ...; }",
-      "defaultValue": "'vertical'",
+      "defaultValue": "\"vertical\"",
       "description": "The orientation of the infinite scroll.",
       "required": false
     },
@@ -70,7 +70,7 @@
     },
     "reverse": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, reverse direction.",
       "required": false
     },
@@ -95,9 +95,9 @@
       "description": "Either a single number or an array of numbers which indicate at what percentage of the target's visibility the observer's callback should be executed.",
       "required": false
     },
-    "onLoad": {
-      "type": "({\n  entry,\n  finish,\n  index,\n}: {\n  finish: () => void\n  index: number\n  entry?: IntersectionObserverEntry | undefined\n}) => void | Promise<void>",
-      "description": "The callback invoked when trigger is intersect.",
+    "triggerProps": {
+      "type": "HTMLStyledProps",
+      "description": "Props for infinite scroll area trigger component.",
       "required": false
     }
   }

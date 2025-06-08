@@ -47,14 +47,14 @@
       "description": "The data list description to use.",
       "required": false
     },
-    "term": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ReactNode[]",
-      "description": "The data list term to use.",
-      "required": false
-    },
     "descriptionProps": {
       "type": "DataListDescriptionProps",
       "description": "The props for the data list description component.",
+      "required": false
+    },
+    "term": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ReactNode[]",
+      "description": "The data list term to use.",
       "required": false
     },
     "termProps": {
@@ -99,25 +99,25 @@
       "description": "The number of columns.\nIf `orientation` is `\"horizontal\"` and `items` is not set, please set this.",
       "required": false
     },
-    "items": {
-      "type": "DataListItemProps[]",
-      "description": "If provided, generate elements based on items.",
-      "required": false
-    },
     "descriptionProps": {
       "type": "DataListDescriptionProps",
       "description": "The props for the data list description component.",
       "required": false
     },
-    "termProps": {
-      "type": "DataListTermProps",
-      "description": "The props for the data list term component.",
+    "items": {
+      "type": "DataListItemProps[]",
+      "description": "If provided, generate elements based on items.",
       "required": false
     },
     "orientation": {
       "type": "\"horizontal\" | \"vertical\" | [\"horizontal\" | \"vertical\" | { [x: string & {}]: \"horizontal\" | \"vertical\" | undefined; base?: \"horizontal\" | \"vertical\" | undefined; \"2xl\"?: \"horizontal\" | \"vertical\" | undefined; lg?: \"horizontal\" | ... 1 more ... | undefined; md?: \"horizontal\" | ... 1 more ... | undefined; sm?: \"horizo...",
-      "defaultValue": "'horizontal'",
+      "defaultValue": "\"horizontal\"",
       "description": "The orientation of the data list.",
+      "required": false
+    },
+    "termProps": {
+      "type": "DataListTermProps",
+      "description": "The props for the data list term component.",
       "required": false
     }
   },

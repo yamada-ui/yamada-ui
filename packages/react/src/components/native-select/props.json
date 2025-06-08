@@ -30,53 +30,9 @@
       "description": "The variant of the component.",
       "required": false
     },
-    "icon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The icon to be used in the select.",
-      "required": false
-    },
     "elementProps": {
       "type": "InputElementProps",
       "description": "The props for the end element.",
-      "required": false
-    },
-    "iconProps": {
-      "type": "NativeSelectIconProps",
-      "description": "Props for icon element.",
-      "required": false
-    },
-    "rootProps": {
-      "type": "InputGroupRootProps",
-      "description": "Props for root element.",
-      "required": false
-    },
-    "items": {
-      "type": "NativeSelectItem[]",
-      "defaultValue": "'[]'",
-      "description": "If provided, generate options based on items.",
-      "required": false
-    },
-    "placeholder": {
-      "type": "string",
-      "description": "The placeholder for select.",
-      "required": false
-    },
-    "placeholderInOptions": {
-      "type": "boolean",
-      "defaultValue": true,
-      "description": "If `true`, include placeholders in options.",
-      "required": false
-    },
-    "invalid": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the field will be invalid.",
-      "required": false
-    },
-    "readOnly": {
-      "type": "boolean",
-      "defaultValue": false,
-      "description": "If `true`, the field will be readonly.",
       "required": false
     },
     "errorBorderColor": {
@@ -87,6 +43,50 @@
     "focusBorderColor": {
       "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
       "description": "The border color when the input is focused.",
+      "required": false
+    },
+    "icon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The icon to be used in the select.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "NativeSelectIconProps",
+      "description": "Props for icon element.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "items": {
+      "type": "NativeSelectItem[]",
+      "defaultValue": "\"[]\"",
+      "description": "If provided, generate options based on items.",
+      "required": false
+    },
+    "placeholder": {
+      "type": "string",
+      "description": "The placeholder for select.",
+      "required": false
+    },
+    "placeholderInOptions": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, include placeholders in options.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "rootProps": {
+      "type": "InputGroupRootProps",
+      "description": "Props for root element.",
       "required": false
     }
   }

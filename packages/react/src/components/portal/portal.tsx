@@ -1,4 +1,4 @@
-import type { ReactNode, RefObject } from "react"
+import type { PropsWithChildren, RefObject } from "react"
 import type { FC } from "../../core"
 import type { RootNode } from "../../providers/environment-provider"
 import { Children, useEffect, useState } from "react"
@@ -14,8 +14,7 @@ const getPortalNode = (node: RootNode) => {
   return getDocument(node).body
 }
 
-export interface PortalProps {
-  children: ReactNode
+export interface PortalProps extends PropsWithChildren {
   /**
    * The `ref` to the component where the portal will be attached to.
    */

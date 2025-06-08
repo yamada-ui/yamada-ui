@@ -42,10 +42,10 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "type": {
-      "type": "\"button\" | \"reset\" | \"submit\"",
-      "defaultValue": "\"button\"",
-      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
       "required": false
     },
     "disabled": {
@@ -54,21 +54,10 @@
       "description": "If `true`, the button is disabled.",
       "required": false
     },
-    "loading": {
+    "disableRipple": {
       "type": "boolean",
       "defaultValue": "false",
-      "description": "If `true`, the loading state of the button is represented.",
-      "required": false
-    },
-    "active": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the button is represented as active.",
-      "required": false
-    },
-    "icon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
-      "description": "The icon to be used in the button.",
+      "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     },
     "fullRounded": {
@@ -77,10 +66,21 @@
       "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
-    "disableRipple": {
+    "icon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The icon to be used in the button.",
+      "required": false
+    },
+    "loading": {
       "type": "boolean",
       "defaultValue": "false",
-      "description": "If `true`, disable ripple effects when pressing a element.",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "type": {
+      "type": "\"button\" | \"reset\" | \"submit\"",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
       "required": false
     }
   },
@@ -184,10 +184,159 @@
       "description": "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.",
       "required": false
     },
+    "animationScheme": {
+      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "defaultValue": "\"scale\"",
+      "description": "The animation of the element.",
+      "required": false
+    },
     "blockScrollOnMount": {
       "type": "boolean",
       "defaultValue": "true",
       "description": "If `true`, scrolling will be disabled on the `body` when the modal opens.",
+      "required": false
+    },
+    "body": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ModalBodyProps",
+      "description": "The modal body to use.",
+      "required": false
+    },
+    "cancel": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+      "description": "The modal cancel button to use.",
+      "required": false
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the modal will close when the `Esc` key is pressed.",
+      "required": false
+    },
+    "closeOnOverlay": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the modal will close when the overlay is clicked.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the element will be initially opened.",
+      "required": false
+    },
+    "duration": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
+      "description": "The animation duration.",
+      "required": false
+    },
+    "finalFocusRef": {
+      "type": "RefObject<HTMLElement | null>",
+      "description": "`ref` of the element to return focus to when `FocusLock` unmounts.",
+      "required": false
+    },
+    "footer": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ModalFooterProps",
+      "description": "The modal footer to use.",
+      "required": false
+    },
+    "header": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ModalHeaderProps",
+      "description": "The modal header to use.",
+      "required": false
+    },
+    "initialFocusRef": {
+      "type": "RefObject<HTMLElement | null>",
+      "description": "`ref` of the element to receive focus initially.",
+      "required": false
+    },
+    "lockFocusAcrossFrames": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "Enables aggressive focus capturing within iframes.\n\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`: allows focus to move outside of iframe.",
+      "required": false
+    },
+    "middle": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+      "description": "The modal middle button to use.",
+      "required": false
+    },
+    "onCancel": {
+      "type": "(onClose: () => void) => void",
+      "description": "The callback invoked when cancel button clicked.",
+      "required": false
+    },
+    "onClose": {
+      "type": "() => void",
+      "description": "Callback invoked to close the element.",
+      "required": false
+    },
+    "onCloseComplete": {
+      "type": "() => void",
+      "description": "Callback function to run side effects after the modal has closed.",
+      "required": false
+    },
+    "onEsc": {
+      "type": "() => void",
+      "description": "Callback invoked when the escape key is pressed and focus is within modal.",
+      "required": false
+    },
+    "onMiddle": {
+      "type": "(onClose: () => void) => void",
+      "description": "The callback invoked when middle button clicked.",
+      "required": false
+    },
+    "onOpen": {
+      "type": "() => void",
+      "description": "Callback invoked to open the element.",
+      "required": false
+    },
+    "onSuccess": {
+      "type": "(onClose: () => void) => void",
+      "description": "The callback invoked when success button clicked.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the element will be opened.",
+      "required": false
+    },
+    "placement": {
+      "type": "\"center\" | \"center-center\" | \"center-end\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" | \"start-end\" | \"start-start\" | [\"center\" | \"center-center\" | ... 8 more ... | { ...; }, \"center\" | ... 9 more ... | { ...; }] | { ...; }",
+      "defaultValue": "\"center\"",
+      "description": "The placement of the modal.",
+      "required": false
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "description": "Props to be forwarded to the portal component.",
+      "required": false
+    },
+    "restoreFocus": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts.",
+      "required": false
+    },
+    "scrollBehavior": {
+      "type": "\"inside\" | \"outside\" | [\"inside\" | \"outside\" | { [x: string & {}]: \"inside\" | \"outside\" | undefined; base?: \"inside\" | \"outside\" | undefined; \"2xl\"?: \"inside\" | \"outside\" | undefined; lg?: \"inside\" | ... 1 more ... | undefined; md?: \"inside\" | ... 1 more ... | undefined; sm?: \"inside\" | ... 1 more ... | undefined; x...",
+      "defaultValue": "\"inside\"",
+      "description": "Where scroll behavior should originate.\n\n- `inside`: scroll only occurs within the `ModalBody`.\n- `outside`: the entire `ModalContent` will scroll within the viewport.",
+      "required": false
+    },
+    "success": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+      "description": "The modal success button to use.",
+      "required": false
+    },
+    "timing": {
+      "type": "\"after\" | \"before\"",
+      "defaultValue": "\"after\"",
+      "description": "The timing of the open and close.",
+      "required": false
+    },
+    "title": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ModalTitleProps",
+      "description": "The modal title to use.",
       "required": false
     },
     "trigger": {
@@ -205,155 +354,6 @@
       "type": "boolean",
       "defaultValue": "true",
       "description": "If `true`, display the modal overlay.",
-      "required": false
-    },
-    "portalProps": {
-      "type": "Omit<PortalProps, \"children\">",
-      "description": "Props to be forwarded to the portal component.",
-      "required": false
-    },
-    "onCloseComplete": {
-      "type": "() => void",
-      "description": "Callback function to run side effects after the modal has closed.",
-      "required": false
-    },
-    "placement": {
-      "type": "\"center\" | \"center-center\" | \"center-end\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" | \"start-end\" | \"start-start\" | [\"center\" | \"center-center\" | ... 8 more ... | { ...; }, \"center\" | ... 9 more ... | { ...; }] | { ...; }",
-      "defaultValue": "\"center\"",
-      "description": "The placement of the modal.",
-      "required": false
-    },
-    "scrollBehavior": {
-      "type": "\"inside\" | \"outside\" | [\"inside\" | \"outside\" | { [x: string & {}]: \"inside\" | \"outside\" | undefined; base?: \"inside\" | \"outside\" | undefined; \"2xl\"?: \"inside\" | \"outside\" | undefined; lg?: \"inside\" | ... 1 more ... | undefined; md?: \"inside\" | ... 1 more ... | undefined; sm?: \"inside\" | ... 1 more ... | undefined; x...",
-      "defaultValue": "\"inside\"",
-      "description": "Where scroll behavior should originate.\n\n- `inside`: scroll only occurs within the `ModalBody`.\n- `outside`: the entire `ModalContent` will scroll within the viewport.",
-      "required": false
-    },
-    "open": {
-      "type": "boolean",
-      "description": "If `true`, the element will be opened.",
-      "required": false
-    },
-    "onClose": {
-      "type": "() => void",
-      "description": "Callback invoked to close the element.",
-      "required": false
-    },
-    "closeOnEsc": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `true`, the modal will close when the `Esc` key is pressed.",
-      "required": false
-    },
-    "closeOnOverlay": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `true`, the modal will close when the overlay is clicked.",
-      "required": false
-    },
-    "onEsc": {
-      "type": "() => void",
-      "description": "Callback invoked when the escape key is pressed and focus is within modal.",
-      "required": false
-    },
-    "defaultOpen": {
-      "type": "boolean",
-      "description": "If `true`, the element will be initially opened.",
-      "required": false
-    },
-    "timing": {
-      "type": "\"after\" | \"before\"",
-      "defaultValue": "\"after\"",
-      "description": "The timing of the open and close.",
-      "required": false
-    },
-    "onOpen": {
-      "type": "() => void",
-      "description": "Callback invoked to open the element.",
-      "required": false
-    },
-    "finalFocusRef": {
-      "type": "RefObject<HTMLElement | null>",
-      "description": "`ref` of the element to return focus to when `FocusLock` unmounts.",
-      "required": false
-    },
-    "initialFocusRef": {
-      "type": "RefObject<HTMLElement | null>",
-      "description": "`ref` of the element to receive focus initially.",
-      "required": false
-    },
-    "lockFocusAcrossFrames": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "Enables aggressive focus capturing within iframes.\n\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`: allows focus to move outside of iframe.",
-      "required": false
-    },
-    "restoreFocus": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts.",
-      "required": false
-    },
-    "animationScheme": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
-      "defaultValue": "\"scale\"",
-      "description": "The animation of the element.",
-      "required": false
-    },
-    "duration": {
-      "type": "number | MotionLifecycleProps<number>",
-      "defaultValue": "0.2",
-      "description": "The animation duration.",
-      "required": false
-    },
-    "body": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ModalBodyProps",
-      "description": "The modal body to use.",
-      "required": false
-    },
-    "cancel": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
-      "description": "The modal cancel button to use.",
-      "required": false
-    },
-    "footer": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ModalFooterProps",
-      "description": "The modal footer to use.",
-      "required": false
-    },
-    "header": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ModalHeaderProps",
-      "description": "The modal header to use.",
-      "required": false
-    },
-    "middle": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
-      "description": "The modal middle button to use.",
-      "required": false
-    },
-    "success": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
-      "description": "The modal success button to use.",
-      "required": false
-    },
-    "title": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ModalTitleProps",
-      "description": "The modal title to use.",
-      "required": false
-    },
-    "onCancel": {
-      "type": "(onClose: () => void) => void",
-      "description": "The callback invoked when cancel button clicked.",
-      "required": false
-    },
-    "onMiddle": {
-      "type": "(onClose: () => void) => void",
-      "description": "The callback invoked when middle button clicked.",
-      "required": false
-    },
-    "onSuccess": {
-      "type": "(onClose: () => void) => void",
-      "description": "The callback invoked when success button clicked.",
       "required": false
     }
   },

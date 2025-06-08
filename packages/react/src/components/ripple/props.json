@@ -2,7 +2,7 @@
   "Ripple": {
     "as": {
       "type": "keyof IntrinsicElements",
-      "description": "",
+      "description": "The HTML element to render.",
       "required": false
     },
     "asChild": {
@@ -20,19 +20,19 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "ripples": {
-      "type": "RippleOptions[]",
-      "description": "",
-      "required": true
-    },
     "onClear": {
       "type": "(key: Key) => void",
-      "description": "",
+      "description": "The callback invoked when a ripple is cleared.",
+      "required": true
+    },
+    "ripples": {
+      "type": "RippleOptions[]",
+      "description": "The ripples to use.",
       "required": true
     },
     "disabled": {
       "type": "boolean",
-      "defaultValue": false,
+      "defaultValue": "false",
       "description": "If `true`, disable ripple effects when pressing a element.",
       "required": false
     }

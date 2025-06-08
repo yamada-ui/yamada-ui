@@ -2,7 +2,7 @@
   "Fade": {
     "as": {
       "type": "keyof IntrinsicElements",
-      "description": "",
+      "description": "The HTML element to render.",
       "required": false
     },
     "asChild": {
@@ -37,11 +37,13 @@
     },
     "delay": {
       "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0",
       "description": "Custom `delay` definition for `enter` and `exit`.",
       "required": false
     },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
       "description": "Custom `duration` definition for `enter` and `exit`.",
       "required": false
     },
@@ -69,7 +71,7 @@
   "FadeScale": {
     "as": {
       "type": "keyof IntrinsicElements",
-      "description": "",
+      "description": "The HTML element to render.",
       "required": false
     },
     "asChild": {
@@ -104,7 +106,7 @@
     },
     "reverse": {
       "type": "boolean",
-      "defaultValue": true,
+      "defaultValue": "true",
       "description": "If `true`, the element will transition back to exit state.",
       "required": false
     },
@@ -116,11 +118,13 @@
     },
     "delay": {
       "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0",
       "description": "Custom `delay` definition for `enter` and `exit`.",
       "required": false
     },
     "duration": {
       "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
       "description": "Custom `duration` definition for `enter` and `exit`.",
       "required": false
     },

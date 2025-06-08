@@ -22,7 +22,7 @@ export default {
     "Toggle password visibility": "パスワードの表示を切り替える",
   },
   progress: {
-    loading: "ローディング...",
+    loading: "読み込み中...",
     percent: "{value}パーセント",
   },
   stat: {

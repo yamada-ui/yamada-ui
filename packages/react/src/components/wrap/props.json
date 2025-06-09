@@ -1,0 +1,59 @@
+{
+  "Wrap": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "align": {
+      "type": "AlignItems | [AlignItems | { [x: string & {}]: AlignItems | undefined; base?: AlignItems | undefined; \"2xl\"?: AlignItems | undefined; lg?: AlignItems | undefined; md?: AlignItems | undefined; sm?: AlignItems | undefined; xl?: AlignItems | undefined; }, AlignItems | { ...; }] | { ...; }",
+      "description": "The CSS `align-items` property.",
+      "required": false
+    },
+    "basis": {
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 98 more ... | { ...; }",
+      "description": "The CSS `flex-basis` property.",
+      "required": false
+    },
+    "direction": {
+      "type": "FlexDirection | [FlexDirection | { [x: string & {}]: FlexDirection | undefined; base?: FlexDirection | undefined; ... 4 more ...; xl?: FlexDirection | undefined; }, FlexDirection | { ...; }] | { ...; }",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
+    },
+    "grow": {
+      "type": "FlexGrow | [FlexGrow | { [x: string & {}]: FlexGrow | undefined; base?: FlexGrow | undefined; \"2xl\"?: FlexGrow | undefined; lg?: FlexGrow | undefined; md?: FlexGrow | undefined; sm?: FlexGrow | undefined; xl?: FlexGrow | undefined; }, FlexGrow | { ...; }] | { ...; }",
+      "description": "The CSS `flex-grow` property.",
+      "required": false
+    },
+    "justify": {
+      "type": "JustifyContent | [JustifyContent | { [x: string & {}]: JustifyContent | undefined; base?: JustifyContent | undefined; ... 4 more ...; xl?: JustifyContent | undefined; }, JustifyContent | { ...; }] | { ...; }",
+      "description": "The CSS `justify-content` property.",
+      "required": false
+    },
+    "shrink": {
+      "type": "FlexShrink | [FlexShrink | { [x: string & {}]: FlexShrink | undefined; base?: FlexShrink | undefined; \"2xl\"?: FlexShrink | undefined; lg?: FlexShrink | undefined; md?: FlexShrink | undefined; sm?: FlexShrink | undefined; xl?: FlexShrink | undefined; }, FlexShrink | { ...; }] | { ...; }",
+      "description": "The CSS `flex-shrink` property.",
+      "required": false
+    },
+    "wrap": {
+      "type": "FlexWrap | [FlexWrap | { [x: string & {}]: FlexWrap | undefined; base?: FlexWrap | undefined; \"2xl\"?: FlexWrap | undefined; lg?: FlexWrap | undefined; md?: FlexWrap | undefined; sm?: FlexWrap | undefined; xl?: FlexWrap | undefined; }, FlexWrap | { ...; }] | { ...; }",
+      "description": "The CSS `flex-wrap` property.",
+      "required": false
+    }
+  }
+}

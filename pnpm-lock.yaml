@@ -30,9 +30,6 @@ importers:
       '@changesets/types':
         specifier: ^6.1.0
         version: 6.1.0
-      '@clack/prompts':
-        specifier: ^0.10.1
-        version: 0.10.1
       '@commitlint/cli':
         specifier: ^19.8.1
         version: 19.8.1(@types/node@22.15.17)(typescript@5.8.3)
@@ -180,15 +177,9 @@ importers:
       axios:
         specifier: ^1.9.0
         version: 1.9.0
-      chalk:
-        specifier: ^5.4.1
-        version: 5.4.1
       commander:
         specifier: ^13.1.0
         version: 13.1.0
-      cross-env:
-        specifier: ^7.0.3
-        version: 7.0.3
       csstype:
         specifier: ^3.1.3
         version: 3.1.3
@@ -255,18 +246,24 @@ importers:
       lefthook:
         specifier: ^1.11.12
         version: 1.11.12
-      list-it:
-        specifier: ^1.3.13
-        version: 1.3.13
       lucide-react:
         specifier: ^0.509.0
         version: 0.509.0(react@19.1.0)
       node-fetch:
         specifier: ^3.3.2
         version: 3.3.2
+      ora:
+        specifier: ^8.2.0
+        version: 8.2.0
+      picocolors:
+        specifier: ^1.1.1
+        version: 1.1.1
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -291,9 +288,6 @@ importers:
       storybook-i18n:
         specifier: ^3.1.1
         version: 3.1.1
-      tslib:
-        specifier: ^2.8.1
-        version: 2.8.1
       tsup:
         specifier: ^8.4.0
         version: 8.4.0(@swc/core@1.11.24)(jiti@2.4.2)(tsx@4.19.4)(typescript@5.8.3)
@@ -919,9 +913,9 @@ importers:
       '@emotion/utils':
         specifier: ^1.4.2
         version: 1.4.2
-      '@popperjs/core':
-        specifier: ^2.11.8
-        version: 2.11.8
+      '@floating-ui/react-dom':
+        specifier: ^2.1.3
+        version: 2.1.3(react-dom@19.1.0)(react@19.1.0)
       '@tanstack/react-table':
         specifier: ^8.21.3
         version: 8.21.3(react-dom@19.1.0)(react@19.1.0)
@@ -3879,6 +3873,34 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
     dev: false
 
+  /@floating-ui/core@1.7.1:
+    resolution: {integrity: sha512-azI0DrjMMfIug/ExbBaeDVJXcY0a7EPvPjb2xAJPa4HeimBX+Z18HK8QQR3jb6356SnDDdxx+hinMLcJEDdOjw==, tarball: https://registry.npmjs.org/@floating-ui/core/-/core-1.7.1.tgz}
+    dependencies:
+      '@floating-ui/utils': 0.2.9
+    dev: false
+
+  /@floating-ui/dom@1.7.1:
+    resolution: {integrity: sha512-cwsmW/zyw5ltYTUeeYJ60CnQuPqmGwuGVhG9w0PRaRKkAyi38BT5CKrpIbb+jtahSwUl04cWzSx9ZOIxeS6RsQ==, tarball: https://registry.npmjs.org/@floating-ui/dom/-/dom-1.7.1.tgz}
+    dependencies:
+      '@floating-ui/core': 1.7.1
+      '@floating-ui/utils': 0.2.9
+    dev: false
+
+  /@floating-ui/react-dom@2.1.3(react-dom@19.1.0)(react@19.1.0):
+    resolution: {integrity: sha512-huMBfiU9UnQ2oBwIhgzyIiSpVgvlDstU8CX0AF+wS+KzmYMs0J2a3GwuFHV1Lz+jlrQGeC1fF+Nv0QoumyV0bA==, tarball: https://registry.npmjs.org/@floating-ui/react-dom/-/react-dom-2.1.3.tgz}
+    peerDependencies:
+      react: ^19.0.0
+      react-dom: ^19.0.0
+    dependencies:
+      '@floating-ui/dom': 1.7.1
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+    dev: false
+
+  /@floating-ui/utils@0.2.9:
+    resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==, tarball: https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.9.tgz}
+    dev: false
+
   /@formatjs/ecma402-abstract@2.3.4:
     resolution: {integrity: sha512-qrycXDeaORzIqNhBOx0btnhpD1c+/qFIHAN9znofuMJX6QBwtbrmlpWfD4oiUUD2vJUOIYFA/gYtg2KAMGG7sA==, tarball: https://registry.npmjs.org/@formatjs/ecma402-abstract/-/ecma402-abstract-2.3.4.tgz}
     dependencies:
@@ -4993,10 +5015,6 @@ packages:
 
   /@polka/url@1.0.0-next.29:
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==, tarball: https://registry.npmjs.org/@polka/url/-/url-1.0.0-next.29.tgz}
-
-  /@popperjs/core@2.11.8:
-    resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==, tarball: https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz}
-    dev: false
 
   /@remix-run/dev@2.16.6(@remix-run/react@2.16.6)(@remix-run/serve@2.16.6)(@types/node@22.15.17)(jiti@2.4.2)(tsx@4.19.4)(typescript@5.8.3)(vite@6.3.5):
     resolution: {integrity: sha512-vddzv6IY+4KFDNhTj7yvMi5BmBpEVSe6meq9Z7/yM5mjv03F5Ywsci41Sdri2RU5Nitplrj2o9iXOtQOnTBS3g==, tarball: https://registry.npmjs.org/@remix-run/dev/-/dev-2.16.6.tgz}
@@ -7024,18 +7042,6 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /ansi-escape-sequences@6.2.4:
-    resolution: {integrity: sha512-2KJQAG1Nk4Iyu0dJENKXQJE9smEASrpu/E0F7LSnR72tQXngKGLqfRkHbkinjNct5vvAQY4BwQNt+4Tvg73nDQ==, tarball: https://registry.npmjs.org/ansi-escape-sequences/-/ansi-escape-sequences-6.2.4.tgz}
-    engines: {node: '>=12.17'}
-    peerDependencies:
-      '@75lb/nature': latest
-    peerDependenciesMeta:
-      '@75lb/nature':
-        optional: true
-    dependencies:
-      array-back: 6.2.2
-    dev: false
-
   /ansi-escapes@4.3.2:
     resolution: {integrity: sha512-gKXj5ALrKWQLsYG9jlTRmR/xKluxHV+Z9QEwNIgCfM1/uwPMCuzVVnh5mwTd+OuBZcwSIMbqssNWRm1lE51QaQ==, tarball: https://registry.npmjs.org/ansi-escapes/-/ansi-escapes-4.3.2.tgz}
     engines: {node: '>=8'}
@@ -7132,11 +7138,6 @@ packages:
   /aria-query@5.3.2:
     resolution: {integrity: sha512-COROpnaoap1E2F000S62r6A60uHZnmlvomhfyT2DlTcrY1OrBKn2UhH7qn5wTC9zMvD0AY7csdPSNwKP+7WiQw==, tarball: https://registry.npmjs.org/aria-query/-/aria-query-5.3.2.tgz}
     engines: {node: '>= 0.4'}
-
-  /array-back@6.2.2:
-    resolution: {integrity: sha512-gUAZ7HPyb4SJczXAMUXMGAvI976JoK3qEx9v1FTmeYuJj0IBiaKttG1ydtGKdkfqWkIkouke7nG8ufGy77+Cvw==, tarball: https://registry.npmjs.org/array-back/-/array-back-6.2.2.tgz}
-    engines: {node: '>=12.17'}
-    dev: false
 
   /array-buffer-byte-length@1.0.2:
     resolution: {integrity: sha512-LHE+8BuR7RYGDKvnrmcuSq3tDcKv9OFEXQt/HpbZhY7V6h0zlUXutnAD82GiFx9rdieCMjkvtcsPqBwgUl1Iiw==, tarball: https://registry.npmjs.org/array-buffer-byte-length/-/array-buffer-byte-length-1.0.2.tgz}
@@ -7865,6 +7866,13 @@ packages:
       restore-cursor: 3.1.0
     dev: true
 
+  /cli-cursor@5.0.0:
+    resolution: {integrity: sha512-aCj4O5wKyszjMmDT4tZj93kxyydN/K5zPWSCe6/0AV/AA1pqe5ZBIw0a2ZfPQV7lL5/yb5HsUreJ6UFAF1tEQw==, tarball: https://registry.npmjs.org/cli-cursor/-/cli-cursor-5.0.0.tgz}
+    engines: {node: '>=18'}
+    dependencies:
+      restore-cursor: 5.1.0
+    dev: false
+
   /cli-handle-error@4.4.1(react@19.1.0):
     resolution: {integrity: sha512-tl4YzQL+7X7vgTFfDH2sWdhLztvNfpPqPOR0YwUMmmAc6UmfFJ1HHZqfv8L7k7/dD0ZDTfsVFDiEJjaaxmqMWA==, tarball: https://registry.npmjs.org/cli-handle-error/-/cli-handle-error-4.4.1.tgz}
     dependencies:
@@ -7891,7 +7899,6 @@ packages:
   /cli-spinners@2.9.2:
     resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==, tarball: https://registry.npmjs.org/cli-spinners/-/cli-spinners-2.9.2.tgz}
     engines: {node: '>=6'}
-    dev: true
 
   /client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==, tarball: https://registry.npmjs.org/client-only/-/client-only-0.0.1.tgz}
@@ -8275,14 +8282,6 @@ packages:
     dependencies:
       recast: 0.23.11
       semver: 7.7.1
-    dev: false
-
-  /cross-env@7.0.3:
-    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==, tarball: https://registry.npmjs.org/cross-env/-/cross-env-7.0.3.tgz}
-    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
-    hasBin: true
-    dependencies:
-      cross-spawn: 7.0.6
     dev: false
 
   /cross-spawn@7.0.6:
@@ -8858,7 +8857,6 @@ packages:
 
   /emoji-regex@10.4.0:
     resolution: {integrity: sha512-EC+0oUMY1Rqm4O6LLrgjtYDvcVYTy7chDnM4Q7030tP4Kwj3u/pR6gP9ygnp2CJMK5Gq+9Q2oqmrFJAz01DXjw==, tarball: https://registry.npmjs.org/emoji-regex/-/emoji-regex-10.4.0.tgz}
-    dev: true
 
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==, tarball: https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz}
@@ -10300,7 +10298,6 @@ packages:
   /get-east-asian-width@1.3.0:
     resolution: {integrity: sha512-vpeMIQKxczTD/0s2CdEWHcb0eeJe6TFjxb+J5xgX7hScxqrGuyjmv4c1D4A/gelKfyox0gJJwIHF+fLjeaM8kQ==, tarball: https://registry.npmjs.org/get-east-asian-width/-/get-east-asian-width-1.3.0.tgz}
     engines: {node: '>=18'}
-    dev: true
 
   /get-intrinsic@1.3.0:
     resolution: {integrity: sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==, tarball: https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz}
@@ -10596,11 +10593,6 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       has-symbols: 1.1.0
-
-  /hash-arg@1.0.9:
-    resolution: {integrity: sha512-nwbBvNEc+1OAsIzoeRO71f7ttUxnBqUyGoW+DkuqDW2ynNHedXGDgJf8q2qkfzO+tC2XjSw8TRUCJHmVxQjPZw==, tarball: https://registry.npmjs.org/hash-arg/-/hash-arg-1.0.9.tgz}
-    engines: {node: '>=8.17.0', npm: '>=6.13.4'}
-    dev: false
 
   /hasha@5.2.2:
     resolution: {integrity: sha512-Hrp5vIK/xr5SkeN2onO32H0MgNZ0f17HRNH39WfL0SYUNOTZ5Lz1TJ8Pajo/87dYGEFlLMm7mIc/k/s6Bvz9HQ==, tarball: https://registry.npmjs.org/hasha/-/hasha-5.2.2.tgz}
@@ -11096,6 +11088,11 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /is-interactive@2.0.0:
+    resolution: {integrity: sha512-qP1vozQRI+BMOPcjFzrjXuQvdak2pHNUMZoeG2eRbiSqyvbEf/wQtEOTOX1guk6E3t36RkaqiSt8A/6YElNxLQ==, tarball: https://registry.npmjs.org/is-interactive/-/is-interactive-2.0.0.tgz}
+    engines: {node: '>=12'}
+    dev: false
+
   /is-map@2.0.3:
     resolution: {integrity: sha512-1Qed0/Hr2m+YqxnM09CjA2d/i6YZNfF6R2oRAOj36eUdS6qIV/huPJNSEpKbupewFs+ZsJlxsjjPbc0/afW6Lw==, tarball: https://registry.npmjs.org/is-map/-/is-map-2.0.3.tgz}
     engines: {node: '>= 0.4'}
@@ -11237,6 +11234,11 @@ packages:
     resolution: {integrity: sha512-knxG2q4UC3u8stRGyAVJCOdxFmv5DZiRcdlIaAQXAbSfJya+OhopNotLQrstBhququ4ZpuKbDc/8S6mgXgPFPw==, tarball: https://registry.npmjs.org/is-unicode-supported/-/is-unicode-supported-0.1.0.tgz}
     engines: {node: '>=10'}
     dev: true
+
+  /is-unicode-supported@1.3.0:
+    resolution: {integrity: sha512-43r2mRvz+8JRIKnWJ+3j8JtjRKZ6GmjzfaE/qiBJnikNnYv/6bagRJ1kUhNk8R5EX/GkobD+r+sfxCPJsiKBLQ==, tarball: https://registry.npmjs.org/is-unicode-supported/-/is-unicode-supported-1.3.0.tgz}
+    engines: {node: '>=12'}
+    dev: false
 
   /is-unicode-supported@2.1.0:
     resolution: {integrity: sha512-mE00Gnza5EEB3Ds0HfMyllZzbBrmLOX3vfWoj9A9PEnTfratQ/BcaJOuMhnkhjXvb2+FkY3VuHqtAGpTPmglFQ==, tarball: https://registry.npmjs.org/is-unicode-supported/-/is-unicode-supported-2.1.0.tgz}
@@ -12297,20 +12299,6 @@ packages:
   /lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==, tarball: https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.2.4.tgz}
 
-  /list-it@1.3.13:
-    resolution: {integrity: sha512-jSF4fMwXmxOYeL1VxTbswXE4qnkt8nVH/3CTEn3PH6GFhXMYSIY+kW4Ue4m2P2xYZ7KhnUVczZQtXIeonkD02A==, tarball: https://registry.npmjs.org/list-it/-/list-it-1.3.13.tgz}
-    hasBin: true
-    dependencies:
-      ansi-escape-sequences: 6.2.4
-      debug: 4.4.0
-      eastasianwidth: 0.2.0
-      hash-arg: 1.0.9
-      node-getopt: github.com/takamin/node-getopt/a94ecd2791f28b89108a001d5e5f51d632dbe671
-    transitivePeerDependencies:
-      - '@75lb/nature'
-      - supports-color
-    dev: false
-
   /list-item@1.1.1:
     resolution: {integrity: sha512-S3D0WZ4J6hyM8o5SNKWaMYB1ALSacPZ2nHGEuCjmHZ+dc03gFeNZoNDcqfcnO4vDhTZmNrqrpYZCdXsRh22bzw==, tarball: https://registry.npmjs.org/list-item/-/list-item-1.1.1.tgz}
     engines: {node: '>=0.10.0'}
@@ -12448,6 +12436,14 @@ packages:
       chalk: 4.1.2
       is-unicode-supported: 0.1.0
     dev: true
+
+  /log-symbols@6.0.0:
+    resolution: {integrity: sha512-i24m8rpwhmPIS4zscNzK6MSEhk0DUWa/8iYQWxhffV8jkI4Phvs3F+quL5xvS0gdQR0FyTCMMH33Y78dDTzzIw==, tarball: https://registry.npmjs.org/log-symbols/-/log-symbols-6.0.0.tgz}
+    engines: {node: '>=18'}
+    dependencies:
+      chalk: 5.4.1
+      is-unicode-supported: 1.3.0
+    dev: false
 
   /loglevel@1.9.2:
     resolution: {integrity: sha512-HgMmCqIJSAKqo68l0rS2AanEWfkxaZ5wNiEFb5ggm08lDs9Xl2KxBlX3PTcaD2chBM1gXAYf491/M2Rv8Jwayg==, tarball: https://registry.npmjs.org/loglevel/-/loglevel-1.9.2.tgz}
@@ -13595,6 +13591,11 @@ packages:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==, tarball: https://registry.npmjs.org/mimic-fn/-/mimic-fn-2.1.0.tgz}
     engines: {node: '>=6'}
 
+  /mimic-function@5.0.1:
+    resolution: {integrity: sha512-VP79XUPxV2CigYP3jWwAUFSku2aKqBH7uTAapFWCBqutsbmDo96KY5o8uh6U+/YSIn5OxJnXp73beVkpqMIGhA==, tarball: https://registry.npmjs.org/mimic-function/-/mimic-function-5.0.1.tgz}
+    engines: {node: '>=18'}
+    dev: false
+
   /min-indent@1.0.1:
     resolution: {integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==, tarball: https://registry.npmjs.org/min-indent/-/min-indent-1.0.1.tgz}
     engines: {node: '>=4'}
@@ -14180,6 +14181,13 @@ packages:
     dependencies:
       mimic-fn: 2.1.0
 
+  /onetime@7.0.0:
+    resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==, tarball: https://registry.npmjs.org/onetime/-/onetime-7.0.0.tgz}
+    engines: {node: '>=18'}
+    dependencies:
+      mimic-function: 5.0.1
+    dev: false
+
   /open@8.4.2:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==, tarball: https://registry.npmjs.org/open/-/open-8.4.2.tgz}
     engines: {node: '>=12'}
@@ -14237,6 +14245,21 @@ packages:
       strip-ansi: 6.0.1
       wcwidth: 1.0.1
     dev: true
+
+  /ora@8.2.0:
+    resolution: {integrity: sha512-weP+BZ8MVNnlCm8c0Qdc1WSWq4Qn7I+9CJGm7Qali6g44e/PUzbjNqJX5NJ9ljlNMosfJvg1fKEGILklK9cwnw==, tarball: https://registry.npmjs.org/ora/-/ora-8.2.0.tgz}
+    engines: {node: '>=18'}
+    dependencies:
+      chalk: 5.4.1
+      cli-cursor: 5.0.0
+      cli-spinners: 2.9.2
+      is-interactive: 2.0.0
+      is-unicode-supported: 2.1.0
+      log-symbols: 6.0.0
+      stdin-discarder: 0.2.2
+      string-width: 7.2.0
+      strip-ansi: 7.1.0
+    dev: false
 
   /os-homedir@1.0.2:
     resolution: {integrity: sha512-B5JU3cabzk8c67mRRd3ECmROafjYMXbuzlwtqdM8IbS8ktlTix8aFGb2bAGKrSRIlnfKwovGUUr72JUPyOb6kQ==, tarball: https://registry.npmjs.org/os-homedir/-/os-homedir-1.0.2.tgz}
@@ -15682,6 +15705,14 @@ packages:
       signal-exit: 3.0.7
     dev: true
 
+  /restore-cursor@5.1.0:
+    resolution: {integrity: sha512-oMA2dcrw6u0YfxJQXm342bFKX/E4sG9rbTzO9ptUcR/e8A33cHuvStiYOwH7fszkZlZ1z/ta9AAoPk2F4qIOHA==, tarball: https://registry.npmjs.org/restore-cursor/-/restore-cursor-5.1.0.tgz}
+    engines: {node: '>=18'}
+    dependencies:
+      onetime: 7.0.0
+      signal-exit: 4.1.0
+    dev: false
+
   /retry@0.12.0:
     resolution: {integrity: sha512-9LkiTwjUh6rT555DtE9rTX+BKByPfrMzEAtnlEtdEwr3Nkffwiihqe2bWADg+OQRjt9gl6ICdmB/ZFDCGAtSow==, tarball: https://registry.npmjs.org/retry/-/retry-0.12.0.tgz}
     engines: {node: '>= 4'}
@@ -16222,6 +16253,11 @@ packages:
   /std-env@3.9.0:
     resolution: {integrity: sha512-UGvjygr6F6tpH7o2qyqR6QYpwraIjKSdtzyBdyytFOHmPZY917kwdwLG0RbOjWOnKmnm3PeHjaoLLMie7kPLQw==, tarball: https://registry.npmjs.org/std-env/-/std-env-3.9.0.tgz}
 
+  /stdin-discarder@0.2.2:
+    resolution: {integrity: sha512-UhDfHmA92YAlNnCfhmq0VeNL5bDbiZGg7sZ2IvPsXubGkiNa9EC+tUTsjBRsYUAz87btI6/1wf4XoVvQ3uRnmQ==, tarball: https://registry.npmjs.org/stdin-discarder/-/stdin-discarder-0.2.2.tgz}
+    engines: {node: '>=18'}
+    dev: false
+
   /storybook-dark-mode@4.0.2(react-dom@19.1.0)(react@19.1.0)(storybook@8.6.12):
     resolution: {integrity: sha512-zjcwwQ01R5t1VsakA6alc2JDIRVtavryW8J3E3eKLDIlAMcvsgtpxlelWkZs2cuNspk6Z10XzhQVrUWtYc3F0w==, tarball: https://registry.npmjs.org/storybook-dark-mode/-/storybook-dark-mode-4.0.2.tgz}
     dependencies:
@@ -16315,7 +16351,6 @@ packages:
       emoji-regex: 10.4.0
       get-east-asian-width: 1.3.0
       strip-ansi: 7.1.0
-    dev: true
 
   /string.prototype.includes@2.0.1:
     resolution: {integrity: sha512-o7+c9bW6zpAdJHTtujeePODAhkuicdAryFsfVKwA+wGw89wJ4GTY484WTucM9hLtDEOpOvI+aHnzqnC5lHp4Rg==, tarball: https://registry.npmjs.org/string.prototype.includes/-/string.prototype.includes-2.0.1.tgz}
@@ -18303,10 +18338,3 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==, tarball: https://registry.npmjs.org/zwitch/-/zwitch-2.0.4.tgz}
-
-  github.com/takamin/node-getopt/a94ecd2791f28b89108a001d5e5f51d632dbe671:
-    resolution: {tarball: https://codeload.github.com/takamin/node-getopt/tar.gz/a94ecd2791f28b89108a001d5e5f51d632dbe671}
-    name: node-getopt
-    version: 0.3.3-forked-by-takamin
-    engines: {node: '>= 0.6.0'}
-    dev: false

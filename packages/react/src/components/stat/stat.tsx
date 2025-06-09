@@ -102,6 +102,8 @@ export const StatRoot = withProvider<"dl", StatRootProps>(
 
 export interface StatIconProps extends HTMLStyledProps<"svg"> {
   /**
+   * The type of the icon.
+   *
    * @default "increase"
    */
   type?: "decrease" | "increase"

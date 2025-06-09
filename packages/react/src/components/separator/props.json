@@ -1,0 +1,35 @@
+{
+  "Separator": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"solid\" | \"dashed\" | \"dotted\" | [AnyString | \"solid\" | \"dashed\" | \"dotted\" | { [x: string & {}]: AnyString | \"solid\" | \"dashed\" | \"dotted\" | undefined; ... 5 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\" | [\"horizontal\" | \"vertical\" | { [x: string & {}]: \"horizontal\" | \"vertical\" | undefined; base?: \"horizontal\" | \"vertical\" | undefined; \"2xl\"?: \"horizontal\" | \"vertical\" | undefined; lg?: \"horizontal\" | ... 1 more ... | undefined; md?: \"horizontal\" | ... 1 more ... | undefined; sm?: \"horizo...",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the divider.",
+      "required": false
+    }
+  }
+}

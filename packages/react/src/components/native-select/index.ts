@@ -8,7 +8,6 @@ export type {
   NativeOptionProps,
   NativeSelectRootProps,
 } from "./native-select"
-export type { NativeSelectItem } from "./use-native-select"
 
 export * from "./native-select.style"
 

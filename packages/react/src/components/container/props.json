@@ -1,0 +1,106 @@
+{
+  "Body": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Footer": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Header": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Root": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | [AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | undefined; ... 5 more ...; xl?: AnyString | ... 4 more ... | undefined; }, AnyString | ... 4 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"outline\" | \"solid\" | \"subtle\" | \"panel\" | \"surface\" | \"elevated\" | [AnyString | \"outline\" | \"solid\" | \"subtle\" | \"panel\" | \"surface\" | \"elevated\" | { ...; }, AnyString | ... 6 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "centerContent": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, container will center its children regardless of their width.",
+      "required": false
+    }
+  }
+}

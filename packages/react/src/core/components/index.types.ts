@@ -18,6 +18,8 @@ export interface StyledProps extends CSSProps {
   asChild?: boolean
   /**
    * Debug mode.
+   *
+   * @private
    */
   __debug?: boolean
 }
@@ -74,6 +76,12 @@ export interface StyledComponent<Y extends As = As, M extends object = {}>
 export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
   ref?: React.Ref<React.ComponentRef<Y>>
 }
+
+export interface HTMLElementProps
+  extends React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLElement>,
+    HTMLElement
+  > {}
 
 export type HTMLProps<Y extends DOMElement = "div"> = Omit<
   React.JSX.IntrinsicElements[Y],

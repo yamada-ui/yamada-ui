@@ -1,0 +1,139 @@
+{
+  "Avatar": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | undefined; ... 5 more ...; xl?: AnyString | ... 5 more ... | undefined; }, AnyString | ... 5 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [AnyString | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | { [x: string & {}]: AnyString | ... 4 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 4 more ... | undefined; }, AnyString | ... 4 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "alt": {
+      "type": "string",
+      "description": "The `HTMLImageElement` property `alt`.",
+      "required": false
+    },
+    "crossOrigin": {
+      "type": "\"\" | \"anonymous\" | \"use-credentials\"",
+      "description": "The `HTMLImageElement` property `crossOrigin`.",
+      "required": false
+    },
+    "fallback": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The fallback text to display if the image is not provided.",
+      "required": false
+    },
+    "format": {
+      "type": "(name: string) => string",
+      "description": "Function to get the initials to display.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactElement<\n  unknown,\n  string | JSXElementConstructor<any>\n>",
+      "description": "The avatar icon to use.",
+      "required": false
+    },
+    "loading": {
+      "type": "\"eager\" | \"lazy\"",
+      "description": "Defines loading strategy.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the person in the avatar.\n\n- If `src` has loaded, the name will be used as the `alt` attribute of the `img`\n- If `src` is not loaded, the name will be used to create the initials",
+      "required": false
+    },
+    "referrerPolicy": {
+      "type": "HTMLAttributeReferrerPolicy",
+      "defaultValue": "\"no-referrer\"",
+      "description": "Defining which referrer is sent when fetching the resource.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"square\" | \"rounded\" | [\"circle\" | \"square\" | \"rounded\" | { [x: string & {}]: \"circle\" | \"square\" | \"rounded\" | undefined; base?: \"circle\" | \"square\" | \"rounded\" | undefined; ... 4 more ...; xl?: \"circle\" | ... 2 more ... | undefined; }, \"circle\" | ... 2 more ... | { ...; }] | { ...; }",
+      "defaultValue": "circle",
+      "description": "The shape of the component",
+      "required": false
+    },
+    "src": {
+      "type": "string",
+      "description": "The image url of the avatar.",
+      "required": false
+    },
+    "srcSet": {
+      "type": "string",
+      "description": "List of sources to use for different screen resolutions.",
+      "required": false
+    }
+  },
+  "AvatarGroup": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | undefined; ... 5 more ...; xl?: AnyString | ... 5 more ... | undefined; }, AnyString | ... 5 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [AnyString | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | { [x: string & {}]: AnyString | ... 4 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 4 more ... | undefined; }, AnyString | ... 4 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "max": {
+      "type": "number",
+      "description": "The maximum number of visible avatars.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "description": "Whether to reverse the order of the avatars.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"square\" | \"rounded\" | [\"circle\" | \"square\" | \"rounded\" | { [x: string & {}]: \"circle\" | \"square\" | \"rounded\" | undefined; base?: \"circle\" | \"square\" | \"rounded\" | undefined; ... 4 more ...; xl?: \"circle\" | ... 2 more ... | undefined; }, \"circle\" | ... 2 more ... | { ...; }] | { ...; }",
+      "defaultValue": "circle",
+      "description": "The shape of the component",
+      "required": false
+    }
+  }
+}

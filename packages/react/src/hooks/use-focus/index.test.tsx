@@ -12,7 +12,11 @@ describe("useFocusOnHide", () => {
   const Component: FC<Omit<UseFocusOnHideProps, "focusRef">> = (props) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const focusRef = useRef<HTMLButtonElement>(null)
-    useFocusOnHide(containerRef, { focusRef, shouldFocus: true, ...props })
+    useFocusOnHide(containerRef, {
+      focusTarget: focusRef,
+      shouldFocus: true,
+      ...props,
+    })
 
     return (
       <div ref={containerRef}>
@@ -63,7 +67,11 @@ describe("useFocusOnShow", () => {
   const Component: FC<Omit<UseFocusOnShowProps, "focusRef">> = (props) => {
     const containerRef = useRef<HTMLDivElement>(null)
     const focusRef = useRef<HTMLButtonElement>(null)
-    useFocusOnShow(containerRef, { focusRef, shouldFocus: true, ...props })
+    useFocusOnShow(containerRef, {
+      focusTarget: focusRef,
+      shouldFocus: true,
+      ...props,
+    })
 
     return (
       <div ref={containerRef}>

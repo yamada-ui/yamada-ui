@@ -1,5 +1,5 @@
 export { Switch, SwitchPropsContext, useSwitchPropsContext } from "./switch"
-export type { SwitchIconProps, SwitchProps } from "./switch"
+export type { SwitchProps } from "./switch"
 
 export * from "./switch.style"
 

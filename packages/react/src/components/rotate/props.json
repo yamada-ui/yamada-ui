@@ -1,0 +1,80 @@
+{
+  "Rotate": {
+    "as": {
+      "type": "keyof IntrinsicElements",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "KeyframeIdent",
+      "defaultValue": "\"from\"",
+      "description": "You can set the initial state.",
+      "required": false
+    },
+    "delay": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "　The animation delay.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the component is disabled.",
+      "required": false
+    },
+    "duration": {
+      "type": "number",
+      "defaultValue": "0.4",
+      "description": "The animation duration.",
+      "required": false
+    },
+    "from": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "Passing React elements to \"from\" is required.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: KeyframeIdent) => void",
+      "description": "This is a callback function that is called when the animation state changes.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the component is readonly.",
+      "required": false
+    },
+    "rotate": {
+      "type": "number",
+      "defaultValue": "45",
+      "description": "The animation rotation.",
+      "required": false
+    },
+    "to": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "Passing React elements to \"to\" is required.",
+      "required": false
+    },
+    "value": {
+      "type": "KeyframeIdent",
+      "description": "Use this when you want to control the animation from outside the component.",
+      "required": false
+    }
+  }
+}

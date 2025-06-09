@@ -1,0 +1,90 @@
+{
+  "Progress": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | undefined; ... 5 more ...; xl?: AnyString | ... 5 more ... | undefined; }, AnyString | ... 5 more ... | { ...; }] | { ...; }",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "AnyString | \"outline\" | \"subtle\" | [AnyString | \"outline\" | \"subtle\" | { [x: string & {}]: AnyString | \"outline\" | \"subtle\" | undefined; ... 5 more ...; xl?: AnyString | ... 2 more ... | undefined; }, AnyString | ... 2 more ... | { ...; }] | { ...; }",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "animated": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the progress bar will animate.",
+      "required": false
+    },
+    "duration": {
+      "type": "string | number",
+      "description": "The animation duration in seconds.",
+      "required": false
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "100",
+      "description": "The maximum value of the progress.",
+      "required": false
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The minimum value of the progress.",
+      "required": false
+    },
+    "rangeColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color of the progress range.",
+      "required": false
+    },
+    "rangeProps": {
+      "type": "ProgressRangeProps",
+      "description": "Props for the progress range element.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"square\" | \"rounded\" | [\"circle\" | \"square\" | \"rounded\" | { [x: string & {}]: \"circle\" | \"square\" | \"rounded\" | undefined; base?: \"circle\" | \"square\" | \"rounded\" | undefined; ... 4 more ...; xl?: \"circle\" | ... 2 more ... | undefined; }, \"circle\" | ... 2 more ... | { ...; }] | { ...; }",
+      "defaultValue": "rounded",
+      "description": "The shape of the progress bar.",
+      "required": false
+    },
+    "striped": {
+      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "defaultValue": "false",
+      "description": "If `true`, the progress bar will show stripe.",
+      "required": false
+    },
+    "trackColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | { ...; }",
+      "description": "The color of the progress track.",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The value of the progress. If `null`, the progress will be indeterminate.",
+      "required": false
+    }
+  }
+}

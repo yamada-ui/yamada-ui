@@ -1,0 +1,88 @@
+{
+  "Icon": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Item": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "The icon to use.",
+      "required": false
+    }
+  },
+  "Root": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "items": {
+      "type": "ListItemProps[]",
+      "description": "If provided, generate elements based on items.",
+      "required": false
+    },
+    "stylePosition": {
+      "type": "ListStylePosition | [ListStylePosition | { [x: string & {}]: ListStylePosition | undefined; base?: ListStylePosition | undefined; ... 4 more ...; xl?: ListStylePosition | undefined; }, ListStylePosition | { ...; }] | { ...; }",
+      "description": "The CSS `list-style-position` property.",
+      "required": false
+    },
+    "styleType": {
+      "type": "ListStyleType | [ListStyleType | { [x: string & {}]: ListStyleType | undefined; base?: ListStyleType | undefined; ... 4 more ...; xl?: ListStyleType | undefined; }, ListStyleType | { ...; }] | { ...; }",
+      "description": "The CSS `list-style-position` property.",
+      "required": false
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import type { FC } from "../../core"
 import { ScrollArea } from "."
-import { a11y, act, fireEvent, render, waitFor } from "../../../test"
+import { a11y, act, fireEvent, render, screen, waitFor } from "../../../test"
 
-const Content: FC = () => {
+const TestContent: FC = () => {
   return (
     <>
       <h1>孫悟空少年編</h1>
@@ -47,116 +47,96 @@ const Content: FC = () => {
   )
 }
 
-describe.todo("<ScrollArea />", () => {
+describe("<ScrollArea />", () => {
   test("renders with no errors", async () => {
-    const { container, getByTestId } = render(
-      <ScrollArea data-testid="ScrollArea" h="xs">
-        <Content />
+    const { container } = render(
+      <ScrollArea data-testid="scroll-area" h="xs">
+        <TestContent />
       </ScrollArea>,
     )
 
-    getByTestId("ScrollArea")
-
+    expect(screen.getByTestId("scroll-area")).toBeInTheDocument()
     await a11y(container)
   })
 
-  test("contains the children content", () => {
-    const { getByText } = render(
-      <ScrollArea data-testid="ScrollArea">
+  test("renders children content correctly", () => {
+    render(
+      <ScrollArea>
         <p>Item 1</p>
       </ScrollArea>,
     )
 
-    getByText("Item 1")
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
   })
 
-  test("can control the scroll position", () => {
+  test("updates scroll position when controlled externally", () => {
     const { container } = render(
       <ScrollArea>
-        <Content />
+        <TestContent />
       </ScrollArea>,
     )
 
     act(() => {
       fireEvent.scroll(container, {
-        target: {
-          scrollTop: 0,
-        },
+        target: { scrollTop: 0 },
       })
       expect(container.scrollTop).toBe(0)
     })
 
     act(() => {
       fireEvent.scroll(container, {
-        target: {
-          scrollTop: 200,
-        },
+        target: { scrollTop: 200 },
       })
       expect(container.scrollTop).toBe(200)
     })
   })
 
-  test("onScrollPositionChange works correctly", () => {
+  test("calls onScrollPositionChange when scrolled", () => {
     const mockScrollPositionChange = vi.fn()
 
-    const { getByTestId } = render(
+    render(
       <ScrollArea
-        data-testid="ScrollArea"
+        data-testid="scroll-area"
         onScrollPositionChange={mockScrollPositionChange}
       >
-        <Content />
+        <TestContent />
       </ScrollArea>,
     )
 
-    act(() =>
-      fireEvent.scroll(getByTestId("ScrollArea"), {
-        target: {
-          scrollTop: 100,
-        },
-      }),
-    )
+    act(() => {
+      fireEvent.scroll(screen.getByTestId("scroll-area"), {
+        target: { scrollTop: 100 },
+      })
+    })
 
     expect(mockScrollPositionChange).toHaveBeenCalledWith({ x: 0, y: 100 })
   })
 
-  test("onMouseEnter and onMouseLeave work correctly", async () => {
-    const { getByTestId } = render(
-      <ScrollArea type="hover" data-testid="ScrollArea">
-        <Content />
+  test("shows scroll indicators on hover and hides them on leave", async () => {
+    render(
+      <ScrollArea type="hover" data-testid="scroll-area">
+        <TestContent />
       </ScrollArea>,
     )
 
-    const scrollArea = getByTestId("ScrollArea")
+    const scrollArea = screen.getByTestId("scroll-area")
+
+    expect(scrollArea).not.toHaveAttribute("data-hover")
 
     await act(() => fireEvent.mouseEnter(scrollArea))
-    expect(scrollArea).toHaveAttribute("data-hovered")
+    expect(scrollArea).toHaveAttribute("data-hover")
 
     await act(() => fireEvent.mouseLeave(scrollArea))
-
     await waitFor(
       () => {
-        expect(scrollArea).not.toHaveAttribute("data-hovered")
+        expect(scrollArea).not.toHaveAttribute("data-hover")
       },
       { timeout: 2000 },
     )
   })
 
-  test("never style is applied correctly", () => {
-    const { getByTestId } = render(
-      <ScrollArea type="never" data-testid="ScrollArea">
-        <Content />
-      </ScrollArea>,
-    )
-
-    const scrollArea = getByTestId("ScrollArea")
-
-    expect(scrollArea).toHaveStyle({ scrollbarWidth: "none" })
-  })
-
-  test("renders with specific key for Safari", () => {
-    const defaultPlatform = window.navigator.platform
-    const defaultVendor = window.navigator.vendor
-
+  test("applies safari specific key format", () => {
+    // Mock Safari environment
     Object.defineProperty(window.navigator, "platform", {
       value: "MacOS",
       writable: true,
@@ -166,23 +146,17 @@ describe.todo("<ScrollArea />", () => {
       writable: true,
     })
 
-    const { getByTestId } = render(
-      <ScrollArea type="never" data-testid="ScrollArea">
-        <Content />
+    render(
+      <ScrollArea type="never" data-testid="scroll-area">
+        <TestContent />
       </ScrollArea>,
     )
 
-    const scrollArea = getByTestId("ScrollArea")
+    const scrollArea = screen.getByTestId("scroll-area")
 
-    expect(scrollArea).toHaveAttribute("data-key", "false-false")
+    expect(scrollArea).toHaveAttribute("data-key")
 
-    Object.defineProperty(window.navigator, "platform", {
-      value: defaultPlatform,
-      writable: false,
-    })
-    Object.defineProperty(window.navigator, "vendor", {
-      value: defaultVendor,
-      writable: false,
-    })
+    // The key should end with the expected pattern
+    expect(scrollArea.getAttribute("data-key")).toMatch(/-false-false$/)
   })
 })

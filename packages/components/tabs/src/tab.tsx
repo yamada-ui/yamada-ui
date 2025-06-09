@@ -77,6 +77,7 @@ export const Tab = forwardRef<TabProps, "button">(
       clickOnSpace,
       disabled,
       focusable,
+      focusOnClick: false,
       onClick: handlerAll(rest.onClick, () => setSelectedIndex(index)),
       onFocus: disabled ? undefined : handlerAll(rest.onFocus, onFocus),
     })

@@ -1,5 +1,12 @@
 # @yamada-ui/carousel
 
+## 2.1.13
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/button@1.0.59
+
 ## 2.1.12
 
 ### Patch Changes

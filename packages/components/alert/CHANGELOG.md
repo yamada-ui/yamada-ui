@@ -1,5 +1,12 @@
 # @yamada-ui/alert
 
+## 1.1.13
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/loading@1.1.33
+
 ## 1.1.12
 
 ### Patch Changes

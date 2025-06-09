@@ -1,5 +1,12 @@
 # @yamada-ui/close-button
 
+## 1.0.56
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @yamada-ui/ripple@1.0.53
+
 ## 1.0.55
 
 ### Patch Changes

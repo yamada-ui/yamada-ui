@@ -21,6 +21,10 @@ export default {
     "Password strength meter": "Password strength meter",
     "Toggle password visibility": "Toggle password visibility",
   },
+  progress: {
+    loading: "Loading...",
+    percent: "{value} percent",
+  },
   stat: {
     "Decreased by": "Decreased by",
     "Increased by": "Increased by",

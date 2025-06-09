@@ -1,3 +1,4 @@
+export * as Popover from "./namespace"
 export type {
   PopoverAnchorProps,
   PopoverBodyProps,
@@ -20,7 +21,5 @@ export {
   PopoverTrigger,
   usePopoverPropsContext,
 } from "./popover"
-
 export * from "./popover.style"
-
-export * as Popover from "./namespace"
+export * from "./use-popover"

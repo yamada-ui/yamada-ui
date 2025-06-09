@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import { render, renderHook, waitFor } from "../../../test"
 import { noop } from "../../utils"
-import { useInfiniteScroll } from "./"
+import { useInfiniteScroll } from "./use-infinite-scroll"
 
 describe("useInfiniteScroll", () => {
   const defaultIntersectionObserver = global.IntersectionObserver

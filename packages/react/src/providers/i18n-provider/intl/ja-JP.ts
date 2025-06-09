@@ -21,6 +21,10 @@ export default {
     "Password strength meter": "パスワードの強度",
     "Toggle password visibility": "パスワードの表示を切り替える",
   },
+  progress: {
+    loading: "読み込み中...",
+    percent: "{value}パーセント",
+  },
   stat: {
     "Decreased by": "減少",
     "Increased by": "増加",

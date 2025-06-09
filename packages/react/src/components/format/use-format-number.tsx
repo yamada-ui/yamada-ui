@@ -23,3 +23,5 @@ export const useFormatNumber = (
 
   return formatter.format(value)
 }
+
+export type UseFormatNumberReturn = ReturnType<typeof useFormatNumber>

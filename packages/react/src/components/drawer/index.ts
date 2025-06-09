@@ -24,9 +24,6 @@ export type {
   DrawerRootProps,
   DrawerTitleProps,
 } from "./drawer"
-
 export * from "./drawer.style"
-
-export * from "./use-drawer"
-
 export * as Drawer from "./namespace"
+export * from "./use-drawer"

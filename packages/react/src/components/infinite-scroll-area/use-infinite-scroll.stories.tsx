@@ -1,14 +1,14 @@
 import type { Meta } from "@storybook/react"
 import { useRef, useState } from "react"
-import { useInfiniteScroll } from "."
-import { Button } from "../../components/button"
-import { Card } from "../../components/card"
-import { Center } from "../../components/center"
-import { Heading } from "../../components/heading"
-import { Loading } from "../../components/loading"
-import { VStack } from "../../components/stack"
-import { Text } from "../../components/text"
 import { noop } from "../../utils"
+import { Button } from "../button"
+import { Card } from "../card"
+import { Center } from "../center"
+import { Heading } from "../heading"
+import { Loading } from "../loading"
+import { VStack } from "../stack"
+import { Text } from "../text"
+import { useInfiniteScroll } from "./use-infinite-scroll"
 
 const meta: Meta = {
   title: "Hooks / useInfiniteScroll",

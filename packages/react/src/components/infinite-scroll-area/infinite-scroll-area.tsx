@@ -1,12 +1,12 @@
 import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
-import type { UseInfiniteScrollProps } from "../../hooks/use-infinite-scroll"
 import type { InfiniteScrollAreaStyle } from "./infinite-scroll-area.style"
+import type { UseInfiniteScrollProps } from "./use-infinite-scroll"
 import { useRef } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { useInfiniteScroll } from "../../hooks/use-infinite-scroll"
 import { mergeRefs } from "../../utils"
 import { infiniteScrollAreaStyle } from "./infinite-scroll-area.style"
+import { useInfiniteScroll } from "./use-infinite-scroll"
 
 export interface InfiniteScrollAreaProps
   extends Omit<HTMLStyledProps, keyof UseInfiniteScrollProps>,

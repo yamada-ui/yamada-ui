@@ -12,7 +12,5 @@ export type {
   AlertRootProps,
   AlertTitleProps,
 } from "./alert"
-
 export * from "./alert.style"
-
 export * as Alert from "./namespace"

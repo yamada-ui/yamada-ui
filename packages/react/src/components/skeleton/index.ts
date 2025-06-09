@@ -8,5 +8,4 @@ export { SkeletonCircle } from "./skeleton-circle"
 export type { SkeletonCircleProps } from "./skeleton-circle"
 export { SkeletonText } from "./skeleton-text"
 export type { SkeletonTextProps } from "./skeleton-text"
-
 export * from "./skeleton.style"

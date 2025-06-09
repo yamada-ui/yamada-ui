@@ -14,7 +14,5 @@ export {
   EmptyStateTitle,
   useEmptyStatePropsContext,
 } from "./empty-state"
-
 export * from "./empty-state.style"
-
 export * as EmptyState from "./namespace"

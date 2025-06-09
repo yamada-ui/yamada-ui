@@ -2,13 +2,6 @@ export { Toggle, TogglePropsContext, useTogglePropsContext } from "./toggle"
 export type { ToggleProps } from "./toggle"
 export { ToggleGroup } from "./toggle-group"
 export type { ToggleGroupProps } from "./toggle-group"
-
 export * from "./toggle.style"
-
-export { useToggle } from "./use-toggle"
-export type { UseToggleProps, UseToggleReturn } from "./use-toggle"
-export { useToggleGroup } from "./use-toggle-group"
-export type {
-  UseToggleGroupProps,
-  UseToggleGroupReturn,
-} from "./use-toggle-group"
+export * from "./use-toggle"
+export * from "./use-toggle-group"

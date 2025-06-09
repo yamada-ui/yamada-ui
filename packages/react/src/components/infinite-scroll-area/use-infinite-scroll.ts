@@ -1,13 +1,13 @@
 import type { RefObject } from "react"
 import type { Orientation, StyleValue } from "../../core"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useValue } from "../../hooks/use-value"
 import {
   assignRef,
   isHTMLElement,
   useCallbackRef,
   useUnmountEffect,
 } from "../../utils"
-import { useValue } from "../use-value"
 
 const isScrollable = (el: HTMLElement, vertical: boolean) => {
   const style = getComputedStyle(el)

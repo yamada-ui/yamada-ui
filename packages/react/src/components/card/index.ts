@@ -5,7 +5,5 @@ export type {
   CardHeaderProps,
   CardRootProps,
 } from "./card"
-
 export * from "./card.style"
-
 export * as Card from "./namespace"

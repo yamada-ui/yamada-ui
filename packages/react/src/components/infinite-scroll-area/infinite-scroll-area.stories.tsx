@@ -7,7 +7,7 @@ import { Heading } from "../heading"
 import { Loading } from "../loading"
 import { VStack } from "../stack"
 import { Text } from "../text"
-import { InfiniteScrollArea } from "./"
+import { InfiniteScrollArea } from "./infinite-scroll-area"
 
 type Story = StoryFn<typeof InfiniteScrollArea>
 

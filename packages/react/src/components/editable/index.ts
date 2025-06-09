@@ -18,8 +18,6 @@ export type {
   EditableSubmitTriggerProps,
   EditableTextareaProps,
 } from "./editable"
-
 export * from "./editable.style"
-export * from "./use-editable"
-
 export * as Editable from "./namespace"
+export * from "./use-editable"

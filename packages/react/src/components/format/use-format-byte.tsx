@@ -41,3 +41,5 @@ export const useFormatByte = (
     unitDisplay,
   })
 }
+
+export type UseFormatByteReturn = ReturnType<typeof useFormatByte>

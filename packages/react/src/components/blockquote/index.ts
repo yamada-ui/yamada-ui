@@ -12,7 +12,5 @@ export type {
   BlockquoteIconProps,
   BlockquoteRootProps,
 } from "./blockquote"
-
 export * from "./blockquote.style"
-
 export * as Blockquote from "./namespace"

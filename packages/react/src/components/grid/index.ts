@@ -6,5 +6,4 @@ export {
   useGridItemPropsContext,
 } from "./grid-item"
 export type { GridItemProps } from "./grid-item"
-
 export * from "./grid.style"

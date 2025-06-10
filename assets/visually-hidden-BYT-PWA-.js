@@ -1,1 +1,0 @@
-import{b as p}from"./factory-B_KMcXyW.js";const i=p("span",{baseStyle:{border:"0",clipPath:"rect(0px 0px 0px 0px)",height:"1px",margin:"-1px",overflow:"hidden",padding:"0",position:"absolute",whiteSpace:"nowrap",width:"1px"}});i.displayName="VisuallyHidden";i.__ui__="VisuallyHidden";export{i as V};

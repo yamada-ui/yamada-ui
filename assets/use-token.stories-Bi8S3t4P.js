@@ -1,6 +1,0 @@
-import{j as g}from"./jsx-runtime-BpbtHYHY.js";import{r as $}from"./index-BwPxMuoB.js";import{u as k}from"./theme-provider-DGyR61Aa.js";import{P as x,$ as i,K as b,Q as n}from"./factory-B_KMcXyW.js";import{B as V}from"./box-B5b1ezDi.js";import"./_commonjsHelpers-Cpj98o6Y.js";const h=(o,t)=>{const{theme:e}=k(),{colorMode:s}=x();return $.useMemo(()=>y(o,t)(e,s),[o,t,e,s])},y=(o,t)=>(e,s)=>{let r=i(e,`${o}.${t}`);if(b(r))if(r=i(e,`semantics.${o}.${t}`),n(r)?r=[i(e,`${o}.${r[0]}`,r[0]),i(e,`${o}.${r[1]}`,r[1])]:r=i(e,`${o}.${r}`)??r,n(r)){const[c,l]=r;if(r=s==="light"?c:l,n(r)){const[p,f]=r;return s==="light"?p:f}else return r}else return r;else if(n(r)){const[c,l]=r;return s==="light"?c:l}else return r},M={title:"Hooks / useToken"},a=()=>{const o=h("colors","primary");return g.jsxs(V,{bg:o,color:"white",p:"md",rounded:"md",children:['Primary for color tokens is "',o,'"']})};var u,m,d;a.parameters={...a.parameters,docs:{...(u=a.parameters)==null?void 0:u.docs,source:{originalSource:`() => {
-  const bg = useToken("colors", "primary");
-  return <Box bg={bg} color="white" p="md" rounded="md">
-      Primary for color tokens is "{bg}"
-    </Box>;
-}`,...(d=(m=a.parameters)==null?void 0:m.docs)==null?void 0:d.source}}};const O=["basic"];export{O as __namedExportsOrder,a as basic,M as default};

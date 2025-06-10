@@ -1,5 +1,15 @@
 # @yamada-ui/tabs
 
+## 1.0.55
+
+### Patch Changes
+
+- [#4687](https://github.com/yamada-ui/yamada-ui/pull/4687) [`c6bc520`](https://github.com/yamada-ui/yamada-ui/commit/c6bc520cccb38984375967ab3dbd2ed402b11dff) Thanks [@bmthd](https://github.com/bmthd)! - set focusOnClick to false in Tab component
+
+- Updated dependencies [[`dd2fafe`](https://github.com/yamada-ui/yamada-ui/commit/dd2fafe963d09bd4e9f31f3d730c9c6301bdb134)]:
+  - @yamada-ui/use-clickable@1.2.22
+  - @yamada-ui/ripple@1.0.53
+
 ## 1.0.54
 
 ### Patch Changes

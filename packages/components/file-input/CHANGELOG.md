@@ -1,5 +1,12 @@
 # @yamada-ui/file-input
 
+## 1.0.56
+
+### Patch Changes
+
+- Updated dependencies [[`dd2fafe`](https://github.com/yamada-ui/yamada-ui/commit/dd2fafe963d09bd4e9f31f3d730c9c6301bdb134)]:
+  - @yamada-ui/use-clickable@1.2.22
+
 ## 1.0.55
 
 ### Patch Changes

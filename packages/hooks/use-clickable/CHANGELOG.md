@@ -1,5 +1,11 @@
 # @yamada-ui/use-clickable
 
+## 1.2.22
+
+### Patch Changes
+
+- [#4657](https://github.com/yamada-ui/yamada-ui/pull/4657) [`dd2fafe`](https://github.com/yamada-ui/yamada-ui/commit/dd2fafe963d09bd4e9f31f3d730c9c6301bdb134) Thanks [@bmthd](https://github.com/bmthd)! - fixed focus on click issue
+
 ## 1.2.21
 
 ### Patch Changes

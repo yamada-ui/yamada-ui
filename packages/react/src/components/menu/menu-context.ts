@@ -4,41 +4,19 @@ import type {
   RefObject,
   SetStateAction,
 } from "react"
-import type { CSSUIObject } from "../../core"
-import type { MenuOptions } from "./menu"
+import type { CSSObject } from "../../core"
 import { createDescendant } from "../../hooks/use-descendant"
 import { createContext } from "../../utils"
 
 export const {
-  DescendantsContextProvider,
+  DescendantsContext,
   useDescendant: useMenuDescendant,
   useDescendants,
   useDescendantsContext: useMenuDescendantsContext,
 } = createDescendant()
 
-interface MenuContext extends MenuOptions {
-  buttonRef: RefObject<HTMLButtonElement | null>
-  focusedIndex: number
-  menuRef: RefObject<HTMLDivElement | null>
-  nested: boolean
-  open: boolean
-  requestAnimationFrameId: RefObject<null | number>
-  setFocusedIndex: Dispatch<SetStateAction<number>>
-  styles: { [key: string]: CSSUIObject | undefined }
-  onClose: () => void
-  onFocusFirstItem: () => void
-  onFocusLastItem: () => void
-  onOpen: () => void
-  onUpstreamClose?: () => void
-}
-
-export const [MenuProvider, useMenu] = createContext<MenuContext>({
-  name: "MenuContext",
-  errorMessage: `useMenu returned is 'undefined'. Seems you forgot to wrap the components in "<Menu />"`,
-})
-
 interface ContextMenuContext {
-  styles: { [key: string]: CSSUIObject | undefined }
+  styles: { [key: string]: CSSObject | undefined }
 }
 
 export const [ContextMenuProvider, useContextMenu] =

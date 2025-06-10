@@ -1,13 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Center } from "../center"
-import { Text } from "../text"
 import {
   ContextMenu,
   ContextMenuTrigger,
   MenuItem,
   MenuList,
   MenuSeparator,
-} from "./"
+} from "../menu"
+import { Text } from "../text"
 
 type Story = StoryFn<typeof ContextMenu>
 

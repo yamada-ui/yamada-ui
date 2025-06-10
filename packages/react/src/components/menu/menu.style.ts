@@ -1,7 +1,7 @@
-import type { ComponentMultiStyle } from "../../core"
+import { defineComponentSlotStyle } from "../../core"
 
-export const Menu: ComponentMultiStyle<"Menu"> = {
-  baseStyle: {
+export const menuStyle = defineComponentSlotStyle({
+  base: {
     button: {
       alignItems: "center",
       appearance: "none",
@@ -22,11 +22,6 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       minW: "xs",
       rounded: "md",
       zIndex: "guldo",
-    },
-    divider: {
-      borderBottomWidth: "1px",
-      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
-      my: "2",
     },
     group: {},
     groupLabel: {
@@ -78,14 +73,20 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
         opacity: 0.4,
       },
     },
+    "item-button": {},
+    "item-option": {},
     list: {
       outline: "none",
       py: "2",
     },
+    "option-group": {},
+    root: {},
     separator: {
       borderBottomWidth: "1px",
       borderColor: ["blackAlpha.200", "whiteAlpha.100"],
       my: "2",
     },
   },
-}
+})
+
+export type MenuStyle = typeof menuStyle

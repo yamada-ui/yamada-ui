@@ -1,11 +1,11 @@
 import type { FC, ThemeProps } from "../../core"
-import type { MenuProps } from "./menu"
+import type { MenuRootProps } from "../menu/menu"
 import { omitThemeProps, useComponentMultiStyle } from "../../core"
-import { Menu } from "./menu"
-import { ContextMenuProvider } from "./menu-context"
+import { MenuRoot } from "../menu/menu"
+import { ContextMenuProvider } from "../menu/menu-context"
 
 export interface ContextMenuProps
-  extends Omit<MenuProps, "trigger">,
+  extends Omit<MenuRootProps, "trigger">,
     ThemeProps<"ContextMenu"> {}
 
 /**
@@ -19,7 +19,7 @@ export const ContextMenu: FC<ContextMenuProps> = (props) => {
 
   return (
     <ContextMenuProvider value={{ styles }}>
-      <Menu trigger="contextmenu" {...rest} />
+      <MenuRoot trigger="contextmenu" {...rest} />
     </ContextMenuProvider>
   )
 }

@@ -3,8 +3,8 @@ import type { CSSUIObject, HTMLUIProps } from "../../core"
 import { useState } from "react"
 import { forwardRef, ui } from "../../core"
 import { cx, handlerAll } from "../../utils"
+import { useContextMenu } from "../menu/menu-context"
 import { PopoverAnchor, PopoverTrigger } from "../popover"
-import { useContextMenu } from "./menu-context"
 
 interface Position {
   left: number

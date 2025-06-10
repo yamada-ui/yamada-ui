@@ -3,7 +3,6 @@ import { BoxIcon } from "../icon"
 import {
   ContextMenu,
   ContextMenuTrigger,
-  Menu,
   MenuButton,
   MenuGroup,
   MenuItem,
@@ -11,31 +10,32 @@ import {
   MenuList,
   MenuOptionGroup,
   MenuOptionItem,
+  MenuRoot,
   MenuSeparator,
 } from "./"
 
 describe("<Menu />", () => {
   test("Menu renders correctly", async () => {
     await a11y(
-      <Menu>
+      <MenuRoot>
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Add item</MenuItem>
           <MenuItem>Edit item</MenuItem>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
   })
 
   test("should render the menu", () => {
     render(
-      <Menu>
+      <MenuRoot>
         <MenuButton data-testid="MenuButton">Menu</MenuButton>
         <MenuList data-testid="MenuList">
           <MenuItem data-testid="MenuItem">Add item</MenuItem>
           <MenuItem>Edit item</MenuItem>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
     expect(screen.getByTestId("MenuButton")).toBeInTheDocument()
     expect(screen.getByTestId("MenuList")).toBeInTheDocument()
@@ -44,7 +44,7 @@ describe("<Menu />", () => {
 
   test("should render the menu with command", () => {
     render(
-      <Menu>
+      <MenuRoot>
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem data-testid="MenuItem" command="⌘N">
@@ -52,7 +52,7 @@ describe("<Menu />", () => {
           </MenuItem>
           <MenuItem command="⌘E">Edit item</MenuItem>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
     expect(screen.getByText("⌘N")).toBeInTheDocument()
     expect(screen.getByText("⌘E")).toBeInTheDocument()
@@ -60,7 +60,7 @@ describe("<Menu />", () => {
 
   test("should render the menu with icons", () => {
     render(
-      <Menu>
+      <MenuRoot>
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem command="⌘N" icon={<BoxIcon data-testid="plus-icon" />}>
@@ -70,7 +70,7 @@ describe("<Menu />", () => {
             Edit item
           </MenuItem>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
     expect(screen.getByTestId("plus-icon")).toBeInTheDocument()
     expect(screen.getByTestId("edit-icon")).toBeInTheDocument()
@@ -78,21 +78,21 @@ describe("<Menu />", () => {
 
   test("should render the menu with divider", () => {
     render(
-      <Menu placement="right-start">
+      <MenuRoot placement="right-start">
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Add item</MenuItem>
           <MenuSeparator data-testid="MenuSeparator" />
           <MenuItem>Edit item</MenuItem>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
     expect(screen.getByTestId("MenuSeparator")).toBeInTheDocument()
   })
 
   test("should render the menu with menu group", () => {
     render(
-      <Menu placement="right-start">
+      <MenuRoot placement="right-start">
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuGroup data-testid="MenuGroup" label="item">
@@ -100,14 +100,14 @@ describe("<Menu />", () => {
             <MenuItem>Edit item</MenuItem>
           </MenuGroup>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
     expect(screen.getByTestId("MenuGroup")).toBeInTheDocument()
   })
 
   test("should render the menu with menu group label", () => {
     render(
-      <Menu placement="right-start">
+      <MenuRoot placement="right-start">
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuGroup label="group-label">
@@ -115,14 +115,14 @@ describe("<Menu />", () => {
             <MenuItem>Edit item</MenuItem>
           </MenuGroup>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
     expect(screen.getByText("group-label")).toBeInTheDocument()
   })
 
   test("should render the menu with menu group label style", () => {
     render(
-      <Menu placement="right-start">
+      <MenuRoot placement="right-start">
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuGroup label="group-label" labelProps={{ fontSize: "12px" }}>
@@ -130,7 +130,7 @@ describe("<Menu />", () => {
             <MenuItem>Edit item</MenuItem>
           </MenuGroup>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
     expect(screen.getByText("group-label")).toBeInTheDocument()
     expect(screen.getByText("group-label")).toHaveStyle({ fontSize: "12px" })
@@ -138,7 +138,7 @@ describe("<Menu />", () => {
 
   test("should render the menu with menu option group", () => {
     render(
-      <Menu placement="right-start">
+      <MenuRoot placement="right-start">
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
@@ -163,7 +163,7 @@ describe("<Menu />", () => {
             <MenuOptionItem value="desc">Descending</MenuOptionItem>
           </MenuOptionGroup>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
     expect(screen.getByTestId("MenuOptionGroup-a")).toBeInTheDocument()
     expect(screen.getByTestId("MenuOptionGroup-b")).toBeInTheDocument()
@@ -183,7 +183,7 @@ describe("<Menu />", () => {
 
   test("should update value with menu option group", async () => {
     render(
-      <Menu placement="right-start">
+      <MenuRoot placement="right-start">
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
@@ -210,7 +210,7 @@ describe("<Menu />", () => {
             </MenuOptionItem>
           </MenuOptionGroup>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
 
     const radioItem = screen.getByTestId("MenuOptionItemRadio")
@@ -228,7 +228,7 @@ describe("<Menu />", () => {
 
   test("should disable the menu item", () => {
     render(
-      <Menu>
+      <MenuRoot>
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Set status</MenuItem>
@@ -237,7 +237,7 @@ describe("<Menu />", () => {
           </MenuItem>
           <MenuItem>Preferences</MenuItem>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
     expect(screen.getByTestId("MenuItem")).toHaveAttribute(
       "aria-disabled",
@@ -247,7 +247,7 @@ describe("<Menu />", () => {
 
   test("should update value with menu option group label", () => {
     render(
-      <Menu placement="right-start">
+      <MenuRoot placement="right-start">
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuOptionGroup
@@ -272,20 +272,20 @@ describe("<Menu />", () => {
             <MenuOptionItem value="desc">Descending</MenuOptionItem>
           </MenuOptionGroup>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
     expect(screen.getByText("option-group-label")).toBeInTheDocument()
   })
 
   test("keydown events for ArrowDown", async () => {
     const { getByRole, user } = render(
-      <Menu>
+      <MenuRoot>
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Add item</MenuItem>
           <MenuItem>Edit item</MenuItem>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
 
     const menuButton = getByRole("button", { name: "Menu" })
@@ -299,13 +299,13 @@ describe("<Menu />", () => {
 
   test("keydown events for ArrowUp", async () => {
     const { getByRole, user } = render(
-      <Menu>
+      <MenuRoot>
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Add item</MenuItem>
           <MenuItem>Edit item</MenuItem>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
 
     const menuButton = getByRole("button", { name: "Menu" })
@@ -320,13 +320,13 @@ describe("<Menu />", () => {
 
   test("keydown events for Enter", async () => {
     const { getByRole, user } = render(
-      <Menu>
+      <MenuRoot>
         <MenuButton>Menu</MenuButton>
         <MenuList>
           <MenuItem>Add item</MenuItem>
           <MenuItem>Edit item</MenuItem>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
 
     const menuButton = getByRole("button", { name: "Menu" })
@@ -340,24 +340,24 @@ describe("<Menu />", () => {
 
   test("Nested menu keyboard interactions", async () => {
     const { getByRole } = render(
-      <Menu>
+      <MenuRoot>
         <MenuButton>Menu</MenuButton>
 
         <MenuList>
           <MenuItem>
-            <Menu>
+            <MenuRoot>
               <MenuItemButton>Settings</MenuItemButton>
 
               <MenuList>
                 <MenuItem>Extensions</MenuItem>
                 <MenuItem>User Tasks</MenuItem>
               </MenuList>
-            </Menu>
+            </MenuRoot>
           </MenuItem>
           <MenuItem>Edit Profile</MenuItem>
           <MenuItem>Preferences</MenuItem>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
 
     const menuButton = getByRole("button", { name: "Menu" })
@@ -379,7 +379,7 @@ describe("<Menu />", () => {
 
   test("Keyboard operations within the list", async () => {
     const { getByRole } = render(
-      <Menu>
+      <MenuRoot>
         <MenuButton>Menu</MenuButton>
 
         <MenuList>
@@ -387,7 +387,7 @@ describe("<Menu />", () => {
           <MenuItem>Edit Profile</MenuItem>
           <MenuItem>Preferences</MenuItem>
         </MenuList>
-      </Menu>,
+      </MenuRoot>,
     )
 
     const menuButton = getByRole("button", { name: "Menu" })

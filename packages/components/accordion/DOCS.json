@@ -161,7 +161,7 @@
       "required": false
     },
     "transitionEnd": {
-      "type": "MotionLifecycleProps<\n  MakeCustomValueType<TargetProperties>\n>",
+      "type": "MotionLifecycleProps<Target>",
       "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
       "required": false
     },

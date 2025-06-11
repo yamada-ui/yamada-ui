@@ -2,7 +2,6 @@ import type { TSESLint } from "@typescript-eslint/utils"
 import type { Linter } from "eslint"
 import pluginVitest from "@vitest/eslint-plugin"
 import prettierConfig from "eslint-config-prettier"
-// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import tseslint from "typescript-eslint"

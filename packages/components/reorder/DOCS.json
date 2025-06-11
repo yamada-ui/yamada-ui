@@ -124,6 +124,7 @@
       "type": "type ONLY_FOR_FORMAT =\n  | \"enter\"\n  | \"done\"\n  | \"go\"\n  | \"next\"\n  | \"previous\"\n  | \"search\"\n  | \"send\"",
       "required": false
     },
+    "exportparts": { "type": "string", "required": false },
     "hidden": { "type": "boolean", "required": false },
     "id": { "type": "string", "required": false },
     "inlist": { "type": "any", "required": false },
@@ -781,6 +782,7 @@
       "description": "The orientation of the reorder.",
       "required": false
     },
+    "part": { "type": "string", "required": false },
     "prefix": { "type": "string", "required": false },
     "property": { "type": "string", "required": false },
     "radioGroup": { "type": "string", "required": false },
@@ -937,6 +939,7 @@
       "type": "type ONLY_FOR_FORMAT =\n  | \"enter\"\n  | \"done\"\n  | \"go\"\n  | \"next\"\n  | \"previous\"\n  | \"search\"\n  | \"send\"",
       "required": false
     },
+    "exportparts": { "type": "string", "required": false },
     "hidden": { "type": "boolean", "required": false },
     "id": { "type": "string", "required": false },
     "inlist": { "type": "any", "required": false },
@@ -1561,6 +1564,7 @@
       "type": "WheelEventHandler<HTMLLIElement>",
       "required": false
     },
+    "part": { "type": "string", "required": false },
     "prefix": { "type": "string", "required": false },
     "property": { "type": "string", "required": false },
     "radioGroup": { "type": "string", "required": false },

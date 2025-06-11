@@ -61,6 +61,7 @@ const preview: Preview = {
     controls: { expanded: true },
     darkMode: { ...customThemes },
     docs: {
+      codePanel: true,
       container: ({
         children,
         theme,
@@ -78,8 +79,6 @@ const preview: Preview = {
           </DocsContainer>
         )
       },
-
-      codePanel: true,
     },
     layout: "fullscreen",
     options: {

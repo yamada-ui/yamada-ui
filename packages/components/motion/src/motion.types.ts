@@ -36,7 +36,6 @@ export type {
   Box as MotionBox,
   CreateVisualElement as MotionCreateVisualElement,
   CSSStyleDeclarationWithTransform,
-  CustomValueType as MotionCustomValueType,
   Cycle as MotionCycle,
   CycleState as MotionCycleState,
   DecayOptions as MotionDecayOptions,

@@ -19,10 +19,15 @@ describe("<Icon />", () => {
   })
 
   const iconComponents = [
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     { name: "Check", Component: CheckIcon },
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     { name: "Info", Component: InfoIcon },
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     { name: "Warning", Component: WarningIcon },
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     { name: "Close", Component: CloseIcon },
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
     { name: "Chevron", Component: ChevronIcon },
   ]
 

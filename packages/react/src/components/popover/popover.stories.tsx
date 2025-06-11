@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useRef } from "react"
 import { Popover } from "."
 import { App, PropsTable } from "../../../storybook/components"

@@ -142,20 +142,6 @@ export const PaginationRoot = withProvider<"nav", PaginationRootProps>(
       [component, currentPage, onNext, onPrev, onFirst, onLast, onChange],
     )
 
-    const children = useMemo(
-      () =>
-        range.map((page, key) => (
-          <styled.li key={key}>
-            {page === "ellipsis" ? (
-              <PaginationEllipsis />
-            ) : (
-              <PaginationItemNumber page={page} />
-            )}
-          </styled.li>
-        )),
-      [range],
-    )
-
     return (
       <PaginationContext value={context}>
         <styled.nav data-disabled={dataAttr(disabled)} {...rootProps}>
@@ -172,7 +158,15 @@ export const PaginationRoot = withProvider<"nav", PaginationRootProps>(
               </styled.li>
             ) : null}
 
-            {children}
+            {range.map((page, key) => (
+              <styled.li key={key}>
+                {page === "ellipsis" ? (
+                  <PaginationEllipsis />
+                ) : (
+                  <PaginationItemNumber page={page} />
+                )}
+              </styled.li>
+            ))}
 
             {withControls ? (
               <styled.li>

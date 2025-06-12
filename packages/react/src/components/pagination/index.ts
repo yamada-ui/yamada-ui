@@ -7,6 +7,7 @@ export type {
 export {
   PaginationItem,
   PaginationRoot,
+  usePaginationContext,
   usePaginationPropsContext,
 } from "./pagination"
 export * from "./pagination.style"

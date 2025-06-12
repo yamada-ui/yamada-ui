@@ -22,7 +22,7 @@ import {
 import { Ripple, useRipple } from "../ripple"
 import { paginationStyle } from "./pagination.style"
 import { usePagination } from "./use-pagination"
-import { usePaginationPropsGetter } from "./use-pagination"
+import { usePaginationItem } from "./use-pagination"
 
 interface PaginationComponentContext
   extends Pick<
@@ -276,8 +276,7 @@ export interface PaginationControlProps
 
 const PaginationItemPrev = withContext<"button", PaginationControlProps>(
   (props) => {
-    const { component: Component } = usePaginationContext()
-    const { getItemPrevProps } = usePaginationPropsGetter()
+    const { Component, getItemPrevProps } = usePaginationItem()
     return <Component {...getItemPrevProps(props)} page="prev" />
   },
   "prev",
@@ -285,8 +284,7 @@ const PaginationItemPrev = withContext<"button", PaginationControlProps>(
 
 const PaginationItemNext = withContext<"button", PaginationControlProps>(
   (props) => {
-    const { component: Component } = usePaginationContext()
-    const { getItemNextProps } = usePaginationPropsGetter()
+    const { Component, getItemNextProps } = usePaginationItem()
     return <Component {...getItemNextProps(props)} page="next" />
   },
   "next",
@@ -294,8 +292,7 @@ const PaginationItemNext = withContext<"button", PaginationControlProps>(
 
 const PaginationItemFirst = withContext<"button", PaginationControlProps>(
   (props) => {
-    const { component: Component } = usePaginationContext()
-    const { getItemFirstProps } = usePaginationPropsGetter()
+    const { Component, getItemFirstProps } = usePaginationItem()
     return <Component {...getItemFirstProps(props)} page="first" />
   },
   "first",
@@ -303,8 +300,7 @@ const PaginationItemFirst = withContext<"button", PaginationControlProps>(
 
 const PaginationItemLast = withContext<"button", PaginationControlProps>(
   (props) => {
-    const { component: Component } = usePaginationContext()
-    const { getItemLastProps } = usePaginationPropsGetter()
+    const { Component, getItemLastProps } = usePaginationItem()
     return <Component {...getItemLastProps(props)} page="last" />
   },
   "last",
@@ -312,8 +308,7 @@ const PaginationItemLast = withContext<"button", PaginationControlProps>(
 
 const PaginationItemNumber = withContext<"button", PaginationItemProps>(
   (props) => {
-    const { component: Component } = usePaginationContext()
-    const { getItemNumberProps } = usePaginationPropsGetter()
+    const { Component, getItemNumberProps } = usePaginationItem()
     return <Component {...getItemNumberProps(props)} />
   },
   "number",
@@ -321,8 +316,7 @@ const PaginationItemNumber = withContext<"button", PaginationItemProps>(
 
 const PaginationEllipsis = withContext<"button", PaginationControlProps>(
   (props) => {
-    const { component: Component } = usePaginationContext()
-    const { getItemEllipsisProps } = usePaginationPropsGetter()
+    const { Component, getItemEllipsisProps } = usePaginationItem()
     return <Component {...getItemEllipsisProps(props)} page="ellipsis" />
   },
   "ellipsis",

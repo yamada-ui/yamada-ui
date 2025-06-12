@@ -142,7 +142,7 @@ export const usePagination = ({
 
 export type UsePaginationReturn = ReturnType<typeof usePagination>
 
-export const usePaginationPropsGetter = () => {
+export const usePaginationItem = () => {
   const {
     disabled: _disabled,
     total,
@@ -154,7 +154,7 @@ export const usePaginationPropsGetter = () => {
     edgeProps = {},
     itemProps = {},
   } = usePaginationPropsContext() ?? {}
-  const { currentPage, onChange, onFirst, onLast, onNext, onPrev } =
+  const { component, currentPage, onChange, onFirst, onLast, onNext, onPrev } =
     usePaginationContext()
 
   const getItemPrevProps = useCallback<
@@ -283,6 +283,7 @@ export const usePaginationPropsGetter = () => {
   )
 
   return {
+    Component: component,
     getItemEllipsisProps,
     getItemFirstProps,
     getItemLastProps,

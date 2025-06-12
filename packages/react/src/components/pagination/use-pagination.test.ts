@@ -1,5 +1,5 @@
 import { renderHook } from "../../../test"
-import { usePagination } from "./"
+import { usePagination } from "./use-pagination"
 
 describe("usePagination", () => {
   test("should return the correct pagination", () => {

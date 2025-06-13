@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useMemo, useState } from "react"
 import { Steps } from "."
 import { PropsTable } from "../../../storybook/components"

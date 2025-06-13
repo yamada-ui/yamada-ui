@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "../../../storybook/components"
 import { useAsync } from "../../hooks/use-async"
 import { Avatar } from "../avatar"

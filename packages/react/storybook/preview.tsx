@@ -1,11 +1,11 @@
-import type { DocsContainerProps } from "@storybook/blocks"
-import type { Preview } from "@storybook/react"
+import type { DocsContainerProps } from "@storybook/addon-docs/blocks"
+import type { Preview } from "@storybook/react-vite"
 import type { FC, PropsWithChildren } from "react"
-import { DocsContainer } from "@storybook/blocks"
-import { addons, useGlobals } from "@storybook/preview-api"
-import { themes } from "@storybook/theming"
+import { DocsContainer } from "@storybook/addon-docs/blocks"
 import { useEffect, useState } from "react"
-import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
+import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode2"
+import { addons, useGlobals } from "storybook/preview-api"
+import { themes } from "storybook/theming"
 import { isRtl, UIProvider, useColorMode, VStack } from "../src"
 import { customThemes } from "./themes"
 
@@ -61,6 +61,7 @@ const preview: Preview = {
     controls: { expanded: true },
     darkMode: { ...customThemes },
     docs: {
+      codePanel: true,
       container: ({
         children,
         theme,

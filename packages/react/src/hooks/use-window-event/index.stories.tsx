@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useRef } from "react"
 import { useWindowEvent } from "."
 import { Input } from "../../components/input"

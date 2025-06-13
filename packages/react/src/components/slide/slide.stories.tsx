@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useBoolean } from "../../hooks/use-boolean"
 import { Button } from "../button"
 import { VStack } from "../stack"

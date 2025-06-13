@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
 import { useState } from "react"
 import { useForm } from "react-hook-form"

@@ -1,4 +1,4 @@
-import { themes } from "@storybook/theming"
+import { themes } from "storybook/theming"
 import { defaultTheme } from "../src"
 
 const fonts = defaultTheme.fonts

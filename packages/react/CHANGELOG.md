@@ -1,5 +1,44 @@
 # @yamada-ui/react
 
+## 1.7.7
+
+### Patch Changes
+
+- Updated dependencies [[`dd2fafe`](https://github.com/yamada-ui/yamada-ui/commit/dd2fafe963d09bd4e9f31f3d730c9c6301bdb134), [`f0541e3`](https://github.com/yamada-ui/yamada-ui/commit/f0541e310d0509e073b714170020e10e741300d9), [`c6bc520`](https://github.com/yamada-ui/yamada-ui/commit/c6bc520cccb38984375967ab3dbd2ed402b11dff)]:
+  - @yamada-ui/use-clickable@1.2.22
+  - @yamada-ui/motion@2.3.4
+  - @yamada-ui/tabs@1.0.55
+  - @yamada-ui/autocomplete@1.6.14
+  - @yamada-ui/file-input@1.0.56
+  - @yamada-ui/menu@1.5.7
+  - @yamada-ui/select@1.8.11
+  - @yamada-ui/tag@1.1.13
+  - @yamada-ui/accordion@2.0.25
+  - @yamada-ui/checkbox@1.3.7
+  - @yamada-ui/loading@1.1.33
+  - @yamada-ui/modal@1.4.14
+  - @yamada-ui/notice@1.1.20
+  - @yamada-ui/popover@1.5.4
+  - @yamada-ui/rating@1.1.14
+  - @yamada-ui/reorder@2.0.26
+  - @yamada-ui/ripple@1.0.53
+  - @yamada-ui/segmented-control@1.1.11
+  - @yamada-ui/snacks@1.1.20
+  - @yamada-ui/switch@1.2.9
+  - @yamada-ui/tooltip@1.2.4
+  - @yamada-ui/transitions@1.1.20
+  - @yamada-ui/providers@1.4.6
+  - @yamada-ui/input@1.0.56
+  - @yamada-ui/alert@1.1.13
+  - @yamada-ui/button@1.0.59
+  - @yamada-ui/use-async-callback@1.0.14
+  - @yamada-ui/color-picker@1.4.19
+  - @yamada-ui/close-button@1.0.56
+  - @yamada-ui/pagination@1.1.13
+  - @yamada-ui/toggle@1.0.37
+  - @yamada-ui/use-media-query@1.0.64
+  - @yamada-ui/file-button@1.1.22
+
 ## 1.7.6
 
 ### Patch Changes

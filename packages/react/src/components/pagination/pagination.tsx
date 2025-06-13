@@ -22,7 +22,7 @@ import {
 import { Ripple, useRipple } from "../ripple"
 import { paginationStyle } from "./pagination.style"
 import { usePagination } from "./use-pagination"
-import { usePaginationItem } from "./use-pagination"
+import { usePaginationItem } from "./use-pagination-item"
 
 interface PaginationComponentContext
   extends Pick<

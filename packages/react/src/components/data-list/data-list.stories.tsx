@@ -88,7 +88,7 @@ export const Variant: Story = () => {
 
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["subtle", "bold", "grid"]}
       rows={["horizontal", "vertical"]}
     >
@@ -122,7 +122,7 @@ export const Size: Story = () => {
 
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["sm", "md", "lg"]}
       rows={["horizontal", "vertical"]}
     >

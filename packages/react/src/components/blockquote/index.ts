@@ -3,7 +3,9 @@ export {
   BlockquoteCite,
   BlockquoteContent,
   BlockquoteIcon,
+  BlockquotePropsContext,
   BlockquoteRoot,
+  useBlockquotePropsContext,
 } from "./blockquote"
 export type {
   BlockquoteCaptionProps,

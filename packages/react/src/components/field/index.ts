@@ -2,6 +2,7 @@ export {
   FieldErrorMessage,
   FieldHelperMessage,
   FieldLabel,
+  FieldPropsContext,
   FieldRoot,
   useFieldPropsContext,
 } from "./field"

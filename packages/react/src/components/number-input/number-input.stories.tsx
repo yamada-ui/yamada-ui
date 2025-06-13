@@ -28,7 +28,7 @@ export const Basic: Story = () => {
 export const Size: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["xs", "sm", "md", "lg", "xl"]}
       rows={["outline", "filled", "flushed"]}
     >
@@ -49,7 +49,7 @@ export const Size: Story = () => {
 export const Variant: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["outline", "filled", "flushed"]}
       rows={COLOR_SCHEMES}
     >
@@ -131,7 +131,7 @@ export const DisabledKeepWithinRange: Story = () => {
 export const Disabled: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <NumberInput
             key={index}
@@ -142,7 +142,7 @@ export const Disabled: Story = () => {
         )}
       </For>
 
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <InputGroup.Root key={index} variant={variant} disabled>
             <InputGroup.Addon>
@@ -167,7 +167,7 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <NumberInput
             key={index}
@@ -178,7 +178,7 @@ export const Readonly: Story = () => {
         )}
       </For>
 
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <InputGroup.Root key={index} variant={variant} readOnly>
             <InputGroup.Addon>
@@ -203,7 +203,7 @@ export const Readonly: Story = () => {
 export const Invalid: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <NumberInput
             key={index}
@@ -214,7 +214,7 @@ export const Invalid: Story = () => {
         )}
       </For>
 
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <InputGroup.Root key={index} variant={variant} invalid>
             <InputGroup.Addon>
@@ -238,7 +238,7 @@ export const Invalid: Story = () => {
 
 export const Addon: Story = () => {
   return (
-    <For each={["outline", "filled", "flushed"]}>
+    <For each={["outline", "filled", "flushed"] as const}>
       {(variant, index) => (
         <InputGroup.Root key={index} variant={variant}>
           <InputGroup.Addon>
@@ -253,7 +253,7 @@ export const Addon: Story = () => {
 
 export const Element: Story = () => {
   return (
-    <For each={["outline", "filled", "flushed"]}>
+    <For each={["outline", "filled", "flushed"] as const}>
       {(variant, index) => (
         <InputGroup.Root key={index} variant={variant}>
           <InputGroup.Element>

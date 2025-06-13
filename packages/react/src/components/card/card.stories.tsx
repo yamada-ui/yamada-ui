@@ -1,6 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "../../../storybook/components"
-import { For } from "../../components/for"
 import { COLOR_SCHEMES, transformSize } from "../../utils"
 import { Button } from "../button"
 import { Heading } from "../heading"
@@ -37,9 +36,14 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <For each={["panel", "elevated", "solid", "subtle", "surface", "outline"]}>
-      {(variant, index) => (
-        <Card.Root key={index} variant={variant}>
+    <PropsTable
+      variant="stack"
+      rows={
+        ["panel", "elevated", "solid", "subtle", "surface", "outline"] as const
+      }
+    >
+      {(_, row, key) => (
+        <Card.Root key={key} variant={row}>
           <Card.Header>
             <Heading size="xl">『SLAM DUNK』（スラムダンク）</Heading>
           </Card.Header>
@@ -52,17 +56,17 @@ export const Variant: Story = () => {
           </Card.Body>
         </Card.Root>
       )}
-    </For>
+    </PropsTable>
   )
 }
 
 export const Size: Story = () => {
   return (
-    <For each={["sm", "md", "lg"]}>
-      {(size, index) => (
-        <Card.Root key={index} size={size}>
+    <PropsTable variant="stack" rows={["sm", "md", "lg"]}>
+      {(_, row, key) => (
+        <Card.Root key={key} size={row}>
           <Card.Header>
-            <Heading size={transformSize(size, 2)}>
+            <Heading size={transformSize(row, 2)}>
               『SLAM DUNK』（スラムダンク）
             </Heading>
           </Card.Header>
@@ -75,13 +79,14 @@ export const Size: Story = () => {
           </Card.Body>
         </Card.Root>
       )}
-    </For>
+    </PropsTable>
   )
 }
 
 export const ColorScheme: Story = () => {
   return (
     <PropsTable
+      variant="stack"
       columns={["solid", "subtle", "surface", "outline"]}
       rows={COLOR_SCHEMES}
     >

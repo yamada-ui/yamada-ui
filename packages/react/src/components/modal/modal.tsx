@@ -29,7 +29,7 @@ import { Slot } from "../slot"
 import { modalStyle } from "./modal.style"
 import { useModal } from "./use-modal"
 
-interface ModalContext
+interface ComponentContext
   extends Omit<UseModalReturn, "getRootProps">,
     PopupAnimationProps,
     Pick<ModalRootProps, "withCloseButton"> {}
@@ -87,13 +87,13 @@ export interface ModalRootProps
 
 export const {
   component,
-  ComponentContext: ModalContext,
+  ComponentContext,
   PropsContext: ModalPropsContext,
-  useComponentContext: useModalContext,
+  useComponentContext,
   usePropsContext: useModalPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<ModalRootProps, ModalStyle, ModalContext>(
+} = createSlotComponent<ModalRootProps, ModalStyle, ComponentContext>(
   "modal",
   modalStyle,
 )
@@ -159,7 +159,7 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
     )
 
     return (
-      <ModalContext value={context}>
+      <ComponentContext value={context}>
         {openTrigger ?? customOpenTrigger}
 
         <AnimatePresence onExitComplete={onCloseComplete}>
@@ -202,7 +202,7 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
             </Portal>
           ) : null}
         </AnimatePresence>
-      </ModalContext>
+      </ComponentContext>
     )
   },
   "root",
@@ -212,7 +212,7 @@ export interface ModalOpenTriggerProps extends PropsWithChildren {}
 
 export const ModalOpenTrigger = component<"fragment", ModalOpenTriggerProps>(
   (props) => {
-    const { getOpenTriggerProps } = useModalContext()
+    const { getOpenTriggerProps } = useComponentContext()
 
     return <Slot {...getOpenTriggerProps(props)} />
   },
@@ -223,7 +223,7 @@ export interface ModalCloseTriggerProps extends PropsWithChildren {}
 
 export const ModalCloseTrigger = component<"fragment", ModalCloseTriggerProps>(
   (props) => {
-    const { getCloseTriggerProps } = useModalContext()
+    const { getCloseTriggerProps } = useComponentContext()
 
     return <Slot {...getCloseTriggerProps(props)} />
   },
@@ -236,7 +236,7 @@ export const ModalCloseButton = withContext<"button", ModalCloseButtonProps>(
   CloseButton,
   "closeButton",
 )(undefined, (props) => {
-  const { getCloseButtonProps } = useModalContext()
+  const { getCloseButtonProps } = useComponentContext()
 
   return { ...getCloseButtonProps(props) }
 })
@@ -244,7 +244,7 @@ export const ModalCloseButton = withContext<"button", ModalCloseButtonProps>(
 export interface ModalOverlayProps extends HTMLMotionProps {}
 
 export const ModalOverlay = withContext<"div", ModalOverlayProps>((props) => {
-  const { animationScheme, duration, getOverlayProps } = useModalContext()
+  const { animationScheme, duration, getOverlayProps } = useComponentContext()
 
   return (
     <motion.div
@@ -269,7 +269,7 @@ export interface ModalContentProps
 export const ModalContent = withContext<"section", ModalContentProps>(
   ({ children, ...rest }) => {
     const { animationScheme, duration, withCloseButton, getContentProps } =
-      useModalContext()
+      useComponentContext()
     const validChildren = getValidChildren(children)
     const [customCloseButton, ...cloneChildren] = findChildren(
       validChildren,
@@ -347,7 +347,7 @@ export const ShorthandModalContent: FC<ShorthandModalContentProps> = ({
   onMiddle,
   onSuccess,
 }) => {
-  const { onClose } = useModalContext()
+  const { onClose } = useComponentContext()
   const customHeader = wrapOrPassProps(ModalHeader, header)
   const customTitle = wrapOrPassProps(ModalTitle, title)
   const customBody = wrapOrPassProps(ModalBody, body)
@@ -388,7 +388,7 @@ export const ModalHeader = withContext<"header", ModalHeaderProps>(
   "header",
   "header",
 )(undefined, (props) => {
-  const { getHeaderProps } = useModalContext()
+  const { getHeaderProps } = useComponentContext()
 
   return { ...getHeaderProps(props) }
 })
@@ -398,7 +398,7 @@ export interface ModalTitleProps extends HTMLStyledProps<"h2"> {}
 export const ModalTitle = withContext<"h2", ModalTitleProps>("h2", "title")(
   undefined,
   (props) => {
-    const { getTitleProps } = useModalContext()
+    const { getTitleProps } = useComponentContext()
 
     return { ...getTitleProps(props) }
   },
@@ -409,7 +409,7 @@ export interface ModalBodyProps extends HTMLStyledProps {}
 export const ModalBody = withContext<"div", ModalBodyProps>("div", "body")(
   undefined,
   (props) => {
-    const { getBodyProps } = useModalContext()
+    const { getBodyProps } = useComponentContext()
 
     return { ...getBodyProps(props) }
   },
@@ -421,7 +421,7 @@ export const ModalFooter = withContext<"footer", ModalFooterProps>(
   "footer",
   "footer",
 )(undefined, (props) => {
-  const { getFooterProps } = useModalContext()
+  const { getFooterProps } = useComponentContext()
 
   return { ...getFooterProps(props) }
 })

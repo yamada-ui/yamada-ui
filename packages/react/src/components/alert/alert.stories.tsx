@@ -29,7 +29,7 @@ export const Basic: Story = () => {
 export const Variant: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["plain", "solid", "subtle", "surface", "island"]}
       rows={["info", "success", "warning", "error"]}
     >
@@ -51,7 +51,7 @@ export const Variant: Story = () => {
 export const ColorScheme: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["plain", "solid", "subtle", "surface", "island"]}
       rows={COLOR_SCHEMES}
     >

@@ -68,7 +68,7 @@ export const Size: Story = () => {
   )
 
   return (
-    <PropsTable variant="column" rows={["sm", "md", "lg", "xl"]}>
+    <PropsTable variant="stack" rows={["sm", "md", "lg", "xl"]}>
       {(_, row, key) => <ReorderRoot key={key} size={row} items={items} />}
     </PropsTable>
   )
@@ -88,7 +88,7 @@ export const Variant: Story = () => {
 
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       rows={[
         "panel",
         "outline",
@@ -117,7 +117,7 @@ export const Orientation: Story = () => {
   )
 
   return (
-    <PropsTable variant="column" rows={["vertical", "horizontal"]}>
+    <PropsTable variant="stack" rows={["vertical", "horizontal"]}>
       {(_, row, key) => (
         <ReorderRoot key={key} items={items} orientation={row} />
       )}

@@ -8,8 +8,10 @@ export {
   DrawerHeader,
   DrawerOpenTrigger,
   DrawerOverlay,
+  DrawerPropsContext,
   DrawerRoot,
   DrawerTitle,
+  useDrawerPropsContext,
 } from "./drawer"
 export type {
   DrawerBodyProps,

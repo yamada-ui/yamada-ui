@@ -1,6 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react"
 import { PropsTable } from "../../../storybook/components"
-import { For } from "../../components/for"
 import { COLOR_SCHEMES, transformSize } from "../../utils"
 import { Heading } from "../heading"
 import { Image } from "../image"
@@ -35,9 +34,14 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <For each={["panel", "elevated", "solid", "subtle", "surface", "outline"]}>
-      {(variant, index) => (
-        <Container.Root key={index} variant={variant}>
+    <PropsTable
+      variant="stack"
+      rows={
+        ["panel", "elevated", "solid", "subtle", "surface", "outline"] as const
+      }
+    >
+      {(_, row, key) => (
+        <Container.Root key={key} variant={row}>
           <Container.Header>
             <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
           </Container.Header>
@@ -50,17 +54,17 @@ export const Variant: Story = () => {
           </Container.Body>
         </Container.Root>
       )}
-    </For>
+    </PropsTable>
   )
 }
 
 export const Size: Story = () => {
   return (
-    <For each={["sm", "md", "lg", "xl"]}>
-      {(size, index) => (
-        <Container.Root key={index} size={size}>
+    <PropsTable variant="stack" rows={["sm", "md", "lg", "xl"]}>
+      {(_, row, key) => (
+        <Container.Root key={key} size={row}>
           <Container.Header>
-            <Heading size={transformSize(size, 2)}>
+            <Heading size={transformSize(row, 2)}>
               『ドラゴンボール』（DRAGON BALL）
             </Heading>
           </Container.Header>
@@ -73,7 +77,7 @@ export const Size: Story = () => {
           </Container.Body>
         </Container.Root>
       )}
-    </For>
+    </PropsTable>
   )
 }
 

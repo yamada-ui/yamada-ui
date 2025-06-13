@@ -45,7 +45,7 @@ export const Basic: Story = () => {
 
 export const Size: Story = () => {
   return (
-    <PropsTable variant="column" rows={["xs", "sm", "md", "lg"]}>
+    <PropsTable variant="stack" rows={["xs", "sm", "md", "lg"]}>
       {(_, row, key) => (
         <Popover.Root key={key} size={row}>
           <Popover.Trigger>

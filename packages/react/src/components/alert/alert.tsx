@@ -16,7 +16,7 @@ const icons = {
   warning: TriangleAlertIcon,
 } as const
 
-interface AlertContext {
+interface ComponentContext {
   status: StatusScheme
 }
 
@@ -32,15 +32,15 @@ export interface AlertRootProps
 }
 
 export const {
-  ComponentContext: AlertContext,
+  ComponentContext,
   PropsContext: AlertPropsContext,
   useClassNames,
-  useComponentContext: useAlertContext,
+  useComponentContext,
   usePropsContext: useAlertPropsContext,
   useStyleContext,
   withContext,
   withProvider,
-} = createSlotComponent<AlertRootProps, AlertStyle, AlertContext>(
+} = createSlotComponent<AlertRootProps, AlertStyle, ComponentContext>(
   "alert",
   alertStyle,
 )
@@ -55,9 +55,9 @@ export const AlertRoot = withProvider<"div", AlertRootProps>(
     const context = useMemo(() => ({ status: status! }), [status])
 
     return (
-      <AlertContext value={context}>
+      <ComponentContext value={context}>
         <styled.div role="alert" {...props} />
-      </AlertContext>
+      </ComponentContext>
     )
   },
   "root",
@@ -66,7 +66,7 @@ export const AlertRoot = withProvider<"div", AlertRootProps>(
 export interface AlertIconProps extends IconProps {}
 
 export const AlertIcon = withContext<"svg", AlertIconProps>((props) => {
-  const { status } = useAlertContext()
+  const { status } = useComponentContext()
   const Icon = icons[status]
 
   return <Icon {...props} />

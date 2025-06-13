@@ -31,7 +31,7 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <PropsTable variant="column" rows={["border", "spacer", "plain"]}>
+    <PropsTable variant="stack" rows={["border", "spacer", "plain"]}>
       {(_, row, key) => (
         <Resizable.Root
           key={key}

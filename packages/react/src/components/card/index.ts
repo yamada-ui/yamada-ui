@@ -1,4 +1,11 @@
-export { CardBody, CardFooter, CardHeader, CardRoot } from "./card"
+export {
+  CardBody,
+  CardFooter,
+  CardHeader,
+  CardPropsContext,
+  CardRoot,
+  useCardPropsContext,
+} from "./card"
 export type {
   CardBodyProps,
   CardFooterProps,

@@ -7,7 +7,7 @@ import { findChild, getValidChildren } from "../../utils"
 import { QuoteIcon } from "../icon"
 import { blockquoteStyle } from "./blockquote.style"
 
-interface BlockquoteContext
+interface ComponentContext
   extends Pick<BlockquoteContentProps, "citeUrl">,
     Pick<BlockquoteCaptionProps, "withDash"> {}
 
@@ -39,17 +39,16 @@ export interface BlockquoteRootProps
 }
 
 export const {
-  ComponentContext: BlockquoteContext,
+  ComponentContext,
   PropsContext: BlockquotePropsContext,
-  useComponentContext: useBlockquoteContext,
+  useComponentContext,
   usePropsContext: useBlockquotePropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<
-  BlockquoteRootProps,
-  BlockquoteStyle,
-  BlockquoteContext
->("blockquote", blockquoteStyle)
+} = createSlotComponent<BlockquoteRootProps, BlockquoteStyle, ComponentContext>(
+  "blockquote",
+  blockquoteStyle,
+)
 
 /**
  * `Blockquote` is a component that represents a blockquote. By default, it renders a `blockquote` element.
@@ -75,7 +74,7 @@ export const BlockquoteRoot = withProvider<"figure", BlockquoteRootProps>(
     const context = useMemo(() => ({ citeUrl, withDash }), [citeUrl, withDash])
 
     return (
-      <BlockquoteContext value={context}>
+      <ComponentContext value={context}>
         <styled.figure {...rest}>
           {icon}
 
@@ -90,7 +89,7 @@ export const BlockquoteRoot = withProvider<"figure", BlockquoteRootProps>(
               </BlockquoteCaption>
             ) : null)}
         </styled.figure>
-      </BlockquoteContext>
+      </ComponentContext>
     )
   },
   "root",
@@ -109,7 +108,7 @@ export const BlockquoteContent = withContext<
 >("blockquote", "content")(
   undefined,
   ({ cite, citeUrl: citeUrlProp, ...rest }) => {
-    const { citeUrl } = useBlockquoteContext()
+    const { citeUrl } = useComponentContext()
 
     return { ...rest, citeurl: cite ?? citeUrlProp ?? citeUrl }
   },
@@ -130,7 +129,7 @@ export const BlockquoteCaption = withContext<
 >("figcaption", "caption")(
   undefined,
   ({ children, withDash: withDashProp, ...rest }) => {
-    const { withDash } = useBlockquoteContext()
+    const { withDash } = useComponentContext()
 
     withDashProp ??= withDash
 

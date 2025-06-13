@@ -39,7 +39,7 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <PropsTable variant="column" rows={["plain", "circle", "square"]}>
+    <PropsTable variant="stack" rows={["plain", "circle", "square"]}>
       {(_, row, key) => (
         <Wrap key={key} gap="md">
           <ColorSwatch variant={row} color="#4387f4" />
@@ -54,7 +54,7 @@ export const Variant: Story = () => {
 export const Size: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       rows={["2xs", "xs", "sm", "md", "lg", "xl", "2xl"]}
     >
       {(_, row, key) => (

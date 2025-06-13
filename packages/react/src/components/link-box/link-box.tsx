@@ -5,20 +5,20 @@ import { createSlotComponent, radiusProperties, styled } from "../../core"
 import { useExtractProps } from "../../core"
 import { linkBoxStyle } from "./link-box.style"
 
-interface LinkBoxContext extends Dict {}
+interface ComponentContext extends Dict {}
 
 export interface LinkBoxRootProps
   extends HTMLStyledProps,
     ThemeProps<LinkBoxStyle> {}
 
 export const {
-  ComponentContext: LinkBoxContext,
+  ComponentContext,
   PropsContext: LinkBoxPropsContext,
-  useComponentContext: useLinkBoxContext,
+  useComponentContext,
   usePropsContext: useLinkBoxPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<LinkBoxRootProps, LinkBoxStyle, LinkBoxContext>(
+} = createSlotComponent<LinkBoxRootProps, LinkBoxStyle, ComponentContext>(
   "link-box",
   linkBoxStyle,
 )
@@ -33,9 +33,9 @@ export const LinkBoxRoot = withProvider<"div", LinkBoxRootProps>(
     const context = useExtractProps(rest, radiusProperties)
 
     return (
-      <LinkBoxContext value={context}>
+      <ComponentContext value={context}>
         <styled.div {...rest}>{children}</styled.div>
-      </LinkBoxContext>
+      </ComponentContext>
     )
   },
   "root",
@@ -54,7 +54,7 @@ export const LinkBoxOverlay = withContext<"a", LinkBoxOverlayProps>(
   "a",
   "overlay",
 )(undefined, ({ external, _before, ...rest }) => {
-  const context = useLinkBoxContext()
+  const context = useComponentContext()
 
   return {
     rel: external ? "noopener" : undefined,

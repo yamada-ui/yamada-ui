@@ -133,6 +133,7 @@
     "eslint-plugin-perfectionist": "^4.12.3",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-storybook": "9.0.4",
     "eslint-plugin-testing-library": "^7.1.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "execa": "9.3.1",
@@ -154,9 +155,8 @@
     "react-icons": "^5.5.0",
     "rimraf": "^6.0.1",
     "storybook": "^9.0.4",
-    "storybook-dark-mode": "^4.0.2",
+    "storybook-dark-mode2": "^5.2.1",
     "storybook-i18n": "^4.0.4",
-    "tslib": "^2.8.1",
     "tsup": "^8.4.0",
     "tsx": "^4.19.4",
     "turbo": "^2.5.3",
@@ -171,12 +171,6 @@
     "overrides": {
       "react": "^19.0.0",
       "react-dom": "^19.0.0"
-    },
-    "patchedDependencies": {
-      "storybook-dark-mode": "patches/storybook-dark-mode.patch"
     }
-  },
-  "devDependencies": {
-    "eslint-plugin-storybook": "9.0.4"
   }
 }

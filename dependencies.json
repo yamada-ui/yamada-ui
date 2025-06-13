@@ -1,0 +1,1499 @@
+[
+  {
+    "type": "components",
+    "name": "accordion",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["collapse", "icon", "motion"],
+        "hooks": ["use-controllable-state", "use-descendant"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "airy",
+    "dependencies": {
+      "external": ["motion/react"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": ["use-controllable-state"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "alert",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon", "loading", "status"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "aspect-ratio",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "avatar",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon"],
+        "hooks": [],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "badge",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "bleed",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "blockquote",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "box",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "breadcrumb",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon"],
+        "hooks": ["use-value"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "button",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["group", "icon", "loading", "ripple"],
+        "hooks": [],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "card",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "center",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "circle-progress",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["progress"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "code",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "collapse",
+    "dependencies": {
+      "external": ["motion/react"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "color-swatch",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["grid"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "container",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "data-list",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "drawer",
+    "dependencies": {
+      "external": ["motion/react", "react-remove-scroll"],
+      "internal": {
+        "components": [
+          "button",
+          "fade",
+          "focus-lock",
+          "modal",
+          "motion",
+          "portal",
+          "slide",
+          "slot"
+        ],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "editable",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "input", "slot"],
+        "hooks": ["use-controllable-state", "use-focus"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "em",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "empty-state",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "fade",
+    "dependencies": {
+      "external": ["motion/react"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "field",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["fieldset"],
+        "hooks": [],
+        "providers": ["environment-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "fieldset",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "file-button",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["button", "field", "file-input", "input", "portal"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "file-input",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "input", "portal"],
+        "hooks": ["use-clickable", "use-controllable-state"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "flex",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "flip",
+    "dependencies": {
+      "external": ["motion/react"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": ["use-controllable-state"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "float",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "focus-lock",
+    "dependencies": {
+      "external": ["react-focus-lock"],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "for",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "format",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "grid",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "group",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["flex"],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "heading",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "highlight",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["mark", "text"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "icon",
+    "dependencies": {
+      "external": ["lucide-react"],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "image",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "indicator",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["float"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "infinite-scroll-area",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": ["use-infinite-scroll"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "input",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "group"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "kbd",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "link",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "link-box",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "list",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "loading",
+    "dependencies": {
+      "external": ["motion/react", "react-remove-scroll"],
+      "internal": {
+        "components": ["center", "icon", "motion", "portal", "text"],
+        "hooks": ["use-timeout"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "mark",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "modal",
+    "dependencies": {
+      "external": ["motion/react", "react-remove-scroll"],
+      "internal": {
+        "components": [
+          "button",
+          "fade",
+          "focus-lock",
+          "motion",
+          "popover",
+          "portal",
+          "slot"
+        ],
+        "hooks": ["use-disclosure"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "motion",
+    "dependencies": {
+      "external": ["motion/react"],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "native-select",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "group", "icon", "input"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "native-table",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "number-input",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["button", "field", "group", "icon", "input"],
+        "hooks": ["use-counter", "use-event-listener", "use-interval"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "password-input",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["button", "field", "group", "icon", "input"],
+        "hooks": ["use-controllable-state"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "picture",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["image"],
+        "hooks": [],
+        "providers": ["theme-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "pin-input",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "group", "input"],
+        "hooks": ["use-controllable-state", "use-descendant"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "popover",
+    "dependencies": {
+      "external": ["motion/react"],
+      "internal": {
+        "components": ["fade", "motion", "portal", "slide"],
+        "hooks": [
+          "use-disclosure",
+          "use-event-listener",
+          "use-focus",
+          "use-outside-click",
+          "use-popper"
+        ],
+        "providers": ["environment-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "portal",
+    "dependencies": {
+      "external": ["react-dom"],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": ["environment-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "progress",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "reorder",
+    "dependencies": {
+      "external": ["motion/react"],
+      "internal": {
+        "components": ["icon", "motion"],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "resizable",
+    "dependencies": {
+      "external": ["react-resizable-panels"],
+      "internal": {
+        "components": [],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "ripple",
+    "dependencies": {
+      "external": ["motion/react"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "rotate",
+    "dependencies": {
+      "external": ["motion/react"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": ["use-controllable-state"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "scroll-area",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "separator",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "simple-grid",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["grid"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "skeleton",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "slide",
+    "dependencies": {
+      "external": ["motion/react"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "slot",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "stack",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "stat",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon"],
+        "hooks": [],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "status",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "switch",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field"],
+        "hooks": ["use-controllable-state"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "tag",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon"],
+        "hooks": ["use-clickable"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "text",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "textarea",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "input"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "toggle",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["button", "field", "group", "input", "portal"],
+        "hooks": ["use-controllable-state"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "tooltip",
+    "dependencies": {
+      "external": ["motion/react"],
+      "internal": {
+        "components": ["motion", "popover", "portal"],
+        "hooks": [
+          "use-disclosure",
+          "use-event-listener",
+          "use-outside-click",
+          "use-popper"
+        ],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "visually-hidden",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "wrap",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["flex"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-animation",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-async",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-async-callback",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-boolean",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-breakpoint",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": ["environment-provider", "theme-provider"]
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-clickable",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-clipboard",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-controllable-state",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-counter",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-descendant",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-disclosure",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-event-listener",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-eye-dropper",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-focus",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-focus-visible",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-hover",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-idle",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-infinite-scroll",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-interval",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-latest-ref",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-local-storage",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-media-query",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-mounted",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-online",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-os",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-outside-click",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-pan-event",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-popper",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-previous",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-processing",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-resize-observer",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-size",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-timeout",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-token",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-value",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-window-event",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "providers",
+    "name": "color-mode-provider",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": ["environment-provider"]
+      }
+    }
+  },
+  {
+    "type": "providers",
+    "name": "environment-provider",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "providers",
+    "name": "i18n-provider",
+    "dependencies": {
+      "external": ["intl-messageformat"],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "providers",
+    "name": "theme-provider",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": ["color-mode-provider", "environment-provider"]
+      }
+    }
+  },
+  {
+    "type": "providers",
+    "name": "ui-provider",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["loading"],
+        "hooks": [],
+        "providers": [
+          "color-mode-provider",
+          "environment-provider",
+          "i18n-provider",
+          "theme-provider"
+        ]
+      }
+    }
+  }
+]

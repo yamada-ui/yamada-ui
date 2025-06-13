@@ -164,6 +164,7 @@
     "storybook": "^8.6.12",
     "storybook-dark-mode": "^4.0.2",
     "storybook-i18n": "^3.1.1",
+    "ts-morph": "^26.0.0",
     "tsup": "^8.4.0",
     "tsx": "^4.19.4",
     "turbo": "^2.5.3",

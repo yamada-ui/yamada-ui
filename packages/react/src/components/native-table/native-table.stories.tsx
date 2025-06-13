@@ -1,9 +1,8 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 // import { ScrollArea } from "../scroll-area"
 import { PropsTable } from "../../../storybook/components"
 // import defaultTheme from "../../theme"
 import { COLOR_SCHEMES } from "../../utils"
-import { For } from "../for"
 import { NativeTable } from "./"
 
 type Story = StoryFn<typeof NativeTable.Root>
@@ -67,9 +66,9 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <For each={["line", "outline"]}>
-      {(variant, index) => (
-        <NativeTable.Root key={index} variant={variant}>
+    <PropsTable variant="stack" rows={["line", "outline"]}>
+      {(_, row, key) => (
+        <NativeTable.Root key={key} variant={row}>
           <NativeTable.Thead>
             <NativeTable.Tr>
               <NativeTable.Th>作品名</NativeTable.Th>
@@ -115,15 +114,15 @@ export const Variant: Story = () => {
           </NativeTable.Tfoot>
         </NativeTable.Root>
       )}
-    </For>
+    </PropsTable>
   )
 }
 
 export const Size: Story = () => {
   return (
-    <For each={["sm", "md", "lg"]}>
-      {(size, index) => (
-        <NativeTable.Root key={index} size={size}>
+    <PropsTable variant="stack" rows={["sm", "md", "lg"]}>
+      {(_, row, key) => (
+        <NativeTable.Root key={key} size={row}>
           <NativeTable.Thead>
             <NativeTable.Tr>
               <NativeTable.Th>作品名</NativeTable.Th>
@@ -169,15 +168,15 @@ export const Size: Story = () => {
           </NativeTable.Tfoot>
         </NativeTable.Root>
       )}
-    </For>
+    </PropsTable>
   )
 }
 
 export const Striped: Story = () => {
   return (
-    <For each={["line", "outline"]}>
-      {(variant, index) => (
-        <NativeTable.Root key={index} variant={variant} striped>
+    <PropsTable variant="stack" rows={["line", "outline"]}>
+      {(_, row, key) => (
+        <NativeTable.Root key={key} variant={row} striped>
           <NativeTable.Thead>
             <NativeTable.Tr>
               <NativeTable.Th>作品名</NativeTable.Th>
@@ -223,14 +222,14 @@ export const Striped: Story = () => {
           </NativeTable.Tfoot>
         </NativeTable.Root>
       )}
-    </For>
+    </PropsTable>
   )
 }
 
 export const ColorScheme: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["outline", "striped"]}
       rows={COLOR_SCHEMES}
     >
@@ -441,7 +440,7 @@ export const ColumnBorders: Story = () => {
 export const HighlightOnHover: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["outline", "striped"]}
       rows={COLOR_SCHEMES}
     >

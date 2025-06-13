@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
 import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
@@ -35,7 +35,7 @@ export const Items: Story = () => {
 export const Variant: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["outline", "filled", "flushed"]}
       rows={COLOR_SCHEMES}
     >
@@ -49,7 +49,7 @@ export const Variant: Story = () => {
 export const Size: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["xs", "sm", "md", "lg", "xl"]}
       rows={["outline", "filled", "flushed"]}
     >
@@ -101,13 +101,13 @@ export const DisabledFocusManagement: Story = () => {
 export const Disabled: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant} disabled />
         )}
       </For>
 
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant}>
             <PinInput.Field disabled />
@@ -133,13 +133,13 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant} readOnly />
         )}
       </For>
 
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant}>
             <PinInput.Field readOnly />
@@ -165,13 +165,13 @@ export const Readonly: Story = () => {
 export const Invalid: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant} invalid />
         )}
       </For>
 
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant}>
             <PinInput.Field invalid />

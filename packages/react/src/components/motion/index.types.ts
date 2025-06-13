@@ -1,6 +1,6 @@
 import type {
   MotionProps as OriginMotionProps,
-  Target,
+  ResolvedValues,
   TargetAndTransition,
   Transition,
 } from "motion/react"
@@ -111,7 +111,7 @@ export interface MotionTransitionProps {
   /**
    * Custom `transitionEnd` definition for `enter` and `exit`.
    */
-  transitionEnd?: MotionLifecycleProps<Target>
+  transitionEnd?: MotionLifecycleProps<ResolvedValues>
 }
 
 export type WithTransitionProps<Y extends object = {}> = MotionTransitionProps &

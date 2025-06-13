@@ -95,11 +95,11 @@ export function isSize(value: any): boolean {
   return isString(value) && sizeMap.includes(value)
 }
 
-export function transformSize(
+export function transformSize<Y = string>(
   token: string | undefined,
   value: number,
   omitTokens: null | string[] = null,
-): string | undefined {
+): undefined | Y {
   if (!token) return undefined
 
   let resolvedSizeMap = sizeMap
@@ -110,7 +110,7 @@ export function transformSize(
   const index = resolvedSizeMap.indexOf(token)
   const size = resolvedSizeMap[index + value]
 
-  return size ?? token
+  return (size ?? token) as Y
 }
 
 export function toCamelCase(value: AnyString): string {

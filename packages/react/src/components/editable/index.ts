@@ -4,9 +4,11 @@ export {
   EditableEditTrigger,
   EditableInput,
   EditablePreview,
+  EditablePropsContext,
   EditableRoot,
   EditableSubmitTrigger,
   EditableTextarea,
+  useEditablePropsContext,
 } from "./editable"
 export type {
   EditableCancelTriggerProps,

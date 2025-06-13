@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
 import { For } from "../for"
@@ -36,7 +36,7 @@ export const Variant: Story = () => {
 
 export const Size: Story = () => {
   return (
-    <PropsTable variant="column" rows={["xs", "sm", "md", "lg", "xl"]}>
+    <PropsTable variant="stack" rows={["xs", "sm", "md", "lg", "xl"]}>
       {(_, row, key) => {
         return <CircleProgress.Root key={key} size={row} value={75} />
       }}
@@ -46,11 +46,11 @@ export const Size: Story = () => {
 
 export const Shape: Story = () => {
   return (
-    <For each={["rounded", "square"] as const}>
-      {(shape, index) => (
-        <CircleProgress.Root key={index} shape={shape} value={50} />
+    <PropsTable variant="stack" rows={["rounded", "square"]}>
+      {(_, row, key) => (
+        <CircleProgress.Root key={key} shape={row} value={50} />
       )}
-    </For>
+    </PropsTable>
   )
 }
 

@@ -318,7 +318,9 @@ export function getSlotClassName<Y extends number | string | symbol>(
   if (isArray(slot)) {
     return `${className}__${toKebabCase(slot[0] as string)} ${className}__${slot.map((value) => toKebabCase(value as string)).join("--")}`
   } else if (isObject(slot)) {
-    return `${className}__${toKebabCase(slot.name)}`
+    const resolvedSlot = toArray(slot.slot)
+
+    return `${className}__${toKebabCase(resolvedSlot[0] as string)} ${className}__${resolvedSlot.map((value) => toKebabCase(value as string)).join("--")}`
   } else {
     return `${className}__${toKebabCase(slot as string)}`
   }
@@ -413,6 +415,20 @@ function getHasAtRuleStyle(css?: CSSObject | CSSObject[]) {
   }
 }
 
+function mergeDefaultProps<
+  Y extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+  M extends Dict = Dict,
+>(defaultProps: Y["defaultProps"], props: M) {
+  return Object.entries(defaultProps ?? {}).reduce<Dict>(
+    (prev, [key, value]) => {
+      prev[key] ??= value
+
+      return prev
+    },
+    props,
+  ) as M
+}
+
 interface UseStyleOptions<
   Y extends Dict = Dict,
   M extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
@@ -467,7 +483,11 @@ function useStyle<
 
     const colorScheme = props.colorScheme ?? rootColorScheme
     const className = cx(defaultClassName ?? customClassName, props.className)
-    const mergedProps = { ...defaultProps, ...props, className, colorScheme }
+    const mergedProps = {
+      ...mergeDefaultProps(defaultProps, props),
+      className,
+      colorScheme,
+    }
     const omitProps = Object.keys(propVariants ?? {})
     const { size, variant } = mergedProps
 

@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -82,7 +82,7 @@ export const Items: Story = () => {
 export const Variant: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["outline", "filled", "flushed"]}
       rows={COLOR_SCHEMES}
     >
@@ -103,7 +103,7 @@ export const Variant: Story = () => {
 export const Size: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["xs", "sm", "md", "lg", "xl"]}
       rows={["outline", "filled", "flushed"]}
     >
@@ -137,7 +137,7 @@ export const DisabledPlaceholderInOptions: Story = () => {
 export const Disabled: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <NativeSelect.Root
             key={index}
@@ -148,7 +148,7 @@ export const Disabled: Story = () => {
         )}
       </For>
 
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <InputGroup.Root key={index} variant={variant} disabled>
             <InputGroup.Addon>
@@ -172,7 +172,7 @@ export const Disabled: Story = () => {
 export const Readonly: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <NativeSelect.Root
             key={index}
@@ -187,7 +187,7 @@ export const Readonly: Story = () => {
         )}
       </For>
 
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <InputGroup.Root key={index} variant={variant} readOnly>
             <InputGroup.Addon>
@@ -211,7 +211,7 @@ export const Readonly: Story = () => {
 export const Invalid: Story = () => {
   return (
     <>
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <NativeSelect.Root
             key={index}
@@ -222,7 +222,7 @@ export const Invalid: Story = () => {
         )}
       </For>
 
-      <For each={["outline", "filled", "flushed"]}>
+      <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <InputGroup.Root key={index} variant={variant} invalid>
             <InputGroup.Addon>
@@ -246,7 +246,7 @@ export const Invalid: Story = () => {
 
 export const Addon: Story = () => {
   return (
-    <For each={["outline", "filled", "flushed"]}>
+    <For each={["outline", "filled", "flushed"] as const}>
       {(variant, index) => (
         <InputGroup.Root key={index} variant={variant}>
           <InputGroup.Addon>
@@ -261,7 +261,7 @@ export const Addon: Story = () => {
 
 export const Element: Story = () => {
   return (
-    <For each={["outline", "filled", "flushed"]}>
+    <For each={["outline", "filled", "flushed"] as const}>
       {(variant, index) => (
         <InputGroup.Root key={index} variant={variant}>
           <InputGroup.Element>

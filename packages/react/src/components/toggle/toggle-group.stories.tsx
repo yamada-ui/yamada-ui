@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useState } from "react"
 import { Toggle, ToggleGroup } from "."
 import { PropsTable } from "../../../storybook/components"
@@ -82,7 +82,7 @@ export const Size: Story = () => {
 
 export const Disabled: Story = () => {
   return (
-    <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    <For each={["ghost", "subtle", "surface", "outline", "solid"] as const}>
       {(variant, index) => (
         <ToggleGroup key={index} variant={variant} attached disabled>
           <Toggle aria-label="Toggle bold" icon={<BoldIcon />} value="bold" />
@@ -104,7 +104,7 @@ export const Disabled: Story = () => {
 
 export const Readonly: Story = () => {
   return (
-    <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    <For each={["ghost", "subtle", "surface", "outline", "solid"] as const}>
       {(variant, index) => (
         <ToggleGroup key={index} variant={variant} attached readOnly>
           <Toggle aria-label="Toggle bold" icon={<BoldIcon />} value="bold" />

@@ -7,8 +7,10 @@ export {
   ModalHeader,
   ModalOpenTrigger,
   ModalOverlay,
+  ModalPropsContext,
   ModalRoot,
   ModalTitle,
+  useModalPropsContext,
 } from "./modal"
 export type {
   ModalBodyProps,

@@ -3,7 +3,7 @@ import { noop } from "./function"
 
 export function createdDom(): boolean {
   return !!(
-    !isUndefined(window) &&
+    typeof window !== "undefined" &&
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     window.document?.createElement
   )

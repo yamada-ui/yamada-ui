@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
 import { Stat } from "./"
@@ -60,7 +60,7 @@ export const Size: Story = () => {
 
 export const ColorScheme: Story = () => {
   return (
-    <PropsTable variant="column" rows={COLOR_SCHEMES}>
+    <PropsTable variant="stack" rows={COLOR_SCHEMES}>
       {(_, row, key) => (
         <Stat.Root
           key={key}

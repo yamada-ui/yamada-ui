@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
 import { Fragment, useId } from "react"
 import { Controller, useForm } from "react-hook-form"
@@ -52,7 +52,7 @@ export const Size: Story = () => {
 
 export const Disabled: Story = () => {
   return (
-    <For each={["thick", "thin"]}>
+    <For each={["thick", "thin"] as const}>
       {(variant, index) => (
         <Fragment key={index}>
           <Switch variant={variant} disabled>
@@ -70,7 +70,7 @@ export const Disabled: Story = () => {
 
 export const Readonly: Story = () => {
   return (
-    <For each={["thick", "thin"]}>
+    <For each={["thick", "thin"] as const}>
       {(variant, index) => (
         <Fragment key={index}>
           <Switch variant={variant} readOnly>
@@ -88,15 +88,15 @@ export const Readonly: Story = () => {
 
 export const Shape: Story = () => {
   return (
-    <For each={["square", "rounded", "circle"] as const}>
-      {(shape, index) => (
-        <Fragment key={index}>
-          <Switch defaultChecked shape={shape}>
-            {toTitleCase(shape)}
+    <PropsTable variant="stack" rows={["square", "rounded", "circle"]}>
+      {(_, row, key) => (
+        <Fragment key={key}>
+          <Switch defaultChecked shape={row}>
+            {toTitleCase(row)}
           </Switch>
         </Fragment>
       )}
-    </For>
+    </PropsTable>
   )
 }
 

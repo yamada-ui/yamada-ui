@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { Dict } from "../../utils"
 import type { ChartTooltip } from "./"
 import { Card, CardBody } from "../card"

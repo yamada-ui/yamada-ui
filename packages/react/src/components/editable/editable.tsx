@@ -9,13 +9,11 @@ import { runIfFn } from "../../utils"
 import { useInputBorder } from "../input"
 import { Slot } from "../slot"
 import { editableStyle } from "./editable.style"
-import { useEditable } from "./use-editable"
-
-interface EditableContext
-  extends Omit<
-    UseEditableReturn,
-    "getRootProps" | "onCancel" | "onEdit" | "onSubmit" | "value"
-  > {}
+import {
+  EditableContext,
+  useEditable,
+  useEditableContext,
+} from "./use-editable"
 
 interface EditableElementProps
   extends Pick<
@@ -39,13 +37,11 @@ export interface EditableRootProps
 
 export const {
   component,
-  ComponentContext: EditableContext,
   PropsContext: EditablePropsContext,
-  useComponentContext: useEditableContext,
   usePropsContext: useEditablePropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<EditableRootProps, EditableStyle, EditableContext>(
+} = createSlotComponent<EditableRootProps, EditableStyle>(
   "editable",
   editableStyle,
 )

@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useState } from "react"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { noop } from "../../utils"
@@ -69,7 +69,7 @@ export const Size: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["xs", "sm", "md", "lg", "xl", "full"]}>
+        <For each={["xs", "sm", "md", "lg", "xl", "full"] as const}>
           {(size) => (
             <Button
               key={size}

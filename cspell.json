@@ -204,7 +204,8 @@
     "Yezi",
     "Yuto",
     "zarbon",
-    "العربية"
+    "العربية",
+    "chromeos"
   ],
   "ignorePaths": [
     "node_modules",

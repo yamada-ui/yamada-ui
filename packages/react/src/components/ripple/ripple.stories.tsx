@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Box } from "../box"
 import { Text } from "../text"
 import { Ripple, useRipple } from "./"

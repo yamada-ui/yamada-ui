@@ -1,7 +1,6 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
-import { For } from "../for"
 import { Progress } from "./"
 
 type Story = StoryFn<typeof Progress>
@@ -31,7 +30,7 @@ export const Variant: Story = () => {
 
 export const Size: Story = () => {
   return (
-    <PropsTable variant="column" rows={["xs", "sm", "md", "lg", "xl"]}>
+    <PropsTable variant="stack" rows={["xs", "sm", "md", "lg", "xl"]}>
       {(_, row, key) => {
         return <Progress key={key} size={row} value={50} />
       }}
@@ -41,9 +40,9 @@ export const Size: Story = () => {
 
 export const Shape: Story = () => {
   return (
-    <For each={["rounded", "square", "circle"] as const}>
-      {(shape, index) => <Progress key={index} shape={shape} value={50} />}
-    </For>
+    <PropsTable variant="stack" rows={["rounded", "square", "circle"]}>
+      {(_, row, key) => <Progress key={key} shape={row} value={50} />}
+    </PropsTable>
   )
 }
 

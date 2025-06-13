@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { App } from "../../../storybook/components"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { toTitleCase } from "../../utils"

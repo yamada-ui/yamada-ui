@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { For } from "../for"
@@ -54,7 +54,7 @@ export const Size: Story = () => {
 export const FullRounded: Story = () => {
   return (
     <Wrap gap="md">
-      <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+      <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
         {(variant, index) => (
           <Button key={index} variant={variant} fullRounded>
             {toTitleCase(variant)}
@@ -68,7 +68,7 @@ export const FullRounded: Story = () => {
 export const Disabled: Story = () => {
   return (
     <Wrap gap="md">
-      <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+      <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
         {(variant, index) => (
           <Button key={index} variant={variant} disabled>
             {toTitleCase(variant)}

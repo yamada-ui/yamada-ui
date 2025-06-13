@@ -2,8 +2,10 @@ export {
   AlertDescription,
   AlertIcon,
   AlertLoading,
+  AlertPropsContext,
   AlertRoot,
   AlertTitle,
+  useAlertPropsContext,
 } from "./alert"
 export type {
   AlertDescriptionProps,

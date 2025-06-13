@@ -8,7 +8,7 @@ import { ChevronRightIcon, EllipsisIcon } from "../icon"
 import { breadcrumbStyle } from "./breadcrumb.style"
 import { useBreadcrumb } from "./use-breadcrumb"
 
-interface BreadcrumbContext {
+interface ComponentContext {
   getEllipsisProps: PropGetter<"svg">
   getLinkProps: PropGetter<"a", { currentPage?: boolean }>
 }
@@ -38,17 +38,16 @@ export interface BreadcrumbRootProps
 }
 
 export const {
-  ComponentContext: BreadcrumbContext,
+  ComponentContext,
   PropsContext: BreadcrumbPropsContext,
-  useComponentContext: useBreadcrumbContext,
+  useComponentContext,
   usePropsContext: useBreadcrumbPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<
-  BreadcrumbRootProps,
-  BreadcrumbStyle,
-  BreadcrumbContext
->("breadcrumb", breadcrumbStyle)
+} = createSlotComponent<BreadcrumbRootProps, BreadcrumbStyle, ComponentContext>(
+  "breadcrumb",
+  breadcrumbStyle,
+)
 
 /**
  * `Breadcrumb` is a component that helps users understand the hierarchy of a website.
@@ -75,7 +74,7 @@ export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
     )
 
     return (
-      <BreadcrumbContext value={context}>
+      <ComponentContext value={context}>
         <styled.nav {...getRootProps()}>
           <BreadcrumbList {...getListProps({ gap, ...listProps })}>
             {children.map((child, index) => {
@@ -95,7 +94,7 @@ export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
             })}
           </BreadcrumbList>
         </styled.nav>
-      </BreadcrumbContext>
+      </ComponentContext>
     )
   },
   "root",
@@ -129,7 +128,7 @@ export const BreadcrumbLink = withContext<"a", BreadcrumbLinkProps>(
   "a",
   "link",
 )(undefined, ({ currentPage, ...rest }) => {
-  const { getLinkProps } = useBreadcrumbContext()
+  const { getLinkProps } = useComponentContext()
 
   return {
     as: !currentPage ? "a" : "span",
@@ -143,7 +142,7 @@ export const BreadcrumbEllipsis = withContext<"svg", BreadcrumbEllipsisProps>(
   EllipsisIcon,
   "ellipsis",
 )(undefined, (props) => {
-  const { getEllipsisProps } = useBreadcrumbContext()
+  const { getEllipsisProps } = useComponentContext()
 
   return { ...getEllipsisProps(props) }
 })

@@ -7,9 +7,9 @@ export {
   ModalHeader as Header,
   ModalOpenTrigger as OpenTrigger,
   ModalOverlay as Overlay,
+  ModalPropsContext as PropsContext,
   ModalRoot as Root,
   ModalTitle as Title,
-  useModalContext as useContext,
   useModalPropsContext as usePropsContext,
 } from "./modal"
 export type {

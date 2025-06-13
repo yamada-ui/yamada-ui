@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useRef } from "react"
 import { Popover } from "."
 import { App, PropsTable } from "../../../storybook/components"
@@ -45,7 +45,7 @@ export const Basic: Story = () => {
 
 export const Size: Story = () => {
   return (
-    <PropsTable variant="column" rows={["xs", "sm", "md", "lg"]}>
+    <PropsTable variant="stack" rows={["xs", "sm", "md", "lg"]}>
       {(_, row, key) => (
         <Popover.Root key={key} size={row}>
           <Popover.Trigger>

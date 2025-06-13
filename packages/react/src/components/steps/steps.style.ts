@@ -13,6 +13,8 @@ export const stepsStyle = defineComponentSlotStyle({
       fontWeight: "medium",
       justifyContent: "center",
       rounded: "full",
+      transitionDuration: "moderate",
+      transitionProperty: "common",
     },
     item: {
       display: "flex",
@@ -38,6 +40,8 @@ export const stepsStyle = defineComponentSlotStyle({
     separator: {
       bg: "border",
       flex: "1",
+      transitionDuration: "moderate",
+      transitionProperty: "common",
     },
     title: {
       fontWeight: "medium",

@@ -63,7 +63,7 @@ export const nativeTableStyle = defineComponentSlotStyle({
         tbody: {
           "& tr": {
             cursor: "pointer",
-            transitionDuration: "slow",
+            transitionDuration: "moderate",
             transitionProperty: "common",
             _hover: {
               bg: "colorScheme.bg",

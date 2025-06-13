@@ -98,3 +98,11 @@ export const visuallyHiddenAttributes = {
   "aria-hidden": true,
   tabIndex: -1,
 } satisfies React.HTMLAttributes<HTMLElement>
+
+export function* useIds() {
+  const id = React.useId()
+
+  for (let i = 0; ; i++) {
+    yield `${id}-${i}`
+  }
+}

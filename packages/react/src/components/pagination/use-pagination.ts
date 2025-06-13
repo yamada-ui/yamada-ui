@@ -7,9 +7,6 @@ import { useValue } from "../../hooks/use-value"
 import { handlerAll } from "../../utils"
 import { usePaginationContext, usePaginationPropsContext } from "./pagination"
 
-export const computedRange = (start: number, end: number) =>
-  Array.from({ length: end - start + 1 }, (_, index) => index + start)
-
 export interface UsePaginationProps {
   /**
    * The total number of pages in pagination.
@@ -141,6 +138,9 @@ export const usePagination = ({
 }
 
 export type UsePaginationReturn = ReturnType<typeof usePagination>
+
+const computedRange = (start: number, end: number) =>
+  Array.from({ length: end - start + 1 }, (_, index) => index + start)
 
 export const usePaginationItem = () => {
   const {

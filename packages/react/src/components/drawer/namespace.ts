@@ -8,9 +8,9 @@ export {
   DrawerHeader as Header,
   DrawerOpenTrigger as OpenTrigger,
   DrawerOverlay as Overlay,
+  DrawerPropsContext as PropsContext,
   DrawerRoot as Root,
   DrawerTitle as Title,
-  useDrawerContext as useContext,
   useDrawerPropsContext as usePropsContext,
 } from "./drawer"
 export type {

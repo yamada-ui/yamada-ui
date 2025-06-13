@@ -102,7 +102,7 @@ export const Disabled: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton key={index} variant={variant} disabled>
               {toTitleCase(variant)}
@@ -112,7 +112,7 @@ export const Disabled: Story = () => {
       </Wrap>
 
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton
               key={index}
@@ -141,7 +141,7 @@ export const Readonly: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton key={index} variant={variant} readOnly>
               {toTitleCase(variant)}
@@ -151,7 +151,7 @@ export const Readonly: Story = () => {
       </Wrap>
 
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton
               key={index}
@@ -180,7 +180,7 @@ export const Invalid: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton key={index} variant={variant} invalid>
               {toTitleCase(variant)}
@@ -190,7 +190,7 @@ export const Invalid: Story = () => {
       </Wrap>
 
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton
               key={index}

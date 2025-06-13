@@ -75,7 +75,7 @@ export const Size: Story = () => {
 export const Rounded: Story = () => {
   return (
     <Wrap gap="md">
-      <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+      <For each={["ghost", "subtle", "surface", "outline", "solid"] as const}>
         {(variant, index) => (
           <Toggle
             key={index}
@@ -94,7 +94,7 @@ export const Disabled: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+        <For each={["ghost", "subtle", "surface", "outline", "solid"] as const}>
           {(variant, index) => (
             <Toggle
               key={index}
@@ -118,7 +118,7 @@ export const Readonly: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+        <For each={["ghost", "subtle", "surface", "outline", "solid"] as const}>
           {(variant, index) => (
             <Toggle
               key={index}
@@ -142,7 +142,7 @@ export const Invalid: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+        <For each={["ghost", "subtle", "surface", "outline", "solid"] as const}>
           {(variant, index) => (
             <Toggle
               key={index}

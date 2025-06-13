@@ -33,7 +33,7 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <PropsTable variant="column" rows={["plain", "panel"]}>
+    <PropsTable variant="stack" rows={["plain", "panel"]}>
       {(_, row, key) => (
         <Accordion.Root key={key} variant={row}>
           <Accordion.Item button="孫悟空少年編">

@@ -36,7 +36,7 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <PropsTable variant="column" rows={["pulse", "shine"]}>
+    <PropsTable variant="stack" rows={["pulse", "shine"]}>
       {(_, row, key) => (
         <VStack key={key} gap="md">
           <HStack>

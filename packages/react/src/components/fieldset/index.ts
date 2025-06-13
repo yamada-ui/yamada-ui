@@ -5,6 +5,7 @@ export {
   FieldsetHeader,
   FieldsetHelperMessage,
   FieldsetLegend,
+  FieldsetPropsContext,
   FieldsetRoot,
   useFieldsetContext,
   useFieldsetPropsContext,

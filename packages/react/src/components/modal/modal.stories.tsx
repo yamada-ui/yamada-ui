@@ -69,7 +69,7 @@ export const Size: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["xs", "sm", "md", "lg", "xl", "cover", "full"]}>
+        <For each={["xs", "sm", "md", "lg", "xl", "cover", "full"] as const}>
           {(size) => (
             <Button
               key={size}

@@ -2,7 +2,9 @@ export * as NativeSelect from "./namespace"
 export {
   NativeOption,
   NativeOptionGroup,
+  NativeSelectPropsContext,
   NativeSelectRoot,
+  useNativeSelectProps,
 } from "./native-select"
 export type {
   NativeOptionGroupProps,

@@ -45,9 +45,13 @@ export const attributes = {
    */
   _between: "&[data-between]",
   /**
-   * The CSS `&[aria-current]:not([aria-current='false'])` attribute selector.
+   * The CSS `&[data-complete]` attribute selector.
    */
-  _current: "&[aria-current]:not([aria-current='false'])",
+  _complete: "&[data-complete]",
+  /**
+   * The CSS `&:is([aria-current], [data-current]):not([aria-current='false'])` attribute selector.
+   */
+  _current: "&:is([aria-current], [data-current]):not([aria-current='false'])",
   /**
    * Styles for when `data-mode` is applied to any parent of this component or element.
    */
@@ -90,6 +94,10 @@ export const attributes = {
    */
   _idle: "&[data-idle]",
   /**
+   * The CSS `&[data-incomplete]` attribute selector.
+   */
+  _incomplete: "&[data-incomplete]",
+  /**
    * Styles for when `data-mode` is applied to any parent of this component or element.
    */
   _light:
@@ -117,7 +125,7 @@ export const attributes = {
   /**
    * The CSS `&[aria-current='false']` attribute selector.
    */
-  _notCurrent: "&:not([aria-current]), &[aria-current='false']",
+  _notCurrent: "&:not([aria-current], [data-current]), &[aria-current='false']",
   /**
    * The CSS `&:not([data-fallback])` attribute selector.
    */
@@ -545,6 +553,14 @@ export const groupAttributes = {
    */
   _groupChecked: toGroup(pseudoClasses._checked),
   /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is complete.
+   */
+  _groupComplete: toGroup(attributes._complete),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is current.
+   */
+  _groupCurrent: toGroup(attributes._current),
+  /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is disabled.
    */
   _groupDisabled: toGroup(pseudoClasses._disabled),
@@ -584,6 +600,10 @@ export const groupAttributes = {
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is idle.
    */
   _groupIdle: toGroup(attributes._idle),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is incomplete.
+   */
+  _groupIncomplete: toGroup(attributes._incomplete),
   /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is invalid.
    */
@@ -671,6 +691,14 @@ export const peerAttributes = {
    */
   _peerChecked: toPeer(pseudoClasses._checked),
   /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is complete.
+   */
+  _peerComplete: toPeer(attributes._complete),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is current.
+   */
+  _peerCurrent: toPeer(attributes._current),
+  /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is disabled.
    */
   _peerDisabled: toPeer(pseudoClasses._disabled),
@@ -710,6 +738,10 @@ export const peerAttributes = {
    * Styles to apply when a parent element with `data-peer` or `.peer` is idle.
    */
   _peerIdle: toPeer(attributes._idle),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is incomplete.
+   */
+  _peerIncomplete: toPeer(attributes._incomplete),
   /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is invalid.
    */

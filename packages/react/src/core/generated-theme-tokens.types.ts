@@ -780,6 +780,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | (string & {})
   gradients: string & {}
   keyframes:
+    | "bg-position"
     | "bounce"
     | "collapse-height"
     | "collapse-width"

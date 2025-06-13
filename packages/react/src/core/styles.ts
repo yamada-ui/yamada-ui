@@ -5220,7 +5220,8 @@ export interface StyleProps {
    *
    * The <code>font-palette</code> CSS property selects a color palette from the font, optionally overriding individual colors in the <code>@font-palette-values</code> at-rule.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-05-15
    * @newly_available_date 2022-11-15
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-palette
@@ -7710,7 +7711,8 @@ export interface StyleProps {
    *
    * The <code>print-color-adjust</code> CSS property sets whether styles of printed pages should be adjusted to use less ink, in cases such as light text on a dark background.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2025-05-01
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/print-color-adjust
    */
@@ -7770,7 +7772,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-display-4/#reading-flow
+   * @see https://developer.mozilla.org/docs/Web/CSS/reading-flow
    *
    * @experimental
    */
@@ -7780,7 +7782,7 @@ export interface StyleProps {
    *
    * The CSS `reading-order` property.
    *
-   * @see https://drafts.csswg.org/css-display-4/#propdef-reading-order
+   * @see https://developer.mozilla.org/docs/Web/CSS/reading-order
    *
    * @experimental
    */
@@ -9548,7 +9550,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-view-transitions-2/#view-transition-class-prop
+   * @see https://developer.mozilla.org/docs/Web/CSS/view-transition-class
    */
   viewTransitionClass?: StyleValue<AnyString>
   /**

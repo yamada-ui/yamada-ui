@@ -1,14 +1,10 @@
-import type { PropGetter} from "../../core";
-import type {
-  PaginationControlProps,
-  PaginationItemProps} from "./pagination";
+import type { PropGetter } from "../../core"
+import type { PaginationControlProps, PaginationItemProps } from "./pagination"
 import { useCallback } from "react"
 import { mergeProps } from "../../core"
+import { useI18n } from "../../providers/i18n-provider"
 import { handlerAll } from "../../utils"
-import {
-  usePaginationContext,
-  usePaginationPropsContext
-} from "./pagination"
+import { usePaginationContext, usePaginationPropsContext } from "./pagination"
 
 export const usePaginationItem = () => {
   const {
@@ -24,12 +20,13 @@ export const usePaginationItem = () => {
   } = usePaginationPropsContext() ?? {}
   const { component, currentPage, onChange, onFirst, onLast, onNext, onPrev } =
     usePaginationContext()
+  const { t } = useI18n("pagination")
 
   const getItemPrevProps = useCallback<
     PropGetter<"button", PaginationControlProps>
   >(
     ({ disabled = _disabled, onClick, ...props } = {}) => ({
-      "aria-label": "Go to previous page",
+      "aria-label": t("Go to previous page"),
       disabled: disabled || currentPage === 1,
       page: "prev",
       ...mergeProps(props, itemProps, controlProps, controlPrevProps)(),
@@ -41,14 +38,22 @@ export const usePaginationItem = () => {
         onPrev,
       ),
     }),
-    [_disabled, itemProps, controlProps, controlPrevProps, onPrev, currentPage],
+    [
+      _disabled,
+      itemProps,
+      controlProps,
+      controlPrevProps,
+      onPrev,
+      currentPage,
+      t,
+    ],
   )
 
   const getItemLastProps = useCallback<
     PropGetter<"button", PaginationControlProps>
   >(
     ({ disabled = _disabled, onClick, ...props } = {}) => ({
-      "aria-label": "Go to last page",
+      "aria-label": t("Go to last page"),
       disabled: disabled || currentPage === total,
       page: "last",
       ...mergeProps(props, itemProps, edgeProps, edgeLastProps)(),
@@ -68,13 +73,14 @@ export const usePaginationItem = () => {
       onLast,
       currentPage,
       total,
+      t,
     ],
   )
   const getItemFirstProps = useCallback<
     PropGetter<"button", PaginationControlProps>
   >(
     ({ disabled = _disabled, onClick, ...props } = {}) => ({
-      "aria-label": "Go to first page",
+      "aria-label": t("Go to first page"),
       disabled: disabled || currentPage === 1,
       page: "first",
       ...mergeProps(props, itemProps, edgeProps, edgeFirstProps)(),
@@ -86,14 +92,14 @@ export const usePaginationItem = () => {
         onFirst,
       ),
     }),
-    [_disabled, itemProps, edgeProps, edgeFirstProps, onFirst, currentPage],
+    [_disabled, itemProps, edgeProps, edgeFirstProps, onFirst, currentPage, t],
   )
 
   const getItemNextProps = useCallback<
     PropGetter<"button", PaginationControlProps>
   >(
     ({ disabled = _disabled, onClick, ...props } = {}) => ({
-      "aria-label": "Go to next page",
+      "aria-label": t("Go to next page"),
       disabled: disabled || currentPage === total,
       page: "next",
       ...mergeProps(props, itemProps, controlProps, controlNextProps)(),
@@ -113,6 +119,7 @@ export const usePaginationItem = () => {
       onNext,
       currentPage,
       total,
+      t,
     ],
   )
 
@@ -128,21 +135,20 @@ export const usePaginationItem = () => {
       onClick,
       ...props
     }) => ({
-      "aria-label": `Go to page ${page}`,
+      "aria-label": t("Go to page {number}", { number: page }),
       active: currentPage === page,
       disabled: disabled,
       page,
       ...mergeProps(props, itemProps)(),
       onClick: handlerAll(itemProps.onClick, onClick, () => onChange(page)),
     }),
-    [_disabled, itemProps, currentPage, onChange],
+    [_disabled, itemProps, currentPage, onChange, t],
   )
 
   const getItemEllipsisProps = useCallback<
     PropGetter<"button", PaginationControlProps>
   >(
     (props = {}) => ({
-      "aria-label": "Ellipsis",
       disabled: true,
       page: "ellipsis",
       ...mergeProps(props, itemProps)(),

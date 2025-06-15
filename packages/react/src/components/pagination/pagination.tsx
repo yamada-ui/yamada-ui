@@ -27,9 +27,16 @@ import { usePaginationItem } from "./use-pagination-item"
 interface PaginationComponentContext
   extends Pick<
       UsePaginationReturn,
-      "currentPage" | "onChange" | "onFirst" | "onLast" | "onNext" | "onPrev"
+      | "currentPage"
+      | "disabled"
+      | "onChange"
+      | "onFirst"
+      | "onLast"
+      | "onNext"
+      | "onPrev"
+      | "total"
     >,
-    Required<Pick<PaginationOptions, "component">> {}
+    Required<Pick<PaginationOptions, "component" | "itemProps">> {}
 
 interface PaginationOptions {
   /**
@@ -106,40 +113,70 @@ export const PaginationRoot = withProvider<"nav", PaginationRootProps>(
     boundaries,
     component = PaginationItem,
     defaultPage,
-    disabled,
+    disabled: _disabled,
     page,
     siblings,
-    total,
+    total: _total,
     withControls: _withControls = true,
     withEdges: _withEdges = false,
+    controlNextProps = {},
+    controlPrevProps = {},
+    controlProps = {},
+    edgeFirstProps = {},
+    edgeLastProps = {},
+    edgeProps = {},
+    itemProps = {},
     rootProps,
     onChange: onChangeProp,
     ...rest
   }) => {
     const withControls = useValue(_withControls)
     const withEdges = useValue(_withEdges)
-    const { currentPage, range, onChange, onFirst, onLast, onNext, onPrev } =
-      usePagination({
-        boundaries,
-        defaultPage,
-        disabled,
-        page,
-        siblings,
-        total,
-        onChange: onChangeProp,
-      })
+    const {
+      currentPage,
+      disabled,
+      range,
+      total,
+      onChange,
+      onFirst,
+      onLast,
+      onNext,
+      onPrev,
+    } = usePagination({
+      boundaries,
+      defaultPage,
+      disabled: _disabled,
+      page,
+      siblings,
+      total: _total,
+      onChange: onChangeProp,
+    })
 
     const context = useMemo<PaginationComponentContext>(
       () => ({
         component,
         currentPage,
+        disabled,
+        total,
+        itemProps,
         onChange,
         onFirst,
         onLast,
         onNext,
         onPrev,
       }),
-      [component, currentPage, onNext, onPrev, onFirst, onLast, onChange],
+      [
+        itemProps,
+        component,
+        currentPage,
+        disabled,
+        total,
+        onNext,
+        onPrev,
+        onFirst,
+        onLast,
+        onChange,
+      ],
     )
 
     return (
@@ -148,13 +185,13 @@ export const PaginationRoot = withProvider<"nav", PaginationRootProps>(
           <PaginationInner data-disabled={dataAttr(disabled)} {...rest}>
             {withEdges ? (
               <styled.li>
-                <PaginationItemFirst />
+                <PaginationItemFirst {...edgeProps} {...edgeFirstProps} />
               </styled.li>
             ) : null}
 
             {withControls ? (
               <styled.li>
-                <PaginationItemPrev />
+                <PaginationItemPrev {...controlProps} {...controlPrevProps} />
               </styled.li>
             ) : null}
 
@@ -170,13 +207,13 @@ export const PaginationRoot = withProvider<"nav", PaginationRootProps>(
 
             {withControls ? (
               <styled.li>
-                <PaginationItemNext />
+                <PaginationItemNext {...controlProps} {...controlNextProps} />
               </styled.li>
             ) : null}
 
             {withEdges ? (
               <styled.li>
-                <PaginationItemLast />
+                <PaginationItemLast {...edgeProps} {...edgeLastProps} />
               </styled.li>
             ) : null}
           </PaginationInner>
@@ -231,7 +268,7 @@ const PaginationItem = withContext<"button", PaginationItemProps>(
     onClick,
     ...rest
   }) => {
-    const { itemProps } = usePaginationPropsContext() ?? {}
+    const { itemProps } = usePaginationContext()
     const ellipsis = page === "ellipsis"
     const rippleProps = useRipple({
       ...rest,
@@ -253,7 +290,7 @@ const PaginationItem = withContext<"button", PaginationItemProps>(
         tabIndex={!ellipsis ? 0 : -1}
         {...rest}
         {...itemProps}
-        onClick={handlerAll(rippleProps.onClick, itemProps?.onClick, onClick)}
+        onClick={handlerAll(rippleProps.onClick, itemProps.onClick, onClick)}
       >
         {children}
         <Ripple {...rippleProps} />

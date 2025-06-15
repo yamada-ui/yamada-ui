@@ -231,6 +231,7 @@ const PaginationItem = withContext<"button", PaginationItemProps>(
     onClick,
     ...rest
   }) => {
+    const { itemProps } = usePaginationPropsContext() ?? {}
     const ellipsis = page === "ellipsis"
     const rippleProps = useRipple({
       ...rest,
@@ -251,7 +252,8 @@ const PaginationItem = withContext<"button", PaginationItemProps>(
           : {})}
         tabIndex={!ellipsis ? 0 : -1}
         {...rest}
-        onClick={handlerAll(rippleProps.onClick, onClick)}
+        {...itemProps}
+        onClick={handlerAll(rippleProps.onClick, itemProps?.onClick, onClick)}
       >
         {children}
         <Ripple {...rippleProps} />

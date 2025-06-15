@@ -16,7 +16,6 @@ export const usePaginationItem = () => {
     edgeFirstProps = {},
     edgeLastProps = {},
     edgeProps = {},
-    itemProps = {},
   } = usePaginationPropsContext() ?? {}
   const { component, currentPage, onChange, onFirst, onLast, onNext, onPrev } =
     usePaginationContext()
@@ -29,24 +28,15 @@ export const usePaginationItem = () => {
       "aria-label": t("Go to previous page"),
       disabled: disabled || currentPage === 1,
       page: "prev",
-      ...mergeProps(props, itemProps, controlProps, controlPrevProps)(),
+      ...mergeProps(props, controlProps, controlPrevProps)(),
       onClick: handlerAll(
-        itemProps.onClick,
         controlProps.onClick,
         controlPrevProps.onClick,
         onClick,
         onPrev,
       ),
     }),
-    [
-      _disabled,
-      itemProps,
-      controlProps,
-      controlPrevProps,
-      onPrev,
-      currentPage,
-      t,
-    ],
+    [_disabled, controlProps, controlPrevProps, onPrev, currentPage, t],
   )
 
   const getItemLastProps = useCallback<
@@ -56,25 +46,16 @@ export const usePaginationItem = () => {
       "aria-label": t("Go to last page"),
       disabled: disabled || currentPage === total,
       page: "last",
-      ...mergeProps(props, itemProps, edgeProps, edgeLastProps)(),
+      ...mergeProps(props, edgeProps, edgeLastProps)(),
+      children: edgeLastProps.children,
       onClick: handlerAll(
-        itemProps.onClick,
         edgeProps.onClick,
         edgeLastProps.onClick,
         onClick,
         onLast,
       ),
     }),
-    [
-      _disabled,
-      itemProps,
-      edgeProps,
-      edgeLastProps,
-      onLast,
-      currentPage,
-      total,
-      t,
-    ],
+    [_disabled, edgeProps, edgeLastProps, onLast, currentPage, total, t],
   )
   const getItemFirstProps = useCallback<
     PropGetter<"button", PaginationControlProps>
@@ -83,16 +64,15 @@ export const usePaginationItem = () => {
       "aria-label": t("Go to first page"),
       disabled: disabled || currentPage === 1,
       page: "first",
-      ...mergeProps(props, itemProps, edgeProps, edgeFirstProps)(),
+      ...mergeProps(props, edgeProps, edgeFirstProps)(),
       onClick: handlerAll(
-        itemProps.onClick,
         edgeProps.onClick,
         edgeFirstProps.onClick,
         onClick,
         onFirst,
       ),
     }),
-    [_disabled, itemProps, edgeProps, edgeFirstProps, onFirst, currentPage, t],
+    [_disabled, edgeProps, edgeFirstProps, onFirst, currentPage, t],
   )
 
   const getItemNextProps = useCallback<
@@ -102,25 +82,15 @@ export const usePaginationItem = () => {
       "aria-label": t("Go to next page"),
       disabled: disabled || currentPage === total,
       page: "next",
-      ...mergeProps(props, itemProps, controlProps, controlNextProps)(),
+      ...mergeProps(props, controlProps, controlNextProps)(),
       onClick: handlerAll(
-        itemProps.onClick,
         controlProps.onClick,
         controlNextProps.onClick,
         onClick,
         onNext,
       ),
     }),
-    [
-      _disabled,
-      itemProps,
-      controlProps,
-      controlNextProps,
-      onNext,
-      currentPage,
-      total,
-      t,
-    ],
+    [_disabled, controlProps, controlNextProps, onNext, currentPage, total, t],
   )
 
   const getItemNumberProps = useCallback<
@@ -139,10 +109,10 @@ export const usePaginationItem = () => {
       active: currentPage === page,
       disabled: disabled,
       page,
-      ...mergeProps(props, itemProps)(),
-      onClick: handlerAll(itemProps.onClick, onClick, () => onChange(page)),
+      ...props,
+      onClick: handlerAll(onClick, () => onChange(page)),
     }),
-    [_disabled, itemProps, currentPage, onChange, t],
+    [_disabled, currentPage, onChange, t],
   )
 
   const getItemEllipsisProps = useCallback<
@@ -151,9 +121,9 @@ export const usePaginationItem = () => {
     (props = {}) => ({
       disabled: true,
       page: "ellipsis",
-      ...mergeProps(props, itemProps)(),
+      ...props,
     }),
-    [itemProps],
+    [],
   )
 
   return {

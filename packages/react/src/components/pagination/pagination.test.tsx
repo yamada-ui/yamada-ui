@@ -2,12 +2,10 @@ import { Pagination } from "."
 import { a11y, fireEvent, render, screen } from "../../../test"
 
 describe("<Pagination />", () => {
-  test.todo(
-    "should pass a11y",
-    async () => await a11y(<Pagination.Root total={10} />),
-  )
+  test("should pass a11y", async () =>
+    await a11y(<Pagination.Root total={10} />))
 
-  test.todo("should render edges control button correctly", () => {
+  test("should render edges control button correctly", () => {
     render(
       <Pagination.Root
         total={10}
@@ -21,7 +19,7 @@ describe("<Pagination />", () => {
     expect(screen.getByText("Last edge")).toBeInTheDocument()
   })
 
-  test.todo("should render control button correctly", () => {
+  test("should render control button correctly", () => {
     render(
       <Pagination.Root
         total={10}
@@ -54,7 +52,7 @@ describe("<Pagination />", () => {
     }
   })
 
-  test.todo("should render disabled correctly", () => {
+  test("should render disabled correctly", () => {
     render(<Pagination.Root disabled total={77} />)
 
     expect(screen.getByRole("navigation")).toHaveAttribute("data-disabled")
@@ -66,7 +64,7 @@ describe("<Pagination />", () => {
   })
 
   test("should render Pagination.Root with previous ellipsis and without next ellipsis correctly", () => {
-    render(
+    const { container } = render(
       <Pagination.Root boundaries={2} page={95} siblings={2} total={100} />,
     )
 
@@ -78,7 +76,7 @@ describe("<Pagination />", () => {
       expect(screen.getByText(page.toString())).toBeInTheDocument()
     }
 
-    const ellipsis = screen.getByLabelText("Ellipsis")
+    const ellipsis = container.querySelector(".ui-pagination__ellipsis")
     expect(ellipsis).toBeInTheDocument()
   })
 
@@ -93,15 +91,15 @@ describe("<Pagination />", () => {
     expect(ellipsis).not.toBeInTheDocument()
   })
 
-  test.todo("should correctly apply itemProps to Pagination.Root props", () => {
+  test("should correctly apply itemProps to Pagination.Root props", () => {
     render(
       <Pagination.Root total={10} itemProps={{ "aria-label": "Go to page" }} />,
     )
 
-    expect(screen.getAllByLabelText("Go to page")).toHaveLength(7)
+    expect(screen.getAllByLabelText("Go to page")).toHaveLength(9)
   })
 
-  test.todo("should correctly apply edgeProps to edge buttons", () => {
+  test("should correctly apply edgeProps to edge buttons", () => {
     render(
       <Pagination.Root
         total={10}
@@ -113,7 +111,7 @@ describe("<Pagination />", () => {
     expect(screen.getAllByLabelText("Go to page")).toHaveLength(2)
   })
 
-  test.todo("should correctly apply controlProps to control buttons", () => {
+  test("should correctly apply controlProps to control buttons", () => {
     render(
       <Pagination.Root
         total={10}

@@ -221,7 +221,7 @@ export interface PaginationItemProps
   extends Omit<HTMLProps<"button">, "page">,
     PaginationItemOptions {}
 
-export const PaginationItem = withContext<"button", PaginationItemProps>(
+const PaginationItem = withContext<"button", PaginationItemProps>(
   ({
     active,
     page,

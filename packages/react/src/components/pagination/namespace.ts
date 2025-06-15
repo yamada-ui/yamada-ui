@@ -1,5 +1,4 @@
 export {
-  PaginationItem as Item,
   PaginationRoot as Root,
   usePaginationContext as useContext,
   usePaginationPropsContext as usePropsContext,

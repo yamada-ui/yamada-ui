@@ -5,7 +5,6 @@ export type {
   PaginationRootProps,
 } from "./pagination"
 export {
-  PaginationItem,
   PaginationRoot,
   usePaginationContext,
   usePaginationPropsContext,

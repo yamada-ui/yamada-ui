@@ -1,9 +1,19 @@
-import type { StyleValue } from "../../core"
+import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useMemo } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { useValue } from "../../hooks/use-value"
+import { createContext, handlerAll, isNumber, mergeRefs } from "../../utils"
 
-export interface UsePaginationProps {
+export type Page = "ellipsis" | number
+
+interface PaginationContext extends Omit<UsePaginationReturn, "getRootProps"> {}
+
+export const [PaginationContext, usePaginationContext] =
+  createContext<PaginationContext>({
+    name: "PaginationContext",
+  })
+
+export interface UsePaginationProps
+  extends Omit<HTMLProps, "onChange" | "page"> {
   /**
    * The total number of pages in pagination.
    */
@@ -13,7 +23,7 @@ export interface UsePaginationProps {
    *
    * @default 1
    */
-  boundaries?: StyleValue<number>
+  boundaries?: number
   /**
    * The initial page of the pagination.
    * Should be less than `total` and greater than `1`.
@@ -36,7 +46,7 @@ export interface UsePaginationProps {
    *
    * @default 1
    */
-  siblings?: StyleValue<number>
+  siblings?: number
   /**
    * The callback invoked when the page changes.
    */
@@ -44,22 +54,21 @@ export interface UsePaginationProps {
 }
 
 export const usePagination = ({
-  boundaries: _boundaries = 1,
+  boundaries = 1,
   defaultPage = 1,
   disabled = false,
   page,
-  siblings: _siblings = 1,
+  siblings = 1,
   total,
   onChange: onChangeProp,
+  ...rest
 }: UsePaginationProps) => {
-  const siblings = useValue(_siblings)
-  const boundaries = useValue(_boundaries)
   const [currentPage, setCurrentPage] = useControllableState({
     defaultValue: defaultPage,
     value: page,
     onChange: onChangeProp,
   })
-  const range = useMemo((): ("ellipsis" | number)[] => {
+  const range = useMemo((): Page[] => {
     const minimumTotal = siblings * 2 + 3 + boundaries * 2
 
     if (minimumTotal >= total) return computedRange(1, total)
@@ -98,26 +107,99 @@ export const usePagination = ({
     ]
   }, [boundaries, siblings, currentPage, total])
 
-  const onFirst = useCallback(() => setCurrentPage(1), [setCurrentPage])
+  const onChange = useCallback(
+    (page: number) => setCurrentPage(Math.max(1, Math.min(total, page))),
+    [setCurrentPage, total],
+  )
 
-  const onLast = useCallback(
+  const onChangeStart = useCallback(() => setCurrentPage(1), [setCurrentPage])
+
+  const onChangeEnd = useCallback(
     () => setCurrentPage(total),
     [setCurrentPage, total],
   )
 
-  const onPrev = useCallback(
-    () => setCurrentPage((prev) => (prev === 1 ? prev : prev - 1)),
+  const onChangePrev = useCallback(
+    () => setCurrentPage((prev) => Math.max(1, prev - 1)),
     [setCurrentPage],
   )
 
-  const onNext = useCallback(
-    () => setCurrentPage((prev) => (prev === total ? prev : prev + 1)),
+  const onChangeNext = useCallback(
+    () => setCurrentPage((prev) => Math.min(total, prev + 1)),
     [setCurrentPage, total],
   )
 
-  const onChange = useCallback(
-    (page: number) => setCurrentPage(page),
-    [setCurrentPage],
+  const getRootProps: PropGetter = useCallback(
+    ({ ref, ...props } = {}) => ({
+      ...rest,
+      ...props,
+      ref: mergeRefs(ref, rest.ref),
+      "aria-label": "Pagination",
+      role: "navigation",
+    }),
+    [rest],
+  )
+
+  const getItemProps: PropGetter<"button", { page?: Page }> = useCallback(
+    ({ page, ...props } = {}) => {
+      if (isNumber(page)) {
+        return {
+          type: "button",
+          "aria-current": currentPage === page ? "page" : undefined,
+          "aria-label": `Go to page ${page}`,
+          disabled,
+          ...props,
+          onClick: handlerAll(props.onClick, () => onChange(page)),
+        }
+      } else {
+        return { ...props, "data-ellipsis": "" }
+      }
+    },
+    [currentPage, onChange, disabled],
+  )
+
+  const getStartTriggerProps: PropGetter<"button"> = useCallback(
+    (props = {}) => ({
+      type: "button",
+      "aria-label": "Go to first page",
+      disabled: disabled || currentPage === 1,
+      ...props,
+      onClick: handlerAll(props.onClick, onChangeStart),
+    }),
+    [onChangeStart, disabled, currentPage],
+  )
+
+  const getEndTriggerProps: PropGetter<"button"> = useCallback(
+    (props = {}) => ({
+      type: "button",
+      "aria-label": "Go to last page",
+      disabled: disabled || currentPage === total,
+      ...props,
+      onClick: handlerAll(props.onClick, onChangeEnd),
+    }),
+    [onChangeEnd, disabled, currentPage, total],
+  )
+
+  const getPrevTriggerProps: PropGetter<"button"> = useCallback(
+    (props = {}) => ({
+      type: "button",
+      "aria-label": "Go to previous page",
+      disabled: disabled || currentPage === 1,
+      ...props,
+      onClick: handlerAll(props.onClick, onChangePrev),
+    }),
+    [onChangePrev, disabled, currentPage],
+  )
+
+  const getNextTriggerProps: PropGetter<"button"> = useCallback(
+    (props = {}) => ({
+      type: "button",
+      "aria-label": "Go to next page",
+      disabled: disabled || currentPage === total,
+      ...props,
+      onClick: handlerAll(props.onClick, onChangeNext),
+    }),
+    [onChangeNext, disabled, currentPage, total],
   )
 
   return {
@@ -125,11 +207,17 @@ export const usePagination = ({
     disabled,
     range,
     total,
+    getEndTriggerProps,
+    getItemProps,
+    getNextTriggerProps,
+    getPrevTriggerProps,
+    getRootProps,
+    getStartTriggerProps,
     onChange,
-    onFirst,
-    onLast,
-    onNext,
-    onPrev,
+    onChangeEnd,
+    onChangeNext,
+    onChangePrev,
+    onChangeStart,
   }
 }
 

@@ -1,190 +1,145 @@
 import { defineComponentSlotStyle } from "../../core"
+import { iconButtonStyle } from "../button"
 
 export const paginationStyle = defineComponentSlotStyle({
   base: {
-    ellipsis: { pointerEvents: "none" },
-    first: {},
-    inner: {
-      alignItems: "center",
-      display: "flex",
-    },
     item: {
+      fontWeight: "normal",
+      _current: {
+        cursor: "default",
+        pointerEvents: "none",
+      },
+    },
+    root: {
+      "& > [data-ellipsis]": {
+        pointerEvents: "none",
+      },
+    },
+    text: {
       alignItems: "center",
-      color: ["blackAlpha.600", "whiteAlpha.700"],
-      cursor: "pointer",
       display: "flex",
       justifyContent: "center",
-      overflow: "hidden",
-      position: "relative",
-      px: 1,
-      transitionDuration: "slower",
-      transitionProperty: "common",
-      userSelect: "none",
-      _selected: { cursor: "default", pointerEvents: "none" },
-      _hover: {
-        bg: ["blackAlpha.50", "whiteAlpha.50"],
-        _disabled: {
-          bg: ["initial", "initial"],
-        },
-      },
-      _active: {
-        bg: ["blackAlpha.100", "whiteAlpha.100"],
-      },
-      _focus: {
-        outline: "none",
-      },
-      _focusVisible: {
-        boxShadow: "outline",
-      },
-      _disabled: {
-        boxShadow: "none",
-        cursor: "not-allowed",
-        opacity: 0.4,
-      },
-    },
-    last: {},
-    next: {},
-    number: {},
-    prev: {},
-    root: {
-      _disabled: {
-        cursor: "not-allowed",
-      },
     },
   },
-  sizes: {
-    xs: {
-      inner: {
-        gap: "xs",
-      },
-      item: {
-        fontSize: "xs",
-        minH: 6,
-        minW: 6,
-        rounded: "sm",
-      },
-    },
-    sm: {
-      inner: {
-        gap: "xs",
-      },
-      item: {
-        fontSize: "sm",
-        minH: 8,
-        minW: 8,
-        rounded: "md",
-      },
-    },
-    md: {
-      inner: {
-        gap: "sm",
-      },
-      item: {
-        fontSize: "md",
-        minH: 10,
-        minW: 10,
-        rounded: "md",
-      },
-    },
-    lg: {
-      inner: {
-        gap: "sm",
-      },
-      item: {
-        fontSize: "lg",
-        minH: 12,
-        minW: 12,
-        rounded: "md",
-      },
-    },
-    xl: {
-      inner: {
-        gap: "md",
-      },
-      item: {
-        fontSize: "xl",
-        minH: 14,
-        minW: 14,
-        rounded: "lg",
-      },
-    },
-  },
+
   variants: {
-    ghost: {
-      item: {
-        _selected: {
-          bg: "transparent",
-          color: "colorScheme.solid",
-          fontWeight: "semibold",
-        },
-        _hover: {
-          bg: "colorScheme.ghost",
-        },
-      },
-    },
     outline: {
-      ellipsis: {
-        border: "0",
-      },
       item: {
-        border: "1px solid",
-        borderColor: "border",
-        _selected: {
-          bg: "transparent",
-          borderColor: "colorScheme.outline",
-          color: "colorScheme.outline",
+        ...iconButtonStyle.variants?.ghost,
+        _current: {
+          ...iconButtonStyle.variants?.outline,
         },
       },
     },
     solid: {
-      ellipsis: {
-        border: "0",
-      },
       item: {
-        border: "1px solid",
-        borderColor: "border",
-        _selected: {
-          bg: "colorScheme.solid",
-          borderColor: "bg",
-          color: "fg.contrast",
+        ...iconButtonStyle.variants?.ghost,
+        _current: {
+          ...iconButtonStyle.variants?.solid,
         },
       },
     },
     subtle: {
       item: {
-        _selected: {
-          bg: "colorScheme.subtle",
-          color: "colorScheme.solid",
+        ...iconButtonStyle.variants?.ghost,
+        _current: {
+          ...iconButtonStyle.variants?.subtle,
         },
       },
     },
     surface: {
-      ellipsis: {
-        border: "0",
-      },
       item: {
-        border: "1px solid",
-        borderColor: "border",
-        _selected: {
-          bg: "colorScheme.subtle",
-          color: "colorScheme.solid",
+        ...iconButtonStyle.variants?.ghost,
+        _current: {
+          ...iconButtonStyle.variants?.surface,
         },
       },
     },
-    unstyled: {
-      inner: { gap: 0 },
+  },
+
+  sizes: {
+    xs: {
       item: {
-        bg: "none",
-        color: "inherit",
-        minH: "auto",
-        minW: "auto",
-        _ripple: { display: "none" },
+        ...iconButtonStyle.sizes?.xs,
+        fontSize: "{font-size}",
+        _icon: { fontSize: iconButtonStyle.sizes?.xs.fontSize },
+      },
+      root: {
+        "--font-size": "fontSizes.sm",
+      },
+      text: {
+        fontSize: "{font-size}",
+      },
+    },
+    sm: {
+      item: {
+        ...iconButtonStyle.sizes?.sm,
+        fontSize: "{font-size}",
+        _icon: { fontSize: iconButtonStyle.sizes?.sm.fontSize },
+      },
+      root: {
+        "--font-size": "fontSizes.md",
+      },
+      text: {
+        fontSize: "{font-size}",
+      },
+    },
+    md: {
+      item: {
+        ...iconButtonStyle.sizes?.md,
+        fontSize: "{font-size}",
+        _icon: { fontSize: iconButtonStyle.sizes?.md.fontSize },
+      },
+      root: {
+        "--font-size": "fontSizes.lg",
+      },
+      text: {
+        fontSize: "{font-size}",
+      },
+    },
+    lg: {
+      item: {
+        ...iconButtonStyle.sizes?.lg,
+        fontSize: "{font-size}",
+        _icon: { fontSize: iconButtonStyle.sizes?.lg.fontSize },
+      },
+      root: {
+        "--font-size": "fontSizes.xl",
+      },
+      text: {
+        fontSize: "{font-size}",
+      },
+    },
+    xl: {
+      item: {
+        ...iconButtonStyle.sizes?.xl,
+        fontSize: "{font-size}",
+        _icon: { fontSize: iconButtonStyle.sizes?.xl.fontSize },
+      },
+      root: {
+        "--font-size": "fontSizes.2xl",
+      },
+      text: {
+        fontSize: "{font-size}",
+      },
+    },
+    "2xl": {
+      item: {
+        ...iconButtonStyle.sizes?.["2xl"],
+        fontSize: "{font-size}",
+        _icon: { fontSize: iconButtonStyle.sizes?.["2xl"].fontSize },
+      },
+      root: {
+        "--font-size": "fontSizes.2xl",
+      },
+      text: {
+        fontSize: "{font-size}",
       },
     },
   },
 
   defaultProps: {
-    size: "sm",
+    size: "md",
     variant: "solid",
   },
 })

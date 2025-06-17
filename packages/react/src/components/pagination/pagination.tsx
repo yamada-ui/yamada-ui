@@ -5,13 +5,17 @@ import type {
   HTMLStyledProps,
   StyleValue,
   ThemeProps,
+  WithoutThemeProps,
 } from "../../core"
+import type { ReactNodeOrFunction } from "../../utils"
+import type { ButtonGroupProps, IconButtonProps } from "../button"
 import type { PaginationStyle } from "./pagination.style"
-import type { UsePaginationProps, UsePaginationReturn } from "./use-pagination"
-import { useMemo } from "react"
+import type { Page, UsePaginationProps } from "./use-pagination"
+import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
-import { dataAttr, handlerAll } from "../../utils"
+import { isNumber, runIfFn } from "../../utils"
+import { ButtonGroup, IconButton } from "../button"
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -19,23 +23,31 @@ import {
   ChevronsRightIcon,
   EllipsisIcon,
 } from "../icon"
-import { Ripple, useRipple } from "../ripple"
 import { paginationStyle } from "./pagination.style"
-import { usePagination } from "./use-pagination"
-import { usePaginationItem } from "./use-pagination-item"
+import {
+  PaginationContext,
+  usePagination,
+  usePaginationContext,
+} from "./use-pagination"
 
-interface PaginationComponentContext
-  extends Pick<
-      UsePaginationReturn,
-      "currentPage" | "onChange" | "onFirst" | "onLast" | "onNext" | "onPrev"
+export interface PaginationRootProps
+  extends WithoutThemeProps<
+      Omit<ButtonGroupProps, "onChange" | "page">,
+      PaginationStyle
     >,
-    Required<Pick<PaginationOptions, "component">> {}
-
-interface PaginationOptions {
+    ThemeProps<PaginationStyle>,
+    Omit<UsePaginationProps, "boundaries" | "siblings"> {
   /**
-   * The pagination button component to use.
+   * Number of elements visible on the left/right edges.
+   *
+   * @default 1
    */
-  component?: FC<PaginationItemProps>
+  boundaries?: StyleValue<number>
+  /** Number of siblings displayed on the left/right side of selected page.
+   *
+   * @default 1
+   */
+  siblings?: StyleValue<number>
   /**
    * If `true`, display the control buttons.
    *
@@ -51,273 +63,343 @@ interface PaginationOptions {
   /**
    * Props for next of the control button element.
    */
-  controlNextProps?: PaginationControlProps
+  controlNextProps?: PaginationItemProps
   /**
    * Props for previous of the control button element.
    */
-  controlPrevProps?: PaginationControlProps
+  controlPrevProps?: PaginationItemProps
   /**
    * Props for control button element.
    */
-  controlProps?: PaginationControlProps
+  controlProps?: PaginationItemProps
   /**
-   * Props for first of the edge button element.
+   * Props for end of the edge button element.
    */
-  edgeFirstProps?: PaginationControlProps
-  /**
-   * Props for last of the edge button element.
-   */
-  edgeLastProps?: PaginationControlProps
+  edgeEndProps?: PaginationItemProps
   /**
    * Props for edge button element.
    */
-  edgeProps?: PaginationControlProps
+  edgeProps?: PaginationItemProps
   /**
-   * Props for button element.
+   * Props for start of the edge button element.
    */
-  itemProps?: PaginationControlProps
+  edgeStartProps?: PaginationItemProps
   /**
-   * Props for root element.
+   * Props for ellipsis of the element.
    */
-  rootProps?: HTMLProps<"nav">
+  ellipsisProps?: PaginationItemProps
+  /**
+   * Props for item of the button element.
+   */
+  itemProps?: PaginationItemProps
 }
 
-export interface PaginationRootProps
-  extends Omit<HTMLStyledProps<"ul">, "children" | "onChange" | "page">,
-    ThemeProps<PaginationStyle>,
-    UsePaginationProps,
-    PaginationOptions {}
-
 export const {
-  ComponentContext: PaginationContext,
+  component,
   PropsContext: PaginationPropsContext,
-  useComponentContext: usePaginationContext,
   usePropsContext: usePaginationPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<
-  PaginationRootProps,
-  PaginationStyle,
-  PaginationComponentContext
->("pagination", paginationStyle)
+} = createSlotComponent<PaginationRootProps, PaginationStyle>(
+  "pagination",
+  paginationStyle,
+)
 
-export const PaginationRoot = withProvider<"nav", PaginationRootProps>(
+/**
+ * `Pagination` is a component for managing the pagination and navigation of content.
+ *
+ * @see https://yamada-ui.com/components/pagination
+ */
+export const PaginationRoot = withProvider(
   ({
-    boundaries,
-    component = PaginationItem,
-    defaultPage,
-    disabled,
-    page,
-    siblings,
-    total,
-    withControls: _withControls = true,
-    withEdges: _withEdges = false,
-    rootProps,
-    onChange: onChangeProp,
+    size,
+    variant,
+    boundaries: boundariesProp,
+    children,
+    siblings: siblingsProp,
+    withControls: withControlsProp = true,
+    withEdges: withEdgesProp = false,
+    controlNextProps,
+    controlPrevProps,
+    controlProps,
+    edgeEndProps,
+    edgeProps,
+    edgeStartProps,
+    ellipsisProps,
+    itemProps,
     ...rest
   }) => {
-    const withControls = useValue(_withControls)
-    const withEdges = useValue(_withEdges)
-    const { currentPage, range, onChange, onFirst, onLast, onNext, onPrev } =
-      usePagination({
-        boundaries,
-        defaultPage,
-        disabled,
-        page,
-        siblings,
-        total,
-        onChange: onChangeProp,
-      })
-
-    const context = useMemo<PaginationComponentContext>(
+    const boundaries = useValue(boundariesProp)
+    const siblings = useValue(siblingsProp)
+    const withControls = useValue(withControlsProp)
+    const withEdges = useValue(withEdgesProp)
+    const {
+      currentPage,
+      disabled,
+      range,
+      total,
+      getEndTriggerProps,
+      getItemProps,
+      getNextTriggerProps,
+      getPrevTriggerProps,
+      getRootProps,
+      getStartTriggerProps,
+      onChange,
+      onChangeEnd,
+      onChangeNext,
+      onChangePrev,
+      onChangeStart,
+    } = usePagination({ ...rest, boundaries, siblings })
+    const context = useMemo(
       () => ({
-        component,
         currentPage,
+        disabled,
+        range,
+        total,
+        getEndTriggerProps,
+        getItemProps,
+        getNextTriggerProps,
+        getPrevTriggerProps,
+        getStartTriggerProps,
         onChange,
-        onFirst,
-        onLast,
-        onNext,
-        onPrev,
+        onChangeEnd,
+        onChangeNext,
+        onChangePrev,
+        onChangeStart,
       }),
-      [component, currentPage, onNext, onPrev, onFirst, onLast, onChange],
+      [
+        currentPage,
+        disabled,
+        range,
+        total,
+        getEndTriggerProps,
+        getItemProps,
+        getNextTriggerProps,
+        getPrevTriggerProps,
+        getStartTriggerProps,
+        onChange,
+        onChangeEnd,
+        onChangeNext,
+        onChangePrev,
+        onChangeStart,
+      ],
     )
+    const computedChildren = useMemo(() => {
+      if (children) {
+        return children
+      } else {
+        const children: ReactNode[] = []
+
+        if (withEdges)
+          children.push(
+            <PaginationStartTrigger>
+              <PaginationItem
+                icon={<ChevronsLeftIcon />}
+                {...edgeProps}
+                {...edgeStartProps}
+              />
+            </PaginationStartTrigger>,
+          )
+        if (withControls)
+          children.push(
+            <PaginationPrevTrigger>
+              <PaginationItem
+                icon={<ChevronLeftIcon />}
+                {...controlProps}
+                {...controlPrevProps}
+              />
+            </PaginationPrevTrigger>,
+          )
+
+        children.push(
+          <PaginationItems
+            render={(page) =>
+              isNumber(page) ? (
+                <PaginationItem {...itemProps}>
+                  <styled.span role="presentation">{page}</styled.span>
+                </PaginationItem>
+              ) : (
+                <PaginationItem
+                  as="span"
+                  icon={<EllipsisIcon />}
+                  {...ellipsisProps}
+                />
+              )
+            }
+          />,
+        )
+
+        if (withControls)
+          children.push(
+            <PaginationNextTrigger>
+              <PaginationItem
+                icon={<ChevronRightIcon />}
+                {...controlProps}
+                {...controlNextProps}
+              />
+            </PaginationNextTrigger>,
+          )
+        if (withEdges)
+          children.push(
+            <PaginationEndTrigger>
+              <PaginationItem
+                icon={<ChevronsRightIcon />}
+                {...edgeProps}
+                {...edgeEndProps}
+              />
+            </PaginationEndTrigger>,
+          )
+
+        return children
+      }
+    }, [
+      children,
+      withEdges,
+      withControls,
+      itemProps,
+      ellipsisProps,
+      edgeProps,
+      edgeStartProps,
+      edgeEndProps,
+      controlProps,
+      controlPrevProps,
+      controlNextProps,
+    ])
 
     return (
       <PaginationContext value={context}>
-        <styled.nav data-disabled={dataAttr(disabled)} {...rootProps}>
-          <PaginationInner data-disabled={dataAttr(disabled)} {...rest}>
-            {withEdges ? (
-              <styled.li>
-                <PaginationItemFirst />
-              </styled.li>
-            ) : null}
-
-            {withControls ? (
-              <styled.li>
-                <PaginationItemPrev />
-              </styled.li>
-            ) : null}
-
-            {range.map((page, key) => (
-              <styled.li key={key}>
-                {page === "ellipsis" ? (
-                  <PaginationEllipsis />
-                ) : (
-                  <PaginationItemNumber page={page} />
-                )}
-              </styled.li>
-            ))}
-
-            {withControls ? (
-              <styled.li>
-                <PaginationItemNext />
-              </styled.li>
-            ) : null}
-
-            {withEdges ? (
-              <styled.li>
-                <PaginationItemLast />
-              </styled.li>
-            ) : null}
-          </PaginationInner>
-        </styled.nav>
+        <ButtonGroup as="nav" size={size} variant={variant} {...getRootProps()}>
+          {computedChildren}
+        </ButtonGroup>
       </PaginationContext>
     )
   },
   "root",
+  { transferProps: ["variant", "size"] },
 )()
 
-const PaginationInner = withContext<"ul", HTMLStyledProps<"ul">>(
-  "ul",
-  "inner",
-)()
-
-interface PaginationItemOptions {
-  /**
-   * The type of the page or item assigned to the pagination item.
-   */
-  page: "ellipsis" | "first" | "last" | "next" | "prev" | number
-  /**
-   * If `true`, the pagination item will be activated.
-   *
-   * @default false
-   */
-  active?: boolean
-  /**
-   * If `true`, the pagination item will be disabled.
-   *
-   * @default false
-   */
-  disabled?: boolean
-  /**
-   * If `true`, disable ripple effects when pressing a element.
-   *
-   * @default false
-   */
-  disableRipple?: boolean
+export interface PaginationItemsProps {
+  children?: (page: Page) => ReactNode
+  render?: (page: Page) => ReactNode
 }
 
-export interface PaginationItemProps
-  extends Omit<HTMLProps<"button">, "page">,
-    PaginationItemOptions {}
+export const PaginationItems: FC<PaginationItemsProps> = ({
+  children,
+  render,
+}) => {
+  const { range, getItemProps } = usePaginationContext()
+
+  return useMemo(
+    () =>
+      range.map((page, index) => {
+        const component = children?.(page) ?? render?.(page)
+
+        if (isValidElement<HTMLProps<"button">>(component)) {
+          return cloneElement(component, {
+            ...getItemProps({ key: index, page, ...component.props }),
+          })
+        } else {
+          return component
+        }
+      }),
+    [children, getItemProps, range, render],
+  )
+}
+
+export interface PaginationItemProps extends IconButtonProps {}
 
 export const PaginationItem = withContext<"button", PaginationItemProps>(
-  ({
-    active,
-    page,
-    children = iconMap[page] ?? page,
-    disabled,
-    disableRipple,
-    onClick,
-    ...rest
-  }) => {
-    const ellipsis = page === "ellipsis"
-    const rippleProps = useRipple({
-      ...rest,
-      disabled: disableRipple || disabled || ellipsis,
-    })
-
-    const Component = styled[ellipsis ? "span" : "button"]
-
-    return (
-      <Component
-        {...(!ellipsis
-          ? {
-              type: "button",
-              "data-disabled": dataAttr(disabled),
-              "data-selected": dataAttr(active),
-              disabled,
-            }
-          : {})}
-        tabIndex={!ellipsis ? 0 : -1}
-        {...rest}
-        onClick={handlerAll(rippleProps.onClick, onClick)}
-      >
-        {children}
-        <Ripple {...rippleProps} />
-      </Component>
-    )
-  },
+  IconButton,
   "item",
 )()
 
-const iconMap: {
-  [key in "ellipsis" | "first" | "last" | "next" | "prev" | number]: ReactNode
-} = {
-  ellipsis: <EllipsisIcon />,
-  first: <ChevronsLeftIcon />,
-  last: <ChevronsRightIcon />,
-  next: <ChevronRightIcon />,
-  prev: <ChevronLeftIcon />,
+export interface PaginationTextProps
+  extends Omit<HTMLStyledProps<"span">, "children"> {
+  children?: ReactNodeOrFunction<{ page: number; total: number }>
+  /**
+   * The format of the text.
+   *
+   * @default 'compact'
+   */
+  format?: "compact" | "short"
 }
 
-export interface PaginationControlProps
-  extends Omit<PaginationItemProps, "page"> {}
+export const PaginationText = withContext<"span", PaginationTextProps>(
+  "span",
+  "text",
+)(undefined, ({ children, format = "compact", ...rest }) => {
+  const { currentPage, total } = usePaginationContext()
+  const computedChildren = useMemo(() => {
+    if (children) {
+      return runIfFn(children, { page: currentPage, total })
+    } else if (format === "short") {
+      return `${currentPage} / ${total}`
+    } else {
+      return `${currentPage} of ${total}`
+    }
+  }, [children, currentPage, format, total])
 
-const PaginationItemPrev = withContext<"button", PaginationControlProps>(
-  (props) => {
-    const { Component, getItemPrevProps } = usePaginationItem()
-    return <Component {...getItemPrevProps(props)} page="prev" />
-  },
-  "prev",
-)()
+  children ??= ({ page, total }) => `${page} / ${total}`
 
-const PaginationItemNext = withContext<"button", PaginationControlProps>(
-  (props) => {
-    const { Component, getItemNextProps } = usePaginationItem()
-    return <Component {...getItemNextProps(props)} page="next" />
-  },
-  "next",
-)()
+  return {
+    ...rest,
+    children: computedChildren,
+  }
+})
 
-const PaginationItemFirst = withContext<"button", PaginationControlProps>(
-  (props) => {
-    const { Component, getItemFirstProps } = usePaginationItem()
-    return <Component {...getItemFirstProps(props)} page="first" />
-  },
-  "first",
-)()
+export interface PaginationStartTriggerProps
+  extends HTMLStyledProps<"button"> {}
 
-const PaginationItemLast = withContext<"button", PaginationControlProps>(
+export const PaginationStartTrigger = withContext<
+  "button",
+  PaginationStartTriggerProps
+>("button", { name: "startTrigger", slot: ["trigger", "start"] })(
+  undefined,
   (props) => {
-    const { Component, getItemLastProps } = usePaginationItem()
-    return <Component {...getItemLastProps(props)} page="last" />
-  },
-  "last",
-)()
+    const { getStartTriggerProps } = usePaginationContext()
 
-const PaginationItemNumber = withContext<"button", PaginationItemProps>(
-  (props) => {
-    const { Component, getItemNumberProps } = usePaginationItem()
-    return <Component {...getItemNumberProps(props)} />
+    return { asChild: true, ...getStartTriggerProps(props) }
   },
-  "number",
-)()
+)
 
-const PaginationEllipsis = withContext<"button", PaginationControlProps>(
+export interface PaginationEndTriggerProps extends HTMLStyledProps<"button"> {}
+
+export const PaginationEndTrigger = withContext<
+  "button",
+  PaginationEndTriggerProps
+>("button", { name: "endTrigger", slot: ["trigger", "end"] })(
+  undefined,
   (props) => {
-    const { Component, getItemEllipsisProps } = usePaginationItem()
-    return <Component {...getItemEllipsisProps(props)} page="ellipsis" />
+    const { getEndTriggerProps } = usePaginationContext()
+
+    return { asChild: true, ...getEndTriggerProps(props) }
   },
-  "ellipsis",
-)()
+)
+
+export interface PaginationPrevTriggerProps extends HTMLStyledProps<"button"> {}
+
+export const PaginationPrevTrigger = withContext<
+  "button",
+  PaginationPrevTriggerProps
+>("button", { name: "prevTrigger", slot: ["trigger", "prev"] })(
+  undefined,
+  (props) => {
+    const { getPrevTriggerProps } = usePaginationContext()
+
+    return { asChild: true, ...getPrevTriggerProps(props) }
+  },
+)
+
+export interface PaginationNextTriggerProps extends HTMLStyledProps<"button"> {}
+
+export const PaginationNextTrigger = withContext<
+  "button",
+  PaginationNextTriggerProps
+>("button", { name: "nextTrigger", slot: ["trigger", "next"] })(
+  undefined,
+  (props) => {
+    const { getNextTriggerProps } = usePaginationContext()
+
+    return { asChild: true, ...getNextTriggerProps(props) }
+  },
+)

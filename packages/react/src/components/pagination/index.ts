@@ -1,15 +1,25 @@
 export * as Pagination from "./namespace"
 export type {
-  PaginationControlProps,
+  PaginationEndTriggerProps,
   PaginationItemProps,
+  PaginationItemsProps,
+  PaginationNextTriggerProps,
+  PaginationPrevTriggerProps,
   PaginationRootProps,
+  PaginationStartTriggerProps,
+  PaginationTextProps,
 } from "./pagination"
 export {
+  PaginationEndTrigger,
   PaginationItem,
+  PaginationItems,
+  PaginationNextTrigger,
+  PaginationPrevTrigger,
+  PaginationPropsContext,
   PaginationRoot,
-  usePaginationContext,
+  PaginationStartTrigger,
+  PaginationText,
   usePaginationPropsContext,
 } from "./pagination"
 export * from "./pagination.style"
-export { usePagination } from "./use-pagination"
-export type { UsePaginationProps, UsePaginationReturn } from "./use-pagination"
+export * from "./use-pagination"

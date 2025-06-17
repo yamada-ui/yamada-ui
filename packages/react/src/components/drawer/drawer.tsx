@@ -1,5 +1,11 @@
 import type { FC, PropsWithChildren, ReactNode } from "react"
-import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  HTMLProps,
+  HTMLStyledProps,
+  SimplePlacement,
+  StyleValue,
+  ThemeProps,
+} from "../../core"
 import type { ButtonProps } from "../button"
 import type { CloseButtonProps } from "../button"
 import type { FocusLockProps } from "../focus-lock"
@@ -12,6 +18,7 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, styled } from "../../core"
+import { useValue } from "../../hooks/use-value"
 import {
   cast,
   findChildren,
@@ -37,7 +44,7 @@ interface ComponentContext
 
 export interface DrawerRootProps
   extends ThemeProps<DrawerStyle>,
-    Omit<UseDrawerProps, "title">,
+    Omit<UseDrawerProps, "placement" | "title">,
     Pick<
       FocusLockProps,
       | "autoFocus"
@@ -63,6 +70,12 @@ export interface DrawerRootProps
    * The animation duration.
    */
   duration?: MotionTransitionProps["duration"]
+  /**
+   * The placement of the drawer.
+   *
+   * @default 'inline-end'
+   */
+  placement?: StyleValue<SimplePlacement>
   /**
    * The modal trigger to use.
    */
@@ -133,7 +146,7 @@ export const DrawerRoot = withProvider(
     initialFocusRef,
     lockFocusAcrossFrames = true,
     middle,
-    placement,
+    placement: placementProp,
     restoreFocus,
     success,
     title,
@@ -148,6 +161,7 @@ export const DrawerRoot = withProvider(
     onSuccess,
     ...props
   }) => {
+    const placement = useValue(placementProp)
     const validChildren = getValidChildren(children)
     const [openTrigger, ...omittedChildren] = findChildren(
       validChildren,

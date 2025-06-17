@@ -1,13 +1,7 @@
-import type {
-  HTMLProps,
-  PropGetter,
-  SimplePlacement,
-  StyleValue,
-} from "../../core"
+import type { HTMLProps, PropGetter, SimplePlacement } from "../../core"
 import type { UseModalProps } from "../modal"
 import type { HTMLMotionProps } from "../motion"
 import { useCallback, useMemo } from "react"
-import { useValue } from "../../hooks/use-value"
 import { cast, handlerAll } from "../../utils"
 import { useModal } from "../modal"
 
@@ -49,7 +43,7 @@ export interface UseDrawerProps extends UseModalProps {
    *
    * @default 'inline-end'
    */
-  placement?: StyleValue<SimplePlacement>
+  placement?: SimplePlacement
 }
 
 export const useDrawer = ({
@@ -60,11 +54,10 @@ export const useDrawer = ({
   dragElastic = 0.1,
   dragOffset = 80,
   dragVelocity = 100,
-  placement: placementProp = "inline-end",
+  placement = "inline-end",
   onEsc,
   ...rest
 }: UseDrawerProps = {}) => {
-  const placement = useValue(placementProp)
   const {
     getContentProps: getModalContentProps,
     onClose,

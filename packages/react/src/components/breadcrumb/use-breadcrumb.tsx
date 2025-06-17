@@ -1,8 +1,7 @@
 import type { ReactElement, ReactNode } from "react"
-import type { HTMLProps, PropGetter, StyleValue } from "../../core"
+import type { HTMLProps, PropGetter } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import { cloneElement, useCallback, useMemo } from "react"
-import { useValue } from "../../hooks/use-value"
 import { useI18n } from "../../providers/i18n-provider"
 import { getValidChildren, runIfFn } from "../../utils"
 
@@ -18,8 +17,10 @@ export interface UseBreadcrumbProps extends HTMLProps<"nav"> {
   ellipsis?: ReactNodeOrFunction<{ items: BreadcrumbItem[] }>
   /**
    * Number of elements visible on the end(right) edges.
+   *
+   * @default 0
    */
-  endBoundaries?: StyleValue<number>
+  endBoundaries?: number
   /**
    * If provided, generate breadcrumb items based on items.
    */
@@ -30,22 +31,22 @@ export interface UseBreadcrumbProps extends HTMLProps<"nav"> {
   link?: ReactElement<any>
   /**
    * Number of elements visible on the start(left) edges.
+   *
+   * @default 0
    */
-  startBoundaries?: StyleValue<number>
+  startBoundaries?: number
 }
 
 export const useBreadcrumb = ({
   children,
   ellipsis,
-  endBoundaries: endBoundariesProp,
+  endBoundaries = 0,
   items = [],
   link,
-  startBoundaries: startBoundariesProp,
+  startBoundaries = 0,
   ...rest
 }: UseBreadcrumbProps) => {
   const validChildren = getValidChildren(children)
-  const endBoundaries = useValue(endBoundariesProp) ?? 0
-  const startBoundaries = useValue(startBoundariesProp) ?? 0
   const length = validChildren.length || items.length
   const { t } = useI18n("breadcrumb")
 

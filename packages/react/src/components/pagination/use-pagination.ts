@@ -1,21 +1,7 @@
-import type { CSSObject, StyleValue } from "../../core"
+import type { StyleValue } from "../../core"
 import { useCallback, useMemo } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useValue } from "../../hooks/use-value"
-import { createContext } from "../../utils"
-
-interface PaginationContext {
-  [key: string]: CSSObject | undefined
-}
-
-export const [PaginationProvider, usePaginationContext] =
-  createContext<PaginationContext>({
-    name: "PaginationContext",
-    errorMessage: `usePaginationContext returned is 'undefined'. Seems you forgot to wrap the components in "<Pagination />"`,
-  })
-
-export const computedRange = (start: number, end: number) =>
-  Array.from({ length: end - start + 1 }, (_, index) => index + start)
 
 export interface UsePaginationProps {
   /**
@@ -148,3 +134,6 @@ export const usePagination = ({
 }
 
 export type UsePaginationReturn = ReturnType<typeof usePagination>
+
+const computedRange = (start: number, end: number) =>
+  Array.from({ length: end - start + 1 }, (_, index) => index + start)

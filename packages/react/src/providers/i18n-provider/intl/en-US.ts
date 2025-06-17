@@ -17,6 +17,13 @@ export default {
     Decrease: "Decrease",
     Increase: "Increase",
   },
+  pagination: {
+    "Go to first page": "Go to first page",
+    "Go to last page": "Go to last page",
+    "Go to next page": "Go to next page",
+    "Go to page {number}": "Go to page {number}",
+    "Go to previous page": "Go to previous page",
+  },
   passwordInput: {
     "Password strength meter": "Password strength meter",
     "Toggle password visibility": "Toggle password visibility",

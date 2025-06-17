@@ -1,18 +1,16 @@
 export {
-  TabsContext as Context,
+  TabsList as List,
+  TabsPanel as Panel,
+  TabsPanels as Panels,
   TabsPropsContext as PropsContext,
   TabsRoot as Root,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  useTabsContext as useContext,
+  TabsTab as Tab,
   useTabsPropsContext as usePropsContext,
 } from "./tabs"
 export type {
+  TabsListProps as ListProps,
+  TabsPanelProps as PanelProps,
+  TabsPanelsProps as PanelsProps,
   TabsRootProps as RootProps,
-  TabListProps,
-  TabPanelProps,
-  TabPanelsProps,
-  TabProps,
+  TabsTabProps as TabProps,
 } from "./tabs"

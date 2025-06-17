@@ -2,222 +2,27 @@ import { defineComponentSlotStyle } from "../../core"
 
 export const tabsStyle = defineComponentSlotStyle({
   base: {
+    list: {
+      display: "flex",
+    },
+    panel: {
+      flex: "1",
+    },
     root: {
       display: "flex",
-      w: "100%",
+      w: "full",
     },
     tab: {
       alignItems: "center",
+      cursor: "pointer",
       display: "flex",
+      fontWeight: "medium",
+      gap: "2",
       justifyContent: "center",
-      outline: "0",
-      overflow: "hidden",
-      position: "relative",
       transitionDuration: "moderate",
       transitionProperty: "common",
-      whiteSpace: "nowrap",
-      _selected: {
-        _hover: {
-          opacity: 1,
-        },
-      },
-      _hover: { opacity: 0.7 },
-      _focusVisible: {
-        boxShadow: "outline",
-        zIndex: "yamcha",
-      },
       _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
-      },
-    },
-    tabList: {
-      display: "flex",
-    },
-    tabPanel: {
-      p: "md",
-    },
-    tabPanels: {
-      w: "100%",
-    },
-  },
-
-  variants: {
-    line: {
-      tab: {
-        borderColor: "transparent",
-        _horizontal: {
-          borderBottomStyle: "solid",
-          borderBottomWidth: "1px",
-          mb: "-1px",
-        },
-        _ripple: { display: "none" },
-        _selected: {
-          borderColor: "currentColor",
-          color: "colorScheme.solid",
-        },
-        _vertical: {
-          borderEndStyle: "solid",
-          borderEndWidth: "1px",
-          me: "-1px",
-        },
-      },
-      tabList: {
-        borderColor: "inherit",
-        _horizontal: { borderBottomWidth: "1px" },
-        _vertical: { borderEndWidth: "1px" },
-      },
-    },
-    rounded: {
-      tab: {
-        borderRadius: "full",
-        vars: [
-          {
-            name: "color",
-            token: "colors",
-            value: "colorScheme.solid",
-          },
-        ],
-        _selected: {
-          boxShadow: "inset 0 0 0px 1px {color}",
-          color: "colorScheme.solid",
-        },
-      },
-      tabList: { gap: "sm" },
-    },
-    "rounded-solid": {
-      tab: {
-        borderRadius: "full",
-        _selected: {
-          bg: "colorScheme.solid",
-          color: "colorScheme.contrast",
-        },
-      },
-      tabList: { gap: "sm" },
-    },
-    "rounded-subtle": {
-      tab: {
-        borderRadius: "full",
-        _selected: {
-          bg: "colorScheme.subtle",
-          color: "colorScheme.fg",
-        },
-      },
-      tabList: { gap: "sm" },
-    },
-    sticky: {
-      tab: {
-        borderColor: "transparent",
-        _horizontal: {
-          borderStyle: "solid",
-          borderWidth: "1px",
-          mb: "-2px",
-          roundedTop: "md",
-        },
-        _ripple: { display: "none" },
-        _selected: {
-          borderColor: "inherit",
-          color: "colorScheme.solid",
-          _horizontal: { borderBottomColor: ["white", "black"] },
-          _vertical: { borderEndColor: ["white", "black"] },
-        },
-        _vertical: {
-          borderStyle: "solid",
-          borderWidth: "1px",
-          me: "-2px",
-          roundedLeft: "md",
-        },
-      },
-      tabList: {
-        borderColor: "inherit",
-        _horizontal: { borderBottomWidth: "1px" },
-        _vertical: { borderEndWidth: "1px" },
-      },
-    },
-    "sticky-solid": {
-      tab: {
-        borderColor: "inherit",
-        _horizontal: {
-          borderStyle: "solid",
-          borderWidth: "1px",
-          mb: "-1px",
-        },
-        _notLast: {
-          _horizontal: { borderEnd: "none" },
-          _vertical: { borderBottom: "none" },
-        },
-        _selected: {
-          bg: "colorScheme.solid",
-          color: "colorScheme.contrast",
-        },
-        _vertical: {
-          borderStyle: "solid",
-          borderWidth: "1px",
-          me: "-1px",
-        },
-      },
-      tabList: {
-        borderColor: "inherit",
-        _horizontal: { borderBottomWidth: "1px" },
-        _vertical: { borderEndWidth: "1px" },
-      },
-    },
-    "sticky-subtle": {
-      tab: {
-        borderColor: "inherit",
-        _horizontal: {
-          borderStyle: "solid",
-          borderWidth: "1px",
-          mb: "-1px",
-        },
-        _notLast: {
-          _horizontal: { borderEnd: "none" },
-          _vertical: { borderBottom: "none" },
-        },
-        _selected: {
-          bg: "colorScheme.subtle",
-          color: "colorScheme.fg",
-        },
-        _vertical: {
-          borderStyle: "solid",
-          borderWidth: "1px",
-          me: "-1px",
-        },
-      },
-      tabList: {
-        borderColor: "inherit",
-        _horizontal: { borderBottomWidth: "1px" },
-        _vertical: { borderEndWidth: "1px" },
-      },
-    },
-    unstyled: {
-      tab: {
-        _ripple: { display: "none" },
-        _hover: { opacity: "inherit" },
-      },
-    },
-  },
-
-  sizes: {
-    sm: {
-      tab: {
-        fontSize: "sm",
-        px: 3,
-        py: 1,
-      },
-    },
-    md: {
-      tab: {
-        fontSize: "md",
-        px: 4,
-        py: 2,
-      },
-    },
-    lg: {
-      tab: {
-        fontSize: "lg",
-        px: 5,
-        py: 3,
+        layerStyle: "disabled",
       },
     },
   },
@@ -230,17 +35,17 @@ export const tabsStyle = defineComponentSlotStyle({
      */
     align: {
       center: {
-        tabList: {
+        list: {
           justifyContent: "center",
         },
       },
       end: {
-        tabList: {
+        list: {
           justifyContent: "flex-end",
         },
       },
       start: {
-        tabList: {
+        list: {
           justifyContent: "flex-start",
         },
       },
@@ -264,16 +69,142 @@ export const tabsStyle = defineComponentSlotStyle({
      */
     orientation: {
       horizontal: {
+        list: { alignItems: "center", flexDirection: "row" },
         root: {
           flexDirection: "column",
         },
-        tabList: { flexDirection: "row" },
       },
       vertical: {
+        list: { alignItems: "stretch", flexDirection: "column" },
         root: {
           flexDirection: "row",
         },
-        tabList: { flexDirection: "column" },
+      },
+    },
+  },
+
+  variants: {
+    line: {
+      list: {
+        _horizontal: {
+          borderBottomWidth: "1px",
+        },
+        _vertical: {
+          borderRightWidth: "1px",
+        },
+      },
+      tab: {
+        color: "fg.muted",
+        focusVisibleRing: "inside",
+        position: "relative",
+        _selected: {
+          color: "fg",
+          _after: {
+            borderColor: "colorScheme.solid",
+            position: "absolute",
+          },
+          _horizontal: {
+            _after: {
+              borderBottomWidth: "1px",
+              bottom: "-1px",
+              w: "full",
+            },
+          },
+          _vertical: {
+            _after: {
+              borderRightWidth: "1px",
+              h: "full",
+              right: "-1px",
+            },
+          },
+        },
+      },
+    },
+    outline: {
+      list: {
+        _horizontal: {
+          borderBottomWidth: "1px",
+        },
+        _vertical: {
+          borderRightWidth: "1px",
+        },
+      },
+      tab: {
+        border: "1px solid transparent",
+        color: "fg.muted",
+        focusVisibleRing: "inside",
+        position: "relative",
+        _horizontal: {
+          mb: "-1px",
+          roundedStart: "l2",
+        },
+        _selected: {
+          bg: "bg",
+          borderColor: "border",
+          color: "fg",
+          _horizontal: {
+            borderBottomColor: "transparent",
+          },
+          _vertical: {
+            borderRightColor: "transparent",
+          },
+        },
+        _vertical: {
+          me: "-1px",
+          roundedLeft: "l2",
+        },
+      },
+    },
+    plain: {
+      tab: {
+        color: "fg.muted",
+        rounded: "l2",
+        _selected: {
+          color: "fg",
+        },
+      },
+    },
+    subtle: {
+      tab: {
+        border: "1px solid transparent",
+        color: "fg.muted",
+        rounded: "l2",
+        _selected: {
+          layerStyle: "subtle",
+        },
+      },
+    },
+  },
+
+  sizes: {
+    sm: {
+      root: {
+        gap: "sm",
+      },
+      tab: {
+        fontSize: "sm",
+        px: "3",
+        py: "1",
+      },
+    },
+    md: {
+      root: {
+        gap: "md",
+      },
+      tab: {
+        fontSize: "md",
+        px: "4",
+        py: "2",
+      },
+    },
+    lg: {
+      root: {
+        gap: "lg",
+      },
+      tab: {
+        fontSize: "lg",
+        px: "5",
+        py: "3",
       },
     },
   },

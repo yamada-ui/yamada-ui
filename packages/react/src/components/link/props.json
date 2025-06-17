@@ -16,12 +16,12 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "variant": {
-      "type": "AnyString | \"underline\" | \"plain\" | [AnyString | \"underline\" | \"plain\" | { [x: string & {}]: AnyString | \"underline\" | \"plain\" | undefined; ... 5 more ...; xl?: AnyString | ... 2 more ... | undefined; }, AnyString | ... 2 more ... | { ...; }] | { ...; }",
+      "type": "\"plain\" | \"underline\" | [\"plain\" | \"underline\" | ({ _peerAccept?: \"plain\" | \"underline\" | [\"plain\" | \"underline\" | (... & { base?: \"plain\" | \"underline\" | [\"plain\" | \"underline\" | (... & ...), \"plain\" | ... 1 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"plain\" | ... 3 more ... | undefined...",
       "description": "The variant of the component.",
       "required": false
     },

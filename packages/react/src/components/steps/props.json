@@ -1,5 +1,5 @@
 {
-  "CancelTrigger": {
+  "CompletedContent": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -21,7 +21,34 @@
       "required": false
     }
   },
-  "Control": {
+  "Content": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "index": {
+      "type": "number",
+      "description": "The index of the step content.",
+      "required": true
+    }
+  },
+  "Description": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -43,7 +70,47 @@
       "required": false
     }
   },
-  "EditTrigger": {
+  "Indicator": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "complete": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "defaultValue": "\"<CheckIcon />\"",
+      "description": "The element for the complete indicator.",
+      "required": false
+    },
+    "current": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "defaultValue": "\"<StepsNumber />\"",
+      "description": "The element for the current indicator.",
+      "required": false
+    },
+    "incomplete": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "defaultValue": "\"<StepsNumber />\"",
+      "description": "The element for the incomplete indicator.",
+      "required": false
+    }
+  },
+  "Item": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -65,7 +132,7 @@
       "required": false
     }
   },
-  "Input": {
+  "List": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -87,7 +154,51 @@
       "required": false
     }
   },
-  "Preview": {
+  "NextTrigger": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Number": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "PrevTrigger": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -130,105 +241,45 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "children": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: EditableElementProps) => ReactNode)",
-      "description": "The editable children to use.",
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
+      "description": "The size of the component.",
       "required": false
     },
-    "defaultValue": {
-      "type": "string",
-      "description": "The initial value of the Editable in both edit & preview mode.",
+    "variant": {
+      "type": "\"solid\" | \"subtle\" | [\"solid\" | \"subtle\" | ({ _peerAccept?: \"solid\" | \"subtle\" | [\"solid\" | \"subtle\" | (... & { base?: \"solid\" | \"subtle\" | [\"solid\" | \"subtle\" | (... & ...), \"solid\" | ... 1 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"solid\" | ... 3 more ... | undefined; }), \"solid\" | .....",
+      "description": "The variant of the component.",
       "required": false
     },
-    "disabled": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the field will be disabled.",
+    "defaultIndex": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The initial index of the active step.",
       "required": false
     },
-    "errorBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | ({ ...; } & { ...; })",
-      "description": "The border color when the input is invalid.",
+    "index": {
+      "type": "number",
+      "description": "The index of the active step.",
       "required": false
     },
-    "focusBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 662 more ... | ({ ...; } & { ...; })",
-      "description": "The border color when the input is focused.",
-      "required": false
-    },
-    "invalid": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the field will be invalid.",
-      "required": false
-    },
-    "onCancel": {
-      "type": "(preValue: string) => void",
-      "description": "Callback invoked when user cancels input with the `Esc` key.\nIt provides the last confirmed value as argument.",
+    "items": {
+      "type": "StepsItem[]",
+      "description": "If provided, generate step components based on steps.",
       "required": false
     },
     "onChange": {
-      "type": "(value: string) => void",
-      "description": "A callback invoked when user changes input.",
+      "type": "(index: number) => void",
+      "description": "The callback function that is called when the active step index is changed.",
       "required": false
     },
-    "onEdit": {
-      "type": "() => void",
-      "description": "A callback invoked once the user enters edit mode.",
-      "required": false
-    },
-    "onSubmit": {
-      "type": "(value: string) => void",
-      "description": "A callback invoked when user confirms value with `enter` key or by blurring input.",
-      "required": false
-    },
-    "placeholder": {
-      "type": "string",
-      "description": "The placeholder text when the value is empty.",
-      "required": false
-    },
-    "previewFocusable": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `true`, the read only view, has a `tabIndex` set to `0`\nso it can receive focus via the keyboard or click.",
-      "required": false
-    },
-    "readOnly": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the field will be readonly.",
-      "required": false
-    },
-    "required": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the field will be required.",
-      "required": false
-    },
-    "selectAllOnFocus": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `true`, the input's text will be highlighted on focus.",
-      "required": false
-    },
-    "startWithEditView": {
-      "type": "boolean",
-      "description": "If `true`, the Editable will start with edit mode by default.",
-      "required": false
-    },
-    "submitOnBlur": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `true`, it'll update the value onBlur and turn off the edit mode.",
-      "required": false
-    },
-    "value": {
-      "type": "string",
-      "description": "The value of the Editable in both edit & preview mode.",
+    "orientation": {
+      "type": "StyleValue<\"horizontal\" | \"vertical\">",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the steps.",
       "required": false
     }
   },
-  "SubmitTrigger": {
+  "Separator": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -250,7 +301,7 @@
       "required": false
     }
   },
-  "Textarea": {
+  "Title": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",

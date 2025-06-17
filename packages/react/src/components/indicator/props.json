@@ -16,17 +16,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | [AnyString | \"lg\" | \"md\" | \"sm\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; base?: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; ... 4 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "AnyString | \"solid\" | \"subtle\" | \"surface\" | [AnyString | \"solid\" | \"subtle\" | \"surface\" | { [x: string & {}]: AnyString | \"solid\" | \"subtle\" | \"surface\" | undefined; ... 5 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "type": "\"solid\" | \"subtle\" | \"surface\" | [\"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"solid\" | \"subtle\" | \"surface\" | [\"solid\" | \"subtle\" | \"surface\" | (... & { base?: \"solid\" | ... 4 more ... | undefined; ... 4 more ...; xl?: \"solid\" | ... 4 more ... | undefined; }), \"solid\" | ... 2 more ... | (... & { ...; })] | { ...",
       "description": "The variant of the component.",
       "required": false
     },
@@ -42,7 +42,7 @@
       "required": false
     },
     "inline": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "type": "StyleValue<boolean>",
       "defaultValue": "false",
       "description": "If `true`, set the indicator as an inline element.",
       "required": false
@@ -58,7 +58,7 @@
       "required": false
     },
     "offset": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | \"7\" | ... 93 more ... | { ...; }",
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | \"7\" | ... 93 more ... | ({ ...; } & { ...; })",
       "description": "Changes position offset.",
       "required": false
     },
@@ -75,7 +75,7 @@
       "required": false
     },
     "placement": {
-      "type": "\"center\" | \"end\" | \"start\" | \"center-center\" | \"center-end\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" | \"start-end\" | \"start-start\" | [\"center\" | ... 11 more ... | { ...; }, \"center\" | ... 11 more ... | { ...; }] | { ...; }",
+      "type": "StyleValue<\n  | \"center\"\n  | \"end\"\n  | \"start\"\n  | \"center-center\"\n  | \"center-end\"\n  | \"center-start\"\n  | \"end-center\"\n  | \"end-end\"\n  | \"end-start\"\n  | \"start-center\"\n  | \"start-end\"\n  | \"start-start\"\n>",
       "defaultValue": "\"start-end\"",
       "description": "The placement of the float.",
       "required": false
@@ -87,7 +87,7 @@
       "required": false
     },
     "withBorder": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "type": "StyleValue<boolean>",
       "defaultValue": "false",
       "description": "If `true`, display the border of the indicator.",
       "required": false

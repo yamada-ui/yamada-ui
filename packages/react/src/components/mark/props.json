@@ -16,12 +16,12 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "variant": {
-      "type": "\"text\" | AnyString | \"solid\" | \"subtle\" | \"accent\" | [\"text\" | AnyString | \"solid\" | \"subtle\" | \"accent\" | { [x: string & {}]: \"text\" | AnyString | \"solid\" | \"subtle\" | \"accent\" | undefined; ... 5 more ...; xl?: \"text\" | ... 4 more ... | undefined; }, \"text\" | ... 4 more ... | { ...; }] | { ...; }",
+      "type": "\"text\" | \"solid\" | \"subtle\" | \"accent\" | [\"text\" | \"solid\" | \"subtle\" | \"accent\" | ({ _peerAccept?: \"text\" | \"solid\" | \"subtle\" | \"accent\" | [\"text\" | \"solid\" | \"subtle\" | \"accent\" | (... & { ...; }), \"text\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: \"text\" | ... 5 mo...",
       "description": "The variant of the component.",
       "required": false
     }

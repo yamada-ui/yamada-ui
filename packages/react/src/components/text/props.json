@@ -16,22 +16,22 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "align": {
-      "type": "TextAlign | [TextAlign | { [x: string & {}]: TextAlign | undefined; base?: TextAlign | undefined; \"2xl\"?: TextAlign | undefined; lg?: TextAlign | undefined; md?: TextAlign | undefined; sm?: TextAlign | undefined; xl?: TextAlign | undefined; }, TextAlign | { ...; }] | { ...; }",
+      "type": "TextAlign | [TextAlign | ({ _peerAccept?: TextAlign | [TextAlign | (... & { base?: TextAlign | [TextAlign | (... & ...), TextAlign | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: TextAlign | ... 2 more ... | undefined; }), TextAlign | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _select...",
       "description": "The CSS `text-align` property.",
       "required": false
     },
     "casing": {
-      "type": "TextTransform | [TextTransform | { [x: string & {}]: TextTransform | undefined; base?: TextTransform | undefined; ... 4 more ...; xl?: TextTransform | undefined; }, TextTransform | { ...; }] | { ...; }",
+      "type": "TextTransform | [TextTransform | ({ _peerAccept?: TextTransform | [TextTransform | (... & { base?: TextTransform | [...] | (... & ...) | undefined; ... 4 more ...; xl?: TextTransform | ... 2 more ... | undefined; }), TextTransform | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: TextTransfo...",
       "description": "The CSS `text-transform` property.",
       "required": false
     },
     "decoration": {
-      "type": "TextDecoration<0 | (string & {})> | [TextDecoration<0 | (string & {})> | { [x: string & {}]: TextDecoration<0 | (string & {})> | undefined; ... 5 more ...; xl?: TextDecoration<...> | undefined; }, TextDecoration<...> | { ...; }] | { ...; }",
+      "type": "TextDecoration<0 | (string & {})> | [TextDecoration<0 | (string & {})> | ({ _peerAccept?: TextDecoration<0 | (string & {})> | [...] | { ...; } | undefined; ... 173 more ...; _selection?: TextDecoration<...> | ... 2 more ... | undefined; } & { ...; }), TextDecoration<...> | ({ ...; } & { ...; })] | ({ ...; } & { ...;...",
       "description": "The CSS `text-decoration` property.",
       "required": false
     }

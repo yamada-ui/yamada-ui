@@ -1,7 +1,7 @@
 {
   "Tooltip": {
     "animationScheme": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"scale\" | \"top\" | \"none\"",
+      "type": "\"scale\" | \"none\" | SimplePlacement",
       "defaultValue": "\"scale\"",
       "description": "The animation of the element.",
       "required": false

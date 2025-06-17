@@ -16,12 +16,12 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "ratio": {
-      "type": "number | [number | { [x: string & {}]: number | undefined; base?: number | undefined; \"2xl\"?: number | undefined; lg?: number | undefined; md?: number | undefined; sm?: number | undefined; xl?: number | undefined; }, number | { ...; }] | { ...; }",
+      "type": "StyleValue<number>",
       "defaultValue": "\"4 / 3\"",
       "description": "The aspect ratio of the Box.",
       "required": false

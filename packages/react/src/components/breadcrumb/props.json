@@ -16,7 +16,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -38,7 +38,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -66,17 +66,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | [AnyString | \"lg\" | \"md\" | \"sm\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; base?: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; ... 4 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "AnyString | \"underline\" | \"plain\" | [AnyString | \"underline\" | \"plain\" | { [x: string & {}]: AnyString | \"underline\" | \"plain\" | undefined; ... 5 more ...; xl?: AnyString | ... 2 more ... | undefined; }, AnyString | ... 2 more ... | { ...; }] | { ...; }",
+      "type": "\"plain\" | \"underline\" | [\"plain\" | \"underline\" | ({ _peerAccept?: \"plain\" | \"underline\" | [\"plain\" | \"underline\" | (... & { base?: \"plain\" | \"underline\" | [\"plain\" | \"underline\" | (... & ...), \"plain\" | ... 1 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"plain\" | ... 3 more ... | undefined...",
       "description": "The variant of the component.",
       "required": false
     },
@@ -86,7 +86,8 @@
       "required": false
     },
     "endBoundaries": {
-      "type": "number | [number | { [x: string & {}]: number | undefined; base?: number | undefined; \"2xl\"?: number | undefined; lg?: number | undefined; md?: number | undefined; sm?: number | undefined; xl?: number | undefined; }, number | { ...; }] | { ...; }",
+      "type": "StyleValue<number>",
+      "defaultValue": "0",
       "description": "Number of elements visible on the end(right) edges.",
       "required": false
     },
@@ -122,7 +123,8 @@
       "required": false
     },
     "startBoundaries": {
-      "type": "number | [number | { [x: string & {}]: number | undefined; base?: number | undefined; \"2xl\"?: number | undefined; lg?: number | undefined; md?: number | undefined; sm?: number | undefined; xl?: number | undefined; }, number | { ...; }] | { ...; }",
+      "type": "StyleValue<number>",
+      "defaultValue": "0",
       "description": "Number of elements visible on the start(left) edges.",
       "required": false
     }

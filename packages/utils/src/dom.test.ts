@@ -2,7 +2,6 @@ import {
   ariaAttr,
   contains,
   createdDom,
-  createId,
   dataAttr,
   getActiveElement,
   getDocument,
@@ -18,6 +17,7 @@ import {
   isMac,
   isSafari,
   platform,
+  uuid,
   vendor,
 } from "./dom"
 
@@ -216,13 +216,11 @@ describe("DOM", () => {
     })
   })
 
-  describe("createId", () => {
+  describe("uuid", () => {
     test("should create a unique id with prefix", () => {
-      const id1 = createId("prefix")
-      const id2 = createId("prefix")
+      const id1 = uuid()
+      const id2 = uuid()
       expect(id1).not.toBe(id2)
-      expect(id1.startsWith("prefix-")).toBeTruthy()
-      expect(id2.startsWith("prefix-")).toBeTruthy()
     })
   })
 })

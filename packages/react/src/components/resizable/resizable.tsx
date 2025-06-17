@@ -51,7 +51,6 @@ export const {
 export const ResizableRoot: FC<ResizableRootProps> = withProvider(
   ({ children, orientation: orientationProp, rootRef, ...rest }) => {
     const computedOrientation = useValue(orientationProp)
-
     const { controlRef, disabled, orientation, getGroupProps, getRootProps } =
       useResizable({
         ...rest,

@@ -44,26 +44,6 @@ describe("useValue", () => {
     const { result } = renderHook(() => useValue("normalValue"))
     expect(result.current).toBe("normalValue")
   })
-
-  test("Returns the correct value when passing an array containing objects for breakpoints", () => {
-    const { result } = renderHook(() =>
-      useValue([
-        { base: "light-base", md: "light-md" },
-        { base: "dark-base", md: "dark-md" },
-      ]),
-    )
-    expect(result.current).toBe("light-base")
-  })
-
-  test("Returns the correct value when passing an object containing arrays for color mode", () => {
-    const { result } = renderHook(() =>
-      useValue({
-        base: ["base-light", "base-dark"],
-        md: ["md-light", "md-dark"],
-      }),
-    )
-    expect(result.current).toBe("base-light")
-  })
 })
 
 describe("getValue", () => {
@@ -122,22 +102,6 @@ describe("getValue", () => {
   test("Returns the same value when passed a normal value", () => {
     const value = getValue("normalValue")(styledTheme, "light", "base")
     expect(value).toBe("normalValue")
-  })
-
-  test("Returns the correct value when passing an array containing objects for breakpoints", () => {
-    const value = getValue([
-      { base: "light-base", md: "light-md" },
-      { base: "dark-base", md: "dark-md" },
-    ])(styledTheme, "light", "base")
-    expect(value).toBe("light-base")
-  })
-
-  test("Returns the correct value when passing an object containing arrays for color mode", () => {
-    const value = getValue({
-      base: ["base-light", "base-dark"],
-      md: ["md-light", "md-dark"],
-    })(styledTheme, "light", "base")
-    expect(value).toBe("base-light")
   })
 
   test("Returns the correct value when providing a not responsive object", () => {

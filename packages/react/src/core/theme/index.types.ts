@@ -3,7 +3,8 @@ import type { PortalProps } from "../../components/portal"
 import type { DefaultTheme } from "../../theme"
 import type { AnyString, Booleanish, Dict } from "../../utils"
 import type {
-  CreateBreakpointsReturn,
+  Breakpoints,
+  ColorModeWithSystem,
   CreateLayersReturn,
   CSSAnimationObject,
   CSSModifierObject,
@@ -11,6 +12,7 @@ import type {
   CSSPropObject,
   CSSSlotObject,
   StyleValue,
+  StyleValueWithCondition,
 } from "../css"
 import type { GeneratedThemeTokens } from "../generated-theme-tokens.types"
 
@@ -23,17 +25,11 @@ export type LayerScheme =
   | "size"
   | "tokens"
   | "variant"
-
 export type Layers = { [key in LayerScheme]: { name: string; order: number } }
-
+export type Direction = "end" | "start"
 export type TextDirection = "ltr" | "rtl"
-
-export type BreakpointDirection = "down" | "up"
-
 export type KeyframeIdent = "from" | "to"
-
 export type Orientation = "horizontal" | "vertical"
-
 export type Placement =
   | "center"
   | "center-center"
@@ -47,18 +43,17 @@ export type Placement =
   | "start-center"
   | "start-end"
   | "start-start"
+export type SimplePlacement =
+  | "block-end"
+  | "block-start"
+  | "inline-end"
+  | "inline-start"
 
-export type NoticePlacement = Extract<
-  Placement,
-  | "end"
-  | "end-center"
-  | "end-end"
-  | "end-start"
-  | "start"
-  | "start-center"
-  | "start-end"
-  | "start-start"
->
+export type BreakpointDirection = "down" | "up"
+export type BreakpointIdentifier =
+  | "@media screen"
+  | `@container ${string}`
+  | `@container`
 
 export interface BreakpointConfig {
   /**
@@ -92,8 +87,10 @@ export interface BreakpointConfig {
    *
    * @default "@media screen"
    */
-  identifier?: "@media screen" | `@container ${string}` | `@container`
+  identifier?: BreakpointIdentifier
 }
+
+export type NoticePlacement = Exclude<Placement, "center" | `center-${string}`>
 
 export interface NoticeConfig extends Pick<PortalProps, "containerRef"> {
   /**
@@ -123,8 +120,6 @@ export interface NoticeConfig extends Pick<PortalProps, "containerRef"> {
   placement?: NoticePlacement
 }
 
-export type SnackDirection = "bottom" | "top"
-
 export interface SnacksConfig {
   /**
    * If `true`, allows the snack to be removed.
@@ -137,7 +132,7 @@ export interface SnacksConfig {
    *
    * @default 'top'
    */
-  direction?: SnackDirection
+  direction?: Direction
   /**
    * The number of `ms` the snack will continue to be displayed.
    *
@@ -192,7 +187,7 @@ export interface LoadingConfig extends Pick<PortalProps, "containerRef"> {
 
 export interface ThemeConfig {
   /**
-   * The config of CSS variables.
+   * The config of the CSS.
    */
   css?: {
     /**
@@ -208,7 +203,7 @@ export interface ThemeConfig {
      *
      * @default 'ui'
      */
-    varPrefix?: AnyString
+    varPrefix?: string
   }
   /**
    * The config of breakpoint.
@@ -227,14 +222,14 @@ export interface ThemeConfig {
    *
    * @default 'light'
    */
-  initialColorMode?: "dark" | "light" | "system"
+  initialColorMode?: ColorModeWithSystem
   /**
    * The initial theme scheme.
    * This is only applicable if multiple themes are provided.
    *
    * @default 'base'
    */
-  initialThemeScheme?: ThemeTokens["themeSchemes"]
+  initialThemeScheme?: ThemeScheme
   /**
    * The config of the loading.
    */
@@ -280,7 +275,9 @@ type ThemeVariantProps<Y extends Dict = Dict> =
         /**
          * The variant of the component.
          */
-        variant?: StyleValue<Exclude<keyof Required<Y>["variants"], "base">>
+        variant?: StyleValueWithCondition<
+          Exclude<keyof Required<Y>["variants"], "base">
+        >
       }
 
 type ThemeSizeProps<Y extends Dict = Dict> =
@@ -290,7 +287,9 @@ type ThemeSizeProps<Y extends Dict = Dict> =
         /**
          * The size of the component.
          */
-        size?: StyleValue<Exclude<keyof Required<Y>["sizes"], "base">>
+        size?: StyleValueWithCondition<
+          Exclude<keyof Required<Y>["sizes"], "base">
+        >
       }
 
 type ThemeComponentProps<Y extends Dict = Dict> =
@@ -358,7 +357,11 @@ export interface DefineThemeBreakpointTokens {
 }
 
 export type DefineThemeColorSchemeValue =
-  | [ThemeTokens["colorSchemes"], ThemeTokens["colorSchemes"]]
+  | [
+      AnyString | ThemeTokens["colorSchemes"],
+      AnyString | ThemeTokens["colorSchemes"],
+    ]
+  | AnyString
   | Dict
   | ThemeTokens["colorSchemes"]
 
@@ -367,7 +370,8 @@ export interface DefineThemeColorSchemeSemanticTokens {
 }
 
 export type DefineThemeColorSemanticValue =
-  | [ThemeTokens["colors"], ThemeTokens["colors"]]
+  | [AnyString | ThemeTokens["colors"], AnyString | ThemeTokens["colors"]]
+  | AnyString
   | ThemeTokens["colors"]
 
 export interface DefineThemeColorSemanticToken {
@@ -387,6 +391,7 @@ export interface DefineThemeColorSemanticToken {
 
 export interface DefineThemeColorSemanticTokens {
   [key: string]:
+    | AnyString
     | DefineThemeColorSemanticToken
     | DefineThemeColorSemanticValue
     | Dict
@@ -448,37 +453,31 @@ export interface UsageTheme extends DefineTheme {
 }
 
 export interface UsageThemeTokens {
-  animations: string
-  aspectRatios: string
-  blurs: string
-  borders: string
-  breakpoints: string
-  colors: string
-  colorSchemes: string
-  durations: string
-  easings: string
-  fonts: string
-  fontSizes: string
-  fontWeights: string
-  gradients: string
-  keyframes: string
-  layerStyles: string
-  letterSpacings: string
-  lineHeights: string
-  radii: string
-  shadows: string
-  sizes: string
-  spaces: string
-  textStyles: string
-  themeSchemes: string
-  zIndices: string
+  animations: unknown
+  aspectRatios: unknown
+  blurs: unknown
+  borders: unknown
+  breakpoints: unknown
+  colors: unknown
+  colorSchemes: unknown
+  durations: unknown
+  easings: unknown
+  fonts: unknown
+  fontSizes: unknown
+  fontWeights: unknown
+  gradients: unknown
+  keyframes: unknown
+  layerStyles: unknown
+  letterSpacings: unknown
+  lineHeights: unknown
+  radii: unknown
+  shadows: unknown
+  sizes: unknown
+  spaces: unknown
+  textStyles: unknown
+  themeSchemes: unknown
+  zIndices: unknown
 }
-
-export type Breakpoint = "base" | ThemeTokens["breakpoints"]
-
-export type ColorScheme =
-  | [ThemeTokens["colorSchemes"], ThemeTokens["colorSchemes"]]
-  | ThemeTokens["colorSchemes"]
 
 export type ComponentDefaultProps<
   Y extends Dict = Dict,
@@ -496,11 +495,11 @@ export type ComponentDefaultProps<
   /**
    * The size of the component.
    */
-  size?: StyleValue<keyof M>
+  size?: StyleValueWithCondition<keyof M>
   /**
    * The variant of the component.
    */
-  variant?: StyleValue<keyof D>
+  variant?: StyleValueWithCondition<keyof D>
 }
 
 interface ComponentSharedStyle<
@@ -537,9 +536,9 @@ export type ComponentCompound<
     ? {}
     : {
         [key in keyof M]?:
+          | Booleanish<keyof M[key]>
+          | Booleanish<keyof M[key]>[]
           | RegExp
-          | StyleValue<Booleanish<keyof M[key]>>
-          | StyleValue<Booleanish<keyof M[key]>>[]
       }) & {
     css: Y
     [key: string]: any
@@ -610,10 +609,7 @@ export interface ComponentSlotStyle<
 }
 
 export interface CSSMap {
-  [key: string]: {
-    ref: string
-    var: string
-  }
+  [key: string]: { ref: string; var: string }
 }
 
 export interface CustomTheme {}
@@ -637,6 +633,12 @@ type OmittedThemeTokens = Exclude<
   | "themeSchemes"
 >
 
+export type ThemeScheme = "base" | ThemeTokens["themeSchemes"]
+export type Breakpoint = "base" | ThemeTokens["breakpoints"]
+export type ColorScheme =
+  | [ThemeTokens["colorSchemes"], ThemeTokens["colorSchemes"]]
+  | ThemeTokens["colorSchemes"]
+
 export type ThemePath =
   | AnyString
   | Extract<ThemeTokens["colors"], `colorScheme.${string}`>
@@ -646,14 +648,14 @@ export type ThemePath =
       }[ThemeTokens[Y]]
     }[OmittedThemeTokens]
 
-export type ChangeThemeScheme = (
-  themeScheme: ThemeTokens["themeSchemes"],
+export type ChangeThemeScheme<Y extends UsageTheme = Theme> = (
+  themeScheme: "base" | keyof Y["themeSchemes"],
 ) => void
 
 export type StyledTheme<Y extends UsageTheme = Theme> = Y & {
-  changeThemeScheme: ChangeThemeScheme
-  themeScheme: ThemeTokens["themeSchemes"]
-  __breakpoints?: CreateBreakpointsReturn
+  changeThemeScheme: ChangeThemeScheme<Y>
+  themeScheme: "base" | keyof Y["themeSchemes"]
+  __breakpoints?: Breakpoints
   __config?: ThemeConfig
   __cssMap?: CSSMap
   __cssVars?: Dict

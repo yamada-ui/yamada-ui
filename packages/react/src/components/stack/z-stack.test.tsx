@@ -65,7 +65,7 @@ describe("<ZStack />", () => {
 
   test("Whether the direction is working properly", () => {
     render(
-      <ZStack direction="right">
+      <ZStack direction="center-end">
         <Box>Item 1</Box>
         <Box>Item 2</Box>
       </ZStack>,
@@ -97,9 +97,9 @@ describe("<ZStack />", () => {
     })
   })
 
-  test("applies correct styles with direction set to top", () => {
+  test("applies correct styles with direction set to start", () => {
     render(
-      <ZStack direction="top">
+      <ZStack direction="start">
         <Box>Box1</Box>
         <Box>Box2</Box>
       </ZStack>,
@@ -117,9 +117,9 @@ describe("<ZStack />", () => {
     })
   })
 
-  test("applies correct styles with direction set to left", () => {
+  test("applies correct styles with direction set to center-start", () => {
     render(
-      <ZStack direction="left">
+      <ZStack direction="center-start">
         <Box>Box1</Box>
         <Box>Box2</Box>
       </ZStack>,

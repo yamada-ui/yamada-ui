@@ -3,9 +3,8 @@ import {
   filterUndefined,
   flattenObject,
   getObject,
-  keysFormObject,
   merge,
-  objectFromEntries,
+  objectKeys,
   omitObject,
   pickObject,
   replaceObject,
@@ -90,20 +89,10 @@ describe("Object", () => {
     })
   })
 
-  describe("objectFromEntries", () => {
-    test("should create an object from an array of key-value pairs", () => {
-      const entries = [
-        ["a", 1],
-        ["b", 2],
-      ]
-      expect(objectFromEntries(entries)).toStrictEqual({ a: 1, b: 2 })
-    })
-  })
-
-  describe("keysFormObject", () => {
+  describe("objectKeys", () => {
     test("should return the keys of an object", () => {
       const obj = { a: 1, b: 2, c: 3 }
-      expect(keysFormObject(obj)).toStrictEqual(["a", "b", "c"])
+      expect(objectKeys(obj)).toStrictEqual(["a", "b", "c"])
     })
   })
 

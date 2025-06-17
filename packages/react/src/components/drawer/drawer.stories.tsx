@@ -137,13 +137,17 @@ export const Duration: Story = () => {
 
 export const Placement: Story = () => {
   const [placement, setPlacement] =
-    useState<Drawer.RootProps["placement"]>("right")
+    useState<Drawer.RootProps["placement"]>("inline-end")
   const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Wrap gap="md">
-        <For each={["top", "bottom", "left", "right"] as const}>
+        <For
+          each={
+            ["block-start", "block-end", "inline-start", "inline-end"] as const
+          }
+        >
           {(placement) => (
             <Button
               key={placement}
@@ -183,13 +187,17 @@ export const Placement: Story = () => {
 
 export const CloseOnDrag: Story = () => {
   const [placement, setPlacement] =
-    useState<Drawer.RootProps["placement"]>("right")
+    useState<Drawer.RootProps["placement"]>("inline-end")
   const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Wrap gap="md">
-        <For each={["top", "bottom", "left", "right"] as const}>
+        <For
+          each={
+            ["block-start", "block-end", "inline-start", "inline-end"] as const
+          }
+        >
           {(placement) => (
             <Button
               key={placement}

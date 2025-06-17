@@ -5,7 +5,7 @@ import type {
   StyledTheme,
   Theme,
   ThemeConfig,
-  ThemeTokens,
+  ThemeScheme,
   UsageTheme,
 } from "../../core"
 import type { Dict } from "../../utils"
@@ -70,9 +70,10 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   theme: initialTheme = {},
   themeSchemeManager = localStorage,
 }) => {
+  const { disableTransitionOnChange, initialThemeScheme } = config ?? {}
   const environment = useEnvironment()
-  const [themeScheme, setThemeScheme] = useState<ThemeTokens["themeSchemes"]>(
-    themeSchemeManager.get(config?.initialThemeScheme)(storageKey),
+  const [themeScheme, setThemeScheme] = useState<ThemeScheme>(
+    themeSchemeManager.get(initialThemeScheme)(storageKey),
   )
 
   const changeThemeScheme: ChangeThemeScheme = useCallback(
@@ -80,7 +81,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
       const { getDocument } = environment
       const doc = getDocument()
 
-      const cleanup = config?.disableTransitionOnChange
+      const cleanup = disableTransitionOnChange
         ? getPreventTransition(environment)
         : undefined
 
@@ -92,7 +93,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 
       themeSchemeManager.set(themeScheme)(storageKey)
     },
-    [config, environment, themeSchemeManager, storageKey],
+    [disableTransitionOnChange, environment, themeSchemeManager, storageKey],
   )
 
   const theme = useMemo(
@@ -101,10 +102,10 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   )
 
   useEffect(() => {
-    const themeScheme = themeSchemeManager.get()(storageKey)
+    const themeScheme = themeSchemeManager.get(initialThemeScheme)(storageKey)
 
-    if (themeScheme) changeThemeScheme(themeScheme)
-  }, [changeThemeScheme, themeSchemeManager, storageKey])
+    changeThemeScheme(themeScheme)
+  }, [changeThemeScheme, themeSchemeManager, storageKey, initialThemeScheme])
 
   return (
     <EmotionThemeProvider theme={{ changeThemeScheme, themeScheme, ...theme }}>
@@ -156,8 +157,8 @@ export const GlobalStyles: FC = () => {
  *
  * @see https://yamada-ui.com/hooks/use-theme
  */
-export const useTheme = <T extends UsageTheme = Theme>() => {
-  const internalTheme = use(ThemeContext) as StyledTheme<T>
+export const useTheme = <Y extends UsageTheme = Theme>() => {
+  const internalTheme = use(ThemeContext) as StyledTheme<Y>
 
   const theme = useMemo(() => {
     const { themeScheme } = internalTheme
@@ -166,12 +167,12 @@ export const useTheme = <T extends UsageTheme = Theme>() => {
 
     const nestedTheme =
       "themeSchemes" in internalTheme && isObject(internalTheme.themeSchemes)
-        ? internalTheme.themeSchemes[themeScheme]
+        ? internalTheme.themeSchemes[themeScheme as string]
         : undefined
 
     if (!nestedTheme) return internalTheme
 
-    return merge<StyledTheme<T>>(internalTheme, nestedTheme)
+    return merge<StyledTheme<Y>>(internalTheme, nestedTheme)
   }, [internalTheme])
 
   const value = useMemo(() => {

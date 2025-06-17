@@ -25,7 +25,6 @@ import { FocusLock } from "../focus-lock"
 import { motion } from "../motion"
 import { Portal } from "../portal"
 import { Slide } from "../slide"
-import { Slot } from "../slot"
 import { drawerStyle } from "./drawer.style"
 import { useDrawer } from "./use-drawer"
 
@@ -235,27 +234,30 @@ export const DrawerRoot = withProvider(
   { transferProps: ["placement"] },
 )()
 
-export interface DrawerOpenTriggerProps extends PropsWithChildren {}
+export interface DrawerOpenTriggerProps extends HTMLStyledProps<"button"> {}
 
-export const DrawerOpenTrigger = component<"fragment", DrawerOpenTriggerProps>(
-  (props) => {
-    const { getOpenTriggerProps } = useComponentContext()
+export const DrawerOpenTrigger = withContext<"button", DrawerOpenTriggerProps>(
+  "button",
+  { name: "openTrigger", slot: ["trigger", "open"] },
+)(undefined, (props) => {
+  const { getOpenTriggerProps } = useComponentContext()
 
-    return <Slot {...getOpenTriggerProps(props)} />
-  },
-  "openTrigger",
-)()
+  return { asChild: true, ...getOpenTriggerProps(props) }
+})
 
-export interface DrawerCloseTriggerProps extends PropsWithChildren {}
+export interface DrawerCloseTriggerProps extends HTMLStyledProps<"button"> {}
 
-export const DrawerCloseTrigger = component<
-  "fragment",
+export const DrawerCloseTrigger = withContext<
+  "button",
   DrawerCloseTriggerProps
->((props) => {
-  const { getCloseTriggerProps } = useComponentContext()
+>("button", { name: "closeTrigger", slot: ["trigger", "close"] })(
+  undefined,
+  (props) => {
+    const { getCloseTriggerProps } = useComponentContext()
 
-  return <Slot {...getCloseTriggerProps(props)} />
-}, "closeTrigger")()
+    return { asChild: true, ...getCloseTriggerProps(props) }
+  },
+)
 
 export interface DrawerCloseButtonProps extends CloseButtonProps {}
 

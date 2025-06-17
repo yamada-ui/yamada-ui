@@ -1,4 +1,6 @@
 import type { FC } from "react"
+import type { ThemeScheme } from "../../core"
+import { useMemo } from "react"
 import { Badge } from "../../components/badge"
 import { Button } from "../../components/button"
 import { Container } from "../../components/container"
@@ -6,10 +8,9 @@ import { For } from "../../components/for"
 import { Heading } from "../../components/heading"
 import { HStack, VStack } from "../../components/stack"
 import { Tag } from "../../components/tag"
-import { Text } from "../../components/text"
 import { Wrap } from "../../components/wrap"
 import { defaultConfig, defaultTheme } from "../../theme"
-import { merge, toTitleCase } from "../../utils"
+import { toTitleCase } from "../../utils"
 import { UIProvider } from "../ui-provider"
 import { useTheme } from "./theme-provider"
 
@@ -18,60 +19,60 @@ export default {
 }
 
 export const SwitchTheming = () => {
-  const theme = merge(defaultTheme, {
-    themeSchemes: {
-      green: {
-        semanticTokens: {
-          colorSchemes: {
-            primary: "green",
-            secondary: "cyan",
+  const theme = useMemo(
+    () => ({
+      ...defaultTheme,
+      themeSchemes: {
+        blue: {
+          semanticTokens: {
+            colorSchemes: {
+              primary: "blue",
+              secondary: "cyan",
+            },
+          },
+        },
+        pink: {
+          semanticTokens: {
+            colorSchemes: {
+              primary: "pink",
+              secondary: "violet",
+            },
+          },
+        },
+        purple: {
+          semanticTokens: {
+            colorSchemes: {
+              primary: "purple",
+              secondary: "green",
+            },
           },
         },
       },
-      pink: {
-        semanticTokens: {
-          colorSchemes: {
-            primary: "pink",
-            secondary: "violet",
-          },
-        },
-      },
-      purple: {
-        semanticTokens: {
-          colorSchemes: {
-            primary: "purple",
-            secondary: "teal",
-          },
-        },
-      },
-    },
-  })
-  const config = merge(defaultConfig, { initialThemeScheme: "pink" })
+    }),
+    [],
+  )
+  const config = useMemo(
+    () => ({ ...defaultConfig, initialThemeScheme: "pink" as ThemeScheme }),
+    [],
+  )
 
   const App: FC = () => {
-    const { changeThemeScheme, themeScheme } = useTheme()
+    const { changeThemeScheme, themeScheme } = useTheme<typeof theme>()
 
     return (
       <VStack>
         <HStack>
-          <Button colorScheme="gray" onClick={() => changeThemeScheme("base")}>
-            Base Theme
-          </Button>
-          <Button colorScheme="pink" onClick={() => changeThemeScheme("pink")}>
-            Pink Theme
-          </Button>
-          <Button
-            colorScheme="purple"
-            onClick={() => changeThemeScheme("purple")}
-          >
-            Purple Theme
-          </Button>
-          <Button
-            colorScheme="green"
-            onClick={() => changeThemeScheme("green")}
-          >
-            Green Theme
-          </Button>
+          <For each={["base", "pink", "purple", "blue"] as const}>
+            {(themeScheme) => (
+              <Button
+                key={themeScheme}
+                colorScheme={"base" === themeScheme ? "mono" : themeScheme}
+                onClick={() => changeThemeScheme(themeScheme)}
+              >
+                {toTitleCase(themeScheme)} Theme
+              </Button>
+            )}
+          </For>
         </HStack>
 
         <Container.Root>
@@ -80,10 +81,19 @@ export const SwitchTheming = () => {
           </Container.Header>
 
           <Container.Body gap="md">
-            <Text color="primary.500">Primary</Text>
-
             <Wrap gap="md">
-              <For each={["primary", "secondary", "warning", "error"]}>
+              <For
+                each={
+                  [
+                    "primary",
+                    "secondary",
+                    "info",
+                    "success",
+                    "warning",
+                    "error",
+                  ] as const
+                }
+              >
                 {(colorScheme) => (
                   <Badge key={colorScheme} colorScheme={colorScheme}>
                     {colorScheme}
@@ -93,7 +103,18 @@ export const SwitchTheming = () => {
             </Wrap>
 
             <Wrap gap="md">
-              <For each={["primary", "secondary", "warning", "error"]}>
+              <For
+                each={
+                  [
+                    "primary",
+                    "secondary",
+                    "info",
+                    "success",
+                    "warning",
+                    "error",
+                  ] as const
+                }
+              >
                 {(colorScheme) => (
                   <Tag key={colorScheme} colorScheme={colorScheme}>
                     {toTitleCase(colorScheme)}
@@ -103,7 +124,18 @@ export const SwitchTheming = () => {
             </Wrap>
 
             <Wrap gap="md">
-              <For each={["primary", "secondary", "warning", "error"]}>
+              <For
+                each={
+                  [
+                    "primary",
+                    "secondary",
+                    "info",
+                    "success",
+                    "warning",
+                    "error",
+                  ] as const
+                }
+              >
                 {(colorScheme) => (
                   <Button key={colorScheme} colorScheme={colorScheme}>
                     {toTitleCase(colorScheme)}

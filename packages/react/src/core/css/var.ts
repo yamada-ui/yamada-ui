@@ -1,6 +1,4 @@
 import type { Dict } from "../../utils"
-import type { StyleConfig } from "../config"
-import type { StyleProperty } from "../styles"
 import type {
   ThemeToken,
   UsageTheme,
@@ -9,7 +7,11 @@ import type {
 } from "../theme"
 import type { CSSMap, DefineThemeValue, StyledTheme } from "../theme"
 import type { Breakpoints } from "./breakpoint"
-import type { CSSObject, CSSProperties, StyleValue } from "./index.types"
+import type {
+  CSSObject,
+  CSSProperties,
+  StyleValueWithCondition,
+} from "./index.types"
 import { useMemo, useRef } from "react"
 import {
   calc,
@@ -26,8 +28,7 @@ import { cssProps } from "../components"
 import { conditions } from "../conditions"
 import { animation, colorMix, gradient, insertKeyframes } from "../config"
 import { DEFAULT_VAR_PREFIX } from "../constant"
-import { styles } from "../styles"
-import { css } from "./css"
+import { css, getStyle } from "./css"
 
 type ParsedValue = number | string | undefined
 
@@ -91,7 +92,7 @@ interface CreateThemeVarsOptions {
   prevTokens?: VariableTokens
 }
 
-export function getCreateThemeVars(
+export function getCreateVars(
   prefix: string = DEFAULT_VAR_PREFIX,
   breakpoints: Breakpoints | undefined,
 ) {
@@ -299,12 +300,12 @@ export function getCreateThemeVars(
   }
 }
 
-export type CreateThemeVars = ReturnType<ReturnType<typeof getCreateThemeVars>>
+export type CreateVars = ReturnType<ReturnType<typeof getCreateVars>>
 
 export function varAttr(
-  value: StyleValue<number | string> | undefined,
+  value: StyleValueWithCondition<number | string> | undefined,
   token?: ThemeToken,
-): StyleValue<number | string> | undefined {
+): StyleValueWithCondition<number | string> | undefined {
   if (isUndefined(value) || isNull(value)) return value
 
   if (isObject(value) || isArray(value)) {
@@ -330,9 +331,7 @@ export function injectVars<Y extends Dict | Dict[] | undefined>(
         const result: [string, any][] = []
 
         if (target) {
-          const style: StyleConfig | true | undefined =
-            styles[prop as StyleProperty]
-          const token = isObject(style) ? style.token : undefined
+          const { token } = getStyle(prop) ?? {}
 
           result.push([
             `--${target}`,

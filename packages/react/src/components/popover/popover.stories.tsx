@@ -246,7 +246,17 @@ export const Gutter: Story = () => {
 export const AnimationScheme: Story = () => {
   return (
     <App flexDirection="column" gap="md">
-      <For each={["scale", "bottom", "left", "right", "top"] as const}>
+      <For
+        each={
+          [
+            "scale",
+            "block-start",
+            "inline-start",
+            "inline-end",
+            "block-end",
+          ] as const
+        }
+      >
         {(animationScheme) => (
           <Popover.Root key={animationScheme} animationScheme={animationScheme}>
             <Popover.Trigger>

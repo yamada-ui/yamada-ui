@@ -25,7 +25,6 @@ import { FocusLock } from "../focus-lock"
 import { motion } from "../motion"
 import { getPopupAnimationProps } from "../popover"
 import { Portal } from "../portal"
-import { Slot } from "../slot"
 import { modalStyle } from "./modal.style"
 import { useModal } from "./use-modal"
 
@@ -86,7 +85,6 @@ export interface ModalRootProps
 }
 
 export const {
-  component,
   ComponentContext,
   PropsContext: ModalPropsContext,
   useComponentContext,
@@ -208,27 +206,27 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
   "root",
 )()
 
-export interface ModalOpenTriggerProps extends PropsWithChildren {}
+export interface ModalOpenTriggerProps extends HTMLStyledProps<"button"> {}
 
-export const ModalOpenTrigger = component<"fragment", ModalOpenTriggerProps>(
-  (props) => {
-    const { getOpenTriggerProps } = useComponentContext()
+export const ModalOpenTrigger = withContext<"button", ModalOpenTriggerProps>(
+  "button",
+  { name: "openTrigger", slot: ["trigger", "open"] },
+)(undefined, (props) => {
+  const { getOpenTriggerProps } = useComponentContext()
 
-    return <Slot {...getOpenTriggerProps(props)} />
-  },
-  "openTrigger",
-)()
+  return { asChild: true, ...getOpenTriggerProps(props) }
+})
 
-export interface ModalCloseTriggerProps extends PropsWithChildren {}
+export interface ModalCloseTriggerProps extends HTMLStyledProps<"button"> {}
 
-export const ModalCloseTrigger = component<"fragment", ModalCloseTriggerProps>(
-  (props) => {
-    const { getCloseTriggerProps } = useComponentContext()
+export const ModalCloseTrigger = withContext<"button", ModalCloseTriggerProps>(
+  "button",
+  { name: "closeTrigger", slot: ["trigger", "close"] },
+)(undefined, (props) => {
+  const { getCloseTriggerProps } = useComponentContext()
 
-    return <Slot {...getCloseTriggerProps(props)} />
-  },
-  "closeTrigger",
-)()
+  return { asChild: true, ...getCloseTriggerProps(props) }
+})
 
 export interface ModalCloseButtonProps extends CloseButtonProps {}
 

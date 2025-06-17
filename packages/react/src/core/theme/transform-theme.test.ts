@@ -1,4 +1,3 @@
-import type { Dict } from "../../utils"
 import type { ThemeConfig, UsageTheme } from "./index.types"
 import { transformTheme } from "."
 import { defaultConfig, defaultTheme } from "../../theme"
@@ -305,15 +304,13 @@ describe("transformTheme", () => {
     expect(__cssVars["--ui-spaces-sm"]).toBe("var(--ui-spaces-2)")
     expect(__cssVars["--ui-spaces-md"]).toBe("var(--ui-spaces-3)")
     expect(__cssVars["--ui-spaces-lg"]).toBe("var(--ui-spaces-4)")
-    expect(__cssVars["--ui-colors-primary"]).toBe("var(--ui-colors-blue-500)")
-    expect(__cssVars["--ui-colors-secondary"]).toBe(
-      "var(--ui-colors-green-500)",
-    )
+    expect(__cssVars["--ui-colors-primary"]).toBe("var(--ui-colors-blue)")
+    expect(__cssVars["--ui-colors-secondary"]).toBe("var(--ui-colors-green)")
     expect(__cssVars[queries.sm]["--ui-spaces-sm"]).toBe("var(--ui-spaces-1)")
     expect(__cssVars[queries.sm]["--ui-spaces-md"]).toBe("var(--ui-spaces-2)")
     expect(__cssVars[queries.sm]["--ui-spaces-lg"]).toBe("var(--ui-spaces-3)")
     expect(__cssVars[conditions._dark]["--ui-colors-primary"]).toBe(
-      "var(--ui-colors-red-500)",
+      "var(--ui-colors-red)",
     )
     TONES.forEach((tone) => {
       expect(__cssMap[`colors.pink.${tone}`]).toStrictEqual({
@@ -349,7 +346,7 @@ describe("transformTheme", () => {
         var: `--ui-colors-tertiary-${tone}`,
       })
       expect(__cssVars[`--ui-colors-tertiary-${tone}`]).toBe(
-        (theme.semanticTokens?.colors?.snot as Dict<string>)[tone],
+        `var(--ui-colors-snot-${tone})`,
       )
     })
   })

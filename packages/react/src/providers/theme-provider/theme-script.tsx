@@ -1,8 +1,8 @@
-import type { ThemeTokens } from "../../core"
+import type { ThemeScheme } from "../../core"
 
 export interface ThemeSchemeScriptProps {
   type?: "cookie" | "localStorage"
-  initialThemeScheme?: ThemeTokens["themeSchemes"]
+  initialThemeScheme?: ThemeScheme
   nonce?: string
   storageKey?: string
 }

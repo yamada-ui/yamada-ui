@@ -53,17 +53,17 @@ export interface DataListRootProps
   termProps?: DataListTermProps
 }
 
-interface DataListContext
+interface ComponentContext
   extends Pick<DataListRootProps, "descriptionProps" | "termProps"> {}
 
 export const {
-  ComponentContext: DataListContext,
+  ComponentContext,
   PropsContext: DataListPropsContext,
-  useComponentContext: useDataListContext,
+  useComponentContext,
   usePropsContext: useDataListPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<DataListRootProps, DataListStyle, DataListContext>(
+} = createSlotComponent<DataListRootProps, DataListStyle, ComponentContext>(
   "data-list",
   dataListStyle,
 )
@@ -71,7 +71,7 @@ export const {
 /**
  * `DataList` is used to display a list of data items.
  *
- * @see Docs https://yamada-ui.com/components/data-list
+ * @see https://yamada-ui.com/components/data-list
  */
 export const DataListRoot = withProvider(
   ({
@@ -112,11 +112,11 @@ export const DataListRoot = withProvider(
     }, [items, colProp])
 
     return (
-      <DataListContext value={context}>
+      <ComponentContext value={context}>
         <styled.dl style={{ "--col": col, ...style }} {...rest}>
           {children ?? computedChildren}
         </styled.dl>
-      </DataListContext>
+      </ComponentContext>
     )
   },
   "root",
@@ -150,7 +150,7 @@ export const DataListItem = withContext<"div", DataListItemProps>(
     termProps: customTermProps,
     ...rest
   }) => {
-    const { descriptionProps, termProps } = useDataListContext()
+    const { descriptionProps, termProps } = useComponentContext()
 
     const validChildren = getValidChildren(children)
     const customTerms = pickChildren(validChildren, DataListTerm)

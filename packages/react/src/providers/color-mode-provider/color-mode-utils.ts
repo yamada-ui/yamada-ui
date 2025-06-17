@@ -7,7 +7,7 @@ export const getPreventTransition = (environment: Environment) => {
   const win = getWindow()
   const doc = getDocument()
 
-  if (!doc) return
+  if (!win || !doc) return
 
   const css = doc.createElement("style")
 
@@ -20,7 +20,7 @@ export const getPreventTransition = (environment: Environment) => {
   doc.head.appendChild(css)
 
   return () => {
-    const forceReflow = () => win?.getComputedStyle(doc.body)
+    const forceReflow = () => win.getComputedStyle(doc.body)
 
     forceReflow()
 
@@ -56,11 +56,11 @@ export const getColorModeUtils = ({
   const setDataset = (colorMode: ColorMode) => {
     const doc = getDocument()
 
+    if (!doc) return
+
     const cleanup = preventTransition
       ? getPreventTransition(environment)
       : undefined
-
-    if (!doc) return
 
     doc.documentElement.dataset.mode = colorMode
     doc.documentElement.style.colorScheme = colorMode
@@ -78,11 +78,7 @@ export const getColorModeUtils = ({
   }
 
   const query = () => {
-    const win = getWindow()
-
-    if (!win) return
-
-    return win.matchMedia(queries.dark)
+    return getWindow()?.matchMedia(queries.dark)
   }
 
   const getSystemColorMode = (fallback?: ColorMode) => {

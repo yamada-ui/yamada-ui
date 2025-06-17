@@ -1,7 +1,6 @@
-import type { MatchMediaMock } from "@yamada-ui/test"
 import type { FC } from "react"
 import type { ThemeConfig } from "../../core"
-import { matchMedia } from "@yamada-ui/test"
+import MatchMediaMock from "vitest-matchmedia-mock"
 import { render, renderHook, screen, waitFor } from "../../../test"
 import { styled } from "../../core"
 import { ThemeProvider } from "../../providers/theme-provider"
@@ -10,18 +9,22 @@ import { noop } from "../../utils"
 import { useBreakpoint } from "./use-breakpoint"
 
 describe("useBreakpoint", () => {
-  let mock: MatchMediaMock
+  let matchMediaMock: MatchMediaMock
 
   beforeAll(() => {
-    mock = matchMedia()
+    matchMediaMock = new MatchMediaMock()
   })
 
   afterEach(() => {
-    mock.clear()
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
   })
 
   test("Returns the correct breakpoint based on the current screen width", () => {
-    mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
+    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
     const { result } = renderHook(() => useBreakpoint())
     expect(result.current).toBe("md")
   })

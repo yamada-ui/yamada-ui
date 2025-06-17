@@ -6,7 +6,7 @@ import { hStackStyle } from "./h-stack.style"
 import { Stack } from "./stack"
 
 export interface HStackProps
-  extends WithoutThemeProps<StackProps>,
+  extends WithoutThemeProps<StackProps, HStackStyle>,
     ThemeProps<HStackStyle> {}
 
 export const {
@@ -18,7 +18,7 @@ export const {
 /**
  * `HStack` is a component that groups elements and provides space between child elements.
  *
- * @see Docs https://yamada-ui.com/components/stack
+ * @see https://yamada-ui.com/components/stack
  */
 export const HStack = withContext(Stack)(undefined, {
   direction: "row",

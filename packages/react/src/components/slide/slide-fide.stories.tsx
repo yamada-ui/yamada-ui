@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useBoolean } from "../../hooks/use-boolean"
 import { Box } from "../box"
 import { Button } from "../button"
@@ -20,11 +20,11 @@ export const Basic: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <SlideFade bg="orange.500" color="white" open={open} p="md" rounded="md">
+      <SlideFade bg="orange.500" color="white" open={open} p="md" rounded="l2">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </SlideFade>
 
-      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
+      <Box bg="purple.500" color="white" p="md" rounded="l2" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>
@@ -44,12 +44,12 @@ export const Duration: Story = () => {
         duration={0.4}
         open={open}
         p="md"
-        rounded="md"
+        rounded="l2"
       >
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </SlideFade>
 
-      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
+      <Box bg="purple.500" color="white" p="md" rounded="l2" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>
@@ -70,12 +70,12 @@ export const OffsetX: Story = () => {
         offsetY={0}
         open={open}
         p="md"
-        rounded="md"
+        rounded="l2"
       >
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </SlideFade>
 
-      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
+      <Box bg="purple.500" color="white" p="md" rounded="l2" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>
@@ -95,12 +95,12 @@ export const OffsetY: Story = () => {
         offsetY={-8}
         open={open}
         p="md"
-        rounded="md"
+        rounded="l2"
       >
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </SlideFade>
 
-      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
+      <Box bg="purple.500" color="white" p="md" rounded="l2" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>
@@ -120,13 +120,13 @@ export const UnmountOnExit: Story = () => {
         offsetY={-8}
         open={open}
         p="md"
-        rounded="md"
+        rounded="l2"
         unmountOnExit
       >
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </SlideFade>
 
-      <Box bg="purple.500" color="white" p="md" rounded="md" w="full">
+      <Box bg="purple.500" color="white" p="md" rounded="l2" w="full">
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Box>
     </>

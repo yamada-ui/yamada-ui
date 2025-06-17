@@ -16,11 +16,13 @@ const icons = {
   warning: TriangleAlertIcon,
 } as const
 
-interface AlertContext {
+interface ComponentContext {
   status: StatusScheme
 }
 
-interface AlertRootOptions {
+export interface AlertRootProps
+  extends HTMLStyledProps,
+    ThemeProps<AlertStyle> {
   /**
    * The status of the alert.
    *
@@ -29,21 +31,16 @@ interface AlertRootOptions {
   status?: StatusScheme
 }
 
-export interface AlertRootProps
-  extends HTMLStyledProps,
-    ThemeProps<AlertStyle>,
-    AlertRootOptions {}
-
 export const {
-  ComponentContext: AlertContext,
+  ComponentContext,
   PropsContext: AlertPropsContext,
   useClassNames,
-  useComponentContext: useAlertContext,
+  useComponentContext,
   usePropsContext: useAlertPropsContext,
   useStyleContext,
   withContext,
   withProvider,
-} = createSlotComponent<AlertRootProps, AlertStyle, AlertContext>(
+} = createSlotComponent<AlertRootProps, AlertStyle, ComponentContext>(
   "alert",
   alertStyle,
 )
@@ -51,28 +48,25 @@ export const {
 /**
  * `Alert` is a component that conveys information to the user.
  *
- * @see Docs https://yamada-ui.com/components/alert
+ * @see https://yamada-ui.com/components/alert
  */
 export const AlertRoot = withProvider<"div", AlertRootProps>(
   ({ status, ...props }) => {
     const context = useMemo(() => ({ status: status! }), [status])
 
     return (
-      <AlertContext value={context}>
+      <ComponentContext value={context}>
         <styled.div role="alert" {...props} />
-      </AlertContext>
+      </ComponentContext>
     )
   },
   "root",
-)(({ colorScheme, status = "info" }) => ({
-  colorScheme: colorScheme ?? status,
-  status,
-}))
+)({ colorScheme: "info", status: "info" })
 
 export interface AlertIconProps extends IconProps {}
 
 export const AlertIcon = withContext<"svg", AlertIconProps>((props) => {
-  const { status } = useAlertContext()
+  const { status } = useComponentContext()
   const Icon = icons[status]
 
   return <Icon {...props} />

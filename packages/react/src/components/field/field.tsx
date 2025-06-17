@@ -20,7 +20,8 @@ export interface FieldContext
   onBlur: () => void
   onFocus: () => void
   id?: string
-  labelId?: string
+  errorMessageId?: string
+  helperMessageId?: string
 }
 
 export const [FieldContext, useFieldContext] = createContext<FieldContext>({
@@ -102,7 +103,7 @@ export const {
 /**
  * `Field` is a component used to group form elements with label, helper message, error message, etc.
  *
- * @see Docs https://yamada-ui.com/components/field
+ * @see https://yamada-ui.com/components/field
  */
 export const FieldRoot = withProvider<"div", FieldRootProps>(
   ({
@@ -124,7 +125,8 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
     ...rest
   }) => {
     const uuid = useId()
-    const labelId = useId()
+    const helperMessageId = useId()
+    const errorMessageId = useId()
     const [focused, setFocused] = useState<boolean>(false)
     const validChildren = getValidChildren(children)
     const customLabel = findChild(validChildren, FieldLabel)
@@ -145,16 +147,27 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
       () => ({
         id,
         disabled,
+        errorMessageId,
         focused,
+        helperMessageId,
         invalid,
-        labelId,
         readOnly,
         replace,
         required,
         onBlur: () => setFocused(false),
         onFocus: () => setFocused(true),
       }),
-      [id, labelId, focused, disabled, invalid, readOnly, replace, required],
+      [
+        id,
+        disabled,
+        focused,
+        invalid,
+        helperMessageId,
+        errorMessageId,
+        readOnly,
+        replace,
+        required,
+      ],
     )
 
     return (
@@ -200,8 +213,19 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
 )()
 
 export interface FieldLabelProps extends HTMLStyledProps<"label"> {
+  /**
+   * The optional indicator to use.
+   */
   optionalIndicator?: ReactNode
+  /**
+   * If `true`, the field will be required.
+   *
+   * @default false
+   */
   required?: boolean
+  /**
+   * The required indicator to use.
+   */
   requiredIndicator?: ReactNode
 }
 
@@ -217,7 +241,6 @@ export const FieldLabel = withContext<"label", FieldLabelProps>(
   }) => {
     const context = useFieldContext()
 
-    id ??= context?.labelId
     required ??= context?.required
 
     return (
@@ -268,11 +291,11 @@ export interface FieldHelperMessageProps extends HTMLStyledProps<"span"> {}
 
 export const FieldHelperMessage = withContext<"span", FieldHelperMessageProps>(
   (props) => {
-    const { id, invalid, replace } = useFieldContext() ?? {}
+    const { helperMessageId, invalid, replace } = useFieldContext() ?? {}
 
     if (replace && invalid) return null
 
-    return <styled.span aria-describedby={id} {...props} />
+    return <styled.span id={helperMessageId} {...props} />
   },
   "helperMessage",
 )()
@@ -281,11 +304,11 @@ export interface FieldErrorMessageProps extends HTMLStyledProps<"span"> {}
 
 export const FieldErrorMessage = withContext<"span", FieldErrorMessageProps>(
   (props) => {
-    const { invalid } = useFieldContext() ?? {}
+    const { errorMessageId, invalid } = useFieldContext() ?? {}
 
     if (!invalid) return null
 
-    return <styled.span aria-live="polite" {...props} />
+    return <styled.span id={errorMessageId} aria-live="polite" {...props} />
   },
   "errorMessage",
 )()

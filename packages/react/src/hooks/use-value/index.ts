@@ -1,9 +1,9 @@
 import type {
+  Breakpoint,
   ColorMode,
   ColorModeArray,
   ResponsiveObject,
   StyledTheme,
-  ThemeTokens,
 } from "../../core"
 import { useMemo } from "react"
 import {
@@ -17,11 +17,11 @@ import { getBreakpointValue, useBreakpoint } from "../use-breakpoint"
 /**
  * `useValue` is a custom hook that combines `useBreakpointValue` and `useColorModeValue`.
  *
- * @see Docs https://yamada-ui.com/hooks/use-value
+ * @see https://yamada-ui.com/hooks/use-value
  */
-export const useValue = <T>(
-  value: ColorModeArray<T> | ResponsiveObject<T> | T,
-): T => {
+export const useValue = <Y>(
+  value: ColorModeArray<Y, false> | ResponsiveObject<Y, false> | Y,
+): Y => {
   const { theme } = useTheme()
   const breakpoint = useBreakpoint()
   const { colorMode } = useColorMode()
@@ -32,36 +32,14 @@ export const useValue = <T>(
 }
 
 export const getValue =
-  <T>(value: ColorModeArray<T> | ResponsiveObject<T> | T) =>
-  (
-    theme: StyledTheme,
-    colorMode: ColorMode,
-    breakpoint: ThemeTokens["breakpoints"],
-  ): T => {
-    if (isObject<ResponsiveObject<T>>(value)) {
-      const computedValue = getBreakpointValue(value)(theme, breakpoint)
-
-      if (isArray<ColorModeArray<T, false>>(computedValue)) {
-        const [light, dark] = computedValue
-
-        return getColorModeValue(light, dark)(colorMode)
-      } else {
-        return computedValue
-      }
-    } else if (isArray<ColorModeArray<T>>(value)) {
+  <Y>(value: ColorModeArray<Y, false> | ResponsiveObject<Y, false> | Y) =>
+  (theme: StyledTheme, colorMode: ColorMode, breakpoint: Breakpoint): Y => {
+    if (isObject<ResponsiveObject<Y, false>>(value)) {
+      return getBreakpointValue(value)(theme, breakpoint)
+    } else if (isArray<ColorModeArray<Y, false>>(value)) {
       const [light, dark] = value
 
-      const computedValue = getColorModeValue(light, dark)(colorMode)
-
-      if (isObject(computedValue)) {
-        if (theme.__breakpoints?.isResponsive(computedValue)) {
-          return getBreakpointValue(computedValue)(theme, breakpoint)
-        } else {
-          return computedValue as T
-        }
-      } else {
-        return computedValue
-      }
+      return getColorModeValue(light, dark)(colorMode)
     } else {
       return value
     }

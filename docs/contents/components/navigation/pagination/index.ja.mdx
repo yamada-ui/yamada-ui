@@ -90,13 +90,13 @@ import { Pagination } from "@yamada-ui/react"
 
 ### ページネーションを無効にする
 
-ページネーションを無効にしたい場合は、`isDisabled`を設定します。
+ページネーションを無効にしたい場合は、`disabled`を設定します。
 
 ```tsx
 <VStack>
   <For each={["solid", "outline", "ghost", "unstyled"]}>
     {(variant, index) => (
-      <Pagination key={index} total={10} variant={variant} isDisabled />
+      <Pagination key={index} total={10} variant={variant} disabled />
     )}
   </For>
 </VStack>

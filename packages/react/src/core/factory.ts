@@ -34,11 +34,6 @@ function factory() {
  * `styled` is an object of JSX elements enabled with Yamada UI's style system,
  * and can also be used as a function for custom components to receive Yamada UI's style system.
  *
- * @see Docs https://yamada-ui.com/styled-system/styled
+ * @see https://yamada-ui.com/styled-system/styled
  */
 export const styled = factory()
-
-/**
- * @deprecated Use `styled` instead.
- */
-export const ui = factory()

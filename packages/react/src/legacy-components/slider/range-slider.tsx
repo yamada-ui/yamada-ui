@@ -599,8 +599,8 @@ export const useRangeSlider = ({
       let h: number | string = "var(--ui-thumb-size)"
 
       if (thumbSizes[i]) {
-        w = `${thumbSizes[i]?.width}px`
-        h = `${thumbSizes[i]?.height}px`
+        w = `${thumbSizes[i].width}px`
+        h = `${thumbSizes[i].height}px`
       }
 
       const bottom = `calc(${n}% - (${h} / 2))`
@@ -767,7 +767,7 @@ export interface RangeSliderProps
 /**
  * `RangeSlider` is a component used for users to select a range of related values.
  *
- * @see Docs https://yamada-ui.com/components/forms/range-slider
+ * @see https://yamada-ui.com/components/forms/range-slider
  */
 export const RangeSlider = forwardRef<RangeSliderProps, "div">((props, ref) => {
   const [styles, mergedProps] = useComponentMultiStyle("RangeSlider", props)

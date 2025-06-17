@@ -120,7 +120,7 @@ export const {
 /**
  * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.
  *
- * @see Docs https://yamada-ui.com/components/button
+ * @see https://yamada-ui.com/components/button
  */
 export const Button = withContext(
   ({
@@ -231,11 +231,14 @@ const ButtonLoading = component<"svg", ButtonLoadingProps>(
       )
     }
 
-    return (
-      <styled.svg {...props} css={mergeCSS(css, props.css)}>
-        {loadingIcon}
-      </styled.svg>
-    )
+    if (isValidElement<HTMLStyledProps<"svg">>(loadingIcon))
+      return cloneElement(loadingIcon, {
+        ...props,
+        ...loadingIcon.props,
+        css: mergeCSS(css, props.css, loadingIcon.props.css),
+      })
+
+    return null
   },
   { name: "button__loading" },
 )()

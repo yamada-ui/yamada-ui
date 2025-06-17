@@ -1,3 +1,4 @@
+import type { ThemeScheme } from "../../core"
 import { createThemeSchemeManager, themeSchemeManager } from "./theme-manager"
 import { THEME_SCHEME_STORAGE_KEY } from "./theme-script"
 
@@ -14,7 +15,7 @@ describe("themeModeManager", () => {
 
     test("sets and gets theme scheme", () => {
       const manager = themeSchemeManager.localStorage
-      manager.set("green")()
+      manager.set("green" as ThemeScheme)()
       expect(manager.get()()).toBe("green")
     })
 
@@ -39,7 +40,7 @@ describe("themeModeManager", () => {
 
     test("sets and gets theme scheme", () => {
       const manager = themeSchemeManager.cookieStorage
-      manager.set("red")()
+      manager.set("red" as ThemeScheme)()
       expect(manager.get()()).toBe("red")
     })
   })

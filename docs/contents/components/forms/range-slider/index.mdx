@@ -97,10 +97,10 @@ To change the orientation, set `orientation` to `vertical` or `horizontal`. By d
 
 ### Reverse Direction
 
-To reverse the direction, set `isReversed` to `true`.
+To reverse the direction, set `reversed` to `true`.
 
 ```tsx
-<RangeSlider isReversed />
+<RangeSlider reversed />
 ```
 
 ### Set Minimum and Maximum Values
@@ -168,7 +168,7 @@ return (
 
         <Center gap="md">
           <Button
-            isDisabled={value[0] === 0}
+            disabled={value[0] === 0}
             onClick={() =>
               setValue((prev) =>
                 prev[0] !== 0 ? [prev[0] - 5, prev[1]] : prev,
@@ -179,7 +179,7 @@ return (
           </Button>
 
           <Button
-            isDisabled={value[0] === 100 || value[0] === value[1]}
+            disabled={value[0] === 100 || value[0] === value[1]}
             colorScheme="blue"
             onClick={() =>
               setValue((prev) =>
@@ -199,7 +199,7 @@ return (
 
         <Center gap="md">
           <Button
-            isDisabled={value[1] === 0 || value[0] === value[1]}
+            disabled={value[1] === 0 || value[0] === value[1]}
             onClick={() =>
               setValue((prev) =>
                 prev[1] !== 0 && value[0] !== value[1]
@@ -212,7 +212,7 @@ return (
           </Button>
 
           <Button
-            isDisabled={value[1] === 100}
+            disabled={value[1] === 100}
             colorScheme="blue"
             onClick={() =>
               setValue((prev) =>
@@ -231,14 +231,14 @@ return (
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <RangeSlider isDisabled />
+  <RangeSlider disabled />
 
   <Fieldset
-    isDisabled
+    disabled
     legend="Hotel Price Range"
     helperMessage="Please select your preferred price range."
   >
@@ -249,14 +249,14 @@ To disable, set `isDisabled` to `true`.
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <RangeSlider isReadOnly />
+  <RangeSlider readOnly />
 
   <Fieldset
-    isReadOnly
+    readOnly
     legend="Hotel Price Range"
     helperMessage="Please select your preferred price range."
   >
@@ -267,17 +267,17 @@ To make read-only, set `isReadOnly` to `true`.
 
 ### Make Input Invalid
 
-To make input invalid, set `isInvalid` to `true`.
+To make input invalid, set `invalid` to `true`.
 
 ```tsx functional=true
 const [value, onChange] = useState<[number, number]>([15, 45])
 
 return (
   <VStack>
-    <RangeSlider isInvalid={value[0] < 20} value={value} onChange={onChange} />
+    <RangeSlider invalid={value[0] < 20} value={value} onChange={onChange} />
 
     <Fieldset
-      isInvalid={value[0] < 20}
+      invalid={value[0] < 20}
       legend="Hotel Price Range"
       errorMessage="Minimum price should be set to 20 or higher."
     >
@@ -315,7 +315,7 @@ To display tooltips, wrap `RangeSliderStartThumb` and `RangeSliderEndThumb` with
 
 ```tsx functional=true
 const [value, onChange] = useState<[number, number]>([25, 75])
-const [isOpen, { on, off }] = useBoolean(false)
+const [open, { on, off }] = useBoolean(false)
 
 return (
   <RangeSlider
@@ -332,10 +332,10 @@ return (
         </RangeSliderMark>
       )}
     </For>
-    <Tooltip placement="top" label={`${value[0]}%`} isOpen={isOpen}>
+    <Tooltip placement="top" label={`${value[0]}%`} open={open}>
       <RangeSliderStartThumb />
     </Tooltip>
-    <Tooltip placement="top" label={`${value[1]}%`} isOpen={isOpen}>
+    <Tooltip placement="top" label={`${value[1]}%`} open={open}>
       <RangeSliderEndThumb />
     </Tooltip>
   </RangeSlider>
@@ -494,7 +494,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Fieldset
-      isInvalid={!!errors.rangeSlider}
+      invalid={!!errors.rangeSlider}
       legend="Hotel Price Range"
       errorMessage={errors.rangeSlider ? errors.rangeSlider.message : undefined}
     >

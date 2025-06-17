@@ -38,7 +38,7 @@ export const {
 /**
  * `List` is a component for displaying lists. By default, it renders a `ul` element.
  *
- * @see Docs https://yamada-ui.com/components/list
+ * @see https://yamada-ui.com/components/list
  */
 export const ListRoot = withProvider(
   ({
@@ -69,6 +69,9 @@ export const ListRoot = withProvider(
 )()
 
 export interface ListItemProps extends HTMLStyledProps<"li"> {
+  /**
+   * The icon to use.
+   */
   icon?: ReactElement<any>
 }
 

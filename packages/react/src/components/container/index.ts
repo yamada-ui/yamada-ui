@@ -12,7 +12,5 @@ export type {
   ContainerHeaderProps,
   ContainerRootProps,
 } from "./container"
-
 export * from "./container.style"
-
 export * as Container from "./namespace"

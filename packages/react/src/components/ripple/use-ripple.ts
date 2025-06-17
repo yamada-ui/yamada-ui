@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Key, MouseEventHandler } from "react"
 import { useCallback, useState } from "react"
-import { createId, handlerAll } from "../../utils"
+import { handlerAll, uuid } from "../../utils"
 
 export interface RippleOptions {
   key: React.Key
@@ -33,7 +33,7 @@ export const useRipple = <T = HTMLElement>({
       setRipples((prev) => [
         ...prev,
         {
-          key: createId(prev.length.toString()),
+          key: uuid(),
           size,
           x: ev.clientX - rect.x - size / 2,
           y: ev.clientY - rect.y - size / 2,

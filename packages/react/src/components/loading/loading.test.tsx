@@ -18,27 +18,14 @@ describe("<Loading />", () => {
     await a11y(<TargetComponent />)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Loading.Oval.displayName).toBe("Loading")
-    expect(Loading.Oval.__styled__).toBe("Loading")
-
     expect(Loading.Audio.displayName).toBe("Loading")
-    expect(Loading.Audio.__styled__).toBe("Loading")
-
     expect(Loading.Circles.displayName).toBe("Loading")
-    expect(Loading.Circles.__styled__).toBe("Loading")
-
     expect(Loading.Dots.displayName).toBe("Loading")
-    expect(Loading.Dots.__styled__).toBe("Loading")
-
     expect(Loading.Grid.displayName).toBe("Loading")
-    expect(Loading.Grid.__styled__).toBe("Loading")
-
     expect(Loading.Puff.displayName).toBe("Loading")
-    expect(Loading.Puff.__styled__).toBe("Loading")
-
     expect(Loading.Rings.displayName).toBe("Loading")
-    expect(Loading.Rings.__styled__).toBe("Loading")
   })
 
   test("sets `className` correctly", () => {

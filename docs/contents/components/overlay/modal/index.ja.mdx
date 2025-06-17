@@ -34,16 +34,16 @@ import {
 
 ## 使い方
 
-表示または非表示を制御するために、`isOpen`と`onClose`を設定します。
+表示または非表示を制御するために、`open`と`onClose`を設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal open={open} onClose={onClose}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -79,7 +79,7 @@ const sizeMap = [
   "full",
 ]
 const [size, setSize] = useState("md")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -97,7 +97,7 @@ return (
       ))}
     </Wrap>
 
-    <Modal isOpen={isOpen} onClose={onClose} size={size}>
+    <Modal open={open} onClose={onClose} size={size}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -133,7 +133,7 @@ const placementMap = [
   "bottom-right",
 ]
 const [placement, setPlacement] = useState("center")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -151,7 +151,7 @@ return (
       ))}
     </Wrap>
 
-    <Modal isOpen={isOpen} onClose={onClose} placement={placement}>
+    <Modal open={open} onClose={onClose} placement={placement}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -177,7 +177,7 @@ return (
 ```tsx functional=true
 const animationMap = ["scale", "top", "left", "bottom", "right"]
 const [animation, setAnimation] = useState("scale")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -195,7 +195,7 @@ return (
       ))}
     </Wrap>
 
-    <Modal isOpen={isOpen} onClose={onClose} animation={animation}>
+    <Modal open={open} onClose={onClose} animation={animation}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -219,13 +219,13 @@ return (
 所要時間を変更する場合は、`duration`に数値(秒)を設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose} duration={0.4}>
+    <Modal open={open} onClose={onClose} duration={0.4}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -250,7 +250,7 @@ return (
 
 ```tsx functional=true
 const [scrollBehavior, setScrollBehavior] = useState("inside")
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
@@ -273,12 +273,7 @@ return (
       </Button>
     </Wrap>
 
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      scrollBehavior={scrollBehavior}
-      h="xl"
-    >
+    <Modal open={open} onClose={onClose} scrollBehavior={scrollBehavior} h="xl">
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -326,13 +321,13 @@ return (
 デフォルトでは、モーダルを開いた際に主要なコンテンツのスクロールをブロックしています。これは、アクセシビリティを確保するためです。もし、主要なコンテンツのスクロールをブロックしたくない場合は、`blockScrollOnMount`を`false`に設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose} blockScrollOnMount={false}>
+    <Modal open={open} onClose={onClose} blockScrollOnMount={false}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -356,13 +351,13 @@ return (
 `ModalOverlay`に`props`などを渡して、カスタマイズしたい場合は、省略せずに設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal open={open} onClose={onClose}>
       <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
 
       <ModalHeader>ドラゴンボール</ModalHeader>
@@ -388,13 +383,13 @@ return (
 モーダルのオーバーレイを無効(非表示)にする場合は、`withOverlay`を`false`にします。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose} withOverlay={false}>
+    <Modal open={open} onClose={onClose} withOverlay={false}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -418,13 +413,13 @@ return (
 `ModalCloseButton`に`props`などを渡して、カスタマイズしたい場合は、省略せずに設定します。
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal open={open} onClose={onClose}>
       <ModalCloseButton color="red.500" />
 
       <ModalHeader>ドラゴンボール</ModalHeader>
@@ -454,13 +449,13 @@ return (
 :::
 
 ```tsx functional=true
-const { isOpen, onOpen, onClose } = useDisclosure()
+const { open, onOpen, onClose } = useDisclosure()
 
 return (
   <>
     <Button onClick={onOpen}>Open Modal</Button>
 
-    <Modal isOpen={isOpen}>
+    <Modal open={open}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -489,7 +484,7 @@ return (
   <>
     <Button onClick={firstControls.onOpen}>Open Modal</Button>
 
-    <Modal isOpen={firstControls.isOpen} onClose={firstControls.onClose}>
+    <Modal open={firstControls.open} onClose={firstControls.onClose}>
       <ModalHeader>ドラゴンボール</ModalHeader>
 
       <ModalBody>
@@ -507,7 +502,7 @@ return (
       </ModalFooter>
 
       <Modal
-        isOpen={secondControls.isOpen}
+        open={secondControls.open}
         onClose={secondControls.onClose}
         size="sm"
       >

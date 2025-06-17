@@ -93,8 +93,10 @@ const Th = <Y extends RowData = unknown>({
     ...rest,
     onClick: handlerAll(rest.onClick, toggleSortingHandler),
   })
-  const { role: _role, ...computedProps } =
-    useClickable<HTMLTableCellElement>(props)
+  const { role: _role, ...computedProps } = useClickable<HTMLTableCellElement>({
+    focusOnClick: false,
+    ...props,
+  })
 
   return (
     <NativeTh

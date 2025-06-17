@@ -39,7 +39,7 @@ export const {
 /**
  * `FormatByte` is used to format bytes to a human-readable format.
  *
- * @see Docs https://yamada-ui.com/components/format-byte
+ * @see https://yamada-ui.com/components/format-byte
  */
 export const FormatByte = withContext(
   ({ locale, unit, unitDisplay, value, ...rest }) => {

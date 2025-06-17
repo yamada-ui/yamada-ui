@@ -9,7 +9,7 @@ import type { FadeStyle } from "./fade.style"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { createComponent } from "../../core"
-import { createTransition, Motion } from "../motion"
+import { createTransition, motion } from "../motion"
 import { fadeStyle } from "./fade.style"
 
 export const fadeVariants: Variants = {
@@ -40,7 +40,7 @@ export const {
 /**
  * `Fade` is a component that gradually shows or hides an element.
  *
- * @see Docs https://yamada-ui.com/components/fade
+ * @see https://yamada-ui.com/components/fade
  */
 export const Fade = withContext(
   ({
@@ -68,7 +68,7 @@ export const Fade = withContext(
     return (
       <AnimatePresence custom={custom}>
         {open ? (
-          <Motion
+          <motion.div
             animate={animate}
             custom={custom}
             exit="exit"

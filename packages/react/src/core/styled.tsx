@@ -19,9 +19,11 @@ import {
   createContext,
   createdDom,
   cx,
+  filterEmpty,
   filterUndefined,
   isString,
   isUndefined,
+  mergeRefs,
   splitObject,
   toArray,
 } from "../utils"
@@ -139,75 +141,89 @@ export function createStyled<
   })
   const componentStyleOptions = { className, style, transferProps }
 
-  const StyledComponent = withEmotionCache<Dict>(
-    ({ as: Component = el, asChild, children, ...props }, cache, ref) => {
-      let className = ""
+  const StyledComponent = withEmotionCache<Dict>(function (
+    { as: Component = el, asChild, children, __debug, ...props },
+    cache,
+    forwardedRef,
+  ) {
+    let className = ""
 
-      const registered = useRef<string[]>([])
-      const htmlTag = isString(Component)
-      const forwardAsChild =
-        styledOptions.forwardAsChild ||
-        styledOptions.forwardProps?.includes("asChild")
-      const theme = use(ThemeContext) as StyledTheme
-      const [omittedProps, styleProps] = useSplitProps(props, shouldForwardProp)
-      const [, rest] = useComponentStyle<any, {}>(
-        omittedProps,
-        componentStyleOptions,
-      )
-      const [cssArray, colorScheme, forwardProps] = useMemo(() => {
-        const { css, colorScheme, ...forwardProps } = rest
+    const debugRef = useRef<HTMLElement>(null)
+    const registered = useRef<string[]>([])
+    const htmlTag = isString(Component)
+    const forwardAsChild =
+      styledOptions.forwardAsChild ||
+      styledOptions.forwardProps?.includes("asChild")
+    const shouldDebug = __debug && process.env.NODE_ENV === "development"
+    const theme = use(ThemeContext) as StyledTheme
+    const [omittedProps, styleProps] = useSplitProps(props, shouldForwardProp)
+    const [, rest] = useComponentStyle<any, {}>(
+      omittedProps,
+      componentStyleOptions,
+    )
+    const [cssArray, colorScheme, forwardProps] = useMemo(() => {
+      const { css, colorScheme, ...forwardProps } = rest
 
-        return [toArray(css), colorScheme, forwardProps]
-      }, [rest])
+      return [toArray(css), colorScheme, forwardProps]
+    }, [rest])
 
-      styleProps.colorScheme ??= colorScheme
+    styleProps.colorScheme ??= colorScheme
 
-      if (forwardProps.className)
-        className = getRegisteredStyles(
-          cache.registered,
-          registered.current,
-          forwardProps.className,
-        ).trim()
+    if (forwardProps.className)
+      className = getRegisteredStyles(
+        cache.registered,
+        registered.current,
+        forwardProps.className,
+      ).trim()
 
-      const interpolations = useMemo(
-        () => [
-          ...[...cssArray, styleProps].map(css(theme)),
-          ...registered.current,
-        ],
-        [cssArray, theme, styleProps],
-      )
+    const interpolations = useMemo(
+      () => [
+        ...registered.current,
+        ...filterEmpty([...cssArray, styleProps].map(css(theme))),
+      ],
+      [cssArray, theme, styleProps],
+    )
 
-      const serialized = useMemo(
-        () =>
-          serializeStyles(interpolations, cache.registered, {
-            theme,
-            ...forwardProps,
-          }),
-        [interpolations, cache.registered, theme, forwardProps],
-      )
+    const serialized = useMemo(
+      () =>
+        serializeStyles(interpolations, cache.registered, {
+          theme,
+          ...forwardProps,
+        }),
+      [interpolations, cache.registered, theme, forwardProps],
+    )
 
-      className = cx(className, `${cache.key}-${serialized.name}`)
-      className = cx(className, styledOptions.target)
+    className = cx(className, `${cache.key}-${serialized.name}`)
+    className = cx(className, styledOptions.target)
 
-      const mergedProps = { ...forwardProps, className, children }
+    if (shouldDebug) {
+      // eslint-disable-next-line no-console
+      console.log({
+        ref: debugRef,
+        as: Component,
+        className,
+        css: interpolations,
+        el,
+      })
+    }
 
-      return (
-        <ColorSchemeContext value={styleProps.colorScheme}>
-          <Insertion cache={cache} htmlTag={htmlTag} serialized={serialized} />
+    const ref = shouldDebug ? mergeRefs(forwardedRef, debugRef) : forwardedRef
+    const mergedProps = { ...forwardProps, className, children }
 
-          {asChild && !forwardAsChild ? (
-            <Slot ref={ref} {...mergedProps} />
-          ) : (
-            <Component ref={ref} {...mergedProps} />
-          )}
-        </ColorSchemeContext>
-      )
-    },
-  ) as StyledComponent<Y, M>
+    return (
+      <ColorSchemeContext value={styleProps.colorScheme}>
+        <Insertion cache={cache} htmlTag={htmlTag} serialized={serialized} />
+
+        {asChild && !forwardAsChild ? (
+          <Slot ref={ref} {...mergedProps} />
+        ) : (
+          <Component ref={ref} {...mergedProps} />
+        )}
+      </ColorSchemeContext>
+    )
+  }) as StyledComponent<Y, M>
 
   StyledComponent.displayName = displayName || "StyledComponent"
-
-  if (styledOptions.name) StyledComponent.__styled__ = displayName
 
   return StyledComponent
 }

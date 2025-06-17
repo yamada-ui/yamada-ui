@@ -1,7 +1,7 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES, noop } from "../../utils"
-import { CloseButton } from "../close-button"
+import { CloseButton } from "../button"
 import { VStack } from "../stack"
 import { Alert } from "./"
 
@@ -29,7 +29,7 @@ export const Basic: Story = () => {
 export const Variant: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["plain", "solid", "subtle", "surface", "island"]}
       rows={["info", "success", "warning", "error"]}
     >
@@ -51,7 +51,7 @@ export const Variant: Story = () => {
 export const ColorScheme: Story = () => {
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["plain", "solid", "subtle", "surface", "island"]}
       rows={COLOR_SCHEMES}
     >

@@ -2,6 +2,7 @@ export {
   FieldErrorMessage,
   FieldHelperMessage,
   FieldLabel,
+  FieldPropsContext,
   FieldRoot,
   useFieldPropsContext,
 } from "./field"
@@ -12,9 +13,6 @@ export type {
   FieldProps,
   FieldRootProps,
 } from "./field"
-
 export * from "./field.style"
-
-export * from "./use-field-props"
-
 export * as Field from "./namespace"
+export * from "./use-field-props"

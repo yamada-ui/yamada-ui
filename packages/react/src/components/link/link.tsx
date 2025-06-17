@@ -21,7 +21,7 @@ export const {
 /**
  * `Link` is a component for creating hyperlinks to different web pages, locations within the same page, or other URLs.
  *
- * @see Docs https://yamada-ui.com/components/link
+ * @see https://yamada-ui.com/components/link
  */
 export const Link = withContext("a")(undefined, ({ external, ...rest }) => ({
   rel: external ? "noopener" : undefined,

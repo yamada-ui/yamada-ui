@@ -1,6 +1,5 @@
 export type { FlexProps } from "./flex"
 export { Flex, FlexPropsContext, useFlexPropsContext } from "./flex"
+export * from "./flex.style"
 export type { SpacerProps } from "./spacer"
 export { Spacer } from "./spacer"
-
-export * from "./flex.style"

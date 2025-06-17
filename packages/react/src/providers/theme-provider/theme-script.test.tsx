@@ -3,12 +3,12 @@ import { ThemeSchemeScript } from "./theme-script"
 
 describe("ThemeSchemeScript", () => {
   test("sets the correct theme scheme on initial render", () => {
-    render(<ThemeSchemeScript initialThemeScheme="green" />)
+    render(<ThemeSchemeScript />)
 
     const scriptTag = document.getElementById("ui-theme-script")
 
     expect(scriptTag?.textContent).toContain(
-      `!(function(){try{var a=function(c){var o=document.documentElement;return o.dataset.theme=c,c},m='green',e='ui-theme-scheme',t=localStorage.getItem(e);t?a(t):localStorage.setItem(e, a(m))}catch(a){}})();`,
+      `!(function(){try{var a=function(c){var o=document.documentElement;return o.dataset.theme=c,c},m='base',e='ui-theme-scheme',t=localStorage.getItem(e);t?a(t):localStorage.setItem(e, a(m))}catch(a){}})();`,
     )
   })
 

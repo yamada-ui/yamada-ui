@@ -27,34 +27,25 @@ export const {
 /**
  * `Input` is a component used to obtain text input from the user.
  *
- * @see Docs https://yamada-ui.com/components/input
+ * @see https://yamada-ui.com/components/input
  */
 export const Input: FC<InputProps> = withContext("input")(
   undefined,
   (props) => {
     const {
-      props: {
-        errorBorderColor,
-        focusBorderColor,
-        htmlSize,
-        vars: varsProp,
-        ...rest
-      },
+      props: { errorBorderColor, focusBorderColor, htmlSize, ...rest },
       ariaProps,
       dataProps,
       eventProps,
     } = useFieldProps(props)
-    const vars = useInputBorder(varsProp, {
-      errorBorderColor,
-      focusBorderColor,
-    })
+    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
 
     return {
       size: htmlSize,
-      vars,
       ...ariaProps,
       ...dataProps,
       ...eventProps,
+      ...varProps,
       ...rest,
     }
   },

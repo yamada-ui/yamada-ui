@@ -130,7 +130,6 @@ interface ControllerProps extends LoadingConfig {
 const Controller: FC<ControllerProps> = ({
   ref,
   allowPinchZoom = false,
-  appendToParentPortal,
   blockScrollOnMount = true,
   component: Component,
   containerRef,
@@ -206,10 +205,7 @@ const Controller: FC<ControllerProps> = ({
   return (
     <AnimatePresence initial={false}>
       {loadingCount ? (
-        <Portal
-          appendToParentPortal={appendToParentPortal}
-          containerRef={containerRef}
-        >
+        <Portal containerRef={containerRef}>
           <RemoveScroll
             allowPinchZoom={allowPinchZoom}
             enabled={blockScrollOnMount}
@@ -226,7 +222,7 @@ const Controller: FC<ControllerProps> = ({
 /**
  * `useLoading` is a custom hook for controlling the loading of the application.
  *
- * @see Docs https://yamada-ui.com/hooks/use-loading
+ * @see https://yamada-ui.com/hooks/use-loading
  */
 export const useLoading = (): LoadingContext => {
   const { background, page, screen } = use(LoadingContext)

@@ -1,7 +1,13 @@
 import type { FC, PropsWithChildren, ReactNode } from "react"
-import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  HTMLProps,
+  HTMLStyledProps,
+  SimplePlacement,
+  StyleValue,
+  ThemeProps,
+} from "../../core"
 import type { ButtonProps } from "../button"
-import type { CloseButtonProps } from "../close-button"
+import type { CloseButtonProps } from "../button"
 import type { FocusLockProps } from "../focus-lock"
 import type { HTMLMotionProps, MotionTransitionProps } from "../motion"
 import type { PortalProps } from "../portal"
@@ -12,19 +18,24 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, styled } from "../../core"
-import { findChildren, getValidChildren, wrapOrPassProps } from "../../utils"
+import { useValue } from "../../hooks/use-value"
+import {
+  cast,
+  findChildren,
+  getValidChildren,
+  wrapOrPassProps,
+} from "../../utils"
 import { Button } from "../button"
-import { CloseButton } from "../close-button"
+import { CloseButton } from "../button"
 import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { Portal } from "../portal"
 import { Slide } from "../slide"
-import { Slot } from "../slot"
 import { drawerStyle } from "./drawer.style"
 import { useDrawer } from "./use-drawer"
 
-interface DrawerContext
+interface ComponentContext
   extends Omit<UseDrawerReturn, "getRootProps">,
     Pick<
       DrawerRootProps,
@@ -33,7 +44,7 @@ interface DrawerContext
 
 export interface DrawerRootProps
   extends ThemeProps<DrawerStyle>,
-    Omit<UseDrawerProps, "title">,
+    Omit<UseDrawerProps, "placement" | "title">,
     Pick<
       FocusLockProps,
       | "autoFocus"
@@ -59,6 +70,12 @@ export interface DrawerRootProps
    * The animation duration.
    */
   duration?: MotionTransitionProps["duration"]
+  /**
+   * The placement of the drawer.
+   *
+   * @default 'inline-end'
+   */
+  placement?: StyleValue<SimplePlacement>
   /**
    * The modal trigger to use.
    */
@@ -93,13 +110,13 @@ export interface DrawerRootProps
 
 export const {
   component,
-  ComponentContext: DrawerContext,
+  ComponentContext,
   PropsContext: DrawerPropsContext,
-  useComponentContext: useDrawerContext,
+  useComponentContext,
   usePropsContext: useDrawerPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<DrawerRootProps, DrawerStyle, DrawerContext>(
+} = createSlotComponent<DrawerRootProps, DrawerStyle, ComponentContext>(
   "drawer",
   drawerStyle,
 )
@@ -107,7 +124,7 @@ export const {
 /**
  * `Drawer` is a component for a panel that appears from the edge of the screen.
  *
- * @see Docs https://yamada-ui.com/components/drawer
+ * @see https://yamada-ui.com/components/drawer
  */
 export const DrawerRoot = withProvider(
   ({
@@ -129,7 +146,7 @@ export const DrawerRoot = withProvider(
     initialFocusRef,
     lockFocusAcrossFrames = true,
     middle,
-    placement,
+    placement: placementProp,
     restoreFocus,
     success,
     title,
@@ -144,6 +161,7 @@ export const DrawerRoot = withProvider(
     onSuccess,
     ...props
   }) => {
+    const placement = useValue(placementProp)
     const validChildren = getValidChildren(children)
     const [openTrigger, ...omittedChildren] = findChildren(
       validChildren,
@@ -180,7 +198,7 @@ export const DrawerRoot = withProvider(
     )
 
     return (
-      <DrawerContext value={context}>
+      <ComponentContext value={context}>
         {openTrigger ?? customOpenTrigger}
 
         <AnimatePresence onExitComplete={onCloseComplete}>
@@ -223,34 +241,37 @@ export const DrawerRoot = withProvider(
             </Portal>
           ) : null}
         </AnimatePresence>
-      </DrawerContext>
+      </ComponentContext>
     )
   },
   "root",
   { transferProps: ["placement"] },
 )()
 
-export interface DrawerOpenTriggerProps extends PropsWithChildren {}
+export interface DrawerOpenTriggerProps extends HTMLStyledProps<"button"> {}
 
-export const DrawerOpenTrigger = component<"fragment", DrawerOpenTriggerProps>(
-  (props) => {
-    const { getOpenTriggerProps } = useDrawerContext()
+export const DrawerOpenTrigger = withContext<"button", DrawerOpenTriggerProps>(
+  "button",
+  { name: "openTrigger", slot: ["trigger", "open"] },
+)(undefined, (props) => {
+  const { getOpenTriggerProps } = useComponentContext()
 
-    return <Slot {...getOpenTriggerProps(props)} />
-  },
-  "openTrigger",
-)()
+  return { asChild: true, ...getOpenTriggerProps(props) }
+})
 
-export interface DrawerCloseTriggerProps extends PropsWithChildren {}
+export interface DrawerCloseTriggerProps extends HTMLStyledProps<"button"> {}
 
-export const DrawerCloseTrigger = component<
-  "fragment",
+export const DrawerCloseTrigger = withContext<
+  "button",
   DrawerCloseTriggerProps
->((props) => {
-  const { getCloseTriggerProps } = useDrawerContext()
+>("button", { name: "closeTrigger", slot: ["trigger", "close"] })(
+  undefined,
+  (props) => {
+    const { getCloseTriggerProps } = useComponentContext()
 
-  return <Slot {...getCloseTriggerProps(props)} />
-}, "closeTrigger")()
+    return { asChild: true, ...getCloseTriggerProps(props) }
+  },
+)
 
 export interface DrawerCloseButtonProps extends CloseButtonProps {}
 
@@ -258,7 +279,7 @@ export const DrawerCloseButton = withContext<"button", DrawerCloseButtonProps>(
   CloseButton,
   "closeButton",
 )(undefined, (props) => {
-  const { getCloseButtonProps } = useDrawerContext()
+  const { getCloseButtonProps } = useComponentContext()
 
   return { ...getCloseButtonProps(props) }
 })
@@ -266,16 +287,16 @@ export const DrawerCloseButton = withContext<"button", DrawerCloseButtonProps>(
 export interface DrawerOverlayProps extends HTMLMotionProps {}
 
 export const DrawerOverlay = withContext<"div", DrawerOverlayProps>((props) => {
-  const { duration, getOverlayProps } = useDrawerContext()
+  const { duration, getOverlayProps } = useComponentContext()
 
   return (
-    <Motion
+    <motion.div
       animate="enter"
       custom={{ duration }}
       exit="exit"
       initial="exit"
       variants={fadeVariants}
-      {...(getOverlayProps(props as HTMLProps) as HTMLMotionProps)}
+      {...cast<HTMLMotionProps>(getOverlayProps(cast<HTMLProps>(props)))}
     />
   )
 }, "overlay")()
@@ -294,7 +315,7 @@ export const DrawerContent = withContext<"div", DrawerContentProps>(
       withCloseButton,
       withDragBar,
       getContentProps,
-    } = useDrawerContext()
+    } = useComponentContext()
     const validChildren = getValidChildren(children)
     const [customCloseButton, ...omittedChildren] = findChildren(
       validChildren,
@@ -379,7 +400,7 @@ export const ShorthandDrawerContent: FC<ShorthandDrawerContentProps> = ({
   onMiddle,
   onSuccess,
 }) => {
-  const { onClose } = useDrawerContext()
+  const { onClose } = useComponentContext()
   const customHeader = wrapOrPassProps(DrawerHeader, header)
   const customTitle = wrapOrPassProps(DrawerTitle, title)
   const customBody = wrapOrPassProps(DrawerBody, body)
@@ -420,7 +441,7 @@ export const DrawerDragBar = withContext<"div", DrawerDragBarProps>(
   "div",
   "dragBar",
 )(undefined, (props) => {
-  const { getDragBarProps } = useDrawerContext()
+  const { getDragBarProps } = useComponentContext()
 
   return { ...getDragBarProps(props) }
 })
@@ -431,7 +452,7 @@ export const DrawerHeader = withContext<"header", DrawerHeaderProps>(
   "header",
   "header",
 )(undefined, (props) => {
-  const { getHeaderProps } = useDrawerContext()
+  const { getHeaderProps } = useComponentContext()
 
   return { ...getHeaderProps(props) }
 })
@@ -441,7 +462,7 @@ export interface DrawerTitleProps extends HTMLStyledProps<"h2"> {}
 export const DrawerTitle = withContext<"h2", DrawerTitleProps>("h2", "title")(
   undefined,
   (props) => {
-    const { getTitleProps } = useDrawerContext()
+    const { getTitleProps } = useComponentContext()
 
     return { ...getTitleProps(props) }
   },
@@ -452,7 +473,7 @@ export interface DrawerBodyProps extends HTMLStyledProps {}
 export const DrawerBody = withContext<"div", DrawerBodyProps>("div", "body")(
   undefined,
   (props) => {
-    const { getBodyProps } = useDrawerContext()
+    const { getBodyProps } = useComponentContext()
 
     return { ...getBodyProps(props) }
   },
@@ -464,7 +485,7 @@ export const DrawerFooter = withContext<"footer", DrawerFooterProps>(
   "footer",
   "footer",
 )(undefined, (props) => {
-  const { getFooterProps } = useDrawerContext()
+  const { getFooterProps } = useComponentContext()
 
   return { ...getFooterProps(props) }
 })

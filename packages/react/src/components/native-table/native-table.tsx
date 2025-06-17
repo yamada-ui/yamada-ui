@@ -1,4 +1,9 @@
-import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  CSSProps,
+  Direction,
+  HTMLStyledProps,
+  ThemeProps,
+} from "../../core"
 import type { NativeTableStyle } from "./native-table.style"
 import { createSlotComponent, styled } from "../../core"
 import { nativeTableStyle } from "./native-table.style"
@@ -37,7 +42,7 @@ export const {
 /**
  * `NativeTable` is a component for efficiently organizing and displaying data.
  *
- * @see Docs https://yamada-ui.com/components/native-table
+ * @see https://yamada-ui.com/components/native-table
  */
 export const NativeTableRoot = withProvider(
   ({ withScrollArea, scrollAreaProps, ...rest }) => {
@@ -70,17 +75,17 @@ export interface CaptionProps extends HTMLStyledProps<"caption"> {
   /**
    * The placement of the table caption.
    *
-   * @default 'bottom'
+   * @default 'end'
    */
-  placement?: "bottom" | "top"
+  placement?: Direction
 }
 
 export const Caption = withContext<"caption", CaptionProps>(
   "caption",
   "caption",
-)(undefined, ({ placement: captionSide = "bottom", ...rest }) => ({
-  "data-placement": captionSide,
-  captionSide,
+)(undefined, ({ placement = "end", ...rest }) => ({
+  "data-placement": placement,
+  captionSide: placement === "end" ? "bottom" : "top",
   ...rest,
 }))
 

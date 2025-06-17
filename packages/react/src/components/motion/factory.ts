@@ -20,7 +20,7 @@ function factory() {
 
   return new Proxy(styled, {
     apply: (_target, _thisArg, [el, options]: [DOMElement, StyledOptions]) => {
-      const component = styled(el, options)
+      const component = styled(el, options) as ComponentType<any>
 
       return _motion.create(component)
     },
@@ -40,6 +40,6 @@ function factory() {
 /**
  * `motion` is a component that allows for the easy implementation of a wide variety of animations.
  *
- * @see Docs https://yamada-ui.com/components/motion
+ * @see https://yamada-ui.com/components/motion
  */
 export const motion = factory()

@@ -12,7 +12,7 @@ const Component = styled<"div", Dict>("div", { forwardProps })
 /**
  * `Motion` is a component that allows for the easy implementation of a wide variety of animations.
  *
- * @see Docs https://yamada-ui.com/components/motion
+ * @see https://yamada-ui.com/components/motion
  */
 export const Motion = (({
   ref,
@@ -31,6 +31,3 @@ export const Motion = (({
     />
   )
 }) as MotionStyledComponent<"div">
-
-Motion.displayName = "Motion"
-Motion.__styled__ = "Motion"

@@ -5,15 +5,26 @@ import { useCallback, useEffect } from "react"
 import { useRef, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useFocusOnPointerDown } from "../../hooks/use-focus"
-import { useCallbackRef } from "../../utils"
+import { createContext, useCallbackRef } from "../../utils"
 import {
+  contains,
   handlerAll,
-  isContains,
   mergeRefs,
   useSafeLayoutEffect,
   useUpdateEffect,
 } from "../../utils"
 import { useFieldProps } from "../field"
+
+interface EditableContext
+  extends Omit<
+    UseEditableReturn,
+    "getRootProps" | "onCancel" | "onEdit" | "onSubmit" | "value"
+  > {}
+
+export const [EditableContext, useEditableContext] =
+  createContext<EditableContext>({
+    name: "EditableContext",
+  })
 
 export interface UseEditableProps extends FieldProps {
   /**
@@ -170,8 +181,8 @@ export const useEditable = (props: UseEditableProps = {}) => {
       const ownerDocument = ev.currentTarget.ownerDocument
       const relatedTarget = (ev.relatedTarget ??
         ownerDocument.activeElement) as HTMLElement
-      const targetIsCancel = isContains(cancelRef.current, relatedTarget)
-      const targetIsSubmit = isContains(submitRef.current, relatedTarget)
+      const targetIsCancel = contains(cancelRef.current, relatedTarget)
+      const targetIsSubmit = contains(submitRef.current, relatedTarget)
       const validBlur = !targetIsCancel && !targetIsSubmit
 
       if (!validBlur) return

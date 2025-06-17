@@ -1,8 +1,8 @@
 import type { UsageThemeTokens } from "./theme"
 
 export interface GeneratedThemeTokens extends UsageThemeTokens {
-  apply: string & {}
-  animations: string & {}
+  apply: never
+  animations: never
   aspectRatios:
     | "bronze"
     | "golden"
@@ -12,10 +12,9 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "square"
     | "ultrawide"
     | "wide"
-    | (string & {})
-  blurs: "2xl" | "3xl" | "4xl" | "lg" | "md" | "sm" | "xl" | (string & {})
-  borders: "lg" | "md" | "sm" | "xl" | "xs" | (string & {})
-  breakpoints: "2xl" | "lg" | "md" | "sm" | "xl" | (string & {})
+  blurs: "2xl" | "3xl" | "4xl" | "lg" | "md" | "sm" | "xl"
+  borders: "lg" | "md" | "sm" | "xl" | "xs"
+  breakpoints: "2xl" | "lg" | "md" | "sm" | "xl"
   colors:
     | "amber"
     | "amber.50"
@@ -708,32 +707,39 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "yellow.outline"
     | "yellow.solid"
     | "yellow.subtle"
-    | (string & {})
   colorSchemes:
     | "amber"
     | "black"
     | "blackAlpha"
     | "blue"
     | "cyan"
+    | "danger"
     | "emerald"
+    | "error"
     | "flashy"
     | "fuchsia"
     | "gray"
     | "green"
     | "indigo"
+    | "info"
     | "lime"
+    | "link"
+    | "mono"
     | "orange"
     | "pink"
+    | "primary"
     | "purple"
     | "red"
     | "rose"
+    | "secondary"
     | "sky"
+    | "success"
     | "teal"
     | "violet"
+    | "warning"
     | "white"
     | "whiteAlpha"
     | "yellow"
-    | (string & {})
   durations:
     | "fast"
     | "faster"
@@ -742,15 +748,8 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "slow"
     | "slower"
     | "slowest"
-    | (string & {})
-  easings:
-    | "ease"
-    | "ease-in"
-    | "ease-in-out"
-    | "ease-in-smooth"
-    | "ease-out"
-    | (string & {})
-  fonts: "body" | "heading" | "mono" | (string & {})
+  easings: "ease" | "ease-in" | "ease-in-out" | "ease-in-smooth" | "ease-out"
+  fonts: "body" | "heading" | "mono"
   fontSizes:
     | "2xl"
     | "2xs"
@@ -766,7 +765,6 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "sm"
     | "xl"
     | "xs"
-    | (string & {})
   fontWeights:
     | "black"
     | "bold"
@@ -777,9 +775,9 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "normal"
     | "semibold"
     | "thin"
-    | (string & {})
-  gradients: string & {}
+  gradients: never
   keyframes:
+    | "bg-position"
     | "bounce"
     | "collapse-height"
     | "collapse-width"
@@ -810,7 +808,6 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "slide-to-top-full"
     | "spin"
     | "translate"
-    | (string & {})
   layerStyles:
     | "active"
     | "disabled"
@@ -827,21 +824,9 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "subtle.hover"
     | "surface"
     | "surface.hover"
-    | (string & {})
-  letterSpacings:
-    | "tight"
-    | "tighter"
-    | "wide"
-    | "wider"
-    | "widest"
-    | (string & {})
-  lineHeights:
-    | "moderate"
-    | "short"
-    | "shorter"
-    | "tall"
-    | "taller"
-    | (string & {})
+    | "visuallyHidden"
+  letterSpacings: "tight" | "tighter" | "wide" | "wider" | "widest"
+  lineHeights: "moderate" | "short" | "shorter" | "tall" | "taller"
   radii:
     | "2xl"
     | "2xs"
@@ -858,17 +843,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "sm"
     | "xl"
     | "xs"
-    | (string & {})
-  shadows:
-    | "2xl"
-    | "inner"
-    | "inset"
-    | "lg"
-    | "md"
-    | "sm"
-    | "xl"
-    | "xs"
-    | (string & {})
+  shadows: "2xl" | "inner" | "inset" | "lg" | "md" | "sm" | "xl" | "xs"
   sizes:
     | "0.5"
     | "1"
@@ -973,7 +948,6 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "vw"
     | "xl"
     | "xs"
-    | (string & {})
   spaces:
     | "0.5"
     | "1"
@@ -1083,9 +1057,8 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "sm"
     | "xl"
     | "xs"
-    | (string & {})
-  textStyles: "outline" | "solid" | "subtle" | "surface" | (string & {})
-  themeSchemes: "base" | (string & {})
+  textStyles: "outline" | "solid" | "subtle" | "surface"
+  themeSchemes: never
   zIndices:
     | "beerus"
     | "burter"
@@ -1101,5 +1074,4 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "vegeta"
     | "yamcha"
     | "zarbon"
-    | (string & {})
 }

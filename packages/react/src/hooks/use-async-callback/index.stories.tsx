@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import type { FC } from "react"
 import { Button } from "../../components/button"
 import { UIProvider } from "../../providers/ui-provider"
@@ -18,19 +18,19 @@ const wait = async (ms: number) =>
   })
 
 export const Basic = () => {
-  const [isLoading, onClick] = useAsyncCallback(async () => {
+  const [loading, onClick] = useAsyncCallback(async () => {
     await wait(3000)
   }, [])
 
   return (
-    <Button loading={isLoading} onClick={onClick}>
+    <Button loading={loading} onClick={onClick}>
       Click me
     </Button>
   )
 }
 
 export const Loading = () => {
-  const [isLoading, onClick] = useAsyncCallback(
+  const [loading, onClick] = useAsyncCallback(
     async () => {
       await wait(3000)
     },
@@ -39,7 +39,7 @@ export const Loading = () => {
   )
 
   return (
-    <Button loading={isLoading} onClick={onClick}>
+    <Button loading={loading} onClick={onClick}>
       Click me
     </Button>
   )
@@ -60,12 +60,12 @@ export const Config = () => {
 }
 
 const App: FC = () => {
-  const [isLoading, onClick] = useAsyncCallback(async () => {
+  const [loading, onClick] = useAsyncCallback(async () => {
     await wait(3000)
   }, [])
 
   return (
-    <Button loading={isLoading} onClick={onClick}>
+    <Button loading={loading} onClick={onClick}>
       Click me
     </Button>
   )

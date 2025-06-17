@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useValue } from "."
 import { Box } from "../../components/box"
 import { useColorMode } from "../../providers/color-mode-provider"

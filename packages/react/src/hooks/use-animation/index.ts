@@ -2,7 +2,7 @@ import type { CSSAnimationObject, Token } from "../../core"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { animation, css } from "../../core"
 import { useTheme } from "../../providers/theme-provider"
-import { getOwnerWindow, isArray, isUndefined, runIfFn } from "../../utils"
+import { getWindow, isArray, isUndefined, runIfFn } from "../../utils"
 import { useBoolean } from "../use-boolean"
 import { useEventListener } from "../use-event-listener"
 
@@ -13,7 +13,7 @@ type CSSObject =
 /**
  * `useAnimation` is a custom hook that implements animations similar to CSS `keyframes`.
  *
- * @see Docs https://yamada-ui.com/hooks/use-animation
+ * @see https://yamada-ui.com/hooks/use-animation
  */
 export const useAnimation = (cssObj: CSSObject): string => {
   const { theme } = useTheme()
@@ -28,7 +28,7 @@ export const useAnimation = (cssObj: CSSObject): string => {
 /**
  * `useDynamicAnimation` is a custom hook used to switch animations.
  *
- * @see Docs https://yamada-ui.com/hooks/use-dynamic-animation
+ * @see https://yamada-ui.com/hooks/use-dynamic-animation
  */
 export const useDynamicAnimation = <
   T extends
@@ -145,7 +145,7 @@ export const useAnimationObserver = ({
   return {
     present: !hidden,
     onAnimationComplete() {
-      const ownerWindow = getOwnerWindow(ref.current)
+      const ownerWindow = getWindow(ref.current)
       const ev = new ownerWindow.CustomEvent("animationend", {
         bubbles: true,
       })

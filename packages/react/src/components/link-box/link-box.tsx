@@ -1,31 +1,24 @@
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { LinkBoxStyle } from "./link-box.style"
-import {
-  createSlotComponent,
-  mergeVars,
-  radiusProperties,
-  styled,
-  useCreateVars,
-} from "../../core"
+import { createSlotComponent, radiusProperties, styled } from "../../core"
+import { useExtractProps } from "../../core"
 import { linkBoxStyle } from "./link-box.style"
 
-interface LinkBoxContext {
-  variableProps: Dict
-}
+interface ComponentContext extends Dict {}
 
 export interface LinkBoxRootProps
   extends HTMLStyledProps,
     ThemeProps<LinkBoxStyle> {}
 
 export const {
-  ComponentContext: LinkBoxContext,
+  ComponentContext,
   PropsContext: LinkBoxPropsContext,
-  useComponentContext: useLinkBoxContext,
+  useComponentContext,
   usePropsContext: useLinkBoxPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<LinkBoxRootProps, LinkBoxStyle, LinkBoxContext>(
+} = createSlotComponent<LinkBoxRootProps, LinkBoxStyle, ComponentContext>(
   "link-box",
   linkBoxStyle,
 )
@@ -33,18 +26,16 @@ export const {
 /**
  * `LinkBox` is a component that allows elements such as articles or cards to function as a single link.
  *
- * @see Docs https://yamada-ui.com/components/link-box
+ * @see https://yamada-ui.com/components/link-box
  */
 export const LinkBoxRoot = withProvider<"div", LinkBoxRootProps>(
-  ({ children, vars: varsProp, ...rest }) => {
-    const [vars, variableProps] = useCreateVars(rest, radiusProperties)
+  ({ children, ...rest }) => {
+    const context = useExtractProps(rest, radiusProperties)
 
     return (
-      <LinkBoxContext value={{ variableProps }}>
-        <styled.div {...rest} vars={mergeVars(vars, varsProp)}>
-          {children}
-        </styled.div>
-      </LinkBoxContext>
+      <ComponentContext value={context}>
+        <styled.div {...rest}>{children}</styled.div>
+      </ComponentContext>
     )
   },
   "root",
@@ -63,12 +54,12 @@ export const LinkBoxOverlay = withContext<"a", LinkBoxOverlayProps>(
   "a",
   "overlay",
 )(undefined, ({ external, _before, ...rest }) => {
-  const { variableProps } = useLinkBoxContext()
+  const context = useComponentContext()
 
   return {
     rel: external ? "noopener" : undefined,
     target: external ? "_blank" : undefined,
-    _before: { ..._before, ...variableProps },
+    _before: { ..._before, ...context },
     ...rest,
   }
 })

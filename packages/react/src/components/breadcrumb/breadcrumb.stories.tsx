@@ -1,6 +1,6 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useMemo } from "react"
-import { For } from "../../components/for"
+import { PropsTable } from "../../../storybook/components"
 import { ChevronsRightIcon } from "../icon"
 // import { Menu, MenuButton, MenuItem, MenuList } from "../menu"
 import { Breadcrumb } from "./"
@@ -41,7 +41,7 @@ export const Items: Story = () => {
   return <Breadcrumb.Root items={items} />
 }
 
-export const Variants: Story = () => {
+export const Variant: Story = () => {
   const items = useMemo<Breadcrumb.RootProps["items"]>(
     () => [
       { href: "/", label: "サイヤ人編" },
@@ -53,15 +53,15 @@ export const Variants: Story = () => {
   )
 
   return (
-    <For each={["plain", "underline"] as const}>
-      {(variant, index) => (
-        <Breadcrumb.Root key={index} variant={variant} items={items} />
+    <PropsTable variant="stack" rows={["plain", "underline"]}>
+      {(_, row, key) => (
+        <Breadcrumb.Root key={key} variant={row} items={items} />
       )}
-    </For>
+    </PropsTable>
   )
 }
 
-export const Sizes: Story = () => {
+export const Size: Story = () => {
   const items = useMemo<Breadcrumb.RootProps["items"]>(
     () => [
       { href: "/", label: "サイヤ人編" },
@@ -73,11 +73,9 @@ export const Sizes: Story = () => {
   )
 
   return (
-    <For each={["sm", "md", "lg"] as const}>
-      {(size, index) => (
-        <Breadcrumb.Root key={index} size={size} items={items} />
-      )}
-    </For>
+    <PropsTable variant="stack" rows={["sm", "md", "lg"]}>
+      {(_, row, key) => <Breadcrumb.Root key={key} size={row} items={items} />}
+    </PropsTable>
   )
 }
 

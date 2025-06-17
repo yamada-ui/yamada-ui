@@ -5,6 +5,7 @@ export {
   FieldsetHeader,
   FieldsetHelperMessage,
   FieldsetLegend,
+  FieldsetPropsContext,
   FieldsetRoot,
   useFieldsetContext,
   useFieldsetPropsContext,
@@ -17,7 +18,5 @@ export type {
   FieldsetLegendProps,
   FieldsetRootProps,
 } from "./fieldset"
-
 export * from "./fieldset.style"
-
 export * as Fieldset from "./namespace"

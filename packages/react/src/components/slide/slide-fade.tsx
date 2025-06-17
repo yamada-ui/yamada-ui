@@ -10,7 +10,7 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { createComponent } from "../../core"
 import { useValue } from "../../hooks/use-value"
-import { createTransition, Motion } from "../motion"
+import { createTransition, motion } from "../motion"
 import { slideFadeStyle } from "./slide-fade.style"
 
 export const slideFadeVariants: Variants = {
@@ -92,7 +92,7 @@ export const {
 /**
  * `SlideFade` is a component that gradually shows or hides an element while moving it from a specified position.
  *
- * @see Docs https://yamada-ui.com/components/slide-fade
+ * @see https://yamada-ui.com/components/slide-fade
  */
 export const SlideFade = withContext(
   ({
@@ -128,7 +128,7 @@ export const SlideFade = withContext(
     return (
       <AnimatePresence custom={custom}>
         {open ? (
-          <Motion
+          <motion.div
             animate={animate}
             custom={custom}
             exit="exit"

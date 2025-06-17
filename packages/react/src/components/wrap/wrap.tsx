@@ -6,7 +6,7 @@ import { Flex } from "../flex"
 import { wrapStyle } from "./wrap.style"
 
 export interface WrapProps
-  extends WithoutThemeProps<FlexProps>,
+  extends WithoutThemeProps<FlexProps, WrapStyle>,
     ThemeProps<WrapStyle> {}
 
 export const {
@@ -18,6 +18,6 @@ export const {
 /**
  * `Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`.
  *
- * @see Docs https://yamada-ui.com/components/wrap
+ * @see https://yamada-ui.com/components/wrap
  */
 export const Wrap = withContext(Flex)()

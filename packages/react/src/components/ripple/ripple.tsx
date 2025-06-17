@@ -15,7 +15,13 @@ const clamp = (value: number, min: number, max: number) =>
 export interface RippleProps
   extends HTMLMotionProps<"span">,
     ThemeProps<RippleStyle> {
+  /**
+   * The ripples to use.
+   */
   ripples: RippleOptions[]
+  /**
+   * The callback invoked when a ripple is cleared.
+   */
   onClear: (key: Key) => void
   /**
    * If `true`, disable ripple effects when pressing a element.
@@ -34,7 +40,7 @@ export const {
 /**
  * `Ripple` is a component that adds a ripple effect to elements, allowing users to recognize when they have clicked.
  *
- * @see Docs https://yamada-ui.com/components/ripple
+ * @see https://yamada-ui.com/components/ripple
  */
 export const Ripple: FC<RippleProps> = withContext(
   ({

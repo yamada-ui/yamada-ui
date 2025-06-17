@@ -12,7 +12,9 @@ import { replaceObject } from "../../utils"
 import { Grid } from "../grid"
 import { simpleGridStyle } from "./simple-grid.style"
 
-interface SimpleGridOptions {
+export interface SimpleGridProps
+  extends Omit<WithoutThemeProps<GridProps, SimpleGridStyle>, "columns">,
+    ThemeProps<SimpleGridStyle> {
   /**
    * The number of columns.
    */
@@ -23,11 +25,6 @@ interface SimpleGridOptions {
    */
   minChildWidth?: CSSProps["minWidth"]
 }
-
-export interface SimpleGridProps
-  extends WithoutThemeProps<GridProps, "columns">,
-    ThemeProps<SimpleGridStyle>,
-    SimpleGridOptions {}
 
 export const {
   PropsContext: SimpleGridPropsContext,
@@ -41,7 +38,7 @@ export const {
 /**
  * `SimpleGrid` is a component that makes `Grid` simpler and more user-friendly.
  *
- * @see Docs https://yamada-ui.com/components/simple-grid
+ * @see https://yamada-ui.com/components/simple-grid
  */
 export const SimpleGrid = withContext(Grid)(
   undefined,

@@ -1,4 +1,4 @@
-import { isNumber, isString, isUndefined } from "@yamada-ui/utils"
+import { isArray, isNumber, isString, isUndefined } from "@yamada-ui/utils"
 import * as React from "react"
 
 export function getValidChildren(
@@ -13,18 +13,34 @@ export function isValidElement(child: any): child is React.ReactNode {
   return React.isValidElement(child) || isString(child) || isNumber(child)
 }
 
-export function isSomeElement(child: any, type: any): boolean {
-  if (child.type === type) return true
+export function isSomeDisplayName(a: any, b: any): boolean {
+  if (isUndefined(a) || isUndefined(b)) return false
 
-  if (!!child.__styled__ && !!type.__styled__) {
-    if (child.__styled__ === type.__styled__) return true
+  if (isArray(a)) {
+    if (a.includes(b)) return true
+    if (!!b.displayName && a.includes(b.displayName)) return true
+    if (!!b.name && a.includes(b.name)) return true
+  } else {
+    if (a === b) return true
+    if (!!a.displayName && !!b.displayName && a.displayName === b.displayName)
+      return true
+    if (!!a.name && !!b.name && a.name === b.name) return true
+    if (!!a.displayName && !!b.name && a.displayName === b.name) return true
+    if (!!a.name && !!b.displayName && a.name === b.displayName) return true
   }
 
-  const payload = child.type._payload
+  return false
+}
 
-  if (!!payload?.value?.__styled__ && !!type.__styled__) {
-    if (payload?.value?.__styled__ === type.__styled__) return true
-  }
+export function isSomeElement(a: any, b: any): boolean {
+  if (isUndefined(a) || isUndefined(b)) return false
+  if (a === b) return true
+  if (isSomeDisplayName(a, b)) return true
+
+  a = a._payload?.value
+
+  if (isUndefined(a)) return false
+  if (isSomeDisplayName(a, b)) return true
 
   return false
 }
@@ -34,7 +50,7 @@ export function findChild<Y = any>(
   ...types: (React.JSXElementConstructor<any> | string)[]
 ): React.ReactElement<Y> | undefined {
   const child = children.find((child) =>
-    types.some((type) => isSomeElement(child, type)),
+    types.some((type) => isSomeElement(child.type, type)),
   )
 
   return child as React.ReactElement<Y> | undefined
@@ -44,15 +60,13 @@ export function findChildren(
   children: React.ReactElement[],
   ...types: (React.JSXElementConstructor<any> | string)[]
 ): [React.ReactElement | undefined, ...React.ReactElement[]] {
-  const child = children.find((child) =>
-    types.some((type) => isSomeElement(child, type)),
-  )
+  const child = findChild(children, ...types)
 
   if (child) {
     return children.sort((a, b) => {
-      if (types.some((type) => isSomeElement(a, type))) {
+      if (types.some((type) => isSomeElement(a.type, type))) {
         return -1
-      } else if (types.some((type) => isSomeElement(b, type))) {
+      } else if (types.some((type) => isSomeElement(b.type, type))) {
         return 1
       } else {
         return 0
@@ -68,7 +82,7 @@ export function includesChildren(
   ...types: (React.JSXElementConstructor<any> | string)[]
 ): boolean {
   return children.some((child) => {
-    if (types.some((type) => isSomeElement(child, type))) return true
+    if (types.some((type) => isSomeElement(child.type, type))) return true
 
     const children = getValidChildren(child.props.children)
 
@@ -81,7 +95,7 @@ export function omitChildren(
   ...types: (React.JSXElementConstructor<any> | string)[]
 ): React.ReactElement[] {
   return children.filter((child) =>
-    types.every((type) => !isSomeElement(child, type)),
+    types.every((type) => !isSomeElement(child.type, type)),
   )
 }
 
@@ -90,7 +104,7 @@ export function pickChildren(
   ...types: (React.JSXElementConstructor<any> | string)[]
 ): React.ReactElement[] {
   return children.filter((child) =>
-    types.every((type) => isSomeElement(child, type)),
+    types.some((type) => isSomeElement(child.type, type)),
   )
 }
 

@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import { useRef, useState } from "react"
-import { render, screen, waitFor } from "../../../test"
+import { render, screen } from "../../../test"
 import { useSize, useSizes } from "./"
 
 describe("useSizes", () => {
@@ -98,7 +98,7 @@ describe("useSizes", () => {
     expect(screen.getByTestId("el")).toHaveTextContent("400 x 320")
   })
 
-  test.skip("updates size when element size changes", async () => {
+  test("updates size when element size changes", async () => {
     const Component: FC = () => {
       const [{ height, width }, setSize] = useState({ height: 320, width: 400 })
       const ref = useRef<HTMLDivElement>(null)
@@ -118,13 +118,13 @@ describe("useSizes", () => {
     }
     const { user } = render(<Component />)
 
-    expect(screen.getByTestId("el")).toHaveTextContent("400 x 320")
+    const targetElement = screen.getByTestId("el")
+
+    expect(targetElement).toHaveTextContent("400 x 320")
 
     await user.click(screen.getByRole("button", { name: /resize/i }))
 
-    await waitFor(() => {
-      expect(screen.getByTestId("el")).toHaveTextContent("300 x 300")
-    })
+    expect(targetElement).toHaveStyle({ height: "300px", width: "300px" })
   })
 
   test("returns undefined size when element is null", () => {

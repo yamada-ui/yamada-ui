@@ -22,7 +22,7 @@ import {
 } from "@yamada-ui/react"
 ```
 
-- `list`: A wrapper component for a list without item icons.
+- `List`: A wrapper component for a list without item icons.
 - `ListItem`: A component for an item.
 - `ListIcon`: A component for an item's icon.
 - `DiscList`: A wrapper component for an unordered list.
@@ -118,7 +118,7 @@ To use custom icons for items, use `ListIcon`.
     {(styleType, index) => (
       <List
         styleType={styleType}
-        ms={styleType === "lower-alpha" ? "1.2em" : "0em"}
+        ms={styleType === "lower-alpha" ? "1.2em" : undefined}
       >
         <For
           each={[
@@ -132,7 +132,7 @@ To use custom icons for items, use `ListIcon`.
           {(text, index) => (
             <ListItem
               key={index}
-              ps={styleType === "lower-alpha" ? "0.2em" : "0em"}
+              ps={styleType === "lower-alpha" ? "0.2em" : undefined}
             >
               {text}
             </ListItem>

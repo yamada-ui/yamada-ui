@@ -3,7 +3,7 @@ import { isFunction } from "./assertion"
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop = () => {}
 
-export function runIfFunc<T, U extends any[]>(
+export function runIfFn<T, U extends any[]>(
   valOrFunc: ((...funcArgs: U) => T) | T,
   ...args: U
 ): T {
@@ -11,7 +11,7 @@ export function runIfFunc<T, U extends any[]>(
 }
 
 export function handlerAll<T extends (event: any, ...args: any[]) => void>(
-  ...funcs: (T | undefined)[]
+  ...funcs: (null | T | undefined)[]
 ) {
   return function (
     event: T extends (event: infer R, ...args: any[]) => any ? R : never,
@@ -25,8 +25,8 @@ export function handlerAll<T extends (event: any, ...args: any[]) => void>(
   }
 }
 
-export function funcAll<T extends (...args: any[]) => any>(
-  ...funcs: (T | undefined)[]
+export function fnAll<T extends (...args: any[]) => any>(
+  ...funcs: (null | T | undefined)[]
 ) {
   return function (...args: T extends (...args: infer R) => any ? R : never) {
     return funcs.forEach((func) => func?.(...args))

@@ -1,8 +1,8 @@
-import type { Meta, StoryFn } from "@storybook/react"
-import { COLOR_SCHEMES } from "@yamada-ui/utils"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "../../../storybook/components"
-import { Wrap } from "../flex"
+import { COLOR_SCHEMES } from "../../utils"
 import { BoldIcon, MinusIcon, MoonIcon, PlusIcon, SunIcon } from "../icon"
+import { Wrap } from "../wrap"
 import { IconButton } from "./icon-button"
 
 type Story = StoryFn<typeof IconButton>

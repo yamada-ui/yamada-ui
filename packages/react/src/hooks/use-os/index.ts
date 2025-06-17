@@ -1,5 +1,8 @@
+import { isUndefined } from "../../utils"
+
 export type OS =
   | "android"
+  | "chromeos"
   | "ios"
   | "linux"
   | "macos"
@@ -14,12 +17,14 @@ const getOS = (): OS => {
   const ios = /(iPhone)|(iPad)|(iPod)/i
   const android = /Android/i
   const linux = /Linux/i
+  const chromeos = /CrOS/i
 
   if (macos.test(userAgent)) return "macos"
   if (ios.test(userAgent)) return "ios"
   if (windows.test(userAgent)) return "windows"
   if (android.test(userAgent)) return "android"
   if (linux.test(userAgent)) return "linux"
+  if (chromeos.test(userAgent)) return "chromeos"
 
   return "undetermined"
 }
@@ -27,10 +32,10 @@ const getOS = (): OS => {
 /**
  * `useOS` is a custom hook that returns the user's OS.
  *
- * @see Docs https://yamada-ui.com/hooks/use-os
+ * @see https://yamada-ui.com/hooks/use-os
  */
 export const useOS = (): OS => {
-  if (typeof window !== "undefined") return getOS()
+  if (!isUndefined(window)) return getOS()
 
   return "undetermined"
 }

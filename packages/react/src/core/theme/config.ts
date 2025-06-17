@@ -156,7 +156,6 @@ const defineAnimationSemanticTokens: DefineAnimationSemanticTokens = (value) =>
 const defineAspectRatioSemanticTokens: DefineSemanticTokens = (value) => value
 const defineBlurSemanticTokens: DefineSemanticTokens = (value) => value
 const defineBorderSemanticTokens: DefineSemanticTokens = (value) => value
-const defineBreakpointSemanticTokens: DefineBreakpointTokens = (value) => value
 const defineColorSemanticTokens: DefineColorSemanticTokens = (value) => value
 const defineColorSchemeSemanticTokens: DefineColorSchemeSemanticTokens = (
   value,
@@ -181,7 +180,6 @@ export const defineSemanticTokens = {
   aspectRatios: defineAspectRatioSemanticTokens,
   blurs: defineBlurSemanticTokens,
   borders: defineBorderSemanticTokens,
-  breakpoints: defineBreakpointSemanticTokens,
   colors: defineColorSemanticTokens,
   colorSchemes: defineColorSchemeSemanticTokens,
   durations: defineDurationSemanticTokens,

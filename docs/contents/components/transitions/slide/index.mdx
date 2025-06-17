@@ -17,16 +17,16 @@ import { Slide } from "@yamada-ui/react"
 
 ## Usage
 
-To control the visibility, set `isOpen`.
+To control the visibility, set `open`.
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Slide isOpen={isOpen} placement="bottom">
+    <Slide open={open} placement="bottom">
       <VStack w="full" bg="orange.500" p="md">
         <Text color="white">
           クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -46,13 +46,13 @@ return (
 To change the duration, set a number (in seconds) to `duration`.
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Slide isOpen={isOpen} placement="bottom" duration={0.7}>
+    <Slide open={open} placement="bottom" duration={0.7}>
       <VStack w="full" bg="orange.500" p="md">
         <Text color="white">
           クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -72,13 +72,13 @@ return (
 To change the placement, set `placement` to `top`, `right`, `bottom`, or `left`. By default, `right` is set.
 
 ```tsx functional=true
-const { isOpen, onToggle } = useDisclosure()
+const { open, onToggle } = useDisclosure()
 
 return (
   <>
     <Button onClick={onToggle}>Please Click</Button>
 
-    <Slide isOpen={isOpen} placement="left" zIndex="sonGoku">
+    <Slide open={open} placement="left" zIndex="sonGoku">
       <VStack w="full" bg="orange.500" p="md">
         <Text color="white">
           クリリンのことか……クリリンのことかーーーっ！！！！！

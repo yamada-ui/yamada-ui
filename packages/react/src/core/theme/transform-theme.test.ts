@@ -1,9 +1,8 @@
-import type { Dict } from "../../utils"
 import type { ThemeConfig, UsageTheme } from "./index.types"
 import { transformTheme } from "."
 import { defaultConfig, defaultTheme } from "../../theme"
 import { TONES } from "../../utils"
-import { pseudos } from "../pseudos"
+import { conditions } from "../conditions"
 
 describe("transformTheme", () => {
   const theme: UsageTheme = {
@@ -247,7 +246,7 @@ describe("transformTheme", () => {
       var: "--ui-colors-border",
     })
     expect(__cssVars["--ui-colors-border"]).toBe("var(--ui-colors-black-200)")
-    expect(__cssVars[pseudos._dark]["--ui-colors-border"]).toBe(
+    expect(__cssVars[conditions._dark]["--ui-colors-border"]).toBe(
       "var(--ui-colors-white-200)",
     )
   })
@@ -264,14 +263,18 @@ describe("transformTheme", () => {
     })
     expect(__cssVars["--ui-borders-md"]).toBe("2px solid #000")
     expect(__cssVars[queries.sm]["--ui-borders-md"]).toBe("1px solid #000")
-    expect(__cssVars[pseudos._dark]["--ui-borders-md"]).toBe("2px solid #FFF")
-    expect(__cssVars[pseudos._dark][queries.sm]["--ui-borders-md"]).toBe(
+    expect(__cssVars[conditions._dark]["--ui-borders-md"]).toBe(
+      "2px solid #FFF",
+    )
+    expect(__cssVars[conditions._dark][queries.sm]["--ui-borders-md"]).toBe(
       "1px solid #FFF",
     )
     expect(__cssVars["--ui-borders-lg"]).toBe("3px solid #000")
-    expect(__cssVars[pseudos._dark]["--ui-borders-lg"]).toBe("3px solid #FFF")
+    expect(__cssVars[conditions._dark]["--ui-borders-lg"]).toBe(
+      "3px solid #FFF",
+    )
     expect(__cssVars[queries.sm]["--ui-borders-lg"]).toBe("2px solid #000")
-    expect(__cssVars[queries.sm][pseudos._dark]["--ui-borders-lg"]).toBe(
+    expect(__cssVars[queries.sm][conditions._dark]["--ui-borders-lg"]).toBe(
       "2px solid #FFF",
     )
   })
@@ -301,15 +304,13 @@ describe("transformTheme", () => {
     expect(__cssVars["--ui-spaces-sm"]).toBe("var(--ui-spaces-2)")
     expect(__cssVars["--ui-spaces-md"]).toBe("var(--ui-spaces-3)")
     expect(__cssVars["--ui-spaces-lg"]).toBe("var(--ui-spaces-4)")
-    expect(__cssVars["--ui-colors-primary"]).toBe("var(--ui-colors-blue-500)")
-    expect(__cssVars["--ui-colors-secondary"]).toBe(
-      "var(--ui-colors-green-500)",
-    )
+    expect(__cssVars["--ui-colors-primary"]).toBe("var(--ui-colors-blue)")
+    expect(__cssVars["--ui-colors-secondary"]).toBe("var(--ui-colors-green)")
     expect(__cssVars[queries.sm]["--ui-spaces-sm"]).toBe("var(--ui-spaces-1)")
     expect(__cssVars[queries.sm]["--ui-spaces-md"]).toBe("var(--ui-spaces-2)")
     expect(__cssVars[queries.sm]["--ui-spaces-lg"]).toBe("var(--ui-spaces-3)")
-    expect(__cssVars[pseudos._dark]["--ui-colors-primary"]).toBe(
-      "var(--ui-colors-red-500)",
+    expect(__cssVars[conditions._dark]["--ui-colors-primary"]).toBe(
+      "var(--ui-colors-red)",
     )
     TONES.forEach((tone) => {
       expect(__cssMap[`colors.pink.${tone}`]).toStrictEqual({
@@ -326,7 +327,7 @@ describe("transformTheme", () => {
       expect(__cssVars[`--ui-colors-primary-${tone}`]).toBe(
         `var(--ui-colors-blue-${tone})`,
       )
-      expect(__cssVars[pseudos._dark][`--ui-colors-primary-${tone}`]).toBe(
+      expect(__cssVars[conditions._dark][`--ui-colors-primary-${tone}`]).toBe(
         `var(--ui-colors-red-${tone})`,
       )
     })
@@ -345,7 +346,7 @@ describe("transformTheme", () => {
         var: `--ui-colors-tertiary-${tone}`,
       })
       expect(__cssVars[`--ui-colors-tertiary-${tone}`]).toBe(
-        (theme.semanticTokens?.colors?.snot as Dict<string>)[tone],
+        `var(--ui-colors-snot-${tone})`,
       )
     })
   })
@@ -388,7 +389,7 @@ describe("transformTheme", () => {
     expect(__cssVars["--ui-gradients-green"]).toBe(
       "linear-gradient(to right, var(--ui-colors-green-200), var(--ui-colors-green-500))",
     )
-    expect(__cssVars[pseudos._dark]["--ui-gradients-green"]).toBe(
+    expect(__cssVars[conditions._dark]["--ui-gradients-green"]).toBe(
       "linear-gradient(to right, var(--ui-colors-green-100), var(--ui-colors-green-300))",
     )
     expect(__cssVars["--ui-gradients-red"]).toBe(
@@ -397,15 +398,15 @@ describe("transformTheme", () => {
     expect(__cssVars[queries.sm]["--ui-gradients-red"]).toBe(
       "linear-gradient(to right, var(--ui-colors-red-100), var(--ui-colors-red-300))",
     )
-    expect(__cssVars[pseudos._dark]["--ui-gradients-red"]).toBe(
+    expect(__cssVars[conditions._dark]["--ui-gradients-red"]).toBe(
       "linear-gradient(to right, var(--ui-colors-red-300), var(--ui-colors-red-600))",
     )
-    expect(__cssVars[pseudos._dark][queries.sm]["--ui-gradients-red"]).toBe(
+    expect(__cssVars[conditions._dark][queries.sm]["--ui-gradients-red"]).toBe(
       "linear-gradient(to right, var(--ui-colors-red-200), var(--ui-colors-red-400))",
     )
     expect(__cssVars["--ui-gradients-hero"]).toBe("var(--ui-gradients-blue)")
     expect(__cssVars["--ui-gradients-banner"]).toBe("var(--ui-gradients-green)")
-    expect(__cssVars[pseudos._dark]["--ui-gradients-banner"]).toBe(
+    expect(__cssVars[conditions._dark]["--ui-gradients-banner"]).toBe(
       "var(--ui-gradients-red)",
     )
     expect(__cssVars["--ui-gradients-pink"]).toBe(
@@ -478,11 +479,11 @@ describe("transformTheme", () => {
       "var(--ui-colors-red-500)",
     )
     expect(
-      __cssVars[themeQueries.red][pseudos._dark]["--ui-colors-border"],
+      __cssVars[themeQueries.red][conditions._dark]["--ui-colors-border"],
     ).toBe("pink")
     expect(__cssVars[themeQueries.blue]["--ui-colors-border"]).toBe("blue")
     expect(
-      __cssVars[themeQueries.blue][pseudos._dark]["--ui-colors-border"],
+      __cssVars[themeQueries.blue][conditions._dark]["--ui-colors-border"],
     ).toBe("cyan")
   })
 })

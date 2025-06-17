@@ -29,12 +29,13 @@ export const superProps = ({
   css,
   duration,
   dur = duration,
-  vars = [],
   ...rest
-}: WithoutThemeProps<LoadingProps, LoadingStyle>) => ({
+}: WithoutThemeProps<LoadingProps, LoadingStyle>): WithoutThemeProps<
+  LoadingProps,
+  LoadingStyle
+> => ({
   css,
   dur,
-  vars,
   ...rest,
 })
 

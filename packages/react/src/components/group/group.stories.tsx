@@ -1,5 +1,6 @@
-import type { Meta, StoryFn } from "@storybook/react"
-import { Button, IconButton } from "../button"
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import { Button } from "../button"
+import { IconButton } from "../button"
 import { PlusIcon } from "../icon"
 import { Input } from "../input"
 import { Tag } from "../tag"

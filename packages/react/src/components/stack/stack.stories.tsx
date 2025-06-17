@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Box } from "../box"
 import { Center } from "../center"
 import { For } from "../for"
@@ -47,23 +47,40 @@ export const Horizontal: Story = () => {
 
 export const Depth: Story = () => {
   return (
-    <ZStack>
-      <Box bg="info" color="white" p="md" rounded="l2">
-        Box
-      </Box>
+    <For
+      each={
+        [
+          "end",
+          "start",
+          "center-end",
+          "center-start",
+          "end-start",
+          "end-end",
+          "start-start",
+          "start-end",
+        ] as const
+      }
+    >
+      {(direction) => (
+        <ZStack key={direction} direction={direction}>
+          <Box bg="info" color="white" p="md" rounded="l2">
+            Box
+          </Box>
 
-      <Box bg="success" color="white" p="md" rounded="l2">
-        Box
-      </Box>
+          <Box bg="success" color="white" p="md" rounded="l2">
+            Box
+          </Box>
 
-      <Box bg="warning" color="white" p="md" rounded="l2">
-        Box
-      </Box>
+          <Box bg="warning" color="white" p="md" rounded="l2">
+            Box
+          </Box>
 
-      <Box bg="error" color="white" p="md" rounded="l2">
-        Box
-      </Box>
-    </ZStack>
+          <Box bg="error" color="white" p="md" rounded="l2">
+            Box
+          </Box>
+        </ZStack>
+      )}
+    </For>
   )
 }
 

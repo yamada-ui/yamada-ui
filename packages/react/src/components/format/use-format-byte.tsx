@@ -13,7 +13,7 @@ export interface FormatBytesOptions {
 /**
  * `useFormatByte` is a custom hook that returns the formatted byte.
  *
- * @see Docs https://yamada-ui.com/hooks/use-format-byte
+ * @see https://yamada-ui.com/hooks/use-format-byte
  */
 export const useFormatByte = (
   bytes: number,
@@ -41,3 +41,5 @@ export const useFormatByte = (
     unitDisplay,
   })
 }
+
+export type UseFormatByteReturn = ReturnType<typeof useFormatByte>

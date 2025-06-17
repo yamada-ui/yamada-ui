@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Center } from "../../components/center"
 import { Text } from "../../components/text"
 import { Tooltip } from "./tooltip"

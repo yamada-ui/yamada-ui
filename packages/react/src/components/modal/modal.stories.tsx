@@ -1,14 +1,14 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useState } from "react"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { noop } from "../../utils"
 import { Button } from "../button"
 import { Container } from "../container"
-import { Wrap } from "../flex"
 import { For } from "../for"
 import { Heading } from "../heading"
 import { Image } from "../image"
 import { Text } from "../text"
+import { Wrap } from "../wrap"
 import { Modal } from "./"
 
 type Story = StoryFn<typeof Modal.Root>
@@ -69,7 +69,7 @@ export const Size: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["xs", "sm", "md", "lg", "xl", "cover", "full"]}>
+        <For each={["xs", "sm", "md", "lg", "xl", "cover", "full"] as const}>
           {(size) => (
             <Button
               key={size}
@@ -203,7 +203,17 @@ export const AnimationScheme: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["scale", "bottom", "left", "right", "top"] as const}>
+        <For
+          each={
+            [
+              "scale",
+              "block-start",
+              "inline-start",
+              "inline-end",
+              "block-end",
+            ] as const
+          }
+        >
           {(animationScheme) => (
             <Button
               key={animationScheme}

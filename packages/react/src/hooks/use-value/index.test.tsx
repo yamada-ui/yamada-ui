@@ -1,17 +1,20 @@
-import type { MatchMediaMock } from "@yamada-ui/test"
-import { matchMedia } from "@yamada-ui/test"
+import MatchMediaMock from "vitest-matchmedia-mock"
 import { renderHook, styledTheme } from "../../../test"
 import { getValue, useValue } from "./"
 
 describe("useValue", () => {
-  let mock: MatchMediaMock
+  let matchMediaMock: MatchMediaMock
 
   beforeAll(() => {
-    mock = matchMedia()
+    matchMediaMock = new MatchMediaMock()
   })
 
   afterEach(() => {
-    mock.clear()
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
   })
 
   test("Returns the base value when passing a responsive object", () => {
@@ -20,7 +23,7 @@ describe("useValue", () => {
   })
 
   test("Returns the correct breakpoint value based on the current screen width", () => {
-    mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
+    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
     const { result } = renderHook(() => useValue({ base: "base", md: "md" }))
     expect(result.current).toBe("md")
   })
@@ -41,37 +44,21 @@ describe("useValue", () => {
     const { result } = renderHook(() => useValue("normalValue"))
     expect(result.current).toBe("normalValue")
   })
-
-  test("Returns the correct value when passing an array containing objects for breakpoints", () => {
-    const { result } = renderHook(() =>
-      useValue([
-        { base: "light-base", md: "light-md" },
-        { base: "dark-base", md: "dark-md" },
-      ]),
-    )
-    expect(result.current).toBe("light-base")
-  })
-
-  test("Returns the correct value when passing an object containing arrays for color mode", () => {
-    const { result } = renderHook(() =>
-      useValue({
-        base: ["base-light", "base-dark"],
-        md: ["md-light", "md-dark"],
-      }),
-    )
-    expect(result.current).toBe("base-light")
-  })
 })
 
 describe("getValue", () => {
-  let mock: MatchMediaMock
+  let matchMediaMock: MatchMediaMock
 
   beforeAll(() => {
-    mock = matchMedia()
+    matchMediaMock = new MatchMediaMock()
   })
 
   afterEach(() => {
-    mock.clear()
+    matchMediaMock.clear()
+  })
+
+  afterAll(() => {
+    matchMediaMock.destroy()
   })
 
   test("Returns the base value when passed a responsive object", () => {
@@ -84,7 +71,7 @@ describe("getValue", () => {
   })
 
   test("Returns the correct breakpoint value based on the current screen width", () => {
-    mock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
+    matchMediaMock.useMediaQuery("(min-width: 481px) and (max-width: 768px)")
 
     const value = getValue({ base: "base", md: "md" })(
       styledTheme,
@@ -115,22 +102,6 @@ describe("getValue", () => {
   test("Returns the same value when passed a normal value", () => {
     const value = getValue("normalValue")(styledTheme, "light", "base")
     expect(value).toBe("normalValue")
-  })
-
-  test("Returns the correct value when passing an array containing objects for breakpoints", () => {
-    const value = getValue([
-      { base: "light-base", md: "light-md" },
-      { base: "dark-base", md: "dark-md" },
-    ])(styledTheme, "light", "base")
-    expect(value).toBe("light-base")
-  })
-
-  test("Returns the correct value when passing an object containing arrays for color mode", () => {
-    const value = getValue({
-      base: ["base-light", "base-dark"],
-      md: ["md-light", "md-dark"],
-    })(styledTheme, "light", "base")
-    expect(value).toBe("base-light")
   })
 
   test("Returns the correct value when providing a not responsive object", () => {

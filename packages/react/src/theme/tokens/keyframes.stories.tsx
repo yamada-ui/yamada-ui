@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { Box } from "../../components/box"
 import { Center } from "../../components/center"
 import { Container } from "../../components/container"
@@ -48,13 +48,36 @@ export const Basic = () => {
                       "--animation-to-x": "50%",
                       "--animation-to-y": "50%",
                       "--animation-width": "{sizes.12}",
+                      "--stripe-color": [
+                        "rgba(255, 255, 255, 0.3)",
+                        "rgba(0, 0, 0, 0.3)",
+                      ],
                     }}
-                    animationDirection="alternate"
+                    animationDirection={
+                      token === "bg-position" ? "normal" : "alternate"
+                    }
                     animationDuration="1s"
                     animationIterationCount="infinite"
                     animationName={token}
-                    animationTimingFunction="ease-in-out"
+                    animationTimingFunction={
+                      token === "bg-position" ? "linear" : "ease-in-out"
+                    }
                     bg="green"
+                    bgImage={
+                      token === "bg-position"
+                        ? `linear-gradient(
+                      45deg,
+                      {stripe-color} 25%,
+                      transparent 25%,
+                      transparent 50%,
+                      {stripe-color} 50%,
+                      {stripe-color} 75%,
+                      transparent 75%,
+                      transparent
+                    )`
+                        : undefined
+                    }
+                    bgSize="1rem 1rem"
                     boxSize="12"
                     position="absolute"
                     rounded="l2"

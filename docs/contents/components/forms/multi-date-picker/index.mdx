@@ -353,10 +353,10 @@ By default, the calendar automatically closes on blur. To prevent the calendar f
 
 ### Disable Clearing
 
-To disable clearing, set `isClearable` to `false`.
+To disable clearing, set `clearable` to `false`.
 
 ```tsx
-<MultiDatePicker placeholder="YYYY/MM/DD" isClearable={false} />
+<MultiDatePicker placeholder="YYYY/MM/DD" clearable={false} />
 ```
 
 ### Disallow Input
@@ -415,7 +415,7 @@ To change the border color, set a color to `focusBorderColor` or `errorBorderCol
     placeholder="custom border color"
   />
   <MultiDatePicker
-    isInvalid
+    invalid
     errorBorderColor="orange.500"
     placeholder="custom border color"
   />
@@ -466,37 +466,37 @@ To set the maximum number of selectable values, set a number to `maxSelectValues
 
 ### Disable
 
-To disable, set `isDisabled` to `true`.
+To disable, set `disabled` to `true`.
 
 ```tsx
 <VStack>
-  <MultiDatePicker isDisabled variant="outline" placeholder="outline" />
-  <MultiDatePicker isDisabled variant="filled" placeholder="filled" />
-  <MultiDatePicker isDisabled variant="flushed" placeholder="flushed" />
+  <MultiDatePicker disabled variant="outline" placeholder="outline" />
+  <MultiDatePicker disabled variant="filled" placeholder="filled" />
+  <MultiDatePicker disabled variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### Make Read-Only
 
-To make read-only, set `isReadOnly` to `true`.
+To make read-only, set `readOnly` to `true`.
 
 ```tsx
 <VStack>
-  <MultiDatePicker isReadOnly variant="outline" placeholder="outline" />
-  <MultiDatePicker isReadOnly variant="filled" placeholder="filled" />
-  <MultiDatePicker isReadOnly variant="flushed" placeholder="flushed" />
+  <MultiDatePicker readOnly variant="outline" placeholder="outline" />
+  <MultiDatePicker readOnly variant="filled" placeholder="filled" />
+  <MultiDatePicker readOnly variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
 ### Make Input Invalid
 
-To make input invalid, set `isInvalid` to `true`.
+To make input invalid, set `invalid` to `true`.
 
 ```tsx
 <VStack>
-  <MultiDatePicker isInvalid variant="outline" placeholder="outline" />
-  <MultiDatePicker isInvalid variant="filled" placeholder="filled" />
-  <MultiDatePicker isInvalid variant="flushed" placeholder="flushed" />
+  <MultiDatePicker invalid variant="outline" placeholder="outline" />
+  <MultiDatePicker invalid variant="filled" placeholder="filled" />
+  <MultiDatePicker invalid variant="flushed" placeholder="flushed" />
 </VStack>
 ```
 
@@ -530,7 +530,7 @@ The `children` are provided with `value` and `onClose` methods, which can be use
   <MultiDatePicker placeholder="YYYY/MM/DD" closeOnSelect={false}>
     {({ value, onClose }) => (
       <VStack mt="sm">
-        <Button isDisabled={!value} onClick={onClose}>
+        <Button disabled={!value} onClick={onClose}>
           Submit{value ? ` ${value.length} dates` : ""}
         </Button>
       </VStack>
@@ -592,7 +592,7 @@ console.log("watch:", watch())
 return (
   <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <FormControl
-      isInvalid={!!errors.multiDatePicker}
+      invalid={!!errors.multiDatePicker}
       label="Date to reserve"
       errorMessage={
         errors.multiDatePicker ? errors.multiDatePicker.message : undefined

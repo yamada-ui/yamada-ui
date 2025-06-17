@@ -1,4 +1,5 @@
 import { defineStyles } from "../../core"
+import { visuallyHiddenAttributes } from "../../utils"
 
 export const layerStyles = defineStyles.layerStyle({
   active: {
@@ -13,6 +14,7 @@ export const layerStyles = defineStyles.layerStyle({
   },
   ghost: {
     bg: "transparent",
+    border: "1px solid transparent",
     color: "colorScheme.outline",
   },
   "ghost.hover": {
@@ -23,7 +25,7 @@ export const layerStyles = defineStyles.layerStyle({
   },
   outline: {
     bg: "transparent",
-    border: "1px solid {colorScheme.outline}",
+    border: "1px solid {colorScheme.muted}",
     color: "colorScheme.outline",
   },
   "outline.hover": {
@@ -42,6 +44,7 @@ export const layerStyles = defineStyles.layerStyle({
   },
   solid: {
     bg: "colorScheme.solid",
+    border: "1px solid transparent",
     color: "colorScheme.contrast",
   },
   "solid.hover": {
@@ -49,6 +52,7 @@ export const layerStyles = defineStyles.layerStyle({
   },
   subtle: {
     bg: "colorScheme.subtle",
+    border: "1px solid transparent",
     color: "colorScheme.fg",
   },
   "subtle.hover": {
@@ -62,4 +66,5 @@ export const layerStyles = defineStyles.layerStyle({
   "surface.hover": {
     bg: "colorScheme.muted",
   },
+  visuallyHidden: visuallyHiddenAttributes.style,
 })

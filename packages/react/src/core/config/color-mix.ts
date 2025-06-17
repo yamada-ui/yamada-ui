@@ -1,6 +1,6 @@
 import type { StyledTheme, UsageTheme } from "../theme"
 import type { TransformOptions } from "./utils"
-import { isArray } from "@yamada-ui/utils"
+import { isArray } from "../../utils"
 import { getColorSchemeVar, isColorScheme } from "../css"
 import { getCSSFunction, globalValues, splitValues, tokenToVar } from "./utils"
 
@@ -51,7 +51,7 @@ function omitPercent(value?: string) {
 function createVariable(
   value: string,
   fallbackValue?: string,
-  properties?: string | string[],
+  properties?: string[],
 ) {
   if (!properties) return value
 
@@ -60,17 +60,11 @@ function createVariable(
 
   const result = { [key]: value }
 
-  if (isArray(properties)) {
-    properties.forEach((property) => {
-      result[property] = fallbackValue
-        ? `var(${key}, ${fallbackValue})`
-        : `var(${key})`
-    })
-  } else {
-    result[properties] = fallbackValue
+  properties.forEach((property) => {
+    result[property] = fallbackValue
       ? `var(${key}, ${fallbackValue})`
       : `var(${key})`
-  }
+  })
 
   return result
 }

@@ -1,10 +1,10 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { IconProps } from "../icon"
 import type { Loading } from "../loading"
 import type { StatusScheme } from "../status"
 import type { AlertStyle } from "./alert.style"
 import { useMemo } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { CircleCheckBigIcon, InfoIcon, TriangleAlertIcon } from "../icon"
 import { useLoadingComponent } from "../loading"
 import { alertStyle } from "./alert.style"
@@ -16,11 +16,13 @@ const icons = {
   warning: TriangleAlertIcon,
 } as const
 
-interface AlertContext {
+interface ComponentContext {
   status: StatusScheme
 }
 
-interface AlertRootOptions {
+export interface AlertRootProps
+  extends HTMLStyledProps,
+    ThemeProps<AlertStyle> {
   /**
    * The status of the alert.
    *
@@ -29,21 +31,16 @@ interface AlertRootOptions {
   status?: StatusScheme
 }
 
-export interface AlertRootProps
-  extends HTMLUIProps,
-    ThemeProps<AlertStyle>,
-    AlertRootOptions {}
-
 export const {
-  ComponentContext: AlertContext,
+  ComponentContext,
   PropsContext: AlertPropsContext,
   useClassNames,
-  useComponentContext: useAlertContext,
+  useComponentContext,
   usePropsContext: useAlertPropsContext,
   useStyleContext,
   withContext,
   withProvider,
-} = createSlotComponent<AlertRootProps, AlertStyle, AlertContext>(
+} = createSlotComponent<AlertRootProps, AlertStyle, ComponentContext>(
   "alert",
   alertStyle,
 )
@@ -51,28 +48,25 @@ export const {
 /**
  * `Alert` is a component that conveys information to the user.
  *
- * @see Docs https://yamada-ui.com/components/alert
+ * @see https://yamada-ui.com/components/alert
  */
 export const AlertRoot = withProvider<"div", AlertRootProps>(
   ({ status, ...props }) => {
     const context = useMemo(() => ({ status: status! }), [status])
 
     return (
-      <AlertContext value={context}>
-        <ui.div role="alert" {...props} />
-      </AlertContext>
+      <ComponentContext value={context}>
+        <styled.div role="alert" {...props} />
+      </ComponentContext>
     )
   },
   "root",
-)(({ colorScheme, status = "info" }) => ({
-  colorScheme: colorScheme ?? status,
-  status,
-}))
+)({ colorScheme: "info", status: "info" })
 
 export interface AlertIconProps extends IconProps {}
 
 export const AlertIcon = withContext<"svg", AlertIconProps>((props) => {
-  const { status } = useAlertContext()
+  const { status } = useComponentContext()
   const Icon = icons[status]
 
   return <Icon {...props} />
@@ -96,11 +90,11 @@ export const AlertLoading = withContext<"svg", AlertLoadingProps>(
   ["icon", "loading"],
 )()
 
-export interface AlertTitleProps extends HTMLUIProps<"p"> {}
+export interface AlertTitleProps extends HTMLStyledProps<"p"> {}
 
 export const AlertTitle = withContext<"p", AlertTitleProps>("p", "title")()
 
-export interface AlertDescriptionProps extends HTMLUIProps<"span"> {}
+export interface AlertDescriptionProps extends HTMLStyledProps<"span"> {}
 
 export const AlertDescription = withContext<"span", AlertDescriptionProps>(
   "span",

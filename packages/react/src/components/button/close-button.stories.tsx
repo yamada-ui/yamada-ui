@@ -1,7 +1,7 @@
-import type { Meta, StoryFn } from "@storybook/react"
-import { COLOR_SCHEMES } from "@yamada-ui/utils"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "../../../storybook/components"
-import { Wrap } from "../flex"
+import { COLOR_SCHEMES } from "../../utils"
+import { Wrap } from "../wrap"
 import { CloseButton } from "./close-button"
 
 type Story = StoryFn<typeof CloseButton>

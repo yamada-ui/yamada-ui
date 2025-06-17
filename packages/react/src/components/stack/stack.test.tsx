@@ -1,14 +1,40 @@
 import type { FC } from "react"
 import { useEffect, useState } from "react"
-import { fireEvent, render, screen, waitFor } from "../../../test"
+import { a11y, fireEvent, render, screen, waitFor } from "../../../test"
 import { Box } from "../box"
 import { Flex } from "../flex"
 import { Separator } from "../separator"
 import { Stack } from "./stack"
 
 describe("<Stack />", () => {
-  test("renders stack correctly", () => {
-    render(<Stack>Stack</Stack>)
+  test("renders stack correctly", async () => {
+    await a11y(
+      <Stack>
+        <Box>Stack Item</Box>
+      </Stack>,
+    )
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Stack.displayName).toBe("Stack")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <Stack data-testid="stack">
+        <Box>Stack Item</Box>
+      </Stack>,
+    )
+    expect(screen.getByTestId("stack")).toHaveClass("ui-stack")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <Stack data-testid="stack">
+        <Box>Stack Item</Box>
+      </Stack>,
+    )
+    expect(screen.getByTestId("stack").tagName).toBe("DIV")
   })
 
   test("renders all the allowed shorthand style props", () => {
@@ -20,7 +46,7 @@ describe("<Stack />", () => {
         justify="start"
         wrap="nowrap"
       >
-        Stack
+        <Box>Stack Item</Box>
       </Stack>,
     )
 

@@ -1,6 +1,6 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import { Button } from "."
 import { CheckIcon, PencilIcon, PlusIcon, XIcon } from "../icon"
-import { Button } from "./button"
 import { ButtonGroup } from "./button-group"
 import { IconButton } from "./icon-button"
 

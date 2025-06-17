@@ -1,8 +1,8 @@
-import type { StringLiteral } from "@yamada-ui/utils"
 import type * as CSS from "csstype"
+import type { AnyString } from "../utils"
 import type { StyleConfigs } from "./config"
-import type { CSSObject, CSSToken } from "./css"
-import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"
+import type { CSSObject, StyleValueWithCondition } from "./css"
+import type { ColorScheme, ThemeTokens } from "./theme"
 import { transforms } from "./config"
 import { pipe } from "./config/utils"
 
@@ -10,7 +10,7 @@ export type StandardStyleProperty = keyof typeof standardStyles
 
 export const standardStyles = {
   accentColor: {
-    properties: "accentColor",
+    properties: ["accentColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -22,7 +22,7 @@ export const standardStyles = {
   anchorName: true,
   anchorScope: true,
   animation: {
-    properties: "animation",
+    properties: ["animation"],
     token: "animations",
     transform: pipe(transforms.token("animations"), transforms.animation),
   },
@@ -30,14 +30,14 @@ export const standardStyles = {
   animationDelay: true,
   animationDirection: true,
   animationDuration: {
-    properties: "animationDuration",
+    properties: ["animationDuration"],
     token: "durations",
     transform: transforms.token("durations"),
   },
   animationFillMode: true,
   animationIterationCount: true,
   animationName: {
-    properties: "animationName",
+    properties: ["animationName"],
     token: "keyframes",
     transform: transforms.token("keyframes"),
   },
@@ -47,18 +47,18 @@ export const standardStyles = {
   animationRangeStart: true,
   animationTimeline: true,
   animationTimingFunction: {
-    properties: "animationTimingFunction",
+    properties: ["animationTimingFunction"],
     token: "easings",
     transform: transforms.token("easings"),
   },
   appearance: true,
   aspectRatio: {
-    properties: "aspectRatio",
+    properties: ["aspectRatio"],
     token: "aspectRatios",
     transform: transforms.token("aspectRatios"),
   },
   backdropBlur: {
-    properties: "--backdrop-blur",
+    properties: ["--backdrop-blur"],
     token: "blurs",
     transform: pipe(
       transforms.token("blurs"),
@@ -67,21 +67,21 @@ export const standardStyles = {
     ),
   },
   backdropBrightness: {
-    properties: "--backdrop-brightness",
+    properties: ["--backdrop-brightness"],
     transform: pipe(
       transforms.function("brightness"),
       transforms.filter("backdropFilter"),
     ),
   },
   backdropContrast: {
-    properties: "--backdrop-contrast",
+    properties: ["--backdrop-contrast"],
     transform: pipe(
       transforms.function("contrast"),
       transforms.filter("backdropFilter"),
     ),
   },
   backdropDropShadow: {
-    properties: "--backdrop-drop-shadow",
+    properties: ["--backdrop-drop-shadow"],
     token: "shadows",
     transform: pipe(
       transforms.token("shadows"),
@@ -91,14 +91,14 @@ export const standardStyles = {
   },
   backdropFilter: true,
   backdropGrayscale: {
-    properties: "--backdrop-grayscale",
+    properties: ["--backdrop-grayscale"],
     transform: pipe(
       transforms.function("grayscale"),
       transforms.filter("backdropFilter"),
     ),
   },
   backdropHueRotate: {
-    properties: "--backdrop-hue-rotate",
+    properties: ["--backdrop-hue-rotate"],
     transform: pipe(
       transforms.deg,
       transforms.function("hue-rotate"),
@@ -106,28 +106,28 @@ export const standardStyles = {
     ),
   },
   backdropInvert: {
-    properties: "--backdrop-invert",
+    properties: ["--backdrop-invert"],
     transform: pipe(
       transforms.function("invert"),
       transforms.filter("backdropFilter"),
     ),
   },
   backdropSaturate: {
-    properties: "--backdrop-saturate",
+    properties: ["--backdrop-saturate"],
     transform: pipe(
       transforms.function("saturate"),
       transforms.filter("backdropFilter"),
     ),
   },
   backdropSepia: {
-    properties: "--backdrop-sepia",
+    properties: ["--backdrop-sepia"],
     transform: pipe(
       transforms.function("sepia"),
       transforms.filter("backdropFilter"),
     ),
   },
   backfaceVisibility: {
-    properties: "backfaceVisibility",
+    properties: ["backfaceVisibility"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -137,23 +137,23 @@ export const standardStyles = {
     ),
   },
   background: {
-    properties: "background",
+    properties: ["background"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   backgroundAttachment: true,
   backgroundBlendMode: true,
   backgroundClip: {
-    properties: "backgroundClip",
+    properties: ["backgroundClip"],
     transform: transforms.bgClip,
   },
   backgroundColor: {
-    properties: "backgroundColor",
+    properties: ["backgroundColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   backgroundImage: {
-    properties: "backgroundImage",
+    properties: ["backgroundImage"],
     token: "gradients",
     transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
@@ -166,7 +166,7 @@ export const standardStyles = {
   baselineShift: true,
   baselineSource: true,
   blockSize: {
-    properties: "blockSize",
+    properties: ["blockSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -176,7 +176,7 @@ export const standardStyles = {
     ),
   },
   blur: {
-    properties: "--blur",
+    properties: ["--blur"],
     token: "blurs",
     transform: pipe(
       transforms.token("blurs"),
@@ -185,67 +185,67 @@ export const standardStyles = {
     ),
   },
   border: {
-    properties: "border",
+    properties: ["border"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlock: {
-    properties: "borderBlock",
+    properties: ["borderBlock"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlockColor: {
-    properties: "borderBlockColor",
+    properties: ["borderBlockColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBlockEnd: {
-    properties: "borderBlockEnd",
+    properties: ["borderBlockEnd"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlockEndColor: {
-    properties: "borderBlockEndColor",
+    properties: ["borderBlockEndColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBlockEndStyle: true,
   borderBlockEndWidth: {
-    properties: "borderBlockEndWidth",
+    properties: ["borderBlockEndWidth"],
     transform: transforms.px,
   },
   borderBlockStart: {
-    properties: "borderBlockStart",
+    properties: ["borderBlockStart"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBlockStartColor: {
-    properties: "borderBlockStartColor",
+    properties: ["borderBlockStartColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBlockStartStyle: true,
   borderBlockStartWidth: {
-    properties: "borderBlockStartWidth",
+    properties: ["borderBlockStartWidth"],
     transform: transforms.px,
   },
   borderBlockStyle: true,
   borderBlockWidth: {
-    properties: "borderBlockWidth",
+    properties: ["borderBlockWidth"],
     transform: transforms.px,
   },
   borderBottom: {
-    properties: "borderBottom",
+    properties: ["borderBottom"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderBottomColor: {
-    properties: "borderBottomColor",
+    properties: ["borderBottomColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderBottomLeftRadius: {
-    properties: "borderBottomLeftRadius",
+    properties: ["borderBottomLeftRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -263,7 +263,7 @@ export const standardStyles = {
     ),
   },
   borderBottomRightRadius: {
-    properties: "borderBottomRightRadius",
+    properties: ["borderBottomRightRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -273,17 +273,17 @@ export const standardStyles = {
   },
   borderBottomStyle: true,
   borderBottomWidth: {
-    properties: "borderBottomWidth",
+    properties: ["borderBottomWidth"],
     transform: transforms.px,
   },
   borderCollapse: true,
   borderColor: {
-    properties: "borderColor",
+    properties: ["borderColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderEndEndRadius: {
-    properties: "borderEndEndRadius",
+    properties: ["borderEndEndRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -292,7 +292,7 @@ export const standardStyles = {
     ),
   },
   borderEndStartRadius: {
-    properties: "borderEndStartRadius",
+    properties: ["borderEndStartRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -301,7 +301,7 @@ export const standardStyles = {
     ),
   },
   borderImage: {
-    properties: "borderImage",
+    properties: ["borderImage"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
@@ -309,31 +309,31 @@ export const standardStyles = {
   borderImageRepeat: true,
   borderImageSlice: true,
   borderImageSource: {
-    properties: "borderImageSource",
+    properties: ["borderImageSource"],
     token: "gradients",
     transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
   borderImageWidth: {
-    properties: "borderImageWidth",
+    properties: ["borderImageWidth"],
     transform: transforms.px,
   },
   borderInline: {
-    properties: "borderInline",
+    properties: ["borderInline"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderInlineColor: {
-    properties: "borderInlineColor",
+    properties: ["borderInlineColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderInlineEnd: {
-    properties: "borderInlineEnd",
+    properties: ["borderInlineEnd"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderInlineEndColor: {
-    properties: "borderInlineEndColor",
+    properties: ["borderInlineEndColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -348,16 +348,16 @@ export const standardStyles = {
   },
   borderInlineEndStyle: true,
   borderInlineEndWidth: {
-    properties: "borderInlineEndWidth",
+    properties: ["borderInlineEndWidth"],
     transform: transforms.px,
   },
   borderInlineStart: {
-    properties: "borderInlineStart",
+    properties: ["borderInlineStart"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderInlineStartColor: {
-    properties: "borderInlineStartColor",
+    properties: ["borderInlineStartColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -372,21 +372,21 @@ export const standardStyles = {
   },
   borderInlineStartStyle: true,
   borderInlineStartWidth: {
-    properties: "borderInlineStartWidth",
+    properties: ["borderInlineStartWidth"],
     transform: transforms.px,
   },
   borderInlineStyle: true,
   borderInlineWidth: {
-    properties: "borderInlineWidth",
+    properties: ["borderInlineWidth"],
     transform: transforms.px,
   },
   borderLeft: {
-    properties: "borderLeft",
+    properties: ["borderLeft"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderLeftColor: {
-    properties: "borderLeftColor",
+    properties: ["borderLeftColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -400,9 +400,12 @@ export const standardStyles = {
     ),
   },
   borderLeftStyle: true,
-  borderLeftWidth: { properties: "borderLeftWidth", transform: transforms.px },
+  borderLeftWidth: {
+    properties: ["borderLeftWidth"],
+    transform: transforms.px,
+  },
   borderRadius: {
-    properties: "borderRadius",
+    properties: ["borderRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -411,12 +414,12 @@ export const standardStyles = {
     ),
   },
   borderRight: {
-    properties: "borderRight",
+    properties: ["borderRight"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderRightColor: {
-    properties: "borderRightColor",
+    properties: ["borderRightColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -431,12 +434,12 @@ export const standardStyles = {
   },
   borderRightStyle: true,
   borderRightWidth: {
-    properties: "borderRightWidth",
+    properties: ["borderRightWidth"],
     transform: transforms.px,
   },
   borderSpacing: true,
   borderStartEndRadius: {
-    properties: "borderStartEndRadius",
+    properties: ["borderStartEndRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -445,7 +448,7 @@ export const standardStyles = {
     ),
   },
   borderStartStartRadius: {
-    properties: "borderStartStartRadius",
+    properties: ["borderStartStartRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -455,17 +458,17 @@ export const standardStyles = {
   },
   borderStyle: true,
   borderTop: {
-    properties: "borderTop",
+    properties: ["borderTop"],
     token: "borders",
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   borderTopColor: {
-    properties: "borderTopColor",
+    properties: ["borderTopColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   borderTopLeftRadius: {
-    properties: "borderTopLeftRadius",
+    properties: ["borderTopLeftRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -483,7 +486,7 @@ export const standardStyles = {
     ),
   },
   borderTopRightRadius: {
-    properties: "borderTopRightRadius",
+    properties: ["borderTopRightRadius"],
     token: "radii",
     transform: pipe(
       transforms.token("radii"),
@@ -492,8 +495,8 @@ export const standardStyles = {
     ),
   },
   borderTopStyle: true,
-  borderTopWidth: { properties: "borderTopWidth", transform: transforms.px },
-  borderWidth: { properties: "borderWidth", transform: transforms.px },
+  borderTopWidth: { properties: ["borderTopWidth"], transform: transforms.px },
+  borderWidth: { properties: ["borderWidth"], transform: transforms.px },
   borderX: {
     properties: ["borderLeft", "borderRight"],
     token: "borders",
@@ -505,7 +508,7 @@ export const standardStyles = {
     transform: pipe(transforms.token("borders"), transforms.px),
   },
   bottom: {
-    properties: "bottom",
+    properties: ["bottom"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -523,7 +526,7 @@ export const standardStyles = {
   boxOrient: true,
   boxPack: true,
   boxShadow: {
-    properties: "boxShadow",
+    properties: ["boxShadow"],
     token: "shadows",
     transform: transforms.token("shadows"),
   },
@@ -542,12 +545,12 @@ export const standardStyles = {
   breakBefore: true,
   breakInside: true,
   brightness: {
-    properties: "--brightness",
+    properties: ["--brightness"],
     transform: pipe(transforms.function("brightness"), transforms.filter()),
   },
   captionSide: true,
   caretColor: {
-    properties: "caretColor",
+    properties: ["caretColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -556,18 +559,18 @@ export const standardStyles = {
   clipPath: true,
   clipRule: true,
   color: {
-    properties: "color",
+    properties: ["color"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   colorAdjust: true,
   colorInterpolation: true,
   colorInterpolationFilters: true,
-  colorMode: { properties: "colorScheme" },
+  colorMode: { properties: ["colorScheme"] },
   columnCount: true,
   columnFill: true,
   columnGap: {
-    properties: "columnGap",
+    properties: ["columnGap"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -575,18 +578,21 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
-  columnRule: { properties: "columnRule", transform: transforms.px },
+  columnRule: { properties: ["columnRule"], transform: transforms.px },
   columnRuleColor: {
-    properties: "columnRuleColor",
+    properties: ["columnRuleColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   columnRuleStyle: true,
-  columnRuleWidth: { properties: "columnRuleWidth", transform: transforms.px },
+  columnRuleWidth: {
+    properties: ["columnRuleWidth"],
+    transform: transforms.px,
+  },
   columns: true,
   columnSpan: true,
   columnWidth: {
-    properties: "columnWidth",
+    properties: ["columnWidth"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -604,7 +610,7 @@ export const standardStyles = {
   containIntrinsicInlineSize: true,
   containIntrinsicSize: true,
   containIntrinsicWidth: {
-    properties: "containIntrinsicWidth",
+    properties: ["containIntrinsicWidth"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -616,7 +622,7 @@ export const standardStyles = {
   content: true,
   contentVisibility: true,
   contrast: {
-    properties: "--contrast",
+    properties: ["--contrast"],
     transform: pipe(transforms.function("contrast"), transforms.filter()),
   },
   counterIncrement: true,
@@ -630,7 +636,7 @@ export const standardStyles = {
   display: true,
   dominantBaseline: true,
   dropShadow: {
-    properties: "--drop-shadow",
+    properties: ["--drop-shadow"],
     token: "shadows",
     transform: pipe(
       transforms.token("shadows"),
@@ -642,7 +648,7 @@ export const standardStyles = {
   emptyCells: true,
   fieldSizing: true,
   fill: {
-    properties: "fill",
+    properties: ["fill"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -651,7 +657,7 @@ export const standardStyles = {
   filter: true,
   flex: true,
   flexBasis: {
-    properties: "flexBasis",
+    properties: ["flexBasis"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -667,19 +673,19 @@ export const standardStyles = {
   flexWrap: true,
   float: true,
   floodColor: {
-    properties: "floodColor",
+    properties: ["floodColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   floodOpacity: true,
   focusRing: { transform: transforms.focusRing("&:is(:focus, [data-focus])") },
   focusRingColor: {
-    properties: "--focus-ring-color",
+    properties: ["--focus-ring-color"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   focusRingOffset: {
-    properties: "--focus-ring-offset",
+    properties: ["--focus-ring-offset"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -687,8 +693,8 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
-  focusRingStyle: { properties: "--focus-ring-style" },
-  focusRingWidth: { properties: "--focus-ring-width" },
+  focusRingStyle: { properties: ["--focus-ring-style"] },
+  focusRingWidth: { properties: ["--focus-ring-width"] },
   focusVisibleRing: {
     transform: transforms.focusRing(
       "&:is(:focus-visible, [data-focus-visible])",
@@ -696,7 +702,7 @@ export const standardStyles = {
   },
   font: true,
   fontFamily: {
-    properties: "fontFamily",
+    properties: ["fontFamily"],
     token: "fonts",
     transform: transforms.token("fonts"),
   },
@@ -706,7 +712,7 @@ export const standardStyles = {
   fontOpticalSizing: true,
   fontPalette: true,
   fontSize: {
-    properties: "fontSize",
+    properties: ["fontSize"],
     token: "fontSizes",
     transform: pipe(
       transforms.token("fontSizes"),
@@ -733,13 +739,14 @@ export const standardStyles = {
   fontVariantPosition: true,
   fontVariationSettings: true,
   fontWeight: {
-    properties: "fontWeight",
+    properties: ["fontWeight"],
     token: "fontWeights",
     transform: transforms.token("fontWeights"),
   },
+  fontWidth: true,
   forcedColorAdjust: true,
   gap: {
-    properties: "gap",
+    properties: ["gap"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -750,13 +757,13 @@ export const standardStyles = {
   glyphOrientationHorizontal: true,
   glyphOrientationVertical: true,
   grayscale: {
-    properties: "--grayscale",
+    properties: ["--grayscale"],
     transform: pipe(transforms.function("grayscale"), transforms.filter()),
   },
   grid: true,
   gridArea: true,
   gridAutoColumns: {
-    properties: "gridAutoColumns",
+    properties: ["gridAutoColumns"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -767,7 +774,7 @@ export const standardStyles = {
   },
   gridAutoFlow: true,
   gridAutoRows: {
-    properties: "gridAutoRows",
+    properties: ["gridAutoRows"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -785,7 +792,7 @@ export const standardStyles = {
   gridTemplate: true,
   gridTemplateAreas: true,
   gridTemplateColumns: {
-    properties: "gridTemplateColumns",
+    properties: ["gridTemplateColumns"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -795,7 +802,7 @@ export const standardStyles = {
     ),
   },
   gridTemplateRows: {
-    properties: "gridTemplateRows",
+    properties: ["gridTemplateRows"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -806,7 +813,7 @@ export const standardStyles = {
   },
   hangingPunctuation: true,
   height: {
-    properties: "height",
+    properties: ["height"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -816,7 +823,7 @@ export const standardStyles = {
     ),
   },
   hueRotate: {
-    properties: "--hue-rotate",
+    properties: ["--hue-rotate"],
     transform: pipe(
       transforms.deg,
       transforms.function("hue-rotate"),
@@ -831,7 +838,7 @@ export const standardStyles = {
   imeMode: true,
   initialLetter: true,
   inlineSize: {
-    properties: "inlineSize",
+    properties: ["inlineSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -841,7 +848,7 @@ export const standardStyles = {
     ),
   },
   inset: {
-    properties: "inset",
+    properties: ["inset"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -850,7 +857,7 @@ export const standardStyles = {
     ),
   },
   insetBlock: {
-    properties: "insetBlock",
+    properties: ["insetBlock"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -859,7 +866,7 @@ export const standardStyles = {
     ),
   },
   insetBlockEnd: {
-    properties: "insetBlockEnd",
+    properties: ["insetBlockEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -868,7 +875,7 @@ export const standardStyles = {
     ),
   },
   insetBlockStart: {
-    properties: "insetBlockStart",
+    properties: ["insetBlockStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -877,7 +884,7 @@ export const standardStyles = {
     ),
   },
   insetInline: {
-    properties: "insetInline",
+    properties: ["insetInline"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -886,7 +893,7 @@ export const standardStyles = {
     ),
   },
   insetInlineEnd: {
-    properties: "insetInlineEnd",
+    properties: ["insetInlineEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -895,7 +902,7 @@ export const standardStyles = {
     ),
   },
   insetInlineStart: {
-    properties: "insetInlineStart",
+    properties: ["insetInlineStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -921,9 +928,10 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  interactivity: true,
   interpolateSize: true,
   invert: {
-    properties: "--invert",
+    properties: ["--invert"],
     transform: pipe(transforms.function("invert"), transforms.filter()),
   },
   isolation: true,
@@ -931,7 +939,7 @@ export const standardStyles = {
   justifyItems: true,
   justifySelf: true,
   left: {
-    properties: "left",
+    properties: ["left"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -940,32 +948,31 @@ export const standardStyles = {
     ),
   },
   letterSpacing: {
-    properties: "letterSpacing",
+    properties: ["letterSpacing"],
     token: "letterSpacings",
     transform: transforms.token("letterSpacings"),
   },
   lightingColor: {
-    properties: "lightingColor",
+    properties: ["lightingColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   lineBreak: true,
   lineHeight: {
-    properties: "lineHeight",
+    properties: ["lineHeight"],
     token: "lineHeights",
     transform: transforms.token("lineHeights"),
   },
-  lineHeightStep: true,
   listStyle: true,
   listStyleImage: {
-    properties: "listStyleImage",
+    properties: ["listStyleImage"],
     token: "gradients",
     transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
   listStylePosition: true,
   listStyleType: true,
   margin: {
-    properties: "margin",
+    properties: ["margin"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -974,7 +981,7 @@ export const standardStyles = {
     ),
   },
   marginBlock: {
-    properties: "marginBlock",
+    properties: ["marginBlock"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -983,7 +990,7 @@ export const standardStyles = {
     ),
   },
   marginBlockEnd: {
-    properties: "marginBlockEnd",
+    properties: ["marginBlockEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -992,7 +999,7 @@ export const standardStyles = {
     ),
   },
   marginBlockStart: {
-    properties: "marginBlockStart",
+    properties: ["marginBlockStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1001,7 +1008,7 @@ export const standardStyles = {
     ),
   },
   marginBottom: {
-    properties: "marginBottom",
+    properties: ["marginBottom"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1010,7 +1017,7 @@ export const standardStyles = {
     ),
   },
   marginInline: {
-    properties: "marginInline",
+    properties: ["marginInline"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1019,7 +1026,7 @@ export const standardStyles = {
     ),
   },
   marginInlineEnd: {
-    properties: "marginInlineEnd",
+    properties: ["marginInlineEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1028,7 +1035,7 @@ export const standardStyles = {
     ),
   },
   marginInlineStart: {
-    properties: "marginInlineStart",
+    properties: ["marginInlineStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1037,7 +1044,7 @@ export const standardStyles = {
     ),
   },
   marginLeft: {
-    properties: "marginLeft",
+    properties: ["marginLeft"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1046,7 +1053,7 @@ export const standardStyles = {
     ),
   },
   marginRight: {
-    properties: "marginRight",
+    properties: ["marginRight"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1055,7 +1062,7 @@ export const standardStyles = {
     ),
   },
   marginTop: {
-    properties: "marginTop",
+    properties: ["marginTop"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1092,11 +1099,14 @@ export const standardStyles = {
   maskBorderRepeat: true,
   maskBorderSlice: true,
   maskBorderSource: true,
-  maskBorderWidth: { properties: "maskBorderWidth", transform: transforms.px },
+  maskBorderWidth: {
+    properties: ["maskBorderWidth"],
+    transform: transforms.px,
+  },
   maskClip: true,
   maskComposite: true,
   maskImage: {
-    properties: "maskImage",
+    properties: ["maskImage"],
     token: "gradients",
     transform: pipe(transforms.token("gradients"), transforms.gradient),
   },
@@ -1110,7 +1120,7 @@ export const standardStyles = {
   mathShift: true,
   mathStyle: true,
   maxBlockSize: {
-    properties: "maxBlockSize",
+    properties: ["maxBlockSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1130,7 +1140,7 @@ export const standardStyles = {
     ),
   },
   maxHeight: {
-    properties: "maxHeight",
+    properties: ["maxHeight"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1140,7 +1150,7 @@ export const standardStyles = {
     ),
   },
   maxInlineSize: {
-    properties: "maxInlineSize",
+    properties: ["maxInlineSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1150,7 +1160,7 @@ export const standardStyles = {
     ),
   },
   maxWidth: {
-    properties: "maxWidth",
+    properties: ["maxWidth"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1160,7 +1170,7 @@ export const standardStyles = {
     ),
   },
   minBlockSize: {
-    properties: "minBlockSize",
+    properties: ["minBlockSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1180,7 +1190,7 @@ export const standardStyles = {
     ),
   },
   minHeight: {
-    properties: "minHeight",
+    properties: ["minHeight"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1190,7 +1200,7 @@ export const standardStyles = {
     ),
   },
   minInlineSize: {
-    properties: "minInlineSize",
+    properties: ["minInlineSize"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1200,7 +1210,7 @@ export const standardStyles = {
     ),
   },
   minWidth: {
-    properties: "minWidth",
+    properties: ["minWidth"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1224,13 +1234,13 @@ export const standardStyles = {
   orphans: true,
   outline: {},
   outlineColor: {
-    properties: "outlineColor",
+    properties: ["outlineColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   outlineOffset: true,
   outlineStyle: true,
-  outlineWidth: { properties: "outlineWidth", transform: transforms.px },
+  outlineWidth: { properties: ["outlineWidth"], transform: transforms.px },
   overflow: true,
   overflowAnchor: true,
   overflowBlock: true,
@@ -1246,7 +1256,7 @@ export const standardStyles = {
   overscrollBehaviorX: true,
   overscrollBehaviorY: true,
   padding: {
-    properties: "padding",
+    properties: ["padding"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1255,7 +1265,7 @@ export const standardStyles = {
     ),
   },
   paddingBlock: {
-    properties: "paddingBlock",
+    properties: ["paddingBlock"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1264,7 +1274,7 @@ export const standardStyles = {
     ),
   },
   paddingBlockEnd: {
-    properties: "paddingBlockEnd",
+    properties: ["paddingBlockEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1273,7 +1283,7 @@ export const standardStyles = {
     ),
   },
   paddingBlockStart: {
-    properties: "paddingBlockStart",
+    properties: ["paddingBlockStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1282,7 +1292,7 @@ export const standardStyles = {
     ),
   },
   paddingBottom: {
-    properties: "paddingBottom",
+    properties: ["paddingBottom"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1291,7 +1301,7 @@ export const standardStyles = {
     ),
   },
   paddingInline: {
-    properties: "paddingInline",
+    properties: ["paddingInline"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1300,7 +1310,7 @@ export const standardStyles = {
     ),
   },
   paddingInlineEnd: {
-    properties: "paddingInlineEnd",
+    properties: ["paddingInlineEnd"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1309,7 +1319,7 @@ export const standardStyles = {
     ),
   },
   paddingInlineStart: {
-    properties: "paddingInlineStart",
+    properties: ["paddingInlineStart"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1318,7 +1328,7 @@ export const standardStyles = {
     ),
   },
   paddingLeft: {
-    properties: "paddingLeft",
+    properties: ["paddingLeft"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1327,7 +1337,7 @@ export const standardStyles = {
     ),
   },
   paddingRight: {
-    properties: "paddingRight",
+    properties: ["paddingRight"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1336,7 +1346,7 @@ export const standardStyles = {
     ),
   },
   paddingTop: {
-    properties: "paddingTop",
+    properties: ["paddingTop"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1384,9 +1394,10 @@ export const standardStyles = {
   quotes: true,
   r: true,
   readingFlow: true,
+  readingOrder: true,
   resize: true,
   right: {
-    properties: "right",
+    properties: ["right"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1394,9 +1405,9 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
-  rotate: { properties: "rotate", transform: transforms.deg },
+  rotate: { properties: ["rotate"], transform: transforms.deg },
   rotateX: {
-    properties: "--rotate-x",
+    properties: ["--rotate-x"],
     transform: pipe(
       transforms.deg,
       transforms.function("rotateX"),
@@ -1404,7 +1415,7 @@ export const standardStyles = {
     ),
   },
   rotateY: {
-    properties: "--rotate-y",
+    properties: ["--rotate-y"],
     transform: pipe(
       transforms.deg,
       transforms.function("rotateY"),
@@ -1412,7 +1423,7 @@ export const standardStyles = {
     ),
   },
   rotateZ: {
-    properties: "--rotate-z",
+    properties: ["--rotate-z"],
     transform: pipe(
       transforms.deg,
       transforms.function("rotateZ"),
@@ -1420,7 +1431,7 @@ export const standardStyles = {
     ),
   },
   rowGap: {
-    properties: "rowGap",
+    properties: ["rowGap"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1434,33 +1445,33 @@ export const standardStyles = {
   rx: true,
   ry: true,
   saturate: {
-    properties: "--saturate",
+    properties: ["--saturate"],
     transform: pipe(transforms.function("saturate"), transforms.filter()),
   },
   scale: true,
   scaleX: {
-    properties: "--scale-x",
+    properties: ["--scale-x"],
     transform: pipe(transforms.function("scaleX"), transforms.transform),
   },
   scaleY: {
-    properties: "--scale-y",
+    properties: ["--scale-y"],
     transform: pipe(transforms.function("scaleY"), transforms.transform),
   },
   scaleZ: {
-    properties: "--scale-z",
+    properties: ["--scale-z"],
     transform: pipe(transforms.function("scaleZ"), transforms.transform),
   },
   scrollbarColor: {
-    properties: "scrollbarColor",
+    properties: ["scrollbarColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
   scrollbarGutter: true,
-  scrollbarWidth: { properties: "scrollbarWidth", transform: transforms.px },
+  scrollbarWidth: { properties: ["scrollbarWidth"], transform: transforms.px },
   scrollBehavior: true,
   scrollInitialTarget: true,
   scrollMargin: {
-    properties: "scrollMargin",
+    properties: ["scrollMargin"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1472,7 +1483,7 @@ export const standardStyles = {
   scrollMarginBlockEnd: true,
   scrollMarginBlockStart: true,
   scrollMarginBottom: {
-    properties: "scrollMarginBottom",
+    properties: ["scrollMarginBottom"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1484,7 +1495,7 @@ export const standardStyles = {
   scrollMarginInlineEnd: true,
   scrollMarginInlineStart: true,
   scrollMarginLeft: {
-    properties: "scrollMarginLeft",
+    properties: ["scrollMarginLeft"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1493,7 +1504,7 @@ export const standardStyles = {
     ),
   },
   scrollMarginRight: {
-    properties: "scrollMarginRight",
+    properties: ["scrollMarginRight"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1502,7 +1513,7 @@ export const standardStyles = {
     ),
   },
   scrollMarginTop: {
-    properties: "scrollMarginTop",
+    properties: ["scrollMarginTop"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1528,8 +1539,9 @@ export const standardStyles = {
       transforms.calc("spaces"),
     ),
   },
+  scrollMarkerGroup: true,
   scrollPadding: {
-    properties: "scrollPadding",
+    properties: ["scrollPadding"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1541,7 +1553,7 @@ export const standardStyles = {
   scrollPaddingBlockEnd: true,
   scrollPaddingBlockStart: true,
   scrollPaddingBottom: {
-    properties: "scrollPaddingBottom",
+    properties: ["scrollPaddingBottom"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1553,7 +1565,7 @@ export const standardStyles = {
   scrollPaddingInlineEnd: true,
   scrollPaddingInlineStart: true,
   scrollPaddingLeft: {
-    properties: "scrollPaddingLeft",
+    properties: ["scrollPaddingLeft"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1562,7 +1574,7 @@ export const standardStyles = {
     ),
   },
   scrollPaddingRight: {
-    properties: "scrollPaddingRight",
+    properties: ["scrollPaddingRight"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1571,7 +1583,7 @@ export const standardStyles = {
     ),
   },
   scrollPaddingTop: {
-    properties: "scrollPaddingTop",
+    properties: ["scrollPaddingTop"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1604,7 +1616,7 @@ export const standardStyles = {
   scrollTimelineAxis: true,
   scrollTimelineName: true,
   sepia: {
-    properties: "--sepia",
+    properties: ["--sepia"],
     transform: pipe(transforms.function("sepia"), transforms.filter()),
   },
   shapeImageThreshold: true,
@@ -1612,7 +1624,7 @@ export const standardStyles = {
   shapeOutside: true,
   shapeRendering: true,
   skewX: {
-    properties: "--skew-x",
+    properties: ["--skew-x"],
     transform: pipe(
       transforms.deg,
       transforms.function("skewX"),
@@ -1620,7 +1632,7 @@ export const standardStyles = {
     ),
   },
   skewY: {
-    properties: "--skew-y",
+    properties: ["--skew-y"],
     transform: pipe(
       transforms.deg,
       transforms.function("skewY"),
@@ -1632,7 +1644,7 @@ export const standardStyles = {
   stopColor: true,
   stopOpacity: true,
   stroke: {
-    properties: "stroke",
+    properties: ["stroke"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -1643,19 +1655,20 @@ export const standardStyles = {
   strokeLinejoin: true,
   strokeMiterlimit: true,
   strokeOpacity: true,
-  strokeWidth: { properties: "strokeWidth", transform: transforms.px },
+  strokeWidth: { properties: ["strokeWidth"], transform: transforms.px },
   tableLayout: true,
   tabSize: true,
   textAlign: true,
   textAlignLast: true,
   textAnchor: true,
+  textAutospace: true,
   textBox: true,
   textBoxEdge: true,
   textBoxTrim: true,
   textCombineUpright: true,
   textDecoration: true,
   textDecorationColor: {
-    properties: "textDecorationColor",
+    properties: ["textDecorationColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -1666,7 +1679,7 @@ export const standardStyles = {
   textDecorationThickness: true,
   textEmphasis: true,
   textEmphasisColor: {
-    properties: "textEmphasisColor",
+    properties: ["textEmphasisColor"],
     token: "colors",
     transform: pipe(transforms.token("colors"), transforms.colorMix),
   },
@@ -1678,7 +1691,7 @@ export const standardStyles = {
   textOverflow: true,
   textRendering: true,
   textShadow: {
-    properties: "textShadow",
+    properties: ["textShadow"],
     token: "shadows",
     transform: transforms.token("shadows"),
   },
@@ -1692,7 +1705,7 @@ export const standardStyles = {
   textWrapStyle: true,
   timelineScope: true,
   top: {
-    properties: "top",
+    properties: ["top"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1709,18 +1722,18 @@ export const standardStyles = {
   transitionBehavior: true,
   transitionDelay: true,
   transitionDuration: {
-    properties: "transitionDuration",
+    properties: ["transitionDuration"],
     token: "durations",
     transform: transforms.token("durations"),
   },
   transitionProperty: { transform: transforms.transition("property") },
   transitionTimingFunction: {
-    properties: "transitionTimingFunction",
+    properties: ["transitionTimingFunction"],
     token: "easings",
     transform: transforms.token("easings"),
   },
   translateX: {
-    properties: "--translate-x",
+    properties: ["--translate-x"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1731,7 +1744,7 @@ export const standardStyles = {
     ),
   },
   translateY: {
-    properties: "--translate-y",
+    properties: ["--translate-y"],
     token: "spaces",
     transform: pipe(
       transforms.token("spaces"),
@@ -1742,7 +1755,7 @@ export const standardStyles = {
     ),
   },
   translateZ: {
-    properties: "--translate-z",
+    properties: ["--translate-z"],
     transform: pipe(transforms.function("translateZ"), transforms.transform),
   },
   unicodeBidi: true,
@@ -1761,7 +1774,7 @@ export const standardStyles = {
   whiteSpaceCollapse: true,
   widows: true,
   width: {
-    properties: "width",
+    properties: ["width"],
     token: "sizes",
     transform: pipe(
       transforms.token("sizes"),
@@ -1777,7 +1790,7 @@ export const standardStyles = {
   x: true,
   y: true,
   zIndex: {
-    properties: "zIndex",
+    properties: ["zIndex"],
     token: "zIndices",
     transform: transforms.token("zIndices"),
   },
@@ -1789,38 +1802,38 @@ export type ShorthandStyleProperty = keyof typeof shorthandStyles
 export const shorthandStyles = {
   accent: standardStyles.accentColor,
   bg: standardStyles.background,
-  bgAttachment: { properties: "backgroundAttachment" },
-  bgBlendMode: { properties: "backgroundBlendMode" },
+  bgAttachment: { properties: ["backgroundAttachment"] },
+  bgBlendMode: { properties: ["backgroundBlendMode"] },
   bgClip: standardStyles.backgroundClip,
   bgColor: standardStyles.backgroundColor,
   bgGradient: standardStyles.backgroundImage,
   bgImage: standardStyles.backgroundImage,
   bgImg: standardStyles.backgroundImage,
-  bgOrigin: { properties: "backgroundOrigin" },
-  bgPosition: { properties: "backgroundPosition" },
-  bgPositionX: { properties: "backgroundPositionX" },
-  bgPositionY: { properties: "backgroundPositionY" },
-  bgPosX: { properties: "backgroundPositionX" },
-  bgPosY: { properties: "backgroundPositionY" },
-  bgRepeat: { properties: "backgroundRepeat" },
-  bgSize: { properties: "backgroundSize" },
-  blendMode: { properties: "mixBlendMode" },
+  bgOrigin: { properties: ["backgroundOrigin"] },
+  bgPosition: { properties: ["backgroundPosition"] },
+  bgPositionX: { properties: ["backgroundPositionX"] },
+  bgPositionY: { properties: ["backgroundPositionY"] },
+  bgPosX: { properties: ["backgroundPositionX"] },
+  bgPosY: { properties: ["backgroundPositionY"] },
+  bgRepeat: { properties: ["backgroundRepeat"] },
+  bgSize: { properties: ["backgroundSize"] },
+  blendMode: { properties: ["mixBlendMode"] },
   borderBottomEndRadius: standardStyles.borderEndEndRadius,
   borderBottomStartRadius: standardStyles.borderEndStartRadius,
   borderEnd: standardStyles.borderInlineEnd,
   borderEndColor: standardStyles.borderInlineEndColor,
   borderEndRadius: standardStyles.borderInlineEndRadius,
-  borderEndStyle: { properties: "borderInlineEndStyle" },
+  borderEndStyle: { properties: ["borderInlineEndStyle"] },
   borderEndWidth: standardStyles.borderInlineEndWidth,
   borderStart: standardStyles.borderInlineStart,
   borderStartColor: standardStyles.borderInlineStartColor,
   borderStartRadius: standardStyles.borderInlineStartRadius,
-  borderStartStyle: { properties: "borderInlineStartStyle" },
+  borderStartStyle: { properties: ["borderInlineStartStyle"] },
   borderStartWidth: standardStyles.borderInlineStartWidth,
   borderTopEndRadius: standardStyles.borderStartEndRadius,
   borderTopStartRadius: standardStyles.borderStartStartRadius,
   caret: standardStyles.caretColor,
-  flexDir: { properties: "flexDirection" },
+  flexDir: { properties: ["flexDirection"] },
   g: standardStyles.gap,
   gapX: standardStyles.columnGap,
   gapY: standardStyles.rowGap,
@@ -1831,7 +1844,7 @@ export const shorthandStyles = {
   insetStart: standardStyles.insetInlineStart,
   leading: standardStyles.lineHeight,
   listStyleImg: standardStyles.listStyleImage,
-  listStylePos: { properties: "listStylePosition" },
+  listStylePos: { properties: ["listStylePosition"] },
   m: standardStyles.margin,
   marginEnd: standardStyles.marginInlineEnd,
   marginStart: standardStyles.marginInlineStart,
@@ -1847,16 +1860,16 @@ export const shorthandStyles = {
   mt: standardStyles.marginTop,
   mx: standardStyles.marginX,
   my: standardStyles.marginY,
-  overscroll: { properties: "overscrollBehavior" },
-  overscrollX: { properties: "overscrollBehaviorX" },
-  overscrollY: { properties: "overscrollBehaviorY" },
+  overscroll: { properties: ["overscrollBehavior"] },
+  overscrollX: { properties: ["overscrollBehaviorX"] },
+  overscrollY: { properties: ["overscrollBehaviorY"] },
   p: standardStyles.padding,
   paddingEnd: standardStyles.paddingInlineEnd,
   paddingStart: standardStyles.paddingInlineStart,
   pb: standardStyles.paddingBottom,
   pe: standardStyles.paddingInlineEnd,
   pl: standardStyles.paddingLeft,
-  pos: { properties: "position" },
+  pos: { properties: ["position"] },
   pr: standardStyles.paddingRight,
   ps: standardStyles.paddingInlineStart,
   pt: standardStyles.paddingTop,
@@ -1880,7 +1893,7 @@ export const shorthandStyles = {
   shadow: standardStyles.boxShadow,
   text: standardStyles.fontSize,
   textColor: standardStyles.color,
-  textDecor: { properties: "textDecoration" },
+  textDecor: { properties: ["textDecoration"] },
   tracking: standardStyles.letterSpacing,
   w: standardStyles.width,
   z: standardStyles.zIndex,
@@ -1889,8 +1902,8 @@ export const shorthandStyles = {
 export type PseudoStyleProperty = keyof typeof pseudoStyles
 
 export const pseudoStyles = {
-  "&::after": { properties: "&::after", transform: transforms.content },
-  "&::before": { properties: "&::before", transform: transforms.content },
+  "&::after": { properties: ["&::after"], transform: transforms.content },
+  "&::before": { properties: ["&::before"], transform: transforms.content },
 } as const satisfies StyleConfigs
 
 export type UIStyleProperty = keyof typeof uiStyles
@@ -1901,7 +1914,7 @@ export const uiStyles = {
   textStyle: { transform: transforms.styles("textStyles") },
   colorScheme: { transform: transforms.colorScheme },
   lineClamp: {
-    properties: "--line-clamp",
+    properties: ["--line-clamp"],
     static: {
       display: "-webkit-box",
       overflow: "hidden",
@@ -1911,25 +1924,26 @@ export const uiStyles = {
     },
   },
   truncated: { transform: transforms.truncated },
-  vars: { transform: transforms.vars },
 } as const satisfies StyleConfigs
 
 export type AtRuleStyleProperty = keyof typeof atRuleStyles
 
 export const atRuleStyles = {
   keyframes: {
-    properties: "animationName",
+    properties: ["animationName"],
     token: "keyframes",
     transform: pipe(transforms.token("keyframes"), transforms.keyframes),
   },
   _container: { transform: transforms.container },
-  _landscape: { properties: "@media (orientation: landscape)" },
+  _landscape: { properties: ["@media (orientation: landscape)"] },
   _media: { transform: transforms.media },
-  _mediaDark: { properties: "@media (prefers-color-scheme: dark)" },
-  _mediaLight: { properties: "@media (prefers-color-scheme: light)" },
-  _mediaReduceMotion: { properties: "@media (prefers-reduced-motion: reduce)" },
-  _portrait: { properties: "@media (orientation: portrait)" },
-  _print: { properties: "@media print" },
+  _mediaDark: { properties: ["@media (prefers-color-scheme: dark)"] },
+  _mediaLight: { properties: ["@media (prefers-color-scheme: light)"] },
+  _mediaReduceMotion: {
+    properties: ["@media (prefers-reduced-motion: reduce)"],
+  },
+  _portrait: { properties: ["@media (orientation: portrait)"] },
+  _print: { properties: ["@media print"] },
   _supports: { transform: transforms.supports },
 } as const satisfies StyleConfigs
 
@@ -1950,7 +1964,6 @@ export const styleProperties = Object.keys(styles) as StyleProperty[]
 export type VariableLengthProperty = (typeof variableLengthProperties)[number]
 
 export const variableLengthProperties = [
-  "vars",
   "_container",
   "_media",
   "_supports",
@@ -2264,19 +2277,19 @@ export interface StyleProps {
    *
    * This will apply styles defined in `theme.styles.mdx.h1`
    */
-  apply?: CSSToken<StringLiteral, "apply">
+  apply?: StyleValueWithCondition<AnyString, "apply">
   /**
    * Apply layer styles defined in `theme.layerStyles`.
    */
-  layerStyle?: CSSToken<StringLiteral, "layerStyles">
+  layerStyle?: StyleValueWithCondition<AnyString, "layerStyles">
   /**
    * Apply text styles defined in `theme.textStyles`.
    */
-  textStyle?: CSSToken<StringLiteral, "textStyles">
+  textStyle?: StyleValueWithCondition<AnyString, "textStyles">
   /**
    * Set color scheme variables.
    */
-  colorScheme?: CSSToken<ColorScheme>
+  colorScheme?: StyleValueWithCondition<ColorScheme>
   /**
    * ### accent-color
    *
@@ -2286,7 +2299,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/accent-color
    */
-  accent?: CSSToken<CSS.Property.AccentColor, "colors">
+  accent?: StyleValueWithCondition<CSS.Property.AccentColor, "colors">
   /**
    * ### accent-color
    *
@@ -2296,7 +2309,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/accent-color
    */
-  accentColor?: CSSToken<CSS.Property.AccentColor, "colors">
+  accentColor?: StyleValueWithCondition<CSS.Property.AccentColor, "colors">
   /**
    * ### align-content
    *
@@ -2308,7 +2321,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-content
    */
-  alignContent?: CSSToken<CSS.Property.AlignContent>
+  alignContent?: StyleValueWithCondition<CSS.Property.AlignContent>
   /**
    * ### align-items
    *
@@ -2320,7 +2333,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-items
    */
-  alignItems?: CSSToken<CSS.Property.AlignItems>
+  alignItems?: StyleValueWithCondition<CSS.Property.AlignItems>
   /**
    * ### alignment-baseline
    *
@@ -2330,7 +2343,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/alignment-baseline
    */
-  alignmentBaseline?: CSSToken<CSS.Property.AlignmentBaseline>
+  alignmentBaseline?: StyleValueWithCondition<CSS.Property.AlignmentBaseline>
   /**
    * ### align-self
    *
@@ -2342,7 +2355,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-self
    */
-  alignSelf?: CSSToken<CSS.Property.AlignSelf>
+  alignSelf?: StyleValueWithCondition<CSS.Property.AlignSelf>
   /**
    * ### all
    *
@@ -2354,7 +2367,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/all
    */
-  all?: CSSToken<CSS.Globals>
+  all?: StyleValueWithCondition<CSS.Globals>
   /**
    * ### anchor-name
    *
@@ -2366,7 +2379,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  anchorName?: CSSToken<string & {}>
+  anchorName?: StyleValueWithCondition<AnyString>
   /**
    * ### anchor-scope
    *
@@ -2378,7 +2391,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  anchorScope?: CSSToken<string & {}>
+  anchorScope?: StyleValueWithCondition<AnyString>
   /**
    * ### animation
    *
@@ -2390,7 +2403,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation
    */
-  animation?: CSSToken<CSS.Property.Animation, "animations">
+  animation?: StyleValueWithCondition<CSS.Property.Animation, "animations">
   /**
    * ### animation-composition
    *
@@ -2401,7 +2414,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-composition
    */
-  animationComposition?: CSSToken<CSS.Property.AnimationComposition>
+  animationComposition?: StyleValueWithCondition<CSS.Property.AnimationComposition>
   /**
    * ### animation-delay
    *
@@ -2413,7 +2426,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-delay
    */
-  animationDelay?: CSSToken<CSS.Property.AnimationDelay>
+  animationDelay?: StyleValueWithCondition<CSS.Property.AnimationDelay>
   /**
    * ### animation-direction
    *
@@ -2425,7 +2438,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-direction
    */
-  animationDirection?: CSSToken<CSS.Property.AnimationDirection>
+  animationDirection?: StyleValueWithCondition<CSS.Property.AnimationDirection>
   /**
    * ### animation-duration
    *
@@ -2437,7 +2450,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-duration
    */
-  animationDuration?: CSSToken<CSS.Property.AnimationDuration, "durations">
+  animationDuration?: StyleValueWithCondition<
+    CSS.Property.AnimationDuration,
+    "durations"
+  >
   /**
    * ### animation-fill-mode
    *
@@ -2449,7 +2465,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode
    */
-  animationFillMode?: CSSToken<CSS.Property.AnimationFillMode>
+  animationFillMode?: StyleValueWithCondition<CSS.Property.AnimationFillMode>
   /**
    * ### animation-iteration-count
    *
@@ -2461,7 +2477,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-iteration-count
    */
-  animationIterationCount?: CSSToken<CSS.Property.AnimationIterationCount>
+  animationIterationCount?: StyleValueWithCondition<CSS.Property.AnimationIterationCount>
   /**
    * ### animation-name
    *
@@ -2473,7 +2489,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-name
    */
-  animationName?: CSSToken<CSS.Property.AnimationName, "keyframes">
+  animationName?: StyleValueWithCondition<
+    CSS.Property.AnimationName,
+    "keyframes"
+  >
   /**
    * ### animation-play-state
    *
@@ -2485,7 +2504,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-play-state
    */
-  animationPlayState?: CSSToken<CSS.Property.AnimationPlayState>
+  animationPlayState?: StyleValueWithCondition<CSS.Property.AnimationPlayState>
   /**
    * ### animation-range
    *
@@ -2497,7 +2516,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationRange?: CSSToken<CSS.Property.AnimationRange>
+  animationRange?: StyleValueWithCondition<CSS.Property.AnimationRange>
   /**
    * ### animation-range-end
    *
@@ -2509,7 +2528,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationRangeEnd?: CSSToken<CSS.Property.AnimationRangeEnd>
+  animationRangeEnd?: StyleValueWithCondition<CSS.Property.AnimationRangeEnd>
   /**
    * ### animation-range-start
    *
@@ -2521,7 +2540,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationRangeStart?: CSSToken<CSS.Property.AnimationRangeStart>
+  animationRangeStart?: StyleValueWithCondition<CSS.Property.AnimationRangeStart>
   /**
    * ### animation-timeline
    *
@@ -2533,7 +2552,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationTimeline?: CSSToken<CSS.Property.AnimationTimeline>
+  animationTimeline?: StyleValueWithCondition<CSS.Property.AnimationTimeline>
   /**
    * ### animation-timing-function
    *
@@ -2545,7 +2564,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-timing-function
    */
-  animationTimingFunction?: CSSToken<
+  animationTimingFunction?: StyleValueWithCondition<
     CSS.Property.AnimationTimingFunction,
     "easings"
   >
@@ -2560,7 +2579,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/appearance
    */
-  appearance?: CSSToken<CSS.Property.Appearance>
+  appearance?: StyleValueWithCondition<CSS.Property.Appearance>
   /**
    * ### aspect-ratio
    *
@@ -2572,23 +2591,26 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/aspect-ratio
    */
-  aspectRatio?: CSSToken<CSS.Property.AspectRatio, "aspectRatios">
+  aspectRatio?: StyleValueWithCondition<
+    CSS.Property.AspectRatio,
+    "aspectRatios"
+  >
   /**
    * Sets the value of `--backdrop-blur`.
    */
-  backdropBlur?: CSSToken<StringLiteral, "blurs">
+  backdropBlur?: StyleValueWithCondition<AnyString, "blurs">
   /**
    * Sets the value of `--backdrop-brightness`.
    */
-  backdropBrightness?: CSSToken<StringLiteral>
+  backdropBrightness?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-contrast`.
    */
-  backdropContrast?: CSSToken<StringLiteral>
+  backdropContrast?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-drop-shadow`.
    */
-  backdropDropShadow?: CSSToken<StringLiteral, "shadows">
+  backdropDropShadow?: StyleValueWithCondition<AnyString, "shadows">
   /**
    * ### backdrop-filter
    *
@@ -2599,27 +2621,27 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/backdrop-filter
    */
-  backdropFilter?: CSSToken<CSS.Property.BackdropFilter>
+  backdropFilter?: StyleValueWithCondition<CSS.Property.BackdropFilter>
   /**
    * Sets the value of `--backdrop-grayscale`.
    */
-  backdropGrayscale?: CSSToken<StringLiteral>
+  backdropGrayscale?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-hue-rotate`.
    */
-  backdropHueRotate?: CSSToken<StringLiteral>
+  backdropHueRotate?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-invert`.
    */
-  backdropInvert?: CSSToken<StringLiteral>
+  backdropInvert?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-saturate`.
    */
-  backdropSaturate?: CSSToken<StringLiteral>
+  backdropSaturate?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-sepia`.
    */
-  backdropSepia?: CSSToken<StringLiteral>
+  backdropSepia?: StyleValueWithCondition<AnyString>
   /**
    * ### backface-visibility
    *
@@ -2631,7 +2653,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/backface-visibility
    */
-  backfaceVisibility?: CSSToken<
+  backfaceVisibility?: StyleValueWithCondition<
     CSS.Property.BackfaceVisibility | number,
     "sizes"
   >
@@ -2646,7 +2668,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background
    */
-  background?: CSSToken<CSS.Property.Background, "colors">
+  background?: StyleValueWithCondition<CSS.Property.Background, "colors">
   /**
    * ### background-attachment
    *
@@ -2658,7 +2680,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-attachment
    */
-  backgroundAttachment?: CSSToken<CSS.Property.BackgroundAttachment>
+  backgroundAttachment?: StyleValueWithCondition<CSS.Property.BackgroundAttachment>
   /**
    * ### background-blend-mode
    *
@@ -2670,7 +2692,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
    */
-  backgroundBlendMode?: CSSToken<CSS.Property.BackgroundBlendMode>
+  backgroundBlendMode?: StyleValueWithCondition<CSS.Property.BackgroundBlendMode>
   /**
    * ### background-clip
    *
@@ -2682,7 +2704,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-clip
    */
-  backgroundClip?: CSSToken<CSS.Property.BackgroundClip>
+  backgroundClip?: StyleValueWithCondition<CSS.Property.BackgroundClip>
   /**
    * ### background-color
    *
@@ -2694,7 +2716,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-color
    */
-  backgroundColor?: CSSToken<CSS.Property.BackgroundColor, "colors">
+  backgroundColor?: StyleValueWithCondition<
+    CSS.Property.BackgroundColor,
+    "colors"
+  >
   /**
    * ### background-image
    *
@@ -2706,7 +2731,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  backgroundImage?: CSSToken<CSS.Property.BackgroundImage, "gradients">
+  backgroundImage?: StyleValueWithCondition<
+    CSS.Property.BackgroundImage,
+    "gradients"
+  >
   /**
    * ### background-origin
    *
@@ -2718,7 +2746,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-origin
    */
-  backgroundOrigin?: CSSToken<CSS.Property.BackgroundOrigin>
+  backgroundOrigin?: StyleValueWithCondition<CSS.Property.BackgroundOrigin>
   /**
    * ### background-position
    *
@@ -2730,7 +2758,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position
    */
-  backgroundPosition?: CSSToken<CSS.Property.BackgroundPosition>
+  backgroundPosition?: StyleValueWithCondition<CSS.Property.BackgroundPosition>
   /**
    * ### background-position-x
    *
@@ -2742,7 +2770,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
    */
-  backgroundPositionX?: CSSToken<CSS.Property.BackgroundPositionX>
+  backgroundPositionX?: StyleValueWithCondition<CSS.Property.BackgroundPositionX>
   /**
    * ### background-position-y
    *
@@ -2754,7 +2782,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
-  backgroundPositionY?: CSSToken<CSS.Property.BackgroundPositionY>
+  backgroundPositionY?: StyleValueWithCondition<CSS.Property.BackgroundPositionY>
   /**
    * ### background-repeat
    *
@@ -2766,7 +2794,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-repeat
    */
-  backgroundRepeat?: CSSToken<CSS.Property.BackgroundRepeat>
+  backgroundRepeat?: StyleValueWithCondition<CSS.Property.BackgroundRepeat>
   /**
    * ### background-size
    *
@@ -2778,7 +2806,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-size
    */
-  backgroundSize?: CSSToken<CSS.Property.BackgroundSize>
+  backgroundSize?: StyleValueWithCondition<CSS.Property.BackgroundSize>
   /**
    * ### baseline-shift
    *
@@ -2788,7 +2816,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-inline/#baseline-shift-property
    */
-  baselineShift?: CSSToken<CSS.Property.BaselineShift>
+  baselineShift?: StyleValueWithCondition<CSS.Property.BaselineShift>
   /**
    * ### baseline-source
    *
@@ -2798,7 +2826,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-inline/#baseline-source
    */
-  baselineSource?: CSSToken<string & {}>
+  baselineSource?: StyleValueWithCondition<AnyString>
   /**
    * ### background
    *
@@ -2810,7 +2838,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background
    */
-  bg?: CSSToken<CSS.Property.Background, "colors">
+  bg?: StyleValueWithCondition<CSS.Property.Background, "colors">
   /**
    * ### background-attachment
    *
@@ -2822,7 +2850,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-attachment
    */
-  bgAttachment?: CSSToken<CSS.Property.BackgroundAttachment>
+  bgAttachment?: StyleValueWithCondition<CSS.Property.BackgroundAttachment>
   /**
    * ### background-blend-mode
    *
@@ -2834,7 +2862,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
    */
-  bgBlendMode?: CSSToken<CSS.Property.BackgroundBlendMode>
+  bgBlendMode?: StyleValueWithCondition<CSS.Property.BackgroundBlendMode>
   /**
    * ### background-clip
    *
@@ -2846,7 +2874,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-clip
    */
-  bgClip?: CSSToken<CSS.Property.BackgroundClip>
+  bgClip?: StyleValueWithCondition<CSS.Property.BackgroundClip>
   /**
    * ### background-color
    *
@@ -2858,7 +2886,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-color
    */
-  bgColor?: CSSToken<CSS.Property.BackgroundColor, "colors">
+  bgColor?: StyleValueWithCondition<CSS.Property.BackgroundColor, "colors">
   /**
    * ### background-image
    *
@@ -2870,7 +2898,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  bgGradient?: CSSToken<CSS.Property.BackgroundImage, "gradients">
+  bgGradient?: StyleValueWithCondition<
+    CSS.Property.BackgroundImage,
+    "gradients"
+  >
   /**
    * ### background-image
    *
@@ -2882,7 +2913,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  bgImage?: CSSToken<CSS.Property.BackgroundImage, "gradients">
+  bgImage?: StyleValueWithCondition<CSS.Property.BackgroundImage, "gradients">
   /**
    * ### background-image
    *
@@ -2894,7 +2925,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  bgImg?: CSSToken<CSS.Property.BackgroundImage, "gradients">
+  bgImg?: StyleValueWithCondition<CSS.Property.BackgroundImage, "gradients">
   /**
    * ### background-origin
    *
@@ -2906,7 +2937,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-origin
    */
-  bgOrigin?: CSSToken<CSS.Property.BackgroundOrigin>
+  bgOrigin?: StyleValueWithCondition<CSS.Property.BackgroundOrigin>
   /**
    * ### background-position
    *
@@ -2918,7 +2949,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position
    */
-  bgPosition?: CSSToken<CSS.Property.BackgroundPosition>
+  bgPosition?: StyleValueWithCondition<CSS.Property.BackgroundPosition>
   /**
    * ### background-position-x
    *
@@ -2930,7 +2961,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
    */
-  bgPositionX?: CSSToken<CSS.Property.BackgroundPositionX>
+  bgPositionX?: StyleValueWithCondition<CSS.Property.BackgroundPositionX>
   /**
    * ### background-position-y
    *
@@ -2942,7 +2973,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
-  bgPositionY?: CSSToken<CSS.Property.BackgroundPositionY>
+  bgPositionY?: StyleValueWithCondition<CSS.Property.BackgroundPositionY>
   /**
    * ### background-position-x
    *
@@ -2954,7 +2985,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
    */
-  bgPosX?: CSSToken<CSS.Property.BackgroundPositionX>
+  bgPosX?: StyleValueWithCondition<CSS.Property.BackgroundPositionX>
   /**
    * ### background-position-y
    *
@@ -2966,7 +2997,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
-  bgPosY?: CSSToken<CSS.Property.BackgroundPositionY>
+  bgPosY?: StyleValueWithCondition<CSS.Property.BackgroundPositionY>
   /**
    * ### background-repeat
    *
@@ -2978,7 +3009,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-repeat
    */
-  bgRepeat?: CSSToken<CSS.Property.BackgroundRepeat>
+  bgRepeat?: StyleValueWithCondition<CSS.Property.BackgroundRepeat>
   /**
    * ### background-size
    *
@@ -2990,7 +3021,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-size
    */
-  bgSize?: CSSToken<CSS.Property.BackgroundSize>
+  bgSize?: StyleValueWithCondition<CSS.Property.BackgroundSize>
   /**
    * ### mix-blend-mode
    *
@@ -3002,7 +3033,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
    */
-  blendMode?: CSSToken<CSS.Property.MixBlendMode>
+  blendMode?: StyleValueWithCondition<CSS.Property.MixBlendMode>
   /**
    * ### block-size
    *
@@ -3014,11 +3045,11 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/block-size
    */
-  blockSize?: CSSToken<CSS.Property.BlockSize | number, "sizes">
+  blockSize?: StyleValueWithCondition<CSS.Property.BlockSize | number, "sizes">
   /**
    * Sets the value of `--blur`.
    */
-  blur?: CSSToken<StringLiteral, "blurs">
+  blur?: StyleValueWithCondition<AnyString, "blurs">
   /**
    * ### border
    *
@@ -3030,7 +3061,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border
    */
-  border?: CSSToken<CSS.Property.Border | number, "borders">
+  border?: StyleValueWithCondition<CSS.Property.Border | number, "borders">
   /**
    * ### border-block
    *
@@ -3042,7 +3073,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block
    */
-  borderBlock?: CSSToken<CSS.Property.BorderBlock | number, "borders">
+  borderBlock?: StyleValueWithCondition<
+    CSS.Property.BorderBlock | number,
+    "borders"
+  >
   /**
    * ### border-block-color
    *
@@ -3054,7 +3088,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-color
    */
-  borderBlockColor?: CSSToken<CSS.Property.BorderBlockColor, "colors">
+  borderBlockColor?: StyleValueWithCondition<
+    CSS.Property.BorderBlockColor,
+    "colors"
+  >
   /**
    * ### border-block-end
    *
@@ -3066,7 +3103,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end
    */
-  borderBlockEnd?: CSSToken<CSS.Property.BorderBlockEnd | number, "borders">
+  borderBlockEnd?: StyleValueWithCondition<
+    CSS.Property.BorderBlockEnd | number,
+    "borders"
+  >
   /**
    * ### border-block-end-color
    *
@@ -3078,7 +3118,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-color
    */
-  borderBlockEndColor?: CSSToken<CSS.Property.BorderBlockEndColor, "colors">
+  borderBlockEndColor?: StyleValueWithCondition<
+    CSS.Property.BorderBlockEndColor,
+    "colors"
+  >
   /**
    * ### border-block-end-style
    *
@@ -3090,7 +3133,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-style
    */
-  borderBlockEndStyle?: CSSToken<CSS.Property.BorderBlockEndStyle>
+  borderBlockEndStyle?: StyleValueWithCondition<CSS.Property.BorderBlockEndStyle>
   /**
    * ### border-block-end-width
    *
@@ -3102,7 +3145,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-width
    */
-  borderBlockEndWidth?: CSSToken<CSS.Property.BorderBlockEndWidth | number>
+  borderBlockEndWidth?: StyleValueWithCondition<
+    CSS.Property.BorderBlockEndWidth | number
+  >
   /**
    * ### border-block-start
    *
@@ -3114,7 +3159,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start
    */
-  borderBlockStart?: CSSToken<CSS.Property.BorderBlockStart | number, "borders">
+  borderBlockStart?: StyleValueWithCondition<
+    CSS.Property.BorderBlockStart | number,
+    "borders"
+  >
   /**
    * ### border-block-start-color
    *
@@ -3126,7 +3174,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-color
    */
-  borderBlockStartColor?: CSSToken<CSS.Property.BorderBlockStartColor, "colors">
+  borderBlockStartColor?: StyleValueWithCondition<
+    CSS.Property.BorderBlockStartColor,
+    "colors"
+  >
   /**
    * ### border-block-start-style
    *
@@ -3138,7 +3189,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-style
    */
-  borderBlockStartStyle?: CSSToken<CSS.Property.BorderBlockStartStyle>
+  borderBlockStartStyle?: StyleValueWithCondition<CSS.Property.BorderBlockStartStyle>
   /**
    * ### border-block-start-width
    *
@@ -3150,7 +3201,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-width
    */
-  borderBlockStartWidth?: CSSToken<CSS.Property.BorderBlockStartWidth | number>
+  borderBlockStartWidth?: StyleValueWithCondition<
+    CSS.Property.BorderBlockStartWidth | number
+  >
   /**
    * ### border-block-style
    *
@@ -3162,7 +3215,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-style
    */
-  borderBlockStyle?: CSSToken<CSS.Property.BorderBlockStyle>
+  borderBlockStyle?: StyleValueWithCondition<CSS.Property.BorderBlockStyle>
   /**
    * ### border-block-width
    *
@@ -3174,7 +3227,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-width
    */
-  borderBlockWidth?: CSSToken<CSS.Property.BorderBlockWidth | number>
+  borderBlockWidth?: StyleValueWithCondition<
+    CSS.Property.BorderBlockWidth | number
+  >
   /**
    * ### border-bottom
    *
@@ -3186,7 +3241,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom
    */
-  borderBottom?: CSSToken<CSS.Property.BorderBottom | number, "borders">
+  borderBottom?: StyleValueWithCondition<
+    CSS.Property.BorderBottom | number,
+    "borders"
+  >
   /**
    * ### border-bottom-color
    *
@@ -3198,7 +3256,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-color
    */
-  borderBottomColor?: CSSToken<CSS.Property.BorderBottomColor, "colors">
+  borderBottomColor?: StyleValueWithCondition<
+    CSS.Property.BorderBottomColor,
+    "colors"
+  >
   /**
    * ### border-end-end-radius
    *
@@ -3210,7 +3271,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
    */
-  borderBottomEndRadius?: CSSToken<
+  borderBottomEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndEndRadius | number,
     "radii"
   >
@@ -3225,7 +3286,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
    */
-  borderBottomLeftRadius?: CSSToken<
+  borderBottomLeftRadius?: StyleValueWithCondition<
     CSS.Property.BorderBottomLeftRadius | number,
     "radii"
   >
@@ -3252,7 +3313,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  borderBottomRadius?: CSSToken<
+  borderBottomRadius?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
@@ -3269,7 +3330,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  borderBottomRightRadius?: CSSToken<
+  borderBottomRightRadius?: StyleValueWithCondition<
     CSS.Property.BorderBottomRightRadius | number,
     "radii"
   >
@@ -3284,7 +3345,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderBottomStartRadius?: CSSToken<
+  borderBottomStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
@@ -3299,7 +3360,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-style
    */
-  borderBottomStyle?: CSSToken<CSS.Property.BorderBottomStyle>
+  borderBottomStyle?: StyleValueWithCondition<CSS.Property.BorderBottomStyle>
   /**
    * ### border-bottom-width
    *
@@ -3311,7 +3372,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-width
    */
-  borderBottomWidth?: CSSToken<CSS.Property.BorderBottomWidth | number>
+  borderBottomWidth?: StyleValueWithCondition<
+    CSS.Property.BorderBottomWidth | number
+  >
   /**
    * ### border-collapse
    *
@@ -3323,7 +3386,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-collapse
    */
-  borderCollapse?: CSSToken<CSS.Property.BorderCollapse>
+  borderCollapse?: StyleValueWithCondition<CSS.Property.BorderCollapse>
   /**
    * ### border-color
    *
@@ -3335,7 +3398,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-color
    */
-  borderColor?: CSSToken<CSS.Property.BorderColor, "colors">
+  borderColor?: StyleValueWithCondition<CSS.Property.BorderColor, "colors">
   /**
    * ### border-inline-end
    *
@@ -3347,7 +3410,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end
    */
-  borderEnd?: CSSToken<CSS.Property.BorderInlineEnd | number, "borders">
+  borderEnd?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEnd | number,
+    "borders"
+  >
   /**
    * ### border-inline-end-color
    *
@@ -3359,7 +3425,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
    */
-  borderEndColor?: CSSToken<CSS.Property.BorderInlineEndColor, "colors">
+  borderEndColor?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEndColor,
+    "colors"
+  >
   /**
    * ### border-end-end-radius
    *
@@ -3371,7 +3440,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
    */
-  borderEndEndRadius?: CSSToken<
+  borderEndEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndEndRadius | number,
     "radii"
   >
@@ -3398,7 +3467,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderEndRadius?: CSSToken<
+  borderEndRadius?: StyleValueWithCondition<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -3415,7 +3484,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderEndStartRadius?: CSSToken<
+  borderEndStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
@@ -3430,7 +3499,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
    */
-  borderEndStyle?: CSSToken<CSS.Property.BorderInlineEndStyle>
+  borderEndStyle?: StyleValueWithCondition<CSS.Property.BorderInlineEndStyle>
   /**
    * ### border-inline-end-width
    *
@@ -3442,7 +3511,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
    */
-  borderEndWidth?: CSSToken<CSS.Property.BorderInlineEndWidth | number>
+  borderEndWidth?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEndWidth | number
+  >
   /**
    * ### border-image
    *
@@ -3454,7 +3525,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image
    */
-  borderImage?: CSSToken<CSS.Property.BorderImage | number, "borders">
+  borderImage?: StyleValueWithCondition<
+    CSS.Property.BorderImage | number,
+    "borders"
+  >
   /**
    * ### border-image-outset
    *
@@ -3466,7 +3540,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-outset
    */
-  borderImageOutset?: CSSToken<CSS.Property.BorderImageOutset>
+  borderImageOutset?: StyleValueWithCondition<CSS.Property.BorderImageOutset>
   /**
    * ### border-image-repeat
    *
@@ -3478,7 +3552,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-repeat
    */
-  borderImageRepeat?: CSSToken<CSS.Property.BorderImageRepeat>
+  borderImageRepeat?: StyleValueWithCondition<CSS.Property.BorderImageRepeat>
   /**
    * ### border-image-slice
    *
@@ -3490,7 +3564,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-slice
    */
-  borderImageSlice?: CSSToken<CSS.Property.BorderImageSlice>
+  borderImageSlice?: StyleValueWithCondition<CSS.Property.BorderImageSlice>
   /**
    * ### border-image-source
    *
@@ -3502,7 +3576,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-source
    */
-  borderImageSource?: CSSToken<CSS.Property.BorderImageSource, "gradients">
+  borderImageSource?: StyleValueWithCondition<
+    CSS.Property.BorderImageSource,
+    "gradients"
+  >
   /**
    * ### border-image-width
    *
@@ -3514,7 +3591,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-width
    */
-  borderImageWidth?: CSSToken<CSS.Property.BorderImageWidth | number>
+  borderImageWidth?: StyleValueWithCondition<
+    CSS.Property.BorderImageWidth | number
+  >
   /**
    * ### border-inline
    *
@@ -3526,7 +3605,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline
    */
-  borderInline?: CSSToken<CSS.Property.BorderInline | number, "borders">
+  borderInline?: StyleValueWithCondition<
+    CSS.Property.BorderInline | number,
+    "borders"
+  >
   /**
    * ### border-inline-color
    *
@@ -3538,7 +3620,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-color
    */
-  borderInlineColor?: CSSToken<CSS.Property.BorderInlineColor, "colors">
+  borderInlineColor?: StyleValueWithCondition<
+    CSS.Property.BorderInlineColor,
+    "colors"
+  >
   /**
    * ### border-inline-end
    *
@@ -3550,7 +3635,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end
    */
-  borderInlineEnd?: CSSToken<CSS.Property.BorderInlineEnd | number, "borders">
+  borderInlineEnd?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEnd | number,
+    "borders"
+  >
   /**
    * ### border-inline-end-color
    *
@@ -3562,7 +3650,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
    */
-  borderInlineEndColor?: CSSToken<CSS.Property.BorderInlineEndColor, "colors">
+  borderInlineEndColor?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEndColor,
+    "colors"
+  >
   /**
    * ### border-end-end-radius
    *
@@ -3586,7 +3677,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderInlineEndRadius?: CSSToken<
+  borderInlineEndRadius?: StyleValueWithCondition<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -3603,7 +3694,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
    */
-  borderInlineEndStyle?: CSSToken<CSS.Property.BorderInlineEndStyle>
+  borderInlineEndStyle?: StyleValueWithCondition<CSS.Property.BorderInlineEndStyle>
   /**
    * ### border-inline-end-width
    *
@@ -3615,7 +3706,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
    */
-  borderInlineEndWidth?: CSSToken<CSS.Property.BorderInlineEndWidth | number>
+  borderInlineEndWidth?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEndWidth | number
+  >
   /**
    * ### border-inline-start
    *
@@ -3627,7 +3720,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start
    */
-  borderInlineStart?: CSSToken<
+  borderInlineStart?: StyleValueWithCondition<
     CSS.Property.BorderInlineStart | number,
     "borders"
   >
@@ -3642,7 +3735,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
    */
-  borderInlineStartColor?: CSSToken<
+  borderInlineStartColor?: StyleValueWithCondition<
     CSS.Property.BorderInlineStartColor,
     "colors"
   >
@@ -3669,7 +3762,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderInlineStartRadius?: CSSToken<
+  borderInlineStartRadius?: StyleValueWithCondition<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
@@ -3686,7 +3779,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
    */
-  borderInlineStartStyle?: CSSToken<CSS.Property.BorderInlineStartStyle>
+  borderInlineStartStyle?: StyleValueWithCondition<CSS.Property.BorderInlineStartStyle>
   /**
    * ### border-inline-start-width
    *
@@ -3698,7 +3791,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
    */
-  borderInlineStartWidth?: CSSToken<
+  borderInlineStartWidth?: StyleValueWithCondition<
     CSS.Property.BorderInlineStartWidth | number
   >
   /**
@@ -3712,7 +3805,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-style
    */
-  borderInlineStyle?: CSSToken<CSS.Property.BorderInlineStyle>
+  borderInlineStyle?: StyleValueWithCondition<CSS.Property.BorderInlineStyle>
   /**
    * ### border-inline-width
    *
@@ -3724,7 +3817,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-width
    */
-  borderInlineWidth?: CSSToken<CSS.Property.BorderInlineWidth | number>
+  borderInlineWidth?: StyleValueWithCondition<
+    CSS.Property.BorderInlineWidth | number
+  >
   /**
    * ### border-left
    *
@@ -3736,7 +3831,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left
    */
-  borderLeft?: CSSToken<CSS.Property.BorderLeft | number, "borders">
+  borderLeft?: StyleValueWithCondition<
+    CSS.Property.BorderLeft | number,
+    "borders"
+  >
   /**
    * ### border-left-color
    *
@@ -3748,7 +3846,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left-color
    */
-  borderLeftColor?: CSSToken<CSS.Property.BorderLeftColor, "colors">
+  borderLeftColor?: StyleValueWithCondition<
+    CSS.Property.BorderLeftColor,
+    "colors"
+  >
   /**
    * ### border-bottom-left-radius
    *
@@ -3772,7 +3873,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  borderLeftRadius?: CSSToken<
+  borderLeftRadius?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
     | number,
@@ -3789,7 +3890,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left-style
    */
-  borderLeftStyle?: CSSToken<CSS.Property.BorderLeftStyle>
+  borderLeftStyle?: StyleValueWithCondition<CSS.Property.BorderLeftStyle>
   /**
    * ### border-left-width
    *
@@ -3801,7 +3902,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left-width
    */
-  borderLeftWidth?: CSSToken<CSS.Property.BorderLeftWidth | number>
+  borderLeftWidth?: StyleValueWithCondition<
+    CSS.Property.BorderLeftWidth | number
+  >
   /**
    * ### border-radius
    *
@@ -3813,7 +3916,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
    */
-  borderRadius?: CSSToken<CSS.Property.BorderRadius | number, "radii">
+  borderRadius?: StyleValueWithCondition<
+    CSS.Property.BorderRadius | number,
+    "radii"
+  >
   /**
    * ### border-right
    *
@@ -3825,7 +3931,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right
    */
-  borderRight?: CSSToken<CSS.Property.BorderRight | number, "borders">
+  borderRight?: StyleValueWithCondition<
+    CSS.Property.BorderRight | number,
+    "borders"
+  >
   /**
    * ### border-right-color
    *
@@ -3837,7 +3946,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right-color
    */
-  borderRightColor?: CSSToken<CSS.Property.BorderRightColor, "colors">
+  borderRightColor?: StyleValueWithCondition<
+    CSS.Property.BorderRightColor,
+    "colors"
+  >
   /**
    * ### border-bottom-right-radius
    *
@@ -3861,7 +3973,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderRightRadius?: CSSToken<
+  borderRightRadius?: StyleValueWithCondition<
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -3878,7 +3990,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right-style
    */
-  borderRightStyle?: CSSToken<CSS.Property.BorderRightStyle>
+  borderRightStyle?: StyleValueWithCondition<CSS.Property.BorderRightStyle>
   /**
    * ### border-right-width
    *
@@ -3890,7 +4002,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right-width
    */
-  borderRightWidth?: CSSToken<CSS.Property.BorderRightWidth | number>
+  borderRightWidth?: StyleValueWithCondition<
+    CSS.Property.BorderRightWidth | number
+  >
   /**
    * ### border-spacing
    *
@@ -3902,7 +4016,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-spacing
    */
-  borderSpacing?: CSSToken<CSS.Property.BorderSpacing>
+  borderSpacing?: StyleValueWithCondition<CSS.Property.BorderSpacing>
   /**
    * ### border-inline-start
    *
@@ -3914,7 +4028,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start
    */
-  borderStart?: CSSToken<CSS.Property.BorderInlineStart | number, "borders">
+  borderStart?: StyleValueWithCondition<
+    CSS.Property.BorderInlineStart | number,
+    "borders"
+  >
   /**
    * ### border-inline-start-color
    *
@@ -3926,7 +4043,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
    */
-  borderStartColor?: CSSToken<CSS.Property.BorderInlineStartColor, "colors">
+  borderStartColor?: StyleValueWithCondition<
+    CSS.Property.BorderInlineStartColor,
+    "colors"
+  >
   /**
    * ### border-start-end-radius
    *
@@ -3938,7 +4058,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  borderStartEndRadius?: CSSToken<
+  borderStartEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartEndRadius | number,
     "radii"
   >
@@ -3965,7 +4085,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderStartRadius?: CSSToken<
+  borderStartRadius?: StyleValueWithCondition<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
@@ -3982,7 +4102,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderStartStartRadius?: CSSToken<
+  borderStartStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartStartRadius | number,
     "radii"
   >
@@ -3997,7 +4117,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
    */
-  borderStartStyle?: CSSToken<CSS.Property.BorderInlineStartStyle>
+  borderStartStyle?: StyleValueWithCondition<CSS.Property.BorderInlineStartStyle>
   /**
    * ### border-inline-start-width
    *
@@ -4009,7 +4129,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
    */
-  borderStartWidth?: CSSToken<CSS.Property.BorderInlineStartWidth | number>
+  borderStartWidth?: StyleValueWithCondition<
+    CSS.Property.BorderInlineStartWidth | number
+  >
   /**
    * ### border-style
    *
@@ -4021,7 +4143,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-style
    */
-  borderStyle?: CSSToken<CSS.Property.BorderStyle>
+  borderStyle?: StyleValueWithCondition<CSS.Property.BorderStyle>
   /**
    * ### border-top
    *
@@ -4033,7 +4155,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top
    */
-  borderTop?: CSSToken<CSS.Property.BorderTop | number, "borders">
+  borderTop?: StyleValueWithCondition<
+    CSS.Property.BorderTop | number,
+    "borders"
+  >
   /**
    * ### border-top-color
    *
@@ -4045,7 +4170,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-color
    */
-  borderTopColor?: CSSToken<CSS.Property.BorderTopColor, "colors">
+  borderTopColor?: StyleValueWithCondition<
+    CSS.Property.BorderTopColor,
+    "colors"
+  >
   /**
    * ### border-start-end-radius
    *
@@ -4057,7 +4185,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  borderTopEndRadius?: CSSToken<
+  borderTopEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartEndRadius | number,
     "radii"
   >
@@ -4072,7 +4200,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  borderTopLeftRadius?: CSSToken<
+  borderTopLeftRadius?: StyleValueWithCondition<
     CSS.Property.BorderTopLeftRadius | number,
     "radii"
   >
@@ -4099,7 +4227,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderTopRadius?: CSSToken<
+  borderTopRadius?: StyleValueWithCondition<
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -4116,7 +4244,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderTopRightRadius?: CSSToken<
+  borderTopRightRadius?: StyleValueWithCondition<
     CSS.Property.BorderTopRightRadius | number,
     "radii"
   >
@@ -4131,7 +4259,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderTopStartRadius?: CSSToken<
+  borderTopStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartStartRadius | number,
     "radii"
   >
@@ -4146,7 +4274,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-style
    */
-  borderTopStyle?: CSSToken<CSS.Property.BorderTopStyle>
+  borderTopStyle?: StyleValueWithCondition<CSS.Property.BorderTopStyle>
   /**
    * ### border-top-width
    *
@@ -4158,7 +4286,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-width
    */
-  borderTopWidth?: CSSToken<CSS.Property.BorderTopWidth | number>
+  borderTopWidth?: StyleValueWithCondition<CSS.Property.BorderTopWidth | number>
   /**
    * ### border-width
    *
@@ -4170,7 +4298,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-width
    */
-  borderWidth?: CSSToken<CSS.Property.BorderWidth | number>
+  borderWidth?: StyleValueWithCondition<CSS.Property.BorderWidth | number>
   /**
    * ### border-left
    *
@@ -4194,7 +4322,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right
    */
-  borderX?: CSSToken<
+  borderX?: StyleValueWithCondition<
     CSS.Property.BorderLeft | CSS.Property.BorderRight | number,
     "borders"
   >
@@ -4221,7 +4349,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top
    */
-  borderY?: CSSToken<
+  borderY?: StyleValueWithCondition<
     CSS.Property.BorderBottom | CSS.Property.BorderTop | number,
     "borders"
   >
@@ -4236,7 +4364,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/bottom
    */
-  bottom?: CSSToken<CSS.Property.Bottom | number, "spaces">
+  bottom?: StyleValueWithCondition<CSS.Property.Bottom | number, "spaces">
   /**
    * ### box-align
    *
@@ -4246,7 +4374,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxAlign?: CSSToken<CSS.Property.BoxAlign>
+  boxAlign?: StyleValueWithCondition<CSS.Property.BoxAlign>
   /**
    * ### box-decoration-break
    *
@@ -4256,7 +4384,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-decoration-break
    */
-  boxDecorationBreak?: CSSToken<CSS.Property.BoxDecorationBreak>
+  boxDecorationBreak?: StyleValueWithCondition<CSS.Property.BoxDecorationBreak>
   /**
    * ### box-direction
    *
@@ -4266,7 +4394,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxDirection?: CSSToken<CSS.Property.BoxDirection>
+  boxDirection?: StyleValueWithCondition<CSS.Property.BoxDirection>
   /**
    * ### box-flex
    *
@@ -4276,7 +4404,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxFlex?: CSSToken<CSS.Property.BoxFlex>
+  boxFlex?: StyleValueWithCondition<CSS.Property.BoxFlex>
   /**
    * ### box-flex-group
    *
@@ -4286,7 +4414,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxFlexGroup?: CSSToken<CSS.Property.BoxFlexGroup>
+  boxFlexGroup?: StyleValueWithCondition<CSS.Property.BoxFlexGroup>
   /**
    * ### box-lines
    *
@@ -4296,7 +4424,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxLines?: CSSToken<CSS.Property.BoxLines>
+  boxLines?: StyleValueWithCondition<CSS.Property.BoxLines>
   /**
    * ### box-ordinal-group
    *
@@ -4306,7 +4434,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxOrdinalGroup?: CSSToken<CSS.Property.BoxOrdinalGroup>
+  boxOrdinalGroup?: StyleValueWithCondition<CSS.Property.BoxOrdinalGroup>
   /**
    * ### box-orient
    *
@@ -4316,7 +4444,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxOrient?: CSSToken<CSS.Property.BoxOrient>
+  boxOrient?: StyleValueWithCondition<CSS.Property.BoxOrient>
   /**
    * ### box-pack
    *
@@ -4326,7 +4454,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxPack?: CSSToken<CSS.Property.BoxPack>
+  boxPack?: StyleValueWithCondition<CSS.Property.BoxPack>
   /**
    * ### box-shadow
    *
@@ -4338,7 +4466,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-shadow
    */
-  boxShadow?: CSSToken<CSS.Property.BoxShadow, "shadows">
+  boxShadow?: StyleValueWithCondition<CSS.Property.BoxShadow, "shadows">
   /**
    * ### height
    *
@@ -4362,7 +4490,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  boxSize?: CSSToken<CSS.Property.Height | CSS.Property.Width | number, "sizes">
+  boxSize?: StyleValueWithCondition<
+    CSS.Property.Height | CSS.Property.Width | number,
+    "sizes"
+  >
   /**
    * ### box-sizing
    *
@@ -4374,7 +4505,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-sizing
    */
-  boxSizing?: CSSToken<CSS.Property.BoxSizing>
+  boxSizing?: StyleValueWithCondition<CSS.Property.BoxSizing>
   /**
    * ### break-after
    *
@@ -4386,7 +4517,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/break-after
    */
-  breakAfter?: CSSToken<CSS.Property.BreakAfter>
+  breakAfter?: StyleValueWithCondition<CSS.Property.BreakAfter>
   /**
    * ### break-before
    *
@@ -4398,7 +4529,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/break-before
    */
-  breakBefore?: CSSToken<CSS.Property.BreakBefore>
+  breakBefore?: StyleValueWithCondition<CSS.Property.BreakBefore>
   /**
    * ### break-inside
    *
@@ -4410,11 +4541,11 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/break-inside
    */
-  breakInside?: CSSToken<CSS.Property.BreakInside>
+  breakInside?: StyleValueWithCondition<CSS.Property.BreakInside>
   /**
    * Sets the value of `--brightness`.
    */
-  brightness?: CSSToken<StringLiteral>
+  brightness?: StyleValueWithCondition<AnyString>
   /**
    * ### caption-side
    *
@@ -4426,7 +4557,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/caption-side
    */
-  captionSide?: CSSToken<CSS.Property.CaptionSide>
+  captionSide?: StyleValueWithCondition<CSS.Property.CaptionSide>
   /**
    * ### caret-color
    *
@@ -4438,7 +4569,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/caret-color
    */
-  caret?: CSSToken<CSS.Property.CaretColor, "colors">
+  caret?: StyleValueWithCondition<CSS.Property.CaretColor, "colors">
   /**
    * ### caret-color
    *
@@ -4450,7 +4581,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/caret-color
    */
-  caretColor?: CSSToken<CSS.Property.CaretColor, "colors">
+  caretColor?: StyleValueWithCondition<CSS.Property.CaretColor, "colors">
   /**
    * ### clear
    *
@@ -4462,7 +4593,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/clear
    */
-  clear?: CSSToken<CSS.Property.Clear>
+  clear?: StyleValueWithCondition<CSS.Property.Clear>
   /**
    * ### clip
    *
@@ -4473,7 +4604,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  clip?: CSSToken<CSS.Property.Clip>
+  clip?: StyleValueWithCondition<CSS.Property.Clip>
   /**
    * ### clip-path
    *
@@ -4485,7 +4616,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/clip-path
    */
-  clipPath?: CSSToken<CSS.Property.ClipPath>
+  clipPath?: StyleValueWithCondition<CSS.Property.ClipPath>
   /**
    * ### clip-rule
    *
@@ -4497,7 +4628,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/clip-rule
    */
-  clipRule?: CSSToken<CSS.Property.ClipRule>
+  clipRule?: StyleValueWithCondition<CSS.Property.ClipRule>
   /**
    * ### color
    *
@@ -4509,7 +4640,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color
    */
-  color?: CSSToken<CSS.Property.Color, "colors">
+  color?: StyleValueWithCondition<CSS.Property.Color, "colors">
   /**
    * ### color-adjust
    *
@@ -4520,7 +4651,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  colorAdjust?: CSSToken<CSS.Property.PrintColorAdjust>
+  colorAdjust?: StyleValueWithCondition<CSS.Property.PrintColorAdjust>
   /**
    * ### color-interpolation
    *
@@ -4532,7 +4663,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation
    */
-  colorInterpolation?: CSSToken<CSS.Property.ColorInterpolation>
+  colorInterpolation?: StyleValueWithCondition<CSS.Property.ColorInterpolation>
   /**
    * ### color-interpolation-filters
    *
@@ -4544,7 +4675,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation-filters
    */
-  colorInterpolationFilters?: CSSToken<string & {}>
+  colorInterpolationFilters?: StyleValueWithCondition<AnyString>
   /**
    * ### column-count
    *
@@ -4556,7 +4687,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-count
    */
-  columnCount?: CSSToken<CSS.Property.ColumnCount>
+  columnCount?: StyleValueWithCondition<CSS.Property.ColumnCount>
   /**
    * ### column-fill
    *
@@ -4568,7 +4699,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-fill
    */
-  columnFill?: CSSToken<CSS.Property.ColumnFill>
+  columnFill?: StyleValueWithCondition<CSS.Property.ColumnFill>
   /**
    * ### column-gap
    *
@@ -4580,7 +4711,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  columnGap?: CSSToken<CSS.Property.ColumnGap | number, "spaces">
+  columnGap?: StyleValueWithCondition<CSS.Property.ColumnGap | number, "spaces">
   /**
    * ### column-rule
    *
@@ -4592,7 +4723,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule
    */
-  columnRule?: CSSToken<CSS.Property.ColumnRule | number>
+  columnRule?: StyleValueWithCondition<CSS.Property.ColumnRule | number>
   /**
    * ### column-rule-color
    *
@@ -4604,7 +4735,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-color
    */
-  columnRuleColor?: CSSToken<CSS.Property.ColumnRuleColor, "colors">
+  columnRuleColor?: StyleValueWithCondition<
+    CSS.Property.ColumnRuleColor,
+    "colors"
+  >
   /**
    * ### column-rule-style
    *
@@ -4616,7 +4750,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-style
    */
-  columnRuleStyle?: CSSToken<CSS.Property.ColumnRuleStyle>
+  columnRuleStyle?: StyleValueWithCondition<CSS.Property.ColumnRuleStyle>
   /**
    * ### column-rule-width
    *
@@ -4628,7 +4762,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-width
    */
-  columnRuleWidth?: CSSToken<CSS.Property.ColumnRuleWidth | number>
+  columnRuleWidth?: StyleValueWithCondition<
+    CSS.Property.ColumnRuleWidth | number
+  >
   /**
    * ### columns
    *
@@ -4640,7 +4776,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/columns
    */
-  columns?: CSSToken<CSS.Property.Columns>
+  columns?: StyleValueWithCondition<CSS.Property.Columns>
   /**
    * ### column-span
    *
@@ -4652,7 +4788,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-span
    */
-  columnSpan?: CSSToken<CSS.Property.ColumnSpan>
+  columnSpan?: StyleValueWithCondition<CSS.Property.ColumnSpan>
   /**
    * ### column-width
    *
@@ -4664,7 +4800,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-width
    */
-  columnWidth?: CSSToken<CSS.Property.ColumnWidth | number, "sizes">
+  columnWidth?: StyleValueWithCondition<
+    CSS.Property.ColumnWidth | number,
+    "sizes"
+  >
   /**
    * ### contain
    *
@@ -4676,7 +4815,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain
    */
-  contain?: CSSToken<CSS.Property.Contain>
+  contain?: StyleValueWithCondition<CSS.Property.Contain>
   /**
    * ### container
    *
@@ -4687,7 +4826,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container
    */
-  container?: CSSToken<CSS.Property.Container>
+  container?: StyleValueWithCondition<CSS.Property.Container>
   /**
    * ### container-name
    *
@@ -4698,7 +4837,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container-name
    */
-  containerName?: CSSToken<CSS.Property.ContainerName>
+  containerName?: StyleValueWithCondition<CSS.Property.ContainerName>
   /**
    * ### container-type
    *
@@ -4709,7 +4848,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container-type
    */
-  containerType?: CSSToken<CSS.Property.ContainerType>
+  containerType?: StyleValueWithCondition<CSS.Property.ContainerType>
   /**
    * ### contain-intrinsic-block-size
    *
@@ -4720,7 +4859,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-block-size
    */
-  containIntrinsicBlockSize?: CSSToken<CSS.Property.ContainIntrinsicBlockSize>
+  containIntrinsicBlockSize?: StyleValueWithCondition<CSS.Property.ContainIntrinsicBlockSize>
   /**
    * ### contain-intrinsic-height
    *
@@ -4731,7 +4870,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-height
    */
-  containIntrinsicHeight?: CSSToken<CSS.Property.ContainIntrinsicHeight>
+  containIntrinsicHeight?: StyleValueWithCondition<CSS.Property.ContainIntrinsicHeight>
   /**
    * ### contain-intrinsic-inline-size
    *
@@ -4742,7 +4881,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-inline-size
    */
-  containIntrinsicInlineSize?: CSSToken<CSS.Property.ContainIntrinsicInlineSize>
+  containIntrinsicInlineSize?: StyleValueWithCondition<CSS.Property.ContainIntrinsicInlineSize>
   /**
    * ### contain-intrinsic-size
    *
@@ -4753,7 +4892,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-size
    */
-  containIntrinsicSize?: CSSToken<CSS.Property.ContainIntrinsicSize>
+  containIntrinsicSize?: StyleValueWithCondition<CSS.Property.ContainIntrinsicSize>
   /**
    * ### contain-intrinsic-width
    *
@@ -4764,7 +4903,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-width
    */
-  containIntrinsicWidth?: CSSToken<
+  containIntrinsicWidth?: StyleValueWithCondition<
     CSS.Property.ContainIntrinsicWidth | number,
     "sizes"
   >
@@ -4779,7 +4918,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/content
    */
-  content?: CSSToken<CSS.Property.Content>
+  content?: StyleValueWithCondition<CSS.Property.Content>
   /**
    * ### content-visibility
    *
@@ -4789,7 +4928,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/content-visibility
    */
-  contentVisibility?: CSSToken<CSS.Property.ContentVisibility>
+  contentVisibility?: StyleValueWithCondition<CSS.Property.ContentVisibility>
   /**
    * ### counter-increment
    *
@@ -4801,7 +4940,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/counter-increment
    */
-  counterIncrement?: CSSToken<CSS.Property.CounterIncrement>
+  counterIncrement?: StyleValueWithCondition<CSS.Property.CounterIncrement>
   /**
    * ### counter-reset
    *
@@ -4813,7 +4952,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/counter-reset
    */
-  counterReset?: CSSToken<CSS.Property.CounterReset>
+  counterReset?: StyleValueWithCondition<CSS.Property.CounterReset>
   /**
    * ### counter-set
    *
@@ -4824,7 +4963,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/counter-set
    */
-  counterSet?: CSSToken<CSS.Property.CounterSet>
+  counterSet?: StyleValueWithCondition<CSS.Property.CounterSet>
   /**
    * ### cursor
    *
@@ -4834,7 +4973,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cursor
    */
-  cursor?: CSSToken<CSS.Property.Cursor>
+  cursor?: StyleValueWithCondition<CSS.Property.Cursor>
   /**
    * ### cx
    *
@@ -4846,7 +4985,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cx
    */
-  cx?: CSSToken<string & {}>
+  cx?: StyleValueWithCondition<AnyString>
   /**
    * ### cy
    *
@@ -4858,7 +4997,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cy
    */
-  cy?: CSSToken<string & {}>
+  cy?: StyleValueWithCondition<AnyString>
   /**
    * ### d
    *
@@ -4870,7 +5009,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/d
    */
-  d?: CSSToken<string & {}>
+  d?: StyleValueWithCondition<AnyString>
   /**
    * ### direction
    *
@@ -4882,7 +5021,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/direction
    */
-  direction?: CSSToken<CSS.Property.Direction>
+  direction?: StyleValueWithCondition<CSS.Property.Direction>
   /**
    * ### display
    *
@@ -4894,19 +5033,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/display
    */
-  display?: CSSToken<CSS.Property.Display>
+  display?: StyleValueWithCondition<CSS.Property.Display>
   /**
    * ### dominant-baseline
    *
    * The <code>dominant-baseline</code> CSS property sets the specific baseline used to align an elements's text and inline-level contents.
    *
    * @baseline `Widely available`
-   * @widely_available_date ≤2022-09-24
-   * @newly_available_date ≤2020-03-24
+   * @widely_available_date 2022-07-15
+   * @newly_available_date 2020-01-15
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/dominant-baseline
    */
-  dominantBaseline?: CSSToken<CSS.Property.DominantBaseline>
+  dominantBaseline?: StyleValueWithCondition<CSS.Property.DominantBaseline>
   /**
    * ### dynamic-range-limit
    *
@@ -4916,7 +5055,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  dynamicRangeLimit?: CSSToken<string & {}>
+  dynamicRangeLimit?: StyleValueWithCondition<AnyString>
   /**
    * ### empty-cells
    *
@@ -4928,7 +5067,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/empty-cells
    */
-  emptyCells?: CSSToken<CSS.Property.EmptyCells>
+  emptyCells?: StyleValueWithCondition<CSS.Property.EmptyCells>
   /**
    * ### field-sizing
    *
@@ -4940,7 +5079,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  fieldSizing?: CSSToken<string & {}>
+  fieldSizing?: StyleValueWithCondition<AnyString>
   /**
    * ### fill
    *
@@ -4952,7 +5091,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/fill
    */
-  fill?: CSSToken<CSS.Property.Fill, "colors">
+  fill?: StyleValueWithCondition<CSS.Property.Fill, "colors">
   /**
    * ### fill-opacity
    *
@@ -4964,7 +5103,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/fill-opacity
    */
-  fillOpacity?: CSSToken<CSS.Property.FillOpacity>
+  fillOpacity?: StyleValueWithCondition<CSS.Property.FillOpacity>
   /**
    * ### fill-rule
    *
@@ -4976,7 +5115,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/fill-rule
    */
-  fillRule?: CSSToken<CSS.Property.FillRule>
+  fillRule?: StyleValueWithCondition<CSS.Property.FillRule>
   /**
    * ### filter
    *
@@ -4988,7 +5127,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/filter
    */
-  filter?: CSSToken<CSS.Property.Filter>
+  filter?: StyleValueWithCondition<CSS.Property.Filter>
   /**
    * ### flex
    *
@@ -5000,7 +5139,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex
    */
-  flex?: CSSToken<CSS.Property.Flex>
+  flex?: StyleValueWithCondition<CSS.Property.Flex>
   /**
    * ### flex-basis
    *
@@ -5012,7 +5151,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-basis
    */
-  flexBasis?: CSSToken<CSS.Property.FlexBasis | number, "sizes">
+  flexBasis?: StyleValueWithCondition<CSS.Property.FlexBasis | number, "sizes">
   /**
    * ### flex-direction
    *
@@ -5024,7 +5163,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-direction
    */
-  flexDir?: CSSToken<CSS.Property.FlexDirection>
+  flexDir?: StyleValueWithCondition<CSS.Property.FlexDirection>
   /**
    * ### flex-direction
    *
@@ -5036,7 +5175,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-direction
    */
-  flexDirection?: CSSToken<CSS.Property.FlexDirection>
+  flexDirection?: StyleValueWithCondition<CSS.Property.FlexDirection>
   /**
    * ### flex-flow
    *
@@ -5048,7 +5187,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-flow
    */
-  flexFlow?: CSSToken<CSS.Property.FlexFlow>
+  flexFlow?: StyleValueWithCondition<CSS.Property.FlexFlow>
   /**
    * ### flex-grow
    *
@@ -5060,7 +5199,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-grow
    */
-  flexGrow?: CSSToken<CSS.Property.FlexGrow>
+  flexGrow?: StyleValueWithCondition<CSS.Property.FlexGrow>
   /**
    * ### flex-shrink
    *
@@ -5072,7 +5211,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-shrink
    */
-  flexShrink?: CSSToken<CSS.Property.FlexShrink>
+  flexShrink?: StyleValueWithCondition<CSS.Property.FlexShrink>
   /**
    * ### flex-wrap
    *
@@ -5084,7 +5223,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-wrap
    */
-  flexWrap?: CSSToken<CSS.Property.FlexWrap>
+  flexWrap?: StyleValueWithCondition<CSS.Property.FlexWrap>
   /**
    * ### float
    *
@@ -5096,7 +5235,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/float
    */
-  float?: CSSToken<CSS.Property.Float>
+  float?: StyleValueWithCondition<CSS.Property.Float>
   /**
    * ### flood-color
    *
@@ -5108,7 +5247,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flood-color
    */
-  floodColor?: CSSToken<CSS.Property.FloodColor, "colors">
+  floodColor?: StyleValueWithCondition<CSS.Property.FloodColor, "colors">
   /**
    * ### flood-opacity
    *
@@ -5120,7 +5259,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flood-opacity
    */
-  floodOpacity?: CSSToken<CSS.Property.FloodOpacity>
+  floodOpacity?: StyleValueWithCondition<CSS.Property.FloodOpacity>
   /**
    * ### font
    *
@@ -5132,7 +5271,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font
    */
-  font?: CSSToken<CSS.Property.Font>
+  font?: StyleValueWithCondition<CSS.Property.Font>
   /**
    * ### font-family
    *
@@ -5144,7 +5283,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-family
    */
-  fontFamily?: CSSToken<CSS.Property.FontFamily, "fonts">
+  fontFamily?: StyleValueWithCondition<CSS.Property.FontFamily, "fonts">
   /**
    * ### font-feature-settings
    *
@@ -5156,7 +5295,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-feature-settings
    */
-  fontFeatureSettings?: CSSToken<CSS.Property.FontFeatureSettings>
+  fontFeatureSettings?: StyleValueWithCondition<CSS.Property.FontFeatureSettings>
   /**
    * ### font-kerning
    *
@@ -5168,7 +5307,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-kerning
    */
-  fontKerning?: CSSToken<CSS.Property.FontKerning>
+  fontKerning?: StyleValueWithCondition<CSS.Property.FontKerning>
   /**
    * ### font-language-override
    *
@@ -5178,7 +5317,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-language-override
    */
-  fontLanguageOverride?: CSSToken<CSS.Property.FontLanguageOverride>
+  fontLanguageOverride?: StyleValueWithCondition<CSS.Property.FontLanguageOverride>
   /**
    * ### font-optical-sizing
    *
@@ -5190,18 +5329,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-optical-sizing
    */
-  fontOpticalSizing?: CSSToken<CSS.Property.FontOpticalSizing>
+  fontOpticalSizing?: StyleValueWithCondition<CSS.Property.FontOpticalSizing>
   /**
    * ### font-palette
    *
    * The <code>font-palette</code> CSS property selects a color palette from the font, optionally overriding individual colors in the <code>@font-palette-values</code> at-rule.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-05-15
    * @newly_available_date 2022-11-15
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-palette
    */
-  fontPalette?: CSSToken<CSS.Property.FontPalette>
+  fontPalette?: StyleValueWithCondition<CSS.Property.FontPalette>
   /**
    * ### font-size
    *
@@ -5213,7 +5353,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-size
    */
-  fontSize?: CSSToken<CSS.Property.FontSize | number, "fontSizes">
+  fontSize?: StyleValueWithCondition<
+    CSS.Property.FontSize | number,
+    "fontSizes"
+  >
   /**
    * ### font-size-adjust
    *
@@ -5224,7 +5367,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-size-adjust
    */
-  fontSizeAdjust?: CSSToken<CSS.Property.FontSizeAdjust>
+  fontSizeAdjust?: StyleValueWithCondition<CSS.Property.FontSizeAdjust>
   /**
    * ### font-smooth
    *
@@ -5232,19 +5375,18 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-smooth
    */
-  fontSmooth?: CSSToken<CSS.Property.FontSmooth>
+  fontSmooth?: StyleValueWithCondition<CSS.Property.FontSmooth>
   /**
    * ### font-stretch
    *
    * The <code>font-stretch</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.
    *
-   * @baseline `Widely available`
-   * @widely_available_date 2020-03-19
-   * @newly_available_date 2017-09-19
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-stretch
+   *
+   * @deprecated
    */
-  fontStretch?: CSSToken<CSS.Property.FontStretch>
+  fontStretch?: StyleValueWithCondition<CSS.Property.FontStretch>
   /**
    * ### font-style
    *
@@ -5256,7 +5398,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-style
    */
-  fontStyle?: CSSToken<CSS.Property.FontStyle>
+  fontStyle?: StyleValueWithCondition<CSS.Property.FontStyle>
   /**
    * ### font-synthesis
    *
@@ -5268,7 +5410,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis
    */
-  fontSynthesis?: CSSToken<CSS.Property.FontSynthesis>
+  fontSynthesis?: StyleValueWithCondition<CSS.Property.FontSynthesis>
   /**
    * ### font-synthesis-position
    *
@@ -5280,7 +5422,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  fontSynthesisPosition?: CSSToken<CSS.Property.FontSynthesisPosition>
+  fontSynthesisPosition?: StyleValueWithCondition<CSS.Property.FontSynthesisPosition>
   /**
    * ### font-synthesis-small-caps
    *
@@ -5291,7 +5433,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-small-caps
    */
-  fontSynthesisSmallCaps?: CSSToken<CSS.Property.FontSynthesisSmallCaps>
+  fontSynthesisSmallCaps?: StyleValueWithCondition<CSS.Property.FontSynthesisSmallCaps>
   /**
    * ### font-synthesis-style
    *
@@ -5302,7 +5444,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-style
    */
-  fontSynthesisStyle?: CSSToken<CSS.Property.FontSynthesisStyle>
+  fontSynthesisStyle?: StyleValueWithCondition<CSS.Property.FontSynthesisStyle>
   /**
    * ### font-synthesis-weight
    *
@@ -5313,7 +5455,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-weight
    */
-  fontSynthesisWeight?: CSSToken<CSS.Property.FontSynthesisWeight>
+  fontSynthesisWeight?: StyleValueWithCondition<CSS.Property.FontSynthesisWeight>
   /**
    * ### font-variant
    *
@@ -5325,7 +5467,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant
    */
-  fontVariant?: CSSToken<CSS.Property.FontVariant>
+  fontVariant?: StyleValueWithCondition<CSS.Property.FontVariant>
   /**
    * ### font-variant-alternates
    *
@@ -5336,7 +5478,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-alternates
    */
-  fontVariantAlternates?: CSSToken<CSS.Property.FontVariantAlternates>
+  fontVariantAlternates?: StyleValueWithCondition<CSS.Property.FontVariantAlternates>
   /**
    * ### font-variant-caps
    *
@@ -5348,7 +5490,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-caps
    */
-  fontVariantCaps?: CSSToken<CSS.Property.FontVariantCaps>
+  fontVariantCaps?: StyleValueWithCondition<CSS.Property.FontVariantCaps>
   /**
    * ### font-variant-east-asian
    *
@@ -5360,7 +5502,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-east-asian
    */
-  fontVariantEastAsian?: CSSToken<CSS.Property.FontVariantEastAsian>
+  fontVariantEastAsian?: StyleValueWithCondition<CSS.Property.FontVariantEastAsian>
   /**
    * ### font-variant-emoji
    *
@@ -5370,7 +5512,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-emoji
    */
-  fontVariantEmoji?: CSSToken<CSS.Property.FontVariantEmoji>
+  fontVariantEmoji?: StyleValueWithCondition<CSS.Property.FontVariantEmoji>
   /**
    * ### font-variant-ligatures
    *
@@ -5382,7 +5524,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-ligatures
    */
-  fontVariantLigatures?: CSSToken<CSS.Property.FontVariantLigatures>
+  fontVariantLigatures?: StyleValueWithCondition<CSS.Property.FontVariantLigatures>
   /**
    * ### font-variant-numeric
    *
@@ -5394,7 +5536,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-numeric
    */
-  fontVariantNumeric?: CSSToken<CSS.Property.FontVariantNumeric>
+  fontVariantNumeric?: StyleValueWithCondition<CSS.Property.FontVariantNumeric>
   /**
    * ### font-variant-position
    *
@@ -5404,7 +5546,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-position
    */
-  fontVariantPosition?: CSSToken<CSS.Property.FontVariantPosition>
+  fontVariantPosition?: StyleValueWithCondition<CSS.Property.FontVariantPosition>
   /**
    * ### font-variation-settings
    *
@@ -5416,7 +5558,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variation-settings
    */
-  fontVariationSettings?: CSSToken<CSS.Property.FontVariationSettings>
+  fontVariationSettings?: StyleValueWithCondition<CSS.Property.FontVariationSettings>
   /**
    * ### font-weight
    *
@@ -5428,18 +5570,31 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-weight
    */
-  fontWeight?: CSSToken<CSS.Property.FontWeight, "fontWeights">
+  fontWeight?: StyleValueWithCondition<CSS.Property.FontWeight, "fontWeights">
+  /**
+   * ### font-width
+   *
+   * The <code>font-width</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-fonts/#propdef-font-width
+   *
+   * @experimental
+   */
+  fontWidth?: StyleValueWithCondition<AnyString>
   /**
    * ### forced-color-adjust
    *
    * The <code>forced-colors</code> CSS @media rule detects when a user has chosen to use a forced colors mode, also known as high-contrast mode, and the <code>forced-color-adjust</code> CSS property sets whether forced colors apply to an element.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/forced-color-adjust
    */
-  forcedColorAdjust?: CSSToken<CSS.Property.ForcedColorAdjust>
+  forcedColorAdjust?: StyleValueWithCondition<CSS.Property.ForcedColorAdjust>
   /**
    * ### gap
    *
@@ -5451,7 +5606,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/gap
    */
-  g?: CSSToken<CSS.Property.Gap | number, "spaces">
+  g?: StyleValueWithCondition<CSS.Property.Gap | number, "spaces">
   /**
    * ### gap
    *
@@ -5463,7 +5618,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/gap
    */
-  gap?: CSSToken<CSS.Property.Gap | number, "spaces">
+  gap?: StyleValueWithCondition<CSS.Property.Gap | number, "spaces">
   /**
    * ### column-gap
    *
@@ -5475,7 +5630,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  gapX?: CSSToken<CSS.Property.ColumnGap | number, "spaces">
+  gapX?: StyleValueWithCondition<CSS.Property.ColumnGap | number, "spaces">
   /**
    * ### row-gap
    *
@@ -5487,18 +5642,18 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
-  gapY?: CSSToken<CSS.Property.RowGap | number, "spaces">
+  gapY?: StyleValueWithCondition<CSS.Property.RowGap | number, "spaces">
   /**
    * ### glyph-orientation-horizontal
    *
    * The SVG 1.1 image format has several components that were excluded from SVG 2, such as fonts, alternate glyphs, and the <code>xlink</code> namespace.
    *
    *
-   * @see https://developer.mozilla.org/docs/Web/SVG/Attribute/glyph-orientation-horizontal
+   * @see https://developer.mozilla.org/docs/Web/SVG/Reference/Attribute/glyph-orientation-horizontal
    *
    * @deprecated
    */
-  glyphOrientationHorizontal?: CSSToken<string & {}>
+  glyphOrientationHorizontal?: StyleValueWithCondition<AnyString>
   /**
    * ### glyph-orientation-vertical
    *
@@ -5509,7 +5664,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  glyphOrientationVertical?: CSSToken<CSS.Property.GlyphOrientationVertical>
+  glyphOrientationVertical?: StyleValueWithCondition<CSS.Property.GlyphOrientationVertical>
   /**
    * ### grid
    *
@@ -5521,7 +5676,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid
    */
-  grid?: CSSToken<CSS.Property.Grid>
+  grid?: StyleValueWithCondition<CSS.Property.Grid>
   /**
    * ### grid-area
    *
@@ -5533,7 +5688,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-area
    */
-  gridArea?: CSSToken<CSS.Property.GridArea>
+  gridArea?: StyleValueWithCondition<CSS.Property.GridArea>
   /**
    * ### grid-auto-columns
    *
@@ -5545,7 +5700,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-columns
    */
-  gridAutoColumns?: CSSToken<CSS.Property.GridAutoColumns | number, "sizes">
+  gridAutoColumns?: StyleValueWithCondition<
+    CSS.Property.GridAutoColumns | number,
+    "sizes"
+  >
   /**
    * ### grid-auto-flow
    *
@@ -5557,7 +5715,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-flow
    */
-  gridAutoFlow?: CSSToken<CSS.Property.GridAutoFlow>
+  gridAutoFlow?: StyleValueWithCondition<CSS.Property.GridAutoFlow>
   /**
    * ### grid-auto-rows
    *
@@ -5569,7 +5727,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-rows
    */
-  gridAutoRows?: CSSToken<CSS.Property.GridAutoRows | number, "sizes">
+  gridAutoRows?: StyleValueWithCondition<
+    CSS.Property.GridAutoRows | number,
+    "sizes"
+  >
   /**
    * ### grid-column
    *
@@ -5581,7 +5742,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-column
    */
-  gridColumn?: CSSToken<CSS.Property.GridColumn>
+  gridColumn?: StyleValueWithCondition<CSS.Property.GridColumn>
   /**
    * ### grid-column-end
    *
@@ -5593,7 +5754,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-column-end
    */
-  gridColumnEnd?: CSSToken<CSS.Property.GridColumnEnd>
+  gridColumnEnd?: StyleValueWithCondition<CSS.Property.GridColumnEnd>
   /**
    * ### grid-column-start
    *
@@ -5605,7 +5766,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-column-start
    */
-  gridColumnStart?: CSSToken<CSS.Property.GridColumnStart>
+  gridColumnStart?: StyleValueWithCondition<CSS.Property.GridColumnStart>
   /**
    * ### grid-row
    *
@@ -5617,7 +5778,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-row
    */
-  gridRow?: CSSToken<CSS.Property.GridRow>
+  gridRow?: StyleValueWithCondition<CSS.Property.GridRow>
   /**
    * ### grid-row-end
    *
@@ -5629,7 +5790,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-row-end
    */
-  gridRowEnd?: CSSToken<CSS.Property.GridRowEnd>
+  gridRowEnd?: StyleValueWithCondition<CSS.Property.GridRowEnd>
   /**
    * ### grid-row-start
    *
@@ -5641,7 +5802,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-row-start
    */
-  gridRowStart?: CSSToken<CSS.Property.GridRowStart>
+  gridRowStart?: StyleValueWithCondition<CSS.Property.GridRowStart>
   /**
    * ### grid-template
    *
@@ -5653,7 +5814,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template
    */
-  gridTemplate?: CSSToken<CSS.Property.GridTemplate>
+  gridTemplate?: StyleValueWithCondition<CSS.Property.GridTemplate>
   /**
    * ### grid-template-areas
    *
@@ -5665,7 +5826,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-areas
    */
-  gridTemplateAreas?: CSSToken<CSS.Property.GridTemplateAreas>
+  gridTemplateAreas?: StyleValueWithCondition<CSS.Property.GridTemplateAreas>
   /**
    * ### grid-template-columns
    *
@@ -5677,7 +5838,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-columns
    */
-  gridTemplateColumns?: CSSToken<
+  gridTemplateColumns?: StyleValueWithCondition<
     CSS.Property.GridTemplateColumns | number,
     "sizes"
   >
@@ -5692,7 +5853,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-rows
    */
-  gridTemplateRows?: CSSToken<CSS.Property.GridTemplateRows | number, "sizes">
+  gridTemplateRows?: StyleValueWithCondition<
+    CSS.Property.GridTemplateRows | number,
+    "sizes"
+  >
   /**
    * ### column-gap
    *
@@ -5704,7 +5868,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  gx?: CSSToken<CSS.Property.ColumnGap | number, "spaces">
+  gx?: StyleValueWithCondition<CSS.Property.ColumnGap | number, "spaces">
   /**
    * ### row-gap
    *
@@ -5716,7 +5880,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
-  gy?: CSSToken<CSS.Property.RowGap | number, "spaces">
+  gy?: StyleValueWithCondition<CSS.Property.RowGap | number, "spaces">
   /**
    * ### height
    *
@@ -5728,7 +5892,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/height
    */
-  h?: CSSToken<CSS.Property.Height | number, "sizes">
+  h?: StyleValueWithCondition<CSS.Property.Height | number, "sizes">
   /**
    * ### hanging-punctuation
    *
@@ -5738,7 +5902,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hanging-punctuation
    */
-  hangingPunctuation?: CSSToken<CSS.Property.HangingPunctuation>
+  hangingPunctuation?: StyleValueWithCondition<CSS.Property.HangingPunctuation>
   /**
    * ### height
    *
@@ -5750,7 +5914,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/height
    */
-  height?: CSSToken<CSS.Property.Height | number, "sizes">
+  height?: StyleValueWithCondition<CSS.Property.Height | number, "sizes">
   /**
    * ### hyphenate-character
    *
@@ -5761,7 +5925,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hyphenate-character
    */
-  hyphenateCharacter?: CSSToken<CSS.Property.HyphenateCharacter>
+  hyphenateCharacter?: StyleValueWithCondition<CSS.Property.HyphenateCharacter>
   /**
    * ### hyphenate-limit-chars
    *
@@ -5771,7 +5935,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hyphenate-limit-chars
    */
-  hyphenateLimitChars?: CSSToken<CSS.Property.HyphenateLimitChars>
+  hyphenateLimitChars?: StyleValueWithCondition<CSS.Property.HyphenateLimitChars>
   /**
    * ### hyphens
    *
@@ -5782,7 +5946,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hyphens
    */
-  hyphens?: CSSToken<CSS.Property.Hyphens>
+  hyphens?: StyleValueWithCondition<CSS.Property.Hyphens>
   /**
    * ### image-orientation
    *
@@ -5794,7 +5958,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/image-orientation
    */
-  imageOrientation?: CSSToken<CSS.Property.ImageOrientation>
+  imageOrientation?: StyleValueWithCondition<CSS.Property.ImageOrientation>
   /**
    * ### image-rendering
    *
@@ -5806,7 +5970,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/image-rendering
    */
-  imageRendering?: CSSToken<CSS.Property.ImageRendering>
+  imageRendering?: StyleValueWithCondition<CSS.Property.ImageRendering>
   /**
    * ### ime-mode
    *
@@ -5817,7 +5981,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  imeMode?: CSSToken<CSS.Property.ImeMode>
+  imeMode?: StyleValueWithCondition<CSS.Property.ImeMode>
   /**
    * ### initial-letter
    *
@@ -5827,7 +5991,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/initial-letter
    */
-  initialLetter?: CSSToken<CSS.Property.InitialLetter>
+  initialLetter?: StyleValueWithCondition<CSS.Property.InitialLetter>
   /**
    * ### inline-size
    *
@@ -5839,7 +6003,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inline-size
    */
-  inlineSize?: CSSToken<CSS.Property.InlineSize | number, "sizes">
+  inlineSize?: StyleValueWithCondition<
+    CSS.Property.InlineSize | number,
+    "sizes"
+  >
   /**
    * ### inset
    *
@@ -5851,7 +6018,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset
    */
-  inset?: CSSToken<CSS.Property.Inset | number, "spaces">
+  inset?: StyleValueWithCondition<CSS.Property.Inset | number, "spaces">
   /**
    * ### inset-block
    *
@@ -5863,7 +6030,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-block
    */
-  insetBlock?: CSSToken<CSS.Property.InsetBlock | number, "spaces">
+  insetBlock?: StyleValueWithCondition<
+    CSS.Property.InsetBlock | number,
+    "spaces"
+  >
   /**
    * ### inset-block-end
    *
@@ -5875,7 +6045,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-end
    */
-  insetBlockEnd?: CSSToken<CSS.Property.InsetBlockEnd | number, "spaces">
+  insetBlockEnd?: StyleValueWithCondition<
+    CSS.Property.InsetBlockEnd | number,
+    "spaces"
+  >
   /**
    * ### inset-block-start
    *
@@ -5887,7 +6060,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-start
    */
-  insetBlockStart?: CSSToken<CSS.Property.InsetBlockStart | number, "spaces">
+  insetBlockStart?: StyleValueWithCondition<
+    CSS.Property.InsetBlockStart | number,
+    "spaces"
+  >
   /**
    * ### inset-inline-end
    *
@@ -5899,7 +6075,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
    */
-  insetEnd?: CSSToken<CSS.Property.InsetInlineEnd | number, "spaces">
+  insetEnd?: StyleValueWithCondition<
+    CSS.Property.InsetInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### inset-inline
    *
@@ -5911,7 +6090,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline
    */
-  insetInline?: CSSToken<CSS.Property.InsetInline | number, "spaces">
+  insetInline?: StyleValueWithCondition<
+    CSS.Property.InsetInline | number,
+    "spaces"
+  >
   /**
    * ### inset-inline-end
    *
@@ -5923,7 +6105,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
    */
-  insetInlineEnd?: CSSToken<CSS.Property.InsetInlineEnd | number, "spaces">
+  insetInlineEnd?: StyleValueWithCondition<
+    CSS.Property.InsetInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### inset-inline-start
    *
@@ -5935,7 +6120,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
    */
-  insetInlineStart?: CSSToken<CSS.Property.InsetInlineStart | number, "spaces">
+  insetInlineStart?: StyleValueWithCondition<
+    CSS.Property.InsetInlineStart | number,
+    "spaces"
+  >
   /**
    * ### inset-inline-start
    *
@@ -5947,7 +6135,20 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
    */
-  insetStart?: CSSToken<CSS.Property.InsetInlineStart | number, "spaces">
+  insetStart?: StyleValueWithCondition<
+    CSS.Property.InsetInlineStart | number,
+    "spaces"
+  >
+  /**
+   * ### interactivity
+   *
+   * The CSS `interactivity` property.
+   *
+   * @see https://drafts.csswg.org/css-ui-4/#propdef-interactivity
+   *
+   * @experimental
+   */
+  interactivity?: StyleValueWithCondition<AnyString>
   /**
    * ### interpolate-size
    *
@@ -5959,7 +6160,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  interpolateSize?: CSSToken<string & {}>
+  interpolateSize?: StyleValueWithCondition<AnyString>
   /**
    * ### isolation
    *
@@ -5971,7 +6172,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/isolation
    */
-  isolation?: CSSToken<CSS.Property.Isolation>
+  isolation?: StyleValueWithCondition<CSS.Property.Isolation>
   /**
    * ### justify-content
    *
@@ -5983,7 +6184,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-content
    */
-  justifyContent?: CSSToken<CSS.Property.JustifyContent>
+  justifyContent?: StyleValueWithCondition<CSS.Property.JustifyContent>
   /**
    * ### justify-items
    *
@@ -5995,7 +6196,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-items
    */
-  justifyItems?: CSSToken<CSS.Property.JustifyItems>
+  justifyItems?: StyleValueWithCondition<CSS.Property.JustifyItems>
   /**
    * ### justify-self
    *
@@ -6007,7 +6208,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-self
    */
-  justifySelf?: CSSToken<CSS.Property.JustifySelf>
+  justifySelf?: StyleValueWithCondition<CSS.Property.JustifySelf>
   /**
    * ### line-height
    *
@@ -6019,7 +6220,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-height
    */
-  leading?: CSSToken<CSS.Property.LineHeight, "lineHeights">
+  leading?: StyleValueWithCondition<CSS.Property.LineHeight, "lineHeights">
   /**
    * ### left
    *
@@ -6031,7 +6232,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/left
    */
-  left?: CSSToken<CSS.Property.Left | number, "spaces">
+  left?: StyleValueWithCondition<CSS.Property.Left | number, "spaces">
   /**
    * ### letter-spacing
    *
@@ -6043,7 +6244,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
    */
-  letterSpacing?: CSSToken<CSS.Property.LetterSpacing, "letterSpacings">
+  letterSpacing?: StyleValueWithCondition<
+    CSS.Property.LetterSpacing,
+    "letterSpacings"
+  >
   /**
    * ### lighting-color
    *
@@ -6055,7 +6259,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/lighting-color
    */
-  lightingColor?: CSSToken<CSS.Property.LightingColor, "colors">
+  lightingColor?: StyleValueWithCondition<CSS.Property.LightingColor, "colors">
   /**
    * ### line-break
    *
@@ -6067,7 +6271,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-break
    */
-  lineBreak?: CSSToken<CSS.Property.LineBreak>
+  lineBreak?: StyleValueWithCondition<CSS.Property.LineBreak>
   /**
    * ### line-height
    *
@@ -6079,19 +6283,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-height
    */
-  lineHeight?: CSSToken<CSS.Property.LineHeight, "lineHeights">
-  /**
-   * ### line-height-step
-   *
-   * The <code>line-height-step</code> CSS property creates consistent vertical rhythm by setting the spacing between body text baselines. It rounds taller lines like headings up to the next multiple of the body text spacing.
-   *
-   * @baseline `Limited available`
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/line-height-step
-   *
-   * @experimental
-   */
-  lineHeightStep?: CSSToken<CSS.Property.LineHeightStep>
+  lineHeight?: StyleValueWithCondition<CSS.Property.LineHeight, "lineHeights">
   /**
    * ### list-style
    *
@@ -6103,7 +6295,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style
    */
-  listStyle?: CSSToken<CSS.Property.ListStyle>
+  listStyle?: StyleValueWithCondition<CSS.Property.ListStyle>
   /**
    * ### list-style-image
    *
@@ -6115,7 +6307,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-image
    */
-  listStyleImage?: CSSToken<CSS.Property.ListStyleImage, "gradients">
+  listStyleImage?: StyleValueWithCondition<
+    CSS.Property.ListStyleImage,
+    "gradients"
+  >
   /**
    * ### list-style-image
    *
@@ -6127,7 +6322,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-image
    */
-  listStyleImg?: CSSToken<CSS.Property.ListStyleImage, "gradients">
+  listStyleImg?: StyleValueWithCondition<
+    CSS.Property.ListStyleImage,
+    "gradients"
+  >
   /**
    * ### list-style-position
    *
@@ -6139,7 +6337,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-position
    */
-  listStylePos?: CSSToken<CSS.Property.ListStylePosition>
+  listStylePos?: StyleValueWithCondition<CSS.Property.ListStylePosition>
   /**
    * ### list-style-position
    *
@@ -6151,7 +6349,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-position
    */
-  listStylePosition?: CSSToken<CSS.Property.ListStylePosition>
+  listStylePosition?: StyleValueWithCondition<CSS.Property.ListStylePosition>
   /**
    * ### list-style-type
    *
@@ -6163,7 +6361,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-type
    */
-  listStyleType?: CSSToken<CSS.Property.ListStyleType>
+  listStyleType?: StyleValueWithCondition<CSS.Property.ListStyleType>
   /**
    * ### margin
    *
@@ -6175,7 +6373,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin
    */
-  m?: CSSToken<CSS.Property.Margin | number, "spaces">
+  m?: StyleValueWithCondition<CSS.Property.Margin | number, "spaces">
   /**
    * ### margin
    *
@@ -6187,7 +6385,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin
    */
-  margin?: CSSToken<CSS.Property.Margin | number, "spaces">
+  margin?: StyleValueWithCondition<CSS.Property.Margin | number, "spaces">
   /**
    * ### margin-block
    *
@@ -6199,7 +6397,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block
    */
-  marginBlock?: CSSToken<CSS.Property.MarginBlock | number, "spaces">
+  marginBlock?: StyleValueWithCondition<
+    CSS.Property.MarginBlock | number,
+    "spaces"
+  >
   /**
    * ### margin-block-end
    *
@@ -6211,7 +6412,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-end
    */
-  marginBlockEnd?: CSSToken<CSS.Property.MarginBlockEnd | number, "spaces">
+  marginBlockEnd?: StyleValueWithCondition<
+    CSS.Property.MarginBlockEnd | number,
+    "spaces"
+  >
   /**
    * ### margin-block-start
    *
@@ -6223,7 +6427,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-start
    */
-  marginBlockStart?: CSSToken<CSS.Property.MarginBlockStart | number, "spaces">
+  marginBlockStart?: StyleValueWithCondition<
+    CSS.Property.MarginBlockStart | number,
+    "spaces"
+  >
   /**
    * ### margin-bottom
    *
@@ -6235,7 +6442,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
    */
-  marginBottom?: CSSToken<CSS.Property.MarginBottom | number, "spaces">
+  marginBottom?: StyleValueWithCondition<
+    CSS.Property.MarginBottom | number,
+    "spaces"
+  >
   /**
    * ### margin-inline-end
    *
@@ -6247,7 +6457,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
    */
-  marginEnd?: CSSToken<CSS.Property.MarginInlineEnd | number, "spaces">
+  marginEnd?: StyleValueWithCondition<
+    CSS.Property.MarginInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### margin-inline
    *
@@ -6259,7 +6472,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline
    */
-  marginInline?: CSSToken<CSS.Property.MarginInline | number, "spaces">
+  marginInline?: StyleValueWithCondition<
+    CSS.Property.MarginInline | number,
+    "spaces"
+  >
   /**
    * ### margin-inline-end
    *
@@ -6271,7 +6487,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
    */
-  marginInlineEnd?: CSSToken<CSS.Property.MarginInlineEnd | number, "spaces">
+  marginInlineEnd?: StyleValueWithCondition<
+    CSS.Property.MarginInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### margin-inline-start
    *
@@ -6283,7 +6502,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  marginInlineStart?: CSSToken<
+  marginInlineStart?: StyleValueWithCondition<
     CSS.Property.MarginInlineStart | number,
     "spaces"
   >
@@ -6298,7 +6517,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
    */
-  marginLeft?: CSSToken<CSS.Property.MarginLeft | number, "spaces">
+  marginLeft?: StyleValueWithCondition<
+    CSS.Property.MarginLeft | number,
+    "spaces"
+  >
   /**
    * ### margin-right
    *
@@ -6310,7 +6532,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
    */
-  marginRight?: CSSToken<CSS.Property.MarginRight | number, "spaces">
+  marginRight?: StyleValueWithCondition<
+    CSS.Property.MarginRight | number,
+    "spaces"
+  >
   /**
    * ### margin-inline-start
    *
@@ -6322,7 +6547,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  marginStart?: CSSToken<CSS.Property.MarginInlineStart | number, "spaces">
+  marginStart?: StyleValueWithCondition<
+    CSS.Property.MarginInlineStart | number,
+    "spaces"
+  >
   /**
    * ### margin-top
    *
@@ -6334,7 +6562,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  marginTop?: CSSToken<CSS.Property.MarginTop | number, "spaces">
+  marginTop?: StyleValueWithCondition<CSS.Property.MarginTop | number, "spaces">
   /**
    * ### margin-trim
    *
@@ -6346,7 +6574,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  marginTrim?: CSSToken<CSS.Property.MarginTrim>
+  marginTrim?: StyleValueWithCondition<CSS.Property.MarginTrim>
   /**
    * ### marker
    *
@@ -6358,7 +6586,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker
    */
-  marker?: CSSToken<CSS.Property.Marker>
+  marker?: StyleValueWithCondition<CSS.Property.Marker>
   /**
    * ### marker-end
    *
@@ -6370,7 +6598,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker-end
    */
-  markerEnd?: CSSToken<CSS.Property.MarkerEnd>
+  markerEnd?: StyleValueWithCondition<CSS.Property.MarkerEnd>
   /**
    * ### marker-mid
    *
@@ -6382,7 +6610,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker-mid
    */
-  markerMid?: CSSToken<CSS.Property.MarkerMid>
+  markerMid?: StyleValueWithCondition<CSS.Property.MarkerMid>
   /**
    * ### marker-start
    *
@@ -6394,7 +6622,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker-start
    */
-  markerStart?: CSSToken<CSS.Property.MarkerStart>
+  markerStart?: StyleValueWithCondition<CSS.Property.MarkerStart>
   /**
    * ### mask
    *
@@ -6405,7 +6633,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask
    */
-  mask?: CSSToken<CSS.Property.Mask>
+  mask?: StyleValueWithCondition<CSS.Property.Mask>
   /**
    * ### mask-border
    *
@@ -6415,7 +6643,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border
    */
-  maskBorder?: CSSToken<CSS.Property.MaskBorder>
+  maskBorder?: StyleValueWithCondition<CSS.Property.MaskBorder>
   /**
    * ### mask-border-outset
    *
@@ -6425,7 +6653,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-outset
    */
-  maskBorderOutset?: CSSToken<CSS.Property.MaskBorderOutset>
+  maskBorderOutset?: StyleValueWithCondition<CSS.Property.MaskBorderOutset>
   /**
    * ### mask-border-repeat
    *
@@ -6435,7 +6663,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-repeat
    */
-  maskBorderRepeat?: CSSToken<CSS.Property.MaskBorderRepeat>
+  maskBorderRepeat?: StyleValueWithCondition<CSS.Property.MaskBorderRepeat>
   /**
    * ### mask-border-slice
    *
@@ -6445,7 +6673,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-slice
    */
-  maskBorderSlice?: CSSToken<CSS.Property.MaskBorderSlice>
+  maskBorderSlice?: StyleValueWithCondition<CSS.Property.MaskBorderSlice>
   /**
    * ### mask-border-source
    *
@@ -6455,7 +6683,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-source
    */
-  maskBorderSource?: CSSToken<CSS.Property.MaskBorderSource>
+  maskBorderSource?: StyleValueWithCondition<CSS.Property.MaskBorderSource>
   /**
    * ### mask-border-width
    *
@@ -6465,7 +6693,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-width
    */
-  maskBorderWidth?: CSSToken<CSS.Property.MaskBorderWidth | number>
+  maskBorderWidth?: StyleValueWithCondition<
+    CSS.Property.MaskBorderWidth | number
+  >
   /**
    * ### mask-clip
    *
@@ -6476,7 +6706,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-clip
    */
-  maskClip?: CSSToken<CSS.Property.MaskClip>
+  maskClip?: StyleValueWithCondition<CSS.Property.MaskClip>
   /**
    * ### mask-composite
    *
@@ -6487,7 +6717,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-composite
    */
-  maskComposite?: CSSToken<CSS.Property.MaskComposite>
+  maskComposite?: StyleValueWithCondition<CSS.Property.MaskComposite>
   /**
    * ### mask-image
    *
@@ -6498,7 +6728,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-image
    */
-  maskImage?: CSSToken<CSS.Property.MaskImage, "gradients">
+  maskImage?: StyleValueWithCondition<CSS.Property.MaskImage, "gradients">
   /**
    * ### mask-mode
    *
@@ -6509,7 +6739,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-mode
    */
-  maskMode?: CSSToken<CSS.Property.MaskMode>
+  maskMode?: StyleValueWithCondition<CSS.Property.MaskMode>
   /**
    * ### mask-origin
    *
@@ -6520,7 +6750,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-origin
    */
-  maskOrigin?: CSSToken<CSS.Property.MaskOrigin>
+  maskOrigin?: StyleValueWithCondition<CSS.Property.MaskOrigin>
   /**
    * ### mask-position
    *
@@ -6531,7 +6761,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-position
    */
-  maskPosition?: CSSToken<CSS.Property.MaskPosition>
+  maskPosition?: StyleValueWithCondition<CSS.Property.MaskPosition>
   /**
    * ### mask-repeat
    *
@@ -6542,7 +6772,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-repeat
    */
-  maskRepeat?: CSSToken<CSS.Property.MaskRepeat>
+  maskRepeat?: StyleValueWithCondition<CSS.Property.MaskRepeat>
   /**
    * ### mask-size
    *
@@ -6553,7 +6783,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-size
    */
-  maskSize?: CSSToken<CSS.Property.MaskSize>
+  maskSize?: StyleValueWithCondition<CSS.Property.MaskSize>
   /**
    * ### mask-type
    *
@@ -6565,7 +6795,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-type
    */
-  maskType?: CSSToken<CSS.Property.MaskType>
+  maskType?: StyleValueWithCondition<CSS.Property.MaskType>
   /**
    * ### math-depth
    *
@@ -6576,7 +6806,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/math-depth
    */
-  mathDepth?: CSSToken<CSS.Property.MathDepth>
+  mathDepth?: StyleValueWithCondition<CSS.Property.MathDepth>
   /**
    * ### math-shift
    *
@@ -6589,7 +6819,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  mathShift?: CSSToken<CSS.Property.MathShift>
+  mathShift?: StyleValueWithCondition<CSS.Property.MathShift>
   /**
    * ### math-style
    *
@@ -6600,7 +6830,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/math-style
    */
-  mathStyle?: CSSToken<CSS.Property.MathStyle>
+  mathStyle?: StyleValueWithCondition<CSS.Property.MathStyle>
   /**
    * ### max-block-size
    *
@@ -6612,7 +6842,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-block-size
    */
-  maxBlockSize?: CSSToken<CSS.Property.MaxBlockSize | number, "sizes">
+  maxBlockSize?: StyleValueWithCondition<
+    CSS.Property.MaxBlockSize | number,
+    "sizes"
+  >
   /**
    * ### max-height
    *
@@ -6624,7 +6857,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-height
    */
-  maxH?: CSSToken<CSS.Property.MaxHeight | number, "sizes">
+  maxH?: StyleValueWithCondition<CSS.Property.MaxHeight | number, "sizes">
   /**
    * ### max-height
    *
@@ -6636,7 +6869,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-height
    */
-  maxHeight?: CSSToken<CSS.Property.MaxHeight | number, "sizes">
+  maxHeight?: StyleValueWithCondition<CSS.Property.MaxHeight | number, "sizes">
   /**
    * ### max-inline-size
    *
@@ -6648,7 +6881,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-inline-size
    */
-  maxInlineSize?: CSSToken<CSS.Property.MaxInlineSize | number, "sizes">
+  maxInlineSize?: StyleValueWithCondition<
+    CSS.Property.MaxInlineSize | number,
+    "sizes"
+  >
   /**
    * ### max-width
    *
@@ -6660,7 +6896,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxW?: CSSToken<CSS.Property.MaxWidth | number, "sizes">
+  maxW?: StyleValueWithCondition<CSS.Property.MaxWidth | number, "sizes">
   /**
    * ### max-width
    *
@@ -6672,7 +6908,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxWidth?: CSSToken<CSS.Property.MaxWidth | number, "sizes">
+  maxWidth?: StyleValueWithCondition<CSS.Property.MaxWidth | number, "sizes">
   /**
    * ### margin-bottom
    *
@@ -6684,7 +6920,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
    */
-  mb?: CSSToken<CSS.Property.MarginBottom | number, "spaces">
+  mb?: StyleValueWithCondition<CSS.Property.MarginBottom | number, "spaces">
   /**
    * ### margin-inline-end
    *
@@ -6696,7 +6932,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
    */
-  me?: CSSToken<CSS.Property.MarginInlineEnd | number, "spaces">
+  me?: StyleValueWithCondition<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
    * ### min-block-size
    *
@@ -6708,7 +6944,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-block-size
    */
-  minBlockSize?: CSSToken<CSS.Property.MinBlockSize | number, "sizes">
+  minBlockSize?: StyleValueWithCondition<
+    CSS.Property.MinBlockSize | number,
+    "sizes"
+  >
   /**
    * ### min-height
    *
@@ -6720,7 +6959,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-height
    */
-  minH?: CSSToken<CSS.Property.MinHeight | number, "sizes">
+  minH?: StyleValueWithCondition<CSS.Property.MinHeight | number, "sizes">
   /**
    * ### min-height
    *
@@ -6732,7 +6971,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-height
    */
-  minHeight?: CSSToken<CSS.Property.MinHeight | number, "sizes">
+  minHeight?: StyleValueWithCondition<CSS.Property.MinHeight | number, "sizes">
   /**
    * ### min-inline-size
    *
@@ -6744,7 +6983,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-inline-size
    */
-  minInlineSize?: CSSToken<CSS.Property.MinInlineSize | number, "sizes">
+  minInlineSize?: StyleValueWithCondition<
+    CSS.Property.MinInlineSize | number,
+    "sizes"
+  >
   /**
    * ### min-width
    *
@@ -6756,7 +6998,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-width
    */
-  minW?: CSSToken<CSS.Property.MinWidth | number, "sizes">
+  minW?: StyleValueWithCondition<CSS.Property.MinWidth | number, "sizes">
   /**
    * ### min-width
    *
@@ -6768,7 +7010,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-width
    */
-  minWidth?: CSSToken<CSS.Property.MinWidth | number, "sizes">
+  minWidth?: StyleValueWithCondition<CSS.Property.MinWidth | number, "sizes">
   /**
    * ### mix-blend-mode
    *
@@ -6780,7 +7022,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
    */
-  mixBlendMode?: CSSToken<CSS.Property.MixBlendMode>
+  mixBlendMode?: StyleValueWithCondition<CSS.Property.MixBlendMode>
   /**
    * ### margin-left
    *
@@ -6792,7 +7034,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
    */
-  ml?: CSSToken<CSS.Property.MarginLeft | number, "spaces">
+  ml?: StyleValueWithCondition<CSS.Property.MarginLeft | number, "spaces">
   /**
    * ### margin-right
    *
@@ -6804,7 +7046,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
    */
-  mr?: CSSToken<CSS.Property.MarginRight | number, "spaces">
+  mr?: StyleValueWithCondition<CSS.Property.MarginRight | number, "spaces">
   /**
    * ### margin-inline-start
    *
@@ -6816,7 +7058,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  ms?: CSSToken<CSS.Property.MarginInlineStart | number, "spaces">
+  ms?: StyleValueWithCondition<
+    CSS.Property.MarginInlineStart | number,
+    "spaces"
+  >
   /**
    * ### margin-top
    *
@@ -6828,7 +7073,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  mt?: CSSToken<CSS.Property.MarginTop | number, "spaces">
+  mt?: StyleValueWithCondition<CSS.Property.MarginTop | number, "spaces">
   /**
    * ### object-fit
    *
@@ -6840,7 +7085,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/object-fit
    */
-  objectFit?: CSSToken<CSS.Property.ObjectFit>
+  objectFit?: StyleValueWithCondition<CSS.Property.ObjectFit>
   /**
    * ### object-position
    *
@@ -6852,7 +7097,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/object-position
    */
-  objectPosition?: CSSToken<CSS.Property.ObjectPosition>
+  objectPosition?: StyleValueWithCondition<CSS.Property.ObjectPosition>
   /**
    * ### object-view-box
    *
@@ -6864,73 +7109,79 @@ export interface StyleProps {
    *
    * @experimental
    */
-  objectViewBox?: CSSToken<string & {}>
+  objectViewBox?: StyleValueWithCondition<AnyString>
   /**
    * ### offset
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset
    */
-  offset?: CSSToken<CSS.Property.Offset>
+  offset?: StyleValueWithCondition<CSS.Property.Offset>
   /**
    * ### offset-anchor
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-anchor
    */
-  offsetAnchor?: CSSToken<CSS.Property.OffsetAnchor>
+  offsetAnchor?: StyleValueWithCondition<CSS.Property.OffsetAnchor>
   /**
    * ### offset-distance
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-distance
    */
-  offsetDistance?: CSSToken<CSS.Property.OffsetDistance>
+  offsetDistance?: StyleValueWithCondition<CSS.Property.OffsetDistance>
   /**
    * ### offset-path
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-path
    */
-  offsetPath?: CSSToken<CSS.Property.OffsetPath>
+  offsetPath?: StyleValueWithCondition<CSS.Property.OffsetPath>
   /**
    * ### offset-position
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-position
    */
-  offsetPosition?: CSSToken<CSS.Property.OffsetPosition>
+  offsetPosition?: StyleValueWithCondition<CSS.Property.OffsetPosition>
   /**
    * ### offset-rotate
    *
    * The <code>offset</code> CSS property animates an element along a defined motion path.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-rotate
    */
-  offsetRotate?: CSSToken<CSS.Property.OffsetRotate>
+  offsetRotate?: StyleValueWithCondition<CSS.Property.OffsetRotate>
   /**
    * ### opacity
    *
@@ -6942,7 +7193,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/opacity
    */
-  opacity?: CSSToken<CSS.Property.Opacity>
+  opacity?: StyleValueWithCondition<CSS.Property.Opacity>
   /**
    * ### order
    *
@@ -6954,7 +7205,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/order
    */
-  order?: CSSToken<CSS.Property.Order>
+  order?: StyleValueWithCondition<CSS.Property.Order>
   /**
    * ### orphans
    *
@@ -6964,7 +7215,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/orphans
    */
-  orphans?: CSSToken<CSS.Property.Orphans>
+  orphans?: StyleValueWithCondition<CSS.Property.Orphans>
   /**
    * ### outline-color
    *
@@ -6976,7 +7227,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-color
    */
-  outlineColor?: CSSToken<CSS.Property.OutlineColor, "colors">
+  outlineColor?: StyleValueWithCondition<CSS.Property.OutlineColor, "colors">
   /**
    * ### outline-offset
    *
@@ -6988,7 +7239,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-offset
    */
-  outlineOffset?: CSSToken<CSS.Property.OutlineOffset>
+  outlineOffset?: StyleValueWithCondition<CSS.Property.OutlineOffset>
   /**
    * ### outline-style
    *
@@ -7000,7 +7251,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-style
    */
-  outlineStyle?: CSSToken<CSS.Property.OutlineStyle>
+  outlineStyle?: StyleValueWithCondition<CSS.Property.OutlineStyle>
   /**
    * ### outline-width
    *
@@ -7012,18 +7263,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-width
    */
-  outlineWidth?: CSSToken<CSS.Property.OutlineWidth | number>
+  outlineWidth?: StyleValueWithCondition<CSS.Property.OutlineWidth | number>
   /**
    * ### overflow
    *
    * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
    *
-   * @baseline `Newly available`
-   * @newly_available_date 2022-09-12
+   * @baseline `Widely available`
+   * @widely_available_date 2022-09-24
+   * @newly_available_date 2020-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow
    */
-  overflow?: CSSToken<CSS.Property.Overflow>
+  overflow?: StyleValueWithCondition<CSS.Property.Overflow>
   /**
    * ### overflow-anchor
    *
@@ -7033,7 +7285,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-anchor
    */
-  overflowAnchor?: CSSToken<CSS.Property.OverflowAnchor>
+  overflowAnchor?: StyleValueWithCondition<CSS.Property.OverflowAnchor>
   /**
    * ### overflow-block
    *
@@ -7045,7 +7297,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-block
    */
-  overflowBlock?: CSSToken<CSS.Property.OverflowBlock>
+  overflowBlock?: StyleValueWithCondition<CSS.Property.OverflowBlock>
   /**
    * ### overflow-clip-margin
    *
@@ -7055,7 +7307,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-clip-margin
    */
-  overflowClipMargin?: CSSToken<CSS.Property.OverflowClipMargin>
+  overflowClipMargin?: StyleValueWithCondition<CSS.Property.OverflowClipMargin>
   /**
    * ### overflow-inline
    *
@@ -7067,7 +7319,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-inline
    */
-  overflowInline?: CSSToken<CSS.Property.OverflowInline>
+  overflowInline?: StyleValueWithCondition<CSS.Property.OverflowInline>
   /**
    * ### overflow-wrap
    *
@@ -7079,29 +7331,31 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-wrap
    */
-  overflowWrap?: CSSToken<CSS.Property.OverflowWrap>
+  overflowWrap?: StyleValueWithCondition<CSS.Property.OverflowWrap>
   /**
    * ### overflow-x
    *
    * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
    *
-   * @baseline `Newly available`
-   * @newly_available_date 2022-09-12
+   * @baseline `Widely available`
+   * @widely_available_date 2022-09-24
+   * @newly_available_date 2020-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-x
    */
-  overflowX?: CSSToken<CSS.Property.OverflowX>
+  overflowX?: StyleValueWithCondition<CSS.Property.OverflowX>
   /**
    * ### overflow-y
    *
    * The <code>overflow</code> CSS property sets the behavior for when content doesn't fit in an element.
    *
-   * @baseline `Newly available`
-   * @newly_available_date 2022-09-12
+   * @baseline `Widely available`
+   * @widely_available_date 2022-09-24
+   * @newly_available_date 2020-03-24
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-y
    */
-  overflowY?: CSSToken<CSS.Property.OverflowY>
+  overflowY?: StyleValueWithCondition<CSS.Property.OverflowY>
   /**
    * ### overlay
    *
@@ -7113,95 +7367,103 @@ export interface StyleProps {
    *
    * @experimental
    */
-  overlay?: CSSToken<CSS.Property.Overlay>
+  overlay?: StyleValueWithCondition<CSS.Property.Overlay>
   /**
    * ### overscroll-behavior
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
    */
-  overscroll?: CSSToken<CSS.Property.OverscrollBehavior>
+  overscroll?: StyleValueWithCondition<CSS.Property.OverscrollBehavior>
   /**
    * ### overscroll-behavior
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
    */
-  overscrollBehavior?: CSSToken<CSS.Property.OverscrollBehavior>
+  overscrollBehavior?: StyleValueWithCondition<CSS.Property.OverscrollBehavior>
   /**
    * ### overscroll-behavior-block
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-block
    */
-  overscrollBehaviorBlock?: CSSToken<CSS.Property.OverscrollBehaviorBlock>
+  overscrollBehaviorBlock?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorBlock>
   /**
    * ### overscroll-behavior-inline
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-inline
    */
-  overscrollBehaviorInline?: CSSToken<CSS.Property.OverscrollBehaviorInline>
+  overscrollBehaviorInline?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorInline>
   /**
    * ### overscroll-behavior-x
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
    */
-  overscrollBehaviorX?: CSSToken<CSS.Property.OverscrollBehaviorX>
+  overscrollBehaviorX?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorX>
   /**
    * ### overscroll-behavior-y
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
    */
-  overscrollBehaviorY?: CSSToken<CSS.Property.OverscrollBehaviorY>
+  overscrollBehaviorY?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorY>
   /**
    * ### overscroll-behavior-x
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
    */
-  overscrollX?: CSSToken<CSS.Property.OverscrollBehaviorX>
+  overscrollX?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorX>
   /**
    * ### overscroll-behavior-y
    *
    * The <code>overscroll-behavior</code> CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
    */
-  overscrollY?: CSSToken<CSS.Property.OverscrollBehaviorY>
+  overscrollY?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorY>
   /**
    * ### padding
    *
@@ -7213,7 +7475,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding
    */
-  p?: CSSToken<CSS.Property.Padding | number, "spaces">
+  p?: StyleValueWithCondition<CSS.Property.Padding | number, "spaces">
   /**
    * ### padding
    *
@@ -7225,7 +7487,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding
    */
-  padding?: CSSToken<CSS.Property.Padding | number, "spaces">
+  padding?: StyleValueWithCondition<CSS.Property.Padding | number, "spaces">
   /**
    * ### padding-block
    *
@@ -7237,7 +7499,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-block
    */
-  paddingBlock?: CSSToken<CSS.Property.PaddingBlock | number, "spaces">
+  paddingBlock?: StyleValueWithCondition<
+    CSS.Property.PaddingBlock | number,
+    "spaces"
+  >
   /**
    * ### padding-block-end
    *
@@ -7249,7 +7514,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-block-end
    */
-  paddingBlockEnd?: CSSToken<CSS.Property.PaddingBlockEnd | number, "spaces">
+  paddingBlockEnd?: StyleValueWithCondition<
+    CSS.Property.PaddingBlockEnd | number,
+    "spaces"
+  >
   /**
    * ### padding-block-start
    *
@@ -7261,7 +7529,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-block-start
    */
-  paddingBlockStart?: CSSToken<
+  paddingBlockStart?: StyleValueWithCondition<
     CSS.Property.PaddingBlockStart | number,
     "spaces"
   >
@@ -7276,7 +7544,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
    */
-  paddingBottom?: CSSToken<CSS.Property.PaddingBottom | number, "spaces">
+  paddingBottom?: StyleValueWithCondition<
+    CSS.Property.PaddingBottom | number,
+    "spaces"
+  >
   /**
    * ### padding-inline-end
    *
@@ -7288,7 +7559,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  paddingEnd?: CSSToken<CSS.Property.PaddingInlineEnd | number, "spaces">
+  paddingEnd?: StyleValueWithCondition<
+    CSS.Property.PaddingInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### padding-inline
    *
@@ -7300,7 +7574,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline
    */
-  paddingInline?: CSSToken<CSS.Property.PaddingInline | number, "spaces">
+  paddingInline?: StyleValueWithCondition<
+    CSS.Property.PaddingInline | number,
+    "spaces"
+  >
   /**
    * ### padding-inline-end
    *
@@ -7312,7 +7589,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  paddingInlineEnd?: CSSToken<CSS.Property.PaddingInlineEnd | number, "spaces">
+  paddingInlineEnd?: StyleValueWithCondition<
+    CSS.Property.PaddingInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### padding-inline-start
    *
@@ -7324,7 +7604,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  paddingInlineStart?: CSSToken<
+  paddingInlineStart?: StyleValueWithCondition<
     CSS.Property.PaddingInlineStart | number,
     "spaces"
   >
@@ -7339,7 +7619,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
    */
-  paddingLeft?: CSSToken<CSS.Property.PaddingLeft | number, "spaces">
+  paddingLeft?: StyleValueWithCondition<
+    CSS.Property.PaddingLeft | number,
+    "spaces"
+  >
   /**
    * ### padding-right
    *
@@ -7351,7 +7634,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
    */
-  paddingRight?: CSSToken<CSS.Property.PaddingRight | number, "spaces">
+  paddingRight?: StyleValueWithCondition<
+    CSS.Property.PaddingRight | number,
+    "spaces"
+  >
   /**
    * ### padding-inline-start
    *
@@ -7363,7 +7649,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  paddingStart?: CSSToken<CSS.Property.PaddingInlineStart | number, "spaces">
+  paddingStart?: StyleValueWithCondition<
+    CSS.Property.PaddingInlineStart | number,
+    "spaces"
+  >
   /**
    * ### padding-top
    *
@@ -7375,7 +7664,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  paddingTop?: CSSToken<CSS.Property.PaddingTop | number, "spaces">
+  paddingTop?: StyleValueWithCondition<
+    CSS.Property.PaddingTop | number,
+    "spaces"
+  >
   /**
    * ### page
    *
@@ -7385,7 +7677,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/page
    */
-  page?: CSSToken<CSS.Property.Page>
+  page?: StyleValueWithCondition<CSS.Property.Page>
   /**
    * ### page-break-after
    *
@@ -7396,7 +7688,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  pageBreakAfter?: CSSToken<CSS.Property.PageBreakAfter>
+  pageBreakAfter?: StyleValueWithCondition<CSS.Property.PageBreakAfter>
   /**
    * ### page-break-before
    *
@@ -7407,7 +7699,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  pageBreakBefore?: CSSToken<CSS.Property.PageBreakBefore>
+  pageBreakBefore?: StyleValueWithCondition<CSS.Property.PageBreakBefore>
   /**
    * ### page-break-inside
    *
@@ -7418,7 +7710,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  pageBreakInside?: CSSToken<CSS.Property.PageBreakInside>
+  pageBreakInside?: StyleValueWithCondition<CSS.Property.PageBreakInside>
   /**
    * ### paint-order
    *
@@ -7428,7 +7720,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/paint-order
    */
-  paintOrder?: CSSToken<CSS.Property.PaintOrder>
+  paintOrder?: StyleValueWithCondition<CSS.Property.PaintOrder>
   /**
    * ### padding-bottom
    *
@@ -7440,7 +7732,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
    */
-  pb?: CSSToken<CSS.Property.PaddingBottom | number, "spaces">
+  pb?: StyleValueWithCondition<CSS.Property.PaddingBottom | number, "spaces">
   /**
    * ### padding-inline-end
    *
@@ -7452,7 +7744,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  pe?: CSSToken<CSS.Property.PaddingInlineEnd | number, "spaces">
+  pe?: StyleValueWithCondition<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
    * ### perspective
    *
@@ -7464,7 +7756,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/perspective
    */
-  perspective?: CSSToken<CSS.Property.Perspective>
+  perspective?: StyleValueWithCondition<CSS.Property.Perspective>
   /**
    * ### perspective-origin
    *
@@ -7476,7 +7768,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/perspective-origin
    */
-  perspectiveOrigin?: CSSToken<CSS.Property.PerspectiveOrigin>
+  perspectiveOrigin?: StyleValueWithCondition<CSS.Property.PerspectiveOrigin>
   /**
    * ### padding-left
    *
@@ -7488,7 +7780,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
    */
-  pl?: CSSToken<CSS.Property.PaddingLeft | number, "spaces">
+  pl?: StyleValueWithCondition<CSS.Property.PaddingLeft | number, "spaces">
   /**
    * ### place-content
    *
@@ -7500,7 +7792,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/place-content
    */
-  placeContent?: CSSToken<CSS.Property.PlaceContent>
+  placeContent?: StyleValueWithCondition<CSS.Property.PlaceContent>
   /**
    * ### place-items
    *
@@ -7512,7 +7804,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/place-items
    */
-  placeItems?: CSSToken<CSS.Property.PlaceItems>
+  placeItems?: StyleValueWithCondition<CSS.Property.PlaceItems>
   /**
    * ### place-self
    *
@@ -7524,7 +7816,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/place-self
    */
-  placeSelf?: CSSToken<CSS.Property.PlaceSelf>
+  placeSelf?: StyleValueWithCondition<CSS.Property.PlaceSelf>
   /**
    * ### pointer-events
    *
@@ -7536,7 +7828,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/pointer-events
    */
-  pointerEvents?: CSSToken<CSS.Property.PointerEvents>
+  pointerEvents?: StyleValueWithCondition<CSS.Property.PointerEvents>
   /**
    * ### position
    *
@@ -7548,7 +7840,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/position
    */
-  pos?: CSSToken<CSS.Property.Position>
+  pos?: StyleValueWithCondition<CSS.Property.Position>
   /**
    * ### position
    *
@@ -7560,7 +7852,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/position
    */
-  position?: CSSToken<CSS.Property.Position>
+  position?: StyleValueWithCondition<CSS.Property.Position>
   /**
    * ### position-anchor
    *
@@ -7572,7 +7864,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionAnchor?: CSSToken<string & {}>
+  positionAnchor?: StyleValueWithCondition<AnyString>
   /**
    * ### position-area
    *
@@ -7584,7 +7876,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionArea?: CSSToken<string & {}>
+  positionArea?: StyleValueWithCondition<AnyString>
   /**
    * ### position-try
    *
@@ -7596,7 +7888,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTry?: CSSToken<string & {}>
+  positionTry?: StyleValueWithCondition<AnyString>
   /**
    * ### position-try-fallbacks
    *
@@ -7608,7 +7900,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTryFallbacks?: CSSToken<string & {}>
+  positionTryFallbacks?: StyleValueWithCondition<AnyString>
   /**
    * ### position-try-order
    *
@@ -7620,7 +7912,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTryOrder?: CSSToken<string & {}>
+  positionTryOrder?: StyleValueWithCondition<AnyString>
   /**
    * ### position-visibility
    *
@@ -7632,7 +7924,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionVisibility?: CSSToken<string & {}>
+  positionVisibility?: StyleValueWithCondition<AnyString>
   /**
    * ### padding-right
    *
@@ -7644,17 +7936,18 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
    */
-  pr?: CSSToken<CSS.Property.PaddingRight | number, "spaces">
+  pr?: StyleValueWithCondition<CSS.Property.PaddingRight | number, "spaces">
   /**
    * ### print-color-adjust
    *
    * The <code>print-color-adjust</code> CSS property sets whether styles of printed pages should be adjusted to use less ink, in cases such as light text on a dark background.
    *
-   * @baseline `Limited available`
+   * @baseline `Newly available`
+   * @newly_available_date 2025-05-01
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/print-color-adjust
    */
-  printColorAdjust?: CSSToken<CSS.Property.PrintColorAdjust>
+  printColorAdjust?: StyleValueWithCondition<CSS.Property.PrintColorAdjust>
   /**
    * ### padding-inline-start
    *
@@ -7666,7 +7959,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  ps?: CSSToken<CSS.Property.PaddingInlineStart | number, "spaces">
+  ps?: StyleValueWithCondition<
+    CSS.Property.PaddingInlineStart | number,
+    "spaces"
+  >
   /**
    * ### padding-top
    *
@@ -7678,7 +7974,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  pt?: CSSToken<CSS.Property.PaddingTop | number, "spaces">
+  pt?: StyleValueWithCondition<CSS.Property.PaddingTop | number, "spaces">
   /**
    * ### quotes
    *
@@ -7690,7 +7986,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/quotes
    */
-  quotes?: CSSToken<CSS.Property.Quotes>
+  quotes?: StyleValueWithCondition<CSS.Property.Quotes>
   /**
    * ### r
    *
@@ -7702,7 +7998,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/r
    */
-  r?: CSSToken<string & {}>
+  r?: StyleValueWithCondition<AnyString>
   /**
    * ### reading-flow
    *
@@ -7710,11 +8006,21 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-display-4/#reading-flow
+   * @see https://developer.mozilla.org/docs/Web/CSS/reading-flow
    *
    * @experimental
    */
-  readingFlow?: CSSToken<string & {}>
+  readingFlow?: StyleValueWithCondition<AnyString>
+  /**
+   * ### reading-order
+   *
+   * The CSS `reading-order` property.
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/reading-order
+   *
+   * @experimental
+   */
+  readingOrder?: StyleValueWithCondition<AnyString>
   /**
    * ### resize
    *
@@ -7724,7 +8030,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/resize
    */
-  resize?: CSSToken<CSS.Property.Resize>
+  resize?: StyleValueWithCondition<CSS.Property.Resize>
   /**
    * ### right
    *
@@ -7736,7 +8042,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/right
    */
-  right?: CSSToken<CSS.Property.Right | number, "spaces">
+  right?: StyleValueWithCondition<CSS.Property.Right | number, "spaces">
   /**
    * ### rotate
    *
@@ -7748,7 +8054,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/rotate
    */
-  rotate?: CSSToken<CSS.Property.Rotate>
+  rotate?: StyleValueWithCondition<CSS.Property.Rotate>
   /**
    * ### border-radius
    *
@@ -7760,7 +8066,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
    */
-  rounded?: CSSToken<CSS.Property.BorderRadius | number, "radii">
+  rounded?: StyleValueWithCondition<CSS.Property.BorderRadius | number, "radii">
   /**
    * ### border-bottom-left-radius
    *
@@ -7784,7 +8090,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  roundedBottom?: CSSToken<
+  roundedBottom?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
@@ -7801,7 +8107,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
    */
-  roundedBottomEnd?: CSSToken<CSS.Property.BorderEndEndRadius | number, "radii">
+  roundedBottomEnd?: StyleValueWithCondition<
+    CSS.Property.BorderEndEndRadius | number,
+    "radii"
+  >
   /**
    * ### border-bottom-left-radius
    *
@@ -7813,7 +8122,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
    */
-  roundedBottomLeft?: CSSToken<
+  roundedBottomLeft?: StyleValueWithCondition<
     CSS.Property.BorderBottomLeftRadius | number,
     "radii"
   >
@@ -7828,7 +8137,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  roundedBottomRight?: CSSToken<
+  roundedBottomRight?: StyleValueWithCondition<
     CSS.Property.BorderBottomRightRadius | number,
     "radii"
   >
@@ -7843,7 +8152,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  roundedBottomStart?: CSSToken<
+  roundedBottomStart?: StyleValueWithCondition<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
@@ -7870,7 +8179,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  roundedEnd?: CSSToken<
+  roundedEnd?: StyleValueWithCondition<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -7899,7 +8208,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  roundedLeft?: CSSToken<
+  roundedLeft?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
     | number,
@@ -7928,7 +8237,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  roundedRight?: CSSToken<
+  roundedRight?: StyleValueWithCondition<
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -7957,7 +8266,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  roundedStart?: CSSToken<
+  roundedStart?: StyleValueWithCondition<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
@@ -7986,7 +8295,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  roundedTop?: CSSToken<
+  roundedTop?: StyleValueWithCondition<
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -8003,7 +8312,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  roundedTopEnd?: CSSToken<CSS.Property.BorderStartEndRadius | number, "radii">
+  roundedTopEnd?: StyleValueWithCondition<
+    CSS.Property.BorderStartEndRadius | number,
+    "radii"
+  >
   /**
    * ### border-top-left-radius
    *
@@ -8015,7 +8327,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  roundedTopLeft?: CSSToken<CSS.Property.BorderTopLeftRadius | number, "radii">
+  roundedTopLeft?: StyleValueWithCondition<
+    CSS.Property.BorderTopLeftRadius | number,
+    "radii"
+  >
   /**
    * ### border-top-right-radius
    *
@@ -8027,7 +8342,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  roundedTopRight?: CSSToken<
+  roundedTopRight?: StyleValueWithCondition<
     CSS.Property.BorderTopRightRadius | number,
     "radii"
   >
@@ -8042,7 +8357,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  roundedTopStart?: CSSToken<
+  roundedTopStart?: StyleValueWithCondition<
     CSS.Property.BorderStartStartRadius | number,
     "radii"
   >
@@ -8057,7 +8372,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
-  rowGap?: CSSToken<CSS.Property.RowGap | number, "spaces">
+  rowGap?: StyleValueWithCondition<CSS.Property.RowGap | number, "spaces">
   /**
    * ### ruby-align
    *
@@ -8068,7 +8383,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/ruby-align
    */
-  rubyAlign?: CSSToken<CSS.Property.RubyAlign>
+  rubyAlign?: StyleValueWithCondition<CSS.Property.RubyAlign>
   /**
    * ### ruby-overhang
    *
@@ -8078,7 +8393,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-ruby/#propdef-ruby-overhang
    */
-  rubyOverhang?: CSSToken<string & {}>
+  rubyOverhang?: StyleValueWithCondition<AnyString>
   /**
    * ### ruby-position
    *
@@ -8089,7 +8404,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/ruby-position
    */
-  rubyPosition?: CSSToken<CSS.Property.RubyPosition>
+  rubyPosition?: StyleValueWithCondition<CSS.Property.RubyPosition>
   /**
    * ### rx
    *
@@ -8101,7 +8416,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/rx
    */
-  rx?: CSSToken<string & {}>
+  rx?: StyleValueWithCondition<AnyString>
   /**
    * ### ry
    *
@@ -8113,7 +8428,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/ry
    */
-  ry?: CSSToken<string & {}>
+  ry?: StyleValueWithCondition<AnyString>
   /**
    * ### scale
    *
@@ -8125,7 +8440,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scale
    */
-  scale?: CSSToken<CSS.Property.Scale>
+  scale?: StyleValueWithCondition<CSS.Property.Scale>
   /**
    * ### scrollbar-color
    *
@@ -8135,7 +8450,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-color
    */
-  scrollbarColor?: CSSToken<CSS.Property.ScrollbarColor, "colors">
+  scrollbarColor?: StyleValueWithCondition<
+    CSS.Property.ScrollbarColor,
+    "colors"
+  >
   /**
    * ### scrollbar-gutter
    *
@@ -8146,7 +8464,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-gutter
    */
-  scrollbarGutter?: CSSToken<CSS.Property.ScrollbarGutter>
+  scrollbarGutter?: StyleValueWithCondition<CSS.Property.ScrollbarGutter>
   /**
    * ### scrollbar-width
    *
@@ -8157,7 +8475,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-width
    */
-  scrollbarWidth?: CSSToken<CSS.Property.ScrollbarWidth | number>
+  scrollbarWidth?: StyleValueWithCondition<CSS.Property.ScrollbarWidth | number>
   /**
    * ### scroll-behavior
    *
@@ -8169,17 +8487,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-behavior
    */
-  scrollBehavior?: CSSToken<CSS.Property.ScrollBehavior>
+  scrollBehavior?: StyleValueWithCondition<CSS.Property.ScrollBehavior>
   /**
    * ### scroll-initial-target
    *
-   * The CSS `scroll-initial-target` property.
+   * The <code>scroll-initial-target: nearest</code> CSS declaration sets the initial scroll position of its scroll container to the top of the element, much like scrolling to a URL fragment.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-scroll-snap-2/#propdef-scroll-initial-target
    *
    * @experimental
    */
-  scrollInitialTarget?: CSSToken<string & {}>
+  scrollInitialTarget?: StyleValueWithCondition<AnyString>
   /**
    * ### scroll-margin
    *
@@ -8191,7 +8511,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin
    */
-  scrollMargin?: CSSToken<CSS.Property.ScrollMargin | number, "spaces">
+  scrollMargin?: StyleValueWithCondition<
+    CSS.Property.ScrollMargin | number,
+    "spaces"
+  >
   /**
    * ### scroll-margin-block
    *
@@ -8203,7 +8526,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block
    */
-  scrollMarginBlock?: CSSToken<CSS.Property.ScrollMarginBlock>
+  scrollMarginBlock?: StyleValueWithCondition<CSS.Property.ScrollMarginBlock>
   /**
    * ### scroll-margin-block-end
    *
@@ -8215,7 +8538,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-end
    */
-  scrollMarginBlockEnd?: CSSToken<CSS.Property.ScrollMarginBlockEnd>
+  scrollMarginBlockEnd?: StyleValueWithCondition<CSS.Property.ScrollMarginBlockEnd>
   /**
    * ### scroll-margin-block-start
    *
@@ -8227,7 +8550,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-start
    */
-  scrollMarginBlockStart?: CSSToken<CSS.Property.ScrollMarginBlockStart>
+  scrollMarginBlockStart?: StyleValueWithCondition<CSS.Property.ScrollMarginBlockStart>
   /**
    * ### scroll-margin-bottom
    *
@@ -8239,7 +8562,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom
    */
-  scrollMarginBottom?: CSSToken<
+  scrollMarginBottom?: StyleValueWithCondition<
     CSS.Property.ScrollMarginBottom | number,
     "spaces"
   >
@@ -8254,7 +8577,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline
    */
-  scrollMarginInline?: CSSToken<CSS.Property.ScrollMarginInline>
+  scrollMarginInline?: StyleValueWithCondition<CSS.Property.ScrollMarginInline>
   /**
    * ### scroll-margin-inline-end
    *
@@ -8266,7 +8589,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-end
    */
-  scrollMarginInlineEnd?: CSSToken<CSS.Property.ScrollMarginInlineEnd>
+  scrollMarginInlineEnd?: StyleValueWithCondition<CSS.Property.ScrollMarginInlineEnd>
   /**
    * ### scroll-margin-inline-start
    *
@@ -8278,7 +8601,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-start
    */
-  scrollMarginInlineStart?: CSSToken<CSS.Property.ScrollMarginInlineStart>
+  scrollMarginInlineStart?: StyleValueWithCondition<CSS.Property.ScrollMarginInlineStart>
   /**
    * ### scroll-margin-left
    *
@@ -8290,7 +8613,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left
    */
-  scrollMarginLeft?: CSSToken<CSS.Property.ScrollMarginLeft | number, "spaces">
+  scrollMarginLeft?: StyleValueWithCondition<
+    CSS.Property.ScrollMarginLeft | number,
+    "spaces"
+  >
   /**
    * ### scroll-margin-right
    *
@@ -8302,7 +8628,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
    */
-  scrollMarginRight?: CSSToken<
+  scrollMarginRight?: StyleValueWithCondition<
     CSS.Property.ScrollMarginRight | number,
     "spaces"
   >
@@ -8317,7 +8643,22 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
    */
-  scrollMarginTop?: CSSToken<CSS.Property.ScrollMarginTop | number, "spaces">
+  scrollMarginTop?: StyleValueWithCondition<
+    CSS.Property.ScrollMarginTop | number,
+    "spaces"
+  >
+  /**
+   * ### scroll-marker-group
+   *
+   * A scroll container can be navigated by activating <code>::scroll-marker</code> pseudo-elements which appear in a generated <code>::scroll-marker-group</code> pseudo-element, either before or after the scroll container.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/scroll-marker-group
+   *
+   * @experimental
+   */
+  scrollMarkerGroup?: StyleValueWithCondition<AnyString>
   /**
    * ### scroll-padding
    *
@@ -8329,7 +8670,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding
    */
-  scrollPadding?: CSSToken<CSS.Property.ScrollPadding | number, "spaces">
+  scrollPadding?: StyleValueWithCondition<
+    CSS.Property.ScrollPadding | number,
+    "spaces"
+  >
   /**
    * ### scroll-padding-block
    *
@@ -8341,7 +8685,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block
    */
-  scrollPaddingBlock?: CSSToken<CSS.Property.ScrollPaddingBlock>
+  scrollPaddingBlock?: StyleValueWithCondition<CSS.Property.ScrollPaddingBlock>
   /**
    * ### scroll-padding-block-end
    *
@@ -8353,7 +8697,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-end
    */
-  scrollPaddingBlockEnd?: CSSToken<CSS.Property.ScrollPaddingBlockEnd>
+  scrollPaddingBlockEnd?: StyleValueWithCondition<CSS.Property.ScrollPaddingBlockEnd>
   /**
    * ### scroll-padding-block-start
    *
@@ -8365,7 +8709,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-start
    */
-  scrollPaddingBlockStart?: CSSToken<CSS.Property.ScrollPaddingBlockStart>
+  scrollPaddingBlockStart?: StyleValueWithCondition<CSS.Property.ScrollPaddingBlockStart>
   /**
    * ### scroll-padding-bottom
    *
@@ -8377,7 +8721,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom
    */
-  scrollPaddingBottom?: CSSToken<
+  scrollPaddingBottom?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingBottom | number,
     "spaces"
   >
@@ -8392,7 +8736,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline
    */
-  scrollPaddingInline?: CSSToken<CSS.Property.ScrollPaddingInline>
+  scrollPaddingInline?: StyleValueWithCondition<CSS.Property.ScrollPaddingInline>
   /**
    * ### scroll-padding-inline-end
    *
@@ -8404,7 +8748,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-end
    */
-  scrollPaddingInlineEnd?: CSSToken<CSS.Property.ScrollPaddingInlineEnd>
+  scrollPaddingInlineEnd?: StyleValueWithCondition<CSS.Property.ScrollPaddingInlineEnd>
   /**
    * ### scroll-padding-inline-start
    *
@@ -8416,7 +8760,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-start
    */
-  scrollPaddingInlineStart?: CSSToken<CSS.Property.ScrollPaddingInlineStart>
+  scrollPaddingInlineStart?: StyleValueWithCondition<CSS.Property.ScrollPaddingInlineStart>
   /**
    * ### scroll-padding-left
    *
@@ -8428,7 +8772,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left
    */
-  scrollPaddingLeft?: CSSToken<
+  scrollPaddingLeft?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingLeft | number,
     "spaces"
   >
@@ -8443,7 +8787,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
    */
-  scrollPaddingRight?: CSSToken<
+  scrollPaddingRight?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingRight | number,
     "spaces"
   >
@@ -8458,7 +8802,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
    */
-  scrollPaddingTop?: CSSToken<CSS.Property.ScrollPaddingTop | number, "spaces">
+  scrollPaddingTop?: StyleValueWithCondition<
+    CSS.Property.ScrollPaddingTop | number,
+    "spaces"
+  >
   /**
    * ### scroll-snap-align
    *
@@ -8470,7 +8817,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align
    */
-  scrollSnapAlign?: CSSToken<CSS.Property.ScrollSnapAlign>
+  scrollSnapAlign?: StyleValueWithCondition<CSS.Property.ScrollSnapAlign>
   /**
    * ### scroll-snap-stop
    *
@@ -8482,7 +8829,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop
    */
-  scrollSnapStop?: CSSToken<CSS.Property.ScrollSnapStop>
+  scrollSnapStop?: StyleValueWithCondition<CSS.Property.ScrollSnapStop>
   /**
    * ### scroll-snap-type
    *
@@ -8494,7 +8841,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type
    */
-  scrollSnapType?: CSSToken<CSS.Property.ScrollSnapType>
+  scrollSnapType?: StyleValueWithCondition<CSS.Property.ScrollSnapType>
   /**
    * ### scroll-timeline
    *
@@ -8506,7 +8853,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollTimeline?: CSSToken<CSS.Property.ScrollTimeline>
+  scrollTimeline?: StyleValueWithCondition<CSS.Property.ScrollTimeline>
   /**
    * ### scroll-timeline-axis
    *
@@ -8518,7 +8865,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollTimelineAxis?: CSSToken<CSS.Property.ScrollTimelineAxis>
+  scrollTimelineAxis?: StyleValueWithCondition<CSS.Property.ScrollTimelineAxis>
   /**
    * ### scroll-timeline-name
    *
@@ -8530,7 +8877,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollTimelineName?: CSSToken<CSS.Property.ScrollTimelineName>
+  scrollTimelineName?: StyleValueWithCondition<CSS.Property.ScrollTimelineName>
   /**
    * ### box-shadow
    *
@@ -8542,7 +8889,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-shadow
    */
-  shadow?: CSSToken<CSS.Property.BoxShadow, "shadows">
+  shadow?: StyleValueWithCondition<CSS.Property.BoxShadow, "shadows">
   /**
    * ### shape-image-threshold
    *
@@ -8554,7 +8901,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-image-threshold
    */
-  shapeImageThreshold?: CSSToken<CSS.Property.ShapeImageThreshold>
+  shapeImageThreshold?: StyleValueWithCondition<CSS.Property.ShapeImageThreshold>
   /**
    * ### shape-margin
    *
@@ -8566,7 +8913,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-margin
    */
-  shapeMargin?: CSSToken<CSS.Property.ShapeMargin>
+  shapeMargin?: StyleValueWithCondition<CSS.Property.ShapeMargin>
   /**
    * ### shape-outside
    *
@@ -8578,7 +8925,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-outside
    */
-  shapeOutside?: CSSToken<CSS.Property.ShapeOutside>
+  shapeOutside?: StyleValueWithCondition<CSS.Property.ShapeOutside>
   /**
    * ### shape-rendering
    *
@@ -8590,7 +8937,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-rendering
    */
-  shapeRendering?: CSSToken<CSS.Property.ShapeRendering>
+  shapeRendering?: StyleValueWithCondition<CSS.Property.ShapeRendering>
   /**
    * ### speak
    *
@@ -8600,7 +8947,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-speech-1/#speaking-props-speak
    */
-  speak?: CSSToken<string & {}>
+  speak?: StyleValueWithCondition<AnyString>
   /**
    * ### speak-as
    *
@@ -8608,11 +8955,11 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-speech-1/#speaking-props-speak-as
+   * @see https://developer.mozilla.org/docs/Web/CSS/speak-as
    *
    * @experimental
    */
-  speakAs?: CSSToken<string & {}>
+  speakAs?: StyleValueWithCondition<AnyString>
   /**
    * ### stop-color
    *
@@ -8624,7 +8971,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stop-color
    */
-  stopColor?: CSSToken<CSS.Property.StopColor>
+  stopColor?: StyleValueWithCondition<CSS.Property.StopColor>
   /**
    * ### stop-opacity
    *
@@ -8636,7 +8983,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stop-opacity
    */
-  stopOpacity?: CSSToken<CSS.Property.StopOpacity>
+  stopOpacity?: StyleValueWithCondition<CSS.Property.StopOpacity>
   /**
    * ### stroke
    *
@@ -8648,7 +8995,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke
    */
-  stroke?: CSSToken<CSS.Property.Stroke, "colors">
+  stroke?: StyleValueWithCondition<CSS.Property.Stroke, "colors">
   /**
    * ### stroke-color
    *
@@ -8662,7 +9009,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  strokeColor?: CSSToken<string & {}>
+  strokeColor?: StyleValueWithCondition<AnyString>
   /**
    * ### stroke-dasharray
    *
@@ -8674,7 +9021,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-dasharray
    */
-  strokeDasharray?: CSSToken<CSS.Property.StrokeDasharray>
+  strokeDasharray?: StyleValueWithCondition<CSS.Property.StrokeDasharray>
   /**
    * ### stroke-dashoffset
    *
@@ -8686,7 +9033,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-dashoffset
    */
-  strokeDashoffset?: CSSToken<CSS.Property.StrokeDashoffset | number>
+  strokeDashoffset?: StyleValueWithCondition<
+    CSS.Property.StrokeDashoffset | number
+  >
   /**
    * ### stroke-linecap
    *
@@ -8698,7 +9047,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-linecap
    */
-  strokeLinecap?: CSSToken<CSS.Property.StrokeLinecap>
+  strokeLinecap?: StyleValueWithCondition<CSS.Property.StrokeLinecap>
   /**
    * ### stroke-linejoin
    *
@@ -8710,7 +9059,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-linejoin
    */
-  strokeLinejoin?: CSSToken<CSS.Property.StrokeLinejoin>
+  strokeLinejoin?: StyleValueWithCondition<CSS.Property.StrokeLinejoin>
   /**
    * ### stroke-miterlimit
    *
@@ -8722,7 +9071,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-miterlimit
    */
-  strokeMiterlimit?: CSSToken<CSS.Property.StrokeMiterlimit>
+  strokeMiterlimit?: StyleValueWithCondition<CSS.Property.StrokeMiterlimit>
   /**
    * ### stroke-opacity
    *
@@ -8734,7 +9083,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-opacity
    */
-  strokeOpacity?: CSSToken<CSS.Property.StrokeOpacity>
+  strokeOpacity?: StyleValueWithCondition<CSS.Property.StrokeOpacity>
   /**
    * ### stroke-width
    *
@@ -8746,7 +9095,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-width
    */
-  strokeWidth?: CSSToken<CSS.Property.StrokeWidth | number>
+  strokeWidth?: StyleValueWithCondition<CSS.Property.StrokeWidth | number>
   /**
    * ### table-layout
    *
@@ -8758,7 +9107,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/table-layout
    */
-  tableLayout?: CSSToken<CSS.Property.TableLayout>
+  tableLayout?: StyleValueWithCondition<CSS.Property.TableLayout>
   /**
    * ### tab-size
    *
@@ -8770,7 +9119,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/tab-size
    */
-  tabSize?: CSSToken<CSS.Property.TabSize>
+  tabSize?: StyleValueWithCondition<CSS.Property.TabSize>
   /**
    * ### font-size
    *
@@ -8782,7 +9131,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-size
    */
-  text?: CSSToken<CSS.Property.FontSize | number, "fontSizes">
+  text?: StyleValueWithCondition<CSS.Property.FontSize | number, "fontSizes">
   /**
    * ### text-align
    *
@@ -8794,18 +9143,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-align
    */
-  textAlign?: CSSToken<CSS.Property.TextAlign>
+  textAlign?: StyleValueWithCondition<CSS.Property.TextAlign>
   /**
    * ### text-align-last
    *
    * The <code>text-align-last</code> CSS property sets the alignment of the last line of text before a forced line break.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-03-12
    * @newly_available_date 2022-09-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-align-last
    */
-  textAlignLast?: CSSToken<CSS.Property.TextAlignLast>
+  textAlignLast?: StyleValueWithCondition<CSS.Property.TextAlignLast>
   /**
    * ### text-anchor
    *
@@ -8817,7 +9167,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-anchor
    */
-  textAnchor?: CSSToken<CSS.Property.TextAnchor>
+  textAnchor?: StyleValueWithCondition<CSS.Property.TextAnchor>
+  /**
+   * ### text-autospace
+   *
+   * The <code>text-autospace</code> CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.
+   *
+   * @baseline `Limited available`
+   *
+   * @see https://drafts.csswg.org/css-text-4/#propdef-text-autospace
+   *
+   * @experimental
+   */
+  textAutospace?: StyleValueWithCondition<AnyString>
   /**
    * ### text-box
    *
@@ -8825,9 +9187,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline-3/#text-box-shorthand
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-box
    */
-  textBox?: CSSToken<string & {}>
+  textBox?: StyleValueWithCondition<AnyString>
   /**
    * ### text-box-edge
    *
@@ -8835,9 +9197,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline-3/#text-box-edge
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-box-edge
    */
-  textBoxEdge?: CSSToken<string & {}>
+  textBoxEdge?: StyleValueWithCondition<AnyString>
   /**
    * ### text-box-trim
    *
@@ -8845,9 +9207,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-inline-3/#text-box-trim
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-box-trim
    */
-  textBoxTrim?: CSSToken<string & {}>
+  textBoxTrim?: StyleValueWithCondition<AnyString>
   /**
    * ### color
    *
@@ -8859,7 +9221,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color
    */
-  textColor?: CSSToken<CSS.Property.Color, "colors">
+  textColor?: StyleValueWithCondition<CSS.Property.Color, "colors">
   /**
    * ### text-combine-upright
    *
@@ -8871,7 +9233,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-combine-upright
    */
-  textCombineUpright?: CSSToken<CSS.Property.TextCombineUpright>
+  textCombineUpright?: StyleValueWithCondition<CSS.Property.TextCombineUpright>
   /**
    * ### text-decoration
    *
@@ -8883,7 +9245,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration
    */
-  textDecor?: CSSToken<CSS.Property.TextDecoration>
+  textDecor?: StyleValueWithCondition<CSS.Property.TextDecoration>
   /**
    * ### text-decoration
    *
@@ -8895,7 +9257,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration
    */
-  textDecoration?: CSSToken<CSS.Property.TextDecoration>
+  textDecoration?: StyleValueWithCondition<CSS.Property.TextDecoration>
   /**
    * ### text-decoration-color
    *
@@ -8907,7 +9269,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-color
    */
-  textDecorationColor?: CSSToken<CSS.Property.TextDecorationColor, "colors">
+  textDecorationColor?: StyleValueWithCondition<
+    CSS.Property.TextDecorationColor,
+    "colors"
+  >
   /**
    * ### text-decoration-line
    *
@@ -8919,7 +9284,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-line
    */
-  textDecorationLine?: CSSToken<CSS.Property.TextDecorationLine>
+  textDecorationLine?: StyleValueWithCondition<CSS.Property.TextDecorationLine>
   /**
    * ### text-decoration-skip
    *
@@ -8933,7 +9298,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textDecorationSkip?: CSSToken<CSS.Property.TextDecorationSkip>
+  textDecorationSkip?: StyleValueWithCondition<CSS.Property.TextDecorationSkip>
   /**
    * ### text-decoration-skip-ink
    *
@@ -8945,7 +9310,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip-ink
    */
-  textDecorationSkipInk?: CSSToken<CSS.Property.TextDecorationSkipInk>
+  textDecorationSkipInk?: StyleValueWithCondition<CSS.Property.TextDecorationSkipInk>
   /**
    * ### text-decoration-style
    *
@@ -8957,7 +9322,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-style
    */
-  textDecorationStyle?: CSSToken<CSS.Property.TextDecorationStyle>
+  textDecorationStyle?: StyleValueWithCondition<CSS.Property.TextDecorationStyle>
   /**
    * ### text-decoration-thickness
    *
@@ -8969,7 +9334,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-thickness
    */
-  textDecorationThickness?: CSSToken<CSS.Property.TextDecorationThickness>
+  textDecorationThickness?: StyleValueWithCondition<CSS.Property.TextDecorationThickness>
   /**
    * ### text-emphasis
    *
@@ -8981,7 +9346,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis
    */
-  textEmphasis?: CSSToken<CSS.Property.TextEmphasis>
+  textEmphasis?: StyleValueWithCondition<CSS.Property.TextEmphasis>
   /**
    * ### text-emphasis-color
    *
@@ -8993,7 +9358,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-color
    */
-  textEmphasisColor?: CSSToken<CSS.Property.TextEmphasisColor, "colors">
+  textEmphasisColor?: StyleValueWithCondition<
+    CSS.Property.TextEmphasisColor,
+    "colors"
+  >
   /**
    * ### text-emphasis-position
    *
@@ -9005,7 +9373,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-position
    */
-  textEmphasisPosition?: CSSToken<CSS.Property.TextEmphasisPosition>
+  textEmphasisPosition?: StyleValueWithCondition<CSS.Property.TextEmphasisPosition>
   /**
    * ### text-emphasis-style
    *
@@ -9017,7 +9385,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-style
    */
-  textEmphasisStyle?: CSSToken<CSS.Property.TextEmphasisStyle>
+  textEmphasisStyle?: StyleValueWithCondition<CSS.Property.TextEmphasisStyle>
   /**
    * ### text-indent
    *
@@ -9029,7 +9397,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-indent
    */
-  textIndent?: CSSToken<CSS.Property.TextIndent>
+  textIndent?: StyleValueWithCondition<CSS.Property.TextIndent>
   /**
    * ### text-justify
    *
@@ -9039,7 +9407,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-justify
    */
-  textJustify?: CSSToken<CSS.Property.TextJustify>
+  textJustify?: StyleValueWithCondition<CSS.Property.TextJustify>
   /**
    * ### text-orientation
    *
@@ -9051,7 +9419,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-orientation
    */
-  textOrientation?: CSSToken<CSS.Property.TextOrientation>
+  textOrientation?: StyleValueWithCondition<CSS.Property.TextOrientation>
   /**
    * ### text-overflow
    *
@@ -9063,7 +9431,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-overflow
    */
-  textOverflow?: CSSToken<CSS.Property.TextOverflow>
+  textOverflow?: StyleValueWithCondition<CSS.Property.TextOverflow>
   /**
    * ### text-rendering
    *
@@ -9075,7 +9443,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-rendering
    */
-  textRendering?: CSSToken<CSS.Property.TextRendering>
+  textRendering?: StyleValueWithCondition<CSS.Property.TextRendering>
   /**
    * ### text-shadow
    *
@@ -9087,7 +9455,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-shadow
    */
-  textShadow?: CSSToken<CSS.Property.TextShadow, "shadows">
+  textShadow?: StyleValueWithCondition<CSS.Property.TextShadow, "shadows">
   /**
    * ### text-size-adjust
    *
@@ -9099,7 +9467,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textSizeAdjust?: CSSToken<CSS.Property.TextSizeAdjust>
+  textSizeAdjust?: StyleValueWithCondition<CSS.Property.TextSizeAdjust>
   /**
    * ### text-spacing-trim
    *
@@ -9111,7 +9479,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textSpacingTrim?: CSSToken<string & {}>
+  textSpacingTrim?: StyleValueWithCondition<AnyString>
   /**
    * ### text-transform
    *
@@ -9123,11 +9491,11 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-transform
    */
-  textTransform?: CSSToken<CSS.Property.TextTransform>
+  textTransform?: StyleValueWithCondition<CSS.Property.TextTransform>
   /**
    * ### text-underline-offset
    *
-   * The <code>text-underline-position</code> and <code>text-underline-offset</code> CSS properties set the position and distance from initial position of text underlines on text with <code>text-decoration: underline</code>.
+   * The <code>text-underline-offset</code> CSS property shifts underlines on text from the initial position by a given distance. The initial position is affected by the <code>text-underline-position</code> property.
    *
    * @baseline `Widely available`
    * @widely_available_date 2023-05-19
@@ -9135,19 +9503,19 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-offset
    */
-  textUnderlineOffset?: CSSToken<CSS.Property.TextUnderlineOffset>
+  textUnderlineOffset?: StyleValueWithCondition<CSS.Property.TextUnderlineOffset>
   /**
    * ### text-underline-position
    *
-   * The <code>text-underline-position</code> and <code>text-underline-offset</code> CSS properties set the position and distance from initial position of text underlines on text with <code>text-decoration: underline</code>.
+   * The <code>text-underline-position</code> CSS property sets the position of underlines on text. For example, <code>text-underline-position: under</code> places the underline below the text, avoiding crossing descenders. The underline may be further adjusted by the <code>text-underline-offset</code> property.
    *
    * @baseline `Widely available`
-   * @widely_available_date 2023-05-19
-   * @newly_available_date 2020-11-19
+   * @widely_available_date 2023-01-28
+   * @newly_available_date 2020-07-28
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-position
    */
-  textUnderlinePosition?: CSSToken<CSS.Property.TextUnderlinePosition>
+  textUnderlinePosition?: StyleValueWithCondition<CSS.Property.TextUnderlinePosition>
   /**
    * ### text-wrap
    *
@@ -9158,7 +9526,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap
    */
-  textWrap?: CSSToken<CSS.Property.TextWrap>
+  textWrap?: StyleValueWithCondition<CSS.Property.TextWrap>
   /**
    * ### text-wrap-mode
    *
@@ -9169,7 +9537,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-mode
    */
-  textWrapMode?: CSSToken<string & {}>
+  textWrapMode?: StyleValueWithCondition<AnyString>
   /**
    * ### text-wrap-style
    *
@@ -9179,7 +9547,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-style
    */
-  textWrapStyle?: CSSToken<string & {}>
+  textWrapStyle?: StyleValueWithCondition<AnyString>
   /**
    * ### timeline-scope
    *
@@ -9191,7 +9559,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  timelineScope?: CSSToken<CSS.Property.TimelineScope>
+  timelineScope?: StyleValueWithCondition<CSS.Property.TimelineScope>
   /**
    * ### top
    *
@@ -9203,7 +9571,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/top
    */
-  top?: CSSToken<CSS.Property.Top | number, "spaces">
+  top?: StyleValueWithCondition<CSS.Property.Top | number, "spaces">
   /**
    * ### touch-action
    *
@@ -9215,7 +9583,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/touch-action
    */
-  touchAction?: CSSToken<CSS.Property.TouchAction>
+  touchAction?: StyleValueWithCondition<CSS.Property.TouchAction>
   /**
    * ### letter-spacing
    *
@@ -9227,7 +9595,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
    */
-  tracking?: CSSToken<CSS.Property.LetterSpacing, "letterSpacings">
+  tracking?: StyleValueWithCondition<
+    CSS.Property.LetterSpacing,
+    "letterSpacings"
+  >
   /**
    * ### transform
    *
@@ -9239,7 +9610,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform
    */
-  transform?: CSSToken<CSS.Property.Transform>
+  transform?: StyleValueWithCondition<CSS.Property.Transform>
   /**
    * ### transform-box
    *
@@ -9250,7 +9621,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform-box
    */
-  transformBox?: CSSToken<CSS.Property.TransformBox>
+  transformBox?: StyleValueWithCondition<CSS.Property.TransformBox>
   /**
    * ### transform-origin
    *
@@ -9262,7 +9633,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform-origin
    */
-  transformOrigin?: CSSToken<CSS.Property.TransformOrigin>
+  transformOrigin?: StyleValueWithCondition<CSS.Property.TransformOrigin>
   /**
    * ### transform-style
    *
@@ -9274,7 +9645,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform-style
    */
-  transformStyle?: CSSToken<CSS.Property.TransformStyle>
+  transformStyle?: StyleValueWithCondition<CSS.Property.TransformStyle>
   /**
    * ### transition-behavior
    *
@@ -9285,7 +9656,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-behavior
    */
-  transitionBehavior?: CSSToken<CSS.Property.TransitionBehavior>
+  transitionBehavior?: StyleValueWithCondition<CSS.Property.TransitionBehavior>
   /**
    * ### transition-delay
    *
@@ -9297,7 +9668,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-delay
    */
-  transitionDelay?: CSSToken<CSS.Property.TransitionDelay>
+  transitionDelay?: StyleValueWithCondition<CSS.Property.TransitionDelay>
   /**
    * ### transition-duration
    *
@@ -9309,7 +9680,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-duration
    */
-  transitionDuration?: CSSToken<CSS.Property.TransitionDuration, "durations">
+  transitionDuration?: StyleValueWithCondition<
+    CSS.Property.TransitionDuration,
+    "durations"
+  >
   /**
    * ### transition-timing-function
    *
@@ -9321,7 +9695,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-timing-function
    */
-  transitionTimingFunction?: CSSToken<
+  transitionTimingFunction?: StyleValueWithCondition<
     CSS.Property.TransitionTimingFunction,
     "easings"
   >
@@ -9336,7 +9710,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/unicode-bidi
    */
-  unicodeBidi?: CSSToken<CSS.Property.UnicodeBidi>
+  unicodeBidi?: StyleValueWithCondition<CSS.Property.UnicodeBidi>
   /**
    * ### user-modify
    *
@@ -9346,7 +9720,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  userModify?: CSSToken<string & {}>
+  userModify?: StyleValueWithCondition<AnyString>
   /**
    * ### user-select
    *
@@ -9356,7 +9730,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/user-select
    */
-  userSelect?: CSSToken<CSS.Property.UserSelect>
+  userSelect?: StyleValueWithCondition<CSS.Property.UserSelect>
   /**
    * ### vector-effect
    *
@@ -9368,7 +9742,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/vector-effect
    */
-  vectorEffect?: CSSToken<CSS.Property.VectorEffect>
+  vectorEffect?: StyleValueWithCondition<CSS.Property.VectorEffect>
   /**
    * ### vertical-align
    *
@@ -9380,7 +9754,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/vertical-align
    */
-  verticalAlign?: CSSToken<CSS.Property.VerticalAlign>
+  verticalAlign?: StyleValueWithCondition<CSS.Property.VerticalAlign>
   /**
    * ### view-timeline
    *
@@ -9392,7 +9766,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimeline?: CSSToken<CSS.Property.ViewTimeline>
+  viewTimeline?: StyleValueWithCondition<CSS.Property.ViewTimeline>
   /**
    * ### view-timeline-axis
    *
@@ -9404,7 +9778,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimelineAxis?: CSSToken<CSS.Property.ViewTimelineAxis>
+  viewTimelineAxis?: StyleValueWithCondition<CSS.Property.ViewTimelineAxis>
   /**
    * ### view-timeline-inset
    *
@@ -9416,7 +9790,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimelineInset?: CSSToken<CSS.Property.ViewTimelineInset>
+  viewTimelineInset?: StyleValueWithCondition<CSS.Property.ViewTimelineInset>
   /**
    * ### view-timeline-name
    *
@@ -9428,7 +9802,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimelineName?: CSSToken<CSS.Property.ViewTimelineName>
+  viewTimelineName?: StyleValueWithCondition<CSS.Property.ViewTimelineName>
   /**
    * ### view-transition-class
    *
@@ -9436,9 +9810,9 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-view-transitions-2/#view-transition-class-prop
+   * @see https://developer.mozilla.org/docs/Web/CSS/view-transition-class
    */
-  viewTransitionClass?: CSSToken<string & {}>
+  viewTransitionClass?: StyleValueWithCondition<AnyString>
   /**
    * ### view-transition-name
    *
@@ -9448,7 +9822,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/view-transition-name
    */
-  viewTransitionName?: CSSToken<CSS.Property.ViewTransitionName>
+  viewTransitionName?: StyleValueWithCondition<CSS.Property.ViewTransitionName>
   /**
    * ### visibility
    *
@@ -9460,7 +9834,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/visibility
    */
-  visibility?: CSSToken<CSS.Property.Visibility>
+  visibility?: StyleValueWithCondition<CSS.Property.Visibility>
   /**
    * ### width
    *
@@ -9472,7 +9846,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  w?: CSSToken<CSS.Property.Width | number, "sizes">
+  w?: StyleValueWithCondition<CSS.Property.Width | number, "sizes">
   /**
    * ### white-space
    *
@@ -9484,7 +9858,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/white-space
    */
-  whiteSpace?: CSSToken<CSS.Property.WhiteSpace>
+  whiteSpace?: StyleValueWithCondition<CSS.Property.WhiteSpace>
   /**
    * ### white-space-collapse
    *
@@ -9495,7 +9869,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/white-space-collapse
    */
-  whiteSpaceCollapse?: CSSToken<CSS.Property.WhiteSpaceCollapse>
+  whiteSpaceCollapse?: StyleValueWithCondition<CSS.Property.WhiteSpaceCollapse>
   /**
    * ### widows
    *
@@ -9505,7 +9879,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/widows
    */
-  widows?: CSSToken<CSS.Property.Widows>
+  widows?: StyleValueWithCondition<CSS.Property.Widows>
   /**
    * ### width
    *
@@ -9517,7 +9891,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  width?: CSSToken<CSS.Property.Width | number, "sizes">
+  width?: StyleValueWithCondition<CSS.Property.Width | number, "sizes">
   /**
    * ### will-change
    *
@@ -9529,7 +9903,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/will-change
    */
-  willChange?: CSSToken<CSS.Property.WillChange>
+  willChange?: StyleValueWithCondition<CSS.Property.WillChange>
   /**
    * ### word-break
    *
@@ -9541,7 +9915,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/word-break
    */
-  wordBreak?: CSSToken<CSS.Property.WordBreak>
+  wordBreak?: StyleValueWithCondition<CSS.Property.WordBreak>
   /**
    * ### word-spacing
    *
@@ -9553,7 +9927,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/word-spacing
    */
-  wordSpacing?: CSSToken<CSS.Property.WordSpacing>
+  wordSpacing?: StyleValueWithCondition<CSS.Property.WordSpacing>
   /**
    * ### writing-mode
    *
@@ -9565,7 +9939,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/writing-mode
    */
-  writingMode?: CSSToken<CSS.Property.WritingMode>
+  writingMode?: StyleValueWithCondition<CSS.Property.WritingMode>
   /**
    * ### x
    *
@@ -9577,7 +9951,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/x
    */
-  x?: CSSToken<string & {}>
+  x?: StyleValueWithCondition<AnyString>
   /**
    * ### y
    *
@@ -9589,7 +9963,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/y
    */
-  y?: CSSToken<string & {}>
+  y?: StyleValueWithCondition<AnyString>
   /**
    * ### z-index
    *
@@ -9601,7 +9975,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/z-index
    */
-  z?: CSSToken<CSS.Property.ZIndex, "zIndices">
+  z?: StyleValueWithCondition<CSS.Property.ZIndex, "zIndices">
   /**
    * ### z-index
    *
@@ -9613,7 +9987,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/z-index
    */
-  zIndex?: CSSToken<CSS.Property.ZIndex, "zIndices">
+  zIndex?: StyleValueWithCondition<CSS.Property.ZIndex, "zIndices">
   /**
    * ### zoom
    *
@@ -9624,55 +9998,55 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/zoom
    */
-  zoom?: CSSToken<CSS.Property.Zoom>
+  zoom?: StyleValueWithCondition<CSS.Property.Zoom>
   /**
 
 */
-  colorMode?: CSSToken<CSS.Property.ColorScheme>
+  colorMode?: StyleValueWithCondition<CSS.Property.ColorScheme>
   /**
    * Sets the value of `--contrast`.
    */
-  contrast?: CSSToken<StringLiteral>
+  contrast?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--drop-shadow`.
    */
-  dropShadow?: CSSToken<StringLiteral, "shadows">
+  dropShadow?: StyleValueWithCondition<AnyString, "shadows">
   /**
    * The focus ring is used to identify the currently focused element.
    */
-  focusRing?: CSSToken<
+  focusRing?: StyleValueWithCondition<
     "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
   >
   /**
    * Sets the value of `--focus-ring-color`.
    */
-  focusRingColor?: CSSToken<StringLiteral, "colors">
+  focusRingColor?: StyleValueWithCondition<AnyString, "colors">
   /**
    * Sets the value of `--focus-ring-offset`.
    */
-  focusRingOffset?: CSSToken<number | StringLiteral, "spaces">
+  focusRingOffset?: StyleValueWithCondition<AnyString | number, "spaces">
   /**
    * Sets the value of `--focus-ring-style`.
    */
-  focusRingStyle?: CSSToken<StringLiteral>
+  focusRingStyle?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--focus-ring-width`.
    */
-  focusRingWidth?: CSSToken<StringLiteral>
+  focusRingWidth?: StyleValueWithCondition<AnyString>
   /**
    * The focus ring is used to identify the currently focused element.
    */
-  focusVisibleRing?: CSSToken<
+  focusVisibleRing?: StyleValueWithCondition<
     "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
   >
   /**
    * Sets the value of `--grayscale`.
    */
-  grayscale?: CSSToken<StringLiteral>
+  grayscale?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--hue-rotate`.
    */
-  hueRotate?: CSSToken<StringLiteral>
+  hueRotate?: StyleValueWithCondition<AnyString>
   /**
    * ### left
    *
@@ -9696,7 +10070,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/right
    */
-  insetX?: CSSToken<CSS.Property.Left | CSS.Property.Right | number, "spaces">
+  insetX?: StyleValueWithCondition<
+    CSS.Property.Left | CSS.Property.Right | number,
+    "spaces"
+  >
   /**
    * ### bottom
    *
@@ -9720,11 +10097,14 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/top
    */
-  insetY?: CSSToken<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
+  insetY?: StyleValueWithCondition<
+    CSS.Property.Bottom | CSS.Property.Top | number,
+    "spaces"
+  >
   /**
    * Sets the value of `--invert`.
    */
-  invert?: CSSToken<StringLiteral>
+  invert?: StyleValueWithCondition<AnyString>
   /**
    * ### keyframes
    *
@@ -9736,8 +10116,8 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@keyframes
    */
-  keyframes?: CSSToken<
-    StringLiteral | { [key: string]: CSSObject },
+  keyframes?: StyleValueWithCondition<
+    AnyString | { [key: string]: CSSObject },
     "keyframes"
   >
   /**
@@ -9750,7 +10130,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-clamp
    */
-  lineClamp?: CSSToken<number>
+  lineClamp?: StyleValueWithCondition<number>
   /**
    * ### margin-inline-end
    *
@@ -9774,7 +10154,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  marginX?: CSSToken<
+  marginX?: StyleValueWithCondition<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
     "spaces"
   >
@@ -9801,7 +10181,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  marginY?: CSSToken<
+  marginY?: StyleValueWithCondition<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
   >
@@ -9828,7 +10208,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxBoxSize?: CSSToken<
+  maxBoxSize?: StyleValueWithCondition<
     CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
     "sizes"
   >
@@ -9855,7 +10235,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-width
    */
-  minBoxSize?: CSSToken<
+  minBoxSize?: StyleValueWithCondition<
     CSS.Property.MinHeight | CSS.Property.MinWidth | number,
     "sizes"
   >
@@ -9882,7 +10262,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  mx?: CSSToken<
+  mx?: StyleValueWithCondition<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
     "spaces"
   >
@@ -9909,7 +10289,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  my?: CSSToken<
+  my?: StyleValueWithCondition<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
   >
@@ -9923,7 +10303,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline
    */
-  outline?: CSSToken<"inside" | "mixed" | "outside" | CSS.Property.Outline>
+  outline?: StyleValueWithCondition<
+    "inside" | "mixed" | "outside" | CSS.Property.Outline
+  >
   /**
    * ### padding-inline-end
    *
@@ -9947,7 +10329,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  paddingX?: CSSToken<
+  paddingX?: StyleValueWithCondition<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
     "spaces"
   >
@@ -9974,7 +10356,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  paddingY?: CSSToken<
+  paddingY?: StyleValueWithCondition<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
     "spaces"
   >
@@ -10001,7 +10383,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  px?: CSSToken<
+  px?: StyleValueWithCondition<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
     "spaces"
   >
@@ -10028,38 +10410,38 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  py?: CSSToken<
+  py?: StyleValueWithCondition<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
     "spaces"
   >
   /**
    * Sets the value of `--rotate-x`.
    */
-  rotateX?: CSSToken<StringLiteral>
+  rotateX?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--rotate-y`.
    */
-  rotateY?: CSSToken<StringLiteral>
+  rotateY?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--rotate-z`.
    */
-  rotateZ?: CSSToken<StringLiteral>
+  rotateZ?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--saturate`.
    */
-  saturate?: CSSToken<StringLiteral>
+  saturate?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--scale-x`.
    */
-  scaleX?: CSSToken<StringLiteral>
+  scaleX?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--scale-y`.
    */
-  scaleY?: CSSToken<StringLiteral>
+  scaleY?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--scale-z`.
    */
-  scaleZ?: CSSToken<StringLiteral>
+  scaleZ?: StyleValueWithCondition<AnyString>
   /**
    * ### scroll-margin-left
    *
@@ -10083,7 +10465,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
    */
-  scrollMarginX?: CSSToken<
+  scrollMarginX?: StyleValueWithCondition<
     CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
     "spaces"
   >
@@ -10110,7 +10492,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
    */
-  scrollMarginY?: CSSToken<
+  scrollMarginY?: StyleValueWithCondition<
     CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
     "spaces"
   >
@@ -10137,7 +10519,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
    */
-  scrollPaddingX?: CSSToken<
+  scrollPaddingX?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
     "spaces"
   >
@@ -10164,22 +10546,22 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
    */
-  scrollPaddingY?: CSSToken<
+  scrollPaddingY?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
     "spaces"
   >
   /**
    * Sets the value of `--sepia`.
    */
-  sepia?: CSSToken<StringLiteral>
+  sepia?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--skew-x`.
    */
-  skewX?: CSSToken<StringLiteral>
+  skewX?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--skew-y`.
    */
-  skewY?: CSSToken<StringLiteral>
+  skewY?: StyleValueWithCondition<AnyString>
   /**
    * ### transition
    *
@@ -10191,7 +10573,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition
    */
-  transition?: CSSToken<
+  transition?: StyleValueWithCondition<
     | "all"
     | "backgrounds"
     | "colors"
@@ -10213,7 +10595,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-property
    */
-  transitionProperty?: CSSToken<
+  transitionProperty?: StyleValueWithCondition<
     | "all"
     | "backgrounds"
     | "colors"
@@ -10227,23 +10609,19 @@ export interface StyleProps {
   /**
    * Sets the value of `--translate-x`.
    */
-  translateX?: CSSToken<number | StringLiteral, "spaces">
+  translateX?: StyleValueWithCondition<AnyString | number, "spaces">
   /**
    * Sets the value of `--translate-y`.
    */
-  translateY?: CSSToken<number | StringLiteral, "spaces">
+  translateY?: StyleValueWithCondition<AnyString | number, "spaces">
   /**
    * Sets the value of `--translate-z`.
    */
-  translateZ?: CSSToken<StringLiteral>
+  translateZ?: StyleValueWithCondition<AnyString | number>
   /**
    * If `true`, it clamps truncate a text after one line.
    */
-  truncated?: CSSToken<boolean>
-  /**
-   * Set CSS variables.
-   */
-  vars?: { name: string; token?: ThemeToken; value?: CSSToken<any> }[]
+  truncated?: StyleValueWithCondition<boolean>
   /**
    * ### container
    *
@@ -10256,7 +10634,7 @@ export interface StyleProps {
    */
   _container?: {
     [key: string]: any
-    name?: StringLiteral
+    name?: AnyString
     css?: CSSObject
     aspectRatio?: CSS.Property.AspectRatio
     blockSize?: CSS.Property.BlockSize | number | ThemeTokens["sizes"]
@@ -10277,8 +10655,8 @@ export interface StyleProps {
     minInlineSize?: CSS.Property.MinInlineSize | number | ThemeTokens["sizes"]
     minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
     minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    orientation?: "landscape" | "portrait" | StringLiteral
-    query?: StringLiteral
+    orientation?: "landscape" | "portrait" | AnyString
+    query?: AnyString
     w?: CSS.Property.Width | number | ThemeTokens["sizes"]
     width?: CSS.Property.Width | number | ThemeTokens["sizes"]
   }[]
@@ -10293,7 +10671,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _landscape?: CSSToken<CSSObject>
+  _landscape?: StyleValueWithCondition<CSSObject>
   /**
    * ### media
    *
@@ -10307,14 +10685,14 @@ export interface StyleProps {
    */
   _media?: {
     [key: string]: any
-    type?: "all" | "print" | "screen" | "speech" | StringLiteral
+    type?: "all" | "print" | "screen" | "speech" | AnyString
     css?: CSSObject
-    anyHover?: "hover" | "none" | StringLiteral
-    anyPointer?: "coarse" | "fine" | "none" | StringLiteral
+    anyHover?: "hover" | "none" | AnyString
+    anyPointer?: "coarse" | "fine" | "none" | AnyString
     aspectRatio?: CSS.Property.AspectRatio
-    color?: number | StringLiteral
-    colorGamut?: "p3" | "rec2020" | "srgb" | StringLiteral
-    colorIndex?: number | StringLiteral
+    color?: AnyString | number
+    colorGamut?: "p3" | "rec2020" | "srgb" | AnyString
+    colorIndex?: AnyString | number
     deviceAspectRatio?: CSS.Property.AspectRatio
     deviceHeight?: CSS.Property.Height | number | ThemeTokens["sizes"]
     deviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
@@ -10325,60 +10703,50 @@ export interface StyleProps {
       | "picture-in-picture"
       | "standalone"
       | "window-controls-overlay"
-      | StringLiteral
-    dynamicRange?: "high" | "standard" | StringLiteral
-    forcedColors?: "active" | "none" | StringLiteral
-    grid?: 0 | 1 | "StringLiteral"
+      | AnyString
+    dynamicRange?: "high" | "standard" | AnyString
+    forcedColors?: "active" | "none" | AnyString
+    grid?: 0 | 1 | "AnyString"
     h?: CSS.Property.Height | number | ThemeTokens["sizes"]
     height?: CSS.Property.Height | number | ThemeTokens["sizes"]
-    hover?: "hover" | "none" | StringLiteral
-    invertedColors?: "inverted" | "none" | StringLiteral
-    maxColor?: number | StringLiteral
-    maxColorIndex?: number | StringLiteral
+    hover?: "hover" | "none" | AnyString
+    invertedColors?: "inverted" | "none" | AnyString
+    maxColor?: AnyString | number
+    maxColorIndex?: AnyString | number
     maxDeviceAspectRatio?: CSS.Property.AspectRatio
     maxDeviceHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
     maxH?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
     maxHeight?: CSS.Property.MaxHeight | number | ThemeTokens["sizes"]
-    maxMonochrome?: number | StringLiteral
-    maxResolution?: StringLiteral
+    maxMonochrome?: AnyString | number
+    maxResolution?: AnyString
     maxW?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
     maxWidth?: CSS.Property.MaxWidth | number | ThemeTokens["sizes"]
     mazDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
-    minColor?: number | StringLiteral
-    minColorIndex?: number | StringLiteral
+    minColor?: AnyString | number
+    minColorIndex?: AnyString | number
     minDeviceAspectRatio?: CSS.Property.AspectRatio
     minDeviceHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
     minDeviceWidth?: CSS.Property.Width | number | ThemeTokens["sizes"]
     minH?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
     minHeight?: CSS.Property.MinHeight | number | ThemeTokens["sizes"]
-    minMonochrome?: number | StringLiteral
-    minResolution?: StringLiteral
+    minMonochrome?: AnyString | number
+    minResolution?: AnyString
     minW?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
     minWidth?: CSS.Property.MinWidth | number | ThemeTokens["sizes"]
-    monochrome?: number | StringLiteral
-    orientation?: "landscape" | "portrait" | StringLiteral
-    overflowBlock?:
-      | "none"
-      | "optional-paged"
-      | "paged"
-      | "scroll"
-      | StringLiteral
-    overflowInline?: "none" | "scroll" | StringLiteral
-    pointer?: "coarse" | "fine" | "none" | StringLiteral
-    prefersColorScheme?: "dark" | "light" | StringLiteral
-    prefersContrast?:
-      | "custom"
-      | "high"
-      | "low"
-      | "no-preference"
-      | StringLiteral
-    prefersReducedMotion?: "no-preference" | "reduce" | StringLiteral
-    query?: StringLiteral
-    resolution?: StringLiteral
-    scan?: "interlace" | "progressive" | StringLiteral
-    scripting?: "enabled" | "initial-only" | "none" | StringLiteral
-    update?: "fast" | "none" | "slow" | StringLiteral
-    videoDynamicRange?: "high" | "standard" | StringLiteral
+    monochrome?: AnyString | number
+    orientation?: "landscape" | "portrait" | AnyString
+    overflowBlock?: "none" | "optional-paged" | "paged" | "scroll" | AnyString
+    overflowInline?: "none" | "scroll" | AnyString
+    pointer?: "coarse" | "fine" | "none" | AnyString
+    prefersColorScheme?: "dark" | "light" | AnyString
+    prefersContrast?: "custom" | "high" | "low" | "no-preference" | AnyString
+    prefersReducedMotion?: "no-preference" | "reduce" | AnyString
+    query?: AnyString
+    resolution?: AnyString
+    scan?: "interlace" | "progressive" | AnyString
+    scripting?: "enabled" | "initial-only" | "none" | AnyString
+    update?: "fast" | "none" | "slow" | AnyString
+    videoDynamicRange?: "high" | "standard" | AnyString
     w?: CSS.Property.Width | number | ThemeTokens["sizes"]
     width?: CSS.Property.Width | number | ThemeTokens["sizes"]
   }[]
@@ -10393,7 +10761,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaDark?: CSSToken<CSSObject>
+  _mediaDark?: StyleValueWithCondition<CSSObject>
   /**
    * ### media
    *
@@ -10405,7 +10773,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaLight?: CSSToken<CSSObject>
+  _mediaLight?: StyleValueWithCondition<CSSObject>
   /**
    * ### media
    *
@@ -10417,7 +10785,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaReduceMotion?: CSSToken<CSSObject>
+  _mediaReduceMotion?: StyleValueWithCondition<CSSObject>
   /**
    * ### media
    *
@@ -10429,7 +10797,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _portrait?: CSSToken<CSSObject>
+  _portrait?: StyleValueWithCondition<CSSObject>
   /**
    * ### media
    *
@@ -10441,7 +10809,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _print?: CSSToken<CSSObject>
+  _print?: StyleValueWithCondition<CSSObject>
   /**
    * ### supports
    *
@@ -10453,5 +10821,5 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@supports
    */
-  _supports?: { css?: CSSObject; query?: StringLiteral }[]
+  _supports?: { css?: CSSObject; query?: AnyString }[]
 }

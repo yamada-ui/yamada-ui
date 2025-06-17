@@ -1,7 +1,7 @@
 {
   "name": "@yamada-ui/utils",
   "type": "module",
-  "version": "1.7.0",
+  "version": "1.7.2",
   "description": "Yamada UI utils",
   "keywords": [
     "utils",
@@ -35,8 +35,8 @@
     "test": "vitest",
     "test:dev": "vitest --watch --ui",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --max-warnings=0 --cache --flag unstable_ts_config",
-    "format": "prettier --ignore-path ../../.prettierignore --check . --cache",
+    "lint": "eslint . --max-warnings=0 --cache",
+    "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^19.0.0"
+    "react": "^19.1.0"
   },
   "peerDependencies": {
     "react": ">=19"

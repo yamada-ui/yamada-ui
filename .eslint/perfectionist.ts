@@ -32,7 +32,7 @@ const semanticSizes = {
 const sortPseudos = [
   ["^_hover$"],
   ["^_active$", "^_focus$", "^_focusVisible$"],
-  ["^_readOnly$", "^_hidden$"],
+  ["^_invalid$", "^_readOnly$", "^_hidden$"],
   ["^_disabled$", "^_never$"],
 ]
 
@@ -57,7 +57,7 @@ const sortObjectGroups = {
     secondary: ["^as$", "^form$", "^type$", "^htmlFor$"],
     senary: ["^layerStyle$", "^textStyle$", "^apply$"],
     septenary: ["^variant$", "^size$", "^colorScheme$"],
-    tertiary: ["^name$", "^src$", "^srcSet$", "^href$", "^target$"],
+    tertiary: ["^name$", "^src$", "^srcSet$", "^href$", "^target$", "^rel$"],
     ...semanticSizes,
   },
   groups: [

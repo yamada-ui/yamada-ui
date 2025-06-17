@@ -1,0 +1,191 @@
+{
+  "HelperMessage": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Icon": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "type": {
+      "type": "\"decrease\" | \"increase\"",
+      "defaultValue": "\"increase\"",
+      "description": "The type of the icon.",
+      "required": false
+    }
+  },
+  "Label": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Root": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "centerContent": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, container will center its children regardless of their width.",
+      "required": false
+    },
+    "helperMessage": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The stat helper message to use.",
+      "required": false
+    },
+    "helperMessageProps": {
+      "type": "StatHelperMessageProps",
+      "description": "Props for stat helper message component.",
+      "required": false
+    },
+    "icon": {
+      "type": "\"decrease\" | \"increase\"",
+      "description": "The stat icon to use.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "Omit<StatIconProps, \"type\">",
+      "description": "Props for stat icon component.",
+      "required": false
+    },
+    "label": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The stat label to use.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "StatLabelProps",
+      "description": "Props for stat label component.",
+      "required": false
+    },
+    "value": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The stat value to use.",
+      "required": false
+    },
+    "valueProps": {
+      "type": "StatValueProps",
+      "description": "Props for stat value component.",
+      "required": false
+    }
+  },
+  "Unit": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Value": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  }
+}

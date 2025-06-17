@@ -1,5 +1,5 @@
 import type { RefObject } from "react"
-import type { CSSObject, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSObject, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ZStackStyle } from "./z-stack.style"
 import {
   cloneElement,
@@ -11,12 +11,18 @@ import {
   useRef,
   useState,
 } from "react"
-import { createComponent, insertVars, mergeCSS, ui } from "../../core"
+import {
+  createComponent,
+  mergeCSS,
+  styled,
+  useInjectVarsIntoCss,
+  useInjectVarsIntoProps,
+} from "../../core"
 import { getValidChildren, mergeRefs } from "../../utils"
 import { zStackStyle } from "./z-stack.style"
 
 export interface ZStackProps
-  extends Omit<HTMLUIProps, "direction">,
+  extends Omit<HTMLStyledProps, "direction">,
     ThemeProps<ZStackStyle> {
   /**
    * Stack in the specified direction.
@@ -24,14 +30,14 @@ export interface ZStackProps
    * @default "bottom"
    */
   direction?:
-    | "bottom"
-    | "bottom-left"
-    | "bottom-right"
-    | "left"
-    | "right"
-    | "top"
-    | "top-left"
-    | "top-right"
+    | "center-end"
+    | "center-start"
+    | "end"
+    | "end-end"
+    | "end-start"
+    | "start"
+    | "start-end"
+    | "start-start"
   /**
    * If `true`, calculate the `width` and `height` of the element and assign container.
    *
@@ -61,7 +67,7 @@ export const {
 /**
  * `ZStack` is a component that groups elements and provides space between child elements.
  *
- * @see Docs https://yamada-ui.com/components/stack
+ * @see https://yamada-ui.com/components/stack
  */
 export const ZStack = withContext(
   ({
@@ -83,9 +89,9 @@ export const ZStack = withContext(
 
     const vertical = useCallback(
       (space: string) => {
-        if (direction.includes("top")) {
+        if (direction.startsWith("start")) {
           return { [!reverse ? "bottom" : "top"]: space }
-        } else if (direction.includes("bottom")) {
+        } else if (direction.startsWith("end")) {
           return { [!reverse ? "top" : "bottom"]: space }
         } else {
           return { [!reverse ? "top" : "bottom"]: 0 }
@@ -96,9 +102,9 @@ export const ZStack = withContext(
 
     const horizontal = useCallback(
       (space: string) => {
-        if (direction.includes("left")) {
+        if (direction.endsWith("-start")) {
           return { [!reverse ? "right" : "left"]: space }
-        } else if (direction.includes("right")) {
+        } else if (direction.endsWith("-end")) {
           return { [!reverse ? "left" : "right"]: space }
         } else {
           return { [!reverse ? "left" : "right"]: 0 }
@@ -144,8 +150,8 @@ export const ZStack = withContext(
     useEffect(() => {
       if (!fit) return
 
-      let negativeLeft = direction.includes("left")
-      let negativeTop = direction.includes("top")
+      let negativeLeft = direction.endsWith("-start")
+      let negativeTop = direction.startsWith("start")
       let width = 0
       let height = 0
 
@@ -187,32 +193,19 @@ export const ZStack = withContext(
     }, [cloneChildren, direction, reverse, fit])
 
     return (
-      <ui.div
+      <styled.div
         css={css}
         minHeight={fit ? `${rect.height}px` : undefined}
         minWidth={fit ? `${rect.width}px` : undefined}
         {...rest}
       >
         {cloneChildren}
-      </ui.div>
+      </styled.div>
     )
   },
-)(undefined, ({ css, ...rest }) => {
-  css = insertVars(css, [
-    {
-      name: "space",
-      property: "gap",
-      token: "spaces",
-    },
-  ])
+)(undefined, (props) => {
+  const css = useInjectVarsIntoCss(props.css, { gap: "space" })
+  const rest = useInjectVarsIntoProps(props, { gap: "space" })
 
-  rest = insertVars(rest, [
-    {
-      name: "space",
-      property: "gap",
-      token: "spaces",
-    },
-  ])
-
-  return { css, ...rest }
+  return { ...rest, css }
 })

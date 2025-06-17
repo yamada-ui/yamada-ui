@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import { render, screen } from "../../../test"
-import { ui } from "../factory"
+import { styled } from "../factory"
 import { useCSS } from "./use-css"
 
 describe("useCSS", () => {
@@ -13,7 +13,7 @@ describe("useCSS", () => {
         mx: "4",
       })
 
-      return <ui.div className={className} data-testid="component" />
+      return <styled.div className={className} data-testid="component" />
     }
 
     render(<Component />)

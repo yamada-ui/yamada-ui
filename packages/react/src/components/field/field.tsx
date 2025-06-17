@@ -1,8 +1,8 @@
 import type { ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldStyle } from "./field.style"
 import { isValidElement, useId, useMemo, useState } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import {
   createContext,
   dataAttr,
@@ -20,7 +20,8 @@ export interface FieldContext
   onBlur: () => void
   onFocus: () => void
   id?: string
-  labelId?: string
+  errorMessageId?: string
+  helperMessageId?: string
 }
 
 export const [FieldContext, useFieldContext] = createContext<FieldContext>({
@@ -56,7 +57,7 @@ export interface FieldProps {
 }
 
 export interface FieldRootProps
-  extends HTMLUIProps,
+  extends HTMLStyledProps,
     ThemeProps<FieldStyle>,
     Pick<FieldLabelProps, "optionalIndicator" | "requiredIndicator">,
     FieldProps {
@@ -102,7 +103,7 @@ export const {
 /**
  * `Field` is a component used to group form elements with label, helper message, error message, etc.
  *
- * @see Docs https://yamada-ui.com/components/field
+ * @see https://yamada-ui.com/components/field
  */
 export const FieldRoot = withProvider<"div", FieldRootProps>(
   ({
@@ -124,7 +125,8 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
     ...rest
   }) => {
     const uuid = useId()
-    const labelId = useId()
+    const helperMessageId = useId()
+    const errorMessageId = useId()
     const [focused, setFocused] = useState<boolean>(false)
     const validChildren = getValidChildren(children)
     const customLabel = findChild(validChildren, FieldLabel)
@@ -145,21 +147,32 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
       () => ({
         id,
         disabled,
+        errorMessageId,
         focused,
+        helperMessageId,
         invalid,
-        labelId,
         readOnly,
         replace,
         required,
         onBlur: () => setFocused(false),
         onFocus: () => setFocused(true),
       }),
-      [id, labelId, focused, disabled, invalid, readOnly, replace, required],
+      [
+        id,
+        disabled,
+        focused,
+        invalid,
+        helperMessageId,
+        errorMessageId,
+        readOnly,
+        replace,
+        required,
+      ],
     )
 
     return (
       <FieldContext value={context}>
-        <ui.div
+        <styled.div
           data-disabled={dataAttr(disabled)}
           data-focus={dataAttr(focused)}
           data-invalid={dataAttr(invalid)}
@@ -192,16 +205,27 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
                 {errorMessage}
               </FieldErrorMessage>
             ) : null)}
-        </ui.div>
+        </styled.div>
       </FieldContext>
     )
   },
   "root",
 )()
 
-export interface FieldLabelProps extends HTMLUIProps<"label"> {
+export interface FieldLabelProps extends HTMLStyledProps<"label"> {
+  /**
+   * The optional indicator to use.
+   */
   optionalIndicator?: ReactNode
+  /**
+   * If `true`, the field will be required.
+   *
+   * @default false
+   */
   required?: boolean
+  /**
+   * The required indicator to use.
+   */
   requiredIndicator?: ReactNode
 }
 
@@ -217,11 +241,10 @@ export const FieldLabel = withContext<"label", FieldLabelProps>(
   }) => {
     const context = useFieldContext()
 
-    id ??= context?.labelId
     required ??= context?.required
 
     return (
-      <ui.label
+      <styled.label
         id={id}
         htmlFor={htmlFor ?? context?.id}
         data-disabled={dataAttr(context?.disabled)}
@@ -241,21 +264,21 @@ export const FieldLabel = withContext<"label", FieldLabelProps>(
         ) : (
           optionalIndicator
         )}
-      </ui.label>
+      </styled.label>
     )
   },
   "label",
 )()
 
-interface FieldRequiredIndicatorProps extends HTMLUIProps<"span"> {}
+interface FieldRequiredIndicatorProps extends HTMLStyledProps<"span"> {}
 
 const FieldRequiredIndicator = withContext<"span", FieldRequiredIndicatorProps>(
   ({ children, ...rest }) => {
     if (!isValidElement(children)) {
       return (
-        <ui.span aria-hidden role="presentation" {...rest}>
+        <styled.span aria-hidden role="presentation" {...rest}>
           {children ?? <>*</>}
-        </ui.span>
+        </styled.span>
       )
     } else {
       return children
@@ -264,28 +287,28 @@ const FieldRequiredIndicator = withContext<"span", FieldRequiredIndicatorProps>(
   "requiredIndicator",
 )()
 
-export interface FieldHelperMessageProps extends HTMLUIProps<"span"> {}
+export interface FieldHelperMessageProps extends HTMLStyledProps<"span"> {}
 
 export const FieldHelperMessage = withContext<"span", FieldHelperMessageProps>(
   (props) => {
-    const { id, invalid, replace } = useFieldContext() ?? {}
+    const { helperMessageId, invalid, replace } = useFieldContext() ?? {}
 
     if (replace && invalid) return null
 
-    return <ui.span aria-describedby={id} {...props} />
+    return <styled.span id={helperMessageId} {...props} />
   },
   "helperMessage",
 )()
 
-export interface FieldErrorMessageProps extends HTMLUIProps<"span"> {}
+export interface FieldErrorMessageProps extends HTMLStyledProps<"span"> {}
 
 export const FieldErrorMessage = withContext<"span", FieldErrorMessageProps>(
   (props) => {
-    const { invalid } = useFieldContext() ?? {}
+    const { errorMessageId, invalid } = useFieldContext() ?? {}
 
     if (!invalid) return null
 
-    return <ui.span aria-live="polite" {...props} />
+    return <styled.span id={errorMessageId} aria-live="polite" {...props} />
   },
   "errorMessage",
 )()

@@ -1,16 +1,19 @@
 import type { MouseEventHandler, ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { TagStyle } from "./tag.style"
 import { useMemo, useRef } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { useClickable } from "../../hooks/use-clickable"
+import { useI18n } from "../../providers/i18n-provider"
 import { dataAttr } from "../../utils"
 import { XIcon } from "../icon"
 import { tagStyle } from "./tag.style"
 
-export interface TagContext extends Pick<TagProps, "disabled"> {}
+export interface ComponentContext extends Pick<TagProps, "disabled"> {}
 
-export interface TagProps extends HTMLUIProps<"span">, ThemeProps<TagStyle> {
+export interface TagProps
+  extends HTMLStyledProps<"span">,
+    ThemeProps<TagStyle> {
   /**
    * If `true`, the tag is disabled.
    *
@@ -36,7 +39,7 @@ export interface TagProps extends HTMLUIProps<"span">, ThemeProps<TagStyle> {
   /**
    * Props for icon element.
    */
-  iconProps?: HTMLUIProps<"span">
+  iconProps?: HTMLStyledProps<"span">
   /**
    * Function to be executed when the close button is clicked.
    */
@@ -44,18 +47,18 @@ export interface TagProps extends HTMLUIProps<"span">, ThemeProps<TagStyle> {
 }
 
 export const {
-  ComponentContext: TagContext,
+  ComponentContext,
   PropsContext: TagPropsContext,
-  useComponentContext: useTagContext,
+  useComponentContext,
   usePropsContext: useTagPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<TagProps, TagStyle, TagContext>("tag", tagStyle)
+} = createSlotComponent<TagProps, TagStyle, ComponentContext>("tag", tagStyle)
 
 /**
  * `Tag` is a component used to categorize or organize items using keywords that describe them.
  *
- * @see Docs https://yamada-ui.com/components/tag
+ * @see https://yamada-ui.com/components/tag
  */
 export const Tag = withProvider(
   ({
@@ -72,8 +75,8 @@ export const Tag = withProvider(
     const context = useMemo(() => ({ disabled }), [disabled])
 
     return (
-      <TagContext value={context}>
-        <ui.span data-disabled={dataAttr(disabled)} {...rest}>
+      <ComponentContext value={context}>
+        <styled.span data-disabled={dataAttr(disabled)} {...rest}>
           {startIcon ? (
             <TagStartIcon {...iconProps}>{startIcon}</TagStartIcon>
           ) : null}
@@ -87,59 +90,60 @@ export const Tag = withProvider(
           {onClose ? (
             <TagCloseButton onClick={onClose} {...closeButtonProps} />
           ) : null}
-        </ui.span>
-      </TagContext>
+        </styled.span>
+      </ComponentContext>
     )
   },
   "root",
   { transferProps: ["disabled"] },
 )()
 
-interface TagContentProps extends HTMLUIProps<"span"> {}
+interface TagContentProps extends HTMLStyledProps<"span"> {}
 
 const TagContent = withContext<"span", TagContentProps>("span", "content")(
   undefined,
   (props) => {
-    const { disabled } = useTagContext()
+    const { disabled } = useComponentContext()
 
     return { "data-disabled": dataAttr(disabled), ...props }
   },
 )
 
-interface TagStartIconProps extends HTMLUIProps<"span"> {}
+interface TagStartIconProps extends HTMLStyledProps<"span"> {}
 
 const TagStartIcon = withContext<"span", TagStartIconProps>("span", [
   "icon",
   "startIcon",
 ])(undefined, (props) => {
-  const { disabled } = useTagContext()
+  const { disabled } = useComponentContext()
 
   return { "data-disabled": dataAttr(disabled), ...props }
 })
 
-interface TagEndIconProps extends HTMLUIProps<"span"> {}
+interface TagEndIconProps extends HTMLStyledProps<"span"> {}
 
 const TagEndIcon = withContext<"span", TagEndIconProps>("span", [
   "icon",
   "endIcon",
 ])(undefined, (props) => {
-  const { disabled } = useTagContext()
+  const { disabled } = useComponentContext()
 
   return { "data-disabled": dataAttr(disabled), ...props }
 })
 
-interface TagCloseButtonProps extends HTMLUIProps<"span"> {}
+interface TagCloseButtonProps extends HTMLStyledProps<"span"> {}
 
 const TagCloseButton = withContext<"span", TagCloseButtonProps>("span", [
   "icon",
   "closeButton",
 ])(undefined, ({ children, ...props }) => {
   const ref = useRef<HTMLSpanElement>(null)
-  const { disabled } = useTagContext()
+  const { disabled } = useComponentContext()
   const rest = useClickable<HTMLSpanElement>({ ref, disabled, ...props })
+  const { t } = useI18n("tag")
 
   return {
-    "aria-label": "Close tag",
+    "aria-label": t("Close tag"),
     "data-disabled": dataAttr(disabled),
     children: children || <XIcon />,
     ...rest,

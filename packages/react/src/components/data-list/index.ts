@@ -12,7 +12,5 @@ export {
   DataListTerm,
   useDataListPropsContext,
 } from "./data-list"
-
 export * from "./data-list.style"
-
 export * as DataList from "./namespace"

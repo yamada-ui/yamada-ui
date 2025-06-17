@@ -1,0 +1,109 @@
+{
+  "Item": {
+    "as": {
+      "type": "keyof IntrinsicElements",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "label": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The label of the reorder item.",
+      "required": false
+    },
+    "value": {
+      "type": "NonNullable<Y>",
+      "description": "The value of the reorder item.",
+      "required": false
+    }
+  },
+  "Root": {
+    "as": {
+      "type": "keyof IntrinsicElements",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"panel\" | \"surface\" | \"plain\" | \"elevated\" | [\"outline\" | \"solid\" | \"subtle\" | \"panel\" | \"surface\" | \"plain\" | \"elevated\" | ({ _peerAccept?: \"outline\" | ... 8 more ... | undefined; ... 173 more ...; _selection?: \"outline\" | ... 8 more ... | undefined; } & { ...; }), \"outline\" | ... 6...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "items": {
+      "type": "ReorderItemProps<Y>[]",
+      "description": "If provided, generate reorder items based on items.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(values: Y[]) => void",
+      "description": "The callback invoked when reorder items are moved.",
+      "required": false
+    },
+    "onCompleteChange": {
+      "type": "(values: Y[]) => void",
+      "description": "The callback invoked when the movement of reorder items is completed.",
+      "required": false
+    },
+    "orientation": {
+      "type": "StyleValue<\"horizontal\" | \"vertical\">",
+      "defaultValue": "\"vertical\"",
+      "description": "The orientation of the reorder.",
+      "required": false
+    }
+  },
+  "Trigger": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  }
+}

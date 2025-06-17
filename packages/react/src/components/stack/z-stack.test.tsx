@@ -1,10 +1,44 @@
-import { render, screen } from "../../../test"
+import { a11y, render, screen } from "../../../test"
 import { Box } from "../box"
 import { ZStack } from "./z-stack"
 
 describe("<ZStack />", () => {
+  test("passes a11y test", async () => {
+    await a11y(
+      <ZStack>
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(ZStack.displayName).toBe("StackDepth")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <ZStack data-testid="z-stack">
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
+    expect(screen.getByTestId("z-stack")).toHaveClass("ui-stack--depth")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <ZStack data-testid="z-stack">
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
+    expect(screen.getByTestId("z-stack").tagName).toBe("DIV")
+  })
+
   test("ZStack renders correctly", () => {
-    render(<ZStack>ZStack</ZStack>)
+    render(
+      <ZStack>
+        <Box>ZStack Item</Box>
+      </ZStack>,
+    )
   })
 
   test("startIndex property works correctly", () => {
@@ -31,7 +65,7 @@ describe("<ZStack />", () => {
 
   test("Whether the direction is working properly", () => {
     render(
-      <ZStack direction="right">
+      <ZStack direction="center-end">
         <Box>Item 1</Box>
         <Box>Item 2</Box>
       </ZStack>,
@@ -63,9 +97,9 @@ describe("<ZStack />", () => {
     })
   })
 
-  test("applies correct styles with direction set to top", () => {
+  test("applies correct styles with direction set to start", () => {
     render(
-      <ZStack direction="top">
+      <ZStack direction="start">
         <Box>Box1</Box>
         <Box>Box2</Box>
       </ZStack>,
@@ -83,9 +117,9 @@ describe("<ZStack />", () => {
     })
   })
 
-  test("applies correct styles with direction set to left", () => {
+  test("applies correct styles with direction set to center-start", () => {
     render(
-      <ZStack direction="left">
+      <ZStack direction="center-start">
         <Box>Box1</Box>
         <Box>Box2</Box>
       </ZStack>,

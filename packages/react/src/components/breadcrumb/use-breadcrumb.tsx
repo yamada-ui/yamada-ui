@@ -1,9 +1,9 @@
 import type { ReactElement, ReactNode } from "react"
-import type { HTMLProps, PropGetter, StyleValue } from "../../core"
+import type { HTMLProps, PropGetter } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import { cloneElement, useCallback, useMemo } from "react"
-import { useValue } from "../../hooks/use-value"
-import { getValidChildren, runIfFunc } from "../../utils"
+import { useI18n } from "../../providers/i18n-provider"
+import { getValidChildren, runIfFn } from "../../utils"
 
 interface BreadcrumbItem extends HTMLProps<"a"> {
   currentPage?: boolean
@@ -17,8 +17,10 @@ export interface UseBreadcrumbProps extends HTMLProps<"nav"> {
   ellipsis?: ReactNodeOrFunction<{ items: BreadcrumbItem[] }>
   /**
    * Number of elements visible on the end(right) edges.
+   *
+   * @default 0
    */
-  endBoundaries?: StyleValue<number>
+  endBoundaries?: number
   /**
    * If provided, generate breadcrumb items based on items.
    */
@@ -29,23 +31,24 @@ export interface UseBreadcrumbProps extends HTMLProps<"nav"> {
   link?: ReactElement<any>
   /**
    * Number of elements visible on the start(left) edges.
+   *
+   * @default 0
    */
-  startBoundaries?: StyleValue<number>
+  startBoundaries?: number
 }
 
 export const useBreadcrumb = ({
   children,
   ellipsis,
-  endBoundaries: endBoundariesProp,
+  endBoundaries = 0,
   items = [],
   link,
-  startBoundaries: startBoundariesProp,
+  startBoundaries = 0,
   ...rest
 }: UseBreadcrumbProps) => {
   const validChildren = getValidChildren(children)
-  const endBoundaries = useValue(endBoundariesProp) ?? 0
-  const startBoundaries = useValue(startBoundariesProp) ?? 0
   const length = validChildren.length || items.length
+  const { t } = useI18n("breadcrumb")
 
   const hasBoundaries =
     startBoundaries + endBoundaries > 0 &&
@@ -66,7 +69,7 @@ export const useBreadcrumb = ({
     (items: BreadcrumbItem[]) => {
       if (!ellipsis) return null
 
-      return runIfFunc(ellipsis, { items })
+      return runIfFn(ellipsis, { items })
     },
     [ellipsis],
   )
@@ -110,11 +113,11 @@ export const useBreadcrumb = ({
 
   const getRootProps: PropGetter<"nav"> = useCallback(
     (props) => ({
-      "aria-label": "Breadcrumb",
+      "aria-label": t("Breadcrumb"),
       ...rest,
       ...props,
     }),
-    [rest],
+    [rest, t],
   )
 
   const getListProps: PropGetter<"ol"> = useCallback(
@@ -133,11 +136,11 @@ export const useBreadcrumb = ({
 
   const getEllipsisProps: PropGetter<"svg"> = useCallback(
     (props) => ({
-      "aria-label": "Ellipsis",
+      "aria-label": t("Ellipsis"),
       role: "presentation",
       ...props,
     }),
-    [],
+    [t],
   )
 
   return {

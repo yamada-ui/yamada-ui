@@ -1,9 +1,9 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES, noop } from "../../utils"
-import { Wrap } from "../flex"
 import { For } from "../for"
 import { PlusIcon } from "../icon"
+import { Wrap } from "../wrap"
 import { Tag } from "./"
 
 type Story = StoryFn<typeof Tag>
@@ -92,7 +92,9 @@ export const Icon: Story = () => {
 export const CloseButton: Story = () => {
   return (
     <Wrap alignItems="flex-start" gap="md">
-      <For each={["primary", "secondary", "success", "warning", "error"]}>
+      <For
+        each={["primary", "secondary", "success", "warning", "error"] as const}
+      >
         {(colorScheme, index) => (
           <Tag
             key={index}
@@ -111,7 +113,9 @@ export const CloseButton: Story = () => {
 export const Disabled: Story = () => {
   return (
     <Wrap alignItems="flex-start" gap="md">
-      <For each={["primary", "secondary", "success", "warning", "error"]}>
+      <For
+        each={["primary", "secondary", "success", "warning", "error"] as const}
+      >
         {(colorScheme, index) => (
           <Tag
             key={index}

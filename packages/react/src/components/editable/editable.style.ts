@@ -9,7 +9,7 @@ export const editableStyle = defineComponentSlotStyle({
     },
     input: {
       bg: "transparent",
-      focusRingColor: "{focusBorderColor}",
+      focusRingColor: "{focus-border-color}",
       focusVisibleRing: "inside",
       fontSize: "inherit",
       fontWeight: "inherit",
@@ -21,8 +21,8 @@ export const editableStyle = defineComponentSlotStyle({
       transitionProperty: "common",
       w: "full",
       _invalid: {
-        borderColor: "{errorBorderColor}",
-        focusRingColor: "{errorBorderColor}",
+        borderColor: "{error-border-color}",
+        focusRingColor: "{error-border-color}",
       },
       _disabled: {
         layerStyle: "disabled",
@@ -52,28 +52,18 @@ export const editableStyle = defineComponentSlotStyle({
       },
     },
     root: {
+      "--error-border-color": "colors.border.error",
+      "--focus-border-color": "colorScheme.outline",
       alignItems: "start",
       display: "inline-flex",
       gap: "sm",
       position: "relative",
-      vars: [
-        {
-          name: "focusBorderColor",
-          token: "colors",
-          value: "colorScheme.outline",
-        },
-        {
-          name: "errorBorderColor",
-          token: "colors",
-          value: "border.error",
-        },
-      ],
       w: "full",
     },
     textarea: {
       bg: "transparent",
       boxSizing: "content-box",
-      focusRingColor: "{focusBorderColor}",
+      focusRingColor: "{focus-border-color}",
       focusVisibleRing: "inside",
       fontSize: "inherit",
       fontWeight: "inherit",
@@ -85,8 +75,8 @@ export const editableStyle = defineComponentSlotStyle({
       transitionProperty: "common",
       w: "full",
       _invalid: {
-        borderColor: "{errorBorderColor}",
-        focusRingColor: "{errorBorderColor}",
+        borderColor: "{error-border-color}",
+        focusRingColor: "{error-border-color}",
       },
       _disabled: {
         layerStyle: "disabled",

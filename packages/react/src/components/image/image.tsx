@@ -1,9 +1,11 @@
-import type { CSSProps, FC, HTMLUIProps, ThemeProps } from "../../core"
+import type { CSSProps, FC, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ImageStyle } from "./image.style"
 import { createComponent } from "../../core"
 import { imageStyle } from "./image.style"
 
-export interface ImageProps extends HTMLUIProps<"img">, ThemeProps<ImageStyle> {
+export interface ImageProps
+  extends HTMLStyledProps<"img">,
+    ThemeProps<ImageStyle> {
   /**
    * The CSS `object-fit` property.
    */
@@ -19,7 +21,7 @@ export const {
 /**
  * `Image` is a component that displays images with fallback support.
  *
- * @see Docs https://yamada-ui.com/components/image
+ * @see https://yamada-ui.com/components/image
  */
 export const Image: FC<ImageProps> = withContext("img")(
   undefined,

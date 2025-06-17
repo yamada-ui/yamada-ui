@@ -35,6 +35,9 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
         borderColor: [`${c}.500`, `${c}.600`],
         color: ["white", "black"],
       },
+      _focusVisible: {
+        boxShadow: "outline",
+      },
       _invalid: {
         borderColor: ["danger.500", "danger.400"],
         _focusVisible: {
@@ -43,9 +46,6 @@ export const Checkbox: ComponentMultiStyle<"Checkbox"> = {
             borderColor: [`${c}.500`, `${c}.600`],
           },
         },
-      },
-      _focusVisible: {
-        boxShadow: "outline",
       },
       _disabled: {
         bg: ["blackAlpha.200", "whiteAlpha.100"],

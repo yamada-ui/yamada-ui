@@ -1,9 +1,10 @@
 import type { RefObject } from "react"
 import type { PortalProps } from "../../components/portal"
 import type { DefaultTheme } from "../../theme"
-import type { Booleanish, Dict, StringLiteral, Union } from "../../utils"
+import type { AnyString, Booleanish, Dict } from "../../utils"
 import type {
-  CreateBreakpointsReturn,
+  Breakpoints,
+  ColorModeWithSystem,
   CreateLayersReturn,
   CSSAnimationObject,
   CSSModifierObject,
@@ -11,6 +12,7 @@ import type {
   CSSPropObject,
   CSSSlotObject,
   StyleValue,
+  StyleValueWithCondition,
 } from "../css"
 import type { GeneratedThemeTokens } from "../generated-theme-tokens.types"
 
@@ -23,15 +25,11 @@ export type LayerScheme =
   | "size"
   | "tokens"
   | "variant"
-
 export type Layers = { [key in LayerScheme]: { name: string; order: number } }
-
+export type Direction = "end" | "start"
 export type TextDirection = "ltr" | "rtl"
-
-export type BreakpointDirection = "down" | "up"
-
+export type KeyframeIdent = "from" | "to"
 export type Orientation = "horizontal" | "vertical"
-
 export type Placement =
   | "center"
   | "center-center"
@@ -45,18 +43,17 @@ export type Placement =
   | "start-center"
   | "start-end"
   | "start-start"
+export type SimplePlacement =
+  | "block-end"
+  | "block-start"
+  | "inline-end"
+  | "inline-start"
 
-export type NoticePlacement = Extract<
-  Placement,
-  | "end"
-  | "end-center"
-  | "end-end"
-  | "end-start"
-  | "start"
-  | "start-center"
-  | "start-end"
-  | "start-start"
->
+export type BreakpointDirection = "down" | "up"
+export type BreakpointIdentifier =
+  | "@media screen"
+  | `@container ${string}`
+  | `@container`
 
 export interface BreakpointConfig {
   /**
@@ -90,31 +87,18 @@ export interface BreakpointConfig {
    *
    * @default "@media screen"
    */
-  identifier?: "@media screen" | `@container ${string}` | `@container`
+  identifier?: BreakpointIdentifier
 }
 
-export interface NoticeConfig {
-  /**
-   * If `true`, the portal will check if it is within a parent portal
-   * and append itself to the parent's portal node.
-   * This provides nesting for portals.
-   *
-   * If `false`, the portal will always append to `document.body`
-   * regardless of nesting. It is used to opt out of portal nesting.
-   *
-   * @default true
-   */
-  appendToParentPortal?: PortalProps["appendToParentPortal"]
+export type NoticePlacement = Exclude<Placement, "center" | `center-${string}`>
+
+export interface NoticeConfig extends Pick<PortalProps, "containerRef"> {
   /**
    * If `true`, allows the notice to be removed.
    *
    * @default false
    */
   closable?: boolean
-  /**
-   * The `ref` to the component where the portal will be attached to.
-   */
-  containerRef?: PortalProps["containerRef"]
   /**
    * The number of `ms` the notice will continue to be displayed.
    *
@@ -136,8 +120,6 @@ export interface NoticeConfig {
   placement?: NoticePlacement
 }
 
-export type SnackDirection = "bottom" | "top"
-
 export interface SnacksConfig {
   /**
    * If `true`, allows the snack to be removed.
@@ -150,7 +132,7 @@ export interface SnacksConfig {
    *
    * @default 'top'
    */
-  direction?: SnackDirection
+  direction?: Direction
   /**
    * The number of `ms` the snack will continue to be displayed.
    *
@@ -174,7 +156,7 @@ export interface SnacksConfig {
   startIndex?: number
 }
 
-export interface LoadingConfig {
+export interface LoadingConfig extends Pick<PortalProps, "containerRef"> {
   /**
    * Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.
    *
@@ -182,26 +164,11 @@ export interface LoadingConfig {
    */
   allowPinchZoom?: boolean
   /**
-   * If `true`, the portal will check if it is within a parent portal
-   * and append itself to the parent's portal node.
-   * This provides nesting for portals.
-   *
-   * If `false`, the portal will always append to `document.body`
-   * regardless of nesting. It is used to opt out of portal nesting.
-   *
-   * @default true
-   */
-  appendToParentPortal?: PortalProps["appendToParentPortal"]
-  /**
    * If `true`, scrolling will be disabled on the `body` when the modal opens.
    *
    * @default true
    */
   blockScrollOnMount?: boolean
-  /**
-   * The `ref` to the component where the portal will be attached to.
-   */
-  containerRef?: PortalProps["containerRef"]
   /**
    * The number of `ms` the loading will continue to be displayed.
    *
@@ -220,7 +187,7 @@ export interface LoadingConfig {
 
 export interface ThemeConfig {
   /**
-   * The config of CSS variables.
+   * The config of the CSS.
    */
   css?: {
     /**
@@ -228,7 +195,7 @@ export interface ThemeConfig {
      * This allows you to define custom names for each layer type in your theme.
      * Set to `false` to disable the use of CSS layers.
      *
-     * @see Docs https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
+     * @see https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
      */
     layers?: false | Layers
     /**
@@ -236,18 +203,12 @@ export interface ThemeConfig {
      *
      * @default 'ui'
      */
-    varPrefix?: StringLiteral
+    varPrefix?: string
   }
   /**
    * The config of breakpoint.
    */
   breakpoint?: BreakpointConfig
-  /**
-   * The text direction to apply to the application.
-   *
-   * @default 'ltr'
-   */
-  direction?: TextDirection
   /**
    * If `true`, temporarily disable transitions.
    * This is used to avoid unnecessary movements caused by transitions during color mode switching, for example.
@@ -261,14 +222,14 @@ export interface ThemeConfig {
    *
    * @default 'light'
    */
-  initialColorMode?: "dark" | "light" | "system"
+  initialColorMode?: ColorModeWithSystem
   /**
    * The initial theme scheme.
    * This is only applicable if multiple themes are provided.
    *
    * @default 'base'
    */
-  initialThemeScheme?: ThemeTokens["themeSchemes"]
+  initialThemeScheme?: ThemeScheme
   /**
    * The config of the loading.
    */
@@ -286,12 +247,6 @@ export interface ThemeConfig {
      */
     screen?: LoadingConfig
   }
-  /**
-   * The locale to apply to the application.
-   *
-   * @default 'en-US'
-   */
-  locale?: string
   /**
    * The config of the notice.
    */
@@ -320,7 +275,9 @@ type ThemeVariantProps<Y extends Dict = Dict> =
         /**
          * The variant of the component.
          */
-        variant?: StyleValue<Union<keyof Required<Y>["variants"]>>
+        variant?: StyleValueWithCondition<
+          Exclude<keyof Required<Y>["variants"], "base">
+        >
       }
 
 type ThemeSizeProps<Y extends Dict = Dict> =
@@ -330,7 +287,9 @@ type ThemeSizeProps<Y extends Dict = Dict> =
         /**
          * The size of the component.
          */
-        size?: StyleValue<Union<keyof Required<Y>["sizes"]>>
+        size?: StyleValueWithCondition<
+          Exclude<keyof Required<Y>["sizes"], "base">
+        >
       }
 
 type ThemeComponentProps<Y extends Dict = Dict> =
@@ -398,7 +357,11 @@ export interface DefineThemeBreakpointTokens {
 }
 
 export type DefineThemeColorSchemeValue =
-  | [ThemeTokens["colorSchemes"], ThemeTokens["colorSchemes"]]
+  | [
+      AnyString | ThemeTokens["colorSchemes"],
+      AnyString | ThemeTokens["colorSchemes"],
+    ]
+  | AnyString
   | Dict
   | ThemeTokens["colorSchemes"]
 
@@ -407,7 +370,8 @@ export interface DefineThemeColorSchemeSemanticTokens {
 }
 
 export type DefineThemeColorSemanticValue =
-  | [ThemeTokens["colors"], ThemeTokens["colors"]]
+  | [AnyString | ThemeTokens["colors"], AnyString | ThemeTokens["colors"]]
+  | AnyString
   | ThemeTokens["colors"]
 
 export interface DefineThemeColorSemanticToken {
@@ -427,6 +391,7 @@ export interface DefineThemeColorSemanticToken {
 
 export interface DefineThemeColorSemanticTokens {
   [key: string]:
+    | AnyString
     | DefineThemeColorSemanticToken
     | DefineThemeColorSemanticValue
     | Dict
@@ -488,37 +453,31 @@ export interface UsageTheme extends DefineTheme {
 }
 
 export interface UsageThemeTokens {
-  animations: string
-  aspectRatios: string
-  blurs: string
-  borders: string
-  breakpoints: string
-  colors: string
-  colorSchemes: string
-  durations: string
-  easings: string
-  fonts: string
-  fontSizes: string
-  fontWeights: string
-  gradients: string
-  keyframes: string
-  layerStyles: string
-  letterSpacings: string
-  lineHeights: string
-  radii: string
-  shadows: string
-  sizes: string
-  spaces: string
-  textStyles: string
-  themeSchemes: string
-  zIndices: string
+  animations: unknown
+  aspectRatios: unknown
+  blurs: unknown
+  borders: unknown
+  breakpoints: unknown
+  colors: unknown
+  colorSchemes: unknown
+  durations: unknown
+  easings: unknown
+  fonts: unknown
+  fontSizes: unknown
+  fontWeights: unknown
+  gradients: unknown
+  keyframes: unknown
+  layerStyles: unknown
+  letterSpacings: unknown
+  lineHeights: unknown
+  radii: unknown
+  shadows: unknown
+  sizes: unknown
+  spaces: unknown
+  textStyles: unknown
+  themeSchemes: unknown
+  zIndices: unknown
 }
-
-export type Breakpoint = "base" | ThemeTokens["breakpoints"]
-
-export type ColorScheme =
-  | [ThemeTokens["colorSchemes"], ThemeTokens["colorSchemes"]]
-  | ThemeTokens["colorSchemes"]
 
 export type ComponentDefaultProps<
   Y extends Dict = Dict,
@@ -536,11 +495,11 @@ export type ComponentDefaultProps<
   /**
    * The size of the component.
    */
-  size?: StyleValue<keyof M>
+  size?: StyleValueWithCondition<keyof M>
   /**
    * The variant of the component.
    */
-  variant?: StyleValue<keyof D>
+  variant?: StyleValueWithCondition<keyof D>
 }
 
 interface ComponentSharedStyle<
@@ -559,30 +518,34 @@ interface ComponentSharedStyle<
 }
 
 export type ComponentCompound<
-  Y extends CSSObject = CSSObject,
+  Y extends CSSObject | CSSSlotObject = CSSObject,
   M extends CSSPropObject = CSSPropObject,
   D extends CSSModifierObject = CSSModifierObject,
   H extends CSSModifierObject = CSSModifierObject,
 > = (string extends keyof D
   ? {}
   : {
-      size?: (keyof D)[] | keyof D
+      size?: (keyof D)[] | keyof D | RegExp
     }) &
   (string extends keyof H
     ? {}
     : {
-        variant?: (keyof H)[] | keyof H
+        variant?: (keyof H)[] | keyof H | RegExp
       }) &
   (string extends keyof M
     ? {}
     : {
         [key in keyof M]?:
-          | StyleValue<Booleanish<keyof M[key]>>
-          | StyleValue<Booleanish<keyof M[key]>>[]
+          | Booleanish<keyof M[key]>
+          | Booleanish<keyof M[key]>[]
+          | RegExp
       }) & {
     css: Y
     [key: string]: any
-    colorScheme?: ThemeTokens["colorSchemes"] | ThemeTokens["colorSchemes"][]
+    colorScheme?:
+      | RegExp
+      | ThemeTokens["colorSchemes"]
+      | ThemeTokens["colorSchemes"][]
     layer?: LayerScheme
   }
 
@@ -646,10 +609,7 @@ export interface ComponentSlotStyle<
 }
 
 export interface CSSMap {
-  [key: string]: {
-    ref: string
-    var: string
-  }
+  [key: string]: { ref: string; var: string }
 }
 
 export interface CustomTheme {}
@@ -663,14 +623,39 @@ export type ThemeTokens = CustomThemeTokens extends UsageThemeTokens
   ? CustomThemeTokens
   : GeneratedThemeTokens
 
-export type ChangeThemeScheme = (
-  themeScheme: ThemeTokens["themeSchemes"],
+type OmittedThemeTokens = Exclude<
+  keyof ThemeTokens,
+  | "apply"
+  | "breakpoints"
+  | "colorSchemes"
+  | "layerStyles"
+  | "textStyles"
+  | "themeSchemes"
+>
+
+export type ThemeScheme = "base" | ThemeTokens["themeSchemes"]
+export type Breakpoint = "base" | ThemeTokens["breakpoints"]
+export type ColorScheme =
+  | [ThemeTokens["colorSchemes"], ThemeTokens["colorSchemes"]]
+  | ThemeTokens["colorSchemes"]
+
+export type ThemePath =
+  | AnyString
+  | Extract<ThemeTokens["colors"], `colorScheme.${string}`>
+  | {
+      [Y in OmittedThemeTokens]: {
+        [M in ThemeTokens[Y]]: M extends object ? never : `${Y}.${M}`
+      }[ThemeTokens[Y]]
+    }[OmittedThemeTokens]
+
+export type ChangeThemeScheme<Y extends UsageTheme = Theme> = (
+  themeScheme: "base" | keyof Y["themeSchemes"],
 ) => void
 
 export type StyledTheme<Y extends UsageTheme = Theme> = Y & {
-  changeThemeScheme: ChangeThemeScheme
-  themeScheme: ThemeTokens["themeSchemes"]
-  __breakpoints?: CreateBreakpointsReturn
+  changeThemeScheme: ChangeThemeScheme<Y>
+  themeScheme: "base" | keyof Y["themeSchemes"]
+  __breakpoints?: Breakpoints
   __config?: ThemeConfig
   __cssMap?: CSSMap
   __cssVars?: Dict

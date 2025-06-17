@@ -1,6 +1,5 @@
 import type { CSSObject } from "@emotion/styled"
-import type * as CSS from "csstype"
-import type { Union } from "../../utils"
+import type { CSSProperties } from "../css"
 import type { ThemeToken } from "../theme"
 import type { Transform } from "./utils"
 import { isNumber, isObject } from "../../utils"
@@ -10,7 +9,7 @@ import { generateCalc } from "./calc"
 import { colorMix } from "./color-mix"
 import { colorScheme } from "./color-scheme"
 import { generateFilter } from "./filter"
-import { generateFocusRing } from "./focus-ring"
+import { focusRingStyle, generateFocusRing } from "./focus-ring"
 import { generateFunction } from "./function"
 import { gradient } from "./gradient"
 import { grid } from "./grid"
@@ -18,19 +17,21 @@ import { generateStyles } from "./styles"
 import { generateToken } from "./token"
 import { transform } from "./transform"
 import { generateTransition } from "./transition"
-import { analyzeCSSValue, isCSSVar } from "./utils"
-import { vars } from "./vars"
+import { analyzeCSSValue, isCSSToken, isCSSVar } from "./utils"
 
-export { animation, colorMix, gradient, insertKeyframes, keyframes }
-
-type CSSProperties = Union<
-  | keyof CSS.ObsoleteProperties
-  | keyof CSS.StandardProperties
-  | keyof CSS.SvgProperties
->
+export {
+  animation,
+  colorMix,
+  focusRingStyle,
+  gradient,
+  insertKeyframes,
+  isCSSToken,
+  isCSSVar,
+  keyframes,
+}
 
 export interface StyleConfig {
-  properties?: CSSProperties | CSSProperties[]
+  properties?: CSSProperties[]
   static?: CSSObject
   token?: ThemeToken
   transform?: Transform
@@ -43,24 +44,27 @@ export interface StyleConfigs {
 export const transforms = {
   colorScheme,
   animation,
-  bgClip: (value: any) => {
+  bgClip: (value, { prev }) => {
     if (value === "text") {
-      return { backgroundClip: "text", color: "transparent" }
+      prev ??= {}
+      prev.color ??= "transparent"
+
+      return value
     } else {
-      return { backgroundClip: value }
+      return value
     }
   },
   calc: generateCalc,
   colorMix,
   container: generateAtRule("container"),
-  content: (value: any) => {
+  content: (value) => {
     if (isObject(value)) {
       return { content: "''", ...value }
     } else {
       return value
     }
   },
-  deg: (value: any) => {
+  deg: (value) => {
     if (isCSSVar(value) || value == null) return value
 
     const isUnitless = typeof value === "string" && !value.endsWith("deg")
@@ -69,7 +73,7 @@ export const transforms = {
   },
   filter: generateFilter,
   focusRing: generateFocusRing,
-  fraction: (value: any) => {
+  fraction: (value) => {
     if (isNumber(value) && value <= 1) value = `${value * 100}%`
 
     return value
@@ -79,7 +83,7 @@ export const transforms = {
   grid,
   keyframes,
   media: generateAtRule("media"),
-  px: (value: any) => {
+  px: (value) => {
     if (value == null) return value
 
     const { unitless } = analyzeCSSValue(value)
@@ -100,7 +104,6 @@ export const transforms = {
       }
     }
   },
-  vars,
-}
+} satisfies { [key: string]: Transform }
 
 export type Transforms = keyof typeof transforms

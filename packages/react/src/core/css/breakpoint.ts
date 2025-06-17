@@ -1,13 +1,13 @@
 import type { Dict } from "../../utils"
 import type {
+  Breakpoint,
   BreakpointConfig,
-  BreakpointDirection,
   DefineThemeBreakpointTokens,
 } from "../theme"
 import { getPx, isObject } from "../../utils"
 
 interface BreakpointQuery {
-  breakpoint: string
+  breakpoint: Breakpoint
   maxW: number | undefined
   maxWQuery: string | undefined
   minMaxQuery: string | undefined
@@ -16,13 +16,13 @@ interface BreakpointQuery {
   query: string | undefined
 }
 
-export type BreakpointQueries = BreakpointQuery[]
-
 export interface Breakpoints {
   getQuery: (key: string) => string | undefined
   isResponsive: (obj: any, strict?: boolean) => boolean
-  keys: string[]
-  queries: BreakpointQueries
+  isResponsiveKey: (key: string) => boolean
+  keys: Breakpoint[]
+  queries: BreakpointQuery[]
+  queriesObj: { [key: string]: BreakpointQuery }
 }
 
 export function createQuery(
@@ -40,47 +40,58 @@ export function createQuery(
     : undefined
 }
 
-function createQueries(
-  breakpoints: Dict,
-  config: BreakpointConfig,
-): BreakpointQueries {
+function createQueries(breakpoints: Dict<number>, config: BreakpointConfig) {
   const { direction, identifier } = config
-  const isDown = direction !== "up"
+  const down = direction !== "up"
 
-  return Object.entries(breakpoints).map(([breakpoint, width], i, entry) => {
-    const [, relatedWidth] = entry[i + 1] ?? []
-    let minW = isDown ? relatedWidth : width
-    let maxW = isDown ? width : relatedWidth
+  const queryEntries = Object.entries(breakpoints)
+    .map(([breakpoint, width], i, entry) => {
+      const [, relatedWidth] = entry[i + 1] ?? []
+      let minW = down ? relatedWidth : width
+      let maxW = down ? width : relatedWidth
 
-    if (breakpoint === "base") {
-      if (isDown) {
-        maxW = undefined
-      } else {
-        minW = undefined
+      if (breakpoint === "base") {
+        if (down) {
+          maxW = undefined
+        } else {
+          minW = undefined
+        }
       }
-    }
 
-    if (isDown) {
-      if (minW) minW += 1
-    } else {
-      if (maxW) maxW -= 1
-    }
+      if (down) {
+        if (minW) minW += 1
+      } else {
+        if (maxW) maxW -= 1
+      }
 
-    const maxWQuery = createQuery(undefined, maxW, identifier)
-    const minWQuery = createQuery(minW, undefined, identifier)
-    const minMaxQuery = createQuery(minW, maxW, identifier)
-    const query = isDown ? maxWQuery : minWQuery
+      const maxWQuery = createQuery(undefined, maxW, identifier)
+      const minWQuery = createQuery(minW, undefined, identifier)
+      const minMaxQuery = createQuery(minW, maxW, identifier)
+      const query = down ? maxWQuery : minWQuery
 
-    return {
-      breakpoint,
-      maxW,
-      maxWQuery,
-      minMaxQuery,
-      minW,
-      minWQuery,
-      query,
-    }
-  })
+      return [
+        breakpoint,
+        {
+          breakpoint: breakpoint as Breakpoint,
+          maxW,
+          maxWQuery,
+          minMaxQuery,
+          minW,
+          minWQuery,
+          query,
+        },
+      ] as const
+    })
+    .sort((a, b) =>
+      down
+        ? (b[1].maxW ?? Infinity) - (a[1].maxW ?? Infinity)
+        : (a[1].minW ?? 0) - (b[1].minW ?? 0),
+    )
+
+  const queries = queryEntries.map(([_, query]) => query)
+  const queriesObj = Object.fromEntries(queryEntries)
+
+  return { queries, queriesObj }
 }
 
 function transformBreakpoints(
@@ -111,16 +122,14 @@ export function createBreakpoints(
 
   breakpoints.base = config.direction !== "up" ? config.base : "0px"
 
-  breakpoints = transformBreakpoints(breakpoints, config)
-
-  const keys = Object.keys(breakpoints)
-
-  const queries = createQueries(breakpoints, config)
+  const transformedBreakpoints = transformBreakpoints(breakpoints, config)
+  const { queries, queriesObj } = createQueries(transformedBreakpoints, config)
+  const keys = Object.keys(queriesObj) as Breakpoint[]
 
   function isResponsive(obj: any, strict = false) {
     if (!isObject(obj)) return false
 
-    const providedKeys = Object.keys(obj)
+    const providedKeys = Object.keys(obj) as Breakpoint[]
 
     if (!providedKeys.length) return false
 
@@ -129,35 +138,20 @@ export function createBreakpoints(
     return providedKeys.every((key) => keys.includes(key))
   }
 
+  function isResponsiveKey(key: string) {
+    return key in queriesObj
+  }
+
   function getQuery(key: string) {
-    return queries.find(({ breakpoint }) => breakpoint === key)?.query
+    return key in queriesObj ? queriesObj[key]?.query : undefined
   }
 
   return {
     getQuery,
     isResponsive,
+    isResponsiveKey,
     keys,
     queries,
-  }
-}
-
-export type CreateBreakpointsReturn = ReturnType<typeof createBreakpoints>
-
-export function getMinMaxQuery(
-  queries: BreakpointQueries,
-  direction: BreakpointDirection,
-  pickKey: string[] = [],
-) {
-  const omitQueries = queries.filter(
-    ({ breakpoint }) => breakpoint !== "base" && pickKey.includes(breakpoint),
-  )
-
-  const minQuery = omitQueries.sort((a, b) => (a.minW ?? 0) - (b.minW ?? 0))[0]
-  const maxQuery = omitQueries.sort((a, b) => (b.maxW ?? 0) - (a.maxW ?? 0))[0]
-
-  if (direction !== "up") {
-    return { maxQuery, minQuery }
-  } else {
-    return { maxQuery, minQuery }
+    queriesObj,
   }
 }

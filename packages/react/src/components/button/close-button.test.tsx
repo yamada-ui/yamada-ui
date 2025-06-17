@@ -6,9 +6,8 @@ describe("<CloseButton />", () => {
     await a11y(<CloseButton />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(CloseButton.displayName).toBe("CloseButton")
-    expect(CloseButton.__ui__).toBe("CloseButton")
   })
 
   test("sets `className` correctly", () => {

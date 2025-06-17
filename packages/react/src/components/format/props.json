@@ -1,0 +1,78 @@
+{
+  "FormatByte": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "description": "The byte size to format",
+      "required": true
+    },
+    "locale": {
+      "type": "string",
+      "defaultValue": "\"en-US\"",
+      "description": "The locale string to use for formatting.",
+      "required": false
+    },
+    "unit": {
+      "type": "\"bit\" | \"byte\"",
+      "description": "The unit granularity to display",
+      "required": false
+    },
+    "unitDisplay": {
+      "type": "\"short\" | \"long\" | \"narrow\"",
+      "description": "The unit display",
+      "required": false
+    }
+  },
+  "FormatNumber": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "description": "The numeric value to be formatted.",
+      "required": true
+    },
+    "locale": {
+      "type": "string",
+      "defaultValue": "\"en-US\"",
+      "description": "The locale string to use for formatting.",
+      "required": false
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import type { PropsWithChildren, ReactNode } from "react"
+import type { FC, PropsWithChildren, ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { StepsStyle } from "./steps.style"
 import type { UseStepsProps } from "./use-steps"
@@ -7,7 +7,6 @@ import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { isNull, isUndefined } from "../../utils"
 import { CheckIcon } from "../icon"
-import { Slot } from "../slot"
 import { stepsStyle } from "./steps.style"
 import {
   StepsContext,
@@ -75,7 +74,6 @@ export interface StepsRootProps
 }
 
 export const {
-  component,
   ComponentContext,
   PropsContext: StepsPropsContext,
   useComponentContext,
@@ -346,25 +344,23 @@ export const StepsSeparator = withContext<"div", StepsSeparatorProps>(
 
 export interface StepsContentsProps extends PropsWithChildren {}
 
-export const StepsContents = withContext<"fragment", StepsContentsProps>(
-  ({ children }) => {
-    const { items } = useComponentContext()
-    return useMemo(() => {
-      if (children) {
-        return children
-      } else {
-        return items?.map(({ content, contentProps }, index) =>
-          isUndefined(content) || isNull(content) ? null : (
-            <StepsContent key={index} index={index} {...contentProps}>
-              {content}
-            </StepsContent>
-          ),
-        )
-      }
-    }, [children, items])
-  },
-  "contents",
-)()
+export const StepsContents: FC<StepsContentsProps> = ({ children }) => {
+  const { items } = useComponentContext()
+
+  return useMemo(() => {
+    if (children) {
+      return children
+    } else {
+      return items?.map(({ content, contentProps }, index) =>
+        isUndefined(content) || isNull(content) ? null : (
+          <StepsContent key={index} index={index} {...contentProps}>
+            {content}
+          </StepsContent>
+        ),
+      )
+    }
+  }, [children, items])
+}
 
 export interface StepsContentProps extends HTMLStyledProps {
   /**
@@ -396,24 +392,24 @@ export const StepsCompletedContent = withContext<
   },
 )
 
-export interface StepsPrevTriggerProps extends PropsWithChildren {}
+export interface StepsPrevTriggerProps extends HTMLStyledProps<"button"> {}
 
-export const StepsPrevTrigger = component<"fragment", StepsPrevTriggerProps>(
-  (props) => {
-    const { getPrevTriggerProps } = useStepsContext()
+export const StepsPrevTrigger = withContext<"button", StepsPrevTriggerProps>(
+  "button",
+  { name: "prevTrigger", slot: ["trigger", "prev"] },
+)((props) => {
+  const { getPrevTriggerProps } = useStepsContext()
 
-    return <Slot {...getPrevTriggerProps(props)} />
-  },
-  "prevTrigger",
-)()
+  return { asChild: true, ...getPrevTriggerProps(props) }
+})
 
-export interface StepsNextTriggerProps extends PropsWithChildren {}
+export interface StepsNextTriggerProps extends HTMLStyledProps<"button"> {}
 
-export const StepsNextTrigger = component<"fragment", StepsNextTriggerProps>(
-  (props) => {
-    const { getNextTriggerProps } = useStepsContext()
+export const StepsNextTrigger = withContext<"button", StepsNextTriggerProps>(
+  "button",
+  { name: "nextTrigger", slot: ["trigger", "next"] },
+)((props) => {
+  const { getNextTriggerProps } = useStepsContext()
 
-    return <Slot {...getNextTriggerProps(props)} />
-  },
-  "nextTrigger",
-)()
+  return { asChild: true, ...getNextTriggerProps(props) }
+})

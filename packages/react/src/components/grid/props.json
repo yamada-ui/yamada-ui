@@ -16,52 +16,52 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "area": {
-      "type": "GridArea | [GridArea | { [x: string & {}]: GridArea | undefined; base?: GridArea | undefined; \"2xl\"?: GridArea | undefined; lg?: GridArea | undefined; md?: GridArea | undefined; sm?: GridArea | undefined; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; }",
+      "type": "GridArea | [GridArea | ({ _peerAccept?: GridArea | [GridArea | (... & { base?: GridArea | [GridArea | (... & ...), GridArea | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: GridArea | ... 2 more ... | undefined; }), GridArea | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: Gri...",
       "description": "The CSS `grid-area` property.",
       "required": false
     },
     "autoColumns": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 92 more ... | { ...; }",
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 92 more ... | ({ ...; } & { ...; })",
       "description": "The CSS `grid-auto-columns` property.",
       "required": false
     },
     "autoFlow": {
-      "type": "GridAutoFlow | [GridAutoFlow | { [x: string & {}]: GridAutoFlow | undefined; base?: GridAutoFlow | undefined; ... 4 more ...; xl?: GridAutoFlow | undefined; }, GridAutoFlow | { ...; }] | { ...; }",
+      "type": "GridAutoFlow | [GridAutoFlow | ({ _peerAccept?: GridAutoFlow | [GridAutoFlow | (... & { base?: GridAutoFlow | [...] | (... & ...) | undefined; ... 4 more ...; xl?: GridAutoFlow | ... 2 more ... | undefined; }), GridAutoFlow | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: GridAutoFlow | ......",
       "description": "The CSS `grid-auto-flow` property.",
       "required": false
     },
     "autoRows": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 92 more ... | { ...; }",
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 92 more ... | ({ ...; } & { ...; })",
       "description": "The CSS `grid-auto-rows` property.",
       "required": false
     },
     "column": {
-      "type": "GridColumn | [GridColumn | { [x: string & {}]: GridColumn | undefined; base?: GridColumn | undefined; \"2xl\"?: GridColumn | undefined; lg?: GridColumn | undefined; md?: GridColumn | undefined; sm?: GridColumn | undefined; xl?: GridColumn | undefined; }, GridColumn | { ...; }] | { ...; }",
+      "type": "GridColumn | [GridColumn | ({ _peerAccept?: GridColumn | [GridColumn | (... & { base?: GridColumn | [GridColumn | (... & ...), GridColumn | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: GridColumn | ... 2 more ... | undefined; }), GridColumn | (... & { ...; })] | { ...; } | undefined; ... 173 more ......",
       "description": "The CSS `grid-column` property.",
       "required": false
     },
     "row": {
-      "type": "GridRow | [GridRow | { [x: string & {}]: GridRow | undefined; base?: GridRow | undefined; \"2xl\"?: GridRow | undefined; lg?: GridRow | undefined; md?: GridRow | undefined; sm?: GridRow | undefined; xl?: GridRow | undefined; }, GridRow | { ...; }] | { ...; }",
+      "type": "GridRow | [GridRow | ({ _peerAccept?: GridRow | [GridRow | (... & { base?: GridRow | [GridRow | (... & ...), GridRow | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: GridRow | ... 2 more ... | undefined; }), GridRow | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: GridRow | .....",
       "description": "The CSS `grid-row` property.",
       "required": false
     },
     "templateAreas": {
-      "type": "GridTemplateAreas | [GridTemplateAreas | { [x: string & {}]: GridTemplateAreas | undefined; base?: GridTemplateAreas | undefined; ... 4 more ...; xl?: GridTemplateAreas | undefined; }, GridTemplateAreas | { ...; }] | { ...; }",
+      "type": "GridTemplateAreas | [GridTemplateAreas | ({ _peerAccept?: GridTemplateAreas | [GridTemplateAreas | (... & { ...; }), GridTemplateAreas | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: GridTemplateAreas | ... 2 more ... | undefined; } & { ...; }), GridTemplateAreas | ({ ...; } & { ...; })] |...",
       "description": "The CSS `grid-template-areas` property.",
       "required": false
     },
     "templateColumns": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 94 more ... | { ...; }",
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 94 more ... | ({ ...; } & { ...; })",
       "description": "The CSS `grid-template-columns` property.",
       "required": false
     },
     "templateRows": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 94 more ... | { ...; }",
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 94 more ... | ({ ...; } & { ...; })",
       "description": "The CSS `grid-template-rows` property.",
       "required": false
     }
@@ -83,42 +83,42 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "area": {
-      "type": "GridArea | [GridArea | { [x: string & {}]: GridArea | undefined; base?: GridArea | undefined; \"2xl\"?: GridArea | undefined; lg?: GridArea | undefined; md?: GridArea | undefined; sm?: GridArea | undefined; xl?: GridArea | undefined; }, GridArea | { ...; }] | { ...; }",
+      "type": "GridArea | [GridArea | ({ _peerAccept?: GridArea | [GridArea | (... & { base?: GridArea | [GridArea | (... & ...), GridArea | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: GridArea | ... 2 more ... | undefined; }), GridArea | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: Gri...",
       "description": "The CSS `grid-area` property.",
       "required": false
     },
     "colEnd": {
-      "type": "GridColumnEnd | [GridColumnEnd | { [x: string & {}]: GridColumnEnd | undefined; base?: GridColumnEnd | undefined; ... 4 more ...; xl?: GridColumnEnd | undefined; }, GridColumnEnd | { ...; }] | { ...; }",
+      "type": "GridColumnEnd | [GridColumnEnd | ({ _peerAccept?: GridColumnEnd | [GridColumnEnd | (... & { base?: GridColumnEnd | [...] | (... & ...) | undefined; ... 4 more ...; xl?: GridColumnEnd | ... 2 more ... | undefined; }), GridColumnEnd | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: GridColumnE...",
       "description": "The CSS `grid-column-end` property.",
       "required": false
     },
     "colSpan": {
-      "type": "number | [number | { [x: string & {}]: number | undefined; base?: number | undefined; \"2xl\"?: number | undefined; lg?: number | undefined; md?: number | undefined; sm?: number | undefined; xl?: number | undefined; }, number | { ...; }] | { ...; }",
+      "type": "StyleValue<number>",
       "description": "The number of columns the grid item should `span`.",
       "required": false
     },
     "colStart": {
-      "type": "GridColumnStart | [GridColumnStart | { [x: string & {}]: GridColumnStart | undefined; base?: GridColumnStart | undefined; ... 4 more ...; xl?: GridColumnStart | undefined; }, GridColumnStart | { ...; }] | { ...; }",
+      "type": "GridColumnStart | [GridColumnStart | ({ _peerAccept?: GridColumnStart | [GridColumnStart | (... & { ...; }), GridColumnStart | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: GridColumnStart | ... 2 more ... | undefined; } & { ...; }), GridColumnStart | ({ ...; } & { ...; })] | ({ ...; } & {...",
       "description": "The CSS `grid-column-start` property.",
       "required": false
     },
     "rowEnd": {
-      "type": "GridRowEnd | [GridRowEnd | { [x: string & {}]: GridRowEnd | undefined; base?: GridRowEnd | undefined; \"2xl\"?: GridRowEnd | undefined; lg?: GridRowEnd | undefined; md?: GridRowEnd | undefined; sm?: GridRowEnd | undefined; xl?: GridRowEnd | undefined; }, GridRowEnd | { ...; }] | { ...; }",
+      "type": "GridRowEnd | [GridRowEnd | ({ _peerAccept?: GridRowEnd | [GridRowEnd | (... & { base?: GridRowEnd | [GridRowEnd | (... & ...), GridRowEnd | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: GridRowEnd | ... 2 more ... | undefined; }), GridRowEnd | (... & { ...; })] | { ...; } | undefined; ... 173 more ......",
       "description": "The CSS `grid-row-end` property.",
       "required": false
     },
     "rowSpan": {
-      "type": "number | [number | { [x: string & {}]: number | undefined; base?: number | undefined; \"2xl\"?: number | undefined; lg?: number | undefined; md?: number | undefined; sm?: number | undefined; xl?: number | undefined; }, number | { ...; }] | { ...; }",
+      "type": "StyleValue<number>",
       "description": "The number of rows the grid item should `span`.",
       "required": false
     },
     "rowStart": {
-      "type": "GridRowStart | [GridRowStart | { [x: string & {}]: GridRowStart | undefined; base?: GridRowStart | undefined; ... 4 more ...; xl?: GridRowStart | undefined; }, GridRowStart | { ...; }] | { ...; }",
+      "type": "GridRowStart | [GridRowStart | ({ _peerAccept?: GridRowStart | [GridRowStart | (... & { base?: GridRowStart | [...] | (... & ...) | undefined; ... 4 more ...; xl?: GridRowStart | ... 2 more ... | undefined; }), GridRowStart | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: GridRowStart | ......",
       "description": "The CSS `grid-row-start` property.",
       "required": false
     }

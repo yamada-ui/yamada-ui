@@ -16,7 +16,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -53,8 +53,8 @@
       "required": false
     },
     "placement": {
-      "type": "\"bottom\" | \"left\" | \"right\" | \"top\" | [\"bottom\" | \"left\" | \"right\" | \"top\" | { [x: string & {}]: \"bottom\" | \"left\" | \"right\" | \"top\" | undefined; base?: \"bottom\" | \"left\" | \"right\" | \"top\" | undefined; ... 4 more ...; xl?: \"bottom\" | ... 3 more ... | undefined; }, \"bottom\" | ... 3 more ... | { ...; }] | { ...; }",
-      "defaultValue": "\"right\"",
+      "type": "StyleValue<\n  \"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\"\n>",
+      "defaultValue": "\"inline-end\"",
       "description": "The placement of the slide.",
       "required": false
     },
@@ -64,7 +64,7 @@
       "required": false
     },
     "transitionEnd": {
-      "type": "MotionLifecycleProps<Target>",
+      "type": "MotionLifecycleProps<ResolvedValues>",
       "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
       "required": false
     },
@@ -91,7 +91,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -123,13 +123,13 @@
       "required": false
     },
     "offsetX": {
-      "type": "string | number | [string | number | { [x: string & {}]: string | number | undefined; base?: string | number | undefined; \"2xl\"?: string | number | undefined; lg?: string | number | undefined; md?: string | ... 1 more ... | undefined; sm?: string | ... 1 more ... | undefined; xl?: string | ... 1 more ... | undefined...",
+      "type": "StyleValue<string | number>",
       "defaultValue": "0",
       "description": "The offset on the horizontal or `x` axis.",
       "required": false
     },
     "offsetY": {
-      "type": "string | number | [string | number | { [x: string & {}]: string | number | undefined; base?: string | number | undefined; \"2xl\"?: string | number | undefined; lg?: string | number | undefined; md?: string | ... 1 more ... | undefined; sm?: string | ... 1 more ... | undefined; xl?: string | ... 1 more ... | undefined...",
+      "type": "StyleValue<string | number>",
       "defaultValue": "8",
       "description": "The offset on the vertical or `y` axis.",
       "required": false
@@ -151,7 +151,7 @@
       "required": false
     },
     "transitionEnd": {
-      "type": "MotionLifecycleProps<Target>",
+      "type": "MotionLifecycleProps<ResolvedValues>",
       "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
       "required": false
     },

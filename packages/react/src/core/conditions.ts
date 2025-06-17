@@ -830,3 +830,7 @@ export const conditionProperties = Object.keys(
   conditions,
 ) as ConditionProperty[]
 export const conditionSelectors = Object.values(conditions)
+
+export function getCondition(key: string) {
+  return key in conditions ? conditions[key as ConditionProperty] : key
+}

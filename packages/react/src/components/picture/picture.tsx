@@ -1,4 +1,5 @@
 import type { FC, HTMLStyledProps, ThemeTokens } from "../../core"
+import type { AnyString } from "../../utils"
 import type { ImageProps } from "../image"
 import { useCallback, useMemo } from "react"
 import { styled } from "../../core"
@@ -33,13 +34,13 @@ export interface PictureSource extends SourceProps {
    *
    * If media is set, media takes precedence.
    */
-  maxW?: number | ThemeTokens["sizes"]
+  maxW?: AnyString | number | ThemeTokens["sizes"]
   /**
    * The minimum width for the source.
    *
    * If media is set, media takes precedence.
    */
-  minW?: number | ThemeTokens["sizes"]
+  minW?: AnyString | number | ThemeTokens["sizes"]
 }
 
 export interface PictureProps extends ImageProps {
@@ -72,7 +73,7 @@ export const Picture: FC<PictureProps> = ({
   ...rest
 }) => {
   const { theme } = useTheme()
-  const { queries } = theme.__breakpoints ?? {}
+  const { queriesObj } = theme.__breakpoints ?? {}
   const { direction = "down", identifier = "@media screen" } =
     theme.__config?.breakpoint ?? {}
   const searchValue =
@@ -104,8 +105,7 @@ export const Picture: FC<PictureProps> = ({
 
           return { ...rest, maxW, media, minW }
         } else {
-          const { maxW, minW, query } =
-            queries?.find((query) => query.breakpoint === media) ?? {}
+          const { maxW, minW, query } = queriesObj?.[media] ?? {}
 
           if (query) media = query.replace(searchValue, "")
 
@@ -119,7 +119,7 @@ export const Picture: FC<PictureProps> = ({
     } else {
       return computedSources
     }
-  }, [queries, searchValue, sourcesProp, compareSources, enableSorting])
+  }, [queriesObj, searchValue, sourcesProp, compareSources, enableSorting])
 
   const sourceElements = useMemo(
     () =>
@@ -146,17 +146,17 @@ export interface SourceProps extends HTMLStyledProps<"source"> {
   /**
    * The media query for the source.
    */
-  media?: ThemeTokens["breakpoints"]
+  media?: AnyString | ThemeTokens["breakpoints"]
 }
 
 export const Source: FC<SourceProps> = ({ media, ...rest }) => {
   const { theme } = useTheme()
-  const { queries } = theme.__breakpoints ?? {}
+  const { queriesObj } = theme.__breakpoints ?? {}
   const { identifier = "@media screen" } = theme.__config?.breakpoint ?? {}
   const searchValue =
     identifier === "@media screen" ? "@media screen and " : `${identifier} `
 
-  const { query } = queries?.find((query) => query.breakpoint === media) ?? {}
+  const { query } = media ? (queriesObj?.[media] ?? {}) : {}
 
   if (query) media = query.replace(searchValue, "")
 

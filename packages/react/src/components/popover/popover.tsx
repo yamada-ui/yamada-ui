@@ -1,5 +1,11 @@
 import type { PropsWithChildren } from "react"
-import type { FC, HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  FC,
+  HTMLProps,
+  HTMLStyledProps,
+  SimplePlacement,
+  ThemeProps,
+} from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { HTMLMotionProps, MotionTransitionProps } from "../motion"
 import type { PortalProps } from "../portal"
@@ -22,7 +28,7 @@ export interface PopupAnimationProps {
    *
    * @default 'scale'
    */
-  animationScheme?: "bottom" | "left" | "none" | "right" | "scale" | "top"
+  animationScheme?: "none" | "scale" | SimplePlacement
   /**
    * The animation duration.
    *
@@ -44,25 +50,25 @@ export const getPopupAnimationProps = (
         custom: { duration, reverse: true, scale: 0.95 },
         variants: fadeScaleVariants,
       }
-    case "top":
+    case "block-start":
       return {
         ...sharedProps,
         custom: { duration, offsetY: -16, reverse: true },
         variants: slideFadeVariants,
       }
-    case "right":
+    case "inline-end":
       return {
         ...sharedProps,
         custom: { duration, offsetX: 16, reverse: true },
         variants: slideFadeVariants,
       }
-    case "left":
+    case "inline-start":
       return {
         ...sharedProps,
         custom: { duration, offsetX: -16, reverse: true },
         variants: slideFadeVariants,
       }
-    case "bottom":
+    case "block-end":
       return {
         ...sharedProps,
         custom: { duration, offsetY: 16, reverse: true },

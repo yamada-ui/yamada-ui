@@ -1,4 +1,4 @@
-import type { ThemeTokens } from "../../core"
+import type { Breakpoint } from "../../core"
 import { useCallback, useMemo, useRef, useSyncExternalStore } from "react"
 import { useEnvironment } from "../../providers/environment-provider"
 import { useTheme } from "../../providers/theme-provider"
@@ -78,7 +78,7 @@ export const useBreakpoint = () => {
     [direction, getWindow, hasContainer, hasQueries, queries],
   )
 
-  const breakpointRef = useRef<ThemeTokens["breakpoints"]>(getBreakpoint())
+  const breakpointRef = useRef<Breakpoint>(getBreakpoint())
 
   const subscribe = useCallback(
     (listener: () => void) => {
@@ -136,5 +136,5 @@ export const useBreakpoint = () => {
 
   const breakpoint = useSyncExternalStore(subscribe, getSnapshot, getSnapshot)
 
-  return breakpoint as ThemeTokens["breakpoints"]
+  return breakpoint
 }

@@ -47,7 +47,7 @@ function generateType({
 }) {
   const overrideType = prop ? overrideTypes[prop] : undefined
 
-  let result = !variableLength || token ? "StyleValue<>" : ""
+  let result = !variableLength || token ? "StyleValueWithCondition<>" : ""
 
   if (overrideType) {
     result = addType(result, overrideType)
@@ -334,7 +334,7 @@ export async function generateStyles(
     import type * as CSS from "csstype"
     import type { AnyString } from "../utils"
     import type { StyleConfigs } from "./config"
-    import type { CSSObject, StyleValue } from "./css"
+    import type { CSSObject, StyleValueWithCondition } from "./css"
     import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"
     import { transforms } from "./config"
     import { pipe } from "./config/utils"

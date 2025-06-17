@@ -15,13 +15,13 @@ import { slideStyle } from "./slide.style"
 
 const getAnimationProps = (placement: SlideProps["placement"]) => {
   switch (placement) {
-    case "top":
+    case "block-start":
       return { enter: { x: 0, y: 0 }, exit: { x: 0, y: "-100%" } }
-    case "right":
+    case "inline-end":
       return { enter: { x: 0, y: 0 }, exit: { x: "100%", y: 0 } }
-    case "bottom":
+    case "block-end":
       return { enter: { x: 0, y: 0 }, exit: { x: 0, y: "100%" } }
-    case "left":
+    case "inline-start":
       return { enter: { x: 0, y: 0 }, exit: { x: "-100%", y: 0 } }
     default:
       return {}

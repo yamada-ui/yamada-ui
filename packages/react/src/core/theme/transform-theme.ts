@@ -1,5 +1,5 @@
 import type { Dict, FlattenObjectOptions } from "../../utils"
-import type { Breakpoints, CreateThemeVars } from "../css"
+import type { CreateVars } from "../css"
 import type {
   CSSMap,
   DefineThemeValue,
@@ -9,12 +9,11 @@ import type {
 import {
   flattenObject,
   isArray,
-  isEmptyObject,
-  objectFromEntries,
+  isObject,
+  isUndefined,
   omitObject,
-  TONES,
 } from "../../utils"
-import { createBreakpoints, createLayers, getCreateThemeVars } from "../css"
+import { createBreakpoints, createLayers, getCreateVars } from "../css"
 
 export type VariableResponsiveValue = Dict<
   [DefineThemeValue, DefineThemeValue] | DefineThemeValue
@@ -77,7 +76,9 @@ const tertiaryTokens = {
 
 type TertiaryToken = keyof typeof tertiaryTokens
 
-const tokens: { [key: string]: TokenOptions } = {
+const tokenMap: {
+  [key in "primary" | "secondary" | "tertiary"]: TokenOptions
+} = {
   primary: primaryTokens,
   secondary: secondaryTokens,
   tertiary: tertiaryTokens,
@@ -102,42 +103,52 @@ export function transformTheme(
   const prefix = config?.css?.varPrefix
   const breakpoints = createBreakpoints(theme.breakpoints, config?.breakpoint)
   const layers = createLayers(config?.css?.layers)
-  const createThemeTokens = getCreateThemeTokens(
-    breakpoints,
-    config?.theme?.responsive,
-  )
+  const shouldProcess = config?.theme?.responsive
+    ? (obj: any) => !breakpoints?.isResponsive(obj, true)
+    : () => true
+  const createVars = getCreateVars(prefix, breakpoints)
 
-  const createThemeVars = getCreateThemeVars(prefix, breakpoints)
+  const primaryTokens = {
+    ...createTokens(theme, "primary", shouldProcess),
+    ...createColorSchemeTokens(theme, undefined, shouldProcess),
+  }
+  const secondaryTokens = createTokens(theme, "secondary", shouldProcess)
+  const tertiaryTokens = createTokens(theme, "tertiary", shouldProcess)
 
-  const primaryTokens = createThemeTokens(theme)
-  const secondaryTokens = createThemeTokens(theme, "secondary")
-  const tertiaryTokens = createThemeTokens(theme, "tertiary")
-
-  let { cssMap, cssVars } = mergeVars(
-    createThemeVars(primaryTokens),
-    createThemeVars(secondaryTokens),
-    createThemeVars(tertiaryTokens),
+  const { cssMap, cssVars } = mergeVars(
+    createVars(primaryTokens),
+    createVars(secondaryTokens),
+    createVars(tertiaryTokens),
   )()
 
   if (theme.themeSchemes) {
-    for (const [themeScheme, nestedTheme] of Object.entries<Dict>(
-      theme.themeSchemes,
-    )) {
-      const nestedPrimaryTokens = createThemeTokens(nestedTheme)
-      const nestedSecondaryTokens = createThemeTokens(nestedTheme, "secondary")
-      const nestedTertiaryTokens = createThemeTokens(nestedTheme, "tertiary")
+    const themeSchemeEntries = Object.entries<Dict>(theme.themeSchemes)
+
+    for (const [themeScheme, nestedTheme] of themeSchemeEntries) {
+      const themeCondition = `[data-theme=${themeScheme}] &:not([data-theme]), &[data-theme=${themeScheme}]`
+
+      const nestedPrimaryTokens = {
+        ...createTokens(nestedTheme, "primary", shouldProcess),
+        ...createColorSchemeTokens(theme, nestedTheme, shouldProcess),
+      }
+      const nestedSecondaryTokens = createTokens(
+        nestedTheme,
+        "secondary",
+        shouldProcess,
+      )
+      const nestedTertiaryTokens = createTokens(
+        nestedTheme,
+        "tertiary",
+        shouldProcess,
+      )
 
       const { cssVars: nestedCSSVars } = mergeVars(
-        createThemeVars(nestedPrimaryTokens),
-        createThemeVars(nestedSecondaryTokens),
-        createThemeVars(nestedTertiaryTokens),
+        createVars(nestedPrimaryTokens),
+        createVars(nestedSecondaryTokens),
+        createVars(nestedTertiaryTokens),
       )({ ...primaryTokens, ...secondaryTokens, ...tertiaryTokens })
 
-      cssVars = {
-        ...cssVars,
-        [`[data-theme=${themeScheme}] &:not([data-theme]), &[data-theme=${themeScheme}]`]:
-          nestedCSSVars,
-      }
+      cssVars[themeCondition] = nestedCSSVars
     }
   }
 
@@ -152,170 +163,138 @@ export function transformTheme(
   return theme as TransformTheme
 }
 
-function createColorToneTokens(token: string, value: any) {
-  const result: [string, VariableToken][] = []
-  const [semanticToken, tone] = token.split(".")
-
-  if (tone) {
-    const enhancedToken = { semantic: false, value }
-
-    result.push([`colors.${semanticToken}.${tone}`, enhancedToken])
-  } else {
-    TONES.forEach((tone) => {
-      const enhancedToken: VariableToken = {
-        semantic: true,
-        value: isArray(value)
-          ? [`${value[0]}.${tone}`, `${value[1]}.${tone}`]
-          : `${value}.${tone}`,
-      }
-
-      result.push([`colors.${semanticToken}.${tone}`, enhancedToken])
-    })
-  }
-
-  return result
-}
-
 function createColorSchemeTokens(
-  token: string,
-  value: any,
-  colors: Dict,
+  theme: Dict,
+  nestedTheme: Dict | undefined,
   shouldProcess: FlattenObjectOptions["shouldProcess"],
 ) {
-  const result: [string, VariableToken][] = []
-  const [semanticToken] = token.split(".")
-
-  result.push(...createColorToneTokens(token, value))
-
-  if (isArray(value)) {
-    const [lightValue, darkValue] = value
-
-    const enhancedLightColors = flattenObject(colors[lightValue] ?? {}, {
-      shouldProcess,
-    })
-    const enhancedDarkColors = flattenObject(colors[darkValue] ?? {}, {
-      shouldProcess,
-    })
-
-    if (
-      !isEmptyObject(enhancedLightColors) &&
-      !isEmptyObject(enhancedDarkColors)
-    ) {
-      Object.entries<any>(enhancedLightColors).forEach(([token, value]) => {
-        const darkValue = enhancedDarkColors[token]
-
-        if (darkValue) value = [isArray(value) ? value[0] : value, darkValue]
-
-        const enhancedToken: VariableToken = {
-          semantic: true,
-          value,
-        }
-
-        if (token === "base") {
-          result.push([`colors.${semanticToken}`, enhancedToken])
-        } else {
-          result.push([`colors.${semanticToken}.${token}`, enhancedToken])
-        }
-      })
-    }
-  } else {
-    const enhancedColors = flattenObject(colors[value] ?? {}, {
-      shouldProcess,
-    })
-
-    if (!isEmptyObject(enhancedColors)) {
-      Object.entries<any>(enhancedColors).forEach(([token, value]) => {
-        const enhancedToken: VariableToken = {
-          semantic: true,
-          value,
-        }
-
-        if (token === "base") {
-          result.push([`colors.${semanticToken}`, enhancedToken])
-        } else {
-          result.push([`colors.${semanticToken}.${token}`, enhancedToken])
-        }
-      })
-    }
+  const colors = { base: theme.colors ?? {}, nested: nestedTheme?.colors ?? {} }
+  const semanticColors = {
+    base: theme.semanticTokens?.colors ?? {},
+    nested: nestedTheme?.semanticTokens?.colors ?? {},
   }
+  const colorSchemeTokens = flattenObject(
+    (nestedTheme ?? theme).semanticTokens?.colorSchemes ?? {},
+    { shouldProcess },
+  )
 
-  return result
-}
+  const results: VariableTokens = {}
 
-function replaceColorToken(token: string) {
-  if (token.endsWith(".base")) {
-    return token.replace(".base", "")
-  } else {
-    return token
-  }
-}
-
-function getCreateThemeTokens(breakpoints?: Breakpoints, responsive?: boolean) {
-  return function (
-    theme: Dict,
-    target: "primary" | "secondary" | "tertiary" = "primary",
+  function insertToken(
+    primaryKey: string,
+    secondaryKey: string | undefined,
+    value: any,
   ) {
-    let shouldProcess: Required<FlattenObjectOptions>["shouldProcess"] = () =>
-      true
-    const tokenEntries: [string, VariableToken][] = []
-    const semanticTokenEntries: [string, VariableToken][] = []
+    if (isUndefined(value)) return
 
-    if (responsive)
-      shouldProcess = (obj) => !breakpoints?.isResponsive(obj, true)
+    if (!secondaryKey || secondaryKey === "base") {
+      results[`colors.${primaryKey}`] = { semantic: true, value }
+    } else {
+      results[`colors.${primaryKey}.${secondaryKey}`] = {
+        semantic: true,
+        value,
+      }
+    }
+  }
 
-    Object.entries(tokens[target] ?? {}).forEach(([primaryKey, options]) => {
-      const resolvedOptions: FlattenObjectOptions = {
-        ...options,
+  function processValue(primaryKey: string, colors: any, keyOrValue: any) {
+    const value = colors.nested[keyOrValue] ?? colors.base[keyOrValue]
+
+    if (isObject(value)) {
+      const tokens = flattenObject(value, { shouldProcess })
+
+      Object.keys(tokens).forEach((secondaryKey) => {
+        const value =
+          secondaryKey === "base" ? keyOrValue : `${keyOrValue}.${secondaryKey}`
+
+        insertToken(primaryKey, secondaryKey, value)
+      })
+    } else {
+      insertToken(primaryKey, undefined, keyOrValue)
+    }
+  }
+
+  function processColorModeValue(
+    primaryKey: string,
+    colors: any,
+    keyOrValue: any[],
+  ) {
+    const [lightValue, darkValue] = keyOrValue
+    const lightColors = colors.nested[lightValue] ?? colors.base[lightValue]
+    const darkColors = colors.nested[darkValue] ?? colors.base[darkValue]
+
+    if (isObject(lightColors) && isObject(darkColors)) {
+      const tokens = flattenObject(lightColors, { shouldProcess })
+
+      Object.keys(tokens).forEach((secondaryKey) => {
+        const value = [
+          secondaryKey === "base"
+            ? lightValue
+            : `${lightValue}.${secondaryKey}`,
+          secondaryKey === "base" ? darkValue : `${darkValue}.${secondaryKey}`,
+        ]
+
+        insertToken(primaryKey, secondaryKey, value)
+      })
+    } else if (!isObject(lightValue) && !isObject(darkValue)) {
+      insertToken(primaryKey, undefined, [lightValue, darkValue])
+    }
+  }
+
+  Object.entries(colorSchemeTokens).forEach(([primaryKey, value]) => {
+    if (isArray(value)) {
+      processColorModeValue(primaryKey, colors, value)
+      processColorModeValue(primaryKey, semanticColors, value)
+    } else {
+      processValue(primaryKey, colors, value)
+      processValue(primaryKey, semanticColors, value)
+    }
+  })
+
+  return results
+}
+
+function createTokens(
+  theme: Dict,
+  target: "primary" | "secondary" | "tertiary",
+  shouldProcess: FlattenObjectOptions["shouldProcess"] = () => true,
+) {
+  const results: VariableTokens = {}
+
+  Object.entries(tokenMap[target]).forEach(
+    ([primaryKey, { shouldProcess: shouldProcessProp, ...rest }]) => {
+      const options: FlattenObjectOptions = {
+        ...rest,
         shouldProcess: (obj) =>
-          shouldProcess(obj) &&
-          (!options.shouldProcess || options.shouldProcess(obj)),
+          shouldProcess(obj) && (!shouldProcessProp || shouldProcessProp(obj)),
       }
 
-      const tokens = flattenObject(theme[primaryKey] ?? {}, resolvedOptions)
+      const tokens = flattenObject(theme[primaryKey] ?? {}, options)
       const semanticTokens = flattenObject(
         theme.semanticTokens?.[primaryKey] ?? {},
-        resolvedOptions,
+        options,
       )
 
       Object.entries(tokens).forEach(([secondaryKey, value]) => {
         const token = `${primaryKey}.${secondaryKey}`
 
-        const enhancedToken: VariableToken = { semantic: false, value }
-
-        tokenEntries.push([token, enhancedToken])
+        results[token] = { semantic: false, value }
       })
 
       Object.entries(semanticTokens).forEach(([secondaryKey, value]) => {
         let token = `${primaryKey}.${secondaryKey}`
 
-        if (token.startsWith("colors.")) token = replaceColorToken(token)
+        if (token.endsWith(".base")) token = token.replace(".base", "")
 
-        const enhancedToken: VariableToken = { semantic: true, value }
-
-        semanticTokenEntries.push([token, enhancedToken])
+        results[token] = { semantic: true, value }
       })
-    })
+    },
+  )
 
-    if (target === "primary") {
-      const colors = theme.semanticTokens?.colors ?? {}
-      const colorSchemes = theme.semanticTokens?.colorSchemes ?? {}
-      const colorSchemeMap = flattenObject(colorSchemes, { shouldProcess })
-
-      Object.entries(colorSchemeMap).forEach(([token, value]) => {
-        semanticTokenEntries.push(
-          ...createColorSchemeTokens(token, value, colors, shouldProcess),
-        )
-      })
-    }
-
-    return objectFromEntries<VariableTokens>([
-      ...tokenEntries,
-      ...semanticTokenEntries,
-    ])
-  }
+  return results
 }
 
-function mergeVars(...fns: CreateThemeVars[]) {
+function mergeVars(...fns: CreateVars[]) {
   return function (prevTokens?: VariableTokens) {
     let resolvedCSSMap: CSSMap = {}
     let resolvedCSSVars: Dict = {}

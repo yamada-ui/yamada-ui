@@ -660,7 +660,7 @@ export const Caption: Story = () => {
   return (
     <>
       <NativeTable.Root>
-        <NativeTable.Caption placement="top">
+        <NativeTable.Caption placement="start">
           ©バードスタジオ/集英社・東映アニメーション
         </NativeTable.Caption>
 
@@ -710,7 +710,7 @@ export const Caption: Story = () => {
       </NativeTable.Root>
 
       <NativeTable.Root>
-        <NativeTable.Caption placement="bottom">
+        <NativeTable.Caption placement="end">
           ©バードスタジオ/集英社・東映アニメーション
         </NativeTable.Caption>
 

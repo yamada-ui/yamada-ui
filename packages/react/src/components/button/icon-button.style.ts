@@ -1,6 +1,9 @@
 import { defineComponentStyle } from "../../core"
+import { buttonStyle } from "./button.style"
 
 export const iconButtonStyle = defineComponentStyle({
+  variants: buttonStyle.variants,
+
   sizes: {
     xs: {
       fontSize: "lg",
@@ -30,6 +33,7 @@ export const iconButtonStyle = defineComponentStyle({
 
   defaultProps: {
     size: "md",
+    variant: "solid",
   },
 })
 

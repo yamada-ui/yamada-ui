@@ -76,7 +76,17 @@ export const Gutter: Story = () => {
 export const AnimationScheme: Story = () => {
   return (
     <App flexDirection="column" gap="md">
-      <For each={["scale", "bottom", "left", "right", "top"] as const}>
+      <For
+        each={
+          [
+            "scale",
+            "block-end",
+            "inline-start",
+            "inline-end",
+            "block-start",
+          ] as const
+        }
+      >
         {(animationScheme) => (
           <Tooltip
             key={animationScheme}

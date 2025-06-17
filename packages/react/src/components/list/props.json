@@ -16,7 +16,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -38,7 +38,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -65,7 +65,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -75,12 +75,12 @@
       "required": false
     },
     "stylePosition": {
-      "type": "ListStylePosition | [ListStylePosition | { [x: string & {}]: ListStylePosition | undefined; base?: ListStylePosition | undefined; ... 4 more ...; xl?: ListStylePosition | undefined; }, ListStylePosition | { ...; }] | { ...; }",
+      "type": "ListStylePosition | [ListStylePosition | ({ _peerAccept?: ListStylePosition | [ListStylePosition | (... & { ...; }), ListStylePosition | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ListStylePosition | ... 2 more ... | undefined; } & { ...; }), ListStylePosition | ({ ...; } & { ...; })] |...",
       "description": "The CSS `list-style-position` property.",
       "required": false
     },
     "styleType": {
-      "type": "ListStyleType | [ListStyleType | { [x: string & {}]: ListStyleType | undefined; base?: ListStyleType | undefined; ... 4 more ...; xl?: ListStyleType | undefined; }, ListStyleType | { ...; }] | { ...; }",
+      "type": "ListStyleType | [ListStyleType | ({ _peerAccept?: ListStyleType | [ListStyleType | (... & { base?: ListStyleType | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ListStyleType | ... 2 more ... | undefined; }), ListStyleType | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ListStyleTy...",
       "description": "The CSS `list-style-position` property.",
       "required": false
     }

@@ -16,17 +16,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | [AnyString | \"lg\" | \"md\" | \"sm\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; base?: AnyString | \"lg\" | \"md\" | \"sm\" | undefined; ... 4 more ...; xl?: AnyString | ... 3 more ... | undefined; }, AnyString | ... 3 more ... | { ...; }] | { ...; }",
+      "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "AnyString | \"thin\" | \"thick\" | [AnyString | \"thin\" | \"thick\" | { [x: string & {}]: AnyString | \"thin\" | \"thick\" | undefined; base?: AnyString | \"thin\" | \"thick\" | undefined; ... 4 more ...; xl?: AnyString | ... 2 more ... | undefined; }, AnyString | ... 2 more ... | { ...; }] | { ...; }",
+      "type": "\"thin\" | \"thick\" | [\"thin\" | \"thick\" | ({ _peerAccept?: \"thin\" | \"thick\" | [\"thin\" | \"thick\" | (... & { base?: \"thin\" | \"thick\" | [\"thin\" | \"thick\" | (... & ...), \"thin\" | ... 1 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"thin\" | ... 3 more ... | undefined; }), \"thin\" | ... 1 more ... | ...",
       "description": "The variant of the component.",
       "required": false
     },
@@ -113,13 +113,13 @@
       "required": false
     },
     "reverse": {
-      "type": "boolean | [boolean | { [x: string & {}]: boolean | undefined; base?: boolean | undefined; \"2xl\"?: boolean | undefined; lg?: boolean | undefined; md?: boolean | undefined; sm?: boolean | undefined; xl?: boolean | undefined; }, boolean | { ...; }] | { ...; }",
+      "type": "StyleValue<boolean>",
       "defaultValue": "false",
       "description": "Change switch label from right to left.",
       "required": false
     },
     "shape": {
-      "type": "\"circle\" | \"square\" | \"rounded\" | [\"circle\" | \"square\" | \"rounded\" | { [x: string & {}]: \"circle\" | \"square\" | \"rounded\" | undefined; base?: \"circle\" | \"square\" | \"rounded\" | undefined; ... 4 more ...; xl?: \"circle\" | ... 2 more ... | undefined; }, \"circle\" | ... 2 more ... | { ...; }] | { ...; }",
+      "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
       "defaultValue": "circle",
       "description": "The shape of the switch.",
       "required": false

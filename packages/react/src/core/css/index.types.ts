@@ -21,33 +21,53 @@ export type ColorMode = "dark" | "light"
 export type ColorModeWithSystem = "system" | ColorMode
 
 export type ColorModeArray<Y, M extends boolean = true> = M extends true
-  ? [ResponsiveObject<Y, false> | Y, ResponsiveObject<Y, false> | Y]
+  ? [ResponsiveWithConditionObject<Y> | Y, ResponsiveWithConditionObject<Y> | Y]
   : [Y, Y]
 
 export type ResponsiveObject<Y, M extends boolean = true> = M extends true
-  ? { [D in Breakpoint]?: ColorModeArray<Y, false> | Y }
+  ? { [D in Breakpoint]?: ColorModeArray<Y> | Y }
   : { [D in Breakpoint]?: Y }
+
+export type ConditionObject<Y, M extends boolean = true> = M extends true
+  ? {
+      [D in ConditionProperty]?: ColorModeArray<Y> | ResponsiveObject<Y> | Y
+    }
+  : {
+      [D in ConditionProperty]?: Y
+    }
 
 export type ResponsiveWithConditionObject<
   Y,
   M extends boolean = true,
 > = M extends true
-  ? { [D in Breakpoint | ConditionProperty]?: ColorModeArray<Y, false> | Y }
-  : { [D in Breakpoint | ConditionProperty]?: Y }
+  ? ConditionObject<Y> & {
+      [D in Breakpoint]?:
+        | ColorModeArray<Y>
+        | ResponsiveWithConditionObject<Y>
+        | Y
+    }
+  : ConditionObject<Y, false> & { [D in Breakpoint]?: Y }
 
 export type Token<Y, M = unknown> = M extends keyof ThemeTokens
   ? ThemeTokens[M] | Y
   : Y
 
 export type ColorModeValue<Y, M = unknown> = M extends keyof ThemeTokens
-  ? ColorModeArray<ThemeTokens[M] | Y> | ThemeTokens[M] | Y
-  : ColorModeArray<Y> | Y
+  ? ColorModeArray<ThemeTokens[M] | Y, false> | ThemeTokens[M] | Y
+  : ColorModeArray<Y, false> | Y
 
 export type ResponsiveValue<Y, M = unknown> = M extends keyof ThemeTokens
-  ? ResponsiveObject<ThemeTokens[M] | Y> | ThemeTokens[M] | Y
-  : ResponsiveObject<Y> | Y
+  ? ResponsiveObject<ThemeTokens[M] | Y, false> | ThemeTokens[M] | Y
+  : ResponsiveObject<Y, false> | Y
 
-export type StyleValue<Y, M = unknown> = M extends keyof ThemeTokens
+export type StyleValue<Y, M = unknown> =
+  | ColorModeValue<Y, M>
+  | ResponsiveValue<Y, M>
+
+export type StyleValueWithCondition<
+  Y,
+  M = unknown,
+> = M extends keyof ThemeTokens
   ?
       | ColorModeArray<ThemeTokens[M] | Y>
       | ResponsiveWithConditionObject<ThemeTokens[M] | Y>
@@ -57,11 +77,11 @@ export type StyleValue<Y, M = unknown> = M extends keyof ThemeTokens
 
 export type CSSVariable = `--${string}`
 interface CSSVariableProps {
-  [key: CSSVariable]: StyleValue<number | ThemePath> | undefined
+  [key: CSSVariable]: StyleValueWithCondition<number | ThemePath> | undefined
 }
 
 type VendorProps = {
-  [Y in keyof CSS.VendorPropertiesFallback]?: StyleValue<
+  [Y in keyof CSS.VendorPropertiesFallback]?: StyleValueWithCondition<
     AnyString | CSS.VendorPropertiesFallback[Y]
   >
 }

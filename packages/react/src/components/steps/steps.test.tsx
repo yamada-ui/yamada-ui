@@ -68,7 +68,7 @@ describe("<Stepper />", () => {
     expect(Steps.Title.displayName).toBe("StepsTitle")
     expect(Steps.Description.displayName).toBe("StepsDescription")
     expect(Steps.Separator.displayName).toBe("StepsSeparator")
-    expect(Steps.Contents.displayName).toBe("StepsContents")
+    expect(Steps.Contents.name).toBe("StepsContents")
     expect(Steps.Content.displayName).toBe("StepsContent")
     expect(Steps.CompletedContent.displayName).toBe("StepsCompletedContent")
   })
@@ -91,10 +91,10 @@ describe("<Stepper />", () => {
       "ui-steps__content--completed",
     )
     expect(screen.getByRole("button", { name: /Prev/i })).toHaveClass(
-      "ui-steps__prev-trigger",
+      "ui-steps__trigger--prev",
     )
     expect(screen.getByRole("button", { name: /Next/i })).toHaveClass(
-      "ui-steps__next-trigger",
+      "ui-steps__trigger--next",
     )
   })
 

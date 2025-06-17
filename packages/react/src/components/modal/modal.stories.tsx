@@ -203,7 +203,17 @@ export const AnimationScheme: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["scale", "bottom", "left", "right", "top"] as const}>
+        <For
+          each={
+            [
+              "scale",
+              "block-start",
+              "inline-start",
+              "inline-end",
+              "block-end",
+            ] as const
+          }
+        >
           {(animationScheme) => (
             <Button
               key={animationScheme}

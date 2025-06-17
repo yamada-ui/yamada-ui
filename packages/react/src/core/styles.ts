@@ -1,7 +1,7 @@
 import type * as CSS from "csstype"
 import type { AnyString } from "../utils"
 import type { StyleConfigs } from "./config"
-import type { CSSObject, StyleValue } from "./css"
+import type { CSSObject, StyleValueWithCondition } from "./css"
 import type { ColorScheme, ThemeTokens } from "./theme"
 import { transforms } from "./config"
 import { pipe } from "./config/utils"
@@ -2277,19 +2277,19 @@ export interface StyleProps {
    *
    * This will apply styles defined in `theme.styles.mdx.h1`
    */
-  apply?: StyleValue<AnyString, "apply">
+  apply?: StyleValueWithCondition<AnyString, "apply">
   /**
    * Apply layer styles defined in `theme.layerStyles`.
    */
-  layerStyle?: StyleValue<AnyString, "layerStyles">
+  layerStyle?: StyleValueWithCondition<AnyString, "layerStyles">
   /**
    * Apply text styles defined in `theme.textStyles`.
    */
-  textStyle?: StyleValue<AnyString, "textStyles">
+  textStyle?: StyleValueWithCondition<AnyString, "textStyles">
   /**
    * Set color scheme variables.
    */
-  colorScheme?: StyleValue<ColorScheme>
+  colorScheme?: StyleValueWithCondition<ColorScheme>
   /**
    * ### accent-color
    *
@@ -2299,7 +2299,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/accent-color
    */
-  accent?: StyleValue<CSS.Property.AccentColor, "colors">
+  accent?: StyleValueWithCondition<CSS.Property.AccentColor, "colors">
   /**
    * ### accent-color
    *
@@ -2309,7 +2309,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/accent-color
    */
-  accentColor?: StyleValue<CSS.Property.AccentColor, "colors">
+  accentColor?: StyleValueWithCondition<CSS.Property.AccentColor, "colors">
   /**
    * ### align-content
    *
@@ -2321,7 +2321,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-content
    */
-  alignContent?: StyleValue<CSS.Property.AlignContent>
+  alignContent?: StyleValueWithCondition<CSS.Property.AlignContent>
   /**
    * ### align-items
    *
@@ -2333,7 +2333,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-items
    */
-  alignItems?: StyleValue<CSS.Property.AlignItems>
+  alignItems?: StyleValueWithCondition<CSS.Property.AlignItems>
   /**
    * ### alignment-baseline
    *
@@ -2343,7 +2343,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/alignment-baseline
    */
-  alignmentBaseline?: StyleValue<CSS.Property.AlignmentBaseline>
+  alignmentBaseline?: StyleValueWithCondition<CSS.Property.AlignmentBaseline>
   /**
    * ### align-self
    *
@@ -2355,7 +2355,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/align-self
    */
-  alignSelf?: StyleValue<CSS.Property.AlignSelf>
+  alignSelf?: StyleValueWithCondition<CSS.Property.AlignSelf>
   /**
    * ### all
    *
@@ -2367,7 +2367,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/all
    */
-  all?: StyleValue<CSS.Globals>
+  all?: StyleValueWithCondition<CSS.Globals>
   /**
    * ### anchor-name
    *
@@ -2379,7 +2379,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  anchorName?: StyleValue<AnyString>
+  anchorName?: StyleValueWithCondition<AnyString>
   /**
    * ### anchor-scope
    *
@@ -2391,7 +2391,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  anchorScope?: StyleValue<AnyString>
+  anchorScope?: StyleValueWithCondition<AnyString>
   /**
    * ### animation
    *
@@ -2403,7 +2403,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation
    */
-  animation?: StyleValue<CSS.Property.Animation, "animations">
+  animation?: StyleValueWithCondition<CSS.Property.Animation, "animations">
   /**
    * ### animation-composition
    *
@@ -2414,7 +2414,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-composition
    */
-  animationComposition?: StyleValue<CSS.Property.AnimationComposition>
+  animationComposition?: StyleValueWithCondition<CSS.Property.AnimationComposition>
   /**
    * ### animation-delay
    *
@@ -2426,7 +2426,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-delay
    */
-  animationDelay?: StyleValue<CSS.Property.AnimationDelay>
+  animationDelay?: StyleValueWithCondition<CSS.Property.AnimationDelay>
   /**
    * ### animation-direction
    *
@@ -2438,7 +2438,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-direction
    */
-  animationDirection?: StyleValue<CSS.Property.AnimationDirection>
+  animationDirection?: StyleValueWithCondition<CSS.Property.AnimationDirection>
   /**
    * ### animation-duration
    *
@@ -2450,7 +2450,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-duration
    */
-  animationDuration?: StyleValue<CSS.Property.AnimationDuration, "durations">
+  animationDuration?: StyleValueWithCondition<
+    CSS.Property.AnimationDuration,
+    "durations"
+  >
   /**
    * ### animation-fill-mode
    *
@@ -2462,7 +2465,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-fill-mode
    */
-  animationFillMode?: StyleValue<CSS.Property.AnimationFillMode>
+  animationFillMode?: StyleValueWithCondition<CSS.Property.AnimationFillMode>
   /**
    * ### animation-iteration-count
    *
@@ -2474,7 +2477,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-iteration-count
    */
-  animationIterationCount?: StyleValue<CSS.Property.AnimationIterationCount>
+  animationIterationCount?: StyleValueWithCondition<CSS.Property.AnimationIterationCount>
   /**
    * ### animation-name
    *
@@ -2486,7 +2489,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-name
    */
-  animationName?: StyleValue<CSS.Property.AnimationName, "keyframes">
+  animationName?: StyleValueWithCondition<
+    CSS.Property.AnimationName,
+    "keyframes"
+  >
   /**
    * ### animation-play-state
    *
@@ -2498,7 +2504,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-play-state
    */
-  animationPlayState?: StyleValue<CSS.Property.AnimationPlayState>
+  animationPlayState?: StyleValueWithCondition<CSS.Property.AnimationPlayState>
   /**
    * ### animation-range
    *
@@ -2510,7 +2516,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationRange?: StyleValue<CSS.Property.AnimationRange>
+  animationRange?: StyleValueWithCondition<CSS.Property.AnimationRange>
   /**
    * ### animation-range-end
    *
@@ -2522,7 +2528,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationRangeEnd?: StyleValue<CSS.Property.AnimationRangeEnd>
+  animationRangeEnd?: StyleValueWithCondition<CSS.Property.AnimationRangeEnd>
   /**
    * ### animation-range-start
    *
@@ -2534,7 +2540,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationRangeStart?: StyleValue<CSS.Property.AnimationRangeStart>
+  animationRangeStart?: StyleValueWithCondition<CSS.Property.AnimationRangeStart>
   /**
    * ### animation-timeline
    *
@@ -2546,7 +2552,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  animationTimeline?: StyleValue<CSS.Property.AnimationTimeline>
+  animationTimeline?: StyleValueWithCondition<CSS.Property.AnimationTimeline>
   /**
    * ### animation-timing-function
    *
@@ -2558,7 +2564,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/animation-timing-function
    */
-  animationTimingFunction?: StyleValue<
+  animationTimingFunction?: StyleValueWithCondition<
     CSS.Property.AnimationTimingFunction,
     "easings"
   >
@@ -2573,7 +2579,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/appearance
    */
-  appearance?: StyleValue<CSS.Property.Appearance>
+  appearance?: StyleValueWithCondition<CSS.Property.Appearance>
   /**
    * ### aspect-ratio
    *
@@ -2585,23 +2591,26 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/aspect-ratio
    */
-  aspectRatio?: StyleValue<CSS.Property.AspectRatio, "aspectRatios">
+  aspectRatio?: StyleValueWithCondition<
+    CSS.Property.AspectRatio,
+    "aspectRatios"
+  >
   /**
    * Sets the value of `--backdrop-blur`.
    */
-  backdropBlur?: StyleValue<AnyString, "blurs">
+  backdropBlur?: StyleValueWithCondition<AnyString, "blurs">
   /**
    * Sets the value of `--backdrop-brightness`.
    */
-  backdropBrightness?: StyleValue<AnyString>
+  backdropBrightness?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-contrast`.
    */
-  backdropContrast?: StyleValue<AnyString>
+  backdropContrast?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-drop-shadow`.
    */
-  backdropDropShadow?: StyleValue<AnyString, "shadows">
+  backdropDropShadow?: StyleValueWithCondition<AnyString, "shadows">
   /**
    * ### backdrop-filter
    *
@@ -2612,27 +2621,27 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/backdrop-filter
    */
-  backdropFilter?: StyleValue<CSS.Property.BackdropFilter>
+  backdropFilter?: StyleValueWithCondition<CSS.Property.BackdropFilter>
   /**
    * Sets the value of `--backdrop-grayscale`.
    */
-  backdropGrayscale?: StyleValue<AnyString>
+  backdropGrayscale?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-hue-rotate`.
    */
-  backdropHueRotate?: StyleValue<AnyString>
+  backdropHueRotate?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-invert`.
    */
-  backdropInvert?: StyleValue<AnyString>
+  backdropInvert?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-saturate`.
    */
-  backdropSaturate?: StyleValue<AnyString>
+  backdropSaturate?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--backdrop-sepia`.
    */
-  backdropSepia?: StyleValue<AnyString>
+  backdropSepia?: StyleValueWithCondition<AnyString>
   /**
    * ### backface-visibility
    *
@@ -2644,7 +2653,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/backface-visibility
    */
-  backfaceVisibility?: StyleValue<
+  backfaceVisibility?: StyleValueWithCondition<
     CSS.Property.BackfaceVisibility | number,
     "sizes"
   >
@@ -2659,7 +2668,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background
    */
-  background?: StyleValue<CSS.Property.Background, "colors">
+  background?: StyleValueWithCondition<CSS.Property.Background, "colors">
   /**
    * ### background-attachment
    *
@@ -2671,7 +2680,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-attachment
    */
-  backgroundAttachment?: StyleValue<CSS.Property.BackgroundAttachment>
+  backgroundAttachment?: StyleValueWithCondition<CSS.Property.BackgroundAttachment>
   /**
    * ### background-blend-mode
    *
@@ -2683,7 +2692,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
    */
-  backgroundBlendMode?: StyleValue<CSS.Property.BackgroundBlendMode>
+  backgroundBlendMode?: StyleValueWithCondition<CSS.Property.BackgroundBlendMode>
   /**
    * ### background-clip
    *
@@ -2695,7 +2704,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-clip
    */
-  backgroundClip?: StyleValue<CSS.Property.BackgroundClip>
+  backgroundClip?: StyleValueWithCondition<CSS.Property.BackgroundClip>
   /**
    * ### background-color
    *
@@ -2707,7 +2716,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-color
    */
-  backgroundColor?: StyleValue<CSS.Property.BackgroundColor, "colors">
+  backgroundColor?: StyleValueWithCondition<
+    CSS.Property.BackgroundColor,
+    "colors"
+  >
   /**
    * ### background-image
    *
@@ -2719,7 +2731,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  backgroundImage?: StyleValue<CSS.Property.BackgroundImage, "gradients">
+  backgroundImage?: StyleValueWithCondition<
+    CSS.Property.BackgroundImage,
+    "gradients"
+  >
   /**
    * ### background-origin
    *
@@ -2731,7 +2746,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-origin
    */
-  backgroundOrigin?: StyleValue<CSS.Property.BackgroundOrigin>
+  backgroundOrigin?: StyleValueWithCondition<CSS.Property.BackgroundOrigin>
   /**
    * ### background-position
    *
@@ -2743,7 +2758,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position
    */
-  backgroundPosition?: StyleValue<CSS.Property.BackgroundPosition>
+  backgroundPosition?: StyleValueWithCondition<CSS.Property.BackgroundPosition>
   /**
    * ### background-position-x
    *
@@ -2755,7 +2770,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
    */
-  backgroundPositionX?: StyleValue<CSS.Property.BackgroundPositionX>
+  backgroundPositionX?: StyleValueWithCondition<CSS.Property.BackgroundPositionX>
   /**
    * ### background-position-y
    *
@@ -2767,7 +2782,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
-  backgroundPositionY?: StyleValue<CSS.Property.BackgroundPositionY>
+  backgroundPositionY?: StyleValueWithCondition<CSS.Property.BackgroundPositionY>
   /**
    * ### background-repeat
    *
@@ -2779,7 +2794,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-repeat
    */
-  backgroundRepeat?: StyleValue<CSS.Property.BackgroundRepeat>
+  backgroundRepeat?: StyleValueWithCondition<CSS.Property.BackgroundRepeat>
   /**
    * ### background-size
    *
@@ -2791,7 +2806,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-size
    */
-  backgroundSize?: StyleValue<CSS.Property.BackgroundSize>
+  backgroundSize?: StyleValueWithCondition<CSS.Property.BackgroundSize>
   /**
    * ### baseline-shift
    *
@@ -2801,7 +2816,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-inline/#baseline-shift-property
    */
-  baselineShift?: StyleValue<CSS.Property.BaselineShift>
+  baselineShift?: StyleValueWithCondition<CSS.Property.BaselineShift>
   /**
    * ### baseline-source
    *
@@ -2811,7 +2826,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-inline/#baseline-source
    */
-  baselineSource?: StyleValue<AnyString>
+  baselineSource?: StyleValueWithCondition<AnyString>
   /**
    * ### background
    *
@@ -2823,7 +2838,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background
    */
-  bg?: StyleValue<CSS.Property.Background, "colors">
+  bg?: StyleValueWithCondition<CSS.Property.Background, "colors">
   /**
    * ### background-attachment
    *
@@ -2835,7 +2850,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-attachment
    */
-  bgAttachment?: StyleValue<CSS.Property.BackgroundAttachment>
+  bgAttachment?: StyleValueWithCondition<CSS.Property.BackgroundAttachment>
   /**
    * ### background-blend-mode
    *
@@ -2847,7 +2862,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-blend-mode
    */
-  bgBlendMode?: StyleValue<CSS.Property.BackgroundBlendMode>
+  bgBlendMode?: StyleValueWithCondition<CSS.Property.BackgroundBlendMode>
   /**
    * ### background-clip
    *
@@ -2859,7 +2874,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-clip
    */
-  bgClip?: StyleValue<CSS.Property.BackgroundClip>
+  bgClip?: StyleValueWithCondition<CSS.Property.BackgroundClip>
   /**
    * ### background-color
    *
@@ -2871,7 +2886,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-color
    */
-  bgColor?: StyleValue<CSS.Property.BackgroundColor, "colors">
+  bgColor?: StyleValueWithCondition<CSS.Property.BackgroundColor, "colors">
   /**
    * ### background-image
    *
@@ -2883,7 +2898,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  bgGradient?: StyleValue<CSS.Property.BackgroundImage, "gradients">
+  bgGradient?: StyleValueWithCondition<
+    CSS.Property.BackgroundImage,
+    "gradients"
+  >
   /**
    * ### background-image
    *
@@ -2895,7 +2913,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  bgImage?: StyleValue<CSS.Property.BackgroundImage, "gradients">
+  bgImage?: StyleValueWithCondition<CSS.Property.BackgroundImage, "gradients">
   /**
    * ### background-image
    *
@@ -2907,7 +2925,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-image
    */
-  bgImg?: StyleValue<CSS.Property.BackgroundImage, "gradients">
+  bgImg?: StyleValueWithCondition<CSS.Property.BackgroundImage, "gradients">
   /**
    * ### background-origin
    *
@@ -2919,7 +2937,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-origin
    */
-  bgOrigin?: StyleValue<CSS.Property.BackgroundOrigin>
+  bgOrigin?: StyleValueWithCondition<CSS.Property.BackgroundOrigin>
   /**
    * ### background-position
    *
@@ -2931,7 +2949,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position
    */
-  bgPosition?: StyleValue<CSS.Property.BackgroundPosition>
+  bgPosition?: StyleValueWithCondition<CSS.Property.BackgroundPosition>
   /**
    * ### background-position-x
    *
@@ -2943,7 +2961,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
    */
-  bgPositionX?: StyleValue<CSS.Property.BackgroundPositionX>
+  bgPositionX?: StyleValueWithCondition<CSS.Property.BackgroundPositionX>
   /**
    * ### background-position-y
    *
@@ -2955,7 +2973,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
-  bgPositionY?: StyleValue<CSS.Property.BackgroundPositionY>
+  bgPositionY?: StyleValueWithCondition<CSS.Property.BackgroundPositionY>
   /**
    * ### background-position-x
    *
@@ -2967,7 +2985,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-x
    */
-  bgPosX?: StyleValue<CSS.Property.BackgroundPositionX>
+  bgPosX?: StyleValueWithCondition<CSS.Property.BackgroundPositionX>
   /**
    * ### background-position-y
    *
@@ -2979,7 +2997,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-position-y
    */
-  bgPosY?: StyleValue<CSS.Property.BackgroundPositionY>
+  bgPosY?: StyleValueWithCondition<CSS.Property.BackgroundPositionY>
   /**
    * ### background-repeat
    *
@@ -2991,7 +3009,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-repeat
    */
-  bgRepeat?: StyleValue<CSS.Property.BackgroundRepeat>
+  bgRepeat?: StyleValueWithCondition<CSS.Property.BackgroundRepeat>
   /**
    * ### background-size
    *
@@ -3003,7 +3021,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/background-size
    */
-  bgSize?: StyleValue<CSS.Property.BackgroundSize>
+  bgSize?: StyleValueWithCondition<CSS.Property.BackgroundSize>
   /**
    * ### mix-blend-mode
    *
@@ -3015,7 +3033,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
    */
-  blendMode?: StyleValue<CSS.Property.MixBlendMode>
+  blendMode?: StyleValueWithCondition<CSS.Property.MixBlendMode>
   /**
    * ### block-size
    *
@@ -3027,11 +3045,11 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/block-size
    */
-  blockSize?: StyleValue<CSS.Property.BlockSize | number, "sizes">
+  blockSize?: StyleValueWithCondition<CSS.Property.BlockSize | number, "sizes">
   /**
    * Sets the value of `--blur`.
    */
-  blur?: StyleValue<AnyString, "blurs">
+  blur?: StyleValueWithCondition<AnyString, "blurs">
   /**
    * ### border
    *
@@ -3043,7 +3061,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border
    */
-  border?: StyleValue<CSS.Property.Border | number, "borders">
+  border?: StyleValueWithCondition<CSS.Property.Border | number, "borders">
   /**
    * ### border-block
    *
@@ -3055,7 +3073,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block
    */
-  borderBlock?: StyleValue<CSS.Property.BorderBlock | number, "borders">
+  borderBlock?: StyleValueWithCondition<
+    CSS.Property.BorderBlock | number,
+    "borders"
+  >
   /**
    * ### border-block-color
    *
@@ -3067,7 +3088,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-color
    */
-  borderBlockColor?: StyleValue<CSS.Property.BorderBlockColor, "colors">
+  borderBlockColor?: StyleValueWithCondition<
+    CSS.Property.BorderBlockColor,
+    "colors"
+  >
   /**
    * ### border-block-end
    *
@@ -3079,7 +3103,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end
    */
-  borderBlockEnd?: StyleValue<CSS.Property.BorderBlockEnd | number, "borders">
+  borderBlockEnd?: StyleValueWithCondition<
+    CSS.Property.BorderBlockEnd | number,
+    "borders"
+  >
   /**
    * ### border-block-end-color
    *
@@ -3091,7 +3118,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-color
    */
-  borderBlockEndColor?: StyleValue<CSS.Property.BorderBlockEndColor, "colors">
+  borderBlockEndColor?: StyleValueWithCondition<
+    CSS.Property.BorderBlockEndColor,
+    "colors"
+  >
   /**
    * ### border-block-end-style
    *
@@ -3103,7 +3133,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-style
    */
-  borderBlockEndStyle?: StyleValue<CSS.Property.BorderBlockEndStyle>
+  borderBlockEndStyle?: StyleValueWithCondition<CSS.Property.BorderBlockEndStyle>
   /**
    * ### border-block-end-width
    *
@@ -3115,7 +3145,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-end-width
    */
-  borderBlockEndWidth?: StyleValue<CSS.Property.BorderBlockEndWidth | number>
+  borderBlockEndWidth?: StyleValueWithCondition<
+    CSS.Property.BorderBlockEndWidth | number
+  >
   /**
    * ### border-block-start
    *
@@ -3127,7 +3159,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start
    */
-  borderBlockStart?: StyleValue<
+  borderBlockStart?: StyleValueWithCondition<
     CSS.Property.BorderBlockStart | number,
     "borders"
   >
@@ -3142,7 +3174,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-color
    */
-  borderBlockStartColor?: StyleValue<
+  borderBlockStartColor?: StyleValueWithCondition<
     CSS.Property.BorderBlockStartColor,
     "colors"
   >
@@ -3157,7 +3189,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-style
    */
-  borderBlockStartStyle?: StyleValue<CSS.Property.BorderBlockStartStyle>
+  borderBlockStartStyle?: StyleValueWithCondition<CSS.Property.BorderBlockStartStyle>
   /**
    * ### border-block-start-width
    *
@@ -3169,7 +3201,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-start-width
    */
-  borderBlockStartWidth?: StyleValue<
+  borderBlockStartWidth?: StyleValueWithCondition<
     CSS.Property.BorderBlockStartWidth | number
   >
   /**
@@ -3183,7 +3215,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-style
    */
-  borderBlockStyle?: StyleValue<CSS.Property.BorderBlockStyle>
+  borderBlockStyle?: StyleValueWithCondition<CSS.Property.BorderBlockStyle>
   /**
    * ### border-block-width
    *
@@ -3195,7 +3227,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-block-width
    */
-  borderBlockWidth?: StyleValue<CSS.Property.BorderBlockWidth | number>
+  borderBlockWidth?: StyleValueWithCondition<
+    CSS.Property.BorderBlockWidth | number
+  >
   /**
    * ### border-bottom
    *
@@ -3207,7 +3241,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom
    */
-  borderBottom?: StyleValue<CSS.Property.BorderBottom | number, "borders">
+  borderBottom?: StyleValueWithCondition<
+    CSS.Property.BorderBottom | number,
+    "borders"
+  >
   /**
    * ### border-bottom-color
    *
@@ -3219,7 +3256,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-color
    */
-  borderBottomColor?: StyleValue<CSS.Property.BorderBottomColor, "colors">
+  borderBottomColor?: StyleValueWithCondition<
+    CSS.Property.BorderBottomColor,
+    "colors"
+  >
   /**
    * ### border-end-end-radius
    *
@@ -3231,7 +3271,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
    */
-  borderBottomEndRadius?: StyleValue<
+  borderBottomEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndEndRadius | number,
     "radii"
   >
@@ -3246,7 +3286,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
    */
-  borderBottomLeftRadius?: StyleValue<
+  borderBottomLeftRadius?: StyleValueWithCondition<
     CSS.Property.BorderBottomLeftRadius | number,
     "radii"
   >
@@ -3273,7 +3313,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  borderBottomRadius?: StyleValue<
+  borderBottomRadius?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
@@ -3290,7 +3330,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  borderBottomRightRadius?: StyleValue<
+  borderBottomRightRadius?: StyleValueWithCondition<
     CSS.Property.BorderBottomRightRadius | number,
     "radii"
   >
@@ -3305,7 +3345,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderBottomStartRadius?: StyleValue<
+  borderBottomStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
@@ -3320,7 +3360,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-style
    */
-  borderBottomStyle?: StyleValue<CSS.Property.BorderBottomStyle>
+  borderBottomStyle?: StyleValueWithCondition<CSS.Property.BorderBottomStyle>
   /**
    * ### border-bottom-width
    *
@@ -3332,7 +3372,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-width
    */
-  borderBottomWidth?: StyleValue<CSS.Property.BorderBottomWidth | number>
+  borderBottomWidth?: StyleValueWithCondition<
+    CSS.Property.BorderBottomWidth | number
+  >
   /**
    * ### border-collapse
    *
@@ -3344,7 +3386,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-collapse
    */
-  borderCollapse?: StyleValue<CSS.Property.BorderCollapse>
+  borderCollapse?: StyleValueWithCondition<CSS.Property.BorderCollapse>
   /**
    * ### border-color
    *
@@ -3356,7 +3398,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-color
    */
-  borderColor?: StyleValue<CSS.Property.BorderColor, "colors">
+  borderColor?: StyleValueWithCondition<CSS.Property.BorderColor, "colors">
   /**
    * ### border-inline-end
    *
@@ -3368,7 +3410,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end
    */
-  borderEnd?: StyleValue<CSS.Property.BorderInlineEnd | number, "borders">
+  borderEnd?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEnd | number,
+    "borders"
+  >
   /**
    * ### border-inline-end-color
    *
@@ -3380,7 +3425,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
    */
-  borderEndColor?: StyleValue<CSS.Property.BorderInlineEndColor, "colors">
+  borderEndColor?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEndColor,
+    "colors"
+  >
   /**
    * ### border-end-end-radius
    *
@@ -3392,7 +3440,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
    */
-  borderEndEndRadius?: StyleValue<
+  borderEndEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndEndRadius | number,
     "radii"
   >
@@ -3419,7 +3467,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderEndRadius?: StyleValue<
+  borderEndRadius?: StyleValueWithCondition<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -3436,7 +3484,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderEndStartRadius?: StyleValue<
+  borderEndStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
@@ -3451,7 +3499,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
    */
-  borderEndStyle?: StyleValue<CSS.Property.BorderInlineEndStyle>
+  borderEndStyle?: StyleValueWithCondition<CSS.Property.BorderInlineEndStyle>
   /**
    * ### border-inline-end-width
    *
@@ -3463,7 +3511,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
    */
-  borderEndWidth?: StyleValue<CSS.Property.BorderInlineEndWidth | number>
+  borderEndWidth?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEndWidth | number
+  >
   /**
    * ### border-image
    *
@@ -3475,7 +3525,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image
    */
-  borderImage?: StyleValue<CSS.Property.BorderImage | number, "borders">
+  borderImage?: StyleValueWithCondition<
+    CSS.Property.BorderImage | number,
+    "borders"
+  >
   /**
    * ### border-image-outset
    *
@@ -3487,7 +3540,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-outset
    */
-  borderImageOutset?: StyleValue<CSS.Property.BorderImageOutset>
+  borderImageOutset?: StyleValueWithCondition<CSS.Property.BorderImageOutset>
   /**
    * ### border-image-repeat
    *
@@ -3499,7 +3552,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-repeat
    */
-  borderImageRepeat?: StyleValue<CSS.Property.BorderImageRepeat>
+  borderImageRepeat?: StyleValueWithCondition<CSS.Property.BorderImageRepeat>
   /**
    * ### border-image-slice
    *
@@ -3511,7 +3564,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-slice
    */
-  borderImageSlice?: StyleValue<CSS.Property.BorderImageSlice>
+  borderImageSlice?: StyleValueWithCondition<CSS.Property.BorderImageSlice>
   /**
    * ### border-image-source
    *
@@ -3523,7 +3576,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-source
    */
-  borderImageSource?: StyleValue<CSS.Property.BorderImageSource, "gradients">
+  borderImageSource?: StyleValueWithCondition<
+    CSS.Property.BorderImageSource,
+    "gradients"
+  >
   /**
    * ### border-image-width
    *
@@ -3535,7 +3591,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-image-width
    */
-  borderImageWidth?: StyleValue<CSS.Property.BorderImageWidth | number>
+  borderImageWidth?: StyleValueWithCondition<
+    CSS.Property.BorderImageWidth | number
+  >
   /**
    * ### border-inline
    *
@@ -3547,7 +3605,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline
    */
-  borderInline?: StyleValue<CSS.Property.BorderInline | number, "borders">
+  borderInline?: StyleValueWithCondition<
+    CSS.Property.BorderInline | number,
+    "borders"
+  >
   /**
    * ### border-inline-color
    *
@@ -3559,7 +3620,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-color
    */
-  borderInlineColor?: StyleValue<CSS.Property.BorderInlineColor, "colors">
+  borderInlineColor?: StyleValueWithCondition<
+    CSS.Property.BorderInlineColor,
+    "colors"
+  >
   /**
    * ### border-inline-end
    *
@@ -3571,7 +3635,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end
    */
-  borderInlineEnd?: StyleValue<CSS.Property.BorderInlineEnd | number, "borders">
+  borderInlineEnd?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEnd | number,
+    "borders"
+  >
   /**
    * ### border-inline-end-color
    *
@@ -3583,7 +3650,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-color
    */
-  borderInlineEndColor?: StyleValue<CSS.Property.BorderInlineEndColor, "colors">
+  borderInlineEndColor?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEndColor,
+    "colors"
+  >
   /**
    * ### border-end-end-radius
    *
@@ -3607,7 +3677,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  borderInlineEndRadius?: StyleValue<
+  borderInlineEndRadius?: StyleValueWithCondition<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -3624,7 +3694,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-style
    */
-  borderInlineEndStyle?: StyleValue<CSS.Property.BorderInlineEndStyle>
+  borderInlineEndStyle?: StyleValueWithCondition<CSS.Property.BorderInlineEndStyle>
   /**
    * ### border-inline-end-width
    *
@@ -3636,7 +3706,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-end-width
    */
-  borderInlineEndWidth?: StyleValue<CSS.Property.BorderInlineEndWidth | number>
+  borderInlineEndWidth?: StyleValueWithCondition<
+    CSS.Property.BorderInlineEndWidth | number
+  >
   /**
    * ### border-inline-start
    *
@@ -3648,7 +3720,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start
    */
-  borderInlineStart?: StyleValue<
+  borderInlineStart?: StyleValueWithCondition<
     CSS.Property.BorderInlineStart | number,
     "borders"
   >
@@ -3663,7 +3735,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
    */
-  borderInlineStartColor?: StyleValue<
+  borderInlineStartColor?: StyleValueWithCondition<
     CSS.Property.BorderInlineStartColor,
     "colors"
   >
@@ -3690,7 +3762,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderInlineStartRadius?: StyleValue<
+  borderInlineStartRadius?: StyleValueWithCondition<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
@@ -3707,7 +3779,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
    */
-  borderInlineStartStyle?: StyleValue<CSS.Property.BorderInlineStartStyle>
+  borderInlineStartStyle?: StyleValueWithCondition<CSS.Property.BorderInlineStartStyle>
   /**
    * ### border-inline-start-width
    *
@@ -3719,7 +3791,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
    */
-  borderInlineStartWidth?: StyleValue<
+  borderInlineStartWidth?: StyleValueWithCondition<
     CSS.Property.BorderInlineStartWidth | number
   >
   /**
@@ -3733,7 +3805,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-style
    */
-  borderInlineStyle?: StyleValue<CSS.Property.BorderInlineStyle>
+  borderInlineStyle?: StyleValueWithCondition<CSS.Property.BorderInlineStyle>
   /**
    * ### border-inline-width
    *
@@ -3745,7 +3817,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-width
    */
-  borderInlineWidth?: StyleValue<CSS.Property.BorderInlineWidth | number>
+  borderInlineWidth?: StyleValueWithCondition<
+    CSS.Property.BorderInlineWidth | number
+  >
   /**
    * ### border-left
    *
@@ -3757,7 +3831,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left
    */
-  borderLeft?: StyleValue<CSS.Property.BorderLeft | number, "borders">
+  borderLeft?: StyleValueWithCondition<
+    CSS.Property.BorderLeft | number,
+    "borders"
+  >
   /**
    * ### border-left-color
    *
@@ -3769,7 +3846,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left-color
    */
-  borderLeftColor?: StyleValue<CSS.Property.BorderLeftColor, "colors">
+  borderLeftColor?: StyleValueWithCondition<
+    CSS.Property.BorderLeftColor,
+    "colors"
+  >
   /**
    * ### border-bottom-left-radius
    *
@@ -3793,7 +3873,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  borderLeftRadius?: StyleValue<
+  borderLeftRadius?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
     | number,
@@ -3810,7 +3890,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left-style
    */
-  borderLeftStyle?: StyleValue<CSS.Property.BorderLeftStyle>
+  borderLeftStyle?: StyleValueWithCondition<CSS.Property.BorderLeftStyle>
   /**
    * ### border-left-width
    *
@@ -3822,7 +3902,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-left-width
    */
-  borderLeftWidth?: StyleValue<CSS.Property.BorderLeftWidth | number>
+  borderLeftWidth?: StyleValueWithCondition<
+    CSS.Property.BorderLeftWidth | number
+  >
   /**
    * ### border-radius
    *
@@ -3834,7 +3916,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
    */
-  borderRadius?: StyleValue<CSS.Property.BorderRadius | number, "radii">
+  borderRadius?: StyleValueWithCondition<
+    CSS.Property.BorderRadius | number,
+    "radii"
+  >
   /**
    * ### border-right
    *
@@ -3846,7 +3931,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right
    */
-  borderRight?: StyleValue<CSS.Property.BorderRight | number, "borders">
+  borderRight?: StyleValueWithCondition<
+    CSS.Property.BorderRight | number,
+    "borders"
+  >
   /**
    * ### border-right-color
    *
@@ -3858,7 +3946,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right-color
    */
-  borderRightColor?: StyleValue<CSS.Property.BorderRightColor, "colors">
+  borderRightColor?: StyleValueWithCondition<
+    CSS.Property.BorderRightColor,
+    "colors"
+  >
   /**
    * ### border-bottom-right-radius
    *
@@ -3882,7 +3973,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderRightRadius?: StyleValue<
+  borderRightRadius?: StyleValueWithCondition<
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -3899,7 +3990,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right-style
    */
-  borderRightStyle?: StyleValue<CSS.Property.BorderRightStyle>
+  borderRightStyle?: StyleValueWithCondition<CSS.Property.BorderRightStyle>
   /**
    * ### border-right-width
    *
@@ -3911,7 +4002,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right-width
    */
-  borderRightWidth?: StyleValue<CSS.Property.BorderRightWidth | number>
+  borderRightWidth?: StyleValueWithCondition<
+    CSS.Property.BorderRightWidth | number
+  >
   /**
    * ### border-spacing
    *
@@ -3923,7 +4016,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-spacing
    */
-  borderSpacing?: StyleValue<CSS.Property.BorderSpacing>
+  borderSpacing?: StyleValueWithCondition<CSS.Property.BorderSpacing>
   /**
    * ### border-inline-start
    *
@@ -3935,7 +4028,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start
    */
-  borderStart?: StyleValue<CSS.Property.BorderInlineStart | number, "borders">
+  borderStart?: StyleValueWithCondition<
+    CSS.Property.BorderInlineStart | number,
+    "borders"
+  >
   /**
    * ### border-inline-start-color
    *
@@ -3947,7 +4043,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-color
    */
-  borderStartColor?: StyleValue<CSS.Property.BorderInlineStartColor, "colors">
+  borderStartColor?: StyleValueWithCondition<
+    CSS.Property.BorderInlineStartColor,
+    "colors"
+  >
   /**
    * ### border-start-end-radius
    *
@@ -3959,7 +4058,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  borderStartEndRadius?: StyleValue<
+  borderStartEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartEndRadius | number,
     "radii"
   >
@@ -3986,7 +4085,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderStartRadius?: StyleValue<
+  borderStartRadius?: StyleValueWithCondition<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
@@ -4003,7 +4102,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderStartStartRadius?: StyleValue<
+  borderStartStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartStartRadius | number,
     "radii"
   >
@@ -4018,7 +4117,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-style
    */
-  borderStartStyle?: StyleValue<CSS.Property.BorderInlineStartStyle>
+  borderStartStyle?: StyleValueWithCondition<CSS.Property.BorderInlineStartStyle>
   /**
    * ### border-inline-start-width
    *
@@ -4030,7 +4129,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-inline-start-width
    */
-  borderStartWidth?: StyleValue<CSS.Property.BorderInlineStartWidth | number>
+  borderStartWidth?: StyleValueWithCondition<
+    CSS.Property.BorderInlineStartWidth | number
+  >
   /**
    * ### border-style
    *
@@ -4042,7 +4143,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-style
    */
-  borderStyle?: StyleValue<CSS.Property.BorderStyle>
+  borderStyle?: StyleValueWithCondition<CSS.Property.BorderStyle>
   /**
    * ### border-top
    *
@@ -4054,7 +4155,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top
    */
-  borderTop?: StyleValue<CSS.Property.BorderTop | number, "borders">
+  borderTop?: StyleValueWithCondition<
+    CSS.Property.BorderTop | number,
+    "borders"
+  >
   /**
    * ### border-top-color
    *
@@ -4066,7 +4170,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-color
    */
-  borderTopColor?: StyleValue<CSS.Property.BorderTopColor, "colors">
+  borderTopColor?: StyleValueWithCondition<
+    CSS.Property.BorderTopColor,
+    "colors"
+  >
   /**
    * ### border-start-end-radius
    *
@@ -4078,7 +4185,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  borderTopEndRadius?: StyleValue<
+  borderTopEndRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartEndRadius | number,
     "radii"
   >
@@ -4093,7 +4200,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  borderTopLeftRadius?: StyleValue<
+  borderTopLeftRadius?: StyleValueWithCondition<
     CSS.Property.BorderTopLeftRadius | number,
     "radii"
   >
@@ -4120,7 +4227,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderTopRadius?: StyleValue<
+  borderTopRadius?: StyleValueWithCondition<
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -4137,7 +4244,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  borderTopRightRadius?: StyleValue<
+  borderTopRightRadius?: StyleValueWithCondition<
     CSS.Property.BorderTopRightRadius | number,
     "radii"
   >
@@ -4152,7 +4259,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  borderTopStartRadius?: StyleValue<
+  borderTopStartRadius?: StyleValueWithCondition<
     CSS.Property.BorderStartStartRadius | number,
     "radii"
   >
@@ -4167,7 +4274,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-style
    */
-  borderTopStyle?: StyleValue<CSS.Property.BorderTopStyle>
+  borderTopStyle?: StyleValueWithCondition<CSS.Property.BorderTopStyle>
   /**
    * ### border-top-width
    *
@@ -4179,7 +4286,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-width
    */
-  borderTopWidth?: StyleValue<CSS.Property.BorderTopWidth | number>
+  borderTopWidth?: StyleValueWithCondition<CSS.Property.BorderTopWidth | number>
   /**
    * ### border-width
    *
@@ -4191,7 +4298,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-width
    */
-  borderWidth?: StyleValue<CSS.Property.BorderWidth | number>
+  borderWidth?: StyleValueWithCondition<CSS.Property.BorderWidth | number>
   /**
    * ### border-left
    *
@@ -4215,7 +4322,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-right
    */
-  borderX?: StyleValue<
+  borderX?: StyleValueWithCondition<
     CSS.Property.BorderLeft | CSS.Property.BorderRight | number,
     "borders"
   >
@@ -4242,7 +4349,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top
    */
-  borderY?: StyleValue<
+  borderY?: StyleValueWithCondition<
     CSS.Property.BorderBottom | CSS.Property.BorderTop | number,
     "borders"
   >
@@ -4257,7 +4364,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/bottom
    */
-  bottom?: StyleValue<CSS.Property.Bottom | number, "spaces">
+  bottom?: StyleValueWithCondition<CSS.Property.Bottom | number, "spaces">
   /**
    * ### box-align
    *
@@ -4267,7 +4374,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxAlign?: StyleValue<CSS.Property.BoxAlign>
+  boxAlign?: StyleValueWithCondition<CSS.Property.BoxAlign>
   /**
    * ### box-decoration-break
    *
@@ -4277,7 +4384,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-decoration-break
    */
-  boxDecorationBreak?: StyleValue<CSS.Property.BoxDecorationBreak>
+  boxDecorationBreak?: StyleValueWithCondition<CSS.Property.BoxDecorationBreak>
   /**
    * ### box-direction
    *
@@ -4287,7 +4394,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxDirection?: StyleValue<CSS.Property.BoxDirection>
+  boxDirection?: StyleValueWithCondition<CSS.Property.BoxDirection>
   /**
    * ### box-flex
    *
@@ -4297,7 +4404,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxFlex?: StyleValue<CSS.Property.BoxFlex>
+  boxFlex?: StyleValueWithCondition<CSS.Property.BoxFlex>
   /**
    * ### box-flex-group
    *
@@ -4307,7 +4414,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxFlexGroup?: StyleValue<CSS.Property.BoxFlexGroup>
+  boxFlexGroup?: StyleValueWithCondition<CSS.Property.BoxFlexGroup>
   /**
    * ### box-lines
    *
@@ -4317,7 +4424,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxLines?: StyleValue<CSS.Property.BoxLines>
+  boxLines?: StyleValueWithCondition<CSS.Property.BoxLines>
   /**
    * ### box-ordinal-group
    *
@@ -4327,7 +4434,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxOrdinalGroup?: StyleValue<CSS.Property.BoxOrdinalGroup>
+  boxOrdinalGroup?: StyleValueWithCondition<CSS.Property.BoxOrdinalGroup>
   /**
    * ### box-orient
    *
@@ -4337,7 +4444,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxOrient?: StyleValue<CSS.Property.BoxOrient>
+  boxOrient?: StyleValueWithCondition<CSS.Property.BoxOrient>
   /**
    * ### box-pack
    *
@@ -4347,7 +4454,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  boxPack?: StyleValue<CSS.Property.BoxPack>
+  boxPack?: StyleValueWithCondition<CSS.Property.BoxPack>
   /**
    * ### box-shadow
    *
@@ -4359,7 +4466,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-shadow
    */
-  boxShadow?: StyleValue<CSS.Property.BoxShadow, "shadows">
+  boxShadow?: StyleValueWithCondition<CSS.Property.BoxShadow, "shadows">
   /**
    * ### height
    *
@@ -4383,7 +4490,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  boxSize?: StyleValue<
+  boxSize?: StyleValueWithCondition<
     CSS.Property.Height | CSS.Property.Width | number,
     "sizes"
   >
@@ -4398,7 +4505,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-sizing
    */
-  boxSizing?: StyleValue<CSS.Property.BoxSizing>
+  boxSizing?: StyleValueWithCondition<CSS.Property.BoxSizing>
   /**
    * ### break-after
    *
@@ -4410,7 +4517,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/break-after
    */
-  breakAfter?: StyleValue<CSS.Property.BreakAfter>
+  breakAfter?: StyleValueWithCondition<CSS.Property.BreakAfter>
   /**
    * ### break-before
    *
@@ -4422,7 +4529,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/break-before
    */
-  breakBefore?: StyleValue<CSS.Property.BreakBefore>
+  breakBefore?: StyleValueWithCondition<CSS.Property.BreakBefore>
   /**
    * ### break-inside
    *
@@ -4434,11 +4541,11 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/break-inside
    */
-  breakInside?: StyleValue<CSS.Property.BreakInside>
+  breakInside?: StyleValueWithCondition<CSS.Property.BreakInside>
   /**
    * Sets the value of `--brightness`.
    */
-  brightness?: StyleValue<AnyString>
+  brightness?: StyleValueWithCondition<AnyString>
   /**
    * ### caption-side
    *
@@ -4450,7 +4557,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/caption-side
    */
-  captionSide?: StyleValue<CSS.Property.CaptionSide>
+  captionSide?: StyleValueWithCondition<CSS.Property.CaptionSide>
   /**
    * ### caret-color
    *
@@ -4462,7 +4569,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/caret-color
    */
-  caret?: StyleValue<CSS.Property.CaretColor, "colors">
+  caret?: StyleValueWithCondition<CSS.Property.CaretColor, "colors">
   /**
    * ### caret-color
    *
@@ -4474,7 +4581,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/caret-color
    */
-  caretColor?: StyleValue<CSS.Property.CaretColor, "colors">
+  caretColor?: StyleValueWithCondition<CSS.Property.CaretColor, "colors">
   /**
    * ### clear
    *
@@ -4486,7 +4593,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/clear
    */
-  clear?: StyleValue<CSS.Property.Clear>
+  clear?: StyleValueWithCondition<CSS.Property.Clear>
   /**
    * ### clip
    *
@@ -4497,7 +4604,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  clip?: StyleValue<CSS.Property.Clip>
+  clip?: StyleValueWithCondition<CSS.Property.Clip>
   /**
    * ### clip-path
    *
@@ -4509,7 +4616,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/clip-path
    */
-  clipPath?: StyleValue<CSS.Property.ClipPath>
+  clipPath?: StyleValueWithCondition<CSS.Property.ClipPath>
   /**
    * ### clip-rule
    *
@@ -4521,7 +4628,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/clip-rule
    */
-  clipRule?: StyleValue<CSS.Property.ClipRule>
+  clipRule?: StyleValueWithCondition<CSS.Property.ClipRule>
   /**
    * ### color
    *
@@ -4533,7 +4640,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color
    */
-  color?: StyleValue<CSS.Property.Color, "colors">
+  color?: StyleValueWithCondition<CSS.Property.Color, "colors">
   /**
    * ### color-adjust
    *
@@ -4544,7 +4651,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  colorAdjust?: StyleValue<CSS.Property.PrintColorAdjust>
+  colorAdjust?: StyleValueWithCondition<CSS.Property.PrintColorAdjust>
   /**
    * ### color-interpolation
    *
@@ -4556,7 +4663,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation
    */
-  colorInterpolation?: StyleValue<CSS.Property.ColorInterpolation>
+  colorInterpolation?: StyleValueWithCondition<CSS.Property.ColorInterpolation>
   /**
    * ### color-interpolation-filters
    *
@@ -4568,7 +4675,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color-interpolation-filters
    */
-  colorInterpolationFilters?: StyleValue<AnyString>
+  colorInterpolationFilters?: StyleValueWithCondition<AnyString>
   /**
    * ### column-count
    *
@@ -4580,7 +4687,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-count
    */
-  columnCount?: StyleValue<CSS.Property.ColumnCount>
+  columnCount?: StyleValueWithCondition<CSS.Property.ColumnCount>
   /**
    * ### column-fill
    *
@@ -4592,7 +4699,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-fill
    */
-  columnFill?: StyleValue<CSS.Property.ColumnFill>
+  columnFill?: StyleValueWithCondition<CSS.Property.ColumnFill>
   /**
    * ### column-gap
    *
@@ -4604,7 +4711,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  columnGap?: StyleValue<CSS.Property.ColumnGap | number, "spaces">
+  columnGap?: StyleValueWithCondition<CSS.Property.ColumnGap | number, "spaces">
   /**
    * ### column-rule
    *
@@ -4616,7 +4723,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule
    */
-  columnRule?: StyleValue<CSS.Property.ColumnRule | number>
+  columnRule?: StyleValueWithCondition<CSS.Property.ColumnRule | number>
   /**
    * ### column-rule-color
    *
@@ -4628,7 +4735,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-color
    */
-  columnRuleColor?: StyleValue<CSS.Property.ColumnRuleColor, "colors">
+  columnRuleColor?: StyleValueWithCondition<
+    CSS.Property.ColumnRuleColor,
+    "colors"
+  >
   /**
    * ### column-rule-style
    *
@@ -4640,7 +4750,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-style
    */
-  columnRuleStyle?: StyleValue<CSS.Property.ColumnRuleStyle>
+  columnRuleStyle?: StyleValueWithCondition<CSS.Property.ColumnRuleStyle>
   /**
    * ### column-rule-width
    *
@@ -4652,7 +4762,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-rule-width
    */
-  columnRuleWidth?: StyleValue<CSS.Property.ColumnRuleWidth | number>
+  columnRuleWidth?: StyleValueWithCondition<
+    CSS.Property.ColumnRuleWidth | number
+  >
   /**
    * ### columns
    *
@@ -4664,7 +4776,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/columns
    */
-  columns?: StyleValue<CSS.Property.Columns>
+  columns?: StyleValueWithCondition<CSS.Property.Columns>
   /**
    * ### column-span
    *
@@ -4676,7 +4788,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-span
    */
-  columnSpan?: StyleValue<CSS.Property.ColumnSpan>
+  columnSpan?: StyleValueWithCondition<CSS.Property.ColumnSpan>
   /**
    * ### column-width
    *
@@ -4688,7 +4800,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-width
    */
-  columnWidth?: StyleValue<CSS.Property.ColumnWidth | number, "sizes">
+  columnWidth?: StyleValueWithCondition<
+    CSS.Property.ColumnWidth | number,
+    "sizes"
+  >
   /**
    * ### contain
    *
@@ -4700,7 +4815,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain
    */
-  contain?: StyleValue<CSS.Property.Contain>
+  contain?: StyleValueWithCondition<CSS.Property.Contain>
   /**
    * ### container
    *
@@ -4711,7 +4826,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container
    */
-  container?: StyleValue<CSS.Property.Container>
+  container?: StyleValueWithCondition<CSS.Property.Container>
   /**
    * ### container-name
    *
@@ -4722,7 +4837,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container-name
    */
-  containerName?: StyleValue<CSS.Property.ContainerName>
+  containerName?: StyleValueWithCondition<CSS.Property.ContainerName>
   /**
    * ### container-type
    *
@@ -4733,7 +4848,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container-type
    */
-  containerType?: StyleValue<CSS.Property.ContainerType>
+  containerType?: StyleValueWithCondition<CSS.Property.ContainerType>
   /**
    * ### contain-intrinsic-block-size
    *
@@ -4744,7 +4859,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-block-size
    */
-  containIntrinsicBlockSize?: StyleValue<CSS.Property.ContainIntrinsicBlockSize>
+  containIntrinsicBlockSize?: StyleValueWithCondition<CSS.Property.ContainIntrinsicBlockSize>
   /**
    * ### contain-intrinsic-height
    *
@@ -4755,7 +4870,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-height
    */
-  containIntrinsicHeight?: StyleValue<CSS.Property.ContainIntrinsicHeight>
+  containIntrinsicHeight?: StyleValueWithCondition<CSS.Property.ContainIntrinsicHeight>
   /**
    * ### contain-intrinsic-inline-size
    *
@@ -4766,7 +4881,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-inline-size
    */
-  containIntrinsicInlineSize?: StyleValue<CSS.Property.ContainIntrinsicInlineSize>
+  containIntrinsicInlineSize?: StyleValueWithCondition<CSS.Property.ContainIntrinsicInlineSize>
   /**
    * ### contain-intrinsic-size
    *
@@ -4777,7 +4892,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-size
    */
-  containIntrinsicSize?: StyleValue<CSS.Property.ContainIntrinsicSize>
+  containIntrinsicSize?: StyleValueWithCondition<CSS.Property.ContainIntrinsicSize>
   /**
    * ### contain-intrinsic-width
    *
@@ -4788,7 +4903,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/contain-intrinsic-width
    */
-  containIntrinsicWidth?: StyleValue<
+  containIntrinsicWidth?: StyleValueWithCondition<
     CSS.Property.ContainIntrinsicWidth | number,
     "sizes"
   >
@@ -4803,7 +4918,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/content
    */
-  content?: StyleValue<CSS.Property.Content>
+  content?: StyleValueWithCondition<CSS.Property.Content>
   /**
    * ### content-visibility
    *
@@ -4813,7 +4928,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/content-visibility
    */
-  contentVisibility?: StyleValue<CSS.Property.ContentVisibility>
+  contentVisibility?: StyleValueWithCondition<CSS.Property.ContentVisibility>
   /**
    * ### counter-increment
    *
@@ -4825,7 +4940,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/counter-increment
    */
-  counterIncrement?: StyleValue<CSS.Property.CounterIncrement>
+  counterIncrement?: StyleValueWithCondition<CSS.Property.CounterIncrement>
   /**
    * ### counter-reset
    *
@@ -4837,7 +4952,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/counter-reset
    */
-  counterReset?: StyleValue<CSS.Property.CounterReset>
+  counterReset?: StyleValueWithCondition<CSS.Property.CounterReset>
   /**
    * ### counter-set
    *
@@ -4848,7 +4963,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/counter-set
    */
-  counterSet?: StyleValue<CSS.Property.CounterSet>
+  counterSet?: StyleValueWithCondition<CSS.Property.CounterSet>
   /**
    * ### cursor
    *
@@ -4858,7 +4973,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cursor
    */
-  cursor?: StyleValue<CSS.Property.Cursor>
+  cursor?: StyleValueWithCondition<CSS.Property.Cursor>
   /**
    * ### cx
    *
@@ -4870,7 +4985,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cx
    */
-  cx?: StyleValue<AnyString>
+  cx?: StyleValueWithCondition<AnyString>
   /**
    * ### cy
    *
@@ -4882,7 +4997,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/cy
    */
-  cy?: StyleValue<AnyString>
+  cy?: StyleValueWithCondition<AnyString>
   /**
    * ### d
    *
@@ -4894,7 +5009,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/d
    */
-  d?: StyleValue<AnyString>
+  d?: StyleValueWithCondition<AnyString>
   /**
    * ### direction
    *
@@ -4906,7 +5021,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/direction
    */
-  direction?: StyleValue<CSS.Property.Direction>
+  direction?: StyleValueWithCondition<CSS.Property.Direction>
   /**
    * ### display
    *
@@ -4918,7 +5033,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/display
    */
-  display?: StyleValue<CSS.Property.Display>
+  display?: StyleValueWithCondition<CSS.Property.Display>
   /**
    * ### dominant-baseline
    *
@@ -4930,7 +5045,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/dominant-baseline
    */
-  dominantBaseline?: StyleValue<CSS.Property.DominantBaseline>
+  dominantBaseline?: StyleValueWithCondition<CSS.Property.DominantBaseline>
   /**
    * ### dynamic-range-limit
    *
@@ -4940,7 +5055,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  dynamicRangeLimit?: StyleValue<AnyString>
+  dynamicRangeLimit?: StyleValueWithCondition<AnyString>
   /**
    * ### empty-cells
    *
@@ -4952,7 +5067,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/empty-cells
    */
-  emptyCells?: StyleValue<CSS.Property.EmptyCells>
+  emptyCells?: StyleValueWithCondition<CSS.Property.EmptyCells>
   /**
    * ### field-sizing
    *
@@ -4964,7 +5079,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  fieldSizing?: StyleValue<AnyString>
+  fieldSizing?: StyleValueWithCondition<AnyString>
   /**
    * ### fill
    *
@@ -4976,7 +5091,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/fill
    */
-  fill?: StyleValue<CSS.Property.Fill, "colors">
+  fill?: StyleValueWithCondition<CSS.Property.Fill, "colors">
   /**
    * ### fill-opacity
    *
@@ -4988,7 +5103,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/fill-opacity
    */
-  fillOpacity?: StyleValue<CSS.Property.FillOpacity>
+  fillOpacity?: StyleValueWithCondition<CSS.Property.FillOpacity>
   /**
    * ### fill-rule
    *
@@ -5000,7 +5115,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/fill-rule
    */
-  fillRule?: StyleValue<CSS.Property.FillRule>
+  fillRule?: StyleValueWithCondition<CSS.Property.FillRule>
   /**
    * ### filter
    *
@@ -5012,7 +5127,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/filter
    */
-  filter?: StyleValue<CSS.Property.Filter>
+  filter?: StyleValueWithCondition<CSS.Property.Filter>
   /**
    * ### flex
    *
@@ -5024,7 +5139,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex
    */
-  flex?: StyleValue<CSS.Property.Flex>
+  flex?: StyleValueWithCondition<CSS.Property.Flex>
   /**
    * ### flex-basis
    *
@@ -5036,7 +5151,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-basis
    */
-  flexBasis?: StyleValue<CSS.Property.FlexBasis | number, "sizes">
+  flexBasis?: StyleValueWithCondition<CSS.Property.FlexBasis | number, "sizes">
   /**
    * ### flex-direction
    *
@@ -5048,7 +5163,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-direction
    */
-  flexDir?: StyleValue<CSS.Property.FlexDirection>
+  flexDir?: StyleValueWithCondition<CSS.Property.FlexDirection>
   /**
    * ### flex-direction
    *
@@ -5060,7 +5175,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-direction
    */
-  flexDirection?: StyleValue<CSS.Property.FlexDirection>
+  flexDirection?: StyleValueWithCondition<CSS.Property.FlexDirection>
   /**
    * ### flex-flow
    *
@@ -5072,7 +5187,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-flow
    */
-  flexFlow?: StyleValue<CSS.Property.FlexFlow>
+  flexFlow?: StyleValueWithCondition<CSS.Property.FlexFlow>
   /**
    * ### flex-grow
    *
@@ -5084,7 +5199,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-grow
    */
-  flexGrow?: StyleValue<CSS.Property.FlexGrow>
+  flexGrow?: StyleValueWithCondition<CSS.Property.FlexGrow>
   /**
    * ### flex-shrink
    *
@@ -5096,7 +5211,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-shrink
    */
-  flexShrink?: StyleValue<CSS.Property.FlexShrink>
+  flexShrink?: StyleValueWithCondition<CSS.Property.FlexShrink>
   /**
    * ### flex-wrap
    *
@@ -5108,7 +5223,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flex-wrap
    */
-  flexWrap?: StyleValue<CSS.Property.FlexWrap>
+  flexWrap?: StyleValueWithCondition<CSS.Property.FlexWrap>
   /**
    * ### float
    *
@@ -5120,7 +5235,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/float
    */
-  float?: StyleValue<CSS.Property.Float>
+  float?: StyleValueWithCondition<CSS.Property.Float>
   /**
    * ### flood-color
    *
@@ -5132,7 +5247,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flood-color
    */
-  floodColor?: StyleValue<CSS.Property.FloodColor, "colors">
+  floodColor?: StyleValueWithCondition<CSS.Property.FloodColor, "colors">
   /**
    * ### flood-opacity
    *
@@ -5144,7 +5259,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/flood-opacity
    */
-  floodOpacity?: StyleValue<CSS.Property.FloodOpacity>
+  floodOpacity?: StyleValueWithCondition<CSS.Property.FloodOpacity>
   /**
    * ### font
    *
@@ -5156,7 +5271,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font
    */
-  font?: StyleValue<CSS.Property.Font>
+  font?: StyleValueWithCondition<CSS.Property.Font>
   /**
    * ### font-family
    *
@@ -5168,7 +5283,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-family
    */
-  fontFamily?: StyleValue<CSS.Property.FontFamily, "fonts">
+  fontFamily?: StyleValueWithCondition<CSS.Property.FontFamily, "fonts">
   /**
    * ### font-feature-settings
    *
@@ -5180,7 +5295,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-feature-settings
    */
-  fontFeatureSettings?: StyleValue<CSS.Property.FontFeatureSettings>
+  fontFeatureSettings?: StyleValueWithCondition<CSS.Property.FontFeatureSettings>
   /**
    * ### font-kerning
    *
@@ -5192,7 +5307,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-kerning
    */
-  fontKerning?: StyleValue<CSS.Property.FontKerning>
+  fontKerning?: StyleValueWithCondition<CSS.Property.FontKerning>
   /**
    * ### font-language-override
    *
@@ -5202,7 +5317,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-language-override
    */
-  fontLanguageOverride?: StyleValue<CSS.Property.FontLanguageOverride>
+  fontLanguageOverride?: StyleValueWithCondition<CSS.Property.FontLanguageOverride>
   /**
    * ### font-optical-sizing
    *
@@ -5214,7 +5329,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-optical-sizing
    */
-  fontOpticalSizing?: StyleValue<CSS.Property.FontOpticalSizing>
+  fontOpticalSizing?: StyleValueWithCondition<CSS.Property.FontOpticalSizing>
   /**
    * ### font-palette
    *
@@ -5226,7 +5341,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-palette
    */
-  fontPalette?: StyleValue<CSS.Property.FontPalette>
+  fontPalette?: StyleValueWithCondition<CSS.Property.FontPalette>
   /**
    * ### font-size
    *
@@ -5238,7 +5353,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-size
    */
-  fontSize?: StyleValue<CSS.Property.FontSize | number, "fontSizes">
+  fontSize?: StyleValueWithCondition<
+    CSS.Property.FontSize | number,
+    "fontSizes"
+  >
   /**
    * ### font-size-adjust
    *
@@ -5249,7 +5367,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-size-adjust
    */
-  fontSizeAdjust?: StyleValue<CSS.Property.FontSizeAdjust>
+  fontSizeAdjust?: StyleValueWithCondition<CSS.Property.FontSizeAdjust>
   /**
    * ### font-smooth
    *
@@ -5257,7 +5375,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-smooth
    */
-  fontSmooth?: StyleValue<CSS.Property.FontSmooth>
+  fontSmooth?: StyleValueWithCondition<CSS.Property.FontSmooth>
   /**
    * ### font-stretch
    *
@@ -5268,7 +5386,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  fontStretch?: StyleValue<CSS.Property.FontStretch>
+  fontStretch?: StyleValueWithCondition<CSS.Property.FontStretch>
   /**
    * ### font-style
    *
@@ -5280,7 +5398,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-style
    */
-  fontStyle?: StyleValue<CSS.Property.FontStyle>
+  fontStyle?: StyleValueWithCondition<CSS.Property.FontStyle>
   /**
    * ### font-synthesis
    *
@@ -5292,7 +5410,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis
    */
-  fontSynthesis?: StyleValue<CSS.Property.FontSynthesis>
+  fontSynthesis?: StyleValueWithCondition<CSS.Property.FontSynthesis>
   /**
    * ### font-synthesis-position
    *
@@ -5304,7 +5422,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  fontSynthesisPosition?: StyleValue<CSS.Property.FontSynthesisPosition>
+  fontSynthesisPosition?: StyleValueWithCondition<CSS.Property.FontSynthesisPosition>
   /**
    * ### font-synthesis-small-caps
    *
@@ -5315,7 +5433,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-small-caps
    */
-  fontSynthesisSmallCaps?: StyleValue<CSS.Property.FontSynthesisSmallCaps>
+  fontSynthesisSmallCaps?: StyleValueWithCondition<CSS.Property.FontSynthesisSmallCaps>
   /**
    * ### font-synthesis-style
    *
@@ -5326,7 +5444,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-style
    */
-  fontSynthesisStyle?: StyleValue<CSS.Property.FontSynthesisStyle>
+  fontSynthesisStyle?: StyleValueWithCondition<CSS.Property.FontSynthesisStyle>
   /**
    * ### font-synthesis-weight
    *
@@ -5337,7 +5455,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-synthesis-weight
    */
-  fontSynthesisWeight?: StyleValue<CSS.Property.FontSynthesisWeight>
+  fontSynthesisWeight?: StyleValueWithCondition<CSS.Property.FontSynthesisWeight>
   /**
    * ### font-variant
    *
@@ -5349,7 +5467,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant
    */
-  fontVariant?: StyleValue<CSS.Property.FontVariant>
+  fontVariant?: StyleValueWithCondition<CSS.Property.FontVariant>
   /**
    * ### font-variant-alternates
    *
@@ -5360,7 +5478,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-alternates
    */
-  fontVariantAlternates?: StyleValue<CSS.Property.FontVariantAlternates>
+  fontVariantAlternates?: StyleValueWithCondition<CSS.Property.FontVariantAlternates>
   /**
    * ### font-variant-caps
    *
@@ -5372,7 +5490,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-caps
    */
-  fontVariantCaps?: StyleValue<CSS.Property.FontVariantCaps>
+  fontVariantCaps?: StyleValueWithCondition<CSS.Property.FontVariantCaps>
   /**
    * ### font-variant-east-asian
    *
@@ -5384,7 +5502,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-east-asian
    */
-  fontVariantEastAsian?: StyleValue<CSS.Property.FontVariantEastAsian>
+  fontVariantEastAsian?: StyleValueWithCondition<CSS.Property.FontVariantEastAsian>
   /**
    * ### font-variant-emoji
    *
@@ -5394,7 +5512,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-emoji
    */
-  fontVariantEmoji?: StyleValue<CSS.Property.FontVariantEmoji>
+  fontVariantEmoji?: StyleValueWithCondition<CSS.Property.FontVariantEmoji>
   /**
    * ### font-variant-ligatures
    *
@@ -5406,7 +5524,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-ligatures
    */
-  fontVariantLigatures?: StyleValue<CSS.Property.FontVariantLigatures>
+  fontVariantLigatures?: StyleValueWithCondition<CSS.Property.FontVariantLigatures>
   /**
    * ### font-variant-numeric
    *
@@ -5418,7 +5536,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-numeric
    */
-  fontVariantNumeric?: StyleValue<CSS.Property.FontVariantNumeric>
+  fontVariantNumeric?: StyleValueWithCondition<CSS.Property.FontVariantNumeric>
   /**
    * ### font-variant-position
    *
@@ -5428,7 +5546,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variant-position
    */
-  fontVariantPosition?: StyleValue<CSS.Property.FontVariantPosition>
+  fontVariantPosition?: StyleValueWithCondition<CSS.Property.FontVariantPosition>
   /**
    * ### font-variation-settings
    *
@@ -5440,7 +5558,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-variation-settings
    */
-  fontVariationSettings?: StyleValue<CSS.Property.FontVariationSettings>
+  fontVariationSettings?: StyleValueWithCondition<CSS.Property.FontVariationSettings>
   /**
    * ### font-weight
    *
@@ -5452,7 +5570,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-weight
    */
-  fontWeight?: StyleValue<CSS.Property.FontWeight, "fontWeights">
+  fontWeight?: StyleValueWithCondition<CSS.Property.FontWeight, "fontWeights">
   /**
    * ### font-width
    *
@@ -5464,7 +5582,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  fontWidth?: StyleValue<AnyString>
+  fontWidth?: StyleValueWithCondition<AnyString>
   /**
    * ### forced-color-adjust
    *
@@ -5476,7 +5594,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/forced-color-adjust
    */
-  forcedColorAdjust?: StyleValue<CSS.Property.ForcedColorAdjust>
+  forcedColorAdjust?: StyleValueWithCondition<CSS.Property.ForcedColorAdjust>
   /**
    * ### gap
    *
@@ -5488,7 +5606,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/gap
    */
-  g?: StyleValue<CSS.Property.Gap | number, "spaces">
+  g?: StyleValueWithCondition<CSS.Property.Gap | number, "spaces">
   /**
    * ### gap
    *
@@ -5500,7 +5618,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/gap
    */
-  gap?: StyleValue<CSS.Property.Gap | number, "spaces">
+  gap?: StyleValueWithCondition<CSS.Property.Gap | number, "spaces">
   /**
    * ### column-gap
    *
@@ -5512,7 +5630,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  gapX?: StyleValue<CSS.Property.ColumnGap | number, "spaces">
+  gapX?: StyleValueWithCondition<CSS.Property.ColumnGap | number, "spaces">
   /**
    * ### row-gap
    *
@@ -5524,7 +5642,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
-  gapY?: StyleValue<CSS.Property.RowGap | number, "spaces">
+  gapY?: StyleValueWithCondition<CSS.Property.RowGap | number, "spaces">
   /**
    * ### glyph-orientation-horizontal
    *
@@ -5535,7 +5653,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  glyphOrientationHorizontal?: StyleValue<AnyString>
+  glyphOrientationHorizontal?: StyleValueWithCondition<AnyString>
   /**
    * ### glyph-orientation-vertical
    *
@@ -5546,7 +5664,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  glyphOrientationVertical?: StyleValue<CSS.Property.GlyphOrientationVertical>
+  glyphOrientationVertical?: StyleValueWithCondition<CSS.Property.GlyphOrientationVertical>
   /**
    * ### grid
    *
@@ -5558,7 +5676,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid
    */
-  grid?: StyleValue<CSS.Property.Grid>
+  grid?: StyleValueWithCondition<CSS.Property.Grid>
   /**
    * ### grid-area
    *
@@ -5570,7 +5688,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-area
    */
-  gridArea?: StyleValue<CSS.Property.GridArea>
+  gridArea?: StyleValueWithCondition<CSS.Property.GridArea>
   /**
    * ### grid-auto-columns
    *
@@ -5582,7 +5700,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-columns
    */
-  gridAutoColumns?: StyleValue<CSS.Property.GridAutoColumns | number, "sizes">
+  gridAutoColumns?: StyleValueWithCondition<
+    CSS.Property.GridAutoColumns | number,
+    "sizes"
+  >
   /**
    * ### grid-auto-flow
    *
@@ -5594,7 +5715,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-flow
    */
-  gridAutoFlow?: StyleValue<CSS.Property.GridAutoFlow>
+  gridAutoFlow?: StyleValueWithCondition<CSS.Property.GridAutoFlow>
   /**
    * ### grid-auto-rows
    *
@@ -5606,7 +5727,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-auto-rows
    */
-  gridAutoRows?: StyleValue<CSS.Property.GridAutoRows | number, "sizes">
+  gridAutoRows?: StyleValueWithCondition<
+    CSS.Property.GridAutoRows | number,
+    "sizes"
+  >
   /**
    * ### grid-column
    *
@@ -5618,7 +5742,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-column
    */
-  gridColumn?: StyleValue<CSS.Property.GridColumn>
+  gridColumn?: StyleValueWithCondition<CSS.Property.GridColumn>
   /**
    * ### grid-column-end
    *
@@ -5630,7 +5754,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-column-end
    */
-  gridColumnEnd?: StyleValue<CSS.Property.GridColumnEnd>
+  gridColumnEnd?: StyleValueWithCondition<CSS.Property.GridColumnEnd>
   /**
    * ### grid-column-start
    *
@@ -5642,7 +5766,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-column-start
    */
-  gridColumnStart?: StyleValue<CSS.Property.GridColumnStart>
+  gridColumnStart?: StyleValueWithCondition<CSS.Property.GridColumnStart>
   /**
    * ### grid-row
    *
@@ -5654,7 +5778,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-row
    */
-  gridRow?: StyleValue<CSS.Property.GridRow>
+  gridRow?: StyleValueWithCondition<CSS.Property.GridRow>
   /**
    * ### grid-row-end
    *
@@ -5666,7 +5790,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-row-end
    */
-  gridRowEnd?: StyleValue<CSS.Property.GridRowEnd>
+  gridRowEnd?: StyleValueWithCondition<CSS.Property.GridRowEnd>
   /**
    * ### grid-row-start
    *
@@ -5678,7 +5802,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-row-start
    */
-  gridRowStart?: StyleValue<CSS.Property.GridRowStart>
+  gridRowStart?: StyleValueWithCondition<CSS.Property.GridRowStart>
   /**
    * ### grid-template
    *
@@ -5690,7 +5814,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template
    */
-  gridTemplate?: StyleValue<CSS.Property.GridTemplate>
+  gridTemplate?: StyleValueWithCondition<CSS.Property.GridTemplate>
   /**
    * ### grid-template-areas
    *
@@ -5702,7 +5826,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-areas
    */
-  gridTemplateAreas?: StyleValue<CSS.Property.GridTemplateAreas>
+  gridTemplateAreas?: StyleValueWithCondition<CSS.Property.GridTemplateAreas>
   /**
    * ### grid-template-columns
    *
@@ -5714,7 +5838,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-columns
    */
-  gridTemplateColumns?: StyleValue<
+  gridTemplateColumns?: StyleValueWithCondition<
     CSS.Property.GridTemplateColumns | number,
     "sizes"
   >
@@ -5729,7 +5853,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/grid-template-rows
    */
-  gridTemplateRows?: StyleValue<CSS.Property.GridTemplateRows | number, "sizes">
+  gridTemplateRows?: StyleValueWithCondition<
+    CSS.Property.GridTemplateRows | number,
+    "sizes"
+  >
   /**
    * ### column-gap
    *
@@ -5741,7 +5868,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/column-gap
    */
-  gx?: StyleValue<CSS.Property.ColumnGap | number, "spaces">
+  gx?: StyleValueWithCondition<CSS.Property.ColumnGap | number, "spaces">
   /**
    * ### row-gap
    *
@@ -5753,7 +5880,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
-  gy?: StyleValue<CSS.Property.RowGap | number, "spaces">
+  gy?: StyleValueWithCondition<CSS.Property.RowGap | number, "spaces">
   /**
    * ### height
    *
@@ -5765,7 +5892,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/height
    */
-  h?: StyleValue<CSS.Property.Height | number, "sizes">
+  h?: StyleValueWithCondition<CSS.Property.Height | number, "sizes">
   /**
    * ### hanging-punctuation
    *
@@ -5775,7 +5902,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hanging-punctuation
    */
-  hangingPunctuation?: StyleValue<CSS.Property.HangingPunctuation>
+  hangingPunctuation?: StyleValueWithCondition<CSS.Property.HangingPunctuation>
   /**
    * ### height
    *
@@ -5787,7 +5914,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/height
    */
-  height?: StyleValue<CSS.Property.Height | number, "sizes">
+  height?: StyleValueWithCondition<CSS.Property.Height | number, "sizes">
   /**
    * ### hyphenate-character
    *
@@ -5798,7 +5925,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hyphenate-character
    */
-  hyphenateCharacter?: StyleValue<CSS.Property.HyphenateCharacter>
+  hyphenateCharacter?: StyleValueWithCondition<CSS.Property.HyphenateCharacter>
   /**
    * ### hyphenate-limit-chars
    *
@@ -5808,7 +5935,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hyphenate-limit-chars
    */
-  hyphenateLimitChars?: StyleValue<CSS.Property.HyphenateLimitChars>
+  hyphenateLimitChars?: StyleValueWithCondition<CSS.Property.HyphenateLimitChars>
   /**
    * ### hyphens
    *
@@ -5819,7 +5946,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/hyphens
    */
-  hyphens?: StyleValue<CSS.Property.Hyphens>
+  hyphens?: StyleValueWithCondition<CSS.Property.Hyphens>
   /**
    * ### image-orientation
    *
@@ -5831,7 +5958,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/image-orientation
    */
-  imageOrientation?: StyleValue<CSS.Property.ImageOrientation>
+  imageOrientation?: StyleValueWithCondition<CSS.Property.ImageOrientation>
   /**
    * ### image-rendering
    *
@@ -5843,7 +5970,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/image-rendering
    */
-  imageRendering?: StyleValue<CSS.Property.ImageRendering>
+  imageRendering?: StyleValueWithCondition<CSS.Property.ImageRendering>
   /**
    * ### ime-mode
    *
@@ -5854,7 +5981,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  imeMode?: StyleValue<CSS.Property.ImeMode>
+  imeMode?: StyleValueWithCondition<CSS.Property.ImeMode>
   /**
    * ### initial-letter
    *
@@ -5864,7 +5991,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/initial-letter
    */
-  initialLetter?: StyleValue<CSS.Property.InitialLetter>
+  initialLetter?: StyleValueWithCondition<CSS.Property.InitialLetter>
   /**
    * ### inline-size
    *
@@ -5876,7 +6003,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inline-size
    */
-  inlineSize?: StyleValue<CSS.Property.InlineSize | number, "sizes">
+  inlineSize?: StyleValueWithCondition<
+    CSS.Property.InlineSize | number,
+    "sizes"
+  >
   /**
    * ### inset
    *
@@ -5888,7 +6018,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset
    */
-  inset?: StyleValue<CSS.Property.Inset | number, "spaces">
+  inset?: StyleValueWithCondition<CSS.Property.Inset | number, "spaces">
   /**
    * ### inset-block
    *
@@ -5900,7 +6030,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-block
    */
-  insetBlock?: StyleValue<CSS.Property.InsetBlock | number, "spaces">
+  insetBlock?: StyleValueWithCondition<
+    CSS.Property.InsetBlock | number,
+    "spaces"
+  >
   /**
    * ### inset-block-end
    *
@@ -5912,7 +6045,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-end
    */
-  insetBlockEnd?: StyleValue<CSS.Property.InsetBlockEnd | number, "spaces">
+  insetBlockEnd?: StyleValueWithCondition<
+    CSS.Property.InsetBlockEnd | number,
+    "spaces"
+  >
   /**
    * ### inset-block-start
    *
@@ -5924,7 +6060,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-block-start
    */
-  insetBlockStart?: StyleValue<CSS.Property.InsetBlockStart | number, "spaces">
+  insetBlockStart?: StyleValueWithCondition<
+    CSS.Property.InsetBlockStart | number,
+    "spaces"
+  >
   /**
    * ### inset-inline-end
    *
@@ -5936,7 +6075,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
    */
-  insetEnd?: StyleValue<CSS.Property.InsetInlineEnd | number, "spaces">
+  insetEnd?: StyleValueWithCondition<
+    CSS.Property.InsetInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### inset-inline
    *
@@ -5948,7 +6090,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline
    */
-  insetInline?: StyleValue<CSS.Property.InsetInline | number, "spaces">
+  insetInline?: StyleValueWithCondition<
+    CSS.Property.InsetInline | number,
+    "spaces"
+  >
   /**
    * ### inset-inline-end
    *
@@ -5960,7 +6105,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-end
    */
-  insetInlineEnd?: StyleValue<CSS.Property.InsetInlineEnd | number, "spaces">
+  insetInlineEnd?: StyleValueWithCondition<
+    CSS.Property.InsetInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### inset-inline-start
    *
@@ -5972,7 +6120,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
    */
-  insetInlineStart?: StyleValue<
+  insetInlineStart?: StyleValueWithCondition<
     CSS.Property.InsetInlineStart | number,
     "spaces"
   >
@@ -5987,7 +6135,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/inset-inline-start
    */
-  insetStart?: StyleValue<CSS.Property.InsetInlineStart | number, "spaces">
+  insetStart?: StyleValueWithCondition<
+    CSS.Property.InsetInlineStart | number,
+    "spaces"
+  >
   /**
    * ### interactivity
    *
@@ -5997,7 +6148,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  interactivity?: StyleValue<AnyString>
+  interactivity?: StyleValueWithCondition<AnyString>
   /**
    * ### interpolate-size
    *
@@ -6009,7 +6160,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  interpolateSize?: StyleValue<AnyString>
+  interpolateSize?: StyleValueWithCondition<AnyString>
   /**
    * ### isolation
    *
@@ -6021,7 +6172,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/isolation
    */
-  isolation?: StyleValue<CSS.Property.Isolation>
+  isolation?: StyleValueWithCondition<CSS.Property.Isolation>
   /**
    * ### justify-content
    *
@@ -6033,7 +6184,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-content
    */
-  justifyContent?: StyleValue<CSS.Property.JustifyContent>
+  justifyContent?: StyleValueWithCondition<CSS.Property.JustifyContent>
   /**
    * ### justify-items
    *
@@ -6045,7 +6196,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-items
    */
-  justifyItems?: StyleValue<CSS.Property.JustifyItems>
+  justifyItems?: StyleValueWithCondition<CSS.Property.JustifyItems>
   /**
    * ### justify-self
    *
@@ -6057,7 +6208,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/justify-self
    */
-  justifySelf?: StyleValue<CSS.Property.JustifySelf>
+  justifySelf?: StyleValueWithCondition<CSS.Property.JustifySelf>
   /**
    * ### line-height
    *
@@ -6069,7 +6220,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-height
    */
-  leading?: StyleValue<CSS.Property.LineHeight, "lineHeights">
+  leading?: StyleValueWithCondition<CSS.Property.LineHeight, "lineHeights">
   /**
    * ### left
    *
@@ -6081,7 +6232,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/left
    */
-  left?: StyleValue<CSS.Property.Left | number, "spaces">
+  left?: StyleValueWithCondition<CSS.Property.Left | number, "spaces">
   /**
    * ### letter-spacing
    *
@@ -6093,7 +6244,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
    */
-  letterSpacing?: StyleValue<CSS.Property.LetterSpacing, "letterSpacings">
+  letterSpacing?: StyleValueWithCondition<
+    CSS.Property.LetterSpacing,
+    "letterSpacings"
+  >
   /**
    * ### lighting-color
    *
@@ -6105,7 +6259,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/lighting-color
    */
-  lightingColor?: StyleValue<CSS.Property.LightingColor, "colors">
+  lightingColor?: StyleValueWithCondition<CSS.Property.LightingColor, "colors">
   /**
    * ### line-break
    *
@@ -6117,7 +6271,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-break
    */
-  lineBreak?: StyleValue<CSS.Property.LineBreak>
+  lineBreak?: StyleValueWithCondition<CSS.Property.LineBreak>
   /**
    * ### line-height
    *
@@ -6129,7 +6283,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-height
    */
-  lineHeight?: StyleValue<CSS.Property.LineHeight, "lineHeights">
+  lineHeight?: StyleValueWithCondition<CSS.Property.LineHeight, "lineHeights">
   /**
    * ### list-style
    *
@@ -6141,7 +6295,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style
    */
-  listStyle?: StyleValue<CSS.Property.ListStyle>
+  listStyle?: StyleValueWithCondition<CSS.Property.ListStyle>
   /**
    * ### list-style-image
    *
@@ -6153,7 +6307,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-image
    */
-  listStyleImage?: StyleValue<CSS.Property.ListStyleImage, "gradients">
+  listStyleImage?: StyleValueWithCondition<
+    CSS.Property.ListStyleImage,
+    "gradients"
+  >
   /**
    * ### list-style-image
    *
@@ -6165,7 +6322,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-image
    */
-  listStyleImg?: StyleValue<CSS.Property.ListStyleImage, "gradients">
+  listStyleImg?: StyleValueWithCondition<
+    CSS.Property.ListStyleImage,
+    "gradients"
+  >
   /**
    * ### list-style-position
    *
@@ -6177,7 +6337,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-position
    */
-  listStylePos?: StyleValue<CSS.Property.ListStylePosition>
+  listStylePos?: StyleValueWithCondition<CSS.Property.ListStylePosition>
   /**
    * ### list-style-position
    *
@@ -6189,7 +6349,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-position
    */
-  listStylePosition?: StyleValue<CSS.Property.ListStylePosition>
+  listStylePosition?: StyleValueWithCondition<CSS.Property.ListStylePosition>
   /**
    * ### list-style-type
    *
@@ -6201,7 +6361,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/list-style-type
    */
-  listStyleType?: StyleValue<CSS.Property.ListStyleType>
+  listStyleType?: StyleValueWithCondition<CSS.Property.ListStyleType>
   /**
    * ### margin
    *
@@ -6213,7 +6373,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin
    */
-  m?: StyleValue<CSS.Property.Margin | number, "spaces">
+  m?: StyleValueWithCondition<CSS.Property.Margin | number, "spaces">
   /**
    * ### margin
    *
@@ -6225,7 +6385,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin
    */
-  margin?: StyleValue<CSS.Property.Margin | number, "spaces">
+  margin?: StyleValueWithCondition<CSS.Property.Margin | number, "spaces">
   /**
    * ### margin-block
    *
@@ -6237,7 +6397,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block
    */
-  marginBlock?: StyleValue<CSS.Property.MarginBlock | number, "spaces">
+  marginBlock?: StyleValueWithCondition<
+    CSS.Property.MarginBlock | number,
+    "spaces"
+  >
   /**
    * ### margin-block-end
    *
@@ -6249,7 +6412,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-end
    */
-  marginBlockEnd?: StyleValue<CSS.Property.MarginBlockEnd | number, "spaces">
+  marginBlockEnd?: StyleValueWithCondition<
+    CSS.Property.MarginBlockEnd | number,
+    "spaces"
+  >
   /**
    * ### margin-block-start
    *
@@ -6261,7 +6427,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-block-start
    */
-  marginBlockStart?: StyleValue<
+  marginBlockStart?: StyleValueWithCondition<
     CSS.Property.MarginBlockStart | number,
     "spaces"
   >
@@ -6276,7 +6442,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
    */
-  marginBottom?: StyleValue<CSS.Property.MarginBottom | number, "spaces">
+  marginBottom?: StyleValueWithCondition<
+    CSS.Property.MarginBottom | number,
+    "spaces"
+  >
   /**
    * ### margin-inline-end
    *
@@ -6288,7 +6457,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
    */
-  marginEnd?: StyleValue<CSS.Property.MarginInlineEnd | number, "spaces">
+  marginEnd?: StyleValueWithCondition<
+    CSS.Property.MarginInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### margin-inline
    *
@@ -6300,7 +6472,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline
    */
-  marginInline?: StyleValue<CSS.Property.MarginInline | number, "spaces">
+  marginInline?: StyleValueWithCondition<
+    CSS.Property.MarginInline | number,
+    "spaces"
+  >
   /**
    * ### margin-inline-end
    *
@@ -6312,7 +6487,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
    */
-  marginInlineEnd?: StyleValue<CSS.Property.MarginInlineEnd | number, "spaces">
+  marginInlineEnd?: StyleValueWithCondition<
+    CSS.Property.MarginInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### margin-inline-start
    *
@@ -6324,7 +6502,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  marginInlineStart?: StyleValue<
+  marginInlineStart?: StyleValueWithCondition<
     CSS.Property.MarginInlineStart | number,
     "spaces"
   >
@@ -6339,7 +6517,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
    */
-  marginLeft?: StyleValue<CSS.Property.MarginLeft | number, "spaces">
+  marginLeft?: StyleValueWithCondition<
+    CSS.Property.MarginLeft | number,
+    "spaces"
+  >
   /**
    * ### margin-right
    *
@@ -6351,7 +6532,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
    */
-  marginRight?: StyleValue<CSS.Property.MarginRight | number, "spaces">
+  marginRight?: StyleValueWithCondition<
+    CSS.Property.MarginRight | number,
+    "spaces"
+  >
   /**
    * ### margin-inline-start
    *
@@ -6363,7 +6547,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  marginStart?: StyleValue<CSS.Property.MarginInlineStart | number, "spaces">
+  marginStart?: StyleValueWithCondition<
+    CSS.Property.MarginInlineStart | number,
+    "spaces"
+  >
   /**
    * ### margin-top
    *
@@ -6375,7 +6562,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  marginTop?: StyleValue<CSS.Property.MarginTop | number, "spaces">
+  marginTop?: StyleValueWithCondition<CSS.Property.MarginTop | number, "spaces">
   /**
    * ### margin-trim
    *
@@ -6387,7 +6574,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  marginTrim?: StyleValue<CSS.Property.MarginTrim>
+  marginTrim?: StyleValueWithCondition<CSS.Property.MarginTrim>
   /**
    * ### marker
    *
@@ -6399,7 +6586,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker
    */
-  marker?: StyleValue<CSS.Property.Marker>
+  marker?: StyleValueWithCondition<CSS.Property.Marker>
   /**
    * ### marker-end
    *
@@ -6411,7 +6598,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker-end
    */
-  markerEnd?: StyleValue<CSS.Property.MarkerEnd>
+  markerEnd?: StyleValueWithCondition<CSS.Property.MarkerEnd>
   /**
    * ### marker-mid
    *
@@ -6423,7 +6610,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker-mid
    */
-  markerMid?: StyleValue<CSS.Property.MarkerMid>
+  markerMid?: StyleValueWithCondition<CSS.Property.MarkerMid>
   /**
    * ### marker-start
    *
@@ -6435,7 +6622,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/marker-start
    */
-  markerStart?: StyleValue<CSS.Property.MarkerStart>
+  markerStart?: StyleValueWithCondition<CSS.Property.MarkerStart>
   /**
    * ### mask
    *
@@ -6446,7 +6633,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask
    */
-  mask?: StyleValue<CSS.Property.Mask>
+  mask?: StyleValueWithCondition<CSS.Property.Mask>
   /**
    * ### mask-border
    *
@@ -6456,7 +6643,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border
    */
-  maskBorder?: StyleValue<CSS.Property.MaskBorder>
+  maskBorder?: StyleValueWithCondition<CSS.Property.MaskBorder>
   /**
    * ### mask-border-outset
    *
@@ -6466,7 +6653,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-outset
    */
-  maskBorderOutset?: StyleValue<CSS.Property.MaskBorderOutset>
+  maskBorderOutset?: StyleValueWithCondition<CSS.Property.MaskBorderOutset>
   /**
    * ### mask-border-repeat
    *
@@ -6476,7 +6663,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-repeat
    */
-  maskBorderRepeat?: StyleValue<CSS.Property.MaskBorderRepeat>
+  maskBorderRepeat?: StyleValueWithCondition<CSS.Property.MaskBorderRepeat>
   /**
    * ### mask-border-slice
    *
@@ -6486,7 +6673,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-slice
    */
-  maskBorderSlice?: StyleValue<CSS.Property.MaskBorderSlice>
+  maskBorderSlice?: StyleValueWithCondition<CSS.Property.MaskBorderSlice>
   /**
    * ### mask-border-source
    *
@@ -6496,7 +6683,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-source
    */
-  maskBorderSource?: StyleValue<CSS.Property.MaskBorderSource>
+  maskBorderSource?: StyleValueWithCondition<CSS.Property.MaskBorderSource>
   /**
    * ### mask-border-width
    *
@@ -6506,7 +6693,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-border-width
    */
-  maskBorderWidth?: StyleValue<CSS.Property.MaskBorderWidth | number>
+  maskBorderWidth?: StyleValueWithCondition<
+    CSS.Property.MaskBorderWidth | number
+  >
   /**
    * ### mask-clip
    *
@@ -6517,7 +6706,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-clip
    */
-  maskClip?: StyleValue<CSS.Property.MaskClip>
+  maskClip?: StyleValueWithCondition<CSS.Property.MaskClip>
   /**
    * ### mask-composite
    *
@@ -6528,7 +6717,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-composite
    */
-  maskComposite?: StyleValue<CSS.Property.MaskComposite>
+  maskComposite?: StyleValueWithCondition<CSS.Property.MaskComposite>
   /**
    * ### mask-image
    *
@@ -6539,7 +6728,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-image
    */
-  maskImage?: StyleValue<CSS.Property.MaskImage, "gradients">
+  maskImage?: StyleValueWithCondition<CSS.Property.MaskImage, "gradients">
   /**
    * ### mask-mode
    *
@@ -6550,7 +6739,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-mode
    */
-  maskMode?: StyleValue<CSS.Property.MaskMode>
+  maskMode?: StyleValueWithCondition<CSS.Property.MaskMode>
   /**
    * ### mask-origin
    *
@@ -6561,7 +6750,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-origin
    */
-  maskOrigin?: StyleValue<CSS.Property.MaskOrigin>
+  maskOrigin?: StyleValueWithCondition<CSS.Property.MaskOrigin>
   /**
    * ### mask-position
    *
@@ -6572,7 +6761,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-position
    */
-  maskPosition?: StyleValue<CSS.Property.MaskPosition>
+  maskPosition?: StyleValueWithCondition<CSS.Property.MaskPosition>
   /**
    * ### mask-repeat
    *
@@ -6583,7 +6772,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-repeat
    */
-  maskRepeat?: StyleValue<CSS.Property.MaskRepeat>
+  maskRepeat?: StyleValueWithCondition<CSS.Property.MaskRepeat>
   /**
    * ### mask-size
    *
@@ -6594,7 +6783,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-size
    */
-  maskSize?: StyleValue<CSS.Property.MaskSize>
+  maskSize?: StyleValueWithCondition<CSS.Property.MaskSize>
   /**
    * ### mask-type
    *
@@ -6606,7 +6795,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mask-type
    */
-  maskType?: StyleValue<CSS.Property.MaskType>
+  maskType?: StyleValueWithCondition<CSS.Property.MaskType>
   /**
    * ### math-depth
    *
@@ -6617,7 +6806,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/math-depth
    */
-  mathDepth?: StyleValue<CSS.Property.MathDepth>
+  mathDepth?: StyleValueWithCondition<CSS.Property.MathDepth>
   /**
    * ### math-shift
    *
@@ -6630,7 +6819,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  mathShift?: StyleValue<CSS.Property.MathShift>
+  mathShift?: StyleValueWithCondition<CSS.Property.MathShift>
   /**
    * ### math-style
    *
@@ -6641,7 +6830,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/math-style
    */
-  mathStyle?: StyleValue<CSS.Property.MathStyle>
+  mathStyle?: StyleValueWithCondition<CSS.Property.MathStyle>
   /**
    * ### max-block-size
    *
@@ -6653,7 +6842,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-block-size
    */
-  maxBlockSize?: StyleValue<CSS.Property.MaxBlockSize | number, "sizes">
+  maxBlockSize?: StyleValueWithCondition<
+    CSS.Property.MaxBlockSize | number,
+    "sizes"
+  >
   /**
    * ### max-height
    *
@@ -6665,7 +6857,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-height
    */
-  maxH?: StyleValue<CSS.Property.MaxHeight | number, "sizes">
+  maxH?: StyleValueWithCondition<CSS.Property.MaxHeight | number, "sizes">
   /**
    * ### max-height
    *
@@ -6677,7 +6869,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-height
    */
-  maxHeight?: StyleValue<CSS.Property.MaxHeight | number, "sizes">
+  maxHeight?: StyleValueWithCondition<CSS.Property.MaxHeight | number, "sizes">
   /**
    * ### max-inline-size
    *
@@ -6689,7 +6881,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-inline-size
    */
-  maxInlineSize?: StyleValue<CSS.Property.MaxInlineSize | number, "sizes">
+  maxInlineSize?: StyleValueWithCondition<
+    CSS.Property.MaxInlineSize | number,
+    "sizes"
+  >
   /**
    * ### max-width
    *
@@ -6701,7 +6896,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxW?: StyleValue<CSS.Property.MaxWidth | number, "sizes">
+  maxW?: StyleValueWithCondition<CSS.Property.MaxWidth | number, "sizes">
   /**
    * ### max-width
    *
@@ -6713,7 +6908,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxWidth?: StyleValue<CSS.Property.MaxWidth | number, "sizes">
+  maxWidth?: StyleValueWithCondition<CSS.Property.MaxWidth | number, "sizes">
   /**
    * ### margin-bottom
    *
@@ -6725,7 +6920,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-bottom
    */
-  mb?: StyleValue<CSS.Property.MarginBottom | number, "spaces">
+  mb?: StyleValueWithCondition<CSS.Property.MarginBottom | number, "spaces">
   /**
    * ### margin-inline-end
    *
@@ -6737,7 +6932,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-end
    */
-  me?: StyleValue<CSS.Property.MarginInlineEnd | number, "spaces">
+  me?: StyleValueWithCondition<CSS.Property.MarginInlineEnd | number, "spaces">
   /**
    * ### min-block-size
    *
@@ -6749,7 +6944,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-block-size
    */
-  minBlockSize?: StyleValue<CSS.Property.MinBlockSize | number, "sizes">
+  minBlockSize?: StyleValueWithCondition<
+    CSS.Property.MinBlockSize | number,
+    "sizes"
+  >
   /**
    * ### min-height
    *
@@ -6761,7 +6959,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-height
    */
-  minH?: StyleValue<CSS.Property.MinHeight | number, "sizes">
+  minH?: StyleValueWithCondition<CSS.Property.MinHeight | number, "sizes">
   /**
    * ### min-height
    *
@@ -6773,7 +6971,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-height
    */
-  minHeight?: StyleValue<CSS.Property.MinHeight | number, "sizes">
+  minHeight?: StyleValueWithCondition<CSS.Property.MinHeight | number, "sizes">
   /**
    * ### min-inline-size
    *
@@ -6785,7 +6983,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-inline-size
    */
-  minInlineSize?: StyleValue<CSS.Property.MinInlineSize | number, "sizes">
+  minInlineSize?: StyleValueWithCondition<
+    CSS.Property.MinInlineSize | number,
+    "sizes"
+  >
   /**
    * ### min-width
    *
@@ -6797,7 +6998,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-width
    */
-  minW?: StyleValue<CSS.Property.MinWidth | number, "sizes">
+  minW?: StyleValueWithCondition<CSS.Property.MinWidth | number, "sizes">
   /**
    * ### min-width
    *
@@ -6809,7 +7010,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-width
    */
-  minWidth?: StyleValue<CSS.Property.MinWidth | number, "sizes">
+  minWidth?: StyleValueWithCondition<CSS.Property.MinWidth | number, "sizes">
   /**
    * ### mix-blend-mode
    *
@@ -6821,7 +7022,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/mix-blend-mode
    */
-  mixBlendMode?: StyleValue<CSS.Property.MixBlendMode>
+  mixBlendMode?: StyleValueWithCondition<CSS.Property.MixBlendMode>
   /**
    * ### margin-left
    *
@@ -6833,7 +7034,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-left
    */
-  ml?: StyleValue<CSS.Property.MarginLeft | number, "spaces">
+  ml?: StyleValueWithCondition<CSS.Property.MarginLeft | number, "spaces">
   /**
    * ### margin-right
    *
@@ -6845,7 +7046,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-right
    */
-  mr?: StyleValue<CSS.Property.MarginRight | number, "spaces">
+  mr?: StyleValueWithCondition<CSS.Property.MarginRight | number, "spaces">
   /**
    * ### margin-inline-start
    *
@@ -6857,7 +7058,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  ms?: StyleValue<CSS.Property.MarginInlineStart | number, "spaces">
+  ms?: StyleValueWithCondition<
+    CSS.Property.MarginInlineStart | number,
+    "spaces"
+  >
   /**
    * ### margin-top
    *
@@ -6869,7 +7073,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  mt?: StyleValue<CSS.Property.MarginTop | number, "spaces">
+  mt?: StyleValueWithCondition<CSS.Property.MarginTop | number, "spaces">
   /**
    * ### object-fit
    *
@@ -6881,7 +7085,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/object-fit
    */
-  objectFit?: StyleValue<CSS.Property.ObjectFit>
+  objectFit?: StyleValueWithCondition<CSS.Property.ObjectFit>
   /**
    * ### object-position
    *
@@ -6893,7 +7097,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/object-position
    */
-  objectPosition?: StyleValue<CSS.Property.ObjectPosition>
+  objectPosition?: StyleValueWithCondition<CSS.Property.ObjectPosition>
   /**
    * ### object-view-box
    *
@@ -6905,7 +7109,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  objectViewBox?: StyleValue<AnyString>
+  objectViewBox?: StyleValueWithCondition<AnyString>
   /**
    * ### offset
    *
@@ -6917,7 +7121,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset
    */
-  offset?: StyleValue<CSS.Property.Offset>
+  offset?: StyleValueWithCondition<CSS.Property.Offset>
   /**
    * ### offset-anchor
    *
@@ -6929,7 +7133,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-anchor
    */
-  offsetAnchor?: StyleValue<CSS.Property.OffsetAnchor>
+  offsetAnchor?: StyleValueWithCondition<CSS.Property.OffsetAnchor>
   /**
    * ### offset-distance
    *
@@ -6941,7 +7145,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-distance
    */
-  offsetDistance?: StyleValue<CSS.Property.OffsetDistance>
+  offsetDistance?: StyleValueWithCondition<CSS.Property.OffsetDistance>
   /**
    * ### offset-path
    *
@@ -6953,7 +7157,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-path
    */
-  offsetPath?: StyleValue<CSS.Property.OffsetPath>
+  offsetPath?: StyleValueWithCondition<CSS.Property.OffsetPath>
   /**
    * ### offset-position
    *
@@ -6965,7 +7169,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-position
    */
-  offsetPosition?: StyleValue<CSS.Property.OffsetPosition>
+  offsetPosition?: StyleValueWithCondition<CSS.Property.OffsetPosition>
   /**
    * ### offset-rotate
    *
@@ -6977,7 +7181,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/offset-rotate
    */
-  offsetRotate?: StyleValue<CSS.Property.OffsetRotate>
+  offsetRotate?: StyleValueWithCondition<CSS.Property.OffsetRotate>
   /**
    * ### opacity
    *
@@ -6989,7 +7193,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/opacity
    */
-  opacity?: StyleValue<CSS.Property.Opacity>
+  opacity?: StyleValueWithCondition<CSS.Property.Opacity>
   /**
    * ### order
    *
@@ -7001,7 +7205,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/order
    */
-  order?: StyleValue<CSS.Property.Order>
+  order?: StyleValueWithCondition<CSS.Property.Order>
   /**
    * ### orphans
    *
@@ -7011,7 +7215,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/orphans
    */
-  orphans?: StyleValue<CSS.Property.Orphans>
+  orphans?: StyleValueWithCondition<CSS.Property.Orphans>
   /**
    * ### outline-color
    *
@@ -7023,7 +7227,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-color
    */
-  outlineColor?: StyleValue<CSS.Property.OutlineColor, "colors">
+  outlineColor?: StyleValueWithCondition<CSS.Property.OutlineColor, "colors">
   /**
    * ### outline-offset
    *
@@ -7035,7 +7239,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-offset
    */
-  outlineOffset?: StyleValue<CSS.Property.OutlineOffset>
+  outlineOffset?: StyleValueWithCondition<CSS.Property.OutlineOffset>
   /**
    * ### outline-style
    *
@@ -7047,7 +7251,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-style
    */
-  outlineStyle?: StyleValue<CSS.Property.OutlineStyle>
+  outlineStyle?: StyleValueWithCondition<CSS.Property.OutlineStyle>
   /**
    * ### outline-width
    *
@@ -7059,7 +7263,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline-width
    */
-  outlineWidth?: StyleValue<CSS.Property.OutlineWidth | number>
+  outlineWidth?: StyleValueWithCondition<CSS.Property.OutlineWidth | number>
   /**
    * ### overflow
    *
@@ -7071,7 +7275,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow
    */
-  overflow?: StyleValue<CSS.Property.Overflow>
+  overflow?: StyleValueWithCondition<CSS.Property.Overflow>
   /**
    * ### overflow-anchor
    *
@@ -7081,7 +7285,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-anchor
    */
-  overflowAnchor?: StyleValue<CSS.Property.OverflowAnchor>
+  overflowAnchor?: StyleValueWithCondition<CSS.Property.OverflowAnchor>
   /**
    * ### overflow-block
    *
@@ -7093,7 +7297,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-block
    */
-  overflowBlock?: StyleValue<CSS.Property.OverflowBlock>
+  overflowBlock?: StyleValueWithCondition<CSS.Property.OverflowBlock>
   /**
    * ### overflow-clip-margin
    *
@@ -7103,7 +7307,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-clip-margin
    */
-  overflowClipMargin?: StyleValue<CSS.Property.OverflowClipMargin>
+  overflowClipMargin?: StyleValueWithCondition<CSS.Property.OverflowClipMargin>
   /**
    * ### overflow-inline
    *
@@ -7115,7 +7319,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-inline
    */
-  overflowInline?: StyleValue<CSS.Property.OverflowInline>
+  overflowInline?: StyleValueWithCondition<CSS.Property.OverflowInline>
   /**
    * ### overflow-wrap
    *
@@ -7127,7 +7331,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-wrap
    */
-  overflowWrap?: StyleValue<CSS.Property.OverflowWrap>
+  overflowWrap?: StyleValueWithCondition<CSS.Property.OverflowWrap>
   /**
    * ### overflow-x
    *
@@ -7139,7 +7343,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-x
    */
-  overflowX?: StyleValue<CSS.Property.OverflowX>
+  overflowX?: StyleValueWithCondition<CSS.Property.OverflowX>
   /**
    * ### overflow-y
    *
@@ -7151,7 +7355,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overflow-y
    */
-  overflowY?: StyleValue<CSS.Property.OverflowY>
+  overflowY?: StyleValueWithCondition<CSS.Property.OverflowY>
   /**
    * ### overlay
    *
@@ -7163,7 +7367,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  overlay?: StyleValue<CSS.Property.Overlay>
+  overlay?: StyleValueWithCondition<CSS.Property.Overlay>
   /**
    * ### overscroll-behavior
    *
@@ -7175,7 +7379,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
    */
-  overscroll?: StyleValue<CSS.Property.OverscrollBehavior>
+  overscroll?: StyleValueWithCondition<CSS.Property.OverscrollBehavior>
   /**
    * ### overscroll-behavior
    *
@@ -7187,7 +7391,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior
    */
-  overscrollBehavior?: StyleValue<CSS.Property.OverscrollBehavior>
+  overscrollBehavior?: StyleValueWithCondition<CSS.Property.OverscrollBehavior>
   /**
    * ### overscroll-behavior-block
    *
@@ -7199,7 +7403,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-block
    */
-  overscrollBehaviorBlock?: StyleValue<CSS.Property.OverscrollBehaviorBlock>
+  overscrollBehaviorBlock?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorBlock>
   /**
    * ### overscroll-behavior-inline
    *
@@ -7211,7 +7415,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-inline
    */
-  overscrollBehaviorInline?: StyleValue<CSS.Property.OverscrollBehaviorInline>
+  overscrollBehaviorInline?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorInline>
   /**
    * ### overscroll-behavior-x
    *
@@ -7223,7 +7427,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
    */
-  overscrollBehaviorX?: StyleValue<CSS.Property.OverscrollBehaviorX>
+  overscrollBehaviorX?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorX>
   /**
    * ### overscroll-behavior-y
    *
@@ -7235,7 +7439,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
    */
-  overscrollBehaviorY?: StyleValue<CSS.Property.OverscrollBehaviorY>
+  overscrollBehaviorY?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorY>
   /**
    * ### overscroll-behavior-x
    *
@@ -7247,7 +7451,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-x
    */
-  overscrollX?: StyleValue<CSS.Property.OverscrollBehaviorX>
+  overscrollX?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorX>
   /**
    * ### overscroll-behavior-y
    *
@@ -7259,7 +7463,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/overscroll-behavior-y
    */
-  overscrollY?: StyleValue<CSS.Property.OverscrollBehaviorY>
+  overscrollY?: StyleValueWithCondition<CSS.Property.OverscrollBehaviorY>
   /**
    * ### padding
    *
@@ -7271,7 +7475,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding
    */
-  p?: StyleValue<CSS.Property.Padding | number, "spaces">
+  p?: StyleValueWithCondition<CSS.Property.Padding | number, "spaces">
   /**
    * ### padding
    *
@@ -7283,7 +7487,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding
    */
-  padding?: StyleValue<CSS.Property.Padding | number, "spaces">
+  padding?: StyleValueWithCondition<CSS.Property.Padding | number, "spaces">
   /**
    * ### padding-block
    *
@@ -7295,7 +7499,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-block
    */
-  paddingBlock?: StyleValue<CSS.Property.PaddingBlock | number, "spaces">
+  paddingBlock?: StyleValueWithCondition<
+    CSS.Property.PaddingBlock | number,
+    "spaces"
+  >
   /**
    * ### padding-block-end
    *
@@ -7307,7 +7514,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-block-end
    */
-  paddingBlockEnd?: StyleValue<CSS.Property.PaddingBlockEnd | number, "spaces">
+  paddingBlockEnd?: StyleValueWithCondition<
+    CSS.Property.PaddingBlockEnd | number,
+    "spaces"
+  >
   /**
    * ### padding-block-start
    *
@@ -7319,7 +7529,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-block-start
    */
-  paddingBlockStart?: StyleValue<
+  paddingBlockStart?: StyleValueWithCondition<
     CSS.Property.PaddingBlockStart | number,
     "spaces"
   >
@@ -7334,7 +7544,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
    */
-  paddingBottom?: StyleValue<CSS.Property.PaddingBottom | number, "spaces">
+  paddingBottom?: StyleValueWithCondition<
+    CSS.Property.PaddingBottom | number,
+    "spaces"
+  >
   /**
    * ### padding-inline-end
    *
@@ -7346,7 +7559,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  paddingEnd?: StyleValue<CSS.Property.PaddingInlineEnd | number, "spaces">
+  paddingEnd?: StyleValueWithCondition<
+    CSS.Property.PaddingInlineEnd | number,
+    "spaces"
+  >
   /**
    * ### padding-inline
    *
@@ -7358,7 +7574,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline
    */
-  paddingInline?: StyleValue<CSS.Property.PaddingInline | number, "spaces">
+  paddingInline?: StyleValueWithCondition<
+    CSS.Property.PaddingInline | number,
+    "spaces"
+  >
   /**
    * ### padding-inline-end
    *
@@ -7370,7 +7589,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  paddingInlineEnd?: StyleValue<
+  paddingInlineEnd?: StyleValueWithCondition<
     CSS.Property.PaddingInlineEnd | number,
     "spaces"
   >
@@ -7385,7 +7604,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  paddingInlineStart?: StyleValue<
+  paddingInlineStart?: StyleValueWithCondition<
     CSS.Property.PaddingInlineStart | number,
     "spaces"
   >
@@ -7400,7 +7619,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
    */
-  paddingLeft?: StyleValue<CSS.Property.PaddingLeft | number, "spaces">
+  paddingLeft?: StyleValueWithCondition<
+    CSS.Property.PaddingLeft | number,
+    "spaces"
+  >
   /**
    * ### padding-right
    *
@@ -7412,7 +7634,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
    */
-  paddingRight?: StyleValue<CSS.Property.PaddingRight | number, "spaces">
+  paddingRight?: StyleValueWithCondition<
+    CSS.Property.PaddingRight | number,
+    "spaces"
+  >
   /**
    * ### padding-inline-start
    *
@@ -7424,7 +7649,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  paddingStart?: StyleValue<CSS.Property.PaddingInlineStart | number, "spaces">
+  paddingStart?: StyleValueWithCondition<
+    CSS.Property.PaddingInlineStart | number,
+    "spaces"
+  >
   /**
    * ### padding-top
    *
@@ -7436,7 +7664,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  paddingTop?: StyleValue<CSS.Property.PaddingTop | number, "spaces">
+  paddingTop?: StyleValueWithCondition<
+    CSS.Property.PaddingTop | number,
+    "spaces"
+  >
   /**
    * ### page
    *
@@ -7446,7 +7677,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/page
    */
-  page?: StyleValue<CSS.Property.Page>
+  page?: StyleValueWithCondition<CSS.Property.Page>
   /**
    * ### page-break-after
    *
@@ -7457,7 +7688,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  pageBreakAfter?: StyleValue<CSS.Property.PageBreakAfter>
+  pageBreakAfter?: StyleValueWithCondition<CSS.Property.PageBreakAfter>
   /**
    * ### page-break-before
    *
@@ -7468,7 +7699,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  pageBreakBefore?: StyleValue<CSS.Property.PageBreakBefore>
+  pageBreakBefore?: StyleValueWithCondition<CSS.Property.PageBreakBefore>
   /**
    * ### page-break-inside
    *
@@ -7479,7 +7710,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  pageBreakInside?: StyleValue<CSS.Property.PageBreakInside>
+  pageBreakInside?: StyleValueWithCondition<CSS.Property.PageBreakInside>
   /**
    * ### paint-order
    *
@@ -7489,7 +7720,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/paint-order
    */
-  paintOrder?: StyleValue<CSS.Property.PaintOrder>
+  paintOrder?: StyleValueWithCondition<CSS.Property.PaintOrder>
   /**
    * ### padding-bottom
    *
@@ -7501,7 +7732,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-bottom
    */
-  pb?: StyleValue<CSS.Property.PaddingBottom | number, "spaces">
+  pb?: StyleValueWithCondition<CSS.Property.PaddingBottom | number, "spaces">
   /**
    * ### padding-inline-end
    *
@@ -7513,7 +7744,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-end
    */
-  pe?: StyleValue<CSS.Property.PaddingInlineEnd | number, "spaces">
+  pe?: StyleValueWithCondition<CSS.Property.PaddingInlineEnd | number, "spaces">
   /**
    * ### perspective
    *
@@ -7525,7 +7756,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/perspective
    */
-  perspective?: StyleValue<CSS.Property.Perspective>
+  perspective?: StyleValueWithCondition<CSS.Property.Perspective>
   /**
    * ### perspective-origin
    *
@@ -7537,7 +7768,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/perspective-origin
    */
-  perspectiveOrigin?: StyleValue<CSS.Property.PerspectiveOrigin>
+  perspectiveOrigin?: StyleValueWithCondition<CSS.Property.PerspectiveOrigin>
   /**
    * ### padding-left
    *
@@ -7549,7 +7780,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-left
    */
-  pl?: StyleValue<CSS.Property.PaddingLeft | number, "spaces">
+  pl?: StyleValueWithCondition<CSS.Property.PaddingLeft | number, "spaces">
   /**
    * ### place-content
    *
@@ -7561,7 +7792,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/place-content
    */
-  placeContent?: StyleValue<CSS.Property.PlaceContent>
+  placeContent?: StyleValueWithCondition<CSS.Property.PlaceContent>
   /**
    * ### place-items
    *
@@ -7573,7 +7804,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/place-items
    */
-  placeItems?: StyleValue<CSS.Property.PlaceItems>
+  placeItems?: StyleValueWithCondition<CSS.Property.PlaceItems>
   /**
    * ### place-self
    *
@@ -7585,7 +7816,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/place-self
    */
-  placeSelf?: StyleValue<CSS.Property.PlaceSelf>
+  placeSelf?: StyleValueWithCondition<CSS.Property.PlaceSelf>
   /**
    * ### pointer-events
    *
@@ -7597,7 +7828,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/pointer-events
    */
-  pointerEvents?: StyleValue<CSS.Property.PointerEvents>
+  pointerEvents?: StyleValueWithCondition<CSS.Property.PointerEvents>
   /**
    * ### position
    *
@@ -7609,7 +7840,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/position
    */
-  pos?: StyleValue<CSS.Property.Position>
+  pos?: StyleValueWithCondition<CSS.Property.Position>
   /**
    * ### position
    *
@@ -7621,7 +7852,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/position
    */
-  position?: StyleValue<CSS.Property.Position>
+  position?: StyleValueWithCondition<CSS.Property.Position>
   /**
    * ### position-anchor
    *
@@ -7633,7 +7864,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionAnchor?: StyleValue<AnyString>
+  positionAnchor?: StyleValueWithCondition<AnyString>
   /**
    * ### position-area
    *
@@ -7645,7 +7876,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionArea?: StyleValue<AnyString>
+  positionArea?: StyleValueWithCondition<AnyString>
   /**
    * ### position-try
    *
@@ -7657,7 +7888,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTry?: StyleValue<AnyString>
+  positionTry?: StyleValueWithCondition<AnyString>
   /**
    * ### position-try-fallbacks
    *
@@ -7669,7 +7900,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTryFallbacks?: StyleValue<AnyString>
+  positionTryFallbacks?: StyleValueWithCondition<AnyString>
   /**
    * ### position-try-order
    *
@@ -7681,7 +7912,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionTryOrder?: StyleValue<AnyString>
+  positionTryOrder?: StyleValueWithCondition<AnyString>
   /**
    * ### position-visibility
    *
@@ -7693,7 +7924,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  positionVisibility?: StyleValue<AnyString>
+  positionVisibility?: StyleValueWithCondition<AnyString>
   /**
    * ### padding-right
    *
@@ -7705,7 +7936,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-right
    */
-  pr?: StyleValue<CSS.Property.PaddingRight | number, "spaces">
+  pr?: StyleValueWithCondition<CSS.Property.PaddingRight | number, "spaces">
   /**
    * ### print-color-adjust
    *
@@ -7716,7 +7947,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/print-color-adjust
    */
-  printColorAdjust?: StyleValue<CSS.Property.PrintColorAdjust>
+  printColorAdjust?: StyleValueWithCondition<CSS.Property.PrintColorAdjust>
   /**
    * ### padding-inline-start
    *
@@ -7728,7 +7959,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  ps?: StyleValue<CSS.Property.PaddingInlineStart | number, "spaces">
+  ps?: StyleValueWithCondition<
+    CSS.Property.PaddingInlineStart | number,
+    "spaces"
+  >
   /**
    * ### padding-top
    *
@@ -7740,7 +7974,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  pt?: StyleValue<CSS.Property.PaddingTop | number, "spaces">
+  pt?: StyleValueWithCondition<CSS.Property.PaddingTop | number, "spaces">
   /**
    * ### quotes
    *
@@ -7752,7 +7986,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/quotes
    */
-  quotes?: StyleValue<CSS.Property.Quotes>
+  quotes?: StyleValueWithCondition<CSS.Property.Quotes>
   /**
    * ### r
    *
@@ -7764,7 +7998,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/r
    */
-  r?: StyleValue<AnyString>
+  r?: StyleValueWithCondition<AnyString>
   /**
    * ### reading-flow
    *
@@ -7776,7 +8010,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  readingFlow?: StyleValue<AnyString>
+  readingFlow?: StyleValueWithCondition<AnyString>
   /**
    * ### reading-order
    *
@@ -7786,7 +8020,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  readingOrder?: StyleValue<AnyString>
+  readingOrder?: StyleValueWithCondition<AnyString>
   /**
    * ### resize
    *
@@ -7796,7 +8030,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/resize
    */
-  resize?: StyleValue<CSS.Property.Resize>
+  resize?: StyleValueWithCondition<CSS.Property.Resize>
   /**
    * ### right
    *
@@ -7808,7 +8042,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/right
    */
-  right?: StyleValue<CSS.Property.Right | number, "spaces">
+  right?: StyleValueWithCondition<CSS.Property.Right | number, "spaces">
   /**
    * ### rotate
    *
@@ -7820,7 +8054,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/rotate
    */
-  rotate?: StyleValue<CSS.Property.Rotate>
+  rotate?: StyleValueWithCondition<CSS.Property.Rotate>
   /**
    * ### border-radius
    *
@@ -7832,7 +8066,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-radius
    */
-  rounded?: StyleValue<CSS.Property.BorderRadius | number, "radii">
+  rounded?: StyleValueWithCondition<CSS.Property.BorderRadius | number, "radii">
   /**
    * ### border-bottom-left-radius
    *
@@ -7856,7 +8090,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  roundedBottom?: StyleValue<
+  roundedBottom?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderBottomRightRadius
     | number,
@@ -7873,7 +8107,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-end-radius
    */
-  roundedBottomEnd?: StyleValue<
+  roundedBottomEnd?: StyleValueWithCondition<
     CSS.Property.BorderEndEndRadius | number,
     "radii"
   >
@@ -7888,7 +8122,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-left-radius
    */
-  roundedBottomLeft?: StyleValue<
+  roundedBottomLeft?: StyleValueWithCondition<
     CSS.Property.BorderBottomLeftRadius | number,
     "radii"
   >
@@ -7903,7 +8137,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-bottom-right-radius
    */
-  roundedBottomRight?: StyleValue<
+  roundedBottomRight?: StyleValueWithCondition<
     CSS.Property.BorderBottomRightRadius | number,
     "radii"
   >
@@ -7918,7 +8152,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  roundedBottomStart?: StyleValue<
+  roundedBottomStart?: StyleValueWithCondition<
     CSS.Property.BorderEndStartRadius | number,
     "radii"
   >
@@ -7945,7 +8179,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-end-start-radius
    */
-  roundedEnd?: StyleValue<
+  roundedEnd?: StyleValueWithCondition<
     | CSS.Property.BorderEndEndRadius
     | CSS.Property.BorderEndStartRadius
     | number,
@@ -7974,7 +8208,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  roundedLeft?: StyleValue<
+  roundedLeft?: StyleValueWithCondition<
     | CSS.Property.BorderBottomLeftRadius
     | CSS.Property.BorderTopLeftRadius
     | number,
@@ -8003,7 +8237,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  roundedRight?: StyleValue<
+  roundedRight?: StyleValueWithCondition<
     | CSS.Property.BorderBottomRightRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -8032,7 +8266,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  roundedStart?: StyleValue<
+  roundedStart?: StyleValueWithCondition<
     | CSS.Property.BorderStartEndRadius
     | CSS.Property.BorderStartStartRadius
     | number,
@@ -8061,7 +8295,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  roundedTop?: StyleValue<
+  roundedTop?: StyleValueWithCondition<
     | CSS.Property.BorderTopLeftRadius
     | CSS.Property.BorderTopRightRadius
     | number,
@@ -8078,7 +8312,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-end-radius
    */
-  roundedTopEnd?: StyleValue<
+  roundedTopEnd?: StyleValueWithCondition<
     CSS.Property.BorderStartEndRadius | number,
     "radii"
   >
@@ -8093,7 +8327,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-left-radius
    */
-  roundedTopLeft?: StyleValue<
+  roundedTopLeft?: StyleValueWithCondition<
     CSS.Property.BorderTopLeftRadius | number,
     "radii"
   >
@@ -8108,7 +8342,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-top-right-radius
    */
-  roundedTopRight?: StyleValue<
+  roundedTopRight?: StyleValueWithCondition<
     CSS.Property.BorderTopRightRadius | number,
     "radii"
   >
@@ -8123,7 +8357,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/border-start-start-radius
    */
-  roundedTopStart?: StyleValue<
+  roundedTopStart?: StyleValueWithCondition<
     CSS.Property.BorderStartStartRadius | number,
     "radii"
   >
@@ -8138,7 +8372,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/row-gap
    */
-  rowGap?: StyleValue<CSS.Property.RowGap | number, "spaces">
+  rowGap?: StyleValueWithCondition<CSS.Property.RowGap | number, "spaces">
   /**
    * ### ruby-align
    *
@@ -8149,7 +8383,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/ruby-align
    */
-  rubyAlign?: StyleValue<CSS.Property.RubyAlign>
+  rubyAlign?: StyleValueWithCondition<CSS.Property.RubyAlign>
   /**
    * ### ruby-overhang
    *
@@ -8159,7 +8393,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-ruby/#propdef-ruby-overhang
    */
-  rubyOverhang?: StyleValue<AnyString>
+  rubyOverhang?: StyleValueWithCondition<AnyString>
   /**
    * ### ruby-position
    *
@@ -8170,7 +8404,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/ruby-position
    */
-  rubyPosition?: StyleValue<CSS.Property.RubyPosition>
+  rubyPosition?: StyleValueWithCondition<CSS.Property.RubyPosition>
   /**
    * ### rx
    *
@@ -8182,7 +8416,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/rx
    */
-  rx?: StyleValue<AnyString>
+  rx?: StyleValueWithCondition<AnyString>
   /**
    * ### ry
    *
@@ -8194,7 +8428,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/ry
    */
-  ry?: StyleValue<AnyString>
+  ry?: StyleValueWithCondition<AnyString>
   /**
    * ### scale
    *
@@ -8206,7 +8440,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scale
    */
-  scale?: StyleValue<CSS.Property.Scale>
+  scale?: StyleValueWithCondition<CSS.Property.Scale>
   /**
    * ### scrollbar-color
    *
@@ -8216,7 +8450,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-color
    */
-  scrollbarColor?: StyleValue<CSS.Property.ScrollbarColor, "colors">
+  scrollbarColor?: StyleValueWithCondition<
+    CSS.Property.ScrollbarColor,
+    "colors"
+  >
   /**
    * ### scrollbar-gutter
    *
@@ -8227,7 +8464,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-gutter
    */
-  scrollbarGutter?: StyleValue<CSS.Property.ScrollbarGutter>
+  scrollbarGutter?: StyleValueWithCondition<CSS.Property.ScrollbarGutter>
   /**
    * ### scrollbar-width
    *
@@ -8238,7 +8475,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scrollbar-width
    */
-  scrollbarWidth?: StyleValue<CSS.Property.ScrollbarWidth | number>
+  scrollbarWidth?: StyleValueWithCondition<CSS.Property.ScrollbarWidth | number>
   /**
    * ### scroll-behavior
    *
@@ -8250,7 +8487,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-behavior
    */
-  scrollBehavior?: StyleValue<CSS.Property.ScrollBehavior>
+  scrollBehavior?: StyleValueWithCondition<CSS.Property.ScrollBehavior>
   /**
    * ### scroll-initial-target
    *
@@ -8262,7 +8499,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollInitialTarget?: StyleValue<AnyString>
+  scrollInitialTarget?: StyleValueWithCondition<AnyString>
   /**
    * ### scroll-margin
    *
@@ -8274,7 +8511,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin
    */
-  scrollMargin?: StyleValue<CSS.Property.ScrollMargin | number, "spaces">
+  scrollMargin?: StyleValueWithCondition<
+    CSS.Property.ScrollMargin | number,
+    "spaces"
+  >
   /**
    * ### scroll-margin-block
    *
@@ -8286,7 +8526,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block
    */
-  scrollMarginBlock?: StyleValue<CSS.Property.ScrollMarginBlock>
+  scrollMarginBlock?: StyleValueWithCondition<CSS.Property.ScrollMarginBlock>
   /**
    * ### scroll-margin-block-end
    *
@@ -8298,7 +8538,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-end
    */
-  scrollMarginBlockEnd?: StyleValue<CSS.Property.ScrollMarginBlockEnd>
+  scrollMarginBlockEnd?: StyleValueWithCondition<CSS.Property.ScrollMarginBlockEnd>
   /**
    * ### scroll-margin-block-start
    *
@@ -8310,7 +8550,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-block-start
    */
-  scrollMarginBlockStart?: StyleValue<CSS.Property.ScrollMarginBlockStart>
+  scrollMarginBlockStart?: StyleValueWithCondition<CSS.Property.ScrollMarginBlockStart>
   /**
    * ### scroll-margin-bottom
    *
@@ -8322,7 +8562,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-bottom
    */
-  scrollMarginBottom?: StyleValue<
+  scrollMarginBottom?: StyleValueWithCondition<
     CSS.Property.ScrollMarginBottom | number,
     "spaces"
   >
@@ -8337,7 +8577,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline
    */
-  scrollMarginInline?: StyleValue<CSS.Property.ScrollMarginInline>
+  scrollMarginInline?: StyleValueWithCondition<CSS.Property.ScrollMarginInline>
   /**
    * ### scroll-margin-inline-end
    *
@@ -8349,7 +8589,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-end
    */
-  scrollMarginInlineEnd?: StyleValue<CSS.Property.ScrollMarginInlineEnd>
+  scrollMarginInlineEnd?: StyleValueWithCondition<CSS.Property.ScrollMarginInlineEnd>
   /**
    * ### scroll-margin-inline-start
    *
@@ -8361,7 +8601,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-inline-start
    */
-  scrollMarginInlineStart?: StyleValue<CSS.Property.ScrollMarginInlineStart>
+  scrollMarginInlineStart?: StyleValueWithCondition<CSS.Property.ScrollMarginInlineStart>
   /**
    * ### scroll-margin-left
    *
@@ -8373,7 +8613,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-left
    */
-  scrollMarginLeft?: StyleValue<
+  scrollMarginLeft?: StyleValueWithCondition<
     CSS.Property.ScrollMarginLeft | number,
     "spaces"
   >
@@ -8388,7 +8628,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
    */
-  scrollMarginRight?: StyleValue<
+  scrollMarginRight?: StyleValueWithCondition<
     CSS.Property.ScrollMarginRight | number,
     "spaces"
   >
@@ -8403,7 +8643,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
    */
-  scrollMarginTop?: StyleValue<CSS.Property.ScrollMarginTop | number, "spaces">
+  scrollMarginTop?: StyleValueWithCondition<
+    CSS.Property.ScrollMarginTop | number,
+    "spaces"
+  >
   /**
    * ### scroll-marker-group
    *
@@ -8415,7 +8658,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollMarkerGroup?: StyleValue<AnyString>
+  scrollMarkerGroup?: StyleValueWithCondition<AnyString>
   /**
    * ### scroll-padding
    *
@@ -8427,7 +8670,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding
    */
-  scrollPadding?: StyleValue<CSS.Property.ScrollPadding | number, "spaces">
+  scrollPadding?: StyleValueWithCondition<
+    CSS.Property.ScrollPadding | number,
+    "spaces"
+  >
   /**
    * ### scroll-padding-block
    *
@@ -8439,7 +8685,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block
    */
-  scrollPaddingBlock?: StyleValue<CSS.Property.ScrollPaddingBlock>
+  scrollPaddingBlock?: StyleValueWithCondition<CSS.Property.ScrollPaddingBlock>
   /**
    * ### scroll-padding-block-end
    *
@@ -8451,7 +8697,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-end
    */
-  scrollPaddingBlockEnd?: StyleValue<CSS.Property.ScrollPaddingBlockEnd>
+  scrollPaddingBlockEnd?: StyleValueWithCondition<CSS.Property.ScrollPaddingBlockEnd>
   /**
    * ### scroll-padding-block-start
    *
@@ -8463,7 +8709,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-block-start
    */
-  scrollPaddingBlockStart?: StyleValue<CSS.Property.ScrollPaddingBlockStart>
+  scrollPaddingBlockStart?: StyleValueWithCondition<CSS.Property.ScrollPaddingBlockStart>
   /**
    * ### scroll-padding-bottom
    *
@@ -8475,7 +8721,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-bottom
    */
-  scrollPaddingBottom?: StyleValue<
+  scrollPaddingBottom?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingBottom | number,
     "spaces"
   >
@@ -8490,7 +8736,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline
    */
-  scrollPaddingInline?: StyleValue<CSS.Property.ScrollPaddingInline>
+  scrollPaddingInline?: StyleValueWithCondition<CSS.Property.ScrollPaddingInline>
   /**
    * ### scroll-padding-inline-end
    *
@@ -8502,7 +8748,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-end
    */
-  scrollPaddingInlineEnd?: StyleValue<CSS.Property.ScrollPaddingInlineEnd>
+  scrollPaddingInlineEnd?: StyleValueWithCondition<CSS.Property.ScrollPaddingInlineEnd>
   /**
    * ### scroll-padding-inline-start
    *
@@ -8514,7 +8760,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-inline-start
    */
-  scrollPaddingInlineStart?: StyleValue<CSS.Property.ScrollPaddingInlineStart>
+  scrollPaddingInlineStart?: StyleValueWithCondition<CSS.Property.ScrollPaddingInlineStart>
   /**
    * ### scroll-padding-left
    *
@@ -8526,7 +8772,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-left
    */
-  scrollPaddingLeft?: StyleValue<
+  scrollPaddingLeft?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingLeft | number,
     "spaces"
   >
@@ -8541,7 +8787,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
    */
-  scrollPaddingRight?: StyleValue<
+  scrollPaddingRight?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingRight | number,
     "spaces"
   >
@@ -8556,7 +8802,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
    */
-  scrollPaddingTop?: StyleValue<
+  scrollPaddingTop?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingTop | number,
     "spaces"
   >
@@ -8571,7 +8817,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-align
    */
-  scrollSnapAlign?: StyleValue<CSS.Property.ScrollSnapAlign>
+  scrollSnapAlign?: StyleValueWithCondition<CSS.Property.ScrollSnapAlign>
   /**
    * ### scroll-snap-stop
    *
@@ -8583,7 +8829,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-stop
    */
-  scrollSnapStop?: StyleValue<CSS.Property.ScrollSnapStop>
+  scrollSnapStop?: StyleValueWithCondition<CSS.Property.ScrollSnapStop>
   /**
    * ### scroll-snap-type
    *
@@ -8595,7 +8841,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-snap-type
    */
-  scrollSnapType?: StyleValue<CSS.Property.ScrollSnapType>
+  scrollSnapType?: StyleValueWithCondition<CSS.Property.ScrollSnapType>
   /**
    * ### scroll-timeline
    *
@@ -8607,7 +8853,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollTimeline?: StyleValue<CSS.Property.ScrollTimeline>
+  scrollTimeline?: StyleValueWithCondition<CSS.Property.ScrollTimeline>
   /**
    * ### scroll-timeline-axis
    *
@@ -8619,7 +8865,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollTimelineAxis?: StyleValue<CSS.Property.ScrollTimelineAxis>
+  scrollTimelineAxis?: StyleValueWithCondition<CSS.Property.ScrollTimelineAxis>
   /**
    * ### scroll-timeline-name
    *
@@ -8631,7 +8877,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  scrollTimelineName?: StyleValue<CSS.Property.ScrollTimelineName>
+  scrollTimelineName?: StyleValueWithCondition<CSS.Property.ScrollTimelineName>
   /**
    * ### box-shadow
    *
@@ -8643,7 +8889,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/box-shadow
    */
-  shadow?: StyleValue<CSS.Property.BoxShadow, "shadows">
+  shadow?: StyleValueWithCondition<CSS.Property.BoxShadow, "shadows">
   /**
    * ### shape-image-threshold
    *
@@ -8655,7 +8901,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-image-threshold
    */
-  shapeImageThreshold?: StyleValue<CSS.Property.ShapeImageThreshold>
+  shapeImageThreshold?: StyleValueWithCondition<CSS.Property.ShapeImageThreshold>
   /**
    * ### shape-margin
    *
@@ -8667,7 +8913,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-margin
    */
-  shapeMargin?: StyleValue<CSS.Property.ShapeMargin>
+  shapeMargin?: StyleValueWithCondition<CSS.Property.ShapeMargin>
   /**
    * ### shape-outside
    *
@@ -8679,7 +8925,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-outside
    */
-  shapeOutside?: StyleValue<CSS.Property.ShapeOutside>
+  shapeOutside?: StyleValueWithCondition<CSS.Property.ShapeOutside>
   /**
    * ### shape-rendering
    *
@@ -8691,7 +8937,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/shape-rendering
    */
-  shapeRendering?: StyleValue<CSS.Property.ShapeRendering>
+  shapeRendering?: StyleValueWithCondition<CSS.Property.ShapeRendering>
   /**
    * ### speak
    *
@@ -8701,7 +8947,7 @@ export interface StyleProps {
    *
    * @see https://drafts.csswg.org/css-speech-1/#speaking-props-speak
    */
-  speak?: StyleValue<AnyString>
+  speak?: StyleValueWithCondition<AnyString>
   /**
    * ### speak-as
    *
@@ -8713,7 +8959,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  speakAs?: StyleValue<AnyString>
+  speakAs?: StyleValueWithCondition<AnyString>
   /**
    * ### stop-color
    *
@@ -8725,7 +8971,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stop-color
    */
-  stopColor?: StyleValue<CSS.Property.StopColor>
+  stopColor?: StyleValueWithCondition<CSS.Property.StopColor>
   /**
    * ### stop-opacity
    *
@@ -8737,7 +8983,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stop-opacity
    */
-  stopOpacity?: StyleValue<CSS.Property.StopOpacity>
+  stopOpacity?: StyleValueWithCondition<CSS.Property.StopOpacity>
   /**
    * ### stroke
    *
@@ -8749,7 +8995,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke
    */
-  stroke?: StyleValue<CSS.Property.Stroke, "colors">
+  stroke?: StyleValueWithCondition<CSS.Property.Stroke, "colors">
   /**
    * ### stroke-color
    *
@@ -8763,7 +9009,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  strokeColor?: StyleValue<AnyString>
+  strokeColor?: StyleValueWithCondition<AnyString>
   /**
    * ### stroke-dasharray
    *
@@ -8775,7 +9021,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-dasharray
    */
-  strokeDasharray?: StyleValue<CSS.Property.StrokeDasharray>
+  strokeDasharray?: StyleValueWithCondition<CSS.Property.StrokeDasharray>
   /**
    * ### stroke-dashoffset
    *
@@ -8787,7 +9033,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-dashoffset
    */
-  strokeDashoffset?: StyleValue<CSS.Property.StrokeDashoffset | number>
+  strokeDashoffset?: StyleValueWithCondition<
+    CSS.Property.StrokeDashoffset | number
+  >
   /**
    * ### stroke-linecap
    *
@@ -8799,7 +9047,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-linecap
    */
-  strokeLinecap?: StyleValue<CSS.Property.StrokeLinecap>
+  strokeLinecap?: StyleValueWithCondition<CSS.Property.StrokeLinecap>
   /**
    * ### stroke-linejoin
    *
@@ -8811,7 +9059,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-linejoin
    */
-  strokeLinejoin?: StyleValue<CSS.Property.StrokeLinejoin>
+  strokeLinejoin?: StyleValueWithCondition<CSS.Property.StrokeLinejoin>
   /**
    * ### stroke-miterlimit
    *
@@ -8823,7 +9071,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-miterlimit
    */
-  strokeMiterlimit?: StyleValue<CSS.Property.StrokeMiterlimit>
+  strokeMiterlimit?: StyleValueWithCondition<CSS.Property.StrokeMiterlimit>
   /**
    * ### stroke-opacity
    *
@@ -8835,7 +9083,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-opacity
    */
-  strokeOpacity?: StyleValue<CSS.Property.StrokeOpacity>
+  strokeOpacity?: StyleValueWithCondition<CSS.Property.StrokeOpacity>
   /**
    * ### stroke-width
    *
@@ -8847,7 +9095,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/stroke-width
    */
-  strokeWidth?: StyleValue<CSS.Property.StrokeWidth | number>
+  strokeWidth?: StyleValueWithCondition<CSS.Property.StrokeWidth | number>
   /**
    * ### table-layout
    *
@@ -8859,7 +9107,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/table-layout
    */
-  tableLayout?: StyleValue<CSS.Property.TableLayout>
+  tableLayout?: StyleValueWithCondition<CSS.Property.TableLayout>
   /**
    * ### tab-size
    *
@@ -8871,7 +9119,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/tab-size
    */
-  tabSize?: StyleValue<CSS.Property.TabSize>
+  tabSize?: StyleValueWithCondition<CSS.Property.TabSize>
   /**
    * ### font-size
    *
@@ -8883,7 +9131,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-size
    */
-  text?: StyleValue<CSS.Property.FontSize | number, "fontSizes">
+  text?: StyleValueWithCondition<CSS.Property.FontSize | number, "fontSizes">
   /**
    * ### text-align
    *
@@ -8895,7 +9143,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-align
    */
-  textAlign?: StyleValue<CSS.Property.TextAlign>
+  textAlign?: StyleValueWithCondition<CSS.Property.TextAlign>
   /**
    * ### text-align-last
    *
@@ -8907,7 +9155,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-align-last
    */
-  textAlignLast?: StyleValue<CSS.Property.TextAlignLast>
+  textAlignLast?: StyleValueWithCondition<CSS.Property.TextAlignLast>
   /**
    * ### text-anchor
    *
@@ -8919,7 +9167,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-anchor
    */
-  textAnchor?: StyleValue<CSS.Property.TextAnchor>
+  textAnchor?: StyleValueWithCondition<CSS.Property.TextAnchor>
   /**
    * ### text-autospace
    *
@@ -8931,7 +9179,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textAutospace?: StyleValue<AnyString>
+  textAutospace?: StyleValueWithCondition<AnyString>
   /**
    * ### text-box
    *
@@ -8941,7 +9189,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-box
    */
-  textBox?: StyleValue<AnyString>
+  textBox?: StyleValueWithCondition<AnyString>
   /**
    * ### text-box-edge
    *
@@ -8951,7 +9199,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-box-edge
    */
-  textBoxEdge?: StyleValue<AnyString>
+  textBoxEdge?: StyleValueWithCondition<AnyString>
   /**
    * ### text-box-trim
    *
@@ -8961,7 +9209,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-box-trim
    */
-  textBoxTrim?: StyleValue<AnyString>
+  textBoxTrim?: StyleValueWithCondition<AnyString>
   /**
    * ### color
    *
@@ -8973,7 +9221,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/color
    */
-  textColor?: StyleValue<CSS.Property.Color, "colors">
+  textColor?: StyleValueWithCondition<CSS.Property.Color, "colors">
   /**
    * ### text-combine-upright
    *
@@ -8985,7 +9233,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-combine-upright
    */
-  textCombineUpright?: StyleValue<CSS.Property.TextCombineUpright>
+  textCombineUpright?: StyleValueWithCondition<CSS.Property.TextCombineUpright>
   /**
    * ### text-decoration
    *
@@ -8997,7 +9245,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration
    */
-  textDecor?: StyleValue<CSS.Property.TextDecoration>
+  textDecor?: StyleValueWithCondition<CSS.Property.TextDecoration>
   /**
    * ### text-decoration
    *
@@ -9009,7 +9257,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration
    */
-  textDecoration?: StyleValue<CSS.Property.TextDecoration>
+  textDecoration?: StyleValueWithCondition<CSS.Property.TextDecoration>
   /**
    * ### text-decoration-color
    *
@@ -9021,7 +9269,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-color
    */
-  textDecorationColor?: StyleValue<CSS.Property.TextDecorationColor, "colors">
+  textDecorationColor?: StyleValueWithCondition<
+    CSS.Property.TextDecorationColor,
+    "colors"
+  >
   /**
    * ### text-decoration-line
    *
@@ -9033,7 +9284,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-line
    */
-  textDecorationLine?: StyleValue<CSS.Property.TextDecorationLine>
+  textDecorationLine?: StyleValueWithCondition<CSS.Property.TextDecorationLine>
   /**
    * ### text-decoration-skip
    *
@@ -9047,7 +9298,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textDecorationSkip?: StyleValue<CSS.Property.TextDecorationSkip>
+  textDecorationSkip?: StyleValueWithCondition<CSS.Property.TextDecorationSkip>
   /**
    * ### text-decoration-skip-ink
    *
@@ -9059,7 +9310,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-skip-ink
    */
-  textDecorationSkipInk?: StyleValue<CSS.Property.TextDecorationSkipInk>
+  textDecorationSkipInk?: StyleValueWithCondition<CSS.Property.TextDecorationSkipInk>
   /**
    * ### text-decoration-style
    *
@@ -9071,7 +9322,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-style
    */
-  textDecorationStyle?: StyleValue<CSS.Property.TextDecorationStyle>
+  textDecorationStyle?: StyleValueWithCondition<CSS.Property.TextDecorationStyle>
   /**
    * ### text-decoration-thickness
    *
@@ -9083,7 +9334,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-decoration-thickness
    */
-  textDecorationThickness?: StyleValue<CSS.Property.TextDecorationThickness>
+  textDecorationThickness?: StyleValueWithCondition<CSS.Property.TextDecorationThickness>
   /**
    * ### text-emphasis
    *
@@ -9095,7 +9346,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis
    */
-  textEmphasis?: StyleValue<CSS.Property.TextEmphasis>
+  textEmphasis?: StyleValueWithCondition<CSS.Property.TextEmphasis>
   /**
    * ### text-emphasis-color
    *
@@ -9107,7 +9358,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-color
    */
-  textEmphasisColor?: StyleValue<CSS.Property.TextEmphasisColor, "colors">
+  textEmphasisColor?: StyleValueWithCondition<
+    CSS.Property.TextEmphasisColor,
+    "colors"
+  >
   /**
    * ### text-emphasis-position
    *
@@ -9119,7 +9373,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-position
    */
-  textEmphasisPosition?: StyleValue<CSS.Property.TextEmphasisPosition>
+  textEmphasisPosition?: StyleValueWithCondition<CSS.Property.TextEmphasisPosition>
   /**
    * ### text-emphasis-style
    *
@@ -9131,7 +9385,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-emphasis-style
    */
-  textEmphasisStyle?: StyleValue<CSS.Property.TextEmphasisStyle>
+  textEmphasisStyle?: StyleValueWithCondition<CSS.Property.TextEmphasisStyle>
   /**
    * ### text-indent
    *
@@ -9143,7 +9397,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-indent
    */
-  textIndent?: StyleValue<CSS.Property.TextIndent>
+  textIndent?: StyleValueWithCondition<CSS.Property.TextIndent>
   /**
    * ### text-justify
    *
@@ -9153,7 +9407,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-justify
    */
-  textJustify?: StyleValue<CSS.Property.TextJustify>
+  textJustify?: StyleValueWithCondition<CSS.Property.TextJustify>
   /**
    * ### text-orientation
    *
@@ -9165,7 +9419,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-orientation
    */
-  textOrientation?: StyleValue<CSS.Property.TextOrientation>
+  textOrientation?: StyleValueWithCondition<CSS.Property.TextOrientation>
   /**
    * ### text-overflow
    *
@@ -9177,7 +9431,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-overflow
    */
-  textOverflow?: StyleValue<CSS.Property.TextOverflow>
+  textOverflow?: StyleValueWithCondition<CSS.Property.TextOverflow>
   /**
    * ### text-rendering
    *
@@ -9189,7 +9443,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-rendering
    */
-  textRendering?: StyleValue<CSS.Property.TextRendering>
+  textRendering?: StyleValueWithCondition<CSS.Property.TextRendering>
   /**
    * ### text-shadow
    *
@@ -9201,7 +9455,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-shadow
    */
-  textShadow?: StyleValue<CSS.Property.TextShadow, "shadows">
+  textShadow?: StyleValueWithCondition<CSS.Property.TextShadow, "shadows">
   /**
    * ### text-size-adjust
    *
@@ -9213,7 +9467,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textSizeAdjust?: StyleValue<CSS.Property.TextSizeAdjust>
+  textSizeAdjust?: StyleValueWithCondition<CSS.Property.TextSizeAdjust>
   /**
    * ### text-spacing-trim
    *
@@ -9225,7 +9479,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  textSpacingTrim?: StyleValue<AnyString>
+  textSpacingTrim?: StyleValueWithCondition<AnyString>
   /**
    * ### text-transform
    *
@@ -9237,7 +9491,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-transform
    */
-  textTransform?: StyleValue<CSS.Property.TextTransform>
+  textTransform?: StyleValueWithCondition<CSS.Property.TextTransform>
   /**
    * ### text-underline-offset
    *
@@ -9249,7 +9503,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-offset
    */
-  textUnderlineOffset?: StyleValue<CSS.Property.TextUnderlineOffset>
+  textUnderlineOffset?: StyleValueWithCondition<CSS.Property.TextUnderlineOffset>
   /**
    * ### text-underline-position
    *
@@ -9261,7 +9515,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-underline-position
    */
-  textUnderlinePosition?: StyleValue<CSS.Property.TextUnderlinePosition>
+  textUnderlinePosition?: StyleValueWithCondition<CSS.Property.TextUnderlinePosition>
   /**
    * ### text-wrap
    *
@@ -9272,7 +9526,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap
    */
-  textWrap?: StyleValue<CSS.Property.TextWrap>
+  textWrap?: StyleValueWithCondition<CSS.Property.TextWrap>
   /**
    * ### text-wrap-mode
    *
@@ -9283,7 +9537,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-mode
    */
-  textWrapMode?: StyleValue<AnyString>
+  textWrapMode?: StyleValueWithCondition<AnyString>
   /**
    * ### text-wrap-style
    *
@@ -9293,7 +9547,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/text-wrap-style
    */
-  textWrapStyle?: StyleValue<AnyString>
+  textWrapStyle?: StyleValueWithCondition<AnyString>
   /**
    * ### timeline-scope
    *
@@ -9305,7 +9559,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  timelineScope?: StyleValue<CSS.Property.TimelineScope>
+  timelineScope?: StyleValueWithCondition<CSS.Property.TimelineScope>
   /**
    * ### top
    *
@@ -9317,7 +9571,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/top
    */
-  top?: StyleValue<CSS.Property.Top | number, "spaces">
+  top?: StyleValueWithCondition<CSS.Property.Top | number, "spaces">
   /**
    * ### touch-action
    *
@@ -9329,7 +9583,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/touch-action
    */
-  touchAction?: StyleValue<CSS.Property.TouchAction>
+  touchAction?: StyleValueWithCondition<CSS.Property.TouchAction>
   /**
    * ### letter-spacing
    *
@@ -9341,7 +9595,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/letter-spacing
    */
-  tracking?: StyleValue<CSS.Property.LetterSpacing, "letterSpacings">
+  tracking?: StyleValueWithCondition<
+    CSS.Property.LetterSpacing,
+    "letterSpacings"
+  >
   /**
    * ### transform
    *
@@ -9353,7 +9610,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform
    */
-  transform?: StyleValue<CSS.Property.Transform>
+  transform?: StyleValueWithCondition<CSS.Property.Transform>
   /**
    * ### transform-box
    *
@@ -9364,7 +9621,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform-box
    */
-  transformBox?: StyleValue<CSS.Property.TransformBox>
+  transformBox?: StyleValueWithCondition<CSS.Property.TransformBox>
   /**
    * ### transform-origin
    *
@@ -9376,7 +9633,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform-origin
    */
-  transformOrigin?: StyleValue<CSS.Property.TransformOrigin>
+  transformOrigin?: StyleValueWithCondition<CSS.Property.TransformOrigin>
   /**
    * ### transform-style
    *
@@ -9388,7 +9645,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transform-style
    */
-  transformStyle?: StyleValue<CSS.Property.TransformStyle>
+  transformStyle?: StyleValueWithCondition<CSS.Property.TransformStyle>
   /**
    * ### transition-behavior
    *
@@ -9399,7 +9656,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-behavior
    */
-  transitionBehavior?: StyleValue<CSS.Property.TransitionBehavior>
+  transitionBehavior?: StyleValueWithCondition<CSS.Property.TransitionBehavior>
   /**
    * ### transition-delay
    *
@@ -9411,7 +9668,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-delay
    */
-  transitionDelay?: StyleValue<CSS.Property.TransitionDelay>
+  transitionDelay?: StyleValueWithCondition<CSS.Property.TransitionDelay>
   /**
    * ### transition-duration
    *
@@ -9423,7 +9680,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-duration
    */
-  transitionDuration?: StyleValue<CSS.Property.TransitionDuration, "durations">
+  transitionDuration?: StyleValueWithCondition<
+    CSS.Property.TransitionDuration,
+    "durations"
+  >
   /**
    * ### transition-timing-function
    *
@@ -9435,7 +9695,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-timing-function
    */
-  transitionTimingFunction?: StyleValue<
+  transitionTimingFunction?: StyleValueWithCondition<
     CSS.Property.TransitionTimingFunction,
     "easings"
   >
@@ -9450,7 +9710,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/unicode-bidi
    */
-  unicodeBidi?: StyleValue<CSS.Property.UnicodeBidi>
+  unicodeBidi?: StyleValueWithCondition<CSS.Property.UnicodeBidi>
   /**
    * ### user-modify
    *
@@ -9460,7 +9720,7 @@ export interface StyleProps {
    *
    * @deprecated
    */
-  userModify?: StyleValue<AnyString>
+  userModify?: StyleValueWithCondition<AnyString>
   /**
    * ### user-select
    *
@@ -9470,7 +9730,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/user-select
    */
-  userSelect?: StyleValue<CSS.Property.UserSelect>
+  userSelect?: StyleValueWithCondition<CSS.Property.UserSelect>
   /**
    * ### vector-effect
    *
@@ -9482,7 +9742,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/vector-effect
    */
-  vectorEffect?: StyleValue<CSS.Property.VectorEffect>
+  vectorEffect?: StyleValueWithCondition<CSS.Property.VectorEffect>
   /**
    * ### vertical-align
    *
@@ -9494,7 +9754,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/vertical-align
    */
-  verticalAlign?: StyleValue<CSS.Property.VerticalAlign>
+  verticalAlign?: StyleValueWithCondition<CSS.Property.VerticalAlign>
   /**
    * ### view-timeline
    *
@@ -9506,7 +9766,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimeline?: StyleValue<CSS.Property.ViewTimeline>
+  viewTimeline?: StyleValueWithCondition<CSS.Property.ViewTimeline>
   /**
    * ### view-timeline-axis
    *
@@ -9518,7 +9778,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimelineAxis?: StyleValue<CSS.Property.ViewTimelineAxis>
+  viewTimelineAxis?: StyleValueWithCondition<CSS.Property.ViewTimelineAxis>
   /**
    * ### view-timeline-inset
    *
@@ -9530,7 +9790,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimelineInset?: StyleValue<CSS.Property.ViewTimelineInset>
+  viewTimelineInset?: StyleValueWithCondition<CSS.Property.ViewTimelineInset>
   /**
    * ### view-timeline-name
    *
@@ -9542,7 +9802,7 @@ export interface StyleProps {
    *
    * @experimental
    */
-  viewTimelineName?: StyleValue<CSS.Property.ViewTimelineName>
+  viewTimelineName?: StyleValueWithCondition<CSS.Property.ViewTimelineName>
   /**
    * ### view-transition-class
    *
@@ -9552,7 +9812,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/view-transition-class
    */
-  viewTransitionClass?: StyleValue<AnyString>
+  viewTransitionClass?: StyleValueWithCondition<AnyString>
   /**
    * ### view-transition-name
    *
@@ -9562,7 +9822,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/view-transition-name
    */
-  viewTransitionName?: StyleValue<CSS.Property.ViewTransitionName>
+  viewTransitionName?: StyleValueWithCondition<CSS.Property.ViewTransitionName>
   /**
    * ### visibility
    *
@@ -9574,7 +9834,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/visibility
    */
-  visibility?: StyleValue<CSS.Property.Visibility>
+  visibility?: StyleValueWithCondition<CSS.Property.Visibility>
   /**
    * ### width
    *
@@ -9586,7 +9846,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  w?: StyleValue<CSS.Property.Width | number, "sizes">
+  w?: StyleValueWithCondition<CSS.Property.Width | number, "sizes">
   /**
    * ### white-space
    *
@@ -9598,7 +9858,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/white-space
    */
-  whiteSpace?: StyleValue<CSS.Property.WhiteSpace>
+  whiteSpace?: StyleValueWithCondition<CSS.Property.WhiteSpace>
   /**
    * ### white-space-collapse
    *
@@ -9609,7 +9869,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/white-space-collapse
    */
-  whiteSpaceCollapse?: StyleValue<CSS.Property.WhiteSpaceCollapse>
+  whiteSpaceCollapse?: StyleValueWithCondition<CSS.Property.WhiteSpaceCollapse>
   /**
    * ### widows
    *
@@ -9619,7 +9879,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/widows
    */
-  widows?: StyleValue<CSS.Property.Widows>
+  widows?: StyleValueWithCondition<CSS.Property.Widows>
   /**
    * ### width
    *
@@ -9631,7 +9891,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/width
    */
-  width?: StyleValue<CSS.Property.Width | number, "sizes">
+  width?: StyleValueWithCondition<CSS.Property.Width | number, "sizes">
   /**
    * ### will-change
    *
@@ -9643,7 +9903,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/will-change
    */
-  willChange?: StyleValue<CSS.Property.WillChange>
+  willChange?: StyleValueWithCondition<CSS.Property.WillChange>
   /**
    * ### word-break
    *
@@ -9655,7 +9915,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/word-break
    */
-  wordBreak?: StyleValue<CSS.Property.WordBreak>
+  wordBreak?: StyleValueWithCondition<CSS.Property.WordBreak>
   /**
    * ### word-spacing
    *
@@ -9667,7 +9927,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/word-spacing
    */
-  wordSpacing?: StyleValue<CSS.Property.WordSpacing>
+  wordSpacing?: StyleValueWithCondition<CSS.Property.WordSpacing>
   /**
    * ### writing-mode
    *
@@ -9679,7 +9939,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/writing-mode
    */
-  writingMode?: StyleValue<CSS.Property.WritingMode>
+  writingMode?: StyleValueWithCondition<CSS.Property.WritingMode>
   /**
    * ### x
    *
@@ -9691,7 +9951,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/x
    */
-  x?: StyleValue<AnyString>
+  x?: StyleValueWithCondition<AnyString>
   /**
    * ### y
    *
@@ -9703,7 +9963,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/y
    */
-  y?: StyleValue<AnyString>
+  y?: StyleValueWithCondition<AnyString>
   /**
    * ### z-index
    *
@@ -9715,7 +9975,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/z-index
    */
-  z?: StyleValue<CSS.Property.ZIndex, "zIndices">
+  z?: StyleValueWithCondition<CSS.Property.ZIndex, "zIndices">
   /**
    * ### z-index
    *
@@ -9727,7 +9987,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/z-index
    */
-  zIndex?: StyleValue<CSS.Property.ZIndex, "zIndices">
+  zIndex?: StyleValueWithCondition<CSS.Property.ZIndex, "zIndices">
   /**
    * ### zoom
    *
@@ -9738,55 +9998,55 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/zoom
    */
-  zoom?: StyleValue<CSS.Property.Zoom>
+  zoom?: StyleValueWithCondition<CSS.Property.Zoom>
   /**
 
 */
-  colorMode?: StyleValue<CSS.Property.ColorScheme>
+  colorMode?: StyleValueWithCondition<CSS.Property.ColorScheme>
   /**
    * Sets the value of `--contrast`.
    */
-  contrast?: StyleValue<AnyString>
+  contrast?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--drop-shadow`.
    */
-  dropShadow?: StyleValue<AnyString, "shadows">
+  dropShadow?: StyleValueWithCondition<AnyString, "shadows">
   /**
    * The focus ring is used to identify the currently focused element.
    */
-  focusRing?: StyleValue<
+  focusRing?: StyleValueWithCondition<
     "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
   >
   /**
    * Sets the value of `--focus-ring-color`.
    */
-  focusRingColor?: StyleValue<AnyString, "colors">
+  focusRingColor?: StyleValueWithCondition<AnyString, "colors">
   /**
    * Sets the value of `--focus-ring-offset`.
    */
-  focusRingOffset?: StyleValue<AnyString | number, "spaces">
+  focusRingOffset?: StyleValueWithCondition<AnyString | number, "spaces">
   /**
    * Sets the value of `--focus-ring-style`.
    */
-  focusRingStyle?: StyleValue<AnyString>
+  focusRingStyle?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--focus-ring-width`.
    */
-  focusRingWidth?: StyleValue<AnyString>
+  focusRingWidth?: StyleValueWithCondition<AnyString>
   /**
    * The focus ring is used to identify the currently focused element.
    */
-  focusVisibleRing?: StyleValue<
+  focusVisibleRing?: StyleValueWithCondition<
     "inline" | "inside" | "mixed" | "none" | "outline" | "outside"
   >
   /**
    * Sets the value of `--grayscale`.
    */
-  grayscale?: StyleValue<AnyString>
+  grayscale?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--hue-rotate`.
    */
-  hueRotate?: StyleValue<AnyString>
+  hueRotate?: StyleValueWithCondition<AnyString>
   /**
    * ### left
    *
@@ -9810,7 +10070,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/right
    */
-  insetX?: StyleValue<CSS.Property.Left | CSS.Property.Right | number, "spaces">
+  insetX?: StyleValueWithCondition<
+    CSS.Property.Left | CSS.Property.Right | number,
+    "spaces"
+  >
   /**
    * ### bottom
    *
@@ -9834,11 +10097,14 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/top
    */
-  insetY?: StyleValue<CSS.Property.Bottom | CSS.Property.Top | number, "spaces">
+  insetY?: StyleValueWithCondition<
+    CSS.Property.Bottom | CSS.Property.Top | number,
+    "spaces"
+  >
   /**
    * Sets the value of `--invert`.
    */
-  invert?: StyleValue<AnyString>
+  invert?: StyleValueWithCondition<AnyString>
   /**
    * ### keyframes
    *
@@ -9850,7 +10116,10 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@keyframes
    */
-  keyframes?: StyleValue<AnyString | { [key: string]: CSSObject }, "keyframes">
+  keyframes?: StyleValueWithCondition<
+    AnyString | { [key: string]: CSSObject },
+    "keyframes"
+  >
   /**
    * Used to visually truncate a text after a number of lines.
    * ### line-clamp
@@ -9861,7 +10130,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/line-clamp
    */
-  lineClamp?: StyleValue<number>
+  lineClamp?: StyleValueWithCondition<number>
   /**
    * ### margin-inline-end
    *
@@ -9885,7 +10154,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  marginX?: StyleValue<
+  marginX?: StyleValueWithCondition<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
     "spaces"
   >
@@ -9912,7 +10181,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  marginY?: StyleValue<
+  marginY?: StyleValueWithCondition<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
   >
@@ -9939,7 +10208,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/max-width
    */
-  maxBoxSize?: StyleValue<
+  maxBoxSize?: StyleValueWithCondition<
     CSS.Property.MaxHeight | CSS.Property.MaxWidth | number,
     "sizes"
   >
@@ -9966,7 +10235,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/min-width
    */
-  minBoxSize?: StyleValue<
+  minBoxSize?: StyleValueWithCondition<
     CSS.Property.MinHeight | CSS.Property.MinWidth | number,
     "sizes"
   >
@@ -9993,7 +10262,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-inline-start
    */
-  mx?: StyleValue<
+  mx?: StyleValueWithCondition<
     CSS.Property.MarginInlineEnd | CSS.Property.MarginInlineStart | number,
     "spaces"
   >
@@ -10020,7 +10289,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/margin-top
    */
-  my?: StyleValue<
+  my?: StyleValueWithCondition<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
   >
@@ -10034,7 +10303,9 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/outline
    */
-  outline?: StyleValue<"inside" | "mixed" | "outside" | CSS.Property.Outline>
+  outline?: StyleValueWithCondition<
+    "inside" | "mixed" | "outside" | CSS.Property.Outline
+  >
   /**
    * ### padding-inline-end
    *
@@ -10058,7 +10329,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  paddingX?: StyleValue<
+  paddingX?: StyleValueWithCondition<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
     "spaces"
   >
@@ -10085,7 +10356,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  paddingY?: StyleValue<
+  paddingY?: StyleValueWithCondition<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
     "spaces"
   >
@@ -10112,7 +10383,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-inline-start
    */
-  px?: StyleValue<
+  px?: StyleValueWithCondition<
     CSS.Property.PaddingInlineEnd | CSS.Property.PaddingInlineStart | number,
     "spaces"
   >
@@ -10139,38 +10410,38 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/padding-top
    */
-  py?: StyleValue<
+  py?: StyleValueWithCondition<
     CSS.Property.PaddingBottom | CSS.Property.PaddingTop | number,
     "spaces"
   >
   /**
    * Sets the value of `--rotate-x`.
    */
-  rotateX?: StyleValue<AnyString>
+  rotateX?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--rotate-y`.
    */
-  rotateY?: StyleValue<AnyString>
+  rotateY?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--rotate-z`.
    */
-  rotateZ?: StyleValue<AnyString>
+  rotateZ?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--saturate`.
    */
-  saturate?: StyleValue<AnyString>
+  saturate?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--scale-x`.
    */
-  scaleX?: StyleValue<AnyString>
+  scaleX?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--scale-y`.
    */
-  scaleY?: StyleValue<AnyString>
+  scaleY?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--scale-z`.
    */
-  scaleZ?: StyleValue<AnyString>
+  scaleZ?: StyleValueWithCondition<AnyString>
   /**
    * ### scroll-margin-left
    *
@@ -10194,7 +10465,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-right
    */
-  scrollMarginX?: StyleValue<
+  scrollMarginX?: StyleValueWithCondition<
     CSS.Property.ScrollMarginLeft | CSS.Property.ScrollMarginRight | number,
     "spaces"
   >
@@ -10221,7 +10492,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-margin-top
    */
-  scrollMarginY?: StyleValue<
+  scrollMarginY?: StyleValueWithCondition<
     CSS.Property.ScrollMarginBottom | CSS.Property.ScrollMarginTop | number,
     "spaces"
   >
@@ -10248,7 +10519,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-right
    */
-  scrollPaddingX?: StyleValue<
+  scrollPaddingX?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingLeft | CSS.Property.ScrollPaddingRight | number,
     "spaces"
   >
@@ -10275,22 +10546,22 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/scroll-padding-top
    */
-  scrollPaddingY?: StyleValue<
+  scrollPaddingY?: StyleValueWithCondition<
     CSS.Property.ScrollPaddingBottom | CSS.Property.ScrollPaddingTop | number,
     "spaces"
   >
   /**
    * Sets the value of `--sepia`.
    */
-  sepia?: StyleValue<AnyString>
+  sepia?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--skew-x`.
    */
-  skewX?: StyleValue<AnyString>
+  skewX?: StyleValueWithCondition<AnyString>
   /**
    * Sets the value of `--skew-y`.
    */
-  skewY?: StyleValue<AnyString>
+  skewY?: StyleValueWithCondition<AnyString>
   /**
    * ### transition
    *
@@ -10302,7 +10573,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition
    */
-  transition?: StyleValue<
+  transition?: StyleValueWithCondition<
     | "all"
     | "backgrounds"
     | "colors"
@@ -10324,7 +10595,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/transition-property
    */
-  transitionProperty?: StyleValue<
+  transitionProperty?: StyleValueWithCondition<
     | "all"
     | "backgrounds"
     | "colors"
@@ -10338,19 +10609,19 @@ export interface StyleProps {
   /**
    * Sets the value of `--translate-x`.
    */
-  translateX?: StyleValue<AnyString | number, "spaces">
+  translateX?: StyleValueWithCondition<AnyString | number, "spaces">
   /**
    * Sets the value of `--translate-y`.
    */
-  translateY?: StyleValue<AnyString | number, "spaces">
+  translateY?: StyleValueWithCondition<AnyString | number, "spaces">
   /**
    * Sets the value of `--translate-z`.
    */
-  translateZ?: StyleValue<AnyString | number>
+  translateZ?: StyleValueWithCondition<AnyString | number>
   /**
    * If `true`, it clamps truncate a text after one line.
    */
-  truncated?: StyleValue<boolean>
+  truncated?: StyleValueWithCondition<boolean>
   /**
    * ### container
    *
@@ -10400,7 +10671,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _landscape?: StyleValue<CSSObject>
+  _landscape?: StyleValueWithCondition<CSSObject>
   /**
    * ### media
    *
@@ -10490,7 +10761,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaDark?: StyleValue<CSSObject>
+  _mediaDark?: StyleValueWithCondition<CSSObject>
   /**
    * ### media
    *
@@ -10502,7 +10773,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaLight?: StyleValue<CSSObject>
+  _mediaLight?: StyleValueWithCondition<CSSObject>
   /**
    * ### media
    *
@@ -10514,7 +10785,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _mediaReduceMotion?: StyleValue<CSSObject>
+  _mediaReduceMotion?: StyleValueWithCondition<CSSObject>
   /**
    * ### media
    *
@@ -10526,7 +10797,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _portrait?: StyleValue<CSSObject>
+  _portrait?: StyleValueWithCondition<CSSObject>
   /**
    * ### media
    *
@@ -10538,7 +10809,7 @@ export interface StyleProps {
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@media
    */
-  _print?: StyleValue<CSSObject>
+  _print?: StyleValueWithCondition<CSSObject>
   /**
    * ### supports
    *

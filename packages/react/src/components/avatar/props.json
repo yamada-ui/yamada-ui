@@ -16,17 +16,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | undefined; ... 5 more ...; xl?: AnyString | ... 5 more ... | undefined; }, AnyString | ... 5 more ... | { ...; }] | { ...; }",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { base?: \"lg\" | ... 6 more ... | undefined; ... 4 more ...; xl?: \"lg\" | ... 6 more ... | undefined; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ....",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "AnyString | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [AnyString | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | { [x: string & {}]: AnyString | ... 4 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 4 more ... | undefined; }, AnyString | ... 4 more ... | { ...; }] | { ...; }",
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?...",
       "description": "The variant of the component.",
       "required": false
     },
@@ -72,7 +72,7 @@
       "required": false
     },
     "shape": {
-      "type": "\"circle\" | \"square\" | \"rounded\" | [\"circle\" | \"square\" | \"rounded\" | { [x: string & {}]: \"circle\" | \"square\" | \"rounded\" | undefined; base?: \"circle\" | \"square\" | \"rounded\" | undefined; ... 4 more ...; xl?: \"circle\" | ... 2 more ... | undefined; }, \"circle\" | ... 2 more ... | { ...; }] | { ...; }",
+      "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
       "defaultValue": "circle",
       "description": "The shape of the component",
       "required": false
@@ -105,17 +105,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | { [x: string & {}]: ColorScheme | undefined; base?: ColorScheme | undefined; \"2xl\"?: ColorScheme | undefined; lg?: ColorScheme | undefined; md?: ColorScheme | undefined; sm?: ColorScheme | undefined; xl?: ColorScheme | undefined; }, ColorScheme | { ...; }] | { ...; }",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | { [x: string & {}]: AnyString | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | undefined; ... 5 more ...; xl?: AnyString | ... 5 more ... | undefined; }, AnyString | ... 5 more ... | { ...; }] | { ...; }",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { base?: \"lg\" | ... 6 more ... | undefined; ... 4 more ...; xl?: \"lg\" | ... 6 more ... | undefined; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ....",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "AnyString | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [AnyString | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | { [x: string & {}]: AnyString | ... 4 more ... | undefined; ... 5 more ...; xl?: AnyString | ... 4 more ... | undefined; }, AnyString | ... 4 more ... | { ...; }] | { ...; }",
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?...",
       "description": "The variant of the component.",
       "required": false
     },
@@ -130,7 +130,7 @@
       "required": false
     },
     "shape": {
-      "type": "\"circle\" | \"square\" | \"rounded\" | [\"circle\" | \"square\" | \"rounded\" | { [x: string & {}]: \"circle\" | \"square\" | \"rounded\" | undefined; base?: \"circle\" | \"square\" | \"rounded\" | undefined; ... 4 more ...; xl?: \"circle\" | ... 2 more ... | undefined; }, \"circle\" | ... 2 more ... | { ...; }] | { ...; }",
+      "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
       "defaultValue": "circle",
       "description": "The shape of the component",
       "required": false

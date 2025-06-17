@@ -9,7 +9,7 @@ import { dataAttr } from "../../utils"
 import { XIcon } from "../icon"
 import { tagStyle } from "./tag.style"
 
-export interface ComponentContext extends Pick<TagProps, "disabled"> {}
+interface ComponentContext extends Pick<TagProps, "disabled"> {}
 
 export interface TagProps
   extends HTMLStyledProps<"span">,

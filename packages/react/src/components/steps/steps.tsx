@@ -1,9 +1,11 @@
 import type { FC, PropsWithChildren, ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
+import type { UseLazyMountProps } from "../../hooks/use-lazy-mount"
 import type { StepsStyle } from "./steps.style"
-import type { UseStepsProps } from "./use-steps"
+import type { UseStepsItemProps, UseStepsProps } from "./use-steps"
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
+import { useLazyMount } from "../../hooks/use-lazy-mount"
 import { useValue } from "../../hooks/use-value"
 import { isNull, isUndefined } from "../../utils"
 import { CheckIcon } from "../icon"
@@ -18,7 +20,8 @@ import {
   useStepsItemContext,
 } from "./use-steps"
 
-interface ComponentContext extends Pick<StepsRootProps, "items"> {}
+interface ComponentContext
+  extends Pick<StepsRootProps, "items" | "lazy" | "lazyBehavior"> {}
 
 interface StepsItem
   extends Omit<StepsItemProps, "content" | "title">,
@@ -65,8 +68,9 @@ interface StepsItem
 
 export interface StepsRootProps
   extends Omit<HTMLStyledProps, "onChange">,
-    ThemeProps<StepsStyle>,
-    Omit<UseStepsProps, "orientation"> {
+    Omit<UseStepsProps, "orientation">,
+    Pick<UseLazyMountProps, "lazy" | "lazyBehavior">,
+    ThemeProps<StepsStyle> {
   /**
    * If provided, generate step components based on steps.
    */
@@ -91,10 +95,18 @@ export const {
  * @see https://yamada-ui.com/components/steps
  */
 export const StepsRoot = withProvider(
-  ({ children, items, orientation: orientationProp, ...rest }) => {
+  ({
+    children,
+    items,
+    lazy,
+    lazyBehavior,
+    orientation: orientationProp,
+    ...rest
+  }) => {
     const computedOrientation = useValue(orientationProp)
     const {
       id,
+      count,
       descendants,
       getStatus,
       index,
@@ -108,10 +120,14 @@ export const StepsRoot = withProvider(
       onNext,
       onPrev,
     } = useSteps({ ...rest, orientation: computedOrientation })
-    const componentContext = useMemo(() => ({ items }), [items])
+    const componentContext = useMemo(
+      () => ({ items, lazy, lazyBehavior }),
+      [items, lazy, lazyBehavior],
+    )
     const stepsContext = useMemo(
       () => ({
         id,
+        count,
         getStatus,
         index,
         orientation,
@@ -125,16 +141,17 @@ export const StepsRoot = withProvider(
       }),
       [
         id,
+        count,
+        index,
+        orientation,
+        setIndex,
+        getStatus,
+        onNext,
+        onPrev,
         getListProps,
         getNextTriggerProps,
         getPrevTriggerProps,
         getContentProps,
-        getStatus,
-        index,
-        onNext,
-        onPrev,
-        orientation,
-        setIndex,
       ],
     )
 
@@ -172,6 +189,7 @@ export const StepsList = withContext<"ol", StepsListProps>(
               hasSeparator = true,
               incomplete,
               title,
+              contentProps: _contentProps,
               descriptionProps,
               indicatorProps,
               separatorProps,
@@ -211,7 +229,9 @@ export const StepsList = withContext<"ol", StepsListProps>(
   "list",
 )()
 
-export interface StepsItemProps extends HTMLStyledProps<"li"> {}
+export interface StepsItemProps
+  extends HTMLStyledProps<"li">,
+    UseStepsItemProps {}
 
 export const StepsItem = withContext<"li", StepsItemProps>((props) => {
   const {
@@ -225,7 +245,6 @@ export const StepsItem = withContext<"li", StepsItemProps>((props) => {
     getSeparatorProps,
     getTitleProps,
   } = useStepsItem(props)
-
   const context = useMemo(
     () => ({
       first,
@@ -285,7 +304,6 @@ export const StepsIndicator = withContext<"div", StepsIndicatorProps>(
     ...rest
   }) => {
     const { status, getIndicatorProps } = useStepsItemContext()
-
     const components = useMemo(
       () => ({ complete, current, incomplete }),
       [complete, current, incomplete],
@@ -372,10 +390,18 @@ export interface StepsContentProps extends HTMLStyledProps {
 export const StepsContent = withContext<"div", StepsContentProps>(
   "div",
   "content",
-)(undefined, (props) => {
-  const { getContentProps } = useStepsContext()
+)(undefined, ({ index, ...rest }) => {
+  const { lazy, lazyBehavior } = useComponentContext()
+  const { index: selectedIndex, getContentProps } = useStepsContext()
+  const mounted = index === selectedIndex
+  const children = useLazyMount({
+    lazy,
+    lazyBehavior,
+    mounted,
+    ...rest,
+  })
 
-  return getContentProps(props)
+  return { ...getContentProps({ index, ...rest }), children }
 })
 
 export interface StepsCompletedContentProps extends HTMLStyledProps {}
@@ -386,9 +412,17 @@ export const StepsCompletedContent = withContext<
 >("div", { name: "completedContent", slot: ["content", "completed"] })(
   undefined,
   (props) => {
-    const { getContentProps } = useStepsContext()
+    const { lazy, lazyBehavior } = useComponentContext()
+    const { count, index: selectedIndex, getContentProps } = useStepsContext()
+    const mounted = count !== 0 && count === selectedIndex
+    const children = useLazyMount({
+      lazy,
+      lazyBehavior,
+      mounted,
+      ...props,
+    })
 
-    return getContentProps(props)
+    return { ...getContentProps(props), children }
   },
 )
 

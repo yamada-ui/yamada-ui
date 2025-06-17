@@ -386,10 +386,10 @@ export function ariaAttr(condition: any): Booleanish | undefined {
   return !!condition ? true : undefined
 }
 
-let createIdCounter = 0
-
-export function createId(prefix: string) {
-  return `${prefix}-${++createIdCounter}-${new Date().getTime()}`
+export function uuid() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+    .replace(/x/g, () => Math.random().toString(16).slice(2, 3))
+    .replace(/y/g, () => ((Math.random() * 4) | 0).toString(16))
 }
 
 const focusableElList = [

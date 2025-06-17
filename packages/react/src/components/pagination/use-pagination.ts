@@ -1,6 +1,7 @@
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useMemo } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
+import { useI18n } from "../../providers/i18n-provider"
 import { createContext, handlerAll, isNumber, mergeRefs } from "../../utils"
 
 export type Page = "ellipsis" | number
@@ -68,6 +69,7 @@ export const usePagination = ({
     value: page,
     onChange: onChangeProp,
   })
+  const { t } = useI18n("pagination")
   const range = useMemo((): Page[] => {
     const minimumTotal = siblings * 2 + 3 + boundaries * 2
 
@@ -134,10 +136,10 @@ export const usePagination = ({
       ...rest,
       ...props,
       ref: mergeRefs(ref, rest.ref),
-      "aria-label": "Pagination",
+      "aria-label": t("Pagination"),
       role: "navigation",
     }),
-    [rest],
+    [rest, t],
   )
 
   const getItemProps: PropGetter<"button", { page?: Page }> = useCallback(
@@ -146,7 +148,7 @@ export const usePagination = ({
         return {
           type: "button",
           "aria-current": currentPage === page ? "page" : undefined,
-          "aria-label": `Go to page ${page}`,
+          "aria-label": t("Go to page {number}", { number: page }),
           disabled,
           ...props,
           onClick: handlerAll(props.onClick, () => onChange(page)),
@@ -155,51 +157,51 @@ export const usePagination = ({
         return { ...props, "data-ellipsis": "" }
       }
     },
-    [currentPage, onChange, disabled],
+    [currentPage, t, onChange, disabled],
   )
 
   const getStartTriggerProps: PropGetter<"button"> = useCallback(
     (props = {}) => ({
       type: "button",
-      "aria-label": "Go to first page",
+      "aria-label": t("Go to first page"),
       disabled: disabled || currentPage === 1,
       ...props,
       onClick: handlerAll(props.onClick, onChangeStart),
     }),
-    [onChangeStart, disabled, currentPage],
+    [onChangeStart, t, disabled, currentPage],
   )
 
   const getEndTriggerProps: PropGetter<"button"> = useCallback(
     (props = {}) => ({
       type: "button",
-      "aria-label": "Go to last page",
+      "aria-label": t("Go to last page"),
       disabled: disabled || currentPage === total,
       ...props,
       onClick: handlerAll(props.onClick, onChangeEnd),
     }),
-    [onChangeEnd, disabled, currentPage, total],
+    [onChangeEnd, t, disabled, currentPage, total],
   )
 
   const getPrevTriggerProps: PropGetter<"button"> = useCallback(
     (props = {}) => ({
       type: "button",
-      "aria-label": "Go to previous page",
+      "aria-label": t("Go to previous page"),
       disabled: disabled || currentPage === 1,
       ...props,
       onClick: handlerAll(props.onClick, onChangePrev),
     }),
-    [onChangePrev, disabled, currentPage],
+    [onChangePrev, t, disabled, currentPage],
   )
 
   const getNextTriggerProps: PropGetter<"button"> = useCallback(
     (props = {}) => ({
       type: "button",
-      "aria-label": "Go to next page",
+      "aria-label": t("Go to next page"),
       disabled: disabled || currentPage === total,
       ...props,
       onClick: handlerAll(props.onClick, onChangeNext),
     }),
-    [onChangeNext, disabled, currentPage, total],
+    [onChangeNext, t, disabled, currentPage, total],
   )
 
   return {

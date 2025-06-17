@@ -17,6 +17,18 @@ export default {
     Decrease: "減少",
     Increase: "増加",
   },
+  pagination: {
+    "Go to first page": "最初のページへ移動",
+    "Go to last page": "最後のページへ移動",
+    "Go to next page": "次のページへ移動",
+    "Go to page {number}": "{number}ページへ移動",
+    "Go to previous page": "前のページへ移動",
+    Pagination: "ページネーション",
+    text: {
+      short: "{number} / {total}",
+      compact: "{number} / {total}ページ",
+    },
+  },
   passwordInput: {
     "Password strength meter": "パスワードの強度",
     "Toggle password visibility": "パスワードの表示を切り替える",

@@ -57,7 +57,7 @@ export const useSteps = ({
   orientation = "horizontal",
   onChange,
   ...rest
-}: UseStepsProps) => {
+}: UseStepsProps = {}) => {
   const descendants = useStepsDescendants()
   const [index, setIndex] = useControllableState({
     defaultValue: defaultIndex,
@@ -140,6 +140,7 @@ export const useSteps = ({
 
   return {
     id,
+    count,
     descendants,
     getStatus,
     index,
@@ -159,7 +160,10 @@ export type UseStepsReturn = ReturnType<typeof useSteps>
 
 export interface UseStepsItemProps extends HTMLProps<"li"> {}
 
-export const useStepsItem = (rest?: UseStepsItemProps) => {
+export const useStepsItem = ({
+  "aria-labelledby": ariaLabelledbyProp,
+  ...rest
+}: UseStepsItemProps = {}) => {
   const { descendants, index, register } = useStepsDescendant()
   const { id, getStatus, orientation } = useStepsContext()
   const status = getStatus(index)
@@ -176,6 +180,7 @@ export const useStepsItem = (rest?: UseStepsItemProps) => {
       return {
         "aria-current": current ? "step" : undefined,
         "aria-labelledby": cx(
+          ariaLabelledbyProp,
           ariaLabelledby,
           hasContent ? `${id}-${index}` : undefined,
         ),
@@ -187,6 +192,7 @@ export const useStepsItem = (rest?: UseStepsItemProps) => {
       }
     },
     [
+      ariaLabelledbyProp,
       getDocument,
       id,
       index,

@@ -26,7 +26,7 @@ export default {
     Pagination: "ページネーション",
     text: {
       short: "{value} / {total}",
-      compact: "{value} / {total}ページ",
+      compact: "{value} / {total} ページ",
     },
   },
   passwordInput: {

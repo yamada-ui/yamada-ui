@@ -148,7 +148,7 @@ export const usePagination = ({
         return {
           type: "button",
           "aria-current": currentPage === page ? "page" : undefined,
-          "aria-label": t("Go to page {number}", { number: page }),
+          "aria-label": t("Go to page", { value: page }),
           disabled,
           ...props,
           onClick: handlerAll(props.onClick, () => onChange(page)),

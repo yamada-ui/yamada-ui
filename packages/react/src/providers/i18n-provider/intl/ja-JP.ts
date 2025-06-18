@@ -18,15 +18,15 @@ export default {
     Increase: "増加",
   },
   pagination: {
-    "Go to first page": "最初のページへ移動",
-    "Go to last page": "最後のページへ移動",
-    "Go to next page": "次のページへ移動",
-    "Go to page {number}": "{number}ページへ移動",
-    "Go to previous page": "前のページへ移動",
+    "Go to first page": "最初のページに移動する",
+    "Go to last page": "最後のページに移動する",
+    "Go to next page": "次のページに移動する",
+    "Go to page": "{value}ページに移動する",
+    "Go to previous page": "前のページに移動する",
     Pagination: "ページネーション",
     text: {
-      short: "{number} / {total}",
-      compact: "{number} / {total}ページ",
+      short: "{value} / {total}",
+      compact: "{value} / {total}ページ",
     },
   },
   passwordInput: {

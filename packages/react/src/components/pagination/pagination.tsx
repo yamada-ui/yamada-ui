@@ -334,11 +334,18 @@ export const PaginationText = withContext<"span", PaginationTextProps>(
   const computedChildren = useMemo(() => {
     if (children) {
       return runIfFn(children, { page: currentPage, total })
+    } else if (format === "short") {
+      return t("text.short", {
+        total,
+        value: currentPage,
+      })
+    } else {
+      return t("text.compact", {
+        total,
+        value: currentPage,
+      })
     }
-    return t(`text.${format}`, { number: currentPage, total })
   }, [children, currentPage, format, total, t])
-
-  children ??= ({ page, total }) => t(`text.short`, { number: page, total })
 
   return {
     ...rest,

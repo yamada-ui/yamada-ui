@@ -5,6 +5,10 @@ export const iconButtonStyle = defineComponentStyle({
   variants: buttonStyle.variants,
 
   sizes: {
+    "2xs": {
+      fontSize: "md",
+      minBoxSize: "6",
+    },
     xs: {
       fontSize: "lg",
       minBoxSize: "8",

@@ -15,12 +15,12 @@ export const useTimeout = (
   useEffect(() => {
     if (delay == null) return undefined
 
-    let timeoutId: null | number = null
+    let timeoutId: NodeJS.Timeout | null = null
 
-    timeoutId = window.setTimeout(callbackRef, delay)
+    timeoutId = setTimeout(callbackRef, delay)
 
     return () => {
-      if (timeoutId) window.clearTimeout(timeoutId)
+      clearTimeout(timeoutId)
     }
   }, [delay, callbackRef])
 }

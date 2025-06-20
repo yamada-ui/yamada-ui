@@ -10,12 +10,12 @@ export const useInterval = (callback: () => void, delay: null | number) => {
   const callbackRef = useCallbackRef(callback)
 
   useEffect(() => {
-    let timeoutId: null | number = null
+    let timeoutId: NodeJS.Timeout | null = null
 
-    if (delay !== null) timeoutId = window.setInterval(callbackRef, delay)
+    if (delay !== null) timeoutId = setInterval(callbackRef, delay)
 
     return () => {
-      if (timeoutId) window.clearInterval(timeoutId)
+      if (timeoutId) clearInterval(timeoutId)
     }
   }, [delay, callbackRef])
 }

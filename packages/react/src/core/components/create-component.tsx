@@ -151,6 +151,7 @@ function getSlotKey<Y extends number | string | symbol>(
   slot?: ComponentSlot<Y>,
 ) {
   if (!slot) return "unknown"
+
   if (isArray(slot) || !isObject(slot)) {
     return toCamelCase(toArray(slot).join("-"))
   } else {

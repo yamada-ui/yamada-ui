@@ -55,6 +55,8 @@ export function transformInterpolation(
 export function getVar(token: string, fallback?: string) {
   if (!token.startsWith("--")) token = `--${token}`
 
+  token = token.replace(/[^-_a-zA-Z0-9]/g, "")
+
   return fallback ? `var(${token}, ${fallback})` : `var(${token})`
 }
 

@@ -193,7 +193,7 @@ function valueToVar(theme: StyledTheme<UsageTheme>) {
         } else if (isCSSToken(theme)(value)) {
           return theme.__cssMap![value]!.ref
         } else {
-          return getVar(value.replace(".", "-"), fallbackValue)
+          return getVar(value, fallbackValue)
         }
       },
     )

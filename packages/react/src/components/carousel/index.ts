@@ -1,21 +1,23 @@
 export {
-  CarouselControlNext,
-  CarouselControlPrev,
+  CarouselIndicator,
   CarouselIndicators,
+  CarouselItem,
+  CarouselList,
+  CarouselNextTrigger,
+  CarouselPrevTrigger,
   CarouselPropsContext,
   CarouselRoot,
-  CarouselSlide,
   useCarouselPropsContext,
 } from "./carousel"
 export type {
-  CarouselControlProps,
+  CarouselIndicatorProps,
   CarouselIndicatorsProps,
+  CarouselItemProps,
+  CarouselListProps,
+  CarouselNextTriggerProps,
+  CarouselPrevTriggerProps,
   CarouselRootProps,
-  CarouselSlideProps,
 } from "./carousel"
-
 export * from "./carousel.style"
-
-export type { CarouselControl } from "./use-carousel"
-
 export * as Carousel from "./namespace"
+export * from "./use-carousel"

@@ -2,152 +2,125 @@ import { defineComponentSlotStyle } from "../../core"
 
 export const carouselStyle = defineComponentSlotStyle({
   base: {
-    control: {
-      p: "2",
-      position: "absolute",
-      rounded: "full",
-      zIndex: "{kurillin, 9}",
-    },
     indicator: {
-      bg: ["whiteAlpha.400", "blackAlpha.400"],
+      bg: "colorScheme.solid/40",
+      cursor: "pointer",
       rounded: "full",
-      transitionDuration: "slower",
+      transitionDuration: "moderate",
       transitionProperty: "common",
+      _horizontal: { w: "10" },
       _selected: {
-        bg: ["whiteAlpha.700", "blackAlpha.700"],
+        bg: "colorScheme.solid",
       },
+      _vertical: { h: "10" },
       _hover: {
-        bg: ["whiteAlpha.500", "blackAlpha.500"],
+        _notSelected: {
+          bg: "colorScheme.solid/70",
+        },
       },
-      _active: {
-        bg: ["whiteAlpha.600", "blackAlpha.600"],
-      },
-      _focusVisible: {
-        boxShadow: "outline",
+      _disabled: {
+        layerStyle: "disabled",
       },
     },
     indicators: {
       display: "flex",
-      gap: "md",
+      gap: "2",
       justifyContent: "center",
       position: "absolute",
-      zIndex: "{kurillin, 9}",
+      zIndex: "yamcha",
+      _horizontal: {
+        bottom: "4",
+        flexDirection: "row",
+        h: "2",
+        left: "50%",
+        px: "4",
+        transform: "translateX(-50%)",
+        w: "full",
+      },
+      _vertical: {
+        flexDirection: "column",
+        h: "full",
+        py: "4",
+        right: "4",
+        top: "50%",
+        transform: "translateY(-50%)",
+        w: "2",
+      },
     },
-    inner: {
+    item: {
+      "&:not([data-include-gap-in-size])": {
+        _horizontal: { mr: "{slide-gap}" },
+        _vertical: { mb: "{slide-gap}" },
+      },
+      "&[data-include-gap-in-size]": {
+        _horizontal: { pr: "{slide-gap}" },
+        _vertical: { pb: "{slide-gap}" },
+      },
+      boxSize: "full",
+      flex: "0 0 {slide-size}",
+      position: "relative",
+    },
+    list: {
+      "&[data-include-gap-in-size]": {
+        _horizontal: { mr: "calc({slide-gap} * -1)" },
+        _vertical: { mb: "calc({slide-gap} * -1)" },
+      },
       display: "flex",
+      h: "full",
+      _horizontal: { flexDirection: "row" },
+      _vertical: { flexDirection: "column" },
     },
-    next: {},
-    prev: {},
+    next: {
+      _horizontal: {
+        right: "4",
+      },
+      _vertical: {
+        bottom: "4",
+      },
+    },
+    prev: {
+      _horizontal: {
+        left: "4",
+      },
+      _vertical: {
+        top: "4",
+      },
+    },
     root: {
-      h: "fit-content",
-      position: "relative",
-      w: "100%",
-    },
-    slide: {
-      position: "relative",
-    },
-    "slide-inner": {
-      boxSize: "100%",
-    },
-    slides: {
-      h: "fit-content",
+      "--slide-gap": "spaces.4",
+      "--slide-size": "sizes.full",
       overflow: "hidden",
-      w: "100%",
+      position: "relative",
+      w: "full",
+    },
+    trigger: {
+      position: "absolute",
+      zIndex: "kurillin",
+      _horizontal: {
+        top: "50%",
+        transform: "translateY(-50%)",
+      },
+      _vertical: {
+        left: "50%",
+        transform: "translateX(-50%) rotate(90deg)",
+      },
     },
   },
 
   sizes: {
     sm: {
-      inner: {
-        h: "sm",
-      },
+      root: { h: "sm" },
     },
     md: {
-      inner: {
-        h: "md",
-      },
+      root: { h: "md" },
     },
     lg: {
-      inner: {
-        h: "lg",
-      },
-    },
-    xl: {
-      inner: {
-        h: "xl",
-      },
-    },
-  },
-
-  props: {
-    /**
-     * The orientation of the carousel.
-     *
-     * @default 'horizontal'
-     */
-    orientation: {
-      horizontal: {
-        indicator: {
-          bottom: "4",
-          w: "8",
-        },
-        indicators: {
-          bottom: "4",
-          flexDirection: "row",
-          h: "2",
-          left: "50%",
-          px: "4",
-          transform: "translateX(-50%)",
-          w: "100%",
-        },
-        inner: {
-          flexDirection: "row",
-        },
-        next: {
-          right: "4",
-          top: "50%",
-          transform: "translateY(-50%)",
-        },
-        prev: {
-          left: "4",
-          top: "50%",
-          transform: "translateY(-50%)",
-        },
-      },
-      vertical: {
-        indicator: {
-          h: "8",
-          right: "4",
-        },
-        indicators: {
-          flexDirection: "column",
-          h: "100%",
-          py: "4",
-          right: "4",
-          top: "50%",
-          transform: "translateY(-50%)",
-          w: "2",
-        },
-        inner: {
-          flexDirection: "column",
-        },
-        next: {
-          bottom: "4",
-          left: "50%",
-          transform: "translateX(-50%)",
-        },
-        prev: {
-          left: "50%",
-          top: "4",
-          transform: "translateX(-50%)",
-        },
-      },
+      root: { h: "lg" },
     },
   },
 
   defaultProps: {
     size: "md",
-    orientation: "horizontal",
   },
 })
 

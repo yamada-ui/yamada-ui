@@ -1,9 +1,27 @@
 import type { FC } from "../../core"
 import { Carousel } from "."
-import { a11y, act, fireEvent, render, screen } from "../../../test"
-import { Button } from "../button"
+import { a11y, fireEvent, render, screen } from "../../../test"
 
-const slidesContentArr = new Array(3).fill(0).map((_, id) => `Slide ${id + 1}`)
+interface TestComponentProps extends Carousel.RootProps {}
+
+const TestComponent: FC<TestComponentProps> = (props) => {
+  return (
+    <Carousel.Root data-testid="carousel" {...props}>
+      <Carousel.List data-testid="carouselList">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <Carousel.Item key={index} index={index}>
+            Slide {index + 1}
+          </Carousel.Item>
+        ))}
+      </Carousel.List>
+
+      <Carousel.PrevTrigger />
+      <Carousel.NextTrigger />
+
+      <Carousel.Indicators />
+    </Carousel.Root>
+  )
+}
 
 describe("<Carousel />", () => {
   const defaultIntersectionObserver = global.IntersectionObserver
@@ -22,237 +40,154 @@ describe("<Carousel />", () => {
     vi.stubGlobal("IntersectionObserver", defaultIntersectionObserver)
   })
 
-  test("should pass a11y test", async () => {
-    await a11y(
-      <Carousel.Root>
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>,
-    )
+  test("renders tag correctly", async () => {
+    await a11y(<TestComponent />)
   })
 
-  test.todo("should render correctly when orientation is set", () => {
-    const { container, rerender } = render(
-      <Carousel.Root orientation="horizontal">
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>,
+  test("sets `displayName` correctly", () => {
+    expect(Carousel.Root.displayName).toBe("CarouselRoot")
+    expect(Carousel.List.displayName).toBe("CarouselList")
+    expect(Carousel.Item.displayName).toBe("CarouselItem")
+    expect(Carousel.PrevTrigger.displayName).toBe("CarouselPrevTrigger")
+    expect(Carousel.NextTrigger.displayName).toBe("CarouselNextTrigger")
+    expect(Carousel.Indicators.displayName).toBe("CarouselIndicators")
+    expect(Carousel.Indicator.displayName).toBe("CarouselIndicator")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<TestComponent />)
+    expect(screen.getByTestId("carousel")).toHaveClass("ui-carousel__root")
+    expect(screen.getByTestId("carouselList")).toHaveClass("ui-carousel__list")
+    expect(screen.getByRole("tabpanel", { name: "1 of 5" })).toHaveClass(
+      "ui-carousel__item",
     )
-
-    let sliders = container.querySelector(".ui-carousel__inner")
-    expect(sliders).toBeInTheDocument()
-
-    let styles = window.getComputedStyle(sliders!)
-    expect(styles.flexDirection).toBe("row")
-
-    rerender(
-      <Carousel.Root orientation="vertical">
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>,
+    expect(screen.getByRole("tablist")).toHaveClass("ui-carousel__indicators")
+    expect(screen.getByRole("tab", { name: "Go to 1 slide" })).toHaveClass(
+      "ui-carousel__indicator",
     )
+    expect(
+      screen.getByRole("button", { name: "Go to previous slide" }),
+    ).toHaveClass("ui-carousel__trigger--prev")
+    expect(
+      screen.getByRole("button", { name: "Go to next slide" }),
+    ).toHaveClass("ui-carousel__trigger--next")
+  })
 
-    sliders = container.querySelector(".ui-carousel__inner")
-    expect(sliders).toBeInTheDocument()
-
-    styles = window.getComputedStyle(sliders!)
-    expect(styles.flexDirection).toBe("column")
+  test("renders HTML tag correctly", () => {
+    render(<TestComponent />)
+    expect(screen.getByTestId("carousel").tagName).toBe("SECTION")
+    expect(screen.getByTestId("carouselList").tagName).toBe("DIV")
+    expect(screen.getByRole("tabpanel", { name: "1 of 5" }).tagName).toBe("DIV")
+    expect(screen.getByRole("tablist").tagName).toBe("DIV")
+    expect(screen.getByRole("tab", { name: "Go to 1 slide" }).tagName).toBe(
+      "BUTTON",
+    )
+    expect(
+      screen.getByRole("button", { name: "Go to previous slide" }).tagName,
+    ).toBe("BUTTON")
+    expect(
+      screen.getByRole("button", { name: "Go to next slide" }).tagName,
+    ).toBe("BUTTON")
   })
 
   test("should render defaultSlide correctly", () => {
-    render(
-      <Carousel.Root defaultIndex={2}>
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>,
-    )
-
-    expect(screen.getByText("Slide 3").parentNode).toHaveAttribute(
-      "data-selected",
-    )
+    render(<TestComponent defaultIndex={1} />)
+    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
   })
 
-  test("should render correctly slide when using control button", () => {
-    render(
-      <Carousel.Root
-        controlNextProps={{ icon: <span>Next slide</span> }}
-        controlPrevProps={{
-          icon: <span>Prev slide</span>,
-        }}
-      >
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>,
+  test("should render correctly slide when using control button", async () => {
+    const { user } = render(<TestComponent />)
+    await user.click(screen.getByRole("button", { name: "Go to next slide" }))
+    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+    await user.click(
+      screen.getByRole("button", { name: "Go to previous slide" }),
     )
-
-    fireEvent.click(screen.getByText("Next slide"))
-
-    expect(screen.getByText("Slide 2").parentNode).toHaveAttribute(
-      "data-selected",
-    )
-
-    fireEvent.click(screen.getByText("Prev slide"))
-
-    expect(screen.getByText("Slide 1").parentNode).toHaveAttribute(
-      "data-selected",
-    )
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
   })
 
-  test("should switch to correctly slide when click on indicator", () => {
-    render(
-      <Carousel.Root>
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>,
-    )
+  test("should switch to correctly slide when click on indicator", async () => {
+    const { user } = render(<TestComponent />)
+    await user.click(screen.getByRole("tab", { name: "Go to 2 slide" }))
+    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+  })
 
-    fireEvent.click(
-      document.querySelectorAll(".ui-carousel__indicator")[
-        slidesContentArr.length - 1
-      ]!,
-    )
+  test("should disabled next and prev button when looping is disabled", async () => {
+    const { user } = render(<TestComponent loop={false} />)
+    expect(
+      screen.getByRole("button", { name: "Go to previous slide" }),
+    ).toBeDisabled()
+    await user.click(screen.getByRole("tab", { name: "Go to 5 slide" }))
+    expect(
+      screen.getByRole("button", { name: "Go to next slide" }),
+    ).toBeDisabled()
+  })
 
-    expect(screen.getByText("Slide 3").parentNode).toHaveAttribute(
-      "data-selected",
-    )
+  test("should move the carousel correctly when left or right arrow keys are pressed", async () => {
+    const { user } = render(<TestComponent orientation="horizontal" />)
+    await user.click(screen.getByRole("tab", { name: "Go to 1 slide" }))
+    await user.keyboard("{ArrowDown}")
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await user.keyboard("{ArrowUp}")
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await user.keyboard("{ArrowRight}")
+    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+    await user.keyboard("{ArrowLeft}")
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await user.keyboard("{ArrowLeft}")
+    expect(screen.getByText("Slide 5")).toHaveAttribute("data-selected")
+    await user.keyboard("{ArrowRight}")
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await user.keyboard("{End}")
+    expect(screen.getByText("Slide 5")).toHaveAttribute("data-selected")
+    await user.keyboard("{Home}")
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+  })
+
+  test("should move the carousel correctly when up or down arrow keys are pressed", async () => {
+    const { user } = render(<TestComponent orientation="vertical" />)
+    await user.click(screen.getByRole("tab", { name: "Go to 1 slide" }))
+    await user.keyboard("{ArrowLeft}")
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await user.keyboard("{ArrowRight}")
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await user.keyboard("{ArrowDown}")
+    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+    await user.keyboard("{ArrowUp}")
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await user.keyboard("{ArrowUp}")
+    expect(screen.getByText("Slide 5")).toHaveAttribute("data-selected")
+    await user.keyboard("{ArrowDown}")
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    await user.keyboard("{End}")
+    expect(screen.getByText("Slide 5")).toHaveAttribute("data-selected")
+    await user.keyboard("{Home}")
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
   })
 
   test("should render correctly when using autoplay", () => {
-    const delayTimer = 500
+    const delay = 500
     vi.useFakeTimers()
-
-    const carouselElement = (
-      <Carousel.Root autoplay delay={delayTimer}>
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>
-    )
-
-    const { rerender } = render(carouselElement)
-
-    // First after delay timer should be slide 2
-    act(() => {
-      vi.advanceTimersByTime(delayTimer)
-    })
-    rerender(carouselElement)
-    expect(screen.getByText("Slide 2").parentNode).toHaveAttribute(
-      "data-selected",
-    )
-
-    // Finally slide 3 must be have data-selected
-    act(() => {
-      vi.advanceTimersByTime(delayTimer)
-    })
-    rerender(carouselElement)
-    expect(screen.getByText("Slide 3").parentNode).toHaveAttribute(
-      "data-selected",
-    )
+    const node = <TestComponent autoplay delay={delay} />
+    const { rerender } = render(node)
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    vi.advanceTimersByTime(delay)
+    rerender(node)
+    expect(screen.getByText("Slide 2")).toHaveAttribute("data-selected")
+    vi.advanceTimersByTime(delay)
+    rerender(node)
+    expect(screen.getByText("Slide 3")).toHaveAttribute("data-selected")
+    vi.useRealTimers()
   })
 
   test("should stop autoplay on mouse enter", () => {
     vi.useFakeTimers()
-    const carouselElement = (
-      <Carousel.Root autoplay delay={500} stopMouseEnterAutoplay>
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>
-    )
-
-    const { rerender } = render(carouselElement)
-
-    fireEvent.mouseEnter(screen.getByText("Slide 1"))
-
-    vi.advanceTimersByTime(10000)
-    rerender(carouselElement)
-
-    expect(screen.getByText("Slide 1").parentNode).toHaveAttribute(
-      "data-selected",
-    )
-  })
-
-  test("should disabled next and prev button when looping is disabled", () => {
-    render(
-      <Carousel.Root
-        loop={false}
-        controlNextProps={{ icon: <span>Next slide</span> }}
-        controlPrevProps={{
-          icon: <span>Prev slide</span>,
-        }}
-      >
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>,
-    )
-
-    // When first slide the prev button should be disabled
-    expect(screen.getByText("Prev slide").parentNode).toBeDisabled()
-
-    // Move to the last slide
-    fireEvent.click(
-      document.querySelectorAll(".ui-carousel__indicator")[
-        slidesContentArr.length - 1
-      ]!,
-    )
-
-    // When last slide the next button should be disabled
-    expect(screen.getByText("Next slide").parentNode).toBeDisabled()
-  })
-
-  test("should not display control element when withControl is false", () => {
-    render(
-      <Carousel.Root withControls={false}>
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>,
-    )
-
-    expect(document.querySelectorAll(".ui-carousel.__control")).toHaveLength(0)
-  })
-
-  test("should not display indicators element when withIndicators is false", () => {
-    render(
-      <Carousel.Root withIndicators={false}>
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>,
-    )
-
-    expect(document.querySelectorAll(".ui-carousel__indicators")).toHaveLength(
-      0,
-    )
-  })
-
-  test("should render function indicator correctly", () => {
-    const indicatorComponent: FC<{
-      index: number
-      selected: boolean
-    }> = ({ index }) => {
-      return <Button>{`test indicator ${index}`}</Button>
-    }
-
-    render(
-      <Carousel.Root indicatorsProps={{ component: indicatorComponent }}>
-        {slidesContentArr.map((value) => (
-          <Carousel.Slide key={value}>{value}</Carousel.Slide>
-        ))}
-      </Carousel.Root>,
-    )
-
-    const indicators = screen.getAllByText(/test indicator \d+/i)
-
-    expect(indicators).toHaveLength(slidesContentArr.length)
-
-    indicators.forEach((indicator) => expect(indicator).toBeInTheDocument())
+    const node = <TestComponent autoplay delay={500} />
+    const { rerender } = render(node)
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    fireEvent.mouseEnter(screen.getByTestId("carousel"))
+    vi.advanceTimersByTime(2000)
+    rerender(node)
+    expect(screen.getByText("Slide 1")).toHaveAttribute("data-selected")
+    vi.useRealTimers()
   })
 })

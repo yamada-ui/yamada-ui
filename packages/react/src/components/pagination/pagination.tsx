@@ -14,6 +14,7 @@ import type { Page, UsePaginationProps } from "./use-pagination"
 import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
+import { useI18n } from "../../providers/i18n-provider"
 import { isNumber, runIfFn } from "../../utils"
 import { ButtonGroup, IconButton } from "../button"
 import {
@@ -329,17 +330,22 @@ export const PaginationText = withContext<"span", PaginationTextProps>(
   "text",
 )(undefined, ({ children, format = "compact", ...rest }) => {
   const { currentPage, total } = usePaginationContext()
+  const { t } = useI18n("pagination")
   const computedChildren = useMemo(() => {
     if (children) {
       return runIfFn(children, { page: currentPage, total })
     } else if (format === "short") {
-      return `${currentPage} / ${total}`
+      return t("text.short", {
+        total,
+        value: currentPage,
+      })
     } else {
-      return `${currentPage} of ${total}`
+      return t("text.compact", {
+        total,
+        value: currentPage,
+      })
     }
-  }, [children, currentPage, format, total])
-
-  children ??= ({ page, total }) => `${page} / ${total}`
+  }, [children, currentPage, format, total, t])
 
   return {
     ...rest,

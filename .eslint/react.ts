@@ -1,11 +1,11 @@
-import type { ESLint, Linter, Rule } from "eslint"
+import type { TSESLint } from "@typescript-eslint/utils"
 import reactPlugin from "eslint-plugin-react"
 import { sharedFiles } from "./shared"
 
-const noDebugRule: Rule.RuleModule = {
+const noDebugRule: TSESLint.LooseRuleDefinition = {
   create(context) {
     return {
-      JSXAttribute(node) {
+      JSXAttribute(node: any) {
         if (node.name && node.name.name === "__debug") {
           context.report({
             messageId: "noDebugProp",
@@ -28,7 +28,7 @@ const noDebugRule: Rule.RuleModule = {
   },
 }
 
-const reactCustomPlugin: ESLint.Plugin = {
+const reactCustomPlugin: TSESLint.FlatConfig.Plugin = {
   meta: {
     name: "eslint-custom-plugin-react",
     version: "1.0.0",
@@ -38,7 +38,7 @@ const reactCustomPlugin: ESLint.Plugin = {
   },
 }
 
-export const reactConfig: Linter.Config = {
+export const reactConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/react",
   files: sharedFiles,
   plugins: { "custom-react": reactCustomPlugin, react: reactPlugin },

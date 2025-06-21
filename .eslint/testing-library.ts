@@ -1,9 +1,9 @@
-import type { Linter } from "eslint"
+import type { TSESLint } from "@typescript-eslint/utils"
 import { fixupPluginRules } from "@eslint/compat"
 import testingLibraryPlugin from "eslint-plugin-testing-library"
 import { sharedTestFiles } from "./shared"
 
-export const testingLibraryConfig: Linter.Config = {
+export const testingLibraryConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/testing-library",
   files: sharedTestFiles,
   plugins: { "testing-library": fixupPluginRules(testingLibraryPlugin) },

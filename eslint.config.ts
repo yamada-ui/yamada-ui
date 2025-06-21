@@ -1,5 +1,4 @@
 import type { TSESLint } from "@typescript-eslint/utils"
-import type { Linter } from "eslint"
 import pluginVitest from "@vitest/eslint-plugin"
 import prettierConfig from "eslint-config-prettier"
 import { dirname, resolve } from "node:path"
@@ -27,7 +26,7 @@ const sharedFiles = [
   "stories/**/*.d.ts",
 ]
 
-const ignoresConfig: Linter.Config = {
+const ignoresConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/ignores",
   ignores: [
     "!.storybook/**",
@@ -38,8 +37,8 @@ const ignoresConfig: Linter.Config = {
     "**/build/**",
     "**/bin/**",
     "**/pnpm-lock.yaml",
-    "docs/**",
-    "examples/**",
+    "website/**",
+    "playgrounds/**",
     "coverage/**",
     "storybook-static/**",
     // TODO: Remove legacy-components
@@ -47,7 +46,7 @@ const ignoresConfig: Linter.Config = {
   ],
 }
 
-const noConsoleConfig: Linter.Config = {
+const noConsoleConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/no-console",
   files: [
     "packages/cli/**/*.ts",
@@ -60,7 +59,7 @@ const noConsoleConfig: Linter.Config = {
   },
 }
 
-const restrictedImportsConfigArray: Linter.Config[] = [
+const restrictedImportsConfigArray: TSESLint.FlatConfig.ConfigArray = [
   {
     name: "eslint/restricted-imports/react",
     files: [
@@ -97,19 +96,19 @@ const restrictedImportsConfigArray: Linter.Config[] = [
   },
 ]
 
-const reactConfig: Linter.Config = {
+const reactConfig: TSESLint.FlatConfig.Config = {
   ...sharedReactConfig,
   files: sharedFiles,
   ignores: ["packages/cli/**/*.ts"],
 }
 
-const reactHooksConfig: Linter.Config = {
+const reactHooksConfig: TSESLint.FlatConfig.Config = {
   ...sharedReactHooksConfig,
   files: sharedFiles,
   ignores: ["packages/cli/**/*.ts"],
 }
 
-const vitestSetupTestsConfig: Linter.Config = {
+const vitestSetupTestsConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/vitest/setup-tests",
   files: ["scripts/setup-test.ts"],
   plugins: {

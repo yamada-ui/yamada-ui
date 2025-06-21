@@ -37,8 +37,8 @@
     "**/bin/**",
     "**/dist/**",
     "coverage/**",
-    "examples/**",
-    "docs/**/*",
+    "playgrounds/**",
+    "website/**/*",
     "storybook-static/**"
   ],
   "ts-node": {

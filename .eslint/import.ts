@@ -1,10 +1,10 @@
-import type { Linter } from "eslint"
+import type { TSESLint } from "@typescript-eslint/utils"
 import { fixupPluginRules } from "@eslint/compat"
 import { flatConfigs } from "eslint-plugin-import"
 import unusedImportsPlugin from "eslint-plugin-unused-imports"
 import { sharedFiles } from "./shared"
 
-export const importConfigArray: Linter.Config[] = [
+export const importConfigArray: TSESLint.FlatConfig.ConfigArray = [
   {
     name: "eslint/import/order",
     files: sharedFiles,

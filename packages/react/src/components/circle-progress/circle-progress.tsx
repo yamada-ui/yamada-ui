@@ -53,7 +53,7 @@ export const {
 /**
  * `CircleProgress` is a component that displays progress in a circular progress bar.
  *
- * @see Docs https://yamada-ui.com/components/circle-progress
+ * @see https://yamada-ui.com/components/circle-progress
  */
 export const CircleProgressRoot = withProvider<"div", CircleProgressRootProps>(
   ({

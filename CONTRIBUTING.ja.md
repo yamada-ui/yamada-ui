@@ -56,20 +56,14 @@ cd yamada-ui
 
 ```json
 {
-  ...
-  "eslint.options": {
-    "flags": ["unstable_ts_config"]
-  },
   "eslint.workingDirectories": [
-    "docs",
-    "examples/create-react-app",
-    "examples/hono",
-    "examples/next/app",
-    "examples/next/pages",
-    "examples/remix",
-    "examples/vite"
-  ],
-  ...
+    "website",
+    "playgrounds/hono",
+    "playgrounds/next/app",
+    "playgrounds/next/pages",
+    "playgrounds/remix",
+    "playgrounds/vite"
+  ]
 }
 ```
 

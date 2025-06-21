@@ -1,5 +1,5 @@
 import type { CSSObject } from "@emotion/react"
-import type { AnyString } from "@yamada-ui/react"
+import type { AnyString } from "@yamada-ui/utils"
 import type { CSSProperties } from "."
 
 export interface StyleConfig {

@@ -76,15 +76,18 @@
     "react-focus-lock": "^2.13.6",
     "react-remove-scroll": "^2.7.1",
     "react-resizable-panels": "^3.0.2",
-    "recharts": "^2.15.3"
+    "recharts": "^2.15.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "clean-package": "2.2.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "use-mask-input": "^3.4.2"
+    "use-mask-input": "^3.4.2",
+    "react-hook-form": "^7.57.0",
+    "react-icons": "^5.5.0",
+    "@lucide/lab": "^0.1.2"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",

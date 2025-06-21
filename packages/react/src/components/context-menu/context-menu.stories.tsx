@@ -1,48 +1,41 @@
-// type Story = StoryFn<typeof ContextMenu>
-
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { ContextMenu } from "."
+import { Center } from "../center"
+import { Menu } from "../menu"
+import { Text } from "../text"
 
-// const meta: Meta<typeof ContextMenu> = {
-//   component: ContextMenu,
-//   title: "Components / ContextMenu",
-// }
-//
+type Story = StoryFn<typeof ContextMenu.Root>
 
-type Story = StoryFn
-
-const meta: Meta = {
+const meta: Meta<typeof ContextMenu.Root> = {
+  component: ContextMenu.Root,
   title: "Components / ContextMenu",
 }
 
 export default meta
 
-// export const Basic: Story = () => {
-//   return (
-//     <ContextMenu>
-//       <ContextMenuTrigger
-//         as={Center}
-//         borderStyle="dashed"
-//         borderWidth="1px"
-//         h="xs"
-//         p="md"
-//         rounded="md"
-//         w="full"
-//       >
-//         <Text>Right click here</Text>
-//       </ContextMenuTrigger>
+export const Basic: Story = () => {
+  return (
+    <ContextMenu.Root>
+      <ContextMenu.Trigger
+        as={Center}
+        borderStyle="dashed"
+        borderWidth="1px"
+        h="xs"
+        p="md"
+        rounded="md"
+        w="full"
+      >
+        <Text>Right click here</Text>
+      </ContextMenu.Trigger>
 
-//       <MenuList>
-//         <MenuItem>Undo</MenuItem>
-//         <MenuItem>Redo</MenuItem>
-//         <MenuSeparator />
-//         <MenuItem disabled>Cut</MenuItem>
-//         <MenuItem>Copy</MenuItem>
-//         <MenuItem>Paste</MenuItem>
-//       </MenuList>
-//     </ContextMenu>
-//   )
-// }
-
-export const temp: Story = () => {
-  return <>temp</>
+      <Menu.List>
+        <Menu.Item>Undo</Menu.Item>
+        <Menu.Item>Redo</Menu.Item>
+        <Menu.Separator />
+        <Menu.Item disabled>Cut</Menu.Item>
+        <Menu.Item>Copy</Menu.Item>
+        <Menu.Item>Paste</Menu.Item>
+      </Menu.List>
+    </ContextMenu.Root>
+  )
 }

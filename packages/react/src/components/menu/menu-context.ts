@@ -4,7 +4,6 @@ import type {
   RefObject,
   SetStateAction,
 } from "react"
-import type { CSSObject } from "../../core"
 import { createDescendant } from "../../hooks/use-descendant"
 import { createContext } from "../../utils"
 
@@ -14,16 +13,6 @@ export const {
   useDescendants,
   useDescendantsContext: useMenuDescendantsContext,
 } = createDescendant()
-
-interface ContextMenuContext {
-  styles: { [key: string]: CSSObject | undefined }
-}
-
-export const [ContextMenuProvider, useContextMenu] =
-  createContext<ContextMenuContext>({
-    name: "ContextMenuContext",
-    strict: false,
-  })
 
 interface UpstreamMenuContext {
   relatedRef: RefObject<HTMLElement | null>

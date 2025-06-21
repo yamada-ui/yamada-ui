@@ -1,7 +1,7 @@
-import type { ComponentMultiStyle } from "../../core"
+import { defineComponentSlotStyle } from "../../core"
 
-export const Menu: ComponentMultiStyle<"Menu"> = {
-  baseStyle: {
+export const menuStyle = defineComponentSlotStyle({
+  base: {
     button: {
       alignItems: "center",
       appearance: "none",
@@ -20,13 +20,9 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       boxShadow: ["lg", "dark-lg"],
       color: "inherit",
       minW: "xs",
+      p: "0",
       rounded: "md",
       zIndex: "guldo",
-    },
-    divider: {
-      borderBottomWidth: "1px",
-      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
-      my: "2",
     },
     group: {},
     groupLabel: {
@@ -35,14 +31,6 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
       fontWeight: "semibold",
       px: "3",
       py: "1.5",
-    },
-    icon: {
-      alignItems: "center",
-      color: ["blackAlpha.600", "whiteAlpha.700"],
-      display: "inline-flex",
-      flexShrink: 0,
-      fontSize: "0.85em",
-      justifyContent: "center",
     },
     item: {
       alignItems: "center",
@@ -78,14 +66,21 @@ export const Menu: ComponentMultiStyle<"Menu"> = {
         opacity: 0.4,
       },
     },
+    "item-button": {},
+    "item-group": {},
     list: {
       outline: "none",
       py: "2",
     },
+    "option-group": {},
+    "option-item": {},
+    root: {},
     separator: {
       borderBottomWidth: "1px",
       borderColor: ["blackAlpha.200", "whiteAlpha.100"],
       my: "2",
     },
   },
-}
+})
+
+export type MenuStyle = typeof menuStyle

@@ -226,10 +226,10 @@ importers:
         specifier: ^3.5.3
         version: 3.5.3
       react:
-        specifier: ^19.1.0
+        specifier: ^19.0.0
         version: 19.1.0
       react-dom:
-        specifier: ^19.1.0
+        specifier: ^19.0.0
         version: 19.1.0(react@19.1.0)
       rimraf:
         specifier: ^6.0.1

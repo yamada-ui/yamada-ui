@@ -41,6 +41,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "bg.contrast"
     | "bg.emphasized"
     | "bg.error"
+    | "bg.ghost"
     | "bg.info"
     | "bg.muted"
     | "bg.overlay"

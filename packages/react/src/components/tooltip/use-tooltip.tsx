@@ -83,7 +83,7 @@ export const useTooltip = ({
   whileElementsMounted,
   onClose: onCloseProp,
   onOpen: onOpenProp,
-}: UseTooltipProps) => {
+}: UseTooltipProps = {}) => {
   const describedbyId = useId()
   const triggerRef = useRef<HTMLElement>(null)
   const openTimeout = useRef<NodeJS.Timeout>(undefined)

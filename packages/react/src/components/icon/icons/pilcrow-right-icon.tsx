@@ -1,9 +1,11 @@
+"use client"
+
 import { PilcrowRight } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
  * `PilcrowRightIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @sees://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const PilcrowRightIcon = component(Icon)({ as: PilcrowRight })

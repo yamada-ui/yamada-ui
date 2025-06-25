@@ -1,3 +1,5 @@
+"use client"
+
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
@@ -10,7 +12,7 @@ import { AnimatePresence } from "motion/react"
 import { useEffect, useMemo, useState } from "react"
 import { createComponent } from "../../core"
 import { createdDom, isNumeric } from "../../utils"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { createTransition } from "../motion"
 import { collapseStyle } from "./collapse.style"
 
@@ -158,7 +160,7 @@ export const Collapse = withContext(
     return (
       <AnimatePresence custom={custom} initial={false}>
         {open ? (
-          <Motion
+          <motion.div
             style={{ overflow: "hidden", ...style }}
             animate={animate}
             custom={custom}

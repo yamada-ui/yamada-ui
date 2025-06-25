@@ -1,16 +1,15 @@
 import type { FC, ReactNode } from "react"
-import type { ColorModeProviderProps } from "../color-mode-provider"
-import type { Environment } from "../environment-provider"
+import type { ColorModeProviderProps, ThemeProviderProps } from "../../core"
 import type { I18nProviderProps } from "../i18n-provider"
-import type { ThemeProviderProps } from "../theme-provider"
 import { LoadingProvider } from "../../components/loading"
-// import { NoticeProvider } from "../../components/notice"
-import { defaultTheme } from "../../theme"
-import { defaultConfig } from "../../theme"
-import { ColorModeProvider } from "../color-mode-provider"
-import { EnvironmentProvider } from "../environment-provider"
+import {
+  ColorModeProvider,
+  EnvironmentProvider,
+  SystemProvider,
+  ThemeProvider,
+} from "../../core"
+import { defaultConfig, defaultTheme } from "../../theme"
 import { I18nProvider } from "../i18n-provider"
-import { ThemeProvider } from "../theme-provider"
 
 export interface UIProviderProps
   extends Omit<ThemeProviderProps, "storageKey">,
@@ -25,19 +24,6 @@ export interface UIProviderProps
    * By default, it is saved to `local storage`.
    */
   colorModeStorageKey?: string
-  /**
-   * If `true`, the use of automatic window and document detection will be disabled.
-   *
-   * @default false
-   */
-  disableEnvironment?: boolean
-  /**
-   * The environment `window` and `document` to be used by all components and hooks.
-   *
-   * By default, we smartly determine the ownerDocument and defaultView
-   * based on where `UIProvider` is rendered.
-   */
-  environment?: Environment
   /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
@@ -55,10 +41,8 @@ export const UIProvider: FC<UIProviderProps> = ({
   colorModeStorageKey,
   config = defaultConfig,
   dir,
-  disableEnvironment,
   disableGlobalStyle,
   disableResetStyle,
-  environment,
   intl,
   locale,
   theme = defaultTheme,
@@ -66,32 +50,27 @@ export const UIProvider: FC<UIProviderProps> = ({
   themeSchemeStorageKey,
 }) => {
   return (
-    <EnvironmentProvider
-      disabled={disableEnvironment}
-      environment={environment}
-    >
+    <EnvironmentProvider>
       <I18nProvider dir={dir} intl={intl} locale={locale}>
-        <ThemeProvider
-          config={config}
-          disableGlobalStyle={disableGlobalStyle}
-          disableResetStyle={disableResetStyle}
-          storageKey={themeSchemeStorageKey}
-          theme={theme}
-          themeSchemeManager={themeSchemeManager}
-        >
-          <ColorModeProvider
-            colorMode={colorMode}
-            colorModeManager={colorModeManager}
+        <SystemProvider config={config} theme={theme}>
+          <ThemeProvider
             config={config}
-            storageKey={colorModeStorageKey}
+            disableGlobalStyle={disableGlobalStyle}
+            disableResetStyle={disableResetStyle}
+            storageKey={themeSchemeStorageKey}
+            theme={theme}
+            themeSchemeManager={themeSchemeManager}
           >
-            <LoadingProvider {...config.loading}>
-              {children}
-
-              {/* <NoticeProvider {...config.notice} /> */}
-            </LoadingProvider>
-          </ColorModeProvider>
-        </ThemeProvider>
+            <ColorModeProvider
+              colorMode={colorMode}
+              colorModeManager={colorModeManager}
+              config={config}
+              storageKey={colorModeStorageKey}
+            >
+              <LoadingProvider {...config.loading}>{children}</LoadingProvider>
+            </ColorModeProvider>
+          </ThemeProvider>
+        </SystemProvider>
       </I18nProvider>
     </EnvironmentProvider>
   )

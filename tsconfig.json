@@ -36,9 +36,9 @@
     "**/node_modules/**",
     "**/bin/**",
     "**/dist/**",
-    "coverage/**",
-    "examples/**",
-    "docs/**/*",
+    "**/coverage/**",
+    "playgrounds/**",
+    "website/**/*",
     "storybook-static/**"
   ],
   "ts-node": {

@@ -1,3 +1,5 @@
+"use client"
+
 import copy from "copy-to-clipboard"
 import { useCallback, useEffect, useState } from "react"
 import { isNumber, isString } from "../../utils"
@@ -42,15 +44,15 @@ export const useClipboard = (
   )
 
   useEffect(() => {
-    let timeoutId: null | number = null
+    let timeoutId: NodeJS.Timeout | null = null
 
     if (copied)
-      timeoutId = window.setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setCopied(false)
       }, timeout)
 
     return () => {
-      if (timeoutId) window.clearTimeout(timeoutId)
+      if (timeoutId) clearTimeout(timeoutId)
     }
   }, [timeout, copied])
 

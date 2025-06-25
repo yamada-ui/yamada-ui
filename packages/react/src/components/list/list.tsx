@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactElement } from "react"
 import type {
   CSSProps,
@@ -69,6 +71,9 @@ export const ListRoot = withProvider(
 )()
 
 export interface ListItemProps extends HTMLStyledProps<"li"> {
+  /**
+   * The icon to use.
+   */
   icon?: ReactElement<any>
 }
 

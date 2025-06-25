@@ -6,5 +6,4 @@ export {
 } from "./image"
 export type { ImageProps } from "./image"
 export type { ImageProps as ImgProps } from "./image"
-
 export * from "./image.style"

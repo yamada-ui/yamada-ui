@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback, useState } from "react"
 import { useRef } from "react"
 import { useSafeLayoutEffect } from "../../utils"
@@ -17,7 +19,7 @@ export function useMounted({
   useSafeLayoutEffect(() => {
     mountedRef.current = true
 
-    let timeoutId: any = null
+    let timeoutId: NodeJS.Timeout | null = null
 
     if (rerender) {
       if (delay > 0) {

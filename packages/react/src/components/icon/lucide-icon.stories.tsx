@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { burger } from "@lucide/lab"
 import { HStack } from "../stack"
 import { GhostIcon, LucideIcon } from "./"
@@ -15,21 +15,21 @@ export default meta
 export const Basic: Story = () => {
   return (
     <HStack alignItems="flex-end">
-      <GhostIcon fontSize="6xl" />
+      <GhostIcon color="fg.muted" fontSize="6xl" />
 
-      <GhostIcon fontSize="5xl" />
+      <GhostIcon color="fg.muted" fontSize="5xl" />
 
-      <GhostIcon fontSize="4xl" />
+      <GhostIcon color="fg.muted" fontSize="4xl" />
 
-      <GhostIcon fontSize="3xl" />
+      <GhostIcon color="fg.muted" fontSize="3xl" />
 
-      <GhostIcon fontSize="2xl" />
+      <GhostIcon color="fg.muted" fontSize="2xl" />
 
-      <GhostIcon fontSize="xl" />
+      <GhostIcon color="fg.muted" fontSize="xl" />
     </HStack>
   )
 }
 
 export const CustomIcon: Story = () => {
-  return <LucideIcon fontSize="4xl" iconNode={burger} />
+  return <LucideIcon color="fg.muted" fontSize="4xl" iconNode={burger} />
 }

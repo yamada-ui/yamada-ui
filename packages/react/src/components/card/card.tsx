@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { CardStyle } from "./card.style"
 import { createSlotComponent } from "../../core"

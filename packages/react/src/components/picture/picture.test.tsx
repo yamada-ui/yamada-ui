@@ -1,6 +1,6 @@
 import { a11y, render, screen } from "../../../test"
-import { ThemeProvider } from "../../providers/theme-provider"
-import { defaultConfig, defaultTheme } from "../../theme"
+import { UIProvider } from "../../providers/ui-provider"
+import { defaultConfig } from "../../theme"
 import { Image } from "../image"
 import { Picture, Source } from "./picture"
 
@@ -21,12 +21,9 @@ describe("<Picture />", () => {
     )
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
-    expect(Picture.displayName).toBe("Picture")
-    expect(Picture.__styled__).toBe("Picture")
-
-    expect(Source.displayName).toBe("Source")
-    expect(Source.__styled__).toBe("Source")
+  test("sets `displayName` correctly", () => {
+    expect(Picture.name).toBe("Picture")
+    expect(Source.name).toBe("Source")
   })
 
   test("renders HTML tag correctly", () => {
@@ -149,23 +146,26 @@ describe("<Picture />", () => {
 
   test("should sorting sources with custom direction", () => {
     const { container } = render(
-      <ThemeProvider
-        config={{
-          ...defaultConfig,
-          breakpoint: { direction: "up" },
-        }}
-        theme={defaultTheme}
-      >
-        <Picture
-          src={src}
-          alt="img"
-          sources={[
-            { srcSet: src, media: "xl" },
-            { srcSet: src, media: "lg" },
-            { srcSet: src, media: "md" },
-          ]}
-        />
-      </ThemeProvider>,
+      <Picture
+        src={src}
+        alt="img"
+        sources={[
+          { srcSet: src, media: "xl" },
+          { srcSet: src, media: "lg" },
+          { srcSet: src, media: "md" },
+        ]}
+      />,
+      {
+        wrapper: (props) => (
+          <UIProvider
+            config={{
+              ...defaultConfig,
+              breakpoint: { direction: "up" },
+            }}
+            {...props}
+          />
+        ),
+      },
     )
     const sources = container.querySelectorAll("source")
     expect(sources[0]?.getAttribute("media")).toContain("(min-width: 1280px)")

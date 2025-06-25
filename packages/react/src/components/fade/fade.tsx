@@ -1,3 +1,5 @@
+"use client"
+
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
@@ -9,7 +11,7 @@ import type { FadeStyle } from "./fade.style"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { createComponent } from "../../core"
-import { createTransition, Motion } from "../motion"
+import { createTransition, motion } from "../motion"
 import { fadeStyle } from "./fade.style"
 
 export const fadeVariants: Variants = {
@@ -68,7 +70,7 @@ export const Fade = withContext(
     return (
       <AnimatePresence custom={custom}>
         {open ? (
-          <Motion
+          <motion.div
             animate={animate}
             custom={custom}
             exit="exit"

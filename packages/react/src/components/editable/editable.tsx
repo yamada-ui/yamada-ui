@@ -1,4 +1,5 @@
-import type { PropsWithChildren } from "react"
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { UseInputBorderProps } from "../input"
@@ -7,15 +8,12 @@ import type { UseEditableProps, UseEditableReturn } from "./use-editable"
 import { createSlotComponent, styled } from "../../core"
 import { runIfFn } from "../../utils"
 import { useInputBorder } from "../input"
-import { Slot } from "../slot"
 import { editableStyle } from "./editable.style"
-import { useEditable } from "./use-editable"
-
-interface EditableContext
-  extends Omit<
-    UseEditableReturn,
-    "getRootProps" | "onCancel" | "onEdit" | "onSubmit" | "value"
-  > {}
+import {
+  EditableContext,
+  useEditable,
+  useEditableContext,
+} from "./use-editable"
 
 interface EditableElementProps
   extends Pick<
@@ -31,18 +29,18 @@ export interface EditableRootProps
     ThemeProps<EditableStyle>,
     UseInputBorderProps,
     UseEditableProps {
+  /**
+   * The editable children to use.
+   */
   children?: ReactNodeOrFunction<EditableElementProps>
 }
 
 export const {
-  component,
-  ComponentContext: EditableContext,
   PropsContext: EditablePropsContext,
-  useComponentContext: useEditableContext,
   usePropsContext: useEditablePropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<EditableRootProps, EditableStyle, EditableContext>(
+} = createSlotComponent<EditableRootProps, EditableStyle>(
   "editable",
   editableStyle,
 )
@@ -53,13 +51,7 @@ export const {
  * @see https://yamada-ui.com/components/editable
  */
 export const EditableRoot = withProvider(
-  ({
-    children,
-    errorBorderColor,
-    focusBorderColor,
-    vars: varsProp,
-    ...props
-  }) => {
+  ({ children, errorBorderColor, focusBorderColor, ...props }) => {
     const {
       editing,
       value: _value,
@@ -69,10 +61,7 @@ export const EditableRoot = withProvider(
       onSubmit,
       ...rest
     } = useEditable(props)
-    const vars = useInputBorder(varsProp, {
-      errorBorderColor,
-      focusBorderColor,
-    })
+    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
     const cloneChildren = runIfFn(children, {
       editing,
       onCancel,
@@ -82,7 +71,7 @@ export const EditableRoot = withProvider(
 
     return (
       <EditableContext value={{ editing, ...rest }}>
-        <styled.div {...getRootProps()} vars={vars}>
+        <styled.div {...getRootProps()} {...varProps}>
           {cloneChildren}
         </styled.div>
       </EditableContext>
@@ -134,35 +123,44 @@ export const EditableControl = withContext<"div", EditableControlProps>(
   return { ...getControlProps(props) }
 })
 
-export interface EditableEditTriggerProps extends PropsWithChildren {}
+export interface EditableEditTriggerProps extends HTMLStyledProps<"button"> {}
 
-export const EditableEditTrigger = component<
-  "fragment",
+export const EditableEditTrigger = withContext<
+  "button",
   EditableEditTriggerProps
->((props) => {
-  const { getEditProps } = useEditableContext()
+>("button", { name: "EditTrigger", slot: ["trigger", "edit"] })(
+  undefined,
+  (props) => {
+    const { getEditProps } = useEditableContext()
 
-  return <Slot {...getEditProps(props)} />
-}, "editTrigger")()
+    return { asChild: true, ...getEditProps(props) }
+  },
+)
 
-export interface EditableCancelTriggerProps extends PropsWithChildren {}
+export interface EditableCancelTriggerProps extends HTMLStyledProps<"button"> {}
 
-export const EditableCancelTrigger = component<
-  "fragment",
+export const EditableCancelTrigger = withContext<
+  "button",
   EditableCancelTriggerProps
->((props) => {
-  const { getCancelProps } = useEditableContext()
+>("button", { name: "CancelTrigger", slot: ["trigger", "cancel"] })(
+  undefined,
+  (props) => {
+    const { getCancelProps } = useEditableContext()
 
-  return <Slot {...getCancelProps(props)} />
-}, "cancelTrigger")()
+    return { asChild: true, ...getCancelProps(props) }
+  },
+)
 
-export interface EditableSubmitTriggerProps extends PropsWithChildren {}
+export interface EditableSubmitTriggerProps extends HTMLStyledProps<"button"> {}
 
-export const EditableSubmitTrigger = component<
-  "fragment",
+export const EditableSubmitTrigger = withContext<
+  "button",
   EditableSubmitTriggerProps
->((props) => {
-  const { getSubmitProps } = useEditableContext()
+>("button", { name: "SubmitTrigger", slot: ["trigger", "submit"] })(
+  undefined,
+  (props) => {
+    const { getSubmitProps } = useEditableContext()
 
-  return <Slot {...getSubmitProps(props)} />
-}, "submitTrigger")()
+    return { asChild: true, ...getSubmitProps(props) }
+  },
+)

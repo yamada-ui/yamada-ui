@@ -1,9 +1,6 @@
 import type * as React from "react"
 import type { Merge } from "../../utils"
 import type { CSSProps } from "../css"
-import type { PseudoProps } from "../pseudos"
-import type { StyleProps } from "../styles"
-import type { StyledTheme, UsageTheme } from "../theme"
 
 export type DOMElement = keyof React.JSX.IntrinsicElements
 
@@ -21,10 +18,6 @@ export interface StyledProps extends CSSProps {
 export type WithoutAs<Y extends object> = Omit<Y, "as">
 
 export type WithoutRef<Y extends object> = Omit<Y, "ref">
-
-export interface InterpolationProps extends StyleProps, PseudoProps {
-  theme: StyledTheme<UsageTheme>
-}
 
 export type OmitProps<Y extends object = {}, M extends object = {}> = Omit<
   Y,
@@ -49,9 +42,7 @@ type ComponentProps<
 }
 
 export interface ComponentArgs
-  extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {
-  __styled__?: string
-}
+  extends Pick<React.FunctionComponent, "displayName" | "propTypes"> {}
 
 export interface Component<Y extends As, D extends object = {}>
   extends ComponentArgs {
@@ -72,6 +63,12 @@ export interface StyledComponent<Y extends As = As, M extends object = {}>
 export interface HTMLRefAttributes<Y extends DOMElement = "div"> {
   ref?: React.Ref<React.ComponentRef<Y>>
 }
+
+export interface HTMLElementProps
+  extends React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLElement>,
+    HTMLElement
+  > {}
 
 export type HTMLProps<Y extends DOMElement = "div"> = Omit<
   React.JSX.IntrinsicElements[Y],

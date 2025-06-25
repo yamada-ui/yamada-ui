@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { Box } from "../../components/box"
 import { useBreakpointEffect } from "./use-breakpoint-effect"
 import { useBreakpointState } from "./use-breakpoint-state"
@@ -38,7 +38,7 @@ export const Basic = () => {
       color="white"
       p="md"
       rounded="md"
-      transitionDuration="slower"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current device is "{device}"

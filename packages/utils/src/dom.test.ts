@@ -1,28 +1,23 @@
 import {
   ariaAttr,
+  contains,
   createdDom,
-  createId,
   dataAttr,
   getActiveElement,
-  getOwnerDocument,
-  getOwnerWindow,
+  getDocument,
   getPlatform,
   getPx,
-  hasNegativeTabIndex,
-  hasTabIndex,
+  getWindow,
   isActiveElement,
   isApple,
-  isContains,
-  isContentEditable,
-  isDisabled,
-  isElement,
-  isFocusable,
-  isHidden,
+  isDisabledElement,
+  isEditableElement,
+  isHiddenElement,
   isHTMLElement,
   isMac,
   isSafari,
-  isTabbable,
   platform,
+  uuid,
   vendor,
 } from "./dom"
 
@@ -35,7 +30,6 @@ describe("DOM", () => {
 
   describe("getPlatform", () => {
     test("should return the platform of the user agent", () => {
-       
       expect(getPlatform()).toBe(navigator.platform)
     })
   })
@@ -43,7 +37,6 @@ describe("DOM", () => {
   describe("vendor", () => {
     test("should return true if the vendor matches", () => {
       expect(vendor(/apple/i)).toBe(
-         
         navigator.vendor.toLowerCase().includes("apple"),
       )
     })
@@ -73,20 +66,8 @@ describe("DOM", () => {
   describe("isSafari", () => {
     test("should return true if the browser is Safari on an Apple device", () => {
       const isAppleDevice = /mac|iphone|ipad|ipod/i.test(getPlatform())
-       
       const isSafariBrowser = /apple/i.test(navigator.vendor)
       expect(isSafari()).toBe(isAppleDevice && isSafariBrowser)
-    })
-  })
-
-  describe("isElement", () => {
-    test("should return true if the object is a DOM element", () => {
-      const el = document.createElement("div")
-      expect(isElement(el)).toBeTruthy()
-    })
-
-    test("should return false for non-element objects", () => {
-      expect(isElement({})).toBeFalsy()
     })
   })
 
@@ -102,69 +83,61 @@ describe("DOM", () => {
     })
   })
 
-  describe("isHidden", () => {
+  describe("isHiddenElement", () => {
     test("should return true if the element or its parent is hidden", () => {
       const parent = document.createElement("div")
       const child = document.createElement("div")
       parent.hidden = true
       parent.appendChild(child)
-      expect(isHidden(child)).toBeTruthy()
+      expect(isHiddenElement(child)).toBeTruthy()
     })
 
     test("should return false if the element and its parents are not hidden", () => {
       const el = document.createElement("div")
-      expect(isHidden(el)).toBeFalsy()
+      expect(isHiddenElement(el)).toBeFalsy()
     })
   })
 
-  describe("disabled", () => {
+  describe("isDisabledElement", () => {
     test("should return true if the element is disabled", () => {
       const el = document.createElement("button")
       el.setAttribute("disabled", true as any)
-      expect(isDisabled(el)).toBeTruthy()
+      expect(isDisabledElement(el)).toBeTruthy()
     })
 
     test("should return true if the element is data-disabled", () => {
       const el = document.createElement("button")
       el.setAttribute("data-disabled", "true")
-      expect(isDisabled(el)).toBeTruthy()
+      expect(isDisabledElement(el)).toBeTruthy()
     })
 
     test("should return true if the element is aria-disabled", () => {
       const el = document.createElement("button")
       el.setAttribute("aria-disabled", "true")
-      expect(isDisabled(el)).toBeTruthy()
+      expect(isDisabledElement(el)).toBeTruthy()
     })
   })
 
-  describe("hasTabIndex", () => {
-    test("should return true if the element has a tabindex", () => {
-      const el = document.createElement("div")
-      el.setAttribute("tabindex", "0")
-      expect(hasTabIndex(el)).toBeTruthy()
-    })
-  })
-
-  describe("isContentEditable", () => {
+  describe("isEditableElement", () => {
     test("should return true if the element is contenteditable", () => {
       const el = document.createElement("div")
       el.setAttribute("contenteditable", "true")
-      expect(isContentEditable(el)).toBeTruthy()
+      expect(isEditableElement(el)).toBeTruthy()
     })
   })
 
-  describe("isContains", () => {
+  describe("contains", () => {
     test("should return true if the parent contains the child", () => {
       const parent = document.createElement("div")
       const child = document.createElement("div")
       parent.appendChild(child)
-      expect(isContains(parent, child)).toBeTruthy()
+      expect(contains(parent, child)).toBeTruthy()
     })
 
     test("should return false if the parent does not contain the child", () => {
       const parent = document.createElement("div")
       const child = document.createElement("div")
-      expect(isContains(parent, child)).toBeFalsy()
+      expect(contains(parent, child)).toBeFalsy()
     })
   })
 
@@ -198,101 +171,17 @@ describe("DOM", () => {
     })
   })
 
-  describe("isFocusable", () => {
-    test("should return false for non-HTMLElements", () => {
-      const el = document.createTextNode("")
-      expect(isFocusable(el as unknown as HTMLElement)).toBeFalsy()
-    })
-
-    test("should return true for input elements", () => {
-      const el = document.createElement("input")
-      expect(isFocusable(el)).toBeTruthy()
-    })
-
-    test("should return false for hidden elements", () => {
-      const el = document.createElement("input")
-      el.hidden = true
-      expect(isFocusable(el)).toBeFalsy()
-    })
-
-    test("should return false for disabled elements", () => {
-      const el = document.createElement("button")
-      el.setAttribute("disabled", true as any)
-      expect(isFocusable(el)).toBeFalsy()
-    })
-
-    test("should return true for elements with href attribute", () => {
-      const el = document.createElement("a")
-      el.setAttribute("href", "#")
-      expect(isFocusable(el)).toBeTruthy()
-    })
-
-    test("should return true for elements with controls attribute", () => {
-      const el = document.createElement("video")
-      el.setAttribute("controls", "true")
-      expect(isFocusable(el)).toBeTruthy()
-    })
-
-    test("should return true for contenteditable elements", () => {
-      const el = document.createElement("div")
-      el.setAttribute("contenteditable", "true")
-      expect(isFocusable(el)).toBeTruthy()
-    })
-
-    test("should return true for elements with tabindex", () => {
-      const el = document.createElement("div")
-      el.setAttribute("tabindex", "0")
-      expect(isFocusable(el)).toBeTruthy()
-    })
-
-    test("should return false for elements without tabindex or specific attributes", () => {
-      const el = document.createElement("div")
-      expect(isFocusable(el)).toBeFalsy()
-    })
-  })
-
-  describe("hasNegativeTabIndex", () => {
-    test("should return true if the element has a negative tabindex", () => {
-      const el = document.createElement("div")
-      el.setAttribute("tabindex", "-1")
-      expect(hasNegativeTabIndex(el)).toBeTruthy()
-    })
-
-    test("should return false if the element does not have a negative tabindex", () => {
-      const el = document.createElement("div")
-      el.setAttribute("tabindex", "0")
-      expect(hasNegativeTabIndex(el)).toBeFalsy()
-    })
-  })
-
-  describe("isTabbable", () => {
-    test("should return true if the element is tabbable", () => {
-      const el = document.createElement("button")
-      document.body.appendChild(el)
-      expect(isTabbable(el)).toBeTruthy()
-      document.body.removeChild(el)
-    })
-
-    test("should return false if the element is not tabbable", () => {
-      const el = document.createElement("div")
-      el.setAttribute("tabindex", "-1")
-      document.body.appendChild(el)
-      expect(isTabbable(el)).toBeFalsy()
-      document.body.removeChild(el)
-    })
-  })
-
-  describe("getOwnerWindow", () => {
+  describe("getWindow", () => {
     test("should return the window object", () => {
       const el = document.createElement("div")
-      expect(getOwnerWindow(el)).toBe(window)
+      expect(getWindow(el)).toBe(window)
     })
   })
 
-  describe("getOwnerDocument", () => {
+  describe("getDocument", () => {
     test("should return the document object", () => {
       const el = document.createElement("div")
-      expect(getOwnerDocument(el)).toBe(document)
+      expect(getDocument(el)).toBe(document)
     })
   })
 
@@ -301,7 +190,7 @@ describe("DOM", () => {
       const input = document.createElement("input")
       document.body.appendChild(input)
       input.focus()
-      expect(getActiveElement()).toBe(input)
+      expect(getActiveElement(document)).toBe(input)
       document.body.removeChild(input)
     })
   })
@@ -311,7 +200,7 @@ describe("DOM", () => {
       const input = document.createElement("input")
       document.body.appendChild(input)
       input.focus()
-      expect(isActiveElement(input)).toBeTruthy()
+      expect(isActiveElement(input, document)).toBeTruthy()
       document.body.removeChild(input)
     })
 
@@ -321,19 +210,17 @@ describe("DOM", () => {
       document.body.appendChild(input)
       document.body.appendChild(input2)
       input.focus()
-      expect(isActiveElement(input2)).toBeFalsy()
+      expect(isActiveElement(input2, document)).toBeFalsy()
       document.body.removeChild(input)
       document.body.removeChild(input2)
     })
   })
 
-  describe("createId", () => {
+  describe("uuid", () => {
     test("should create a unique id with prefix", () => {
-      const id1 = createId("prefix")
-      const id2 = createId("prefix")
+      const id1 = uuid()
+      const id2 = uuid()
       expect(id1).not.toBe(id2)
-      expect(id1.startsWith("prefix-")).toBeTruthy()
-      expect(id2.startsWith("prefix-")).toBeTruthy()
     })
   })
 })

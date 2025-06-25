@@ -1,3 +1,5 @@
+"use client"
+
 import { BookText } from "lucide-react"
 import { component, Icon } from "../icon"
 

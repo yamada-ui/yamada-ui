@@ -1,0 +1,72 @@
+{
+  "Picture": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "enableSorting": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the sources will be sorted by the `minW` and `maxW` properties.",
+      "required": false
+    },
+    "fit": {
+      "type": "ObjectFit | [ObjectFit | ({ _peerAccept?: ObjectFit | [ObjectFit | (... & { base?: ObjectFit | [ObjectFit | (... & ...), ObjectFit | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: ObjectFit | ... 2 more ... | undefined; }), ObjectFit | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _select...",
+      "description": "The CSS `object-fit` property.",
+      "required": false
+    },
+    "pictureProps": {
+      "type": "HTMLStyledProps<\"picture\">",
+      "description": "The props for the picture element.",
+      "required": false
+    },
+    "sources": {
+      "type": "PictureSource[]",
+      "description": "The sources for the picture element.",
+      "required": false
+    }
+  },
+  "Source": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "media": {
+      "type": "AnyString | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\"",
+      "description": "The media query for the source.",
+      "required": false
+    }
+  }
+}

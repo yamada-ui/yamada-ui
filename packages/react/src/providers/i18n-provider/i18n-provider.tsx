@@ -1,6 +1,11 @@
+"use client"
+
+import type { Formats, Options } from "intl-messageformat"
 import type { FC, ReactNode } from "react"
 import type { TextDirection } from "../../core"
 import type { Dict, Path, Value } from "../../utils"
+import type { IcuArgs } from "./icu.types"
+import IntlMessageFormat from "intl-messageformat"
 import {
   createContext,
   useCallback,
@@ -14,8 +19,8 @@ import {
   createdDom,
   getMemoizedObject as get,
   isEmptyObject,
-  isObject,
   isRtl,
+  isString,
   isUndefined,
   noop,
   useSsr,
@@ -47,34 +52,31 @@ export function getLanguage(locale?: string, dir?: TextDirection): Language {
   return { dir, locale }
 }
 
-type Pattern<Y> = Y extends `${string}{${infer M}}${infer D}`
-  ? M | Pattern<D>
-  : never
-
-type PatternValue = number | string
-
-type ReplaceValue<Y> =
-  Pattern<Y> extends never
-    ? never
-    : PatternValue | { [M in Pattern<Y>]: PatternValue }
-
-type IntlData = (typeof DEFAULT_INTL)["en-US"]
+type DefaultLocale = "en-US"
+type IntlData = (typeof DEFAULT_INTL)[DefaultLocale]
 type IntlKey = keyof IntlData
 type IntlPath = Path<IntlData>
+
+type Translation<Y extends object = IntlData, M extends string = IntlPath> = <
+  D extends M,
+>(
+  path: D,
+  ...args: IcuArgs<Value<Y, D>> extends never
+    ? [replaceValues?: IcuArgs<Value<Y, D>, IntlPath | M>]
+    : [replaceValues: IcuArgs<Value<Y, D>, IntlPath | M>]
+) => string
 
 interface I18nContext<Y extends object = IntlData, M extends string = IntlPath>
   extends Language {
   changeLanguage: (locale?: string, dir?: TextDirection) => void
-  t: <D extends M>(
-    path: D,
-    replaceValue?: ReplaceValue<Value<Y, D>>,
-    pattern?: string,
-  ) => string
+  getTranslation: (key?: IntlKey) => Translation<Y, M>
+  t: Translation<Y, M>
 }
 
 export const I18nContext = createContext<I18nContext>({
   ...DEFAULT_LANGUAGE,
   changeLanguage: noop,
+  getTranslation: () => () => "",
   t: () => "",
 })
 
@@ -87,11 +89,19 @@ export interface I18nProviderProps {
    */
   dir?: TextDirection
   /**
+   * The formats to pass to the `intlMessageFormat` instance.
+   */
+  formats?: Formats
+  /**
    * The internationalization messages to apply to the application.
    *
    * This prop expects a dictionary object where the keys are locale strings (e.g., "en-US").
    */
   intl?: Dict
+  /**
+   * The options to pass to the `intlMessageFormat` instance.
+   */
+  intlMessageFormatOptions?: Options
   /**
    * The locale to apply to the application.
    *
@@ -103,7 +113,9 @@ export interface I18nProviderProps {
 export const I18nProvider: FC<I18nProviderProps> = ({
   children,
   dir: forcedDir,
+  formats,
   intl = DEFAULT_INTL as Dict,
+  intlMessageFormatOptions,
   locale: forcedLocale,
 }) => {
   const ssr = useSsr()
@@ -121,41 +133,74 @@ export const I18nProvider: FC<I18nProviderProps> = ({
     setLanguage(getLanguage(locale, dir))
   }, [])
 
-  const translate = useCallback(
-    <Y extends IntlPath>(
-      path: Y,
-      replaceValue?: ReplaceValue<Value<IntlData, Y>>,
-      pattern = "label",
-    ) => {
-      let value = get<string>(messages, path, "")
+  const getValue = useCallback(
+    (path: number | string) => {
+      const value = get<string | undefined>(messages, path)
 
-      if (isUndefined(replaceValue)) return value
-
-      if (!isObject(replaceValue)) {
-        value = value.replace(
-          new RegExp(`{${pattern}}`, "g"),
-          `${replaceValue}`,
-        )
+      if (!isUndefined(value)) {
+        return value
       } else {
-        value = Object.entries(replaceValue).reduce(
-          (prev, [pattern, value]) =>
-            prev.replace(new RegExp(`{${pattern}}`, "g"), `${value}`),
-          value,
-        )
-      }
+        path = path.toString().replace(/^[^.]+\./g, "")
 
-      return value
+        return get<string | undefined>(messages, path)
+      }
     },
     [messages],
   )
 
+  const getTranslation = useCallback(
+    (key?: IntlKey) =>
+      <Y extends IntlPath>(
+        path: Y,
+        replaceValues?: IcuArgs<Value<IntlData, Y>, IntlPath>,
+      ) => {
+        const value = getValue(key ? `${key}.${path}` : path) ?? path
+
+        if (isUndefined(replaceValues)) return value
+
+        try {
+          const resolvedReplaceValues = Object.entries(replaceValues).reduce<{
+            [key: string]: any
+          }>((prev, [key, pathOrValue]) => {
+            if (isString(pathOrValue)) {
+              const resolvedPathOrValue = String(pathOrValue)
+              const value =
+                getValue(
+                  key ? `${key}.${resolvedPathOrValue}` : resolvedPathOrValue,
+                ) ?? resolvedPathOrValue
+
+              prev[key] = value
+            } else {
+              prev[key] = pathOrValue
+            }
+
+            return prev
+          }, {})
+
+          const message = new IntlMessageFormat(
+            value,
+            locale,
+            formats,
+            intlMessageFormatOptions,
+          )
+
+          return message.format(resolvedReplaceValues) as string
+        } catch (e) {
+          if (e instanceof Error) console.warn(e.message)
+
+          return value
+        }
+      },
+    [getValue, locale, formats, intlMessageFormatOptions],
+  )
+
   const value = useMemo(() => {
-    const rest = { changeLanguage, t: translate }
+    const rest = { changeLanguage, getTranslation, t: getTranslation() }
 
     if (ssr) return { ...DEFAULT_LANGUAGE, ...rest }
 
     return { ...language, ...rest }
-  }, [changeLanguage, translate, ssr, language])
+  }, [changeLanguage, getTranslation, ssr, language])
 
   useEffect(() => {
     if (controlled) return
@@ -183,12 +228,14 @@ export function useI18n<Y extends IntlKey>(
 export function useI18n<Y extends IntlKey>(key?: Y) {
   const context = useContext(I18nContext)
 
-  const translate = useCallback(
+  const translation = useCallback(
     <M extends Path<IntlData[Y]>>(
       path: M,
-      replaceValue?: ReplaceValue<M>,
-      pattern = "label",
-    ) => context.t(`${key!}.${path}` as any, replaceValue, pattern),
+      replaceValues?: IcuArgs<
+        Value<IntlData[Y], M>,
+        IntlPath | Path<IntlData[Y]>
+      >,
+    ) => context.getTranslation(key)(path as any, replaceValues as any),
     [key, context],
   )
 
@@ -200,7 +247,7 @@ export function useI18n<Y extends IntlKey>(key?: Y) {
     }
 
   if (key) {
-    return { ...context, t: translate }
+    return { ...context, t: translation }
   } else {
     return context
   }

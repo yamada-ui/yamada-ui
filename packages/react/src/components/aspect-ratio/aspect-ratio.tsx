@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, HTMLStyledProps, StyleValue } from "../../core"
 import type { AspectRatioStyle } from "./aspect-ratio.style"
 import { Children } from "react"
@@ -5,7 +7,7 @@ import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"
 import { aspectRatioStyle } from "./aspect-ratio.style"
 
-interface AspectRatioOptions {
+export interface AspectRatioProps extends HTMLStyledProps {
   /**
    * The aspect ratio of the Box.
    *
@@ -13,8 +15,6 @@ interface AspectRatioOptions {
    */
   ratio?: StyleValue<number>
 }
-
-export interface AspectRatioProps extends AspectRatioOptions, HTMLStyledProps {}
 
 export const {
   PropsContext: AspectRatioPropsContext,

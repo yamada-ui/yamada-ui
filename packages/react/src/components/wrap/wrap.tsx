@@ -1,3 +1,5 @@
+"use client"
+
 import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { FlexProps } from "../flex"
 import type { WrapStyle } from "./wrap.style"
@@ -6,7 +8,7 @@ import { Flex } from "../flex"
 import { wrapStyle } from "./wrap.style"
 
 export interface WrapProps
-  extends WithoutThemeProps<FlexProps>,
+  extends WithoutThemeProps<FlexProps, WrapStyle>,
     ThemeProps<WrapStyle> {}
 
 export const {

@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect } from "react"
 import { useCallbackRef } from "../../utils"
 
@@ -10,17 +12,17 @@ export const useTimeout = (
   callback: (...args: any[]) => void,
   delay: null | number,
 ) => {
-  const func = useCallbackRef(callback)
+  const callbackRef = useCallbackRef(callback)
 
   useEffect(() => {
     if (delay == null) return undefined
 
-    let timeoutId: null | number = null
+    let timeoutId: NodeJS.Timeout | null = null
 
-    timeoutId = window.setTimeout(func, delay)
+    timeoutId = setTimeout(callbackRef, delay)
 
     return () => {
-      if (timeoutId) window.clearTimeout(timeoutId)
+      clearTimeout(timeoutId)
     }
-  }, [delay, func])
+  }, [delay, callbackRef])
 }

@@ -1,3 +1,5 @@
+"use client"
+
 import { CigaretteOff } from "lucide-react"
 import { component, Icon } from "../icon"
 

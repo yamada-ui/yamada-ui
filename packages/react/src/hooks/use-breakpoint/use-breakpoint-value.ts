@@ -1,8 +1,7 @@
-import type { ThemeTokens, UsageTheme } from "../../core"
-import type { StyledTheme } from "../../core"
+import type { Breakpoint, System } from "../../core"
 import type { ResponsiveObject } from "../../core"
 import { useMemo } from "react"
-import { useTheme } from "../../providers/theme-provider"
+import { useSystem } from "../../core"
 import { useBreakpoint } from "./use-breakpoint"
 
 /**
@@ -11,27 +10,22 @@ import { useBreakpoint } from "./use-breakpoint"
  *
  * @see https://yamada-ui.com/hooks/use-breakpoint-value
  */
-export const useBreakpointValue = <T>(values: ResponsiveObject<T>): T => {
-  const { theme } = useTheme()
+export const useBreakpointValue = <Y>(
+  values: ResponsiveObject<Y, false>,
+): Y => {
+  const system = useSystem()
   const breakpoint = useBreakpoint()
 
   return useMemo(
-    () => getBreakpointValue<T>(values)(theme, breakpoint),
-    [values, theme, breakpoint],
+    () => getBreakpointValue<Y>(values)(system, breakpoint),
+    [values, system, breakpoint],
   )
 }
 
 export const getBreakpointValue =
-  <T>(values: ResponsiveObject<T> = {}) =>
-  (
-    theme: StyledTheme<UsageTheme> | undefined,
-    breakpoint: ThemeTokens["breakpoints"],
-  ): T => {
-    if (!theme) {
-      console.warn("getBreakpointValue: `theme` is undefined.")
-    }
-
-    const breakpoints = theme?.__breakpoints?.keys ?? []
+  <Y>(values: ResponsiveObject<Y, false> = {}) =>
+  (system: System, breakpoint: Breakpoint): Y => {
+    const breakpoints = system.breakpoints.keys
 
     if (!breakpoints.length) {
       console.warn("getBreakpointValue: `breakpoints` is undefined.")
@@ -43,9 +37,9 @@ export const getBreakpointValue =
       const nextBreakpoint = breakpoints[i]
 
       if (nextBreakpoint && values.hasOwnProperty(nextBreakpoint)) {
-        return values[nextBreakpoint] as T
+        return values[nextBreakpoint] as Y
       }
     }
 
-    return values.base as T
+    return values.base as Y
   }

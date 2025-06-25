@@ -1,3 +1,5 @@
+"use client"
+
 import { SquareArrowUpRight } from "lucide-react"
 import { component, Icon } from "../icon"
 

@@ -1,26 +1,28 @@
 import type { Dict } from "../../utils"
-import type { StyleConfig } from "../config"
-import type { PseudoProperty } from "../pseudos"
-import type { StyleProperty, VariableLengthProperty } from "../styles"
-import type { StyledTheme, UsageTheme } from "../theme"
-import type { Breakpoints } from "./breakpoint"
-import type { CSSObjectOrFunc } from "./index.types"
+import type { Breakpoints, System, UsageTheme } from "../system"
+import type { StyleConfig } from "./config"
+import type { CSSObjectOrFunction } from "./index.types"
+import type { StyleProperty, VariableLengthProperty } from "./styles"
+import type { TransformOptions } from "./utils"
 import { isArray, isObject, isString, merge, runIfFn } from "../../utils"
-import { colorMix } from "../config"
-import { pseudos } from "../pseudos"
-import { styles, variableLengthProperties } from "../styles"
-import { getColorSchemeVar, getVar, transformInterpolation } from "./var"
+import { getColorSchemeVar, getVar, transformInterpolation } from "../system"
+import { colorMix } from "./color-mix"
+import { conditions, getCondition } from "./conditions"
+import { styles, variableLengthProperties } from "./styles"
+import { isCSSToken } from "./utils"
 
 function isVariableLength(key: string): boolean {
   return variableLengthProperties.includes(key as VariableLengthProperty)
 }
 
 function isImportant(value: any): boolean {
-  return isString(value) && /\s*!important\s*/g.test(value)
+  return (
+    isString(value) && (/\s*!important$/.test(value) || /\s*!$/.test(value))
+  )
 }
 
 function omitImportant(value: any): string {
-  return isString(value) ? value.replace(/\s*!important\s*/g, "") : value
+  return isString(value) ? value.replace(/(!important|!)$/, "").trim() : value
 }
 
 function insertImportant(value: any, style?: StyleConfig): any {
@@ -29,21 +31,19 @@ function insertImportant(value: any, style?: StyleConfig): any {
   } else if (isObject(value)) {
     if (!style?.properties) return value
 
-    if (isArray(style.properties)) {
-      for (const property of style.properties) {
-        value[property] += " !important"
-      }
-    } else {
-      value[style.properties] += " !important"
+    for (const property of style.properties) {
+      value[property] += " !important"
     }
   }
 
   return value
 }
 
-function isAdditionalObject(obj: Dict) {
-  return function (breakpointKeys: string[]): boolean {
-    const keys = Object.keys(obj)
+function isConditionalObject(breakpoints: Breakpoints) {
+  return function (value: any): boolean {
+    if (!isObject(value)) return false
+
+    const keys = Object.keys(value)
 
     if (!keys.length) return false
 
@@ -51,7 +51,7 @@ function isAdditionalObject(obj: Dict) {
 
     return keys.every((key) => {
       return (
-        breakpointKeys.includes(key) ||
+        breakpoints.isResponsiveKey(key) ||
         key.startsWith("@") ||
         key.startsWith("_")
       )
@@ -59,168 +59,161 @@ function isAdditionalObject(obj: Dict) {
   }
 }
 
-function expandColorModeArray(
-  key: string,
-  value: any[],
-  breakpoints: Breakpoints,
-): Dict {
-  let computedCSS: Dict = {}
-
-  if (breakpoints.isResponsive(value[0])) {
-    computedCSS = expandResponsiveObject(key, value[0], breakpoints)
-  } else {
-    computedCSS[key] = value[0]
-  }
-
-  computedCSS[pseudos._dark] = { [key]: value[1] }
-
-  return computedCSS
-}
-
-function expandResponsiveObject(
-  key: string,
-  value: Dict,
-  breakpoints: Breakpoints,
-): Dict {
-  return breakpoints.queries.reduce<Dict>((prev, { breakpoint, query }) => {
-    const breakpointValue = value[breakpoint]
-
-    if (query) {
-      if (breakpointValue) prev[query] = { [key]: breakpointValue }
-    } else if (isArray(breakpointValue)) {
-      prev = merge(
-        prev,
-        expandColorModeArray(key, breakpointValue, breakpoints),
-      )
-    } else {
-      prev[key] = breakpointValue
-    }
-
-    return prev
-  }, {})
-}
-
-function expandAdditionalObject(
-  key: string,
-  value: Dict,
-  breakpoints: Breakpoints,
-) {
-  return Object.entries(value).reduce<Dict>((prev, [query, value]) => {
-    if (query === "base") {
-      if (isArray(value)) {
-        prev = merge(prev, expandColorModeArray(key, value, breakpoints))
-      } else {
-        prev[key] = value
-      }
-    } else {
-      query =
-        breakpoints.queries.find(({ breakpoint }) => breakpoint === query)
-          ?.query ?? query
-
-      if (isObject(value)) {
-        prev = merge(prev, {
-          [query]: expandResponsiveObject(key, value, breakpoints),
-        })
-      } else if (isArray(value)) {
-        prev = merge(prev, {
-          [query]: expandColorModeArray(key, value, breakpoints),
-        })
-      } else {
-        prev[query] = { [key]: value }
-      }
-    }
-
-    return prev
-  }, {})
-}
-
-function expandCSS(theme: StyledTheme<UsageTheme>) {
-  return function (css: Dict): Dict {
-    if (!theme.__breakpoints) return css
-
-    const { isResponsive, keys } = theme.__breakpoints
-
+function transformColorModeArray(breakpoints: Breakpoints) {
+  return function (key: string, [lightValue, darkValue]: any[]): Dict {
     let computedCSS: Dict = {}
 
-    for (let [key, value] of Object.entries(css)) {
-      value = runIfFn(value, theme)
+    if (isConditionalObject(breakpoints)(lightValue)) {
+      computedCSS = transformConditionalObject(breakpoints)(key, lightValue)
+    } else {
+      computedCSS[key] = lightValue
+    }
 
-      if (value == null) continue
-
-      if (!isVariableLength(key) && isArray(value)) {
-        computedCSS = merge(
-          computedCSS,
-          expandColorModeArray(key, value, theme.__breakpoints),
-        )
-
-        continue
-      }
-
-      if (!isVariableLength(key) && isObject(value) && isResponsive(value)) {
-        computedCSS = merge(
-          computedCSS,
-          expandResponsiveObject(key, value, theme.__breakpoints),
-        )
-
-        continue
-      }
-
-      if (
-        !isVariableLength(key) &&
-        isObject(value) &&
-        isAdditionalObject(value)(keys)
-      ) {
-        computedCSS = merge(
-          computedCSS,
-          expandAdditionalObject(key, value, theme.__breakpoints),
-        )
-
-        continue
-      }
-
-      computedCSS = merge(computedCSS, { [key]: value })
+    if (isConditionalObject(breakpoints)(darkValue)) {
+      computedCSS[conditions._dark] = transformConditionalObject(breakpoints)(
+        key,
+        darkValue,
+      )
+    } else {
+      computedCSS[conditions._dark] = { [key]: darkValue }
     }
 
     return computedCSS
   }
 }
 
-function valueToVar(theme: StyledTheme<UsageTheme>) {
-  return function (value: any) {
-    return transformInterpolation(value, (value, fallbackValue) => {
-      if (value.includes("colorScheme.")) {
-        return getColorSchemeVar(theme)(value)
-      } else if (value.includes("colors.")) {
-        return colorMix(value, { fallback: fallbackValue, theme })
-      } else {
-        if (
-          isObject(theme.__cssMap) &&
-          value in theme.__cssMap &&
-          theme.__cssMap[value]?.ref
-        )
-          return theme.__cssMap[value].ref
+function transformConditionalObject(breakpoints: Breakpoints) {
+  return function (key: string, value: Dict) {
+    const conditionalKeys = Object.keys(value).filter(
+      (key) => !breakpoints.isResponsiveKey(key),
+    )
 
-        return fallbackValue || getVar(theme)(value)
-      }
-    })
+    const breakpointObj = breakpoints.queries.reduce<Dict>(
+      (prev, { breakpoint, query }) => {
+        const breakpointValue = value[breakpoint]
+
+        if (breakpointValue) {
+          if (isArray(breakpointValue)) {
+            const colorModeValue = transformColorModeArray(breakpoints)(
+              key,
+              breakpointValue,
+            )
+
+            prev = merge(
+              prev,
+              query ? { [query]: colorModeValue } : colorModeValue,
+            )
+          } else if (isConditionalObject(breakpoints)(breakpointValue)) {
+            const conditionalValue = transformConditionalObject(breakpoints)(
+              key,
+              breakpointValue,
+            )
+
+            prev = merge(
+              prev,
+              query ? { [query]: conditionalValue } : conditionalValue,
+            )
+          } else {
+            prev = merge(
+              prev,
+              query
+                ? { [query]: { [key]: breakpointValue } }
+                : { [key]: breakpointValue },
+            )
+          }
+        }
+
+        return prev
+      },
+      {},
+    )
+
+    const additionalObj = conditionalKeys.reduce<Dict>(
+      (prev, conditionalKey) => {
+        const query = getCondition(conditionalKey)
+
+        prev[query] = { [key]: value[conditionalKey] }
+
+        return prev
+      },
+      {},
+    )
+
+    return { ...breakpointObj, ...additionalObj }
   }
 }
 
-function mergeCSS(
-  prev: Dict,
-  value: any,
-  prop: string,
-  properties?: string | string[],
-) {
-  if (properties) {
-    if (isArray(properties)) {
-      for (const property of properties) {
-        prev[property] = prev[property] ?? {}
-        prev[property] = merge(prev[property], value)
+export function transformConditionalValue({ breakpoints }: System) {
+  return function (key: string, value: any) {
+    if (isArray(value)) {
+      return transformColorModeArray(breakpoints)(key, value)
+    } else if (isConditionalObject(breakpoints)(value)) {
+      return transformConditionalObject(breakpoints)(key, value)
+    } else {
+      return { [key]: value }
+    }
+  }
+}
+
+function expandCSS(system: System) {
+  return function (css: Dict): Dict {
+    let computedCSS: Dict = {}
+
+    for (let [key, value] of Object.entries(css)) {
+      if (value == null) continue
+
+      if (!isVariableLength(key)) {
+        computedCSS = merge(
+          computedCSS,
+          transformConditionalValue(system)(key, value),
+        )
+      } else {
+        computedCSS = merge(computedCSS, { [key]: value })
+      }
+    }
+
+    return computedCSS
+  }
+}
+
+function valueToVar(system: System) {
+  return function (prop: string, value: any) {
+    const result = transformInterpolation(
+      value,
+      function (value: string, fallbackValue?: string) {
+        if (value.includes("colorScheme.")) {
+          return getColorSchemeVar(system)(value)
+        } else if (value.includes("colors.")) {
+          return colorMix(value, { fallback: fallbackValue, system })
+        } else if (isCSSToken(system)(value)) {
+          return system.cssMap![value]!.ref
+        } else {
+          return getVar(value, fallbackValue)
+        }
+      },
+    )
+
+    if (prop.startsWith("--") && isString(result)) {
+      if (result.includes("colorScheme.")) {
+        return getColorSchemeVar(system)(result)
+      } else if (result.includes("colors.")) {
+        return colorMix(result, { system })
+      } else if (isCSSToken(system)(result)) {
+        return system.cssMap![result]!.ref
+      } else {
+        return result
       }
     } else {
-      prev[properties] = prev[properties] ?? {}
-      prev[properties] = merge(prev[properties], value)
+      return result
+    }
+  }
+}
+
+function mergeCSS(prev: Dict, value: any, prop: string, properties?: string[]) {
+  if (properties) {
+    for (const property of properties) {
+      prev[property] = prev[property] ?? {}
+      prev[property] = merge(prev[property], value)
     }
   } else {
     prev[prop] = prev[prop] ?? {}
@@ -234,15 +227,11 @@ function insertCSS(
   prev: Dict,
   value: any,
   prop: string,
-  properties?: string | string[],
+  properties?: string[],
 ) {
   if (properties) {
-    if (isArray(properties)) {
-      for (const property of properties) {
-        prev[property] = value
-      }
-    } else {
-      prev[properties] = value
+    for (const property of properties) {
+      prev[property] = value
     }
   } else {
     prev[prop] = value
@@ -251,29 +240,35 @@ function insertCSS(
   return prev
 }
 
-export function css(theme: StyledTheme<UsageTheme>) {
-  return function (cssOrFunc: CSSObjectOrFunc) {
-    function createCSS(cssOrFunc: CSSObjectOrFunc): Dict {
-      const cssObj = runIfFn(cssOrFunc, theme)
-      const computedCSS = expandCSS(theme)(cssObj)
+export function getStyle(prop: string) {
+  const style = styles[prop as StyleProperty] as StyleConfig | true | undefined
+
+  return style === true ? { properties: [prop] } : style
+}
+
+export function css(system: System, theme: UsageTheme = {}) {
+  return function (cssOrFn: CSSObjectOrFunction) {
+    function createCSS(cssOrFn: CSSObjectOrFunction): Dict {
+      const cssObj = runIfFn(cssOrFn, system)
+      const computedCSS = expandCSS(system)(cssObj)
 
       let prev: Dict = {}
 
       for (let [prop, value] of Object.entries(computedCSS)) {
-        value = valueToVar(theme)(value)
+        value = valueToVar(system)(prop, value)
 
         if (value == null) continue
 
-        if (prop in pseudos) prop = pseudos[prop as PseudoProperty]
+        prop = getCondition(prop)
 
-        let style = styles[prop as StyleProperty] as
-          | StyleConfig
-          | true
-          | undefined
-
-        if (style === true) style = { properties: prop }
-
-        const options = { css, prev, properties: style?.properties, theme }
+        const style = getStyle(prop)
+        const options: TransformOptions = {
+          css,
+          prev,
+          properties: style?.properties,
+          system,
+          theme,
+        }
 
         if (isObject(value)) {
           value = style?.transform?.(value, options) ?? value
@@ -308,7 +303,7 @@ export function css(theme: StyledTheme<UsageTheme>) {
       return prev
     }
 
-    return createCSS(cssOrFunc)
+    return createCSS(cssOrFn)
   }
 }
 

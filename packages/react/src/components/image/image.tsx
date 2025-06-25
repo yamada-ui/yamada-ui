@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, FC, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ImageStyle } from "./image.style"
 import { createComponent } from "../../core"

@@ -1,4 +1,5 @@
 import { a11y, render, screen } from "../../../test"
+import { LoaderIcon } from "../icon"
 import { Button } from "./button"
 
 describe("<Button />", () => {
@@ -6,9 +7,8 @@ describe("<Button />", () => {
     await a11y(<Button>test</Button>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Button.displayName).toBe("Button")
-    expect(Button.__styled__).toBe("Button")
   })
 
   test("sets `className` correctly", () => {
@@ -34,7 +34,7 @@ describe("<Button />", () => {
       <Button
         data-testid="btn"
         loading
-        loadingIcon={<>loading start</>}
+        loadingIcon={<LoaderIcon data-testid="loadingIcon" />}
         loadingMessage="Submitting"
       >
         Submit
@@ -49,14 +49,14 @@ describe("<Button />", () => {
     expect(screen.getByText("Submitting")).toBeInTheDocument()
 
     // Confirm loading position
-    expect(screen.getByText(/loading start/i)).toHaveClass(
+    expect(screen.getByTestId("loadingIcon")).toHaveClass(
       "ui-button__loading--start",
     )
 
     rerender(
       <Button
         loading
-        loadingIcon={<>loading end</>}
+        loadingIcon={<LoaderIcon data-testid="loadingIcon" />}
         loadingMessage="Test if loading placement"
         loadingPlacement="end"
       >
@@ -64,7 +64,7 @@ describe("<Button />", () => {
       </Button>,
     )
 
-    expect(screen.getByText(/loading end/i)).toHaveClass(
+    expect(screen.getByTestId("loadingIcon")).toHaveClass(
       "ui-button__loading--end",
     )
   })
@@ -101,11 +101,7 @@ describe("<Button />", () => {
     )
     expect(getByTestId("btn")).toHaveAttribute("type", "submit")
 
-    rerender(
-      <Button as="button" data-testid="btn">
-        Submit
-      </Button>,
-    )
+    rerender(<Button data-testid="btn">Submit</Button>)
     expect(getByTestId("btn")).toHaveAttribute("type")
   })
 

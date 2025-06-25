@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactElement } from "react"
 import type { CSSProps, HTMLStyledProps } from "../../core"
 import type { StackStyle } from "./stack.style"
@@ -6,7 +8,7 @@ import { createComponent, styled } from "../../core"
 import { getValidChildren, replaceObject } from "../../utils"
 import { stackStyle } from "./stack.style"
 
-interface StackOptions {
+export interface StackProps extends Omit<HTMLStyledProps, "direction"> {
   /**
    * The CSS `align-items` property.
    */
@@ -28,10 +30,6 @@ interface StackOptions {
    */
   wrap?: CSSProps["flexWrap"]
 }
-
-export interface StackProps
-  extends Omit<HTMLStyledProps, "direction">,
-    StackOptions {}
 
 export const {
   PropsContext: StackPropsContext,

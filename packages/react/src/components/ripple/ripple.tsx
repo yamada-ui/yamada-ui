@@ -1,3 +1,5 @@
+"use client"
+
 import type { Key } from "react"
 import type { FC, ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"
@@ -15,7 +17,13 @@ const clamp = (value: number, min: number, max: number) =>
 export interface RippleProps
   extends HTMLMotionProps<"span">,
     ThemeProps<RippleStyle> {
+  /**
+   * The ripples to use.
+   */
   ripples: RippleOptions[]
+  /**
+   * The callback invoked when a ripple is cleared.
+   */
   onClear: (key: Key) => void
   /**
    * If `true`, disable ripple effects when pressing a element.

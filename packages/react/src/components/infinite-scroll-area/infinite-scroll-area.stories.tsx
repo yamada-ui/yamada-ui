@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useRef, useState } from "react"
 import { noop } from "../../utils"
 import { Button } from "../button"
@@ -7,7 +7,7 @@ import { Heading } from "../heading"
 import { Loading } from "../loading"
 import { VStack } from "../stack"
 import { Text } from "../text"
-import { InfiniteScrollArea } from "./"
+import { InfiniteScrollArea } from "./infinite-scroll-area"
 
 type Story = StoryFn<typeof InfiniteScrollArea>
 

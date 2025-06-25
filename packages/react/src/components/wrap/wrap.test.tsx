@@ -6,9 +6,8 @@ describe("<Wrap />", () => {
     await a11y(<Wrap>Wrap</Wrap>)
   })
 
-  test("sets `displayName` and `__styled__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Wrap.displayName).toBe("Wrap")
-    expect(Wrap.__styled__).toBe("Wrap")
   })
 
   test("sets `className` correctly", () => {

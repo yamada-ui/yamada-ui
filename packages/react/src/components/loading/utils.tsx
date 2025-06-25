@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type {
   CSSProps,
@@ -29,12 +31,13 @@ export const superProps = ({
   css,
   duration,
   dur = duration,
-  vars = [],
   ...rest
-}: WithoutThemeProps<LoadingProps, LoadingStyle>) => ({
+}: WithoutThemeProps<LoadingProps, LoadingStyle>): WithoutThemeProps<
+  LoadingProps,
+  LoadingStyle
+> => ({
   css,
   dur,
-  vars,
   ...rest,
 })
 
@@ -61,5 +64,5 @@ export interface LoadingSharedProps {
   duration: null | number
   message: ReactNode | undefined
   onFinish: () => void
-  initialState?: boolean
+  initial?: boolean | string
 }

@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { StatusStyle } from "./status.style"
 import { createSlotComponent, styled } from "../../core"
@@ -45,10 +47,7 @@ export const Status = withProvider<"div", StatusProps>(
     )
   },
   "root",
-)(({ colorScheme, value = "info" }) => ({
-  colorScheme: colorScheme ?? value,
-  value,
-}))
+)({ colorScheme: "info", value: "info" })
 
 interface StatusIndicatorProps extends HTMLStyledProps {}
 

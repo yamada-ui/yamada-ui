@@ -1,3 +1,5 @@
+"use client"
+
 import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { StackProps } from "./stack"
 import type { VStackStyle } from "./v-stack.style"
@@ -6,7 +8,7 @@ import { Stack } from "./stack"
 import { vStackStyle } from "./v-stack.style"
 
 export interface VStackProps
-  extends WithoutThemeProps<StackProps>,
+  extends WithoutThemeProps<StackProps, VStackStyle>,
     ThemeProps<VStackStyle> {}
 
 export const {

@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FormatByteStyle } from "./format-byte.style"
 import { createComponent, styled } from "../../core"

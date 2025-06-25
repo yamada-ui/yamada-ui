@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { InputStyle } from "./input.style"
@@ -33,28 +35,19 @@ export const Input: FC<InputProps> = withContext("input")(
   undefined,
   (props) => {
     const {
-      props: {
-        errorBorderColor,
-        focusBorderColor,
-        htmlSize,
-        vars: varsProp,
-        ...rest
-      },
+      props: { errorBorderColor, focusBorderColor, htmlSize, ...rest },
       ariaProps,
       dataProps,
       eventProps,
     } = useFieldProps(props)
-    const vars = useInputBorder(varsProp, {
-      errorBorderColor,
-      focusBorderColor,
-    })
+    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
 
     return {
       size: htmlSize,
-      vars,
       ...ariaProps,
       ...dataProps,
       ...eventProps,
+      ...varProps,
       ...rest,
     }
   },

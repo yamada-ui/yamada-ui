@@ -1,8 +1,10 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, StyleValue } from "../../core"
 import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"
 
-interface GridItemOptions {
+export interface GridItemProps extends HTMLStyledProps {
   /**
    * The CSS `grid-area` property.
    */
@@ -32,8 +34,6 @@ interface GridItemOptions {
    */
   rowStart?: CSSProps["gridRowStart"]
 }
-
-export interface GridItemProps extends HTMLStyledProps, GridItemOptions {}
 
 export const {
   PropsContext: GridItemPropsContext,

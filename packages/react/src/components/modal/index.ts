@@ -7,8 +7,10 @@ export {
   ModalHeader,
   ModalOpenTrigger,
   ModalOverlay,
+  ModalPropsContext,
   ModalRoot,
   ModalTitle,
+  useModalPropsContext,
 } from "./modal"
 export type {
   ModalBodyProps,
@@ -22,9 +24,6 @@ export type {
   ModalRootProps,
   ModalTitleProps,
 } from "./modal"
-
 export * from "./modal.style"
-
-export * from "./use-modal"
-
 export * as Modal from "./namespace"
+export * from "./use-modal"

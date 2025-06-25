@@ -1,9 +1,11 @@
+"use client"
+
 import { TableCellsSplit } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
  * `TableCellsSplitIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @sees://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const TableCellsSplitIcon = component(Icon)({ as: TableCellsSplit })

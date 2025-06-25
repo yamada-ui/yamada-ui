@@ -5,7 +5,7 @@ import { memo } from "react"
 import { useTimeout } from "../../hooks/use-timeout"
 import { isValidElement } from "../../utils"
 import { Center } from "../center"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { Text } from "../text"
 import { Loading } from "./"
 
@@ -32,11 +32,11 @@ const variants: Variants = {
 export interface ScreenProps extends LoadingSharedProps {}
 
 export const Screen: FC<ScreenProps> = memo(
-  ({ duration, initialState, message, onFinish }) => {
+  ({ duration, initial, message, onFinish }) => {
     useTimeout(onFinish, duration)
 
     return (
-      <Motion
+      <motion.div
         data-loading
         alignItems="center"
         animate="animate"
@@ -44,7 +44,7 @@ export const Screen: FC<ScreenProps> = memo(
         display="flex"
         exit="exit"
         h="100dvh"
-        initial={initialState ? false : "initial"}
+        initial={initial}
         inset={0}
         justifyContent="center"
         p="md"
@@ -64,7 +64,7 @@ export const Screen: FC<ScreenProps> = memo(
             )
           ) : null}
         </Center>
-      </Motion>
+      </motion.div>
     )
   },
 )

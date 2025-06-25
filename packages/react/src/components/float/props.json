@@ -1,0 +1,35 @@
+{
+  "Float": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "offset": {
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | \"7\" | ... 93 more ... | ({ ...; } & { ...; })",
+      "description": "Changes position offset.",
+      "required": false
+    },
+    "placement": {
+      "type": "StyleValue<\n  | \"center\"\n  | \"end\"\n  | \"start\"\n  | \"center-center\"\n  | \"center-end\"\n  | \"center-start\"\n  | \"end-center\"\n  | \"end-end\"\n  | \"end-start\"\n  | \"start-center\"\n  | \"start-end\"\n  | \"start-start\"\n>",
+      "defaultValue": "\"start-end\"",
+      "description": "The placement of the float.",
+      "required": false
+    }
+  }
+}

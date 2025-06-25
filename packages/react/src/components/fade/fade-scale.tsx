@@ -1,3 +1,5 @@
+"use client"
+
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
@@ -9,7 +11,7 @@ import type { FadeScaleStyle } from "./fade-scale.style"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { createComponent } from "../../core"
-import { createTransition, Motion } from "../motion"
+import { createTransition, motion } from "../motion"
 import { fadeScaleStyle } from "./fade-scale.style"
 
 export const fadeScaleVariants: Variants = {
@@ -59,7 +61,10 @@ export const {
   PropsContext: FadeScalePropsContext,
   usePropsContext: useFadeScalePropsContext,
   withContext,
-} = createComponent<FadeScaleProps, FadeScaleStyle>("fadeScale", fadeScaleStyle)
+} = createComponent<FadeScaleProps, FadeScaleStyle>(
+  "fade-scale",
+  fadeScaleStyle,
+)
 
 /**
  * `FadeScale` is a component that gradually scales up to reveal or scales down to hide an element.
@@ -96,7 +101,7 @@ export const FadeScale = withContext(
     return (
       <AnimatePresence custom={custom}>
         {open ? (
-          <Motion
+          <motion.div
             animate={animate}
             custom={custom}
             exit="exit"

@@ -1,16 +1,24 @@
+"use client"
+
 import type { ReactNode } from "react"
-import type { HTMLStyledProps, ThemeProps } from "../../core"
-import type { UseInfiniteScrollProps } from "../../hooks/use-infinite-scroll"
+import type {
+  HTMLStyledProps,
+  Orientation,
+  StyleValue,
+  ThemeProps,
+} from "../../core"
 import type { InfiniteScrollAreaStyle } from "./infinite-scroll-area.style"
+import type { UseInfiniteScrollProps } from "./use-infinite-scroll"
 import { useRef } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { useInfiniteScroll } from "../../hooks/use-infinite-scroll"
+import { useValue } from "../../hooks/use-value"
 import { mergeRefs } from "../../utils"
 import { infiniteScrollAreaStyle } from "./infinite-scroll-area.style"
+import { useInfiniteScroll } from "./use-infinite-scroll"
 
 export interface InfiniteScrollAreaProps
   extends Omit<HTMLStyledProps, keyof UseInfiniteScrollProps>,
-    UseInfiniteScrollProps,
+    Omit<UseInfiniteScrollProps, "orientation">,
     ThemeProps<InfiniteScrollAreaStyle> {
   /**
    * The infinite scroll area finish to use.
@@ -20,6 +28,12 @@ export interface InfiniteScrollAreaProps
    * The infinite scroll area loading to use.
    */
   loading?: ReactNode
+  /**
+   * The orientation of the infinite scroll.
+   *
+   * @default 'vertical'
+   */
+  orientation?: StyleValue<Orientation>
   /**
    * Props for infinite scroll area trigger component.
    */
@@ -51,7 +65,7 @@ export const InfiniteScrollArea = withProvider(
     indexRef,
     initialLoad,
     loading,
-    orientation,
+    orientation: orientationProp,
     resetRef,
     reverse,
     rootMargin,
@@ -63,6 +77,7 @@ export const InfiniteScrollArea = withProvider(
     ...rest
   }) => {
     const rootRef = useRef<HTMLDivElement>(null)
+    const orientation = useValue(orientationProp)
     const { ref: triggerRef, finish } = useInfiniteScroll({
       disabled,
       indexRef,

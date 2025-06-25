@@ -1,30 +1,19 @@
+"use client"
+
+import type { EventMap, EventType } from "../../utils"
 import { useCallback, useEffect, useRef } from "react"
-import { useCallbackRef } from "../../utils"
+import { isFunction, useCallbackRef } from "../../utils"
 
-type Events =
-  | keyof DocumentEventMap
-  | keyof GlobalEventHandlersEventMap
-  | keyof WindowEventMap
-type Target = (() => EventTarget | null) | EventTarget | null
-type Options = AddEventListenerOptions | boolean
-type Handler<E extends Events> = E extends keyof DocumentEventMap
-  ? (event: DocumentEventMap[E]) => void
-  : E extends keyof WindowEventMap
-    ? (event: WindowEventMap[E]) => void
-    : E extends keyof GlobalEventHandlersEventMap
-      ? (event: GlobalEventHandlersEventMap[E]) => void
-      : ((event: Event) => void) | undefined
-
-export const useEventListener = <E extends Events>(
-  target: Target,
-  event: E,
-  handler: Handler<E>,
-  options?: Options,
+export const useEventListener = <Y extends EventType>(
+  target: (() => EventTarget | null) | EventTarget | null | undefined,
+  event: Y,
+  handler: (ev: EventMap[Y]) => void,
+  options?: AddEventListenerOptions | boolean,
 ) => {
   const listener = useCallbackRef(handler)
 
   useEffect(() => {
-    const el = typeof target === "function" ? target() : (target ?? document)
+    const el = isFunction(target) ? target() : (target ?? document)
 
     if (!el) return
 
@@ -44,7 +33,7 @@ export const useEventListener = <E extends Events>(
   }, [event, target, options, listener, handler])
 
   return () => {
-    const el = typeof target === "function" ? target() : (target ?? document)
+    const el = isFunction(target) ? target() : (target ?? document)
 
     el?.removeEventListener(
       event,
@@ -59,9 +48,9 @@ export const useEventListeners = () => {
   const currentListeners = listeners.current
 
   const add = useCallback(
-    <E extends Events>(
+    <Y extends EventType>(
       el: EventTarget,
-      event: E,
+      event: Y,
       listener: any,
       options: AddEventListenerOptions | boolean,
     ) => {
@@ -77,9 +66,9 @@ export const useEventListeners = () => {
   )
 
   const remove = useCallback(
-    <E extends Events>(
+    <Y extends EventType>(
       el: EventTarget,
-      event: E,
+      event: Y,
       listener: any,
       options: boolean | EventListenerOptions,
     ) => {

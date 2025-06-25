@@ -4,7 +4,7 @@ import type { LoadingSharedProps } from "./utils"
 import { memo } from "react"
 import { useTimeout } from "../../hooks/use-timeout"
 import { isValidElement } from "../../utils"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { Text } from "../text"
 import { Loading } from "./"
 
@@ -34,11 +34,11 @@ const variants: Variants = {
 export interface BackgroundProps extends LoadingSharedProps {}
 
 export const Background: FC<BackgroundProps> = memo(
-  ({ duration, initialState, message, onFinish }) => {
+  ({ duration, initial, message, onFinish }) => {
     useTimeout(onFinish, duration)
 
     return (
-      <Motion
+      <motion.div
         data-loading
         alignItems="center"
         animate="animate"
@@ -48,7 +48,7 @@ export const Background: FC<BackgroundProps> = memo(
         display="flex"
         exit="exit"
         gap="sm"
-        initial={initialState ? false : "initial"}
+        initial={initial}
         justifyContent="center"
         maxW="20rem"
         p="sm"
@@ -69,7 +69,7 @@ export const Background: FC<BackgroundProps> = memo(
             </Text>
           )
         ) : null}
-      </Motion>
+      </motion.div>
     )
   },
 )

@@ -1,3 +1,5 @@
+"use client"
+
 import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { HStackStyle } from "./h-stack.style"
 import type { StackProps } from "./stack"
@@ -6,7 +8,7 @@ import { hStackStyle } from "./h-stack.style"
 import { Stack } from "./stack"
 
 export interface HStackProps
-  extends WithoutThemeProps<StackProps>,
+  extends WithoutThemeProps<StackProps, HStackStyle>,
     ThemeProps<HStackStyle> {}
 
 export const {

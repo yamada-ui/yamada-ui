@@ -1,3 +1,5 @@
+"use client"
+
 import type { Dispatch, SetStateAction } from "react"
 import { useState } from "react"
 import { isNull, isUndefined, runIfFn, useCallbackRef } from "../../utils"
@@ -42,21 +44,21 @@ export function useControllableState<Y>({
 
   const [defaultValue, setDefaultValue] = useState(defaultValueProp)
   const controlled = !isUndefined(value)
-  const resolvedValue = controlled ? value : defaultValue
+  const currentValue = (controlled ? value : defaultValue) as Y
 
   const setValue = useCallbackRef(
     (next: SetStateAction<Y>) => {
-      const nextValue = runIfFn(next, resolvedValue as Y)
+      const nextValue = runIfFn(next, currentValue)
 
-      if (!onUpdate(resolvedValue as Y, nextValue)) return
+      if (!onUpdate(currentValue, nextValue)) return
 
       if (!controlled || isUndefined(nextValue) || isNull(nextValue))
         setDefaultValue(nextValue)
 
       onChange(nextValue)
     },
-    [controlled, resolvedValue, onChange, onUpdate],
+    [controlled, currentValue, onChange, onUpdate],
   )
 
-  return [resolvedValue, setValue]
+  return [currentValue, setValue]
 }

@@ -1,9 +1,11 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { TextStyle } from "./text.style"
 import { createComponent } from "../../core"
 import { textStyle } from "./text.style"
 
-interface TextOptions {
+export interface TextProps extends HTMLStyledProps<"p">, ThemeProps<TextStyle> {
   /**
    * The CSS `text-align` property.
    */
@@ -17,11 +19,6 @@ interface TextOptions {
    */
   decoration?: CSSProps["textDecoration"]
 }
-
-export interface TextProps
-  extends HTMLStyledProps<"p">,
-    ThemeProps<TextStyle>,
-    TextOptions {}
 
 export const {
   PropsContext: TextPropsContext,

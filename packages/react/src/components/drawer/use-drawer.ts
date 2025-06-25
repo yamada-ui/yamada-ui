@@ -1,9 +1,10 @@
-import type { HTMLProps, PropGetter, StyleValue } from "../../core"
+"use client"
+
+import type { HTMLProps, PropGetter, SimplePlacement } from "../../core"
 import type { UseModalProps } from "../modal"
 import type { HTMLMotionProps } from "../motion"
 import { useCallback, useMemo } from "react"
-import { useValue } from "../../hooks/use-value"
-import { handlerAll } from "../../utils"
+import { cast, handlerAll } from "../../utils"
 import { useModal } from "../modal"
 
 type DragEndEventHandler = Required<HTMLMotionProps>["onDragEnd"]
@@ -42,9 +43,9 @@ export interface UseDrawerProps extends UseModalProps {
   /**
    * The placement of the drawer.
    *
-   * @default 'right'
+   * @default 'inline-end'
    */
-  placement?: StyleValue<"bottom" | "left" | "right" | "top">
+  placement?: SimplePlacement
 }
 
 export const useDrawer = ({
@@ -55,11 +56,10 @@ export const useDrawer = ({
   dragElastic = 0.1,
   dragOffset = 80,
   dragVelocity = 100,
-  placement: placementProp = "right",
+  placement = "inline-end",
   onEsc,
   ...rest
 }: UseDrawerProps = {}) => {
-  const placement = useValue(placementProp)
   const {
     getContentProps: getModalContentProps,
     onClose,
@@ -75,11 +75,11 @@ export const useDrawer = ({
     if (!closeOnDrag) return false
 
     switch (placement) {
-      case "top":
-      case "bottom":
+      case "block-start":
+      case "block-end":
         return "y"
-      case "left":
-      case "right":
+      case "inline-start":
+      case "inline-end":
         return "x"
     }
   }, [placement, closeOnDrag])
@@ -87,13 +87,13 @@ export const useDrawer = ({
   const getDragRestriction = useCallback(
     (value: number) => {
       switch (placement) {
-        case "top":
+        case "block-start":
           return { bottom: value }
-        case "bottom":
+        case "block-end":
           return { top: value }
-        case "left":
+        case "inline-start":
           return { right: value }
-        case "right":
+        case "inline-end":
           return { left: value }
       }
     },
@@ -103,7 +103,7 @@ export const useDrawer = ({
   const onDragEnd: DragEndEventHandler = useCallback(
     (_, info) => {
       switch (placement) {
-        case "top":
+        case "block-start":
           if (
             info.velocity.y <= dragVelocity * -1 ||
             info.offset.y <= dragOffset * -1
@@ -111,12 +111,12 @@ export const useDrawer = ({
             onClose()
           break
 
-        case "bottom":
+        case "block-end":
           if (info.velocity.y >= dragVelocity || info.offset.y >= dragOffset)
             onClose()
           break
 
-        case "left":
+        case "inline-start":
           if (
             info.velocity.x <= dragVelocity * -1 ||
             info.offset.x <= dragOffset * -1
@@ -124,7 +124,7 @@ export const useDrawer = ({
             onClose()
           break
 
-        case "right":
+        case "inline-end":
           if (info.velocity.x >= dragVelocity || info.offset.x >= dragOffset)
             onClose()
           break
@@ -140,9 +140,9 @@ export const useDrawer = ({
       dragElastic: getDragRestriction(dragElastic),
       dragMomentum: false,
       dragSnapToOrigin: true,
-      ...(getModalContentProps(
-        props as HTMLProps<"section">,
-      ) as HTMLMotionProps<"section">),
+      ...cast<HTMLMotionProps<"section">>(
+        getModalContentProps(cast<HTMLProps<"section">>(props)),
+      ),
       onDragEnd: handlerAll(props.onDragEnd, onDragEnd),
     }),
     [

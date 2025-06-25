@@ -1,3 +1,5 @@
+"use client"
+
 import { Braces } from "lucide-react"
 import { component, Icon } from "../icon"
 

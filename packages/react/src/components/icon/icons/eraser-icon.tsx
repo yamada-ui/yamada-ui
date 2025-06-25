@@ -1,3 +1,5 @@
+"use client"
+
 import { Eraser } from "lucide-react"
 import { component, Icon } from "../icon"
 

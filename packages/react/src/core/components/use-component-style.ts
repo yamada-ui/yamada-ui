@@ -1,44 +1,44 @@
+"use client"
+
 import type { Dict } from "../../utils"
 import type {
-  BreakpointQueries,
   ColorModeArray,
-  CreateLayersReturn,
   CSSModifierObject,
   CSSObject,
+  CSSPropObject,
   CSSSlotObject,
-  ResponsiveObject,
-  StyleValue,
+  ResponsiveWithConditionObject,
+  StyleValueWithCondition,
 } from "../css"
 import type {
-  BreakpointDirection,
+  Breakpoints,
   ComponentCompound,
   ComponentSlotStyle,
   ComponentStyle,
+  Layers,
   LayerScheme,
   ThemeProps,
   WithoutThemeProps,
-} from "../theme"
+} from "../system"
 import type { ComponentSlot, ComponentSlotName } from "./create-component"
 import type { HTMLStyledProps } from "./index.types"
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
-import { useTheme } from "../../providers/theme-provider"
 import {
+  bem,
   cx,
-  filterUndefined,
   isArray,
   isBooleanish,
   isEmptyObject,
   isObject,
-  keysFormObject,
+  isRegExp,
   merge,
   omitObject,
   toArray,
   toKebabCase,
 } from "../../utils"
-import { createQuery, mergeCSS } from "../css"
-import { pseudos } from "../pseudos"
-import { useColorSchemeContext } from "../styled"
+import { conditions, getCondition, mergeCSS } from "../css"
+import { useColorSchemeContext, useSystem } from "../system"
 import { isEqualProps } from "./props"
 
 type Style<Y extends boolean = false> = Y extends false
@@ -47,13 +47,11 @@ type Style<Y extends boolean = false> = Y extends false
 
 type MergedStyle = CSSModifierObject | CSSModifierObject<CSSSlotObject>
 
-interface GetStyleOptions {
-  direction: BreakpointDirection
-  queries: BreakpointQueries
+interface GetStyleOptions
+  extends Partial<Breakpoints>,
+    Pick<Partial<Layers>, "wrap"> {
   hasSlot?: boolean
-  identifier?: string
   selectors?: (string | undefined)[]
-  wrap?: CreateLayersReturn["wrap"]
 }
 
 function getSelectorStyle<Y extends Dict = Dict>(
@@ -84,7 +82,7 @@ function getStyle<Y extends boolean = false>(
             return [name, style]
           }
         }),
-      )
+      ) as Style<Y>
     } else if (selectors.length) {
       return getSelectorStyle(selectors, style) as Style<Y>
     } else {
@@ -94,7 +92,7 @@ function getStyle<Y extends boolean = false>(
 }
 
 function getColorModeStyle<Y extends boolean = false>(
-  value: ColorModeArray<number | string>,
+  value: ColorModeArray<string>,
   mergedStyle: MergedStyle,
 ) {
   return function ({ selectors = [], ...rest }: GetStyleOptions) {
@@ -103,126 +101,84 @@ function getColorModeStyle<Y extends boolean = false>(
     const lightStyle = getModifierStyle<Y>(
       lightValue,
       mergedStyle,
-    )({ ...rest, selectors: [...selectors, pseudos._light] })
+    )({ ...rest, selectors })
 
     const darkStyle = getModifierStyle<Y>(
       darkValue,
       mergedStyle,
-    )({ ...rest, selectors: [...selectors, pseudos._dark] })
+    )({ ...rest, selectors: [...selectors, conditions._dark] })
 
     return merge(lightStyle, darkStyle)
   }
 }
 
-function getResponsiveFinalQuery(
-  queries: BreakpointQueries,
-  breakpoints: string[],
-  down: boolean,
-) {
-  const filteredQueries = queries.filter(
-    ({ breakpoint }) =>
-      breakpoint !== "base" && breakpoints.includes(breakpoint),
-  )
-
-  const finalQuery = filteredQueries.sort((a, b) =>
-    down ? (a.maxW ?? 0) - (b.maxW ?? 0) : (b.minW ?? 0) - (a.minW ?? 0),
-  )[0]
-
-  return finalQuery
-}
-
-function getResponsiveNextQuery(
-  value: ResponsiveObject<number | string>,
-  queries: BreakpointQueries,
-  index: number,
-) {
-  let nextIndex = index + 1
-  let nextQuery: BreakpointQueries[number] | undefined
-
-  while (nextIndex < queries.length) {
-    const query = queries[nextIndex]!
-
-    if (value[query.breakpoint]) {
-      const targetIndex = nextIndex - 1
-
-      nextQuery = queries[targetIndex]
-
-      break
-    }
-
-    nextIndex += 1
-  }
-
-  return nextQuery
-}
-
-function getResponsiveStyle<Y extends boolean = false>(
-  value: ResponsiveObject<number | string>,
+function getConditionStyle<Y extends boolean = false>(
+  value: ResponsiveWithConditionObject<string>,
   mergedStyle: MergedStyle,
 ) {
   return function (options: GetStyleOptions) {
-    const { direction, identifier, queries, selectors = [] } = options
-    const breakpoints = keysFormObject(value)
+    const { isResponsiveKey, queries = [], selectors = [] } = options
+    const conditionalKeys = Object.keys(value).filter(
+      (key) => !isResponsiveKey?.(key),
+    )
 
-    if (breakpoints.length === 1 && "base" in value) {
-      return getModifierStyle<Y>(value.base, mergedStyle)(options)
-    } else {
-      const down = direction !== "up"
-
-      const finalQuery = getResponsiveFinalQuery(queries, breakpoints, down)
-
-      let hasBase = false
-
-      return queries.reduce<Style<Y>>(
-        (prev, { breakpoint, maxW, maxWQuery, minW, minWQuery }, index) => {
-          const final = breakpoint === finalQuery?.breakpoint
-
-          if (breakpoint === "base") return prev
-          if (!value[breakpoint]) return prev
-
-          if (!hasBase) {
-            const prevQuery = queries[index - 1]
-            const query = prevQuery?.[down ? "minWQuery" : "maxWQuery"]
-
-            const style = getModifierStyle<Y>(
-              value.base,
+    const breakpointObj = queries.reduce<Style<Y>>(
+      (prev, { breakpoint, query }) => {
+        if (value[breakpoint]) {
+          prev = merge(
+            prev,
+            getModifierStyle<Y>(
+              value[breakpoint],
               mergedStyle,
-            )({ ...options, selectors: [...selectors, query] })
+            )({ ...options, selectors: [...selectors, query] }),
+          )
+        }
 
-            prev = merge(prev, style)
+        return prev
+      },
+      {},
+    )
 
-            hasBase = true
-          }
-
-          let query = down ? maxWQuery : minWQuery
-
-          if (!final) {
-            const nextQuery = getResponsiveNextQuery(value, queries, index)
-
-            minW = down ? nextQuery?.minW : minW
-            maxW = down ? maxW : nextQuery?.maxW
-
-            query = createQuery(minW, maxW, identifier)
-          }
-
-          const style = getModifierStyle<Y>(
-            value[breakpoint],
-            mergedStyle,
-          )({ ...options, selectors: [...selectors, query] })
-
-          prev = merge(prev, style)
-
-          return prev
-        },
-        {},
+    const additionalObj = conditionalKeys.reduce<Style<Y>>((prev, key) => {
+      prev = merge(
+        prev,
+        getModifierStyle<Y>(
+          value[key as keyof typeof value],
+          mergedStyle,
+        )({ ...options, selectors: [...selectors, getCondition(key)] }),
       )
+
+      return prev
+    }, {})
+
+    return { ...breakpointObj, ...additionalObj }
+  }
+}
+
+function getModifierStyle<Y extends boolean = false>(
+  value: StyleValueWithCondition<string> | undefined,
+  mergedStyle: MergedStyle,
+) {
+  return function (options: GetStyleOptions): Style<Y> | undefined {
+    let style: Style<Y> | undefined = undefined
+
+    if (!value) return style
+
+    if (isArray(value)) {
+      style = getColorModeStyle<Y>(value, mergedStyle)(options)
+    } else if (isObject(value)) {
+      style = getConditionStyle<Y>(value, mergedStyle)(options)
+    } else {
+      style = getStyle<Y>(mergedStyle[value])(options)
     }
+
+    return style
   }
 }
 
 function getPropStyle<Y extends boolean = false>(
   props: Dict,
-  propVariants: CSSModifierObject | CSSModifierObject<CSSSlotObject>,
+  propVariants: CSSPropObject | CSSPropObject<CSSSlotObject>,
   style: Style<Y> | undefined = {},
 ) {
   const variants = Object.entries(propVariants)
@@ -268,7 +224,11 @@ function getCompoundStyle<Y extends boolean = false>(
       if (!conditions.length) return
 
       const apply = conditions.every(([key, value]) =>
-        isArray(value) ? value.includes(props[key]) : props[key] === value,
+        isArray(value)
+          ? value.includes(props[key])
+          : isRegExp(value)
+            ? value.test(props[key])
+            : props[key] === value,
       )
 
       if (!apply) return
@@ -283,43 +243,31 @@ function getCompoundStyle<Y extends boolean = false>(
   }
 }
 
-function getModifierStyle<Y extends boolean = false>(
-  value: StyleValue<number | string> | undefined,
-  mergedStyle: MergedStyle,
-) {
-  return function (options: GetStyleOptions): Style<Y> | undefined {
-    let style: Style<Y> | undefined = undefined
-
-    if (!value) return style
-
-    if (isArray(value)) {
-      style = getColorModeStyle<Y>(value, mergedStyle)(options)
-    } else if (isObject(value)) {
-      style = getResponsiveStyle<Y>(value, mergedStyle)(options)
-    } else {
-      style = getStyle<Y>(mergedStyle[value])(options)
-    }
-
-    return style
-  }
-}
-
-export function getSlotClassName<Y extends number | string | symbol>(
+export function getSlotClassName<Y extends string>(
   className?: string,
   slot?: ComponentSlot<Y>,
 ) {
   if (!className || !slot) return className
 
   if (isArray(slot)) {
-    return `${className}__${toKebabCase(slot[0] as string)} ${className}__${slot.map((value) => toKebabCase(value as string)).join("--")}`
+    const [element, modifier] = slot.map((value) =>
+      toKebabCase(value as string),
+    )
+
+    return cx(bem(className, element), bem(className, element, modifier))
   } else if (isObject(slot)) {
-    return `${className}__${toKebabCase(slot.name)}`
+    const slotArray = toArray(slot.slot)
+    const [element, modifier] = slotArray.map((value) =>
+      toKebabCase(value as string),
+    )
+
+    return cx(bem(className, element), bem(className, element, modifier))
   } else {
-    return `${className}__${toKebabCase(slot as string)}`
+    return bem(className, toKebabCase(slot as string))
   }
 }
 
-function getSlotCSS<Y extends number | string | symbol>(
+function getSlotCSS<Y extends string>(
   slot?: ComponentSlot<Y>,
   slotCSS?: CSSSlotObject<Y>,
 ): CSSObject[] {
@@ -338,7 +286,7 @@ function getSlotCSS<Y extends number | string | symbol>(
   }
 }
 
-export function mergeSlotCSS<Y extends number | string | symbol>(
+export function mergeSlotCSS<Y extends string>(
   slot?: ComponentSlot<Y>,
   slotCSS?: CSSSlotObject<Y>,
   css?: CSSObject | CSSObject[],
@@ -386,7 +334,7 @@ function wrapStyle<Y extends boolean = false>(
 }
 
 function getHasAtRuleStyle(css?: CSSObject | CSSObject[]) {
-  return (getAtRule?: CreateLayersReturn["getAtRule"]) => {
+  return (getAtRule?: Layers["getAtRule"]) => {
     let hasVariant = false
     let hasSize = false
 
@@ -406,6 +354,20 @@ function getHasAtRuleStyle(css?: CSSObject | CSSObject[]) {
 
     return { hasSize, hasVariant }
   }
+}
+
+function mergeDefaultProps<
+  Y extends ComponentSlotStyle | ComponentStyle = ComponentStyle,
+  M extends Dict = Dict,
+>(defaultProps: Y["defaultProps"], props: M) {
+  return Object.entries(defaultProps ?? {}).reduce<Dict>(
+    (prev, [key, value]) => {
+      prev[key] ??= value
+
+      return prev
+    },
+    props,
+  ) as M
 }
 
 interface UseStyleOptions<
@@ -436,17 +398,13 @@ function useStyle<
     transferProps,
   }: UseStyleOptions<Y, M, D, H> = {},
 ): [Style<H>, WithoutThemeProps<Y, M, D>] {
-  const { theme } = useTheme()
-  const { getAtRule, wrap } = theme.__layers ?? {}
+  const system = useSystem()
+  const { getAtRule, wrap } = system.layers
   const rootColorScheme = useColorSchemeContext()
-  const { queries = [] } = theme.__breakpoints ?? {}
-  const { direction = "down", identifier } = theme.__config?.breakpoint ?? {}
-  const options = { direction, hasSlot, identifier, queries, wrap }
+  const options = { ...system.breakpoints, hasSlot, wrap }
 
   const propsRef = useRef<Dict>({})
-  const styleRef = useRef<Style<H>>({})
-
-  props = filterUndefined(props)
+  const styleRef = useRef<Style<H> | undefined>(undefined)
 
   const hasComponentStyle =
     componentStyle && !!Object.keys(componentStyle).length
@@ -464,7 +422,11 @@ function useStyle<
 
     const colorScheme = props.colorScheme ?? rootColorScheme
     const className = cx(defaultClassName ?? customClassName, props.className)
-    const mergedProps = { ...defaultProps, ...props, className, colorScheme }
+    const mergedProps = {
+      ...mergeDefaultProps(defaultProps, props),
+      className,
+      colorScheme,
+    }
     const omitProps = Object.keys(propVariants ?? {})
     const { size, variant } = mergedProps
 
@@ -489,13 +451,19 @@ function useStyle<
       }
 
       if (sizes && !hasSize) {
-        const sizeStyle = getModifierStyle<H>(size, sizes)(options)
+        const sizeStyle = merge(
+          sizes.base,
+          getModifierStyle<H>(size, sizes)(options),
+        )
 
         style = merge(style, wrapStyle<H>("size", sizeStyle)(options))
       }
 
       if (variants && !hasVariant) {
-        const variantStyle = getModifierStyle<H>(variant, variants)(options)
+        const variantStyle = merge(
+          variants.base,
+          getModifierStyle<H>(variant, variants)(options),
+        )
 
         style = merge(style, wrapStyle<H>("variant", variantStyle)(options))
       }
@@ -516,7 +484,7 @@ function useStyle<
             computedProps.css,
           )
         } else {
-          computedProps.css = mergeCSS(style, computedProps.css)
+          computedProps.css = mergeCSS(style as CSSObject, computedProps.css)
         }
       } else {
         computedProps.css = propsRef.current.css
@@ -534,7 +502,10 @@ function useStyle<
       propsRef.current = props as unknown as WithoutThemeProps<Y, M, D>
   }
 
-  return [styleRef.current, propsRef.current as WithoutThemeProps<Y, M, D>]
+  return [
+    styleRef.current ?? {},
+    propsRef.current as WithoutThemeProps<Y, M, D>,
+  ]
 }
 
 export interface UseComponentStyleOptions<

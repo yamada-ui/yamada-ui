@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldsetStyle } from "./fieldset.style"

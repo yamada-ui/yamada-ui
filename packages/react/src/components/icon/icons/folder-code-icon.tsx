@@ -1,3 +1,5 @@
+"use client"
+
 import { FolderCode } from "lucide-react"
 import { component, Icon } from "../icon"
 

@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { ScrollAreaStyle } from "./scroll-area.style"
 import type { UseScrollAreaProps } from "./use-scroll-area"

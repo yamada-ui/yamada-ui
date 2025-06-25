@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, PropsWithChildren, ReactNode, RefObject } from "react"
 import type { LoadingConfig, ThemeConfig } from "../../core"
 import type { LoadingSharedProps } from "./utils"
@@ -130,18 +132,16 @@ interface ControllerProps extends LoadingConfig {
 const Controller: FC<ControllerProps> = ({
   ref,
   allowPinchZoom = false,
-  appendToParentPortal,
   blockScrollOnMount = true,
   component: Component,
-  containerRef,
-  duration: durationProps = null,
-  initialState,
+  duration: durationProp = null,
+  loadingCount: loadingCountProp = 0,
 }) => {
   const loading = useRef<boolean>(false)
   const [{ duration, loadingCount, message }, setState] =
     useState<LoadingState>({
-      duration: durationProps,
-      loadingCount: initialState ? 1 : 0,
+      duration: durationProp,
+      loadingCount: loadingCountProp,
       message: undefined,
     })
 
@@ -151,13 +151,13 @@ const Controller: FC<ControllerProps> = ({
         loading.current = false
 
         setState(({ loadingCount }) => ({
-          duration: durationProps,
+          duration: durationProp,
           loadingCount: decrementCount(loadingCount),
           message: undefined,
         }))
       },
 
-      force: ({ duration = durationProps, loadingCount = 0, message }) => {
+      force: ({ duration = durationProp, loadingCount = 0, message }) => {
         loading.current = !!loadingCount
 
         setState({
@@ -167,7 +167,7 @@ const Controller: FC<ControllerProps> = ({
         })
       },
 
-      start: ({ duration = durationProps, message } = {}) => {
+      start: ({ duration = durationProp, message } = {}) => {
         loading.current = true
 
         setState(({ loadingCount }) => ({
@@ -179,7 +179,7 @@ const Controller: FC<ControllerProps> = ({
 
       update: (next) => setState((prev) => ({ ...prev, ...next })),
     }),
-    [durationProps],
+    [durationProp],
   )
 
   assignRef(ref.current.start, start)
@@ -189,27 +189,24 @@ const Controller: FC<ControllerProps> = ({
 
   const props: LoadingSharedProps = {
     duration,
-    initialState,
+    initial: loadingCountProp > 0 ? false : "initial",
     message,
     onFinish: finish,
   }
 
   useUpdateEffect(() => {
-    if (initialState || isNumber(durationProps))
+    if (loadingCountProp > 0 || isNumber(durationProp))
       setState({
-        duration: durationProps,
-        loadingCount: initialState ? 1 : 0,
+        duration: durationProp,
+        loadingCount: loadingCountProp,
         message: undefined,
       })
-  }, [initialState, durationProps])
+  }, [loadingCountProp, durationProp])
 
   return (
     <AnimatePresence initial={false}>
       {loadingCount ? (
-        <Portal
-          appendToParentPortal={appendToParentPortal}
-          containerRef={containerRef}
-        >
+        <Portal>
           <RemoveScroll
             allowPinchZoom={allowPinchZoom}
             enabled={blockScrollOnMount}

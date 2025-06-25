@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps } from "../../core"
 import type { VisuallyHiddenStyle } from "./visually-hidden.style"
 import { createComponent } from "../../core"

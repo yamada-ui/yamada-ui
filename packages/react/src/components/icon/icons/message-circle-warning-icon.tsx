@@ -1,3 +1,5 @@
+"use client"
+
 import { MessageCircleWarning } from "lucide-react"
 import { component, Icon } from "../icon"
 

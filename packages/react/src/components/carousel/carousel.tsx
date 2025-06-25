@@ -335,6 +335,10 @@ export const CarouselNextTrigger = withContext<
 )
 
 export interface CarouselIndicatorsProps extends HTMLStyledProps {
+  /**
+   * The function used to generate children.
+   * it will be called with `{ index: number; selected: boolean }`.
+   */
   render?: (props: { index: number; selected: boolean }) => ReactNode
 }
 

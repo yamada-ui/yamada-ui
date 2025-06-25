@@ -52,6 +52,7 @@ export interface UseToggleProps<Y extends number | string = string>
 export const useToggle = <Y extends number | string = string>(
   props: UseToggleProps<Y> = {},
 ) => {
+  const { t } = useI18n("toggle")
   const {
     disabled: groupDisabled,
     readOnly: groupReadOnly,
@@ -59,9 +60,6 @@ export const useToggle = <Y extends number | string = string>(
     onChange: onChangeGroup,
     onChangeMapRef,
   } = useToggleGroupContext() ?? {}
-
-  const { t } = useI18n("toggle")
-
   const {
     props: {
       id,

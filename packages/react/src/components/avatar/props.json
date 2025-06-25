@@ -56,7 +56,7 @@
       "required": false
     },
     "loading": {
-      "type": "\"eager\" | \"lazy\"",
+      "type": "\"lazy\" | \"eager\"",
       "description": "Defines loading strategy.",
       "required": false
     },
@@ -78,7 +78,7 @@
       "required": false
     },
     "src": {
-      "type": "string",
+      "type": "string | Blob",
       "description": "The image url of the avatar.",
       "required": false
     },

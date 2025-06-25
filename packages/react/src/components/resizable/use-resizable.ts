@@ -45,6 +45,9 @@ export interface ResizableItemControl extends ImperativePanelHandle {}
 
 interface ResizableGroupProps
   extends Omit<Partial<PanelGroupProps>, "tagName"> {
+  /**
+   * Ref of the resizable group callback.
+   */
   ref?: RefObject<ResizableGroupControl>
   /**
    * The HTML element to render.
@@ -52,6 +55,9 @@ interface ResizableGroupProps
   as?: keyof HTMLElementTagNameMap
 }
 interface ResizableItemProps extends Omit<PanelProps, "tagName"> {
+  /**
+   * Ref of the resizable item callback.
+   */
   ref?: RefObject<ResizableItemControl>
   /**
    * The HTML element to render.

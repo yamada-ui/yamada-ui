@@ -267,6 +267,18 @@
       "description": "If provided, generate step components based on steps.",
       "required": false
     },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, rendering of the content will be deferred until it is selected.",
+      "required": false
+    },
+    "lazyBehavior": {
+      "type": "LazyBehavior",
+      "defaultValue": "\"unmount\"",
+      "description": "The lazy behavior of content when not active. Only works when `lazy={true}`.\n\n- `unmount`: The content is always unmounted.\n- `keepMounted`: The content is initially unmounted, but stays mounted when selected.",
+      "required": false
+    },
     "onChange": {
       "type": "(index: number) => void",
       "description": "The callback function that is called when the active step index is changed.",

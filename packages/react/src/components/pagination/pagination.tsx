@@ -282,7 +282,15 @@ export const PaginationRoot = withProvider(
 )()
 
 export interface PaginationItemsProps {
+  /**
+   * The function used to generate children.
+   * it will be called with page number or `"ellipsis"`.
+   */
   children?: (page: Page) => ReactNode
+  /**
+   * The function used to generate children.
+   * it will be called with page number or `"ellipsis"`.
+   */
   render?: (page: Page) => ReactNode
 }
 
@@ -318,6 +326,10 @@ export const PaginationItem = withContext<"button", PaginationItemProps>(
 
 export interface PaginationTextProps
   extends Omit<HTMLStyledProps<"span">, "children"> {
+  /**
+   * The children of the text.
+   * if function, it will be called with `{ page: number; total: number }`.
+   */
   children?: ReactNodeOrFunction<{ page: number; total: number }>
   /**
    * The format of the text.

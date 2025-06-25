@@ -1,3 +1,5 @@
+"use client"
+
 import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { StackProps } from "./stack"
 import type { VStackStyle } from "./v-stack.style"

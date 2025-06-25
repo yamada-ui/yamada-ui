@@ -1,3 +1,5 @@
+"use client"
+
 import type { DependencyList } from "react"
 import { useCallback, useEffect, useRef } from "react"
 import { useState } from "react"

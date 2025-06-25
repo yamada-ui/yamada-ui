@@ -1,3 +1,5 @@
+"use client"
+
 import type { RefObject } from "react"
 import type { CSSObject, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ZStackStyle } from "./z-stack.style"

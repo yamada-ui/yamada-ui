@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactElement } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { AvatarStyle } from "./avatar.style"

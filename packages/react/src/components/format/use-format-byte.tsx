@@ -1,3 +1,5 @@
+"use client"
+
 import { useI18n } from "../../providers/i18n-provider"
 import { useFormatNumber } from "./use-format-number"
 

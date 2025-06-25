@@ -1,3 +1,5 @@
+"use client"
+
 import { AudioLines } from "lucide-react"
 import { component, Icon } from "../icon"
 

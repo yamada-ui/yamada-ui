@@ -1,3 +1,5 @@
+"use client"
+
 import { TestTubes } from "lucide-react"
 import { component, Icon } from "../icon"
 

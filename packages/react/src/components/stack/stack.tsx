@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactElement } from "react"
 import type { CSSProps, HTMLStyledProps } from "../../core"
 import type { StackStyle } from "./stack.style"

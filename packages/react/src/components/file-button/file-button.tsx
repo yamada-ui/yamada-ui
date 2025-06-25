@@ -1,3 +1,5 @@
+"use client"
+
 import type { ButtonProps } from "../../components/button"
 import type { ThemeProps } from "../../core"
 import type { UseInputBorderProps } from "../input"

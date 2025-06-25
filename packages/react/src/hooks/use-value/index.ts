@@ -3,14 +3,10 @@ import type {
   ColorMode,
   ColorModeArray,
   ResponsiveObject,
-  StyledTheme,
+  System,
 } from "../../core"
 import { useMemo } from "react"
-import {
-  getColorModeValue,
-  useColorMode,
-} from "../../providers/color-mode-provider"
-import { useTheme } from "../../providers/theme-provider"
+import { getColorModeValue, useColorMode, useSystem } from "../../core"
 import { isArray, isObject } from "../../utils"
 import { getBreakpointValue, useBreakpoint } from "../use-breakpoint"
 
@@ -22,20 +18,20 @@ import { getBreakpointValue, useBreakpoint } from "../use-breakpoint"
 export const useValue = <Y>(
   value: ColorModeArray<Y, false> | ResponsiveObject<Y, false> | Y,
 ): Y => {
-  const { theme } = useTheme()
+  const system = useSystem()
   const breakpoint = useBreakpoint()
   const { colorMode } = useColorMode()
 
   return useMemo(() => {
-    return getValue(value)(theme, colorMode, breakpoint)
-  }, [value, theme, colorMode, breakpoint])
+    return getValue(value)(system, colorMode, breakpoint)
+  }, [value, system, colorMode, breakpoint])
 }
 
 export const getValue =
   <Y>(value: ColorModeArray<Y, false> | ResponsiveObject<Y, false> | Y) =>
-  (theme: StyledTheme, colorMode: ColorMode, breakpoint: Breakpoint): Y => {
+  (system: System, colorMode: ColorMode, breakpoint: Breakpoint): Y => {
     if (isObject<ResponsiveObject<Y, false>>(value)) {
-      return getBreakpointValue(value)(theme, breakpoint)
+      return getBreakpointValue(value)(system, breakpoint)
     } else if (isArray<ColorModeArray<Y, false>>(value)) {
       const [light, dark] = value
 

@@ -1,3 +1,5 @@
+"use client"
+
 import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { HStackStyle } from "./h-stack.style"
 import type { StackProps } from "./stack"

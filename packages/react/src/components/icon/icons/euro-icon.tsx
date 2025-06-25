@@ -1,3 +1,5 @@
+"use client"
+
 import { Euro } from "lucide-react"
 import { component, Icon } from "../icon"
 

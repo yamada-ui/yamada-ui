@@ -1,3 +1,5 @@
+"use client"
+
 import { Waves } from "lucide-react"
 import { component, Icon } from "../icon"
 

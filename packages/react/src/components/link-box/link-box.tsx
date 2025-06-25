@@ -1,8 +1,11 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { LinkBoxStyle } from "./link-box.style"
 import { createSlotComponent, radiusProperties, styled } from "../../core"
 import { useExtractProps } from "../../core"
+import { dataAttr } from "../../utils"
 import { linkBoxStyle } from "./link-box.style"
 
 interface ComponentContext extends Dict {}
@@ -59,6 +62,7 @@ export const LinkBoxOverlay = withContext<"a", LinkBoxOverlayProps>(
   return {
     rel: external ? "noopener" : undefined,
     target: external ? "_blank" : undefined,
+    "data-link-box-overlay": dataAttr(true),
     _before: { ..._before, ...context },
     ...rest,
   }

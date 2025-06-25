@@ -1,3 +1,5 @@
+"use client"
+
 import { i18nCache, useI18n } from "../../providers/i18n-provider"
 
 const getNumberFormatter = i18nCache(Intl.NumberFormat)

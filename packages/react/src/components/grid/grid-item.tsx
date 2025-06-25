@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, StyleValue } from "../../core"
 import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"

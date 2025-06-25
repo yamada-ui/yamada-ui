@@ -1,3 +1,5 @@
+"use client"
+
 import type { DependencyList } from "react"
 import type { Breakpoint } from "../../core"
 import { useEffect } from "react"

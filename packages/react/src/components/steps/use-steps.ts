@@ -1,8 +1,10 @@
+"use client"
+
 import type { HTMLProps, Orientation, PropGetter } from "../../core"
 import { useCallback, useId } from "react"
+import { useEnvironment } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendant } from "../../hooks/use-descendant"
-import { useEnvironment } from "../../providers/environment-provider"
 import { createContext, cx, dataAttr, handlerAll, mergeRefs } from "../../utils"
 
 export type StepStatusScheme = "complete" | "current" | "incomplete"

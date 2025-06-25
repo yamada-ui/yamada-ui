@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, ThemeProps, WithoutThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { GroupProps } from "../group"

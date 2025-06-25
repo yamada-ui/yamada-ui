@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FormatNumberStyle } from "./format-number.style"
 import { createComponent, styled } from "../../core"

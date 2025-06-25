@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, HTMLStyledProps, StyleValue } from "../../core"
 import type { SkeletonProps } from "./skeleton"
 import { mergeCSS, styled } from "../../core"

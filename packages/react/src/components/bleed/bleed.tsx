@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps } from "../../core"
 import type { BleedStyle } from "./bleed.style"
 import { createComponent, varAttr } from "../../core"

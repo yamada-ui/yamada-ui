@@ -1,3 +1,5 @@
+"use client"
+
 import { SquareSplitHorizontal } from "lucide-react"
 import { component, Icon } from "../icon"
 

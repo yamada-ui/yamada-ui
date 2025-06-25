@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { GridStyle } from "./grid.style"
 import { createComponent } from "../../core"

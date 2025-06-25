@@ -1,3 +1,5 @@
+"use client"
+
 import type { ChangeEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { FieldProps } from "../field"

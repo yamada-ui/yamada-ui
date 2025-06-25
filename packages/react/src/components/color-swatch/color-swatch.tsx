@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ColorSwatchStyle } from "./color-swatch.style"
 import { createSlotComponent, styled, varAttr } from "../../core"

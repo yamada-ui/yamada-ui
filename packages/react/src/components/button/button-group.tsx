@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, ThemeProps, WithoutThemeProps } from "../../core"
 import type { GroupProps } from "../group"
 import type { ButtonProps } from "./button"

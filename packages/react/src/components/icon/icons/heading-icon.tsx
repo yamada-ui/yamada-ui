@@ -1,3 +1,5 @@
+"use client"
+
 import { Heading } from "lucide-react"
 import { component, Icon } from "../icon"
 

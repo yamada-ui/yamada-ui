@@ -1,3 +1,5 @@
+"use client"
+
 import type { ResponsiveObject } from "../../core"
 import { useState } from "react"
 import { useBreakpointValue } from "./use-breakpoint-value"

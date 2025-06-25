@@ -1,3 +1,5 @@
+"use client"
+
 import type { Variants } from "motion/react"
 import type { ReactNode } from "react"
 import type { KeyframeIdent, Orientation, ThemeProps } from "../../core"

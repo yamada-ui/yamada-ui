@@ -1,3 +1,5 @@
+"use client"
+
 import { Syringe } from "lucide-react"
 import { component, Icon } from "../icon"
 

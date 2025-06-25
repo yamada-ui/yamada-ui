@@ -1,3 +1,5 @@
+"use client"
+
 import type { KeyboardEvent } from "react"
 import type { HTMLProps, Orientation, PropGetter } from "../../core"
 import { useCallback, useId, useState } from "react"

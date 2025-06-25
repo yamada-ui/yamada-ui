@@ -1,3 +1,5 @@
+"use client"
+
 import type { ThemeProps } from "../../core"
 import type { FlexProps } from "../flex"
 import type { GroupStyle } from "./group.style"

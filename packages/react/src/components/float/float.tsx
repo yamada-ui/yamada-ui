@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FloatStyle } from "./float.style"
 import { createComponent, varAttr } from "../../core"

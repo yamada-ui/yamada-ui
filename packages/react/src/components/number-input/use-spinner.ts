@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback, useRef, useState } from "react"
 import { useInterval } from "../../hooks/use-interval"
 import { useUnmountEffect } from "../../utils"

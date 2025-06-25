@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { IconProps } from "../icon"
 import type { Loading } from "../loading"
@@ -34,7 +36,6 @@ export interface AlertRootProps
 export const {
   ComponentContext,
   PropsContext: AlertPropsContext,
-  useClassNames,
   useComponentContext,
   usePropsContext: useAlertPropsContext,
   useStyleContext,

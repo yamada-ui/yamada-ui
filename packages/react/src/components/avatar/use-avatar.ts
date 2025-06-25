@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactElement, ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useState } from "react"

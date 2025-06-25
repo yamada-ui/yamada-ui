@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { EmStyle } from "./em.style"
 import { createComponent } from "../../core"

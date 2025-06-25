@@ -1,3 +1,5 @@
+"use client"
+
 import type { PropsWithChildren, RefObject } from "react"
 import type { FC } from "../../core"
 import { useCallback } from "react"

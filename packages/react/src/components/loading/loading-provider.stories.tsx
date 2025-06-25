@@ -47,7 +47,7 @@ export const Basic = () => {
   )
 }
 
-export const UseInitialState = () => {
+export const DefaultLoading = () => {
   const config = merge(defaultConfig, {
     loading: {
       background: {
@@ -64,7 +64,7 @@ export const UseInitialState = () => {
         icon: {
           variant: "dots",
         },
-        initialState: true,
+        loadingCount: 1,
       },
     },
   })

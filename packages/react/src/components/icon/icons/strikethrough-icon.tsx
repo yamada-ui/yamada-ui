@@ -1,3 +1,5 @@
+"use client"
+
 import { Strikethrough } from "lucide-react"
 import { component, Icon } from "../icon"
 

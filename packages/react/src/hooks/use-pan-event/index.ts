@@ -1,3 +1,5 @@
+"use client"
+
 import type { RefObject } from "react"
 import type { AnyPointerEvent, Point } from "../../utils"
 import sync, { cancelSync, getFrameData } from "framesync"

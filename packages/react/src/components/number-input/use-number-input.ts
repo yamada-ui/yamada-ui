@@ -1,3 +1,5 @@
+"use client"
+
 import type { ChangeEvent, FocusEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { UseCounterProps } from "../../hooks/use-counter"

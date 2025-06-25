@@ -1,3 +1,5 @@
+"use client"
+
 import type { UIEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"

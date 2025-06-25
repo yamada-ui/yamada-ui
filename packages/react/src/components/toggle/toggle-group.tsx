@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactElement } from "react"
 import type { ComponentArgs, ThemeProps, WithoutThemeProps } from "../../core"
 import type { GroupProps } from "../group"

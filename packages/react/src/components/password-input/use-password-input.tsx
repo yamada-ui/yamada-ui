@@ -1,3 +1,5 @@
+"use client"
+
 import type { MouseEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"

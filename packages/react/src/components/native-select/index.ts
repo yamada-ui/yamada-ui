@@ -12,3 +12,4 @@ export type {
   NativeSelectRootProps,
 } from "./native-select"
 export * from "./native-select.style"
+export * from "./use-native-select"

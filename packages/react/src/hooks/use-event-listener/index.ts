@@ -1,3 +1,5 @@
+"use client"
+
 import type { EventMap, EventType } from "../../utils"
 import { useCallback, useEffect, useRef } from "react"
 import { isFunction, useCallbackRef } from "../../utils"

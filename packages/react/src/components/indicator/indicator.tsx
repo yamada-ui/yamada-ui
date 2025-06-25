@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FloatProps } from "../float"

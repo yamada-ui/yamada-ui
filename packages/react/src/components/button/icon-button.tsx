@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { ButtonProps } from "./button"

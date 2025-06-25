@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { InputStyle } from "./input.style"

@@ -1,3 +1,5 @@
+"use client"
+
 import { PartyPopper } from "lucide-react"
 import { component, Icon } from "../icon"
 

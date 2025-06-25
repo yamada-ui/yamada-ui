@@ -1,3 +1,5 @@
+"use client"
+
 import type { LoadingProps } from "./utils"
 import { Icon } from "../icon"
 import { initialProps, superProps, withContext } from "./utils"

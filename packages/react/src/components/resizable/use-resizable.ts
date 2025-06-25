@@ -1,3 +1,5 @@
+"use client"
+
 import type { MouseEvent, MouseEventHandler, RefObject } from "react"
 import type {
   ImperativePanelGroupHandle,

@@ -1,3 +1,5 @@
+"use client"
+
 import type { RefObject } from "react"
 import type { Orientation } from "../../core"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"

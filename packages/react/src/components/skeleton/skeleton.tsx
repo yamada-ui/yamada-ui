@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { SkeletonStyle } from "./skeleton.style"
 import { useMemo } from "react"

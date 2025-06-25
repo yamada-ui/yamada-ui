@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLMotionProps, Reorder } from "motion/react"
 import type { PropsWithChildren, ReactElement, ReactNode } from "react"
 import type { Orientation, PropGetter } from "../../core"

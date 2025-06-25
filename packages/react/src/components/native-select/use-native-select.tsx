@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field/field"
@@ -42,7 +44,7 @@ export interface UseNativeSelectProps extends HTMLProps<"select">, FieldProps {
   placeholderInOptions?: boolean
 }
 
-export const useNativeSelect = (props: UseNativeSelectProps) => {
+export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
   const {
     props: {
       children,

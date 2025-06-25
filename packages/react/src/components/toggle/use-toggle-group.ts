@@ -1,3 +1,5 @@
+"use client"
+
 import type { RefObject } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useRef } from "react"

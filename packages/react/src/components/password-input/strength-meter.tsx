@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { HTMLStyledProps } from "../../core"
 import type { StrengthMeterStyle } from "./strength-meter.style"

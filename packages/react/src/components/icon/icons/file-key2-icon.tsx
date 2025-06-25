@@ -1,3 +1,5 @@
+"use client"
+
 import { FileKey2 } from "lucide-react"
 import { component, Icon } from "../icon"
 

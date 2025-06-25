@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, PropsWithChildren, ReactNode } from "react"
 import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"

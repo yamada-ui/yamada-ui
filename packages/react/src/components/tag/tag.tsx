@@ -1,3 +1,5 @@
+"use client"
+
 import type { MouseEventHandler, ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { TagStyle } from "./tag.style"
@@ -113,7 +115,7 @@ interface TagStartIconProps extends HTMLStyledProps<"span"> {}
 
 const TagStartIcon = withContext<"span", TagStartIconProps>("span", [
   "icon",
-  "startIcon",
+  "start",
 ])(undefined, (props) => {
   const { disabled } = useComponentContext()
 
@@ -124,7 +126,7 @@ interface TagEndIconProps extends HTMLStyledProps<"span"> {}
 
 const TagEndIcon = withContext<"span", TagEndIconProps>("span", [
   "icon",
-  "endIcon",
+  "end",
 ])(undefined, (props) => {
   const { disabled } = useComponentContext()
 

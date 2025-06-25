@@ -1,3 +1,5 @@
+"use client"
+
 import type { PropsWithChildren, ReactElement } from "react"
 import type { ComponentArgs, HTMLStyledProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"

@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps, WithoutThemeProps } from "../../core"
 import type { InputProps } from "../input"

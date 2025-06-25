@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { StatusStyle } from "./status.style"
 import { createSlotComponent, styled } from "../../core"

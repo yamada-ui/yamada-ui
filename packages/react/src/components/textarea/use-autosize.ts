@@ -1,3 +1,5 @@
+"use client"
+
 import type { PropGetter } from "../../core"
 import { useCallback, useRef } from "react"
 import {

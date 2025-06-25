@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { KeyframeIdent, ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"

@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { FC, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"

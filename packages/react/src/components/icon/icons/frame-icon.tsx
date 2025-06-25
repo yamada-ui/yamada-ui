@@ -1,3 +1,5 @@
+"use client"
+
 import { Frame } from "lucide-react"
 import { component, Icon } from "../icon"
 

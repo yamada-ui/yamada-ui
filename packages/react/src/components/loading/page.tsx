@@ -55,7 +55,7 @@ const variants: { [key: string]: Variants } = {
 export interface PageProps extends LoadingSharedProps {}
 
 export const Page: FC<PageProps> = memo(
-  ({ duration, initialState, message, onFinish }) => {
+  ({ duration, initial, message, onFinish }) => {
     useTimeout(onFinish, duration)
 
     return (
@@ -67,7 +67,7 @@ export const Page: FC<PageProps> = memo(
         display="flex"
         exit="exit"
         h="100dvh"
-        initial={initialState ? false : "initial"}
+        initial={initial}
         inset={0}
         justifyContent="center"
         p="md"
@@ -85,7 +85,7 @@ export const Page: FC<PageProps> = memo(
           exit="exit"
           flexDirection="column"
           gap="sm"
-          initial={initialState ? false : "initial"}
+          initial={initial}
           justifyContent="center"
           maxW="24rem"
           p="md"

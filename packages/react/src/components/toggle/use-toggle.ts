@@ -1,3 +1,5 @@
+"use client"
+
 import type { ChangeEvent } from "react"
 import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { Merge } from "../../utils"

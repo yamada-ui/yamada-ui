@@ -1,7 +1,8 @@
+"use client"
+
 import type { CSSAnimationObject, Token } from "../../core"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { animation, css } from "../../core"
-import { useTheme } from "../../providers/theme-provider"
+import { animation, css, useSystem } from "../../core"
 import { getWindow, isArray, isUndefined, runIfFn } from "../../utils"
 import { useBoolean } from "../use-boolean"
 import { useEventListener } from "../use-event-listener"
@@ -16,12 +17,12 @@ type CSSObject =
  * @see https://yamada-ui.com/hooks/use-animation
  */
 export const useAnimation = (cssObj: CSSObject): string => {
-  const { theme } = useTheme()
+  const system = useSystem()
 
   if (isArray(cssObj)) {
-    return cssObj.map((cssObj) => animation(cssObj, { css, theme })).join(", ")
+    return cssObj.map((cssObj) => animation(cssObj, { css, system })).join(", ")
   } else {
-    return animation(cssObj, { css, theme })
+    return animation(cssObj, { css, system })
   }
 }
 
@@ -46,7 +47,7 @@ export const useDynamicAnimation = <
       | keyof T,
   ) => void,
 ] => {
-  const { theme } = useTheme()
+  const system = useSystem()
 
   const keys = useRef<string | string[] | undefined>(
     !isUndefined(init)
@@ -64,10 +65,10 @@ export const useDynamicAnimation = <
       if (isArray(styles)) {
         cache.current.set(
           key,
-          styles.map((style) => animation(style, { css, theme })).join(", "),
+          styles.map((style) => animation(style, { css, system })).join(", "),
         )
       } else {
-        cache.current.set(key, animation(styles, { css, theme }))
+        cache.current.set(key, animation(styles, { css, system }))
       }
     }
 

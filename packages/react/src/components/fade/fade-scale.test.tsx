@@ -13,7 +13,7 @@ describe("<FadeScale />", () => {
 
   test("sets `className` correctly", () => {
     render(<FadeScale>FadeScale</FadeScale>)
-    expect(screen.getByText("FadeScale")).toHaveClass("ui-fadeScale")
+    expect(screen.getByText("FadeScale")).toHaveClass("ui-fade-scale")
   })
 
   test("renders HTML tag correctly", () => {

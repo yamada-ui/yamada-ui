@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { UseInputBorderProps } from "../input"
@@ -126,7 +128,7 @@ export interface EditableEditTriggerProps extends HTMLStyledProps<"button"> {}
 export const EditableEditTrigger = withContext<
   "button",
   EditableEditTriggerProps
->("button", { name: "editTrigger", slot: ["trigger", "edit"] })(
+>("button", { name: "EditTrigger", slot: ["trigger", "edit"] })(
   undefined,
   (props) => {
     const { getEditProps } = useEditableContext()
@@ -140,7 +142,7 @@ export interface EditableCancelTriggerProps extends HTMLStyledProps<"button"> {}
 export const EditableCancelTrigger = withContext<
   "button",
   EditableCancelTriggerProps
->("button", { name: "cancelTrigger", slot: ["trigger", "cancel"] })(
+>("button", { name: "CancelTrigger", slot: ["trigger", "cancel"] })(
   undefined,
   (props) => {
     const { getCancelProps } = useEditableContext()
@@ -154,7 +156,7 @@ export interface EditableSubmitTriggerProps extends HTMLStyledProps<"button"> {}
 export const EditableSubmitTrigger = withContext<
   "button",
   EditableSubmitTriggerProps
->("button", { name: "submitTrigger", slot: ["trigger", "submit"] })(
+>("button", { name: "SubmitTrigger", slot: ["trigger", "submit"] })(
   undefined,
   (props) => {
     const { getSubmitProps } = useEditableContext()

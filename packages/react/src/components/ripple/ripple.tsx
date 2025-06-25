@@ -1,3 +1,5 @@
+"use client"
+
 import type { Key } from "react"
 import type { FC, ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"

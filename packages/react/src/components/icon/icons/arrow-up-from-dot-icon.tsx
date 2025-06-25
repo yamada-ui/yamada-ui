@@ -1,3 +1,5 @@
+"use client"
+
 import { ArrowUpFromDot } from "lucide-react"
 import { component, Icon } from "../icon"
 

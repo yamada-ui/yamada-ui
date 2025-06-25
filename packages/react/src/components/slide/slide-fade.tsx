@@ -1,3 +1,5 @@
+"use client"
+
 import type { Variants } from "motion/react"
 import type { StyleValue, ThemeProps } from "../../core"
 import type {

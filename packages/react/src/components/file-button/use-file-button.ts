@@ -1,3 +1,5 @@
+"use client"
+
 import type { PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import type { UseFileInputProps } from "../file-input"
@@ -9,7 +11,7 @@ export interface UseFileButtonProps
   extends UseFileInputProps<"button">,
     FieldProps {}
 
-export const useFileButton = (props: UseFileButtonProps) => {
+export const useFileButton = (props: UseFileButtonProps = {}) => {
   const { interactive, clickableProps, getInputProps } =
     useFileInput<"button">(props)
 

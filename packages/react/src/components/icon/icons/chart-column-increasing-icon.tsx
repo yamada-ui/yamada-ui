@@ -1,3 +1,5 @@
+"use client"
+
 import { ChartColumnIncreasing } from "lucide-react"
 import { component, Icon } from "../icon"
 

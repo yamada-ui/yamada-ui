@@ -1,8 +1,7 @@
-import type { Breakpoint, UsageTheme } from "../../core"
-import type { StyledTheme } from "../../core"
+import type { Breakpoint, System } from "../../core"
 import type { ResponsiveObject } from "../../core"
 import { useMemo } from "react"
-import { useTheme } from "../../providers/theme-provider"
+import { useSystem } from "../../core"
 import { useBreakpoint } from "./use-breakpoint"
 
 /**
@@ -14,23 +13,19 @@ import { useBreakpoint } from "./use-breakpoint"
 export const useBreakpointValue = <Y>(
   values: ResponsiveObject<Y, false>,
 ): Y => {
-  const { theme } = useTheme()
+  const system = useSystem()
   const breakpoint = useBreakpoint()
 
   return useMemo(
-    () => getBreakpointValue<Y>(values)(theme, breakpoint),
-    [values, theme, breakpoint],
+    () => getBreakpointValue<Y>(values)(system, breakpoint),
+    [values, system, breakpoint],
   )
 }
 
 export const getBreakpointValue =
   <Y>(values: ResponsiveObject<Y, false> = {}) =>
-  (theme: StyledTheme<UsageTheme> | undefined, breakpoint: Breakpoint): Y => {
-    if (!theme) {
-      console.warn("getBreakpointValue: `theme` is undefined.")
-    }
-
-    const breakpoints = theme?.__breakpoints?.keys ?? []
+  (system: System, breakpoint: Breakpoint): Y => {
+    const breakpoints = system.breakpoints.keys
 
     if (!breakpoints.length) {
       console.warn("getBreakpointValue: `breakpoints` is undefined.")

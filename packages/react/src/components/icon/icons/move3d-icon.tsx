@@ -1,3 +1,5 @@
+"use client"
+
 import { Move3d } from "lucide-react"
 import { component, Icon } from "../icon"
 

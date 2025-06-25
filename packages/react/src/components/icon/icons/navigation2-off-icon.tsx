@@ -1,3 +1,5 @@
+"use client"
+
 import { Navigation2Off } from "lucide-react"
 import { component, Icon } from "../icon"
 

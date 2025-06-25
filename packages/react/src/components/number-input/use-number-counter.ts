@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLProps, PropGetter } from "../../core"
 import type { UseCounterProps, UseCounterReturn } from "../../hooks/use-counter"
 import type { UseSpinnerProps } from "./use-spinner"

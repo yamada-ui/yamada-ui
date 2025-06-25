@@ -1,3 +1,5 @@
+"use client"
+
 import { Radius } from "lucide-react"
 import { component, Icon } from "../icon"
 

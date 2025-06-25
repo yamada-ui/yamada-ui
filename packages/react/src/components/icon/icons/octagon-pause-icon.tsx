@@ -1,3 +1,5 @@
+"use client"
+
 import { OctagonPause } from "lucide-react"
 import { component, Icon } from "../icon"
 

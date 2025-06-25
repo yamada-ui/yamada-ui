@@ -1,3 +1,5 @@
+"use client"
+
 import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { FlexProps } from "../flex"
 import type { WrapStyle } from "./wrap.style"

@@ -1,3 +1,5 @@
+"use client"
+
 import { Hotel } from "lucide-react"
 import { component, Icon } from "../icon"
 

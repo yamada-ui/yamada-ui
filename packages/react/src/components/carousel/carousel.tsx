@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type {
   CSSProps,
@@ -301,7 +303,7 @@ export interface CarouselPrevTriggerProps extends IconButtonProps {}
 export const CarouselPrevTrigger = withContext<
   "button",
   CarouselPrevTriggerProps
->(IconButton, { name: "prevTrigger", slot: ["trigger", "prev"] })(
+>(IconButton, { name: "PrevTrigger", slot: ["trigger", "prev"] })(
   undefined,
   (props) => {
     const { getPrevTriggerProps } = useCarouselContext()
@@ -319,7 +321,7 @@ export interface CarouselNextTriggerProps extends IconButtonProps {}
 export const CarouselNextTrigger = withContext<
   "button",
   CarouselNextTriggerProps
->(IconButton, { name: "nextTrigger", slot: ["trigger", "next"] })(
+>(IconButton, { name: "NextTrigger", slot: ["trigger", "next"] })(
   undefined,
   (props) => {
     const { getNextTriggerProps } = useCarouselContext()

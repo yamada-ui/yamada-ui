@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLProps } from "../../core"
 import { useCallback } from "react"
 import { useI18n } from "../../providers/i18n-provider"
@@ -28,7 +30,7 @@ export const useProgress = <Y extends "div" | "svg" = "div">({
   max = 100,
   min = 0,
   value,
-}: UseProgressProps) => {
+}: UseProgressProps = {}) => {
   const indeterminate = value === null
   const percent = valueToPercent(value ?? 0, min, max)
   const { t } = useI18n("progress")

@@ -1,3 +1,5 @@
+"use client"
+
 import type { LoadingProps } from "./utils"
 import { styled, varAttr } from "../../core"
 import { Icon } from "../icon"

@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { TextStyle } from "./text.style"
 import { createComponent } from "../../core"

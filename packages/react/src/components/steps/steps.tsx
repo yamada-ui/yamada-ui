@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, PropsWithChildren, ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { UseLazyMountProps } from "../../hooks/use-lazy-mount"
@@ -409,7 +411,7 @@ export interface StepsCompletedContentProps extends HTMLStyledProps {}
 export const StepsCompletedContent = withContext<
   "div",
   StepsCompletedContentProps
->("div", { name: "completedContent", slot: ["content", "completed"] })(
+>("div", { name: "CompletedContent", slot: ["content", "completed"] })(
   undefined,
   (props) => {
     const { lazy, lazyBehavior } = useComponentContext()
@@ -430,7 +432,7 @@ export interface StepsPrevTriggerProps extends HTMLStyledProps<"button"> {}
 
 export const StepsPrevTrigger = withContext<"button", StepsPrevTriggerProps>(
   "button",
-  { name: "prevTrigger", slot: ["trigger", "prev"] },
+  { name: "PrevTrigger", slot: ["trigger", "prev"] },
 )((props) => {
   const { getPrevTriggerProps } = useStepsContext()
 
@@ -441,7 +443,7 @@ export interface StepsNextTriggerProps extends HTMLStyledProps<"button"> {}
 
 export const StepsNextTrigger = withContext<"button", StepsNextTriggerProps>(
   "button",
-  { name: "nextTrigger", slot: ["trigger", "next"] },
+  { name: "NextTrigger", slot: ["trigger", "next"] },
 )((props) => {
   const { getNextTriggerProps } = useStepsContext()
 

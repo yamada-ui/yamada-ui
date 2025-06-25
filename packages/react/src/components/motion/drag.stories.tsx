@@ -139,17 +139,17 @@ export const DragTransition: Story = () => {
 }
 
 export const DragPropagation: Story = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const itemRef = useRef<HTMLDivElement>(null)
 
   return (
-    <Center ref={containerRef}>
+    <Center ref={ref}>
       <Motion
         ref={itemRef}
         bg="mono"
         cursor="grab"
         drag
-        dragConstraints={containerRef}
+        dragConstraints={ref}
         h="2xs"
         p="md"
         rounded="l3"

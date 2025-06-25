@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useMemo } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"

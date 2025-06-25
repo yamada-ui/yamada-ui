@@ -1,3 +1,5 @@
+"use client"
+
 import { MonitorUp } from "lucide-react"
 import { component, Icon } from "../icon"
 

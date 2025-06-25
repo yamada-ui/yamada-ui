@@ -1,3 +1,5 @@
+"use client"
+
 import type { PropsWithChildren, ReactNode } from "react"
 import type { FC, HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ButtonProps } from "../button"
@@ -210,7 +212,7 @@ export interface ModalOpenTriggerProps extends HTMLStyledProps<"button"> {}
 
 export const ModalOpenTrigger = withContext<"button", ModalOpenTriggerProps>(
   "button",
-  { name: "openTrigger", slot: ["trigger", "open"] },
+  { name: "OpenTrigger", slot: ["trigger", "open"] },
 )(undefined, (props) => {
   const { getOpenTriggerProps } = useComponentContext()
 
@@ -221,7 +223,7 @@ export interface ModalCloseTriggerProps extends HTMLStyledProps<"button"> {}
 
 export const ModalCloseTrigger = withContext<"button", ModalCloseTriggerProps>(
   "button",
-  { name: "closeTrigger", slot: ["trigger", "close"] },
+  { name: "CloseTrigger", slot: ["trigger", "close"] },
 )(undefined, (props) => {
   const { getCloseTriggerProps } = useComponentContext()
 

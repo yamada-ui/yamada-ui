@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLProps, ThemeProps, WithoutThemeProps } from "../../core"
 import type { CloseButtonStyle } from "./close-button.style"
 import type { IconButtonProps } from "./icon-button"

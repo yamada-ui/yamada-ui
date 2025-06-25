@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, PropsWithChildren, ReactNode } from "react"
 import type {
   HTMLProps,
@@ -252,7 +254,7 @@ export interface DrawerOpenTriggerProps extends HTMLStyledProps<"button"> {}
 
 export const DrawerOpenTrigger = withContext<"button", DrawerOpenTriggerProps>(
   "button",
-  { name: "openTrigger", slot: ["trigger", "open"] },
+  { name: "OpenTrigger", slot: ["trigger", "open"] },
 )(undefined, (props) => {
   const { getOpenTriggerProps } = useComponentContext()
 
@@ -264,7 +266,7 @@ export interface DrawerCloseTriggerProps extends HTMLStyledProps<"button"> {}
 export const DrawerCloseTrigger = withContext<
   "button",
   DrawerCloseTriggerProps
->("button", { name: "closeTrigger", slot: ["trigger", "close"] })(
+>("button", { name: "CloseTrigger", slot: ["trigger", "close"] })(
   undefined,
   (props) => {
     const { getCloseTriggerProps } = useComponentContext()

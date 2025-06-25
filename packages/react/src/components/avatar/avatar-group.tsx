@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { AvatarStyle } from "./avatar.style"
 import type { UseAvatarGroupProps } from "./use-avatar-group"

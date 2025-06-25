@@ -55,6 +55,8 @@ async function createIcons(iconNames: string[]) {
     iconNames.map(async (iconName) => {
       const fileName = toKebabCase(iconName)
       let data = [
+        `"use client"`,
+        ``,
         `import { ${iconName} } from "lucide-react"`,
         `import { component, Icon } from "../icon"`,
         ``,

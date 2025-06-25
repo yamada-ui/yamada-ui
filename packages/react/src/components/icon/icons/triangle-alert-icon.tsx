@@ -1,3 +1,5 @@
+"use client"
+
 import { TriangleAlert } from "lucide-react"
 import { component, Icon } from "../icon"
 

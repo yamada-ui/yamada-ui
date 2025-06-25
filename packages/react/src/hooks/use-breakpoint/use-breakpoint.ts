@@ -1,7 +1,8 @@
+"use client"
+
 import type { Breakpoint } from "../../core"
 import { useCallback, useMemo, useRef, useSyncExternalStore } from "react"
-import { useEnvironment } from "../../providers/environment-provider"
-import { useTheme } from "../../providers/theme-provider"
+import { useEnvironment, useSystem } from "../../core"
 import { createdDom, isUndefined, noop } from "../../utils"
 
 /**
@@ -12,25 +13,16 @@ import { createdDom, isUndefined, noop } from "../../utils"
  */
 export const useBreakpoint = () => {
   const animationFrameId = useRef(0)
-  const { theme } = useTheme()
+  const { breakpoints, config } = useSystem()
   const { getWindow } = useEnvironment()
-  const breakpoints = theme.__breakpoints
   const {
     containerRef,
     direction = "down",
     identifier = "@media screen",
-  } = theme.__config?.breakpoint ?? {}
+  } = config.breakpoint ?? {}
   const hasContainer = !!containerRef
 
-  if (!breakpoints) {
-    console.warn(
-      "useBreakpoint: `breakpoints` is undefined. Seems you forgot to put theme in `breakpoints`",
-    )
-  }
-
   const queries = useMemo(() => {
-    if (!breakpoints) return []
-
     return breakpoints.queries.map(
       ({ breakpoint, maxW, minMaxQuery, minW }) => {
         const searchValue =

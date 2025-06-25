@@ -1,3 +1,5 @@
+"use client"
+
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
@@ -59,7 +61,10 @@ export const {
   PropsContext: FadeScalePropsContext,
   usePropsContext: useFadeScalePropsContext,
   withContext,
-} = createComponent<FadeScaleProps, FadeScaleStyle>("fadeScale", fadeScaleStyle)
+} = createComponent<FadeScaleProps, FadeScaleStyle>(
+  "fade-scale",
+  fadeScaleStyle,
+)
 
 /**
  * `FadeScale` is a component that gradually scales up to reveal or scales down to hide an element.

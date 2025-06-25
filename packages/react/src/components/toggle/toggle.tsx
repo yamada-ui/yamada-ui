@@ -1,3 +1,5 @@
+"use client"
+
 import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { IconButtonProps } from "../button"
 import type { UseInputBorderProps } from "../input"

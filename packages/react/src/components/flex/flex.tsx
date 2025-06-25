@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FlexStyle } from "./flex.style"
 import { createComponent } from "../../core"

@@ -23,7 +23,7 @@ export const Basic = () => {
       color="white"
       p="md"
       rounded="md"
-      transitionDuration="slower"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current breakpoint is "{breakpoint}"

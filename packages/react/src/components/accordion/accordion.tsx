@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { CollapseProps } from "../collapse"

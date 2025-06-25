@@ -1,3 +1,5 @@
+"use client"
+
 import { StarOff } from "lucide-react"
 import { component, Icon } from "../icon"
 

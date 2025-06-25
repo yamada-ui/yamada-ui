@@ -1,3 +1,5 @@
+"use client"
+
 import { BotOff } from "lucide-react"
 import { component, Icon } from "../icon"
 

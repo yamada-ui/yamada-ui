@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ProgressStyle } from "./progress.style"
 import type { UseProgressProps } from "./use-progress"

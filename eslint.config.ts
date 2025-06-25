@@ -36,10 +36,10 @@ const ignoresConfig: TSESLint.FlatConfig.Config = {
     "**/node_modules/**",
     "**/build/**",
     "**/bin/**",
+    "**/coverage/**",
     "**/pnpm-lock.yaml",
     "website/**",
     "playgrounds/**",
-    "coverage/**",
     "storybook-static/**",
     // TODO: Remove legacy-components
     "**/legacy-components/**",

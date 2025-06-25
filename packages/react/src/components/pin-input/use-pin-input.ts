@@ -90,7 +90,7 @@ export interface UsePinInputProps
   onComplete?: (value: string) => void
 }
 
-export const usePinInput = (props: UsePinInputProps) => {
+export const usePinInput = (props: UsePinInputProps = {}) => {
   const uuid = useId()
   const {
     props: {

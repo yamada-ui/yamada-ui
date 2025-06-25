@@ -1,16 +1,25 @@
-import type { ChangeEvent, FocusEventHandler } from "react"
-import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
-import { useCallback, useEffect, useId, useRef, useState } from "react"
+"use client"
+
+import type { ChangeEvent } from "react"
+import type { HTMLProps, Orientation, PropGetter } from "../../core"
+import type { FieldProps } from "../field"
+import { useCallback, useId } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { createDescendant } from "../../hooks/use-descendant"
-import { trackFocusVisible } from "../../hooks/use-focus-visible"
 import {
   ariaAttr,
+  createContext,
   dataAttr,
   handlerAll,
   mergeRefs,
-  useCallbackRef,
+  visuallyHiddenAttributes,
 } from "../../utils"
+
+export interface SegmentedControlContext
+  extends Omit<UseSegmentedControlReturn, "descendants" | "getRootProps"> {}
+
+export const [SegmentedControlContext, useSegmentedControlContext] =
+  createContext<SegmentedControlContext>({ name: "SegmentedControlContext" })
 
 export const { DescendantsContext, useDescendant, useDescendants } =
   createDescendant<HTMLInputElement>()
@@ -30,6 +39,12 @@ export interface UseSegmentedControlProps extends Omit<HTMLProps, "onChange"> {
    * @default false
    */
   disabled?: boolean
+  /**
+   * The orientation of the segmented control.
+   *
+   * @default 'horizontal'
+   */
+  orientation?: Orientation
   /**
    * If `true`, the segmented control will be readonly.
    *
@@ -51,166 +66,161 @@ export const useSegmentedControl = ({
   name,
   defaultValue,
   disabled,
+  orientation = "horizontal",
   readOnly,
   value: valueProp,
   onChange: onChangeProp,
   ...rest
-}: UseSegmentedControlProps) => {
+}: UseSegmentedControlProps = {}) => {
   const uuid = useId()
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [focusedIndex, setFocusedIndex] = useState<number>(-1)
-  const [focusVisible, setFocusVisible] = useState<boolean>(false)
-  const onChangeRef = useCallbackRef(onChangeProp)
   const [value, setValue] = useControllableState({
     defaultValue,
     value: valueProp,
-    onChange: onChangeRef,
+    onChange: onChangeProp,
   })
-
   const descendants = useDescendants()
 
   id ??= uuid
-  name ??= `segmented-control-${uuid}`
-
-  const onFocus = useCallback(
-    (index: number, skip: boolean) => {
-      if (disabled) return
-
-      if (skip) {
-        const next = descendants.enabledNextValue(index)
-
-        if (next) setFocusedIndex(next.index)
-      } else {
-        setFocusedIndex(index)
-      }
-    },
-    [descendants, disabled, setFocusedIndex],
-  )
-
-  const onChange = useCallback(
-    (ev: ChangeEvent<HTMLInputElement>) => {
-      if (disabled || readOnly) {
-        ev.preventDefault()
-
-        return
-      }
-
-      setValue(ev.target.value)
-    },
-    [disabled, readOnly, setValue],
-  )
-
-  const onBlur = useCallback(() => setFocusedIndex(-1), [])
-
-  useEffect(() => {
-    return trackFocusVisible(setFocusVisible)
-  }, [])
+  name ??= uuid
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => ({
+    (props) => ({
+      id,
       "aria-disabled": ariaAttr(disabled),
+      "aria-orientation": orientation,
+      "data-disabled": dataAttr(disabled),
+      "data-orientation": orientation,
       "data-readonly": dataAttr(readOnly),
       role: "radiogroup",
       ...rest,
       ...props,
-      id,
-      ref: mergeRefs(containerRef, ref),
-      onBlur: handlerAll(props.onBlur, onBlur),
     }),
-    [disabled, id, onBlur, readOnly, rest],
-  )
-
-  const getInputProps: RequiredPropGetter<
-    HTMLProps<"input">,
-    { index: number }
-  > = useCallback(
-    ({ index, ...props }) => {
-      const trulyDisabled = props.disabled ?? disabled
-      const trulyReadOnly = props.readOnly ?? readOnly
-      const checked = props.value === value
-
-      return {
-        ...props,
-        id: `${id}-${index}`,
-        type: "radio",
-        name,
-        style: {
-          border: "0px",
-          clip: "rect(0px, 0px, 0px, 0px)",
-          height: "1px",
-          margin: "-1px",
-          overflow: "hidden",
-          padding: "0px",
-          position: "absolute",
-          whiteSpace: "nowrap",
-          width: "1px",
-        },
-        "aria-disabled": ariaAttr(trulyDisabled),
-        "data-checked": dataAttr(checked),
-        "data-focus": dataAttr(index === focusedIndex),
-        "data-readonly": dataAttr(trulyReadOnly),
-        checked,
-        disabled: trulyDisabled || trulyReadOnly,
-        readOnly: trulyReadOnly,
-        onChange: handlerAll(props.onChange, (ev) =>
-          !trulyDisabled && !trulyReadOnly
-            ? onChange(ev as ChangeEvent<HTMLInputElement>)
-            : {},
-        ),
-      }
-    },
-    [disabled, focusedIndex, id, name, onChange, readOnly, value],
-  )
-
-  const getLabelProps: RequiredPropGetter<
-    HTMLProps<"label">,
-    {
-      index: number
-      value: string
-      disabled?: boolean
-      readOnly?: boolean
-    }
-  > = useCallback(
-    ({ index, ...props }) => {
-      const trulyDisabled = props.disabled ?? disabled
-      const trulyReadOnly = props.readOnly ?? readOnly
-      const checked = props.value === value
-      const focused = index === focusedIndex
-
-      return {
-        ...props,
-        "aria-disabled": ariaAttr(trulyDisabled),
-        "data-checked": dataAttr(checked),
-        "data-focus": dataAttr(focused),
-        "data-focus-visible": dataAttr(focused && focusVisible),
-        "data-readonly": dataAttr(trulyReadOnly),
-        onFocus: handlerAll(
-          props.onFocus as unknown as FocusEventHandler<HTMLLabelElement>,
-          () => onFocus(index, trulyDisabled || trulyReadOnly || false),
-        ),
-        ...(trulyDisabled || trulyReadOnly
-          ? {
-              _invalid: {},
-              _hover: {},
-              _active: {},
-              _focus: {},
-              _focusVisible: {},
-            }
-          : {}),
-      }
-    },
-    [disabled, focusVisible, focusedIndex, onFocus, readOnly, value],
+    [disabled, id, orientation, readOnly, rest],
   )
 
   return {
-    defaultValue,
+    id,
+    name,
     descendants,
+    disabled,
+    orientation,
+    readOnly,
     setValue,
     value,
-    getInputProps,
-    getLabelProps,
     getRootProps,
   }
 }
 
 export type UseSegmentedControlReturn = ReturnType<typeof useSegmentedControl>
+
+export interface UseSegmentedControlItemProps
+  extends HTMLProps<"label">,
+    Pick<FieldProps, "disabled" | "readOnly"> {
+  /**
+   * The value of the segmented control item.
+   */
+  value: string
+  /**
+   * Props for the input element.
+   */
+  inputProps?: HTMLProps<"input">
+}
+
+export const useSegmentedControlItem = ({
+  disabled,
+  readOnly,
+  value,
+  inputProps,
+  ...rest
+}: UseSegmentedControlItemProps) => {
+  const {
+    name,
+    disabled: rootDisabled,
+    orientation,
+    readOnly: rootReadOnly,
+    setValue,
+    value: selectedValue,
+  } = useSegmentedControlContext()
+  const { index, register } = useDescendant({ disabled: disabled || readOnly })
+  const checked = value === selectedValue
+  const trulyDisabled = disabled ?? rootDisabled
+  const trulyReadOnly = readOnly ?? rootReadOnly
+  const interactive = !(trulyReadOnly || trulyDisabled)
+
+  const onChange = useCallback(
+    (ev: ChangeEvent<HTMLInputElement>) => {
+      setValue(ev.target.value)
+    },
+    [setValue],
+  )
+
+  const getLabelProps: PropGetter<"label"> = useCallback(
+    (props) => ({
+      "aria-disabled": ariaAttr(trulyDisabled),
+      "aria-readonly": ariaAttr(trulyReadOnly),
+      "data-checked": dataAttr(checked),
+      "data-disabled": dataAttr(trulyDisabled),
+      "data-index": index.toString(),
+      "data-orientation": orientation,
+      "data-readonly": dataAttr(trulyReadOnly),
+      "data-root-disabled": dataAttr(rootDisabled),
+      "data-root-readonly": dataAttr(rootReadOnly),
+      ...props,
+      ...rest,
+    }),
+    [
+      orientation,
+      trulyDisabled,
+      index,
+      trulyReadOnly,
+      checked,
+      rootDisabled,
+      rootReadOnly,
+      rest,
+    ],
+  )
+
+  const getInputProps: PropGetter<"input"> = useCallback(
+    ({ ref, ...props } = {}) => ({
+      type: "radio",
+      name,
+      style: visuallyHiddenAttributes.style,
+      "aria-disabled": ariaAttr(trulyDisabled),
+      "aria-readonly": ariaAttr(trulyReadOnly),
+      "data-checked": dataAttr(checked),
+      "data-disabled": dataAttr(trulyDisabled),
+      "data-orientation": orientation,
+      "data-readonly": dataAttr(trulyReadOnly),
+      checked,
+      disabled: trulyDisabled || trulyReadOnly,
+      readOnly: trulyReadOnly,
+      tabIndex: interactive ? undefined : -1,
+      value,
+      ...inputProps,
+      ...props,
+      ref: mergeRefs(register, ref),
+      onChange: handlerAll(props.onChange, inputProps?.onChange, onChange),
+    }),
+    [
+      orientation,
+      name,
+      trulyDisabled,
+      trulyReadOnly,
+      checked,
+      interactive,
+      value,
+      inputProps,
+      register,
+      onChange,
+    ],
+  )
+
+  return {
+    getInputProps,
+    getLabelProps,
+  }
+}
+
+export type UseSegmentedControlItemReturn = ReturnType<
+  typeof useSegmentedControlItem
+>

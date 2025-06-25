@@ -1,15 +1,13 @@
+export * as SegmentedControl from "./namespace"
 export {
-  SegmentedControlButton,
+  SegmentedControlItem,
   SegmentedControlPropsContext,
   SegmentedControlRoot,
   useSegmentedControlPropsContext,
 } from "./segmented-control"
 export type {
-  SegmentedControlButtonProps,
-  SegmentedControlItem,
+  SegmentedControlItemProps,
   SegmentedControlRootProps,
 } from "./segmented-control"
-
 export * from "./segmented-control.style"
-
-export * as SegmentedControl from "./namespace"
+export * from "./use-segmented-control"

@@ -1,86 +1,101 @@
-import { defineComponentSlotStyle } from "../../core"
+import { defineComponentSlotStyle, focusRingStyle } from "../../core"
 
 export const segmentedControlStyle = defineComponentSlotStyle({
   base: {
-    button: {
+    item: {
+      "&:has(input:focus-visible)": {
+        ...focusRingStyle.outline,
+      },
       alignItems: "center",
-      color: ["blackAlpha.800", "whiteAlpha.800"],
+      color: "fg",
       cursor: "pointer",
       display: "inline-flex",
       flex: "1 1 0%",
       fontWeight: "medium",
       justifyContent: "center",
       position: "relative",
-      transitionDuration: "500ms",
-      transitionProperty: "color, box-shadow, opacity",
+      rounded: "md",
+      transitionDuration: "moderate",
+      transitionProperty: "color, opacity",
       whiteSpace: "nowrap",
       _checked: {
         anchorName: "--checked",
       },
-      _hover: {
-        opacity: 0.7,
-        _checked: {
-          opacity: 1,
-        },
+      _readOnly: { layerStyle: "readOnly", pointerEvents: "none" },
+      _disabled: {
+        layerStyle: "disabled",
+        "&[data-root-disabled]": { opacity: 1 },
       },
-      _focusVisible: {
-        boxShadow: "outline",
-      },
-      _readOnly: { cursor: "default" },
-      _disabled: { cursor: "not-allowed", opacity: 0.4 },
     },
     root: {
       alignItems: "center",
       anchorScope: "--checked",
-      bg: ["blackAlpha.100", "whiteAlpha.100"],
+      bg: ["bg.ghost", "bg.subtle"],
       display: "inline-flex",
       p: "1",
+      rounded: "lg",
       _before: {
-        boxShadow: "md",
-        height: "anchor-size(--checked height)",
+        bg: "bg.panel",
+        boxShadow: "xs",
+        h: "anchor-size(--checked height)",
         left: "anchor(--checked left)",
         pointerEvents: "none",
         position: "absolute",
+        rounded: "md",
         top: "anchor(--checked top)",
-        transitionDuration: "300ms",
-        transitionProperty: "left, width",
-        width: "anchor-size(--checked width)",
+        transitionDuration: "moderate",
+        transitionProperty: "top, left, width",
+        w: "anchor-size(--checked width)",
       },
-      _readOnly: { cursor: "default" },
-      _disabled: { cursor: "not-allowed" },
+      _dark: {
+        _before: {
+          bg: "bg.muted",
+        },
+      },
+      _readOnly: { layerStyle: "readOnly" },
+      _disabled: { layerStyle: "disabled" },
     },
   },
 
-  variants: {
-    basic: {
-      button: {
-        rounded: "md",
-        _checked: {
-          color: "colorScheme.contrast",
+  props: {
+    /**
+     * If `true`, the segmented control will be full rounded.
+     *
+     * @default false
+     */
+    fullRounded: {
+      true: {
+        item: {
+          rounded: "full",
         },
-      },
-      root: {
-        rounded: "lg",
-        _before: {
-          bg: "colorScheme.solid",
-          color: "colorScheme.contrast",
-          rounded: "md",
+        root: {
+          rounded: "full",
+          _before: {
+            rounded: "full",
+          },
         },
       },
     },
-    rounded: {
-      button: {
-        rounded: "full",
-        _checked: {
-          color: "colorScheme.contrast",
+    /**
+     * The orientation of the segmented control.
+     *
+     * @default 'horizontal'
+     */
+    orientation: {
+      horizontal: {
+        item: {
+          h: "full",
+        },
+        root: {
+          flexDirection: "row",
         },
       },
-      root: {
-        rounded: "full",
-        _before: {
-          bg: "colorScheme.solid",
-          color: "colorScheme.contrast",
-          rounded: "full",
+      vertical: {
+        item: {
+          w: "full",
+        },
+        root: {
+          flexDirection: "column",
         },
       },
     },
@@ -88,22 +103,37 @@ export const segmentedControlStyle = defineComponentSlotStyle({
 
   sizes: {
     sm: {
-      button: { fontSize: "sm", px: "2", py: "0.5" },
-      root: { minW: "xs" },
+      item: { fontSize: "sm", px: "3", _vertical: { minH: "7" } },
+      root: {
+        _horizontal: { h: "9", minW: "64" },
+      },
     },
     md: {
-      button: { fontSize: "md", px: "3", py: "1" },
-      root: { minW: "sm" },
+      item: { fontSize: "md", px: "3", _vertical: { minH: "8" } },
+      root: {
+        _horizontal: { h: "10", minW: "80" },
+        _vertical: {},
+      },
     },
     lg: {
-      button: { fontSize: "md", px: "4", py: "1.5" },
-      root: { minW: "md" },
+      item: { fontSize: "lg", px: "4", _vertical: { minH: "9" } },
+      root: {
+        _horizontal: { h: "11", minW: "96" },
+        _vertical: {},
+      },
+    },
+    xl: {
+      item: { fontSize: "xl", px: "5", _vertical: { minH: "10" } },
+      root: {
+        _horizontal: { h: "12", minW: "96" },
+        _vertical: {},
+      },
     },
   },
 
   defaultProps: {
     size: "md",
-    variant: "basic",
+    orientation: "horizontal",
   },
 })
 

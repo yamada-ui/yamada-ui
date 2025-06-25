@@ -1,29 +1,31 @@
-import type { ChangeEventHandler, ReactElement, Ref } from "react"
-import type {
-  HTMLProps,
-  HTMLStyledProps,
-  RequiredPropGetter,
-  ThemeProps,
-} from "../../core"
+"use client"
+
+import type { ReactNode } from "react"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { SegmentedControlStyle } from "./segmented-control.style"
-import type { UseSegmentedControlProps } from "./use-segmented-control"
+import type {
+  UseSegmentedControlItemProps,
+  UseSegmentedControlProps,
+} from "./use-segmented-control"
+import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { getValidChildren, mergeRefs } from "../../utils"
+import { useValue } from "../../hooks/use-value"
 import { segmentedControlStyle } from "./segmented-control.style"
 import {
   DescendantsContext,
-  useDescendant,
+  SegmentedControlContext,
   useSegmentedControl,
+  useSegmentedControlItem,
 } from "./use-segmented-control"
 
-export interface SegmentedControlItem extends SegmentedControlButtonProps {
-  label?: string
+interface SegmentedControlItem extends SegmentedControlItemProps {
+  label?: ReactNode
 }
 
 export interface SegmentedControlRootProps
-  extends Omit<HTMLStyledProps, "defaultValue" | "onChange" | "value">,
+  extends Omit<HTMLStyledProps, "defaultValue" | "onChange">,
     ThemeProps<SegmentedControlStyle>,
-    UseSegmentedControlProps {
+    Omit<UseSegmentedControlProps, "orientation"> {
   /**
    * If provided, generate segmented control buttons but based on items.
    *
@@ -32,133 +34,78 @@ export interface SegmentedControlRootProps
   items?: SegmentedControlItem[]
 }
 
-interface SegmentedControlContext {
-  getInputProps: RequiredPropGetter<HTMLProps<"input">, { index: number }>
-  getLabelProps: RequiredPropGetter<
-    HTMLProps<"label">,
-    {
-      index: number
-      value: string
-      disabled?: boolean
-      readOnly?: boolean
-    }
-  >
-}
-
 export const {
-  ComponentContext: SegmentedControlContext,
   PropsContext: SegmentedControlPropsContext,
-  useComponentContext: useSegmentedControlContext,
   usePropsContext: useSegmentedControlPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<
-  SegmentedControlRootProps,
-  SegmentedControlStyle,
-  SegmentedControlContext
->("segmented-control", segmentedControlStyle)
+} = createSlotComponent<SegmentedControlRootProps, SegmentedControlStyle>(
+  "segmented-control",
+  segmentedControlStyle,
+)
 
 /**
  * `SegmentedControl` is a component used for allowing users to select one option from multiple choices.
  *
  * @see https://yamada-ui.com/components/segmented-control
  */
-export const SegmentedControlRoot = withProvider<
-  "div",
-  SegmentedControlRootProps
->(({ children, items = [], ...rest }) => {
-  const {
-    defaultValue,
-    descendants,
-    setValue,
-    value,
-    getInputProps,
-    getLabelProps,
-    getRootProps,
-  } = useSegmentedControl(rest)
+export const SegmentedControlRoot = withProvider(
+  ({ children, items = [], orientation: orientationProp, ...rest }) => {
+    const computedOrientation = useValue(orientationProp)
+    const {
+      id,
+      name,
+      descendants,
+      disabled,
+      orientation,
+      readOnly,
+      setValue,
+      value,
+      getRootProps,
+    } = useSegmentedControl({ orientation: computedOrientation, ...rest })
+    const cloneChildren = useMemo(() => {
+      if (children) {
+        return children
+      } else {
+        return items.map(({ label, ...rest }, index) => (
+          <SegmentedControlItem key={index} {...rest}>
+            {label}
+          </SegmentedControlItem>
+        ))
+      }
+    }, [children, items])
+    const context = useMemo(
+      () => ({ id, name, disabled, orientation, readOnly, setValue, value }),
+      [id, name, disabled, readOnly, orientation, setValue, value],
+    )
 
-  const validChildren = getValidChildren(children)
-  let computedChildren: ReactElement<any>[] = []
-
-  if (!validChildren.length && items.length) {
-    computedChildren = items.map(({ label, value, ...props }, i) => (
-      <SegmentedControlButton key={i} value={value} {...props}>
-        {label}
-      </SegmentedControlButton>
-    ))
-  } else {
-    computedChildren = validChildren
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  if (value == null && defaultValue == null) {
-    for (const child of computedChildren) {
-      if (child.type !== SegmentedControlButton)
-        if (
-          (child.type as any).displayName !== SegmentedControlButton.displayName
-        )
-          continue
-
-      const value = child.props.value
-
-      setValue(value)
-
-      break
-    }
-  }
-
-  return (
-    <DescendantsContext value={descendants}>
-      <SegmentedControlContext value={{ getInputProps, getLabelProps }}>
-        <styled.div {...getRootProps()}>{computedChildren}</styled.div>
+    return (
+      <SegmentedControlContext value={context}>
+        <DescendantsContext value={descendants}>
+          <styled.div {...getRootProps()}>{cloneChildren}</styled.div>
+        </DescendantsContext>
       </SegmentedControlContext>
-    </DescendantsContext>
-  )
-}, "root")()
+    )
+  },
+  "root",
+  { transferProps: ["orientation"] },
+)()
 
-export interface SegmentedControlButtonProps
-  extends Omit<HTMLStyledProps<"label">, "onChange" | "ref">,
-    Pick<SegmentedControlRootProps, "disabled" | "readOnly"> {
-  /**
-   * The value of the segmented control button.
-   */
-  value: string
-  /**
-   * Ref of Input element.
-   */
-  ref?: Ref<HTMLInputElement>
-  /**
-   * The callback fired when any children radio is checked or unchecked.
-   */
-  onChange?: ChangeEventHandler<HTMLInputElement>
-}
+export interface SegmentedControlItemProps
+  extends HTMLStyledProps<"label">,
+    UseSegmentedControlItemProps {}
 
-export const SegmentedControlButton = withContext<
-  "input",
-  SegmentedControlButtonProps
->(({ ref, children, disabled, readOnly, value, onChange, ...rest }) => {
-  const { getInputProps, getLabelProps } = useSegmentedControlContext()
-  const { index, register } = useDescendant({
-    disabled: disabled || readOnly,
-  })
-  const props = {
-    disabled,
-    index,
-    readOnly,
-    value,
-  }
+export const SegmentedControlItem = withContext<
+  "label",
+  SegmentedControlItemProps
+>(({ children, ...rest }) => {
+  const { getInputProps, getLabelProps } = useSegmentedControlItem(rest)
 
   return (
-    <styled.label {...getLabelProps(props)} {...rest}>
-      <styled.input
-        {...getInputProps({
-          ref: mergeRefs(register, ref),
-          onChange,
-          ...props,
-        })}
-      />
+    <styled.label {...getLabelProps()}>
+      <styled.input {...getInputProps()} />
 
-      <styled.span zIndex="1">{children}</styled.span>
+      <styled.span>{children}</styled.span>
     </styled.label>
   )
-}, "button")()
+}, "item")()

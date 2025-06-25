@@ -50,7 +50,7 @@ export interface UseToggleProps<Y extends number | string = string>
 }
 
 export const useToggle = <Y extends number | string = string>(
-  props: UseToggleProps<Y>,
+  props: UseToggleProps<Y> = {},
 ) => {
   const {
     disabled: groupDisabled,

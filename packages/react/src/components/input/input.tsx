@@ -1,6 +1,7 @@
 "use client"
 
-import type { FC, HTMLStyledProps, ThemeProps } from "../../core"
+import type { FC } from "react"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { InputStyle } from "./input.style"
 import type { UseInputBorderProps } from "./use-input-border"

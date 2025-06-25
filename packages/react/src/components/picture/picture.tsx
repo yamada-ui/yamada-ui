@@ -1,4 +1,5 @@
-import type { FC, HTMLStyledProps, ThemeTokens } from "../../core"
+import type { FC } from "react"
+import type { HTMLStyledProps, ThemeTokens } from "../../core"
 import type { AnyString } from "../../utils"
 import type { ImageProps } from "../image"
 import { useCallback, useMemo } from "react"

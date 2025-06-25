@@ -46,14 +46,12 @@ export interface ComponentArgs
 
 export interface Component<Y extends As, D extends object = {}>
   extends ComponentArgs {
-  <M extends As = Y>(props: ComponentProps<Y, M, D>): React.ReactNode
+  <M extends As = Y>(
+    props: ComponentProps<Y, M, D>,
+  ): Promise<React.ReactNode> | React.ReactElement
 }
 
-export type FC<Y extends object = {}> = FunctionComponent<Y>
-
-export interface FunctionComponent<Y = {}> extends ComponentArgs {
-  (props: Y): React.ReactNode
-}
+export type GenericsComponent<Y extends Function> = ComponentArgs & Y
 
 export type As = React.ElementType
 

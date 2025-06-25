@@ -1,8 +1,7 @@
 "use client"
 
-import type { PropsWithChildren } from "react"
+import type { FC, PropsWithChildren } from "react"
 import type {
-  FC,
   HTMLProps,
   HTMLStyledProps,
   SimplePlacement,

@@ -19,7 +19,7 @@ import {
 import { useFieldProps } from "../field"
 import { useToggleGroupContext } from "./use-toggle-group"
 
-export interface UseToggleProps<Y extends number | string = string>
+export interface UseToggleProps<Y extends string = string>
   extends FieldProps,
     HTMLRefAttributes<"input">,
     Omit<HTMLProps<"button">, "onChange" | "ref" | "value"> {
@@ -49,7 +49,7 @@ export interface UseToggleProps<Y extends number | string = string>
   onChange?: (checked: boolean) => void
 }
 
-export const useToggle = <Y extends number | string = string>(
+export const useToggle = <Y extends string = string>(
   props: UseToggleProps<Y> = {},
 ) => {
   const { t } = useI18n("toggle")

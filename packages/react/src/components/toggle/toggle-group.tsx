@@ -1,7 +1,11 @@
 "use client"
 
 import type { ReactElement } from "react"
-import type { ComponentArgs, ThemeProps, WithoutThemeProps } from "../../core"
+import type {
+  GenericsComponent,
+  ThemeProps,
+  WithoutThemeProps,
+} from "../../core"
 import type { GroupProps } from "../group"
 import type { ToggleProps } from "./toggle"
 import type { ToggleStyle } from "./toggle.style"
@@ -16,9 +20,8 @@ import { ToggleGroupContext, useToggleGroup } from "./use-toggle-group"
  *
  * @see https://yamada-ui.com/components/toggle
  */
-export interface ToggleGroupProps<
-  Y extends (number | string)[] | number | string = string,
-> extends Omit<
+export interface ToggleGroupProps<Y extends string | string[] = string>
+  extends Omit<
       WithoutThemeProps<GroupProps, ToggleStyle>,
       "defaultValue" | "onChange" | "value"
     >,
@@ -26,9 +29,7 @@ export interface ToggleGroupProps<
     ThemeProps<ToggleStyle> {}
 
 export const ToggleGroup = component<"div", ToggleGroupProps>(
-  <Y extends (number | string)[] | number | string = string>(
-    props: ToggleGroupProps<Y>,
-  ) => {
+  (props: ToggleGroupProps) => {
     const [, { colorScheme, size, variant, attached, ...rest }] =
       useRootComponentProps(props, "group", {
         transferProps: ["size", "variant", "colorScheme"],
@@ -70,8 +71,8 @@ export const ToggleGroup = component<"div", ToggleGroupProps>(
     )
   },
   "group",
-)() as ComponentArgs & {
-  <Y extends (number | string)[] | number | string = string>(
+)() as GenericsComponent<{
+  <Y extends string | string[] = string>(
     props: ToggleGroupProps<Y>,
   ): ReactElement
-}
+}>

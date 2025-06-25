@@ -1,6 +1,7 @@
 "use client"
 
-import type { FC, ThemeProps, WithoutThemeProps } from "../../core"
+import type { FC } from "react"
+import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { GroupProps } from "../group"
 import type { ButtonProps } from "./button"
 import type { ButtonStyle } from "./button.style"

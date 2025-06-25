@@ -1,7 +1,7 @@
 "use client"
 
-import type { Key } from "react"
-import type { FC, ThemeProps } from "../../core"
+import type { FC, Key } from "react"
+import type { ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"
 import type { RippleStyle } from "./ripple.style"
 import type { RippleOptions } from "./use-ripple"

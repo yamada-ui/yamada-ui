@@ -1,6 +1,6 @@
 "use client"
 
-import type { FC } from "react"
+import type { FC, FunctionComponent } from "react"
 import type { AnyString, Dict, Merge } from "../../utils"
 import type { CSSObject, CSSSlotObject } from "../css"
 import type {
@@ -13,7 +13,6 @@ import type { StyledOptions } from "../system"
 import type {
   As,
   DOMElement,
-  FunctionComponent,
   HTMLStyledProps,
   Component as OriginalComponent,
 } from "./index.types"

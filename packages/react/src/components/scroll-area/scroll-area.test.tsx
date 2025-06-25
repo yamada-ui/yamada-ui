@@ -1,4 +1,4 @@
-import type { FC } from "../../core"
+import type { FC } from "react"
 import { ScrollArea } from "."
 import { a11y, act, fireEvent, render, screen, waitFor } from "../../../test"
 

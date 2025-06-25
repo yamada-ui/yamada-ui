@@ -1,6 +1,7 @@
 "use client"
 
-import type { FC, HTMLStyledProps, StyleValue } from "../../core"
+import type { FC } from "react"
+import type { HTMLStyledProps, StyleValue } from "../../core"
 import type { AspectRatioStyle } from "./aspect-ratio.style"
 import { Children } from "react"
 import { createComponent } from "../../core"

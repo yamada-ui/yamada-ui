@@ -24,7 +24,8 @@ export const [SegmentedControlContext, useSegmentedControlContext] =
 export const { DescendantsContext, useDescendant, useDescendants } =
   createDescendant<HTMLInputElement>()
 
-export interface UseSegmentedControlProps extends Omit<HTMLProps, "onChange"> {
+export interface UseSegmentedControlProps<Y extends string = string>
+  extends Omit<HTMLProps, "onChange"> {
   /**
    * The HTML `name` attribute used for forms.
    */
@@ -32,7 +33,7 @@ export interface UseSegmentedControlProps extends Omit<HTMLProps, "onChange"> {
   /**
    * The initial value of the segmented control.
    */
-  defaultValue?: string
+  defaultValue?: Y
   /**
    * If `true`, the segmented control will be disabled.
    *
@@ -54,14 +55,14 @@ export interface UseSegmentedControlProps extends Omit<HTMLProps, "onChange"> {
   /**
    * The value of the segmented control.
    */
-  value?: string
+  value?: Y
   /**
    * The callback fired when any children radio is checked or unchecked.
    */
-  onChange?: (value: string) => void
+  onChange?: (value: Y) => void
 }
 
-export const useSegmentedControl = ({
+export const useSegmentedControl = <Y extends string = string>({
   id,
   name,
   defaultValue,
@@ -71,7 +72,7 @@ export const useSegmentedControl = ({
   value: valueProp,
   onChange: onChangeProp,
   ...rest
-}: UseSegmentedControlProps = {}) => {
+}: UseSegmentedControlProps<Y> = {}) => {
   const uuid = useId()
   const [value, setValue] = useControllableState({
     defaultValue,
@@ -113,26 +114,26 @@ export const useSegmentedControl = ({
 
 export type UseSegmentedControlReturn = ReturnType<typeof useSegmentedControl>
 
-export interface UseSegmentedControlItemProps
+export interface UseSegmentedControlItemProps<Y extends string = string>
   extends HTMLProps<"label">,
     Pick<FieldProps, "disabled" | "readOnly"> {
   /**
    * The value of the segmented control item.
    */
-  value: string
+  value: Y
   /**
    * Props for the input element.
    */
   inputProps?: HTMLProps<"input">
 }
 
-export const useSegmentedControlItem = ({
+export const useSegmentedControlItem = <Y extends string = string>({
   disabled,
   readOnly,
   value,
   inputProps,
   ...rest
-}: UseSegmentedControlItemProps) => {
+}: UseSegmentedControlItemProps<Y>) => {
   const {
     name,
     disabled: rootDisabled,

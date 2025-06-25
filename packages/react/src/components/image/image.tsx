@@ -1,6 +1,7 @@
 "use client"
 
-import type { CSSProps, FC, HTMLStyledProps, ThemeProps } from "../../core"
+import type { FC } from "react"
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ImageStyle } from "./image.style"
 import { createComponent } from "../../core"
 import { imageStyle } from "./image.style"

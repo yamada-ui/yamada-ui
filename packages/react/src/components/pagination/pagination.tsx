@@ -1,8 +1,7 @@
 "use client"
 
-import type { ReactNode } from "react"
+import type { FC, ReactNode } from "react"
 import type {
-  FC,
   HTMLProps,
   HTMLStyledProps,
   StyleValue,

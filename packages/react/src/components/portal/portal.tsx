@@ -1,7 +1,6 @@
 "use client"
 
-import type { PropsWithChildren, RefObject } from "react"
-import type { FC } from "../../core"
+import type { FC, PropsWithChildren, RefObject } from "react"
 import type { RootNode } from "../../core"
 import { Children, useEffect, useState } from "react"
 import { createPortal } from "react-dom"

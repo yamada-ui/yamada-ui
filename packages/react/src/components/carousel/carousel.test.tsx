@@ -1,4 +1,4 @@
-import type { FC } from "../../core"
+import type { FC } from "react"
 import { Carousel } from "."
 import { a11y, fireEvent, render, screen } from "../../../test"
 

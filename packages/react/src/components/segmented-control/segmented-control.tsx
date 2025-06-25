@@ -1,7 +1,7 @@
 "use client"
 
-import type { ReactNode } from "react"
-import type { HTMLStyledProps, ThemeProps } from "../../core"
+import type { ReactElement, ReactNode } from "react"
+import type { GenericsComponent, HTMLStyledProps, ThemeProps } from "../../core"
 import type { SegmentedControlStyle } from "./segmented-control.style"
 import type {
   UseSegmentedControlItemProps,
@@ -22,10 +22,10 @@ interface SegmentedControlItem extends SegmentedControlItemProps {
   label?: ReactNode
 }
 
-export interface SegmentedControlRootProps
+export interface SegmentedControlRootProps<Y extends string = string>
   extends Omit<HTMLStyledProps, "defaultValue" | "onChange">,
     ThemeProps<SegmentedControlStyle>,
-    Omit<UseSegmentedControlProps, "orientation"> {
+    Omit<UseSegmentedControlProps<Y>, "orientation"> {
   /**
    * If provided, generate segmented control buttons but based on items.
    *
@@ -89,11 +89,13 @@ export const SegmentedControlRoot = withProvider(
   },
   "root",
   { transferProps: ["orientation"] },
-)()
+)() as GenericsComponent<{
+  <Y extends string = string>(props: SegmentedControlRootProps<Y>): ReactElement
+}>
 
-export interface SegmentedControlItemProps
+export interface SegmentedControlItemProps<Y extends string = string>
   extends HTMLStyledProps<"label">,
-    UseSegmentedControlItemProps {}
+    UseSegmentedControlItemProps<Y> {}
 
 export const SegmentedControlItem = withContext<
   "label",
@@ -108,4 +110,6 @@ export const SegmentedControlItem = withContext<
       <styled.span>{children}</styled.span>
     </styled.label>
   )
-}, "item")()
+}, "item")() as GenericsComponent<{
+  <Y extends string = string>(props: SegmentedControlItemProps<Y>): ReactElement
+}>

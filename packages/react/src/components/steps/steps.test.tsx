@@ -1,4 +1,4 @@
-import type { FC } from "../../core"
+import type { FC } from "react"
 import { useMemo } from "react"
 import { Steps } from "."
 import { a11y, render, screen } from "../../../test"

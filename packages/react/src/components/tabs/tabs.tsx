@@ -1,7 +1,7 @@
 "use client"
 
-import type { PropsWithChildren, ReactNode } from "react"
-import type { FC, HTMLStyledProps, ThemeProps } from "../../core"
+import type { FC, PropsWithChildren, ReactNode } from "react"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { UseLazyMountProps } from "../../hooks/use-lazy-mount"
 import type { TabsStyle } from "./tabs.style"
 import type { UseTabPanelProps, UseTabProps, UseTabsProps } from "./use-tabs"

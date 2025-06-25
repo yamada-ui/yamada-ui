@@ -1,4 +1,4 @@
-import type { FC } from "../../core"
+import type { FC } from "react"
 import { a11y, render, screen } from "../../../test"
 import { Button } from "../button"
 import { Modal } from "./"

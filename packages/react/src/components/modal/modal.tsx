@@ -1,7 +1,7 @@
 "use client"
 
-import type { PropsWithChildren, ReactNode } from "react"
-import type { FC, HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
+import type { FC, PropsWithChildren, ReactNode } from "react"
+import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ButtonProps } from "../button"
 import type { CloseButtonProps } from "../button"
 import type { FocusLockProps } from "../focus-lock"

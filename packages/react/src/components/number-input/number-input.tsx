@@ -1,11 +1,7 @@
 "use client"
 
-import type {
-  FC,
-  HTMLStyledProps,
-  ThemeProps,
-  WithoutThemeProps,
-} from "../../core"
+import type { FC } from "react"
+import type { HTMLStyledProps, ThemeProps, WithoutThemeProps } from "../../core"
 import type { InputProps } from "../input"
 import type { NumberInputStyle } from "./number-input.style"
 import type { UseNumberInputProps } from "./use-number-input"

@@ -1,8 +1,7 @@
 "use client"
 
-import type { ForwardedRef, ReactElement } from "react"
+import type { FC, ForwardedRef, ReactElement } from "react"
 import type {
-  FC,
   HTMLStyledProps,
   HTMLStyledPropsWithoutAs,
   ThemeProps,

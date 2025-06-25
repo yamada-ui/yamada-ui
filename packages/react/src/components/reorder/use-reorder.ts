@@ -94,7 +94,7 @@ export const useReorder = <Y = string>({
   onChange,
   onCompleteChange,
   ...rest
-}: UseReorderProps<Y>) => {
+}: UseReorderProps<Y> = {}) => {
   const axis = orientation === "vertical" ? "y" : "x"
   const validChildren = useMemo(() => getValidChildren(children), [children])
   const hasChildren = !!validChildren.length

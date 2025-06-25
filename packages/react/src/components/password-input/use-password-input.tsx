@@ -28,7 +28,7 @@ export interface UsePasswordInputProps extends HTMLProps<"input">, FieldProps {
   onVisibleChange?: (visible: boolean) => void
 }
 
-export const usePasswordInput = (props: UsePasswordInputProps) => {
+export const usePasswordInput = (props: UsePasswordInputProps = {}) => {
   const {
     props: {
       defaultVisible,

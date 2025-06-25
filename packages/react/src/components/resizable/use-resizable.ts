@@ -120,7 +120,7 @@ export const useResizable = ({
   groupProps = {},
   onLayout,
   ...rest
-}: UseResizableProps) => {
+}: UseResizableProps = {}) => {
   const controlRef = useRef<ResizableGroupControl>(null)
   const uuid = useId()
 

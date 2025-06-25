@@ -95,7 +95,7 @@ export interface UseNumberInputProps
   parse?: (value: string) => string
 }
 
-export const useNumberInput = (props: UseNumberInputProps) => {
+export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const {
     props: {
       allowMouseWheel,

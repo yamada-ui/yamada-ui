@@ -9,6 +9,7 @@ export const colors = defineSemanticTokens.colors({
     contrast: ["#171717", "#ededed"],
     emphasized: ["black.300", "white.300"],
     error: ["error.50", "error.950"],
+    ghost: ["black.50", "white.50"],
     info: ["info.50", "info.950"],
     muted: ["black.200", "white.200"],
     overlay: "blackAlpha.600",

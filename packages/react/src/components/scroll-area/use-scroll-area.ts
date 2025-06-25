@@ -32,7 +32,7 @@ export const useScrollArea = ({
   scrollHideDelay = 1000,
   onScrollPositionChange,
   ...rest
-}: UseScrollAreaProps) => {
+}: UseScrollAreaProps = {}) => {
   const [isHovered, setIsHovered] = useState<boolean>(false)
   const [isScrolling, setIsScrolling] = useState<boolean>(false)
   const isAlways = type === "always"

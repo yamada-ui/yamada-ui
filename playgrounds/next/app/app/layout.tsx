@@ -1,4 +1,11 @@
 import type { Metadata } from "next"
+import {
+  colorModeManager,
+  ColorModeScript,
+  themeSchemeManager,
+  ThemeSchemeScript,
+  UIProvider,
+} from "@yamada-ui/react"
 import { Inter } from "next/font/google"
 
 const inter = Inter({
@@ -20,8 +27,18 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
+        <ColorModeScript type="cookie" />
+        <ThemeSchemeScript type="cookie" />
+
+        <UIProvider
+          colorModeManager={colorModeManager.cookieStorage}
+          themeSchemeManager={themeSchemeManager.cookieStorage}
+        >
+          {children}
+        </UIProvider>
+      </body>
     </html>
   )
 }

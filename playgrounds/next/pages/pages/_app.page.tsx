@@ -1,5 +1,9 @@
 import type { AppProps } from "next/app"
-import { UIProvider } from "@yamada-ui/react"
+import {
+  createColorModeManager,
+  createThemeSchemeManager,
+  UIProvider,
+} from "@yamada-ui/react"
 import { Inter } from "next/font/google"
 import Head from "next/head"
 
@@ -11,6 +15,10 @@ const inter = Inter({
 })
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { cookies } = pageProps
+  const colorModeManager = createColorModeManager("ssr", cookies)
+  const themeSchemeManager = createThemeSchemeManager("ssr", cookies)
+
   return (
     <>
       <Head>
@@ -22,7 +30,10 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
 
-      <UIProvider>
+      <UIProvider
+        colorModeManager={colorModeManager}
+        themeSchemeManager={themeSchemeManager}
+      >
         <Component {...{ ...pageProps, inter }} />
       </UIProvider>
     </>

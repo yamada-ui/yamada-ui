@@ -14,8 +14,7 @@ import {
   omitObject,
   splitObject,
 } from "../../utils"
-import { conditionProperties } from "../conditions"
-import { styleProperties } from "../styles"
+import { conditionProperties, styleProperties } from "../css"
 
 type MergeAll<Y extends Dict[]> = Y extends [infer M]
   ? M

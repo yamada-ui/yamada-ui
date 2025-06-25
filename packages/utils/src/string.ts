@@ -114,7 +114,9 @@ export function transformSize<Y = string>(
 }
 
 export function toCamelCase(value: AnyString): string {
-  return value.toLowerCase().replace(/[_-](.)/g, (_, val) => val.toUpperCase())
+  return value
+    .replace(/[_-](.)/g, (_, val) => val.toUpperCase())
+    .replace(/^(.)/, (_, val) => val.toLowerCase())
 }
 
 export function toPascalCase(value: AnyString): string {
@@ -136,4 +138,13 @@ export function toTitleCase(value: AnyString): string {
     .replace(/[_-](.)/g, (_, val) => ` ${val.toUpperCase()}`)
     .replace(/^./, (str) => str.toUpperCase())
     .trim()
+}
+
+export function bem(block: string, element?: string, modifier?: string) {
+  let className = block
+
+  if (element) className += `__${element}`
+  if (modifier) className += `--${modifier}`
+
+  return className
 }

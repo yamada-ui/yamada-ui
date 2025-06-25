@@ -1,14 +1,15 @@
 import type { Dict } from "../../utils"
-import type { StyleConfig } from "../config"
-import type { StyleProperty, VariableLengthProperty } from "../styles"
-import type { StyledTheme, UsageTheme } from "../theme"
-import type { Breakpoints } from "./breakpoint"
+import type { Breakpoints, System, UsageTheme } from "../system"
+import type { StyleConfig } from "./config"
 import type { CSSObjectOrFunction } from "./index.types"
+import type { StyleProperty, VariableLengthProperty } from "./styles"
+import type { TransformOptions } from "./utils"
 import { isArray, isObject, isString, merge, runIfFn } from "../../utils"
-import { conditions, getCondition } from "../conditions"
-import { colorMix, isCSSToken } from "../config"
-import { styles, variableLengthProperties } from "../styles"
-import { getColorSchemeVar, getVar, transformInterpolation } from "./var"
+import { getColorSchemeVar, getVar, transformInterpolation } from "../system"
+import { colorMix } from "./color-mix"
+import { conditions, getCondition } from "./conditions"
+import { styles, variableLengthProperties } from "./styles"
+import { isCSSToken } from "./utils"
 
 function isVariableLength(key: string): boolean {
   return variableLengthProperties.includes(key as VariableLengthProperty)
@@ -142,12 +143,8 @@ function transformConditionalObject(breakpoints: Breakpoints) {
   }
 }
 
-export function transformConditionalValue(theme: StyledTheme<UsageTheme>) {
+export function transformConditionalValue({ breakpoints }: System) {
   return function (key: string, value: any) {
-    const breakpoints = theme.__breakpoints
-
-    if (!breakpoints) return { [key]: value }
-
     if (isArray(value)) {
       return transformColorModeArray(breakpoints)(key, value)
     } else if (isConditionalObject(breakpoints)(value)) {
@@ -158,19 +155,17 @@ export function transformConditionalValue(theme: StyledTheme<UsageTheme>) {
   }
 }
 
-function expandCSS(theme: StyledTheme<UsageTheme>) {
+function expandCSS(system: System) {
   return function (css: Dict): Dict {
     let computedCSS: Dict = {}
 
     for (let [key, value] of Object.entries(css)) {
-      value = runIfFn(value, theme)
-
       if (value == null) continue
 
       if (!isVariableLength(key)) {
         computedCSS = merge(
           computedCSS,
-          transformConditionalValue(theme)(key, value),
+          transformConditionalValue(system)(key, value),
         )
       } else {
         computedCSS = merge(computedCSS, { [key]: value })
@@ -181,17 +176,17 @@ function expandCSS(theme: StyledTheme<UsageTheme>) {
   }
 }
 
-function valueToVar(theme: StyledTheme<UsageTheme>) {
+function valueToVar(system: System) {
   return function (prop: string, value: any) {
     const result = transformInterpolation(
       value,
       function (value: string, fallbackValue?: string) {
         if (value.includes("colorScheme.")) {
-          return getColorSchemeVar(theme)(value)
+          return getColorSchemeVar(system)(value)
         } else if (value.includes("colors.")) {
-          return colorMix(value, { fallback: fallbackValue, theme })
-        } else if (isCSSToken(theme)(value)) {
-          return theme.__cssMap![value]!.ref
+          return colorMix(value, { fallback: fallbackValue, system })
+        } else if (isCSSToken(system)(value)) {
+          return system.cssMap![value]!.ref
         } else {
           return getVar(value, fallbackValue)
         }
@@ -200,11 +195,11 @@ function valueToVar(theme: StyledTheme<UsageTheme>) {
 
     if (prop.startsWith("--") && isString(result)) {
       if (result.includes("colorScheme.")) {
-        return getColorSchemeVar(theme)(result)
+        return getColorSchemeVar(system)(result)
       } else if (result.includes("colors.")) {
-        return colorMix(result, { theme })
-      } else if (isCSSToken(theme)(result)) {
-        return theme.__cssMap![result]!.ref
+        return colorMix(result, { system })
+      } else if (isCSSToken(system)(result)) {
+        return system.cssMap![result]!.ref
       } else {
         return result
       }
@@ -251,23 +246,29 @@ export function getStyle(prop: string) {
   return style === true ? { properties: [prop] } : style
 }
 
-export function css(theme: StyledTheme<UsageTheme>) {
+export function css(system: System, theme: UsageTheme = {}) {
   return function (cssOrFn: CSSObjectOrFunction) {
     function createCSS(cssOrFn: CSSObjectOrFunction): Dict {
-      const cssObj = runIfFn(cssOrFn, theme)
-      const computedCSS = expandCSS(theme)(cssObj)
+      const cssObj = runIfFn(cssOrFn, system)
+      const computedCSS = expandCSS(system)(cssObj)
 
       let prev: Dict = {}
 
       for (let [prop, value] of Object.entries(computedCSS)) {
-        value = valueToVar(theme)(prop, value)
+        value = valueToVar(system)(prop, value)
 
         if (value == null) continue
 
         prop = getCondition(prop)
 
         const style = getStyle(prop)
-        const options = { css, prev, properties: style?.properties, theme }
+        const options: TransformOptions = {
+          css,
+          prev,
+          properties: style?.properties,
+          system,
+          theme,
+        }
 
         if (isObject(value)) {
           value = style?.transform?.(value, options) ?? value

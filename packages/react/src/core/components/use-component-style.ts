@@ -1,8 +1,8 @@
+"use client"
+
 import type { Dict } from "../../utils"
 import type {
-  Breakpoints,
   ColorModeArray,
-  CreateLayersReturn,
   CSSModifierObject,
   CSSObject,
   CSSPropObject,
@@ -11,19 +11,21 @@ import type {
   StyleValueWithCondition,
 } from "../css"
 import type {
+  Breakpoints,
   ComponentCompound,
   ComponentSlotStyle,
   ComponentStyle,
+  Layers,
   LayerScheme,
   ThemeProps,
   WithoutThemeProps,
-} from "../theme"
+} from "../system"
 import type { ComponentSlot, ComponentSlotName } from "./create-component"
 import type { HTMLStyledProps } from "./index.types"
 import { useRef } from "react"
 import isEqual from "react-fast-compare"
-import { useTheme } from "../../providers/theme-provider"
 import {
+  bem,
   cx,
   isArray,
   isBooleanish,
@@ -35,9 +37,8 @@ import {
   toArray,
   toKebabCase,
 } from "../../utils"
-import { conditions, getCondition } from "../conditions"
-import { mergeCSS } from "../css"
-import { useColorSchemeContext } from "../styled"
+import { conditions, getCondition, mergeCSS } from "../css"
+import { useColorSchemeContext, useSystem } from "../system"
 import { isEqualProps } from "./props"
 
 type Style<Y extends boolean = false> = Y extends false
@@ -48,7 +49,7 @@ type MergedStyle = CSSModifierObject | CSSModifierObject<CSSSlotObject>
 
 interface GetStyleOptions
   extends Partial<Breakpoints>,
-    Pick<Partial<CreateLayersReturn>, "wrap"> {
+    Pick<Partial<Layers>, "wrap"> {
   hasSlot?: boolean
   selectors?: (string | undefined)[]
 }
@@ -91,7 +92,7 @@ function getStyle<Y extends boolean = false>(
 }
 
 function getColorModeStyle<Y extends boolean = false>(
-  value: ColorModeArray<number | string>,
+  value: ColorModeArray<string>,
   mergedStyle: MergedStyle,
 ) {
   return function ({ selectors = [], ...rest }: GetStyleOptions) {
@@ -112,7 +113,7 @@ function getColorModeStyle<Y extends boolean = false>(
 }
 
 function getConditionStyle<Y extends boolean = false>(
-  value: ResponsiveWithConditionObject<number | string>,
+  value: ResponsiveWithConditionObject<string>,
   mergedStyle: MergedStyle,
 ) {
   return function (options: GetStyleOptions) {
@@ -155,7 +156,7 @@ function getConditionStyle<Y extends boolean = false>(
 }
 
 function getModifierStyle<Y extends boolean = false>(
-  value: StyleValueWithCondition<number | string> | undefined,
+  value: StyleValueWithCondition<string> | undefined,
   mergedStyle: MergedStyle,
 ) {
   return function (options: GetStyleOptions): Style<Y> | undefined {
@@ -242,24 +243,31 @@ function getCompoundStyle<Y extends boolean = false>(
   }
 }
 
-export function getSlotClassName<Y extends number | string | symbol>(
+export function getSlotClassName<Y extends string>(
   className?: string,
   slot?: ComponentSlot<Y>,
 ) {
   if (!className || !slot) return className
 
   if (isArray(slot)) {
-    return `${className}__${toKebabCase(slot[0] as string)} ${className}__${slot.map((value) => toKebabCase(value as string)).join("--")}`
-  } else if (isObject(slot)) {
-    const resolvedSlot = toArray(slot.slot)
+    const [element, modifier] = slot.map((value) =>
+      toKebabCase(value as string),
+    )
 
-    return `${className}__${toKebabCase(resolvedSlot[0] as string)} ${className}__${resolvedSlot.map((value) => toKebabCase(value as string)).join("--")}`
+    return cx(bem(className, element), bem(className, element, modifier))
+  } else if (isObject(slot)) {
+    const slotArray = toArray(slot.slot)
+    const [element, modifier] = slotArray.map((value) =>
+      toKebabCase(value as string),
+    )
+
+    return cx(bem(className, element), bem(className, element, modifier))
   } else {
-    return `${className}__${toKebabCase(slot as string)}`
+    return bem(className, toKebabCase(slot as string))
   }
 }
 
-function getSlotCSS<Y extends number | string | symbol>(
+function getSlotCSS<Y extends string>(
   slot?: ComponentSlot<Y>,
   slotCSS?: CSSSlotObject<Y>,
 ): CSSObject[] {
@@ -278,7 +286,7 @@ function getSlotCSS<Y extends number | string | symbol>(
   }
 }
 
-export function mergeSlotCSS<Y extends number | string | symbol>(
+export function mergeSlotCSS<Y extends string>(
   slot?: ComponentSlot<Y>,
   slotCSS?: CSSSlotObject<Y>,
   css?: CSSObject | CSSObject[],
@@ -326,7 +334,7 @@ function wrapStyle<Y extends boolean = false>(
 }
 
 function getHasAtRuleStyle(css?: CSSObject | CSSObject[]) {
-  return (getAtRule?: CreateLayersReturn["getAtRule"]) => {
+  return (getAtRule?: Layers["getAtRule"]) => {
     let hasVariant = false
     let hasSize = false
 
@@ -390,10 +398,10 @@ function useStyle<
     transferProps,
   }: UseStyleOptions<Y, M, D, H> = {},
 ): [Style<H>, WithoutThemeProps<Y, M, D>] {
-  const { theme } = useTheme()
-  const { getAtRule, wrap } = theme.__layers ?? {}
+  const system = useSystem()
+  const { getAtRule, wrap } = system.layers
   const rootColorScheme = useColorSchemeContext()
-  const options = { ...theme.__breakpoints, hasSlot, wrap }
+  const options = { ...system.breakpoints, hasSlot, wrap }
 
   const propsRef = useRef<Dict>({})
   const styleRef = useRef<Style<H> | undefined>(undefined)

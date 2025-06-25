@@ -148,7 +148,7 @@ export async function generateStyles(
   const standardStyles: string[] = []
   const shorthandStyles: string[] = []
   const pseudoStyles: string[] = []
-  const uiStyles: string[] = []
+  const styledStyles: string[] = []
   const atRuleStyles: string[] = []
   const styleProps: string[] = []
   const variableLengthProps: string[] = []
@@ -308,7 +308,7 @@ export async function generateStyles(
     addStyles(entry, standardStyles),
   )
   Object.entries<StyleConfig>(styledProps).forEach((entry) =>
-    addStyles(entry, uiStyles),
+    addStyles(entry, styledStyles),
   )
   Object.entries<StyleConfig>(atRuleProps).forEach((entry) =>
     addStyles(entry, atRuleStyles, true),
@@ -333,12 +333,12 @@ export async function generateStyles(
 
   const content = `
     import type * as CSS from "csstype"
-    import type { AnyString } from "../utils"
+    import type { AnyString } from "../../utils"
+    import type { ColorScheme, ThemeTokens } from "../system"
     import type { StyleConfigs } from "./config"
-    import type { CSSObject, StyleValueWithCondition } from "./css"
-    import type { ColorScheme, ThemeToken, ThemeTokens } from "./theme"
+    import type { CSSObject, StyleValueWithCondition } from "./index.types"
     import { transforms } from "./config"
-    import { pipe } from "./config/utils"
+    import { pipe } from "./utils"
 
     export type StandardStyleProperty = keyof typeof standardStyles
 
@@ -358,10 +358,10 @@ export async function generateStyles(
       ${pseudoStyles.join(",\n")}
     } as const satisfies StyleConfigs
 
-    export type UIStyleProperty = keyof typeof uiStyles
+    export type StyledStyleProperty = keyof typeof styledStyles
 
-    export const uiStyles = {
-      ${uiStyles.join(",\n")}
+    export const styledStyles = {
+      ${styledStyles.join(",\n")}
     } as const satisfies StyleConfigs
 
     export type AtRuleStyleProperty = keyof typeof atRuleStyles
@@ -372,7 +372,7 @@ export async function generateStyles(
 
     export type Styles = typeof styles
 
-    export const styles = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...uiStyles, ...atRuleStyles } as const satisfies StyleConfigs
+    export const styles = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...styledStyles, ...atRuleStyles } as const satisfies StyleConfigs
 
     export type StyleProperty = keyof typeof styles
 

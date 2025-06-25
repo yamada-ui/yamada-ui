@@ -22,7 +22,7 @@ import { features } from "web-features"
 import { excludeProps } from "./exclude-props"
 import { generateStyles } from "./styles"
 
-export const OUT_PATH = "packages/react/src/core/styles.ts"
+export const OUT_PATH = "packages/react/src/core/css/styles.ts"
 
 export type Properties = CSSProperties | StyledProperties
 export type CSSProperties = keyof CSS.PropertiesFallback

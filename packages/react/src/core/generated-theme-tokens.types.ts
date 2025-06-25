@@ -1,4 +1,4 @@
-import type { UsageThemeTokens } from "./theme"
+import type { UsageThemeTokens } from "./system"
 
 export interface GeneratedThemeTokens extends UsageThemeTokens {
   apply: never

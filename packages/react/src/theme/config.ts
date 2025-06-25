@@ -8,7 +8,7 @@ import { defineConfig } from "../core"
 export const config = defineConfig({
   css: { varPrefix: "ui" },
   breakpoint: { direction: "down", identifier: "@media screen" },
-  initialColorMode: "light",
-  initialThemeScheme: "base",
+  defaultColorMode: "light",
+  defaultThemeScheme: "base",
   theme: { responsive: true },
 })

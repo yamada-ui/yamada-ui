@@ -319,6 +319,9 @@ importers:
       '@yamada-ui/utils':
         specifier: workspace:*
         version: link:../utils
+      color2k:
+        specifier: ^2.0.3
+        version: 2.0.3
       copy-to-clipboard:
         specifier: 3.3.3
         version: 3.3.3

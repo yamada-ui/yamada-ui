@@ -26,7 +26,7 @@
     "vite": "pnpm --prefix playgrounds/vite",
     "remix": "pnpm --prefix playgrounds/remix",
     "hono": "pnpm --prefix playgrounds/hono",
-    "prebuild": "pnpm build:cli && pnpm gen:tokens",
+    "prebuild": "pnpm cli build && pnpm gen:tokens",
     "build": "turbo run build --filter=./packages/**",
     "lint": "turbo run lint --filter=./packages/**",
     "lint:inspect": "pnpm dlx @eslint/config-inspector",

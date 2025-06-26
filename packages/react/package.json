@@ -93,7 +93,7 @@
   "peerDependencies": {
     "@emotion/react": ">=11",
     "@emotion/styled": ">=11",
-    "motion": ">=11",
+    "motion": ">=12",
     "react": ">=19",
     "react-dom": ">=19"
   },

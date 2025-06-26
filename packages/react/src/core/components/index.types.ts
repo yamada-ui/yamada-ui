@@ -2,6 +2,16 @@ import type * as React from "react"
 import type { Merge } from "../../utils"
 import type { CSSProps } from "../css"
 
+declare module "react" {
+  interface CSSProperties {
+    [key: `--${string}`]: number | string
+  }
+
+  interface DataAttributes {
+    [key: `data-${string}`]: string | undefined
+  }
+}
+
 export type DOMElement = keyof React.JSX.IntrinsicElements
 
 export interface StyledProps extends CSSProps {

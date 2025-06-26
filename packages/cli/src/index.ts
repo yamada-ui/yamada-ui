@@ -1,6 +1,6 @@
-import c from "chalk"
 import { Command } from "commander"
 import { createRequire } from "node:module"
+import c from "picocolors"
 import { actionTheme, actionTokens } from "./command/index.js"
 import { initCLI } from "./utils/index.js"
 

@@ -243,9 +243,6 @@ importers:
 
   packages/cli:
     dependencies:
-      '@clack/prompts':
-        specifier: ^0.10.1
-        version: 0.10.1
       chokidar:
         specifier: ^4.0.3
         version: 4.0.3
@@ -267,6 +264,12 @@ importers:
       node-eval:
         specifier: ^2.0.0
         version: 2.0.0
+      ora:
+        specifier: ^8.2.0
+        version: 8.2.0
+      picocolors:
+        specifier: ^1.1.1
+        version: 1.1.1
       prettier:
         specifier: ^3.6.1
         version: 3.6.1
@@ -280,9 +283,6 @@ importers:
       '@types/update-notifier':
         specifier: 6.0.8
         version: 6.0.8
-      chalk:
-        specifier: ^5.4.1
-        version: 5.4.1
       update-notifier:
         specifier: ^7.3.1
         version: 7.3.1
@@ -1923,21 +1923,6 @@ packages:
       fs-extra: 7.0.1
       human-id: 4.1.1
       prettier: 2.8.8
-    dev: false
-
-  /@clack/core@0.4.2:
-    resolution: {integrity: sha512-NYQfcEy8MWIxrT5Fj8nIVchfRFA26yYKJcvBS7WlUIlw2OmQOY9DhGGXMovyI5J5PpxrCPGkgUi207EBrjpBvg==, tarball: https://registry.npmjs.org/@clack/core/-/core-0.4.2.tgz}
-    dependencies:
-      picocolors: 1.1.1
-      sisteransi: 1.0.5
-    dev: false
-
-  /@clack/prompts@0.10.1:
-    resolution: {integrity: sha512-Q0T02vx8ZM9XSv9/Yde0jTmmBQufZhPJfYAg2XrrrxWWaZgq1rr8nU8Hv710BQ1dhoP8rtY7YUdpGej2Qza/cw==, tarball: https://registry.npmjs.org/@clack/prompts/-/prompts-0.10.1.tgz}
-    dependencies:
-      '@clack/core': 0.4.2
-      picocolors: 1.1.1
-      sisteransi: 1.0.5
     dev: false
 
   /@commitlint/cli@19.8.1(@types/node@24.0.4)(typescript@5.8.3):

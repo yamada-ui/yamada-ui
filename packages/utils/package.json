@@ -31,7 +31,7 @@
   },
   "scripts": {
     "clean": "rimraf dist .turbo .eslintcache",
-    "build": "tsup",
+    "build": "tsdown",
     "test": "vitest",
     "test:dev": "vitest --watch --ui",
     "typecheck": "tsc --noEmit",
@@ -50,20 +50,5 @@
   "peerDependencies": {
     "react": ">=19"
   },
-  "clean-package": "../../clean-package.config.json",
-  "tsup": {
-    "clean": true,
-    "dts": true,
-    "bundle": false,
-    "target": "es2022",
-    "format": [
-      "cjs",
-      "esm"
-    ],
-    "entry": [
-      "src",
-      "!src/**/*.test.*"
-    ],
-    "sourcemap": true
-  }
+  "clean-package": "./clean-package.config.json"
 }

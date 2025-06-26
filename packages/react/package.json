@@ -38,7 +38,7 @@
   },
   "scripts": {
     "clean": "rimraf dist .turbo .eslintcache",
-    "build": "tsup",
+    "build": "tsdown",
     "storybook": "storybook dev -p 6006 -c storybook",
     "storybook:serve": "npx http-server ../../storybook-static",
     "storybook:build": "storybook build -c storybook -o ../../storybook-static",
@@ -69,14 +69,14 @@
     "embla-carousel-react": "^8.6.0",
     "framesync": "6.1.2",
     "intl-messageformat": "^10.7.16",
-    "lucide-react": "0.515.0",
-    "motion": "^12.18.1",
+    "lucide-react": "0.523.0",
+    "motion": "^12.19.1",
     "react-dropzone-esm": "^15.2.0",
     "react-fast-compare": "^3.2.2",
     "react-focus-lock": "^2.13.6",
     "react-remove-scroll": "^2.7.1",
     "react-resizable-panels": "^3.0.2",
-    "recharts": "^2.15.3",
+    "recharts": "^3.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -87,7 +87,8 @@
     "use-mask-input": "^3.4.2",
     "react-hook-form": "^7.57.0",
     "react-icons": "^5.5.0",
-    "@lucide/lab": "^0.1.2"
+    "@lucide/lab": "^0.1.2",
+    "@faker-js/faker": "^9.8.0"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",
@@ -96,21 +97,5 @@
     "react": ">=19",
     "react-dom": ">=19"
   },
-  "clean-package": "../../clean-package.config.json",
-  "tsup": {
-    "clean": true,
-    "dts": true,
-    "bundle": false,
-    "target": "es2022",
-    "format": [
-      "cjs",
-      "esm"
-    ],
-    "entry": [
-      "src",
-      "!src/**/*.test.*",
-      "!src/**/*.stories.*"
-    ],
-    "sourcemap": true
-  }
+  "clean-package": "./clean-package.config.json"
 }

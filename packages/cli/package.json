@@ -38,7 +38,7 @@
   },
   "scripts": {
     "clean": "rimraf dist .turbo .eslintcache",
-    "build": "tsup",
+    "build": "tsdown",
     "typecheck": " tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "prettier . --ignore-path ../../.prettierignore --check --cache"
@@ -52,7 +52,7 @@
     "esbuild": "^0.25.5",
     "glob": "^11.0.3",
     "node-eval": "^2.0.0",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.1",
     "tar": "^7.4.3",
     "typescript": "^5.8.3"
   },
@@ -60,17 +60,5 @@
     "@types/update-notifier": "6.0.8",
     "chalk": "^5.4.1",
     "update-notifier": "^7.3.1"
-  },
-  "tsup": {
-    "clean": true,
-    "shims": true,
-    "bundle": false,
-    "format": [
-      "esm"
-    ],
-    "target": "es2022",
-    "entry": [
-      "src"
-    ]
   }
 }

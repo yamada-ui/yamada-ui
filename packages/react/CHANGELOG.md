@@ -2461,7 +2461,6 @@
 ### Minor Changes
 
 - [#2024](https://github.com/yamada-ui/yamada-ui/pull/2024) [`556c09c`](https://github.com/yamada-ui/yamada-ui/commit/556c09caed3fafbbbca44a0381fec18d72b50722) Thanks [@hirotomoyamada](https://github.com/hirotomoyamada)! - - Added `BreadcrumbEllipsis` for `Breadcrumb`.
-
   - Added `ContextMenu`.
   - Added `YearPicker`.
 

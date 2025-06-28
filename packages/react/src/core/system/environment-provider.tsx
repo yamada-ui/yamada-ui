@@ -1,14 +1,14 @@
 "use client"
 
 import type { FC, PropsWithChildren } from "react"
-import { createContext, use, useMemo, useRef } from "react"
-import { getDocument, getWindow, runIfFn } from "../../utils"
+import { createContext, use, useCallback, useMemo, useRef } from "react"
+import { createdDom, getDocument, getWindow, runIfFn } from "../../utils"
 
 export type RootNode = Document | Node | ShadowRoot
 
 export interface Environment {
   getDocument: () => Document | undefined
-  getRootNode: () => RootNode
+  getRootNode: () => RootNode | undefined
   getWindow: () => undefined | Window
 }
 
@@ -30,15 +30,23 @@ export const EnvironmentProvider: FC<EnvironmentProviderProps> = ({
 }) => {
   const ref = useRef<HTMLSpanElement>(null)
 
-  const getRootNode = useMemo(() => {
-    return () => runIfFn(value) ?? ref.current?.getRootNode() ?? document
+  const getRootNode = useCallback(() => {
+    return runIfFn(value) ?? ref.current?.getRootNode() ?? document
   }, [value, ref])
 
   const context = useMemo<Environment>(() => {
-    return {
-      getDocument: () => getDocument(getRootNode()),
-      getRootNode,
-      getWindow: () => getWindow(getRootNode()),
+    if (createdDom()) {
+      return {
+        getDocument: () => getDocument(getRootNode()),
+        getRootNode,
+        getWindow: () => getWindow(getRootNode()),
+      }
+    } else {
+      return {
+        getDocument: () => undefined,
+        getRootNode: () => undefined,
+        getWindow: () => undefined,
+      }
     }
   }, [getRootNode])
 

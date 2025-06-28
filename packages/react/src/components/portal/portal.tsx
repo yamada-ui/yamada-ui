@@ -7,8 +7,8 @@ import { createPortal } from "react-dom"
 import { useEnvironment } from "../../core"
 import { getDocument, isShadowRoot, useSsr } from "../../utils"
 
-const getPortalNode = (node: RootNode) => {
-  const rootNode = node.getRootNode()
+const getPortalNode = (node?: RootNode) => {
+  const rootNode = node?.getRootNode()
 
   if (isShadowRoot(rootNode)) return rootNode
 

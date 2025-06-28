@@ -1,12 +1,11 @@
 import type { Metadata } from "next"
 import {
-  colorModeManager,
   ColorModeScript,
-  themeSchemeManager,
   ThemeSchemeScript,
   UIProvider,
 } from "@yamada-ui/react"
 import { Inter } from "next/font/google"
+import { cookies } from "next/headers"
 
 const inter = Inter({
   style: "normal",
@@ -21,21 +20,20 @@ export const metadata: Metadata = {
   title: "Next.js App - Yamada UI",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const cookieStore = await cookies()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
         <ColorModeScript type="cookie" />
         <ThemeSchemeScript type="cookie" />
 
-        <UIProvider
-          colorModeManager={colorModeManager.cookieStorage}
-          themeSchemeManager={themeSchemeManager.cookieStorage}
-        >
+        <UIProvider cookie={cookieStore.toString()} storage="cookie">
           {children}
         </UIProvider>
       </body>

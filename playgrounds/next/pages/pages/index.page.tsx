@@ -1,3 +1,4 @@
+import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next"
 import {
   Button,
   MoonIcon,
@@ -5,6 +6,14 @@ import {
   useColorMode,
   VStack,
 } from "@yamada-ui/react"
+
+export function getServerSideProps({
+  req,
+}: GetServerSidePropsContext): GetServerSidePropsResult<{ cookie?: string }> {
+  const cookie = req.headers.cookie
+
+  return { props: { cookie } }
+}
 
 export default function Home() {
   const { colorMode, toggleColorMode } = useColorMode()

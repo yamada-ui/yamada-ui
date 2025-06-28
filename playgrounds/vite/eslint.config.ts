@@ -16,7 +16,7 @@ import {
 
 const ignoresConfig = {
   name: "eslint/ignores",
-  ignores: ["**/dist/**", "**/node_modules/**"],
+  ignores: ["**/node_modules/**"],
 }
 
 const tsConfigAppPath = resolve(

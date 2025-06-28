@@ -6,8 +6,8 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
-        <ColorModeScript type="cookie" nonce="testing" />
-        <ThemeSchemeScript type="cookie" nonce="testing" />
+        <ColorModeScript type="cookie" />
+        <ThemeSchemeScript type="cookie" />
         <Main />
         <NextScript />
       </body>

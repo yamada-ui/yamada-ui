@@ -16,7 +16,7 @@ import {
 
 const ignoresConfig: Linter.Config = {
   name: "eslint/ignores",
-  ignores: ["**/dist/**", "**/node_modules/**"],
+  ignores: ["**/node_modules/**"],
 }
 
 const languageOptionConfig = languageOptionFactory(true, {

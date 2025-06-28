@@ -1,9 +1,9 @@
 {
   "name": "next-pages",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
@@ -13,7 +13,7 @@
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "next": "15.3.4",
+    "next": "^15.3.4",
     "@yamada-ui/react": "workspace:*"
   },
   "devDependencies": {

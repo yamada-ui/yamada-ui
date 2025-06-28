@@ -14,7 +14,7 @@ import {
 
 const ignoresConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/ignores",
-  ignores: ["**/dist/**", "**/node_modules/**", "**/.next/**"],
+  ignores: ["**/node_modules/**", "**/.next/**"],
 }
 
 const languageOptionConfig = languageOptionFactory(true, {

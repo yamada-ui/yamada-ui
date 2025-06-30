@@ -2,13 +2,15 @@ import type { FC } from "react"
 import type { MockInstance } from "vitest"
 import { act, fireEvent, render, waitFor } from "@yamada-ui/test"
 import { dataAttr } from "@yamada-ui/utils"
-import { useFocusVisible } from "../src"
+import { __test__, useFocusVisible } from "../src"
 
 describe("useFocusVisible", () => {
   let matchesMock: MockInstance
   const defaultPointerEvent = global.PointerEvent
 
   beforeEach(() => {
+    __test__.resetState()
+
     global.PointerEvent = class PointerEvent extends Event {
       constructor(type: string, eventInitDict?: PointerEventInit | undefined) {
         super(type, eventInitDict)
@@ -144,5 +146,44 @@ describe("useFocusVisible", () => {
     waitFor(() => {
       expect(el).toHaveAttribute("data-focus-visible")
     })
+  })
+
+  test("hasEventBeforeFocus is set to false and hasBlurredWindowRecently is set to true when window loses focus", () => {
+    const Component: FC = () => {
+      const { focusVisible, ...rest } = useFocusVisible()
+
+      return (
+        <div
+          data-focus-visible={dataAttr(focusVisible)}
+          data-testid="button"
+          tabIndex={0}
+          {...rest}
+        >
+          Virtual Button
+        </div>
+      )
+    }
+
+    const { getByTestId } = render(<Component />)
+    const el = getByTestId("button")
+
+    expect(el).not.toHaveAttribute("data-focus-visible")
+
+    act(() => {
+      fireEvent.keyDown(document, { key: "Tab" })
+    })
+
+    waitFor(() => {
+      expect(el).toHaveAttribute("data-focus-visible")
+    })
+
+    act(() => {
+      fireEvent.blur(window)
+    })
+
+    expect(el).not.toHaveAttribute("data-focus-visible")
+
+    expect(__test__.getHasBlurredWindowRecently()).toBeTruthy()
+    expect(__test__.getHasEventBeforeFocus()).toBeFalsy()
   })
 })

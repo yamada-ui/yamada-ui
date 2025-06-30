@@ -32,7 +32,7 @@ describe("useFocusVisible", () => {
     matchesMock.mockRestore()
   })
 
-  test("focusVisible becomes true when focused", () => {
+  test("focusVisible and hasEventBeforeFocus becomes true when focused", () => {
     const Component: FC = () => {
       const { focusVisible, ...rest } = useFocusVisible()
 
@@ -51,18 +51,23 @@ describe("useFocusVisible", () => {
     const el = getByTestId("button")
 
     expect(el).not.toHaveAttribute("data-focus-visible")
+    expect(__test__.getHasEventBeforeFocus()).toBeFalsy()
 
     act(() => {
       fireEvent.focus(el)
     })
 
     expect(el).toHaveAttribute("data-focus-visible")
+    waitFor(() => {
+      expect(__test__.getHasEventBeforeFocus()).toBeTruthy()
+    })
 
     act(() => {
       fireEvent.blur(el)
     })
 
     expect(el).not.toHaveAttribute("data-focus-visible")
+    expect(__test__.getHasEventBeforeFocus()).toBeFalsy()
   })
 
   test("focusVisible remains true on pointer down", () => {

@@ -3,7 +3,7 @@
 import type { FC, PropsWithChildren, ReactNode } from "react"
 import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ButtonProps } from "../button"
-import type { CloseButtonProps } from "../button"
+import type { CloseButtonProps } from "../close-button"
 import type { FocusLockProps } from "../focus-lock"
 import type { HTMLMotionProps, HTMLMotionPropsWithoutAs } from "../motion"
 import type { PopupAnimationProps } from "../popover"
@@ -21,7 +21,7 @@ import {
   wrapOrPassProps,
 } from "../../utils"
 import { Button } from "../button"
-import { CloseButton } from "../button"
+import { CloseButton } from "../close-button"
 import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { motion } from "../motion"

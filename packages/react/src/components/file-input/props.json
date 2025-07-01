@@ -36,7 +36,7 @@
       "required": false
     },
     "component": {
-      "type": "FC<{ index: number; value: File }>",
+      "type": "(props: { index: number; value: File }) => ReactNode",
       "description": "The component that displays uploaded files.",
       "required": false
     },

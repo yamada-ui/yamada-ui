@@ -4,9 +4,10 @@ import { useMemo, useState } from "react"
 import { PropsTable } from "../../../storybook/components"
 import { useInterval } from "../../hooks/use-interval"
 import { uuid } from "../../utils"
-import { Button, IconButton } from "../button"
+import { Button } from "../button"
 import { Heading } from "../heading"
 import { PlusIcon, XIcon } from "../icon"
+import { IconButton } from "../icon-button"
 import { Text } from "../text"
 import { Tabs } from "./"
 
@@ -482,7 +483,7 @@ export const Dynamic: Story = () => {
                   aria-label="Remove Tab"
                   icon={<XIcon />}
                   role="button"
-                  onClick={(ev) => {
+                  onClick={(ev: React.MouseEvent) => {
                     ev.stopPropagation()
                     onRemoveTab(id!)
                   }}

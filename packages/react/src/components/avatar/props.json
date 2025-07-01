@@ -78,7 +78,7 @@
       "required": false
     },
     "src": {
-      "type": "string | Blob",
+      "type": "string",
       "description": "The image url of the avatar.",
       "required": false
     },

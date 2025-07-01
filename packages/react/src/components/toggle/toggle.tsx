@@ -6,13 +6,13 @@ import type {
   ThemeProps,
   WithoutThemeProps,
 } from "../../core"
-import type { IconButtonProps } from "../button"
+import type { IconButtonProps } from "../icon-button"
 import type { UseInputBorderProps } from "../input"
 import type { ToggleStyle } from "./toggle.style"
 import type { UseToggleProps } from "./use-toggle"
 import { styled } from "../../core"
 import { createSlotComponent } from "../../core"
-import { IconButton } from "../button"
+import { IconButton } from "../icon-button"
 import { useInputBorder } from "../input"
 import { Portal } from "../portal"
 import { toggleStyle } from "./toggle.style"

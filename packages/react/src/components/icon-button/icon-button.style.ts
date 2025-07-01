@@ -1,5 +1,5 @@
 import { defineComponentStyle } from "../../core"
-import { buttonStyle } from "./button.style"
+import { buttonStyle } from "../button"
 
 export const iconButtonStyle = defineComponentStyle({
   variants: buttonStyle.variants,

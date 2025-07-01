@@ -2,10 +2,10 @@
 
 import type { ReactNode } from "react"
 import type { ThemeProps, WithoutThemeProps } from "../../core"
-import type { ButtonProps } from "./button"
+import type { ButtonProps } from "../button"
 import type { IconButtonStyle } from "./icon-button.style"
 import { createComponent } from "../../core"
-import { Button } from "./button"
+import { Button } from "../button"
 import { iconButtonStyle } from "./icon-button.style"
 
 export interface IconButtonProps

@@ -10,10 +10,3 @@ export {
 } from "./close-button"
 export type { CloseButtonProps } from "./close-button"
 export * from "./close-button.style"
-export {
-  IconButton,
-  IconButtonPropsContext,
-  useIconButtonPropsContext,
-} from "./icon-button"
-export type { IconButtonProps } from "./icon-button"
-export * from "./icon-button.style"

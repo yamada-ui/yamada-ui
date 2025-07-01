@@ -1,5 +1,5 @@
 import { defineComponentSlotStyle } from "../../core"
-import { iconButtonStyle } from "../button"
+import { iconButtonStyle } from "../icon-button"
 
 export const paginationStyle = defineComponentSlotStyle({
   base: {

@@ -1,8 +1,38 @@
 import { defineComponentStyle } from "../../core"
-import { buttonStyle } from "../button"
 
 export const iconButtonStyle = defineComponentStyle({
-  variants: buttonStyle.variants,
+  variants: {
+    ghost: {
+      layerStyle: "ghost",
+      _hover: {
+        layerStyle: "ghost.hover",
+      },
+    },
+    outline: {
+      layerStyle: "outline",
+      _hover: {
+        layerStyle: "outline.hover",
+      },
+    },
+    solid: {
+      layerStyle: "solid",
+      _hover: {
+        layerStyle: "solid.hover",
+      },
+    },
+    subtle: {
+      layerStyle: "subtle",
+      _hover: {
+        layerStyle: "subtle.hover",
+      },
+    },
+    surface: {
+      layerStyle: "surface",
+      _hover: {
+        layerStyle: "surface.hover",
+      },
+    },
+  },
 
   sizes: {
     "2xs": {

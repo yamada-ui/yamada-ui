@@ -483,7 +483,7 @@ export const Dynamic: Story = () => {
                   aria-label="Remove Tab"
                   icon={<XIcon />}
                   role="button"
-                  onClick={(ev: React.MouseEvent) => {
+                  onClick={(ev) => {
                     ev.stopPropagation()
                     onRemoveTab(id!)
                   }}

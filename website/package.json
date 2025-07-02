@@ -1,0 +1,45 @@
+{
+  "name": "website",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf .next .eslintcache",
+    "dev:content": "velite --watch",
+    "dev:next": "next dev",
+    "dev": "run-p dev:*",
+    "build:content": "velite --clean",
+    "build:next": "next build",
+    "build": "run-s build:*",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings=0 --cache",
+    "format": "prettier . --ignore-path ../.prettierignore --check --cache"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
+    "@yamada-ui/react": "workspace:*",
+    "motion": "12.18.1",
+    "next": "^15.3.4",
+    "next-intl": "^4.3.1",
+    "next-mdx-remote": "^5.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "scroll-into-view-if-needed": "^3.1.0",
+    "velite": "^0.2.4"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^15.3.4",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^24.0.4",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@yamada-ui/cli": "workspace:*",
+    "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.6.1",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.35.0"
+  }
+}

@@ -5,6 +5,7 @@ import * as components from "@yamada-ui/react"
 import { VStack } from "@yamada-ui/react"
 import { notFound } from "next/navigation"
 import * as runtime from "react/jsx-runtime"
+import { mdToText } from "@/utils/string"
 import { Header } from "./header"
 import { Toc } from "./toc"
 
@@ -44,7 +45,7 @@ export async function generateMetadata({
   const { locale, slug } = await params
   const { description, title } = getDoc(locale, slug) ?? {}
 
-  return { description, title }
+  return { description: mdToText(description), title }
 }
 
 interface PageProps {

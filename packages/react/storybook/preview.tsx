@@ -74,8 +74,7 @@ const preview: Preview = {
     locale: "en-US",
   },
   parameters: {
-    backgrounds: { disable: true },
-    controls: { expanded: true },
+    docs: { codePanel: true },
     layout: "fullscreen",
     options: {
       storySort: {

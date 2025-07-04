@@ -29,7 +29,7 @@ export function Header() {
       position="sticky"
       py="sm"
       right="0"
-      top="14"
+      top="{primary-header-height}"
       zIndex="yamcha"
     >
       {items.map(({ pathname: href, title }) => (

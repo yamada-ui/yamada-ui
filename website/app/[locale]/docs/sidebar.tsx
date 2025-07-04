@@ -34,13 +34,13 @@ export function Sidebar() {
       display={{ base: "block", md: "none" }}
       gridColumn="1 / 2"
       gridRow="1 / 3"
-      maxH="calc(100dvh - {sizes.14} - {sizes.13} - {spaces.lg})"
+      maxH="calc(100dvh - {header-height})"
       overflowY="auto"
       pb="lg"
       position="sticky"
       pt="1.5"
       px="1"
-      top="calc({sizes.14} + {sizes.13} + {spaces.lg})"
+      top="{header-height}"
     >
       <VStack as="nav" gap="xs">
         {items.map(({ items, pathname: href, segment, title }) => {

@@ -1,4 +1,4 @@
-import type { Doc } from "@/.velite"
+import type { Doc } from "#velite"
 import { Heading, Text, VStack } from "@yamada-ui/react"
 import { mdToHtml } from "@/utils/string"
 
@@ -8,7 +8,7 @@ export function Header({ description, title }: HeaderProps) {
   return (
     <VStack gap="md">
       <VStack gap="sm">
-        <Heading>{title}</Heading>
+        <Heading size="5xl">{title}</Heading>
 
         <Text color="fg.muted">{mdToHtml(description)}</Text>
       </VStack>

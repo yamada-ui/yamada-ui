@@ -8,7 +8,7 @@ interface LayoutProps extends PropsWithChildren {}
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <VStack flex="1" gap="lg" pt={{ base: "0", md: "md" }}>
+    <VStack flex="1" gap="lg">
       <Header />
 
       <Grid

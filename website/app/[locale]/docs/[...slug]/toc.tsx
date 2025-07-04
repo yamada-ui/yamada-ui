@@ -1,6 +1,6 @@
 "use client"
 
-import type { Doc } from "@/.velite"
+import type { Doc } from "#velite"
 import type { RefObject } from "react"
 import {
   Link,
@@ -98,13 +98,13 @@ export function Toc({ path, toc }: TocProps) {
       gap="md"
       gridColumn="3 / 4"
       gridRow="1 / 3"
-      maxH="calc(100dvh - {sizes.14} - {sizes.13} - {spaces.lg})"
+      maxH="calc(100dvh - {header-height})"
       overflowY="auto"
       pb="lg"
       position="sticky"
       pt="1.5"
       px="1"
-      top="calc({sizes.14} + {sizes.13} + {spaces.lg})"
+      top="{header-height}"
       _media={[{ css: { display: "none" }, maxW: "75rem" }]}
     >
       {flattenedToc.length ? (

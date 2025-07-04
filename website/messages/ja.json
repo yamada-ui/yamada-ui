@@ -34,6 +34,10 @@
       "title": "このページでは",
       "scrollToTop": "上にスクロールする",
       "edit": "GitHubでこのページを編集する"
+    },
+    "copyButton": {
+      "copied": "コピーしました",
+      "copy": "クリップボードにコピーする"
     }
   }
 }

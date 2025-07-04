@@ -1,6 +1,17 @@
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeSlug from "rehype-slug"
+import remarkDirective from "remark-directive"
+import remarkGfm from "remark-gfm"
 import { defineCollection, defineConfig, s } from "velite"
 import generateDocMap from "@/scripts/generate/doc-map"
 import { getLocale } from "@/utils/i18n"
+import { CONSTANTS } from "./constants"
+import { rehypePre } from "./utils/rehype-plugins"
+import {
+  remarkCallout,
+  remarkCodeTitle,
+  remarkSteps,
+} from "./utils/remark-plugins"
 
 function getPath(value: string) {
   return value.replace(/.*\/contents\//, "")
@@ -24,10 +35,12 @@ const docs = defineCollection({
   pattern: "**/*.mdx",
   schema: s
     .object({
+      style: s.string().optional(),
       category: s.string().optional(),
       code: s.mdx(),
       description: s.string(),
       metadata: s.metadata(),
+      source: s.string().optional(),
       status: s.enum(["planned", "new", "experimental"]).optional(),
       storybook: s.string().optional(),
       title: s.string(),
@@ -36,7 +49,16 @@ const docs = defineCollection({
     .transform((data, { meta }) => ({
       ...data,
       ...getSlug(meta.path as string),
+      style: data.style
+        ? `${CONSTANTS.SNS.GITHUB.PACKAGE_EDIT_URL}/${data.style}`
+        : undefined,
       path: getPath(meta.path as string),
+      source: data.source
+        ? `${CONSTANTS.SNS.GITHUB.PACKAGE_EDIT_URL}/${data.source}`
+        : undefined,
+      storybook: data.storybook
+        ? `${CONSTANTS.SNS.STORYBOOK}?path=/story/${data.storybook}`
+        : undefined,
     })),
 })
 
@@ -46,8 +68,21 @@ export default defineConfig({
     generateDocMap(docs)
   },
   mdx: {
-    rehypePlugins: [],
-    remarkPlugins: [],
+    rehypePlugins: [
+      rehypeSlug,
+      rehypePre,
+      [
+        rehypeAutolinkHeadings,
+        { behavior: "wrap", properties: { "data-fragment": "" } },
+      ],
+    ],
+    remarkPlugins: [
+      remarkDirective,
+      remarkGfm,
+      remarkCallout,
+      remarkCodeTitle,
+      remarkSteps,
+    ],
   },
   root: "contents",
 })

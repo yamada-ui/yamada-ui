@@ -37,6 +37,10 @@
       "title": "On this page",
       "scrollToTop": "Scroll to top",
       "edit": "Edit this page on GitHub"
+    },
+    "copyButton": {
+      "copied": "Copied",
+      "copy": "Copy to Clipboard"
     }
   }
 }

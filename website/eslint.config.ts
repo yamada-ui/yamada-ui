@@ -15,7 +15,7 @@ import {
 
 const ignoresConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/ignores",
-  ignores: ["**/node_modules/**", "**/.next/**"],
+  ignores: ["**/node_modules/**", "**/.next/**", "**/.velite/**"],
 }
 
 const nextConfig: TSESLint.FlatConfig.Config = {

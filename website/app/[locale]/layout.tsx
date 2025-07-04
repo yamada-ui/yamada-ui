@@ -87,6 +87,15 @@ export default async function Layout({ children, params }: LayoutProps) {
           >
             <Flex alignItems="center" flexDirection="column" minH="100dvh">
               <Flex
+                css={{
+                  "--header-height":
+                    "calc({primary-header-height} + {secondary-header-height})",
+                  "--primary-header-height": "sizes.14",
+                  "--secondary-header-height": {
+                    base: "calc({sizes.13} + {spaces.lg})",
+                    md: "0px",
+                  },
+                }}
                 alignItems="center"
                 flex="1"
                 flexDirection="column"

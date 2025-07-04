@@ -1,4 +1,4 @@
-import type { Doc } from "@/.velite"
+import type { Doc } from "#velite"
 import en from "./doc-map.en.json"
 import ja from "./doc-map.ja.json"
 

@@ -1,10 +1,8 @@
-import type { MDXComponents, MDXContent } from "mdx/types"
 import type { Metadata } from "next"
 import { docs } from "#velite"
-import * as components from "@yamada-ui/react"
 import { VStack } from "@yamada-ui/react"
 import { notFound } from "next/navigation"
-import * as runtime from "react/jsx-runtime"
+import { MDXContent } from "@/components"
 import { mdToText } from "@/utils/string"
 import { Header } from "./header"
 import { Toc } from "./toc"
@@ -15,18 +13,6 @@ function getDoc(locale: string, slug: string[]) {
   )
 }
 
-function getContent(code?: string): MDXContent | null {
-  try {
-    if (!code) return null
-
-    const fn = new Function(code)
-
-    return fn({ ...runtime })?.default
-  } catch {
-    return null
-  }
-}
-
 export function generateStaticParams({
   params,
 }: {
@@ -34,7 +20,7 @@ export function generateStaticParams({
 }) {
   return docs
     .filter(({ locale }) => locale === params.locale)
-    .map(({ slug }) => slug)
+    .map(({ slug }) => ({ slug }))
 }
 
 export async function generateMetadata({
@@ -58,16 +44,12 @@ export default async function Page({ params }: PageProps) {
 
   if (!doc) return notFound()
 
-  const Content = getContent(doc.code)
-
   return (
     <>
       <VStack flex="1" gap="lg">
         <Header {...doc} />
 
-        {Content ? (
-          <Content components={components as unknown as MDXComponents} />
-        ) : null}
+        <MDXContent code={doc.code} />
       </VStack>
 
       <Toc {...doc} />

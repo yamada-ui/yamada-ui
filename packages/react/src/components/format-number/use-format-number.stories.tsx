@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react-vite"
-import { useFormatNumber } from "."
 import { Text } from "../text"
+import { useFormatNumber } from "./use-format-number"
 
 const meta: Meta = {
   title: "Hooks / useFormatNumber",

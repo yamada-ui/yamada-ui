@@ -1,3 +1,4 @@
+export * from "./alert.style"
 export {
   AlertDescription,
   AlertIcon,
@@ -14,5 +15,4 @@ export type {
   AlertRootProps,
   AlertTitleProps,
 } from "./alert"
-export * from "./alert.style"
 export * as Alert from "./namespace"

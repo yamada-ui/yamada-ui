@@ -1,7 +1,7 @@
 "use client"
 
 import { useI18n } from "../../providers/i18n-provider"
-import { useFormatNumber } from "./use-format-number"
+import { useFormatNumber } from "../format-number"
 
 const bitPrefixes = ["", "kilo", "mega", "giga", "tera"]
 const bytePrefixes = ["", "kilo", "mega", "giga", "tera", "peta"]

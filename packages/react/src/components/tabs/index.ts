@@ -1,3 +1,4 @@
+export * from "./tabs.style"
 export * as Tabs from "./namespace"
 export type {
   TabsListProps,
@@ -15,5 +16,4 @@ export {
   TabsTab,
   useTabsPropsContext,
 } from "./tabs"
-export * from "./tabs.style"
 export * from "./use-tabs"

@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { FormatNumber } from "."
+import { FormatNumber } from "./format-number"
 
 type Story = StoryFn<typeof FormatNumber>
 

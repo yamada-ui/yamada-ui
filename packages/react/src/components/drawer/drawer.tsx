@@ -9,7 +9,7 @@ import type {
   ThemeProps,
 } from "../../core"
 import type { ButtonProps } from "../button"
-import type { CloseButtonProps } from "../button"
+import type { CloseButtonProps } from "../close-button"
 import type { FocusLockProps } from "../focus-lock"
 import type { HTMLMotionProps, MotionTransitionProps } from "../motion"
 import type { PortalProps } from "../portal"
@@ -28,7 +28,7 @@ import {
   wrapOrPassProps,
 } from "../../utils"
 import { Button } from "../button"
-import { CloseButton } from "../button"
+import { CloseButton } from "../close-button"
 import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { motion } from "../motion"

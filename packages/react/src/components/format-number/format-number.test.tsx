@@ -1,5 +1,5 @@
-import { FormatNumber } from "."
 import { a11y, render } from "../../../test"
+import { FormatNumber } from "./format-number"
 
 describe("<FormatNumber />", () => {
   test("FormatNumber renders correctly", async () => {

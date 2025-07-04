@@ -1,3 +1,4 @@
+export * from "./editable.style"
 export {
   EditableCancelTrigger,
   EditableControl,
@@ -20,6 +21,5 @@ export type {
   EditableSubmitTriggerProps,
   EditableTextareaProps,
 } from "./editable"
-export * from "./editable.style"
 export * as Editable from "./namespace"
 export * from "./use-editable"

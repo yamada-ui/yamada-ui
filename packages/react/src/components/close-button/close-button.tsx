@@ -1,13 +1,13 @@
 "use client"
 
 import type { HTMLProps, ThemeProps, WithoutThemeProps } from "../../core"
+import type { IconButtonProps } from "../icon-button"
 import type { CloseButtonStyle } from "./close-button.style"
-import type { IconButtonProps } from "./icon-button"
 import { createComponent } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
 import { XIcon } from "../icon"
+import { IconButton } from "../icon-button"
 import { closeButtonStyle } from "./close-button.style"
-import { IconButton } from "./icon-button"
 
 export interface CloseButtonProps
   extends Omit<

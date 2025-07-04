@@ -1,3 +1,4 @@
+export * from "./accordion.style"
 export type {
   AccordionButtonProps,
   AccordionItemProps,
@@ -12,6 +13,5 @@ export {
   AccordionRoot,
   useAccordionPropsContext,
 } from "./accordion"
-export * from "./accordion.style"
 export * as Accordion from "./namespace"
 export * from "./use-accordion"

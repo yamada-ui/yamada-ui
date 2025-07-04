@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { FormatByte } from "."
+import { FormatByte } from "./format-byte"
 
 type Story = StoryFn<typeof FormatByte>
 

@@ -7,12 +7,17 @@ import type { StatusScheme } from "../status"
 import type { AlertStyle } from "./alert.style"
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { CircleCheckBigIcon, InfoIcon, TriangleAlertIcon } from "../icon"
+import {
+  CircleCheckBigIcon,
+  InfoIcon,
+  OctagonAlertIcon,
+  TriangleAlertIcon,
+} from "../icon"
 import { useLoadingComponent } from "../loading"
 import { alertStyle } from "./alert.style"
 
 const icons = {
-  error: TriangleAlertIcon,
+  error: OctagonAlertIcon,
   info: InfoIcon,
   success: CircleCheckBigIcon,
   warning: TriangleAlertIcon,
@@ -52,26 +57,29 @@ export const {
  * @see https://yamada-ui.com/components/alert
  */
 export const AlertRoot = withProvider<"div", AlertRootProps>(
-  ({ status, ...props }) => {
+  ({ status, colorScheme = status, ...props }) => {
     const context = useMemo(() => ({ status: status! }), [status])
 
     return (
       <ComponentContext value={context}>
-        <styled.div role="alert" {...props} />
+        <styled.div colorScheme={colorScheme} role="alert" {...props} />
       </ComponentContext>
     )
   },
   "root",
-)({ colorScheme: "info", status: "info" })
+)({ status: "info" })
 
 export interface AlertIconProps extends IconProps {}
 
-export const AlertIcon = withContext<"svg", AlertIconProps>((props) => {
-  const { status } = useComponentContext()
-  const Icon = icons[status]
+export const AlertIcon = withContext<"svg", AlertIconProps>(
+  ({ as, ...rest }) => {
+    const { status } = useComponentContext()
+    const Icon = as || icons[status]
 
-  return <Icon {...props} />
-}, "icon")()
+    return <Icon {...rest} />
+  },
+  "icon",
+)()
 
 export interface AlertLoadingProps extends Loading.Props {
   /**

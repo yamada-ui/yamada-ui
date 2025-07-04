@@ -48,7 +48,7 @@ async function setDocMap(docMap: { [key in Lang]: DocMap }) {
     Object.entries(docMap).map(async ([lang, data]) => {
       const filePath = path.join(DATA_PATH, `doc-map.${lang}.json`)
 
-      await writeFile(filePath, JSON.stringify(data, null, 2))
+      await writeFile(filePath, JSON.stringify(data, null, 2) + "\n")
     }),
   )
 }

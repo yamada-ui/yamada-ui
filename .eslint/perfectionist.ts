@@ -84,7 +84,20 @@ export const perfectionistConfig: TSESLint.FlatConfig.Config = {
   files: sharedFiles,
   plugins: { perfectionist: perfectionistPlugin },
   rules: {
-    "perfectionist/sort-exports": ["error", { type, partitionByNewLine: true }],
+    "perfectionist/sort-exports": [
+      "error",
+      {
+        type,
+        customGroups: [
+          {
+            anyOf: [{ elementNamePattern: [".style(.js|.jsx|.ts|.tsx)?$"] }],
+            groupName: "style",
+          },
+        ],
+        groups: ["style"],
+        partitionByNewLine: true,
+      },
+    ],
     "perfectionist/sort-imports": [
       "error",
       {
@@ -100,7 +113,8 @@ export const perfectionistConfig: TSESLint.FlatConfig.Config = {
           "unknown",
           ["side-effect", "side-effect-style"],
         ],
-        newlinesBetween: "never",
+        newlinesBetween: "ignore",
+        partitionByNewLine: true,
       },
     ],
 

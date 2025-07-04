@@ -42,7 +42,7 @@ export interface PinInputRootProps
   items?: number
 }
 
-export const {
+const {
   ComponentContext,
   PropsContext: PinInputPropsContext,
   useComponentContext,
@@ -53,6 +53,8 @@ export const {
   "pin-input",
   pinInputStyle,
 )
+
+export { PinInputPropsContext, usePinInputPropsContext }
 
 /**
  * `PinInput` is a component used to capture pin codes or OTP (One-Time Password) inputs.

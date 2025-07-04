@@ -24,12 +24,14 @@ export interface StatusProps extends HTMLStyledProps, ThemeProps<StatusStyle> {
   labelProps?: HTMLStyledProps
 }
 
-export const {
+const {
   PropsContext: StatusPropsContext,
   usePropsContext: useStatusPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<StatusProps, StatusStyle>("status", statusStyle)
+
+export { StatusPropsContext, useStatusPropsContext }
 
 /**
  * `Status` is component that indicate the status of a process or state.

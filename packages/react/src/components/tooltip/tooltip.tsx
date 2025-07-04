@@ -41,13 +41,15 @@ export interface TooltipProps
   portalProps?: Omit<PortalProps, "children">
 }
 
-export const {
+const {
   PropsContext: TooltipPropsContext,
   StyleContext,
   usePropsContext: useTooltipPropsContext,
   withContext,
   useRootComponentProps,
 } = createSlotComponent<TooltipProps, TooltipStyle>("tooltip", tooltipStyle)
+
+export { TooltipPropsContext, useTooltipPropsContext }
 
 /**
  * `Tooltip` is a component that displays short information, such as supplementary details for an element.

@@ -38,11 +38,13 @@ export interface FlexProps
   wrap?: CSSProps["flexWrap"]
 }
 
-export const {
+const {
   PropsContext: FlexPropsContext,
   usePropsContext: useFlexPropsContext,
   withContext,
 } = createComponent<FlexProps, FlexStyle>("flex", flexStyle)
+
+export { FlexPropsContext, useFlexPropsContext }
 
 /**
  * `Flex` is a component that sets `flex` to `Box`. Also, convenient style shorthand is available.

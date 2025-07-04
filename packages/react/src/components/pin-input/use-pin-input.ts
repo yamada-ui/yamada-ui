@@ -9,11 +9,17 @@ import { createDescendant } from "../../hooks/use-descendant"
 import { filterUndefined, handlerAll, runKeyAction } from "../../utils"
 import { useFieldProps } from "../field"
 
-export const {
+const {
   DescendantsContext: PinInputDescendantsContext,
   useDescendant: usePinInputDescendant,
   useDescendants: usePinInputDescendants,
 } = createDescendant<HTMLInputElement>()
+
+export {
+  PinInputDescendantsContext,
+  usePinInputDescendant,
+  usePinInputDescendants,
+}
 
 const toArray = (value?: string) => value?.split("")
 

@@ -17,7 +17,7 @@ export interface CloseButtonProps
     Pick<HTMLProps<"button">, "aria-label">,
     ThemeProps<CloseButtonStyle> {}
 
-export const {
+const {
   PropsContext: CloseButtonPropsContext,
   usePropsContext: useCloseButtonPropsContext,
   withContext,
@@ -25,6 +25,8 @@ export const {
   "close-button",
   closeButtonStyle,
 )
+
+export { CloseButtonPropsContext, useCloseButtonPropsContext }
 
 /**
  * `CloseButton` is a component used primarily to trigger the close functionality of a component.

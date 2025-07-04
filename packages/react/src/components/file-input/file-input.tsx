@@ -44,7 +44,7 @@ export interface FileInputProps
   separator?: string
 }
 
-export const {
+const {
   PropsContext: FileInputPropsContext,
   usePropsContext: useFileInputPropsContext,
   withContext,
@@ -53,6 +53,8 @@ export const {
   "file-input",
   fileInputStyle,
 )
+
+export { FileInputPropsContext, useFileInputPropsContext }
 
 /**
  * `FileInput` is a component used for users to select files.

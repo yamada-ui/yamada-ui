@@ -29,7 +29,7 @@ export interface FormatByteProps
   unitDisplay?: "long" | "narrow" | "short"
 }
 
-export const {
+const {
   PropsContext: FormatBytePropsContext,
   usePropsContext: useFormatBytePropsContext,
   withContext,
@@ -37,6 +37,8 @@ export const {
   "format-byte",
   formatByteStyle,
 )
+
+export { FormatBytePropsContext, useFormatBytePropsContext }
 
 /**
  * `FormatByte` is used to format bytes to a human-readable format.

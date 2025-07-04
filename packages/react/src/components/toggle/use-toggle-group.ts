@@ -21,11 +21,13 @@ interface ToggleGroupContext {
   onChange?: <Y extends string = string>(value: undefined | Y) => void
 }
 
-export const [ToggleGroupContext, useToggleGroupContext] =
+const [ToggleGroupContext, useToggleGroupContext] =
   createContext<ToggleGroupContext>({
     name: "ToggleGroupContext",
     strict: false,
   })
+
+export { ToggleGroupContext, useToggleGroupContext }
 
 export interface UseToggleGroupProps<Y extends string | string[] = string>
   extends Omit<HTMLProps, "defaultValue" | "onChange" | "value"> {

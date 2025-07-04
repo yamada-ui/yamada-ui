@@ -12,8 +12,8 @@ import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { segmentedControlStyle } from "./segmented-control.style"
 import {
-  DescendantsContext,
   SegmentedControlContext,
+  SegmentedControlDescendantsContext,
   useSegmentedControl,
   useSegmentedControlItem,
 } from "./use-segmented-control"
@@ -34,7 +34,7 @@ export interface SegmentedControlRootProps<Y extends string = string>
   items?: SegmentedControlItem[]
 }
 
-export const {
+const {
   PropsContext: SegmentedControlPropsContext,
   usePropsContext: useSegmentedControlPropsContext,
   withContext,
@@ -43,6 +43,8 @@ export const {
   "segmented-control",
   segmentedControlStyle,
 )
+
+export { SegmentedControlPropsContext, useSegmentedControlPropsContext }
 
 /**
  * `SegmentedControl` is a component used for allowing users to select one option from multiple choices.
@@ -81,9 +83,9 @@ export const SegmentedControlRoot = withProvider(
 
     return (
       <SegmentedControlContext value={context}>
-        <DescendantsContext value={descendants}>
+        <SegmentedControlDescendantsContext value={descendants}>
           <styled.div {...getRootProps()}>{cloneChildren}</styled.div>
-        </DescendantsContext>
+        </SegmentedControlDescendantsContext>
       </SegmentedControlContext>
     )
   },

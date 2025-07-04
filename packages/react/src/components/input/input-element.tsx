@@ -12,8 +12,7 @@ export interface InputElementProps
     ThemeProps<InputElementStyle>,
     Pick<InputProps, "errorBorderColor" | "focusBorderColor"> {}
 
-export const {
-  component,
+const {
   PropsContext: InputElementPropsContext,
   usePropsContext: useInputElementPropsContext,
   withContext,
@@ -21,6 +20,8 @@ export const {
   "input-element",
   inputElementStyle,
 )
+
+export { InputElementPropsContext, useInputElementPropsContext }
 
 export const InputElement = withContext("div")(
   { "data-input-element": "" },

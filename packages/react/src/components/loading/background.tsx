@@ -1,6 +1,6 @@
 import type { Variants } from "motion/react"
 import type { FC } from "react"
-import type { LoadingSharedProps } from "./utils"
+import type { LoadingSharedProps } from "./loading-provider"
 import { memo } from "react"
 import { useTimeout } from "../../hooks/use-timeout"
 import { isValidElement } from "../../utils"

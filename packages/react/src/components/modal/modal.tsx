@@ -86,7 +86,7 @@ export interface ModalRootProps
   onCloseComplete?: () => void
 }
 
-export const {
+const {
   ComponentContext,
   PropsContext: ModalPropsContext,
   useComponentContext,
@@ -97,6 +97,8 @@ export const {
   "modal",
   modalStyle,
 )
+
+export { ModalPropsContext, useModalPropsContext }
 
 /**
  * `Modal` is a component that is displayed over the main content to focus the user's attention solely on the information.

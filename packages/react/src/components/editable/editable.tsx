@@ -35,7 +35,7 @@ export interface EditableRootProps
   children?: ReactNodeOrFunction<EditableElementProps>
 }
 
-export const {
+const {
   PropsContext: EditablePropsContext,
   usePropsContext: useEditablePropsContext,
   withContext,
@@ -44,6 +44,8 @@ export const {
   "editable",
   editableStyle,
 )
+
+export { EditablePropsContext, useEditablePropsContext }
 
 /**
  * `Editable` is a component used to obtain inline editable text input.

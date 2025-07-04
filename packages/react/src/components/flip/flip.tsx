@@ -85,13 +85,14 @@ export interface FlipProps
   onChange?: (value: KeyframeIdent) => void
 }
 
-export const {
+const {
   PropsContext: FlipPropsContext,
   usePropsContext: useFlipPropsContext,
-  useStyleContext,
   withContext,
   withProvider,
 } = createSlotComponent<FlipProps, FlipStyle>("flip", flipStyle)
+
+export { FlipPropsContext, useFlipPropsContext }
 
 /**
  * `Flip` is an animation component that alternates between flipping two elements.

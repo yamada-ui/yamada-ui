@@ -73,11 +73,13 @@ export interface RotateProps
   onChange?: (value: KeyframeIdent) => void
 }
 
-export const {
+const {
   PropsContext: RotatePropsContext,
   usePropsContext: useRotatePropsContext,
   withContext,
 } = createComponent<RotateProps, RotateStyle>("rotate", rotateStyle)
+
+export { RotatePropsContext, useRotatePropsContext }
 
 /**
  * `Rotate` is an animation component that alternately rotates two elements as they switch.

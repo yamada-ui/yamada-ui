@@ -110,8 +110,7 @@ export interface DrawerRootProps
   onCloseComplete?: () => void
 }
 
-export const {
-  component,
+const {
   ComponentContext,
   PropsContext: DrawerPropsContext,
   useComponentContext,
@@ -122,6 +121,8 @@ export const {
   "drawer",
   drawerStyle,
 )
+
+export { DrawerPropsContext, useDrawerPropsContext }
 
 /**
  * `Drawer` is a component for a panel that appears from the edge of the screen.

@@ -34,11 +34,13 @@ export interface SkeletonProps
   startColor?: CSSProps["color"]
 }
 
-export const {
+const {
   PropsContext: SkeletonPropsContext,
   usePropsContext: useSkeletonPropsContext,
   withContext,
 } = createComponent<SkeletonProps, SkeletonStyle>("skeleton", skeletonStyle)
+
+export { SkeletonPropsContext, useSkeletonPropsContext }
 
 /**
  * `Skeleton` is a component that acts as a placeholder until content is loaded.

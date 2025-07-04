@@ -48,7 +48,7 @@ export interface TagProps
   onClose?: MouseEventHandler<HTMLElement>
 }
 
-export const {
+const {
   ComponentContext,
   PropsContext: TagPropsContext,
   useComponentContext,
@@ -56,6 +56,8 @@ export const {
   withContext,
   withProvider,
 } = createSlotComponent<TagProps, TagStyle, ComponentContext>("tag", tagStyle)
+
+export { TagPropsContext, useTagPropsContext }
 
 /**
  * `Tag` is a component used to categorize or organize items using keywords that describe them.

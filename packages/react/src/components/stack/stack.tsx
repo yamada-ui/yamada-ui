@@ -31,11 +31,13 @@ export interface StackProps extends Omit<HTMLStyledProps, "direction"> {
   wrap?: CSSProps["flexWrap"]
 }
 
-export const {
+const {
   PropsContext: StackPropsContext,
   usePropsContext: useStackPropsContext,
   withContext,
 } = createComponent<StackProps, StackStyle>("stack", stackStyle)
+
+export { StackPropsContext, useStackPropsContext }
 
 /**
  * `Stack` is a component that groups elements and provides space between child elements.

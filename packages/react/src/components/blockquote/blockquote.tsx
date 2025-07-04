@@ -40,7 +40,7 @@ export interface BlockquoteRootProps
   contentProps?: HTMLStyledProps<"blockquote">
 }
 
-export const {
+const {
   ComponentContext,
   PropsContext: BlockquotePropsContext,
   useComponentContext,
@@ -51,6 +51,8 @@ export const {
   "blockquote",
   blockquoteStyle,
 )
+
+export { BlockquotePropsContext, useBlockquotePropsContext }
 
 /**
  * `Blockquote` is a component that represents a blockquote. By default, it renders a `blockquote` element.

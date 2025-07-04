@@ -9,11 +9,13 @@ export interface KbdProps
   extends HTMLStyledProps<"kbd">,
     ThemeProps<KbdStyle> {}
 
-export const {
+const {
   PropsContext: KbdPropsContext,
   usePropsContext: useKbdPropsContext,
   withContext,
 } = createComponent<KbdProps, KbdStyle>("kbd", kbdStyle)
+
+export { KbdPropsContext, useKbdPropsContext }
 
 /**
  * `Kbd` is a component that represents keyboard input.

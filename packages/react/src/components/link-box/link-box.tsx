@@ -14,7 +14,7 @@ export interface LinkBoxRootProps
   extends HTMLStyledProps,
     ThemeProps<LinkBoxStyle> {}
 
-export const {
+const {
   ComponentContext,
   PropsContext: LinkBoxPropsContext,
   useComponentContext,
@@ -25,6 +25,8 @@ export const {
   "link-box",
   linkBoxStyle,
 )
+
+export { LinkBoxPropsContext, useLinkBoxPropsContext }
 
 /**
  * `LinkBox` is a component that allows elements such as articles or cards to function as a single link.

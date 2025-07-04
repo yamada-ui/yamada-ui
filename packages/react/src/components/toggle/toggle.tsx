@@ -27,13 +27,20 @@ export interface ToggleProps<Y extends string = string>
     Pick<UseInputBorderProps, "errorBorderColor">,
     ThemeProps<ToggleStyle> {}
 
-export const {
+const {
   component,
   PropsContext: TogglePropsContext,
   usePropsContext: useTogglePropsContext,
   withProvider,
   useRootComponentProps,
 } = createSlotComponent<ToggleProps, ToggleStyle>("toggle", toggleStyle)
+
+export {
+  component,
+  TogglePropsContext,
+  useRootComponentProps,
+  useTogglePropsContext,
+}
 
 /**
  * `Toggle` is a two-state button that can be either on or off.

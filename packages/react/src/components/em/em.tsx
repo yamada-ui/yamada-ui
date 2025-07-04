@@ -7,11 +7,13 @@ import { emStyle } from "./em.style"
 
 export interface EmProps extends HTMLStyledProps<"em">, ThemeProps<EmStyle> {}
 
-export const {
+const {
   PropsContext: EmPropsContext,
   usePropsContext: useEmPropsContext,
   withContext,
 } = createComponent<EmProps, EmStyle>("em", emStyle)
+
+export { EmPropsContext, useEmPropsContext }
 
 /**
  * `Em` is a component that represents emphasized text. By default, it renders a `em` element.

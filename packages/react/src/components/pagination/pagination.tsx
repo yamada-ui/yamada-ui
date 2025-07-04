@@ -98,8 +98,7 @@ export interface PaginationRootProps
   itemProps?: PaginationItemProps
 }
 
-export const {
-  component,
+const {
   PropsContext: PaginationPropsContext,
   usePropsContext: usePaginationPropsContext,
   withContext,
@@ -108,6 +107,8 @@ export const {
   "pagination",
   paginationStyle,
 )
+
+export { PaginationPropsContext, usePaginationPropsContext }
 
 /**
  * `Pagination` is a component for managing the pagination and navigation of content.

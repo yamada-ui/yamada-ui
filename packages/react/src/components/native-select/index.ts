@@ -5,7 +5,7 @@ export {
   NativeOptionGroup,
   NativeSelectPropsContext,
   NativeSelectRoot,
-  useNativeSelectProps,
+  useNativeSelectPropsContext,
 } from "./native-select"
 export type {
   NativeOptionGroupProps,

@@ -27,12 +27,14 @@ export interface SwitchProps
   labelProps?: HTMLStyledProps<"span">
 }
 
-export const {
+const {
   PropsContext: SwitchPropsContext,
   usePropsContext: useSwitchPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<SwitchProps, SwitchStyle>("switch", switchStyle)
+
+export { SwitchPropsContext, useSwitchPropsContext }
 
 /**
  * `Switch` is a component used to toggle between on and off states.

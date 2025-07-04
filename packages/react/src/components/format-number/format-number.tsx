@@ -21,7 +21,7 @@ export interface FormatNumberProps
   locale?: string
 }
 
-export const {
+const {
   PropsContext: FormatNumberPropsContext,
   usePropsContext: useFormatNumberPropsContext,
   withContext,
@@ -29,6 +29,8 @@ export const {
   "format-number",
   formatNumberStyle,
 )
+
+export { FormatNumberPropsContext, useFormatNumberPropsContext }
 
 /**
  * `FormatNumber` is used to format numbers to a specific locale and options.

@@ -60,11 +60,13 @@ export interface ZStackProps
   startIndex?: number
 }
 
-export const {
+const {
   PropsContext: ZStackPropsContext,
   usePropsContext: useZStackPropsContext,
   withContext,
 } = createComponent<ZStackProps, ZStackStyle>("stack--depth", zStackStyle)
+
+export { useZStackPropsContext, ZStackPropsContext }
 
 /**
  * `ZStack` is a component that groups elements and provides space between child elements.

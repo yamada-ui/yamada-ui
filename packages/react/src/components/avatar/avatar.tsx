@@ -19,7 +19,7 @@ export interface AvatarProps
   icon?: ReactElement
 }
 
-export const {
+const {
   component,
   PropsContext: AvatarPropsContext,
   usePropsContext: useAvatarPropsContext,
@@ -27,6 +27,13 @@ export const {
   withProvider,
   useRootComponentProps,
 } = createSlotComponent<AvatarProps, AvatarStyle>("avatar", avatarStyle)
+
+export {
+  AvatarPropsContext,
+  component,
+  useAvatarPropsContext,
+  useRootComponentProps,
+}
 
 /**
  * `Avatar` is a component that displays a profile picture or an icon with initials representing a user.

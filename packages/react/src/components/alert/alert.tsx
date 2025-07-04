@@ -38,18 +38,19 @@ export interface AlertRootProps
   status?: StatusScheme
 }
 
-export const {
+const {
   ComponentContext,
   PropsContext: AlertPropsContext,
   useComponentContext,
   usePropsContext: useAlertPropsContext,
-  useStyleContext,
   withContext,
   withProvider,
 } = createSlotComponent<AlertRootProps, AlertStyle, ComponentContext>(
   "alert",
   alertStyle,
 )
+
+export { AlertPropsContext, useAlertPropsContext }
 
 /**
  * `Alert` is a component that conveys information to the user.

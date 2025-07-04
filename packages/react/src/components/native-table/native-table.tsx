@@ -29,17 +29,17 @@ export interface NativeTableRootProps
   scrollAreaProps?: NativeTableAreaProps
 }
 
-export const {
+const {
   PropsContext: NativeTablePropsContext,
   usePropsContext: useNativeTablePropsContext,
   withContext,
   withProvider,
-  useRootComponentProps,
-  useSlotComponentProps,
 } = createSlotComponent<NativeTableRootProps, NativeTableStyle>(
   "native-table",
   nativeTableStyle,
 )
+
+export { NativeTablePropsContext, useNativeTablePropsContext }
 
 /**
  * `NativeTable` is a component for efficiently organizing and displaying data.

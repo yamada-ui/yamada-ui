@@ -23,10 +23,11 @@ interface EditableContext
     "getRootProps" | "onCancel" | "onEdit" | "onSubmit" | "value"
   > {}
 
-export const [EditableContext, useEditableContext] =
-  createContext<EditableContext>({
-    name: "EditableContext",
-  })
+const [EditableContext, useEditableContext] = createContext<EditableContext>({
+  name: "EditableContext",
+})
+
+export { EditableContext, useEditableContext }
 
 export interface UseEditableProps extends FieldProps {
   /**

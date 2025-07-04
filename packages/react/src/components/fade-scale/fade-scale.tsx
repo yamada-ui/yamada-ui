@@ -57,7 +57,7 @@ export interface FadeScaleProps
   scale?: number
 }
 
-export const {
+const {
   PropsContext: FadeScalePropsContext,
   usePropsContext: useFadeScalePropsContext,
   withContext,
@@ -65,6 +65,8 @@ export const {
   "fade-scale",
   fadeScaleStyle,
 )
+
+export { FadeScalePropsContext, useFadeScalePropsContext }
 
 /**
  * `FadeScale` is a component that gradually scales up to reveal or scales down to hide an element.

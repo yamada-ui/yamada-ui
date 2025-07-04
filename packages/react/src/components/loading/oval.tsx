@@ -1,9 +1,9 @@
 "use client"
 
-import type { LoadingProps } from "./utils"
+import type { LoadingProps } from "./loading"
 import { styled, varAttr } from "../../core"
 import { Icon } from "../icon"
-import { initialProps, superProps, withContext } from "./utils"
+import { initialProps, superProps, withContext } from "./loading"
 
 export interface OvalProps extends LoadingProps {}
 

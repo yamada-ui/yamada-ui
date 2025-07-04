@@ -12,7 +12,7 @@ export interface InputAddonProps
     ThemeProps<InputAddonStyle>,
     Pick<InputProps, "errorBorderColor" | "focusBorderColor"> {}
 
-export const {
+const {
   PropsContext: InputAddonPropsContext,
   usePropsContext: useInputAddonPropsContext,
   withContext,
@@ -20,6 +20,8 @@ export const {
   "input-addon",
   inputAddonStyle,
 )
+
+export { InputAddonPropsContext, useInputAddonPropsContext }
 
 export const InputAddon = withContext("div")(
   undefined,

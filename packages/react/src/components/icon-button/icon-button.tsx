@@ -26,7 +26,7 @@ export interface IconButtonProps
   icon?: ReactNode
 }
 
-export const {
+const {
   PropsContext: IconButtonPropsContext,
   usePropsContext: useIconButtonPropsContext,
   withContext,
@@ -34,6 +34,8 @@ export const {
   "icon-button",
   iconButtonStyle,
 )
+
+export { IconButtonPropsContext, useIconButtonPropsContext }
 
 /**
  * `IconButton` is a component that displays an icon within a button.

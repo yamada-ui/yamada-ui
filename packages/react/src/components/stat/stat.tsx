@@ -52,12 +52,14 @@ export interface StatRootProps
   valueProps?: StatValueProps
 }
 
-export const {
+const {
   PropsContext: StatPropsContext,
   usePropsContext: useStatPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<StatRootProps, StatStyle>("stat", statStyle)
+
+export { StatPropsContext, useStatPropsContext }
 
 /**
  * `Stat` is used to show numbers and data in a box.

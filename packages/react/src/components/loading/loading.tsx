@@ -1,6 +1,5 @@
 "use client"
 
-import type { ReactNode } from "react"
 import type {
   CSSProps,
   InitialProps,
@@ -54,15 +53,10 @@ export interface LoadingProps
   secondaryColor?: CSSProps["color"]
 }
 
-export const {
+const {
   PropsContext: LoadingPropsContext,
   usePropsContext: useLoadingPropsContext,
   withContext,
 } = createComponent<LoadingProps, LoadingStyle>("loading", loadingStyle)
 
-export interface LoadingSharedProps {
-  duration: null | number
-  message: ReactNode | undefined
-  onFinish: () => void
-  initial?: boolean | string
-}
+export { LoadingPropsContext, useLoadingPropsContext, withContext }

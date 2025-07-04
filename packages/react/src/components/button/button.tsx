@@ -112,12 +112,14 @@ export interface ButtonProps
   loadingProps?: ButtonLoadingProps
 }
 
-export const {
+const {
   component,
   PropsContext: ButtonPropsContext,
   usePropsContext: useButtonPropsContext,
   withContext,
 } = createComponent<ButtonProps, ButtonStyle>("button", buttonStyle)
+
+export { ButtonPropsContext, useButtonPropsContext }
 
 /**
  * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.

@@ -41,19 +41,22 @@ type ReorderItemProps<Y = string> = Merge<
 
 interface ReorderContext extends Pick<UseReorderProps, "orientation"> {}
 
-export const [ReorderContext, useReorderContext] =
-  createContext<ReorderContext>({
-    name: "ReorderContext",
-  })
+const [ReorderContext, useReorderContext] = createContext<ReorderContext>({
+  name: "ReorderContext",
+})
+
+export { ReorderContext, useReorderContext }
 
 interface ReorderItemContext {
   getTriggerProps: PropGetter
 }
 
-export const [ReorderItemContext, useReorderItemContext] =
+const [ReorderItemContext, useReorderItemContext] =
   createContext<ReorderItemContext>({
     name: "ReorderItemContext",
   })
+
+export { ReorderItemContext, useReorderItemContext }
 
 export interface UseReorderProps<Y = string>
   extends Partial<

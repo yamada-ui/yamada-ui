@@ -9,7 +9,7 @@ export interface ContainerRootProps
   extends HTMLStyledProps<"section">,
     ThemeProps<ContainerStyle> {}
 
-export const {
+const {
   PropsContext: ContainerPropsContext,
   usePropsContext: useContainerPropsContext,
   withContext,
@@ -18,6 +18,8 @@ export const {
   "container",
   containerStyle,
 )
+
+export { ContainerPropsContext, useContainerPropsContext }
 
 /**
  * `Container` is a component used as a general division element. By default, it renders the `section` element.

@@ -15,17 +15,25 @@ import {
   useUpdateEffect,
 } from "../../utils"
 
-export const {
+const {
   DescendantsContext: TabDescendantsContext,
   useDescendant: useTabDescendant,
   useDescendants: useTabDescendants,
 } = createDescendant<HTMLButtonElement>()
 
-export const {
+export { TabDescendantsContext, useTabDescendant, useTabDescendants }
+
+const {
   DescendantsContext: TabPanelDescendantsContext,
   useDescendant: useTabPanelDescendant,
   useDescendants: useTabPanelDescendants,
 } = createDescendant<HTMLDivElement>()
+
+export {
+  TabPanelDescendantsContext,
+  useTabPanelDescendant,
+  useTabPanelDescendants,
+}
 
 interface TabsContext
   extends Omit<
@@ -33,9 +41,11 @@ interface TabsContext
     "getRootProps" | "tabDescendants" | "tabPanelDescendants"
   > {}
 
-export const [TabsContext, useTabsContext] = createContext<TabsContext>({
+const [TabsContext, useTabsContext] = createContext<TabsContext>({
   name: "TabsContext",
 })
+
+export { TabsContext, useTabsContext }
 
 export interface UseTabsProps extends Omit<HTMLProps, "onChange"> {
   /**

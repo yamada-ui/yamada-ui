@@ -82,7 +82,7 @@ export interface SlideFadeProps
   reverse?: boolean
 }
 
-export const {
+const {
   PropsContext: SlideFadePropsContext,
   usePropsContext: useSlideFadePropsContext,
   withContext,
@@ -90,6 +90,8 @@ export const {
   "slide-fade",
   slideFadeStyle,
 )
+
+export { SlideFadePropsContext, useSlideFadePropsContext }
 
 /**
  * `SlideFade` is a component that gradually shows or hides an element while moving it from a specified position.

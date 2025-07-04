@@ -79,7 +79,7 @@ export interface StepsRootProps
   items?: StepsItem[]
 }
 
-export const {
+const {
   ComponentContext,
   PropsContext: StepsPropsContext,
   useComponentContext,
@@ -90,6 +90,8 @@ export const {
   "steps",
   stepsStyle,
 )
+
+export { StepsPropsContext, useStepsPropsContext }
 
 /**
  * `Steps` is a component that displays the progress of a multi-step process.

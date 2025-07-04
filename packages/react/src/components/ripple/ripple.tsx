@@ -33,11 +33,13 @@ export interface RippleProps
   disabled?: boolean
 }
 
-export const {
+const {
   PropsContext: RipplePropsContext,
   usePropsContext: useRipplePropsContext,
   withContext,
 } = createComponent<RippleProps, RippleStyle>("ripple", rippleStyle)
+
+export { RipplePropsContext, useRipplePropsContext }
 
 /**
  * `Ripple` is a component that adds a ripple effect to elements, allowing users to recognize when they have clicked.

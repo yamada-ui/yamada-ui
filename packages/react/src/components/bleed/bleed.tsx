@@ -33,11 +33,13 @@ export interface BleedProps extends HTMLStyledProps {
   inlineStart?: "full" | CSSProps["marginInlineStart"]
 }
 
-export const {
+const {
   PropsContext: BleedPropsContext,
   usePropsContext: useBleedPropsContext,
   withContext,
 } = createComponent<BleedProps, BleedStyle>("bleed", bleedStyle)
+
+export { BleedPropsContext, useBleedPropsContext }
 
 /**
  * `Bleed` is a component used to break an element from the boundaries of its container.

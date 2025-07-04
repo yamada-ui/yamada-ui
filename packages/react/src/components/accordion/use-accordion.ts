@@ -15,27 +15,38 @@ import {
   mergeRefs,
 } from "../../utils"
 
-export const {
+const {
   DescendantsContext: AccordionDescendantsContext,
   useDescendant: useAccordionDescendant,
   useDescendants: useAccordionDescendants,
 } = createDescendant<HTMLButtonElement>()
 
+export {
+  AccordionDescendantsContext,
+  useAccordionDescendant,
+  useAccordionDescendants,
+}
+
 interface AccordionContext
   extends Omit<UseAccordionReturn, "descendants" | "getRootProps"> {}
 
-export const [AccordionContext, useAccordionContext] =
-  createContext<AccordionContext>({
+const [AccordionContext, useAccordionContext] = createContext<AccordionContext>(
+  {
     name: "AccordionContext",
-  })
+  },
+)
+
+export { AccordionContext, useAccordionContext }
 
 interface AccordionItemContext
   extends Omit<UseAccordionItemReturn, "getItemProps"> {}
 
-export const [AccordionItemContext, useAccordionItemContext] =
+const [AccordionItemContext, useAccordionItemContext] =
   createContext<AccordionItemContext>({
     name: "AccordionItemContext",
   })
+
+export { AccordionItemContext, useAccordionItemContext }
 
 export interface UseAccordionProps extends Omit<HTMLProps, "onChange"> {
   /**

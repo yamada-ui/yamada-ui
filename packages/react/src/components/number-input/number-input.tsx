@@ -41,7 +41,7 @@ export interface NumberInputProps
   rootProps?: InputGroup.RootProps
 }
 
-export const {
+const {
   PropsContext: NumberInputPropsContext,
   usePropsContext: useNumberInputPropsContext,
   withContext,
@@ -50,6 +50,8 @@ export const {
   "number-input",
   numberInputStyle,
 )
+
+export { NumberInputPropsContext, useNumberInputPropsContext }
 
 /**
  * `NumberInput` is a component used to obtain numeric input from the user.

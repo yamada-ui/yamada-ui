@@ -18,11 +18,13 @@ export interface TextareaProps
     FieldProps,
     UseTextareaProps {}
 
-export const {
+const {
   PropsContext: TextareaPropsContext,
   usePropsContext: useTextareaPropsContext,
   withContext,
 } = createComponent<TextareaProps, TextareaStyle>("textarea", textareaStyle)
+
+export { TextareaPropsContext, useTextareaPropsContext }
 
 /**
  * `Textarea` is a component used to obtain multi-line text input.

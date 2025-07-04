@@ -7,11 +7,13 @@ import { centerStyle } from "./center.style"
 
 export interface CenterProps extends HTMLStyledProps, ThemeProps<CenterStyle> {}
 
-export const {
+const {
   PropsContext: CenterPropsContext,
   usePropsContext: useCenterPropsContext,
   withContext,
 } = createComponent<CenterProps, CenterStyle>("center", centerStyle)
+
+export { CenterPropsContext, useCenterPropsContext }
 
 /**
  * `Center` is a component that aligns the child elements in the center within the component.

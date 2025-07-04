@@ -37,16 +37,18 @@ export interface NativeSelectRootProps
   rootProps?: InputGroup.RootProps
 }
 
-export const {
+const {
   component,
   PropsContext: NativeSelectPropsContext,
-  usePropsContext: useNativeSelectProps,
+  usePropsContext: useNativeSelectPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<NativeSelectRootProps, NativeSelectStyle>(
   "native-select",
   nativeSelectStyle,
 )
+
+export { NativeSelectPropsContext, useNativeSelectPropsContext }
 
 /**
  * `NativeSelect` is a component used for allowing users to select one option from a list. It displays a native dropdown list provided by the browser (user agent).

@@ -14,3 +14,13 @@ export type {
   TabsRootProps as RootProps,
   TabsTabProps as TabProps,
 } from "./tabs"
+export {
+  TabsContext as Context,
+  TabDescendantsContext as DescendantsContext,
+  TabPanelDescendantsContext as PanelDescendantsContext,
+  useTabsContext as useContext,
+  useTabDescendant as useDescendant,
+  useTabDescendants as useDescendants,
+  useTabPanelDescendant as usePanelDescendant,
+  useTabPanelDescendants as usePanelDescendants,
+} from "./use-tabs"

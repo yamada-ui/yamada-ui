@@ -147,7 +147,7 @@ export interface CarouselRootProps
   stopMouseEnterAutoplay?: StyleValue<boolean>
 }
 
-export const {
+const {
   ComponentContext,
   PropsContext: CarouselPropsContext,
   useComponentContext,
@@ -158,6 +158,8 @@ export const {
   "carousel",
   carouselStyle,
 )
+
+export { CarouselPropsContext, useCarouselPropsContext }
 
 /**
  * `Carousel` is a component that displays multiple elements like a slideshow.

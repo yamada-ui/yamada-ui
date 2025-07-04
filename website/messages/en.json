@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "title": "Yamada UI",
+    "description": "A UI component library unleashing the power of styling, animation, and flexibility in React applications."
+  },
+  "docs": {
+    "overview": "Overview",
+    "onThisPage": "On this page",
+    "scrollToTop": "Scroll to top",
+    "edit": "Edit this page on GitHub",
+    "category": {
+      "frameworks": "Frameworks"
+    }
+  },
+  "component": {
+    "header": {
+      "docs": "Docs",
+      "icons": "Icons",
+      "playground": "Playground",
+      "themes": "Themes",
+      "colors": "Colors",
+      "github": "GitHub repository",
+      "colorMode": "Change to {colorMode}",
+      "lang": "Change language",
+      "menu": "Open menu"
+    },
+    "footer": {
+      "copyright": "Built by <owner>Hirotomo Yamada</owner> and <contributors>these awesome people</contributors>",
+      "github": "GitHub profile of Hirotomo Yamada",
+      "discord": "Discord server",
+      "x": "X profile of Hirotomo Yamada"
+    },
+    "search": {
+      "placeholder": "Search documentation..."
+    },
+    "toc": {
+      "title": "On this page",
+      "scrollToTop": "Scroll to top",
+      "edit": "Edit this page on GitHub"
+    },
+    "copyButton": {
+      "copied": "Copied",
+      "copy": "Copy to Clipboard"
+    }
+  }
+}

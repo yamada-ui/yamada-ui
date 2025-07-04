@@ -1,0 +1,68 @@
+{
+  "title": "Docs",
+  "segment": "docs",
+  "items": [
+    {
+      "title": "Get Started",
+      "segment": "get-started",
+      "pathname": "/docs/get-started",
+      "items": [
+        {
+          "title": "Installation",
+          "segment": "installation",
+          "pathname": "/docs/get-started/installation"
+        },
+        {
+          "title": "Frameworks",
+          "segment": "frameworks",
+          "items": [
+            {
+              "title": "Using Yamada UI in Vite",
+              "segment": "vite",
+              "pathname": "/docs/get-started/frameworks/vite"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Components",
+      "segment": "components",
+      "pathname": "/docs/components",
+      "items": [
+        {
+          "title": "Box",
+          "segment": "box",
+          "pathname": "/docs/components/box"
+        }
+      ]
+    },
+    {
+      "title": "Hooks",
+      "segment": "hooks",
+      "pathname": "/docs/hooks",
+      "items": [
+        {
+          "title": "useBoolean",
+          "segment": "use-boolean",
+          "pathname": "/docs/hooks/use-boolean"
+        }
+      ]
+    },
+    {
+      "title": "Theming",
+      "segment": "theming",
+      "pathname": "/docs/theming"
+    },
+    {
+      "title": "Styling",
+      "segment": "styling",
+      "pathname": "/docs/styling"
+    },
+    {
+      "title": "Community",
+      "segment": "community",
+      "pathname": "/docs/community"
+    }
+  ]
+}

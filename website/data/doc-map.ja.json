@@ -1,0 +1,68 @@
+{
+  "title": "ドキュメント",
+  "segment": "docs",
+  "items": [
+    {
+      "title": "はじめる",
+      "segment": "get-started",
+      "pathname": "/docs/get-started",
+      "items": [
+        {
+          "title": "インストール",
+          "segment": "installation",
+          "pathname": "/docs/get-started/installation"
+        },
+        {
+          "title": "フレームワーク",
+          "segment": "frameworks",
+          "items": [
+            {
+              "title": "ViteでYamada UIを使用する",
+              "segment": "vite",
+              "pathname": "/docs/get-started/frameworks/vite"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "コンポーネント",
+      "segment": "components",
+      "pathname": "/docs/components",
+      "items": [
+        {
+          "title": "Box",
+          "segment": "box",
+          "pathname": "/docs/components/box"
+        }
+      ]
+    },
+    {
+      "title": "フック",
+      "segment": "hooks",
+      "pathname": "/docs/hooks",
+      "items": [
+        {
+          "title": "useBoolean",
+          "segment": "use-boolean",
+          "pathname": "/docs/hooks/use-boolean"
+        }
+      ]
+    },
+    {
+      "title": "テーマ",
+      "segment": "theming",
+      "pathname": "/docs/theming"
+    },
+    {
+      "title": "スタイル",
+      "segment": "styling",
+      "pathname": "/docs/styling"
+    },
+    {
+      "title": "コミュニティ",
+      "segment": "community",
+      "pathname": "/docs/community"
+    }
+  ]
+}

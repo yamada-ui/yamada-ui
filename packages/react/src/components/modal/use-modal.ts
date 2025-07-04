@@ -6,7 +6,9 @@ import { useDisclosure } from "../../hooks/use-disclosure"
 import { useI18n } from "../../providers/i18n-provider"
 import { cx, handlerAll } from "../../utils"
 
-export interface UseModalProps extends HTMLProps, UseDisclosureProps {
+export interface UseModalProps
+  extends HTMLProps,
+    Omit<UseDisclosureProps, "timing"> {
   /**
    * If `true`, the modal will close when the `Esc` key is pressed.
    *
@@ -28,10 +30,20 @@ export interface UseModalProps extends HTMLProps, UseDisclosureProps {
 export const useModal = ({
   closeOnEsc = true,
   closeOnOverlay = true,
+  defaultOpen,
+  open: openProp,
+  onClose: onCloseProp,
   onEsc,
+  onOpen: onOpenProp,
   ...rest
 }: UseModalProps = {}) => {
-  const { open, onClose, onOpen, onToggle } = useDisclosure(rest)
+  const { open, onClose, onOpen } = useDisclosure({
+    defaultOpen,
+    open: openProp,
+    onClose: onCloseProp,
+    onOpen: onOpenProp,
+    ...rest,
+  })
   const contentId = useId()
   const titleId = useId()
   const bodyId = useId()
@@ -162,7 +174,6 @@ export const useModal = ({
     getTitleProps,
     onClose,
     onOpen,
-    onToggle,
   }
 }
 

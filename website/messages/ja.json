@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "title": "Yamada UI",
+    "description": "Reactアプリケーションのスタイリング、アニメーション、そして柔軟性の力を解き放つ、UIコンポーネントライブラリ。"
+  },
+  "docs": {
+    "overview": "概要",
+    "category": {
+      "frameworks": "フレームワーク"
+    }
+  },
+  "component": {
+    "header": {
+      "docs": "ドキュメント",
+      "icons": "アイコン",
+      "playground": "プレイグラウンド",
+      "colors": "カラー",
+      "themes": "テーマ",
+      "github": "GitHubリポジトリ",
+      "colorMode": "{colorMode}に変更する",
+      "lang": "言語を変更する",
+      "menu": "メニューを開く"
+    },
+    "footer": {
+      "copyright": "このライブラリは、<owner>Hirotomo Yamada</owner> と <contributors>愉快な仲間たち</contributors> によって開発されました。",
+      "github": "Hirotomo YamadaのGitHubプロフィール",
+      "discord": "Discordサーバー",
+      "x": "Hirotomo YamadaのXプロフィール"
+    },
+    "search": {
+      "placeholder": "ドキュメントを検索する..."
+    },
+    "toc": {
+      "title": "このページでは",
+      "scrollToTop": "上にスクロールする",
+      "edit": "GitHubでこのページを編集する"
+    },
+    "copyButton": {
+      "copied": "コピーしました",
+      "copy": "クリップボードにコピーする"
+    }
+  }
+}

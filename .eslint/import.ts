@@ -9,7 +9,7 @@ export const importConfigArray: TSESLint.FlatConfig.ConfigArray = [
     name: "eslint/import/order",
     files: sharedFiles,
     plugins: {
-      import: fixupPluginRules(flatConfigs.recommended.plugins.import),
+      import: fixupPluginRules(flatConfigs.recommended.plugins?.import ?? {}),
     },
     rules: {
       "import/consistent-type-specifier-style": ["error", "prefer-top-level"],

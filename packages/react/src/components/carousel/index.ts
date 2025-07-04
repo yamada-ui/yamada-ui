@@ -1,3 +1,4 @@
+export * from "./carousel.style"
 export {
   CarouselIndicator,
   CarouselIndicators,
@@ -18,6 +19,5 @@ export type {
   CarouselPrevTriggerProps,
   CarouselRootProps,
 } from "./carousel"
-export * from "./carousel.style"
 export * as Carousel from "./namespace"
 export * from "./use-carousel"

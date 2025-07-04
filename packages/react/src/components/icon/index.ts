@@ -1,6 +1,6 @@
+export * from "./icon.style"
 export { Icon, IconPropsContext, useIconPropsContext } from "./icon"
 export type { IconProps } from "./icon"
-export * from "./icon.style"
 export * from "./icons"
 export * as icons from "./icons"
 export { LucideIcon } from "./lucide-icon"

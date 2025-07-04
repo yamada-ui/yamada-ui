@@ -1,3 +1,4 @@
+export * from "./blockquote.style"
 export {
   BlockquoteCaption,
   BlockquoteCite,
@@ -14,5 +15,4 @@ export type {
   BlockquoteIconProps,
   BlockquoteRootProps,
 } from "./blockquote"
-export * from "./blockquote.style"
 export * as Blockquote from "./namespace"

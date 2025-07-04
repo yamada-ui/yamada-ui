@@ -1,3 +1,4 @@
+export * from "./segmented-control.style"
 export * as SegmentedControl from "./namespace"
 export {
   SegmentedControlItem,
@@ -9,5 +10,4 @@ export type {
   SegmentedControlItemProps,
   SegmentedControlRootProps,
 } from "./segmented-control"
-export * from "./segmented-control.style"
 export * from "./use-segmented-control"

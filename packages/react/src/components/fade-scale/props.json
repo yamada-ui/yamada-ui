@@ -1,5 +1,5 @@
 {
-  "Fade": {
+  "FadeScale": {
     "as": {
       "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
@@ -50,6 +50,18 @@
     "open": {
       "type": "boolean",
       "description": "Show the component. triggers when enter or exit states.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the element will transition back to exit state.",
+      "required": false
+    },
+    "scale": {
+      "type": "number",
+      "defaultValue": "0.95",
+      "description": "The initial scale of the element.",
       "required": false
     },
     "transition": {

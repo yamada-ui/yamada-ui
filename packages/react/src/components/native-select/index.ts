@@ -1,3 +1,4 @@
+export * from "./native-select.style"
 export * as NativeSelect from "./namespace"
 export {
   NativeOption,
@@ -11,5 +12,4 @@ export type {
   NativeOptionProps,
   NativeSelectRootProps,
 } from "./native-select"
-export * from "./native-select.style"
 export * from "./use-native-select"

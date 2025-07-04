@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react-vite"
-import { useFormatByte } from "."
 import { Text } from "../text"
+import { useFormatByte } from "./use-format-byte"
 
 const meta: Meta = {
   title: "Hooks / useFormatByte",

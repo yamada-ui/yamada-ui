@@ -1,3 +1,4 @@
+export * from "./stat.style"
 export * as Stat from "./namespace"
 export {
   StatHelperMessage,
@@ -17,4 +18,3 @@ export type {
   StatUnitProps,
   StatValueProps,
 } from "./stat"
-export * from "./stat.style"

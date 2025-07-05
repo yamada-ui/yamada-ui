@@ -3,7 +3,6 @@ import {
   Blockquote,
   Box,
   Code,
-  Grid,
   Heading,
   List,
   NativeTable,
@@ -26,7 +25,9 @@ const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
-  blockquote: (props) => <Blockquote.Root {...props} />,
+  blockquote: (props) => (
+    <Blockquote.Root css={{ "& p": { m: "0" } }} my="md" {...props} />
+  ),
   callout: Callout,
   code: (props) => <Code variant="surface" verticalAlign="middle" {...props} />,
   "code-block": CodeBlock,
@@ -34,6 +35,8 @@ const mdxComponents: MDXComponents = {
     <Heading
       size="5xl"
       color="fg"
+      mb="md"
+      mt="xl"
       scrollMarginTop="{header-height}"
       {...props}
     />
@@ -42,6 +45,8 @@ const mdxComponents: MDXComponents = {
     <Heading
       size="3xl"
       color="fg"
+      mb="md"
+      mt="xl"
       scrollMarginTop="{header-height}"
       {...props}
     />
@@ -50,6 +55,8 @@ const mdxComponents: MDXComponents = {
     <Heading
       size="2xl"
       color="fg"
+      mb="md"
+      mt="lg"
       scrollMarginTop="{header-height}"
       {...props}
     />
@@ -58,6 +65,8 @@ const mdxComponents: MDXComponents = {
     <Heading
       size="xl"
       color="fg"
+      mb="md"
+      mt="lg"
       scrollMarginTop="{header-height}"
       {...props}
     />
@@ -66,6 +75,7 @@ const mdxComponents: MDXComponents = {
     <Heading
       size="lg"
       color="fg"
+      my="md"
       scrollMarginTop="{header-height}"
       {...props}
     />
@@ -74,19 +84,20 @@ const mdxComponents: MDXComponents = {
     <Heading
       size="md"
       color="fg"
+      my="md"
       scrollMarginTop="{header-height}"
       {...props}
     />
   ),
   li: (props) => <List.Item color="fg.emphasized" {...props} />,
-  ol: (props) => <List.Root styleType="decimal" {...props} />,
-  p: (props) => <Text color="fg.emphasized" {...props} />,
+  ol: (props) => <List.Root my="md" styleType="decimal" {...props} />,
+  p: (props) => <Text color="fg.emphasized" my="md" {...props} />,
   pre: Pre,
   strong: (props) => (
     <Text as="strong" color="fg" fontWeight="semibold" {...props} />
   ),
   table: (props) => (
-    <Box borderWidth="1px" overflow="hidden" rounded="l2">
+    <Box borderWidth="1px" my="lg" overflow="hidden" rounded="l2">
       <NativeTable.Root variant="outline" border="none" {...props} />
     </Box>
   ),
@@ -96,7 +107,7 @@ const mdxComponents: MDXComponents = {
   th: (props) => <NativeTable.Th textAlign="start" {...props} />,
   thead: (props) => <NativeTable.Thead {...props} />,
   tr: (props) => <NativeTable.Tr {...props} />,
-  ul: (props) => <List.Root styleType="disc" {...props} />,
+  ul: (props) => <List.Root my="md" styleType="disc" {...props} />,
 }
 
 function getContent(code?: string): MDXContent | null {
@@ -120,8 +131,8 @@ export function MDXContent({ code, components }: MDXContentProps) {
   const Content = useMemo(() => getContent(code), [code])
 
   return Content ? (
-    <Grid>
+    <Box _lastChild={{ mb: "0" }}>
       <Content components={{ ...mdxComponents, ...components }} />
-    </Grid>
+    </Box>
   ) : null
 }

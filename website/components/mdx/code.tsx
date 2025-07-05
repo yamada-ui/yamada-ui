@@ -31,7 +31,7 @@ export async function Pre({ lang, children, ...rest }: PreProps) {
   const omittedHtml = html.replace(/^<pre[^>]*>/, "").replace(/<\/pre>$/, "")
 
   return (
-    <Grid position="relative">
+    <Grid my="lg" position="relative">
       <Box
         as="pre"
         css={{
@@ -119,7 +119,12 @@ export interface CodeBlockProps extends GridProps {
 
 export function CodeBlock({ lang, children, title, ...rest }: BoxProps) {
   return (
-    <Grid css={{ "& pre": { roundedTop: "0" } }} data-lang={lang} {...rest}>
+    <Grid
+      css={{ "& > div": { m: "0" }, "& pre": { roundedTop: "0" } }}
+      data-lang={lang}
+      my="lg"
+      {...rest}
+    >
       <Box
         bg="bg.panel"
         borderBottomWidth="1px"

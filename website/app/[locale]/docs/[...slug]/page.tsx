@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { docs } from "#velite"
-import { VStack } from "@yamada-ui/react"
+import { Box } from "@yamada-ui/react"
 import { notFound } from "next/navigation"
 import { MDXContent } from "@/components"
 import { mdToText } from "@/utils/string"
@@ -46,11 +46,11 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <>
-      <VStack flex="1" gap="lg">
+      <Box flex="1">
         <Header {...doc} />
 
         <MDXContent code={doc.code} />
-      </VStack>
+      </Box>
 
       <Toc {...doc} />
     </>

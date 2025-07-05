@@ -6,7 +6,7 @@ export interface HeaderProps extends Doc {}
 
 export function Header({ description, title }: HeaderProps) {
   return (
-    <VStack gap="md">
+    <VStack gap="md" mb="xl">
       <VStack gap="sm">
         <Heading size="5xl">{title}</Heading>
 

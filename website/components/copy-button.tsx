@@ -24,7 +24,7 @@ export function CopyButton({ value, onClick, ...rest }: CopyButtonProps) {
       <IconButton
         size="sm"
         variant="ghost"
-        bg={{ base: "bg.panel", _hover: "bg.muted" }}
+        bg={{ base: "bg.panel", _hover: ["bg.subtle", "bg.muted"] }}
         color={{ base: "fg.muted", _hover: "fg" }}
         disableRipple
         icon={copied ? <CheckIcon /> : <ClipboardIcon />}

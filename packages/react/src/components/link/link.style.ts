@@ -5,7 +5,6 @@ export const linkStyle = defineComponentStyle({
     alignItems: "center",
     cursor: "pointer",
     display: "inline-flex",
-    focusRing: "outside",
     gap: "3",
     rounded: "l1",
   },

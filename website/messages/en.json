@@ -5,9 +5,9 @@
   },
   "docs": {
     "overview": "Overview",
-    "onThisPage": "On this page",
-    "scrollToTop": "Scroll to top",
-    "edit": "Edit this page on GitHub",
+    "storybook": "Storybook",
+    "source": "Source",
+    "style": "Style",
     "category": {
       "frameworks": "Frameworks"
     }

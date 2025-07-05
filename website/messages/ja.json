@@ -5,6 +5,9 @@
   },
   "docs": {
     "overview": "概要",
+    "storybook": "ストーリーブック",
+    "source": "ソースコード",
+    "style": "スタイル",
     "category": {
       "frameworks": "フレームワーク"
     }

@@ -13,7 +13,7 @@ export const colors = defineSemanticTokens.colors({
     info: ["info.50", "info.950"],
     muted: ["black.200", "white.200"],
     overlay: "blackAlpha.600",
-    panel: ["white.bg", "black.bg"],
+    panel: ["black.bg", "white.bg"],
     subtle: ["black.100", "white.100"],
     success: ["success.50", "success.950"],
     warning: ["warning.50", "warning.950"],
@@ -43,7 +43,7 @@ export const colors = defineSemanticTokens.colors({
 
   black: {
     base: "#0a0b0b",
-    bg: "#161616",
+    bg: "#f8f8f8",
     contrast: "white",
     emphasized: "black.200",
     fg: "black.800",
@@ -55,7 +55,7 @@ export const colors = defineSemanticTokens.colors({
   },
   white: {
     base: "#ffffff",
-    bg: "#f8f8f8",
+    bg: "#161616",
     contrast: "black",
     emphasized: "white.400/50",
     fg: "white.900",
@@ -68,7 +68,7 @@ export const colors = defineSemanticTokens.colors({
 
   gray: {
     base: "gray.500",
-    bg: ["black.50", "white.100"],
+    bg: ["black.bg", "white.bg"],
     contrast: ["white", "white"],
     emphasized: ["black.200", "white.400/50"],
     fg: ["black.800", "white.900"],

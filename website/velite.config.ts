@@ -9,7 +9,8 @@ import { CONSTANTS } from "./constants"
 import { rehypePre } from "./utils/rehype-plugins"
 import {
   remarkCallout,
-  remarkCodeTitle,
+  remarkCodeBlock,
+  remarkCodePreview,
   remarkSteps,
 } from "./utils/remark-plugins"
 
@@ -80,7 +81,8 @@ export default defineConfig({
       remarkDirective,
       remarkGfm,
       remarkCallout,
-      remarkCodeTitle,
+      remarkCodePreview,
+      remarkCodeBlock,
       remarkSteps,
     ],
   },

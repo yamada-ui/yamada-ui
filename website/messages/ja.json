@@ -38,6 +38,10 @@
     "copyButton": {
       "copied": "コピーしました",
       "copy": "クリップボードにコピーする"
+    },
+    "codePreview": {
+      "preview": "プレビュー",
+      "code": "コード"
     }
   }
 }

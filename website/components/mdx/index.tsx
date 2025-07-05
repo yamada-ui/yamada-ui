@@ -8,29 +8,23 @@ import {
   NativeTable,
   Text,
 } from "@yamada-ui/react"
-import * as components from "@yamada-ui/react"
 import { useMemo } from "react"
 import * as runtime from "react/jsx-runtime"
-import { NextLink } from "../next-link"
 import { Callout } from "./callout"
-import { CodeBlock, Pre } from "./code"
+import { CodeBlock } from "./code-block"
+import { CodePreview } from "./code-preview"
+import { Link } from "./link"
+import { Pre } from "./pre"
 
 const mdxComponents: MDXComponents = {
-  ...(components as unknown as MDXComponents),
-  a: (props) => (
-    <NextLink
-      css={{ "&[data-fragment]": { textDecoration: "none" } }}
-      variant="underline"
-      color="inherit"
-      {...props}
-    />
-  ),
+  a: Link,
   blockquote: (props) => (
     <Blockquote.Root css={{ "& p": { m: "0" } }} my="md" {...props} />
   ),
   callout: Callout,
   code: (props) => <Code variant="surface" verticalAlign="middle" {...props} />,
   "code-block": CodeBlock,
+  "code-preview": CodePreview,
   h1: (props) => (
     <Heading
       size="5xl"

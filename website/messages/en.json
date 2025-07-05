@@ -41,6 +41,10 @@
     "copyButton": {
       "copied": "Copied",
       "copy": "Copy to Clipboard"
+    },
+    "codePreview": {
+      "preview": "Preview",
+      "code": "Code"
     }
   }
 }

@@ -1,4 +1,4 @@
-import type { BoxProps, GridProps } from "@yamada-ui/react"
+import type { BoxProps } from "@yamada-ui/react"
 import {
   transformerMetaHighlight,
   transformerNotationDiff,
@@ -6,7 +6,7 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from "@shikijs/transformers"
-import { Box, Grid, isString, Text } from "@yamada-ui/react"
+import { Box, Grid, isString } from "@yamada-ui/react"
 import { codeToHtml } from "shiki"
 import { CopyButton } from "../copy-button"
 
@@ -31,7 +31,7 @@ export async function Pre({ lang, children, ...rest }: PreProps) {
   const omittedHtml = html.replace(/^<pre[^>]*>/, "").replace(/<\/pre>$/, "")
 
   return (
-    <Grid my="lg" position="relative">
+    <Grid my="lg" position="relative" {...rest}>
       <Box
         as="pre"
         css={{
@@ -100,7 +100,6 @@ export async function Pre({ lang, children, ...rest }: PreProps) {
         ps={{ base: "lg", md: "md" }}
         py={{ base: "lg", md: "md" }}
         rounded="l2"
-        {...rest}
       />
       <CopyButton
         position="absolute"
@@ -108,38 +107,6 @@ export async function Pre({ lang, children, ...rest }: PreProps) {
         top={{ base: "3.5", md: "1.5" }}
         value={children}
       />
-    </Grid>
-  )
-}
-
-export interface CodeBlockProps extends GridProps {
-  lang?: string
-  title?: string
-}
-
-export function CodeBlock({ lang, children, title, ...rest }: BoxProps) {
-  return (
-    <Grid
-      css={{ "& > div": { m: "0" }, "& pre": { roundedTop: "0" } }}
-      data-lang={lang}
-      my="lg"
-      {...rest}
-    >
-      <Box
-        bg="bg.panel"
-        borderBottomWidth="1px"
-        borderColor="border.subtle"
-        color="fg.emphasized"
-        p="2"
-        px="4"
-        py="3"
-        roundedTop="l2"
-      >
-        <Text fontFamily="mono" fontSize="sm">
-          {title}
-        </Text>
-      </Box>
-      {children}
     </Grid>
   )
 }

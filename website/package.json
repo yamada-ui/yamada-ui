@@ -27,7 +27,8 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "scroll-into-view-if-needed": "^3.1.0",
-    "shiki": "3.3.0"
+    "shiki": "3.3.0",
+    "sucrase": "^3.35.0"
   },
   "devDependencies": {
     "@cspell/eslint-plugin": "^9.1.2",

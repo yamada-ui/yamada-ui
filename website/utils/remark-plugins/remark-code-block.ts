@@ -2,16 +2,14 @@ import type { PhrasingContent, Root } from "mdast"
 import type { Plugin } from "unified"
 import { visit } from "unist-util-visit"
 
-export function remarkCodeTitle(): ReturnType<Plugin<[], Root>> {
+export function remarkCodeBlock(): ReturnType<Plugin<[], Root>> {
   return function (tree, file) {
     visit(tree, "code", function (node, index = 0, parent) {
-      const attrs = `${node.lang ?? ""} ${node.meta ?? ""}`.trim()
+      if (!node.meta) return
 
-      if (!attrs) return
+      const [title] = node.meta.match(/(?<=title=("|'))(.*?)(?=("|'))/) ?? [""]
 
-      const [title] = attrs.match(/(?<=title=("|'))(.*?)(?=("|'))/) ?? [""]
-
-      if (!title && attrs.includes("title=")) {
+      if (!title && node.meta.includes("title=")) {
         file.message("Invalid title", node, "remark-code-title")
 
         return

@@ -21,7 +21,7 @@ export function Header() {
       as="nav"
       size="sm"
       variant="ghost"
-      bg="bg"
+      bg="bg/90"
       display={{ base: "flex", md: "none" }}
       gap="xs"
       justifyContent="center"

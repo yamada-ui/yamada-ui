@@ -60,7 +60,7 @@ export function Toc({ path, toc }: TocProps) {
 
         if (!el) continue
 
-        if (el.getBoundingClientRect().top < 100) currentId = id
+        if (el.getBoundingClientRect().top < 140) currentId = id
       }
 
       setCurrentId(currentId)
@@ -109,11 +109,11 @@ export function Toc({ path, toc }: TocProps) {
     >
       {flattenedToc.length ? (
         <>
-          <Text color="fg.muted" fontSize="sm">
+          <Text color="fg" fontSize="sm">
             {t("title")}
           </Text>
 
-          <VStack as="nav" alignItems="flex-start" gap="xs">
+          <VStack as="nav" alignItems="flex-start" gap="sm">
             {flattenedToc.map(({ depth, title, url }, index) => {
               const id = url.replace("#", "")
               const current = currentId == id
@@ -128,7 +128,11 @@ export function Toc({ path, toc }: TocProps) {
                   href={url}
                   css={{ "--depth": depth }}
                   aria-current={current ? "page" : undefined}
-                  color={{ base: "fg.muted", _current: "fg", _hover: "fg" }}
+                  color={{
+                    base: "fg.muted",
+                    _current: "fg",
+                    _hover: "fg",
+                  }}
                   fontSize="sm"
                   lineClamp={1}
                   ms="calc(md * {depth})"

@@ -1,11 +1,6 @@
 "use client"
 
-import type {
-  BoxProps,
-  CSSProps,
-  HTMLProps,
-  StackProps,
-} from "@yamada-ui/react"
+import type { BoxProps, HTMLProps, StackProps } from "@yamada-ui/react"
 import type { PreProps } from "./pre"
 import {
   Box,
@@ -36,10 +31,6 @@ export function CodePreviewTabs({ children, ...rest }: CodePreviewTabsProps) {
             id="preview"
             aria-controls="previewPanel"
             aria-selected={preview}
-            color={!preview ? "fg.muted" : undefined}
-            _selected={{
-              layerStyle: "subtle",
-            }}
             onClick={on}
           >
             {t("preview")}
@@ -49,7 +40,6 @@ export function CodePreviewTabs({ children, ...rest }: CodePreviewTabsProps) {
             id="code"
             aria-controls="codePanel"
             aria-selected={!preview}
-            color={preview ? "fg.muted" : undefined}
             onClick={off}
           >
             {t("code")}
@@ -62,7 +52,7 @@ export function CodePreviewTabs({ children, ...rest }: CodePreviewTabsProps) {
   )
 }
 
-export interface CodePreviewTabProps extends HTMLProps<"button">, CSSProps {}
+export interface CodePreviewTabProps extends HTMLProps<"button"> {}
 
 export function CodePreviewTab({ ...rest }: CodePreviewTabProps) {
   return (
@@ -80,6 +70,9 @@ export function CodePreviewTab({ ...rest }: CodePreviewTabProps) {
       rounded="l2"
       transitionDuration="moderate"
       transitionProperty="common"
+      _notSelected={{
+        color: "fg.muted",
+      }}
       _selected={{
         layerStyle: "subtle",
       }}
@@ -90,7 +83,7 @@ export function CodePreviewTab({ ...rest }: CodePreviewTabProps) {
 
 export interface PreviewPanelProps extends BoxProps {}
 
-export function PreviewPanel({ ...rest }: PreviewPanelProps) {
+export function PreviewPanel({ children, ...rest }: PreviewPanelProps) {
   const { preview } = useCodePreviewTabsContext()
 
   return (
@@ -100,7 +93,16 @@ export function PreviewPanel({ ...rest }: PreviewPanelProps) {
       hidden={!preview}
       role="tabpanel"
       {...rest}
-    />
+    >
+      <Box
+        borderColor="border.subtle"
+        borderWidth="1px"
+        p={{ base: "lg", md: "md" }}
+        rounded="l2"
+      >
+        {children}
+      </Box>
+    </Box>
   )
 }
 
@@ -112,6 +114,7 @@ export function CodePanel({ ...rest }: CodePanelProps) {
   return (
     <Box
       id="codePanel"
+      css={{ "& > *": { m: "0" } }}
       aria-labelledby="code"
       hidden={preview}
       role="tabpanel"

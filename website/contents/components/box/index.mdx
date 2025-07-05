@@ -7,8 +7,28 @@ storybook: components-box--basic
 source: components/box
 ---
 
-## Import
+```tsx preview
+<Box p="md" bg="bg.contrast" color="fg.contrast">
+  This is the Box
+</Box>
+```
+
+## Usage
 
 ```ts
 import { Box } from "@yamada-ui/react"
+```
+
+```tsx
+<Box />
+```
+
+### Render a different component
+
+By passing `as`, you can render it as a different element.
+
+```tsx preview
+<Box as="section" p="md" bg="danger" color="white">
+  This is the section
+</Box>
 ```

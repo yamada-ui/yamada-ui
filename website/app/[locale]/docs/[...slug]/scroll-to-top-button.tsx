@@ -21,6 +21,7 @@ export function ScrollToTopButton() {
       fontSize="sm"
       opacity={y > 100 ? 1 : 0}
       rounded="l1"
+      tabIndex={y > 100 ? 0 : -1}
       transitionDuration="moderate"
       transitionProperty="color, opacity"
       onClick={() => {

@@ -10,6 +10,7 @@ import {
 } from "@yamada-ui/react"
 import { useMemo } from "react"
 import * as runtime from "react/jsx-runtime"
+import { langConditions } from "@/utils/i18n"
 import { Callout } from "./callout"
 import { CodeBlock } from "./code-block"
 import { CodePreview } from "./code-preview"
@@ -22,7 +23,19 @@ const mdxComponents: MDXComponents = {
     <Blockquote.Root css={{ "& p": { m: "0" } }} my="md" {...props} />
   ),
   callout: Callout,
-  code: (props) => <Code variant="surface" verticalAlign="middle" {...props} />,
+  code: (props) => (
+    <Code
+      css={{
+        [langConditions.ja]: {
+          mx: "1",
+          verticalAlign: "top",
+        },
+      }}
+      variant="surface"
+      verticalAlign="middle"
+      {...props}
+    />
+  ),
   "code-block": CodeBlock,
   "code-preview": CodePreview,
   h1: (props) => (

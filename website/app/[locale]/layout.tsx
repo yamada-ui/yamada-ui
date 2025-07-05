@@ -17,6 +17,7 @@ import { Footer } from "@/app/[locale]/footer"
 import { Header } from "@/app/[locale]/header"
 import { CONSTANTS } from "@/constants"
 import { routing } from "@/i18n"
+import { theme } from "@/theme"
 import { getLang } from "@/utils/i18n"
 
 export function generateStaticParams() {
@@ -74,7 +75,11 @@ export default async function Layout({ children, params }: LayoutProps) {
   const lang = getLang(locale)
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html
+      lang={lang}
+      style={{ scrollBehavior: "smooth" }}
+      suppressHydrationWarning
+    >
       <body className={inter.className} suppressHydrationWarning>
         <ColorModeScript type="cookie" />
         <ThemeSchemeScript type="cookie" />
@@ -84,6 +89,7 @@ export default async function Layout({ children, params }: LayoutProps) {
             cookie={cookieStore.toString()}
             locale={locale}
             storage="cookie"
+            theme={theme}
           >
             <Flex alignItems="center" flexDirection="column" minH="100dvh">
               <Flex

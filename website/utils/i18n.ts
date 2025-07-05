@@ -22,3 +22,8 @@ export function getLocale(lang?: string) {
     )
   }
 }
+
+export const langConditions: { [key in Lang]: string } = {
+  en: "[lang=en] &",
+  ja: "[lang=ja] &",
+}

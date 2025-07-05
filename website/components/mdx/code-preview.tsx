@@ -1,12 +1,17 @@
 import type { ComponentType, ReactNode } from "react"
 import type { Transform } from "sucrase"
 import type { CodePreviewTabsProps } from "./code-preview-tabs"
-import { Box, isFunction, isString } from "@yamada-ui/react"
+import { isArray, isFunction, isString, Text } from "@yamada-ui/react"
 import * as Components from "@yamada-ui/react"
 import React, { isValidElement, useMemo } from "react"
 import { transform as originalTransform } from "sucrase"
 import { CodePanel, CodePreviewTabs, PreviewPanel } from "./code-preview-tabs"
-import { Pre } from "./pre"
+
+const components = {
+  React,
+  ...React,
+  ...Components,
+}
 
 function trim(code: string) {
   return code.trim().replace(/;$/, "")
@@ -37,15 +42,33 @@ function evalCode(
 
 export interface CodePreviewProps extends CodePreviewTabsProps {
   lang: string
+  functional?: boolean
 }
 
-export function CodePreview({ lang, children, ...rest }: CodePreviewProps) {
+export function CodePreview({
+  lang,
+  children,
+  functional,
+  ...rest
+}: CodePreviewProps) {
+  const [code, pre] = useMemo(() => {
+    let [code, pre] = isArray(children) ? children : [null, null]
+
+    if (isString(code) && functional) {
+      if (!code.startsWith("function")) {
+        code = `function Demo() { ${code} }`
+      }
+    }
+
+    return [code, pre]
+  }, [children, functional])
+
   const component = useMemo<ReactNode>(() => {
     try {
-      if (!isString(children)) return null
+      if (!isString(code)) return null
 
       const ts = ["ts", "tsx"].includes(lang)
-      const code = pipe<string>(
+      const transformedCode = pipe<string>(
         function (code) {
           return 'const _jsxFileName = "";' + code
         },
@@ -57,9 +80,9 @@ export function CodePreview({ lang, children, ...rest }: CodePreviewProps) {
         transform("jsx", ts ? "typescript" : undefined),
         (code: string) => `return (${code})`,
         trim,
-      )(children)
+      )(code)
 
-      const Component = evalCode(code, { React, ...Components })
+      const Component = evalCode(transformedCode, components)
 
       if (isFunction(Component)) {
         return <Component />
@@ -70,32 +93,21 @@ export function CodePreview({ lang, children, ...rest }: CodePreviewProps) {
       }
     } catch (e) {
       if (process.env.NODE_ENV === "development") {
-        console.error(e)
+        if (e instanceof Error) {
+          return <Text color="error">{e.toString()}</Text>
+        } else {
+          return null
+        }
       } else {
         throw e
       }
-
-      return null
     }
-  }, [children, lang])
+  }, [code, lang])
 
   return (
     <CodePreviewTabs {...rest}>
-      <PreviewPanel data-lang={lang}>
-        <Box
-          borderColor="border.subtle"
-          borderWidth="1px"
-          p={{ base: "lg", md: "md" }}
-          rounded="l2"
-        >
-          {component}
-        </Box>
-      </PreviewPanel>
-      <CodePanel lang={lang}>
-        <Pre lang={lang} m="0">
-          {children}
-        </Pre>
-      </CodePanel>
+      <PreviewPanel data-lang={lang}>{component}</PreviewPanel>
+      <CodePanel lang={lang}>{pre}</CodePanel>
     </CodePreviewTabs>
   )
 }

@@ -31,7 +31,7 @@ export function Header() {
   return (
     <HStack
       as="header"
-      bg="bg"
+      bg="bg/90"
       gap="sm"
       left="0"
       position="sticky"

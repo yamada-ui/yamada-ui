@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 import { Code } from "@yamada-ui/react"
 import { NextLink } from "@/components"
+import { langConditions } from "./i18n"
 
 interface FC<T extends object = {}> {
   (props: T & { children: ReactNode; key?: number | string }): ReactNode
@@ -29,7 +30,17 @@ export function mdToHtml(
   {
     a = (props) => <NextLink variant="underline" {...props} />,
     code = (props) => (
-      <Code variant="surface" verticalAlign="middle" {...props} />
+      <Code
+        css={{
+          [langConditions.ja]: {
+            mx: "1",
+            verticalAlign: "top",
+          },
+        }}
+        variant="surface"
+        verticalAlign="middle"
+        {...props}
+      />
     ),
   }: TextToHtmlOptions = {},
 ): ReactNode {

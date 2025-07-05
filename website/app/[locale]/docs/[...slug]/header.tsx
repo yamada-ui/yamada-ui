@@ -10,7 +10,7 @@ export function Header({ description, title }: HeaderProps) {
       <VStack gap="sm">
         <Heading size="5xl">{title}</Heading>
 
-        <Text color="fg.muted">{mdToHtml(description)}</Text>
+        <Text color="fg.emphasized">{mdToHtml(description)}</Text>
       </VStack>
     </VStack>
   )

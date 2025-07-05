@@ -9,7 +9,12 @@ export function Link({ href, ...rest }: LinkProps) {
   return (
     <NextLink
       href={href}
-      css={{ "&[data-fragment]": { textDecoration: "none" } }}
+      css={{
+        "&[data-fragment]": {
+          display: "inline-block",
+          textDecoration: "none",
+        },
+      }}
       variant="underline"
       color="inherit"
       external={external}

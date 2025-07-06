@@ -707,9 +707,6 @@ importers:
       hastscript:
         specifier: ^9.0.1
         version: 9.0.1
-      mdast:
-        specifier: ^3.0.0
-        version: 3.0.0
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
@@ -728,6 +725,9 @@ importers:
       remark-gfm:
         specifier: ^4.0.1
         version: 4.0.1
+      tsx:
+        specifier: ^4.20.3
+        version: 4.20.3
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -10934,11 +10934,6 @@ packages:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==, tarball: https://registry.npmjs.org/mdast-util-to-string/-/mdast-util-to-string-4.0.0.tgz}
     dependencies:
       '@types/mdast': 4.0.4
-
-  /mdast@3.0.0:
-    resolution: {integrity: sha512-xySmf8g4fPKMeC07jXGz971EkLbWAJ83s4US2Tj9lEdnZ142UP5grN73H1Xd3HzrdbU5o9GYYP/y8F9ZSwLE9g==, tarball: https://registry.npmjs.org/mdast/-/mdast-3.0.0.tgz}
-    deprecated: '`mdast` was renamed to `remark`'
-    dev: true
 
   /media-query-parser@2.0.2:
     resolution: {integrity: sha512-1N4qp+jE0pL5Xv4uEcwVUhIkwdUO3S/9gML90nqKA7v7FcOS5vUtatfzok9S9U1EJU8dHWlcv95WLnKmmxZI9w==, tarball: https://registry.npmjs.org/media-query-parser/-/media-query-parser-2.0.2.tgz}

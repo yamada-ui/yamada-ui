@@ -7,6 +7,7 @@ import {
   CloseButton,
   Drawer,
   GithubIcon,
+  handlerAll,
   IconButton,
   MenuIcon,
   Separator,
@@ -200,7 +201,13 @@ interface DocsMenuItemProps extends NextLinkButtonProps {
   segment: string
 }
 
-function DocsMenuItem({ href, children, segment, ...rest }: DocsMenuItemProps) {
+function DocsMenuItem({
+  href,
+  children,
+  segment,
+  onClick,
+  ...rest
+}: DocsMenuItemProps) {
   const pathname = usePathname()
   const overview = segment === "overview"
   const current = overview
@@ -217,6 +224,9 @@ function DocsMenuItem({ href, children, segment, ...rest }: DocsMenuItemProps) {
       fontWeight="normal"
       justifyContent="flex-start"
       mb="xs"
+      onClick={handlerAll(onClick, () =>
+        window.scrollTo({ behavior: "instant", top: 0 }),
+      )}
       {...rest}
     >
       <Text as="span" truncated>

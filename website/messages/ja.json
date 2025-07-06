@@ -9,7 +9,10 @@
     "source": "ソースコード",
     "style": "スタイル",
     "category": {
-      "frameworks": "フレームワーク"
+      "frameworks": "フレームワーク",
+      "tokens": "デザイントークン",
+      "configuration": "設定",
+      "styles": "スタイル"
     }
   },
   "component": {

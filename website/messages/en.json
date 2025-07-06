@@ -9,7 +9,10 @@
     "source": "Source",
     "style": "Style",
     "category": {
-      "frameworks": "Frameworks"
+      "frameworks": "Frameworks",
+      "tokens": "Design Tokens",
+      "configuration": "Configuration",
+      "styles": "Styles"
     }
   },
   "component": {

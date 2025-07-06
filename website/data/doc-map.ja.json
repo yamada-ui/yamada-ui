@@ -5,25 +5,55 @@
     {
       "title": "はじめる",
       "segment": "get-started",
-      "pathname": "/docs/get-started",
       "items": [
         {
-          "title": "インストール",
-          "segment": "installation",
-          "pathname": "/docs/get-started/installation"
+          "title": "マイグレーション",
+          "segment": "migration",
+          "pathname": "/docs/get-started/migration"
+        },
+        {
+          "title": "基本を学ぶ",
+          "segment": "basics",
+          "pathname": "/docs/get-started/basics"
+        },
+        {
+          "title": "応用を学ぶ",
+          "segment": "advanced",
+          "pathname": "/docs/get-started/advanced"
+        },
+        {
+          "title": "CLI",
+          "segment": "cli",
+          "pathname": "/docs/get-started/cli"
         },
         {
           "title": "フレームワーク",
           "segment": "frameworks",
           "items": [
             {
-              "title": "ViteでYamada UIを使用する",
+              "title": "Next.js (App)",
+              "segment": "next-app",
+              "pathname": "/docs/get-started/frameworks/next-app"
+            },
+            {
+              "title": "Next.js (Pages)",
+              "segment": "next-pages",
+              "pathname": "/docs/get-started/frameworks/next-pages"
+            },
+            {
+              "title": "Remix",
+              "segment": "remix",
+              "pathname": "/docs/get-started/frameworks/remix"
+            },
+            {
+              "title": "Vite",
               "segment": "vite",
               "pathname": "/docs/get-started/frameworks/vite"
             }
           ]
         }
-      ]
+      ],
+      "pathname": "/docs/get-started"
     },
     {
       "title": "コンポーネント",
@@ -50,18 +80,267 @@
       ]
     },
     {
-      "title": "テーマ",
-      "segment": "theming",
-      "pathname": "/docs/theming"
-    },
-    {
       "title": "スタイル",
       "segment": "styling",
+      "items": [
+        {
+          "title": "Style Props",
+          "segment": "style-props",
+          "pathname": "/docs/styling/style-props"
+        },
+        {
+          "title": "条件付きスタイル",
+          "segment": "conditional-styles",
+          "pathname": "/docs/styling/conditional-styles"
+        },
+        {
+          "title": "レスポンシブデザイン",
+          "segment": "responsive",
+          "pathname": "/docs/styling/responsive"
+        },
+        {
+          "title": "カラーモード",
+          "segment": "color-mode",
+          "pathname": "/docs/styling/color-mode"
+        },
+        {
+          "title": "CSSカスタムプロパティ",
+          "segment": "css-custom-properties",
+          "pathname": "/docs/styling/css-custom-properties"
+        },
+        {
+          "title": "CSS値関数",
+          "segment": "css-value-functions",
+          "pathname": "/docs/styling/css-value-functions"
+        },
+        {
+          "title": "インターポレーション",
+          "segment": "interpolation",
+          "pathname": "/docs/styling/interpolation"
+        },
+        {
+          "title": "アニメーション",
+          "segment": "animation",
+          "pathname": "/docs/styling/animation"
+        },
+        {
+          "title": "フォーカスリング",
+          "segment": "focus-ring",
+          "pathname": "/docs/styling/focus-ring"
+        },
+        {
+          "title": "グローバルスタイル",
+          "segment": "global-styles",
+          "pathname": "/docs/styling/global-styles"
+        },
+        {
+          "title": "リセットスタイル",
+          "segment": "reset-styles",
+          "pathname": "/docs/styling/reset-styles"
+        },
+        {
+          "title": "レイヤースタイル",
+          "segment": "layer-styles",
+          "pathname": "/docs/styling/layer-styles"
+        },
+        {
+          "title": "テキストスタイル",
+          "segment": "text-styles",
+          "pathname": "/docs/styling/text-styles"
+        },
+        {
+          "title": "アットルール",
+          "segment": "at-rules",
+          "pathname": "/docs/styling/at-rules"
+        },
+        {
+          "title": "カスケードレイヤー",
+          "segment": "cascade-layers",
+          "pathname": "/docs/styling/cascade-layers"
+        }
+      ],
       "pathname": "/docs/styling"
+    },
+    {
+      "title": "テーマ",
+      "segment": "theming",
+      "items": [
+        {
+          "title": "カスタマイズ",
+          "segment": "customization",
+          "pathname": "/docs/theming/customization"
+        },
+        {
+          "title": "ブレークポイント",
+          "segment": "breakpoints",
+          "pathname": "/docs/theming/breakpoints"
+        },
+        {
+          "title": "カスケードレイヤー",
+          "segment": "cascade-layers",
+          "pathname": "/docs/theming/cascade-layers"
+        },
+        {
+          "title": "設定",
+          "segment": "configuration",
+          "items": [
+            {
+              "title": "概要",
+              "segment": "overview",
+              "pathname": "/docs/theming/configuration/overview"
+            },
+            {
+              "title": "カスタマイズ",
+              "segment": "customization",
+              "pathname": "/docs/theming/configuration/customization"
+            }
+          ]
+        },
+        {
+          "title": "スタイル",
+          "segment": "styles",
+          "items": [
+            {
+              "title": "グローバルスタイル",
+              "segment": "global-styles",
+              "pathname": "/docs/theming/styles/global-styles"
+            },
+            {
+              "title": "リセットスタイル",
+              "segment": "reset-styles",
+              "pathname": "/docs/theming/styles/reset-styles"
+            },
+            {
+              "title": "レイヤースタイル",
+              "segment": "layer-styles",
+              "pathname": "/docs/theming/styles/layer-styles"
+            },
+            {
+              "title": "テキストスタイル",
+              "segment": "text-styles",
+              "pathname": "/docs/theming/styles/text-styles"
+            }
+          ]
+        },
+        {
+          "title": "デザイントークン",
+          "segment": "tokens",
+          "items": [
+            {
+              "title": "アニメーション (animation)",
+              "segment": "animations",
+              "pathname": "/docs/theming/tokens/animations"
+            },
+            {
+              "title": "アスペクト比 (aspect-ratio)",
+              "segment": "aspect-ratios",
+              "pathname": "/docs/theming/tokens/aspect-ratios"
+            },
+            {
+              "title": "ぼかし (blur)",
+              "segment": "blurs",
+              "pathname": "/docs/theming/tokens/blurs"
+            },
+            {
+              "title": "ボーダー (border)",
+              "segment": "borders",
+              "pathname": "/docs/theming/tokens/borders"
+            },
+            {
+              "title": "ブレイクポイント (media query)",
+              "segment": "breakpoints",
+              "pathname": "/docs/theming/tokens/breakpoints"
+            },
+            {
+              "title": "カラー (color)",
+              "segment": "colors",
+              "pathname": "/docs/theming/tokens/colors"
+            },
+            {
+              "title": "所要時間 (animation-duration)",
+              "segment": "durations",
+              "pathname": "/docs/theming/tokens/durations"
+            },
+            {
+              "title": "イージング (animation-timing-function)",
+              "segment": "easings",
+              "pathname": "/docs/theming/tokens/easings"
+            },
+            {
+              "title": "文字の大きさ (font-size)",
+              "segment": "font-sizes",
+              "pathname": "/docs/theming/tokens/font-sizes"
+            },
+            {
+              "title": "文字の太さ (font-weight)",
+              "segment": "font-weights",
+              "pathname": "/docs/theming/tokens/font-weights"
+            },
+            {
+              "title": "文字体 (font-family)",
+              "segment": "fonts",
+              "pathname": "/docs/theming/tokens/fonts"
+            },
+            {
+              "title": "グラデーション (background-image)",
+              "segment": "gradients",
+              "pathname": "/docs/theming/tokens/gradients"
+            },
+            {
+              "title": "キーフレーム (@keyframes)",
+              "segment": "keyframes",
+              "pathname": "/docs/theming/tokens/keyframes"
+            },
+            {
+              "title": "文字間隔 (letter-spacing)",
+              "segment": "letter-spacings",
+              "pathname": "/docs/theming/tokens/letter-spacings"
+            },
+            {
+              "title": "行間 (line-height)",
+              "segment": "line-heights",
+              "pathname": "/docs/theming/tokens/line-heights"
+            },
+            {
+              "title": "角丸 (border-radius)",
+              "segment": "radii",
+              "pathname": "/docs/theming/tokens/radii"
+            },
+            {
+              "title": "シャドウ (box-shadow)",
+              "segment": "shadows",
+              "pathname": "/docs/theming/tokens/shadows"
+            },
+            {
+              "title": "サイズ (width, height)",
+              "segment": "sizes",
+              "pathname": "/docs/theming/tokens/sizes"
+            },
+            {
+              "title": "スペース (margin, padding)",
+              "segment": "spaces",
+              "pathname": "/docs/theming/tokens/spaces"
+            },
+            {
+              "title": "位置 (z-index)",
+              "segment": "z-indices",
+              "pathname": "/docs/theming/tokens/z-indices"
+            }
+          ]
+        }
+      ],
+      "pathname": "/docs/theming"
     },
     {
       "title": "コミュニティ",
       "segment": "community",
+      "items": [
+        {
+          "title": "貢献する",
+          "segment": "contributing",
+          "pathname": "/docs/community/contributing"
+        }
+      ],
       "pathname": "/docs/community"
     }
   ]

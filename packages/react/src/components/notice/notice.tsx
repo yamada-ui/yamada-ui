@@ -160,10 +160,9 @@ export const useNotice = (
 ): CreateNoticeReturn => {
   const { theme } = useTheme()
 
-  return useMemo(
-    () => createNoticeFunc(defaultOptions ?? {}, theme),
-    [defaultOptions, theme],
-  )
+  return useMemo(() => {
+    return createNoticeFunc(defaultOptions ?? {}, theme)
+  }, [defaultOptions, theme])
 }
 
 type State = {
@@ -215,11 +214,13 @@ const createNoticeStore = (initialState: State): Store => {
 
         return {
           ...prev,
-          [placement]: prev[placement].map((notice) =>
-            notice.id.toString() === id.toString()
-              ? { ...notice, isDelete: true }
-              : notice,
-          ),
+          [placement]: prev[placement].map((notice) => {
+            if (notice.id.toString() === id.toString()) {
+              return { ...notice, isDelete: true }
+            } else {
+              return notice
+            }
+          }),
         }
       })
     },
@@ -241,10 +242,12 @@ const createNoticeStore = (initialState: State): Store => {
 
         return placements.reduce(
           (acc, placement) => {
-            acc[placement] = prev[placement].map((notice) => ({
-              ...notice,
-              isDelete: true,
-            }))
+            acc[placement] = prev[placement].map((notice) => {
+              return {
+                ...notice,
+                isDelete: true,
+              }
+            })
 
             return acc
           },
@@ -276,9 +279,13 @@ const createNoticeStore = (initialState: State): Store => {
 
           const ids = notices.map(({ id }) => id)
 
-          prevNotices = prevNotices.map((notice) =>
-            ids.includes(notice.id) ? { ...notice, isDelete: true } : notice,
-          )
+          prevNotices = prevNotices.map((notice) => {
+            if (ids.includes(notice.id)) {
+              return { ...notice, isDelete: true }
+            } else {
+              return notice
+            }
+          })
         }
 
         const notices = convertedPlacement.includes("top")
@@ -297,12 +304,14 @@ const createNoticeStore = (initialState: State): Store => {
       Boolean(findNotice(noticeStore.getSnapshot(), id).placement),
 
     remove: (id, placement) => {
-      setState((prevState) => ({
-        ...prevState,
-        [placement]: prevState[placement].filter(
-          (notice) => notice.id.toString() !== id.toString(),
-        ),
-      }))
+      setState((prevState) => {
+        return {
+          ...prevState,
+          [placement]: prevState[placement].filter(
+            (notice) => notice.id.toString() !== id.toString(),
+          ),
+        }
+      })
     },
 
     subscribe: (onStoreChange) => {
@@ -429,26 +438,20 @@ export const NoticeRoot = withContext<"div", NoticeRootProps>(
 
 interface NoticeContentProps extends HTMLStyledProps {}
 
-export const NoticeContent = withContext<"div", NoticeContentProps>(
-  ({ ...props }) => {
-    return <styled.div {...props} />
-  },
-  "content",
-)()
+export const NoticeContent = withContext<"div", NoticeContentProps>((props) => {
+  return <styled.div {...props} />
+}, "content")()
 
 export interface NoticeIconProps extends AlertIconProps {}
 
-export const NoticeIcon = withContext<"div", NoticeIconProps>(
-  ({ ...props }) => {
-    return <Alert.Icon {...props} />
-  },
-  "icon",
-)()
+export const NoticeIcon = withContext<"div", NoticeIconProps>((props) => {
+  return <Alert.Icon {...props} />
+}, "icon")()
 
 export interface NoticeLoadingProps extends AlertLoadingProps {}
 
 export const NoticeLoading = withContext<"svg", NoticeLoadingProps>(
-  ({ ...props }) => {
+  (props) => {
     return <Alert.Loading {...props} />
   },
   ["icon", "loading"],
@@ -456,17 +459,14 @@ export const NoticeLoading = withContext<"svg", NoticeLoadingProps>(
 
 export interface NoticeTitleProps extends AlertTitleProps {}
 
-export const NoticeTitle = withContext<"div", NoticeTitleProps>(
-  ({ ...props }) => {
-    return <Alert.Title {...props} />
-  },
-  "title",
-)()
+export const NoticeTitle = withContext<"div", NoticeTitleProps>((props) => {
+  return <Alert.Title {...props} />
+}, "title")()
 
 export interface NoticeDescriptionProps extends AlertDescriptionProps {}
 
 export const NoticeDescription = withContext<"div", NoticeDescriptionProps>(
-  ({ ...props }) => {
+  (props) => {
     return <Alert.Description {...props} />
   },
   "description",

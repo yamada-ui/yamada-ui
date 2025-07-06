@@ -1,11 +1,6 @@
 import type { Variants } from "motion/react"
 import type { ReactNode } from "react"
-import type {
-  CSSObject,
-  HTMLStyledProps,
-  ThemeConfig,
-  ThemeProps,
-} from "../../core"
+import type { HTMLStyledProps, ThemeConfig, ThemeProps } from "../../core"
 import type { HTMLMotionProps, MotionStyledComponent } from "../motion"
 import type { NoticeStyle } from "./notice.style"
 import type { DragEndEventHandler, NoticeOptions } from "./types"
@@ -18,6 +13,7 @@ import {
   useSyncExternalStore,
 } from "react"
 import { createSlotComponent, styled } from "../../core"
+import { useHover } from "../../hooks/use-hover"
 import { useTimeout } from "../../hooks/use-timeout"
 import { runIfFn, toDirectionalPlacement, useUpdateEffect } from "../../utils"
 import { motion } from "../motion"
@@ -54,7 +50,6 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
     closeOnDrag,
     closeStrategy,
     containerRef,
-    gap = "0",
     variants,
     itemProps,
     listProps,
@@ -65,7 +60,6 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
         closeOnDrag,
         closeStrategy,
         containerRef,
-        gap,
         variants,
         itemProps,
         listProps,
@@ -73,7 +67,6 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
       [
         appendToParentPortal,
         containerRef,
-        gap,
         itemProps,
         listProps,
         variants,
@@ -92,15 +85,9 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
         Object.entries(state).map(([placement, notices]) => {
           const convertedPlacement = toDirectionalPlacement(placement)
 
-          const customCSS: CSSObject = {
-            gap,
-            margin: gap,
-          }
-
           return (
             <NoticeListComponent
               key={placement}
-              css={customCSS}
               data-placement={placement}
               convertedPlacement={convertedPlacement}
               notices={notices}
@@ -110,7 +97,7 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
             />
           )
         }),
-      [state, gap, variants, itemProps, listProps],
+      [state, variants, itemProps, listProps],
     )
 
     return (
@@ -178,6 +165,8 @@ export interface NoticeComponentProps
     NoticeOptions,
     Pick<NoticeProviderProps, "itemProps" | "variants"> {
   convertedPlacement: string
+  hovered: boolean
+  index: number
 }
 
 const NoticeComponent = withContext<"li", NoticeComponentProps>(
@@ -187,6 +176,8 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
     closeOnDrag,
     convertedPlacement,
     duration = 5000,
+    hovered,
+    index,
     isDelete = false,
     message,
     placement = "start-center",
@@ -338,6 +329,15 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
       [convertedPlacement, dragVelocity, dragOffset, onDelete],
     )
 
+    const isBottom = convertedPlacement.includes("bottom")
+    const ySign = isBottom ? 1 : -1
+
+    const y =
+      index > 0 && !hovered
+        ? `calc(${index * ySign * 100}% + ${index * (isBottom ? -20 : 20)}px)`
+        : "0px"
+    const scaleX = index > 0 && !hovered ? Math.max(1 - index * 0.1, 0) : 1
+
     return (
       <motion.li
         id={id.toString()}
@@ -360,28 +360,40 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
         {...rest}
         {...props}
       >
-        <NoticeListInnerItemComponent
-          data-placement-bottom={convertedPlacement.includes("bottom")}
-          data-placement-center={convertedPlacement.includes("center")}
-          data-placement-left={convertedPlacement.includes("left")}
-          data-placement-right={convertedPlacement.includes("right")}
-          data-placement-top={convertedPlacement.includes("top")}
+        <motion.div
+          animate={{ scaleX, y }}
+          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
         >
-          {runIfFn(message, { id, onClose })}
-        </NoticeListInnerItemComponent>
+          <NoticeListInnerItemComponent
+            data-placement-bottom={convertedPlacement.includes("bottom")}
+            data-placement-center={convertedPlacement.includes("center")}
+            data-placement-left={convertedPlacement.includes("left")}
+            data-placement-right={convertedPlacement.includes("right")}
+            data-placement-top={convertedPlacement.includes("top")}
+            hovered={hovered}
+          >
+            {runIfFn(message, { id, onClose })}
+          </NoticeListInnerItemComponent>
+        </motion.div>
       </motion.li>
     )
   },
   "listItem",
 )()
 
-interface NoticeListInnerItemProps extends HTMLStyledProps {}
+interface NoticeListInnerItemProps extends HTMLStyledProps {
+  hovered: boolean
+}
 
 const NoticeListInnerItemComponent = withContext<
   "div",
   NoticeListInnerItemProps
->(({ children, ...props }) => {
-  return <styled.div {...props}>{children}</styled.div>
+>(({ children, hovered, ...props }) => {
+  return (
+    <styled.div data-expanded={hovered} {...props}>
+      {children}
+    </styled.div>
+  )
 }, "noticeWrapper")()
 
 interface NoticeListProps
@@ -400,6 +412,8 @@ const NoticeListComponent = withContext<"ul", NoticeListProps>(
     listProps,
     ...props
   }) => {
+    const { ref, hovered } = useHover<HTMLUListElement>()
+
     const sortedNotices = useMemo(() => {
       return notices.sort((a, b) => {
         const idA = Number.isNaN(Number(a.id)) ? Number(a.id) : Number(a.id)
@@ -407,8 +421,10 @@ const NoticeListComponent = withContext<"ul", NoticeListProps>(
         return idB - idA
       })
     }, [notices])
+
     return (
       <styled.ul
+        ref={ref}
         style={{
           "--length": sortedNotices.length,
         }}
@@ -425,15 +441,15 @@ const NoticeListComponent = withContext<"ul", NoticeListProps>(
           {sortedNotices.map((notice, index) => (
             <NoticeComponent
               key={notice.id}
-              style={{
-                "--index": index,
-              }}
+              style={{ "--index": index }}
               data-placement-bottom={convertedPlacement.includes("bottom")}
               data-placement-center={convertedPlacement.includes("center")}
               data-placement-left={convertedPlacement.includes("left")}
               data-placement-right={convertedPlacement.includes("right")}
               data-placement-top={convertedPlacement.includes("top")}
               convertedPlacement={convertedPlacement}
+              hovered={hovered}
+              index={index}
               variants={variants}
               itemProps={itemProps}
               {...notice}

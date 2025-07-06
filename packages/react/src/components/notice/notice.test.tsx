@@ -123,6 +123,32 @@ describe("useNotice()", () => {
     expect(noticeTitles).toHaveLength(5)
   })
 
+  test("If the limit value is set to 0, all are displayed", async () => {
+    const LimitedNoticeExample = () => {
+      const notice = useNotice({ limit: 0 })
+      const onOpen = () => {
+        notice({
+          description: "NoticeDescription",
+          title: "NoticeTitle",
+        })
+      }
+
+      return <button onClick={onOpen}>Open Notice</button>
+    }
+
+    const { user } = render(<LimitedNoticeExample />)
+
+    const openNoticeButton = await screen.findByRole("button", {
+      name: /open notice/i,
+    })
+
+    for (let index = 0; index < 5; index++) {
+      await user.click(openNoticeButton)
+    }
+    const noticeTitles = await screen.findAllByText(/NoticeTitle/i)
+    expect(noticeTitles).toHaveLength(5)
+  })
+
   test("Update notice", async () => {
     const UpdateNoticeExample = () => {
       const notice = useNotice()

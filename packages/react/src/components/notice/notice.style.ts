@@ -45,65 +45,25 @@ export const noticeStyle = defineComponentSlotStyle({
       display: "flex",
       justifyContent: "center",
       zIndex: "calc(var(--length) - var(--index))",
-      _groupHover: {
-        _first: {
-          "& > *:first-of-type": {
-            '&[data-placement-bottom="true"]': {
-              paddingBottom: "md",
-            },
-            '&[data-placement-top="true"]': {
-              paddingTop: "md",
-            },
-          },
-          _notFirst: {
-            paddingTop: "md",
-          },
-        },
-        _notFirst: {
-          "& > *:first-of-type": {
-            '&[data-placement-bottom="true"]': {
-              paddingBottom: "md",
-            },
-            '&[data-placement-top="true"]': {
-              paddingTop: "md",
-            },
-            transform: "scale(1) translateY(0)",
-          },
-          paddingTop: "0",
-        },
-      },
-      _notFirst: {
-        "& > *:first-of-type": {
-          '&[data-placement-bottom="true"]': {
-            paddingBottom: "md",
-            transform:
-              "translateY(calc((var(--index) * 100%) - (var(--index) * 20px))) scale(max(calc(1 - var(--index) * 0.1), 0))",
-          },
-          '&[data-placement-top="true"]': {
-            paddingTop: "md",
-            transform:
-              "translateY(calc((var(--index) * -100%) + (var(--index) * 20px))) scale(max(calc(1 - var(--index) * 0.1), 0))",
-          },
-        },
-      },
     },
     loading: {},
     noticeWrapper: {
+      '&[data-expanded="true"]': {
+        "&[data-placement-bottom='true']": {
+          paddingBottom: "md",
+        },
+        "&[data-placement-top='true']": {
+          paddingTop: "md",
+        },
+      },
       display: "flex",
       maxW: "36rem",
       minW: "20rem",
       pointerEvents: "auto",
       transformOrigin: "top",
-      transition: "padding 400ms ease, transform 400ms ease",
+      transition: "padding 400ms ease",
     },
     root: {
-      "&>*": {
-        opacity: "calc(1 - var(--index) * 1)",
-        transition: "opacity 300ms ease",
-        _groupHover: {
-          opacity: 1,
-        },
-      },
       boxShadow:
         "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
     },

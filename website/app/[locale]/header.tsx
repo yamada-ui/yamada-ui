@@ -22,7 +22,6 @@ export function Header() {
     return [
       { href: "/docs", label: t("docs") },
       { href: "/icons", label: t("icons") },
-      { href: "/playground", label: t("playground") },
       { href: "/themes", label: t("themes") },
       { href: "https://yamada-colors.app", label: t("colors") },
     ]

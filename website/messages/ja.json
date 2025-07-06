@@ -15,6 +15,24 @@
       "styles": "スタイル"
     }
   },
+  "home": {
+    "title": "コンポーネントの力を解き放つ",
+    "description": "美しく一貫性のある、アクセスしやすいコンポーネントと高度なスタイリングを実現するデザインシステムを提供し、あなたのアイデアを現実のものにします。",
+    "primaryAction": "はじめる",
+    "secondaryAction": "コンポーネントを見る"
+  },
+  "icons": {
+    "title": "美しく一貫性のあるアイコン",
+    "description": "Lucideを使用して作成された、すぐに使用できるアイコンのコレクション。アプリケーションにコピー&ペーストできます。",
+    "primaryAction": "アイコンを見る",
+    "secondaryAction": "ドキュメント"
+  },
+  "themes": {
+    "title": "あなただけのテーマ",
+    "description": "美しく一貫性のあるテーマをお試しください。プロジェクトにコピー&ペーストできます。新しいテーマエディターを近日公開予定です。",
+    "primaryAction": "テーマを見る",
+    "secondaryAction": "ドキュメント"
+  },
   "component": {
     "header": {
       "docs": "ドキュメント",

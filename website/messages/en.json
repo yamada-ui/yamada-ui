@@ -15,6 +15,24 @@
       "styles": "Styles"
     }
   },
+  "home": {
+    "title": "Unleash the Power of Components",
+    "description": "Provides a design system that delivers beautiful, consistent, accessible components and advanced styling. Bring your ideas to life.",
+    "primaryAction": "Get Started",
+    "secondaryAction": "Browse Components"
+  },
+  "icons": {
+    "title": "Beautiful & Consistent Icons",
+    "description": "A collection of ready-to-use icons built with Lucide. Copy and paste into your apps.",
+    "primaryAction": "Browse Icons",
+    "secondaryAction": "Documentation"
+  },
+  "themes": {
+    "title": "Your Own Themes",
+    "description": "Try out beautiful and consistent themes. Copy and paste them into your projects. New theme editor coming soon.",
+    "primaryAction": "Browse Themes",
+    "secondaryAction": "Documentation"
+  },
   "component": {
     "header": {
       "docs": "Docs",

@@ -1,4 +1,5 @@
 export * from "./discord-icon"
+export * from "./hero"
 export * from "./logo-icon"
 export * from "./mdx"
 export * from "./next-link"

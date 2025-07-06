@@ -7,11 +7,10 @@ import {
   Flex,
   Text,
 } from "@yamada-ui/react"
-import { usePathname } from "next/navigation"
 import { useMemo } from "react"
 import { NextLinkButton } from "@/components"
 import { flattenDocMap, getDocMap } from "@/data"
-import { useLocale } from "@/i18n"
+import { useLocale, usePathname } from "@/i18n"
 
 export function Pagination() {
   const pathname = usePathname()

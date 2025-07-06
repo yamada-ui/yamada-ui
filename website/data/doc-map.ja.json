@@ -166,6 +166,11 @@
       "segment": "theming",
       "items": [
         {
+          "title": "CLI",
+          "segment": "cli",
+          "pathname": "/docs/theming/cli"
+        },
+        {
           "title": "カスタマイズ",
           "segment": "customization",
           "pathname": "/docs/theming/customization"

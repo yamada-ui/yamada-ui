@@ -2,6 +2,7 @@
 
 import type { NextLinkButtonProps } from "@/components"
 import {
+  Box,
   ButtonGroup,
   CloseButton,
   Drawer,
@@ -157,24 +158,17 @@ function DocsMenu() {
 
       <Separator />
 
-      <ButtonGroup
-        as="nav"
-        size="sm"
-        variant="ghost"
-        alignItems="stretch"
-        flexDirection="column"
-        gap="xs"
-        w="full"
-      >
+      <Box as="nav" _lastChild={{ mb: "0" }}>
         {secondaryItems.map(({ items, pathname: href, segment, title }) => {
           if (items) {
             return (
-              <VStack key={segment} gap="xs" mt="md">
+              <Box key={segment} my="lg" _lastChild={{ mb: "0" }}>
                 <Text
                   as="span"
                   color="fg.muted"
                   fontSize="sm"
                   lineClamp={1}
+                  mb="2"
                   ms="3"
                 >
                   {title}
@@ -187,7 +181,7 @@ function DocsMenu() {
                     </DocsMenuItem>
                   )
                 })}
-              </VStack>
+              </Box>
             )
           } else {
             return (
@@ -197,7 +191,7 @@ function DocsMenu() {
             )
           }
         })}
-      </ButtonGroup>
+      </Box>
     </VStack>
   )
 }
@@ -219,8 +213,10 @@ function DocsMenuItem({ href, children, segment, ...rest }: DocsMenuItemProps) {
       size="sm"
       variant={{ base: "ghost", _current: "solid" }}
       aria-current={current ? "page" : undefined}
+      display="block"
       fontWeight="normal"
       justifyContent="flex-start"
+      mb="xs"
       {...rest}
     >
       <Text as="span" truncated>

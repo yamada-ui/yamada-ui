@@ -1,7 +1,7 @@
 "use client"
 
 import type { NextLinkButtonProps } from "@/components"
-import { Box, Text, VStack } from "@yamada-ui/react"
+import { Box, Text } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
 import { NextLinkButton } from "@/components"
@@ -42,16 +42,17 @@ export function Sidebar() {
       px="1"
       top="{header-height}"
     >
-      <VStack as="nav" gap="xs">
+      <Box as="nav" _lastChild={{ mb: "0" }}>
         {items.map(({ items, pathname: href, segment, title }) => {
           if (items) {
             return (
-              <VStack key={segment} gap="xs" mt="md">
+              <Box key={segment} my="lg" _lastChild={{ mb: "0" }}>
                 <Text
                   as="span"
                   color="fg.muted"
                   fontSize="sm"
                   lineClamp={1}
+                  mb="2"
                   ms="3"
                 >
                   {title}
@@ -64,7 +65,7 @@ export function Sidebar() {
                     </SidebarItem>
                   )
                 })}
-              </VStack>
+              </Box>
             )
           } else {
             return (
@@ -74,7 +75,7 @@ export function Sidebar() {
             )
           }
         })}
-      </VStack>
+      </Box>
     </Box>
   )
 }
@@ -99,6 +100,7 @@ function SidebarItem({ href, segment, ...rest }: SidebarItemProps) {
       fontWeight="normal"
       justifyContent="flex-start"
       lineClamp={1}
+      mb="xs"
       {...rest}
     />
   )

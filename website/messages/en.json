@@ -25,7 +25,10 @@
     "title": "Beautiful & Consistent Icons",
     "description": "A collection of ready-to-use icons built with Lucide. Copy and paste into your apps.",
     "primaryAction": "Browse Icons",
-    "secondaryAction": "Documentation"
+    "secondaryAction": "Documentation",
+    "placeholder": "Search {count} icons...",
+    "not-found": "Icon not found.",
+    "reset": "Clear your search and try again"
   },
   "themes": {
     "title": "Your Own Themes",

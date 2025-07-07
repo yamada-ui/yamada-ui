@@ -13,19 +13,23 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../.prettierignore --check --cache"
+    "format": "prettier . --ignore-path ../.prettierignore --check --cache",
+    "gen:icon": "tsx scripts/generate/icon"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "@yamada-ui/react": "workspace:*",
+    "execa": "9.3.1",
     "hast-util-to-jsx-runtime": "^2.3.6",
+    "match-sorter": "^8.0.3",
     "motion": "12.18.1",
     "next": "^15.3.4",
     "next-intl": "^4.3.1",
     "next-mdx-remote": "^5.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "rimraf": "^6.0.1",
     "scroll-into-view-if-needed": "^3.1.0",
     "shiki": "3.3.0",
     "sucrase": "^3.35.0"
@@ -43,6 +47,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@yamada-ui/cli": "workspace:*",
+    "@yamada-ui/utils": "workspace:*",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-import-resolver-node": "^0.3.9",

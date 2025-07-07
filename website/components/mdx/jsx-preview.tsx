@@ -1,7 +1,6 @@
 "use client"
 
 import type { BoxProps, HTMLProps, StackProps } from "@yamada-ui/react"
-import type { PreProps } from "./pre"
 import {
   Box,
   ButtonGroup,
@@ -12,49 +11,49 @@ import {
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
 
-const [CodePreviewTabsContext, useCodePreviewTabsContext] = createContext<{
+const [JsxPreviewContext, useJsxPreviewContext] = createContext<{
   preview: boolean
-}>({ name: "CodePreviewTabs" })
+}>({ name: "JsxPreview" })
 
-export interface CodePreviewTabsProps extends StackProps {}
+export interface JsxPreviewProps extends StackProps {}
 
-export function CodePreviewTabs({ children, ...rest }: CodePreviewTabsProps) {
+export function JsxPreview({ children, ...rest }: JsxPreviewProps) {
   const t = useTranslations("component.codePreview")
   const [preview, { off, on }] = useBoolean(true)
   const context = useMemo(() => ({ preview }), [preview])
 
   return (
-    <CodePreviewTabsContext value={context}>
+    <JsxPreviewContext value={context}>
       <VStack gap="md" my="lg" {...rest}>
         <ButtonGroup size="sm" aria-orientation="horizontal" role="tablist">
-          <CodePreviewTab
+          <JsxPreviewTab
             id="preview"
             aria-controls="previewPanel"
             aria-selected={preview}
             onClick={on}
           >
             {t("preview")}
-          </CodePreviewTab>
+          </JsxPreviewTab>
 
-          <CodePreviewTab
+          <JsxPreviewTab
             id="code"
             aria-controls="codePanel"
             aria-selected={!preview}
             onClick={off}
           >
             {t("code")}
-          </CodePreviewTab>
+          </JsxPreviewTab>
         </ButtonGroup>
 
         {children}
       </VStack>
-    </CodePreviewTabsContext>
+    </JsxPreviewContext>
   )
 }
 
-export interface CodePreviewTabProps extends HTMLProps<"button"> {}
+export interface JsxPreviewTabProps extends HTMLProps<"button"> {}
 
-export function CodePreviewTab({ ...rest }: CodePreviewTabProps) {
+export function JsxPreviewTab({ ...rest }: JsxPreviewTabProps) {
   return (
     <Box
       as="button"
@@ -81,10 +80,10 @@ export function CodePreviewTab({ ...rest }: CodePreviewTabProps) {
   )
 }
 
-export interface PreviewPanelProps extends BoxProps {}
+export interface JsxPreviewPanelProps extends BoxProps {}
 
-export function PreviewPanel({ children, ...rest }: PreviewPanelProps) {
-  const { preview } = useCodePreviewTabsContext()
+export function JsxPreviewPanel({ children, ...rest }: JsxPreviewPanelProps) {
+  const { preview } = useJsxPreviewContext()
 
   return (
     <Box
@@ -106,15 +105,14 @@ export function PreviewPanel({ children, ...rest }: PreviewPanelProps) {
   )
 }
 
-export interface CodePanelProps extends PreProps {}
+export interface JsxCodePanelProps extends BoxProps {}
 
-export function CodePanel({ ...rest }: CodePanelProps) {
-  const { preview } = useCodePreviewTabsContext()
+export function JsxCodePanel({ ...rest }: JsxCodePanelProps) {
+  const { preview } = useJsxPreviewContext()
 
   return (
     <Box
       id="codePanel"
-      css={{ "& > *": { m: "0" } }}
       aria-labelledby="code"
       hidden={preview}
       role="tabpanel"

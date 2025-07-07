@@ -3,7 +3,7 @@ import { Icon } from "@yamada-ui/react"
 
 export interface LogoIconProps extends IconProps {}
 
-export function LogoIcon({ boxSize = "1.5em", ...props }: LogoIconProps) {
+export function LogoIcon({ boxSize = "1em", ...props }: LogoIconProps) {
   return (
     <Icon
       boxSize={boxSize}

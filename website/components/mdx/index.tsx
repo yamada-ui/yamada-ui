@@ -13,9 +13,9 @@ import * as runtime from "react/jsx-runtime"
 import { langConditions } from "@/utils/i18n"
 import { Callout } from "./callout"
 import { CodeBlock } from "./code-block"
-import { CodePreview } from "./code-preview"
 import { Link } from "./link"
-import { Pre } from "./pre"
+
+export { CodeBlock }
 
 const mdxComponents: MDXComponents = {
   a: Link,
@@ -36,8 +36,6 @@ const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
-  "code-block": CodeBlock,
-  "code-preview": CodePreview,
   h1: (props) => (
     <Heading
       size="5xl"
@@ -99,7 +97,7 @@ const mdxComponents: MDXComponents = {
   li: (props) => <List.Item color="fg.emphasized" {...props} />,
   ol: (props) => <List.Root my="md" styleType="decimal" {...props} />,
   p: (props) => <Text color="fg.emphasized" my="md" {...props} />,
-  pre: Pre,
+  pre: CodeBlock,
   strong: (props) => (
     <Text as="strong" color="fg" fontWeight="semibold" {...props} />
   ),

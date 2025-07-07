@@ -1,3 +1,4 @@
+export * from "./code-preview"
 export * from "./discord-icon"
 export * from "./hero"
 export * from "./logo-icon"

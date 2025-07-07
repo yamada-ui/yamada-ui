@@ -10,7 +10,6 @@ import { rehypePre } from "./utils/rehype-plugins"
 import {
   remarkCallout,
   remarkCodeBlock,
-  remarkCodePreview,
   remarkSteps,
 } from "./utils/remark-plugins"
 
@@ -81,7 +80,6 @@ export default defineConfig({
       remarkDirective,
       remarkGfm,
       remarkCallout,
-      remarkCodePreview,
       remarkCodeBlock,
       remarkSteps,
     ],

@@ -3,7 +3,7 @@ import { Icon } from "@yamada-ui/react"
 
 export interface DiscordIconProps extends IconProps {}
 
-export function DiscordIcon({ boxSize = "1.5em", ...props }: DiscordIconProps) {
+export function DiscordIcon({ boxSize = "1em", ...props }: DiscordIconProps) {
   return (
     <Icon boxSize={boxSize} fill="none" viewBox="0 0 256 199" {...props}>
       <path

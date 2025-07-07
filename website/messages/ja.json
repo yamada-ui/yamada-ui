@@ -25,7 +25,10 @@
     "title": "美しく一貫性のあるアイコン",
     "description": "Lucideを使用して作成された、すぐに使用できるアイコンのコレクション。アプリケーションにコピー&ペーストできます。",
     "primaryAction": "アイコンを見る",
-    "secondaryAction": "ドキュメント"
+    "secondaryAction": "ドキュメント",
+    "placeholder": "{count}個のアイコンを検索する...",
+    "not-found": "アイコンが見つかりません。",
+    "reset": "検索をクリアしてもう一度試す"
   },
   "themes": {
     "title": "あなただけのテーマ",

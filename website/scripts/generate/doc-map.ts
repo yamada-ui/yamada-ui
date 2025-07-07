@@ -14,7 +14,7 @@ import { getPathname } from "@/utils/route"
 
 const messages = { en, ja }
 
-const DATA_PATH = path.join(process.cwd(), "data")
+const DATA_PATH = path.resolve("data")
 
 async function getDocMap(): Promise<{ [key in Lang]: DocMap }> {
   const [en, ja] = await Promise.all(

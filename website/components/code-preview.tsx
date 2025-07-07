@@ -1,37 +1,54 @@
-import type { BoxProps } from "@yamada-ui/react"
-import {
-  transformerMetaHighlight,
-  transformerNotationDiff,
-  transformerNotationFocus,
-  transformerNotationHighlight,
-  transformerNotationWordHighlight,
-} from "@shikijs/transformers"
-import { Box, Grid, isString } from "@yamada-ui/react"
-import { codeToHtml } from "shiki"
-import { CopyButton } from "../copy-button"
+"use client"
 
-export interface PreProps extends BoxProps {
-  lang: string
+import type { GridProps } from "@yamada-ui/react"
+import { Box, Grid, useInjectVarsIntoProps } from "@yamada-ui/react"
+import { useLayoutEffect, useState } from "react"
+import { codeToHtml } from "@/libs/shiki"
+import { CopyButton } from "./copy-button"
+
+export interface CodePreviewProps extends Omit<GridProps, "children"> {
+  lang?: string
+  children?: string
+  code?: string
+  html?: string
 }
 
-export async function Pre({ lang, children, ...rest }: PreProps) {
-  if (!isString(children)) return null
+export function CodePreview({
+  lang,
+  bg = "bg.panel",
+  code,
+  children = code,
+  html: htmlProp,
+  ...props
+}: CodePreviewProps) {
+  const rest = useInjectVarsIntoProps(
+    { bg, ...props },
+    {
+      background: "bg",
+      backgroundColor: "bg",
+      bg: "bg",
+      bgColor: "bg",
+    },
+  )
+  const [html, setHtml] = useState<string | undefined>(htmlProp)
 
-  const html = await codeToHtml(children, {
-    lang,
-    themes: { light: "one-light", dark: "one-dark-pro" },
-    transformers: [
-      transformerMetaHighlight(),
-      transformerNotationDiff(),
-      transformerNotationFocus(),
-      transformerNotationHighlight(),
-      transformerNotationWordHighlight(),
-    ],
-  })
-  const omittedHtml = html.replace(/^<pre[^>]*>/, "").replace(/<\/pre>$/, "")
+  useLayoutEffect(() => {
+    if (html || !children || !lang) return
+
+    codeToHtml(children, { lang }).then(setHtml)
+  }, [children, html, lang])
+
+  if (!html || !children) return null
 
   return (
-    <Grid my="lg" position="relative" {...rest}>
+    <Grid
+      minH={{ base: "16", md: "12" }}
+      my="lg"
+      position="relative"
+      rounded="l2"
+      {...rest}
+      bg="{bg}"
+    >
       <Box
         as="pre"
         css={{
@@ -90,21 +107,20 @@ export async function Pre({ lang, children, ...rest }: PreProps) {
           },
         }}
         data-lang={lang}
-        bg="bg.panel!"
-        dangerouslySetInnerHTML={{ __html: omittedHtml }}
+        bg="transparent!"
+        dangerouslySetInnerHTML={{ __html: html }}
         fontFamily="mono"
         fontSize="sm"
         lineHeight="1.1"
         overflowX="auto"
-        pe="13"
+        pe={{ base: "13", md: "11" }}
         ps={{ base: "lg", md: "md" }}
         py={{ base: "lg", md: "md" }}
-        rounded="l2"
       />
       <CopyButton
         position="absolute"
         right={{ base: "2", md: "1.5" }}
-        top={{ base: "3.5", md: "1.5" }}
+        top={{ base: "3.5", sm: "2", md: "1.5" }}
         value={children}
       />
     </Grid>

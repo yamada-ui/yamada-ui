@@ -17,8 +17,14 @@ export function rehypePre(): ReturnType<Plugin<[], Root>> {
           Array.isArray(className) && typeof className[0] === "string"
             ? className[0].split("-")[1]
             : undefined
+        const title = child.properties.title
+        const preview = child.properties.preview
+        const functional = child.properties.functional
 
         node.properties.lang = lang
+        node.properties.title = title
+        node.properties.preview = preview
+        node.properties.functional = functional
 
         if (child.children[0]?.type !== "text") return child
 

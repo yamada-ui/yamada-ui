@@ -22,9 +22,9 @@ export function CopyButton({ value, onClick, ...rest }: CopyButtonProps) {
   return (
     <Tooltip content={copied ? t("copied") : t("copy")} placement="start">
       <IconButton
-        size="sm"
+        size={{ base: "sm", md: "xs" }}
         variant="ghost"
-        bg={{ base: "bg.panel", _hover: ["bg.subtle", "bg.muted"] }}
+        bg={{ base: "{bg, transparent}", _hover: ["bg.subtle", "bg.muted"] }}
         color={{ base: "fg.muted", _hover: "fg" }}
         disableRipple
         icon={copied ? <CheckIcon /> : <ClipboardIcon />}

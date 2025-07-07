@@ -598,9 +598,15 @@ importers:
       '@yamada-ui/react':
         specifier: workspace:*
         version: link:../packages/react
+      execa:
+        specifier: 9.3.1
+        version: 9.3.1
       hast-util-to-jsx-runtime:
         specifier: ^2.3.6
         version: 2.3.6
+      match-sorter:
+        specifier: ^8.0.3
+        version: 8.0.3
       motion:
         specifier: 12.18.1
         version: 12.18.1(react-dom@19.1.0)(react@19.1.0)
@@ -619,6 +625,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.1.0(react@19.1.0)
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
       scroll-into-view-if-needed:
         specifier: ^3.1.0
         version: 3.1.0
@@ -665,6 +674,9 @@ importers:
       '@yamada-ui/cli':
         specifier: workspace:*
         version: link:../packages/cli
+      '@yamada-ui/utils':
+        specifier: workspace:*
+        version: link:../packages/utils
       eslint:
         specifier: ^9.29.0
         version: 9.29.0(jiti@2.4.2)
@@ -10600,6 +10612,13 @@ packages:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==, tarball: https://registry.npmjs.org/markdown-table/-/markdown-table-3.0.4.tgz}
     dev: true
 
+  /match-sorter@8.0.3:
+    resolution: {integrity: sha512-BnR/YBS1iO94R3EcseKkb7kJ2w2su5CWmywHvFYv70HQ2syqca79JefoGocMK+G1NOdpV2kt0G3uQb5hcdFtIA==, tarball: https://registry.npmjs.org/match-sorter/-/match-sorter-8.0.3.tgz}
+    dependencies:
+      '@babel/runtime': 7.27.6
+      remove-accents: 0.5.0
+    dev: false
+
   /math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==, tarball: https://registry.npmjs.org/math-intrinsics/-/math-intrinsics-1.1.0.tgz}
     engines: {node: '>= 0.4'}
@@ -13436,6 +13455,10 @@ packages:
       mdast-util-to-markdown: 2.1.2
       unified: 11.0.5
     dev: true
+
+  /remove-accents@0.5.0:
+    resolution: {integrity: sha512-8g3/Otx1eJaVD12e31UbJj1YzdtVvzH85HV7t+9MJYk/u3XmkOUJ5Ys9wQrf9PCPK8+xn4ymzqYCiZl6QWKn+A==, tarball: https://registry.npmjs.org/remove-accents/-/remove-accents-0.5.0.tgz}
+    dev: false
 
   /repeat-string@1.6.1:
     resolution: {integrity: sha512-PV0dzCYDNfRi1jCDbJzpW7jNNDRuCOG/jI5ctQcGKt/clZD+YcPS3yIlWuTJMmESC8aevCFmWJy5wjAFgNqN6w==, tarball: https://registry.npmjs.org/repeat-string/-/repeat-string-1.6.1.tgz}

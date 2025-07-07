@@ -1,6 +1,8 @@
 import type { Doc } from "#velite"
+import { icons } from "@yamada-ui/react"
 import en from "./doc-map.en.json"
 import ja from "./doc-map.ja.json"
+import iconTags from "./icons.json"
 
 export interface DocMap {
   segment: string
@@ -24,4 +26,12 @@ export function flattenDocMap(items: DocMap[]): DocMap[] {
     ...(pathname ? [{ pathname, ...rest }] : []),
     ...flattenDocMap(items),
   ])
+}
+
+export function getIcons() {
+  return Object.entries(icons).map(([name, Icon]) => ({
+    name,
+    Icon,
+    tags: iconTags[name as keyof typeof iconTags],
+  }))
 }

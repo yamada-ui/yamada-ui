@@ -56,13 +56,13 @@ async function setDocMap(docMap: { [key in Lang]: DocMap }) {
 export default async function main(docs: Doc[]) {
   const docMap = await getDocMap()
 
-  docs.forEach(({ category, locale, slug, status, title }) => {
+  docs.forEach(({ group, locale, slug, status, title }) => {
     const lang = getLang(locale)
     const t = createTranslator<Dict>({ locale, messages: messages[lang] })
 
     let items = docMap[lang].items
 
-    if (category) slug = [...slug.slice(0, -1), category, ...slug.slice(-1)]
+    if (group) slug = [...slug.slice(0, -1), group, ...slug.slice(-1)]
 
     slug.reduce((prev, segment, index) => {
       const last = index === slug.length - 1
@@ -90,7 +90,7 @@ export default async function main(docs: Doc[]) {
             status,
           })
         } else {
-          const title = t(`docs.category.${segment}`)
+          const title = t(`docs.group.${segment}`)
 
           prev?.push({ title, segment, items: [] })
         }

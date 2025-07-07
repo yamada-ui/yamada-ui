@@ -9,11 +9,14 @@
     "storybook": "ストーリーブック",
     "source": "ソースコード",
     "style": "スタイル",
-    "category": {
+    "group": {
       "frameworks": "フレームワーク",
       "tokens": "デザイントークン",
       "configuration": "設定",
-      "styles": "スタイル"
+      "styles": "スタイル",
+      "components": "コンポーネント",
+      "layouts": "レイアウト",
+      "typography": "タイポグラフィ"
     }
   },
   "home": {

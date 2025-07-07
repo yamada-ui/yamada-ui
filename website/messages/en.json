@@ -9,11 +9,14 @@
     "storybook": "Storybook",
     "source": "Source",
     "style": "Style",
-    "category": {
+    "group": {
       "frameworks": "Frameworks",
       "tokens": "Design Tokens",
       "configuration": "Configuration",
-      "styles": "Styles"
+      "styles": "Styles",
+      "components": "Components",
+      "layouts": "Layouts",
+      "typography": "Typography"
     }
   },
   "home": {

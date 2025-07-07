@@ -66,9 +66,30 @@
       "pathname": "/docs/components",
       "items": [
         {
-          "title": "Box",
-          "segment": "box",
-          "pathname": "/docs/components/box"
+          "title": "CLI",
+          "segment": "cli",
+          "pathname": "/docs/components/cli"
+        },
+        {
+          "title": "styled",
+          "segment": "styled",
+          "pathname": "/docs/components/styled"
+        },
+        {
+          "title": "createComponent",
+          "segment": "create-component",
+          "pathname": "/docs/components/create-component"
+        },
+        {
+          "title": "コンポーネント",
+          "segment": "components",
+          "items": [
+            {
+              "title": "Box",
+              "segment": "box",
+              "pathname": "/docs/components/box"
+            }
+          ]
         }
       ]
     },

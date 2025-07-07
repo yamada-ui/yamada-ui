@@ -61,7 +61,7 @@ export interface UseTooltipProps
 
 export const useTooltip = ({
   autoUpdate,
-  closeDelay = 100,
+  closeDelay = 0,
   closeOnClick = true,
   closeOnEsc = true,
   closeOnScroll,
@@ -74,7 +74,7 @@ export const useTooltip = ({
   middleware,
   offset,
   open: openProp,
-  openDelay = 400,
+  openDelay = 0,
   placement,
   platform,
   preventOverflow,
@@ -88,7 +88,6 @@ export const useTooltip = ({
   const triggerRef = useRef<HTMLElement>(null)
   const openTimeout = useRef<NodeJS.Timeout>(undefined)
   const closeTimeout = useRef<NodeJS.Timeout>(undefined)
-  const isHovered = useRef(false)
   const { open, onClose, onOpen } = useDisclosure({
     defaultOpen,
     open: openProp,
@@ -140,7 +139,7 @@ export const useTooltip = ({
     }
 
     closeTimeout.current = getWindow(triggerRef.current).setTimeout(() => {
-      if (!isHovered.current) onForceClose()
+      onForceClose()
     }, closeDelay)
   }, [closeDelay, onForceClose])
 
@@ -182,21 +181,17 @@ export const useTooltip = ({
           ariaDescribedby,
           open ? describedbyId : undefined,
         ),
-        onBlur: handlerAll(props.onBlur, open ? onDelayClose : undefined),
+        onBlur: handlerAll(props.onBlur, onDelayClose),
         onClick: handlerAll(
           props.onClick,
-          open && closeOnClick ? onDelayClose : undefined,
+          closeOnClick ? onDelayClose : undefined,
         ),
-        onFocus: handlerAll(props.onFocus, !open ? onDelayOpen : undefined),
+        onFocus: handlerAll(props.onFocus, onDelayOpen),
         onPointerEnter: handlerAll(props.onPointerEnter, (ev) => {
-          isHovered.current = true
-
-          if (ev.pointerType !== "touch" && !open) onDelayOpen()
+          if (ev.pointerType !== "touch") onDelayOpen()
         }),
         onPointerLeave: handlerAll(props.onPointerLeave, (ev) => {
-          isHovered.current = false
-
-          if (ev.pointerType !== "touch" && open) onDelayClose()
+          if (ev.pointerType !== "touch") onDelayClose()
         }),
       })
     },
@@ -223,14 +218,7 @@ export const useTooltip = ({
       "data-close": dataAttr(!open),
       "data-open": dataAttr(open),
       role: "tooltip",
-      onPointerEnter: handlerAll(props.onPointerEnter, () => {
-        isHovered.current = true
-      }),
-      onPointerLeave: handlerAll(props.onPointerLeave, () => {
-        if (isHovered.current) onDelayClose()
-
-        isHovered.current = false
-      }),
+      onPointerLeave: handlerAll(props.onPointerLeave, onDelayClose),
       ...props,
     }),
     [describedbyId, onDelayClose, open],

@@ -3,5 +3,5 @@ packages:
   - "playgrounds/**"
   - "website/**"
   - "!website/.next"
-  - "!website/.mdx"
+  - "!website/.velite"
   - "!playgrounds/**/.next"

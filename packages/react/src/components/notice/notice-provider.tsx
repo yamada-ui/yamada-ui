@@ -360,40 +360,30 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
         {...rest}
         {...props}
       >
-        <motion.div
+        <NoticeListInnerItemComponent
+          data-expanded={hovered}
+          data-placement-bottom={convertedPlacement.includes("bottom")}
+          data-placement-center={convertedPlacement.includes("center")}
+          data-placement-left={convertedPlacement.includes("left")}
+          data-placement-right={convertedPlacement.includes("right")}
+          data-placement-top={convertedPlacement.includes("top")}
           animate={{ scaleX, y }}
           transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
         >
-          <NoticeListInnerItemComponent
-            data-placement-bottom={convertedPlacement.includes("bottom")}
-            data-placement-center={convertedPlacement.includes("center")}
-            data-placement-left={convertedPlacement.includes("left")}
-            data-placement-right={convertedPlacement.includes("right")}
-            data-placement-top={convertedPlacement.includes("top")}
-            hovered={hovered}
-          >
-            {runIfFn(message, { id, onClose })}
-          </NoticeListInnerItemComponent>
-        </motion.div>
+          {runIfFn(message, { id, onClose })}
+        </NoticeListInnerItemComponent>
       </motion.li>
     )
   },
   "listItem",
 )()
-
-interface NoticeListInnerItemProps extends HTMLStyledProps {
-  hovered: boolean
-}
+interface NoticeListInnerItemProps extends HTMLMotionProps {}
 
 const NoticeListInnerItemComponent = withContext<
   "div",
   NoticeListInnerItemProps
->(({ children, hovered, ...props }) => {
-  return (
-    <styled.div data-expanded={hovered} {...props}>
-      {children}
-    </styled.div>
-  )
+>(({ children, ...props }) => {
+  return <motion.div {...props}>{children}</motion.div>
 }, "noticeWrapper")()
 
 interface NoticeListProps

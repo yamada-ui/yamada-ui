@@ -114,7 +114,15 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
   },
 )()
 
-const getPlacementInitialValues = (convertedPlacement: string) => {
+const getPlacementInitialValues = (
+  convertedPlacement:
+    | "bottom-center"
+    | "bottom-left"
+    | "bottom-right"
+    | "top-center"
+    | "top-left"
+    | "top-right",
+) => {
   switch (convertedPlacement) {
     case "top-left":
       return { x: -100, y: 0 }
@@ -129,8 +137,34 @@ const getPlacementInitialValues = (convertedPlacement: string) => {
     case "bottom-right":
       return { x: 100, y: 0 }
     default:
-      console.warn(`Unexpected placement value: ${convertedPlacement}`)
       return { x: 0, y: -100 }
+  }
+}
+
+const getPlacementExitValues = (
+  convertedPlacement:
+    | "bottom-center"
+    | "bottom-left"
+    | "bottom-right"
+    | "top-center"
+    | "top-left"
+    | "top-right",
+) => {
+  switch (convertedPlacement) {
+    case "top-left":
+      return { x: -200, y: 0 }
+    case "top-center":
+      return { x: 0, y: -200 }
+    case "top-right":
+      return { x: 200, y: 0 }
+    case "bottom-left":
+      return { x: -200, y: 0 }
+    case "bottom-center":
+      return { x: 0, y: 200 }
+    case "bottom-right":
+      return { x: 200, y: 0 }
+    default:
+      return { x: 0, y: -200 }
   }
 }
 
@@ -146,13 +180,13 @@ const defaultVariants: Variants = {
     y: 0,
   },
   exit: ({ convertedPlacement }) => ({
-    opacity: 0,
+    opacity: 0.5,
     scale: 0.95,
     transition: {
       duration: 0.2,
       ease: [0.4, 0, 0.2, 1],
     },
-    ...getPlacementInitialValues(convertedPlacement),
+    ...getPlacementExitValues(convertedPlacement),
   }),
   initial: ({ convertedPlacement }) => ({
     opacity: 0,
@@ -432,11 +466,6 @@ const NoticeListComponent = withContext<"ul", NoticeListProps>(
             <NoticeComponent
               key={notice.id}
               style={{ "--index": index }}
-              data-placement-bottom={convertedPlacement.includes("bottom")}
-              data-placement-center={convertedPlacement.includes("center")}
-              data-placement-left={convertedPlacement.includes("left")}
-              data-placement-right={convertedPlacement.includes("right")}
-              data-placement-top={convertedPlacement.includes("top")}
               convertedPlacement={convertedPlacement}
               hovered={hovered}
               index={index}

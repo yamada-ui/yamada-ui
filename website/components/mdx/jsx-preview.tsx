@@ -96,7 +96,7 @@ export function JsxPreviewPanel({ children, ...rest }: JsxPreviewPanelProps) {
       <Box
         borderColor="border.subtle"
         borderWidth="1px"
-        p={{ base: "lg", md: "md" }}
+        p="{space}"
         rounded="l2"
       >
         {children}

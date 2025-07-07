@@ -1,4 +1,3 @@
-import { VStack } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { Hero } from "@/components"
 import { List } from "./list"
@@ -7,7 +6,7 @@ export default function Page() {
   const t = useTranslations("icons")
 
   return (
-    <VStack flex="1" gap="0">
+    <>
       <Hero
         description={t("description")}
         title={t("title")}
@@ -20,7 +19,8 @@ export default function Page() {
           children: t("secondaryAction"),
         }}
       />
+
       <List />
-    </VStack>
+    </>
   )
 }

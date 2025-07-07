@@ -34,7 +34,7 @@ export function Header() {
       gap="sm"
       left="0"
       position="sticky"
-      px={{ base: "lg", md: "md" }}
+      px="{space}"
       py="sm"
       right="0"
       top="0"

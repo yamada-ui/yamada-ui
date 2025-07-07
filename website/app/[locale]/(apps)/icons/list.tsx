@@ -84,7 +84,13 @@ export function List({ ...rest }: ListProps) {
 
   return (
     <>
-      <VStack flex="1" gap={{ base: "lg", md: "md" }} {...rest}>
+      <VStack
+        id="icons"
+        flex="1"
+        gap="{space}"
+        scrollMarginTop="{header-height}"
+        {...rest}
+      >
         <InputGroup.Root>
           <InputGroup.Element>
             <SearchIcon fontSize="xl" />
@@ -213,7 +219,7 @@ function Preview({ onOpenRef, ...rest }: PreviewProps) {
         display="grid"
         gap="lg"
         gridTemplateColumns={{ base: "auto 1fr", lg: "1fr" }}
-        p={{ base: "lg", md: "md" }}
+        p="{space}"
       >
         <Center
           bg="bg"

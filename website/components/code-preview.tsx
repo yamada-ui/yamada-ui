@@ -114,8 +114,8 @@ export function CodePreview({
         lineHeight="1.1"
         overflowX="auto"
         pe={{ base: "13", md: "11" }}
-        ps={{ base: "lg", md: "md" }}
-        py={{ base: "lg", md: "md" }}
+        ps="{space}"
+        py="{space}"
       />
       <CopyButton
         position="absolute"

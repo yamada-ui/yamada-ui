@@ -12,7 +12,7 @@ export function Footer() {
       flexDir="column"
       gap="md"
       position="sticky"
-      px={{ base: "lg", md: "md" }}
+      px="{space}"
       py="xl"
       top="100vh"
       w="full"

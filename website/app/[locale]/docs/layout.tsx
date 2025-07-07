@@ -8,13 +8,23 @@ interface LayoutProps extends PropsWithChildren {}
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <VStack flex="1" gap="lg">
+    <VStack
+      css={{
+        "--docs-header-height": {
+          base: "calc({sizes.13} + {spaces.lg})",
+          md: "0px",
+        },
+        "--header-height": "calc({root-header-height} + {docs-header-height})",
+      }}
+      flex="1"
+      gap="lg"
+    >
       <Header />
 
       <Grid
         alignItems="flex-start"
         flex="1"
-        gap={{ base: "lg", md: "md" }}
+        gap="{space}"
         templateColumns="{sizes.64} 1fr {sizes.64}"
         templateRows="1fr auto"
         w="full"

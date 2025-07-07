@@ -28,7 +28,8 @@
     "secondaryAction": "Documentation",
     "placeholder": "Search {count} icons...",
     "not-found": "Icon not found.",
-    "reset": "Clear your search and try again"
+    "reset": "Clear your search and try again",
+    "openPreview": "Open {name} preview"
   },
   "themes": {
     "title": "Your Own Themes",

@@ -125,7 +125,7 @@ export function List({ ...rest }: ListProps) {
                   <AspectRatio ratio={1 / 1}>
                     <Center
                       as="button"
-                      aria-label={name}
+                      aria-label={t("openPreview", { name })}
                       bg={{
                         base: "bg.panel",
                         _hover: ["bg.subtle", "bg.muted"],

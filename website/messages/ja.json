@@ -28,7 +28,8 @@
     "secondaryAction": "ドキュメント",
     "placeholder": "{count}個のアイコンを検索する...",
     "not-found": "アイコンが見つかりません。",
-    "reset": "検索をクリアしてもう一度試す"
+    "reset": "検索をクリアしてもう一度試す",
+    "openPreview": "{name}のプレビューを開く"
   },
   "themes": {
     "title": "あなただけのテーマ",

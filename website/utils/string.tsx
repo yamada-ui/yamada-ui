@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 import { Code } from "@yamada-ui/react"
+import { Fragment } from "react"
 import { NextLink } from "@/components"
 import { langConditions } from "./i18n"
 
@@ -55,7 +56,7 @@ export function mdToHtml(
         children: transformCode(children, code),
       })
     } else {
-      return transformCode(chunk, code)
+      return <Fragment key={index}>{transformCode(chunk, code)}</Fragment>
     }
   })
 }

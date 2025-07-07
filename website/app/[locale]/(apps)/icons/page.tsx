@@ -1,6 +1,19 @@
+import type { Metadata } from "next"
 import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Hero } from "@/components"
 import { List } from "./list"
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string[] }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "icons" })
+
+  return { description: t("description"), title: t("title") }
+}
 
 export default function Page() {
   const t = useTranslations("icons")

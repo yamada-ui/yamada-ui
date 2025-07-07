@@ -20,7 +20,7 @@
     "cli": "pnpm --prefix packages/cli",
     "react": "pnpm --prefix packages/react",
     "utils": "pnpm --prefix packages/utils",
-    "website": "pnpm --prefix website",
+    "www": "pnpm --prefix www",
     "next:pages": "pnpm --prefix playgrounds/next/pages",
     "next:app": "pnpm --prefix playgrounds/next/app",
     "vite": "pnpm --prefix playgrounds/vite",

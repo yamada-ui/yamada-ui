@@ -38,7 +38,7 @@
     "**/dist/**",
     "**/coverage/**",
     "playgrounds/**",
-    "website/**/*",
+    "www/**/*",
     "storybook-static/**"
   ],
   "ts-node": {

@@ -21,13 +21,13 @@ eslint:
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
       exclude:
         - playgrounds/**
-        - website/**
+        - www/**
       run: |
         pnpm eslint {staged_files} --no-warn-ignored --max-warnings=0 --fix --cache
       stage_fixed: true
 
-    website:
-      root: website/
+    www:
+      root: www/
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
       run: |
         pnpm eslint {staged_files} --max-warnings=0 --fix --cache

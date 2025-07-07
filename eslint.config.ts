@@ -38,7 +38,7 @@ const ignoresConfig: TSESLint.FlatConfig.Config = {
     "**/bin/**",
     "**/coverage/**",
     "**/pnpm-lock.yaml",
-    "website/**",
+    "www/**",
     "playgrounds/**",
     "storybook-static/**",
     // TODO: Remove legacy-components

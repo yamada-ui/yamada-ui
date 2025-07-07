@@ -217,13 +217,13 @@
     "dist",
     "pnpm-lock.yaml",
     "packages/react/src/components/icon/icons/**",
-    "website/pages/icons/tags.ts",
-    "website/constant/maintainers.ts",
-    "website/constant/members.ts",
-    "website/constant/contributors.ts",
-    "website/contents/changelog/**",
-    "website/contents/components/**/props.mdx",
-    "website/contents/components/**/props.ja.mdx",
+    "www/pages/icons/tags.ts",
+    "www/constant/maintainers.ts",
+    "www/constant/members.ts",
+    "www/constant/contributors.ts",
+    "www/contents/changelog/**",
+    "www/contents/components/**/props.mdx",
+    "www/contents/components/**/props.ja.mdx",
     "CHANGELOG.md"
   ]
 }

@@ -14,10 +14,10 @@ fi
 
 echo "$git_diff_result"
 
-if echo "$git_diff_result" | grep -q "^website/"; then
-  echo "Run because './website' is included in the difference."
+if echo "$git_diff_result" | grep -q "^www/"; then
+  echo "Run because './www' is included in the difference."
   exit 1
 else
-  echo "Run was canceled because './website' was not included in the difference."
+  echo "Run was canceled because './www' was not included in the difference."
   exit 0
 fi

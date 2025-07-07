@@ -60,8 +60,7 @@ To ensure the extension works correctly, please add the following settings to `.
 ```json
 {
   "eslint.workingDirectories": [
-    "website",
-    "playgrounds/hono",
+    "www",
     "playgrounds/next/app",
     "playgrounds/next/pages",
     "playgrounds/remix",
@@ -129,7 +128,6 @@ the following types:
 
 6. Next, commit your changes following the
    [commit convention](#commit-convention).
-
    - `Confirming changes`: Run the `pnpm storybook` command to launch Storybook. The source for Storybook is in `./stories`.
    - `Creating a new component`: When you run the pnpm `gen:component` command, a component is created from a template and dependencies are installed.
    - `Adding functionality to an existing component`: After adding, please add a story for the target component so that the functionality can be understood.

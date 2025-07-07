@@ -29,9 +29,12 @@ export interface TextToHtmlOptions {
 export function mdToHtml(
   md = "",
   {
-    a = (props) => <NextLink variant="underline" {...props} />,
-    code = (props) => (
+    a = ({ key, ...rest }) => (
+      <NextLink key={key} variant="underline" {...rest} />
+    ),
+    code = ({ key, ...rest }) => (
       <Code
+        key={key}
         css={{
           [langConditions.ja]: {
             mx: "1",
@@ -40,7 +43,7 @@ export function mdToHtml(
         }}
         variant="surface"
         verticalAlign="middle"
-        {...props}
+        {...rest}
       />
     ),
   }: TextToHtmlOptions = {},

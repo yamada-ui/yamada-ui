@@ -38,6 +38,6 @@ export const Icon = withContext("svg")(
     const css = useInjectVarsIntoCss(props.css, { fontSize: "size" })
     const rest = useInjectVarsIntoProps(props, { fontSize: "size" })
 
-    return { ...rest, css, boxSize: "{size}" }
+    return { boxSize: "{size}", ...rest, css }
   },
 )

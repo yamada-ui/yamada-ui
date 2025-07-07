@@ -1,6 +1,7 @@
 import type { BoxProps, GridProps } from "@yamada-ui/react"
 import type { ComponentType } from "react"
 import type { Transform } from "sucrase"
+import { burger } from "@lucide/lab"
 import { Box, Grid, isFunction, Text } from "@yamada-ui/react"
 import * as Components from "@yamada-ui/react"
 import React, { isValidElement } from "react"
@@ -10,6 +11,7 @@ import { CodePreview } from "../code-preview"
 import { JsxCodePanel, JsxPreview, JsxPreviewPanel } from "./jsx-preview"
 
 const components = {
+  burger,
   React,
   ...React,
   ...Components,

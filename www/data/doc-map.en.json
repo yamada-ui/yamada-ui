@@ -87,7 +87,12 @@
             {
               "title": "Box",
               "segment": "box",
-              "pathname": "/docs/components/components/box"
+              "pathname": "/docs/components/box"
+            },
+            {
+              "title": "Icon",
+              "segment": "icon",
+              "pathname": "/docs/components/icon"
             }
           ]
         }

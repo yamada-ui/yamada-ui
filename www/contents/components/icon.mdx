@@ -1,0 +1,48 @@
+---
+title: Icon
+description: "`Icon` is a general icon component that can be used in your projects."
+group: components
+storybook: components-icon--basic
+source: components/icon
+---
+
+```tsx preview
+<GhostIcon />
+```
+
+## Usage
+
+```ts
+import { GhostIcon } from "@yamada-ui/react"
+```
+
+```tsx
+<GhostIcon />
+```
+
+You can find all the icons we offer at [here](/icons).
+
+### Using React Icons
+
+When using [React Icons](https://react-icons.github.io/react-icons), set the component to `as`.
+
+```ts
+import { Icon } from "@yamada-ui/react"
+import { FaRobot } from "react-icons/fa"
+```
+
+```tsx
+<Icon as={FaRobot} />
+```
+
+### Using Lucide lab
+
+When using [Lucide lab](https://github.com/lucide-icons/lucide-lab), use `LucideIcon`.
+
+```ts
+import { LucideIcon } from "@yamada-ui/react"
+```
+
+```tsx preview
+<LucideIcon iconNode={burger} />
+```

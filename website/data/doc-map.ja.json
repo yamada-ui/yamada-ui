@@ -27,6 +27,11 @@
           "pathname": "/docs/get-started/cli"
         },
         {
+          "title": "アクセシビリティ",
+          "segment": "accessibility",
+          "pathname": "/docs/get-started/accessibility"
+        },
+        {
           "title": "フレームワーク",
           "segment": "frameworks",
           "items": [
@@ -179,6 +184,11 @@
           "title": "ブレークポイント",
           "segment": "breakpoints",
           "pathname": "/docs/theming/breakpoints"
+        },
+        {
+          "title": "テーマの切り替え",
+          "segment": "switching-themes",
+          "pathname": "/docs/theming/switching-themes"
         },
         {
           "title": "カスケードレイヤー",
@@ -347,6 +357,11 @@
         }
       ],
       "pathname": "/docs/community"
+    },
+    {
+      "title": "変更履歴",
+      "segment": "changelog",
+      "pathname": "/docs/changelog"
     }
   ]
 }

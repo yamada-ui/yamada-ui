@@ -12,6 +12,7 @@ export function Sidebar() {
   const pathname = usePathname()
   const { lang } = useLocale()
   const t = useTranslations("docs")
+  const changelog = pathname.startsWith("/docs/changelog")
 
   const items = useMemo(() => {
     const docMap = getDocMap(lang)
@@ -22,11 +23,11 @@ export function Sidebar() {
       {
         pathname: pathname.split("/").slice(0, 3).join("/"),
         segment: "overview",
-        title: t("overview"),
+        title: changelog ? t("latest") : t("overview"),
       },
       ...items,
     ]
-  }, [lang, pathname, t])
+  }, [changelog, lang, pathname, t])
 
   return (
     <Box

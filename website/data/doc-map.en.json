@@ -28,6 +28,11 @@
           "pathname": "/docs/get-started/cli"
         },
         {
+          "title": "Accessibility",
+          "segment": "accessibility",
+          "pathname": "/docs/get-started/accessibility"
+        },
+        {
           "title": "Frameworks",
           "segment": "frameworks",
           "items": [
@@ -179,6 +184,11 @@
           "title": "Breakpoints",
           "segment": "breakpoints",
           "pathname": "/docs/theming/breakpoints"
+        },
+        {
+          "title": "Switching Themes",
+          "segment": "switching-themes",
+          "pathname": "/docs/theming/switching-themes"
         },
         {
           "title": "Cascade Layers",
@@ -347,6 +357,11 @@
         }
       ],
       "pathname": "/docs/community"
+    },
+    {
+      "title": "Changelog",
+      "segment": "changelog",
+      "pathname": "/docs/changelog"
     }
   ]
 }

@@ -116,6 +116,7 @@ function DocsMenu() {
   const pathname = usePathname()
   const { lang } = useLocale()
   const docMap = useMemo(() => getDocMap(lang), [lang])
+  const changelog = pathname.startsWith("/docs/changelog")
 
   const primaryItems = useMemo(() => {
     const { items = [] } = docMap
@@ -131,11 +132,11 @@ function DocsMenu() {
       {
         pathname: pathname.split("/").slice(0, 3).join("/"),
         segment: "overview",
-        title: t("overview"),
+        title: changelog ? t("latest") : t("overview"),
       },
       ...items,
     ]
-  }, [pathname, primaryItems, t])
+  }, [changelog, pathname, primaryItems, t])
 
   return (
     <VStack display={pathname.startsWith("/docs") ? "flex" : "none"} gap="md">

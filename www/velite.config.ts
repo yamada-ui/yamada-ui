@@ -24,7 +24,9 @@ function getSlug(value: string) {
     .split(".")
   const slug = (
     path!.endsWith("/index") ? path!.replace(/\/index$/, "") : path
-  )!.split("/")
+  )!
+    .split("/")
+    .filter((segment) => !segment.match(/^\(|\)$/))
   const locale = getLocale(lang)
 
   return { locale, slug }

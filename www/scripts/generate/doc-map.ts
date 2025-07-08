@@ -70,9 +70,15 @@ function omitDocMap(docMap: DocMap) {
 export default async function main(docs: Doc[]) {
   const docMap = await getDocMap()
 
-  docs.forEach(({ locale, slug, status, title }) => {
+  docs.forEach(({ locale, status, path, title }) => {
     const lang = getLang(locale)
     const t = createTranslator<Dict>({ locale, messages: messages[lang] })
+
+    path = path.replace(/\.mdx$/, "").replace(/\..*$/, "")
+
+    const slug = (
+      path!.endsWith("/index") ? path!.replace(/\/index$/, "") : path
+    )!.split("/")
 
     const items = docMap[lang].items!
 

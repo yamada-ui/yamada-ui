@@ -4,6 +4,7 @@ import prettierConfig from "eslint-config-prettier"
 import tseslint from "typescript-eslint"
 import {
   baseConfig,
+  cspellConfig,
   importConfigArray,
   jsxA11yConfig,
   languageOptionFactory,
@@ -48,6 +49,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   typescriptConfig,
   ...importConfigArray,
   perfectionistConfig,
+  cspellConfig,
   reactConfig,
   reactHooksConfig,
   jsxA11yConfig,

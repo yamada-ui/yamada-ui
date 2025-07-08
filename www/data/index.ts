@@ -10,6 +10,7 @@ export interface DocMap {
   items?: DocMap[]
   pathname?: string
   status?: Doc["status"]
+  __exists?: boolean
 }
 
 export function getDocMap(lang: string): DocMap {

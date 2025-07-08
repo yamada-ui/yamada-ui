@@ -53,6 +53,20 @@ async function setDocMap(docMap: { [key in Lang]: DocMap }) {
   )
 }
 
+function omitDocMap(docMap: DocMap) {
+  if (!docMap.items) return docMap
+
+  docMap.items = docMap.items
+    .filter((item) => item.__exists)
+    .map(({ __exists, ...rest }) => {
+      if (rest.items) return omitDocMap(rest)
+
+      return rest
+    })
+
+  return docMap
+}
+
 export default async function main(docs: Doc[]) {
   const docMap = await getDocMap()
 
@@ -69,6 +83,7 @@ export default async function main(docs: Doc[]) {
 
       if (itemIndex !== -1) {
         if (prev[itemIndex]) {
+          prev[itemIndex].__exists = true
           prev[itemIndex].segment = segment
 
           if (last) {
@@ -93,11 +108,12 @@ export default async function main(docs: Doc[]) {
             segment,
             pathname: getPathname("docs", ...omittedSlug),
             status,
+            __exists: true,
           })
         } else {
           const title = t(`docs.group.${segment.replace(/^\(|\)$/g, "")}`)
 
-          prev.push({ title, segment, items: [] })
+          prev.push({ title, segment, items: [], __exists: true })
         }
       }
 
@@ -105,5 +121,9 @@ export default async function main(docs: Doc[]) {
     }, items)
   })
 
-  await setDocMap(docMap)
+  const omittedDocMap = Object.fromEntries(
+    Object.entries(docMap).map(([lang, data]) => [lang, omitDocMap(data)]),
+  ) as { [key in Lang]: DocMap }
+
+  await setDocMap(omittedDocMap)
 }

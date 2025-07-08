@@ -82,22 +82,6 @@
         },
         {
           "title": "コンポーネント",
-          "segment": "components",
-          "items": [
-            {
-              "title": "Box",
-              "segment": "box",
-              "pathname": "/docs/components/box"
-            },
-            {
-              "title": "Icon",
-              "segment": "icon",
-              "pathname": "/docs/components/icon"
-            }
-          ]
-        },
-        {
-          "title": "コンポーネント",
           "segment": "(components)",
           "items": [
             {

@@ -6,13 +6,17 @@ import { useSafeLayoutEffect } from "../../utils"
 
 export interface UseMountedProps {
   delay?: number
-  rerender?: boolean
+  state?: boolean
 }
 
-export function useMounted({
-  delay = 0,
-  rerender = false,
-}: UseMountedProps = {}): [() => boolean, boolean] {
+export function useMounted(props?: {
+  delay?: number
+  state?: false
+}): () => boolean
+
+export function useMounted(props?: { delay?: number; state?: true }): boolean
+
+export function useMounted({ delay = 0, state = false }: UseMountedProps = {}) {
   const mountedRef = useRef(false)
   const [mounted, setMounted] = useState(false)
 
@@ -21,7 +25,7 @@ export function useMounted({
 
     let timeoutId: NodeJS.Timeout | null = null
 
-    if (rerender) {
+    if (state) {
       if (delay > 0) {
         timeoutId = setTimeout(() => setMounted(true), delay)
       } else {
@@ -32,13 +36,18 @@ export function useMounted({
     return () => {
       mountedRef.current = false
 
-      if (rerender) setMounted(false)
+      if (state) setMounted(false)
 
       if (timeoutId) clearTimeout(timeoutId)
     }
-  }, [delay, rerender])
+  }, [delay, state])
 
-  return [useCallback(() => mountedRef.current, []), mounted]
+  if (state) {
+    return mounted
+  } else {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return useCallback(() => mountedRef.current, [])
+  }
 }
 
 export type UseMountedReturn = ReturnType<typeof useMounted>

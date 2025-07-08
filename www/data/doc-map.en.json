@@ -126,8 +126,8 @@
         },
         {
           "title": "Responsive Design",
-          "segment": "responsive",
-          "pathname": "/docs/styling/responsive"
+          "segment": "responsive-design",
+          "pathname": "/docs/styling/responsive-design"
         },
         {
           "title": "Color Mode",
@@ -210,6 +210,11 @@
           "title": "Breakpoints",
           "segment": "breakpoints",
           "pathname": "/docs/theming/breakpoints"
+        },
+        {
+          "title": "Color Mode",
+          "segment": "color-mode",
+          "pathname": "/docs/theming/color-mode"
         },
         {
           "title": "Switching Themes",

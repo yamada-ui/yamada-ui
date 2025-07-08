@@ -4,8 +4,46 @@ description: "`useBoolean`は、`on`・`off`・`toggle`関数を使用して真�
 storybook: hooks-use-boolean--basic
 ---
 
-## インポート
+```tsx preview functional
+const [flg, { on, off, toggle }] = useBoolean()
 
-```ts
+return (
+  <>
+    <Text>state: {String(flg)}</Text>
+
+    <Wrap mt="md" gap="md">
+      <Button onClick={on}>On</Button>
+      <Button onClick={off}>Off</Button>
+      <Button onClick={toggle}>Toggle</Button>
+    </Wrap>
+  </>
+)
+```
+
+## 使い方
+
+```tsx
 import { useBoolean } from "@yamada-ui/react"
+```
+
+```tsx
+const [flg, { on, off, toggle }] = useBoolean()
+```
+
+### 初期値を使う
+
+```tsx preview functional
+const [flg, { on, off, toggle }] = useBoolean(true)
+
+return (
+  <>
+    <Text>state: {String(flg)}</Text>
+
+    <Wrap mt="md" gap="md">
+      <Button onClick={on}>On</Button>
+      <Button onClick={off}>Off</Button>
+      <Button onClick={toggle}>Toggle</Button>
+    </Wrap>
+  </>
+)
 ```

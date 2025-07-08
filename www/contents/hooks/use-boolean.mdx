@@ -6,8 +6,46 @@ description: >-
 storybook: hooks-use-boolean--basic
 ---
 
-## Import
+```tsx preview functional
+const [flg, { on, off, toggle }] = useBoolean()
 
-```ts
+return (
+  <>
+    <Text>state: {String(flg)}</Text>
+
+    <Wrap mt="md" gap="md">
+      <Button onClick={on}>On</Button>
+      <Button onClick={off}>Off</Button>
+      <Button onClick={toggle}>Toggle</Button>
+    </Wrap>
+  </>
+)
+```
+
+## Usage
+
+```tsx
 import { useBoolean } from "@yamada-ui/react"
+```
+
+```tsx
+const [flg, { on, off, toggle }] = useBoolean()
+```
+
+### Using Initial Values
+
+```tsx preview functional
+const [flg, { on, off, toggle }] = useBoolean(true)
+
+return (
+  <>
+    <Text>state: {String(flg)}</Text>
+
+    <Wrap mt="md" gap="md">
+      <Button onClick={on}>On</Button>
+      <Button onClick={off}>Off</Button>
+      <Button onClick={toggle}>Toggle</Button>
+    </Wrap>
+  </>
+)
 ```

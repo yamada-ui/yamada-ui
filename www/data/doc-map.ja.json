@@ -126,8 +126,8 @@
         },
         {
           "title": "レスポンシブデザイン",
-          "segment": "responsive",
-          "pathname": "/docs/styling/responsive"
+          "segment": "responsive-design",
+          "pathname": "/docs/styling/responsive-design"
         },
         {
           "title": "カラーモード",
@@ -207,9 +207,14 @@
           "pathname": "/docs/theming/customization"
         },
         {
-          "title": "ブレークポイント",
+          "title": "ブレイクポイント",
           "segment": "breakpoints",
           "pathname": "/docs/theming/breakpoints"
+        },
+        {
+          "title": "カラーモード",
+          "segment": "color-mode",
+          "pathname": "/docs/theming/color-mode"
         },
         {
           "title": "テーマの切り替え",

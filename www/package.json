@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "clean": "rimraf .next .velite .eslintcache",
+    "clean": "rimraf .next .velite .eslintcache tsconfig.tsbuildinfo node_modules",
     "dev:content": "velite --watch",
     "dev:next": "next dev",
     "dev": "run-p dev:*",

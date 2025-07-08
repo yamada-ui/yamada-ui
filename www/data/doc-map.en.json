@@ -82,7 +82,7 @@
         },
         {
           "title": "Components",
-          "segment": "components",
+          "segment": "(components)",
           "items": [
             {
               "title": "Box",
@@ -113,6 +113,7 @@
     {
       "title": "Styling",
       "segment": "styling",
+      "pathname": "/docs/styling",
       "items": [
         {
           "title": "Style Props",
@@ -189,12 +190,12 @@
           "segment": "cascade-layers",
           "pathname": "/docs/styling/cascade-layers"
         }
-      ],
-      "pathname": "/docs/styling"
+      ]
     },
     {
       "title": "Theming",
       "segment": "theming",
+      "pathname": "/docs/theming",
       "items": [
         {
           "title": "CLI",
@@ -271,6 +272,7 @@
         {
           "title": "Design Tokens",
           "segment": "tokens",
+          "pathname": "/docs/theming",
           "items": [
             {
               "title": "Animations",
@@ -374,20 +376,19 @@
             }
           ]
         }
-      ],
-      "pathname": "/docs/theming"
+      ]
     },
     {
       "title": "Community",
       "segment": "community",
+      "pathname": "/docs/community",
       "items": [
         {
           "title": "Contributing",
           "segment": "contributing",
           "pathname": "/docs/community/contributing"
         }
-      ],
-      "pathname": "/docs/community"
+      ]
     },
     {
       "title": "Changelog",

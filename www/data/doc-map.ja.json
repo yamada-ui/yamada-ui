@@ -5,6 +5,7 @@
     {
       "title": "はじめる",
       "segment": "get-started",
+      "pathname": "/docs/get-started",
       "items": [
         {
           "title": "マイグレーション",
@@ -57,8 +58,7 @@
             }
           ]
         }
-      ],
-      "pathname": "/docs/get-started"
+      ]
     },
     {
       "title": "コンポーネント",
@@ -95,6 +95,22 @@
               "pathname": "/docs/components/icon"
             }
           ]
+        },
+        {
+          "title": "コンポーネント",
+          "segment": "(components)",
+          "items": [
+            {
+              "title": "Box",
+              "segment": "box",
+              "pathname": "/docs/components/box"
+            },
+            {
+              "title": "Icon",
+              "segment": "icon",
+              "pathname": "/docs/components/icon"
+            }
+          ]
         }
       ]
     },
@@ -113,6 +129,7 @@
     {
       "title": "スタイル",
       "segment": "styling",
+      "pathname": "/docs/styling",
       "items": [
         {
           "title": "Style Props",
@@ -189,12 +206,12 @@
           "segment": "cascade-layers",
           "pathname": "/docs/styling/cascade-layers"
         }
-      ],
-      "pathname": "/docs/styling"
+      ]
     },
     {
       "title": "テーマ",
       "segment": "theming",
+      "pathname": "/docs/theming",
       "items": [
         {
           "title": "CLI",
@@ -374,20 +391,19 @@
             }
           ]
         }
-      ],
-      "pathname": "/docs/theming"
+      ]
     },
     {
       "title": "コミュニティ",
       "segment": "community",
+      "pathname": "/docs/community",
       "items": [
         {
           "title": "貢献する",
           "segment": "contributing",
           "pathname": "/docs/community/contributing"
         }
-      ],
-      "pathname": "/docs/community"
+      ]
     },
     {
       "title": "変更履歴",

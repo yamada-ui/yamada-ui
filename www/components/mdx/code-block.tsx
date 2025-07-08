@@ -1,99 +1,19 @@
 import type { BoxProps, GridProps } from "@yamada-ui/react"
-import type { ComponentType } from "react"
-import type { Transform } from "sucrase"
-import { burger } from "@lucide/lab"
-import { Box, Grid, isFunction, Text } from "@yamada-ui/react"
-import * as Components from "@yamada-ui/react"
-import React, { isValidElement } from "react"
-import { transform as originalTransform } from "sucrase"
+import { Box, Code, Grid, Text } from "@yamada-ui/react"
+import { useTranslations } from "next-intl"
+import React from "react"
 import { codeToHtml } from "@/libs/shiki"
+import { langConditions } from "@/utils/i18n"
 import { CodePreview } from "../code-preview"
+import { Callout } from "./callout"
+import { ClientOnly } from "./client-only"
 import { JsxCodePanel, JsxPreview, JsxPreviewPanel } from "./jsx-preview"
-
-const components = {
-  burger,
-  React,
-  ...React,
-  ...Components,
-}
-
-function trim(code: string) {
-  return code.trim().replace(/;$/, "")
-}
-
-function pipe<T>(...functions: ((...args: T[]) => T)[]) {
-  return functions.reduce(function (acc, cb) {
-    return function (...args: T[]) {
-      return acc(cb(...args))
-    }
-  })
-}
-
-function transform(...transforms: (Transform | undefined)[]) {
-  return function (code: string) {
-    return originalTransform(code, {
-      transforms: transforms.filter(Boolean) as Transform[],
-    }).code
-  }
-}
-
-function evalCode(
-  code: string,
-  args: { [key: string]: unknown },
-): ComponentType {
-  return new Function(...Object.keys(args), code)(...Object.values(args))
-}
-
-interface GetComponentOptions {
-  lang: string
-  functional?: boolean
-}
-
-function getComponent(code: string, { lang, functional }: GetComponentOptions) {
-  try {
-    if (functional && !code.startsWith("function"))
-      code = `function Demo() { ${code} }`
-
-    const ts = ["ts", "tsx"].includes(lang)
-    const transformedCode = pipe<string>(
-      function (code) {
-        return 'const _jsxFileName = "";' + code
-      },
-      transform("imports"),
-      function (code: string) {
-        return code.replace('const _jsxFileName = "";', "").trim()
-      },
-      trim,
-      transform("jsx", ts ? "typescript" : undefined),
-      (code: string) => `return (${code})`,
-      trim,
-    )(code)
-
-    const Component = evalCode(transformedCode, components)
-
-    if (isFunction(Component)) {
-      return <Component />
-    } else if (isValidElement(Component)) {
-      return Component
-    } else {
-      return null
-    }
-  } catch (e) {
-    if (process.env.NODE_ENV === "development") {
-      if (e instanceof Error) {
-        return <Text color="error">{e.toString()}</Text>
-      } else {
-        return null
-      }
-    } else {
-      throw e
-    }
-  }
-}
+import { ServerOnly } from "./server-only"
 
 export interface CodeBlockProps extends Omit<GridProps, "children"> {
   lang?: string
   children?: string
+  client?: boolean
   code?: string
   functional?: boolean
   preview?: boolean
@@ -104,25 +24,55 @@ export function CodeBlock({
   lang = "ts",
   code,
   children = code,
+  client = false,
   functional = false,
   preview = false,
   title,
   ...rest
 }: CodeBlockProps) {
+  const t = useTranslations("component.codeBlock")
+
   if (!children) return null
 
   if (preview) {
-    const component = getComponent(children, { lang, functional })
-
     return (
-      <JsxPreview>
-        <JsxPreviewPanel>{component}</JsxPreviewPanel>
-        <JsxCodePanel>
-          <Pre lang={lang} m="0">
-            {children}
-          </Pre>
-        </JsxCodePanel>
-      </JsxPreview>
+      <>
+        <JsxPreview>
+          <JsxPreviewPanel>
+            {client ? (
+              <ClientOnly lang={lang} code={children} functional={functional} />
+            ) : (
+              <ServerOnly lang={lang} code={children} functional={functional} />
+            )}
+          </JsxPreviewPanel>
+          <JsxCodePanel>
+            <Pre lang={lang} m="0">
+              {children}
+            </Pre>
+          </JsxCodePanel>
+        </JsxPreview>
+
+        {client ? (
+          <Callout data-type="warning">
+            {t.rich("clientOnly", {
+              tag: (chunks) => (
+                <Code
+                  css={{
+                    [langConditions.ja]: {
+                      mx: "1",
+                      verticalAlign: "top",
+                    },
+                  }}
+                  variant="surface"
+                  verticalAlign="middle"
+                >
+                  {chunks}
+                </Code>
+              ),
+            })}
+          </Callout>
+        ) : null}
+      </>
     )
   } else if (title) {
     return (

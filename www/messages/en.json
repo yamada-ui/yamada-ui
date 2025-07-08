@@ -71,7 +71,8 @@
       "copied": "Copied",
       "copy": "Copy to Clipboard"
     },
-    "codePreview": {
+    "codeBlock": {
+      "clientOnly": "If you use this code, you need to add <tag>\"use client\"</tag> to the top of the file.",
       "preview": "Preview",
       "code": "Code"
     }

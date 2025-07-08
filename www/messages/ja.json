@@ -71,7 +71,8 @@
       "copied": "コピーしました",
       "copy": "クリップボードにコピーする"
     },
-    "codePreview": {
+    "codeBlock": {
+      "clientOnly": "こちらのコードを使用する場合は、<tag>\"use client\"</tag>をファイルの上部に追加する必要があります。",
       "preview": "プレビュー",
       "code": "コード"
     }

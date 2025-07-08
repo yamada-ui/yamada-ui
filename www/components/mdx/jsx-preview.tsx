@@ -18,7 +18,7 @@ const [JsxPreviewContext, useJsxPreviewContext] = createContext<{
 export interface JsxPreviewProps extends StackProps {}
 
 export function JsxPreview({ children, ...rest }: JsxPreviewProps) {
-  const t = useTranslations("component.codePreview")
+  const t = useTranslations("component.codeBlock")
   const [preview, { off, on }] = useBoolean(true)
   const context = useMemo(() => ({ preview }), [preview])
 

@@ -3,22 +3,23 @@ title: useBoolean
 description: >-
   `useBoolean` is a custom hook used to manage boolean values using `on`, `off`,
   and `toggle` functions.
-storybook: hooks-use-boolean--basic
+storybook: hooks-useboolean--basic
+source: hooks/use-boolean
 ---
 
-```tsx preview functional
+```tsx preview functional client
 const [flg, { on, off, toggle }] = useBoolean()
 
 return (
-  <>
+  <VStack gap="md">
     <Text>state: {String(flg)}</Text>
 
-    <Wrap mt="md" gap="md">
+    <ButtonGroup wrap="wrap">
       <Button onClick={on}>On</Button>
       <Button onClick={off}>Off</Button>
       <Button onClick={toggle}>Toggle</Button>
-    </Wrap>
-  </>
+    </ButtonGroup>
+  </VStack>
 )
 ```
 
@@ -34,18 +35,18 @@ const [flg, { on, off, toggle }] = useBoolean()
 
 ### Using Initial Values
 
-```tsx preview functional
+```tsx preview functional client
 const [flg, { on, off, toggle }] = useBoolean(true)
 
 return (
-  <>
+  <VStack gap="md">
     <Text>state: {String(flg)}</Text>
 
-    <Wrap mt="md" gap="md">
+    <ButtonGroup wrap="wrap">
       <Button onClick={on}>On</Button>
       <Button onClick={off}>Off</Button>
       <Button onClick={toggle}>Toggle</Button>
-    </Wrap>
-  </>
+    </ButtonGroup>
+  </VStack>
 )
 ```

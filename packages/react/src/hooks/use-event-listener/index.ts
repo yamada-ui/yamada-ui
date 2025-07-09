@@ -6,7 +6,7 @@ import { isFunction, useCallbackRef } from "../../utils"
 
 export const useEventListener = <Y extends EventType>(
   target: (() => EventTarget | null) | EventTarget | null | undefined,
-  event: Y,
+  ev: Y,
   handler: (ev: EventMap[Y]) => void,
   options?: AddEventListenerOptions | boolean,
 ) => {
@@ -18,25 +18,25 @@ export const useEventListener = <Y extends EventType>(
     if (!el) return
 
     el.addEventListener(
-      event,
+      ev,
       listener as EventListenerOrEventListenerObject,
       options,
     )
 
     return () => {
       el.removeEventListener(
-        event,
+        ev,
         listener as EventListenerOrEventListenerObject,
         options,
       )
     }
-  }, [event, target, options, listener, handler])
+  }, [ev, target, options, listener, handler])
 
   return () => {
     const el = isFunction(target) ? target() : (target ?? document)
 
     el?.removeEventListener(
-      event,
+      ev,
       listener as EventListenerOrEventListenerObject,
       options,
     )
@@ -50,14 +50,14 @@ export const useEventListeners = () => {
   const add = useCallback(
     <Y extends EventType>(
       el: EventTarget,
-      event: Y,
+      ev: Y,
       listener: any,
       options: AddEventListenerOptions | boolean,
     ) => {
-      listeners.current.set(listener, { el, event, options })
+      listeners.current.set(listener, { el, ev, options })
 
       el.addEventListener(
-        event,
+        ev,
         listener as EventListenerOrEventListenerObject,
         options,
       )
@@ -68,12 +68,12 @@ export const useEventListeners = () => {
   const remove = useCallback(
     <Y extends EventType>(
       el: EventTarget,
-      event: Y,
+      ev: Y,
       listener: any,
       options: boolean | EventListenerOptions,
     ) => {
       el.removeEventListener(
-        event,
+        ev,
         listener as EventListenerOrEventListenerObject,
         options,
       )
@@ -85,8 +85,8 @@ export const useEventListeners = () => {
 
   useEffect(
     () => () => {
-      currentListeners.forEach(({ el, event, options }, key) =>
-        remove(el, event, key, options),
+      currentListeners.forEach(({ el, ev, options }, key) =>
+        remove(el, ev, key, options),
       )
     },
     [remove, currentListeners],

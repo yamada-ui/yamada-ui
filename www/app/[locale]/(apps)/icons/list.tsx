@@ -31,56 +31,63 @@ import {
 } from "@yamada-ui/react"
 import { matchSorter } from "match-sorter"
 import { useTranslations } from "next-intl"
-import { Fragment, useCallback, useMemo, useRef, useState } from "react"
+import {
+  Fragment,
+  memo,
+  useCallback,
+  useRef,
+  useState,
+  useTransition,
+} from "react"
 import { CodePreview } from "@/components"
 import { getIcons } from "@/data"
 
 const ICONS = getIcons()
 const COUNT = ICONS.length
-const PER_PAGE = 300
+const PER_PAGE = 200
 
 export interface ListProps extends StackProps {}
 
 export function List({ ...rest }: ListProps) {
   const t = useTranslations("icons")
-  const [index, setIndex] = useState(0)
   const [value, setValue] = useState("")
-  const inputRef = useRef<HTMLInputElement>(null)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const hitsRef = useRef(ICONS)
+  const [list, setList] = useState(ICONS.slice(0, PER_PAGE))
   const resetRef = useRef<() => void>(noop)
   const openRef = useRef<(name: string, Icon: ElementType) => void>(noop)
+  const totalIndex = Math.ceil(ICONS.length / PER_PAGE) - 1
+  const [, startTransition] = useTransition()
 
   const onSearch = useCallback((value: string) => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    setValue(value)
 
-    timeoutRef.current = setTimeout(() => setValue(value), 400)
+    startTransition(() => {
+      resetRef.current()
+
+      let hits = ICONS
+
+      if (value.length)
+        hits = matchSorter(ICONS, value, {
+          keys: ["tags", "name"],
+        })
+
+      hitsRef.current = hits
+
+      setList(hits.slice(0, PER_PAGE))
+    })
   }, [])
 
   const onReset = useCallback(() => {
-    if (inputRef.current) inputRef.current.value = ""
-
     setValue("")
+    setList(ICONS.slice(0, PER_PAGE))
+    resetRef.current()
+    hitsRef.current = ICONS
   }, [])
 
-  const hits = useMemo(() => {
-    setIndex(0)
-    resetRef.current()
-
-    if (value.length) {
-      return matchSorter(ICONS, value, {
-        keys: ["tags", "name"],
-      })
-    } else {
-      return ICONS
-    }
-  }, [value])
-
-  const data = useMemo(
-    () => hits.slice(0, PER_PAGE * (index + 1)),
-    [hits, index],
+  const onOpen = useCallback(
+    (name: string, Icon: ElementType) => openRef.current(name, Icon),
+    [],
   )
-
-  const totalIndex = Math.ceil(hits.length / PER_PAGE) - 1
 
   return (
     <>
@@ -96,52 +103,37 @@ export function List({ ...rest }: ListProps) {
             <SearchIcon fontSize="xl" />
           </InputGroup.Element>
           <Input
-            ref={inputRef}
             name="search"
             placeholder={t("placeholder", { count: COUNT })}
+            value={value}
             onChange={(ev) => onSearch(ev.target.value)}
           />
         </InputGroup.Root>
 
         <InfiniteScrollArea
-          disabled={index === totalIndex}
+          disabled={list.length === hitsRef.current.length}
           flex="1"
           loading={<Box h="px" w="full" />}
           resetRef={resetRef}
-          rootMargin="0px 0px 640px 0px"
+          rootMargin="0px 0px 600px 0px"
           onLoad={({ finish, index }) => {
-            setIndex(index)
+            setList(hitsRef.current.slice(0, PER_PAGE * (index + 1)))
 
             if (index >= totalIndex) finish()
           }}
         >
-          {data.length ? (
+          {list.length ? (
             <Grid
               gap="md"
               templateColumns="repeat(auto-fill, minmax(56px, 1fr))"
             >
-              {data.map(({ name, Icon }) => (
-                <Tooltip key={name} content={`${name}Icon`}>
-                  <AspectRatio ratio={1 / 1}>
-                    <Center
-                      as="button"
-                      aria-label={t("openPreview", { name })}
-                      bg={{
-                        base: "bg.panel",
-                        _hover: ["bg.subtle", "bg.muted"],
-                      }}
-                      cursor="pointer"
-                      focusVisibleRing="outline"
-                      outline="0"
-                      rounded="l2"
-                      transitionDuration="moderate"
-                      transitionProperty="background"
-                      onClick={() => openRef.current(name, Icon)}
-                    >
-                      <Icon fontSize="2xl" />
-                    </Center>
-                  </AspectRatio>
-                </Tooltip>
+              {list.map(({ name, Icon }) => (
+                <IconButton
+                  key={name}
+                  name={name}
+                  Icon={Icon}
+                  onOpen={onOpen}
+                />
               ))}
             </Grid>
           ) : (
@@ -154,6 +146,46 @@ export function List({ ...rest }: ListProps) {
     </>
   )
 }
+
+interface IconButtonProps extends CenterProps {
+  name: string
+  Icon: ElementType
+  onOpen: (name: string, Icon: ElementType) => void
+}
+
+const IconButton = memo(function IconButton({
+  name,
+  Icon,
+  onOpen,
+  ...rest
+}: IconButtonProps) {
+  const t = useTranslations("icons")
+
+  return (
+    <Tooltip content={`${name}Icon`}>
+      <AspectRatio ratio={1 / 1}>
+        <Center
+          as="button"
+          aria-label={t("openPreview", { name })}
+          bg={{
+            base: "bg.panel",
+            _hover: ["bg.subtle", "bg.muted"],
+          }}
+          cursor="pointer"
+          focusVisibleRing="outline"
+          outline="0"
+          rounded="l2"
+          transitionDuration="moderate"
+          transitionProperty="background"
+          onClick={() => onOpen(name, Icon)}
+          {...rest}
+        >
+          <Icon fontSize="2xl" />
+        </Center>
+      </AspectRatio>
+    </Tooltip>
+  )
+})
 
 interface NotFoundProps extends CenterProps {
   onReset: () => void
@@ -189,7 +221,7 @@ interface PreviewProps extends Drawer.RootProps {
   onOpenRef: RefObject<(name: string, Icon: ElementType) => void>
 }
 
-function Preview({ onOpenRef, ...rest }: PreviewProps) {
+const Preview = memo(function Preview({ onOpenRef, ...rest }: PreviewProps) {
   const data = useRef<null | { name: string; Icon: ElementType }>(null)
   const { open, onClose, onOpen } = useDisclosure({
     onClose: () => {
@@ -278,4 +310,4 @@ function Preview({ onOpenRef, ...rest }: PreviewProps) {
       </Drawer.Content>
     </Drawer.Root>
   )
-}
+})

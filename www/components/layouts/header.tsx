@@ -271,11 +271,7 @@ const I18nButton: FC<I18nButtonProps> = memo(({ menuProps, ...rest }) => {
       />
 
       <MenuList>
-        <MenuOptionGroup<string>
-          type="radio"
-          value={locale}
-          onChange={changeLocale}
-        >
+        <MenuOptionGroup type="radio" value={locale} onChange={changeLocale}>
           {CONSTANT.I18N.LOCALES.map(({ label, value }) => (
             <MenuOptionItem key={value} closeOnSelect value={value}>
               {label}

@@ -193,6 +193,7 @@ export interface NoticeComponentProps
   convertedPlacement: string
   hovered: boolean
   index: number
+  length: number
 }
 
 const NoticeComponent = withContext<"li", NoticeComponentProps>(
@@ -205,6 +206,7 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
     hovered,
     index,
     isDelete = false,
+    length,
     message,
     placement = "start-center",
     title,
@@ -244,11 +246,13 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
     }, [duration])
 
     const onMouseEnter = useCallback(() => {
+      if (!isPresent) return
       setDelay(null)
-    }, [])
+    }, [isPresent])
     const onMouseLeave = useCallback(() => {
+      if (!isPresent) return
       setDelay(duration)
-    }, [duration])
+    }, [duration, isPresent])
 
     const onClose = useCallback(() => {
       if (isPresent) {
@@ -380,6 +384,7 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
         layout
         title={title?.toString()}
         variants={variants}
+        zIndex={length - index}
         onDragEnd={handleDragEnd}
         onHoverEnd={onMouseLeave}
         onHoverStart={onMouseEnter}
@@ -389,9 +394,6 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
         <NoticeListInnerItemComponent
           data-expanded={hovered}
           data-placement-bottom={convertedPlacement.includes("bottom")}
-          data-placement-center={convertedPlacement.includes("center")}
-          data-placement-left={convertedPlacement.includes("left")}
-          data-placement-right={convertedPlacement.includes("right")}
           data-placement-top={convertedPlacement.includes("top")}
           animate={{ scaleX, y }}
           transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
@@ -403,6 +405,7 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
   },
   "listItem",
 )()
+
 interface NoticeListInnerItemProps extends HTMLMotionProps {}
 
 const NoticeListInnerItemComponent = withContext<
@@ -441,9 +444,6 @@ const NoticeListComponent = withContext<"ul", NoticeListProps>(
     return (
       <styled.ul
         ref={ref}
-        style={{
-          "--length": sortedNotices.length,
-        }}
         data-group=""
         data-placement-bottom={convertedPlacement.includes("bottom")}
         data-placement-center={convertedPlacement.includes("center")}
@@ -457,10 +457,10 @@ const NoticeListComponent = withContext<"ul", NoticeListProps>(
           {sortedNotices.map((notice, index) => (
             <NoticeComponent
               key={notice.id}
-              style={{ "--index": index }}
               convertedPlacement={convertedPlacement}
               hovered={hovered}
               index={index}
+              length={sortedNotices.length}
               variants={variants}
               itemProps={itemProps}
               {...notice}

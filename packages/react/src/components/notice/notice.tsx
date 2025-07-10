@@ -341,7 +341,7 @@ const createNoticeStore = (initialState: State): Store => {
 export const noticeStore = createNoticeStore(initialState)
 
 export interface NoticeProps
-  extends Omit<HTMLStyledProps, "id" | keyof UseNoticeOptions>,
+  extends Omit<HTMLStyledProps, "id" | "title">,
     Omit<UseNoticeOptions, "itemProps"> {
   id: number | string
   onClose: () => void

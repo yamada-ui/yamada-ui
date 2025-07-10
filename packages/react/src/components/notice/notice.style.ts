@@ -44,11 +44,16 @@ export const noticeStyle = defineComponentSlotStyle({
       alignItems: "center",
       display: "flex",
       justifyContent: "center",
-      zIndex: "calc(var(--length) - var(--index))",
     },
     loading: {},
     noticeWrapper: {
-      '&[data-expanded="true"]': {
+      display: "flex",
+      maxW: "36rem",
+      minW: "20rem",
+      pointerEvents: "auto",
+      transformOrigin: "top",
+      transition: "padding 400ms ease",
+      _expanded: {
         "&[data-placement-bottom='true']": {
           paddingBottom: "md",
         },
@@ -56,12 +61,6 @@ export const noticeStyle = defineComponentSlotStyle({
           paddingTop: "md",
         },
       },
-      display: "flex",
-      maxW: "36rem",
-      minW: "20rem",
-      pointerEvents: "auto",
-      transformOrigin: "top",
-      transition: "padding 400ms ease",
     },
     root: {
       boxShadow:

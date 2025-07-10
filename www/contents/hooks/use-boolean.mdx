@@ -1,0 +1,52 @@
+---
+title: useBoolean
+description: >-
+  `useBoolean` is a custom hook used to manage boolean values using `on`, `off`,
+  and `toggle` functions.
+storybook: hooks-useboolean--basic
+source: hooks/use-boolean
+---
+
+```tsx preview functional client
+const [flg, { on, off, toggle }] = useBoolean()
+
+return (
+  <VStack gap="md">
+    <Text>state: {String(flg)}</Text>
+
+    <ButtonGroup wrap="wrap">
+      <Button onClick={on}>On</Button>
+      <Button onClick={off}>Off</Button>
+      <Button onClick={toggle}>Toggle</Button>
+    </ButtonGroup>
+  </VStack>
+)
+```
+
+## Usage
+
+```tsx
+import { useBoolean } from "@yamada-ui/react"
+```
+
+```tsx
+const [flg, { on, off, toggle }] = useBoolean()
+```
+
+### Using Initial Values
+
+```tsx preview functional client
+const [flg, { on, off, toggle }] = useBoolean(true)
+
+return (
+  <VStack gap="md">
+    <Text>state: {String(flg)}</Text>
+
+    <ButtonGroup wrap="wrap">
+      <Button onClick={on}>On</Button>
+      <Button onClick={off}>Off</Button>
+      <Button onClick={toggle}>Toggle</Button>
+    </ButtonGroup>
+  </VStack>
+)
+```

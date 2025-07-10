@@ -1,0 +1,46 @@
+{
+  "For": {
+    "children": {
+      "type": "(value: T, index: number, array: T[]) => ReactNode",
+      "description": "The render function to render each item in the array.",
+      "required": true
+    },
+    "each": {
+      "type": "T[] | readonly T[]",
+      "description": "The array to iterate over.",
+      "required": false
+    },
+    "fallback": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The fallback content to render when the array is empty.",
+      "required": false
+    },
+    "filter": {
+      "type": "(value: T, index: number, array: T[]) => boolean",
+      "description": "A function that returns a boolean indicating whether the item should be included in the render result.",
+      "required": false
+    },
+    "limit": {
+      "type": "number",
+      "description": "The maximum number of items to include in the render result.",
+      "required": false
+    },
+    "offset": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The number of items to skip before including them in the render result.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "The boolean value to determine the order of the items in the array.\nIf `true`, the items will be reversed.\nIf `sortBy` is provided, inversion is applied to the sorted array.",
+      "required": false
+    },
+    "sort": {
+      "type": "(a: T, b: T) => number",
+      "description": "The function to sort the items in the array.\nIf function is provided, the items will be sorted based on the return value.\nIf `reverse` is `true`, the inversion is applied to the sorted array.",
+      "required": false
+    }
+  }
+}

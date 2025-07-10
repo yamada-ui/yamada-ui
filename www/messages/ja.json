@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "title": "Yamada UI",
+    "description": "美しく一貫性のある、アクセスしやすいコンポーネントと高度なスタイリングを実現するデザインシステムを提供し、あなたのアイデアを現実のものにします。"
+  },
+  "docs": {
+    "overview": "概要",
+    "latest": "最新",
+    "storybook": "ストーリーブック",
+    "source": "ソースコード",
+    "style": "スタイル",
+    "group": {
+      "frameworks": "フレームワーク",
+      "tokens": "デザイントークン",
+      "configuration": "設定",
+      "styles": "スタイル",
+      "components": "コンポーネント",
+      "layouts": "レイアウト",
+      "typography": "タイポグラフィ"
+    }
+  },
+  "home": {
+    "title": "コンポーネントの力を解き放つ",
+    "description": "美しく一貫性のある、アクセスしやすいコンポーネントと高度なスタイリングを実現するデザインシステムを提供し、あなたのアイデアを現実のものにします。",
+    "primaryAction": "はじめる",
+    "secondaryAction": "コンポーネントを見る"
+  },
+  "icons": {
+    "title": "美しく一貫性のあるアイコン",
+    "description": "Lucideを使用して作成された、すぐに使用できるアイコンのコレクション。アプリケーションにコピー&ペーストできます。",
+    "primaryAction": "アイコンを見る",
+    "secondaryAction": "ドキュメント",
+    "placeholder": "{total}個のアイコンを検索する...",
+    "notFound": "アイコンが見つかりません。",
+    "reset": "検索をクリアしてもう一度試す",
+    "openPreview": "{title}のプレビューを開く"
+  },
+  "themes": {
+    "title": "あなただけのテーマ",
+    "description": "美しく一貫性のあるテーマをお試しください。プロジェクトにコピー&ペーストできます。新しいテーマエディターを近日公開予定です。",
+    "primaryAction": "テーマを見る",
+    "secondaryAction": "ドキュメント"
+  },
+  "component": {
+    "header": {
+      "docs": "ドキュメント",
+      "icons": "アイコン",
+      "playground": "プレイグラウンド",
+      "colors": "カラー",
+      "themes": "テーマ",
+      "github": "GitHubリポジトリ",
+      "discord": "Discordサーバー",
+      "colorMode": "{colorMode}に変更する",
+      "lang": "言語を変更する",
+      "menu": "メニューを開く"
+    },
+    "footer": {
+      "copyright": "このライブラリは、<owner>Hirotomo Yamada</owner> と <contributors>愉快な仲間たち</contributors> によって開発されました。",
+      "github": "Hirotomo YamadaのGitHubプロフィール",
+      "discord": "Discordサーバー",
+      "x": "Hirotomo YamadaのXプロフィール"
+    },
+    "search": {
+      "placeholder": "ドキュメントを検索する...",
+      "notFound": "「{value}」に該当する結果が見つかりませんでした。"
+    },
+    "toc": {
+      "title": "このページでは",
+      "scrollToTop": "上にスクロールする",
+      "edit": "GitHubでこのページを編集する"
+    },
+    "copyButton": {
+      "copied": "コピーしました",
+      "copy": "クリップボードにコピーする"
+    },
+    "codeBlock": {
+      "clientOnly": "こちらのコードを使用する場合は、<tag>\"use client\"</tag>をファイルの上部に追加する必要があります。",
+      "preview": "プレビュー",
+      "code": "コード"
+    }
+  }
+}

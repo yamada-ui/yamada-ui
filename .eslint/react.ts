@@ -1,8 +1,8 @@
-import type { Linter } from "eslint"
+import type { TSESLint } from "@typescript-eslint/utils"
 import reactPlugin from "eslint-plugin-react"
 import { sharedFiles } from "./shared"
 
-export const reactConfig: Linter.Config = {
+export const reactConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/react",
   files: sharedFiles,
   plugins: { react: reactPlugin },

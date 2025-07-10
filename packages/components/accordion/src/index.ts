@@ -1,8 +1,0 @@
-export { Accordion } from "./accordion"
-export type { AccordionProps } from "./accordion"
-export { AccordionItem } from "./accordion-item"
-export type { AccordionItemProps } from "./accordion-item"
-export { AccordionLabel } from "./accordion-label"
-export type { AccordionLabelProps } from "./accordion-label"
-export { AccordionPanel } from "./accordion-panel"
-export type { AccordionPanelProps } from "./accordion-panel"

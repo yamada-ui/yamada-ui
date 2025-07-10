@@ -1,0 +1,35 @@
+{
+  "Link": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"plain\" | \"underline\" | [\"plain\" | \"underline\" | ({ _peerAccept?: \"plain\" | \"underline\" | [\"plain\" | \"underline\" | (... & { base?: \"plain\" | \"underline\" | [\"plain\" | \"underline\" | (... & ...), \"plain\" | ... 1 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"plain\" | ... 3 more ... | undefined...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "external": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the link will open in new tab.",
+      "required": false
+    }
+  }
+}

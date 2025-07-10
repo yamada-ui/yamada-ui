@@ -13,28 +13,24 @@ type PathImpl<Y extends number | string | symbol, M> = Y extends number | string
     : `${Y}.${Path<M>}`
   : ``
 
-export type Path<Y> = {
-  [M in keyof Y]-?: PathImpl<M, Y[M]>
-}[keyof Y]
+export type Path<Y> = Y extends any[]
+  ? `${number}`
+  : {
+      [M in keyof Y]-?: PathImpl<M, Y[M]>
+    }[keyof Y]
+
+export type Value<
+  Y extends Dict,
+  M extends string,
+> = M extends `${infer D}.${infer H}` ? Value<Y[D], H> : Y[M]
 
 export interface Dict<Y = any> {
   [key: string]: Y
 }
 
-export interface ObjectLiteral {}
+export type AnyString = string & {}
 
-export type StringLiteral = {} & string
-
-export type Replace<
-  Y extends string,
-  M extends string,
-  D extends string,
-  H extends string = "",
-> = Y extends `${infer T}${M}${infer R}`
-  ? Replace<R, M, D, `${H}${T}${D}`>
-  : `${H}${Y}`
-
-export type Union<Y> = StringLiteral | Y
+export type Booleanish<Y> = Y extends "false" | "true" ? boolean : Y
 
 export type Length<T extends any[]> = T["length"]
 

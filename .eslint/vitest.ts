@@ -1,15 +1,16 @@
-import type { Linter } from "eslint"
+import type { TSESLint } from "@typescript-eslint/utils"
 import { fixupPluginRules } from "@eslint/compat"
 import vitestPlugin from "@vitest/eslint-plugin"
 import { sharedTestFiles } from "./shared"
 
-export const vitestConfig: Linter.Config = {
+export const vitestConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/vitest",
   files: sharedTestFiles,
   plugins: { vitest: fixupPluginRules(vitestPlugin) },
   rules: {
     ...vitestPlugin.configs.recommended.rules,
     "vitest/expect-expect": "off",
+    "vitest/no-commented-out-tests": "off",
 
     "vitest/consistent-test-it": ["error", { fn: "test" }],
     "vitest/no-alias-methods": "error",

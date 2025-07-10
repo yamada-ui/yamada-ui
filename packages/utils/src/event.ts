@@ -1,20 +1,17 @@
-export type AnyPointerEvent = MouseEvent | PointerEvent | TouchEvent
+import { isFunction } from "./assertion"
+import {
+  getDocument,
+  getNextTabbableElement,
+  getTabbableElementEdges,
+} from "./dom"
+import { noop } from "./function"
 
-export type PointType = "client" | "page"
+export type AnyPointerEvent = MouseEvent | PointerEvent | TouchEvent
 
 export interface Point {
   x: number
   y: number
 }
-
-export interface PointerEventInfo {
-  point: Point
-}
-
-export type MixedEventListener = (
-  e: AnyPointerEvent,
-  info: PointerEventInfo,
-) => void
 
 export function isMouseEvent(ev: any): ev is MouseEvent {
   const win = getEventWindow(ev)
@@ -29,7 +26,7 @@ export function isTouchEvent(ev: AnyPointerEvent): ev is TouchEvent {
   return !!(ev as TouchEvent).touches
 }
 
-export function isMultiTouchEvent(ev: AnyPointerEvent) {
+export function isMultiTouchEvent(ev: AnyPointerEvent): boolean {
   return isTouchEvent(ev) && ev.touches.length > 1
 }
 
@@ -39,8 +36,8 @@ export function getEventWindow(ev: Event): typeof globalThis {
 
 export function pointFromTouch(
   e: TouchEvent,
-  type: PointType = process.env.NODE_ENV === "test" ? "client" : "page",
-) {
+  type: "client" | "page" = process.env.NODE_ENV === "test" ? "client" : "page",
+): Point {
   const point = e.touches[0] || e.changedTouches[0]
 
   return { x: point?.[`${type}X`] ?? 0, y: point?.[`${type}Y`] ?? 0 }
@@ -48,8 +45,8 @@ export function pointFromTouch(
 
 export function pointFromMouse(
   point: MouseEvent | PointerEvent,
-  type: PointType = "page",
-) {
+  type: "client" | "page" = "page",
+): Point {
   return {
     x: point[`${type}X`],
     y: point[`${type}Y`],
@@ -58,47 +55,116 @@ export function pointFromMouse(
 
 export function getEventPoint(
   ev: AnyPointerEvent,
-  type: PointType = process.env.NODE_ENV === "test" ? "client" : "page",
-) {
+  type: "client" | "page" = process.env.NODE_ENV === "test" ? "client" : "page",
+): Point {
   return isTouchEvent(ev) ? pointFromTouch(ev, type) : pointFromMouse(ev, type)
 }
 
-export function addDomEvent(
+export interface EventMap
+  extends DocumentEventMap,
+    GlobalEventHandlersEventMap,
+    WindowEventMap,
+    FontFaceSetEventMap {}
+
+export type EventType = keyof EventMap
+
+export function addDomEvent<Y extends EventType>(
   target: EventTarget,
-  type: string,
-  cb: EventListener,
-  options?: AddEventListenerOptions,
+  type: Y,
+  cb: (ev: EventMap[Y]) => void,
+  options?: AddEventListenerOptions | boolean,
 ) {
-  target.addEventListener(type, cb, options)
+  target.addEventListener(
+    type,
+    cb as EventListenerOrEventListenerObject,
+    options,
+  )
 
   return () => {
-    target.removeEventListener(type, cb, options)
+    target.removeEventListener(
+      type,
+      cb as EventListenerOrEventListenerObject,
+      options,
+    )
   }
 }
 
-function filter(cb: EventListener): EventListener {
-  return function (ev: Event) {
-    const isMouse = isMouseEvent(ev)
-
-    if (!isMouse || ev.button === 0) cb(ev)
-  }
-}
-
-function wrap(cb: MixedEventListener, filterPrimary = false): EventListener {
-  function listener(ev: any) {
-    return cb(ev, { point: getEventPoint(ev) })
-  }
-
-  const fn = filterPrimary ? filter(listener) : listener
-
-  return fn as EventListener
-}
-
-export function addPointerEvent(
-  target: EventTarget,
-  type: string,
-  cb: MixedEventListener,
-  options?: AddEventListenerOptions,
+export function focusTrap(
+  el: HTMLElement | null,
+  onFocus?: (elToFocus: HTMLElement) => void,
 ) {
-  return addDomEvent(target, type, wrap(cb, type === "pointerdown"), options)
+  if (!el) return noop
+
+  const doc = getDocument(el)
+
+  function onKeyDown(ev: KeyboardEvent) {
+    if (ev.key !== "Tab") return
+
+    let elToFocus: HTMLElement | null | undefined = null
+
+    const [firstTabbable, lastTabbable] = getTabbableElementEdges(el, true)
+
+    if (ev.shiftKey) {
+      if (doc.activeElement === firstTabbable) elToFocus = lastTabbable
+    } else {
+      if (doc.activeElement === lastTabbable) elToFocus = firstTabbable
+    }
+
+    if (!elToFocus) return
+
+    ev.preventDefault()
+
+    if (isFunction(onFocus)) {
+      onFocus(elToFocus)
+    } else {
+      elToFocus.focus()
+    }
+  }
+
+  return addDomEvent(el, "keydown", onKeyDown, true)
+}
+
+export function focusTransfer(
+  el: HTMLElement | null,
+  target?: HTMLElement | null,
+  onFocus?: (elToFocus: HTMLElement) => void,
+) {
+  const doc = getDocument(el)
+  const body = doc.body
+
+  function onKeyDown(ev: KeyboardEvent) {
+    if (ev.key !== "Tab") return
+
+    let elToFocus: HTMLElement | null | undefined = null
+
+    const [firstTabbable, lastTabbable] = getTabbableElementEdges(el, true)
+    const nextTabbable = getNextTabbableElement(body, target)
+    const noTabbableEls = !firstTabbable && !lastTabbable
+
+    if (ev.shiftKey) {
+      if (nextTabbable === doc.activeElement) {
+        elToFocus = lastTabbable
+      } else if (doc.activeElement === firstTabbable || noTabbableEls) {
+        elToFocus = target
+      }
+    } else {
+      if (doc.activeElement === target) {
+        elToFocus = firstTabbable
+      } else if (doc.activeElement === lastTabbable || noTabbableEls) {
+        elToFocus = nextTabbable
+      }
+    }
+
+    if (!elToFocus) return
+
+    ev.preventDefault()
+
+    if (isFunction(onFocus)) {
+      onFocus(elToFocus)
+    } else {
+      elToFocus.focus()
+    }
+  }
+
+  return addDomEvent(doc, "keydown", onKeyDown, true)
 }

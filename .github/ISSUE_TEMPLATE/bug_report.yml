@@ -20,14 +20,6 @@ body:
       label: Which package has an issue?
       options:
         - "@yamada-ui/react"
-        - "@yamada-ui/table"
-        - "@yamada-ui/calendar"
-        - "@yamada-ui/carousel"
-        - "@yamada-ui/dropzone"
-        - "@yamada-ui/charts"
-        - "@yamada-ui/markdown"
-        - "@yamada-ui/fontawesome"
-        - "@yamada-ui/next"
         - "@yamada-ui/cli"
     validations:
       required: true
@@ -36,7 +28,7 @@ body:
     attributes:
       label: "Package Version"
       description: "The version of the package you are using."
-      placeholder: "0.1.0"
+      placeholder: "2.0.0"
     validations:
       required: true
   - type: textarea

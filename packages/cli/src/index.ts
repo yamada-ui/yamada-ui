@@ -1,24 +1,23 @@
-import c from "chalk"
 import { Command } from "commander"
-import path from "path"
-import pkg from "../package.json"
-import { actionTheme, actionTokens, themePath } from "./command"
-import { initCLI } from "./utils"
+import { createRequire } from "node:module"
+import c from "picocolors"
+import { actionTheme, actionTokens } from "./command/index.js"
+import { initCLI } from "./utils/index.js"
+
+const pkg = createRequire(import.meta.url)("@yamada-ui/cli/package.json")
 
 export const run = async () => {
   await initCLI()
-
-  const program = new Command(pkg.name)
-    .name("yamada-cli")
-    .description(pkg.description)
+  const program = new Command("Yamada UI CLI")
     .version(pkg.version)
     .usage(`${c.green("<command>")} [options]`)
 
   program
     .command("tokens <path>")
     .option("--cwd <path>", "Current working directory")
-    .option("-o, --out <path>", `Output file to ${path.join(...themePath)}`)
+    .option("-o, --out <path>", `Output path`)
     .option("-w, --watch [path]", "Watch directory for changes and rebuild")
+    .option("--internal", "Generate internal tokens")
     .action(actionTokens)
 
   program

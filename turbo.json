@@ -9,7 +9,16 @@
       "dependsOn": ["^build:fast"],
       "outputs": ["dist/**"]
     },
-    "dev": {
+    "test": {
+      "cache": false
+    },
+    "typecheck": {
+      "cache": false
+    },
+    "lint": {
+      "cache": false
+    },
+    "format": {
       "cache": false
     }
   },

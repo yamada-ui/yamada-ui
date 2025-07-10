@@ -7,7 +7,7 @@ expect.extend({ toHaveNoViolations })
 
 const { getComputedStyle } = window
 
-window.getComputedStyle = (elt) => getComputedStyle(elt)
+window.getComputedStyle = (el) => getComputedStyle(el)
 window.Element.prototype.scrollTo = noop
 window.scrollTo = noop
 
@@ -36,6 +36,9 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
 }))
+
+// @ts-ignore
+global.EyeDropper = vi.fn()
 
 vi.spyOn(window.HTMLCanvasElement.prototype, "getContext").mockImplementation(
   () => null,

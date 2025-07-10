@@ -1,7 +1,8 @@
 {
   "name": "@yamada-ui/utils",
+  "type": "module",
   "version": "1.7.2",
-  "description": "Yamada UI utils",
+  "description": "The utilities for Yamada UI projects",
   "keywords": [
     "utils",
     "utilities",
@@ -29,11 +30,13 @@
     "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "scripts": {
-    "dev": "pnpm build:fast -- --watch",
-    "build": "tsup src --dts",
-    "build:fast": "tsup src",
-    "clean": "rimraf dist .turbo",
+    "clean": "rimraf dist .turbo .eslintcache",
+    "build": "tsdown",
+    "test": "vitest",
+    "test:dev": "vitest --watch --ui",
     "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings=0 --cache",
+    "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
   },
@@ -42,19 +45,10 @@
   },
   "devDependencies": {
     "clean-package": "2.2.0",
-    "react": "^18.3.1"
+    "react": "^19.1.0"
   },
   "peerDependencies": {
-    "react": ">=18"
+    "react": ">=19"
   },
-  "clean-package": "../../clean-package.config.json",
-  "tsup": {
-    "clean": true,
-    "target": "es2019",
-    "format": [
-      "cjs",
-      "esm"
-    ],
-    "sourcemap": true
-  }
+  "clean-package": "./clean-package.config.json"
 }

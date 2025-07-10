@@ -1,0 +1,47 @@
+---
+title: Icon
+description: "`Icon`は、プロジェクトに使用できる一般的なアイコンコンポーネントです。"
+storybook: components-icon--basic
+source: components/icon
+---
+
+```tsx preview
+<GhostIcon />
+```
+
+## 使い方
+
+```ts
+import { GhostIcon } from "@yamada-ui/react"
+```
+
+```tsx
+<GhostIcon />
+```
+
+[こちら](/icons)から提供しているすべてのアイコンを探すことができます。
+
+### React Iconsを使用する
+
+[React Icons](https://react-icons.github.io/react-icons)を使用する場合は、`as`にコンポーネントをセットします。
+
+```ts
+import { Icon } from "@yamada-ui/react"
+import { FaRobot } from "react-icons/fa"
+```
+
+```tsx
+<Icon as={FaRobot} />
+```
+
+### Lucide labを使用する
+
+[Lucide lab](https://github.com/lucide-icons/lucide-lab)のアイコンを使用する場合は、`LucideIcon`を使用します。
+
+```ts
+import { LucideIcon } from "@yamada-ui/react"
+```
+
+```tsx preview
+<LucideIcon iconNode={burger} />
+```

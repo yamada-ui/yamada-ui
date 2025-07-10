@@ -1,0 +1,26 @@
+export {
+  Caption,
+  Col,
+  Colgroup,
+  NativeTablePropsContext as PropsContext,
+  NativeTableRoot as Root,
+  Tbody,
+  Td,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
+  useNativeTablePropsContext as usePropsContext,
+} from "./native-table"
+export type {
+  CaptionProps,
+  ColgroupProps,
+  ColProps,
+  NativeTableRootProps as RootProps,
+  TbodyProps,
+  TdProps,
+  TfootProps,
+  TheadProps,
+  ThProps,
+  TrProps,
+} from "./native-table"

@@ -3,7 +3,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "moduleDetection": "force",
     "jsx": "react-jsx",
     "esModuleInterop": true,
@@ -25,7 +25,6 @@
   },
   "include": [
     "@types",
-    ".storybook/**/*",
     "**/*.js",
     "**/*.jsx",
     "**/*.ts",
@@ -35,15 +34,11 @@
   ],
   "exclude": [
     "**/node_modules/**",
-    "coverage/**",
-    "examples/**",
-    "docs/**/*",
     "**/bin/**",
     "**/dist/**",
-    "**/.next/**",
-    "**/.turbo/**",
-    ".changelog/**",
-    ".changeset/**",
+    "**/coverage/**",
+    "playgrounds/**",
+    "www/**/*",
     "storybook-static/**"
   ],
   "ts-node": {

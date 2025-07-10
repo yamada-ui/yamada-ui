@@ -1,16 +1,18 @@
-import c from "chalk"
 import checkNode from "cli-check-node"
 import unhandledError from "cli-handle-unhandled"
+import { createRequire } from "node:module"
+import c from "picocolors"
 import updateNotifier from "update-notifier"
-import pkg from "../../package.json"
+
+const pkg = createRequire(import.meta.url)("@yamada-ui/cli/package.json")
 
 export const initCLI = async () => {
-  checkNode("12")
+  checkNode("22")
 
   await unhandledError()
 
   console.log(
-    `\n${c.bold.green("Yamada UI CLI")} v${pkg.version} ${c.dim("by Yamada UI")}`,
+    `\n${c.bold(c.green("Yamada UI CLI"))} v${pkg.version} ${c.dim("by Yamada UI")}`,
   )
   console.log(`${c.dim(pkg.description)}\n`)
 

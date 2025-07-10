@@ -1,5 +1,4 @@
 import type { TSESLint } from "@typescript-eslint/utils"
-import type { Linter } from "eslint"
 import pluginVitest from "@vitest/eslint-plugin"
 import prettierConfig from "eslint-config-prettier"
 import { dirname, resolve } from "node:path"
@@ -27,7 +26,7 @@ const sharedFiles = [
   "stories/**/*.d.ts",
 ]
 
-const ignoresConfig: Linter.Config = {
+const ignoresConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/ignores",
   ignores: [
     "!.storybook/**",
@@ -37,87 +36,79 @@ const ignoresConfig: Linter.Config = {
     "**/node_modules/**",
     "**/build/**",
     "**/bin/**",
+    "**/coverage/**",
     "**/pnpm-lock.yaml",
-    "docs/**",
-    "examples/**",
-    "coverage/**",
+    "www/**",
+    "playgrounds/**",
     "storybook-static/**",
+    // TODO: Remove legacy-components
+    "**/legacy-components/**",
   ],
 }
 
-const noConsoleConfig: Linter.Config = {
+const noConsoleConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/no-console",
   files: [
     "packages/cli/**/*.ts",
     "scripts/**/*.ts",
-    "stories/**/*.tsx",
-    "stories/**/*.ts",
+    "packages/**/*.stories.tsx",
+    "packages/**/*.stories.ts",
   ],
   rules: {
     "no-console": "off",
   },
 }
 
-const storybookConfig: Linter.Config = {
-  name: "eslint/storybook",
-  files: ["stories/**/*.ts", "stories/**/*.tsx", "stories/**/*.d.ts"],
-  rules: {
-    "react-hooks/rules-of-hooks": "off",
+const restrictedImportsConfigArray: TSESLint.FlatConfig.ConfigArray = [
+  {
+    name: "eslint/restricted-imports/react",
+    files: [
+      "**/packages/(react|utils)/**/*.js",
+      "**/packages/(react|utils)/**/*.cjs",
+      "**/packages/(react|utils)/**/*.mjs",
+      "**/packages/(react|utils)/**/*.jsx",
+      "**/packages/(react|utils)/**/*.ts",
+      "**/packages/(react|utils)/**/*.cts",
+      "**/packages/(react|utils)/**/*.mts",
+      "**/packages/(react|utils)/**/*.tsx",
+      "**/packages/(react|utils)/**/*.d.ts",
+    ],
+    rules: {
+      "no-restricted-imports": ["error", "@yamada-ui/react"],
+    },
   },
-}
-
-const deprecatedConfig: Linter.Config = {
-  name: "eslint/deprecated",
-  files: [
-    "packages/**/tests/**/*.js",
-    "packages/**/tests/**/*.cjs",
-    "packages/**/tests/**/*.mjs",
-    "packages/**/tests/**/*.jsx",
-    "packages/**/tests/**/*.ts",
-    "packages/**/tests/**/*.cts",
-    "packages/**/tests/**/*.mts",
-    "packages/**/tests/**/*.tsx",
-    "packages/**/tests/**/*.d.ts",
-    "stories/**/*.ts",
-    "stories/**/*.tsx",
-    "stories/**/*.d.ts",
-  ],
-  rules: {
-    "@typescript-eslint/no-deprecated": "warn",
+  {
+    name: "eslint/restricted-imports/utils",
+    files: [
+      "**/packages/react/src/!(utils)/**/*.js",
+      "**/packages/react/src/!(utils)/**/*.cjs",
+      "**/packages/react/src/!(utils)/**/*.mjs",
+      "**/packages/react/src/!(utils)/**/*.jsx",
+      "**/packages/react/src/!(utils)/**/*.ts",
+      "**/packages/react/src/!(utils)/**/*.cts",
+      "**/packages/react/src/!(utils)/**/*.mts",
+      "**/packages/react/src/!(utils)/**/*.tsx",
+      "**/packages/react/src/!(utils)/**/*.d.ts",
+    ],
+    rules: {
+      "no-restricted-imports": ["error", "@yamada-ui/utils"],
+    },
   },
-}
+]
 
-const restrictedImportsConfig: Linter.Config = {
-  name: "eslint/restricted-imports",
-  files: [
-    "packages/**/*.js",
-    "packages/**/*.cjs",
-    "packages/**/*.mjs",
-    "packages/**/*.jsx",
-    "packages/**/*.ts",
-    "packages/**/*.cts",
-    "packages/**/*.mts",
-    "packages/**/*.tsx",
-    "packages/**/*.d.ts",
-  ],
-  rules: {
-    "no-restricted-imports": ["error", "@yamada-ui/react"],
-  },
-}
-
-const reactConfig: Linter.Config = {
+const reactConfig: TSESLint.FlatConfig.Config = {
   ...sharedReactConfig,
   files: sharedFiles,
   ignores: ["packages/cli/**/*.ts"],
 }
 
-const reactHooksConfig: Linter.Config = {
+const reactHooksConfig: TSESLint.FlatConfig.Config = {
   ...sharedReactHooksConfig,
   files: sharedFiles,
   ignores: ["packages/cli/**/*.ts"],
 }
 
-const vitestSetupTestsConfig: Linter.Config = {
+const vitestSetupTestsConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/vitest/setup-tests",
   files: ["scripts/setup-test.ts"],
   plugins: {
@@ -140,15 +131,13 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   languageOptionConfig,
   baseConfig,
   noConsoleConfig,
-  deprecatedConfig,
-  restrictedImportsConfig,
+  ...restrictedImportsConfigArray,
   typescriptConfig,
   ...importConfigArray,
   perfectionistConfig,
   cspellConfig,
   reactConfig,
   reactHooksConfig,
-  storybookConfig,
   vitestConfig,
   vitestSetupTestsConfig,
   testingLibraryConfig,

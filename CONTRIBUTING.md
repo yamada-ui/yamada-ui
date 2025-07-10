@@ -59,20 +59,13 @@ To ensure the extension works correctly, please add the following settings to `.
 
 ```json
 {
-  ...
-  "eslint.options": {
-    "flags": ["unstable_ts_config"]
-  },
   "eslint.workingDirectories": [
-    "docs",
-    "examples/create-react-app",
-    "examples/hono",
-    "examples/next/app",
-    "examples/next/pages",
-    "examples/remix",
-    "examples/vite"
-  ],
-  ...
+    "www",
+    "playgrounds/next/app",
+    "playgrounds/next/pages",
+    "playgrounds/remix",
+    "playgrounds/vite"
+  ]
 }
 ```
 
@@ -135,7 +128,6 @@ the following types:
 
 6. Next, commit your changes following the
    [commit convention](#commit-convention).
-
    - `Confirming changes`: Run the `pnpm storybook` command to launch Storybook. The source for Storybook is in `./stories`.
    - `Creating a new component`: When you run the pnpm `gen:component` command, a component is created from a template and dependencies are installed.
    - `Adding functionality to an existing component`: After adding, please add a story for the target component so that the functionality can be understood.

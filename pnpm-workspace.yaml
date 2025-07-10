@@ -1,7 +1,7 @@
 packages:
   - "packages/**/**"
-  - "examples/**"
-  - "docs/**"
-  - "!docs/.next"
-  - "!docs/.mdx"
-  - "!examples/**/.next"
+  - "playgrounds/**"
+  - "www/**"
+  - "!www/.next"
+  - "!www/.velite"
+  - "!playgrounds/**/.next"

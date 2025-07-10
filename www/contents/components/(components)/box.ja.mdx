@@ -1,0 +1,32 @@
+---
+title: Box
+description: "`Box`は、他のすべてのコンポーネントがその上に構築される最も抽象的なコンポーネントです。デフォルトでは、`div`要素をレンダリングします。"
+storybook: components-box--basic
+source: components/box
+---
+
+```tsx preview
+<Box p="md" bg="bg.contrast" color="fg.contrast">
+  This is the Box
+</Box>
+```
+
+## 使い方
+
+```ts
+import { Box } from "@yamada-ui/react"
+```
+
+```tsx
+<Box />
+```
+
+### 異なるコンポーネントとしてレンダリングする
+
+`as`を渡すことで、異なるコンポーネントとしてレンダリングすることができます。
+
+```tsx preview
+<Box as="section" p="md" bg="danger" color="white">
+  This is the section
+</Box>
+```

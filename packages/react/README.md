@@ -66,36 +66,6 @@ npm install @yamada-ui/react
 bun add @yamada-ui/react
 ```
 
-`@yamada-ui/table` and `@yamada-ui/calendar`, among others,
-are not included with `@yamada-ui/react`.
-You will need to install them separately.
-
-```sh
-# Provide a convenient Table component using `@tanstack/react-table`.
-pnpm add @yamada-ui/table
-
-# Provide a convenient Calendar and datePicker, MonthPicker component
-pnpm add @yamada-ui/calendar
-
-# Provide a convenient Carousel component using `embla-carousel-react`.
-pnpm add @yamada-ui/carousel
-
-# Provide a convenient Dropzone component using `react-dropzone`.
-pnpm add @yamada-ui/dropzone
-
-# Provide a convenient Chart component using `recharts`.
-pnpm add @yamada-ui/charts
-
-# Provide a convenient Markdown component using `react-markdown` and `react-syntax-highlighter`.
-pnpm add @yamada-ui/markdown
-
-# Provide a convenient Icon component using `Lucide`.
-pnpm add @yamada-ui/lucide
-
-# a package for conveniently using `Font Awesome`.
-pnpm add @yamada-ui/fontawesome
-```
-
 ## Usage
 
 To get started with using the components, please follow the steps below:

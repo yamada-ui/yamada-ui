@@ -1,0 +1,39 @@
+name: Storybook
+
+on:
+  push:
+    paths:
+      - "packages/**"
+      - "!packages/**/(scripts|test)/**"
+      - "!packages/**/*.test.(ts|tsx)"
+      - "package.json"
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Install
+        uses: ./.github/composite-actions/install
+
+      - name: Build Storybook
+        run: pnpm react storybook:build
+
+      - name: Update Storybook
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        with:
+          branch: gh-pages
+          folder: storybook-static
+          clean: true
+          clean-exclude: .nojekyll

@@ -6,14 +6,14 @@ import type {
   SourceFile,
   TransformerFactory,
 } from "typescript"
-import * as p from "@clack/prompts"
-import c from "chalk"
 import dns from "dns"
 import { existsSync } from "fs"
 import { mkdir, readFile, writeFile } from "fs/promises"
 import { Readable } from "node:stream"
 import { pipeline } from "node:stream/promises"
+import ora from "ora"
 import path from "path"
+import * as c from "picocolors"
 import { t } from "tar"
 import {
   createPrinter,
@@ -27,7 +27,7 @@ import {
   visitEachChild,
   visitNode,
 } from "typescript"
-import { isWriteable, prettier } from "../../utils"
+import { isWriteable, prettier } from "../../utils/index.js"
 
 const ORG_NAME = "yamada-ui"
 const REPO_NAME = "yamada-ui"
@@ -289,40 +289,32 @@ export const actionTheme = async (
   _outPath: string,
   { branch = DEFAULT_BRANCH_NAME, cwd, replace = false }: Options,
 ) => {
-  p.intro(c.magenta(`Generating Yamada UI theme`))
+  const spinner = ora()
 
-  const s = p.spinner()
+  const start = process.hrtime.bigint()
+  cwd ??= path.resolve()
+  const outPath = path.join(cwd, _outPath)
 
-  try {
-    const start = process.hrtime.bigint()
-    cwd ??= path.resolve()
-    const outPath = path.join(cwd, _outPath)
+  spinner.start(`Checking "package.json"`)
 
-    s.start(`Checking "package.json"`)
+  const hasReact = await checkHasReact(cwd)
 
-    const hasReact = await checkHasReact(cwd)
+  spinner.succeed(`Checked "package.json"`)
 
-    s.stop(`Checked "package.json"`)
+  spinner.start(`Downloading the theme`)
 
-    s.start(`Downloading the theme`)
+  const fileMap = await getFileMap(outPath, branch)
 
-    const fileMap = await getFileMap(outPath, branch)
+  spinner.succeed(`Downloaded the theme`)
 
-    s.stop(`Downloaded the theme`)
+  spinner.start(`Writing the theme "${outPath}"`)
 
-    s.start(`Writing the theme "${outPath}"`)
+  await generateTheme(outPath, fileMap, hasReact, replace)
 
-    await generateTheme(outPath, fileMap, hasReact, replace)
+  spinner.succeed(`Wrote the theme`)
 
-    s.stop(`Wrote the theme`)
+  const end = process.hrtime.bigint()
+  const duration = (Number(end - start) / 1e9).toFixed(2)
 
-    const end = process.hrtime.bigint()
-    const duration = (Number(end - start) / 1e9).toFixed(2)
-
-    p.outro(`${c.green(`Done`)} in ${c.dim(`${duration}s`)}\n`)
-  } catch (e) {
-    s.stop(`An error occurred`, 500)
-
-    p.cancel(c.red(e instanceof Error ? e.message : "Message is missing"))
-  }
+  console.log("\n", c.green(`Done in ${duration}s`))
 }

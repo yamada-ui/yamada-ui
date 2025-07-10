@@ -1,0 +1,91 @@
+{
+  "FileInput": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { ...; }), \"2xl\" | ... 5 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: \"2xl\" | .....",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | ({ _peerAccept?: \"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "children": {
+      "type": "(files: File[] | undefined) => ReactNode",
+      "description": "A callback that returns a React node.",
+      "required": false
+    },
+    "component": {
+      "type": "(props: { index: number; value: File }) => ReactNode",
+      "description": "The component that displays uploaded files.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "File[]",
+      "description": "The initial value of the file input.",
+      "required": false
+    },
+    "errorBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "description": "The border color when the input is invalid.",
+      "required": false
+    },
+    "focusBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "description": "The border color when the input is focused.",
+      "required": false
+    },
+    "format": {
+      "type": "(value: File, index: number) => string",
+      "description": "A callback that formats the name of the uploaded file.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(files: File[] | undefined) => void",
+      "description": "Function to be called when a file change event occurs.",
+      "required": false
+    },
+    "resetRef": {
+      "type": "RefObject<(() => void) | null>",
+      "description": "Ref to a reset function.",
+      "required": false
+    },
+    "separator": {
+      "type": "string",
+      "defaultValue": "\",\"",
+      "description": "The string to separate uploaded files.",
+      "required": false
+    },
+    "value": {
+      "type": "File[]",
+      "description": "The value of the file input.",
+      "required": false
+    }
+  }
+}

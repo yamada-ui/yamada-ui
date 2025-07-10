@@ -1,0 +1,88 @@
+{
+  "Icon": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Item": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "description": "The icon to use.",
+      "required": false
+    }
+  },
+  "Root": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "items": {
+      "type": "ListItemProps[]",
+      "description": "If provided, generate elements based on items.",
+      "required": false
+    },
+    "stylePosition": {
+      "type": "ListStylePosition | [ListStylePosition | ({ _peerAccept?: ListStylePosition | [ListStylePosition | (... & { ...; }), ListStylePosition | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ListStylePosition | ... 2 more ... | undefined; } & { ...; }), ListStylePosition | ({ ...; } & { ...; })] |...",
+      "description": "The CSS `list-style-position` property.",
+      "required": false
+    },
+    "styleType": {
+      "type": "ListStyleType | [ListStyleType | ({ _peerAccept?: ListStyleType | [ListStyleType | (... & { base?: ListStyleType | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ListStyleType | ... 2 more ... | undefined; }), ListStyleType | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ListStyleTy...",
+      "description": "The CSS `list-style-position` property.",
+      "required": false
+    }
+  }
+}

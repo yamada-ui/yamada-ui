@@ -26,6 +26,10 @@ export function isString(value: any): value is string {
   return Object.prototype.toString.call(value) === "[object String]"
 }
 
+export function isBooleanish(value: any): value is boolean {
+  return isBoolean(value) || value === "true" || value === "false"
+}
+
 export function isBoolean(value: any): value is boolean {
   return typeof value === "boolean"
 }
@@ -36,6 +40,10 @@ export function isUndefined(value: any): value is undefined {
 
 export function isNull(value: any): value is null {
   return value === null
+}
+
+export function isRegExp(value: any): value is RegExp {
+  return value instanceof RegExp
 }
 
 export function isObject<T extends Dict>(value: any): value is T {

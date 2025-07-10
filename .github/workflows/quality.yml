@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - main
-      - documentation
       - v*
 
 concurrency:
@@ -25,7 +24,7 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/.*/(src|scripts|package.json|tsconfig.json),turbo.json,tsconfig.json"
+          file_patterns: "packages/.*/(src|package.json|tsconfig.json|clean-package.config.json|tsdown.config.ts),turbo.json,tsconfig.json"
 
       - name: Cache turbo build setup
         uses: actions/cache@v4
@@ -38,19 +37,13 @@ jobs:
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
-      - name: Fetch main branch
-        if: steps.check-modified.outputs.changed == 'true'
-        run: git fetch origin main:main
-
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Build packages
         if: steps.check-modified.outputs.changed == 'true'
-        run: |
-          COMMIT=$(git merge-base HEAD main)
-          pnpm build:depend --commit=$COMMIT
+        run: pnpm build
 
   test:
     name: Test
@@ -63,7 +56,7 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/.*/(src|tests|package.json|tsconfig.json),scripts/setup-test.ts,vitest.config.mts"
+          file_patterns: "packages/.*/(src|package.json|tsconfig.json|vitest.config.mts),scripts/setup-test.ts"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
@@ -71,7 +64,7 @@ jobs:
 
       - name: Run tests
         if: steps.check-modified.outputs.changed == 'true'
-        run: pnpm test:ci
+        run: pnpm test
 
       - name: Upload coverage
         if: steps.check-modified.outputs.changed == 'true'
@@ -95,7 +88,7 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/,eslint/,eslint.config.mjs,tsconfig.json"
+          file_patterns: "packages/,.eslint/,eslint.config.ts,tsconfig.json"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
@@ -116,7 +109,7 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/,stories/,scripts/,tsconfig.json"
+          file_patterns: "packages/,scripts/,.eslint/,eslint.config.ts,tsconfig.json"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
@@ -137,22 +130,12 @@ jobs:
         id: check-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "packages/,stories/,scripts/,.prettierrc.json,.prettierignore"
-
-      - name: Check docs modified files
-        id: check-docs-modified
-        uses: ./.github/composite-actions/check-modified-files
-        with:
-          file_patterns: "docs/"
+          file_patterns: "packages/,scripts/,.prettierrc.json,.prettierignore"
 
       - name: Install
-        if: steps.check-modified.outputs.changed == 'true' || steps.check-docs-modified.outputs.changed == 'true'
+        if: steps.check-modified.outputs.changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run format
         if: steps.check-modified.outputs.changed == 'true'
-        run: pnpm format:check
-
-      - name: Run docs format
-        if: steps.check-docs-modified.outputs.changed == 'true'
-        run: pnpm docs:format:check
+        run: pnpm format

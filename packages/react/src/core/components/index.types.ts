@@ -58,7 +58,7 @@ export interface Component<Y extends As, D extends object = {}>
   extends ComponentArgs {
   <M extends As = Y>(
     props: ComponentProps<Y, M, D>,
-  ): Promise<React.ReactNode> | React.ReactElement
+  ): React.ReactElement | React.ReactNode
 }
 
 export type GenericsComponent<Y extends Function> = ComponentArgs & Y

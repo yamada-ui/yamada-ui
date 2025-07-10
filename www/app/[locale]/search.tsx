@@ -342,6 +342,8 @@ const Item = memo(function Item({
       px="4"
       rounded="l2"
       tabIndex={-1}
+      transitionDuration="moderate"
+      transitionProperty="colors"
       w="full"
       {...rest}
     >

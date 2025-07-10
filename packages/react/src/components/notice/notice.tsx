@@ -157,7 +157,11 @@ export const useNotice = (
   defaultOptions?: UseNoticeOptions,
 ): CreateNoticeReturn => {
   return useMemo(() => {
-    return createNoticeFunc(defaultOptions ?? {})
+    const mergedOptions = merge(defaultOptions ?? {}, {
+      limit: 5,
+    })
+
+    return createNoticeFunc(mergedOptions)
   }, [defaultOptions])
 }
 

@@ -246,13 +246,11 @@ const NoticeComponent = withContext<"li", NoticeComponentProps>(
     }, [duration])
 
     const onMouseEnter = useCallback(() => {
-      if (!isPresent) return
       setDelay(null)
-    }, [isPresent])
+    }, [])
     const onMouseLeave = useCallback(() => {
-      if (!isPresent) return
       setDelay(duration)
-    }, [duration, isPresent])
+    }, [duration])
 
     const onClose = useCallback(() => {
       if (isPresent) {

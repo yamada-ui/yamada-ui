@@ -7,7 +7,7 @@ import {
 } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
-import { LogoIcon, NextLinkIconButton } from "@/components"
+import { DiscordIcon, LogoIcon, NextLinkIconButton } from "@/components"
 import { CONSTANTS } from "@/constants"
 import { ColorModeButton } from "./color-mode-button"
 import { LangButton } from "./lang-button"
@@ -63,6 +63,16 @@ export function Header() {
             color="fg.emphasized"
             external
             icon={<GithubIcon />}
+          />
+
+          <Separator h="4" orientation="vertical" />
+
+          <NextLinkIconButton
+            href={CONSTANTS.SNS.DISCORD}
+            aria-label={t("discord")}
+            color="fg.emphasized"
+            external
+            icon={<DiscordIcon />}
           />
 
           <Separator h="4" orientation="vertical" />

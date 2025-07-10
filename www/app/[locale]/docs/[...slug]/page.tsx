@@ -3,6 +3,7 @@ import { docs } from "#velite"
 import { Box } from "@yamada-ui/react"
 import { notFound } from "next/navigation"
 import { MDXContent } from "@/components"
+import { getDocs } from "@/data"
 import { mdToText } from "@/utils/string"
 import { Header } from "./header"
 import { Toc } from "./toc"
@@ -18,9 +19,7 @@ export function generateStaticParams({
 }: {
   params: { locale: string }
 }) {
-  return docs
-    .filter(({ locale }) => locale === params.locale)
-    .map(({ slug }) => ({ slug }))
+  return getDocs(params.locale).map(({ slug }) => ({ slug }))
 }
 
 export async function generateMetadata({

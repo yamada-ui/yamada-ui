@@ -19,7 +19,7 @@ import {
 } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
-import { NextLinkButton, NextLinkIconButton } from "@/components"
+import { DiscordIcon, NextLinkButton, NextLinkIconButton } from "@/components"
 import { CONSTANTS } from "@/constants"
 import { getDocMap } from "@/data"
 import { useLocale, usePathname } from "@/i18n"
@@ -79,6 +79,16 @@ export function MobileMenu({ items }: MobileMenuProps) {
 
           <Separator h="4" orientation="vertical" />
 
+          <NextLinkIconButton
+            href={CONSTANTS.SNS.DISCORD}
+            aria-label={t("discord")}
+            color="fg.emphasized"
+            external
+            icon={<DiscordIcon />}
+          />
+
+          <Separator h="4" orientation="vertical" />
+
           <LangButton />
 
           <Separator h="4" orientation="vertical" />
@@ -102,20 +112,25 @@ export function MobileMenu({ items }: MobileMenuProps) {
               variant: { base: "ghost", _current: "solid" },
               justifyContent: "flex-start",
             }}
+            onClose={onClose}
           />
 
-          <DocsMenu />
+          <DocsMenu onClose={onClose} />
         </Drawer.Body>
       </Drawer.Content>
     </Drawer.Root>
   )
 }
 
-function DocsMenu() {
+interface DocsMenuProps {
+  onClose: () => void
+}
+
+function DocsMenu({ onClose }: DocsMenuProps) {
   const t = useTranslations("docs")
   const pathname = usePathname()
-  const { lang } = useLocale()
-  const docMap = useMemo(() => getDocMap(lang), [lang])
+  const { locale } = useLocale()
+  const docMap = useMemo(() => getDocMap(locale), [locale])
   const changelog = pathname.startsWith("/docs/changelog")
 
   const primaryItems = useMemo(() => {
@@ -152,7 +167,12 @@ function DocsMenu() {
         w="full"
       >
         {primaryItems.map(({ pathname: href, segment, title }) => (
-          <DocsMenuItem key={href} href={href!} segment={segment}>
+          <DocsMenuItem
+            key={href}
+            href={href!}
+            segment={segment}
+            onClose={onClose}
+          >
             {title}
           </DocsMenuItem>
         ))}
@@ -178,7 +198,12 @@ function DocsMenu() {
 
                 {items.map(({ pathname: href, segment, title }) => {
                   return (
-                    <DocsMenuItem key={href} href={href!} segment={segment}>
+                    <DocsMenuItem
+                      key={href}
+                      href={href!}
+                      segment={segment}
+                      onClose={onClose}
+                    >
                       {title}
                     </DocsMenuItem>
                   )
@@ -187,7 +212,12 @@ function DocsMenu() {
             )
           } else {
             return (
-              <DocsMenuItem key={segment} href={href!} segment={segment}>
+              <DocsMenuItem
+                key={segment}
+                href={href!}
+                segment={segment}
+                onClose={onClose}
+              >
                 {title}
               </DocsMenuItem>
             )
@@ -200,6 +230,7 @@ function DocsMenu() {
 
 interface DocsMenuItemProps extends NextLinkButtonProps {
   segment: string
+  onClose: () => void
 }
 
 function DocsMenuItem({
@@ -207,6 +238,7 @@ function DocsMenuItem({
   children,
   segment,
   onClick,
+  onClose,
   ...rest
 }: DocsMenuItemProps) {
   const pathname = usePathname()
@@ -225,9 +257,11 @@ function DocsMenuItem({
       fontWeight="normal"
       justifyContent="flex-start"
       mb="xs"
-      onClick={handlerAll(onClick, () =>
-        window.scrollTo({ behavior: "instant", top: 0 }),
-      )}
+      onClick={handlerAll(onClick, () => {
+        if (pathname === href) onClose()
+
+        window.scrollTo({ behavior: "instant", top: 0 })
+      })}
       {...rest}
     >
       <Text as="span" truncated>

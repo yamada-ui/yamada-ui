@@ -10,12 +10,12 @@ import { useLocale, usePathname } from "@/i18n"
 
 export function Sidebar() {
   const pathname = usePathname()
-  const { lang } = useLocale()
+  const { locale } = useLocale()
   const t = useTranslations("docs")
   const changelog = pathname.startsWith("/docs/changelog")
 
   const items = useMemo(() => {
-    const docMap = getDocMap(lang)
+    const docMap = getDocMap(locale)
     const { items = [] } =
       docMap.items?.find((item) => pathname.startsWith(item.pathname!)) ?? {}
 
@@ -27,7 +27,7 @@ export function Sidebar() {
       },
       ...items,
     ]
-  }, [changelog, lang, pathname, t])
+  }, [changelog, locale, pathname, t])
 
   return (
     <Box

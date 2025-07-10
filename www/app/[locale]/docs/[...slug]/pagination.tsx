@@ -14,17 +14,17 @@ import { useLocale, usePathname } from "@/i18n"
 
 export function Pagination() {
   const pathname = usePathname()
-  const { lang } = useLocale()
+  const { locale } = useLocale()
 
   const { next, prev } = useMemo(() => {
-    const { items = [] } = getDocMap(lang)
+    const { items = [] } = getDocMap(locale)
     const flattenedDocMap = flattenDocMap(items)
     const index = flattenedDocMap.findIndex((doc) => doc.pathname === pathname)
     const prev = flattenedDocMap[index - 1]
     const next = flattenedDocMap[index + 1]
 
     return { next, prev }
-  }, [lang, pathname])
+  }, [locale, pathname])
 
   return (
     <ButtonGroup

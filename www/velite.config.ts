@@ -12,6 +12,7 @@ import {
   remarkCodeBlock,
   remarkSteps,
 } from "./utils/remark-plugins"
+import { getPathname } from "./utils/route"
 
 function getPath(value: string) {
   return value.replace(/.*\/contents\//, "")
@@ -49,20 +50,26 @@ const docs = defineCollection({
       title: s.string(),
       toc: s.toc(),
     })
-    .transform((data, { meta }) => ({
-      ...data,
-      ...getSlug(meta.path as string),
-      style: data.style
-        ? `${CONSTANTS.SNS.GITHUB.PACKAGE_EDIT_URL}/${data.style}`
-        : undefined,
-      path: getPath(meta.path as string),
-      source: data.source
-        ? `${CONSTANTS.SNS.GITHUB.PACKAGE_EDIT_URL}/${data.source}`
-        : undefined,
-      storybook: data.storybook
-        ? `${CONSTANTS.SNS.STORYBOOK}?path=/story/${data.storybook}`
-        : undefined,
-    })),
+    .transform((data, { meta }) => {
+      const { locale, slug } = getSlug(meta.path as string)
+
+      return {
+        ...data,
+        style: data.style
+          ? `${CONSTANTS.SNS.GITHUB.PACKAGE_EDIT_URL}/${data.style}`
+          : undefined,
+        locale,
+        path: getPath(meta.path as string),
+        pathname: getPathname("docs", ...slug),
+        slug,
+        source: data.source
+          ? `${CONSTANTS.SNS.GITHUB.PACKAGE_EDIT_URL}/${data.source}`
+          : undefined,
+        storybook: data.storybook
+          ? `${CONSTANTS.SNS.STORYBOOK}?path=/story/${data.storybook}`
+          : undefined,
+      }
+    }),
 })
 
 export default defineConfig({

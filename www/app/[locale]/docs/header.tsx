@@ -8,13 +8,13 @@ import { useLocale, usePathname } from "@/i18n"
 
 export function Header() {
   const pathname = usePathname()
-  const { lang } = useLocale()
+  const { locale } = useLocale()
 
   const items = useMemo(() => {
-    const { items = [] } = getDocMap(lang)
+    const { items = [] } = getDocMap(locale)
 
     return items
-  }, [lang])
+  }, [locale])
 
   return (
     <ButtonGroup

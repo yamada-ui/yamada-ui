@@ -30,10 +30,10 @@
     "description": "Lucideを使用して作成された、すぐに使用できるアイコンのコレクション。アプリケーションにコピー&ペーストできます。",
     "primaryAction": "アイコンを見る",
     "secondaryAction": "ドキュメント",
-    "placeholder": "{count}個のアイコンを検索する...",
-    "not-found": "アイコンが見つかりません。",
+    "placeholder": "{total}個のアイコンを検索する...",
+    "notFound": "アイコンが見つかりません。",
     "reset": "検索をクリアしてもう一度試す",
-    "openPreview": "{name}のプレビューを開く"
+    "openPreview": "{title}のプレビューを開く"
   },
   "themes": {
     "title": "あなただけのテーマ",
@@ -49,6 +49,7 @@
       "colors": "カラー",
       "themes": "テーマ",
       "github": "GitHubリポジトリ",
+      "discord": "Discordサーバー",
       "colorMode": "{colorMode}に変更する",
       "lang": "言語を変更する",
       "menu": "メニューを開く"
@@ -60,7 +61,8 @@
       "x": "Hirotomo YamadaのXプロフィール"
     },
     "search": {
-      "placeholder": "ドキュメントを検索する..."
+      "placeholder": "ドキュメントを検索する...",
+      "notFound": "「{value}」に該当する結果が見つかりませんでした。"
     },
     "toc": {
       "title": "このページでは",

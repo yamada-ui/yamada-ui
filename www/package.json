@@ -14,7 +14,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "prettier . --ignore-path ../.prettierignore --check --cache",
-    "gen:icon": "tsx scripts/generate/icon"
+    "gen:icons": "tsx scripts/generate/icons"
   },
   "dependencies": {
     "@lucide/lab": "^0.1.2",

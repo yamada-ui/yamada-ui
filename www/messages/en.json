@@ -30,10 +30,10 @@
     "description": "A collection of ready-to-use icons built with Lucide. Copy and paste into your apps.",
     "primaryAction": "Browse Icons",
     "secondaryAction": "Documentation",
-    "placeholder": "Search {count} icons...",
-    "not-found": "Icon not found.",
+    "placeholder": "Search {total} icons...",
+    "notFound": "Icon not found.",
     "reset": "Clear your search and try again",
-    "openPreview": "Open {name} preview"
+    "openPreview": "Open {title} preview"
   },
   "themes": {
     "title": "Your Own Themes",
@@ -49,6 +49,7 @@
       "themes": "Themes",
       "colors": "Colors",
       "github": "GitHub repository",
+      "discord": "Discord server",
       "colorMode": "Change to {colorMode}",
       "lang": "Change language",
       "menu": "Open menu"
@@ -60,7 +61,8 @@
       "x": "X profile of Hirotomo Yamada"
     },
     "search": {
-      "placeholder": "Search documentation..."
+      "placeholder": "Search documentation...",
+      "notFound": "No results found for \"{value}\"."
     },
     "toc": {
       "title": "On this page",

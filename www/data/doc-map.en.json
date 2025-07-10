@@ -272,7 +272,6 @@
         {
           "title": "Design Tokens",
           "segment": "tokens",
-          "pathname": "/docs/theming",
           "items": [
             {
               "title": "Animations",

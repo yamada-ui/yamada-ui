@@ -8,7 +8,7 @@ import { prettier } from "@/libs/prettier"
 const REPOSITORY_PATH = path.resolve(".lucide")
 const DIST_PATH = path.resolve("data", "icons.json")
 
-async function getIconTags(fileName: string): Promise<string[]> {
+async function getKeywords(fileName: string): Promise<string[]> {
   const data = await readFile(
     path.resolve(REPOSITORY_PATH, "icons", fileName),
     "utf-8",
@@ -38,7 +38,7 @@ async function main() {
 
       const iconName = fileName.replace(".json", "")
 
-      data[`${toPascalCase(iconName)}Icon`] = await getIconTags(fileName)
+      data[`${toPascalCase(iconName)}Icon`] = await getKeywords(fileName)
     }),
   )
 

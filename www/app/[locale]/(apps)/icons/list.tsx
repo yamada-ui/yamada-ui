@@ -40,10 +40,8 @@ import {
   useTransition,
 } from "react"
 import { CodePreview } from "@/components"
-import { getIcons } from "@/data"
+import { iconContents } from "@/data"
 
-const ICONS = getIcons()
-const COUNT = ICONS.length
 const PER_PAGE = 200
 
 export interface ListProps extends StackProps {}
@@ -51,11 +49,12 @@ export interface ListProps extends StackProps {}
 export function List({ ...rest }: ListProps) {
   const t = useTranslations("icons")
   const [value, setValue] = useState("")
-  const hitsRef = useRef(ICONS)
-  const [list, setList] = useState(ICONS.slice(0, PER_PAGE))
+  const total = iconContents.length
+  const hitsRef = useRef(iconContents)
+  const [list, setList] = useState(iconContents.slice(0, PER_PAGE))
   const resetRef = useRef<() => void>(noop)
-  const openRef = useRef<(name: string, Icon: ElementType) => void>(noop)
-  const totalIndex = Math.ceil(ICONS.length / PER_PAGE) - 1
+  const openRef = useRef<(title: string, Icon: ElementType) => void>(noop)
+  const totalIndex = Math.ceil(total / PER_PAGE) - 1
   const [, startTransition] = useTransition()
 
   const onSearch = useCallback((value: string) => {
@@ -64,11 +63,11 @@ export function List({ ...rest }: ListProps) {
     startTransition(() => {
       resetRef.current()
 
-      let hits = ICONS
+      let hits = iconContents
 
       if (value.length)
-        hits = matchSorter(ICONS, value, {
-          keys: ["tags", "name"],
+        hits = matchSorter(iconContents, value, {
+          keys: ["title", "keywords"],
         })
 
       hitsRef.current = hits
@@ -79,13 +78,13 @@ export function List({ ...rest }: ListProps) {
 
   const onReset = useCallback(() => {
     setValue("")
-    setList(ICONS.slice(0, PER_PAGE))
+    setList(iconContents.slice(0, PER_PAGE))
     resetRef.current()
-    hitsRef.current = ICONS
+    hitsRef.current = iconContents
   }, [])
 
   const onOpen = useCallback(
-    (name: string, Icon: ElementType) => openRef.current(name, Icon),
+    (title: string, Icon: ElementType) => openRef.current(title, Icon),
     [],
   )
 
@@ -104,7 +103,7 @@ export function List({ ...rest }: ListProps) {
           </InputGroup.Element>
           <Input
             name="search"
-            placeholder={t("placeholder", { count: COUNT })}
+            placeholder={t("placeholder", { total })}
             value={value}
             onChange={(ev) => onSearch(ev.target.value)}
           />
@@ -127,11 +126,11 @@ export function List({ ...rest }: ListProps) {
               gap="md"
               templateColumns="repeat(auto-fill, minmax(56px, 1fr))"
             >
-              {list.map(({ name, Icon }) => (
+              {list.map(({ Icon, title }) => (
                 <IconButton
-                  key={name}
-                  name={name}
+                  key={title}
                   Icon={Icon}
+                  title={title}
                   onOpen={onOpen}
                 />
               ))}
@@ -148,25 +147,25 @@ export function List({ ...rest }: ListProps) {
 }
 
 interface IconButtonProps extends CenterProps {
-  name: string
   Icon: ElementType
-  onOpen: (name: string, Icon: ElementType) => void
+  title: string
+  onOpen: (title: string, Icon: ElementType) => void
 }
 
 const IconButton = memo(function IconButton({
-  name,
   Icon,
+  title,
   onOpen,
   ...rest
 }: IconButtonProps) {
   const t = useTranslations("icons")
 
   return (
-    <Tooltip content={`${name}Icon`}>
+    <Tooltip content={title}>
       <AspectRatio ratio={1 / 1}>
         <Center
           as="button"
-          aria-label={t("openPreview", { name })}
+          aria-label={t("openPreview", { title })}
           bg={{
             base: "bg.panel",
             _hover: ["bg.subtle", "bg.muted"],
@@ -177,7 +176,7 @@ const IconButton = memo(function IconButton({
           rounded="l2"
           transitionDuration="moderate"
           transitionProperty="background"
-          onClick={() => onOpen(name, Icon)}
+          onClick={() => onOpen(title, Icon)}
           {...rest}
         >
           <Icon fontSize="2xl" />
@@ -207,7 +206,7 @@ function NotFound({ onReset, ...rest }: NotFoundProps) {
       />
 
       <Text color="fg.muted" fontSize="lg" lineClamp={1}>
-        {t("not-found")}
+        {t("notFound")}
       </Text>
 
       <Button size="sm" variant="subtle" onClick={onReset}>
@@ -218,23 +217,23 @@ function NotFound({ onReset, ...rest }: NotFoundProps) {
 }
 
 interface PreviewProps extends Drawer.RootProps {
-  onOpenRef: RefObject<(name: string, Icon: ElementType) => void>
+  onOpenRef: RefObject<(title: string, Icon: ElementType) => void>
 }
 
 const Preview = memo(function Preview({ onOpenRef, ...rest }: PreviewProps) {
-  const data = useRef<null | { name: string; Icon: ElementType }>(null)
+  const data = useRef<null | { Icon: ElementType; title: string }>(null)
   const { open, onClose, onOpen } = useDisclosure({
     onClose: () => {
       data.current = null
     },
   })
 
-  assignRef(onOpenRef, (name, Icon) => {
-    data.current = { name, Icon }
+  assignRef(onOpenRef, (title, Icon) => {
+    data.current = { Icon, title }
     onOpen()
   })
 
-  const { name, Icon: PreviewIcon = Fragment } = data.current ?? {}
+  const { Icon: PreviewIcon = Fragment, title } = data.current ?? {}
 
   return (
     <Drawer.Root
@@ -289,7 +288,7 @@ const Preview = memo(function Preview({ onOpenRef, ...rest }: PreviewProps) {
 
         <HStack alignItems="flex-start" minW="0" w="full">
           <Heading as="h3" flex="1" lineClamp={1}>
-            {name}
+            {title}
           </Heading>
 
           <Drawer.CloseTrigger>
@@ -301,11 +300,11 @@ const Preview = memo(function Preview({ onOpenRef, ...rest }: PreviewProps) {
           <CodePreview
             lang="tsx"
             bg="bg"
-            code={`import { ${name} } from "@yamada-ui/react"`}
+            code={`import { ${title} } from "@yamada-ui/react"`}
             m="0"
           />
 
-          <CodePreview lang="tsx" bg="bg" code={`<${name}Icon />`} m="0" />
+          <CodePreview lang="tsx" bg="bg" code={`<${title} />`} m="0" />
         </VStack>
       </Drawer.Content>
     </Drawer.Root>

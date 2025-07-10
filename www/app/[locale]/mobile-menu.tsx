@@ -49,7 +49,6 @@ export function MobileMenu({ items }: MobileMenuProps) {
 
   return (
     <Drawer.Root
-      // eslint-disable-next-line jsx-a11y/no-autofocus
       autoFocus={false}
       closeOnDrag
       open={open}

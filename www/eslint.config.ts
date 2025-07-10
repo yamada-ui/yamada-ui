@@ -6,17 +6,25 @@ import {
   baseConfig,
   cspellConfig,
   importConfigArray,
-  jsxA11yConfig,
   languageOptionFactory,
   perfectionistConfig,
   reactConfig,
   reactHooksConfig,
+  jsxA11yConfig as sharedJsxA11yConfig,
   typescriptConfig,
 } from "../.eslint"
 
 const ignoresConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/ignores",
   ignores: ["**/node_modules/**", "**/.next/**", "**/.velite/**"],
+}
+
+const jsxA11yConfig: TSESLint.FlatConfig.Config = {
+  ...sharedJsxA11yConfig,
+  rules: {
+    ...sharedJsxA11yConfig.rules,
+    "jsx-a11y/no-autofocus": "off",
+  },
 }
 
 const nextConfig: TSESLint.FlatConfig.Config = {

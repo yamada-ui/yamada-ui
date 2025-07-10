@@ -237,6 +237,7 @@ const Preview = memo(function Preview({ onOpenRef, ...rest }: PreviewProps) {
 
   return (
     <Drawer.Root
+      autoFocus={false}
       closeOnDrag
       open={open}
       placement="block-end"

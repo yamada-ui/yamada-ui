@@ -1,12 +1,11 @@
 import type { TSESLint } from "@typescript-eslint/utils"
-import { fixupPluginRules } from "@eslint/compat"
 import vitestPlugin from "@vitest/eslint-plugin"
 import { sharedTestFiles } from "./shared"
 
 export const vitestConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/vitest",
   files: sharedTestFiles,
-  plugins: { vitest: fixupPluginRules(vitestPlugin) },
+  plugins: { vitest: vitestPlugin },
   rules: {
     ...vitestPlugin.configs.recommended.rules,
     "vitest/expect-expect": "off",

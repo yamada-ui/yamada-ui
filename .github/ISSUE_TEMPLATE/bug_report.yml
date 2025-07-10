@@ -28,7 +28,7 @@ body:
     attributes:
       label: "Package Version"
       description: "The version of the package you are using."
-      placeholder: "0.1.0"
+      placeholder: "2.0.0"
     validations:
       required: true
   - type: textarea

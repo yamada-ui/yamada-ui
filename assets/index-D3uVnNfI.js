@@ -1,1 +1,0 @@
-import{r as V}from"./index-Bv9Y92EF.js";import{s,J as m,K as C,L as x}from"./factory-7Z88KRtK.js";function g({defaultValue:u,value:l,onChange:r,onUpdate:c=(t,a)=>t!==a}){const t=s(r),a=s(c),[f,d]=V.useState(u),o=l!==void 0,n=o?l:f,i=s(p=>{const e=m(p,n);a(n,e)&&((!o||C(e)||x(e))&&d(e),t(e))},[o,n,t,a]);return[n,i]}export{g as u};

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
 
-    <title>@storybook/core - Storybook</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>storybook - Storybook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
@@ -46,24 +46,22 @@
     <link href="./sb-manager/runtime.js" rel="modulepreload" />
 
     
-    <link href="./sb-addons/storybook-core-core-server-presets-0/common-manager-bundle.js" rel="modulepreload" />
+    <link href="./sb-addons/storybook-core-server-presets-0/common-manager-bundle.js" rel="modulepreload" />
     
-    <link href="./sb-addons/viewport-1/manager-bundle.js" rel="modulepreload" />
+    <link href="./sb-addons/docs-1/manager-bundle.js" rel="modulepreload" />
     
-    <link href="./sb-addons/docs-2/manager-bundle.js" rel="modulepreload" />
+    <link href="./sb-addons/a11y-2/manager-bundle.js" rel="modulepreload" />
     
-    <link href="./sb-addons/a11y-3/manager-bundle.js" rel="modulepreload" />
-    
-    <link href="./sb-addons/backgrounds-4/manager-bundle.js" rel="modulepreload" />
-    
-    <link href="./sb-addons/measure-5/manager-bundle.js" rel="modulepreload" />
-    
-    <link href="./sb-addons/storysource-6/manager-bundle.js" rel="modulepreload" />
-    
-    <link href="./sb-addons/storybook-dark-mode-esm-preset-7/manager-bundle.js" rel="modulepreload" />
+    <link href="./sb-addons/storybook-3/manager-bundle.js" rel="modulepreload" />
       <link
   rel="icon"
   href="https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/favicon.svg"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+  rel="stylesheet"
 />
  
 
@@ -85,7 +83,15 @@
           window['FEATURES'] = {
   "argTypeTargetsV7": true,
   "legacyDecoratorFileOrder": false,
-  "disallowImplicitActionsInRenderV8": true
+  "disallowImplicitActionsInRenderV8": true,
+  "viewport": true,
+  "highlight": true,
+  "controls": false,
+  "interactions": false,
+  "actions": false,
+  "backgrounds": false,
+  "outline": true,
+  "measure": true
 };
         
       
@@ -99,8 +105,7 @@
       
         
           window['DOCS_OPTIONS'] = {
-  "defaultName": "Docs",
-  "autodocs": "tag"
+  "defaultName": "Docs"
 };
         
       
@@ -144,25 +149,17 @@
 
     <script type="module">
       import './sb-manager/globals-runtime.js';
+
       
+        import './sb-addons/storybook-core-server-presets-0/common-manager-bundle.js';
       
-        import './sb-addons/storybook-core-core-server-presets-0/common-manager-bundle.js';
+        import './sb-addons/docs-1/manager-bundle.js';
       
-        import './sb-addons/viewport-1/manager-bundle.js';
+        import './sb-addons/a11y-2/manager-bundle.js';
       
-        import './sb-addons/docs-2/manager-bundle.js';
+        import './sb-addons/storybook-3/manager-bundle.js';
       
-        import './sb-addons/a11y-3/manager-bundle.js';
-      
-        import './sb-addons/backgrounds-4/manager-bundle.js';
-      
-        import './sb-addons/measure-5/manager-bundle.js';
-      
-        import './sb-addons/storysource-6/manager-bundle.js';
-      
-        import './sb-addons/storybook-dark-mode-esm-preset-7/manager-bundle.js';
-      
-      
+
       import './sb-manager/runtime.js';
     </script>
   </body>

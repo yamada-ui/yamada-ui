@@ -1,6 +1,0 @@
-import{j as e}from"./jsx-runtime-DztICxWZ.js";import{b as s}from"./icon-DKuqv-9Z.js";import{c as i}from"./createLucideIcon-Bq8XVWwL.js";import{f as m}from"./forward-ref-DH6f5tnY.js";import{c as a}from"./factory-7Z88KRtK.js";/**
- * @license lucide-react v0.475.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */const t=[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["path",{d:"m9 12 2 2 4-4",key:"dzmm74"}]],n=i("CircleCheck",t),C=m(({className:c,...o},r)=>e.jsx(s,{ref:r,as:n,className:a("ui-lucide-icon",c),...o})),x=C;export{C,x as a};

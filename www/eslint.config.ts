@@ -19,6 +19,14 @@ const ignoresConfig: TSESLint.FlatConfig.Config = {
   ignores: ["**/node_modules/**", "**/.next/**", "**/.velite/**"],
 }
 
+const noConsoleConfig: TSESLint.FlatConfig.Config = {
+  name: "eslint/no-console",
+  files: ["scripts/**/*.ts"],
+  rules: {
+    "no-console": "off",
+  },
+}
+
 const jsxA11yConfig: TSESLint.FlatConfig.Config = {
   ...sharedJsxA11yConfig,
   rules: {
@@ -53,6 +61,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   ignoresConfig,
   languageOptionConfig,
   baseConfig,
+  noConsoleConfig,
   nextConfig,
   typescriptConfig,
   ...importConfigArray,

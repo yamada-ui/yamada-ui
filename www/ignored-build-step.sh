@@ -4,6 +4,8 @@ echo "VERCEL_GIT_COMMIT_REF: $VERCEL_GIT_COMMIT_REF"
 
 TARGET_BRANCH="v1"
 
-if [ "$VERCEL_GIT_COMMIT_REF" != "$TARGET_BRANCH" ]; then
+if [ "$VERCEL_GIT_COMMIT_REF" == "$TARGET_BRANCH" ]; then
   exit 0
+else
+  exit 1
 fi

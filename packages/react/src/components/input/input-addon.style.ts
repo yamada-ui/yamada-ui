@@ -44,6 +44,7 @@ export const inputAddonStyle = defineComponentStyle({
     outline: {
       layerStyle: "surface",
     },
+    plain: {},
   },
 
   sizes: inputStyle.sizes,

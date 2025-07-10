@@ -1,9 +1,9 @@
 import type { Dict } from "../../utils/index.js"
-import * as p from "@clack/prompts"
-import c from "chalk"
 import chokidar from "chokidar"
 import { writeFile } from "fs/promises"
+import ora from "ora"
 import path from "path"
+import c from "picocolors"
 import { getModule, isString } from "../../utils/index.js"
 import { generateThemeTokens } from "./generate-theme-tokens.js"
 
@@ -18,29 +18,13 @@ const buildThemeTokens = async ({
   outPath: string
   theme: Dict
 }) => {
-  const s = p.spinner()
+  const themeTokens = await generateThemeTokens(
+    theme,
+    config.theme ?? {},
+    internal,
+  )
 
-  try {
-    s.start(`Parsing the theme`)
-
-    const themeTokens = await generateThemeTokens(
-      theme,
-      config.theme ?? {},
-      internal,
-    )
-
-    s.stop(`Parsed the theme`)
-
-    s.start(`Writing file "${outPath}"`)
-
-    await writeFile(outPath, themeTokens, "utf8")
-
-    s.stop(`Wrote file`)
-  } catch (e) {
-    s.stop(`An error occurred`, 500)
-
-    p.cancel(c.red(e instanceof Error ? e.message : "Message is missing"))
-  }
+  await writeFile(outPath, themeTokens, "utf8")
 }
 
 const getTheme = async (path: string, cwd: string) => {
@@ -64,7 +48,9 @@ export const actionTokens = async (
   inputPath: string,
   { cwd = path.resolve(), internal = false, out: outPath, watch }: Options,
 ) => {
-  p.intro(c.magenta(`Generating Yamada UI theme typings`))
+  const spinner = ora()
+
+  spinner.start(`Getting theme`)
 
   inputPath = path.resolve(cwd, inputPath)
 
@@ -72,7 +58,11 @@ export const actionTokens = async (
 
   const { config, dependencies, theme } = file
 
+  spinner.succeed(`Got theme`)
+
   const buildFile = async () => {
+    spinner.start(`Generating theme typings`)
+
     await buildThemeTokens({
       config,
       internal,
@@ -80,7 +70,9 @@ export const actionTokens = async (
       theme,
     })
 
-    if (watch) p.log.info("Watching for changes...")
+    spinner.succeed(`Generated theme typings`)
+
+    if (watch) spinner.info("Watching for changes...")
   }
 
   if (watch) {
@@ -90,7 +82,7 @@ export const actionTokens = async (
       .watch(watchPath)
       .on("ready", buildFile)
       .on("change", async (path) => {
-        p.log.info(`File changed ${path}`)
+        spinner.info(`File changed ${path}`)
 
         file = await getTheme(inputPath, cwd)
 
@@ -104,6 +96,6 @@ export const actionTokens = async (
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)
 
-    p.outro(`${c.green(`Done`)} in ${c.dim(`${duration}s`)}\n`)
+    console.log("\n", c.green(`Done in ${duration}s`))
   }
 }

@@ -1,3 +1,5 @@
+"use client"
+
 import { SquareParkingOff } from "lucide-react"
 import { component, Icon } from "../icon"
 

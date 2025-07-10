@@ -1,3 +1,5 @@
+"use client"
+
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
@@ -70,11 +72,13 @@ export interface CollapseProps
   startingHeight?: number | string
 }
 
-export const {
+const {
   PropsContext: CollapsePropsContext,
   usePropsContext: useCollapsePropsContext,
   withContext,
 } = createComponent<CollapseProps, CollapseStyle>("collapse", collapseStyle)
+
+export { CollapsePropsContext, useCollapsePropsContext }
 
 /**
  * `Collapse` is a component that allows you to expand or collapse an element for display.

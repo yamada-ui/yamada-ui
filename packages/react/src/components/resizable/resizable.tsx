@@ -1,6 +1,7 @@
-import type { ForwardedRef, ReactElement } from "react"
+"use client"
+
+import type { FC, ForwardedRef, ReactElement } from "react"
 import type {
-  FC,
   HTMLStyledProps,
   HTMLStyledPropsWithoutAs,
   ThemeProps,
@@ -38,7 +39,7 @@ export interface ResizableRootProps
   rootRef?: ForwardedRef<HTMLDivElement>
 }
 
-export const {
+const {
   PropsContext: ResizablePropsContext,
   usePropsContext: useResizablePropsContext,
   withContext,
@@ -48,10 +49,11 @@ export const {
   resizableStyle,
 )
 
+export { ResizablePropsContext, useResizablePropsContext }
+
 export const ResizableRoot: FC<ResizableRootProps> = withProvider(
   ({ children, orientation: orientationProp, rootRef, ...rest }) => {
     const computedOrientation = useValue(orientationProp)
-
     const { controlRef, disabled, orientation, getGroupProps, getRootProps } =
       useResizable({
         ...rest,

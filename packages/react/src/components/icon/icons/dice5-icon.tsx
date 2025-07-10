@@ -1,3 +1,5 @@
+"use client"
+
 import { Dice5 } from "lucide-react"
 import { component, Icon } from "../icon"
 

@@ -1,3 +1,5 @@
+"use client"
+
 import { BanknoteArrowUp } from "lucide-react"
 import { component, Icon } from "../icon"
 

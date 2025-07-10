@@ -1,9 +1,12 @@
+"use client"
+
 import type { ChangeEvent } from "react"
 import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { Merge } from "../../utils"
 import type { FieldProps } from "../field"
 import { useCallback, useMemo, useRef } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
+import { useI18n } from "../../providers/i18n-provider"
 import {
   ariaAttr,
   dataAttr,
@@ -16,7 +19,7 @@ import {
 import { useFieldProps } from "../field"
 import { useToggleGroupContext } from "./use-toggle-group"
 
-export interface UseToggleProps<Y extends number | string = string>
+export interface UseToggleProps<Y extends string = string>
   extends FieldProps,
     HTMLRefAttributes<"input">,
     Omit<HTMLProps<"button">, "onChange" | "ref" | "value"> {
@@ -46,9 +49,10 @@ export interface UseToggleProps<Y extends number | string = string>
   onChange?: (checked: boolean) => void
 }
 
-export const useToggle = <Y extends number | string = string>(
-  props: UseToggleProps<Y>,
+export const useToggle = <Y extends string = string>(
+  props: UseToggleProps<Y> = {},
 ) => {
+  const { t } = useI18n("toggle")
   const {
     disabled: groupDisabled,
     readOnly: groupReadOnly,
@@ -160,14 +164,15 @@ export const useToggle = <Y extends number | string = string>(
     Merge<HTMLProps<"button">, { "aria-label": string }>
   > = useCallback(
     (props = {}) => ({
-      type: "button",
       ...dataProps,
+      type: "button",
       "aria-disabled": ariaAttr(!interactive),
-      "aria-label": value?.toString() ?? "Toggle button",
+      "aria-label": value?.toString() ?? t("Toggle button"),
       "aria-pressed": trulyChecked,
       "data-active": dataAttr(active),
       "data-checked": dataAttr(trulyChecked),
       disabled,
+      tabIndex: interactive ? undefined : -1,
       ...rest,
       ...props,
       onClick: handlerAll(rest.onClick, props.onClick, onClick),
@@ -181,6 +186,7 @@ export const useToggle = <Y extends number | string = string>(
       rest,
       onClick,
       interactive,
+      t,
     ],
   )
 

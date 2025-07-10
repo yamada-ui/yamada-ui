@@ -1,3 +1,5 @@
+"use client"
+
 import type { Path } from "@yamada-ui/utils"
 import type { Value } from "@yamada-ui/utils"
 import {

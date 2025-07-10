@@ -1,10 +1,17 @@
-import type { FC, HTMLStyledProps } from "../../core"
+"use client"
+
+import type { FC } from "react"
+import type { HTMLStyledProps, StyleValue } from "../../core"
 import type { SkeletonProps } from "./skeleton"
 import { mergeCSS, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { Skeleton } from "./skeleton"
 
-export interface SkeletonTextProps extends SkeletonProps {
+export interface SkeletonTextProps extends Omit<SkeletonProps, "lineClamp"> {
+  /**
+   * The number of lines to display.
+   */
+  lineClamp?: StyleValue<number>
   /**
    * Props for the root element.
    */

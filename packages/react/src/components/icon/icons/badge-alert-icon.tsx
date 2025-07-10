@@ -1,3 +1,5 @@
+"use client"
+
 import { BadgeAlert } from "lucide-react"
 import { component, Icon } from "../icon"
 

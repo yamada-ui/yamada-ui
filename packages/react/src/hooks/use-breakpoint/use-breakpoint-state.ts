@@ -1,3 +1,5 @@
+"use client"
+
 import type { ResponsiveObject } from "../../core"
 import { useState } from "react"
 import { useBreakpointValue } from "./use-breakpoint-value"
@@ -7,7 +9,9 @@ import { useBreakpointValue } from "./use-breakpoint-value"
  *
  * @see https://yamada-ui.com/hooks/use-breakpoint-state
  */
-export const useBreakpointState = <T>(initialState: ResponsiveObject<T>) => {
+export const useBreakpointState = <Y>(
+  initialState: ResponsiveObject<Y, false>,
+) => {
   const state = useBreakpointValue(initialState)
 
   return useState(state)

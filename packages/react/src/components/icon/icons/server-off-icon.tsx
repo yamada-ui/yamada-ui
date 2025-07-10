@@ -1,3 +1,5 @@
+"use client"
+
 import { ServerOff } from "lucide-react"
 import { component, Icon } from "../icon"
 

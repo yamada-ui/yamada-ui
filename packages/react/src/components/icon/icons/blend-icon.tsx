@@ -1,3 +1,5 @@
+"use client"
+
 import { Blend } from "lucide-react"
 import { component, Icon } from "../icon"
 

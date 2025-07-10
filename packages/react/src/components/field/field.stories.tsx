@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Field } from "."
 import { Input } from "../input"
 import { Tag } from "../tag"

@@ -1,3 +1,5 @@
+"use client"
+
 import { BookMarked } from "lucide-react"
 import { component, Icon } from "../icon"
 

@@ -1,6 +1,5 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { AnimatePresence, useScroll, useTransform } from "motion/react"
-import { App } from "../../../storybook/components"
 import { useBoolean } from "../../hooks/use-boolean"
 import { UIProvider } from "../../providers/ui-provider"
 import { defaultConfig } from "../../theme"
@@ -52,17 +51,15 @@ export const MotionConfig: Story = () => {
 
   return (
     <UIProvider config={config}>
-      <App>
-        <Motion
-          animate={{ x: 100 }}
-          bg="mono"
-          color="mono.contrast"
-          p="md"
-          rounded="md"
-        >
-          Motion
-        </Motion>
-      </App>
+      <Motion
+        animate={{ x: 100 }}
+        bg="mono"
+        color="mono.contrast"
+        p="md"
+        rounded="md"
+      >
+        Motion
+      </Motion>
     </UIProvider>
   )
 }

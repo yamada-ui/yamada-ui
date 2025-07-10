@@ -1,6 +1,8 @@
+"use client"
+
 import type { RefObject } from "react"
-import { useEffect, useRef } from "react"
-import { getOwnerDocument, useCallbackRef } from "../../utils"
+import { useCallback, useEffect, useRef } from "react"
+import { getDocument, useCallbackRef } from "../../utils"
 
 export interface UseOutsideClickProps {
   ref: React.RefObject<HTMLElement | null>
@@ -25,14 +27,15 @@ export const useOutsideClick = ({
     isPointerDown: false,
   })
 
-  useEffect(() => {
-    if (!enabled) return
-
-    const onPointerDown = (ev: MouseEvent | TouchEvent) => {
+  const onPointerDown = useCallback(
+    (ev: MouseEvent | TouchEvent) => {
       if (isValidEvent(ev, ref)) state.current.isPointerDown = true
-    }
+    },
+    [ref],
+  )
 
-    const onMouseUp = (ev: MouseEvent) => {
+  const onMouseUp = useCallback(
+    (ev: MouseEvent) => {
       if (state.current.ignoreEmulatedMouseEvents) {
         state.current.ignoreEmulatedMouseEvents = false
 
@@ -44,19 +47,27 @@ export const useOutsideClick = ({
 
         handlerRef(ev)
       }
-    }
+    },
+    [handler, handlerRef, ref],
+  )
 
-    const onTouchEnd = (ev: TouchEvent) => {
+  const onTouchEnd = useCallback(
+    (ev: TouchEvent) => {
       state.current.ignoreEmulatedMouseEvents = true
 
-      if (handler && state.current.isPointerDown && isValidEvent(ev, ref)) {
+      if (state.current.isPointerDown && handler && isValidEvent(ev, ref)) {
         state.current.isPointerDown = false
 
         handlerRef(ev)
       }
-    }
+    },
+    [handler, handlerRef, ref],
+  )
 
-    const doc = getOwnerDocument(ref.current)
+  useEffect(() => {
+    if (!enabled) return
+
+    const doc = getDocument(ref.current)
 
     doc.addEventListener("mousedown", onPointerDown, true)
     doc.addEventListener("mouseup", onMouseUp, true)
@@ -69,7 +80,16 @@ export const useOutsideClick = ({
       doc.removeEventListener("touchstart", onPointerDown, true)
       doc.removeEventListener("touchend", onTouchEnd, true)
     }
-  }, [handler, ref, handlerRef, state, enabled])
+  }, [
+    handler,
+    ref,
+    handlerRef,
+    state,
+    enabled,
+    onPointerDown,
+    onMouseUp,
+    onTouchEnd,
+  ])
 }
 
 const isValidEvent = (
@@ -80,7 +100,7 @@ const isValidEvent = (
 
   if ("button" in ev && ev.button > 0) return false
 
-  if (target) if (!getOwnerDocument(target).contains(target)) return false
+  if (target) if (!getDocument(target).contains(target)) return false
 
   return !ref.current?.contains(target)
 }

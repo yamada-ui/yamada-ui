@@ -1,3 +1,5 @@
+"use client"
+
 import { Cog } from "lucide-react"
 import { component, Icon } from "../icon"
 

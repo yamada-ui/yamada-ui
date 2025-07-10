@@ -1,3 +1,5 @@
+"use client"
+
 import { Airplay } from "lucide-react"
 import { component, Icon } from "../icon"
 

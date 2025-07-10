@@ -1,3 +1,5 @@
+"use client"
+
 import { CircleUser } from "lucide-react"
 import { component, Icon } from "../icon"
 

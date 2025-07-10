@@ -1,6 +1,6 @@
 import type { Variants } from "motion/react"
 import type { FC } from "react"
-import type { LoadingSharedProps } from "./utils"
+import type { LoadingSharedProps } from "./loading-provider"
 import { memo } from "react"
 import { useTimeout } from "../../hooks/use-timeout"
 import { isValidElement } from "../../utils"
@@ -32,7 +32,7 @@ const variants: Variants = {
 export interface ScreenProps extends LoadingSharedProps {}
 
 export const Screen: FC<ScreenProps> = memo(
-  ({ duration, initialState, message, onFinish }) => {
+  ({ duration, initial, message, onFinish }) => {
     useTimeout(onFinish, duration)
 
     return (
@@ -44,7 +44,7 @@ export const Screen: FC<ScreenProps> = memo(
         display="flex"
         exit="exit"
         h="100dvh"
-        initial={initialState ? false : "initial"}
+        initial={initial}
         inset={0}
         justifyContent="center"
         p="md"

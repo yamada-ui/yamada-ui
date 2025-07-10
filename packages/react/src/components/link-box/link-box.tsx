@@ -1,29 +1,32 @@
-import type { ReactElement } from "react"
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { LinkBoxStyle } from "./link-box.style"
-import { isValidElement } from "react"
 import { createSlotComponent, radiusProperties, styled } from "../../core"
 import { useExtractProps } from "../../core"
+import { dataAttr } from "../../utils"
 import { linkBoxStyle } from "./link-box.style"
 
-interface LinkBoxContext extends Dict {}
+interface ComponentContext extends Dict {}
 
 export interface LinkBoxRootProps
   extends HTMLStyledProps,
     ThemeProps<LinkBoxStyle> {}
 
-export const {
-  ComponentContext: LinkBoxContext,
+const {
+  ComponentContext,
   PropsContext: LinkBoxPropsContext,
-  useComponentContext: useLinkBoxContext,
+  useComponentContext,
   usePropsContext: useLinkBoxPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<LinkBoxRootProps, LinkBoxStyle, LinkBoxContext>(
+} = createSlotComponent<LinkBoxRootProps, LinkBoxStyle, ComponentContext>(
   "link-box",
   linkBoxStyle,
 )
+
+export { LinkBoxPropsContext, useLinkBoxPropsContext }
 
 /**
  * `LinkBox` is a component that allows elements such as articles or cards to function as a single link.
@@ -35,9 +38,9 @@ export const LinkBoxRoot = withProvider<"div", LinkBoxRootProps>(
     const context = useExtractProps(rest, radiusProperties)
 
     return (
-      <LinkBoxContext value={context}>
+      <ComponentContext value={context}>
         <styled.div {...rest}>{children}</styled.div>
-      </LinkBoxContext>
+      </ComponentContext>
     )
   },
   "root",
@@ -56,29 +59,13 @@ export const LinkBoxOverlay = withContext<"a", LinkBoxOverlayProps>(
   "a",
   "overlay",
 )(undefined, ({ external, _before, ...rest }) => {
-  const context = useLinkBoxContext()
+  const context = useComponentContext()
 
   return {
     rel: external ? "noopener" : undefined,
     target: external ? "_blank" : undefined,
+    "data-link-box-overlay": dataAttr(true),
     _before: { ..._before, ...context },
     ...rest,
   }
 })
-
-/**
- * Reactの要素かどうかを判定する関数
- * @param element 判定対象の要素
- * @returns Reactの要素かどうか
- */
-export const isReactElement = (element: unknown): element is ReactElement => {
-  if (isValidElement(element)) return true
-
-  return (
-    typeof element === "object" &&
-    element !== null &&
-    "$$typeof" in element &&
-    (element.$$typeof === Symbol.for("react.element") ||
-      element.$$typeof === Symbol.for("react.forward_ref"))
-  )
-}

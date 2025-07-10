@@ -1,3 +1,5 @@
+"use client"
+
 import { Tally5 } from "lucide-react"
 import { component, Icon } from "../icon"
 

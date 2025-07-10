@@ -1,5 +1,7 @@
+"use client"
+
 import type { DependencyList } from "react"
-import type { ThemeTokens } from "../../core"
+import type { Breakpoint } from "../../core"
 import { useEffect } from "react"
 import { useBreakpoint } from "./use-breakpoint"
 
@@ -9,7 +11,7 @@ import { useBreakpoint } from "./use-breakpoint"
  * @see https://yamada-ui.com/hooks/use-breakpoint-effect
  */
 export const useBreakpointEffect = (
-  callback: (breakpoint: ThemeTokens["breakpoints"]) => void,
+  callback: (breakpoint: Breakpoint) => void,
   deps: DependencyList,
 ) => {
   const breakpoint = useBreakpoint()

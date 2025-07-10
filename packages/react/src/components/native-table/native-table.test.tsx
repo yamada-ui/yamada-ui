@@ -6,7 +6,7 @@ describe("<NativeTable />", () => {
   const Table: FC<NativeTable.RootProps> = (props) => {
     return (
       <NativeTable.Root data-testid="root" {...props}>
-        <NativeTable.Caption data-testid="caption" placement="top">
+        <NativeTable.Caption data-testid="caption" placement="start">
           Table Caption
         </NativeTable.Caption>
 

@@ -1,6 +1,6 @@
-import c from "chalk"
 import { Command } from "commander"
 import { createRequire } from "node:module"
+import c from "picocolors"
 import { actionTheme, actionTokens } from "./command/index.js"
 import { initCLI } from "./utils/index.js"
 
@@ -9,7 +9,6 @@ const pkg = createRequire(import.meta.url)("@yamada-ui/cli/package.json")
 export const run = async () => {
   await initCLI()
   const program = new Command("Yamada UI CLI")
-    .description(pkg.description)
     .version(pkg.version)
     .usage(`${c.green("<command>")} [options]`)
 

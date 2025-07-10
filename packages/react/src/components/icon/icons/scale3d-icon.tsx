@@ -1,3 +1,5 @@
+"use client"
+
 import { Scale3d } from "lucide-react"
 import { component, Icon } from "../icon"
 

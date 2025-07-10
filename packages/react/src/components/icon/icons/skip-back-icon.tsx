@@ -1,3 +1,5 @@
+"use client"
+
 import { SkipBack } from "lucide-react"
 import { component, Icon } from "../icon"
 

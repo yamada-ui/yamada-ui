@@ -1,0 +1,39 @@
+{
+  "Text": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "align": {
+      "type": "TextAlign | [TextAlign | ({ _peerAccept?: TextAlign | [TextAlign | (... & { base?: TextAlign | [TextAlign | (... & ...), TextAlign | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: TextAlign | ... 2 more ... | undefined; }), TextAlign | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _select...",
+      "description": "The CSS `text-align` property.",
+      "required": false
+    },
+    "casing": {
+      "type": "TextTransform | [TextTransform | ({ _peerAccept?: TextTransform | [TextTransform | (... & { base?: TextTransform | [...] | (... & ...) | undefined; ... 4 more ...; xl?: TextTransform | ... 2 more ... | undefined; }), TextTransform | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: TextTransfo...",
+      "description": "The CSS `text-transform` property.",
+      "required": false
+    },
+    "decoration": {
+      "type": "TextDecoration<0 | (string & {})> | [TextDecoration<0 | (string & {})> | ({ _peerAccept?: TextDecoration<0 | (string & {})> | [...] | { ...; } | undefined; ... 173 more ...; _selection?: TextDecoration<...> | ... 2 more ... | undefined; } & { ...; }), TextDecoration<...> | ({ ...; } & { ...; })] | ({ ...; } & { ...;...",
+      "description": "The CSS `text-decoration` property.",
+      "required": false
+    }
+  }
+}

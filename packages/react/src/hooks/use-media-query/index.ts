@@ -1,5 +1,7 @@
+"use client"
+
 import { useCallback, useSyncExternalStore } from "react"
-import { useEnvironment } from "../../providers/environment-provider"
+import { useEnvironment } from "../../core"
 
 /**
  * `useMediaQuery` is a custom hook that detects whether it matches a media query.

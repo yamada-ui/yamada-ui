@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useEffect, useMemo, useRef } from "react"
 import { GripVerticalIcon } from "../icon"
 import { Resizable } from "./"
@@ -31,7 +31,7 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <PropsTable variant="column" rows={["border", "spacer", "plain"]}>
+    <PropsTable variant="stack" rows={["border", "spacer", "plain"]}>
       {(_, row, key) => (
         <Resizable.Root
           key={key}

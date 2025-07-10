@@ -1,3 +1,5 @@
+"use client"
+
 import { GripHorizontal } from "lucide-react"
 import { component, Icon } from "../icon"
 

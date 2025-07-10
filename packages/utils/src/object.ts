@@ -88,26 +88,40 @@ export function filterUndefined<Y extends Dict>(obj: Y): Y {
   return filterObject(obj, (_, val) => val !== null && val !== undefined)
 }
 
+export interface mergeOptions {
+  debug?: boolean
+  mergeArray?: boolean
+  shouldProcess?: (value: any) => boolean
+}
+
 export function merge<Y extends Dict>(
   target: any,
   source: any,
-  mergeArray = false,
+  options: mergeOptions = { mergeArray: false, shouldProcess: () => true },
 ): Y {
   let result = Object.assign({}, target)
 
-  if (isObject(source)) {
+  if (isObject(source) && options.shouldProcess?.(source)) {
     if (isObject(target)) {
       for (const [sourceKey, sourceValue] of Object.entries(source)) {
         const targetValue: any = target[sourceKey]
 
-        if (mergeArray && isArray(sourceValue) && isArray(targetValue)) {
-          result[sourceKey] = targetValue.concat(...sourceValue)
-        } else if (
-          !isFunction(sourceValue) &&
-          isObject(sourceValue) &&
-          target.hasOwnProperty(sourceKey)
-        ) {
-          result[sourceKey] = merge(targetValue, sourceValue, mergeArray)
+        if (options.shouldProcess(sourceValue)) {
+          if (
+            options.mergeArray &&
+            isArray(sourceValue) &&
+            isArray(targetValue)
+          ) {
+            result[sourceKey] = targetValue.concat(...sourceValue)
+          } else if (
+            !isFunction(sourceValue) &&
+            isObject(sourceValue) &&
+            target.hasOwnProperty(sourceKey)
+          ) {
+            result[sourceKey] = merge(targetValue, sourceValue, options)
+          } else {
+            Object.assign(result, { [sourceKey]: sourceValue })
+          }
         } else {
           Object.assign(result, { [sourceKey]: sourceValue })
         }
@@ -123,7 +137,7 @@ export function merge<Y extends Dict>(
 export interface FlattenObjectOptions {
   maxDepth?: number
   separator?: string
-  shouldProcess?: (obj: any) => boolean
+  shouldProcess?: (value: any) => boolean
 }
 
 export function flattenObject<Y extends Dict>(
@@ -155,15 +169,7 @@ export function flattenObject<Y extends Dict>(
   }, {}) as Y
 }
 
-export function objectFromEntries<Y extends Dict>(entries: any[][]): Y {
-  return entries.reduce<any>((result, [key, value]) => {
-    result[key] = value
-
-    return result
-  }, {}) as Y
-}
-
-export function keysFormObject<Y extends object>(obj: Y): (keyof Y)[] {
+export function objectKeys<Y extends object>(obj: Y): (keyof Y)[] {
   return Object.keys(obj) as (keyof Y)[]
 }
 

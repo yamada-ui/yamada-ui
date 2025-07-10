@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useIdle } from "."
 import { Box } from "../../components/box"
 
@@ -17,7 +17,7 @@ export const Basic = () => {
       color="white"
       p="md"
       rounded="md"
-      transitionDuration="slower"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       Current state: {idle ? "idle" : "not idle"}

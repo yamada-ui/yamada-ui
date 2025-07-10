@@ -1,4 +1,4 @@
-import type { FC } from "../../core"
+import type { FC } from "react"
 import type { SkeletonProps } from "./skeleton"
 import { mergeCSS } from "../../core"
 import { Skeleton } from "./skeleton"

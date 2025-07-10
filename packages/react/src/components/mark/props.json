@@ -1,0 +1,29 @@
+{
+  "Mark": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"text\" | \"solid\" | \"subtle\" | \"accent\" | [\"text\" | \"solid\" | \"subtle\" | \"accent\" | ({ _peerAccept?: \"text\" | \"solid\" | \"subtle\" | \"accent\" | [\"text\" | \"solid\" | \"subtle\" | \"accent\" | (... & { ...; }), \"text\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: \"text\" | ... 5 mo...",
+      "description": "The variant of the component.",
+      "required": false
+    }
+  }
+}

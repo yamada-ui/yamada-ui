@@ -1,3 +1,5 @@
+"use client"
+
 import { ChevronsUp } from "lucide-react"
 import { component, Icon } from "../icon"
 

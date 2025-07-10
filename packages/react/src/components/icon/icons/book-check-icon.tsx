@@ -1,3 +1,5 @@
+"use client"
+
 import { BookCheck } from "lucide-react"
 import { component, Icon } from "../icon"
 

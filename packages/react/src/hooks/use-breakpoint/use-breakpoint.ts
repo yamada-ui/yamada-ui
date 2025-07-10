@@ -1,7 +1,8 @@
-import type { ThemeTokens } from "../../core"
+"use client"
+
+import type { Breakpoint } from "../../core"
 import { useCallback, useMemo, useRef, useSyncExternalStore } from "react"
-import { useEnvironment } from "../../providers/environment-provider"
-import { useTheme } from "../../providers/theme-provider"
+import { useEnvironment, useSystem } from "../../core"
 import { createdDom, isUndefined, noop } from "../../utils"
 
 /**
@@ -12,25 +13,16 @@ import { createdDom, isUndefined, noop } from "../../utils"
  */
 export const useBreakpoint = () => {
   const animationFrameId = useRef(0)
-  const { theme } = useTheme()
+  const { breakpoints, config } = useSystem()
   const { getWindow } = useEnvironment()
-  const breakpoints = theme.__breakpoints
   const {
     containerRef,
     direction = "down",
     identifier = "@media screen",
-  } = theme.__config?.breakpoint ?? {}
+  } = config.breakpoint ?? {}
   const hasContainer = !!containerRef
 
-  if (!breakpoints) {
-    console.warn(
-      "useBreakpoint: `breakpoints` is undefined. Seems you forgot to put theme in `breakpoints`",
-    )
-  }
-
   const queries = useMemo(() => {
-    if (!breakpoints) return []
-
     return breakpoints.queries.map(
       ({ breakpoint, maxW, minMaxQuery, minW }) => {
         const searchValue =
@@ -56,12 +48,12 @@ export const useBreakpoint = () => {
       if (isUndefined(width)) {
         const win = getWindow()
 
-        if (!win || hasContainer || !hasQueries) return "base"
+        if (hasContainer || !hasQueries) return "base"
 
         for (const { breakpoint, query } of queries) {
-          const mql = win.matchMedia(query)
+          const mql = win?.matchMedia(query)
 
-          if (mql.matches) return breakpoint
+          if (mql?.matches) return breakpoint
         }
       } else {
         for (const { breakpoint, maxW, minW } of queries) {
@@ -78,7 +70,7 @@ export const useBreakpoint = () => {
     [direction, getWindow, hasContainer, hasQueries, queries],
   )
 
-  const breakpointRef = useRef<ThemeTokens["breakpoints"]>(getBreakpoint())
+  const breakpointRef = useRef<Breakpoint>(getBreakpoint())
 
   const subscribe = useCallback(
     (listener: () => void) => {
@@ -136,5 +128,5 @@ export const useBreakpoint = () => {
 
   const breakpoint = useSyncExternalStore(subscribe, getSnapshot, getSnapshot)
 
-  return breakpoint as ThemeTokens["breakpoints"]
+  return breakpoint
 }

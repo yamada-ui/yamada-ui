@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Kbd } from "."
 import { PropsTable } from "../../../storybook/components"
 import { Text } from "../../components/text"

@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { EmptyState } from "./empty-state.style"
@@ -38,7 +40,7 @@ export interface EmptyStateRootProps
   titleProps?: EmptyStateTitleProps
 }
 
-export const {
+const {
   PropsContext: EmptyStatePropsContext,
   usePropsContext: useEmptyStatePropsContext,
   withContext,
@@ -47,6 +49,8 @@ export const {
   "empty-state",
   emptyState,
 )
+
+export { EmptyStatePropsContext, useEmptyStatePropsContext }
 
 /**
  * `EmptyState` is used to display when a resource is empty or not available.

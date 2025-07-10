@@ -1,3 +1,5 @@
+"use client"
+
 import { BellOff } from "lucide-react"
 import { component, Icon } from "../icon"
 

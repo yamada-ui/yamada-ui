@@ -1,6 +1,6 @@
 import type { CSSAnimationObject } from "../../core"
-import { useAnimation, useAnimationObserver, useDynamicAnimation } from "."
-import { act, renderHook, waitFor } from "../../../test"
+import { useAnimation, useDynamicAnimation } from "."
+import { renderHook, waitFor } from "../../../test"
 
 describe("useAnimation", () => {
   test("should generate a single animation string", () => {
@@ -312,35 +312,5 @@ describe("useDynamicAnimation", () => {
     const { result } = renderHook(() => useDynamicAnimation(style))
 
     expect(result.current[0]).toBeUndefined()
-  })
-})
-
-describe("useAnimationObserver", () => {
-  test("should handle open and close animations correctly", () => {
-    let open = false
-    const ref = { current: document.createElement("div") }
-    const { rerender, result } = renderHook(() =>
-      useAnimationObserver({ ref, open }),
-    )
-
-    expect(result.current.present).toBeFalsy()
-
-    open = true
-    rerender()
-
-    act(() => {
-      result.current.onAnimationComplete()
-    })
-
-    expect(result.current.present).toBeTruthy()
-
-    open = false
-    rerender()
-
-    act(() => {
-      result.current.onAnimationComplete()
-    })
-
-    expect(result.current.present).toBeFalsy()
   })
 })

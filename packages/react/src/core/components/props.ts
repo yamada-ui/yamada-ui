@@ -12,9 +12,9 @@ import {
   merge,
   mergeRefs,
   omitObject,
+  splitObject,
 } from "../../utils"
-import { conditionProperties } from "../conditions"
-import { styleProperties } from "../styles"
+import { conditionProperties, styleProperties } from "../css"
 
 type MergeAll<Y extends Dict[]> = Y extends [infer M]
   ? M
@@ -158,6 +158,10 @@ export function isEqualProps<
     omitObject(a, omitKeys as (keyof Y)[]),
     omitObject(b, omitKeys as (keyof M)[]),
   )
+}
+
+export function useSplitProps(props: Dict, keys: readonly string[] | string[]) {
+  return useMemo(() => splitObject(props, keys), [props, keys])
 }
 
 export function extractProps(props: Dict, keys: readonly string[] | string[]) {

@@ -1,3 +1,5 @@
+"use client"
+
 import { Microscope } from "lucide-react"
 import { component, Icon } from "../icon"
 

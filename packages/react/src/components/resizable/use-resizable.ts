@@ -1,3 +1,5 @@
+"use client"
+
 import type { MouseEvent, MouseEventHandler, RefObject } from "react"
 import type {
   ImperativePanelGroupHandle,
@@ -32,10 +34,13 @@ import {
 interface ResizableContext
   extends Omit<UseResizableReturn, "getGroupProps" | "getRootProps"> {}
 
-export const [ResizableContext, useResizableContext] =
-  createContext<ResizableContext>({
+const [ResizableContext, useResizableContext] = createContext<ResizableContext>(
+  {
     name: "ResizableContext",
-  })
+  },
+)
+
+export { ResizableContext, useResizableContext }
 
 export interface ResizableStorage extends PanelGroupStorage {}
 export interface ResizableGroupControl extends ImperativePanelGroupHandle {}
@@ -43,16 +48,31 @@ export interface ResizableItemControl extends ImperativePanelHandle {}
 
 interface ResizableGroupProps
   extends Omit<Partial<PanelGroupProps>, "tagName"> {
+  /**
+   * Ref of the resizable group callback.
+   */
   ref?: RefObject<ResizableGroupControl>
+  /**
+   * The HTML element to render.
+   */
   as?: keyof HTMLElementTagNameMap
 }
 interface ResizableItemProps extends Omit<PanelProps, "tagName"> {
+  /**
+   * Ref of the resizable item callback.
+   */
   ref?: RefObject<ResizableItemControl>
+  /**
+   * The HTML element to render.
+   */
   as?: keyof HTMLElementTagNameMap
 }
 interface ResizableTriggerProps
   extends Omit<PanelResizeHandleProps, "tagName">,
     HTMLRefAttributes {
+  /**
+   * The HTML element to render.
+   */
   as?: keyof HTMLElementTagNameMap
 }
 
@@ -109,7 +129,7 @@ export const useResizable = ({
   groupProps = {},
   onLayout,
   ...rest
-}: UseResizableProps) => {
+}: UseResizableProps = {}) => {
   const controlRef = useRef<ResizableGroupControl>(null)
   const uuid = useId()
 

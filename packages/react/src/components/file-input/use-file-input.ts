@@ -1,3 +1,5 @@
+"use client"
+
 import type { ChangeEvent, RefObject } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict } from "../../utils"
@@ -6,7 +8,6 @@ import { useCallback, useRef } from "react"
 import { useClickable } from "../../hooks/use-clickable"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
-  ariaAttr,
   assignRef,
   dataAttr,
   handlerAll,
@@ -100,6 +101,7 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
     ...eventProps,
     ...rest,
     disabled,
+    focusOnClick: interactive,
     onClick: handlerAll(onClickProp, onClick),
   })
 
@@ -110,7 +112,6 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
       ...visuallyHiddenAttributes,
       ...ariaProps,
       ...dataProps,
-      ...eventProps,
       id,
       form,
       type: "file",
@@ -128,7 +129,6 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
       required,
       ariaProps,
       dataProps,
-      eventProps,
       id,
       form,
       name,
@@ -145,7 +145,7 @@ export const useFileInput = <Y extends "button" | "input" = "input">(
     (props = {}) => ({
       "data-placeholder": dataAttr(!count),
       ...clickableProps,
-      "aria-disabled": ariaAttr(!interactive),
+      tabIndex: interactive ? 0 : clickableProps.tabIndex,
       ...props,
     }),
     [clickableProps, count, interactive],

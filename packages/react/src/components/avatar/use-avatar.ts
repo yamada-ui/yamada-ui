@@ -1,9 +1,7 @@
-import type {
-  HTMLAttributeReferrerPolicy,
-  ReactElement,
-  ReactNode,
-} from "react"
-import type { HTMLProps, HTMLStyledProps, PropGetter } from "../../core"
+"use client"
+
+import type { ReactElement, ReactNode } from "react"
+import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useState } from "react"
 import { useI18n } from "../../providers/i18n-provider"
 import { dataAttr, handlerAll } from "../../utils"
@@ -29,19 +27,19 @@ export interface UseAvatarProps extends HTMLProps {
   /**
    * The image url of the avatar.
    */
-  src?: HTMLStyledProps<"img">["src"]
+  src?: HTMLProps<"img">["src"]
   /**
    * List of sources to use for different screen resolutions.
    */
-  srcSet?: HTMLStyledProps<"img">["srcSet"]
+  srcSet?: HTMLProps<"img">["srcSet"]
   /**
    * The `HTMLImageElement` property `alt`.
    */
-  alt?: HTMLStyledProps<"img">["alt"]
+  alt?: HTMLProps<"img">["alt"]
   /**
    * The `HTMLImageElement` property `crossOrigin`.
    */
-  crossOrigin?: HTMLStyledProps<"img">["crossOrigin"]
+  crossOrigin?: HTMLProps<"img">["crossOrigin"]
   /**
    * The fallback text to display if the image is not provided.
    */
@@ -57,13 +55,13 @@ export interface UseAvatarProps extends HTMLProps {
   /**
    * Defines loading strategy.
    */
-  loading?: HTMLStyledProps<"img">["loading"]
+  loading?: HTMLProps<"img">["loading"]
   /**
    * Defining which referrer is sent when fetching the resource.
    *
    * @default 'no-referrer'
    */
-  referrerPolicy?: HTMLAttributeReferrerPolicy
+  referrerPolicy?: HTMLProps<"img">["referrerPolicy"]
 }
 
 export const useAvatar = ({

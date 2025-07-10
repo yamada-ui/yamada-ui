@@ -1,3 +1,5 @@
+"use client"
+
 import type { ForwardedRef } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { UseAutosizeProps } from "./use-autosize"
@@ -24,7 +26,7 @@ export const useTextarea = ({
   minRows,
   resizeRef,
   ...rest
-}: UseTextareaProps) => {
+}: UseTextareaProps = {}) => {
   const { ref, onResizeTextarea } = useAutosize({
     disabled: !autosize,
     maxRows,

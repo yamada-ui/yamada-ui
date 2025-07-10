@@ -3,12 +3,8 @@ name: Release
 on:
   push:
     paths:
-      - ".storybook/**"
       - ".changeset/**"
       - "packages/**"
-      - "!packages/**/tests/**"
-      - "!packages/**/scripts/**"
-      - "stories/**"
     branches:
       - main
 
@@ -66,7 +62,6 @@ jobs:
         if: steps.changesets.outputs.published != 'true'
         run: |
           git checkout main
-          pnpm version:dev
           pnpm release:dev
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

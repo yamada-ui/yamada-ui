@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import { useCallback } from "react"
 import { useI18n } from "../../providers/i18n-provider"

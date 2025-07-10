@@ -1,3 +1,5 @@
+"use client"
+
 import { TouchpadOff } from "lucide-react"
 import { component, Icon } from "../icon"
 

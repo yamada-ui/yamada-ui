@@ -17,8 +17,6 @@ export const nativeSelectStyle = defineComponentSlotStyle({
         layerStyle: "disabled",
       },
     },
-    option: {},
-    optionGroup: {},
     root: {},
   },
 

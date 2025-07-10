@@ -1,3 +1,5 @@
+"use client"
+
 import { BookCopy } from "lucide-react"
 import { component, Icon } from "../icon"
 

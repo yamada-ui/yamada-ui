@@ -1,6 +1,10 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, StyleValue } from "../../core"
+import type { GridItemStyle } from "./grid-item.style"
 import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"
+import { gridItemStyle } from "./grid-item.style"
 
 export interface GridItemProps extends HTMLStyledProps {
   /**
@@ -33,11 +37,13 @@ export interface GridItemProps extends HTMLStyledProps {
   rowStart?: CSSProps["gridRowStart"]
 }
 
-export const {
+const {
   PropsContext: GridItemPropsContext,
   usePropsContext: useGridItemPropsContext,
   withContext,
-} = createComponent<GridItemProps>("grid-item")
+} = createComponent<GridItemProps, GridItemStyle>("grid-item", gridItemStyle)
+
+export { GridItemPropsContext, useGridItemPropsContext }
 
 export const GridItem = withContext("div")(
   undefined,

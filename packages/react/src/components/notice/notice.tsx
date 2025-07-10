@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import type { FC, HTMLStyledProps, StyledTheme } from "../../core"
+import type { HTMLStyledProps } from "../../core"
 import type {
   AlertDescriptionProps,
   AlertIconProps,
@@ -7,7 +7,8 @@ import type {
   AlertRootProps,
   AlertTitleProps,
 } from "../alert"
-import type { ButtonProps, CloseButtonProps } from "../button"
+import type { ButtonProps } from "../button"
+import type { CloseButtonProps } from "../close-button"
 import type {
   NoticeComponentProps,
   NoticeConfig,
@@ -17,7 +18,6 @@ import type {
 } from "./types"
 import { useMemo } from "react"
 import { styled } from "../../core"
-import { useTheme } from "../../providers/theme-provider"
 import {
   handlerAll,
   isFunction,
@@ -25,7 +25,8 @@ import {
   toDirectionalPlacement,
 } from "../../utils"
 import { Alert } from "../alert"
-import { Button, CloseButton } from "../button"
+import { Button } from "../button"
+import { CloseButton } from "../close-button"
 import { withContext } from "./notice-provider"
 
 const findId = (
@@ -102,10 +103,10 @@ interface createRenderOptions extends Omit<NoticeConfig, "itemProps"> {}
 
 const createRender = (
   options: createRenderOptions,
-): FC<NoticeComponentProps> => {
+): ((props: NoticeComponentProps) => ReactNode) => {
   const { component, ...rest } = options
 
-  const Render: FC<NoticeComponentProps> = (props) => {
+  const renderFunction = (props: NoticeComponentProps) => {
     if (isFunction(component)) {
       return component({ ...props, ...rest })
     } else {
@@ -113,17 +114,14 @@ const createRender = (
     }
   }
 
-  return Render
+  renderFunction.displayName = "NoticeRender"
+
+  return renderFunction
 }
 
-const createNoticeFunc = (
-  defaultOptions: UseNoticeOptions,
-  theme: StyledTheme,
-) => {
-  const themeOptions = theme.__config?.notice ?? {}
-
+const createNoticeFunc = (defaultOptions: UseNoticeOptions) => {
   const computedOptions = (options: UseNoticeOptions) => {
-    return merge(themeOptions, merge(defaultOptions, options))
+    return merge(defaultOptions, options)
   }
 
   const notice = (options: UseNoticeOptions = {}) => {
@@ -158,11 +156,9 @@ type CreateNoticeReturn = ReturnType<typeof createNoticeFunc>
 export const useNotice = (
   defaultOptions?: UseNoticeOptions,
 ): CreateNoticeReturn => {
-  const { theme } = useTheme()
-
   return useMemo(() => {
-    return createNoticeFunc(defaultOptions ?? {}, theme)
-  }, [defaultOptions, theme])
+    return createNoticeFunc(defaultOptions ?? {})
+  }, [defaultOptions])
 }
 
 type State = {

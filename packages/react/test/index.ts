@@ -1,7 +1,7 @@
 export * from "./a11y"
 export * from "./drag"
 export * from "./render"
-export * from "./theme"
+export * from "./system"
 export * from "./utils"
 export {
   act,

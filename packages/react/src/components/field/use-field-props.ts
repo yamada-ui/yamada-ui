@@ -1,8 +1,10 @@
+"use client"
+
 import type { FocusEventHandler } from "react"
 import type { Dict } from "../../utils"
 import type { FieldProps } from "./field"
 import { useMemo } from "react"
-import { useEnvironment } from "../../providers/environment-provider"
+import { useEnvironment } from "../../core"
 import { ariaAttr, cx, dataAttr, handlerAll } from "../../utils"
 import { useFieldsetContext } from "../fieldset"
 import { useFieldContext } from "./field"

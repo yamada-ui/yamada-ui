@@ -1,3 +1,5 @@
+"use client"
+
 import { Repeat1 } from "lucide-react"
 import { component, Icon } from "../icon"
 

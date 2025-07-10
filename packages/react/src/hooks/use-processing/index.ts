@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback, useMemo, useRef } from "react"
 import { useUnmountEffect } from "../../utils"
 import { useBoolean } from "../use-boolean"

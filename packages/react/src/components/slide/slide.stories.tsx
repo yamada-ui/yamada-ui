@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useBoolean } from "../../hooks/use-boolean"
 import { Button } from "../button"
 import { VStack } from "../stack"
@@ -21,7 +21,7 @@ export const Basic: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide open={open} placement="bottom">
+      <Slide open={open} placement="block-end">
         <VStack bg="bg.panel" p="md" w="full">
           <Text color="bg.contrast">
             クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -43,7 +43,7 @@ export const Duration: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide duration={0.7} open={open} placement="bottom">
+      <Slide duration={0.7} open={open} placement="block-end">
         <VStack bg="bg.panel" p="md" w="full">
           <Text color="bg.contrast">
             クリリンのことか……クリリンのことかーーーっ！！！！！
@@ -65,7 +65,7 @@ export const Placement: Story = () => {
     <>
       <Button onClick={toggle}>Please Click</Button>
 
-      <Slide open={open} placement="right">
+      <Slide open={open} placement="inline-end">
         <VStack bg="bg.panel" h="full" p="md">
           <Text color="bg.contrast">
             クリリンのことか……クリリンのことかーーーっ！！！！！

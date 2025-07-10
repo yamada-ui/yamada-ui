@@ -1,0 +1,162 @@
+{
+  "NumberInput": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { ...; }), \"2xl\" | ... 5 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: \"2xl\" | .....",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | ({ _peerAccept?: \"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "allowMouseWheel": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the input's value will change based on mouse wheel.",
+      "required": false
+    },
+    "clampValueOnBlur": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "This controls the value update when you blur out of the input.\n\n- If `true` and the value is greater than `max`, the value will be reset to `max`.\n- Else, the value remains the same.",
+      "required": false
+    },
+    "controlProps": {
+      "type": "NumberInputControlProps",
+      "description": "The props for the control element.",
+      "required": false
+    },
+    "decrementProps": {
+      "type": "NumberInputDecrementButtonProps",
+      "description": "The props for the decrement button element.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "string | number",
+      "description": "The initial value of the counter.\nShould be less than `max` and greater than `min`.",
+      "required": false
+    },
+    "elementProps": {
+      "type": "InputElementProps",
+      "description": "The props for the end element.",
+      "required": false
+    },
+    "errorBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "description": "The border color when the input is invalid.",
+      "required": false
+    },
+    "focusBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "description": "The border color when the input is focused.",
+      "required": false
+    },
+    "focusInputOnChange": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the input will be focused as you increment or decrement the value with the button.",
+      "required": false
+    },
+    "format": {
+      "type": "(value: string | number) => string",
+      "description": "If using a custom display format, this converts the default format to the custom format.",
+      "required": false
+    },
+    "getAriaValueText": {
+      "type": "(value: string | number) => string | undefined",
+      "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
+      "required": false
+    },
+    "htmlSize": {
+      "type": "number",
+      "description": "The native HTML `size` attribute to be passed to the `input`.",
+      "required": false
+    },
+    "incrementProps": {
+      "type": "NumberInputIncrementButtonProps",
+      "description": "The props for the increment button element.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "isValidCharacter": {
+      "type": "(value: string) => boolean",
+      "description": "Whether the pressed key should be allowed in the input.\nThe default behavior is to allow DOM floating point characters defined by /^[Ee0-9+\\-.]$/.",
+      "required": false
+    },
+    "keepWithinRange": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "This controls the value update behavior in general.\n\n- If `true` and you use the stepper or up/down arrow keys,\n  the value will not exceed the `max` or go lower than `min`.\n\n- If `false`, the value will be allowed to go out of range.",
+      "required": false
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "Number.MAX_SAFE_INTEGER",
+      "description": "The maximum value of the counter",
+      "required": false
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "Number.MIN_SAFE_INTEGER",
+      "description": "The minimum value of the counter",
+      "required": false
+    },
+    "onChange": {
+      "type": "(valueAsString: string, valueAsNumber: number) => void",
+      "description": "The callback fired when the value changes.",
+      "required": false
+    },
+    "parse": {
+      "type": "(value: string) => string",
+      "description": "If using a custom display format, this converts the custom format to a format `parseFloat` understands.",
+      "required": false
+    },
+    "precision": {
+      "type": "number",
+      "description": "The number of decimal points used to round the value.",
+      "required": false
+    },
+    "rootProps": {
+      "type": "InputGroupRootProps",
+      "description": "The props for the root element.",
+      "required": false
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "1",
+      "description": "The step used to increment or decrement the value.",
+      "required": false
+    },
+    "value": {
+      "type": "string | number",
+      "description": "The value of the counter.\nShould be less than `max` and greater than `min`.",
+      "required": false
+    }
+  }
+}

@@ -24,10 +24,10 @@ export const drawerStyle = defineComponentSlotStyle({
     /**
      * The placement of the drawer.
      *
-     * @default 'right'
+     * @default 'inline-end'
      */
     placement: {
-      bottom: {
+      "block-end": {
         content: { maxW: "full", roundedBottom: "0" },
         dragBar: {
           left: "50%",
@@ -37,17 +37,17 @@ export const drawerStyle = defineComponentSlotStyle({
           w: "3xs",
         },
       },
-      left: {
-        content: { roundedLeft: "0" },
+      "block-start": {
+        content: { maxW: "full", roundedTop: "0" },
         dragBar: {
-          h: "3xs",
-          minW: "2",
-          right: "md",
-          top: "50%",
-          transform: "translateY(-50%)",
+          bottom: "md",
+          left: "50%",
+          minH: "2",
+          transform: "translateX(-50%)",
+          w: "3xs",
         },
       },
-      right: {
+      "inline-end": {
         content: { roundedRight: "0" },
         dragBar: {
           h: "3xs",
@@ -57,14 +57,14 @@ export const drawerStyle = defineComponentSlotStyle({
           transform: "translateY(-50%)",
         },
       },
-      top: {
-        content: { maxW: "full", roundedTop: "0" },
+      "inline-start": {
+        content: { roundedLeft: "0" },
         dragBar: {
-          bottom: "md",
-          left: "50%",
-          minH: "2",
-          transform: "translateX(-50%)",
-          w: "3xs",
+          h: "3xs",
+          minW: "2",
+          right: "md",
+          top: "50%",
+          transform: "translateY(-50%)",
         },
       },
     },
@@ -102,7 +102,7 @@ export const drawerStyle = defineComponentSlotStyle({
         },
       },
       closeOnDrag: true,
-      placement: "top",
+      placement: "block-start",
       withDragBar: true,
     },
     {
@@ -122,7 +122,7 @@ export const drawerStyle = defineComponentSlotStyle({
         },
       },
       closeOnDrag: true,
-      placement: "bottom",
+      placement: "block-end",
       withDragBar: true,
     },
     {
@@ -142,7 +142,7 @@ export const drawerStyle = defineComponentSlotStyle({
         },
       },
       closeOnDrag: true,
-      placement: "right",
+      placement: "inline-end",
       withDragBar: true,
     },
     {
@@ -162,14 +162,14 @@ export const drawerStyle = defineComponentSlotStyle({
         },
       },
       closeOnDrag: true,
-      placement: "left",
+      placement: "inline-start",
       withDragBar: true,
     },
   ],
 
   defaultProps: {
     size: "lg",
-    placement: "right",
+    placement: "inline-end",
   },
 })
 

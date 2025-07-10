@@ -1,3 +1,5 @@
+"use client"
+
 import type { ThemeProps } from "../../core"
 import type { FlexProps } from "../flex"
 import type { GroupStyle } from "./group.style"
@@ -12,11 +14,13 @@ export interface GroupProps
   extends Omit<FlexProps, "grow">,
     ThemeProps<GroupStyle> {}
 
-export const {
+const {
   PropsContext: GroupPropsContext,
   usePropsContext: useGroupPropsContext,
   withContext,
 } = createComponent<GroupProps, GroupStyle>("group", groupStyle)
+
+export { GroupPropsContext, useGroupPropsContext }
 
 /**
  * `Group` is a component that groups and attaches multiple elements together.

@@ -1,3 +1,5 @@
+"use client"
+
 import { Goal } from "lucide-react"
 import { component, Icon } from "../icon"
 

@@ -1,15 +1,15 @@
+export * from "./native-select.style"
+export * as NativeSelect from "./namespace"
 export {
   NativeOption,
   NativeOptionGroup,
+  NativeSelectPropsContext,
   NativeSelectRoot,
+  useNativeSelectPropsContext,
 } from "./native-select"
 export type {
   NativeOptionGroupProps,
   NativeOptionProps,
-  NativeSelectItem,
   NativeSelectRootProps,
 } from "./native-select"
-
-export * from "./native-select.style"
-
-export * as NativeSelect from "./namespace"
+export * from "./use-native-select"

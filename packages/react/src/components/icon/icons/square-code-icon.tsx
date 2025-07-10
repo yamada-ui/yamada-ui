@@ -1,3 +1,5 @@
+"use client"
+
 import { SquareCode } from "lucide-react"
 import { component, Icon } from "../icon"
 

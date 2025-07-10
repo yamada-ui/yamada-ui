@@ -3,10 +3,10 @@ import { defineComponentSlotStyle } from "../../core"
 export const nativeTableStyle = defineComponentSlotStyle({
   base: {
     caption: {
-      "&[data-placement='bottom']": {
+      "&[data-placement='end']": {
         mt: "sm",
       },
-      "&[data-placement='top']": {
+      "&[data-placement='start']": {
         mb: "sm",
       },
       color: "fg.muted",
@@ -63,7 +63,7 @@ export const nativeTableStyle = defineComponentSlotStyle({
         tbody: {
           "& tr": {
             cursor: "pointer",
-            transitionDuration: "slow",
+            transitionDuration: "moderate",
             transitionProperty: "common",
             _hover: {
               bg: "colorScheme.bg",

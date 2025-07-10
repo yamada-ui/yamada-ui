@@ -1,3 +1,5 @@
+"use client"
+
 import { Sandwich } from "lucide-react"
 import { component, Icon } from "../icon"
 

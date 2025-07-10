@@ -1,3 +1,5 @@
+"use client"
+
 import { ArrowDown10 } from "lucide-react"
 import { component, Icon } from "../icon"
 

@@ -1,3 +1,5 @@
+"use client"
+
 import type { RefObject } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useRef } from "react"
@@ -12,22 +14,23 @@ import {
 } from "../../utils"
 
 interface ToggleGroupContext {
-  onChangeMapRef: RefObject<Map<number | string, (value: boolean) => void>>
+  onChangeMapRef: RefObject<Map<string, (value: boolean) => void>>
   disabled?: boolean
   readOnly?: boolean
-  value?: (number | string)[] | number | string
-  onChange?: <Y extends number | string = string>(value: undefined | Y) => void
+  value?: string | string[]
+  onChange?: <Y extends string = string>(value: undefined | Y) => void
 }
 
-export const [ToggleGroupContext, useToggleGroupContext] =
+const [ToggleGroupContext, useToggleGroupContext] =
   createContext<ToggleGroupContext>({
     name: "ToggleGroupContext",
     strict: false,
   })
 
-export interface UseToggleGroupProps<
-  Y extends (number | string)[] | number | string = string,
-> extends Omit<HTMLProps, "defaultValue" | "onChange" | "value"> {
+export { ToggleGroupContext, useToggleGroupContext }
+
+export interface UseToggleGroupProps<Y extends string | string[] = string>
+  extends Omit<HTMLProps, "defaultValue" | "onChange" | "value"> {
   /**
    * The initial value of the toggle button group.
    */
@@ -54,9 +57,7 @@ export interface UseToggleGroupProps<
   onChange?: (value: Y extends any[] ? Y : undefined | Y) => void
 }
 
-export const useToggleGroup = <
-  Y extends (number | string)[] | number | string = string,
->({
+export const useToggleGroup = <Y extends string | string[] = string>({
   defaultValue,
   disabled,
   readOnly,
@@ -66,7 +67,7 @@ export const useToggleGroup = <
 }: UseToggleGroupProps<Y>) => {
   type Value = Y extends any[] ? Y : undefined | Y
 
-  const onChangeMapRef = useRef<Map<number | string, (value: boolean) => void>>(
+  const onChangeMapRef = useRef<Map<string, (value: boolean) => void>>(
     new Map(),
   )
   const [value, setValue] = useControllableState<Value>({
@@ -75,7 +76,7 @@ export const useToggleGroup = <
     onChange: onChangeProp,
   })
 
-  const onReset = useCallback((targetValue?: (number | string)[]) => {
+  const onReset = useCallback((targetValue?: string[]) => {
     onChangeMapRef.current.forEach((onChange, value) => {
       if (targetValue?.includes(value)) {
         onChange(true)
@@ -86,7 +87,7 @@ export const useToggleGroup = <
   }, [])
 
   const onChange = useCallback(
-    <M extends number | string = Y extends any[] ? Y[number] : Y>(
+    <M extends string = Y extends any[] ? Y[number] : Y>(
       value: M | undefined,
     ) => {
       if (isUndefined(value)) return
@@ -109,7 +110,7 @@ export const useToggleGroup = <
             return nextValue as Value
           }
         } else {
-          if (value === (prev as number | string | undefined)) {
+          if (value === (prev as string | undefined)) {
             onReset()
 
             return undefined as Value

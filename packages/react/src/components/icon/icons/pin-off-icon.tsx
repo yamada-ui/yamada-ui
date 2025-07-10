@@ -1,3 +1,5 @@
+"use client"
+
 import { PinOff } from "lucide-react"
 import { component, Icon } from "../icon"
 

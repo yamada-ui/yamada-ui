@@ -1,3 +1,5 @@
+"use client"
+
 import { HousePlug } from "lucide-react"
 import { component, Icon } from "../icon"
 

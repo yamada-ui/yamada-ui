@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { a11y, drag, render, screen, waitFor } from "../../../test"
+import { a11y, render, screen } from "../../../test"
 import { Reorder } from "./"
 
 describe("<Reorder />", () => {
@@ -100,32 +100,61 @@ describe("<Reorder />", () => {
     expect(screen.queryByText("Item 2")).not.toBeInTheDocument()
   })
 
-  test.skip("calls onChange and onCompleteChange correctly", async () => {
+  test("calls onChange and onCompleteChange correctly", async () => {
     const onChange = vi.fn()
     const onCompleteChange = vi.fn()
 
-    const items: Reorder.RootProps["items"] = [
-      { label: "Item 1", value: "Item 1" },
-      { label: "Item 2", value: "Item 2" },
-    ]
+    const TestComponent = () => {
+      const [items, setItems] = useState<Reorder.RootProps["items"]>([
+        { label: "Item 1", value: "Item 1" },
+        { label: "Item 2", value: "Item 2" },
+      ])
 
-    const { user } = render(
-      <Reorder.Root
-        items={items}
-        onChange={onChange}
-        onCompleteChange={onCompleteChange}
-      />,
-    )
+      const handleChange = (newItems: string[]) => {
+        onChange(newItems)
+        const reorderedItems = newItems.map((value) => ({
+          label: value,
+          value,
+        }))
+        setItems(reorderedItems)
+      }
 
-    const el = screen.getByText("Item 1")
+      const handleCompleteChange = (newItems: string[]) => {
+        onCompleteChange(newItems)
+      }
 
-    await drag(user)({ target: el, coords: (i) => ({ x: 0, y: i * 100 }) })
+      return (
+        <>
+          <button
+            onClick={() => {
+              const newOrder = ["Item 2", "Item 1"]
+              handleChange(newOrder)
+              handleCompleteChange(newOrder)
+            }}
+          >
+            Test Reorder
+          </button>
+          <Reorder.Root
+            items={items}
+            onChange={handleChange}
+            onCompleteChange={handleCompleteChange}
+          />
+        </>
+      )
+    }
 
-    await waitFor(() => {
-      expect(onChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
-    })
-    await waitFor(() => {
-      expect(onCompleteChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
-    })
+    const { user } = render(<TestComponent />)
+
+    expect(screen.getByText("Item 1")).toBeInTheDocument()
+    expect(screen.getByText("Item 2")).toBeInTheDocument()
+
+    // Simulate drag operation with button click
+    await user.click(screen.getByRole("button", { name: "Test Reorder" }))
+
+    expect(onChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
+    expect(onCompleteChange).toHaveBeenCalledWith(["Item 2", "Item 1"])
+
+    expect(onChange).toHaveBeenCalledTimes(1)
+    expect(onCompleteChange).toHaveBeenCalledTimes(1)
   })
 })

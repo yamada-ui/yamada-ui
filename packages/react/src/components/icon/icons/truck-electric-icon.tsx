@@ -1,3 +1,5 @@
+"use client"
+
 import { TruckElectric } from "lucide-react"
 import { component, Icon } from "../icon"
 

@@ -1,3 +1,5 @@
+"use client"
+
 import type { UIEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
@@ -30,7 +32,7 @@ export const useScrollArea = ({
   scrollHideDelay = 1000,
   onScrollPositionChange,
   ...rest
-}: UseScrollAreaProps) => {
+}: UseScrollAreaProps = {}) => {
   const [isHovered, setIsHovered] = useState<boolean>(false)
   const [isScrolling, setIsScrolling] = useState<boolean>(false)
   const isAlways = type === "always"

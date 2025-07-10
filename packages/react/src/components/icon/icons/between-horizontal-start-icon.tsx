@@ -1,3 +1,5 @@
+"use client"
+
 import { BetweenHorizontalStart } from "lucide-react"
 import { component, Icon } from "../icon"
 

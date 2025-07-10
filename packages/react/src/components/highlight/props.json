@@ -1,0 +1,60 @@
+{
+  "Highlight": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "children": {
+      "type": "string",
+      "description": "The text used for searching.",
+      "required": true
+    },
+    "query": {
+      "type": "string | string[]",
+      "description": "Can be a single string or an array of strings. These are the terms that are highlighted in the text.",
+      "required": true
+    },
+    "align": {
+      "type": "TextAlign | [TextAlign | ({ _peerAccept?: TextAlign | [TextAlign | (... & { base?: TextAlign | [TextAlign | (... & ...), TextAlign | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: TextAlign | ... 2 more ... | undefined; }), TextAlign | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _select...",
+      "description": "The CSS `text-align` property.",
+      "required": false
+    },
+    "casing": {
+      "type": "TextTransform | [TextTransform | ({ _peerAccept?: TextTransform | [TextTransform | (... & { base?: TextTransform | [...] | (... & ...) | undefined; ... 4 more ...; xl?: TextTransform | ... 2 more ... | undefined; }), TextTransform | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: TextTransfo...",
+      "description": "The CSS `text-transform` property.",
+      "required": false
+    },
+    "decoration": {
+      "type": "TextDecoration<0 | (string & {})> | [TextDecoration<0 | (string & {})> | ({ _peerAccept?: TextDecoration<0 | (string & {})> | [...] | { ...; } | undefined; ... 173 more ...; _selection?: TextDecoration<...> | ... 2 more ... | undefined; } & { ...; }), TextDecoration<...> | ({ ...; } & { ...; })] | ({ ...; } & { ...;...",
+      "description": "The CSS `text-decoration` property.",
+      "required": false
+    },
+    "fragment": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, `Fragment` is used for rendering.",
+      "required": false
+    },
+    "markProps": {
+      "type": "MarkProps",
+      "description": "Properties passed to the Mark component which is used to highlight the matched terms.",
+      "required": false
+    }
+  }
+}

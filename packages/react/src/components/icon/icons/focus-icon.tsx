@@ -1,3 +1,5 @@
+"use client"
+
 import { Focus } from "lucide-react"
 import { component, Icon } from "../icon"
 

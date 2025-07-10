@@ -1,9 +1,7 @@
-import type {
-  FC,
-  HTMLStyledProps,
-  ThemeProps,
-  WithoutThemeProps,
-} from "../../core"
+"use client"
+
+import type { FC } from "react"
+import type { HTMLStyledProps, ThemeProps, WithoutThemeProps } from "../../core"
 import type { InputProps } from "../input"
 import type { NumberInputStyle } from "./number-input.style"
 import type { UseNumberInputProps } from "./use-number-input"
@@ -43,7 +41,7 @@ export interface NumberInputProps
   rootProps?: InputGroup.RootProps
 }
 
-export const {
+const {
   PropsContext: NumberInputPropsContext,
   usePropsContext: useNumberInputPropsContext,
   withContext,
@@ -52,6 +50,8 @@ export const {
   "number-input",
   numberInputStyle,
 )
+
+export { NumberInputPropsContext, useNumberInputPropsContext }
 
 /**
  * `NumberInput` is a component used to obtain numeric input from the user.

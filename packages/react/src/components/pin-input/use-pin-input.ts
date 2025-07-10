@@ -1,3 +1,5 @@
+"use client"
+
 import type { ChangeEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { FieldProps } from "../field"
@@ -7,11 +9,17 @@ import { createDescendant } from "../../hooks/use-descendant"
 import { filterUndefined, handlerAll, runKeyAction } from "../../utils"
 import { useFieldProps } from "../field"
 
-export const {
+const {
   DescendantsContext: PinInputDescendantsContext,
   useDescendant: usePinInputDescendant,
   useDescendants: usePinInputDescendants,
 } = createDescendant<HTMLInputElement>()
+
+export {
+  PinInputDescendantsContext,
+  usePinInputDescendant,
+  usePinInputDescendants,
+}
 
 const toArray = (value?: string) => value?.split("")
 
@@ -88,7 +96,7 @@ export interface UsePinInputProps
   onComplete?: (value: string) => void
 }
 
-export const usePinInput = (props: UsePinInputProps) => {
+export const usePinInput = (props: UsePinInputProps = {}) => {
   const uuid = useId()
   const {
     props: {
@@ -292,7 +300,6 @@ export const usePinInput = (props: UsePinInputProps) => {
       ({ index, ...props }) => ({
         ...ariaProps,
         ...dataProps,
-        ...eventProps,
         type: mask ? "password" : type === "number" ? "tel" : "text",
         autoComplete: otp ? "one-time-code" : "off",
         disabled,
@@ -305,9 +312,9 @@ export const usePinInput = (props: UsePinInputProps) => {
         value: values[index] || "",
         ...filterUndefined(props),
         id: `${id}${index ? `-${index}` : ""}`,
-        onBlur: handlerAll(props.onBlur, onBlur),
+        onBlur: handlerAll(eventProps.onBlur, props.onBlur, onBlur),
         onChange: handlerAll(props.onChange, onChange(index)),
-        onFocus: handlerAll(props.onFocus, onFocus(index)),
+        onFocus: handlerAll(eventProps.onFocus, props.onFocus, onFocus(index)),
         onKeyDown: handlerAll(props.onKeyDown, onKeyDown(index)),
       }),
       [

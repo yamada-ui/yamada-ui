@@ -1,0 +1,105 @@
+{
+  "ColorSwatch": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | ... 6 more ... | (... & { ...; }), \"2xl\" | ... 6 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: \"2xl...",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"circle\" | \"square\" | \"plain\" | [\"circle\" | \"square\" | \"plain\" | ({ _peerAccept?: \"circle\" | \"square\" | \"plain\" | [\"circle\" | \"square\" | \"plain\" | (... & { base?: \"circle\" | ... 4 more ... | undefined; ... 4 more ...; xl?: \"circle\" | ... 4 more ... | undefined; }), \"circle\" | ... 2 more ... | (... & { ...; })] | { ....",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "color": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "defaultValue": "\"#ffffff00\"",
+      "description": "The color used for the swatch element.",
+      "required": false
+    },
+    "overlays": {
+      "type": "HTMLStyledProps[]",
+      "description": "The overlay used for the swatch element.",
+      "required": false
+    },
+    "withShadow": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the swatch element has an inner `box-shadow`.",
+      "required": false
+    }
+  },
+  "ColorSwatchGroup": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | ... 6 more ... | (... & { ...; }), \"2xl\" | ... 6 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: \"2xl...",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"circle\" | \"square\" | \"plain\" | [\"circle\" | \"square\" | \"plain\" | ({ _peerAccept?: \"circle\" | \"square\" | \"plain\" | [\"circle\" | \"square\" | \"plain\" | (... & { base?: \"circle\" | ... 4 more ... | undefined; ... 4 more ...; xl?: \"circle\" | ... 4 more ... | undefined; }), \"circle\" | ... 2 more ... | (... & { ...; })] | { ....",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "itemProps": {
+      "type": "ColorSwatchProps",
+      "description": "The props for the `ColorSwatch` component.",
+      "required": false
+    },
+    "items": {
+      "type": "(\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 664 more ... | undefined)[]",
+      "defaultValue": "\"#ffffff00\"",
+      "description": "The color used for the swatch element.",
+      "required": false
+    },
+    "overlays": {
+      "type": "HTMLStyledProps[]",
+      "description": "The overlay used for the swatch element.",
+      "required": false
+    },
+    "withShadow": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the swatch element has an inner `box-shadow`.",
+      "required": false
+    }
+  }
+}

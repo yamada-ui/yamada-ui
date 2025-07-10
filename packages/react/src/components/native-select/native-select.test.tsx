@@ -5,7 +5,7 @@ import { BoxIcon } from "../icon"
 describe("<NativeSelect />", () => {
   test("NativeSelect renders correctly", async () => {
     await a11y(
-      <NativeSelect.Root aria-label="Select value" placeholder="Options">
+      <NativeSelect.Root placeholder="Choice a option">
         <NativeSelect.Option value="one">Option 1</NativeSelect.Option>
         <NativeSelect.Option value="two">Option 2</NativeSelect.Option>
       </NativeSelect.Root>,
@@ -21,7 +21,6 @@ describe("<NativeSelect />", () => {
   test("sets `className` correctly", () => {
     render(
       <NativeSelect.Root
-        aria-label="Native Select"
         placeholder="キャラクターを選択"
         rootProps={{ "data-testid": "root" }}
       >
@@ -44,7 +43,7 @@ describe("<NativeSelect />", () => {
 
     expect(screen.getByTestId("root")).toHaveClass("ui-native-select__root")
     expect(
-      screen.getByRole("combobox", { name: /native select/i }),
+      screen.getByRole("combobox", { name: /キャラクターを選択/i }),
     ).toHaveClass("ui-native-select__field")
     expect(screen.getByRole("option", { name: "孫悟空" })).toHaveClass(
       "ui-native-select__option",
@@ -99,15 +98,23 @@ describe("<NativeSelect />", () => {
   test("should disable select", () => {
     render(<NativeSelect.Root data-testid="select" disabled />)
     expect(screen.getByTestId("select")).toBeDisabled()
+    expect(screen.getByTestId("select")).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    )
   })
 
   test("should be read only", () => {
     render(<NativeSelect.Root data-testid="select" readOnly />)
-    expect(screen.getByTestId("select")).not.toHaveAttribute(
+    expect(screen.getByTestId("select")).toHaveAttribute(
       "aria-readonly",
       "true",
     )
-    expect(screen.getByTestId("select")).not.toHaveAttribute("readonly", "true")
+    expect(screen.getByTestId("select")).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    )
+    expect(screen.getByTestId("select")).toHaveAttribute("readonly")
   })
 
   test("should be invalid", () => {

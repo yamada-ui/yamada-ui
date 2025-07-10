@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps } from "../../core"
 import { styled } from "../../core"
 

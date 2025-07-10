@@ -1,8 +1,10 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { SkeletonStyle } from "./skeleton.style"
 import { useMemo } from "react"
 import { createComponent, varAttr } from "../../core"
-import { dataAttr, getValidChildren, isString, isUndefined } from "../../utils"
+import { dataAttr, getValidChildren, isNumber } from "../../utils"
 import { skeletonStyle } from "./skeleton.style"
 
 export interface SkeletonProps
@@ -32,11 +34,13 @@ export interface SkeletonProps
   startColor?: CSSProps["color"]
 }
 
-export const {
+const {
   PropsContext: SkeletonPropsContext,
   usePropsContext: useSkeletonPropsContext,
   withContext,
 } = createComponent<SkeletonProps, SkeletonStyle>("skeleton", skeletonStyle)
+
+export { SkeletonPropsContext, useSkeletonPropsContext }
 
 /**
  * `Skeleton` is a component that acts as a placeholder until content is loaded.
@@ -64,17 +68,11 @@ export const Skeleton = withContext("div", { transferProps: ["loading"] })(
       "aria-busy": loading,
       "data-loaded": dataAttr(!loading),
       "data-loading": dataAttr(loading),
-      "--duration": !isUndefined(duration)
-        ? isString(duration)
-          ? duration
-          : `${duration}s`
-        : undefined,
+      "--duration": isNumber(duration) ? `${duration}s` : duration,
       "--end-color": varAttr(endColor, "colors"),
-      "--fade-duration": !isUndefined(fadeDuration)
-        ? isString(fadeDuration)
-          ? fadeDuration
-          : `${fadeDuration}s`
-        : undefined,
+      "--fade-duration": isNumber(fadeDuration)
+        ? `${fadeDuration}s`
+        : fadeDuration,
       "--height": fitContent ? "fit-content" : undefined,
       "--start-color": varAttr(startColor, "colors"),
       "--width": fitContent ? "fit-content" : undefined,

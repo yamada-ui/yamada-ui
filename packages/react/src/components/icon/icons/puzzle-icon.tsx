@@ -1,3 +1,5 @@
+"use client"
+
 import { Puzzle } from "lucide-react"
 import { component, Icon } from "../icon"
 

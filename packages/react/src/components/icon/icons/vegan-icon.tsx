@@ -1,3 +1,5 @@
+"use client"
+
 import { Vegan } from "lucide-react"
 import { component, Icon } from "../icon"
 

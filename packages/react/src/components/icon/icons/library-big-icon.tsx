@@ -1,3 +1,5 @@
+"use client"
+
 import { LibraryBig } from "lucide-react"
 import { component, Icon } from "../icon"
 

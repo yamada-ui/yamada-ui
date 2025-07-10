@@ -1,3 +1,5 @@
+"use client"
+
 import type { MouseEventHandler, ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { TagStyle } from "./tag.style"
@@ -9,7 +11,7 @@ import { dataAttr } from "../../utils"
 import { XIcon } from "../icon"
 import { tagStyle } from "./tag.style"
 
-export interface TagContext extends Pick<TagProps, "disabled"> {}
+interface ComponentContext extends Pick<TagProps, "disabled"> {}
 
 export interface TagProps
   extends HTMLStyledProps<"span">,
@@ -46,14 +48,16 @@ export interface TagProps
   onClose?: MouseEventHandler<HTMLElement>
 }
 
-export const {
-  ComponentContext: TagContext,
+const {
+  ComponentContext,
   PropsContext: TagPropsContext,
-  useComponentContext: useTagContext,
+  useComponentContext,
   usePropsContext: useTagPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<TagProps, TagStyle, TagContext>("tag", tagStyle)
+} = createSlotComponent<TagProps, TagStyle, ComponentContext>("tag", tagStyle)
+
+export { TagPropsContext, useTagPropsContext }
 
 /**
  * `Tag` is a component used to categorize or organize items using keywords that describe them.
@@ -75,7 +79,7 @@ export const Tag = withProvider(
     const context = useMemo(() => ({ disabled }), [disabled])
 
     return (
-      <TagContext value={context}>
+      <ComponentContext value={context}>
         <styled.span data-disabled={dataAttr(disabled)} {...rest}>
           {startIcon ? (
             <TagStartIcon {...iconProps}>{startIcon}</TagStartIcon>
@@ -91,7 +95,7 @@ export const Tag = withProvider(
             <TagCloseButton onClick={onClose} {...closeButtonProps} />
           ) : null}
         </styled.span>
-      </TagContext>
+      </ComponentContext>
     )
   },
   "root",
@@ -103,7 +107,7 @@ interface TagContentProps extends HTMLStyledProps<"span"> {}
 const TagContent = withContext<"span", TagContentProps>("span", "content")(
   undefined,
   (props) => {
-    const { disabled } = useTagContext()
+    const { disabled } = useComponentContext()
 
     return { "data-disabled": dataAttr(disabled), ...props }
   },
@@ -113,9 +117,9 @@ interface TagStartIconProps extends HTMLStyledProps<"span"> {}
 
 const TagStartIcon = withContext<"span", TagStartIconProps>("span", [
   "icon",
-  "startIcon",
+  "start",
 ])(undefined, (props) => {
-  const { disabled } = useTagContext()
+  const { disabled } = useComponentContext()
 
   return { "data-disabled": dataAttr(disabled), ...props }
 })
@@ -124,9 +128,9 @@ interface TagEndIconProps extends HTMLStyledProps<"span"> {}
 
 const TagEndIcon = withContext<"span", TagEndIconProps>("span", [
   "icon",
-  "endIcon",
+  "end",
 ])(undefined, (props) => {
-  const { disabled } = useTagContext()
+  const { disabled } = useComponentContext()
 
   return { "data-disabled": dataAttr(disabled), ...props }
 })
@@ -138,7 +142,7 @@ const TagCloseButton = withContext<"span", TagCloseButtonProps>("span", [
   "closeButton",
 ])(undefined, ({ children, ...props }) => {
   const ref = useRef<HTMLSpanElement>(null)
-  const { disabled } = useTagContext()
+  const { disabled } = useComponentContext()
   const rest = useClickable<HTMLSpanElement>({ ref, disabled, ...props })
   const { t } = useI18n("tag")
 

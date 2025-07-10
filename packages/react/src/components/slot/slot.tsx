@@ -1,5 +1,9 @@
-import type { HTMLAttributes, PropsWithChildren, RefAttributes } from "react"
-import type { FC } from "../../core"
+import type {
+  FC,
+  HTMLAttributes,
+  PropsWithChildren,
+  RefAttributes,
+} from "react"
 import { Children, cloneElement, isValidElement } from "react"
 import { mergeProps } from "../../core"
 import { findChild, getValidChildren } from "../../utils"

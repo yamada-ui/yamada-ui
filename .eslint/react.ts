@@ -1,47 +1,11 @@
-import type { ESLint, Linter, Rule } from "eslint"
+import type { TSESLint } from "@typescript-eslint/utils"
 import reactPlugin from "eslint-plugin-react"
 import { sharedFiles } from "./shared"
 
-const noDebugRule: Rule.RuleModule = {
-  create(context) {
-    return {
-      JSXAttribute(node) {
-        if (node.name && node.name.name === "__debug") {
-          context.report({
-            messageId: "noDebugProp",
-            node,
-          })
-        }
-      },
-    }
-  },
-  meta: {
-    type: "problem",
-    docs: {
-      description: "Warn when using __debug prop",
-    },
-    messages: {
-      noDebugProp:
-        "`__debug` prop is for debugging only and should not be used in production.",
-    },
-    schema: [],
-  },
-}
-
-const reactCustomPlugin: ESLint.Plugin = {
-  meta: {
-    name: "eslint-custom-plugin-react",
-    version: "1.0.0",
-  },
-  rules: {
-    "no-debug": noDebugRule,
-  },
-}
-
-export const reactConfig: Linter.Config = {
+export const reactConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/react",
   files: sharedFiles,
-  plugins: { "custom-react": reactCustomPlugin, react: reactPlugin },
+  plugins: { react: reactPlugin },
   rules: {
     ...reactPlugin.configs.recommended.rules,
 
@@ -57,8 +21,6 @@ export const reactConfig: Linter.Config = {
     "react/jsx-pascal-case": "error",
     "react/react-in-jsx-scope": "off",
     "react/self-closing-comp": "error",
-
-    "custom-react/no-debug": "warn",
   },
   settings: { react: { version: "detect" } },
 }

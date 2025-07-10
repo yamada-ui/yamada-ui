@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "../../../storybook/components"
 import { useAsync } from "../../hooks/use-async"
 import { Avatar } from "../avatar"
@@ -36,7 +36,7 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <PropsTable variant="column" rows={["pulse", "shine"]}>
+    <PropsTable variant="stack" rows={["pulse", "shine"]}>
       {(_, row, key) => (
         <VStack key={key} gap="md">
           <HStack>
@@ -49,6 +49,20 @@ export const Variant: Story = () => {
         </VStack>
       )}
     </PropsTable>
+  )
+}
+
+export const Size: Story = () => {
+  return (
+    <VStack gap="md">
+      <HStack>
+        <SkeletonCircle boxSize="14" />
+
+        <SkeletonText h="6" lineClamp={2} />
+      </HStack>
+
+      <Skeleton h="20" />
+    </VStack>
   )
 }
 
@@ -81,19 +95,6 @@ export const Children: Story = () => {
         </SkeletonCircle>
       </HStack>
     </>
-  )
-}
-export const Size: Story = () => {
-  return (
-    <VStack gap="md">
-      <HStack>
-        <SkeletonCircle boxSize="14" />
-
-        <SkeletonText h="6" lineClamp={2} />
-      </HStack>
-
-      <Skeleton h="20" />
-    </VStack>
   )
 }
 

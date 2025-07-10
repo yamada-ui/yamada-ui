@@ -1,7 +1,9 @@
+"use client"
+
 import { use } from "react"
 import * as React from "react"
 
-export type ReactNodeOrFunction<Y> =
+export type ReactNodeOrFunction<Y = unknown> =
   | ((props: Y) => React.ReactNode)
   | React.ReactNode
 

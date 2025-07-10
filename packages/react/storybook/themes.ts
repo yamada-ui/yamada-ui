@@ -1,48 +1,43 @@
-import { themes } from "@storybook/theming"
-import { defaultTheme } from "../src"
-
-const fonts = defaultTheme.fonts
-const colors = defaultTheme.colors
-const semanticColors = defaultTheme.semanticTokens.colors
+import { create } from "storybook/theming"
 
 const sharedTheme = {
   appBorderRadius: 0,
-  barSelectedColor: colors.blue[500],
+  barSelectedColor: "#4387f4",
   brandTitle: "Yamada UI",
   brandUrl: "https://github.com/yamada-ui/yamada-ui",
-  colorPrimary: colors.violet[500],
-  colorSecondary: colors.blue[500],
-  fontBase: fonts.body,
-  fontCode: fonts.mono,
+  colorPrimary: "#895af6",
+  colorSecondary: "#4387f4",
+  fontBase:
+    'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "游ゴシック体", YuGothic, "YuGothic M", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+  fontCode:
+    'SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
 }
 
-export const customThemes = {
-  light: {
-    ...themes.light,
-    brandImage:
-      "https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-black@2x.png",
+export const themes = {
+  light: create({
     ...sharedTheme,
     base: "light",
-    appBg: semanticColors.bg.panel[0],
-    appContentBg: semanticColors.bg.base[0],
-    barBg: semanticColors.bg.panel[0],
-    barTextColor: semanticColors.fg.base[0],
-    textColor: semanticColors.fg.base[0],
-    textInverseColor: semanticColors.fg.base[0],
-    textMutedColor: "#7f7f7f",
-  },
-  dark: {
-    ...themes.dark,
+    appBg: "#ffffff",
+    appContentBg: "#fafafa",
+    barBg: "#ffffff",
+    barTextColor: "#171717",
     brandImage:
-      "https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-white@2x.png",
+      "https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-black@2x.png",
+    textColor: "#171717",
+    textInverseColor: "#171717",
+    textMutedColor: "#7f7f7f",
+  }),
+  dark: create({
     ...sharedTheme,
     base: "dark",
-    appBg: semanticColors.bg.panel[1],
-    appContentBg: semanticColors.bg.base[1],
-    barBg: semanticColors.bg.panel[1],
-    barTextColor: semanticColors.fg.base[1],
-    textColor: semanticColors.fg.base[1],
-    textInverseColor: semanticColors.fg.base[1],
+    appBg: "#121212",
+    appContentBg: "#0a0b0b",
+    barBg: "#121212",
+    barTextColor: "#ededed",
+    brandImage:
+      "https://raw.githubusercontent.com/yamada-ui/yamada-ui/main/logo/logo-white@2x.png",
+    textColor: "#ededed",
+    textInverseColor: "#ededed",
     textMutedColor: "#999999",
-  },
+  }),
 }

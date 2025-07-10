@@ -1,3 +1,5 @@
+export * from "./native-table.style"
+export * as NativeTable from "./namespace"
 export type {
   CaptionProps,
   ColgroupProps,
@@ -24,7 +26,3 @@ export {
   Tr,
   useNativeTablePropsContext,
 } from "./native-table"
-
-export * from "./native-table.style"
-
-export * as NativeTable from "./namespace"

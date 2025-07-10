@@ -1,3 +1,5 @@
+"use client"
+
 import { AlarmClockOff } from "lucide-react"
 import { component, Icon } from "../icon"
 

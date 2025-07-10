@@ -1,3 +1,5 @@
+"use client"
+
 import { FlashlightOff } from "lucide-react"
 import { component, Icon } from "../icon"
 

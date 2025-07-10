@@ -1,3 +1,5 @@
+"use client"
+
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
@@ -31,11 +33,13 @@ export interface FadeProps
   extends WithTransitionProps<HTMLMotionProps>,
     ThemeProps<FadeStyle> {}
 
-export const {
+const {
   PropsContext: FadePropsContext,
   usePropsContext: useFadePropsContext,
   withContext,
 } = createComponent<FadeProps, FadeStyle>("fade", fadeStyle)
+
+export { FadePropsContext, useFadePropsContext }
 
 /**
  * `Fade` is a component that gradually shows or hides an element.

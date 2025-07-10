@@ -10,8 +10,8 @@ export const createTransition = {
     ): Transition {
       return {
         ...(transition ?? {
-          duration: 0.25,
-          ease: [0, 0, 0.2, 1],
+          duration: 0.2,
+          ease: [0, 0, 0.58, 1],
         }),
         ...(duration
           ? { duration: isNumber(duration) ? duration : duration.enter }
@@ -28,7 +28,7 @@ export const createTransition = {
       return {
         ...(transition ?? {
           duration: 0.2,
-          ease: [0.4, 0, 1, 1],
+          ease: [0.42, 0, 1, 1],
         }),
         ...(duration
           ? { duration: isNumber(duration) ? duration : duration.exit }

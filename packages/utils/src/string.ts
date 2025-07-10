@@ -95,11 +95,11 @@ export function isSize(value: any): boolean {
   return isString(value) && sizeMap.includes(value)
 }
 
-export function transformSize(
+export function transformSize<Y = string>(
   token: string | undefined,
   value: number,
   omitTokens: null | string[] = null,
-): string | undefined {
+): undefined | Y {
   if (!token) return undefined
 
   let resolvedSizeMap = sizeMap
@@ -110,7 +110,7 @@ export function transformSize(
   const index = resolvedSizeMap.indexOf(token)
   const size = resolvedSizeMap[index + value]
 
-  return size ?? token
+  return (size ?? token) as Y
 }
 
 export function toDirectionalPlacement(placement: string): string {
@@ -138,7 +138,9 @@ export function toDirectionalPlacement(placement: string): string {
 }
 
 export function toCamelCase(value: AnyString): string {
-  return value.toLowerCase().replace(/[_-](.)/g, (_, val) => val.toUpperCase())
+  return value
+    .replace(/[_-](.)/g, (_, val) => val.toUpperCase())
+    .replace(/^(.)/, (_, val) => val.toLowerCase())
 }
 
 export function toPascalCase(value: AnyString): string {
@@ -160,4 +162,13 @@ export function toTitleCase(value: AnyString): string {
     .replace(/[_-](.)/g, (_, val) => ` ${val.toUpperCase()}`)
     .replace(/^./, (str) => str.toUpperCase())
     .trim()
+}
+
+export function bem(block: string, element?: string, modifier?: string) {
+  let className = block
+
+  if (element) className += `__${element}`
+  if (modifier) className += `--${modifier}`
+
+  return className
 }

@@ -1,3 +1,5 @@
+"use client"
+
 import { Contact } from "lucide-react"
 import { component, Icon } from "../icon"
 

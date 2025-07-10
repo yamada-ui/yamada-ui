@@ -1,3 +1,5 @@
+"use client"
+
 import { ShieldUser } from "lucide-react"
 import { component, Icon } from "../icon"
 

@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
 import { useRef, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
@@ -8,9 +8,9 @@ import { PlusIcon } from "../../components/icon"
 import { HStack, VStack } from "../../components/stack"
 import { Text } from "../../components/text"
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
-import { IconButton } from "../button"
 import { Field } from "../field"
 import { For } from "../for"
+import { IconButton } from "../icon-button"
 import { Wrap } from "../wrap"
 import { FileButton } from "./file-button"
 
@@ -102,7 +102,7 @@ export const Disabled: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton key={index} variant={variant} disabled>
               {toTitleCase(variant)}
@@ -112,7 +112,7 @@ export const Disabled: Story = () => {
       </Wrap>
 
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton
               key={index}
@@ -141,7 +141,7 @@ export const Readonly: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton key={index} variant={variant} readOnly>
               {toTitleCase(variant)}
@@ -151,7 +151,7 @@ export const Readonly: Story = () => {
       </Wrap>
 
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton
               key={index}
@@ -180,7 +180,7 @@ export const Invalid: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton key={index} variant={variant} invalid>
               {toTitleCase(variant)}
@@ -190,7 +190,7 @@ export const Invalid: Story = () => {
       </Wrap>
 
       <Wrap gap="md">
-        <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+        <For each={["solid", "subtle", "surface", "outline", "ghost"] as const}>
           {(variant, index) => (
             <FileButton
               key={index}

@@ -1,3 +1,5 @@
+"use client"
+
 import type { Formats, Options } from "intl-messageformat"
 import type { FC, ReactNode } from "react"
 import type { TextDirection } from "../../core"

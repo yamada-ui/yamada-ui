@@ -1,9 +1,9 @@
-import type { Linter } from "eslint"
+import type { TSESLint } from "@typescript-eslint/utils"
 import { fixupPluginRules } from "@eslint/compat"
 import vitestPlugin from "@vitest/eslint-plugin"
 import { sharedTestFiles } from "./shared"
 
-export const vitestConfig: Linter.Config = {
+export const vitestConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/vitest",
   files: sharedTestFiles,
   plugins: { vitest: fixupPluginRules(vitestPlugin) },

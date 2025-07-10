@@ -1,3 +1,5 @@
+"use client"
+
 import { MessageCircleReply } from "lucide-react"
 import { component, Icon } from "../icon"
 

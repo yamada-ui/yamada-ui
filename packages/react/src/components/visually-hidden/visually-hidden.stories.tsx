@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Button } from "../button"
 import { CheckIcon } from "../icon"
 import { VisuallyHidden } from "./visually-hidden"

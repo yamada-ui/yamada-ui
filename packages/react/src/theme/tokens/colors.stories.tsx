@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { Box } from "../../components/box"
 import { Center } from "../../components/center"
 import { Container } from "../../components/container"

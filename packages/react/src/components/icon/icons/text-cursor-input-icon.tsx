@@ -1,3 +1,5 @@
+"use client"
+
 import { TextCursorInput } from "lucide-react"
 import { component, Icon } from "../icon"
 

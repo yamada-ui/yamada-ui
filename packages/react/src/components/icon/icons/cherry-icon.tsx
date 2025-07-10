@@ -1,3 +1,5 @@
+"use client"
+
 import { Cherry } from "lucide-react"
 import { component, Icon } from "../icon"
 

@@ -10,7 +10,6 @@ export const linkBoxStyle = defineComponentSlotStyle({
         cursor: "inherit",
         display: "block",
         inset: "0",
-        outlineColor: "{--focus-ring-color}",
         position: "absolute",
         zIndex: "0",
       },
@@ -21,7 +20,7 @@ export const linkBoxStyle = defineComponentSlotStyle({
       },
     },
     root: {
-      "a[href]:not(.ui-link-box__overlay), abbr[title]": {
+      "a[href]:not([data-link-box-overlay]), abbr[title]": {
         position: "relative",
         zIndex: "yamcha",
       },

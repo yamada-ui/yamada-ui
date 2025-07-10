@@ -1,14 +1,22 @@
+"use client"
+
 import type { ReactElement } from "react"
-import type { HTMLStyledProps, PropGetter, ThemeProps } from "../../core"
+import type {
+  HTMLStyledProps,
+  PropGetter,
+  StyleValue,
+  ThemeProps,
+} from "../../core"
 import type { BreadcrumbStyle } from "./breadcrumb.style"
 import type { UseBreadcrumbProps } from "./use-breadcrumb"
 import { Fragment, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
+import { useValue } from "../../hooks/use-value"
 import { ChevronRightIcon, EllipsisIcon } from "../icon"
 import { breadcrumbStyle } from "./breadcrumb.style"
 import { useBreadcrumb } from "./use-breadcrumb"
 
-interface BreadcrumbContext {
+interface ComponentContext {
   getEllipsisProps: PropGetter<"svg">
   getLinkProps: PropGetter<"a", { currentPage?: boolean }>
 }
@@ -16,13 +24,25 @@ interface BreadcrumbContext {
 export interface BreadcrumbRootProps
   extends HTMLStyledProps<"nav">,
     ThemeProps<BreadcrumbStyle>,
-    UseBreadcrumbProps {
+    Omit<UseBreadcrumbProps, "endBoundaries" | "startBoundaries"> {
+  /**
+   * Number of elements visible on the end(right) edges.
+   *
+   * @default 0
+   */
+  endBoundaries?: StyleValue<number>
   /**
    * The visual separator between each breadcrumb item.
    *
    * @default '/'
    */
   separator?: ReactElement | string
+  /**
+   * Number of elements visible on the start(left) edges.
+   *
+   * @default 0
+   */
+  startBoundaries?: StyleValue<number>
   /**
    * Props for item element.
    */
@@ -37,18 +57,19 @@ export interface BreadcrumbRootProps
   separatorProps?: BreadcrumbSeparatorProps
 }
 
-export const {
-  ComponentContext: BreadcrumbContext,
+const {
+  ComponentContext,
   PropsContext: BreadcrumbPropsContext,
-  useComponentContext: useBreadcrumbContext,
+  useComponentContext,
   usePropsContext: useBreadcrumbPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<
-  BreadcrumbRootProps,
-  BreadcrumbStyle,
-  BreadcrumbContext
->("breadcrumb", breadcrumbStyle)
+} = createSlotComponent<BreadcrumbRootProps, BreadcrumbStyle, ComponentContext>(
+  "breadcrumb",
+  breadcrumbStyle,
+)
+
+export { BreadcrumbPropsContext, useBreadcrumbPropsContext }
 
 /**
  * `Breadcrumb` is a component that helps users understand the hierarchy of a website.
@@ -56,7 +77,18 @@ export const {
  * @see https://yamada-ui.com/components/breadcrumb
  */
 export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
-  ({ gap, separator, itemProps, listProps, separatorProps, ...rest }) => {
+  ({
+    endBoundaries: endBoundariesProp,
+    gap,
+    separator,
+    startBoundaries: startBoundariesProp,
+    itemProps,
+    listProps,
+    separatorProps,
+    ...rest
+  }) => {
+    const endBoundaries = useValue(endBoundariesProp)
+    const startBoundaries = useValue(startBoundariesProp)
     const {
       children,
       getEllipsisProps,
@@ -65,7 +97,9 @@ export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
       getRootProps,
     } = useBreadcrumb({
       ellipsis: <BreadcrumbEllipsis />,
+      endBoundaries,
       link: <BreadcrumbLink />,
+      startBoundaries,
       ...rest,
     })
 
@@ -75,7 +109,7 @@ export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
     )
 
     return (
-      <BreadcrumbContext value={context}>
+      <ComponentContext value={context}>
         <styled.nav {...getRootProps()}>
           <BreadcrumbList {...getListProps({ gap, ...listProps })}>
             {children.map((child, index) => {
@@ -95,7 +129,7 @@ export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
             })}
           </BreadcrumbList>
         </styled.nav>
-      </BreadcrumbContext>
+      </ComponentContext>
     )
   },
   "root",
@@ -129,7 +163,7 @@ export const BreadcrumbLink = withContext<"a", BreadcrumbLinkProps>(
   "a",
   "link",
 )(undefined, ({ currentPage, ...rest }) => {
-  const { getLinkProps } = useBreadcrumbContext()
+  const { getLinkProps } = useComponentContext()
 
   return {
     as: !currentPage ? "a" : "span",
@@ -143,7 +177,7 @@ export const BreadcrumbEllipsis = withContext<"svg", BreadcrumbEllipsisProps>(
   EllipsisIcon,
   "ellipsis",
 )(undefined, (props) => {
-  const { getEllipsisProps } = useBreadcrumbContext()
+  const { getEllipsisProps } = useComponentContext()
 
   return { ...getEllipsisProps(props) }
 })

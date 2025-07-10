@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { Box } from "../../components/box"
 import { useBreakpoint } from "./use-breakpoint"
 import { useBreakpointValue } from "./use-breakpoint-value"
@@ -26,7 +26,7 @@ export const Basic = () => {
       color="white"
       p="md"
       rounded="md"
-      transitionDuration="slower"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current breakpoint is "{breakpoint}"

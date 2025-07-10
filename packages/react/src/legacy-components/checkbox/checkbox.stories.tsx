@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { FC } from "react"
 import type { SubmitHandler } from "react-hook-form"
 import type { CheckboxItem, UseCheckboxGroupReturn } from "./"

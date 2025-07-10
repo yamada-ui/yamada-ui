@@ -45,7 +45,6 @@ export const {
 
 export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
   ({
-    appendToParentPortal,
     children,
     closeOnDrag,
     closeStrategy,
@@ -56,7 +55,6 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
   }) => {
     const context = useMemo(
       () => ({
-        appendToParentPortal,
         closeOnDrag,
         closeStrategy,
         containerRef,
@@ -65,7 +63,6 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
         listProps,
       }),
       [
-        appendToParentPortal,
         containerRef,
         itemProps,
         listProps,
@@ -103,12 +100,7 @@ export const NoticeProvider = withProvider<"div", NoticeProviderProps>(
     return (
       <NoticeContext value={context}>
         {children}
-        <Portal
-          appendToParentPortal={appendToParentPortal}
-          containerRef={containerRef}
-        >
-          {components}
-        </Portal>
+        <Portal containerRef={containerRef}>{components}</Portal>
       </NoticeContext>
     )
   },

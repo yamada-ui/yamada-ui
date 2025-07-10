@@ -1,3 +1,5 @@
+"use client"
+
 import { MoveUpLeft } from "lucide-react"
 import { component, Icon } from "../icon"
 

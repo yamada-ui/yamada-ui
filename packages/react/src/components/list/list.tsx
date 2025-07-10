@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactElement } from "react"
 import type {
   CSSProps,
@@ -27,13 +29,14 @@ export interface ListRootProps
   styleType?: CSSProps["listStyleType"]
 }
 
-export const {
-  component,
+const {
   PropsContext: ListPropsContext,
   usePropsContext: useListPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<ListRootProps, ListStyle>("list", listStyle)
+
+export { ListPropsContext, useListPropsContext }
 
 /**
  * `List` is a component for displaying lists. By default, it renders a `ul` element.
@@ -69,6 +72,9 @@ export const ListRoot = withProvider(
 )()
 
 export interface ListItemProps extends HTMLStyledProps<"li"> {
+  /**
+   * The icon to use.
+   */
   icon?: ReactElement<any>
 }
 

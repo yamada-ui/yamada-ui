@@ -1,3 +1,5 @@
+"use client"
+
 import { ArrowRightFromLine } from "lucide-react"
 import { component, Icon } from "../icon"
 

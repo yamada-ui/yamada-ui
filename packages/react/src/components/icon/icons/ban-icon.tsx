@@ -1,3 +1,5 @@
+"use client"
+
 import { Ban } from "lucide-react"
 import { component, Icon } from "../icon"
 

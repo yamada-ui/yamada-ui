@@ -1,3 +1,5 @@
+"use client"
+
 import type {
   CSSProps,
   StyleValue,
@@ -26,7 +28,7 @@ export interface SimpleGridProps
   minChildWidth?: CSSProps["minWidth"]
 }
 
-export const {
+const {
   PropsContext: SimpleGridPropsContext,
   usePropsContext: useSimpleGridPropsContext,
   withContext,
@@ -34,6 +36,8 @@ export const {
   "simple-grid",
   simpleGridStyle,
 )
+
+export { SimpleGridPropsContext, useSimpleGridPropsContext }
 
 /**
  * `SimpleGrid` is a component that makes `Grid` simpler and more user-friendly.

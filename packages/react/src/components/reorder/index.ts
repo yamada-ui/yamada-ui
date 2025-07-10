@@ -1,3 +1,5 @@
+export * from "./reorder.style"
+export * as Reorder from "./namespace"
 export {
   ReorderItem,
   ReorderPropsContext,
@@ -10,20 +12,4 @@ export type {
   ReorderRootProps,
   ReorderTriggerProps,
 } from "./reorder"
-
-export * from "./reorder.style"
-
-export {
-  ReorderContext,
-  ReorderItemContext,
-  useReorder,
-  useReorderContext,
-} from "./use-reorder"
-export type {
-  UseReorderItemProps,
-  UseReorderItemReturn,
-  UseReorderProps,
-  UseReorderReturn,
-} from "./use-reorder"
-
-export * as Reorder from "./namespace"
+export * from "./use-reorder"

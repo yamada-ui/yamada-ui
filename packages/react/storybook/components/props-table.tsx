@@ -19,7 +19,7 @@ interface PropsTableProps<Y extends string, M extends string> {
     rowIndex: number,
   ) => ReactNode
   rows: M[]
-  variant?: "column" | "grid"
+  variant?: "grid" | "stack"
   columns?: Y[]
 }
 

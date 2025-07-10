@@ -3,6 +3,7 @@ import {
   getObject,
   isArray,
   isObject,
+  isString,
   omitObject,
   prettier,
 } from "../../utils/index.js"
@@ -15,10 +16,11 @@ const print = (unions: { [key: string]: string[] }) =>
     .sort(([a], [b]) => a.localeCompare(b))
     .map(
       ([key, union]) =>
-        `${key}: ${union
-          .map((value: any) => `"${value}"`)
-          .concat(["(string & {})"])
-          .join(" | ")};`,
+        `${key}: ${
+          !union.length
+            ? "never"
+            : union.map((value: any) => `"${value}"`).join(" | ")
+        };`,
     )
     .join("\n")
 
@@ -46,6 +48,12 @@ const extractColorSchemes = (theme: Dict, colorTokens: string[] = []) => {
 
   const colorSchemes: string[] = []
 
+  Object.entries(colors ?? {}).forEach(([key, value]) => {
+    if (!isTone(value)) return
+
+    colorSchemes.push(key)
+  })
+
   if (!isObject(semanticTokens?.colorSchemes)) return { colorSchemes }
 
   Object.entries(semanticTokens.colorSchemes).forEach(([key, value]) => {
@@ -53,6 +61,13 @@ const extractColorSchemes = (theme: Dict, colorTokens: string[] = []) => {
       colorSchemes.push(key)
       colorTokens.push(...TONES.map((tone) => `${key}.${tone}`))
     } else {
+      if (isArray(value)) {
+        if (value.every((token) => colorSchemes.includes(token)))
+          colorSchemes.push(key)
+      } else if (isString(value)) {
+        if (colorSchemes.includes(value)) colorSchemes.push(key)
+      }
+
       const targetToken = isArray(value) ? value[0] : value
 
       const targetTokens = colorTokens.filter(
@@ -69,23 +84,13 @@ const extractColorSchemes = (theme: Dict, colorTokens: string[] = []) => {
     }
   })
 
-  if (!isObject(colors)) return { colorSchemes }
-
-  Object.entries(colors).forEach(([key, value]) => {
-    if (!isTone(value)) return
-
-    colorSchemes.push(key)
-  })
-
   return { colorSchemes }
 }
 
 const extractThemeSchemes = (theme: Dict) => {
   const { themeSchemes } = theme
 
-  if (!isObject(themeSchemes)) return ["base"]
-
-  return ["base", ...Object.keys(themeSchemes)]
+  return Object.keys(themeSchemes ?? {})
 }
 
 interface ExtractPathsOptions {
@@ -210,7 +215,7 @@ export const generateThemeTokens = async (
   if (internal) {
     return prettier(
       [
-        `import type { UsageThemeTokens } from "./theme"`,
+        `import type { UsageThemeTokens } from "./system"`,
         ``,
         `export interface GeneratedThemeTokens extends UsageThemeTokens {`,
         print({

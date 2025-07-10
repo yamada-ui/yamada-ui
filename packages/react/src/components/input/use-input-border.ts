@@ -15,7 +15,7 @@ export interface UseInputBorderProps {
 export const useInputBorder = ({
   errorBorderColor,
   focusBorderColor,
-}: UseInputBorderProps) => {
+}: UseInputBorderProps = {}) => {
   return useMemo(
     () => ({
       "--error-border-color": errorBorderColor

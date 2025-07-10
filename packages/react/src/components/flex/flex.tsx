@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FlexStyle } from "./flex.style"
 import { createComponent } from "../../core"
@@ -36,11 +38,13 @@ export interface FlexProps
   wrap?: CSSProps["flexWrap"]
 }
 
-export const {
+const {
   PropsContext: FlexPropsContext,
   usePropsContext: useFlexPropsContext,
   withContext,
 } = createComponent<FlexProps, FlexStyle>("flex", flexStyle)
+
+export { FlexPropsContext, useFlexPropsContext }
 
 /**
  * `Flex` is a component that sets `flex` to `Box`. Also, convenient style shorthand is available.

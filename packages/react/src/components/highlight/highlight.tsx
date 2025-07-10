@@ -1,4 +1,4 @@
-import type { FC } from "../../core"
+import type { FC } from "react"
 import type { MarkProps } from "../mark"
 import type { TextProps } from "../text"
 import { Fragment } from "react"

@@ -37,22 +37,16 @@ export interface NoticeConfig {
    */
   action?: (props: NoticeCommonProps) => ReactNode
   /**
-   * If `true`, the portal will check if it is within a parent portal
-   * and append itself to the parent's portal node.
-   * This provides nesting for portals.
-   *
-   * If `false`, the portal will always append to `document.body`
-   * regardless of nesting. It is used to opt out of portal nesting.
-   *
-   * @default true
-   */
-  appendToParentPortal?: PortalProps["appendToParentPortal"]
-  /**
    * If `true`, allows the notice to be removed.
    *
    * @default false
    */
   closable?: boolean
+  /**
+   * If `true`, the notice will be closed when the drag ends.
+   *
+   * @default false
+   */
   closeOnDrag?: boolean
   /**
    * The strategy to remove the notice when `closable` is set to `true`

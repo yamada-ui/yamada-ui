@@ -1,105 +1,122 @@
+"use client"
+
 import type { RefObject } from "react"
-import type { FocusableElement } from "../../utils"
 import { useCallback, useRef } from "react"
 import {
   getActiveElement,
-  getAllFocusable,
+  getDocument,
+  getFocusableElements,
   isRefObject,
   isSafari,
-  isTabbable,
+  isTabbableElement,
   useSafeLayoutEffect,
   useUpdateEffect,
 } from "../../utils"
 import { useEventListener } from "../use-event-listener"
 
 export interface UseFocusOnHideProps {
-  focusRef: RefObject<FocusableElement | null>
+  focusTarget?: HTMLElement | null | RefObject<HTMLElement | null>
   shouldFocus?: boolean
   visible?: boolean
 }
 
-const preventReturnFocus = (containerRef: RefObject<HTMLElement | null>) => {
-  const el = containerRef.current
-
+const preventReturnFocus = (el: HTMLElement | null) => {
   if (!el) return false
 
-  const activeElement = getActiveElement(el)
+  const activeElement = getActiveElement(getDocument(el))
 
   if (!activeElement) return false
   if (el.contains(activeElement)) return false
-  if (isTabbable(activeElement)) return true
+  if (isTabbableElement(activeElement)) return true
 
   return false
 }
 
-export const useFocusOnHide = (
-  containerRef: RefObject<HTMLElement | null>,
-  { focusRef, shouldFocus: shouldFocusProp, visible }: UseFocusOnHideProps,
+export const useFocusOnHide = <T extends HTMLElement>(
+  refOrEl: RefObject<null | T> | T,
+  { focusTarget: focusRefOrEl, shouldFocus, visible }: UseFocusOnHideProps,
 ) => {
-  const shouldFocus = shouldFocusProp && !visible
+  const trulyShouldFocus = shouldFocus && !visible
 
   useUpdateEffect(() => {
-    if (!shouldFocus) return
+    const target = isRefObject(refOrEl) ? refOrEl.current : refOrEl
+    const focusTarget = isRefObject(focusRefOrEl)
+      ? focusRefOrEl.current
+      : focusRefOrEl
 
-    if (preventReturnFocus(containerRef)) return
+    if (!trulyShouldFocus) return
 
-    const el = focusRef.current || containerRef.current
+    if (preventReturnFocus(target)) return
 
-    if (el) {
+    const el = focusTarget ?? target
+
+    if (el)
       requestAnimationFrame(() => {
         el.focus()
       })
-    }
-  }, [shouldFocus, containerRef, focusRef])
+  }, [trulyShouldFocus])
 }
 
 export interface UseFocusOnShowProps {
-  focusRef?: RefObject<FocusableElement | null>
+  focusTarget?: HTMLElement | null | RefObject<HTMLElement | null>
   preventScroll?: boolean
   shouldFocus?: boolean
   visible?: boolean
 }
 
 export const useFocusOnShow = <T extends HTMLElement>(
-  target: RefObject<null | T> | T,
-  { focusRef, preventScroll, shouldFocus, visible }: UseFocusOnShowProps = {
+  refOrEl: RefObject<null | T> | T,
+  {
+    focusTarget: focusRefOrEl,
+    preventScroll,
+    shouldFocus,
+    visible,
+  }: UseFocusOnShowProps = {
     preventScroll: true,
     shouldFocus: false,
   },
 ) => {
-  const element = isRefObject(target) ? target.current : target
-
-  const autoFocusValue = shouldFocus && visible
-  const autoFocusRef = useRef(autoFocusValue)
+  const target = isRefObject(refOrEl) ? refOrEl.current : refOrEl
+  const trulyShouldFocus = shouldFocus && visible
+  const trulyShouldFocusRef = useRef(trulyShouldFocus)
   const lastVisibleRef = useRef(visible)
 
   useSafeLayoutEffect(() => {
     if (!lastVisibleRef.current && visible)
-      autoFocusRef.current = autoFocusValue
+      trulyShouldFocusRef.current = trulyShouldFocus
 
     lastVisibleRef.current = visible
-  }, [visible, autoFocusValue])
+  }, [visible, trulyShouldFocus])
 
   const onFocus = useCallback(() => {
-    if (!visible || !element || !autoFocusRef.current) return
+    if (!visible || !target || !trulyShouldFocusRef.current) return
 
-    autoFocusRef.current = false
+    trulyShouldFocusRef.current = false
 
-    if (element.contains(document.activeElement as HTMLElement)) return
+    if (target.contains(document.activeElement as HTMLElement)) return
 
-    if (focusRef?.current) {
+    const focusTarget = isRefObject(focusRefOrEl)
+      ? focusRefOrEl.current
+      : focusRefOrEl
+
+    if (focusTarget) {
       requestAnimationFrame(() => {
-        focusRef.current?.focus({ preventScroll })
+        focusTarget.focus({ preventScroll })
       })
     } else {
-      const tabbableEls = getAllFocusable(element)
+      const tabbableEls = getFocusableElements(target)
 
-      if (tabbableEls.length > 0)
+      if (tabbableEls.length > 0) {
         requestAnimationFrame(() => {
           tabbableEls[0]?.focus({ preventScroll })
         })
+      } else {
+        requestAnimationFrame(() => {
+          target.focus({ preventScroll })
+        })
+      }
     }
-  }, [visible, preventScroll, element, focusRef])
+  }, [visible, target, focusRefOrEl, preventScroll])
 
   useUpdateEffect(() => {
     requestAnimationFrame(() => {
@@ -107,7 +124,7 @@ export const useFocusOnShow = <T extends HTMLElement>(
     })
   }, [onFocus])
 
-  useEventListener(element, "transitionend", onFocus)
+  useEventListener(target, "transitionend", onFocus)
 }
 
 export interface UseFocusOnMouseDownProps {
@@ -121,23 +138,29 @@ export const useFocusOnPointerDown = ({
   elements,
   enabled,
 }: UseFocusOnMouseDownProps) => {
-  const doc = () => ref.current?.ownerDocument ?? document
+  useEventListener(
+    () => getDocument(ref.current),
+    "pointerdown",
+    (ev) => {
+      if (!isSafari() || !enabled) return
+      const target = ev.target as HTMLElement
 
-  useEventListener(doc, "pointerdown", (ev) => {
-    if (!isSafari() || !enabled) return
-    const target = ev.target as HTMLElement
+      const els = elements ?? [ref]
 
-    const els = elements ?? [ref]
+      const validTarget = els.some((elOrRef) => {
+        const el = isRefObject(elOrRef) ? elOrRef.current : elOrRef
 
-    const isValidTarget = els.some((elementOrRef) => {
-      const el = isRefObject(elementOrRef) ? elementOrRef.current : elementOrRef
-      return el?.contains(target) || el === target
-    })
+        return el?.contains(target) || el === target
+      })
 
-    if (doc().activeElement !== target && isValidTarget) {
-      ev.preventDefault()
+      if (
+        getActiveElement(getDocument(ref.current)) !== target &&
+        validTarget
+      ) {
+        ev.preventDefault()
 
-      target.focus()
-    }
-  })
+        target.focus()
+      }
+    },
+  )
 }

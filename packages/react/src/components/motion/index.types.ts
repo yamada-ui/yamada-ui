@@ -1,6 +1,6 @@
 import type {
   MotionProps as OriginMotionProps,
-  Target,
+  ResolvedValues,
   TargetAndTransition,
   Transition,
 } from "motion/react"
@@ -45,6 +45,9 @@ interface StyledPropsWithoutAs extends Omit<StyledProps, "as"> {}
 
 interface MotionStyledProps
   extends Merge<StyledPropsWithoutAs, OriginMotionProps> {
+  /**
+   * The HTML element to render.
+   */
   as?: DOMElement
 }
 
@@ -79,10 +82,14 @@ type MotionLifecycleProps<Y> = { [key in "enter" | "exit"]?: Y }
 export interface MotionTransitionProps {
   /**
    * Custom `delay` definition for `enter` and `exit`.
+   *
+   * @default 0
    */
   delay?: MotionLifecycleProps<number> | number
   /**
    * Custom `duration` definition for `enter` and `exit`.
+   *
+   * @default 0.2
    */
   duration?: MotionLifecycleProps<number> | number
   /**
@@ -104,7 +111,7 @@ export interface MotionTransitionProps {
   /**
    * Custom `transitionEnd` definition for `enter` and `exit`.
    */
-  transitionEnd?: MotionLifecycleProps<Target>
+  transitionEnd?: MotionLifecycleProps<ResolvedValues>
 }
 
 export type WithTransitionProps<Y extends object = {}> = MotionTransitionProps &

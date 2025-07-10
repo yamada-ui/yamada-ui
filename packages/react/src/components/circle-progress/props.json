@@ -1,0 +1,115 @@
+{
+  "Label": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Root": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { base?: \"lg\" | ... 6 more ... | undefined; ... 4 more ...; xl?: \"lg\" | ... 6 more ... | undefined; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ....",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"subtle\" | [\"outline\" | \"subtle\" | ({ _peerAccept?: \"outline\" | \"subtle\" | [\"outline\" | \"subtle\" | (... & { base?: \"outline\" | \"subtle\" | [\"outline\" | \"subtle\" | (... & ...), \"outline\" | ... 1 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"outline\" | ... 3 more ... | undefined; ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "circleProps": {
+      "type": "CircleProgressCircleProps",
+      "description": "Props for the progress circle element.",
+      "required": false
+    },
+    "duration": {
+      "type": "string | number",
+      "description": "The animation duration in seconds.",
+      "required": false
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "100",
+      "description": "The maximum value of the progress.",
+      "required": false
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The minimum value of the progress.",
+      "required": false
+    },
+    "rangeColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "description": "The color of the progress range.",
+      "required": false
+    },
+    "rangeProps": {
+      "type": "CircleProgressRangeProps",
+      "description": "Props for the progress range element.",
+      "required": false
+    },
+    "shape": {
+      "type": "StyleValue<\"square\" | \"rounded\">",
+      "defaultValue": "rounded",
+      "description": "The shape of the progress bar.",
+      "required": false
+    },
+    "thickness": {
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 100 more ... | ({ ...; } & { ...; })",
+      "description": "The thickness of the progress bar.",
+      "required": false
+    },
+    "trackColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "description": "The color of the progress track.",
+      "required": false
+    },
+    "trackProps": {
+      "type": "CircleProgressTrackProps",
+      "description": "Props for the progress track element.",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The value of the progress. If `null`, the progress will be indeterminate.",
+      "required": false
+    }
+  }
+}

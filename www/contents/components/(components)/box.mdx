@@ -1,0 +1,34 @@
+---
+title: Box
+description: >-
+  `Box` is the most abstract component on which all other components are built.
+  By default, it renders a `div` element.
+storybook: components-box--basic
+source: components/box
+---
+
+```tsx preview
+<Box p="md" bg="bg.contrast" color="fg.contrast">
+  This is the Box
+</Box>
+```
+
+## Usage
+
+```ts
+import { Box } from "@yamada-ui/react"
+```
+
+```tsx
+<Box />
+```
+
+### Render a different component
+
+By passing `as`, you can render it as a different element.
+
+```tsx preview
+<Box as="section" p="md" bg="danger" color="white">
+  This is the section
+</Box>
+```

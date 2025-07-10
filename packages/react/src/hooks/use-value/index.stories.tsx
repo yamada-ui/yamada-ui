@@ -1,7 +1,7 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useValue } from "."
 import { Box } from "../../components/box"
-import { useColorMode } from "../../providers/color-mode-provider"
+import { useColorMode } from "../../core"
 import { useBreakpoint } from "../use-breakpoint"
 
 const meta: Meta = {
@@ -28,7 +28,7 @@ export const Basic = () => {
       color={color}
       p="md"
       rounded="md"
-      transitionDuration="slower"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       The current breakpoint is "{breakpoint}", colorMode is "{colorMode}"

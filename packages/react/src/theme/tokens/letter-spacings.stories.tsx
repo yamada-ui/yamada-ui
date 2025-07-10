@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { Container } from "../../components/container"
 import { For } from "../../components/for"
 import { Heading } from "../../components/heading"

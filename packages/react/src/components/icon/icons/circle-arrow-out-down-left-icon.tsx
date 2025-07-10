@@ -1,3 +1,5 @@
+"use client"
+
 import { CircleArrowOutDownLeft } from "lucide-react"
 import { component, Icon } from "../icon"
 

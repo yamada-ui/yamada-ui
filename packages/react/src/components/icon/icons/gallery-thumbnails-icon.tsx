@@ -1,3 +1,5 @@
+"use client"
+
 import { GalleryThumbnails } from "lucide-react"
 import { component, Icon } from "../icon"
 

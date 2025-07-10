@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { FlexProps } from "../flex"
 import { useMemo } from "react"
 import { For } from "../../components/for"

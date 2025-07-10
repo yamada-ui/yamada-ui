@@ -1,3 +1,5 @@
+"use client"
+
 import type { RefObject } from "react"
 import type { CSSObject, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ZStackStyle } from "./z-stack.style"
@@ -30,14 +32,14 @@ export interface ZStackProps
    * @default "bottom"
    */
   direction?:
-    | "bottom"
-    | "bottom-left"
-    | "bottom-right"
-    | "left"
-    | "right"
-    | "top"
-    | "top-left"
-    | "top-right"
+    | "center-end"
+    | "center-start"
+    | "end"
+    | "end-end"
+    | "end-start"
+    | "start"
+    | "start-end"
+    | "start-start"
   /**
    * If `true`, calculate the `width` and `height` of the element and assign container.
    *
@@ -58,11 +60,13 @@ export interface ZStackProps
   startIndex?: number
 }
 
-export const {
+const {
   PropsContext: ZStackPropsContext,
   usePropsContext: useZStackPropsContext,
   withContext,
 } = createComponent<ZStackProps, ZStackStyle>("stack--depth", zStackStyle)
+
+export { useZStackPropsContext, ZStackPropsContext }
 
 /**
  * `ZStack` is a component that groups elements and provides space between child elements.
@@ -89,9 +93,9 @@ export const ZStack = withContext(
 
     const vertical = useCallback(
       (space: string) => {
-        if (direction.includes("top")) {
+        if (direction.startsWith("start")) {
           return { [!reverse ? "bottom" : "top"]: space }
-        } else if (direction.includes("bottom")) {
+        } else if (direction.startsWith("end")) {
           return { [!reverse ? "top" : "bottom"]: space }
         } else {
           return { [!reverse ? "top" : "bottom"]: 0 }
@@ -102,9 +106,9 @@ export const ZStack = withContext(
 
     const horizontal = useCallback(
       (space: string) => {
-        if (direction.includes("left")) {
+        if (direction.endsWith("-start")) {
           return { [!reverse ? "right" : "left"]: space }
-        } else if (direction.includes("right")) {
+        } else if (direction.endsWith("-end")) {
           return { [!reverse ? "left" : "right"]: space }
         } else {
           return { [!reverse ? "left" : "right"]: 0 }
@@ -150,8 +154,8 @@ export const ZStack = withContext(
     useEffect(() => {
       if (!fit) return
 
-      let negativeLeft = direction.includes("left")
-      let negativeTop = direction.includes("top")
+      let negativeLeft = direction.endsWith("-start")
+      let negativeTop = direction.startsWith("start")
       let width = 0
       let height = 0
 

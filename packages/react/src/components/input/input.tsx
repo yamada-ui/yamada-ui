@@ -1,4 +1,7 @@
-import type { FC, HTMLStyledProps, ThemeProps } from "../../core"
+"use client"
+
+import type { FC } from "react"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { InputStyle } from "./input.style"
 import type { UseInputBorderProps } from "./use-input-border"
@@ -18,11 +21,13 @@ export interface InputProps
   htmlSize?: number
 }
 
-export const {
+const {
   PropsContext: InputPropsContext,
   usePropsContext: useInputPropsContext,
   withContext,
 } = createComponent<InputProps, InputStyle>("input", inputStyle)
+
+export { InputPropsContext, useInputPropsContext }
 
 /**
  * `Input` is a component used to obtain text input from the user.

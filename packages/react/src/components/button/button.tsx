@@ -1,3 +1,5 @@
+"use client"
+
 import type { ElementType, ReactNode } from "react"
 import type {
   CSSObject,
@@ -15,8 +17,8 @@ import {
   useMemo,
   useRef,
 } from "react"
-import { createComponent, mergeCSS, styled } from "../../core"
-import { createContext, dataAttr, mergeRefs } from "../../utils"
+import { createComponent, getClassName, mergeCSS, styled } from "../../core"
+import { bem, createContext, dataAttr, mergeRefs } from "../../utils"
 import { getLoadingComponent, isLoadingScheme } from "../loading"
 import { Ripple, useRipple } from "../ripple"
 import { buttonStyle } from "./button.style"
@@ -110,12 +112,14 @@ export interface ButtonProps
   loadingProps?: ButtonLoadingProps
 }
 
-export const {
+const {
   component,
   PropsContext: ButtonPropsContext,
   usePropsContext: useButtonPropsContext,
   withContext,
 } = createComponent<ButtonProps, ButtonStyle>("button", buttonStyle)
+
+export { ButtonPropsContext, useButtonPropsContext }
 
 /**
  * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.
@@ -203,7 +207,7 @@ const ButtonContent = component(
       </>
     )
   },
-  { name: "button__content" },
+  { name: "ButtonContent", className: getClassName(bem("button", "content")) },
 )()
 
 interface ButtonLoadingProps extends HTMLStyledProps<"svg"> {}
@@ -240,15 +244,17 @@ const ButtonLoading = component<"svg", ButtonLoadingProps>(
 
     return null
   },
-  { name: "button__loading" },
+  { name: "ButtonLoading", className: getClassName(bem("button", "loading")) },
 )()
 
 const ButtonStartLoading = component<"svg", ButtonLoadingProps>(ButtonLoading, {
-  name: "button__loading--start",
+  name: "ButtonStartLoading",
+  className: getClassName(bem("button", "loading", "start")),
 })()
 
 const ButtonEndLoading = component<"svg", ButtonLoadingProps>(ButtonLoading, {
-  name: "button__loading--end",
+  name: "ButtonEndLoading",
+  className: getClassName(bem("button", "loading", "end")),
 })()
 
 interface ButtonIconProps extends HTMLStyledProps<"svg"> {}
@@ -265,13 +271,15 @@ const ButtonIcon = component<"svg", ButtonIconProps>(
 
     return Children.count(children) > 1 ? Children.only(null) : null
   },
-  { name: "button__icon" },
+  { name: "ButtonIcon", className: getClassName(bem("button", "icon")) },
 )()
 
 const ButtonStartIcon = component<"svg", ButtonIconProps>(ButtonIcon, {
-  name: "button__icon--start",
+  name: "ButtonStartIcon",
+  className: getClassName(bem("button", "icon", "start")),
 })()
 
 const ButtonEndIcon = component<"svg", ButtonIconProps>(ButtonIcon, {
-  name: "button__icon--end",
+  name: "ButtonEndIcon",
+  className: getClassName(bem("button", "icon", "end")),
 })()

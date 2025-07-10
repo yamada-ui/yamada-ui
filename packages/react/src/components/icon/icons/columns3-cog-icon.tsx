@@ -1,3 +1,5 @@
+"use client"
+
 import { Columns3Cog } from "lucide-react"
 import { component, Icon } from "../icon"
 

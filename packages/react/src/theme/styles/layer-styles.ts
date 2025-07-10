@@ -14,6 +14,7 @@ export const layerStyles = defineStyles.layerStyle({
   },
   ghost: {
     bg: "transparent",
+    border: "1px solid transparent",
     color: "colorScheme.outline",
   },
   "ghost.hover": {
@@ -43,6 +44,7 @@ export const layerStyles = defineStyles.layerStyle({
   },
   solid: {
     bg: "colorScheme.solid",
+    border: "1px solid transparent",
     color: "colorScheme.contrast",
   },
   "solid.hover": {
@@ -50,6 +52,7 @@ export const layerStyles = defineStyles.layerStyle({
   },
   subtle: {
     bg: "colorScheme.subtle",
+    border: "1px solid transparent",
     color: "colorScheme.fg",
   },
   "subtle.hover": {

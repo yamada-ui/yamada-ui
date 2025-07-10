@@ -1,3 +1,5 @@
+"use client"
+
 import type { MouseEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
@@ -26,7 +28,7 @@ export interface UsePasswordInputProps extends HTMLProps<"input">, FieldProps {
   onVisibleChange?: (visible: boolean) => void
 }
 
-export const usePasswordInput = (props: UsePasswordInputProps) => {
+export const usePasswordInput = (props: UsePasswordInputProps = {}) => {
   const {
     props: {
       defaultVisible,
@@ -63,10 +65,11 @@ export const usePasswordInput = (props: UsePasswordInputProps) => {
       disabled,
       ...ariaProps,
       ...dataProps,
-      ...eventProps,
       ...rest,
       ...props,
       ref: mergeRefs(ref, rest.ref),
+      onBlur: handlerAll(eventProps.onBlur, props.onBlur),
+      onFocus: handlerAll(eventProps.onFocus, props.onFocus),
     }),
     [visible, rest, disabled, dataProps, eventProps, ariaProps],
   )

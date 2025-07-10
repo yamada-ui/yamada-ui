@@ -1,3 +1,5 @@
+"use client"
+
 import { AlignStartVertical } from "lucide-react"
 import { component, Icon } from "../icon"
 

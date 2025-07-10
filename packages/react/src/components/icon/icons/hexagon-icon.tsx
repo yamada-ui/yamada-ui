@@ -1,3 +1,5 @@
+"use client"
+
 import { Hexagon } from "lucide-react"
 import { component, Icon } from "../icon"
 

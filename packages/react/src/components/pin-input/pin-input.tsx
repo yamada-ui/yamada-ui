@@ -1,3 +1,5 @@
+"use client"
+
 import type {
   RequiredPropGetter,
   ThemeProps,
@@ -20,7 +22,7 @@ import {
   usePinInputDescendant,
 } from "./use-pin-input"
 
-interface PinInputContext extends UseInputBorderProps {
+interface ComponentContext extends UseInputBorderProps {
   getInputProps: RequiredPropGetter<"input", { index: number }>
 }
 
@@ -40,17 +42,19 @@ export interface PinInputRootProps
   items?: number
 }
 
-export const {
-  ComponentContext: PinInputComponentContext,
+const {
+  ComponentContext,
   PropsContext: PinInputPropsContext,
-  useComponentContext: usePinInputComponentContext,
+  useComponentContext,
   usePropsContext: usePinInputPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<PinInputRootProps, PinInputStyle, PinInputContext>(
+} = createSlotComponent<PinInputRootProps, PinInputStyle, ComponentContext>(
   "pin-input",
   pinInputStyle,
 )
+
+export { PinInputPropsContext, usePinInputPropsContext }
 
 /**
  * `PinInput` is a component used to capture pin codes or OTP (One-Time Password) inputs.
@@ -78,9 +82,9 @@ export const PinInputRoot = withProvider<"div", PinInputRootProps>(
 
     return (
       <PinInputDescendantsContext value={descendants}>
-        <PinInputComponentContext value={context}>
+        <ComponentContext value={context}>
           <Group {...getRootProps()}>{cloneChildren}</Group>
-        </PinInputComponentContext>
+        </ComponentContext>
       </PinInputDescendantsContext>
     )
   },
@@ -94,7 +98,7 @@ export const PinInputField = withContext<"input", PinInputFieldProps>(
   "field",
 )(undefined, ({ ref, ...rest }) => {
   const { errorBorderColor, focusBorderColor, getInputProps } =
-    usePinInputComponentContext()
+    useComponentContext()
   const { index, register } = usePinInputDescendant()
   const { props, ariaProps, dataProps, eventProps } = useFieldProps(rest)
 

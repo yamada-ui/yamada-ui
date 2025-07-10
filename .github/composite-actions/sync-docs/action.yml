@@ -11,22 +11,22 @@ runs:
     - name: Sync docs
       run: |
         pnpm gen:docs
-        pnpm docs:theme
-        pnpm docs:props
-        pnpm docs:changelog
-        pnpm docs:styled-system
-        pnpm docs:contributors
-        pnpm docs:search
-        pnpm docs:icon-tags
+        pnpm www:theme
+        pnpm www:props
+        pnpm www:changelog
+        pnpm www:styled-system
+        pnpm www:contributors
+        pnpm www:search
+        pnpm www:icon-tags
       shell: bash
 
     - name: Create PR
       uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ env.GITHUB_TOKEN }}
-        base: documentation
+        base: v1
         commit-message: "ci(changesets): sync documentation"
         title: "Sync documentation"
-        branch: changeset-release/docs
+        branch: v1/www
         assignees: "hirotomoyamada"
         reviewers: "hirotomoyamada"

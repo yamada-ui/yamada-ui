@@ -3,9 +3,7 @@ name: Quality
 on:
   pull_request:
     branches:
-      - main
-      - documentation
-      - v*
+      - v1
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -38,9 +36,9 @@ jobs:
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
-      - name: Fetch main branch
+      - name: Fetch v1 branch
         if: steps.check-modified.outputs.changed == 'true'
-        run: git fetch origin main:main
+        run: git fetch origin v1:v1
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true'
@@ -49,7 +47,7 @@ jobs:
       - name: Build packages
         if: steps.check-modified.outputs.changed == 'true'
         run: |
-          COMMIT=$(git merge-base HEAD main)
+          COMMIT=$(git merge-base HEAD v1)
           pnpm build:depend --commit=$COMMIT
 
   test:
@@ -143,7 +141,7 @@ jobs:
         id: check-docs-modified
         uses: ./.github/composite-actions/check-modified-files
         with:
-          file_patterns: "docs/"
+          file_patterns: "www/"
 
       - name: Install
         if: steps.check-modified.outputs.changed == 'true' || steps.check-docs-modified.outputs.changed == 'true'
@@ -155,4 +153,4 @@ jobs:
 
       - name: Run docs format
         if: steps.check-docs-modified.outputs.changed == 'true'
-        run: pnpm docs:format:check
+        run: pnpm www:format:check

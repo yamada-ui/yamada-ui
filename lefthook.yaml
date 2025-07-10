@@ -20,13 +20,13 @@ eslint:
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
       exclude:
         - examples/**
-        - docs/**
+        - www/**
       run: |
         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
       stage_fixed: true
 
-    docs:
-      root: docs/
+    www:
+      root: www/
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
       run: |
         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config

@@ -3,14 +3,12 @@ name: Release
 on:
   push:
     paths:
-      - ".storybook/**"
       - ".changeset/**"
       - "packages/**"
       - "!packages/**/tests/**"
       - "!packages/**/scripts/**"
-      - "stories/**"
     branches:
-      - main
+      - v1
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -65,7 +63,7 @@ jobs:
       - name: Create @dev release
         if: steps.changesets.outputs.published != 'true'
         run: |
-          git checkout main
+          git checkout v1
           pnpm version:dev
           pnpm release:dev
         env:
@@ -85,58 +83,6 @@ jobs:
           pnpm notification:release
         env:
           DISCORD_RELEASE_WEBHOOK_URL: ${{ secrets.DISCORD_RELEASE_WEBHOOK_URL }}
-
-      - name: Build Storybook
-        if: steps.stories.outputs.changed == 'true' || steps.changesets.outputs.published == 'true'
-        run: pnpm build:storybook
-
-      - name: Update Storybook
-        if: steps.stories.outputs.changed == 'true' || steps.changesets.outputs.published == 'true'
-        uses: JamesIves/github-pages-deploy-action@v4.5.0
-        with:
-          branch: gh-pages
-          folder: storybook-static
-          clean: true
-          clean-exclude: .nojekyll
-
-      - name: Sync Colors
-        if: steps.changesets.outputs.published == 'true'
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.PAT_TOKEN }}
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: 'yamada-ui',
-              repo: 'yamada-colors',
-              workflow_id: 'sync.yml',
-              ref: 'main'
-            })
-
-      - name: Sync Components
-        if: steps.changesets.outputs.published == 'true'
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.PAT_TOKEN }}
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: 'yamada-ui',
-              repo: 'yamada-components',
-              workflow_id: 'sync.yml',
-              ref: 'main'
-            })
-
-      - name: Sync Theme
-        if: steps.changesets.outputs.published == 'true'
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.PAT_TOKEN }}
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: 'yamada-ui',
-              repo: 'yamada-theme',
-              workflow_id: 'sync.yml',
-              ref: 'main'
-            })
 
       - name: Sync Docs
         if: steps.changesets.outputs.published == 'true'

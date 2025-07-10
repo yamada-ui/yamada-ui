@@ -1,9 +1,11 @@
 import { toPascalCase } from "@yamada-ui/utils"
 import { execa } from "execa"
-import { readdir, readFile, writeFile } from "fs/promises"
+import { readdir, readFile } from "fs/promises"
+import ora from "ora"
 import path from "path"
+import c from "picocolors"
 import { rimraf } from "rimraf"
-import { prettier } from "@/libs/prettier"
+import { writeFileWithFormat } from "@/libs/prettier"
 
 const REPOSITORY_PATH = path.resolve(".lucide")
 const DIST_PATH = path.resolve("data", "icons.json")
@@ -20,7 +22,17 @@ async function getKeywords(fileName: string): Promise<string[]> {
 }
 
 async function main() {
+  const spinner = ora()
+
+  const start = process.hrtime.bigint()
+
+  spinner.start(`Clearing .lucide`)
+
   await rimraf(REPOSITORY_PATH)
+
+  spinner.succeed(`Cleared .lucide`)
+
+  spinner.start(`Cloning .lucide`)
 
   await execa("git", [
     "clone",
@@ -28,9 +40,17 @@ async function main() {
     REPOSITORY_PATH,
   ])
 
+  spinner.succeed(`Cloned .lucide`)
+
+  spinner.start(`Getting icons`)
+
   const fileNames = await readdir(path.resolve(REPOSITORY_PATH, "icons"))
 
+  spinner.succeed(`Got icons`)
+
   const data: { [key: string]: string[] } = {}
+
+  spinner.start(`Getting keywords`)
 
   await Promise.all(
     fileNames.map(async (fileName) => {
@@ -42,13 +62,24 @@ async function main() {
     }),
   )
 
-  const content = await prettier(JSON.stringify(data, null, 2), {
-    parser: "json",
-  })
+  spinner.succeed(`Got keywords`)
 
-  await writeFile(DIST_PATH, content)
+  spinner.start(`Writing data`)
+
+  await writeFileWithFormat(DIST_PATH, data)
+
+  spinner.succeed(`Wrote data`)
+
+  spinner.start(`Clearing .lucide`)
 
   await rimraf(REPOSITORY_PATH)
+
+  spinner.succeed(`Cleared .lucide`)
+
+  const end = process.hrtime.bigint()
+  const duration = (Number(end - start) / 1e9).toFixed(2)
+
+  console.log("\n", c.green(`Done in ${duration}s`))
 }
 
 main()

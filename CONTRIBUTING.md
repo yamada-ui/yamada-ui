@@ -41,15 +41,14 @@ To improve our development process, we have set up tools and systems. Yamada UI 
 ### Commands
 
 - **`pnpm install`**: bootstraps the entire project, symlinks all dependencies for cross-component development.
-- **`pnpm storybook`**: starts storybook server and loads stories.
+- **`pnpm clean`**: clean build and test cache.
+- **`pnpm react storybook`**: starts storybook server.
+- **`pnpm www dev`**: starts documentation site server.
 - **`pnpm build`**: run build for all component packages.
+- **`pnpm format`**: run format for all component packages.
+- **`pnpm lint`**: run lint for all component packages.
+- **`pnpm typecheck`**: run typecheck for all component packages.
 - **`pnpm test`**: run test for all component packages.
-- **`pnpm gen:component`**: create a component package from a template using [Plop](https://plopjs.com/).
-  - Please enter package and component names in kebab case
-  - If the provider is true, it sets up a provider that provides styles used in `children`.
-- **`pnpm gen:hook`**: create a hook package from a template using [Plop](https://plopjs.com/).
-  - Please enter package and custom hook names in kebab case
-- **`pnpm gen:tokens`**: generate theme tokens.
 
 ### Visual Studio Code
 
@@ -118,23 +117,13 @@ the following types:
    will be used to generate a changelog when we publish an update.
    [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).
 
-5. Also, if you provide `jsx` snippets to the changeset, please turn off the
-   live preview by doing the following at the beginning of the snippet:
-   ` ```jsx live=false`
-
 > If you made minor changes like CI config, prettier, etc, you can run
 > `pnpm changeset add --empty` to generate an empty changeset file to document
 > your changes.
 
-6. Next, commit your changes following the
-   [commit convention](#commit-convention).
-   - `Confirming changes`: Run the `pnpm storybook` command to launch Storybook. The source for Storybook is in `./stories`.
-   - `Creating a new component`: When you run the pnpm `gen:component` command, a component is created from a template and dependencies are installed.
-   - `Adding functionality to an existing component`: After adding, please add a story for the target component so that the functionality can be understood.
-   - `Creating a new hook`: When you run the `pnpm gen:hook` command, a hook is created from a template and dependencies are installed.
-   - `Adding functionality to an existing hook`: After adding, please add a story for the target hook so that the functionality can be understood.
+5. Next, commit your changes following the [commit convention](#commit-convention).
 
-7. Once you have completed all of the above tasks, please push your changes.
+6. Once you have completed all of the above tasks, please push your changes.
    After pushing, a URL for the pull request will be generated. Follow the template and submit your request accordingly.
    Additionally, check the Checks within the pull request and ensure that the Quality check has successfully completed.
    If there are any issues, this pull request will not be merged.

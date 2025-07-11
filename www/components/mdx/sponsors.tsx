@@ -1,5 +1,5 @@
 import type { FlexProps } from "@yamada-ui/react"
-import { Image, Wrap } from "@yamada-ui/react"
+import { Box, Image, Wrap } from "@yamada-ui/react"
 import NextLink from "next/link"
 import sponsors from "@/data/sponsors.json"
 
@@ -13,7 +13,7 @@ export function Sponsors({ type, ...rest }: SponsorsProps) {
   return (
     <Wrap gap="6" minH="12" {...rest}>
       {items.map(({ href, src, alt, ...rest }, index) => (
-        <NextLink key={index} href={href} target="_blank">
+        <Box key={index} as={NextLink} href={href} target="_blank" rounded="l2">
           <Image
             src={src}
             alt={alt}
@@ -21,7 +21,7 @@ export function Sponsors({ type, ...rest }: SponsorsProps) {
             maxW="full"
             {...rest}
           />
-        </NextLink>
+        </Box>
       ))}
     </Wrap>
   )

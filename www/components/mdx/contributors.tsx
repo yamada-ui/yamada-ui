@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   GithubIcon,
   Grid,
   HStack,
@@ -27,13 +28,19 @@ export function Contributors({ type, ...rest }: ContributorsProps) {
     return (
       <Wrap gap="sm" my="lg">
         {contributors.map(({ id, avatar_url, html_url, login }) => (
-          <NextLink key={id} href={html_url} target="_blank">
+          <Box
+            key={id}
+            as={NextLink}
+            href={html_url}
+            target="_blank"
+            rounded="full"
+          >
             <Avatar
               name={login}
               src={avatar_url}
               aria-label={t("common.github", { name: login })}
             />
-          </NextLink>
+          </Box>
         ))}
       </Wrap>
     )
@@ -55,7 +62,12 @@ export function Contributors({ type, ...rest }: ContributorsProps) {
               <Text fontWeight="semibold">{name[lang]}</Text>
 
               <HStack fontSize="sm" gap="xs">
-                <NextLink href={github.url} target="_blank">
+                <Box
+                  as={NextLink}
+                  href={github.url}
+                  target="_blank"
+                  rounded="l1"
+                >
                   <GithubIcon
                     aria-label={t("common.github", { name: name[lang] })}
                     color={{ base: "fg.muted", _hover: "fg" }}
@@ -63,10 +75,10 @@ export function Contributors({ type, ...rest }: ContributorsProps) {
                     transitionDuration="moderate"
                     transitionProperty="colors"
                   />
-                </NextLink>
+                </Box>
 
                 {x ? (
-                  <NextLink href={x.url} target="_blank">
+                  <Box as={NextLink} href={x.url} target="_blank" rounded="l1">
                     <XIcon
                       aria-label={t("common.x", { name: name[lang] })}
                       color={{ base: "fg.muted", _hover: "fg" }}
@@ -74,7 +86,7 @@ export function Contributors({ type, ...rest }: ContributorsProps) {
                       transitionDuration="moderate"
                       transitionProperty="colors"
                     />
-                  </NextLink>
+                  </Box>
                 ) : null}
               </HStack>
 

@@ -139,7 +139,7 @@ function transformConditionalObject(breakpoints: Breakpoints) {
       {},
     )
 
-    return { ...breakpointObj, ...additionalObj }
+    return merge(breakpointObj, additionalObj)
   }
 }
 

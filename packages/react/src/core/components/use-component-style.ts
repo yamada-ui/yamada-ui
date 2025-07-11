@@ -151,7 +151,7 @@ function getConditionStyle<Y extends boolean = false>(
       return prev
     }, {})
 
-    return { ...breakpointObj, ...additionalObj }
+    return merge(breakpointObj, additionalObj)
   }
 }
 

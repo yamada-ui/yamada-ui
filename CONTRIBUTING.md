@@ -44,11 +44,11 @@ To improve our development process, we have set up tools and systems. Yamada UI 
 - **`pnpm clean`**: clean build and test cache.
 - **`pnpm react storybook`**: starts storybook server.
 - **`pnpm www dev`**: starts documentation site server.
-- **`pnpm build`**: run build for all component packages.
-- **`pnpm format`**: run format for all component packages.
-- **`pnpm lint`**: run lint for all component packages.
-- **`pnpm typecheck`**: run typecheck for all component packages.
-- **`pnpm test`**: run test for all component packages.
+- **`pnpm build`**: run build for all packages.
+- **`pnpm format`**: run format for all packages.
+- **`pnpm lint`**: run lint for all packages.
+- **`pnpm typecheck`**: run typecheck for all packages.
+- **`pnpm test`**: run test for all packages.
 
 ### Visual Studio Code
 

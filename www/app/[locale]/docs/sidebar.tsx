@@ -4,7 +4,7 @@ import type { NextLinkButtonProps } from "@/components"
 import { Box, handlerAll, Text } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
-import { NextLinkButton } from "@/components"
+import { NextLinkButton, Status } from "@/components"
 import { getDocMap } from "@/data"
 import { useLocale, usePathname } from "@/i18n"
 
@@ -44,7 +44,7 @@ export function Sidebar() {
       top="{header-height}"
     >
       <Box as="nav" _lastChild={{ mb: "0" }}>
-        {items.map(({ items, pathname: href, segment, title }) => {
+        {items.map(({ items, pathname: href, segment, status, title }) => {
           if (items) {
             return (
               <Box key={segment} my="lg" _lastChild={{ mb: "0" }}>
@@ -59,10 +59,13 @@ export function Sidebar() {
                   {title}
                 </Text>
 
-                {items.map(({ pathname: href, segment, title }) => {
+                {items.map(({ pathname: href, segment, status, title }) => {
                   return (
                     <SidebarItem key={href} href={href!} segment={segment}>
-                      {title}
+                      <Text as="span" lineClamp={1}>
+                        {title}
+                      </Text>
+                      {status ? <Status status={status} /> : null}
                     </SidebarItem>
                   )
                 })}
@@ -71,7 +74,10 @@ export function Sidebar() {
           } else {
             return (
               <SidebarItem key={segment} href={href!} segment={segment}>
-                {title}
+                <Text as="span" lineClamp={1}>
+                  {title}
+                </Text>
+                {status ? <Status status={status} /> : null}
               </SidebarItem>
             )
           }
@@ -98,9 +104,9 @@ function SidebarItem({ href, segment, onClick, ...rest }: SidebarItemProps) {
       size="sm"
       variant={{ base: "ghost", _current: "subtle" }}
       aria-current={current ? "page" : undefined}
+      display="flex"
       fontWeight="normal"
       justifyContent="flex-start"
-      lineClamp={1}
       mb="xs"
       onClick={handlerAll(onClick, () =>
         window.scrollTo({ behavior: "instant", top: 0 }),

@@ -45,7 +45,9 @@ const docs = defineCollection({
       release_date: s.string().optional(),
       release_url: s.string().optional(),
       source: s.string().optional(),
-      status: s.enum(["planned", "new", "experimental"]).optional(),
+      status: s
+        .enum(["planned", "new", "experimental", "stable", "deprecated"])
+        .optional(),
       storybook: s.string().optional(),
       title: s.string(),
       toc: s.toc(),

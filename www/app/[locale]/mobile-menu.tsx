@@ -19,7 +19,12 @@ import {
 } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
-import { DiscordIcon, NextLinkButton, NextLinkIconButton } from "@/components"
+import {
+  DiscordIcon,
+  NextLinkButton,
+  NextLinkIconButton,
+  Status,
+} from "@/components"
 import { CONSTANTS } from "@/constants"
 import { getDocMap } from "@/data"
 import { useLocale, usePathname } from "@/i18n"
@@ -180,48 +185,56 @@ function DocsMenu({ onClose }: DocsMenuProps) {
       <Separator />
 
       <Box as="nav" _lastChild={{ mb: "0" }}>
-        {secondaryItems.map(({ items, pathname: href, segment, title }) => {
-          if (items) {
-            return (
-              <Box key={segment} my="lg" _lastChild={{ mb: "0" }}>
-                <Text
-                  as="span"
-                  color="fg.muted"
-                  fontSize="sm"
-                  lineClamp={1}
-                  mb="2"
-                  ms="3"
-                >
-                  {title}
-                </Text>
+        {secondaryItems.map(
+          ({ items, pathname: href, segment, status, title }) => {
+            if (items) {
+              return (
+                <Box key={segment} my="lg" _lastChild={{ mb: "0" }}>
+                  <Text
+                    as="span"
+                    color="fg.muted"
+                    fontSize="sm"
+                    lineClamp={1}
+                    mb="2"
+                    ms="3"
+                  >
+                    {title}
+                  </Text>
 
-                {items.map(({ pathname: href, segment, title }) => {
-                  return (
-                    <DocsMenuItem
-                      key={href}
-                      href={href!}
-                      segment={segment}
-                      onClose={onClose}
-                    >
-                      {title}
-                    </DocsMenuItem>
-                  )
-                })}
-              </Box>
-            )
-          } else {
-            return (
-              <DocsMenuItem
-                key={segment}
-                href={href!}
-                segment={segment}
-                onClose={onClose}
-              >
-                {title}
-              </DocsMenuItem>
-            )
-          }
-        })}
+                  {items.map(({ pathname: href, segment, status, title }) => {
+                    return (
+                      <DocsMenuItem
+                        key={href}
+                        href={href!}
+                        segment={segment}
+                        onClose={onClose}
+                      >
+                        <Text as="span" lineClamp={1}>
+                          {title}
+                        </Text>
+                        {status ? <Status status={status} /> : null}
+                      </DocsMenuItem>
+                    )
+                  })}
+                </Box>
+              )
+            } else {
+              return (
+                <DocsMenuItem
+                  key={segment}
+                  href={href!}
+                  segment={segment}
+                  onClose={onClose}
+                >
+                  <Text as="span" lineClamp={1}>
+                    {title}
+                  </Text>
+                  {status ? <Status status={status} /> : null}
+                </DocsMenuItem>
+              )
+            }
+          },
+        )}
       </Box>
     </VStack>
   )
@@ -234,7 +247,6 @@ interface DocsMenuItemProps extends NextLinkButtonProps {
 
 function DocsMenuItem({
   href,
-  children,
   segment,
   onClick,
   onClose,
@@ -252,7 +264,8 @@ function DocsMenuItem({
       size="sm"
       variant={{ base: "ghost", _current: "solid" }}
       aria-current={current ? "page" : undefined}
-      display="block"
+      data-group
+      display="flex"
       fontWeight="normal"
       justifyContent="flex-start"
       mb="xs"
@@ -262,10 +275,6 @@ function DocsMenuItem({
         window.scrollTo({ behavior: "instant", top: 0 })
       })}
       {...rest}
-    >
-      <Text as="span" truncated>
-        {children}
-      </Text>
-    </NextLinkButton>
+    />
   )
 }

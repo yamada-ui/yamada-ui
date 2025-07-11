@@ -151,6 +151,16 @@ export const trackFocusVisible = (
   }
 }
 
+export const __test__ = {
+  getHasBlurredWindowRecently: () => hasBlurredWindowRecently,
+  getHasEventBeforeFocus: () => hasEventBeforeFocus,
+  resetState: () => {
+    hasEventBeforeFocus = false
+    hasBlurredWindowRecently = false
+    modality = null
+  },
+}
+
 export const useFocusVisible = (options?: TrackFocusVisibleOptions) => {
   const [focusVisible, setFocusVisible] = useState(false)
   const [focus, setFocus] = useState(false)

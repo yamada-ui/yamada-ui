@@ -2,6 +2,7 @@
 
 import type { EventMap, EventType } from "../../utils"
 import { useCallback, useEffect, useRef } from "react"
+import { useEnvironment } from "../../core"
 import { isFunction, useCallbackRef } from "../../utils"
 
 export const useEventListener = <Y extends EventType>(
@@ -10,10 +11,11 @@ export const useEventListener = <Y extends EventType>(
   handler: (ev: EventMap[Y]) => void,
   options?: AddEventListenerOptions | boolean,
 ) => {
+  const { getDocument } = useEnvironment()
   const listener = useCallbackRef(handler)
 
   useEffect(() => {
-    const el = isFunction(target) ? target() : (target ?? document)
+    const el = isFunction(target) ? target() : (target ?? getDocument())
 
     if (!el) return
 
@@ -30,7 +32,7 @@ export const useEventListener = <Y extends EventType>(
         options,
       )
     }
-  }, [ev, target, options, listener, handler])
+  }, [ev, target, options, listener, handler, getDocument])
 
   return () => {
     const el = isFunction(target) ? target() : (target ?? document)

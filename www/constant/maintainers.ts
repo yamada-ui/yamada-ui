@@ -1,0 +1,141 @@
+export const MAINTAINERS = [
+  {
+    name: { en: "Hirotomo Yamada", ja: "Hirotomo Yamada" },
+    description: {
+      en: "Developer of Yamada UI. Designer, design system and UI engineer.",
+      ja: "Yamada UIの開発者。デザイナー・デザインシステムおよびUIエンジニア。",
+    },
+    discord: { id: "434987704162451467" },
+    github: {
+      id: "hirotomoyamada",
+      icon: "https://avatars.githubusercontent.com/u/84060430?v=4",
+      url: "https://github.com/hirotomoyamada",
+    },
+    x: { url: "https://x.com/hirotomoyamada" },
+  },
+  {
+    name: { en: "Kazuki Shirai", ja: "Kazuki Shirai" },
+    description: {
+      en: "Security risk assessment, Web engineer.",
+      ja: "セキュリティリスクアセスメント。Webエンジニア。",
+    },
+    discord: { id: "281653488084189184" },
+    github: {
+      id: "108yen",
+      icon: "https://avatars.githubusercontent.com/u/9676316?v=4",
+      url: "https://github.com/108yen",
+    },
+    x: { url: "https://x.com/108yen___" },
+  },
+  {
+    name: { en: "koralle", ja: "koralle" },
+    description: {
+      en: "Front-end engineer, likes React and Neovim.",
+      ja: "ReactとNeovimが好きなフロントエンドエンジニア。",
+    },
+    discord: { id: "702799711404425246" },
+    github: {
+      id: "koralle",
+      icon: "https://avatars.githubusercontent.com/u/33865215?v=4",
+      url: "https://github.com/koralle",
+    },
+    x: { url: "https://x.com/koralle_tech" },
+  },
+  {
+    name: { en: "Yuto Ichinose", ja: "Ichinose Yuto" },
+    description: {
+      en: "Web engineer, a university student.",
+      ja: "Webエンジニア。大学生。",
+    },
+    discord: { id: "1000629510078738432" },
+    github: {
+      id: "illionillion",
+      icon: "https://avatars.githubusercontent.com/u/60034520?v=4",
+      url: "https://github.com/illionillion",
+    },
+    x: { url: "https://x.com/dimyasvariant" },
+  },
+  {
+    name: { en: "Kae Okamura", ja: "Okamura Kae" },
+    description: {
+      en: "Japanese front-end engineer in South Korea.",
+      ja: "韓国でフロントエンジニアとして活動している日本人です。",
+    },
+    discord: { id: "857882104339628063" },
+    github: {
+      id: "kaehehehe",
+      icon: "https://avatars.githubusercontent.com/u/77221488?v=4",
+      url: "https://github.com/kaehehehe",
+    },
+  },
+  {
+    name: { en: "Shintaro Jokagi", ja: "Shintaro Jokagi" },
+    description: {
+      en: "Developer from New Zealand and a university student.",
+      ja: "ニュージーランドのエンジニア。大学生。",
+    },
+    discord: { id: "631578250144907269" },
+    github: {
+      id: "taroj1205",
+      icon: "https://avatars.githubusercontent.com/u/61367823?v=4",
+      url: "https://github.com/taroj1205",
+    },
+    x: { url: "https://x.com/taroj1205" },
+  },
+  {
+    name: { en: "Takaaki Chida", ja: "Takaaki Chida" },
+    description: {
+      en: "Front-end engineer, developing web applications.",
+      ja: "フロントエンドエンジニア。Webアプリケーションの開発を行っています。",
+    },
+    discord: { id: "841466932187234354" },
+    github: {
+      id: "chida09",
+      icon: "https://avatars.githubusercontent.com/u/49680717?v=4",
+      url: "https://github.com/chida09",
+    },
+    x: { url: "https://x.com/_c0909" },
+  },
+  {
+    name: { en: "Yoko Odenda", ja: "Yoko Odenda" },
+    description: {
+      en: "Former pharmacist turned front-end engineer.",
+      ja: "元薬剤師のフロントエンドエンジニア。",
+    },
+    discord: { id: "413329189635227650" },
+    github: {
+      id: "odendayoko",
+      icon: "https://avatars.githubusercontent.com/u/128268777?v=4",
+      url: "https://github.com/odendayoko",
+    },
+    x: { url: "https://x.com/odendayoko" },
+  },
+  {
+    name: { en: "Kurakake Kaito", ja: "Kurakake Kaito" },
+    description: {
+      en: "A student engineer who enjoys front-end and back-end development.",
+      ja: "フロントエンドとバックエンドを楽しむ学生エンジニア。",
+    },
+    discord: { id: "1009394043974856704" },
+    github: {
+      id: "kurakke",
+      icon: "https://avatars.githubusercontent.com/u/84614038?v=4",
+      url: "https://github.com/kurakke",
+    },
+    x: { url: "https://x.com/kurakke" },
+  },
+  {
+    name: { en: "jougen", ja: "じょうげん" },
+    description: {
+      en: "Web engineer. Focused on code readability.",
+      ja: "Webエンジニア。コードの可読性にこだわりあり。",
+    },
+    discord: { id: "217631628380340227" },
+    github: {
+      id: "bmthd",
+      icon: "https://avatars.githubusercontent.com/u/81406938?v=4",
+      url: "https://github.com/bmthd",
+    },
+    x: { url: "https://x.com/j_ktwr" },
+  },
+]

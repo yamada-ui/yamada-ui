@@ -1,0 +1,130 @@
+{
+  "home": {
+    "title": "Yamada UI - A UI component library unleashing the power of styling, animation, and flexibility in React applications.",
+    "description": "A UI component library unleashing the power of styling, animation, and flexibility in React applications.",
+    "hero": {
+      "heading": [
+        "`Unleash the Power` of",
+        "Styling, Animation, and Flexibility",
+        "in React Apps"
+      ],
+      "message": "Yamada UI is a versatile React component library, unleashing the power of your application's animation and flexibility. It provides an intuitive and efficient way to integrate advanced styling into your application, bringing your ideas to life.",
+      "started": "Get Started",
+      "examples": "Examples"
+    },
+    "support": {
+      "title": "Support Yamada UI",
+      "description": "Our maintainers dedicate their time, effort, and heart to ensure Yamada UI continues to improve. Please support us by donating to our team.",
+      "open-collective": "Sponsor the Yamada UI maintainers",
+      "patreon": "Sponsor the creator, Hirotomo Yamada",
+      "platinum-sponsors": "Platinum Sponsors",
+      "gold-sponsors": "Gold Sponsors"
+    }
+  },
+  "examples": {
+    "title": "Examples",
+    "description": "Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your own.",
+    "hero": {
+      "heading": "`Check out some `examples",
+      "message": "Dashboard, cards, authentication. Some examples built using the components. Use this as a guide to build your own.",
+      "started": "Get Started",
+      "components": "Components"
+    },
+    "author": {
+      "description": "Created by"
+    },
+    "mail": {
+      "title": "Mail"
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "cards": {
+      "title": "Cards"
+    },
+    "tasks": {
+      "title": "Tasks"
+    },
+    "playground": {
+      "title": "Playground"
+    },
+    "forms": {
+      "title": "Forms"
+    },
+    "music": {
+      "title": "Music"
+    },
+    "authentication": {
+      "title": "Authentication"
+    }
+  },
+  "icons": {
+    "title": "Icons",
+    "description": "Beautiful & consistent icon toolkit made by the Lucide community.",
+    "placeholder": "Search {label} icons",
+    "not-found": "Icon not found.",
+    "reset": "Clear your search and try again"
+  },
+  "not-found": {
+    "title": "404: Not found",
+    "description": "Page not found",
+    "heading": "404 | Page Not Found",
+    "message": "You just hit a route that doesn't exist... the sadness.😢",
+    "back-to-home": "Back to Home"
+  },
+  "component": {
+    "tree": {
+      "yamada-colors": "Colors generator",
+      "examples": "Examples",
+      "icons": "Icons"
+    },
+    "feedback": {
+      "ad-banner": {
+        "message": "Leave Yamada UI a star",
+        "button": "Star"
+      }
+    },
+    "forms": {
+      "search": {
+        "message": "Search the docs",
+        "placeholder": "Search the docs"
+      }
+    },
+    "pagination": { "prev": "Previous", "next": "Next" },
+    "table-of-contents": {
+      "title": "On this page"
+    },
+    "edit-page": {
+      "label": "Edit this page on GitHub"
+    },
+    "editable-code-block": {
+      "label": "Editable example",
+      "control-button": {
+        "open": "Show more",
+        "close": "Show less"
+      }
+    },
+    "doc-links": {
+      "source": "Source"
+    },
+    "select-package-managers": {
+      "name": "Package",
+      "description": "Description"
+    },
+    "color-mode-button": {
+      "light": "Toggle Dark",
+      "dark": "Toggle Light"
+    },
+    "props-card": {
+      "required": "Required",
+      "deprecated": "Deprecated",
+      "description": "Description",
+      "type": "Type",
+      "default": "Default",
+      "docs": "Docs"
+    },
+    "footer": {
+      "description": "Built by `Hirotomo Yamada` and `these awesome people`"
+    }
+  }
+}

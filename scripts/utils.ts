@@ -1,21 +1,10 @@
 import type { Options } from "prettier"
 import { RequestError } from "@octokit/request-error"
-import { Octokit } from "@octokit/rest"
-import { isArray, toCamelCase } from "@yamada-ui/react"
 import { config } from "dotenv"
 import path from "path"
 import { format, resolveConfig } from "prettier"
 
-const COMMON_PARAMS = {
-  ref: "main",
-  owner: "yamada-ui",
-  path: "",
-  repo: "yamada-data",
-}
-
 config()
-
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 export const prettier = async (content: string, options?: Options) => {
   const prettierConfig = await resolveConfig(
@@ -68,40 +57,4 @@ export const recursiveOctokit = async <T = void>(
       throw e
     }
   }
-}
-
-export interface Constant {
-  [key: string]: any
-}
-
-export const getConstant = async (): Promise<Constant> => {
-  const result: Constant = {}
-
-  const { data } = await octokit.repos.getContent(COMMON_PARAMS)
-
-  if (isArray(data)) {
-    await Promise.all(
-      data.map(async ({ name, path }) => {
-        try {
-          const { data } = await octokit.repos.getContent({
-            ...COMMON_PARAMS,
-            path,
-          })
-
-          if ("content" in data) {
-            const content = Buffer.from(data.content, "base64").toString(
-              "utf-8",
-            )
-
-            name = name.replace(".json", "")
-            name = toCamelCase(name)
-
-            if (content) result[name] = JSON.parse(content)
-          }
-        } catch {}
-      }),
-    )
-  }
-
-  return result
 }

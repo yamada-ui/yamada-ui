@@ -38,7 +38,7 @@ const ignoresConfig: Linter.Config = {
     "**/build/**",
     "**/bin/**",
     "**/pnpm-lock.yaml",
-    "docs/**",
+    "www/**",
     "examples/**",
     "coverage/**",
     "storybook-static/**",

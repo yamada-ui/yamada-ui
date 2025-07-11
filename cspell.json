@@ -192,13 +192,12 @@
     "dist",
     "pnpm-lock.yaml",
     "packages/components/lucide/src/icons/**",
-    "docs/pages/icons/tags.ts",
-    "docs/constant/maintainers.ts",
-    "docs/constant/members.ts",
-    "docs/constant/contributors.ts",
-    "docs/contents/changelog/**",
-    "docs/contents/components/**/props.mdx",
-    "docs/contents/components/**/props.ja.mdx",
+    "www/pages/icons/tags.ts",
+    "www/constant/maintainers.ts",
+    "www/constant/contributors.ts",
+    "www/contents/changelog/**",
+    "www/contents/components/**/props.mdx",
+    "www/contents/components/**/props.ja.mdx",
     "CHANGELOG.md"
   ]
 }

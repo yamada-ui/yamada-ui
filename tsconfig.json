@@ -37,7 +37,7 @@
     "**/node_modules/**",
     "coverage/**",
     "examples/**",
-    "docs/**/*",
+    "www/**/*",
     "**/bin/**",
     "**/dist/**",
     "**/.next/**",

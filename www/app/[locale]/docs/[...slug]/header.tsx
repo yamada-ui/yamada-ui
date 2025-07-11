@@ -25,7 +25,9 @@ export function Header({
       <VStack gap="sm">
         <Heading size="5xl">{title}</Heading>
 
-        <Text color="fg.emphasized">{mdToHtml(description)}</Text>
+        <Text color="fg.emphasized" fontSize="sm" lineHeight="1.8">
+          {mdToHtml(description)}
+        </Text>
       </VStack>
 
       {storybook || source || style ? (

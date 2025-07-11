@@ -12,12 +12,12 @@ import { useMemo } from "react"
 import * as runtime from "react/jsx-runtime"
 import { langConditions } from "@/utils/i18n"
 import { Callout } from "./callout"
+import { Card, CardGroup } from "./card"
 import { CodeBlock } from "./code-block"
+import { CodeGroup } from "./code-group"
 import { Contributors } from "./contributors"
 import { Link } from "./link"
 import { Sponsors } from "./sponsors"
-
-export { CodeBlock }
 
 const mdxComponents: MDXComponents = {
   a: Link,
@@ -25,6 +25,8 @@ const mdxComponents: MDXComponents = {
     <Blockquote.Root css={{ "& p": { m: "0" } }} my="md" {...props} />
   ),
   callout: Callout,
+  card: Card,
+  "card-group": CardGroup,
   code: (props) => (
     <Code
       css={{
@@ -38,6 +40,7 @@ const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
+  "code-group": CodeGroup,
   Contributors,
   h1: (props) => (
     <Heading
@@ -97,9 +100,16 @@ const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
-  li: (props) => <List.Item color="fg.emphasized" {...props} />,
+  li: (props) => (
+    <List.Item
+      css={{ "& p": { m: 0 } }}
+      color="fg.emphasized"
+      fontSize="sm"
+      {...props}
+    />
+  ),
   ol: (props) => <List.Root my="md" styleType="decimal" {...props} />,
-  p: (props) => <Text color="fg.emphasized" my="md" {...props} />,
+  p: (props) => <Text color="fg.emphasized" fontSize="sm" my="md" {...props} />,
   pre: CodeBlock,
   Sponsors,
   strong: (props) => (
@@ -111,9 +121,11 @@ const mdxComponents: MDXComponents = {
     </Box>
   ),
   tbody: (props) => <NativeTable.Tbody {...props} />,
-  td: (props) => <NativeTable.Td color="fg.emphasized" {...props} />,
+  td: (props) => (
+    <NativeTable.Td color="fg.emphasized" fontSize="sm" {...props} />
+  ),
   tfoot: (props) => <NativeTable.Tfoot {...props} />,
-  th: (props) => <NativeTable.Th textAlign="start" {...props} />,
+  th: (props) => <NativeTable.Th fontSize="sm" textAlign="start" {...props} />,
   thead: (props) => <NativeTable.Thead {...props} />,
   tr: (props) => <NativeTable.Tr {...props} />,
   ul: (props) => <List.Root my="md" styleType="disc" {...props} />,
@@ -140,7 +152,7 @@ export function MDXContent({ code, components }: MDXContentProps) {
   const Content = useMemo(() => getContent(code), [code])
 
   return Content ? (
-    <Box _lastChild={{ mb: "0" }}>
+    <Box lineHeight="1.8" _lastChild={{ mb: "0" }}>
       <Content components={{ ...mdxComponents, ...components }} />
     </Box>
   ) : null

@@ -9,7 +9,9 @@ import { CONSTANTS } from "./constants"
 import { rehypePre } from "./utils/rehype-plugins"
 import {
   remarkCallout,
+  remarkCardGroup,
   remarkCodeBlock,
+  remarkCodeGroup,
   remarkSteps,
 } from "./utils/remark-plugins"
 import { getPathname } from "./utils/route"
@@ -93,6 +95,8 @@ export default defineConfig({
       remarkGfm,
       remarkCallout,
       remarkCodeBlock,
+      remarkCodeGroup,
+      remarkCardGroup,
       remarkSteps,
     ],
   },

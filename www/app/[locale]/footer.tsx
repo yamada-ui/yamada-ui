@@ -17,12 +17,7 @@ export function Footer() {
       top="100vh"
       w="full"
     >
-      <Text
-        as="small"
-        color="fg.muted"
-        fontSize={{ base: "md", sm: "sm" }}
-        textAlign="center"
-      >
+      <Text as="small" color="fg.muted" fontSize="sm" textAlign="center">
         {t.rich("component.footer.copyright", {
           contributors: (chunks) => (
             <NextLink

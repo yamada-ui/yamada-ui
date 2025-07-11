@@ -389,12 +389,6 @@
       "description": "The drawer success button to use.",
       "required": false
     },
-    "timing": {
-      "type": "\"after\" | \"before\"",
-      "defaultValue": "\"after\"",
-      "description": "The timing of the open and close.",
-      "required": false
-    },
     "title": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerTitleProps",
       "description": "The drawer title to use.",

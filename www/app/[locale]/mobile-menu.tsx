@@ -33,7 +33,7 @@ export interface MobileMenuProps {
 
 export function MobileMenu({ items }: MobileMenuProps) {
   const { open, onClose, onOpen } = useDisclosure()
-  const t = useTranslations("component.header")
+  const t = useTranslations()
   const pathname = usePathname()
 
   useBreakpointEffect(
@@ -59,7 +59,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
     >
       <Drawer.OpenTrigger>
         <IconButton
-          aria-label={t("menu")}
+          aria-label={t("component.header.menu")}
           color="fg.emphasized"
           display={{ base: "none", md: "flex" }}
           icon={<MenuIcon />}
@@ -70,7 +70,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
         <Drawer.Header gap="sm" justifyContent="flex-end" pt="sm" px="md">
           <NextLinkIconButton
             href={CONSTANTS.SNS.GITHUB.PROJECT}
-            aria-label={t("github")}
+            aria-label={t("component.header.github")}
             color="fg.emphasized"
             external
             icon={<GithubIcon />}
@@ -80,7 +80,7 @@ export function MobileMenu({ items }: MobileMenuProps) {
 
           <NextLinkIconButton
             href={CONSTANTS.SNS.DISCORD}
-            aria-label={t("discord")}
+            aria-label={t("common.discord")}
             color="fg.emphasized"
             external
             icon={<DiscordIcon />}

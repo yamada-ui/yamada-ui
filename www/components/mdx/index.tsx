@@ -13,7 +13,9 @@ import * as runtime from "react/jsx-runtime"
 import { langConditions } from "@/utils/i18n"
 import { Callout } from "./callout"
 import { CodeBlock } from "./code-block"
+import { Contributors } from "./contributors"
 import { Link } from "./link"
+import { Sponsors } from "./sponsors"
 
 export { CodeBlock }
 
@@ -36,6 +38,7 @@ const mdxComponents: MDXComponents = {
       {...props}
     />
   ),
+  Contributors,
   h1: (props) => (
     <Heading
       size="5xl"
@@ -98,6 +101,7 @@ const mdxComponents: MDXComponents = {
   ol: (props) => <List.Root my="md" styleType="decimal" {...props} />,
   p: (props) => <Text color="fg.emphasized" my="md" {...props} />,
   pre: CodeBlock,
+  Sponsors,
   strong: (props) => (
     <Text as="strong" color="fg" fontWeight="semibold" {...props} />
   ),

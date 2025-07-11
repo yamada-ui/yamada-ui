@@ -16,14 +16,17 @@ import { NavMenu } from "./nav-menu"
 import { Search } from "./search"
 
 export function Header() {
-  const t = useTranslations("component.header")
+  const t = useTranslations()
 
   const items = useMemo(() => {
     return [
-      { href: "/docs", label: t("docs") },
-      { href: "/icons", label: t("icons") },
-      { href: "/themes", label: t("themes") },
-      { href: "https://yamada-colors.app", label: t("colors") },
+      { href: "/docs", label: t("component.header.docs") },
+      { href: "/icons", label: t("component.header.icons") },
+      { href: "/themes", label: t("component.header.themes") },
+      {
+        href: "https://yamada-colors.app",
+        label: t("component.header.colors"),
+      },
     ]
   }, [t])
 
@@ -59,7 +62,7 @@ export function Header() {
         <HStack display={{ base: "flex", sm: "none" }} gap="sm">
           <NextLinkIconButton
             href={CONSTANTS.SNS.GITHUB.PROJECT}
-            aria-label={t("github")}
+            aria-label={t("component.header.github")}
             color="fg.emphasized"
             external
             icon={<GithubIcon />}
@@ -69,7 +72,7 @@ export function Header() {
 
           <NextLinkIconButton
             href={CONSTANTS.SNS.DISCORD}
-            aria-label={t("discord")}
+            aria-label={t("common.discord")}
             color="fg.emphasized"
             external
             icon={<DiscordIcon />}

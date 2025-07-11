@@ -4,7 +4,7 @@ import { DiscordIcon, NextLink, XIcon } from "@/components"
 import { CONSTANTS } from "@/constants"
 
 export function Footer() {
-  const t = useTranslations("component.footer")
+  const t = useTranslations()
 
   return (
     <Center
@@ -23,7 +23,7 @@ export function Footer() {
         fontSize={{ base: "md", sm: "sm" }}
         textAlign="center"
       >
-        {t.rich("copyright", {
+        {t.rich("component.footer.copyright", {
           contributors: (chunks) => (
             <NextLink
               href={CONSTANTS.SNS.GITHUB.PROJECT + "/graphs/contributors"}
@@ -56,7 +56,7 @@ export function Footer() {
       <HStack fontSize="2xl">
         <NextLink
           href={CONSTANTS.SNS.GITHUB.HIROTOMO_YAMADA}
-          aria-label={t("github")}
+          aria-label={t("common.github", { name: "Hirotomo Yamada" })}
           color={{ base: "fg.muted", _hover: "fg" }}
           external
           transitionDuration="moderate"
@@ -67,7 +67,7 @@ export function Footer() {
 
         <NextLink
           href={CONSTANTS.SNS.DISCORD}
-          aria-label={t("discord")}
+          aria-label={t("common.discord")}
           color={{ base: "fg.muted", _hover: "fg" }}
           external
           transitionDuration="moderate"
@@ -78,7 +78,7 @@ export function Footer() {
 
         <NextLink
           href={CONSTANTS.SNS.X.HIROTOMO_YAMADA}
-          aria-label={t("x")}
+          aria-label={t("common.x", { name: "Hirotomo Yamada" })}
           color={{ base: "fg.muted", _hover: "fg" }}
           external
           transitionDuration="moderate"

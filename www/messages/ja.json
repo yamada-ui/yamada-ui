@@ -41,6 +41,11 @@
     "primaryAction": "テーマを見る",
     "secondaryAction": "ドキュメント"
   },
+  "common": {
+    "github": "{name}のGitHubプロフィール",
+    "discord": "Discordサーバー",
+    "x": "{name}のXプロフィール"
+  },
   "component": {
     "header": {
       "docs": "ドキュメント",
@@ -49,16 +54,12 @@
       "colors": "カラー",
       "themes": "テーマ",
       "github": "GitHubリポジトリ",
-      "discord": "Discordサーバー",
       "colorMode": "{colorMode}に変更する",
       "lang": "言語を変更する",
       "menu": "メニューを開く"
     },
     "footer": {
-      "copyright": "このライブラリは、<owner>Hirotomo Yamada</owner> と <contributors>愉快な仲間たち</contributors> によって開発されました。",
-      "github": "Hirotomo YamadaのGitHubプロフィール",
-      "discord": "Discordサーバー",
-      "x": "Hirotomo YamadaのXプロフィール"
+      "copyright": "このライブラリは、<owner>Hirotomo Yamada</owner> と <contributors>愉快な仲間たち</contributors> によって開発されました。"
     },
     "search": {
       "placeholder": "ドキュメントを検索する...",

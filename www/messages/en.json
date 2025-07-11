@@ -41,6 +41,11 @@
     "primaryAction": "Browse Themes",
     "secondaryAction": "Documentation"
   },
+  "common": {
+    "github": "GitHub profile of {name}",
+    "discord": "Discord server",
+    "x": "X profile of {name}"
+  },
   "component": {
     "header": {
       "docs": "Docs",
@@ -49,16 +54,12 @@
       "themes": "Themes",
       "colors": "Colors",
       "github": "GitHub repository",
-      "discord": "Discord server",
       "colorMode": "Change to {colorMode}",
       "lang": "Change language",
       "menu": "Open menu"
     },
     "footer": {
-      "copyright": "Built by <owner>Hirotomo Yamada</owner> and <contributors>these awesome people</contributors>",
-      "github": "GitHub profile of Hirotomo Yamada",
-      "discord": "Discord server",
-      "x": "X profile of Hirotomo Yamada"
+      "copyright": "Built by <owner>Hirotomo Yamada</owner> and <contributors>these awesome people</contributors>"
     },
     "search": {
       "placeholder": "Search documentation...",

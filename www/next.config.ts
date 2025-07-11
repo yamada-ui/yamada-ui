@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
     externalDir: true,
     optimizePackageImports: ["@yamada-ui/react"],
   },
+  images: {
+    remotePatterns: [{ hostname: "avatars.githubusercontent.com" }],
+  },
   productionBrowserSourceMaps: false,
   reactStrictMode: false,
   async redirects() {

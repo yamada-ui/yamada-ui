@@ -1,0 +1,166 @@
+{
+  "Accept": {
+    "children": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "",
+      "required": false
+    }
+  },
+  "Idle": {
+    "children": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "",
+      "required": false
+    }
+  },
+  "Reject": {
+    "children": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "",
+      "required": false
+    }
+  },
+  "Root": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | (... & { ...; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: \"lg\" | ... 6 more ... | undefined; ...",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"solid\" | \"dashed\" | \"unstyled\" | [\"solid\" | \"dashed\" | \"unstyled\" | ({ _peerAccept?: \"solid\" | \"dashed\" | \"unstyled\" | [\"solid\" | \"dashed\" | \"unstyled\" | (... & { base?: \"solid\" | ... 4 more ... | undefined; ... 4 more ...; xl?: \"solid\" | ... 4 more ... | undefined; }), \"solid\" | ... 2 more ... | (... & { ...; })] ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "accept": {
+      "type": "string[] | Accept",
+      "description": "File types to accept.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "errorBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "description": "The border color when the input is invalid.",
+      "required": false
+    },
+    "focusBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "description": "The border color when the input is focused.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, display the dropzone loading icon.",
+      "required": false
+    },
+    "loadingProps": {
+      "type": "LoadingProps",
+      "description": "Props for dropzone loading icon element.",
+      "required": false
+    },
+    "loadingScheme": {
+      "type": "LoadingScheme",
+      "defaultValue": "\"oval\"",
+      "description": "The loading scheme.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The HTML `name` attribute used for forms.",
+      "required": false
+    },
+    "onDragEnter": {
+      "type": "DragEventHandler<HTMLElement>",
+      "description": "Called when the user drags files over the dropzone.",
+      "required": false
+    },
+    "onDragLeave": {
+      "type": "DragEventHandler<HTMLElement>",
+      "description": "Called when the user leaves the dropzone.",
+      "required": false
+    },
+    "onDragOver": {
+      "type": "DragEventHandler<HTMLElement>",
+      "description": "Called when the user drags over the dropzone.",
+      "required": false
+    },
+    "onDrop": {
+      "type": "<T extends File>(\n  acceptedFiles: T[],\n  fileRejections: FileRejection[],\n  event: DropEvent,\n) => void",
+      "description": "Called when files are dropped on the dropzone.",
+      "required": false
+    },
+    "onDropAccepted": {
+      "type": "<T extends File>(files: T[], event: DropEvent) => void",
+      "description": "Called when accepted files are dropped on the dropzone.",
+      "required": false
+    },
+    "onDropRejected": {
+      "type": "(\n  fileRejections: FileRejection[],\n  event: DropEvent,\n) => void",
+      "description": "Called when rejected files are dropped on the dropzone.",
+      "required": false
+    },
+    "onDropzoneError": {
+      "type": "(err: Error) => void",
+      "description": "Called when an error occurs during file dropzone operations.",
+      "required": false
+    },
+    "onFileDialogCancel": {
+      "type": "() => void",
+      "description": "Called when the file dialog is canceled.",
+      "required": false
+    },
+    "onFileDialogOpen": {
+      "type": "() => void",
+      "description": "Called when the file dialog is opened.",
+      "required": false
+    },
+    "openRef": {
+      "type": "type ONLY_FOR_FORMAT =\n  | ((instance: (() => void | undefined) | null) => void)\n  | RefObject<(() => void | undefined) | null>",
+      "description": "Ref to a open function.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    }
+  }
+}

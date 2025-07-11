@@ -47,7 +47,12 @@ export function Callout({
   return (
     <Alert.Root colorScheme={colorScheme} my="lg" {...rest}>
       <Alert.Icon as={ICON_MAP[type]} />
-      <Alert.Description colorScheme="mono" color="fg" fontSize="sm">
+      <Alert.Description
+        colorScheme="mono"
+        color="fg"
+        fontSize="sm"
+        lineHeight="1.8"
+      >
         {isValidElement<PropsWithChildren>(children)
           ? children.props.children
           : children}

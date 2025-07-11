@@ -6,7 +6,7 @@ import NextLink from "next/link"
 export interface CardGroupProps {}
 
 export function CardGroup(props: CardGroupProps) {
-  return <SimpleGrid gap="lg" minChildWidth="2xs" my="lg" {...props} />
+  return <SimpleGrid gap="lg" minChildWidth="sm" my="lg" {...props} />
 }
 
 export interface CardProps extends OriginalCard.RootProps {

@@ -96,8 +96,13 @@ export default async function main(docs: Doc[]) {
 
           if (last) {
             prev[itemIndex].title = title
-            prev[itemIndex].status = status
             prev[itemIndex].pathname = getPathname("docs", ...omittedSlug)
+
+            if (status) {
+              prev[itemIndex].status = status
+            } else {
+              delete prev[itemIndex].status
+            }
           } else {
             if (segment.match(/^\(|\)$/)) {
               const title = t(`docs.group.${segment.replace(/^\(|\)$/g, "")}`)

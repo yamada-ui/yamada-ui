@@ -2,9 +2,9 @@
 
 import type { ReactElement, ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useI18n } from "../../providers/i18n-provider"
-import { dataAttr, handlerAll } from "../../utils"
+import { dataAttr, handlerAll, mergeRefs } from "../../utils"
 
 const defaultFormat = (name: string) => {
   const names = name.trim().split(" ")
@@ -77,10 +77,17 @@ export const useAvatar = ({
   referrerPolicy = "no-referrer",
   ...rest
 }: UseAvatarProps = {}) => {
+  const imageRef = useRef<HTMLImageElement>(null)
   const initials = name ? format(name) : undefined
   const [loaded, setLoaded] = useState<boolean>(false)
   const fallback = !src || !loaded
   const { t } = useI18n("avatar")
+
+  useEffect(() => {
+    if (!imageRef.current) return
+
+    if (imageRef.current.complete) setLoaded(true)
+  }, [])
 
   const getGroupProps: PropGetter = useCallback((props) => ({ ...props }), [])
 
@@ -95,8 +102,9 @@ export const useAvatar = ({
   )
 
   const getImageProps: PropGetter<"img"> = useCallback(
-    ({ onLoad, ...props } = {}) => ({
+    ({ ref, onLoad, ...props } = {}) => ({
       ...props,
+      ref: mergeRefs(ref, imageRef),
       src,
       srcSet,
       alt: name || alt,

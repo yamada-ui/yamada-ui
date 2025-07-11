@@ -282,7 +282,7 @@ const MultiSelectField = forwardRef<MultiSelectFieldProps, "div">(
                   dangerouslySetInnerHTML={{
                     __html: `${value}${!isLast ? separator : ""}`,
                   }}
-                  display="inline-block"
+                  display="inline"
                   me="0.25rem"
                 />
               )

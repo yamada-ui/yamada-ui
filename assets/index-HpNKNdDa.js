@@ -1,1 +1,0 @@
-import{r as s,a2 as o}from"./iframe-CzCJWi2Q.js";function l({delay:t=0,state:e=!1}={}){const u=s.useRef(!1),[n,r]=s.useState(!1);return o(()=>{u.current=!0;let f=null;return e&&(t>0?f=setTimeout(()=>r(!0),t):r(!0)),()=>{u.current=!1,e&&r(!1),f&&clearTimeout(f)}},[t,e]),e?n:s.useCallback(()=>u.current,[])}export{l as u};

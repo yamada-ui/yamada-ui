@@ -15,8 +15,8 @@
   },
   "scripts": {
     "prepare": "lefthook install",
-    "clean": "pnpm -r --parallel exec rimraf dist .turbo *.log .eslintcache coverage node_modules",
-    "clean:all": "pnpm clean && pnpm rimraf .turbo *.log .eslintcache coverage storybook-static trace node_modules",
+    "clean": "pnpm -r --parallel exec rimraf dist .turbo *.log .next .velite .eslintcache coverage node_modules",
+    "clean:all": "pnpm clean && pnpm rimraf .turbo *.log storybook-static node_modules",
     "cli": "pnpm --prefix packages/cli",
     "react": "pnpm --prefix packages/react",
     "utils": "pnpm --prefix packages/utils",

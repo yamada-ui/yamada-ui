@@ -40,11 +40,5 @@
     "playgrounds/**",
     "www/**/*",
     "storybook-static/**"
-  ],
-  "ts-node": {
-    "transpileOnly": true,
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+  ]
 }

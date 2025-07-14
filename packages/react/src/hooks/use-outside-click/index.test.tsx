@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import type { UseOutsideClickProps } from "./"
 import { useRef } from "react"
-import { render } from "../../../test"
+import { render } from "@/test"
 import { useOutsideClick } from "./"
 
 describe("useOutsideClick", () => {

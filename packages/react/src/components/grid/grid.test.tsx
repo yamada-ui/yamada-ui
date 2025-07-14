@@ -1,4 +1,4 @@
-import { render, screen } from "../../../test"
+import { render, screen } from "@/test"
 import { Grid } from "./grid"
 
 describe("<Grid />", () => {

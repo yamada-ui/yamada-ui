@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
+import { a11y, render, screen, waitFor } from "@/test"
 import { FileButton } from "."
-import { a11y, render, screen, waitFor } from "../../../test"
 
 describe("<FileButton />", () => {
   afterAll(() => {

@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { render, screen } from "../../../test"
+import { render, screen } from "@/test"
 import { styled } from "../system/factory"
 import { useCSS } from "./use-css"
 

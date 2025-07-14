@@ -1,5 +1,5 @@
+import { a11y, render, screen } from "@/test"
 import { NativeSelect } from "."
-import { a11y, render, screen } from "../../../test"
 import { BoxIcon } from "../icon"
 
 describe("<NativeSelect />", () => {

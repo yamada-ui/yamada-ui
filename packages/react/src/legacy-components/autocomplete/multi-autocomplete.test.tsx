@@ -1,6 +1,6 @@
 import type { AutocompleteItem } from "."
 import { AutocompleteOption, MultiAutocomplete } from "."
-import { render, screen, waitFor } from "../../../test"
+import { render, screen, waitFor } from "@/test"
 import { noop } from "../../utils"
 
 describe("<MultiAutoComplete />", () => {

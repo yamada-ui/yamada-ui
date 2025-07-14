@@ -1,6 +1,6 @@
 import type { CSSAnimationObject } from "../../core"
+import { renderHook, waitFor } from "@/test"
 import { useAnimation, useDynamicAnimation } from "."
-import { renderHook, waitFor } from "../../../test"
 
 describe("useAnimation", () => {
   test("should generate a single animation string", () => {

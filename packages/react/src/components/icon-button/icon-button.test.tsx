@@ -1,4 +1,4 @@
-import { a11y, render } from "../../../test"
+import { a11y, render } from "@/test"
 import { BoxIcon } from "../icon"
 import { IconButton } from "./icon-button"
 

@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { render, renderHook, waitFor } from "../../../test"
+import { render, renderHook, waitFor } from "@/test"
 import { noop } from "../../utils"
 import { useInfiniteScroll } from "./use-infinite-scroll"
 

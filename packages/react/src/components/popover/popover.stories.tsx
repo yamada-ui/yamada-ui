@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useRef } from "react"
+import { PropsTable } from "@/storybook"
 import { Popover } from "."
-import { PropsTable } from "../../../storybook/components"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { toTitleCase } from "../../utils"
 import { Box } from "../box"

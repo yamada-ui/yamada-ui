@@ -1,5 +1,5 @@
 import type { DataListItemProps } from "."
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "@/test"
 import { DataList } from "./"
 
 describe("<DataList />", () => {

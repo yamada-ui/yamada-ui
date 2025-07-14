@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from "react"
+import type { FC } from "react"
 import type { ColorModeProviderProps, ThemeProviderProps } from "../../core"
 import type { I18nProviderProps } from "../i18n-provider"
 import { LoadingProvider } from "../../components/loading"
@@ -15,10 +15,6 @@ export interface UIProviderProps
   extends Omit<ThemeProviderProps, "storageKey">,
     Pick<ColorModeProviderProps, "colorMode">,
     I18nProviderProps {
-  /**
-   * Application content.
-   */
-  children: ReactNode
   /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.

@@ -1,4 +1,4 @@
-import { act, renderHook } from "../../../test"
+import { act, renderHook } from "@/test"
 import { ColorModeProvider } from "./color-mode-provider"
 import { useColorMode } from "./color-mode-provider"
 

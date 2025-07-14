@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "@/test"
 import { Skeleton, SkeletonCircle, SkeletonText } from "./"
 
 describe("<Skeleton />", () => {

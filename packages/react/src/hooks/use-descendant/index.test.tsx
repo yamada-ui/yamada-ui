@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from "react"
 import type { DescendantOptions, FilterDescendant } from "./"
-import { render, renderHook } from "../../../test"
+import { render, renderHook } from "@/test"
 import { createDescendant } from "./"
 
 describe("useDescendant", () => {

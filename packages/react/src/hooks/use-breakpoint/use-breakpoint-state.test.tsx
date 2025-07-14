@@ -1,5 +1,5 @@
 import MatchMediaMock from "vitest-matchmedia-mock"
-import { renderHook } from "../../../test"
+import { renderHook } from "@/test"
 import { useBreakpointState } from "./use-breakpoint-state"
 
 describe("useBreakpointState", () => {

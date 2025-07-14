@@ -1,5 +1,5 @@
+import { a11y, render, screen } from "@/test"
 import { Tooltip } from "."
-import { a11y, render, screen } from "../../../test"
 import { Text } from "../text"
 
 describe("<Tooltip />", () => {

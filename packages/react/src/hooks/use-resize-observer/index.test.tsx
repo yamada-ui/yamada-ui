@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "../../../test"
+import { render, screen, waitFor } from "@/test"
 import { useElementSize, useResizeObserver } from "./"
 
 describe("useResizeObserver", () => {

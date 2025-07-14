@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 // import { ScrollArea } from "../scroll-area"
-import { PropsTable } from "../../../storybook/components"
+import { PropsTable } from "@/storybook"
 // import defaultTheme from "../../theme"
 import { COLOR_SCHEMES } from "../../utils"
 import { NativeTable } from "./"

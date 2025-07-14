@@ -1,5 +1,5 @@
+import { fireEvent, render, screen } from "@/test"
 import { Toggle, ToggleGroup } from "."
-import { fireEvent, render, screen } from "../../../test"
 import { noop } from "../../utils"
 
 describe("<Toggle />", () => {

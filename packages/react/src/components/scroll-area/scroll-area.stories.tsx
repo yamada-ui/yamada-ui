@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useRef } from "react"
+import { PropsTable } from "@/storybook"
 import { ScrollArea } from "."
-import { PropsTable } from "../../../storybook/components"
 import { Button } from "../button"
 import { Heading } from "../heading"
 import { VStack } from "../stack"

@@ -1,5 +1,5 @@
-import { a11y, screen } from "../../../test"
-import { render } from "../../../test"
+import { a11y, screen } from "@/test"
+import { render } from "@/test"
 import { Heading } from "./heading"
 
 describe("<Heading />", () => {

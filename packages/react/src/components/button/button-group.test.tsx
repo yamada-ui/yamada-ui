@@ -1,4 +1,4 @@
-import { a11y, render } from "../../../test"
+import { a11y, render } from "@/test"
 import { Button } from "./button"
 import { ButtonGroup } from "./button-group"
 

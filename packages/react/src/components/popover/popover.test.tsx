@@ -1,5 +1,5 @@
+import { a11y, render, screen, waitFor } from "@/test"
 import { Popover } from "."
-import { a11y, render, screen, waitFor } from "../../../test"
 import { Button } from "../button"
 
 describe("<Popover />", () => {

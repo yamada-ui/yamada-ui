@@ -5,7 +5,7 @@ import {
   screen,
   waitFor,
   waitForElementToBeRemoved,
-} from "../../../test"
+} from "@/test"
 import { useNotice } from "./notice"
 
 describe("useNotice()", () => {

@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useState } from "react"
+import { PropsTable } from "@/storybook"
 import { Pagination } from "."
-import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES, isNumber } from "../../utils"
 import {
   ArrowLeftIcon,

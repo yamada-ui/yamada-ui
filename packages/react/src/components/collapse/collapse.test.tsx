@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { a11y, render, screen, wait, waitFor } from "../../../test"
+import { a11y, render, screen, wait, waitFor } from "@/test"
 import { Collapse } from "./collapse"
 
 describe("<Collapse />", () => {

@@ -1,4 +1,4 @@
-import { a11y } from "../../../test"
+import { a11y } from "@/test"
 import { Slot, Slottable } from "./slot"
 
 describe("<Slot />", () => {

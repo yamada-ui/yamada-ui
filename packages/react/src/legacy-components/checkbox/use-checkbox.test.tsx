@@ -4,7 +4,7 @@ import type {
   MouseEventHandler,
   TouchEventHandler,
 } from "react"
-import { act, fireEvent, render, renderHook, screen } from "../../../test"
+import { act, fireEvent, render, renderHook, screen } from "@/test"
 import { useCheckbox } from "./"
 
 const EnhancedCheckbox = (props: {

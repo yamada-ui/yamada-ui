@@ -1,5 +1,5 @@
+import { a11y, render, screen } from "@/test"
 import { Indicator } from "."
-import { a11y, render, screen } from "../../../test"
 
 describe("<Indicator />", () => {
   test("Indicator renders correctly", async () => {

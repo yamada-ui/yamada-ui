@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import { act, render, renderHook, screen, waitFor } from "../../../test"
+import { act, render, renderHook, screen, waitFor } from "@/test"
 import { FocusLock } from "./focus-lock"
 
 describe("<FocusLock />", () => {
@@ -48,6 +48,7 @@ describe("<FocusLock />", () => {
 
     render(
       <FocusLock contentRef={result.current}>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         <div ref={result.current} tabIndex={0}>
           No focusable elements here
         </div>

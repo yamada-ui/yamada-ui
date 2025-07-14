@@ -1,5 +1,5 @@
+import { a11y, filterVisuallyHidden, render, screen } from "@/test"
 import { Field } from "."
-import { a11y, filterVisuallyHidden, render, screen } from "../../../test"
 import { Input } from "../input"
 
 describe("<Field />", () => {

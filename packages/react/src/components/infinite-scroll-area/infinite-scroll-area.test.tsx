@@ -1,7 +1,7 @@
 import type { InfiniteScrollAreaProps } from "."
 import { useRef, useState } from "react"
+import { a11y, fireEvent, render, waitFor } from "@/test"
 import { InfiniteScrollArea } from "."
-import { a11y, fireEvent, render, waitFor } from "../../../test"
 
 describe("<InfiniteScrollArea />", () => {
   const defaultIntersectionObserver = global.IntersectionObserver
@@ -21,7 +21,7 @@ describe("<InfiniteScrollArea />", () => {
   })
 
   test("InfiniteScrollArea renders correctly", async () => {
-    const { container } = render(
+    await a11y(
       <InfiniteScrollArea loading={<>Loading…</>}>
         {Array(50)
           .fill(0)
@@ -32,7 +32,6 @@ describe("<InfiniteScrollArea />", () => {
           ))}
       </InfiniteScrollArea>,
     )
-    await a11y(container)
   })
 
   test("sets `displayName` correctly", () => {

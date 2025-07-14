@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "@/test"
 import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Accordion } from "./"

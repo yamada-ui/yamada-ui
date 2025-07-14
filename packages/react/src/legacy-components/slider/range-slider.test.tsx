@@ -1,5 +1,5 @@
 import { RangeSlider, RangeSliderEndThumb, RangeSliderStartThumb } from "."
-import { a11y, act, fireEvent, render, renderHook, screen } from "../../../test"
+import { a11y, act, fireEvent, render, renderHook, screen } from "@/test"
 import { noop } from "../../utils"
 import { useRangeSlider } from "./range-slider"
 

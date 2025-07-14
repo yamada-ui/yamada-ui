@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "@/test"
 import { AspectRatio } from "./aspect-ratio"
 
 describe("<AspectRatio />", () => {

@@ -1,6 +1,6 @@
 import type { Column } from "."
 import { PagingTable, Table } from "."
-import { a11y, render, screen, waitFor } from "../../../test"
+import { a11y, render, screen, waitFor } from "@/test"
 
 describe("<Table />", () => {
   const columns = [{ accessorKey: "name", header: "作品名" }]

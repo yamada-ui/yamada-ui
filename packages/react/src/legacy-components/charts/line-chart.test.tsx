@@ -1,5 +1,5 @@
 import type { LineProps } from "./"
-import { a11y, fireEvent, render, screen, waitFor } from "../../../test"
+import { a11y, fireEvent, render, screen, waitFor } from "@/test"
 import { LineChart } from "./"
 
 describe("<LineChart />", () => {

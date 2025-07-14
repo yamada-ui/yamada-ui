@@ -1,6 +1,6 @@
 import type { FC } from "react"
+import { a11y, render, screen } from "@/test"
 import { LinkBox } from "."
-import { a11y, render, screen } from "../../../test"
 import { Heading } from "../heading"
 import { Text } from "../text"
 

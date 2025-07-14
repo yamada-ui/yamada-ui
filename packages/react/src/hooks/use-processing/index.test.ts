@@ -1,4 +1,4 @@
-import { act, renderHook } from "../../../test"
+import { act, renderHook } from "@/test"
 import { useProcessing } from "./"
 
 describe("useProcessing", () => {

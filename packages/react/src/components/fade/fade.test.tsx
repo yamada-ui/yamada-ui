@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { a11y, render, screen, waitFor } from "../../../test"
+import { a11y, render, screen, waitFor } from "@/test"
 import { Fade } from "./fade"
 
 describe("<Fade />", () => {

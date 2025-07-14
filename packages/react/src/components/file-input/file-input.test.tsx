@@ -1,5 +1,5 @@
+import { a11y, act, fireEvent, render, screen } from "@/test"
 import { FileInput } from "."
-import { a11y, act, fireEvent, render, screen } from "../../../test"
 
 describe("<FileInput />", () => {
   test("FileInput renders correctly", async () => {

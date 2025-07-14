@@ -1,4 +1,4 @@
-import { renderHook } from "../../../test"
+import { renderHook } from "@/test"
 import { useOS } from "./"
 
 describe("useOS", () => {

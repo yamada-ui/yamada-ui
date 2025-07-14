@@ -1,6 +1,6 @@
 import type { FC } from "react"
 import { isUndefined } from "@yamada-ui/utils"
-import { render, screen } from "../../test"
+import { render, screen } from "@/test"
 import { createStore } from "./store"
 
 describe("createStore", () => {

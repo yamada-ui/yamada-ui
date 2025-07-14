@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { PropsTable } from "../../../storybook/components"
+import { PropsTable } from "@/storybook"
 import { COLOR_SCHEMES } from "../../utils"
 import { Avatar } from "../avatar"
 import { Grid } from "../grid"

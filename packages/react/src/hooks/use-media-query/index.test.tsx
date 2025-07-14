@@ -1,6 +1,6 @@
 import MatchMediaMock from "vitest-matchmedia-mock"
+import { act, renderHook } from "@/test"
 import { useMediaQuery } from "."
-import { act, renderHook } from "../../../test"
 
 describe("useMediaQuery", () => {
   let matchMediaMock: MatchMediaMock

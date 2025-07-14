@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useMemo, useState } from "react"
+import { PropsTable } from "@/storybook"
 import { Steps } from "."
-import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
 import { Box } from "../box"
 import { Button, ButtonGroup } from "../button"

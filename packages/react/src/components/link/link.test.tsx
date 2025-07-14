@@ -1,5 +1,5 @@
+import { a11y, render, screen } from "@/test"
 import { Link } from "."
-import { a11y, render, screen } from "../../../test"
 
 describe("<Link />", () => {
   test("passes a11y test", async () => {

@@ -1,5 +1,5 @@
 import { RangeDatePicker } from "."
-import { a11y, fireEvent, render } from "../../../test"
+import { a11y, fireEvent, render } from "@/test"
 
 describe("<RangeDatePicker />", () => {
   test("RangeDatePicker renders correctly", async () => {

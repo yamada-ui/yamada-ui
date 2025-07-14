@@ -1,5 +1,5 @@
-import { render, screen } from "../../../test"
-import { a11y } from "../../../test"
+import { render, screen } from "@/test"
+import { a11y } from "@/test"
 import { Box } from "./box"
 
 describe("<Box />", () => {

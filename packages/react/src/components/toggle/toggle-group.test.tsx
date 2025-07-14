@@ -1,5 +1,5 @@
+import { a11y, fireEvent, render, screen } from "@/test"
 import { Toggle, ToggleGroup } from "."
-import { a11y, fireEvent, render, screen } from "../../../test"
 
 describe("<ToggleGroup />", () => {
   test("should render ToggleGroup and its children correctly", async () => {

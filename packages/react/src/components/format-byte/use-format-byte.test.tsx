@@ -1,4 +1,4 @@
-import { renderHook } from "../../../test"
+import { renderHook } from "@/test"
 import { useFormatByte } from "./use-format-byte"
 
 describe("useFormatByte", () => {

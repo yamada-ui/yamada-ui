@@ -1,5 +1,5 @@
+import { a11y, fireEvent, render, screen } from "@/test"
 import { Pagination } from "."
-import { a11y, fireEvent, render, screen } from "../../../test"
 import { isNumber } from "../../utils"
 import { IconButton } from "../icon-button"
 

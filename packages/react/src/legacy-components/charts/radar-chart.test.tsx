@@ -1,5 +1,5 @@
 import type { RadarProps } from "./"
-import { a11y, fireEvent, render, screen, waitFor } from "../../../test"
+import { a11y, fireEvent, render, screen, waitFor } from "@/test"
 import { RadarChart } from "./"
 
 describe("<RadarChart />", () => {

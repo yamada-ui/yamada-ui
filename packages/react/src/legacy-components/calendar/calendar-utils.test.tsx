@@ -1,6 +1,6 @@
 import type { RefObject } from "react"
 import { createRef } from "react"
-import { render } from "../../../test"
+import { render } from "@/test"
 import {
   disableAllTabIndex,
   getFocused,

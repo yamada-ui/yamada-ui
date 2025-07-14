@@ -10,7 +10,7 @@
     "dev:content": "velite --watch",
     "dev:next": "next dev",
     "dev": "run-p dev:*",
-    "build:content": "velite --clean",
+    "build:content": "NODE_OPTIONS=\"--experimental-strip-types\" velite --clean",
     "build:next": "next build",
     "build": "run-s build:*",
     "start": "next start",

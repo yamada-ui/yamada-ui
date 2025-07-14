@@ -1,26 +1,33 @@
-import type { ChangeEvent } from "react"
-import type { PropGetter } from "../../core"
-import { useCallback, useEffect, useState } from "react"
-import { trackFocusVisible } from "../../hooks/use-focus-visible"
-import { dataAttr, handlerAll } from "../../utils"
-import { useRatingContext } from "./rating-context"
+"use client"
 
-export interface UseRatingItemProps {
+import type { ChangeEvent } from "react"
+import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
+import type { Merge } from "../../utils"
+import { useCallback } from "react"
+import { dataAttr, handlerAll, mergeRefs } from "../../utils"
+import { useRatingContext } from "./rating"
+
+export interface UseRatingItemProps
+  extends Merge<HTMLProps<"label">, HTMLRefAttributes<"input">> {
   fractionValue: number
   groupValue: number
   value: number
 }
 
 export const useRatingItem = ({
+  ref,
   fractionValue,
   groupValue,
   value,
+  ...rest
 }: UseRatingItemProps) => {
   const {
     id,
     name,
+    disabled,
     highlightSelectedOnly,
     outside,
+    readOnly,
     resolvedValue,
     roundedValue,
     setHoveredValue,
@@ -30,12 +37,8 @@ export const useRatingItem = ({
   const {
     "aria-disabled": ariaDisabled,
     "aria-readonly": _ariaReadOnly,
-    disabled,
-    readOnly,
     ...omittedFormControlProps
   } = formControlProps
-  const [focused, setFocused] = useState<boolean>(false)
-  const [focusVisible, setFocusVisible] = useState<boolean>(false)
   const active = value === resolvedValue
   const checked = value === roundedValue
   const filled = highlightSelectedOnly
@@ -43,8 +46,6 @@ export const useRatingItem = ({
     : value <= resolvedValue
 
   const onBlur = useCallback(() => {
-    setFocused(false)
-
     if (outside) setHoveredValue(-1)
   }, [outside, setHoveredValue])
 
@@ -81,44 +82,40 @@ export const useRatingItem = ({
   }, [disabled, onChange, readOnly, value])
 
   const getItemProps: PropGetter<"label"> = useCallback(
-    (props = {}, ref = null) => {
+    (props = {}) => {
       const zIndex = active ? 1 : -1
 
       return {
-        ref,
         htmlFor: `${id}-${groupValue}-${value}`,
         ...omittedFormControlProps,
         ...props,
+        ...rest,
         "data-active": dataAttr(active),
         "data-disabled": dataAttr(disabled),
         "data-filled": dataAttr(filled),
-        "data-focus": dataAttr(focused),
-        "data-focus-visible": dataAttr(focused && focusVisible),
         zIndex: fractionValue !== 1 ? zIndex : undefined,
         onMouseDown: handlerAll(onMouseDown, props.onMouseDown),
         onTouchStart: handlerAll(onTouchStart, props.onTouchStart),
       }
     },
     [
-      disabled,
-      omittedFormControlProps,
-      fractionValue,
-      groupValue,
-      id,
       active,
+      id,
+      groupValue,
+      value,
+      omittedFormControlProps,
+      rest,
+      disabled,
       filled,
-      focusVisible,
-      focused,
+      fractionValue,
       onMouseDown,
       onTouchStart,
-      value,
     ],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
-    (props = {}, ref = null) => {
+    (props = {}) => {
       return {
-        ref,
         "aria-disabled": ariaDisabled,
         "aria-label": `${value}`,
         disabled,
@@ -126,6 +123,7 @@ export const useRatingItem = ({
         ...omittedFormControlProps,
         ...props,
         id: `${id}-${groupValue}-${value}`,
+        ref: mergeRefs(ref, props.ref),
         type: "radio",
         name,
         style: {
@@ -145,7 +143,6 @@ export const useRatingItem = ({
         value,
         onBlur: handlerAll(onBlur, props.onBlur),
         onChange: handlerAll(onInputChange, props.onChange),
-        onFocus: handlerAll(() => setFocused(true), props.onFocus),
         onKeyDown: handlerAll(
           (ev) => (ev.key === " " ? onChange(value) : void 0),
           props.onKeyDown,
@@ -154,24 +151,21 @@ export const useRatingItem = ({
     },
     [
       ariaDisabled,
+      value,
       disabled,
       readOnly,
-      value,
       omittedFormControlProps,
       id,
       groupValue,
+      ref,
       name,
-      checked,
-      onInputChange,
-      onBlur,
       active,
+      checked,
+      onBlur,
+      onInputChange,
       onChange,
     ],
   )
-
-  useEffect(() => {
-    return trackFocusVisible(setFocusVisible)
-  }, [])
 
   return {
     active,

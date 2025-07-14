@@ -1,11 +1,7 @@
-import type { ComponentMultiStyle } from "../../core"
+import { defineComponentSlotStyle, focusRingStyle } from "../../core"
 
-export const Rating: ComponentMultiStyle<"Rating"> = {
-  baseStyle: ({ colorScheme: c = "yellow" }) => ({
-    container: {
-      display: "flex",
-      w: "max-content",
-    },
+export const ratingStyle = defineComponentSlotStyle({
+  base: {
     group: {
       position: "relative",
     },
@@ -16,6 +12,10 @@ export const Rating: ComponentMultiStyle<"Rating"> = {
       justifyContent: "center",
     },
     item: {
+      "&:has(input:focus-visible)": {
+        ...focusRingStyle.outline,
+      },
+      "--filled-color": "colorScheme.solid",
       color: ["blackAlpha.300", "whiteAlpha.300"],
       cursor: "pointer",
       display: "block",
@@ -23,7 +23,7 @@ export const Rating: ComponentMultiStyle<"Rating"> = {
       outline: "none",
       rounded: "sm",
       _filled: {
-        color: [`${c}.500`, `${c}.600`],
+        color: ["{filled-color}", "{filled-color}"],
       },
       _notLast: {
         left: 0,
@@ -41,7 +41,11 @@ export const Rating: ComponentMultiStyle<"Rating"> = {
         opacity: 0.4,
       },
     },
-  }),
+    root: {
+      display: "flex",
+      w: "max-content",
+    },
+  },
 
   sizes: {
     xs: {
@@ -72,7 +76,8 @@ export const Rating: ComponentMultiStyle<"Rating"> = {
   },
 
   defaultProps: {
-    colorScheme: "yellow",
     size: "md",
   },
-}
+})
+
+export type RatingStyle = typeof ratingStyle

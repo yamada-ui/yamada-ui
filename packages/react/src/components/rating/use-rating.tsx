@@ -1,15 +1,15 @@
+"use client"
+
 import type { MouseEvent, ReactNode, TouchEvent } from "react"
 import type {
-  CSSUIProps,
-  HTMLUIProps,
+  CSSProps,
+  HTMLProps,
   PropGetter,
   RequiredPropGetter,
 } from "../../core"
-import type { Merge } from "../../utils"
-import type { FormControlOptions } from "../form-control"
-import type { MotionProps } from "../motion"
-import type { RatingGroupProps } from "./rating-group"
-import type { RatingItemProps } from "./rating-item"
+import type { FieldProps } from "../field"
+import type { HTMLMotionProps } from "../motion"
+import type { RatingGroupProps, RatingItemProps } from "./rating"
 import { useCallback, useId, useRef, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
@@ -17,20 +17,19 @@ import {
   dataAttr,
   handlerAll,
   mergeRefs,
-  runIfFunc,
-  splitObject,
+  runIfFn,
 } from "../../utils"
-import { formControlProperties, useFormControlProps } from "../form-control"
-import { RatingGroup } from "./rating-group"
+import { useFieldProps } from "../field"
+import { RatingGroup } from "./rating"
 import { getRoundedValue } from "./rating-utils"
 
 type OmittedGroupProps = Omit<RatingGroupProps, "children" | "items" | "value">
 type OmittedItemProps = Omit<
   RatingItemProps,
-  "children" | "fractionValue" | "groupValue" | "value"
+  "children" | "fractionValue" | "groupValue" | "ref" | "value"
 >
 type OmittedInputProps = Omit<
-  HTMLUIProps<"input">,
+  HTMLProps<"input">,
   "checked" | "defaultValue" | "value"
 >
 
@@ -42,7 +41,9 @@ export type InputProps =
   | ((value: number) => OmittedInputProps)
   | OmittedInputProps
 
-interface UseRatingOptions {
+export interface UseRatingProps
+  extends FieldProps,
+    Omit<HTMLProps, "color" | "defaultValue" | "id" | "onChange"> {
   /**
    * The top-level id string that will be applied to the rating.
    * The index of the rating item will be appended to this top-level id.
@@ -55,7 +56,7 @@ interface UseRatingOptions {
   /**
    * The color of the filled icons.
    */
-  color?: ((value: number) => CSSUIProps["color"]) | CSSUIProps["color"]
+  color?: ((value: number) => CSSProps["color"]) | CSSProps["color"]
   /**
    * The initial value of the rating.
    *
@@ -114,10 +115,6 @@ interface UseRatingOptions {
   onHover?: (value: number) => void
 }
 
-export type UseRatingProps = FormControlOptions &
-  Omit<HTMLUIProps, "color" | "defaultValue" | "id" | "onChange"> &
-  UseRatingOptions
-
 export const useRating = ({
   name,
   color,
@@ -141,7 +138,12 @@ export const useRating = ({
   ...props
 }: UseRatingProps) => {
   const uuid = useId()
-  const { id = uuid, ...rest } = useFormControlProps(props)
+  const {
+    props: { id = uuid, disabled, readOnly, ...rest },
+    ariaProps,
+    dataProps,
+    eventProps,
+  } = useFieldProps(props)
   const containerRef = useRef<HTMLDivElement>(null)
   const [value, setValue] = useControllableState({
     defaultValue,
@@ -150,11 +152,6 @@ export const useRating = ({
   })
   const [hoveredValue, setHoveredValue] = useState<number>(-1)
   const [outside, setOutside] = useState(true)
-  const [formControlProps, containerProps] = splitObject(
-    rest,
-    formControlProperties,
-  )
-  const { disabled, readOnly, ...omittedFormControlProps } = formControlProps
   const resolvedFractions = Math.floor(fractions)
   const resolvedItems = Math.floor(items)
   const decimal = 1 / resolvedFractions
@@ -231,8 +228,10 @@ export const useRating = ({
       ref: mergeRefs(ref, containerRef),
       "aria-label": `${value} Stars`,
       role: "radiogroup",
-      ...omittedFormControlProps,
-      ...containerProps,
+      ...ariaProps,
+      ...dataProps,
+      ...eventProps,
+      ...rest,
       ...props,
       id,
       onMouseEnter: handlerAll(
@@ -254,10 +253,12 @@ export const useRating = ({
       ),
     }),
     [
-      omittedFormControlProps,
-      containerProps,
-      id,
       value,
+      ariaProps,
+      dataProps,
+      eventProps,
+      rest,
+      id,
       onMouseEnter,
       onMouseEnterProp,
       onMouseLeave,
@@ -272,14 +273,14 @@ export const useRating = ({
   )
 
   const getGroupProps: RequiredPropGetter<
-    Merge<MotionProps, { value: number }>,
-    MotionProps
+    HTMLMotionProps,
+    { value: number },
+    HTMLMotionProps
   > = useCallback(
-    ({ value, ...props }, ref = null) => {
+    ({ value, ...props }) => {
       const active = !readOnly && Math.ceil(hoveredValue) === value
 
       return {
-        ref,
         whileTap: !disabled && !readOnly ? { y: -4 } : undefined,
         ...props,
         "data-active": dataAttr(active),
@@ -297,7 +298,7 @@ export const useRating = ({
       return (
         <RatingGroup
           key={value}
-          color={runIfFunc(color, value)}
+          color={runIfFn(color, value)}
           items={index === 0 ? resolvedFractions + 1 : resolvedFractions}
           value={value}
         />
@@ -309,17 +310,23 @@ export const useRating = ({
     name,
     children,
     decimal,
+    disabled,
     emptyIcon,
     filledIcon,
     highlightSelectedOnly,
     hoveredValue,
     outside,
+    readOnly,
     resolvedValue,
     roundedValue,
     setHoveredValue,
     setValue,
     value,
-    formControlProps,
+    formControlProps: {
+      ...ariaProps,
+      ...dataProps,
+      ...eventProps,
+    },
     getContainerProps,
     getGroupProps,
     groupProps,

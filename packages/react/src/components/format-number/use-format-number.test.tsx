@@ -1,4 +1,4 @@
-import { renderHook } from "@/test"
+import { renderHook } from "#test"
 import { useFormatNumber } from "./use-format-number"
 
 describe("useFormatNumber", () => {

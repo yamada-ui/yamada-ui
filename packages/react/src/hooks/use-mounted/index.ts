@@ -1,7 +1,6 @@
 "use client"
 
-import { useCallback, useState } from "react"
-import { useRef } from "react"
+import { useCallback, useRef, useState } from "react"
 import { useSafeLayoutEffect } from "../../utils"
 
 export interface UseMountedProps {

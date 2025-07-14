@@ -1,4 +1,4 @@
-import { a11y, act, fireEvent, render } from "@/test"
+import { a11y, act, fireEvent, render } from "#test"
 import {
   Dropzone,
   DropzoneAccept,

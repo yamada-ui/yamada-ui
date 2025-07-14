@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
+import { PropsTable } from "#storybook"
 import { Controller, useForm } from "react-hook-form"
-import { PropsTable } from "@/storybook"
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Button } from "../button"
 import { Field } from "../field"

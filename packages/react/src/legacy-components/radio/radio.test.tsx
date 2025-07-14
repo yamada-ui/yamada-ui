@@ -1,4 +1,4 @@
-import { a11y, fireEvent, render, screen } from "@/test"
+import { a11y, fireEvent, render, screen } from "#test"
 import { FormControl } from "../form-control"
 import { Radio, RadioGroup } from "./"
 

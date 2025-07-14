@@ -1,6 +1,6 @@
 import type { KeyframeIdent } from "../../core"
+import { a11y, render, screen, waitFor } from "#test"
 import { useState } from "react"
-import { a11y, render, screen, waitFor } from "@/test"
 import { BoxIcon } from "../icon"
 import { Rotate } from "./"
 

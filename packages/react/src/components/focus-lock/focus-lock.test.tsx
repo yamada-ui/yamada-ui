@@ -1,5 +1,5 @@
+import { act, render, renderHook, screen, waitFor } from "#test"
 import { useRef, useState } from "react"
-import { act, render, renderHook, screen, waitFor } from "@/test"
 import { FocusLock } from "./focus-lock"
 
 describe("<FocusLock />", () => {

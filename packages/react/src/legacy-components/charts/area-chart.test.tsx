@@ -1,5 +1,5 @@
 import type { AreaProps } from "./"
-import { a11y, fireEvent, render, screen, waitFor } from "@/test"
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { AreaChart } from "./"
 
 describe("<AreaChart />", () => {

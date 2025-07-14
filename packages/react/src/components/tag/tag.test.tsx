@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "@/test"
+import { a11y, render, screen } from "#test"
 import { noop } from "../../utils"
 import { CheckIcon } from "../icon"
 import { Tag } from "./"

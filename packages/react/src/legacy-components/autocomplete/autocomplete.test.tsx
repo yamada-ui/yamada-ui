@@ -1,7 +1,7 @@
 import type { AutocompleteItem } from "."
 import { useState } from "react"
 import { Autocomplete, AutocompleteOption, AutocompleteOptionGroup } from "."
-import { act, fireEvent, render, renderHook, screen, waitFor } from "@/test"
+import { act, fireEvent, render, renderHook, screen, waitFor } from "#test"
 import { noop } from "../../utils"
 
 describe("<Autocomplete />", () => {

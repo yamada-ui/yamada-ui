@@ -18,7 +18,8 @@ export const config: StorybookConfig = {
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
-        "@/storybook": resolve(__dirname, "./"),
+        "#storybook": resolve(__dirname, "./"),
+        "@": resolve(__dirname, "../src"),
       }
     }
     return config

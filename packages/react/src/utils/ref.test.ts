@@ -1,5 +1,5 @@
+import { act, renderHook } from "#test"
 import { createRef } from "react"
-import { act, renderHook } from "@/test"
 import {
   assignRef,
   isRefObject,

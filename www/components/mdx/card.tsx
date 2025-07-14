@@ -1,6 +1,10 @@
 import type { As } from "@yamada-ui/react"
-import { ChevronRightIcon, Heading, SimpleGrid } from "@yamada-ui/react"
-import { Card as OriginalCard } from "@yamada-ui/react"
+import {
+  ChevronRightIcon,
+  Heading,
+  Card as OriginalCard,
+  SimpleGrid,
+} from "@yamada-ui/react"
 import NextLink from "next/link"
 
 export interface CardGroupProps {}

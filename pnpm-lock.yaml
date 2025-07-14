@@ -217,9 +217,6 @@ importers:
       '@types/update-notifier':
         specifier: 6.0.8
         version: 6.0.8
-      '@yamada-ui/workspace':
-        specifier: workspace:*
-        version: link:../workspace
       update-notifier:
         specifier: ^7.3.1
         version: 7.3.1
@@ -323,9 +320,6 @@ importers:
       '@types/react-dom':
         specifier: ^19.1.6
         version: 19.1.6(@types/react@19.1.8)
-      '@yamada-ui/workspace':
-        specifier: workspace:*
-        version: link:../workspace
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
@@ -345,9 +339,6 @@ importers:
         specifier: ^2.0.3
         version: 2.0.3
     devDependencies:
-      '@yamada-ui/workspace':
-        specifier: workspace:*
-        version: link:../workspace
       clean-package:
         specifier: 2.2.0
         version: 2.2.0
@@ -363,6 +354,9 @@ importers:
       '@eslint/compat':
         specifier: ^1.3.1
         version: 1.3.1(eslint@9.30.1)
+      '@limegrass/eslint-plugin-import-alias':
+        specifier: ^1.5.1
+        version: 1.5.1(eslint@9.30.1)
       '@octokit/request-error':
         specifier: ^7.0.0
         version: 7.0.0
@@ -470,9 +464,6 @@ importers:
       '@types/react-dom':
         specifier: ^19.1.6
         version: 19.1.6(@types/react@19.1.8)
-      '@yamada-ui/workspace':
-        specifier: workspace:*
-        version: link:../../../packages/workspace
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -501,9 +492,6 @@ importers:
       '@types/react-dom':
         specifier: ^19.1.6
         version: 19.1.6(@types/react@19.1.8)
-      '@yamada-ui/workspace':
-        specifier: workspace:*
-        version: link:../../../packages/workspace
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -544,9 +532,6 @@ importers:
       '@types/react-dom':
         specifier: ^19.1.6
         version: 19.1.6(@types/react@19.1.8)
-      '@yamada-ui/workspace':
-        specifier: workspace:*
-        version: link:../../packages/workspace
       vite:
         specifier: ^7.0.0
         version: 7.0.3(@types/node@24.0.12)(jiti@2.4.2)(tsx@4.20.3)
@@ -578,9 +563,6 @@ importers:
       '@vitejs/plugin-react-swc':
         specifier: ^3.8.0
         version: 3.10.2(vite@7.0.3)
-      '@yamada-ui/workspace':
-        specifier: workspace:*
-        version: link:../../packages/workspace
       vite:
         specifier: ^7.0.0
         version: 7.0.3(@types/node@24.0.12)(jiti@2.4.2)(tsx@4.20.3)
@@ -777,7 +759,6 @@ packages:
   /@babel/compat-data@7.28.0:
     resolution: {integrity: sha512-60X7qkglvrap8mn1lh2ebxXdZYtUcpd7gsmy9kLaBJ4i/WdY8PqTSdxyA8qraikqKQK5C1KRBKXqznrVapyNaw==, tarball: https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.28.0.tgz}
     engines: {node: '>=6.9.0'}
-    dev: false
 
   /@babel/core@7.27.1:
     resolution: {integrity: sha512-IaaGWsQqfsQWVLqMn9OB92MNN7zukfVA4s7KKAI0KfrrDsZ0yhi5uV4baBuLuN7n3vsZpwP8asPPcVwApxvjBQ==, tarball: https://registry.npmjs.org/@babel/core/-/core-7.27.1.tgz}
@@ -823,7 +804,6 @@ packages:
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@babel/generator@7.27.1:
     resolution: {integrity: sha512-UnJfnIpc/+JO0/+KRVQNGU+y5taA5vCbwN8+azkX6beii/ZF+enZJSOKo11ZSzGJjlNfJHfQtmQT8H+9TXPG2w==, tarball: https://registry.npmjs.org/@babel/generator/-/generator-7.27.1.tgz}
@@ -872,7 +852,6 @@ packages:
       browserslist: 4.25.1
       lru-cache: 5.1.1
       semver: 6.3.1
-    dev: false
 
   /@babel/helper-create-class-features-plugin@7.27.1(@babel/core@7.27.1):
     resolution: {integrity: sha512-QwGAmuvM17btKU5VqXfb+Giw4JcN0hjuufz3DYnpeVDvZLAObloM77bhMXiqry3Iio+Ai4phVRDwl6WU10+r5A==, tarball: https://registry.npmjs.org/@babel/helper-create-class-features-plugin/-/helper-create-class-features-plugin-7.27.1.tgz}
@@ -972,7 +951,6 @@ packages:
       '@babel/traverse': 7.28.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@babel/helper-optimise-call-expression@7.27.1:
     resolution: {integrity: sha512-URMGH08NzYFhubNSGJrpUEphGKQwMQYBySzat5cAByY1/YgIRkULnIy3tAMeszlL/so2HbeilYloUmSpd7GdVw==, tarball: https://registry.npmjs.org/@babel/helper-optimise-call-expression/-/helper-optimise-call-expression-7.27.1.tgz}
@@ -1047,7 +1025,6 @@ packages:
     dependencies:
       '@babel/template': 7.27.2
       '@babel/types': 7.28.0
-    dev: false
 
   /@babel/parser@7.28.0:
     resolution: {integrity: sha512-jVZGvOxOuNSsuQuLRTh13nU0AogFlw32w/MT+LV6D3sP5WdbW61E77RnkbaO2dUvmPAYrBDJXGn5gGS6tH4j8g==, tarball: https://registry.npmjs.org/@babel/parser/-/parser-7.28.0.tgz}
@@ -3481,6 +3458,18 @@ packages:
     resolution: {integrity: sha512-3sRl+pkyFY/kLmHl0cgHiFp2xEqErA8N3ECjMs7serSUBmoJ70lBa0PG5t0IM6WJgdZNyyI0R8YFfi5wM8+mzg==, tarball: https://registry.npmjs.org/@jspm/core/-/core-2.1.0.tgz}
     dev: true
 
+  /@limegrass/eslint-plugin-import-alias@1.5.1(eslint@9.30.1):
+    resolution: {integrity: sha512-W5PNfHhnj1CzlSAm5jMB7ITwiuQnIuRwwdwy8f/DBkYhwd5LOhY4ABHwpVeqqAiKC9nhfPQSANtoqpP3sxcESA==, tarball: https://registry.npmjs.org/@limegrass/eslint-plugin-import-alias/-/eslint-plugin-import-alias-1.5.1.tgz}
+    peerDependencies:
+      eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8.40.0 || ^9
+    dependencies:
+      eslint: 9.30.1(jiti@2.4.2)
+      fs-extra: 10.1.0
+      micromatch: 4.0.8
+      slash: 3.0.0
+      tsconfig-paths: 4.2.0
+    dev: false
+
   /@lucide/lab@0.1.2:
     resolution: {integrity: sha512-VprF2BJa7ZuTGOhUd5cf8tHJXyL63wdxcGieAiVVoR9hO0YmPsnZO0AGqDiX2/br+/MC6n8BoJcmPilltOXIJA==, tarball: https://registry.npmjs.org/@lucide/lab/-/lab-0.1.2.tgz}
 
@@ -5496,7 +5485,7 @@ packages:
   /@vanilla-extract/babel-plugin-debug-ids@1.2.0:
     resolution: {integrity: sha512-z5nx2QBnOhvmlmBKeRX5sPVLz437wV30u+GJL+Hzj1rGiJYVNvgIIlzUpRNjVQ0MgAgiQIqIUbqPnmMc6HmDlQ==, tarball: https://registry.npmjs.org/@vanilla-extract/babel-plugin-debug-ids/-/babel-plugin-debug-ids-1.2.0.tgz}
     dependencies:
-      '@babel/core': 7.27.1
+      '@babel/core': 7.28.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6293,7 +6282,6 @@ packages:
       electron-to-chromium: 1.5.181
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.25.1)
-    dev: false
 
   /buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==, tarball: https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz}
@@ -6380,7 +6368,6 @@ packages:
 
   /caniuse-lite@1.0.30001727:
     resolution: {integrity: sha512-pB68nIHmbN6L/4C6MH1DokyR3bYqFwjaSs/sWDHGj4CTcFtQUQMuJftVwWkXq7mNWOybD3KhUv3oWHoGxgP14Q==, tarball: https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001727.tgz}
-    dev: false
 
   /ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==, tarball: https://registry.npmjs.org/ccount/-/ccount-2.0.1.tgz}
@@ -7370,7 +7357,6 @@ packages:
 
   /electron-to-chromium@1.5.181:
     resolution: {integrity: sha512-+ISMj8OIQ+0qEeDj14Rt8WwcTOiqHyAB+5bnK1K7xNNLjBJ4hRCQfUkw8RWtcLbfBzDwc15ZnKH0c7SNOfwiyA==, tarball: https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.181.tgz}
-    dev: false
 
   /embla-carousel-react@8.6.0(react@19.1.0):
     resolution: {integrity: sha512-0/PjqU7geVmo6F734pmPqpyHqiM99olvyecY7zdweCw+6tKEXnrE90pBiBbMMU8s5tICemzpQ3hi5EpxzGW+JA==, tarball: https://registry.npmjs.org/embla-carousel-react/-/embla-carousel-react-8.6.0.tgz}
@@ -8613,7 +8599,6 @@ packages:
       graceful-fs: 4.2.11
       jsonfile: 6.1.0
       universalify: 2.0.1
-    dev: true
 
   /fs-extra@7.0.1:
     resolution: {integrity: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==, tarball: https://registry.npmjs.org/fs-extra/-/fs-extra-7.0.1.tgz}
@@ -9842,7 +9827,6 @@ packages:
       universalify: 2.0.1
     optionalDependencies:
       graceful-fs: 4.2.11
-    dev: true
 
   /jsonparse@1.3.1:
     resolution: {integrity: sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==, tarball: https://registry.npmjs.org/jsonparse/-/jsonparse-1.3.1.tgz}
@@ -14282,6 +14266,7 @@ packages:
 
   /tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==, tarball: https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz}
+    requiresBuild: true
 
   /tsx@4.20.3:
     resolution: {integrity: sha512-qjbnuR9Tr+FJOMBqJCW5ehvIo/buZq7vH7qD7JziU98h6l3qGy0a/yPFjwO+y0/T7GFpNgNAvEcPPVfyT8rrPQ==, tarball: https://registry.npmjs.org/tsx/-/tsx-4.20.3.tgz}
@@ -14625,7 +14610,6 @@ packages:
   /universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==, tarball: https://registry.npmjs.org/universalify/-/universalify-2.0.1.tgz}
     engines: {node: '>= 10.0.0'}
-    dev: true
 
   /unpipe@1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==, tarball: https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz}
@@ -14686,7 +14670,6 @@ packages:
       browserslist: 4.25.1
       escalade: 3.2.0
       picocolors: 1.1.1
-    dev: false
 
   /update-notifier@7.3.1:
     resolution: {integrity: sha512-+dwUY4L35XFYEzE+OAL3sarJdUioVovq+8f7lcIJ7wnmnYQV5UD1Y/lcwaMSyaQ6Bj3JMj1XSTjZbNLHn/19yA==, tarball: https://registry.npmjs.org/update-notifier/-/update-notifier-7.3.1.tgz}

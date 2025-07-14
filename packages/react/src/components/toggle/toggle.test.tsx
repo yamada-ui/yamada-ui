@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@/test"
+import { fireEvent, render, screen } from "#test"
 import { Toggle, ToggleGroup } from "."
 import { noop } from "../../utils"
 

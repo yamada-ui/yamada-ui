@@ -4,8 +4,8 @@ import type {
   UseFocusOnMouseDownProps,
   UseFocusOnShowProps,
 } from "./"
+import { act, fireEvent, render, waitFor } from "#test"
 import { useRef } from "react"
-import { act, fireEvent, render, waitFor } from "@/test"
 import { useFocusOnHide, useFocusOnPointerDown, useFocusOnShow } from "./"
 
 describe("useFocusOnHide", () => {

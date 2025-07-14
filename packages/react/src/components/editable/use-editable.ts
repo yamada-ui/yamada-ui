@@ -3,15 +3,15 @@
 import type { ChangeEvent, FocusEvent, KeyboardEvent } from "react"
 import type { PropGetter } from "../../core"
 import type { FieldProps } from "../field"
-import { useCallback, useEffect } from "react"
-import { useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import { useFocusOnPointerDown } from "../../hooks/use-focus"
-import { createContext, useCallbackRef } from "../../utils"
 import {
   contains,
+  createContext,
   handlerAll,
   mergeRefs,
+  useCallbackRef,
   useSafeLayoutEffect,
   useUpdateEffect,
 } from "../../utils"

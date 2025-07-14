@@ -1,5 +1,5 @@
 import type { RadioItem } from "./"
-import { a11y, fireEvent, render, renderHook, screen } from "@/test"
+import { a11y, fireEvent, render, renderHook, screen } from "#test"
 import { ui } from "../../core"
 import { Radio, RadioGroup, useRadioGroup } from "./"
 

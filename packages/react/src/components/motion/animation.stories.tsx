@@ -5,8 +5,7 @@ import { useBoolean } from "../../hooks/use-boolean"
 import { Box } from "../box"
 import { Button } from "../button"
 import { Heading } from "../heading"
-import { HStack } from "../stack"
-import { VStack } from "../stack"
+import { HStack, VStack } from "../stack"
 import { Motion } from "./motion"
 
 type Story = StoryFn<typeof Motion>

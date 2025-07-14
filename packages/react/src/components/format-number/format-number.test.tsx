@@ -1,4 +1,4 @@
-import { a11y, render } from "@/test"
+import { a11y, render } from "#test"
 import { FormatNumber } from "./format-number"
 
 describe("<FormatNumber />", () => {

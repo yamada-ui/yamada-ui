@@ -1,5 +1,5 @@
+import { a11y, render, screen, waitFor } from "#test"
 import { useRef, useState } from "react"
-import { a11y, render, screen, waitFor } from "@/test"
 import { FileButton } from "."
 
 describe("<FileButton />", () => {

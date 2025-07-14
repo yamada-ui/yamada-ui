@@ -1,4 +1,4 @@
-import { renderHook } from "@/test"
+import { renderHook } from "#test"
 import { usePagination } from "./use-pagination"
 
 describe("usePagination", () => {

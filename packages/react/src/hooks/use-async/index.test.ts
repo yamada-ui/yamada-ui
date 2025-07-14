@@ -1,4 +1,4 @@
-import { act, renderHook, waitFor } from "@/test"
+import { act, renderHook, waitFor } from "#test"
 import { useAsync, useAsyncFunc, useAsyncRetry } from "."
 
 describe("useAsync", () => {

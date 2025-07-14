@@ -1,6 +1,6 @@
 import type { FC } from "react"
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { useEffect, useState } from "react"
-import { a11y, fireEvent, render, screen, waitFor } from "@/test"
 import { Box } from "../box"
 import { Flex } from "../flex"
 import { Separator } from "../separator"

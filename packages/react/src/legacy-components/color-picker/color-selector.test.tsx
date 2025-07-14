@@ -1,5 +1,5 @@
 import { expect } from "vitest"
-import { fireEvent, render, screen } from "@/test"
+import { fireEvent, render, screen } from "#test"
 import { ColorSelector } from "./"
 
 describe("<ColorSelector />", () => {

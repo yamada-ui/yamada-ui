@@ -1,13 +1,12 @@
 import type { TSESLint } from "@typescript-eslint/utils"
 import nextPlugin from "@next/eslint-plugin-next"
 import {
+  createLanguageConfig,
   jsxA11yConfig,
-  languageOptionFactory,
   reactConfig,
   reactHooksConfig,
   sharedConfigArray,
   cspellConfig as sharedCspellConfig,
-  sharedFiles,
 } from "@yamada-ui/workspace/eslint"
 import tseslint from "typescript-eslint"
 
@@ -16,14 +15,6 @@ const noConsoleConfig: TSESLint.FlatConfig.Config = {
   files: ["scripts/**"],
   rules: {
     "no-console": "off",
-  },
-}
-
-const restrictedImportsConfig: TSESLint.FlatConfig.Config = {
-  name: "eslint/restricted-imports",
-  files: sharedFiles,
-  rules: {
-    "no-restricted-imports": "off",
   },
 }
 
@@ -43,7 +34,7 @@ const nextConfig: TSESLint.FlatConfig.Config = {
   },
 }
 
-const languageOptionConfig = languageOptionFactory(true, {
+const languageConfig = createLanguageConfig(true, {
   languageOptions: {
     parserOptions: {
       ecmaFeatures: {
@@ -55,10 +46,9 @@ const languageOptionConfig = languageOptionFactory(true, {
 })
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
-  languageOptionConfig,
+  languageConfig,
   ...sharedConfigArray,
   noConsoleConfig,
-  restrictedImportsConfig,
   cspellConfig,
   nextConfig,
   jsxA11yConfig,

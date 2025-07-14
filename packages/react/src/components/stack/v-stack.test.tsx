@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "@/test"
+import { a11y, render, screen } from "#test"
 import { Box } from "../box"
 import { VStack } from "./v-stack"
 

@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { useMemo } from "react"
-import { PropsTable } from "@/storybook"
 import { Reorder, ReorderItem, ReorderRoot, ReorderTrigger } from "."
 import { GhostIcon } from "../icon"
 import { Separator } from "../separator"

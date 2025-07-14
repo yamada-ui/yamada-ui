@@ -1,5 +1,5 @@
 import type { ThemeScheme } from "./index.types"
-import { act, renderHook } from "@/test"
+import { act, renderHook } from "#test"
 import { useTheme } from "./theme-provider"
 
 describe("ThemeProvider", () => {

@@ -5,7 +5,7 @@ import { Resizable } from "./"
 
 type Story = StoryFn<typeof Resizable.Root>
 
-import { PropsTable } from "@/storybook"
+import { PropsTable } from "#storybook"
 import { useBoolean } from "../../hooks/use-boolean"
 import { Button } from "../button"
 import { Center } from "../center"

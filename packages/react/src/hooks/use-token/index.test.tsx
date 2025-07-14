@@ -1,4 +1,4 @@
-import { renderHook } from "@/test"
+import { renderHook } from "#test"
 import { UIProvider } from "../../providers/ui-provider"
 import { useToken } from "./"
 

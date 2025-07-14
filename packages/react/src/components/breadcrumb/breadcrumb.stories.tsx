@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { useMemo } from "react"
-import { PropsTable } from "@/storybook"
 import { ChevronsRightIcon } from "../icon"
 // import { Menu, MenuButton, MenuItem, MenuList } from "../menu"
 import { Breadcrumb } from "./"

@@ -1,4 +1,4 @@
-import { drag, fireEvent, render, screen, waitFor } from "@/test"
+import { drag, fireEvent, render, screen, waitFor } from "#test"
 import { AlphaSlider } from "./"
 
 describe("<AlphaSlider />", () => {

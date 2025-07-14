@@ -9,7 +9,8 @@ export default mergeConfig(
     plugins: [react()],
     resolve: {
       alias: {
-        "@/test": resolve(__dirname, "./test"),
+        "#test": resolve(__dirname, "./test"),
+        "@": resolve(__dirname, "./src"),
       },
     },
     test: {

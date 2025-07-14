@@ -2,9 +2,13 @@ import type { TSESLint } from "@typescript-eslint/utils"
 import prettierConfig from "eslint-config-prettier"
 import { baseConfigArray } from "./base"
 import { cspellConfig } from "./cspell"
-import { importConfigArray } from "./import"
+import {
+  createImportAliasConfig,
+  importConfigArray,
+  restrictedImportsConfigArray,
+} from "./import"
 import { jsxA11yConfig } from "./jsx-a11y"
-import { languageOptionFactory } from "./language-option"
+import { createLanguageConfig } from "./language"
 import { perfectionistConfig } from "./perfectionist"
 import { reactConfig } from "./react"
 import { reactHooksConfig } from "./react-hooks"
@@ -15,14 +19,16 @@ import { vitestConfig } from "./vitest"
 
 export {
   baseConfigArray,
+  createImportAliasConfig,
+  createLanguageConfig,
   cspellConfig,
   importConfigArray,
   jsxA11yConfig,
-  languageOptionFactory,
   perfectionistConfig,
   prettierConfig,
   reactConfig,
   reactHooksConfig,
+  restrictedImportsConfigArray,
   sharedFiles,
   testingLibraryConfig,
   typescriptConfig,

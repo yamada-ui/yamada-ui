@@ -1,4 +1,4 @@
-import { a11y, act, render, screen, waitFor } from "@/test"
+import { a11y, act, render, screen, waitFor } from "#test"
 import { PinInput } from "."
 
 describe("<PinInput />", () => {

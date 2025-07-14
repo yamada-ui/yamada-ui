@@ -1,4 +1,4 @@
-import { a11y, act, fireEvent, render, screen, waitFor } from "@/test"
+import { a11y, act, fireEvent, render, screen, waitFor } from "#test"
 import { BoxIcon } from "../icon"
 import {
   ContextMenu,

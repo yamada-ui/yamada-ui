@@ -1,4 +1,4 @@
-import { render, screen } from "@/test"
+import { render, screen } from "#test"
 import { useHover } from "./"
 
 describe("useHover", () => {

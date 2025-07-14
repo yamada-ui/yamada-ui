@@ -3,8 +3,12 @@
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { Dict } from "../../utils"
 import type { LinkBoxStyle } from "./link-box.style"
-import { createSlotComponent, radiusProperties, styled } from "../../core"
-import { useExtractProps } from "../../core"
+import {
+  createSlotComponent,
+  radiusProperties,
+  styled,
+  useExtractProps,
+} from "../../core"
 import { dataAttr } from "../../utils"
 import { linkBoxStyle } from "./link-box.style"
 

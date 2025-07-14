@@ -87,7 +87,6 @@
     "@lucide/lab": "^0.1.2",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "@yamada-ui/workspace": "workspace:*",
     "clean-package": "2.2.0",
     "react-hook-form": "^7.57.0",
     "react-icons": "^5.5.0",

@@ -1,7 +1,6 @@
 import type { CSSProperties, DataAttributes, ReactNode } from "react"
 import { cloneElement, useMemo } from "react"
-import { dataAttr, isNull, isUndefined } from "../../utils"
-import { getValidChildren } from "../../utils"
+import { dataAttr, getValidChildren, isNull, isUndefined } from "../../utils"
 
 export const useGroup = (children?: ReactNode) => {
   const validChildren = getValidChildren(children)

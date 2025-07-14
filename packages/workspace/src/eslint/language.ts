@@ -3,7 +3,7 @@ import globals from "globals"
 import { parser } from "typescript-eslint"
 import { sharedFiles } from "./shared"
 
-export const languageOptionFactory = (
+export const createLanguageConfig = (
   project: TSESLint.ParserOptions["project"] = true,
   config: TSESLint.FlatConfig.Config = {},
 ): TSESLint.FlatConfig.Config => {

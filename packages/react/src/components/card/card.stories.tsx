@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { PropsTable } from "@/storybook"
+import { PropsTable } from "#storybook"
 import { COLOR_SCHEMES, transformSize } from "../../utils"
 import { Button } from "../button"
 import { Heading } from "../heading"

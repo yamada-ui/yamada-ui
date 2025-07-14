@@ -3,8 +3,14 @@
 import type { UIEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
-import { dataAttr, handlerAll, isMac, vendor } from "../../utils"
-import { mergeRefs, useSafeLayoutEffect } from "../../utils"
+import {
+  dataAttr,
+  handlerAll,
+  isMac,
+  mergeRefs,
+  useSafeLayoutEffect,
+  vendor,
+} from "../../utils"
 
 export interface UseScrollAreaProps extends HTMLProps {
   /**

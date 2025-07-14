@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "@/test"
+import { a11y, render, screen } from "#test"
 import { Kbd } from "."
 
 describe("<Kbd />", () => {

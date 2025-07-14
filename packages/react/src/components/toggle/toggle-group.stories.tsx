@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { useState } from "react"
-import { PropsTable } from "@/storybook"
 import { Toggle, ToggleGroup } from "."
 import { COLOR_SCHEMES } from "../../utils"
 import { For } from "../for"

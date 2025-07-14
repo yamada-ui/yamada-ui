@@ -1,6 +1,5 @@
-import { act, renderHook } from "@/test"
-import { ColorModeProvider } from "./color-mode-provider"
-import { useColorMode } from "./color-mode-provider"
+import { act, renderHook } from "#test"
+import { ColorModeProvider, useColorMode } from "./color-mode-provider"
 
 describe("ColorModeProvider", () => {
   test("provides a color mode to child components", () => {

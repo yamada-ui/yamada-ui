@@ -13,10 +13,10 @@ import {
   findChild,
   getValidChildren,
   isEmpty,
+  isString,
   omitChildren,
   runIfFn,
 } from "../../utils"
-import { isString } from "../../utils"
 import { Collapse } from "../collapse"
 import { ChevronDownIcon } from "../icon"
 import { accordionStyle } from "./accordion.style"

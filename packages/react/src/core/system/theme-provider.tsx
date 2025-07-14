@@ -12,8 +12,11 @@ import type {
   UsageTheme,
 } from "./index.types"
 import type { Storage } from "./storage-manager"
-import { ThemeProvider as EmotionThemeProvider, Global } from "@emotion/react"
-import { ThemeContext } from "@emotion/react"
+import {
+  ThemeProvider as EmotionThemeProvider,
+  Global,
+  ThemeContext,
+} from "@emotion/react"
 import { use, useCallback, useEffect, useMemo, useState } from "react"
 import { isEmptyObject, isObject, isUndefined, merge } from "../../utils"
 import { css } from "../css"

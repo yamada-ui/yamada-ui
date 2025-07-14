@@ -1,7 +1,6 @@
 import { Box } from "../../components/box"
 import { Center } from "../../components/center"
-import { HStack } from "../../components/stack"
-import { VStack } from "../../components/stack"
+import { HStack, VStack } from "../../components/stack"
 import { Text } from "../../components/text"
 import { Wrap } from "../../components/wrap"
 

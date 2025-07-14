@@ -1,6 +1,6 @@
 import type { InfiniteScrollAreaProps } from "."
+import { a11y, fireEvent, render, waitFor } from "#test"
 import { useRef, useState } from "react"
-import { a11y, fireEvent, render, waitFor } from "@/test"
 import { InfiniteScrollArea } from "."
 
 describe("<InfiniteScrollArea />", () => {

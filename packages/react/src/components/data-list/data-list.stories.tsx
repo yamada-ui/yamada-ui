@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { useMemo } from "react"
-import { PropsTable } from "@/storybook"
 import { Separator } from "../separator"
 import { VStack } from "../stack"
 import { DataList } from "./"

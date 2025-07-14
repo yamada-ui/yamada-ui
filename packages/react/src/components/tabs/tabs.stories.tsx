@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { FC } from "react"
+import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
-import { PropsTable } from "@/storybook"
 import { useInterval } from "../../hooks/use-interval"
 import { uuid } from "../../utils"
 import { Button } from "../button"

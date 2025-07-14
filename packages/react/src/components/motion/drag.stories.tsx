@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import {} from "#storybook"
 import { useDragControls } from "motion/react"
 import { useRef } from "react"
-import {} from "@/storybook"
 import { Box } from "../box"
 import { Center } from "../center"
 import { Motion } from "./motion"

@@ -1,8 +1,7 @@
 "use client"
 
 import type { DependencyList } from "react"
-import { useCallback, useEffect, useRef } from "react"
-import { useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useMounted } from "../use-mounted"
 
 export type FunctionReturningPromise = (...args: any[]) => Promise<any>

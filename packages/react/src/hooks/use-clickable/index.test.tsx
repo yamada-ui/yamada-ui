@@ -1,9 +1,7 @@
 import type { FC } from "react"
 import type { UseClickableProps } from "./"
+import { act, fireEvent, render } from "#test"
 import { vi } from "vitest"
-import { act } from "@/test"
-import { fireEvent } from "@/test"
-import { render } from "@/test"
 import { useClickable } from "./"
 
 const setup = (props: UseClickableProps = {}) => {

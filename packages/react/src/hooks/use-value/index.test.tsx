@@ -1,5 +1,5 @@
+import { renderHook, system } from "#test"
 import MatchMediaMock from "vitest-matchmedia-mock"
-import { renderHook, system } from "@/test"
 import { getValue, useValue } from "./"
 
 describe("useValue", () => {

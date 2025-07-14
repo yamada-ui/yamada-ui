@@ -1,4 +1,4 @@
-import { act, renderHook } from "@/test"
+import { act, renderHook } from "#test"
 import { useCounter } from "./index"
 
 describe("useCounter", () => {

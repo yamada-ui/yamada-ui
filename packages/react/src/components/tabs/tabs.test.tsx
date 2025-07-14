@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, render, screen } from "@/test"
+import { a11y, render, screen } from "#test"
 import { Tabs } from "./"
 
 const items: Required<Tabs.RootProps>["items"] = [

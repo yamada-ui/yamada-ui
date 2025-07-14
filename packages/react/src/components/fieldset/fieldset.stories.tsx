@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { PropsTable } from "@/storybook"
+import { PropsTable } from "#storybook"
 import { Fieldset } from "."
 import { Field } from "../field"
 import { Input } from "../input"

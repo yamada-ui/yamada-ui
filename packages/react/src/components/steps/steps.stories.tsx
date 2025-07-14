@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
-import { PropsTable } from "@/storybook"
 import { Steps } from "."
 import { COLOR_SCHEMES } from "../../utils"
 import { Box } from "../box"

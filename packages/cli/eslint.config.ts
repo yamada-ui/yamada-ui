@@ -1,7 +1,8 @@
 import type { TSESLint } from "@typescript-eslint/utils"
 import {
+  createLanguageConfig,
   cspellConfig,
-  languageOptionFactory,
+  restrictedImportsConfigArray,
   sharedConfigArray,
   sharedFiles,
 } from "@yamada-ui/workspace/eslint"
@@ -22,11 +23,12 @@ const tsConfigPath = resolve(
   "tsconfig.json",
 )
 
-const languageOptionConfig = languageOptionFactory(tsConfigPath)
+const languageConfig = createLanguageConfig(tsConfigPath)
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
-  languageOptionConfig,
+  languageConfig,
   ...sharedConfigArray,
+  ...restrictedImportsConfigArray,
   cspellConfig,
   noConsoleConfig,
 )

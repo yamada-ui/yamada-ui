@@ -2,8 +2,9 @@
   "extends": "@yamada-ui/workspace/typescript/tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@/storybook": ["./storybook"],
-      "@/test": ["./test"]
+      // "@/*": ["./src/*"],
+      "#storybook": ["./storybook"],
+      "#test": ["./test"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],

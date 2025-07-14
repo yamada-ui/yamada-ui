@@ -1,5 +1,5 @@
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack } from "."
-import { a11y, act, fireEvent, render, renderHook, screen } from "@/test"
+import { a11y, act, fireEvent, render, renderHook, screen } from "#test"
 import { noop } from "../../utils"
 import { useSlider } from "./slider"
 

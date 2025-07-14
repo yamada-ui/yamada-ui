@@ -1,12 +1,14 @@
 import type { TSESLint } from "@typescript-eslint/utils"
 import {
+  createImportAliasConfig,
+  createLanguageConfig,
   jsxA11yConfig,
-  languageOptionFactory,
   reactConfig,
   reactHooksConfig,
   sharedConfigArray,
   cspellConfig as sharedCspellConfig,
   sharedFiles,
+  restrictedImportsConfigArray as sharedRestrictedImportsConfigArray,
   vitestConfig,
 } from "@yamada-ui/workspace/eslint"
 import { dirname, resolve } from "node:path"
@@ -20,24 +22,21 @@ const ignoresConfig: TSESLint.FlatConfig.Config = {
 }
 
 const restrictedImportsConfigArray: TSESLint.FlatConfig.ConfigArray = [
-  {
-    name: "eslint/restricted-imports/react",
-    files: sharedFiles,
-    rules: {
-      "no-restricted-imports": ["error", "@yamada-ui/react"],
-    },
-  },
+  ...sharedRestrictedImportsConfigArray,
   {
     name: "eslint/restricted-imports/utils",
-    files: [
-      "src/!(utils)/**/*.ts",
-      "src/!(utils)/**/*.cts",
-      "src/!(utils)/**/*.mts",
-      "src/!(utils)/**/*.tsx",
-      "src/!(utils)/**/*.d.ts",
-    ],
+    files: sharedFiles.map((file) => `src/!(utils)/${file}`),
     rules: {
-      "no-restricted-imports": ["error", "@yamada-ui/utils"],
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            "@yamada-ui/react",
+            "@yamada-ui/utils",
+            "@yamada-ui/workspace/*",
+          ],
+        },
+      ],
     },
   },
 ]
@@ -60,12 +59,14 @@ const tsConfigPath = resolve(
   "tsconfig.json",
 )
 
-const languageOptionConfig = languageOptionFactory(tsConfigPath)
+const languageConfig = createLanguageConfig(tsConfigPath)
+const importAliasConfig = createImportAliasConfig(tsConfigPath)
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
-  languageOptionConfig,
+  languageConfig,
   ...sharedConfigArray,
   ...restrictedImportsConfigArray,
+  importAliasConfig,
   ignoresConfig,
   noConsoleConfig,
   cspellConfig,

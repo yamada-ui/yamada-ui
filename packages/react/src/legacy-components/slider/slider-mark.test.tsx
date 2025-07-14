@@ -1,5 +1,5 @@
 import { Slider, SliderMark } from "."
-import { a11y, render, screen } from "@/test"
+import { a11y, render, screen } from "#test"
 
 describe("<SliderMark />", () => {
   test("should render correctly", async () => {

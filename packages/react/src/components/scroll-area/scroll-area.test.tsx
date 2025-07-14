@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, act, fireEvent, render, screen, waitFor } from "@/test"
+import { a11y, act, fireEvent, render, screen, waitFor } from "#test"
 import { ScrollArea } from "."
 
 const TestContent: FC = () => {

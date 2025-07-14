@@ -25,6 +25,7 @@ export const baseConfigArray = [
       "no-dupe-else-if": "error",
       "no-dupe-keys": "error",
       "no-duplicate-case": "error",
+      "no-duplicate-imports": ["error", { allowSeparateTypeImports: true }],
       "no-empty-character-class": "error",
       "no-empty-pattern": "error",
       "no-empty-static-block": "error",
@@ -62,13 +63,6 @@ export const baseConfigArray = [
       "valid-typeof": "error",
 
       "no-console": ["warn", { allow: ["warn", "error"] }],
-    },
-  } satisfies TSESLint.FlatConfig.Config,
-  {
-    name: "eslint/restricted-imports",
-    files: sharedFiles,
-    rules: {
-      "no-restricted-imports": ["error", "@yamada-ui/react"],
     },
   } satisfies TSESLint.FlatConfig.Config,
   {

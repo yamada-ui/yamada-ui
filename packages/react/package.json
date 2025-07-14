@@ -57,10 +57,10 @@
     "@emotion/react": "^11.14.0",
     "@emotion/serialize": "^1.3.3",
     "@emotion/sheet": "^1.4.0",
-    "@emotion/styled": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@emotion/use-insertion-effect-with-fallbacks": "^1.2.0",
     "@emotion/utils": "^1.4.2",
-    "@floating-ui/react-dom": "^2.1.3",
+    "@floating-ui/react-dom": "^2.1.4",
     "@tanstack/react-table": "^8.21.3",
     "@yamada-ui/utils": "workspace:*",
     "color2k": "^2.0.3",
@@ -79,16 +79,16 @@
     "react-fast-compare": "^3.2.2",
     "react-focus-lock": "^2.13.6",
     "react-remove-scroll": "^2.7.1",
-    "react-resizable-panels": "^3.0.2",
-    "recharts": "^3.0.0"
+    "react-resizable-panels": "^3.0.3",
+    "recharts": "^3.1.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "^9.8.0",
+    "@faker-js/faker": "^9.9.0",
     "@lucide/lab": "^0.1.2",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "clean-package": "2.2.0",
-    "react-hook-form": "^7.57.0",
+    "react-hook-form": "^7.60.0",
     "react-icons": "^5.5.0",
     "use-mask-input": "^3.4.2"
   },

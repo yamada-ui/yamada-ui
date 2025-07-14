@@ -15,7 +15,6 @@ import {
   useBreakpointEffect,
   useDisclosure,
   useUpdateEffect,
-  VStack,
 } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { useMemo } from "react"
@@ -144,12 +143,14 @@ function DocsMenu({ onClose }: DocsMenuProps) {
   }, [docMap])
 
   const secondaryItems = useMemo(() => {
-    const { items = [] } =
+    if (!pathname.startsWith("/docs")) return []
+
+    const { items = [], pathname: href } =
       primaryItems.find((item) => pathname.startsWith(item.pathname!)) ?? {}
 
     return [
       {
-        pathname: pathname.split("/").slice(0, 3).join("/"),
+        pathname: href,
         segment: "overview",
         title: changelog ? t("latest") : t("overview"),
       },
@@ -158,7 +159,7 @@ function DocsMenu({ onClose }: DocsMenuProps) {
   }, [changelog, pathname, primaryItems, t])
 
   return (
-    <VStack display={pathname.startsWith("/docs") ? "flex" : "none"} gap="md">
+    <>
       <Separator />
 
       <ButtonGroup
@@ -182,9 +183,14 @@ function DocsMenu({ onClose }: DocsMenuProps) {
         ))}
       </ButtonGroup>
 
-      <Separator />
+      <Separator display={pathname.startsWith("/docs") ? "block" : "none"} />
 
-      <Box as="nav" _lastChild={{ mb: "0" }}>
+      <Box
+        as="nav"
+        display={pathname.startsWith("/docs") ? "block" : "none"}
+        w="full"
+        _lastChild={{ mb: "0" }}
+      >
         {secondaryItems.map(
           ({ items, pathname: href, segment, status, title }) => {
             if (items) {
@@ -236,7 +242,7 @@ function DocsMenu({ onClose }: DocsMenuProps) {
           },
         )}
       </Box>
-    </VStack>
+    </>
   )
 }
 

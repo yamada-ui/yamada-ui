@@ -2,6 +2,9 @@
   "name": "www",
   "version": "2.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "clean": "rimraf .next .velite .eslintcache tsconfig.tsbuildinfo node_modules",
     "dev:content": "velite --watch",

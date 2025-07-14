@@ -3,7 +3,9 @@ name: Storybook
 on:
   push:
     paths:
-      - "packages/**"
+      - "packages/**/*.(html|ts|tsx)"
+      - "packages/**/package.json"
+      - "!packages/(cli|workspace)/**"
       - "!packages/**/(scripts|test)/**"
       - "!packages/**/*.test.(ts|tsx)"
       - "package.json"
@@ -34,6 +36,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
           branch: gh-pages
-          folder: storybook-static
+          folder: packages/react/storybook-static
           clean: true
           clean-exclude: .nojekyll

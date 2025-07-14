@@ -32,6 +32,7 @@ import {
   isEmptyObject,
   isObject,
   isRegExp,
+  isUndefined,
   merge,
   omitObject,
   toArray,
@@ -124,7 +125,7 @@ function getConditionStyle<Y extends boolean = false>(
 
     const breakpointObj = queries.reduce<Style<Y>>(
       (prev, { breakpoint, query }) => {
-        if (value[breakpoint]) {
+        if (!isUndefined(value[breakpoint])) {
           prev = merge(
             prev,
             getModifierStyle<Y>(
@@ -151,7 +152,7 @@ function getConditionStyle<Y extends boolean = false>(
       return prev
     }, {})
 
-    return { ...breakpointObj, ...additionalObj }
+    return merge(breakpointObj, additionalObj)
   }
 }
 

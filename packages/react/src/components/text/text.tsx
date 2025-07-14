@@ -20,11 +20,13 @@ export interface TextProps extends HTMLStyledProps<"p">, ThemeProps<TextStyle> {
   decoration?: CSSProps["textDecoration"]
 }
 
-export const {
+const {
   PropsContext: TextPropsContext,
   usePropsContext: useTextPropsContext,
   withContext,
 } = createComponent<TextProps, TextStyle>("text", textStyle)
+
+export { TextPropsContext, useTextPropsContext }
 
 /**
  * `Text` is a component that represents a paragraph of text. By default, it renders a `p` element.

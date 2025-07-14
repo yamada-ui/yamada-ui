@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { Button } from "."
 import { CheckIcon, PencilIcon, PlusIcon, XIcon } from "../icon"
+import { IconButton } from "../icon-button"
 import { ButtonGroup } from "./button-group"
-import { IconButton } from "./icon-button"
 
 type Story = StoryFn<typeof ButtonGroup>
 

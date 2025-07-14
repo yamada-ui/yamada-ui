@@ -2,7 +2,6 @@
 
 import type { FC, PropsWithChildren, ReactNode, RefObject } from "react"
 import type { LoadingConfig, ThemeConfig } from "../../core"
-import type { LoadingSharedProps } from "./utils"
 import { AnimatePresence } from "motion/react"
 import { createContext, createRef, use, useMemo, useRef, useState } from "react"
 import { RemoveScroll } from "react-remove-scroll"
@@ -122,6 +121,13 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
       />
     </LoadingContext.Provider>
   )
+}
+
+export interface LoadingSharedProps {
+  duration: null | number
+  message: ReactNode | undefined
+  onFinish: () => void
+  initial?: boolean | string
 }
 
 interface ControllerProps extends LoadingConfig {

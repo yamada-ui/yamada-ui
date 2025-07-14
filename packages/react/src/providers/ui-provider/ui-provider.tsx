@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from "react"
+import type { FC } from "react"
 import type { ColorModeProviderProps, ThemeProviderProps } from "../../core"
 import type { I18nProviderProps } from "../i18n-provider"
 import { LoadingProvider } from "../../components/loading"
@@ -13,12 +13,8 @@ import { I18nProvider } from "../i18n-provider"
 
 export interface UIProviderProps
   extends Omit<ThemeProviderProps, "storageKey">,
-    Pick<ColorModeProviderProps, "colorMode" | "colorModeManager">,
+    Pick<ColorModeProviderProps, "colorMode">,
     I18nProviderProps {
-  /**
-   * Application content.
-   */
-  children: ReactNode
   /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
@@ -37,16 +33,16 @@ export interface UIProviderProps
 export const UIProvider: FC<UIProviderProps> = ({
   children,
   colorMode,
-  colorModeManager,
   colorModeStorageKey,
   config = defaultConfig,
+  cookie,
   dir,
   disableGlobalStyle,
   disableResetStyle,
   intl,
   locale,
+  storage,
   theme = defaultTheme,
-  themeSchemeManager,
   themeSchemeStorageKey,
 }) => {
   return (
@@ -55,16 +51,18 @@ export const UIProvider: FC<UIProviderProps> = ({
         <SystemProvider config={config} theme={theme}>
           <ThemeProvider
             config={config}
+            cookie={cookie}
             disableGlobalStyle={disableGlobalStyle}
             disableResetStyle={disableResetStyle}
+            storage={storage}
             storageKey={themeSchemeStorageKey}
             theme={theme}
-            themeSchemeManager={themeSchemeManager}
           >
             <ColorModeProvider
               colorMode={colorMode}
-              colorModeManager={colorModeManager}
               config={config}
+              cookie={cookie}
+              storage={storage}
               storageKey={colorModeStorageKey}
             >
               <LoadingProvider {...config.loading}>{children}</LoadingProvider>

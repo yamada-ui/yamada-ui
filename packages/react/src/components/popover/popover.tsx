@@ -16,10 +16,10 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { createSlotComponent } from "../../core"
 import { cast, runIfFn } from "../../utils"
-import { fadeScaleVariants } from "../fade"
+import { fadeScaleVariants } from "../fade-scale"
 import { motion } from "../motion"
 import { Portal } from "../portal"
-import { slideFadeVariants } from "../slide"
+import { slideFadeVariants } from "../slide-fade"
 import { popoverStyle } from "./popover.style"
 import { usePopover } from "./use-popover"
 
@@ -121,11 +121,11 @@ export interface PopoverRootProps
   withCloseButton?: boolean
 }
 
-export const {
-  ComponentContext: PopoverContext,
+const {
+  ComponentContext,
   PropsContext: PopoverPropsContext,
   StyleContext,
-  useComponentContext: usePopoverContext,
+  useComponentContext,
   usePropsContext: usePopoverPropsContext,
   withContext,
   useRootComponentProps,
@@ -133,6 +133,8 @@ export const {
   "popover",
   popoverStyle,
 )
+
+export { PopoverPropsContext, usePopoverPropsContext }
 
 /**
  * `Popover` is a component that floats around an element to display information.
@@ -193,9 +195,9 @@ export const PopoverRoot: FC<PopoverRootProps> = (props) => {
 
   return (
     <StyleContext value={styleContext}>
-      <PopoverContext value={popoverContext}>
+      <ComponentContext value={popoverContext}>
         {runIfFn(children, { open, onClose, onForceClose })}
-      </PopoverContext>
+      </ComponentContext>
     </StyleContext>
   )
 }
@@ -206,7 +208,7 @@ export const PopoverTrigger = withContext<"button", PopoverTriggerProps>(
   "button",
   "trigger",
 )({ asChild: true }, (props) => {
-  const { getTriggerProps } = usePopoverContext()
+  const { getTriggerProps } = useComponentContext()
 
   return getTriggerProps(props)
 })
@@ -217,7 +219,7 @@ export const PopoverAnchor = withContext<"div", PopoverAnchorProps>(
   "div",
   "anchor",
 )({ asChild: true }, (props) => {
-  const { getAnchorProps } = usePopoverContext()
+  const { getAnchorProps } = useComponentContext()
 
   return getAnchorProps(props)
 })
@@ -228,7 +230,7 @@ const PopoverPositioner = withContext<"div", PopoverPositionerProps>(
   "div",
   "positioner",
 )(undefined, (props) => {
-  const { getPositionerProps } = usePopoverContext()
+  const { getPositionerProps } = useComponentContext()
 
   return getPositionerProps(props)
 })
@@ -245,7 +247,7 @@ export interface PopoverContentProps
 export const PopoverContent = withContext<"div", PopoverContentProps>(
   ({ portalProps, ...rest }) => {
     const { animationScheme, duration, open, getContentProps } =
-      usePopoverContext()
+      useComponentContext()
 
     return (
       <AnimatePresence>
@@ -273,7 +275,7 @@ export const PopoverHeader = withContext<"div", PopoverHeaderProps>(
   "div",
   "header",
 )(undefined, (props) => {
-  const { getHeaderProps } = usePopoverContext()
+  const { getHeaderProps } = useComponentContext()
 
   return getHeaderProps(props)
 })
@@ -283,7 +285,7 @@ export interface PopoverBodyProps extends HTMLStyledProps {}
 export const PopoverBody = withContext<"div", PopoverBodyProps>("div", "body")(
   undefined,
   (props) => {
-    const { getBodyProps } = usePopoverContext()
+    const { getBodyProps } = useComponentContext()
 
     return getBodyProps(props)
   },
@@ -295,7 +297,7 @@ export const PopoverFooter = withContext<"div", PopoverFooterProps>(
   "div",
   "footer",
 )(undefined, (props) => {
-  const { getFooterProps } = usePopoverContext()
+  const { getFooterProps } = useComponentContext()
 
   return getFooterProps(props)
 })

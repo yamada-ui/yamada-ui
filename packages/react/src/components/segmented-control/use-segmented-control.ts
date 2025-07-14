@@ -15,14 +15,27 @@ import {
   visuallyHiddenAttributes,
 } from "../../utils"
 
-export interface SegmentedControlContext
+interface SegmentedControlContext
   extends Omit<UseSegmentedControlReturn, "descendants" | "getRootProps"> {}
 
-export const [SegmentedControlContext, useSegmentedControlContext] =
-  createContext<SegmentedControlContext>({ name: "SegmentedControlContext" })
+const [SegmentedControlContext, useSegmentedControlContext] =
+  createContext<SegmentedControlContext>({
+    name: "SegmentedControlContext",
+  })
 
-export const { DescendantsContext, useDescendant, useDescendants } =
-  createDescendant<HTMLInputElement>()
+export { SegmentedControlContext, useSegmentedControlContext }
+
+const {
+  DescendantsContext: SegmentedControlDescendantsContext,
+  useDescendant: useSegmentedControlDescendant,
+  useDescendants: useSegmentedControlDescendants,
+} = createDescendant<HTMLInputElement>()
+
+export {
+  SegmentedControlDescendantsContext,
+  useSegmentedControlDescendant,
+  useSegmentedControlDescendants,
+}
 
 export interface UseSegmentedControlProps<Y extends string = string>
   extends Omit<HTMLProps, "onChange"> {
@@ -79,7 +92,7 @@ export const useSegmentedControl = <Y extends string = string>({
     value: valueProp,
     onChange: onChangeProp,
   })
-  const descendants = useDescendants()
+  const descendants = useSegmentedControlDescendants()
 
   id ??= uuid
   name ??= uuid
@@ -142,7 +155,9 @@ export const useSegmentedControlItem = <Y extends string = string>({
     setValue,
     value: selectedValue,
   } = useSegmentedControlContext()
-  const { index, register } = useDescendant({ disabled: disabled || readOnly })
+  const { index, register } = useSegmentedControlDescendant({
+    disabled: disabled || readOnly,
+  })
   const checked = value === selectedValue
   const trulyDisabled = disabled ?? rootDisabled
   const trulyReadOnly = readOnly ?? rootReadOnly

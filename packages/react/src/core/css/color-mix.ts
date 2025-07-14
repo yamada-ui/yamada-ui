@@ -1,6 +1,6 @@
 import type { System } from "../system"
 import type { TransformOptions } from "./utils"
-import { isArray } from "../../utils"
+import { isArray, isString } from "../../utils"
 import { getColorSchemeVar, isColorScheme } from "../system"
 import { getCSSFunction, globalValues, splitValues, tokenToVar } from "./utils"
 
@@ -22,7 +22,7 @@ const methods: { [key: string]: string } = {
 
 function getColor(system: System) {
   return function (value: string | undefined, fallbackColor?: string) {
-    if (!value) return ""
+    if (!isString(value) || !value) return ""
 
     let [color, percent, ...rest] = value.split(" ").filter(Boolean)
 
@@ -75,7 +75,7 @@ export function colorMix(
 ) {
   if (value == null || globalValues.has(value)) return value
 
-  if (value.includes("/")) {
+  if (isString(value) && value.includes("/")) {
     const [color, percent] = value.split("/")
 
     value = `transparentize(${color}, ${percent})`

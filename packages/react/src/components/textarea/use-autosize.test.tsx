@@ -1,5 +1,5 @@
 import type { UseAutosizeProps } from "./use-autosize"
-import { fireEvent, render, screen } from "../../../test"
+import { fireEvent, render, screen } from "#test"
 import { useAutosize } from "./use-autosize"
 
 const AutoSizeTextarea = ({ maxRows, minRows }: UseAutosizeProps) => {

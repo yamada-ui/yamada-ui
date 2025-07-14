@@ -4,8 +4,8 @@ import type {
   UseFocusOnMouseDownProps,
   UseFocusOnShowProps,
 } from "./"
+import { act, fireEvent, render, waitFor } from "#test"
 import { useRef } from "react"
-import { act, fireEvent, render, waitFor } from "../../../test"
 import { useFocusOnHide, useFocusOnPointerDown, useFocusOnShow } from "./"
 
 describe("useFocusOnHide", () => {
@@ -126,6 +126,7 @@ describe("useFocusOnShow", () => {
 
 describe("useFocusOnPointerDown", () => {
   const defaultPlatform = window.navigator.platform
+
   const defaultVendor = window.navigator.vendor
 
   beforeAll(() => {

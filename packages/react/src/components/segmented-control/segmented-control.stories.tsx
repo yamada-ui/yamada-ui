@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
-import { PropsTable } from "../../../storybook/components"
 import { SegmentedControl } from "./"
 
 type Story = StoryFn<typeof SegmentedControl.Root>

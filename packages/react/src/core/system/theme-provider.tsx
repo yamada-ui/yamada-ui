@@ -11,17 +11,19 @@ import type {
   ThemeScheme,
   UsageTheme,
 } from "./index.types"
-import type { ThemeSchemeManager } from "./theme-manager"
-import { ThemeProvider as EmotionThemeProvider, Global } from "@emotion/react"
-import { ThemeContext } from "@emotion/react"
+import type { Storage } from "./storage-manager"
+import {
+  ThemeProvider as EmotionThemeProvider,
+  Global,
+  ThemeContext,
+} from "@emotion/react"
 import { use, useCallback, useEffect, useMemo, useState } from "react"
 import { isEmptyObject, isObject, isUndefined, merge } from "../../utils"
 import { css } from "../css"
 import { useEnvironment } from "./environment-provider"
+import { createStorageManager } from "./storage-manager"
+import { THEME_SCHEME_STORAGE_KEY } from "./storage-script"
 import { useSystem } from "./system-provider"
-import { themeSchemeManager } from "./theme-manager"
-
-const { localStorage } = themeSchemeManager
 
 export const getPreventTransition = (environment: Environment) => {
   const { getDocument, getWindow } = environment
@@ -61,6 +63,11 @@ export interface ThemeProviderProps
    */
   config?: ThemeConfig
   /**
+   * If `storage` is `cookie`, the cookie to use.
+   * If not provided, the cookie will be set to `document.cookie`.
+   */
+  cookie?: string
+  /**
    * If `true`, will not mount the global styles defined in the theme.
    *
    * @default true
@@ -73,6 +80,13 @@ export interface ThemeProviderProps
    */
   disableResetStyle?: boolean
   /**
+   * The storage to use.
+   * If you are using a server-side rendering library, you should use `cookie`.
+   *
+   * @default 'localStorage'
+   */
+  storage?: Storage
+  /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
    */
@@ -81,28 +95,25 @@ export interface ThemeProviderProps
    * The theme of the yamada ui.
    */
   theme?: UsageTheme
-  /**
-   * Manager to persist a user's theme scheme preference.
-   *
-   * Omit if you don't render server-side.
-   * For SSR, choose `themeSchemeManager.ssr`.
-   *
-   * @default 'themeSchemeManager.localStorage'
-   */
-  themeSchemeManager?: ThemeSchemeManager
 }
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({
   children,
   config,
-  storageKey,
+  cookie,
+  storage = "localStorage" as Storage,
+  storageKey = THEME_SCHEME_STORAGE_KEY,
   theme = {},
-  themeSchemeManager = localStorage,
 }) => {
-  const { defaultThemeScheme, disableTransitionOnChange } = config ?? {}
+  const { defaultThemeScheme = "base", disableTransitionOnChange } =
+    config ?? {}
+  const storageManager = useMemo(
+    () => createStorageManager(storage, storageKey, defaultThemeScheme, cookie),
+    [cookie, defaultThemeScheme, storage, storageKey],
+  )
   const environment = useEnvironment()
   const [themeScheme, setThemeScheme] = useState<ThemeScheme>(
-    themeSchemeManager.get(defaultThemeScheme)(storageKey),
+    storageManager.get(),
   )
 
   const changeThemeScheme: ChangeThemeScheme = useCallback(
@@ -120,16 +131,16 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
 
       setThemeScheme(themeScheme)
 
-      themeSchemeManager.set(themeScheme)(storageKey)
+      storageManager.set(themeScheme)
     },
-    [disableTransitionOnChange, environment, themeSchemeManager, storageKey],
+    [disableTransitionOnChange, environment, storageManager],
   )
 
   useEffect(() => {
-    const themeScheme = themeSchemeManager.get(defaultThemeScheme)(storageKey)
+    const themeScheme = storageManager.get()
 
     changeThemeScheme(themeScheme)
-  }, [changeThemeScheme, themeSchemeManager, storageKey, defaultThemeScheme])
+  }, [changeThemeScheme, storageManager])
 
   return (
     <EmotionThemeProvider theme={{ changeThemeScheme, themeScheme, ...theme }}>

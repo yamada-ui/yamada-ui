@@ -1,5 +1,5 @@
 import type { CellProps } from "./"
-import { a11y, fireEvent, render, screen, waitFor } from "../../../test"
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { PieChart } from "./"
 
 describe("<PieChart />", () => {

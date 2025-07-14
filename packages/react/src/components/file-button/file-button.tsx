@@ -18,7 +18,7 @@ export interface FileButtonProps
     Pick<UseInputBorderProps, "errorBorderColor">,
     ThemeProps<FileButtonStyle> {}
 
-export const {
+const {
   PropsContext: FileButtonPropsContext,
   usePropsContext: useFileButtonPropsContext,
   withContext,
@@ -26,6 +26,8 @@ export const {
   "file-button",
   fileButtonStyle,
 )
+
+export { FileButtonPropsContext, useFileButtonPropsContext }
 
 /**
  * `FileButton` is a button component used for users to select files.

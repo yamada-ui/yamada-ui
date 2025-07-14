@@ -30,10 +30,10 @@ export {
   StepsTitle as Title,
   useStepsPropsContext as usePropsContext,
 } from "./steps"
+export type { StepsItemContext as ItemContext } from "./use-steps"
 export {
   StepsContext as Context,
   StepsDescendantsContext as DescendantsContext,
-  StepsItemContext as ItemContext,
   useStepsContext as useContext,
   useStepsDescendant as useDescendant,
   useStepsDescendants as useDescendants,

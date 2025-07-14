@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import type { ThemeConfig } from "../../core"
+import { render, renderHook, screen, waitFor } from "#test"
 import MatchMediaMock from "vitest-matchmedia-mock"
-import { render, renderHook, screen, waitFor } from "../../../test"
 import { styled, ThemeProvider } from "../../core"
 import { defaultConfig, defaultTheme } from "../../theme"
 import { useBreakpoint } from "./use-breakpoint"

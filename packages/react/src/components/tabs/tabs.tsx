@@ -50,7 +50,7 @@ export interface TabsRootProps
   items?: TabsItem[]
 }
 
-export const {
+const {
   ComponentContext,
   PropsContext: TabsPropsContext,
   useComponentContext,
@@ -61,6 +61,8 @@ export const {
   "tabs",
   tabsStyle,
 )
+
+export { TabsPropsContext, useTabsPropsContext }
 
 /**
  * `Tabs` is a component for switching between different display areas.

@@ -1,3 +1,4 @@
+export * from "./modal.style"
 export {
   ModalBody,
   ModalCloseButton,
@@ -24,6 +25,5 @@ export type {
   ModalRootProps,
   ModalTitleProps,
 } from "./modal"
-export * from "./modal.style"
 export * as Modal from "./namespace"
 export * from "./use-modal"

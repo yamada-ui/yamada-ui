@@ -4,7 +4,14 @@ import type { StyleConfig } from "./config"
 import type { CSSObjectOrFunction } from "./index.types"
 import type { StyleProperty, VariableLengthProperty } from "./styles"
 import type { TransformOptions } from "./utils"
-import { isArray, isObject, isString, merge, runIfFn } from "../../utils"
+import {
+  isArray,
+  isObject,
+  isString,
+  isUndefined,
+  merge,
+  runIfFn,
+} from "../../utils"
 import { getColorSchemeVar, getVar, transformInterpolation } from "../system"
 import { colorMix } from "./color-mix"
 import { conditions, getCondition } from "./conditions"
@@ -92,7 +99,7 @@ function transformConditionalObject(breakpoints: Breakpoints) {
       (prev, { breakpoint, query }) => {
         const breakpointValue = value[breakpoint]
 
-        if (breakpointValue) {
+        if (!isUndefined(breakpointValue)) {
           if (isArray(breakpointValue)) {
             const colorModeValue = transformColorModeArray(breakpoints)(
               key,
@@ -139,7 +146,7 @@ function transformConditionalObject(breakpoints: Breakpoints) {
       {},
     )
 
-    return { ...breakpointObj, ...additionalObj }
+    return merge(breakpointObj, additionalObj)
   }
 }
 

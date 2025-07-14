@@ -1,3 +1,4 @@
+export * from "./resizable.style"
 export * as Resizable from "./namespace"
 export {
   ResizableItem,
@@ -11,5 +12,4 @@ export type {
   ResizableRootProps,
   ResizableTriggerProps,
 } from "./resizable"
-export * from "./resizable.style"
 export * from "./use-resizable"

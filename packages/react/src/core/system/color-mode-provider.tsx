@@ -1,8 +1,8 @@
 "use client"
 
 import type { FC, PropsWithChildren } from "react"
-import type { ColorModeManager } from "./color-mode-manager"
 import type { ColorMode, ColorModeWithSystem, ThemeConfig } from "./index.types"
+import type { Storage } from "./storage-manager"
 import {
   createContext,
   use,
@@ -12,12 +12,11 @@ import {
   useState,
 } from "react"
 import { isEmptyObject, noop } from "../../utils"
-import { colorModeManager } from "./color-mode-manager"
-import { getColorModeUtils } from "./color-mode-utils"
 import { useEnvironment } from "./environment-provider"
+import { createStorageManager } from "./storage-manager"
+import { COLOR_MODE_STORAGE_KEY } from "./storage-script"
+import { getPreventTransition } from "./theme-provider"
 import { useSystemColorMode } from "./use-system-color-mode"
-
-const { localStorage } = colorModeManager
 
 interface ColorModeContext {
   changeColorMode: (colorMode: ColorModeWithSystem) => void
@@ -26,13 +25,6 @@ interface ColorModeContext {
   toggleColorMode: () => void
   forced?: boolean
 }
-
-const getColorMode =
-  (manager: ColorModeManager, fallback: ColorModeWithSystem) =>
-  (storageKey?: string) =>
-    manager.type === "cookie" && manager.ssr
-      ? manager.get(fallback)(storageKey)
-      : fallback
 
 export const ColorModeContext = createContext<ColorModeContext>({
   changeColorMode: noop,
@@ -48,21 +40,25 @@ export interface ColorModeProviderProps extends PropsWithChildren {
    */
   colorMode?: ColorMode
   /**
-   * Manager to persist a user's color mode preference.
-   *
-   * Omit if you don't render server-side.
-   * For SSR, choose `colorModeManager.ssr`.
-   *
-   * @default 'colorModeManager.localStorage'
-   */
-  colorModeManager?: ColorModeManager
-  /**
    * The config of the yamada ui.
    */
   config?: ThemeConfig
   /**
-   * Key of value saved in storage.
-   * By default, it is saved to `local storage`.
+   * If `storage` is `cookie`, the cookie to use.
+   * If not provided, the cookie will be set to `document.cookie`.
+   */
+  cookie?: string
+  /**
+   * The storage to use.
+   * If you are using a server-side rendering library, you should use `cookie`.
+   *
+   * @default 'localStorage'
+   */
+  storage?: Storage
+  /**
+   * The key of the value saved in storage.
+   *
+   * @default 'color-mode'
    */
   storageKey?: string
 }
@@ -70,16 +66,22 @@ export interface ColorModeProviderProps extends PropsWithChildren {
 export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   children,
   colorMode: forcedColorMode,
-  colorModeManager = localStorage,
   config: {
     defaultColorMode = "light" as ColorModeWithSystem,
     disableTransitionOnChange = true,
   } = {},
-  storageKey,
+  cookie,
+  storage = "localStorage" as Storage,
+  storageKey = COLOR_MODE_STORAGE_KEY,
 }) => {
+  const storageManager = useMemo(
+    () => createStorageManager(storage, storageKey, defaultColorMode, cookie),
+    [cookie, defaultColorMode, storage, storageKey],
+  )
   const environment = useEnvironment()
-  const [colorMode, setColorMode] = useState<ColorModeWithSystem>(() =>
-    getColorMode(colorModeManager, defaultColorMode)(storageKey),
+  const { getDocument, getWindow } = environment
+  const [colorMode, setColorMode] = useState<ColorModeWithSystem>(
+    storageManager.get(),
   )
   const systemColorMode = useSystemColorMode({
     callback: (systemColorMode) => {
@@ -89,7 +91,6 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
       setDataset(systemColorMode)
     },
   })
-
   const computedColorMode = defaultColorMode === "dark" ? "dark" : "light"
   const resolvedColorMode =
     colorMode === "system"
@@ -98,13 +99,44 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
         : computedColorMode
       : colorMode
 
-  const { getSystemColorMode, setClassName, setDataset } = useMemo(
-    () =>
-      getColorModeUtils({
-        environment,
-        preventTransition: disableTransitionOnChange,
-      }),
-    [disableTransitionOnChange, environment],
+  const getSystemColorMode = useCallback(
+    (fallback?: ColorMode) => {
+      const mql = getWindow()?.matchMedia("(prefers-color-scheme: dark)")
+      const dark = mql?.matches ?? fallback === "dark"
+
+      return dark ? "dark" : "light"
+    },
+    [getWindow],
+  )
+
+  const setDataset = useCallback(
+    (colorMode: ColorMode) => {
+      const doc = getDocument()
+
+      if (!doc) return
+
+      const cleanup = disableTransitionOnChange
+        ? getPreventTransition(environment)
+        : undefined
+
+      doc.documentElement.dataset.mode = colorMode
+      doc.documentElement.style.colorScheme = colorMode
+
+      cleanup?.()
+    },
+    [disableTransitionOnChange, environment, getDocument],
+  )
+
+  const setClassName = useCallback(
+    (isDark: boolean) => {
+      const doc = getDocument()
+
+      if (!doc) return
+
+      doc.body.classList.add(isDark ? "dark" : "light")
+      doc.body.classList.remove(isDark ? "light" : "dark")
+    },
+    [getDocument],
   )
 
   const changeColorMode = useCallback(
@@ -115,15 +147,9 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
       setClassName(resolved === "dark")
       setDataset(resolved)
 
-      colorModeManager.set(colorMode)(storageKey)
+      storageManager.set(colorMode)
     },
-    [
-      colorModeManager,
-      getSystemColorMode,
-      setClassName,
-      setDataset,
-      storageKey,
-    ],
+    [storageManager, getSystemColorMode, setClassName, setDataset],
   )
 
   const toggleColorMode = useCallback((): void => {
@@ -131,10 +157,10 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
   }, [changeColorMode, resolvedColorMode])
 
   useEffect(() => {
-    const managerValue = colorModeManager.get()(storageKey)
+    const colorMode = storageManager.get()
 
-    changeColorMode(managerValue)
-  }, [changeColorMode, colorModeManager, storageKey])
+    changeColorMode(colorMode)
+  }, [changeColorMode, storageManager])
 
   const context = useMemo(
     () => ({

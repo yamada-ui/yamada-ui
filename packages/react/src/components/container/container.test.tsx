@@ -1,4 +1,4 @@
-import { render, screen } from "../../../test"
+import { render, screen } from "#test"
 import { Heading } from "../heading"
 import { Text } from "../text"
 import { Container } from "./"

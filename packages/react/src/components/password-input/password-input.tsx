@@ -34,7 +34,7 @@ export interface PasswordInputProps
   rootProps?: InputGroup.RootProps
 }
 
-export const {
+const {
   PropsContext: PasswordInputPropsContext,
   usePropsContext: usePasswordInputPropsContext,
   withContext,
@@ -43,6 +43,8 @@ export const {
   "password-input",
   passwordInputStyle,
 )
+
+export { PasswordInputPropsContext, usePasswordInputPropsContext }
 
 /**
  * `PasswordInput` is a component that allows users to input passwords with a visibility toggle.

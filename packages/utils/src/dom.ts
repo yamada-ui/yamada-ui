@@ -81,11 +81,7 @@ export function isWebKit(): boolean {
 }
 
 export function isHTMLElement(el: any): el is HTMLElement {
-  return (
-    isObject(el) &&
-    el.nodeType === Node.ELEMENT_NODE &&
-    typeof el.nodeName === "string"
-  )
+  return isNode(el) && el.nodeType === Node.ELEMENT_NODE
 }
 
 export function isWindow(el: any): el is Window {
@@ -93,7 +89,7 @@ export function isWindow(el: any): el is Window {
 }
 
 export function isDocument(el: any): el is Document {
-  return isObject(el) && el.nodeType === Node.DOCUMENT_NODE
+  return isNode(el) && el.nodeType === Node.DOCUMENT_NODE
 }
 
 export function isVisualViewport(el: any): el is VisualViewport {

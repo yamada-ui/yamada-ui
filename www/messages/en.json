@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "title": "Yamada UI",
+    "description": "Provides a design system that delivers beautiful, consistent, accessible components and advanced styling. Bring your ideas to life."
+  },
+  "docs": {
+    "overview": "Overview",
+    "latest": "Latest",
+    "storybook": "Storybook",
+    "source": "Source",
+    "style": "Style",
+    "group": {
+      "frameworks": "Frameworks",
+      "tokens": "Design Tokens",
+      "configuration": "Configuration",
+      "styles": "Styles",
+      "components": "Components",
+      "layouts": "Layouts",
+      "typography": "Typography"
+    }
+  },
+  "home": {
+    "title": "Unleash the Power of Components",
+    "description": "Provides a design system that delivers beautiful, consistent, accessible components and advanced styling. Bring your ideas to life.",
+    "primaryAction": "Get Started",
+    "secondaryAction": "Browse Components"
+  },
+  "icons": {
+    "title": "Beautiful & Consistent Icons",
+    "description": "A collection of ready-to-use icons built with Lucide. Copy and paste into your apps.",
+    "primaryAction": "Browse Icons",
+    "secondaryAction": "Documentation",
+    "placeholder": "Search {total} icons...",
+    "notFound": "Icon not found.",
+    "reset": "Clear your search and try again",
+    "openPreview": "Open {title} preview"
+  },
+  "themes": {
+    "title": "Your Own Themes",
+    "description": "Try out beautiful and consistent themes. Copy and paste them into your projects. New theme editor coming soon.",
+    "primaryAction": "Browse Themes",
+    "secondaryAction": "Documentation"
+  },
+  "common": {
+    "github": "GitHub profile of {name}",
+    "discord": "Discord server",
+    "x": "X profile of {name}"
+  },
+  "component": {
+    "header": {
+      "docs": "Docs",
+      "icons": "Icons",
+      "playground": "Playground",
+      "themes": "Themes",
+      "colors": "Colors",
+      "github": "GitHub repository",
+      "colorMode": "Change to {colorMode}",
+      "lang": "Change language",
+      "menu": "Open menu"
+    },
+    "footer": {
+      "copyright": "Built by <owner>Hirotomo Yamada</owner> and <contributors>these awesome people</contributors>"
+    },
+    "search": {
+      "placeholder": "Search documentation...",
+      "notFound": "No results found for \"{value}\"."
+    },
+    "toc": {
+      "title": "On this page",
+      "scrollToTop": "Scroll to top",
+      "edit": "Edit this page on GitHub"
+    },
+    "copyButton": {
+      "copied": "Copied",
+      "copy": "Copy to Clipboard"
+    },
+    "codeBlock": {
+      "clientOnly": "If you use this code, you need to add <tag>\"use client\"</tag> to the top of the file.",
+      "preview": "Preview",
+      "code": "Code"
+    }
+  }
+}

@@ -34,10 +34,13 @@ import {
 interface ResizableContext
   extends Omit<UseResizableReturn, "getGroupProps" | "getRootProps"> {}
 
-export const [ResizableContext, useResizableContext] =
-  createContext<ResizableContext>({
+const [ResizableContext, useResizableContext] = createContext<ResizableContext>(
+  {
     name: "ResizableContext",
-  })
+  },
+)
+
+export { ResizableContext, useResizableContext }
 
 export interface ResizableStorage extends PanelGroupStorage {}
 export interface ResizableGroupControl extends ImperativePanelGroupHandle {}

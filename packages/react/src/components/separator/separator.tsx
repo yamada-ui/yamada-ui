@@ -9,11 +9,13 @@ export interface SeparatorProps
   extends HTMLStyledProps<"hr">,
     ThemeProps<SeparatorStyle> {}
 
-export const {
+const {
   PropsContext: SeparatorPropsContext,
   usePropsContext: useSeparatorPropsContext,
   withContext,
 } = createComponent<SeparatorProps, SeparatorStyle>("separator", separatorStyle)
+
+export { SeparatorPropsContext, useSeparatorPropsContext }
 
 /**
  * `Separator` is a component that represents a division between elements.

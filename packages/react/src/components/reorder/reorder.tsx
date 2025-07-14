@@ -32,12 +32,14 @@ export interface ReorderRootProps<Y = string>
   items?: ReorderItemProps<Y>[]
 }
 
-export const {
+const {
   PropsContext: ReorderPropsContext,
   usePropsContext: useReorderPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<ReorderRootProps, ReorderStyle>("reorder", reorderStyle)
+
+export { ReorderPropsContext, useReorderPropsContext }
 
 /**
  * `Reorder` is a component that allows you to change the order of items using drag and drop.

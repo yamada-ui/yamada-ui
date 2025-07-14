@@ -9,12 +9,14 @@ export interface CardRootProps
   extends HTMLStyledProps<"article">,
     ThemeProps<CardStyle> {}
 
-export const {
+const {
   PropsContext: CardPropsContext,
   usePropsContext: useCardPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<CardRootProps, CardStyle>("card", cardStyle)
+
+export { CardPropsContext, useCardPropsContext }
 
 /**
  * `Card` is a component that groups and displays related information. By default, it renders a `article` element.

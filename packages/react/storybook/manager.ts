@@ -2,8 +2,7 @@ import type { StoryContext } from "@storybook/react-vite"
 import { useCallback, useEffect } from "react"
 import { GLOBALS_UPDATED } from "storybook/internal/core-events"
 import { Addon_TypesEnum } from "storybook/internal/types"
-import { addons } from "storybook/manager-api"
-import { useParameter } from "storybook/manager-api"
+import { addons, useParameter } from "storybook/manager-api"
 import { themes } from "./themes"
 
 try {

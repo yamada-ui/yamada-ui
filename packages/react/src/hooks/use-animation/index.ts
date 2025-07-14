@@ -1,11 +1,9 @@
 "use client"
 
 import type { CSSAnimationObject, Token } from "../../core"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 import { animation, css, useSystem } from "../../core"
-import { getWindow, isArray, isUndefined, runIfFn } from "../../utils"
-import { useBoolean } from "../use-boolean"
-import { useEventListener } from "../use-event-listener"
+import { isArray, isUndefined, runIfFn } from "../../utils"
 
 type CSSObject =
   | Token<CSSAnimationObject, "animations">
@@ -115,45 +113,3 @@ export const useDynamicAnimation = <
 
   return [animations, setAnimation]
 }
-
-export interface UseAnimationObserverProps {
-  ref: React.RefObject<HTMLElement | null>
-  open?: boolean
-}
-
-export const useAnimationObserver = ({
-  ref,
-  open,
-}: UseAnimationObserverProps) => {
-  const [mounted, setMounted] = useState(open)
-  const [flg, { on }] = useBoolean()
-
-  useEffect(() => {
-    if (flg) return
-
-    setMounted(open)
-    on()
-  }, [open, flg, on])
-
-  useEventListener(
-    () => ref.current,
-    "animationend",
-    () => setMounted(open),
-  )
-
-  const hidden = open ? false : !mounted
-
-  return {
-    present: !hidden,
-    onAnimationComplete() {
-      const ownerWindow = getWindow(ref.current)
-      const ev = new ownerWindow.CustomEvent("animationend", {
-        bubbles: true,
-      })
-
-      ref.current?.dispatchEvent(ev)
-    },
-  }
-}
-
-export type ReturnUseAnimationObserver = ReturnType<typeof useAnimationObserver>

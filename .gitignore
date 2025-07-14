@@ -12,7 +12,7 @@ trace
 dist
 build
 .vercel
-.mdx
+.velite
 
 # misc
 .DS_Store

@@ -17,9 +17,17 @@ export interface AvatarProps
    * The avatar icon to use.
    */
   icon?: ReactElement
+  /**
+   * The props to pass to the fallback component.
+   */
+  fallbackProps?: AvatarFallbackProps
+  /**
+   * The props to pass to the image component.
+   */
+  imageProps?: AvatarImageProps
 }
 
-export const {
+const {
   component,
   PropsContext: AvatarPropsContext,
   usePropsContext: useAvatarPropsContext,
@@ -28,21 +36,31 @@ export const {
   useRootComponentProps,
 } = createSlotComponent<AvatarProps, AvatarStyle>("avatar", avatarStyle)
 
+export {
+  AvatarPropsContext,
+  component,
+  useAvatarPropsContext,
+  useRootComponentProps,
+}
+
 /**
  * `Avatar` is a component that displays a profile picture or an icon with initials representing a user.
  *
  * @see https://yamada-ui.com/components/avatar
  */
-export const Avatar = withProvider<"div", AvatarProps>((props) => {
-  const { getFallbackProps, getImageProps, getRootProps } = useAvatar(props)
+export const Avatar = withProvider<"div", AvatarProps>(
+  ({ fallbackProps, imageProps, ...rest }) => {
+    const { getFallbackProps, getImageProps, getRootProps } = useAvatar(rest)
 
-  return (
-    <styled.div {...getRootProps()}>
-      <AvatarFallback {...getFallbackProps()} />
-      <AvatarImage {...getImageProps()} />
-    </styled.div>
-  )
-}, "root")({ icon: <UserRoundIcon fontSize="1.2em" /> })
+    return (
+      <styled.div {...getRootProps()}>
+        <AvatarFallback {...getFallbackProps(fallbackProps)} />
+        <AvatarImage {...getImageProps(imageProps)} />
+      </styled.div>
+    )
+  },
+  "root",
+)({ icon: <UserRoundIcon fontSize="1.2em" /> })
 
 interface AvatarImageProps extends HTMLStyledProps<"img"> {}
 

@@ -26,39 +26,28 @@ cd yamada-ui
 
 開発プロセスを快適するために、ツールとシステムを用意しています。`Yamada UI`はモノレポ構造であり、各コンポーネントは独立したパッケージです。
 
-### ツール
-
-- [PNPM](https://pnpm.io/) パッケージと依存関係の管理
-- [Tsup](https://tsup.egoist.dev/) パッケージのバンドル
-- [Storybook](https://storybook.js.org/) コンポーネントの迅速な開発とテスト
-- [Testing Library](https://testing-library.com/) コンポーネントとフックのテスト
-- [Changeset](https://github.com/atlassian/changesets) 変更のドキュメンテーション・ログの生成、リリースの管理
-- [Next.js](https://nextjs.org/) ドキュメントサイトのフレームワーク
-
 ### コマンド
 
 - **`pnpm install`**: すべての依存関係とパッケージをセットアップし、モノレポ開発のためにすべての依存関係をシンボリックリンクします。
-- **`pnpm storybook`**: storybookサーバーを起動し、ストーリーを読み込みます。
-- **`pnpm build`**: すべてのコンポーネント・フックのパッケージに対してビルドを実行します。
-- **`pnpm test`**: すべてのコンポーネント・フックのパッケージに対してテストを実行します。
-- **`pnpm gen:component`**: [Plop](https://plopjs.com/)を使用して、テンプレートからコンポーネントのパッケージを作成します。
-  - パッケージ名とコンポーネント名はケバブケースで入力してください。
-  - プロバイダーが`true`の場合、`children`で使用されるスタイルを提供するプロバイダーをセットアップします。
-- **`pnpm gen:hook`**: [Plop](https://plopjs.com/)を使用して、テンプレートからフックのパッケージを作成します。
-  - パッケージ名とカスタムフック名はケバブケースで入力してください。
-- **`pnpm gen:tokens`**: テーマのトークンを生成します。
+- **`pnpm clean`**: ビルドやテストのキャッシュを削除します。
+- **`pnpm react storybook`**: ストーリーブックを起動します。
+- **`pnpm www dev`**: ドキュメントサイトを起動します。
+- **`pnpm build`**: すべてのパッケージに対してビルドを実行します。
+- **`pnpm format`**: すべてのパッケージに対してフォーマットを実行します。
+- **`pnpm lint`**: すべてのパッケージに対してlintを実行します。
+- **`pnpm typecheck`**: すべてのパッケージに対して型チェックを実行します。
+- **`pnpm test`**: すべてのパッケージに対してテストを実行します。
 
 ### Visual Studio Code
-
-#### [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 拡張機能を正しく動作させるために、`.vscode/setting.json`に以下の設定を追加してください。
 
 ```json
 {
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "prettier.requireConfig": true,
   "eslint.workingDirectories": [
-    "website",
-    "playgrounds/hono",
+    "www",
     "playgrounds/next/app",
     "playgrounds/next/pages",
     "playgrounds/remix",
@@ -107,22 +96,13 @@ cd yamada-ui
 4. `pnpm changeset`を実行して、変更の詳細な説明を作成します。これは、更新を公開する際にチェンジログを生成するために使用されます。
    [Changesetについてさらに学ぶ](https://github.com/atlassian/changesets/tree/master/packages/cli)
 
-5. また、jsxのスニペットをchangesetに提供する場合、スニペットの始まりで以下のようにしてライブプレビューをオフにしてください。
-   ` ```jsx live=false`
-
 > [!NOTE]
 >
 > CIの設定やPrettierなどの小さな変更を行った場合は、`pnpm changeset add --empty`を実行して、空のchangesetファイルを生成し、変更を文書化することができます。
 
-6. 次に、[コミット規約](#コミット規約)に従ってコミットします。
+5. 次に、[コミット規約](#コミット規約)に従ってコミットします。
 
-   - `変更の確認`: コマンドの`pnpm storybook`を実行すると、Storybookが起動します。Storybookのソースは、`./stories`です。
-   - `新しいコンポーネントの作成`: コマンドの`pnpm gen:component`を実行すると、テンプレートからコンポーネントを作成し、依存関係もインストールします。
-   - `既存のコンポーネントに機能を追加`: 追加後は、機能が分かるように対象のコンポーネントのストーリーを追加してください。
-   - `新しいフックの作成`: コマンドの`pnpm gen:hook`を実行すると、テンプレートからフックを作成し、依存関係もインストールします。
-   - `既存のフックに機能を追加`: 追加後は、機能が分かるように対象のフックのストーリーを追加してください。
-
-7. 上記の全てのタスクを完了したら、変更をプッシュしてください。プッシュ後、プルリクエストのURLが生成されます。テンプレートに従ってリクエストを提出してください。また、プルリクエスト内のチェックを確認し、品質チェックが正常に完了していることを確認してください。問題がある場合、このプルリクエストはマージされません。
+6. 上記の全てのタスクを完了したら、変更をプッシュしてください。プッシュ後、プルリクエストのURLが生成されます。テンプレートに従ってリクエストを提出してください。また、プルリクエスト内のチェックを確認し、品質チェックが正常に完了していることを確認してください。問題がある場合、このプルリクエストはマージされません。
 
 ## ライセンス
 

@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { useState } from "react"
 import { Toggle, ToggleGroup } from "."
-import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
 import { For } from "../for"
 import { BoldIcon, ItalicIcon, UnderlineIcon } from "../icon"

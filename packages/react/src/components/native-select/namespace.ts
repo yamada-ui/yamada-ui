@@ -3,7 +3,7 @@ export {
   NativeOptionGroup as OptionGroup,
   NativeSelectPropsContext as PropsContext,
   NativeSelectRoot as Root,
-  useNativeSelectProps as usePropsContext,
+  useNativeSelectPropsContext as usePropsContext,
 } from "./native-select"
 export type {
   NativeOptionGroupProps as OptionGroupProps,

@@ -13,10 +13,10 @@ import {
   findChild,
   getValidChildren,
   isEmpty,
+  isString,
   omitChildren,
   runIfFn,
 } from "../../utils"
-import { isString } from "../../utils"
 import { Collapse } from "../collapse"
 import { ChevronDownIcon } from "../icon"
 import { accordionStyle } from "./accordion.style"
@@ -61,10 +61,10 @@ const [AccordionItemComponentContext, useAccordionItemComponentContext] =
     name: "AccordionItemComponentContext",
   })
 
-export const {
-  ComponentContext: AccordionComponentContext,
+const {
+  ComponentContext,
   PropsContext: AccordionPropsContext,
-  useComponentContext: useAccordionComponentContext,
+  useComponentContext,
   usePropsContext: useAccordionPropsContext,
   withContext,
   withProvider,
@@ -73,6 +73,8 @@ export const {
   AccordionStyle,
   AccordionComponentContext
 >("accordion", accordionStyle)
+
+export { AccordionPropsContext, useAccordionPropsContext }
 
 /**
  * `Accordion` is a component for a list that displays information in an expandable or collapsible manner.
@@ -122,9 +124,9 @@ export const AccordionRoot = withProvider<"div", AccordionRootProps>(
     return (
       <AccordionDescendantsContext value={descendants}>
         <AccordionContext value={context}>
-          <AccordionComponentContext value={componentContext}>
+          <ComponentContext value={componentContext}>
             <styled.div {...getRootProps()} />
-          </AccordionComponentContext>
+          </ComponentContext>
         </AccordionContext>
       </AccordionDescendantsContext>
     )
@@ -215,7 +217,7 @@ export interface AccordionButtonProps extends HTMLStyledProps<"button"> {
 
 export const AccordionButton = withContext<"button", AccordionButtonProps>(
   ({ children, icon: customIcon, containerProps, ...rest }) => {
-    const { icon: rootIcon } = useAccordionComponentContext()
+    const { icon: rootIcon } = useComponentContext()
     const { icon: itemIcon } = useAccordionItemComponentContext()
     const { disabled, open, getButtonProps } = useAccordionItemContext()
     const props = { disabled, expanded: open }
@@ -241,7 +243,7 @@ interface AccordionIconProps extends HTMLStyledProps<"svg"> {}
 
 export const AccordionIcon = withContext<"svg", AccordionIconProps>(
   ({ children = <ChevronDownIcon />, ...rest }) => {
-    const { iconHidden } = useAccordionComponentContext()
+    const { iconHidden } = useComponentContext()
     const { getIconProps } = useAccordionItemContext()
 
     if (iconHidden) return null

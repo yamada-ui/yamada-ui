@@ -1,5 +1,5 @@
 import type { Hsv } from "./"
-import { drag, fireEvent, render, screen, waitFor } from "../../../test"
+import { drag, fireEvent, render, screen, waitFor } from "#test"
 import { SaturationSlider } from "./"
 
 describe("<SaturationSlider />", () => {

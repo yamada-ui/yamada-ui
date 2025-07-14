@@ -7,12 +7,12 @@ import type {
 import type * as React from "react"
 import type {
   ComponentArgs,
+  DOMElement,
   OmitProps,
   StyledProps,
   WithoutAs,
   WithoutRef,
 } from "../../core"
-import type { DOMElement } from "../../core"
 import type { Dict, Merge } from "../../utils"
 
 type ComponentConditionalProps<

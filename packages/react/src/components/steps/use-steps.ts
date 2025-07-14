@@ -9,26 +9,33 @@ import { createContext, cx, dataAttr, handlerAll, mergeRefs } from "../../utils"
 
 export type StepStatusScheme = "complete" | "current" | "incomplete"
 
-export const {
+const {
   DescendantsContext: StepsDescendantsContext,
   useDescendant: useStepsDescendant,
   useDescendants: useStepsDescendants,
 } = createDescendant<HTMLLIElement>()
 
+export { StepsDescendantsContext, useStepsDescendant, useStepsDescendants }
+
 interface StepsContext
   extends Omit<UseStepsReturn, "descendants" | "getRootProps"> {}
 
-export const [StepsContext, useStepsContext] = createContext<StepsContext>({
+const [StepsContext, useStepsContext] = createContext<StepsContext>({
   name: "StepsContext",
 })
+
+export { StepsContext, useStepsContext }
 
 export interface StepsItemContext
   extends Omit<UseStepsItemReturn, "getRootProps"> {}
 
-export const [StepsItemContext, useStepsItemContext] =
-  createContext<StepsItemContext>({
+const [StepsItemContext, useStepsItemContext] = createContext<StepsItemContext>(
+  {
     name: "StepsItemContext",
-  })
+  },
+)
+
+export { StepsItemContext, useStepsItemContext }
 
 export interface UseStepsProps extends Omit<HTMLProps, "onChange"> {
   /**

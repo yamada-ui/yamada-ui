@@ -27,7 +27,7 @@ export interface StrengthMeterProps
   getIndicatorProps?: (percent: number) => IndicatorProps
 }
 
-export const {
+const {
   PropsContext: StrengthMeterPropsContext,
   usePropsContext: useStrengthMeterPropsContext,
   withContext,
@@ -36,6 +36,8 @@ export const {
   "strength-meter",
   strengthMeterStyle,
 )
+
+export { StrengthMeterPropsContext, useStrengthMeterPropsContext }
 
 export const StrengthMeter = withProvider<"div", StrengthMeterProps>(
   ({

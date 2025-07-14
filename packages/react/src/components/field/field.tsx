@@ -26,10 +26,12 @@ export interface FieldContext
   helperMessageId?: string
 }
 
-export const [FieldContext, useFieldContext] = createContext<FieldContext>({
+const [FieldContext, useFieldContext] = createContext<FieldContext>({
   name: "FieldContext",
   strict: false,
 })
+
+export { FieldContext, useFieldContext }
 
 export interface FieldProps {
   /**
@@ -95,12 +97,14 @@ export interface FieldRootProps
   labelProps?: FieldLabelProps
 }
 
-export const {
+const {
   PropsContext: FieldPropsContext,
   usePropsContext: useFieldPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<FieldRootProps, FieldStyle>("field", fieldStyle)
+
+export { FieldPropsContext, useFieldPropsContext }
 
 /**
  * `Field` is a component used to group form elements with label, helper message, error message, etc.

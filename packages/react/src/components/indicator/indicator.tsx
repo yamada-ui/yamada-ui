@@ -75,7 +75,7 @@ export interface IndicatorProps
   labelProps?: IndicatorLabelProps
 }
 
-export const {
+const {
   PropsContext: IndicatorPropsContext,
   usePropsContext: useIndicatorPropsContext,
   withContext,
@@ -84,6 +84,8 @@ export const {
   "indicator",
   indicatorStyle,
 )
+
+export { IndicatorPropsContext, useIndicatorPropsContext }
 
 /**
  * `Indicator` is a component that displays at the corner of elements such as avatars.

@@ -1,6 +1,6 @@
 import type { FC } from "react"
+import { a11y, fireEvent, render, screen } from "#test"
 import { Carousel } from "."
-import { a11y, fireEvent, render, screen } from "../../../test"
 
 interface TestComponentProps extends Carousel.RootProps {}
 

@@ -1,9 +1,9 @@
 {
-  "name": "next-pages",
-  "version": "0.1.0",
+  "name": "@playgrounds/next-pages",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
@@ -11,19 +11,15 @@
     "format": "prettier . --ignore-path ../../../.prettierignore --check --cache"
   },
   "dependencies": {
+    "@yamada-ui/react": "workspace:*",
+    "next": "^15.3.5",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "next": "15.3.4",
-    "@yamada-ui/react": "workspace:*"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@types/node": "^24.0.4",
+    "@types/node": "^24.0.13",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "typescript": "^5.8.3",
-    "eslint": "^9.29.0",
-    "typescript-eslint": "^8.35.0",
-    "eslint-config-prettier": "^10.1.5",
-    "prettier": "^3.6.1"
+    "typescript": "^5.8.3"
   }
 }

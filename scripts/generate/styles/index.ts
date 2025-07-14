@@ -8,8 +8,8 @@ import {
   toArray,
   toCamelCase,
 } from "@yamada-ui/utils"
+import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { execa } from "execa"
-import { writeFile } from "fs/promises"
 import { glob } from "glob"
 import ora from "ora"
 import c from "picocolors"
@@ -230,7 +230,7 @@ async function main() {
 
   spinner.start(`Writing file "${OUT_PATH}"`)
 
-  const { data, duplicatedProperties } = await generateStyles(
+  const { data, duplicatedProperties } = generateStyles(
     cssCompatData,
     atRuleCompatData,
   )
@@ -243,7 +243,7 @@ async function main() {
     })
   }
 
-  await writeFile(OUT_PATH, data)
+  await writeFileWithFormat(OUT_PATH, data)
 
   spinner.succeed(`Wrote file "${OUT_PATH}"`)
 

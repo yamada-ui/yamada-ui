@@ -17,5 +17,11 @@
   "snapshot": {
     "useCalculatedVersion": true
   },
-  "ignore": ["next-app", "next-pages", "vite-react", "remix"]
+  "ignore": [
+    "@yamada-ui/workspace",
+    "@playgrounds/next-app",
+    "@playgrounds/next-pages",
+    "@playgrounds/vite",
+    "@playgrounds/remix"
+  ]
 }

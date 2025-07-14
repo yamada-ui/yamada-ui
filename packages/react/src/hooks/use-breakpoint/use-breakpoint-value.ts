@@ -1,5 +1,4 @@
-import type { Breakpoint, System } from "../../core"
-import type { ResponsiveObject } from "../../core"
+import type { Breakpoint, ResponsiveObject, System } from "../../core"
 import { useMemo } from "react"
 import { useSystem } from "../../core"
 import { useBreakpoint } from "./use-breakpoint"

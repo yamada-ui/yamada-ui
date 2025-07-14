@@ -1,3 +1,4 @@
+export * from "./pagination.style"
 export * as Pagination from "./namespace"
 export type {
   PaginationEndTriggerProps,
@@ -21,5 +22,4 @@ export {
   PaginationText,
   usePaginationPropsContext,
 } from "./pagination"
-export * from "./pagination.style"
 export * from "./use-pagination"

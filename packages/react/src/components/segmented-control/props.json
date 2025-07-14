@@ -21,7 +21,7 @@
       "required": false
     },
     "value": {
-      "type": "string",
+      "type": "Y",
       "description": "The value of the segmented control item.",
       "required": true
     },
@@ -70,7 +70,7 @@
       "required": false
     },
     "defaultValue": {
-      "type": "string",
+      "type": "Y",
       "description": "The initial value of the segmented control.",
       "required": false
     },
@@ -98,7 +98,7 @@
       "required": false
     },
     "onChange": {
-      "type": "(value: string) => void",
+      "type": "(value: Y) => void",
       "description": "The callback fired when any children radio is checked or unchecked.",
       "required": false
     },
@@ -115,7 +115,7 @@
       "required": false
     },
     "value": {
-      "type": "string",
+      "type": "Y",
       "description": "The value of the segmented control.",
       "required": false
     }

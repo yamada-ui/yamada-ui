@@ -15,11 +15,13 @@ export interface ImageProps
   fit?: CSSProps["objectFit"]
 }
 
-export const {
+const {
   PropsContext: ImagePropsContext,
   usePropsContext: useImagePropsContext,
   withContext,
 } = createComponent<ImageProps, ImageStyle>("image", imageStyle)
+
+export { ImagePropsContext, useImagePropsContext }
 
 /**
  * `Image` is a component that displays images with fallback support.

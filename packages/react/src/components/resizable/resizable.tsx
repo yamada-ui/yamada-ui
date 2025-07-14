@@ -39,7 +39,7 @@ export interface ResizableRootProps
   rootRef?: ForwardedRef<HTMLDivElement>
 }
 
-export const {
+const {
   PropsContext: ResizablePropsContext,
   usePropsContext: useResizablePropsContext,
   withContext,
@@ -48,6 +48,8 @@ export const {
   "resizable",
   resizableStyle,
 )
+
+export { ResizablePropsContext, useResizablePropsContext }
 
 export const ResizableRoot: FC<ResizableRootProps> = withProvider(
   ({ children, orientation: orientationProp, rootRef, ...rest }) => {

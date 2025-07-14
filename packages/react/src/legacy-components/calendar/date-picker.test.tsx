@@ -1,5 +1,5 @@
 import { DatePicker } from "."
-import { a11y, fireEvent, render, screen } from "../../../test"
+import { a11y, fireEvent, render, screen } from "#test"
 
 describe("<DatePicker />", () => {
   test("DatePicker renders correctly", async () => {

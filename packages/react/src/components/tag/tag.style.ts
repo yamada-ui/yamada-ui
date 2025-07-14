@@ -49,6 +49,12 @@ export const tagStyle = defineComponentSlotStyle({
         layerStyle: "outline",
       },
     },
+    plain: {
+      root: {
+        borderColor: "transparent",
+        borderWidth: "1px",
+      },
+    },
     solid: {
       root: {
         layerStyle: "solid",

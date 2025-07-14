@@ -9,11 +9,13 @@ export interface CodeProps
   extends HTMLStyledProps<"code">,
     ThemeProps<CodeStyle> {}
 
-export const {
+const {
   PropsContext: CodePropsContext,
   usePropsContext: useCodePropsContext,
   withContext,
 } = createComponent<CodeProps, CodeStyle>("code", codeStyle)
+
+export { CodePropsContext, useCodePropsContext }
 
 /**
  * `Code` is a component that represents a code block. By default, it renders a `code` element.

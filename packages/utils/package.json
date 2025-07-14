@@ -32,8 +32,8 @@
   "scripts": {
     "clean": "rimraf dist .turbo .eslintcache",
     "build": "tsdown",
-    "test": "vitest",
-    "test:dev": "vitest --watch --ui",
+    "test": "NODE_OPTIONS=\"--experimental-strip-types\" vitest",
+    "test:dev": "NODE_OPTIONS=\"--experimental-strip-types\" vitest --watch --ui",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "prettier . --ignore-path ../../.prettierignore --check --cache",

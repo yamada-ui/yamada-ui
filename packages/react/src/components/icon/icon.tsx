@@ -13,12 +13,14 @@ export interface IconProps
   extends HTMLStyledProps<"svg">,
     ThemeProps<IconStyle> {}
 
-export const {
+const {
   component,
   PropsContext: IconPropsContext,
   usePropsContext: useIconPropsContext,
   withContext,
 } = createComponent<IconProps, IconStyle>("icon", iconStyle)
+
+export { component, IconPropsContext, useIconPropsContext, withContext }
 
 /**
  * `Icon` is a general icon component that can be used in your projects.
@@ -36,6 +38,6 @@ export const Icon = withContext("svg")(
     const css = useInjectVarsIntoCss(props.css, { fontSize: "size" })
     const rest = useInjectVarsIntoProps(props, { fontSize: "size" })
 
-    return { ...rest, css, boxSize: "{size}" }
+    return { boxSize: "{size}", ...rest, css }
   },
 )

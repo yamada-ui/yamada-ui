@@ -6,10 +6,10 @@ import type { CSSObject, CSSSlotObject } from "../css"
 import type {
   ComponentSlotStyle,
   ComponentStyle,
+  StyledOptions,
   System,
   WithoutThemeProps,
 } from "../system"
-import type { StyledOptions } from "../system"
 import type {
   As,
   DOMElement,

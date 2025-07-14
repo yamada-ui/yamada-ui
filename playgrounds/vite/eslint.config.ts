@@ -1,37 +1,28 @@
 import type { TSESLint } from "@typescript-eslint/utils"
-import prettierConfig from "eslint-config-prettier"
+import {
+  createLanguageConfig,
+  cspellConfig,
+  jsxA11yConfig,
+  reactConfig,
+  reactHooksConfig,
+  sharedConfigArray,
+} from "@yamada-ui/workspace/eslint"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import tseslint from "typescript-eslint"
-import {
-  baseConfig,
-  importConfigArray,
-  jsxA11yConfig,
-  languageOptionFactory,
-  perfectionistConfig,
-  reactConfig,
-  reactHooksConfig,
-  typescriptConfig,
-} from "../../.eslint"
-
-const ignoresConfig = {
-  name: "eslint/ignores",
-  ignores: ["**/dist/**", "**/node_modules/**"],
-}
 
 const tsConfigAppPath = resolve(
   dirname(fileURLToPath(import.meta.url)),
-  "./tsconfig.app.json",
+  "tsconfig.app.json",
 )
 
 const tsConfigNodePath = resolve(
   dirname(fileURLToPath(import.meta.url)),
-  "./tsconfig.node.json",
+  "tsconfig.node.json",
 )
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
-  ignoresConfig,
-  languageOptionFactory(tsConfigAppPath, {
+  createLanguageConfig(tsConfigAppPath, {
     files: ["src/**/*.ts", "src/**/*.tsx"],
     languageOptions: {
       parserOptions: {
@@ -42,7 +33,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       },
     },
   }),
-  languageOptionFactory(tsConfigNodePath, {
+  createLanguageConfig(tsConfigNodePath, {
     files: ["eslint.config.ts", "vite.config.ts"],
     languageOptions: {
       parserOptions: {
@@ -50,14 +41,11 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
       },
     },
   }),
-  baseConfig,
-  typescriptConfig,
-  ...importConfigArray,
-  perfectionistConfig,
+  ...sharedConfigArray,
+  cspellConfig,
   reactConfig,
   reactHooksConfig,
   jsxA11yConfig,
-  prettierConfig,
 )
 
 export default config

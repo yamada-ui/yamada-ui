@@ -1,4 +1,4 @@
-import { renderHook } from "../../../test"
+import { renderHook } from "#test"
 import { ColorModeProvider } from "./color-mode-provider"
 import { useColorModeValue } from "./use-color-mode-value"
 

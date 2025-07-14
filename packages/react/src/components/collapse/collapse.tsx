@@ -12,8 +12,7 @@ import { AnimatePresence } from "motion/react"
 import { useEffect, useMemo, useState } from "react"
 import { createComponent } from "../../core"
 import { createdDom, isNumeric } from "../../utils"
-import { motion } from "../motion"
-import { createTransition } from "../motion"
+import { createTransition, motion } from "../motion"
 import { collapseStyle } from "./collapse.style"
 
 const variants: Variants = {
@@ -72,11 +71,13 @@ export interface CollapseProps
   startingHeight?: number | string
 }
 
-export const {
+const {
   PropsContext: CollapsePropsContext,
   usePropsContext: useCollapsePropsContext,
   withContext,
 } = createComponent<CollapseProps, CollapseStyle>("collapse", collapseStyle)
+
+export { CollapsePropsContext, useCollapsePropsContext }
 
 /**
  * `Collapse` is a component that allows you to expand or collapse an element for display.

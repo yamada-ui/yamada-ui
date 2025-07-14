@@ -58,7 +58,7 @@ export interface DataListRootProps
 interface ComponentContext
   extends Pick<DataListRootProps, "descriptionProps" | "termProps"> {}
 
-export const {
+const {
   ComponentContext,
   PropsContext: DataListPropsContext,
   useComponentContext,
@@ -69,6 +69,8 @@ export const {
   "data-list",
   dataListStyle,
 )
+
+export { DataListPropsContext, useDataListPropsContext }
 
 /**
  * `DataList` is used to display a list of data items.

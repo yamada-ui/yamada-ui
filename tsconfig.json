@@ -1,50 +1,5 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "moduleResolution": "bundler",
-    "moduleDetection": "force",
-    "jsx": "react-jsx",
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true,
-    "skipLibCheck": true,
-    "declaration": true,
-    "sourceMap": true,
-    "allowJs": true,
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noUncheckedSideEffectImports": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "types": ["vitest/globals"]
-  },
-  "include": [
-    "@types",
-    "**/*.js",
-    "**/*.jsx",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.mjs",
-    "**/*.mts"
-  ],
-  "exclude": [
-    "**/node_modules/**",
-    "**/bin/**",
-    "**/dist/**",
-    "**/coverage/**",
-    "playgrounds/**",
-    "website/**/*",
-    "storybook-static/**"
-  ],
-  "ts-node": {
-    "transpileOnly": true,
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+  "extends": "@yamada-ui/workspace/typescript/tsconfig.json",
+  "include": ["scripts", "eslint.config.ts"],
+  "exclude": ["@yamada-ui/utils"]
 }

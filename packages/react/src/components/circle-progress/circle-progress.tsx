@@ -42,7 +42,7 @@ export interface CircleProgressRootProps
   trackProps?: CircleProgressTrackProps
 }
 
-export const {
+const {
   PropsContext: CircleProgressPropsContext,
   usePropsContext: useCircleProgressPropsContext,
   withContext,
@@ -51,6 +51,8 @@ export const {
   "circle-progress",
   circleProgressStyle,
 )
+
+export { CircleProgressPropsContext, useCircleProgressPropsContext }
 
 /**
  * `CircleProgress` is a component that displays progress in a circular progress bar.

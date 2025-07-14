@@ -45,6 +45,11 @@
       "description": "The fallback text to display if the image is not provided.",
       "required": false
     },
+    "fallbackProps": {
+      "type": "AvatarFallbackProps",
+      "description": "The props to pass to the fallback component.",
+      "required": false
+    },
     "format": {
       "type": "(name: string) => string",
       "description": "Function to get the initials to display.",
@@ -53,6 +58,11 @@
     "icon": {
       "type": "ReactElement<\n  unknown,\n  string | JSXElementConstructor<any>\n>",
       "description": "The avatar icon to use.",
+      "required": false
+    },
+    "imageProps": {
+      "type": "AvatarImageProps",
+      "description": "The props to pass to the image component.",
       "required": false
     },
     "loading": {
@@ -78,7 +88,7 @@
       "required": false
     },
     "src": {
-      "type": "string | Blob",
+      "type": "string",
       "description": "The image url of the avatar.",
       "required": false
     },

@@ -51,7 +51,7 @@ export interface ColorSwatchProps
   withShadow?: boolean
 }
 
-export const {
+const {
   PropsContext: ColorSwatchPropsContext,
   usePropsContext: useColorSwatchPropsContext,
   withContext,
@@ -60,6 +60,8 @@ export const {
   "color-swatch",
   colorSwatchStyle,
 )
+
+export { ColorSwatchPropsContext, useColorSwatchPropsContext }
 
 /**
  * `ColorSwatch` is a component that displays color samples.

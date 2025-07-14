@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { UIProvider } from "../../providers/ui-provider"
 import { defaultConfig } from "../../theme"
 import { Image } from "../image"

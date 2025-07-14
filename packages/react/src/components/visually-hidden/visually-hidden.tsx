@@ -7,14 +7,16 @@ import { visuallyHiddenStyle } from "./visually-hidden.style"
 
 export interface VisuallyHiddenProps extends HTMLStyledProps<"span"> {}
 
-export const {
-  PropsContext: visuallyHiddenPropsContext,
+const {
+  PropsContext: VisuallyHiddenPropsContext,
   usePropsContext: useVisuallyHiddenPropsContext,
   withContext,
 } = createComponent<VisuallyHiddenProps, VisuallyHiddenStyle>(
   "visually-hidden",
   visuallyHiddenStyle,
 )
+
+export { useVisuallyHiddenPropsContext, VisuallyHiddenPropsContext }
 
 /**
  * `VisuallyHidden` is a common technique used in web accessibility to hide content from the visual client, but keep it readable for screen readers.

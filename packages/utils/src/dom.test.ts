@@ -66,6 +66,7 @@ describe("DOM", () => {
   describe("isSafari", () => {
     test("should return true if the browser is Safari on an Apple device", () => {
       const isAppleDevice = /mac|iphone|ipad|ipod/i.test(getPlatform())
+
       const isSafariBrowser = /apple/i.test(navigator.vendor)
       expect(isSafari()).toBe(isAppleDevice && isSafariBrowser)
     })

@@ -11,11 +11,13 @@ export interface HStackProps
   extends WithoutThemeProps<StackProps, HStackStyle>,
     ThemeProps<HStackStyle> {}
 
-export const {
+const {
   PropsContext: HStackPropsContext,
   usePropsContext: useHStackPropsContext,
   withContext,
 } = createComponent<HStackProps, HStackStyle>("stack--horizontal", hStackStyle)
+
+export { HStackPropsContext, useHStackPropsContext }
 
 /**
  * `HStack` is a component that groups elements and provides space between child elements.

@@ -1,4 +1,4 @@
-import { a11y, render, screen, waitFor } from "../../../test"
+import { a11y, render, screen, waitFor } from "#test"
 import { noop } from "../../utils"
 import { Option, OptionGroup, Select } from "./"
 

@@ -5,6 +5,8 @@ on:
     paths:
       - ".changeset/**"
       - "packages/**"
+      - "!packages/**/(scripts|storybook|test)/**"
+      - "!packages/**/*.(stories|test).(ts|tsx|mdx)"
     branches:
       - v*
 

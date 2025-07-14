@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { BadgeProps } from "./badge"
+import { PropsTable } from "#storybook"
 import { useMemo } from "react"
-import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
 import { For } from "../for"
 import { Wrap } from "../wrap"

@@ -1,7 +1,4 @@
 packages:
-  - "packages/**/**"
+  - "packages/**"
   - "playgrounds/**"
-  - "website/**"
-  - "!website/.next"
-  - "!website/.mdx"
-  - "!playgrounds/**/.next"
+  - "www/**"

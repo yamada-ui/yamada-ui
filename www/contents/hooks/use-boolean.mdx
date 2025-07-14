@@ -25,9 +25,21 @@ return (
 
 ## Usage
 
-```tsx
+:::code-group
+
+```tsx [package]
 import { useBoolean } from "@yamada-ui/react"
 ```
+
+```tsx [alias]
+import { useBoolean } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useBoolean } from "@workspace/ui"
+```
+
+:::
 
 ```tsx
 const [flg, { on, off, toggle }] = useBoolean()

@@ -15,8 +15,7 @@
     "./prettier": "./src/prettier/index.ts",
     "./prettier/*": "./src/prettier/*.js",
     "./typescript/*": "./src/typescript/*",
-    "./vitest/config": "./src/vitest/config.js",
-    "./vitest/setup": "./src/vitest/setup.ts",
+    "./vitest/*": "./src/vitest/*.ts",
     "./octokit": "./src/octokit/index.ts"
   },
   "dependencies": {

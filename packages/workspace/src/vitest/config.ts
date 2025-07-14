@@ -1,7 +1,6 @@
-/**
- * @type {import("vitest/config").ViteUserConfig}
- */
-const config = {
+import type { ViteUserConfig } from "vitest/config"
+
+export default {
   test: {
     coverage: {
       exclude: [
@@ -19,6 +18,4 @@ const config = {
     watch: false,
     onConsoleLog: (_, type) => type !== "stderr",
   },
-}
-
-export default config
+} satisfies ViteUserConfig

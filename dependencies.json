@@ -1,0 +1,1576 @@
+[
+  {
+    "type": "components",
+    "name": "accordion",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["collapse", "icon", "motion"],
+        "hooks": ["use-controllable-state", "use-descendant"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "airy",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": ["use-controllable-state"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "alert",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon", "loading", "status"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "aspect-ratio",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "avatar",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon"],
+        "hooks": [],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "badge",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "bleed",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "blockquote",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "box",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "breadcrumb",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon"],
+        "hooks": ["use-value"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "button",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["group", "icon-button", "loading", "ripple"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "card",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "carousel",
+    "dependencies": {
+      "external": ["embla-carousel-react@8.6.0", "embla-carousel@8.6.0"],
+      "internal": {
+        "components": ["icon", "icon-button"],
+        "hooks": ["use-boolean", "use-controllable-state", "use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "center",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "circle-progress",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["progress"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "client-only",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["show"],
+        "hooks": ["use-mounted"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "close-button",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon", "icon-button"],
+        "hooks": [],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "code",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "collapse",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "color-swatch",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["grid"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "container",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "data-list",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "drawer",
+    "dependencies": {
+      "external": ["motion/react@12.18.1", "react-remove-scroll@2.7.1"],
+      "internal": {
+        "components": [
+          "button",
+          "close-button",
+          "fade",
+          "focus-lock",
+          "modal",
+          "motion",
+          "portal",
+          "slide"
+        ],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "editable",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "input"],
+        "hooks": ["use-controllable-state", "use-focus"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "em",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "empty-state",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "fade",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "fade-scale",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "field",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["fieldset"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "fieldset",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "file-button",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["button", "field", "file-input", "input", "portal"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "file-input",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "input", "portal"],
+        "hooks": ["use-clickable", "use-controllable-state"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "flex",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "flip",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": ["use-controllable-state"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "float",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "focus-lock",
+    "dependencies": {
+      "external": ["react-focus-lock@2.13.6"],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "for",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "format-byte",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["format-number"],
+        "hooks": [],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "format-number",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "grid",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "group",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["flex"],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "heading",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "highlight",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["mark", "text"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "icon",
+    "dependencies": {
+      "external": ["lucide-react@0.523.0"],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "icon-button",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["button", "button.style"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "image",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "indicator",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["float"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "infinite-scroll-area",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "input",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "group"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "kbd",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "link",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "link-box",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "list",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "loading",
+    "dependencies": {
+      "external": ["motion/react@12.18.1", "react-remove-scroll@2.7.1"],
+      "internal": {
+        "components": ["center", "icon", "motion", "portal", "text"],
+        "hooks": ["use-timeout"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "mark",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "modal",
+    "dependencies": {
+      "external": ["motion/react@12.18.1", "react-remove-scroll@2.7.1"],
+      "internal": {
+        "components": [
+          "button",
+          "close-button",
+          "fade",
+          "focus-lock",
+          "motion",
+          "popover",
+          "portal"
+        ],
+        "hooks": ["use-disclosure"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "motion",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "native-select",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "group", "icon", "input"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "native-table",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "number-input",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["button", "field", "group", "icon", "input"],
+        "hooks": ["use-counter", "use-event-listener", "use-interval"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "pagination",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["button", "icon", "icon-button"],
+        "hooks": ["use-controllable-state", "use-value"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "password-input",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["button", "field", "group", "icon", "input"],
+        "hooks": ["use-controllable-state"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "picture",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["image"],
+        "hooks": ["use-token"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "pin-input",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "group", "input"],
+        "hooks": ["use-controllable-state", "use-descendant"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "popover",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["fade-scale", "motion", "portal", "slide-fade"],
+        "hooks": [
+          "use-disclosure",
+          "use-event-listener",
+          "use-focus",
+          "use-outside-click",
+          "use-popper"
+        ],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "portal",
+    "dependencies": {
+      "external": ["react-dom@19.1.0"],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "progress",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "reorder",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["icon", "motion"],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "resizable",
+    "dependencies": {
+      "external": ["react-resizable-panels@3.0.2"],
+      "internal": {
+        "components": [],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "ripple",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "rotate",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": ["use-controllable-state"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "scroll-area",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "segmented-control",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field"],
+        "hooks": ["use-controllable-state", "use-descendant", "use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "separator",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "show",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "simple-grid",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["grid"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "skeleton",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "slide",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "slide-fade",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["motion"],
+        "hooks": ["use-value"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "slot",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "stack",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "stat",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon"],
+        "hooks": [],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "status",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "steps",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon"],
+        "hooks": [
+          "use-controllable-state",
+          "use-descendant",
+          "use-lazy-mount",
+          "use-value"
+        ],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "switch",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field"],
+        "hooks": ["use-controllable-state"],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "tabs",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [
+          "use-controllable-state",
+          "use-descendant",
+          "use-lazy-mount",
+          "use-value"
+        ],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "tag",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["icon"],
+        "hooks": ["use-clickable"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "text",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "textarea",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "input"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "toggle",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["field", "group", "icon-button", "input", "portal"],
+        "hooks": ["use-controllable-state"],
+        "providers": ["i18n-provider"]
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "tooltip",
+    "dependencies": {
+      "external": ["motion/react@12.18.1"],
+      "internal": {
+        "components": ["motion", "popover", "portal"],
+        "hooks": [
+          "use-disclosure",
+          "use-event-listener",
+          "use-outside-click",
+          "use-popper"
+        ],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "visually-hidden",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "components",
+    "name": "wrap",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["flex"],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-animation",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-async",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-async-callback",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-boolean",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-breakpoint",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-clickable",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-clipboard",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-controllable-state",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-counter",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-descendant",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-disclosure",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-event-listener",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-eye-dropper",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-focus",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-hover",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-idle",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-interval",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-latest-ref",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-lazy-mount",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-local-storage",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-media-query",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-mounted",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-online",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-os",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-outside-click",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-popper",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-previous",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-processing",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-resize-observer",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-timeout",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-token",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-value",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "hooks",
+    "name": "use-window-event",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "providers",
+    "name": "i18n-provider",
+    "dependencies": {
+      "external": ["intl-messageformat@10.7.16"],
+      "internal": {
+        "components": [],
+        "hooks": [],
+        "providers": []
+      }
+    }
+  },
+  {
+    "type": "providers",
+    "name": "ui-provider",
+    "dependencies": {
+      "external": [],
+      "internal": {
+        "components": ["loading"],
+        "hooks": [],
+        "providers": ["i18n-provider"]
+      }
+    }
+  }
+]

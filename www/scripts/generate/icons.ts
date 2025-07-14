@@ -1,11 +1,11 @@
 import { toPascalCase } from "@yamada-ui/utils"
+import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { execa } from "execa"
 import { readdir, readFile } from "fs/promises"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
 import { rimraf } from "rimraf"
-import { writeFileWithFormat } from "@/libs/prettier"
 
 const REPOSITORY_PATH = path.resolve(".lucide")
 const DIST_PATH = path.resolve("data", "icons.json")
@@ -66,7 +66,7 @@ async function main() {
 
   spinner.start(`Writing data`)
 
-  await writeFileWithFormat(DIST_PATH, data)
+  await writeFileWithFormat(DIST_PATH, data, { parser: "json" })
 
   spinner.succeed(`Wrote data`)
 

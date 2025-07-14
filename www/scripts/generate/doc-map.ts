@@ -4,10 +4,10 @@ import type { Doc } from "#velite"
 import type { DocMap } from "@/data"
 import type { Lang } from "@/utils/i18n"
 import type { Dict } from "@yamada-ui/react"
+import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { readFile } from "fs/promises"
 import { createTranslator } from "next-intl"
 import path from "path"
-import { writeFileWithFormat } from "@/libs/prettier"
 import { getLang, langs } from "@/utils/i18n"
 import { getPathname } from "@/utils/route"
 
@@ -31,7 +31,7 @@ async function getDocMap(): Promise<{ [key in Lang]: DocMap }> {
           items: [],
         }
 
-        await writeFileWithFormat(filePath, data)
+        await writeFileWithFormat(filePath, data, { parser: "json" })
 
         return [lang, data]
       }
@@ -46,7 +46,7 @@ async function setDocMap(docMap: { [key in Lang]: DocMap }) {
     Object.entries(docMap).map(async ([lang, data]) => {
       const filePath = path.join(DATA_PATH, `doc-map.${lang}.json`)
 
-      await writeFileWithFormat(filePath, data)
+      await writeFileWithFormat(filePath, data, { parser: "json" })
     }),
   )
 }

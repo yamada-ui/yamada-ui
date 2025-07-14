@@ -1,6 +1,7 @@
 import type { JSDocTagInfo, SourceFile, Symbol, TypeChecker } from "typescript"
 import { isEmptyObject, isString } from "@yamada-ui/utils"
-import { readdir, readFile, writeFile } from "fs/promises"
+import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { readdir, readFile } from "fs/promises"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
@@ -12,7 +13,6 @@ import {
   readConfigFile,
   sys,
 } from "typescript"
-import { prettier } from "../../utils"
 
 interface ExportedType {
   name: string
@@ -112,7 +112,7 @@ async function formatType(type: string) {
   try {
     const prefix = "type ONLY_FOR_FORMAT = "
 
-    const result = await prettier(prefix + type, {
+    const result = await format(prefix + type, {
       semi: false,
     })
 
@@ -124,7 +124,7 @@ async function formatType(type: string) {
 
 async function formatDescription(description: string) {
   try {
-    const result = await prettier(description, {
+    const result = await format(description, {
       parser: "markdown",
     })
 
@@ -359,11 +359,13 @@ async function main() {
           Object.entries(data).sort(([a], [b]) => a.localeCompare(b)),
         )
 
-        const content = await prettier(JSON.stringify(sortedData), {
-          parser: "json",
-        })
-
-        await writeFile(path.join(dirPath, "props.json"), content)
+        await writeFileWithFormat(
+          path.join(dirPath, "props.json"),
+          sortedData,
+          {
+            parser: "json",
+          },
+        )
       }
     }),
   )

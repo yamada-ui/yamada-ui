@@ -11,7 +11,6 @@ import type { StyleConfig } from "./styled-props"
 import type { TransformOptions } from "./transform-props"
 import { conditionSelectors } from "@yamada-ui/react"
 import { isUndefined, toArray } from "@yamada-ui/utils"
-import { prettier } from "../../utils"
 import { checkProps } from "./check"
 import { generateConfig } from "./config"
 import { overrideTypes } from "./override-types"
@@ -141,7 +140,7 @@ function generateDoc(...data: CSSCompatStatement[]) {
   }
 }
 
-export async function generateStyles(
+export function generateStyles(
   cssCompatData: CSSCompatData,
   atRuleCompatData: CSSCompatData,
 ) {
@@ -331,7 +330,7 @@ export async function generateStyles(
     },
   )
 
-  const content = `
+  const data = `
     import type * as CSS from "csstype"
     import type { AnyString } from "../../utils"
     import type { ColorScheme, ThemeTokens } from "../system"
@@ -388,8 +387,6 @@ export async function generateStyles(
       ${styleProps.join("\n")}
     }
   `
-
-  const data = await prettier(content)
 
   return { data, duplicatedProperties }
 }

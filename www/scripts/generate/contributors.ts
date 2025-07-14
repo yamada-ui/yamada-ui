@@ -1,11 +1,11 @@
 import type { Dict } from "@yamada-ui/utils"
 import { Octokit } from "@octokit/rest"
+import { getContent, retryOnRateLimit } from "@yamada-ui/workspace/octokit"
+import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { config } from "dotenv"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
-import { getContent, retryOnRateLimit } from "@/libs/octokit"
-import { writeFileWithFormat } from "@/libs/prettier"
 
 config()
 
@@ -87,11 +87,15 @@ async function main() {
   await writeFileWithFormat(
     path.resolve("data", "maintainers.json"),
     maintainers,
+    { parser: "json" },
   )
-  await writeFileWithFormat(path.resolve("data", "emeriti.json"), emeriti)
+  await writeFileWithFormat(path.resolve("data", "emeriti.json"), emeriti, {
+    parser: "json",
+  })
   await writeFileWithFormat(
     path.resolve("data", "contributors.json"),
     omittedContributors,
+    { parser: "json" },
   )
 
   spinner.succeed("Wrote data")

@@ -1,7 +1,7 @@
 import type { TSESLint } from "@typescript-eslint/utils"
 import {
-  cspellConfig,
   createLanguageConfig,
+  cspellConfig,
   sharedConfigArray,
   sharedFiles,
 } from "@yamada-ui/workspace/eslint"

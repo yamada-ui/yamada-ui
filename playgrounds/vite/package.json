@@ -1,5 +1,5 @@
 {
-  "name": "vite-react",
+  "name": "@playgrounds/vite",
   "version": "2.0.0",
   "private": true,
   "type": "module",
@@ -20,11 +20,8 @@
     "@types/node": "^24.0.4",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@yamada-ui/workspace": "workspace:*",
     "@vitejs/plugin-react-swc": "^3.8.0",
-    "eslint": "^9.29.0",
-    "eslint-config-prettier": "^10.1.5",
-    "prettier": "^3.6.1",
-    "typescript-eslint": "^8.35.0",
     "vite": "^7.0.0"
   }
 }

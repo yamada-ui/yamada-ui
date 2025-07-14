@@ -5,7 +5,7 @@ import { sharedFiles } from "./shared"
 const disabledRules = configs.recommended[1]?.rules
 const stylisticRules = configs.stylistic[2]?.rules
 
-export const typescriptConfig: TSESLint.FlatConfig.Config = {
+export const typescriptConfig = {
   name: "eslint/typescript",
   files: sharedFiles,
   plugins: {
@@ -69,4 +69,4 @@ export const typescriptConfig: TSESLint.FlatConfig.Config = {
     "@typescript-eslint/prefer-reduce-type-parameter": "warn",
     "@typescript-eslint/prefer-string-starts-ends-with": "warn",
   },
-}
+} satisfies TSESLint.FlatConfig.Config

@@ -2,10 +2,10 @@ import type { TSESLint } from "@typescript-eslint/utils"
 import vitestPlugin from "@vitest/eslint-plugin"
 import { sharedTestFiles } from "./shared"
 
-export const vitestConfig: TSESLint.FlatConfig.Config = {
+export const vitestConfig = {
   name: "eslint/vitest",
   files: sharedTestFiles,
-  plugins: { vitest: vitestPlugin },
+  plugins: { vitest: vitestPlugin as unknown as TSESLint.FlatConfig.Plugin },
   rules: {
     ...vitestPlugin.configs.recommended.rules,
     "vitest/expect-expect": "off",
@@ -42,4 +42,4 @@ export const vitestConfig: TSESLint.FlatConfig.Config = {
     "vitest/require-top-level-describe": "error",
     "vitest/valid-expect": ["error", { alwaysAwait: true }],
   },
-}
+} satisfies TSESLint.FlatConfig.Config

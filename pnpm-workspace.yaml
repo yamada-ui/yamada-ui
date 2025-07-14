@@ -1,7 +1,4 @@
 packages:
-  - "packages/**/**"
+  - "packages/**"
   - "playgrounds/**"
   - "www/**"
-  - "!www/.next"
-  - "!www/.velite"
-  - "!playgrounds/**/.next"

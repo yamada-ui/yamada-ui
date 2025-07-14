@@ -2,7 +2,7 @@ import type { TSESLint } from "@typescript-eslint/utils"
 import reactPlugin from "eslint-plugin-react"
 import { sharedFiles } from "./shared"
 
-export const reactConfig: TSESLint.FlatConfig.Config = {
+export const reactConfig = {
   name: "eslint/react",
   files: sharedFiles,
   plugins: { react: reactPlugin },
@@ -23,4 +23,4 @@ export const reactConfig: TSESLint.FlatConfig.Config = {
     "react/self-closing-comp": "error",
   },
   settings: { react: { version: "detect" } },
-}
+} satisfies TSESLint.FlatConfig.Config

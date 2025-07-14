@@ -1,38 +1,35 @@
 import type { TSESLint } from "@typescript-eslint/utils"
 import nextPlugin from "@next/eslint-plugin-next"
-import prettierConfig from "eslint-config-prettier"
-import tseslint from "typescript-eslint"
 import {
-  baseConfig,
-  cspellConfig,
-  importConfigArray,
+  jsxA11yConfig,
   languageOptionFactory,
-  perfectionistConfig,
   reactConfig,
   reactHooksConfig,
-  jsxA11yConfig as sharedJsxA11yConfig,
-  typescriptConfig,
-} from "../.eslint"
-
-const ignoresConfig: TSESLint.FlatConfig.Config = {
-  name: "eslint/ignores",
-  ignores: ["**/node_modules/**", "**/.next/**", "**/.velite/**"],
-}
+  sharedConfigArray,
+  cspellConfig as sharedCspellConfig,
+  sharedFiles,
+} from "@yamada-ui/workspace/eslint"
+import tseslint from "typescript-eslint"
 
 const noConsoleConfig: TSESLint.FlatConfig.Config = {
   name: "eslint/no-console",
-  files: ["scripts/**/*.ts"],
+  files: ["scripts/**"],
   rules: {
     "no-console": "off",
   },
 }
 
-const jsxA11yConfig: TSESLint.FlatConfig.Config = {
-  ...sharedJsxA11yConfig,
+const restrictedImportsConfig: TSESLint.FlatConfig.Config = {
+  name: "eslint/restricted-imports",
+  files: sharedFiles,
   rules: {
-    ...sharedJsxA11yConfig.rules,
-    "jsx-a11y/no-autofocus": "off",
+    "no-restricted-imports": "off",
   },
+}
+
+const cspellConfig: TSESLint.FlatConfig.Config = {
+  ...sharedCspellConfig,
+  ignores: [...sharedCspellConfig.ignores, "data/**", "contents/changelog/**"],
 }
 
 const nextConfig: TSESLint.FlatConfig.Config = {
@@ -58,19 +55,15 @@ const languageOptionConfig = languageOptionFactory(true, {
 })
 
 const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
-  ignoresConfig,
   languageOptionConfig,
-  baseConfig,
+  ...sharedConfigArray,
   noConsoleConfig,
-  nextConfig,
-  typescriptConfig,
-  ...importConfigArray,
-  perfectionistConfig,
+  restrictedImportsConfig,
   cspellConfig,
+  nextConfig,
+  jsxA11yConfig,
   reactConfig,
   reactHooksConfig,
-  jsxA11yConfig,
-  prettierConfig,
 )
 
 export default config

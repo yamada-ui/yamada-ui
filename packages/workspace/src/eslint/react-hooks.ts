@@ -3,7 +3,7 @@ import { fixupPluginRules } from "@eslint/compat"
 import reactHooksPlugin from "eslint-plugin-react-hooks"
 import { sharedFiles } from "./shared"
 
-export const reactHooksConfig: TSESLint.FlatConfig.Config = {
+export const reactHooksConfig = {
   name: "eslint/react-hooks",
   files: sharedFiles,
   plugins: { "react-hooks": fixupPluginRules(reactHooksPlugin) },
@@ -12,4 +12,4 @@ export const reactHooksConfig: TSESLint.FlatConfig.Config = {
 
     "react-hooks/exhaustive-deps": "error",
   },
-}
+} satisfies TSESLint.FlatConfig.Config

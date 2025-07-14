@@ -1,4 +1,4 @@
 {
-  "extends": "@yamada-ui/workspace/typescript/tsconfig.json",
+  "extends": "./src/typescript/tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"]
 }

@@ -17,14 +17,6 @@ const noConsoleConfig: TSESLint.FlatConfig.Config = {
   },
 }
 
-const restrictedImportsConfig: TSESLint.FlatConfig.Config = {
-  name: "eslint/restricted-imports",
-  files: sharedFiles,
-  rules: {
-    "no-restricted-imports": "off",
-  },
-}
-
 const tsConfigPath = resolve(
   dirname(fileURLToPath(import.meta.url)),
   "tsconfig.json",
@@ -37,7 +29,6 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   ...sharedConfigArray,
   cspellConfig,
   noConsoleConfig,
-  restrictedImportsConfig,
 )
 
 export default config

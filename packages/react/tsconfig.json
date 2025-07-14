@@ -1,6 +1,12 @@
 {
-  "extends": "../../tsconfig.json",
-  "include": ["@types", "src"],
+  "extends": "@yamada-ui/workspace/typescript/tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@/storybook": ["./storybook"],
+      "@/test": ["./test"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
   "exclude": [
     // TODO: Remove legacy-components
     "src/legacy-components/**/*",

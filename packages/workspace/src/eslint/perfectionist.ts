@@ -79,10 +79,12 @@ const sortObjectGroups = {
   ],
 }
 
-export const perfectionistConfig: TSESLint.FlatConfig.Config = {
+export const perfectionistConfig = {
   name: "eslint/perfectionist",
   files: sharedFiles,
-  plugins: { perfectionist: perfectionistPlugin },
+  plugins: {
+    perfectionist: perfectionistPlugin as unknown as TSESLint.FlatConfig.Plugin,
+  },
   rules: {
     "perfectionist/sort-exports": [
       "error",
@@ -159,4 +161,4 @@ export const perfectionistConfig: TSESLint.FlatConfig.Config = {
     "perfectionist/sort-sets": ["warn", { type }],
     "perfectionist/sort-union-types": ["warn", { type }],
   },
-}
+} satisfies TSESLint.FlatConfig.Config

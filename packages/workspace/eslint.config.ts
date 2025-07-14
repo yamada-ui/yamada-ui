@@ -3,27 +3,11 @@ import {
   cspellConfig,
   languageOptionFactory,
   sharedConfigArray,
-  sharedFiles,
+  vitestConfig,
 } from "@yamada-ui/workspace/eslint"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import tseslint from "typescript-eslint"
-
-const noConsoleConfig: TSESLint.FlatConfig.Config = {
-  name: "eslint/no-console",
-  files: sharedFiles,
-  rules: {
-    "no-console": "off",
-  },
-}
-
-const restrictedImportsConfig: TSESLint.FlatConfig.Config = {
-  name: "eslint/restricted-imports",
-  files: sharedFiles,
-  rules: {
-    "no-restricted-imports": "off",
-  },
-}
 
 const tsConfigPath = resolve(
   dirname(fileURLToPath(import.meta.url)),
@@ -36,8 +20,7 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   languageOptionConfig,
   ...sharedConfigArray,
   cspellConfig,
-  noConsoleConfig,
-  restrictedImportsConfig,
+  vitestConfig,
 )
 
 export default config

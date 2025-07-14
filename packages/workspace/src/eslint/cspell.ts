@@ -1,9 +1,9 @@
 import type { TSESLint } from "@typescript-eslint/utils"
 import cspellPlugin from "@cspell/eslint-plugin"
-import cspellJson from "../cspell.json"
+import cspellJson from "../../../../cspell.json"
 import { sharedFiles } from "./shared"
 
-export const cspellConfig: TSESLint.FlatConfig.Config = {
+export const cspellConfig = {
   name: "eslint/cspell",
   files: sharedFiles,
   ignores: cspellJson.ignorePaths,
@@ -12,9 +12,12 @@ export const cspellConfig: TSESLint.FlatConfig.Config = {
     "@cspell/spellchecker": [
       "warn",
       {
-        configFile: new URL("../cspell.json", import.meta.url).toString(),
+        configFile: new URL(
+          "../../../../cspell.json",
+          import.meta.url,
+        ).toString(),
         cspell: {},
       },
     ],
   },
-}
+} satisfies TSESLint.FlatConfig.Config

@@ -119,6 +119,7 @@
     "Neue",
     "Nkoo",
     "nonconstructor",
+    "noninteractive",
     "nonoctal",
     "nums",
     "nwsapi",
@@ -213,17 +214,18 @@
     "العربية"
   ],
   "ignorePaths": [
-    "node_modules",
-    "dist",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.next/**",
+    "**/.turbo/**",
+    "**/.velite/**",
+    "**/coverage/**",
+    "**/storybook-static/**",
+    "**/CHANGELOG.md/**",
     "pnpm-lock.yaml",
+    ".changelog/**",
     "packages/react/src/components/icon/icons/**",
-    "www/pages/icons/tags.ts",
-    "www/constant/maintainers.ts",
-    "www/constant/members.ts",
-    "www/constant/contributors.ts",
-    "www/contents/changelog/**",
-    "www/contents/components/**/props.mdx",
-    "www/contents/components/**/props.ja.mdx",
-    "CHANGELOG.md"
+    "www/data/**",
+    "www/contents/changelog/**"
   ]
 }

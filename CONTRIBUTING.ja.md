@@ -40,12 +40,12 @@ cd yamada-ui
 
 ### Visual Studio Code
 
-#### [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-
 拡張機能を正しく動作させるために、`.vscode/setting.json`に以下の設定を追加してください。
 
 ```json
 {
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "prettier.requireConfig": true,
   "eslint.workingDirectories": [
     "www",
     "playgrounds/next/app",

@@ -3,7 +3,7 @@ import { fixupPluginRules } from "@eslint/compat"
 import testingLibraryPlugin from "eslint-plugin-testing-library"
 import { sharedTestFiles } from "./shared"
 
-export const testingLibraryConfig: TSESLint.FlatConfig.Config = {
+export const testingLibraryConfig = {
   name: "eslint/testing-library",
   files: sharedTestFiles,
   plugins: { "testing-library": fixupPluginRules(testingLibraryPlugin) },
@@ -17,4 +17,4 @@ export const testingLibraryConfig: TSESLint.FlatConfig.Config = {
     "testing-library/prefer-find-by": "error",
     "testing-library/prefer-query-by-disappearance": "error",
   },
-}
+} satisfies TSESLint.FlatConfig.Config

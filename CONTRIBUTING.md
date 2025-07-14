@@ -52,12 +52,10 @@ To improve our development process, we have set up tools and systems. Yamada UI 
 
 ### Visual Studio Code
 
-#### [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-
-To ensure the extension works correctly, please add the following settings to `.vscode/settings.json`.
-
 ```json
 {
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "prettier.requireConfig": true,
   "eslint.workingDirectories": [
     "www",
     "playgrounds/next/app",

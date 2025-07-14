@@ -1,55 +1,69 @@
 import type {
+  RenderHookOptions as OriginalRenderHookOptions,
+  RenderOptions as OriginalRenderOptions,
   Queries,
   queries,
-  RenderHookOptions as ReactRenderHookOptions,
-  RenderOptions as ReactRenderOptions,
 } from "@testing-library/react"
-import type { ReactElement } from "react"
-import type * as ReactDOMClient from "react-dom/client"
+import type { PropsWithChildren, ReactNode } from "react"
+import type { Container } from "react-dom/client"
+import type { AxeCore } from "vitest-axe"
 import type { UIProviderProps } from "../src"
 import {
-  render as reactRender,
-  renderHook as reactRenderHook,
+  render as originalRender,
+  renderHook as originalRenderHook,
 } from "@testing-library/react"
 import { userEvent } from "@testing-library/user-event"
-import { defaultTheme, UIProvider } from "../src"
+import { isValidElement } from "react"
+import { UIProvider } from "../src"
 import "@testing-library/jest-dom/vitest"
 
-export type RenderOptions = ReactRenderOptions & {
+export interface RenderOptions extends OriginalRenderOptions {
   withProvider?: boolean
+  providerProps?: Omit<UIProviderProps, "children">
 }
 
-export type RenderReturn = ReturnType<typeof reactRender> & {
+export interface RenderReturn extends ReturnType<typeof originalRender> {
   user: ReturnType<typeof userEvent.setup>
 }
 
 export function render(
-  ui: ReactElement,
-  { withProvider = true, ...rest }: RenderOptions = {},
+  ui: ReactNode,
+  { withProvider = true, providerProps, ...options }: RenderOptions = {},
 ): RenderReturn {
   const user = userEvent.setup()
 
   if (withProvider)
-    rest.wrapper ??= (props: any) => (
-      <UIProvider {...props} theme={defaultTheme} />
+    options.wrapper ??= (props: PropsWithChildren) => (
+      <UIProvider {...props} {...providerProps} />
     )
 
-  const result = reactRender(ui, rest)
+  const result = originalRender(ui, options)
 
   return { user, ...result }
 }
 
-type RendererableContainer = ReactDOMClient.Container
-type HydrateableContainer = Parameters<
-  (typeof ReactDOMClient)["hydrateRoot"]
->[0]
+export interface A11yOptions extends RenderOptions {
+  axeOptions?: AxeCore.RunOptions
+}
 
-export type RenderHookOptions<
+export async function a11y(
+  ui: ReactNode,
+  { axeOptions, ...options }: A11yOptions = {},
+): Promise<void> {
+  const { axe } = await import("vitest-axe")
+  const container = isValidElement(ui) ? render(ui, options).container : ui
+  const results = await axe(container as HTMLElement, axeOptions)
+
+  // @ts-ignore
+  expect(results).toHaveNoViolations()
+}
+
+export interface RenderHookOptions<
   Y,
   M extends Queries = typeof queries,
-  D extends HydrateableContainer | RendererableContainer = HTMLElement,
-  H extends HydrateableContainer | RendererableContainer = D,
-> = ReactRenderHookOptions<Y, M, D, H> & {
+  D extends Container | Document | Element = HTMLElement,
+  H extends Container | Document | Element = D,
+> extends OriginalRenderHookOptions<Y, M, D, H> {
   withProvider?: boolean
   providerProps?: Omit<UIProviderProps, "children">
 }
@@ -58,20 +72,20 @@ export function renderHook<
   Y,
   M,
   D extends Queries = typeof queries,
-  H extends HydrateableContainer | RendererableContainer = HTMLElement,
-  R extends HydrateableContainer | RendererableContainer = H,
+  H extends Container | Document | Element = HTMLElement,
+  R extends Container | Document | Element = H,
 >(
   render: (props: M) => Y,
   {
     withProvider = true,
     providerProps,
-    ...rest
+    ...options
   }: RenderHookOptions<M, D, H, R> = {},
 ) {
   if (withProvider)
-    rest.wrapper ??= (props: any) => (
-      <UIProvider {...props} theme={defaultTheme} {...providerProps} />
+    options.wrapper ??= (props: PropsWithChildren) => (
+      <UIProvider {...props} {...providerProps} />
     )
 
-  return reactRenderHook<Y, M, D, H, R>(render, rest)
+  return originalRenderHook<Y, M, D, H, R>(render, options)
 }

@@ -1,4 +1,3 @@
-export * from "./a11y"
 export * from "./drag"
 export * from "./render"
 export * from "./system"

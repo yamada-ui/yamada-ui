@@ -1,14 +1,6 @@
 import type { ReactNode } from "react"
 import { Fragment } from "react"
-import {
-  Center,
-  Flex,
-  For,
-  Grid,
-  GridItem,
-  Heading,
-  toTitleCase,
-} from "../../src"
+import { Center, Flex, For, Grid, GridItem, Heading, toTitleCase } from "../src"
 
 interface PropsTableProps<Y extends string, M extends string> {
   children: (

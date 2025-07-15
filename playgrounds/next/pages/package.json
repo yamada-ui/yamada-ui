@@ -11,10 +11,10 @@
     "format": "prettier . --ignore-path ../../../.prettierignore --check --cache"
   },
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "@yamada-ui/react": "workspace:*",
     "next": "^15.4.1",
-    "@yamada-ui/react": "workspace:*"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.13",

@@ -80,7 +80,7 @@ importers:
         specifier: ^0.10.1
         version: 0.10.1
       '@vitejs/plugin-react-swc':
-        specifier: ^3.8.0
+        specifier: ^3.10.2
         version: 3.10.2(vite@7.0.3)
       '@vitest/coverage-v8':
         specifier: ^3.2.4
@@ -191,7 +191,7 @@ importers:
         specifier: ^14.0.0
         version: 14.0.0
       esbuild:
-        specifier: ^0.25.5
+        specifier: ^0.25.6
         version: 0.25.6
       glob:
         specifier: ^11.0.3
@@ -206,7 +206,7 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1
       prettier:
-        specifier: ^3.6.1
+        specifier: ^3.6.2
         version: 3.6.2
       tar:
         specifier: ^7.4.3
@@ -237,7 +237,7 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
       '@emotion/styled':
-        specifier: ^11.14.0
+        specifier: ^11.14.1
         version: 11.14.1(@emotion/react@11.14.0)(@types/react@19.1.8)(react@19.1.0)
       '@emotion/use-insertion-effect-with-fallbacks':
         specifier: ^1.2.0
@@ -246,7 +246,7 @@ importers:
         specifier: ^1.4.2
         version: 1.4.2
       '@floating-ui/react-dom':
-        specifier: ^2.1.3
+        specifier: ^2.1.4
         version: 2.1.4(react-dom@19.1.0)(react@19.1.0)
       '@tanstack/react-table':
         specifier: ^8.21.3
@@ -272,6 +272,9 @@ importers:
       embla-carousel-react:
         specifier: ^8.6.0
         version: 8.6.0(react@19.1.0)
+      file-selector:
+        specifier: ^2.1.2
+        version: 2.1.2
       framesync:
         specifier: 6.1.2
         version: 6.1.2
@@ -290,9 +293,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.1.0(react@19.1.0)
-      react-dropzone-esm:
-        specifier: ^15.2.0
-        version: 15.2.0(react@19.1.0)
+      react-dropzone:
+        specifier: ^14.3.8
+        version: 14.3.8(react@19.1.0)
       react-fast-compare:
         specifier: ^3.2.2
         version: 3.2.2
@@ -303,14 +306,14 @@ importers:
         specifier: ^2.7.1
         version: 2.7.1(@types/react@19.1.8)(react@19.1.0)
       react-resizable-panels:
-        specifier: ^3.0.2
+        specifier: ^3.0.3
         version: 3.0.3(react-dom@19.1.0)(react@19.1.0)
       recharts:
-        specifier: ^3.0.0
+        specifier: ^3.1.0
         version: 3.1.0(@types/react@19.1.8)(react-dom@19.1.0)(react-is@19.1.0)(react@19.1.0)(redux@5.0.1)
     devDependencies:
       '@faker-js/faker':
-        specifier: ^9.8.0
+        specifier: ^9.9.0
         version: 9.9.0
       '@lucide/lab':
         specifier: ^0.1.2
@@ -325,7 +328,7 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       react-hook-form:
-        specifier: ^7.57.0
+        specifier: ^7.60.0
         version: 7.60.0(react@19.1.0)
       react-icons:
         specifier: ^5.5.0
@@ -561,7 +564,7 @@ importers:
         specifier: ^19.1.6
         version: 19.1.6(@types/react@19.1.8)
       '@vitejs/plugin-react-swc':
-        specifier: ^3.8.0
+        specifier: ^3.10.2
         version: 3.10.2(vite@7.0.3)
       vite:
         specifier: 7.0.3
@@ -664,7 +667,7 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1
       prettier:
-        specifier: ^3.6.1
+        specifier: ^3.6.2
         version: 3.6.2
       rehype-autolink-headings:
         specifier: ^7.1.0
@@ -6120,6 +6123,11 @@ packages:
       when-exit: 2.1.4
     dev: true
 
+  /attr-accept@2.2.5:
+    resolution: {integrity: sha512-0bDNnY/u6pPwHDMoF0FieU354oBi0a8rD9FcsLwzcGWbc8KS8KPIi7y+s13OlVY+gMWc/9xEMUgNE6Qm8ZllYQ==, tarball: https://registry.npmjs.org/attr-accept/-/attr-accept-2.2.5.tgz}
+    engines: {node: '>=4'}
+    dev: false
+
   /available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==, tarball: https://registry.npmjs.org/available-typed-arrays/-/available-typed-arrays-1.0.7.tgz}
     engines: {node: '>= 0.4'}
@@ -8436,6 +8444,13 @@ packages:
     engines: {node: '>=16.0.0'}
     dependencies:
       flat-cache: 4.0.1
+    dev: false
+
+  /file-selector@2.1.2:
+    resolution: {integrity: sha512-QgXo+mXTe8ljeqUFaX3QVHc5osSItJ/Km+xpocx0aSqWGMSCf6qYs/VnzZgS864Pjn5iceMRFigeAV7AfTlaig==, tarball: https://registry.npmjs.org/file-selector/-/file-selector-2.1.2.tgz}
+    engines: {node: '>= 12'}
+    dependencies:
+      tslib: 2.8.1
     dev: false
 
   /fill-range@7.1.1:
@@ -12578,12 +12593,14 @@ packages:
       react: 19.1.0
       scheduler: 0.26.0
 
-  /react-dropzone-esm@15.2.0(react@19.1.0):
-    resolution: {integrity: sha512-pPwR8xWVL+tFLnbAb8KVH5f6Vtl397tck8dINkZ1cPMxHWH+l9dFmIgRWgbh7V7jbjIcuKXCsVrXbhQz68+dVA==, tarball: https://registry.npmjs.org/react-dropzone-esm/-/react-dropzone-esm-15.2.0.tgz}
+  /react-dropzone@14.3.8(react@19.1.0):
+    resolution: {integrity: sha512-sBgODnq+lcA4P296DY4wacOZz3JFpD99fp+hb//iBO2HHnyeZU3FwWyXJ6salNpqQdsZrgMrotuko/BdJMV8Ug==, tarball: https://registry.npmjs.org/react-dropzone/-/react-dropzone-14.3.8.tgz}
     engines: {node: '>= 10.13'}
     peerDependencies:
       react: ^19.0.0
     dependencies:
+      attr-accept: 2.2.5
+      file-selector: 2.1.2
       prop-types: 15.8.1
       react: 19.1.0
     dev: false

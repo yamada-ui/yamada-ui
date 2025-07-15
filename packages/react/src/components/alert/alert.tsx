@@ -92,10 +92,10 @@ export interface AlertLoadingProps extends Loading.Props {
 }
 
 export const AlertLoading = withContext<"svg", AlertLoadingProps>(
-  ({ loadingScheme = "oval", ...props }) => {
+  ({ loadingScheme = "oval", ...rest }) => {
     const Component = useLoadingComponent(loadingScheme)
 
-    return <Component {...props} />
+    return <Component {...rest} />
   },
   ["icon", "loading"],
 )()

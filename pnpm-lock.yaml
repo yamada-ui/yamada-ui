@@ -7,6 +7,7 @@ settings:
 overrides:
   react: ^19.0.0
   react-dom: ^19.0.0
+  vite: 7.0.3
 
 importers:
 
@@ -56,7 +57,7 @@ importers:
         version: 9.0.16(@testing-library/dom@10.4.0)
       '@storybook/react-vite':
         specifier: ^9.0.16
-        version: 9.0.16(react-dom@19.1.0)(react@19.1.0)(storybook@9.0.16)(typescript@5.8.3)(vite@7.0.4)
+        version: 9.0.16(react-dom@19.1.0)(react@19.1.0)(storybook@9.0.16)(typescript@5.8.3)(vite@7.0.3)
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.6.3
@@ -80,7 +81,7 @@ importers:
         version: 0.10.1
       '@vitejs/plugin-react-swc':
         specifier: ^3.8.0
-        version: 3.10.2(vite@7.0.4)
+        version: 3.10.2(vite@7.0.3)
       '@vitest/coverage-v8':
         specifier: ^3.2.4
         version: 3.2.4(vitest@3.2.4)
@@ -170,7 +171,7 @@ importers:
         version: 0.1.0(vitest@3.2.4)
       vitest-matchmedia-mock:
         specifier: ^1.0.6
-        version: 1.0.6(@types/node@24.0.13)(@vitest/ui@3.2.4)(jsdom@26.1.0)
+        version: 1.0.6(@types/node@24.0.13)(@vitest/ui@3.2.4)(jiti@2.4.2)(jsdom@26.1.0)(tsx@4.20.3)
       web-features:
         specifier: ^2.41.2
         version: 2.41.2
@@ -521,7 +522,7 @@ importers:
     devDependencies:
       '@remix-run/dev':
         specifier: ^2.16.8
-        version: 2.16.8(@remix-run/react@2.16.8)(@remix-run/serve@2.16.8)(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)(typescript@5.8.3)(vite@7.0.4)
+        version: 2.16.8(@remix-run/react@2.16.8)(@remix-run/serve@2.16.8)(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)(typescript@5.8.3)(vite@7.0.3)
       '@types/node':
         specifier: ^24.0.13
         version: 24.0.13
@@ -532,11 +533,11 @@ importers:
         specifier: ^19.1.6
         version: 19.1.6(@types/react@19.1.8)
       vite:
-        specifier: ^7.0.4
-        version: 7.0.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
+        specifier: 7.0.3
+        version: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(typescript@5.8.3)(vite@7.0.4)
+        version: 5.1.4(typescript@5.8.3)(vite@7.0.3)
 
   playgrounds/vite:
     dependencies:
@@ -561,10 +562,10 @@ importers:
         version: 19.1.6(@types/react@19.1.8)
       '@vitejs/plugin-react-swc':
         specifier: ^3.8.0
-        version: 3.10.2(vite@7.0.4)
+        version: 3.10.2(vite@7.0.3)
       vite:
-        specifier: ^7.0.4
-        version: 7.0.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
+        specifier: 7.0.3
+        version: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
 
   www:
     dependencies:
@@ -2235,14 +2236,6 @@ packages:
     resolution: {integrity: sha512-snKqtPW01tN0ui7yu9rGv69aJXr/a/Ywvl11sUjNtEcRc+ng/mQriFL0wLXMef74iHa/EkftbDzU9F8iFbH+zg==, tarball: https://registry.npmjs.org/@emotion/weak-memoize/-/weak-memoize-0.4.0.tgz}
     dev: false
 
-  /@esbuild/aix-ppc64@0.21.5:
-    resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==, tarball: https://registry.npmjs.org/@esbuild/aix-ppc64/-/aix-ppc64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [ppc64]
-    os: [aix]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/aix-ppc64@0.25.6:
     resolution: {integrity: sha512-ShbM/3XxwuxjFiuVBHA+d3j5dyac0aEVVq1oluIDf71hUw0aRF59dV/efUsIwFnR6m8JNM2FjZOzmaZ8yG61kw==, tarball: https://registry.npmjs.org/@esbuild/aix-ppc64/-/aix-ppc64-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2258,14 +2251,6 @@ packages:
     os: [android]
     requiresBuild: true
     dev: true
-    optional: true
-
-  /@esbuild/android-arm64@0.21.5:
-    resolution: {integrity: sha512-c0uX9VAUBQ7dTDCjq+wdyGLowMdtR/GoC2U5IYk/7D1H1JYC0qseD7+11iMP2mRLN9RcCMRcjC4YMclCzGwS/A==, tarball: https://registry.npmjs.org/@esbuild/android-arm64/-/android-arm64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [arm64]
-    os: [android]
-    requiresBuild: true
     optional: true
 
   /@esbuild/android-arm64@0.25.6:
@@ -2285,14 +2270,6 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/android-arm@0.21.5:
-    resolution: {integrity: sha512-vCPvzSjpPHEi1siZdlvAlsPxXl7WbOVUBBAowWug4rJHb68Ox8KualB+1ocNvT5fjv6wpkX6o/iEpbDrf68zcg==, tarball: https://registry.npmjs.org/@esbuild/android-arm/-/android-arm-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [arm]
-    os: [android]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/android-arm@0.25.6:
     resolution: {integrity: sha512-S8ToEOVfg++AU/bHwdksHNnyLyVM+eMVAOf6yRKFitnwnbwwPNqKr3srzFRe7nzV69RQKb5DgchIX5pt3L53xg==, tarball: https://registry.npmjs.org/@esbuild/android-arm/-/android-arm-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2308,14 +2285,6 @@ packages:
     os: [android]
     requiresBuild: true
     dev: true
-    optional: true
-
-  /@esbuild/android-x64@0.21.5:
-    resolution: {integrity: sha512-D7aPRUUNHRBwHxzxRvp856rjUHRFW1SdQATKXH2hqA0kAZb1hKmi02OpYRacl0TxIGz/ZmXWlbZgjwWYaCakTA==, tarball: https://registry.npmjs.org/@esbuild/android-x64/-/android-x64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [x64]
-    os: [android]
-    requiresBuild: true
     optional: true
 
   /@esbuild/android-x64@0.25.6:
@@ -2335,14 +2304,6 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/darwin-arm64@0.21.5:
-    resolution: {integrity: sha512-DwqXqZyuk5AiWWf3UfLiRDJ5EDd49zg6O9wclZ7kUMv2WRFr4HKjXp/5t8JZ11QbQfUS6/cRCKGwYhtNAY88kQ==, tarball: https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [arm64]
-    os: [darwin]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/darwin-arm64@0.25.6:
     resolution: {integrity: sha512-FFCssz3XBavjxcFxKsGy2DYK5VSvJqa6y5HXljKzhRZ87LvEi13brPrf/wdyl/BbpbMKJNOr1Sd0jtW4Ge1pAA==, tarball: https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2358,14 +2319,6 @@ packages:
     os: [darwin]
     requiresBuild: true
     dev: true
-    optional: true
-
-  /@esbuild/darwin-x64@0.21.5:
-    resolution: {integrity: sha512-se/JjF8NlmKVG4kNIuyWMV/22ZaerB+qaSi5MdrXtd6R08kvs2qCN4C09miupktDitvh8jRFflwGFBQcxZRjbw==, tarball: https://registry.npmjs.org/@esbuild/darwin-x64/-/darwin-x64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [x64]
-    os: [darwin]
-    requiresBuild: true
     optional: true
 
   /@esbuild/darwin-x64@0.25.6:
@@ -2385,14 +2338,6 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/freebsd-arm64@0.21.5:
-    resolution: {integrity: sha512-5JcRxxRDUJLX8JXp/wcBCy3pENnCgBR9bN6JsY4OmhfUtIHe3ZW0mawA7+RDAcMLrMIZaf03NlQiX9DGyB8h4g==, tarball: https://registry.npmjs.org/@esbuild/freebsd-arm64/-/freebsd-arm64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [arm64]
-    os: [freebsd]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/freebsd-arm64@0.25.6:
     resolution: {integrity: sha512-aoLF2c3OvDn2XDTRvn8hN6DRzVVpDlj2B/F66clWd/FHLiHaG3aVZjxQX2DYphA5y/evbdGvC6Us13tvyt4pWg==, tarball: https://registry.npmjs.org/@esbuild/freebsd-arm64/-/freebsd-arm64-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2408,14 +2353,6 @@ packages:
     os: [freebsd]
     requiresBuild: true
     dev: true
-    optional: true
-
-  /@esbuild/freebsd-x64@0.21.5:
-    resolution: {integrity: sha512-J95kNBj1zkbMXtHVH29bBriQygMXqoVQOQYA+ISs0/2l3T9/kj42ow2mpqerRBxDJnmkUDCaQT/dfNXWX/ZZCQ==, tarball: https://registry.npmjs.org/@esbuild/freebsd-x64/-/freebsd-x64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [x64]
-    os: [freebsd]
-    requiresBuild: true
     optional: true
 
   /@esbuild/freebsd-x64@0.25.6:
@@ -2435,14 +2372,6 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-arm64@0.21.5:
-    resolution: {integrity: sha512-ibKvmyYzKsBeX8d8I7MH/TMfWDXBF3db4qM6sy+7re0YXya+K1cem3on9XgdT2EQGMu4hQyZhan7TeQ8XkGp4Q==, tarball: https://registry.npmjs.org/@esbuild/linux-arm64/-/linux-arm64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [arm64]
-    os: [linux]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/linux-arm64@0.25.6:
     resolution: {integrity: sha512-b967hU0gqKd9Drsh/UuAm21Khpoh6mPBSgz8mKRq4P5mVK8bpA+hQzmm/ZwGVULSNBzKdZPQBRT3+WuVavcWsQ==, tarball: https://registry.npmjs.org/@esbuild/linux-arm64/-/linux-arm64-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2458,14 +2387,6 @@ packages:
     os: [linux]
     requiresBuild: true
     dev: true
-    optional: true
-
-  /@esbuild/linux-arm@0.21.5:
-    resolution: {integrity: sha512-bPb5AHZtbeNGjCKVZ9UGqGwo8EUu4cLq68E95A53KlxAPRmUyYv2D6F0uUI65XisGOL1hBP5mTronbgo+0bFcA==, tarball: https://registry.npmjs.org/@esbuild/linux-arm/-/linux-arm-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [arm]
-    os: [linux]
-    requiresBuild: true
     optional: true
 
   /@esbuild/linux-arm@0.25.6:
@@ -2485,14 +2406,6 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-ia32@0.21.5:
-    resolution: {integrity: sha512-YvjXDqLRqPDl2dvRODYmmhz4rPeVKYvppfGYKSNGdyZkA01046pLWyRKKI3ax8fbJoK5QbxblURkwK/MWY18Tg==, tarball: https://registry.npmjs.org/@esbuild/linux-ia32/-/linux-ia32-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [ia32]
-    os: [linux]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/linux-ia32@0.25.6:
     resolution: {integrity: sha512-aHWdQ2AAltRkLPOsKdi3xv0mZ8fUGPdlKEjIEhxCPm5yKEThcUjHpWB1idN74lfXGnZ5SULQSgtr5Qos5B0bPw==, tarball: https://registry.npmjs.org/@esbuild/linux-ia32/-/linux-ia32-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2508,14 +2421,6 @@ packages:
     os: [linux]
     requiresBuild: true
     dev: true
-    optional: true
-
-  /@esbuild/linux-loong64@0.21.5:
-    resolution: {integrity: sha512-uHf1BmMG8qEvzdrzAqg2SIG/02+4/DHB6a9Kbya0XDvwDEKCoC8ZRWI5JJvNdUjtciBGFQ5PuBlpEOXQj+JQSg==, tarball: https://registry.npmjs.org/@esbuild/linux-loong64/-/linux-loong64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [loong64]
-    os: [linux]
-    requiresBuild: true
     optional: true
 
   /@esbuild/linux-loong64@0.25.6:
@@ -2535,14 +2440,6 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-mips64el@0.21.5:
-    resolution: {integrity: sha512-IajOmO+KJK23bj52dFSNCMsz1QP1DqM6cwLUv3W1QwyxkyIWecfafnI555fvSGqEKwjMXVLokcV5ygHW5b3Jbg==, tarball: https://registry.npmjs.org/@esbuild/linux-mips64el/-/linux-mips64el-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [mips64el]
-    os: [linux]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/linux-mips64el@0.25.6:
     resolution: {integrity: sha512-WViNlpivRKT9/py3kCmkHnn44GkGXVdXfdc4drNmRl15zVQ2+D2uFwdlGh6IuK5AAnGTo2qPB1Djppj+t78rzw==, tarball: https://registry.npmjs.org/@esbuild/linux-mips64el/-/linux-mips64el-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2558,14 +2455,6 @@ packages:
     os: [linux]
     requiresBuild: true
     dev: true
-    optional: true
-
-  /@esbuild/linux-ppc64@0.21.5:
-    resolution: {integrity: sha512-1hHV/Z4OEfMwpLO8rp7CvlhBDnjsC3CttJXIhBi+5Aj5r+MBvy4egg7wCbe//hSsT+RvDAG7s81tAvpL2XAE4w==, tarball: https://registry.npmjs.org/@esbuild/linux-ppc64/-/linux-ppc64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [ppc64]
-    os: [linux]
-    requiresBuild: true
     optional: true
 
   /@esbuild/linux-ppc64@0.25.6:
@@ -2585,14 +2474,6 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-riscv64@0.21.5:
-    resolution: {integrity: sha512-2HdXDMd9GMgTGrPWnJzP2ALSokE/0O5HhTUvWIbD3YdjME8JwvSCnNGBnTThKGEB91OZhzrJ4qIIxk/SBmyDDA==, tarball: https://registry.npmjs.org/@esbuild/linux-riscv64/-/linux-riscv64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [riscv64]
-    os: [linux]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/linux-riscv64@0.25.6:
     resolution: {integrity: sha512-KZh7bAGGcrinEj4qzilJ4hqTY3Dg2U82c8bv+e1xqNqZCrCyc+TL9AUEn5WGKDzm3CfC5RODE/qc96OcbIe33w==, tarball: https://registry.npmjs.org/@esbuild/linux-riscv64/-/linux-riscv64-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2610,14 +2491,6 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/linux-s390x@0.21.5:
-    resolution: {integrity: sha512-zus5sxzqBJD3eXxwvjN1yQkRepANgxE9lgOW2qLnmr8ikMTphkjgXu1HR01K4FJg8h1kEEDAqDcZQtbrRnB41A==, tarball: https://registry.npmjs.org/@esbuild/linux-s390x/-/linux-s390x-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [s390x]
-    os: [linux]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/linux-s390x@0.25.6:
     resolution: {integrity: sha512-9N1LsTwAuE9oj6lHMyyAM+ucxGiVnEqUdp4v7IaMmrwb06ZTEVCIs3oPPplVsnjPfyjmxwHxHMF8b6vzUVAUGw==, tarball: https://registry.npmjs.org/@esbuild/linux-s390x/-/linux-s390x-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2633,14 +2506,6 @@ packages:
     os: [linux]
     requiresBuild: true
     dev: true
-    optional: true
-
-  /@esbuild/linux-x64@0.21.5:
-    resolution: {integrity: sha512-1rYdTpyv03iycF1+BhzrzQJCdOuAOtaqHTWJZCWvijKD2N5Xu0TtVC8/+1faWqcP9iBCWOmjmhoH94dH82BxPQ==, tarball: https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [x64]
-    os: [linux]
-    requiresBuild: true
     optional: true
 
   /@esbuild/linux-x64@0.25.6:
@@ -2668,14 +2533,6 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/netbsd-x64@0.21.5:
-    resolution: {integrity: sha512-Woi2MXzXjMULccIwMnLciyZH4nCIMpWQAs049KEeMvOcNADVxo0UBIQPfSmxB3CWKedngg7sWZdLvLczpe0tLg==, tarball: https://registry.npmjs.org/@esbuild/netbsd-x64/-/netbsd-x64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [x64]
-    os: [netbsd]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/netbsd-x64@0.25.6:
     resolution: {integrity: sha512-dUXuZr5WenIDlMHdMkvDc1FAu4xdWixTCRgP7RQLBOkkGgwuuzaGSYcOpW4jFxzpzL1ejb8yF620UxAqnBrR9g==, tarball: https://registry.npmjs.org/@esbuild/netbsd-x64/-/netbsd-x64-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2699,14 +2556,6 @@ packages:
     os: [openbsd]
     requiresBuild: true
     dev: true
-    optional: true
-
-  /@esbuild/openbsd-x64@0.21.5:
-    resolution: {integrity: sha512-HLNNw99xsvx12lFBUwoT8EVCsSvRNDVxNpjZ7bPn947b8gJPzeHWyNVhFsaerc0n3TsbOINvRP2byTZ5LKezow==, tarball: https://registry.npmjs.org/@esbuild/openbsd-x64/-/openbsd-x64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [x64]
-    os: [openbsd]
-    requiresBuild: true
     optional: true
 
   /@esbuild/openbsd-x64@0.25.6:
@@ -2734,14 +2583,6 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/sunos-x64@0.21.5:
-    resolution: {integrity: sha512-6+gjmFpfy0BHU5Tpptkuh8+uw3mnrvgs+dSPQXQOv3ekbordwnzTVEb4qnIvQcYXq6gzkyTnoZ9dZG+D4garKg==, tarball: https://registry.npmjs.org/@esbuild/sunos-x64/-/sunos-x64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [x64]
-    os: [sunos]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/sunos-x64@0.25.6:
     resolution: {integrity: sha512-dyCGxv1/Br7MiSC42qinGL8KkG4kX0pEsdb0+TKhmJZgCUDBGmyo1/ArCjNGiOLiIAgdbWgmWgib4HoCi5t7kA==, tarball: https://registry.npmjs.org/@esbuild/sunos-x64/-/sunos-x64-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2757,14 +2598,6 @@ packages:
     os: [win32]
     requiresBuild: true
     dev: true
-    optional: true
-
-  /@esbuild/win32-arm64@0.21.5:
-    resolution: {integrity: sha512-Z0gOTd75VvXqyq7nsl93zwahcTROgqvuAcYDUr+vOv8uHhNSKROyU961kgtCD1e95IqPKSQKH7tBTslnS3tA8A==, tarball: https://registry.npmjs.org/@esbuild/win32-arm64/-/win32-arm64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [arm64]
-    os: [win32]
-    requiresBuild: true
     optional: true
 
   /@esbuild/win32-arm64@0.25.6:
@@ -2784,14 +2617,6 @@ packages:
     dev: true
     optional: true
 
-  /@esbuild/win32-ia32@0.21.5:
-    resolution: {integrity: sha512-SWXFF1CL2RVNMaVs+BBClwtfZSvDgtL//G/smwAc5oVK/UPu2Gu9tIaRgFmYFFKrmg3SyAjSrElf0TiJ1v8fYA==, tarball: https://registry.npmjs.org/@esbuild/win32-ia32/-/win32-ia32-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [ia32]
-    os: [win32]
-    requiresBuild: true
-    optional: true
-
   /@esbuild/win32-ia32@0.25.6:
     resolution: {integrity: sha512-4AWhgXmDuYN7rJI6ORB+uU9DHLq/erBbuMoAuB4VWJTu5KtCgcKYPynF0YI1VkBNuEfjNlLrFr9KZPJzrtLkrQ==, tarball: https://registry.npmjs.org/@esbuild/win32-ia32/-/win32-ia32-0.25.6.tgz}
     engines: {node: '>=18'}
@@ -2807,14 +2632,6 @@ packages:
     os: [win32]
     requiresBuild: true
     dev: true
-    optional: true
-
-  /@esbuild/win32-x64@0.21.5:
-    resolution: {integrity: sha512-tQd/1efJuzPC6rCFwEvLtci/xNFcTZknmXs98FYDfGE4wP9ClFV98nyKrzJKVPMhdDnjzLhdUyMX4PsQAPjwIw==, tarball: https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.21.5.tgz}
-    engines: {node: '>=12'}
-    cpu: [x64]
-    os: [win32]
-    requiresBuild: true
     optional: true
 
   /@esbuild/win32-x64@0.25.6:
@@ -3447,11 +3264,11 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /@joshwooding/vite-plugin-react-docgen-typescript@0.6.1(typescript@5.8.3)(vite@7.0.4):
+  /@joshwooding/vite-plugin-react-docgen-typescript@0.6.1(typescript@5.8.3)(vite@7.0.3):
     resolution: {integrity: sha512-J4BaTocTOYFkMHIra1JDWrMWpNmBl4EkplIwHEsV8aeUOtdWjwSnln9U7twjMFTAEB7mptNtSKyVi1Y2W9sDJw==, tarball: https://registry.npmjs.org/@joshwooding/vite-plugin-react-docgen-typescript/-/vite-plugin-react-docgen-typescript-0.6.1.tgz}
     peerDependencies:
       typescript: '>= 4.3.x'
-      vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
+      vite: 7.0.3
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -3460,7 +3277,7 @@ packages:
       magic-string: 0.30.17
       react-docgen-typescript: 2.4.0(typescript@5.8.3)
       typescript: 5.8.3
-      vite: 7.0.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
     dev: false
 
   /@jridgewell/gen-mapping@0.3.12:
@@ -4020,7 +3837,7 @@ packages:
       reselect: 5.1.1
     dev: false
 
-  /@remix-run/dev@2.16.8(@remix-run/react@2.16.8)(@remix-run/serve@2.16.8)(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)(typescript@5.8.3)(vite@7.0.4):
+  /@remix-run/dev@2.16.8(@remix-run/react@2.16.8)(@remix-run/serve@2.16.8)(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)(typescript@5.8.3)(vite@7.0.3):
     resolution: {integrity: sha512-2EKByaD5CDwh7H56UFVCqc90kCZ9LukPlSwkcsR3gj7WlfL7sXtcIqIopcToAlKAeao3HDbhBlBT2CTOivxZCg==, tarball: https://registry.npmjs.org/@remix-run/dev/-/dev-2.16.8.tgz}
     engines: {node: '>=18.0.0'}
     hasBin: true
@@ -4028,7 +3845,7 @@ packages:
       '@remix-run/react': ^2.16.8
       '@remix-run/serve': ^2.16.8
       typescript: ^5.1.0
-      vite: ^5.1.0 || ^6.0.0
+      vite: 7.0.3
       wrangler: ^3.28.2
     peerDependenciesMeta:
       '@remix-run/serve':
@@ -4056,7 +3873,7 @@ packages:
       '@remix-run/serve': 2.16.8(typescript@5.8.3)
       '@remix-run/server-runtime': 2.16.8(typescript@5.8.3)
       '@types/mdx': 2.0.13
-      '@vanilla-extract/integration': 6.5.0(@types/node@24.0.13)
+      '@vanilla-extract/integration': 6.5.0(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
       arg: 5.0.2
       cacache: 17.1.4
       chalk: 4.1.2
@@ -4097,7 +3914,7 @@ packages:
       tsconfig-paths: 4.2.0
       typescript: 5.8.3
       valibot: 0.41.0(typescript@5.8.3)
-      vite: 7.0.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
       vite-node: 3.2.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
       ws: 7.5.10
     transitivePeerDependencies:
@@ -4666,16 +4483,16 @@ packages:
       - '@types/react'
     dev: false
 
-  /@storybook/builder-vite@9.0.16(storybook@9.0.16)(vite@7.0.4):
+  /@storybook/builder-vite@9.0.16(storybook@9.0.16)(vite@7.0.3):
     resolution: {integrity: sha512-zXockUexeRy3ABG7DFLEvJqJe4mGL0JkI7FMrpwiKaHCQNaD87vR0xkRVeh0a3B8GKUNxoYtpYKvdzc9DobQHQ==, tarball: https://registry.npmjs.org/@storybook/builder-vite/-/builder-vite-9.0.16.tgz}
     peerDependencies:
       storybook: ^9.0.16
-      vite: ^5.0.0 || ^6.0.0 || ^7.0.0
+      vite: 7.0.3
     dependencies:
       '@storybook/csf-plugin': 9.0.16(storybook@9.0.16)
       storybook: 9.0.16(@testing-library/dom@10.4.0)(prettier@3.6.2)
       ts-dedent: 2.2.0
-      vite: 7.0.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
     dev: false
 
   /@storybook/cli@9.0.16(@testing-library/dom@10.4.0):
@@ -4754,18 +4571,18 @@ packages:
       storybook: 9.0.16(@testing-library/dom@10.4.0)(prettier@3.6.2)
     dev: false
 
-  /@storybook/react-vite@9.0.16(react-dom@19.1.0)(react@19.1.0)(storybook@9.0.16)(typescript@5.8.3)(vite@7.0.4):
+  /@storybook/react-vite@9.0.16(react-dom@19.1.0)(react@19.1.0)(storybook@9.0.16)(typescript@5.8.3)(vite@7.0.3):
     resolution: {integrity: sha512-a+UsoymyvPH4bJJVI+asj02N8U2wlkGyzhUqF6LUM9gXzixRMxoRHkchCKLdqLhE+//STrwC0YFF3GG6Y5oMEg==, tarball: https://registry.npmjs.org/@storybook/react-vite/-/react-vite-9.0.16.tgz}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: ^19.0.0
       react-dom: ^19.0.0
       storybook: ^9.0.16
-      vite: ^5.0.0 || ^6.0.0 || ^7.0.0
+      vite: 7.0.3
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.6.1(typescript@5.8.3)(vite@7.0.4)
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.6.1(typescript@5.8.3)(vite@7.0.3)
       '@rollup/pluginutils': 5.2.0
-      '@storybook/builder-vite': 9.0.16(storybook@9.0.16)(vite@7.0.4)
+      '@storybook/builder-vite': 9.0.16(storybook@9.0.16)(vite@7.0.3)
       '@storybook/react': 9.0.16(react-dom@19.1.0)(react@19.1.0)(storybook@9.0.16)(typescript@5.8.3)
       find-up: 7.0.0
       magic-string: 0.30.17
@@ -4775,7 +4592,7 @@ packages:
       resolve: 1.22.10
       storybook: 9.0.16(@testing-library/dom@10.4.0)(prettier@3.6.2)
       tsconfig-paths: 4.2.0
-      vite: 7.0.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -5683,7 +5500,7 @@ packages:
       - babel-plugin-macros
     dev: true
 
-  /@vanilla-extract/integration@6.5.0(@types/node@24.0.13):
+  /@vanilla-extract/integration@6.5.0(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3):
     resolution: {integrity: sha512-E2YcfO8vA+vs+ua+gpvy1HRqvgWbI+MTlUpxA8FvatOvybuNcWAY0CKwQ/Gpj7rswYKtC6C7+xw33emM6/ImdQ==, tarball: https://registry.npmjs.org/@vanilla-extract/integration/-/integration-6.5.0.tgz}
     dependencies:
       '@babel/core': 7.27.1
@@ -5697,11 +5514,12 @@ packages:
       lodash: 4.17.21
       mlly: 1.7.4
       outdent: 0.8.0
-      vite: 5.4.19(@types/node@24.0.13)
-      vite-node: 1.6.1(@types/node@24.0.13)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
+      vite-node: 1.6.1(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
+      - jiti
       - less
       - lightningcss
       - sass
@@ -5710,6 +5528,8 @@ packages:
       - sugarss
       - supports-color
       - terser
+      - tsx
+      - yaml
     dev: true
 
   /@vanilla-extract/private@1.0.6:
@@ -5774,14 +5594,14 @@ packages:
       react: 19.1.0
     dev: false
 
-  /@vitejs/plugin-react-swc@3.10.2(vite@7.0.4):
+  /@vitejs/plugin-react-swc@3.10.2(vite@7.0.3):
     resolution: {integrity: sha512-xD3Rdvrt5LgANug7WekBn1KhcvLn1H3jNBfJRL3reeOIua/WnZOEV5qi5qIBq5T8R0jUDmRtxuvk4bPhzGHDWw==, tarball: https://registry.npmjs.org/@vitejs/plugin-react-swc/-/plugin-react-swc-3.10.2.tgz}
     peerDependencies:
-      vite: ^4 || ^5 || ^6 || ^7.0.0-beta.0
+      vite: 7.0.3
     dependencies:
       '@rolldown/pluginutils': 1.0.0-beta.11
       '@swc/core': 1.12.11
-      vite: 7.0.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -5851,11 +5671,11 @@ packages:
       tinyrainbow: 2.0.0
     dev: false
 
-  /@vitest/mocker@2.1.9(vite@5.4.19):
+  /@vitest/mocker@2.1.9(vite@7.0.3):
     resolution: {integrity: sha512-tVL6uJgoUdi6icpxmdrn5YNo3g3Dxv+IHJBr0GXHaEdTcw3F+cPKnsXFhli6nO+f/6SDKPHEK1UN+k+TQv0Ehg==, tarball: https://registry.npmjs.org/@vitest/mocker/-/mocker-2.1.9.tgz}
     peerDependencies:
       msw: ^2.4.9
-      vite: ^5.0.0
+      vite: 7.0.3
     peerDependenciesMeta:
       msw:
         optional: true
@@ -5865,14 +5685,14 @@ packages:
       '@vitest/spy': 2.1.9
       estree-walker: 3.0.3
       magic-string: 0.30.17
-      vite: 5.4.19(@types/node@24.0.13)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
     dev: false
 
   /@vitest/mocker@3.2.4(vite@7.0.3):
     resolution: {integrity: sha512-46ryTE9RZO/rfDd7pEqFl7etuyzekzEhUbTW3BvmeO/BcCMEgq59BKhek3dXDWgAj4oMK6OZi+vRr1wPW6qjEQ==, tarball: https://registry.npmjs.org/@vitest/mocker/-/mocker-3.2.4.tgz}
     peerDependencies:
       msw: ^2.4.9
-      vite: ^5.0.0 || ^6.0.0 || ^7.0.0-0
+      vite: 7.0.3
     peerDependenciesMeta:
       msw:
         optional: true
@@ -7901,36 +7721,6 @@ packages:
       '@esbuild/win32-ia32': 0.17.6
       '@esbuild/win32-x64': 0.17.6
     dev: true
-
-  /esbuild@0.21.5:
-    resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==, tarball: https://registry.npmjs.org/esbuild/-/esbuild-0.21.5.tgz}
-    engines: {node: '>=12'}
-    hasBin: true
-    requiresBuild: true
-    optionalDependencies:
-      '@esbuild/aix-ppc64': 0.21.5
-      '@esbuild/android-arm': 0.21.5
-      '@esbuild/android-arm64': 0.21.5
-      '@esbuild/android-x64': 0.21.5
-      '@esbuild/darwin-arm64': 0.21.5
-      '@esbuild/darwin-x64': 0.21.5
-      '@esbuild/freebsd-arm64': 0.21.5
-      '@esbuild/freebsd-x64': 0.21.5
-      '@esbuild/linux-arm': 0.21.5
-      '@esbuild/linux-arm64': 0.21.5
-      '@esbuild/linux-ia32': 0.21.5
-      '@esbuild/linux-loong64': 0.21.5
-      '@esbuild/linux-mips64el': 0.21.5
-      '@esbuild/linux-ppc64': 0.21.5
-      '@esbuild/linux-riscv64': 0.21.5
-      '@esbuild/linux-s390x': 0.21.5
-      '@esbuild/linux-x64': 0.21.5
-      '@esbuild/netbsd-x64': 0.21.5
-      '@esbuild/openbsd-x64': 0.21.5
-      '@esbuild/sunos-x64': 0.21.5
-      '@esbuild/win32-arm64': 0.21.5
-      '@esbuild/win32-ia32': 0.21.5
-      '@esbuild/win32-x64': 0.21.5
 
   /esbuild@0.25.6:
     resolution: {integrity: sha512-GVuzuUwtdsghE3ocJ9Bs8PNoF13HNQ5TXbEi2AhvVb8xU1Iwt9Fos9FEamfoee+u/TOsn7GUWc04lz46n2bbTg==, tarball: https://registry.npmjs.org/esbuild/-/esbuild-0.25.6.tgz}
@@ -15190,7 +14980,7 @@ packages:
       d3-timer: 3.0.1
     dev: false
 
-  /vite-node@1.6.1(@types/node@24.0.13):
+  /vite-node@1.6.1(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3):
     resolution: {integrity: sha512-YAXkfvGtuTzwWbDSACdJSg4A4DZiAqckWe90Zapc/sEX3XvHcw1NdurM/6od8J207tSDqNbSsgdCacBgvJKFuA==, tarball: https://registry.npmjs.org/vite-node/-/vite-node-1.6.1.tgz}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -15199,9 +14989,10 @@ packages:
       debug: 4.4.1
       pathe: 1.1.2
       picocolors: 1.1.1
-      vite: 5.4.19(@types/node@24.0.13)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
     transitivePeerDependencies:
       - '@types/node'
+      - jiti
       - less
       - lightningcss
       - sass
@@ -15210,9 +15001,11 @@ packages:
       - sugarss
       - supports-color
       - terser
+      - tsx
+      - yaml
     dev: true
 
-  /vite-node@2.1.9(@types/node@24.0.13):
+  /vite-node@2.1.9(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3):
     resolution: {integrity: sha512-AM9aQ/IPrW/6ENLQg3AGY4K1N2TGZdR5e4gu/MmmR2xR3Ll1+dib+nook92g4TV3PXVyeyxdWwtaCAiUL0hMxA==, tarball: https://registry.npmjs.org/vite-node/-/vite-node-2.1.9.tgz}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -15221,9 +15014,10 @@ packages:
       debug: 4.4.1
       es-module-lexer: 1.7.0
       pathe: 1.1.2
-      vite: 5.4.19(@types/node@24.0.13)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
     transitivePeerDependencies:
       - '@types/node'
+      - jiti
       - less
       - lightningcss
       - sass
@@ -15232,6 +15026,8 @@ packages:
       - sugarss
       - supports-color
       - terser
+      - tsx
+      - yaml
     dev: false
 
   /vite-node@3.2.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3):
@@ -15243,7 +15039,7 @@ packages:
       debug: 4.4.1
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 7.0.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -15258,10 +15054,10 @@ packages:
       - tsx
       - yaml
 
-  /vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@7.0.4):
+  /vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@7.0.3):
     resolution: {integrity: sha512-cYj0LRuLV2c2sMqhqhGpaO3LretdtMn/BVX4cPLanIZuwwrkVl+lK84E/miEXkCHWXuq65rhNN4rXsBcOB3S4w==, tarball: https://registry.npmjs.org/vite-tsconfig-paths/-/vite-tsconfig-paths-5.1.4.tgz}
     peerDependencies:
-      vite: '*'
+      vite: 7.0.3
     peerDependenciesMeta:
       vite:
         optional: true
@@ -15269,105 +15065,14 @@ packages:
       debug: 4.4.0
       globrex: 0.1.2
       tsconfck: 3.1.6(typescript@5.8.3)
-      vite: 7.0.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
     dev: true
 
-  /vite@5.4.19(@types/node@24.0.13):
-    resolution: {integrity: sha512-qO3aKv3HoQC8QKiNSTuUM1l9o/XX3+c+VTgLHbJWHZGeTPVAg2XwazI9UWzoxjIJCGCV2zU60uqMzjeLZuULqA==, tarball: https://registry.npmjs.org/vite/-/vite-5.4.19.tgz}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^18.0.0 || >=20.0.0
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      sass-embedded: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      sass-embedded:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 24.0.13
-      esbuild: 0.21.5
-      postcss: 8.5.6
-      rollup: 4.44.2
-    optionalDependencies:
-      fsevents: 2.3.3
-
   /vite@7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3):
     resolution: {integrity: sha512-y2L5oJZF7bj4c0jgGYgBNSdIu+5HF+m68rn2cQXFbGoShdhV1phX9rbnxy9YXj82aS8MMsCLAAFkRxZeWdldrQ==, tarball: https://registry.npmjs.org/vite/-/vite-7.0.3.tgz}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': ^20.19.0 || >=22.12.0
-      jiti: '>=1.21.0'
-      less: ^4.0.0
-      lightningcss: ^1.21.0
-      sass: ^1.70.0
-      sass-embedded: ^1.70.0
-      stylus: '>=0.54.8'
-      sugarss: ^5.0.0
-      terser: ^5.16.0
-      tsx: ^4.8.1
-      yaml: ^2.4.2
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      jiti:
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      sass-embedded:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-      tsx:
-        optional: true
-      yaml:
-        optional: true
-    dependencies:
-      '@types/node': 24.0.13
-      esbuild: 0.25.6
-      fdir: 6.4.6(picomatch@4.0.2)
-      jiti: 2.4.2
-      picomatch: 4.0.2
-      postcss: 8.5.6
-      rollup: 4.44.2
-      tinyglobby: 0.2.14
-      tsx: 4.20.3
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: false
-
-  /vite@7.0.4(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3):
-    resolution: {integrity: sha512-SkaSguuS7nnmV7mfJ8l81JGBFV7Gvzp8IzgE8A8t23+AxuNX61Q5H1Tpz5efduSN7NHC8nQXD3sKQKZAu5mNEA==, tarball: https://registry.npmjs.org/vite/-/vite-7.0.4.tgz}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -15432,16 +15137,17 @@ packages:
       vitest: 3.2.4(@types/node@24.0.13)(@vitest/ui@3.2.4)(jiti@2.4.2)(jsdom@26.1.0)(tsx@4.20.3)
     dev: false
 
-  /vitest-matchmedia-mock@1.0.6(@types/node@24.0.13)(@vitest/ui@3.2.4)(jsdom@26.1.0):
+  /vitest-matchmedia-mock@1.0.6(@types/node@24.0.13)(@vitest/ui@3.2.4)(jiti@2.4.2)(jsdom@26.1.0)(tsx@4.20.3):
     resolution: {integrity: sha512-UUU0YY6BpmcuD2p4DpUVUP0afKuxHX6YAQs5J5skP+ksm+yXJHi9kSN5eOQuC0TFVTuXnIFPl0U9vGPNgnzA1g==, tarball: https://registry.npmjs.org/vitest-matchmedia-mock/-/vitest-matchmedia-mock-1.0.6.tgz}
     dependencies:
-      vitest: 2.1.9(@types/node@24.0.13)(@vitest/ui@3.2.4)(jsdom@26.1.0)
+      vitest: 2.1.9(@types/node@24.0.13)(@vitest/ui@3.2.4)(jiti@2.4.2)(jsdom@26.1.0)(tsx@4.20.3)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@types/node'
       - '@vitest/browser'
       - '@vitest/ui'
       - happy-dom
+      - jiti
       - jsdom
       - less
       - lightningcss
@@ -15452,9 +15158,11 @@ packages:
       - sugarss
       - supports-color
       - terser
+      - tsx
+      - yaml
     dev: false
 
-  /vitest@2.1.9(@types/node@24.0.13)(@vitest/ui@3.2.4)(jsdom@26.1.0):
+  /vitest@2.1.9(@types/node@24.0.13)(@vitest/ui@3.2.4)(jiti@2.4.2)(jsdom@26.1.0)(tsx@4.20.3):
     resolution: {integrity: sha512-MSmPM9REYqDGBI8439mA4mWhV5sKmDlBKWIYbA3lRb2PTHACE0mgKwA8yQ2xq9vxDTuk4iPrECBAEW2aoFXY0Q==, tarball: https://registry.npmjs.org/vitest/-/vitest-2.1.9.tgz}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -15481,7 +15189,7 @@ packages:
     dependencies:
       '@types/node': 24.0.13
       '@vitest/expect': 2.1.9
-      '@vitest/mocker': 2.1.9(vite@5.4.19)
+      '@vitest/mocker': 2.1.9(vite@7.0.3)
       '@vitest/pretty-format': 2.1.9
       '@vitest/runner': 2.1.9
       '@vitest/snapshot': 2.1.9
@@ -15499,10 +15207,11 @@ packages:
       tinyexec: 0.3.2
       tinypool: 1.1.1
       tinyrainbow: 1.2.0
-      vite: 5.4.19(@types/node@24.0.13)
-      vite-node: 2.1.9(@types/node@24.0.13)
+      vite: 7.0.3(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
+      vite-node: 2.1.9(@types/node@24.0.13)(jiti@2.4.2)(tsx@4.20.3)
       why-is-node-running: 2.3.0
     transitivePeerDependencies:
+      - jiti
       - less
       - lightningcss
       - msw
@@ -15512,6 +15221,8 @@ packages:
       - sugarss
       - supports-color
       - terser
+      - tsx
+      - yaml
     dev: false
 
   /vitest@3.2.4(@types/node@24.0.13)(@vitest/ui@3.2.4)(jiti@2.4.2)(jsdom@26.1.0)(tsx@4.20.3):

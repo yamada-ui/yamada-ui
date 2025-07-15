@@ -1,15 +1,13 @@
 import type { Dict } from "@yamada-ui/utils"
-import { Octokit } from "@octokit/rest"
-import { getContent, retryOnRateLimit } from "@yamada-ui/workspace/octokit"
+import {
+  getContent,
+  octokit,
+  retryOnRateLimit,
+} from "@yamada-ui/workspace/octokit"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
-import { config } from "dotenv"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
-
-config()
-
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
 
 type Contributor = Awaited<
   ReturnType<typeof octokit.repos.listContributors>

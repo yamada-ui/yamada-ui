@@ -104,7 +104,7 @@
     "vitest": "^3.2.4",
     "vitest-axe": "^0.1.0",
     "vitest-matchmedia-mock": "^1.0.6",
-    "web-features": "^2.41.1"
+    "web-features": "^2.41.2"
   },
   "pnpm": {
     "overrides": {

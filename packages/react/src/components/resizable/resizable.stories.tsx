@@ -474,7 +474,7 @@ export const CookieStorage: Story = () => {
   )
 }
 
-export const CustomControls: Story = () => {
+export const CustomControl: Story = () => {
   const controlRef = useRef<Resizable.ItemControl>(null)
 
   return (

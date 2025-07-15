@@ -1,105 +1,134 @@
-import { test } from "vitest"
-import { a11y, act, fireEvent, render, screen } from "../../../test"
+import { a11y, act, fireEvent, render, screen } from "#test"
+import { ImageIcon } from "../icon"
+import { Text } from "../text"
 import { Dropzone } from "./"
 import { IMAGE_ACCEPT_TYPE } from "./accept-types"
 
 describe("<Dropzone />", () => {
   test("Dropzone renders correctly", async () => {
-    const { container } = render(
+    await a11y(
       <Dropzone.Root>
-        <p>Drag file here or click to select file</p>
+        <Text>Drag file here or click to select file</Text>
       </Dropzone.Root>,
     )
-    await a11y(container)
   })
 
-  test("Children property renders correctly", () => {
-    const text = "Drag file here or click to select file"
-    const { container } = render(
-      <Dropzone.Root>
-        <p>{text}</p>
+  test("sets `displayName` correctly", () => {
+    expect(Dropzone.Root.displayName).toBe("DropzoneRoot")
+    expect(Dropzone.Accept.name).toBe("DropzoneAccept")
+    expect(Dropzone.Idle.name).toBe("DropzoneIdle")
+    expect(Dropzone.Reject.name).toBe("DropzoneReject")
+    expect(Dropzone.Icon.displayName).toBe("DropzoneIcon")
+    expect(Dropzone.Title.displayName).toBe("DropzoneTitle")
+    expect(Dropzone.Description.displayName).toBe("DropzoneDescription")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <Dropzone.Root data-testid="root">
+        <Dropzone.Idle>
+          <Dropzone.Icon as={ImageIcon} data-testid="icon" />
+        </Dropzone.Idle>
+
+        <Dropzone.Title data-testid="title">
+          Drag images here or click to select files
+        </Dropzone.Title>
+        <Dropzone.Description data-testid="description">
+          Attach as many files as you like, each file should not exceed 5mb
+        </Dropzone.Description>
       </Dropzone.Root>,
     )
-    expect(container.textContent).toBe(text)
+    expect(screen.getByTestId("root")).toHaveClass("ui-dropzone__root")
+    expect(screen.getByTestId("title")).toHaveClass("ui-dropzone__title")
+    expect(screen.getByTestId("description")).toHaveClass(
+      "ui-dropzone__description",
+    )
+    expect(screen.getByTestId("icon")).toHaveClass("ui-dropzone__icon")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <Dropzone.Root data-testid="root">
+        <Dropzone.Title data-testid="title">
+          Drag images here or click to select files
+        </Dropzone.Title>
+        <Dropzone.Description data-testid="description">
+          Attach as many files as you like, each file should not exceed 5mb
+        </Dropzone.Description>
+      </Dropzone.Root>,
+    )
+    expect(screen.getByTestId("root").tagName).toBe("DIV")
+    expect(screen.getByTestId("title").tagName).toBe("P")
+    expect(screen.getByTestId("description").tagName).toBe("P")
   })
 
   test("Is the multiple property being reflected correctly", () => {
-    const { container } = render(
-      <Dropzone.Root multiple>
-        <p>Drag file here or click to select file</p>
+    render(
+      <Dropzone.Root multiple inputProps={{ "data-testid": "input" }}>
+        <Text>Drag file here or click to select file</Text>
       </Dropzone.Root>,
     )
-    expect(container.querySelector("input")).toHaveAttribute("multiple")
+    expect(screen.getByTestId("input")).toHaveAttribute("multiple")
   })
 
   test("Is the accept property being reflected correctly", () => {
-    const { container } = render(
+    render(
       <Dropzone.Root
-        accept={{
-          "image/*": [],
-        }}
+        accept={{ "image/*": [] }}
+        inputProps={{ "data-testid": "input" }}
       >
-        <p>Drag image here or click to select image</p>
+        <Text>Drag image here or click to select image</Text>
       </Dropzone.Root>,
     )
-    expect(container.querySelector("input")).toHaveAttribute(
-      "accept",
-      "image/*",
-    )
+    expect(screen.getByTestId("input")).toHaveAttribute("accept", "image/*")
   })
 
   test("Is the disabled property being reflected correctly", () => {
-    const { container } = render(
-      <Dropzone.Root variant="dashed" disabled>
-        <p>Drag file here or click to select file</p>
+    render(
+      <Dropzone.Root
+        variant="dashed"
+        disabled
+        inputProps={{ "data-testid": "input" }}
+      >
+        <Text>Drag file here or click to select file</Text>
       </Dropzone.Root>,
     )
-    expect(container.querySelector("input")).toHaveAttribute("disabled")
-    expect(container.querySelector("input")).toHaveAttribute(
-      "aria-disabled",
-      "true",
-    )
+    expect(screen.getByTestId("input")).toHaveAttribute("disabled")
+    expect(screen.getByTestId("input")).toHaveAttribute("aria-disabled", "true")
   })
 
   test("Is the readOnly property being reflected correctly", () => {
-    const { container } = render(
-      <Dropzone.Root variant="dashed" readOnly>
-        <p>Drag file here or click to select file</p>
+    render(
+      <Dropzone.Root
+        variant="dashed"
+        readOnly
+        inputProps={{ "data-testid": "input" }}
+      >
+        <Text>Drag file here or click to select file</Text>
       </Dropzone.Root>,
     )
-    expect(container.querySelector("input")).toHaveAttribute("readonly")
-    expect(container.querySelector("input")).toHaveAttribute(
-      "aria-readonly",
-      "true",
-    )
+    expect(screen.getByTestId("input")).toHaveAttribute("readonly")
+    expect(screen.getByTestId("input")).toHaveAttribute("aria-readonly", "true")
   })
 
   test("Is the loading property being reflected correctly", () => {
-    const { container } = render(
-      <Dropzone.Root variant="dashed" loading>
-        <p>Drag file here or click to select file</p>
+    render(
+      <Dropzone.Root variant="dashed" data-testid="root" loading>
+        <Text>Drag file here or click to select file</Text>
       </Dropzone.Root>,
     )
 
-    expect(container.querySelector(".ui-dropzone__root")).toHaveAttribute(
-      "data-loading",
-      "",
-    )
+    expect(screen.getByTestId("root")).toHaveAttribute("data-loading")
   })
 
   test("Is the onDrop return files correctly", async () => {
     const file = new File(["test"], "test.png", { type: "image/png" })
     const onDrop = vi.fn()
-    const { container } = render(<Dropzone.Root onDrop={onDrop} />)
-
-    const dropzone = container.querySelector(".ui-dropzone__root")
+    render(<Dropzone.Root data-testid="root" onDrop={onDrop} />)
 
     await act(() =>
-      fireEvent.drop(dropzone!, {
-        dataTransfer: {
-          files: [file],
-          types: ["Files"],
-        },
+      fireEvent.drop(screen.getByTestId("root")!, {
+        dataTransfer: { files: [file], types: ["Files"] },
       }),
     )
 
@@ -108,42 +137,35 @@ describe("<Dropzone />", () => {
 
   test("DropzoneAccept renders correctly when dragging accepted files", async () => {
     const file = new File(["test"], "test.png", { type: "image/png" })
-    const { container } = render(
-      <Dropzone.Root accept={IMAGE_ACCEPT_TYPE}>
+    render(
+      <Dropzone.Root data-testid="root" accept={IMAGE_ACCEPT_TYPE}>
         <Dropzone.Accept>
-          <p>Accepted</p>
+          <Text>Accepted</Text>
         </Dropzone.Accept>
       </Dropzone.Root>,
     )
 
-    const dropzone = container.querySelector(".ui-dropzone__root")
-
     await act(() =>
-      fireEvent.dragEnter(dropzone!, {
-        dataTransfer: {
-          files: [file],
-          types: ["Files"],
-        },
+      fireEvent.dragEnter(screen.getByTestId("root")!, {
+        dataTransfer: { files: [file], types: ["Files"] },
       }),
     )
 
-    expect(container.textContent).toContain("Accepted")
+    expect(screen.getByText("Accepted")).toBeInTheDocument()
   })
 
   test("DropzoneReject renders correctly when dragging rejected files", async () => {
     const file = new File(["test"], "test.txt", { type: "text/plain" })
-    const { container } = render(
-      <Dropzone.Root accept={IMAGE_ACCEPT_TYPE}>
+    render(
+      <Dropzone.Root data-testid="root" accept={IMAGE_ACCEPT_TYPE}>
         <Dropzone.Reject>
-          <p>Rejected</p>
+          <Text>Rejected</Text>
         </Dropzone.Reject>
       </Dropzone.Root>,
     )
 
-    const dropzone = container.querySelector(".ui-dropzone__root")
-
     await act(() =>
-      fireEvent.dragEnter(dropzone!, {
+      fireEvent.dragEnter(screen.getByTestId("root")!, {
         dataTransfer: {
           files: [file],
           types: ["Files"],
@@ -151,31 +173,18 @@ describe("<Dropzone />", () => {
       }),
     )
 
-    expect(container.textContent).toContain("Rejected")
+    expect(screen.getByText("Rejected")).toBeInTheDocument()
   })
 
   test("DropzoneIdle renders correctly when not dragging files", () => {
-    const { container } = render(
+    render(
       <Dropzone.Root>
         <Dropzone.Idle>
-          <p>Idle</p>
+          <Text>Idle</Text>
         </Dropzone.Idle>
       </Dropzone.Root>,
     )
 
-    expect(container.textContent).toContain("Idle")
-  })
-
-  test("sets `displayName` correctly", () => {
-    expect(Dropzone.Root.displayName).toBe("DropzoneRoot")
-    expect(Dropzone.Accept.displayName).toBe("DropzoneAccept")
-    expect(Dropzone.Idle.displayName).toBe("DropzoneIdle")
-    expect(Dropzone.Reject.displayName).toBe("DropzoneReject")
-  })
-
-  test("sets `className` correctly", () => {
-    render(<Dropzone.Root data-testid="root">Dropzone</Dropzone.Root>)
-
-    expect(screen.getByTestId("root")).toHaveClass("ui-dropzone__root")
+    expect(screen.getByText("Idle")).toBeInTheDocument()
   })
 })

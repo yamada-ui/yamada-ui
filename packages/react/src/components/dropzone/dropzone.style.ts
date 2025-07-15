@@ -2,126 +2,107 @@ import { defineComponentSlotStyle } from "../../core"
 
 export const dropzoneStyle = defineComponentSlotStyle({
   base: {
+    description: { fontSize: "sm" },
+    icon: { fontSize: "7xl" },
+    loading: { fontSize: "4xl" },
     overlay: {
       alignItems: "center",
-      bg: ["whiteAlpha.600", "blackAlpha.600"],
+      bg: "bg.panel/40",
+      boxSize: "full",
       display: "flex",
-      h: "100%",
+      inset: 0,
       justifyContent: "center",
-      left: 0,
       position: "absolute",
-      top: 0,
-      w: "100%",
       zIndex: "kurillin",
     },
     root: {
-      "&[data-accept]": {
-        bg: ["success.50", "success.900"],
-        borderColor: ["success.500", "success.400"],
-      },
-      "&[data-loading]": {
-        bg: ["blackAlpha.100", "whiteAlpha.100"],
-        cursor: "not-allowed",
-      },
-      "&[data-reject]": {
-        bg: ["danger.50", "danger.900"],
-        borderColor: ["danger.500", "danger.400"],
-      },
+      "& *": { pointerEvents: "none" },
+      "--error-border-color": "colors.border.error",
+      "--focus-border-color": "colorScheme.outline",
       alignItems: "center",
-      bg: ["blackAlpha.50", "whiteAlpha.50"],
-      color: "muted",
+      cursor: "pointer",
       display: "flex",
+      focusRingColor: "{focus-border-color}",
       justifyContent: "center",
-      outline: 0,
       overflow: "hidden",
       p: "md",
       position: "relative",
-      rounded: "md",
+      rounded: "l2",
       transitionDuration: "moderate",
       transitionProperty: "common",
-      w: "100%",
-      _hover: {
-        bg: ["blackAlpha.100", "whiteAlpha.100"],
-        cursor: "pointer",
-      },
-      _focus: {
-        borderColor: [
-          "var(--focus-border-color, blue.500)",
-          "var(--focus-border-color, blue.300)",
-        ],
-        boxShadow: [
-          "0 0 0 1px var(--focus-border-color, var(--ui-colors-blue-500))",
-          "0 0 0 1px var(--focus-border-color, var(--ui-colors-blue-300))",
-        ],
-        zIndex: 1,
-      },
-      _focusVisible: {
-        borderColor: [
-          "var(--focus-border-color, blue.500)",
-          "var(--focus-border-color, blue.300)",
-        ],
-        boxShadow: [
-          "0 0 0 1px var(--focus-border-color, var(--ui-colors-blue-500))",
-          "0 0 0 1px var(--focus-border-color, var(--ui-colors-blue-300))",
-        ],
-        zIndex: 1,
-      },
-      _invalid: {
-        borderColor: [
-          "var(--error-border-color, red.500)",
-          "var(--error-border-color, red.400)",
-        ],
-        boxShadow: [
-          "0 0 0 1px var(--error-border-color, var(--ui-colors-red-500))",
-          "0 0 0 1px var(--error-border-color, var(--ui-colors-red-400))",
-        ],
-      },
-      _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
-      },
+      w: "full",
+      _loading: { cursor: "not-allowed" },
+      _readOnly: { layerStyle: "readOnly" },
+      _disabled: { layerStyle: "disabled" },
+    },
+    title: {
+      fontSize: "xl",
     },
   },
 
   variants: {
+    base: {
+      icon: {
+        _groupAccept: { color: "success" },
+        _groupReject: { color: "error" },
+      },
+      root: {
+        color: "fg.subtle",
+        _accept: { bg: "success.bg" },
+        _reject: { bg: "error.bg" },
+      },
+      title: { color: "fg.muted" },
+    },
     dashed: {
       root: {
+        bg: "transparent",
         borderStyle: "dashed",
         borderWidth: "1px",
+        _accept: { borderColor: "success.muted" },
+        _reject: { borderColor: ["error.muted", "error.subtle"] },
+        _hover: {
+          "&:not([data-accept], [data-reject])": {
+            bg: "bg.panel",
+          },
+        },
+        _invalid: {
+          borderColor: "{error-border-color}",
+          focusRingColor: "{error-border-color}",
+        },
+      },
+    },
+    panel: {
+      root: {
+        bg: "bg.panel",
+        border: "1px solid transparent",
+        focusVisibleRing: "inside",
+        _hover: { bg: "bg.subtle" },
+        _invalid: {
+          borderColor: "{error-border-color}",
+          focusRingColor: "{error-border-color}",
+        },
+      },
+    },
+    plain: {
+      root: {
+        rounded: "0",
+        _invalid: {
+          borderColor: "{error-border-color}",
+          focusRingColor: "{error-border-color}",
+        },
       },
     },
     solid: {
       root: {
-        borderStyle: "solid",
+        bg: "transparent",
         borderWidth: "1px",
-      },
-    },
-    unstyled: {
-      overlay: {
-        bg: "transparent",
-      },
-      root: {
-        "&[data-accept]": {
-          bg: "transparent",
-          borderColor: "inherit",
-        },
-        "&[data-loading]": {
-          bg: "transparent",
-          cursor: "auto",
-        },
-        "&[data-reject]": {
-          bg: "transparent",
-          borderColor: "inherit",
-        },
-        bg: "transparent",
-        borderStyle: "none",
-        borderWidth: 0,
-        color: "inherit",
-        minH: "auto",
-        rounded: "inherit",
-        _hover: {
-          bg: "transparent",
-          cursor: "inherit",
+        focusVisibleRing: "inside",
+        _accept: { borderColor: "success.muted" },
+        _reject: { borderColor: ["error.muted", "error.subtle"] },
+        _hover: { bg: "bg.panel" },
+        _invalid: {
+          borderColor: "{error-border-color}",
+          focusRingColor: "{error-border-color}",
         },
       },
     },
@@ -129,19 +110,19 @@ export const dropzoneStyle = defineComponentSlotStyle({
 
   sizes: {
     xs: {
-      root: { h: "xs" },
+      root: { minH: "xs" },
     },
     sm: {
-      root: { h: "sm" },
+      root: { minH: "sm" },
     },
     md: {
-      root: { h: "md" },
+      root: { minH: "md" },
     },
     lg: {
-      root: { h: "lg" },
+      root: { minH: "lg" },
     },
     full: {
-      root: { h: "full" },
+      root: { minH: "full" },
     },
   },
 

@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { Breadcrumb } from "./"
 
 describe("<Breadcrumb />", () => {
@@ -16,15 +16,10 @@ describe("<Breadcrumb />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Breadcrumb.Root.displayName).toBe("BreadcrumbRoot")
-    expect(Breadcrumb.Root.__ui__).toBe("BreadcrumbRoot")
-
     expect(Breadcrumb.Link.displayName).toBe("BreadcrumbLink")
-    expect(Breadcrumb.Link.__ui__).toBe("BreadcrumbLink")
-
     expect(Breadcrumb.Ellipsis.displayName).toBe("BreadcrumbEllipsis")
-    expect(Breadcrumb.Ellipsis.__ui__).toBe("BreadcrumbEllipsis")
   })
 
   test("sets `className` correctly", () => {

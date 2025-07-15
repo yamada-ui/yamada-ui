@@ -1,65 +1,95 @@
 import type * as CSS from "csstype"
-import type { ObjectLiteral, StringLiteral } from "../../utils"
-import type { PseudoProperty, PseudoProps } from "../pseudos"
-import type { StyleProps } from "../styles"
-import type { Breakpoint, StyledTheme, ThemeTokens, UsageTheme } from "../theme"
+import type { AnyString } from "../../utils"
+import type {
+  Breakpoint,
+  KeyframeIdent,
+  System,
+  ThemePath,
+  ThemeTokens,
+} from "../system"
+import type {
+  AnySelector,
+  ConditionProperty,
+  ConditionProps,
+} from "./conditions"
+import type { StyleProps } from "./styles"
 
 export type { CSS }
 
-export type ColorMode = "dark" | "light"
-export type ColorModeWithSystem = "system" | ColorMode
-
 export type ColorModeArray<Y, M extends boolean = true> = M extends true
-  ? [ResponsiveObject<Y, false> | Y, ResponsiveObject<Y, false> | Y]
+  ? [ResponsiveWithConditionObject<Y> | Y, ResponsiveWithConditionObject<Y> | Y]
   : [Y, Y]
 
 export type ResponsiveObject<Y, M extends boolean = true> = M extends true
-  ? { [key in Breakpoint]?: ColorModeArray<Y, false> | Y }
-  : { [key in Breakpoint]?: Y }
+  ? { [D in Breakpoint]?: ColorModeArray<Y> | Y }
+  : { [D in Breakpoint]?: Y }
 
-export type ResponsiveWithPseudoObject<
+export type ConditionObject<Y, M extends boolean = true> = M extends true
+  ? {
+      [D in ConditionProperty]?: ColorModeArray<Y> | ResponsiveObject<Y> | Y
+    }
+  : {
+      [D in ConditionProperty]?: Y
+    }
+
+export type ResponsiveWithConditionObject<
   Y,
   M extends boolean = true,
 > = M extends true
-  ? { [key in Breakpoint | PseudoProperty]?: ColorModeArray<Y, false> | Y }
-  : { [key in Breakpoint | PseudoProperty]?: Y }
-
-export type StyleValue<Y> =
-  | ColorModeArray<Y>
-  | ResponsiveWithPseudoObject<Y>
-  | Y
+  ? ConditionObject<Y> & {
+      [D in Breakpoint]?:
+        | ColorModeArray<Y>
+        | ResponsiveWithConditionObject<Y>
+        | Y
+    }
+  : ConditionObject<Y, false> & { [D in Breakpoint]?: Y }
 
 export type Token<Y, M = unknown> = M extends keyof ThemeTokens
   ? ThemeTokens[M] | Y
   : Y
 
-export type ColorModeToken<Y, M = unknown> = M extends keyof ThemeTokens
-  ? ColorModeArray<ThemeTokens[M] | Y> | ThemeTokens[M] | Y
-  : ColorModeArray<Y> | Y
+export type ColorModeValue<Y, M = unknown> = M extends keyof ThemeTokens
+  ? ColorModeArray<ThemeTokens[M] | Y, false> | ThemeTokens[M] | Y
+  : ColorModeArray<Y, false> | Y
 
-export type ResponsiveToken<Y, M = unknown> = M extends keyof ThemeTokens
-  ? ResponsiveObject<ThemeTokens[M] | Y> | ThemeTokens[M] | Y
-  : ResponsiveObject<Y> | Y
+export type ResponsiveValue<Y, M = unknown> = M extends keyof ThemeTokens
+  ? ResponsiveObject<ThemeTokens[M] | Y, false> | ThemeTokens[M] | Y
+  : ResponsiveObject<Y, false> | Y
 
-export type CSSToken<Y, M = unknown> = M extends keyof ThemeTokens
-  ? StyleValue<ThemeTokens[M] | Y>
-  : StyleValue<Y>
+export type StyleValue<Y, M = unknown> =
+  | ColorModeValue<Y, M>
+  | ResponsiveValue<Y, M>
 
-type CSSValue<Y extends keyof StyleProps> = StyleValue<StyleProps[Y]>
+export type StyleValueWithCondition<
+  Y,
+  M = unknown,
+> = M extends keyof ThemeTokens
+  ?
+      | ColorModeArray<ThemeTokens[M] | Y>
+      | ResponsiveWithConditionObject<ThemeTokens[M] | Y>
+      | ThemeTokens[M]
+      | Y
+  : ColorModeArray<Y> | ResponsiveWithConditionObject<Y> | Y
 
-type CSSInternalObject = {
-  [Y in keyof StyleProps]?: CSSValue<Y>
+export type CSSVariable = `--${string}`
+interface CSSVariableProps {
+  [key: CSSVariable]: StyleValueWithCondition<number | ThemePath> | undefined
 }
 
-type CSSRecursiveObject<Y> = {
-  [K in keyof CSS.Pseudos | PseudoProperty | StringLiteral]?:
-    | (CSSRecursiveObject<Y> & Y)
-    | ObjectLiteral
+type VendorProps = {
+  [Y in keyof CSS.VendorPropertiesFallback]?: StyleValueWithCondition<
+    AnyString | CSS.VendorPropertiesFallback[Y]
+  >
 }
 
-export interface CSSObject
-  extends CSSInternalObject,
-    CSSRecursiveObject<CSSInternalObject> {}
+interface CSSFlatObject extends StyleProps, VendorProps, CSSVariableProps {}
+
+export type CSSObject = CSSFlatObject & {
+  [D in AnySelector | ConditionProperty]?: D extends keyof CSSFlatObject
+    ? CSSFlatObject[D]
+    : CSSObject
+}
+export type CSSProperties = AnyString | keyof CSSFlatObject
 
 export interface CSSPropObject<
   Y extends CSSObject | CSSSlotObject = CSSObject,
@@ -67,22 +97,21 @@ export interface CSSPropObject<
   [key: string]: { [key: string]: Y }
 }
 
-export type CSSSlotObject<Y extends number | string | symbol = string> = {
-  [key in Y]?: CSSObject
+export type CSSSlotObject<Y extends string = string> = {
+  [M in Y]?: CSSObject
 }
 
-export interface CSSModifierObject<
-  Y extends CSSObject | CSSSlotObject = CSSObject,
-> {
-  [key: string]: Y
-}
+export type CSSModifierObject<Y extends CSSObject | CSSSlotObject = CSSObject> =
+  {
+    [M in "base" | AnyString]?: Y
+  }
 
-export type CSSKeyframesObject = {
-  [key in "from" | "to" | `${number}%`]?: CSSInternalObject
+export type CSSKeyframeObject = {
+  [M in `${number}%` | KeyframeIdent]?: CSSFlatObject
 }
 
 export interface CSSAnimationObject {
-  keyframes: Token<CSSKeyframesObject, "keyframes">
+  keyframes: Token<CSSKeyframeObject, "keyframes">
   delay?: Token<CSS.Property.AnimationDelay>
   direction?: Token<CSS.Property.AnimationDirection>
   duration?: Token<CSS.Property.AnimationDuration, "durations">
@@ -92,7 +121,11 @@ export interface CSSAnimationObject {
   timingFunction?: Token<CSS.Property.AnimationTimingFunction, "easings">
 }
 
-export interface CSSProps extends StyleProps, PseudoProps {
+export interface CSSProps
+  extends StyleProps,
+    ConditionProps,
+    VendorProps,
+    CSSVariableProps {
   /**
    * The CSS object.
    */
@@ -100,7 +133,7 @@ export interface CSSProps extends StyleProps, PseudoProps {
 }
 
 export interface FunctionCSSInterpolation {
-  (theme: StyledTheme<UsageTheme>): CSSObject
+  (system: System): CSSObject
 }
 
-export type CSSObjectOrFunc = CSSObject | FunctionCSSInterpolation
+export type CSSObjectOrFunction = CSSObject | FunctionCSSInterpolation

@@ -1,5 +1,5 @@
-import type { Meta, StoryFn } from "@storybook/react"
-import { PropsTable } from "../../../storybook/components"
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { COLOR_SCHEMES } from "../../utils"
 import { Mark } from "./mark"
 

@@ -1,12 +1,12 @@
-import type { CSSProps, HTMLUIProps } from "../../core"
+"use client"
+
+import type { CSSProps, HTMLStyledProps } from "../../core"
 import type { BleedStyle } from "./bleed.style"
-import { createComponent, mergeVars } from "../../core"
+import { createComponent, varAttr } from "../../core"
 import { calc } from "../../utils"
 import { bleedStyle } from "./bleed.style"
 
-interface BleedOptions {}
-
-export interface BleedProps extends HTMLUIProps, BleedOptions {
+export interface BleedProps extends HTMLStyledProps {
   /**
    * The CSS `margin-block` property.
    */
@@ -33,16 +33,18 @@ export interface BleedProps extends HTMLUIProps, BleedOptions {
   inlineStart?: "full" | CSSProps["marginInlineStart"]
 }
 
-export const {
+const {
   PropsContext: BleedPropsContext,
   usePropsContext: useBleedPropsContext,
   withContext,
 } = createComponent<BleedProps, BleedStyle>("bleed", bleedStyle)
 
+export { BleedPropsContext, useBleedPropsContext }
+
 /**
  * `Bleed` is a component used to break an element from the boundaries of its container.
  *
- * @see Docs https://yamada-ui.com/components/bleed
+ * @see https://yamada-ui.com/components/bleed
  */
 export const Bleed = withContext("div")(
   undefined,
@@ -53,7 +55,6 @@ export const Bleed = withContext("div")(
     inline,
     inlineEnd,
     inlineStart,
-    vars,
     ...rest
   }) => {
     blockStart ??= block
@@ -64,31 +65,25 @@ export const Bleed = withContext("div")(
     const inlineStartFull = inlineStart === "full"
     const inlineEndFull = inlineEnd === "full"
 
-    const marginBlockStart = calc.negate("{blockStart}")
-    const marginBlockEnd = calc.negate("{blockEnd}")
+    const marginBlockStart = calc.negate("{block-start}")
+    const marginBlockEnd = calc.negate("{block-end}")
     const marginInlineStart = inlineStartFull
       ? "calc(50% - 50vw)"
-      : calc.negate("{inlineStart}")
+      : calc.negate("{inline-start}")
     const marginInlineEnd = inlineEndFull
       ? "calc(50% - 50vw)"
-      : calc.negate("{inlineEnd}")
+      : calc.negate("{inline-end}")
 
     return {
       ...rest,
+      "--block-end": varAttr(blockEnd, "spaces"),
+      "--block-start": varAttr(blockStart, "spaces"),
+      "--inline-end": varAttr(inlineEnd, "spaces"),
+      "--inline-start": varAttr(inlineStart, "spaces"),
       marginBlockEnd,
       marginBlockStart,
       marginInlineEnd,
       marginInlineStart,
-      vars: mergeVars(vars, [
-        {
-          name: "inlineStart",
-          token: "spaces",
-          value: inlineStart ?? inline,
-        },
-        { name: "inlineEnd", token: "spaces", value: inlineEnd ?? inline },
-        { name: "blockStart", token: "spaces", value: blockStart ?? block },
-        { name: "blockEnd", token: "spaces", value: blockEnd ?? block },
-      ]),
     }
   },
 )

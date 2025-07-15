@@ -1,49 +1,43 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+"use client"
+
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { IconStyle } from "./icon.style"
-import { createComponent, insertVars } from "../../core"
+import {
+  createComponent,
+  useInjectVarsIntoCss,
+  useInjectVarsIntoProps,
+} from "../../core"
 import { iconStyle } from "./icon.style"
 
-export interface IconProps extends HTMLUIProps<"svg">, ThemeProps<IconStyle> {}
+export interface IconProps
+  extends HTMLStyledProps<"svg">,
+    ThemeProps<IconStyle> {}
 
-export const {
+const {
   component,
   PropsContext: IconPropsContext,
   usePropsContext: useIconPropsContext,
   withContext,
 } = createComponent<IconProps, IconStyle>("icon", iconStyle)
 
+export { component, IconPropsContext, useIconPropsContext, withContext }
+
 /**
  * `Icon` is a general icon component that can be used in your projects.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const Icon = withContext("svg")(
   {
     "aria-hidden": true,
+    "data-icon": "",
     role: "img",
     verticalAlign: "middle",
   },
-  ({ css, ...rest }) => {
-    css = insertVars(css, [
-      {
-        name: "boxSize",
-        property: "fontSize",
-        token: "fontSizes",
-      },
-    ])
+  (props) => {
+    const css = useInjectVarsIntoCss(props.css, { fontSize: "size" })
+    const rest = useInjectVarsIntoProps(props, { fontSize: "size" })
 
-    rest = insertVars(rest, [
-      {
-        name: "boxSize",
-        property: "fontSize",
-        token: "fontSizes",
-      },
-    ])
-
-    return {
-      css,
-      boxSize: "{boxSize}",
-      ...rest,
-    }
+    return { boxSize: "{size}", ...rest, css }
   },
 )

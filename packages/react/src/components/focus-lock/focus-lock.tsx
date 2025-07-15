@@ -1,14 +1,13 @@
-import type { ReactNode, RefObject } from "react"
-import type { FC } from "../../core"
-import type { FocusableElement } from "../../utils"
+"use client"
+
+import type { FC, PropsWithChildren, RefObject } from "react"
 import { useCallback } from "react"
 import ReactFocusLock from "react-focus-lock"
-import { getAllFocusable, interopDefault } from "../../utils"
+import { getFocusableElements, interopDefault } from "../../utils"
 
 const InternalFocusLock = interopDefault(ReactFocusLock)
 
-export interface FocusLockProps {
-  children: ReactNode
+export interface FocusLockProps extends PropsWithChildren {
   /**
    * If `true`, the first focusable element within the `children` will auto-focused once `FocusLock` mounts.
    *
@@ -28,11 +27,11 @@ export interface FocusLockProps {
   /**
    * `ref` of the element to return focus to when `FocusLock` unmounts.
    */
-  finalFocusRef?: RefObject<FocusableElement | null>
+  finalFocusRef?: RefObject<HTMLElement | null>
   /**
    * `ref` of the element to receive focus initially.
    */
-  initialFocusRef?: RefObject<FocusableElement | null>
+  initialFocusRef?: RefObject<HTMLElement | null>
   /**
    * Enables aggressive focus capturing within iframes.
    * - If `true`: keep focus in the lock, no matter where lock is active.
@@ -58,7 +57,7 @@ export interface FocusLockProps {
 /**
  * `FocusLock` is a component that improves accessibility by restricting focus within elements such as modals and dialogs, and locking the focus within that range.
  *
- * @see Docs https://yamada-ui.com/components/focus-lock
+ * @see https://yamada-ui.com/components/focus-lock
  */
 export const FocusLock: FC<FocusLockProps> = ({
   autoFocus,
@@ -77,7 +76,7 @@ export const FocusLock: FC<FocusLockProps> = ({
     if (initialFocusRef?.current) {
       initialFocusRef.current.focus()
     } else if (contentRef?.current) {
-      const focusables = getAllFocusable(contentRef.current)
+      const focusables = getFocusableElements(contentRef.current)
 
       if (focusables.length === 0)
         requestAnimationFrame(() => {
@@ -104,5 +103,3 @@ export const FocusLock: FC<FocusLockProps> = ({
     </InternalFocusLock>
   )
 }
-
-FocusLock.__ui__ = "FocusLock"

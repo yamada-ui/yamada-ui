@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { noop } from "../../utils"
 import { CheckIcon } from "../icon"
 import { Tag } from "./"
@@ -8,9 +8,8 @@ describe("<Tag />", () => {
     await a11y(<Tag>Tag</Tag>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Tag.displayName).toBe("TagRoot")
-    expect(Tag.__ui__).toBe("TagRoot")
   })
 
   test("sets `className` correctly", () => {
@@ -22,10 +21,10 @@ describe("<Tag />", () => {
     const el = screen.getByTestId("tag")
     expect(el).toHaveClass("ui-tag__root")
     expect(el.children[0]).toHaveClass("ui-tag__icon")
-    expect(el.children[0]).toHaveClass("ui-tag__icon--start-icon")
+    expect(el.children[0]).toHaveClass("ui-tag__icon--start")
     expect(el.children[1]).toHaveClass("ui-tag__content")
     expect(el.children[2]).toHaveClass("ui-tag__icon")
-    expect(el.children[2]).toHaveClass("ui-tag__icon--end-icon")
+    expect(el.children[2]).toHaveClass("ui-tag__icon--end")
     render(
       <Tag data-testid="tagWithCloseButton" onClose={noop}>
         Tag

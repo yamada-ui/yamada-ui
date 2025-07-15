@@ -1,6 +1,6 @@
 import type { CSSAnimationObject } from "../../core"
-import { useAnimation, useAnimationObserver, useDynamicAnimation } from "."
-import { act, renderHook, waitFor } from "../../../test"
+import { renderHook, waitFor } from "#test"
+import { useAnimation, useDynamicAnimation } from "."
 
 describe("useAnimation", () => {
   test("should generate a single animation string", () => {
@@ -143,13 +143,13 @@ describe("useDynamicAnimation", () => {
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
     )
 
-    await waitFor(() => {
-      result.current[1]("moveRight")
-    })
+    result.current[1]("moveRight")
 
-    expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running/,
-    )
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
+        /animation-.* var\(--ui-durations-slow\) var\(--ui-easings-ease-out\) 0s 1 normal forwards running/,
+      )
+    })
   })
 
   test("Multi animation should be changed dynamically", async () => {
@@ -218,13 +218,13 @@ describe("useDynamicAnimation", () => {
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
     )
 
-    await waitFor(() => {
-      result.current[1]("moveRight")
-    })
+    result.current[1]("moveRight")
 
-    expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
-    )
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
+        /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running/,
+      )
+    })
   })
 
   test("Should accept multiple keys", async () => {
@@ -290,13 +290,13 @@ describe("useDynamicAnimation", () => {
       /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
     )
 
-    await waitFor(() => {
-      result.current[1](["moveRight", "gradients"])
-    })
+    result.current[1](["moveRight", "gradients"])
 
-    expect(result.current[0]).toMatch(
-      /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
-    )
+    await waitFor(() => {
+      expect(result.current[0]).toMatch(
+        /animation-.* var\(--ui-durations-slower\) var\(--ui-easings-ease-in-out\) 0s 1 normal forwards running, animation-.* 10s linear 0s infinite normal none running/,
+      )
+    })
   })
 
   test("Should be undefined if no default key is set", () => {
@@ -312,35 +312,5 @@ describe("useDynamicAnimation", () => {
     const { result } = renderHook(() => useDynamicAnimation(style))
 
     expect(result.current[0]).toBeUndefined()
-  })
-})
-
-describe("useAnimationObserver", () => {
-  test("should handle open and close animations correctly", () => {
-    let open = false
-    const ref = { current: document.createElement("div") }
-    const { rerender, result } = renderHook(() =>
-      useAnimationObserver({ ref, open }),
-    )
-
-    expect(result.current.present).toBeFalsy()
-
-    open = true
-    rerender()
-
-    act(() => {
-      result.current.onAnimationComplete()
-    })
-
-    expect(result.current.present).toBeTruthy()
-
-    open = false
-    rerender()
-
-    act(() => {
-      result.current.onAnimationComplete()
-    })
-
-    expect(result.current.present).toBeFalsy()
   })
 })

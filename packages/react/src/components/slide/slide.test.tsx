@@ -1,10 +1,24 @@
+import { a11y, render, screen, waitFor } from "#test"
 import { useState } from "react"
-import { a11y, render, screen, waitFor } from "../../../test"
 import { Slide } from "./slide"
 
 describe("<Slide />", () => {
   test("passes a11y test", async () => {
     await a11y(<Slide />)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Slide.displayName).toBe("Slide")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Slide>Slide</Slide>)
+    expect(screen.getByText("Slide")).toHaveClass("ui-slide")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Slide>Slide</Slide>)
+    expect(screen.getByText("Slide").tagName).toBe("DIV")
   })
 
   test("applies default styles correctly", async () => {
@@ -17,8 +31,8 @@ describe("<Slide />", () => {
     })
   })
 
-  test("applies styles correctly for top placement", async () => {
-    render(<Slide placement="top">Slide</Slide>)
+  test("applies styles correctly for block-start placement", async () => {
+    render(<Slide placement="block-start">Slide</Slide>)
 
     const slide = await screen.findByText("Slide")
 
@@ -27,8 +41,8 @@ describe("<Slide />", () => {
     })
   })
 
-  test("applies styles correctly for left placement", async () => {
-    render(<Slide placement="left">Slide</Slide>)
+  test("applies styles correctly for inline-start placement", async () => {
+    render(<Slide placement="inline-start">Slide</Slide>)
 
     const slide = await screen.findByText("Slide")
 
@@ -37,8 +51,8 @@ describe("<Slide />", () => {
     })
   })
 
-  test("applies styles correctly for right placement", async () => {
-    render(<Slide placement="right">Slide</Slide>)
+  test("applies styles correctly for inline-end placement", async () => {
+    render(<Slide placement="inline-end">Slide</Slide>)
 
     const slide = await screen.findByText("Slide")
 
@@ -47,8 +61,8 @@ describe("<Slide />", () => {
     })
   })
 
-  test("applies styles correctly for bottom placement", async () => {
-    render(<Slide placement="bottom">Slide</Slide>)
+  test("applies styles correctly for block-end placement", async () => {
+    render(<Slide placement="block-end">Slide</Slide>)
 
     const slide = await screen.findByText("Slide")
 

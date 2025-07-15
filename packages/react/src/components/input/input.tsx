@@ -1,4 +1,7 @@
-import type { FC, HTMLUIProps, ThemeProps } from "../../core"
+"use client"
+
+import type { FC } from "react"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { InputStyle } from "./input.style"
 import type { UseInputBorderProps } from "./use-input-border"
@@ -8,7 +11,7 @@ import { inputStyle } from "./input.style"
 import { useInputBorder } from "./use-input-border"
 
 export interface InputProps
-  extends Omit<HTMLUIProps<"input">, "size">,
+  extends Omit<HTMLStyledProps<"input">, "size">,
     ThemeProps<InputStyle>,
     UseInputBorderProps,
     FieldProps {
@@ -18,43 +21,36 @@ export interface InputProps
   htmlSize?: number
 }
 
-export const {
+const {
   PropsContext: InputPropsContext,
   usePropsContext: useInputPropsContext,
   withContext,
 } = createComponent<InputProps, InputStyle>("input", inputStyle)
 
+export { InputPropsContext, useInputPropsContext }
+
 /**
  * `Input` is a component used to obtain text input from the user.
  *
- * @see Docs https://yamada-ui.com/components/input
+ * @see https://yamada-ui.com/components/input
  */
 export const Input: FC<InputProps> = withContext("input")(
   undefined,
   (props) => {
     const {
-      props: {
-        errorBorderColor,
-        focusBorderColor,
-        htmlSize,
-        vars: varsProp,
-        ...rest
-      },
+      props: { errorBorderColor, focusBorderColor, htmlSize, ...rest },
       ariaProps,
       dataProps,
       eventProps,
     } = useFieldProps(props)
-    const vars = useInputBorder(varsProp, {
-      errorBorderColor,
-      focusBorderColor,
-    })
+    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
 
     return {
       size: htmlSize,
-      vars,
       ...ariaProps,
       ...dataProps,
       ...eventProps,
+      ...varProps,
       ...rest,
     }
   },

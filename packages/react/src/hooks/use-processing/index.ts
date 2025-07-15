@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback, useMemo, useRef } from "react"
 import { useUnmountEffect } from "../../utils"
 import { useBoolean } from "../use-boolean"
@@ -5,7 +7,7 @@ import { useBoolean } from "../use-boolean"
 /**
  * `useProcessing` is a custom hook for handling processing states.
  *
- * @see Docs https://yamada-ui.com/hooks/use-processing
+ * @see https://yamada-ui.com/hooks/use-processing
  */
 export const useProcessing = (init?: boolean) => {
   const [loading, { off, on }] = useBoolean(init)

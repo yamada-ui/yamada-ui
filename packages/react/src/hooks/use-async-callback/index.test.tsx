@@ -1,7 +1,7 @@
 import type { FC } from "react"
+import { render, renderHook, screen, waitFor } from "#test"
 import { vi } from "vitest"
 import { useAsyncCallback } from "."
-import { render, renderHook, screen, waitFor } from "../../../test"
 
 const wait = async (ms: number) =>
   new Promise((resolve) => {

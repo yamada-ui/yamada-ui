@@ -1,93 +1,88 @@
-import type { DocsContainerProps } from "@storybook/blocks"
-import type { Preview } from "@storybook/react"
-import type { FC, PropsWithChildren } from "react"
-import { DocsContainer } from "@storybook/blocks"
-import { addons } from "@storybook/preview-api"
-import { themes } from "@storybook/theming"
-import { useEffect, useState } from "react"
-import { DARK_MODE_EVENT_NAME } from "storybook-dark-mode"
-import { UIProvider, useColorMode, VStack } from "../src"
-import { customThemes } from "./themes"
+import type { Preview, StoryContext } from "@storybook/react-vite"
+import { useEffect } from "react"
+import { GLOBALS_UPDATED } from "storybook/internal/core-events"
+import { addons } from "storybook/preview-api"
+import { defaultConfig, isRtl, UIProvider, useColorMode, VStack } from "../src"
+import { themes } from "./themes"
 
 const channel = addons.getChannel()
 
-const useDarkMode = (callback?: (darkMode: boolean) => void) => {
-  const [darkMode, setDarkMode] = useState(false)
-
-  useEffect(() => {
-    channel.on(DARK_MODE_EVENT_NAME, callback ?? setDarkMode)
-
-    return () => channel.off(DARK_MODE_EVENT_NAME, callback ?? setDarkMode)
-  }, [callback, setDarkMode])
-
-  return darkMode
-}
-
-const App: FC<PropsWithChildren> = ({ children }) => {
-  const { changeColorMode } = useColorMode()
-
-  useDarkMode((darkMode) => {
-    changeColorMode(darkMode ? "dark" : "light")
-  })
-
-  return (
-    <VStack
-      align="start"
-      gap={{ base: "lg", md: "md" }}
-      minH={{
-        base: "calc(100dvh - {spaces.lg} * 2)",
-        md: "calc(100dvh - {spaces.md} * 2)",
-      }}
-      p={{ base: "lg", md: "md" }}
-    >
-      {children}
-    </VStack>
-  )
-}
-
 const preview: Preview = {
-  parameters: {
-    backgrounds: { disable: true },
-    controls: { expanded: true },
-    darkMode: { ...customThemes },
-    docs: {
-      container: ({
-        children,
-        theme,
-        ...rest
-      }: PropsWithChildren<DocsContainerProps>) => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const darkMode = useDarkMode()
-        const colorMode = darkMode ? "dark" : "light"
+  decorators: [
+    function (Story) {
+      const { changeColorMode } = useColorMode()
 
-        theme = themes[colorMode]
+      useEffect(() => {
+        const onUpdateGlobals = ({ globals }: StoryContext) => {
+          changeColorMode(globals.colorMode)
+        }
 
-        return (
-          <DocsContainer theme={theme} {...rest}>
-            <UIProvider colorMode={colorMode}>{children}</UIProvider>
-          </DocsContainer>
-        )
+        channel.on(GLOBALS_UPDATED, onUpdateGlobals)
+
+        return () => {
+          channel.off(GLOBALS_UPDATED, onUpdateGlobals)
+        }
+      }, [changeColorMode])
+
+      return <Story />
+    },
+    function (Story, { globals, parameters }) {
+      const { layout } = parameters
+      const { colorMode: initialColorMode, locale } = globals
+      const dir = isRtl(globals.locale) ? "rtl" : "ltr"
+      const config = { ...defaultConfig, initialColorMode }
+
+      return (
+        <UIProvider config={config} dir={dir} locale={locale}>
+          <VStack
+            align="start"
+            gap={{ base: "lg", md: "md" }}
+            justify={layout === "centered" ? "center" : "start"}
+            minH="100dvh"
+            p={{ base: "lg", md: "md" }}
+          >
+            <Story />
+          </VStack>
+        </UIProvider>
+      )
+    },
+  ],
+  globalTypes: {
+    colorMode: {
+      toolbar: {
+        items: [
+          { icon: "sun", title: "Light", value: "light" },
+          { icon: "moon", title: "Dark", value: "dark" },
+        ],
       },
     },
+    locale: {
+      description: "Internationalization locale",
+      toolbar: {
+        icon: "globe",
+        items: [
+          { right: "🇺🇸", title: "English", value: "en-US" },
+          { right: "🇯🇵", title: "日本語", value: "ja-JP" },
+          { right: "🇰🇷", title: "한국어", value: "ko-KR" },
+          { right: "🇸🇦", title: "العربية", value: "ar-EG" },
+        ],
+      },
+    },
+  },
+  initialGlobals: {
+    colorMode: "light",
+    locale: "en-US",
+  },
+  parameters: {
+    docs: { codePanel: true },
     layout: "fullscreen",
     options: {
       storySort: {
         order: ["Components", "Hooks", "Styled System", "Theme"],
       },
     },
+    themes,
   },
-
-  decorators: [
-    (Story) => {
-      return (
-        <UIProvider>
-          <App>
-            <Story />
-          </App>
-        </UIProvider>
-      )
-    },
-  ],
 }
 
 export default preview

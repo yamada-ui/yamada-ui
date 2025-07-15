@@ -1,9 +1,11 @@
+"use client"
+
 import { Video } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
  * `VideoIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const VideoIcon = component(Icon)({ as: Video })

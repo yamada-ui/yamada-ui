@@ -1,0 +1,156 @@
+{
+  "List": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Panel": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "Root": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"line\" | \"outline\" | \"subtle\" | \"plain\" | [\"line\" | \"outline\" | \"subtle\" | \"plain\" | ({ _peerAccept?: \"line\" | \"outline\" | \"subtle\" | \"plain\" | [\"line\" | \"outline\" | \"subtle\" | \"plain\" | (... & { ...; }), \"line\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: \"line\" | ... ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "align": {
+      "type": "StyleValue<\"center\" | \"end\" | \"start\">",
+      "defaultValue": "\"start\"",
+      "description": "The alignment of the tabs.",
+      "required": false
+    },
+    "defaultIndex": {
+      "type": "number",
+      "description": "The index of the selected tab.",
+      "required": false
+    },
+    "fitted": {
+      "type": "StyleValue<boolean>",
+      "defaultValue": "false",
+      "description": "If `true`, tabs will stretch to width of the tablist.",
+      "required": false
+    },
+    "index": {
+      "type": "number",
+      "description": "The index of the selected tab.",
+      "required": false
+    },
+    "items": {
+      "type": "TabsItem[]",
+      "description": "If provided, generate tab and panel components based on tabs.",
+      "required": false
+    },
+    "lazy": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, rendering of the content will be deferred until it is selected.",
+      "required": false
+    },
+    "lazyBehavior": {
+      "type": "LazyBehavior",
+      "defaultValue": "\"unmount\"",
+      "description": "The lazy behavior of content when not active. Only works when `lazy={true}`.\n\n- `unmount`: The content is always unmounted.\n- `keepMounted`: The content is initially unmounted, but stays mounted when selected.",
+      "required": false
+    },
+    "manual": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the tabs will be manually activated and display its panel by pressing Space or Enter.\n\nIf `false`, the tabs will be automatically activated and their panel is displayed when they receive focus.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(index: number) => void",
+      "description": "The callback invoked when the index changes.",
+      "required": false
+    },
+    "orientation": {
+      "type": "StyleValue<\"horizontal\" | \"vertical\">",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the tab list.",
+      "required": false
+    }
+  },
+  "Tab": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  }
+}

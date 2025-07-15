@@ -1,15 +1,18 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+"use client"
+
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { InputProps } from "./input"
 import type { InputAddonStyle } from "./input-addon.style"
-import { createComponent, mergeVars } from "../../core"
+import { createComponent } from "../../core"
 import { inputAddonStyle } from "./input-addon.style"
+import { useInputBorder } from "./use-input-border"
 
 export interface InputAddonProps
-  extends HTMLUIProps,
+  extends HTMLStyledProps,
     ThemeProps<InputAddonStyle>,
     Pick<InputProps, "errorBorderColor" | "focusBorderColor"> {}
 
-export const {
+const {
   PropsContext: InputAddonPropsContext,
   usePropsContext: useInputAddonPropsContext,
   withContext,
@@ -18,26 +21,13 @@ export const {
   inputAddonStyle,
 )
 
+export { InputAddonPropsContext, useInputAddonPropsContext }
+
 export const InputAddon = withContext("div")(
   undefined,
-  ({ errorBorderColor, focusBorderColor, vars, ...rest }) => ({
-    vars: mergeVars(
-      vars,
-      errorBorderColor
-        ? {
-            name: "errorBorderColor",
-            token: "colors",
-            value: errorBorderColor,
-          }
-        : undefined,
-      focusBorderColor
-        ? {
-            name: "focusBorderColor",
-            token: "colors",
-            value: focusBorderColor,
-          }
-        : undefined,
-    ),
-    ...rest,
-  }),
+  ({ errorBorderColor, focusBorderColor, ...rest }) => {
+    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
+
+    return { ...varProps, ...rest }
+  },
 )

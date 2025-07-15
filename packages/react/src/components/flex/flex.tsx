@@ -1,9 +1,13 @@
-import type { CSSProps, HTMLUIProps, ThemeProps } from "../../core"
+"use client"
+
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FlexStyle } from "./flex.style"
 import { createComponent } from "../../core"
 import { flexStyle } from "./flex.style"
 
-interface FlexOptions {
+export interface FlexProps
+  extends Omit<HTMLStyledProps, "direction">,
+    ThemeProps<FlexStyle> {
   /**
    * The CSS `align-items` property.
    */
@@ -34,21 +38,18 @@ interface FlexOptions {
   wrap?: CSSProps["flexWrap"]
 }
 
-export interface FlexProps
-  extends Omit<HTMLUIProps, "direction">,
-    ThemeProps<FlexStyle>,
-    FlexOptions {}
-
-export const {
+const {
   PropsContext: FlexPropsContext,
   usePropsContext: useFlexPropsContext,
   withContext,
 } = createComponent<FlexProps, FlexStyle>("flex", flexStyle)
 
+export { FlexPropsContext, useFlexPropsContext }
+
 /**
  * `Flex` is a component that sets `flex` to `Box`. Also, convenient style shorthand is available.
  *
- * @see Docs https://yamada-ui.com/components/flex
+ * @see https://yamada-ui.com/components/flex
  */
 export const Flex = withContext("div")(
   undefined,

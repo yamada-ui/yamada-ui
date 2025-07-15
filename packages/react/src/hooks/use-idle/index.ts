@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useRef, useState } from "react"
 
 const DEFAULT_EVENTS: (keyof DocumentEventMap)[] = [
@@ -21,22 +23,20 @@ export interface IdleOptions {
 /**
  * `useIdle` is a custom hook that detects whether the user has been idle for a certain amount of time in milliseconds.
  *
- * @see Docs https://yamada-ui.com/hooks/use-idle
+ * @see https://yamada-ui.com/hooks/use-idle
  */
 export const useIdle = (timeout: number, options?: IdleOptions) => {
   const { events, initialState } = { ...DEFAULT_OPTIONS, ...options }
   const [idle, setIdle] = useState<boolean>(initialState)
-  const timeoutId = useRef<any>(null)
+  const timeoutId = useRef<NodeJS.Timeout>(undefined)
 
   useEffect(() => {
     const handleEvent = () => {
       setIdle(false)
 
-      if (timeoutId.current) window.clearTimeout(timeoutId.current)
+      if (timeoutId.current) clearTimeout(timeoutId.current)
 
-      timeoutId.current = window.setTimeout(() => {
-        setIdle(true)
-      }, timeout)
+      timeoutId.current = setTimeout(() => setIdle(true), timeout)
     }
 
     events.forEach((event) => document.addEventListener(event, handleEvent))

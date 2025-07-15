@@ -1,3 +1,4 @@
+export * from "./drawer.style"
 export {
   DrawerBody,
   DrawerCloseButton,
@@ -8,8 +9,10 @@ export {
   DrawerHeader,
   DrawerOpenTrigger,
   DrawerOverlay,
+  DrawerPropsContext,
   DrawerRoot,
   DrawerTitle,
+  useDrawerPropsContext,
 } from "./drawer"
 export type {
   DrawerBodyProps,
@@ -24,9 +27,5 @@ export type {
   DrawerRootProps,
   DrawerTitleProps,
 } from "./drawer"
-
-export * from "./drawer.style"
-
-export * from "./use-drawer"
-
 export * as Drawer from "./namespace"
+export * from "./use-drawer"

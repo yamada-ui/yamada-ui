@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { ShoppingCartIcon } from "../icon"
 import { EmptyState } from "./"
 
@@ -12,18 +12,11 @@ describe("<EmptyState />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(EmptyState.Root.displayName).toBe("EmptyStateRoot")
-    expect(EmptyState.Root.__ui__).toBe("EmptyStateRoot")
-
     expect(EmptyState.Title.displayName).toBe("EmptyStateTitle")
-    expect(EmptyState.Title.__ui__).toBe("EmptyStateTitle")
-
     expect(EmptyState.Description.displayName).toBe("EmptyStateDescription")
-    expect(EmptyState.Description.__ui__).toBe("EmptyStateDescription")
-
     expect(EmptyState.Indicator.displayName).toBe("EmptyStateIndicator")
-    expect(EmptyState.Indicator.__ui__).toBe("EmptyStateIndicator")
   })
 
   test("sets `className` correctly", () => {

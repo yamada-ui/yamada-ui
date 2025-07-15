@@ -1,6 +1,5 @@
-import type { Meta, StoryFn } from "@storybook/react"
-import { PropsTable } from "../../../storybook/components"
-import { For } from "../../components/for"
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { COLOR_SCHEMES } from "../../utils"
 import { Blockquote } from "./"
 
@@ -79,18 +78,18 @@ export const Icon: Story = () => {
 
 export const Justify: Story = () => {
   return (
-    <For each={["start", "center", "end"] as const}>
-      {(justify, index) => (
+    <PropsTable variant="stack" rows={["start", "center", "end"]}>
+      {(_, row, key) => (
         <Blockquote.Root
-          key={index}
+          key={key}
           cite="Wikipedia"
           citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール"
-          justify={justify}
+          justify={row}
         >
           地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
         </Blockquote.Root>
       )}
-    </For>
+    </PropsTable>
   )
 }
 

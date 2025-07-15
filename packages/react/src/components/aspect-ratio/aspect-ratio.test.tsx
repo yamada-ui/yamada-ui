@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { AspectRatio } from "./aspect-ratio"
 
 describe("<AspectRatio />", () => {
@@ -10,9 +10,8 @@ describe("<AspectRatio />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(AspectRatio.displayName).toBe("AspectRatio")
-    expect(AspectRatio.__ui__).toBe("AspectRatio")
   })
 
   test("sets `className` correctly", () => {

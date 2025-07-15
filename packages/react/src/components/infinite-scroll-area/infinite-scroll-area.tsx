@@ -1,16 +1,24 @@
+"use client"
+
 import type { ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
-import type { UseInfiniteScrollProps } from "../../hooks/use-infinite-scroll"
+import type {
+  HTMLStyledProps,
+  Orientation,
+  StyleValue,
+  ThemeProps,
+} from "../../core"
 import type { InfiniteScrollAreaStyle } from "./infinite-scroll-area.style"
+import type { UseInfiniteScrollProps } from "./use-infinite-scroll"
 import { useRef } from "react"
-import { createSlotComponent, ui } from "../../core"
-import { useInfiniteScroll } from "../../hooks/use-infinite-scroll"
+import { createSlotComponent, styled } from "../../core"
+import { useValue } from "../../hooks/use-value"
 import { mergeRefs } from "../../utils"
 import { infiniteScrollAreaStyle } from "./infinite-scroll-area.style"
+import { useInfiniteScroll } from "./use-infinite-scroll"
 
 export interface InfiniteScrollAreaProps
-  extends Omit<HTMLUIProps, keyof UseInfiniteScrollProps>,
-    UseInfiniteScrollProps,
+  extends Omit<HTMLStyledProps, keyof UseInfiniteScrollProps>,
+    Omit<UseInfiniteScrollProps, "orientation">,
     ThemeProps<InfiniteScrollAreaStyle> {
   /**
    * The infinite scroll area finish to use.
@@ -21,12 +29,18 @@ export interface InfiniteScrollAreaProps
    */
   loading?: ReactNode
   /**
+   * The orientation of the infinite scroll.
+   *
+   * @default 'vertical'
+   */
+  orientation?: StyleValue<Orientation>
+  /**
    * Props for infinite scroll area trigger component.
    */
-  triggerProps?: HTMLUIProps
+  triggerProps?: HTMLStyledProps
 }
 
-export const {
+const {
   PropsContext: InfiniteScrollAreaPropsContext,
   usePropsContext: useInfiniteScrollAreaPropsContext,
   withContext,
@@ -36,11 +50,13 @@ export const {
   infiniteScrollAreaStyle,
 )
 
+export { InfiniteScrollAreaPropsContext, useInfiniteScrollAreaPropsContext }
+
 /**
  * `InfiniteScrollArea` is for providing infinite scroll functionality.
  * This feature provides a smooth scrolling experience by automatically loading and displaying the next dataset when the user reaches the end of the page.
  *
- * @see Docs https://yamada-ui.com/components/infinite-scroll-area
+ * @see https://yamada-ui.com/components/infinite-scroll-area
  */
 export const InfiniteScrollArea = withProvider(
   ({
@@ -51,7 +67,7 @@ export const InfiniteScrollArea = withProvider(
     indexRef,
     initialLoad,
     loading,
-    orientation,
+    orientation: orientationProp,
     resetRef,
     reverse,
     rootMargin,
@@ -63,6 +79,7 @@ export const InfiniteScrollArea = withProvider(
     ...rest
   }) => {
     const rootRef = useRef<HTMLDivElement>(null)
+    const orientation = useValue(orientationProp)
     const { ref: triggerRef, finish } = useInfiniteScroll({
       disabled,
       indexRef,
@@ -80,7 +97,7 @@ export const InfiniteScrollArea = withProvider(
     const showTrigger = !disabled && (hasFinish || !finish)
 
     return (
-      <ui.div
+      <styled.div
         ref={mergeRefs(rootRef, ref)}
         aria-busy="false"
         role="feed"
@@ -99,14 +116,14 @@ export const InfiniteScrollArea = withProvider(
             {finish ? finishProp : loading}
           </InfiniteScrollTrigger>
         ) : null}
-      </ui.div>
+      </styled.div>
     )
   },
   "root",
   { transferProps: ["orientation"] },
 )()
 
-interface InfiniteScrollTriggerProps extends HTMLUIProps {}
+interface InfiniteScrollTriggerProps extends HTMLStyledProps {}
 
 const InfiniteScrollTrigger = withContext<"div", InfiniteScrollTriggerProps>(
   "div",

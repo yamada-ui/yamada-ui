@@ -1,6 +1,6 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { useMemo } from "react"
-import { PropsTable } from "../../../storybook/components"
 import { Separator } from "../separator"
 import { VStack } from "../stack"
 import { DataList } from "./"
@@ -88,7 +88,7 @@ export const Variant: Story = () => {
 
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["subtle", "bold", "grid"]}
       rows={["horizontal", "vertical"]}
     >
@@ -122,7 +122,7 @@ export const Size: Story = () => {
 
   return (
     <PropsTable
-      variant="column"
+      variant="stack"
       columns={["sm", "md", "lg"]}
       rows={["horizontal", "vertical"]}
     >

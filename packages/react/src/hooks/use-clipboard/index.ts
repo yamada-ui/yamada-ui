@@ -1,3 +1,5 @@
+"use client"
+
 import copy from "copy-to-clipboard"
 import { useCallback, useEffect, useState } from "react"
 import { isNumber, isString } from "../../utils"
@@ -10,7 +12,7 @@ export interface UseClipboardOptions {
 /**
  * `useClipboard` is a custom hook that performs the operation of copying a value to the clipboard.
  *
- * @see Docs https://yamada-ui.com/hooks/use-clipboard
+ * @see https://yamada-ui.com/hooks/use-clipboard
  */
 export const useClipboard = (
   defaultValue = "",
@@ -42,15 +44,15 @@ export const useClipboard = (
   )
 
   useEffect(() => {
-    let timeoutId: null | number = null
+    let timeoutId: NodeJS.Timeout | null = null
 
     if (copied)
-      timeoutId = window.setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setCopied(false)
       }, timeout)
 
     return () => {
-      if (timeoutId) window.clearTimeout(timeoutId)
+      if (timeoutId) clearTimeout(timeoutId)
     }
   }, [timeout, copied])
 

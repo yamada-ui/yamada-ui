@@ -1,8 +1,9 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import {} from "#storybook"
 import { useDragControls } from "motion/react"
 import { useRef } from "react"
-import { App } from "../../../storybook/components"
 import { Box } from "../box"
+import { Center } from "../center"
 import { Motion } from "./motion"
 
 type Story = StoryFn<typeof Motion>
@@ -16,26 +17,24 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <App>
-      <Motion
-        bg="mono"
-        cursor="grab"
-        drag
-        h="2xs"
-        rounded="l3"
-        w="2xs"
-        _active={{ cursor: "grabbing" }}
-        onDrag={(_, info) => console.log("Drag", info)}
-        onDragEnd={(_, info) => console.log("Drag ends", info)}
-        onDragStart={(_, info) => console.log("Drag starts", info)}
-      />
-    </App>
+    <Motion
+      bg="mono"
+      cursor="grab"
+      drag
+      h="2xs"
+      rounded="l3"
+      w="2xs"
+      _active={{ cursor: "grabbing" }}
+      onDrag={(_, info) => console.log("Drag", info)}
+      onDragEnd={(_, info) => console.log("Drag ends", info)}
+      onDragStart={(_, info) => console.log("Drag starts", info)}
+    />
   )
 }
 
 export const DragConstraints: Story = () => {
   return (
-    <App>
+    <>
       <Motion
         bg="mono"
         cursor="grab"
@@ -56,7 +55,7 @@ export const DragConstraints: Story = () => {
         w="2xs"
         _active={{ cursor: "grabbing" }}
       />
-    </App>
+    </>
   )
 }
 
@@ -64,7 +63,7 @@ export const DragConstraintsRef: Story = () => {
   const constraintsRef = useRef<HTMLDivElement>(null)
 
   return (
-    <App ref={constraintsRef}>
+    <Center ref={constraintsRef} flex="1" w="full">
       <Motion
         bg="mono"
         cursor="grab"
@@ -75,7 +74,7 @@ export const DragConstraintsRef: Story = () => {
         w="2xs"
         _active={{ cursor: "grabbing" }}
       />
-    </App>
+    </Center>
   )
 }
 
@@ -83,7 +82,7 @@ export const DragElastic: Story = () => {
   const constraintsRef = useRef<HTMLDivElement>(null)
 
   return (
-    <App ref={constraintsRef}>
+    <Center ref={constraintsRef} flex="1" w="full">
       <Motion
         bg="mono"
         cursor="grab"
@@ -95,7 +94,7 @@ export const DragElastic: Story = () => {
         w="2xs"
         _active={{ cursor: "grabbing" }}
       />
-    </App>
+    </Center>
   )
 }
 
@@ -103,7 +102,7 @@ export const DragMomentum: Story = () => {
   const constraintsRef = useRef<HTMLDivElement>(null)
 
   return (
-    <App ref={constraintsRef}>
+    <Center ref={constraintsRef} flex="1" w="full">
       <Motion
         bg="mono"
         cursor="grab"
@@ -115,7 +114,7 @@ export const DragMomentum: Story = () => {
         w="2xs"
         _active={{ cursor: "grabbing" }}
       />
-    </App>
+    </Center>
   )
 }
 
@@ -123,7 +122,7 @@ export const DragTransition: Story = () => {
   const constraintsRef = useRef<HTMLDivElement>(null)
 
   return (
-    <App ref={constraintsRef}>
+    <Center ref={constraintsRef} flex="1" w="full">
       <Motion
         bg="mono"
         cursor="grab"
@@ -135,22 +134,22 @@ export const DragTransition: Story = () => {
         w="2xs"
         _active={{ cursor: "grabbing" }}
       />
-    </App>
+    </Center>
   )
 }
 
 export const DragPropagation: Story = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const itemRef = useRef<HTMLDivElement>(null)
 
   return (
-    <App ref={containerRef}>
+    <Center ref={ref}>
       <Motion
         ref={itemRef}
         bg="mono"
         cursor="grab"
         drag
-        dragConstraints={containerRef}
+        dragConstraints={ref}
         h="2xs"
         p="md"
         rounded="l3"
@@ -169,7 +168,7 @@ export const DragPropagation: Story = () => {
           _active={{ cursor: "grabbing" }}
         />
       </Motion>
-    </App>
+    </Center>
   )
 }
 
@@ -178,7 +177,7 @@ export const DragControls: Story = () => {
   const dragControls = useDragControls()
 
   return (
-    <App ref={constraintsRef} gap="md">
+    <Center ref={constraintsRef} flex="1" gap="md" w="full">
       <Box
         bg="secondary"
         cursor="pointer"
@@ -199,7 +198,7 @@ export const DragControls: Story = () => {
         w="2xs"
         _active={{ cursor: "grabbing" }}
       />
-    </App>
+    </Center>
   )
 }
 
@@ -208,7 +207,7 @@ export const DisabledDragListener: Story = () => {
   const dragControls = useDragControls()
 
   return (
-    <App ref={constraintsRef} gap="md">
+    <Center ref={constraintsRef} flex="1" gap="md" w="full">
       <Box
         bg="secondary"
         cursor="pointer"
@@ -230,6 +229,6 @@ export const DisabledDragListener: Story = () => {
         w="2xs"
         _active={{ cursor: "grabbing" }}
       />
-    </App>
+    </Center>
   )
 }

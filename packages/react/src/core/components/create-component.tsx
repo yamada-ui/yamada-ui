@@ -1,17 +1,19 @@
-import type { FC } from "react"
-import type { Dict, Merge, StringLiteral } from "../../utils"
+"use client"
+
+import type { FC, FunctionComponent } from "react"
+import type { AnyString, Dict, Merge } from "../../utils"
 import type { CSSObject, CSSSlotObject } from "../css"
-import type { StyledOptions } from "../styled"
 import type {
   ComponentSlotStyle,
   ComponentStyle,
+  StyledOptions,
+  System,
   WithoutThemeProps,
-} from "../theme"
+} from "../system"
 import type {
   As,
   DOMElement,
-  FunctionComponent,
-  HTMLUIProps,
+  HTMLStyledProps,
   Component as OriginalComponent,
 } from "./index.types"
 import { Fragment } from "react"
@@ -22,12 +24,12 @@ import {
   isFunction,
   isObject,
   isString,
-  runIfFunc,
+  runIfFn,
   toArray,
   toCamelCase,
   toPascalCase,
 } from "../../utils"
-import { ui } from "../factory"
+import { styled, useSystem } from "../system"
 import { chainProps, mergeProps } from "./props"
 import {
   getSlotClassName,
@@ -37,6 +39,7 @@ import {
 import { getClassName, getDisplayName } from "./utils"
 
 type AsWithFragment = "fragment" | As
+type ClassName = ((system: System) => string) | string
 
 type Component<
   Y extends AsWithFragment = AsWithFragment,
@@ -47,14 +50,14 @@ type Component<
 
 export type ComponentSlotName<
   Y extends ComponentSlotStyle | ComponentStyle = ComponentSlotStyle,
-> = keyof Required<Y>["base"] | StringLiteral
+> = AnyString | Extract<keyof Required<Y>["base"], string>
 
-export type ComponentSlot<Y extends number | string | symbol> =
+export type ComponentSlot<Y extends string> =
   | [Y, Y]
   | Y
   | { name: string; slot: [Y, Y] | Y }
 
-export type InitialProps<Y extends Dict = Dict> = SuperProps<Y>
+export type InitialProps<Y extends Dict = Dict> = ((props: Y) => any) | Y
 export type SuperProps<Y extends Dict = Dict> = ((props: Y) => any) | Y
 
 export type SuperWithoutThemeProps<
@@ -66,14 +69,19 @@ export type SuperWithoutThemeProps<
 export interface UseComponentPropsOptions<
   Y extends number | string | symbol = string,
 > {
-  className?: string
+  className?: ClassName
   withContext?: boolean
   transferProps?: Y[]
 }
 
 export interface ComponentOptions extends Omit<StyledOptions, "transferProps"> {
-  className?: string
+  className?: ClassName
   shouldStyleProps?: boolean
+}
+
+interface classNameOptions<Y extends string = string> {
+  className?: ClassName
+  slot?: ComponentSlot<Y>
 }
 
 export interface ComponentWithContextOptions<
@@ -91,7 +99,7 @@ function createProxyComponent<
   if (el === "fragment") el = Fragment
 
   if (shouldStyleProps || isString(el)) {
-    const ProxyComponent = ui(el as As, options)
+    const ProxyComponent = styled(el as As, options)
 
     ProxyComponent.displayName = "ProxyComponent"
 
@@ -103,7 +111,17 @@ function createProxyComponent<
   }
 }
 
-function getSlotCSS<Y extends number | string | symbol>(
+function withDisplayName<
+  Y extends AsWithFragment = AsWithFragment,
+  M extends object = {},
+>(Component: FC<M>, displayName: string) {
+  Object.defineProperty(Component, "name", { value: displayName })
+  Object.defineProperty(Component, "displayName", { value: displayName })
+
+  return Component as Component<Y, M>
+}
+
+function getSlotCSS<Y extends string>(
   slot?: ComponentSlot<Y>,
   slotCSS?: CSSSlotObject<Y>,
 ): CSSObject[] {
@@ -122,7 +140,7 @@ function getSlotCSS<Y extends number | string | symbol>(
   }
 }
 
-function mergeSlotCSS<Y extends number | string | symbol>(
+function mergeSlotCSS<Y extends string>(
   slot?: ComponentSlot<Y>,
   slotCSS?: CSSSlotObject<Y>,
   css?: CSSObject | CSSObject[],
@@ -138,10 +156,9 @@ function mergeSlotCSS<Y extends number | string | symbol>(
   return result
 }
 
-function getSlotKey<Y extends number | string | symbol>(
-  slot?: ComponentSlot<Y>,
-) {
+function getSlotKey<Y extends string>(slot?: ComponentSlot<Y>) {
   if (!slot) return "unknown"
+
   if (isArray(slot) || !isObject(slot)) {
     return toCamelCase(toArray(slot).join("-"))
   } else {
@@ -149,9 +166,7 @@ function getSlotKey<Y extends number | string | symbol>(
   }
 }
 
-function getSlotName<Y extends number | string | symbol>(
-  slot?: ComponentSlot<Y>,
-) {
+function getSlotName<Y extends string>(slot?: ComponentSlot<Y>) {
   if (!slot) return ""
 
   if (isArray(slot)) {
@@ -167,22 +182,36 @@ export function createComponent<
   Y extends object = {},
   M extends ComponentStyle = Dict,
 >(name: string, style?: M) {
-  const defaultClassName = style?.className ?? getClassName(name)
+  const defaultClassName = style?.className
   const defaultDisplayName = getDisplayName(name)
-
   const [PropsContext, usePropsContext] = createContext<Partial<Y>>({
     name: `${defaultDisplayName}PropsContext`,
     strict: false,
   })
 
+  function useClassName(name?: string, className?: ClassName) {
+    const system = useSystem()
+
+    className = runIfFn(className, system)
+    className ??= getClassName(name, defaultClassName)(system)
+
+    return className
+  }
+
   function useComponentProps<H extends Y = Y, R extends keyof H = keyof H>(
     props: H,
     {
-      className = defaultClassName,
+      className,
       withContext = true,
       transferProps,
     }: UseComponentPropsOptions<R> = {},
   ) {
+    const system = useSystem()
+
+    className = runIfFn(className, system)
+    className ??= defaultClassName
+    className ??= getClassName(name)(system)
+
     const contextProps = usePropsContext() ?? {}
     const mergedProps = withContext ? mergeProps(contextProps, props)() : props
     const [, rest] = useComponentStyle(mergedProps, {
@@ -196,17 +225,15 @@ export function createComponent<
 
   function component<D extends AsWithFragment = "div", H extends Dict = Y>(
     el: D | FC<H>,
-    {
-      name,
-      className = getClassName(name, defaultClassName),
-      ...options
-    }: ComponentOptions = {},
+    { name, className, ...options }: ComponentOptions = {},
   ) {
     const displayName = getDisplayName(name, defaultDisplayName)
     const ProxyComponent = createProxyComponent(el, options)
 
     return function (...superProps: SuperProps<H>[]) {
-      const Component = (props: H) => {
+      return withDisplayName<D, H>((props) => {
+        className = useClassName(name, className)
+
         const mergedProps = chainProps<any>(...superProps)()(props)
 
         return (
@@ -215,12 +242,7 @@ export function createComponent<
             className={cx(className, mergedProps.className)}
           />
         )
-      }
-
-      Component.displayName = displayName
-      Component.__ui__ = displayName
-
-      return Component as Component<D, H>
+      }, displayName)
     }
   }
 
@@ -232,7 +254,7 @@ export function createComponent<
     el: D | FC<WithoutThemeProps<H, M, R>>,
     {
       name,
-      className = getClassName(name, defaultClassName),
+      className,
       withContext,
       transferProps,
       ...options
@@ -245,11 +267,12 @@ export function createComponent<
       initialProps?: InitialProps<H>,
       ...superProps: SuperWithoutThemeProps<H, M, R>[]
     ) {
-      const Component = (props: H) => {
-        const computedProps = mergeProps(
-          runIfFunc(initialProps, props) ?? {},
-          props,
-        )() as H
+      return withDisplayName<D, H>((props) => {
+        className = useClassName(name, className)
+
+        const computedProps = isFunction(initialProps)
+          ? initialProps(props)
+          : mergeProps(initialProps ?? {}, props)()
         const mergedProps = useComponentProps(computedProps, {
           className,
           withContext,
@@ -258,12 +281,7 @@ export function createComponent<
         const rest = chainProps<any>(...toArray(superProps))()(mergedProps)
 
         return <ProxyComponent {...rest} />
-      }
-
-      Component.displayName = displayName
-      Component.__ui__ = displayName
-
-      return Component as Component<D, H>
+      }, displayName)
     }
   }
 
@@ -280,29 +298,53 @@ export function createSlotComponent<
   Y extends object = {},
   M extends ComponentSlotStyle = Dict,
   D extends Dict = Dict,
->(name: string, style?: M) {
-  const rootClassName = style?.className ?? getClassName(name)
-  const rootDisplayName = getDisplayName(name)
-
-  const classNameMap = new Map<string, string>()
-
+>(rootName: string, style?: M) {
+  const rootClassName = style?.className
+  const rootDisplayName = getDisplayName(rootName)
+  const classNameMap = new Map<string, classNameOptions>()
   const [StyleContext, useStyleContext] = createContext<
     CSSSlotObject<ComponentSlotName<M>>
   >({
     name: `${rootDisplayName}StyleContext`,
   })
-
   const [ComponentContext, useComponentContext] = createContext<D>({
     name: `${rootDisplayName}Context`,
   })
-
   const [PropsContext, usePropsContext] = createContext<Partial<Y>>({
     name: `${rootDisplayName}PropsContext`,
     strict: false,
   })
 
+  function useClassName(
+    slot?: ComponentSlot<ComponentSlotName<M>>,
+    className?: ClassName,
+  ) {
+    const system = useSystem()
+
+    className = runIfFn(className, system)
+    className ??= getSlotClassName(
+      rootClassName ?? getClassName(rootName)(system),
+      slot,
+    )
+
+    return className
+  }
+
   function useClassNames() {
-    return Object.fromEntries(classNameMap.entries())
+    const system = useSystem()
+    const entries = classNameMap.entries().map(([key, { className, slot }]) => {
+      className = runIfFn(className, system)
+      className ??= getSlotClassName(
+        rootClassName ?? getClassName(rootName)(system),
+        slot,
+      )
+
+      return [key, className]
+    })
+
+    return Object.fromEntries(
+      entries.filter(([_, className]) => className),
+    ) as { [key: string]: string }
   }
 
   function useRootComponentProps<
@@ -312,7 +354,7 @@ export function createSlotComponent<
     props: Y,
     slot?: ComponentSlot<ComponentSlotName<M>>,
     {
-      className = rootClassName,
+      className,
       withContext = true,
       transferProps,
     }: UseComponentPropsOptions<R> = {},
@@ -320,6 +362,8 @@ export function createSlotComponent<
     CSSSlotObject,
     Merge<WithoutThemeProps<Y, M, R>, { css?: CSSObject | CSSObject[] }>,
   ] {
+    className = useClassName(slot, className)
+
     const contextProps = usePropsContext() ?? {}
     const mergedProps = withContext ? mergeProps(contextProps, props)() : props
     const [css, rest] = useComponentSlotStyle(mergedProps, {
@@ -336,10 +380,12 @@ export function createSlotComponent<
     props: Y,
     slot?: ComponentSlot<ComponentSlotName<M>>,
     {
-      className = getSlotClassName(rootClassName, slot),
+      className,
       withContext = true,
     }: Omit<UseComponentPropsOptions, "transferProps"> = {},
   ) {
+    className = useClassName(slot, className)
+
     const style = useStyleContext()
     const contextProps = usePropsContext() ?? {}
     const rest = withContext ? mergeProps(contextProps, props)() : props
@@ -354,21 +400,19 @@ export function createSlotComponent<
   function component<H extends AsWithFragment = "div", R extends Dict = Dict>(
     el: FC<R> | H,
     slot?: ComponentSlot<ComponentSlotName<M>>,
-    {
-      name,
-      className = getSlotClassName(rootClassName, slot),
-      ...options
-    }: ComponentOptions = {},
+    { name, className, ...options }: ComponentOptions = {},
   ) {
     const ProxyComponent = createProxyComponent(el, options)
     const slotKey = getSlotKey(slot)
     const slotName = getSlotName(slot)
     const displayName = getDisplayName(name, `${rootDisplayName}${slotName}`)
 
-    if (className) classNameMap.set(slotKey, className)
+    classNameMap.set(slotKey, { className, slot })
 
     return function (...superProps: SuperProps<R>[]) {
-      const Component = (props: R) => {
+      return withDisplayName<H, R>((props) => {
+        className = useClassName(slot, className)
+
         const mergedProps = chainProps(...superProps)()(props)
 
         return (
@@ -377,12 +421,7 @@ export function createSlotComponent<
             className={cx(className, mergedProps.className)}
           />
         )
-      }
-
-      Component.displayName = displayName
-      Component.__ui__ = displayName
-
-      return Component as Component<H, R>
+      }, displayName)
     }
   }
 
@@ -397,7 +436,7 @@ export function createSlotComponent<
     >,
     {
       name,
-      className = getSlotClassName(rootClassName, slot),
+      className,
       withContext,
       transferProps,
       ...options
@@ -408,17 +447,16 @@ export function createSlotComponent<
     const slotName = getSlotName(slot)
     const displayName = getDisplayName(name, `${rootDisplayName}${slotName}`)
 
-    if (className) classNameMap.set(slotKey, className)
+    classNameMap.set(slotKey, { className, slot })
 
     return function (
       initialProps?: InitialProps<R>,
       ...superProps: SuperWithoutThemeProps<R, M, T>[]
     ) {
-      const Component = (props: R) => {
-        const computedProps = mergeProps(
-          runIfFunc(initialProps, props) ?? {},
-          props,
-        )()
+      return withDisplayName<H, R>((props) => {
+        const computedProps = isFunction(initialProps)
+          ? initialProps(props)
+          : mergeProps(initialProps ?? {}, props)()
         const [context, mergedProps] = useRootComponentProps(
           computedProps,
           slot,
@@ -435,24 +473,19 @@ export function createSlotComponent<
             <ProxyComponent {...rest} />
           </StyleContext>
         )
-      }
-
-      Component.displayName = displayName
-      Component.__ui__ = displayName
-
-      return Component as Component<H, R>
+      }, displayName)
     }
   }
 
   function withContext<
     H extends AsWithFragment = "div",
-    R extends Dict = H extends DOMElement ? HTMLUIProps<H> : Dict,
+    R extends Dict = H extends DOMElement ? HTMLStyledProps<H> : Dict,
   >(
     el: FC<R> | H,
     slot?: ComponentSlot<ComponentSlotName<M>>,
     {
       name,
-      className = getSlotClassName(rootClassName, slot),
+      className,
       withContext,
       ...options
     }: Omit<ComponentWithContextOptions, "transferProps"> = {},
@@ -462,17 +495,16 @@ export function createSlotComponent<
     const slotName = getSlotName(slot)
     const displayName = getDisplayName(name, `${rootDisplayName}${slotName}`)
 
-    if (className) classNameMap.set(slotKey, className)
+    classNameMap.set(slotKey, { className, slot })
 
     return function (
       initialProps?: InitialProps<R>,
       ...superProps: SuperProps<R>[]
     ) {
-      const Component = (props: R) => {
-        const computedProps = mergeProps(
-          runIfFunc(initialProps, props) ?? {},
-          props,
-        )()
+      return withDisplayName<H, R>((props) => {
+        const computedProps = isFunction(initialProps)
+          ? initialProps(props)
+          : mergeProps(initialProps ?? {}, props)()
         const mergedProps = useSlotComponentProps(computedProps, slot, {
           className,
           withContext,
@@ -480,12 +512,7 @@ export function createSlotComponent<
         const rest = chainProps(...superProps)()(mergedProps)
 
         return <ProxyComponent {...rest} />
-      }
-
-      Component.displayName = displayName
-      Component.__ui__ = displayName
-
-      return Component as Component<H, R>
+      }, displayName)
     }
   }
 

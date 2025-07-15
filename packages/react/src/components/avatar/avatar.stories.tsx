@@ -1,10 +1,9 @@
-import type { Meta, StoryFn } from "@storybook/react"
-import type { AvatarProps } from "./"
-import { COLOR_SCHEMES } from "@yamada-ui/utils"
-import { PropsTable } from "../../../storybook/components/props-table"
-import { For } from "../../components/for"
-import { Wrap } from "../flex"
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
+import { COLOR_SCHEMES } from "../../utils"
+import { For } from "../for"
 import { GhostIcon } from "../icon"
+import { Wrap } from "../wrap"
 import { Avatar, AvatarGroup } from "./"
 
 type Story = StoryFn<typeof Avatar>
@@ -64,13 +63,9 @@ export const Size: Story = () => {
 
 export const Shape: Story = () => {
   return (
-    <Wrap gap="md">
-      <For<AvatarProps["shape"]> each={["circle", "square", "rounded"]}>
-        {(shape, index) => (
-          <Avatar key={index} name="Hirotomo Yamada" shape={shape} />
-        )}
-      </For>
-    </Wrap>
+    <PropsTable variant="stack" rows={["circle", "square", "rounded"]}>
+      {(_, row, key) => <Avatar key={key} name="Hirotomo Yamada" shape={row} />}
+    </PropsTable>
   )
 }
 
@@ -122,19 +117,23 @@ export const RandomColor: Story = () => {
 export const Group: Story = () => {
   return (
     <>
-      <For each={["solid", "subtle", "surface", "outline"]}>
+      <For each={["solid", "subtle", "surface", "outline"] as const}>
         {(variant, index) => (
           <AvatarGroup key={index} variant={variant}>
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar key={index} name="Hirotomo Yamada" />
+                <Avatar
+                  key={index}
+                  name="Hirotomo Yamada"
+                  bg={variant === "outline" ? "bg" : undefined}
+                />
               ))}
           </AvatarGroup>
         )}
       </For>
 
-      <For each={["xs", "sm", "md", "lg", "xl"]}>
+      <For each={["xs", "sm", "md", "lg", "xl"] as const}>
         {(size, index) => (
           <AvatarGroup key={index} size={size}>
             {Array(5)
@@ -164,19 +163,23 @@ export const Group: Story = () => {
 export const GroupMax: Story = () => {
   return (
     <>
-      <For each={["solid", "subtle", "surface", "outline"]}>
+      <For each={["solid", "subtle", "surface", "outline"] as const}>
         {(variant, index) => (
           <AvatarGroup key={index} variant={variant} max={3}>
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar key={index} name="Hirotomo Yamada" />
+                <Avatar
+                  key={index}
+                  name="Hirotomo Yamada"
+                  bg={variant === "outline" ? "bg" : undefined}
+                />
               ))}
           </AvatarGroup>
         )}
       </For>
 
-      <For each={["xs", "sm", "md", "lg", "xl"]}>
+      <For each={["xs", "sm", "md", "lg", "xl"] as const}>
         {(size, index) => (
           <AvatarGroup key={index} size={size} max={3}>
             {Array(5)

@@ -1,4 +1,4 @@
-import { act, renderHook, waitFor } from "../../../test"
+import { act, renderHook } from "#test"
 import { useClipboard } from "./"
 
 describe("useClipboard", () => {
@@ -35,6 +35,14 @@ describe("useClipboard", () => {
     })
   })
 
+  beforeEach(() => {
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   afterAll(() => {
     Object.defineProperty(window, "clipboardData", {
       value: defaultClipboardData,
@@ -67,12 +75,10 @@ describe("useClipboard", () => {
     })
     expect(result.current.copied).toBeTruthy()
 
-    waitFor(
-      () => {
-        expect(result.current.copied).toBeFalsy()
-      },
-      { timeout: 1500 },
-    )
+    act(() => {
+      vi.advanceTimersByTime(1500)
+    })
+    expect(result.current.copied).toBeFalsy()
   })
 
   test("copied returns to false after the specified timeout", () => {
@@ -82,12 +88,10 @@ describe("useClipboard", () => {
     })
     expect(result.current.copied).toBeTruthy()
 
-    waitFor(
-      () => {
-        expect(result.current.copied).toBeFalsy()
-      },
-      { timeout: 2000 },
-    )
+    act(() => {
+      vi.advanceTimersByTime(2000)
+    })
+    expect(result.current.copied).toBeFalsy()
   })
 
   test("copied returns to false after the specified timeout with number", () => {
@@ -97,12 +101,10 @@ describe("useClipboard", () => {
     })
     expect(result.current.copied).toBeTruthy()
 
-    waitFor(
-      () => {
-        expect(result.current.copied).toBeFalsy()
-      },
-      { timeout: 2000 },
-    )
+    act(() => {
+      vi.advanceTimersByTime(2000)
+    })
+    expect(result.current.copied).toBeFalsy()
   })
 
   test("value is updated when new value is copied", () => {

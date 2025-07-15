@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { Button } from "../button"
 import { Drawer } from "./"
 
@@ -44,29 +44,18 @@ describe("<Drawer />", () => {
     await a11y(<TestComponent />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Drawer.Root.displayName).toBe("DrawerRoot")
-    expect(Drawer.Root.__ui__).toBe("DrawerRoot")
     expect(Drawer.Overlay.displayName).toBe("DrawerOverlay")
-    expect(Drawer.Overlay.__ui__).toBe("DrawerOverlay")
     expect(Drawer.OpenTrigger.displayName).toBe("DrawerOpenTrigger")
-    expect(Drawer.OpenTrigger.__ui__).toBe("DrawerOpenTrigger")
     expect(Drawer.CloseTrigger.displayName).toBe("DrawerCloseTrigger")
-    expect(Drawer.CloseTrigger.__ui__).toBe("DrawerCloseTrigger")
     expect(Drawer.CloseButton.displayName).toBe("DrawerCloseButton")
-    expect(Drawer.CloseButton.__ui__).toBe("DrawerCloseButton")
     expect(Drawer.Content.displayName).toBe("DrawerContent")
-    expect(Drawer.Content.__ui__).toBe("DrawerContent")
     expect(Drawer.DragBar.displayName).toBe("DrawerDragBar")
-    expect(Drawer.DragBar.__ui__).toBe("DrawerDragBar")
     expect(Drawer.Header.displayName).toBe("DrawerHeader")
-    expect(Drawer.Header.__ui__).toBe("DrawerHeader")
     expect(Drawer.Title.displayName).toBe("DrawerTitle")
-    expect(Drawer.Title.__ui__).toBe("DrawerTitle")
     expect(Drawer.Body.displayName).toBe("DrawerBody")
-    expect(Drawer.Body.__ui__).toBe("DrawerBody")
     expect(Drawer.Footer.displayName).toBe("DrawerFooter")
-    expect(Drawer.Footer.__ui__).toBe("DrawerFooter")
   })
 
   test("sets `className` correctly", () => {

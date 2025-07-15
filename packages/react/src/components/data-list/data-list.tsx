@@ -1,8 +1,10 @@
+"use client"
+
 import type { ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { DataListStyle } from "./data-list.style"
 import { useMemo, useState } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import {
   getValidChildren,
   isArray,
@@ -32,7 +34,7 @@ const getComputeCol = (items: DataListItemProps[]) => {
 }
 
 export interface DataListRootProps
-  extends HTMLUIProps<"dl">,
+  extends HTMLStyledProps<"dl">,
     ThemeProps<DataListStyle> {
   /**
    * The number of columns.
@@ -53,25 +55,27 @@ export interface DataListRootProps
   termProps?: DataListTermProps
 }
 
-interface DataListContext
+interface ComponentContext
   extends Pick<DataListRootProps, "descriptionProps" | "termProps"> {}
 
-export const {
-  ComponentContext: DataListContext,
+const {
+  ComponentContext,
   PropsContext: DataListPropsContext,
-  useComponentContext: useDataListContext,
+  useComponentContext,
   usePropsContext: useDataListPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<DataListRootProps, DataListStyle, DataListContext>(
+} = createSlotComponent<DataListRootProps, DataListStyle, ComponentContext>(
   "data-list",
   dataListStyle,
 )
 
+export { DataListPropsContext, useDataListPropsContext }
+
 /**
  * `DataList` is used to display a list of data items.
  *
- * @see Docs https://yamada-ui.com/components/data-list
+ * @see https://yamada-ui.com/components/data-list
  */
 export const DataListRoot = withProvider(
   ({
@@ -112,17 +116,17 @@ export const DataListRoot = withProvider(
     }, [items, colProp])
 
     return (
-      <DataListContext value={context}>
-        <ui.dl style={{ "--col": col, ...style }} {...rest}>
+      <ComponentContext value={context}>
+        <styled.dl style={{ "--col": col, ...style }} {...rest}>
           {children ?? computedChildren}
-        </ui.dl>
-      </DataListContext>
+        </styled.dl>
+      </ComponentContext>
     )
   },
   "root",
 )()
 
-export interface DataListItemProps extends HTMLUIProps {
+export interface DataListItemProps extends HTMLStyledProps {
   /**
    * The data list description to use.
    */
@@ -150,7 +154,7 @@ export const DataListItem = withContext<"div", DataListItemProps>(
     termProps: customTermProps,
     ...rest
   }) => {
-    const { descriptionProps, termProps } = useDataListContext()
+    const { descriptionProps, termProps } = useComponentContext()
 
     const validChildren = getValidChildren(children)
     const customTerms = pickChildren(validChildren, DataListTerm)
@@ -160,7 +164,7 @@ export const DataListItem = withContext<"div", DataListItemProps>(
       : children
 
     return (
-      <ui.div {...rest}>
+      <styled.div {...rest}>
         {!isEmpty(customTerms) ? (
           customTerms
         ) : isArray(term) ? (
@@ -197,17 +201,17 @@ export const DataListItem = withContext<"div", DataListItemProps>(
         )}
 
         {computedChildren}
-      </ui.div>
+      </styled.div>
     )
   },
   "item",
 )()
 
-export interface DataListTermProps extends HTMLUIProps<"dt"> {}
+export interface DataListTermProps extends HTMLStyledProps<"dt"> {}
 
 export const DataListTerm = withContext<"dt", DataListTermProps>("dt", "term")()
 
-export interface DataListDescriptionProps extends HTMLUIProps<"dd"> {}
+export interface DataListDescriptionProps extends HTMLStyledProps<"dd"> {}
 
 export const DataListDescription = withContext<"dd", DataListDescriptionProps>(
   "dd",

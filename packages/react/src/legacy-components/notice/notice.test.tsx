@@ -1,11 +1,5 @@
 import { useRef, useState } from "react"
-import {
-  a11y,
-  render,
-  screen,
-  waitFor,
-  waitForElementToBeRemoved,
-} from "../../../test"
+import { a11y, render, screen, waitFor, waitForElementToBeRemoved } from "#test"
 import { useNotice } from "./notice"
 
 describe("useNotice()", () => {

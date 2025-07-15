@@ -1,21 +1,25 @@
-import type { HTMLUIProps, ThemeProps } from "../../core"
+"use client"
+
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { HeadingStyle } from "./heading.style"
 import { createComponent } from "../../core"
 import { headingStyle } from "./heading.style"
 
 export interface HeadingProps
-  extends HTMLUIProps<"h1">,
+  extends HTMLStyledProps<"h1">,
     ThemeProps<HeadingStyle> {}
 
-export const {
+const {
   PropsContext: HeadingPropsContext,
   usePropsContext: useHeadingPropsContext,
   withContext,
 } = createComponent<HeadingProps, HeadingStyle>("heading", headingStyle)
 
+export { HeadingPropsContext, useHeadingPropsContext }
+
 /**
  * `Heading` is a component that represents section headings. By default, it renders an `h1` element.
  *
- * @see Docs https://yamada-ui.com/components/heading
+ * @see https://yamada-ui.com/components/heading
  */
 export const Heading = withContext("h1")()

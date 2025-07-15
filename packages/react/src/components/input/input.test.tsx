@@ -1,15 +1,57 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { Input, InputGroup } from "./"
 
 describe("<Input />", () => {
   test("passes a11y test", async () => {
-    await a11y(<Input />, {
-      axeOptions: {
-        rules: {
-          label: { enabled: false },
+    await a11y(
+      <InputGroup.Root>
+        <InputGroup.Element>Hello</InputGroup.Element>
+        <Input />
+        <InputGroup.Addon>World</InputGroup.Addon>
+      </InputGroup.Root>,
+      {
+        axeOptions: {
+          rules: {
+            label: { enabled: false },
+          },
         },
       },
-    })
+    )
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Input.displayName).toBe("Input")
+    expect(InputGroup.Root.name).toBe("InputGroupRoot")
+    expect(InputGroup.Element.displayName).toBe("InputElement")
+    expect(InputGroup.Addon.displayName).toBe("InputAddon")
+  })
+
+  test("sets `className` correctly", () => {
+    render(
+      <InputGroup.Root data-testid="input-group">
+        <InputGroup.Element>Hello</InputGroup.Element>
+        <Input />
+        <InputGroup.Addon>World</InputGroup.Addon>
+      </InputGroup.Root>,
+    )
+    expect(screen.getByTestId("input-group")).toHaveClass("ui-group")
+    expect(screen.getByRole("textbox")).toHaveClass("ui-input")
+    expect(screen.getByText("Hello")).toHaveClass("ui-input-element")
+    expect(screen.getByText("World")).toHaveClass("ui-input-addon")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(
+      <InputGroup.Root data-testid="input-group">
+        <InputGroup.Element>Hello</InputGroup.Element>
+        <Input />
+        <InputGroup.Addon>World</InputGroup.Addon>
+      </InputGroup.Root>,
+    )
+    expect(screen.getByTestId("input-group").tagName).toBe("DIV")
+    expect(screen.getByRole("textbox").tagName).toBe("INPUT")
+    expect(screen.getByText("Hello").tagName).toBe("DIV")
+    expect(screen.getByText("World").tagName).toBe("DIV")
   })
 
   test("Elements inside input render correctly", async () => {

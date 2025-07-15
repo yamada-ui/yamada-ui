@@ -1,6 +1,5 @@
 export {
   EditableCancelTrigger as CancelTrigger,
-  EditableContext as Context,
   EditableControl as Control,
   EditableEditTrigger as EditTrigger,
   EditableInput as Input,
@@ -9,7 +8,6 @@ export {
   EditableRoot as Root,
   EditableSubmitTrigger as SubmitTrigger,
   EditableTextarea as Textarea,
-  useEditableContext as useContext,
   useEditablePropsContext as usePropsContext,
 } from "./editable"
 export type {
@@ -22,3 +20,7 @@ export type {
   EditableSubmitTriggerProps as SubmitTriggerProps,
   EditableTextareaProps as TextareaProps,
 } from "./editable"
+export {
+  EditableContext as Context,
+  useEditableContext as useContext,
+} from "./use-editable"

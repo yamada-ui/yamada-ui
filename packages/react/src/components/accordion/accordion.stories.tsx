@@ -1,6 +1,6 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { useState } from "react"
-import { PropsTable } from "../../../storybook/components"
 import { GhostIcon, MinusIcon, PlusIcon } from "../icon"
 import { Accordion } from "./"
 
@@ -33,7 +33,7 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <PropsTable variant="column" rows={["plain", "panel"]}>
+    <PropsTable variant="stack" rows={["plain", "panel"]}>
       {(_, row, key) => (
         <Accordion.Root key={key} variant={row}>
           <Accordion.Item button="孫悟空少年編">

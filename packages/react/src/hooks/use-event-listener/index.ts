@@ -1,53 +1,44 @@
+"use client"
+
+import type { EventMap, EventType } from "../../utils"
 import { useCallback, useEffect, useRef } from "react"
-import { useCallbackRef } from "../../utils"
+import { useEnvironment } from "../../core"
+import { isFunction, useCallbackRef } from "../../utils"
 
-type Events =
-  | keyof DocumentEventMap
-  | keyof GlobalEventHandlersEventMap
-  | keyof WindowEventMap
-type Target = (() => EventTarget | null) | EventTarget | null
-type Options = AddEventListenerOptions | boolean
-type Handler<E extends Events> = E extends keyof DocumentEventMap
-  ? (event: DocumentEventMap[E]) => void
-  : E extends keyof WindowEventMap
-    ? (event: WindowEventMap[E]) => void
-    : E extends keyof GlobalEventHandlersEventMap
-      ? (event: GlobalEventHandlersEventMap[E]) => void
-      : ((event: Event) => void) | undefined
-
-export const useEventListener = <E extends Events>(
-  target: Target,
-  event: E,
-  handler: Handler<E>,
-  options?: Options,
+export const useEventListener = <Y extends EventType>(
+  target: (() => EventTarget | null) | EventTarget | null | undefined,
+  ev: Y,
+  handler: (ev: EventMap[Y]) => void,
+  options?: AddEventListenerOptions | boolean,
 ) => {
+  const { getDocument } = useEnvironment()
   const listener = useCallbackRef(handler)
 
   useEffect(() => {
-    const el = typeof target === "function" ? target() : (target ?? document)
+    const el = isFunction(target) ? target() : (target ?? getDocument())
 
     if (!el) return
 
     el.addEventListener(
-      event,
+      ev,
       listener as EventListenerOrEventListenerObject,
       options,
     )
 
     return () => {
       el.removeEventListener(
-        event,
+        ev,
         listener as EventListenerOrEventListenerObject,
         options,
       )
     }
-  }, [event, target, options, listener, handler])
+  }, [ev, target, options, listener, handler, getDocument])
 
   return () => {
-    const el = typeof target === "function" ? target() : (target ?? document)
+    const el = isFunction(target) ? target() : (target ?? document)
 
     el?.removeEventListener(
-      event,
+      ev,
       listener as EventListenerOrEventListenerObject,
       options,
     )
@@ -59,16 +50,16 @@ export const useEventListeners = () => {
   const currentListeners = listeners.current
 
   const add = useCallback(
-    <E extends Events>(
+    <Y extends EventType>(
       el: EventTarget,
-      event: E,
+      ev: Y,
       listener: any,
       options: AddEventListenerOptions | boolean,
     ) => {
-      listeners.current.set(listener, { el, event, options })
+      listeners.current.set(listener, { el, ev, options })
 
       el.addEventListener(
-        event,
+        ev,
         listener as EventListenerOrEventListenerObject,
         options,
       )
@@ -77,14 +68,14 @@ export const useEventListeners = () => {
   )
 
   const remove = useCallback(
-    <E extends Events>(
+    <Y extends EventType>(
       el: EventTarget,
-      event: E,
+      ev: Y,
       listener: any,
       options: boolean | EventListenerOptions,
     ) => {
       el.removeEventListener(
-        event,
+        ev,
         listener as EventListenerOrEventListenerObject,
         options,
       )
@@ -96,8 +87,8 @@ export const useEventListeners = () => {
 
   useEffect(
     () => () => {
-      currentListeners.forEach(({ el, event, options }, key) =>
-        remove(el, event, key, options),
+      currentListeners.forEach(({ el, ev, options }, key) =>
+        remove(el, ev, key, options),
       )
     },
     [remove, currentListeners],

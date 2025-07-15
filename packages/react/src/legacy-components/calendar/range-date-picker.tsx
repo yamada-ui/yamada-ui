@@ -90,7 +90,7 @@ export interface RangeDatePickerProps
 /**
  * `RangeDatePicker` is a component used for users to select a range of dates.
  *
- * @see Docs https://yamada-ui.com/components/forms/range-date-picker
+ * @see https://yamada-ui.com/components/forms/range-date-picker
  */
 export const RangeDatePicker = forwardRef<RangeDatePickerProps, "input">(
   (props, ref) => {

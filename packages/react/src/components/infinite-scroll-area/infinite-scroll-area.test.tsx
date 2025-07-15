@@ -1,7 +1,7 @@
 import type { InfiniteScrollAreaProps } from "."
+import { a11y, fireEvent, render, waitFor } from "#test"
 import { useRef, useState } from "react"
 import { InfiniteScrollArea } from "."
-import { a11y, fireEvent, render, waitFor } from "../../../test"
 
 describe("<InfiniteScrollArea />", () => {
   const defaultIntersectionObserver = global.IntersectionObserver
@@ -21,7 +21,7 @@ describe("<InfiniteScrollArea />", () => {
   })
 
   test("InfiniteScrollArea renders correctly", async () => {
-    const { container } = render(
+    await a11y(
       <InfiniteScrollArea loading={<>Loading…</>}>
         {Array(50)
           .fill(0)
@@ -32,7 +32,36 @@ describe("<InfiniteScrollArea />", () => {
           ))}
       </InfiniteScrollArea>,
     )
-    await a11y(container)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(InfiniteScrollArea.displayName).toBe("InfiniteScrollAreaRoot")
+  })
+
+  test("sets `className` correctly", () => {
+    const { container } = render(
+      <InfiniteScrollArea loading={<>Loading…</>}>
+        {Array(50)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index}>{index}</div>
+          ))}
+      </InfiniteScrollArea>,
+    )
+    expect(container.firstChild).toHaveClass("ui-infinite-scroll-area__root")
+  })
+
+  test("renders HTML tag correctly", () => {
+    const { container } = render(
+      <InfiniteScrollArea loading={<>Loading…</>}>
+        {Array(50)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index}>{index}</div>
+          ))}
+      </InfiniteScrollArea>,
+    )
+    expect(container.firstChild?.nodeName).toBe("DIV")
   })
 
   test("InfiniteScrollArea renders with initialLoad correctly", () => {

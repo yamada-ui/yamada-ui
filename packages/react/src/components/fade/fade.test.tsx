@@ -1,5 +1,5 @@
+import { a11y, render, screen, waitFor } from "#test"
 import { useState } from "react"
-import { a11y, render, screen, waitFor } from "../../../test"
 import { Fade } from "./fade"
 
 describe("<Fade />", () => {
@@ -7,9 +7,8 @@ describe("<Fade />", () => {
     await a11y(<Fade />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Fade.displayName).toBe("Fade")
-    expect(Fade.__ui__).toBe("Fade")
   })
 
   test("sets `className` correctly", () => {

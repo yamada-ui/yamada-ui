@@ -1,4 +1,4 @@
-import { a11y, fireEvent, render, screen, waitFor } from "../../../test"
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { RadialChart } from "./"
 
 describe("<RadialChart />", () => {

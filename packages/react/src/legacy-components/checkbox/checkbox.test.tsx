@@ -1,6 +1,6 @@
 import type { ChangeEvent } from "react"
 import type { CheckboxItem } from "./"
-import { a11y, act, render, renderHook, screen } from "../../../test"
+import { a11y, act, render, renderHook, screen } from "#test"
 import { FormControl } from "../form-control"
 import { Checkbox, CheckboxGroup, useCheckboxGroup } from "./"
 

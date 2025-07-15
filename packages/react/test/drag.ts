@@ -1,5 +1,5 @@
 import type { UserEvent } from "@testing-library/user-event"
-import { runIfFunc } from "@yamada-ui/utils"
+import { runIfFn } from "@yamada-ui/utils"
 import { wait } from "./utils"
 
 const DEFAULT_COUNT = 11
@@ -52,30 +52,27 @@ const defaultCoords = (i: number) => {
   return !isEnd ? { x: 0, y: i * 100 } : undefined
 }
 
-export const drag =
-  (user: UserEvent) =>
-  async ({
-    target,
-    coords: _coords = defaultCoords,
-    count = DEFAULT_COUNT,
-    interval = 50,
-    keys: _keys = defaultKeys,
-  }: DragOptions) => {
-    const timeline = [...Array(count).keys()]
+export function drag(user: UserEvent) {
+  return async (options: DragOptions) => {
+    const timeline = [...Array(options.count ?? DEFAULT_COUNT).keys()]
+
+    options.keys ??= defaultKeys
+    options.coords ??= defaultCoords
 
     for (const i of timeline) {
       const isStart = i === 0
-      const keys = runIfFunc(_keys, i)
-      const coords = runIfFunc(_coords, i)
+      const keys = runIfFn(options.keys, i)
+      const coords = runIfFn(options.coords, i)
 
       const input: PointerInput = {}
 
-      if (isStart) input.target = target
+      if (isStart) input.target = options.target
       if (keys) input.keys = keys
       if (coords) input.coords = coords
 
       await user.pointer(input)
 
-      await wait(interval)
+      await wait(options.interval ?? 50)
     }
   }
+}

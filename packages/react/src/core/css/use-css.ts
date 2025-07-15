@@ -1,17 +1,21 @@
-import type { StyledTheme } from "../theme"
-import type { CSSObject, CSSObjectOrFunc } from "./index.types"
+import type { StyledTheme, System, UsageTheme } from "../system"
+import type { CSSObject, CSSObjectOrFunction } from "./index.types"
 import { css as emotionCSS } from "@emotion/css"
 import { useMemo } from "react"
-import { useTheme } from "../../providers/theme-provider"
+import { useSystem, useTheme } from "../system"
 import { css } from "./css"
 
-export const useCSS = (cssObject: CSSObject | CSSObjectOrFunc = {}) => {
-  const { theme } = useTheme()
+export const useCSS = (cssObject: CSSObject | CSSObjectOrFunction = {}) => {
+  const system = useSystem()
+  const { theme } = useTheme<UsageTheme>()
 
-  return useMemo(() => getCSS(theme)(cssObject), [cssObject, theme])
+  return useMemo(
+    () => getCSS(system, theme)(cssObject),
+    [cssObject, system, theme],
+  )
 }
 
 export const getCSS =
-  (theme: StyledTheme) =>
-  (cssObject: CSSObject | CSSObjectOrFunc = {}) =>
-    emotionCSS(css(theme)(cssObject))
+  (system: System, theme: StyledTheme<UsageTheme>) =>
+  (cssObject: CSSObject | CSSObjectOrFunction = {}) =>
+    emotionCSS(css(system, theme)(cssObject))

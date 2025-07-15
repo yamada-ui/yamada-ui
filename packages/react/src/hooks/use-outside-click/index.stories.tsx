@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useRef, useState } from "react"
 import { useOutsideClick } from "."
 import { Button } from "../../components/button"
@@ -12,18 +12,18 @@ export default meta
 
 export const Basic = () => {
   const ref = useRef<HTMLDivElement>(null)
-  const [isOpen, setIsOpen] = useState(false)
+  const [open, setOpen] = useState(false)
 
   useOutsideClick({
     ref,
-    handler: () => setIsOpen(false),
+    handler: () => setOpen(false),
   })
 
-  return isOpen ? (
+  return open ? (
     <Center ref={ref} bg="danger" color="white" h="10" px="4" rounded="md">
       Hey, Click anywhere outside of me to close.
     </Center>
   ) : (
-    <Button onClick={() => setIsOpen(true)}>Please Click</Button>
+    <Button onClick={() => setOpen(true)}>Please Click</Button>
   )
 }

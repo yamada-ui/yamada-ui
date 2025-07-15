@@ -1,14 +1,14 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useState } from "react"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { noop } from "../../utils"
 import { Button } from "../button"
 import { Container } from "../container"
-import { Wrap } from "../flex"
 import { For } from "../for"
 import { Heading } from "../heading"
 import { Image } from "../image"
 import { Text } from "../text"
+import { Wrap } from "../wrap"
 import { Drawer } from "./"
 
 type Story = StoryFn<typeof Drawer.Root>
@@ -69,7 +69,7 @@ export const Size: Story = () => {
   return (
     <>
       <Wrap gap="md">
-        <For each={["xs", "sm", "md", "lg", "xl", "full"]}>
+        <For each={["xs", "sm", "md", "lg", "xl", "full"] as const}>
           {(size) => (
             <Button
               key={size}
@@ -137,13 +137,17 @@ export const Duration: Story = () => {
 
 export const Placement: Story = () => {
   const [placement, setPlacement] =
-    useState<Drawer.RootProps["placement"]>("right")
+    useState<Drawer.RootProps["placement"]>("inline-end")
   const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Wrap gap="md">
-        <For each={["top", "bottom", "left", "right"] as const}>
+        <For
+          each={
+            ["block-start", "block-end", "inline-start", "inline-end"] as const
+          }
+        >
           {(placement) => (
             <Button
               key={placement}
@@ -183,13 +187,17 @@ export const Placement: Story = () => {
 
 export const CloseOnDrag: Story = () => {
   const [placement, setPlacement] =
-    useState<Drawer.RootProps["placement"]>("right")
+    useState<Drawer.RootProps["placement"]>("inline-end")
   const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Wrap gap="md">
-        <For each={["top", "bottom", "left", "right"] as const}>
+        <For
+          each={
+            ["block-start", "block-end", "inline-start", "inline-end"] as const
+          }
+        >
           {(placement) => (
             <Button
               key={placement}

@@ -1,9 +1,11 @@
+"use client"
+
 import { CalendarArrowDown } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
  * `CalendarArrowDownIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const CalendarArrowDownIcon = component(Icon)({ as: CalendarArrowDown })

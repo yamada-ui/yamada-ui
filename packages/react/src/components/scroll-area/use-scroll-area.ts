@@ -1,8 +1,16 @@
+"use client"
+
 import type { UIEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
-import { dataAttr, handlerAll, isMac, vendor } from "@yamada-ui/utils"
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
-import { mergeRefs, useSafeLayoutEffect } from "../../utils"
+import {
+  dataAttr,
+  handlerAll,
+  isMac,
+  mergeRefs,
+  useSafeLayoutEffect,
+  vendor,
+} from "../../utils"
 
 export interface UseScrollAreaProps extends HTMLProps {
   /**
@@ -30,7 +38,7 @@ export const useScrollArea = ({
   scrollHideDelay = 1000,
   onScrollPositionChange,
   ...rest
-}: UseScrollAreaProps) => {
+}: UseScrollAreaProps = {}) => {
   const [isHovered, setIsHovered] = useState<boolean>(false)
   const [isScrolling, setIsScrolling] = useState<boolean>(false)
   const isAlways = type === "always"

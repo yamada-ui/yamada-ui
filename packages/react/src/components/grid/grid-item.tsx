@@ -1,8 +1,12 @@
-import type { CSSProps, HTMLUIProps, StyleValue } from "../../core"
+"use client"
+
+import type { CSSProps, HTMLStyledProps, StyleValue } from "../../core"
+import type { GridItemStyle } from "./grid-item.style"
 import { createComponent } from "../../core"
 import { replaceObject } from "../../utils"
+import { gridItemStyle } from "./grid-item.style"
 
-interface GridItemOptions {
+export interface GridItemProps extends HTMLStyledProps {
   /**
    * The CSS `grid-area` property.
    */
@@ -33,13 +37,13 @@ interface GridItemOptions {
   rowStart?: CSSProps["gridRowStart"]
 }
 
-export interface GridItemProps extends HTMLUIProps, GridItemOptions {}
-
-export const {
+const {
   PropsContext: GridItemPropsContext,
   usePropsContext: useGridItemPropsContext,
   withContext,
-} = createComponent<GridItemProps>("grid-item")
+} = createComponent<GridItemProps, GridItemStyle>("grid-item", gridItemStyle)
+
+export { GridItemPropsContext, useGridItemPropsContext }
 
 export const GridItem = withContext("div")(
   undefined,

@@ -1,35 +1,28 @@
-import type { ThemeTokens } from "../../core"
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { useTheme } from "../../providers/theme-provider"
-import { createdDom } from "../../utils"
+"use client"
+
+import type { Breakpoint } from "../../core"
+import { useCallback, useMemo, useRef, useSyncExternalStore } from "react"
+import { useEnvironment, useSystem } from "../../core"
+import { createdDom, isUndefined, noop } from "../../utils"
 
 /**
  * `useBreakpoint` is a custom hook that returns the current breakpoint.
  * This hook monitors changes in the window size and returns the appropriate value.
  *
- * @see Docs https://yamada-ui.com/hooks/use-breakpoint
+ * @see https://yamada-ui.com/hooks/use-breakpoint
  */
 export const useBreakpoint = () => {
   const animationFrameId = useRef(0)
-  const { theme } = useTheme()
-
-  const breakpoints = theme.__breakpoints
+  const { breakpoints, config } = useSystem()
+  const { getWindow } = useEnvironment()
   const {
     containerRef,
     direction = "down",
     identifier = "@media screen",
-  } = theme.__config?.breakpoint ?? {}
+  } = config.breakpoint ?? {}
   const hasContainer = !!containerRef
 
-  if (!breakpoints) {
-    console.warn(
-      "useBreakpoint: `breakpoints` is undefined. Seems you forgot to put theme in `breakpoints`",
-    )
-  }
-
   const queries = useMemo(() => {
-    if (!breakpoints) return []
-
     return breakpoints.queries.map(
       ({ breakpoint, maxW, minMaxQuery, minW }) => {
         const searchValue =
@@ -50,83 +43,90 @@ export const useBreakpoint = () => {
 
   const hasQueries = !!queries.length
 
-  const [breakpoint, setBreakpoint] = useState(() => {
-    if (!createdDom() || hasContainer || !hasQueries) return "base"
-
-    for (const { breakpoint, query } of queries) {
-      const mql = window.matchMedia(query)
-
-      if (mql.matches) return breakpoint
-    }
-  })
-
   const getBreakpoint = useCallback(
-    (width: number) => {
-      for (const { breakpoint, maxW, minW } of queries) {
-        if (direction !== "up") {
-          if ((minW ?? 0) <= width) return breakpoint
-        } else {
-          if (width <= (maxW ?? Infinity)) return breakpoint
+    (width?: number) => {
+      if (isUndefined(width)) {
+        const win = getWindow()
+
+        if (hasContainer || !hasQueries) return "base"
+
+        for (const { breakpoint, query } of queries) {
+          const mql = win?.matchMedia(query)
+
+          if (mql?.matches) return breakpoint
+        }
+      } else {
+        for (const { breakpoint, maxW, minW } of queries) {
+          if (direction !== "up") {
+            if ((minW ?? 0) <= width) return breakpoint
+          } else {
+            if (width <= (maxW ?? Infinity)) return breakpoint
+          }
         }
       }
 
       return "base"
     },
-    [queries, direction],
+    [direction, getWindow, hasContainer, hasQueries, queries],
   )
 
-  useEffect(() => {
-    if (!hasContainer || !hasQueries) return
+  const breakpointRef = useRef<Breakpoint>(getBreakpoint())
 
-    if (!createdDom()) return
+  const subscribe = useCallback(
+    (listener: () => void) => {
+      if (!hasContainer || !hasQueries) {
+        const observer = queries.map(({ breakpoint, query }): (() => void) => {
+          const mql = getWindow()?.matchMedia(query)
 
-    const observer = new ResizeObserver(([entry]) => {
-      if (!entry) return
+          const onChange = (e: MediaQueryListEvent) => {
+            if (e.matches) breakpointRef.current = breakpoint
 
-      cancelAnimationFrame(animationFrameId.current)
+            listener()
+          }
 
-      const { width } = entry.contentRect
+          mql?.addEventListener("change", onChange)
 
-      animationFrameId.current = requestAnimationFrame(() => {
-        const breakpoint = getBreakpoint(width)
+          return () => {
+            mql?.removeEventListener("change", onChange)
+          }
+        })
 
-        setBreakpoint(breakpoint)
-      })
-    })
+        return () => {
+          observer.forEach((unobserve) => unobserve())
+        }
+      } else if (createdDom()) {
+        const observer = new ResizeObserver(([entry]) => {
+          if (!entry) return
 
-    if (containerRef.current) observer.observe(containerRef.current)
+          cancelAnimationFrame(animationFrameId.current)
 
-    return () => {
-      observer.disconnect()
+          const { width } = entry.contentRect
 
-      if (process.env.NODE_ENV !== "test")
-        cancelAnimationFrame(animationFrameId.current)
-    }
-  }, [hasQueries, hasContainer, containerRef, getBreakpoint])
+          breakpointRef.current = getBreakpoint(width)
 
-  useEffect(() => {
-    if (hasContainer || !hasQueries) return
+          animationFrameId.current = requestAnimationFrame(listener)
+        })
 
-    const observer = queries.map(({ breakpoint, query }): (() => void) => {
-      const mql = window.matchMedia(query)
+        if (containerRef.current) observer.observe(containerRef.current)
 
-      const onChange = (e: MediaQueryListEvent) => {
-        if (e.matches) setBreakpoint(breakpoint)
+        return () => {
+          observer.disconnect()
+
+          if (process.env.NODE_ENV !== "test")
+            cancelAnimationFrame(animationFrameId.current)
+        }
+      } else {
+        return noop
       }
+    },
+    [containerRef, getBreakpoint, getWindow, hasContainer, hasQueries, queries],
+  )
 
-      if (typeof mql.addEventListener === "function")
-        mql.addEventListener("change", onChange)
+  const getSnapshot = useCallback(() => {
+    return breakpointRef.current
+  }, [])
 
-      return () => {
-        if (typeof mql.removeEventListener === "function")
-          mql.removeEventListener("change", onChange)
-      }
-    })
+  const breakpoint = useSyncExternalStore(subscribe, getSnapshot, getSnapshot)
 
-    return () => {
-      observer.forEach((unobserve) => unobserve())
-    }
-  }, [queries, hasQueries, hasContainer])
-
-  return breakpoint as ThemeTokens["breakpoints"]
+  return breakpoint
 }

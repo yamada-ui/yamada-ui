@@ -1,18 +1,20 @@
+"use client"
+
 import type { ReactNode } from "react"
-import type { HTMLUIProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { BlockquoteStyle } from "./blockquote.style"
 import { useMemo } from "react"
-import { createSlotComponent, ui } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { findChild, getValidChildren } from "../../utils"
 import { QuoteIcon } from "../icon"
 import { blockquoteStyle } from "./blockquote.style"
 
-interface BlockquoteContext
+interface ComponentContext
   extends Pick<BlockquoteContentProps, "citeUrl">,
     Pick<BlockquoteCaptionProps, "withDash"> {}
 
 export interface BlockquoteRootProps
-  extends Omit<HTMLUIProps<"figure">, "cite">,
+  extends Omit<HTMLStyledProps<"figure">, "cite">,
     ThemeProps<BlockquoteStyle>,
     Pick<BlockquoteContentProps, "citeUrl">,
     Pick<BlockquoteCaptionProps, "withDash"> {
@@ -27,34 +29,35 @@ export interface BlockquoteRootProps
   /**
    * The props for the `BlockquoteCaption` component.
    */
-  captionProps?: HTMLUIProps<"figcaption">
+  captionProps?: HTMLStyledProps<"figcaption">
   /**
    * The props for the `BlockquoteCite` component.
    */
-  citeProps?: HTMLUIProps<"cite">
+  citeProps?: HTMLStyledProps<"cite">
   /**
    * The props for the `BlockquoteContent` component.
    */
-  contentProps?: HTMLUIProps<"blockquote">
+  contentProps?: HTMLStyledProps<"blockquote">
 }
 
-export const {
-  ComponentContext: BlockquoteContext,
+const {
+  ComponentContext,
   PropsContext: BlockquotePropsContext,
-  useComponentContext: useBlockquoteContext,
+  useComponentContext,
   usePropsContext: useBlockquotePropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<
-  BlockquoteRootProps,
-  BlockquoteStyle,
-  BlockquoteContext
->("blockquote", blockquoteStyle)
+} = createSlotComponent<BlockquoteRootProps, BlockquoteStyle, ComponentContext>(
+  "blockquote",
+  blockquoteStyle,
+)
+
+export { BlockquotePropsContext, useBlockquotePropsContext }
 
 /**
  * `Blockquote` is a component that represents a blockquote. By default, it renders a `blockquote` element.
  *
- * @see Docs https://yamada-ui.com/components/blockquote
+ * @see https://yamada-ui.com/components/blockquote
  */
 export const BlockquoteRoot = withProvider<"figure", BlockquoteRootProps>(
   ({
@@ -75,8 +78,8 @@ export const BlockquoteRoot = withProvider<"figure", BlockquoteRootProps>(
     const context = useMemo(() => ({ citeUrl, withDash }), [citeUrl, withDash])
 
     return (
-      <BlockquoteContext value={context}>
-        <ui.figure {...rest}>
+      <ComponentContext value={context}>
+        <styled.figure {...rest}>
           {icon}
 
           {customBlockquoteContent ?? (
@@ -89,23 +92,19 @@ export const BlockquoteRoot = withProvider<"figure", BlockquoteRootProps>(
                 <BlockquoteCite {...citeProps}>{cite}</BlockquoteCite>
               </BlockquoteCaption>
             ) : null)}
-        </ui.figure>
-      </BlockquoteContext>
+        </styled.figure>
+      </ComponentContext>
     )
   },
   "root",
 )()
 
-interface BlockquoteContentOptions {
+export interface BlockquoteContentProps extends HTMLStyledProps<"blockquote"> {
   /**
    * The URL of the citation of the blockquote.
    */
   citeUrl?: string
 }
-
-export interface BlockquoteContentProps
-  extends HTMLUIProps<"blockquote">,
-    BlockquoteContentOptions {}
 
 export const BlockquoteContent = withContext<
   "blockquote",
@@ -113,13 +112,13 @@ export const BlockquoteContent = withContext<
 >("blockquote", "content")(
   undefined,
   ({ cite, citeUrl: citeUrlProp, ...rest }) => {
-    const { citeUrl } = useBlockquoteContext()
+    const { citeUrl } = useComponentContext()
 
     return { ...rest, citeurl: cite ?? citeUrlProp ?? citeUrl }
   },
 )
 
-interface BlockquoteCaptionOptions {
+export interface BlockquoteCaptionProps extends HTMLStyledProps<"figcaption"> {
   /**
    * If `true`, the dash will be shown.
    *
@@ -128,17 +127,13 @@ interface BlockquoteCaptionOptions {
   withDash?: boolean
 }
 
-export interface BlockquoteCaptionProps
-  extends HTMLUIProps<"figcaption">,
-    BlockquoteCaptionOptions {}
-
 export const BlockquoteCaption = withContext<
   "figcaption",
   BlockquoteCaptionProps
 >("figcaption", "caption")(
   undefined,
   ({ children, withDash: withDashProp, ...rest }) => {
-    const { withDash } = useBlockquoteContext()
+    const { withDash } = useComponentContext()
 
     withDashProp ??= withDash
 
@@ -153,16 +148,16 @@ export const BlockquoteCaption = withContext<
   },
 )
 
-export interface BlockquoteCiteProps extends HTMLUIProps<"cite"> {}
+export interface BlockquoteCiteProps extends HTMLStyledProps<"cite"> {}
 
 export const BlockquoteCite = withContext<"cite", BlockquoteCiteProps>(
   "cite",
   "cite",
 )()
 
-export interface BlockquoteIconProps extends HTMLUIProps<"svg"> {}
+export interface BlockquoteIconProps extends HTMLStyledProps<"svg"> {}
 
 export const BlockquoteIcon = withContext<"svg", BlockquoteIconProps>(
   QuoteIcon,
   "icon",
-)({ "data-icon": "" })
+)()

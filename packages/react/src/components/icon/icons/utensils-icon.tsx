@@ -1,9 +1,11 @@
+"use client"
+
 import { Utensils } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
  * `UtensilsIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const UtensilsIcon = component(Icon)({ as: Utensils })

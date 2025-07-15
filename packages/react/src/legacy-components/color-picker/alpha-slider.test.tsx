@@ -1,35 +1,7 @@
-import { drag, fireEvent, render, screen, waitFor } from "../../../test"
+import { drag, fireEvent, render, screen, waitFor } from "#test"
 import { AlphaSlider } from "./"
 
 describe("<AlphaSlider />", () => {
-  beforeAll(() => {
-    Object.defineProperties(MouseEvent.prototype, {
-      pageX: {
-        configurable: true,
-        get() {
-          return this.clientX
-        },
-      },
-      pageY: {
-        configurable: true,
-        get() {
-          return this.clientY
-        },
-      },
-    })
-  })
-
-  afterAll(() => {
-    Object.defineProperty(MouseEvent.prototype, "pageX", {
-      configurable: true,
-      value: undefined,
-    })
-    Object.defineProperty(MouseEvent.prototype, "pageY", {
-      configurable: true,
-      value: undefined,
-    })
-  })
-
   test("AlphaSlider renders correctly", () => {
     render(<AlphaSlider data-testid="alphaSlider" />)
 

@@ -1,9 +1,7 @@
+export * from "./visually-hidden.style"
 export {
   useVisuallyHiddenPropsContext,
   VisuallyHidden,
-  visuallyHiddenPropsContext,
+  VisuallyHiddenPropsContext,
 } from "./visually-hidden"
-
 export type { VisuallyHiddenProps } from "./visually-hidden"
-
-export * from "./visually-hidden.style"

@@ -1,11 +1,11 @@
-import type { Meta } from "@storybook/react"
-import { App } from "../../../storybook/components"
+import type { Meta } from "@storybook/react-vite"
 import { Button } from "../button"
-import { Wrap } from "../flex"
 import { Text } from "../text"
+import { Wrap } from "../wrap"
 import { useLoading } from "./loading-provider"
 
 const meta: Meta = {
+  parameters: { layout: "centered" },
   title: "Hooks / useLoading",
 }
 
@@ -20,15 +20,13 @@ export const Basic = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <App>
-      <Wrap gap="md">
-        <Button onClick={() => screen.start()}>Start screen loading</Button>
-        <Button onClick={() => page.start()}>Start page loading</Button>
-        <Button onClick={() => background.start()}>
-          Start background loading
-        </Button>
-      </Wrap>
-    </App>
+    <Wrap gap="md">
+      <Button onClick={() => screen.start()}>Start screen loading</Button>
+      <Button onClick={() => page.start()}>Start page loading</Button>
+      <Button onClick={() => background.start()}>
+        Start background loading
+      </Button>
+    </Wrap>
   )
 }
 
@@ -36,19 +34,17 @@ export const Timeout = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <App>
-      <Wrap gap="md">
-        <Button onClick={() => screen.start({ duration: 5000 })}>
-          Start screen loading
-        </Button>
-        <Button onClick={() => page.start({ duration: 5000 })}>
-          Start page loading
-        </Button>
-        <Button onClick={() => background.start({ duration: 5000 })}>
-          Start background loading
-        </Button>
-      </Wrap>
-    </App>
+    <Wrap gap="md">
+      <Button onClick={() => screen.start({ duration: 5000 })}>
+        Start screen loading
+      </Button>
+      <Button onClick={() => page.start({ duration: 5000 })}>
+        Start page loading
+      </Button>
+      <Button onClick={() => background.start({ duration: 5000 })}>
+        Start background loading
+      </Button>
+    </Wrap>
   )
 }
 
@@ -56,27 +52,23 @@ export const Message = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <App>
-      <Wrap gap="md">
-        <Button
-          onClick={() => screen.start({ duration: 5000, message: "Loading" })}
-        >
-          Start screen loading
-        </Button>
-        <Button
-          onClick={() => page.start({ duration: 5000, message: "Loading" })}
-        >
-          Start page loading
-        </Button>
-        <Button
-          onClick={() =>
-            background.start({ duration: 5000, message: "Loading" })
-          }
-        >
-          Start background loading
-        </Button>
-      </Wrap>
-    </App>
+    <Wrap gap="md">
+      <Button
+        onClick={() => screen.start({ duration: 5000, message: "Loading" })}
+      >
+        Start screen loading
+      </Button>
+      <Button
+        onClick={() => page.start({ duration: 5000, message: "Loading" })}
+      >
+        Start page loading
+      </Button>
+      <Button
+        onClick={() => background.start({ duration: 5000, message: "Loading" })}
+      >
+        Start background loading
+      </Button>
+    </Wrap>
   )
 }
 
@@ -84,31 +76,29 @@ export const CustomMessage = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <App>
-      <Wrap gap="md">
-        <Button
-          onClick={() =>
-            screen.start({ message: <Text color="primary">Loading</Text> })
-          }
-        >
-          Start screen loading
-        </Button>
-        <Button
-          onClick={() =>
-            page.start({ message: <Text color="primary">Loading</Text> })
-          }
-        >
-          Start page loading
-        </Button>
-        <Button
-          onClick={() =>
-            background.start({ message: <Text color="primary">Loading</Text> })
-          }
-        >
-          Start background loading
-        </Button>
-      </Wrap>
-    </App>
+    <Wrap gap="md">
+      <Button
+        onClick={() =>
+          screen.start({ message: <Text color="primary">Loading</Text> })
+        }
+      >
+        Start screen loading
+      </Button>
+      <Button
+        onClick={() =>
+          page.start({ message: <Text color="primary">Loading</Text> })
+        }
+      >
+        Start page loading
+      </Button>
+      <Button
+        onClick={() =>
+          background.start({ message: <Text color="primary">Loading</Text> })
+        }
+      >
+        Start background loading
+      </Button>
+    </Wrap>
   )
 }
 
@@ -116,45 +106,43 @@ export const UpdateMessage = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <App>
-      <Wrap gap="md">
-        <Button
-          onClick={() => {
-            screen.start({ duration: 10000, message: "Loading" })
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          screen.start({ duration: 10000, message: "Loading" })
 
-            setTimeout(() => {
-              screen.update({ message: "Please wait" })
-            }, 5000)
-          }}
-        >
-          Start screen loading
-        </Button>
+          setTimeout(() => {
+            screen.update({ message: "Please wait" })
+          }, 5000)
+        }}
+      >
+        Start screen loading
+      </Button>
 
-        <Button
-          onClick={() => {
-            page.start({ duration: 10000, message: "Loading" })
+      <Button
+        onClick={() => {
+          page.start({ duration: 10000, message: "Loading" })
 
-            setTimeout(() => {
-              page.update({ message: "Please wait" })
-            }, 5000)
-          }}
-        >
-          Start page loading
-        </Button>
+          setTimeout(() => {
+            page.update({ message: "Please wait" })
+          }, 5000)
+        }}
+      >
+        Start page loading
+      </Button>
 
-        <Button
-          onClick={() => {
-            background.start({ duration: 10000, message: "Loading" })
+      <Button
+        onClick={() => {
+          background.start({ duration: 10000, message: "Loading" })
 
-            setTimeout(() => {
-              background.update({ message: "Please wait" })
-            }, 5000)
-          }}
-        >
-          Start background loading
-        </Button>
-      </Wrap>
-    </App>
+          setTimeout(() => {
+            background.update({ message: "Please wait" })
+          }, 5000)
+        }}
+      >
+        Start background loading
+      </Button>
+    </Wrap>
   )
 }
 
@@ -177,9 +165,5 @@ export const AsyncFunction = () => {
     page.finish()
   }
 
-  return (
-    <App>
-      <Button onClick={getData}>Start page loading</Button>
-    </App>
-  )
+  return <Button onClick={getData}>Start page loading</Button>
 }

@@ -1,5 +1,5 @@
 import { Calendar } from "."
-import { a11y, fireEvent, render, screen, waitFor } from "../../../test"
+import { a11y, fireEvent, render, screen, waitFor } from "#test"
 import { Icon } from "../../components/icon"
 
 describe("<Calendar />", () => {

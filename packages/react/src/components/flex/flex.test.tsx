@@ -1,9 +1,27 @@
-import { render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { Flex } from "./flex"
 
 describe("<Flex />", () => {
   test("renders flex correctly", () => {
     render(<Flex>Flex</Flex>)
+  })
+
+  test("passes a11y test", async () => {
+    await a11y(<Flex>Flex</Flex>)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Flex.displayName).toBe("Flex")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Flex>Flex</Flex>)
+    expect(screen.getByText("Flex")).toHaveClass("ui-flex")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Flex>Flex</Flex>)
+    expect(screen.getByText("Flex").tagName).toBe("DIV")
   })
 
   test("renders all the allowed shorthand style props", () => {

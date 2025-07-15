@@ -1,0 +1,398 @@
+{
+  "title": "Docs",
+  "segment": "docs",
+  "items": [
+    {
+      "title": "Get Started",
+      "segment": "get-started",
+      "pathname": "/docs/get-started",
+      "items": [
+        {
+          "title": "Migration",
+          "segment": "migration",
+          "pathname": "/docs/get-started/migration"
+        },
+        {
+          "title": "Learn the Basics",
+          "segment": "basics",
+          "pathname": "/docs/get-started/basics"
+        },
+        {
+          "title": "Learn the Advanced",
+          "segment": "advanced",
+          "pathname": "/docs/get-started/advanced"
+        },
+        {
+          "title": "CLI",
+          "segment": "cli",
+          "pathname": "/docs/get-started/cli"
+        },
+        {
+          "title": "Accessibility",
+          "segment": "accessibility",
+          "pathname": "/docs/get-started/accessibility"
+        },
+        {
+          "title": "Frameworks",
+          "segment": "frameworks",
+          "items": [
+            {
+              "title": "Next.js (App)",
+              "segment": "next-app",
+              "pathname": "/docs/get-started/frameworks/next-app"
+            },
+            {
+              "title": "Next.js (Pages)",
+              "segment": "next-pages",
+              "pathname": "/docs/get-started/frameworks/next-pages"
+            },
+            {
+              "title": "Remix",
+              "segment": "remix",
+              "pathname": "/docs/get-started/frameworks/remix"
+            },
+            {
+              "title": "Vite",
+              "segment": "vite",
+              "pathname": "/docs/get-started/frameworks/vite"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Components",
+      "segment": "components",
+      "pathname": "/docs/components",
+      "items": [
+        {
+          "title": "CLI",
+          "segment": "cli",
+          "pathname": "/docs/components/cli"
+        },
+        {
+          "title": "styled",
+          "segment": "styled",
+          "pathname": "/docs/components/styled"
+        },
+        {
+          "title": "createComponent",
+          "segment": "create-component",
+          "pathname": "/docs/components/create-component"
+        },
+        {
+          "title": "Components",
+          "segment": "(components)",
+          "items": [
+            {
+              "title": "Box",
+              "segment": "box",
+              "pathname": "/docs/components/box"
+            },
+            {
+              "title": "Icon",
+              "segment": "icon",
+              "pathname": "/docs/components/icon"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Hooks",
+      "segment": "hooks",
+      "pathname": "/docs/hooks",
+      "items": [
+        {
+          "title": "useBoolean",
+          "segment": "use-boolean",
+          "pathname": "/docs/hooks/use-boolean"
+        }
+      ]
+    },
+    {
+      "title": "Styling",
+      "segment": "styling",
+      "pathname": "/docs/styling",
+      "items": [
+        {
+          "title": "Style Props",
+          "segment": "style-props",
+          "pathname": "/docs/styling/style-props"
+        },
+        {
+          "title": "Conditional Styles",
+          "segment": "conditional-styles",
+          "pathname": "/docs/styling/conditional-styles"
+        },
+        {
+          "title": "Responsive Design",
+          "segment": "responsive-design",
+          "pathname": "/docs/styling/responsive-design"
+        },
+        {
+          "title": "Color Mode",
+          "segment": "color-mode",
+          "pathname": "/docs/styling/color-mode"
+        },
+        {
+          "title": "CSS Custom Properties",
+          "segment": "css-custom-properties",
+          "pathname": "/docs/styling/css-custom-properties"
+        },
+        {
+          "title": "CSS Value Functions",
+          "segment": "css-value-functions",
+          "pathname": "/docs/styling/css-value-functions"
+        },
+        {
+          "title": "Interpolation",
+          "segment": "interpolation",
+          "pathname": "/docs/styling/interpolation"
+        },
+        {
+          "title": "Animation",
+          "segment": "animation",
+          "pathname": "/docs/styling/animation"
+        },
+        {
+          "title": "Focus Ring",
+          "segment": "focus-ring",
+          "pathname": "/docs/styling/focus-ring"
+        },
+        {
+          "title": "Global Styles",
+          "segment": "global-styles",
+          "pathname": "/docs/styling/global-styles"
+        },
+        {
+          "title": "Reset Styles",
+          "segment": "reset-styles",
+          "pathname": "/docs/styling/reset-styles"
+        },
+        {
+          "title": "Layer Styles",
+          "segment": "layer-styles",
+          "pathname": "/docs/styling/layer-styles"
+        },
+        {
+          "title": "Text Styles",
+          "segment": "text-styles",
+          "pathname": "/docs/styling/text-styles"
+        },
+        {
+          "title": "At-Rules",
+          "segment": "at-rules",
+          "pathname": "/docs/styling/at-rules"
+        },
+        {
+          "title": "Cascade Layers",
+          "segment": "cascade-layers",
+          "pathname": "/docs/styling/cascade-layers"
+        }
+      ]
+    },
+    {
+      "title": "Theming",
+      "segment": "theming",
+      "pathname": "/docs/theming",
+      "items": [
+        {
+          "title": "CLI",
+          "segment": "cli",
+          "pathname": "/docs/theming/cli"
+        },
+        {
+          "title": "Customization",
+          "segment": "customization",
+          "pathname": "/docs/theming/customization"
+        },
+        {
+          "title": "Breakpoints",
+          "segment": "breakpoints",
+          "pathname": "/docs/theming/breakpoints"
+        },
+        {
+          "title": "Color Mode",
+          "segment": "color-mode",
+          "pathname": "/docs/theming/color-mode"
+        },
+        {
+          "title": "Switching Themes",
+          "segment": "switching-themes",
+          "pathname": "/docs/theming/switching-themes"
+        },
+        {
+          "title": "Cascade Layers",
+          "segment": "cascade-layers",
+          "pathname": "/docs/theming/cascade-layers"
+        },
+        {
+          "title": "Configuration",
+          "segment": "configuration",
+          "items": [
+            {
+              "title": "Overview",
+              "segment": "overview",
+              "pathname": "/docs/theming/configuration/overview"
+            },
+            {
+              "title": "Customization",
+              "segment": "customization",
+              "pathname": "/docs/theming/configuration/customization"
+            }
+          ]
+        },
+        {
+          "title": "Styles",
+          "segment": "styles",
+          "items": [
+            {
+              "title": "Global Styles",
+              "segment": "global-styles",
+              "pathname": "/docs/theming/styles/global-styles"
+            },
+            {
+              "title": "Reset Styles",
+              "segment": "reset-styles",
+              "pathname": "/docs/theming/styles/reset-styles"
+            },
+            {
+              "title": "Layer Styles",
+              "segment": "layer-styles",
+              "pathname": "/docs/theming/styles/layer-styles"
+            },
+            {
+              "title": "Text Styles",
+              "segment": "text-styles",
+              "pathname": "/docs/theming/styles/text-styles"
+            }
+          ]
+        },
+        {
+          "title": "Design Tokens",
+          "segment": "tokens",
+          "items": [
+            {
+              "title": "Animations",
+              "segment": "animations",
+              "pathname": "/docs/theming/tokens/animations"
+            },
+            {
+              "title": "Aspect Ratios",
+              "segment": "aspect-ratios",
+              "pathname": "/docs/theming/tokens/aspect-ratios"
+            },
+            {
+              "title": "Blurs",
+              "segment": "blurs",
+              "pathname": "/docs/theming/tokens/blurs"
+            },
+            {
+              "title": "Borders",
+              "segment": "borders",
+              "pathname": "/docs/theming/tokens/borders"
+            },
+            {
+              "title": "Breakpoints",
+              "segment": "breakpoints",
+              "pathname": "/docs/theming/tokens/breakpoints"
+            },
+            {
+              "title": "Colors",
+              "segment": "colors",
+              "pathname": "/docs/theming/tokens/colors"
+            },
+            {
+              "title": "Durations",
+              "segment": "durations",
+              "pathname": "/docs/theming/tokens/durations"
+            },
+            {
+              "title": "Easings",
+              "segment": "easings",
+              "pathname": "/docs/theming/tokens/easings"
+            },
+            {
+              "title": "Font Sizes",
+              "segment": "font-sizes",
+              "pathname": "/docs/theming/tokens/font-sizes"
+            },
+            {
+              "title": "Font Weights",
+              "segment": "font-weights",
+              "pathname": "/docs/theming/tokens/font-weights"
+            },
+            {
+              "title": "Fonts",
+              "segment": "fonts",
+              "pathname": "/docs/theming/tokens/fonts"
+            },
+            {
+              "title": "Gradients",
+              "segment": "gradients",
+              "pathname": "/docs/theming/tokens/gradients"
+            },
+            {
+              "title": "Keyframes",
+              "segment": "keyframes",
+              "pathname": "/docs/theming/tokens/keyframes"
+            },
+            {
+              "title": "Letter Spacings",
+              "segment": "letter-spacings",
+              "pathname": "/docs/theming/tokens/letter-spacings"
+            },
+            {
+              "title": "Line Heights",
+              "segment": "line-heights",
+              "pathname": "/docs/theming/tokens/line-heights"
+            },
+            {
+              "title": "Radii",
+              "segment": "radii",
+              "pathname": "/docs/theming/tokens/radii"
+            },
+            {
+              "title": "Shadows",
+              "segment": "shadows",
+              "pathname": "/docs/theming/tokens/shadows"
+            },
+            {
+              "title": "Sizes",
+              "segment": "sizes",
+              "pathname": "/docs/theming/tokens/sizes"
+            },
+            {
+              "title": "Spaces",
+              "segment": "spaces",
+              "pathname": "/docs/theming/tokens/spaces"
+            },
+            {
+              "title": "Z Indices",
+              "segment": "z-indices",
+              "pathname": "/docs/theming/tokens/z-indices"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Community",
+      "segment": "community",
+      "pathname": "/docs/community",
+      "items": [
+        {
+          "title": "Contributing",
+          "segment": "contributing",
+          "pathname": "/docs/community/contributing"
+        }
+      ]
+    },
+    {
+      "title": "Changelog",
+      "segment": "changelog",
+      "pathname": "/docs/changelog"
+    }
+  ]
+}

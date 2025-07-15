@@ -1,50 +1,64 @@
 import type {
-  Instance,
-  Modifier,
-  Placement,
+  Placement as FloatingPlacement,
+  Middleware,
+  Platform,
+  Strategy,
+  UseFloatingOptions,
   VirtualElement,
-} from "@popperjs/core"
-import type { PropGetter, StyleValue } from "../../core"
-import { createPopper } from "@popperjs/core"
-import { useCallback, useEffect, useRef } from "react"
-import { mergeRefs, noop } from "../../utils"
-import { useValue } from "../use-value"
+} from "@floating-ui/react-dom"
+import type { ComponentRef, Ref } from "react"
+import type {
+  DOMElement,
+  HTMLElementProps,
+  HTMLProps,
+  Placement,
+} from "../../core"
+import {
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  useFloating,
+} from "@floating-ui/react-dom"
+import { useCallback, useMemo } from "react"
+import { mergeRefs } from "../../utils"
 
-export type PopperProperty = (typeof popperProperties)[number]
+export type PopperPlacement = Exclude<Placement, "center" | "center-center">
 
-export const popperProperties = [
-  "enabled",
-  "offset",
-  "gutter",
-  "preventOverflow",
-  "flip",
-  "matchWidth",
-  "boundary",
-  "eventListeners",
-  "strategy",
-  "placement",
-  "modifiers",
-] as const
+const PLACEMENT_MAP: {
+  [key in PopperPlacement]: FloatingPlacement
+} = {
+  "center-end": "right",
+  "center-start": "left",
+  end: "bottom",
+  "end-center": "bottom",
+  "end-end": "bottom-end",
+  "end-start": "bottom-start",
+  start: "top",
+  "start-center": "top",
+  "start-end": "top-end",
+  "start-start": "top-start",
+}
 
-export interface UsePopperProps {
+type WhileElementsMounted = UseFloatingOptions["whileElementsMounted"]
+
+type Reference<Y extends DOMElement | VirtualElement = "div"> =
+  Y extends DOMElement ? ComponentRef<Y> : Y
+
+export interface UsePopperProps<Y extends DOMElement | VirtualElement = "div"> {
   /**
-   * The boundary area for the popper. Used within the `preventOverflow` modifier.
-   *
-   * @default 'clippingParents'
-   */
-  boundary?: "clippingParents" | "scrollParent" | HTMLElement
-  /**
-   * Whether the popper.js should be enabled.
+   * If `true`, automatically updates the position of the floating element when necessary.
    *
    * @default true
    */
-  enabled?: boolean
+  autoUpdate?: boolean
   /**
-   * If provided, determines whether the popper will reposition itself on `scroll`  and `resize` of the window.
-   *
-   * @default true
+   * Object containing the reference and floating elements.
    */
-  eventListeners?: boolean | { resize?: boolean; scroll?: boolean }
+  elements?: {
+    floating?: HTMLElement | null
+    reference?: null | Reference<Y>
+  }
   /**
    * If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.
    *
@@ -57,7 +71,7 @@ export interface UsePopperProps {
    *
    * @default 8
    */
-  gutter?: StyleValue<number>
+  gutter?: number
   /**
    * If `true`, the popper will match the width of the reference at all times.
    * It's useful for `autocomplete`, `date-picker` and `select` patterns.
@@ -66,22 +80,30 @@ export interface UsePopperProps {
    */
   matchWidth?: boolean
   /**
-   * Array of popper.js modifiers.
-   * Check the docs to see the list of possible modifiers you can pass.
-   *
-   * @see Docs https://popper.js.org/docs/v2/modifiers/
+   * Array of middleware objects to modify the positioning or provide data for
+   * rendering.
    */
-  modifiers?: Partial<Modifier<string, any>>[]
+  middleware?: (false | Middleware | null | undefined)[]
   /**
    * The main and cross-axis offset to displace popper element from its reference element.
    */
   offset?: [number, number]
   /**
+   * Whether the popper should be enabled.
+   *
+   * @default true
+   */
+  open?: boolean
+  /**
    * The placement of the popper relative to its reference.
    *
-   * @default 'bottom'
+   * @default 'start'
    */
-  placement?: StyleValue<Placement>
+  placement?: PopperPlacement
+  /**
+   * Custom or extended platform object.
+   */
+  platform?: Platform
   /**
    * If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.
    *
@@ -93,215 +115,110 @@ export interface UsePopperProps {
    *
    * @default 'absolute'
    */
-  strategy?: "absolute" | "fixed"
+  strategy?: Strategy
+  /**
+   * Whether to use `transform` for positioning instead of `top` and `left`
+   * (layout) in the `floatingStyles` object.
+   *
+   * @default true
+   */
+  transform?: boolean
+  /**
+   * A callback invoked when both the reference and floating elements are
+   * mounted, and cleaned up when either is unmounted. This is useful for
+   * setting up event listeners (e.g. pass `autoUpdate`).
+   */
+  whileElementsMounted?: (
+    reference: Reference<Y>,
+    floating: HTMLElement,
+    update: () => void,
+  ) => () => void
 }
 
-const defaultEventListeners = {
-  resize: true,
-  scroll: true,
-}
-
-const transforms: {
-  [key in Placement]?: string
-} = {
-  bottom: "top center",
-  "bottom-end": "top right",
-  "bottom-start": "top left",
-
-  left: "right center",
-  "left-end": "right bottom",
-  "left-start": "right top",
-
-  right: "left center",
-  "right-end": "left bottom",
-  "right-start": "left top",
-
-  top: "bottom center",
-  "top-end": "bottom right",
-  "top-start": "bottom left",
-}
-
-export const usePopper = ({
-  boundary = "clippingParents",
-  enabled = true,
-  eventListeners = true,
-  flip = true,
-  gutter: _gutter = 8,
+export const usePopper = <
+  Y extends DOMElement | VirtualElement = "div",
+  M extends DOMElement = "div",
+>({
+  autoUpdate: autoUpdateProp = true,
+  elements,
+  flip: flipProp = true,
+  gutter = 8,
   matchWidth,
-  modifiers,
-  offset,
-  placement: _placement = "bottom",
+  middleware: middlewareProp,
+  offset: offsetProp,
+  open = true,
+  placement = "start",
+  platform,
   preventOverflow = true,
   strategy = "absolute",
+  transform = true,
+  whileElementsMounted: whileElementsMountedProp,
 }: UsePopperProps = {}) => {
-  const reference = useRef<Element | null | VirtualElement>(null)
-  const popper = useRef<HTMLElement | null>(null)
-  const instance = useRef<Instance | null>(null)
+  const middleware = useMemo(() => {
+    const middleware: (false | Middleware | null | undefined)[] = []
 
-  const gutter = useValue(_gutter)
-  const placement = useValue(_placement)
+    if (offsetProp) {
+      const [mainAxis, crossAxis] = offsetProp
 
-  const cleanup = useRef(noop)
-
-  const setupPopper = useCallback(() => {
-    if (!enabled || !reference.current || !popper.current) return
-
-    cleanup.current()
-
-    const modifierTransformOrigin: Modifier<"transformOrigin", any> = {
-      name: "transformOrigin",
-      effect:
-        ({ state }) =>
-        () => {
-          state.elements.popper.style.setProperty(
-            "--popper-transform-origin",
-            transforms[state.placement] ?? "",
-          )
-        },
-      enabled: true,
-      fn: ({ state }) => {
-        state.elements.popper.style.setProperty(
-          "--popper-transform-origin",
-          transforms[state.placement] ?? "",
-        )
-      },
-      phase: "write",
+      middleware.push(offset({ crossAxis, mainAxis }))
+    } else if (gutter) {
+      middleware.push(offset(gutter))
     }
 
-    const modifierEventListeners = {
-      name: "eventListeners",
-      ...(typeof eventListeners === "object"
-        ? {
-            enabled: true,
-            options: { ...defaultEventListeners, ...eventListeners },
-          }
-        : {
-            enabled: eventListeners,
-            options: defaultEventListeners,
-          }),
-    }
+    if (flipProp) middleware.push(flip())
 
-    const modifierOffset = {
-      name: "offset",
-      options: { offset: offset ?? [0, gutter] },
-    }
+    if (preventOverflow) middleware.push(shift())
 
-    const modifierFlip = {
-      name: "flip",
-      enabled: !!flip,
-      options: { padding: 8 },
-    }
+    if (middlewareProp) middleware.push(...middlewareProp)
 
-    const modifierPreventOverflow = {
-      name: "preventOverflow",
-      enabled: !!preventOverflow,
-      options: { boundary },
-    }
+    return middleware
+  }, [flipProp, gutter, middlewareProp, offsetProp, preventOverflow])
+  const whileElementsMounted = useMemo(() => {
+    if (whileElementsMountedProp)
+      return whileElementsMountedProp as WhileElementsMounted
 
-    const modifierMatchWidth: Modifier<"matchWidth", any> = {
-      name: "matchWidth",
-      effect:
-        ({ state }) =>
-        () => {
-          state.elements.popper.style.width = `${
-            (state.elements.reference as HTMLElement).offsetWidth
-          }px`
-        },
-      enabled: !!matchWidth,
-      fn: ({ state }) => {
-        if (state.styles.popper)
-          state.styles.popper.width = `${state.rects.reference.width}px`
-      },
-      phase: "beforeWrite",
-      requires: ["computeStyles"],
-    }
+    if (autoUpdateProp) return autoUpdate
+  }, [autoUpdateProp, whileElementsMountedProp])
 
-    instance.current = createPopper(reference.current, popper.current, {
-      modifiers: [
-        modifierTransformOrigin,
-        modifierMatchWidth,
-        modifierEventListeners,
-        modifierOffset,
-        modifierFlip,
-        modifierPreventOverflow,
-        ...(modifiers ?? []),
-      ],
-      placement,
-      strategy,
-    })
-
-    instance.current.forceUpdate()
-
-    cleanup.current = instance.current.destroy
-  }, [
-    placement,
-    enabled,
-    modifiers,
-    matchWidth,
-    eventListeners,
-    offset,
-    gutter,
-    flip,
-    preventOverflow,
-    boundary,
+  const { floatingStyles, refs, ...rest } = useFloating<Reference<Y>>({
+    elements,
+    middleware,
+    open,
+    placement: PLACEMENT_MAP[placement],
+    platform,
     strategy,
-  ])
+    transform,
+    whileElementsMounted,
+  })
 
-  useEffect(() => {
-    return () => {
-      if (reference.current || popper.current) return
-
-      instance.current?.destroy()
-      instance.current = null
-    }
-  }, [])
-
-  const referenceRef = useCallback(
-    <T extends Element | VirtualElement>(el: null | T) => {
-      reference.current = el
-
-      setupPopper()
-    },
-    [setupPopper],
+  const getReferenceProps = useCallback(
+    <D extends DOMElement | VirtualElement = Y>(
+      props?: D extends DOMElement ? HTMLProps<D> : HTMLElementProps,
+    ) =>
+      ({
+        ...props,
+        ref: mergeRefs(props?.ref as Ref<any>, refs.setReference),
+      }) as D extends DOMElement ? HTMLProps<D> : HTMLElementProps,
+    [refs.setReference],
   )
 
-  const getReferenceProps: PropGetter = useCallback(
-    (props = {}, ref = null) => ({
-      ...props,
-      ref: mergeRefs(referenceRef, ref),
-    }),
-    [referenceRef],
-  )
-
-  const popperRef = useCallback(
-    <T extends HTMLElement>(el: null | T) => {
-      popper.current = el
-
-      setupPopper()
-    },
-    [setupPopper],
-  )
-
-  const getPopperProps: PropGetter = useCallback(
-    (props = {}, ref = null) => ({
-      ...props,
-      ref: mergeRefs(popperRef, ref),
-      style: {
-        ...props.style,
-        inset: "0 auto auto 0",
-        minWidth: matchWidth ? undefined : "max-content",
-        position: strategy,
-      },
-    }),
-    [strategy, popperRef, matchWidth],
+  const getPopperProps = useCallback(
+    <H extends DOMElement = M>(props?: HTMLProps<H>) =>
+      ({
+        ...props,
+        ref: mergeRefs(props?.ref as Ref<any>, refs.setFloating),
+        style: {
+          ...props?.style,
+          minWidth: matchWidth ? undefined : "max-content",
+          ...floatingStyles,
+        },
+      }) as HTMLProps<H>,
+    [refs.setFloating, matchWidth, floatingStyles],
   )
 
   return {
-    forceUpdate: () => instance.current?.forceUpdate(),
-    popperRef,
-    referenceRef,
-    transformOrigin: "var(--popper-transform-origin)",
-    update: async () => instance.current?.update(),
+    ...rest,
+    refs,
     getPopperProps,
     getReferenceProps,
   }

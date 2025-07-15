@@ -1,13 +1,15 @@
-import type { LoadingProps } from "./utils"
+"use client"
+
+import type { LoadingProps } from "./loading"
 import { Icon } from "../icon"
-import { initialProps, superProps, withContext } from "./utils"
+import { initialProps, superProps, withContext } from "./loading"
 
 export interface GridProps extends LoadingProps {}
 
 /**
  * `Loading` is a component displayed during waiting times, such as when data is being loaded.
  *
- * @see Docs https://yamada-ui.com/components/feedback/loading
+ * @see https://yamada-ui.com/components/feedback/loading
  */
 export const Grid = withContext<"svg", GridProps>(({ dur = "1s", ...rest }) => {
   return (

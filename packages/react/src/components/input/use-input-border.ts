@@ -1,5 +1,5 @@
 import type { CSSProps } from "../../core"
-import { mergeVars } from "../../core"
+import { useMemo } from "react"
 
 export interface UseInputBorderProps {
   /**
@@ -12,26 +12,20 @@ export interface UseInputBorderProps {
   focusBorderColor?: CSSProps["borderColor"]
 }
 
-export const useInputBorder = (
-  varsProp: CSSProps["vars"],
-  { errorBorderColor, focusBorderColor }: UseInputBorderProps,
-) => {
-  return mergeVars(
-    varsProp,
-    errorBorderColor
-      ? {
-          name: "errorBorderColor",
-          token: "colors",
-          value: errorBorderColor,
-        }
-      : undefined,
-    focusBorderColor
-      ? {
-          name: "focusBorderColor",
-          token: "colors",
-          value: focusBorderColor,
-        }
-      : undefined,
+export const useInputBorder = ({
+  errorBorderColor,
+  focusBorderColor,
+}: UseInputBorderProps = {}) => {
+  return useMemo(
+    () => ({
+      "--error-border-color": errorBorderColor
+        ? `colors.${errorBorderColor}`
+        : undefined,
+      "--focus-border-color": focusBorderColor
+        ? `colors.${focusBorderColor}`
+        : undefined,
+    }),
+    [errorBorderColor, focusBorderColor],
   )
 }
 

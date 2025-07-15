@@ -3,10 +3,10 @@ name: Next
 on:
   push:
     paths:
-      - ".storybook/**"
       - ".changeset/**"
       - "packages/**"
-      - "stories/**"
+      - "!packages/**/(scripts|storybook|test)/**"
+      - "!packages/**/*.(stories|test).(ts|tsx|mdx)"
     branches:
       - v*
 
@@ -16,7 +16,6 @@ concurrency:
 jobs:
   release:
     name: Release
-    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -43,9 +42,7 @@ jobs:
         run: pnpm build
 
       - name: Create @next release
-        run: |
-          pnpm version:next
-          pnpm release:next
+        run: pnpm release:next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

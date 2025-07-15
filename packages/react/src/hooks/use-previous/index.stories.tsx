@@ -1,4 +1,4 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { usePrevious } from "."
 import { Button } from "../../components/button"
 import { Text } from "../../components/text"

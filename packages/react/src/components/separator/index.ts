@@ -1,2 +1,6 @@
-export { Separator } from "./separator"
+export {
+  Separator,
+  SeparatorPropsContext,
+  useSeparatorPropsContext,
+} from "./separator"
 export type { SeparatorProps } from "./separator"

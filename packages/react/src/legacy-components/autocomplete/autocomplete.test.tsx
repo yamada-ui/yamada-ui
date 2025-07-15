@@ -1,18 +1,12 @@
 import type { AutocompleteItem } from "."
 import { useState } from "react"
 import { Autocomplete, AutocompleteOption, AutocompleteOptionGroup } from "."
-import {
-  act,
-  fireEvent,
-  render,
-  renderHook,
-  screen,
-  waitFor,
-} from "../../../test"
+import { act, fireEvent, render, renderHook, screen, waitFor } from "#test"
 import { noop } from "../../utils"
 
 describe("<Autocomplete />", () => {
   const AUTOCOMPLETE_CLASS = ".ui-autocomplete"
+  const AUTOCOMPLETE_FIELD_CLASS = ".ui-autocomplete__field"
   const OPTION_ROLE = "option"
 
   describe("renders correctly", () => {
@@ -104,7 +98,7 @@ describe("<Autocomplete />", () => {
     test.each(["xs", "sm", "md", "lg"])(`with size prop %s`, (size) => {
       const { container } = render(<Autocomplete size={size} items={ITEMS} />)
 
-      const autocomplete = container.querySelector(AUTOCOMPLETE_CLASS)
+      const autocomplete = container.querySelector(AUTOCOMPLETE_FIELD_CLASS)
       expect(autocomplete).toBeInTheDocument()
 
       expect(autocomplete).toHaveStyle(`font-size: var(--ui-fontSizes-${size})`)

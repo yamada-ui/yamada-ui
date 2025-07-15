@@ -1,9 +1,11 @@
+"use client"
+
 import { Hammer } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
  * `HammerIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const HammerIcon = component(Icon)({ as: Hammer })

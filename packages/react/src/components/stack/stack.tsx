@@ -1,12 +1,14 @@
+"use client"
+
 import type { ReactElement } from "react"
-import type { CSSProps, HTMLUIProps } from "../../core"
+import type { CSSProps, HTMLStyledProps } from "../../core"
 import type { StackStyle } from "./stack.style"
 import { cloneElement, Fragment, useMemo } from "react"
-import { createComponent, ui } from "../../core"
+import { createComponent, styled } from "../../core"
 import { getValidChildren, replaceObject } from "../../utils"
 import { stackStyle } from "./stack.style"
 
-interface StackOptions {
+export interface StackProps extends Omit<HTMLStyledProps, "direction"> {
   /**
    * The CSS `align-items` property.
    */
@@ -29,20 +31,18 @@ interface StackOptions {
   wrap?: CSSProps["flexWrap"]
 }
 
-export interface StackProps
-  extends Omit<HTMLUIProps, "direction">,
-    StackOptions {}
-
-export const {
+const {
   PropsContext: StackPropsContext,
   usePropsContext: useStackPropsContext,
   withContext,
 } = createComponent<StackProps, StackStyle>("stack", stackStyle)
 
+export { StackPropsContext, useStackPropsContext }
+
 /**
  * `Stack` is a component that groups elements and provides space between child elements.
  *
- * @see Docs https://yamada-ui.com/components/stack
+ * @see https://yamada-ui.com/components/stack
  */
 export const Stack = withContext(
   ({
@@ -89,7 +89,7 @@ export const Stack = withContext(
     )
 
     return (
-      <ui.div
+      <styled.div
         alignItems={alignItems}
         flexDirection={flexDirection}
         flexWrap={flexWrap}
@@ -97,7 +97,7 @@ export const Stack = withContext(
         {...rest}
       >
         {cloneChildren}
-      </ui.div>
+      </styled.div>
     )
   },
 )()

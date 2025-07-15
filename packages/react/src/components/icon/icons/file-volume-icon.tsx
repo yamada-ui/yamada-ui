@@ -1,9 +1,11 @@
+"use client"
+
 import { FileVolume } from "lucide-react"
 import { component, Icon } from "../icon"
 
 /**
  * `FileVolumeIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see Docs https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/components/icon
  */
 export const FileVolumeIcon = component(Icon)({ as: FileVolume })

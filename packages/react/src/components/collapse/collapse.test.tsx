@@ -1,5 +1,5 @@
+import { a11y, render, screen, wait, waitFor } from "#test"
 import { useState } from "react"
-import { a11y, render, screen, wait, waitFor } from "../../../test"
 import { Collapse } from "./collapse"
 
 describe("<Collapse />", () => {
@@ -7,9 +7,8 @@ describe("<Collapse />", () => {
     await a11y(<Collapse />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Collapse.displayName).toBe("Collapse")
-    expect(Collapse.__ui__).toBe("Collapse")
   })
 
   test("sets `className` correctly", () => {

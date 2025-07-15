@@ -1,12 +1,6 @@
-import type {
-  ColorMode,
-  StyledTheme,
-  ThemeTokens,
-  UsageTheme,
-} from "../../core"
+import type { ColorMode, StyledTheme, ThemeTokens } from "../../core"
 import { useMemo } from "react"
-import { useColorMode } from "../../providers/color-mode-provider"
-import { useTheme } from "../../providers/theme-provider"
+import { useColorMode, useTheme } from "../../core"
 import { getMemoizedObject as get, isArray, isUndefined } from "../../utils"
 
 type OmittedTheme = Omit<ThemeTokens, "colorSchemes" | "themeSchemes">
@@ -14,7 +8,7 @@ type OmittedTheme = Omit<ThemeTokens, "colorSchemes" | "themeSchemes">
 /**
  * `useToken` is a custom hook for retrieving tokens from the theme.
  *
- * @see Docs https://yamada-ui.com/hooks/use-token
+ * @see https://yamada-ui.com/hooks/use-token
  */
 export const useToken = <
   Y extends number | string = string,
@@ -40,7 +34,7 @@ export const getToken =
     name: M,
     path: number | ThemeTokens[M] | undefined,
   ) =>
-  (theme: StyledTheme<UsageTheme>, colorMode: ColorMode) => {
+  (theme: StyledTheme, colorMode?: ColorMode) => {
     if (name === "layerStyles") name = "styles.layerStyles" as M
     if (name === "textStyles") name = "styles.textStyles" as M
 
@@ -50,7 +44,7 @@ export const getToken =
       if (isArray(value)) {
         const [lightValue, darkValue] = value
 
-        return colorMode === "light" ? lightValue : darkValue
+        return colorMode !== "dark" ? lightValue : darkValue
       } else {
         return value
       }
@@ -69,12 +63,12 @@ export const getToken =
       if (isArray(value)) {
         const [lightValue, darkValue] = value
 
-        value = colorMode === "light" ? lightValue : darkValue
+        value = colorMode !== "dark" ? lightValue : darkValue
 
         if (isArray(value)) {
           const [lightValue, darkValue] = value as unknown as [Y, Y]
 
-          return colorMode === "light" ? lightValue : darkValue
+          return colorMode !== "dark" ? lightValue : darkValue
         } else {
           return value
         }

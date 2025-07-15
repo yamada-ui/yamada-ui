@@ -1,46 +1,8 @@
 import type { Hsv } from "./"
-import { drag, fireEvent, render, screen, waitFor } from "../../../test"
+import { drag, fireEvent, render, screen, waitFor } from "#test"
 import { SaturationSlider } from "./"
 
 describe("<SaturationSlider />", () => {
-  let originalPageX: PropertyDescriptor | undefined
-  let originalPageY: PropertyDescriptor | undefined
-
-  beforeEach(() => {
-    originalPageX = Object.getOwnPropertyDescriptor(
-      MouseEvent.prototype,
-      "pageX",
-    )
-    originalPageY = Object.getOwnPropertyDescriptor(
-      MouseEvent.prototype,
-      "pageY",
-    )
-
-    Object.defineProperties(MouseEvent.prototype, {
-      pageX: {
-        configurable: true,
-        get() {
-          return this.clientX
-        },
-      },
-      pageY: {
-        configurable: true,
-        get() {
-          return this.clientY
-        },
-      },
-    })
-  })
-
-  afterEach(() => {
-    if (originalPageX) {
-      Object.defineProperty(MouseEvent.prototype, "pageX", originalPageX)
-    }
-    if (originalPageY) {
-      Object.defineProperty(MouseEvent.prototype, "pageY", originalPageY)
-    }
-  })
-
   test("SaturationSlider renders correctly", () => {
     render(<SaturationSlider data-testid="saturationSlider" />)
 

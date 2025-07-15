@@ -1,7 +1,9 @@
+"use client"
+
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
-  MotionProps,
+  HTMLMotionProps,
   MotionTransitionVariants,
   WithTransitionProps,
 } from "../motion"
@@ -9,7 +11,7 @@ import type { FadeStyle } from "./fade.style"
 import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { createComponent } from "../../core"
-import { createTransition, Motion } from "../motion"
+import { createTransition, motion } from "../motion"
 import { fadeStyle } from "./fade.style"
 
 export const fadeVariants: Variants = {
@@ -28,19 +30,21 @@ export const fadeVariants: Variants = {
 } satisfies MotionTransitionVariants
 
 export interface FadeProps
-  extends WithTransitionProps<MotionProps>,
+  extends WithTransitionProps<HTMLMotionProps>,
     ThemeProps<FadeStyle> {}
 
-export const {
+const {
   PropsContext: FadePropsContext,
   usePropsContext: useFadePropsContext,
   withContext,
 } = createComponent<FadeProps, FadeStyle>("fade", fadeStyle)
 
+export { FadePropsContext, useFadePropsContext }
+
 /**
  * `Fade` is a component that gradually shows or hides an element.
  *
- * @see Docs https://yamada-ui.com/components/fade
+ * @see https://yamada-ui.com/components/fade
  */
 export const Fade = withContext(
   ({
@@ -68,7 +72,7 @@ export const Fade = withContext(
     return (
       <AnimatePresence custom={custom}>
         {open ? (
-          <Motion
+          <motion.div
             animate={animate}
             custom={custom}
             exit="exit"

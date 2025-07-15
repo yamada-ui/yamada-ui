@@ -1,7 +1,6 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { Variants } from "motion/react"
 import { useMemo } from "react"
-import { App } from "../../../storybook/components"
 import { Motion } from "./motion"
 
 type Story = StoryFn<typeof Motion>
@@ -23,18 +22,16 @@ export const Basic: Story = () => {
   )
 
   return (
-    <App>
-      <Motion
-        animate="visible"
-        bg="mono"
-        cursor="pointer"
-        h="2xs"
-        initial="hidden"
-        rounded="l2"
-        variants={variants}
-        w="2xs"
-      />
-    </App>
+    <Motion
+      animate="visible"
+      bg="mono"
+      cursor="pointer"
+      h="2xs"
+      initial="hidden"
+      rounded="l2"
+      variants={variants}
+      w="2xs"
+    />
   )
 }
 
@@ -56,51 +53,25 @@ export const Propagation: Story = () => {
   )
 
   return (
-    <App>
-      <Motion
-        animate="visible"
-        bg="mono"
-        cursor="pointer"
-        display="flex"
-        flexDirection="column"
-        gap="md"
-        initial="hidden"
-        overflow="hidden"
-        p="md"
-        rounded="l2"
-        variants={list}
-        w="2xs"
-      >
-        <Motion
-          bg="mono.contrast"
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-        <Motion
-          bg="mono.contrast"
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-        <Motion
-          bg="mono.contrast"
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-        <Motion
-          bg="mono.contrast"
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-      </Motion>
-    </App>
+    <Motion
+      animate="visible"
+      bg="mono"
+      cursor="pointer"
+      display="flex"
+      flexDirection="column"
+      gap="md"
+      initial="hidden"
+      overflow="hidden"
+      p="md"
+      rounded="l2"
+      variants={list}
+      w="2xs"
+    >
+      <Motion bg="mono.contrast" h="4" rounded="l2" variants={item} w="full" />
+      <Motion bg="mono.contrast" h="4" rounded="l2" variants={item} w="full" />
+      <Motion bg="mono.contrast" h="4" rounded="l2" variants={item} w="full" />
+      <Motion bg="mono.contrast" h="4" rounded="l2" variants={item} w="full" />
+    </Motion>
   )
 }
 
@@ -128,51 +99,25 @@ export const Orchestration: Story = () => {
   )
 
   return (
-    <App>
-      <Motion
-        animate="visible"
-        bg="mono"
-        cursor="pointer"
-        display="flex"
-        flexDirection="column"
-        gap="md"
-        initial="hidden"
-        overflow="hidden"
-        p="md"
-        rounded="l2"
-        variants={list}
-        w="2xs"
-      >
-        <Motion
-          bg="mono.contrast"
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-        <Motion
-          bg="mono.contrast"
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-        <Motion
-          bg="mono.contrast"
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-        <Motion
-          bg="mono.contrast"
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-      </Motion>
-    </App>
+    <Motion
+      animate="visible"
+      bg="mono"
+      cursor="pointer"
+      display="flex"
+      flexDirection="column"
+      gap="md"
+      initial="hidden"
+      overflow="hidden"
+      p="md"
+      rounded="l2"
+      variants={list}
+      w="2xs"
+    >
+      <Motion bg="mono.contrast" h="4" rounded="l2" variants={item} w="full" />
+      <Motion bg="mono.contrast" h="4" rounded="l2" variants={item} w="full" />
+      <Motion bg="mono.contrast" h="4" rounded="l2" variants={item} w="full" />
+      <Motion bg="mono.contrast" h="4" rounded="l2" variants={item} w="full" />
+    </Motion>
   )
 }
 
@@ -198,55 +143,53 @@ export const DynamicVariants: Story = () => {
   )
 
   return (
-    <App>
+    <Motion
+      animate="visible"
+      bg="mono"
+      cursor="pointer"
+      display="flex"
+      flexDirection="column"
+      gap="md"
+      initial="hidden"
+      overflow="hidden"
+      p="md"
+      rounded="l2"
+      variants={list}
+      w="2xs"
+    >
       <Motion
-        animate="visible"
-        bg="mono"
-        cursor="pointer"
-        display="flex"
-        flexDirection="column"
-        gap="md"
-        initial="hidden"
-        overflow="hidden"
-        p="md"
+        bg="mono.contrast"
+        custom={1}
+        h="4"
         rounded="l2"
-        variants={list}
-        w="2xs"
-      >
-        <Motion
-          bg="mono.contrast"
-          custom={1}
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-        <Motion
-          bg="mono.contrast"
-          custom={2}
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-        <Motion
-          bg="mono.contrast"
-          custom={3}
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-        <Motion
-          bg="mono.contrast"
-          custom={4}
-          h="4"
-          rounded="l2"
-          variants={item}
-          w="full"
-        />
-      </Motion>
-    </App>
+        variants={item}
+        w="full"
+      />
+      <Motion
+        bg="mono.contrast"
+        custom={2}
+        h="4"
+        rounded="l2"
+        variants={item}
+        w="full"
+      />
+      <Motion
+        bg="mono.contrast"
+        custom={3}
+        h="4"
+        rounded="l2"
+        variants={item}
+        w="full"
+      />
+      <Motion
+        bg="mono.contrast"
+        custom={4}
+        h="4"
+        rounded="l2"
+        variants={item}
+        w="full"
+      />
+    </Motion>
   )
 }
 
@@ -271,79 +214,77 @@ export const ValueSpecific: Story = () => {
   )
 
   return (
-    <App>
+    <Motion
+      as="svg"
+      animate="visible"
+      h="200px"
+      initial="hidden"
+      viewBox="0 0 800 200"
+      w="800px"
+    >
       <Motion
-        as="svg"
-        animate="visible"
-        h="200px"
-        initial="hidden"
-        viewBox="0 0 800 200"
-        w="800px"
-      >
-        <Motion
-          as="circle"
-          custom={1}
-          cx="100"
-          cy="100"
-          fill="transparent"
-          r="80"
-          stroke="#ed3237"
-          strokeLinecap="round"
-          strokeWidth="10px"
-          variants={variants}
-        />
-        <Motion
-          as="line"
-          custom={2}
-          fill="transparent"
-          stroke="#f5c535"
-          strokeLinecap="round"
-          strokeWidth="10px"
-          variants={variants}
-          x1="220"
-          x2="360"
-          y1="30"
-          y2="170"
-        />
-        <Motion
-          as="line"
-          custom={2.5}
-          fill="transparent"
-          stroke="#f5c535"
-          strokeLinecap="round"
-          strokeWidth="10px"
-          variants={variants}
-          x1="220"
-          x2="360"
-          y1="170"
-          y2="30"
-        />
-        <Motion
-          as="rect"
-          custom={3}
-          fill="transparent"
-          h="140px"
-          rx="20"
-          stroke="#0789c7"
-          strokeLinecap="round"
-          strokeWidth="10px"
-          variants={variants}
-          w="140px"
-          x="410"
-          y="30"
-        />
-        <Motion
-          as="polygon"
-          custom={4}
-          fill="transparent"
-          points="670 30, 600 170, 740 170"
-          stroke="#42b7a5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="10px"
-          variants={variants}
-        />
-      </Motion>
-    </App>
+        as="circle"
+        custom={1}
+        cx="100"
+        cy="100"
+        fill="transparent"
+        r="80"
+        stroke="#ed3237"
+        strokeLinecap="round"
+        strokeWidth="10px"
+        variants={variants}
+      />
+      <Motion
+        as="line"
+        custom={2}
+        fill="transparent"
+        stroke="#f5c535"
+        strokeLinecap="round"
+        strokeWidth="10px"
+        variants={variants}
+        x1="220"
+        x2="360"
+        y1="30"
+        y2="170"
+      />
+      <Motion
+        as="line"
+        custom={2.5}
+        fill="transparent"
+        stroke="#f5c535"
+        strokeLinecap="round"
+        strokeWidth="10px"
+        variants={variants}
+        x1="220"
+        x2="360"
+        y1="170"
+        y2="30"
+      />
+      <Motion
+        as="rect"
+        custom={3}
+        fill="transparent"
+        h="140px"
+        rx="20"
+        stroke="#0789c7"
+        strokeLinecap="round"
+        strokeWidth="10px"
+        variants={variants}
+        w="140px"
+        x="410"
+        y="30"
+      />
+      <Motion
+        as="polygon"
+        custom={4}
+        fill="transparent"
+        points="670 30, 600 170, 740 170"
+        stroke="#42b7a5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="10px"
+        variants={variants}
+      />
+    </Motion>
   )
 }

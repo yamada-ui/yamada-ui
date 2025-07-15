@@ -1,5 +1,5 @@
+import { act, renderHook, waitFor } from "#test"
 import { useAsync, useAsyncFunc, useAsyncRetry } from "."
-import { act, renderHook, waitFor } from "../../../test"
 
 describe("useAsync", () => {
   test("should handle async function execution", async () => {
@@ -49,7 +49,6 @@ describe("useAsyncRetry", () => {
       result.current.retry()
     })
     await waitFor(() => expect(result.current.loading).toBeFalsy())
-
-    expect(result.current.value).toBe("success")
+    await waitFor(() => expect(result.current.value).toBe("success"))
   })
 })

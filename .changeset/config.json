@@ -18,11 +18,10 @@
     "useCalculatedVersion": true
   },
   "ignore": [
-    "create-react-app",
-    "next-app",
-    "next-pages",
-    "vite-react",
-    "hono-react",
-    "remix"
+    "@yamada-ui/workspace",
+    "@playgrounds/next-app",
+    "@playgrounds/next-pages",
+    "@playgrounds/vite",
+    "@playgrounds/remix"
   ]
 }

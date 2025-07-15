@@ -1,4 +1,4 @@
-import type { FC } from "../../core"
+import type { FC } from "react"
 import type { MarkProps } from "../mark"
 import type { TextProps } from "../text"
 import { Fragment } from "react"
@@ -30,7 +30,7 @@ export interface HighlightProps extends Omit<TextProps, "children"> {
 /**
  * `Highlight` is a component that highlights specified strings within text. By default, it renders a `p` element.
  *
- * @see Docs https://yamada-ui.com/components/highlight
+ * @see https://yamada-ui.com/components/highlight
  */
 export const Highlight: FC<HighlightProps> = ({
   children: text,

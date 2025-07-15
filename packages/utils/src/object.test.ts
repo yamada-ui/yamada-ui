@@ -1,12 +1,10 @@
-import type { Dict } from "./index.types"
 import {
   filterObject,
   filterUndefined,
   flattenObject,
   getObject,
-  keysFormObject,
   merge,
-  objectFromEntries,
+  objectKeys,
   omitObject,
   pickObject,
   replaceObject,
@@ -21,29 +19,10 @@ describe("Object", () => {
     })
   })
 
-  describe("omitObject with nested keys", () => {
-    test("should omit specified keys from an object", () => {
-      const obj = { a: { b: 2, c: 3 }, d: 4 }
-      expect(omitObject<Dict>(obj, ["a.b", "d"])).toStrictEqual({
-        a: { c: 3 },
-      })
-    })
-  })
-
   describe("pickObject", () => {
     test("should pick specified keys from an object", () => {
       const obj = { a: 1, b: 2, c: 3 }
       expect(pickObject(obj, ["a", "c"])).toStrictEqual({ a: 1, c: 3 })
-    })
-  })
-
-  describe("pickObject with nested keys", () => {
-    test("should omit specified keys from an object", () => {
-      const obj = { a: { b: 2, c: 3 }, d: 4 }
-      expect(pickObject<Dict>(obj, ["a.b", "d"])).toStrictEqual({
-        a: { b: 2 },
-        d: 4,
-      })
     })
   })
 
@@ -110,20 +89,10 @@ describe("Object", () => {
     })
   })
 
-  describe("objectFromEntries", () => {
-    test("should create an object from an array of key-value pairs", () => {
-      const entries = [
-        ["a", 1],
-        ["b", 2],
-      ]
-      expect(objectFromEntries(entries)).toStrictEqual({ a: 1, b: 2 })
-    })
-  })
-
-  describe("keysFormObject", () => {
+  describe("objectKeys", () => {
     test("should return the keys of an object", () => {
       const obj = { a: 1, b: 2, c: 3 }
-      expect(keysFormObject(obj)).toStrictEqual(["a", "b", "c"])
+      expect(objectKeys(obj)).toStrictEqual(["a", "b", "c"])
     })
   })
 

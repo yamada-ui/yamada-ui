@@ -1,7 +1,7 @@
-import type { Meta } from "@storybook/react"
+import type { Meta } from "@storybook/react-vite"
 import { useLocalStorage } from "."
 import { Button } from "../../components/button"
-import { Wrap } from "../../components/flex"
+import { Wrap } from "../../components/wrap"
 
 const meta: Meta = {
   title: "Hooks / useLocalStorage",

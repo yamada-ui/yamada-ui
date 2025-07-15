@@ -1,67 +1,43 @@
+"use client"
+
 import type {
+  Breakpoint,
   ColorMode,
   ColorModeArray,
   ResponsiveObject,
-  StyledTheme,
-  ThemeTokens,
+  System,
 } from "../../core"
 import { useMemo } from "react"
-import {
-  getColorModeValue,
-  useColorMode,
-} from "../../providers/color-mode-provider"
-import { useTheme } from "../../providers/theme-provider"
+import { getColorModeValue, useColorMode, useSystem } from "../../core"
 import { isArray, isObject } from "../../utils"
 import { getBreakpointValue, useBreakpoint } from "../use-breakpoint"
 
 /**
  * `useValue` is a custom hook that combines `useBreakpointValue` and `useColorModeValue`.
  *
- * @see Docs https://yamada-ui.com/hooks/use-value
+ * @see https://yamada-ui.com/hooks/use-value
  */
-export const useValue = <T>(
-  value: ColorModeArray<T> | ResponsiveObject<T> | T,
-): T => {
-  const { theme } = useTheme()
+export const useValue = <Y>(
+  value: ColorModeArray<Y, false> | ResponsiveObject<Y, false> | Y,
+): Y => {
+  const system = useSystem()
   const breakpoint = useBreakpoint()
   const { colorMode } = useColorMode()
 
   return useMemo(() => {
-    return getValue(value)(theme, colorMode, breakpoint)
-  }, [value, theme, colorMode, breakpoint])
+    return getValue(value)(system, colorMode, breakpoint)
+  }, [value, system, colorMode, breakpoint])
 }
 
 export const getValue =
-  <T>(value: ColorModeArray<T> | ResponsiveObject<T> | T) =>
-  (
-    theme: StyledTheme,
-    colorMode: ColorMode,
-    breakpoint: ThemeTokens["breakpoints"],
-  ): T => {
-    if (isObject<ResponsiveObject<T>>(value)) {
-      const computedValue = getBreakpointValue(value)(theme, breakpoint)
-
-      if (isArray<ColorModeArray<T, false>>(computedValue)) {
-        const [light, dark] = computedValue
-
-        return getColorModeValue(light, dark)(colorMode)
-      } else {
-        return computedValue
-      }
-    } else if (isArray<ColorModeArray<T>>(value)) {
+  <Y>(value: ColorModeArray<Y, false> | ResponsiveObject<Y, false> | Y) =>
+  (system: System, colorMode: ColorMode, breakpoint: Breakpoint): Y => {
+    if (isObject<ResponsiveObject<Y, false>>(value)) {
+      return getBreakpointValue(value)(system, breakpoint)
+    } else if (isArray<ColorModeArray<Y, false>>(value)) {
       const [light, dark] = value
 
-      const computedValue = getColorModeValue(light, dark)(colorMode)
-
-      if (isObject(computedValue)) {
-        if (theme.__breakpoints?.isResponsive(computedValue)) {
-          return getBreakpointValue(computedValue)(theme, breakpoint)
-        } else {
-          return computedValue as T
-        }
-      } else {
-        return computedValue
-      }
+      return getColorModeValue(light, dark)(colorMode)
     } else {
       return value
     }

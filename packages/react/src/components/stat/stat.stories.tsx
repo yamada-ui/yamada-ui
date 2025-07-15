@@ -1,6 +1,6 @@
-import type { Meta, StoryFn } from "@storybook/react"
-import { COLOR_SCHEMES } from "@yamada-ui/utils"
-import { PropsTable } from "../../../storybook/components"
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
+import { COLOR_SCHEMES } from "../../utils"
 import { Stat } from "./"
 
 type Story = StoryFn<typeof Stat.Root>
@@ -60,7 +60,7 @@ export const Size: Story = () => {
 
 export const ColorScheme: Story = () => {
   return (
-    <PropsTable variant="column" rows={COLOR_SCHEMES}>
+    <PropsTable variant="stack" rows={COLOR_SCHEMES}>
       {(_, row, key) => (
         <Stat.Root
           key={key}

@@ -1,9 +1,23 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { Textarea } from "./"
 
 describe("<Textarea />", () => {
   test("Textarea renders correctly", async () => {
     await a11y(<Textarea aria-label="Enter notes" defaultValue="hello" />)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Textarea.displayName).toBe("Textarea")
+  })
+
+  test("sets `className` correctly", () => {
+    render(<Textarea />)
+    expect(screen.getByRole("textbox")).toHaveClass("ui-textarea")
+  })
+
+  test("renders HTML tag correctly", () => {
+    render(<Textarea />)
+    expect(screen.getByRole("textbox").tagName).toBe("TEXTAREA")
   })
 
   test("Disabled Textarea renders correctly", () => {
@@ -40,7 +54,7 @@ describe("<Textarea />", () => {
     expect(screen.getByRole("textbox")).toHaveProperty("rows", 1)
   })
 
-  test.todo("Autosize Textarea renders correctly", () => {
+  test("Autosize Textarea renders correctly", () => {
     let fontsData =
       "fonts" in global.document ? global.document.fonts : undefined
 
@@ -52,7 +66,7 @@ describe("<Textarea />", () => {
       writable: true,
     })
     render(<Textarea autosize />)
-    expect(screen.getByRole("textbox")).toHaveProperty("rows", 1)
+    expect(screen.getByRole("textbox")).toHaveProperty("rows", 2)
     Object.defineProperty(global.document, "fonts", {
       value: fontsData,
       writable: true,

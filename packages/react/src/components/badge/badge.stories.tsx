@@ -1,10 +1,10 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { BadgeProps } from "./badge"
+import { PropsTable } from "#storybook"
 import { useMemo } from "react"
-import { PropsTable } from "../../../storybook/components"
-import { For } from "../../components/for"
 import { COLOR_SCHEMES } from "../../utils"
-import { Wrap } from "../flex"
+import { For } from "../for"
+import { Wrap } from "../wrap"
 import { Badge, BadgePropsContext } from "./badge"
 
 type Story = StoryFn<typeof Badge>

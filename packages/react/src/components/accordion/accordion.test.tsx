@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Accordion } from "./"
@@ -14,16 +14,11 @@ describe("<Accordion />", () => {
     )
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Accordion.Root.displayName).toBe("AccordionRoot")
     expect(Accordion.Item.displayName).toBe("AccordionItem")
     expect(Accordion.Button.displayName).toBe("AccordionButton")
     expect(Accordion.Panel.displayName).toBe("AccordionPanel")
-
-    expect(Accordion.Root.__ui__).toBe("AccordionRoot")
-    expect(Accordion.Item.__ui__).toBe("AccordionItem")
-    expect(Accordion.Button.__ui__).toBe("AccordionButton")
-    expect(Accordion.Panel.__ui__).toBe("AccordionPanel")
   })
 
   test("sets `className` correctly", () => {

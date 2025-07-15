@@ -1,4 +1,4 @@
-import { render, screen } from "../../../test"
+import { render, screen } from "#test"
 import { Separator } from "./separator"
 
 describe("<Separator />", () => {
@@ -6,9 +6,8 @@ describe("<Separator />", () => {
     render(<Separator />)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Separator.displayName).toBe("Separator")
-    expect(Separator.__ui__).toBe("Separator")
   })
 
   test("sets `className` correctly", () => {

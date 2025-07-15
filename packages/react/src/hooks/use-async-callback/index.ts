@@ -1,6 +1,6 @@
 import type { DependencyList } from "react"
 import type { LoadingOptions } from "../../components/loading"
-import type { LoadingMethod } from "../../components/loading/utils"
+import type { LoadingMethod } from "../../components/loading/loading"
 import { useCallback, useMemo } from "react"
 import { useLoading } from "../../components/loading"
 import { useProcessing } from "../../hooks/use-processing"
@@ -28,7 +28,7 @@ export interface UseAsyncCallbackOptions {
 /**
  * `useAsyncCallback` is a custom hook used to manage async callbacks.
  *
- * @see Docs https://yamada-ui.com/hooks/use-async-callback
+ * @see https://yamada-ui.com/hooks/use-async-callback
  */
 export const useAsyncCallback = <Y extends Callback>(
   callback: Y,

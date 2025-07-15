@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { Mark } from "./"
 
 describe("<Mark />", () => {
@@ -6,9 +6,8 @@ describe("<Mark />", () => {
     await a11y(<Mark>Mark</Mark>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Mark.displayName).toBe("Mark")
-    expect(Mark.__ui__).toBe("Mark")
   })
 
   test("sets `className` correctly", () => {

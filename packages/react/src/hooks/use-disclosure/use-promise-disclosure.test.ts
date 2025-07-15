@@ -1,4 +1,4 @@
-import { act, renderHook } from "../../../test"
+import { act, renderHook } from "#test"
 import { usePromiseDisclosure } from "./use-promise-disclosure"
 
 describe("usePromiseDisclosure", () => {

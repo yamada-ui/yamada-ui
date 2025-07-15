@@ -1,7 +1,7 @@
-import type { Meta, StoryFn } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { Fieldset } from "."
 import { Field } from "../field"
-import { For } from "../for"
 import { Input } from "../input"
 
 type Story = StoryFn<typeof Fieldset.Root>
@@ -29,11 +29,14 @@ export const Basic: Story = () => {
 
 export const Variant: Story = () => {
   return (
-    <For each={["plain", "elevated", "outline", "panel"]}>
-      {(variant, index) => (
+    <PropsTable
+      variant="stack"
+      rows={["plain", "elevated", "outline", "panel"]}
+    >
+      {(_, row, key) => (
         <Fieldset.Root
-          key={index}
-          variant={variant}
+          key={key}
+          variant={row}
           helperMessage="Please provide your contact details below."
           legend="Contact details"
         >
@@ -46,17 +49,17 @@ export const Variant: Story = () => {
           </Field.Root>
         </Fieldset.Root>
       )}
-    </For>
+    </PropsTable>
   )
 }
 
 export const Size: Story = () => {
   return (
-    <For each={["sm", "md", "lg"]}>
-      {(size, index) => (
+    <PropsTable variant="stack" rows={["sm", "md", "lg"]}>
+      {(_, row, key) => (
         <Fieldset.Root
-          key={index}
-          size={size}
+          key={key}
+          size={row}
           variant="panel"
           helperMessage="Please provide your contact details below."
           legend="Contact details"
@@ -70,7 +73,7 @@ export const Size: Story = () => {
           </Field.Root>
         </Fieldset.Root>
       )}
-    </For>
+    </PropsTable>
   )
 }
 

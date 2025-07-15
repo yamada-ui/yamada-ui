@@ -1,4 +1,4 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { Badge } from "./"
 
 describe("<Badge />", () => {
@@ -6,9 +6,8 @@ describe("<Badge />", () => {
     await a11y(<Badge>Badge</Badge>)
   })
 
-  test("sets `displayName` and `__ui__` correctly", () => {
+  test("sets `displayName` correctly", () => {
     expect(Badge.displayName).toBe("Badge")
-    expect(Badge.__ui__).toBe("Badge")
   })
 
   test("sets `className` correctly", () => {

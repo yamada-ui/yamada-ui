@@ -1,5 +1,12 @@
+"use client"
+
 import type { ElementType, ReactNode } from "react"
-import type { CSSObject, HTMLProps, HTMLUIProps, ThemeProps } from "../../core"
+import type {
+  CSSObject,
+  HTMLProps,
+  HTMLStyledProps,
+  ThemeProps,
+} from "../../core"
 import type { Loading } from "../loading"
 import type { ButtonStyle } from "./button.style"
 import {
@@ -10,8 +17,8 @@ import {
   useMemo,
   useRef,
 } from "react"
-import { createComponent, mergeCSS, ui } from "../../core"
-import { createContext, dataAttr, mergeRefs } from "../../utils"
+import { createComponent, getClassName, mergeCSS, styled } from "../../core"
+import { bem, createContext, dataAttr, mergeRefs } from "../../utils"
 import { getLoadingComponent, isLoadingScheme } from "../loading"
 import { Ripple, useRipple } from "../ripple"
 import { buttonStyle } from "./button.style"
@@ -39,7 +46,7 @@ const useButtonType = (value?: ElementType) => {
 }
 
 export interface ButtonProps
-  extends HTMLUIProps<"button">,
+  extends HTMLStyledProps<"button">,
     ThemeProps<ButtonStyle> {
   /**
    * The type of button. Accepts `button`, `reset`, or `submit`.
@@ -105,17 +112,19 @@ export interface ButtonProps
   loadingProps?: ButtonLoadingProps
 }
 
-export const {
+const {
   component,
   PropsContext: ButtonPropsContext,
   usePropsContext: useButtonPropsContext,
   withContext,
 } = createComponent<ButtonProps, ButtonStyle>("button", buttonStyle)
 
+export { ButtonPropsContext, useButtonPropsContext }
+
 /**
  * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.
  *
- * @see Docs https://yamada-ui.com/components/button
+ * @see https://yamada-ui.com/components/button
  */
 export const Button = withContext(
   ({
@@ -151,7 +160,7 @@ export const Button = withContext(
 
     return (
       <ButtonContext.Provider value={context}>
-        <ui.button
+        <styled.button
           ref={mergeRefs(ref, buttonRef)}
           as={as}
           type={type}
@@ -165,9 +174,9 @@ export const Button = withContext(
 
           {loading ? (
             loadingMessage || (
-              <ui.span opacity={0}>
+              <styled.span opacity={0}>
                 <ButtonContent>{children}</ButtonContent>
-              </ui.span>
+              </styled.span>
             )
           ) : (
             <ButtonContent>{children}</ButtonContent>
@@ -176,7 +185,7 @@ export const Button = withContext(
           {endLoading ? <ButtonEndLoading {...loadingProps} /> : null}
 
           <Ripple {...rippleProps} />
-        </ui.button>
+        </styled.button>
       </ButtonContext.Provider>
     )
   },
@@ -198,10 +207,10 @@ const ButtonContent = component(
       </>
     )
   },
-  { name: "button__content" },
+  { name: "ButtonContent", className: getClassName(bem("button", "content")) },
 )()
 
-interface ButtonLoadingProps extends HTMLUIProps<"svg"> {}
+interface ButtonLoadingProps extends HTMLStyledProps<"svg"> {}
 
 const ButtonLoading = component<"svg", ButtonLoadingProps>(
   (props) => {
@@ -226,24 +235,29 @@ const ButtonLoading = component<"svg", ButtonLoadingProps>(
       )
     }
 
-    return (
-      <ui.div {...props} css={mergeCSS(css, props.css)}>
-        {loadingIcon}
-      </ui.div>
-    )
+    if (isValidElement<HTMLStyledProps<"svg">>(loadingIcon))
+      return cloneElement(loadingIcon, {
+        ...props,
+        ...loadingIcon.props,
+        css: mergeCSS(css, props.css, loadingIcon.props.css),
+      })
+
+    return null
   },
-  { name: "button__loading" },
+  { name: "ButtonLoading", className: getClassName(bem("button", "loading")) },
 )()
 
 const ButtonStartLoading = component<"svg", ButtonLoadingProps>(ButtonLoading, {
-  name: "button__loading--start",
+  name: "ButtonStartLoading",
+  className: getClassName(bem("button", "loading", "start")),
 })()
 
 const ButtonEndLoading = component<"svg", ButtonLoadingProps>(ButtonLoading, {
-  name: "button__loading--end",
+  name: "ButtonEndLoading",
+  className: getClassName(bem("button", "loading", "end")),
 })()
 
-interface ButtonIconProps extends HTMLUIProps<"svg"> {}
+interface ButtonIconProps extends HTMLStyledProps<"svg"> {}
 
 const ButtonIcon = component<"svg", ButtonIconProps>(
   ({ children, ...rest }) => {
@@ -257,13 +271,15 @@ const ButtonIcon = component<"svg", ButtonIconProps>(
 
     return Children.count(children) > 1 ? Children.only(null) : null
   },
-  { name: "button__icon" },
+  { name: "ButtonIcon", className: getClassName(bem("button", "icon")) },
 )()
 
 const ButtonStartIcon = component<"svg", ButtonIconProps>(ButtonIcon, {
-  name: "button__icon--start",
+  name: "ButtonStartIcon",
+  className: getClassName(bem("button", "icon", "start")),
 })()
 
 const ButtonEndIcon = component<"svg", ButtonIconProps>(ButtonIcon, {
-  name: "button__icon--end",
+  name: "ButtonEndIcon",
+  className: getClassName(bem("button", "icon", "end")),
 })()

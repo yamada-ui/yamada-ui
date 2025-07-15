@@ -1,10 +1,14 @@
+import { a11y, render, screen } from "#test"
 import { useRef } from "react"
-import { a11y, render, screen } from "../../../test"
 import { Portal } from "./portal"
 
 describe("<Portal />", () => {
   test("Portal renders correctly", async () => {
     await a11y(<Portal>Hello</Portal>)
+  })
+
+  test("sets `displayName` correctly", () => {
+    expect(Portal.name).toBe("Portal")
   })
 
   test("Portal with containerRef renders correctly", () => {
@@ -22,11 +26,7 @@ describe("<Portal />", () => {
 
     render(<TestContainer />)
 
-    const order1 = screen.getByText("order1")
-    const order2 = screen.getByText("order2")
-
-    expect(order1).toHaveTextContent("order2")
-    expect(order2).toHaveTextContent("order3")
+    expect(screen.getByText("order2order3")).toBeInTheDocument()
   })
 
   test("Nested Portal with containerRef renders correctly", () => {
@@ -36,10 +36,8 @@ describe("<Portal />", () => {
       return (
         <>
           <Portal containerRef={ref}>
-            <div>
-              order2
-              <Portal>order3</Portal>
-            </div>
+            order2
+            <Portal>order3</Portal>
           </Portal>
           <div ref={ref}>order1</div>
         </>
@@ -48,35 +46,7 @@ describe("<Portal />", () => {
 
     render(<TestContainer />)
 
-    const order1 = screen.getByText("order1")
-
-    expect(order1).toHaveTextContent("order2")
-    expect(order1).toHaveTextContent("order3")
-  })
-
-  test("Nested Portal with setting appendToParentPortal to false renders correctly", () => {
-    const TestContainer = () => {
-      const ref = useRef<HTMLDivElement>(null)
-
-      return (
-        <>
-          <Portal containerRef={ref}>
-            <div>
-              order2
-              <Portal appendToParentPortal={false}>order3</Portal>
-            </div>
-          </Portal>
-          <div ref={ref}>order1</div>
-        </>
-      )
-    }
-
-    render(<TestContainer />)
-
-    const order1 = screen.getByText("order1")
-
-    expect(order1).toHaveTextContent("order2")
-    expect(order1).not.toHaveTextContent("order3")
+    expect(screen.getByText("order1order2")).toBeInTheDocument()
     expect(screen.getByText("order3")).toBeInTheDocument()
   })
 
@@ -96,8 +66,6 @@ describe("<Portal />", () => {
 
     render(<TestContainer />)
 
-    const order2 = screen.getByText("order2")
-
-    expect(order2).toHaveTextContent("order1")
+    expect(screen.getByText("order1")).not.toHaveTextContent("order1order2")
   })
 })

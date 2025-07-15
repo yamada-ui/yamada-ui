@@ -1,9 +1,11 @@
-import type { HTMLUIProps } from "../../core"
-import { ui } from "../../core"
+"use client"
 
-export interface SpacerProps extends HTMLUIProps {}
+import type { HTMLStyledProps } from "../../core"
+import { styled } from "../../core"
 
-export const Spacer = ui("div", {
+export interface SpacerProps extends HTMLStyledProps {}
+
+export const Spacer = styled("div", {
   name: "spacer",
   base: {
     alignSelf: "stretch",

@@ -49,6 +49,12 @@ export const tagStyle = defineComponentSlotStyle({
         layerStyle: "outline",
       },
     },
+    plain: {
+      root: {
+        borderColor: "transparent",
+        borderWidth: "1px",
+      },
+    },
     solid: {
       root: {
         layerStyle: "solid",
@@ -73,10 +79,10 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "xs",
-        lineHeight: "{sizes.6}",
-        minH: "6",
-        minW: "6",
-        px: "2",
+        lineHeight: "{sizes.5}",
+        minH: "5",
+        minW: "5",
+        px: "1.5",
       },
     },
     md: {
@@ -85,9 +91,9 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "sm",
-        lineHeight: "{sizes.7}",
-        minH: "7",
-        minW: "7",
+        lineHeight: "{sizes.6}",
+        minH: "6",
+        minW: "6",
         px: "2",
       },
     },
@@ -97,10 +103,10 @@ export const tagStyle = defineComponentSlotStyle({
       },
       root: {
         fontSize: "md",
-        lineHeight: "{sizes.8}",
-        minH: "8",
-        minW: "8",
-        px: "3",
+        lineHeight: "{sizes.7}",
+        minH: "7",
+        minW: "7",
+        px: "2.5",
       },
     },
   },

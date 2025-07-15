@@ -1,8 +1,8 @@
-import type { Meta, StoryFn } from "@storybook/react"
-import { COLOR_SCHEMES } from "@yamada-ui/utils"
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { Kbd } from "."
-import { PropsTable } from "../../../storybook/components"
 import { Text } from "../../components/text"
+import { COLOR_SCHEMES } from "../../utils"
 
 type Story = StoryFn<typeof Kbd>
 

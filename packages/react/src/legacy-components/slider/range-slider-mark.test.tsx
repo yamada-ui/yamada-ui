@@ -4,7 +4,7 @@ import {
   RangeSliderMark,
   RangeSliderTrack,
 } from "."
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 
 describe("<RangeSliderMark />", () => {
   test("should render correctly", async () => {

@@ -1,10 +1,10 @@
 import type { Variants } from "motion/react"
 import type { FC } from "react"
-import type { LoadingSharedProps } from "./utils"
+import type { LoadingSharedProps } from "./loading-provider"
 import { memo } from "react"
 import { useTimeout } from "../../hooks/use-timeout"
 import { isValidElement } from "../../utils"
-import { Motion } from "../motion"
+import { motion } from "../motion"
 import { Text } from "../text"
 import { Loading } from "./"
 
@@ -55,11 +55,11 @@ const variants: { [key: string]: Variants } = {
 export interface PageProps extends LoadingSharedProps {}
 
 export const Page: FC<PageProps> = memo(
-  ({ duration, initialState, message, onFinish }) => {
+  ({ duration, initial, message, onFinish }) => {
     useTimeout(onFinish, duration)
 
     return (
-      <Motion
+      <motion.div
         data-loading
         alignItems="center"
         animate="animate"
@@ -67,7 +67,7 @@ export const Page: FC<PageProps> = memo(
         display="flex"
         exit="exit"
         h="100dvh"
-        initial={initialState ? false : "initial"}
+        initial={initial}
         inset={0}
         justifyContent="center"
         p="md"
@@ -76,7 +76,7 @@ export const Page: FC<PageProps> = memo(
         w="100vw"
         zIndex="beerus"
       >
-        <Motion
+        <motion.div
           alignItems="center"
           animate="animate"
           bg="bg.panel"
@@ -85,7 +85,7 @@ export const Page: FC<PageProps> = memo(
           exit="exit"
           flexDirection="column"
           gap="sm"
-          initial={initialState ? false : "initial"}
+          initial={initial}
           justifyContent="center"
           maxW="24rem"
           p="md"
@@ -101,8 +101,8 @@ export const Page: FC<PageProps> = memo(
               <Text lineClamp={3}>{message}</Text>
             )
           ) : null}
-        </Motion>
-      </Motion>
+        </motion.div>
+      </motion.div>
     )
   },
 )

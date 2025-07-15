@@ -1,6 +1,5 @@
 ---
 "@yamada-ui/react": major
-"@yamada-ui/utils": major
 "@yamada-ui/cli": major
 ---
 

@@ -30,6 +30,11 @@
       "description": "The variant of the component.",
       "required": false
     },
+    "index": {
+      "type": "number",
+      "description": "The index of the pin input field.",
+      "required": true
+    },
     "errorBorderColor": {
       "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
       "description": "The border color when the input is invalid.",

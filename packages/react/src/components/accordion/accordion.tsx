@@ -51,6 +51,10 @@ export interface AccordionRootProps
    * @default false
    */
   iconHidden?: boolean
+  /**
+   * If provided, generate elements based on items.
+   */
+  items?: Omit<AccordionItemProps, "index">[]
 }
 
 interface AccordionItemComponentContext
@@ -82,7 +86,7 @@ export { AccordionPropsContext, useAccordionPropsContext }
  * @see https://yamada-ui.com/components/accordion
  */
 export const AccordionRoot = withProvider<"div", AccordionRootProps>(
-  ({ icon, iconHidden, ...props }) => {
+  ({ children, icon, iconHidden, items, ...props }) => {
     const {
       descendants,
       focusedIndex,
@@ -93,7 +97,13 @@ export const AccordionRoot = withProvider<"div", AccordionRootProps>(
       toggle,
       getRootProps,
     } = useAccordion(props)
+    const computedChildren = useMemo(() => {
+      if (children) return children
 
+      return items?.map((props, index) => (
+        <AccordionItem key={index} index={index} {...props} />
+      ))
+    }, [children, items])
     const context = useMemo(
       () => ({
         focusedIndex,
@@ -125,7 +135,7 @@ export const AccordionRoot = withProvider<"div", AccordionRootProps>(
       <AccordionDescendantsContext value={descendants}>
         <AccordionContext value={context}>
           <ComponentContext value={componentContext}>
-            <styled.div {...getRootProps()} />
+            <styled.div {...getRootProps()}>{computedChildren}</styled.div>
           </ComponentContext>
         </AccordionContext>
       </AccordionDescendantsContext>

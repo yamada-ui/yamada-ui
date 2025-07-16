@@ -167,13 +167,19 @@ export const useSteps = ({
 
 export type UseStepsReturn = ReturnType<typeof useSteps>
 
-export interface UseStepsItemProps extends HTMLProps<"li"> {}
+export interface UseStepsItemProps extends HTMLProps<"li"> {
+  /**
+   * The index of the step.
+   */
+  index: number
+}
 
 export const useStepsItem = ({
   "aria-labelledby": ariaLabelledbyProp,
+  index,
   ...rest
-}: UseStepsItemProps = {}) => {
-  const { descendants, index, register } = useStepsDescendant()
+}: UseStepsItemProps) => {
+  const { descendants, register } = useStepsDescendant()
   const { id, getStatus, orientation } = useStepsContext()
   const status = getStatus(index)
   const current = status === "current"

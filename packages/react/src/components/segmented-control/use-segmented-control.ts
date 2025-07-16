@@ -155,7 +155,7 @@ export const useSegmentedControlItem = <Y extends string = string>({
     setValue,
     value: selectedValue,
   } = useSegmentedControlContext()
-  const { index, register } = useSegmentedControlDescendant({
+  const { register } = useSegmentedControlDescendant({
     disabled: disabled || readOnly,
   })
   const checked = value === selectedValue
@@ -176,7 +176,6 @@ export const useSegmentedControlItem = <Y extends string = string>({
       "aria-readonly": ariaAttr(trulyReadOnly),
       "data-checked": dataAttr(checked),
       "data-disabled": dataAttr(trulyDisabled),
-      "data-index": index.toString(),
       "data-orientation": orientation,
       "data-readonly": dataAttr(trulyReadOnly),
       "data-root-disabled": dataAttr(rootDisabled),
@@ -187,7 +186,6 @@ export const useSegmentedControlItem = <Y extends string = string>({
     [
       orientation,
       trulyDisabled,
-      index,
       trulyReadOnly,
       checked,
       rootDisabled,

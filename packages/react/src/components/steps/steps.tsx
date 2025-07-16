@@ -26,7 +26,7 @@ interface ComponentContext
   extends Pick<StepsRootProps, "items" | "lazy" | "lazyBehavior"> {}
 
 interface StepsItem
-  extends Omit<StepsItemProps, "content" | "title">,
+  extends Omit<StepsItemProps, "content" | "index" | "title">,
     Pick<StepsIndicatorProps, "complete" | "current" | "incomplete"> {
   /**
    * The content for step element.
@@ -202,7 +202,7 @@ export const StepsList = withContext<"ol", StepsListProps>(
             },
             index,
           ) => (
-            <StepsItem key={index} title={title} {...rest}>
+            <StepsItem key={index} index={index} title={title} {...rest}>
               <StepsIndicator
                 complete={complete}
                 current={current}

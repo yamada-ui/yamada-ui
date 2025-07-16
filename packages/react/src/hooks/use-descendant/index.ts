@@ -53,18 +53,20 @@ const getPrevIndex = (current: number, max: number, loop: boolean) => {
   return next
 }
 
-export interface DescendantProps {
+export type DescendantProps<M = {}> = M & {
   disabled?: boolean
 }
 
-export interface Descendant<Y extends HTMLElement = HTMLElement>
-  extends DescendantProps {
+export type Descendant<
+  Y extends HTMLElement = HTMLElement,
+  M = {},
+> = DescendantProps<M> & {
   index: number
   node: Y
 }
 
-const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
-  const descendants = new Map<Y, Descendant<Y>>()
+const descendantsManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
+  const descendants = new Map<Y, Descendant<Y, M>>()
 
   const setIndexes = (next: Node[]) => {
     descendants.forEach((descendant) => {
@@ -75,13 +77,13 @@ const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
     })
   }
 
-  const set = (node: null | Y, { disabled }: DescendantProps = {}) => {
+  const set = (node: null | Y, props?: DescendantProps<M>) => {
     if (!node || descendants.has(node)) return
 
     const keys = Array.from(descendants.keys()).concat(node)
     const sorted = sortNodes(keys)
 
-    const descendant = { disabled, index: -1, node }
+    const descendant = { ...props, index: -1, node } as Descendant<Y, M>
 
     descendants.set(node, descendant)
 
@@ -90,7 +92,7 @@ const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
 
   const destroy = () => descendants.clear()
 
-  const register = (nodeOrProps?: DescendantProps | null | Y) => {
+  const register = (nodeOrProps?: DescendantProps<M> | null | Y) => {
     if (nodeOrProps == null) return
 
     if (isHTMLElement(nodeOrProps)) return set(nodeOrProps)
@@ -111,6 +113,20 @@ const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
   const count = () => values().length
 
   const enabledCount = () => enabledValues().length
+
+  const focus = (target?: null | Y) => {
+    if (!target) return
+
+    const values = enabledValues()
+
+    values.forEach(({ node }) => {
+      delete node.dataset.activedescendant
+    })
+
+    target.dataset.activedescendant = "true"
+
+    target.focus()
+  }
 
   const indexOf = (target?: null | Y) =>
     !target ? -1 : (descendants.get(target)?.index ?? -1)
@@ -195,6 +211,7 @@ const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
     enabledValue,
     enabledValues,
     firstValue,
+    focus,
     indexOf,
     lastValue,
     nextValue,
@@ -206,19 +223,22 @@ const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
   }
 }
 
-export type DescendantsManager<Y extends HTMLElement> = ReturnType<
-  typeof descendantsManager<Y>
+export type DescendantsManager<Y extends HTMLElement, M = {}> = ReturnType<
+  typeof descendantsManager<Y, M>
 >
 
-export const createDescendant = <Y extends HTMLElement = HTMLElement>() => {
+export const createDescendant = <
+  Y extends HTMLElement = HTMLElement,
+  M = {},
+>() => {
   const [DescendantsContext, useDescendantsContext] = createContext<
-    DescendantsManager<Y>
+    DescendantsManager<Y, M>
   >({
     name: "DescendantsContext",
   })
 
   const useDescendants = () => {
-    const descendants = useRef(descendantsManager<Y>())
+    const descendants = useRef(descendantsManager<Y, M>())
 
     useSafeLayoutEffect(() => {
       return () => descendants.current.destroy()
@@ -227,7 +247,7 @@ export const createDescendant = <Y extends HTMLElement = HTMLElement>() => {
     return descendants.current
   }
 
-  const useDescendant = (options?: DescendantProps) => {
+  const useDescendant = (options?: DescendantProps<M>) => {
     const descendants = useDescendantsContext()
     const ref = useRef<Y>(null)
 

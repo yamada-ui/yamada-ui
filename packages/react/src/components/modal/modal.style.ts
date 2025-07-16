@@ -17,13 +17,15 @@ export const modalStyle = defineComponentSlotStyle({
       top: "md",
     },
     content: {
-      bg: "bg.panel",
+      bg: "bg",
+      borderColor: "border.subtle",
+      borderWidth: "1px",
       boxShadow: "lg",
       display: "flex",
       flexDirection: "column",
       maxH: "full",
       position: "relative",
-      rounded: "l2",
+      rounded: "l4",
       zIndex: "recoome",
     },
     footer: {

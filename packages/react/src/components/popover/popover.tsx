@@ -80,7 +80,7 @@ export const getPopupAnimationProps = (
   }
 }
 
-export interface PopoverContext
+interface ComponentContext
   extends Pick<
       UsePopoverReturn,
       | "getAnchorProps"
@@ -105,7 +105,6 @@ export interface PopoverRootProps
   children?: ReactNodeOrFunction<{
     open: boolean
     onClose: () => void
-    onForceClose: () => void
   }>
   /**
    * The animation duration.
@@ -129,7 +128,7 @@ const {
   usePropsContext: usePopoverPropsContext,
   withContext,
   useRootComponentProps,
-} = createSlotComponent<PopoverRootProps, PopoverStyle, PopoverContext>(
+} = createSlotComponent<PopoverRootProps, PopoverStyle, ComponentContext>(
   "popover",
   popoverStyle,
 )
@@ -161,10 +160,9 @@ export const PopoverRoot: FC<PopoverRootProps> = (props) => {
     getHeaderProps,
     getPositionerProps,
     getTriggerProps,
-    onClose: onForceClose,
-    onDelayClose: onClose,
+    onClose,
   } = usePopover(rest)
-  const popoverContext = useMemo(
+  const componentContext = useMemo(
     () => ({
       animationScheme,
       duration,
@@ -195,8 +193,8 @@ export const PopoverRoot: FC<PopoverRootProps> = (props) => {
 
   return (
     <StyleContext value={styleContext}>
-      <ComponentContext value={popoverContext}>
-        {runIfFn(children, { open, onClose, onForceClose })}
+      <ComponentContext value={componentContext}>
+        {runIfFn(children, { open, onClose })}
       </ComponentContext>
     </StyleContext>
   )

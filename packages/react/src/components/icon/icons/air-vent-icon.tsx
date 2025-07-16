@@ -1,3 +1,5 @@
+"use client"
+
 import { AirVent } from "lucide-react"
 import { component, Icon } from "../icon"
 

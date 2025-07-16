@@ -1,3 +1,5 @@
+"use client"
+
 import type { Variants } from "motion/react"
 import type { ThemeProps } from "../../core"
 import type {
@@ -60,11 +62,13 @@ export interface SlideProps
   extends WithTransitionProps<HTMLMotionProps>,
     ThemeProps<SlideStyle> {}
 
-export const {
+const {
   PropsContext: SlidePropsContext,
   usePropsContext: useSlidePropsContext,
   withContext,
 } = createComponent<SlideProps, SlideStyle>("slide", slideStyle)
+
+export { SlidePropsContext, useSlidePropsContext }
 
 /**
  * `Slide` is a component that shows or hides an element from the corners of the page.

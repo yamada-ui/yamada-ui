@@ -1,3 +1,5 @@
+"use client"
+
 import { Banknote } from "lucide-react"
 import { component, Icon } from "../icon"
 

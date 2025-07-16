@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, PropsWithChildren, ReactNode } from "react"
 import type {
   HTMLProps,
@@ -7,7 +9,7 @@ import type {
   ThemeProps,
 } from "../../core"
 import type { ButtonProps } from "../button"
-import type { CloseButtonProps } from "../button"
+import type { CloseButtonProps } from "../close-button"
 import type { FocusLockProps } from "../focus-lock"
 import type { HTMLMotionProps, MotionTransitionProps } from "../motion"
 import type { PortalProps } from "../portal"
@@ -26,7 +28,7 @@ import {
   wrapOrPassProps,
 } from "../../utils"
 import { Button } from "../button"
-import { CloseButton } from "../button"
+import { CloseButton } from "../close-button"
 import { fadeVariants } from "../fade"
 import { FocusLock } from "../focus-lock"
 import { motion } from "../motion"
@@ -108,8 +110,7 @@ export interface DrawerRootProps
   onCloseComplete?: () => void
 }
 
-export const {
-  component,
+const {
   ComponentContext,
   PropsContext: DrawerPropsContext,
   useComponentContext,
@@ -120,6 +121,8 @@ export const {
   "drawer",
   drawerStyle,
 )
+
+export { DrawerPropsContext, useDrawerPropsContext }
 
 /**
  * `Drawer` is a component for a panel that appears from the edge of the screen.
@@ -252,7 +255,7 @@ export interface DrawerOpenTriggerProps extends HTMLStyledProps<"button"> {}
 
 export const DrawerOpenTrigger = withContext<"button", DrawerOpenTriggerProps>(
   "button",
-  { name: "openTrigger", slot: ["trigger", "open"] },
+  { name: "OpenTrigger", slot: ["trigger", "open"] },
 )(undefined, (props) => {
   const { getOpenTriggerProps } = useComponentContext()
 
@@ -264,7 +267,7 @@ export interface DrawerCloseTriggerProps extends HTMLStyledProps<"button"> {}
 export const DrawerCloseTrigger = withContext<
   "button",
   DrawerCloseTriggerProps
->("button", { name: "closeTrigger", slot: ["trigger", "close"] })(
+>("button", { name: "CloseTrigger", slot: ["trigger", "close"] })(
   undefined,
   (props) => {
     const { getCloseTriggerProps } = useComponentContext()

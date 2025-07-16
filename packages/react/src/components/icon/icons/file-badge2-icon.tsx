@@ -1,3 +1,5 @@
+"use client"
+
 import { FileBadge2 } from "lucide-react"
 import { component, Icon } from "../icon"
 

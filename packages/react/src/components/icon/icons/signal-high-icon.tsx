@@ -1,3 +1,5 @@
+"use client"
+
 import { SignalHigh } from "lucide-react"
 import { component, Icon } from "../icon"
 

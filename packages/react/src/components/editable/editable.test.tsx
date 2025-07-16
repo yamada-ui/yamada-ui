@@ -1,15 +1,14 @@
-import { a11y, act, fireEvent, render } from "../../../test"
+import { a11y, act, fireEvent, render } from "#test"
 import { Editable } from "./"
 
 describe("<Editable />", () => {
   test("Editable renders correctly", async () => {
-    const { container } = render(
+    await a11y(
       <Editable.Root defaultValue="Some text">
         <Editable.Preview />
         <Editable.Input />
       </Editable.Root>,
     )
-    await a11y(container)
   })
 
   test("should render editable component", () => {

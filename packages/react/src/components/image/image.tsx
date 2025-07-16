@@ -1,4 +1,7 @@
-import type { CSSProps, FC, HTMLStyledProps, ThemeProps } from "../../core"
+"use client"
+
+import type { FC } from "react"
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ImageStyle } from "./image.style"
 import { createComponent } from "../../core"
 import { imageStyle } from "./image.style"
@@ -12,11 +15,13 @@ export interface ImageProps
   fit?: CSSProps["objectFit"]
 }
 
-export const {
+const {
   PropsContext: ImagePropsContext,
   usePropsContext: useImagePropsContext,
   withContext,
 } = createComponent<ImageProps, ImageStyle>("image", imageStyle)
+
+export { ImagePropsContext, useImagePropsContext }
 
 /**
  * `Image` is a component that displays images with fallback support.

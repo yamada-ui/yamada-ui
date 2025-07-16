@@ -1,15 +1,14 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { BoxIcon } from "../icon"
 import { List } from "./"
 
 describe("<List />", () => {
   test("List renders correctly", async () => {
-    const { container } = render(
+    await a11y(
       <List.Root>
         <List.Item>Item one</List.Item>
       </List.Root>,
     )
-    await a11y(container)
   })
 
   test("sets `displayName` correctly", () => {

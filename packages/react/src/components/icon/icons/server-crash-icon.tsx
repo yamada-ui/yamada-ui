@@ -1,3 +1,5 @@
+"use client"
+
 import { ServerCrash } from "lucide-react"
 import { component, Icon } from "../icon"
 

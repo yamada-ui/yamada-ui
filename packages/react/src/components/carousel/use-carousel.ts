@@ -1,3 +1,5 @@
+"use client"
+
 import type {
   EmblaCarouselType,
   EmblaOptionsType,
@@ -39,8 +41,11 @@ export type CarouselPlugin = EmblaPluginType
 export interface CarouselContext
   extends Omit<UseCarouselReturn, "getRootProps"> {}
 
-export const [CarouselContext, useCarouselContext] =
-  createContext<CarouselContext>({ name: "CarouselContext" })
+const [CarouselContext, useCarouselContext] = createContext<CarouselContext>({
+  name: "CarouselContext",
+})
+
+export { CarouselContext, useCarouselContext }
 
 export interface UseCarouselProps
   extends Omit<HTMLProps<"section">, "onChange"> {

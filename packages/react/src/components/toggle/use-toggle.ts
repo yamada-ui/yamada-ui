@@ -1,3 +1,5 @@
+"use client"
+
 import type { ChangeEvent } from "react"
 import type { HTMLProps, HTMLRefAttributes, PropGetter } from "../../core"
 import type { Merge } from "../../utils"
@@ -17,7 +19,7 @@ import {
 import { useFieldProps } from "../field"
 import { useToggleGroupContext } from "./use-toggle-group"
 
-export interface UseToggleProps<Y extends number | string = string>
+export interface UseToggleProps<Y extends string = string>
   extends FieldProps,
     HTMLRefAttributes<"input">,
     Omit<HTMLProps<"button">, "onChange" | "ref" | "value"> {
@@ -47,9 +49,10 @@ export interface UseToggleProps<Y extends number | string = string>
   onChange?: (checked: boolean) => void
 }
 
-export const useToggle = <Y extends number | string = string>(
-  props: UseToggleProps<Y>,
+export const useToggle = <Y extends string = string>(
+  props: UseToggleProps<Y> = {},
 ) => {
+  const { t } = useI18n("toggle")
   const {
     disabled: groupDisabled,
     readOnly: groupReadOnly,
@@ -57,9 +60,6 @@ export const useToggle = <Y extends number | string = string>(
     onChange: onChangeGroup,
     onChangeMapRef,
   } = useToggleGroupContext() ?? {}
-
-  const { t } = useI18n("toggle")
-
   const {
     props: {
       id,

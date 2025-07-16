@@ -4,22 +4,22 @@ import type {
   UseFocusOnMouseDownProps,
   UseFocusOnShowProps,
 } from "./"
+import { act, fireEvent, render, waitFor } from "#test"
 import { useRef } from "react"
-import { act, fireEvent, render, waitFor } from "../../../test"
 import { useFocusOnHide, useFocusOnPointerDown, useFocusOnShow } from "./"
 
 describe("useFocusOnHide", () => {
   const Component: FC<Omit<UseFocusOnHideProps, "focusRef">> = (props) => {
-    const containerRef = useRef<HTMLDivElement>(null)
+    const ref = useRef<HTMLDivElement>(null)
     const focusRef = useRef<HTMLButtonElement>(null)
-    useFocusOnHide(containerRef, {
+    useFocusOnHide(ref, {
       focusTarget: focusRef,
       shouldFocus: true,
       ...props,
     })
 
     return (
-      <div ref={containerRef}>
+      <div ref={ref}>
         <button ref={focusRef} data-testid="button">
           Button
         </button>
@@ -65,16 +65,16 @@ describe("useFocusOnHide", () => {
 
 describe("useFocusOnShow", () => {
   const Component: FC<Omit<UseFocusOnShowProps, "focusRef">> = (props) => {
-    const containerRef = useRef<HTMLDivElement>(null)
+    const ref = useRef<HTMLDivElement>(null)
     const focusRef = useRef<HTMLButtonElement>(null)
-    useFocusOnShow(containerRef, {
+    useFocusOnShow(ref, {
       focusTarget: focusRef,
       shouldFocus: true,
       ...props,
     })
 
     return (
-      <div ref={containerRef}>
+      <div ref={ref}>
         <button ref={focusRef} data-testid="button">
           Button
         </button>
@@ -85,11 +85,11 @@ describe("useFocusOnShow", () => {
   const ComponentWithoutFocusRef: FC<Omit<UseFocusOnShowProps, "focusRef">> = (
     props,
   ) => {
-    const containerRef = useRef<HTMLDivElement>(null)
-    useFocusOnShow(containerRef, { shouldFocus: true, ...props })
+    const ref = useRef<HTMLDivElement>(null)
+    useFocusOnShow(ref, { shouldFocus: true, ...props })
 
     return (
-      <div ref={containerRef}>
+      <div ref={ref}>
         <button data-testid="button">Button</button>
       </div>
     )
@@ -126,6 +126,7 @@ describe("useFocusOnShow", () => {
 
 describe("useFocusOnPointerDown", () => {
   const defaultPlatform = window.navigator.platform
+
   const defaultVendor = window.navigator.vendor
 
   beforeAll(() => {

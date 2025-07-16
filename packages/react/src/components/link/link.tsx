@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { LinkStyle } from "./link.style"
 import { createComponent } from "../../core"
@@ -12,11 +14,13 @@ export interface LinkProps extends HTMLStyledProps<"a">, ThemeProps<LinkStyle> {
   external?: boolean
 }
 
-export const {
+const {
   PropsContext: LinkPropsContext,
   usePropsContext: useLinkPropsContext,
   withContext,
 } = createComponent<LinkProps, LinkStyle>("link", linkStyle)
+
+export { LinkPropsContext, useLinkPropsContext }
 
 /**
  * `Link` is a component for creating hyperlinks to different web pages, locations within the same page, or other URLs.

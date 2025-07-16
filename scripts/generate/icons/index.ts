@@ -1,12 +1,12 @@
 import { parse } from "@babel/parser"
 import traverse from "@babel/traverse"
 import { interopDefault, toKebabCase } from "@yamada-ui/utils"
+import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { execa } from "execa"
-import { readdir, readFile, unlink, writeFile } from "fs/promises"
+import { readdir, readFile, unlink } from "fs/promises"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
-import { prettier } from "../../utils"
 
 const resolvedTraverse = interopDefault(traverse)
 
@@ -55,6 +55,8 @@ async function createIcons(iconNames: string[]) {
     iconNames.map(async (iconName) => {
       const fileName = toKebabCase(iconName)
       let data = [
+        `"use client"`,
+        ``,
         `import { ${iconName} } from "lucide-react"`,
         `import { component, Icon } from "../icon"`,
         ``,
@@ -67,9 +69,10 @@ async function createIcons(iconNames: string[]) {
         ``,
       ].join("\n")
 
-      data = await prettier(data)
-
-      await writeFile(path.resolve(DIST_PATH, `${fileName}-icon.tsx`), data)
+      await writeFileWithFormat(
+        path.resolve(DIST_PATH, `${fileName}-icon.tsx`),
+        data,
+      )
     }),
   )
 }
@@ -80,9 +83,7 @@ async function createTypes(iconNames: string[]) {
     `export type IconNames = ${iconNames.map((iconName) => `\"${iconName}Icon\"`).join(" | ")}`,
   ].join("\n")
 
-  data = await prettier(data)
-
-  await writeFile(path.resolve(DIST_PATH, fileName), data)
+  await writeFileWithFormat(path.resolve(DIST_PATH, fileName), data)
 }
 
 async function main() {
@@ -115,9 +116,7 @@ async function main() {
 
   let data = [`export type * from "./index.types"`, ...chunks].join("\n")
 
-  data = await prettier(data)
-
-  await writeFile(path.resolve(DIST_PATH, "index.ts"), data)
+  await writeFileWithFormat(path.resolve(DIST_PATH, "index.ts"), data)
 
   spinner.succeed(`Created icons`)
 

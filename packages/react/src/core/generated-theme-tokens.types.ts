@@ -1,4 +1,4 @@
-import type { UsageThemeTokens } from "./theme"
+import type { UsageThemeTokens } from "./system"
 
 export interface GeneratedThemeTokens extends UsageThemeTokens {
   apply: never
@@ -41,6 +41,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "bg.contrast"
     | "bg.emphasized"
     | "bg.error"
+    | "bg.ghost"
     | "bg.info"
     | "bg.muted"
     | "bg.overlay"

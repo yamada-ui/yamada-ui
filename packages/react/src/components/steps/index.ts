@@ -1,3 +1,4 @@
+export * from "./steps.style"
 export * as Steps from "./namespace"
 export type {
   StepsDescriptionProps,
@@ -25,5 +26,4 @@ export {
   StepsTitle,
   useStepsPropsContext,
 } from "./steps"
-export * from "./steps.style"
 export * from "./use-steps"

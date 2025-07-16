@@ -1,5 +1,5 @@
 import { MonthPicker } from "."
-import { a11y, render, screen, waitFor } from "../../../test"
+import { a11y, render, screen, waitFor } from "#test"
 
 describe("<MonthPicker />", () => {
   test("MonthPicker renders correctly", async () => {

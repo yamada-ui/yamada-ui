@@ -1,3 +1,5 @@
+"use client"
+
 import { DecimalsArrowRight } from "lucide-react"
 import { component, Icon } from "../icon"
 

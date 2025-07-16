@@ -1,3 +1,5 @@
+"use client"
+
 import { FileCheck } from "lucide-react"
 import { component, Icon } from "../icon"
 

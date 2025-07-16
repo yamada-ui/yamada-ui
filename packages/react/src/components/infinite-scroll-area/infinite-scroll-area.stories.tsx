@@ -103,7 +103,14 @@ export const Root: Story = () => {
         </InfiniteScrollArea>
       </VStack>
 
-      <Button onClick={() => resetRef.current()}>Reset</Button>
+      <Button
+        onClick={() => {
+          setCount(50)
+          resetRef.current()
+        }}
+      >
+        Reset
+      </Button>
     </>
   )
 }
@@ -484,7 +491,14 @@ export const Reset: Story = () => {
           ))}
       </InfiniteScrollArea>
 
-      <Button onClick={() => resetRef.current()}>Reset</Button>
+      <Button
+        onClick={() => {
+          setCount(50)
+          resetRef.current()
+        }}
+      >
+        Reset
+      </Button>
     </>
   )
 }

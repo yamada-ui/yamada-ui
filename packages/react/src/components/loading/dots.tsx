@@ -1,6 +1,8 @@
-import type { LoadingProps } from "./utils"
+"use client"
+
+import type { LoadingProps } from "./loading"
 import { Icon } from "../icon"
-import { initialProps, superProps, withContext } from "./utils"
+import { initialProps, superProps, withContext } from "./loading"
 
 export interface DotsProps extends LoadingProps {}
 

@@ -1,11 +1,14 @@
-import type { FC, ThemeProps, WithoutThemeProps } from "../../core"
+"use client"
+
+import type { FC } from "react"
+import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { GroupProps } from "../group"
 import type { ButtonProps } from "./button"
 import type { ButtonStyle } from "./button.style"
 import { useMemo } from "react"
 import { Group } from "../group"
+import { IconButtonPropsContext } from "../icon-button"
 import { ButtonPropsContext } from "./button"
-import { IconButtonPropsContext } from "./icon-button"
 
 export interface ButtonGroupProps
   extends WithoutThemeProps<GroupProps, ButtonStyle>,

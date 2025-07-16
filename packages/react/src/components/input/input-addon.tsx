@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { InputProps } from "./input"
 import type { InputAddonStyle } from "./input-addon.style"
@@ -10,7 +12,7 @@ export interface InputAddonProps
     ThemeProps<InputAddonStyle>,
     Pick<InputProps, "errorBorderColor" | "focusBorderColor"> {}
 
-export const {
+const {
   PropsContext: InputAddonPropsContext,
   usePropsContext: useInputAddonPropsContext,
   withContext,
@@ -18,6 +20,8 @@ export const {
   "input-addon",
   inputAddonStyle,
 )
+
+export { InputAddonPropsContext, useInputAddonPropsContext }
 
 export const InputAddon = withContext("div")(
   undefined,

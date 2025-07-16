@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { KeyframeIdent, ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"
@@ -65,11 +67,13 @@ export interface AiryProps
   onChange?: (value: KeyframeIdent) => void
 }
 
-export const {
+const {
   PropsContext: AiryPropsContext,
   usePropsContext: useAiryPropsContext,
   withContext,
 } = createComponent<AiryProps, AiryStyle>("airy", airyStyle)
+
+export { AiryPropsContext, useAiryPropsContext }
 
 /**
  * `Airy` is a component that creates an airy animation, switching between two elements when one is clicked.

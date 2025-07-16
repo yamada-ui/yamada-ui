@@ -1,20 +1,11 @@
 import type { FC } from "react"
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { Tabs } from "./"
 
 const items: Required<Tabs.RootProps>["items"] = [
-  {
-    panel: "This is home tab",
-    tab: "Home",
-  },
-  {
-    panel: "This is about tab",
-    tab: "About",
-  },
-  {
-    panel: "This is contact tab",
-    tab: "Contact",
-  },
+  { panel: "This is home tab", tab: "Home" },
+  { panel: "This is about tab", tab: "About" },
+  { panel: "This is contact tab", tab: "Contact" },
 ]
 
 interface TestComponentProps extends Tabs.RootProps {}

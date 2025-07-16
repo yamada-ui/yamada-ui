@@ -1,3 +1,5 @@
+"use client"
+
 import type { UseDisclosureProps } from "./use-disclosure"
 import { useCallback, useRef } from "react"
 import { noop } from "../../utils"

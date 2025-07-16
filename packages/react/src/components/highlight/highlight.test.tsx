@@ -1,5 +1,5 @@
+import { a11y, render, renderHook, screen } from "#test"
 import { Highlight, useHighlight } from "."
-import { a11y, render, renderHook, screen } from "../../../test"
 
 describe("<Highlight />", () => {
   test("passes a11y test", async () => {

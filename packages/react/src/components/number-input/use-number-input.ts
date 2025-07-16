@@ -1,3 +1,5 @@
+"use client"
+
 import type { ChangeEvent, FocusEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { UseCounterProps } from "../../hooks/use-counter"
@@ -93,7 +95,7 @@ export interface UseNumberInputProps
   parse?: (value: string) => string
 }
 
-export const useNumberInput = (props: UseNumberInputProps) => {
+export const useNumberInput = (props: UseNumberInputProps = {}) => {
   const {
     props: {
       allowMouseWheel,

@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import type { CollapseProps } from "../collapse"
@@ -11,10 +13,10 @@ import {
   findChild,
   getValidChildren,
   isEmpty,
+  isString,
   omitChildren,
   runIfFn,
 } from "../../utils"
-import { isString } from "../../utils"
 import { Collapse } from "../collapse"
 import { ChevronDownIcon } from "../icon"
 import { accordionStyle } from "./accordion.style"
@@ -49,6 +51,10 @@ export interface AccordionRootProps
    * @default false
    */
   iconHidden?: boolean
+  /**
+   * If provided, generate elements based on items.
+   */
+  items?: Omit<AccordionItemProps, "index">[]
 }
 
 interface AccordionItemComponentContext
@@ -59,10 +65,10 @@ const [AccordionItemComponentContext, useAccordionItemComponentContext] =
     name: "AccordionItemComponentContext",
   })
 
-export const {
-  ComponentContext: AccordionComponentContext,
+const {
+  ComponentContext,
   PropsContext: AccordionPropsContext,
-  useComponentContext: useAccordionComponentContext,
+  useComponentContext,
   usePropsContext: useAccordionPropsContext,
   withContext,
   withProvider,
@@ -72,13 +78,15 @@ export const {
   AccordionComponentContext
 >("accordion", accordionStyle)
 
+export { AccordionPropsContext, useAccordionPropsContext }
+
 /**
  * `Accordion` is a component for a list that displays information in an expandable or collapsible manner.
  *
  * @see https://yamada-ui.com/components/accordion
  */
 export const AccordionRoot = withProvider<"div", AccordionRootProps>(
-  ({ icon, iconHidden, ...props }) => {
+  ({ children, icon, iconHidden, items, ...props }) => {
     const {
       descendants,
       focusedIndex,
@@ -89,7 +97,13 @@ export const AccordionRoot = withProvider<"div", AccordionRootProps>(
       toggle,
       getRootProps,
     } = useAccordion(props)
+    const computedChildren = useMemo(() => {
+      if (children) return children
 
+      return items?.map((props, index) => (
+        <AccordionItem key={index} index={index} {...props} />
+      ))
+    }, [children, items])
     const context = useMemo(
       () => ({
         focusedIndex,
@@ -120,9 +134,9 @@ export const AccordionRoot = withProvider<"div", AccordionRootProps>(
     return (
       <AccordionDescendantsContext value={descendants}>
         <AccordionContext value={context}>
-          <AccordionComponentContext value={componentContext}>
-            <styled.div {...getRootProps()} />
-          </AccordionComponentContext>
+          <ComponentContext value={componentContext}>
+            <styled.div {...getRootProps()}>{computedChildren}</styled.div>
+          </ComponentContext>
         </AccordionContext>
       </AccordionDescendantsContext>
     )
@@ -213,7 +227,7 @@ export interface AccordionButtonProps extends HTMLStyledProps<"button"> {
 
 export const AccordionButton = withContext<"button", AccordionButtonProps>(
   ({ children, icon: customIcon, containerProps, ...rest }) => {
-    const { icon: rootIcon } = useAccordionComponentContext()
+    const { icon: rootIcon } = useComponentContext()
     const { icon: itemIcon } = useAccordionItemComponentContext()
     const { disabled, open, getButtonProps } = useAccordionItemContext()
     const props = { disabled, expanded: open }
@@ -239,7 +253,7 @@ interface AccordionIconProps extends HTMLStyledProps<"svg"> {}
 
 export const AccordionIcon = withContext<"svg", AccordionIconProps>(
   ({ children = <ChevronDownIcon />, ...rest }) => {
-    const { iconHidden } = useAccordionComponentContext()
+    const { iconHidden } = useComponentContext()
     const { getIconProps } = useAccordionItemContext()
 
     if (iconHidden) return null

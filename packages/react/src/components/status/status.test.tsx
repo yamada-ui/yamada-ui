@@ -1,5 +1,5 @@
+import { a11y, render, screen } from "#test"
 import { Status } from "."
-import { a11y, render, screen } from "../../../test"
 
 const TestComponent = () => (
   <Status

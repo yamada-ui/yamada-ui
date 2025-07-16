@@ -1,24 +1,20 @@
-import type { FC, ReactNode } from "react"
-import type { ColorModeProviderProps } from "../color-mode-provider"
+import type { FC } from "react"
+import type { ColorModeProviderProps, ThemeProviderProps } from "../../core"
 import type { I18nProviderProps } from "../i18n-provider"
-import type { ThemeProviderProps } from "../theme-provider"
 import { LoadingProvider } from "../../components/loading"
-// import { NoticeProvider } from "../../components/notice"
-import { defaultTheme } from "../../theme"
-import { defaultConfig } from "../../theme"
-import { ColorModeProvider } from "../color-mode-provider"
-import { EnvironmentProvider } from "../environment-provider"
+import {
+  ColorModeProvider,
+  EnvironmentProvider,
+  SystemProvider,
+  ThemeProvider,
+} from "../../core"
+import { defaultConfig, defaultTheme } from "../../theme"
 import { I18nProvider } from "../i18n-provider"
-import { ThemeProvider } from "../theme-provider"
 
 export interface UIProviderProps
   extends Omit<ThemeProviderProps, "storageKey">,
-    Pick<ColorModeProviderProps, "colorMode" | "colorModeManager">,
+    Pick<ColorModeProviderProps, "colorMode">,
     I18nProviderProps {
-  /**
-   * Application content.
-   */
-  children: ReactNode
   /**
    * Key of value saved in storage.
    * By default, it is saved to `local storage`.
@@ -37,42 +33,42 @@ export interface UIProviderProps
 export const UIProvider: FC<UIProviderProps> = ({
   children,
   colorMode,
-  colorModeManager,
   colorModeStorageKey,
   config = defaultConfig,
+  cookie,
   dir,
   disableGlobalStyle,
   disableResetStyle,
   intl,
   locale,
+  storage,
   theme = defaultTheme,
-  themeSchemeManager,
   themeSchemeStorageKey,
 }) => {
   return (
     <EnvironmentProvider>
       <I18nProvider dir={dir} intl={intl} locale={locale}>
-        <ThemeProvider
-          config={config}
-          disableGlobalStyle={disableGlobalStyle}
-          disableResetStyle={disableResetStyle}
-          storageKey={themeSchemeStorageKey}
-          theme={theme}
-          themeSchemeManager={themeSchemeManager}
-        >
-          <ColorModeProvider
-            colorMode={colorMode}
-            colorModeManager={colorModeManager}
+        <SystemProvider config={config} theme={theme}>
+          <ThemeProvider
             config={config}
-            storageKey={colorModeStorageKey}
+            cookie={cookie}
+            disableGlobalStyle={disableGlobalStyle}
+            disableResetStyle={disableResetStyle}
+            storage={storage}
+            storageKey={themeSchemeStorageKey}
+            theme={theme}
           >
-            <LoadingProvider {...config.loading}>
-              {children}
-
-              {/* <NoticeProvider {...config.notice} /> */}
-            </LoadingProvider>
-          </ColorModeProvider>
-        </ThemeProvider>
+            <ColorModeProvider
+              colorMode={colorMode}
+              config={config}
+              cookie={cookie}
+              storage={storage}
+              storageKey={colorModeStorageKey}
+            >
+              <LoadingProvider {...config.loading}>{children}</LoadingProvider>
+            </ColorModeProvider>
+          </ThemeProvider>
+        </SystemProvider>
       </I18nProvider>
     </EnvironmentProvider>
   )

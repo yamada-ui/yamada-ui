@@ -1,4 +1,7 @@
-import type { FC, HTMLStyledProps, StyleValue } from "../../core"
+"use client"
+
+import type { FC } from "react"
+import type { HTMLStyledProps, StyleValue } from "../../core"
 import type { SkeletonProps } from "./skeleton"
 import { mergeCSS, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"

@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { Snacks, useSnacks } from "."
-import { fireEvent, render, screen, waitFor } from "../../../test"
+import { fireEvent, render, screen, waitFor } from "#test"
 
 describe("<Snacks />", () => {
   const SnackExample = () => {

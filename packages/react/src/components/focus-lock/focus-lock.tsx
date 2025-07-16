@@ -1,5 +1,6 @@
-import type { PropsWithChildren, RefObject } from "react"
-import type { FC } from "../../core"
+"use client"
+
+import type { FC, PropsWithChildren, RefObject } from "react"
 import { useCallback } from "react"
 import ReactFocusLock from "react-focus-lock"
 import { getFocusableElements, interopDefault } from "../../utils"

@@ -1,3 +1,5 @@
+"use client"
+
 import type { KeyboardEvent, KeyboardEventHandler } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useId, useState } from "react"
@@ -13,27 +15,38 @@ import {
   mergeRefs,
 } from "../../utils"
 
-export const {
+const {
   DescendantsContext: AccordionDescendantsContext,
   useDescendant: useAccordionDescendant,
   useDescendants: useAccordionDescendants,
 } = createDescendant<HTMLButtonElement>()
 
+export {
+  AccordionDescendantsContext,
+  useAccordionDescendant,
+  useAccordionDescendants,
+}
+
 interface AccordionContext
   extends Omit<UseAccordionReturn, "descendants" | "getRootProps"> {}
 
-export const [AccordionContext, useAccordionContext] =
-  createContext<AccordionContext>({
+const [AccordionContext, useAccordionContext] = createContext<AccordionContext>(
+  {
     name: "AccordionContext",
-  })
+  },
+)
+
+export { AccordionContext, useAccordionContext }
 
 interface AccordionItemContext
   extends Omit<UseAccordionItemReturn, "getItemProps"> {}
 
-export const [AccordionItemContext, useAccordionItemContext] =
+const [AccordionItemContext, useAccordionItemContext] =
   createContext<AccordionItemContext>({
     name: "AccordionItemContext",
   })
+
+export { AccordionItemContext, useAccordionItemContext }
 
 export interface UseAccordionProps extends Omit<HTMLProps, "onChange"> {
   /**
@@ -126,6 +139,10 @@ export type UseAccordionReturn = ReturnType<typeof useAccordion>
 
 export interface UseAccordionItemProps extends HTMLProps {
   /**
+   * The index of the accordion item.
+   */
+  index: number
+  /**
    * If `true`, the accordion item will be disabled.
    *
    * @default false
@@ -135,8 +152,9 @@ export interface UseAccordionItemProps extends HTMLProps {
 
 export const useAccordionItem = ({
   disabled,
+  index,
   ...rest
-}: UseAccordionItemProps = {}) => {
+}: UseAccordionItemProps) => {
   const itemId = useId()
   const panelId = useId()
   const {
@@ -146,7 +164,7 @@ export const useAccordionItem = ({
     setIndex,
     toggle,
   } = useAccordionContext()
-  const { descendants, index, register } = useAccordionDescendant({ disabled })
+  const { descendants, register } = useAccordionDescendant({ disabled })
   const open =
     index !== -1
       ? isArray(selectedIndex)

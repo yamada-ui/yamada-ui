@@ -1,3 +1,4 @@
+export * from "./color-swatch.style"
 export {
   ColorSwatch,
   ColorSwatchPropsContext,
@@ -6,4 +7,3 @@ export {
 export type { ColorSwatchProps } from "./color-swatch"
 export { ColorSwatchGroup } from "./color-swatch-group"
 export type { ColorSwatchGroupProps } from "./color-swatch-group"
-export * from "./color-swatch.style"

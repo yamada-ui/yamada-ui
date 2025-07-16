@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { HTMLStyledProps } from "../../core"
 import type { StrengthMeterStyle } from "./strength-meter.style"
@@ -25,7 +27,7 @@ export interface StrengthMeterProps
   getIndicatorProps?: (percent: number) => IndicatorProps
 }
 
-export const {
+const {
   PropsContext: StrengthMeterPropsContext,
   usePropsContext: useStrengthMeterPropsContext,
   withContext,
@@ -34,6 +36,8 @@ export const {
   "strength-meter",
   strengthMeterStyle,
 )
+
+export { StrengthMeterPropsContext, useStrengthMeterPropsContext }
 
 export const StrengthMeter = withProvider<"div", StrengthMeterProps>(
   ({

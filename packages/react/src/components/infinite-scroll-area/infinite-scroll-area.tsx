@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type {
   HTMLStyledProps,
@@ -38,7 +40,7 @@ export interface InfiniteScrollAreaProps
   triggerProps?: HTMLStyledProps
 }
 
-export const {
+const {
   PropsContext: InfiniteScrollAreaPropsContext,
   usePropsContext: useInfiniteScrollAreaPropsContext,
   withContext,
@@ -47,6 +49,8 @@ export const {
   "infinite-scroll-area",
   infiniteScrollAreaStyle,
 )
+
+export { InfiniteScrollAreaPropsContext, useInfiniteScrollAreaPropsContext }
 
 /**
  * `InfiniteScrollArea` is for providing infinite scroll functionality.

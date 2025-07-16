@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - main
-      - documentation
       - v*
 
 concurrency:
@@ -14,7 +13,6 @@ concurrency:
 jobs:
   build:
     name: Build
-    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,9 +22,16 @@ jobs:
 
       - name: Check modified files
         id: check-modified
-        uses: ./.github/composite-actions/check-modified-files
+        uses: tj-actions/changed-files@v46
         with:
-          file_patterns: "packages/.*/(src|scripts|package.json|tsconfig.json),turbo.json,tsconfig.json"
+          files: |
+            turbo.json
+            packages/**/(package.json|tsconfig.json|tsdown.config.ts)
+            packages/**/src/**/*.{ts,tsx}
+            !packages/**/src/**/*.stories.{ts,tsx}
+            !packages/**/src/**/*.test.{ts,tsx}
+            !packages/workspace/src/**
+            packages/workspace/src/typescript/**
 
       - name: Cache turbo build setup
         uses: actions/cache@v4
@@ -39,19 +44,13 @@ jobs:
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
           TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
-      - name: Fetch main branch
-        if: steps.check-modified.outputs.changed == 'true'
-        run: git fetch origin main:main
-
       - name: Install
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Build packages
-        if: steps.check-modified.outputs.changed == 'true'
-        run: |
-          COMMIT=$(git merge-base HEAD main)
-          pnpm build:depend --commit=$COMMIT
+        if: steps.check-modified.outputs.any_changed == 'true'
+        run: pnpm build
 
   test:
     name: Test
@@ -62,20 +61,25 @@ jobs:
 
       - name: Check modified files
         id: check-modified
-        uses: ./.github/composite-actions/check-modified-files
+        uses: tj-actions/changed-files@v46
         with:
-          file_patterns: "packages/.*/(src|package.json|tsconfig.json|vitest.config.mts),scripts/setup-test.ts"
+          files: |
+            packages/**/(package.json|vitest.config.mts)
+            packages/**/(src|test)/**/*.{ts,tsx}
+            !packages/**/src/**/*.stories.{ts,tsx}
+            !packages/workspace/src/**
+            packages/workspace/src/vitest/**
 
       - name: Install
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run tests
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified.outputs.any_changed == 'true'
         run: pnpm test
 
       - name: Upload coverage
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified.outputs.any_changed == 'true'
         uses: codecov/codecov-action@v4
         with:
           fail_ci_if_error: false
@@ -93,18 +97,34 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check modified files
-        id: check-modified
-        uses: ./.github/composite-actions/check-modified-files
+        id: check-modified-packages
+        uses: tj-actions/changed-files@v46
         with:
-          file_patterns: "packages/,eslint/,eslint.config.mjs,tsconfig.json"
+          files: |
+            packages/**/(package.json|tsconfig.json)
+            packages/**/*.{ts,tsx,mts}
+
+      - name: Check modified files
+        id: check-modified-scripts
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            scripts/**
+            package.json
+            tsconfig.json
+            eslint.config.ts
 
       - name: Install
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run lint
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified-packages.outputs.any_changed == 'true'
         run: pnpm lint
+
+      - name: Run lint
+        if: steps.check-modified-scripts.outputs.any_changed == 'true'
+        run: pnpm lint:scripts
 
   type_script:
     name: TypeScript
@@ -114,18 +134,33 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check modified files
-        id: check-modified
-        uses: ./.github/composite-actions/check-modified-files
+        id: check-modified-packages
+        uses: tj-actions/changed-files@v46
         with:
-          file_patterns: "packages/,scripts/,tsconfig.json"
+          files: |
+            packages/**/(package.json|tsconfig.json)
+            packages/**/*.{ts,tsx,mts}
+
+      - name: Check modified files
+        id: check-modified-scripts
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            scripts/**
+            package.json
+            tsconfig.json
 
       - name: Install
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run typecheck
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified-packages.outputs.any_changed == 'true'
         run: pnpm typecheck
+
+      - name: Run typecheck
+        if: steps.check-modified-scripts.outputs.any_changed == 'true'
+        run: pnpm typecheck:scripts
 
   prettier:
     name: Prettier
@@ -135,25 +170,31 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check modified files
-        id: check-modified
-        uses: ./.github/composite-actions/check-modified-files
+        id: check-modified-packages
+        uses: tj-actions/changed-files@v46
         with:
-          file_patterns: "packages/,scripts/,.prettierrc.json,.prettierignore"
+          files: |
+            packages/**
+            .prettierignore
+            .prettierrc.js
 
-      - name: Check docs modified files
-        id: check-docs-modified
-        uses: ./.github/composite-actions/check-modified-files
+      - name: Check modified files
+        id: check-modified-scripts
+        uses: tj-actions/changed-files@v46
         with:
-          file_patterns: "docs/"
+          files: |
+            scripts/**
+            .prettierignore
+            .prettierrc.js
 
       - name: Install
-        if: steps.check-modified.outputs.changed == 'true' || steps.check-docs-modified.outputs.changed == 'true'
+        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run format
-        if: steps.check-modified.outputs.changed == 'true'
+        if: steps.check-modified-packages.outputs.any_changed == 'true'
         run: pnpm format
 
-      - name: Run docs format
-        if: steps.check-docs-modified.outputs.changed == 'true'
-        run: pnpm format:docs
+      - name: Run format
+        if: steps.check-modified-scripts.outputs.any_changed == 'true'
+        run: pnpm format:scripts

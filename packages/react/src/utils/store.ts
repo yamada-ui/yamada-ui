@@ -1,5 +1,6 @@
-import type { Path } from "@yamada-ui/utils"
-import type { Value } from "@yamada-ui/utils"
+"use client"
+
+import type { Path, Value } from "@yamada-ui/utils"
 import {
   getMemoizedObject,
   isArray,

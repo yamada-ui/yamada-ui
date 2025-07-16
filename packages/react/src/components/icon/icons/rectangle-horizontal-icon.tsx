@@ -1,3 +1,5 @@
+"use client"
+
 import { RectangleHorizontal } from "lucide-react"
 import { component, Icon } from "../icon"
 

@@ -1,9 +1,10 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field/field"
 import { cloneElement, useCallback, useMemo } from "react"
-import { ariaAttr, handlerAll } from "../../utils"
-import { mergeRefs } from "../../utils"
+import { ariaAttr, handlerAll, mergeRefs } from "../../utils"
 import { useFieldProps } from "../field"
 
 interface NativeSelectSharedItem
@@ -42,7 +43,7 @@ export interface UseNativeSelectProps extends HTMLProps<"select">, FieldProps {
   placeholderInOptions?: boolean
 }
 
-export const useNativeSelect = (props: UseNativeSelectProps) => {
+export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
   const {
     props: {
       children,

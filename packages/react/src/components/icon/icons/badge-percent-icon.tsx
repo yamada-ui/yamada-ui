@@ -1,3 +1,5 @@
+"use client"
+
 import { BadgePercent } from "lucide-react"
 import { component, Icon } from "../icon"
 

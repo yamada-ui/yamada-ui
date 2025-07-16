@@ -8,8 +8,8 @@ import {
   toArray,
   toCamelCase,
 } from "@yamada-ui/utils"
+import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { execa } from "execa"
-import { writeFile } from "fs/promises"
 import { glob } from "glob"
 import ora from "ora"
 import c from "picocolors"
@@ -22,7 +22,7 @@ import { features } from "web-features"
 import { excludeProps } from "./exclude-props"
 import { generateStyles } from "./styles"
 
-export const OUT_PATH = "packages/react/src/core/styles.ts"
+export const OUT_PATH = "packages/react/src/core/css/styles.ts"
 
 export type Properties = CSSProperties | StyledProperties
 export type CSSProperties = keyof CSS.PropertiesFallback
@@ -230,7 +230,7 @@ async function main() {
 
   spinner.start(`Writing file "${OUT_PATH}"`)
 
-  const { data, duplicatedProperties } = await generateStyles(
+  const { data, duplicatedProperties } = generateStyles(
     cssCompatData,
     atRuleCompatData,
   )
@@ -243,7 +243,7 @@ async function main() {
     })
   }
 
-  await writeFile(OUT_PATH, data)
+  await writeFileWithFormat(OUT_PATH, data)
 
   spinner.succeed(`Wrote file "${OUT_PATH}"`)
 

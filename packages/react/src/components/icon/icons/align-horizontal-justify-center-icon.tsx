@@ -1,3 +1,5 @@
+"use client"
+
 import { AlignHorizontalJustifyCenter } from "lucide-react"
 import { component, Icon } from "../icon"
 

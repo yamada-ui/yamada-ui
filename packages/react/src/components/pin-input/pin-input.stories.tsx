@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
+import { PropsTable } from "#storybook"
 import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
-import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
 import { Button } from "../button"
 import { Field } from "../field"
@@ -110,10 +110,10 @@ export const Disabled: Story = () => {
       <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant}>
-            <PinInput.Field disabled />
-            <PinInput.Field disabled />
-            <PinInput.Field disabled />
-            <PinInput.Field disabled />
+            <PinInput.Field disabled index={0} />
+            <PinInput.Field disabled index={1} />
+            <PinInput.Field disabled index={2} />
+            <PinInput.Field disabled index={3} />
           </PinInput.Root>
         )}
       </For>
@@ -142,10 +142,10 @@ export const Readonly: Story = () => {
       <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant}>
-            <PinInput.Field readOnly />
-            <PinInput.Field readOnly />
-            <PinInput.Field readOnly />
-            <PinInput.Field readOnly />
+            <PinInput.Field index={0} readOnly />
+            <PinInput.Field index={1} readOnly />
+            <PinInput.Field index={2} readOnly />
+            <PinInput.Field index={3} readOnly />
           </PinInput.Root>
         )}
       </For>
@@ -174,10 +174,10 @@ export const Invalid: Story = () => {
       <For each={["outline", "filled", "flushed"] as const}>
         {(variant, index) => (
           <PinInput.Root key={index} variant={variant}>
-            <PinInput.Field invalid />
-            <PinInput.Field invalid />
-            <PinInput.Field invalid />
-            <PinInput.Field invalid />
+            <PinInput.Field index={0} invalid />
+            <PinInput.Field index={1} invalid />
+            <PinInput.Field index={2} invalid />
+            <PinInput.Field index={3} invalid />
           </PinInput.Root>
         )}
       </For>
@@ -209,10 +209,10 @@ export const BorderColor: Story = () => {
 export const CustomFields: Story = () => {
   return (
     <PinInput.Root>
-      <PinInput.Field />
-      <PinInput.Field />
-      <PinInput.Field />
-      <PinInput.Field />
+      <PinInput.Field index={0} />
+      <PinInput.Field index={1} />
+      <PinInput.Field index={2} />
+      <PinInput.Field index={3} />
     </PinInput.Root>
   )
 }

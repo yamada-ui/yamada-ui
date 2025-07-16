@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLAttributes, KeyboardEvent, MouseEvent, Ref } from "react"
 import type { StyledProps } from "../../core"
 import { useCallback, useState } from "react"

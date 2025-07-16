@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { GridStyle } from "./grid.style"
 import { createComponent } from "../../core"
@@ -42,11 +44,13 @@ export interface GridProps extends HTMLStyledProps, ThemeProps<GridStyle> {
   templateRows?: CSSProps["gridTemplateRows"]
 }
 
-export const {
+const {
   PropsContext: GridPropsContext,
   usePropsContext: useGridPropsContext,
   withContext,
 } = createComponent<GridProps, GridStyle>("grid", gridStyle)
+
+export { GridPropsContext, useGridPropsContext }
 
 /**
  * `Grid` is a component for managing grid layouts. It also comes with handy style shorthand.

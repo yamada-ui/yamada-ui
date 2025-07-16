@@ -1,3 +1,5 @@
+"use client"
+
 import type { KeyboardEvent } from "react"
 import type { HTMLProps, Orientation, PropGetter } from "../../core"
 import { useCallback, useId, useState } from "react"
@@ -13,17 +15,25 @@ import {
   useUpdateEffect,
 } from "../../utils"
 
-export const {
+const {
   DescendantsContext: TabDescendantsContext,
   useDescendant: useTabDescendant,
   useDescendants: useTabDescendants,
 } = createDescendant<HTMLButtonElement>()
 
-export const {
+export { TabDescendantsContext, useTabDescendant, useTabDescendants }
+
+const {
   DescendantsContext: TabPanelDescendantsContext,
   useDescendant: useTabPanelDescendant,
   useDescendants: useTabPanelDescendants,
 } = createDescendant<HTMLDivElement>()
+
+export {
+  TabPanelDescendantsContext,
+  useTabPanelDescendant,
+  useTabPanelDescendants,
+}
 
 interface TabsContext
   extends Omit<
@@ -31,9 +41,11 @@ interface TabsContext
     "getRootProps" | "tabDescendants" | "tabPanelDescendants"
   > {}
 
-export const [TabsContext, useTabsContext] = createContext<TabsContext>({
+const [TabsContext, useTabsContext] = createContext<TabsContext>({
   name: "TabsContext",
 })
+
+export { TabsContext, useTabsContext }
 
 export interface UseTabsProps extends Omit<HTMLProps, "onChange"> {
   /**
@@ -173,9 +185,14 @@ export const useTabs = ({
 
 export type UseTabsReturn = ReturnType<typeof useTabs>
 
-export interface UseTabProps extends HTMLProps<"button"> {}
+export interface UseTabProps extends HTMLProps<"button"> {
+  /**
+   * The index of the tab.
+   */
+  index: number
+}
 
-export const useTab = ({ id, disabled, ...rest }: UseTabProps = {}) => {
+export const useTab = ({ id, disabled, index, ...rest }: UseTabProps) => {
   const uuid = useId()
   const {
     index: selectedIndex,
@@ -184,7 +201,7 @@ export const useTab = ({ id, disabled, ...rest }: UseTabProps = {}) => {
     setFocusedIndex,
     setIndex,
   } = useTabsContext()
-  const { index, register } = useTabDescendant({ disabled })
+  const { register } = useTabDescendant({ disabled })
   const { descendants } = useTabPanelDescendant()
   const tabPanelId = descendants.value(index)?.node.id
   const selected = index === selectedIndex
@@ -237,15 +254,21 @@ export const useTab = ({ id, disabled, ...rest }: UseTabProps = {}) => {
 
 export type UseTabReturn = ReturnType<typeof useTab>
 
-export interface UseTabPanelProps extends HTMLProps {}
+export interface UseTabPanelProps extends HTMLProps {
+  /**
+   * The index of the tab panel.
+   */
+  index: number
+}
 
 export const useTabPanel = ({
   "aria-labelledby": ariaLabelledbyProp,
+  index,
   ...rest
-}: UseTabPanelProps = {}) => {
+}: UseTabPanelProps) => {
   const id = useId()
   const { index: selectedIndex, orientation } = useTabsContext()
-  const { index, register } = useTabPanelDescendant()
+  const { register } = useTabPanelDescendant()
   const { descendants } = useTabDescendant()
   const tabId = descendants.value(index)?.node.id
   const selected = index === selectedIndex

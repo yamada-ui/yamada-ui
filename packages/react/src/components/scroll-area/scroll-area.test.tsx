@@ -1,6 +1,6 @@
-import type { FC } from "../../core"
+import type { FC } from "react"
+import { a11y, act, fireEvent, render, screen, waitFor } from "#test"
 import { ScrollArea } from "."
-import { a11y, act, fireEvent, render, screen, waitFor } from "../../../test"
 
 const TestContent: FC = () => {
   return (
@@ -49,14 +49,11 @@ const TestContent: FC = () => {
 
 describe("<ScrollArea />", () => {
   test("renders with no errors", async () => {
-    const { container } = render(
-      <ScrollArea data-testid="scroll-area" h="xs">
+    await a11y(
+      <ScrollArea h="xs">
         <TestContent />
       </ScrollArea>,
     )
-
-    expect(screen.getByTestId("scroll-area")).toBeInTheDocument()
-    await a11y(container)
   })
 
   test("renders children content correctly", () => {

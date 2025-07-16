@@ -1,7 +1,7 @@
-import type { FC } from "../../core"
+import type { FC } from "react"
+import { a11y, render, screen } from "#test"
 import { useMemo } from "react"
 import { Steps } from "."
-import { a11y, render, screen } from "../../../test"
 import { Button, ButtonGroup } from "../button"
 
 interface TestComponentProps extends Steps.RootProps {

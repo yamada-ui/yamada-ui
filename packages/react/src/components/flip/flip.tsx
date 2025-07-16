@@ -1,3 +1,5 @@
+"use client"
+
 import type { Variants } from "motion/react"
 import type { ReactNode } from "react"
 import type { KeyframeIdent, Orientation, ThemeProps } from "../../core"
@@ -83,13 +85,14 @@ export interface FlipProps
   onChange?: (value: KeyframeIdent) => void
 }
 
-export const {
+const {
   PropsContext: FlipPropsContext,
   usePropsContext: useFlipPropsContext,
-  useStyleContext,
   withContext,
   withProvider,
 } = createSlotComponent<FlipProps, FlipStyle>("flip", flipStyle)
+
+export { FlipPropsContext, useFlipPropsContext }
 
 /**
  * `Flip` is an animation component that alternates between flipping two elements.

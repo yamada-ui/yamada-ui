@@ -1,3 +1,5 @@
+"use client"
+
 import { Clock10 } from "lucide-react"
 import { component, Icon } from "../icon"
 

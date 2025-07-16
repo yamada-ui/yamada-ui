@@ -1,5 +1,6 @@
 import type { CSSObject } from "@emotion/styled"
-import type { AnyString, ThemeToken } from "@yamada-ui/react"
+import type { ThemeToken } from "@yamada-ui/react"
+import type { AnyString } from "@yamada-ui/utils"
 import type { CSSProperties, StyledProperties } from "."
 import type { TransformOptions } from "./transform-props"
 

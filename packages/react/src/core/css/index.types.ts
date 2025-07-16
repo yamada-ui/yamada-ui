@@ -1,24 +1,20 @@
 import type * as CSS from "csstype"
 import type { AnyString } from "../../utils"
 import type {
+  Breakpoint,
+  KeyframeIdent,
+  System,
+  ThemePath,
+  ThemeTokens,
+} from "../system"
+import type {
   AnySelector,
   ConditionProperty,
   ConditionProps,
-} from "../conditions"
-import type { StyleProps } from "../styles"
-import type {
-  Breakpoint,
-  KeyframeIdent,
-  StyledTheme,
-  ThemePath,
-  ThemeTokens,
-  UsageTheme,
-} from "../theme"
+} from "./conditions"
+import type { StyleProps } from "./styles"
 
 export type { CSS }
-
-export type ColorMode = "dark" | "light"
-export type ColorModeWithSystem = "system" | ColorMode
 
 export type ColorModeArray<Y, M extends boolean = true> = M extends true
   ? [ResponsiveWithConditionObject<Y> | Y, ResponsiveWithConditionObject<Y> | Y]
@@ -101,13 +97,13 @@ export interface CSSPropObject<
   [key: string]: { [key: string]: Y }
 }
 
-export type CSSSlotObject<Y extends number | string | symbol = string> = {
+export type CSSSlotObject<Y extends string = string> = {
   [M in Y]?: CSSObject
 }
 
 export type CSSModifierObject<Y extends CSSObject | CSSSlotObject = CSSObject> =
   {
-    [M in "base" | AnyString | number]?: Y
+    [M in "base" | AnyString]?: Y
   }
 
 export type CSSKeyframeObject = {
@@ -137,7 +133,7 @@ export interface CSSProps
 }
 
 export interface FunctionCSSInterpolation {
-  (theme: StyledTheme<UsageTheme>): CSSObject
+  (system: System): CSSObject
 }
 
 export type CSSObjectOrFunction = CSSObject | FunctionCSSInterpolation

@@ -1,3 +1,5 @@
+"use client"
+
 import type { FC, PropsWithChildren, ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { UseLazyMountProps } from "../../hooks/use-lazy-mount"
@@ -24,7 +26,7 @@ interface ComponentContext
   extends Pick<StepsRootProps, "items" | "lazy" | "lazyBehavior"> {}
 
 interface StepsItem
-  extends Omit<StepsItemProps, "content" | "title">,
+  extends Omit<StepsItemProps, "content" | "index" | "title">,
     Pick<StepsIndicatorProps, "complete" | "current" | "incomplete"> {
   /**
    * The content for step element.
@@ -77,7 +79,7 @@ export interface StepsRootProps
   items?: StepsItem[]
 }
 
-export const {
+const {
   ComponentContext,
   PropsContext: StepsPropsContext,
   useComponentContext,
@@ -88,6 +90,8 @@ export const {
   "steps",
   stepsStyle,
 )
+
+export { StepsPropsContext, useStepsPropsContext }
 
 /**
  * `Steps` is a component that displays the progress of a multi-step process.
@@ -198,7 +202,7 @@ export const StepsList = withContext<"ol", StepsListProps>(
             },
             index,
           ) => (
-            <StepsItem key={index} title={title} {...rest}>
+            <StepsItem key={index} index={index} title={title} {...rest}>
               <StepsIndicator
                 complete={complete}
                 current={current}
@@ -409,7 +413,7 @@ export interface StepsCompletedContentProps extends HTMLStyledProps {}
 export const StepsCompletedContent = withContext<
   "div",
   StepsCompletedContentProps
->("div", { name: "completedContent", slot: ["content", "completed"] })(
+>("div", { name: "CompletedContent", slot: ["content", "completed"] })(
   undefined,
   (props) => {
     const { lazy, lazyBehavior } = useComponentContext()
@@ -430,7 +434,7 @@ export interface StepsPrevTriggerProps extends HTMLStyledProps<"button"> {}
 
 export const StepsPrevTrigger = withContext<"button", StepsPrevTriggerProps>(
   "button",
-  { name: "prevTrigger", slot: ["trigger", "prev"] },
+  { name: "PrevTrigger", slot: ["trigger", "prev"] },
 )((props) => {
   const { getPrevTriggerProps } = useStepsContext()
 
@@ -441,7 +445,7 @@ export interface StepsNextTriggerProps extends HTMLStyledProps<"button"> {}
 
 export const StepsNextTrigger = withContext<"button", StepsNextTriggerProps>(
   "button",
-  { name: "nextTrigger", slot: ["trigger", "next"] },
+  { name: "NextTrigger", slot: ["trigger", "next"] },
 )((props) => {
   const { getNextTriggerProps } = useStepsContext()
 

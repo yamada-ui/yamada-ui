@@ -1,9 +1,10 @@
-import type { FC, HTMLStyledProps, ThemeTokens } from "../../core"
+import type { FC } from "react"
+import type { HTMLStyledProps, ThemeTokens } from "../../core"
 import type { AnyString } from "../../utils"
 import type { ImageProps } from "../image"
 import { useCallback, useMemo } from "react"
-import { styled } from "../../core"
-import { useTheme } from "../../providers/theme-provider"
+import { styled, useSystem, useTheme } from "../../core"
+import { getToken } from "../../hooks/use-token"
 import { getPx, isUndefined } from "../../utils"
 import { Image } from "../image"
 
@@ -72,10 +73,11 @@ export const Picture: FC<PictureProps> = ({
   pictureProps,
   ...rest
 }) => {
+  const { breakpoints, config } = useSystem()
   const { theme } = useTheme()
-  const { queriesObj } = theme.__breakpoints ?? {}
+  const { queriesObj } = breakpoints
   const { direction = "down", identifier = "@media screen" } =
-    theme.__config?.breakpoint ?? {}
+    config.breakpoint ?? {}
   const searchValue =
     identifier === "@media screen" ? "@media screen and " : `${identifier} `
 
@@ -98,14 +100,20 @@ export const Picture: FC<PictureProps> = ({
     const computedSources = sourcesProp.map(
       ({ maxW, media, minW, ...rest }) => {
         if (!media) {
-          if (minW) minW = getPx(minW)
-          if (maxW) maxW = getPx(maxW)
+          if (minW)
+            minW = getPx(
+              getToken("sizes", minW as ThemeTokens["sizes"])(theme) ?? minW,
+            )
+          if (maxW)
+            maxW = getPx(
+              getToken("sizes", maxW as ThemeTokens["sizes"])(theme) ?? maxW,
+            )
 
           media = createQuery(minW, maxW)
 
           return { ...rest, maxW, media, minW }
         } else {
-          const { maxW, minW, query } = queriesObj?.[media] ?? {}
+          const { maxW, minW, query } = queriesObj[media] ?? {}
 
           if (query) media = query.replace(searchValue, "")
 
@@ -119,7 +127,14 @@ export const Picture: FC<PictureProps> = ({
     } else {
       return computedSources
     }
-  }, [queriesObj, searchValue, sourcesProp, compareSources, enableSorting])
+  }, [
+    queriesObj,
+    searchValue,
+    sourcesProp,
+    compareSources,
+    enableSorting,
+    theme,
+  ])
 
   const sourceElements = useMemo(
     () =>
@@ -150,13 +165,13 @@ export interface SourceProps extends HTMLStyledProps<"source"> {
 }
 
 export const Source: FC<SourceProps> = ({ media, ...rest }) => {
-  const { theme } = useTheme()
-  const { queriesObj } = theme.__breakpoints ?? {}
-  const { identifier = "@media screen" } = theme.__config?.breakpoint ?? {}
+  const { breakpoints, config } = useSystem()
+  const { queriesObj } = breakpoints
+  const { identifier = "@media screen" } = config.breakpoint ?? {}
   const searchValue =
     identifier === "@media screen" ? "@media screen and " : `${identifier} `
 
-  const { query } = media ? (queriesObj?.[media] ?? {}) : {}
+  const { query } = media ? (queriesObj[media] ?? {}) : {}
 
   if (query) media = query.replace(searchValue, "")
 

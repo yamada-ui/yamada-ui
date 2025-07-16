@@ -1,13 +1,14 @@
-import type { PropsWithChildren, RefObject } from "react"
-import type { FC } from "../../core"
-import type { RootNode } from "../../providers/environment-provider"
+"use client"
+
+import type { FC, PropsWithChildren, RefObject } from "react"
+import type { RootNode } from "../../core"
 import { Children, useEffect, useState } from "react"
 import { createPortal } from "react-dom"
-import { useEnvironment } from "../../providers/environment-provider"
+import { useEnvironment } from "../../core"
 import { getDocument, isShadowRoot, useSsr } from "../../utils"
 
-const getPortalNode = (node: RootNode) => {
-  const rootNode = node.getRootNode()
+const getPortalNode = (node?: RootNode) => {
+  const rootNode = node?.getRootNode()
 
   if (isShadowRoot(rootNode)) return rootNode
 

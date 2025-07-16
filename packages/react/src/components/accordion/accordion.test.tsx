@@ -1,13 +1,28 @@
-import { a11y, render, screen } from "../../../test"
+import { a11y, render, screen } from "#test"
 import { noop } from "../../utils"
 import { BoxIcon } from "../icon"
 import { Accordion } from "./"
+
+const items = [
+  {
+    button: "Accordion Label 1",
+    children: "This is an accordion item 1",
+  },
+  {
+    button: "Accordion Label 2",
+    children: "This is an accordion item 2",
+  },
+  {
+    button: "Accordion Label 3",
+    children: "This is an accordion item 3",
+  },
+]
 
 describe("<Accordion />", () => {
   test("Accordion renders correctly", async () => {
     await a11y(
       <Accordion.Root>
-        <Accordion.Item button="Accordion Label">
+        <Accordion.Item button="Accordion Label" index={0}>
           This is an accordion item
         </Accordion.Item>
       </Accordion.Root>,
@@ -24,7 +39,7 @@ describe("<Accordion />", () => {
   test("sets `className` correctly", () => {
     render(
       <Accordion.Root data-testid="root">
-        <Accordion.Item data-testid="item" button="Accordion Label">
+        <Accordion.Item data-testid="item" button="Accordion Label" index={0}>
           <Accordion.Panel data-testid="panel">
             This is an accordion item
           </Accordion.Panel>
@@ -42,7 +57,7 @@ describe("<Accordion />", () => {
   test("renders HTML tag correctly", () => {
     render(
       <Accordion.Root data-testid="root">
-        <Accordion.Item data-testid="item" button="Accordion Label">
+        <Accordion.Item data-testid="item" button="Accordion Label" index={0}>
           <Accordion.Panel data-testid="panel">
             This is an accordion item
           </Accordion.Panel>
@@ -60,16 +75,7 @@ describe("<Accordion />", () => {
   })
 
   test("should render correctly with defaultIndex item expanded", async () => {
-    render(
-      <Accordion.Root defaultIndex={0}>
-        <Accordion.Item button="Accordion Label 1">
-          This is an accordion item 1
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 2">
-          This is an accordion item 2
-        </Accordion.Item>
-      </Accordion.Root>,
-    )
+    render(<Accordion.Root defaultIndex={0} items={items} />)
 
     const button = await screen.findByRole("button", {
       name: /Accordion Label 1/i,
@@ -80,16 +86,7 @@ describe("<Accordion />", () => {
   })
 
   test("should work correctly with toggle", async () => {
-    const { user } = render(
-      <Accordion.Root toggle>
-        <Accordion.Item button="Accordion Label 1">
-          This is an accordion item 1
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 2">
-          This is an accordion item 2
-        </Accordion.Item>
-      </Accordion.Root>,
-    )
+    const { user } = render(<Accordion.Root items={items} toggle />)
 
     const button = screen.getByRole("button", { name: /Accordion Label 1/i })
 
@@ -102,17 +99,7 @@ describe("<Accordion />", () => {
 
   test("should show multiple items", async () => {
     const { user } = render(
-      <Accordion.Root defaultIndex={[0, 1]} multiple>
-        <Accordion.Item button="Accordion Label 1">
-          This is an accordion item 1
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 2">
-          This is an accordion item 2
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 3">
-          This is an accordion item 3
-        </Accordion.Item>
-      </Accordion.Root>,
+      <Accordion.Root defaultIndex={[0, 1]} items={items} multiple />,
     )
 
     const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
@@ -130,7 +117,7 @@ describe("<Accordion />", () => {
   test("should render a disabled item", () => {
     render(
       <Accordion.Root>
-        <Accordion.Item button="Accordion Label" disabled>
+        <Accordion.Item button="Accordion Label" disabled index={0}>
           This is an accordion item
         </Accordion.Item>
       </Accordion.Root>,
@@ -143,7 +130,7 @@ describe("<Accordion />", () => {
   test("should render item with panel", async () => {
     render(
       <Accordion.Root defaultIndex={0}>
-        <Accordion.Item button="Accordion Label">
+        <Accordion.Item button="Accordion Label" index={0}>
           <Accordion.Panel>This is an accordion item</Accordion.Panel>
         </Accordion.Item>
       </Accordion.Root>,
@@ -164,7 +151,7 @@ describe("<Accordion />", () => {
           />
         )}
       >
-        <Accordion.Item button="Accordion Label">
+        <Accordion.Item button="Accordion Label" index={0}>
           This is an accordion item
         </Accordion.Item>
       </Accordion.Root>,
@@ -192,6 +179,7 @@ describe("<Accordion />", () => {
               data-testid="custom-icon"
             />
           )}
+          index={0}
         >
           This is an accordion item
         </Accordion.Item>
@@ -212,7 +200,7 @@ describe("<Accordion />", () => {
   test("should render item with custom icon in AccordionButton", async () => {
     const { user } = render(
       <Accordion.Root>
-        <Accordion.Item>
+        <Accordion.Item index={0}>
           <Accordion.Button
             icon={({ expanded }) => (
               <BoxIcon
@@ -242,7 +230,7 @@ describe("<Accordion />", () => {
   test("should render item with custom label", () => {
     render(
       <Accordion.Root>
-        <Accordion.Item>
+        <Accordion.Item index={0}>
           <Accordion.Button>Accordion Label</Accordion.Button>
           <Accordion.Panel>This is an accordion item</Accordion.Panel>
         </Accordion.Item>
@@ -263,6 +251,7 @@ describe("<Accordion />", () => {
             if (expanded) return <p>Is expanded</p>
             else return <p>Not expanded</p>
           }}
+          index={0}
         >
           This is an accordion item
         </Accordion.Item>
@@ -277,19 +266,7 @@ describe("<Accordion />", () => {
   })
 
   test("focus moves correctly on ArrowDown", async () => {
-    const { user } = render(
-      <Accordion.Root>
-        <Accordion.Item button="Accordion Label 1">
-          This is an accordion item 1
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 2">
-          This is an accordion item 2
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 3">
-          This is an accordion item 3
-        </Accordion.Item>
-      </Accordion.Root>,
-    )
+    const { user } = render(<Accordion.Root items={items} />)
 
     const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
     const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
@@ -309,19 +286,7 @@ describe("<Accordion />", () => {
   })
 
   test("focus moves correctly on ArrowUp", async () => {
-    const { user } = render(
-      <Accordion.Root>
-        <Accordion.Item button="Accordion Label 1">
-          This is an accordion item 1
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 2">
-          This is an accordion item 2
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 3">
-          This is an accordion item 3
-        </Accordion.Item>
-      </Accordion.Root>,
-    )
+    const { user } = render(<Accordion.Root items={items} />)
 
     const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
     const item2 = screen.getByRole("button", { name: /Accordion Label 2/i })
@@ -338,19 +303,7 @@ describe("<Accordion />", () => {
   })
 
   test("focus moves correctly on Home", async () => {
-    const { user } = render(
-      <Accordion.Root>
-        <Accordion.Item button="Accordion Label 1">
-          This is an accordion item 1
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 2">
-          This is an accordion item 2
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 3">
-          This is an accordion item 3
-        </Accordion.Item>
-      </Accordion.Root>,
-    )
+    const { user } = render(<Accordion.Root items={items} />)
 
     const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
     const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
@@ -363,19 +316,7 @@ describe("<Accordion />", () => {
   })
 
   test("focus moves correctly on End", async () => {
-    const { user } = render(
-      <Accordion.Root>
-        <Accordion.Item button="Accordion Label 1">
-          This is an accordion item 1
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 2">
-          This is an accordion item 2
-        </Accordion.Item>
-        <Accordion.Item button="Accordion Label 3">
-          This is an accordion item 3
-        </Accordion.Item>
-      </Accordion.Root>,
-    )
+    const { user } = render(<Accordion.Root items={items} />)
 
     const item1 = screen.getByRole("button", { name: /Accordion Label 1/i })
     const item3 = screen.getByRole("button", { name: /Accordion Label 3/i })
@@ -392,7 +333,7 @@ describe("<Accordion />", () => {
 
     render(
       <Accordion.Root multiple toggle>
-        <Accordion.Item button="Accordion Label">
+        <Accordion.Item button="Accordion Label" index={0}>
           This is an accordion item
         </Accordion.Item>
       </Accordion.Root>,
@@ -408,7 +349,7 @@ describe("<Accordion />", () => {
 
     render(
       <Accordion.Root defaultIndex={1} multiple>
-        <Accordion.Item button="Accordion Label">
+        <Accordion.Item button="Accordion Label" index={0}>
           This is an accordion item
         </Accordion.Item>
       </Accordion.Root>,

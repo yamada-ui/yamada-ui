@@ -1,7 +1,5 @@
-import type { StyledTheme } from "../../core"
+import { renderHook, system } from "#test"
 import MatchMediaMock from "vitest-matchmedia-mock"
-import { renderHook, styledTheme } from "../../../test"
-import { noop } from "../../utils"
 import { getBreakpointValue, useBreakpointValue } from "./use-breakpoint-value"
 
 describe("useBreakpointValue", () => {
@@ -44,33 +42,6 @@ describe("getBreakpointValue", () => {
   test("Returns the value of base", () => {
     const { result } = renderHook(() => getBreakpointValue({ base: "md" }))
 
-    expect(result.current(styledTheme, "md")).toBe("md")
-  })
-
-  test("Outputs a warning message if theme is undefined", () => {
-    const theme = undefined as unknown as StyledTheme
-
-    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
-
-    renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"), {
-      withProvider: false,
-    })
-
-    expect(consoleWarnSpy).toHaveBeenCalledWith(
-      "getBreakpointValue: `theme` is undefined.",
-    )
-  })
-
-  test("Outputs a warning message if breakpoints are undefined", () => {
-    const theme = {} as StyledTheme
-
-    const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(noop)
-
-    renderHook(() => getBreakpointValue({ base: "md" })(theme, "base"), {
-      withProvider: false,
-    })
-    expect(consoleWarnSpy).toHaveBeenCalledWith(
-      "getBreakpointValue: `breakpoints` is undefined.",
-    )
+    expect(result.current(system, "md")).toBe("md")
   })
 })

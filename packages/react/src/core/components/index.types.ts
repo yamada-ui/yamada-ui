@@ -1,9 +1,16 @@
 import type * as React from "react"
 import type { Merge } from "../../utils"
-import type { ConditionProps } from "../conditions"
 import type { CSSProps } from "../css"
-import type { StyleProps } from "../styles"
-import type { StyledTheme, UsageTheme } from "../theme"
+
+declare module "react" {
+  interface CSSProperties {
+    [key: `--${string}`]: number | string
+  }
+
+  interface DataAttributes {
+    [key: `data-${string}`]: string | undefined
+  }
+}
 
 export type DOMElement = keyof React.JSX.IntrinsicElements
 
@@ -16,21 +23,11 @@ export interface StyledProps extends CSSProps {
    * Merges its props onto its immediate child.
    */
   asChild?: boolean
-  /**
-   * Debug mode.
-   *
-   * @private
-   */
-  __debug?: boolean
 }
 
 export type WithoutAs<Y extends object> = Omit<Y, "as">
 
 export type WithoutRef<Y extends object> = Omit<Y, "ref">
-
-export interface InterpolationProps extends StyleProps, ConditionProps {
-  theme: StyledTheme<UsageTheme>
-}
 
 export type OmitProps<Y extends object = {}, M extends object = {}> = Omit<
   Y,
@@ -59,14 +56,12 @@ export interface ComponentArgs
 
 export interface Component<Y extends As, D extends object = {}>
   extends ComponentArgs {
-  <M extends As = Y>(props: ComponentProps<Y, M, D>): React.ReactNode
+  <M extends As = Y>(
+    props: ComponentProps<Y, M, D>,
+  ): React.ReactElement | React.ReactNode
 }
 
-export type FC<Y extends object = {}> = FunctionComponent<Y>
-
-export interface FunctionComponent<Y = {}> extends ComponentArgs {
-  (props: Y): React.ReactNode
-}
+export type GenericsComponent<Y extends Function> = ComponentArgs & Y
 
 export type As = React.ElementType
 

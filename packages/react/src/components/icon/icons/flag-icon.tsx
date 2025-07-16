@@ -1,3 +1,5 @@
+"use client"
+
 import { Flag } from "lucide-react"
 import { component, Icon } from "../icon"
 

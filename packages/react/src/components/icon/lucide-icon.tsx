@@ -1,3 +1,5 @@
+"use client"
+
 import type { IconNode } from "lucide-react"
 import type { IconProps } from "./icon"
 import { Icon as OriginalIcon } from "lucide-react"

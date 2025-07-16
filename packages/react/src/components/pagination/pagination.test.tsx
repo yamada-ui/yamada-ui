@@ -1,7 +1,7 @@
+import { a11y, fireEvent, render, screen } from "#test"
 import { Pagination } from "."
-import { a11y, fireEvent, render, screen } from "../../../test"
 import { isNumber } from "../../utils"
-import { IconButton } from "../button"
+import { IconButton } from "../icon-button"
 
 describe("<Pagination />", () => {
   test("passes a11y test", async () => {

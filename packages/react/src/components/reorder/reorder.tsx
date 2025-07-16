@@ -1,5 +1,7 @@
+"use client"
+
 import type { PropsWithChildren, ReactElement } from "react"
-import type { ComponentArgs, HTMLStyledProps, ThemeProps } from "../../core"
+import type { GenericsComponent, HTMLStyledProps, ThemeProps } from "../../core"
 import type { Merge } from "../../utils"
 import type { HTMLMotionProps } from "../motion"
 import type { ReorderStyle } from "./reorder.style"
@@ -30,12 +32,14 @@ export interface ReorderRootProps<Y = string>
   items?: ReorderItemProps<Y>[]
 }
 
-export const {
+const {
   PropsContext: ReorderPropsContext,
   usePropsContext: useReorderPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<ReorderRootProps, ReorderStyle>("reorder", reorderStyle)
+
+export { ReorderPropsContext, useReorderPropsContext }
 
 /**
  * `Reorder` is a component that allows you to change the order of items using drag and drop.
@@ -65,9 +69,9 @@ export const ReorderRoot = withProvider<"ul", ReorderRootProps>(
   },
   "root",
   { transferProps: ["orientation"] },
-)() as ComponentArgs & {
+)() as GenericsComponent<{
   <Y = string>(props: ReorderRootProps<Y>): ReactElement
-}
+}>
 
 export interface ReorderItemProps<Y = string>
   extends Omit<
@@ -91,9 +95,9 @@ export const ReorderItem = withContext<"li", ReorderItemProps>(
     )
   },
   "item",
-)() as ComponentArgs & {
+)() as GenericsComponent<{
   <Y = string>(props: ReorderItemProps<Y>): ReactElement
-}
+}>
 
 export interface ReorderTriggerProps extends HTMLStyledProps {}
 

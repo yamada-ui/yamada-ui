@@ -14,8 +14,7 @@ import {
   omitObject,
   splitObject,
 } from "../../utils"
-import { conditionProperties } from "../conditions"
-import { styleProperties } from "../styles"
+import { conditionProperties, styleProperties } from "../css"
 
 type MergeAll<Y extends Dict[]> = Y extends [infer M]
   ? M
@@ -37,10 +36,10 @@ export const cssProps = new Set<string>([
 export type ShouldForwardProp = (prop: string) => boolean
 
 export function createShouldForwardProp(
-  forwardProps?: string[],
+  forwardProps: string[] = [],
 ): ShouldForwardProp {
   return function (prop: string): boolean {
-    if (forwardProps?.includes(prop)) return true
+    if (forwardProps.includes(prop)) return true
 
     if (prop.startsWith("--")) return false
 

@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldsetStyle } from "./fieldset.style"
@@ -13,16 +15,17 @@ import {
 } from "../../utils"
 import { fieldsetStyle } from "./fieldset.style"
 
-export interface FieldsetContext
+interface FieldsetContext
   extends Pick<FieldsetRootProps, "disabled" | "invalid"> {
   id?: string
 }
 
-export const [FieldsetContext, useFieldsetContext] =
-  createContext<FieldsetContext>({
-    name: "FieldsetContext",
-    strict: false,
-  })
+const [FieldsetContext, useFieldsetContext] = createContext<FieldsetContext>({
+  name: "FieldsetContext",
+  strict: false,
+})
+
+export { FieldsetContext, useFieldsetContext }
 
 export interface FieldsetRootProps
   extends HTMLStyledProps<"fieldset">,
@@ -73,7 +76,7 @@ export interface FieldsetRootProps
   legendProps?: FieldsetLegendProps
 }
 
-export const {
+const {
   PropsContext: FieldsetPropsContext,
   usePropsContext: useFieldsetPropsContext,
   withContext,
@@ -82,6 +85,8 @@ export const {
   "fieldset",
   fieldsetStyle,
 )
+
+export { FieldsetPropsContext, useFieldsetPropsContext }
 
 /**
  * `Fieldset` is a component used to group multiple controls.

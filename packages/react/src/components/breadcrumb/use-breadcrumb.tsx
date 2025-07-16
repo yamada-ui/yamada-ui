@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactElement, ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
@@ -45,7 +47,7 @@ export const useBreadcrumb = ({
   link,
   startBoundaries = 0,
   ...rest
-}: UseBreadcrumbProps) => {
+}: UseBreadcrumbProps = {}) => {
   const validChildren = getValidChildren(children)
   const length = validChildren.length || items.length
   const { t } = useI18n("breadcrumb")

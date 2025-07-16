@@ -1,5 +1,7 @@
+"use client"
+
 import type { ReactNode } from "react"
-import type { FC, HTMLStyledProps, ThemeProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
 import type { FileInputStyle } from "./file-input.style"
@@ -29,7 +31,7 @@ export interface FileInputProps
   /**
    * The component that displays uploaded files.
    */
-  component?: FC<{ index: number; value: File }>
+  component?: (props: { index: number; value: File }) => ReactNode
   /**
    * A callback that formats the name of the uploaded file.
    */
@@ -42,7 +44,7 @@ export interface FileInputProps
   separator?: string
 }
 
-export const {
+const {
   PropsContext: FileInputPropsContext,
   usePropsContext: useFileInputPropsContext,
   withContext,
@@ -51,6 +53,8 @@ export const {
   "file-input",
   fileInputStyle,
 )
+
+export { FileInputPropsContext, useFileInputPropsContext }
 
 /**
  * `FileInput` is a component used for users to select files.

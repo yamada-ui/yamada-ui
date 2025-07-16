@@ -1,3 +1,5 @@
+"use client"
+
 import type { ChangeEvent, RefObject } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { Dict } from "../../utils"

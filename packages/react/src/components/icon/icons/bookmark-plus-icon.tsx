@@ -1,3 +1,5 @@
+"use client"
+
 import { BookmarkPlus } from "lucide-react"
 import { component, Icon } from "../icon"
 

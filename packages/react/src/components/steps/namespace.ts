@@ -9,11 +9,9 @@ export type {
   StepsNextTriggerProps as NextTriggerProps,
   StepsNumberProps as NumberProps,
   StepsPrevTriggerProps as PrevTriggerProps,
-  StepsPropsContext as PropsContext,
   StepsRootProps as RootProps,
   StepsSeparatorProps as SeparatorProps,
   StepsTitleProps as TitleProps,
-  useStepsPropsContext as usePropsContext,
 } from "./steps"
 export {
   StepsCompletedContent as CompletedContent,
@@ -26,14 +24,16 @@ export {
   StepsNextTrigger as NextTrigger,
   StepsNumber as Number,
   StepsPrevTrigger as PrevTrigger,
+  StepsPropsContext as PropsContext,
   StepsRoot as Root,
   StepsSeparator as Separator,
   StepsTitle as Title,
+  useStepsPropsContext as usePropsContext,
 } from "./steps"
+export type { StepsItemContext as ItemContext } from "./use-steps"
 export {
   StepsContext as Context,
   StepsDescendantsContext as DescendantsContext,
-  StepsItemContext as ItemContext,
   useStepsContext as useContext,
   useStepsDescendant as useDescendant,
   useStepsDescendants as useDescendants,

@@ -1,3 +1,5 @@
+"use client"
+
 import type {
   ChangeEvent,
   ChangeEventHandler,
@@ -69,7 +71,7 @@ export interface UseSwitchProps<Y extends number | string = string>
 }
 
 export const useSwitch = <Y extends number | string = string>(
-  props: UseSwitchProps<Y>,
+  props: UseSwitchProps<Y> = {},
 ) => {
   const uuid = useId()
   const {

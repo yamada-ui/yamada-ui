@@ -1,5 +1,5 @@
+import { a11y, render, screen, waitFor } from "#test"
 import { useState } from "react"
-import { a11y, render, screen, waitFor } from "../../../test"
 import { EyeIcon, EyeOffIcon } from "../icon"
 import { PasswordInput, StrengthMeter } from "./"
 

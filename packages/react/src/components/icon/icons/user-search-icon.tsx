@@ -1,3 +1,5 @@
+"use client"
+
 import { UserSearch } from "lucide-react"
 import { component, Icon } from "../icon"
 

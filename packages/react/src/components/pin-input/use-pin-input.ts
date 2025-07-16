@@ -1,3 +1,5 @@
+"use client"
+
 import type { ChangeEvent, KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { FieldProps } from "../field"
@@ -7,11 +9,17 @@ import { createDescendant } from "../../hooks/use-descendant"
 import { filterUndefined, handlerAll, runKeyAction } from "../../utils"
 import { useFieldProps } from "../field"
 
-export const {
+const {
   DescendantsContext: PinInputDescendantsContext,
   useDescendant: usePinInputDescendant,
   useDescendants: usePinInputDescendants,
 } = createDescendant<HTMLInputElement>()
+
+export {
+  PinInputDescendantsContext,
+  usePinInputDescendant,
+  usePinInputDescendants,
+}
 
 const toArray = (value?: string) => value?.split("")
 
@@ -88,7 +96,7 @@ export interface UsePinInputProps
   onComplete?: (value: string) => void
 }
 
-export const usePinInput = (props: UsePinInputProps) => {
+export const usePinInput = (props: UsePinInputProps = {}) => {
   const uuid = useId()
   const {
     props: {
@@ -124,7 +132,7 @@ export const usePinInput = (props: UsePinInputProps) => {
     (index: number) => {
       if (!moveFocus || !manageFocus) return
 
-      const next = descendants.nextValue(index, undefined, false)
+      const next = descendants.nextValue(index, false)
 
       if (!next) return
 
@@ -137,8 +145,8 @@ export const usePinInput = (props: UsePinInputProps) => {
     (direction: "next" | "prev", index: number) => {
       const input =
         direction === "next"
-          ? descendants.nextValue(index, undefined, false)
-          : descendants.prevValue(index, undefined, false)
+          ? descendants.nextValue(index, false)
+          : descendants.prevValue(index, false)
 
       if (!input) return
 
@@ -243,7 +251,7 @@ export const usePinInput = (props: UsePinInputProps) => {
           },
           Backspace: (ev) => {
             if ((ev.target as HTMLInputElement).value === "") {
-              const prevInput = descendants.prevValue(index, undefined, false)
+              const prevInput = descendants.prevValue(index, false)
 
               if (!prevInput) return
 

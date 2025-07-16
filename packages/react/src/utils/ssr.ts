@@ -1,3 +1,5 @@
+"use client"
+
 import { noop } from "@yamada-ui/utils"
 import { useSyncExternalStore } from "react"
 

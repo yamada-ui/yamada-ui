@@ -1,6 +1,5 @@
 import type { FC } from "react"
 import { useCallback, useEffect } from "react"
-import { App as OriginalApp } from "../../../storybook/components"
 import { UIProvider } from "../../providers/ui-provider"
 import { defaultConfig } from "../../theme"
 import { merge } from "../../utils"
@@ -48,7 +47,7 @@ export const Basic = () => {
   )
 }
 
-export const UseInitialState = () => {
+export const DefaultLoading = () => {
   const config = merge(defaultConfig, {
     loading: {
       background: {
@@ -65,7 +64,7 @@ export const UseInitialState = () => {
         icon: {
           variant: "dots",
         },
-        initialState: true,
+        loadingCount: 1,
       },
     },
   })
@@ -81,15 +80,13 @@ const App: FC = () => {
   const { background, page, screen } = useLoading()
 
   return (
-    <OriginalApp>
-      <Wrap gap="md">
-        <Button onClick={() => screen.start()}>Start screen loading</Button>
-        <Button onClick={() => page.start()}>Start page loading</Button>
-        <Button onClick={() => background.start()}>
-          Start background loading
-        </Button>
-      </Wrap>
-    </OriginalApp>
+    <Wrap gap="md">
+      <Button onClick={() => screen.start()}>Start screen loading</Button>
+      <Button onClick={() => page.start()}>Start page loading</Button>
+      <Button onClick={() => background.start()}>
+        Start background loading
+      </Button>
+    </Wrap>
   )
 }
 
@@ -107,14 +104,12 @@ const AsyncApp: FC = () => {
   }, [fetchData])
 
   return (
-    <OriginalApp>
-      <Wrap gap="md">
-        <Button onClick={() => screen.start()}>Start screen loading</Button>
-        <Button onClick={() => page.start()}>Start page loading</Button>
-        <Button onClick={() => background.start()}>
-          Start background loading
-        </Button>
-      </Wrap>
-    </OriginalApp>
+    <Wrap gap="md">
+      <Button onClick={() => screen.start()}>Start screen loading</Button>
+      <Button onClick={() => page.start()}>Start page loading</Button>
+      <Button onClick={() => background.start()}>
+        Start background loading
+      </Button>
+    </Wrap>
   )
 }

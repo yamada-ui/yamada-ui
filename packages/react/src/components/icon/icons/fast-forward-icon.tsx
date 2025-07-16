@@ -1,3 +1,5 @@
+"use client"
+
 import { FastForward } from "lucide-react"
 import { component, Icon } from "../icon"
 

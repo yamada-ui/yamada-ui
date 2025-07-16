@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useMemo } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
@@ -8,10 +10,12 @@ export type Page = "ellipsis" | number
 
 interface PaginationContext extends Omit<UsePaginationReturn, "getRootProps"> {}
 
-export const [PaginationContext, usePaginationContext] =
+const [PaginationContext, usePaginationContext] =
   createContext<PaginationContext>({
     name: "PaginationContext",
   })
+
+export { PaginationContext, usePaginationContext }
 
 export interface UsePaginationProps
   extends Omit<HTMLProps, "onChange" | "page"> {

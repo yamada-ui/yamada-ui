@@ -1,3 +1,5 @@
+"use client"
+
 import { BugPlay } from "lucide-react"
 import { component, Icon } from "../icon"
 

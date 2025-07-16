@@ -17,7 +17,7 @@ export const Basic = () => {
       color="white"
       p="md"
       rounded="md"
-      transitionDuration="slower"
+      transitionDuration="moderate"
       transitionProperty="all"
     >
       Current state: {idle ? "idle" : "not idle"}

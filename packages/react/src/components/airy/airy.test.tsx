@@ -1,7 +1,7 @@
 import type { KeyframeIdent } from "../../core"
+import { a11y, render, screen, waitFor } from "#test"
 import { useState } from "react"
 import { Airy } from "."
-import { a11y, render, screen, waitFor } from "../../../test"
 
 describe("<Airy />", () => {
   test("passes a11y test", async () => {

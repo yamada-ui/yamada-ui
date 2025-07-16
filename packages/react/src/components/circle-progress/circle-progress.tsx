@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { UseProgressProps } from "../progress"
 import type { CircleProgressStyle } from "./circle-progress.style"
@@ -40,7 +42,7 @@ export interface CircleProgressRootProps
   trackProps?: CircleProgressTrackProps
 }
 
-export const {
+const {
   PropsContext: CircleProgressPropsContext,
   usePropsContext: useCircleProgressPropsContext,
   withContext,
@@ -50,10 +52,12 @@ export const {
   circleProgressStyle,
 )
 
+export { CircleProgressPropsContext, useCircleProgressPropsContext }
+
 /**
  * `CircleProgress` is a component that displays progress in a circular progress bar.
  *
- * @see Docs https://yamada-ui.com/components/circle-progress
+ * @see https://yamada-ui.com/components/circle-progress
  */
 export const CircleProgressRoot = withProvider<"div", CircleProgressRootProps>(
   ({

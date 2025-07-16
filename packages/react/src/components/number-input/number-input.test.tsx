@@ -1,5 +1,5 @@
+import { a11y, fireEvent, render, screen } from "#test"
 import { NumberInput } from "."
-import { a11y, fireEvent, render, screen } from "../../../test"
 
 describe("<NumberInput />", () => {
   test("NumberInput renders correctly", async () => {

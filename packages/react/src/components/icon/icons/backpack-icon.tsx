@@ -1,3 +1,5 @@
+"use client"
+
 import { Backpack } from "lucide-react"
 import { component, Icon } from "../icon"
 

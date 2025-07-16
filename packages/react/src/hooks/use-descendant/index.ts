@@ -1,5 +1,7 @@
+"use client"
+
 import type { RefCallback } from "react"
-import { useRef, useState } from "react"
+import { useRef } from "react"
 import {
   cast,
   createContext,
@@ -51,184 +53,134 @@ const getPrevIndex = (current: number, max: number, loop: boolean) => {
   return next
 }
 
-export type DescendantOptions<
-  T extends HTMLElement = HTMLElement,
-  K = {},
-> = K & {
-  id?: string
+export interface DescendantProps {
   disabled?: boolean
-  filter?: FilterDescendant<T, K>
 }
 
-export type Descendant<
-  T extends HTMLElement = HTMLElement,
-  K = {},
-> = DescendantOptions<T, K> & {
+export interface Descendant<Y extends HTMLElement = HTMLElement>
+  extends DescendantProps {
   index: number
-  node: T
+  node: Y
 }
 
-export type FilterDescendant<T extends HTMLElement = HTMLElement, K = {}> = (
-  value: Descendant<T, K>,
-  index: number,
-  array: Descendant<T, K>[],
-) => boolean
+const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
+  const descendants = new Map<Y, Descendant<Y>>()
 
-const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
-  const descendants = new Map<T, Descendant<T, K>>()
-
-  const assignIndex = (newDescendants: Node[]) => {
+  const setIndexes = (next: Node[]) => {
     descendants.forEach((descendant) => {
-      const index = newDescendants.indexOf(descendant.node)
+      const index = next.indexOf(descendant.node)
 
       descendant.index = index
       descendant.node.dataset.index = descendant.index.toString()
     })
   }
 
-  const setDescendants = (
-    node: null | T,
-    options?: DescendantOptions<T, K>,
-  ) => {
+  const set = (node: null | Y, { disabled }: DescendantProps = {}) => {
     if (!node || descendants.has(node)) return
 
     const keys = Array.from(descendants.keys()).concat(node)
     const sorted = sortNodes(keys)
 
-    if (options?.disabled) options.disabled = !!options.disabled
+    const descendant = { disabled, index: -1, node }
 
-    const descendant = { index: -1, node, ...options }
+    descendants.set(node, descendant)
 
-    descendants.set(node, descendant as Descendant<T, K>)
-
-    assignIndex(sorted)
+    setIndexes(sorted)
   }
 
-  const register = (nodeOrOptions?: DescendantOptions<T, K> | null | T) => {
-    if (nodeOrOptions == null) return
+  const destroy = () => descendants.clear()
 
-    if (isHTMLElement(nodeOrOptions)) return setDescendants(nodeOrOptions)
+  const register = (nodeOrProps?: DescendantProps | null | Y) => {
+    if (nodeOrProps == null) return
 
-    return (node: null | T) => setDescendants(node, nodeOrOptions)
+    if (isHTMLElement(nodeOrProps)) return set(nodeOrProps)
+
+    return (node: null | Y) => set(node, nodeOrProps)
   }
 
-  const unregister = (node?: T) => {
+  const unregister = (node?: null | Y) => {
     if (node == null) return
 
     descendants.delete(node)
 
     const sorted = sortNodes(Array.from(descendants.keys()))
 
-    assignIndex(sorted)
+    setIndexes(sorted)
   }
 
-  const destroy = () => descendants.clear()
+  const count = () => values().length
 
-  const count = (filter?: FilterDescendant<T, K>) => values(filter).length
+  const enabledCount = () => enabledValues().length
 
-  const enabledCount = (filter?: FilterDescendant<T, K>) =>
-    enabledValues(filter).length
+  const indexOf = (target?: null | Y) =>
+    !target ? -1 : (descendants.get(target)?.index ?? -1)
 
-  const indexOf = (node?: null | T) =>
-    !node ? -1 : (descendants.get(node)?.index ?? -1)
-
-  const enabledIndexOf = (node?: null | T, filter?: FilterDescendant<T, K>) =>
-    node == null
+  const enabledIndexOf = (target?: null | Y) =>
+    target == null
       ? -1
-      : enabledValues(filter).findIndex((i) => i.node.isSameNode(node))
+      : enabledValues().findIndex(({ node }) => node.isSameNode(target))
 
-  const values = (filter?: FilterDescendant<T, K>) => {
-    const values = Array.from(descendants.values())
+  const values = () =>
+    Array.from(descendants.values()).sort((a, b) => a.index - b.index)
 
-    if (filter) {
-      return values.filter(filter).sort((a, b) => a.index - b.index)
-    } else {
-      return values.sort((a, b) => a.index - b.index)
-    }
+  const enabledValues = () => values().filter(({ disabled }) => !disabled)
+
+  const value = (index: number) => {
+    if (!count()) return undefined
+
+    return values()[index]
   }
 
-  const enabledValues = (filter?: FilterDescendant<T, K>) =>
-    values(filter).filter(({ disabled }) => !disabled)
+  const enabledValue = (index: number) => {
+    if (!enabledCount()) return undefined
 
-  const value = (index: number, filter?: FilterDescendant<T, K>) => {
-    if (count(filter) === 0) return undefined
-
-    return values(filter)[index]
+    return enabledValues()[index]
   }
 
-  const enabledValue = (index: number, filter?: FilterDescendant<T, K>) => {
-    if (enabledCount(filter) === 0) return undefined
+  const firstValue = () => value(0)
 
-    return enabledValues(filter)[index]
+  const enabledFirstValue = () => enabledValue(0)
+
+  const lastValue = () => value(count() - 1)
+
+  const enabledLastValue = () => enabledValue(enabledCount() - 1)
+
+  const prevValue = (index: number, loop = true) => {
+    const prev = getPrevIndex(index, count() - 1, loop)
+
+    return value(prev)
   }
 
-  const firstValue = (filter?: FilterDescendant<T, K>) => value(0, filter)
-
-  const enabledFirstValue = (filter?: FilterDescendant<T, K>) =>
-    enabledValue(0, filter)
-
-  const lastValue = (filter?: FilterDescendant<T, K>) =>
-    value(descendants.size - 1, filter)
-
-  const enabledLastValue = (filter?: FilterDescendant<T, K>) =>
-    enabledValue(enabledValues(filter).length - 1, filter)
-
-  const prevValue = (
-    index: number,
-    filter?: FilterDescendant<T, K>,
-    loop = true,
-  ) => {
-    const prev = getPrevIndex(index, count(filter) - 1, loop)
-
-    return value(prev, filter)
-  }
-
-  const enabledPrevValue = (
-    index: number,
-    filter?: FilterDescendant<T, K>,
-    loop = true,
-  ) => {
+  const enabledPrevValue = (index: number, loop = true) => {
     const target = value(index)
 
     if (!target) return
 
-    const enabledIndex = enabledIndexOf(target.node, filter)
+    const enabledIndex = enabledIndexOf(target.node)
     const prevEnabledIndex = getPrevIndex(
       enabledIndex,
-      enabledCount(filter) - 1,
+      enabledCount() - 1,
       loop,
     )
 
-    return enabledValue(prevEnabledIndex, filter)
+    return enabledValue(prevEnabledIndex)
   }
 
-  const nextValue = (
-    index: number,
-    filter?: FilterDescendant<T, K>,
-    loop = true,
-  ) => {
-    const next = getNextIndex(index, count(filter), loop)
+  const nextValue = (index: number, loop = true) => {
+    const next = getNextIndex(index, count(), loop)
 
-    return value(next, filter)
+    return value(next)
   }
 
-  const enabledNextValue = (
-    index: number,
-    filter?: FilterDescendant<T, K>,
-    loop = true,
-  ) => {
+  const enabledNextValue = (index: number, loop = true) => {
     const target = value(index)
 
     if (!target) return
 
-    const enabledIndex = enabledIndexOf(target.node, filter)
-    const nextEnabledIndex = getNextIndex(
-      enabledIndex,
-      enabledCount(filter),
-      loop,
-    )
+    const enabledIndex = enabledIndexOf(target.node)
+    const nextEnabledIndex = getNextIndex(enabledIndex, enabledCount(), loop)
 
-    return enabledValue(nextEnabledIndex, filter)
+    return enabledValue(nextEnabledIndex)
   }
 
   return {
@@ -254,23 +206,19 @@ const descendantsManager = <T extends HTMLElement = HTMLElement, K = {}>() => {
   }
 }
 
-export type DescendantsManager<
-  T extends HTMLElement,
-  K extends { [key: string]: any } = {},
-> = ReturnType<typeof descendantsManager<T, K>>
+export type DescendantsManager<Y extends HTMLElement> = ReturnType<
+  typeof descendantsManager<Y>
+>
 
-export const createDescendant = <
-  T extends HTMLElement = HTMLElement,
-  K extends { [key: string]: any } = {},
->() => {
+export const createDescendant = <Y extends HTMLElement = HTMLElement>() => {
   const [DescendantsContext, useDescendantsContext] = createContext<
-    DescendantsManager<T, K>
+    DescendantsManager<Y>
   >({
     name: "DescendantsContext",
   })
 
   const useDescendants = () => {
-    const descendants = useRef(descendantsManager<T, K>())
+    const descendants = useRef(descendantsManager<Y>())
 
     useSafeLayoutEffect(() => {
       return () => descendants.current.destroy()
@@ -279,36 +227,24 @@ export const createDescendant = <
     return descendants.current
   }
 
-  const useDescendant = (options?: DescendantOptions<T, K>) => {
+  const useDescendant = (options?: DescendantProps) => {
     const descendants = useDescendantsContext()
-    const [index, setIndex] = useState<number>(-1)
-    const ref = useRef<T>(null)
+    const ref = useRef<Y>(null)
 
     useSafeLayoutEffect(() => {
       return () => {
-        if (!ref.current) return
-
-        descendants.unregister(ref.current)
+        if (ref.current) descendants.unregister(ref.current)
       }
     }, [])
 
-    useSafeLayoutEffect(() => {
-      if (!ref.current) return
-
-      const dataIndex = Number(ref.current.dataset.index)
-
-      if (index != dataIndex && !Number.isNaN(dataIndex)) setIndex(dataIndex)
-    })
-
-    const refCallback = options
-      ? cast<RefCallback<T>>(descendants.register(options))
-      : cast<RefCallback<T>>(descendants.register)
-
     return {
       descendants,
-      enabledIndex: descendants.enabledIndexOf(ref.current, options?.filter),
-      index,
-      register: mergeRefs(refCallback, ref),
+      register: mergeRefs(
+        options
+          ? cast<RefCallback<Y>>(descendants.register(options))
+          : cast<RefCallback<Y>>(descendants.register),
+        ref,
+      ),
     }
   }
 

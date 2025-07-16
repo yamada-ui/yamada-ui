@@ -1,5 +1,7 @@
-import type { Key } from "react"
-import type { FC, ThemeProps } from "../../core"
+"use client"
+
+import type { FC, Key } from "react"
+import type { ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"
 import type { RippleStyle } from "./ripple.style"
 import type { RippleOptions } from "./use-ripple"
@@ -31,11 +33,13 @@ export interface RippleProps
   disabled?: boolean
 }
 
-export const {
+const {
   PropsContext: RipplePropsContext,
   usePropsContext: useRipplePropsContext,
   withContext,
 } = createComponent<RippleProps, RippleStyle>("ripple", rippleStyle)
+
+export { RipplePropsContext, useRipplePropsContext }
 
 /**
  * `Ripple` is a component that adds a ripple effect to elements, allowing users to recognize when they have clicked.

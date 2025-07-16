@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { HeadingStyle } from "./heading.style"
 import { createComponent } from "../../core"
@@ -7,11 +9,13 @@ export interface HeadingProps
   extends HTMLStyledProps<"h1">,
     ThemeProps<HeadingStyle> {}
 
-export const {
+const {
   PropsContext: HeadingPropsContext,
   usePropsContext: useHeadingPropsContext,
   withContext,
 } = createComponent<HeadingProps, HeadingStyle>("heading", headingStyle)
+
+export { HeadingPropsContext, useHeadingPropsContext }
 
 /**
  * `Heading` is a component that represents section headings. By default, it renders an `h1` element.

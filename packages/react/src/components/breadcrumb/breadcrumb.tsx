@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactElement } from "react"
 import type {
   HTMLStyledProps,
@@ -55,7 +57,7 @@ export interface BreadcrumbRootProps
   separatorProps?: BreadcrumbSeparatorProps
 }
 
-export const {
+const {
   ComponentContext,
   PropsContext: BreadcrumbPropsContext,
   useComponentContext,
@@ -66,6 +68,8 @@ export const {
   "breadcrumb",
   breadcrumbStyle,
 )
+
+export { BreadcrumbPropsContext, useBreadcrumbPropsContext }
 
 /**
  * `Breadcrumb` is a component that helps users understand the hierarchy of a website.

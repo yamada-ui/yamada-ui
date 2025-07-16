@@ -1,3 +1,5 @@
+"use client"
+
 import { Grid2x2Plus } from "lucide-react"
 import { component, Icon } from "../icon"
 

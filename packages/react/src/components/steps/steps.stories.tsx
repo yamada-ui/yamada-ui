@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
 import { Steps } from "."
-import { PropsTable } from "../../../storybook/components"
 import { COLOR_SCHEMES } from "../../utils"
 import { Box } from "../box"
 import { Button, ButtonGroup } from "../button"
@@ -344,7 +344,7 @@ export const CustomComponent: Story = () => {
   return (
     <Steps.Root>
       <Steps.List>
-        <Steps.Item>
+        <Steps.Item index={0}>
           <Steps.Indicator />
           <Box>
             <Steps.Title>孫悟空少年編</Steps.Title>
@@ -352,7 +352,7 @@ export const CustomComponent: Story = () => {
           </Box>
           <Steps.Separator />
         </Steps.Item>
-        <Steps.Item>
+        <Steps.Item index={1}>
           <Steps.Indicator />
           <Box>
             <Steps.Title>ピッコロ大魔王編</Steps.Title>
@@ -360,7 +360,7 @@ export const CustomComponent: Story = () => {
           </Box>
           <Steps.Separator />
         </Steps.Item>
-        <Steps.Item>
+        <Steps.Item index={2}>
           <Steps.Indicator />
           <Box>
             <Steps.Title>サイヤ人編</Steps.Title>

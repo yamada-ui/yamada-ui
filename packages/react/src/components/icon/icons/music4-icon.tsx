@@ -1,3 +1,5 @@
+"use client"
+
 import { Music4 } from "lucide-react"
 import { component, Icon } from "../icon"
 

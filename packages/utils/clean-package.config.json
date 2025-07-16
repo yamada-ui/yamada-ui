@@ -1,0 +1,20 @@
+{
+  "replace": {
+    "main": "dist/esm/index.js",
+    "types": "dist/types/index.d.ts",
+    "exports": {
+      ".": {
+        "source": "./src/index.ts",
+        "import": {
+          "types": "./dist/types/index.d.ts",
+          "default": "./dist/esm/index.js"
+        },
+        "require": {
+          "types": "./dist/types/index.d.ts",
+          "default": "./dist/cjs/index.cjs"
+        }
+      },
+      "./package.json": "./package.json"
+    }
+  }
+}

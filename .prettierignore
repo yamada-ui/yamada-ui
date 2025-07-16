@@ -1,8 +1,8 @@
-.next
 .turbo
+.next
+.velite
 dist
 node_modules
-coverage
-build
 pnpm-lock.yaml
-*.hbs
+coverage
+storybook-static

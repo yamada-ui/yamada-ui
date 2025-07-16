@@ -1,3 +1,5 @@
+"use client"
+
 import { ImageUp } from "lucide-react"
 import { component, Icon } from "../icon"
 

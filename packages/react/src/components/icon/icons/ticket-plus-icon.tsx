@@ -1,3 +1,5 @@
+"use client"
+
 import { TicketPlus } from "lucide-react"
 import { component, Icon } from "../icon"
 

@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLProps, PropGetter, SimplePlacement } from "../../core"
 import type { UseModalProps } from "../modal"
 import type { HTMLMotionProps } from "../motion"

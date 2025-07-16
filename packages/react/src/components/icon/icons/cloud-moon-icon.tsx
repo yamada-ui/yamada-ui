@@ -1,3 +1,5 @@
+"use client"
+
 import { CloudMoon } from "lucide-react"
 import { component, Icon } from "../icon"
 

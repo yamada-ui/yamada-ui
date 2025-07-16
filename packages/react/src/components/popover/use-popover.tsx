@@ -1,14 +1,16 @@
+"use client"
+
 import type { FocusEvent, KeyboardEvent, RefObject } from "react"
 import type { PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import type { UsePopperProps } from "../../hooks/use-popper"
 import { useCallback, useEffect, useId, useRef } from "react"
+import { useEnvironment } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { useEventListener } from "../../hooks/use-event-listener"
 import { useFocusOnShow } from "../../hooks/use-focus"
 import { useOutsideClick } from "../../hooks/use-outside-click"
 import { usePopper } from "../../hooks/use-popper"
-import { useEnvironment } from "../../providers/environment-provider"
 import {
   contains,
   cx,

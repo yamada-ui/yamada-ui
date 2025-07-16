@@ -1,3 +1,5 @@
+"use client"
+
 import type { Dispatch, SetStateAction } from "react"
 import { useState } from "react"
 import { isNull, isUndefined, runIfFn, useCallbackRef } from "../../utils"

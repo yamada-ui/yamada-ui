@@ -1,5 +1,5 @@
 import { YearPicker } from "."
-import { a11y, fireEvent, render } from "../../../test"
+import { a11y, fireEvent, render } from "#test"
 
 describe("<YearPicker />", () => {
   test("YearPicker renders correctly", async () => {

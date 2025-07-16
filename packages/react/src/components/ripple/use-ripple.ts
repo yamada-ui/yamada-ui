@@ -1,10 +1,11 @@
-import type React from "react"
+"use client"
+
 import type { Key, MouseEventHandler } from "react"
 import { useCallback, useState } from "react"
 import { handlerAll, uuid } from "../../utils"
 
 export interface RippleOptions {
-  key: React.Key
+  key: Key
   size: number
   x: number
   y: number

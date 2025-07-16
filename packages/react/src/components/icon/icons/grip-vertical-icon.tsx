@@ -1,3 +1,5 @@
+"use client"
+
 import { GripVertical } from "lucide-react"
 import { component, Icon } from "../icon"
 

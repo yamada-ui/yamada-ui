@@ -1,5 +1,5 @@
 import { MultiDatePicker } from "."
-import { a11y, fireEvent, render } from "../../../test"
+import { a11y, fireEvent, render } from "#test"
 
 describe("<MultiDatePicker />", () => {
   test("MultiDatePicker renders correctly", async () => {

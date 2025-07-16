@@ -1,3 +1,5 @@
+"use client"
+
 import { Sticker } from "lucide-react"
 import { component, Icon } from "../icon"
 

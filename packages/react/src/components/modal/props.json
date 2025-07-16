@@ -42,6 +42,16 @@
       "description": "Set color scheme variables.",
       "required": false
     },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | ... 6 more ... | (... & { ...; }), \"2xl\" | ... 6 more ... | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: \"2xl...",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 173 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+      "description": "The variant of the component.",
+      "required": false
+    },
     "active": {
       "type": "boolean",
       "defaultValue": "false",
@@ -370,12 +380,6 @@
     "success": {
       "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
       "description": "The modal success button to use.",
-      "required": false
-    },
-    "timing": {
-      "type": "\"after\" | \"before\"",
-      "defaultValue": "\"after\"",
-      "description": "The timing of the open and close.",
       "required": false
     },
     "title": {

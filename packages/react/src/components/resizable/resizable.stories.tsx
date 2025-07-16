@@ -5,7 +5,7 @@ import { Resizable } from "./"
 
 type Story = StoryFn<typeof Resizable.Root>
 
-import { PropsTable } from "../../../storybook/components"
+import { PropsTable } from "#storybook"
 import { useBoolean } from "../../hooks/use-boolean"
 import { Button } from "../button"
 import { Center } from "../center"
@@ -474,7 +474,7 @@ export const CookieStorage: Story = () => {
   )
 }
 
-export const CustomControls: Story = () => {
+export const CustomControl: Story = () => {
   const controlRef = useRef<Resizable.ItemControl>(null)
 
   return (

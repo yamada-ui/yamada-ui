@@ -1,3 +1,5 @@
+"use client"
+
 import { ListStart } from "lucide-react"
 import { component, Icon } from "../icon"
 

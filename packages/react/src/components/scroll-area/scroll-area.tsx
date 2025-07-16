@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { ScrollAreaStyle } from "./scroll-area.style"
 import type { UseScrollAreaProps } from "./use-scroll-area"
@@ -10,7 +12,7 @@ export interface ScrollAreaProps
     ThemeProps<ScrollAreaStyle>,
     UseScrollAreaProps {}
 
-export const {
+const {
   PropsContext: ScrollAreaPropsContext,
   usePropsContext: useScrollAreaPropsContext,
   withContext,
@@ -18,6 +20,8 @@ export const {
   "scroll-area",
   scrollAreaStyle,
 )
+
+export { ScrollAreaPropsContext, useScrollAreaPropsContext }
 
 /**
  * `ScrollArea` is a component that displays a customized scrollbar.

@@ -1,3 +1,5 @@
+"use client"
+
 import type { ThemeProps, WithoutThemeProps } from "../../core"
 import type { StackProps } from "./stack"
 import type { VStackStyle } from "./v-stack.style"
@@ -9,11 +11,13 @@ export interface VStackProps
   extends WithoutThemeProps<StackProps, VStackStyle>,
     ThemeProps<VStackStyle> {}
 
-export const {
+const {
   PropsContext: VStackPropsContext,
   usePropsContext: useVStackPropsContext,
   withContext,
 } = createComponent<VStackProps, VStackStyle>("stack--vertical", vStackStyle)
+
+export { useVStackPropsContext, VStackPropsContext }
 
 /**
  * `VStack` is a component that groups elements and provides space between child elements.

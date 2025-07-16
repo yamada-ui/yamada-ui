@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback, useEffect, useState } from "react"
 import { isFunction } from "../../utils"
 import { useWindowEvent } from "../use-window-event"
@@ -32,7 +34,7 @@ const deserializeJSON = (value: string | undefined) => {
 
 export const createStorage = <T>(type: StorageType, name: string) => {
   const eventName =
-    type === "localStorage" ? "ui-local-storage" : "ui-session-storage"
+    type === "localStorage" ? "local-storage" : "session-storage"
 
   return ({
     key,

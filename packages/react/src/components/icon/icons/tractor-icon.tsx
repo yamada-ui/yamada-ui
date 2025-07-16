@@ -1,3 +1,5 @@
+"use client"
+
 import { Tractor } from "lucide-react"
 import { component, Icon } from "../icon"
 

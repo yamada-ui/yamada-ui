@@ -1,3 +1,5 @@
+"use client"
+
 import { MailSearch } from "lucide-react"
 import { component, Icon } from "../icon"
 

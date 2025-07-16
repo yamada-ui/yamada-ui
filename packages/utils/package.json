@@ -1,8 +1,8 @@
 {
   "name": "@yamada-ui/utils",
   "type": "module",
-  "version": "1.7.2",
-  "description": "Yamada UI utils",
+  "version": "2.0.0",
+  "description": "The utilities for Yamada UI projects",
   "keywords": [
     "utils",
     "utilities",
@@ -31,9 +31,9 @@
   },
   "scripts": {
     "clean": "rimraf dist .turbo .eslintcache",
-    "build": "tsup",
-    "test": "vitest",
-    "test:dev": "vitest --watch --ui",
+    "build": "tsdown",
+    "test": "NODE_OPTIONS=\"--experimental-strip-types\" vitest",
+    "test:dev": "NODE_OPTIONS=\"--experimental-strip-types\" vitest --watch --ui",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
@@ -50,20 +50,5 @@
   "peerDependencies": {
     "react": ">=19"
   },
-  "clean-package": "../../clean-package.config.json",
-  "tsup": {
-    "clean": true,
-    "dts": true,
-    "bundle": false,
-    "target": "es2022",
-    "format": [
-      "cjs",
-      "esm"
-    ],
-    "entry": [
-      "src",
-      "!src/**/*.test.*"
-    ],
-    "sourcemap": true
-  }
+  "clean-package": "./clean-package.config.json"
 }

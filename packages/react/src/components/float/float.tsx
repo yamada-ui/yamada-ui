@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { FloatStyle } from "./float.style"
 import { createComponent, varAttr } from "../../core"
@@ -13,11 +15,13 @@ export interface FloatProps
   offset?: CSSProps["inset"]
 }
 
-export const {
+const {
   PropsContext: FloatPropsContext,
   usePropsContext: useFloatPropsContext,
   withContext,
 } = createComponent<FloatProps, FloatStyle>("float", floatStyle)
+
+export { FloatPropsContext, useFloatPropsContext }
 
 /**
  * `Float` is a component used to anchor an element to the edge of a container.

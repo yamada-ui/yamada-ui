@@ -1,13 +1,21 @@
+export * from "./input-addon.style"
+export * from "./input-element.style"
+export * from "./input.style"
 export { Input, InputPropsContext, useInputPropsContext } from "./input"
 export type { InputProps } from "./input"
-export { InputAddon } from "./input-addon"
+export {
+  InputAddon,
+  InputAddonPropsContext,
+  useInputAddonPropsContext,
+} from "./input-addon"
 export type { InputAddonProps } from "./input-addon"
-export * from "./input-addon.style"
-export { InputElement } from "./input-element"
+export {
+  InputElement,
+  InputElementPropsContext,
+  useInputElementPropsContext,
+} from "./input-element"
 export type { InputElementProps } from "./input-element"
-export * from "./input-element.style"
 export { InputGroupRoot } from "./input-group"
 export type { InputGroupRootProps } from "./input-group"
-export * from "./input.style"
 export * as InputGroup from "./namespace"
 export * from "./use-input-border"

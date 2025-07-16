@@ -1,6 +1,7 @@
-import type { ReactNode } from "react"
+"use client"
+
+import type { FC, ReactNode } from "react"
 import type {
-  FC,
   HTMLProps,
   HTMLStyledProps,
   StyleValue,
@@ -8,7 +9,8 @@ import type {
   WithoutThemeProps,
 } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
-import type { ButtonGroupProps, IconButtonProps } from "../button"
+import type { ButtonGroupProps } from "../button"
+import type { IconButtonProps } from "../icon-button"
 import type { PaginationStyle } from "./pagination.style"
 import type { Page, UsePaginationProps } from "./use-pagination"
 import { cloneElement, isValidElement, useMemo } from "react"
@@ -16,7 +18,7 @@ import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { useI18n } from "../../providers/i18n-provider"
 import { isNumber, runIfFn } from "../../utils"
-import { ButtonGroup, IconButton } from "../button"
+import { ButtonGroup } from "../button"
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -24,6 +26,7 @@ import {
   ChevronsRightIcon,
   EllipsisIcon,
 } from "../icon"
+import { IconButton } from "../icon-button"
 import { paginationStyle } from "./pagination.style"
 import {
   PaginationContext,
@@ -95,8 +98,7 @@ export interface PaginationRootProps
   itemProps?: PaginationItemProps
 }
 
-export const {
-  component,
+const {
   PropsContext: PaginationPropsContext,
   usePropsContext: usePaginationPropsContext,
   withContext,
@@ -105,6 +107,8 @@ export const {
   "pagination",
   paginationStyle,
 )
+
+export { PaginationPropsContext, usePaginationPropsContext }
 
 /**
  * `Pagination` is a component for managing the pagination and navigation of content.
@@ -280,7 +284,15 @@ export const PaginationRoot = withProvider(
 )()
 
 export interface PaginationItemsProps {
+  /**
+   * The function used to generate children.
+   * it will be called with page number or `"ellipsis"`.
+   */
   children?: (page: Page) => ReactNode
+  /**
+   * The function used to generate children.
+   * it will be called with page number or `"ellipsis"`.
+   */
   render?: (page: Page) => ReactNode
 }
 
@@ -316,6 +328,10 @@ export const PaginationItem = withContext<"button", PaginationItemProps>(
 
 export interface PaginationTextProps
   extends Omit<HTMLStyledProps<"span">, "children"> {
+  /**
+   * The children of the text.
+   * if function, it will be called with `{ page: number; total: number }`.
+   */
   children?: ReactNodeOrFunction<{ page: number; total: number }>
   /**
    * The format of the text.

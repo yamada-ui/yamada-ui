@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ProgressStyle } from "./progress.style"
 import type { UseProgressProps } from "./use-progress"
@@ -28,12 +30,14 @@ export interface ProgressProps
   rangeProps?: ProgressRangeProps
 }
 
-export const {
+const {
   PropsContext: ProgressPropsContext,
   usePropsContext: useProgressPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<ProgressProps, ProgressStyle>("progress", progressStyle)
+
+export { ProgressPropsContext, useProgressPropsContext }
 
 /**
  * `Progress` is a component for visually indicating progress.

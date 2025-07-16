@@ -1,3 +1,5 @@
+"use client"
+
 import type { ReactElement } from "react"
 import type {
   CSSProps,
@@ -6,7 +8,7 @@ import type {
   ThemeProps,
 } from "../../core"
 import type { ListStyle } from "./list.style"
-import { cloneElement, isValidElement } from "react"
+import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { listStyle } from "./list.style"
 
@@ -27,13 +29,14 @@ export interface ListRootProps
   styleType?: CSSProps["listStyleType"]
 }
 
-export const {
-  component,
+const {
   PropsContext: ListPropsContext,
   usePropsContext: useListPropsContext,
   withContext,
   withProvider,
 } = createSlotComponent<ListRootProps, ListStyle>("list", listStyle)
+
+export { ListPropsContext, useListPropsContext }
 
 /**
  * `List` is a component for displaying lists. By default, it renders a `ul` element.
@@ -50,6 +53,11 @@ export const ListRoot = withProvider(
     ...rest
   }) => {
     const as = asProp ?? (listStyleType == "decimal" ? "ol" : undefined)
+    const computedChildren = useMemo(() => {
+      if (children) return children
+
+      return items?.map((props, index) => <ListItem key={index} {...props} />)
+    }, [children, items])
 
     return (
       <styled.ul
@@ -59,8 +67,7 @@ export const ListRoot = withProvider(
         role="list"
         {...rest}
       >
-        {children ??
-          items?.map((props, index) => <ListItem key={index} {...props} />)}
+        {computedChildren}
       </styled.ul>
     )
   },

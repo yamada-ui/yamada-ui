@@ -1,15 +1,13 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { useRef } from "react"
+import { PropsTable } from "#storybook"
+import { useMemo, useRef, useState } from "react"
 import { useDisclosure } from "../../hooks/use-disclosure"
-import { Button, IconButton } from "../button"
-import {
-  ChevronDownIcon,
-  MenuIcon,
-  PlusIcon,
-  SquareArrowOutUpRightIcon,
-  SquarePenIcon,
-} from "../icon/icons"
-import { Portal } from "../portal"
+import { Box } from "../box"
+import { Button } from "../button"
+import { Center } from "../center"
+import { PlusIcon, SquareArrowOutUpRightIcon, SquarePenIcon } from "../icon"
+import { HStack } from "../stack"
+import { Text } from "../text"
 import { Menu } from "./"
 
 type Story = StoryFn<typeof Menu.Root>
@@ -22,369 +20,871 @@ const meta: Meta<typeof Menu.Root> = {
 export default meta
 
 export const Basic: Story = () => {
+  const items = useMemo(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
   return (
     <Menu.Root>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
 
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
+      <Menu.Content>
+        {items.map(({ label, value }, index) => (
+          <Menu.Item key={index} value={value}>
+            {label}
+          </Menu.Item>
+        ))}
+      </Menu.Content>
     </Menu.Root>
   )
 }
 
-export const Command: Story = () => {
+export const Items: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
   return (
     <Menu.Root>
-      <Menu.Button
-        as={IconButton}
-        variant="outline"
-        aria-label="Menu"
-        icon={<MenuIcon fontSize="2xl" />}
-      />
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
 
-      <Menu.List>
-        <Menu.Item command="⌘T">New Tab</Menu.Item>
-        <Menu.Item command="⌘N">New Window</Menu.Item>
-        <Menu.Item command="⌘O">Open File</Menu.Item>
-      </Menu.List>
+      <Menu.Content items={items} />
     </Menu.Root>
   )
 }
 
-export const Icon: Story = () => {
-  return (
-    <Menu.Root>
-      <Menu.Button
-        as={IconButton}
-        variant="outline"
-        aria-label="Menu"
-        icon={<MenuIcon fontSize="2xl" />}
-      />
+export const Size: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
 
-      <Menu.List>
-        <Menu.Item command="⌘T" icon={<PlusIcon fontSize="lg" />}>
-          New Tab
-        </Menu.Item>
-        <Menu.Item
-          command="⌘N"
-          icon={<SquareArrowOutUpRightIcon fontSize="lg" />}
-        >
-          New Window
-        </Menu.Item>
-        <Menu.Item command="⌘O" icon={<SquarePenIcon fontSize="lg" />}>
-          Open File
-        </Menu.Item>
-      </Menu.List>
-    </Menu.Root>
+  return (
+    <PropsTable variant="stack" rows={["sm", "md"]}>
+      {(_, row, key) => (
+        <Menu.Root key={key} size={row}>
+          <Menu.Trigger>
+            <Button>Menu</Button>
+          </Menu.Trigger>
+
+          <Menu.Content items={items} />
+        </Menu.Root>
+      )}
+    </PropsTable>
   )
 }
 
-export const InitialFocusRef: Story = () => {
-  const ref = useRef<HTMLDivElement>(null)
-
-  return (
-    <Menu.Root initialFocusRef={ref}>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
-
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item ref={ref}>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
-    </Menu.Root>
+export const OnSelect: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
   )
-}
 
-export const Placement: Story = () => {
   return (
-    <Menu.Root placement="start-start">
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+    <Menu.Root onSelect={(value) => console.log("selected", value)}>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
 
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
-    </Menu.Root>
-  )
-}
-
-export const Animation: Story = () => {
-  return (
-    <Menu.Root animationScheme="block-start">
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
-
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
-    </Menu.Root>
-  )
-}
-
-export const Offset: Story = () => {
-  return (
-    <Menu.Root offset={[16, 16]}>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
-
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
-    </Menu.Root>
-  )
-}
-
-export const Gutter: Story = () => {
-  return (
-    <Menu.Root gutter={32}>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
-
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
-    </Menu.Root>
-  )
-}
-
-export const Duration: Story = () => {
-  return (
-    <Menu.Root duration={0.4}>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
-
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
+      <Menu.Content items={items} />
     </Menu.Root>
   )
 }
 
 export const Separator: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+      { type: "separator" },
+      { label: "大蛇丸", value: "orochimaru" },
+      { label: "自來也", value: "pervy-sage" },
+      { label: "綱手", value: "tsunade" },
+    ],
+    [],
+  )
+
   return (
-    <Menu.Root>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+    <HStack>
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with items</Button>
+        </Menu.Trigger>
 
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
+        <Menu.Content items={items} />
+      </Menu.Root>
 
-        <Menu.Separator />
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with composition</Button>
+        </Menu.Trigger>
 
-        <Menu.Item>Sign out</Menu.Item>
-      </Menu.List>
-    </Menu.Root>
+        <Menu.Content>
+          <Menu.Item value="naruto">うずまきナルト</Menu.Item>
+          <Menu.Item value="sasuke">うちはサスケ</Menu.Item>
+          <Menu.Item value="sakura">春野サクラ</Menu.Item>
+
+          <Menu.Separator />
+
+          <Menu.Item value="orochimaru">大蛇丸</Menu.Item>
+          <Menu.Item value="pervy-sage">自來也</Menu.Item>
+          <Menu.Item value="tsunade">綱手</Menu.Item>
+        </Menu.Content>
+      </Menu.Root>
+    </HStack>
   )
 }
 
 export const Group: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      {
+        items: [
+          { label: "うずまきナルト", value: "naruto" },
+          { label: "うちはサスケ", value: "sasuke" },
+          { label: "春野サクラ", value: "sakura" },
+        ],
+        label: "第七班",
+      },
+      {
+        items: [
+          { label: "大蛇丸", value: "orochimaru" },
+          { label: "自來也", value: "pervy-sage" },
+          { label: "綱手", value: "tsunade" },
+        ],
+        label: "伝列の三忍",
+      },
+    ],
+    [],
+  )
+
+  return (
+    <HStack>
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with items</Button>
+        </Menu.Trigger>
+
+        <Menu.Content items={items} />
+      </Menu.Root>
+
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with composition</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Label>第七班</Menu.Label>
+
+          <Menu.Group>
+            <Menu.Item value="naruto">うずまきナルト</Menu.Item>
+            <Menu.Item value="sasuke">うちはサスケ</Menu.Item>
+            <Menu.Item value="sakura">春野サクラ</Menu.Item>
+          </Menu.Group>
+
+          <Menu.Separator />
+
+          <Menu.Label>伝列の三忍</Menu.Label>
+
+          <Menu.Group>
+            <Menu.Item value="orochimaru">大蛇丸</Menu.Item>
+            <Menu.Item value="pervy-sage">自來也</Menu.Item>
+            <Menu.Item value="tsunade">綱手</Menu.Item>
+          </Menu.Group>
+        </Menu.Content>
+      </Menu.Root>
+    </HStack>
+  )
+}
+
+export const CheckboxGroup: Story = () => {
+  const [value, setValue] = useState<string[]>(["naruto"])
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      {
+        type: "checkbox",
+        items: [
+          { label: "うずまきナルト", value: "naruto" },
+          { label: "うちはサスケ", value: "sasuke" },
+          { label: "春野サクラ", value: "sakura" },
+          { disabled: true, label: "はたけカカシ", value: "kakashi" },
+        ],
+        value,
+        onChange: setValue,
+      },
+    ],
+    [value],
+  )
+
+  return (
+    <HStack>
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with items</Button>
+        </Menu.Trigger>
+
+        <Menu.Content items={items} />
+      </Menu.Root>
+
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with composition</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.OptionGroup type="checkbox" value={value} onChange={setValue}>
+            <Menu.OptionItem value="naruto">うずまきナルト</Menu.OptionItem>
+            <Menu.OptionItem value="sasuke">うちはサスケ</Menu.OptionItem>
+            <Menu.OptionItem value="sakura">春野サクラ</Menu.OptionItem>
+            <Menu.OptionItem disabled value="kakashi">
+              はたけカカシ
+            </Menu.OptionItem>
+          </Menu.OptionGroup>
+        </Menu.Content>
+      </Menu.Root>
+    </HStack>
+  )
+}
+
+export const RadioGroup: Story = () => {
+  const [value, setValue] = useState<string>("naruto")
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      {
+        type: "radio",
+        items: [
+          { label: "うずまきナルト", value: "naruto" },
+          { label: "うちはサスケ", value: "sasuke" },
+          { label: "春野サクラ", value: "sakura" },
+          { disabled: true, label: "はたけカカシ", value: "kakashi" },
+        ],
+        value,
+        onChange: setValue,
+      },
+    ],
+    [value],
+  )
+
+  return (
+    <HStack>
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with items</Button>
+        </Menu.Trigger>
+
+        <Menu.Content items={items} />
+      </Menu.Root>
+
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with composition</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.OptionGroup type="radio" value={value} onChange={setValue}>
+            <Menu.OptionItem value="naruto">うずまきナルト</Menu.OptionItem>
+            <Menu.OptionItem value="sasuke">うちはサスケ</Menu.OptionItem>
+            <Menu.OptionItem value="sakura">春野サクラ</Menu.OptionItem>
+            <Menu.OptionItem disabled value="kakashi">
+              はたけカカシ
+            </Menu.OptionItem>
+          </Menu.OptionGroup>
+        </Menu.Content>
+      </Menu.Root>
+    </HStack>
+  )
+}
+
+export const Indicator: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      {
+        label: (
+          <>
+            <Menu.Indicator as={PlusIcon} />
+            New Tab
+          </>
+        ),
+        value: "tab",
+      },
+      {
+        label: (
+          <>
+            <Menu.Indicator as={SquareArrowOutUpRightIcon} />
+            New Window
+          </>
+        ),
+        value: "window",
+      },
+      {
+        label: (
+          <>
+            <Menu.Indicator as={SquarePenIcon} />
+            New File
+          </>
+        ),
+        value: "file",
+      },
+    ],
+    [],
+  )
+
+  return (
+    <HStack>
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with items</Button>
+        </Menu.Trigger>
+
+        <Menu.Content items={items} />
+      </Menu.Root>
+
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with composition</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Item value="tab">
+            <Menu.Indicator as={PlusIcon} />
+            New Tab
+          </Menu.Item>
+          <Menu.Item value="window">
+            <Menu.Indicator as={SquareArrowOutUpRightIcon} />
+            New Window
+          </Menu.Item>
+          <Menu.Item value="file">
+            <Menu.Indicator as={SquarePenIcon} />
+            New File
+          </Menu.Item>
+        </Menu.Content>
+      </Menu.Root>
+    </HStack>
+  )
+}
+
+export const Command: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      {
+        label: (
+          <>
+            New Tab
+            <Menu.Command>⌘T</Menu.Command>
+          </>
+        ),
+        value: "tab",
+      },
+      {
+        label: (
+          <>
+            New Window
+            <Menu.Command>⌘N</Menu.Command>
+          </>
+        ),
+        value: "window",
+      },
+      {
+        label: (
+          <>
+            New File
+            <Menu.Command>⌘O</Menu.Command>
+          </>
+        ),
+        value: "file",
+      },
+    ],
+    [],
+  )
+
+  return (
+    <HStack>
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with items</Button>
+        </Menu.Trigger>
+
+        <Menu.Content items={items} />
+      </Menu.Root>
+
+      <Menu.Root>
+        <Menu.Trigger>
+          <Button>Menu with composition</Button>
+        </Menu.Trigger>
+
+        <Menu.Content>
+          <Menu.Item value="tab">
+            New Tab
+            <Menu.Command>⌘T</Menu.Command>
+          </Menu.Item>
+          <Menu.Item value="window">
+            New Window
+            <Menu.Command>⌘N</Menu.Command>
+          </Menu.Item>
+          <Menu.Item value="file">
+            New File
+            <Menu.Command>⌘O</Menu.Command>
+          </Menu.Item>
+        </Menu.Content>
+      </Menu.Root>
+    </HStack>
+  )
+}
+
+export const Links: Story = () => {
+  const items = useMemo(
+    () => [
+      {
+        href: "https://naruto-official.com/",
+        label: "うずまきナルト",
+        value: "naruto",
+      },
+      {
+        href: "https://naruto-official.com/",
+        label: "うちはサスケ",
+        value: "sasuke",
+      },
+      {
+        href: "https://naruto-official.com/",
+        label: "春野サクラ",
+        value: "sakura",
+      },
+    ],
+    [],
+  )
+
   return (
     <Menu.Root>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
 
-      <Menu.List>
-        <Menu.Group label="account">
-          <Menu.Item>Set status</Menu.Item>
-          <Menu.Item>Edit Profile</Menu.Item>
-          <Menu.Item>Preferences</Menu.Item>
-        </Menu.Group>
-
-        <Menu.Separator />
-
-        <Menu.Group label="action">
-          <Menu.Item>Sign out</Menu.Item>
-        </Menu.Group>
-      </Menu.List>
+      <Menu.Content>
+        {items.map(({ href, label, value }, index) => (
+          <Menu.Item
+            key={index}
+            as="a"
+            href={href}
+            rel="noreferrer"
+            target="_blank"
+            value={value}
+          >
+            {label}
+          </Menu.Item>
+        ))}
+      </Menu.Content>
     </Menu.Root>
   )
 }
 
-export const OptionGroup: Story = () => {
+export const Anchor: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
   return (
     <Menu.Root>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+      <HStack>
+        <Menu.Anchor>
+          <Center borderWidth="1px" h="10" px="3" rounded="l2">
+            Here display Popover
+          </Center>
+        </Menu.Anchor>
 
-      <Menu.List>
-        <Menu.OptionGroup type="radio" label="order">
-          <Menu.OptionItem value="asc">Ascending</Menu.OptionItem>
-          <Menu.OptionItem value="desc">Descending</Menu.OptionItem>
-        </Menu.OptionGroup>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+      </HStack>
 
-        <Menu.Separator />
-
-        <Menu.OptionGroup type="checkbox" label="display">
-          <Menu.OptionItem value="gender">gender</Menu.OptionItem>
-          <Menu.OptionItem value="email">email</Menu.OptionItem>
-          <Menu.OptionItem value="phone">phone</Menu.OptionItem>
-        </Menu.OptionGroup>
-      </Menu.List>
+      <Menu.Content items={items} />
     </Menu.Root>
   )
 }
 
-export const PortalMenu: Story = () => {
+export const ContextMenu: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
   return (
     <Menu.Root>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+      <Menu.ContextTrigger>
+        <Center
+          borderStyle="dashed"
+          borderWidth="1px"
+          h="xs"
+          p="md"
+          rounded="md"
+          w="full"
+        >
+          <Text>Right click here</Text>
+        </Center>
+      </Menu.ContextTrigger>
 
-      <Portal>
-        <Menu.List>
-          <Menu.Item>Set status</Menu.Item>
-          <Menu.Item>Edit Profile</Menu.Item>
-          <Menu.Item>Preferences</Menu.Item>
-        </Menu.List>
-      </Portal>
+      <Menu.Content items={items} />
     </Menu.Root>
   )
 }
 
-export const NestedMenu: Story = () => {
+export const Duration: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
   return (
-    <Menu.Root>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+    <Menu.Root duration={0.7}>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
 
-      <Menu.List>
-        <Menu.Item>
-          <Menu.Root>
-            <Menu.ItemButton>Settings</Menu.ItemButton>
-
-            <Menu.List>
-              <Menu.Item>Extensions</Menu.Item>
-              <Menu.Item>
-                <Menu.Root>
-                  <Menu.ItemButton>Theme</Menu.ItemButton>
-
-                  <Menu.List>
-                    <Menu.Item>Color Theme</Menu.Item>
-                    <Menu.Item>File Icon Theme</Menu.Item>
-                    <Menu.Item>Product Icon Theme</Menu.Item>
-                  </Menu.List>
-                </Menu.Root>
-              </Menu.Item>
-              <Menu.Item>User Tasks</Menu.Item>
-            </Menu.List>
-          </Menu.Root>
-        </Menu.Item>
-        <Menu.Item>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
+      <Menu.Content items={items} />
     </Menu.Root>
   )
 }
 
-export const DisabledCloseOnSelect: Story = () => {
-  return (
-    <Menu.Root closeOnSelect={false}>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+export const Offset: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
 
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item closeOnSelect>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
+  return (
+    <Menu.Root offset={[16, 16]}>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
     </Menu.Root>
   )
 }
 
-export const DisabledCloseBlur: Story = () => {
-  return (
-    <Menu.Root closeOnBlur={false}>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+export const Gutter: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
 
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
+  return (
+    <Menu.Root gutter={32}>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
     </Menu.Root>
   )
 }
 
-export const Disabled: Story = () => {
-  return (
-    <Menu.Root>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+export const AnimationScheme: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
 
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item disabled>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
+  return (
+    <Menu.Root animationScheme="block-start">
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+  )
+}
+
+export const Placement: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
+  return (
+    <Menu.Root placement="center-end">
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+  )
+}
+
+export const BlockScrollOnMount: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
+  return (
+    <Box minH="200dvh">
+      <Menu.Root blockScrollOnMount>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content items={items} />
+      </Menu.Root>
+    </Box>
+  )
+}
+
+export const CloseOnScroll: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
+  return (
+    <Box minH="200dvh">
+      <Menu.Root closeOnScroll>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content items={items} />
+      </Menu.Root>
+    </Box>
+  )
+}
+
+export const InitialFocusRef: Story = () => {
+  const initialFocusRef = useRef<HTMLDivElement>(null)
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { ref: initialFocusRef, label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
+  return (
+    <Menu.Root initialFocusRef={initialFocusRef}>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
     </Menu.Root>
   )
 }
 
 export const Focusable: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      {
+        disabled: true,
+        focusable: true,
+        label: "うちはサスケ",
+        value: "sasuke",
+      },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
   return (
     <Menu.Root>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
 
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item disabled focusable>
-          Edit Profile
-        </Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
+      <Menu.Content items={items} />
+    </Menu.Root>
+  )
+}
+
+export const Disabled: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
+  return (
+    <Menu.Root disabled>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+  )
+}
+
+export const DisabledItem: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { disabled: true, label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
+  return (
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+  )
+}
+
+export const DisabledCloseOnSelect: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
+  return (
+    <Menu.Root closeOnSelect={false}>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+  )
+}
+
+export const DisabledCloseOnBlur: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
+  return (
+    <Menu.Root closeOnBlur={false}>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+  )
+}
+
+export const DisabledCloseOnEsc: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
+
+  return (
+    <Menu.Root closeOnEsc={false}>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
     </Menu.Root>
   )
 }
 
 export const CustomControl: Story = () => {
   const { open, onClose, onOpen } = useDisclosure()
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+    ],
+    [],
+  )
 
   return (
-    <Menu.Root open={open} onClose={onClose} onOpen={onOpen}>
-      <Menu.Button as={Button} endIcon={<ChevronDownIcon fontSize="xl" />}>
-        Menu
-      </Menu.Button>
+    <HStack>
+      <Menu.Root open={open} onClose={onClose} onOpen={onOpen}>
+        <Menu.Trigger>
+          <Button>Menu</Button>
+        </Menu.Trigger>
 
-      <Menu.List>
-        <Menu.Item>Set status</Menu.Item>
-        <Menu.Item>Edit Profile</Menu.Item>
-        <Menu.Item>Preferences</Menu.Item>
-      </Menu.List>
-    </Menu.Root>
+        <Menu.Content items={items} />
+      </Menu.Root>
+
+      <Button onClick={onOpen}>Click me from here</Button>
+    </HStack>
   )
 }

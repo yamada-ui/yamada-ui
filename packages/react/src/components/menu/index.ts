@@ -1,26 +1,35 @@
+export * from "./menu.style"
 export {
-  MenuButton,
+  MenuAnchor,
   MenuCommand,
+  MenuContent,
+  MenuContextTrigger,
   MenuGroup,
+  MenuIndicator,
   MenuItem,
-  MenuItemButton,
-  MenuList,
+  MenuLabel,
   MenuOptionGroup,
   MenuOptionItem,
+  MenuPropsContext,
   MenuRoot,
   MenuSeparator,
+  MenuTrigger,
+  useMenuPropsContext,
 } from "./menu"
 export type {
-  MenuButtonProps,
+  MenuAnchorProps,
   MenuCommandProps,
+  MenuContentProps,
+  MenuContextTriggerProps,
   MenuGroupProps,
-  MenuItemButtonProps,
+  MenuIndicatorProps,
   MenuItemProps,
-  MenuListProps,
+  MenuLabelProps,
   MenuOptionGroupProps,
   MenuOptionItemProps,
   MenuRootProps,
   MenuSeparatorProps,
+  MenuTriggerProps,
 } from "./menu"
-export * from "./menu.style"
 export * as Menu from "./namespace"
+export * from "./use-menu"

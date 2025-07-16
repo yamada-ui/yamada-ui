@@ -2,84 +2,60 @@ import { defineComponentSlotStyle } from "../../core"
 
 export const menuStyle = defineComponentSlotStyle({
   base: {
-    button: {
-      alignItems: "center",
-      appearance: "none",
-      display: "inline-flex",
-      outline: 0,
-      transitionDuration: "moderate",
-      transitionProperty: "common",
-    },
     command: {
-      opacity: 0.6,
+      textStyle: "mono",
+      color: "fg.muted",
+      ms: "auto",
     },
-    content: {
-      bg: ["white", "black"],
-      border: "1px solid",
-      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
-      boxShadow: ["lg", "dark-lg"],
-      color: "inherit",
-      minW: "xs",
-      p: "0",
-      rounded: "md",
-      zIndex: "guldo",
-    },
+    content: { gap: "0" },
     group: {},
-    groupLabel: {
-      color: "muted",
-      fontSize: "sm",
-      fontWeight: "semibold",
-      px: "3",
-      py: "1.5",
-    },
+    indicator: {},
     item: {
       alignItems: "center",
-      color: "inherit",
       cursor: "pointer",
       display: "flex",
-      flex: "0 0 auto",
-      gap: "0.75rem",
-      outline: 0,
-      px: "3",
-      py: "1.5",
-      textAlign: "start",
-      textDecoration: "none",
-      transitionDuration: "ultra-fast",
-      transitionProperty: "background",
-      transitionTimingFunction: "ease-in",
+      focusVisibleRing: "none",
       userSelect: "none",
-      width: "100%",
-      _active: {
-        bg: ["blackAlpha.50", "whiteAlpha.50"],
-        _focus: {
-          bg: ["blackAlpha.50", "whiteAlpha.50"],
-        },
-        _disabled: {
-          bg: ["white", "black"],
-        },
-      },
-      _focus: {
-        bg: ["blackAlpha.50", "whiteAlpha.50"],
-      },
-      _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
-      },
+      _activedescendant: { bg: ["bg.subtle", "bg.muted"] },
+      _disabled: { layerStyle: "disabled" },
     },
-    "item-button": {},
-    "item-group": {},
-    list: {
-      outline: "none",
-      py: "2",
-    },
-    "option-group": {},
-    "option-item": {},
-    root: {},
+    label: { fontWeight: "medium" },
     separator: {
+      "& + hr": { display: "none" },
+      "&:last-child, &:first-child": { display: "none" },
       borderBottomWidth: "1px",
-      borderColor: ["blackAlpha.200", "whiteAlpha.100"],
-      my: "2",
+      mx: "-1",
+      my: "1",
     },
+  },
+
+  sizes: {
+    sm: {
+      command: { fontSize: "2xs" },
+      content: {
+        fontSize: "xs",
+        minW: "3xs",
+        p: "1",
+      },
+      indicator: { fontSize: "sm" },
+      item: { gap: "1.5", px: "1.5", py: "1", rounded: "l1" },
+      label: { px: "1.5", py: "1" },
+    },
+    md: {
+      command: { fontSize: "xs" },
+      content: {
+        fontSize: "sm",
+        minW: "2xs",
+        p: "1",
+      },
+      indicator: { fontSize: "md" },
+      item: { gap: "2", px: "2", py: "1.5", rounded: "l2" },
+      label: { px: "2", py: "1.5" },
+    },
+  },
+
+  defaultProps: {
+    size: "md",
   },
 })
 

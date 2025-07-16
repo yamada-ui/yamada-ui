@@ -42,6 +42,7 @@ export function runKeyAction<Y>(
   actions: { [key in KeyboardKey]?: React.KeyboardEventHandler<Y> },
   { preventDefault = true }: { preventDefault?: boolean } = {},
 ) {
+  if (ev.key === " ") ev.key = ev.code
   const action = actions[ev.key]
 
   if (!action) return

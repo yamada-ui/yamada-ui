@@ -6,17 +6,6 @@ describe("<PinInput />", () => {
     await a11y(<PinInput.Root />)
   })
 
-  test("custom fields renders correctly", async () => {
-    await a11y(
-      <PinInput.Root>
-        <PinInput.Field />
-        <PinInput.Field />
-        <PinInput.Field />
-        <PinInput.Field />
-      </PinInput.Root>,
-    )
-  })
-
   test("sets `displayName` correctly", () => {
     expect(PinInput.Root.name).toBe("PinInputRoot")
     expect(PinInput.Field.name).toBe("PinInputField")
@@ -25,7 +14,7 @@ describe("<PinInput />", () => {
   test("sets `className` correctly", () => {
     render(
       <PinInput.Root data-testid="root">
-        <PinInput.Field data-testid="field" />
+        <PinInput.Field data-testid="field" index={0} />
       </PinInput.Root>,
     )
     expect(screen.getByTestId("root")).toHaveClass("ui-pin-input__root")

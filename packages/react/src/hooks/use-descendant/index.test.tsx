@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from "react"
-import type { DescendantOptions, FilterDescendant } from "./"
+import type { DescendantProps } from "./"
 import { render, renderHook } from "#test"
 import { createDescendant } from "./"
 
@@ -38,7 +38,7 @@ describe("useDescendant", () => {
 
     const count = 1
 
-    const Item: FC<DescendantOptions> = ({ ...props }) => {
+    const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
 
       return <div ref={register}>Item</div>
@@ -58,7 +58,7 @@ describe("useDescendant", () => {
   test("Index and value retrieval", () => {
     const { descendants, useDescendant, Wrapper } = setup()
 
-    const Item: FC<DescendantOptions> = ({ ...props }) => {
+    const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
 
       return <div ref={register}>Item</div>
@@ -74,7 +74,7 @@ describe("useDescendant", () => {
   test("Retrieve of valid indexes and values", () => {
     const { descendants, useDescendant, Wrapper } = setup()
 
-    const Item: FC<DescendantOptions> = ({ ...props }) => {
+    const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
 
       return <div ref={register}>Item</div>
@@ -92,29 +92,6 @@ describe("useDescendant", () => {
     expect(descendants.enabledIndexOf(descendants.values()[0]?.node)).toBe(0)
     expect(descendants.enabledIndexOf(descendants.values()[1]?.node)).toBe(1)
     expect(descendants.enabledIndexOf(descendants.values()[2]?.node)).toBe(-1)
-  })
-
-  test("Value retrieval using filters", () => {
-    const { descendants, useDescendant, Wrapper } = setup()
-
-    const Item: FC<DescendantOptions> = ({ ...props }) => {
-      const { register } = useDescendant(props)
-
-      return <div ref={register}>Item</div>
-    }
-
-    render(
-      <Wrapper>
-        <Item id="a" />
-        <Item id="b" />
-        <Item />
-      </Wrapper>,
-    )
-
-    const filter: FilterDescendant = (descendant) => descendant.id === "a"
-
-    expect(descendants.values(filter)).toHaveLength(1)
-    expect(descendants.values(filter)[0]?.id).toBe("a")
   })
 
   test("Retrieve of next and previous values", () => {
@@ -135,7 +112,7 @@ describe("useDescendant", () => {
   test("Retrieve of valid next and previous values", () => {
     const { descendants, useDescendant, Wrapper } = setup()
 
-    const Item: FC<DescendantOptions> = ({ ...props }) => {
+    const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
 
       return <div ref={register}>Item</div>
@@ -160,7 +137,7 @@ describe("useDescendant", () => {
   test("Retrieve of first and last values", () => {
     const { descendants, useDescendant, Wrapper } = setup()
 
-    const Item: FC<DescendantOptions> = ({ ...props }) => {
+    const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
 
       return <div ref={register}>Item</div>
@@ -175,7 +152,7 @@ describe("useDescendant", () => {
   test("Retrieve of valid first and last values", () => {
     const { descendants, useDescendant, Wrapper } = setup()
 
-    const Item: FC<DescendantOptions> = ({ ...props }) => {
+    const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
 
       return <div ref={register}>Item</div>
@@ -201,7 +178,7 @@ describe("useDescendant", () => {
   test("Return undefined for invalid indexes or elements", () => {
     const { descendants, useDescendant, Wrapper } = setup()
 
-    const Item: FC<DescendantOptions> = ({ ...props }) => {
+    const Item: FC<DescendantProps> = ({ ...props }) => {
       const { register } = useDescendant(props)
 
       return <div ref={register}>Item</div>

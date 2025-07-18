@@ -16,7 +16,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -38,7 +38,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -65,7 +65,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -75,12 +75,12 @@
       "required": false
     },
     "stylePosition": {
-      "type": "ListStylePosition | [ListStylePosition | ({ _peerAccept?: ListStylePosition | [ListStylePosition | (... & { ...; }), ListStylePosition | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ListStylePosition | ... 2 more ... | undefined; } & { ...; }), ListStylePosition | ({ ...; } & { ...; })] |...",
+      "type": "ListStylePosition | [ListStylePosition | ({ _peerAccept?: ListStylePosition | [ListStylePosition | (... & { ...; }), ListStylePosition | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ListStylePosition | ... 2 more ... | undefined; } & { ...; }), ListStylePosition | ({ ...; } & { ...; })] |...",
       "description": "The CSS `list-style-position` property.",
       "required": false
     },
     "styleType": {
-      "type": "ListStyleType | [ListStyleType | ({ _peerAccept?: ListStyleType | [ListStyleType | (... & { base?: ListStyleType | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ListStyleType | ... 2 more ... | undefined; }), ListStyleType | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ListStyleTy...",
+      "type": "ListStyleType | [ListStyleType | ({ _peerAccept?: ListStyleType | [ListStyleType | (... & { base?: ListStyleType | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ListStyleType | ... 2 more ... | undefined; }), ListStyleType | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ListStyleTy...",
       "description": "The CSS `list-style-position` property.",
       "required": false
     }

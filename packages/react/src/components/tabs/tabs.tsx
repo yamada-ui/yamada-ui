@@ -24,7 +24,7 @@ import {
 interface ComponentContext
   extends Pick<TabsRootProps, "items" | "lazy" | "lazyBehavior"> {}
 
-interface TabsItem extends TabsTabProps {
+interface TabsItem extends Omit<TabsTabProps, "index"> {
   /**
    * The content for panel element.
    */
@@ -148,7 +148,7 @@ export const TabsList = withContext<"div", TabsListProps>(
             index,
           ) =>
             isUndefined(tab) || isNull(tab) ? null : (
-              <TabsTab id={id} key={id ?? index} {...rest}>
+              <TabsTab id={id} key={id ?? index} index={index} {...rest}>
                 {tab}
               </TabsTab>
             ),
@@ -183,7 +183,7 @@ export const TabsPanels: FC<TabsPanelsProps> = ({ children }) => {
     } else {
       return items?.map(({ id, panel, panelProps }, index) =>
         isUndefined(panel) || isNull(panel) ? null : (
-          <TabsPanel key={id ?? index} {...panelProps}>
+          <TabsPanel key={id ?? index} index={index} {...panelProps}>
             {panel}
           </TabsPanel>
         ),

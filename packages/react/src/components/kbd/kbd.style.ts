@@ -2,12 +2,10 @@ import { defineComponentStyle } from "../../core"
 
 export const kbdStyle = defineComponentStyle({
   base: {
+    textStyle: "mono",
     alignItems: "center",
     display: "inline-flex",
-    fontFamily: "mono",
-    fontWeight: "medium",
     rounded: "l1",
-    whiteSpace: "nowrap",
   },
 
   variants: {

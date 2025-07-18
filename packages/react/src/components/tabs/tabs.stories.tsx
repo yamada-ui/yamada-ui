@@ -21,21 +21,40 @@ const meta: Meta<typeof Tabs.Root> = {
 export default meta
 
 export const Basic: Story = () => {
+  const items = useMemo(
+    () => [
+      {
+        panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+        tab: "孫悟空",
+      },
+      {
+        panel: "へっ！きたねぇ花火だ",
+        tab: "ベジータ",
+      },
+      {
+        panel:
+          "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+        tab: "フリーザ",
+      },
+    ],
+    [],
+  )
+
   return (
     <Tabs.Root>
       <Tabs.List>
-        <Tabs.Tab>孫悟空</Tabs.Tab>
-        <Tabs.Tab>ベジータ</Tabs.Tab>
-        <Tabs.Tab>フリーザ</Tabs.Tab>
+        {items.map(({ tab }, index) => (
+          <Tabs.Tab key={index} index={index}>
+            {tab}
+          </Tabs.Tab>
+        ))}
       </Tabs.List>
 
-      <Tabs.Panel>
-        クリリンのことか……クリリンのことかーーーっ！！！！！
-      </Tabs.Panel>
-      <Tabs.Panel>へっ！きたねぇ花火だ</Tabs.Panel>
-      <Tabs.Panel>
-        私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
-      </Tabs.Panel>
+      {items.map(({ panel }, index) => (
+        <Tabs.Panel key={index} index={index}>
+          {panel}
+        </Tabs.Panel>
+      ))}
     </Tabs.Root>
   )
 }
@@ -469,11 +488,11 @@ export const Dynamic: Story = () => {
   return (
     <Tabs.Root index={index} items={items} manual onChange={setIndex}>
       <Tabs.List>
-        {items.map(({ id, tab }) => {
+        {items.map(({ id, tab }, index) => {
           const hasRemove = items.length > 1
 
           return (
-            <Tabs.Tab key={id} transition="none">
+            <Tabs.Tab key={id} index={index} transition="none">
               {tab}
               {hasRemove ? (
                 <IconButton
@@ -505,7 +524,7 @@ export const Dynamic: Story = () => {
       </Tabs.List>
 
       {items.map(({ id, panel }, index) => (
-        <Tabs.Panel key={id}>
+        <Tabs.Panel key={id} index={index}>
           <Heading>
             {panel} {id}
           </Heading>

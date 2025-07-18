@@ -139,6 +139,10 @@ export type UseAccordionReturn = ReturnType<typeof useAccordion>
 
 export interface UseAccordionItemProps extends HTMLProps {
   /**
+   * The index of the accordion item.
+   */
+  index: number
+  /**
    * If `true`, the accordion item will be disabled.
    *
    * @default false
@@ -148,8 +152,9 @@ export interface UseAccordionItemProps extends HTMLProps {
 
 export const useAccordionItem = ({
   disabled,
+  index,
   ...rest
-}: UseAccordionItemProps = {}) => {
+}: UseAccordionItemProps) => {
   const itemId = useId()
   const panelId = useId()
   const {
@@ -159,7 +164,7 @@ export const useAccordionItem = ({
     setIndex,
     toggle,
   } = useAccordionContext()
-  const { descendants, index, register } = useAccordionDescendant({ disabled })
+  const { descendants, register } = useAccordionDescendant({ disabled })
   const open =
     index !== -1
       ? isArray(selectedIndex)

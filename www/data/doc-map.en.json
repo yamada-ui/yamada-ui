@@ -93,6 +93,11 @@
               "title": "Icon",
               "segment": "icon",
               "pathname": "/docs/components/icon"
+            },
+            {
+              "title": "Em",
+              "segment": "em",
+              "pathname": "/docs/components/em"
             }
           ]
         }

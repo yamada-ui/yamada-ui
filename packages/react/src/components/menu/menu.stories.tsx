@@ -175,7 +175,7 @@ export const Group: Story = () => {
           { label: "自來也", value: "pervy-sage" },
           { label: "綱手", value: "tsunade" },
         ],
-        label: "伝列の三忍",
+        label: "伝説の三忍",
       },
     ],
     [],
@@ -207,7 +207,7 @@ export const Group: Story = () => {
 
           <Menu.Separator />
 
-          <Menu.Label>伝列の三忍</Menu.Label>
+          <Menu.Label>伝説の三忍</Menu.Label>
 
           <Menu.Group>
             <Menu.Item value="orochimaru">大蛇丸</Menu.Item>
@@ -559,6 +559,34 @@ export const ContextMenu: Story = () => {
   )
 }
 
+export const NestedMenu: Story = () => {
+  return (
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content>
+        <Menu.Item value="naruto">うずまきナルト</Menu.Item>
+        <Menu.Item value="sasuke">うちはサスケ</Menu.Item>
+        <Menu.Item value="sakura">春野サクラ</Menu.Item>
+
+        <Menu.Root>
+          <Menu.Trigger>
+            <Menu.Item>伝説の三忍</Menu.Item>
+          </Menu.Trigger>
+
+          <Menu.Content>
+            <Menu.Item value="orochimaru">大蛇丸</Menu.Item>
+            <Menu.Item value="pervy-sage">自來也</Menu.Item>
+            <Menu.Item value="tsunade">綱手</Menu.Item>
+          </Menu.Content>
+        </Menu.Root>
+      </Menu.Content>
+    </Menu.Root>
+  )
+}
+
 export const Duration: Story = () => {
   const items = useMemo<Menu.ContentProps["items"]>(
     () => [
@@ -732,32 +760,6 @@ export const InitialFocusRef: Story = () => {
   )
 }
 
-export const Focusable: Story = () => {
-  const items = useMemo<Menu.ContentProps["items"]>(
-    () => [
-      { label: "うずまきナルト", value: "naruto" },
-      {
-        disabled: true,
-        focusable: true,
-        label: "うちはサスケ",
-        value: "sasuke",
-      },
-      { label: "春野サクラ", value: "sakura" },
-    ],
-    [],
-  )
-
-  return (
-    <Menu.Root>
-      <Menu.Trigger>
-        <Button>Menu</Button>
-      </Menu.Trigger>
-
-      <Menu.Content items={items} />
-    </Menu.Root>
-  )
-}
-
 export const Disabled: Story = () => {
   const items = useMemo<Menu.ContentProps["items"]>(
     () => [
@@ -804,7 +806,7 @@ export const DisabledCloseOnSelect: Story = () => {
   const items = useMemo<Menu.ContentProps["items"]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
-      { label: "うちはサスケ", value: "sasuke" },
+      { closeOnSelect: true, label: "うちはサスケ", value: "sasuke" },
       { label: "春野サクラ", value: "sakura" },
     ],
     [],

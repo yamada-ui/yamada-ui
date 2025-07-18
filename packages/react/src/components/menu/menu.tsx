@@ -22,14 +22,16 @@ import type {
 import { Fragment, useMemo, useState } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { cast, handlerAll } from "../../utils"
-import { CheckIcon, CircleSmallIcon } from "../icon"
+import { CheckIcon, ChevronRightIcon, CircleSmallIcon } from "../icon"
 import { Popover } from "../popover"
 import { menuStyle } from "./menu.style"
 import {
+  MainMenuContext,
   MenuContext,
   MenuDescendantsContext,
   MenuOptionGroupContext,
   useMenu,
+  useMenuContext,
   useMenuItem,
   useMenuOptionGroup,
   useMenuOptionItem,
@@ -41,20 +43,24 @@ interface MenuSharedItem {
 
 interface MenuItemWithValue extends MenuSharedItem, MenuItemProps {}
 
+interface MenuOptionItem extends MenuSharedItem, MenuOptionItemProps {}
+
 interface MenuItemWithSeparator extends MenuSeparatorProps {
   type: "separator"
 }
 
 interface MenuItemWithRadioGroup<Y extends string = string>
-  extends Omit<MenuItemWithItems, "defaultValue" | "onChange">,
+  extends Omit<MenuItemWithItems, "defaultValue" | "items" | "onChange">,
     MenuOptionGroupProps<"radio", Y> {
   type: "radio"
+  items?: MenuOptionItem[]
 }
 
 interface MenuItemWithCheckboxGroup<Y extends string[] = string[]>
-  extends Omit<MenuItemWithItems, "defaultValue" | "onChange">,
+  extends Omit<MenuItemWithItems, "defaultValue" | "items" | "onChange">,
     MenuOptionGroupProps<"checkbox", Y> {
   type: "checkbox"
+  items?: MenuOptionItem[]
 }
 
 interface MenuItemWithItems extends MenuSharedItem, MenuGroupProps {
@@ -130,7 +136,7 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
       matchWidth,
       middleware,
       offset,
-      placement = "end-start",
+      placement,
       platform,
       preventOverflow,
       strategy,
@@ -143,6 +149,8 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
     closeOnSelect,
     descendants,
     open,
+    subMenu,
+    subMenuDirection,
     updateRef,
     getContentProps,
     getContextTriggerProps,
@@ -151,18 +159,38 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
     getTriggerProps,
     onActiveDescendant,
     onClose,
+    onCloseRef,
     onOpen,
     onSelect,
-  } = useMenu({ autoFocus: !initialFocusRef, disabled, ...rest })
+  } = useMenu({ disabled, ...rest })
   const menuContext = useMemo(
     () => ({
-      closeOnSelect,
+      subMenu,
+      subMenuDirection,
       onActiveDescendant,
       onClose,
       onOpen,
       onSelect,
     }),
-    [closeOnSelect, onClose, onOpen, onSelect, onActiveDescendant],
+    [onClose, onOpen, onSelect, onActiveDescendant, subMenu, subMenuDirection],
+  )
+  const mainMenuContext = useMemo(
+    () => ({
+      closeOnSelect,
+      descendants,
+      onActiveDescendant,
+      onClose,
+      onCloseRef,
+      onSelect,
+    }),
+    [
+      closeOnSelect,
+      descendants,
+      onActiveDescendant,
+      onClose,
+      onCloseRef,
+      onSelect,
+    ],
   )
   const componentContext = useMemo(
     () => ({
@@ -185,40 +213,46 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
     <StyleContext value={styleContext}>
       <MenuDescendantsContext value={descendants}>
         <MenuContext value={menuContext}>
-          <ComponentContext value={componentContext}>
-            <Popover.Root
-              {...{
-                animationScheme,
-                autoFocus: false,
-                autoUpdate,
-                blockScrollOnMount,
-                closeOnBlur,
-                closeOnEsc,
-                closeOnScroll,
-                disabled,
-                duration,
-                elements,
-                flip,
-                gutter,
-                initialFocusRef,
-                matchWidth,
-                middleware,
-                offset,
-                open,
-                placement,
-                platform,
-                preventOverflow,
-                strategy,
-                transform,
-                updateRef,
-                whileElementsMounted,
-                onClose,
-                onOpen,
-              }}
-            >
-              {children}
-            </Popover.Root>
-          </ComponentContext>
+          <MainMenuContext value={mainMenuContext}>
+            <ComponentContext value={componentContext}>
+              <Popover.Root
+                {...{
+                  animationScheme:
+                    animationScheme ??
+                    (subMenu ? "inline-start" : "block-start"),
+                  autoFocus: !!initialFocusRef,
+                  autoUpdate,
+                  blockScrollOnMount,
+                  closeOnBlur,
+                  closeOnEsc,
+                  closeOnScroll,
+                  disabled,
+                  duration,
+                  elements,
+                  flip,
+                  gutter,
+                  initialFocusRef,
+                  matchWidth,
+                  middleware,
+                  offset: offset ?? (subMenu ? [0, 0] : undefined),
+                  open,
+                  placement:
+                    placement ??
+                    (subMenu ? `center-${subMenuDirection}` : "end-start"),
+                  platform,
+                  preventOverflow,
+                  strategy,
+                  transform,
+                  updateRef,
+                  whileElementsMounted,
+                  onClose,
+                  onOpen,
+                }}
+              >
+                {children}
+              </Popover.Root>
+            </ComponentContext>
+          </MainMenuContext>
         </MenuContext>
       </MenuDescendantsContext>
     </StyleContext>
@@ -233,7 +267,7 @@ export const MenuTrigger = withContext<"button", MenuTriggerProps>(
 )(undefined, (props) => {
   const { getTriggerProps } = useComponentContext()
 
-  return getTriggerProps(props)
+  return cast<HTMLProps<"button">>(getTriggerProps(cast<HTMLProps>(props)))
 })
 
 interface Rect {
@@ -297,7 +331,8 @@ export interface MenuContentProps extends Popover.ContentProps {
 export const MenuContent = withContext<"div", MenuContentProps>(
   Popover.Content,
   "content",
-)(undefined, ({ children, items = [], ...rest }) => {
+)(undefined, ({ children, items = [], portalProps, ...rest }) => {
+  const { subMenu } = useMenuContext()
   const { getContentProps } = useComponentContext()
   const computedChildren = useMemo(() => {
     if (children) return children
@@ -404,9 +439,12 @@ export const MenuContent = withContext<"div", MenuContentProps>(
     })
   }, [children, items])
 
-  return getContentProps(
-    cast<HTMLProps>({ ...rest, children: computedChildren }),
-  )
+  return {
+    ...getContentProps(
+      cast<HTMLProps>({ ...rest, children: computedChildren }),
+    ),
+    portalProps: subMenu ? { ...portalProps, disabled: true } : portalProps,
+  }
 })
 
 export interface MenuLabelProps extends HTMLStyledProps<"span"> {}
@@ -461,7 +499,7 @@ export const MenuOptionGroup = withContext<"div", MenuOptionGroupProps>(
       </MenuOptionGroupContext>
     )
   },
-  "option",
+  { name: "optionGroup", slot: ["group", "option"] },
 )() as GenericsComponent<{
   <
     Y extends MenuOptionGroupType = "checkbox",
@@ -475,9 +513,17 @@ export interface MenuItemProps extends HTMLStyledProps, UseMenuItemProps {}
 
 export const MenuItem = withContext<"div", MenuItemProps>(
   ({ children, ...rest }) => {
-    const { getItemProps } = useMenuItem(rest)
+    const { subMenuTrigger, getItemProps } = useMenuItem(rest)
 
-    return <styled.div {...getItemProps()}>{children}</styled.div>
+    return (
+      <styled.div {...getItemProps()}>
+        {children}
+
+        {subMenuTrigger ? (
+          <MenuIndicator as={ChevronRightIcon} ms="auto" />
+        ) : null}
+      </styled.div>
+    )
   },
   "item",
 )()
@@ -501,7 +547,7 @@ export const MenuOptionItem = withContext<"div", MenuOptionItemProps>(
       </styled.div>
     )
   },
-  ["item", "option"],
+  { name: "optionItem", slot: ["item", "option"] },
 )()
 
 export interface MenuIndicatorProps extends HTMLStyledProps<"svg"> {}

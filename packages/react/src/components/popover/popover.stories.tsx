@@ -100,46 +100,31 @@ export const Anchor: Story = () => {
 
 export const NestedPopover: Story = () => {
   return (
-    <>
-      <Popover.Root>
-        <Popover.Trigger>
-          <Button>Click me</Button>
-        </Popover.Trigger>
+    <Popover.Root>
+      <Popover.Trigger>
+        <Button>Click me</Button>
+      </Popover.Trigger>
 
-        <Popover.Content>
-          <Popover.Header>ベジータ!</Popover.Header>
-          <Popover.Body>
-            <Text>がんばれカカロット……お前がナンバー１だ！！</Text>
+      <Popover.Content>
+        <Popover.Header>ベジータ!</Popover.Header>
+        <Popover.Body>
+          <Text>がんばれカカロット……お前がナンバー１だ！！</Text>
 
-            <Popover.Root>
-              <Popover.Trigger>
-                <Button>Click me</Button>
-              </Popover.Trigger>
+          <Popover.Root>
+            <Popover.Trigger>
+              <Button>Click me</Button>
+            </Popover.Trigger>
 
-              <Popover.Content>
-                <Popover.Header>ベジータ!</Popover.Header>
-                <Popover.Body>
-                  がんばれカカロット……お前がナンバー１だ！！
-                </Popover.Body>
-              </Popover.Content>
-            </Popover.Root>
-          </Popover.Body>
-        </Popover.Content>
-      </Popover.Root>
-
-      <Popover.Root>
-        <Popover.Trigger>
-          <Button>Click me</Button>
-        </Popover.Trigger>
-
-        <Popover.Content>
-          <Popover.Header>ベジータ!</Popover.Header>
-          <Popover.Body>
-            がんばれカカロット……お前がナンバー１だ！！
-          </Popover.Body>
-        </Popover.Content>
-      </Popover.Root>
-    </>
+            <Popover.Content>
+              <Popover.Header>ベジータ!</Popover.Header>
+              <Popover.Body>
+                がんばれカカロット……お前がナンバー１だ！！
+              </Popover.Body>
+            </Popover.Content>
+          </Popover.Root>
+        </Popover.Body>
+      </Popover.Content>
+    </Popover.Root>
   )
 }
 

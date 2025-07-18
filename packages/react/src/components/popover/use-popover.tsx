@@ -12,6 +12,7 @@ import { useFocusOnShow } from "../../hooks/use-focus"
 import { useOutsideClick } from "../../hooks/use-outside-click"
 import { usePopper } from "../../hooks/use-popper"
 import {
+  ariaAttr,
   assignRef,
   contains,
   cx,
@@ -21,7 +22,6 @@ import {
   getEventRelatedTarget,
   handlerAll,
   mergeRefs,
-  noop,
   scrollLock,
   useUnmountEffect,
 } from "../../utils"
@@ -168,6 +168,7 @@ export const usePopover = ({
       const relatedTarget = getEventRelatedTarget(ev)
       const popup = relatedTarget?.hasAttribute("data-popup")
 
+      if (contains(triggerRef.current, relatedTarget)) return
       if (contains(contentRef.current, relatedTarget)) return
       if (contains(contentRef.current, ev.target) && popup) return
 
@@ -187,7 +188,7 @@ export const usePopover = ({
   })
 
   useOutsideClick({
-    ref: contentRef,
+    ref: [contentRef, triggerRef],
     enabled: open && closeOnBlur,
     handler: onClose,
   })
@@ -218,8 +219,10 @@ export const usePopover = ({
   const getTriggerProps: PropGetter<"button"> = useCallback(
     ({ ref, ...props } = {}) => ({
       "aria-controls": open ? contentId : undefined,
+      "aria-disabled": ariaAttr(disabled),
       "aria-expanded": open,
       "aria-haspopup": "dialog",
+      "data-disabled": dataAttr(disabled),
       role: "button",
       ...props,
       ref: mergeRefs(ref, triggerRef, (node) => {
@@ -227,7 +230,7 @@ export const usePopover = ({
       }),
       onClick: handlerAll(
         props.onClick,
-        !open ? (!disabled ? onOpen : noop) : onClose,
+        !open ? (!disabled ? onOpen : undefined) : onClose,
       ),
     }),
     [contentId, disabled, onClose, onOpen, open, refs],

@@ -97,7 +97,7 @@ const setGlobalFocusEvents = () => {
   if (process.env.NODE_ENV !== "test") {
     Object.defineProperties(HTMLElement.prototype, {
       focus: {
-        configurable: false,
+        configurable: true,
         value: function customFocus(...args: [FocusOptions]) {
           hasEventBeforeFocus = true
 

@@ -3,7 +3,7 @@
 import type { FocusEvent, KeyboardEvent, RefObject } from "react"
 import type { PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
-import type { UsePopperProps } from "../../hooks/use-popper"
+import type { PopperPlacement, UsePopperProps } from "../../hooks/use-popper"
 import { useCallback, useEffect, useId, useRef } from "react"
 import { useEnvironment } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
@@ -12,13 +12,14 @@ import { useFocusOnShow } from "../../hooks/use-focus"
 import { useOutsideClick } from "../../hooks/use-outside-click"
 import { usePopper } from "../../hooks/use-popper"
 import {
+  ariaAttr,
+  assignRef,
   contains,
   cx,
   dataAttr,
   focusTransfer,
   focusTrap,
   getEventRelatedTarget,
-  getWindow,
   handlerAll,
   mergeRefs,
   scrollLock,
@@ -40,12 +41,6 @@ export interface UsePopoverProps
    * @default false
    */
   blockScrollOnMount?: boolean
-  /**
-   * The delay before hiding the popover.
-   *
-   * @default 0
-   */
-  closeDelay?: number
   /**
    * If `true`, the popover will close when you blur out it by clicking outside or tabbing out.
    *
@@ -84,18 +79,22 @@ export interface UsePopoverProps
    */
   modal?: boolean
   /**
-   * The delay before showing the popover.
+   * The placement of the popper relative to its reference.
    *
-   * @default 0
+   * @default 'end'
    */
-  openDelay?: number
+  placement?: PopperPlacement
+  /**
+   * Update the position of the floating element, re-rendering the component if required.
+   */
+  updateRef?: RefObject<() => void>
 }
 
 export const usePopover = ({
   autoFocus = true,
   autoUpdate,
-  blockScrollOnMount = false,
-  closeDelay = 0,
+  modal = false,
+  blockScrollOnMount = modal,
   closeOnBlur = true,
   closeOnEsc = true,
   closeOnScroll,
@@ -107,15 +106,14 @@ export const usePopover = ({
   initialFocusRef,
   matchWidth,
   middleware,
-  modal = false,
   offset,
   open: openProp,
-  openDelay = 0,
   placement = "end",
   platform,
   preventOverflow,
   strategy,
   transform,
+  updateRef,
   whileElementsMounted,
   onClose: onCloseProp,
   onOpen: onOpenProp,
@@ -135,7 +133,7 @@ export const usePopover = ({
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })
-  const { refs, getPopperProps } = usePopper<"button">({
+  const { refs, update, getPopperProps } = usePopper<"button">({
     autoUpdate,
     elements,
     flip,
@@ -152,48 +150,17 @@ export const usePopover = ({
     whileElementsMounted,
   })
 
-  const onForceClose = useCallback(() => {
-    if (closeTimeout.current) {
-      clearTimeout(closeTimeout.current)
-
-      closeTimeout.current = undefined
-    }
-
-    onClose()
-  }, [onClose])
-
-  const onDelayOpen = useCallback(() => {
-    if (!disabled && !openTimeout.current) {
-      if (open) onForceClose()
-
-      openTimeout.current = getWindow(refs.reference.current).setTimeout(() => {
-        onOpen()
-        openTimeout.current = undefined
-      }, openDelay)
-    }
-  }, [disabled, open, onForceClose, refs.reference, onOpen, openDelay])
-
-  const onDelayClose = useCallback(() => {
-    if (openTimeout.current) {
-      clearTimeout(openTimeout.current)
-      openTimeout.current = undefined
-    }
-
-    closeTimeout.current = getWindow(refs.reference.current).setTimeout(
-      onForceClose,
-      closeDelay,
-    )
-  }, [closeDelay, onForceClose, refs.reference])
+  assignRef(updateRef, update)
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
       if (closeOnEsc && ev.key === "Escape") {
-        onDelayClose()
+        onClose()
 
         triggerRef.current?.focus()
       }
     },
-    [closeOnEsc, onDelayClose],
+    [closeOnEsc, onClose],
   )
 
   const onBlur = useCallback(
@@ -201,16 +168,17 @@ export const usePopover = ({
       const relatedTarget = getEventRelatedTarget(ev)
       const popup = relatedTarget?.hasAttribute("data-popup")
 
+      if (contains(triggerRef.current, relatedTarget)) return
       if (contains(contentRef.current, relatedTarget)) return
       if (contains(contentRef.current, ev.target) && popup) return
 
-      if (closeOnBlur) onDelayClose()
+      if (closeOnBlur) onClose()
     },
-    [closeOnBlur, onDelayClose],
+    [closeOnBlur, onClose],
   )
 
   useEventListener(getDocument(), "scroll", () => {
-    if (open && closeOnScroll) onForceClose()
+    if (open && closeOnScroll) onClose()
   })
 
   useFocusOnShow(contentRef, {
@@ -220,11 +188,9 @@ export const usePopover = ({
   })
 
   useOutsideClick({
-    ref: contentRef,
-    enabled: open,
-    handler: () => {
-      onDelayClose()
-    },
+    ref: [contentRef, triggerRef],
+    enabled: open && closeOnBlur,
+    handler: onClose,
   })
 
   useEffect(() => {
@@ -234,7 +200,7 @@ export const usePopover = ({
   }, [open, modal])
 
   useEffect(() => {
-    if (!open || !modal || !blockScrollOnMount) return
+    if (!open || !blockScrollOnMount) return
 
     return scrollLock(contentRef.current)
   }, [open, modal, blockScrollOnMount])
@@ -253,16 +219,21 @@ export const usePopover = ({
   const getTriggerProps: PropGetter<"button"> = useCallback(
     ({ ref, ...props } = {}) => ({
       "aria-controls": open ? contentId : undefined,
+      "aria-disabled": ariaAttr(disabled),
       "aria-expanded": open,
       "aria-haspopup": "dialog",
+      "data-disabled": dataAttr(disabled),
       role: "button",
       ...props,
       ref: mergeRefs(ref, triggerRef, (node) => {
         if (anchorRef.current == null) refs.setReference(node)
       }),
-      onClick: handlerAll(props.onClick, !open ? onDelayOpen : onDelayClose),
+      onClick: handlerAll(
+        props.onClick,
+        !open ? (!disabled ? onOpen : undefined) : onClose,
+      ),
     }),
-    [contentId, onDelayClose, onDelayOpen, open, refs],
+    [contentId, disabled, onClose, onOpen, open, refs],
   )
 
   const getAnchorProps: PropGetter = useCallback(
@@ -337,9 +308,7 @@ export const usePopover = ({
     getHeaderProps,
     getPositionerProps,
     getTriggerProps,
-    onClose: onForceClose,
-    onDelayClose,
-    onDelayOpen,
+    onClose,
     onOpen,
   }
 }

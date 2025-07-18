@@ -89,7 +89,7 @@ export const useFocusOnShow = <T extends HTMLElement>(
   }, [visible, trulyShouldFocus])
 
   const onFocus = useCallback(() => {
-    if (!visible || !target || !trulyShouldFocusRef.current) return
+    if (!target || !trulyShouldFocusRef.current) return
 
     trulyShouldFocusRef.current = false
 
@@ -116,7 +116,7 @@ export const useFocusOnShow = <T extends HTMLElement>(
         })
       }
     }
-  }, [visible, target, focusRefOrEl, preventScroll])
+  }, [target, focusRefOrEl, preventScroll])
 
   useUpdateEffect(() => {
     requestAnimationFrame(() => {

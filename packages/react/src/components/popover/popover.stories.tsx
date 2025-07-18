@@ -10,6 +10,7 @@ import { Center } from "../center"
 import { Field } from "../field"
 import { For } from "../for"
 import { Input } from "../input"
+import { HStack } from "../stack"
 import { Text } from "../text"
 
 type Story = StoryFn<typeof Popover.Root>
@@ -77,15 +78,17 @@ export const Footer: Story = () => {
 export const Anchor: Story = () => {
   return (
     <Popover.Root>
-      <Popover.Anchor>
-        <Center borderWidth="1px" h="10" px="3" rounded="l2">
-          Here display Popover
-        </Center>
-      </Popover.Anchor>
+      <HStack>
+        <Popover.Anchor>
+          <Center borderWidth="1px" h="10" px="3" rounded="l2">
+            Here display Popover
+          </Center>
+        </Popover.Anchor>
 
-      <Popover.Trigger>
-        <Button>Click me</Button>
-      </Popover.Trigger>
+        <Popover.Trigger>
+          <Button>Click me</Button>
+        </Popover.Trigger>
+      </HStack>
 
       <Popover.Content>
         <Popover.Header>ベジータ!</Popover.Header>
@@ -97,46 +100,31 @@ export const Anchor: Story = () => {
 
 export const NestedPopover: Story = () => {
   return (
-    <>
-      <Popover.Root>
-        <Popover.Trigger>
-          <Button>Click me</Button>
-        </Popover.Trigger>
+    <Popover.Root>
+      <Popover.Trigger>
+        <Button>Click me</Button>
+      </Popover.Trigger>
 
-        <Popover.Content>
-          <Popover.Header>ベジータ!</Popover.Header>
-          <Popover.Body>
-            <Text>がんばれカカロット……お前がナンバー１だ！！</Text>
+      <Popover.Content>
+        <Popover.Header>ベジータ!</Popover.Header>
+        <Popover.Body>
+          <Text>がんばれカカロット……お前がナンバー１だ！！</Text>
 
-            <Popover.Root>
-              <Popover.Trigger>
-                <Button>Click me</Button>
-              </Popover.Trigger>
+          <Popover.Root>
+            <Popover.Trigger>
+              <Button>Click me</Button>
+            </Popover.Trigger>
 
-              <Popover.Content>
-                <Popover.Header>ベジータ!</Popover.Header>
-                <Popover.Body>
-                  がんばれカカロット……お前がナンバー１だ！！
-                </Popover.Body>
-              </Popover.Content>
-            </Popover.Root>
-          </Popover.Body>
-        </Popover.Content>
-      </Popover.Root>
-
-      <Popover.Root>
-        <Popover.Trigger>
-          <Button>Click me</Button>
-        </Popover.Trigger>
-
-        <Popover.Content>
-          <Popover.Header>ベジータ!</Popover.Header>
-          <Popover.Body>
-            がんばれカカロット……お前がナンバー１だ！！
-          </Popover.Body>
-        </Popover.Content>
-      </Popover.Root>
-    </>
+            <Popover.Content>
+              <Popover.Header>ベジータ!</Popover.Header>
+              <Popover.Body>
+                がんばれカカロット……お前がナンバー１だ！！
+              </Popover.Body>
+            </Popover.Content>
+          </Popover.Root>
+        </Popover.Body>
+      </Popover.Content>
+    </Popover.Root>
   )
 }
 
@@ -152,38 +140,6 @@ export const Duration: Story = () => {
         <Popover.Body>がんばれカカロット……お前がナンバー１だ！！</Popover.Body>
       </Popover.Content>
     </Popover.Root>
-  )
-}
-
-export const Delay: Story = () => {
-  return (
-    <>
-      <Popover.Root openDelay={1000}>
-        <Popover.Trigger>
-          <Button>Delay Open 1000ms</Button>
-        </Popover.Trigger>
-
-        <Popover.Content>
-          <Popover.Header>ベジータ!</Popover.Header>
-          <Popover.Body>
-            がんばれカカロット……お前がナンバー１だ！！
-          </Popover.Body>
-        </Popover.Content>
-      </Popover.Root>
-
-      <Popover.Root closeDelay={1000}>
-        <Popover.Trigger>
-          <Button>Delay Close 1000ms</Button>
-        </Popover.Trigger>
-
-        <Popover.Content>
-          <Popover.Header>ベジータ!</Popover.Header>
-          <Popover.Body>
-            がんばれカカロット……お前がナンバー１だ！！
-          </Popover.Body>
-        </Popover.Content>
-      </Popover.Root>
-    </>
   )
 }
 
@@ -233,7 +189,7 @@ export const AnimationScheme: Story = () => {
       {(animationScheme) => (
         <Popover.Root key={animationScheme} animationScheme={animationScheme}>
           <Popover.Trigger>
-            <Button>Open "{animationScheme}" Popover</Button>
+            <Button>Open "{toTitleCase(animationScheme)}" Popover</Button>
           </Popover.Trigger>
 
           <Popover.Content>

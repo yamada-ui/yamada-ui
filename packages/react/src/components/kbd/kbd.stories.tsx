@@ -16,7 +16,7 @@ export default meta
 export const Basic: Story = () => {
   return (
     <Text>
-      <Kbd>shift</Kbd> + <Kbd>Tab</Kbd>
+      <Kbd>Shift</Kbd> + <Kbd>Tab</Kbd>
     </Text>
   )
 }
@@ -31,7 +31,7 @@ export const Variant: Story = () => {
         return (
           <Text key={key}>
             <Kbd colorScheme={row} variant={column}>
-              shift
+              Shift
             </Kbd>{" "}
             +{" "}
             <Kbd colorScheme={row} variant={column}>
@@ -51,7 +51,7 @@ export const Size: Story = () => {
         return (
           <Text key={key}>
             <Kbd colorScheme={row} size={column}>
-              shift
+              Shift
             </Kbd>{" "}
             +{" "}
             <Kbd colorScheme={row} size={column}>

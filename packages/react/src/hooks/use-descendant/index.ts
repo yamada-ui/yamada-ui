@@ -3,10 +3,9 @@
 import type { RefCallback } from "react"
 import { useRef } from "react"
 import {
-  cast,
   createContext,
-  isHTMLElement,
   mergeRefs,
+  runIfFn,
   useSafeLayoutEffect,
 } from "../../utils"
 
@@ -53,18 +52,20 @@ const getPrevIndex = (current: number, max: number, loop: boolean) => {
   return next
 }
 
-export interface DescendantProps {
-  disabled?: boolean
+export type DescendantProps<Y extends HTMLElement = HTMLElement, M = {}> = M & {
+  disabled?: ((node: Y) => boolean) | boolean
 }
 
-export interface Descendant<Y extends HTMLElement = HTMLElement>
-  extends DescendantProps {
+export type Descendant<
+  Y extends HTMLElement = HTMLElement,
+  M = {},
+> = DescendantProps<Y, M> & {
   index: number
   node: Y
 }
 
-const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
-  const descendants = new Map<Y, Descendant<Y>>()
+const createDescendants = <Y extends HTMLElement = HTMLElement, M = {}>() => {
+  const descendants = new Map<Y, Descendant<Y, M>>()
 
   const setIndexes = (next: Node[]) => {
     descendants.forEach((descendant) => {
@@ -75,13 +76,13 @@ const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
     })
   }
 
-  const set = (node: null | Y, { disabled }: DescendantProps = {}) => {
+  const set = (node: null | Y, props?: DescendantProps<Y, M>) => {
     if (!node || descendants.has(node)) return
 
     const keys = Array.from(descendants.keys()).concat(node)
     const sorted = sortNodes(keys)
 
-    const descendant = { disabled, index: -1, node }
+    const descendant = { ...props, index: -1, node } as Descendant<Y, M>
 
     descendants.set(node, descendant)
 
@@ -90,12 +91,8 @@ const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
 
   const destroy = () => descendants.clear()
 
-  const register = (nodeOrProps?: DescendantProps | null | Y) => {
-    if (nodeOrProps == null) return
-
-    if (isHTMLElement(nodeOrProps)) return set(nodeOrProps)
-
-    return (node: null | Y) => set(node, nodeOrProps)
+  const register = (props?: DescendantProps<Y, M>): RefCallback<Y> => {
+    return (node: null | Y) => set(node, props)
   }
 
   const unregister = (node?: null | Y) => {
@@ -112,6 +109,26 @@ const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
 
   const enabledCount = () => enabledValues().length
 
+  const focus = (target?: null | Y) => {
+    if (!target) return
+
+    if (
+      target.dataset.activedescendant === "" ||
+      target.dataset.activedescendant === "true"
+    )
+      return
+
+    const values = enabledValues()
+
+    values.forEach(({ node }) => {
+      delete node.dataset.activedescendant
+    })
+
+    target.dataset.activedescendant = ""
+
+    target.focus()
+  }
+
   const indexOf = (target?: null | Y) =>
     !target ? -1 : (descendants.get(target)?.index ?? -1)
 
@@ -123,7 +140,8 @@ const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
   const values = () =>
     Array.from(descendants.values()).sort((a, b) => a.index - b.index)
 
-  const enabledValues = () => values().filter(({ disabled }) => !disabled)
+  const enabledValues = () =>
+    values().filter(({ disabled, node }) => !runIfFn(disabled, node))
 
   const value = (index: number) => {
     if (!count()) return undefined
@@ -195,6 +213,7 @@ const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
     enabledValue,
     enabledValues,
     firstValue,
+    focus,
     indexOf,
     lastValue,
     nextValue,
@@ -206,19 +225,39 @@ const descendantsManager = <Y extends HTMLElement = HTMLElement>() => {
   }
 }
 
-export type DescendantsManager<Y extends HTMLElement> = ReturnType<
-  typeof descendantsManager<Y>
+export type Descendants<Y extends HTMLElement, M = {}> = ReturnType<
+  typeof createDescendants<Y, M>
 >
 
-export const createDescendant = <Y extends HTMLElement = HTMLElement>() => {
+export type CreateDescendantRegister<Y extends HTMLElement, M = {}> = (
+  props?: DescendantProps<Y, M>,
+) => RefCallback<Y>
+
+export const createDescendant = <
+  Y extends HTMLElement = HTMLElement,
+  M = {},
+>() => {
   const [DescendantsContext, useDescendantsContext] = createContext<
-    DescendantsManager<Y>
+    Descendants<Y, M>
   >({
     name: "DescendantsContext",
   })
 
+  const useDescendantRegister = (descendants?: Descendants<Y, M>) => {
+    const ref = useRef<Y>(null)
+
+    useSafeLayoutEffect(() => {
+      return () => {
+        if (ref.current) descendants?.unregister(ref.current)
+      }
+    }, [])
+
+    return (props?: DescendantProps<Y, M>): RefCallback<Y> =>
+      mergeRefs(ref, descendants?.register(props))
+  }
+
   const useDescendants = () => {
-    const descendants = useRef(descendantsManager<Y>())
+    const descendants = useRef(createDescendants<Y, M>())
 
     useSafeLayoutEffect(() => {
       return () => descendants.current.destroy()
@@ -227,30 +266,20 @@ export const createDescendant = <Y extends HTMLElement = HTMLElement>() => {
     return descendants.current
   }
 
-  const useDescendant = (options?: DescendantProps) => {
+  const useDescendant = (props?: DescendantProps<Y, M>) => {
     const descendants = useDescendantsContext()
-    const ref = useRef<Y>(null)
-
-    useSafeLayoutEffect(() => {
-      return () => {
-        if (ref.current) descendants.unregister(ref.current)
-      }
-    }, [])
+    const createRegister = useDescendantRegister(descendants)
 
     return {
       descendants,
-      register: mergeRefs(
-        options
-          ? cast<RefCallback<Y>>(descendants.register(options))
-          : cast<RefCallback<Y>>(descendants.register),
-        ref,
-      ),
+      register: createRegister(props),
     }
   }
 
   return {
     DescendantsContext,
     useDescendant,
+    useDescendantRegister,
     useDescendants,
     useDescendantsContext,
   }

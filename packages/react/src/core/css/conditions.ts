@@ -279,6 +279,10 @@ export const pseudoElementSelectors = Object.values(pseudoElements)
 
 export const pseudoClasses = {
   /**
+   * The CSS `&:is([data-activedescendant])` pseudo-class.
+   */
+  _activedescendant: "&:is([data-activedescendant])",
+  /**
    * The CSS `:any-link` pseudo-class.
    */
   _anyLink: "&:is(:any-link, [data-any-link])",
@@ -544,6 +548,10 @@ export const groupAttributes = {
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is active.
    */
   _groupActive: toGroup(pseudoClasses._active),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is activedescendant.
+   */
+  _groupActivedescendant: toGroup(pseudoClasses._activedescendant),
   /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is blank.
    */

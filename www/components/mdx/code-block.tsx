@@ -50,9 +50,7 @@ export function CodeBlock({
             )}
           </Tabs.Panel>
           <Tabs.Panel index={1}>
-            <Pre lang={lang} m="0">
-              {children}
-            </Pre>
+            <Pre lang={lang}>{children}</Pre>
           </Tabs.Panel>
         </Tabs.Root>
 
@@ -96,13 +94,17 @@ export function CodeBlock({
           </Text>
         </Flex>
 
-        <Pre lang={lang} m="0" roundedTop="0">
+        <Pre lang={lang} roundedTop="0">
           {children}
         </Pre>
       </Grid>
     )
   } else {
-    return <Pre lang={lang}>{children}</Pre>
+    return (
+      <Pre lang={lang} my="lg">
+        {children}
+      </Pre>
+    )
   }
 }
 

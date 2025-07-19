@@ -43,7 +43,6 @@ export function CodePreview({
   return (
     <Grid
       minH={{ base: "16", md: "12" }}
-      my="lg"
       position="relative"
       rounded="l2"
       {...rest}

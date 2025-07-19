@@ -491,7 +491,9 @@ function useStyle<
     if (!isEqualProps(propsRef.current, computedProps))
       propsRef.current = computedProps
   } else {
-    props.className = cx(defaultClassName, props.className)
+    const className = cx(defaultClassName, props.className)
+
+    if (className) props.className = className
 
     if (!isEqualProps(propsRef.current, props))
       propsRef.current = props as unknown as WithoutThemeProps<Y, M, D>

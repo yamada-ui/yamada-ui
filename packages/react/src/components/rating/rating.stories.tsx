@@ -1,9 +1,12 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
+import { PropsTable } from "#storybook"
 import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
+import { Rating } from "."
+import { COLOR_SCHEMES } from "../../utils"
 import { Button } from "../button"
-import { Fieldset } from "../form-control"
+import { Field } from "../field"
 import {
   AngryIcon,
   FrownIcon,
@@ -13,7 +16,6 @@ import {
   SmilePlusIcon,
 } from "../icon"
 import { VStack } from "../stack"
-import { Rating } from "./"
 
 type Story = StoryFn<typeof Rating>
 
@@ -28,32 +30,23 @@ export const Basic: Story = () => {
   return <Rating />
 }
 
-export const WithSize: Story = () => {
+export const Size: Story = () => {
   return (
-    <>
-      <Rating size="xs" defaultValue={3} />
-      <Rating size="sm" defaultValue={3} />
-      <Rating size="md" defaultValue={3} />
-      <Rating size="lg" defaultValue={3} />
-      <Rating size="xl" defaultValue={3} />
-    </>
+    <PropsTable columns={["xs", "sm", "md", "lg", "xl"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+        return (
+          <Rating key={key} colorScheme={row} size={column} defaultValue={3} />
+        )
+      }}
+    </PropsTable>
   )
 }
 
-export const WithColorScheme: Story = () => {
-  return (
-    <>
-      <Rating colorScheme="purple" defaultValue={3} />
-      <Rating colorScheme="pink" defaultValue={3} />
-    </>
-  )
-}
-
-export const WithDefaultValue: Story = () => {
+export const DefaultValue: Story = () => {
   return <Rating defaultValue={3} />
 }
 
-export const WithItems: Story = () => {
+export const Items: Story = () => {
   return (
     <>
       <Rating items={4} />
@@ -63,7 +56,7 @@ export const WithItems: Story = () => {
   )
 }
 
-export const WithFractions: Story = () => {
+export const Fractions: Story = () => {
   return (
     <>
       <Rating defaultValue={1.5} fractions={2} />
@@ -73,7 +66,7 @@ export const WithFractions: Story = () => {
   )
 }
 
-export const WithHighlightSelectedOnly: Story = () => {
+export const HighlightSelectedOnly: Story = () => {
   return <Rating defaultValue={3} highlightSelectedOnly />
 }
 
@@ -82,9 +75,9 @@ export const Disabled: Story = () => {
     <>
       <Rating defaultValue={3} disabled />
 
-      <Fieldset disabled legend="How satisfied are you with Yamada UI?">
+      <Field.Root disabled label="How satisfied are you with Yamada UI?">
         <Rating defaultValue={3} />
-      </Fieldset>
+      </Field.Root>
     </>
   )
 }
@@ -94,9 +87,9 @@ export const Readonly: Story = () => {
     <>
       <Rating defaultValue={3} readOnly />
 
-      <Fieldset legend="How satisfied are you with Yamada UI?" readOnly>
+      <Field.Root label="How satisfied are you with Yamada UI?" readOnly>
         <Rating defaultValue={3} />
-      </Fieldset>
+      </Field.Root>
     </>
   )
 }
@@ -235,17 +228,17 @@ export const ReactHookForm: Story = () => {
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <Fieldset
+      <Field.Root
         errorMessage={errors.rating?.message}
         invalid={!!errors.rating}
-        legend="How satisfied are you with Yamada UI?"
+        label="How satisfied are you with Yamada UI?"
       >
         <Controller
           name="rating"
           control={control}
           render={({ field }) => <Rating {...field} />}
         />
-      </Fieldset>
+      </Field.Root>
 
       <Button type="submit" alignSelf="flex-end">
         Submit

@@ -16,6 +16,7 @@ import useEmblaCarousel from "embla-carousel-react"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useBoolean } from "../../hooks/use-boolean"
 import { useControllableState } from "../../hooks/use-controllable-state"
+import { useI18n } from "../../providers/i18n-provider"
 import {
   assignRef,
   createContext,
@@ -207,6 +208,7 @@ export const useCarousel = ({
   onScrollProgress,
   ...rest
 }: UseCarouselProps = {}) => {
+  const { t } = useI18n("carousel")
   const [index, setIndex] = useControllableState({
     defaultValue: defaultIndex,
     value: indexProp,
@@ -222,17 +224,17 @@ export const useCarousel = ({
   const horizontal = orientation === "horizontal"
   const axis = horizontal ? "x" : "y"
   const [snapCount, setSnapCount] = useState(0)
-  const [count, setCount] = useState(0)
+  const [total, setTotal] = useState(0)
   const watchResize = useCallback<Extract<CarouselWatchResize, Function>>(
     (methods, entries) => {
       const result = isFunction(watchResizeProp)
         ? watchResizeProp(methods, entries)
         : true
       const snapCount = methods.scrollSnapList().length
-      const count = methods.slideNodes().length
+      const total = methods.slideNodes().length
 
       setSnapCount(snapCount)
-      setCount(count)
+      setTotal(total)
 
       return result
     },
@@ -262,10 +264,10 @@ export const useCarousel = ({
 
   const onInit = useCallback((methods: CarouselControl) => {
     const snapCount = methods.scrollSnapList().length
-    const count = methods.slideNodes().length
+    const total = methods.slideNodes().length
 
     setSnapCount(snapCount)
-    setCount(count)
+    setTotal(total)
   }, [])
 
   const onScroll = useCallback(() => {
@@ -391,7 +393,7 @@ export const useCarousel = ({
     carousel.reInit()
   }, [
     carousel,
-    count,
+    total,
     align,
     axis,
     containScroll,
@@ -436,7 +438,7 @@ export const useCarousel = ({
 
         return {
           id: `${listId}-${indexProp}`,
-          "aria-label": `${page} of ${count}`,
+          "aria-label": t("{page} of {total}", { page, total }),
           "aria-roledescription": "slide",
           "data-index": indexProp.toString(),
           "data-orientation": orientation,
@@ -445,41 +447,41 @@ export const useCarousel = ({
           ...props,
         }
       },
-      [index, listId, count, orientation],
+      [index, listId, total, orientation, t],
     )
 
   const getPrevTriggerProps: PropGetter<"button"> = useCallback(
     (props = {}) => ({
       "aria-controls": listId,
-      "aria-label": "Go to previous slide",
+      "aria-label": t("Go to previous slide"),
       "data-orientation": orientation,
       disabled: !carousel?.canScrollPrev(),
       ...props,
       onClick: handlerAll(props.onClick, () => carousel?.scrollPrev()),
     }),
-    [carousel, listId, orientation],
+    [carousel, listId, orientation, t],
   )
 
   const getNextTriggerProps: PropGetter<"button"> = useCallback(
     (props = {}) => ({
       "aria-controls": listId,
-      "aria-label": "Go to next slide",
+      "aria-label": t("Go to next slide"),
       "data-orientation": orientation,
       disabled: !carousel?.canScrollNext(),
       ...props,
       onClick: handlerAll(props.onClick, () => carousel?.scrollNext()),
     }),
-    [carousel, listId, orientation],
+    [carousel, listId, orientation, t],
   )
 
   const getIndicatorsProps: PropGetter = useCallback(
     (props = {}) => ({
-      "aria-label": "Slides",
+      "aria-label": t("Slides"),
       "aria-orientation": orientation,
       role: "tablist",
       ...props,
     }),
-    [orientation],
+    [orientation, t],
   )
 
   const getIndicatorProps: RequiredPropGetter<"button", { index: number }> =
@@ -491,7 +493,7 @@ export const useCarousel = ({
         return {
           type: "button" as const,
           "aria-controls": `${listId}-${indexProp}`,
-          "aria-label": `Go to ${page} slide`,
+          "aria-label": t("Go to {page} slide", { page }),
           "aria-selected": selected,
           "data-index": indexProp.toString(),
           "data-orientation": orientation,
@@ -508,15 +510,15 @@ export const useCarousel = ({
           onKeyDown: handlerAll(props.onKeyDown, onKeyDown(indexProp)),
         }
       },
-      [carousel, index, listId, orientation, onKeyDown],
+      [index, listId, t, orientation, onKeyDown, carousel],
     )
 
   return {
     carousel,
-    count,
     index,
     setIndex,
     snapCount,
+    total,
     getIndicatorProps,
     getIndicatorsProps,
     getItemProps,

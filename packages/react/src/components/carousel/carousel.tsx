@@ -183,10 +183,10 @@ export const CarouselRoot = withProvider<"section", CarouselRootProps>(
     const stopMouseEnterAutoplay = useValue(rest.stopMouseEnterAutoplay)
     const {
       carousel,
-      count,
       index,
       setIndex,
       snapCount,
+      total,
       getIndicatorProps,
       getIndicatorsProps,
       getItemProps,
@@ -217,10 +217,10 @@ export const CarouselRoot = withProvider<"section", CarouselRootProps>(
     const carouselContext = useMemo(
       () => ({
         carousel,
-        count,
         index,
         setIndex,
         snapCount,
+        total,
         getIndicatorProps,
         getIndicatorsProps,
         getItemProps,
@@ -230,7 +230,7 @@ export const CarouselRoot = withProvider<"section", CarouselRootProps>(
       }),
       [
         carousel,
-        count,
+        total,
         index,
         setIndex,
         snapCount,

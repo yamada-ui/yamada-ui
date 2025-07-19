@@ -351,12 +351,12 @@ export const PaginationText = withContext<"span", PaginationTextProps>(
     if (children) {
       return runIfFn(children, { page: currentPage, total })
     } else if (format === "short") {
-      return t("text.short", {
+      return t("{value} / {total}", {
         total,
         value: currentPage,
       })
     } else {
-      return t("text.compact", {
+      return t("{value} of {total}", {
         total,
         value: currentPage,
       })

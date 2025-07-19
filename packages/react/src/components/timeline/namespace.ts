@@ -1,0 +1,20 @@
+export type {
+  TimelineConnectorProps as ConnectorProps,
+  TimelineContentProps as ContentProps,
+  TimelineDescriptionProps as DescriptionProps,
+  TimelineIndicatorProps as IndicatorProps,
+  TimelineItemProps as ItemProps,
+  TimelineRootProps as RootProps,
+  TimelineTitleProps as TitleProps,
+} from "./timeline"
+export {
+  TimelineConnector as Connector,
+  TimelineContent as Content,
+  TimelineDescription as Description,
+  TimelineIndicator as Indicator,
+  TimelineItem as Item,
+  TimelinePropsContext as PropsContext,
+  TimelineRoot as Root,
+  TimelineTitle as Title,
+  useTimelinePropsContext as usePropsContext,
+} from "./timeline"

@@ -140,11 +140,6 @@
       "description": "Set color scheme variables.",
       "required": false
     },
-    "value": {
-      "type": "string",
-      "description": "The value of the menu item.",
-      "required": true
-    },
     "closeOnSelect": {
       "type": "boolean",
       "description": "If `true`, the menu item will be closed when selected.",
@@ -156,10 +151,9 @@
       "description": "If `true`, the menu item will be disabled.",
       "required": false
     },
-    "focusable": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the menu item will be focusable.",
+    "value": {
+      "type": "string",
+      "description": "The value of the menu item.",
       "required": false
     }
   },
@@ -250,7 +244,7 @@
     },
     "value": {
       "type": "string",
-      "description": "The value of the menu item.",
+      "description": "The value of the menu option item.",
       "required": true
     },
     "closeOnSelect": {
@@ -262,12 +256,6 @@
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the menu item will be disabled.",
-      "required": false
-    },
-    "focusable": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the menu item will be focusable.",
       "required": false
     }
   },
@@ -390,7 +378,7 @@
       "required": false
     },
     "onSelect": {
-      "type": "(value: string) => void",
+      "type": "(value?: string | undefined) => void",
       "description": "Callback invoked when a menu item is selected.",
       "required": false
     },
@@ -420,6 +408,12 @@
       "type": "Strategy",
       "defaultValue": "\"absolute\"",
       "description": "The CSS positioning strategy to use.",
+      "required": false
+    },
+    "subMenuDirection": {
+      "type": "SubMenuDirection",
+      "defaultValue": "\"end\"",
+      "description": "The direction of the sub menu.",
       "required": false
     },
     "transform": {

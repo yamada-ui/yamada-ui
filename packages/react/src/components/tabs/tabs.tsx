@@ -80,6 +80,7 @@ export const TabsRoot: FC<TabsRootProps> = withProvider(
   }) => {
     const computedOrientation = useValue(orientationProp)
     const {
+      id,
       focusedIndex,
       index,
       manual,
@@ -97,6 +98,7 @@ export const TabsRoot: FC<TabsRootProps> = withProvider(
     )
     const tabsContext = useMemo(
       () => ({
+        id,
         focusedIndex,
         index,
         manual,
@@ -106,6 +108,7 @@ export const TabsRoot: FC<TabsRootProps> = withProvider(
         getListProps,
       }),
       [
+        id,
         manual,
         focusedIndex,
         index,

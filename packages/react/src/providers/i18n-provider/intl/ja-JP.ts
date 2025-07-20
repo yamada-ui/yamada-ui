@@ -31,18 +31,16 @@ export default {
     "Go to page": "{value}ページに移動する",
     "Go to previous page": "前のページに移動する",
     Pagination: "ページネーション",
-    text: {
-      short: "{value} / {total}",
-      compact: "{value} / {total} ページ",
-    },
+    "{value} / {total}": "{value} / {total}",
+    "{value} of {total}": "{value} / {total} ページ",
   },
   passwordInput: {
     "Password strength meter": "パスワードの強度",
     "Toggle password visibility": "パスワードの表示を切り替える",
   },
   progress: {
-    loading: "読み込み中...",
-    percent: "{value}パーセント",
+    "Loading...": "読み込み中...",
+    "{value} percent": "{value}パーセント",
   },
   stat: {
     "Decreased by": "減少",

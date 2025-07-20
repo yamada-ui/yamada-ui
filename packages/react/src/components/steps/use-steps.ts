@@ -39,6 +39,10 @@ export { StepsItemContext, useStepsItemContext }
 
 export interface UseStepsProps extends Omit<HTMLProps, "onChange"> {
   /**
+   * The total number of steps.
+   */
+  count?: number
+  /**
    * The initial index of the active step.
    *
    * @default 0
@@ -61,6 +65,7 @@ export interface UseStepsProps extends Omit<HTMLProps, "onChange"> {
 }
 
 export const useSteps = ({
+  count = 0,
   defaultIndex = 0,
   index: indexProp,
   orientation = "horizontal",
@@ -74,7 +79,6 @@ export const useSteps = ({
     onChange,
   })
   const id = useId()
-  const count = descendants.count()
 
   const getStatus = useCallback(
     (indexProp: number): StepStatusScheme => {

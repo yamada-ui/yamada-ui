@@ -31,18 +31,16 @@ export default {
     "Go to page": "Go to page {value}",
     "Go to previous page": "Go to previous page",
     Pagination: "Pagination",
-    text: {
-      short: "{value} / {total}",
-      compact: "{value} of {total}",
-    },
+    "{value} / {total}": "{value} / {total}",
+    "{value} of {total}": "{value} of {total}",
   },
   passwordInput: {
     "Password strength meter": "Password strength meter",
     "Toggle password visibility": "Toggle password visibility",
   },
   progress: {
-    loading: "Loading...",
-    percent: "{value} percent",
+    "Loading...": "Loading...",
+    "{value} percent": "{value} percent",
   },
   stat: {
     "Decreased by": "Decreased by",

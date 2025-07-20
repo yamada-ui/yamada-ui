@@ -1,10 +1,10 @@
 import type { AnyString } from "./index.types"
-import { isString, isUndefined } from "./assertion"
+import { isString } from "./assertion"
 
 export function cx(...classNames: (string | undefined)[]) {
   return classNames
-    .filter((className) => !isUndefined(className))
-    .map((className) => className.trim())
+    .filter((className) => !!className)
+    .map((className) => className!.trim())
     .join(" ")
 }
 

@@ -16,7 +16,7 @@ export function CodeGroup({ children, ids }: CodeGroupProps) {
       <Tabs.List
         bg="bg.panel"
         borderBottomWidth="1px"
-        borderColor="border.subtle"
+        borderColor="border"
         color="fg.emphasized"
         gap="xs"
         h="12"

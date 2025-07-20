@@ -1,11 +1,11 @@
 import type { FC, PropsWithChildren } from "react"
-import type { DescendantProps } from "./"
+import type { DescendantProps } from "."
 import { render, renderHook } from "#test"
-import { createDescendant } from "./"
+import { createDescendants } from "."
 
 describe("useDescendant", () => {
   const initializeDescendants = () => {
-    const { result } = renderHook(() => createDescendant())
+    const { result } = renderHook(() => createDescendants())
 
     const { DescendantsContext, useDescendant, useDescendants } = result.current
 

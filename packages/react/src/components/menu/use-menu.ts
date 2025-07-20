@@ -2,11 +2,11 @@
 
 import type { KeyboardEvent, MouseEvent, RefObject } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
-import type { Descendant, Descendants } from "../../hooks/use-descendant"
+import type { Descendant, Descendants } from "../../hooks/use-descendants"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback, useId, useRef } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { createDescendant } from "../../hooks/use-descendant"
+import { createDescendants } from "../../hooks/use-descendants"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import {
   ariaAttr,
@@ -35,7 +35,7 @@ const {
   useDescendant: useMenuDescendant,
   useDescendantRegister: useMenuDescendantRegister,
   useDescendants: useMenuDescendants,
-} = createDescendant<HTMLDivElement, MenuDescendantProps>()
+} = createDescendants<HTMLDivElement, MenuDescendantProps>()
 
 export { MenuDescendantsContext, useMenuDescendant, useMenuDescendants }
 

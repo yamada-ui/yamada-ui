@@ -64,7 +64,7 @@ export type Descendant<
   node: Y
 }
 
-const createDescendants = <Y extends HTMLElement = HTMLElement, M = {}>() => {
+const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
   const descendants = new Map<Y, Descendant<Y, M>>()
 
   const setIndexes = (next: Node[]) => {
@@ -226,14 +226,19 @@ const createDescendants = <Y extends HTMLElement = HTMLElement, M = {}>() => {
 }
 
 export type Descendants<Y extends HTMLElement, M = {}> = ReturnType<
-  typeof createDescendants<Y, M>
+  typeof descendantManager<Y, M>
 >
 
 export type CreateDescendantRegister<Y extends HTMLElement, M = {}> = (
   props?: DescendantProps<Y, M>,
 ) => RefCallback<Y>
 
-export const createDescendant = <
+/**
+ * `useDescendants` is a custom hook that manages descendants.
+ *
+ * @see https://yamada-ui.com/hooks/use-descendants
+ */
+export const createDescendants = <
   Y extends HTMLElement = HTMLElement,
   M = {},
 >() => {
@@ -257,7 +262,7 @@ export const createDescendant = <
   }
 
   const useDescendants = () => {
-    const descendants = useRef(createDescendants<Y, M>())
+    const descendants = useRef(descendantManager<Y, M>())
 
     useSafeLayoutEffect(() => {
       return () => descendants.current.destroy()

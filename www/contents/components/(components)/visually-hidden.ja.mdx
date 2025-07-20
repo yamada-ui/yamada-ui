@@ -1,0 +1,37 @@
+---
+title: VisuallyHidden
+description: "`VisuallyHidden`は、視覚的な表示からコンテンツを隠しながらスクリーンリーダーで読み取り可能にする、ウェブアクセシビリティで一般的に使用される手法です。"
+storybook: components-visuallyhidden--basic
+source: components/visually-hidden
+---
+
+```tsx preview
+<Button>
+  <VisuallyHidden>Checkmark</VisuallyHidden>
+  <CheckIcon />
+</Button>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { VisuallyHidden } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { VisuallyHidden } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { VisuallyHidden } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<VisuallyHidden>Hidden content</VisuallyHidden>
+```
+
+視覚的に要素を隠すために使用されますが、スクリーンリーダーではアクセス可能にします。デフォルトでは、`span`要素をレンダリングします。

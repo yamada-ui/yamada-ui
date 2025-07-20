@@ -98,6 +98,11 @@
               "title": "Em",
               "segment": "em",
               "pathname": "/docs/components/em"
+            },
+            {
+              "title": "VisuallyHidden",
+              "segment": "visually-hidden",
+              "pathname": "/docs/components/visually-hidden"
             }
           ]
         }

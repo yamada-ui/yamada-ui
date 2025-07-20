@@ -15,8 +15,9 @@
       "configuration": "設定",
       "styles": "スタイル",
       "components": "コンポーネント",
-      "layouts": "レイアウト",
-      "typography": "タイポグラフィ"
+      "charts": "チャート",
+      "animations": "アニメーション",
+      "utilities": "ユーティリティ"
     }
   },
   "home": {

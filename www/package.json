@@ -18,6 +18,7 @@
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "prettier . --ignore-path ../.prettierignore --check --cache",
     "gen:icons": "tsx scripts/generate/icons",
+    "gen:docs": "tsx scripts/generate/docs",
     "gen:contributors": "tsx scripts/generate/contributors"
   },
   "dependencies": {
@@ -48,6 +49,7 @@
     "@yamada-ui/cli": "workspace:*",
     "@yamada-ui/utils": "workspace:*",
     "@yamada-ui/workspace": "workspace:*",
+    "commander": "^14.0.0",
     "dotenv": "^17.2.0",
     "execa": "9.3.1",
     "gray-matter": "^4.0.3",

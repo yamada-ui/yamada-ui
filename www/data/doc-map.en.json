@@ -85,9 +85,221 @@
           "segment": "(components)",
           "items": [
             {
+              "title": "Accordion",
+              "segment": "accordion",
+              "pathname": "/docs/components/accordion"
+            },
+            {
+              "title": "ActionBar",
+              "segment": "action-bar",
+              "pathname": "/docs/components/action-bar",
+              "status": "planned"
+            },
+            {
+              "title": "Alert",
+              "segment": "alert",
+              "pathname": "/docs/components/alert"
+            },
+            {
+              "title": "AlphaSlider",
+              "segment": "alpha-slider",
+              "pathname": "/docs/components/alpha-slider"
+            },
+            {
+              "title": "AspectRatio",
+              "segment": "aspect-ratio",
+              "pathname": "/docs/components/aspect-ratio"
+            },
+            {
+              "title": "Autocomplete",
+              "segment": "autocomplete",
+              "pathname": "/docs/components/autocomplete"
+            },
+            {
+              "title": "Avatar",
+              "segment": "avatar",
+              "pathname": "/docs/components/avatar"
+            },
+            {
+              "title": "Badge",
+              "segment": "badge",
+              "pathname": "/docs/components/badge"
+            },
+            {
+              "title": "Bleed",
+              "segment": "bleed",
+              "pathname": "/docs/components/bleed"
+            },
+            {
+              "title": "Blockquote",
+              "segment": "blockquote",
+              "pathname": "/docs/components/blockquote"
+            },
+            {
               "title": "Box",
               "segment": "box",
               "pathname": "/docs/components/box"
+            },
+            {
+              "title": "Breadcrumb",
+              "segment": "breadcrumb",
+              "pathname": "/docs/components/breadcrumb"
+            },
+            {
+              "title": "Button",
+              "segment": "button",
+              "pathname": "/docs/components/button"
+            },
+            {
+              "title": "Calendar",
+              "segment": "calendar",
+              "pathname": "/docs/components/calendar"
+            },
+            {
+              "title": "Card",
+              "segment": "card",
+              "pathname": "/docs/components/card"
+            },
+            {
+              "title": "Carousel",
+              "segment": "carousel",
+              "pathname": "/docs/components/carousel"
+            },
+            {
+              "title": "Center",
+              "segment": "center",
+              "pathname": "/docs/components/center"
+            },
+            {
+              "title": "Checkbox",
+              "segment": "checkbox",
+              "pathname": "/docs/components/checkbox"
+            },
+            {
+              "title": "CheckboxCard",
+              "segment": "checkbox-card",
+              "pathname": "/docs/components/checkbox-card"
+            },
+            {
+              "title": "CircleProgress",
+              "segment": "circle-progress",
+              "pathname": "/docs/components/circle-progress"
+            },
+            {
+              "title": "CloseButton",
+              "segment": "close-button",
+              "pathname": "/docs/components/close-button"
+            },
+            {
+              "title": "Code",
+              "segment": "code",
+              "pathname": "/docs/components/code"
+            },
+            {
+              "title": "ColorPicker",
+              "segment": "color-picker",
+              "pathname": "/docs/components/color-picker"
+            },
+            {
+              "title": "ColorSwatch",
+              "segment": "color-swatch",
+              "pathname": "/docs/components/color-swatch"
+            },
+            {
+              "title": "Container",
+              "segment": "container",
+              "pathname": "/docs/components/container"
+            },
+            {
+              "title": "DataList",
+              "segment": "data-list",
+              "pathname": "/docs/components/data-list"
+            },
+            {
+              "title": "DatePicker",
+              "segment": "date-picker",
+              "pathname": "/docs/components/date-picker"
+            },
+            {
+              "title": "Dockable",
+              "segment": "dockable",
+              "pathname": "/docs/components/dockable",
+              "status": "planned"
+            },
+            {
+              "title": "Drawer",
+              "segment": "drawer",
+              "pathname": "/docs/components/drawer"
+            },
+            {
+              "title": "Dropzone",
+              "segment": "dropzone",
+              "pathname": "/docs/components/dropzone"
+            },
+            {
+              "title": "Editable",
+              "segment": "editable",
+              "pathname": "/docs/components/editable"
+            },
+            {
+              "title": "Em",
+              "segment": "em",
+              "pathname": "/docs/components/em"
+            },
+            {
+              "title": "EmptyState",
+              "segment": "empty-state",
+              "pathname": "/docs/components/empty-state"
+            },
+            {
+              "title": "Field",
+              "segment": "field",
+              "pathname": "/docs/components/field"
+            },
+            {
+              "title": "Fieldset",
+              "segment": "fieldset",
+              "pathname": "/docs/components/fieldset"
+            },
+            {
+              "title": "FileButton",
+              "segment": "file-button",
+              "pathname": "/docs/components/file-button"
+            },
+            {
+              "title": "FileInput",
+              "segment": "file-input",
+              "pathname": "/docs/components/file-input"
+            },
+            {
+              "title": "Flex",
+              "segment": "flex",
+              "pathname": "/docs/components/flex"
+            },
+            {
+              "title": "Float",
+              "segment": "float",
+              "pathname": "/docs/components/float"
+            },
+            {
+              "title": "Grid",
+              "segment": "grid",
+              "pathname": "/docs/components/grid"
+            },
+            {
+              "title": "Heading",
+              "segment": "heading",
+              "pathname": "/docs/components/heading"
+            },
+            {
+              "title": "Highlight",
+              "segment": "highlight",
+              "pathname": "/docs/components/highlight"
+            },
+            {
+              "title": "HueSlider",
+              "segment": "hue-slider",
+              "pathname": "/docs/components/hue-slider"
             },
             {
               "title": "Icon",
@@ -95,9 +307,447 @@
               "pathname": "/docs/components/icon"
             },
             {
-              "title": "Em",
-              "segment": "em",
-              "pathname": "/docs/components/em"
+              "title": "IconButton",
+              "segment": "icon-button",
+              "pathname": "/docs/components/icon-button"
+            },
+            {
+              "title": "Image",
+              "segment": "image",
+              "pathname": "/docs/components/image"
+            },
+            {
+              "title": "Indicator",
+              "segment": "indicator",
+              "pathname": "/docs/components/indicator"
+            },
+            {
+              "title": "InfiniteScrollArea",
+              "segment": "infinite-scroll-area",
+              "pathname": "/docs/components/infinite-scroll-area"
+            },
+            {
+              "title": "Input",
+              "segment": "input",
+              "pathname": "/docs/components/input"
+            },
+            {
+              "title": "Kbd",
+              "segment": "kbd",
+              "pathname": "/docs/components/kbd"
+            },
+            {
+              "title": "Link",
+              "segment": "link",
+              "pathname": "/docs/components/link"
+            },
+            {
+              "title": "LinkBox",
+              "segment": "link-box",
+              "pathname": "/docs/components/link-box"
+            },
+            {
+              "title": "List",
+              "segment": "list",
+              "pathname": "/docs/components/list"
+            },
+            {
+              "title": "Menu",
+              "segment": "menu",
+              "pathname": "/docs/components/menu"
+            },
+            {
+              "title": "Modal",
+              "segment": "modal",
+              "pathname": "/docs/components/modal"
+            },
+            {
+              "title": "MonthPicker",
+              "segment": "month-picker",
+              "pathname": "/docs/components/month-picker"
+            },
+            {
+              "title": "MultiAutocomplete",
+              "segment": "multi-autocomplete",
+              "pathname": "/docs/components/multi-autocomplete"
+            },
+            {
+              "title": "MultiDatePicker",
+              "segment": "multi-date-picker",
+              "pathname": "/docs/components/multi-date-picker"
+            },
+            {
+              "title": "MultiSelect",
+              "segment": "multi-select",
+              "pathname": "/docs/components/multi-select"
+            },
+            {
+              "title": "NativeSelect",
+              "segment": "native-select",
+              "pathname": "/docs/components/native-select"
+            },
+            {
+              "title": "NativeTable",
+              "segment": "native-table",
+              "pathname": "/docs/components/native-table"
+            },
+            {
+              "title": "NumberInput",
+              "segment": "number-input",
+              "pathname": "/docs/components/number-input"
+            },
+            {
+              "title": "Pagination",
+              "segment": "pagination",
+              "pathname": "/docs/components/pagination"
+            },
+            {
+              "title": "PagingTable",
+              "segment": "paging-table",
+              "pathname": "/docs/components/paging-table"
+            },
+            {
+              "title": "PasswordInput",
+              "segment": "password-input",
+              "pathname": "/docs/components/password-input"
+            },
+            {
+              "title": "PhoneInput",
+              "segment": "phone-input",
+              "pathname": "/docs/components/phone-input",
+              "status": "planned"
+            },
+            {
+              "title": "Picture",
+              "segment": "picture",
+              "pathname": "/docs/components/picture"
+            },
+            {
+              "title": "PinInput",
+              "segment": "pin-input",
+              "pathname": "/docs/components/pin-input"
+            },
+            {
+              "title": "Popover",
+              "segment": "popover",
+              "pathname": "/docs/components/popover"
+            },
+            {
+              "title": "Progress",
+              "segment": "progress",
+              "pathname": "/docs/components/progress"
+            },
+            {
+              "title": "Radio",
+              "segment": "radio",
+              "pathname": "/docs/components/radio"
+            },
+            {
+              "title": "RadioCard",
+              "segment": "radio-card",
+              "pathname": "/docs/components/radio-card"
+            },
+            {
+              "title": "RangeDatePicker",
+              "segment": "range-date-picker",
+              "pathname": "/docs/components/range-date-picker"
+            },
+            {
+              "title": "RangeSlider",
+              "segment": "range-slider",
+              "pathname": "/docs/components/range-slider"
+            },
+            {
+              "title": "Rating",
+              "segment": "rating",
+              "pathname": "/docs/components/rating"
+            },
+            {
+              "title": "Reorder",
+              "segment": "reorder",
+              "pathname": "/docs/components/reorder"
+            },
+            {
+              "title": "Resizable",
+              "segment": "resizable",
+              "pathname": "/docs/components/resizable"
+            },
+            {
+              "title": "SaturationSlider",
+              "segment": "saturation-slider",
+              "pathname": "/docs/components/saturation-slider"
+            },
+            {
+              "title": "ScrollArea",
+              "segment": "scroll-area",
+              "pathname": "/docs/components/scroll-area"
+            },
+            {
+              "title": "SegmentedControl",
+              "segment": "segmented-control",
+              "pathname": "/docs/components/segmented-control"
+            },
+            {
+              "title": "Select",
+              "segment": "select",
+              "pathname": "/docs/components/select"
+            },
+            {
+              "title": "Separator",
+              "segment": "separator",
+              "pathname": "/docs/components/separator"
+            },
+            {
+              "title": "SimpleGrid",
+              "segment": "simple-grid",
+              "pathname": "/docs/components/simple-grid"
+            },
+            {
+              "title": "Slider",
+              "segment": "slider",
+              "pathname": "/docs/components/slider"
+            },
+            {
+              "title": "Spacer",
+              "segment": "spacer",
+              "pathname": "/docs/components/spacer"
+            },
+            {
+              "title": "Stack",
+              "segment": "stack",
+              "pathname": "/docs/components/stack"
+            },
+            {
+              "title": "Stat",
+              "segment": "stat",
+              "pathname": "/docs/components/stat"
+            },
+            {
+              "title": "Status",
+              "segment": "status",
+              "pathname": "/docs/components/status"
+            },
+            {
+              "title": "Steps",
+              "segment": "steps",
+              "pathname": "/docs/components/steps"
+            },
+            {
+              "title": "Swipeable",
+              "segment": "swipeable",
+              "pathname": "/docs/components/swipeable",
+              "status": "planned"
+            },
+            {
+              "title": "Switch",
+              "segment": "switch",
+              "pathname": "/docs/components/switch"
+            },
+            {
+              "title": "Table",
+              "segment": "table",
+              "pathname": "/docs/components/table"
+            },
+            {
+              "title": "Tabs",
+              "segment": "tabs",
+              "pathname": "/docs/components/tabs"
+            },
+            {
+              "title": "Tag",
+              "segment": "tag",
+              "pathname": "/docs/components/tag"
+            },
+            {
+              "title": "Text",
+              "segment": "text",
+              "pathname": "/docs/components/text"
+            },
+            {
+              "title": "Textarea",
+              "segment": "textarea",
+              "pathname": "/docs/components/textarea"
+            },
+            {
+              "title": "Timeline",
+              "segment": "timeline",
+              "pathname": "/docs/components/timeline"
+            },
+            {
+              "title": "TimePicker",
+              "segment": "time-picker",
+              "pathname": "/docs/components/time-picker",
+              "status": "planned"
+            },
+            {
+              "title": "Toggle",
+              "segment": "toggle",
+              "pathname": "/docs/components/toggle"
+            },
+            {
+              "title": "Tooltip",
+              "segment": "tooltip",
+              "pathname": "/docs/components/tooltip"
+            },
+            {
+              "title": "Tour",
+              "segment": "tour",
+              "pathname": "/docs/components/tour",
+              "status": "planned"
+            },
+            {
+              "title": "Tree",
+              "segment": "tree",
+              "pathname": "/docs/components/tree",
+              "status": "planned"
+            },
+            {
+              "title": "Wrap",
+              "segment": "wrap",
+              "pathname": "/docs/components/wrap"
+            },
+            {
+              "title": "YearPicker",
+              "segment": "year-picker",
+              "pathname": "/docs/components/year-picker"
+            }
+          ]
+        },
+        {
+          "title": "Charts",
+          "segment": "(charts)",
+          "items": [
+            {
+              "title": "AreaChart",
+              "segment": "area-chart",
+              "pathname": "/docs/components/area-chart"
+            },
+            {
+              "title": "BarChart",
+              "segment": "bar-chart",
+              "pathname": "/docs/components/bar-chart"
+            },
+            {
+              "title": "DonutChart",
+              "segment": "donut-chart",
+              "pathname": "/docs/components/donut-chart"
+            },
+            {
+              "title": "LineChart",
+              "segment": "line-chart",
+              "pathname": "/docs/components/line-chart"
+            },
+            {
+              "title": "PieChart",
+              "segment": "pie-chart",
+              "pathname": "/docs/components/pie-chart"
+            },
+            {
+              "title": "RadarChart",
+              "segment": "radar-chart",
+              "pathname": "/docs/components/radar-chart"
+            },
+            {
+              "title": "RadialChart",
+              "segment": "radial-chart",
+              "pathname": "/docs/components/radial-chart"
+            }
+          ]
+        },
+        {
+          "title": "Animations",
+          "segment": "(animations)",
+          "items": [
+            {
+              "title": "Airy",
+              "segment": "airy",
+              "pathname": "/docs/components/airy"
+            },
+            {
+              "title": "Collapse",
+              "segment": "collapse",
+              "pathname": "/docs/components/collapse"
+            },
+            {
+              "title": "FadeScale",
+              "segment": "fade-scale",
+              "pathname": "/docs/components/fade-scale"
+            },
+            {
+              "title": "Fade",
+              "segment": "fade",
+              "pathname": "/docs/components/fade"
+            },
+            {
+              "title": "Flip",
+              "segment": "flip",
+              "pathname": "/docs/components/flip"
+            },
+            {
+              "title": "Loading",
+              "segment": "loading",
+              "pathname": "/docs/components/loading"
+            },
+            {
+              "title": "Motion",
+              "segment": "motion",
+              "pathname": "/docs/components/motion"
+            },
+            {
+              "title": "Ripple",
+              "segment": "ripple",
+              "pathname": "/docs/components/ripple"
+            },
+            {
+              "title": "Rotate",
+              "segment": "rotate",
+              "pathname": "/docs/components/rotate"
+            },
+            {
+              "title": "Skeleton",
+              "segment": "skeleton",
+              "pathname": "/docs/components/skeleton"
+            },
+            {
+              "title": "SlideFade",
+              "segment": "slide-fade",
+              "pathname": "/docs/components/slide-fade"
+            },
+            {
+              "title": "Slide",
+              "segment": "slide",
+              "pathname": "/docs/components/slide"
+            }
+          ]
+        },
+        {
+          "title": "Utilities",
+          "segment": "(utilities)",
+          "items": [
+            {
+              "title": "FocusLock",
+              "segment": "focus-lock",
+              "pathname": "/docs/components/focus-lock"
+            },
+            {
+              "title": "For",
+              "segment": "for",
+              "pathname": "/docs/components/for"
+            },
+            {
+              "title": "FormatByte",
+              "segment": "format-byte",
+              "pathname": "/docs/components/format-byte"
+            },
+            {
+              "title": "FormatNumber",
+              "segment": "format-number",
+              "pathname": "/docs/components/format-number"
+            },
+            {
+              "title": "Portal",
+              "segment": "portal",
+              "pathname": "/docs/components/portal"
             },
             {
               "title": "VisuallyHidden",
@@ -117,6 +767,186 @@
           "title": "useBoolean",
           "segment": "use-boolean",
           "pathname": "/docs/hooks/use-boolean"
+        },
+        {
+          "title": "useAnimation",
+          "segment": "use-animation",
+          "pathname": "/docs/hooks/use-animation"
+        },
+        {
+          "title": "useAsyncCallback",
+          "segment": "use-async-callback",
+          "pathname": "/docs/hooks/use-async-callback"
+        },
+        {
+          "title": "useAsync",
+          "segment": "use-async",
+          "pathname": "/docs/hooks/use-async"
+        },
+        {
+          "title": "useBreakpointEffect",
+          "segment": "use-breakpoint-effect",
+          "pathname": "/docs/hooks/use-breakpoint-effect"
+        },
+        {
+          "title": "useBreakpointState",
+          "segment": "use-breakpoint-state",
+          "pathname": "/docs/hooks/use-breakpoint-state"
+        },
+        {
+          "title": "useBreakpointValue",
+          "segment": "use-breakpoint-value",
+          "pathname": "/docs/hooks/use-breakpoint-value"
+        },
+        {
+          "title": "useBreakpoint",
+          "segment": "use-breakpoint",
+          "pathname": "/docs/hooks/use-breakpoint"
+        },
+        {
+          "title": "useClipboard",
+          "segment": "use-clipboard",
+          "pathname": "/docs/hooks/use-clipboard"
+        },
+        {
+          "title": "useColorModeValue",
+          "segment": "use-color-mode-value",
+          "pathname": "/docs/hooks/use-color-mode-value"
+        },
+        {
+          "title": "useColorMode",
+          "segment": "use-color-mode",
+          "pathname": "/docs/hooks/use-color-mode"
+        },
+        {
+          "title": "useDisclosure",
+          "segment": "use-disclosure",
+          "pathname": "/docs/hooks/use-disclosure"
+        },
+        {
+          "title": "useDynamicAnimation",
+          "segment": "use-dynamic-animation",
+          "pathname": "/docs/hooks/use-dynamic-animation"
+        },
+        {
+          "title": "useFormatByte",
+          "segment": "use-format-byte",
+          "pathname": "/docs/hooks/use-format-byte"
+        },
+        {
+          "title": "useFormatNumber",
+          "segment": "use-format-number",
+          "pathname": "/docs/hooks/use-format-number"
+        },
+        {
+          "title": "useHover",
+          "segment": "use-hover",
+          "pathname": "/docs/hooks/use-hover"
+        },
+        {
+          "title": "useIdle",
+          "segment": "use-idle",
+          "pathname": "/docs/hooks/use-idle"
+        },
+        {
+          "title": "useInfiniteScroll",
+          "segment": "use-infinite-scroll",
+          "pathname": "/docs/hooks/use-infinite-scroll"
+        },
+        {
+          "title": "useInterval",
+          "segment": "use-interval",
+          "pathname": "/docs/hooks/use-interval"
+        },
+        {
+          "title": "useLoading",
+          "segment": "use-loading",
+          "pathname": "/docs/hooks/use-loading"
+        },
+        {
+          "title": "useLocalStorage",
+          "segment": "use-local-storage",
+          "pathname": "/docs/hooks/use-local-storage"
+        },
+        {
+          "title": "useMediaQuery",
+          "segment": "use-media-query",
+          "pathname": "/docs/hooks/use-media-query"
+        },
+        {
+          "title": "useNotice",
+          "segment": "use-notice",
+          "pathname": "/docs/hooks/use-notice"
+        },
+        {
+          "title": "useOS",
+          "segment": "use-os",
+          "pathname": "/docs/hooks/use-os"
+        },
+        {
+          "title": "useOutsideClick",
+          "segment": "use-outside-click",
+          "pathname": "/docs/hooks/use-outside-click"
+        },
+        {
+          "title": "usePrevious",
+          "segment": "use-previous",
+          "pathname": "/docs/hooks/use-previous"
+        },
+        {
+          "title": "useProcessing",
+          "segment": "use-processing",
+          "pathname": "/docs/hooks/use-processing"
+        },
+        {
+          "title": "usePromiseDisclosure",
+          "segment": "use-promise-disclosure",
+          "pathname": "/docs/hooks/use-promise-disclosure"
+        },
+        {
+          "title": "useResizeObserver",
+          "segment": "use-resize-observer",
+          "pathname": "/docs/hooks/use-resize-observer"
+        },
+        {
+          "title": "useSnacks",
+          "segment": "use-snacks",
+          "pathname": "/docs/hooks/use-snacks"
+        },
+        {
+          "title": "useTheme",
+          "segment": "use-theme",
+          "pathname": "/docs/hooks/use-theme"
+        },
+        {
+          "title": "useTimeout",
+          "segment": "use-timeout",
+          "pathname": "/docs/hooks/use-timeout"
+        },
+        {
+          "title": "useToken",
+          "segment": "use-token",
+          "pathname": "/docs/hooks/use-token"
+        },
+        {
+          "title": "useBreakpointEffect",
+          "segment": "use-update-breakpoint-effect",
+          "pathname": "/docs/hooks/use-update-breakpoint-effect"
+        },
+        {
+          "title": "useUpdateEffect",
+          "segment": "use-update-effect",
+          "pathname": "/docs/hooks/use-update-effect"
+        },
+        {
+          "title": "useValue",
+          "segment": "use-value",
+          "pathname": "/docs/hooks/use-value"
+        },
+        {
+          "title": "useWindowEvent",
+          "segment": "use-window-event",
+          "pathname": "/docs/hooks/use-window-event"
         }
       ]
     },

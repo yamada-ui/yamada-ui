@@ -15,8 +15,9 @@
       "configuration": "Configuration",
       "styles": "Styles",
       "components": "Components",
-      "layouts": "Layouts",
-      "typography": "Typography"
+      "charts": "Charts",
+      "animations": "Animations",
+      "utilities": "Utilities"
     }
   },
   "home": {

@@ -98,6 +98,21 @@
               "title": "Em",
               "segment": "em",
               "pathname": "/docs/components/em"
+            },
+            {
+              "title": "ZStack",
+              "segment": "z-stack",
+              "pathname": "/docs/components/z-stack"
+            },
+            {
+              "title": "VStack",
+              "segment": "v-stack",
+              "pathname": "/docs/components/v-stack"
+            },
+            {
+              "title": "HStack",
+              "segment": "h-stack",
+              "pathname": "/docs/components/h-stack"
             }
           ]
         }

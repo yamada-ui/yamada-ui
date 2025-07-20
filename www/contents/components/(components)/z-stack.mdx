@@ -1,0 +1,76 @@
+---
+title: ZStack
+description:
+  "`Stack` is a component that groups elements and provides spacing between child
+  elements.`ZStack` is used to stack child elements in depth."
+storybook: components-stack--depth
+source: components/stack
+---
+
+```tsx preview
+<ZStack>
+  <For each={["info", "success", "warning", "error"]}>
+    {(bg, index) => (
+      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+        Box
+      </Box>
+    )}
+  </For>
+</ZStack>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { ZStack } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ZStack } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ZStack } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<ZStack />
+```
+
+### Changing Direction
+
+To change the direction, set `direction` to `start`, `end-end`, etc.
+
+```tsx preview
+<VStack>
+  <ZStack direction="start">
+    <For each={["info", "success", "warning", "error"]}>
+      {(bg, index) => (
+        <Box key={index} p="md" rounded="4" bg={bg} color="white">
+          Box
+        </Box>
+      )}
+    </For>
+  </ZStack>
+</VStack>
+```
+
+### Reversing Direction
+
+To reverse the direction, set `reverse` to `true`.
+
+```tsx preview
+<ZStack direction="center-start" reverse>
+  <For each={["info", "success", "warning", "error"]}>
+    {(bg, index) => (
+      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+        Box
+      </Box>
+    )}
+  </For>
+</ZStack>
+```

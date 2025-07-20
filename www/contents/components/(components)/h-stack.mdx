@@ -1,0 +1,58 @@
+---
+title: HStack
+description:
+  "`Stack` is a component that groups elements and provides spacing between child
+  elements.`HStack` is used to stack child elements horizontally."
+storybook: components-stack--horizontal
+source: components/stack
+---
+
+```tsx preview
+<HStack>
+  <For each={["info", "success", "warning", "error"]}>
+    {(bg, index) => (
+      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+        Box
+      </Box>
+    )}
+  </For>
+</HStack>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { HStack } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { HStack } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { HStack } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<HStack />
+```
+
+### Use spaces
+
+```tsx preview
+<HStack>
+  <Box p="md" rounded="4" bg="info" color="white">
+    Box
+  </Box>
+
+  <Spacer />
+
+  <Box p="md" rounded="4" bg="error" color="white">
+    Box
+  </Box>
+</HStack>
+```

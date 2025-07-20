@@ -1,0 +1,74 @@
+---
+title: ZStack
+description: "`Stack`は、要素をグループ化し、子要素間にスペースを設けるコンポーネントです。`ZStack`は、子要素を奥行き方向にスタックするために使用されます。"
+storybook: components-stack--depth
+source: components/stack
+---
+
+```tsx preview
+<ZStack>
+  <For each={["info", "success", "warning", "error"]}>
+    {(bg, index) => (
+      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+        Box
+      </Box>
+    )}
+  </For>
+</ZStack>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { ZStack } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ZStack } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ZStack } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<ZStack />
+```
+
+### 方向を変更する
+
+方向を変更する場合は、`direction`に`start`, `end-end`などを設定します。
+
+```tsx preview
+<VStack>
+  <ZStack direction="start">
+    <For each={["info", "success", "warning", "error"]}>
+      {(bg, index) => (
+        <Box key={index} p="md" rounded="4" bg={bg} color="white">
+          Box
+        </Box>
+      )}
+    </For>
+  </ZStack>
+</VStack>
+```
+
+### 方向を反転させる
+
+方向を反転させる場合は、`reverse`を`true`に設定します。
+
+```tsx preview
+<ZStack direction="center-start" reverse>
+  <For each={["info", "success", "warning", "error"]}>
+    {(bg, index) => (
+      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+        Box
+      </Box>
+    )}
+  </For>
+</ZStack>
+```

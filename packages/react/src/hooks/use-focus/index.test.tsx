@@ -1,67 +1,8 @@
 import type { FC } from "react"
-import type {
-  UseFocusOnHideProps,
-  UseFocusOnMouseDownProps,
-  UseFocusOnShowProps,
-} from "./"
+import type { UseFocusOnMouseDownProps, UseFocusOnShowProps } from "./"
 import { act, fireEvent, render, waitFor } from "#test"
 import { useRef } from "react"
-import { useFocusOnHide, useFocusOnPointerDown, useFocusOnShow } from "./"
-
-describe("useFocusOnHide", () => {
-  const Component: FC<Omit<UseFocusOnHideProps, "focusRef">> = (props) => {
-    const ref = useRef<HTMLDivElement>(null)
-    const focusRef = useRef<HTMLButtonElement>(null)
-    useFocusOnHide(ref, {
-      focusTarget: focusRef,
-      shouldFocus: true,
-      ...props,
-    })
-
-    return (
-      <div ref={ref}>
-        <button ref={focusRef} data-testid="button">
-          Button
-        </button>
-      </div>
-    )
-  }
-
-  test("focuses on the element when it becomes hidden", async () => {
-    const { getByTestId, rerender } = render(<Component visible />)
-    const button = getByTestId("button")
-
-    expect(button).not.toHaveFocus()
-
-    rerender(<Component visible={false} />)
-
-    await waitFor(() => {
-      expect(button).toHaveFocus()
-    })
-  })
-
-  test("does not focus on the element when shouldFocus is false", () => {
-    const { getByTestId } = render(
-      <Component shouldFocus={false} visible={false} />,
-    )
-    const button = getByTestId("button")
-
-    expect(button).not.toHaveFocus()
-  })
-
-  test("does not focus on the element when visible is true", async () => {
-    const { getByTestId, rerender } = render(<Component shouldFocus visible />)
-    const button = getByTestId("button")
-
-    expect(button).not.toHaveFocus()
-
-    rerender(<Component shouldFocus visible />)
-
-    await waitFor(() => {
-      expect(button).not.toHaveFocus()
-    })
-  })
-})
+import { useFocusOnPointerDown, useFocusOnShow } from "./"
 
 describe("useFocusOnShow", () => {
   const Component: FC<Omit<UseFocusOnShowProps, "focusRef">> = (props) => {

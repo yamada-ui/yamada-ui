@@ -789,19 +789,9 @@
       "pathname": "/docs/hooks",
       "items": [
         {
-          "title": "useBoolean",
-          "segment": "use-boolean",
-          "pathname": "/docs/hooks/use-boolean"
-        },
-        {
           "title": "useAnimation",
           "segment": "use-animation",
           "pathname": "/docs/hooks/use-animation"
-        },
-        {
-          "title": "useAsyncCallback",
-          "segment": "use-async-callback",
-          "pathname": "/docs/hooks/use-async-callback"
         },
         {
           "title": "useAsync",
@@ -809,9 +799,29 @@
           "pathname": "/docs/hooks/use-async"
         },
         {
+          "title": "useAsyncCallback",
+          "segment": "use-async-callback",
+          "pathname": "/docs/hooks/use-async-callback"
+        },
+        {
+          "title": "useBoolean",
+          "segment": "use-boolean",
+          "pathname": "/docs/hooks/use-boolean"
+        },
+        {
+          "title": "useBreakpoint",
+          "segment": "use-breakpoint",
+          "pathname": "/docs/hooks/use-breakpoint"
+        },
+        {
           "title": "useBreakpointEffect",
           "segment": "use-breakpoint-effect",
           "pathname": "/docs/hooks/use-breakpoint-effect"
+        },
+        {
+          "title": "useBreakpointEffect",
+          "segment": "use-update-breakpoint-effect",
+          "pathname": "/docs/hooks/use-update-breakpoint-effect"
         },
         {
           "title": "useBreakpointState",
@@ -824,14 +834,14 @@
           "pathname": "/docs/hooks/use-breakpoint-value"
         },
         {
-          "title": "useBreakpoint",
-          "segment": "use-breakpoint",
-          "pathname": "/docs/hooks/use-breakpoint"
-        },
-        {
           "title": "useClipboard",
           "segment": "use-clipboard",
           "pathname": "/docs/hooks/use-clipboard"
+        },
+        {
+          "title": "useColorMode",
+          "segment": "use-color-mode",
+          "pathname": "/docs/hooks/use-color-mode"
         },
         {
           "title": "useColorModeValue",
@@ -839,9 +849,14 @@
           "pathname": "/docs/hooks/use-color-mode-value"
         },
         {
-          "title": "useColorMode",
-          "segment": "use-color-mode",
-          "pathname": "/docs/hooks/use-color-mode"
+          "title": "useCounter",
+          "segment": "use-counter",
+          "pathname": "/docs/hooks/use-counter"
+        },
+        {
+          "title": "useDescendants",
+          "segment": "use-descendants",
+          "pathname": "/docs/hooks/use-descendants"
         },
         {
           "title": "useDisclosure",
@@ -852,6 +867,21 @@
           "title": "useDynamicAnimation",
           "segment": "use-dynamic-animation",
           "pathname": "/docs/hooks/use-dynamic-animation"
+        },
+        {
+          "title": "useEyeDropper",
+          "segment": "use-eye-dropper",
+          "pathname": "/docs/hooks/use-eye-dropper"
+        },
+        {
+          "title": "useFocusOnPointerDown",
+          "segment": "use-focus-on-pointer-down",
+          "pathname": "/docs/hooks/use-focus-on-pointer-down"
+        },
+        {
+          "title": "useFocusOnShow",
+          "segment": "use-focus-on-show",
+          "pathname": "/docs/hooks/use-focus-on-show"
         },
         {
           "title": "useFormatByte",
@@ -884,6 +914,11 @@
           "pathname": "/docs/hooks/use-interval"
         },
         {
+          "title": "useLazyMount",
+          "segment": "use-lazy-mount",
+          "pathname": "/docs/hooks/use-lazy-mount"
+        },
+        {
           "title": "useLoading",
           "segment": "use-loading",
           "pathname": "/docs/hooks/use-loading"
@@ -897,6 +932,11 @@
           "title": "useMediaQuery",
           "segment": "use-media-query",
           "pathname": "/docs/hooks/use-media-query"
+        },
+        {
+          "title": "useMounted",
+          "segment": "use-mounted",
+          "pathname": "/docs/hooks/use-mounted"
         },
         {
           "title": "useNotice",
@@ -952,11 +992,6 @@
           "title": "useToken",
           "segment": "use-token",
           "pathname": "/docs/hooks/use-token"
-        },
-        {
-          "title": "useBreakpointEffect",
-          "segment": "use-update-breakpoint-effect",
-          "pathname": "/docs/hooks/use-update-breakpoint-effect"
         },
         {
           "title": "useUpdateEffect",

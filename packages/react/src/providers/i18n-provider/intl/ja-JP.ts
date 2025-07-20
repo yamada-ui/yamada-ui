@@ -6,6 +6,13 @@ export default {
     Breadcrumb: "パンくずリスト",
     Ellipsis: "省略記号",
   },
+  carousel: {
+    "Go to next slide": "次のスライドに移動する",
+    "Go to previous slide": "前のスライドに移動する",
+    "Go to {page} slide": "{page}スライドに移動する",
+    Slides: "スライド",
+    "{page} of {total}": "{page} / {total}",
+  },
   closeButton: {
     Close: "閉じる",
   },

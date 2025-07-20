@@ -6,6 +6,13 @@ export default {
     Breadcrumb: "Breadcrumb",
     Ellipsis: "Ellipsis",
   },
+  carousel: {
+    "Go to next slide": "Go to next slide",
+    "Go to previous slide": "Go to previous slide",
+    "Go to {page} slide": "Go to {page} slide",
+    Slides: "Slides",
+    "{page} of {total}": "{page} of {total}",
+  },
   closeButton: {
     Close: "Close",
   },

@@ -17,4 +17,9 @@ const {
 
 export { MarkPropsContext, useMarkPropsContext }
 
+/**
+ * `Mark` is a component that emphasizes a specific part of the text.
+ *
+ * @see https://yamada-ui.com/components/mark
+ */
 export const Mark = withContext<"mark", MarkProps>("mark")()

@@ -287,6 +287,11 @@
               "pathname": "/docs/components/grid"
             },
             {
+              "title": "Group",
+              "segment": "group",
+              "pathname": "/docs/components/group"
+            },
+            {
               "title": "Heading",
               "segment": "heading",
               "pathname": "/docs/components/heading"
@@ -350,6 +355,11 @@
               "title": "List",
               "segment": "list",
               "pathname": "/docs/components/list"
+            },
+            {
+              "title": "Mark",
+              "segment": "mark",
+              "pathname": "/docs/components/mark"
             },
             {
               "title": "Menu",
@@ -725,6 +735,11 @@
           "segment": "(utilities)",
           "items": [
             {
+              "title": "ClientOnly",
+              "segment": "client-only",
+              "pathname": "/docs/components/client-only"
+            },
+            {
               "title": "FocusLock",
               "segment": "focus-lock",
               "pathname": "/docs/components/focus-lock"
@@ -748,6 +763,16 @@
               "title": "Portal",
               "segment": "portal",
               "pathname": "/docs/components/portal"
+            },
+            {
+              "title": "Show",
+              "segment": "show",
+              "pathname": "/docs/components/show"
+            },
+            {
+              "title": "Slot",
+              "segment": "slot",
+              "pathname": "/docs/components/slot"
             },
             {
               "title": "VisuallyHidden",

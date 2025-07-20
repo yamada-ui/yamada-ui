@@ -2,8 +2,8 @@
 
 import type {
   CSSProps,
-  Direction,
   HTMLStyledProps,
+  SimpleDirection,
   ThemeProps,
 } from "../../core"
 import type { NativeTableStyle } from "./native-table.style"
@@ -79,7 +79,7 @@ export interface CaptionProps extends HTMLStyledProps<"caption"> {
    *
    * @default 'end'
    */
-  placement?: Direction
+  placement?: SimpleDirection
 }
 
 export const Caption = withContext<"caption", CaptionProps>(

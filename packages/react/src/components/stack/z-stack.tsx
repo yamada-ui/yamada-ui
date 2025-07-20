@@ -1,7 +1,12 @@
 "use client"
 
 import type { RefObject } from "react"
-import type { CSSObject, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  CSSObject,
+  Direction,
+  HTMLStyledProps,
+  ThemeProps,
+} from "../../core"
 import type { ZStackStyle } from "./z-stack.style"
 import {
   cloneElement,
@@ -29,17 +34,9 @@ export interface ZStackProps
   /**
    * Stack in the specified direction.
    *
-   * @default "bottom"
+   * @default "end"
    */
-  direction?:
-    | "center-end"
-    | "center-start"
-    | "end"
-    | "end-end"
-    | "end-start"
-    | "start"
-    | "start-end"
-    | "start-start"
+  direction?: Direction
   /**
    * If `true`, calculate the `width` and `height` of the element and assign container.
    *
@@ -83,6 +80,9 @@ export const ZStack = withContext(
     startIndex = 0,
     ...rest
   }) => {
+    if (direction === "start-center") direction = "start"
+    if (direction === "end-center") direction = "end"
+
     const refMap = useRef<Map<number, RefObject<HTMLDivElement | null>>>(
       new Map(),
     )

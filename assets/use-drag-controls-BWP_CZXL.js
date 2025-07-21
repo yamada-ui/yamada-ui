@@ -1,1 +1,0 @@
-import{a9 as r}from"./iframe-6cyGxZR1.js";class s{constructor(){this.componentControls=new Set}subscribe(t){return this.componentControls.add(t),()=>this.componentControls.delete(t)}start(t,o){this.componentControls.forEach(n=>{n.start(t.nativeEvent||t,o)})}}const e=()=>new s;function i(){return r(e)}export{i as u};

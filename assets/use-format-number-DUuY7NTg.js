@@ -1,0 +1,1 @@
+import{F as u}from"./iframe-BbB59fLB.js";const f=n=>{const t=new Map;return function(r,e){const o=r+(e?Object.entries(e).sort((c,m)=>c[0]<m[0]?-1:1).join():"");if(t.has(o))return t.get(o);const s=new n(r,e);return t.set(o,s),s}},b=f(Intl.NumberFormat),F=(n,{locale:t,...a}={})=>{const{locale:r}=u();return t??=r,b(t,a).format(n)};export{F as u};

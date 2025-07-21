@@ -4,6 +4,7 @@ import type { RefCallback } from "react"
 import { useRef } from "react"
 import {
   createContext,
+  isTruthyDataAttr,
   mergeRefs,
   runIfFn,
   useSafeLayoutEffect,
@@ -112,11 +113,7 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
   const focus = (target?: null | Y) => {
     if (!target) return
 
-    if (
-      target.dataset.activedescendant === "" ||
-      target.dataset.activedescendant === "true"
-    )
-      return
+    if (isTruthyDataAttr(target.dataset.activedescendant)) return
 
     const values = enabledValues()
 

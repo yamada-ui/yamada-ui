@@ -369,6 +369,10 @@ export function getTabIndex(node: HTMLElement | SVGElement) {
   return node.tabIndex
 }
 
+export function isTruthyDataAttr(condition: any): boolean {
+  return condition === "true" || condition === true || condition === ""
+}
+
 export function dataAttr(condition: any): string | undefined {
   return (condition ? "" : undefined) as string | undefined
 }

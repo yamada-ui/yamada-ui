@@ -17,6 +17,7 @@ import {
   handlerAll,
   isArray,
   isString,
+  isTruthyDataAttr,
   mergeRefs,
   noop,
   runKeyAction,
@@ -347,9 +348,7 @@ export const useSubMenu = ({
 
     if (!node) return false
 
-    const dataDisabled =
-      node.getAttribute("data-disabled") === "" ||
-      node.getAttribute("data-disabled") === "true"
+    const dataDisabled = isTruthyDataAttr(node.getAttribute("data-disabled"))
 
     return dataDisabled
   }, [])
@@ -359,9 +358,7 @@ export const useSubMenu = ({
 
     if (!node) return false
 
-    const ariaDisabled =
-      node.getAttribute("aria-disabled") === "" ||
-      node.getAttribute("aria-disabled") === "true"
+    const ariaDisabled = isTruthyDataAttr(node.getAttribute("aria-disabled"))
 
     return ariaDisabled
   }, [])
@@ -536,7 +533,7 @@ export const useMenuItem = ({
   value,
   ...rest
 }: UseMenuItemProps) => {
-  const trigger = dataTrigger === "" || dataTrigger === "true"
+  const trigger = isTruthyDataAttr(dataTrigger)
   const { subMenu, subMenuDirection, onActiveDescendant, onClose, onSelect } =
     useMenuContext()
   const { onCloseRef } = useMainMenuContext() ?? {}

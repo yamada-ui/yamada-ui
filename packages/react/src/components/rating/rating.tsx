@@ -1,202 +1,274 @@
 "use client"
 
-import type { Dispatch, ReactNode, SetStateAction } from "react"
-import type {
-  HTMLStyledProps,
-  RequiredPropGetter,
-  ThemeProps,
-} from "../../core"
-import type { Dict, Merge } from "../../utils"
-import type { HTMLMotionProps } from "../motion"
+import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
+import type { FunctionOrValue, Merge, ReactNodeOrFunction } from "../../utils"
 import type { RatingStyle } from "./rating.style"
-import type {
-  GroupProps,
-  InputProps,
-  ItemProps,
-  UseRatingProps,
-} from "./use-rating"
-import type { UseRatingItemProps } from "./use-rating-item"
-import { cloneElement } from "react"
-import { createSlotComponent, styled } from "../../core"
-import { getValidChildren, isString, runIfFn } from "../../utils"
+import type { UseRatingItemProps, UseRatingProps } from "./use-rating"
+import { useMemo } from "react"
+import { createSlotComponent, styled, varAttr } from "../../core"
+import { runIfFn } from "../../utils"
 import { StarIcon } from "../icon"
-import { motion } from "../motion"
-import { getRoundedValue } from "./rating-utils"
 import { ratingStyle } from "./rating.style"
-import { useRating } from "./use-rating"
-import { useRatingItem } from "./use-rating-item"
+import {
+  RatingContext,
+  useRating,
+  useRatingContext,
+  useRatingItem,
+} from "./use-rating"
+
+interface ComponentContext
+  extends Pick<
+    RatingProps,
+    | "color"
+    | "emptyIcon"
+    | "filledIcon"
+    | "groupProps"
+    | "iconProps"
+    | "inputProps"
+    | "itemProps"
+  > {}
 
 export interface RatingProps
-  extends ThemeProps<RatingStyle>,
-    Merge<HTMLStyledProps, UseRatingProps> {}
-
-interface RatingContext {
-  id: string
-  name: string
-  decimal: number
-  disabled: boolean | undefined
-  emptyIcon: ((value: number) => ReactNode) | ReactNode | undefined
-  filledIcon: ((value: number) => ReactNode) | ReactNode | undefined
-  highlightSelectedOnly: boolean
-  hoveredValue: number
-  outside: boolean
-  readOnly: boolean | undefined
-  resolvedValue: number
-  roundedValue: number
-  setHoveredValue: Dispatch<SetStateAction<number>>
-  setValue: Dispatch<SetStateAction<number>>
-  value: number
-  formControlProps: Dict
-  getGroupProps: RequiredPropGetter<
-    HTMLMotionProps,
-    { value: number },
-    HTMLMotionProps
-  >
-  groupProps: GroupProps | undefined
-  inputProps: InputProps | undefined
-  itemProps: ItemProps | undefined
+  extends Merge<Omit<HTMLStyledProps, "children" | "color">, UseRatingProps>,
+    ThemeProps<RatingStyle> {
+  /**
+   * The color of the filled icons.
+   */
+  color?: FunctionOrValue<number, CSSProps["color"]>
+  /**
+   * The empty icon for the rating.
+   */
+  emptyIcon?: ReactNodeOrFunction<number>
+  /**
+   * The filled icon for the rating.
+   */
+  filledIcon?: ReactNodeOrFunction<number>
+  /**
+   * Props for the rating group.
+   */
+  groupProps?: FunctionOrValue<number, RatingGroupProps>
+  /**
+   * Props for the rating item.
+   */
+  iconProps?: FunctionOrValue<number, RatingIconProps>
+  /**
+   * Props for the input element.
+   */
+  inputProps?: FunctionOrValue<number, HTMLStyledProps<"input">>
+  /**
+   * Props for the rating item.
+   */
+  itemProps?: FunctionOrValue<number, RatingItemProps>
 }
 
-export const {
-  ComponentContext: RatingContext,
+const {
+  ComponentContext,
   PropsContext: RatingPropsContext,
-  useComponentContext: useRatingContext,
+  useComponentContext,
   usePropsContext: useRatingPropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<RatingProps, RatingStyle, RatingContext>(
+} = createSlotComponent<RatingProps, RatingStyle, ComponentContext>(
   "rating",
   ratingStyle,
 )
+
+export { RatingPropsContext, useRatingPropsContext }
 
 /**
  * `Rating` is a component used to allow users to provide ratings.
  *
  * @see https://yamada-ui.com/components/rating
  */
-export const Rating = withProvider<"div", RatingProps>((props) => {
-  const { children, getContainerProps, ...rest } = useRating(props)
+export const Rating = withProvider<"div", RatingProps>(
+  ({
+    color,
+    emptyIcon,
+    filledIcon,
+    groupProps,
+    iconProps,
+    inputProps,
+    itemProps,
+    ...rest
+  }) => {
+    const {
+      id,
+      name,
+      count,
+      decimal,
+      disabled,
+      displayValue,
+      fractions,
+      highlightSelectedOnly,
+      hoveredValue,
+      interactive,
+      outsideRef,
+      readOnly,
+      required,
+      roundedValue,
+      setHoveredValue,
+      setValue,
+      value,
+      ariaProps,
+      dataProps,
+      eventProps,
+      getRootProps,
+    } = useRating(rest)
+    const ratingContext = useMemo(
+      () => ({
+        id,
+        name,
+        count,
+        decimal,
+        disabled,
+        displayValue,
+        fractions,
+        highlightSelectedOnly,
+        hoveredValue,
+        interactive,
+        outsideRef,
+        readOnly,
+        required,
+        roundedValue,
+        setHoveredValue,
+        setValue,
+        value,
+        ariaProps,
+        dataProps,
+        eventProps,
+      }),
+      [
+        id,
+        name,
+        count,
+        decimal,
+        disabled,
+        fractions,
+        highlightSelectedOnly,
+        hoveredValue,
+        interactive,
+        displayValue,
+        outsideRef,
+        readOnly,
+        required,
+        roundedValue,
+        setHoveredValue,
+        setValue,
+        value,
+        ariaProps,
+        dataProps,
+        eventProps,
+      ],
+    )
+    const componentContext = useMemo(
+      () => ({
+        color,
+        emptyIcon,
+        filledIcon,
+        groupProps,
+        iconProps,
+        inputProps,
+        itemProps,
+      }),
+      [
+        color,
+        emptyIcon,
+        filledIcon,
+        groupProps,
+        iconProps,
+        inputProps,
+        itemProps,
+      ],
+    )
 
-  return (
-    <RatingContext value={{ ...rest }}>
-      <styled.div {...getContainerProps()}>{children}</styled.div>
-    </RatingContext>
-  )
-}, "root")()
+    return (
+      <RatingContext value={ratingContext}>
+        <ComponentContext value={componentContext}>
+          <styled.div {...getRootProps()}>
+            {Array.from({ length: count }).map((_, index) => (
+              <RatingGroup key={index} value={index + 1} />
+            ))}
+          </styled.div>
+        </ComponentContext>
+      </RatingContext>
+    )
+  },
+  "root",
+)()
 
-export interface RatingGroupProps extends HTMLMotionProps {
-  items: number
+interface RatingGroupProps extends HTMLStyledProps {
   value: number
 }
 
-export const RatingGroup = withContext<"div", RatingGroupProps>(
-  ({ color, items, value: groupValue, ...rest }) => {
-    const { decimal, getGroupProps, groupProps } = useRatingContext()
-    const computedGroupProps = runIfFn(groupProps, groupValue)
+const RatingGroup = withContext<"div", RatingGroupProps>(
+  ({ value, ...rest }) => {
+    const { fractions } = useRatingContext()
+    const { groupProps } = useComponentContext()
+    const count = useMemo(
+      () => (value === 1 ? fractions + 1 : fractions),
+      [value, fractions],
+    )
 
     return (
-      <motion.div
-        {...getGroupProps({
-          value: groupValue,
-          ...computedGroupProps,
-          ...rest,
-        })}
-      >
-        {Array(items)
-          .fill(0)
-          .map((_, index) => {
-            const fractionValue =
-              decimal * (groupValue === 1 ? index : index + 1)
-            const value = getRoundedValue(
-              groupValue - 1 + fractionValue,
-              decimal,
-            )
-
-            return (
-              <RatingItem
-                key={`${groupValue}-${fractionValue}`}
-                color={color}
-                fractionValue={fractionValue}
-                groupValue={groupValue}
-                value={value}
-              />
-            )
-          })}
-      </motion.div>
+      <styled.div {...runIfFn(groupProps, value)} {...rest}>
+        {Array.from({ length: count }).map((_, index) => (
+          <RatingItem key={index} groupValue={value} index={index} />
+        ))}
+      </styled.div>
     )
   },
   "group",
 )()
 
-export interface RatingItemProps
-  extends Merge<HTMLStyledProps<"label">, UseRatingItemProps> {}
+interface RatingItemProps
+  extends HTMLStyledProps<"label">,
+    UseRatingItemProps {}
 
-export const RatingItem = withContext<"input", RatingItemProps>(
-  ({ color, fractionValue, groupValue, value, ...rest }) => {
-    const {
-      emptyIcon = <StarIcon fill="currentColor" />,
-      filledIcon = <StarIcon fill="currentColor" />,
-      inputProps,
-      itemProps,
-    } = useRatingContext()
-    const { active, filled, getInputProps, getItemProps } = useRatingItem({
-      fractionValue,
-      groupValue,
-      value,
-      ...rest,
-    })
-    const computedItemProps = runIfFn(itemProps, value)
-    const computedInputProps = runIfFn(inputProps, value)
-    const customColor = color
-      ? {
-          "--filled-color": isString(color)
-            ? [`colors.${color}`, `colors.${color}`]
-            : color,
-        }
-      : {}
+const RatingItem = withContext<"label", RatingItemProps>((props) => {
+  const {
+    active,
+    filled,
+    fractionValue,
+    groupValue,
+    getInputProps,
+    getLabelProps,
+  } = useRatingItem(props)
+  const {
+    emptyIcon = <StarIcon fill="currentColor" strokeColor="currentColor" />,
+    filledIcon = <StarIcon fill="currentColor" strokeColor="currentColor" />,
+    iconProps,
+    inputProps,
+    itemProps,
+  } = useComponentContext()
+  const clipPath =
+    fractionValue !== 1
+      ? `inset(0 ${active ? 100 - fractionValue * 100 : 100}% 0 0)`
+      : undefined
 
-    return (
-      <>
-        <styled.input {...getInputProps({ ...computedInputProps })} />
+  return (
+    <styled.label {...getLabelProps(runIfFn(itemProps, groupValue))}>
+      <styled.input {...getInputProps(runIfFn(inputProps, groupValue))} />
 
-        <styled.label
-          {...getItemProps({ ...computedItemProps, ...customColor })}
-        >
-          <RatingIcon
-            clipPath={
-              fractionValue !== 1
-                ? `inset(0 ${active ? 100 - fractionValue * 100 : 100}% 0 0)`
-                : undefined
-            }
-          >
-            {filled
-              ? runIfFn(filledIcon, groupValue)
-              : runIfFn(emptyIcon, groupValue)}
-          </RatingIcon>
-        </styled.label>
-      </>
-    )
-  },
-  "item",
-)()
+      <RatingIcon
+        {...{ "--clip-path": clipPath }}
+        {...runIfFn(iconProps, groupValue)}
+      >
+        {filled
+          ? runIfFn(filledIcon, groupValue)
+          : runIfFn(emptyIcon, groupValue)}
+      </RatingIcon>
+    </styled.label>
+  )
+}, "item")(undefined, ({ groupValue, ...rest }) => {
+  const { color } = useComponentContext()
+
+  return {
+    "--filled-color": varAttr(runIfFn(color, groupValue), "colors"),
+    groupValue,
+    ...rest,
+  }
+})
 
 interface RatingIconProps extends HTMLStyledProps {}
 
-const RatingIcon = withContext<"div", RatingIconProps>(
-  ({ children, ...rest }) => {
-    const validChildren = getValidChildren(children)
-    const cloneChildren = validChildren.map((child) =>
-      cloneElement(child, {
-        style: {
-          maxHeight: "1em",
-          maxWidth: "1em",
-        },
-        "aria-hidden": true,
-        focusable: false,
-      }),
-    )
-
-    return <styled.div {...rest}>{cloneChildren}</styled.div>
-  },
-  "icon",
-)()
+const RatingIcon = withContext<"div", RatingIconProps>("div", "icon")()

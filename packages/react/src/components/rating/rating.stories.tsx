@@ -1,11 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import type { SubmitHandler } from "react-hook-form"
 import { PropsTable } from "#storybook"
 import { useState } from "react"
-import { Controller, useForm } from "react-hook-form"
 import { Rating } from "."
 import { COLOR_SCHEMES } from "../../utils"
-import { Button } from "../button"
 import { Field } from "../field"
 import {
   AngryIcon,
@@ -15,7 +12,6 @@ import {
   SmileIcon,
   SmilePlusIcon,
 } from "../icon"
-import { VStack } from "../stack"
 
 type Story = StoryFn<typeof Rating>
 
@@ -32,11 +28,19 @@ export const Basic: Story = () => {
 
 export const Size: Story = () => {
   return (
-    <PropsTable columns={["xs", "sm", "md", "lg", "xl"]} rows={COLOR_SCHEMES}>
-      {(column, row, key) => {
-        return (
-          <Rating key={key} colorScheme={row} size={column} defaultValue={3} />
-        )
+    <PropsTable variant="stack" rows={["xs", "sm", "md", "lg", "xl"]}>
+      {(_, row, key) => {
+        return <Rating key={key} size={row} defaultValue={3} />
+      }}
+    </PropsTable>
+  )
+}
+
+export const ColorScheme: Story = () => {
+  return (
+    <PropsTable variant="stack" rows={COLOR_SCHEMES}>
+      {(_, row, key) => {
+        return <Rating key={key} colorScheme={row} defaultValue={3} />
       }}
     </PropsTable>
   )
@@ -46,12 +50,12 @@ export const DefaultValue: Story = () => {
   return <Rating defaultValue={3} />
 }
 
-export const Items: Story = () => {
+export const Count: Story = () => {
   return (
     <>
-      <Rating items={4} />
-      <Rating items={5} />
-      <Rating items={6} />
+      <Rating count={4} />
+      <Rating count={5} />
+      <Rating count={6} />
     </>
   )
 }
@@ -59,9 +63,9 @@ export const Items: Story = () => {
 export const Fractions: Story = () => {
   return (
     <>
-      <Rating defaultValue={1.5} fractions={2} />
-      <Rating defaultValue={2.33} fractions={3} />
-      <Rating defaultValue={3.75} fractions={4} />
+      <Rating defaultValue={1 + 1 / 2} fractions={2} />
+      <Rating defaultValue={2 + 1 / 3} fractions={3} />
+      <Rating defaultValue={3 + 1 / 4} fractions={4} />
     </>
   )
 }
@@ -121,34 +125,11 @@ export const CustomColor: Story = () => {
     <>
       <Rating color="green.500" defaultValue={3} />
       <Rating color={getColor} defaultValue={3} />
-      <Rating color={getColor} defaultValue={3} fractions={3} />
     </>
   )
 }
 
 export const CustomIcon: Story = () => {
-  const getColor = (value: number) => {
-    switch (value) {
-      case 1:
-        return "red.500"
-
-      case 2:
-        return "orange.500"
-
-      case 3:
-        return "yellow.500"
-
-      case 4:
-        return "green.500"
-
-      case 5:
-        return "blue.500"
-
-      default:
-        return undefined
-    }
-  }
-
   const getIcon = (value: number) => {
     switch (value) {
       case 1:
@@ -178,24 +159,7 @@ export const CustomIcon: Story = () => {
         emptyIcon={<GhostIcon />}
         filledIcon={<GhostIcon />}
       />
-
-      <Rating
-        defaultValue={2}
-        emptyIcon={<GhostIcon />}
-        filledIcon={<GhostIcon />}
-        fractions={3}
-      />
-
-      <Rating emptyIcon={getIcon} filledIcon={getIcon} gap="xs" />
-
-      <Rating
-        color={getColor}
-        emptyIcon={getIcon}
-        filledIcon={getIcon}
-        gap="xs"
-      />
-
-      <Rating emptyIcon={getIcon} filledIcon={getIcon} fractions={3} gap="xs" />
+      <Rating defaultValue={3} emptyIcon={getIcon} filledIcon={getIcon} />
     </>
   )
 }
@@ -204,45 +168,4 @@ export const CustomControl: Story = () => {
   const [value, onChange] = useState<number>(3)
 
   return <Rating value={value} onChange={onChange} />
-}
-
-export const ReactHookForm: Story = () => {
-  interface Data {
-    rating: number
-  }
-
-  const defaultValues: Data = {
-    rating: 3,
-  }
-
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    watch,
-  } = useForm<Data>({ defaultValues })
-
-  const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-  console.log("watch:", watch())
-
-  return (
-    <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-      <Field.Root
-        errorMessage={errors.rating?.message}
-        invalid={!!errors.rating}
-        label="How satisfied are you with Yamada UI?"
-      >
-        <Controller
-          name="rating"
-          control={control}
-          render={({ field }) => <Rating {...field} />}
-        />
-      </Field.Root>
-
-      <Button type="submit" alignSelf="flex-end">
-        Submit
-      </Button>
-    </VStack>
-  )
 }

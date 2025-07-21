@@ -1,49 +1,41 @@
 "use client"
 
-import type { MouseEvent, ReactNode, TouchEvent } from "react"
-import type {
-  CSSProps,
-  HTMLProps,
-  PropGetter,
-  RequiredPropGetter,
-} from "../../core"
+import type { ChangeEvent, KeyboardEvent, MouseEvent, TouchEvent } from "react"
+import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
-import type { HTMLMotionProps } from "../motion"
-import type { RatingGroupProps, RatingItemProps } from "./rating"
-import { useCallback, useId, useRef, useState } from "react"
+import { useCallback, useId, useMemo, useRef, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
 import {
+  ariaAttr,
   clampNumber,
+  createContext,
   dataAttr,
   handlerAll,
+  isTruthyDataAttr,
   mergeRefs,
-  runIfFn,
+  runKeyAction,
+  visuallyHiddenAttributes,
 } from "../../utils"
 import { useFieldProps } from "../field"
-import { RatingGroup } from "./rating"
-import { getRoundedValue } from "./rating-utils"
 
-type OmittedGroupProps = Omit<RatingGroupProps, "children" | "items" | "value">
-type OmittedItemProps = Omit<
-  RatingItemProps,
-  "children" | "fractionValue" | "groupValue" | "ref" | "value"
->
-type OmittedInputProps = Omit<
-  HTMLProps<"input">,
-  "checked" | "defaultValue" | "value"
->
+const getRoundedValue = (value: number, to: number) => {
+  const rounded = Math.round(value / to) * to
+  const precision = `${to}`.split(".")[1]?.length || 0
 
-export type GroupProps =
-  | ((value: number) => OmittedGroupProps)
-  | OmittedGroupProps
-export type ItemProps = ((value: number) => OmittedItemProps) | OmittedItemProps
-export type InputProps =
-  | ((value: number) => OmittedInputProps)
-  | OmittedInputProps
+  return Number(rounded.toFixed(precision))
+}
+
+export interface RatingContext extends Omit<UseRatingReturn, "getRootProps"> {}
+
+const [RatingContext, useRatingContext] = createContext<RatingContext>({
+  name: "RatingContext",
+})
+
+export { RatingContext, useRatingContext }
 
 export interface UseRatingProps
   extends FieldProps,
-    Omit<HTMLProps, "color" | "defaultValue" | "id" | "onChange"> {
+    Omit<HTMLProps, "color" | "defaultValue" | "onChange"> {
   /**
    * The top-level id string that will be applied to the rating.
    * The index of the rating item will be appended to this top-level id.
@@ -54,23 +46,17 @@ export interface UseRatingProps
    */
   name?: string
   /**
-   * The color of the filled icons.
+   * Number of controls that should be rendered.
+   *
+   * @default 5
    */
-  color?: ((value: number) => CSSProps["color"]) | CSSProps["color"]
+  count?: number
   /**
    * The initial value of the rating.
    *
    * @default 0
    */
   defaultValue?: number
-  /**
-   * The empty icon for the rating.
-   */
-  emptyIcon?: ((value: number) => ReactNode) | ReactNode
-  /**
-   * The filled icon for the rating.
-   */
-  filledIcon?: ((value: number) => ReactNode) | ReactNode
   /**
    * Number of fractions each item can be divided into,
    *
@@ -84,27 +70,9 @@ export interface UseRatingProps
    */
   highlightSelectedOnly?: boolean
   /**
-   * Number of controls that should be rendered.
-   *
-   * @default 5
-   */
-  items?: number
-  /**
    * The value of the rating.
    */
   value?: number
-  /**
-   * Props for the rating group.
-   */
-  groupProps?: GroupProps
-  /**
-   * Props for the input element.
-   */
-  inputProps?: InputProps
-  /**
-   * Props for the rating item.
-   */
-  itemProps?: ItemProps
   /**
    * The callback invoked when value state changes.
    */
@@ -115,81 +83,91 @@ export interface UseRatingProps
   onHover?: (value: number) => void
 }
 
-export const useRating = ({
-  name,
-  color,
-  defaultValue = 0,
-  emptyIcon,
-  filledIcon,
-  fractions = 1,
-  highlightSelectedOnly = false,
-  items = 5,
-  value: valueProp,
-  groupProps,
-  inputProps,
-  itemProps,
-  onChange: onChangeProp,
-  onHover,
-  onMouseEnter: onMouseEnterProp,
-  onMouseLeave: onMouseLeaveProp,
-  onMouseMove: onMouseMoveProp,
-  onTouchEnd: onTouchEndProp,
-  onTouchStart: onTouchStartProp,
-  ...props
-}: UseRatingProps) => {
+export const useRating = (props: UseRatingProps = {}) => {
   const uuid = useId()
   const {
-    props: { id = uuid, disabled, readOnly, ...rest },
+    props: {
+      id = uuid,
+      name = uuid,
+      count: countProp = 5,
+      defaultValue = 0,
+      disabled,
+      fractions: fractionsProp = 1,
+      highlightSelectedOnly = false,
+      required,
+      value: valueProp,
+      onChange: onChangeProp,
+      onHover,
+      ...rest
+    },
     ariaProps,
     dataProps,
     eventProps,
-  } = useFieldProps(props)
-  const containerRef = useRef<HTMLDivElement>(null)
+  } = useFieldProps({ ...props, notSupportReadOnly: true })
+  const rootRef = useRef<HTMLDivElement>(null)
   const [value, setValue] = useControllableState({
     defaultValue,
     value: valueProp,
     onChange: onChangeProp,
   })
-  const [hoveredValue, setHoveredValue] = useState<number>(-1)
-  const [outside, setOutside] = useState(true)
-  const resolvedFractions = Math.floor(fractions)
-  const resolvedItems = Math.floor(items)
-  const decimal = 1 / resolvedFractions
-  const roundedValue = getRoundedValue(value, decimal)
-  const resolvedValue = hoveredValue !== -1 ? hoveredValue : roundedValue
-
-  name ??= `rating-${id}`
+  const [hoveredValue, setHoveredValue] = useState(-1)
+  const outsideRef = useRef(true)
+  const fractions = Math.floor(fractionsProp)
+  const count = Math.floor(countProp)
+  const decimal = 1 / fractions
+  const roundedValue = useMemo(
+    () => getRoundedValue(value, decimal),
+    [decimal, value],
+  )
+  const readOnly = isTruthyDataAttr(dataProps["data-readonly"])
+  const interactive = !(readOnly || disabled)
+  const displayValue = hoveredValue !== -1 ? hoveredValue : roundedValue
 
   const getHoveredValue = useCallback(
     (x: number) => {
-      const { left, width } = containerRef.current!.getBoundingClientRect()
-      const itemWidth = width / resolvedItems
+      if (!rootRef.current) return -1
+
+      const { left, width } = rootRef.current.getBoundingClientRect()
+      const itemWidth = width / count
 
       const hoveredValue = (x - left) / itemWidth
 
       const value = clampNumber(
         getRoundedValue(hoveredValue + decimal / 2, decimal),
         decimal,
-        resolvedItems,
+        count,
       )
 
       return value
     },
-    [decimal, resolvedItems],
+    [count, decimal],
   )
 
   const onMouseEnter = useCallback(() => {
-    if (!disabled && !readOnly) setOutside(false)
-  }, [disabled, readOnly])
+    if (interactive) outsideRef.current = false
+  }, [interactive])
 
   const onMouseLeave = useCallback(() => {
-    if (disabled || readOnly) return
+    if (!interactive) return
 
     setHoveredValue(-1)
-    setOutside(true)
+    outsideRef.current = true
 
     if (hoveredValue !== -1) onHover?.(-1)
-  }, [disabled, hoveredValue, onHover, readOnly, setHoveredValue])
+  }, [hoveredValue, onHover, interactive, setHoveredValue])
+
+  const onMouseMove = useCallback(
+    (ev: MouseEvent<HTMLDivElement>) => {
+      if (disabled || readOnly) return
+
+      const roundedValue = getHoveredValue(ev.clientX)
+
+      setHoveredValue(roundedValue)
+
+      if (roundedValue !== hoveredValue) onHover?.(roundedValue)
+    },
+    [disabled, getHoveredValue, hoveredValue, readOnly, onHover],
+  )
 
   const onTouchStart = useCallback(
     (ev: TouchEvent<HTMLDivElement>) => {
@@ -210,129 +188,239 @@ export const useRating = ({
     ev.preventDefault()
   }, [])
 
-  const onMouseMove = useCallback(
-    (ev: MouseEvent<HTMLDivElement>) => {
-      if (disabled || readOnly) return
-
-      const roundedValue = getHoveredValue(ev.clientX)
-
-      setHoveredValue(roundedValue)
-
-      if (roundedValue !== hoveredValue) onHover?.(roundedValue)
-    },
-    [disabled, getHoveredValue, hoveredValue, readOnly, onHover],
-  )
-
-  const getContainerProps: PropGetter = useCallback(
-    (props = {}, ref = null) => ({
-      ref: mergeRefs(ref, containerRef),
-      "aria-label": `${value} Stars`,
-      role: "radiogroup",
-      ...ariaProps,
+  const getRootProps: PropGetter = useCallback(
+    ({ ref, ...props } = {}) => ({
       ...dataProps,
       ...eventProps,
+      ...ariaProps,
+      id,
+      "aria-label": `${value} Stars`,
+      "aria-readonly": ariaAttr(readOnly),
+      role: "radiogroup",
       ...rest,
       ...props,
-      id,
+      ref: mergeRefs(ref, rest.ref, rootRef),
       onMouseEnter: handlerAll(
-        onMouseEnter,
         props.onMouseEnter,
-        onMouseEnterProp,
+        rest.onMouseEnter,
+        onMouseEnter,
       ),
       onMouseLeave: handlerAll(
-        onMouseLeave,
         props.onMouseLeave,
-        onMouseLeaveProp,
+        rest.onMouseLeave,
+        onMouseLeave,
       ),
-      onMouseMove: handlerAll(onMouseMove, props.onMouseMove, onMouseMoveProp),
-      onTouchEnd: handlerAll(onTouchEnd, props.onTouchEnd, onTouchEndProp),
+      onMouseMove: handlerAll(props.onMouseMove, rest.onMouseMove, onMouseMove),
+      onTouchEnd: handlerAll(props.onTouchEnd, rest.onTouchEnd, onTouchEnd),
       onTouchStart: handlerAll(
-        onTouchStart,
         props.onTouchStart,
-        onTouchStartProp,
+        rest.onTouchStart,
+        onTouchStart,
       ),
     }),
     [
-      value,
       ariaProps,
       dataProps,
       eventProps,
-      rest,
       id,
       onMouseEnter,
-      onMouseEnterProp,
       onMouseLeave,
-      onMouseLeaveProp,
       onMouseMove,
-      onMouseMoveProp,
       onTouchEnd,
-      onTouchEndProp,
       onTouchStart,
-      onTouchStartProp,
+      readOnly,
+      rest,
+      value,
     ],
   )
-
-  const getGroupProps: RequiredPropGetter<
-    HTMLMotionProps,
-    { value: number },
-    HTMLMotionProps
-  > = useCallback(
-    ({ value, ...props }) => {
-      const active = !readOnly && Math.ceil(hoveredValue) === value
-
-      return {
-        whileTap: !disabled && !readOnly ? { y: -4 } : undefined,
-        ...props,
-        "data-active": dataAttr(active),
-        tabIndex: -1,
-      }
-    },
-    [disabled, hoveredValue, readOnly],
-  )
-
-  const children = Array(resolvedItems)
-    .fill(0)
-    .map((_, index) => {
-      const value = index + 1
-
-      return (
-        <RatingGroup
-          key={value}
-          color={runIfFn(color, value)}
-          items={index === 0 ? resolvedFractions + 1 : resolvedFractions}
-          value={value}
-        />
-      )
-    })
 
   return {
     id,
     name,
-    children,
+    count,
     decimal,
     disabled,
-    emptyIcon,
-    filledIcon,
+    displayValue,
+    fractions,
     highlightSelectedOnly,
     hoveredValue,
-    outside,
+    interactive,
+    outsideRef,
     readOnly,
-    resolvedValue,
+    required,
     roundedValue,
     setHoveredValue,
     setValue,
     value,
-    formControlProps: {
-      ...ariaProps,
-      ...dataProps,
-      ...eventProps,
-    },
-    getContainerProps,
-    getGroupProps,
-    groupProps,
-    inputProps,
-    itemProps,
+    ariaProps,
+    dataProps,
+    eventProps,
+    getRootProps,
   }
 }
 
 export type UseRatingReturn = ReturnType<typeof useRating>
+
+export interface UseRatingItemProps extends HTMLProps<"label"> {
+  groupValue: number
+  index: number
+}
+
+export const useRatingItem = ({
+  groupValue,
+  index,
+  ...rest
+}: UseRatingItemProps) => {
+  const {
+    id: rootId,
+    name,
+    decimal,
+    disabled,
+    displayValue,
+    highlightSelectedOnly,
+    interactive,
+    outsideRef,
+    readOnly,
+    required,
+    roundedValue,
+    setHoveredValue,
+    setValue,
+    ariaProps,
+    dataProps,
+    eventProps,
+  } = useRatingContext()
+  const fractionValue = decimal * (groupValue === 1 ? index : index + 1)
+  const value = useMemo(
+    () => getRoundedValue(groupValue - 1 + fractionValue, decimal),
+    [decimal, fractionValue, groupValue],
+  )
+  const active = value === displayValue
+  const checked = value === roundedValue
+  const filled = highlightSelectedOnly
+    ? value === displayValue
+    : value <= displayValue
+  const id = `${rootId}-${groupValue}-${value}`
+
+  const onBlur = useCallback(() => {
+    if (outsideRef.current) setHoveredValue(-1)
+  }, [outsideRef, setHoveredValue])
+
+  const onInputChange = useCallback(
+    (ev: ChangeEvent<HTMLInputElement>) => {
+      if (!interactive) return
+
+      const value = parseFloat(ev.target.value)
+
+      setHoveredValue(value)
+    },
+    [interactive, setHoveredValue],
+  )
+
+  const onChange = useCallback(
+    (value: number) => {
+      if (!interactive) return
+
+      setValue(value)
+    },
+    [interactive, setValue],
+  )
+
+  const onMouseDown = useCallback(() => {
+    onChange(value)
+  }, [onChange, value])
+
+  const onTouchStart = useCallback(() => {
+    onChange(value)
+  }, [onChange, value])
+
+  const onKeyDown = useCallback(
+    (ev: KeyboardEvent<HTMLInputElement>) => {
+      runKeyAction(ev, {
+        Space: () => onChange(value),
+      })
+    },
+    [onChange, value],
+  )
+
+  const getLabelProps: PropGetter<"label"> = useCallback(
+    ({ style, ...props } = {}) => ({
+      ...dataProps,
+      ...ariaProps,
+      htmlFor: id,
+      "data-active": dataAttr(active),
+      "data-filled": dataAttr(filled),
+      ...rest,
+      ...props,
+      style: {
+        ...style,
+        zIndex: fractionValue !== 1 ? (active ? 1 : -1) : undefined,
+      },
+      onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
+      onTouchStart: handlerAll(props.onTouchStart, onTouchStart),
+    }),
+    [
+      active,
+      ariaProps,
+      dataProps,
+      filled,
+      fractionValue,
+      id,
+      onMouseDown,
+      onTouchStart,
+      rest,
+    ],
+  )
+
+  const getInputProps: PropGetter<"input"> = useCallback(
+    (props = {}) => ({
+      ...dataProps,
+      ...eventProps,
+      ...ariaProps,
+      id,
+      type: "radio",
+      name,
+      style: visuallyHiddenAttributes.style,
+      "aria-label": value.toString(),
+      "data-active": dataAttr(active),
+      "data-checked": dataAttr(checked),
+      checked,
+      disabled,
+      readOnly,
+      required,
+      value,
+      ...props,
+      onBlur: handlerAll(onBlur, props.onBlur),
+      onChange: handlerAll(props.onChange, onInputChange),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
+    }),
+    [
+      id,
+      name,
+      value,
+      active,
+      checked,
+      dataProps,
+      eventProps,
+      ariaProps,
+      disabled,
+      readOnly,
+      required,
+      onBlur,
+      onInputChange,
+      onKeyDown,
+    ],
+  )
+
+  return {
+    active,
+    checked,
+    filled,
+    fractionValue,
+    groupValue,
+    value,
+    getInputProps,
+    getLabelProps,
+  }
+}
+
+export type UseRatingItemReturn = ReturnType<typeof useRatingItem>

@@ -1,0 +1,39 @@
+---
+title: Em
+description: >-
+  `Em` is a component that represents emphasized text. By default, it renders a
+  `em` element.
+storybook: components-em--basic
+source: components/em
+style: components/em/em.style.ts
+---
+
+```tsx preview
+<Text>
+  I'll be <Em>back</Em>.
+</Text>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { Em } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Em } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Em } from "@workspace/ui"
+```
+
+:::
+
+```tsx title="index.tsx"
+<Text>
+  I'll be <Em>back</Em>.
+</Text>
+```

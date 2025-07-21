@@ -101,7 +101,7 @@ export { StepsPropsContext, useStepsPropsContext }
 export const StepsRoot = withProvider(
   ({
     children,
-    items,
+    items = [],
     lazy,
     lazyBehavior,
     orientation: orientationProp,
@@ -123,7 +123,11 @@ export const StepsRoot = withProvider(
       getRootProps,
       onNext,
       onPrev,
-    } = useSteps({ ...rest, orientation: computedOrientation })
+    } = useSteps({
+      count: items.length,
+      ...rest,
+      orientation: computedOrientation,
+    })
     const componentContext = useMemo(
       () => ({ items, lazy, lazyBehavior }),
       [items, lazy, lazyBehavior],

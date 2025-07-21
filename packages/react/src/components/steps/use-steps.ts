@@ -4,7 +4,7 @@ import type { HTMLProps, Orientation, PropGetter } from "../../core"
 import { useCallback, useId } from "react"
 import { useEnvironment } from "../../core"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { createDescendant } from "../../hooks/use-descendant"
+import { createDescendants } from "../../hooks/use-descendants"
 import { createContext, cx, dataAttr, handlerAll, mergeRefs } from "../../utils"
 
 export type StepStatusScheme = "complete" | "current" | "incomplete"
@@ -13,7 +13,7 @@ const {
   DescendantsContext: StepsDescendantsContext,
   useDescendant: useStepsDescendant,
   useDescendants: useStepsDescendants,
-} = createDescendant<HTMLLIElement>()
+} = createDescendants<HTMLLIElement>()
 
 export { StepsDescendantsContext, useStepsDescendant, useStepsDescendants }
 
@@ -39,6 +39,10 @@ export { StepsItemContext, useStepsItemContext }
 
 export interface UseStepsProps extends Omit<HTMLProps, "onChange"> {
   /**
+   * The total number of steps.
+   */
+  count?: number
+  /**
    * The initial index of the active step.
    *
    * @default 0
@@ -61,6 +65,7 @@ export interface UseStepsProps extends Omit<HTMLProps, "onChange"> {
 }
 
 export const useSteps = ({
+  count = 0,
   defaultIndex = 0,
   index: indexProp,
   orientation = "horizontal",
@@ -74,7 +79,6 @@ export const useSteps = ({
     onChange,
   })
   const id = useId()
-  const count = descendants.count()
 
   const getStatus = useCallback(
     (indexProp: number): StepStatusScheme => {

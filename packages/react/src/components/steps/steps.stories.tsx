@@ -342,7 +342,7 @@ export const CustomIndicator: Story = () => {
 
 export const CustomComponent: Story = () => {
   return (
-    <Steps.Root>
+    <Steps.Root count={3}>
       <Steps.List>
         <Steps.Item index={0}>
           <Steps.Indicator />

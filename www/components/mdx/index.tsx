@@ -18,6 +18,7 @@ import { CodeGroup } from "./code-group"
 import { Contributors } from "./contributors"
 import { Link } from "./link"
 import { Sponsors } from "./sponsors"
+import { Steps } from "./steps"
 
 const mdxComponents: MDXComponents = {
   a: Link,
@@ -112,6 +113,7 @@ const mdxComponents: MDXComponents = {
   p: (props) => <Text color="fg.emphasized" fontSize="sm" my="md" {...props} />,
   pre: CodeBlock,
   Sponsors,
+  steps: Steps,
   strong: (props) => (
     <Text as="strong" color="fg" fontWeight="semibold" {...props} />
   ),

@@ -25,8 +25,6 @@ export type LayerScheme =
   | "size"
   | "tokens"
   | "variant"
-export type Direction = "end" | "start"
-export type TextDirection = "ltr" | "rtl"
 export type KeyframeIdent = "from" | "to"
 export type Orientation = "horizontal" | "vertical"
 export type Placement =
@@ -47,6 +45,9 @@ export type SimplePlacement =
   | "block-start"
   | "inline-end"
   | "inline-start"
+export type Direction = Exclude<Placement, "center" | "center-center">
+export type SimpleDirection = Extract<Placement, "end" | "start">
+export type TextDirection = "ltr" | "rtl"
 export type BreakpointDirection = "down" | "up"
 export type BreakpointIdentifier =
   | "@media screen"
@@ -134,7 +135,7 @@ export interface SnacksConfig {
    *
    * @default 'top'
    */
-  direction?: Direction
+  direction?: SimpleDirection
   /**
    * The number of `ms` the snack will continue to be displayed.
    *

@@ -10,7 +10,8 @@ export const popoverStyle = defineComponentSlotStyle({
       gap: "{gap}",
     },
     content: {
-      bg: "bg.panel",
+      bg: ["bg", "bg.subtle"],
+      borderColor: ["border.subtle", "border.muted"],
       borderWidth: "1px",
       boxShadow: "sm",
       display: "flex",
@@ -19,7 +20,6 @@ export const popoverStyle = defineComponentSlotStyle({
       gap: "{gap}",
       p: "{padding}",
       rounded: "l2",
-      zIndex: "guldo",
     },
     footer: {
       alignItems: "center",
@@ -33,6 +33,9 @@ export const popoverStyle = defineComponentSlotStyle({
       fontWeight: "semibold",
       gap: "{gap}",
       justifyContent: "flex-start",
+    },
+    positioner: {
+      zIndex: "recoome",
     },
   },
 

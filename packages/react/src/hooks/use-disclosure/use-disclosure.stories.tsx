@@ -12,29 +12,23 @@ const meta: Meta = {
 export default meta
 
 export const Basic = () => {
-  const {
-    // open,
-    // onClose,
-    onOpen,
-  } = useDisclosure()
+  const { open, onClose, onOpen } = useDisclosure()
 
   return (
     <>
       <Button onClick={onOpen}>Open Dialog</Button>
 
-      {/* TODO: Fix this */}
-      {/* <Dialog
+      <Modal.Root
+        body="だ…大地よ海よ　そして生きているすべての　みんな…
+        このオラにほんのちょっとずつだけ元気をわけてくれ…！！！"
         cancel="わけない"
-        header="孫悟空"
         open={open}
         success="わける"
+        title="孫悟空"
         onCancel={onClose}
         onClose={onClose}
         onSuccess={onClose}
-      >
-        だ…大地よ海よ　そして生きているすべての　みんな…
-        このオラにほんのちょっとずつだけ元気をわけてくれ…！！！
-      </Dialog> */}
+      />
     </>
   )
 }

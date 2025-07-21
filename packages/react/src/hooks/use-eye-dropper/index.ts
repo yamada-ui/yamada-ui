@@ -11,6 +11,11 @@ export interface EyeDropperReturn {
   sRGBHex: string
 }
 
+/**
+ * `useEyeDropper` is a custom hook that opens the eye dropper tool and returns the color value.
+ *
+ * @see https://yamada-ui.com/hooks/use-eye-dropper
+ */
 export const useEyeDropper = () => {
   const [supported, setSupported] = useState(false)
 

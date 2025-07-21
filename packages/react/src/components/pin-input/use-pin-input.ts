@@ -5,7 +5,7 @@ import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useEffect, useId, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { createDescendant } from "../../hooks/use-descendant"
+import { createDescendants } from "../../hooks/use-descendants"
 import { filterUndefined, handlerAll, runKeyAction } from "../../utils"
 import { useFieldProps } from "../field"
 
@@ -13,7 +13,7 @@ const {
   DescendantsContext: PinInputDescendantsContext,
   useDescendant: usePinInputDescendant,
   useDescendants: usePinInputDescendants,
-} = createDescendant<HTMLInputElement>()
+} = createDescendants<HTMLInputElement>()
 
 export {
   PinInputDescendantsContext,

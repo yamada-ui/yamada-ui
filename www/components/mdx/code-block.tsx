@@ -1,5 +1,5 @@
 import type { BoxProps, GridProps } from "@yamada-ui/react"
-import { Code, Flex, Grid, Tabs, Text } from "@yamada-ui/react"
+import { Box, Code, Flex, Grid, Tabs, Text } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import React from "react"
 import { codeToHtml } from "@/libs/shiki"
@@ -43,16 +43,24 @@ export function CodeBlock({
           </Tabs.List>
 
           <Tabs.Panel index={0}>
-            {client ? (
-              <ClientOnly lang={lang} code={children} functional={functional} />
-            ) : (
-              <ServerOnly lang={lang} code={children} functional={functional} />
-            )}
+            <Box borderWidth="1px" p="{space}" rounded="l2">
+              {client ? (
+                <ClientOnly
+                  lang={lang}
+                  code={children}
+                  functional={functional}
+                />
+              ) : (
+                <ServerOnly
+                  lang={lang}
+                  code={children}
+                  functional={functional}
+                />
+              )}
+            </Box>
           </Tabs.Panel>
           <Tabs.Panel index={1}>
-            <Pre lang={lang} m="0">
-              {children}
-            </Pre>
+            <Pre lang={lang}>{children}</Pre>
           </Tabs.Panel>
         </Tabs.Root>
 
@@ -85,7 +93,7 @@ export function CodeBlock({
           alignItems="center"
           bg="bg.panel"
           borderBottomWidth="1px"
-          borderColor="border.subtle"
+          borderColor="border"
           color="fg.emphasized"
           h="12"
           px="4"
@@ -96,13 +104,17 @@ export function CodeBlock({
           </Text>
         </Flex>
 
-        <Pre lang={lang} m="0" roundedTop="0">
+        <Pre lang={lang} roundedTop="0">
           {children}
         </Pre>
       </Grid>
     )
   } else {
-    return <Pre lang={lang}>{children}</Pre>
+    return (
+      <Pre lang={lang} my="lg">
+        {children}
+      </Pre>
+    )
   }
 }
 

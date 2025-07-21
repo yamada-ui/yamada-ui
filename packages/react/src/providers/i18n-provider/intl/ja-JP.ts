@@ -6,6 +6,13 @@ export default {
     Breadcrumb: "パンくずリスト",
     Ellipsis: "省略記号",
   },
+  carousel: {
+    "Go to next slide": "次のスライドに移動する",
+    "Go to previous slide": "前のスライドに移動する",
+    "Go to {page} slide": "{page}スライドに移動する",
+    Slides: "スライド",
+    "{page} of {total}": "{page} / {total}",
+  },
   closeButton: {
     Close: "閉じる",
   },
@@ -24,18 +31,16 @@ export default {
     "Go to page": "{value}ページに移動する",
     "Go to previous page": "前のページに移動する",
     Pagination: "ページネーション",
-    text: {
-      short: "{value} / {total}",
-      compact: "{value} / {total} ページ",
-    },
+    "{value} / {total}": "{value} / {total}",
+    "{value} of {total}": "{value} / {total} ページ",
   },
   passwordInput: {
     "Password strength meter": "パスワードの強度",
     "Toggle password visibility": "パスワードの表示を切り替える",
   },
   progress: {
-    loading: "読み込み中...",
-    percent: "{value}パーセント",
+    "Loading...": "読み込み中...",
+    "{value} percent": "{value}パーセント",
   },
   stat: {
     "Decreased by": "減少",

@@ -16,7 +16,7 @@ export function CodeGroup({ children, ids }: CodeGroupProps) {
       <Tabs.List
         bg="bg.panel"
         borderBottomWidth="1px"
-        borderColor="border.subtle"
+        borderColor="border"
         color="fg.emphasized"
         gap="xs"
         h="12"
@@ -27,6 +27,7 @@ export function CodeGroup({ children, ids }: CodeGroupProps) {
         {tabs.map((tab, index) => (
           <Tabs.Tab
             key={tab}
+            fontFamily="mono"
             index={index}
             lineHeight="{sizes.6}"
             minH="6"

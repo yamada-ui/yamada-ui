@@ -1,0 +1,40 @@
+---
+title: VisuallyHidden
+description:
+  "`VisuallyHidden` is a common technique used in web accessibility to hide
+  content from the visual client, but keep it readable for screen readers."
+storybook: components-visuallyhidden--basic
+source: components/visually-hidden
+style: components/visually-hidden/visually-hidden.style.ts
+---
+
+```tsx preview
+<Button>
+  <VisuallyHidden>Checkmark</VisuallyHidden>
+  <CheckIcon />
+</Button>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { VisuallyHidden } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { VisuallyHidden } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { VisuallyHidden } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<VisuallyHidden>Hidden content</VisuallyHidden>
+```
+
+It is used to visually hide elements, but it is accessible in screen readers. By default, it renders a `span` element.

@@ -56,8 +56,7 @@ export const resetStyle = defineStyles.resetStyle({
   },
 
   "code, kbd, samp, pre": {
-    fontFamily:
-      "ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace",
+    fontFamily: "inherit",
     fontSize: "1em",
   },
 

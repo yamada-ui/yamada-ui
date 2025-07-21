@@ -4,7 +4,7 @@ import type { KeyboardEvent, KeyboardEventHandler } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useId, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { createDescendant } from "../../hooks/use-descendant"
+import { createDescendants } from "../../hooks/use-descendants"
 import {
   ariaAttr,
   createContext,
@@ -19,7 +19,7 @@ const {
   DescendantsContext: AccordionDescendantsContext,
   useDescendant: useAccordionDescendant,
   useDescendants: useAccordionDescendants,
-} = createDescendant<HTMLButtonElement>()
+} = createDescendants<HTMLButtonElement>()
 
 export {
   AccordionDescendantsContext,

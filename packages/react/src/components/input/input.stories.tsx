@@ -354,7 +354,7 @@ export const FloatingLabel: Story = () => {
           transitionDuration: "moderate",
           transitionProperty: "top, color, font-size",
           transitionTimingFunction: "ease-in-out",
-          zIndex: "1",
+          zIndex: "yamcha",
           _peerPlaceholderShown: {
             color: "fg.subtle",
             fontSize: "md",

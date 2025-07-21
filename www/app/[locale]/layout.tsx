@@ -10,7 +10,7 @@ import {
 } from "@yamada-ui/react"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
-import { Inter } from "next/font/google"
+import { Geist_Mono, Inter } from "next/font/google"
 import { cookies } from "next/headers"
 import { notFound } from "next/navigation"
 import { Footer } from "@/app/[locale]/footer"
@@ -50,7 +50,14 @@ export async function generateMetadata({
   }
 }
 
-const inter = Inter({
+const _inter = Inter({
+  style: "normal",
+  display: "block",
+  subsets: ["latin", "latin-ext"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+})
+
+const _geistMono = Geist_Mono({
   style: "normal",
   display: "block",
   subsets: ["latin", "latin-ext"],
@@ -77,7 +84,7 @@ export default async function Layout({ children, params }: LayoutProps) {
       style={{ scrollBehavior: "smooth" }}
       suppressHydrationWarning
     >
-      <body className={inter.className} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <ColorModeScript type="cookie" />
         <ThemeSchemeScript type="cookie" />
 

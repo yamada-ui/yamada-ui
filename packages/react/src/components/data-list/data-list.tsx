@@ -77,7 +77,7 @@ export { DataListPropsContext, useDataListPropsContext }
  *
  * @see https://yamada-ui.com/components/data-list
  */
-export const DataListRoot = withProvider(
+export const DataListRoot = withProvider<"dl", DataListRootProps>(
   ({
     style,
     children,

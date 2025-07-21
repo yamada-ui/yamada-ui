@@ -1,6 +1,5 @@
 "use client"
 
-import type { FC } from "react"
 import type { HTMLStyledProps, ThemeProps, WithoutThemeProps } from "../../core"
 import type { InputProps } from "../input"
 import type { NumberInputStyle } from "./number-input.style"
@@ -120,16 +119,14 @@ const NumberInputControl = withContext<"div", NumberInputControlProps>(
 
 type NumberInputIncrementButtonProps = HTMLStyledProps<"button">
 
-const NumberInputIncrementButton: FC<NumberInputIncrementButtonProps> =
-  withContext<"button", NumberInputIncrementButtonProps>("button", [
-    "button",
-    "increment",
-  ])({ children: <ChevronUpIcon /> })
+const NumberInputIncrementButton = withContext<
+  "button",
+  NumberInputIncrementButtonProps
+>("button", ["button", "increment"])({ children: <ChevronUpIcon /> })
 
 type NumberInputDecrementButtonProps = HTMLStyledProps<"button">
 
-const NumberInputDecrementButton: FC<NumberInputDecrementButtonProps> =
-  withContext<"button", NumberInputDecrementButtonProps>("button", [
-    "button",
-    "decrement",
-  ])({ children: <ChevronDownIcon /> })
+const NumberInputDecrementButton = withContext<
+  "button",
+  NumberInputDecrementButtonProps
+>("button", ["button", "decrement"])({ children: <ChevronDownIcon /> })

@@ -42,7 +42,7 @@ export { IconButtonPropsContext, useIconButtonPropsContext }
  *
  * @see https://yamada-ui.com/components/icon-button
  */
-export const IconButton = withContext(Button)(
+export const IconButton = withContext<"button", IconButtonProps>(Button)(
   undefined,
   ({ children, icon, ...rest }) => ({
     children: icon || children,

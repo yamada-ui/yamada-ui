@@ -24,4 +24,4 @@ export { useWrapPropsContext, WrapPropsContext }
  *
  * @see https://yamada-ui.com/components/wrap
  */
-export const Wrap = withContext(Flex)()
+export const Wrap = withContext<"div", WrapProps>(Flex)()

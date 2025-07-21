@@ -27,7 +27,11 @@ export { GroupPropsContext, useGroupPropsContext }
  *
  * @see https://yamada-ui.com/components/group
  */
-export const Group = withContext(
+export const Group = withContext<"div", GroupProps, "attached" | "orientation">(
+  Flex,
+  { transferProps: ["attached", "orientation"] },
+)(
+  undefined,
   ({
     attached: attachedProp,
     children,
@@ -38,16 +42,12 @@ export const Group = withContext(
     const attached = useValue(attachedProp)
     const cloneChildren = useGroup(children)
 
-    return (
-      <Flex
-        data-attached={dataAttr(attached)}
-        data-orientation={orientation}
-        role="group"
-        {...rest}
-      >
-        {cloneChildren}
-      </Flex>
-    )
+    return {
+      "data-attached": dataAttr(attached),
+      "data-orientation": orientation,
+      children: cloneChildren,
+      role: "group",
+      ...rest,
+    }
   },
-  { transferProps: ["attached", "orientation"] },
-)()
+)

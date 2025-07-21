@@ -134,7 +134,7 @@ export function createStyled<
     transferProps,
     ...styledOptions
   }: StyledOptions<D, H, R, keyof M> = {},
-): StyledComponent<Y, M> {
+) {
   const displayName =
     styledOptions.displayName ?? getDisplayName(styledOptions.name, "")
   const shouldForwardProp = !styledOptions.shouldForwardProp
@@ -149,7 +149,7 @@ export function createStyled<
     defaultProps,
   })
 
-  const StyledComponent = withEmotionCache<Dict>(function (
+  const StyledComponent = withEmotionCache(function (
     { as: Component = el, asChild, children, ...props },
     cache,
     ref,

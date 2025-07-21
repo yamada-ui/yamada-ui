@@ -75,7 +75,7 @@ export { SlidePropsContext, useSlidePropsContext }
  *
  * @see https://yamada-ui.com/components/slide
  */
-export const Slide = withContext(
+export const Slide = withContext<"div", SlideProps, "placement">(
   ({
     delay,
     duration = { enter: 0.4, exit: 0.3 },

@@ -58,7 +58,11 @@ export { InfiniteScrollAreaPropsContext, useInfiniteScrollAreaPropsContext }
  *
  * @see https://yamada-ui.com/components/infinite-scroll-area
  */
-export const InfiniteScrollArea = withProvider(
+export const InfiniteScrollArea = withProvider<
+  "div",
+  InfiniteScrollAreaProps,
+  "orientation"
+>(
   ({
     ref,
     children,

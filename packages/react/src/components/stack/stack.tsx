@@ -44,7 +44,7 @@ export { StackPropsContext, useStackPropsContext }
  *
  * @see https://yamada-ui.com/components/stack
  */
-export const Stack = withContext(
+export const Stack = withContext<"div", StackProps>(
   ({
     align: alignItems,
     children,

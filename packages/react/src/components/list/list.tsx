@@ -43,7 +43,7 @@ export { ListPropsContext, useListPropsContext }
  *
  * @see https://yamada-ui.com/components/list
  */
-export const ListRoot = withProvider(
+export const ListRoot = withProvider<"ul", ListRootProps, "styleType">(
   ({
     as: asProp,
     children,

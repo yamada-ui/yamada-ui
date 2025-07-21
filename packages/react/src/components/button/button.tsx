@@ -1,6 +1,6 @@
 "use client"
 
-import type { ElementType, ReactNode } from "react"
+import type { ElementType, PropsWithChildren, ReactNode } from "react"
 import type {
   CSSObject,
   HTMLProps,
@@ -126,7 +126,7 @@ export { ButtonPropsContext, useButtonPropsContext }
  *
  * @see https://yamada-ui.com/components/button
  */
-export const Button = withContext(
+export const Button = withContext<"button", ButtonProps>(
   ({
     ref,
     as,
@@ -191,7 +191,7 @@ export const Button = withContext(
   },
 )()
 
-const ButtonContent = component(
+const ButtonContent = component<"fragment", PropsWithChildren>(
   ({ children }) => {
     const { endIcon, startIcon, iconProps } = useButtonContext()
 

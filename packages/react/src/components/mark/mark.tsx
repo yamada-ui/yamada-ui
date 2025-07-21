@@ -22,4 +22,4 @@ export { MarkPropsContext, useMarkPropsContext }
  *
  * @see https://yamada-ui.com/components/mark
  */
-export const Mark = withContext<"mark", MarkProps>("mark")()
+export const Mark = withContext("mark")()

@@ -64,7 +64,7 @@ export { TagPropsContext, useTagPropsContext }
  *
  * @see https://yamada-ui.com/components/tag
  */
-export const Tag = withProvider(
+export const Tag = withProvider<"span", TagProps, "disabled">(
   ({
     children,
     disabled,

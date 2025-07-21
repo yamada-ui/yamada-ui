@@ -98,7 +98,7 @@ export { StepsPropsContext, useStepsPropsContext }
  *
  * @see https://yamada-ui.com/components/steps
  */
-export const StepsRoot = withProvider(
+export const StepsRoot = withProvider<"div", StepsRootProps, "orientation">(
   ({
     children,
     items = [],

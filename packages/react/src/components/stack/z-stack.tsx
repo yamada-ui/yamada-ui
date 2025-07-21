@@ -70,7 +70,7 @@ export { useZStackPropsContext, ZStackPropsContext }
  *
  * @see https://yamada-ui.com/components/stack
  */
-export const ZStack = withContext(
+export const ZStack = withContext<"div", ZStackProps>(
   ({
     css,
     children,

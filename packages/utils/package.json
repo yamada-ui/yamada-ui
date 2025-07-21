@@ -30,11 +30,13 @@
     "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "scripts": {
-    "clean": "rimraf dist .turbo .eslintcache",
+    "clean": "rimraf node_modules dist trace coverage .turbo .eslintcache",
     "build": "tsdown",
     "test": "NODE_OPTIONS=\"--experimental-strip-types\" vitest",
     "test:dev": "NODE_OPTIONS=\"--experimental-strip-types\" vitest --watch --ui",
     "typecheck": "tsc --noEmit",
+    "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
+    "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
     "prepack": "clean-package",

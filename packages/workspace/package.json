@@ -5,8 +5,10 @@
   "version": "1.0.0",
   "description": "The workspace for Yamada UI projects",
   "scripts": {
-    "clean": "rimraf .eslintcache",
+    "clean": "rimraf node_modules trace .eslintcache",
     "typecheck": "tsc --noEmit",
+    "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
+    "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "prettier . --ignore-path ../../.prettierignore --check --cache"
   },

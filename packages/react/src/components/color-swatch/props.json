@@ -36,7 +36,7 @@
       "description": "The color used for the swatch element.",
       "required": false
     },
-    "overlays": {
+    "layers": {
       "type": "HTMLStyledProps[]",
       "description": "The overlay used for the swatch element.",
       "required": false
@@ -90,7 +90,7 @@
       "description": "The color used for the swatch element.",
       "required": false
     },
-    "overlays": {
+    "layers": {
       "type": "HTMLStyledProps[]",
       "description": "The overlay used for the swatch element.",
       "required": false

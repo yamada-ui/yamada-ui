@@ -16,6 +16,14 @@ export default {
   closeButton: {
     Close: "閉じる",
   },
+  hueSlider: {
+    Blue: "青",
+    Cyan: "シアン",
+    Green: "緑",
+    Magenta: "マゼンタ",
+    Red: "赤",
+    Yellow: "黄",
+  },
   modal: {
     "Close modal": "モーダルを閉じる",
     "Open modal": "モーダルを開く",

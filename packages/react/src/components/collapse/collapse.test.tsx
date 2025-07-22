@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Collapse } from "./collapse"
 
 describe("<Collapse />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Collapse />)
   })
 

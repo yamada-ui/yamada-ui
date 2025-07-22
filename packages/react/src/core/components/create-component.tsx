@@ -58,7 +58,9 @@ export type ComponentSlot<Y extends string> =
   | Y
   | { name: string; slot: [Y, Y] | Y }
 
-export type InitialProps<Y extends Dict = Dict> = ((props: Y) => any) | Y
+export type InitialProps<Y extends Dict = Dict> =
+  | ((props: Y) => any)
+  | Partial<Y>
 export type SuperProps<Y extends Dict = Dict> = ((props: Y) => any) | Y
 
 export type SuperWithoutThemeProps<

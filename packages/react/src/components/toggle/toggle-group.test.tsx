@@ -2,7 +2,7 @@ import { a11y, fireEvent, render, screen } from "#test"
 import { Toggle, ToggleGroup } from "."
 
 describe("<ToggleGroup />", () => {
-  test("should render ToggleGroup and its children correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <ToggleGroup>
         <Toggle value="opt1">Option 1</Toggle>

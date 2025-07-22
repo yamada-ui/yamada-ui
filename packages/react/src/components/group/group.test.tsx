@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Group } from "./group"
 
 describe("<Group />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Group>Group</Group>)
   })
 

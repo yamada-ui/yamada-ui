@@ -3,7 +3,7 @@ import { BoxIcon } from "../icon"
 import { IconButton } from "./icon-button"
 
 describe("<IconButton />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <IconButton
         colorScheme="primary"

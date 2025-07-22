@@ -5,7 +5,7 @@ import { Dropzone } from "./"
 import { IMAGE_ACCEPT_TYPE } from "./accept-types"
 
 describe("<Dropzone />", () => {
-  test("Dropzone renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Dropzone.Root>
         <Text>Drag file here or click to select file</Text>

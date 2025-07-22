@@ -3,7 +3,7 @@ import { BoxIcon } from "../icon"
 import { Switch } from "./"
 
 describe("<Switch />", () => {
-  test("Switch renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Switch>Switch</Switch>)
   })
 

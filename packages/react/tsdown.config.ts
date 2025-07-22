@@ -9,9 +9,6 @@ const sharedConfig: UserConfig = {
     "!src/**/*.json",
     "!src/**/*.test.*",
     "!src/**/*.stories.*",
-    // TODO: Remove legacy-components
-    "!src/legacy-components",
-    "!src/theme/components",
   ],
   platform: "browser",
   sourcemap: true,

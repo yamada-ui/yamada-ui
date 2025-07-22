@@ -11,8 +11,7 @@ export const config: StorybookConfig = {
     interactions: false,
   },
   framework: "@storybook/react-vite",
-  // TODO: Remove legacy-components
-  stories: ["../src/!(legacy-components)/**/*.@(mdx|stories.@(tsx))"],
+  stories: ["../src/**/*.@(mdx|stories.@(tsx))"],
   typescript: { reactDocgen: false },
   viteFinal: (config) => {
     if (config.resolve) {

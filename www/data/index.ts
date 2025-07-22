@@ -23,9 +23,9 @@ export function getDocs(locale: string): Doc[] {
 export function getDocMap(locale: string): DocMap {
   switch (locale) {
     case "ja-JP":
-      return ja
+      return ja as DocMap
     default:
-      return en
+      return en as DocMap
   }
 }
 

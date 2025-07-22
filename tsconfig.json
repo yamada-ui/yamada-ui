@@ -11,9 +11,5 @@
     "packages/**/*.cts",
     "eslint.config.ts"
   ],
-  "exclude": [
-    // TODO: Remove legacy-components
-    "packages/react/src/legacy-components/**/*",
-    "packages/react/src/theme/components/**/*"
-  ]
+  "exclude": ["node_modules"]
 }

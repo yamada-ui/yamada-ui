@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Input, InputGroup } from "./"
 
 describe("<Input />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <InputGroup.Root>
         <InputGroup.Element>Hello</InputGroup.Element>

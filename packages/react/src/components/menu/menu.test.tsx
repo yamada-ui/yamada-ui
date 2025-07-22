@@ -41,7 +41,7 @@ const itemsWithCheckboxGroup: Menu.ContentProps["items"] = [
 ]
 
 describe("<Menu />", () => {
-  test("Menu renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Menu.Root defaultOpen>
         <Menu.Trigger>

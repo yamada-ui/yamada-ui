@@ -3,7 +3,7 @@ import { Field } from "."
 import { Input } from "../input"
 
 describe("<Field />", () => {
-  test("Field renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Field.Root />)
   })
 

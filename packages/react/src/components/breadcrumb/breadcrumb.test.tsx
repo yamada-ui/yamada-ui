@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Breadcrumb } from "./"
 
 describe("<Breadcrumb />", () => {
-  test("renders breadcrumb correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Breadcrumb.Root>
         <Breadcrumb.Link href="/">1</Breadcrumb.Link>

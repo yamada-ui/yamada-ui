@@ -2,7 +2,7 @@ import { a11y, act, fireEvent, render } from "#test"
 import { Editable } from "./"
 
 describe("<Editable />", () => {
-  test("Editable renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Editable.Root defaultValue="Some text">
         <Editable.Preview />

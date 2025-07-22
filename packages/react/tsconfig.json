@@ -7,10 +7,5 @@
       "#test": ["./test"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
-  "exclude": [
-    // TODO: Remove legacy-components
-    "src/legacy-components/**/*",
-    "src/theme/components/**/*"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"]
 }

@@ -13,14 +13,5 @@ export default mergeConfig(
         "@": resolve(__dirname, "./src"),
       },
     },
-    test: {
-      coverage: {
-        exclude: [
-          // TODO: Remove legacy-components
-          "src/legacy-components/**",
-        ],
-      },
-      exclude: ["src/legacy-components/**"],
-    },
   }),
 )

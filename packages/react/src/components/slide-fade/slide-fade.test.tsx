@@ -3,7 +3,7 @@ import { useState } from "react"
 import { SlideFade } from "./slide-fade"
 
 describe("<SlideFade />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<SlideFade />)
   })
 

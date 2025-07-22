@@ -3,7 +3,7 @@ import { a11y, render, screen } from "#test"
 import { DataList } from "./"
 
 describe("<DataList />", () => {
-  test("DataList renders correctly", async () => {
+  test("renders component correctly", async () => {
     const items: DataListItemProps[] = [
       { description: "入れ替わりの魔女", term: "白石うらら" },
       { description: "虜の魔女", term: "小田切寧々" },

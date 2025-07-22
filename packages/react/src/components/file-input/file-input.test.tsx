@@ -2,7 +2,7 @@ import { a11y, act, fireEvent, render, screen } from "#test"
 import { FileInput } from "."
 
 describe("<FileInput />", () => {
-  test("FileInput renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<FileInput placeholder="placeholder" />)
   })
 

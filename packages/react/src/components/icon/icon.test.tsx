@@ -3,11 +3,11 @@ import { FaMarkdown } from "react-icons/fa"
 import { Icon } from "./icon"
 
 describe("<Icon />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Icon />)
   })
 
-  test("passes a11y test given a third-party icon", async () => {
+  test("renders component correctly given a third-party icon", async () => {
     await a11y(<Icon as={FaMarkdown} />)
   })
 

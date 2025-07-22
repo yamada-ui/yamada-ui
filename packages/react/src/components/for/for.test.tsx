@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { For } from "."
 
 describe("<For />", () => {
-  test("For renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <For each={["One", "Two", "Three"]}>
         {(item, index) => <div key={index}>{item}</div>}

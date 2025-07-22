@@ -3,7 +3,7 @@ import { useState } from "react"
 import { FadeScale } from "./fade-scale"
 
 describe("<FadeScale />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<FadeScale />)
   })
 

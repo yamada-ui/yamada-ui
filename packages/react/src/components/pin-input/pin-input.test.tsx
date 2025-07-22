@@ -2,7 +2,7 @@ import { a11y, act, render, screen, waitFor } from "#test"
 import { PinInput } from "."
 
 describe("<PinInput />", () => {
-  test("PinInput renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<PinInput.Root />)
   })
 

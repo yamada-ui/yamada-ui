@@ -39,7 +39,7 @@ describe("<Popover />", () => {
     )
   }
 
-  test("renders tag correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Component defaultOpen />)
   })
 

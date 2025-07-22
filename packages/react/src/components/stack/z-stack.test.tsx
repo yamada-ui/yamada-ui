@@ -3,7 +3,7 @@ import { Box } from "../box"
 import { ZStack } from "./z-stack"
 
 describe("<ZStack />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <ZStack>
         <Box>ZStack Item</Box>

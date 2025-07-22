@@ -2,7 +2,7 @@ import { a11y, fireEvent, render, screen } from "#test"
 import { NumberInput } from "."
 
 describe("<NumberInput />", () => {
-  test("NumberInput renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<NumberInput aria-label="Input number" />)
   })
 

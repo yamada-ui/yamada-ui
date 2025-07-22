@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Skeleton, SkeletonCircle, SkeletonText } from "./"
 
 describe("<Skeleton />", () => {
-  test("Skeleton renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <>
         <Skeleton />

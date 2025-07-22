@@ -15,7 +15,7 @@ const TestComponent: FC<TestComponentProps> = (props) => {
 }
 
 describe("<SegmentedControl />", () => {
-  test("SegmentedControl renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<TestComponent />)
   })
 

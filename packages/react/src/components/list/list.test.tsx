@@ -3,7 +3,7 @@ import { BoxIcon } from "../icon"
 import { List } from "./"
 
 describe("<List />", () => {
-  test("List renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <List.Root>
         <List.Item>Item one</List.Item>

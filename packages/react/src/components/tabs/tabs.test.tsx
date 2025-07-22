@@ -20,7 +20,7 @@ const TestComponent: FC<TestComponentProps> = (props) => {
 }
 
 describe("<Tabs />", () => {
-  test("Tabs renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<TestComponent />)
   })
 

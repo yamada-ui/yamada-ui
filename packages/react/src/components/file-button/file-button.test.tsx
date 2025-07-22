@@ -7,7 +7,7 @@ describe("<FileButton />", () => {
     vi.restoreAllMocks()
   })
 
-  test("pass a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<FileButton>Upload</FileButton>)
   })
 

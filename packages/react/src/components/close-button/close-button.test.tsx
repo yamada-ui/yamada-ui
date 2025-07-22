@@ -2,7 +2,7 @@ import { a11y, fireEvent, render, screen } from "#test"
 import { CloseButton } from "./close-button"
 
 describe("<CloseButton />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<CloseButton />)
   })
 

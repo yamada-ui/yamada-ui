@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Airy } from "."
 
 describe("<Airy />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Airy from="ON" to="OFF" />)
   })
 

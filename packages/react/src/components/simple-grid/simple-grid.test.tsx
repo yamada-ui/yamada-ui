@@ -2,7 +2,7 @@ import { a11y, render, screen, waitFor } from "#test"
 import { SimpleGrid } from "./simple-grid"
 
 describe("<SimpleGrid />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<SimpleGrid>GridSimple</SimpleGrid>)
   })
 

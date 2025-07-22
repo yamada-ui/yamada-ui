@@ -6,7 +6,7 @@ import { BoxIcon } from "../icon"
 import { Flip } from "./"
 
 describe("<Flip />", () => {
-  test("passes a11y test", () => {
+  test("renders component correctly", () => {
     a11y(<Flip from="ON" to="OFF" />)
   })
 

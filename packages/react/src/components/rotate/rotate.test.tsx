@@ -5,7 +5,7 @@ import { BoxIcon } from "../icon"
 import { Rotate } from "./"
 
 describe("<Rotate />", () => {
-  test("passes a11y test", () => {
+  test("renders component correctly", () => {
     a11y(<Rotate from="ON" to="OFF" />)
   })
 

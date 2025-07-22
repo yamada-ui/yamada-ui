@@ -155,7 +155,7 @@ export const Readonly: Story = () => {
 }
 
 export const Invalid: Story = () => {
-  const [value, onChange] = useState<number>(15)
+  const [value, onChange] = useState(15)
 
   return (
     <>
@@ -200,9 +200,9 @@ export const ThumbWithTooltip: Story = () => {
 }
 
 export const OnChange: Story = () => {
-  const [value, onChange] = useState<number>(50)
-  const [startValue, onChangeStart] = useState<number>(50)
-  const [endValue, onChangeEnd] = useState<number>(50)
+  const [value, onChange] = useState(50)
+  const [startValue, onChangeStart] = useState(50)
+  const [endValue, onChangeEnd] = useState(50)
 
   return (
     <>

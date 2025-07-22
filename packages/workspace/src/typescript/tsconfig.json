@@ -21,6 +21,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "types": ["vitest/globals"]
-  },
-  "exclude": ["node_modules", "bin", "dist", "coverage", "storybook-static"]
+  }
 }

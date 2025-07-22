@@ -7,5 +7,6 @@
       "#test": ["./test"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+  "exclude": ["node_modules", "trace", "dist", "coverage", "storybook-static"]
 }

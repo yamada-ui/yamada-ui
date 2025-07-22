@@ -10,5 +10,6 @@
     "packages/**/*.mts",
     "packages/**/*.cts",
     "eslint.config.ts"
-  ]
+  ],
+  "exclude": ["node_modules"]
 }

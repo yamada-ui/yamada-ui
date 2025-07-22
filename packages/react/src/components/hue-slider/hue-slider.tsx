@@ -1,3 +1,5 @@
+"use client"
+
 import type { HTMLStyledProps, ThemeProps, WithoutThemeProps } from "../../core"
 import type { HueSliderStyle } from "./hue-slider.style"
 import { useCallback, useMemo } from "react"

@@ -1,3 +1,5 @@
+"use client"
+
 import type { WithoutThemeProps } from "../../core"
 import type { AlphaSliderStyle } from "./alpha-slider.style"
 import { useMemo } from "react"

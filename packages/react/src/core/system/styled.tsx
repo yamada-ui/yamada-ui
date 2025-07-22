@@ -149,7 +149,7 @@ export function createStyled<
     defaultProps,
   })
 
-  const StyledComponent = withEmotionCache(function (
+  const StyledComponent = withEmotionCache<Dict>(function (
     { as: Component = el, asChild, children, ...props },
     cache,
     ref,

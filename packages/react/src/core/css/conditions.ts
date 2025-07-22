@@ -147,6 +147,10 @@ export const attributes = {
    */
   _pressed: "&:is([data-pressed], [aria-pressed=true])",
   /**
+   * The CSS `&:is([data-range])` attribute selector.
+   */
+  _range: "&:is([data-range])",
+  /**
    * The CSS `&[data-reject]` attribute selector.
    */
   _reject: "&[data-reject]",
@@ -637,6 +641,10 @@ export const groupAttributes = {
    */
   _groupPressed: toGroup(attributes._pressed),
   /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is range.
+   */
+  _groupRange: toGroup(attributes._range),
+  /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is read-only.
    */
   _groupReadOnly: toGroup(pseudoClasses._readOnly),
@@ -774,6 +782,10 @@ export const peerAttributes = {
    * Styles to apply when a parent element with `data-peer` or `.peer` is pressed.
    */
   _peerPressed: toPeer(attributes._pressed),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is range.
+   */
+  _peerRange: toPeer(attributes._range),
   /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is read-only.
    */

@@ -1,0 +1,20 @@
+export {
+  SliderMark as Mark,
+  SliderMarks as Marks,
+  SliderPropsContext as PropsContext,
+  SliderRange as Range,
+  SliderRoot as Root,
+  SliderThumb as Thumb,
+  SliderThumbs as Thumbs,
+  SliderTrack as Track,
+  useSliderPropsContext as usePropsContext,
+} from "./slider"
+export type {
+  SliderMarkProps as MarkProps,
+  SliderMarksProps as MarksProps,
+  SliderRangeProps as RangeProps,
+  SliderRootProps as RootProps,
+  SliderThumbProps as ThumbProps,
+  SliderThumbsProps as ThumbsProps,
+  SliderTrackProps as TrackProps,
+} from "./slider"

@@ -42,6 +42,9 @@ export default {
     "Loading...": "読み込み中...",
     "{value} percent": "{value}パーセント",
   },
+  slider: {
+    "Slider thumb": "スライダーのつまみ",
+  },
   stat: {
     "Decreased by": "減少",
     "Increased by": "増加",

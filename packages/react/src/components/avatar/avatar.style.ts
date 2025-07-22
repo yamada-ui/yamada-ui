@@ -36,7 +36,7 @@ export const avatarStyle = defineComponentSlotStyle({
     /**
      * The shape of the component
      *
-     * @default circle
+     * @default 'circle'
      */
     shape: {
       circle: {

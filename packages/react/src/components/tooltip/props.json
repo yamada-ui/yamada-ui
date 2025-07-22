@@ -118,7 +118,7 @@
       "required": false
     },
     "placement": {
-      "type": "PopperPlacement",
+      "type": "Direction",
       "defaultValue": "\"start\"",
       "description": "The placement of the popper relative to its reference.",
       "required": false

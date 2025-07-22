@@ -16,12 +16,12 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "area": {
-      "type": "GridArea | [GridArea | ({ _peerAccept?: GridArea | [GridArea | (... & { base?: GridArea | [GridArea | (... & ...), GridArea | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: GridArea | ... 2 more ... | undefined; }), GridArea | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: Gri...",
+      "type": "GridArea | [GridArea | ({ _peerAccept?: GridArea | [GridArea | (... & { base?: GridArea | [GridArea | (... & ...), GridArea | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: GridArea | ... 2 more ... | undefined; }), GridArea | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: Gri...",
       "description": "The CSS `grid-area` property.",
       "required": false
     },
@@ -31,7 +31,7 @@
       "required": false
     },
     "autoFlow": {
-      "type": "GridAutoFlow | [GridAutoFlow | ({ _peerAccept?: GridAutoFlow | [GridAutoFlow | (... & { base?: GridAutoFlow | [...] | (... & ...) | undefined; ... 4 more ...; xl?: GridAutoFlow | ... 2 more ... | undefined; }), GridAutoFlow | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: GridAutoFlow | ......",
+      "type": "GridAutoFlow | [GridAutoFlow | ({ _peerAccept?: GridAutoFlow | [GridAutoFlow | (... & { base?: GridAutoFlow | [...] | (... & ...) | undefined; ... 4 more ...; xl?: GridAutoFlow | ... 2 more ... | undefined; }), GridAutoFlow | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: GridAutoFlow | ......",
       "description": "The CSS `grid-auto-flow` property.",
       "required": false
     },
@@ -41,7 +41,7 @@
       "required": false
     },
     "column": {
-      "type": "GridColumn | [GridColumn | ({ _peerAccept?: GridColumn | [GridColumn | (... & { base?: GridColumn | [GridColumn | (... & ...), GridColumn | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: GridColumn | ... 2 more ... | undefined; }), GridColumn | (... & { ...; })] | { ...; } | undefined; ... 175 more ......",
+      "type": "GridColumn | [GridColumn | ({ _peerAccept?: GridColumn | [GridColumn | (... & { base?: GridColumn | [GridColumn | (... & ...), GridColumn | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: GridColumn | ... 2 more ... | undefined; }), GridColumn | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
       "description": "The CSS `grid-column` property.",
       "required": false
     },
@@ -56,12 +56,12 @@
       "required": false
     },
     "row": {
-      "type": "GridRow | [GridRow | ({ _peerAccept?: GridRow | [GridRow | (... & { base?: GridRow | [GridRow | (... & ...), GridRow | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: GridRow | ... 2 more ... | undefined; }), GridRow | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: GridRow | .....",
+      "type": "GridRow | [GridRow | ({ _peerAccept?: GridRow | [GridRow | (... & { base?: GridRow | [GridRow | (... & ...), GridRow | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: GridRow | ... 2 more ... | undefined; }), GridRow | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: GridRow | .....",
       "description": "The CSS `grid-row` property.",
       "required": false
     },
     "templateAreas": {
-      "type": "GridTemplateAreas | [GridTemplateAreas | ({ _peerAccept?: GridTemplateAreas | [GridTemplateAreas | (... & { ...; }), GridTemplateAreas | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: GridTemplateAreas | ... 2 more ... | undefined; } & { ...; }), GridTemplateAreas | ({ ...; } & { ...; })] |...",
+      "type": "GridTemplateAreas | [GridTemplateAreas | ({ _peerAccept?: GridTemplateAreas | [GridTemplateAreas | (... & { ...; }), GridTemplateAreas | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: GridTemplateAreas | ... 2 more ... | undefined; } & { ...; }), GridTemplateAreas | ({ ...; } & { ...; })] |...",
       "description": "The CSS `grid-template-areas` property.",
       "required": false
     },

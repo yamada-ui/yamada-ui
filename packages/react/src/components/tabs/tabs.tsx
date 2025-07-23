@@ -69,7 +69,7 @@ export { TabsPropsContext, useTabsPropsContext }
  *
  * @see https://yamada-ui.com/components/tabs
  */
-export const TabsRoot: FC<TabsRootProps> = withProvider(
+export const TabsRoot = withProvider<"div", TabsRootProps, "orientation">(
   ({
     children,
     items,

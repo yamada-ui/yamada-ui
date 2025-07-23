@@ -84,7 +84,7 @@ export { CollapsePropsContext, useCollapsePropsContext }
  *
  * @see https://yamada-ui.com/components/collapse
  */
-export const Collapse = withContext(
+export const Collapse = withContext<"div", CollapseProps>(
   ({
     style,
     animationOpacity = true,

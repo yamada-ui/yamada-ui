@@ -19,13 +19,17 @@ function factory() {
   const cache = new Map<DOMElement, ComponentType<any>>()
 
   return new Proxy(styled, {
-    apply: (_target, _thisArg, [el, options]: [DOMElement, StyledOptions]) => {
+    apply: function (
+      _target,
+      _thisArg,
+      [el, options]: [DOMElement, StyledOptions],
+    ) {
       const component = styled(el, options) as ComponentType<any>
 
       return _motion.create(component)
     },
 
-    get: (_target, el: DOMElement) => {
+    get: function (_target, el: DOMElement) {
       if (!cache.has(el)) {
         const component = styled(el) as ComponentType<any>
 

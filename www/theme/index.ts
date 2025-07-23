@@ -3,6 +3,11 @@ import { defaultTheme, defineTheme, merge } from "@yamada-ui/react"
 
 export const theme = defineTheme({
   ...defaultTheme,
+  fonts: {
+    body: "'Inter', 'Inter Fallback'",
+    heading: "'Inter', 'Inter Fallback'",
+    mono: "'Geist Mono', 'Geist Mono Fallback'",
+  },
   styles: {
     ...defaultTheme.styles,
     globalStyle: merge<CSSObject>(defaultTheme.styles.globalStyle, {

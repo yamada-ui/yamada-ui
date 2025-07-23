@@ -42,6 +42,9 @@ export default {
     "Loading...": "Loading...",
     "{value} percent": "{value} percent",
   },
+  slider: {
+    "Slider thumb": "Slider thumb",
+  },
   stat: {
     "Decreased by": "Decreased by",
     "Increased by": "Increased by",

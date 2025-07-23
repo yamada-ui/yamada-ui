@@ -1,7 +1,6 @@
 "use client"
 
-import type { FC } from "react"
-import type { ThemeProps, WithoutThemeProps } from "../../core"
+import type { Component, ThemeProps, WithoutThemeProps } from "../../core"
 import type { GroupProps } from "../group"
 import type { ButtonProps } from "./button"
 import type { ButtonStyle } from "./button.style"
@@ -21,13 +20,13 @@ export interface ButtonGroupProps
   disabled?: boolean
 }
 
-export const ButtonGroup: FC<ButtonGroupProps> = ({
+export const ButtonGroup = (({
   size,
   variant,
   attached,
   disabled,
   ...rest
-}) => {
+}: ButtonGroupProps) => {
   const context = useMemo<ButtonProps>(
     () => ({
       size,
@@ -45,4 +44,4 @@ export const ButtonGroup: FC<ButtonGroupProps> = ({
       </IconButtonPropsContext>
     </ButtonPropsContext>
   )
-}
+}) as Component<"div", ButtonGroupProps>

@@ -1,6 +1,6 @@
 "use client"
 
-import type { FC, Key } from "react"
+import type { Key } from "react"
 import type { ThemeProps } from "../../core"
 import type { HTMLMotionProps } from "../motion"
 import type { RippleStyle } from "./ripple.style"
@@ -46,7 +46,7 @@ export { RipplePropsContext, useRipplePropsContext }
  *
  * @see https://yamada-ui.com/components/ripple
  */
-export const Ripple: FC<RippleProps> = withContext(
+export const Ripple = withContext<"span", RippleProps>(
   ({
     style,
     color = "currentColor",

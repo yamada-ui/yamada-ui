@@ -9,7 +9,7 @@ export const inputElementStyle = defineComponentStyle({
     height: "full",
     justifyContent: "center",
     position: "absolute",
-    zIndex: 2,
+    zIndex: "kurillin",
   },
 
   props: {

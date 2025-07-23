@@ -16,7 +16,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -38,17 +38,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | ... 6 more ... | (... & { ...; }), \"2xl\" | ... 6 more ... | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: \"2xl...",
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | ... 6 more ... | (... & { ...; }), \"2xl\" | ... 6 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl...",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 175 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
       "description": "The variant of the component.",
       "required": false
     },
@@ -123,7 +123,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -145,7 +145,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -167,17 +167,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { ...; }), \"2xl\" | ... 5 more ... | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: \"2xl\" | .....",
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { ...; }), \"2xl\" | ... 5 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl\" | .....",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?...",
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
       "description": "The variant of the component.",
       "required": false
     },
@@ -187,7 +187,7 @@
       "required": true
     },
     "align": {
-      "type": "AlignItems | [AlignItems | ({ _peerAccept?: AlignItems | [AlignItems | (... & { base?: AlignItems | [AlignItems | (... & ...), AlignItems | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: AlignItems | ... 2 more ... | undefined; }), AlignItems | (... & { ...; })] | { ...; } | undefined; ... 175 more ......",
+      "type": "AlignItems | [AlignItems | ({ _peerAccept?: AlignItems | [AlignItems | (... & { base?: AlignItems | [AlignItems | (... & ...), AlignItems | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: AlignItems | ... 2 more ... | undefined; }), AlignItems | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
       "description": "The CSS `align-items` property.",
       "required": false
     },
@@ -230,7 +230,7 @@
       "required": false
     },
     "direction": {
-      "type": "FlexDirection | [FlexDirection | ({ _peerAccept?: FlexDirection | [FlexDirection | (... & { base?: FlexDirection | [...] | (... & ...) | undefined; ... 4 more ...; xl?: FlexDirection | ... 2 more ... | undefined; }), FlexDirection | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: FlexDirecti...",
+      "type": "FlexDirection | [FlexDirection | ({ _peerAccept?: FlexDirection | [FlexDirection | (... & { base?: FlexDirection | [...] | (... & ...) | undefined; ... 4 more ...; xl?: FlexDirection | ... 2 more ... | undefined; }), FlexDirection | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: FlexDirecti...",
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
@@ -278,7 +278,7 @@
       "required": false
     },
     "justify": {
-      "type": "JustifyContent | [JustifyContent | ({ _peerAccept?: JustifyContent | [JustifyContent | (... & { ...; }), JustifyContent | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: JustifyContent | ... 2 more ... | undefined; } & { ...; }), JustifyContent | ({ ...; } & { ...; })] | ({ ...; } & { ...; })",
+      "type": "JustifyContent | [JustifyContent | ({ _peerAccept?: JustifyContent | [JustifyContent | (... & { ...; }), JustifyContent | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: JustifyContent | ... 2 more ... | undefined; } & { ...; }), JustifyContent | ({ ...; } & { ...; })] | ({ ...; } & { ...; })",
       "description": "The CSS `justify-content` property.",
       "required": false
     },
@@ -299,7 +299,7 @@
       "required": false
     },
     "shrink": {
-      "type": "FlexShrink | [FlexShrink | ({ _peerAccept?: FlexShrink | [FlexShrink | (... & { base?: FlexShrink | [FlexShrink | (... & ...), FlexShrink | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexShrink | ... 2 more ... | undefined; }), FlexShrink | (... & { ...; })] | { ...; } | undefined; ... 175 more ......",
+      "type": "FlexShrink | [FlexShrink | ({ _peerAccept?: FlexShrink | [FlexShrink | (... & { base?: FlexShrink | [FlexShrink | (... & ...), FlexShrink | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexShrink | ... 2 more ... | undefined; }), FlexShrink | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
       "description": "The CSS `flex-shrink` property.",
       "required": false
     },
@@ -327,7 +327,7 @@
       "required": false
     },
     "wrap": {
-      "type": "FlexWrap | [FlexWrap | ({ _peerAccept?: FlexWrap | [FlexWrap | (... & { base?: FlexWrap | [FlexWrap | (... & ...), FlexWrap | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexWrap | ... 2 more ... | undefined; }), FlexWrap | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: Fle...",
+      "type": "FlexWrap | [FlexWrap | ({ _peerAccept?: FlexWrap | [FlexWrap | (... & { base?: FlexWrap | [FlexWrap | (... & ...), FlexWrap | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexWrap | ... 2 more ... | undefined; }), FlexWrap | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: Fle...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }
@@ -349,7 +349,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -371,7 +371,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 175 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },

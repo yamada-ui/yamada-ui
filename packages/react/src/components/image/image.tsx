@@ -1,6 +1,5 @@
 "use client"
 
-import type { FC } from "react"
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ImageStyle } from "./image.style"
 import { createComponent } from "../../core"
@@ -28,7 +27,7 @@ export { ImagePropsContext, useImagePropsContext }
  *
  * @see https://yamada-ui.com/components/image
  */
-export const Image: FC<ImageProps> = withContext("img")(
-  undefined,
-  ({ fit, ...rest }) => ({ objectFit: fit, ...rest }),
-)
+export const Image = withContext("img")(undefined, ({ fit, ...rest }) => ({
+  objectFit: fit,
+  ...rest,
+}))

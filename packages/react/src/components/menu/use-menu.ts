@@ -2,11 +2,11 @@
 
 import type { KeyboardEvent, MouseEvent, RefObject } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
-import type { Descendant, Descendants } from "../../hooks/use-descendant"
+import type { Descendant, Descendants } from "../../hooks/use-descendants"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback, useId, useRef } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { createDescendant } from "../../hooks/use-descendant"
+import { createDescendants } from "../../hooks/use-descendants"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import {
   ariaAttr,
@@ -17,6 +17,7 @@ import {
   handlerAll,
   isArray,
   isString,
+  isTruthyDataAttr,
   mergeRefs,
   noop,
   runKeyAction,
@@ -35,7 +36,7 @@ const {
   useDescendant: useMenuDescendant,
   useDescendantRegister: useMenuDescendantRegister,
   useDescendants: useMenuDescendants,
-} = createDescendant<HTMLDivElement, MenuDescendantProps>()
+} = createDescendants<HTMLDivElement, MenuDescendantProps>()
 
 export { MenuDescendantsContext, useMenuDescendant, useMenuDescendants }
 
@@ -347,9 +348,7 @@ export const useSubMenu = ({
 
     if (!node) return false
 
-    const dataDisabled =
-      node.getAttribute("data-disabled") === "" ||
-      node.getAttribute("data-disabled") === "true"
+    const dataDisabled = isTruthyDataAttr(node.getAttribute("data-disabled"))
 
     return dataDisabled
   }, [])
@@ -359,9 +358,7 @@ export const useSubMenu = ({
 
     if (!node) return false
 
-    const ariaDisabled =
-      node.getAttribute("aria-disabled") === "" ||
-      node.getAttribute("aria-disabled") === "true"
+    const ariaDisabled = isTruthyDataAttr(node.getAttribute("aria-disabled"))
 
     return ariaDisabled
   }, [])
@@ -536,7 +533,7 @@ export const useMenuItem = ({
   value,
   ...rest
 }: UseMenuItemProps) => {
-  const trigger = dataTrigger === "" || dataTrigger === "true"
+  const trigger = isTruthyDataAttr(dataTrigger)
   const { subMenu, subMenuDirection, onActiveDescendant, onClose, onSelect } =
     useMenuContext()
   const { onCloseRef } = useMainMenuContext() ?? {}

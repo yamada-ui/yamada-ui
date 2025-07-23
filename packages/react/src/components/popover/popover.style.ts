@@ -35,7 +35,7 @@ export const popoverStyle = defineComponentSlotStyle({
       justifyContent: "flex-start",
     },
     positioner: {
-      zIndex: "guldo",
+      zIndex: "recoome",
     },
   },
 

@@ -33,7 +33,7 @@ export const layerStyles = defineStyles.layerStyle({
   },
   panel: {
     bg: "bg.panel",
-    borderColor: "border.subtle",
+    borderColor: "border",
     borderWidth: "1px",
   },
   readOnly: {

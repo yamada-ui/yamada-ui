@@ -19,6 +19,11 @@ export interface ClientOnlyProps {
   fallback?: ReactNode
 }
 
+/**
+ * `ClientOnly` is a component that renders its children only on the client side.
+ *
+ * @see https://yamada-ui.com/components/client-only
+ */
 export const ClientOnly: FC<ClientOnlyProps> = (props) => {
   const { children, fallback } = props
   const mounted = useMounted({ state: true })

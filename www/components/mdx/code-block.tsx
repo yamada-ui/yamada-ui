@@ -1,5 +1,5 @@
 import type { BoxProps, GridProps } from "@yamada-ui/react"
-import { Code, Flex, Grid, Tabs, Text } from "@yamada-ui/react"
+import { Box, Code, Flex, Grid, Tabs, Text } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import React from "react"
 import { codeToHtml } from "@/libs/shiki"
@@ -43,11 +43,21 @@ export function CodeBlock({
           </Tabs.List>
 
           <Tabs.Panel index={0}>
-            {client ? (
-              <ClientOnly lang={lang} code={children} functional={functional} />
-            ) : (
-              <ServerOnly lang={lang} code={children} functional={functional} />
-            )}
+            <Box borderWidth="1px" p="{space}" rounded="l2">
+              {client ? (
+                <ClientOnly
+                  lang={lang}
+                  code={children}
+                  functional={functional}
+                />
+              ) : (
+                <ServerOnly
+                  lang={lang}
+                  code={children}
+                  functional={functional}
+                />
+              )}
+            </Box>
           </Tabs.Panel>
           <Tabs.Panel index={1}>
             <Pre lang={lang}>{children}</Pre>
@@ -83,7 +93,7 @@ export function CodeBlock({
           alignItems="center"
           bg="bg.panel"
           borderBottomWidth="1px"
-          borderColor="border.subtle"
+          borderColor="border"
           color="fg.emphasized"
           h="12"
           px="4"

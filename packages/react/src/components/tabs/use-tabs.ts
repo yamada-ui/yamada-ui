@@ -4,7 +4,7 @@ import type { KeyboardEvent } from "react"
 import type { HTMLProps, Orientation, PropGetter } from "../../core"
 import { useCallback, useId, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { createDescendant } from "../../hooks/use-descendant"
+import { createDescendants } from "../../hooks/use-descendants"
 import {
   createContext,
   cx,
@@ -19,7 +19,7 @@ const {
   DescendantsContext: TabDescendantsContext,
   useDescendant: useTabDescendant,
   useDescendants: useTabDescendants,
-} = createDescendant<HTMLButtonElement>()
+} = createDescendants<HTMLButtonElement>()
 
 export { TabDescendantsContext, useTabDescendant, useTabDescendants }
 
@@ -27,7 +27,7 @@ const {
   DescendantsContext: TabPanelDescendantsContext,
   useDescendant: useTabPanelDescendant,
   useDescendants: useTabPanelDescendants,
-} = createDescendant<HTMLDivElement>()
+} = createDescendants<HTMLDivElement>()
 
 export {
   TabPanelDescendantsContext,

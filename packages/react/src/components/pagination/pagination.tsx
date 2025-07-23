@@ -115,7 +115,11 @@ export { PaginationPropsContext, usePaginationPropsContext }
  *
  * @see https://yamada-ui.com/components/pagination
  */
-export const PaginationRoot = withProvider(
+export const PaginationRoot = withProvider<
+  "nav",
+  PaginationRootProps,
+  "size" | "variant"
+>(
   ({
     size,
     variant,

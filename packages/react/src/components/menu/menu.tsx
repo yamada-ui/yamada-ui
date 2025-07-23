@@ -2,13 +2,13 @@
 
 import type { FC, ReactElement, ReactNode } from "react"
 import type {
+  Direction,
   GenericsComponent,
   HTMLProps,
   HTMLStyledProps,
   ThemeProps,
   WithoutThemeProps,
 } from "../../core"
-import type { PopperPlacement } from "../../hooks/use-popper"
 import type { MenuStyle } from "./menu.style"
 import type {
   MenuOptionGroupType,
@@ -93,7 +93,7 @@ export interface MenuRootProps
    *
    * @default 'end-start'
    */
-  placement?: PopperPlacement
+  placement?: Direction
 }
 
 const {

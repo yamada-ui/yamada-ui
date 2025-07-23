@@ -1,9 +1,9 @@
 "use client"
 
 import type { FocusEvent, KeyboardEvent, RefObject } from "react"
-import type { PropGetter } from "../../core"
+import type { Direction, PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
-import type { PopperPlacement, UsePopperProps } from "../../hooks/use-popper"
+import type { UsePopperProps } from "../../hooks/use-popper"
 import { useCallback, useEffect, useId, useRef } from "react"
 import { useEnvironment } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
@@ -83,7 +83,7 @@ export interface UsePopoverProps
    *
    * @default 'end'
    */
-  placement?: PopperPlacement
+  placement?: Direction
   /**
    * Update the position of the floating element, re-rendering the component if required.
    */

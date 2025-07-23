@@ -33,7 +33,7 @@ export { CloseButtonPropsContext, useCloseButtonPropsContext }
  *
  * @see https://yamada-ui.com/components/close-button
  */
-export const CloseButton = withContext(IconButton)(
+export const CloseButton = withContext<"button", CloseButtonProps>(IconButton)(
   undefined,
   ({ children, icon, ...rest }) => {
     const { t } = useI18n("closeButton")

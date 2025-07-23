@@ -28,8 +28,10 @@ export { ScrollAreaPropsContext, useScrollAreaPropsContext }
  *
  * @see https://yamada-ui.com/components/scroll-area
  */
-export const ScrollArea = withContext(({ children, ...rest }) => {
-  const { getRootProps } = useScrollArea(rest)
+export const ScrollArea = withContext<"div", ScrollAreaProps>(
+  ({ children, ...rest }) => {
+    const { getRootProps } = useScrollArea(rest)
 
-  return <styled.div {...getRootProps()}>{children}</styled.div>
-})()
+    return <styled.div {...getRootProps()}>{children}</styled.div>
+  },
+)()

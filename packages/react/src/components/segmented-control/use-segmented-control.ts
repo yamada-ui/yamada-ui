@@ -5,7 +5,7 @@ import type { HTMLProps, Orientation, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useId } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { createDescendant } from "../../hooks/use-descendant"
+import { createDescendants } from "../../hooks/use-descendants"
 import {
   ariaAttr,
   createContext,
@@ -29,7 +29,7 @@ const {
   DescendantsContext: SegmentedControlDescendantsContext,
   useDescendant: useSegmentedControlDescendant,
   useDescendants: useSegmentedControlDescendants,
-} = createDescendant<HTMLInputElement>()
+} = createDescendants<HTMLInputElement>()
 
 export {
   SegmentedControlDescendantsContext,

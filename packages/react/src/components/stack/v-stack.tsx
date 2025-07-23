@@ -24,6 +24,6 @@ export { useVStackPropsContext, VStackPropsContext }
  *
  * @see https://yamada-ui.com/components/stack
  */
-export const VStack = withContext(Stack)(undefined, {
+export const VStack = withContext<"div", VStackProps>(Stack)(undefined, {
   direction: "column",
 })

@@ -1,4 +1,5 @@
 import type { RefObject } from "react"
+import type { PortalProps } from "../../components/portal"
 import type { DefaultTheme } from "../../theme"
 import type { AnyString, Booleanish, Dict } from "../../utils"
 import type {
@@ -121,6 +122,10 @@ export interface NoticeConfig {
    * @default 'start-center'
    */
   placement?: NoticePlacement
+  /**
+   * The props of the notice provider portal.
+   */
+  portalProps?: PortalProps
 }
 
 export interface SnacksConfig {

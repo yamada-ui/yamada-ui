@@ -1,17 +1,19 @@
-import type { Meta } from "@storybook/react"
+import type { Meta, StoryFn } from "@storybook/react-vite"
 import { useRef } from "react"
 import { Button } from "../button"
 import { Center } from "../center"
-import { Wrap } from "../flex"
 import { Notice, useNotice } from "./"
+import { Wrap } from "../wrap"
 
-const meta: Meta = {
+type Story = StoryFn<typeof useNotice>
+
+const meta: Meta<typeof useNotice> = {
   title: "Hooks / useNotice",
 }
 
 export default meta
 
-export const Basic = () => {
+export const Basic: Story = () => {
   const notice = useNotice()
 
   return (
@@ -30,7 +32,7 @@ export const Basic = () => {
   )
 }
 
-export const WithDuration = () => {
+export const WithDuration: Story = () => {
   const notice = useNotice()
 
   return (
@@ -50,7 +52,7 @@ export const WithDuration = () => {
   )
 }
 
-export const KeepStay = () => {
+export const KeepStay: Story = () => {
   const notice = useNotice()
 
   return (
@@ -70,7 +72,7 @@ export const KeepStay = () => {
   )
 }
 
-export const WithVariant = () => {
+export const WithVariant: Story = () => {
   const notice = useNotice()
 
   return (
@@ -140,7 +142,7 @@ export const WithVariant = () => {
   )
 }
 
-export const WithLoadingVariant = () => {
+export const WithLoadingVariant: Story = () => {
   const notice = useNotice()
 
   return (
@@ -206,7 +208,7 @@ export const WithLoadingVariant = () => {
   )
 }
 
-export const WithStatus = () => {
+export const WithStatus: Story = () => {
   const notice = useNotice()
 
   return (
@@ -276,7 +278,7 @@ export const WithStatus = () => {
   )
 }
 
-export const WithColorScheme = () => {
+export const WithColorScheme: Story = () => {
   const notice = useNotice({
     variant: "island",
   })
@@ -340,7 +342,7 @@ export const WithColorScheme = () => {
   )
 }
 
-export const WithPlacement = () => {
+export const WithPlacement: Story = () => {
   const notice = useNotice()
 
   return (
@@ -423,7 +425,7 @@ export const WithPlacement = () => {
   )
 }
 
-export const WithClosable = () => {
+export const WithClosable: Story = () => {
   const notice = useNotice()
 
   return (
@@ -444,7 +446,7 @@ export const WithClosable = () => {
   )
 }
 
-export const WithCloseButton = () => {
+export const WithCloseButton: Story = () => {
   const notice = useNotice()
 
   return (
@@ -464,9 +466,7 @@ export const WithCloseButton = () => {
         <Button
           onClick={() =>
             notice({
-              closeButton: (notice) => (
-                <Notice.CloseButton variant="outline" noticeId={notice.id} />
-              ),
+              closeButton: () => <Notice.CloseButton variant="outline" />,
               description: "オッス！オラ悟空！",
               title: "孫悟空",
             })
@@ -505,7 +505,7 @@ export const OnAutoClose = () => {
 
 export const OnDismiss = () => {
   const notice = useNotice({
-    onDismiss(notice) {
+    onClose(notice) {
       console.log("Dismissed", notice.id)
     },
   })
@@ -539,11 +539,11 @@ export const UseDismiss = () => {
   }
 
   const onDismiss = () => {
-    notice.dismiss()
+    notice.close()
   }
 
   const onDismissAll = () => {
-    notice.dismissAll()
+    notice.closeAll()
   }
 
   return (
@@ -622,8 +622,8 @@ export const CustomComponent = () => {
             top="50%"
             translateY="-50%"
             onClick={() => {
-              if (notice.dismiss && notice.id) {
-                notice.dismiss(notice.id)
+              if (notice.close && notice.id) {
+                notice.close(notice.id)
               }
             }}
           />

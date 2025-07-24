@@ -14,7 +14,7 @@ export const Basic = () => {
   const config = merge(defaultConfig, {
     notice: {
       options: {
-        limit: 3,
+        limit: 10,
         placement: "bottom-right",
       },
     },

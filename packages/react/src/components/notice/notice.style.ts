@@ -20,6 +20,9 @@ export const noticeStyle = defineComponentSlotStyle({
     title: {
       lineClamp: 1,
     },
+    content: {
+      flex: 1,
+    },
   },
 })
 

@@ -1,5 +1,5 @@
 import type { ExternalToast } from "sonner"
-import type { CSSObject, NoticeConfig } from "../../core"
+import type { CSSObject, HTMLStyledProps, NoticeConfig } from "../../core"
 import type {
   AlertDescriptionProps,
   AlertIconProps,
@@ -7,33 +7,65 @@ import type {
   AlertRootProps,
   AlertTitleProps,
 } from "../alert"
-import type { CloseButtonProps } from "../button"
-import { useCallback } from "react"
+import type { CloseButtonProps } from "../close-button"
+import { createContext, useCallback, useContext } from "react"
 import { toast } from "sonner"
-import { ui } from "../../core"
+import { styled } from "../../core"
 import { handlerAll, isFunction } from "../../utils"
 import { Alert } from "../alert"
-import { CloseButton } from "../button"
-import { useNoticeContext, withContext } from "./notice-provider"
-import { mapPlacementToPosition } from "./notice-provider"
+import { CloseButton } from "../close-button"
+import {
+  mapPlacementToPosition,
+  useNoticeContext,
+  withContext,
+} from "./notice-provider"
+
+/**
+ * Type for notice id, used throughout the notice system.
+ */
+export type NoticeId = number | string;
+
+/**
+ * @private
+ * Context to provide the current notice's id and close functions to children.
+ * Used to avoid prop drilling for NoticeCloseButton and similar components.
+ */
+interface NoticeItemContextValue {
+  id?: NoticeId
+  close?: (id: NoticeId) => NoticeId | undefined
+  closeAll?: () => void
+}
+
+const NoticeItemContext = createContext<NoticeItemContextValue | undefined>(
+  undefined,
+)
+
+/**
+ * @private
+ * Hook to access the current notice's context (id, close, closeAll).
+ * Returns undefined if not inside a NoticeItemContext provider.
+ */
+const useNoticeItemContext = (): NoticeItemContextValue | undefined => {
+  return useContext(NoticeItemContext)
+}
 
 export interface NoticeExtraProps {
   /**
    * The id of the notice.
    */
-  id?: number | string
+  id?: NoticeId
+  /**
+   * Function to close one or the most recent toast.
+   */
+  close?: (id: NoticeId) => NoticeId | undefined
+  /**
+   * Function to close all toasts.
+   */
+  closeAll?: () => void
   /**
    * The description of the notice.
    */
   description?: React.ReactNode
-  /**
-   * Function to dismiss one or the most recent toast.
-   */
-  dismiss?: (id: number | string) => number | string | undefined
-  /**
-   * Function to dismiss all toasts.
-   */
-  dismissAll?: () => void
   /**
    * The title of the notice.
    */
@@ -78,9 +110,9 @@ export interface UseNoticeOptions
    */
   onAutoClose?: (notice: NoticeExtraProps) => void
   /**
-   * A function that is called when the notice is dismissed.
+   * A function that is called when the notice is closed.
    */
-  onDismiss?: (notice: NoticeExtraProps) => void
+  onClose?: (notice: NoticeExtraProps) => void
 }
 
 export interface NoticeOptions
@@ -88,218 +120,240 @@ export interface NoticeOptions
     UseNoticeOptions {}
 
 export interface NoticeFunction {
-  (props?: NoticeOptions): number | string
+  (props?: NoticeOptions): NoticeId
   /**
-   * Dismiss one or the most recent notice.
-   * @param id Optional id of the notice to dismiss
+   * Close one or the most recent notice.
+   * @param id Optional id of the notice to close
    */
-  dismiss: (id?: NoticeExtraProps["id"]) => number | string | undefined
+  close: (id?: NoticeId) => NoticeId | undefined
   /**
-   * Dismiss all notices.
+   * Close all notices.
    */
-  dismissAll: () => void
+  closeAll: () => void
   /**
    * Update an existing notice with new properties.
    * @param id The id of the notice to update
    * @param props New properties to update the notice with
    */
-  update: (id: number | string, props: Partial<NoticeOptions>) => void
-  _call: (props: NoticeOptions) => number | string
+  update: (id: NoticeId, props: Partial<NoticeOptions>) => void
+  _call: (props: NoticeOptions) => NoticeId
+}
+
+/**
+ * @private
+ * Returns a NoticeItemContext.Provider with the correct value.
+ */
+function withNoticeItemContext(
+  id: NoticeId,
+  close: (id?: NoticeId) => NoticeId | undefined,
+  closeAll: () => void,
+  children: React.ReactNode,
+) {
+  return (
+    <NoticeItemContext.Provider value={{ id, close, closeAll }}>
+      {children}
+    </NoticeItemContext.Provider>
+  );
 }
 
 export const useNotice = (options?: NoticeOptions): NoticeFunction => {
   const {
-    id: useNoticeId,
-    style: useNoticeStyle,
-    colorScheme: useNoticeColorScheme,
-    variant: useNoticeVariant,
-    closable: useNoticeClosable = true,
-    closeButton: useNoticeCloseButton,
-    component: useNoticeComponent,
-    description: useNoticeDescription,
-    duration: useNoticeDuration,
-    icon: useNoticeIcon,
-    limit: useNoticeLimit = 3,
-    placement: useNoticePlacement = "start-center",
-    status: useNoticeStatus,
-    title: useNoticeTitle,
-    onAutoClose: useNoticeOnAutoClose,
-    onDismiss: useNoticeOnDismiss,
+    id: defaultId,
+    style: defaultStyle,
+    colorScheme: defaultColorScheme,
+    variant: defaultVariant,
+    closable: defaultClosable = true,
+    closeButton: defaultCloseButton,
+    component: defaultComponent,
+    description: defaultDescription,
+    duration: defaultDuration,
+    icon: defaultIcon,
+    limit: defaultLimit = 3,
+    placement: defaultPlacement = "start-center",
+    status: defaultStatus,
+    title: defaultTitle,
+    onAutoClose: defaultOnAutoClose,
+    onClose: defaultOnClose,
   } = options ?? {}
 
   const { placementRef, onChangeLimit } = useNoticeContext()
-
-  const noticeOnAutoClose = useNoticeOnAutoClose
-  const noticeOnDismiss = useNoticeOnDismiss
-  const noticeComponent = useNoticeComponent
 
   const onAutoClose = useCallback(
     (
       id: NoticeExtraProps["id"],
       description: NoticeExtraProps["description"],
       title: NoticeExtraProps["title"],
-      hookOnAutoClose?: (info: NoticeExtraProps) => void,
+      onAutoCloseProp?: (info: NoticeExtraProps) => void,
     ) => {
       const info = {
         id,
         description,
         title,
       }
-      if (hookOnAutoClose) {
-        hookOnAutoClose(info)
+      if (onAutoCloseProp) {
+        onAutoCloseProp(info)
       }
-      if (noticeOnAutoClose) {
-        noticeOnAutoClose(info)
+      if (defaultOnAutoClose) {
+        defaultOnAutoClose(info)
       }
     },
-    [noticeOnAutoClose],
+    [defaultOnAutoClose],
   )
 
-  const onDismiss = useCallback(
+  const onClose = useCallback(
     (
       id: NoticeExtraProps["id"],
       description: NoticeExtraProps["description"],
       title: NoticeExtraProps["title"],
-      hookOnDismiss?: (info: NoticeExtraProps) => void,
+      onCloseProp?: (info: NoticeExtraProps) => void,
     ) => {
       const info = {
         id,
         description,
         title,
       }
-      if (hookOnDismiss) {
-        hookOnDismiss(info)
+      if (onCloseProp) {
+        onCloseProp(info)
       }
-      if (noticeOnDismiss) {
-        noticeOnDismiss(info)
+      if (defaultOnClose) {
+        defaultOnClose(info)
       }
     },
-    [noticeOnDismiss],
+    [defaultOnClose],
   )
 
-  const noticeFn = function (specificProps?: NoticeOptions): number | string {
+  const noticeFn = function (specificProps?: NoticeOptions): NoticeId {
     if (specificProps) {
       return noticeFn._call({ ...options, ...specificProps })
     }
     return noticeFn._call(options ?? {})
   } as NoticeFunction
 
-  noticeFn._call = (callProps: NoticeOptions): number | string => {
+  noticeFn._call = (callProps: NoticeOptions): NoticeId => {
     const {
-      id: hookId,
-      style: hookStyle,
-      colorScheme: hookColorScheme,
-      variant: hookVariant,
-      closable: hookClosable,
-      closeButton: hookCloseButton,
-      component: hookComponent,
-      description: hookDescription,
-      duration: hookDuration,
-      icon: hookIcon,
-      limit: hookLimit,
-      placement: hookPlacement,
-      status: hookStatus,
-      title: hookTitle,
-      onAutoClose: hookOnAutoClose,
-      onDismiss: hookOnDismiss,
+      id,
+      style,
+      colorScheme,
+      variant,
+      closable,
+      closeButton,
+      component,
+      description,
+      duration,
+      icon,
+      limit,
+      placement,
+      status,
+      title,
+      onAutoClose: onAutoCloseProp,
+      onClose: onCloseProp,
     } = callProps
 
-    const currentLimit = hookLimit ?? useNoticeLimit
-    const placement = hookPlacement ?? useNoticePlacement
+    const currentLimit = limit ?? defaultLimit
+    const currentPlacement = placement ?? defaultPlacement
 
     onChangeLimit(currentLimit)
+    placementRef.current = currentPlacement
 
-    placementRef.current = placement
+    const currentTitle = title ?? defaultTitle
+    const currentDescription = description ?? defaultDescription
+    const currentId = id ?? defaultId
 
-    const title = hookTitle ?? useNoticeTitle
-    const description = hookDescription ?? useNoticeDescription
-
-    const id = hookId ?? useNoticeId
-
-    const options: ExternalNotice = {
-      dismissible: hookClosable ?? useNoticeClosable,
-      duration: hookDuration ?? useNoticeDuration ?? 5000,
-      position: mapPlacementToPosition(placement),
-      ...(id ? { id } : {}),
+    const toastOptions: ExternalNotice = {
+      dismissible: closable ?? defaultClosable,
+      duration: duration ?? defaultDuration ?? 5000,
+      position: mapPlacementToPosition(currentPlacement),
+      ...(currentId ? { id: currentId } : {}),
       onAutoClose: (notice) =>
-        onAutoClose(notice.id, description, title, hookOnAutoClose),
+        onAutoClose(
+          notice.id,
+          currentDescription,
+          currentTitle,
+          onAutoCloseProp,
+        ),
       onDismiss: (notice) =>
-        onDismiss(notice.id, description, title, hookOnDismiss),
+        onClose(notice.id, currentDescription, currentTitle, onCloseProp),
     }
 
-    if (hookComponent) {
+    function getNoticeProps(id: NoticeId) {
+      return {
+        id,
+        close: noticeFn.close,
+        closeAll: noticeFn.closeAll,
+        description: currentDescription,
+        title: currentTitle,
+      }
+    }
+
+    if (component) {
       return toast.custom(
-        (id) =>
-          hookComponent({
-            id,
-            description,
-            dismiss: noticeFn.dismiss,
-            dismissAll: noticeFn.dismissAll,
-            title,
-          }),
-        options,
+        (id) => withNoticeItemContext(id, noticeFn.close, noticeFn.closeAll, component(getNoticeProps(id))),
+        toastOptions,
       )
     }
 
-    if (noticeComponent) {
+    if (defaultComponent) {
       return toast.custom(
-        (id) =>
-          noticeComponent({
-            id,
-            description,
-            dismiss: noticeFn.dismiss,
-            dismissAll: noticeFn.dismissAll,
-            title,
-          }),
-        options,
+        (id) => withNoticeItemContext(id, noticeFn.close, noticeFn.closeAll, defaultComponent(getNoticeProps(id))),
+        toastOptions,
       )
     }
 
-    const variant = hookVariant ?? useNoticeVariant
-    const status = hookStatus ?? useNoticeStatus
-    const css = { ...hookStyle, ...useNoticeStyle }
-    const colorScheme = hookColorScheme ?? useNoticeColorScheme
-    const icon = hookIcon ?? useNoticeIcon
-    const closable = hookClosable ?? useNoticeClosable
-    const closeButton = hookCloseButton ?? useNoticeCloseButton
+    const currentVariant = variant ?? defaultVariant
+    const currentStatus = status ?? defaultStatus
+    const css = { ...style, ...defaultStyle }
+    const currentColorScheme = colorScheme ?? defaultColorScheme
+    const currentIcon = icon ?? defaultIcon
+    const isClosable = closable ?? defaultClosable
+    const currentCloseButton = closeButton ?? defaultCloseButton
 
     return toast.custom(
-      (id) => (
-        <NoticeRoot
-          css={css}
-          colorScheme={colorScheme}
-          variant={variant}
-          placement={placement}
-          status={status}
-        >
-          {status === "loading" ? (
-            <NoticeLoading loadingScheme={icon?.loadingScheme} />
-          ) : (
-            <NoticeIcon {...(icon?.color ? { color: icon.color } : {})} />
-          )}
-          <ui.div flex="1">
-            {title ? <NoticeTitle>{title}</NoticeTitle> : null}
-            {description ? (
-              <NoticeDescription>{description}</NoticeDescription>
-            ) : null}
-          </ui.div>
-
-          {closable && closeButton ? (
-            isFunction(closeButton) ? (
-              closeButton({ id, description, title })
+      (id) =>
+        withNoticeItemContext(
+          id,
+          noticeFn.close,
+          noticeFn.closeAll,
+          <NoticeRoot
+            css={css}
+            colorScheme={currentColorScheme}
+            variant={currentVariant}
+            placement={currentPlacement}
+            status={currentStatus}
+          >
+            {currentStatus === "loading" ? (
+              <NoticeLoading loadingScheme={currentIcon?.loadingScheme} />
             ) : (
-              <NoticeCloseButton noticeId={id} />
-            )
-          ) : null}
-        </NoticeRoot>
-      ),
-      options,
+              <NoticeIcon
+                {...(currentIcon?.color ? { color: currentIcon.color } : {})}
+              />
+            )}
+            <NoticeContent>
+              {currentTitle ? <NoticeTitle>{currentTitle}</NoticeTitle> : null}
+              {currentDescription ? (
+                <NoticeDescription>{currentDescription}</NoticeDescription>
+              ) : null}
+            </NoticeContent>
+
+            {isClosable && currentCloseButton ? (
+              isFunction(currentCloseButton) ? (
+                currentCloseButton({
+                  id: currentId,
+                  description: currentDescription,
+                  title: currentTitle,
+                })
+              ) : (
+                <NoticeCloseButton />
+              )
+            ) : null}
+          </NoticeRoot>,
+        ),
+      toastOptions,
     )
   }
 
-  noticeFn.dismiss = (
+  noticeFn.close = (
     id?: NoticeExtraProps["id"],
-  ): number | string | undefined => {
+  ): NoticeId | undefined => {
     const toasts = toast.getToasts()
     const idToDismiss = id ?? toasts[toasts.length - 1]?.id
     if (idToDismiss) {
@@ -308,12 +362,12 @@ export const useNotice = (options?: NoticeOptions): NoticeFunction => {
     }
   }
 
-  noticeFn.dismissAll = (): void => {
+  noticeFn.closeAll = (): void => {
     toast.dismiss()
   }
 
   noticeFn.update = (
-    id: number | string,
+    id: NoticeId,
     props: Partial<NoticeOptions>,
   ): void => {
     const updatedProps = { ...options, ...props, id }
@@ -334,9 +388,7 @@ interface NoticeRootOptions
       | "icon"
       | "placement"
       | "status"
-    > {
-  noticeId?: NoticeOptions["id"]
-}
+    > {}
 
 export interface NoticeRootProps extends NoticeRootOptions {}
 
@@ -350,9 +402,16 @@ export const NoticeRoot = withContext<"div", NoticeRootProps>(
     )
   },
   "root",
-)(({ placement = "start-center" }) => ({
-  className: `ui-notice__root--${placement}`,
-}))
+)()
+
+export interface NoticeContentProps extends HTMLStyledProps {}
+
+export const NoticeContent = withContext<"div", NoticeContentProps>(
+  ({ ...props }) => {
+    return <styled.div {...props} />
+  },
+  "content",
+)()
 
 export interface NoticeIconProps extends AlertIconProps {}
 
@@ -391,27 +450,40 @@ export const NoticeDescription = withContext<"div", NoticeDescriptionProps>(
 )()
 
 export interface NoticeCloseButtonProps
-  extends Pick<NoticeOptions, "description">,
-    CloseButtonProps {
-  noticeId?: NoticeOptions["id"]
+  extends Omit<CloseButtonProps, "id">,
+    Pick<NoticeOptions, "id"> {}
+
+/**
+ * @private
+ * Returns props for a notice close button, including the correct onClick handler and ARIA attributes.
+ * Uses the id from context if not provided in props.
+ *
+ * @param userProps Optional props to merge with the returned props.
+ * @returns Props for a close button that will dismiss the notice.
+ */
+export const useNoticeCloseButtonProps = (
+  userProps: NoticeCloseButtonProps = {},
+) => {
+  const context = useNoticeItemContext()
+  const id = userProps.id ?? context?.id
+
+  return {
+    ...userProps,
+    id: String(userProps.id ?? context?.id),
+    "aria-label": userProps["aria-label"] ?? "Close notice",
+    onClick: handlerAll(userProps.onClick, (e) => {
+      e.stopPropagation()
+      if (id) {
+        toast.dismiss(id)
+      }
+    }),
+  }
 }
 
 export const NoticeCloseButton = withContext<"button", NoticeCloseButtonProps>(
-  ({ noticeId, onClick, ...props }) => {
-    return (
-      <CloseButton
-        colorScheme="gray"
-        onClick={(e) => {
-          handlerAll(onClick, () => {
-            e.stopPropagation()
-            if (noticeId) {
-              toast.dismiss(noticeId)
-            }
-          })(e)
-        }}
-        {...props}
-      />
-    )
+  (props) => {
+    const buttonProps = useNoticeCloseButtonProps(props)
+    return <CloseButton colorScheme="gray" {...buttonProps} />
   },
   "close-button",
 )()

@@ -26,7 +26,7 @@ interface ComponentContext
   extends Pick<StepsRootProps, "items" | "lazy" | "lazyBehavior"> {}
 
 interface StepsItem
-  extends Omit<StepsItemProps, "content" | "title">,
+  extends Omit<StepsItemProps, "content" | "index" | "title">,
     Pick<StepsIndicatorProps, "complete" | "current" | "incomplete"> {
   /**
    * The content for step element.
@@ -98,10 +98,10 @@ export { StepsPropsContext, useStepsPropsContext }
  *
  * @see https://yamada-ui.com/components/steps
  */
-export const StepsRoot = withProvider(
+export const StepsRoot = withProvider<"div", StepsRootProps, "orientation">(
   ({
     children,
-    items,
+    items = [],
     lazy,
     lazyBehavior,
     orientation: orientationProp,
@@ -123,7 +123,11 @@ export const StepsRoot = withProvider(
       getRootProps,
       onNext,
       onPrev,
-    } = useSteps({ ...rest, orientation: computedOrientation })
+    } = useSteps({
+      count: items.length,
+      ...rest,
+      orientation: computedOrientation,
+    })
     const componentContext = useMemo(
       () => ({ items, lazy, lazyBehavior }),
       [items, lazy, lazyBehavior],
@@ -202,7 +206,7 @@ export const StepsList = withContext<"ol", StepsListProps>(
             },
             index,
           ) => (
-            <StepsItem key={index} title={title} {...rest}>
+            <StepsItem key={index} index={index} title={title} {...rest}>
               <StepsIndicator
                 complete={complete}
                 current={current}

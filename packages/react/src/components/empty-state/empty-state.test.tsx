@@ -3,7 +3,7 @@ import { ShoppingCartIcon } from "../icon"
 import { EmptyState } from "./"
 
 describe("<EmptyState />", () => {
-  test("EmptyState renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <EmptyState.Root
         description="Explore our products and add items to your cart"

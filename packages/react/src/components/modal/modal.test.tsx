@@ -38,7 +38,7 @@ const TestComponent: FC<Modal.RootProps> = (props) => {
 }
 
 describe("<Modal />", () => {
-  test("renders modal correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<TestComponent />)
   })
 

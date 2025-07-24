@@ -98,7 +98,7 @@ export { SlideFadePropsContext, useSlideFadePropsContext }
  *
  * @see https://yamada-ui.com/components/slide-fade
  */
-export const SlideFade = withContext(
+export const SlideFade = withContext<"div", SlideFadeProps>(
   ({
     delay,
     duration,

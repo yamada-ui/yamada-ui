@@ -13,7 +13,7 @@ export const dropzoneStyle = defineComponentSlotStyle({
       inset: 0,
       justifyContent: "center",
       position: "absolute",
-      zIndex: "kurillin",
+      zIndex: "yamcha",
     },
     root: {
       "& *": { pointerEvents: "none" },

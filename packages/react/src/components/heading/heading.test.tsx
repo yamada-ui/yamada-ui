@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Heading } from "./heading"
 
 describe("<Heading />", () => {
-  test("renders heading correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Heading>Heading</Heading>)
   })
 

@@ -1058,7 +1058,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "sm"
     | "xl"
     | "xs"
-  textStyles: "outline" | "solid" | "subtle" | "surface"
+  textStyles: "mono" | "outline" | "solid" | "subtle" | "surface"
   themeSchemes: never
   zIndices:
     | "beerus"

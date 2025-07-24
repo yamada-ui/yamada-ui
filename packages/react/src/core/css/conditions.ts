@@ -147,6 +147,10 @@ export const attributes = {
    */
   _pressed: "&:is([data-pressed], [aria-pressed=true])",
   /**
+   * The CSS `&:is([data-range])` attribute selector.
+   */
+  _range: "&:is([data-range])",
+  /**
    * The CSS `&[data-reject]` attribute selector.
    */
   _reject: "&[data-reject]",
@@ -278,6 +282,10 @@ export const pseudoElementProperties = Object.keys(
 export const pseudoElementSelectors = Object.values(pseudoElements)
 
 export const pseudoClasses = {
+  /**
+   * The CSS `&:is([data-activedescendant])` pseudo-class.
+   */
+  _activedescendant: "&:is([data-activedescendant])",
   /**
    * The CSS `:any-link` pseudo-class.
    */
@@ -545,6 +553,10 @@ export const groupAttributes = {
    */
   _groupActive: toGroup(pseudoClasses._active),
   /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is activedescendant.
+   */
+  _groupActivedescendant: toGroup(pseudoClasses._activedescendant),
+  /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is blank.
    */
   _groupBlank: toGroup(pseudoClasses._blank),
@@ -628,6 +640,10 @@ export const groupAttributes = {
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is pressed.
    */
   _groupPressed: toGroup(attributes._pressed),
+  /**
+   * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is range.
+   */
+  _groupRange: toGroup(attributes._range),
   /**
    * Styles to apply when a parent element with `role=group`, `data-group` or `.group` is read-only.
    */
@@ -766,6 +782,10 @@ export const peerAttributes = {
    * Styles to apply when a parent element with `data-peer` or `.peer` is pressed.
    */
   _peerPressed: toPeer(attributes._pressed),
+  /**
+   * Styles to apply when a parent element with `data-peer` or `.peer` is range.
+   */
+  _peerRange: toPeer(attributes._range),
   /**
    * Styles to apply when a parent element with `data-peer` or `.peer` is read-only.
    */

@@ -1,7 +1,6 @@
 "use client"
 
-import type { FC } from "react"
-import type { HTMLStyledProps, StyleValue } from "../../core"
+import type { Component, HTMLStyledProps, StyleValue } from "../../core"
 import type { SkeletonProps } from "./skeleton"
 import { mergeCSS, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
@@ -18,7 +17,7 @@ export interface SkeletonTextProps extends Omit<SkeletonProps, "lineClamp"> {
   rootProps?: HTMLStyledProps
 }
 
-export const SkeletonText: FC<SkeletonTextProps> = ({
+export const SkeletonText = (({
   css,
   children,
   gap = "2",
@@ -28,7 +27,7 @@ export const SkeletonText: FC<SkeletonTextProps> = ({
   _notFirst,
   rootProps,
   ...rest
-}) => {
+}: SkeletonTextProps) => {
   const lineClamp = useValue(lineClampProp)
 
   return (
@@ -54,4 +53,4 @@ export const SkeletonText: FC<SkeletonTextProps> = ({
       })}
     </styled.div>
   )
-}
+}) as Component<"div", SkeletonTextProps>

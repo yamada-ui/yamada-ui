@@ -5,7 +5,7 @@ import type { HTMLProps, PropGetter, RequiredPropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useEffect, useId, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { createDescendant } from "../../hooks/use-descendant"
+import { createDescendants } from "../../hooks/use-descendants"
 import { filterUndefined, handlerAll, runKeyAction } from "../../utils"
 import { useFieldProps } from "../field"
 
@@ -13,7 +13,7 @@ const {
   DescendantsContext: PinInputDescendantsContext,
   useDescendant: usePinInputDescendant,
   useDescendants: usePinInputDescendants,
-} = createDescendant<HTMLInputElement>()
+} = createDescendants<HTMLInputElement>()
 
 export {
   PinInputDescendantsContext,
@@ -132,7 +132,7 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
     (index: number) => {
       if (!moveFocus || !manageFocus) return
 
-      const next = descendants.nextValue(index, undefined, false)
+      const next = descendants.nextValue(index, false)
 
       if (!next) return
 
@@ -145,8 +145,8 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
     (direction: "next" | "prev", index: number) => {
       const input =
         direction === "next"
-          ? descendants.nextValue(index, undefined, false)
-          : descendants.prevValue(index, undefined, false)
+          ? descendants.nextValue(index, false)
+          : descendants.prevValue(index, false)
 
       if (!input) return
 
@@ -251,7 +251,7 @@ export const usePinInput = (props: UsePinInputProps = {}) => {
           },
           Backspace: (ev) => {
             if ((ev.target as HTMLInputElement).value === "") {
-              const prevInput = descendants.prevValue(index, undefined, false)
+              const prevInput = descendants.prevValue(index, false)
 
               if (!prevInput) return
 

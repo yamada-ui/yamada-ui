@@ -17,6 +17,8 @@ export const colorSwatchStyle = defineComponentSlotStyle({
         overflow: "hidden",
         position: "absolute",
       },
+      "--checkers-bg": ["colors.whiteAlpha.500", "colors.blackAlpha.500"],
+      "--checkers-fg": ["colors.blackAlpha.300", "colors.whiteAlpha.300"],
       overflow: "hidden",
       position: "relative",
     },

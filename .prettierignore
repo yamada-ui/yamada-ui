@@ -2,6 +2,7 @@
 .next
 .velite
 dist
+trace
 node_modules
 pnpm-lock.yaml
 coverage

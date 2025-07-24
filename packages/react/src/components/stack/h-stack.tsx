@@ -24,6 +24,6 @@ export { HStackPropsContext, useHStackPropsContext }
  *
  * @see https://yamada-ui.com/components/stack
  */
-export const HStack = withContext(Stack)(undefined, {
+export const HStack = withContext<"div", HStackProps>(Stack)(undefined, {
   direction: "row",
 })

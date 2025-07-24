@@ -6,8 +6,23 @@ export default {
     Breadcrumb: "Breadcrumb",
     Ellipsis: "Ellipsis",
   },
+  carousel: {
+    "Go to next slide": "Go to next slide",
+    "Go to previous slide": "Go to previous slide",
+    "Go to {page} slide": "Go to {page} slide",
+    Slides: "Slides",
+    "{page} of {total}": "{page} of {total}",
+  },
   closeButton: {
     Close: "Close",
+  },
+  hueSlider: {
+    Blue: "Blue",
+    Cyan: "Cyan",
+    Green: "Green",
+    Magenta: "Magenta",
+    Red: "Red",
+    Yellow: "Yellow",
   },
   modal: {
     "Close modal": "Close modal",
@@ -24,18 +39,19 @@ export default {
     "Go to page": "Go to page {value}",
     "Go to previous page": "Go to previous page",
     Pagination: "Pagination",
-    text: {
-      short: "{value} / {total}",
-      compact: "{value} of {total}",
-    },
+    "{value} / {total}": "{value} / {total}",
+    "{value} of {total}": "{value} of {total}",
   },
   passwordInput: {
     "Password strength meter": "Password strength meter",
     "Toggle password visibility": "Toggle password visibility",
   },
   progress: {
-    loading: "Loading...",
-    percent: "{value} percent",
+    "Loading...": "Loading...",
+    "{value} percent": "{value} percent",
+  },
+  slider: {
+    "Slider thumb": "Slider thumb",
   },
   stat: {
     "Decreased by": "Decreased by",

@@ -2,11 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Flex } from "./flex"
 
 describe("<Flex />", () => {
-  test("renders flex correctly", () => {
-    render(<Flex>Flex</Flex>)
-  })
-
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Flex>Flex</Flex>)
   })
 

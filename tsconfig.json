@@ -1,5 +1,15 @@
 {
   "extends": "@yamada-ui/workspace/typescript/tsconfig.json",
-  "include": ["scripts", "eslint.config.ts"],
-  "exclude": ["@yamada-ui/utils"]
+  "include": [
+    "scripts/**/*.ts",
+    "scripts/**/*.tsx",
+    "scripts/**/*.mts",
+    "scripts/**/*.cts",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.mts",
+    "packages/**/*.cts",
+    "eslint.config.ts"
+  ],
+  "exclude": ["node_modules"]
 }

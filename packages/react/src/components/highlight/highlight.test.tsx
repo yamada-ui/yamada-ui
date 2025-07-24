@@ -2,7 +2,7 @@ import { a11y, render, renderHook, screen } from "#test"
 import { Highlight, useHighlight } from "."
 
 describe("<Highlight />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Highlight query="highlight">Highlight</Highlight>)
   })
 

@@ -17,14 +17,16 @@ export const modalStyle = defineComponentSlotStyle({
       top: "md",
     },
     content: {
-      bg: "bg.panel",
+      bg: "bg",
+      borderColor: "border.subtle",
+      borderWidth: "1px",
       boxShadow: "lg",
       display: "flex",
       flexDirection: "column",
       maxH: "full",
       position: "relative",
-      rounded: "l2",
-      zIndex: "recoome",
+      rounded: "l4",
+      zIndex: "burter",
     },
     footer: {
       alignItems: "center",
@@ -48,7 +50,7 @@ export const modalStyle = defineComponentSlotStyle({
       inset: "0",
       position: "fixed",
       w: "vw",
-      zIndex: "burter",
+      zIndex: "jeice",
     },
     root: {
       alignItems: "center",
@@ -59,7 +61,7 @@ export const modalStyle = defineComponentSlotStyle({
       p: "md",
       position: "fixed",
       w: "vw",
-      zIndex: "jeice",
+      zIndex: "guldo",
     },
     title: {
       fontSize: "xl",

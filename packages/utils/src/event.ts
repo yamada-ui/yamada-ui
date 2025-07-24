@@ -36,7 +36,7 @@ export function getEventWindow(ev: Event): typeof globalThis {
 
 export function pointFromTouch(
   e: TouchEvent,
-  type: "client" | "page" = process.env.NODE_ENV === "test" ? "client" : "page",
+  type: "client" | "page" = "client",
 ): Point {
   const point = e.touches[0] || e.changedTouches[0]
 
@@ -45,7 +45,7 @@ export function pointFromTouch(
 
 export function pointFromMouse(
   point: MouseEvent | PointerEvent,
-  type: "client" | "page" = "page",
+  type: "client" | "page" = "client",
 ): Point {
   return {
     x: point[`${type}X`],
@@ -55,7 +55,7 @@ export function pointFromMouse(
 
 export function getEventPoint(
   ev: AnyPointerEvent,
-  type: "client" | "page" = process.env.NODE_ENV === "test" ? "client" : "page",
+  type: "client" | "page" = "client",
 ): Point {
   return isTouchEvent(ev) ? pointFromTouch(ev, type) : pointFromMouse(ev, type)
 }

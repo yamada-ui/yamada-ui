@@ -33,6 +33,7 @@ import { styled, useSystem } from "../system"
 import { chainProps, mergeProps } from "./props"
 import {
   getSlotClassName,
+  mergeSlotCSS,
   useComponentSlotStyle,
   useComponentStyle,
 } from "./use-component-style"
@@ -57,7 +58,9 @@ export type ComponentSlot<Y extends string> =
   | Y
   | { name: string; slot: [Y, Y] | Y }
 
-export type InitialProps<Y extends Dict = Dict> = ((props: Y) => any) | Y
+export type InitialProps<Y extends Dict = Dict> =
+  | ((props: Y) => any)
+  | Partial<Y>
 export type SuperProps<Y extends Dict = Dict> = ((props: Y) => any) | Y
 
 export type SuperWithoutThemeProps<
@@ -119,41 +122,6 @@ function withDisplayName<
   Object.defineProperty(Component, "displayName", { value: displayName })
 
   return Component as Component<Y, M>
-}
-
-function getSlotCSS<Y extends string>(
-  slot?: ComponentSlot<Y>,
-  slotCSS?: CSSSlotObject<Y>,
-): CSSObject[] {
-  if (!slotCSS || !slot) return []
-
-  if (isArray(slot)) {
-    return slot.map((slot) => slotCSS[slot]!)
-  } else if (isObject(slot)) {
-    if (isArray(slot.slot)) {
-      return slot.slot.map((slot) => slotCSS[slot]!)
-    } else {
-      return [slotCSS[slot.slot]!]
-    }
-  } else {
-    return [slotCSS[slot]!]
-  }
-}
-
-function mergeSlotCSS<Y extends string>(
-  slot?: ComponentSlot<Y>,
-  slotCSS?: CSSSlotObject<Y>,
-  css?: CSSObject | CSSObject[],
-) {
-  if (!slotCSS || !slot) return css
-
-  const result: CSSObject[] = []
-
-  result.push(...getSlotCSS(slot, slotCSS))
-
-  if (css) result.push(...toArray(css))
-
-  return result
 }
 
 function getSlotKey<Y extends string>(slot?: ComponentSlot<Y>) {

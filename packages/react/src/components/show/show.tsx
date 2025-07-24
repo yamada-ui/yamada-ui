@@ -18,6 +18,11 @@ export interface ShowProps<T> {
   when?: null | T
 }
 
+/**
+ * `Show` is a component that shows or hides its children based on a condition.
+ *
+ * @see https://yamada-ui.com/components/show
+ */
 export const Show = <T,>({
   children,
   fallback,

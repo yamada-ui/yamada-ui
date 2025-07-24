@@ -8,7 +8,7 @@ import type {
   ThemeProps,
 } from "../../core"
 import type { ListStyle } from "./list.style"
-import { cloneElement, isValidElement } from "react"
+import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { listStyle } from "./list.style"
 
@@ -43,7 +43,7 @@ export { ListPropsContext, useListPropsContext }
  *
  * @see https://yamada-ui.com/components/list
  */
-export const ListRoot = withProvider(
+export const ListRoot = withProvider<"ul", ListRootProps, "styleType">(
   ({
     as: asProp,
     children,
@@ -53,6 +53,11 @@ export const ListRoot = withProvider(
     ...rest
   }) => {
     const as = asProp ?? (listStyleType == "decimal" ? "ol" : undefined)
+    const computedChildren = useMemo(() => {
+      if (children) return children
+
+      return items?.map((props, index) => <ListItem key={index} {...props} />)
+    }, [children, items])
 
     return (
       <styled.ul
@@ -62,8 +67,7 @@ export const ListRoot = withProvider(
         role="list"
         {...rest}
       >
-        {children ??
-          items?.map((props, index) => <ListItem key={index} {...props} />)}
+        {computedChildren}
       </styled.ul>
     )
   },

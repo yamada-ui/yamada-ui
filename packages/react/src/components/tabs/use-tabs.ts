@@ -4,7 +4,7 @@ import type { KeyboardEvent } from "react"
 import type { HTMLProps, Orientation, PropGetter } from "../../core"
 import { useCallback, useId, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
-import { createDescendant } from "../../hooks/use-descendant"
+import { createDescendants } from "../../hooks/use-descendants"
 import {
   createContext,
   cx,
@@ -19,7 +19,7 @@ const {
   DescendantsContext: TabDescendantsContext,
   useDescendant: useTabDescendant,
   useDescendants: useTabDescendants,
-} = createDescendant<HTMLButtonElement>()
+} = createDescendants<HTMLButtonElement>()
 
 export { TabDescendantsContext, useTabDescendant, useTabDescendants }
 
@@ -27,7 +27,7 @@ const {
   DescendantsContext: TabPanelDescendantsContext,
   useDescendant: useTabPanelDescendant,
   useDescendants: useTabPanelDescendants,
-} = createDescendant<HTMLDivElement>()
+} = createDescendants<HTMLDivElement>()
 
 export {
   TabPanelDescendantsContext,
@@ -170,6 +170,7 @@ export const useTabs = ({
   )
 
   return {
+    id,
     focusedIndex,
     index,
     manual,
@@ -185,23 +186,27 @@ export const useTabs = ({
 
 export type UseTabsReturn = ReturnType<typeof useTabs>
 
-export interface UseTabProps extends HTMLProps<"button"> {}
+export interface UseTabProps extends HTMLProps<"button"> {
+  /**
+   * The index of the tab.
+   */
+  index: number
+}
 
-export const useTab = ({ id, disabled, ...rest }: UseTabProps = {}) => {
-  const uuid = useId()
+export const useTab = ({ id, disabled, index, ...rest }: UseTabProps) => {
   const {
+    id: rootId,
     index: selectedIndex,
     manual,
     orientation,
     setFocusedIndex,
     setIndex,
   } = useTabsContext()
-  const { index, register } = useTabDescendant({ disabled })
-  const { descendants } = useTabPanelDescendant()
-  const tabPanelId = descendants.value(index)?.node.id
+  const { register } = useTabDescendant({ disabled })
+  const tabPanelId = `${rootId}-panel-${index}`
   const selected = index === selectedIndex
 
-  id ??= uuid
+  id ??= `${rootId}-tab-${index}`
 
   const onClick = useCallback(() => {
     if (!disabled) setIndex(index)
@@ -249,18 +254,25 @@ export const useTab = ({ id, disabled, ...rest }: UseTabProps = {}) => {
 
 export type UseTabReturn = ReturnType<typeof useTab>
 
-export interface UseTabPanelProps extends HTMLProps {}
+export interface UseTabPanelProps extends HTMLProps {
+  /**
+   * The index of the tab panel.
+   */
+  index: number
+}
 
 export const useTabPanel = ({
+  id,
   "aria-labelledby": ariaLabelledbyProp,
+  index,
   ...rest
-}: UseTabPanelProps = {}) => {
-  const id = useId()
-  const { index: selectedIndex, orientation } = useTabsContext()
-  const { index, register } = useTabPanelDescendant()
-  const { descendants } = useTabDescendant()
-  const tabId = descendants.value(index)?.node.id
+}: UseTabPanelProps) => {
+  const { id: rootId, index: selectedIndex, orientation } = useTabsContext()
+  const { register } = useTabPanelDescendant()
+  const tabId = `${rootId}-tab-${index}`
   const selected = index === selectedIndex
+
+  id ??= `${rootId}-panel-${index}`
 
   const getRootProps: PropGetter = useCallback(
     ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({

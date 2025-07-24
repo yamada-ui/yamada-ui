@@ -27,6 +27,7 @@ import isEqual from "react-fast-compare"
 import {
   bem,
   cx,
+  filterEmpty,
   isArray,
   isBooleanish,
   isEmptyObject,
@@ -268,39 +269,32 @@ export function getSlotClassName<Y extends string>(
   }
 }
 
-function getSlotCSS<Y extends string>(
-  slot?: ComponentSlot<Y>,
-  slotCSS?: CSSSlotObject<Y>,
-): CSSObject[] {
-  if (!slotCSS || !slot) return []
-
-  if (isArray(slot)) {
-    return slot.map((slot) => slotCSS[slot]!)
-  } else if (isObject(slot)) {
-    if (isArray(slot.slot)) {
-      return slot.slot.map((slot) => slotCSS[slot]!)
-    } else {
-      return [slotCSS[slot.slot]!]
-    }
-  } else {
-    return [slotCSS[slot]!]
-  }
-}
-
 export function mergeSlotCSS<Y extends string>(
   slot?: ComponentSlot<Y>,
-  slotCSS?: CSSSlotObject<Y>,
+  style?: CSSSlotObject<Y>,
   css?: CSSObject | CSSObject[],
-) {
-  if (!slotCSS || !slot) return css
+): CSSObject | CSSObject[] | undefined {
+  if (!style || !slot) return css
 
-  const result: CSSObject[] = []
+  const temp: (CSSObject | undefined)[] = []
 
-  result.push(...getSlotCSS(slot, slotCSS))
+  if (isArray(slot)) {
+    temp.push(...slot.map((slot) => style[slot]))
+  } else if (isObject(slot)) {
+    if (isArray(slot.slot)) {
+      temp.push(...slot.slot.map((slot) => style[slot]))
+    } else {
+      temp.push(style[slot.slot])
+    }
+  } else {
+    temp.push(style[slot])
+  }
 
-  if (css) result.push(...toArray(css))
+  if (css) temp.push(...toArray(css))
 
-  return result
+  const result = filterEmpty(temp)
+
+  return !!result.length ? result : undefined
 }
 
 function omitThemeProps<
@@ -497,7 +491,9 @@ function useStyle<
     if (!isEqualProps(propsRef.current, computedProps))
       propsRef.current = computedProps
   } else {
-    props.className = cx(defaultClassName, props.className)
+    const className = cx(defaultClassName, props.className)
+
+    if (className) props.className = className
 
     if (!isEqualProps(propsRef.current, props))
       propsRef.current = props as unknown as WithoutThemeProps<Y, M, D>

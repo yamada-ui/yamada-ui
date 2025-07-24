@@ -44,7 +44,7 @@ export { SimpleGridPropsContext, useSimpleGridPropsContext }
  *
  * @see https://yamada-ui.com/components/simple-grid
  */
-export const SimpleGrid = withContext(Grid)(
+export const SimpleGrid = withContext<"div", SimpleGridProps>(Grid)(
   undefined,
   ({ columns, minChildWidth, ...rest }) => {
     const templateColumns = useMemo(() => {

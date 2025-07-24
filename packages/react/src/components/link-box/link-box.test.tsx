@@ -23,7 +23,7 @@ const Component: FC = () => {
 }
 
 describe("<LinkBox />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Component />)
   })
 

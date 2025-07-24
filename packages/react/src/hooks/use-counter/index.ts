@@ -76,6 +76,11 @@ export interface UseCounterProps {
   onChange?: (valueAsString: string, valueAsNumber: number) => void
 }
 
+/**
+ * `useCounter` is a custom hook that returns the current counter value.
+ *
+ * @see https://yamada-ui.com/hooks/use-counter
+ */
 export const useCounter = ({
   keepWithinRange = true,
   max: maxValue = Number.MAX_SAFE_INTEGER,

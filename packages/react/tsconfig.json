@@ -8,9 +8,5 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
-  "exclude": [
-    // TODO: Remove legacy-components
-    "src/legacy-components/**/*",
-    "src/theme/components/**/*"
-  ]
+  "exclude": ["node_modules", "trace", "dist", "coverage", "storybook-static"]
 }

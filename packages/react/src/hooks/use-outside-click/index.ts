@@ -2,10 +2,10 @@
 
 import type { RefObject } from "react"
 import { useCallback, useEffect, useRef } from "react"
-import { getDocument, useCallbackRef } from "../../utils"
+import { getDocument, isArray, useCallbackRef } from "../../utils"
 
 export interface UseOutsideClickProps {
-  ref: React.RefObject<HTMLElement | null>
+  ref: RefObject<HTMLElement | null> | RefObject<HTMLElement | null>[]
   enabled?: boolean
   handler?: (ev: Event) => void
 }
@@ -67,7 +67,7 @@ export const useOutsideClick = ({
   useEffect(() => {
     if (!enabled) return
 
-    const doc = getDocument(ref.current)
+    const doc = getDocument(isArray(ref) ? ref[0]?.current : ref.current)
 
     doc.addEventListener("mousedown", onPointerDown, true)
     doc.addEventListener("mouseup", onMouseUp, true)
@@ -94,7 +94,7 @@ export const useOutsideClick = ({
 
 const isValidEvent = (
   ev: MouseEvent | TouchEvent,
-  ref: RefObject<HTMLElement | null>,
+  ref: RefObject<HTMLElement | null> | RefObject<HTMLElement | null>[],
 ) => {
   const target = ev.target as HTMLElement | null
 
@@ -102,5 +102,9 @@ const isValidEvent = (
 
   if (target) if (!getDocument(target).contains(target)) return false
 
-  return !ref.current?.contains(target)
+  if (isArray(ref)) {
+    return !ref.some((ref) => ref.current?.contains(target))
+  } else {
+    return !ref.current?.contains(target)
+  }
 }

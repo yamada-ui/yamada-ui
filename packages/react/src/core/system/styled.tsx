@@ -134,7 +134,7 @@ export function createStyled<
     transferProps,
     ...styledOptions
   }: StyledOptions<D, H, R, keyof M> = {},
-): StyledComponent<Y, M> {
+) {
   const displayName =
     styledOptions.displayName ?? getDisplayName(styledOptions.name, "")
   const shouldForwardProp = !styledOptions.shouldForwardProp
@@ -154,7 +154,7 @@ export function createStyled<
     cache,
     ref,
   ) {
-    let className = ""
+    let className: string | undefined = ""
 
     const system = useSystem()
     const { theme } = useTheme<UsageTheme>()
@@ -204,8 +204,13 @@ export function createStyled<
       [interpolations, cache.registered],
     )
 
-    className = cx(className, `${cache.key}-${serialized.name}`)
+    className = cx(
+      className,
+      !!serialized.styles ? `${cache.key}-${serialized.name}` : undefined,
+    )
     className = cx(className, styledOptions.target)
+
+    if (!className) className = undefined
 
     const mergedProps = { ...forwardProps, className, children }
 

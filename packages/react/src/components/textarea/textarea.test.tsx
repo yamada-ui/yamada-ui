@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Textarea } from "./"
 
 describe("<Textarea />", () => {
-  test("Textarea renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Textarea aria-label="Enter notes" defaultValue="hello" />)
   })
 

@@ -4,7 +4,7 @@ export const groupStyle = defineComponentStyle({
   base: {
     "& > *": {
       _focusVisible: {
-        zIndex: 1,
+        zIndex: "yamcha",
       },
     },
     display: "inline-flex",

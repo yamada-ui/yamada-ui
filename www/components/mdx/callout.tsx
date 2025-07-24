@@ -45,7 +45,7 @@ export function Callout({
   const colorScheme = COLOR_SCHEME_MAP[type]
 
   return (
-    <Alert.Root colorScheme={colorScheme} my="lg" {...rest}>
+    <Alert.Root colorScheme={colorScheme} border="none" my="lg" {...rest}>
       <Alert.Icon as={ICON_MAP[type]} />
       <Alert.Description
         colorScheme="mono"

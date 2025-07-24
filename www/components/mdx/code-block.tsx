@@ -1,5 +1,5 @@
 import type { BoxProps, GridProps } from "@yamada-ui/react"
-import { Code, Flex, Grid, Text } from "@yamada-ui/react"
+import { Box, Code, Flex, Grid, Tabs, Text } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import React from "react"
 import { codeToHtml } from "@/libs/shiki"
@@ -7,7 +7,6 @@ import { langConditions } from "@/utils/i18n"
 import { CodePreview } from "../code-preview"
 import { Callout } from "./callout"
 import { ClientOnly } from "./client-only"
-import { JsxCodePanel, JsxPreview, JsxPreviewPanel } from "./jsx-preview"
 import { ServerOnly } from "./server-only"
 
 export interface CodeBlockProps extends Omit<GridProps, "children"> {
@@ -37,20 +36,33 @@ export function CodeBlock({
   if (preview) {
     return (
       <>
-        <JsxPreview>
-          <JsxPreviewPanel>
-            {client ? (
-              <ClientOnly lang={lang} code={children} functional={functional} />
-            ) : (
-              <ServerOnly lang={lang} code={children} functional={functional} />
-            )}
-          </JsxPreviewPanel>
-          <JsxCodePanel>
-            <Pre lang={lang} m="0">
-              {children}
-            </Pre>
-          </JsxCodePanel>
-        </JsxPreview>
+        <Tabs.Root size="sm" variant="subtle" gap="md" my="lg">
+          <Tabs.List gap="sm">
+            <Tabs.Tab index={0}>{t("preview")}</Tabs.Tab>
+            <Tabs.Tab index={1}>{t("code")}</Tabs.Tab>
+          </Tabs.List>
+
+          <Tabs.Panel index={0}>
+            <Box borderWidth="1px" p="{space}" rounded="l2">
+              {client ? (
+                <ClientOnly
+                  lang={lang}
+                  code={children}
+                  functional={functional}
+                />
+              ) : (
+                <ServerOnly
+                  lang={lang}
+                  code={children}
+                  functional={functional}
+                />
+              )}
+            </Box>
+          </Tabs.Panel>
+          <Tabs.Panel index={1}>
+            <Pre lang={lang}>{children}</Pre>
+          </Tabs.Panel>
+        </Tabs.Root>
 
         {client ? (
           <Callout data-type="warning">
@@ -81,7 +93,7 @@ export function CodeBlock({
           alignItems="center"
           bg="bg.panel"
           borderBottomWidth="1px"
-          borderColor="border.subtle"
+          borderColor="border"
           color="fg.emphasized"
           h="12"
           px="4"
@@ -92,13 +104,17 @@ export function CodeBlock({
           </Text>
         </Flex>
 
-        <Pre lang={lang} m="0" roundedTop="0">
+        <Pre lang={lang} roundedTop="0">
           {children}
         </Pre>
       </Grid>
     )
   } else {
-    return <Pre lang={lang}>{children}</Pre>
+    return (
+      <Pre lang={lang} my="lg">
+        {children}
+      </Pre>
+    )
   }
 }
 

@@ -3,7 +3,7 @@ import { LoaderIcon } from "../icon"
 import { Button } from "./button"
 
 describe("<Button />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Button>test</Button>)
   })
 

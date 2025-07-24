@@ -15,18 +15,9 @@
     "sourceMap": true,
     "allowJs": true,
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "noUncheckedSideEffectImports": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "types": ["vitest/globals"]
-  },
-  "exclude": [
-    "**/node_modules/**",
-    "**/bin/**",
-    "**/dist/**",
-    "**/coverage/**",
-    "**/storybook-static/**"
-  ]
+  }
 }

@@ -94,7 +94,7 @@ export const NoticeProvider = withProvider(
         placementRef,
         onChangeLimit,
       }),
-      [onChangeLimit, placementRef],
+      [onChangeLimit],
     )
 
     return (

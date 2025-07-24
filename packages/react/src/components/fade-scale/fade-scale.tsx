@@ -73,7 +73,7 @@ export { FadeScalePropsContext, useFadeScalePropsContext }
  *
  * @see https://yamada-ui.com/components/fade-scale
  */
-export const FadeScale = withContext(
+export const FadeScale = withContext<"div", FadeScaleProps>(
   ({
     delay,
     duration,

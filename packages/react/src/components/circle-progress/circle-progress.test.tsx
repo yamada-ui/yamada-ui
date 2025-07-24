@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { CircleProgress } from "./"
 
 describe("<CircleProgress />", () => {
-  test("renders tag correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<CircleProgress.Root value={50} />)
   })
 

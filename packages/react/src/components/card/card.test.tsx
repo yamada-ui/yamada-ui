@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Card } from "./"
 
 describe("<Card />", () => {
-  test("renders card correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Card.Root>Card</Card.Root>)
   })
 

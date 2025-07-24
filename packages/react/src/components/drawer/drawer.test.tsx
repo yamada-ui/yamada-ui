@@ -40,7 +40,7 @@ const TestComponent: FC<Drawer.RootProps> = (props) => {
 }
 
 describe("<Drawer />", () => {
-  test("renders modal correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<TestComponent />)
   })
 

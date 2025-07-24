@@ -8,10 +8,10 @@ import type {
 } from "@floating-ui/react-dom"
 import type { ComponentRef, Ref } from "react"
 import type {
+  Direction,
   DOMElement,
   HTMLElementProps,
   HTMLProps,
-  Placement,
 } from "../../core"
 import {
   autoUpdate,
@@ -23,10 +23,8 @@ import {
 import { useCallback, useMemo } from "react"
 import { mergeRefs } from "../../utils"
 
-export type PopperPlacement = Exclude<Placement, "center" | "center-center">
-
 const PLACEMENT_MAP: {
-  [key in PopperPlacement]: FloatingPlacement
+  [key in Direction]: FloatingPlacement
 } = {
   "center-end": "right",
   "center-start": "left",
@@ -99,7 +97,7 @@ export interface UsePopperProps<Y extends DOMElement | VirtualElement = "div"> {
    *
    * @default 'start'
    */
-  placement?: PopperPlacement
+  placement?: Direction
   /**
    * Custom or extended platform object.
    */

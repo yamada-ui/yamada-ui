@@ -7,7 +7,7 @@ import { Picture, Source } from "./picture"
 const src = "https://image.xyz/source"
 
 describe("<Picture />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Picture
         src={src}

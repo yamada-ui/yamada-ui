@@ -8,54 +8,10 @@ import {
   getFocusableElements,
   isRefObject,
   isSafari,
-  isTabbableElement,
   useSafeLayoutEffect,
   useUpdateEffect,
 } from "../../utils"
 import { useEventListener } from "../use-event-listener"
-
-export interface UseFocusOnHideProps {
-  focusTarget?: HTMLElement | null | RefObject<HTMLElement | null>
-  shouldFocus?: boolean
-  visible?: boolean
-}
-
-const preventReturnFocus = (el: HTMLElement | null) => {
-  if (!el) return false
-
-  const activeElement = getActiveElement(getDocument(el))
-
-  if (!activeElement) return false
-  if (el.contains(activeElement)) return false
-  if (isTabbableElement(activeElement)) return true
-
-  return false
-}
-
-export const useFocusOnHide = <T extends HTMLElement>(
-  refOrEl: RefObject<null | T> | T,
-  { focusTarget: focusRefOrEl, shouldFocus, visible }: UseFocusOnHideProps,
-) => {
-  const trulyShouldFocus = shouldFocus && !visible
-
-  useUpdateEffect(() => {
-    const target = isRefObject(refOrEl) ? refOrEl.current : refOrEl
-    const focusTarget = isRefObject(focusRefOrEl)
-      ? focusRefOrEl.current
-      : focusRefOrEl
-
-    if (!trulyShouldFocus) return
-
-    if (preventReturnFocus(target)) return
-
-    const el = focusTarget ?? target
-
-    if (el)
-      requestAnimationFrame(() => {
-        el.focus()
-      })
-  }, [trulyShouldFocus])
-}
 
 export interface UseFocusOnShowProps {
   focusTarget?: HTMLElement | null | RefObject<HTMLElement | null>
@@ -64,6 +20,11 @@ export interface UseFocusOnShowProps {
   visible?: boolean
 }
 
+/**
+ * `useFocusOnShow` is a custom hook that focuses on the target element when it is shown.
+ *
+ * @see https://yamada-ui.com/hooks/use-focus-on-show
+ */
 export const useFocusOnShow = <T extends HTMLElement>(
   refOrEl: RefObject<null | T> | T,
   {
@@ -89,7 +50,7 @@ export const useFocusOnShow = <T extends HTMLElement>(
   }, [visible, trulyShouldFocus])
 
   const onFocus = useCallback(() => {
-    if (!visible || !target || !trulyShouldFocusRef.current) return
+    if (!target || !trulyShouldFocusRef.current) return
 
     trulyShouldFocusRef.current = false
 
@@ -116,7 +77,7 @@ export const useFocusOnShow = <T extends HTMLElement>(
         })
       }
     }
-  }, [visible, target, focusRefOrEl, preventScroll])
+  }, [target, focusRefOrEl, preventScroll])
 
   useUpdateEffect(() => {
     requestAnimationFrame(() => {
@@ -133,6 +94,11 @@ export interface UseFocusOnMouseDownProps {
   enabled?: boolean
 }
 
+/**
+ * `useFocusOnPointerDown` is a custom hook that focuses on the target element when it is clicked.
+ *
+ * @see https://yamada-ui.com/hooks/use-focus-on-pointer-down
+ */
 export const useFocusOnPointerDown = ({
   ref,
   elements,

@@ -80,7 +80,7 @@ export { AiryPropsContext, useAiryPropsContext }
  *
  * @see https://yamada-ui.com/components/airy
  */
-export const Airy = withContext(
+export const Airy = withContext<"button", AiryProps>(
   ({
     defaultValue = "from",
     delay = 0,

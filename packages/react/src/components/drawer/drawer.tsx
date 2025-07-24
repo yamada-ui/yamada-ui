@@ -129,7 +129,7 @@ export { DrawerPropsContext, useDrawerPropsContext }
  *
  * @see https://yamada-ui.com/components/drawer
  */
-export const DrawerRoot = withProvider(
+export const DrawerRoot = withProvider<"div", DrawerRootProps, "placement">(
   ({
     allowPinchZoom = false,
     autoFocus,

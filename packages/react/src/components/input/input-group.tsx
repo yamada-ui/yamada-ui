@@ -1,7 +1,6 @@
 "use client"
 
-import type { FC } from "react"
-import type { ThemeProps, WithoutThemeProps } from "../../core"
+import type { Component, ThemeProps, WithoutThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { GroupProps } from "../group"
 import type { InputProps } from "./input"
@@ -20,7 +19,7 @@ export interface InputGroupRootProps
     Pick<InputProps, "errorBorderColor" | "focusBorderColor">,
     FieldProps {}
 
-export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
+export const InputGroupRoot = ((props: InputGroupRootProps) => {
   const {
     props: {
       id: _id,
@@ -91,4 +90,4 @@ export const InputGroupRoot: FC<InputGroupRootProps> = (props) => {
       </InputAddonPropsContext>
     </InputPropsContext>
   )
-}
+}) as Component<"div", InputGroupRootProps>

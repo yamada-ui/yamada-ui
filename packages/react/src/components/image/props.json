@@ -16,12 +16,12 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "fit": {
-      "type": "ObjectFit | [ObjectFit | ({ _peerAccept?: ObjectFit | [ObjectFit | (... & { base?: ObjectFit | [ObjectFit | (... & ...), ObjectFit | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: ObjectFit | ... 2 more ... | undefined; }), ObjectFit | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _select...",
+      "type": "ObjectFit | [ObjectFit | ({ _peerAccept?: ObjectFit | [ObjectFit | (... & { base?: ObjectFit | [ObjectFit | (... & ...), ObjectFit | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: ObjectFit | ... 2 more ... | undefined; }), ObjectFit | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _select...",
       "description": "The CSS `object-fit` property.",
       "required": false
     }
@@ -43,12 +43,12 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "fit": {
-      "type": "ObjectFit | [ObjectFit | ({ _peerAccept?: ObjectFit | [ObjectFit | (... & { base?: ObjectFit | [ObjectFit | (... & ...), ObjectFit | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: ObjectFit | ... 2 more ... | undefined; }), ObjectFit | (... & { ...; })] | { ...; } | undefined; ... 173 more ...; _select...",
+      "type": "ObjectFit | [ObjectFit | ({ _peerAccept?: ObjectFit | [ObjectFit | (... & { base?: ObjectFit | [ObjectFit | (... & ...), ObjectFit | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: ObjectFit | ... 2 more ... | undefined; }), ObjectFit | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _select...",
       "description": "The CSS `object-fit` property.",
       "required": false
     }

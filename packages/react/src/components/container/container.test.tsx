@@ -4,7 +4,7 @@ import { Text } from "../text"
 import { Container } from "./"
 
 describe("<Container />", () => {
-  test("renders container correctly", () => {
+  test("renders component correctly", () => {
     render(
       <Container.Root>
         <Container.Header>

@@ -2,7 +2,7 @@ import { a11y } from "#test"
 import { Slot, Slottable } from "./slot"
 
 describe("<Slot />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Slot>Slot</Slot>)
   })
 

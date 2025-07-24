@@ -3,7 +3,7 @@ import { Tooltip } from "."
 import { Text } from "../text"
 
 describe("<Tooltip />", () => {
-  test("renders tag correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Tooltip content="Tooltip Hovered" open>
         <Text as="span">Trigger</Text>

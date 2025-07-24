@@ -625,6 +625,23 @@ export const standardStyles = {
     properties: ["--contrast"],
     transform: pipe(transforms.function("contrast"), transforms.filter()),
   },
+  cornerBlockEndShape: true,
+  cornerBlockStartShape: true,
+  cornerBottomLeftShape: true,
+  cornerBottomRightShape: true,
+  cornerBottomShape: true,
+  cornerEndEndShape: true,
+  cornerEndStartShape: true,
+  cornerInlineEndShape: true,
+  cornerInlineStartShape: true,
+  cornerLeftShape: true,
+  cornerRightShape: true,
+  cornerShape: true,
+  cornerStartEndShape: true,
+  cornerStartStartShape: true,
+  cornerTopLeftShape: true,
+  cornerTopRightShape: true,
+  cornerTopShape: true,
   counterIncrement: true,
   counterReset: true,
   counterSet: true,
@@ -4918,6 +4935,176 @@ export interface StyleProps {
    */
   contentVisibility?: StyleValueWithCondition<CSS.Property.ContentVisibility>
   /**
+   * ### corner-block-end-shape
+   *
+   * The CSS `corner-block-end-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-block-end-shape
+   *
+   * @experimental
+   */
+  cornerBlockEndShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-block-start-shape
+   *
+   * The CSS `corner-block-start-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-block-start-shape
+   *
+   * @experimental
+   */
+  cornerBlockStartShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-bottom-left-shape
+   *
+   * The CSS `corner-bottom-left-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-bottom-left-shape
+   *
+   * @experimental
+   */
+  cornerBottomLeftShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-bottom-right-shape
+   *
+   * The CSS `corner-bottom-right-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-bottom-right-shape
+   *
+   * @experimental
+   */
+  cornerBottomRightShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-bottom-shape
+   *
+   * The CSS `corner-bottom-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-bottom-shape
+   *
+   * @experimental
+   */
+  cornerBottomShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-end-end-shape
+   *
+   * The CSS `corner-end-end-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-end-end-shape
+   *
+   * @experimental
+   */
+  cornerEndEndShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-end-start-shape
+   *
+   * The CSS `corner-end-start-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-end-start-shape
+   *
+   * @experimental
+   */
+  cornerEndStartShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-inline-end-shape
+   *
+   * The CSS `corner-inline-end-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-inline-end-shape
+   *
+   * @experimental
+   */
+  cornerInlineEndShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-inline-start-shape
+   *
+   * The CSS `corner-inline-start-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-inline-start-shape
+   *
+   * @experimental
+   */
+  cornerInlineStartShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-left-shape
+   *
+   * The CSS `corner-left-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-left-shape
+   *
+   * @experimental
+   */
+  cornerLeftShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-right-shape
+   *
+   * The CSS `corner-right-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-right-shape
+   *
+   * @experimental
+   */
+  cornerRightShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-shape
+   *
+   * The CSS `corner-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-shape
+   *
+   * @experimental
+   */
+  cornerShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-start-end-shape
+   *
+   * The CSS `corner-start-end-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-start-end-shape
+   *
+   * @experimental
+   */
+  cornerStartEndShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-start-start-shape
+   *
+   * The CSS `corner-start-start-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-start-start-shape
+   *
+   * @experimental
+   */
+  cornerStartStartShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-top-left-shape
+   *
+   * The CSS `corner-top-left-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-top-left-shape
+   *
+   * @experimental
+   */
+  cornerTopLeftShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-top-right-shape
+   *
+   * The CSS `corner-top-right-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-top-right-shape
+   *
+   * @experimental
+   */
+  cornerTopRightShape?: StyleValueWithCondition<AnyString>
+  /**
+   * ### corner-top-shape
+   *
+   * The CSS `corner-top-shape` property.
+   *
+   * @see https://drafts.csswg.org/css-borders/#propdef-corner-top-shape
+   *
+   * @experimental
+   */
+  cornerTopShape?: StyleValueWithCondition<AnyString>
+  /**
    * ### counter-increment
    *
    * The <code>counter-reset</code> and <code>counter-increment</code> CSS properties and the <code>counter()</code> and <code>counters()</code> functions automatically number headings or ordered list items.
@@ -8367,7 +8554,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-ruby/#propdef-ruby-overhang
+   * @see https://developer.mozilla.org/docs/Web/CSS/ruby-overhang
    */
   rubyOverhang?: StyleValueWithCondition<AnyString>
   /**

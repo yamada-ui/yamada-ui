@@ -28,6 +28,12 @@ export interface Dict<Y = any> {
   [key: string]: Y
 }
 
+export type Prettify<T> = {
+  [K in keyof T]: T[K]
+} & {}
+
+export type FunctionOrValue<Y, M> = ((props: Y) => M) | M
+
 export type AnyString = string & {}
 
 export type Booleanish<Y> = Y extends "false" | "true" ? boolean : Y

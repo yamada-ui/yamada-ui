@@ -2,7 +2,7 @@ import { render, screen } from "#test"
 import { Separator } from "./separator"
 
 describe("<Separator />", () => {
-  test("renders separator correctly", () => {
+  test("renders component correctly", () => {
     render(<Separator />)
   })
 

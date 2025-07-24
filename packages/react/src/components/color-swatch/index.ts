@@ -1,5 +1,6 @@
 export * from "./color-swatch.style"
 export {
+  checkersProps,
   ColorSwatch,
   ColorSwatchPropsContext,
   useColorSwatchPropsContext,

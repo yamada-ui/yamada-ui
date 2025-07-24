@@ -3,7 +3,7 @@ import { defineComponentStyle } from "../../core"
 export const slideStyle = defineComponentStyle({
   base: {
     position: "fixed",
-    zIndex: "jeice",
+    zIndex: "guldo",
   },
 
   props: {

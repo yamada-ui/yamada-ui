@@ -3,7 +3,7 @@ import { NativeSelect } from "."
 import { BoxIcon } from "../icon"
 
 describe("<NativeSelect />", () => {
-  test("NativeSelect renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <NativeSelect.Root placeholder="Choice a option">
         <NativeSelect.Option value="one">Option 1</NativeSelect.Option>

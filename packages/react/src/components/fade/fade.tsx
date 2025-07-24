@@ -46,7 +46,7 @@ export { FadePropsContext, useFadePropsContext }
  *
  * @see https://yamada-ui.com/components/fade
  */
-export const Fade = withContext(
+export const Fade = withContext<"div", FadeProps>(
   ({
     delay,
     duration,

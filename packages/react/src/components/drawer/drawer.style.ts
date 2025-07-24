@@ -11,7 +11,7 @@ export const drawerStyle = defineComponentSlotStyle({
     content: {
       ...modalStyle.base?.content,
       position: "fixed",
-      rounded: "l5",
+      rounded: "l4",
     },
     dragBar: {
       bg: "bg.subtle",

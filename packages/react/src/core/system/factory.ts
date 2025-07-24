@@ -18,11 +18,15 @@ function factory() {
   const cache = new Map<DOMElement, ComponentType>()
 
   return new Proxy(createStyled, {
-    apply: (_target, _thisArg, [el, options]: [DOMElement, StyledOptions]) => {
+    apply: function (
+      _target,
+      _thisArg,
+      [el, options]: [DOMElement, StyledOptions],
+    ) {
       return createStyled(el, options)
     },
 
-    get: (_target, el: DOMElement) => {
+    get: function (_target, el: DOMElement): ComponentType | undefined {
       if (!cache.has(el)) cache.set(el, createStyled(el))
 
       return cache.get(el)

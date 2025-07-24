@@ -24,7 +24,7 @@ import {
 interface ComponentContext
   extends Pick<TabsRootProps, "items" | "lazy" | "lazyBehavior"> {}
 
-interface TabsItem extends TabsTabProps {
+interface TabsItem extends Omit<TabsTabProps, "index"> {
   /**
    * The content for panel element.
    */
@@ -69,7 +69,7 @@ export { TabsPropsContext, useTabsPropsContext }
  *
  * @see https://yamada-ui.com/components/tabs
  */
-export const TabsRoot: FC<TabsRootProps> = withProvider(
+export const TabsRoot = withProvider<"div", TabsRootProps, "orientation">(
   ({
     children,
     items,
@@ -80,6 +80,7 @@ export const TabsRoot: FC<TabsRootProps> = withProvider(
   }) => {
     const computedOrientation = useValue(orientationProp)
     const {
+      id,
       focusedIndex,
       index,
       manual,
@@ -97,6 +98,7 @@ export const TabsRoot: FC<TabsRootProps> = withProvider(
     )
     const tabsContext = useMemo(
       () => ({
+        id,
         focusedIndex,
         index,
         manual,
@@ -106,6 +108,7 @@ export const TabsRoot: FC<TabsRootProps> = withProvider(
         getListProps,
       }),
       [
+        id,
         manual,
         focusedIndex,
         index,
@@ -148,7 +151,7 @@ export const TabsList = withContext<"div", TabsListProps>(
             index,
           ) =>
             isUndefined(tab) || isNull(tab) ? null : (
-              <TabsTab id={id} key={id ?? index} {...rest}>
+              <TabsTab id={id} key={id ?? index} index={index} {...rest}>
                 {tab}
               </TabsTab>
             ),
@@ -183,7 +186,7 @@ export const TabsPanels: FC<TabsPanelsProps> = ({ children }) => {
     } else {
       return items?.map(({ id, panel, panelProps }, index) =>
         isUndefined(panel) || isNull(panel) ? null : (
-          <TabsPanel key={id ?? index} {...panelProps}>
+          <TabsPanel key={id ?? index} index={index} {...panelProps}>
             {panel}
           </TabsPanel>
         ),

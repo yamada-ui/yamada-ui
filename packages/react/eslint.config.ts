@@ -15,12 +15,6 @@ import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import tseslint from "typescript-eslint"
 
-// TODO: Remove legacy-components
-const ignoresConfig: TSESLint.FlatConfig.Config = {
-  name: "eslint/ignores",
-  ignores: ["src/legacy-components/**", "src/theme/components/**"],
-}
-
 const restrictedImportsConfigArray: TSESLint.FlatConfig.ConfigArray = [
   ...sharedRestrictedImportsConfigArray,
   {
@@ -67,7 +61,6 @@ const config: TSESLint.FlatConfig.ConfigArray = tseslint.config(
   ...sharedConfigArray,
   ...restrictedImportsConfigArray,
   importAliasConfig,
-  ignoresConfig,
   noConsoleConfig,
   cspellConfig,
   jsxA11yConfig,

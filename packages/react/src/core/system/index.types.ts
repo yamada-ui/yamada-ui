@@ -26,8 +26,6 @@ export type LayerScheme =
   | "size"
   | "tokens"
   | "variant"
-export type Direction = "end" | "start"
-export type TextDirection = "ltr" | "rtl"
 export type KeyframeIdent = "from" | "to"
 export type Orientation = "horizontal" | "vertical"
 export type Placement =
@@ -48,6 +46,9 @@ export type SimplePlacement =
   | "block-start"
   | "inline-end"
   | "inline-start"
+export type Direction = Exclude<Placement, "center" | "center-center">
+export type SimpleDirection = Extract<Placement, "end" | "start">
+export type TextDirection = "ltr" | "rtl"
 export type BreakpointDirection = "down" | "up"
 export type BreakpointIdentifier =
   | "@media screen"
@@ -140,7 +141,7 @@ export interface SnacksConfig {
    *
    * @default 'top'
    */
-  direction?: Direction
+  direction?: SimpleDirection
   /**
    * The number of `ms` the snack will continue to be displayed.
    *
@@ -313,24 +314,21 @@ export type ThemeProps<Y extends Dict = Dict> = ThemeComponentProps<Y> &
   ThemeSizeProps<Y> &
   ThemeVariantProps<Y>
 
-type ThemeProp = "size" | "variant"
-
 export type WithoutThemeProps<
   Y extends Dict = Dict,
-  M extends Dict | keyof Y = Dict,
+  M extends Dict = Dict,
   D extends keyof Y = keyof Y,
-> = M extends object
-  ? string extends keyof Required<M>["props"]
-    ? Omit<Y, keyof Y extends D ? ThemeProp : Exclude<ThemeProp, D>>
-    : Omit<
-        Y,
-        keyof Y extends D
-          ? keyof Required<M>["props"] | ThemeProp
-          : Exclude<keyof Required<M>["props"] | ThemeProp, D>
-      >
-  : M extends string
-    ? Omit<Y, keyof Y extends D ? M | ThemeProp : Exclude<M | ThemeProp, D>>
-    : never
+> = Omit<
+  Y,
+  Exclude<
+    | (string extends keyof Required<M>["props"]
+        ? never
+        : keyof Required<M>["props"])
+    | (string extends keyof Required<M>["sizes"] ? never : "size")
+    | (string extends keyof Required<M>["variants"] ? never : "variant"),
+    keyof Y extends D ? never : D
+  >
+>
 
 export type DefineThemeValue = number | string
 

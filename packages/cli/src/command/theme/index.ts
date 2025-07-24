@@ -31,7 +31,7 @@ import { isWriteable, prettier } from "../../utils"
 
 const ORG_NAME = "yamada-ui"
 const REPO_NAME = "yamada-ui"
-const DEFAULT_BRANCH_NAME = "main"
+const DEFAULT_BRANCH_NAME = "v1"
 
 const isOnline = async (): Promise<boolean> => {
   return new Promise((resolve) => {

@@ -23,7 +23,7 @@ export interface ColorSwatchGroupProps extends Omit<ColorSwatchProps, "color"> {
  */
 export const ColorSwatchGroup = (({
   items = [],
-  overlays,
+  layers,
   withShadow = true,
   itemProps,
   ...rest
@@ -38,8 +38,8 @@ export const ColorSwatchGroup = (({
     return (
       <ColorSwatch
         aria-label="color swatch group"
+        layers={layers}
         overflow="hidden"
-        overlays={overlays}
         withShadow={withShadow}
         {...rest}
       />
@@ -48,7 +48,7 @@ export const ColorSwatchGroup = (({
     return (
       <ColorSwatch
         aria-label="color swatch group"
-        overlays={withShadow ? [{ boxShadow: "inner" }] : []}
+        layers={withShadow ? [{ boxShadow: "inner" }] : []}
         {...rest}
       >
         <Grid templateColumns="repeat(2, 1fr)">

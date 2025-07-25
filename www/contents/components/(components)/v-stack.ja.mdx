@@ -1,0 +1,56 @@
+---
+title: VStack
+description: "`Stack`は、要素をグループ化し、子要素間にスペースを設けるコンポーネントです。`VStack`は、子要素を垂直方向にスタックするために使用されます。"
+storybook: components-stack--vertical
+source: components/stack
+---
+
+```tsx preview
+<VStack>
+  <For each={["info", "success", "warning", "error"]}>
+    {(bg, index) => (
+      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+        Box
+      </Box>
+    )}
+  </For>
+</VStack>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { VStack } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { VStack } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { VStack } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<VStack />
+```
+
+### 子要素間に区切り線を設ける
+
+`separator`を渡すことで、子要素間に区切り線を追加できます。
+
+```tsx preview
+<VStack separator={<Separator />}>
+  <For each={["info", "success", "warning", "error"]}>
+    {(bg, index) => (
+      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+        Box
+      </Box>
+    )}
+  </For>
+</VStack>
+```

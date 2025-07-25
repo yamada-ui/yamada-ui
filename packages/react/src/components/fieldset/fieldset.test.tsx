@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Fieldset } from "./"
 
 describe("<Fieldset />", () => {
-  test("Fieldset renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Fieldset.Root
         helperMessage="Please review the terms carefully before agreeing."

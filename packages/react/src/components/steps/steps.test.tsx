@@ -55,7 +55,7 @@ const TestComponent: FC<TestComponentProps> = ({ itemProps, ...rest }) => {
 }
 
 describe("<Stepper />", () => {
-  test("renders tag correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<TestComponent />)
   })
 

@@ -1,13 +1,16 @@
+import type { PropsWithChildren } from "react"
 import { Center, Timeline } from "@yamada-ui/react"
 import { Children, isValidElement, useMemo } from "react"
 
-export interface Steps extends Timeline.RootProps {}
+export interface StepsProps extends Timeline.RootProps {}
 
-export function Steps({ children, ...rest }) {
+export function Steps({ children, ...rest }: StepsProps) {
   const items = useMemo<Timeline.RootProps["items"]>(
     () =>
       Children.map(children, (child, index) => ({
-        content: isValidElement(child) ? child.props.children : child,
+        content: isValidElement<PropsWithChildren>(child)
+          ? child.props.children
+          : child,
         indicator: (
           <Center
             layerStyle="solid"
@@ -25,7 +28,7 @@ export function Steps({ children, ...rest }) {
             _lastChild: { mb: "0" },
           },
         },
-      })),
+      })) as Timeline.RootProps["items"],
     [children],
   )
 

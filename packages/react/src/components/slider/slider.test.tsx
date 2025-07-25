@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Slider } from "."
 
 describe("<Slider />", () => {
-  test("rating renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Slider.Root defaultValue={50} />)
   })
 
@@ -51,13 +51,13 @@ describe("<Slider />", () => {
   })
 
   test("disabled Slider renders correctly", () => {
-    render(<Slider.Root data-testid="slider" disabled />)
+    render(<Slider.Root disabled />)
 
     expect(screen.getByRole("slider")).toHaveAttribute("aria-disabled")
   })
 
   test("readonly Slider renders correctly", () => {
-    render(<Slider.Root data-testid="slider" readOnly />)
+    render(<Slider.Root readOnly />)
 
     expect(screen.getByRole("slider")).toHaveAttribute("aria-readonly")
   })

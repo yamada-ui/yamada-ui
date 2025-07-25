@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Mark } from "./"
 
 describe("<Mark />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Mark>Mark</Mark>)
   })
 

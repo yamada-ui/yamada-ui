@@ -2,32 +2,30 @@
 
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { ColorSwatchStyle } from "./color-swatch.style"
-import { createSlotComponent, styled, varAttr } from "../../core"
+import { createSlotComponent, styled } from "../../core"
 import { isString } from "../../utils"
 import { colorSwatchStyle } from "./color-swatch.style"
 
-const defaultOverlays = (
+export const checkersProps: HTMLStyledProps = {
+  bgImage: [
+    "linear-gradient(45deg, {checkers-fg} 25%, transparent 25%)",
+    "linear-gradient(-45deg, {checkers-fg} 25%, transparent 25%)",
+    "linear-gradient(45deg, transparent 75%, {checkers-fg} 75%)",
+    "linear-gradient(-45deg, {checkers-bg} 75%, {checkers-fg} 75%)",
+  ].join(", "),
+  bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
+  bgSize: `8px 8px`,
+}
+
+const defaultLayers = (
   background: CSSProps["color"],
   withShadow: boolean,
 ): HTMLStyledProps[] => {
-  const overlays: HTMLStyledProps[] = [
-    {
-      "--body": varAttr(["whiteAlpha.500", "blackAlpha.500"], "colors"),
-      "--checkers": varAttr(["blackAlpha.300", "whiteAlpha.300"], "colors"),
-      bgImage:
-        "linear-gradient(45deg, {checkers} 25%, transparent 25%), linear-gradient(-45deg, {checkers} 25%, transparent 25%), linear-gradient(45deg, transparent 75%, {checkers} 75%), linear-gradient(-45deg, {body} 75%, {checkers} 75%)",
-      bgPosition: `0 0, 0 4px, 4px -4px, -4px 0`,
-      bgSize: `8px 8px`,
-    },
-    { background },
-  ]
+  const layers: HTMLStyledProps[] = [checkersProps, { background }]
 
-  if (withShadow)
-    overlays.push({
-      boxShadow: "inner",
-    })
+  if (withShadow) layers.push({ boxShadow: "inner" })
 
-  return overlays
+  return layers
 }
 
 export interface ColorSwatchProps
@@ -42,7 +40,7 @@ export interface ColorSwatchProps
   /**
    * The overlay used for the swatch element.
    */
-  overlays?: HTMLStyledProps[]
+  layers?: HTMLStyledProps[]
   /**
    * If `true`, the swatch element has an inner `box-shadow`.
    *
@@ -73,7 +71,7 @@ export const ColorSwatch = withProvider<"div", ColorSwatchProps>(
     children,
     color = "#ffffff00",
     withShadow = true,
-    overlays = defaultOverlays(color, withShadow),
+    layers = defaultLayers(color, withShadow),
     ...rest
   }) => {
     return (
@@ -84,7 +82,7 @@ export const ColorSwatch = withProvider<"div", ColorSwatchProps>(
         {...rest}
       >
         {children}
-        {overlays.map((props, index) => (
+        {layers.map((props, index) => (
           <ColorSwatchOverlay key={index} {...props} />
         ))}
       </styled.div>

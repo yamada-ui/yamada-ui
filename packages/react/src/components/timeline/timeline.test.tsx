@@ -17,7 +17,7 @@ const items: Timeline.RootProps["items"] = [
 ]
 
 describe("<Timeline />", () => {
-  test("renders timeline correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Timeline.Root items={items} />)
   })
 

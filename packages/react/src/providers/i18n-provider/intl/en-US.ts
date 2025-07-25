@@ -16,6 +16,14 @@ export default {
   closeButton: {
     Close: "Close",
   },
+  hueSlider: {
+    Blue: "Blue",
+    Cyan: "Cyan",
+    Green: "Green",
+    Magenta: "Magenta",
+    Red: "Red",
+    Yellow: "Yellow",
+  },
   modal: {
     "Close modal": "Close modal",
     "Open modal": "Open modal",

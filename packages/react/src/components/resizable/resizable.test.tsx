@@ -13,7 +13,7 @@ function assert(
 }
 
 describe("<Resizable />", () => {
-  test("Resizable renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Resizable.Root>
         <Resizable.Item>One</Resizable.Item>

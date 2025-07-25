@@ -3,7 +3,7 @@ import { Button } from "./button"
 import { ButtonGroup } from "./button-group"
 
 describe("<Button />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <ButtonGroup>
         <Button>Button</Button>

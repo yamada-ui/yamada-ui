@@ -22,7 +22,7 @@ describe("<Rating />", () => {
     vi.clearAllMocks()
   })
 
-  test("rating renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Rating />)
   })
 

@@ -4,7 +4,7 @@ import { EyeIcon, EyeOffIcon } from "../icon"
 import { PasswordInput, StrengthMeter } from "./"
 
 describe("<PasswordInput />", () => {
-  test("PasswordInput renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<PasswordInput placeholder="password" />)
   })
 
@@ -81,7 +81,7 @@ describe("<PassWordInputStrengthMeter />", () => {
     )
   }
 
-  test("PasswordInputStrengthMeter renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<StrengthMeter value={3} />)
   })
 

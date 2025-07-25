@@ -4,7 +4,7 @@ import { isNumber } from "../../utils"
 import { IconButton } from "../icon-button"
 
 describe("<Pagination />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Pagination.Root total={10} withEdges />)
   })
 

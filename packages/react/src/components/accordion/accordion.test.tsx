@@ -19,7 +19,7 @@ const items = [
 ]
 
 describe("<Accordion />", () => {
-  test("Accordion renders correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Accordion.Root>
         <Accordion.Item button="Accordion Label" index={0}>

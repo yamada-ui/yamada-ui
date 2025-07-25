@@ -40,7 +40,7 @@ describe("<Carousel />", () => {
     vi.stubGlobal("IntersectionObserver", defaultIntersectionObserver)
   })
 
-  test("renders tag correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<TestComponent />)
   })
 

@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { Link } from "."
 
 describe("<Link />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Link href="https://yamada-ui.com">Link</Link>)
   })
 

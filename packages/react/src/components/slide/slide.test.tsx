@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Slide } from "./slide"
 
 describe("<Slide />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Slide />)
   })
 

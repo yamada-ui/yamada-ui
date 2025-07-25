@@ -3,7 +3,7 @@ import { QuoteIcon } from "../icon"
 import { Blockquote } from "./"
 
 describe("<Blockquote />", () => {
-  test("renders blockquote correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Blockquote.Root citeUrl="https://ja.wikipedia.org/wiki/ドラゴンボール">
         <Blockquote.Icon>

@@ -4,7 +4,7 @@ import { CheckIcon } from "../icon"
 import { Tag } from "./"
 
 describe("<Tag />", () => {
-  test("renders tag correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(<Tag>Tag</Tag>)
   })
 

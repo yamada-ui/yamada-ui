@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Reorder } from "./"
 
 describe("<Reorder />", () => {
-  test("renders with no errors", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Reorder.Root>
         <Reorder.Item value="Item 1">Item 1</Reorder.Item>

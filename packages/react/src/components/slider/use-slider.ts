@@ -204,9 +204,6 @@ export const useSlider = <Y extends [number, number] | number = number>(
   const oneStep = step || (max - min) / 100
 
   if (max < min) console.warn("Do not assign a number less than 'min' to 'max'")
-  if (100 < max)
-    console.warn("Do not assign a number greater than 100 to 'max'")
-  if (0 > min) console.warn("Do not assign a number less than 0 to 'min'")
 
   const getMinMax = useCallback(
     (index: number) => {

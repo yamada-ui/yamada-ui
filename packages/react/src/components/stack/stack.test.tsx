@@ -7,7 +7,7 @@ import { Separator } from "../separator"
 import { Stack } from "./stack"
 
 describe("<Stack />", () => {
-  test("renders stack correctly", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <Stack>
         <Box>Stack Item</Box>

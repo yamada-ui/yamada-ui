@@ -48,7 +48,7 @@ const TestContent: FC = () => {
 }
 
 describe("<ScrollArea />", () => {
-  test("renders with no errors", async () => {
+  test("renders component correctly", async () => {
     await a11y(
       <ScrollArea h="xs">
         <TestContent />

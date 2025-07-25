@@ -2,7 +2,7 @@ import { a11y, render, screen } from "#test"
 import { FormatByte } from "./format-byte"
 
 describe("<FormatByte />", () => {
-  test("passes a11y test", async () => {
+  test("renders component correctly", async () => {
     await a11y(<FormatByte value={1024} />)
   })
 

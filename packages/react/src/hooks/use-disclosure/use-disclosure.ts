@@ -3,9 +3,17 @@
 import { useCallback, useRef, useState } from "react"
 import { useCallbackRef } from "../../utils"
 
+export type DisclosureCallback<Y, M> = [Y] extends [never]
+  ? () => M
+  : undefined extends Y
+    ? (value?: Y) => M
+    : (value: Y) => M
+
 export interface UseDisclosureProps<
-  Y extends (...args: any[]) => Promise<void> | void = () => void,
-  M extends (...args: any[]) => Promise<void> | void = () => void,
+  Y = never,
+  M = never,
+  D = Promise<void> | void,
+  H = Promise<void> | void,
 > {
   /**
    * If `true`, the element will be initially opened.
@@ -24,11 +32,11 @@ export interface UseDisclosureProps<
   /**
    * Callback invoked to close the element.
    */
-  onClose?: M
+  onClose?: DisclosureCallback<M, H>
   /**
    * Callback invoked to open the element.
    */
-  onOpen?: Y
+  onOpen?: DisclosureCallback<Y, D>
 }
 
 /**
@@ -38,15 +46,17 @@ export interface UseDisclosureProps<
  * @see https://yamada-ui.com/hooks/use-disclosure
  */
 export const useDisclosure = <
-  Y extends (...args: any[]) => Promise<void> | void = () => void,
-  M extends (...args: any[]) => Promise<void> | void = () => void,
+  Y = never,
+  M = never,
+  D = Promise<void> | void,
+  H = Promise<void> | void,
 >({
   defaultOpen = false,
   open: controlledOpen,
   timing,
   onClose: onCloseProp,
   onOpen: onOpenProp,
-}: UseDisclosureProps<Y, M> = {}) => {
+}: UseDisclosureProps<Y, M, D, H> = {}) => {
   const [uncontrolledOpen, setUncontrolledOpen] = useState<boolean>(defaultOpen)
 
   const timingRef = useRef(timing ?? "after")
@@ -57,34 +67,32 @@ export const useDisclosure = <
   const open = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen
 
   const onOpen = useCallback(
-    async (...args: Parameters<Y>) => {
-      if (timingRef.current === "before") await handleOpen(...args)
+    async (value: Y) => {
+      if (timingRef.current === "before") await handleOpen(value)
 
       if (!controlled) setUncontrolledOpen(true)
 
-      if (timingRef.current === "after") await handleOpen(...args)
+      if (timingRef.current === "after") await handleOpen(value)
     },
     [controlled, handleOpen, timingRef],
-  ) as Y
+  ) as DisclosureCallback<Y, D>
 
   const onClose = useCallback(
-    async (...args: Parameters<M>) => {
-      if (timingRef.current === "before") await handleClose(...args)
+    async (value: M) => {
+      if (timingRef.current === "before") await handleClose(value)
 
       if (!controlled) setUncontrolledOpen(false)
 
-      if (timingRef.current === "after") await handleClose(...args)
+      if (timingRef.current === "after") await handleClose(value)
     },
     [controlled, handleClose, timingRef],
-  ) as M
+  ) as DisclosureCallback<M, H>
 
   const onToggle = useCallback(
-    async (...args: Parameters<M> | Parameters<Y>) =>
-      !open
-        ? onOpen(...(args as Parameters<Y>))
-        : onClose(...(args as Parameters<M>)),
+    async (value: M | Y) =>
+      !open ? await onOpen(value as Y) : await onClose(value as M),
     [open, onOpen, onClose],
-  ) as M | Y
+  ) as DisclosureCallback<M, H> | DisclosureCallback<Y, D>
 
   return {
     open,
@@ -94,4 +102,9 @@ export const useDisclosure = <
   }
 }
 
-export type UseDisclosureReturn = ReturnType<typeof useDisclosure>
+export type UseDisclosureReturn<
+  Y = never,
+  M = never,
+  D = Promise<void> | void,
+  H = Promise<void> | void,
+> = ReturnType<typeof useDisclosure<Y, M, D, H>>

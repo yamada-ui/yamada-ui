@@ -47,6 +47,7 @@ export function CodeGroup({ children, ids }: CodeGroupProps) {
           <Tabs.Panel
             css={{ "& > div": { m: "0", roundedTop: "0" } }}
             index={index}
+            tabIndex={-1}
           >
             {child}
           </Tabs.Panel>

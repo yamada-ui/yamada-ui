@@ -154,7 +154,12 @@ export function MDXContent({ code, components }: MDXContentProps) {
   const Content = useMemo(() => getContent(code), [code])
 
   return Content ? (
-    <Box lineHeight="1.8" _lastChild={{ mb: "0" }}>
+    <Box
+      lineHeight="1.8"
+      position="relative"
+      zIndex="0"
+      _lastChild={{ mb: "0" }}
+    >
       <Content components={{ ...mdxComponents, ...components }} />
     </Box>
   ) : null

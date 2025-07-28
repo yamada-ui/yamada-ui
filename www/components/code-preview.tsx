@@ -115,6 +115,8 @@ export function CodePreview({
         pe={{ base: "13", md: "11" }}
         ps="{space}"
         py="{space}"
+        rounded="l2"
+        tabIndex={0}
       />
       <CopyButton
         position="absolute"

@@ -42,7 +42,7 @@ export function CodeBlock({
             <Tabs.Tab index={1}>{t("code")}</Tabs.Tab>
           </Tabs.List>
 
-          <Tabs.Panel index={0}>
+          <Tabs.Panel index={0} rounded="l2">
             <Box borderWidth="1px" p="{space}" rounded="l2">
               {client ? (
                 <ClientOnly
@@ -59,7 +59,7 @@ export function CodeBlock({
               )}
             </Box>
           </Tabs.Panel>
-          <Tabs.Panel index={1}>
+          <Tabs.Panel index={1} tabIndex={-1}>
             <Pre lang={lang}>{children}</Pre>
           </Tabs.Panel>
         </Tabs.Root>

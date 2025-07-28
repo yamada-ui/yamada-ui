@@ -1,6 +1,0 @@
-import{t as o,u as s,j as t,T as a}from"./iframe-BbB59fLB.js";const i=o({base:{fontSize:"italic"}}),{withContext:r}=s("em",i),n=r("em")(),c={component:n,title:"Components / Em"},e=()=>t.jsxs(a,{children:[t.jsx(n,{children:"Unleash the Power"})," of Styling, Animation, and Flexibility in React Apps."]});e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`() => {
-  return <Text>
-      <Em>Unleash the Power</Em> of Styling, Animation, and Flexibility in React
-      Apps.
-    </Text>;
-}`,...e.parameters?.docs?.source}}};const l=["Basic"];export{e as Basic,l as __namedExportsOrder,c as default};

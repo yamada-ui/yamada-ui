@@ -1,0 +1,4 @@
+import{ap as m,r,j as l,T as u}from"./iframe-BHpF9Anv.js";const d=(e,a=!1)=>{const{getWindow:t}=m(),i=r.useCallback(c=>{const o=t()?.matchMedia(e);return o?.addEventListener("change",c),()=>{o?.removeEventListener("change",c)}},[t,e]),n=r.useCallback(()=>t()?.matchMedia(e).matches??a,[t,e,a]);return r.useSyncExternalStore(i,n,n)},x={title:"Hooks / useMediaQuery"},s=()=>{const e=d("(min-width: 1280px)");return l.jsx(u,{children:e?"larger than 1280px":"smaller than 1280px"})};s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`() => {
+  const flg = useMediaQuery("(min-width: 1280px)");
+  return <Text>{flg ? "larger than 1280px" : "smaller than 1280px"}</Text>;
+}`,...s.parameters?.docs?.source}}};const h=["Basic"];export{s as Basic,h as __namedExportsOrder,x as default};

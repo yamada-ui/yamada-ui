@@ -5,14 +5,7 @@ import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldsetStyle } from "./fieldset.style"
 import { useId, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import {
-  createContext,
-  dataAttr,
-  findChild,
-  getValidChildren,
-  isEmpty,
-  omitChildren,
-} from "../../utils"
+import { createContext, dataAttr, useSplitChildren } from "../../utils"
 import { fieldsetStyle } from "./fieldset.style"
 
 interface FieldsetContext
@@ -110,22 +103,21 @@ export const FieldsetRoot = withProvider<"fieldset", FieldsetRootProps>(
     ...rest
   }) => {
     const uuid = useId()
-    const validChildren = getValidChildren(children)
-    const customLegend = findChild(validChildren, FieldsetLegend)
-    const customHeader = findChild(validChildren, FieldsetHeader)
-    const customContent = findChild(validChildren, FieldsetContent)
-    const customHelperMessage = findChild(validChildren, FieldsetHelperMessage)
-    const customErrorMessage = findChild(validChildren, FieldsetErrorMessage)
-    const cloneChildren = !isEmpty(validChildren)
-      ? omitChildren(
-          validChildren,
-          FieldsetLegend,
-          FieldsetHeader,
-          FieldsetContent,
-          FieldsetHelperMessage,
-          FieldsetErrorMessage,
-        )
-      : children
+    const [
+      omittedChildren,
+      customLegend,
+      customHeader,
+      customContent,
+      customHelperMessage,
+      customErrorMessage,
+    ] = useSplitChildren(
+      children,
+      FieldsetLegend,
+      FieldsetHeader,
+      FieldsetContent,
+      FieldsetHelperMessage,
+      FieldsetErrorMessage,
+    )
 
     id ??= uuid
 
@@ -158,7 +150,9 @@ export const FieldsetRoot = withProvider<"fieldset", FieldsetRootProps>(
           )}
 
           {customContent || (
-            <FieldsetContent {...contentProps}>{cloneChildren}</FieldsetContent>
+            <FieldsetContent {...contentProps}>
+              {omittedChildren}
+            </FieldsetContent>
           )}
 
           {customErrorMessage ||

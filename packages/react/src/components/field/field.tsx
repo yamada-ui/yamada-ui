@@ -5,14 +5,7 @@ import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldStyle } from "./field.style"
 import { isValidElement, useId, useMemo, useState } from "react"
 import { createSlotComponent, styled } from "../../core"
-import {
-  createContext,
-  dataAttr,
-  findChild,
-  getValidChildren,
-  isEmpty,
-  omitChildren,
-} from "../../utils"
+import { createContext, dataAttr, useSplitChildren } from "../../utils"
 import { fieldStyle } from "./field.style"
 
 export interface FieldContext
@@ -134,18 +127,17 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
     const helperMessageId = useId()
     const errorMessageId = useId()
     const [focused, setFocused] = useState<boolean>(false)
-    const validChildren = getValidChildren(children)
-    const customLabel = findChild(validChildren, FieldLabel)
-    const customHelperMessage = findChild(validChildren, FieldHelperMessage)
-    const customErrorMessage = findChild(validChildren, FieldErrorMessage)
-    const cloneChildren = !isEmpty(validChildren)
-      ? omitChildren(
-          validChildren,
-          FieldLabel,
-          FieldHelperMessage,
-          FieldErrorMessage,
-        )
-      : children
+    const [
+      omittedChildren,
+      customLabel,
+      customHelperMessage,
+      customErrorMessage,
+    ] = useSplitChildren(
+      children,
+      FieldLabel,
+      FieldHelperMessage,
+      FieldErrorMessage,
+    )
 
     id ??= uuid
 
@@ -196,7 +188,7 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
               </FieldLabel>
             ) : null)}
 
-          {cloneChildren}
+          {omittedChildren}
 
           {customHelperMessage ||
             (helperMessage ? (

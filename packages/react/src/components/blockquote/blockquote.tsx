@@ -5,7 +5,7 @@ import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { BlockquoteStyle } from "./blockquote.style"
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { findChild, getValidChildren } from "../../utils"
+import { useFindChild, useValidChildren } from "../../utils"
 import { QuoteIcon } from "../icon"
 import { blockquoteStyle } from "./blockquote.style"
 
@@ -71,9 +71,15 @@ export const BlockquoteRoot = withProvider<"figure", BlockquoteRootProps>(
     contentProps,
     ...rest
   }) => {
-    const validChildren = getValidChildren(children)
-    const customBlockquoteContent = findChild(validChildren, BlockquoteContent)
-    const customBlockquoteCaption = findChild(validChildren, BlockquoteCaption)
+    const validChildren = useValidChildren(children)
+    const customBlockquoteContent = useFindChild(
+      validChildren,
+      BlockquoteContent,
+    )
+    const customBlockquoteCaption = useFindChild(
+      validChildren,
+      BlockquoteCaption,
+    )
 
     const context = useMemo(() => ({ citeUrl, withDash }), [citeUrl, withDash])
 

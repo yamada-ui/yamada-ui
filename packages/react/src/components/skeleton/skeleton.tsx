@@ -2,9 +2,8 @@
 
 import type { CSSProps, HTMLStyledProps, ThemeProps } from "../../core"
 import type { SkeletonStyle } from "./skeleton.style"
-import { useMemo } from "react"
 import { createComponent, varAttr } from "../../core"
-import { dataAttr, getValidChildren, isNumber } from "../../utils"
+import { dataAttr, isNumber, useValidChildren } from "../../utils"
 import { skeletonStyle } from "./skeleton.style"
 
 export interface SkeletonProps
@@ -59,7 +58,7 @@ export const Skeleton = withContext("div", { transferProps: ["loading"] })(
     startColor,
     ...rest
   }) => {
-    const validChildren = useMemo(() => getValidChildren(children), [children])
+    const validChildren = useValidChildren(children)
     const hasChildren = !!validChildren.length
 
     fitContent ??= hasChildren

@@ -320,7 +320,7 @@
       "required": false
     },
     "onClose": {
-      "type": "() => void",
+      "type": "() => void | Promise<void>",
       "description": "Callback invoked to close the element.",
       "required": false
     },
@@ -340,7 +340,7 @@
       "required": false
     },
     "onOpen": {
-      "type": "() => void",
+      "type": "() => void | Promise<void>",
       "description": "Callback invoked to open the element.",
       "required": false
     },

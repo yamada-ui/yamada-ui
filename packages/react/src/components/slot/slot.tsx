@@ -6,7 +6,7 @@ import type {
 } from "react"
 import { Children, cloneElement, isValidElement } from "react"
 import { mergeProps } from "../../core"
-import { findChild, getValidChildren } from "../../utils"
+import { useFindChild, useValidChildren } from "../../utils"
 
 export interface SlotProps
   extends HTMLAttributes<HTMLElement>,
@@ -19,8 +19,8 @@ export interface SlotProps
  * @see https://yamada-ui.com/components/slot
  */
 export const Slot: FC<SlotProps> = ({ children, ...rest }) => {
-  const validChildren = getValidChildren(children)
-  const slottable = findChild(validChildren, Slottable)
+  const validChildren = useValidChildren(children)
+  const slottable = useFindChild(validChildren, Slottable)
 
   if (slottable) {
     const newElement = slottable.props.children

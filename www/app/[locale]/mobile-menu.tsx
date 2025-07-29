@@ -1,10 +1,14 @@
 "use client"
 
 import type { NextLinkButtonProps } from "@/components"
+import type { DocMap } from "@/data"
 import {
   Box,
+  Button,
   ButtonGroup,
+  ChevronRightIcon,
   CloseButton,
+  Collapse,
   Drawer,
   GithubIcon,
   handlerAll,
@@ -15,9 +19,10 @@ import {
   useBreakpointEffect,
   useDisclosure,
   useUpdateEffect,
+  VStack,
 } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import {
   DiscordIcon,
   NextLinkButton,
@@ -135,28 +140,24 @@ function DocsMenu({ onClose }: DocsMenuProps) {
   const { locale } = useLocale()
   const docMap = useMemo(() => getDocMap(locale), [locale])
   const changelog = pathname.startsWith("/docs/changelog")
-
-  const primaryItems = useMemo(() => {
-    const { items = [] } = docMap
-
-    return items
-  }, [docMap])
-
-  const secondaryItems = useMemo(() => {
-    if (!pathname.startsWith("/docs")) return []
-
-    const { items = [], pathname: href } =
-      primaryItems.find((item) => pathname.startsWith(item.pathname!)) ?? {}
-
-    return [
-      {
-        pathname: href,
-        segment: "overview",
-        title: changelog ? t("latest") : t("overview"),
-      },
-      ...items,
-    ]
-  }, [changelog, pathname, primaryItems, t])
+  const items = useMemo(() => {
+    return (
+      docMap.items?.map((item) => ({
+        ...item,
+        items: [
+          {
+            pathname: item.pathname,
+            segment: "overview",
+            title: changelog ? t("latest") : t("overview"),
+          },
+          ...(item.items ?? []),
+        ],
+      })) ?? []
+    )
+  }, [changelog, docMap.items, t])
+  const [selectedPathname, setSelectedPathname] = useState<string | undefined>(
+    items.find((item) => pathname.startsWith(item.pathname!))?.pathname,
+  )
 
   return (
     <>
@@ -171,78 +172,111 @@ function DocsMenu({ onClose }: DocsMenuProps) {
         gap="xs"
         w="full"
       >
-        {primaryItems.map(({ pathname: href, segment, title }) => (
-          <DocsMenuItem
-            key={href}
-            href={href!}
-            segment={segment}
-            onClose={onClose}
-          >
-            {title}
-          </DocsMenuItem>
-        ))}
+        {items.map((item) => {
+          const open = selectedPathname === item.pathname
+
+          return (
+            <DocsMenuGroup
+              key={item.pathname}
+              open={open}
+              onClick={() =>
+                setSelectedPathname(open ? undefined : item.pathname)
+              }
+              onClose={onClose}
+              {...item}
+            />
+          )
+        })}
       </ButtonGroup>
-
-      <Separator display={pathname.startsWith("/docs") ? "block" : "none"} />
-
-      <Box
-        as="nav"
-        display={pathname.startsWith("/docs") ? "block" : "none"}
-        w="full"
-        _lastChild={{ mb: "0" }}
-      >
-        {secondaryItems.map(
-          ({ items, pathname: href, segment, status, title }) => {
-            if (items) {
-              return (
-                <Box key={segment} my="lg" _lastChild={{ mb: "0" }}>
-                  <Text
-                    as="span"
-                    color="fg.muted"
-                    fontSize="sm"
-                    lineClamp={1}
-                    mb="2"
-                    ms="3"
-                  >
-                    {title}
-                  </Text>
-
-                  {items.map(({ pathname: href, segment, status, title }) => {
-                    return (
-                      <DocsMenuItem
-                        key={href}
-                        href={href!}
-                        segment={segment}
-                        onClose={onClose}
-                      >
-                        <Text as="span" lineClamp={1}>
-                          {title}
-                        </Text>
-                        {status ? <Status status={status} /> : null}
-                      </DocsMenuItem>
-                    )
-                  })}
-                </Box>
-              )
-            } else {
-              return (
-                <DocsMenuItem
-                  key={segment}
-                  href={href!}
-                  segment={segment}
-                  onClose={onClose}
-                >
-                  <Text as="span" lineClamp={1}>
-                    {title}
-                  </Text>
-                  {status ? <Status status={status} /> : null}
-                </DocsMenuItem>
-              )
-            }
-          },
-        )}
-      </Box>
     </>
+  )
+}
+
+interface DocsMenuGroupProps extends DocMap {
+  open: boolean
+  onClick: () => void
+  onClose: () => void
+}
+
+function DocsMenuGroup({
+  items = [],
+  open,
+  title,
+  onClick,
+  onClose,
+}: DocsMenuGroupProps) {
+  return (
+    <VStack gap="xs">
+      <Button
+        size="sm"
+        variant="ghost"
+        endIcon={
+          <ChevronRightIcon
+            color="fg.muted"
+            ms="auto"
+            transform={open ? "rotate(90deg)" : "rotate(0deg)"}
+            transitionDuration="moderate"
+            transitionProperty="transform"
+          />
+        }
+        fontWeight="normal"
+        justifyContent="flex-start"
+        onClick={onClick}
+      >
+        <Text>{title}</Text>
+      </Button>
+
+      <Collapse as="nav" open={open} ps="md" w="full" _lastChild={{ mb: "0" }}>
+        {items.map(({ items, pathname: href, segment, status, title }) => {
+          if (items) {
+            return (
+              <Box key={segment} my="lg" _lastChild={{ mb: "0" }}>
+                <Text
+                  as="span"
+                  color="fg.muted"
+                  fontSize="sm"
+                  lineClamp={1}
+                  mb="2"
+                  ms="3"
+                >
+                  {title}
+                </Text>
+
+                {items.map(({ pathname: href, segment, status, title }) => {
+                  return (
+                    <DocsMenuItem
+                      key={href}
+                      href={href!}
+                      segment={segment}
+                      onClose={onClose}
+                    >
+                      <Text as="span" lineClamp={1}>
+                        {title}
+                      </Text>
+                      {status ? <Status status={status} /> : null}
+                    </DocsMenuItem>
+                  )
+                })}
+              </Box>
+            )
+          } else {
+            return (
+              <DocsMenuItem
+                key={segment}
+                href={href!}
+                segment={segment}
+                onClose={onClose}
+              >
+                <Text as="span" lineClamp={1}>
+                  {title}
+                </Text>
+                {status ? <Status status={status} /> : null}
+              </DocsMenuItem>
+            )
+          }
+        })}
+      </Collapse>
+    </VStack>
   )
 }
 

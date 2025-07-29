@@ -14,12 +14,7 @@ import { AnimatePresence } from "motion/react"
 import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, styled } from "../../core"
-import {
-  cast,
-  findChildren,
-  getValidChildren,
-  wrapOrPassProps,
-} from "../../utils"
+import { cast, isArray, useSplitChildren, wrapOrPassProps } from "../../utils"
 import { Button } from "../button"
 import { CloseButton } from "../close-button"
 import { fadeVariants } from "../fade"
@@ -134,17 +129,13 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
     onSuccess,
     ...props
   }) => {
-    const validChildren = getValidChildren(children)
-    const [openTrigger, ...omittedChildren] = findChildren(
-      validChildren,
+    const [omittedChildren, openTrigger, customOverlay] = useSplitChildren(
+      children,
       ModalOpenTrigger,
-    )
-    const [customOverlay, ...cloneChildren] = findChildren(
-      omittedChildren,
       ModalOverlay,
     )
+    const hasChildren = isArray(omittedChildren) && !!omittedChildren.length
     const { open, getRootProps, ...rest } = useModal(props)
-    const hasChildren = !!cloneChildren.length
     const customOpenTrigger = trigger ? (
       <ModalOpenTrigger>{trigger}</ModalOpenTrigger>
     ) : null
@@ -183,7 +174,7 @@ export const ModalRoot = withProvider<"div", ModalRootProps>(
                     {customOverlay ?? (withOverlay ? <ModalOverlay /> : null)}
 
                     {hasChildren ? (
-                      cloneChildren
+                      omittedChildren
                     ) : (
                       <ShorthandModalContent
                         body={body}
@@ -272,9 +263,8 @@ export const ModalContent = withContext<"section", ModalContentProps>(
   ({ children, ...rest }) => {
     const { animationScheme, duration, withCloseButton, getContentProps } =
       useComponentContext()
-    const validChildren = getValidChildren(children)
-    const [customCloseButton, ...cloneChildren] = findChildren(
-      validChildren,
+    const [omittedChildren, customCloseButton] = useSplitChildren(
+      children,
       ModalCloseButton,
     )
 
@@ -287,7 +277,7 @@ export const ModalContent = withContext<"section", ModalContentProps>(
       >
         {customCloseButton ?? (withCloseButton ? <ModalCloseButton /> : null)}
 
-        {cloneChildren}
+        {omittedChildren}
       </motion.section>
     )
   },

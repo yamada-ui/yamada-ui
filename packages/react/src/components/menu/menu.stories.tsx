@@ -197,9 +197,7 @@ export const Group: Story = () => {
         </Menu.Trigger>
 
         <Menu.Content>
-          <Menu.Label>第七班</Menu.Label>
-
-          <Menu.Group>
+          <Menu.Group label="第七班">
             <Menu.Item value="naruto">うずまきナルト</Menu.Item>
             <Menu.Item value="sasuke">うちはサスケ</Menu.Item>
             <Menu.Item value="sakura">春野サクラ</Menu.Item>
@@ -207,9 +205,7 @@ export const Group: Story = () => {
 
           <Menu.Separator />
 
-          <Menu.Label>伝説の三忍</Menu.Label>
-
-          <Menu.Group>
+          <Menu.Group label="伝説の三忍">
             <Menu.Item value="orochimaru">大蛇丸</Menu.Item>
             <Menu.Item value="pervy-sage">自來也</Menu.Item>
             <Menu.Item value="tsunade">綱手</Menu.Item>

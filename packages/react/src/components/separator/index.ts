@@ -1,3 +1,4 @@
+export * from "./separator.style"
 export {
   Separator,
   SeparatorPropsContext,

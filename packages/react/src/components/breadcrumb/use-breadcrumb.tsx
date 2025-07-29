@@ -5,7 +5,7 @@ import type { HTMLProps, PropGetter } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
 import { cloneElement, useCallback, useMemo } from "react"
 import { useI18n } from "../../providers/i18n-provider"
-import { getValidChildren, runIfFn } from "../../utils"
+import { runIfFn, useValidChildren } from "../../utils"
 
 interface BreadcrumbItem extends HTMLProps<"a"> {
   currentPage?: boolean
@@ -48,7 +48,7 @@ export const useBreadcrumb = ({
   startBoundaries = 0,
   ...rest
 }: UseBreadcrumbProps = {}) => {
-  const validChildren = getValidChildren(children)
+  const validChildren = useValidChildren(children)
   const length = validChildren.length || items.length
   const { t } = useI18n("breadcrumb")
 

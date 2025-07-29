@@ -137,7 +137,6 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
       computedChildren,
       dataProps,
       eventProps,
-
       rest,
       placeholder,
       disabled,

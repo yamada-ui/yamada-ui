@@ -8,7 +8,10 @@ export const menuStyle = defineComponentSlotStyle({
       ms: "auto",
     },
     content: { gap: "0", p: "1" },
-    group: {},
+    group: {
+      display: "flex",
+      flexDirection: "column",
+    },
     indicator: {},
     item: {
       alignItems: "center",

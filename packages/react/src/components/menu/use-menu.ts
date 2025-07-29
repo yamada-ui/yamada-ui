@@ -55,6 +55,14 @@ const [MenuContext, useMenuContext] = createContext<MenuContext>({
   name: "MenuContext",
 })
 
+interface MenuGroupContext extends Pick<UseMenuGroupReturn, "getLabelProps"> {}
+
+const [MenuGroupContext, useMenuGroupContext] = createContext<MenuGroupContext>(
+  {
+    name: "MenuGroupContext",
+  },
+)
+
 interface MainMenuContext {
   descendants: Descendants<HTMLDivElement, MenuDescendantProps>
   onActiveDescendant: (descendant?: MenuDescendant) => void
@@ -83,9 +91,11 @@ const [MenuOptionGroupContext, useMenuOptionGroupContext] =
 export {
   MainMenuContext,
   MenuContext,
+  MenuGroupContext,
   MenuOptionGroupContext,
   useMainMenuContext,
   useMenuContext,
+  useMenuGroupContext,
   useMenuOptionGroupContext,
 }
 
@@ -281,11 +291,6 @@ export const useMenu = ({
     [triggerId],
   )
 
-  const getGroupProps: PropGetter = useCallback(
-    (props) => ({ role: "group", ...props }),
-    [],
-  )
-
   const getSeparatorProps: PropGetter = useCallback(
     (props) => ({ role: "separator", ...props }),
     [],
@@ -300,7 +305,6 @@ export const useMenu = ({
     updateRef,
     getContentProps,
     getContextTriggerProps,
-    getGroupProps,
     getSeparatorProps,
     getTriggerProps,
     onActiveDescendant,
@@ -505,6 +509,31 @@ export const useSubMenu = ({
 }
 
 export type UseSubMenuReturn = ReturnType<typeof useSubMenu>
+
+export interface UseMenuGroupProps extends HTMLProps {}
+
+export const useMenuGroup = ({ ...rest }: UseMenuGroupProps) => {
+  const labelId = useId()
+
+  const getGroupProps: PropGetter = useCallback(
+    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
+      "aria-labelledby": cx(rest["aria-labelledby"], ariaLabelledby, labelId),
+      role: "group",
+      ...rest,
+      ...props,
+    }),
+    [labelId, rest],
+  )
+
+  const getLabelProps: PropGetter<"span"> = useCallback(
+    (props) => ({ id: labelId, role: "presentation", ...props }),
+    [labelId],
+  )
+
+  return { getGroupProps, getLabelProps }
+}
+
+export type UseMenuGroupReturn = ReturnType<typeof useMenuGroup>
 
 export interface UseMenuItemProps extends HTMLProps {
   /**

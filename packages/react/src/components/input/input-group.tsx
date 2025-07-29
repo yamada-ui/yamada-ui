@@ -6,7 +6,7 @@ import type { GroupProps } from "../group"
 import type { InputProps } from "./input"
 import type { InputStyle } from "./input.style"
 import { cloneElement, useMemo } from "react"
-import { getValidChildren, isSomeElement } from "../../utils"
+import { isSomeElement, useValidChildren } from "../../utils"
 import { useFieldProps } from "../field"
 import { Group } from "../group"
 import { InputPropsContext } from "./input"
@@ -35,7 +35,7 @@ export const InputGroupRoot = ((props: InputGroupRootProps) => {
     },
     dataProps,
   } = useFieldProps(props)
-  const validChildren = getValidChildren(children)
+  const validChildren = useValidChildren(children)
   const cloneChildren = useMemo(
     () =>
       validChildren.map((child, index) => {

@@ -16,12 +16,12 @@ import {
 import {
   createContext,
   dataAttr,
-  getValidChildren,
   handlerAll,
   isArray,
   isObject,
   mergeRefs,
   useUpdateEffect,
+  useValidChildren,
 } from "../../utils"
 
 const getAlternativeValue = ({ children, label }: Dict = {}) =>
@@ -99,7 +99,7 @@ export const useReorder = <Y = string>({
   ...rest
 }: UseReorderProps<Y> = {}) => {
   const axis = orientation === "vertical" ? "y" : "x"
-  const validChildren = useMemo(() => getValidChildren(children), [children])
+  const validChildren = useValidChildren(children)
   const hasChildren = !!validChildren.length
   const defaultValues = useMemo(() => {
     const values = hasChildren

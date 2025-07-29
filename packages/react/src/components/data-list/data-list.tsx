@@ -156,12 +156,24 @@ export const DataListItem = withContext<"div", DataListItemProps>(
   }) => {
     const { descriptionProps, termProps } = useComponentContext()
 
-    const validChildren = getValidChildren(children)
-    const customTerms = pickChildren(validChildren, DataListTerm)
-    const customDescriptions = pickChildren(validChildren, DataListDescription)
-    const computedChildren = !isEmpty(validChildren)
-      ? omitChildren(validChildren, DataListTerm, DataListDescription)
-      : children
+    const [omittedChildren, customTerms, customDescriptions] = useMemo(() => {
+      const validChildren = getValidChildren(children)
+
+      if (isEmpty(validChildren)) return [children]
+
+      const customTerms = pickChildren(validChildren, DataListTerm)
+      const customDescriptions = pickChildren(
+        validChildren,
+        DataListDescription,
+      )
+      const omittedChildren = omitChildren(
+        validChildren,
+        DataListTerm,
+        DataListDescription,
+      )
+
+      return [omittedChildren, customTerms, customDescriptions] as const
+    }, [children])
 
     return (
       <styled.div {...rest}>
@@ -200,7 +212,7 @@ export const DataListItem = withContext<"div", DataListItemProps>(
           </DataListDescription>
         )}
 
-        {computedChildren}
+        {omittedChildren}
       </styled.div>
     )
   },

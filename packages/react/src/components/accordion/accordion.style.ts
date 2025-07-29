@@ -39,7 +39,9 @@ export const accordionStyle = defineComponentSlotStyle({
       pb: "3",
       px: "4",
     },
-    root: {},
+    root: {
+      w: "full",
+    },
   },
 
   variants: {

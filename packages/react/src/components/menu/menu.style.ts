@@ -7,7 +7,7 @@ export const menuStyle = defineComponentSlotStyle({
       color: "fg.muted",
       ms: "auto",
     },
-    content: { gap: "0" },
+    content: { gap: "0", p: "1" },
     group: {},
     indicator: {},
     item: {
@@ -32,22 +32,14 @@ export const menuStyle = defineComponentSlotStyle({
   sizes: {
     sm: {
       command: { fontSize: "2xs" },
-      content: {
-        fontSize: "xs",
-        minW: "3xs",
-        p: "1",
-      },
+      content: { fontSize: "xs", minW: "3xs" },
       indicator: { fontSize: "sm" },
       item: { gap: "1.5", px: "1.5", py: "1", rounded: "l1" },
       label: { px: "1.5", py: "1" },
     },
     md: {
       command: { fontSize: "xs" },
-      content: {
-        fontSize: "sm",
-        minW: "2xs",
-        p: "1",
-      },
+      content: { fontSize: "sm", minW: "2xs" },
       indicator: { fontSize: "md" },
       item: { gap: "2", px: "2", py: "1.5", rounded: "l2" },
       label: { px: "2", py: "1.5" },

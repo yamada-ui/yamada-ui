@@ -162,6 +162,8 @@ export const standardStyles = {
   backgroundPositionX: true,
   backgroundPositionY: true,
   backgroundRepeat: true,
+  backgroundRepeatX: true,
+  backgroundRepeatY: true,
   backgroundSize: true,
   baselineShift: true,
   baselineSource: true,
@@ -2800,6 +2802,26 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/background-repeat
    */
   backgroundRepeat?: StyleValueWithCondition<CSS.Property.BackgroundRepeat>
+  /**
+   * ### background-repeat-x
+   *
+   * The CSS `background-repeat-x` property.
+   *
+   * @see https://drafts.csswg.org/css-backgrounds-4/#background-repeat-longhands
+   *
+   * @experimental
+   */
+  backgroundRepeatX?: StyleValueWithCondition<AnyString>
+  /**
+   * ### background-repeat-y
+   *
+   * The CSS `background-repeat-y` property.
+   *
+   * @see https://drafts.csswg.org/css-backgrounds-4/#background-repeat-longhands
+   *
+   * @experimental
+   */
+  backgroundRepeatY?: StyleValueWithCondition<AnyString>
   /**
    * ### background-size
    *
@@ -6974,7 +6996,8 @@ export interface StyleProps {
    *
    * MathML, or the Mathematical Markup Language, describes mathematical notation, such as expressions and formulas. Also known as MathML Core.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-07-12
    * @newly_available_date 2023-01-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/math-depth
@@ -6985,7 +7008,8 @@ export interface StyleProps {
    *
    * MathML, or the Mathematical Markup Language, describes mathematical notation, such as expressions and formulas. Also known as MathML Core.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-07-12
    * @newly_available_date 2023-01-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/math-shift
@@ -6998,7 +7022,8 @@ export interface StyleProps {
    *
    * MathML, or the Mathematical Markup Language, describes mathematical notation, such as expressions and formulas. Also known as MathML Core.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-07-12
    * @newly_available_date 2023-01-12
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/math-style

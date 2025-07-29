@@ -3,9 +3,11 @@
 import type { IconButtonProps } from "@yamada-ui/react"
 import { IconButton, LanguagesIcon, Menu } from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
 import { useCallback, useMemo } from "react"
 import { CONSTANTS } from "@/constants"
-import { usePathname, useRouter } from "@/i18n"
+import { usePathname } from "@/i18n"
+import { getLang } from "@/utils/i18n"
 
 export interface LangButtonProps extends IconButtonProps {}
 
@@ -17,7 +19,9 @@ export function LangButton({ ...rest }: LangButtonProps) {
 
   const onSelect = useCallback(
     (locale?: string) => {
-      router.push({ pathname }, { locale })
+      const lang = getLang(locale)
+
+      router.push(`/${lang}${pathname}`)
     },
     [pathname, router],
   )

@@ -512,17 +512,20 @@ export type UseSubMenuReturn = ReturnType<typeof useSubMenu>
 
 export interface UseMenuGroupProps extends HTMLProps {}
 
-export const useMenuGroup = ({ ...rest }: UseMenuGroupProps) => {
+export const useMenuGroup = ({
+  "aria-labelledby": ariaLabelledbyProp,
+  ...rest
+}: UseMenuGroupProps) => {
   const labelId = useId()
 
   const getGroupProps: PropGetter = useCallback(
     ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      "aria-labelledby": cx(rest["aria-labelledby"], ariaLabelledby, labelId),
+      "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, labelId),
       role: "group",
       ...rest,
       ...props,
     }),
-    [labelId, rest],
+    [ariaLabelledbyProp, labelId, rest],
   )
 
   const getLabelProps: PropGetter<"span"> = useCallback(
@@ -778,10 +781,9 @@ export const useMenuOptionItem = ({
       ? selectedValue.includes(value)
       : false
 
-  const getIndicatorProps: PropGetter<"svg"> = useCallback(
+  const getIndicatorProps: PropGetter = useCallback(
     ({ style, ...props } = {}) => ({
       style: { opacity: selected ? 1 : 0, ...style },
-      role: "presentation",
       ...props,
     }),
     [selected],

@@ -78,7 +78,7 @@ export const Size: Story = () => {
   )
 
   return (
-    <PropsTable variant="stack" rows={["sm", "md"]}>
+    <PropsTable variant="stack" rows={["sm", "md", "lg"]}>
       {(_, row, key) => (
         <Menu.Root key={key} size={row}>
           <Menu.Trigger>
@@ -183,7 +183,7 @@ export const Group: Story = () => {
 
   return (
     <HStack>
-      <Menu.Root>
+      <Menu.Root size="lg">
         <Menu.Trigger>
           <Button>Menu with items</Button>
         </Menu.Trigger>
@@ -320,7 +320,9 @@ export const Indicator: Story = () => {
       {
         label: (
           <>
-            <Menu.Indicator as={PlusIcon} />
+            <Menu.Indicator>
+              <PlusIcon />
+            </Menu.Indicator>
             New Tab
           </>
         ),
@@ -329,7 +331,9 @@ export const Indicator: Story = () => {
       {
         label: (
           <>
-            <Menu.Indicator as={SquareArrowOutUpRightIcon} />
+            <Menu.Indicator>
+              <SquareArrowOutUpRightIcon />
+            </Menu.Indicator>
             New Window
           </>
         ),
@@ -338,7 +342,9 @@ export const Indicator: Story = () => {
       {
         label: (
           <>
-            <Menu.Indicator as={SquarePenIcon} />
+            <Menu.Indicator>
+              <SquarePenIcon />
+            </Menu.Indicator>
             New File
           </>
         ),
@@ -365,15 +371,21 @@ export const Indicator: Story = () => {
 
         <Menu.Content>
           <Menu.Item value="tab">
-            <Menu.Indicator as={PlusIcon} />
+            <Menu.Indicator>
+              <PlusIcon />
+            </Menu.Indicator>
             New Tab
           </Menu.Item>
           <Menu.Item value="window">
-            <Menu.Indicator as={SquareArrowOutUpRightIcon} />
+            <Menu.Indicator>
+              <SquareArrowOutUpRightIcon />
+            </Menu.Indicator>
             New Window
           </Menu.Item>
           <Menu.Item value="file">
-            <Menu.Indicator as={SquarePenIcon} />
+            <Menu.Indicator>
+              <SquarePenIcon />
+            </Menu.Indicator>
             New File
           </Menu.Item>
         </Menu.Content>

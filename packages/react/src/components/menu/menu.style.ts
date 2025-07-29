@@ -7,12 +7,16 @@ export const menuStyle = defineComponentSlotStyle({
       color: "fg.muted",
       ms: "auto",
     },
-    content: { gap: "0", p: "1" },
+    content: { gap: "0" },
     group: {
       display: "flex",
       flexDirection: "column",
     },
-    indicator: {},
+    indicator: {
+      alignItems: "center",
+      display: "flex",
+      justifyContent: "center",
+    },
     item: {
       alignItems: "center",
       cursor: "pointer",
@@ -35,17 +39,27 @@ export const menuStyle = defineComponentSlotStyle({
   sizes: {
     sm: {
       command: { fontSize: "2xs" },
-      content: { fontSize: "xs", minW: "3xs" },
+      content: { fontSize: "xs", minW: "3xs", p: "1" },
       indicator: { fontSize: "sm" },
       item: { gap: "1.5", px: "1.5", py: "1", rounded: "l1" },
       label: { px: "1.5", py: "1" },
+      separator: { my: "1" },
     },
     md: {
       command: { fontSize: "xs" },
-      content: { fontSize: "sm", minW: "2xs" },
+      content: { fontSize: "sm", minW: "2xs", p: "1" },
       indicator: { fontSize: "md" },
-      item: { gap: "2", px: "2", py: "1.5", rounded: "l2" },
+      item: { gap: "2", px: "2", py: "1.5", rounded: "l1" },
       label: { px: "2", py: "1.5" },
+      separator: { my: "1" },
+    },
+    lg: {
+      command: { fontSize: "sm" },
+      content: { fontSize: "md", minW: "2xs", p: "2" },
+      indicator: { fontSize: "lg" },
+      item: { gap: "2", px: "2", py: "2", rounded: "l1" },
+      label: { px: "2", py: "2" },
+      separator: { my: "2" },
     },
   },
 

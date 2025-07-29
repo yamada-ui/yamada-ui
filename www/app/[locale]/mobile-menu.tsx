@@ -262,7 +262,8 @@ function DocsMenuItem({
   const overview = segment === "overview"
   const current = overview
     ? pathname === href
-    : pathname.startsWith(href.toString())
+    : pathname.length <= href.toString().length &&
+      pathname.startsWith(href.toString())
 
   return (
     <NextLinkButton

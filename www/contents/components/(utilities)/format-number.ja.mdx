@@ -1,9 +1,202 @@
 ---
 title: FormatNumber
-description: "`FormatNumber` は、特定のロケールとオプションに合わせて数値をフォーマットするために使用されます。"
+description: "`FormatNumber`は、特定のロケールとオプションに合わせて数値をフォーマットするために使用されます。"
 storybook: components-formatnumber--basic
 source: components/format-number
 style: components/format-number/format-number.style.ts
 ---
 
+```tsx preview
+<FormatNumber value={1234567.89} />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { FormatNumber } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { FormatNumber } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { FormatNumber } from "@workspace/ui"
+```
+
+:::
+
+```tsx title="index.tsx"
+<FormatNumber value={1234567.89} />
+```
+
+指定されたロケールとオプションに従って数値をフォーマットします。デフォルトでは、フォーマットされた数値を含む`span`要素をレンダリングします。
+
+:::note
+`FormatNumber`は、内部的に[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)を使用しています。`FormatNumber`は、[navigator.language](https://developer.mozilla.org/ja/docs/Web/API/Navigator/language)に基づいて`locale`を自動的に設定します。
+:::
+
+### ロケールの変更する
+
+ロケールを変更する場合は、[locale](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales)に値を設定します。
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">en-US</Text>
+  <FormatNumber value={1234567.89} locale="en-US" />
+
+  <Text fontWeight="semibold">ja-JP</Text>
+  <FormatNumber value={1234567.89} locale="ja-JP" />
+
+  <Text fontWeight="semibold">de-DE</Text>
+  <FormatNumber value={1234567.89} locale="de-DE" />
+
+  <Text fontWeight="semibold">fr-FR</Text>
+  <FormatNumber value={1234567.89} locale="fr-FR" />
+
+  <Text fontWeight="semibold">zh-CN</Text>
+  <FormatNumber value={1234567.89} locale="zh-CN" />
+</Grid>
+```
+
+#### コンフィグからカスタマイズする
+
+アプリケーション全体のロケールの設定をしたい場合は、コンフィグをカスタマイズします。
+
+```tsx
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const customConfig = extendConfig({
+  locale: "ja-JP",
+})
+
+const App = () => {
+  return (
+    <UIProvider config={customConfig}>
+      <FormatNumber value={1000} />
+    </UIProvider>
+  )
+}
+```
+
+:::note
+コンフィグをもっと学びたい場合は、[コンフィグをカスタマイズする](/ja/docs/theming/configuration/customization)をご覧ください。
+:::
+
+### 通貨に変換する
+
+通貨に変換する場合は、[style](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style)に`"currency"`を設定します。
+
+```tsx preview
+<Grid templateColumns="auto 1fr" gap="sm">
+  <Text fontWeight="semibold">USD</Text>
+  <FormatNumber
+    value={1234567.89}
+    style="currency"
+    currency="USD"
+    locale="en-US"
+  />
+
+  <Text fontWeight="semibold">EUR</Text>
+  <FormatNumber
+    value={1234567.89}
+    style="currency"
+    currency="EUR"
+    locale="de-DE"
+  />
+
+  <Text fontWeight="semibold">JPY</Text>
+  <FormatNumber
+    value={1234567.89}
+    style="currency"
+    currency="JPY"
+    locale="ja-JP"
+  />
+</Grid>
+```
+
+### 単位に変換する
+
+単位に変換する場合は、[style](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style)に`"unit"`を設定します。
+
+```tsx preview
+<VStack gap="sm">
+  <FormatNumber value={100} style="unit" unit="kilogram" />
+  <FormatNumber value={100} style="unit" unit="celsius" unitDisplay="long" />
+  <FormatNumber
+    value={100}
+    style="unit"
+    unit="kilometer-per-hour"
+    unitDisplay="narrow"
+  />
+</VStack>
+```
+
+### パーセントに変換する
+
+パーセントに変換する場合は、[style](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style)に`"percent"`を設定します。
+
+```tsx preview
+<VStack gap="sm">
+  <FormatNumber value={0.45} style="percent" />
+  <FormatNumber value={0.45} style="percent" minimumFractionDigits={2} />
+</VStack>
+```
+
+### 表記に変換する
+
+表記に変換する場合は、[notation](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#notation)に値を設定します。
+
+```tsx preview
+<VStack gap="sm">
+  <FormatNumber value={1234567.89} notation="standard" />
+  <FormatNumber value={1234567.89} notation="scientific" />
+  <FormatNumber value={1234567.89} notation="engineering" />
+  <FormatNumber value={1234567.89} notation="compact" />
+</VStack>
+```
+
+### 小数点以下の桁数を制御する
+
+小数点以下の桁数を制御する場合は、[minimumFractionDigits](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#minimumfractiondigits)と[maximumFractionDigits](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumfractiondigits)を使用します。
+
+```tsx preview
+<VStack gap="sm">
+  <FormatNumber
+    minimumFractionDigits={2}
+    maximumFractionDigits={2}
+    value={1234.5}
+  />
+  <FormatNumber
+    minimumFractionDigits={0}
+    maximumFractionDigits={3}
+    value={1234.567}
+  />
+  <FormatNumber
+    minimumFractionDigits={4}
+    maximumFractionDigits={4}
+    value={1234}
+  />
+</VStack>
+```
+
+### グループ化を無効にする
+
+グループ化を無効にする場合は、[useGrouping](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#usegrouping)に`false`を設定します。
+
+```tsx preview
+<FormatNumber value={1234567.89} useGrouping={false} />
+```
+
+### 符号の表示を変更する
+
+符号の表示を変更する場合は、[signDisplay](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#signdisplay)に値を設定します。
+
+```tsx preview
+<VStack gap="sm">
+  <FormatNumber value={1234.5} signDisplay="always" />
+  <FormatNumber value={-1234.5} signDisplay="exceptZero" />
+</VStack>
+```

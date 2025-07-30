@@ -17,9 +17,9 @@ function trim(code: string) {
   return code.trim().replace(/;$/, "")
 }
 
-function pipe<T>(...functions: ((...args: T[]) => T)[]) {
+function pipe<Y>(...functions: ((...args: Y[]) => Y)[]) {
   return functions.reduce(function (acc, cb) {
-    return function (...args: T[]) {
+    return function (...args: Y[]) {
       return acc(cb(...args))
     }
   })

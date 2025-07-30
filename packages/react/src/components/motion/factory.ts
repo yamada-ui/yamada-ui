@@ -9,10 +9,10 @@ type Components = {
 }
 
 interface Factory extends Components {
-  <T extends DOMElement = DOMElement, M extends object = {}>(
-    el: T,
+  <Y extends DOMElement = DOMElement, M extends object = {}>(
+    el: Y,
     options?: StyledOptions,
-  ): MotionStyledComponent<T, M>
+  ): MotionStyledComponent<Y, M>
 }
 
 function factory() {

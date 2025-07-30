@@ -4,8 +4,8 @@ import { Fragment } from "react"
 import { NextLink } from "@/components"
 import { langConditions } from "./i18n"
 
-interface FC<T extends object = {}> {
-  (props: T & { children: ReactNode; key?: number | string }): ReactNode
+interface FC<Y extends object = {}> {
+  (props: Y & { children: ReactNode; key?: number | string }): ReactNode
 }
 
 function transformCode(

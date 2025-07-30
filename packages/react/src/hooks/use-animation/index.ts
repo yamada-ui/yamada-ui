@@ -30,19 +30,19 @@ export const useAnimation = (cssObj: CSSObject): string => {
  * @see https://yamada-ui.com/hooks/use-dynamic-animation
  */
 export const useDynamicAnimation = <
-  T extends
+  Y extends
     | Token<CSSAnimationObject, "animations">[]
     | { [key: string]: CSSObject },
 >(
-  arrayOrObj: T,
-  init?: (keyof T)[] | keyof T,
+  arrayOrObj: Y,
+  init?: (keyof Y)[] | keyof Y,
 ): [
   string | undefined,
   (
     key:
-      | ((key: (keyof T)[] | keyof T | undefined) => (keyof T)[] | keyof T)
-      | (keyof T)[]
-      | keyof T,
+      | ((key: (keyof Y)[] | keyof Y | undefined) => (keyof Y)[] | keyof Y)
+      | (keyof Y)[]
+      | keyof Y,
   ) => void,
 ] => {
   const system = useSystem()
@@ -80,9 +80,9 @@ export const useDynamicAnimation = <
   const setAnimation = useCallback(
     (
       keysOrFunc:
-        | ((key: (keyof T)[] | keyof T | undefined) => (keyof T)[] | keyof T)
-        | (keyof T)[]
-        | keyof T,
+        | ((key: (keyof Y)[] | keyof Y | undefined) => (keyof Y)[] | keyof Y)
+        | (keyof Y)[]
+        | keyof Y,
     ) => {
       const args = (() => {
         if (!isUndefined(keys.current) && isArray(arrayOrObj)) {
@@ -92,7 +92,7 @@ export const useDynamicAnimation = <
         } else {
           return keys.current
         }
-      })() as (keyof T)[] | keyof T | undefined
+      })() as (keyof Y)[] | keyof Y | undefined
 
       const keyOrArray = runIfFn(keysOrFunc, args)
 

@@ -7,9 +7,9 @@ import { useCallback, useEffect, useRef, useState } from "react"
  *
  * @see https://yamada-ui.com/hooks/use-hover
  */
-export const useHover = <T extends HTMLElement = HTMLDivElement>() => {
+export const useHover = <Y extends HTMLElement = HTMLDivElement>() => {
   const [hovered, setHovered] = useState(false)
-  const ref = useRef<T>(null)
+  const ref = useRef<Y>(null)
 
   const onMouseEnter = useCallback(() => setHovered(true), [])
   const onMouseLeave = useCallback(() => setHovered(false), [])

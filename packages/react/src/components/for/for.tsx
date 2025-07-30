@@ -1,15 +1,15 @@
 import type { ReactNode } from "react"
 import { isArray } from "../../utils"
 
-export interface ForProps<T> {
+export interface ForProps<Y> {
   /**
    * The render function to render each item in the array.
    */
-  children: (value: T, index: number, array: T[]) => ReactNode
+  children: (value: Y, index: number, array: Y[]) => ReactNode
   /**
    * The array to iterate over.
    */
-  each: readonly T[] | T[] | undefined
+  each: readonly Y[] | undefined | Y[]
   /**
    * The fallback content to render when the array is empty.
    */
@@ -17,7 +17,7 @@ export interface ForProps<T> {
   /**
    * A function that returns a boolean indicating whether the item should be included in the render result.
    */
-  filter?: (value: T, index: number, array: T[]) => boolean
+  filter?: (value: Y, index: number, array: Y[]) => boolean
   /**
    * The maximum number of items to include in the render result.
    */
@@ -39,7 +39,7 @@ export interface ForProps<T> {
    * If function is provided, the items will be sorted based on the return value.
    * If `reverse` is `true`, the inversion is applied to the sorted array.
    */
-  sort?: (a: T, b: T) => number
+  sort?: (a: Y, b: Y) => number
 }
 
 /**
@@ -47,7 +47,7 @@ export interface ForProps<T> {
  *
  * @see https://yamada-ui.com/components/for
  */
-export const For = <T,>({
+export const For = <Y,>({
   children,
   each,
   fallback,
@@ -56,7 +56,7 @@ export const For = <T,>({
   offset = 0,
   reverse = false,
   sort,
-}: ForProps<T>): ReactNode => {
+}: ForProps<Y>): ReactNode => {
   if (!each || !isArray(each) || !each.length) return fallback || null
 
   const cloned = [...each]

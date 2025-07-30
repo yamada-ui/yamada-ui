@@ -5,7 +5,7 @@ export function isRefObject(val: any): val is { current: any } {
   return isObject(val) && "current" in val
 }
 
-export function assignRef<T = any>(ref: React.Ref<T> | undefined, value: T) {
+export function assignRef<Y = any>(ref: React.Ref<Y> | undefined, value: Y) {
   if (ref == null) return
 
   if (typeof ref === "function") {
@@ -22,22 +22,22 @@ export function assignRef<T = any>(ref: React.Ref<T> | undefined, value: T) {
   }
 }
 
-export function mergeRefs<T = any>(
-  ...refs: (null | React.Ref<T> | undefined)[]
+export function mergeRefs<Y = any>(
+  ...refs: (null | React.Ref<Y> | undefined)[]
 ) {
-  return function (node: null | T) {
+  return function (node: null | Y) {
     return refs.forEach((ref) => {
       assignRef(ref, node)
     })
   }
 }
 
-export function useMergeRefs<T = any>(...refs: (React.Ref<T> | undefined)[]) {
+export function useMergeRefs<Y = any>(...refs: (React.Ref<Y> | undefined)[]) {
   return React.useMemo(() => mergeRefs(...refs), [refs])
 }
 
-export function useCallbackRef<T extends (...args: any[]) => any>(
-  callback: T | undefined,
+export function useCallbackRef<Y extends (...args: any[]) => any>(
+  callback: undefined | Y,
   deps: React.DependencyList = [],
 ) {
   const callbackRef = React.useRef(callback)
@@ -47,7 +47,7 @@ export function useCallbackRef<T extends (...args: any[]) => any>(
   })
 
   return React.useCallback(
-    ((...args) => callbackRef.current?.(...args)) as T,
+    ((...args) => callbackRef.current?.(...args)) as Y,
     // eslint-disable-next-line react-hooks/exhaustive-deps
     deps,
   )

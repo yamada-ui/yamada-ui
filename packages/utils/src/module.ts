@@ -1,3 +1,3 @@
-export function interopDefault<T>(module: T): T {
-  return (module as { default: T }).default || module
+export function interopDefault<Y>(module: Y): Y {
+  return (module as { default: Y }).default || module
 }

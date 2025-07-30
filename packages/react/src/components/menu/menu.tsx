@@ -9,11 +9,11 @@ import type {
   ThemeProps,
   WithoutThemeProps,
 } from "../../core"
+import type { UseComboboxGroupProps } from "../../hooks/use-combobox"
 import type { MenuStyle } from "./menu.style"
 import type {
   MenuOptionGroupType,
   MenuOptionGroupValue,
-  UseMenuGroupProps,
   UseMenuItemProps,
   UseMenuOptionGroupProps,
   UseMenuOptionItemProps,
@@ -22,20 +22,23 @@ import type {
 } from "./use-menu"
 import { Fragment, useMemo, useState } from "react"
 import { createSlotComponent, styled } from "../../core"
+import {
+  ComboboxContext,
+  ComboboxDescendantsContext,
+  ComboboxGroupContext,
+  useComboboxGroup,
+  useComboboxGroupContext,
+} from "../../hooks/use-combobox"
 import { cast, handlerAll } from "../../utils"
 import { CheckIcon, ChevronRightIcon, CircleSmallIcon } from "../icon"
-import { Popover } from "../popover"
+import { Popover, usePopoverProps } from "../popover"
 import { menuStyle } from "./menu.style"
 import {
   MainMenuContext,
   MenuContext,
-  MenuDescendantsContext,
-  MenuGroupContext,
   MenuOptionGroupContext,
   useMenu,
   useMenuContext,
-  useMenuGroup,
-  useMenuGroupContext,
   useMenuItem,
   useMenuOptionGroup,
   useMenuOptionItem,
@@ -120,34 +123,17 @@ export { MenuPropsContext, useMenuPropsContext }
  * @see https://yamada-ui.com/components/menu
  */
 export const MenuRoot: FC<MenuRootProps> = (props) => {
+  const [styleContext, mergedProps] = useRootComponentProps(props)
   const [
-    styleContext,
-    {
-      animationScheme,
-      autoUpdate,
-      blockScrollOnMount,
-      children,
-      closeOnBlur,
-      closeOnEsc,
-      closeOnScroll,
-      disabled,
-      duration,
-      elements,
-      flip,
-      gutter,
-      initialFocusRef,
-      matchWidth,
-      middleware,
-      offset,
-      placement,
-      platform,
-      preventOverflow,
-      strategy,
-      transform,
-      whileElementsMounted,
-      ...rest
-    },
-  ] = useRootComponentProps(props)
+    { animationScheme, initialFocusRef, offset, placement, ...popoverProps },
+    { children, disabled, ...rest },
+  ] = usePopoverProps(mergedProps, [
+    "disabled",
+    "open",
+    "defaultOpen",
+    "onOpen",
+    "onClose",
+  ])
   const {
     closeOnSelect,
     descendants,
@@ -165,34 +151,63 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
     onOpen,
     onSelect,
   } = useMenu({ disabled, ...rest })
+  const mergedPopoverProps = useMemo<Popover.RootProps>(
+    () => ({
+      ...popoverProps,
+      animationScheme:
+        animationScheme ?? (subMenu ? "inline-start" : "block-start"),
+      autoFocus: !!initialFocusRef,
+      disabled,
+      initialFocusRef,
+      offset: offset ?? (subMenu ? [0, 0] : undefined),
+      open,
+      placement:
+        placement ?? (subMenu ? `center-${subMenuDirection}` : "end-start"),
+      updateRef,
+      onClose,
+      onOpen,
+    }),
+    [
+      animationScheme,
+      disabled,
+      initialFocusRef,
+      offset,
+      onClose,
+      onOpen,
+      open,
+      placement,
+      popoverProps,
+      subMenu,
+      subMenuDirection,
+      updateRef,
+    ],
+  )
+  const comboboxContext = useMemo(
+    () => ({
+      descendants,
+      role: "menu" as const,
+      onActiveDescendant,
+      onClose,
+    }),
+    [descendants, onActiveDescendant, onClose],
+  )
   const menuContext = useMemo(
     () => ({
       subMenu,
       subMenuDirection,
-      onActiveDescendant,
-      onClose,
-      onOpen,
       onSelect,
     }),
-    [onClose, onOpen, onSelect, onActiveDescendant, subMenu, subMenuDirection],
+    [subMenu, subMenuDirection, onSelect],
   )
   const mainMenuContext = useMemo(
     () => ({
       closeOnSelect,
       descendants,
       onActiveDescendant,
-      onClose,
       onCloseRef,
       onSelect,
     }),
-    [
-      closeOnSelect,
-      descendants,
-      onActiveDescendant,
-      onClose,
-      onCloseRef,
-      onSelect,
-    ],
+    [closeOnSelect, descendants, onActiveDescendant, onCloseRef, onSelect],
   )
   const componentContext = useMemo(
     () => ({
@@ -211,50 +226,17 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
 
   return (
     <StyleContext value={styleContext}>
-      <MenuDescendantsContext value={descendants}>
-        <MenuContext value={menuContext}>
-          <MainMenuContext value={mainMenuContext}>
-            <ComponentContext value={componentContext}>
-              <Popover.Root
-                {...{
-                  animationScheme:
-                    animationScheme ??
-                    (subMenu ? "inline-start" : "block-start"),
-                  autoFocus: !!initialFocusRef,
-                  autoUpdate,
-                  blockScrollOnMount,
-                  closeOnBlur,
-                  closeOnEsc,
-                  closeOnScroll,
-                  disabled,
-                  duration,
-                  elements,
-                  flip,
-                  gutter,
-                  initialFocusRef,
-                  matchWidth,
-                  middleware,
-                  offset: offset ?? (subMenu ? [0, 0] : undefined),
-                  open,
-                  placement:
-                    placement ??
-                    (subMenu ? `center-${subMenuDirection}` : "end-start"),
-                  platform,
-                  preventOverflow,
-                  strategy,
-                  transform,
-                  updateRef,
-                  whileElementsMounted,
-                  onClose,
-                  onOpen,
-                }}
-              >
-                {children}
-              </Popover.Root>
-            </ComponentContext>
-          </MainMenuContext>
-        </MenuContext>
-      </MenuDescendantsContext>
+      <ComboboxDescendantsContext value={descendants}>
+        <ComboboxContext value={comboboxContext}>
+          <MenuContext value={menuContext}>
+            <MainMenuContext value={mainMenuContext}>
+              <ComponentContext value={componentContext}>
+                <Popover.Root {...mergedPopoverProps}>{children}</Popover.Root>
+              </ComponentContext>
+            </MainMenuContext>
+          </MenuContext>
+        </ComboboxContext>
+      </ComboboxDescendantsContext>
     </StyleContext>
   )
 }
@@ -441,13 +423,13 @@ export interface MenuLabelProps extends HTMLStyledProps<"span"> {}
 export const MenuLabel = withContext<"span", MenuLabelProps>("span", "label")(
   undefined,
   (props) => {
-    const { getLabelProps } = useMenuGroupContext()
+    const { getLabelProps } = useComboboxGroupContext()
 
     return getLabelProps(props)
   },
 )
 
-export interface MenuGroupProps extends UseMenuGroupProps, HTMLStyledProps {
+export interface MenuGroupProps extends UseComboboxGroupProps, HTMLStyledProps {
   /**
    * The label of the group.
    */
@@ -460,16 +442,16 @@ export interface MenuGroupProps extends UseMenuGroupProps, HTMLStyledProps {
 
 export const MenuGroup = withContext<"div", MenuGroupProps>(
   ({ children, label, labelProps, ...rest }) => {
-    const { getGroupProps, getLabelProps } = useMenuGroup(rest)
+    const { getGroupProps, getLabelProps } = useComboboxGroup(rest)
     const context = useMemo(() => ({ getLabelProps }), [getLabelProps])
 
     return (
-      <MenuGroupContext value={context}>
+      <ComboboxGroupContext value={context}>
         <styled.div {...getGroupProps(rest)}>
           {label ? <MenuLabel {...labelProps}>{label}</MenuLabel> : null}
           {children}
         </styled.div>
-      </MenuGroupContext>
+      </ComboboxGroupContext>
     )
   },
   "group",

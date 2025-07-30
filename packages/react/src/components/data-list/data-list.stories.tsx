@@ -33,7 +33,7 @@ export const Basic: Story = () => {
 
 export const Children: Story = () => {
   return (
-    <DataList.Root col={2}>
+    <DataList.Root>
       <DataList.Item>
         <DataList.Term>白石うらら</DataList.Term>
         <DataList.Description>入れ替わりの魔女</DataList.Description>
@@ -339,7 +339,7 @@ export const CustomTerm: Story = () => {
         termProps={{ textDecoration: "line-through" }}
       />
 
-      <DataList.Root col={2}>
+      <DataList.Root>
         <DataList.Item>
           <DataList.Term color="blue">白石うらら</DataList.Term>
           <DataList.Description>入れ替わりの魔女</DataList.Description>
@@ -404,7 +404,7 @@ export const CustomDescription: Story = () => {
         descriptionProps={{ textDecoration: "line-through" }}
       />
 
-      <DataList.Root col={2}>
+      <DataList.Root>
         <DataList.Item>
           <DataList.Term>白石うらら</DataList.Term>
           <DataList.Description color="blue">

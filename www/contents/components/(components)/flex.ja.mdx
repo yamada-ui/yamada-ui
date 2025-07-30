@@ -8,13 +8,11 @@ style: components/flex/flex.style.ts
 
 ```tsx preview
 <Flex gap="md">
-  <For each={["info", "success", "warning", "error"]}>
-    {(bg, index) => (
-      <Box key={index} bg={bg} color="white" p="md" rounded="l2">
-        Box
-      </Box>
-    )}
-  </For>
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
 </Flex>
 ```
 
@@ -44,13 +42,11 @@ import { Flex } from "@workspace/ui"
 
 ```tsx preview
 <Flex direction="column" gap="md">
-  <For each={["info", "success", "warning", "error"]}>
-    {(bg, index) => (
-      <Box key={index} bg={bg} color="white" p="md" rounded="l2">
-        Box
-      </Box>
-    )}
-  </For>
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
 </Flex>
 ```
 
@@ -60,7 +56,7 @@ import { Flex } from "@workspace/ui"
 <Flex align="center" gap="md">
   <For each={["sm", "md", "lg"]}>
     {(p, index) => (
-      <Box key={index} bg={"info"} color="white" p={p} rounded="l2">
+      <Box key={index} bg="bg.contrast" color="fg.contrast" color="white" p={p}>
         Box
       </Box>
     )}
@@ -72,13 +68,11 @@ import { Flex } from "@workspace/ui"
 
 ```tsx preview
 <Flex justify="space-between" gap="md">
-  <For each={["info", "success", "warning", "error"]}>
-    {(bg, index) => (
-      <Box key={index} bg={bg} color="white" p="md" rounded="l2">
-        Box
-      </Box>
-    )}
-  </For>
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
 </Flex>
 ```
 
@@ -86,13 +80,11 @@ import { Flex } from "@workspace/ui"
 
 ```tsx preview
 <Flex wrap="wrap" gap="md" maxW="xs">
-  <For each={["info", "success", "warning", "error"]}>
-    {(bg, index) => (
-      <Box key={index} bg={bg} color="white" p="md" rounded="l2">
-        Box
-      </Box>
-    )}
-  </For>
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
 </Flex>
 ```
 
@@ -100,13 +92,13 @@ import { Flex } from "@workspace/ui"
 
 ```tsx preview
 <Flex w="full" gap="md">
-  <Box bg="info" color="white" p="md" rounded="l2">
+  <Box bg="bg.contrast" color="fg.contrast" p="md">
     Box
   </Box>
 
   <Spacer />
 
-  <Box bg="error" color="white" p="md" rounded="l2">
+  <Box bg="bg.contrast" color="fg.contrast" p="md">
     Box
   </Box>
 </Flex>

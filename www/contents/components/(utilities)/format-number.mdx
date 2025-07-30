@@ -61,20 +61,16 @@ To change the locale, set a value for [locale](https://developer.mozilla.org/en-
 </Grid>
 ```
 
-#### Customize from Config
+#### Set the Locale for the Entire Application
 
-If you want to set the locale for the entire application, customize the config.
+If you want to set the locale for the entire application, set the `locale` for the `UIProvider`.
 
 ```tsx
-import { UIProvider, extendConfig } from "@yamada-ui/react"
-
-const customConfig = extendConfig({
-  locale: "ja-JP",
-})
+import { UIProvider } from "@yamada-ui/react"
 
 const App = () => {
   return (
-    <UIProvider config={customConfig}>
+    <UIProvider locale="en-US">
       <FormatNumber value={1000} />
     </UIProvider>
   )

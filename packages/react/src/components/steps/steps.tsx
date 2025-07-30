@@ -5,11 +5,16 @@ import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { UseLazyMountProps } from "../../hooks/use-lazy-mount"
 import type { StepsStyle } from "./steps.style"
 import type { UseStepsItemProps, UseStepsProps } from "./use-steps"
-import { useMemo } from "react"
+import { Children, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { useLazyMount } from "../../hooks/use-lazy-mount"
 import { useValue } from "../../hooks/use-value"
-import { isNull, isUndefined } from "../../utils"
+import {
+  isNull,
+  isUndefined,
+  useFindChild,
+  useValidChildren,
+} from "../../utils"
 import { CheckIcon } from "../icon"
 import { stepsStyle } from "./steps.style"
 import {
@@ -70,7 +75,7 @@ interface StepsItem
 
 export interface StepsRootProps
   extends Omit<HTMLStyledProps, "onChange">,
-    Omit<UseStepsProps, "orientation">,
+    Omit<UseStepsProps, "count" | "orientation">,
     Pick<UseLazyMountProps, "lazy" | "lazyBehavior">,
     ThemeProps<StepsStyle> {
   /**
@@ -108,6 +113,8 @@ export const StepsRoot = withProvider<"div", StepsRootProps, "orientation">(
     ...rest
   }) => {
     const computedOrientation = useValue(orientationProp)
+    const validChildren = useValidChildren(children)
+    const stepsList = useFindChild<StepsListProps>(validChildren, StepsList)
     const {
       id,
       count,
@@ -124,7 +131,7 @@ export const StepsRoot = withProvider<"div", StepsRootProps, "orientation">(
       onNext,
       onPrev,
     } = useSteps({
-      count: items.length,
+      count: items.length || Children.count(stepsList?.props.children),
       ...rest,
       orientation: computedOrientation,
     })

@@ -4,13 +4,15 @@ import type { FocusEvent, KeyboardEvent, RefObject } from "react"
 import type { Direction, PropGetter } from "../../core"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import type { UsePopperProps } from "../../hooks/use-popper"
+import type { Dict } from "../../utils"
+import type { PopupAnimationProps } from "./popover"
 import { useCallback, useEffect, useId, useRef } from "react"
-import { useEnvironment } from "../../core"
+import { useEnvironment, useSplitProps } from "../../core"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { useEventListener } from "../../hooks/use-event-listener"
 import { useFocusOnShow } from "../../hooks/use-focus"
 import { useOutsideClick } from "../../hooks/use-outside-click"
-import { usePopper } from "../../hooks/use-popper"
+import { popperProps, usePopper } from "../../hooks/use-popper"
 import {
   ariaAttr,
   assignRef,
@@ -28,7 +30,7 @@ import {
 
 export interface UsePopoverProps
   extends Omit<UseDisclosureProps, "timing">,
-    UsePopperProps {
+    UsePopperProps<"button"> {
   /**
    * If `true`, focus will be transferred to the first interactive element when the popover opens.
    *
@@ -314,3 +316,49 @@ export const usePopover = ({
 }
 
 export type UsePopoverReturn = ReturnType<typeof usePopover>
+
+export const popoverProps: (
+  | keyof PopupAnimationProps
+  | keyof UsePopoverProps
+)[] = [
+  ...popperProps,
+  "autoFocus",
+  "blockScrollOnMount",
+  "closeOnBlur",
+  "closeOnEsc",
+  "closeOnScroll",
+  "disabled",
+  "initialFocusRef",
+  "modal",
+  "updateRef",
+  "defaultOpen",
+  "onOpen",
+  "onClose",
+  "animationScheme",
+  "duration",
+]
+
+export const usePopoverProps = <
+  Y extends Dict = Dict,
+  M extends keyof PopupAnimationProps | keyof UsePopoverProps =
+    | keyof PopupAnimationProps
+    | keyof UsePopoverProps,
+>(
+  props: Y,
+  omitKeys?: M[],
+) => {
+  return useSplitProps(
+    props,
+    popoverProps.filter((key) => !omitKeys?.includes(key as M)),
+  ) as unknown as [
+    keyof PopupAnimationProps | keyof UsePopoverProps extends M
+      ? PopupAnimationProps & UsePopoverProps
+      : Omit<PopupAnimationProps & UsePopoverProps, M>,
+    Omit<
+      Y,
+      keyof PopupAnimationProps | keyof UsePopoverProps extends M
+        ? keyof PopupAnimationProps | keyof UsePopoverProps
+        : Exclude<keyof PopupAnimationProps | keyof UsePopoverProps, M>
+    >,
+  ]
+}

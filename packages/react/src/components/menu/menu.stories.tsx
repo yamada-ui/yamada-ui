@@ -669,7 +669,7 @@ export const AnimationScheme: Story = () => {
   )
 
   return (
-    <Menu.Root animationScheme="block-start">
+    <Menu.Root animationScheme="inline-start">
       <Menu.Trigger>
         <Button>Menu</Button>
       </Menu.Trigger>
@@ -690,7 +690,7 @@ export const Placement: Story = () => {
   )
 
   return (
-    <Menu.Root placement="center-end">
+    <Menu.Root animationScheme="inline-start" placement="center-end">
       <Menu.Trigger>
         <Button>Menu</Button>
       </Menu.Trigger>

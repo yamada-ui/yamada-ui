@@ -13,6 +13,7 @@ import type {
   HTMLElementProps,
   HTMLProps,
 } from "../../core"
+import type { Dict } from "../../utils"
 import {
   autoUpdate,
   flip,
@@ -22,6 +23,7 @@ import {
   useFloating,
 } from "@floating-ui/react-dom"
 import { useCallback, useMemo } from "react"
+import { useSplitProps } from "../../core"
 import { mergeRefs } from "../../utils"
 
 const PLACEMENT_MAP: {
@@ -152,7 +154,7 @@ export const usePopper = <
   strategy = "absolute",
   transform = true,
   whileElementsMounted: whileElementsMountedProp,
-}: UsePopperProps = {}) => {
+}: UsePopperProps<Y> = {}) => {
   const middleware = useMemo(() => {
     const middleware: (false | Middleware | null | undefined)[] = []
 
@@ -242,3 +244,44 @@ export const usePopper = <
 }
 
 export type UsePopperReturn = ReturnType<typeof usePopper>
+
+export const popperProps: (keyof UsePopperProps)[] = [
+  "autoUpdate",
+  "elements",
+  "flip",
+  "gutter",
+  "matchWidth",
+  "middleware",
+  "offset",
+  "open",
+  "placement",
+  "platform",
+  "preventOverflow",
+  "strategy",
+  "transform",
+  "whileElementsMounted",
+]
+
+export const usePopperProps = <
+  Y extends DOMElement | VirtualElement = "div",
+  M extends Dict = Dict,
+  D extends keyof UsePopperProps = keyof UsePopperProps,
+>(
+  props: M,
+  omitKeys?: D[],
+) => {
+  return useSplitProps(
+    props,
+    popperProps.filter((key) => !omitKeys?.includes(key as D)),
+  ) as unknown as [
+    keyof UsePopperProps extends D
+      ? UsePopperProps<Y>
+      : Omit<UsePopperProps<Y>, D>,
+    Omit<
+      M,
+      keyof UsePopperProps extends D
+        ? keyof UsePopperProps
+        : Exclude<keyof UsePopperProps, D>
+    >,
+  ]
+}

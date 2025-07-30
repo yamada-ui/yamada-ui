@@ -3,44 +3,20 @@
 import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { DataListStyle } from "./data-list.style"
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import {
   getValidChildren,
   isArray,
   isEmpty,
-  isNumber,
   omitChildren,
   pickChildren,
-  useUpdateEffect,
 } from "../../utils"
 import { dataListStyle } from "./data-list.style"
-
-const getComputeCol = (items: DataListItemProps[]) => {
-  let col = 0
-
-  items.forEach(({ description, term }) => {
-    const termCount = !term ? 0 : isArray(term) ? term.length : 1
-    const descriptionCount = !description
-      ? 0
-      : isArray(description)
-        ? description.length
-        : 1
-
-    col = Math.max(col, termCount + descriptionCount)
-  })
-
-  return col
-}
 
 export interface DataListRootProps
   extends HTMLStyledProps<"dl">,
     ThemeProps<DataListStyle> {
-  /**
-   * The number of columns.
-   * If `orientation` is `"horizontal"` and `items` is not set, please set this.
-   */
-  col?: number
   /**
    * If provided, generate elements based on items.
    */
@@ -78,20 +54,39 @@ export { DataListPropsContext, useDataListPropsContext }
  * @see https://yamada-ui.com/components/data-list
  */
 export const DataListRoot = withProvider<"dl", DataListRootProps>(
-  ({
-    style,
-    children,
-    col: colProp,
-    items = [],
-    descriptionProps,
-    termProps,
-    ...rest
-  }) => {
-    const [col, setCol] = useState(() => {
-      if (isNumber(colProp)) return colProp
+  ({ style, children, items = [], descriptionProps, termProps, ...rest }) => {
+    const col = useMemo(() => {
+      let col = 0
 
-      return getComputeCol(items)
-    })
+      if (children) {
+        const validChildren = getValidChildren(children)
+        const dataListItems = pickChildren(validChildren, DataListItem)
+
+        dataListItems.forEach(({ props }) => {
+          const validChildren = getValidChildren(props.children)
+          const pickedChildren = pickChildren(
+            validChildren,
+            DataListTerm,
+            DataListDescription,
+          )
+
+          col = Math.max(col, pickedChildren.length)
+        })
+      } else {
+        items.forEach(({ description, term }) => {
+          const termCount = !term ? 0 : isArray(term) ? term.length : 1
+          const descriptionCount = !description
+            ? 0
+            : isArray(description)
+              ? description.length
+              : 1
+
+          col = Math.max(col, termCount + descriptionCount)
+        })
+      }
+
+      return col
+    }, [children, items])
     const computedChildren = useMemo(
       () =>
         items.map((props, index) => <DataListItem key={index} {...props} />),
@@ -104,16 +99,6 @@ export const DataListRoot = withProvider<"dl", DataListRootProps>(
       }),
       [descriptionProps, termProps],
     )
-
-    useUpdateEffect(() => {
-      if (isNumber(colProp)) {
-        setCol(colProp)
-
-        return
-      }
-
-      setCol(getComputeCol(items))
-    }, [items, colProp])
 
     return (
       <ComponentContext value={context}>

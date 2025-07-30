@@ -108,10 +108,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
   }, [children, items, placeholder, placeholderInOptions])
 
   const getRootProps: PropGetter = useCallback(
-    (props) => ({
-      ...dataProps,
-      ...props,
-    }),
+    (props) => ({ ...dataProps, ...props }),
     [dataProps],
   )
 
@@ -145,10 +142,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
   )
 
   const getIconProps: PropGetter = useCallback(
-    (props) => ({
-      ...dataProps,
-      ...props,
-    }),
+    (props) => ({ ...dataProps, ...props }),
     [dataProps],
   )
 

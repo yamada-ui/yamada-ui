@@ -7,7 +7,7 @@ import { useCallback, useId, useRef } from "react"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import { useEventListener } from "../../hooks/use-event-listener"
 import { useOutsideClick } from "../../hooks/use-outside-click"
-import { usePopper } from "../../hooks/use-popper"
+import { usePopper, usePopperProps } from "../../hooks/use-popper"
 import {
   cx,
   dataAttr,
@@ -20,7 +20,7 @@ import {
 
 export interface UseTooltipProps
   extends Omit<UseDisclosureProps, "timing">,
-    UsePopperProps {
+    UsePopperProps<"button"> {
   /**
    * The delay before hiding the tooltip.
    *
@@ -59,31 +59,22 @@ export interface UseTooltipProps
   openDelay?: number
 }
 
-export const useTooltip = ({
-  autoUpdate,
-  closeDelay = 0,
-  closeOnClick = true,
-  closeOnEsc = true,
-  closeOnScroll,
-  defaultOpen,
-  disabled,
-  elements,
-  flip,
-  gutter,
-  matchWidth,
-  middleware,
-  offset,
-  open: openProp,
-  openDelay = 0,
-  placement,
-  platform,
-  preventOverflow,
-  strategy,
-  transform,
-  whileElementsMounted,
-  onClose: onCloseProp,
-  onOpen: onOpenProp,
-}: UseTooltipProps = {}) => {
+export const useTooltip = (props: UseTooltipProps = {}) => {
+  const [
+    popperProps,
+    {
+      closeDelay = 0,
+      closeOnClick = true,
+      closeOnEsc = true,
+      closeOnScroll,
+      defaultOpen,
+      disabled,
+      open: openProp,
+      openDelay = 0,
+      onClose: onCloseProp,
+      onOpen: onOpenProp,
+    },
+  ] = usePopperProps(props, ["open"])
   const describedbyId = useId()
   const triggerRef = useRef<HTMLElement>(null)
   const openTimeout = useRef<NodeJS.Timeout>(undefined)
@@ -95,20 +86,8 @@ export const useTooltip = ({
     onOpen: onOpenProp,
   })
   const { getPopperProps, getReferenceProps } = usePopper({
-    autoUpdate,
-    elements,
-    flip,
-    gutter,
-    matchWidth,
-    middleware,
-    offset,
     open,
-    placement,
-    platform,
-    preventOverflow,
-    strategy,
-    transform,
-    whileElementsMounted,
+    ...popperProps,
   })
 
   const onForceClose = useCallback(() => {

@@ -1,3 +1,5 @@
+"use client"
+
 import type { KeyboardEvent, MouseEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { Descendant } from "../../hooks/use-descendants"

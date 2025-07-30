@@ -41,3 +41,9 @@ export type Booleanish<Y> = Y extends "false" | "true" ? boolean : Y
 export type Length<T extends any[]> = T["length"]
 
 export type Merge<Y, M> = M & Omit<Y, keyof M>
+
+export type DeepPartial<Y> = Y extends any[] | Date | Function | Primitive
+  ? Y
+  : {
+      [P in keyof Y]?: DeepPartial<Y[P]>
+    }

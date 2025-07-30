@@ -63,21 +63,11 @@ export const Depth: Story = () => {
     >
       {(direction) => (
         <ZStack key={direction} direction={direction}>
-          <Box bg="info" color="white" p="md" rounded="l2">
-            Box
-          </Box>
-
-          <Box bg="success" color="white" p="md" rounded="l2">
-            Box
-          </Box>
-
-          <Box bg="warning" color="white" p="md" rounded="l2">
-            Box
-          </Box>
-
-          <Box bg="error" color="white" p="md" rounded="l2">
-            Box
-          </Box>
+          {["info", "success", "warning", "error"].map((bg, index) => (
+            <Box key={index} bg={bg} color="white" p="md" rounded="l2">
+              Box
+            </Box>
+          ))}
         </ZStack>
       )}
     </For>

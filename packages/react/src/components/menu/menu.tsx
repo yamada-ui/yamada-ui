@@ -13,6 +13,7 @@ import type { MenuStyle } from "./menu.style"
 import type {
   MenuOptionGroupType,
   MenuOptionGroupValue,
+  UseMenuGroupProps,
   UseMenuItemProps,
   UseMenuOptionGroupProps,
   UseMenuOptionItemProps,
@@ -29,9 +30,12 @@ import {
   MainMenuContext,
   MenuContext,
   MenuDescendantsContext,
+  MenuGroupContext,
   MenuOptionGroupContext,
   useMenu,
   useMenuContext,
+  useMenuGroup,
+  useMenuGroupContext,
   useMenuItem,
   useMenuOptionGroup,
   useMenuOptionItem,
@@ -76,16 +80,15 @@ interface ComponentContext
     UseMenuReturn,
     | "getContentProps"
     | "getContextTriggerProps"
-    | "getGroupProps"
     | "getSeparatorProps"
     | "getTriggerProps"
   > {}
 
 export interface MenuRootProps
-  extends Omit<UseMenuProps, "autoFocus">,
+  extends UseMenuProps,
     Omit<
       WithoutThemeProps<Popover.RootProps, MenuStyle>,
-      "autoFocus" | "modal" | "withCloseButton"
+      "autoFocus" | "modal" | "updateRef" | "withCloseButton"
     >,
     ThemeProps<MenuStyle> {
   /**
@@ -154,7 +157,6 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
     updateRef,
     getContentProps,
     getContextTriggerProps,
-    getGroupProps,
     getSeparatorProps,
     getTriggerProps,
     onActiveDescendant,
@@ -196,13 +198,11 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
     () => ({
       getContentProps,
       getContextTriggerProps,
-      getGroupProps,
       getSeparatorProps,
       getTriggerProps,
     }),
     [
       getContentProps,
-      getGroupProps,
       getContextTriggerProps,
       getSeparatorProps,
       getTriggerProps,
@@ -346,16 +346,12 @@ export const MenuContent = withContext<"div", MenuContentProps>(
             hasEndSeparator = hasSeparator,
             hasStartSeparator = hasSeparator,
             items = [],
-            label,
-            labelProps,
             ...rest
           } = props
 
           return (
             <Fragment key={index}>
               {hasStartSeparator ? <MenuSeparator /> : null}
-
-              {label ? <MenuLabel {...labelProps}>{label}</MenuLabel> : null}
 
               <MenuOptionGroup type={type} {...rest}>
                 {items.map(({ label, ...rest }, index) => (
@@ -375,16 +371,12 @@ export const MenuContent = withContext<"div", MenuContentProps>(
             hasEndSeparator = hasSeparator,
             hasStartSeparator = hasSeparator,
             items = [],
-            label,
-            labelProps,
             ...rest
           } = props
 
           return (
             <Fragment key={index}>
               {hasStartSeparator ? <MenuSeparator /> : null}
-
-              {label ? <MenuLabel {...labelProps}>{label}</MenuLabel> : null}
 
               <MenuOptionGroup type={type} {...rest}>
                 {items.map(({ label, ...rest }, index) => (
@@ -406,16 +398,12 @@ export const MenuContent = withContext<"div", MenuContentProps>(
           hasEndSeparator = hasSeparator,
           hasStartSeparator = hasSeparator,
           items = [],
-          label,
-          labelProps,
           ...rest
         } = props
 
         return (
           <Fragment key={index}>
             {hasStartSeparator ? <MenuSeparator /> : null}
-
-            {label ? <MenuLabel {...labelProps}>{label}</MenuLabel> : null}
 
             <MenuGroup {...rest}>
               {items.map(({ label, ...rest }, index) => (
@@ -430,6 +418,7 @@ export const MenuContent = withContext<"div", MenuContentProps>(
         )
       } else if ("value" in props) {
         const { label, ...rest } = props
+
         return (
           <MenuItem key={index} {...rest}>
             {label}
@@ -449,23 +438,42 @@ export const MenuContent = withContext<"div", MenuContentProps>(
 
 export interface MenuLabelProps extends HTMLStyledProps<"span"> {}
 
-export const MenuLabel = withContext<"span", MenuLabelProps>(
-  "span",
-  "label",
-)({
-  role: "presentation",
-})
-
-export interface MenuGroupProps extends HTMLStyledProps {}
-
-export const MenuGroup = withContext<"div", MenuGroupProps>("div", "group")(
+export const MenuLabel = withContext<"span", MenuLabelProps>("span", "label")(
   undefined,
   (props) => {
-    const { getGroupProps } = useComponentContext()
+    const { getLabelProps } = useMenuGroupContext()
 
-    return getGroupProps(props)
+    return getLabelProps(props)
   },
 )
+
+export interface MenuGroupProps extends UseMenuGroupProps, HTMLStyledProps {
+  /**
+   * The label of the group.
+   */
+  label?: ReactNode
+  /**
+   * Props for the label component.
+   */
+  labelProps?: MenuLabelProps
+}
+
+export const MenuGroup = withContext<"div", MenuGroupProps>(
+  ({ children, label, labelProps, ...rest }) => {
+    const { getGroupProps, getLabelProps } = useMenuGroup(rest)
+    const context = useMemo(() => ({ getLabelProps }), [getLabelProps])
+
+    return (
+      <MenuGroupContext value={context}>
+        <styled.div {...getGroupProps(rest)}>
+          {label ? <MenuLabel {...labelProps}>{label}</MenuLabel> : null}
+          {children}
+        </styled.div>
+      </MenuGroupContext>
+    )
+  },
+  "group",
+)()
 
 export interface MenuOptionGroupProps<
   Y extends MenuOptionGroupType = "checkbox",
@@ -487,7 +495,6 @@ export const MenuOptionGroup = withContext<"div", MenuOptionGroupProps>(
       value: valueProp,
       onChange: onChangeProp,
     })
-    const { getGroupProps } = useComponentContext()
     const context = useMemo(
       () => ({ type, value, onChange }),
       [type, value, onChange],
@@ -495,7 +502,7 @@ export const MenuOptionGroup = withContext<"div", MenuOptionGroupProps>(
 
     return (
       <MenuOptionGroupContext value={context}>
-        <styled.div {...getGroupProps(rest)} />
+        <MenuGroup {...rest} />
       </MenuOptionGroupContext>
     )
   },
@@ -530,19 +537,23 @@ export const MenuItem = withContext<"div", MenuItemProps>(
 
 export interface MenuOptionItemProps
   extends HTMLStyledProps,
-    UseMenuOptionItemProps {}
+    UseMenuOptionItemProps {
+  /**
+   * The icon to be used in the menu option item.
+   */
+  icon?: ReactNode
+}
 
 export const MenuOptionItem = withContext<"div", MenuOptionItemProps>(
-  ({ children, ...rest }) => {
+  ({ children, icon, ...rest }) => {
     const { type, getIndicatorProps, getOptionItemProps } =
       useMenuOptionItem(rest)
 
     return (
       <styled.div {...getOptionItemProps()}>
-        <MenuIndicator
-          as={type === "radio" ? CircleSmallIcon : CheckIcon}
-          {...getIndicatorProps()}
-        />
+        <MenuIndicator {...getIndicatorProps()}>
+          {icon || (type === "radio" ? <CircleSmallIcon /> : <CheckIcon />)}
+        </MenuIndicator>
         {children}
       </styled.div>
     )
@@ -550,10 +561,10 @@ export const MenuOptionItem = withContext<"div", MenuOptionItemProps>(
   { name: "optionItem", slot: ["item", "option"] },
 )()
 
-export interface MenuIndicatorProps extends HTMLStyledProps<"svg"> {}
+export interface MenuIndicatorProps extends HTMLStyledProps {}
 
-export const MenuIndicator = withContext<"svg", MenuIndicatorProps>(
-  "svg",
+export const MenuIndicator = withContext<"div", MenuIndicatorProps>(
+  "div",
   "indicator",
 )()
 

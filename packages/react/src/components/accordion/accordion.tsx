@@ -8,15 +8,7 @@ import type { AccordionStyle } from "./accordion.style"
 import type { UseAccordionItemProps, UseAccordionProps } from "./use-accordion"
 import { Children, cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
-import {
-  createContext,
-  findChild,
-  getValidChildren,
-  isEmpty,
-  isString,
-  omitChildren,
-  runIfFn,
-} from "../../utils"
+import { createContext, isString, runIfFn, useSplitChildren } from "../../utils"
 import { Collapse } from "../collapse"
 import { ChevronDownIcon } from "../icon"
 import { accordionStyle } from "./accordion.style"
@@ -172,14 +164,13 @@ export const AccordionItem = withContext<"div", AccordionItemProps>(
       getPanelProps,
     } = useAccordionItem(rest)
 
-    children = runIfFn(children, { disabled, expanded: open })
+    children = useMemo(
+      () => runIfFn(children, { disabled, expanded: open }),
+      [children, disabled, open],
+    )
 
-    const validChildren = getValidChildren(children)
-    const customAccordionButton = findChild(validChildren, AccordionButton)
-    const customAccordionPanel = findChild(validChildren, AccordionPanel)
-    const cloneChildren = !isEmpty(validChildren)
-      ? omitChildren(validChildren, AccordionButton, AccordionPanel)
-      : children
+    const [omittedChildren, customAccordionButton, customAccordionPanel] =
+      useSplitChildren(children, AccordionButton, AccordionPanel)
 
     const context = useMemo(
       () => ({
@@ -204,7 +195,7 @@ export const AccordionItem = withContext<"div", AccordionItemProps>(
               </AccordionButton>
             )}
             {customAccordionPanel ?? (
-              <AccordionPanel>{cloneChildren}</AccordionPanel>
+              <AccordionPanel>{omittedChildren}</AccordionPanel>
             )}
           </styled.div>
         </AccordionItemComponentContext>

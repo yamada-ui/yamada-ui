@@ -5,7 +5,7 @@ import type { CSSProps, HTMLStyledProps } from "../../core"
 import type { StackStyle } from "./stack.style"
 import { cloneElement, Fragment, useMemo } from "react"
 import { createComponent, styled } from "../../core"
-import { getValidChildren, replaceObject } from "../../utils"
+import { replaceObject, useValidChildren } from "../../utils"
 import { stackStyle } from "./stack.style"
 
 export interface StackProps extends Omit<HTMLStyledProps, "direction"> {
@@ -57,8 +57,7 @@ export const Stack = withContext<"div", StackProps>(
     const isColumn = (value: any) =>
       value === "column" || value === "column-reverse"
 
-    const validChildren = getValidChildren(children)
-
+    const validChildren = useValidChildren(children)
     const cloneChildren = useMemo(
       () =>
         separator

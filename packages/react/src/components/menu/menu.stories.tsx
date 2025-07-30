@@ -78,7 +78,7 @@ export const Size: Story = () => {
   )
 
   return (
-    <PropsTable variant="stack" rows={["sm", "md"]}>
+    <PropsTable variant="stack" rows={["sm", "md", "lg"]}>
       {(_, row, key) => (
         <Menu.Root key={key} size={row}>
           <Menu.Trigger>
@@ -183,7 +183,7 @@ export const Group: Story = () => {
 
   return (
     <HStack>
-      <Menu.Root>
+      <Menu.Root size="lg">
         <Menu.Trigger>
           <Button>Menu with items</Button>
         </Menu.Trigger>
@@ -197,9 +197,7 @@ export const Group: Story = () => {
         </Menu.Trigger>
 
         <Menu.Content>
-          <Menu.Label>第七班</Menu.Label>
-
-          <Menu.Group>
+          <Menu.Group label="第七班">
             <Menu.Item value="naruto">うずまきナルト</Menu.Item>
             <Menu.Item value="sasuke">うちはサスケ</Menu.Item>
             <Menu.Item value="sakura">春野サクラ</Menu.Item>
@@ -207,9 +205,7 @@ export const Group: Story = () => {
 
           <Menu.Separator />
 
-          <Menu.Label>伝説の三忍</Menu.Label>
-
-          <Menu.Group>
+          <Menu.Group label="伝説の三忍">
             <Menu.Item value="orochimaru">大蛇丸</Menu.Item>
             <Menu.Item value="pervy-sage">自來也</Menu.Item>
             <Menu.Item value="tsunade">綱手</Menu.Item>
@@ -324,7 +320,9 @@ export const Indicator: Story = () => {
       {
         label: (
           <>
-            <Menu.Indicator as={PlusIcon} />
+            <Menu.Indicator>
+              <PlusIcon />
+            </Menu.Indicator>
             New Tab
           </>
         ),
@@ -333,7 +331,9 @@ export const Indicator: Story = () => {
       {
         label: (
           <>
-            <Menu.Indicator as={SquareArrowOutUpRightIcon} />
+            <Menu.Indicator>
+              <SquareArrowOutUpRightIcon />
+            </Menu.Indicator>
             New Window
           </>
         ),
@@ -342,7 +342,9 @@ export const Indicator: Story = () => {
       {
         label: (
           <>
-            <Menu.Indicator as={SquarePenIcon} />
+            <Menu.Indicator>
+              <SquarePenIcon />
+            </Menu.Indicator>
             New File
           </>
         ),
@@ -369,15 +371,21 @@ export const Indicator: Story = () => {
 
         <Menu.Content>
           <Menu.Item value="tab">
-            <Menu.Indicator as={PlusIcon} />
+            <Menu.Indicator>
+              <PlusIcon />
+            </Menu.Indicator>
             New Tab
           </Menu.Item>
           <Menu.Item value="window">
-            <Menu.Indicator as={SquareArrowOutUpRightIcon} />
+            <Menu.Indicator>
+              <SquareArrowOutUpRightIcon />
+            </Menu.Indicator>
             New Window
           </Menu.Item>
           <Menu.Item value="file">
-            <Menu.Indicator as={SquarePenIcon} />
+            <Menu.Indicator>
+              <SquarePenIcon />
+            </Menu.Indicator>
             New File
           </Menu.Item>
         </Menu.Content>

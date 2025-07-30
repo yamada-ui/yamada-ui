@@ -5,7 +5,7 @@ import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { StatStyle } from "./stat.style"
 import { createSlotComponent, styled } from "../../core"
 import { useI18n } from "../../providers/i18n-provider"
-import { findChild, getValidChildren, isEmpty, omitChildren } from "../../utils"
+import { useSplitChildren } from "../../utils"
 import { TriangleIcon } from "../icon"
 import { statStyle } from "./stat.style"
 
@@ -79,13 +79,12 @@ export const StatRoot = withProvider<"dl", StatRootProps>(
     valueProps,
     ...rest
   }) => {
-    const validChildren = getValidChildren(children)
-    const customStatLabel = findChild(validChildren, StatLabel)
-    const customStatValue = findChild(validChildren, StatValue)
-    const customStatHelperMessage = findChild(validChildren, StatHelperMessage)
-    const cloneChildren = !isEmpty(validChildren)
-      ? omitChildren(validChildren, StatLabel, StatValue, StatHelperMessage)
-      : children
+    const [
+      omittedChildren,
+      customStatLabel,
+      customStatValue,
+      customStatHelperMessage,
+    ] = useSplitChildren(children, StatLabel, StatValue, StatHelperMessage)
 
     return (
       <styled.dl {...rest}>
@@ -97,7 +96,7 @@ export const StatRoot = withProvider<"dl", StatRootProps>(
             {helperMessage}
           </StatHelperMessage>
         )}
-        {cloneChildren}
+        {omittedChildren}
       </styled.dl>
     )
   },

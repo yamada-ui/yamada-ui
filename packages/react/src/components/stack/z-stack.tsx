@@ -74,7 +74,7 @@ export const ZStack = withContext<"div", ZStackProps>(
   ({
     css,
     children,
-    direction = "bottom",
+    direction = "end",
     fit = true,
     reverse = false,
     startIndex = 0,

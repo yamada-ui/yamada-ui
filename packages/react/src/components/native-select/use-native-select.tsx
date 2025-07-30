@@ -9,7 +9,7 @@ import { useFieldProps } from "../field"
 
 interface NativeSelectSharedItem
   extends Omit<HTMLProps<"option">, "children" | "label" | "value"> {
-  label?: string
+  label: string
 }
 
 interface NativeSelectItemWithValue extends NativeSelectSharedItem {
@@ -137,7 +137,6 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
       computedChildren,
       dataProps,
       eventProps,
-
       rest,
       placeholder,
       disabled,

@@ -18,6 +18,7 @@ import {
   flip,
   offset,
   shift,
+  size,
   useFloating,
 } from "@floating-ui/react-dom"
 import { useCallback, useMemo } from "react"
@@ -169,8 +170,26 @@ export const usePopper = <
 
     if (middlewareProp) middleware.push(...middlewareProp)
 
+    if (matchWidth)
+      middleware.push(
+        size({
+          apply({ elements, rects }) {
+            Object.assign(elements.floating.style, {
+              minWidth: `${rects.reference.width}px`,
+            })
+          },
+        }),
+      )
+
     return middleware
-  }, [flipProp, gutter, middlewareProp, offsetProp, preventOverflow])
+  }, [
+    flipProp,
+    gutter,
+    matchWidth,
+    middlewareProp,
+    offsetProp,
+    preventOverflow,
+  ])
   const whileElementsMounted = useMemo(() => {
     if (whileElementsMountedProp)
       return whileElementsMountedProp as WhileElementsMounted

@@ -1,8 +1,7 @@
 import type { ComponentType } from "react"
 import type { Transform } from "sucrase"
 import { burger } from "@lucide/lab"
-import { isFunction, Text } from "@yamada-ui/react"
-import * as Components from "@yamada-ui/react"
+import { Client, isFunction, Text } from "@yamada-ui/react"
 import React, { isValidElement } from "react"
 import { transform as originalTransform } from "sucrase"
 
@@ -10,7 +9,7 @@ const components = {
   burger,
   React,
   ...React,
-  ...Components,
+  ...Client,
 }
 
 function trim(code: string) {

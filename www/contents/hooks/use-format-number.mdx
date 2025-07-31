@@ -5,4 +5,245 @@ storybook: hooks-useformatnumber--basic
 source: hooks/use-format-number
 ---
 
-### Usage
+```tsx preview functional client
+const formattedValue = useFormatNumber(1234567.89)
+
+return <Text>{formattedValue}</Text>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useFormatNumber } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useFormatNumber } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useFormatNumber } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+const formattedValue = useFormatNumber(1234567.89)
+```
+
+It formats numbers according to the specified locale and options. The hook returns the formatted value directly.
+
+:::note
+`useFormatNumber` internally uses [Intl.NumberFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat). `useFormatNumber` automatically sets the `locale` based on [navigator.language](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/language).
+:::
+
+### Changing the Locale
+
+To change the locale, set a value for [locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales).
+
+```tsx preview functional client
+const enValue = useFormatNumber(1234567.89, { locale: "en-US" })
+const jaValue = useFormatNumber(1234567.89, { locale: "ja-JP" })
+const deValue = useFormatNumber(1234567.89, { locale: "de-DE" })
+const frValue = useFormatNumber(1234567.89, { locale: "fr-FR" })
+const zhValue = useFormatNumber(1234567.89, { locale: "zh-CN" })
+
+return (
+  <Grid templateColumns="auto 1fr" gap="sm">
+    <Text fontWeight="semibold">en-US</Text>
+    <Text>{enValue}</Text>
+
+    <Text fontWeight="semibold">ja-JP</Text>
+    <Text>{jaValue}</Text>
+
+    <Text fontWeight="semibold">de-DE</Text>
+    <Text>{deValue}</Text>
+
+    <Text fontWeight="semibold">fr-FR</Text>
+    <Text>{frValue}</Text>
+
+    <Text fontWeight="semibold">zh-CN</Text>
+    <Text>{zhValue}</Text>
+  </Grid>
+)
+```
+
+#### Set the Locale for the Entire Application
+
+If you want to set the locale for the entire application, set the `locale` for the `UIProvider`.
+
+```tsx
+import { UIProvider } from "@yamada-ui/react"
+
+const App = () => {
+  return (
+    <UIProvider locale="en-US">
+      <YourComponent />
+    </UIProvider>
+  )
+}
+```
+
+:::note
+If you want to learn more about config, please check [Customizing Config](/docs/theming/configuration/customization).
+:::
+
+### Converting to Currency
+
+To convert to currency, set `"currency"` for [style](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style).
+
+```tsx preview functional client
+const usdValue = useFormatNumber(1234567.89, {
+  style: "currency",
+  currency: "USD",
+  locale: "en-US",
+})
+const eurValue = useFormatNumber(1234567.89, {
+  style: "currency",
+  currency: "EUR",
+  locale: "de-DE",
+})
+const jpyValue = useFormatNumber(1234567.89, {
+  style: "currency",
+  currency: "JPY",
+  locale: "ja-JP",
+})
+
+return (
+  <Grid templateColumns="auto 1fr" gap="sm">
+    <Text fontWeight="semibold">USD</Text>
+    <Text>{usdValue}</Text>
+
+    <Text fontWeight="semibold">EUR</Text>
+    <Text>{eurValue}</Text>
+
+    <Text fontWeight="semibold">JPY</Text>
+    <Text>{jpyValue}</Text>
+  </Grid>
+)
+```
+
+### Converting to Units
+
+To convert to units, set `"unit"` for [style](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style).
+
+```tsx preview functional client
+const kilogramValue = useFormatNumber(100, {
+  style: "unit",
+  unit: "kilogram",
+})
+const celsiusValue = useFormatNumber(100, {
+  style: "unit",
+  unit: "celsius",
+  unitDisplay: "long",
+})
+const speedValue = useFormatNumber(100, {
+  style: "unit",
+  unit: "kilometer-per-hour",
+  unitDisplay: "narrow",
+})
+
+return (
+  <VStack gap="sm">
+    <Text>{kilogramValue}</Text>
+    <Text>{celsiusValue}</Text>
+    <Text>{speedValue}</Text>
+  </VStack>
+)
+```
+
+### Converting to Percent
+
+To convert to percent, set `"percent"` for [style](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style).
+
+```tsx preview functional client
+const percent1Value = useFormatNumber(0.45, { style: "percent" })
+const percent2Value = useFormatNumber(0.45, {
+  style: "percent",
+  minimumFractionDigits: 2,
+})
+
+return (
+  <VStack gap="sm">
+    <Text>{percent1Value}</Text>
+    <Text>{percent2Value}</Text>
+  </VStack>
+)
+```
+
+### Converting Notation
+
+To convert notation, set a value for [notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#notation).
+
+```tsx preview functional client
+const standardValue = useFormatNumber(1234567.89, { notation: "standard" })
+const scientificValue = useFormatNumber(1234567.89, { notation: "scientific" })
+const engineeringValue = useFormatNumber(1234567.89, {
+  notation: "engineering",
+})
+const compactValue = useFormatNumber(1234567.89, { notation: "compact" })
+
+return (
+  <VStack gap="sm">
+    <Text>{standardValue}</Text>
+    <Text>{scientificValue}</Text>
+    <Text>{engineeringValue}</Text>
+    <Text>{compactValue}</Text>
+  </VStack>
+)
+```
+
+### Controlling Decimal Places
+
+To control the number of decimal places, use [minimumFractionDigits](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#minimumfractiondigits) and [maximumFractionDigits](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumfractiondigits).
+
+```tsx preview functional client
+const fixed2Value = useFormatNumber(1234.5, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+})
+const range03Value = useFormatNumber(1234.567, {
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 3,
+})
+const fixed4Value = useFormatNumber(1234, {
+  minimumFractionDigits: 4,
+  maximumFractionDigits: 4,
+})
+
+return (
+  <VStack gap="sm">
+    <Text>{fixed2Value}</Text>
+    <Text>{range03Value}</Text>
+    <Text>{fixed4Value}</Text>
+  </VStack>
+)
+```
+
+### Disabling Grouping
+
+To disable grouping, set `false` for [useGrouping](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#usegrouping).
+
+```tsx preview functional client
+const noGroupingValue = useFormatNumber(1234567.89, { useGrouping: false })
+
+return <Text>{noGroupingValue}</Text>
+```
+
+### Changing the Sign Display
+
+To change the sign display, set a value for [signDisplay](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#signdisplay).
+
+```tsx preview functional client
+const alwaysValue = useFormatNumber(1234.5, { signDisplay: "always" })
+const exceptZeroValue = useFormatNumber(-1234.5, { signDisplay: "exceptZero" })
+
+return (
+  <VStack gap="sm">
+    <Text>{alwaysValue}</Text>
+    <Text>{exceptZeroValue}</Text>
+  </VStack>
+)
+```

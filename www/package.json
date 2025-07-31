@@ -8,10 +8,10 @@
   "scripts": {
     "clean": "rimraf .next .velite .eslintcache tsconfig.tsbuildinfo node_modules",
     "dev:content": "NODE_OPTIONS=\"--experimental-strip-types\" velite --watch",
-    "dev:next": "next dev",
+    "dev:next": "next dev --turbopack",
     "dev": "run-p dev:*",
     "build:content": "NODE_OPTIONS=\"--experimental-strip-types\" velite --clean",
-    "build:next": "next build",
+    "build:next": "next build --turbopack",
     "build": "run-s build:*",
     "start": "next start",
     "typecheck": "tsc --noEmit",

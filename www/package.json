@@ -11,7 +11,7 @@
     "dev:next": "next dev --turbopack",
     "dev": "run-p dev:*",
     "build:content": "NODE_OPTIONS=\"--experimental-strip-types\" velite --clean",
-    "build:next": "next build --turbopack",
+    "build:next": "next build",
     "build": "run-s build:*",
     "start": "next start",
     "typecheck": "tsc --noEmit",

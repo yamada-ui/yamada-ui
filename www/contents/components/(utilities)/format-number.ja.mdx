@@ -38,25 +38,25 @@ import { FormatNumber } from "@workspace/ui"
 `FormatNumber`は、内部的に[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)を使用しています。`FormatNumber`は、[navigator.language](https://developer.mozilla.org/ja/docs/Web/API/Navigator/language)に基づいて`locale`を自動的に設定します。
 :::
 
-### ロケールの変更する
+### ロケールを変更する
 
 ロケールを変更する場合は、[locale](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales)に値を設定します。
 
 ```tsx preview
 <Grid templateColumns="auto 1fr" gap="sm">
-  <Text fontWeight="semibold">en-US</Text>
+  <Text fontWeight="semibold">英語</Text>
   <FormatNumber value={1234567.89} locale="en-US" />
 
-  <Text fontWeight="semibold">ja-JP</Text>
+  <Text fontWeight="semibold">日本語</Text>
   <FormatNumber value={1234567.89} locale="ja-JP" />
 
-  <Text fontWeight="semibold">de-DE</Text>
+  <Text fontWeight="semibold">ドイツ語</Text>
   <FormatNumber value={1234567.89} locale="de-DE" />
 
-  <Text fontWeight="semibold">fr-FR</Text>
+  <Text fontWeight="semibold">フランス語</Text>
   <FormatNumber value={1234567.89} locale="fr-FR" />
 
-  <Text fontWeight="semibold">zh-CN</Text>
+  <Text fontWeight="semibold">中国語</Text>
   <FormatNumber value={1234567.89} locale="zh-CN" />
 </Grid>
 ```
@@ -87,7 +87,7 @@ const App = () => {
 
 ```tsx preview
 <Grid templateColumns="auto 1fr" gap="sm">
-  <Text fontWeight="semibold">USD</Text>
+  <Text fontWeight="semibold">米ドル</Text>
   <FormatNumber
     value={1234567.89}
     style="currency"
@@ -95,7 +95,7 @@ const App = () => {
     locale="en-US"
   />
 
-  <Text fontWeight="semibold">EUR</Text>
+  <Text fontWeight="semibold">ユーロ</Text>
   <FormatNumber
     value={1234567.89}
     style="currency"
@@ -103,7 +103,7 @@ const App = () => {
     locale="de-DE"
   />
 
-  <Text fontWeight="semibold">JPY</Text>
+  <Text fontWeight="semibold">円</Text>
   <FormatNumber
     value={1234567.89}
     style="currency"

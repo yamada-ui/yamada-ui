@@ -5,4 +5,245 @@ storybook: hooks-useformatnumber--basic
 source: hooks/use-format-number
 ---
 
-### 使い方
+```tsx preview functional client
+const formattedValue = useFormatNumber(1234567.89)
+
+return <Text>{formattedValue}</Text>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useFormatNumber } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useFormatNumber } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useFormatNumber } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+const formattedValue = useFormatNumber(1234567.89)
+```
+
+指定されたロケールとオプションに従って数値をフォーマットします。フックはフォーマットされた値を直接返します。
+
+:::note
+`useFormatNumber`は、内部的に[Intl.NumberFormat](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat)を使用しています。`useFormatNumber`は、[navigator.language](https://developer.mozilla.org/ja/docs/Web/API/Navigator/language)に基づいて`locale`を自動的に設定します。
+:::
+
+### ロケールを変更する
+
+ロケールを変更する場合は、[locale](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales)に値を設定します。
+
+```tsx preview functional client
+const enValue = useFormatNumber(1234567.89, { locale: "en-US" })
+const jaValue = useFormatNumber(1234567.89, { locale: "ja-JP" })
+const deValue = useFormatNumber(1234567.89, { locale: "de-DE" })
+const frValue = useFormatNumber(1234567.89, { locale: "fr-FR" })
+const zhValue = useFormatNumber(1234567.89, { locale: "zh-CN" })
+
+return (
+  <Grid templateColumns="auto 1fr" gap="sm">
+    <Text fontWeight="semibold">英語</Text>
+    <Text>{enValue}</Text>
+
+    <Text fontWeight="semibold">日本語</Text>
+    <Text>{jaValue}</Text>
+
+    <Text fontWeight="semibold">ドイツ語</Text>
+    <Text>{deValue}</Text>
+
+    <Text fontWeight="semibold">フランス語</Text>
+    <Text>{frValue}</Text>
+
+    <Text fontWeight="semibold">中国語</Text>
+    <Text>{zhValue}</Text>
+  </Grid>
+)
+```
+
+#### プロジェクト全体のロケールを設定する
+
+アプリケーション全体のロケールの設定をしたい場合は、`UIProvider`の`locale`に値を設定します。
+
+```tsx
+import { UIProvider } from "@yamada-ui/react"
+
+const App = () => {
+  return (
+    <UIProvider locale="ja-JP">
+      <YourComponent />
+    </UIProvider>
+  )
+}
+```
+
+:::note
+コンフィグをもっと学びたい場合は、[コンフィグをカスタマイズする](/ja/docs/theming/configuration/customization)をご覧ください。
+:::
+
+### 通貨に変換する
+
+通貨に変換する場合は、[style](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style)に`"currency"`を設定します。
+
+```tsx preview functional client
+const usdValue = useFormatNumber(1234567.89, {
+  style: "currency",
+  currency: "USD",
+  locale: "en-US",
+})
+const eurValue = useFormatNumber(1234567.89, {
+  style: "currency",
+  currency: "EUR",
+  locale: "de-DE",
+})
+const jpyValue = useFormatNumber(1234567.89, {
+  style: "currency",
+  currency: "JPY",
+  locale: "ja-JP",
+})
+
+return (
+  <Grid templateColumns="auto 1fr" gap="sm">
+    <Text fontWeight="semibold">米ドル</Text>
+    <Text>{usdValue}</Text>
+
+    <Text fontWeight="semibold">ユーロ</Text>
+    <Text>{eurValue}</Text>
+
+    <Text fontWeight="semibold">円</Text>
+    <Text>{jpyValue}</Text>
+  </Grid>
+)
+```
+
+### 単位に変換する
+
+単位に変換する場合は、[style](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style)に`"unit"`を設定します。
+
+```tsx preview functional client
+const kilogramValue = useFormatNumber(100, {
+  style: "unit",
+  unit: "kilogram",
+})
+const celsiusValue = useFormatNumber(100, {
+  style: "unit",
+  unit: "celsius",
+  unitDisplay: "long",
+})
+const speedValue = useFormatNumber(100, {
+  style: "unit",
+  unit: "kilometer-per-hour",
+  unitDisplay: "narrow",
+})
+
+return (
+  <VStack gap="sm">
+    <Text>{kilogramValue}</Text>
+    <Text>{celsiusValue}</Text>
+    <Text>{speedValue}</Text>
+  </VStack>
+)
+```
+
+### パーセントに変換する
+
+パーセントに変換する場合は、[style](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#style)に`"percent"`を設定します。
+
+```tsx preview functional client
+const percent1Value = useFormatNumber(0.45, { style: "percent" })
+const percent2Value = useFormatNumber(0.45, {
+  style: "percent",
+  minimumFractionDigits: 2,
+})
+
+return (
+  <VStack gap="sm">
+    <Text>{percent1Value}</Text>
+    <Text>{percent2Value}</Text>
+  </VStack>
+)
+```
+
+### 表記に変換する
+
+表記に変換する場合は、[notation](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#notation)に値を設定します。
+
+```tsx preview functional client
+const standardValue = useFormatNumber(1234567.89, { notation: "standard" })
+const scientificValue = useFormatNumber(1234567.89, { notation: "scientific" })
+const engineeringValue = useFormatNumber(1234567.89, {
+  notation: "engineering",
+})
+const compactValue = useFormatNumber(1234567.89, { notation: "compact" })
+
+return (
+  <VStack gap="sm">
+    <Text>{standardValue}</Text>
+    <Text>{scientificValue}</Text>
+    <Text>{engineeringValue}</Text>
+    <Text>{compactValue}</Text>
+  </VStack>
+)
+```
+
+### 小数点以下の桁数を制御する
+
+小数点以下の桁数を制御する場合は、[minimumFractionDigits](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#minimumfractiondigits)と[maximumFractionDigits](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumfractiondigits)を使用します。
+
+```tsx preview functional client
+const fixed2Value = useFormatNumber(1234.5, {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+})
+const range03Value = useFormatNumber(1234.567, {
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 3,
+})
+const fixed4Value = useFormatNumber(1234, {
+  minimumFractionDigits: 4,
+  maximumFractionDigits: 4,
+})
+
+return (
+  <VStack gap="sm">
+    <Text>{fixed2Value}</Text>
+    <Text>{range03Value}</Text>
+    <Text>{fixed4Value}</Text>
+  </VStack>
+)
+```
+
+### グループ化を無効にする
+
+グループ化を無効にする場合は、[useGrouping](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#usegrouping)に`false`を設定します。
+
+```tsx preview functional client
+const noGroupingValue = useFormatNumber(1234567.89, { useGrouping: false })
+
+return <Text>{noGroupingValue}</Text>
+```
+
+### 符号の表示を変更する
+
+符号の表示を変更する場合は、[signDisplay](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#signdisplay)に値を設定します。
+
+```tsx preview functional client
+const alwaysValue = useFormatNumber(1234.5, { signDisplay: "always" })
+const exceptZeroValue = useFormatNumber(-1234.5, { signDisplay: "exceptZero" })
+
+return (
+  <VStack gap="sm">
+    <Text>{alwaysValue}</Text>
+    <Text>{exceptZeroValue}</Text>
+  </VStack>
+)
+```

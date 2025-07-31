@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": ["react-resizable-panels@3.0.3"],
+    "internal": {
+      "components": [],
+      "hooks": ["use-value"],
+      "providers": []
+    }
+  }
+}

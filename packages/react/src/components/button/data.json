@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": [],
+    "internal": {
+      "components": ["group", "icon-button", "loading", "ripple"],
+      "hooks": [],
+      "providers": []
+    }
+  }
+}

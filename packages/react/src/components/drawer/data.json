@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "external": ["motion/react@12.18.1", "react-remove-scroll@2.7.1"],
+    "internal": {
+      "components": [
+        "button",
+        "close-button",
+        "fade",
+        "focus-lock",
+        "modal",
+        "motion",
+        "portal",
+        "slide"
+      ],
+      "hooks": ["use-value"],
+      "providers": []
+    }
+  }
+}

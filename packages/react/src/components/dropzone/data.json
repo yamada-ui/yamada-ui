@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": ["file-selector@2.1.2", "react-dropzone@14.3.8"],
+    "internal": {
+      "components": ["fade", "field", "input", "loading", "portal"],
+      "hooks": [],
+      "providers": []
+    }
+  }
+}

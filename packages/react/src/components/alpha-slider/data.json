@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": [],
+    "internal": {
+      "components": ["color-swatch", "hue-slider"],
+      "hooks": ["use-value"],
+      "providers": []
+    }
+  }
+}

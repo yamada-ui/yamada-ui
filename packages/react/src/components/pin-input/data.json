@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": [],
+    "internal": {
+      "components": ["field", "group", "input"],
+      "hooks": ["use-controllable-state", "use-descendants"],
+      "providers": []
+    }
+  }
+}

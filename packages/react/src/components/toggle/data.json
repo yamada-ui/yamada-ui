@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": [],
+    "internal": {
+      "components": ["field", "group", "icon-button", "input", "portal"],
+      "hooks": ["use-controllable-state"],
+      "providers": ["i18n-provider"]
+    }
+  }
+}

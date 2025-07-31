@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": [],
+    "internal": {
+      "components": ["slider"],
+      "hooks": ["use-value"],
+      "providers": ["i18n-provider"]
+    }
+  }
+}

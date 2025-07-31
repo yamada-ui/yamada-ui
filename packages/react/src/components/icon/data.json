@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": ["lucide-react@0.533.0"],
+    "internal": {
+      "components": [],
+      "hooks": [],
+      "providers": []
+    }
+  }
+}

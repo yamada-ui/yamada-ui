@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": [],
+    "internal": {
+      "components": ["icon"],
+      "hooks": ["use-value"],
+      "providers": ["i18n-provider"]
+    }
+  }
+}

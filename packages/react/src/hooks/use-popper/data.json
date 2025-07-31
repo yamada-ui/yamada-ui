@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": ["@floating-ui/react-dom@2.1.4"],
+    "internal": {
+      "components": [],
+      "hooks": [],
+      "providers": []
+    }
+  }
+}

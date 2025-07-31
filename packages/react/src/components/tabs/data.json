@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "external": [],
+    "internal": {
+      "components": [],
+      "hooks": [
+        "use-controllable-state",
+        "use-descendants",
+        "use-lazy-mount",
+        "use-value"
+      ],
+      "providers": []
+    }
+  }
+}

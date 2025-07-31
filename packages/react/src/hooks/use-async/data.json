@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": [],
+    "internal": {
+      "components": [],
+      "hooks": ["use-mounted"],
+      "providers": []
+    }
+  }
+}

@@ -42,7 +42,7 @@ export const Background: FC<BackgroundProps> = memo(
         data-loading
         alignItems="center"
         animate="animate"
-        bg="panel"
+        bg="bg.panel"
         bottom="md"
         boxShadow="lg"
         display="flex"

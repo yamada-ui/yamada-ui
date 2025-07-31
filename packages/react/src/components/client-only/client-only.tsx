@@ -24,8 +24,7 @@ export interface ClientOnlyProps {
  *
  * @see https://yamada-ui.com/components/client-only
  */
-export const ClientOnly: FC<ClientOnlyProps> = (props) => {
-  const { children, fallback } = props
+export const ClientOnly: FC<ClientOnlyProps> = ({ children, fallback }) => {
   const mounted = useMounted({ state: true })
 
   return (

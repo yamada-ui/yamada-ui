@@ -91,7 +91,7 @@
     "jiti": "^2.5.1",
     "jsdom": "^26.1.0",
     "lefthook": "^1.12.2",
-    "lucide-react": "^0.533.0",
+    "lucide-react": "^0.535.0",
     "node-fetch": "^3.3.2",
     "ora": "^8.2.0",
     "picocolors": "^1.1.1",
@@ -106,7 +106,7 @@
     "vitest": "^3.2.4",
     "vitest-axe": "^0.1.0",
     "vitest-matchmedia-mock": "^1.0.6",
-    "web-features": "^2.42.0"
+    "web-features": "^2.43.0"
   },
   "pnpm": {
     "overrides": {

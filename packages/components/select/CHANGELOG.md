@@ -1,5 +1,14 @@
 # @yamada-ui/select
 
+## 1.8.12
+
+### Patch Changes
+
+- [#4702](https://github.com/yamada-ui/yamada-ui/pull/4702) [`f0150ef`](https://github.com/yamada-ui/yamada-ui/commit/f0150efe56e0ae4b6e9094b962c5332e946c8b1e) Thanks [@jeffplays2005](https://github.com/jeffplays2005)! - Fix `MultiSelect` component truncated incorrectly on Safari.
+
+- Updated dependencies [[`d29c490`](https://github.com/yamada-ui/yamada-ui/commit/d29c490aab6e5ab4dd3eee093a0894a563de1634)]:
+  - @yamada-ui/use-clickable@1.2.23
+
 ## 1.8.11
 
 ### Patch Changes

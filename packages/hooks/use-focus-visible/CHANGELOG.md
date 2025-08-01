@@ -1,5 +1,11 @@
 # @yamada-ui/use-focus-visible
 
+## 1.1.17
+
+### Patch Changes
+
+- [#4712](https://github.com/yamada-ui/yamada-ui/pull/4712) [`6fa5637`](https://github.com/yamada-ui/yamada-ui/commit/6fa56373559cef5c7f72f7844e1153d7cc144680) Thanks [@taroj1205](https://github.com/taroj1205)! - Fix `Cannot redefine property: focus` issue.
+
 ## 1.1.16
 
 ### Patch Changes

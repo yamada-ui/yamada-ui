@@ -116,7 +116,7 @@ export const useClickable = <
   const refCb = (node: any) => {
     if (!node) return
 
-    if (node.tagName !== "BUTTON") setButton(false)
+    if (node.tagName !== "BUTTON" && button) setButton(false)
   }
 
   const handleClick = useCallback(

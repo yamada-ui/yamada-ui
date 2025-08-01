@@ -1516,6 +1516,7 @@ export type IconNames =
   | "TruckElectricIcon"
   | "TruckIcon"
   | "TurkishLiraIcon"
+  | "TurntableIcon"
   | "TurtleIcon"
   | "TvIcon"
   | "TvMinimalIcon"

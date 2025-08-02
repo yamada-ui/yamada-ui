@@ -97,47 +97,6 @@
           "pathname": "/docs/components/styled"
         },
         {
-          "title": "Charts",
-          "segment": "(charts)",
-          "items": [
-            {
-              "title": "AreaChart",
-              "segment": "area-chart",
-              "pathname": "/docs/components/area-chart"
-            },
-            {
-              "title": "BarChart",
-              "segment": "bar-chart",
-              "pathname": "/docs/components/bar-chart"
-            },
-            {
-              "title": "DonutChart",
-              "segment": "donut-chart",
-              "pathname": "/docs/components/donut-chart"
-            },
-            {
-              "title": "LineChart",
-              "segment": "line-chart",
-              "pathname": "/docs/components/line-chart"
-            },
-            {
-              "title": "PieChart",
-              "segment": "pie-chart",
-              "pathname": "/docs/components/pie-chart"
-            },
-            {
-              "title": "RadarChart",
-              "segment": "radar-chart",
-              "pathname": "/docs/components/radar-chart"
-            },
-            {
-              "title": "RadialChart",
-              "segment": "radial-chart",
-              "pathname": "/docs/components/radial-chart"
-            }
-          ]
-        },
-        {
           "title": "Animations",
           "segment": "(animations)",
           "items": [
@@ -200,6 +159,47 @@
               "title": "Slide",
               "segment": "slide",
               "pathname": "/docs/components/slide"
+            }
+          ]
+        },
+        {
+          "title": "Charts",
+          "segment": "(charts)",
+          "items": [
+            {
+              "title": "AreaChart",
+              "segment": "area-chart",
+              "pathname": "/docs/components/area-chart"
+            },
+            {
+              "title": "BarChart",
+              "segment": "bar-chart",
+              "pathname": "/docs/components/bar-chart"
+            },
+            {
+              "title": "DonutChart",
+              "segment": "donut-chart",
+              "pathname": "/docs/components/donut-chart"
+            },
+            {
+              "title": "LineChart",
+              "segment": "line-chart",
+              "pathname": "/docs/components/line-chart"
+            },
+            {
+              "title": "PieChart",
+              "segment": "pie-chart",
+              "pathname": "/docs/components/pie-chart"
+            },
+            {
+              "title": "RadarChart",
+              "segment": "radar-chart",
+              "pathname": "/docs/components/radar-chart"
+            },
+            {
+              "title": "RadialChart",
+              "segment": "radial-chart",
+              "pathname": "/docs/components/radial-chart"
             }
           ]
         },

@@ -3,35 +3,14 @@
   "segment": "docs",
   "items": [
     {
-      "title": "変更履歴",
-      "segment": "changelog",
-      "pathname": "/docs/changelog"
-    },
-    {
-      "title": "コミュニティ",
-      "segment": "community",
-      "items": [
-        {
-          "title": "貢献する",
-          "segment": "contributing",
-          "pathname": "/docs/community/contributing"
-        }
-      ],
-      "pathname": "/docs/community"
-    },
-    {
       "title": "はじめる",
       "segment": "get-started",
+      "pathname": "/docs/get-started",
       "items": [
         {
-          "title": "アクセシビリティ",
-          "segment": "accessibility",
-          "pathname": "/docs/get-started/accessibility"
-        },
-        {
-          "title": "応用を学ぶ",
-          "segment": "advanced",
-          "pathname": "/docs/get-started/advanced"
+          "title": "マイグレーション",
+          "segment": "migration",
+          "pathname": "/docs/get-started/migration"
         },
         {
           "title": "基本を学ぶ",
@@ -39,14 +18,19 @@
           "pathname": "/docs/get-started/basics"
         },
         {
+          "title": "応用を学ぶ",
+          "segment": "advanced",
+          "pathname": "/docs/get-started/advanced"
+        },
+        {
           "title": "CLI",
           "segment": "cli",
           "pathname": "/docs/get-started/cli"
         },
         {
-          "title": "マイグレーション",
-          "segment": "migration",
-          "pathname": "/docs/get-started/migration"
+          "title": "アクセシビリティ",
+          "segment": "accessibility",
+          "pathname": "/docs/get-started/accessibility"
         },
         {
           "title": "フレームワーク",
@@ -74,12 +58,12 @@
             }
           ]
         }
-      ],
-      "pathname": "/docs/get-started"
+      ]
     },
     {
       "title": "コンポーネント",
       "segment": "components",
+      "pathname": "/docs/components",
       "items": [
         {
           "title": "CLI",
@@ -87,14 +71,572 @@
           "pathname": "/docs/components/cli"
         },
         {
+          "title": "styled",
+          "segment": "styled",
+          "pathname": "/docs/components/styled"
+        },
+        {
           "title": "createComponent",
           "segment": "create-component",
           "pathname": "/docs/components/create-component"
         },
         {
-          "title": "styled",
-          "segment": "styled",
-          "pathname": "/docs/components/styled"
+          "title": "コンポーネント",
+          "segment": "(components)",
+          "items": [
+            {
+              "title": "Accordion",
+              "segment": "accordion",
+              "pathname": "/docs/components/accordion"
+            },
+            {
+              "title": "ActionBar",
+              "segment": "action-bar",
+              "pathname": "/docs/components/action-bar",
+              "status": "planned"
+            },
+            {
+              "title": "Alert",
+              "segment": "alert",
+              "pathname": "/docs/components/alert"
+            },
+            {
+              "title": "AlphaSlider",
+              "segment": "alpha-slider",
+              "pathname": "/docs/components/alpha-slider"
+            },
+            {
+              "title": "AspectRatio",
+              "segment": "aspect-ratio",
+              "pathname": "/docs/components/aspect-ratio"
+            },
+            {
+              "title": "Autocomplete",
+              "segment": "autocomplete",
+              "pathname": "/docs/components/autocomplete"
+            },
+            {
+              "title": "Avatar",
+              "segment": "avatar",
+              "pathname": "/docs/components/avatar"
+            },
+            {
+              "title": "Badge",
+              "segment": "badge",
+              "pathname": "/docs/components/badge"
+            },
+            {
+              "title": "Bleed",
+              "segment": "bleed",
+              "pathname": "/docs/components/bleed"
+            },
+            {
+              "title": "Blockquote",
+              "segment": "blockquote",
+              "pathname": "/docs/components/blockquote"
+            },
+            {
+              "title": "Box",
+              "segment": "box",
+              "pathname": "/docs/components/box"
+            },
+            {
+              "title": "Breadcrumb",
+              "segment": "breadcrumb",
+              "pathname": "/docs/components/breadcrumb"
+            },
+            {
+              "title": "Button",
+              "segment": "button",
+              "pathname": "/docs/components/button"
+            },
+            {
+              "title": "Calendar",
+              "segment": "calendar",
+              "pathname": "/docs/components/calendar"
+            },
+            {
+              "title": "Card",
+              "segment": "card",
+              "pathname": "/docs/components/card"
+            },
+            {
+              "title": "Carousel",
+              "segment": "carousel",
+              "pathname": "/docs/components/carousel"
+            },
+            {
+              "title": "Center",
+              "segment": "center",
+              "pathname": "/docs/components/center"
+            },
+            {
+              "title": "Checkbox",
+              "segment": "checkbox",
+              "pathname": "/docs/components/checkbox"
+            },
+            {
+              "title": "CheckboxCard",
+              "segment": "checkbox-card",
+              "pathname": "/docs/components/checkbox-card"
+            },
+            {
+              "title": "CircleProgress",
+              "segment": "circle-progress",
+              "pathname": "/docs/components/circle-progress"
+            },
+            {
+              "title": "CloseButton",
+              "segment": "close-button",
+              "pathname": "/docs/components/close-button"
+            },
+            {
+              "title": "Code",
+              "segment": "code",
+              "pathname": "/docs/components/code"
+            },
+            {
+              "title": "ColorPicker",
+              "segment": "color-picker",
+              "pathname": "/docs/components/color-picker"
+            },
+            {
+              "title": "ColorSwatch",
+              "segment": "color-swatch",
+              "pathname": "/docs/components/color-swatch"
+            },
+            {
+              "title": "Container",
+              "segment": "container",
+              "pathname": "/docs/components/container"
+            },
+            {
+              "title": "DataList",
+              "segment": "data-list",
+              "pathname": "/docs/components/data-list"
+            },
+            {
+              "title": "DatePicker",
+              "segment": "date-picker",
+              "pathname": "/docs/components/date-picker"
+            },
+            {
+              "title": "Dockable",
+              "segment": "dockable",
+              "pathname": "/docs/components/dockable",
+              "status": "planned"
+            },
+            {
+              "title": "Drawer",
+              "segment": "drawer",
+              "pathname": "/docs/components/drawer"
+            },
+            {
+              "title": "Dropzone",
+              "segment": "dropzone",
+              "pathname": "/docs/components/dropzone"
+            },
+            {
+              "title": "Editable",
+              "segment": "editable",
+              "pathname": "/docs/components/editable"
+            },
+            {
+              "title": "Em",
+              "segment": "em",
+              "pathname": "/docs/components/em"
+            },
+            {
+              "title": "EmptyState",
+              "segment": "empty-state",
+              "pathname": "/docs/components/empty-state"
+            },
+            {
+              "title": "Field",
+              "segment": "field",
+              "pathname": "/docs/components/field"
+            },
+            {
+              "title": "Fieldset",
+              "segment": "fieldset",
+              "pathname": "/docs/components/fieldset"
+            },
+            {
+              "title": "FileButton",
+              "segment": "file-button",
+              "pathname": "/docs/components/file-button"
+            },
+            {
+              "title": "FileInput",
+              "segment": "file-input",
+              "pathname": "/docs/components/file-input"
+            },
+            {
+              "title": "Flex",
+              "segment": "flex",
+              "pathname": "/docs/components/flex"
+            },
+            {
+              "title": "Float",
+              "segment": "float",
+              "pathname": "/docs/components/float"
+            },
+            {
+              "title": "Grid",
+              "segment": "grid",
+              "pathname": "/docs/components/grid"
+            },
+            {
+              "title": "Group",
+              "segment": "group",
+              "pathname": "/docs/components/group"
+            },
+            {
+              "title": "Heading",
+              "segment": "heading",
+              "pathname": "/docs/components/heading"
+            },
+            {
+              "title": "Highlight",
+              "segment": "highlight",
+              "pathname": "/docs/components/highlight"
+            },
+            {
+              "title": "HStack",
+              "segment": "h-stack",
+              "pathname": "/docs/components/h-stack"
+            },
+            {
+              "title": "HueSlider",
+              "segment": "hue-slider",
+              "pathname": "/docs/components/hue-slider"
+            },
+            {
+              "title": "Icon",
+              "segment": "icon",
+              "pathname": "/docs/components/icon"
+            },
+            {
+              "title": "IconButton",
+              "segment": "icon-button",
+              "pathname": "/docs/components/icon-button"
+            },
+            {
+              "title": "Image",
+              "segment": "image",
+              "pathname": "/docs/components/image"
+            },
+            {
+              "title": "Indicator",
+              "segment": "indicator",
+              "pathname": "/docs/components/indicator"
+            },
+            {
+              "title": "InfiniteScrollArea",
+              "segment": "infinite-scroll-area",
+              "pathname": "/docs/components/infinite-scroll-area"
+            },
+            {
+              "title": "Input",
+              "segment": "input",
+              "pathname": "/docs/components/input"
+            },
+            {
+              "title": "Kbd",
+              "segment": "kbd",
+              "pathname": "/docs/components/kbd"
+            },
+            {
+              "title": "Link",
+              "segment": "link",
+              "pathname": "/docs/components/link"
+            },
+            {
+              "title": "LinkBox",
+              "segment": "link-box",
+              "pathname": "/docs/components/link-box"
+            },
+            {
+              "title": "List",
+              "segment": "list",
+              "pathname": "/docs/components/list"
+            },
+            {
+              "title": "Mark",
+              "segment": "mark",
+              "pathname": "/docs/components/mark"
+            },
+            {
+              "title": "Menu",
+              "segment": "menu",
+              "pathname": "/docs/components/menu"
+            },
+            {
+              "title": "Modal",
+              "segment": "modal",
+              "pathname": "/docs/components/modal"
+            },
+            {
+              "title": "MonthPicker",
+              "segment": "month-picker",
+              "pathname": "/docs/components/month-picker"
+            },
+            {
+              "title": "MultiAutocomplete",
+              "segment": "multi-autocomplete",
+              "pathname": "/docs/components/multi-autocomplete"
+            },
+            {
+              "title": "MultiDatePicker",
+              "segment": "multi-date-picker",
+              "pathname": "/docs/components/multi-date-picker"
+            },
+            {
+              "title": "MultiSelect",
+              "segment": "multi-select",
+              "pathname": "/docs/components/multi-select"
+            },
+            {
+              "title": "NativeSelect",
+              "segment": "native-select",
+              "pathname": "/docs/components/native-select"
+            },
+            {
+              "title": "NativeTable",
+              "segment": "native-table",
+              "pathname": "/docs/components/native-table"
+            },
+            {
+              "title": "NumberInput",
+              "segment": "number-input",
+              "pathname": "/docs/components/number-input"
+            },
+            {
+              "title": "Pagination",
+              "segment": "pagination",
+              "pathname": "/docs/components/pagination"
+            },
+            {
+              "title": "PagingTable",
+              "segment": "paging-table",
+              "pathname": "/docs/components/paging-table"
+            },
+            {
+              "title": "PasswordInput",
+              "segment": "password-input",
+              "pathname": "/docs/components/password-input"
+            },
+            {
+              "title": "PhoneInput",
+              "segment": "phone-input",
+              "pathname": "/docs/components/phone-input",
+              "status": "planned"
+            },
+            {
+              "title": "Picture",
+              "segment": "picture",
+              "pathname": "/docs/components/picture"
+            },
+            {
+              "title": "PinInput",
+              "segment": "pin-input",
+              "pathname": "/docs/components/pin-input"
+            },
+            {
+              "title": "Popover",
+              "segment": "popover",
+              "pathname": "/docs/components/popover"
+            },
+            {
+              "title": "Progress",
+              "segment": "progress",
+              "pathname": "/docs/components/progress"
+            },
+            {
+              "title": "Radio",
+              "segment": "radio",
+              "pathname": "/docs/components/radio"
+            },
+            {
+              "title": "RadioCard",
+              "segment": "radio-card",
+              "pathname": "/docs/components/radio-card"
+            },
+            {
+              "title": "RangeDatePicker",
+              "segment": "range-date-picker",
+              "pathname": "/docs/components/range-date-picker"
+            },
+            {
+              "title": "RangeSlider",
+              "segment": "range-slider",
+              "pathname": "/docs/components/range-slider"
+            },
+            {
+              "title": "Rating",
+              "segment": "rating",
+              "pathname": "/docs/components/rating"
+            },
+            {
+              "title": "Reorder",
+              "segment": "reorder",
+              "pathname": "/docs/components/reorder"
+            },
+            {
+              "title": "Resizable",
+              "segment": "resizable",
+              "pathname": "/docs/components/resizable"
+            },
+            {
+              "title": "SaturationSlider",
+              "segment": "saturation-slider",
+              "pathname": "/docs/components/saturation-slider"
+            },
+            {
+              "title": "ScrollArea",
+              "segment": "scroll-area",
+              "pathname": "/docs/components/scroll-area"
+            },
+            {
+              "title": "SegmentedControl",
+              "segment": "segmented-control",
+              "pathname": "/docs/components/segmented-control"
+            },
+            {
+              "title": "Select",
+              "segment": "select",
+              "pathname": "/docs/components/select"
+            },
+            {
+              "title": "Separator",
+              "segment": "separator",
+              "pathname": "/docs/components/separator"
+            },
+            {
+              "title": "SimpleGrid",
+              "segment": "simple-grid",
+              "pathname": "/docs/components/simple-grid"
+            },
+            {
+              "title": "Slider",
+              "segment": "slider",
+              "pathname": "/docs/components/slider"
+            },
+            {
+              "title": "Spacer",
+              "segment": "spacer",
+              "pathname": "/docs/components/spacer"
+            },
+            {
+              "title": "Stack",
+              "segment": "stack",
+              "pathname": "/docs/components/stack"
+            },
+            {
+              "title": "Stat",
+              "segment": "stat",
+              "pathname": "/docs/components/stat"
+            },
+            {
+              "title": "Status",
+              "segment": "status",
+              "pathname": "/docs/components/status"
+            },
+            {
+              "title": "Steps",
+              "segment": "steps",
+              "pathname": "/docs/components/steps"
+            },
+            {
+              "title": "Swipeable",
+              "segment": "swipeable",
+              "pathname": "/docs/components/swipeable",
+              "status": "planned"
+            },
+            {
+              "title": "Switch",
+              "segment": "switch",
+              "pathname": "/docs/components/switch"
+            },
+            {
+              "title": "Table",
+              "segment": "table",
+              "pathname": "/docs/components/table"
+            },
+            {
+              "title": "Tabs",
+              "segment": "tabs",
+              "pathname": "/docs/components/tabs"
+            },
+            {
+              "title": "Tag",
+              "segment": "tag",
+              "pathname": "/docs/components/tag"
+            },
+            {
+              "title": "Text",
+              "segment": "text",
+              "pathname": "/docs/components/text"
+            },
+            {
+              "title": "Textarea",
+              "segment": "textarea",
+              "pathname": "/docs/components/textarea"
+            },
+            {
+              "title": "Timeline",
+              "segment": "timeline",
+              "pathname": "/docs/components/timeline"
+            },
+            {
+              "title": "TimePicker",
+              "segment": "time-picker",
+              "pathname": "/docs/components/time-picker",
+              "status": "planned"
+            },
+            {
+              "title": "Toggle",
+              "segment": "toggle",
+              "pathname": "/docs/components/toggle"
+            },
+            {
+              "title": "Tooltip",
+              "segment": "tooltip",
+              "pathname": "/docs/components/tooltip"
+            },
+            {
+              "title": "Tour",
+              "segment": "tour",
+              "pathname": "/docs/components/tour",
+              "status": "planned"
+            },
+            {
+              "title": "Tree",
+              "segment": "tree",
+              "pathname": "/docs/components/tree",
+              "status": "planned"
+            },
+            {
+              "title": "VStack",
+              "segment": "v-stack",
+              "pathname": "/docs/components/v-stack"
+            },
+            {
+              "title": "Wrap",
+              "segment": "wrap",
+              "pathname": "/docs/components/wrap"
+            },
+            {
+              "title": "YearPicker",
+              "segment": "year-picker",
+              "pathname": "/docs/components/year-picker"
+            },
+            {
+              "title": "ZStack",
+              "segment": "z-stack",
+              "pathname": "/docs/components/z-stack"
+            }
+          ]
         },
         {
           "title": "チャート",
@@ -253,834 +795,8 @@
               "pathname": "/docs/components/visually-hidden"
             }
           ]
-        },
-        {
-          "title": "コンポーネント",
-          "segment": "(components)",
-          "items": [
-            {
-              "title": "Accordion",
-              "segment": "accordion",
-              "pathname": "/docs/components/accordion"
-            },
-            {
-              "title": "ActionBar",
-              "segment": "action-bar",
-              "pathname": "/docs/components/action-bar",
-              "status": "planned"
-            },
-            {
-              "title": "Alert",
-              "segment": "alert",
-              "pathname": "/docs/components/alert"
-            },
-            {
-              "title": "AlphaSlider",
-              "segment": "alpha-slider",
-              "pathname": "/docs/components/alpha-slider"
-            },
-            {
-              "title": "AspectRatio",
-              "segment": "aspect-ratio",
-              "pathname": "/docs/components/aspect-ratio"
-            },
-            {
-              "title": "Autocomplete",
-              "segment": "autocomplete",
-              "pathname": "/docs/components/autocomplete"
-            },
-            {
-              "title": "Avatar",
-              "segment": "avatar",
-              "pathname": "/docs/components/avatar"
-            },
-            {
-              "title": "Badge",
-              "segment": "badge",
-              "pathname": "/docs/components/badge"
-            },
-            {
-              "title": "Bleed",
-              "segment": "bleed",
-              "pathname": "/docs/components/bleed"
-            },
-            {
-              "title": "Blockquote",
-              "segment": "blockquote",
-              "pathname": "/docs/components/blockquote"
-            },
-            {
-              "title": "Box",
-              "segment": "box",
-              "pathname": "/docs/components/box"
-            },
-            {
-              "title": "Breadcrumb",
-              "segment": "breadcrumb",
-              "pathname": "/docs/components/breadcrumb"
-            },
-            {
-              "title": "Button",
-              "segment": "button",
-              "pathname": "/docs/components/button"
-            },
-            {
-              "title": "Calendar",
-              "segment": "calendar",
-              "pathname": "/docs/components/calendar"
-            },
-            {
-              "title": "Card",
-              "segment": "card",
-              "pathname": "/docs/components/card"
-            },
-            {
-              "title": "Carousel",
-              "segment": "carousel",
-              "pathname": "/docs/components/carousel"
-            },
-            {
-              "title": "Center",
-              "segment": "center",
-              "pathname": "/docs/components/center"
-            },
-            {
-              "title": "CheckboxCard",
-              "segment": "checkbox-card",
-              "pathname": "/docs/components/checkbox-card"
-            },
-            {
-              "title": "Checkbox",
-              "segment": "checkbox",
-              "pathname": "/docs/components/checkbox"
-            },
-            {
-              "title": "CircleProgress",
-              "segment": "circle-progress",
-              "pathname": "/docs/components/circle-progress"
-            },
-            {
-              "title": "CloseButton",
-              "segment": "close-button",
-              "pathname": "/docs/components/close-button"
-            },
-            {
-              "title": "Code",
-              "segment": "code",
-              "pathname": "/docs/components/code"
-            },
-            {
-              "title": "ColorPicker",
-              "segment": "color-picker",
-              "pathname": "/docs/components/color-picker"
-            },
-            {
-              "title": "ColorSwatch",
-              "segment": "color-swatch",
-              "pathname": "/docs/components/color-swatch"
-            },
-            {
-              "title": "Container",
-              "segment": "container",
-              "pathname": "/docs/components/container"
-            },
-            {
-              "title": "DataList",
-              "segment": "data-list",
-              "pathname": "/docs/components/data-list"
-            },
-            {
-              "title": "DatePicker",
-              "segment": "date-picker",
-              "pathname": "/docs/components/date-picker"
-            },
-            {
-              "title": "Dockable",
-              "segment": "dockable",
-              "pathname": "/docs/components/dockable",
-              "status": "planned"
-            },
-            {
-              "title": "Drawer",
-              "segment": "drawer",
-              "pathname": "/docs/components/drawer"
-            },
-            {
-              "title": "Dropzone",
-              "segment": "dropzone",
-              "pathname": "/docs/components/dropzone"
-            },
-            {
-              "title": "Editable",
-              "segment": "editable",
-              "pathname": "/docs/components/editable"
-            },
-            {
-              "title": "Em",
-              "segment": "em",
-              "pathname": "/docs/components/em"
-            },
-            {
-              "title": "EmptyState",
-              "segment": "empty-state",
-              "pathname": "/docs/components/empty-state"
-            },
-            {
-              "title": "Field",
-              "segment": "field",
-              "pathname": "/docs/components/field"
-            },
-            {
-              "title": "Fieldset",
-              "segment": "fieldset",
-              "pathname": "/docs/components/fieldset"
-            },
-            {
-              "title": "FileButton",
-              "segment": "file-button",
-              "pathname": "/docs/components/file-button"
-            },
-            {
-              "title": "FileInput",
-              "segment": "file-input",
-              "pathname": "/docs/components/file-input"
-            },
-            {
-              "title": "Flex",
-              "segment": "flex",
-              "pathname": "/docs/components/flex"
-            },
-            {
-              "title": "Float",
-              "segment": "float",
-              "pathname": "/docs/components/float"
-            },
-            {
-              "title": "Grid",
-              "segment": "grid",
-              "pathname": "/docs/components/grid"
-            },
-            {
-              "title": "Group",
-              "segment": "group",
-              "pathname": "/docs/components/group"
-            },
-            {
-              "title": "HStack",
-              "segment": "h-stack",
-              "pathname": "/docs/components/h-stack"
-            },
-            {
-              "title": "Heading",
-              "segment": "heading",
-              "pathname": "/docs/components/heading"
-            },
-            {
-              "title": "Highlight",
-              "segment": "highlight",
-              "pathname": "/docs/components/highlight"
-            },
-            {
-              "title": "HueSlider",
-              "segment": "hue-slider",
-              "pathname": "/docs/components/hue-slider"
-            },
-            {
-              "title": "IconButton",
-              "segment": "icon-button",
-              "pathname": "/docs/components/icon-button"
-            },
-            {
-              "title": "Icon",
-              "segment": "icon",
-              "pathname": "/docs/components/icon"
-            },
-            {
-              "title": "Image",
-              "segment": "image",
-              "pathname": "/docs/components/image"
-            },
-            {
-              "title": "Indicator",
-              "segment": "indicator",
-              "pathname": "/docs/components/indicator"
-            },
-            {
-              "title": "InfiniteScrollArea",
-              "segment": "infinite-scroll-area",
-              "pathname": "/docs/components/infinite-scroll-area"
-            },
-            {
-              "title": "Input",
-              "segment": "input",
-              "pathname": "/docs/components/input"
-            },
-            {
-              "title": "Kbd",
-              "segment": "kbd",
-              "pathname": "/docs/components/kbd"
-            },
-            {
-              "title": "LinkBox",
-              "segment": "link-box",
-              "pathname": "/docs/components/link-box"
-            },
-            {
-              "title": "Link",
-              "segment": "link",
-              "pathname": "/docs/components/link"
-            },
-            {
-              "title": "List",
-              "segment": "list",
-              "pathname": "/docs/components/list"
-            },
-            {
-              "title": "Mark",
-              "segment": "mark",
-              "pathname": "/docs/components/mark"
-            },
-            {
-              "title": "Menu",
-              "segment": "menu",
-              "pathname": "/docs/components/menu"
-            },
-            {
-              "title": "Modal",
-              "segment": "modal",
-              "pathname": "/docs/components/modal"
-            },
-            {
-              "title": "MonthPicker",
-              "segment": "month-picker",
-              "pathname": "/docs/components/month-picker"
-            },
-            {
-              "title": "MultiAutocomplete",
-              "segment": "multi-autocomplete",
-              "pathname": "/docs/components/multi-autocomplete"
-            },
-            {
-              "title": "MultiDatePicker",
-              "segment": "multi-date-picker",
-              "pathname": "/docs/components/multi-date-picker"
-            },
-            {
-              "title": "MultiSelect",
-              "segment": "multi-select",
-              "pathname": "/docs/components/multi-select"
-            },
-            {
-              "title": "NativeSelect",
-              "segment": "native-select",
-              "pathname": "/docs/components/native-select"
-            },
-            {
-              "title": "NativeTable",
-              "segment": "native-table",
-              "pathname": "/docs/components/native-table"
-            },
-            {
-              "title": "NumberInput",
-              "segment": "number-input",
-              "pathname": "/docs/components/number-input"
-            },
-            {
-              "title": "Pagination",
-              "segment": "pagination",
-              "pathname": "/docs/components/pagination"
-            },
-            {
-              "title": "PagingTable",
-              "segment": "paging-table",
-              "pathname": "/docs/components/paging-table"
-            },
-            {
-              "title": "PasswordInput",
-              "segment": "password-input",
-              "pathname": "/docs/components/password-input"
-            },
-            {
-              "title": "PhoneInput",
-              "segment": "phone-input",
-              "pathname": "/docs/components/phone-input",
-              "status": "planned"
-            },
-            {
-              "title": "Picture",
-              "segment": "picture",
-              "pathname": "/docs/components/picture"
-            },
-            {
-              "title": "PinInput",
-              "segment": "pin-input",
-              "pathname": "/docs/components/pin-input"
-            },
-            {
-              "title": "Popover",
-              "segment": "popover",
-              "pathname": "/docs/components/popover"
-            },
-            {
-              "title": "Progress",
-              "segment": "progress",
-              "pathname": "/docs/components/progress"
-            },
-            {
-              "title": "RadioCard",
-              "segment": "radio-card",
-              "pathname": "/docs/components/radio-card"
-            },
-            {
-              "title": "Radio",
-              "segment": "radio",
-              "pathname": "/docs/components/radio"
-            },
-            {
-              "title": "RangeDatePicker",
-              "segment": "range-date-picker",
-              "pathname": "/docs/components/range-date-picker"
-            },
-            {
-              "title": "RangeSlider",
-              "segment": "range-slider",
-              "pathname": "/docs/components/range-slider"
-            },
-            {
-              "title": "Rating",
-              "segment": "rating",
-              "pathname": "/docs/components/rating"
-            },
-            {
-              "title": "Reorder",
-              "segment": "reorder",
-              "pathname": "/docs/components/reorder"
-            },
-            {
-              "title": "Resizable",
-              "segment": "resizable",
-              "pathname": "/docs/components/resizable"
-            },
-            {
-              "title": "SaturationSlider",
-              "segment": "saturation-slider",
-              "pathname": "/docs/components/saturation-slider"
-            },
-            {
-              "title": "ScrollArea",
-              "segment": "scroll-area",
-              "pathname": "/docs/components/scroll-area"
-            },
-            {
-              "title": "SegmentedControl",
-              "segment": "segmented-control",
-              "pathname": "/docs/components/segmented-control"
-            },
-            {
-              "title": "Select",
-              "segment": "select",
-              "pathname": "/docs/components/select"
-            },
-            {
-              "title": "Separator",
-              "segment": "separator",
-              "pathname": "/docs/components/separator"
-            },
-            {
-              "title": "SimpleGrid",
-              "segment": "simple-grid",
-              "pathname": "/docs/components/simple-grid"
-            },
-            {
-              "title": "Slider",
-              "segment": "slider",
-              "pathname": "/docs/components/slider"
-            },
-            {
-              "title": "Spacer",
-              "segment": "spacer",
-              "pathname": "/docs/components/spacer"
-            },
-            {
-              "title": "Stack",
-              "segment": "stack",
-              "pathname": "/docs/components/stack"
-            },
-            {
-              "title": "Stat",
-              "segment": "stat",
-              "pathname": "/docs/components/stat"
-            },
-            {
-              "title": "Status",
-              "segment": "status",
-              "pathname": "/docs/components/status"
-            },
-            {
-              "title": "Steps",
-              "segment": "steps",
-              "pathname": "/docs/components/steps"
-            },
-            {
-              "title": "Swipeable",
-              "segment": "swipeable",
-              "pathname": "/docs/components/swipeable",
-              "status": "planned"
-            },
-            {
-              "title": "Switch",
-              "segment": "switch",
-              "pathname": "/docs/components/switch"
-            },
-            {
-              "title": "Table",
-              "segment": "table",
-              "pathname": "/docs/components/table"
-            },
-            {
-              "title": "Tabs",
-              "segment": "tabs",
-              "pathname": "/docs/components/tabs"
-            },
-            {
-              "title": "Tag",
-              "segment": "tag",
-              "pathname": "/docs/components/tag"
-            },
-            {
-              "title": "Text",
-              "segment": "text",
-              "pathname": "/docs/components/text"
-            },
-            {
-              "title": "Textarea",
-              "segment": "textarea",
-              "pathname": "/docs/components/textarea"
-            },
-            {
-              "title": "TimePicker",
-              "segment": "time-picker",
-              "pathname": "/docs/components/time-picker",
-              "status": "planned"
-            },
-            {
-              "title": "Timeline",
-              "segment": "timeline",
-              "pathname": "/docs/components/timeline"
-            },
-            {
-              "title": "Toggle",
-              "segment": "toggle",
-              "pathname": "/docs/components/toggle"
-            },
-            {
-              "title": "Tooltip",
-              "segment": "tooltip",
-              "pathname": "/docs/components/tooltip"
-            },
-            {
-              "title": "Tour",
-              "segment": "tour",
-              "pathname": "/docs/components/tour",
-              "status": "planned"
-            },
-            {
-              "title": "Tree",
-              "segment": "tree",
-              "pathname": "/docs/components/tree",
-              "status": "planned"
-            },
-            {
-              "title": "VStack",
-              "segment": "v-stack",
-              "pathname": "/docs/components/v-stack"
-            },
-            {
-              "title": "Wrap",
-              "segment": "wrap",
-              "pathname": "/docs/components/wrap"
-            },
-            {
-              "title": "YearPicker",
-              "segment": "year-picker",
-              "pathname": "/docs/components/year-picker"
-            },
-            {
-              "title": "ZStack",
-              "segment": "z-stack",
-              "pathname": "/docs/components/z-stack"
-            }
-          ]
         }
-      ],
-      "pathname": "/docs/components"
-    },
-    {
-      "title": "スタイル",
-      "segment": "styling",
-      "items": [
-        {
-          "title": "アニメーション",
-          "segment": "animation",
-          "pathname": "/docs/styling/animation"
-        },
-        {
-          "title": "アットルール",
-          "segment": "at-rules",
-          "pathname": "/docs/styling/at-rules"
-        },
-        {
-          "title": "カスケードレイヤー",
-          "segment": "cascade-layers",
-          "pathname": "/docs/styling/cascade-layers"
-        },
-        {
-          "title": "カラーモード",
-          "segment": "color-mode",
-          "pathname": "/docs/styling/color-mode"
-        },
-        {
-          "title": "条件付きスタイル",
-          "segment": "conditional-styles",
-          "pathname": "/docs/styling/conditional-styles"
-        },
-        {
-          "title": "CSSカスタムプロパティ",
-          "segment": "css-custom-properties",
-          "pathname": "/docs/styling/css-custom-properties"
-        },
-        {
-          "title": "CSS値関数",
-          "segment": "css-value-functions",
-          "pathname": "/docs/styling/css-value-functions"
-        },
-        {
-          "title": "フォーカスリング",
-          "segment": "focus-ring",
-          "pathname": "/docs/styling/focus-ring"
-        },
-        {
-          "title": "グローバルスタイル",
-          "segment": "global-styles",
-          "pathname": "/docs/styling/global-styles"
-        },
-        {
-          "title": "インターポレーション",
-          "segment": "interpolation",
-          "pathname": "/docs/styling/interpolation"
-        },
-        {
-          "title": "レイヤースタイル",
-          "segment": "layer-styles",
-          "pathname": "/docs/styling/layer-styles"
-        },
-        {
-          "title": "リセットスタイル",
-          "segment": "reset-styles",
-          "pathname": "/docs/styling/reset-styles"
-        },
-        {
-          "title": "レスポンシブデザイン",
-          "segment": "responsive-design",
-          "pathname": "/docs/styling/responsive-design"
-        },
-        {
-          "title": "Style Props",
-          "segment": "style-props",
-          "pathname": "/docs/styling/style-props"
-        },
-        {
-          "title": "テキストスタイル",
-          "segment": "text-styles",
-          "pathname": "/docs/styling/text-styles"
-        }
-      ],
-      "pathname": "/docs/styling"
-    },
-    {
-      "title": "テーマ",
-      "segment": "theming",
-      "items": [
-        {
-          "title": "ブレイクポイント",
-          "segment": "breakpoints",
-          "pathname": "/docs/theming/breakpoints"
-        },
-        {
-          "title": "カスケードレイヤー",
-          "segment": "cascade-layers",
-          "pathname": "/docs/theming/cascade-layers"
-        },
-        {
-          "title": "CLI",
-          "segment": "cli",
-          "pathname": "/docs/theming/cli"
-        },
-        {
-          "title": "カラーモード",
-          "segment": "color-mode",
-          "pathname": "/docs/theming/color-mode"
-        },
-        {
-          "title": "カスタマイズ",
-          "segment": "customization",
-          "pathname": "/docs/theming/customization"
-        },
-        {
-          "title": "テーマの切り替え",
-          "segment": "switching-themes",
-          "pathname": "/docs/theming/switching-themes"
-        },
-        {
-          "title": "設定",
-          "segment": "configuration",
-          "items": [
-            {
-              "title": "カスタマイズ",
-              "segment": "customization",
-              "pathname": "/docs/theming/configuration/customization"
-            },
-            {
-              "title": "概要",
-              "segment": "overview",
-              "pathname": "/docs/theming/configuration/overview"
-            }
-          ]
-        },
-        {
-          "title": "スタイル",
-          "segment": "styles",
-          "items": [
-            {
-              "title": "グローバルスタイル",
-              "segment": "global-styles",
-              "pathname": "/docs/theming/styles/global-styles"
-            },
-            {
-              "title": "レイヤースタイル",
-              "segment": "layer-styles",
-              "pathname": "/docs/theming/styles/layer-styles"
-            },
-            {
-              "title": "リセットスタイル",
-              "segment": "reset-styles",
-              "pathname": "/docs/theming/styles/reset-styles"
-            },
-            {
-              "title": "テキストスタイル",
-              "segment": "text-styles",
-              "pathname": "/docs/theming/styles/text-styles"
-            }
-          ]
-        },
-        {
-          "title": "デザイントークン",
-          "segment": "tokens",
-          "items": [
-            {
-              "title": "アニメーション (animation)",
-              "segment": "animations",
-              "pathname": "/docs/theming/tokens/animations"
-            },
-            {
-              "title": "アスペクト比 (aspect-ratio)",
-              "segment": "aspect-ratios",
-              "pathname": "/docs/theming/tokens/aspect-ratios"
-            },
-            {
-              "title": "ぼかし (blur)",
-              "segment": "blurs",
-              "pathname": "/docs/theming/tokens/blurs"
-            },
-            {
-              "title": "ボーダー (border)",
-              "segment": "borders",
-              "pathname": "/docs/theming/tokens/borders"
-            },
-            {
-              "title": "ブレイクポイント (media query)",
-              "segment": "breakpoints",
-              "pathname": "/docs/theming/tokens/breakpoints"
-            },
-            {
-              "title": "カラー (color)",
-              "segment": "colors",
-              "pathname": "/docs/theming/tokens/colors"
-            },
-            {
-              "title": "所要時間 (animation-duration)",
-              "segment": "durations",
-              "pathname": "/docs/theming/tokens/durations"
-            },
-            {
-              "title": "イージング (animation-timing-function)",
-              "segment": "easings",
-              "pathname": "/docs/theming/tokens/easings"
-            },
-            {
-              "title": "文字の大きさ (font-size)",
-              "segment": "font-sizes",
-              "pathname": "/docs/theming/tokens/font-sizes"
-            },
-            {
-              "title": "文字の太さ (font-weight)",
-              "segment": "font-weights",
-              "pathname": "/docs/theming/tokens/font-weights"
-            },
-            {
-              "title": "文字体 (font-family)",
-              "segment": "fonts",
-              "pathname": "/docs/theming/tokens/fonts"
-            },
-            {
-              "title": "グラデーション (background-image)",
-              "segment": "gradients",
-              "pathname": "/docs/theming/tokens/gradients"
-            },
-            {
-              "title": "キーフレーム (@keyframes)",
-              "segment": "keyframes",
-              "pathname": "/docs/theming/tokens/keyframes"
-            },
-            {
-              "title": "文字間隔 (letter-spacing)",
-              "segment": "letter-spacings",
-              "pathname": "/docs/theming/tokens/letter-spacings"
-            },
-            {
-              "title": "行間 (line-height)",
-              "segment": "line-heights",
-              "pathname": "/docs/theming/tokens/line-heights"
-            },
-            {
-              "title": "角丸 (border-radius)",
-              "segment": "radii",
-              "pathname": "/docs/theming/tokens/radii"
-            },
-            {
-              "title": "シャドウ (box-shadow)",
-              "segment": "shadows",
-              "pathname": "/docs/theming/tokens/shadows"
-            },
-            {
-              "title": "サイズ (width, height)",
-              "segment": "sizes",
-              "pathname": "/docs/theming/tokens/sizes"
-            },
-            {
-              "title": "スペース (margin, padding)",
-              "segment": "spaces",
-              "pathname": "/docs/theming/tokens/spaces"
-            },
-            {
-              "title": "位置 (z-index)",
-              "segment": "z-indices",
-              "pathname": "/docs/theming/tokens/z-indices"
-            }
-          ]
-        }
-      ],
-      "pathname": "/docs/theming"
+      ]
     },
     {
       "title": "フック",
@@ -1093,14 +809,14 @@
           "pathname": "/docs/hooks/use-animation"
         },
         {
-          "title": "useAsyncCallback",
-          "segment": "use-async-callback",
-          "pathname": "/docs/hooks/use-async-callback"
-        },
-        {
           "title": "useAsync",
           "segment": "use-async",
           "pathname": "/docs/hooks/use-async"
+        },
+        {
+          "title": "useAsyncCallback",
+          "segment": "use-async-callback",
+          "pathname": "/docs/hooks/use-async-callback"
         },
         {
           "title": "useBoolean",
@@ -1108,9 +824,19 @@
           "pathname": "/docs/hooks/use-boolean"
         },
         {
+          "title": "useBreakpoint",
+          "segment": "use-breakpoint",
+          "pathname": "/docs/hooks/use-breakpoint"
+        },
+        {
           "title": "useBreakpointEffect",
           "segment": "use-breakpoint-effect",
           "pathname": "/docs/hooks/use-breakpoint-effect"
+        },
+        {
+          "title": "useBreakpointEffect",
+          "segment": "use-update-breakpoint-effect",
+          "pathname": "/docs/hooks/use-update-breakpoint-effect"
         },
         {
           "title": "useBreakpointState",
@@ -1123,24 +849,19 @@
           "pathname": "/docs/hooks/use-breakpoint-value"
         },
         {
-          "title": "useBreakpoint",
-          "segment": "use-breakpoint",
-          "pathname": "/docs/hooks/use-breakpoint"
-        },
-        {
           "title": "useClipboard",
           "segment": "use-clipboard",
           "pathname": "/docs/hooks/use-clipboard"
         },
         {
-          "title": "useColorModeValue",
-          "segment": "use-color-mode-value",
-          "pathname": "/docs/hooks/use-color-mode-value"
-        },
-        {
           "title": "useColorMode",
           "segment": "use-color-mode",
           "pathname": "/docs/hooks/use-color-mode"
+        },
+        {
+          "title": "useColorModeValue",
+          "segment": "use-color-mode-value",
+          "pathname": "/docs/hooks/use-color-mode-value"
         },
         {
           "title": "useCounter",
@@ -1288,11 +1009,6 @@
           "pathname": "/docs/hooks/use-token"
         },
         {
-          "title": "useBreakpointEffect",
-          "segment": "use-update-breakpoint-effect",
-          "pathname": "/docs/hooks/use-update-breakpoint-effect"
-        },
-        {
           "title": "useUpdateEffect",
           "segment": "use-update-effect",
           "pathname": "/docs/hooks/use-update-effect"
@@ -1308,6 +1024,290 @@
           "pathname": "/docs/hooks/use-window-event"
         }
       ]
+    },
+    {
+      "title": "スタイル",
+      "segment": "styling",
+      "pathname": "/docs/styling",
+      "items": [
+        {
+          "title": "Style Props",
+          "segment": "style-props",
+          "pathname": "/docs/styling/style-props"
+        },
+        {
+          "title": "条件付きスタイル",
+          "segment": "conditional-styles",
+          "pathname": "/docs/styling/conditional-styles"
+        },
+        {
+          "title": "レスポンシブデザイン",
+          "segment": "responsive-design",
+          "pathname": "/docs/styling/responsive-design"
+        },
+        {
+          "title": "カラーモード",
+          "segment": "color-mode",
+          "pathname": "/docs/styling/color-mode"
+        },
+        {
+          "title": "CSSカスタムプロパティ",
+          "segment": "css-custom-properties",
+          "pathname": "/docs/styling/css-custom-properties"
+        },
+        {
+          "title": "CSS値関数",
+          "segment": "css-value-functions",
+          "pathname": "/docs/styling/css-value-functions"
+        },
+        {
+          "title": "インターポレーション",
+          "segment": "interpolation",
+          "pathname": "/docs/styling/interpolation"
+        },
+        {
+          "title": "アニメーション",
+          "segment": "animation",
+          "pathname": "/docs/styling/animation"
+        },
+        {
+          "title": "フォーカスリング",
+          "segment": "focus-ring",
+          "pathname": "/docs/styling/focus-ring"
+        },
+        {
+          "title": "グローバルスタイル",
+          "segment": "global-styles",
+          "pathname": "/docs/styling/global-styles"
+        },
+        {
+          "title": "リセットスタイル",
+          "segment": "reset-styles",
+          "pathname": "/docs/styling/reset-styles"
+        },
+        {
+          "title": "レイヤースタイル",
+          "segment": "layer-styles",
+          "pathname": "/docs/styling/layer-styles"
+        },
+        {
+          "title": "テキストスタイル",
+          "segment": "text-styles",
+          "pathname": "/docs/styling/text-styles"
+        },
+        {
+          "title": "アットルール",
+          "segment": "at-rules",
+          "pathname": "/docs/styling/at-rules"
+        },
+        {
+          "title": "カスケードレイヤー",
+          "segment": "cascade-layers",
+          "pathname": "/docs/styling/cascade-layers"
+        }
+      ]
+    },
+    {
+      "title": "テーマ",
+      "segment": "theming",
+      "pathname": "/docs/theming",
+      "items": [
+        {
+          "title": "CLI",
+          "segment": "cli",
+          "pathname": "/docs/theming/cli"
+        },
+        {
+          "title": "カスタマイズ",
+          "segment": "customization",
+          "pathname": "/docs/theming/customization"
+        },
+        {
+          "title": "ブレイクポイント",
+          "segment": "breakpoints",
+          "pathname": "/docs/theming/breakpoints"
+        },
+        {
+          "title": "カラーモード",
+          "segment": "color-mode",
+          "pathname": "/docs/theming/color-mode"
+        },
+        {
+          "title": "テーマの切り替え",
+          "segment": "switching-themes",
+          "pathname": "/docs/theming/switching-themes"
+        },
+        {
+          "title": "カスケードレイヤー",
+          "segment": "cascade-layers",
+          "pathname": "/docs/theming/cascade-layers"
+        },
+        {
+          "title": "設定",
+          "segment": "configuration",
+          "items": [
+            {
+              "title": "概要",
+              "segment": "overview",
+              "pathname": "/docs/theming/configuration/overview"
+            },
+            {
+              "title": "カスタマイズ",
+              "segment": "customization",
+              "pathname": "/docs/theming/configuration/customization"
+            }
+          ]
+        },
+        {
+          "title": "スタイル",
+          "segment": "styles",
+          "items": [
+            {
+              "title": "グローバルスタイル",
+              "segment": "global-styles",
+              "pathname": "/docs/theming/styles/global-styles"
+            },
+            {
+              "title": "リセットスタイル",
+              "segment": "reset-styles",
+              "pathname": "/docs/theming/styles/reset-styles"
+            },
+            {
+              "title": "レイヤースタイル",
+              "segment": "layer-styles",
+              "pathname": "/docs/theming/styles/layer-styles"
+            },
+            {
+              "title": "テキストスタイル",
+              "segment": "text-styles",
+              "pathname": "/docs/theming/styles/text-styles"
+            }
+          ]
+        },
+        {
+          "title": "デザイントークン",
+          "segment": "tokens",
+          "items": [
+            {
+              "title": "アニメーション (animation)",
+              "segment": "animations",
+              "pathname": "/docs/theming/tokens/animations"
+            },
+            {
+              "title": "アスペクト比 (aspect-ratio)",
+              "segment": "aspect-ratios",
+              "pathname": "/docs/theming/tokens/aspect-ratios"
+            },
+            {
+              "title": "ぼかし (blur)",
+              "segment": "blurs",
+              "pathname": "/docs/theming/tokens/blurs"
+            },
+            {
+              "title": "ボーダー (border)",
+              "segment": "borders",
+              "pathname": "/docs/theming/tokens/borders"
+            },
+            {
+              "title": "ブレイクポイント (media query)",
+              "segment": "breakpoints",
+              "pathname": "/docs/theming/tokens/breakpoints"
+            },
+            {
+              "title": "カラー (color)",
+              "segment": "colors",
+              "pathname": "/docs/theming/tokens/colors"
+            },
+            {
+              "title": "所要時間 (animation-duration)",
+              "segment": "durations",
+              "pathname": "/docs/theming/tokens/durations"
+            },
+            {
+              "title": "イージング (animation-timing-function)",
+              "segment": "easings",
+              "pathname": "/docs/theming/tokens/easings"
+            },
+            {
+              "title": "文字の大きさ (font-size)",
+              "segment": "font-sizes",
+              "pathname": "/docs/theming/tokens/font-sizes"
+            },
+            {
+              "title": "文字の太さ (font-weight)",
+              "segment": "font-weights",
+              "pathname": "/docs/theming/tokens/font-weights"
+            },
+            {
+              "title": "文字体 (font-family)",
+              "segment": "fonts",
+              "pathname": "/docs/theming/tokens/fonts"
+            },
+            {
+              "title": "グラデーション (background-image)",
+              "segment": "gradients",
+              "pathname": "/docs/theming/tokens/gradients"
+            },
+            {
+              "title": "キーフレーム (@keyframes)",
+              "segment": "keyframes",
+              "pathname": "/docs/theming/tokens/keyframes"
+            },
+            {
+              "title": "文字間隔 (letter-spacing)",
+              "segment": "letter-spacings",
+              "pathname": "/docs/theming/tokens/letter-spacings"
+            },
+            {
+              "title": "行間 (line-height)",
+              "segment": "line-heights",
+              "pathname": "/docs/theming/tokens/line-heights"
+            },
+            {
+              "title": "角丸 (border-radius)",
+              "segment": "radii",
+              "pathname": "/docs/theming/tokens/radii"
+            },
+            {
+              "title": "シャドウ (box-shadow)",
+              "segment": "shadows",
+              "pathname": "/docs/theming/tokens/shadows"
+            },
+            {
+              "title": "サイズ (width, height)",
+              "segment": "sizes",
+              "pathname": "/docs/theming/tokens/sizes"
+            },
+            {
+              "title": "スペース (margin, padding)",
+              "segment": "spaces",
+              "pathname": "/docs/theming/tokens/spaces"
+            },
+            {
+              "title": "位置 (z-index)",
+              "segment": "z-indices",
+              "pathname": "/docs/theming/tokens/z-indices"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "コミュニティ",
+      "segment": "community",
+      "pathname": "/docs/community",
+      "items": [
+        {
+          "title": "貢献する",
+          "segment": "contributing",
+          "pathname": "/docs/community/contributing"
+        }
+      ]
+    },
+    {
+      "title": "変更履歴",
+      "segment": "changelog",
+      "pathname": "/docs/changelog"
     }
   ]
 }

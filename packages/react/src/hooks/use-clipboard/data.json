@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": ["copy-to-clipboard@3.3.3"],
+    "internal": {
+      "components": [],
+      "hooks": [],
+      "providers": []
+    }
+  }
+}

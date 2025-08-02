@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": [],
+    "internal": {
+      "components": ["grid"],
+      "hooks": [],
+      "providers": []
+    }
+  }
+}

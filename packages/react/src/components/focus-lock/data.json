@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": ["react-focus-lock@2.13.6"],
+    "internal": {
+      "components": [],
+      "hooks": [],
+      "providers": []
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": ["embla-carousel-react@8.6.0", "embla-carousel@8.6.0"],
+    "internal": {
+      "components": ["icon", "icon-button"],
+      "hooks": ["use-boolean", "use-controllable-state", "use-value"],
+      "providers": ["i18n-provider"]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": ["motion/react@12.18.1"],
+    "internal": {
+      "components": ["motion"],
+      "hooks": ["use-controllable-state"],
+      "providers": []
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": ["react-dom@19.1.1"],
+    "internal": {
+      "components": [],
+      "hooks": [],
+      "providers": []
+    }
+  }
+}

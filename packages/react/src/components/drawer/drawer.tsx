@@ -21,12 +21,7 @@ import { useMemo } from "react"
 import { RemoveScroll } from "react-remove-scroll"
 import { createSlotComponent, styled } from "../../core"
 import { useValue } from "../../hooks/use-value"
-import {
-  cast,
-  findChildren,
-  getValidChildren,
-  wrapOrPassProps,
-} from "../../utils"
+import { cast, isArray, useSplitChildren, wrapOrPassProps } from "../../utils"
 import { Button } from "../button"
 import { CloseButton } from "../close-button"
 import { fadeVariants } from "../fade"
@@ -165,15 +160,12 @@ export const DrawerRoot = withProvider<"div", DrawerRootProps, "placement">(
     ...props
   }) => {
     const placement = useValue(placementProp)
-    const validChildren = getValidChildren(children)
-    const [openTrigger, ...omittedChildren] = findChildren(
-      validChildren,
+    const [omittedChildren, openTrigger, customOverlay] = useSplitChildren(
+      children,
       DrawerOpenTrigger,
-    )
-    const [customOverlay, ...cloneChildren] = findChildren(
-      omittedChildren,
       DrawerOverlay,
     )
+    const hasChildren = isArray(omittedChildren) && !!omittedChildren.length
     const { open, getRootProps, ...rest } = useDrawer({
       closeOnDrag,
       dragConstraints,
@@ -183,7 +175,6 @@ export const DrawerRoot = withProvider<"div", DrawerRootProps, "placement">(
       placement,
       ...props,
     })
-    const hasChildren = !!cloneChildren.length
     const customOpenTrigger = trigger ? (
       <DrawerOpenTrigger>{trigger}</DrawerOpenTrigger>
     ) : null
@@ -223,7 +214,7 @@ export const DrawerRoot = withProvider<"div", DrawerRootProps, "placement">(
                     {customOverlay ?? (withOverlay ? <DrawerOverlay /> : null)}
 
                     {hasChildren ? (
-                      cloneChildren
+                      omittedChildren
                     ) : (
                       <ShorthandDrawerContent
                         body={body}
@@ -319,15 +310,8 @@ export const DrawerContent = withContext<"div", DrawerContentProps>(
       withDragBar,
       getContentProps,
     } = useComponentContext()
-    const validChildren = getValidChildren(children)
-    const [customCloseButton, ...omittedChildren] = findChildren(
-      validChildren,
-      DrawerCloseButton,
-    )
-    const [customDragBar, ...cloneChildren] = findChildren(
-      omittedChildren,
-      DrawerDragBar,
-    )
+    const [omittedChildren, customCloseButton, customDragBar] =
+      useSplitChildren(children, DrawerCloseButton, DrawerDragBar)
 
     return (
       <Slide
@@ -341,7 +325,7 @@ export const DrawerContent = withContext<"div", DrawerContentProps>(
         {customDragBar ??
           (withDragBar && closeOnDrag ? <DrawerDragBar /> : null)}
 
-        {cloneChildren}
+        {omittedChildren}
       </Slide>
     )
   },

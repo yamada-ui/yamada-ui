@@ -45,6 +45,7 @@ const mdxComponents: MDXComponents = {
   Contributors,
   h1: (props) => (
     <Heading
+      as="h1"
       size="5xl"
       color="fg"
       mb="md"
@@ -55,6 +56,7 @@ const mdxComponents: MDXComponents = {
   ),
   h2: (props) => (
     <Heading
+      as="h2"
       size="3xl"
       color="fg"
       mb="md"
@@ -65,6 +67,7 @@ const mdxComponents: MDXComponents = {
   ),
   h3: (props) => (
     <Heading
+      as="h3"
       size="2xl"
       color="fg"
       mb="md"
@@ -75,6 +78,7 @@ const mdxComponents: MDXComponents = {
   ),
   h4: (props) => (
     <Heading
+      as="h4"
       size="xl"
       color="fg"
       mb="md"
@@ -85,6 +89,7 @@ const mdxComponents: MDXComponents = {
   ),
   h5: (props) => (
     <Heading
+      as="h5"
       size="lg"
       color="fg"
       my="md"
@@ -94,6 +99,7 @@ const mdxComponents: MDXComponents = {
   ),
   h6: (props) => (
     <Heading
+      as="h6"
       size="md"
       color="fg"
       my="md"
@@ -154,7 +160,12 @@ export function MDXContent({ code, components }: MDXContentProps) {
   const Content = useMemo(() => getContent(code), [code])
 
   return Content ? (
-    <Box lineHeight="1.8" _lastChild={{ mb: "0" }}>
+    <Box
+      lineHeight="1.8"
+      position="relative"
+      zIndex="0"
+      _lastChild={{ mb: "0" }}
+    >
       <Content components={{ ...mdxComponents, ...components }} />
     </Box>
   ) : null

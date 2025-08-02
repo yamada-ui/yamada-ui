@@ -18,7 +18,7 @@ export const Basic = () => {
     try {
       await onOpen()
 
-      console.log("あるじゃねえか、サタン!!!")
+      console.log("やるじゃねえか、サタン!!!")
       console.log("おめえはホントに世界の…")
       console.log("救世主かもな!!!!")
     } catch {

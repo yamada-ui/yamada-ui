@@ -6,4 +6,134 @@ source: components/container
 style: components/container/container.style.ts
 ---
 
+```tsx preview
+<Container.Root>
+  <Container.Header>
+    <Heading size="xl"> "Dragon Ball" (DRAGON BALL) </Heading>
+  </Container.Header>
+
+  <Container.Body color="fg.muted">
+    <Text>
+      "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It
+      was serialized in "Weekly Shonen Jump" (Shueisha) from the 51st issue of
+      1984 to the 25th issue of 1995. It is a long manga that depicts
+      "adventure", "dream", "battle", "friendship", etc., centered on the
+      protagonist, Son Goku, and the treasure, Dragon Ball, which can grant any
+      wish if all seven scattered balls are collected.
+    </Text>
+  </Container.Body>
+</Container.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Container } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Container } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Container } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Container.Root>
+  <Container.Header />
+  <Container.Body />
+  <Container.Footer />
+</Container.Root>
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["panel", "elevated", "subtle", "solid", "surface", "outline"]}>
+    {(variant, index) => (
+      <Container.Root variant={variant} key={index}>
+        <Container.Header>
+          <Heading size="md">Container</Heading>
+        </Container.Header>
+
+        <Container.Body>
+          <Text>Variant is {variant}</Text>
+        </Container.Body>
+      </Container.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <Container.Root size={size} key={index}>
+        <Container.Header>
+          <Heading size={transformSize(size, 2)}>Container</Heading>
+        </Container.Header>
+
+        <Container.Body color="fg.muted">
+          <Text>Size is {size}</Text>
+        </Container.Body>
+      </Container.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["info", "success", "warning", "error"]}>
+    {(colorScheme, index) => (
+      <Container.Root colorScheme={colorScheme} variant="solid" key={index}>
+        <Container.Header>
+          <Heading size="md">Container</Heading>
+        </Container.Header>
+
+        <Container.Body>
+          <Text>ColorScheme is {colorScheme}</Text>
+        </Container.Body>
+      </Container.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Centering Child Elements
+
+```tsx preview
+<Container.Root centerContent>
+  <Container.Header flexDirection="column">
+    <Image
+      src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
+      alt="Dragon Ball"
+      maxW="sm"
+    />
+
+    <Heading size="xl"> "Dragon Ball" (DRAGON BALL) </Heading>
+  </Container.Header>
+
+  <Container.Body color="fg.muted">
+    <Text>
+      "Dragon Ball" (DRAGON BALL) is a Japanese manga work by Akira Toriyama. It
+      was serialized in "Weekly Shonen Jump" (Shueisha) from the 51st issue of
+      1984 to the 25th issue of 1995. It is a long manga that depicts
+      "adventure", "dream", "battle", "friendship", etc., centered on the
+      protagonist Goku (Son Goku), and the treasure "Dragon Ball" that can grant
+      any wish if all seven balls scattered around the world are collected.
+    </Text>
+  </Container.Body>
+</Container.Root>
+```

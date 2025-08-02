@@ -4,7 +4,7 @@ import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { EmptyState } from "./empty-state.style"
 import { createSlotComponent, styled } from "../../core"
-import { findChild, getValidChildren, isEmpty, omitChildren } from "../../utils"
+import { useSplitChildren } from "../../utils"
 import { emptyState } from "./empty-state.style"
 
 export interface EmptyStateRootProps
@@ -69,21 +69,19 @@ export const EmptyStateRoot = withProvider<"div", EmptyStateRootProps>(
     titleProps,
     ...rest
   }) => {
-    const validChildren = getValidChildren(children)
-    const customIndicator = findChild(validChildren, EmptyStateIndicator)
-    const customContent = findChild(validChildren, EmptyStateContent)
-    const customTitle = findChild(validChildren, EmptyStateTitle)
-    const customDescription = findChild(validChildren, EmptyStateDescription)
-
-    const computedChildren = !isEmpty(validChildren)
-      ? omitChildren(
-          validChildren,
-          EmptyStateIndicator,
-          EmptyStateTitle,
-          EmptyStateContent,
-          EmptyStateDescription,
-        )
-      : children
+    const [
+      omittedChildren,
+      customIndicator,
+      customContent,
+      customTitle,
+      customDescription,
+    ] = useSplitChildren(
+      children,
+      EmptyStateIndicator,
+      EmptyStateContent,
+      EmptyStateTitle,
+      EmptyStateDescription,
+    )
 
     return (
       <styled.div {...rest}>
@@ -107,7 +105,7 @@ export const EmptyStateRoot = withProvider<"div", EmptyStateRootProps>(
           </EmptyStateContent>
         )}
 
-        {computedChildren}
+        {omittedChildren}
       </styled.div>
     )
   },

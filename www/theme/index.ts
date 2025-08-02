@@ -1,16 +1,13 @@
-import type { CSSObject } from "@yamada-ui/react"
-import { defaultTheme, defineTheme, merge } from "@yamada-ui/react"
+import { extendTheme } from "@yamada-ui/react"
 
-export const theme = defineTheme({
-  ...defaultTheme,
+export const theme = extendTheme({
   fonts: {
     body: "'Inter', 'Inter Fallback'",
     heading: "'Inter', 'Inter Fallback'",
     mono: "'Geist Mono', 'Geist Mono Fallback'",
   },
   styles: {
-    ...defaultTheme.styles,
-    globalStyle: merge<CSSObject>(defaultTheme.styles.globalStyle, {
+    globalStyle: {
       body: {
         "--root-header-height": "sizes.14",
         "--space": { base: "spaces.lg", md: "spaces.md" },
@@ -18,6 +15,6 @@ export const theme = defineTheme({
       html: {
         scrollBehavior: "smooth",
       },
-    }),
+    },
   },
 })

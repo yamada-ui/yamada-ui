@@ -1,14 +1,18 @@
 import type { CSSProperties, DataAttributes, ReactNode } from "react"
 import { cloneElement, useMemo } from "react"
-import { dataAttr, getValidChildren, isNull, isUndefined } from "../../utils"
+import { dataAttr, isNull, isUndefined, useValidChildren } from "../../utils"
 
 export const useGroup = (children?: ReactNode) => {
-  const validChildren = getValidChildren(children)
-  const omittedChildren = validChildren.filter((child) => {
-    const ungrouped = child.props["data-ungrouped"]
+  const validChildren = useValidChildren(children)
+  const omittedChildren = useMemo(
+    () =>
+      validChildren.filter((child) => {
+        const ungrouped = child.props["data-ungrouped"]
 
-    return isUndefined(ungrouped) || isNull(ungrouped)
-  })
+        return isUndefined(ungrouped) || isNull(ungrouped)
+      }),
+    [validChildren],
+  )
   const count = omittedChildren.length
   const cloneChildren = useMemo(
     () =>

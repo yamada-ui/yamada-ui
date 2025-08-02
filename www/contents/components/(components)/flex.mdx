@@ -6,4 +6,100 @@ source: components/flex
 style: components/flex/flex.style.ts
 ---
 
+```tsx preview
+<Flex gap="md">
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
+</Flex>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Flex } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Flex } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Flex } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Flex />
+```
+
+### Direction
+
+```tsx preview
+<Flex direction="column" gap="md">
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
+</Flex>
+```
+
+### Align
+
+```tsx preview
+<Flex align="center" gap="md">
+  <For each={["sm", "md", "lg"]}>
+    {(p, index) => (
+      <Box key={index} bg="bg.contrast" color="fg.contrast" p={p}>
+        Box
+      </Box>
+    )}
+  </For>
+</Flex>
+```
+
+### Justify
+
+```tsx preview
+<Flex justify="space-between" gap="md">
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
+</Flex>
+```
+
+### Wrap
+
+```tsx preview
+<Flex wrap="wrap" gap="md" maxW="xs">
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
+</Flex>
+```
+
+### Use spaces
+
+```tsx preview
+<Flex w="full" gap="md">
+  <Box bg="bg.contrast" color="fg.contrast" p="md">
+    Box
+  </Box>
+
+  <Spacer />
+
+  <Box bg="bg.contrast" color="fg.contrast" p="md">
+    Box
+  </Box>
+</Flex>
+```

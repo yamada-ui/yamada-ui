@@ -160,8 +160,11 @@ export function isEqualProps<
   )
 }
 
-export function useSplitProps(props: Dict, keys: readonly string[] | string[]) {
-  return useMemo(() => splitObject(props, keys), [props, keys])
+export function useSplitProps<Y extends Dict, M extends keyof Y>(
+  props: Y,
+  keys: M[] | readonly M[],
+) {
+  return useMemo(() => splitObject<Y, M>(props, keys), [props, keys])
 }
 
 export function extractProps(props: Dict, keys: readonly string[] | string[]) {

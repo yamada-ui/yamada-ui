@@ -6,4 +6,126 @@ source: components/container
 style: components/container/container.style.ts
 ---
 
+```tsx preview
+<Container.Root>
+  <Container.Header>
+    <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
+  </Container.Header>
+
+  <Container.Body color="fg.muted">
+    <Text>
+      『ドラゴンボール』（DRAGON
+      BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Text>
+  </Container.Body>
+</Container.Root>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Container } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Container } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Container } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Container.Root>
+  <Container.Header />
+  <Container.Body />
+  <Container.Footer />
+</Container.Root>
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["panel", "elevated", "subtle", "solid", "surface", "outline"]}>
+    {(variant, index) => (
+      <Container.Root variant={variant} key={index}>
+        <Container.Header>
+          <Heading size="md">Container</Heading>
+        </Container.Header>
+
+        <Container.Body>
+          <Text>Variant is {variant}</Text>
+        </Container.Body>
+      </Container.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <Container.Root size={size} key={index}>
+        <Container.Header>
+          <Heading size={transformSize(size, 2)}>Container</Heading>
+        </Container.Header>
+
+        <Container.Body color="fg.muted">
+          <Text>Size is {size}</Text>
+        </Container.Body>
+      </Container.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### カラースキーマを変更する
+
+```tsx preview
+<VStack>
+  <For each={["info", "success", "warning", "error"]}>
+    {(colorScheme, index) => (
+      <Container.Root colorScheme={colorScheme} variant="solid" key={index}>
+        <Container.Header>
+          <Heading size="md">Container</Heading>
+        </Container.Header>
+
+        <Container.Body>
+          <Text>ColorScheme is {colorScheme}</Text>
+        </Container.Body>
+      </Container.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### 子要素を中央寄せにする
+
+```tsx preview
+<Container.Root centerContent>
+  <Container.Header flexDirection="column">
+    <Image
+      src="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
+      alt="ドラゴンボール"
+      maxW="sm"
+    />
+
+    <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
+  </Container.Header>
+
+  <Container.Body color="fg.muted">
+    <Text>
+      『ドラゴンボール』（DRAGON
+      BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Text>
+  </Container.Body>
+</Container.Root>
+```

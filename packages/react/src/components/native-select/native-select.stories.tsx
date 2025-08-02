@@ -80,6 +80,29 @@ export const Items: Story = () => {
 }
 
 export const Variant: Story = () => {
+  const items: NativeSelect.Item[] = [
+    { label: "ベジータ", value: "ベジータ" },
+    {
+      items: [
+        { label: "孫悟空", value: "孫悟空" },
+        { label: "孫悟飯", value: "孫悟飯" },
+        { label: "クリリン", value: "クリリン" },
+      ],
+      label: "地球人",
+    },
+    {
+      items: [
+        { label: "フリーザ", value: "フリーザ" },
+        { label: "ギニュー", value: "ギニュー" },
+        { label: "リクーム", value: "リクーム" },
+        { label: "バータ", value: "バータ" },
+        { label: "ジース", value: "ジース" },
+        { label: "グルド", value: "グルド" },
+      ],
+      label: "フリーザ軍",
+    },
+  ]
+
   return (
     <PropsTable
       variant="stack"
@@ -92,6 +115,7 @@ export const Variant: Story = () => {
             key={key}
             colorScheme={row}
             variant={column}
+            items={items}
             placeholder={toTitleCase(column)}
           />
         )
@@ -101,6 +125,29 @@ export const Variant: Story = () => {
 }
 
 export const Size: Story = () => {
+  const items: NativeSelect.Item[] = [
+    { label: "ベジータ", value: "ベジータ" },
+    {
+      items: [
+        { label: "孫悟空", value: "孫悟空" },
+        { label: "孫悟飯", value: "孫悟飯" },
+        { label: "クリリン", value: "クリリン" },
+      ],
+      label: "地球人",
+    },
+    {
+      items: [
+        { label: "フリーザ", value: "フリーザ" },
+        { label: "ギニュー", value: "ギニュー" },
+        { label: "リクーム", value: "リクーム" },
+        { label: "バータ", value: "バータ" },
+        { label: "ジース", value: "ジース" },
+        { label: "グルド", value: "グルド" },
+      ],
+      label: "フリーザ軍",
+    },
+  ]
+
   return (
     <PropsTable
       variant="stack"
@@ -113,6 +160,7 @@ export const Size: Story = () => {
             key={key}
             size={column}
             variant={row}
+            items={items}
             placeholder={`Size (${column})`}
           />
         )

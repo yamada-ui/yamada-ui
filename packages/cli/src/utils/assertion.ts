@@ -1,5 +1,5 @@
-export interface Dict<T = any> {
-  [key: string]: T
+export interface Dict<Y = any> {
+  [key: string]: Y
 }
 
 export function is(x: any, y: any) {
@@ -44,7 +44,7 @@ export function isNull(value: any): value is null {
   return value === null
 }
 
-export function isObject<T extends Dict>(value: any): value is T {
+export function isObject<Y extends Dict>(value: any): value is Y {
   return (
     value !== null &&
     (typeof value === "object" || typeof value === "function") &&
@@ -52,7 +52,7 @@ export function isObject<T extends Dict>(value: any): value is T {
   )
 }
 
-export function isArray<T extends any[]>(value: any): value is T {
+export function isArray<Y extends any[]>(value: any): value is Y {
   return Array.isArray(value)
 }
 
@@ -64,8 +64,8 @@ export function isEmptyObject(value: any): boolean {
   return isObject(value) && !Object.keys(value).length
 }
 
-export function isFunction<T extends Function = Function>(
+export function isFunction<Y extends Function = Function>(
   value: any,
-): value is T {
+): value is Y {
   return typeof value === "function"
 }

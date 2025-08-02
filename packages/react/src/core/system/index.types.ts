@@ -347,9 +347,9 @@ export interface DefineThemeKeyframeTokens {
 }
 
 export interface DefineThemeAnimationTokens<
-  T extends CSSAnimationObject | string = CSSAnimationObject,
+  Y extends CSSAnimationObject | string = CSSAnimationObject,
 > {
-  [key: DefineThemeValue]: DefineThemeAnimationTokens<T> | T | T[]
+  [key: DefineThemeValue]: DefineThemeAnimationTokens<Y> | Y | Y[]
 }
 
 export interface DefineThemeBreakpointTokens {

@@ -130,6 +130,7 @@ export * from "./hooks/use-boolean"
 export * from "./hooks/use-breakpoint"
 export * from "./hooks/use-clickable"
 export * from "./hooks/use-clipboard"
+export * from "./hooks/use-combobox"
 export * from "./hooks/use-controllable-state"
 export * from "./hooks/use-counter"
 export * from "./hooks/use-descendants"
@@ -162,3 +163,5 @@ export * from "./hooks/use-window-event"
  */
 export * from "./providers/i18n-provider"
 export * from "./providers/ui-provider"
+
+export * as Client from "./client"

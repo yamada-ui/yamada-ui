@@ -23,8 +23,11 @@ export function Steps({ children, ...rest }: StepsProps) {
         ),
         contentProps: {
           css: {
+            "& > :is(h3, h4, h5, h6):first-of-type": {
+              lineHeight: "{indicator-size}",
+              mt: "0",
+            },
             display: "block",
-            _firstChild: { lineHeight: "{indicator-size}", mt: "0" },
             _lastChild: { mb: "0" },
           },
         },

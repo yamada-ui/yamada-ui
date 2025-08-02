@@ -23,6 +23,7 @@ export const createLanguageConfig = (
       parserOptions: {
         ecmaVersion: 10,
         sourceType: "module",
+        tsconfigRootDir: process.cwd(),
         ...languageOptions.parserOptions,
         project,
       },

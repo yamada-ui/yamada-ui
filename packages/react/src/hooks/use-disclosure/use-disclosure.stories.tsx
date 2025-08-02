@@ -46,12 +46,12 @@ export const Toggle = () => {
 }
 
 export const Chain = () => {
-  const { open, onClose, onOpen } = useDisclosure({
-    onClose: (...args: string[]) => {
-      console.log("Args:", args)
+  const { open, onClose, onOpen } = useDisclosure<string, string>({
+    onClose: (value) => {
+      console.log("onClose:", value)
     },
-    onOpen: (...args: string[]) => {
-      console.log("Args:", args)
+    onOpen: (value) => {
+      console.log("onOpen:", value)
     },
   })
 

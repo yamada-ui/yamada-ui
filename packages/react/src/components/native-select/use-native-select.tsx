@@ -9,7 +9,7 @@ import { useFieldProps } from "../field"
 
 interface NativeSelectSharedItem
   extends Omit<HTMLProps<"option">, "children" | "label" | "value"> {
-  label?: string
+  label: string
 }
 
 interface NativeSelectItemWithValue extends NativeSelectSharedItem {
@@ -108,10 +108,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
   }, [children, items, placeholder, placeholderInOptions])
 
   const getRootProps: PropGetter = useCallback(
-    (props) => ({
-      ...dataProps,
-      ...props,
-    }),
+    (props) => ({ ...dataProps, ...props }),
     [dataProps],
   )
 
@@ -137,7 +134,6 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
       computedChildren,
       dataProps,
       eventProps,
-
       rest,
       placeholder,
       disabled,
@@ -146,10 +142,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
   )
 
   const getIconProps: PropGetter = useCallback(
-    (props) => ({
-      ...dataProps,
-      ...props,
-    }),
+    (props) => ({ ...dataProps, ...props }),
     [dataProps],
   )
 

@@ -95,6 +95,16 @@
       "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
       "required": false
+    },
+    "label": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The label of the group.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "MenuLabelProps",
+      "description": "Props for the label component.",
+      "required": false
     }
   },
   "Indicator": {
@@ -203,6 +213,16 @@
     "defaultValue": {
       "type": "M",
       "description": "The initial value of the menu item group.",
+      "required": false
+    },
+    "label": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The label of the group.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "MenuLabelProps",
+      "description": "Props for the label component.",
       "required": false
     },
     "onChange": {
@@ -368,12 +388,12 @@
       "required": false
     },
     "onClose": {
-      "type": "() => void",
+      "type": "() => void | Promise<void>",
       "description": "Callback invoked to close the element.",
       "required": false
     },
     "onOpen": {
-      "type": "() => void",
+      "type": "() => void | Promise<void>",
       "description": "Callback invoked to open the element.",
       "required": false
     },

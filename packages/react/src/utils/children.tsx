@@ -1,4 +1,10 @@
-import { isArray, isNumber, isString, isUndefined } from "@yamada-ui/utils"
+import {
+  isArray,
+  isEmpty,
+  isNumber,
+  isString,
+  isUndefined,
+} from "@yamada-ui/utils"
 import * as React from "react"
 
 export function getValidChildren(
@@ -7,6 +13,10 @@ export function getValidChildren(
   return React.Children.toArray(children).filter((child) =>
     React.isValidElement(child),
   )
+}
+
+export function useValidChildren(children: React.ReactNode) {
+  return React.useMemo(() => getValidChildren(children), [children])
 }
 
 export function isValidElement(child: any): child is React.ReactNode {
@@ -56,10 +66,22 @@ export function findChild<Y = any>(
   return child as React.ReactElement<Y> | undefined
 }
 
-export function findChildren(
+export function useFindChild<Y = any>(
   children: React.ReactElement[],
   ...types: (React.JSXElementConstructor<any> | string)[]
-): [React.ReactElement | undefined, ...React.ReactElement[]] {
+): React.ReactElement<Y> | undefined {
+  const typesRef = React.useRef(types)
+
+  return React.useMemo(
+    () => findChild<Y>(children, ...typesRef.current),
+    [children],
+  )
+}
+
+export function findChildren<Y = any, M = any>(
+  children: React.ReactElement[],
+  ...types: (React.JSXElementConstructor<any> | string)[]
+): [React.ReactElement<Y> | undefined, ...React.ReactElement<M>[]] {
   const child = findChild(children, ...types)
 
   if (child) {
@@ -71,10 +93,22 @@ export function findChildren(
       } else {
         return 0
       }
-    }) as [React.ReactElement | undefined, ...React.ReactElement[]]
+    }) as [React.ReactElement<Y> | undefined, ...React.ReactElement<M>[]]
   } else {
-    return [undefined, ...children]
+    return [undefined, ...(children as React.ReactElement<M>[])]
   }
+}
+
+export function useFindChildren<Y = any, M = any>(
+  children: React.ReactElement<M>[],
+  ...types: (React.JSXElementConstructor<any> | string)[]
+): [React.ReactElement<Y> | undefined, ...React.ReactElement<M>[]] {
+  const typesRef = React.useRef(types)
+
+  return React.useMemo(
+    () => findChildren<Y, M>(children, ...typesRef.current),
+    [children],
+  )
 }
 
 export function includesChildren(
@@ -90,21 +124,100 @@ export function includesChildren(
   })
 }
 
-export function omitChildren(
-  children: React.ReactElement[],
+export function useIncludesChildren(
+  children: React.ReactElement<any>[],
   ...types: (React.JSXElementConstructor<any> | string)[]
-): React.ReactElement[] {
-  return children.filter((child) =>
-    types.every((type) => !isSomeElement(child.type, type)),
+): boolean {
+  return React.useMemo(
+    () => includesChildren(children, ...types),
+    [children, types],
   )
 }
 
-export function pickChildren(
+export function omitChildren<Y = any>(
   children: React.ReactElement[],
   ...types: (React.JSXElementConstructor<any> | string)[]
-): React.ReactElement[] {
+): React.ReactElement<Y>[] {
+  return children.filter((child) =>
+    types.every((type) => !isSomeElement(child.type, type)),
+  ) as React.ReactElement<Y>[]
+}
+
+export function useOmitChildren<Y = any>(
+  children: React.ReactElement<any>[],
+  ...types: (React.JSXElementConstructor<any> | string)[]
+): React.ReactElement<Y>[] {
+  const typesRef = React.useRef(types)
+
+  return React.useMemo(
+    () => omitChildren<Y>(children, ...typesRef.current),
+    [children],
+  )
+}
+
+export function pickChildren<Y = any>(
+  children: React.ReactElement[],
+  ...types: (React.JSXElementConstructor<any> | string)[]
+): React.ReactElement<Y>[] {
   return children.filter((child) =>
     types.some((type) => isSomeElement(child.type, type)),
+  ) as React.ReactElement<Y>[]
+}
+
+export function usePickChildren<Y = any>(
+  children: React.ReactElement<any>[],
+  ...types: (React.JSXElementConstructor<any> | string)[]
+): React.ReactElement<Y>[] {
+  const typesRef = React.useRef(types)
+
+  return React.useMemo(
+    () => pickChildren<Y>(children, ...typesRef.current),
+    [children],
+  )
+}
+
+export function splitChildren<Y = any, M = any>(
+  children: React.ReactNode,
+  ...types: (
+    | (React.JSXElementConstructor<any> | string)[]
+    | React.JSXElementConstructor<any>
+    | string
+  )[]
+): [
+  React.ReactElement<M>[] | React.ReactNode,
+  ...(React.ReactElement<Y> | undefined)[],
+] {
+  const validChildren = getValidChildren(children)
+
+  if (isEmpty(validChildren)) return [children]
+
+  const pickedChildren = types.map((types) =>
+    isArray(types)
+      ? findChild(validChildren, ...types)
+      : findChild(validChildren, types),
+  )
+
+  const omittedChildren = omitChildren(validChildren, ...types.flat())
+
+  return [omittedChildren, ...pickedChildren] as const
+}
+
+export function useSplitChildren<Y = any, M = any>(
+  children: React.ReactNode,
+  ...types: (
+    | (React.JSXElementConstructor<any> | string)[]
+    | React.JSXElementConstructor<any>
+    | string
+  )[]
+): [
+  React.ReactElement<M>[] | React.ReactNode,
+  ...(React.ReactElement<Y> | undefined)[],
+] {
+  const typesRef = React.useRef(types)
+
+  return React.useMemo(
+    () => splitChildren<Y, M>(children, ...typesRef.current),
+    [children],
   )
 }
 

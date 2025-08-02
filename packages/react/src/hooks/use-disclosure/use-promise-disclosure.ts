@@ -1,14 +1,17 @@
 "use client"
 
-import type { UseDisclosureProps } from "./use-disclosure"
+import type { DisclosureCallback, UseDisclosureProps } from "./use-disclosure"
 import { useCallback, useRef } from "react"
 import { noop } from "../../utils"
 import { useDisclosure } from "./use-disclosure"
 
 export interface UsePromiseDisclosureProps<
-  Y extends (...args: any[]) => Promise<void> | void = () => void,
-  M extends (...args: any[]) => Promise<void> | void = () => void,
-> extends UseDisclosureProps<Y, M> {
+  Y = never,
+  M = never,
+  D = never,
+  H = Promise<void> | void,
+  R = Promise<void> | void,
+> extends UseDisclosureProps<M, D | Y, H, R> {
   disableCloseOnSuccess?: boolean
   error?: unknown
 }
@@ -20,52 +23,55 @@ export interface UsePromiseDisclosureProps<
  * @see https://yamada-ui.com/hooks/use-promise-disclosure
  */
 export const usePromiseDisclosure = <
-  Y extends (...args: any[]) => Promise<void> | void = () => void,
-  M extends (...args: any[]) => Promise<void> | void = () => void,
+  Y = never,
+  M = never,
+  D = never,
+  H = Promise<void> | void,
+  R = Promise<void> | void,
 >({
   disableCloseOnSuccess = false,
   error,
   ...rest
-}: UsePromiseDisclosureProps<Y, M> = {}) => {
+}: UsePromiseDisclosureProps<Y, M, D, H, R> = {}) => {
   const {
     open,
     onClose: onInternalClose,
     onOpen: onInternalOpen,
     onToggle,
-  } = useDisclosure<Y, M>(rest)
+  } = useDisclosure<M, D | Y, H, R>(rest)
 
   const rejectRef = useRef<((reason?: any) => void) | undefined>(undefined)
-  const resolveRef = useRef<M>(noop as M)
+  const resolveRef = useRef(noop as DisclosureCallback<Y, R>)
 
   const onOpen = useCallback(
-    async (...args: Parameters<Y>) => {
-      const promise = new Promise<void>((resolve, reject) => {
-        resolveRef.current = (async (...args: Parameters<M>) => {
+    async (value: M) => {
+      const promise = new Promise<Y>((resolve, reject) => {
+        resolveRef.current = (async (value: Y) => {
           rejectRef.current = undefined
 
-          resolve()
+          resolve(value)
 
-          if (!disableCloseOnSuccess) await onInternalClose(...args)
-        }) as M
+          if (!disableCloseOnSuccess) await onInternalClose(value)
+        }) as DisclosureCallback<Y, R>
 
         rejectRef.current = reject
       })
 
-      await onInternalOpen(...args)
+      await onInternalOpen(value)
 
-      await promise
+      return await promise
     },
     [onInternalOpen, onInternalClose, disableCloseOnSuccess],
-  )
+  ) as DisclosureCallback<M, [Y] extends [never] ? Promise<void> : Promise<Y>>
 
   const onClose = useCallback(
-    async (...args: Parameters<M>) => {
+    async (value: D) => {
       rejectRef.current?.(error)
 
-      await onInternalClose(...args)
+      await onInternalClose(value)
     },
     [onInternalClose, error],
-  ) as M
+  ) as DisclosureCallback<D, R>
 
   return {
     open,
@@ -76,4 +82,10 @@ export const usePromiseDisclosure = <
   }
 }
 
-export type UsePromiseDisclosureReturn = ReturnType<typeof usePromiseDisclosure>
+export type UsePromiseDisclosureReturn<
+  Y = never,
+  M = never,
+  D = never,
+  H = Promise<void> | void,
+  R = Promise<void> | void,
+> = ReturnType<typeof usePromiseDisclosure<Y, M, D, H, R>>

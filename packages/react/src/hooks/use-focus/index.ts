@@ -25,8 +25,8 @@ export interface UseFocusOnShowProps {
  *
  * @see https://yamada-ui.com/hooks/use-focus-on-show
  */
-export const useFocusOnShow = <T extends HTMLElement>(
-  refOrEl: RefObject<null | T> | T,
+export const useFocusOnShow = <Y extends HTMLElement>(
+  refOrEl: RefObject<null | Y> | Y,
   {
     focusTarget: focusRefOrEl,
     preventScroll,

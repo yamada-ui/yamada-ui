@@ -1,8 +1,6 @@
 ---
 title: VStack
-description:
-  "`Stack` is a component that groups elements and provides spacing between child
-  elements. `VStack` is used to stack child elements vertically."
+description: "`VStack` is used to stack child elements vertically."
 storybook: components-stack--vertical
 source: components/z-stack
 ---
@@ -11,7 +9,7 @@ source: components/z-stack
 <VStack>
   <For each={["info", "success", "warning", "error"]}>
     {(bg, index) => (
-      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+      <Box key={index} p="md" rounded="l2" bg={bg} color="white">
         Box
       </Box>
     )}
@@ -49,7 +47,7 @@ Use the `separator` prop to add a separator between the child elements.
 <VStack separator={<Separator />}>
   <For each={["info", "success", "warning", "error"]}>
     {(bg, index) => (
-      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+      <Box key={index} p="md" rounded="l2" bg={bg} color="white">
         Box
       </Box>
     )}

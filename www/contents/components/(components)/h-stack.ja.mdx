@@ -1,6 +1,6 @@
 ---
 title: HStack
-description: "`Stack`は、要素をグループ化し、子要素間にスペースを設けるコンポーネントです。`HStack`は、子要素を水平方向にスタックするために使用されます。"
+description: "`HStack`は、子要素を水平方向にスタックするために使用されます。"
 storybook: components-stack--horizontal
 source: components/stack
 ---
@@ -9,7 +9,7 @@ source: components/stack
 <HStack>
   <For each={["info", "success", "warning", "error"]}>
     {(bg, index) => (
-      <Box key={index} p="md" rounded="4" bg={bg} color="white">
+      <Box key={index} p="md" rounded="l2" bg={bg} color="white">
         Box
       </Box>
     )}
@@ -39,17 +39,17 @@ import { HStack } from "@workspace/ui"
 <HStack />
 ```
 
-### 要素間のスペースを確保する
+### スペースを追加する
 
 ```tsx preview
 <HStack>
-  <Box p="md" rounded="4" bg="info" color="white">
+  <Box p="md" rounded="l2" bg="info" color="white">
     Box
   </Box>
 
   <Spacer />
 
-  <Box p="md" rounded="4" bg="error" color="white">
+  <Box p="md" rounded="l2" bg="error" color="white">
     Box
   </Box>
 </HStack>

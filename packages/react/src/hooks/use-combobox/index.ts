@@ -132,7 +132,7 @@ export const useCombobox = ({
   )
 
   const onActiveDescendant = useCallback(
-    (descendant?: ComboboxDescendant) => {
+    (descendant?: ComboboxDescendant, options?: FocusOptions) => {
       const target =
         activedescendant === "trigger" ? triggerRef.current : contentRef.current
 
@@ -140,7 +140,7 @@ export const useCombobox = ({
 
       target.setAttribute("aria-activedescendant", descendant.id)
 
-      descendants.focus(descendant.node)
+      descendants.focus(descendant.node, options)
     },
     [activedescendant, descendants, disabled],
   )
@@ -327,14 +327,17 @@ export const useComboboxItem = ({
     disabled: descendantDisabled,
   })
 
-  const onActive = useCallback(() => {
-    if (disabled) return
+  const onActive = useCallback(
+    (options?: FocusOptions) => {
+      if (disabled) return
 
-    const index = descendants.indexOf(itemRef.current)
-    const current = descendants.value(index)
+      const index = descendants.indexOf(itemRef.current)
+      const current = descendants.value(index)
 
-    onActiveDescendant(current)
-  }, [descendants, disabled, onActiveDescendant])
+      onActiveDescendant(current, options)
+    },
+    [descendants, disabled, onActiveDescendant],
+  )
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
@@ -378,9 +381,11 @@ export const useComboboxItem = ({
       ...rest,
       ...props,
       ref: mergeRefs(ref, rest.ref, itemRef, register),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onActive),
+      onFocus: handlerAll(props.onFocus, rest.onFocus, () => onActive()),
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
-      onMouseMove: handlerAll(props.onMouseMove, rest.onMouseMove, onActive),
+      onMouseMove: handlerAll(props.onMouseMove, rest.onMouseMove, () =>
+        onActive({ preventScroll: true }),
+      ),
     }),
     [
       id,

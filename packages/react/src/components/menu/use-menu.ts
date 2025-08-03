@@ -42,7 +42,10 @@ const [MenuContext, useMenuContext] = createContext<MenuContext>({
 
 interface MainMenuContext {
   descendants: Descendants<HTMLDivElement, ComboboxDescendantProps>
-  onActiveDescendant: (descendant?: ComboboxDescendant) => void
+  onActiveDescendant: (
+    descendant?: ComboboxDescendant,
+    options?: FocusOptions,
+  ) => void
   onCloseRef: RefObject<() => void>
   onSelect: (value?: string, closeOnSelect?: boolean) => void
   closeOnSelect?: boolean
@@ -230,7 +233,10 @@ export interface UseSubMenuProps
   extends Omit<Required<UseDisclosureProps>, "defaultOpen" | "timing"> {
   id: string
   descendants: Descendants<HTMLDivElement, ComboboxDescendantProps>
-  onActiveDescendant: (descendant?: ComboboxDescendant) => void
+  onActiveDescendant: (
+    descendant?: ComboboxDescendant,
+    options?: FocusOptions,
+  ) => void
   disabled?: boolean
   subMenuDirection?: SubMenuDirection
 }

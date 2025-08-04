@@ -6,4 +6,32 @@ source: components/center
 style: components/center/center.style.ts
 ---
 
+```tsx preview
+<Center h="xs" rounded="md" bg="primary" color="white">
+  This is the Center
+</Center>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Center } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Center } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Center } from "@workspace/ui"
+```
+
+:::
+
+```tsx title="index.tsx"
+<Center h="xs" rounded="md" bg="primary" color="white">
+  This is the Center
+</Center>
+```

@@ -192,6 +192,7 @@
     "tseslint",
     "tsunade",
     "tsup",
+    "turbopack",
     "typeanalyze",
     "typecheck",
     "typetrace",

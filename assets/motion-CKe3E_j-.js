@@ -1,1 +1,0 @@
-import{au as r,r as m,aY as i,j as c,s as u,e as x}from"./iframe-B58gGoPv.js";const p=["transition"],d=u("div",{forwardProps:p}),j=({ref:t,as:s="div",className:o,...a})=>{const e=r(),n=m.useMemo(()=>i.create(s),[s]);return c.jsx(d,{ref:t,as:n,className:x(e.utils.getClassName("motion"),o),...a})};export{j as M};

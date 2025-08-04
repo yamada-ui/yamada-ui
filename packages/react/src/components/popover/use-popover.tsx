@@ -24,6 +24,7 @@ import {
   getEventRelatedTarget,
   handlerAll,
   mergeRefs,
+  runKeyAction,
   scrollLock,
   useUnmountEffect,
 } from "../../utils"
@@ -155,12 +156,16 @@ export const usePopover = ({
   assignRef(updateRef, update)
 
   const onKeyDown = useCallback(
-    (ev: KeyboardEvent<HTMLDivElement>) => {
-      if (closeOnEsc && ev.key === "Escape") {
-        onClose()
+    (ev: KeyboardEvent<HTMLElement>) => {
+      runKeyAction(ev, {
+        Escape: () => {
+          if (!closeOnEsc) return
 
-        triggerRef.current?.focus()
-      }
+          onClose()
+
+          triggerRef.current?.focus()
+        },
+      })
     },
     [closeOnEsc, onClose],
   )
@@ -230,12 +235,18 @@ export const usePopover = ({
       ref: mergeRefs(ref, triggerRef, (node) => {
         if (anchorRef.current == null) refs.setReference(node)
       }),
+      onBlur: handlerAll(props.onBlur, (ev) =>
+        !contains(contentRef.current, getEventRelatedTarget(ev))
+          ? onClose()
+          : void 0,
+      ),
       onClick: handlerAll(
         props.onClick,
         !open ? (!disabled ? onOpen : undefined) : onClose,
       ),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
     }),
-    [contentId, disabled, onClose, onOpen, open, refs],
+    [contentId, disabled, onClose, onKeyDown, onOpen, open, refs],
   )
 
   const getAnchorProps: PropGetter = useCallback(

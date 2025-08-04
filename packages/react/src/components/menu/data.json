@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": [],
+    "internal": {
+      "components": ["icon", "popover"],
+      "hooks": ["use-controllable-state", "use-descendants", "use-disclosure"],
+      "providers": []
+    }
+  }
+}

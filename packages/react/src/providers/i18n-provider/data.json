@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": ["intl-messageformat@10.7.16"],
+    "internal": {
+      "components": [],
+      "hooks": [],
+      "providers": []
+    }
+  }
+}

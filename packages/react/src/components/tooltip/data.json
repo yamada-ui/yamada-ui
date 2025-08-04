@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "external": ["motion/react@12.18.1"],
+    "internal": {
+      "components": ["motion", "popover", "portal"],
+      "hooks": [
+        "use-disclosure",
+        "use-event-listener",
+        "use-outside-click",
+        "use-popper"
+      ],
+      "providers": []
+    }
+  }
+}

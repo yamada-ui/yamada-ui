@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "external": [],
+    "internal": {
+      "components": ["field", "group", "icon", "input"],
+      "hooks": ["use-counter", "use-event-listener", "use-interval"],
+      "providers": ["i18n-provider"]
+    }
+  }
+}

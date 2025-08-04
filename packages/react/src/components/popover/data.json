@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "external": ["motion/react@12.18.1"],
+    "internal": {
+      "components": ["fade-scale", "motion", "portal", "slide-fade"],
+      "hooks": [
+        "use-disclosure",
+        "use-event-listener",
+        "use-focus",
+        "use-outside-click",
+        "use-popper"
+      ],
+      "providers": []
+    }
+  }
+}

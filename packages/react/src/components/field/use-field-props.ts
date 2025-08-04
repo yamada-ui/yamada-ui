@@ -43,21 +43,12 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
   const props = useMemo(
     () => ({
       id,
-      "aria-describedby": ariaDescribedby,
       disabled,
       readOnly: notSupportReadOnly ? undefined : readOnly,
       required,
       ...rest,
     }),
-    [
-      id,
-      disabled,
-      readOnly,
-      required,
-      rest,
-      notSupportReadOnly,
-      ariaDescribedby,
-    ],
+    [id, disabled, readOnly, required, rest, notSupportReadOnly],
   )
   const dataProps = useMemo(
     () => ({

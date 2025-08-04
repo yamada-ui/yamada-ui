@@ -23,7 +23,6 @@ import type {
 import type { ComponentSlot, ComponentSlotName } from "./create-component"
 import type { HTMLStyledProps } from "./index.types"
 import { useRef } from "react"
-import isEqual from "react-fast-compare"
 import {
   bem,
   cx,
@@ -399,6 +398,7 @@ function useStyle<
   const options = { ...system.breakpoints, hasSlot, wrap }
 
   const propsRef = useRef<Dict>({})
+  const mergedPropsRef = useRef<Dict>({})
   const styleRef = useRef<Style<H> | undefined>(undefined)
 
   const hasComponentStyle =
@@ -434,7 +434,9 @@ function useStyle<
       transferProps,
     ) as Y
 
-    if (!isEqualProps(propsRef.current, computedProps, ["css", "children"])) {
+    if (
+      !isEqualProps(mergedPropsRef.current, mergedProps, ["css", "children"])
+    ) {
       const { hasSize, hasVariant } = getHasAtRuleStyle(props.css)(getAtRule)
 
       let style: Style<H> = {}
@@ -469,24 +471,22 @@ function useStyle<
       if (compounds)
         style = getCompoundStyle<H>(mergedProps, compounds, style)(options)
 
-      if (!isEqual(styleRef.current, style)) {
-        styleRef.current = style
+      styleRef.current = style
 
-        if (hasSlot) {
-          computedProps.css = mergeSlotCSS<ComponentSlotName<M>>(
-            slot,
-            style as CSSSlotObject,
-            computedProps.css,
-          )
-        } else {
-          computedProps.css = mergeCSS(style as CSSObject, computedProps.css)
-        }
+      if (hasSlot) {
+        computedProps.css = mergeSlotCSS<ComponentSlotName<M>>(
+          slot,
+          style as CSSSlotObject,
+          computedProps.css,
+        )
       } else {
-        computedProps.css = propsRef.current.css
+        computedProps.css = mergeCSS(style as CSSObject, computedProps.css)
       }
     } else {
       computedProps.css = propsRef.current.css
     }
+
+    mergedPropsRef.current = mergedProps
 
     if (!isEqualProps(propsRef.current, computedProps))
       propsRef.current = computedProps

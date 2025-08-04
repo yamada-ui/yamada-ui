@@ -102,7 +102,7 @@ export function focusTrap(
 
     let elToFocus: HTMLElement | null | undefined = null
 
-    const [firstTabbable, lastTabbable] = getTabbableElementEdges(el, true)
+    const [firstTabbable, lastTabbable] = getTabbableElementEdges(el, false)
 
     if (ev.shiftKey) {
       if (doc.activeElement === firstTabbable) elToFocus = lastTabbable
@@ -137,21 +137,21 @@ export function focusTransfer(
 
     let elToFocus: HTMLElement | null | undefined = null
 
-    const [firstTabbable, lastTabbable] = getTabbableElementEdges(el, true)
+    const [firstTabbable, lastTabbable] = getTabbableElementEdges(el, false)
     const nextTabbable = getNextTabbableElement(body, target)
     const noTabbableEls = !firstTabbable && !lastTabbable
 
     if (ev.shiftKey) {
       if (nextTabbable === doc.activeElement) {
-        elToFocus = lastTabbable
+        if (doc.activeElement !== lastTabbable) elToFocus = lastTabbable
       } else if (doc.activeElement === firstTabbable || noTabbableEls) {
-        elToFocus = target
+        if (doc.activeElement !== target) elToFocus = target
       }
     } else {
       if (doc.activeElement === target) {
-        elToFocus = firstTabbable
+        if (doc.activeElement !== firstTabbable) elToFocus = firstTabbable
       } else if (doc.activeElement === lastTabbable || noTabbableEls) {
-        elToFocus = nextTabbable
+        if (doc.activeElement !== nextTabbable) elToFocus = nextTabbable
       }
     }
 

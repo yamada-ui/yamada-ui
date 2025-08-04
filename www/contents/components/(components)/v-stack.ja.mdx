@@ -7,13 +7,11 @@ source: components/stack
 
 ```tsx preview
 <VStack>
-  <For each={["info", "success", "warning", "error"]}>
-    {(bg, index) => (
-      <Box key={index} p="md" rounded="l2" bg={bg} color="white">
-        Box
-      </Box>
-    )}
-  </For>
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
 </VStack>
 ```
 
@@ -45,12 +43,10 @@ import { VStack } from "@workspace/ui"
 
 ```tsx preview
 <VStack separator={<Separator />}>
-  <For each={["info", "success", "warning", "error"]}>
-    {(bg, index) => (
-      <Box key={index} p="md" rounded="l2" bg={bg} color="white">
-        Box
-      </Box>
-    )}
-  </For>
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
 </VStack>
 ```

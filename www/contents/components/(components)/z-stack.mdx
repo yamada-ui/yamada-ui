@@ -8,7 +8,7 @@ source: components/stack
 ```tsx preview
 <ZStack>
   {["info", "success", "warning", "error"].map((bg, index) => (
-    <Box key={index} bg={bg} color="white" p="md" rounded="l2">
+    <Box key={index} bg={bg} color="white" p="md">
       Box
     </Box>
   ))}
@@ -44,7 +44,7 @@ To change the direction, set `direction` to `start`, `end-end`, etc.
 ```tsx preview
 <ZStack direction="start">
   {["info", "success", "warning", "error"].map((bg, index) => (
-    <Box key={index} bg={bg} color="white" p="md" rounded="l2">
+    <Box key={index} bg={bg} color="white" p="md">
       Box
     </Box>
   ))}
@@ -58,7 +58,7 @@ To reverse the direction, set `reverse` to `true`.
 ```tsx preview
 <ZStack direction="center-start" reverse>
   {["info", "success", "warning", "error"].map((bg, index) => (
-    <Box key={index} bg={bg} color="white" p="md" rounded="l2">
+    <Box key={index} bg={bg} color="white" p="md">
       Box
     </Box>
   ))}

@@ -302,6 +302,11 @@
               "pathname": "/docs/components/highlight"
             },
             {
+              "title": "HStack",
+              "segment": "h-stack",
+              "pathname": "/docs/components/h-stack"
+            },
+            {
               "title": "HueSlider",
               "segment": "hue-slider",
               "pathname": "/docs/components/hue-slider"
@@ -612,6 +617,11 @@
               "status": "planned"
             },
             {
+              "title": "VStack",
+              "segment": "v-stack",
+              "pathname": "/docs/components/v-stack"
+            },
+            {
               "title": "Wrap",
               "segment": "wrap",
               "pathname": "/docs/components/wrap"
@@ -620,6 +630,11 @@
               "title": "YearPicker",
               "segment": "year-picker",
               "pathname": "/docs/components/year-picker"
+            },
+            {
+              "title": "ZStack",
+              "segment": "z-stack",
+              "pathname": "/docs/components/z-stack"
             }
           ]
         },

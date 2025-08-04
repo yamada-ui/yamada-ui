@@ -144,7 +144,7 @@ export interface UseInfiniteScrollProps
  *
  * @see https://yamada-ui.com/hooks/use-infinite-scroll
  */
-export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
+export const useInfiniteScroll = <Y extends HTMLElement = HTMLDivElement>({
   behavior,
   disabled = false,
   indexRef: indexRefProp,
@@ -158,7 +158,7 @@ export const useInfiniteScroll = <T extends HTMLElement = HTMLDivElement>({
   threshold,
   onLoad: onLoadProp,
 }: UseInfiniteScrollProps = {}) => {
-  const ref = useRef<T>(null)
+  const ref = useRef<Y>(null)
   const indexRef = useRef<number>(startIndex)
   const processingRef = useRef<boolean>(false)
   const observerRef = useRef<IntersectionObserver | undefined>(undefined)

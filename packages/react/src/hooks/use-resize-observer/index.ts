@@ -21,9 +21,9 @@ const defaultRect: ObserverRect = {
  *
  * @see https://yamada-ui.com/hooks/use-resize-observer
  */
-export const useResizeObserver = <T extends HTMLElement = any>() => {
+export const useResizeObserver = <Y extends HTMLElement = any>() => {
   const id = useRef(0)
-  const ref = useRef<T>(null)
+  const ref = useRef<Y>(null)
   const [rect, setRect] = useState<ObserverRect>(defaultRect)
 
   const observer = useMemo(() => {
@@ -53,8 +53,8 @@ export const useResizeObserver = <T extends HTMLElement = any>() => {
   return [ref, rect] as const
 }
 
-export const useElementSize = <T extends HTMLElement = any>() => {
-  const [ref, { height, width }] = useResizeObserver<T>()
+export const useElementSize = <Y extends HTMLElement = any>() => {
+  const [ref, { height, width }] = useResizeObserver<Y>()
 
   return { ref, height, width }
 }

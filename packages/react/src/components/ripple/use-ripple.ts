@@ -11,18 +11,18 @@ export interface RippleOptions {
   y: number
 }
 
-export interface UseRippleProps<T = HTMLElement> {
+export interface UseRippleProps<Y = HTMLElement> {
   disabled?: boolean
-  onClick?: MouseEventHandler<T>
+  onClick?: MouseEventHandler<Y>
 }
 
-export const useRipple = <T = HTMLElement>({
+export const useRipple = <Y = HTMLElement>({
   disabled,
   ...rest
-}: UseRippleProps<T> = {}) => {
+}: UseRippleProps<Y> = {}) => {
   const [ripples, setRipples] = useState<RippleOptions[]>([])
 
-  const onClick: MouseEventHandler<T> = useCallback(
+  const onClick: MouseEventHandler<Y> = useCallback(
     (ev) => {
       if (disabled) return
 

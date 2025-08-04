@@ -3,11 +3,11 @@ import type { ReactNodeOrFunction } from "../../utils"
 import { isValidElement } from "react"
 import { runIfFn } from "../../utils"
 
-export interface ShowProps<T> {
+export interface ShowProps<Y> {
   /**
    * The children to render if `when` is `true`
    */
-  children: ReactNodeOrFunction<T>
+  children: ReactNodeOrFunction<Y>
   /**
    * The fallback content to render if `when` is `false`
    */
@@ -15,7 +15,7 @@ export interface ShowProps<T> {
   /**
    * If `true`, it'll render the `children` prop
    */
-  when?: null | T
+  when?: null | Y
 }
 
 /**
@@ -23,11 +23,11 @@ export interface ShowProps<T> {
  *
  * @see https://yamada-ui.com/components/show
  */
-export const Show = <T,>({
+export const Show = <Y,>({
   children,
   fallback,
   when,
-}: ShowProps<T>): ReactNode => {
+}: ShowProps<Y>): ReactNode => {
   let result: ReactNode
 
   if (!when) {

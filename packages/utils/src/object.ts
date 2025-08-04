@@ -236,7 +236,7 @@ export function memoizeObject(func: typeof getObject) {
 
 export const getMemoizedObject = memoizeObject(getObject)
 
-export function wrapWithKey<T>(obj: T, key?: string) {
+export function wrapWithKey<Y>(obj: Y, key?: string) {
   if (key) {
     return { [key]: obj }
   } else {

@@ -7,8 +7,8 @@ import { useEffect, useRef } from "react"
  *
  * @see https://yamada-ui.com/hooks/use-previous
  */
-export const usePrevious = <T>(value: T) => {
-  const ref = useRef<T | undefined>(undefined)
+export const usePrevious = <Y>(value: Y) => {
+  const ref = useRef<undefined | Y>(undefined)
 
   useEffect(() => {
     ref.current = value

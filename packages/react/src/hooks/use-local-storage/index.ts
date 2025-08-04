@@ -6,15 +6,15 @@ import { useWindowEvent } from "../use-window-event"
 
 export type StorageType = "localStorage" | "sessionStorage"
 
-export interface StorageProps<T> {
+export interface StorageProps<Y> {
   key: string
-  defaultValue?: T
-  deserialize?: (value: string | undefined) => T
+  defaultValue?: Y
+  deserialize?: (value: string | undefined) => Y
   getInitialValueInEffect?: boolean
-  serialize?: (value: T) => string
+  serialize?: (value: Y) => string
 }
 
-const serializeJSON = <T>(value: T, name: string) => {
+const serializeJSON = <Y>(value: Y, name: string) => {
   try {
     return JSON.stringify(value)
   } catch {
@@ -32,7 +32,7 @@ const deserializeJSON = (value: string | undefined) => {
   }
 }
 
-export const createStorage = <T>(type: StorageType, name: string) => {
+export const createStorage = <Y>(type: StorageType, name: string) => {
   const eventName =
     type === "localStorage" ? "local-storage" : "session-storage"
 
@@ -41,10 +41,10 @@ export const createStorage = <T>(type: StorageType, name: string) => {
     defaultValue = undefined,
     deserialize = deserializeJSON,
     getInitialValueInEffect = true,
-    serialize = (value: T) => serializeJSON(value, name),
-  }: StorageProps<T>) => {
+    serialize = (value: Y) => serializeJSON(value, name),
+  }: StorageProps<Y>) => {
     const readStorageValue = useCallback(
-      (skipStorage?: boolean): T => {
+      (skipStorage?: boolean): Y => {
         if (
           typeof window === "undefined" ||
           !(type in window) ||
@@ -52,24 +52,24 @@ export const createStorage = <T>(type: StorageType, name: string) => {
           window[type] == null ||
           skipStorage
         ) {
-          return (defaultValue ?? "") as T
+          return (defaultValue ?? "") as Y
         }
 
         const storageValue = window[type].getItem(key)
 
         return storageValue !== null
           ? deserialize(storageValue)
-          : ((defaultValue ?? "") as T)
+          : ((defaultValue ?? "") as Y)
       },
       [key, deserialize, defaultValue],
     )
 
-    const [value, setValue] = useState<T>(
+    const [value, setValue] = useState<Y>(
       readStorageValue(getInitialValueInEffect),
     )
 
     const setStorageValue = useCallback(
-      (valOrFn: ((prevState: T) => T) | T) => {
+      (valOrFn: ((prevState: Y) => Y) | Y) => {
         if (isFunction(valOrFn)) {
           setValue((current) => {
             const result = valOrFn(current)
@@ -97,7 +97,7 @@ export const createStorage = <T>(type: StorageType, name: string) => {
 
     const removeStorageValue = useCallback(() => {
       window[type].removeItem(key)
-      setValue(defaultValue as T)
+      setValue(defaultValue as Y)
     }, [defaultValue, key])
 
     useWindowEvent("storage", (ev) => {
@@ -131,5 +131,5 @@ export const createStorage = <T>(type: StorageType, name: string) => {
  *
  * @see https://yamada-ui.com/hooks/use-local-storage
  */
-export const useLocalStorage = <T = string>(props: StorageProps<T>) =>
-  createStorage<T>("localStorage", "use-local-storage")(props)
+export const useLocalStorage = <Y = string>(props: StorageProps<Y>) =>
+  createStorage<Y>("localStorage", "use-local-storage")(props)

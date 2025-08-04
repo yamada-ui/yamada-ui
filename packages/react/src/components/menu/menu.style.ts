@@ -19,11 +19,10 @@ export const menuStyle = defineComponentSlotStyle({
     },
     item: {
       alignItems: "center",
-      cursor: "pointer",
       display: "flex",
       focusVisibleRing: "none",
       userSelect: "none",
-      _activedescendant: { bg: ["bg.subtle", "bg.muted"] },
+      _activedescendant: { bg: "bg.muted/70" },
       _disabled: { layerStyle: "disabled" },
     },
     label: { fontWeight: "medium" },

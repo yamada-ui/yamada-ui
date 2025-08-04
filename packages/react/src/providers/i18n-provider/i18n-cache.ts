@@ -1,28 +1,28 @@
-interface FormatOptions<T> {
-  options: T extends Intl.NumberFormat
+interface FormatOptions<Y> {
+  options: Y extends Intl.NumberFormat
     ? Intl.NumberFormatOptions
-    : T extends Intl.DateTimeFormat
+    : Y extends Intl.DateTimeFormat
       ? Intl.DateTimeFormatOptions
-      : T extends Intl.RelativeTimeFormat
+      : Y extends Intl.RelativeTimeFormat
         ? Intl.RelativeTimeFormatOptions
-        : T extends Intl.ListFormat
+        : Y extends Intl.ListFormat
           ? Intl.ListFormatOptions
-          : T extends Intl.PluralRules
+          : Y extends Intl.PluralRules
             ? Intl.PluralRulesOptions
-            : T extends Intl.Collator
+            : Y extends Intl.Collator
               ? Intl.CollatorOptions
               : never
 }
 
-export const i18nCache = <T extends abstract new (...args: any) => any>(
-  Instance: T,
+export const i18nCache = <Y extends abstract new (...args: any) => any>(
+  Instance: Y,
 ) => {
-  const formatterCache = new Map<string, T>()
+  const formatterCache = new Map<string, Y>()
 
   return function create(
     locale: string,
-    options?: FormatOptions<InstanceType<T>>["options"],
-  ): InstanceType<T> {
+    options?: FormatOptions<InstanceType<Y>>["options"],
+  ): InstanceType<Y> {
     const key =
       locale +
       (options
@@ -32,7 +32,7 @@ export const i18nCache = <T extends abstract new (...args: any) => any>(
         : "")
 
     if (formatterCache.has(key))
-      return formatterCache.get(key) as InstanceType<T>
+      return formatterCache.get(key) as InstanceType<Y>
 
     // @ts-ignore
     const formatter = new Instance(locale, options)

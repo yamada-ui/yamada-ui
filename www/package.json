@@ -3,12 +3,12 @@
   "version": "2.0.0",
   "private": true,
   "engines": {
-    "node": ">=22.7"
+    "node": ">=22.18"
   },
   "scripts": {
     "clean": "rimraf .next .velite .eslintcache tsconfig.tsbuildinfo node_modules",
-    "dev:content": "cross-env NODE_OPTIONS=\"--experimental-strip-types\" velite --watch",
-    "dev:next": "next dev",
+    "dev:content": "NODE_OPTIONS=\"--experimental-strip-types\" velite --watch",
+    "dev:next": "next dev --turbopack",
     "dev": "run-p dev:*",
     "build:content": "cross-env NODE_OPTIONS=\"--experimental-strip-types\" velite --clean",
     "build:next": "next build",

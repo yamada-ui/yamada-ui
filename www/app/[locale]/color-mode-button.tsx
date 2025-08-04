@@ -14,7 +14,13 @@ export function ColorModeButton({ ...rest }: ColorModeButtonProps) {
     <IconButton
       aria-label={t("colorMode", { colorMode })}
       color="fg.emphasized"
-      icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
+      icon={
+        <>
+          <SunIcon display={["inline", "none"]} />
+          <MoonIcon display={["none", "inline"]} />
+        </>
+      }
+      suppressHydrationWarning
       onClick={toggleColorMode}
       {...rest}
     />

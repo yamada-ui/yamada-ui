@@ -11,8 +11,8 @@ export type FunctionReturningPromise = (...args: any[]) => Promise<any>
  *
  * @see https://yamada-ui.com/hooks/use-async
  */
-export function useAsync<T extends FunctionReturningPromise>(
-  func: T,
+export function useAsync<Y extends FunctionReturningPromise>(
+  func: Y,
   deps: DependencyList = [],
 ) {
   const [state, callback] = useAsyncFunc(func, deps, { loading: true })
@@ -24,7 +24,7 @@ export function useAsync<T extends FunctionReturningPromise>(
   return state
 }
 
-export type AsyncState<T> =
+export type AsyncState<Y> =
   | {
       error: Error
       loading: false
@@ -37,37 +37,37 @@ export type AsyncState<T> =
     }
   | {
       loading: false
-      value: T
+      value: Y
       error?: undefined
     }
   | {
       loading: true
       error?: Error | undefined
-      value?: T
+      value?: Y
     }
 
 export type PromiseType<P extends Promise<any>> =
-  P extends Promise<infer T> ? T : never
+  P extends Promise<infer Y> ? Y : never
 
-type StateFromFunctionReturningPromise<T extends FunctionReturningPromise> =
-  AsyncState<PromiseType<ReturnType<T>>>
+type StateFromFunctionReturningPromise<Y extends FunctionReturningPromise> =
+  AsyncState<PromiseType<ReturnType<Y>>>
 
 export type AsyncFnReturn<
-  T extends FunctionReturningPromise = FunctionReturningPromise,
-> = [StateFromFunctionReturningPromise<T>, T]
+  Y extends FunctionReturningPromise = FunctionReturningPromise,
+> = [StateFromFunctionReturningPromise<Y>, Y]
 
-export function useAsyncFunc<T extends FunctionReturningPromise>(
-  func: T,
+export function useAsyncFunc<Y extends FunctionReturningPromise>(
+  func: Y,
   deps: DependencyList = [],
-  initialState: StateFromFunctionReturningPromise<T> = { loading: false },
-): AsyncFnReturn<T> {
+  initialState: StateFromFunctionReturningPromise<Y> = { loading: false },
+): AsyncFnReturn<Y> {
   const lastCallId = useRef(0)
   const isMounted = useMounted()
   const [state, setState] =
-    useState<StateFromFunctionReturningPromise<T>>(initialState)
+    useState<StateFromFunctionReturningPromise<Y>>(initialState)
 
   const callback = useCallback(
-    (...args: Parameters<T>): ReturnType<T> => {
+    (...args: Parameters<Y>): ReturnType<Y> => {
       const callId = ++lastCallId.current
 
       if (!state.loading)
@@ -86,21 +86,21 @@ export function useAsyncFunc<T extends FunctionReturningPromise>(
 
           return error
         },
-      ) as ReturnType<T>
+      ) as ReturnType<Y>
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     deps,
   )
 
-  return [state, callback as unknown as T]
+  return [state, callback as unknown as Y]
 }
 
-export type AsyncStateRetry<T> = AsyncState<T> & {
+export type AsyncStateRetry<Y> = AsyncState<Y> & {
   retry(): void
 }
 
-export function useAsyncRetry<T>(
-  func: () => Promise<T>,
+export function useAsyncRetry<Y>(
+  func: () => Promise<Y>,
   deps: DependencyList = [],
 ) {
   const [attempt, setAttempt] = useState<number>(0)

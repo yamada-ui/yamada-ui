@@ -60,7 +60,7 @@ interface DefineStyle {
 }
 
 interface DefineModifierStyle {
-  <T extends CSSModifierObject>(value: T): T
+  <Y extends CSSModifierObject>(value: Y): Y
 }
 
 const defineGlobalStyle: DefineStyle = (value) => value
@@ -76,19 +76,19 @@ export const defineStyles = {
 }
 
 interface DefineTokens {
-  <T extends DefineThemeTokens>(value: T): T
+  <Y extends DefineThemeTokens>(value: Y): Y
 }
 
 interface DefineAnimationTokens {
-  <T extends DefineThemeAnimationTokens>(value: T): T
+  <Y extends DefineThemeAnimationTokens>(value: Y): Y
 }
 
 interface DefineBreakpointTokens {
-  <T extends DefineThemeBreakpointTokens>(value: T): T
+  <Y extends DefineThemeBreakpointTokens>(value: Y): Y
 }
 
 interface DefineKeyframeTokens {
-  <T extends DefineThemeKeyframeTokens>(value: T): T
+  <Y extends DefineThemeKeyframeTokens>(value: Y): Y
 }
 
 const defineAnimationTokens: DefineAnimationTokens = (value) => value
@@ -138,17 +138,17 @@ export const defineTokens = {
 interface DefineSemanticTokens extends DefineTokens {}
 
 interface DefineAnimationSemanticTokens {
-  <T extends DefineThemeAnimationTokens<CSSAnimationObject | string>>(
-    value: T,
-  ): T
+  <Y extends DefineThemeAnimationTokens<CSSAnimationObject | string>>(
+    value: Y,
+  ): Y
 }
 
 interface DefineColorSemanticTokens {
-  <T extends DefineThemeColorSemanticTokens>(value: T): T
+  <Y extends DefineThemeColorSemanticTokens>(value: Y): Y
 }
 
 interface DefineColorSchemeSemanticTokens {
-  <T extends DefineThemeColorSchemeSemanticTokens>(value: T): T
+  <Y extends DefineThemeColorSchemeSemanticTokens>(value: Y): Y
 }
 
 const defineAnimationSemanticTokens: DefineAnimationSemanticTokens = (value) =>
@@ -199,13 +199,13 @@ export const defineSemanticTokens = {
 }
 
 interface DefineThemeSchemes {
-  <T extends DefineThemeSchemeTokens>(value: T): T
+  <Y extends DefineThemeSchemeTokens>(value: Y): Y
 }
 
 export const defineThemeSchemes: DefineThemeSchemes = (value) => value
 
 interface DefineTheme {
-  <T extends UsageTheme>(value: T): T
+  <Y extends UsageTheme>(value: Y): Y
 }
 
 export const defineTheme: DefineTheme = (value) => value

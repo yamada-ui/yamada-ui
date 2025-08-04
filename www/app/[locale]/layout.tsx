@@ -11,7 +11,6 @@ import {
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Geist_Mono, Inter } from "next/font/google"
-import { cookies } from "next/headers"
 import { notFound } from "next/navigation"
 import { Footer } from "@/app/[locale]/footer"
 import { Header } from "@/app/[locale]/header"
@@ -70,7 +69,6 @@ interface LayoutProps extends PropsWithChildren {
 
 export default async function Layout({ children, params }: LayoutProps) {
   const { locale } = await params
-  const cookieStore = await cookies()
 
   if (!hasLocale(routing.locales, locale)) notFound()
 
@@ -85,16 +83,11 @@ export default async function Layout({ children, params }: LayoutProps) {
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>
-        <ColorModeScript type="cookie" />
-        <ThemeSchemeScript type="cookie" />
+        <ColorModeScript />
+        <ThemeSchemeScript />
 
         <NextIntlClientProvider>
-          <UIProvider
-            cookie={cookieStore.toString()}
-            locale={locale}
-            storage="cookie"
-            theme={theme}
-          >
+          <UIProvider locale={locale} theme={theme}>
             <Flex alignItems="center" flexDirection="column" minH="100dvh">
               <Flex
                 alignItems="center"

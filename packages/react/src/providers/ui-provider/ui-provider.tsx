@@ -1,5 +1,12 @@
 import type { FC } from "react"
-import type { ColorModeProviderProps, ThemeProviderProps } from "../../core"
+import type {
+  ColorModeProviderProps,
+  ThemeConfig,
+  ThemeProviderProps,
+  UsageTheme,
+} from "../../core"
+import type { DefaultTheme } from "../../theme"
+import type { DeepMerge } from "../../utils"
 import type { I18nProviderProps } from "../i18n-provider"
 import { LoadingProvider } from "../../components/loading"
 import {
@@ -9,6 +16,7 @@ import {
   ThemeProvider,
 } from "../../core"
 import { defaultConfig, defaultTheme } from "../../theme"
+import { merge } from "../../utils"
 import { I18nProvider } from "../i18n-provider"
 
 export interface UIProviderProps
@@ -72,4 +80,12 @@ export const UIProvider: FC<UIProviderProps> = ({
       </I18nProvider>
     </EnvironmentProvider>
   )
+}
+
+export const extendTheme = <Y extends UsageTheme>(theme: Y) => {
+  return merge<DeepMerge<DefaultTheme, Y>>(defaultTheme, theme)
+}
+
+export const extendConfig = (config: ThemeConfig) => {
+  return merge(defaultConfig, config)
 }

@@ -6,7 +6,7 @@ import type { GroupProps } from "../group"
 import type { InputProps } from "./input"
 import type { InputStyle } from "./input.style"
 import { cloneElement, useMemo } from "react"
-import { isSomeElement, useValidChildren } from "../../utils"
+import { isSomeElement, isTruthyDataAttr, useValidChildren } from "../../utils"
 import { useFieldProps } from "../field"
 import { Group } from "../group"
 import { InputPropsContext } from "./input"
@@ -53,36 +53,31 @@ export const InputGroupRoot = ((props: InputGroupRootProps) => {
       }),
     [validChildren],
   )
-
-  const context = useMemo(
+  const sharedContext = useMemo(
     () => ({
       size,
       variant,
-      disabled,
       errorBorderColor,
       focusBorderColor,
-      invalid: props.invalid,
-      readOnly,
-      required,
       ...dataProps,
     }),
-    [
-      size,
-      variant,
+    [size, variant, errorBorderColor, focusBorderColor, dataProps],
+  )
+  const inputContext = useMemo(
+    () => ({
+      ...sharedContext,
       disabled,
-      errorBorderColor,
-      focusBorderColor,
+      invalid: isTruthyDataAttr(sharedContext["data-invalid"]),
       readOnly,
       required,
-      props.invalid,
-      dataProps,
-    ],
+    }),
+    [sharedContext, disabled, readOnly, required],
   )
 
   return (
-    <InputPropsContext value={context}>
-      <InputAddonPropsContext value={context}>
-        <InputElementPropsContext value={context}>
+    <InputPropsContext value={inputContext}>
+      <InputAddonPropsContext value={sharedContext}>
+        <InputElementPropsContext value={sharedContext}>
           <Group attached w="full" {...rest}>
             {cloneChildren}
           </Group>

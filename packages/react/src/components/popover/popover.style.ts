@@ -10,8 +10,8 @@ export const popoverStyle = defineComponentSlotStyle({
       gap: "{gap}",
     },
     content: {
-      bg: ["bg", "bg.subtle"],
-      borderColor: ["border.subtle", "border.muted"],
+      bg: "bg.panel",
+      borderColor: "border.muted",
       borderWidth: "1px",
       boxShadow: "sm",
       display: "flex",

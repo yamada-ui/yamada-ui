@@ -5,7 +5,7 @@ import { useCallback, useRef } from "react"
 import {
   getActiveElement,
   getDocument,
-  getFocusableElements,
+  getFirstFocusableElement,
   isRefObject,
   isSafari,
   useSafeLayoutEffect,
@@ -25,8 +25,8 @@ export interface UseFocusOnShowProps {
  *
  * @see https://yamada-ui.com/hooks/use-focus-on-show
  */
-export const useFocusOnShow = <T extends HTMLElement>(
-  refOrEl: RefObject<null | T> | T,
+export const useFocusOnShow = <Y extends HTMLElement>(
+  refOrEl: RefObject<null | Y> | Y,
   {
     focusTarget: focusRefOrEl,
     preventScroll,
@@ -65,11 +65,11 @@ export const useFocusOnShow = <T extends HTMLElement>(
         focusTarget.focus({ preventScroll })
       })
     } else {
-      const tabbableEls = getFocusableElements(target)
+      const firstFocusable = getFirstFocusableElement(target)
 
-      if (tabbableEls.length > 0) {
+      if (firstFocusable) {
         requestAnimationFrame(() => {
-          tabbableEls[0]?.focus({ preventScroll })
+          firstFocusable.focus({ preventScroll })
         })
       } else {
         requestAnimationFrame(() => {

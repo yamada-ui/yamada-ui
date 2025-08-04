@@ -17,8 +17,6 @@ export const dropzoneStyle = defineComponentSlotStyle({
     },
     root: {
       "& *": { pointerEvents: "none" },
-      "--error-border-color": "colors.border.error",
-      "--focus-border-color": "colorScheme.outline",
       alignItems: "center",
       cursor: "pointer",
       display: "flex",

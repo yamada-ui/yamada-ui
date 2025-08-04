@@ -116,6 +116,20 @@ export const useCombobox = ({
     onOpen: onOpenProp,
   })
 
+  const onActiveDescendant = useCallback(
+    (descendant?: ComboboxDescendant, options?: FocusOptions) => {
+      const target =
+        activedescendant === "trigger" ? triggerRef.current : contentRef.current
+
+      if (!target || !descendant || disabled) return
+
+      target.setAttribute("aria-activedescendant", descendant.id)
+
+      descendants.focus(descendant.node, options)
+    },
+    [activedescendant, descendants, disabled],
+  )
+
   const onClick = useCallback(
     (ev: MouseEvent<HTMLDivElement>) => {
       if (disabled) return
@@ -129,20 +143,6 @@ export const useCombobox = ({
       }
     },
     [disabled, onClose, onOpen, open],
-  )
-
-  const onActiveDescendant = useCallback(
-    (descendant?: ComboboxDescendant) => {
-      const target =
-        activedescendant === "trigger" ? triggerRef.current : contentRef.current
-
-      if (!target || !descendant || disabled) return
-
-      target.setAttribute("aria-activedescendant", descendant.id)
-
-      descendants.focus(descendant.node)
-    },
-    [activedescendant, descendants, disabled],
   )
 
   const onKeyDown = useCallback(
@@ -193,12 +193,13 @@ export const useCombobox = ({
 
   const getTriggerProps: PropGetter = useCallback(
     ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
-      "aria-controls": contentId,
+      "aria-controls": open ? contentId : undefined,
       "aria-disabled": ariaAttr(!interactive),
       "aria-expanded": open,
       "aria-haspopup": role,
       "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
       "data-disabled": dataAttr(disabled),
+      "data-focus": dataAttr(open),
       "data-readonly": dataAttr(readOnly),
       role: "combobox",
       tabIndex: interactive ? 0 : -1,
@@ -229,6 +230,7 @@ export const useCombobox = ({
       role,
       ...props,
       ref: mergeRefs(ref, contentRef),
+      onKeyDown: handlerAll(props.onKeyDown),
     }),
     [ariaLabelledbyProp, contentId, role],
   )
@@ -240,6 +242,7 @@ export const useCombobox = ({
 
   return {
     descendants,
+    interactive,
     open,
     role,
     getContentProps,

@@ -110,7 +110,7 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
 
   const enabledCount = () => enabledValues().length
 
-  const focus = (target?: null | Y) => {
+  const focus = (target?: null | Y, options?: FocusOptions) => {
     if (!target) return
 
     if (isTruthyDataAttr(target.dataset.activedescendant)) return
@@ -123,7 +123,7 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
 
     target.dataset.activedescendant = ""
 
-    target.focus()
+    target.focus(options)
   }
 
   const indexOf = (target?: null | Y) =>

@@ -17,7 +17,7 @@ interface NativeSelectItemWithValue extends NativeSelectSharedItem {
 }
 
 interface NativeSelectItemWithItems extends NativeSelectSharedItem {
-  items?: NativeSelectItemWithValue[]
+  items: NativeSelectItemWithValue[]
 }
 
 export type NativeSelectItem =
@@ -67,15 +67,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
       computedChildren = children
     } else if (items.length) {
       computedChildren = items.map((item, index) => {
-        if ("value" in item) {
-          const { label, ...props } = item
-
-          return cloneElement(<option />, {
-            key: index,
-            children: label,
-            ...props,
-          })
-        } else if ("items" in item) {
+        if ("items" in item) {
           const { items = [], label, ...props } = item
 
           return cloneElement(<optgroup />, {
@@ -88,6 +80,14 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
               }),
             ),
             label,
+            ...props,
+          })
+        } else {
+          const { label, ...props } = item
+
+          return cloneElement(<option />, {
+            key: index,
+            children: label,
             ...props,
           })
         }

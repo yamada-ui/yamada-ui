@@ -175,6 +175,7 @@ export const useMenu = ({
     (props = {}) =>
       getComboboxTriggerProps({
         id: triggerId,
+        "data-focus": undefined,
         "data-trigger": dataAttr(true),
         ...getSubMenuProps(props),
       }),
@@ -185,6 +186,7 @@ export const useMenu = ({
     (props = {}) =>
       getComboboxTriggerProps({
         id: triggerId,
+        "data-focus": undefined,
         "data-trigger": dataAttr(true),
         role: "application",
         ...props,

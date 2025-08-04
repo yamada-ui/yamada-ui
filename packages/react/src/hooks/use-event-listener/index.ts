@@ -53,8 +53,8 @@ export const useEventListeners = () => {
     <Y extends EventType>(
       el: EventTarget,
       ev: Y,
-      listener: any,
-      options: AddEventListenerOptions | boolean,
+      listener: (ev: EventMap[Y]) => void,
+      options?: AddEventListenerOptions | boolean,
     ) => {
       listeners.current.set(listener, { el, ev, options })
 
@@ -71,8 +71,8 @@ export const useEventListeners = () => {
     <Y extends EventType>(
       el: EventTarget,
       ev: Y,
-      listener: any,
-      options: boolean | EventListenerOptions,
+      listener: (ev: EventMap[Y]) => void,
+      options?: boolean | EventListenerOptions,
     ) => {
       el.removeEventListener(
         ev,

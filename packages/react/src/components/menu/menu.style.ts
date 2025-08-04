@@ -63,7 +63,6 @@ export const menuStyle = defineComponentSlotStyle({
     },
     item: {
       alignItems: "center",
-      cursor: "pointer",
       display: "flex",
       focusVisibleRing: "none",
       minH: "{item-height}",

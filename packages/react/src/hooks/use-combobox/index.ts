@@ -69,12 +69,6 @@ export interface UseComboboxProps
   extends HTMLProps,
     Omit<UseDisclosureProps, "timing"> {
   /**
-   * Assign the active descendant to the content or trigger.
-   *
-   * @default 'trigger'
-   */
-  activedescendant?: "content" | "trigger"
-  /**
    * If `true`, the combobox will be disabled.
    *
    * @default false
@@ -94,7 +88,6 @@ export interface UseComboboxProps
 
 export const useCombobox = ({
   "aria-labelledby": ariaLabelledbyProp,
-  activedescendant = "trigger",
   defaultOpen,
   disabled,
   open: openProp,
@@ -117,17 +110,14 @@ export const useCombobox = ({
   })
 
   const onActiveDescendant = useCallback(
-    (descendant?: ComboboxDescendant, options?: FocusOptions) => {
-      const target =
-        activedescendant === "trigger" ? triggerRef.current : contentRef.current
+    (descendant?: ComboboxDescendant) => {
+      if (!triggerRef.current || !descendant || disabled) return
 
-      if (!target || !descendant || disabled) return
+      triggerRef.current.setAttribute("aria-activedescendant", descendant.id)
 
-      target.setAttribute("aria-activedescendant", descendant.id)
-
-      descendants.focus(descendant.node, options)
+      descendants.active(descendant)
     },
-    [activedescendant, descendants, disabled],
+    [descendants, disabled],
   )
 
   const onClick = useCallback(
@@ -199,7 +189,6 @@ export const useCombobox = ({
       "aria-haspopup": role,
       "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
       "data-disabled": dataAttr(disabled),
-      "data-focus": dataAttr(open),
       "data-readonly": dataAttr(readOnly),
       role: "combobox",
       tabIndex: interactive ? 0 : -1,
@@ -286,12 +275,6 @@ export type UseComboboxGroupReturn = ReturnType<typeof useComboboxGroup>
 
 export interface UseComboboxItemProps extends HTMLProps {
   /**
-   * If `true`, the descendant will be disabled.
-   *
-   * @default false
-   */
-  descendantDisabled?: boolean
-  /**
    * If `true`, the item will be disabled.
    *
    * @default false
@@ -310,31 +293,21 @@ export const useComboboxItem = ({
   "aria-disabled": ariaDisabled,
   "data-disabled": dataDisabled,
   disabled = false,
-  descendantDisabled = disabled,
   selected,
   ...rest
 }: UseComboboxItemProps = {}) => {
   const uuid = useId()
   const itemRef = useRef<HTMLDivElement>(null)
-  const {
-    role: rootRole = "listbox",
-    onActiveDescendant,
-    onClose,
-  } = useComboboxContext()
-  const role = rootRole === "menu" ? "menuitem" : "option"
+  const { onActiveDescendant, onClose } = useComboboxContext()
 
   id ??= uuid
 
-  const { descendants, register } = useComboboxDescendant({
-    id,
-    disabled: descendantDisabled,
-  })
+  const { descendants, register } = useComboboxDescendant({ id, disabled })
 
   const onActive = useCallback(() => {
     if (disabled) return
 
-    const index = descendants.indexOf(itemRef.current)
-    const current = descendants.value(index)
+    const current = descendants.value(itemRef.current)
 
     onActiveDescendant(current)
   }, [descendants, disabled, onActiveDescendant])
@@ -376,7 +349,7 @@ export const useComboboxItem = ({
       "aria-selected": selected,
       "data-disabled": dataDisabled ?? dataAttr(disabled),
       "data-selected": dataAttr(selected),
-      role,
+      role: "option",
       tabIndex: -1,
       ...rest,
       ...props,
@@ -391,7 +364,6 @@ export const useComboboxItem = ({
       disabled,
       selected,
       dataDisabled,
-      role,
       rest,
       register,
       onActive,

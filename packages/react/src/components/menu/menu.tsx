@@ -9,11 +9,11 @@ import type {
   ThemeProps,
   WithoutThemeProps,
 } from "../../core"
-import type { UseComboboxGroupProps } from "../../hooks/use-combobox"
 import type { MenuStyle } from "./menu.style"
 import type {
   MenuOptionGroupType,
   MenuOptionGroupValue,
+  UseMenuGroupProps,
   UseMenuItemProps,
   UseMenuOptionGroupProps,
   UseMenuOptionItemProps,
@@ -22,13 +22,6 @@ import type {
 } from "./use-menu"
 import { Fragment, useMemo, useState } from "react"
 import { createSlotComponent, styled } from "../../core"
-import {
-  ComboboxContext,
-  ComboboxDescendantsContext,
-  ComboboxGroupContext,
-  useComboboxGroup,
-  useComboboxGroupContext,
-} from "../../hooks/use-combobox"
 import { cast, handlerAll } from "../../utils"
 import { CheckIcon, ChevronRightIcon, CircleSmallIcon } from "../icon"
 import { Popover, usePopoverProps } from "../popover"
@@ -36,9 +29,13 @@ import { menuStyle } from "./menu.style"
 import {
   MainMenuContext,
   MenuContext,
+  MenuDescendantsContext,
+  MenuGroupContext,
   MenuOptionGroupContext,
   useMenu,
   useMenuContext,
+  useMenuGroup,
+  useMenuGroupContext,
   useMenuItem,
   useMenuOptionGroup,
   useMenuOptionItem,
@@ -148,6 +145,7 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
     onActiveDescendant,
     onClose,
     onCloseRef,
+    onCloseSubMenu,
     onOpen,
     onSelect,
   } = useMenu({ disabled, ...rest })
@@ -182,22 +180,25 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
       updateRef,
     ],
   )
-  const comboboxContext = useMemo(
-    () => ({
-      descendants,
-      role: "menu" as const,
-      onActiveDescendant,
-      onClose,
-    }),
-    [descendants, onActiveDescendant, onClose],
-  )
   const menuContext = useMemo(
     () => ({
       subMenu,
       subMenuDirection,
+      onActiveDescendant,
+      onClose,
+      onCloseSubMenu,
+      onOpen,
       onSelect,
     }),
-    [subMenu, subMenuDirection, onSelect],
+    [
+      onClose,
+      onOpen,
+      onSelect,
+      onActiveDescendant,
+      subMenu,
+      subMenuDirection,
+      onCloseSubMenu,
+    ],
   )
   const mainMenuContext = useMemo(
     () => ({
@@ -226,17 +227,15 @@ export const MenuRoot: FC<MenuRootProps> = (props) => {
 
   return (
     <StyleContext value={styleContext}>
-      <ComboboxDescendantsContext value={descendants}>
-        <ComboboxContext value={comboboxContext}>
-          <MenuContext value={menuContext}>
-            <MainMenuContext value={mainMenuContext}>
-              <ComponentContext value={componentContext}>
-                <Popover.Root {...mergedPopoverProps}>{children}</Popover.Root>
-              </ComponentContext>
-            </MainMenuContext>
-          </MenuContext>
-        </ComboboxContext>
-      </ComboboxDescendantsContext>
+      <MenuDescendantsContext value={descendants}>
+        <MenuContext value={menuContext}>
+          <MainMenuContext value={mainMenuContext}>
+            <ComponentContext value={componentContext}>
+              <Popover.Root {...mergedPopoverProps}>{children}</Popover.Root>
+            </ComponentContext>
+          </MainMenuContext>
+        </MenuContext>
+      </MenuDescendantsContext>
     </StyleContext>
   )
 }
@@ -423,13 +422,13 @@ export interface MenuLabelProps extends HTMLStyledProps<"span"> {}
 export const MenuLabel = withContext<"span", MenuLabelProps>("span", "label")(
   undefined,
   (props) => {
-    const { getLabelProps } = useComboboxGroupContext()
+    const { getLabelProps } = useMenuGroupContext()
 
     return getLabelProps(props)
   },
 )
 
-export interface MenuGroupProps extends UseComboboxGroupProps, HTMLStyledProps {
+export interface MenuGroupProps extends UseMenuGroupProps, HTMLStyledProps {
   /**
    * The label of the group.
    */
@@ -442,16 +441,16 @@ export interface MenuGroupProps extends UseComboboxGroupProps, HTMLStyledProps {
 
 export const MenuGroup = withContext<"div", MenuGroupProps>(
   ({ children, label, labelProps, ...rest }) => {
-    const { getGroupProps, getLabelProps } = useComboboxGroup(rest)
+    const { getGroupProps, getLabelProps } = useMenuGroup(rest)
     const context = useMemo(() => ({ getLabelProps }), [getLabelProps])
 
     return (
-      <ComboboxGroupContext value={context}>
+      <MenuGroupContext value={context}>
         <styled.div {...getGroupProps(rest)}>
           {label ? <MenuLabel {...labelProps}>{label}</MenuLabel> : null}
           {children}
         </styled.div>
-      </ComboboxGroupContext>
+      </MenuGroupContext>
     )
   },
   "group",

@@ -62,10 +62,10 @@ export const avatarStyle = defineComponentSlotStyle({
         },
       },
       root: {
-        layerStyle: "outline",
+        bg: "transparent",
+        borderColor: "transparent",
         _loaded: {
-          bg: "transparent",
-          borderColor: "transparent",
+          layerStyle: "outline",
         },
       },
     },
@@ -77,9 +77,9 @@ export const avatarStyle = defineComponentSlotStyle({
         },
       },
       root: {
-        layerStyle: "solid",
+        bg: "transparent",
         _loaded: {
-          bg: "transparent",
+          layerStyle: "solid",
         },
       },
     },
@@ -91,18 +91,18 @@ export const avatarStyle = defineComponentSlotStyle({
         },
       },
       root: {
-        layerStyle: "subtle",
+        bg: "transparent",
         _loaded: {
-          bg: "transparent",
+          layerStyle: "subtle",
         },
       },
     },
     surface: {
       root: {
-        layerStyle: "surface",
+        bg: "transparent",
+        borderColor: "transparent",
         _loaded: {
-          bg: "transparent",
-          borderColor: "transparent",
+          layerStyle: "surface",
         },
       },
     },

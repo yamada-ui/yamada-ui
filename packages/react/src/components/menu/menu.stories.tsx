@@ -747,18 +747,18 @@ export const CloseOnScroll: Story = () => {
 }
 
 export const InitialFocusRef: Story = () => {
-  const initialFocusRef = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const items = useMemo<Menu.ContentProps["items"]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
-      { ref: initialFocusRef, label: "うちはサスケ", value: "sasuke" },
+      { ref: ref, label: "うちはサスケ", value: "sasuke" },
       { label: "春野サクラ", value: "sakura" },
     ],
     [],
   )
 
   return (
-    <Menu.Root initialFocusRef={initialFocusRef}>
+    <Menu.Root initialFocusRef={ref}>
       <Menu.Trigger>
         <Button>Menu</Button>
       </Menu.Trigger>

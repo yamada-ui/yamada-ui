@@ -302,10 +302,10 @@ export const CloseOnScroll: Story = () => {
 }
 
 export const InitialFocusRef: Story = () => {
-  const initialFocusRef = useRef<HTMLInputElement>(null)
+  const ref = useRef<HTMLInputElement>(null)
 
   return (
-    <Popover.Root initialFocusRef={initialFocusRef}>
+    <Popover.Root initialFocusRef={ref}>
       <Popover.Trigger>
         <Button>Open Profile</Button>
       </Popover.Trigger>
@@ -318,11 +318,7 @@ export const InitialFocusRef: Story = () => {
           </Field.Root>
 
           <Field.Root label="Email address">
-            <Input
-              ref={initialFocusRef}
-              type="email"
-              placeholder="Your email address"
-            />
+            <Input ref={ref} type="email" placeholder="Your email address" />
           </Field.Root>
         </Popover.Body>
       </Popover.Content>

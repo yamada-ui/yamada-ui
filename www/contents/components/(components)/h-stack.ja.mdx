@@ -1,0 +1,54 @@
+---
+title: HStack
+description: "`HStack`は、子要素を水平方向にスタックするために使用されます。"
+storybook: components-stack--horizontal
+source: components/stack
+---
+
+```tsx preview
+<HStack>
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
+</HStack>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { HStack } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { HStack } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { HStack } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<HStack />
+```
+
+### スペースを追加する
+
+```tsx preview
+<HStack>
+  <Box bg="bg.contrast" color="fg.contrast" p="md">
+    Box
+  </Box>
+
+  <Spacer />
+
+  <Box bg="bg.contrast" color="fg.contrast" p="md">
+    Box
+  </Box>
+</HStack>
+```

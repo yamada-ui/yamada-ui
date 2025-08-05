@@ -54,7 +54,7 @@ import { Card } from "@workspace/ui"
 
 ### バリアントを変更する
 
-```tsx
+```tsx preview
 <VStack>
   <For each={["elevated", "outline", "subtle", "solid"]}>
     {(variant, index) => (
@@ -77,7 +77,7 @@ import { Card } from "@workspace/ui"
 
 ### サイズを変更する
 
-```tsx
+```tsx preview
 <VStack>
   <For each={["sm", "md", "normal", "lg"]}>
     {(size, index) => (
@@ -100,7 +100,7 @@ import { Card } from "@workspace/ui"
 
 ### カラースキームを変更する
 
-```tsx
+```tsx preview
 <VStack>
   <For
     each={[
@@ -128,7 +128,7 @@ import { Card } from "@workspace/ui"
 
 ### レイアウトをカスタマイズする
 
-```tsx
+```tsx preview
 <Card maxW="md">
   <Card.Header justifyContent="center">
     <Image
@@ -153,7 +153,7 @@ import { Card } from "@workspace/ui"
 </Card>
 ```
 
-```tsx
+```tsx preview
 <Card
   flexDirection={{ base: "row", md: "column" }}
   overflow="hidden"

@@ -6,4 +6,91 @@ source: components/airy
 style: components/airy/airy.style.ts
 ---
 
+```tsx preview
+<Airy from={<MenuIcon fontSize="2xl" />} to={<XIcon fontSize="2xl" />} />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Airy } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Airy } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Airy } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Airy />
+```
+
+### Change the Duration
+
+To change the duration, set a numerical value (seconds) to `duration`.
+
+```tsx preview
+<Airy
+  duration={0.6}
+  from={<MenuIcon fontSize="2xl" />}
+  to={<XIcon fontSize="2xl" />}
+/>
+```
+
+### Add a Delay
+
+If you want to delay the switch, set a numerical value (seconds) to `delay`.
+
+```tsx preview
+<Airy
+  delay={1}
+  from={<MenuIcon fontSize="2xl" />}
+  to={<XIcon fontSize="2xl" />}
+/>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<Airy
+  disabled
+  from={<MenuIcon fontSize="2xl" />}
+  to={<XIcon fontSize="2xl" />}
+/>
+```
+
+### ReadOnly
+
+To readyOnly, set `readOnly` to `true`.
+
+```tsx preview
+<Airy
+  readOnly
+  from={<MenuIcon fontSize="2xl" />}
+  to={<XIcon fontSize="2xl" />}
+/>
+```
+
+### Control
+
+```tsx preview functional client
+const [value, onChange] = useState<KeyframeIdent>("to")
+
+return (
+  <Airy
+    from={<MenuIcon fontSize="2xl" />}
+    to={<XIcon fontSize="2xl" />}
+    value={value}
+    onChange={onChange}
+  />
+)
+```

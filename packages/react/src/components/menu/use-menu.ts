@@ -1,22 +1,15 @@
 "use client"
 
 import type { KeyboardEvent, MouseEvent, RefObject } from "react"
-import type { PropGetter } from "../../core"
-import type {
-  ComboboxDescendant,
-  ComboboxDescendantProps,
-  UseComboboxItemProps,
-} from "../../hooks/use-combobox"
-import type { Descendants } from "../../hooks/use-descendants"
+import type { HTMLProps, PropGetter } from "../../core"
+import type { Descendant, Descendants } from "../../hooks/use-descendants"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback, useId, useRef } from "react"
-import {
-  useCombobox,
-  useComboboxDescendantRegister,
-  useComboboxItem,
-} from "../../hooks/use-combobox"
 import { useControllableState } from "../../hooks/use-controllable-state"
+import { createDescendants } from "../../hooks/use-descendants"
+import { useDisclosure } from "../../hooks/use-disclosure"
 import {
+  ariaAttr,
   assignRef,
   createContext,
   cx,
@@ -33,19 +26,47 @@ import {
 
 type SubMenuDirection = "end" | "start"
 
+interface MenuDescendantProps {
+  id: string
+}
+type MenuDescendant = Descendant<HTMLDivElement, MenuDescendantProps>
+
+const {
+  DescendantsContext: MenuDescendantsContext,
+  useDescendant: useMenuDescendant,
+  useDescendantRegister: useMenuDescendantRegister,
+  useDescendants: useMenuDescendants,
+} = createDescendants<HTMLDivElement, MenuDescendantProps>()
+
+export { MenuDescendantsContext, useMenuDescendant, useMenuDescendants }
+
 interface MenuContext
-  extends Pick<UseMenuReturn, "onSelect" | "subMenu" | "subMenuDirection"> {}
+  extends Pick<
+    UseMenuReturn,
+    | "onActiveDescendant"
+    | "onClose"
+    | "onCloseSubMenu"
+    | "onOpen"
+    | "onSelect"
+    | "subMenu"
+    | "subMenuDirection"
+  > {}
 
 const [MenuContext, useMenuContext] = createContext<MenuContext>({
   name: "MenuContext",
 })
 
+interface MenuGroupContext extends Pick<UseMenuGroupReturn, "getLabelProps"> {}
+
+const [MenuGroupContext, useMenuGroupContext] = createContext<MenuGroupContext>(
+  {
+    name: "MenuGroupContext",
+  },
+)
+
 interface MainMenuContext {
-  descendants: Descendants<HTMLDivElement, ComboboxDescendantProps>
-  onActiveDescendant: (
-    descendant?: ComboboxDescendant,
-    options?: FocusOptions,
-  ) => void
+  descendants: Descendants<HTMLDivElement, MenuDescendantProps>
+  onActiveDescendant: (descendant?: MenuDescendant) => void
   onCloseRef: RefObject<() => void>
   onSelect: (value?: string, closeOnSelect?: boolean) => void
   closeOnSelect?: boolean
@@ -70,9 +91,11 @@ const [MenuOptionGroupContext, useMenuOptionGroupContext] =
 export {
   MainMenuContext,
   MenuContext,
+  MenuGroupContext,
   MenuOptionGroupContext,
   useMainMenuContext,
   useMenuContext,
+  useMenuGroupContext,
   useMenuOptionGroupContext,
 }
 
@@ -112,29 +135,33 @@ export const useMenu = ({
   onSelect: onSelectProp,
 }: UseMenuProps = {}) => {
   const triggerId = useId()
+  const contentId = useId()
+  const descendants = useMenuDescendants()
   const updateRef = useRef<() => void>(noop)
   const onCloseRef = useRef<() => void>(noop)
-  const {
-    descendants,
-    open,
-    getContentProps: getComboboxContentProps,
-    getSeparatorProps,
-    getTriggerProps: getComboboxTriggerProps,
-    onActiveDescendant,
-    onClose,
-    onOpen,
-  } = useCombobox({
-    activedescendant: "content",
+  const contentRef = useRef<HTMLDivElement>(null)
+  const { open, onClose, onOpen } = useDisclosure({
     defaultOpen,
-    disabled,
     open: openProp,
-    role: "menu",
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })
+  const onCloseSubMenu = useCallback(() => onCloseRef.current(), [])
+  const onActiveDescendant = useCallback(
+    (
+      descendant?: MenuDescendant,
+      options: FocusOptions = { preventScroll: true },
+    ) => {
+      if (!contentRef.current || !descendant || disabled) return
+
+      contentRef.current.setAttribute("aria-activedescendant", descendant.id)
+
+      descendants.active(descendant, options)
+    },
+    [descendants, disabled],
+  )
   const { mainCloseOnSelect, subMenu, getSubMenuProps, onMainSelect } =
     useSubMenu({
-      id: triggerId,
       descendants,
       disabled,
       open,
@@ -160,6 +187,21 @@ export const useMenu = ({
     [closeOnSelect, disabled, onClose, onMainSelect, onSelectProp],
   )
 
+  const onClick = useCallback(
+    (ev: MouseEvent<HTMLDivElement>) => {
+      if (disabled) return
+
+      ev.preventDefault()
+
+      if (!open) {
+        onOpen()
+      } else {
+        onClose()
+      }
+    },
+    [disabled, onClose, onOpen, open],
+  )
+
   const onContextMenu = useCallback(
     (ev: MouseEvent<HTMLDivElement>) => {
       if (disabled) return
@@ -171,43 +213,100 @@ export const useMenu = ({
     [disabled, onOpen],
   )
 
+  const onKeyDown = useCallback(
+    (ev: KeyboardEvent<HTMLDivElement>) => {
+      if (disabled) return
+
+      runKeyAction(ev, {
+        ArrowDown: () => {
+          onOpen()
+
+          setTimeout(() => {
+            const descendant = descendants.enabledFirstValue()
+
+            onActiveDescendant(descendant)
+          })
+        },
+        ArrowUp: () => {
+          onOpen()
+
+          setTimeout(() => {
+            const descendant = descendants.enabledLastValue()
+
+            onActiveDescendant(descendant)
+          })
+        },
+        Enter: () => {
+          onOpen()
+
+          setTimeout(() => {
+            const descendant = descendants.enabledFirstValue()
+
+            onActiveDescendant(descendant)
+          })
+        },
+        Space: () => {
+          onOpen()
+
+          setTimeout(() => {
+            const descendant = descendants.enabledFirstValue()
+
+            onActiveDescendant(descendant)
+          })
+        },
+      })
+    },
+    [descendants, disabled, onActiveDescendant, onOpen],
+  )
+
   const getTriggerProps: PropGetter = useCallback(
-    (props = {}) =>
-      getComboboxTriggerProps({
+    (props = {}) => ({
+      ...getSubMenuProps({
         id: triggerId,
-        "data-focus": undefined,
+        "aria-controls": open ? contentId : undefined,
+        "aria-disabled": ariaAttr(disabled),
+        "aria-expanded": open,
+        "aria-haspopup": "menu",
         "data-trigger": dataAttr(true),
-        ...getSubMenuProps(props),
+        role: "button",
+        tabIndex: disabled ? -1 : 0,
+        ...props,
+        onClick: handlerAll(props.onClick, onClick),
+        onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
       }),
-    [getComboboxTriggerProps, getSubMenuProps, triggerId],
+    }),
+    [contentId, disabled, getSubMenuProps, onClick, onKeyDown, open, triggerId],
   )
 
   const getContextTriggerProps: PropGetter = useCallback(
-    (props = {}) =>
-      getComboboxTriggerProps({
-        id: triggerId,
-        "data-focus": undefined,
-        "data-trigger": dataAttr(true),
-        role: "application",
-        ...props,
-        onClick: handlerAll(props.onClick, (ev) => {
-          ev.defaultPrevented = true
-        }),
-        onContextMenu: handlerAll(props.onContextMenu, onContextMenu),
-        onKeyDown: handlerAll(props.onKeyDown, (ev) => {
-          ev.defaultPrevented = true
-        }),
-      }),
-    [getComboboxTriggerProps, onContextMenu, triggerId],
+    (props = {}) => ({
+      id: triggerId,
+      "aria-controls": open ? contentId : undefined,
+      "aria-disabled": ariaAttr(disabled),
+      "aria-expanded": open,
+      "aria-haspopup": "menu",
+      "data-trigger": dataAttr(true),
+      role: "application",
+      ...props,
+      onContextMenu: handlerAll(props.onContextMenu, onContextMenu),
+    }),
+    [contentId, disabled, onContextMenu, open, triggerId],
   )
 
   const getContentProps: PropGetter = useCallback(
-    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) =>
-      getComboboxContentProps({
-        "aria-labelledby": cx(ariaLabelledby, triggerId),
-        ...props,
-      }),
-    [getComboboxContentProps, triggerId],
+    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
+      id: contentId,
+      "aria-labelledby": cx(ariaLabelledby, triggerId),
+      role: "menu",
+      ...props,
+      ref: mergeRefs(ref, contentRef),
+    }),
+    [contentId, triggerId],
+  )
+
+  const getSeparatorProps: PropGetter = useCallback(
+    (props) => ({ role: "separator", ...props }),
+    [],
   )
 
   return {
@@ -224,6 +323,7 @@ export const useMenu = ({
     onActiveDescendant,
     onClose,
     onCloseRef,
+    onCloseSubMenu,
     onOpen,
     onSelect,
   }
@@ -233,18 +333,13 @@ export type UseMenuReturn = ReturnType<typeof useMenu>
 
 export interface UseSubMenuProps
   extends Omit<Required<UseDisclosureProps>, "defaultOpen" | "timing"> {
-  id: string
-  descendants: Descendants<HTMLDivElement, ComboboxDescendantProps>
-  onActiveDescendant: (
-    descendant?: ComboboxDescendant,
-    options?: FocusOptions,
-  ) => void
+  descendants: Descendants<HTMLDivElement, MenuDescendantProps>
+  onActiveDescendant: (descendant?: MenuDescendant) => void
   disabled?: boolean
   subMenuDirection?: SubMenuDirection
 }
 
 export const useSubMenu = ({
-  id,
   descendants,
   disabled = false,
   open,
@@ -253,6 +348,7 @@ export const useSubMenu = ({
   onClose,
   onOpen,
 }: UseSubMenuProps) => {
+  const uuid = useId()
   const {
     closeOnSelect: mainCloseOnSelect,
     descendants: mainDescendants,
@@ -261,7 +357,7 @@ export const useSubMenu = ({
     onSelect: onMainSelect,
   } = useMainMenuContext() ?? {}
   const subMenu = !!mainDescendants && !!onActiveMainDescendant
-  const createRegister = useComboboxDescendantRegister(mainDescendants)
+  const createRegister = useMenuDescendantRegister(mainDescendants)
   const triggerRef = useRef<HTMLDivElement>(null)
 
   const dataDisabled = useCallback((node?: HTMLDivElement | null) => {
@@ -303,10 +399,9 @@ export const useSubMenu = ({
     (ev: MouseEvent<HTMLDivElement>) => {
       if (!subMenu || disabled || dataDisabled() || ariaDisabled()) return
 
-      const index = descendants.indexOf(triggerRef.current)
-      const current = descendants.value(index)
+      const descendant = descendants.value(triggerRef.current)
 
-      onActiveMainDescendant(current)
+      onActiveMainDescendant(descendant)
 
       ev.defaultPrevented = true
     },
@@ -331,32 +426,34 @@ export const useSubMenu = ({
 
       runKeyAction(ev, {
         ArrowDown: () => {
-          const index = currentDescendant.indexOf(triggerRef.current)
-          const next = currentDescendant.enabledNextValue(index)
+          const descendant = currentDescendant.enabledNextValue(
+            triggerRef.current,
+          )
 
-          onActiveCurrentDescendant(next)
+          onActiveCurrentDescendant(descendant)
 
           ev.defaultPrevented = true
         },
         ArrowUp: () => {
-          const index = currentDescendant.indexOf(triggerRef.current)
-          const prev = currentDescendant.enabledPrevValue(index)
+          const descendant = currentDescendant.enabledPrevValue(
+            triggerRef.current,
+          )
 
-          onActiveCurrentDescendant(prev)
+          onActiveCurrentDescendant(descendant)
 
           ev.defaultPrevented = true
         },
         End: () => {
-          const last = currentDescendant.enabledLastValue()
+          const descendant = currentDescendant.enabledLastValue()
 
-          onActiveCurrentDescendant(last)
+          onActiveCurrentDescendant(descendant)
 
           ev.defaultPrevented = true
         },
         Home: () => {
-          const first = currentDescendant.enabledFirstValue()
+          const descendant = currentDescendant.enabledFirstValue()
 
-          onActiveCurrentDescendant(first)
+          onActiveCurrentDescendant(descendant)
 
           ev.defaultPrevented = true
         },
@@ -389,19 +486,15 @@ export const useSubMenu = ({
   assignRef(onCloseRef, onClose)
 
   const getSubMenuProps: PropGetter = useCallback(
-    ({ ref, ...props } = {}) => {
+    ({ id = uuid, ref, ...props } = {}) => {
+      const getDisabled = (node: HTMLDivElement) =>
+        disabled || dataDisabled(node) || ariaDisabled(node)
+      const register = createRegister({ id, disabled: getDisabled })
+
       return {
         role: subMenu ? "menuitem" : "button",
         ...props,
-        ref: mergeRefs(
-          ref,
-          triggerRef,
-          createRegister({
-            id,
-            disabled: (node) =>
-              disabled || dataDisabled(node) || ariaDisabled(node),
-          }),
-        ),
+        ref: mergeRefs(ref, triggerRef, register),
         onClick: handlerAll(onClick, props.onClick),
         onKeyDown: handlerAll(onKeyDown, props.onKeyDown),
         onMouseEnter: handlerAll(onMouseEnter, props.onMouseEnter),
@@ -409,9 +502,9 @@ export const useSubMenu = ({
       }
     },
     [
+      uuid,
       subMenu,
       createRegister,
-      id,
       onClick,
       onKeyDown,
       onMouseEnter,
@@ -427,11 +520,45 @@ export const useSubMenu = ({
 
 export type UseSubMenuReturn = ReturnType<typeof useSubMenu>
 
-export interface UseMenuItemProps extends UseComboboxItemProps {
+export interface UseMenuGroupProps extends HTMLProps {}
+
+export const useMenuGroup = ({
+  "aria-labelledby": ariaLabelledbyProp,
+  ...rest
+}: UseMenuGroupProps) => {
+  const labelId = useId()
+
+  const getGroupProps: PropGetter = useCallback(
+    ({ "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
+      "aria-labelledby": cx(ariaLabelledbyProp, ariaLabelledby, labelId),
+      role: "group",
+      ...rest,
+      ...props,
+    }),
+    [ariaLabelledbyProp, labelId, rest],
+  )
+
+  const getLabelProps: PropGetter<"span"> = useCallback(
+    (props) => ({ id: labelId, role: "presentation", ...props }),
+    [labelId],
+  )
+
+  return { getGroupProps, getLabelProps }
+}
+
+export type UseMenuGroupReturn = ReturnType<typeof useMenuGroup>
+
+export interface UseMenuItemProps extends HTMLProps {
   /**
    * If `true`, the menu item will be closed when selected.
    */
   closeOnSelect?: boolean
+  /**
+   * If `true`, the menu item will be disabled.
+   *
+   * @default false
+   */
+  disabled?: boolean
   /**
    * The value of the menu item.
    */
@@ -439,6 +566,9 @@ export interface UseMenuItemProps extends UseComboboxItemProps {
 }
 
 export const useMenuItem = ({
+  id,
+  "aria-disabled": ariaDisabled,
+  "data-disabled": dataDisabled,
   "data-trigger": dataTrigger,
   closeOnSelect,
   disabled = false,
@@ -446,39 +576,73 @@ export const useMenuItem = ({
   ...rest
 }: UseMenuItemProps) => {
   const trigger = isTruthyDataAttr(dataTrigger)
-  const { subMenu, subMenuDirection, onSelect } = useMenuContext()
-  const { onCloseRef } = useMainMenuContext() ?? {}
-  const subMenuTrigger = subMenu && trigger
   const {
-    descendants,
-    getIndicatorProps,
-    getItemProps: getComboboxItemProps,
+    subMenu,
+    subMenuDirection,
+    onActiveDescendant,
     onClose,
-  } = useComboboxItem({
-    ...rest,
-    descendantDisabled: disabled || subMenuTrigger,
-    disabled,
+    onCloseSubMenu,
+    onSelect,
+  } = useMenuContext()
+  const uuid = useId()
+  const itemRef = useRef<HTMLDivElement>(null)
+  const subMenuTrigger = subMenu && trigger
+
+  id ??= uuid
+
+  const { descendants, register } = useMenuDescendant({
+    id,
+    disabled: disabled || subMenuTrigger,
   })
+
+  const onActive = useCallback(() => {
+    if (disabled) return
+
+    const descendant = descendants.value(itemRef.current)
+
+    onActiveDescendant(descendant)
+  }, [descendants, disabled, onActiveDescendant])
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
       runKeyAction(ev, {
+        ArrowDown: () => {
+          const descendant = descendants.enabledNextValue(itemRef.current)
+
+          onActiveDescendant(descendant)
+        },
+        ArrowUp: () => {
+          const descendant = descendants.enabledPrevValue(itemRef.current)
+
+          onActiveDescendant(descendant)
+        },
+        End: () => {
+          const descendant = descendants.enabledLastValue()
+
+          onActiveDescendant(descendant)
+        },
         Enter: () => onSelect(value, closeOnSelect),
+        Home: () => {
+          const descendant = descendants.enabledFirstValue()
+
+          onActiveDescendant(descendant)
+        },
         Space: () => onSelect(value, closeOnSelect),
         [subMenuDirection === "end" ? "ArrowLeft" : "ArrowRight"]: () => {
           if (!subMenu) return
 
           onClose()
 
-          const trigger = descendants.firstValue()
+          const descendant = descendants.firstValue()
 
-          trigger?.node.focus()
+          descendant?.node.focus()
         },
       })
     },
     [
       closeOnSelect,
       descendants,
+      onActiveDescendant,
       onClose,
       onSelect,
       subMenu,
@@ -488,33 +652,43 @@ export const useMenuItem = ({
   )
 
   const getItemProps: PropGetter = useCallback(
-    (props = {}) =>
-      getComboboxItemProps({
-        ...props,
-        onClick: handlerAll(props.onClick, rest.onClick, () =>
-          !disabled && !subMenuTrigger ? onSelect(value, closeOnSelect) : noop,
-        ),
-        onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
-        onMouseMove: handlerAll(props.onMouseMove, rest.onMouseMove, () =>
-          onCloseRef?.current(),
-        ),
+    ({ ref, ...props } = {}) => ({
+      id,
+      "aria-disabled": ariaDisabled ?? ariaAttr(disabled),
+      "data-disabled": dataDisabled ?? dataAttr(disabled),
+      role: "menuitem",
+      tabIndex: -1,
+      ...rest,
+      ...props,
+      ref: mergeRefs(ref, rest.ref, itemRef, register),
+      onClick: handlerAll(props.onClick, rest.onClick, () =>
+        onSelect(value, closeOnSelect),
+      ),
+      onFocus: handlerAll(props.onFocus, rest.onFocus, onActive),
+      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
+      onMouseMove: handlerAll(props.onMouseMove, rest.onMouseMove, () => {
+        onCloseSubMenu()
+        onActive()
       }),
+    }),
     [
-      rest,
-      subMenuTrigger,
-      getComboboxItemProps,
-      onKeyDown,
+      id,
+      ariaDisabled,
       disabled,
+      dataDisabled,
+      rest,
+      register,
+      onActive,
+      onKeyDown,
       onSelect,
       value,
       closeOnSelect,
-      onCloseRef,
+      onCloseSubMenu,
     ],
   )
 
   return {
     subMenuTrigger,
-    getIndicatorProps,
     getItemProps,
   }
 }
@@ -610,6 +784,7 @@ export const useMenuOptionItem = ({
   ...rest
 }: UseMenuOptionItemProps) => {
   const { type, value: selectedValue, onChange } = useMenuOptionGroupContext()
+  const { getItemProps } = useMenuItem({ disabled, value, ...rest })
   const radio = type === "radio" && isString(selectedValue)
   const checkbox = type === "checkbox" && isArray(selectedValue)
   const selected = radio
@@ -617,12 +792,14 @@ export const useMenuOptionItem = ({
     : checkbox
       ? selectedValue.includes(value)
       : false
-  const { getIndicatorProps, getItemProps } = useMenuItem({
-    disabled,
-    selected,
-    value,
-    ...rest,
-  })
+
+  const getIndicatorProps: PropGetter = useCallback(
+    ({ style, ...props } = {}) => ({
+      style: { opacity: selected ? 1 : 0, ...style },
+      ...props,
+    }),
+    [selected],
+  )
 
   const getOptionItemProps: PropGetter = useCallback(
     (props = {}) =>

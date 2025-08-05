@@ -14,6 +14,8 @@ export const globalStyle = defineStyles.globalStyle({
   },
   body: {
     colorScheme: "mono",
+    "--error-border-color": "colors.border.error",
+    "--focus-border-color": "colorScheme.outline",
     bg: "bg",
     color: "fg",
     fontFamily: "body",

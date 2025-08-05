@@ -1,0 +1,66 @@
+---
+title: ZStack
+description: "`ZStack`は、子要素を奥行き方向にスタックするために使用されます。"
+storybook: components-stack--depth
+source: components/stack
+---
+
+```tsx preview
+<ZStack>
+  {["info", "success", "warning", "error"].map((bg, index) => (
+    <Box key={index} bg={bg} color="white" p="md">
+      Box
+    </Box>
+  ))}
+</ZStack>
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { ZStack } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ZStack } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ZStack } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<ZStack />
+```
+
+### 方向を変更する
+
+方向を変更する場合は、`direction`に`start`, `end-end`などを設定します。
+
+```tsx preview
+<ZStack direction="start">
+  {["info", "success", "warning", "error"].map((bg, index) => (
+    <Box key={index} bg={bg} color="white" p="md">
+      Box
+    </Box>
+  ))}
+</ZStack>
+```
+
+### 方向を反転させる
+
+方向を反転させる場合は、`reverse`を`true`に設定します。
+
+```tsx preview
+<ZStack direction="center-start" reverse>
+  {["info", "success", "warning", "error"].map((bg, index) => (
+    <Box key={index} bg={bg} color="white" p="md">
+      Box
+    </Box>
+  ))}
+</ZStack>
+```

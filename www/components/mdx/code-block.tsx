@@ -7,7 +7,6 @@ import { langConditions } from "@/utils/i18n"
 import { CodePreview } from "../code-preview"
 import { Callout } from "./callout"
 import { ClientOnly } from "./client-only"
-import { ServerOnly } from "./server-only"
 
 export interface CodeBlockProps extends Omit<GridProps, "children"> {
   lang?: string
@@ -44,19 +43,7 @@ export function CodeBlock({
 
           <Tabs.Panel index={0} rounded="l2">
             <Box borderWidth="1px" p="{space}" rounded="l2">
-              {client ? (
-                <ClientOnly
-                  lang={lang}
-                  code={children}
-                  functional={functional}
-                />
-              ) : (
-                <ServerOnly
-                  lang={lang}
-                  code={children}
-                  functional={functional}
-                />
-              )}
+              <ClientOnly lang={lang} code={children} functional={functional} />
             </Box>
           </Tabs.Panel>
           <Tabs.Panel index={1} tabIndex={-1}>

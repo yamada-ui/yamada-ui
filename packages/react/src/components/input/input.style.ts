@@ -20,8 +20,6 @@ export const getInputHeightStyle = (height?: string, key?: string) =>
 
 export const inputStyle = defineComponentStyle({
   base: {
-    "--error-border-color": "colors.border.error",
-    "--focus-border-color": "colorScheme.outline",
     appearance: "none",
     minW: "0",
     position: "relative",

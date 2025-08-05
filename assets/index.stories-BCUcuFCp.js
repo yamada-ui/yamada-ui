@@ -1,0 +1,4 @@
+import{ar as m,r,j as l,T as u}from"./iframe-DiGnZRjA.js";import"./preload-helper-D9Z9MdNV.js";const d=(e,a=!1)=>{const{getWindow:t}=m(),i=r.useCallback(o=>{const c=t()?.matchMedia(e);return c?.addEventListener("change",o),()=>{c?.removeEventListener("change",o)}},[t,e]),n=r.useCallback(()=>t()?.matchMedia(e).matches??a,[t,e,a]);return r.useSyncExternalStore(i,n,n)},h={title:"Hooks / useMediaQuery"},s=()=>{const e=d("(min-width: 1280px)");return l.jsx(u,{children:e?"larger than 1280px":"smaller than 1280px"})};s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`() => {
+  const flg = useMediaQuery("(min-width: 1280px)");
+  return <Text>{flg ? "larger than 1280px" : "smaller than 1280px"}</Text>;
+}`,...s.parameters?.docs?.source}}};const g=["Basic"];export{s as Basic,g as __namedExportsOrder,h as default};

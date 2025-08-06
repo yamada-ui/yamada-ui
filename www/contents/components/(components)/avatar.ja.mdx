@@ -6,4 +6,156 @@ source: components/avatar
 style: components/avatar/avatar.style.ts
 ---
 
+```tsx preview
+<Avatar
+  name="Hirotomo Yamada"
+  src="https://avatars.githubusercontent.com/u/84060430?v=4"
+/>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Avatar } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Avatar } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Avatar } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Avatar />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant, key) => (
+      <Avatar variant={variant} name="Hirotomo Yamada" key={key} />
+    )}
+  </For>
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, key) => <Avatar size={size} name="Hirotomo Yamada" key={key} />}
+  </For>
+</Wrap>
+```
+
+### 形を変える
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["circle", "square", "rounded"]}>
+    {(size, key) => <Avatar shape={size} name="Hirotomo Yamada" key={key} />}
+  </For>
+</Wrap>
+```
+
+### イニシャルを表示する
+
+`name`に文字列を設定すると、イニシャルのアイコンを表示します。
+
+```tsx preview
+<Avatar name="Hirotomo Yamada" />
+```
+
+### 画像を表示する
+
+アバターに画像を表示したい場合は、`src`にパスを設定します。
+
+```tsx preview
+<Avatar src="https://avatars.githubusercontent.com/u/84060430?v=4" />
+```
+
+### フォールバック
+
+`src`の読み込みが失敗した場合は、2つのフォールバックがあります。
+
+- `name`がある場合: イニシャルのアイコンを表示します。
+- `name`がない場合: デフォルトのアバターのアイコンを使用します。
+
+```tsx preview
+<Wrap gap="md">
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <Avatar name="Hirotomo Yamada" src="https://not-found.com" />
+  <Avatar src="https://not-found.com" />
+</Wrap>
+```
+
+### フォールバックをカスタマイズする
+
+フォールバックのアイコンや背景色をカスタマイズした例です。
+
+```tsx preview
+<Wrap gap="md">
+  <Avatar bg="warning" src="https://not-found.com" />
+  <Avatar icon={<GhostIcon />} src="https://not-found.com" />
+</Wrap>
+```
+
+### ランダムな色を使う
+
+```tsx preview functional
+const randomColorScheme = (name: string) => {
+  const index = name.charCodeAt(0) % COLOR_SCHEMES.length
+  return COLOR_SCHEMES[index]
+}
+
+return (
+  <Wrap gap="md">
+    <For each={["Hirotomo Yamada", "Koiso Kenji", "Shinohara Natsuki"]}>
+      {(name, index) => (
+        <Avatar key={index} name={name} colorScheme={randomColorScheme(name)} />
+      )}
+    </For>
+  </Wrap>
+)
+```
+
+### アバターグループ
+
+表示するアバターの数を制御する場合は、`max`に数値を指定します。指定された数以上のアバターが存在する場合は、切り詰めて残りのアバターを`+X`のように表示されます。
+
+```tsx preview
+<AvatarGroup max={3}>
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+</AvatarGroup>
+```

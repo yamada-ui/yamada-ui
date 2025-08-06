@@ -16,6 +16,8 @@ export function remarkCodeBlock(): ReturnType<Plugin<[], Root>> {
         !node.meta.includes("functional=false")
       const client =
         node.meta.includes("client") && !node.meta.includes("client=false")
+      const iframe =
+        node.meta.includes("iframe") && !node.meta.includes("iframe=false")
 
       if (!title && node.meta.includes("title=")) return
 
@@ -24,6 +26,7 @@ export function remarkCodeBlock(): ReturnType<Plugin<[], Root>> {
         ...node.data.hProperties,
         client,
         functional,
+        iframe,
         preview,
         title,
       }

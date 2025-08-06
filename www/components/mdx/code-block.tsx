@@ -7,6 +7,7 @@ import { langConditions } from "@/utils/i18n"
 import { CodePreview } from "../code-preview"
 import { Callout } from "./callout"
 import { ClientOnly } from "./client-only"
+import { Iframe } from "./iframe"
 
 export interface CodeBlockProps extends Omit<GridProps, "children"> {
   lang?: string
@@ -14,6 +15,7 @@ export interface CodeBlockProps extends Omit<GridProps, "children"> {
   client?: boolean
   code?: string
   functional?: boolean
+  iframe?: boolean
   preview?: boolean
   title?: string
 }
@@ -24,6 +26,7 @@ export function CodeBlock({
   children = code,
   client = false,
   functional = false,
+  iframe = false,
   preview = false,
   title,
   ...rest
@@ -42,9 +45,25 @@ export function CodeBlock({
           </Tabs.List>
 
           <Tabs.Panel index={0} rounded="l2">
-            <Box borderWidth="1px" p="{space}" rounded="l2">
-              <ClientOnly lang={lang} code={children} functional={functional} />
-            </Box>
+            {iframe ? (
+              <Iframe>
+                <Box h="full" overflow="auto" p="lg" w="full">
+                  <ClientOnly
+                    lang={lang}
+                    code={children}
+                    functional={functional}
+                  />
+                </Box>
+              </Iframe>
+            ) : (
+              <Box borderWidth="1px" p="{space}" rounded="l2">
+                <ClientOnly
+                  lang={lang}
+                  code={children}
+                  functional={functional}
+                />
+              </Box>
+            )}
           </Tabs.Panel>
           <Tabs.Panel index={1} tabIndex={-1}>
             <Pre lang={lang}>{children}</Pre>

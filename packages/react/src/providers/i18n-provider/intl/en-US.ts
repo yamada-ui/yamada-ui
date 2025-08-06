@@ -50,6 +50,9 @@ export default {
     "Loading...": "Loading...",
     "{value} percent": "{value} percent",
   },
+  select: {
+    "Clear value": "Clear value",
+  },
   slider: {
     "Slider thumb": "Slider thumb",
   },

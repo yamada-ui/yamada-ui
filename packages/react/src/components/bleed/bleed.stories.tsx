@@ -65,7 +65,7 @@ export const Full: Story = () => {
   return (
     <Center w="full">
       <VStack gap="lg" maxW="xl">
-        <Bleed blockStart="md" inline="full">
+        <Bleed blockStart="lg" inline="full">
           <Image
             src="https://hokuto-no-ken.jp/wp/wp-content/themes/hokuto_cms_40th/images/main_vs_bg_new.jpg"
             alt="北斗の拳"

@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
-import type { FieldProps } from "../field/field"
+import type { FieldProps } from "../field"
 import { cloneElement, useCallback, useMemo } from "react"
 import { ariaAttr, handlerAll, mergeRefs } from "../../utils"
 import { useFieldProps } from "../field"
@@ -68,27 +68,27 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
     } else if (items.length) {
       computedChildren = items.map((item, index) => {
         if ("items" in item) {
-          const { items = [], label, ...props } = item
+          const { items = [], label, ...rest } = item
 
           return cloneElement(<optgroup />, {
             key: index,
-            children: items.map(({ label, ...props }, index) =>
+            children: items.map(({ label, ...rest }, index) =>
               cloneElement(<option />, {
                 key: index,
                 children: label,
-                ...props,
+                ...rest,
               }),
             ),
             label,
-            ...props,
+            ...rest,
           })
         } else {
-          const { label, ...props } = item
+          const { label, ...rest } = item
 
           return cloneElement(<option />, {
             key: index,
             children: label,
-            ...props,
+            ...rest,
           })
         }
       })

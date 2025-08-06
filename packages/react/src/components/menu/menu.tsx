@@ -298,6 +298,14 @@ export const MenuAnchor = withContext<"div", MenuAnchorProps>(
 
 export interface MenuContentProps extends Popover.ContentProps {
   /**
+   * The footer of the menu.
+   */
+  footer?: ReactNode
+  /**
+   * The header of the menu.
+   */
+  header?: ReactNode
+  /**
    * If provided, generate elements based on items.
    */
   items?: (
@@ -307,115 +315,157 @@ export interface MenuContentProps extends Popover.ContentProps {
     | MenuItemWithSeparator
     | MenuItemWithValue
   )[]
+  /**
+   * Props for the footer component.
+   */
+  footerProps?: MenuFooterProps
+  /**
+   * Props for the header component.
+   */
+  headerProps?: MenuHeaderProps
 }
 
 export const MenuContent = withContext<"div", MenuContentProps>(
   Popover.Content,
   "content",
-)(undefined, ({ children, items = [], portalProps, ...rest }) => {
-  const { subMenu } = useMenuContext()
-  const { getContentProps } = useComponentContext()
-  const computedChildren = useMemo(() => {
-    if (children) return children
+)(
+  undefined,
+  ({
+    children,
+    footer,
+    header,
+    items = [],
+    footerProps,
+    headerProps,
+    portalProps,
+    ...rest
+  }) => {
+    const { subMenu } = useMenuContext()
+    const { getContentProps } = useComponentContext()
+    const computedChildren = useMemo(() => {
+      if (children) return children
 
-    return items.map((props, index) => {
-      if ("type" in props) {
-        if (props.type === "radio") {
-          const {
-            type,
-            hasSeparator = true,
-            hasEndSeparator = hasSeparator,
-            hasStartSeparator = hasSeparator,
-            items = [],
-            ...rest
-          } = props
+      return (
+        <>
+          {header ? <MenuHeader {...headerProps}>{header}</MenuHeader> : null}
 
-          return (
-            <Fragment key={index}>
-              {hasStartSeparator ? <MenuSeparator /> : null}
+          {items.map((props, index) => {
+            if ("type" in props) {
+              if (props.type === "radio") {
+                const {
+                  type,
+                  hasSeparator = true,
+                  hasEndSeparator = hasSeparator,
+                  hasStartSeparator = hasSeparator,
+                  items = [],
+                  ...rest
+                } = props
 
-              <MenuOptionGroup type={type} {...rest}>
-                {items.map(({ label, ...rest }, index) => (
-                  <MenuOptionItem key={index} {...rest}>
-                    {label}
-                  </MenuOptionItem>
-                ))}
-              </MenuOptionGroup>
+                return (
+                  <Fragment key={index}>
+                    {hasStartSeparator ? <MenuSeparator /> : null}
 
-              {hasEndSeparator ? <MenuSeparator /> : null}
-            </Fragment>
-          )
-        } else if (props.type === "checkbox") {
-          const {
-            type,
-            hasSeparator = true,
-            hasEndSeparator = hasSeparator,
-            hasStartSeparator = hasSeparator,
-            items = [],
-            ...rest
-          } = props
+                    <MenuOptionGroup type={type} {...rest}>
+                      {items.map(({ label, ...rest }, index) => (
+                        <MenuOptionItem key={index} {...rest}>
+                          {label}
+                        </MenuOptionItem>
+                      ))}
+                    </MenuOptionGroup>
 
-          return (
-            <Fragment key={index}>
-              {hasStartSeparator ? <MenuSeparator /> : null}
+                    {hasEndSeparator ? <MenuSeparator /> : null}
+                  </Fragment>
+                )
+              } else if (props.type === "checkbox") {
+                const {
+                  type,
+                  hasSeparator = true,
+                  hasEndSeparator = hasSeparator,
+                  hasStartSeparator = hasSeparator,
+                  items = [],
+                  ...rest
+                } = props
 
-              <MenuOptionGroup type={type} {...rest}>
-                {items.map(({ label, ...rest }, index) => (
-                  <MenuOptionItem key={index} {...rest}>
-                    {label}
-                  </MenuOptionItem>
-                ))}
-              </MenuOptionGroup>
+                return (
+                  <Fragment key={index}>
+                    {hasStartSeparator ? <MenuSeparator /> : null}
 
-              {hasEndSeparator ? <MenuSeparator /> : null}
-            </Fragment>
-          )
-        } else {
-          return <MenuSeparator key={index} />
-        }
-      } else if ("items" in props) {
-        const {
-          hasSeparator = true,
-          hasEndSeparator = hasSeparator,
-          hasStartSeparator = hasSeparator,
-          items = [],
-          ...rest
-        } = props
+                    <MenuOptionGroup type={type} {...rest}>
+                      {items.map(({ label, ...rest }, index) => (
+                        <MenuOptionItem key={index} {...rest}>
+                          {label}
+                        </MenuOptionItem>
+                      ))}
+                    </MenuOptionGroup>
 
-        return (
-          <Fragment key={index}>
-            {hasStartSeparator ? <MenuSeparator /> : null}
+                    {hasEndSeparator ? <MenuSeparator /> : null}
+                  </Fragment>
+                )
+              } else {
+                return <MenuSeparator key={index} />
+              }
+            } else if ("items" in props) {
+              const {
+                hasSeparator = true,
+                hasEndSeparator = hasSeparator,
+                hasStartSeparator = hasSeparator,
+                items = [],
+                ...rest
+              } = props
 
-            <MenuGroup {...rest}>
-              {items.map(({ label, ...rest }, index) => (
+              return (
+                <Fragment key={index}>
+                  {hasStartSeparator ? <MenuSeparator /> : null}
+
+                  <MenuGroup {...rest}>
+                    {items.map(({ label, ...rest }, index) => (
+                      <MenuItem key={index} {...rest}>
+                        {label}
+                      </MenuItem>
+                    ))}
+                  </MenuGroup>
+
+                  {hasEndSeparator ? <MenuSeparator /> : null}
+                </Fragment>
+              )
+            } else if ("value" in props) {
+              const { label, ...rest } = props
+
+              return (
                 <MenuItem key={index} {...rest}>
                   {label}
                 </MenuItem>
-              ))}
-            </MenuGroup>
+              )
+            }
+          })}
 
-            {hasEndSeparator ? <MenuSeparator /> : null}
-          </Fragment>
-        )
-      } else if ("value" in props) {
-        const { label, ...rest } = props
+          {footer ? <MenuFooter {...footerProps}>{footer}</MenuFooter> : null}
+        </>
+      )
+    }, [children, footer, footerProps, header, headerProps, items])
 
-        return (
-          <MenuItem key={index} {...rest}>
-            {label}
-          </MenuItem>
-        )
-      }
-    })
-  }, [children, items])
+    return {
+      ...getContentProps(
+        cast<HTMLProps>({ ...rest, children: computedChildren }),
+      ),
+      portalProps: subMenu ? { ...portalProps, disabled: true } : portalProps,
+    }
+  },
+)
 
-  return {
-    ...getContentProps(
-      cast<HTMLProps>({ ...rest, children: computedChildren }),
-    ),
-    portalProps: subMenu ? { ...portalProps, disabled: true } : portalProps,
-  }
-})
+export interface MenuHeaderProps extends HTMLStyledProps {}
+
+export const MenuHeader = withContext<"div", MenuHeaderProps>(
+  "div",
+  "header",
+)({ "data-header": "" })
+
+export interface MenuFooterProps extends HTMLStyledProps {}
+
+export const MenuFooter = withContext<"div", MenuFooterProps>(
+  "div",
+  "footer",
+)({ "data-footer": "" })
 
 export interface MenuLabelProps extends HTMLStyledProps<"span"> {}
 
@@ -533,7 +583,12 @@ export const MenuOptionItem = withContext<"div", MenuOptionItemProps>(
     return (
       <styled.div {...getOptionItemProps()}>
         <MenuIndicator {...getIndicatorProps()}>
-          {icon || (type === "radio" ? <CircleSmallIcon /> : <CheckIcon />)}
+          {icon ||
+            (type === "radio" ? (
+              <CircleSmallIcon fill="currentColor" />
+            ) : (
+              <CheckIcon />
+            ))}
         </MenuIndicator>
         {children}
       </styled.div>

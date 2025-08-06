@@ -64,6 +64,7 @@ export type Descendant<
 > = DescendantProps<Y, M> & {
   index: number
   node: Y
+  recurred?: boolean
 }
 
 const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
@@ -121,9 +122,9 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
 
     if (isTruthyDataAttr(target.dataset.activedescendant)) return
 
-    const values = enabledValues()
+    const descendants = values()
 
-    values.forEach(({ node }) => {
+    descendants.forEach(({ node }) => {
       delete node.dataset.activedescendant
     })
 
@@ -142,10 +143,17 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
     }
   }
 
-  const enabledIndexOf = (target?: null | Y) =>
-    target == null
-      ? -1
-      : enabledValues().findIndex(({ node }) => node.isSameNode(target))
+  const enabledIndexOf = (target?: Descendant<Y, M> | null | Y) => {
+    if (!target) return -1
+
+    if (target instanceof Node) {
+      return enabledValues().findIndex(({ node }) => node.isSameNode(target))
+    } else {
+      return enabledValues().findIndex(({ node }) =>
+        node.isSameNode(target.node),
+      )
+    }
+  }
 
   const values = () =>
     Array.from(descendants.values()).sort((a, b) => a.index - b.index)
@@ -179,54 +187,96 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
     indexOrNode: Descendant<Y, M> | null | number | Y,
     loop = true,
   ) => {
-    const index = isNumber(indexOrNode) ? indexOrNode : indexOf(indexOrNode)
-    const prev = getPrevIndex(index, count() - 1, loop)
+    if (!count()) return undefined
 
-    return value(prev)
+    const currentIndex = isNumber(indexOrNode)
+      ? indexOrNode
+      : indexOf(indexOrNode)
+
+    if (currentIndex === -1) return undefined
+
+    const prevIndex = getPrevIndex(currentIndex, count() - 1, loop)
+
+    return value(prevIndex)
   }
 
   const enabledPrevValue = (
     indexOrNode: Descendant<Y, M> | null | number | Y,
     loop = true,
   ) => {
-    const index = isNumber(indexOrNode) ? indexOrNode : indexOf(indexOrNode)
-    const target = value(index)
+    if (!enabledCount()) return undefined
 
-    if (!target) return
+    let index = isNumber(indexOrNode) ? indexOrNode : indexOf(indexOrNode)
+    let enabledValue = null
+    let recurred = false
 
-    const enabledIndex = enabledIndexOf(target.node)
-    const prevEnabledIndex = getPrevIndex(
-      enabledIndex,
-      enabledCount() - 1,
-      loop,
-    )
+    while (enabledValue == null) {
+      index--
 
-    return enabledValue(prevEnabledIndex)
+      if (loop && index < 0) {
+        index = count() - 1
+        recurred = true
+      }
+
+      const descendant = value(index)
+
+      enabledValue =
+        descendant && !runIfFn(descendant.disabled, descendant.node)
+          ? descendant
+          : null
+    }
+
+    if (recurred) enabledValue.recurred = recurred
+
+    return enabledValue
   }
 
   const nextValue = (
     indexOrNode: Descendant<Y, M> | null | number | Y,
     loop = true,
   ) => {
-    const index = isNumber(indexOrNode) ? indexOrNode : indexOf(indexOrNode)
-    const next = getNextIndex(index, count(), loop)
+    if (!count()) return undefined
 
-    return value(next)
+    const currentIndex = isNumber(indexOrNode)
+      ? indexOrNode
+      : indexOf(indexOrNode)
+
+    if (currentIndex === -1) return undefined
+
+    const nextIndex = getNextIndex(currentIndex, count(), loop)
+
+    return value(nextIndex)
   }
 
   const enabledNextValue = (
     indexOrNode: Descendant<Y, M> | null | number | Y,
     loop = true,
   ) => {
-    const index = isNumber(indexOrNode) ? indexOrNode : indexOf(indexOrNode)
-    const target = value(index)
+    if (!enabledCount()) return undefined
 
-    if (!target) return
+    let index = isNumber(indexOrNode) ? indexOrNode : indexOf(indexOrNode)
+    let enabledValue = null
+    let recurred = false
 
-    const enabledIndex = enabledIndexOf(target.node)
-    const nextEnabledIndex = getNextIndex(enabledIndex, enabledCount(), loop)
+    while (enabledValue == null) {
+      index++
 
-    return enabledValue(nextEnabledIndex)
+      if (loop && index >= count()) {
+        index = 0
+        recurred = true
+      }
+
+      const descendant = value(index)
+
+      enabledValue =
+        descendant && !runIfFn(descendant.disabled, descendant.node)
+          ? descendant
+          : null
+    }
+
+    if (recurred) enabledValue.recurred = recurred
+
+    return enabledValue
   }
 
   return {

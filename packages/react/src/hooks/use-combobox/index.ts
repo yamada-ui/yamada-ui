@@ -1,10 +1,12 @@
 "use client"
 
 import type { KeyboardEvent, MouseEvent } from "react"
-import type { HTMLProps, PropGetter } from "../../core"
+import type { HTMLProps, PropGetter, SimpleDirection } from "../../core"
 import type { Descendant } from "../../hooks/use-descendants"
 import type { UseDisclosureProps } from "../../hooks/use-disclosure"
 import { useCallback, useId, useRef } from "react"
+import scrollIntoView from "scroll-into-view-if-needed"
+import { useEnvironment } from "../../core"
 import { createDescendants } from "../../hooks/use-descendants"
 import { useDisclosure } from "../../hooks/use-disclosure"
 import {
@@ -13,12 +15,16 @@ import {
   cx,
   dataAttr,
   handlerAll,
+  isUndefined,
   mergeRefs,
   runKeyAction,
+  useUpdateEffect,
 } from "../../utils"
 
 export interface ComboboxDescendantProps {
   id: string
+  closeOnSelect?: boolean
+  value?: string
 }
 export type ComboboxDescendant = Descendant<
   HTMLDivElement,
@@ -41,10 +47,9 @@ export {
 
 interface ComboboxContext
   extends Pick<
-      UseComboboxReturn,
-      "descendants" | "onActiveDescendant" | "onClose"
-    >,
-    Pick<UseComboboxItemProps, "role"> {}
+    UseComboboxReturn,
+    "onActiveDescendant" | "onClose" | "onSelect"
+  > {}
 
 const [ComboboxContext, useComboboxContext] = createContext<ComboboxContext>({
   name: "ComboboxContext",
@@ -66,8 +71,14 @@ export {
 }
 
 export interface UseComboboxProps
-  extends HTMLProps,
+  extends Omit<HTMLProps, "onChange">,
     Omit<UseDisclosureProps, "timing"> {
+  /**
+   * If `true`, the list element will be closed when value is selected.
+   *
+   * @default true
+   */
+  closeOnSelect?: boolean
   /**
    * If `true`, the combobox will be disabled.
    *
@@ -75,28 +86,35 @@ export interface UseComboboxProps
    */
   disabled?: boolean
   /**
+   * The value to focus on when the combobox is opened.
+   */
+  initialFocusValue?: string
+  /**
    * If `true`, the combobox will be readonly.
    *
    * @default false
    */
   readOnly?: boolean
   /**
-   * The role of the combobox popup.
+   * The callback invoked when value is selected.
    */
-  role?: "dialog" | "grid" | "listbox" | "menu" | "tree"
+  onChange?: (value: string) => void
 }
 
 export const useCombobox = ({
   "aria-labelledby": ariaLabelledbyProp,
+  closeOnSelect: closeOnSelectProp = true,
   defaultOpen,
   disabled,
+  initialFocusValue,
   open: openProp,
   readOnly,
-  role = "listbox",
+  onChange: onChangeProp,
   onClose: onCloseProp,
   onOpen: onOpenProp,
   ...rest
 }: UseComboboxProps = {}) => {
+  const { getWindow } = useEnvironment()
   const interactive = !(readOnly || disabled)
   const triggerRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -108,6 +126,45 @@ export const useCombobox = ({
     onClose: onCloseProp,
     onOpen: onOpenProp,
   })
+  const activeDescendant = useRef<ComboboxDescendant | null>(null)
+
+  const onSelect = useCallback(
+    (value?: string, closeOnSelect = closeOnSelectProp) => {
+      triggerRef.current?.focus()
+
+      if (!interactive || isUndefined(value)) return
+
+      onChangeProp?.(value)
+
+      if (!closeOnSelect) return
+
+      onClose()
+    },
+    [closeOnSelectProp, interactive, onChangeProp, onClose],
+  )
+
+  const onScrollIntoView = useCallback(
+    (descendant?: ComboboxDescendant, block: SimpleDirection = "start") => {
+      if (!contentRef.current || !descendant) return
+
+      const style = getWindow()?.getComputedStyle(contentRef.current)
+      const padding =
+        block === "start" ? style?.paddingBlockStart : style?.paddingBlockEnd
+      const value = parseInt(padding ?? "0px")
+
+      scrollIntoView(descendant.node, {
+        behavior: (actions) =>
+          actions.forEach(({ el, top }) => {
+            el.scrollTop = block === "start" ? top - value : top + value
+          }),
+        block,
+        boundary: contentRef.current,
+        inline: "nearest",
+        scrollMode: "if-needed",
+      })
+    },
+    [getWindow],
+  )
 
   const onActiveDescendant = useCallback(
     (descendant?: ComboboxDescendant) => {
@@ -115,9 +172,27 @@ export const useCombobox = ({
 
       triggerRef.current.setAttribute("aria-activedescendant", descendant.id)
 
+      activeDescendant.current = descendant
+
       descendants.active(descendant)
     },
     [descendants, disabled],
+  )
+
+  const onOpenWithActiveDescendant = useCallback(
+    (getFallbackDescendant: () => ComboboxDescendant | undefined) => {
+      onOpen()
+
+      setTimeout(() => {
+        const values = descendants.values()
+        const descendant = values.find(
+          ({ value }) => initialFocusValue === value,
+        )
+
+        onActiveDescendant(descendant ?? getFallbackDescendant())
+      })
+    },
+    [descendants, initialFocusValue, onActiveDescendant, onOpen],
   )
 
   const onClick = useCallback(
@@ -127,12 +202,12 @@ export const useCombobox = ({
       ev.preventDefault()
 
       if (!open) {
-        onOpen()
+        onOpenWithActiveDescendant(() => descendants.enabledFirstValue())
       } else {
         onClose()
       }
     },
-    [disabled, onClose, onOpen, open],
+    [descendants, disabled, onClose, onOpenWithActiveDescendant, open],
   )
 
   const onKeyDown = useCallback(
@@ -141,52 +216,120 @@ export const useCombobox = ({
 
       runKeyAction(ev, {
         ArrowDown: () => {
-          onOpen()
+          if (!open) {
+            onOpenWithActiveDescendant(() => {
+              const descendant = descendants.enabledFirstValue()
 
-          setTimeout(() => {
-            const descendant = descendants.enabledFirstValue()
+              onScrollIntoView(descendant)
+
+              return descendant
+            })
+          } else if (activeDescendant.current) {
+            const descendant = descendants.enabledNextValue(
+              activeDescendant.current,
+            )
 
             onActiveDescendant(descendant)
-          })
+
+            onScrollIntoView(descendant, descendant?.recurred ? "start" : "end")
+          }
         },
         ArrowUp: () => {
-          onOpen()
+          if (!open) {
+            onOpenWithActiveDescendant(() => {
+              const descendant = descendants.enabledLastValue()
 
-          setTimeout(() => {
-            const descendant = descendants.enabledLastValue()
+              onScrollIntoView(descendant, "end")
+
+              return descendant
+            })
+          } else if (activeDescendant.current) {
+            const descendant = descendants.enabledPrevValue(
+              activeDescendant.current,
+            )
 
             onActiveDescendant(descendant)
-          })
+
+            onScrollIntoView(descendant, descendant?.recurred ? "end" : "start")
+          }
+        },
+        End: () => {
+          if (!open) return
+
+          const descendant = descendants.enabledLastValue()
+
+          onActiveDescendant(descendant)
+
+          onScrollIntoView(descendant, "end")
         },
         Enter: () => {
-          onOpen()
+          if (!open) {
+            onOpenWithActiveDescendant(() => {
+              const descendant = descendants.enabledFirstValue()
 
-          setTimeout(() => {
-            const descendant = descendants.enabledFirstValue()
+              onScrollIntoView(descendant)
 
-            onActiveDescendant(descendant)
-          })
+              return descendant
+            })
+          } else {
+            if (!activeDescendant.current) return
+
+            const { closeOnSelect, value } = activeDescendant.current
+
+            onSelect(value, closeOnSelect)
+          }
+        },
+        Home: () => {
+          if (!open) return
+
+          const descendant = descendants.enabledFirstValue()
+
+          onActiveDescendant(descendant)
+
+          onScrollIntoView(descendant)
         },
         Space: () => {
-          onOpen()
+          if (!open) {
+            onOpenWithActiveDescendant(() => {
+              const descendant = descendants.enabledFirstValue()
 
-          setTimeout(() => {
-            const descendant = descendants.enabledFirstValue()
+              onScrollIntoView(descendant)
 
-            onActiveDescendant(descendant)
-          })
+              return descendant
+            })
+          } else {
+            if (!activeDescendant.current) return
+
+            const { closeOnSelect, value } = activeDescendant.current
+
+            onSelect(value, closeOnSelect)
+          }
         },
       })
     },
-    [descendants, disabled, onActiveDescendant, onOpen],
+    [
+      disabled,
+      open,
+      onOpenWithActiveDescendant,
+      descendants,
+      onScrollIntoView,
+      onActiveDescendant,
+      onSelect,
+    ],
   )
+
+  useUpdateEffect(() => {
+    if (open) return
+
+    activeDescendant.current = null
+  }, [open])
 
   const getTriggerProps: PropGetter = useCallback(
     ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
       "aria-controls": open ? contentId : undefined,
       "aria-disabled": ariaAttr(!interactive),
       "aria-expanded": open,
-      "aria-haspopup": role,
+      "aria-haspopup": "listbox",
       "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
       "data-disabled": dataAttr(disabled),
       "data-readonly": dataAttr(readOnly),
@@ -202,7 +345,6 @@ export const useCombobox = ({
       contentId,
       interactive,
       open,
-      role,
       ariaLabelledbyProp,
       disabled,
       readOnly,
@@ -213,15 +355,14 @@ export const useCombobox = ({
   )
 
   const getContentProps: PropGetter = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
+    ({ ref, ...props } = {}) => ({
       id: contentId,
-      "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
-      role,
+      role: "listbox",
       ...props,
       ref: mergeRefs(ref, contentRef),
       onKeyDown: handlerAll(props.onKeyDown),
     }),
-    [ariaLabelledbyProp, contentId, role],
+    [contentId],
   )
 
   const getSeparatorProps: PropGetter = useCallback(
@@ -230,16 +371,18 @@ export const useCombobox = ({
   )
 
   return {
+    activeDescendant,
     descendants,
     interactive,
     open,
-    role,
     getContentProps,
     getSeparatorProps,
     getTriggerProps,
     onActiveDescendant,
     onClose,
     onOpen,
+    onScrollIntoView,
+    onSelect,
   }
 }
 
@@ -275,6 +418,10 @@ export type UseComboboxGroupReturn = ReturnType<typeof useComboboxGroup>
 
 export interface UseComboboxItemProps extends HTMLProps {
   /**
+   * If `true`, the item will be closed when selected.
+   */
+  closeOnSelect?: boolean
+  /**
    * If `true`, the item will be disabled.
    *
    * @default false
@@ -282,27 +429,36 @@ export interface UseComboboxItemProps extends HTMLProps {
   disabled?: boolean
   /**
    * If `true`, the item will be selected.
-   *
-   * @default false
    */
   selected?: boolean
+  /**
+   * The value of the item.
+   */
+  value?: string
 }
 
 export const useComboboxItem = ({
   id,
   "aria-disabled": ariaDisabled,
   "data-disabled": dataDisabled,
+  closeOnSelect,
   disabled = false,
-  selected,
+  selected = false,
+  value,
   ...rest
 }: UseComboboxItemProps = {}) => {
   const uuid = useId()
   const itemRef = useRef<HTMLDivElement>(null)
-  const { onActiveDescendant, onClose } = useComboboxContext()
+  const { onActiveDescendant, onClose, onSelect } = useComboboxContext()
 
   id ??= uuid
 
-  const { descendants, register } = useComboboxDescendant({ id, disabled })
+  const { descendants, register } = useComboboxDescendant({
+    id,
+    closeOnSelect,
+    disabled,
+    value,
+  })
 
   const onActive = useCallback(() => {
     if (disabled) return
@@ -312,34 +468,15 @@ export const useComboboxItem = ({
     onActiveDescendant(current)
   }, [descendants, disabled, onActiveDescendant])
 
-  const onKeyDown = useCallback(
-    (ev: KeyboardEvent<HTMLDivElement>) => {
-      runKeyAction(ev, {
-        ArrowDown: () => {
-          const index = descendants.indexOf(itemRef.current)
-          const next = descendants.enabledNextValue(index)
+  const onClick = useCallback(
+    (ev: MouseEvent<HTMLDivElement>) => {
+      ev.preventDefault()
 
-          onActiveDescendant(next)
-        },
-        ArrowUp: () => {
-          const index = descendants.indexOf(itemRef.current)
-          const prev = descendants.enabledPrevValue(index)
+      if (disabled) return
 
-          onActiveDescendant(prev)
-        },
-        End: () => {
-          const last = descendants.enabledLastValue()
-
-          onActiveDescendant(last)
-        },
-        Home: () => {
-          const first = descendants.enabledFirstValue()
-
-          onActiveDescendant(first)
-        },
-      })
+      onSelect(value, closeOnSelect)
     },
-    [descendants, onActiveDescendant],
+    [closeOnSelect, disabled, onSelect, value],
   )
 
   const getItemProps: PropGetter = useCallback(
@@ -349,13 +486,13 @@ export const useComboboxItem = ({
       "aria-selected": selected,
       "data-disabled": dataDisabled ?? dataAttr(disabled),
       "data-selected": dataAttr(selected),
+      "data-value": value,
       role: "option",
       tabIndex: -1,
       ...rest,
       ...props,
       ref: mergeRefs(ref, rest.ref, itemRef, register),
-      onFocus: handlerAll(props.onFocus, rest.onFocus, onActive),
-      onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
+      onClick: handlerAll(props.onClick, rest.onClick, onClick),
       onMouseMove: handlerAll(props.onMouseMove, rest.onMouseMove, onActive),
     }),
     [
@@ -364,10 +501,11 @@ export const useComboboxItem = ({
       disabled,
       selected,
       dataDisabled,
+      value,
       rest,
       register,
+      onClick,
       onActive,
-      onKeyDown,
     ],
   )
 

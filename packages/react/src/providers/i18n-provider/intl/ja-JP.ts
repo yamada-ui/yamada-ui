@@ -50,6 +50,9 @@ export default {
     "Loading...": "読み込み中...",
     "{value} percent": "{value}パーセント",
   },
+  select: {
+    "Clear value": "値を消去する",
+  },
   slider: {
     "Slider thumb": "スライダーのつまみ",
   },

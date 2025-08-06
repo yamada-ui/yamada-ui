@@ -37,8 +37,8 @@ export const inputStyle = defineComponentStyle({
     filled: {
       bg: "bg.panel",
       border: "1px solid transparent",
-      focusRing: "inside",
       focusRingColor: "{focus-border-color}",
+      focusVisibleRing: "inside",
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",
@@ -63,16 +63,16 @@ export const inputStyle = defineComponentStyle({
     },
     outline: {
       border: "1px solid {colorScheme.muted}",
-      focusRing: "inside",
       focusRingColor: "{focus-border-color}",
+      focusVisibleRing: "inside",
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",
       },
     },
     plain: {
-      focusRing: "inside",
       focusRingColor: "{focus-border-color}",
+      focusVisibleRing: "inside",
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",

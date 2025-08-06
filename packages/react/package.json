@@ -83,7 +83,8 @@
     "react-focus-lock": "^2.13.6",
     "react-remove-scroll": "^2.7.1",
     "react-resizable-panels": "^3.0.4",
-    "recharts": "^3.1.0"
+    "recharts": "^3.1.0",
+    "scroll-into-view-if-needed": "^3.1.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",

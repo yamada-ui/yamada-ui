@@ -5,7 +5,7 @@ import { nativeSelectStyle } from "../native-select"
 export const selectStyle = defineComponentSlotStyle({
   base: {
     ...nativeSelectStyle.base,
-    content: menuStyle.base?.content,
+    content: { ...menuStyle.base?.content, maxH: "xs" },
     field: {
       ...nativeSelectStyle.base?.field,
       alignItems: "center",

@@ -64,6 +64,7 @@ export type Descendant<
 > = DescendantProps<Y, M> & {
   index: number
   node: Y
+  recurred?: boolean
 }
 
 const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
@@ -207,11 +208,15 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
 
     let index = isNumber(indexOrNode) ? indexOrNode : indexOf(indexOrNode)
     let enabledValue = null
+    let recurred = false
 
     while (enabledValue == null) {
       index--
 
-      if (loop && index < 0) index = count() - 1
+      if (loop && index < 0) {
+        index = count() - 1
+        recurred = true
+      }
 
       const descendant = value(index)
 
@@ -220,6 +225,8 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
           ? descendant
           : null
     }
+
+    if (recurred) enabledValue.recurred = recurred
 
     return enabledValue
   }
@@ -249,11 +256,15 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
 
     let index = isNumber(indexOrNode) ? indexOrNode : indexOf(indexOrNode)
     let enabledValue = null
+    let recurred = false
 
     while (enabledValue == null) {
       index++
 
-      if (loop && index >= count()) index = 0
+      if (loop && index >= count()) {
+        index = 0
+        recurred = true
+      }
 
       const descendant = value(index)
 
@@ -262,6 +273,8 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
           ? descendant
           : null
     }
+
+    if (recurred) enabledValue.recurred = recurred
 
     return enabledValue
   }

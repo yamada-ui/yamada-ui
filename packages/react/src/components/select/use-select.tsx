@@ -52,11 +52,11 @@ interface SelectSharedItem extends Omit<HTMLProps, "children" | "value"> {
   label: ReactNode
 }
 
-interface SelectItemWithValue extends SelectSharedItem {
+export interface SelectItemWithValue extends SelectSharedItem {
   value?: string
 }
 
-interface SelectItemWithItems extends SelectSharedItem {
+export interface SelectItemWithItems extends SelectSharedItem {
   items: SelectItemWithValue[]
 }
 

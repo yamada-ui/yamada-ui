@@ -89,6 +89,10 @@ export interface SelectRootProps<Y extends string | string[] = string>
    */
   iconProps?: SelectIconProps
   /**
+   * Props for placeholder element.
+   */
+  placeholderProps?: Omit<SelectOptionProps, "children" | "value">
+  /**
    * Props for root element.
    */
   rootProps?: InputGroup.RootProps
@@ -132,6 +136,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
         contentProps,
         elementProps,
         iconProps,
+        placeholderProps,
         rootProps,
         ...rest
       },
@@ -210,7 +215,11 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
         return (
           <>
             {placeholder ? (
-              <SelectOption hidden={!placeholderInOptions} value="">
+              <SelectOption
+                {...placeholderProps}
+                hidden={!placeholderInOptions}
+                value=""
+              >
                 {placeholder}
               </SelectOption>
             ) : null}
@@ -242,7 +251,13 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
           )
         }
       })
-    }, [children, computedItems, placeholder, placeholderInOptions])
+    }, [
+      children,
+      computedItems,
+      placeholder,
+      placeholderInOptions,
+      placeholderProps,
+    ])
     const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
     const comboboxContext = useMemo(
       () => ({ onActiveDescendant, onClose, onSelect }),

@@ -16,5 +16,7 @@ export type {
 } from "./select"
 export type {
   SelectItem as Item,
+  SelectItemWithItems as ItemWithItems,
+  SelectItemWithValue as ItemWithValue,
   SelectRenderProps as RenderProps,
 } from "./use-select"

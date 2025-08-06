@@ -12,6 +12,8 @@ import { For } from "../for"
 import { ChevronsDownIcon, UserIcon } from "../icon"
 import { InputGroup } from "../input"
 import { VStack } from "../stack"
+import { Tag } from "../tag"
+import { Text } from "../text"
 
 type Story = StoryFn<typeof Select.Root>
 
@@ -771,6 +773,64 @@ export const CustomIcon: Story = () => {
         iconProps={{ children: <ChevronsDownIcon /> }}
       />
     </>
+  )
+}
+
+export const CustomOptionIcon: Story = () => {
+  const items = useMemo<Select.ItemWithValue[]>(
+    () => [
+      { label: "木ノ下和也", value: "木ノ下和也" },
+      { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+      { label: "七海麻美", value: "七海麻美" },
+      { label: "更科瑠夏", value: "更科瑠夏" },
+      { label: "桜沢墨", value: "桜沢墨" },
+      { label: "八重森みに", value: "八重森みに" },
+    ],
+    [],
+  )
+
+  return (
+    <Select.Root
+      placeholder="Select a character"
+      placeholderProps={{ icon: <UserIcon /> }}
+    >
+      {items.map(({ label, value }) => (
+        <Select.Option key={value} icon={<UserIcon />} value={value}>
+          {label}
+        </Select.Option>
+      ))}
+    </Select.Root>
+  )
+}
+
+export const CustomRender: Story = () => {
+  const items = useMemo<Select.Item[]>(
+    () => [
+      { label: "木ノ下和也", value: "木ノ下和也" },
+      { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+      { label: "七海麻美", value: "七海麻美" },
+      { label: "更科瑠夏", value: "更科瑠夏" },
+      { label: "桜沢墨", value: "桜沢墨" },
+      { label: "八重森みに", value: "八重森みに" },
+    ],
+    [],
+  )
+
+  return (
+    <Select.Root
+      items={items}
+      multiple
+      placeholder="Select a character"
+      render={({ label, value }) =>
+        value === "" ? (
+          <Text data-placeholder>{label}</Text>
+        ) : (
+          <Tag size="sm" _notLast={{ me: "1" }}>
+            {label}
+          </Tag>
+        )
+      }
+    />
   )
 }
 

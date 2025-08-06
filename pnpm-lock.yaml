@@ -317,6 +317,9 @@ importers:
       recharts:
         specifier: ^3.1.0
         version: 3.1.0(@types/react@19.1.9)(react-dom@19.1.1)(react-is@19.1.1)(react@19.1.1)(redux@5.0.1)
+      scroll-into-view-if-needed:
+        specifier: ^3.1.0
+        version: 3.1.0
     devDependencies:
       '@faker-js/faker':
         specifier: ^9.9.0

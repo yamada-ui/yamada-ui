@@ -45,7 +45,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <>
-      <Box flex="1">
+      <Box minW="0" w="full">
         <Header {...doc} />
 
         <MDXContent code={doc.code} />

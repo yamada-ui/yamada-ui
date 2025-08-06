@@ -6,4 +6,70 @@ source: components/badge
 style: components/badge/badge.style.ts
 ---
 
+```tsx preview
+<Badge>Badge</Badge>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Badge } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Badge } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Badge } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Badge />
+```
+
+### Change Variant
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant, index) => (
+      <Badge key={index} variant={variant}>
+        {variant}
+      </Badge>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Size
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <Badge key={index} size={size}>
+        {size}
+      </Badge>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Badge key={index} colorScheme={colorScheme}>
+        {colorScheme}
+      </Badge>
+    )}
+  </For>
+</Wrap>
+```

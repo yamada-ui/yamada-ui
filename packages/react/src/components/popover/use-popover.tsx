@@ -229,7 +229,6 @@ export const usePopover = ({
       "aria-disabled": ariaAttr(disabled),
       "aria-expanded": open,
       "aria-haspopup": "dialog",
-      "data-disabled": dataAttr(disabled),
       role: "button",
       ...props,
       ref: mergeRefs(ref, triggerRef, (node) => {

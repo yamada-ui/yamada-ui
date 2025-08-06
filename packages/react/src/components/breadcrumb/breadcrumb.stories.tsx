@@ -149,7 +149,12 @@ export const CustomEllipsis: Story = () => {
           return (
             <Menu.Root>
               <Menu.Trigger>
-                <Breadcrumb.Ellipsis cursor="pointer" />
+                <Breadcrumb.Ellipsis
+                  cursor="pointer"
+                  focusVisibleRing="outline"
+                  outline="none"
+                  rounded="l1"
+                />
               </Menu.Trigger>
 
               <Menu.Content>
@@ -171,7 +176,12 @@ export const CustomEllipsis: Story = () => {
         <Breadcrumb.Link href="/">孫悟空少年編</Breadcrumb.Link>
         <Menu.Root>
           <Menu.Trigger>
-            <Breadcrumb.Ellipsis cursor="pointer" />
+            <Breadcrumb.Ellipsis
+              cursor="pointer"
+              focusVisibleRing="outline"
+              outline="none"
+              rounded="l1"
+            />
           </Menu.Trigger>
 
           <Menu.Content>

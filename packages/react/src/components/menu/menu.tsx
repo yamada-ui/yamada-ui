@@ -446,7 +446,7 @@ export const MenuGroup = withContext<"div", MenuGroupProps>(
 
     return (
       <MenuGroupContext value={context}>
-        <styled.div {...getGroupProps(rest)}>
+        <styled.div {...getGroupProps()}>
           {label ? <MenuLabel {...labelProps}>{label}</MenuLabel> : null}
           {children}
         </styled.div>

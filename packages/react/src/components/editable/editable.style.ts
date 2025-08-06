@@ -52,6 +52,8 @@ export const editableStyle = defineComponentSlotStyle({
       },
     },
     root: {
+      "--error-border-color": "colors.border.error",
+      "--focus-border-color": "colorScheme.outline",
       alignItems: "start",
       display: "inline-flex",
       gap: "sm",

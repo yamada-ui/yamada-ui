@@ -15,7 +15,7 @@ describe("<NativeSelect />", () => {
   test("sets `displayName` correctly", () => {
     expect(NativeSelect.Root.displayName).toBe("NativeSelectRoot")
     expect(NativeSelect.Option.displayName).toBe("NativeSelectOption")
-    expect(NativeSelect.OptionGroup.displayName).toBe("NativeSelectOptionGroup")
+    expect(NativeSelect.Group.displayName).toBe("NativeSelectGroup")
   })
 
   test("sets `className` correctly", () => {
@@ -24,20 +24,20 @@ describe("<NativeSelect />", () => {
         placeholder="キャラクターを選択"
         rootProps={{ "data-testid": "root" }}
       >
-        <NativeSelect.OptionGroup label="地球人">
+        <NativeSelect.Group label="地球人">
           <NativeSelect.Option value="孫悟空">孫悟空</NativeSelect.Option>
           <NativeSelect.Option value="孫悟飯">孫悟飯</NativeSelect.Option>
           <NativeSelect.Option value="クリリン">クリリン</NativeSelect.Option>
-        </NativeSelect.OptionGroup>
+        </NativeSelect.Group>
 
-        <NativeSelect.OptionGroup label="フリーザ軍">
+        <NativeSelect.Group label="フリーザ軍">
           <NativeSelect.Option value="フリーザ">フリーザ</NativeSelect.Option>
           <NativeSelect.Option value="ギニュー">ギニュー</NativeSelect.Option>
           <NativeSelect.Option value="リクーム">リクーム</NativeSelect.Option>
           <NativeSelect.Option value="バータ">バータ</NativeSelect.Option>
           <NativeSelect.Option value="ジース">ジース</NativeSelect.Option>
           <NativeSelect.Option value="グルド">グルド</NativeSelect.Option>
-        </NativeSelect.OptionGroup>
+        </NativeSelect.Group>
       </NativeSelect.Root>,
     )
 
@@ -49,7 +49,7 @@ describe("<NativeSelect />", () => {
       "ui-native-select__option",
     )
     expect(screen.getByRole("group", { name: "地球人" })).toHaveClass(
-      "ui-native-select__option-group",
+      "ui-native-select__group",
     )
   })
 

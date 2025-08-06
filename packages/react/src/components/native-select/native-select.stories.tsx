@@ -39,14 +39,14 @@ export const Basic: Story = () => {
 export const Group: Story = () => {
   return (
     <NativeSelect.Root placeholder="Select a character">
-      <NativeSelect.OptionGroup label="第1部隊">
+      <NativeSelect.Group label="第1部隊">
         <NativeSelect.Option value="鳴海弦">鳴海弦</NativeSelect.Option>
         <NativeSelect.Option value="長谷川エイジ">
           長谷川エイジ
         </NativeSelect.Option>
-      </NativeSelect.OptionGroup>
+      </NativeSelect.Group>
 
-      <NativeSelect.OptionGroup label="第3部隊">
+      <NativeSelect.Group label="第3部隊">
         <NativeSelect.Option value="日比野カフカ">
           日比野カフカ
         </NativeSelect.Option>
@@ -55,7 +55,7 @@ export const Group: Story = () => {
         <NativeSelect.Option value="四ノ宮キコル">
           四ノ宮キコル
         </NativeSelect.Option>
-      </NativeSelect.OptionGroup>
+      </NativeSelect.Group>
     </NativeSelect.Root>
   )
 }

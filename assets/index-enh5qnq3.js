@@ -1,0 +1,1 @@
+import{a6 as o,r as C,g,A as l,a7 as x}from"./iframe-CDTQ5ROD.js";function b({defaultValue:r,value:u,onChange:c,onUpdate:f=(t,a)=>t!==a}){const t=o(c),a=o(f),[d,i]=C.useState(r),s=!l(u),n=s?u:d,V=o(p=>{const e=g(p,n);a(n,e)&&((!s||l(e)||x(e))&&i(e),t(e))},[s,n,t,a]);return[n,V]}export{b as u};

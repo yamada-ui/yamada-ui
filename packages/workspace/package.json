@@ -48,7 +48,7 @@
     "prettier": "^3.6.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "typescript-eslint": "8.38.0",
+    "typescript-eslint": "^8.39.0",
     "vitest": "^3.2.4",
     "vitest-axe": "^0.1.0"
   }

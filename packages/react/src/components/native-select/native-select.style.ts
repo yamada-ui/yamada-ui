@@ -27,7 +27,7 @@ export const nativeSelectStyle = defineComponentSlotStyle({
     },
     flushed: {
       field: inputStyle.variants?.flushed,
-      root: getInputPaddingResetStyle("& > select"),
+      root: getInputPaddingResetStyle("& > :is(select, [role='combobox'])"),
     },
     outline: {
       field: inputStyle.variants?.outline,

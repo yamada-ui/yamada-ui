@@ -86,7 +86,7 @@ export const useAvatar = ({
   useEffect(() => {
     if (!imageRef.current) return
 
-    if (imageRef.current.complete) setLoaded(true)
+    if (!!imageRef.current.src && imageRef.current.complete) setLoaded(true)
   }, [])
 
   const getGroupProps: PropGetter = useCallback((props) => ({ ...props }), [])

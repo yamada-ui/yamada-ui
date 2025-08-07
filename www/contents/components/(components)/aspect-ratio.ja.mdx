@@ -6,4 +6,44 @@ source: components/aspect-ratio
 style: components/aspect-ratio/aspect-ratio.style.ts
 ---
 
+```tsx preview
+<AspectRatio w="md">
+  <Image
+    src="https://eiga.k-img.com/images/movie/100944/photo/14e876cfa5d3c633.jpg"
+    alt="シン・ゴジラ"
+  />
+</AspectRatio>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { AspectRatio } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { AspectRatio } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { AspectRatio } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<AspectRatio />
+```
+
+### iframeを使う
+
+```tsx preview
+<AspectRatio ratio={16 / 9} w="full">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12974.591815632506!2d139.6932331!3d35.6117497!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b1a487a026f%3A0x16e7e351187c8216!2z5qCq5byP5Lya56S-IOOCouODkOODg-ODlw!5e0!3m2!1sja!2sjp!4v1674728815443!5m2!1sja!2sjp"
+    title="map"
+  />
+</AspectRatio>
+```

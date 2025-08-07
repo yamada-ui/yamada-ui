@@ -3,6 +3,8 @@ import { inputStyle } from "./input.style"
 
 export const inputAddonStyle = defineComponentStyle({
   base: {
+    "--error-border-color": "colors.border.error",
+    "--focus-border-color": "colorScheme.outline",
     alignItems: "center",
     alignSelf: "stretch",
     display: "flex",

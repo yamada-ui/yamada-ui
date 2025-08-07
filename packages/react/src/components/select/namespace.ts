@@ -1,3 +1,8 @@
+export type {
+  ComboboxItem as Item,
+  ComboboxItemWithItems as ItemWithItems,
+  ComboboxItemWithValue as ItemWithValue,
+} from "../../hooks/use-combobox"
 export {
   SelectGroup as Group,
   SelectLabel as Label,
@@ -15,8 +20,6 @@ export type {
   SelectSeparatorProps as SeparatorProps,
 } from "./select"
 export type {
-  SelectItem as Item,
-  SelectItemWithItems as ItemWithItems,
-  SelectItemWithValue as ItemWithValue,
+  SelectOptionRender as Render,
   SelectRenderProps as RenderProps,
 } from "./use-select"

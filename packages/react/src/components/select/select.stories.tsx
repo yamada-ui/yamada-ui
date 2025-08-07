@@ -791,15 +791,10 @@ export const CustomOptionIcon: Story = () => {
 
   return (
     <Select.Root
+      items={items}
       placeholder="Select a character"
-      placeholderProps={{ icon: <UserIcon /> }}
-    >
-      {items.map(({ label, value }) => (
-        <Select.Option key={value} icon={<UserIcon />} value={value}>
-          {label}
-        </Select.Option>
-      ))}
-    </Select.Root>
+      optionProps={{ icon: <UserIcon /> }}
+    />
   )
 }
 

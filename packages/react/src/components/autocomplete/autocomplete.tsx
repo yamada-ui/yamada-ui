@@ -1,8 +1,7 @@
 "use client"
 
-import type { ReactElement, ReactNode } from "react"
+import type { ReactNode } from "react"
 import type {
-  GenericsComponent,
   HTMLProps,
   HTMLStyledProps,
   ThemeProps,
@@ -14,12 +13,12 @@ import type {
 } from "../../hooks/use-combobox"
 import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
-import type { SelectStyle } from "./select.style"
+import type { AutocompleteStyle } from "./autocomplete.style"
 import type {
-  UseSelectOptionProps,
-  UseSelectProps,
-  UseSelectReturn,
-} from "./use-select"
+  UseAutocompleteOptionProps,
+  UseAutocompleteProps,
+  UseAutocompleteReturn,
+} from "./use-autocomplete"
 import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
 import {
@@ -31,26 +30,33 @@ import {
   useComboboxGroup,
   useComboboxGroupContext,
 } from "../../hooks/use-combobox"
-import { cast, isArray } from "../../utils"
+import { cast } from "../../utils"
 import { useGroupItemProps } from "../group"
-import { CheckIcon, ChevronDownIcon, XIcon } from "../icon"
+import { CheckIcon, ChevronDownIcon, MinusIcon, XIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
 import { Popover, usePopoverProps } from "../popover"
-import { selectStyle } from "./select.style"
-import { SelectContext, useSelect, useSelectOption } from "./use-select"
+import { autocompleteStyle } from "./autocomplete.style"
+import {
+  AutocompleteContext,
+  useAutocomplete,
+  useAutocompleteOption,
+} from "./use-autocomplete"
 
 interface ComponentContext
-  extends Pick<UseSelectReturn, "getSeparatorProps">,
-    Pick<SelectRootProps, "groupProps" | "optionProps"> {}
+  extends Pick<UseAutocompleteReturn, "getSeparatorProps">,
+    Pick<
+      AutocompleteRootProps,
+      "emptyIcon" | "emptyProps" | "groupProps" | "optionProps"
+    > {}
 
-export interface SelectRootProps<Y extends string | string[] = string>
+export interface AutocompleteRootProps
   extends Omit<
       HTMLStyledProps,
       "defaultValue" | "offset" | "onChange" | "value"
     >,
-    UseSelectProps<Y>,
+    UseAutocompleteProps,
     Omit<
-      WithoutThemeProps<Popover.RootProps, SelectStyle>,
+      WithoutThemeProps<Popover.RootProps, AutocompleteStyle>,
       | "autoFocus"
       | "children"
       | "initialFocusRef"
@@ -59,13 +65,13 @@ export interface SelectRootProps<Y extends string | string[] = string>
       | "updateRef"
       | "withCloseButton"
     >,
-    ThemeProps<SelectStyle>,
+    ThemeProps<AutocompleteStyle>,
     FieldProps,
     UseInputBorderProps {
   /**
    * If `true`, display the clear icon.
    *
-   * @default false
+   * @default true
    */
   clearable?: boolean
   /**
@@ -73,33 +79,37 @@ export interface SelectRootProps<Y extends string | string[] = string>
    */
   clearIcon?: ReactNode
   /**
-   * The icon to be used in the select.
+   * The icon to be used in the empty element.
+   */
+  emptyIcon?: ReactNode
+  /**
+   * The icon to be used in the autocomplete.
    */
   icon?: ReactNode
   /**
    * Props for content element.
    */
-  contentProps?: SelectContentProps
+  contentProps?: AutocompleteContentProps
   /**
    * The props for the end element.
    */
   elementProps?: InputGroup.ElementProps
   /**
+   * Props for empty element.
+   */
+  emptyProps?: AutocompleteEmptyProps
+  /**
    * Props for group element.
    */
-  groupProps?: Omit<SelectGroupProps, "children" | "label">
+  groupProps?: Omit<AutocompleteGroupProps, "children" | "label">
   /**
    * Props for icon element.
    */
-  iconProps?: SelectIconProps
+  iconProps?: AutocompleteIconProps
   /**
    * Props for option element.
    */
-  optionProps?: Omit<SelectOptionProps, "children" | "value">
-  /**
-   * Props for placeholder element.
-   */
-  placeholderProps?: Omit<SelectOptionProps, "children" | "value">
+  optionProps?: Omit<AutocompleteOptionProps, "children" | "value">
   /**
    * Props for root element.
    */
@@ -108,25 +118,26 @@ export interface SelectRootProps<Y extends string | string[] = string>
 
 const {
   ComponentContext,
-  PropsContext: SelectPropsContext,
+  PropsContext: AutocompletePropsContext,
   useComponentContext,
-  usePropsContext: useSelectPropsContext,
+  usePropsContext: useAutocompletePropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<SelectRootProps, SelectStyle, ComponentContext>(
-  "select",
-  selectStyle,
-)
+} = createSlotComponent<
+  AutocompleteRootProps,
+  AutocompleteStyle,
+  ComponentContext
+>("autocomplete", autocompleteStyle)
 
-export { SelectPropsContext, useSelectPropsContext }
+export { AutocompletePropsContext, useAutocompletePropsContext }
 
 /**
- * `Select` is a component used for allowing a user to choose one option from a list.
+ * `Autocomplete` is a component used to display suggestions in response to user text input.
  *
- * @see https://yamada-ui.com/components/select
+ * @see https://yamada-ui.com/components/autocomplete
  */
-export const SelectRoot = withProvider<"div", SelectRootProps>(
-  <Y extends string | string[] = string>(props: SelectRootProps<Y>) => {
+export const AutocompleteRoot = withProvider<"div", AutocompleteRootProps>(
+  (props) => {
     const [groupItemProps, mergedProps] = useGroupItemProps(props)
     const [
       popoverProps,
@@ -135,18 +146,19 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
         css,
         colorScheme,
         children,
-        clearable,
+        clearable = true,
         clearIcon = <XIcon />,
+        emptyIcon,
         errorBorderColor,
         focusBorderColor,
         icon,
         items: itemsProp,
         contentProps,
         elementProps,
+        emptyProps,
         groupProps,
         iconProps,
         optionProps,
-        placeholderProps,
         rootProps,
         ...rest
       },
@@ -162,19 +174,16 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
       if (itemsProp) return itemsProp
 
       return createComboboxItem(children, {
-        Group: SelectGroup,
-        Label: SelectLabel,
-        Option: SelectOption,
+        Group: AutocompleteGroup,
+        Label: AutocompleteLabel,
+        Option: AutocompleteOption,
       })
     }, [itemsProp, children])
     const {
       descendants,
       interactive,
       items: computedItems,
-      max,
       open,
-      placeholder,
-      placeholderInOptions,
       value,
       getClearIconProps,
       getContentProps,
@@ -183,11 +192,10 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
       getRootProps,
       getSeparatorProps,
       onActiveDescendant,
-      onChange,
       onClose,
       onOpen,
       onSelect,
-    } = useSelect({ items, ...rest })
+    } = useAutocomplete({ items, ...rest })
     const mergedPopoverProps = useMemo<Popover.RootProps>(
       () => ({
         animationScheme: "block-start",
@@ -202,51 +210,36 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
       }),
       [interactive, onClose, onOpen, open, popoverProps],
     )
-    const computedChildren = useMemo(() => {
-      if (children)
-        return (
-          <>
-            {placeholder ? (
-              <SelectOption
-                {...placeholderProps}
-                hidden={!placeholderInOptions}
-                value=""
-              >
-                {placeholder}
-              </SelectOption>
-            ) : null}
-
-            {children}
-          </>
-        )
-
-      return createComboboxChildren(computedItems, {
-        Group: SelectGroup,
-        Option: SelectOption,
-      })
-    }, [
-      children,
-      computedItems,
-      placeholder,
-      placeholderInOptions,
-      placeholderProps,
-    ])
+    const computedChildren = useMemo(
+      () =>
+        createComboboxChildren(computedItems, {
+          Empty: AutocompleteEmpty,
+          Group: AutocompleteGroup,
+          Option: AutocompleteOption,
+        }),
+      [computedItems],
+    )
     const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
     const comboboxContext = useMemo(
-      () => ({ max, value, onActiveDescendant, onChange, onClose, onSelect }),
-      [max, onActiveDescendant, onChange, onClose, onSelect, value],
+      () => ({ onActiveDescendant, onClose, onSelect }),
+      [onActiveDescendant, onClose, onSelect],
     )
-    const selectContext = useMemo(() => ({ max, value }), [max, value])
+    const autocompleteContext = useMemo(() => ({ value }), [value])
     const componentContext = useMemo(
-      () => ({ getSeparatorProps, groupProps, optionProps }),
-      [getSeparatorProps, groupProps, optionProps],
+      () => ({
+        emptyIcon,
+        emptyProps,
+        getSeparatorProps,
+        groupProps,
+        optionProps,
+      }),
+      [getSeparatorProps, groupProps, optionProps, emptyProps, emptyIcon],
     )
-    const hasValue = isArray(value) ? !!value.length : !!value
 
     return (
       <ComboboxDescendantsContext value={descendants}>
         <ComboboxContext value={comboboxContext}>
-          <SelectContext value={selectContext}>
+          <AutocompleteContext value={autocompleteContext}>
             <ComponentContext value={componentContext}>
               <Popover.Root {...mergedPopoverProps}>
                 <InputGroup.Root
@@ -256,33 +249,36 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
                   {...getRootProps({ ...groupItemProps, ...rootProps })}
                 >
                   <Popover.Trigger>
-                    <SelectField {...getFieldProps(varProps)} />
+                    <AutocompleteField {...getFieldProps(varProps)} />
                   </Popover.Trigger>
 
                   <InputGroup.Element
-                    {...{ clickable: clearable && hasValue, ...elementProps }}
+                    {...{ clickable: clearable && !!value, ...elementProps }}
                   >
-                    {clearable && hasValue ? (
-                      <SelectIcon
+                    {clearable && !!value ? (
+                      <AutocompleteIcon
                         icon={clearIcon}
                         {...getClearIconProps(iconProps)}
                       />
                     ) : (
-                      <SelectIcon icon={icon} {...getIconProps(iconProps)} />
+                      <AutocompleteIcon
+                        icon={icon}
+                        {...getIconProps(iconProps)}
+                      />
                     )}
                   </InputGroup.Element>
                 </InputGroup.Root>
 
-                <SelectContent
-                  {...cast<SelectContentProps>(
+                <AutocompleteContent
+                  {...cast<AutocompleteContentProps>(
                     getContentProps(cast<HTMLProps>(contentProps)),
                   )}
                 >
                   {computedChildren}
-                </SelectContent>
+                </AutocompleteContent>
               </Popover.Root>
             </ComponentContext>
-          </SelectContext>
+          </AutocompleteContext>
         </ComboboxContext>
       </ComboboxDescendantsContext>
     )
@@ -292,51 +288,37 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
   const context = useInputPropsContext()
 
   return { ...context, ...props }
-}) as GenericsComponent<{
-  <Y extends string | string[] = string>(
-    props: SelectRootProps<Y>,
-  ): ReactElement
-}>
+})
 
-interface SelectFieldProps extends HTMLStyledProps {}
+interface AutocompleteFieldProps extends HTMLStyledProps<"input"> {}
 
-const SelectField = withContext<"div", SelectFieldProps>("div", "field")(
-  { "data-group-propagate": "" },
-  ({ children, ...rest }) => ({
-    ...rest,
-    children: <SelectValueText>{children}</SelectValueText>,
-  }),
-)
+const AutocompleteField = withContext<"input", AutocompleteFieldProps>(
+  "input",
+  "field",
+)({ "data-group-propagate": "" })
 
-interface SelectIconProps extends HTMLStyledProps {
+interface AutocompleteIconProps extends HTMLStyledProps {
   icon?: ReactNode
 }
 
-const SelectIcon = withContext<"div", SelectIconProps>("div", "icon")(
-  undefined,
-  ({ children, icon, ...rest }) => ({
-    children: icon || children || <ChevronDownIcon />,
-    ...rest,
-  }),
-)
+const AutocompleteIcon = withContext<"div", AutocompleteIconProps>(
+  "div",
+  "icon",
+)(undefined, ({ children, icon, ...rest }) => ({
+  children: icon || children || <ChevronDownIcon />,
+  ...rest,
+}))
 
-interface SelectValueTextProps extends HTMLProps<"span"> {}
+interface AutocompleteContentProps extends Popover.ContentProps {}
 
-const SelectValueText = withContext<"span", SelectValueTextProps>(
-  "span",
-  "valueText",
-)()
-
-interface SelectContentProps extends Popover.ContentProps {}
-
-const SelectContent = withContext<"div", SelectContentProps>(
+const AutocompleteContent = withContext<"div", AutocompleteContentProps>(
   Popover.Content,
   "content",
 )()
 
-export interface SelectLabelProps extends HTMLStyledProps<"span"> {}
+export interface AutocompleteLabelProps extends HTMLStyledProps<"span"> {}
 
-export const SelectLabel = withContext<"span", SelectLabelProps>(
+export const AutocompleteLabel = withContext<"span", AutocompleteLabelProps>(
   "span",
   "label",
 )(undefined, (props) => {
@@ -345,7 +327,7 @@ export const SelectLabel = withContext<"span", SelectLabelProps>(
   return getLabelProps(props)
 })
 
-export interface SelectGroupProps
+export interface AutocompleteGroupProps
   extends UseComboboxGroupProps,
     HTMLStyledProps {
   /**
@@ -355,10 +337,10 @@ export interface SelectGroupProps
   /**
    * Props for the label component.
    */
-  labelProps?: SelectLabelProps
+  labelProps?: AutocompleteLabelProps
 }
 
-export const SelectGroup = withContext<"div", SelectGroupProps>(
+export const AutocompleteGroup = withContext<"div", AutocompleteGroupProps>(
   ({ children, label, labelProps, ...rest }) => {
     const { groupProps } = useComponentContext()
     const { getGroupProps, getLabelProps } = useComboboxGroup({
@@ -370,7 +352,9 @@ export const SelectGroup = withContext<"div", SelectGroupProps>(
     return (
       <ComboboxGroupContext value={context}>
         <styled.div {...getGroupProps()}>
-          {label ? <SelectLabel {...labelProps}>{label}</SelectLabel> : null}
+          {label ? (
+            <AutocompleteLabel {...labelProps}>{label}</AutocompleteLabel>
+          ) : null}
           {children}
         </styled.div>
       </ComboboxGroupContext>
@@ -379,28 +363,28 @@ export const SelectGroup = withContext<"div", SelectGroupProps>(
   "group",
 )()
 
-export interface SelectOptionProps
-  extends UseSelectOptionProps,
+export interface AutocompleteOptionProps
+  extends UseAutocompleteOptionProps,
     HTMLStyledProps {
   /**
-   * The icon to be used in the select option.
+   * The icon to be used in the autocomplete option.
    */
   icon?: ReactNode
 }
 
-export const SelectOption = withContext<"div", SelectOptionProps>(
+export const AutocompleteOption = withContext<"div", AutocompleteOptionProps>(
   ({ children, icon: iconProp, ...rest }) => {
     const { optionProps: { icon, ...optionProps } = {} } = useComponentContext()
-    const { getIndicatorProps, getOptionProps } = useSelectOption({
+    const { getIndicatorProps, getOptionProps } = useAutocompleteOption({
       ...optionProps,
       ...rest,
     })
 
     return (
       <styled.div {...getOptionProps()}>
-        <SelectIndicator {...getIndicatorProps()}>
+        <AutocompleteIndicator {...getIndicatorProps()}>
           {iconProp ?? icon ?? <CheckIcon />}
-        </SelectIndicator>
+        </AutocompleteIndicator>
         {children}
       </styled.div>
     )
@@ -408,20 +392,32 @@ export const SelectOption = withContext<"div", SelectOptionProps>(
   "option",
 )()
 
-interface SelectIndicatorProps extends HTMLStyledProps {}
+interface AutocompleteEmptyProps extends HTMLStyledProps {
+  /**
+   * The icon to be used in the autocomplete option.
+   */
+  icon?: ReactNode
+}
 
-const SelectIndicator = withContext<"div", SelectIndicatorProps>(
+const AutocompleteEmpty = withContext<"div", AutocompleteEmptyProps>(
+  ({ children, icon, ...rest }) => {
+    const { emptyIcon, emptyProps } = useComponentContext()
+
+    return (
+      <styled.div {...emptyProps} {...rest}>
+        <AutocompleteIndicator>
+          {icon ?? emptyIcon ?? <MinusIcon />}
+        </AutocompleteIndicator>
+        {children}
+      </styled.div>
+    )
+  },
+  "empty",
+)()
+
+interface AutocompleteIndicatorProps extends HTMLStyledProps {}
+
+const AutocompleteIndicator = withContext<"div", AutocompleteIndicatorProps>(
   "div",
   "indicator",
 )()
-
-export interface SelectSeparatorProps extends HTMLStyledProps<"hr"> {}
-
-export const SelectSeparator = withContext<"hr", SelectSeparatorProps>(
-  "hr",
-  "separator",
-)(undefined, (props) => {
-  const { getSeparatorProps } = useComponentContext()
-
-  return getSeparatorProps(props)
-})

@@ -1,25 +1,125 @@
 "use client"
 
-import type { KeyboardEvent, MouseEvent } from "react"
+import type {
+  JSXElementConstructor,
+  KeyboardEvent,
+  MouseEvent,
+  ReactNode,
+} from "react"
 import type { HTMLProps, PropGetter, SimpleDirection } from "../../core"
-import type { Descendant } from "../../hooks/use-descendants"
-import type { UseDisclosureProps } from "../../hooks/use-disclosure"
+import type { Descendant } from "../use-descendants"
+import type { UseDisclosureProps } from "../use-disclosure"
 import { useCallback, useId, useRef } from "react"
 import scrollIntoView from "scroll-into-view-if-needed"
 import { useEnvironment } from "../../core"
-import { createDescendants } from "../../hooks/use-descendants"
-import { useDisclosure } from "../../hooks/use-disclosure"
 import {
   ariaAttr,
   createContext,
   cx,
   dataAttr,
+  findChild,
+  getValidChildren,
   handlerAll,
+  isSomeElement,
   isUndefined,
   mergeRefs,
   runKeyAction,
   useUpdateEffect,
 } from "../../utils"
+import { createDescendants } from "../use-descendants"
+import { useDisclosure } from "../use-disclosure"
+
+interface ComboboxSharedItem extends Omit<HTMLProps, "children" | "value"> {
+  label: ReactNode
+}
+
+export interface ComboboxItemWithValue extends ComboboxSharedItem {
+  query?: string
+  value?: string
+}
+
+export interface ComboboxItemWithItems extends ComboboxSharedItem {
+  items: ComboboxItemWithValue[]
+}
+
+export type ComboboxItem = ComboboxItemWithItems | ComboboxItemWithValue
+
+export interface CreateComboboxItemOptions {
+  Group: JSXElementConstructor<any>
+  Label: JSXElementConstructor<any>
+  Option: JSXElementConstructor<any>
+}
+
+export const createComboboxItem = (
+  children: ReactNode,
+  { Group, Label, Option }: CreateComboboxItemOptions,
+) => {
+  const validChildren = getValidChildren(children)
+
+  return validChildren
+    .filter(
+      ({ type }) => isSomeElement(type, Option) || isSomeElement(type, Group),
+    )
+    .map(({ type, props }) => {
+      if (isSomeElement(type, Option)) {
+        return { ...props, label: props.children }
+      } else {
+        const validChildren = getValidChildren(props.children)
+        const label = findChild(validChildren, Label)
+
+        return {
+          ...props,
+          items: validChildren
+            .filter(({ type }) => isSomeElement(type, Option))
+            .map(({ props }) => ({ ...props, label: props.children })),
+          label: label?.props.children ?? props.label,
+        }
+      }
+    })
+}
+
+export interface CreateComboboxChildrenOptions {
+  Group: JSXElementConstructor<any>
+  Option: JSXElementConstructor<any>
+  Empty?: JSXElementConstructor<any>
+}
+
+export const createComboboxChildren = (
+  items: ComboboxItem[],
+  { Empty, Group, Option }: CreateComboboxChildrenOptions,
+) => {
+  return items.map((item, index) => {
+    if ("data-empty" in item && Empty) {
+      const { label, ...rest } = item
+
+      return (
+        <Empty key={index} {...rest}>
+          {label}
+        </Empty>
+      )
+    } else if ("items" in item) {
+      const { items = [], label, ...rest } = item
+
+      return (
+        <Group key={index} label={label} {...rest}>
+          {items.map(({ label, ...rest }, index) => (
+            <Option key={index} {...rest}>
+              {label}
+            </Option>
+          ))}
+        </Group>
+      )
+    } else {
+      const { label, ...rest } = item
+
+      return (
+        <Option key={index} {...rest}>
+          {label}
+        </Option>
+      )
+    }
+  })
+}
 
 export interface ComboboxDescendantProps {
   id: string
@@ -90,6 +190,12 @@ export interface UseComboboxProps
    */
   initialFocusValue?: string
   /**
+   * If `true`, the combobox will be opened when click on the field.
+   *
+   * @default true
+   */
+  openOnClick?: boolean
+  /**
    * If `true`, the combobox will be readonly.
    *
    * @default false
@@ -108,6 +214,7 @@ export const useCombobox = ({
   disabled,
   initialFocusValue,
   open: openProp,
+  openOnClick = true,
   readOnly,
   onChange: onChangeProp,
   onClose: onCloseProp,
@@ -202,17 +309,25 @@ export const useCombobox = ({
       ev.preventDefault()
 
       if (!open) {
-        onOpenWithActiveDescendant(() => descendants.enabledFirstValue())
+        if (openOnClick)
+          onOpenWithActiveDescendant(() => descendants.enabledFirstValue())
       } else {
         onClose()
       }
     },
-    [descendants, disabled, onClose, onOpenWithActiveDescendant, open],
+    [
+      descendants,
+      disabled,
+      onClose,
+      onOpenWithActiveDescendant,
+      open,
+      openOnClick,
+    ],
   )
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLDivElement>) => {
-      if (disabled) return
+      if (disabled || ev.nativeEvent.isComposing) return
 
       runKeyAction(ev, {
         ArrowDown: () => {
@@ -232,6 +347,12 @@ export const useCombobox = ({
             onActiveDescendant(descendant)
 
             onScrollIntoView(descendant, descendant?.recurred ? "start" : "end")
+          } else {
+            const descendant = descendants.enabledFirstValue()
+
+            onActiveDescendant(descendant)
+
+            onScrollIntoView(descendant)
           }
         },
         ArrowUp: () => {
@@ -251,6 +372,12 @@ export const useCombobox = ({
             onActiveDescendant(descendant)
 
             onScrollIntoView(descendant, descendant?.recurred ? "end" : "start")
+          } else {
+            const descendant = descendants.enabledLastValue()
+
+            onActiveDescendant(descendant)
+
+            onScrollIntoView(descendant, "end")
           }
         },
         End: () => {

@@ -262,7 +262,7 @@ async function main() {
 
   const start = process.hrtime.bigint()
 
-  spinner.start("Getting config")
+  spinner.start("Getting tsconfig")
 
   const { config } = readConfigFile(CONFIG_PATH, sys.readFile)
   const { fileNames, options } = parseJsonConfigFileContent(
@@ -273,13 +273,17 @@ async function main() {
   const { getSourceFile, getTypeChecker } = createProgram(fileNames, options)
   const dirents = await readdir(ENTRY_PATH, { withFileTypes: true })
 
-  spinner.succeed("Got config")
+  spinner.succeed("Got tsconfig")
 
   spinner.start("Generating props types")
+
+  const targets = process.argv.slice(2)
 
   await Promise.all(
     dirents.map(async (dirent) => {
       if (!dirent.isDirectory()) return
+
+      if (targets.length && !targets.includes(dirent.name)) return
 
       const dirPath = path.join(dirent.parentPath, dirent.name)
       const relativePath = dirPath.replace(process.cwd() + "/", "")

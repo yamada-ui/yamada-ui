@@ -2,7 +2,7 @@ export const EMERITI = [
   {
     name: { en: "Tomoya Nakamura", ja: "Tomoya Nakamura" },
     description: {
-      en: "Software engineer based in tokyo.",
+      en: "Software engineer based in Tokyo.",
       ja: "東京を拠点に活動するソフトウェアエンジニア。",
     },
     discord: { id: "770535018040655873" },

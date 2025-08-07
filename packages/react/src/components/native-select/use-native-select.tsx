@@ -26,6 +26,12 @@ export type NativeSelectItem =
 
 export interface UseNativeSelectProps extends HTMLProps<"select">, FieldProps {
   /**
+   * If `true`, include placeholder in options.
+   *
+   * @default true
+   */
+  includePlaceholder?: boolean
+  /**
    * If provided, generate options based on items.
    *
    * @default '[]'
@@ -35,12 +41,6 @@ export interface UseNativeSelectProps extends HTMLProps<"select">, FieldProps {
    * The placeholder for select.
    */
   placeholder?: string
-  /**
-   * If `true`, include placeholders in options.
-   *
-   * @default true
-   */
-  placeholderInOptions?: boolean
 }
 
 export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
@@ -48,9 +48,9 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
     props: {
       children,
       disabled,
+      includePlaceholder = true,
       items = [],
       placeholder,
-      placeholderInOptions = true,
       readOnly,
       ...rest
     },
@@ -97,7 +97,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
     return (
       <>
         {placeholder ? (
-          <option hidden={!placeholderInOptions} value="">
+          <option hidden={!includePlaceholder} value="">
             {placeholder}
           </option>
         ) : null}
@@ -105,7 +105,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
         {computedChildren}
       </>
     )
-  }, [children, items, placeholder, placeholderInOptions])
+  }, [children, items, placeholder, includePlaceholder])
 
   const getRootProps: PropGetter = useCallback(
     (props) => ({ ...dataProps, ...props }),

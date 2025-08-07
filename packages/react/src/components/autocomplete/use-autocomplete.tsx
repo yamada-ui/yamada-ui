@@ -30,6 +30,45 @@ import { useFieldProps } from "../field"
 const getInputValue = (item?: ComboboxItemWithValue) =>
   isString(item?.label) ? item.label : (item?.query ?? "")
 
+export interface AutocompleteFilter {
+  (
+    inputValue: string,
+    items: ComboboxItem[],
+    matcher: AutocompleteMatcher,
+  ): ComboboxItem[]
+}
+
+const defaultFilter: AutocompleteFilter = (inputValue, items, matcher) => {
+  if (!inputValue.length) return items
+
+  return items
+    .map((item) => {
+      if ("items" in item) {
+        const items = item.items.filter((item) => {
+          if ("query" in item) {
+            return matcher(inputValue, item.query)
+          } else if (isString(item.label)) {
+            return matcher(inputValue, item.label)
+          }
+        })
+
+        if (items.length) return { ...item, items }
+      } else if ("query" in item) {
+        if (matcher(inputValue, item.query)) return item
+      } else if (isString(item.label)) {
+        if (matcher(inputValue, item.label)) return item
+      }
+    })
+    .filter(Boolean) as ComboboxItem[]
+}
+
+export interface AutocompleteMatcher {
+  (input: string, target?: string): boolean
+}
+
+const defaultMatcher: AutocompleteMatcher = (input, target) =>
+  target?.toLowerCase().includes(input.toLowerCase()) ?? false
+
 interface AutocompleteContext extends Pick<UseAutocompleteReturn, "value"> {}
 
 const [AutocompleteContext, useAutocompleteContext] =
@@ -73,6 +112,10 @@ export interface UseAutocompleteProps
    */
   emptyMessage?: ReactNode
   /**
+   * The function to filter the items.
+   */
+  filter?: AutocompleteFilter
+  /**
    * If `true`, the input will be focused when the clear icon is clicked.
    *
    * @default true
@@ -88,6 +131,10 @@ export interface UseAutocompleteProps
    * @default '[]'
    */
   items?: ComboboxItem[]
+  /**
+   * The function to match the items.
+   */
+  matcher?: AutocompleteMatcher
   /**
    * If `true`, the autocomplete will be opened when the input value changes.
    *
@@ -129,9 +176,11 @@ export const useAutocomplete = (props: UseAutocompleteProps = {}) => {
       defaultValue,
       disabled,
       emptyMessage = t("No results found"),
+      filter = defaultFilter,
       focusOnClear = true,
       inputValue: inputValueProp,
       items = [],
+      matcher = defaultMatcher,
       openOnChange = true,
       openOnFocus = false,
       placeholder,
@@ -190,7 +239,7 @@ export const useAutocomplete = (props: UseAutocompleteProps = {}) => {
     descendants,
     interactive,
     open,
-    getContentProps,
+    getContentProps: getComboboxContentProps,
     getSeparatorProps,
     getTriggerProps,
     onActiveDescendant,
@@ -209,40 +258,18 @@ export const useAutocomplete = (props: UseAutocompleteProps = {}) => {
     ...rest,
   })
   const filteredItems = useMemo<ComboboxItem[]>(() => {
-    if (!inputValue.length) return items
+    if (!items.length) return []
 
-    const value = inputValue.toLowerCase()
+    const filteredItems = filter(inputValue, items, matcher)
 
-    const result = items
-      .map((item) => {
-        if ("items" in item) {
-          const items = item.items.filter((item) => {
-            if ("query" in item) {
-              const query = item.query?.toLowerCase()
-
-              return query?.includes(value)
-            } else if (isString(item.label)) {
-              const label = item.label.toLowerCase()
-
-              return label.includes(value)
-            }
-          })
-
-          if (items.length) return { ...item, items }
-        } else if ("query" in item) {
-          const query = item.query?.toLowerCase()
-
-          if (query?.includes(value)) return item
-        } else if (isString(item.label)) {
-          const label = item.label.toLowerCase()
-
-          if (label.includes(value)) return item
-        }
-      })
-      .filter(Boolean) as ComboboxItem[]
-
-    return result.length ? result : [{ "data-empty": "", label: emptyMessage }]
-  }, [emptyMessage, inputValue, items])
+    return filteredItems.length
+      ? filteredItems
+      : [{ "data-empty": "", label: emptyMessage }]
+  }, [emptyMessage, filter, inputValue, items, matcher])
+  const empty = useMemo(
+    () => !filteredItems.filter(({ hidden }) => !hidden).length,
+    [filteredItems],
+  )
 
   const onInputChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
@@ -366,6 +393,11 @@ export const useAutocomplete = (props: UseAutocompleteProps = {}) => {
       onMouseDown,
       placeholder,
     ],
+  )
+
+  const getContentProps: PropGetter = useCallback(
+    (props) => getComboboxContentProps({ hidden: empty, ...props }),
+    [empty, getComboboxContentProps],
   )
 
   const getIconProps: PropGetter = useCallback(

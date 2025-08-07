@@ -28,17 +28,17 @@ import {
 } from "../../utils"
 import { useFieldProps } from "../field"
 
-export interface SelectRenderProps extends ComboboxItemWithValue {
+interface SelectRenderProps extends ComboboxItemWithValue {
   count: number
   index: number
   separator: string
 }
 
-export interface SelectOptionRender {
+export interface SelectItemRender {
   (props: SelectRenderProps): ReactNode
 }
 
-const defaultRender: SelectOptionRender = ({
+const defaultRender: SelectItemRender = ({
   count,
   index,
   label,
@@ -75,6 +75,12 @@ export interface UseSelectProps<Y extends string | string[] = string>
    */
   defaultValue?: Y
   /**
+   * If `true`, include placeholder in options.
+   *
+   * @default true
+   */
+  includePlaceholder?: boolean
+  /**
    * If provided, generate options based on items.
    *
    * @default '[]'
@@ -94,12 +100,6 @@ export interface UseSelectProps<Y extends string | string[] = string>
    * The placeholder for select.
    */
   placeholder?: string
-  /**
-   * If `true`, include placeholders in options.
-   *
-   * @default true
-   */
-  placeholderInOptions?: boolean
   /**
    * The function to render the selected items.
    */
@@ -131,10 +131,10 @@ export const useSelect = <Y extends string | string[] = string>(
       closeOnSelect = !multiple,
       defaultValue = (multiple ? [] : "") as Y,
       disabled,
+      includePlaceholder = !multiple,
       items: itemProp = [],
       max,
       placeholder,
-      placeholderInOptions = !multiple,
       readOnly,
       render = defaultRender,
       separator = ",",
@@ -169,11 +169,27 @@ export const useSelect = <Y extends string | string[] = string>(
     },
     [max, setValue],
   )
+  const items = useMemo<ComboboxItem[]>(() => {
+    const items = [...itemProp]
+
+    if (placeholder)
+      items.unshift({
+        hidden: !includePlaceholder,
+        label: placeholder,
+        value: "",
+      })
+
+    return items
+  }, [itemProp, placeholder, includePlaceholder])
+  const empty = useMemo(
+    () => !items.filter(({ hidden }) => !hidden).length,
+    [items],
+  )
   const {
     descendants,
     interactive,
     open,
-    getContentProps,
+    getContentProps: getComboboxContentProps,
     getSeparatorProps,
     getTriggerProps,
     onActiveDescendant,
@@ -191,18 +207,6 @@ export const useSelect = <Y extends string | string[] = string>(
     ...eventProps,
     ...rest,
   })
-  const items = useMemo<ComboboxItem[]>(() => {
-    const items = [...itemProp]
-
-    if (placeholder)
-      items.unshift({
-        hidden: !placeholderInOptions,
-        label: placeholder,
-        value: "",
-      })
-
-    return items
-  }, [itemProp, placeholder, placeholderInOptions])
   const valueMap = useMemo<{ [key: string]: ComboboxItemWithValue }>(() => {
     const valueMap: { [key: string]: ComboboxItemWithValue } = {}
 
@@ -267,6 +271,11 @@ export const useSelect = <Y extends string | string[] = string>(
     [children, getTriggerProps, labelId, placeholder],
   )
 
+  const getContentProps: PropGetter = useCallback(
+    (props) => getComboboxContentProps({ hidden: empty, ...props }),
+    [empty, getComboboxContentProps],
+  )
+
   const getIconProps: PropGetter = useCallback(
     (props) => ({ ...dataProps, ...props }),
     [dataProps],
@@ -281,10 +290,7 @@ export const useSelect = <Y extends string | string[] = string>(
         ...props,
         onClick: handlerAll(props.onClick, onClear),
         onKeyDown: handlerAll(props.onKeyDown, (ev) =>
-          runKeyAction(ev, {
-            Enter: onClear,
-            Space: onClear,
-          }),
+          runKeyAction(ev, { Enter: onClear, Space: onClear }),
         ),
       }),
     [getIconProps, onClear, t],
@@ -292,12 +298,12 @@ export const useSelect = <Y extends string | string[] = string>(
 
   return {
     descendants,
+    includePlaceholder,
     interactive,
     items,
     max,
     open,
     placeholder,
-    placeholderInOptions,
     setValue,
     value,
     valueMap,

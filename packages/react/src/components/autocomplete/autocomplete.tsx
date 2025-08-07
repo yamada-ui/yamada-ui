@@ -52,7 +52,7 @@ interface ComponentContext
 export interface AutocompleteRootProps
   extends Omit<
       HTMLStyledProps,
-      "defaultValue" | "offset" | "onChange" | "value"
+      "defaultValue" | "filter" | "offset" | "onChange" | "value"
     >,
     UseAutocompleteProps,
     Omit<

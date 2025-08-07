@@ -1,4 +1,8 @@
 export default {
+  autocomplete: {
+    "Clear value": "値を消去する",
+    "No results found": "結果が見つかりません",
+  },
   avatar: {
     "Avatar Icon": "アバターアイコン",
   },

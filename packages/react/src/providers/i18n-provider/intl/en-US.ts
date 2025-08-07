@@ -1,4 +1,8 @@
 export default {
+  autocomplete: {
+    "Clear value": "Clear value",
+    "No results found": "No results found",
+  },
   avatar: {
     "Avatar Icon": "Avatar Icon",
   },

@@ -6,4 +6,122 @@ source: components/circle-progress
 style: components/circle-progress/circle-progress.style.ts
 ---
 
+```tsx preview
+<CircleProgress.Root value={75} />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { CircleProgress } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { CircleProgress } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { CircleProgress } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<CircleProgress.Root>
+  <CircleProgress.Label />
+</CircleProgress.Root>
+```
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["outline", "subtle"]}>
+    {(variant, index) => (
+      <CircleProgress.Root value={75} variant={variant} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <CircleProgress.Root value={75} size={size} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+または、`boxSize`に文字列もしくは数値を設定します。
+
+```tsx preview
+<CircleProgress.Root boxSize="100px" value={31} />
+```
+
+### カラースキーマを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <CircleProgress.Root value={75} colorScheme={colorScheme} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+### 形を変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["rounded", "square"]}>
+    {(shape, index) => (
+      <CircleProgress.Root value={75} shape={shape} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+### アニメーションを適応する
+
+`value`を`null`に設定すると、アニメーションが適応されます。
+
+```tsx preview
+<CircleProgress.Root value={null} />
+```
+
+#### アニメーションの間隔を変更する
+
+`duration`に数値を設定します。
+
+```tsx preview
+<CircleProgress.Root duration={2} value={null} />
+```
+
+### 太さを変更する
+
+プログレスバーの太さを変更をしたい場合は、`thickness`に文字列または数値を設定します。
+
+```tsx preview
+<CircleProgress.Root thickness={1} value={31} />
+```
+
+### ラベルを追加する
+
+```tsx preview
+<CircleProgress.Root value={75}>
+  <CircleProgress.Label>75%</CircleProgress.Label>
+</CircleProgress.Root>
+```
+
+### 色を変更する
+
+```tsx preview
+<CircleProgress.Root rangeColor="red.500" trackColor="blue.500" value={31} />
+```

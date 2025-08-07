@@ -26,7 +26,7 @@
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | ({ _peerAccept?: \"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+      "type": "\"outline\" | \"filled\" | \"flushed\" | \"plain\" | [\"outline\" | \"filled\" | \"flushed\" | \"plain\" | ({ _peerAccept?: \"outline\" | \"filled\" | \"flushed\" | \"plain\" | [\"outline\" | \"filled\" | \"flushed\" | \"plain\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
       "description": "The variant of the component.",
       "required": false
     },
@@ -55,6 +55,12 @@
       "description": "Props for icon element.",
       "required": false
     },
+    "includePlaceholder": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, include placeholder in options.",
+      "required": false
+    },
     "invalid": {
       "type": "boolean",
       "defaultValue": "false",
@@ -70,12 +76,6 @@
     "placeholder": {
       "type": "string",
       "description": "The placeholder for select.",
-      "required": false
-    },
-    "placeholderInOptions": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `true`, include placeholders in options.",
       "required": false
     },
     "readOnly": {

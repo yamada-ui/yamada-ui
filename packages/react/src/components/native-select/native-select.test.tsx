@@ -81,8 +81,8 @@ describe("<NativeSelect />", () => {
         variant="outline"
         data-testid="select"
         focusBorderColor="green.500"
+        includePlaceholder={false}
         placeholder="Options"
-        placeholderInOptions={false}
       >
         <NativeSelect.Option data-testid="option" value="one">
           Option 1

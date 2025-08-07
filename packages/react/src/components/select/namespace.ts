@@ -19,7 +19,4 @@ export type {
   SelectRootProps as RootProps,
   SelectSeparatorProps as SeparatorProps,
 } from "./select"
-export type {
-  SelectOptionRender as Render,
-  SelectRenderProps as RenderProps,
-} from "./use-select"
+export type { SelectItemRender as Render } from "./use-select"

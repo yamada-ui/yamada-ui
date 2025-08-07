@@ -22,6 +22,7 @@ export function rehypePre(): ReturnType<Plugin<[], Root>> {
         node.properties.preview = child.properties.preview
         node.properties.functional = child.properties.functional
         node.properties.client = child.properties.client
+        node.properties.iframe = child.properties.iframe
 
         if (child.children[0]?.type !== "text") return child
 

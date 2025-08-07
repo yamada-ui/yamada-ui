@@ -3,9 +3,12 @@
 import type { ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type {
+  ComboboxItem,
+  ComboboxItemWithValue,
   UseComboboxItemProps,
   UseComboboxProps,
 } from "../../hooks/use-combobox"
+import type { Dict } from "../../utils"
 import type { FieldProps } from "../field"
 import { cloneElement, isValidElement, useCallback, useMemo } from "react"
 import { useCombobox, useComboboxItem } from "../../hooks/use-combobox"
@@ -25,19 +28,23 @@ import {
 } from "../../utils"
 import { useFieldProps } from "../field"
 
-export interface SelectRenderProps extends SelectItemWithValue {
+export interface SelectRenderProps extends ComboboxItemWithValue {
   count: number
   index: number
   separator: string
 }
 
-const defaultRender = ({
+export interface SelectOptionRender {
+  (props: SelectRenderProps): ReactNode
+}
+
+const defaultRender: SelectOptionRender = ({
   count,
   index,
   label,
   separator,
   value,
-}: SelectRenderProps) => {
+}) => {
   const last = count - 1 === index
 
   return (
@@ -47,20 +54,6 @@ const defaultRender = ({
     </span>
   )
 }
-
-interface SelectSharedItem extends Omit<HTMLProps, "children" | "value"> {
-  label: ReactNode
-}
-
-export interface SelectItemWithValue extends SelectSharedItem {
-  value?: string
-}
-
-export interface SelectItemWithItems extends SelectSharedItem {
-  items: SelectItemWithValue[]
-}
-
-export type SelectItem = SelectItemWithItems | SelectItemWithValue
 
 interface SelectContext extends Pick<UseSelectReturn, "max" | "value"> {}
 
@@ -86,7 +79,7 @@ export interface UseSelectProps<Y extends string | string[] = string>
    *
    * @default '[]'
    */
-  items?: SelectItem[]
+  items?: ComboboxItem[]
   /**
    * The maximum selectable value.
    */
@@ -198,7 +191,7 @@ export const useSelect = <Y extends string | string[] = string>(
     ...eventProps,
     ...rest,
   })
-  const items = useMemo<SelectItem[]>(() => {
+  const items = useMemo<ComboboxItem[]>(() => {
     const items = [...itemProp]
 
     if (placeholder)
@@ -210,8 +203,8 @@ export const useSelect = <Y extends string | string[] = string>(
 
     return items
   }, [itemProp, placeholder, placeholderInOptions])
-  const valueMap = useMemo<{ [key: string]: SelectItemWithValue }>(() => {
-    const valueMap: { [key: string]: SelectItemWithValue } = {}
+  const valueMap = useMemo<{ [key: string]: ComboboxItemWithValue }>(() => {
+    const valueMap: { [key: string]: ComboboxItemWithValue } = {}
 
     items.forEach((item) => {
       if ("items" in item) {
@@ -229,7 +222,7 @@ export const useSelect = <Y extends string | string[] = string>(
 
     return valueMap
   }, [items])
-  const selectedItems = useMemo<SelectItemWithValue[]>(() => {
+  const selectedItems = useMemo<ComboboxItemWithValue[]>(() => {
     if (isArray(value)) {
       if (value.length) {
         return toArray(value.map((value) => valueMap[value]))
@@ -246,7 +239,7 @@ export const useSelect = <Y extends string | string[] = string>(
     return selectedItems.map((item, index) => {
       const component = render({ count, index, separator, ...item })
 
-      if (isValidElement<any>(component)) {
+      if (isValidElement<Dict>(component)) {
         return cloneElement(component, { ...component.props, key: index })
       } else {
         return component
@@ -290,7 +283,7 @@ export const useSelect = <Y extends string | string[] = string>(
         onKeyDown: handlerAll(props.onKeyDown, (ev) =>
           runKeyAction(ev, {
             Enter: onClear,
-            Escape: onClear,
+            Space: onClear,
           }),
         ),
       }),

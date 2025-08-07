@@ -124,7 +124,7 @@ import { Card } from "@workspace/ui"
 ### Customize Layout
 
 ```tsx preview
-<Card maxW="md">
+<Card.Root maxW="md">
   <Card.Header justifyContent="center">
     <Image
       src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
@@ -145,11 +145,11 @@ import { Card } from "@workspace/ui"
   <Card.Footer>
     <Button colorScheme="primary">Wikipedia</Button>
   </Card.Footer>
-</Card>
+</Card.Root>
 ```
 
 ```tsx preview
-<Card
+<Card.Root
   flexDirection={{ base: "row", md: "column" }}
   overflow="hidden"
   variant="outline"
@@ -176,5 +176,5 @@ import { Card } from "@workspace/ui"
       <Button colorScheme="primary">Wikipedia</Button>
     </Card.Footer>
   </VStack>
-</Card>
+</Card.Root>
 ```

@@ -1,4 +1,8 @@
 export default {
+  autocomplete: {
+    "Clear value": "Clear value",
+    "No results found": "No results found",
+  },
   avatar: {
     "Avatar Icon": "Avatar Icon",
   },
@@ -49,6 +53,9 @@ export default {
   progress: {
     "Loading...": "Loading...",
     "{value} percent": "{value} percent",
+  },
+  select: {
+    "Clear value": "Clear value",
   },
   slider: {
     "Slider thumb": "Slider thumb",

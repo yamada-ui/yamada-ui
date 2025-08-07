@@ -44,8 +44,8 @@
     "storybook": "storybook dev -p 6006 -c storybook",
     "storybook:serve": "npx http-server ./storybook-static",
     "storybook:build": "storybook build -c storybook",
-    "test": "NODE_OPTIONS=\"--experimental-strip-types\" vitest",
-    "test:dev": "NODE_OPTIONS=\"--experimental-strip-types\" vitest --watch --ui",
+    "test": "vitest",
+    "test:dev": "vitest --watch --ui",
     "typecheck": "tsc --noEmit",
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",
@@ -83,7 +83,8 @@
     "react-focus-lock": "^2.13.6",
     "react-remove-scroll": "^2.7.1",
     "react-resizable-panels": "^3.0.4",
-    "recharts": "^3.1.0"
+    "recharts": "^3.1.0",
+    "scroll-into-view-if-needed": "^3.1.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",

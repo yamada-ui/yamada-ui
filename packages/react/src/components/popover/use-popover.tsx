@@ -82,6 +82,12 @@ export interface UsePopoverProps
    */
   modal?: boolean
   /**
+   * If `true`, the popover will be opened when click on the field.
+   *
+   * @default true
+   */
+  openOnClick?: boolean
+  /**
    * The placement of the popper relative to its reference.
    *
    * @default 'end'
@@ -111,6 +117,7 @@ export const usePopover = ({
   middleware,
   offset,
   open: openProp,
+  openOnClick = true,
   placement = "end",
   platform,
   preventOverflow,
@@ -229,7 +236,6 @@ export const usePopover = ({
       "aria-disabled": ariaAttr(disabled),
       "aria-expanded": open,
       "aria-haspopup": "dialog",
-      "data-disabled": dataAttr(disabled),
       role: "button",
       ...props,
       ref: mergeRefs(ref, triggerRef, (node) => {
@@ -242,11 +248,11 @@ export const usePopover = ({
       ),
       onClick: handlerAll(
         props.onClick,
-        !open ? (!disabled ? onOpen : undefined) : onClose,
+        !open ? (!disabled && openOnClick ? onOpen : undefined) : onClose,
       ),
       onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
     }),
-    [contentId, disabled, onClose, onKeyDown, onOpen, open, refs],
+    [contentId, disabled, onClose, onKeyDown, onOpen, open, openOnClick, refs],
   )
 
   const getAnchorProps: PropGetter = useCallback(
@@ -338,6 +344,7 @@ export const popoverProps: (
   "closeOnBlur",
   "closeOnEsc",
   "closeOnScroll",
+  "openOnClick",
   "disabled",
   "initialFocusRef",
   "modal",

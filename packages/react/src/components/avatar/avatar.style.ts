@@ -57,7 +57,7 @@ export const avatarStyle = defineComponentSlotStyle({
         _child: {
           _loaded: {
             borderColor: "bg !important",
-            borderWidth: "2px",
+            borderWidth: "1px",
           },
         },
       },
@@ -73,7 +73,7 @@ export const avatarStyle = defineComponentSlotStyle({
       group: {
         _child: {
           borderColor: "bg",
-          borderWidth: "2px",
+          borderWidth: "1px",
         },
       },
       root: {
@@ -87,7 +87,7 @@ export const avatarStyle = defineComponentSlotStyle({
       group: {
         _child: {
           borderColor: "bg",
-          borderWidth: "2px",
+          borderWidth: "1px",
         },
       },
       root: {
@@ -98,14 +98,6 @@ export const avatarStyle = defineComponentSlotStyle({
       },
     },
     surface: {
-      group: {
-        _child: {
-          _loaded: {
-            borderColor: "bg !important",
-            borderWidth: "2px",
-          },
-        },
-      },
       root: {
         layerStyle: "surface",
         _loaded: {

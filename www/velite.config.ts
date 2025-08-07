@@ -17,11 +17,12 @@ import {
 import { getPathname } from "./utils/route"
 
 function getPath(value: string) {
-  return value.replace(/.*\/contents\//, "")
+  return value.replace(/\\/g, "/").replace(/.*\/contents\//, "")
 }
 
 function getSlug(value: string) {
   const [path, lang] = value
+    .replace(/\\/g, "/")
     .replace(/.*\/contents\//, "")
     .replace(/\.mdx$/, "")
     .split(".")

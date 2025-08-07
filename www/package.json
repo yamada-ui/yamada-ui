@@ -7,10 +7,10 @@
   },
   "scripts": {
     "clean": "rimraf .next .velite .eslintcache tsconfig.tsbuildinfo node_modules",
-    "dev:content": "NODE_OPTIONS=\"--experimental-strip-types\" velite --watch",
+    "dev:content": "velite --watch",
     "dev:next": "next dev --turbopack",
     "dev": "run-p dev:*",
-    "build:content": "NODE_OPTIONS=\"--experimental-strip-types\" velite --clean",
+    "build:content": "velite --clean",
     "build:next": "next build",
     "build": "run-s build:*",
     "start": "next start",

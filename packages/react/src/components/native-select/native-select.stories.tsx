@@ -23,15 +23,18 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <NativeSelect.Root placeholder="Select a character">
-      <NativeSelect.Option value="日比野カフカ">
+    <NativeSelect.Root
+      includePlaceholder={false}
+      placeholder="Select a character"
+    >
+      {/* <NativeSelect.Option value="日比野カフカ">
         日比野カフカ
       </NativeSelect.Option>
       <NativeSelect.Option value="市川レノ">市川レノ</NativeSelect.Option>
       <NativeSelect.Option value="亜白ミナ">亜白ミナ</NativeSelect.Option>
       <NativeSelect.Option value="四ノ宮キコル">
         四ノ宮キコル
-      </NativeSelect.Option>
+      </NativeSelect.Option> */}
     </NativeSelect.Root>
   )
 }
@@ -171,7 +174,7 @@ export const DefaultValue: Story = () => {
   )
 }
 
-export const DisabledPlaceholderInOptions: Story = () => {
+export const DisabledIncludePlaceholder: Story = () => {
   const items = useMemo<NativeSelect.Item[]>(
     () => [
       { label: "日比野カフカ", value: "日比野カフカ" },
@@ -184,9 +187,9 @@ export const DisabledPlaceholderInOptions: Story = () => {
 
   return (
     <NativeSelect.Root
+      includePlaceholder={false}
       items={items}
       placeholder="Select a character"
-      placeholderInOptions={false}
     />
   )
 }

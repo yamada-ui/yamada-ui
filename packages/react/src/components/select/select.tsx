@@ -169,12 +169,12 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
     }, [itemsProp, children])
     const {
       descendants,
+      includePlaceholder,
       interactive,
       items: computedItems,
       max,
       open,
       placeholder,
-      placeholderInOptions,
       value,
       getClearIconProps,
       getContentProps,
@@ -209,7 +209,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
             {placeholder ? (
               <SelectOption
                 {...placeholderProps}
-                hidden={!placeholderInOptions}
+                hidden={!includePlaceholder}
                 value=""
               >
                 {placeholder}
@@ -228,7 +228,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
       children,
       computedItems,
       placeholder,
-      placeholderInOptions,
+      includePlaceholder,
       placeholderProps,
     ])
     const varProps = useInputBorder({ errorBorderColor, focusBorderColor })

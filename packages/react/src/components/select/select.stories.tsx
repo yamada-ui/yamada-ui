@@ -402,7 +402,7 @@ export const CloseOnScroll: Story = () => {
   )
 }
 
-export const DisabledPlaceholderInOptions: Story = () => {
+export const DisabledIncludePlaceholder: Story = () => {
   const items = useMemo<Select.Item[]>(
     () => [
       { label: "木ノ下和也", value: "木ノ下和也" },
@@ -417,9 +417,9 @@ export const DisabledPlaceholderInOptions: Story = () => {
 
   return (
     <Select.Root
+      includePlaceholder={false}
       items={items}
       placeholder="Select a character"
-      placeholderInOptions={false}
     />
   )
 }

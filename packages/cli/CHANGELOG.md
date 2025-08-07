@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 1.2.5
+
+### Patch Changes
+
+- [#4723](https://github.com/yamada-ui/yamada-ui/pull/4723) [`6492e1a`](https://github.com/yamada-ui/yamada-ui/commit/6492e1aa98374b763cd9f4a711f1070105852f70) Thanks [@taroj1205](https://github.com/taroj1205)! - Fix theme generation using wrong branch.
+
 ## 1.2.4
 
 ### Patch Changes

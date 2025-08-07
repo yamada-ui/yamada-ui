@@ -1,5 +1,26 @@
 # @yamada-ui/react
 
+## 1.7.8
+
+### Patch Changes
+
+- Updated dependencies [[`6fa5637`](https://github.com/yamada-ui/yamada-ui/commit/6fa56373559cef5c7f72f7844e1153d7cc144680), [`d29c490`](https://github.com/yamada-ui/yamada-ui/commit/d29c490aab6e5ab4dd3eee093a0894a563de1634), [`f0150ef`](https://github.com/yamada-ui/yamada-ui/commit/f0150efe56e0ae4b6e9094b962c5332e946c8b1e)]:
+  - @yamada-ui/use-focus-visible@1.1.17
+  - @yamada-ui/use-clickable@1.2.23
+  - @yamada-ui/select@1.8.12
+  - @yamada-ui/checkbox@1.3.8
+  - @yamada-ui/radio@1.3.7
+  - @yamada-ui/rating@1.1.15
+  - @yamada-ui/segmented-control@1.1.12
+  - @yamada-ui/autocomplete@1.6.15
+  - @yamada-ui/file-input@1.0.57
+  - @yamada-ui/menu@1.5.8
+  - @yamada-ui/tabs@1.0.56
+  - @yamada-ui/tag@1.1.14
+  - @yamada-ui/switch@1.2.10
+  - @yamada-ui/input@1.0.57
+  - @yamada-ui/color-picker@1.4.20
+
 ## 1.7.7
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @yamada-ui/use-clickable
 
+## 1.2.23
+
+### Patch Changes
+
+- [#4737](https://github.com/yamada-ui/yamada-ui/pull/4737) [`d29c490`](https://github.com/yamada-ui/yamada-ui/commit/d29c490aab6e5ab4dd3eee093a0894a563de1634) Thanks [@jeffplays2005](https://github.com/jeffplays2005)! - Fix `useClickable` button state update in ref callback
+
 ## 1.2.22
 
 ### Patch Changes

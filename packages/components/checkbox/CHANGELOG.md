@@ -1,5 +1,12 @@
 # @yamada-ui/checkbox
 
+## 1.3.8
+
+### Patch Changes
+
+- Updated dependencies [[`6fa5637`](https://github.com/yamada-ui/yamada-ui/commit/6fa56373559cef5c7f72f7844e1153d7cc144680)]:
+  - @yamada-ui/use-focus-visible@1.1.17
+
 ## 1.3.7
 
 ### Patch Changes

@@ -260,6 +260,11 @@
       "description": "The border color when the input is invalid.",
       "required": false
     },
+    "filter": {
+      "type": "AutocompleteFilter",
+      "description": "The function to filter the items.",
+      "required": false
+    },
     "flip": {
       "type": "boolean",
       "defaultValue": "true",

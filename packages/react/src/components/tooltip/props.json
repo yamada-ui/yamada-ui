@@ -64,7 +64,7 @@
       "required": false
     },
     "elements": {
-      "type": "{\n  floating?: HTMLElement | null | undefined\n  reference?: HTMLDivElement | null | undefined\n}",
+      "type": "{\n  floating?: HTMLElement | null | undefined\n  reference?: HTMLButtonElement | null | undefined\n}",
       "description": "Object containing the reference and floating elements.",
       "required": false
     },
@@ -152,7 +152,7 @@
       "required": false
     },
     "whileElementsMounted": {
-      "type": "(\n  reference: HTMLDivElement,\n  floating: HTMLElement,\n  update: () => void,\n) => () => void",
+      "type": "(\n  reference: HTMLButtonElement,\n  floating: HTMLElement,\n  update: () => void,\n) => () => void",
       "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
       "required": false
     }

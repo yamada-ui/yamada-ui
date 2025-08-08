@@ -189,37 +189,37 @@ To group buttons, use `ButtonGroup`. `ButtonGroup` allows you to set `variant`, 
 
 ```tsx preview
 <VStack>
-  <ButtonGroup attached variant="outline">
-    <Button>Button</Button>
-    <IconButton icon={<PlusIcon />} />
-  </ButtonGroup>
+  <ButtonGroup.Root attached variant="outline">
+    <ButtonGroup.Item>Button</ButtonGroup.Item>
+    <ButtonGroup.IconItem icon={<PlusIcon />} />
+  </ButtonGroup.Root>
 
   <Wrap gap="md">
-    <ButtonGroup gap="sm">
-      <Button>Button</Button>
-      <Button>Button</Button>
-      <Button>Button</Button>
-    </ButtonGroup>
+    <ButtonGroup.Root gap="sm">
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
 
-    <ButtonGroup attached disabled variant="outline">
-      <Button>Button</Button>
-      <Button>Button</Button>
-      <Button>Button</Button>
-    </ButtonGroup>
+    <ButtonGroup.Root attached disabled variant="outline">
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
   </Wrap>
 
   <Wrap gap="md">
-    <ButtonGroup orientation="vertical" gap="sm">
-      <Button>Button</Button>
-      <Button>Button</Button>
-      <Button>Button</Button>
-    </ButtonGroup>
+    <ButtonGroup.Root orientation="vertical" gap="sm">
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
 
-    <ButtonGroup orientation="vertical" attached variant="outline">
-      <Button>Button</Button>
-      <Button>Button</Button>
-      <Button>Button</Button>
-    </ButtonGroup>
+    <ButtonGroup.Root orientation="vertical" attached variant="outline">
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
   </Wrap>
 </VStack>
 ```

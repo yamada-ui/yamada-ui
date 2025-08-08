@@ -14,11 +14,11 @@ return (
   <VStack gap="md">
     <Text>state: {String(flg)}</Text>
 
-    <ButtonGroup wrap="wrap">
-      <Button onClick={on}>On</Button>
-      <Button onClick={off}>Off</Button>
-      <Button onClick={toggle}>Toggle</Button>
-    </ButtonGroup>
+    <ButtonGroup.Root wrap="wrap">
+      <ButtonGroup.Item onClick={on}>On</ButtonGroup.Item>
+      <ButtonGroup.Item onClick={off}>Off</ButtonGroup.Item>
+      <ButtonGroup.Item onClick={toggle}>Toggle</ButtonGroup.Item>
+    </ButtonGroup.Root>
   </VStack>
 )
 ```
@@ -54,11 +54,11 @@ return (
   <VStack gap="md">
     <Text>state: {String(flg)}</Text>
 
-    <ButtonGroup wrap="wrap">
-      <Button onClick={on}>On</Button>
-      <Button onClick={off}>Off</Button>
-      <Button onClick={toggle}>Toggle</Button>
-    </ButtonGroup>
+    <ButtonGroup.Root wrap="wrap">
+      <ButtonGroup.Item onClick={on}>On</ButtonGroup.Item>
+      <ButtonGroup.Item onClick={off}>Off</ButtonGroup.Item>
+      <ButtonGroup.Item onClick={toggle}>Toggle</ButtonGroup.Item>
+    </ButtonGroup.Root>
   </VStack>
 )
 ```

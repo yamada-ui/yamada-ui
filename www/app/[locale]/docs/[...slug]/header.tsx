@@ -31,7 +31,7 @@ export function Header({
       </VStack>
 
       {storybook || source || style ? (
-        <ButtonGroup as="nav" size="xs" variant="outline" gap="sm">
+        <ButtonGroup.Root as="nav" size="xs" variant="outline" gap="sm">
           {source ? (
             <NextLinkButton
               href={source}
@@ -62,7 +62,7 @@ export function Header({
               {t("storybook")}
             </NextLinkButton>
           ) : null}
-        </ButtonGroup>
+        </ButtonGroup.Root>
       ) : null}
     </VStack>
   )

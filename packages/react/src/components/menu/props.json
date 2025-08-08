@@ -64,6 +64,26 @@
       "description": "Set color scheme variables.",
       "required": false
     },
+    "footer": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The footer of the menu.",
+      "required": false
+    },
+    "footerProps": {
+      "type": "MenuFooterProps",
+      "description": "Props for the footer component.",
+      "required": false
+    },
+    "header": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The header of the menu.",
+      "required": false
+    },
+    "headerProps": {
+      "type": "MenuHeaderProps",
+      "description": "Props for the header component.",
+      "required": false
+    },
     "items": {
       "type": "(\n  | MenuItemWithCheckboxGroup<string[]>\n  | MenuItemWithItems\n  | MenuItemWithRadioGroup<string>\n  | MenuItemWithSeparator\n  | MenuItemWithValue\n)[]",
       "description": "If provided, generate elements based on items.",
@@ -72,6 +92,28 @@
     "portalProps": {
       "type": "Omit<PortalProps, \"children\">",
       "description": "Props for portal component.",
+      "required": false
+    }
+  },
+  "Footer": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
       "required": false
     }
   },
@@ -104,6 +146,28 @@
     "labelProps": {
       "type": "MenuLabelProps",
       "description": "Props for the label component.",
+      "required": false
+    }
+  },
+  "Header": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
       "required": false
     }
   },
@@ -277,11 +341,16 @@
       "defaultValue": "false",
       "description": "If `true`, the menu item will be disabled.",
       "required": false
+    },
+    "icon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The icon to be used in the menu option item.",
+      "required": false
     }
   },
   "Root": {
     "size": {
-      "type": "\"md\" | \"sm\" | [\"md\" | \"sm\" | ({ _peerAccept?: \"md\" | \"sm\" | [\"md\" | \"sm\" | (... & { base?: \"md\" | \"sm\" | [\"md\" | \"sm\" | (... & ...), \"md\" | \"sm\" | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"md\" | ... 3 more ... | undefined; }), \"md\" | ... 1 more ... | (... & { ...; })] | { ...; } | undefined; ... ...",
+      "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
       "description": "The size of the component.",
       "required": false
     },
@@ -350,7 +419,7 @@
       "required": false
     },
     "elements": {
-      "type": "{\n  floating?: HTMLElement | null | undefined\n  reference?: HTMLDivElement | null | undefined\n}",
+      "type": "{\n  floating?: HTMLElement | null | undefined\n  reference?: HTMLButtonElement | null | undefined\n}",
       "description": "Object containing the reference and floating elements.",
       "required": false
     },
@@ -407,6 +476,12 @@
       "description": "If `true`, the element will be opened.",
       "required": false
     },
+    "openOnClick": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the popover will be opened when click on the field.",
+      "required": false
+    },
     "placement": {
       "type": "Direction",
       "defaultValue": "\"end-start\"",
@@ -442,13 +517,8 @@
       "description": "Whether to use `transform` for positioning instead of `top` and `left`\n(layout) in the `floatingStyles` object.",
       "required": false
     },
-    "updateRef": {
-      "type": "RefObject<() => void>",
-      "description": "Update the position of the floating element, re-rendering the component if required.",
-      "required": false
-    },
     "whileElementsMounted": {
-      "type": "(\n  reference: HTMLDivElement,\n  floating: HTMLElement,\n  update: () => void,\n) => () => void",
+      "type": "(\n  reference: HTMLButtonElement,\n  floating: HTMLElement,\n  update: () => void,\n) => () => void",
       "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
       "required": false
     }

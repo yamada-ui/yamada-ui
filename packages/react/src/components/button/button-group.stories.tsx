@@ -1,13 +1,11 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { Button } from "."
 import { CheckIcon, PencilIcon, PlusIcon, XIcon } from "../icon"
-import { IconButton } from "../icon-button"
-import { ButtonGroup } from "./button-group"
+import { ButtonGroup } from "./"
 
-type Story = StoryFn<typeof ButtonGroup>
+type Story = StoryFn<typeof ButtonGroup.Root>
 
-const meta: Meta<typeof ButtonGroup> = {
-  component: ButtonGroup,
+const meta: Meta<typeof ButtonGroup.Root> = {
+  component: ButtonGroup.Root,
   title: "Components / ButtonGroup",
 }
 
@@ -15,28 +13,28 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <ButtonGroup>
-      <Button>Button</Button>
-      <Button>Button</Button>
-      <Button>Button</Button>
-    </ButtonGroup>
+    <ButtonGroup.Root>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
   )
 }
 
 export const Variant: Story = () => {
   return (
     <>
-      <ButtonGroup variant="surface">
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <Button>Button</Button>
-      </ButtonGroup>
+      <ButtonGroup.Root variant="surface">
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+      </ButtonGroup.Root>
 
-      <ButtonGroup variant="surface">
-        <IconButton aria-label="Edit" icon={<PencilIcon />} />
-        <IconButton aria-label="Submit" icon={<CheckIcon />} />
-        <IconButton aria-label="Cancel" icon={<XIcon />} />
-      </ButtonGroup>
+      <ButtonGroup.Root variant="surface">
+        <ButtonGroup.IconItem aria-label="Edit" icon={<PencilIcon />} />
+        <ButtonGroup.IconItem aria-label="Submit" icon={<CheckIcon />} />
+        <ButtonGroup.IconItem aria-label="Cancel" icon={<XIcon />} />
+      </ButtonGroup.Root>
     </>
   )
 }
@@ -44,17 +42,17 @@ export const Variant: Story = () => {
 export const Size: Story = () => {
   return (
     <>
-      <ButtonGroup size="sm">
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <Button>Button</Button>
-      </ButtonGroup>
+      <ButtonGroup.Root size="sm">
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+      </ButtonGroup.Root>
 
-      <ButtonGroup size="sm">
-        <IconButton aria-label="Edit" icon={<PencilIcon />} />
-        <IconButton aria-label="Submit" icon={<CheckIcon />} />
-        <IconButton aria-label="Cancel" icon={<XIcon />} />
-      </ButtonGroup>
+      <ButtonGroup.Root size="sm">
+        <ButtonGroup.IconItem aria-label="Edit" icon={<PencilIcon />} />
+        <ButtonGroup.IconItem aria-label="Submit" icon={<CheckIcon />} />
+        <ButtonGroup.IconItem aria-label="Cancel" icon={<XIcon />} />
+      </ButtonGroup.Root>
     </>
   )
 }
@@ -62,17 +60,17 @@ export const Size: Story = () => {
 export const ColorScheme: Story = () => {
   return (
     <>
-      <ButtonGroup colorScheme="blue">
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <Button>Button</Button>
-      </ButtonGroup>
+      <ButtonGroup.Root colorScheme="blue">
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+      </ButtonGroup.Root>
 
-      <ButtonGroup colorScheme="blue">
-        <IconButton aria-label="Edit" icon={<PencilIcon />} />
-        <IconButton aria-label="Submit" icon={<CheckIcon />} />
-        <IconButton aria-label="Cancel" icon={<XIcon />} />
-      </ButtonGroup>
+      <ButtonGroup.Root colorScheme="blue">
+        <ButtonGroup.IconItem aria-label="Edit" icon={<PencilIcon />} />
+        <ButtonGroup.IconItem aria-label="Submit" icon={<CheckIcon />} />
+        <ButtonGroup.IconItem aria-label="Cancel" icon={<XIcon />} />
+      </ButtonGroup.Root>
     </>
   )
 }
@@ -80,23 +78,23 @@ export const ColorScheme: Story = () => {
 export const Disabled: Story = () => {
   return (
     <>
-      <ButtonGroup disabled>
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <Button>Button</Button>
-      </ButtonGroup>
+      <ButtonGroup.Root disabled>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+      </ButtonGroup.Root>
 
-      <ButtonGroup variant="outline" attached disabled>
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <Button>Button</Button>
-      </ButtonGroup>
+      <ButtonGroup.Root variant="outline" attached disabled>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+      </ButtonGroup.Root>
 
-      <ButtonGroup disabled>
-        <IconButton aria-label="Edit" icon={<PencilIcon />} />
-        <IconButton aria-label="Submit" icon={<CheckIcon />} />
-        <IconButton aria-label="Cancel" icon={<XIcon />} />
-      </ButtonGroup>
+      <ButtonGroup.Root disabled>
+        <ButtonGroup.IconItem aria-label="Edit" icon={<PencilIcon />} />
+        <ButtonGroup.IconItem aria-label="Submit" icon={<CheckIcon />} />
+        <ButtonGroup.IconItem aria-label="Cancel" icon={<XIcon />} />
+      </ButtonGroup.Root>
     </>
   )
 }
@@ -104,17 +102,17 @@ export const Disabled: Story = () => {
 export const Orientation: Story = () => {
   return (
     <>
-      <ButtonGroup>
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <Button>Button</Button>
-      </ButtonGroup>
+      <ButtonGroup.Root>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+      </ButtonGroup.Root>
 
-      <ButtonGroup orientation="vertical">
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <Button>Button</Button>
-      </ButtonGroup>
+      <ButtonGroup.Root orientation="vertical">
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+      </ButtonGroup.Root>
     </>
   )
 }
@@ -122,22 +120,25 @@ export const Orientation: Story = () => {
 export const Attached: Story = () => {
   return (
     <>
-      <ButtonGroup variant="outline" attached>
-        <Button>Button</Button>
-        <IconButton aria-label="Add" icon={<PlusIcon fontSize="xl" />} />
-      </ButtonGroup>
+      <ButtonGroup.Root variant="outline" attached>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.IconItem
+          aria-label="Add"
+          icon={<PlusIcon fontSize="xl" />}
+        />
+      </ButtonGroup.Root>
 
-      <ButtonGroup size="sm" variant="outline" attached>
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <Button>Button</Button>
-      </ButtonGroup>
+      <ButtonGroup.Root size="sm" variant="outline" attached>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+      </ButtonGroup.Root>
 
-      <ButtonGroup variant="outline" attached orientation="vertical">
-        <Button>Button</Button>
-        <Button>Button</Button>
-        <Button>Button</Button>
-      </ButtonGroup>
+      <ButtonGroup.Root variant="outline" attached orientation="vertical">
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+        <ButtonGroup.Item>Button</ButtonGroup.Item>
+      </ButtonGroup.Root>
     </>
   )
 }

@@ -128,7 +128,7 @@
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"filled\" | \"flushed\" | \"plain\" | [\"outline\" | \"filled\" | \"flushed\" | \"plain\" | ({ _peerAccept?: \"outline\" | \"filled\" | \"flushed\" | \"plain\" | [\"outline\" | \"filled\" | \"flushed\" | \"plain\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+      "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | ({ _peerAccept?: \"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
       "description": "The variant of the component.",
       "required": false
     },

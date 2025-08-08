@@ -124,26 +124,26 @@ return (
 If you want to control the number of avatars displayed, specify a number with `max`. If there are more avatars than the specified number, it truncates and displays the remaining avatars as `+X`.
 
 ```tsx preview
-<AvatarGroup max={3}>
-  <Avatar
+<AvatarGroup.Root max={3}>
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-</AvatarGroup>
+</AvatarGroup.Root>
 ```

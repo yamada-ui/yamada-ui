@@ -63,10 +63,10 @@ describe("<Toggle />", () => {
     vi.spyOn(console, "warn").mockImplementation(noop)
 
     render(
-      <ToggleGroup value={["toggle1"]}>
-        <Toggle value="toggle1">Toggle1</Toggle>
-        <Toggle value={undefined}>undefined</Toggle>
-      </ToggleGroup>,
+      <ToggleGroup.Root value={["toggle1"]}>
+        <ToggleGroup.Item value="toggle1">Toggle1</ToggleGroup.Item>
+        <ToggleGroup.Item value={undefined}>undefined</ToggleGroup.Item>
+      </ToggleGroup.Root>,
     )
 
     fireEvent.click(screen.getByRole("button", { name: /toggle1/i }))

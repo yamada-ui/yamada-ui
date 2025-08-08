@@ -50,7 +50,7 @@ export function Header() {
 
       <Spacer display={{ base: "none", md: "block" }} />
 
-      <ButtonGroup size="sm" variant="ghost" alignItems="center" gap="sm">
+      <ButtonGroup.Root size="sm" variant="ghost" alignItems="center" gap="sm">
         <Search />
 
         <Separator
@@ -94,7 +94,7 @@ export function Header() {
         </HStack>
 
         <MobileMenu items={items} />
-      </ButtonGroup>
+      </ButtonGroup.Root>
     </HStack>
   )
 }

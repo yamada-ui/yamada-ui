@@ -94,11 +94,6 @@
       "description": "The variant of the component.",
       "required": false
     },
-    "col": {
-      "type": "number",
-      "description": "The number of columns.\nIf `orientation` is `\"horizontal\"` and `items` is not set, please set this.",
-      "required": false
-    },
     "descriptionProps": {
       "type": "DataListDescriptionProps",
       "description": "The props for the data list description component.",

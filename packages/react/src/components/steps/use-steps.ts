@@ -26,8 +26,7 @@ const [StepsContext, useStepsContext] = createContext<StepsContext>({
 
 export { StepsContext, useStepsContext }
 
-export interface StepsItemContext
-  extends Omit<UseStepsItemReturn, "getRootProps"> {}
+interface StepsItemContext extends Omit<UseStepsItemReturn, "getRootProps"> {}
 
 const [StepsItemContext, useStepsItemContext] = createContext<StepsItemContext>(
   {

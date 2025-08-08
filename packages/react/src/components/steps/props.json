@@ -256,11 +256,6 @@
       "description": "The variant of the component.",
       "required": false
     },
-    "count": {
-      "type": "number",
-      "description": "The total number of steps.",
-      "required": false
-    },
     "defaultIndex": {
       "type": "number",
       "defaultValue": "0",

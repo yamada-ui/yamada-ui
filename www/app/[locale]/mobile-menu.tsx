@@ -4,7 +4,6 @@ import type { NextLinkButtonProps } from "@/components"
 import type { DocMap } from "@/data"
 import {
   Box,
-  Button,
   ButtonGroup,
   ChevronRightIcon,
   CloseButton,
@@ -163,7 +162,7 @@ function DocsMenu({ onClose }: DocsMenuProps) {
     <>
       <Separator />
 
-      <ButtonGroup
+      <ButtonGroup.Root
         as="nav"
         size="sm"
         variant="ghost"
@@ -187,7 +186,7 @@ function DocsMenu({ onClose }: DocsMenuProps) {
             />
           )
         })}
-      </ButtonGroup>
+      </ButtonGroup.Root>
     </>
   )
 }
@@ -207,7 +206,7 @@ function DocsMenuGroup({
 }: DocsMenuGroupProps) {
   return (
     <VStack gap="xs">
-      <Button
+      <ButtonGroup.Item
         size="sm"
         variant="ghost"
         endIcon={
@@ -224,7 +223,7 @@ function DocsMenuGroup({
         onClick={onClick}
       >
         <Text>{title}</Text>
-      </Button>
+      </ButtonGroup.Item>
 
       <Collapse as="nav" open={open} ps="md" w="full" _lastChild={{ mb: "0" }}>
         {items.map(({ items, pathname: href, segment, status, title }) => {

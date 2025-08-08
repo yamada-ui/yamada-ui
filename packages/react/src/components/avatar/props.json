@@ -1,5 +1,5 @@
 {
-  "Avatar": {
+  "Item": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -98,7 +98,7 @@
       "required": false
     }
   },
-  "AvatarGroup": {
+  "Root": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",

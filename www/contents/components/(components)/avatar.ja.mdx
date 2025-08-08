@@ -136,26 +136,26 @@ return (
 表示するアバターの数を制御する場合は、`max`に数値を指定します。指定された数以上のアバターが存在する場合は、切り詰めて残りのアバターを`+X`のように表示されます。
 
 ```tsx preview
-<AvatarGroup max={3}>
-  <Avatar
+<AvatarGroup.Root max={3}>
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-</AvatarGroup>
+</AvatarGroup.Root>
 ```

@@ -2,10 +2,9 @@ import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { SubmitHandler } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 import { Editable } from "."
-import { Button, ButtonGroup } from "../button"
+import { Button, ButtonGroup, IconButton } from "../button"
 import { Field } from "../field"
 import { CheckIcon, PencilIcon, XIcon } from "../icon"
-import { IconButton } from "../icon-button"
 import { VStack } from "../stack"
 
 type Story = StoryFn<typeof Editable.Root>
@@ -209,28 +208,28 @@ export const CustomControl: Story = () => {
       Editable.useContext()
 
     return (
-      <ButtonGroup size="xs">
-        <IconButton
+      <ButtonGroup.Root size="xs">
+        <ButtonGroup.IconItem
           icon={<PencilIcon />}
           {...getEditProps()}
           variant="ghost"
           aria-label="Edit"
         />
 
-        <IconButton
+        <ButtonGroup.IconItem
           icon={<CheckIcon />}
           {...getSubmitProps()}
           variant="outline"
           aria-label="Submit"
         />
 
-        <IconButton
+        <ButtonGroup.IconItem
           icon={<XIcon />}
           {...getCancelProps()}
           variant="outline"
           aria-label="Cancel"
         />
-      </ButtonGroup>
+      </ButtonGroup.Root>
     )
   }
 

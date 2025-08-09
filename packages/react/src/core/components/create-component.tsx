@@ -347,21 +347,16 @@ export function createSlotComponent<
   function useSlotComponentProps<Y extends Dict = Dict>(
     props: Y,
     slot?: ComponentSlot<ComponentSlotName<M>>,
-    {
-      className,
-      withContext = true,
-    }: Omit<UseComponentPropsOptions, "transferProps"> = {},
+    { className }: Omit<UseComponentPropsOptions, "transferProps"> = {},
   ) {
     className = useClassName(slot, className)
 
     const style = useStyleContext()
-    const contextProps = usePropsContext() ?? {}
-    const rest = withContext ? mergeProps(contextProps, props)() : props
 
     return {
-      ...rest,
-      className: cx(className, rest.className),
-      css: mergeSlotCSS(slot, style, rest.css),
+      ...props,
+      className: cx(className, props.className),
+      css: mergeSlotCSS(slot, style, props.css),
     }
   }
 

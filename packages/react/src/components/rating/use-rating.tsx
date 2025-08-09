@@ -11,7 +11,6 @@ import {
   createContext,
   dataAttr,
   handlerAll,
-  isTruthyDataAttr,
   mergeRefs,
   runKeyAction,
   visuallyHiddenAttributes,
@@ -94,6 +93,7 @@ export const useRating = (props: UseRatingProps = {}) => {
       disabled,
       fractions: fractionsProp = 1,
       highlightSelectedOnly = false,
+      readOnly,
       required,
       value: valueProp,
       onChange: onChangeProp,
@@ -119,7 +119,6 @@ export const useRating = (props: UseRatingProps = {}) => {
     () => getRoundedValue(value, decimal),
     [decimal, value],
   )
-  const readOnly = isTruthyDataAttr(dataProps["data-readonly"])
   const interactive = !(readOnly || disabled)
   const displayValue = hoveredValue !== -1 ? hoveredValue : roundedValue
 

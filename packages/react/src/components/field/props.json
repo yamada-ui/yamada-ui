@@ -149,6 +149,11 @@
       "description": "The optional indicator to use.",
       "required": false
     },
+    "orientation": {
+      "type": "StyleValue<\"horizontal\" | \"vertical\">",
+      "description": "The orientation of the field.",
+      "required": false
+    },
     "readOnly": {
       "type": "boolean",
       "defaultValue": "false",

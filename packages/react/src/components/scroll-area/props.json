@@ -32,7 +32,7 @@
       "required": false
     },
     "type": {
-      "type": "\"hover\" | \"scroll\" | \"always\" | \"never\"",
+      "type": "\"scroll\" | \"hover\" | \"always\" | \"never\"",
       "defaultValue": "\"hover\"",
       "description": "Scrollbar visibility type.",
       "required": false

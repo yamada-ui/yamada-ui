@@ -103,7 +103,7 @@
       "required": false
     },
     "variant": {
-      "type": "\"solid\" | \"subtle\" | \"surface\" | \"plain\" | \"island\" | [\"solid\" | \"subtle\" | \"surface\" | \"plain\" | \"island\" | ({ _peerAccept?: \"solid\" | \"subtle\" | \"surface\" | \"plain\" | \"island\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"solid\" | ... 6 more ... | undefined; } & { ...; }), \"solid\" | ... 4 more .....",
+      "type": "\"solid\" | \"subtle\" | \"island\" | \"surface\" | \"plain\" | [\"solid\" | \"subtle\" | \"island\" | \"surface\" | \"plain\" | ({ _peerAccept?: \"solid\" | \"subtle\" | \"island\" | \"surface\" | \"plain\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"solid\" | ... 6 more ... | undefined; } & { ...; }), \"solid\" | ... 4 more .....",
       "description": "The variant of the component.",
       "required": false
     },

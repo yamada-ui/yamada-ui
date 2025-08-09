@@ -13,11 +13,7 @@ export const linkBoxStyle = defineComponentSlotStyle({
         position: "absolute",
         zIndex: "0",
       },
-      _focusVisible: {
-        _before: {
-          ...focusRingStyle.outline,
-        },
-      },
+      _focusVisible: { _before: focusRingStyle.outline },
     },
     root: {
       "a[href]:not([data-link-box-overlay]), abbr[title]": {

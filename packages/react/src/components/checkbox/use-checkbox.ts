@@ -158,7 +158,6 @@ export const useCheckbox = <Y extends string = string>({
         "data-indeterminate": dataAttr(indeterminate),
         checked,
         disabled,
-        indeterminate,
         readOnly,
         required,
         value,

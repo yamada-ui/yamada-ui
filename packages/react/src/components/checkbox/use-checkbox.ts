@@ -6,17 +6,19 @@ import type { FieldProps } from "../field"
 import { useCallback, useId } from "react"
 import { useControllableEventState } from "../../hooks/use-controllable-state"
 import {
+  ariaAttr,
   cx,
   dataAttr,
   handlerAll,
+  isNumber,
   isUndefined,
   mergeRefs,
   visuallyHiddenAttributes,
 } from "../../utils"
 import { useFieldProps } from "../field"
-import { useRadioGroupContext } from "./use-radio-group"
+import { useCheckboxGroupContext } from "./use-checkbox-group"
 
-export interface UseRadioProps<Y extends string = string>
+export interface UseCheckboxProps<Y extends string = string>
   extends Omit<HTMLProps<"label">, "onBlur" | "onChange" | "onFocus" | "ref">,
     HTMLRefAttributes<"input">,
     FieldProps {
@@ -25,25 +27,31 @@ export interface UseRadioProps<Y extends string = string>
    */
   id?: string
   /**
-   * The name of the input field in a radio.
+   * The name of the input field in a checkbox.
    */
   name?: string
   /**
-   * If `true`, the radio will be checked.
+   * If `true`, the checkbox will be checked.
    */
   checked?: boolean
   /**
-   * If `true`, the radio will be initially checked.
+   * If `true`, the checkbox will be initially checked.
    *
    * @default false
    */
   defaultChecked?: boolean
   /**
-   * The value of the radio.
+   * If `true`, the checkbox will be indeterminate.
+   *
+   * @default false
+   */
+  indeterminate?: boolean
+  /**
+   * The value of the checkbox.
    */
   value?: Y
   /**
-   * The callback invoked when the radio is blurred.
+   * The callback invoked when the checkbox is blurred.
    */
   onBlur?: FocusEventHandler<HTMLInputElement>
   /**
@@ -51,18 +59,18 @@ export interface UseRadioProps<Y extends string = string>
    */
   onChange?: ChangeEventHandler<HTMLInputElement>
   /**
-   * The callback invoked when the radio is focused.
+   * The callback invoked when the checkbox is focused.
    */
   onFocus?: FocusEventHandler<HTMLInputElement>
 }
 
-export const useRadio = <Y extends string = string>({
+export const useCheckbox = <Y extends string = string>({
   "aria-describedby": ariaDescribedbyProp,
   ...props
-}: UseRadioProps<Y> = {}) => {
-  const group = useRadioGroupContext()
+}: UseCheckboxProps<Y> = {}) => {
+  const group = useCheckboxGroupContext()
   const {
-    name: groupName,
+    max,
     value: groupValue,
     getInputProps: getGroupInputProps,
     getLabelProps,
@@ -72,10 +80,11 @@ export const useRadio = <Y extends string = string>({
     props: {
       id,
       ref,
-      name = groupName,
+      name,
       checked: checkedProp,
       defaultChecked = false,
       disabled,
+      indeterminate = false,
       readOnly,
       required,
       value,
@@ -90,25 +99,29 @@ export const useRadio = <Y extends string = string>({
     ...props,
     notSupportReadOnly: true,
   })
-  const interactive = !(readOnly || disabled)
   const resolvedAriaDescribedby = group ? ariaDescribedbyProp : ariaDescribedby
   const resolvedChecked =
     !isUndefined(groupValue) && !isUndefined(value)
-      ? groupValue === value
+      ? groupValue.includes(value)
       : checkedProp
   const [checked, setChecked] = useControllableEventState({
     defaultValue: defaultChecked,
     value: resolvedChecked,
     onChange: onChangeProp,
   })
+  const trulyDisabled =
+    !checked && isNumber(max) && group && group.value.length >= max
+  const interactive = !(readOnly || trulyDisabled)
 
   const onChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
       if (!interactive) return (ev.defaultPrevented = true)
 
+      if (indeterminate) ev.target.checked = true
+
       setChecked(ev)
     },
-    [setChecked, interactive],
+    [interactive, indeterminate, setChecked],
   )
 
   const getRootProps: PropGetter<"label"> = useCallback(
@@ -117,13 +130,15 @@ export const useRadio = <Y extends string = string>({
         ...dataProps,
         htmlFor: id,
         "data-checked": dataAttr(checked),
+        "data-disabled": dataAttr(!interactive),
+        "data-indeterminate": dataAttr(indeterminate),
         ...rest,
         ...props,
       }
 
       return getLabelProps?.(sharedProps) ?? sharedProps
     },
-    [dataProps, getLabelProps, id, checked, rest],
+    [dataProps, id, checked, interactive, indeterminate, rest, getLabelProps],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
@@ -132,12 +147,15 @@ export const useRadio = <Y extends string = string>({
         ...dataProps,
         ...ariaProps,
         id,
-        type: "radio",
+        type: "checkbox",
         name,
         style: visuallyHiddenAttributes.style,
-        "aria-checked": checked,
+        "aria-checked": indeterminate ? ("mixed" as const) : checked,
         "aria-describedby": cx(resolvedAriaDescribedby, ariaDescribedby),
+        "aria-disabled": ariaAttr(!interactive),
         "data-checked": dataAttr(checked),
+        "data-disabled": dataAttr(!interactive),
+        "data-indeterminate": dataAttr(indeterminate),
         checked,
         disabled,
         readOnly,
@@ -153,16 +171,18 @@ export const useRadio = <Y extends string = string>({
       return getGroupInputProps?.(sharedProps) ?? sharedProps
     },
     [
+      dataProps,
+      ariaProps,
       id,
       name,
+      indeterminate,
       checked,
       resolvedAriaDescribedby,
+      interactive,
       disabled,
       readOnly,
       required,
       value,
-      dataProps,
-      ariaProps,
       ref,
       eventProps,
       onChange,
@@ -175,13 +195,16 @@ export const useRadio = <Y extends string = string>({
       ...dataProps,
       "aria-hidden": "true",
       "data-checked": dataAttr(checked),
+      "data-disabled": dataAttr(!interactive),
+      "data-indeterminate": dataAttr(indeterminate),
       ...props,
     }),
-    [dataProps, checked],
+    [dataProps, checked, interactive, indeterminate],
   )
 
   return {
     checked,
+    indeterminate,
     getIndicatorProps,
     getInputProps,
     getRootProps,
@@ -189,4 +212,4 @@ export const useRadio = <Y extends string = string>({
   }
 }
 
-export type UseRadioReturn = ReturnType<typeof useRadio>
+export type UseCheckboxReturn = ReturnType<typeof useCheckbox>

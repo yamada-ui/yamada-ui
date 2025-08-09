@@ -3,57 +3,66 @@
 import type { ChangeEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
-import { useCallback, useId } from "react"
+import { useCallback } from "react"
 import { useControllableState } from "../../client"
 import {
+  ariaAttr,
   createContext,
   cx,
   dataAttr,
   handlerAll,
+  isNumber,
   isObject,
+  isString,
   isUndefined,
   mergeRefs,
   visuallyHiddenAttributes,
 } from "../../utils"
 import { useFieldProps } from "../field"
 
-interface RadioGroupContext extends Omit<UseRadioGroupReturn, "getRootProps"> {}
+interface CheckboxGroupContext
+  extends Omit<UseCheckboxGroupReturn, "getRootProps"> {}
 
-const [RadioGroupContext, useRadioGroupContext] =
-  createContext<RadioGroupContext>({
-    name: "RadioGroupContext",
+const [CheckboxGroupContext, useCheckboxGroupContext] =
+  createContext<CheckboxGroupContext>({
+    name: "CheckboxGroupContext",
     strict: false,
   })
 
-export { RadioGroupContext, useRadioGroupContext }
+export { CheckboxGroupContext, useCheckboxGroupContext }
 
-export interface UseRadioGroupProps<Y extends string = string>
+export interface UseCheckboxGroupProps<Y extends string = string>
   extends Omit<HTMLProps, "defaultValue" | "onChange" | "value">,
     FieldProps {
   /**
-   * The initial value of the radio group.
+   * The initial value of the checkbox group.
+   *
+   * @default '[]'
    */
-  defaultValue?: Y
+  defaultValue?: Y[]
   /**
-   * The value of the radio group.
+   * The maximum number of checkboxes that can be checked.
    */
-  value?: Y
+  max?: number
   /**
-   * The callback fired when any children radio is checked or unchecked.
+   * The value of the checkbox group.
    */
-  onChange?: (value: Y) => void
+  value?: Y[]
+  /**
+   * The callback fired when any children checkbox is checked or unchecked.
+   */
+  onChange?: (value: Y[]) => void
 }
 
-export const useRadioGroup = <Y extends string = string>(
-  props: UseRadioGroupProps<Y> = {},
+export const useCheckboxGroup = <Y extends string = string>(
+  props: UseCheckboxGroupProps<Y> = {},
 ) => {
-  const uuid = useId()
   const {
     context: { labelId } = {},
     props: {
-      id = uuid,
-      defaultValue,
+      defaultValue = [],
       disabled,
+      max,
       readOnly,
       required,
       value: valueProp,
@@ -75,13 +84,19 @@ export const useRadioGroup = <Y extends string = string>(
     (valueOrEv: ChangeEvent<HTMLInputElement> | Y) => {
       if (!interactive) return
 
-      if (isObject(valueOrEv)) {
-        setValue(valueOrEv.target.value as Y)
-      } else {
-        setValue(valueOrEv)
-      }
+      if (isObject(valueOrEv)) valueOrEv = valueOrEv.target.value as Y
+
+      setValue((prev) => {
+        if (prev.includes(valueOrEv)) {
+          return prev.filter((prevValue) => prevValue !== valueOrEv)
+        } else if (!isNumber(max) || prev.length < max) {
+          return [...prev, valueOrEv]
+        } else {
+          return prev
+        }
+      })
     },
-    [interactive, setValue],
+    [interactive, max, setValue],
   )
 
   const getRootProps: PropGetter = useCallback(
@@ -92,31 +107,35 @@ export const useRadioGroup = <Y extends string = string>(
       ...props
     } = {}) => ({
       ...dataProps,
-      id,
       "aria-describedby": cx(ariaDescribedbyProp, ariaDescribedby),
       "aria-labelledby": cx(labelId, ariaLabelledby),
-      role: "radiogroup",
+      role: "group",
       ...rest,
       ...props,
       ref: mergeRefs(ref, rest.ref),
     }),
-    [ariaDescribedbyProp, dataProps, id, labelId, rest],
+    [ariaDescribedbyProp, dataProps, labelId, rest],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
     (props = {}) => {
-      const checked = !isUndefined(value) && value === props.value
+      const checked =
+        !isUndefined(value) &&
+        (isString(props.value) || isNumber(props.value)) &&
+        value.includes(props.value as Y)
+      const trulyDisabled = !checked && isNumber(max) && value.length >= max
 
       return {
         ...dataProps,
         ...ariaProps,
-        type: "radio",
-        name: id,
+        type: "checkbox",
         style: visuallyHiddenAttributes.style,
         "aria-checked": checked,
+        "aria-disabled": ariaAttr(trulyDisabled),
         "data-checked": dataAttr(checked),
+        "data-disabled": dataAttr(trulyDisabled),
         checked,
-        disabled,
+        disabled: trulyDisabled,
         readOnly,
         required,
         ...props,
@@ -128,9 +147,8 @@ export const useRadioGroup = <Y extends string = string>(
     [
       ariaProps,
       dataProps,
-      disabled,
       eventProps,
-      id,
+      max,
       onChange,
       readOnly,
       required,
@@ -147,7 +165,7 @@ export const useRadioGroup = <Y extends string = string>(
   )
 
   return {
-    name: id,
+    max,
     value,
     getInputProps,
     getLabelProps,
@@ -156,4 +174,4 @@ export const useRadioGroup = <Y extends string = string>(
   }
 }
 
-export type UseRadioGroupReturn = ReturnType<typeof useRadioGroup>
+export type UseCheckboxGroupReturn = ReturnType<typeof useCheckboxGroup>

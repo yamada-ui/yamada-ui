@@ -1,6 +1,6 @@
 import { defineComponentSlotStyle, focusRingStyle } from "../../core"
 
-export const radioStyle = defineComponentSlotStyle({
+export const checkboxStyle = defineComponentSlotStyle({
   base: {
     group: {},
     indicator: {
@@ -11,7 +11,6 @@ export const radioStyle = defineComponentSlotStyle({
       focusRingColor: "{focus-border-color}",
       "input:focus-visible + &": focusRingStyle.outline,
       justifyContent: "center",
-      _before: { display: "block" },
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",
@@ -34,52 +33,58 @@ export const radioStyle = defineComponentSlotStyle({
     /**
      * The shape of the component
      *
-     * @default 'circle'
+     * @default 'rounded'
      */
     shape: {
-      circle: { indicator: { rounded: "full", _before: { rounded: "full" } } },
       rounded: {
-        indicator: {
-          rounded: "l1",
-          _before: { rounded: "calc({radii.l1} / 2)" },
-        },
+        indicator: { rounded: "l1" },
       },
       square: {
-        indicator: { rounded: "0", _before: { rounded: "0" } },
+        indicator: { rounded: "0" },
       },
     },
   },
 
   variants: {
-    base: {
-      indicator: { _checked: { _before: { bg: "colorScheme.solid" } } },
-    },
     outline: {
-      indicator: { _checked: { _before: { bg: "colorScheme.outline" } } },
-      root: { _checked: { "--border-color": "colorScheme.outline" } },
+      indicator: { color: "colorScheme.outline" },
+      root: {
+        _checked: { "--border-color": "colorScheme.outline" },
+        _indeterminate: { "--border-color": "colorScheme.outline" },
+      },
     },
-    solid: {},
+    solid: {
+      indicator: {
+        color: "colorScheme.contrast",
+        _checked: { bg: "colorScheme.solid" },
+        _indeterminate: { bg: "colorScheme.solid" },
+      },
+      root: {
+        _checked: { "--border-color": "colorScheme.solid" },
+        _indeterminate: { "--border-color": "colorScheme.solid" },
+      },
+    },
     subtle: {
-      indicator: { bg: "colorScheme.subtle" },
+      indicator: { bg: "colorScheme.subtle", color: "colorScheme.fg" },
       root: { "--border-color": "transparent" },
     },
     surface: {
-      indicator: { bg: "colorScheme.subtle" },
+      indicator: { bg: "colorScheme.subtle", color: "colorScheme.fg" },
       root: { "--border-color": "colorScheme.muted" },
     },
   },
 
   sizes: {
     sm: {
-      indicator: { boxSize: "3.5", _before: { boxSize: "1.5" } },
+      indicator: { boxSize: "3.5", fontSize: "xs" },
       label: { fontSize: "sm" },
     },
     md: {
-      indicator: { boxSize: "4", _before: { boxSize: "2" } },
+      indicator: { boxSize: "4", fontSize: "sm" },
       label: { fontSize: "md" },
     },
     lg: {
-      indicator: { boxSize: "5", _before: { boxSize: "3" } },
+      indicator: { boxSize: "5", fontSize: "md" },
       label: { fontSize: "lg" },
     },
   },
@@ -87,8 +92,8 @@ export const radioStyle = defineComponentSlotStyle({
   defaultProps: {
     size: "md",
     variant: "solid",
-    shape: "circle",
+    shape: "rounded",
   },
 })
 
-export type RadioStyle = typeof radioStyle
+export type CheckboxStyle = typeof checkboxStyle

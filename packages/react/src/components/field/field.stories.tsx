@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
+import { PropsTable } from "#storybook"
 import { Field } from "."
 import { Input } from "../input"
 import { Tag } from "../tag"
@@ -62,6 +63,25 @@ export const Replace: Story = () => {
         <Input type="email" placeholder="your email address" />
       </Field.Root>
     </>
+  )
+}
+
+export const Orientation: Story = () => {
+  return (
+    <PropsTable variant="stack" rows={["vertical", "horizontal"]}>
+      {(_, row, key) => (
+        <Field.Root
+          key={key}
+          errorMessage="Email is required."
+          helperMessage="We'll never share your email."
+          label="Email address"
+          orientation={row}
+          required
+        >
+          <Input type="email" placeholder="your email address" />
+        </Field.Root>
+      )}
+    </PropsTable>
   )
 }
 

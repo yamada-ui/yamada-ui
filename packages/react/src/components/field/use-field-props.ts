@@ -44,11 +44,11 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
     () => ({
       id,
       disabled,
-      readOnly: notSupportReadOnly ? undefined : readOnly,
+      readOnly,
       required,
       ...rest,
     }),
-    [id, disabled, readOnly, required, rest, notSupportReadOnly],
+    [id, disabled, readOnly, required, rest],
   )
   const dataProps = useMemo(
     () => ({

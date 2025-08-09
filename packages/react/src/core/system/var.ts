@@ -146,10 +146,15 @@ export function createVars(
               return tokenToVar(value).reference
             } else if (value in cssMap && cssMap[value]?.ref) {
               return cssMap[value].ref
+            } else if (fallbackValue) {
+              fallbackValue =
+                fallbackValue in cssMap && cssMap[fallbackValue]?.ref
+                  ? cssMap[fallbackValue]?.ref
+                  : fallbackValue
+
+              return `var(--${prefix}-${value}, ${fallbackValue})`
             } else {
-              return fallbackValue
-                ? `var(--${prefix}-${value}, ${fallbackValue})`
-                : `var(--${prefix}-${value})`
+              return `var(--${prefix}-${value})`
             }
           }
         })

@@ -6,4 +6,86 @@ source: components/close-button
 style: components/close-button/close-button.style.ts
 ---
 
+```tsx preview
+<CloseButton />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { CloseButton } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { CloseButton } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { CloseButton } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<CloseButton />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => <CloseButton variant={variant} key={index} />}
+  </For>
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="md" alignItems="center">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => <CloseButton size={size} key={index} />}
+  </For>
+</Wrap>
+```
+
+### カラースキーマを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <CloseButton colorScheme={colorScheme} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+### 形を変える
+
+角丸にする場合は、`fullRounded`を`true`にします。
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => (
+      <CloseButton variant={variant} key={index} fullRounded />
+    )}
+  </For>
+</Wrap>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`にします。
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => <CloseButton variant={variant} key={index} disabled />}
+  </For>
+</Wrap>
+```

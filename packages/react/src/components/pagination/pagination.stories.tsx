@@ -3,6 +3,7 @@ import { PropsTable } from "#storybook"
 import { useState } from "react"
 import { Pagination } from "."
 import { COLOR_SCHEMES, isNumber } from "../../utils"
+import { IconButton } from "../button"
 import {
   ArrowLeftIcon,
   ArrowLeftToLineIcon,
@@ -16,7 +17,6 @@ import {
   GhostIcon,
   MinusIcon,
 } from "../icon"
-import { IconButton } from "../icon-button"
 
 type Story = StoryFn<typeof Pagination.Root>
 

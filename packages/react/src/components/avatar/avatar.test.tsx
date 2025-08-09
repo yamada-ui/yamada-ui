@@ -34,21 +34,21 @@ describe("<Avatar />", () => {
 describe("<AvatarGroup />", () => {
   test("renders component correctly", async () => {
     await a11y(
-      <AvatarGroup>
-        <Avatar name="Hirotomo Yamada" />
-      </AvatarGroup>,
+      <AvatarGroup.Root>
+        <AvatarGroup.Item name="Hirotomo Yamada" />
+      </AvatarGroup.Root>,
     )
   })
 
   test("renders a number avatar showing count of truncated avatars", () => {
     render(
-      <AvatarGroup max={2}>
-        <Avatar />
-        <Avatar />
-        <Avatar />
-        <Avatar />
-        <Avatar />
-      </AvatarGroup>,
+      <AvatarGroup.Root max={2}>
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+      </AvatarGroup.Root>,
     )
     const moreLabel = screen.getByText("+3")
     expect(moreLabel).toBeInTheDocument()
@@ -56,12 +56,12 @@ describe("<AvatarGroup />", () => {
 
   test("does not render a number avatar showing count of truncated avatars if max is equal to avatars given", () => {
     const { container } = render(
-      <AvatarGroup max={4}>
-        <Avatar />
-        <Avatar />
-        <Avatar />
-        <Avatar />
-      </AvatarGroup>,
+      <AvatarGroup.Root max={4}>
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+      </AvatarGroup.Root>,
     )
     const moreLabel = container.querySelector(".ui-avatar__excess")
     expect(moreLabel).not.toBeInTheDocument()
@@ -69,18 +69,18 @@ describe("<AvatarGroup />", () => {
 
   test("does not render a number avatar showing count of truncated avatars if max is more than avatars given", () => {
     const { container } = render(
-      <AvatarGroup max={6}>
-        <Avatar />
-        <Avatar />
-        <Avatar />
-        <Avatar />
-      </AvatarGroup>,
+      <AvatarGroup.Root max={6}>
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+        <AvatarGroup.Item />
+      </AvatarGroup.Root>,
     )
     const moreLabel = container.querySelector(".ui-avatar__excess")
     expect(moreLabel).not.toBeInTheDocument()
   })
 
   test("should have the correct displayName", () => {
-    expect(AvatarGroup.displayName).toBe("AvatarGroup")
+    expect(AvatarGroup.Root.displayName).toBe("AvatarGroup")
   })
 })

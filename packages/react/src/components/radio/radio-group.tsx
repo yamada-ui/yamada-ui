@@ -31,6 +31,11 @@ export interface RadioGroupRootProps<Y extends string = string>
     >,
     ThemeProps<RadioStyle>,
     UseRadioGroupProps<Y> {
+  /**
+   * If provided, generate options based on items.
+   *
+   * @default '[]'
+   */
   items?: RadioItem<Y>[]
 }
 

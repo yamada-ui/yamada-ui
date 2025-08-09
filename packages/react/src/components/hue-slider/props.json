@@ -79,7 +79,7 @@
       "required": false
     },
     "indicatorRounded": {
-      "type": "number | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"full\" | \"l1\" | \"l2\" | \"l3\" | \"l4\" | \"l5\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | [...] | ({ ...; } & { ...; })",
+      "type": "number | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"full\" | \"l1\" | \"l2\" | \"l3\" | \"l4\" | \"l5\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | [...] | ({ ...; } & { ...; })",
       "description": "The rounded of the indicator.",
       "required": false
     },
@@ -167,7 +167,7 @@
       "required": false
     },
     "thumbRounded": {
-      "type": "number | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"full\" | \"l1\" | \"l2\" | \"l3\" | \"l4\" | \"l5\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | [...] | ({ ...; } & { ...; })",
+      "type": "number | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"full\" | \"l1\" | \"l2\" | \"l3\" | \"l4\" | \"l5\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | [...] | ({ ...; } & { ...; })",
       "description": "The rounded of the thumb.",
       "required": false
     },
@@ -187,7 +187,7 @@
       "required": false
     },
     "trackRounded": {
-      "type": "number | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"full\" | \"l1\" | \"l2\" | \"l3\" | \"l4\" | \"l5\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | [...] | ({ ...; } & { ...; })",
+      "type": "number | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"full\" | \"l1\" | \"l2\" | \"l3\" | \"l4\" | \"l5\" | \"-moz-initial\" | \"inherit\" | \"initial\" | \"revert\" | \"revert-layer\" | \"unset\" | [...] | ({ ...; } & { ...; })",
       "description": "The rounded of the track.",
       "required": false
     },

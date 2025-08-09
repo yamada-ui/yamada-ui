@@ -6,4 +6,130 @@ source: components/collapse
 style: components/collapse/collapse.style.ts
 ---
 
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap={0}>
+    <Button onClick={toggle}>Please Click</Button>
+
+    <Collapse open={open}>
+      <Box borderWidth={1} mt="md" p="md" rounded="l2" w="full">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </Collapse>
+  </VStack>
+)
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Collapse } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Collapse } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Collapse } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Collapse />
+```
+
+### Change the Duration
+
+To change the duration, set a number (in seconds) to `duration`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap={0}>
+    <Button onClick={toggle}>Please Click</Button>
+
+    <Collapse open={open} duration={0.7}>
+      <Box borderWidth={1} mt="md" p="md" rounded="l2" w="full">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </Collapse>
+  </VStack>
+)
+```
+
+### Unmount on Exit
+
+To unmount the component when it is not visible, set `unmountOnExit` to `true`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap={0}>
+    <Button onClick={toggle}>Please Click</Button>
+
+    <Collapse open={open} unmountOnExit>
+      <Box borderWidth={1} mt="md" p="md" rounded="l2" w="full">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </Collapse>
+
+    <Box borderWidth={1} mt="md" p="md" rounded="l2" w="full">
+      私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+    </Box>
+  </VStack>
+)
+```
+
+### Disable Opacity Animation
+
+To disable the opacity animation, set `animationOpacity` to `false`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap={0}>
+    <Button onClick={toggle}>Please Click</Button>
+
+    <Collapse animationOpacity={false} open={open}>
+      <Box borderWidth={1} mt="md" p="md" rounded="l2" w="full">
+        クリリンのことか……クリリンのことかーーーっ！！！！！
+      </Box>
+    </Collapse>
+
+    <Box borderWidth={1} mt="md" p="md" rounded="l2" w="full">
+      私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+    </Box>
+  </VStack>
+)
+```
+
+### Add a Starting Height
+
+To add a starting height, set a string or number to `startingHeight`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack alignItems="flex-start" gap="md">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <Collapse open={open} startingHeight={23}>
+      <Box>
+        私の戦闘力は530000です。
+        <br />
+        ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+      </Box>
+    </Collapse>
+  </VStack>
+)
+```

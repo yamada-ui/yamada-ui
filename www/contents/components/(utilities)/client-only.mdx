@@ -5,4 +5,73 @@ storybook: components-clientonly--basic
 source: components/client-only
 ---
 
+```tsx preview
+<ClientOnly>
+  <IconButton aria-label="Plus" icon={<PlusIcon />} />
+</ClientOnly>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { ClientOnly } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ClientOnly } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ClientOnly } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<ClientOnly />
+```
+
+### Fallback
+
+To render a loading state while child elements are being prepared, use the `fallback` prop.
+
+```tsx preview
+<ClientOnly fallback={<Skeleton boxSize="10" rounded="l2" />}>
+  <IconButton aria-label="Plus" icon={<PlusIcon />} />
+</ClientOnly>
+```
+
+### Render Prop
+
+When your component accesses browser-only APIs like `window`, `document`, `localStorage`, use the render prop pattern.
+This pattern ensures that components accessing browser APIs are evaluated only on the client side, preventing hydration mismatches and server-side errors.\
+It can also be used for rendering heavy components that are not needed on the server side.
+
+```tsx preview
+<ClientOnly fallback={<SkeletonText lineClamp={2} />}>
+  {() => (
+    <VStack gap="sm">
+      <Text>Current URL: {window.location.href}</Text>
+      <Text>Screen width: {window.innerWidth}px</Text>
+    </VStack>
+  )}
+</ClientOnly>
+```
+
+:::warning
+While you can pass components directly, be careful with components that access browser APIs.
+:::
+
+```tsx
+/* This may cause server-side errors */
+<ClientOnly fallback={<Skeleton />}>
+  <ComponentThatUsesWindow />
+</ClientOnly>
+
+/* This is safe */
+<ClientOnly fallback={<Skeleton />}>
+  {() => <ComponentThatUsesWindow />}
+</ClientOnly>
+```

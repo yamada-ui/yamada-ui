@@ -37,9 +37,7 @@ export const radioStyle = defineComponentSlotStyle({
      * @default 'circle'
      */
     shape: {
-      circle: {
-        indicator: { rounded: "full", _before: { rounded: "full" } },
-      },
+      circle: { indicator: { rounded: "full", _before: { rounded: "full" } } },
       rounded: {
         indicator: {
           rounded: "l1",
@@ -57,7 +55,8 @@ export const radioStyle = defineComponentSlotStyle({
       indicator: { _checked: { _before: { bg: "colorScheme.solid" } } },
     },
     outline: {
-      root: { _checked: { "--border-color": "colorScheme.solid" } },
+      indicator: { _checked: { _before: { bg: "colorScheme.outline" } } },
+      root: { _checked: { "--border-color": "colorScheme.outline" } },
     },
     solid: {},
     subtle: {

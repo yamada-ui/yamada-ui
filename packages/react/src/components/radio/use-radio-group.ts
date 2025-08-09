@@ -49,6 +49,7 @@ export const useRadioGroup = <Y extends string = string>(
 ) => {
   const uuid = useId()
   const {
+    context: { labelId } = {},
     props: {
       id = uuid,
       defaultValue,
@@ -84,16 +85,22 @@ export const useRadioGroup = <Y extends string = string>(
   )
 
   const getRootProps: PropGetter = useCallback(
-    ({ ref, "aria-describedby": ariaDescribedby, ...props } = {}) => ({
+    ({
+      ref,
+      "aria-describedby": ariaDescribedby,
+      "aria-labelledby": ariaLabelledby,
+      ...props
+    } = {}) => ({
       ...dataProps,
       id,
       "aria-describedby": cx(ariaDescribedbyProp, ariaDescribedby),
+      "aria-labelledby": cx(labelId, ariaLabelledby),
       role: "radiogroup",
       ...rest,
       ...props,
       ref: mergeRefs(ref, rest.ref),
     }),
-    [ariaDescribedbyProp, dataProps, id, rest],
+    [ariaDescribedbyProp, dataProps, id, labelId, rest],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
@@ -101,6 +108,8 @@ export const useRadioGroup = <Y extends string = string>(
       const checked = !isUndefined(value) && value === props.value
 
       return {
+        ...dataProps,
+        ...ariaProps,
         type: "radio",
         name: id,
         style: visuallyHiddenAttributes.style,
@@ -110,8 +119,6 @@ export const useRadioGroup = <Y extends string = string>(
         disabled,
         readOnly,
         required,
-        ...dataProps,
-        ...ariaProps,
         ...props,
         onBlur: handlerAll(props.onBlur, eventProps.onBlur),
         onChange: handlerAll(props.onChange, onChange),

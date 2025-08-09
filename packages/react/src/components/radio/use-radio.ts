@@ -60,12 +60,13 @@ export const useRadio = <Y extends string = string>({
   "aria-describedby": ariaDescribedbyProp,
   ...props
 }: UseRadioProps<Y> = {}) => {
+  const group = useRadioGroupContext()
   const {
     name: groupName,
     value: groupValue,
     getInputProps: getGroupInputProps,
     getLabelProps,
-  } = useRadioGroupContext() ?? {}
+  } = group ?? {}
   const uuid = useId()
   const {
     props: {
@@ -85,14 +86,12 @@ export const useRadio = <Y extends string = string>({
     dataProps,
     eventProps,
   } = useFieldProps({
-    id: groupName ? uuid : undefined,
+    id: group ? uuid : undefined,
     ...props,
     notSupportReadOnly: true,
   })
   const interactive = !(readOnly || disabled)
-  const resolvedAriaDescribedby = groupName
-    ? ariaDescribedbyProp
-    : ariaDescribedby
+  const resolvedAriaDescribedby = group ? ariaDescribedbyProp : ariaDescribedby
   const resolvedChecked =
     !isUndefined(groupValue) && !isUndefined(value)
       ? groupValue === value
@@ -114,22 +113,24 @@ export const useRadio = <Y extends string = string>({
 
   const getRootProps: PropGetter<"label"> = useCallback(
     (props = {}) => {
-      const n = {
-        "data-checked": dataAttr(checked),
+      const sharedProps = {
         ...dataProps,
         htmlFor: id,
+        "data-checked": dataAttr(checked),
         ...rest,
         ...props,
       }
 
-      return getLabelProps?.(n) ?? n
+      return getLabelProps?.(sharedProps) ?? sharedProps
     },
     [dataProps, getLabelProps, id, checked, rest],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
     ({ "aria-describedby": ariaDescribedby, ...props } = {}) => {
-      const n = {
+      const sharedProps = {
+        ...dataProps,
+        ...ariaProps,
         id,
         type: "radio",
         name,
@@ -142,8 +143,6 @@ export const useRadio = <Y extends string = string>({
         readOnly,
         required,
         value,
-        ...dataProps,
-        ...ariaProps,
         ...props,
         ref: mergeRefs(props.ref, ref),
         onBlur: handlerAll(props.onBlur, eventProps.onBlur),
@@ -151,7 +150,7 @@ export const useRadio = <Y extends string = string>({
         onFocus: handlerAll(props.onFocus, eventProps.onFocus),
       }
 
-      return getGroupInputProps?.(n) ?? n
+      return getGroupInputProps?.(sharedProps) ?? sharedProps
     },
     [
       id,
@@ -173,9 +172,9 @@ export const useRadio = <Y extends string = string>({
 
   const getIndicatorProps: PropGetter = useCallback(
     (props = {}) => ({
+      ...dataProps,
       "aria-hidden": "true",
       "data-checked": dataAttr(checked),
-      ...dataProps,
       ...props,
     }),
     [dataProps, checked],

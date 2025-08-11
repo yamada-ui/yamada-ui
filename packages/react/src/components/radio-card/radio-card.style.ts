@@ -1,5 +1,5 @@
 import { defineComponentSlotStyle, focusRingStyle } from "../../core"
-import { radioStyle } from "../radio/radio.style"
+import { radioStyle } from "../radio"
 
 export const radioCardStyle = defineComponentSlotStyle({
   base: {

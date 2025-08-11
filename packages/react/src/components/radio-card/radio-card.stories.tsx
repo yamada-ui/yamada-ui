@@ -548,7 +548,7 @@ export const CustomControl: Story = () => {
 
 export const ReactHookForm: Story = () => {
   interface Data {
-    radio: string
+    radioCard: string
   }
 
   const {
@@ -588,12 +588,12 @@ export const ReactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Field.Root
-        errorMessage={errors.radio?.message}
-        invalid={!!errors.radio}
+        errorMessage={errors.radioCard?.message}
+        invalid={!!errors.radioCard}
         label="Who is your favorite character?"
       >
         <Controller
-          name="radio"
+          name="radioCard"
           control={control}
           render={({ field }) => (
             <RadioCardGroup.Root items={items} {...field} />

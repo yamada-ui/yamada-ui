@@ -329,13 +329,14 @@ export function mergeVars(...fns: CreateVars[]) {
 export function varAttr(
   value: StyleValueWithCondition<number | string> | undefined,
   token?: ThemeToken,
+  fallbackValue?: string,
 ): StyleValueWithCondition<number | string> | undefined {
   if (isUndefined(value) || isNull(value)) return value
 
   if (isObject(value) || isArray(value)) {
-    return replaceObject(value, (value) => varAttr(value, token))
+    return replaceObject(value, (value) => varAttr(value, token, fallbackValue))
   } else {
-    return token ? `{${token}.${value}, ${value}}` : value
+    return token ? `{${token}.${value}, ${fallbackValue ?? value}}` : value
   }
 }
 

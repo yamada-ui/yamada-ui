@@ -5,7 +5,7 @@ import type { HTMLProps } from "../../core"
 import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
-import { RadioGroup, useRadioGroup } from "."
+import { Radio, RadioGroup, useRadioGroup } from "."
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
 import { Box } from "../box"
 import { Button } from "../button"
@@ -13,7 +13,6 @@ import { Field } from "../field"
 import { For } from "../for"
 import { HStack, VStack } from "../stack"
 import { Text } from "../text"
-import { Radio } from "./radio"
 
 type Story = StoryFn<typeof Radio>
 
@@ -25,10 +24,6 @@ const meta: Meta<typeof Radio> = {
 export default meta
 
 export const Basic: Story = () => {
-  return <Radio>織田信長</Radio>
-}
-
-export const Group: Story = () => {
   return (
     <RadioGroup.Root>
       <RadioGroup.Item value="1">織田信長</RadioGroup.Item>
@@ -54,7 +49,7 @@ export const Items: Story = () => {
 export const Variant: Story = () => {
   const items = useMemo<RadioGroup.RootProps["items"]>(
     () => [
-      { defaultChecked: true, label: "Checked", value: "1" },
+      { label: "Checked", value: "1" },
       { label: "No checked", value: "2" },
     ],
     [],
@@ -71,6 +66,7 @@ export const Variant: Story = () => {
             key={key}
             colorScheme={row}
             variant={column}
+            defaultValue="1"
             items={items}
           />
         )
@@ -82,7 +78,7 @@ export const Variant: Story = () => {
 export const Size: Story = () => {
   const items = useMemo<RadioGroup.RootProps["items"]>(
     () => [
-      { defaultChecked: true, label: "Checked", value: "1" },
+      { label: "Checked", value: "1" },
       { label: "No checked", value: "2" },
     ],
     [],
@@ -96,6 +92,7 @@ export const Size: Story = () => {
             key={key}
             colorScheme={row}
             size={column}
+            defaultValue="1"
             items={items}
           />
         )
@@ -146,7 +143,7 @@ export const Orientation: Story = () => {
 export const Shape: Story = () => {
   const items = useMemo<RadioGroup.RootProps["items"]>(
     () => [
-      { defaultChecked: true, label: "織田信長", value: "1" },
+      { label: "織田信長", value: "1" },
       { label: "豊臣秀吉", value: "2" },
       { label: "徳川家康", value: "3" },
     ],
@@ -155,7 +152,9 @@ export const Shape: Story = () => {
 
   return (
     <PropsTable variant="stack" rows={["circle", "square", "rounded"]}>
-      {(_, row, key) => <RadioGroup.Root key={key} items={items} shape={row} />}
+      {(_, row, key) => (
+        <RadioGroup.Root key={key} defaultValue="1" items={items} shape={row} />
+      )}
     </PropsTable>
   )
 }

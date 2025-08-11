@@ -7,8 +7,9 @@ import type {
   WithoutThemeProps,
 } from "../../core"
 import type { GroupProps } from "../group"
+import type { UseInputBorderProps } from "../input"
+import type { CheckboxProps } from "./checkbox"
 import type { CheckboxStyle } from "./checkbox.style"
-import type { UseCheckboxProps } from "./use-checkbox"
 import type { UseCheckboxGroupProps } from "./use-checkbox-group"
 import { useMemo } from "react"
 import { Group } from "../group"
@@ -21,7 +22,7 @@ import {
 import { CheckboxGroupContext, useCheckboxGroup } from "./use-checkbox-group"
 
 export interface CheckboxItem<Y extends string = string>
-  extends UseCheckboxProps<Y> {
+  extends CheckboxProps<Y> {
   label: ReactNode
 }
 
@@ -31,7 +32,8 @@ export interface CheckboxGroupRootProps<Y extends string = string>
       "defaultValue" | "onChange" | "value"
     >,
     ThemeProps<CheckboxStyle>,
-    UseCheckboxGroupProps<Y> {
+    UseCheckboxGroupProps<Y>,
+    UseInputBorderProps {
   /**
    * If provided, generate options based on items.
    *
@@ -55,6 +57,8 @@ export const CheckboxGroupRoot = component<"div", CheckboxGroupRootProps>(
         variant,
         children,
         disabled,
+        errorBorderColor,
+        focusBorderColor,
         invalid,
         items = [],
         readOnly,
@@ -81,11 +85,23 @@ export const CheckboxGroupRoot = component<"div", CheckboxGroupRootProps>(
         size,
         variant,
         disabled,
+        errorBorderColor,
+        focusBorderColor,
         invalid,
         readOnly,
         shape,
       }),
-      [variant, size, colorScheme, shape, disabled, invalid, readOnly],
+      [
+        variant,
+        size,
+        colorScheme,
+        shape,
+        disabled,
+        invalid,
+        readOnly,
+        errorBorderColor,
+        focusBorderColor,
+      ],
     )
     const groupContext = useMemo(
       () => ({ max, value, getInputProps, getLabelProps, onChange }),

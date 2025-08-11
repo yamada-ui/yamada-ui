@@ -5,7 +5,7 @@ import type { HTMLProps } from "../../core"
 import { PropsTable } from "#storybook"
 import { useMemo, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
-import { CheckboxGroup, useCheckboxGroup } from "."
+import { Checkbox, CheckboxGroup, useCheckboxGroup } from "."
 import { COLOR_SCHEMES, toTitleCase, useIds } from "../../utils"
 import { Box } from "../box"
 import { Button } from "../button"
@@ -13,7 +13,6 @@ import { Field } from "../field"
 import { For } from "../for"
 import { HStack, VStack } from "../stack"
 import { Text } from "../text"
-import { Checkbox } from "./checkbox"
 
 type Story = StoryFn<typeof Checkbox>
 

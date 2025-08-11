@@ -7,8 +7,9 @@ import type {
   WithoutThemeProps,
 } from "../../core"
 import type { GroupProps } from "../group"
+import type { UseInputBorderProps } from "../input"
+import type { RadioProps } from "./radio"
 import type { RadioStyle } from "./radio.style"
-import type { UseRadioProps } from "./use-radio"
 import type { UseRadioGroupProps } from "./use-radio-group"
 import { useMemo } from "react"
 import { Group } from "../group"
@@ -20,7 +21,7 @@ import {
 } from "./radio"
 import { RadioGroupContext, useRadioGroup } from "./use-radio-group"
 
-export interface RadioItem<Y extends string = string> extends UseRadioProps<Y> {
+export interface RadioItem<Y extends string = string> extends RadioProps<Y> {
   label: ReactNode
 }
 
@@ -30,7 +31,8 @@ export interface RadioGroupRootProps<Y extends string = string>
       "defaultValue" | "onChange" | "value"
     >,
     ThemeProps<RadioStyle>,
-    UseRadioGroupProps<Y> {
+    UseRadioGroupProps<Y>,
+    UseInputBorderProps {
   /**
    * If provided, generate options based on items.
    *
@@ -53,6 +55,8 @@ export const RadioGroupRoot = component<"div", RadioGroupRootProps>((props) => {
       variant,
       children,
       disabled,
+      errorBorderColor,
+      focusBorderColor,
       invalid,
       items = [],
       readOnly,
@@ -74,8 +78,28 @@ export const RadioGroupRoot = component<"div", RadioGroupRootProps>((props) => {
     ))
   }, [items, children])
   const context = useMemo(
-    () => ({ colorScheme, size, variant, disabled, invalid, readOnly, shape }),
-    [variant, size, colorScheme, shape, disabled, invalid, readOnly],
+    () => ({
+      colorScheme,
+      size,
+      variant,
+      disabled,
+      errorBorderColor,
+      focusBorderColor,
+      invalid,
+      readOnly,
+      shape,
+    }),
+    [
+      variant,
+      size,
+      colorScheme,
+      shape,
+      disabled,
+      invalid,
+      readOnly,
+      errorBorderColor,
+      focusBorderColor,
+    ],
   )
   const groupContext = useMemo(
     () => ({ name, value, getInputProps, getLabelProps, onChange }),

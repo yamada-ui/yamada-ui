@@ -1,12 +1,19 @@
 "use client"
 
 import type { ReactElement, ReactNode } from "react"
-import type { GenericsComponent, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  GenericsComponent,
+  HTMLProps,
+  HTMLStyledProps,
+  ThemeProps,
+} from "../../core"
 import type { Merge } from "../../utils"
 import type { UseInputBorderProps } from "../input"
 import type { CheckboxStyle } from "./checkbox.style"
 import type { UseCheckboxProps } from "./use-checkbox"
+import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
+import { cast } from "../../utils"
 import { CheckIcon, MinusIcon } from "../icon"
 import { useInputBorder } from "../input"
 import { checkboxStyle } from "./checkbox.style"
@@ -84,20 +91,44 @@ export const Checkbox = withProvider<"label", CheckboxProps>(
       getRootProps,
     } = useCheckbox(rest)
     const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
-
-    return (
-      <styled.label {...getRootProps({ ...varProps, ...rootProps })}>
-        <styled.input {...getInputProps(inputProps)} />
+    const icon = useMemo(() => {
+      if (indeterminate) {
+        return indeterminateIcon || <MinusIcon />
+      } else if (checked) {
+        return checkedIcon || <CheckIcon />
+      } else {
+        return null
+      }
+    }, [indeterminate, indeterminateIcon, checked, checkedIcon])
+    const input = useMemo(() => {
+      return <styled.input {...getInputProps(inputProps)} />
+    }, [getInputProps, inputProps])
+    const indicator = useMemo(() => {
+      return (
         <CheckboxIndicator {...getIndicatorProps(indicatorProps)}>
-          {indeterminate
-            ? indeterminateIcon || <MinusIcon />
-            : checked
-              ? checkedIcon || <CheckIcon />
-              : null}
+          {icon}
         </CheckboxIndicator>
-        <CheckboxLabel {...labelProps}>{children}</CheckboxLabel>
-      </styled.label>
-    )
+      )
+    }, [getIndicatorProps, indicatorProps, icon])
+
+    if (children) {
+      return (
+        <styled.label {...getRootProps({ ...varProps, ...rootProps })}>
+          {input}
+          {indicator}
+          <CheckboxLabel {...labelProps}>{children}</CheckboxLabel>
+        </styled.label>
+      )
+    } else {
+      return (
+        <styled.div
+          {...cast<HTMLProps>(getRootProps({ ...varProps, ...rootProps }))}
+        >
+          {input}
+          {indicator}
+        </styled.div>
+      )
+    }
   },
   "root",
 )() as GenericsComponent<{

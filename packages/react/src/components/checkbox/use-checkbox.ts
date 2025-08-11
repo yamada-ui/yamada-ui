@@ -128,7 +128,6 @@ export const useCheckbox = <Y extends string = string>({
     (props = {}) => {
       const sharedProps = {
         ...dataProps,
-        htmlFor: id,
         "data-checked": dataAttr(checked),
         "data-disabled": dataAttr(!interactive),
         "data-indeterminate": dataAttr(indeterminate),
@@ -138,7 +137,7 @@ export const useCheckbox = <Y extends string = string>({
 
       return getLabelProps?.(sharedProps) ?? sharedProps
     },
-    [dataProps, id, checked, interactive, indeterminate, rest, getLabelProps],
+    [dataProps, checked, interactive, indeterminate, rest, getLabelProps],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(

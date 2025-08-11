@@ -12,6 +12,7 @@ import { Button } from "../button"
 import { Field } from "../field"
 import { For } from "../for"
 import { HStack, VStack } from "../stack"
+import { Text } from "../text"
 import { Checkbox } from "./checkbox"
 
 type Story = StoryFn<typeof Checkbox>
@@ -423,6 +424,36 @@ export const CustomHook: Story = () => {
       <CustomCheckbox value="1">ソラ</CustomCheckbox>
       <CustomCheckbox value="2">リク</CustomCheckbox>
       <CustomCheckbox value="3">カイリ</CustomCheckbox>
+    </HStack>
+  )
+}
+
+export const CustomComponent: Story = () => {
+  return (
+    <HStack
+      as="label"
+      css={{
+        "&:has(input:checked)": {
+          bg: "colorScheme.subtle",
+          borderColor: "colorScheme.muted",
+        },
+      }}
+      colorScheme="green"
+      alignItems="flex-start"
+      borderWidth="1px"
+      gap="md"
+      px="md"
+      py="3"
+      rounded="l2"
+    >
+      <Checkbox h="6" />
+
+      <VStack gap="xs" userSelect="none">
+        <Text>Enable notifications</Text>
+        <Text color="fg.muted" fontSize="sm">
+          You can enable or disable notifications at any time.
+        </Text>
+      </VStack>
     </HStack>
   )
 }

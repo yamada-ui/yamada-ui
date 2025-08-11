@@ -11,6 +11,7 @@ import { Box } from "../box"
 import { Button } from "../button"
 import { Field } from "../field"
 import { For } from "../for"
+import { HeartIcon, KeyIcon } from "../icon"
 import { HStack, VStack } from "../stack"
 import { Text } from "../text"
 
@@ -425,6 +426,19 @@ export const CustomHook: Story = () => {
       <CustomCheckbox value="3">カイリ</CustomCheckbox>
     </HStack>
   )
+}
+
+export const CustomIcon: Story = () => {
+  const items = useMemo<CheckboxGroup.RootProps["items"]>(
+    () => [
+      { label: "ソラ", value: "1" },
+      { label: "リク", value: "2" },
+      { checkedIcon: <HeartIcon />, label: "カイリ", value: "3" },
+    ],
+    [],
+  )
+
+  return <CheckboxGroup.Root checkedIcon={<KeyIcon />} items={items} />
 }
 
 export const CustomComponent: Story = () => {

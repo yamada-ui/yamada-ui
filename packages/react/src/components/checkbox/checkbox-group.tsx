@@ -33,7 +33,8 @@ export interface CheckboxGroupRootProps<Y extends string = string>
     >,
     ThemeProps<CheckboxStyle>,
     UseCheckboxGroupProps<Y>,
-    UseInputBorderProps {
+    UseInputBorderProps,
+    Pick<CheckboxProps, "checkedIcon"> {
   /**
    * If provided, generate options based on items.
    *
@@ -55,6 +56,7 @@ export const CheckboxGroupRoot = component<"div", CheckboxGroupRootProps>(
         colorScheme,
         size,
         variant,
+        checkedIcon,
         children,
         disabled,
         errorBorderColor,
@@ -84,6 +86,7 @@ export const CheckboxGroupRoot = component<"div", CheckboxGroupRootProps>(
         colorScheme,
         size,
         variant,
+        checkedIcon,
         disabled,
         errorBorderColor,
         focusBorderColor,
@@ -101,6 +104,7 @@ export const CheckboxGroupRoot = component<"div", CheckboxGroupRootProps>(
         readOnly,
         errorBorderColor,
         focusBorderColor,
+        checkedIcon,
       ],
     )
     const groupContext = useMemo(

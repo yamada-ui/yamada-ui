@@ -2,15 +2,11 @@ import { defineStyles } from "../../core"
 import { visuallyHiddenAttributes } from "../../utils"
 
 export const layerStyles = defineStyles.layerStyle({
-  active: {
-    opacity: 1,
-  },
+  active: { opacity: 1 },
   disabled: {
     cursor: "not-allowed",
     opacity: 0.4,
-    _ripple: {
-      display: "none",
-    },
+    _ripple: { display: "none" },
   },
   ghost: {
     bg: "transparent",
@@ -20,9 +16,7 @@ export const layerStyles = defineStyles.layerStyle({
   "ghost.hover": {
     bg: "colorScheme.ghost",
   },
-  hover: {
-    opacity: 0.8,
-  },
+  hover: { opacity: 0.8 },
   outline: {
     bg: "transparent",
     border: "1px solid {colorScheme.muted}",
@@ -38,9 +32,7 @@ export const layerStyles = defineStyles.layerStyle({
   },
   readOnly: {
     cursor: "default",
-    _ripple: {
-      display: "none",
-    },
+    _ripple: { display: "none" },
   },
   solid: {
     bg: "colorScheme.solid",

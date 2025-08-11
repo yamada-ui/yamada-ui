@@ -1,12 +1,19 @@
 "use client"
 
 import type { ReactElement } from "react"
-import type { GenericsComponent, HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  GenericsComponent,
+  HTMLProps,
+  HTMLStyledProps,
+  ThemeProps,
+} from "../../core"
 import type { Merge } from "../../utils"
 import type { UseInputBorderProps } from "../input"
 import type { RadioStyle } from "./radio.style"
 import type { UseRadioProps } from "./use-radio"
+import { useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
+import { cast } from "../../utils"
 import { useInputBorder } from "../input"
 import { radioStyle } from "./radio.style"
 import { useRadio } from "./use-radio"
@@ -67,14 +74,31 @@ export const Radio = withProvider<"label", RadioProps>(
   }) => {
     const { getIndicatorProps, getInputProps, getRootProps } = useRadio(rest)
     const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
+    const input = useMemo(() => {
+      return <styled.input {...getInputProps(inputProps)} />
+    }, [getInputProps, inputProps])
+    const indicator = useMemo(() => {
+      return <RadioIndicator {...getIndicatorProps(indicatorProps)} />
+    }, [getIndicatorProps, indicatorProps])
 
-    return (
-      <styled.label {...getRootProps({ ...varProps, ...rootProps })}>
-        <styled.input {...getInputProps(inputProps)} />
-        <RadioIndicator {...getIndicatorProps(indicatorProps)} />
-        <RadioLabel {...labelProps}>{children}</RadioLabel>
-      </styled.label>
-    )
+    if (children) {
+      return (
+        <styled.label {...getRootProps({ ...varProps, ...rootProps })}>
+          {input}
+          {indicator}
+          <RadioLabel {...labelProps}>{children}</RadioLabel>
+        </styled.label>
+      )
+    } else {
+      return (
+        <styled.div
+          {...cast<HTMLProps>(getRootProps({ ...varProps, ...rootProps }))}
+        >
+          {input}
+          {indicator}
+        </styled.div>
+      )
+    }
   },
   "root",
 )() as GenericsComponent<{

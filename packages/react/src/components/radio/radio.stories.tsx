@@ -12,6 +12,7 @@ import { Button } from "../button"
 import { Field } from "../field"
 import { For } from "../for"
 import { HStack, VStack } from "../stack"
+import { Text } from "../text"
 import { Radio } from "./radio"
 
 type Story = StoryFn<typeof Radio>
@@ -358,6 +359,36 @@ export const CustomHook: Story = () => {
       <CustomRadio value="1">織田信長</CustomRadio>
       <CustomRadio value="2">豊臣秀吉</CustomRadio>
       <CustomRadio value="3">徳川家康</CustomRadio>
+    </HStack>
+  )
+}
+
+export const CustomComponent: Story = () => {
+  return (
+    <HStack
+      as="label"
+      css={{
+        "&:has(input:checked)": {
+          bg: "colorScheme.subtle",
+          borderColor: "colorScheme.muted",
+        },
+      }}
+      colorScheme="green"
+      alignItems="flex-start"
+      borderWidth="1px"
+      gap="md"
+      px="md"
+      py="3"
+      rounded="l2"
+    >
+      <Radio h="6" />
+
+      <VStack gap="xs" userSelect="none">
+        <Text>Enable notifications</Text>
+        <Text color="fg.muted" fontSize="sm">
+          You can enable or disable notifications at any time.
+        </Text>
+      </VStack>
     </HStack>
   )
 }

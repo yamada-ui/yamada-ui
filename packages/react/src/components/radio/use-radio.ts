@@ -115,7 +115,6 @@ export const useRadio = <Y extends string = string>({
     (props = {}) => {
       const sharedProps = {
         ...dataProps,
-        htmlFor: id,
         "data-checked": dataAttr(checked),
         ...rest,
         ...props,
@@ -123,7 +122,7 @@ export const useRadio = <Y extends string = string>({
 
       return getLabelProps?.(sharedProps) ?? sharedProps
     },
-    [dataProps, getLabelProps, id, checked, rest],
+    [dataProps, getLabelProps, checked, rest],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(

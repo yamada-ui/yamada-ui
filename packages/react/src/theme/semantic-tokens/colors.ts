@@ -253,7 +253,7 @@ export const colors = defineSemanticTokens.colors({
     base: "red.500",
     bg: ["red.50/40", "red.400/10"],
     contrast: ["white", "white"],
-    emphasized: ["red.200", "red700"],
+    emphasized: ["red.200", "red.700"],
     fg: ["red.700", "red.100"],
     ghost: ["red.50", "red.950/50"],
     muted: ["red.100", "red.800"],

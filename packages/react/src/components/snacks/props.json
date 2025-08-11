@@ -1,0 +1,52 @@
+{
+  "Snacks": {
+    "as": {
+      "type": "keyof IntrinsicElements",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "snacks": {
+      "type": "{\n  direction: SimpleDirection | undefined\n  items: Snack[]\n  startIndex: number | undefined\n}",
+      "description": "The snacks created by `useSnacks`.",
+      "required": true
+    },
+    "gap": {
+      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"normal\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | ... 94 more ... | ({ ...; } & { ...; })",
+      "defaultValue": "\"md\"",
+      "description": "The CSS `gap` property.",
+      "required": false
+    },
+    "gutter": {
+      "type": "[number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | ... 94 more ... | undefined, number | ... 117 more ... | undefined]",
+      "defaultValue": "\"[0, 'lg']\"",
+      "description": "A property that provides spacing between the top and bottom.",
+      "required": false
+    },
+    "listProps": {
+      "type": "HTMLMotionProps",
+      "description": "Props for the snacks list element.",
+      "required": false
+    },
+    "negativeMargins": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, apply gutter value to negative margins",
+      "required": false
+    }
+  }
+}

@@ -63,24 +63,24 @@ export const cardStyle = defineComponentSlotStyle({
 
   sizes: {
     sm: {
-      body: { gap: "3", px: "3", py: "3" },
-      footer: { gap: "3", pb: "3", px: "3" },
-      header: { fontSize: "lg", gap: "3", pt: "3", px: "3" },
+      body: { gap: "3", px: "3", py: "2" },
+      footer: { gap: "3", pb: "2", px: "3" },
+      header: { fontSize: "lg", gap: "3", pt: "2", px: "3" },
     },
     md: {
-      body: { gap: "4", px: "4", py: "4" },
-      footer: { gap: "4", pb: "4", px: "4" },
-      header: { fontSize: "xl", gap: "4", pt: "4", px: "4" },
+      body: { gap: "4", px: "4", py: "3" },
+      footer: { gap: "4", pb: "3", px: "4" },
+      header: { fontSize: "xl", gap: "4", pt: "3", px: "4" },
     },
     lg: {
-      body: { gap: "6", px: "6", py: "6" },
-      footer: { gap: "6", pb: "6", px: "6" },
-      header: { fontSize: "2xl", gap: "6", pt: "6", px: "6" },
+      body: { gap: "6", px: "6", py: "5" },
+      footer: { gap: "6", pb: "5", px: "6" },
+      header: { fontSize: "2xl", gap: "6", pt: "5", px: "6" },
     },
     xl: {
-      body: { gap: "8", px: "8", py: "8" },
-      footer: { gap: "8", pb: "8", px: "8" },
-      header: { fontSize: "2xl", gap: "8", pt: "8", px: "8" },
+      body: { gap: "8", px: "8", py: "7" },
+      footer: { gap: "8", pb: "7", px: "8" },
+      header: { fontSize: "2xl", gap: "8", pt: "7", px: "8" },
     },
   },
 

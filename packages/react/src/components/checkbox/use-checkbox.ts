@@ -129,7 +129,6 @@ export const useCheckbox = <Y extends string = string>({
       const sharedProps = {
         ...dataProps,
         "data-checked": dataAttr(checked),
-        "data-disabled": dataAttr(!interactive),
         "data-indeterminate": dataAttr(indeterminate),
         ...rest,
         ...props,
@@ -137,7 +136,7 @@ export const useCheckbox = <Y extends string = string>({
 
       return getLabelProps?.(sharedProps) ?? sharedProps
     },
-    [dataProps, checked, interactive, indeterminate, rest, getLabelProps],
+    [dataProps, checked, indeterminate, rest, getLabelProps],
   )
 
   const getInputProps: PropGetter<"input"> = useCallback(
@@ -153,7 +152,6 @@ export const useCheckbox = <Y extends string = string>({
         "aria-describedby": cx(resolvedAriaDescribedby, ariaDescribedby),
         "aria-disabled": ariaAttr(!interactive),
         "data-checked": dataAttr(checked),
-        "data-disabled": dataAttr(!interactive),
         "data-indeterminate": dataAttr(indeterminate),
         checked,
         disabled,
@@ -194,11 +192,10 @@ export const useCheckbox = <Y extends string = string>({
       ...dataProps,
       "aria-hidden": "true",
       "data-checked": dataAttr(checked),
-      "data-disabled": dataAttr(!interactive),
       "data-indeterminate": dataAttr(indeterminate),
       ...props,
     }),
-    [dataProps, checked, interactive, indeterminate],
+    [dataProps, checked, indeterminate],
   )
 
   return {

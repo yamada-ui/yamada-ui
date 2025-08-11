@@ -1,7 +1,7 @@
 import { defineComponentSlotStyle, focusRingStyle } from "../../core"
-import { radioStyle } from "../radio"
+import { checkboxStyle } from "../checkbox"
 
-export const radioCardStyle = defineComponentSlotStyle({
+export const checkboxCardStyle = defineComponentSlotStyle({
   base: {
     addon: {
       borderColor: "{--addon-border-color}",
@@ -14,15 +14,18 @@ export const radioCardStyle = defineComponentSlotStyle({
     description: { color: "fg.muted", fontSize: "{description-size}" },
     group: { w: "full" },
     indicator: {
-      ...radioStyle.base?.indicator,
+      ...checkboxStyle.base?.indicator,
       "input:focus-visible + &": {
-        borderColor: "{focus-ring-color}",
+        _checked: focusRingStyle.outline,
+        _notChecked: {
+          borderColor: "{focus-ring-color}",
+        },
       },
       position: "absolute",
       top: "calc({space-y} + ({label-size} * 1.5 - {label-size}) / 2)",
     },
     root: {
-      ...radioStyle.base?.root,
+      ...checkboxStyle.base?.root,
       "&:has(input:focus-visible)": focusRingStyle.outline,
       "--addon-border-color": "{root-border-color}",
       "--root-border-color": "colors.border",
@@ -85,35 +88,40 @@ export const radioCardStyle = defineComponentSlotStyle({
      *
      * @default 'circle'
      */
-    shape: { ...radioStyle.props?.shape },
+    shape: { ...checkboxStyle.props?.shape },
   },
 
   variants: {
-    base: { indicator: radioStyle.variants?.base.indicator },
+    base: {
+      indicator: {
+        color: "colorScheme.contrast",
+        _checked: { bg: "colorScheme.solid" },
+        _indeterminate: { bg: "colorScheme.solid" },
+      },
+      root: {
+        _checked: { "--indicator-border-color": "colorScheme.solid" },
+        _indeterminate: { "--indicator-border-color": "colorScheme.solid" },
+      },
+    },
     outline: {
       root: {
         _checked: {
-          "--indicator-border-color": "colorScheme.outline",
           "--root-border-color": "colorScheme.outline",
         },
       },
     },
     subtle: {
-      indicator: { _checked: { bg: "bg" } },
       root: {
         _checked: {
           "--addon-border-color": "colorScheme.muted",
-          "--indicator-border-color": "colorScheme.emphasized",
           "--root-border-color": "transparent",
           bg: "colorScheme.subtle",
         },
       },
     },
     surface: {
-      indicator: { _checked: { bg: "bg" } },
       root: {
         _checked: {
-          "--indicator-border-color": "colorScheme.emphasized",
           "--root-border-color": "colorScheme.muted",
           bg: "colorScheme.subtle",
         },
@@ -123,36 +131,36 @@ export const radioCardStyle = defineComponentSlotStyle({
 
   sizes: {
     sm: {
-      indicator: radioStyle.sizes?.sm.indicator,
+      indicator: checkboxStyle.sizes?.sm.indicator,
       root: {
-        ...radioStyle.sizes?.sm.root,
+        ...checkboxStyle.sizes?.sm.root,
         "--description-size": "fontSizes.xs",
         "--space-x": "spaces.3",
         "--space-y": "spaces.2",
       },
     },
     md: {
-      indicator: radioStyle.sizes?.md.indicator,
+      indicator: checkboxStyle.sizes?.md.indicator,
       root: {
-        ...radioStyle.sizes?.md.root,
+        ...checkboxStyle.sizes?.md.root,
         "--description-size": "fontSizes.sm",
         "--space-x": "spaces.4",
         "--space-y": "spaces.3",
       },
     },
     lg: {
-      indicator: radioStyle.sizes?.lg.indicator,
+      indicator: checkboxStyle.sizes?.lg.indicator,
       root: {
-        ...radioStyle.sizes?.lg.root,
+        ...checkboxStyle.sizes?.lg.root,
         "--description-size": "fontSizes.md",
         "--space-x": "spaces.5",
         "--space-y": "spaces.4",
       },
     },
     xl: {
-      indicator: radioStyle.sizes?.lg.indicator,
+      indicator: checkboxStyle.sizes?.lg.indicator,
       root: {
-        ...radioStyle.sizes?.lg.root,
+        ...checkboxStyle.sizes?.lg.root,
         "--description-size": "fontSizes.md",
         "--space-x": "spaces.6",
         "--space-y": "spaces.5",
@@ -164,8 +172,8 @@ export const radioCardStyle = defineComponentSlotStyle({
     size: "md",
     variant: "surface",
     justify: "start",
-    shape: "circle",
+    shape: "rounded",
   },
 })
 
-export type RadioCardStyle = typeof radioCardStyle
+export type CheckboxCardStyle = typeof checkboxCardStyle

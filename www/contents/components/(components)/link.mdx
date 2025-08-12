@@ -7,3 +7,36 @@ style: components/link/link.style.ts
 ---
 
 ## Usage
+
+```tsx preview
+<Link href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB">
+  ドラゴンボール - wikipedia
+</Link>
+```
+
+:::code-group
+
+```tsx [package]
+import { Link } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Link } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Link } from "@workspace/ui"
+```
+
+:::
+
+### External Links
+
+```tsx preview
+<Link
+  href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
+  external
+>
+  ドラゴンボール - wikipedia
+</Link>
+```

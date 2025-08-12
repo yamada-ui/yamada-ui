@@ -119,41 +119,41 @@ export const Group: Story = () => {
     <>
       <For each={["solid", "subtle", "surface", "outline"] as const}>
         {(variant, index) => (
-          <AvatarGroup key={index} variant={variant}>
+          <AvatarGroup.Root key={index} variant={variant}>
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar
+                <AvatarGroup.Item
                   key={index}
                   name="Hirotomo Yamada"
                   bg={variant === "outline" ? "bg" : undefined}
                 />
               ))}
-          </AvatarGroup>
+          </AvatarGroup.Root>
         )}
       </For>
 
       <For each={["xs", "sm", "md", "lg", "xl"] as const}>
         {(size, index) => (
-          <AvatarGroup key={index} size={size}>
+          <AvatarGroup.Root key={index} size={size}>
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar key={index} name="Hirotomo Yamada" />
+                <AvatarGroup.Item key={index} name="Hirotomo Yamada" />
               ))}
-          </AvatarGroup>
+          </AvatarGroup.Root>
         )}
       </For>
 
       <For each={["circle", "square", "rounded"] as const}>
         {(shape, index) => (
-          <AvatarGroup key={index} shape={shape}>
+          <AvatarGroup.Root key={index} shape={shape}>
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar key={index} name="Hirotomo Yamada" />
+                <AvatarGroup.Item key={index} name="Hirotomo Yamada" />
               ))}
-          </AvatarGroup>
+          </AvatarGroup.Root>
         )}
       </For>
     </>
@@ -165,41 +165,41 @@ export const GroupMax: Story = () => {
     <>
       <For each={["solid", "subtle", "surface", "outline"] as const}>
         {(variant, index) => (
-          <AvatarGroup key={index} variant={variant} max={3}>
+          <AvatarGroup.Root key={index} variant={variant} max={3}>
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar
+                <AvatarGroup.Item
                   key={index}
                   name="Hirotomo Yamada"
                   bg={variant === "outline" ? "bg" : undefined}
                 />
               ))}
-          </AvatarGroup>
+          </AvatarGroup.Root>
         )}
       </For>
 
       <For each={["xs", "sm", "md", "lg", "xl"] as const}>
         {(size, index) => (
-          <AvatarGroup key={index} size={size} max={3}>
+          <AvatarGroup.Root key={index} size={size} max={3}>
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar key={index} name="Hirotomo Yamada" />
+                <AvatarGroup.Item key={index} name="Hirotomo Yamada" />
               ))}
-          </AvatarGroup>
+          </AvatarGroup.Root>
         )}
       </For>
 
       <For each={["circle", "square", "rounded"] as const}>
         {(shape, index) => (
-          <AvatarGroup key={index} max={3} shape={shape}>
+          <AvatarGroup.Root key={index} max={3} shape={shape}>
             {Array(5)
               .fill(0)
               .map((_, index) => (
-                <Avatar key={index} name="Hirotomo Yamada" />
+                <AvatarGroup.Item key={index} name="Hirotomo Yamada" />
               ))}
-          </AvatarGroup>
+          </AvatarGroup.Root>
         )}
       </For>
     </>

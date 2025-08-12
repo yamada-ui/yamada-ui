@@ -6,4 +6,144 @@ source: components/avatar
 style: components/avatar/avatar.style.ts
 ---
 
+```tsx preview
+<Avatar
+  name="Hirotomo Yamada"
+  src="https://avatars.githubusercontent.com/u/84060430?v=4"
+/>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Avatar } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Avatar } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Avatar } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Avatar />
+```
+
+### Change Size
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, key) => <Avatar size={size} name="Hirotomo Yamada" key={key} />}
+  </For>
+</Wrap>
+```
+
+### Change Shape
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["circle", "square", "rounded"]}>
+    {(size, key) => <Avatar shape={size} name="Hirotomo Yamada" key={key} />}
+  </For>
+</Wrap>
+```
+
+### Display Initials
+
+When you set a string to name, an icon with the user's initials will be displayed.
+
+```tsx preview
+<Avatar name="Hirotomo Yamada" />
+```
+
+### Display an Image
+
+If you want to display an image in the avatar, set the path to `src`.
+
+```tsx preview
+<Avatar src="https://avatars.githubusercontent.com/u/84060430?v=4" />
+```
+
+### Fallback
+
+There are two fallbacks if the loading of `src` fails:
+
+- If `name` is provided: It uses an icon with the user's initials
+- If `name` is not provided: It uses the default avatar icon.
+
+```tsx preview
+<Wrap gap="md">
+  <Avatar
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <Avatar name="Hirotomo Yamada" src="https://not-found.com" />
+  <Avatar src="https://not-found.com" />
+</Wrap>
+```
+
+### Customize the Fallback
+
+Here is an example of customizing the fallback icon and background color.
+
+```tsx preview
+<Wrap gap="md">
+  <Avatar bg="warning" src="https://not-found.com" />
+  <Avatar icon={<GhostIcon />} src="https://not-found.com" />
+</Wrap>
+```
+
+### Use random color
+
+```tsx preview functional
+const randomColorScheme = (name: string) => {
+  const index = name.charCodeAt(0) % COLOR_SCHEMES.length
+  return COLOR_SCHEMES[index]
+}
+
+return (
+  <Wrap gap="md">
+    <For each={["Hirotomo Yamada", "Koiso Kenji", "Shinohara Natsuki"]}>
+      {(name, index) => (
+        <Avatar key={index} name={name} colorScheme={randomColorScheme(name)} />
+      )}
+    </For>
+  </Wrap>
+)
+```
+
+### Avatar Group
+
+If you want to control the number of avatars displayed, specify a number with `max`. If there are more avatars than the specified number, it truncates and displays the remaining avatars as `+X`.
+
+```tsx preview
+<AvatarGroup.Root max={3}>
+  <AvatarGroup.Item
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <AvatarGroup.Item
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <AvatarGroup.Item
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <AvatarGroup.Item
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+  <AvatarGroup.Item
+    name="Hirotomo Yamada"
+    src="https://avatars.githubusercontent.com/u/84060430?v=4"
+  />
+</AvatarGroup.Root>
+```

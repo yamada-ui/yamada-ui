@@ -21,7 +21,7 @@ export const Basic: Story = () => {
   return (
     <Card.Root>
       <Card.Header>
-        <Heading size="xl">『SLAM DUNK』（スラムダンク）</Heading>
+        <Heading size="xl">SLAM DUNK（スラムダンク）</Heading>
       </Card.Header>
 
       <Card.Body color="fg.muted">
@@ -45,7 +45,7 @@ export const Variant: Story = () => {
       {(_, row, key) => (
         <Card.Root key={key} variant={row}>
           <Card.Header>
-            <Heading size="xl">『SLAM DUNK』（スラムダンク）</Heading>
+            <Heading size="xl">SLAM DUNK（スラムダンク）</Heading>
           </Card.Header>
 
           <Card.Body>
@@ -67,7 +67,7 @@ export const Size: Story = () => {
         <Card.Root key={key} size={row}>
           <Card.Header>
             <Heading size={transformSize(row, 2)}>
-              『SLAM DUNK』（スラムダンク）
+              SLAM DUNK（スラムダンク）
             </Heading>
           </Card.Header>
 
@@ -123,7 +123,7 @@ export const Horizontal: Story = () => {
 
       <VStack gap="0">
         <Card.Header>
-          <Heading size="xl">『SLAM DUNK』（スラムダンク）</Heading>
+          <Heading size="xl">SLAM DUNK（スラムダンク）</Heading>
         </Card.Header>
 
         <Card.Body color="fg.muted">

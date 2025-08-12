@@ -20,6 +20,8 @@ export const getInputHeightStyle = (height?: string, key?: string) =>
 
 export const inputStyle = defineComponentStyle({
   base: {
+    "--error-border-color": "colors.border.error",
+    "--focus-border-color": "colorScheme.outline",
     appearance: "none",
     minW: "0",
     position: "relative",
@@ -37,8 +39,8 @@ export const inputStyle = defineComponentStyle({
     filled: {
       bg: "bg.panel",
       border: "1px solid transparent",
-      focusRing: "inside",
       focusRingColor: "{focus-border-color}",
+      focusVisibleRing: "inside",
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",
@@ -63,16 +65,16 @@ export const inputStyle = defineComponentStyle({
     },
     outline: {
       border: "1px solid {colorScheme.muted}",
-      focusRing: "inside",
       focusRingColor: "{focus-border-color}",
+      focusVisibleRing: "inside",
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",
       },
     },
     plain: {
-      focusRing: "inside",
       focusRingColor: "{focus-border-color}",
+      focusVisibleRing: "inside",
       _invalid: {
         borderColor: "{error-border-color}",
         focusRingColor: "{error-border-color}",

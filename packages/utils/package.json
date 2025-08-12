@@ -32,8 +32,8 @@
   "scripts": {
     "clean": "rimraf node_modules dist trace coverage .turbo .eslintcache",
     "build": "tsdown",
-    "test": "NODE_OPTIONS=\"--experimental-strip-types\" vitest",
-    "test:dev": "NODE_OPTIONS=\"--experimental-strip-types\" vitest --watch --ui",
+    "test": "vitest",
+    "test:dev": "vitest --watch --ui",
     "typecheck": "tsc --noEmit",
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
     "typeanalyze": "npx analyze-trace ./trace --expandTypes=false",

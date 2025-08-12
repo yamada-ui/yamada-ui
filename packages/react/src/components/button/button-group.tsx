@@ -6,10 +6,10 @@ import type { ButtonProps } from "./button"
 import type { ButtonStyle } from "./button.style"
 import { useMemo } from "react"
 import { Group } from "../group"
-import { IconButtonPropsContext } from "../icon-button"
 import { ButtonPropsContext } from "./button"
+import { IconButtonPropsContext } from "./icon-button"
 
-export interface ButtonGroupProps
+export interface ButtonGroupRootProps
   extends WithoutThemeProps<GroupProps, ButtonStyle>,
     ThemeProps<ButtonStyle> {
   /**
@@ -20,13 +20,18 @@ export interface ButtonGroupProps
   disabled?: boolean
 }
 
-export const ButtonGroup = (({
+/**
+ * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.
+ *
+ * @see https://yamada-ui.com/components/button
+ */
+export const ButtonGroupRoot = (({
   size,
   variant,
   attached,
   disabled,
   ...rest
-}: ButtonGroupProps) => {
+}: ButtonGroupRootProps) => {
   const context = useMemo<ButtonProps>(
     () => ({
       size,
@@ -44,4 +49,4 @@ export const ButtonGroup = (({
       </IconButtonPropsContext>
     </ButtonPropsContext>
   )
-}) as Component<"div", ButtonGroupProps>
+}) as Component<"div", ButtonGroupRootProps>

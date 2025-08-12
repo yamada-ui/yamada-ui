@@ -6,4 +6,220 @@ source: components/button
 style: components/button/button.style.ts
 ---
 
+```tsx preview
+<Button>Button</Button>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Button } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Button } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Button } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Button />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => (
+      <Button variant={variant} key={index}>
+        Button
+      </Button>
+    )}
+  </For>
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <Button size={size} key={index}>
+        Button
+      </Button>
+    )}
+  </For>
+</Wrap>
+```
+
+### カラースキーマを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Button colorScheme={colorScheme} key={index}>
+        Button
+      </Button>
+    )}
+  </For>
+</Wrap>
+```
+
+### 形を変える
+
+角丸にする場合は、`fullRounded`を`true`にします。
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => (
+      <Button variant={variant} key={index} fullRounded>
+        Button
+      </Button>
+    )}
+  </For>
+</Wrap>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`にします。
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => (
+      <Button variant={variant} key={index} disabled>
+        Button
+      </Button>
+    )}
+  </For>
+</Wrap>
+```
+
+### アイコンを追加する
+
+アイコンを追加する場合は、`startIcon`または`endIcon`に`ReactNode`を設定します。
+
+```tsx preview
+<Wrap gap="md">
+  <Button colorScheme="primary" variant="solid" startIcon={<PlusIcon />}>
+    Button
+  </Button>
+
+  <Button colorScheme="secondary" variant="subtle" endIcon={<ArrowRightIcon />}>
+    Button
+  </Button>
+
+  <Button colorScheme="info" variant="surface" startIcon={<MailIcon />}>
+    Button
+  </Button>
+
+  <Button colorScheme="warning" variant="outline" startIcon={<CheckIcon />}>
+    Button
+  </Button>
+
+  <Button colorScheme="danger" variant="ghost" startIcon={<XIcon />}>
+    Button
+  </Button>
+</Wrap>
+```
+
+### ローディングアニメーションを使う
+
+ローディングアニメーションを使う場合は、`loading`を`true`にします。また、ローディング中にテキストを変更したい場合は、`loadingMessage`を使用します。
+
+```tsx preview
+<Wrap gap="md">
+  <Button colorScheme="primary" loading>
+    Button
+  </Button>
+
+  <Button colorScheme="secondary" variant="subtle" loading loadingIcon="dots">
+    Button
+  </Button>
+
+  <Button
+    colorScheme="info"
+    variant="surface"
+    loading
+    loadingIcon={<Loading.Puff />}
+  >
+    Button
+  </Button>
+
+  <Button
+    colorScheme="warning"
+    variant="outline"
+    loading
+    loadingMessage="Loading..."
+  >
+    Button
+  </Button>
+
+  <Button
+    colorScheme="danger"
+    variant="ghost"
+    loading
+    loadingIcon="grid"
+    loadingMessage="Loading..."
+    loadingPlacement="end"
+  >
+    Button
+  </Button>
+</Wrap>
+```
+
+:::note
+`Button`のローディングアニメーションは、内部的に[Loading](/docs/components/loading)を使用しています。
+:::
+
+### グループ化する
+
+ボタンをグループ化する場合は、`ButtonGroup`を使用します。`ButtonGroup`は、子要素(`Button`)の`variant`, `size`, `colorScheme`, `disabled`を一括で設定できます。
+
+```tsx preview
+<VStack>
+  <ButtonGroup.Root attached variant="outline">
+    <ButtonGroup.Item>Button</ButtonGroup.Item>
+    <ButtonGroup.IconItem icon={<PlusIcon />} />
+  </ButtonGroup.Root>
+
+  <Wrap gap="md">
+    <ButtonGroup.Root gap="sm">
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
+
+    <ButtonGroup.Root attached disabled variant="outline">
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
+  </Wrap>
+
+  <Wrap gap="md">
+    <ButtonGroup.Root orientation="vertical" gap="sm">
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
+
+    <ButtonGroup.Root orientation="vertical" attached variant="outline">
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
+  </Wrap>
+</VStack>
+```

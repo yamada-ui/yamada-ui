@@ -6,4 +6,92 @@ source: components/color-swatch
 style: components/color-swatch/color-swatch.style.ts
 ---
 
+```tsx preview
+<ColorSwatch color="#186bf2" />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { ColorSwatch } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ColorSwatch } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ColorSwatch } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<ColorSwatch />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["plain", "circle", "square"]}>
+    {(variant, index) => (
+      <ColorSwatch color="#186bf2" variant={variant} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="md" alignItems="center">
+  <For each={["2xs", "xs", "sm", "md", "lg", "xl", "2xl"]}>
+    {(size, index) => <ColorSwatch color="#186bf2" size={size} key={index} />}
+  </For>
+</Wrap>
+```
+
+### アルファ
+
+アルファチャンネルを使った見本の作例です。
+
+```tsx preview
+<VStack>
+  <Wrap gap="md">
+    {Object.entries(defaultTheme.colors.whiteAlpha).map(([key, color]) => (
+      <ColorSwatch key={key} color={color} />
+    ))}
+  </Wrap>
+
+  <Wrap gap="md">
+    {Object.entries(defaultTheme.colors.blackAlpha).map(([key, color]) => (
+      <ColorSwatch key={key} color={color} />
+    ))}
+  </Wrap>
+</VStack>
+```
+
+### 影を無効にする
+
+デフォルトでは、色を見やすくするためにインラインに影がついています。影を無効にする場合は、`withShadow`を`false`に設定します。
+
+```tsx preview
+<ColorSwatch color="#186bf2" withShadow={false} />
+```
+
+### グループ化する
+
+複数の色を含む見本を作成するには、`ColorSwatchGroup`を使用します。
+
+```tsx preview
+<Wrap gap="md">
+  <ColorSwatchGroup
+    items={["green.500", "green.600", "green.700", "green.800"]}
+  />
+  <ColorSwatchGroup items={["red.500", "red.400", "red.300"]} />
+  <ColorSwatchGroup items={[]} />
+</Wrap>
+```

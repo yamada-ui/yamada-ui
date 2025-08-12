@@ -1,20 +1,24 @@
 "use client"
 
 import type { FragmentContent, PageContent } from "@/data"
-import type { HTMLProps } from "@yamada-ui/react"
+import type { Descendant, HTMLProps } from "@yamada-ui/react"
 import type { ElementType, KeyboardEvent, ReactNode, RefObject } from "react"
 import {
   AlignLeftIcon,
+  assignRef,
   Box,
   Center,
-  dataAttr,
+  createDescendants,
+  handlerAll,
   HashIcon,
   HStack,
   IconButton,
   Input,
   InputGroup,
   Kbd,
+  mergeRefs,
   Modal,
+  noop,
   runKeyAction,
   SearchIcon,
   Text,
@@ -28,9 +32,8 @@ import { useTranslations } from "next-intl"
 import NextLink from "next/link"
 import { useRouter } from "next/navigation"
 import {
-  createRef,
-  memo,
   useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -39,6 +42,13 @@ import {
 import scrollIntoView from "scroll-into-view-if-needed"
 import { getContents, getDefaultContents } from "@/data"
 import { useLocale, usePathname } from "@/i18n"
+
+const {
+  DescendantsContext,
+  useDescendant,
+  useDescendants,
+  useDescendantsContext,
+} = createDescendants<HTMLAnchorElement, { href: string }>()
 
 export function Search() {
   const { open, onClose, onOpen } = useDisclosure()
@@ -67,7 +77,7 @@ export function Search() {
       <HStack
         as="button"
         type="button"
-        bg={["bg.subtle/40", "bg.subtle"]}
+        bg={["bg.muted/30", "bg.muted/30"]}
         color={{ base: "fg.muted", _hover: "fg.emphasized" }}
         cursor="pointer"
         display={{ base: "flex", lg: "none" }}
@@ -108,7 +118,7 @@ export function Search() {
         withCloseButton={false}
         onClose={onClose}
       >
-        <SearchContents onClose={onClose} />
+        <SearchContent onClose={onClose} />
       </Modal.Root>
     </>
   )
@@ -116,54 +126,185 @@ export function Search() {
 
 type Hit = FragmentContent | PageContent
 
-interface SearchContentsProps {
+interface SearchContentProps {
   onClose: () => void
 }
 
-function SearchContents({ onClose }: SearchContentsProps) {
-  const t = useTranslations("component.search")
-  const { locale } = useLocale()
-  const pathname = usePathname()
-  const router = useRouter()
-  const contents = useMemo(() => getContents(locale), [locale])
-  const defaultContents = useMemo(() => getDefaultContents(locale), [locale])
-  const [value, setValue] = useState("")
-  const [hits, setHits] = useState<Hit[]>(defaultContents)
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [, startTransition] = useTransition()
-  const compositionRef = useRef(false)
-  const eventRef = useRef<"keyboard" | "mouse" | null>(null)
+function SearchContent({ onClose }: SearchContentProps) {
   const bodyRef = useRef<HTMLDivElement>(null)
-  const itemRefs = useRef<Map<number, RefObject<HTMLAnchorElement | null>>>(
-    new Map(),
-  )
+  const descendants = useDescendants()
+  const onSearchRef = useRef<(value: string) => void>(noop)
+  const activeDescendant = useRef<Descendant<
+    HTMLAnchorElement,
+    { href: string }
+  > | null>(null)
 
-  const onSearch = useCallback(
-    (value: string) => {
-      setValue(value)
+  const onActive = useCallback(
+    (descendant?: Descendant<HTMLAnchorElement, { href: string }>) => {
+      if (!descendant) return
 
-      startTransition(() => {
-        let hits: Hit[] = defaultContents
+      activeDescendant.current = descendant
 
-        if (value.length)
-          hits = matchSorter(contents, value, {
-            keys: [
-              "title",
-              "hierarchy.6",
-              "hierarchy.5",
-              "hierarchy.4",
-              "hierarchy.3",
-              "hierarchy.2",
-              "hierarchy.1",
-            ],
-          })
+      descendants.active(descendant)
 
-        setSelectedIndex(0)
-        setHits(hits)
+      scrollIntoView(descendant.node, {
+        behavior: (actions) =>
+          actions.forEach(({ el, top }) => {
+            el.scrollTop = top
+          }),
+        block: "nearest",
+        boundary: bodyRef.current,
+        inline: "nearest",
+        scrollMode: "if-needed",
       })
     },
-    [contents, defaultContents],
+    [activeDescendant, bodyRef, descendants],
   )
+
+  return (
+    <DescendantsContext value={descendants}>
+      <Modal.Content maxW="auto" w={{ base: "lg", sm: "full" }}>
+        <SearchContentHeader
+          activeDescendant={activeDescendant}
+          onActive={onActive}
+          onClose={onClose}
+          onSearchRef={onSearchRef}
+        />
+
+        <SearchContentBody
+          ref={bodyRef}
+          onActive={onActive}
+          onClose={onClose}
+          onSearchRef={onSearchRef}
+        />
+      </Modal.Content>
+    </DescendantsContext>
+  )
+}
+
+interface SearchContentHeaderProps {
+  activeDescendant: RefObject<Descendant<
+    HTMLAnchorElement,
+    { href: string }
+  > | null>
+  onActive: (
+    descendant?: Descendant<HTMLAnchorElement, { href: string }>,
+  ) => void
+  onClose: () => void
+  onSearchRef: RefObject<(value: string) => void>
+}
+
+function SearchContentHeader({
+  activeDescendant,
+  onActive,
+  onClose,
+  onSearchRef,
+}: SearchContentHeaderProps) {
+  const t = useTranslations("component.search")
+  const descendants = useDescendantsContext()
+  const compositionRef = useRef(false)
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const onKeyDown = useCallback(
+    (ev: KeyboardEvent<HTMLInputElement>) => {
+      if (compositionRef.current) return
+
+      runKeyAction(ev, {
+        ArrowDown: () => {
+          if (activeDescendant.current) {
+            const descendant = descendants.enabledNextValue(
+              activeDescendant.current,
+            )
+
+            onActive(descendant)
+          } else {
+            const descendant = descendants.enabledFirstValue()
+
+            onActive(descendant)
+          }
+        },
+        ArrowUp: () => {
+          if (activeDescendant.current) {
+            const descendant = descendants.enabledPrevValue(
+              activeDescendant.current,
+            )
+
+            onActive(descendant)
+          } else {
+            const descendant = descendants.enabledLastValue()
+
+            onActive(descendant)
+          }
+        },
+        End: () => {
+          const descendant = descendants.enabledLastValue()
+
+          onActive(descendant)
+        },
+        Enter: () => {
+          const { href } = activeDescendant.current ?? {}
+
+          if (!href) return
+
+          router.push(href)
+
+          if (href.split("#")[0] === pathname) onClose()
+        },
+        Home: () => {
+          const descendant = descendants.enabledFirstValue()
+
+          onActive(descendant)
+        },
+      })
+    },
+    [activeDescendant, descendants, onActive, onClose, pathname, router],
+  )
+
+  return (
+    <Modal.Header pt="sm" px="sm">
+      <InputGroup.Root>
+        <InputGroup.Element>
+          <SearchIcon fontSize="xl" />
+        </InputGroup.Element>
+        <Input
+          placeholder={t("placeholder")}
+          onChange={(ev) => onSearchRef.current(ev.target.value)}
+          onCompositionEnd={() => {
+            compositionRef.current = false
+          }}
+          onCompositionStart={() => {
+            compositionRef.current = true
+          }}
+          onKeyDown={onKeyDown}
+        />
+      </InputGroup.Root>
+    </Modal.Header>
+  )
+}
+
+interface SearchContentBodyProps extends Modal.BodyProps {
+  onActive: (
+    descendant?: Descendant<HTMLAnchorElement, { href: string }>,
+  ) => void
+  onClose: () => void
+  onSearchRef: RefObject<(value: string) => void>
+}
+
+function SearchContentBody({
+  onActive,
+  onClose,
+  onSearchRef,
+  ...rest
+}: SearchContentBodyProps) {
+  const t = useTranslations("component.search")
+  const { locale } = useLocale()
+  const contents = useMemo(() => getContents(locale), [locale])
+  const defaultContents = useMemo(() => getDefaultContents(locale), [locale])
+  const [hits, setHits] = useState<Hit[]>(defaultContents)
+  const [, startTransition] = useTransition()
+  const descendants = useDescendantsContext()
+  const [value, setValue] = useState("")
 
   const getDescription = useCallback((hit: Hit) => {
     if (hit.type === "fragment") {
@@ -176,140 +317,66 @@ function SearchContents({ onClose }: SearchContentsProps) {
     }
   }, [])
 
-  const onKeyDown = useCallback(
-    (ev: KeyboardEvent<HTMLInputElement>) => {
-      if (compositionRef.current) return
+  assignRef(onSearchRef, (value) => {
+    startTransition(() => {
+      let hits: Hit[] = defaultContents
 
-      eventRef.current = "keyboard"
+      if (value.length)
+        hits = matchSorter(contents, value, {
+          keys: [
+            "title",
+            "hierarchy.6",
+            "hierarchy.5",
+            "hierarchy.4",
+            "hierarchy.3",
+            "hierarchy.2",
+            "hierarchy.1",
+          ],
+        })
 
-      runKeyAction(ev, {
-        ArrowDown: () => {
-          if (selectedIndex === hits.length - 1) return
+      setHits(hits)
+      setValue(value)
 
-          setSelectedIndex((prev) => prev + 1)
-        },
-        ArrowUp: () => {
-          if (selectedIndex === 0) return
-
-          setSelectedIndex((prev) => prev - 1)
-        },
-        End: () => {
-          setSelectedIndex(hits.length - 1)
-        },
-        Enter: () => {
-          const item = hits[selectedIndex]
-
-          if (!item?.pathname) return
-
-          router.push(item.pathname)
-
-          if (item.pathname.split("#")[0] === pathname) onClose()
-        },
-        Home: () => {
-          setSelectedIndex(0)
-        },
-      })
-    },
-    [hits, onClose, pathname, router, selectedIndex],
-  )
-
-  const onClick = useCallback(
-    (item: Hit) => {
-      if (item.pathname.split("#")[0] === pathname) onClose()
-    },
-    [onClose, pathname],
-  )
-
-  const onMouseEnter = useCallback(
-    (index: number) => {
-      if (eventRef.current !== "mouse") return
-
-      setSelectedIndex(index)
-    },
-    [eventRef, setSelectedIndex],
-  )
-
-  useWindowEvent("mousemove", () => {
-    eventRef.current = "mouse"
+      if (!hits.length) return
+    })
   })
 
-  useUpdateEffect(() => {
-    if (!bodyRef.current || eventRef.current === "mouse") return
+  useEffect(() => {
+    const descendant = descendants.enabledFirstValue()
 
-    const itemRef = itemRefs.current.get(selectedIndex)
-
-    if (!itemRef?.current) return
-
-    scrollIntoView(itemRef.current, {
-      behavior: (actions) =>
-        actions.forEach(({ el, top }) => {
-          el.scrollTop = top
-        }),
-      block: "nearest",
-      boundary: bodyRef.current,
-      inline: "nearest",
-      scrollMode: "if-needed",
-    })
-  }, [selectedIndex])
+    onActive(descendant)
+  }, [descendants, onActive, value])
 
   return (
-    <Modal.Content
+    <Modal.Body
+      as="nav"
+      gap="sm"
       maxH={{ base: "4xl", sm: "full" }}
-      maxW="auto"
-      w={{ base: "lg", sm: "full" }}
+      my="sm"
+      px="sm"
+      tabIndex={-1}
+      {...rest}
     >
-      <Modal.Header pt="sm" px="sm">
-        <InputGroup.Root>
-          <InputGroup.Element>
-            <SearchIcon fontSize="xl" />
-          </InputGroup.Element>
-          <Input
-            placeholder={t("placeholder")}
-            value={value}
-            onChange={(ev) => onSearch(ev.target.value)}
-            onCompositionEnd={() => {
-              compositionRef.current = false
-            }}
-            onCompositionStart={() => {
-              compositionRef.current = true
-            }}
-            onKeyDown={onKeyDown}
+      {hits.length ? (
+        hits.map((hit, index) => (
+          <Item
+            key={`${hit.pathname}-${index}`}
+            href={hit.pathname}
+            description={getDescription(hit)}
+            icon={hit.type === "fragment" ? HashIcon : AlignLeftIcon}
+            title={hit.title}
+            onActive={onActive}
+            onClose={onClose}
           />
-        </InputGroup.Root>
-      </Modal.Header>
-
-      <Modal.Body ref={bodyRef} as="nav" gap="sm" my="sm" px="sm" tabIndex={-1}>
-        {hits.length ? (
-          hits.map((hit, index) => {
-            const selected = selectedIndex === index
-
-            const ref = createRef<HTMLAnchorElement>()
-
-            itemRefs.current.set(index, ref)
-
-            return (
-              <Item
-                key={hit.pathname}
-                ref={ref}
-                href={hit.pathname}
-                data-selected={dataAttr(selected)}
-                description={getDescription(hit)}
-                icon={hit.type === "fragment" ? HashIcon : AlignLeftIcon}
-                title={hit.title}
-                onClick={() => onClick(hit)}
-                onMouseEnter={() => onMouseEnter(index)}
-              />
-            )
-          })
-        ) : (
-          <Center minH="16" w="full">
-            <Text color="fg.muted" fontSize="sm" lineClamp={1}>
-              {t("notFound", { value })}
-            </Text>
-          </Center>
-        )}
-      </Modal.Body>
-    </Modal.Content>
+        ))
+      ) : (
+        <Center minH="16" w="full">
+          <Text color="fg.muted" fontSize="sm" lineClamp={1}>
+            {t("notFound", { value })}
+          </Text>
+        </Center>
+      )}
+    </Modal.Body>
   )
 }
 
@@ -317,23 +384,46 @@ interface ItemProps extends Omit<HTMLProps<"a">, "href" | "title"> {
   href: string
   icon: ElementType
   title: ReactNode
+  onActive: (
+    descendant?: Descendant<HTMLAnchorElement, { href: string }>,
+  ) => void
+  onClose: () => void
   description?: ReactNode
 }
 
-const Item = memo(function Item({
+const Item = function Item({
+  ref,
+  href,
   description,
   icon: Icon,
   title,
+  onActive,
+  onClose,
   ...rest
 }: ItemProps) {
+  const itemRef = useRef<HTMLAnchorElement>(null)
+  const { descendants, register } = useDescendant({ href })
+  const pathname = usePathname()
+
+  const onMouseMove = useCallback(() => {
+    const descendant = descendants.value(itemRef.current)
+
+    onActive(descendant)
+  }, [descendants, onActive])
+
+  const onClick = useCallback(() => {
+    if (href.split("#")[0] === pathname) onClose()
+  }, [href, onClose, pathname])
+
   return (
     <Box
+      ref={mergeRefs(ref, itemRef, register)}
       as={NextLink}
+      href={href}
       alignItems="center"
       bg={{
         base: "transparent",
-        _selected: ["bg.subtle/70", "bg.muted/70"],
-        _hover: ["bg.subtle/70", "bg.muted/70"],
+        _activedescendant: ["bg.muted/70", "bg.muted/70"],
       }}
       display="flex"
       focusVisibleRing="none"
@@ -346,6 +436,8 @@ const Item = memo(function Item({
       transitionProperty="colors"
       w="full"
       {...rest}
+      onClick={handlerAll(onClick, rest.onClick)}
+      onMouseMove={handlerAll(onMouseMove, rest.onMouseMove)}
     >
       <Icon fontSize="2xl" />
 
@@ -359,4 +451,4 @@ const Item = memo(function Item({
       </VStack>
     </Box>
   )
-})
+}

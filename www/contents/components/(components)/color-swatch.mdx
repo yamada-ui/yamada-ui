@@ -6,4 +6,92 @@ source: components/color-swatch
 style: components/color-swatch/color-swatch.style.ts
 ---
 
+```tsx preview
+<ColorSwatch color="#186bf2" />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { ColorSwatch } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ColorSwatch } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ColorSwatch } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<ColorSwatch />
+```
+
+### Change Variant
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["plain", "circle", "square"]}>
+    {(variant, index) => (
+      <ColorSwatch color="#186bf2" variant={variant} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Size
+
+```tsx preview
+<Wrap gap="md" alignItems="center">
+  <For each={["2xs", "xs", "sm", "md", "lg", "xl", "2xl"]}>
+    {(size, index) => <ColorSwatch color="#186bf2" size={size} key={index} />}
+  </For>
+</Wrap>
+```
+
+### Alpha
+
+Example of color swatch using alpha channels.
+
+```tsx preview
+<VStack>
+  <Wrap gap="md">
+    {Object.entries(defaultTheme.colors.whiteAlpha).map(([key, color]) => (
+      <ColorSwatch key={key} color={color} />
+    ))}
+  </Wrap>
+
+  <Wrap gap="md">
+    {Object.entries(defaultTheme.colors.blackAlpha).map(([key, color]) => (
+      <ColorSwatch key={key} color={color} />
+    ))}
+  </Wrap>
+</VStack>
+```
+
+### Disable Shadow
+
+By default, a shadow is included inline to make the color easier to see. To disable the shadow, set `withShadow` to `false`.
+
+```tsx preview
+<ColorSwatch color="#186bf2" withShadow={false} />
+```
+
+### Group
+
+To create color swatch containing multiple colors, use `ColorSwatchGroup`.
+
+```tsx preview
+<Wrap gap="md">
+  <ColorSwatchGroup
+    items={["green.500", "green.600", "green.700", "green.800"]}
+  />
+  <ColorSwatchGroup items={["red.500", "red.400", "red.300"]} />
+  <ColorSwatchGroup items={[]} />
+</Wrap>
+```

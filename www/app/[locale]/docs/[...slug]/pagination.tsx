@@ -27,7 +27,7 @@ export function Pagination() {
   }, [locale, pathname])
 
   return (
-    <ButtonGroup
+    <ButtonGroup.Root
       as="nav"
       size="sm"
       variant="subtle"
@@ -54,6 +54,6 @@ export function Pagination() {
           </NextLinkButton>
         ) : null}
       </Flex>
-    </ButtonGroup>
+    </ButtonGroup.Root>
   )
 }

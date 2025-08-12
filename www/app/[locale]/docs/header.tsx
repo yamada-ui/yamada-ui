@@ -17,7 +17,7 @@ export function Header() {
   }, [locale])
 
   return (
-    <ButtonGroup
+    <ButtonGroup.Root
       as="nav"
       size="sm"
       variant="ghost"
@@ -43,6 +43,6 @@ export function Header() {
           {title}
         </NextLinkButton>
       ))}
-    </ButtonGroup>
+    </ButtonGroup.Root>
   )
 }

@@ -217,7 +217,11 @@ export const FieldsetErrorMessage = withContext<
 >((props) => {
   const { invalid } = useFieldsetContext() ?? {}
 
-  if (!invalid) return null
-
-  return <styled.span aria-live="polite" {...props} />
+  return (
+    <styled.span
+      aria-live={invalid ? "polite" : undefined}
+      hidden={!invalid}
+      {...props}
+    />
+  )
 }, "errorMessage")()

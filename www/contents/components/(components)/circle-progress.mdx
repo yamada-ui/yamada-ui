@@ -6,4 +6,122 @@ source: components/circle-progress
 style: components/circle-progress/circle-progress.style.ts
 ---
 
+```tsx preview
+<CircleProgress.Root value={75} />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { CircleProgress } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { CircleProgress } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { CircleProgress } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<CircleProgress.Root>
+  <CircleProgress.Label />
+</CircleProgress.Root>
+```
+
+### Change Variant
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["outline", "subtle"]}>
+    {(variant, index) => (
+      <CircleProgress.Root value={75} variant={variant} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Size
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <CircleProgress.Root value={75} size={size} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+Alternatively, set a string or number to `boxSize`.
+
+```tsx preview
+<CircleProgress.Root boxSize="100px" value={31} />
+```
+
+### Change Color Scheme
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <CircleProgress.Root value={75} colorScheme={colorScheme} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Shape
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["rounded", "square"]}>
+    {(shape, index) => (
+      <CircleProgress.Root value={75} shape={shape} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+### Apply Animation
+
+Setting `value` to `null` will apply animation.
+
+```tsx preview
+<CircleProgress.Root value={null} />
+```
+
+#### Change Animation Duration
+
+Set a number to `duration`.
+
+```tsx preview
+<CircleProgress.Root duration={2} value={null} />
+```
+
+### Change Thickness
+
+To change the thickness of the progress bar, set a string or number to `thickness`.
+
+```tsx preview
+<CircleProgress.Root thickness={1} value={31} />
+```
+
+### Add Label
+
+```tsx preview
+<CircleProgress.Root value={75}>
+  <CircleProgress.Label>75%</CircleProgress.Label>
+</CircleProgress.Root>
+```
+
+### Change Color
+
+```tsx preview
+<CircleProgress.Root rangeColor="red.500" trackColor="blue.500" value={31} />
+```

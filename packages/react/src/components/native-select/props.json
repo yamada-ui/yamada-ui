@@ -1,5 +1,98 @@
 {
-  "Root": {
+  "NativeSelect": {
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { base?: \"lg\" | ... 6 more ... | undefined; ... 4 more ...; xl?: \"lg\" | ... 6 more ... | undefined; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ....",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | ({ _peerAccept?: \"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "elementProps": {
+        "type": "InputElementProps",
+        "description": "The props for the end element.",
+        "required": false
+      },
+      "errorBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "description": "The border color when the input is invalid.",
+        "required": false
+      },
+      "focusBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "description": "The border color when the input is focused.",
+        "required": false
+      },
+      "icon": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The icon to be used in the select.",
+        "required": false
+      },
+      "iconProps": {
+        "type": "NativeSelectIconProps",
+        "description": "Props for icon element.",
+        "required": false
+      },
+      "includePlaceholder": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, include placeholder in options.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "items": {
+        "type": "NativeSelectItem[]",
+        "defaultValue": "\"[]\"",
+        "description": "If provided, generate options based on items.",
+        "required": false
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "The placeholder for select.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "rootProps": {
+        "type": "InputGroupRootProps",
+        "description": "Props for root element.",
+        "required": false
+      }
+    }
+  },
+  "NativeSelectRoot": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -55,6 +148,12 @@
       "description": "Props for icon element.",
       "required": false
     },
+    "includePlaceholder": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, include placeholder in options.",
+      "required": false
+    },
     "invalid": {
       "type": "boolean",
       "defaultValue": "false",
@@ -70,12 +169,6 @@
     "placeholder": {
       "type": "string",
       "description": "The placeholder for select.",
-      "required": false
-    },
-    "placeholderInOptions": {
-      "type": "boolean",
-      "defaultValue": "true",
-      "description": "If `true`, include placeholders in options.",
       "required": false
     },
     "readOnly": {

@@ -1,5 +1,453 @@
 {
-  "Group": {
+  "Autocomplete": {
+    "Group": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "label": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The label of the group.",
+        "required": false
+      },
+      "labelProps": {
+        "type": "AutocompleteLabelProps",
+        "description": "Props for the label component.",
+        "required": false
+      }
+    },
+    "Label": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Option": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "closeOnSelect": {
+        "type": "boolean",
+        "description": "If `true`, the item will be closed when selected.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the item will be disabled.",
+        "required": false
+      },
+      "icon": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The icon to be used in the autocomplete option.",
+        "required": false
+      },
+      "selected": {
+        "type": "boolean",
+        "description": "If `true`, the item will be selected.",
+        "required": false
+      },
+      "value": {
+        "type": "string",
+        "description": "The value of the item.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { base?: \"lg\" | ... 6 more ... | undefined; ... 4 more ...; xl?: \"lg\" | ... 6 more ... | undefined; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ....",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | ({ _peerAccept?: \"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "allowCustomValue": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the autocomplete will allow custom value.",
+        "required": false
+      },
+      "animationScheme": {
+        "type": "\"scale\" | \"none\" | SimplePlacement",
+        "defaultValue": "\"scale\"",
+        "description": "The animation of the element.",
+        "required": false
+      },
+      "autoUpdate": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, automatically updates the position of the floating element when necessary.",
+        "required": false
+      },
+      "blockScrollOnMount": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, scrolling will be disabled on the `body` when the modal opens.",
+        "required": false
+      },
+      "clearable": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, display the clear icon.",
+        "required": false
+      },
+      "clearIcon": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The icon to be used in the clear button.",
+        "required": false
+      },
+      "closeOnBlur": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the popover will close when you blur out it by clicking outside or tabbing out.",
+        "required": false
+      },
+      "closeOnChange": {
+        "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ((ev: ChangeEvent<HTMLInputElement>) => boolean)",
+        "defaultValue": "false",
+        "description": "If `true`, the autocomplete will be closed when the input value changes.",
+        "required": false
+      },
+      "closeOnEsc": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the popover will hide on pressing Esc key.",
+        "required": false
+      },
+      "closeOnScroll": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the popover will hide on scroll.",
+        "required": false
+      },
+      "closeOnSelect": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the list element will be closed when value is selected.",
+        "required": false
+      },
+      "contentProps": {
+        "type": "AutocompleteContentProps",
+        "description": "Props for content element.",
+        "required": false
+      },
+      "defaultInputValue": {
+        "type": "string",
+        "description": "The initial value of the input.",
+        "required": false
+      },
+      "defaultOpen": {
+        "type": "boolean",
+        "description": "If `true`, the element will be initially opened.",
+        "required": false
+      },
+      "defaultValue": {
+        "type": "string",
+        "description": "The initial value of the autocomplete.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the combobox will be disabled.",
+        "required": false
+      },
+      "duration": {
+        "type": "number | MotionLifecycleProps<number>",
+        "defaultValue": "0.2",
+        "description": "The animation duration.",
+        "required": false
+      },
+      "elementProps": {
+        "type": "InputElementProps",
+        "description": "The props for the end element.",
+        "required": false
+      },
+      "elements": {
+        "type": "{\n  floating?: HTMLElement | null | undefined\n  reference?: HTMLButtonElement | null | undefined\n}",
+        "description": "Object containing the reference and floating elements.",
+        "required": false
+      },
+      "emptyIcon": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The icon to be used in the empty element.",
+        "required": false
+      },
+      "emptyMessage": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "defaultValue": "\"No results found\"",
+        "description": "The message displayed when the search yields no hits.",
+        "required": false
+      },
+      "emptyProps": {
+        "type": "AutocompleteEmptyProps",
+        "description": "Props for empty element.",
+        "required": false
+      },
+      "errorBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "description": "The border color when the input is invalid.",
+        "required": false
+      },
+      "filter": {
+        "type": "AutocompleteFilter",
+        "description": "The function to filter the items.",
+        "required": false
+      },
+      "flip": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.",
+        "required": false
+      },
+      "focusBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "description": "The border color when the input is focused.",
+        "required": false
+      },
+      "focusOnClear": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the input will be focused when the clear icon is clicked.",
+        "required": false
+      },
+      "groupProps": {
+        "type": "Omit<AutocompleteGroupProps, \"label\" | \"children\">",
+        "description": "Props for group element.",
+        "required": false
+      },
+      "gutter": {
+        "type": "number",
+        "defaultValue": "8",
+        "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier.",
+        "required": false
+      },
+      "icon": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The icon to be used in the autocomplete.",
+        "required": false
+      },
+      "iconProps": {
+        "type": "AutocompleteIconProps",
+        "description": "Props for icon element.",
+        "required": false
+      },
+      "inputValue": {
+        "type": "string",
+        "description": "The value of the input.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "items": {
+        "type": "ComboboxItem[]",
+        "defaultValue": "\"[]\"",
+        "description": "If provided, generate options based on items.",
+        "required": false
+      },
+      "matcher": {
+        "type": "AutocompleteMatcher",
+        "description": "The function to match the items.",
+        "required": false
+      },
+      "matchWidth": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns.",
+        "required": false
+      },
+      "middleware": {
+        "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
+        "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
+        "required": false
+      },
+      "offset": {
+        "type": "[number, number]",
+        "description": "The main and cross-axis offset to displace popper element from its reference element.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(value: string) => void",
+        "description": "The callback invoked when value state changes.",
+        "required": false
+      },
+      "onClose": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to close the element.",
+        "required": false
+      },
+      "onInputChange": {
+        "type": "(value: string) => void",
+        "description": "The callback invoked when input value state changes.",
+        "required": false
+      },
+      "onOpen": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to open the element.",
+        "required": false
+      },
+      "open": {
+        "type": "boolean",
+        "description": "If `true`, the element will be opened.",
+        "required": false
+      },
+      "openOnChange": {
+        "type": "type ONLY_FOR_FORMAT =\n  | boolean\n  | ((ev: ChangeEvent<HTMLInputElement>) => boolean)",
+        "defaultValue": "true",
+        "description": "If `true`, the autocomplete will be opened when the input value changes.",
+        "required": false
+      },
+      "openOnClick": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the combobox will be opened when click on the field.",
+        "required": false
+      },
+      "openOnFocus": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the autocomplete will be opened when the input is focused.",
+        "required": false
+      },
+      "optionProps": {
+        "type": "Omit<AutocompleteOptionProps, \"children\" | \"value\">",
+        "description": "Props for option element.",
+        "required": false
+      },
+      "placeholder": {
+        "type": "string",
+        "description": "The placeholder for autocomplete.",
+        "required": false
+      },
+      "placement": {
+        "type": "Direction",
+        "defaultValue": "\"end\"",
+        "description": "The placement of the popper relative to its reference.",
+        "required": false
+      },
+      "platform": {
+        "type": "Platform",
+        "description": "Custom or extended platform object.",
+        "required": false
+      },
+      "preventOverflow": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the combobox will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "rootProps": {
+        "type": "InputGroupRootProps",
+        "description": "Props for root element.",
+        "required": false
+      },
+      "strategy": {
+        "type": "Strategy",
+        "defaultValue": "\"absolute\"",
+        "description": "The CSS positioning strategy to use.",
+        "required": false
+      },
+      "value": {
+        "type": "string",
+        "description": "The value of the autocomplete.",
+        "required": false
+      },
+      "whileElementsMounted": {
+        "type": "(\n  reference: HTMLButtonElement,\n  floating: HTMLElement,\n  update: () => void,\n) => () => void",
+        "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
+        "required": false
+      }
+    }
+  },
+  "AutocompleteGroup": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -31,7 +479,7 @@
       "required": false
     }
   },
-  "Label": {
+  "AutocompleteLabel": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -53,7 +501,7 @@
       "required": false
     }
   },
-  "Option": {
+  "AutocompleteOption": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -101,7 +549,7 @@
       "required": false
     }
   },
-  "Root": {
+  "AutocompleteRoot": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",

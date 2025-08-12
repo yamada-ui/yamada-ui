@@ -1,5 +1,480 @@
 {
-  "CloseButton": {
+  "Drawer": {
+    "CloseButton": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | ... 6 more ... | (... & { ...; }), \"2xl\" | ... 6 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl...",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "active": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is represented as active.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is disabled.",
+        "required": false
+      },
+      "disableRipple": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, disable ripple effects when pressing a element.",
+        "required": false
+      },
+      "fullRounded": {
+        "type": "StyleValue<boolean>",
+        "defaultValue": "false",
+        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+        "required": false
+      },
+      "icon": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The icon to be used in the button.",
+        "required": false
+      },
+      "loading": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the loading state of the button is represented.",
+        "required": false
+      },
+      "type": {
+        "type": "\"button\" | \"submit\" | \"reset\"",
+        "defaultValue": "\"button\"",
+        "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+        "required": false
+      }
+    },
+    "CloseTrigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Content": {
+      "as": {
+        "type": "keyof IntrinsicElements",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "DragBar": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Footer": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Header": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "OpenTrigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Overlay": {
+      "as": {
+        "type": "keyof IntrinsicElements",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "size": {
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" | \"full\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" | \"full\" | ({ _peerAccept?: \"2xl\" | ... 12 more ... | undefined; ... 178 more ...; _selection?: \"2xl\" | ... 12 more ... | undefined; } & { ...; }), \"2xl\" | ......",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "allowPinchZoom": {
+        "type": "boolean",
+        "defaultValue": "false.",
+        "description": "Handle zoom or pinch gestures on iOS devices when scroll locking is enabled.",
+        "required": false
+      },
+      "blockScrollOnMount": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, scrolling will be disabled on the `body` when the drawer opens.",
+        "required": false
+      },
+      "body": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerBodyProps",
+        "description": "The drawer body to use.",
+        "required": false
+      },
+      "cancel": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+        "description": "The drawer cancel button to use.",
+        "required": false
+      },
+      "closeOnDrag": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, then the drawer will close on drag.",
+        "required": false
+      },
+      "closeOnEsc": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the modal will close when the `Esc` key is pressed.",
+        "required": false
+      },
+      "closeOnOverlay": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the modal will close when the overlay is clicked.",
+        "required": false
+      },
+      "defaultOpen": {
+        "type": "boolean",
+        "description": "If `true`, the element will be initially opened.",
+        "required": false
+      },
+      "dragConstraints": {
+        "type": "number",
+        "defaultValue": "0",
+        "description": "Applies constraints on the permitted draggable area.",
+        "required": false
+      },
+      "dragElastic": {
+        "type": "number",
+        "defaultValue": "0.1",
+        "description": "The degree of movement allowed outside constraints. 0 = no movement, 1 = full movement.",
+        "required": false
+      },
+      "dragOffset": {
+        "type": "number",
+        "defaultValue": "80",
+        "description": "Offset from being dragged to closing.",
+        "required": false
+      },
+      "dragVelocity": {
+        "type": "number",
+        "defaultValue": "100",
+        "description": "Velocity of the drag that triggers close.",
+        "required": false
+      },
+      "duration": {
+        "type": "number | MotionLifecycleProps<number>",
+        "description": "The animation duration.",
+        "required": false
+      },
+      "finalFocusRef": {
+        "type": "RefObject<HTMLElement | null>",
+        "description": "`ref` of the element to return focus to when `FocusLock` unmounts.",
+        "required": false
+      },
+      "footer": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerFooterProps",
+        "description": "The drawer footer to use.",
+        "required": false
+      },
+      "header": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerHeaderProps",
+        "description": "The drawer header to use.",
+        "required": false
+      },
+      "initialFocusRef": {
+        "type": "RefObject<HTMLElement | null>",
+        "description": "`ref` of the element to receive focus initially.",
+        "required": false
+      },
+      "lockFocusAcrossFrames": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "Enables aggressive focus capturing within iframes.\n\n- If `true`: keep focus in the lock, no matter where lock is active.\n- If `false`: allows focus to move outside of iframe.",
+        "required": false
+      },
+      "middle": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+        "description": "The drawer middle button to use.",
+        "required": false
+      },
+      "onCancel": {
+        "type": "(onClose: () => void) => void",
+        "description": "The callback invoked when cancel button clicked.",
+        "required": false
+      },
+      "onClose": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to close the element.",
+        "required": false
+      },
+      "onCloseComplete": {
+        "type": "() => void",
+        "description": "Callback function to run side effects after the drawer has closed.",
+        "required": false
+      },
+      "onEsc": {
+        "type": "() => void",
+        "description": "Callback invoked when the escape key is pressed and focus is within modal.",
+        "required": false
+      },
+      "onMiddle": {
+        "type": "(onClose: () => void) => void",
+        "description": "The callback invoked when middle button clicked.",
+        "required": false
+      },
+      "onOpen": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to open the element.",
+        "required": false
+      },
+      "onSuccess": {
+        "type": "(onClose: () => void) => void",
+        "description": "The callback invoked when success button clicked.",
+        "required": false
+      },
+      "open": {
+        "type": "boolean",
+        "description": "If `true`, the element will be opened.",
+        "required": false
+      },
+      "placement": {
+        "type": "StyleValue<SimplePlacement>",
+        "defaultValue": "\"inline-end\"",
+        "description": "The placement of the drawer.",
+        "required": false
+      },
+      "portalProps": {
+        "type": "Omit<PortalProps, \"children\">",
+        "description": "Props to be forwarded to the portal component.",
+        "required": false
+      },
+      "restoreFocus": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts.",
+        "required": false
+      },
+      "success": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+        "description": "The drawer success button to use.",
+        "required": false
+      },
+      "title": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerTitleProps",
+        "description": "The drawer title to use.",
+        "required": false
+      },
+      "trigger": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The modal trigger to use.",
+        "required": false
+      },
+      "withCloseButton": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, display the drawer close button.",
+        "required": false
+      },
+      "withDragBar": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, display the drag bar when `closeOnDrag` is `true`.",
+        "required": false
+      },
+      "withOverlay": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, display the drawer overlay.",
+        "required": false
+      }
+    },
+    "Title": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    }
+  },
+  "DrawerBody": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "DrawerCloseButton": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -66,13 +541,13 @@
       "required": false
     },
     "type": {
-      "type": "\"button\" | \"reset\" | \"submit\"",
+      "type": "\"button\" | \"submit\" | \"reset\"",
       "defaultValue": "\"button\"",
       "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
       "required": false
     }
   },
-  "CloseTrigger": {
+  "DrawerCloseTrigger": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -94,7 +569,7 @@
       "required": false
     }
   },
-  "Content": {
+  "DrawerContent": {
     "as": {
       "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
@@ -116,7 +591,7 @@
       "required": false
     }
   },
-  "DragBar": {
+  "DrawerDragBar": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -138,7 +613,7 @@
       "required": false
     }
   },
-  "Footer": {
+  "DrawerFooter": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -160,7 +635,7 @@
       "required": false
     }
   },
-  "Header": {
+  "DrawerHeader": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -182,7 +657,7 @@
       "required": false
     }
   },
-  "OpenTrigger": {
+  "DrawerOpenTrigger": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -204,7 +679,7 @@
       "required": false
     }
   },
-  "Overlay": {
+  "DrawerOverlay": {
     "as": {
       "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
@@ -226,7 +701,7 @@
       "required": false
     }
   },
-  "Root": {
+  "DrawerRoot": {
     "size": {
       "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" | \"full\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" | \"full\" | ({ _peerAccept?: \"2xl\" | ... 12 more ... | undefined; ... 178 more ...; _selection?: \"2xl\" | ... 12 more ... | undefined; } & { ...; }), \"2xl\" | ......",
       "description": "The size of the component.",
@@ -428,7 +903,7 @@
       "required": false
     }
   },
-  "Title": {
+  "DrawerTitle": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",

@@ -1,5 +1,302 @@
 {
-  "Description": {
+  "Dropzone": {
+    "Description": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Icon": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | (... & { ...; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"lg\" | ... 6 more ... | undefined; ...",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"solid\" | \"panel\" | \"plain\" | \"dashed\" | [\"solid\" | \"panel\" | \"plain\" | \"dashed\" | ({ _peerAccept?: \"solid\" | \"panel\" | \"plain\" | \"dashed\" | [\"solid\" | \"panel\" | \"plain\" | \"dashed\" | (... & { ...; }), \"solid\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"solid\" | ... 5 ...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "accept": {
+        "type": "string[] | Accept",
+        "description": "Set accepted file types.",
+        "required": false
+      },
+      "autoFocus": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "Set to true to focus the root element on render.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be disabled.",
+        "required": false
+      },
+      "errorBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "description": "The border color when the input is invalid.",
+        "required": false
+      },
+      "focusBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "description": "The border color when the input is focused.",
+        "required": false
+      },
+      "getFilesFromEvent": {
+        "type": "(\n  event: DropEvent,\n) => Promise<(File | DataTransferItem)[]>",
+        "description": "Use this to provide a custom file aggregator.",
+        "required": false
+      },
+      "inputProps": {
+        "type": "HTMLStyledProps<\"input\">",
+        "description": "Props for dropzone input element.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "loading": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, display the dropzone loading icon.",
+        "required": false
+      },
+      "loadingProps": {
+        "type": "DropzoneLoadingProps",
+        "description": "Props for dropzone loading icon element.",
+        "required": false
+      },
+      "loadingScheme": {
+        "type": "LoadingScheme",
+        "defaultValue": "\"oval\"",
+        "description": "The loading scheme.",
+        "required": false
+      },
+      "maxFiles": {
+        "type": "number",
+        "defaultValue": "0",
+        "description": "Maximum accepted number of files.\nThe default value is 0 which means there is no limitation to how many files are accepted.",
+        "required": false
+      },
+      "maxSize": {
+        "type": "number",
+        "defaultValue": "Infinity",
+        "description": "Maximum file size (in bytes).",
+        "required": false
+      },
+      "minSize": {
+        "type": "number",
+        "defaultValue": "0",
+        "description": "Minimum file size (in bytes).",
+        "required": false
+      },
+      "multiple": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "Allow drag and drop (or selection from the file dialog) of multiple files.",
+        "required": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The HTML `name` attribute used for forms.",
+        "required": false
+      },
+      "noClick": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If true, disables click to open the native file selection dialog.",
+        "required": false
+      },
+      "noDrag": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If true, disables drag and drop.",
+        "required": false
+      },
+      "noDragEventsBubbling": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If true, stops drag event propagation to parents.",
+        "required": false
+      },
+      "noKeyboard": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If true, disables `space` and `enter` to open the native file selection dialog.\nNote that it also stops tracking the focus state.",
+        "required": false
+      },
+      "onDragEnter": {
+        "type": "DragEventHandler<HTMLElement>",
+        "description": "Callback for when the dragenter event occurs.",
+        "required": false
+      },
+      "onDragLeave": {
+        "type": "DragEventHandler<HTMLElement>",
+        "description": "Callback for when the dragleave event occurs.",
+        "required": false
+      },
+      "onDragOver": {
+        "type": "DragEventHandler<HTMLElement>",
+        "description": "Callback for when the dragover event occurs.",
+        "required": false
+      },
+      "onDrop": {
+        "type": "<T extends File>(\n  acceptedFiles: T[],\n  fileRejections: FileRejection[],\n  event: DropEvent,\n) => void",
+        "description": "Callback for when the drop event occurs.\nNote that this callback is invoked after the `getFilesFromEvent` callback is done.",
+        "required": false
+      },
+      "onDropAccepted": {
+        "type": "<T extends File>(files: T[], event: DropEvent) => void",
+        "description": "Callback for when the drop event occurs.\nNote that if no files are accepted, this callback is not invoked.",
+        "required": false
+      },
+      "onDropRejected": {
+        "type": "(\n  fileRejections: FileRejection[],\n  event: DropEvent,\n) => void",
+        "description": "Callback for when the drop event occurs.\nNote that if no files are rejected, this callback is not invoked.",
+        "required": false
+      },
+      "onError": {
+        "type": "(err: Error) => void",
+        "description": "Callback for when there's some error from any of the promises.",
+        "required": false
+      },
+      "onFileDialogCancel": {
+        "type": "() => void",
+        "description": "Callback for when closing the file dialog with no selection.",
+        "required": false
+      },
+      "onFileDialogOpen": {
+        "type": "() => void",
+        "description": "Callback for when opening the file dialog.",
+        "required": false
+      },
+      "openRef": {
+        "type": "RefObject<() => void>",
+        "description": "Ref to a open function.",
+        "required": false
+      },
+      "overlayProps": {
+        "type": "DropzoneOverlayProps",
+        "description": "Props for dropzone overlay element.",
+        "required": false
+      },
+      "preventDropOnDocument": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If false, allow dropped items to take over the current browser window.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "useFsAccessApi": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If true, use the [File System API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API) to read files.",
+        "required": false
+      },
+      "validator": {
+        "type": "<T extends File>(\n  file: T,\n) => FileError | readonly FileError[] | null",
+        "description": "Custom validation function.\nIt must return null if there's no errors.",
+        "required": false
+      }
+    },
+    "Title": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    }
+  },
+  "DropzoneDescription": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -21,7 +318,7 @@
       "required": false
     }
   },
-  "Icon": {
+  "DropzoneIcon": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -43,7 +340,7 @@
       "required": false
     }
   },
-  "Root": {
+  "DropzoneRoot": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -272,7 +569,7 @@
       "required": false
     }
   },
-  "Title": {
+  "DropzoneTitle": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",

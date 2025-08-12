@@ -136,7 +136,7 @@
       "required": false
     },
     "type": {
-      "type": "\"button\" | \"reset\" | \"submit\"",
+      "type": "\"button\" | \"submit\" | \"reset\"",
       "defaultValue": "\"button\"",
       "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
       "required": false

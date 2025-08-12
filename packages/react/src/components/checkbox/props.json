@@ -1,5 +1,5 @@
 {
-  "Item": {
+  "Checkbox": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -148,7 +148,315 @@
       "required": false
     }
   },
-  "Root": {
+  "CheckboxGroup": {
+    "Item": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "checked": {
+        "type": "boolean",
+        "description": "If `true`, the checkbox will be checked.",
+        "required": false
+      },
+      "checkedIcon": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The icon to display in the checkbox when it is checked.",
+        "required": false
+      },
+      "defaultChecked": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the checkbox will be initially checked.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be disabled.",
+        "required": false
+      },
+      "errorBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "description": "The border color when the input is invalid.",
+        "required": false
+      },
+      "focusBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "description": "The border color when the input is focused.",
+        "required": false
+      },
+      "id": {
+        "type": "string",
+        "description": "id assigned to input.",
+        "required": false
+      },
+      "indeterminate": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the checkbox will be indeterminate.",
+        "required": false
+      },
+      "indeterminateIcon": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The icon to display in the checkbox when it is indeterminate.",
+        "required": false
+      },
+      "indicatorProps": {
+        "type": "CheckboxIndicatorProps",
+        "description": "Props for the indicator component.",
+        "required": false
+      },
+      "inputProps": {
+        "type": "HTMLStyledProps<\"input\">",
+        "description": "Props for the input element.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "labelProps": {
+        "type": "CheckboxLabelProps",
+        "description": "Props for the label component.",
+        "required": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The name of the input field in a checkbox.",
+        "required": false
+      },
+      "onBlur": {
+        "type": "FocusEventHandler<HTMLInputElement>",
+        "description": "The callback invoked when the checkbox is blurred.",
+        "required": false
+      },
+      "onChange": {
+        "type": "ChangeEventHandler<HTMLInputElement>",
+        "description": "The callback invoked when the checked state changes.",
+        "required": false
+      },
+      "onFocus": {
+        "type": "FocusEventHandler<HTMLInputElement>",
+        "description": "The callback invoked when the checkbox is focused.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "rootProps": {
+        "type": "HTMLStyledProps<\"label\">",
+        "description": "Props for the label element.",
+        "required": false
+      },
+      "shape": {
+        "type": "StyleValue<\"square\" | \"rounded\">",
+        "defaultValue": "\"rounded\"",
+        "description": "The shape of the component",
+        "required": false
+      },
+      "value": {
+        "type": "Y",
+        "description": "The value of the checkbox.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "align": {
+        "type": "AlignItems | [AlignItems | ({ _peerAccept?: AlignItems | [AlignItems | (... & { base?: AlignItems | [AlignItems | (... & ...), AlignItems | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: AlignItems | ... 2 more ... | undefined; }), AlignItems | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+        "description": "The CSS `align-items` property.",
+        "required": false
+      },
+      "attached": {
+        "type": "StyleValue<boolean>",
+        "defaultValue": "false",
+        "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
+        "required": false
+      },
+      "basis": {
+        "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 98 more ... | ({ ...; } & { ...; })",
+        "description": "The CSS `flex-basis` property.",
+        "required": false
+      },
+      "checkedIcon": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The icon to display in the checkbox when it is checked.",
+        "required": false
+      },
+      "defaultValue": {
+        "type": "Y[]",
+        "defaultValue": "\"[]\"",
+        "description": "The initial value of the checkbox group.",
+        "required": false
+      },
+      "direction": {
+        "type": "FlexDirection | [FlexDirection | ({ _peerAccept?: FlexDirection | [FlexDirection | (... & { base?: FlexDirection | [...] | (... & ...) | undefined; ... 4 more ...; xl?: FlexDirection | ... 2 more ... | undefined; }), FlexDirection | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: FlexDirecti...",
+        "description": "The CSS `flex-direction` property.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be disabled.",
+        "required": false
+      },
+      "errorBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "description": "The border color when the input is invalid.",
+        "required": false
+      },
+      "focusBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "description": "The border color when the input is focused.",
+        "required": false
+      },
+      "grow": {
+        "type": "StyleValue<boolean>",
+        "defaultValue": "false",
+        "description": "If `true`, the children will grow to fill the available space.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "items": {
+        "type": "CheckboxItem<Y>[]",
+        "defaultValue": "\"[]\"",
+        "description": "If provided, generate options based on items.",
+        "required": false
+      },
+      "justify": {
+        "type": "JustifyContent | [JustifyContent | ({ _peerAccept?: JustifyContent | [JustifyContent | (... & { ...; }), JustifyContent | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: JustifyContent | ... 2 more ... | undefined; } & { ...; }), JustifyContent | ({ ...; } & { ...; })] | ({ ...; } & { ...; })",
+        "description": "The CSS `justify-content` property.",
+        "required": false
+      },
+      "max": {
+        "type": "number",
+        "description": "The maximum number of checkboxes that can be checked.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(value: Y[]) => void",
+        "description": "The callback fired when any children checkbox is checked or unchecked.",
+        "required": false
+      },
+      "orientation": {
+        "type": "StyleValue<\"horizontal\" | \"vertical\">",
+        "defaultValue": "\"horizontal\"",
+        "description": "The orientation of the group.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "shape": {
+        "type": "StyleValue<\"square\" | \"rounded\">",
+        "defaultValue": "\"rounded\"",
+        "description": "The shape of the component",
+        "required": false
+      },
+      "shrink": {
+        "type": "FlexShrink | [FlexShrink | ({ _peerAccept?: FlexShrink | [FlexShrink | (... & { base?: FlexShrink | [FlexShrink | (... & ...), FlexShrink | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexShrink | ... 2 more ... | undefined; }), FlexShrink | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+        "description": "The CSS `flex-shrink` property.",
+        "required": false
+      },
+      "stacking": {
+        "type": "StyleValue<\"first-on-top\" | \"last-on-top\">",
+        "description": "The stacking order of the group.",
+        "required": false
+      },
+      "value": {
+        "type": "Y[]",
+        "description": "The value of the checkbox group.",
+        "required": false
+      },
+      "wrap": {
+        "type": "FlexWrap | [FlexWrap | ({ _peerAccept?: FlexWrap | [FlexWrap | (... & { base?: FlexWrap | [FlexWrap | (... & ...), FlexWrap | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexWrap | ... 2 more ... | undefined; }), FlexWrap | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: Fle...",
+        "description": "The CSS `flex-wrap` property.",
+        "required": false
+      }
+    }
+  },
+  "CheckboxGroupRoot": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -195,6 +503,11 @@
       "description": "The CSS `flex-basis` property.",
       "required": false
     },
+    "checkedIcon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The icon to display in the checkbox when it is checked.",
+      "required": false
+    },
     "defaultValue": {
       "type": "Y[]",
       "defaultValue": "\"[]\"",
@@ -210,6 +523,16 @@
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "errorBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "description": "The border color when the input is invalid.",
+      "required": false
+    },
+    "focusBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "description": "The border color when the input is focused.",
       "required": false
     },
     "grow": {

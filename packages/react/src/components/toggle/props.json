@@ -1,5 +1,5 @@
 {
-  "Item": {
+  "Toggle": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -99,7 +99,7 @@
       "required": false
     },
     "type": {
-      "type": "\"button\" | \"reset\" | \"submit\"",
+      "type": "\"button\" | \"submit\" | \"reset\"",
       "defaultValue": "\"button\"",
       "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
       "required": false
@@ -110,7 +110,238 @@
       "required": false
     }
   },
-  "Root": {
+  "ToggleGroup": {
+    "Item": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { ...; }), \"2xl\" | ... 5 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl\" | .....",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "active": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is represented as active.",
+        "required": false
+      },
+      "checked": {
+        "type": "boolean",
+        "description": "If `true`, the toggle button will be checked.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is disabled.",
+        "required": false
+      },
+      "disableRipple": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, disable ripple effects when pressing a element.",
+        "required": false
+      },
+      "errorBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "description": "The border color when the input is invalid.",
+        "required": false
+      },
+      "fullRounded": {
+        "type": "StyleValue<boolean>",
+        "defaultValue": "false",
+        "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
+        "required": false
+      },
+      "icon": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "description": "The icon to be used in the button.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "loading": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the loading state of the button is represented.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(checked: boolean) => void",
+        "description": "The callback invoked when checked state changes.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "type": {
+        "type": "\"button\" | \"submit\" | \"reset\"",
+        "defaultValue": "\"button\"",
+        "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+        "required": false
+      },
+      "value": {
+        "type": "Y",
+        "description": "The value of the toggle button.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { ...; }), \"2xl\" | ... 5 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl\" | .....",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "align": {
+        "type": "AlignItems | [AlignItems | ({ _peerAccept?: AlignItems | [AlignItems | (... & { base?: AlignItems | [AlignItems | (... & ...), AlignItems | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: AlignItems | ... 2 more ... | undefined; }), AlignItems | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+        "description": "The CSS `align-items` property.",
+        "required": false
+      },
+      "attached": {
+        "type": "StyleValue<boolean>",
+        "defaultValue": "false",
+        "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
+        "required": false
+      },
+      "basis": {
+        "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 98 more ... | ({ ...; } & { ...; })",
+        "description": "The CSS `flex-basis` property.",
+        "required": false
+      },
+      "defaultValue": {
+        "type": "NonNullable<Y extends any[] ? Y : Y | undefined>",
+        "description": "The initial value of the toggle button group.",
+        "required": false
+      },
+      "direction": {
+        "type": "FlexDirection | [FlexDirection | ({ _peerAccept?: FlexDirection | [FlexDirection | (... & { base?: FlexDirection | [...] | (... & ...) | undefined; ... 4 more ...; xl?: FlexDirection | ... 2 more ... | undefined; }), FlexDirection | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: FlexDirecti...",
+        "description": "The CSS `flex-direction` property.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, all wrapped toggle button will be disabled.",
+        "required": false
+      },
+      "fullRounded": {
+        "type": "StyleValue<boolean>",
+        "defaultValue": "false",
+        "description": "If true, the toggle button is full rounded. Else, it'll be slightly round.",
+        "required": false
+      },
+      "grow": {
+        "type": "StyleValue<boolean>",
+        "defaultValue": "false",
+        "description": "If `true`, the children will grow to fill the available space.",
+        "required": false
+      },
+      "justify": {
+        "type": "JustifyContent | [JustifyContent | ({ _peerAccept?: JustifyContent | [JustifyContent | (... & { ...; }), JustifyContent | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: JustifyContent | ... 2 more ... | undefined; } & { ...; }), JustifyContent | ({ ...; } & { ...; })] | ({ ...; } & { ...; })",
+        "description": "The CSS `justify-content` property.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(value: Y extends any[] ? Y : Y | undefined) => void",
+        "description": "The callback fired when any children toggle button is selected or unselected.",
+        "required": false
+      },
+      "orientation": {
+        "type": "StyleValue<\"horizontal\" | \"vertical\">",
+        "defaultValue": "\"horizontal\"",
+        "description": "The orientation of the group.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, all wrapped toggle button will be readonly.",
+        "required": false
+      },
+      "shrink": {
+        "type": "FlexShrink | [FlexShrink | ({ _peerAccept?: FlexShrink | [FlexShrink | (... & { base?: FlexShrink | [FlexShrink | (... & ...), FlexShrink | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexShrink | ... 2 more ... | undefined; }), FlexShrink | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+        "description": "The CSS `flex-shrink` property.",
+        "required": false
+      },
+      "stacking": {
+        "type": "StyleValue<\"first-on-top\" | \"last-on-top\">",
+        "description": "The stacking order of the group.",
+        "required": false
+      },
+      "value": {
+        "type": "NonNullable<Y extends any[] ? Y : Y | undefined>",
+        "description": "The value of the toggle button group.",
+        "required": false
+      },
+      "wrap": {
+        "type": "FlexWrap | [FlexWrap | ({ _peerAccept?: FlexWrap | [FlexWrap | (... & { base?: FlexWrap | [FlexWrap | (... & ...), FlexWrap | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexWrap | ... 2 more ... | undefined; }), FlexWrap | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: Fle...",
+        "description": "The CSS `flex-wrap` property.",
+        "required": false
+      }
+    }
+  },
+  "ToggleGroupRoot": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",

@@ -6,4 +6,376 @@ source: components/dropzone
 style: components/dropzone/dropzone.style.ts
 ---
 
+```tsx preview
+<Dropzone.Root>
+  <Text>Drag file here or click to select file</Text>
+</Dropzone.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Dropzone } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Dropzone } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Dropzone } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Dropzone.Root>
+  <Dropzone.Title />
+  <Dropzone.Description />
+  <Dropzone.Accept>
+    <Dropzone.Icon />
+  </Dropzone.Accept>
+  <Dropzone.Reject>
+    <Dropzone.Icon />
+  </Dropzone.Reject>
+  <Dropzone.Idle>
+    <Dropzone.Icon />
+  </Dropzone.Idle>
+</Dropzone.Root>
+```
+
+:::note
+`Dropzone` internally uses [react-dropzone](https://react-dropzone.js.org/).
+:::
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["dashed", "solid", "panel"]}>
+    {(variant, index) => (
+      <Dropzone.Root key={index} variant={variant}>
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size, index) => (
+      <Dropzone.Root key={index} size={size}>
+        <Text>Drag file here or click to select file</Text>
+      </Dropzone.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Allow Multiple Selection
+
+To allow multiple selection, set `multiple` to `true`.
+
+```tsx preview
+<Dropzone.Root multiple>
+  <Text>Drag files here or click to select files</Text>
+</Dropzone.Root>
+```
+
+### Specify File Extensions
+
+To specify file extensions, set `accept` to an array of strings or an [object](https://developer.mozilla.org/en-US/docs/Web/API/window/showOpenFilePicker).
+
+We also provide easy-to-use constants like `IMAGE_ACCEPT_TYPE` and `PDF_ACCEPT_TYPE`.
+
+```tsx preview
+<VStack>
+  <Dropzone.Root accept={Dropzone.IMAGE_ACCEPT_TYPE}>
+    <Text>Drag image here or click to select image</Text>
+  </Dropzone.Root>
+
+  <Dropzone.Root accept={{ "image/*": [] }}>
+    <Text>Drag image here or click to select image</Text>
+  </Dropzone.Root>
+</VStack>
+```
+
+### Specify Maximum File Size
+
+To specify the maximum file size, set `maxSize` to a number (bytes).
+
+```tsx preview
+<Dropzone.Root maxSize={3 * 1024 ** 2}>
+  <VStack alignItems="center" gap="xs">
+    <Dropzone.Title>Drag file here or click to select file</Dropzone.Title>
+    <Dropzone.Description>
+      Attach as many files as you like, each file should not exceed 5mb
+    </Dropzone.Description>
+  </VStack>
+</Dropzone.Root>
+```
+
+### Specify Maximum Number of Uploadable Files
+
+To specify the maximum number of uploadable files, set `maxFiles` to a number.
+
+```tsx preview
+<Dropzone.Root maxFiles={3} multiple>
+  <VStack alignItems="center" gap="xs">
+    <Dropzone.Title>Drag file here or click to select file</Dropzone.Title>
+    <Dropzone.Description>
+      Attach as many files as you like, can upload up to 3 files
+    </Dropzone.Description>
+  </VStack>
+</Dropzone.Root>
+```
+
+### Display According to Status
+
+To control the display based on whether the file is accepted or rejected, use `DropzoneAccept`, `DropzoneReject`, `DropzoneIdle`.
+
+- `DropzoneAccept`: A component displayed when a file is accepted.
+- `DropzoneReject`: A component displayed when a file is rejected.
+- `DropzoneIdle`: A component displayed when in idle state.
+
+```tsx preview
+<Dropzone.Root accept={Dropzone.IMAGE_ACCEPT_TYPE} maxSize={3 * 1024 ** 2}>
+  <HStack>
+    <Dropzone.Accept>
+      <Dropzone.Icon as={UploadIcon} />
+    </Dropzone.Accept>
+
+    <Dropzone.Reject>
+      <Dropzone.Icon as={XIcon} />
+    </Dropzone.Reject>
+
+    <Dropzone.Idle>
+      <Dropzone.Icon as={ImageIcon} />
+    </Dropzone.Idle>
+
+    <VStack gap="xs">
+      <Dropzone.Title>Drag images here or click to select files</Dropzone.Title>
+      <Dropzone.Description>
+        Attach as many files as you like, each file should not exceed 5mb
+      </Dropzone.Description>
+    </VStack>
+  </HStack>
+</Dropzone.Root>
+```
+
+### Handle Dropped Event
+
+To handle the selection event, use `onDrop`.
+
+:::warning
+Please note that it is always called regardless of whether the dropped file is accepted or rejected.
+:::
+
+```tsx preview
+<Dropzone.Root
+  accept={Dropzone.IMAGE_ACCEPT_TYPE}
+  maxSize={3 * 1024 ** 2}
+  onDrop={(acceptedFiles, fileRejections) =>
+    console.log("dropped", acceptedFiles, fileRejections)
+  }
+>
+  <HStack>
+    <Dropzone.Accept>
+      <Dropzone.Icon as={UploadIcon} />
+    </Dropzone.Accept>
+
+    <Dropzone.Reject>
+      <Dropzone.Icon as={XIcon} />
+    </Dropzone.Reject>
+
+    <Dropzone.Idle>
+      <Dropzone.Icon as={ImageIcon} />
+    </Dropzone.Idle>
+
+    <VStack gap="xs">
+      <Dropzone.Title>Drag images here or click to select files</Dropzone.Title>
+      <Dropzone.Description>
+        Attach as many files as you like, each file should not exceed 5mb
+      </Dropzone.Description>
+    </VStack>
+  </HStack>
+</Dropzone.Root>
+```
+
+### Handle Only Accepted Files
+
+To handle only accepted files, use `onDropAccepted`.
+
+```tsx preview
+<Dropzone.Root
+  accept={Dropzone.IMAGE_ACCEPT_TYPE}
+  maxSize={3 * 1024 ** 2}
+  onDropAccepted={(files) => console.log("accepted", files)}
+>
+  <HStack>
+    <Dropzone.Accept>
+      <Dropzone.Icon as={UploadIcon} />
+    </Dropzone.Accept>
+
+    <Dropzone.Reject>
+      <Dropzone.Icon as={XIcon} />
+    </Dropzone.Reject>
+
+    <Dropzone.Idle>
+      <Dropzone.Icon as={ImageIcon} />
+    </Dropzone.Idle>
+
+    <VStack gap="xs">
+      <Dropzone.Title>Drag images here or click to select files</Dropzone.Title>
+      <Dropzone.Description>
+        Attach as many files as you like, each file should not exceed 5mb
+      </Dropzone.Description>
+    </VStack>
+  </HStack>
+</Dropzone.Root>
+```
+
+### Handle Only Rejected Files
+
+To handle only rejected files, use `onDropRejected`.
+
+```tsx preview
+<Dropzone.Root
+  accept={Dropzone.IMAGE_ACCEPT_TYPE}
+  maxSize={3 * 1024 ** 2}
+  onDropRejected={(files) => console.log("rejected", files)}
+>
+  <HStack>
+    <Dropzone.Accept>
+      <Dropzone.Icon as={UploadIcon} />
+    </Dropzone.Accept>
+
+    <Dropzone.Reject>
+      <Dropzone.Icon as={XIcon} />
+    </Dropzone.Reject>
+
+    <Dropzone.Idle>
+      <Dropzone.Icon as={ImageIcon} />
+    </Dropzone.Idle>
+
+    <VStack gap="xs">
+      <Dropzone.Title>Drag images here or click to select files</Dropzone.Title>
+      <Dropzone.Description>
+        Attach as many files as you like, each file should not exceed 5mb
+      </Dropzone.Description>
+    </VStack>
+  </HStack>
+</Dropzone.Root>
+```
+
+### Change Border Color
+
+To change the border color, set `focusBorderColor` or `errorBorderColor` to a color.
+
+```tsx preview
+<VStack>
+  <Dropzone.Root focusBorderColor="green.500">
+    <Text>Drag file here or click to select file</Text>
+  </Dropzone.Root>
+
+  <Dropzone.Root errorBorderColor="orange.500" invalid>
+    <Text>Drag file here or click to select file</Text>
+  </Dropzone.Root>
+</VStack>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<VStack>
+  <Dropzone.Root disabled>
+    <Text>Drag file here or click to select file</Text>
+  </Dropzone.Root>
+
+  <Field.Root disabled label="Upload file">
+    <Dropzone.Root>
+      <Text>Drag file here or click to select file</Text>
+    </Dropzone.Root>
+  </Field.Root>
+</VStack>
+```
+
+### Make Read-Only
+
+To make read-only, set `readOnly` to `true`.
+
+```tsx preview
+<VStack>
+  <Dropzone.Root readOnly>
+    <Text>Drag file here or click to select file</Text>
+  </Dropzone.Root>
+
+  <Field.Root label="Upload file" readOnly>
+    <Dropzone.Root>
+      <Text>Drag file here or click to select file</Text>
+    </Dropzone.Root>
+  </Field.Root>
+</VStack>
+```
+
+### Make Input Invalid
+
+To make the input invalid, set `invalid` to `true`.
+
+```tsx preview
+<VStack>
+  <Dropzone.Root invalid>
+    <Text>Drag file here or click to select file</Text>
+  </Dropzone.Root>
+
+  <Field.Root errorMessage="File is required." invalid label="Upload file">
+    <Dropzone.Root>
+      <Text>Drag file here or click to select file</Text>
+    </Dropzone.Root>
+  </Field.Root>
+</VStack>
+```
+
+### Use Loading Animation
+
+To use a loading animation, set `loading` to `true`.
+
+```tsx preview
+<VStack>
+  <Dropzone.Root loading>
+    <Text>Drag file here or click to select file</Text>
+  </Dropzone.Root>
+
+  <Dropzone.Root loading loadingScheme="grid">
+    <Text>Drag file here or click to select file</Text>
+  </Dropzone.Root>
+
+  <Dropzone.Root loading loadingProps={{ color: "blue" }}>
+    <Text>Drag file here or click to select file</Text>
+  </Dropzone.Root>
+</VStack>
+```
+
+### Control
+
+```tsx functional=true preview
+const openRef = useRef<() => void>(noop)
+
+return (
+  <VStack>
+    <Button onClick={() => openRef.current()}>Select file</Button>
+
+    <Dropzone.Root openRef={openRef}>
+      <Text>Drag file here or click to select file</Text>
+    </Dropzone.Root>
+  </VStack>
+)
+```

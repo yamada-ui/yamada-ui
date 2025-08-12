@@ -1,0 +1,19 @@
+export type {
+  ComboboxItem as Item,
+  ComboboxItemWithItems as ItemWithItems,
+  ComboboxItemWithValue as ItemWithValue,
+} from "../../hooks/use-combobox"
+export {
+  AutocompleteGroup as Group,
+  AutocompleteLabel as Label,
+  AutocompleteOption as Option,
+  AutocompletePropsContext as PropsContext,
+  AutocompleteRoot as Root,
+  useAutocompletePropsContext as usePropsContext,
+} from "./autocomplete"
+export type {
+  AutocompleteGroupProps as GroupProps,
+  AutocompleteLabelProps as LabelProps,
+  AutocompleteOptionProps as OptionProps,
+  AutocompleteRootProps as RootProps,
+} from "./autocomplete"

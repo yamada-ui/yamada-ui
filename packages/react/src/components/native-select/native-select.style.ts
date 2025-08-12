@@ -13,6 +13,7 @@ export const nativeSelectStyle = defineComponentSlotStyle({
       color: "colorScheme.outline",
       display: "inline-flex",
       justifyContent: "center",
+      rounded: "l1",
       _disabled: {
         layerStyle: "disabled",
       },
@@ -26,7 +27,7 @@ export const nativeSelectStyle = defineComponentSlotStyle({
     },
     flushed: {
       field: inputStyle.variants?.flushed,
-      root: getInputPaddingResetStyle("& > select"),
+      root: getInputPaddingResetStyle("& > :is(select, [role='combobox'])"),
     },
     outline: {
       field: inputStyle.variants?.outline,
@@ -39,38 +40,43 @@ export const nativeSelectStyle = defineComponentSlotStyle({
   sizes: {
     xs: {
       field: inputStyle.sizes?.xs,
-      icon: {
-        fontSize: inputStyle.sizes?.xs.fontSize,
-      },
-      root: getInputHeightStyle(inputStyle.sizes?.xs.minH, "& > select"),
+      icon: { fontSize: inputStyle.sizes?.xs.fontSize },
+      root: getInputHeightStyle(
+        inputStyle.sizes?.xs.minH,
+        "& > :is(select, [role='combobox'])",
+      ),
     },
     sm: {
       field: inputStyle.sizes?.sm,
-      icon: {
-        fontSize: inputStyle.sizes?.sm.fontSize,
-      },
-      root: getInputHeightStyle(inputStyle.sizes?.sm.minH, "& > select"),
+      icon: { fontSize: inputStyle.sizes?.sm.fontSize },
+      root: getInputHeightStyle(
+        inputStyle.sizes?.sm.minH,
+        "& > :is(select, [role='combobox'])",
+      ),
     },
     md: {
       field: inputStyle.sizes?.md,
-      icon: {
-        fontSize: inputStyle.sizes?.md.fontSize,
-      },
-      root: getInputHeightStyle(inputStyle.sizes?.md.minH, "& > select"),
+      icon: { fontSize: inputStyle.sizes?.md.fontSize },
+      root: getInputHeightStyle(
+        inputStyle.sizes?.md.minH,
+        "& > :is(select, [role='combobox'])",
+      ),
     },
     lg: {
       field: inputStyle.sizes?.lg,
-      icon: {
-        fontSize: inputStyle.sizes?.lg.fontSize,
-      },
-      root: getInputHeightStyle(inputStyle.sizes?.lg.minH, "& > select"),
+      icon: { fontSize: inputStyle.sizes?.lg.fontSize },
+      root: getInputHeightStyle(
+        inputStyle.sizes?.lg.minH,
+        "& > :is(select, [role='combobox'])",
+      ),
     },
     xl: {
       field: inputStyle.sizes?.xl,
-      icon: {
-        fontSize: inputStyle.sizes?.xl.fontSize,
-      },
-      root: getInputHeightStyle(inputStyle.sizes?.xl.minH, "& > select"),
+      icon: { fontSize: inputStyle.sizes?.xl.fontSize },
+      root: getInputHeightStyle(
+        inputStyle.sizes?.xl.minH,
+        "& > :is(select, [role='combobox'])",
+      ),
     },
   },
 

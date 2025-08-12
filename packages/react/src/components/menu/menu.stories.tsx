@@ -537,6 +537,54 @@ export const Anchor: Story = () => {
   )
 }
 
+export const Header: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+      { label: "大蛇丸", value: "orochimaru" },
+      { label: "自來也", value: "pervy-sage" },
+      { label: "綱手", value: "tsunade" },
+    ],
+    [],
+  )
+
+  return (
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content header="キャラクター" items={items} maxH="2xs" />
+    </Menu.Root>
+  )
+}
+
+export const Footer: Story = () => {
+  const items = useMemo<Menu.ContentProps["items"]>(
+    () => [
+      { label: "うずまきナルト", value: "naruto" },
+      { label: "うちはサスケ", value: "sasuke" },
+      { label: "春野サクラ", value: "sakura" },
+      { label: "大蛇丸", value: "orochimaru" },
+      { label: "自來也", value: "pervy-sage" },
+      { label: "綱手", value: "tsunade" },
+    ],
+    [],
+  )
+
+  return (
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content footer="キャラクター" items={items} maxH="2xs" />
+    </Menu.Root>
+  )
+}
+
 export const ContextMenu: Story = () => {
   const items = useMemo<Menu.ContentProps["items"]>(
     () => [
@@ -747,18 +795,18 @@ export const CloseOnScroll: Story = () => {
 }
 
 export const InitialFocusRef: Story = () => {
-  const initialFocusRef = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const items = useMemo<Menu.ContentProps["items"]>(
     () => [
       { label: "うずまきナルト", value: "naruto" },
-      { ref: initialFocusRef, label: "うちはサスケ", value: "sasuke" },
+      { ref: ref, label: "うちはサスケ", value: "sasuke" },
       { label: "春野サクラ", value: "sakura" },
     ],
     [],
   )
 
   return (
-    <Menu.Root initialFocusRef={initialFocusRef}>
+    <Menu.Root initialFocusRef={ref}>
       <Menu.Trigger>
         <Button>Menu</Button>
       </Menu.Trigger>

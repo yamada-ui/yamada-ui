@@ -11,12 +11,13 @@ import { fieldStyle } from "./field.style"
 export interface FieldContext
   extends FieldProps,
     Pick<FieldRootProps, "replace"> {
+  id: string
+  errorMessageId: string
   focused: boolean
+  helperMessageId: string
+  labelId: string
   onBlur: () => void
   onFocus: () => void
-  id?: string
-  errorMessageId?: string
-  helperMessageId?: string
 }
 
 const [FieldContext, useFieldContext] = createContext<FieldContext>({
@@ -124,6 +125,7 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
     ...rest
   }) => {
     const uuid = useId()
+    const labelId = useId()
     const helperMessageId = useId()
     const errorMessageId = useId()
     const [focused, setFocused] = useState<boolean>(false)
@@ -149,6 +151,7 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
         focused,
         helperMessageId,
         invalid,
+        labelId,
         readOnly,
         replace,
         required,
@@ -158,6 +161,7 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
       [
         id,
         disabled,
+        labelId,
         focused,
         invalid,
         helperMessageId,
@@ -188,8 +192,6 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
               </FieldLabel>
             ) : null)}
 
-          {omittedChildren}
-
           {customHelperMessage ||
             (helperMessage ? (
               <FieldHelperMessage {...helperMessageProps}>
@@ -203,6 +205,8 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
                 {errorMessage}
               </FieldErrorMessage>
             ) : null)}
+
+          {omittedChildren}
         </styled.div>
       </FieldContext>
     )
@@ -243,7 +247,7 @@ export const FieldLabel = withContext<"label", FieldLabelProps>(
 
     return (
       <styled.label
-        id={id}
+        id={id ?? context?.labelId}
         htmlFor={htmlFor ?? context?.id}
         data-disabled={dataAttr(context?.disabled)}
         data-focus={dataAttr(context?.focused)}
@@ -291,9 +295,13 @@ export const FieldHelperMessage = withContext<"span", FieldHelperMessageProps>(
   (props) => {
     const { helperMessageId, invalid, replace } = useFieldContext() ?? {}
 
-    if (replace && invalid) return null
-
-    return <styled.span id={helperMessageId} {...props} />
+    return (
+      <styled.span
+        id={helperMessageId}
+        hidden={replace && invalid ? true : false}
+        {...props}
+      />
+    )
   },
   "helperMessage",
 )()
@@ -304,9 +312,14 @@ export const FieldErrorMessage = withContext<"span", FieldErrorMessageProps>(
   (props) => {
     const { errorMessageId, invalid } = useFieldContext() ?? {}
 
-    if (!invalid) return null
-
-    return <styled.span id={errorMessageId} aria-live="polite" {...props} />
+    return (
+      <styled.span
+        id={errorMessageId}
+        aria-live={invalid ? "polite" : undefined}
+        hidden={!invalid}
+        {...props}
+      />
+    )
   },
   "errorMessage",
 )()

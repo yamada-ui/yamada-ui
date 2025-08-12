@@ -119,12 +119,12 @@ const NativeSelectIcon = withContext<"div", NativeSelectIconProps>(
   ...rest,
 }))
 
-export interface NativeSelectOptionGroupProps extends HTMLProps<"optgroup"> {}
+export interface NativeSelectGroupProps extends HTMLProps<"optgroup"> {}
 
-export const NativeSelectOptionGroup = component<
+export const NativeSelectGroup = component<"optgroup", NativeSelectGroupProps>(
   "optgroup",
-  NativeSelectOptionGroupProps
->("optgroup", "optionGroup")()
+  "group",
+)()
 
 export interface NativeSelectOptionProps extends HTMLProps<"option"> {}
 
@@ -132,3 +132,10 @@ export const NativeSelectOption = component<"option", NativeSelectOptionProps>(
   "option",
   "option",
 )()
+
+export interface NativeSelectSeparatorProps extends HTMLProps<"hr"> {}
+
+export const NativeSelectSeparator = component<
+  "hr",
+  NativeSelectSeparatorProps
+>("hr", "separator")()

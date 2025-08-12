@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
-import type { FieldProps } from "../field/field"
+import type { FieldProps } from "../field"
 import { cloneElement, useCallback, useMemo } from "react"
 import { ariaAttr, handlerAll, mergeRefs } from "../../utils"
 import { useFieldProps } from "../field"
@@ -17,7 +17,7 @@ interface NativeSelectItemWithValue extends NativeSelectSharedItem {
 }
 
 interface NativeSelectItemWithItems extends NativeSelectSharedItem {
-  items?: NativeSelectItemWithValue[]
+  items: NativeSelectItemWithValue[]
 }
 
 export type NativeSelectItem =
@@ -25,6 +25,12 @@ export type NativeSelectItem =
   | NativeSelectItemWithValue
 
 export interface UseNativeSelectProps extends HTMLProps<"select">, FieldProps {
+  /**
+   * If `true`, include placeholder in options.
+   *
+   * @default true
+   */
+  includePlaceholder?: boolean
   /**
    * If provided, generate options based on items.
    *
@@ -35,12 +41,6 @@ export interface UseNativeSelectProps extends HTMLProps<"select">, FieldProps {
    * The placeholder for select.
    */
   placeholder?: string
-  /**
-   * If `true`, include placeholders in options.
-   *
-   * @default true
-   */
-  placeholderInOptions?: boolean
 }
 
 export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
@@ -48,9 +48,9 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
     props: {
       children,
       disabled,
+      includePlaceholder = true,
       items = [],
       placeholder,
-      placeholderInOptions = true,
       readOnly,
       ...rest
     },
@@ -67,28 +67,28 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
       computedChildren = children
     } else if (items.length) {
       computedChildren = items.map((item, index) => {
-        if ("value" in item) {
-          const { label, ...props } = item
+        if ("items" in item) {
+          const { items = [], label, ...rest } = item
+
+          return cloneElement(<optgroup />, {
+            key: index,
+            children: items.map(({ label, ...rest }, index) =>
+              cloneElement(<option />, {
+                key: index,
+                children: label,
+                ...rest,
+              }),
+            ),
+            label,
+            ...rest,
+          })
+        } else {
+          const { label, ...rest } = item
 
           return cloneElement(<option />, {
             key: index,
             children: label,
-            ...props,
-          })
-        } else if ("items" in item) {
-          const { items = [], label, ...props } = item
-
-          return cloneElement(<optgroup />, {
-            key: index,
-            children: items.map(({ label, ...props }, index) =>
-              cloneElement(<option />, {
-                key: index,
-                children: label,
-                ...props,
-              }),
-            ),
-            label,
-            ...props,
+            ...rest,
           })
         }
       })
@@ -97,7 +97,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
     return (
       <>
         {placeholder ? (
-          <option hidden={!placeholderInOptions} value="">
+          <option hidden={!includePlaceholder} value="">
             {placeholder}
           </option>
         ) : null}
@@ -105,7 +105,7 @@ export const useNativeSelect = (props: UseNativeSelectProps = {}) => {
         {computedChildren}
       </>
     )
-  }, [children, items, placeholder, placeholderInOptions])
+  }, [children, items, placeholder, includePlaceholder])
 
   const getRootProps: PropGetter = useCallback(
     (props) => ({ ...dataProps, ...props }),

@@ -1,5 +1,5 @@
 import { defineComponentSlotStyle } from "../../core"
-import { iconButtonStyle } from "../icon-button"
+import { iconButtonStyle } from "../button"
 
 export const toggleStyle = defineComponentSlotStyle({
   base: {

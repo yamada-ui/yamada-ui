@@ -103,7 +103,7 @@ describe("<Field />", () => {
     ).toBeInTheDocument()
     expect(
       screen.queryByText(filterVisuallyHidden("Please enter your email")),
-    ).toBeNull()
+    ).not.toBeVisible()
   })
 
   test("should be appeared helperMessage", () => {

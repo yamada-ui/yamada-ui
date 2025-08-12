@@ -24,6 +24,7 @@ import {
   getEventRelatedTarget,
   handlerAll,
   mergeRefs,
+  runKeyAction,
   scrollLock,
   useUnmountEffect,
 } from "../../utils"
@@ -81,6 +82,12 @@ export interface UsePopoverProps
    */
   modal?: boolean
   /**
+   * If `true`, the popover will be opened when click on the field.
+   *
+   * @default true
+   */
+  openOnClick?: boolean
+  /**
    * The placement of the popper relative to its reference.
    *
    * @default 'end'
@@ -110,6 +117,7 @@ export const usePopover = ({
   middleware,
   offset,
   open: openProp,
+  openOnClick = true,
   placement = "end",
   platform,
   preventOverflow,
@@ -155,12 +163,16 @@ export const usePopover = ({
   assignRef(updateRef, update)
 
   const onKeyDown = useCallback(
-    (ev: KeyboardEvent<HTMLDivElement>) => {
-      if (closeOnEsc && ev.key === "Escape") {
-        onClose()
+    (ev: KeyboardEvent<HTMLElement>) => {
+      runKeyAction(ev, {
+        Escape: () => {
+          if (!closeOnEsc) return
 
-        triggerRef.current?.focus()
-      }
+          onClose()
+
+          triggerRef.current?.focus()
+        },
+      })
     },
     [closeOnEsc, onClose],
   )
@@ -224,18 +236,23 @@ export const usePopover = ({
       "aria-disabled": ariaAttr(disabled),
       "aria-expanded": open,
       "aria-haspopup": "dialog",
-      "data-disabled": dataAttr(disabled),
       role: "button",
       ...props,
       ref: mergeRefs(ref, triggerRef, (node) => {
         if (anchorRef.current == null) refs.setReference(node)
       }),
+      onBlur: handlerAll(props.onBlur, (ev) =>
+        !contains(contentRef.current, getEventRelatedTarget(ev))
+          ? onClose()
+          : void 0,
+      ),
       onClick: handlerAll(
         props.onClick,
-        !open ? (!disabled ? onOpen : undefined) : onClose,
+        !open ? (!disabled && openOnClick ? onOpen : undefined) : onClose,
       ),
+      onKeyDown: handlerAll(props.onKeyDown, onKeyDown),
     }),
-    [contentId, disabled, onClose, onOpen, open, refs],
+    [contentId, disabled, onClose, onKeyDown, onOpen, open, openOnClick, refs],
   )
 
   const getAnchorProps: PropGetter = useCallback(
@@ -327,6 +344,7 @@ export const popoverProps: (
   "closeOnBlur",
   "closeOnEsc",
   "closeOnScroll",
+  "openOnClick",
   "disabled",
   "initialFocusRef",
   "modal",

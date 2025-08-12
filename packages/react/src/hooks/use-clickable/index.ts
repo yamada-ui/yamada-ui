@@ -119,7 +119,7 @@ export const useClickable = <
   )
 
   const onDocumentKeyUp = useCallback(
-    (ev: KeyboardEvent<Y>) => {
+    (ev: globalThis.KeyboardEvent) => {
       if (pressed && isValidElement(ev)) {
         ev.preventDefault()
         ev.stopPropagation()
@@ -182,7 +182,7 @@ export const useClickable = <
   )
 
   const onDocumentMouseUp = useCallback(
-    (ev: MouseEvent<Y>) => {
+    (ev: globalThis.MouseEvent) => {
       if (ev.button !== 0) return
 
       setPressed(false)

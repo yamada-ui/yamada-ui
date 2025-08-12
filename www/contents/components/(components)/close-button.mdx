@@ -6,4 +6,86 @@ source: components/close-button
 style: components/close-button/close-button.style.ts
 ---
 
+```tsx preview
+<CloseButton />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { CloseButton } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { CloseButton } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { CloseButton } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<CloseButton />
+```
+
+### Change Variant
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => <CloseButton variant={variant} key={index} />}
+  </For>
+</Wrap>
+```
+
+### Change Size
+
+```tsx preview
+<Wrap gap="md" alignItems="center">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => <CloseButton size={size} key={index} />}
+  </For>
+</Wrap>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <CloseButton colorScheme={colorScheme} key={index} />
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Shape
+
+To rounded corners, set `fullRounded` to `true`.
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => (
+      <CloseButton variant={variant} key={index} fullRounded />
+    )}
+  </For>
+</Wrap>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => <CloseButton variant={variant} key={index} disabled />}
+  </For>
+</Wrap>
+```

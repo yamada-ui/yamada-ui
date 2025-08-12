@@ -4,6 +4,7 @@ import type { RefCallback } from "react"
 import { useRef } from "react"
 import {
   createContext,
+  isNumber,
   isTruthyDataAttr,
   mergeRefs,
   runIfFn,
@@ -63,6 +64,7 @@ export type Descendant<
 > = DescendantProps<Y, M> & {
   index: number
   node: Y
+  recurred?: boolean
 }
 
 const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
@@ -110,29 +112,48 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
 
   const enabledCount = () => enabledValues().length
 
-  const focus = (target?: null | Y) => {
+  const active = (
+    target?: Descendant<Y, M> | null | Y,
+    options?: FocusOptions,
+  ) => {
     if (!target) return
+
+    if (!(target instanceof Node)) target = target.node
 
     if (isTruthyDataAttr(target.dataset.activedescendant)) return
 
-    const values = enabledValues()
+    const descendants = values()
 
-    values.forEach(({ node }) => {
+    descendants.forEach(({ node }) => {
       delete node.dataset.activedescendant
     })
 
     target.dataset.activedescendant = ""
 
-    target.focus()
+    if (options) target.focus(options)
   }
 
-  const indexOf = (target?: null | Y) =>
-    !target ? -1 : (descendants.get(target)?.index ?? -1)
+  const indexOf = (target?: Descendant<Y, M> | null | Y) => {
+    if (!target) return -1
 
-  const enabledIndexOf = (target?: null | Y) =>
-    target == null
-      ? -1
-      : enabledValues().findIndex(({ node }) => node.isSameNode(target))
+    if (target instanceof Node) {
+      return descendants.get(target)?.index ?? -1
+    } else {
+      return descendants.get(target.node)?.index ?? -1
+    }
+  }
+
+  const enabledIndexOf = (target?: Descendant<Y, M> | null | Y) => {
+    if (!target) return -1
+
+    if (target instanceof Node) {
+      return enabledValues().findIndex(({ node }) => node.isSameNode(target))
+    } else {
+      return enabledValues().findIndex(({ node }) =>
+        node.isSameNode(target.node),
+      )
+    }
+  }
 
   const values = () =>
     Array.from(descendants.values()).sort((a, b) => a.index - b.index)
@@ -140,10 +161,12 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
   const enabledValues = () =>
     values().filter(({ disabled, node }) => !runIfFn(disabled, node))
 
-  const value = (index: number) => {
-    if (!count()) return undefined
+  const value = (indexOrNode: null | number | Y) => {
+    if (!count() || indexOrNode == null) return undefined
 
-    return values()[index]
+    return isNumber(indexOrNode)
+      ? values()[indexOrNode]
+      : descendants.get(indexOrNode)
   }
 
   const enabledValue = (index: number) => {
@@ -160,45 +183,104 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
 
   const enabledLastValue = () => enabledValue(enabledCount() - 1)
 
-  const prevValue = (index: number, loop = true) => {
-    const prev = getPrevIndex(index, count() - 1, loop)
+  const prevValue = (
+    indexOrNode: Descendant<Y, M> | null | number | Y,
+    loop = true,
+  ) => {
+    if (!count()) return undefined
 
-    return value(prev)
+    const currentIndex = isNumber(indexOrNode)
+      ? indexOrNode
+      : indexOf(indexOrNode)
+
+    if (currentIndex === -1) return undefined
+
+    const prevIndex = getPrevIndex(currentIndex, count() - 1, loop)
+
+    return value(prevIndex)
   }
 
-  const enabledPrevValue = (index: number, loop = true) => {
-    const target = value(index)
+  const enabledPrevValue = (
+    indexOrNode: Descendant<Y, M> | null | number | Y,
+    loop = true,
+  ) => {
+    if (!enabledCount()) return undefined
 
-    if (!target) return
+    let index = isNumber(indexOrNode) ? indexOrNode : indexOf(indexOrNode)
+    let enabledValue = null
+    let recurred = false
 
-    const enabledIndex = enabledIndexOf(target.node)
-    const prevEnabledIndex = getPrevIndex(
-      enabledIndex,
-      enabledCount() - 1,
-      loop,
-    )
+    while (enabledValue == null) {
+      index--
 
-    return enabledValue(prevEnabledIndex)
+      if (loop && index < 0) {
+        index = count() - 1
+        recurred = true
+      }
+
+      const descendant = value(index)
+
+      enabledValue =
+        descendant && !runIfFn(descendant.disabled, descendant.node)
+          ? descendant
+          : null
+    }
+
+    if (recurred) enabledValue.recurred = recurred
+
+    return enabledValue
   }
 
-  const nextValue = (index: number, loop = true) => {
-    const next = getNextIndex(index, count(), loop)
+  const nextValue = (
+    indexOrNode: Descendant<Y, M> | null | number | Y,
+    loop = true,
+  ) => {
+    if (!count()) return undefined
 
-    return value(next)
+    const currentIndex = isNumber(indexOrNode)
+      ? indexOrNode
+      : indexOf(indexOrNode)
+
+    if (currentIndex === -1) return undefined
+
+    const nextIndex = getNextIndex(currentIndex, count(), loop)
+
+    return value(nextIndex)
   }
 
-  const enabledNextValue = (index: number, loop = true) => {
-    const target = value(index)
+  const enabledNextValue = (
+    indexOrNode: Descendant<Y, M> | null | number | Y,
+    loop = true,
+  ) => {
+    if (!enabledCount()) return undefined
 
-    if (!target) return
+    let index = isNumber(indexOrNode) ? indexOrNode : indexOf(indexOrNode)
+    let enabledValue = null
+    let recurred = false
 
-    const enabledIndex = enabledIndexOf(target.node)
-    const nextEnabledIndex = getNextIndex(enabledIndex, enabledCount(), loop)
+    while (enabledValue == null) {
+      index++
 
-    return enabledValue(nextEnabledIndex)
+      if (loop && index >= count()) {
+        index = 0
+        recurred = true
+      }
+
+      const descendant = value(index)
+
+      enabledValue =
+        descendant && !runIfFn(descendant.disabled, descendant.node)
+          ? descendant
+          : null
+    }
+
+    if (recurred) enabledValue.recurred = recurred
+
+    return enabledValue
   }
 
   return {
+    active,
     count,
     destroy,
     enabledCount,
@@ -210,7 +292,6 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
     enabledValue,
     enabledValues,
     firstValue,
-    focus,
     indexOf,
     lastValue,
     nextValue,

@@ -1,4 +1,8 @@
 export default {
+  autocomplete: {
+    "Clear value": "値を消去する",
+    "No results found": "結果が見つかりません",
+  },
   avatar: {
     "Avatar Icon": "アバターアイコン",
   },
@@ -49,6 +53,9 @@ export default {
   progress: {
     "Loading...": "読み込み中...",
     "{value} percent": "{value}パーセント",
+  },
+  select: {
+    "Clear value": "値を消去する",
   },
   slider: {
     "Slider thumb": "スライダーのつまみ",

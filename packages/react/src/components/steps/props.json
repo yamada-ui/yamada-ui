@@ -1,5 +1,348 @@
 {
-  "CompletedContent": {
+  "Steps": {
+    "CompletedContent": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Content": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "index": {
+        "type": "number",
+        "description": "The index of the step content.",
+        "required": true
+      }
+    },
+    "Description": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Indicator": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "complete": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "defaultValue": "\"<CheckIcon />\"",
+        "description": "The element for the complete indicator.",
+        "required": false
+      },
+      "current": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "defaultValue": "\"<StepsNumber />\"",
+        "description": "The element for the current indicator.",
+        "required": false
+      },
+      "incomplete": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "defaultValue": "\"<StepsNumber />\"",
+        "description": "The element for the incomplete indicator.",
+        "required": false
+      }
+    },
+    "Item": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "index": {
+        "type": "number",
+        "description": "The index of the step.",
+        "required": true
+      }
+    },
+    "List": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "NextTrigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Number": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "PrevTrigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"solid\" | \"subtle\" | [\"solid\" | \"subtle\" | ({ _peerAccept?: \"solid\" | \"subtle\" | [\"solid\" | \"subtle\" | (... & { base?: \"solid\" | \"subtle\" | [\"solid\" | \"subtle\" | (... & ...), \"solid\" | ... 1 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"solid\" | ... 3 more ... | undefined; }), \"solid\" | .....",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "defaultIndex": {
+        "type": "number",
+        "defaultValue": "0",
+        "description": "The initial index of the active step.",
+        "required": false
+      },
+      "index": {
+        "type": "number",
+        "description": "The index of the active step.",
+        "required": false
+      },
+      "items": {
+        "type": "StepsItem[]",
+        "description": "If provided, generate step components based on steps.",
+        "required": false
+      },
+      "lazy": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, rendering of the content will be deferred until it is selected.",
+        "required": false
+      },
+      "lazyBehavior": {
+        "type": "LazyBehavior",
+        "defaultValue": "\"unmount\"",
+        "description": "The lazy behavior of content when not active. Only works when `lazy={true}`.\n\n- `unmount`: The content is always unmounted.\n- `keepMounted`: The content is initially unmounted, but stays mounted when selected.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(index: number) => void",
+        "description": "The callback function that is called when the active step index is changed.",
+        "required": false
+      },
+      "orientation": {
+        "type": "StyleValue<\"horizontal\" | \"vertical\">",
+        "defaultValue": "\"horizontal\"",
+        "description": "The orientation of the steps.",
+        "required": false
+      }
+    },
+    "Separator": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Title": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    }
+  },
+  "StepsDescription": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -21,56 +364,7 @@
       "required": false
     }
   },
-  "Content": {
-    "as": {
-      "type": "As",
-      "description": "The HTML element to render.",
-      "required": false
-    },
-    "asChild": {
-      "type": "boolean",
-      "description": "Merges its props onto its immediate child.",
-      "required": false
-    },
-    "css": {
-      "type": "CSSObject | CSSObject[]",
-      "description": "The CSS object.",
-      "required": false
-    },
-    "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
-      "description": "Set color scheme variables.",
-      "required": false
-    },
-    "index": {
-      "type": "number",
-      "description": "The index of the step content.",
-      "required": true
-    }
-  },
-  "Description": {
-    "as": {
-      "type": "As",
-      "description": "The HTML element to render.",
-      "required": false
-    },
-    "asChild": {
-      "type": "boolean",
-      "description": "Merges its props onto its immediate child.",
-      "required": false
-    },
-    "css": {
-      "type": "CSSObject | CSSObject[]",
-      "description": "The CSS object.",
-      "required": false
-    },
-    "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
-      "description": "Set color scheme variables.",
-      "required": false
-    }
-  },
-  "Indicator": {
+  "StepsIndicator": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -110,7 +404,7 @@
       "required": false
     }
   },
-  "Item": {
+  "StepsItem": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -137,7 +431,7 @@
       "required": true
     }
   },
-  "List": {
+  "StepsList": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -159,7 +453,7 @@
       "required": false
     }
   },
-  "NextTrigger": {
+  "StepsNextTrigger": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -181,7 +475,7 @@
       "required": false
     }
   },
-  "Number": {
+  "StepsNumber": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -203,7 +497,7 @@
       "required": false
     }
   },
-  "PrevTrigger": {
+  "StepsPrevTrigger": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -225,7 +519,7 @@
       "required": false
     }
   },
-  "Root": {
+  "StepsRoot": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -254,11 +548,6 @@
     "variant": {
       "type": "\"solid\" | \"subtle\" | [\"solid\" | \"subtle\" | ({ _peerAccept?: \"solid\" | \"subtle\" | [\"solid\" | \"subtle\" | (... & { base?: \"solid\" | \"subtle\" | [\"solid\" | \"subtle\" | (... & ...), \"solid\" | ... 1 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"solid\" | ... 3 more ... | undefined; }), \"solid\" | .....",
       "description": "The variant of the component.",
-      "required": false
-    },
-    "count": {
-      "type": "number",
-      "description": "The total number of steps.",
       "required": false
     },
     "defaultIndex": {
@@ -301,7 +590,7 @@
       "required": false
     }
   },
-  "Separator": {
+  "StepsSeparator": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -323,7 +612,7 @@
       "required": false
     }
   },
-  "Title": {
+  "StepsTitle": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",

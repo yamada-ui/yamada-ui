@@ -194,8 +194,14 @@ function valueToVar(system: System) {
           return colorMix(value, { fallback: fallbackValue, system })
         } else if (isCSSToken(system)(value)) {
           return system.cssMap![value]!.ref
-        } else {
+        } else if (fallbackValue) {
+          fallbackValue = isCSSToken(system)(fallbackValue)
+            ? system.cssMap![fallbackValue]!.ref
+            : fallbackValue
+
           return getVar(value, fallbackValue)
+        } else {
+          return getVar(value)
         }
       },
     )

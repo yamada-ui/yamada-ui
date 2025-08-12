@@ -163,11 +163,7 @@ function SearchContent({ onClose }: SearchContentProps) {
 
   return (
     <DescendantsContext value={descendants}>
-      <Modal.Content
-        maxH={{ base: "4xl", sm: "full" }}
-        maxW="auto"
-        w={{ base: "lg", sm: "full" }}
-      >
+      <Modal.Content maxW="auto" w={{ base: "lg", sm: "full" }}>
         <SearchContentHeader
           activeDescendant={activeDescendant}
           onActive={onActive}
@@ -352,7 +348,15 @@ function SearchContentBody({
   }, [descendants, onActive, value])
 
   return (
-    <Modal.Body as="nav" gap="sm" my="sm" px="sm" tabIndex={-1} {...rest}>
+    <Modal.Body
+      as="nav"
+      gap="sm"
+      maxH={{ base: "4xl", sm: "full" }}
+      my="sm"
+      px="sm"
+      tabIndex={-1}
+      {...rest}
+    >
       {hits.length ? (
         hits.map((hit, index) => (
           <Item

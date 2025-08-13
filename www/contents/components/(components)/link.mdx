@@ -34,6 +34,42 @@ import { Link } from "@workspace/ui"
 <Link />
 ```
 
+### Change Variants
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["plain", "underline"]}>
+    {(variant) => (
+      <Link
+        key={variant}
+        variant={variant}
+        href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
+      >
+        ドラゴンボール - wikipedia
+      </Link>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Color Schemes
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning", "link"]}>
+    {(colorScheme) => (
+      <Link
+        key={colorScheme}
+        colorScheme={colorScheme}
+        href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
+      >
+        ドラゴンボール - wikipedia
+      </Link>
+    )}
+  </For>
+</Wrap>
+```
+
 ### External Links
 
 ```tsx preview

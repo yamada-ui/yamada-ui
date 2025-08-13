@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./heading.style\"\nexport { Heading, HeadingPropsContext, useHeadingPropsContext } from \"./heading\"\nexport type { HeadingProps } from \"./heading\"\n"
+    },
+    {
+      "name": "heading.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const headingStyle = defineComponentStyle({\n  base: {\n    fontFamily: \"heading\",\n    fontWeight: \"semibold\",\n  },\n\n  sizes: {\n    xs: { fontSize: { base: \"xs\", sm: \"2xs\" } },\n    sm: { fontSize: { base: \"sm\", sm: \"xs\" } },\n    md: { fontSize: { base: \"md\", sm: \"sm\" } },\n    lg: { fontSize: { base: \"lg\", sm: \"md\" } },\n    xl: { fontSize: { base: \"xl\", sm: \"lg\" } },\n    \"2xl\": { fontSize: { base: \"2xl\", sm: \"xl\" } },\n    \"3xl\": { fontSize: { base: \"3xl\", sm: \"2xl\" } },\n    \"4xl\": { fontSize: { base: \"4xl\", sm: \"3xl\" } },\n    \"5xl\": { fontSize: { base: \"5xl\", sm: \"4xl\" } },\n    \"6xl\": { fontSize: { base: \"6xl\", sm: \"5xl\" } },\n    \"7xl\": { fontSize: { base: \"7xl\", sm: \"6xl\" } },\n    \"8xl\": { fontSize: { base: \"8xl\", sm: \"7xl\" } },\n    \"9xl\": { fontSize: { base: \"9xl\", sm: \"8xl\" } },\n  },\n\n  defaultProps: { size: \"4xl\" },\n})\n\nexport type HeadingStyle = typeof headingStyle\n"
+    },
+    {
+      "name": "heading.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { HeadingStyle } from \"./heading.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { headingStyle } from \"./heading.style\"\n\nexport interface HeadingProps\n  extends HTMLStyledProps<\"h1\">,\n    ThemeProps<HeadingStyle> {}\n\nconst {\n  PropsContext: HeadingPropsContext,\n  usePropsContext: useHeadingPropsContext,\n  withContext,\n} = createComponent<HeadingProps, HeadingStyle>(\"heading\", headingStyle)\n\nexport { HeadingPropsContext, useHeadingPropsContext }\n\n/**\n * `Heading` is a component that represents section headings. By default, it renders an `h1` element.\n *\n * @see https://yamada-ui.com/components/heading\n */\nexport const Heading = withContext(\"h1\")()\n"
+    }
+  ]
+}

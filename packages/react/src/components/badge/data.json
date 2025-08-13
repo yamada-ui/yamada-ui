@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./badge.style\"\nexport { Badge, BadgePropsContext, useBadgePropsContext } from \"./badge\"\nexport type { BadgeProps } from \"./badge\"\n"
+    },
+    {
+      "name": "badge.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const badgeStyle = defineComponentStyle({\n  base: {\n    alignItems: \"center\",\n    display: \"inline-flex\",\n    fontWeight: \"medium\",\n    rounded: \"l1\",\n    textTransform: \"uppercase\",\n    verticalAlign: \"middle\",\n    whiteSpace: \"nowrap\",\n  },\n\n  props: {\n    /**\n     * If `true`, the button is full rounded. Else, it'll be slightly round.\n     *\n     * @default false\n     */\n    fullRounded: {\n      true: {\n        rounded: \"full\",\n      },\n    },\n  },\n\n  variants: {\n    outline: {\n      layerStyle: \"outline\",\n    },\n    solid: {\n      layerStyle: \"solid\",\n    },\n    subtle: {\n      layerStyle: \"subtle\",\n    },\n    surface: {\n      layerStyle: \"surface\",\n    },\n  },\n\n  sizes: {\n    sm: {\n      fontSize: \"xs\",\n      lineHeight: \"{sizes.5}\",\n      minH: \"5\",\n      px: \"1.5\",\n    },\n    md: {\n      fontSize: \"sm\",\n      lineHeight: \"{sizes.6}\",\n      minH: \"6\",\n      px: \"2\",\n    },\n    lg: {\n      fontSize: \"md\",\n      lineHeight: \"{sizes.7}\",\n      minH: \"7\",\n      px: \"2.5\",\n    },\n  },\n\n  defaultProps: {\n    size: \"sm\",\n    variant: \"outline\",\n  },\n})\n\nexport type BadgeStyle = typeof badgeStyle\n"
+    },
+    {
+      "name": "badge.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { BadgeStyle } from \"./badge.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { badgeStyle } from \"./badge.style\"\n\nexport interface BadgeProps\n  extends HTMLStyledProps<\"span\">,\n    ThemeProps<BadgeStyle> {}\n\nconst {\n  PropsContext: BadgePropsContext,\n  usePropsContext: useBadgePropsContext,\n  withContext,\n} = createComponent<BadgeProps, BadgeStyle>(\"badge\", badgeStyle)\n\nexport { BadgePropsContext, useBadgePropsContext }\n\n/**\n * `Badge` is a component that emphasizes the status of an item to make it immediately recognizable.\n *\n * @see https://yamada-ui.com/components/badge\n */\nexport const Badge = withContext(\"span\")()\n"
+    }
+  ]
+}

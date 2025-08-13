@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./separator.style\"\nexport {\n  Separator,\n  SeparatorPropsContext,\n  useSeparatorPropsContext,\n} from \"./separator\"\nexport type { SeparatorProps } from \"./separator\"\n"
+    },
+    {
+      "name": "separator.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const separatorStyle = defineComponentStyle({\n  base: {\n    borderColor: \"border\",\n  },\n\n  props: {\n    /**\n     * The orientation of the divider.\n     *\n     * @default 'horizontal'\n     */\n    orientation: {\n      horizontal: {\n        borderWidth: \"0 0 1px 0\",\n        w: \"full\",\n      },\n      vertical: {\n        borderWidth: \"0 0 0 1px\",\n        h: \"full\",\n      },\n    },\n  },\n\n  variants: {\n    dashed: {\n      borderStyle: \"dashed\",\n    },\n    dotted: {\n      borderStyle: \"dotted\",\n    },\n    solid: {\n      borderStyle: \"solid\",\n    },\n  },\n\n  defaultProps: { variant: \"solid\", orientation: \"horizontal\" },\n})\n\nexport type SeparatorStyle = typeof separatorStyle\n"
+    },
+    {
+      "name": "separator.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { SeparatorStyle } from \"./separator.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { separatorStyle } from \"./separator.style\"\n\nexport interface SeparatorProps\n  extends HTMLStyledProps<\"hr\">,\n    ThemeProps<SeparatorStyle> {}\n\nconst {\n  PropsContext: SeparatorPropsContext,\n  usePropsContext: useSeparatorPropsContext,\n  withContext,\n} = createComponent<SeparatorProps, SeparatorStyle>(\"separator\", separatorStyle)\n\nexport { SeparatorPropsContext, useSeparatorPropsContext }\n\n/**\n * `Separator` is a component that represents a division between elements.\n *\n * @see https://yamada-ui.com/components/separator\n */\nexport const Separator = withContext(\"hr\")()\n"
+    }
+  ]
+}

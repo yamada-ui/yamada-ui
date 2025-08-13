@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": {
+    "components": ["client-only"],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./show\"\n"
+    },
+    {
+      "name": "show.tsx",
+      "content": "import type { ReactNode } from \"react\"\nimport type { ReactNodeOrFunction } from \"@yamada-ui/react\"\nimport { isValidElement } from \"react\"\nimport { runIfFn } from \"@yamada-ui/react\"\n\nexport interface ShowProps<Y> {\n  /**\n   * The children to render if `when` is `true`\n   */\n  children: ReactNodeOrFunction<Y>\n  /**\n   * The fallback content to render if `when` is `false`\n   */\n  fallback?: ReactNode\n  /**\n   * If `true`, it'll render the `children` prop\n   */\n  when?: null | Y\n}\n\n/**\n * `Show` is a component that shows or hides its children based on a condition.\n *\n * @see https://yamada-ui.com/components/show\n */\nexport const Show = <Y,>({\n  children,\n  fallback,\n  when,\n}: ShowProps<Y>): ReactNode => {\n  let result: ReactNode\n\n  if (!when) {\n    result = fallback\n  } else {\n    result = runIfFn(children, when)\n  }\n\n  // eslint-disable-next-line react/jsx-no-useless-fragment\n  return isValidElement(result) ? result : <>{result}</>\n}\n"
+    }
+  ]
+}

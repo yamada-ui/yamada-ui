@@ -1,6 +1,6 @@
 import fs from "fs"
 
-export const isWriteable = async (directory: string) => {
+export async function isWriteable(directory: string) {
   try {
     await fs.promises.access(
       directory,

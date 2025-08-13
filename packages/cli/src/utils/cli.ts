@@ -1,12 +1,10 @@
 import checkNode from "cli-check-node"
 import unhandledError from "cli-handle-unhandled"
-import { createRequire } from "node:module"
 import c from "picocolors"
 import updateNotifier from "update-notifier"
+import pkg from "../../package.json"
 
-const pkg = createRequire(import.meta.url)("@yamada-ui/cli/package.json")
-
-export const initCLI = async () => {
+export async function initCLI() {
   checkNode("22")
 
   await unhandledError()

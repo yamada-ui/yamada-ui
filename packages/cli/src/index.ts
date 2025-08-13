@@ -1,31 +1,30 @@
 import { Command } from "commander"
-import { createRequire } from "node:module"
 import c from "picocolors"
-import { actionTheme, actionTokens } from "./command/index.js"
-import { initCLI } from "./utils/index.js"
+import pkg from "../package.json"
+import { add } from "./commands/add"
+import { diff } from "./commands/diff"
+import { init } from "./commands/init"
+import { tokens } from "./commands/tokens"
+import { initCLI } from "./utils"
 
-const pkg = createRequire(import.meta.url)("@yamada-ui/cli/package.json")
-
-export const run = async () => {
+export async function run() {
   await initCLI()
+
   const program = new Command("Yamada UI CLI")
-    .version(pkg.version)
+    .description("The official CLI for Yamada UI projects")
+    .version(pkg.version, "-v, --version", "Display the version number")
     .usage(`${c.green("<command>")} [options]`)
 
-  program
-    .command("tokens <path>")
-    .option("--cwd <path>", "Current working directory")
-    .option("-o, --out <path>", `Output path`)
-    .option("-w, --watch [path]", "Watch directory for changes and rebuild")
-    .option("--internal", "Generate internal tokens")
-    .action(actionTokens)
-
-  program
-    .command("theme <path>")
-    .option("-b, --branch <branch>", "Branch to download")
-    .option("--cwd <path>", "Current working directory")
-    .option("-r, --replace", "Force replace the theme")
-    .action(actionTheme)
+  program.addCommand(init)
+  program.addCommand(add)
+  program.addCommand(diff)
+  program.addCommand(tokens)
 
   program.parse()
+}
+
+if (process.argv.includes("--run")) {
+  process.argv = process.argv.filter((arg) => arg !== "--run")
+
+  run()
 }

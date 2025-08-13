@@ -1,18 +1,33 @@
-import type { Dict } from "../../utils/index.js"
+import type { Dict } from "@yamada-ui/utils"
 import {
   getObject,
   isArray,
   isObject,
   isString,
   omitObject,
-  prettier,
-} from "../../utils/index.js"
-import { config } from "./config.js"
+} from "@yamada-ui/utils"
+import chokidar from "chokidar"
+import { Command } from "commander"
+import { ESLint } from "eslint"
+import { writeFile } from "fs/promises"
+import ora from "ora"
+import path from "path"
+import c from "picocolors"
+import { format, getModule } from "../../utils"
+import { config } from "./config"
 
 const TONES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
 
-const print = (unions: { [key: string]: string[] }) =>
-  Object.entries(unions)
+function isTone(value: any) {
+  if (!isObject(value)) return false
+
+  const keys = Object.keys(value)
+
+  return TONES.every((key) => keys.includes(key.toString()))
+}
+
+function print(unions: { [key: string]: string[] }) {
+  return Object.entries(unions)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(
       ([key, union]) =>
@@ -23,16 +38,9 @@ const print = (unions: { [key: string]: string[] }) =>
         };`,
     )
     .join("\n")
-
-const isTone = (value: any) => {
-  if (!isObject(value)) return false
-
-  const keys = Object.keys(value)
-
-  return TONES.every((key) => keys.includes(key.toString()))
 }
 
-const extractColorSchemes = (theme: Dict, colorTokens: string[] = []) => {
+function extractColorSchemes(theme: Dict, colorTokens: string[] = []) {
   colorTokens.push(
     "colorScheme.contrast",
     "colorScheme.fg",
@@ -87,7 +95,7 @@ const extractColorSchemes = (theme: Dict, colorTokens: string[] = []) => {
   return { colorSchemes }
 }
 
-const extractThemeSchemes = (theme: Dict) => {
+function extractThemeSchemes(theme: Dict) {
   const { themeSchemes } = theme
 
   return Object.keys(themeSchemes ?? {})
@@ -99,14 +107,14 @@ interface ExtractPathsOptions {
   shouldProcess?: (obj: Dict) => boolean
 }
 
-const extractPaths = (
+function extractPaths(
   target: Dict,
   {
     maxDepth = Infinity,
     replaceKey = (key: string) => key,
     shouldProcess = () => true,
   }: ExtractPathsOptions = {},
-) => {
+) {
   if (!isObject(target) && !isArray(target)) return []
 
   return Object.entries(target).reduce<string[]>((prev, [key, value]) => {
@@ -124,7 +132,7 @@ const extractPaths = (
   }, [])
 }
 
-const extractKeys = (obj: Dict, key: string) => {
+function extractKeys(obj: Dict, key: string) {
   const property = getObject(obj, key)
 
   if (!isObject(property)) return []
@@ -132,11 +140,10 @@ const extractKeys = (obj: Dict, key: string) => {
   return Object.keys(property)
 }
 
-export const generateThemeTokens = async (
+async function generateThemeTokens(
   theme: Dict,
-  { responsive = false }: Dict,
-  internal: boolean,
-) => {
+  { internal = false, theme: { responsive = false } = {} }: Dict,
+) {
   let shouldProcess: (obj: Dict) => boolean = () => true
 
   if (responsive && isObject(theme.breakpoints)) {
@@ -213,7 +220,7 @@ export const generateThemeTokens = async (
   const themeSchemes = extractThemeSchemes(theme)
 
   if (internal) {
-    return prettier(
+    return await format(
       [
         `import type { UsageThemeTokens } from "./system"`,
         ``,
@@ -230,7 +237,7 @@ export const generateThemeTokens = async (
       ].join("\n"),
     )
   } else {
-    return prettier(
+    return format(
       [
         `import type { UsageThemeTokens } from "@yamada-ui/react"`,
         ``,
@@ -250,3 +257,102 @@ export const generateThemeTokens = async (
     )
   }
 }
+
+const getTheme = async (path: string, cwd: string) => {
+  const { dependencies, mod } = await getModule(path, cwd)
+
+  const theme =
+    mod?.default ?? mod?.theme ?? mod?.customTheme ?? mod?.defaultTheme ?? {}
+  const config = mod?.config ?? mod?.customConfig ?? mod?.defaultConfig ?? {}
+
+  return { config, dependencies, theme }
+}
+
+interface Options {
+  cwd: string
+  internal: boolean
+  lint: boolean
+  watch: boolean | string
+  out?: string
+}
+
+export const tokens = new Command("tokens")
+  .description("Generate theme typings")
+  .argument("<path>", "Path to the theme file")
+  .option("--cwd <path>", "Current working directory", process.cwd())
+  .option("-o, --out <path>", `Output path`)
+  .option(
+    "-w, --watch [path]",
+    "Watch directory for changes and rebuild",
+    false,
+  )
+  .option("--lint", "Lint the output file", false)
+  .option("--internal", "Generate internal tokens", false)
+  .action(async function (
+    inputPath: string,
+    { cwd, internal, lint, out: outPath, watch }: Options,
+  ) {
+    const spinner = ora()
+    const eslint = new ESLint({ fix: true })
+
+    spinner.start(`Getting theme`)
+
+    cwd = path.resolve(cwd)
+    inputPath = path.resolve(cwd, inputPath)
+    outPath = outPath
+      ? path.resolve(cwd, outPath)
+      : path.join(
+          inputPath.includes("/")
+            ? inputPath.split("/").slice(0, -1).join("/")
+            : cwd,
+          "index.types.ts",
+        )
+
+    let file = await getTheme(inputPath, cwd)
+
+    const { config, dependencies, theme } = file
+
+    spinner.succeed(`Got theme`)
+
+    const buildFile = async () => {
+      spinner.start(`Generating theme typings`)
+
+      let content = await generateThemeTokens(theme, { ...config, internal })
+
+      if (lint) {
+        const [result] = await eslint.lintText(content, { filePath: inputPath })
+
+        if (result?.output) content = result.output
+      }
+
+      await writeFile(outPath, content, "utf8")
+
+      spinner.succeed(`Generated theme typings`)
+
+      if (watch) spinner.info("Watching for changes...")
+    }
+
+    if (watch) {
+      const watchPath = isString(watch) ? watch : dependencies
+
+      chokidar
+        .watch(watchPath)
+        .on("ready", buildFile)
+        .on("change", async (path) => {
+          spinner.info(`File changed ${path}`)
+
+          file = await getTheme(inputPath, cwd)
+
+          return buildFile()
+        })
+    } else {
+      const start = process.hrtime.bigint()
+
+      await buildFile()
+
+      const end = process.hrtime.bigint()
+      const duration = (Number(end - start) / 1e9).toFixed(2)
+
+      console.log("\n", c.green(`Done in ${duration}s`))
+    }
+  })

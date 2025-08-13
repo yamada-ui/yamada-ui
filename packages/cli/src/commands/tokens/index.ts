@@ -6,7 +6,6 @@ import {
   isString,
   omitObject,
 } from "@yamada-ui/utils"
-import chokidar from "chokidar"
 import { Command } from "commander"
 import { ESLint } from "eslint"
 import { writeFile } from "fs/promises"
@@ -258,7 +257,7 @@ async function generateThemeTokens(
   }
 }
 
-const getTheme = async (path: string, cwd: string) => {
+async function getTheme(path: string, cwd: string) {
   const { dependencies, mod } = await getModule(path, cwd)
 
   const theme =
@@ -272,7 +271,6 @@ interface Options {
   cwd: string
   internal: boolean
   lint: boolean
-  watch: boolean | string
   out?: string
 }
 
@@ -281,78 +279,52 @@ export const tokens = new Command("tokens")
   .argument("<path>", "Path to the theme file")
   .option("--cwd <path>", "Current working directory", process.cwd())
   .option("-o, --out <path>", `Output path`)
-  .option(
-    "-w, --watch [path]",
-    "Watch directory for changes and rebuild",
-    false,
-  )
-  .option("--lint", "Lint the output file", false)
+  .option("-l, --lint", "Lint the output file", false)
   .option("--internal", "Generate internal tokens", false)
   .action(async function (
     inputPath: string,
-    { cwd, internal, lint, out: outPath, watch }: Options,
+    { cwd, internal, lint, out: outPath }: Options,
   ) {
     const spinner = ora()
     const eslint = new ESLint({ fix: true })
+
+    const start = process.hrtime.bigint()
 
     spinner.start(`Getting theme`)
 
     cwd = path.resolve(cwd)
     inputPath = path.resolve(cwd, inputPath)
-    outPath = outPath
-      ? path.resolve(cwd, outPath)
-      : path.join(
-          inputPath.includes("/")
-            ? inputPath.split("/").slice(0, -1).join("/")
-            : cwd,
-          "index.types.ts",
-        )
 
-    let file = await getTheme(inputPath, cwd)
+    if (outPath) {
+      outPath = path.resolve(cwd, outPath)
+    } else if (inputPath.includes("/")) {
+      const dirPath = inputPath.split("/").slice(0, -1).join("/")
 
-    const { config, dependencies, theme } = file
+      outPath = path.join(dirPath, "index.types.ts")
+    } else {
+      outPath = path.join(cwd, "index.types.ts")
+    }
+
+    const { config, theme } = await getTheme(inputPath, cwd)
 
     spinner.succeed(`Got theme`)
 
-    const buildFile = async () => {
-      spinner.start(`Generating theme typings`)
+    spinner.start(`Generating theme typings`)
 
-      let content = await generateThemeTokens(theme, { ...config, internal })
+    let content = await generateThemeTokens(theme, { ...config, internal })
 
-      if (lint) {
-        const [result] = await eslint.lintText(content, { filePath: inputPath })
+    if (lint) {
+      const [result] = await eslint.lintText(content, { filePath: inputPath })
 
-        if (result?.output) content = result.output
-      }
-
-      await writeFile(outPath, content, "utf8")
-
-      spinner.succeed(`Generated theme typings`)
-
-      if (watch) spinner.info("Watching for changes...")
+      if (result?.output) content = result.output
     }
 
-    if (watch) {
-      const watchPath = isString(watch) ? watch : dependencies
+    await writeFile(outPath, content, "utf8")
 
-      chokidar
-        .watch(watchPath)
-        .on("ready", buildFile)
-        .on("change", async (path) => {
-          spinner.info(`File changed ${path}`)
+    spinner.succeed(`Generated theme typings`)
 
-          file = await getTheme(inputPath, cwd)
+    const end = process.hrtime.bigint()
+    const duration = (Number(end - start) / 1e9).toFixed(2)
 
-          return buildFile()
-        })
-    } else {
-      const start = process.hrtime.bigint()
-
-      await buildFile()
-
-      const end = process.hrtime.bigint()
-      const duration = (Number(end - start) / 1e9).toFixed(2)
-
-      console.log("\n", c.green(`Done in ${duration}s`))
-    }
+    console.log("\n", c.green(`Done in ${duration}s`))
   })

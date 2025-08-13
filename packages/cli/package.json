@@ -48,17 +48,18 @@
   },
   "dependencies": {
     "@yamada-ui/utils": "workspace:*",
-    "chokidar": "^4.0.3",
     "cli-check-node": "^1.3.4",
     "cli-handle-unhandled": "^1.1.2",
     "commander": "^14.0.0",
     "esbuild": "^0.25.8",
     "eslint": "^9.32.0",
+    "execa": "9.3.1",
     "glob": "^11.0.3",
     "node-eval": "^2.0.0",
     "ora": "^8.2.0",
     "picocolors": "^1.1.1",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "prompts": "^2.4.2"
   },
   "devDependencies": {
     "@types/update-notifier": "6.0.8",

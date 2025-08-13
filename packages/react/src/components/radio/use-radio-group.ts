@@ -4,7 +4,7 @@ import type { ChangeEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type { FieldProps } from "../field"
 import { useCallback, useId } from "react"
-import { useControllableState } from "../../client"
+import { useControllableState } from "../../hooks/use-controllable-state"
 import {
   createContext,
   cx,

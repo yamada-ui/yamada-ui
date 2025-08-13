@@ -164,5 +164,3 @@ export * from "./hooks/use-window-event"
  */
 export * from "./providers/i18n-provider"
 export * from "./providers/ui-provider"
-
-export * as Client from "./client"

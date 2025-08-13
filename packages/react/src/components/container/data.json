@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "namespace.ts",
+      "content": "export type {\n  ContainerBodyProps as BodyProps,\n  ContainerFooterProps as FooterProps,\n  ContainerHeaderProps as HeaderProps,\n  ContainerRootProps as RootProps,\n} from \"./container\"\nexport {\n  ContainerBody as Body,\n  ContainerFooter as Footer,\n  ContainerHeader as Header,\n  ContainerPropsContext as PropsContext,\n  ContainerRoot as Root,\n  useContainerPropsContext as usePropsContext,\n} from \"./container\"\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export * from \"./container.style\"\nexport {\n  ContainerBody,\n  ContainerFooter,\n  ContainerHeader,\n  ContainerPropsContext,\n  ContainerRoot,\n  useContainerPropsContext,\n} from \"./container\"\nexport type {\n  ContainerBodyProps,\n  ContainerFooterProps,\n  ContainerHeaderProps,\n  ContainerRootProps,\n} from \"./container\"\nexport * as Container from \"./namespace\"\n"
+    },
+    {
+      "name": "container.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { ContainerStyle } from \"./container.style\"\nimport { createSlotComponent } from \"@yamada-ui/react\"\nimport { containerStyle } from \"./container.style\"\n\nexport interface ContainerRootProps\n  extends HTMLStyledProps<\"section\">,\n    ThemeProps<ContainerStyle> {}\n\nconst {\n  PropsContext: ContainerPropsContext,\n  usePropsContext: useContainerPropsContext,\n  withContext,\n  withProvider,\n} = createSlotComponent<ContainerRootProps, ContainerStyle>(\n  \"container\",\n  containerStyle,\n)\n\nexport { ContainerPropsContext, useContainerPropsContext }\n\n/**\n * `Container` is a component used as a general division element. By default, it renders the `section` element.\n *\n * @see https://yamada-ui.com/components/container\n */\nexport const ContainerRoot = withProvider(\"section\", \"root\")()\n\nexport interface ContainerHeaderProps extends HTMLStyledProps<\"header\"> {}\n\nexport const ContainerHeader = withContext(\"header\", \"header\")()\n\nexport interface ContainerBodyProps extends HTMLStyledProps {}\n\nexport const ContainerBody = withContext(\"div\", \"body\")()\n\nexport interface ContainerFooterProps extends HTMLStyledProps<\"footer\"> {}\n\nexport const ContainerFooter = withContext(\"footer\", \"footer\")()\n"
+    },
+    {
+      "name": "container.style.ts",
+      "content": "import { defineComponentSlotStyle } from \"@yamada-ui/react\"\n\nexport const containerStyle = defineComponentSlotStyle({\n  base: {\n    body: {\n      alignItems: \"start\",\n      display: \"flex\",\n      flex: \"1\",\n      flexDirection: \"column\",\n    },\n    footer: {\n      alignItems: \"center\",\n      display: \"flex\",\n      justifyContent: \"start\",\n    },\n    header: {\n      alignItems: \"center\",\n      display: \"flex\",\n      justifyContent: \"start\",\n    },\n    root: {\n      display: \"flex\",\n      flexDirection: \"column\",\n      overflowWrap: \"break-word\",\n      rounded: \"l2\",\n      w: \"full\",\n    },\n  },\n\n  props: {\n    /**\n     * If `true`, container will center its children regardless of their width.\n     *\n     * @default false\n     */\n    centerContent: {\n      true: {\n        body: {\n          alignItems: \"center\",\n        },\n        footer: {\n          justifyContent: \"center\",\n        },\n        header: {\n          justifyContent: \"center\",\n        },\n      },\n    },\n  },\n\n  variants: {\n    elevated: {\n      root: {\n        bg: \"bg.panel\",\n        boxShadow: \"md\",\n      },\n    },\n    outline: {\n      root: {\n        layerStyle: \"outline\",\n      },\n    },\n    panel: {\n      root: {\n        layerStyle: \"panel\",\n      },\n    },\n    solid: {\n      root: {\n        layerStyle: \"solid\",\n      },\n    },\n    subtle: {\n      root: {\n        layerStyle: \"subtle\",\n      },\n    },\n    surface: {\n      root: {\n        layerStyle: \"surface\",\n      },\n    },\n  },\n\n  sizes: {\n    sm: {\n      body: { gap: \"3\", px: \"3\", py: \"3\" },\n      footer: { gap: \"3\", pb: \"3\", px: \"3\" },\n      header: { fontSize: \"lg\", gap: \"3\", pt: \"3\", px: \"3\" },\n    },\n    md: {\n      body: { gap: \"4\", px: \"4\", py: \"4\" },\n      footer: { gap: \"4\", pb: \"4\", px: \"4\" },\n      header: { fontSize: \"xl\", gap: \"4\", pt: \"4\", px: \"4\" },\n    },\n    lg: {\n      body: { gap: \"6\", px: \"6\", py: \"6\" },\n      footer: { gap: \"6\", pb: \"6\", px: \"6\" },\n      header: { fontSize: \"2xl\", gap: \"6\", pt: \"6\", px: \"6\" },\n    },\n    xl: {\n      body: { gap: \"8\", px: \"8\", py: \"8\" },\n      footer: { gap: \"8\", pb: \"8\", px: \"8\" },\n      header: { fontSize: \"2xl\", gap: \"8\", pt: \"8\", px: \"8\" },\n    },\n  },\n\n  defaultProps: {\n    size: \"lg\",\n    variant: \"panel\",\n  },\n})\n\nexport type ContainerStyle = typeof containerStyle\n"
+    }
+  ]
+}

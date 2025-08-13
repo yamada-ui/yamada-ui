@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": ["copy-to-clipboard@3.3.3"],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport copy from \"copy-to-clipboard\"\nimport { useCallback, useEffect, useState } from \"react\"\nimport { isNumber, isString } from \"@yamada-ui/react\"\n\nexport interface UseClipboardOptions {\n  format?: string\n  timeout?: number\n}\n\n/**\n * `useClipboard` is a custom hook that performs the operation of copying a value to the clipboard.\n *\n * @see https://yamada-ui.com/hooks/use-clipboard\n */\nexport const useClipboard = (\n  defaultValue = \"\",\n  timeoutOrOptions: number | UseClipboardOptions = {},\n) => {\n  const [copied, setCopied] = useState(false)\n\n  const [value, setValue] = useState(defaultValue)\n\n  useEffect(() => setValue(defaultValue), [defaultValue])\n\n  const { timeout = 1500, ...copyOptions } = isNumber(timeoutOrOptions)\n    ? { timeout: timeoutOrOptions }\n    : timeoutOrOptions\n\n  const onCopy = useCallback(\n    (newValue?: any) => {\n      if (!isString(newValue)) {\n        newValue = value\n      } else {\n        setValue(newValue)\n      }\n\n      const copied = copy(newValue, copyOptions)\n\n      setCopied(copied)\n    },\n    [value, copyOptions],\n  )\n\n  useEffect(() => {\n    let timeoutId: NodeJS.Timeout | null = null\n\n    if (copied)\n      timeoutId = setTimeout(() => {\n        setCopied(false)\n      }, timeout)\n\n    return () => {\n      if (timeoutId) clearTimeout(timeoutId)\n    }\n  }, [timeout, copied])\n\n  return {\n    copied,\n    setValue,\n    value,\n    onCopy,\n  }\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./visually-hidden.style\"\nexport {\n  useVisuallyHiddenPropsContext,\n  VisuallyHidden,\n  VisuallyHiddenPropsContext,\n} from \"./visually-hidden\"\nexport type { VisuallyHiddenProps } from \"./visually-hidden\"\n"
+    },
+    {
+      "name": "visually-hidden.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const visuallyHiddenStyle = defineComponentStyle({\n  base: {\n    layerStyle: \"visuallyHidden\",\n  },\n})\n\nexport type VisuallyHiddenStyle = typeof visuallyHiddenStyle\n"
+    },
+    {
+      "name": "visually-hidden.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps } from \"@yamada-ui/react\"\nimport type { VisuallyHiddenStyle } from \"./visually-hidden.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { visuallyHiddenStyle } from \"./visually-hidden.style\"\n\nexport interface VisuallyHiddenProps extends HTMLStyledProps<\"span\"> {}\n\nconst {\n  PropsContext: VisuallyHiddenPropsContext,\n  usePropsContext: useVisuallyHiddenPropsContext,\n  withContext,\n} = createComponent<VisuallyHiddenProps, VisuallyHiddenStyle>(\n  \"visually-hidden\",\n  visuallyHiddenStyle,\n)\n\nexport { useVisuallyHiddenPropsContext, VisuallyHiddenPropsContext }\n\n/**\n * `VisuallyHidden` is a common technique used in web accessibility to hide content from the visual client, but keep it readable for screen readers.\n *\n * @see https://yamada-ui.com/components/visually-hidden\n */\nexport const VisuallyHidden = withContext(\"span\")()\n"
+    }
+  ]
+}

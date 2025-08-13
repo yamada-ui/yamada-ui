@@ -2,7 +2,7 @@ import { Command } from "commander"
 import { sort } from "./sort"
 
 export default function main() {
-  const program = new Command("Yamada UI CLI")
+  const program = new Command()
 
   program
     .command("sort <path>")

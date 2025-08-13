@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "components": ["motion"],
+    "externals": ["motion@12.18.1"],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": {
+    "components": ["button"],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export { Ripple, RipplePropsContext, useRipplePropsContext } from \"./ripple\"\nexport type { RippleProps } from \"./ripple\"\nexport * from \"./use-ripple\"\n"
+    },
+    {
+      "name": "ripple.tsx",
+      "content": "\"use client\"\n\nimport type { Key } from \"react\"\nimport type { ThemeProps } from \"@yamada-ui/react\"\nimport type { HTMLMotionProps } from \"../motion\"\nimport type { RippleStyle } from \"./ripple.style\"\nimport type { RippleOptions } from \"./use-ripple\"\nimport { AnimatePresence } from \"motion/react\"\nimport { createComponent, handlerAll } from \"@yamada-ui/react\"\nimport { motion } from \"../motion\"\nimport { rippleStyle } from \"./ripple.style\"\n\nconst clamp = (value: number, min: number, max: number) =>\n  Math.min(Math.max(value, min), max)\n\nexport interface RippleProps\n  extends HTMLMotionProps<\"span\">,\n    ThemeProps<RippleStyle> {\n  /**\n   * The ripples to use.\n   */\n  ripples: RippleOptions[]\n  /**\n   * The callback invoked when a ripple is cleared.\n   */\n  onClear: (key: Key) => void\n  /**\n   * If `true`, disable ripple effects when pressing a element.\n   *\n   * @default false\n   */\n  disabled?: boolean\n}\n\nconst {\n  PropsContext: RipplePropsContext,\n  usePropsContext: useRipplePropsContext,\n  withContext,\n} = createComponent<RippleProps, RippleStyle>(\"ripple\", rippleStyle)\n\nexport { RipplePropsContext, useRipplePropsContext }\n\n/**\n * `Ripple` is a component that adds a ripple effect to elements, allowing users to recognize when they have clicked.\n *\n * @see https://yamada-ui.com/components/ripple\n */\nexport const Ripple = withContext<\"span\", RippleProps>(\n  ({\n    style,\n    color = \"currentColor\",\n    disabled,\n    ripples,\n    onAnimationComplete,\n    onClear,\n    ...rest\n  }) => {\n    if (disabled) return null\n\n    return (\n      <>\n        {ripples.map(({ key, size, x, y }) => {\n          const duration = clamp(0.01 * size, 0.2, size > 100 ? 0.75 : 0.5)\n\n          return (\n            <AnimatePresence key={key} mode=\"popLayout\">\n              <motion.span\n                style={{\n                  height: `${size}px`,\n                  left: x,\n                  pointerEvents: \"none\",\n                  position: \"absolute\",\n                  top: y,\n                  transformOrigin: \"center\",\n                  width: `${size}px`,\n                  ...style,\n                }}\n                animate={{ opacity: 0, transform: \"scale(2)\" }}\n                bgColor={color}\n                exit={{ opacity: 0 }}\n                initial={{ opacity: 0.35, transform: \"scale(0)\" }}\n                transition={{ duration }}\n                {...rest}\n                onAnimationComplete={handlerAll(onAnimationComplete, () =>\n                  onClear(key),\n                )}\n              />\n            </AnimatePresence>\n          )\n        })}\n      </>\n    )\n  },\n)()\n"
+    },
+    {
+      "name": "ripple.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const rippleStyle = defineComponentStyle({\n  base: {\n    rounded: \"full\",\n    zIndex: \"kurillin\",\n  },\n})\n\nexport type RippleStyle = typeof rippleStyle\n"
+    },
+    {
+      "name": "use-ripple.ts",
+      "content": "\"use client\"\n\nimport type { Key, MouseEventHandler } from \"react\"\nimport { useCallback, useState } from \"react\"\nimport { handlerAll, uuid } from \"@yamada-ui/react\"\n\nexport interface RippleOptions {\n  key: Key\n  size: number\n  x: number\n  y: number\n}\n\nexport interface UseRippleProps<Y = HTMLElement> {\n  disabled?: boolean\n  onClick?: MouseEventHandler<Y>\n}\n\nexport const useRipple = <Y = HTMLElement,>({\n  disabled,\n  ...rest\n}: UseRippleProps<Y> = {}) => {\n  const [ripples, setRipples] = useState<RippleOptions[]>([])\n\n  const onClick: MouseEventHandler<Y> = useCallback(\n    (ev) => {\n      if (disabled) return\n\n      const trigger = ev.currentTarget as unknown as Element\n\n      const size = Math.max(trigger.clientWidth, trigger.clientHeight)\n      const rect = trigger.getBoundingClientRect()\n\n      setRipples((prev) => [\n        ...prev,\n        {\n          key: uuid(),\n          size,\n          x: ev.clientX - rect.x - size / 2,\n          y: ev.clientY - rect.y - size / 2,\n        },\n      ])\n    },\n    [disabled],\n  )\n\n  const onClear = useCallback((key: Key) => {\n    setRipples((prev) => prev.filter((item) => item.key !== key))\n  }, [])\n\n  return {\n    ripples,\n    onClear,\n    onClick: handlerAll(onClick, rest.onClick),\n  }\n}\n\nexport type UseRippleReturn = ReturnType<typeof useRipple>\n"
+    }
+  ]
+}

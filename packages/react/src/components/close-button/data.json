@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "components": ["button", "icon"],
+    "externals": [],
+    "hooks": [],
+    "providers": ["i18n-provider"]
+  },
+  "dependents": {
+    "components": ["drawer", "modal", "snacks"],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./close-button.style\"\nexport {\n  CloseButton,\n  CloseButtonPropsContext,\n  useCloseButtonPropsContext,\n} from \"./close-button\"\nexport type { CloseButtonProps } from \"./close-button\"\n"
+    },
+    {
+      "name": "close-button.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const closeButtonStyle = defineComponentStyle({\n  defaultProps: {\n    size: \"xs\",\n    variant: \"ghost\",\n  },\n})\n\nexport type CloseButtonStyle = typeof closeButtonStyle\n"
+    },
+    {
+      "name": "close-button.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLProps, ThemeProps, WithoutThemeProps } from \"@yamada-ui/react\"\nimport type { IconButtonProps } from \"../button\"\nimport type { CloseButtonStyle } from \"./close-button.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { useI18n } from \"../../providers/i18n-provider\"\nimport { IconButton } from \"../button\"\nimport { XIcon } from \"../icon\"\nimport { closeButtonStyle } from \"./close-button.style\"\n\nexport interface CloseButtonProps\n  extends Omit<\n      WithoutThemeProps<IconButtonProps, CloseButtonStyle>,\n      \"aria-label\"\n    >,\n    Pick<HTMLProps<\"button\">, \"aria-label\">,\n    ThemeProps<CloseButtonStyle> {}\n\nconst {\n  PropsContext: CloseButtonPropsContext,\n  usePropsContext: useCloseButtonPropsContext,\n  withContext,\n} = createComponent<CloseButtonProps, CloseButtonStyle>(\n  \"close-button\",\n  closeButtonStyle,\n)\n\nexport { CloseButtonPropsContext, useCloseButtonPropsContext }\n\n/**\n * `CloseButton` is a component used primarily to trigger the close functionality of a component.\n *\n * @see https://yamada-ui.com/components/close-button\n */\nexport const CloseButton = withContext<\"button\", CloseButtonProps>(IconButton)(\n  undefined,\n  ({ children, icon, ...rest }) => {\n    const { t } = useI18n(\"closeButton\")\n\n    return {\n      \"aria-label\": t(\"Close\"),\n      children: children || icon || <XIcon />,\n      ...rest,\n    }\n  },\n)\n"
+    }
+  ]
+}

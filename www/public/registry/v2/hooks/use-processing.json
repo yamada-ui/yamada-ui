@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": ["use-boolean"],
+    "providers": []
+  },
+  "dependents": {
+    "components": [],
+    "hooks": ["use-async-callback"],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport { useCallback, useMemo, useRef } from \"react\"\nimport { useUnmountEffect } from \"@yamada-ui/react\"\nimport { useBoolean } from \"../use-boolean\"\n\n/**\n * `useProcessing` is a custom hook for handling processing states.\n *\n * @see https://yamada-ui.com/hooks/use-processing\n */\nexport const useProcessing = (init?: boolean) => {\n  const [loading, { off, on }] = useBoolean(init)\n  const countRef = useRef<number>(0)\n\n  const start = useCallback(() => {\n    countRef.current += 1\n\n    on()\n  }, [on])\n\n  const finish = useCallback(() => {\n    countRef.current -= 1\n\n    if (countRef.current <= 0) off()\n  }, [off])\n\n  useUnmountEffect(() => {\n    countRef.current = 0\n  })\n\n  const controls = useMemo(\n    () => ({\n      finish,\n      loading,\n      start,\n    }),\n    [finish, loading, start],\n  )\n\n  return controls\n}\n\nexport type UseProcessingReturn = ReturnType<typeof useProcessing>\n"
+    }
+  ]
+}

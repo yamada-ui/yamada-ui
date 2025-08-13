@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export { For } from \"./for\"\nexport type { ForProps } from \"./for\"\n"
+    },
+    {
+      "name": "for.tsx",
+      "content": "import type { ReactNode } from \"react\"\nimport { isArray } from \"@yamada-ui/react\"\n\nexport interface ForProps<Y> {\n  /**\n   * The render function to render each item in the array.\n   */\n  children: (value: Y, index: number, array: Y[]) => ReactNode\n  /**\n   * The array to iterate over.\n   */\n  each: readonly Y[] | undefined | Y[]\n  /**\n   * The fallback content to render when the array is empty.\n   */\n  fallback?: ReactNode\n  /**\n   * A function that returns a boolean indicating whether the item should be included in the render result.\n   */\n  filter?: (value: Y, index: number, array: Y[]) => boolean\n  /**\n   * The maximum number of items to include in the render result.\n   */\n  limit?: number\n  /**\n   * The number of items to skip before including them in the render result.\n   * @default 0\n   */\n  offset?: number\n  /**\n   * The boolean value to determine the order of the items in the array.\n   * If `true`, the items will be reversed.\n   * If `sortBy` is provided, inversion is applied to the sorted array.\n   * @default false\n   */\n  reverse?: boolean\n  /**\n   * The function to sort the items in the array.\n   * If function is provided, the items will be sorted based on the return value.\n   * If `reverse` is `true`, the inversion is applied to the sorted array.\n   */\n  sort?: (a: Y, b: Y) => number\n}\n\n/**\n * `For` is a component used to loop over an array and render a component for each item.\n *\n * @see https://yamada-ui.com/components/for\n */\nexport const For = <Y,>({\n  children,\n  each,\n  fallback,\n  filter,\n  limit,\n  offset = 0,\n  reverse = false,\n  sort,\n}: ForProps<Y>): ReactNode => {\n  if (!each || !isArray(each) || !each.length) return fallback || null\n\n  const cloned = [...each]\n  const filtered = filter ? cloned.filter(filter) : cloned\n  const sorted = sort ? filtered.sort(sort) : filtered\n  const reversed = reverse ? sorted.reverse() : sorted\n  const sliced = reversed.slice(offset, limit ? offset + limit : undefined)\n\n  if (!sliced.length) return fallback || null\n\n  return sliced.map(children)\n}\n"
+    }
+  ]
+}

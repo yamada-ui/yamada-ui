@@ -14,6 +14,7 @@ export const importConfigArray: TSESLint.FlatConfig.ConfigArray = [
     },
     rules: {
       "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+      "import/no-duplicates": "error",
     },
     settings: {
       "import/parsers": {

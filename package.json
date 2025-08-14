@@ -45,7 +45,7 @@
     "gen:tokens": "pnpm cli start tokens react/src/theme/index.ts --cwd .. --internal -o react/src/core/generated-theme-tokens.types.ts && eslint packages/react/src/core/generated-theme-tokens.types.ts --fix",
     "gen:icons": "tsx scripts/generate/icons",
     "gen:props": "tsx scripts/generate/props",
-    "gen:data": "tsx scripts/generate/data",
+    "gen:registries": "tsx scripts/generate/registries",
     "changelog": "tsx scripts/changelog",
     "release": "changeset publish",
     "release:dev": "changeset version --snapshot dev && changeset publish --tag dev",

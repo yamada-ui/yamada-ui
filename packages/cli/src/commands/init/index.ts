@@ -16,6 +16,7 @@ import {
 } from "../../constant"
 import {
   addWorkspace,
+  format,
   getPackageJson,
   getPackageManager,
   installDependencies,
@@ -114,7 +115,10 @@ export const init = new Command("init")
 
       spinner.start(`Generating ${c.cyan(configFileName)}`)
 
-      await writeFileSafe(configPath, JSON.stringify(config, null, 2))
+      await writeFileSafe(
+        configPath,
+        await format(JSON.stringify(config), { parser: "json" }),
+      )
 
       spinner.succeed(`Generated ${c.cyan(configFileName)}`)
 
@@ -147,17 +151,23 @@ export const init = new Command("init")
         await Promise.all(
           [
             {
-              content: JSON.stringify(packageJson, null, 2),
+              content: await format(JSON.stringify(packageJson), {
+                parser: "json",
+              }),
               path: path.resolve(outdirPath, "package.json"),
             },
             {
-              content: JSON.stringify(tsconfigJson, null, 2),
+              content: await format(JSON.stringify(tsconfigJson), {
+                parser: "json",
+              }),
               path: path.resolve(outdirPath, "tsconfig.json"),
             },
-            ...sources.map(({ name, content }) => ({
-              content,
-              path: path.resolve(outdirPath, "src", name),
-            })),
+            ...(await Promise.all(
+              sources.map(async ({ name, content }) => ({
+                content: await format(content),
+                path: path.resolve(outdirPath, "src", name),
+              })),
+            )),
           ].map(({ content, path }) => writeFileSafe(path, content)),
         )
 

@@ -8,6 +8,7 @@ import c from "picocolors"
 import validateProjectName from "validate-npm-package-name"
 import YAML from "yamljs"
 import { writeFileSafe } from "./fs"
+import { format } from "./prettier"
 
 export type PackageManager = "bun" | "npm" | "pnpm" | "yarn"
 
@@ -128,17 +129,13 @@ export async function addWorkspace(cwd: string, workspacePath: string) {
         if (!json.packages.includes(workspacePath)) {
           json.packages.push(workspacePath)
 
-          await writeFileSafe(
-            path.resolve(cwd, "pnpm-workspace.yaml"),
-            YAML.stringify(json, undefined, 2),
-          )
+          const content = await format(YAML.stringify(json), { parser: "yaml" })
+
+          await writeFileSafe(path.resolve(cwd, "pnpm-workspace.yaml"), content)
         }
       } else {
-        const content = YAML.stringify(
-          { packages: [workspacePath] },
-          undefined,
-          2,
-        )
+        const data = YAML.stringify({ packages: [workspacePath] })
+        const content = await format(data, { parser: "yaml" })
 
         await writeFileSafe(path.resolve(cwd, "pnpm-workspace.yaml"), content)
       }
@@ -153,10 +150,11 @@ export async function addWorkspace(cwd: string, workspacePath: string) {
       if (!packageJson.workspaces.includes(workspacePath)) {
         packageJson.workspaces.push(workspacePath)
 
-        await writeFileSafe(
-          path.resolve(cwd, "package.json"),
-          JSON.stringify(packageJson, null, 2),
-        )
+        const content = await format(JSON.stringify(packageJson), {
+          parser: "json",
+        })
+
+        await writeFileSafe(path.resolve(cwd, "package.json"), content)
       }
 
       break

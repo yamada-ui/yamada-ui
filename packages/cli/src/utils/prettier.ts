@@ -1,15 +1,18 @@
 import type { Options } from "prettier"
-import path from "path"
-import { format, resolveConfig } from "prettier"
+import {
+  format as OriginalFormat,
+  resolveConfig,
+  resolveConfigFile,
+} from "prettier"
 
-export const prettier = async (content: string, options?: Options) => {
-  const prettierConfig = await resolveConfig(
-    path.join(process.cwd(), ".prettierrc"),
-  )
+export async function format(content: string, options?: Options) {
+  const path = await resolveConfigFile()
+
+  const config = path ? await resolveConfig(path) : {}
 
   try {
-    return format(content, {
-      ...prettierConfig,
+    return OriginalFormat(content, {
+      ...config,
       parser: "typescript",
       ...options,
     })

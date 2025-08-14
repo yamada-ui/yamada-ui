@@ -1,4 +1,6 @@
+import type { Dict } from "@yamada-ui/utils"
 import type { SourceFile } from "typescript"
+import { toKebabCase } from "@yamada-ui/utils"
 import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { Command } from "commander"
 import { existsSync } from "fs"
@@ -14,12 +16,15 @@ import {
   readConfigFile,
   sys,
 } from "typescript"
+import { ICON_TEMPLATE } from "../icons/template"
 
 type RegistryType = "components" | "hooks" | "providers" | "root" | "theme"
 
 interface Source {
   name: string
-  content: string
+  content?: string
+  data?: Dict[]
+  template?: string
 }
 
 interface Dependents {
@@ -73,24 +78,34 @@ async function getExternals(): Promise<ExternalsMap> {
   return { ...dependencies, ...devDependencies }
 }
 
-async function getIconsSource() {
-  const data = await readFile(
+async function getIconsSources() {
+  const index = await readFile(
     path.join(ENTRY_PATH, "components", "icon", "icons", "index.ts"),
     "utf-8",
   )
-  const iconNames = await readFile(
+  const indexTypes = await readFile(
     path.join(ENTRY_PATH, "components", "icon", "icons", "index.types.ts"),
     "utf-8",
   )
-
   const icons =
-    data
+    index
       .match(/{\s*([^}]+)\s*}/g)
       ?.map((match) => match.replace(/{\s*|\s*}/g, "")) ?? []
 
-  const content = `export { ${icons.join(", ")} } from "@yamada-ui/react"\n${iconNames}`
+  const sources: Source[] = [
+    { name: "icons/index.ts", content: index },
+    { name: "icons/index.types.ts", content: indexTypes },
+    {
+      name: "icons",
+      data: icons.map((iconName) => ({
+        name: `${toKebabCase(iconName)}.tsx`,
+        iconName,
+      })),
+      template: ICON_TEMPLATE,
+    },
+  ]
 
-  return format(content)
+  return sources
 }
 
 function shouldIgnoreFileName(name: string) {
@@ -193,9 +208,7 @@ async function getSources() {
               if (dirent.isDirectory()) {
                 switch (name) {
                   case "icons": {
-                    const content = await getIconsSource()
-
-                    sources?.push({ name: "icons.ts", content })
+                    sources?.push(...(await getIconsSources()))
 
                     break
                   }
@@ -466,7 +479,10 @@ async function generateThemeRegistry() {
     }),
   )
 
-  const registry: Registry = { type: "theme", sources }
+  const registry: Registry = {
+    type: "theme",
+    sources: sources.sort((a, b) => a.name.localeCompare(b.name)),
+  }
   const content = JSON.stringify(registry)
 
   await writeFileWithFormat(path.join(themePath, "registry.json"), content, {

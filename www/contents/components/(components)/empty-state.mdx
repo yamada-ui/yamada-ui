@@ -6,4 +6,82 @@ source: components/empty-state
 style: components/empty-state/empty-state.style.ts
 ---
 
+```tsx preview
+<EmptyState.Root
+  description="Explore our products and add items to your cart"
+  indicator={<ShoppingCartIcon />}
+  title="Your cart is empty"
+/>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { EmptyState } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { EmptyState } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { EmptyState } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<EmptyState.Root>
+  <EmptyState.Indicator />
+  <EmptyState.Title />
+  <EmptyState.Description />
+</EmptyState.Root>
+```
+
+### Change Size
+
+```tsx preview
+<VStack gap="md">
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <EmptyState.Root
+        key={index}
+        size={size}
+        description="Explore our products and add items to your cart"
+        indicator={<ShoppingCartIcon />}
+        title="Your cart is empty"
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Add Children
+
+```tsx preview
+<EmptyState.Root
+  description="Explore our products and add items to your cart"
+  indicator={<ShoppingCartIcon />}
+  title="Your cart is empty"
+>
+  <Button>Back to home</Button>
+</EmptyState.Root>
+```
+
+### Custom
+
+```tsx preview
+<EmptyState.Root>
+  <EmptyState.Indicator>
+    <ShoppingCartIcon />
+  </EmptyState.Indicator>
+
+  <EmptyState.Title>Your cart is empty</EmptyState.Title>
+
+  <EmptyState.Description>
+    Explore our products and add items to your cart
+  </EmptyState.Description>
+</EmptyState.Root>
+```

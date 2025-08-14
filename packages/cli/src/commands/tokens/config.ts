@@ -1,4 +1,4 @@
-import type { Dict } from "../../utils"
+import type { Dict } from "@yamada-ui/utils"
 
 export interface Config {
   key: string

@@ -6,4 +6,73 @@ source: components/kbd
 style: components/kbd/kbd.style.ts
 ---
 
+```tsx preview
+<Text>
+  <Kbd>Shift</Kbd> + <Kbd>Tab</Kbd>
+</Text>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Kbd } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Kbd } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Kbd } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Kbd />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack gap="md">
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant, index) => (
+      <Text key={index}>
+        <Kbd variant={variant}>Shift</Kbd> + <Kbd variant={variant}>Tab</Kbd>
+      </Text>
+    )}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack gap="md">
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <Text key={index}>
+        <Kbd size={size}>Shift</Kbd> + <Kbd size={size}>Tab</Kbd>
+      </Text>
+    )}
+  </For>
+</VStack>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<VStack gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Text key={index}>
+        <Kbd colorScheme={colorScheme}>Shift</Kbd> +{" "}
+        <Kbd colorScheme={colorScheme}>Tab</Kbd>
+      </Text>
+    )}
+  </For>
+</VStack>
+```

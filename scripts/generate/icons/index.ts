@@ -7,6 +7,7 @@ import { readdir, readFile, unlink } from "fs/promises"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
+import { ICON_TEMPLATE } from "./template"
 
 const resolvedTraverse = interopDefault(traverse)
 
@@ -54,24 +55,11 @@ async function createIcons(iconNames: string[]) {
   return Promise.all(
     iconNames.map(async (iconName) => {
       const fileName = toKebabCase(iconName)
-      let data = [
-        `"use client"`,
-        ``,
-        `import { ${iconName} } from "lucide-react"`,
-        `import { component, Icon } from "../icon"`,
-        ``,
-        `/**`,
-        ` * \`${iconName}Icon\` is [Lucide](https://lucide.dev) SVG icon component.`,
-        ` *`,
-        ` * @see https://yamada-ui.com/components/icon`,
-        ` */`,
-        `export const ${iconName}Icon = component(Icon)({ as: ${iconName} })`,
-        ``,
-      ].join("\n")
+      const content = ICON_TEMPLATE.replace(/{{iconName}}/g, iconName)
 
       await writeFileWithFormat(
         path.resolve(DIST_PATH, `${fileName}-icon.tsx`),
-        data,
+        content,
       )
     }),
   )

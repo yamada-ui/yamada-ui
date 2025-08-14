@@ -639,6 +639,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.1.1(react@19.1.1)
+      react-hook-form:
+        specifier: ^7.61.1
+        version: 7.61.1(react@19.1.1)
       react-icons:
         specifier: ^5.5.0
         version: 5.5.0(react@19.1.1)
@@ -12088,7 +12091,6 @@ packages:
       react: ^19.0.0
     dependencies:
       react: 19.1.1
-    dev: true
 
   /react-icons@5.5.0(react@19.1.1):
     resolution: {integrity: sha512-MEFcXdkP3dLo8uumGI5xN3lDFNsRtrjbOEKDLD7yv76v4wpnEq2Lt2qeHaQOr34I/wPN3s3+N08WkQ+CW37Xiw==, tarball: https://registry.npmjs.org/react-icons/-/react-icons-5.5.0.tgz}

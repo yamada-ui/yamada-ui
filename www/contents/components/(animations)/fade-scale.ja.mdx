@@ -5,4 +5,96 @@ storybook: components-fadescale--basic
 source: components/fade-scale
 ---
 
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap="md">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <FadeScale open={open} borderWidth={1} p="md" rounded="l2">
+      その打球、消えるよ
+    </FadeScale>
+  </VStack>
+)
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { FadeScale } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { FadeScale } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { FadeScale } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<FadeScale />
+```
+
+### 拡大の初期値を変更する
+
+拡大の初期値を変更する場合は、`scale`に数値を設定します。この数値を基準に拡大され、縮小していきます。デフォルトは、`0.95`です。
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap="md">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <FadeScale open={open} scale={0.75} borderWidth={1} p="md" rounded="l2">
+      その打球、消えるよ
+    </FadeScale>
+  </VStack>
+)
+```
+
+### 所要時間を変更する
+
+所要時間を変更する場合は、`duration`に数値(秒)を設定します。
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap="md">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <FadeScale open={open} duration={0.4} borderWidth={1} p="md" rounded="l2">
+      その打球、消えるよ
+    </FadeScale>
+  </VStack>
+)
+```
+
+### 非表示時にアンマウントする
+
+非表示時にアンマウントする場合は、`unmountOnExit`をtrueに設定します。
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap="md">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <FadeScale open={open} unmountOnExit borderWidth={1} p="md" rounded="l2">
+      その打球、消えるよ
+    </FadeScale>
+
+    <Box borderWidth={1} p="md" rounded="l2" w="full">
+      俺はたった今からデータを捨てる！そして俺は過去を凌駕する！
+    </Box>
+  </VStack>
+)
+```

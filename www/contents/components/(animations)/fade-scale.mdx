@@ -5,4 +5,96 @@ storybook: components-fadescale--basic
 source: components/fade-scale
 ---
 
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap="md">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <FadeScale open={open} borderWidth={1} p="md" rounded="l2">
+      その打球、消えるよ
+    </FadeScale>
+  </VStack>
+)
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { FadeScale } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { FadeScale } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { FadeScale } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<FadeScale />
+```
+
+### Change the initial scale value
+
+To change the initial scale value, set a number to `scale`. The element will scale based on this value, starting from and shrinking to it. The default is `0.95`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap="md">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <FadeScale open={open} scale={0.75} borderWidth={1} p="md" rounded="l2">
+      その打球、消えるよ
+    </FadeScale>
+  </VStack>
+)
+```
+
+### Change the Duration
+
+To change the duration, set a number (in seconds) to `duration`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap="md">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <FadeScale open={open} duration={0.4} borderWidth={1} p="md" rounded="l2">
+      その打球、消えるよ
+    </FadeScale>
+  </VStack>
+)
+```
+
+### Unmount on Exit
+
+To unmount the component when it is not visible, set `unmountOnExit` to `true`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start" gap="md">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <FadeScale open={open} unmountOnExit borderWidth={1} p="md" rounded="l2">
+      その打球、消えるよ
+    </FadeScale>
+
+    <Box borderWidth={1} p="md" rounded="l2" w="full">
+      俺はたった今からデータを捨てる！そして俺は過去を凌駕する！
+    </Box>
+  </VStack>
+)
+```

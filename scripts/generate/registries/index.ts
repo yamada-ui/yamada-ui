@@ -521,22 +521,20 @@ async function publishRegistries() {
 
       const content = await readFile(filePath, "utf-8")
 
-      if (parentName === "react") {
-        const targetPath = path.join(PUBLIC_PATH, "index.json")
+      let targetPath: string
 
-        await writeFile(targetPath, content)
+      if (parentName === "react") {
+        targetPath = path.join(PUBLIC_PATH, "index.json")
+      } else if (childName === "theme") {
+        targetPath = path.join(PUBLIC_PATH, "theme.json")
       } else {
         if (!existsSync(path.join(PUBLIC_PATH, parentName)))
           await mkdir(path.join(PUBLIC_PATH, parentName), { recursive: true })
 
-        const targetPath = path.join(
-          PUBLIC_PATH,
-          parentName,
-          `${childName}.json`,
-        )
-
-        await writeFile(targetPath, content)
+        targetPath = path.join(PUBLIC_PATH, parentName, `${childName}.json`)
       }
+
+      await writeFile(targetPath, content)
     }),
   )
 }

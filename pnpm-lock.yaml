@@ -203,15 +203,18 @@ importers:
       eslint:
         specifier: ^9.32.0
         version: 9.32.0(jiti@2.5.1)
-      execa:
-        specifier: 9.3.1
-        version: 9.3.1
       glob:
         specifier: ^11.0.3
         version: 11.0.3
+      https-proxy-agent:
+        specifier: ^7.0.6
+        version: 7.0.6
       node-eval:
         specifier: ^2.0.0
         version: 2.0.0
+      node-fetch:
+        specifier: ^3.3.2
+        version: 3.3.2
       ora:
         specifier: ^8.2.0
         version: 8.2.0

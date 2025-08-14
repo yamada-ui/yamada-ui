@@ -1,4 +1,4 @@
-import type { Config, Data } from "../../index.type"
+import type { Config } from "../../index.type"
 import boxen from "boxen"
 import { Command } from "commander"
 import { existsSync } from "fs"
@@ -11,7 +11,6 @@ import {
   DEFAULT_PACKAGE_JSON,
   DEFAULT_PACKAGE_NAME,
   PATH,
-  REGISTRY_URL,
   TSCONFIG_JSON,
 } from "../../constant"
 import {
@@ -23,6 +22,7 @@ import {
   requireDependencies,
   writeFileSafe,
 } from "../../utils"
+import { fetchRegistry } from "../../utils/registry"
 
 interface Options {
   config: string
@@ -132,8 +132,8 @@ export const init = new Command("init")
 
         spinner.start("Fetching data")
 
-        const data = await fetch(path.join(REGISTRY_URL, "index.json"))
-        const { sources } = (await data.json()) as Data
+        const registries = await fetchRegistry(["index"])
+        const { sources } = registries[0]!
 
         spinner.succeed("Fetched data")
 

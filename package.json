@@ -42,7 +42,7 @@
     "spellcheck": "cspell \"**/*.{js,jsx,mjs,ts,tsx,mts,md,mdx}\" --quiet",
     "quality": "pnpm format && pnpm lint && pnpm typecheck && pnpm test",
     "gen:styles": "tsx scripts/generate/styles",
-    "gen:tokens": "pnpm cli start tokens react/src/theme/index.ts --cwd .. --internal --out react/src/core/generated-theme-tokens.types.ts && eslint packages/react/src/core/generated-theme-tokens.types.ts --fix",
+    "gen:tokens": "pnpm cli start tokens react/src/theme/index.ts --cwd .. --internal -o react/src/core/generated-theme-tokens.types.ts && eslint packages/react/src/core/generated-theme-tokens.types.ts --fix",
     "gen:icons": "tsx scripts/generate/icons",
     "gen:props": "tsx scripts/generate/props",
     "gen:data": "tsx scripts/generate/data",

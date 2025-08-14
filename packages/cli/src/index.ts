@@ -3,7 +3,7 @@ import unhandledError from "cli-handle-unhandled"
 import { Command } from "commander"
 import c from "picocolors"
 import updateNotifier from "update-notifier"
-import pkg from "../package.json"
+import packageJson from "../package.json"
 import { add } from "./commands/add"
 import { diff } from "./commands/diff"
 import { init } from "./commands/init"
@@ -15,19 +15,18 @@ export async function run() {
   await unhandledError()
 
   updateNotifier({
-    pkg,
+    pkg: packageJson,
     shouldNotifyInNpmScript: true,
     updateCheckInterval: 1000 * 60 * 60 * 24 * 3,
   }).notify({ isGlobal: true })
 
   console.log(
-    `\n${c.bold(c.green("Yamada UI CLI"))} v${pkg.version} ${c.dim("by Yamada UI")}`,
+    `\n${c.bold(c.green("Yamada UI CLI"))} v${packageJson.version} ${c.dim("by Yamada UI")}`,
   )
-  console.log(`${c.dim(pkg.description)}\n`)
+  console.log(`${c.dim(packageJson.description)}\n`)
 
   const program = new Command("Yamada UI CLI")
-    .description("The official CLI for Yamada UI projects")
-    .version(pkg.version, "-v, --version", "Display the version number")
+    .version(packageJson.version, "-v, --version", "Display the version number")
     .usage(`${c.green("<command>")} [options]`)
 
   program.addCommand(init)

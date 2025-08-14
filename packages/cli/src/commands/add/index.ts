@@ -1,6 +1,7 @@
 import { Command } from "commander"
 import ora from "ora"
 import c from "picocolors"
+import { CONFIG_FILE_NAME } from "../../constant"
 
 interface Options {
   cwd: string
@@ -9,19 +10,24 @@ interface Options {
 export const add = new Command("add")
   .description("Add a component to your project")
   .option("--cwd <path>", "Current working directory", process.cwd())
+  .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
   .action(function ({ cwd }: Options) {
     const spinner = ora()
 
-    spinner.start("")
+    try {
+      const start = process.hrtime.bigint()
 
-    console.log(cwd)
+      console.log(cwd)
 
-    spinner.succeed("")
+      const end = process.hrtime.bigint()
+      const duration = (Number(end - start) / 1e9).toFixed(2)
 
-    const start = process.hrtime.bigint()
-
-    const end = process.hrtime.bigint()
-    const duration = (Number(end - start) / 1e9).toFixed(2)
-
-    console.log("\n", c.green(`Done in ${duration}s`))
+      console.log("\n", c.green(`Done in ${duration}s`))
+    } catch (e) {
+      if (e instanceof Error) {
+        spinner.fail(e.message)
+      } else {
+        spinner.fail("An unknown error occurred")
+      }
+    }
   })

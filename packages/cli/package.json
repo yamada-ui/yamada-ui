@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "@yamada-ui/utils": "workspace:*",
+    "boxen": "^8.0.1",
     "cli-check-node": "^1.3.4",
     "cli-handle-unhandled": "^1.1.2",
     "commander": "^14.0.0",
@@ -59,10 +60,15 @@
     "ora": "^8.2.0",
     "picocolors": "^1.1.1",
     "prettier": "^3.6.2",
-    "prompts": "^2.4.2"
+    "prompts": "^2.4.2",
+    "validate-npm-package-name": "^6.0.2",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "@types/prompts": "^2.4.9",
     "@types/update-notifier": "6.0.8",
+    "@types/validate-npm-package-name": "^4.0.2",
+    "@types/yamljs": "^0.2.34",
     "tsx": "^4.20.3",
     "typescript": "^5.9.2",
     "update-notifier": "^7.3.1"

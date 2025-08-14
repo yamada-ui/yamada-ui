@@ -1,3 +1,5 @@
 export * from "./fs"
+export * from "./git"
 export * from "./module"
+export * from "./package"
 export * from "./prettier"

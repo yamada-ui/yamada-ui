@@ -132,7 +132,7 @@ async function formatSource(data: string) {
   while (match != null) {
     const [target] = match
 
-    if (new RegExp(`../../(${PROVIDE_DIRECTORIES.join("|")})`).test(target)) {
+    if (new RegExp(`../(${PROVIDE_DIRECTORIES.join("|")})`).test(target)) {
       if (target.includes("import type")) {
         importTypeDeclarations.push(target)
       } else {
@@ -448,6 +448,32 @@ async function generateRegistries(
   )
 }
 
+async function generateThemeRegistry() {
+  const themePath = path.join(ENTRY_PATH, "theme")
+  const filePaths = await glob(path.join(themePath, "**", "*.{ts,tsx}"))
+
+  const sources: Source[] = []
+
+  await Promise.all(
+    filePaths.map(async (filePath) => {
+      if (shouldIgnoreFileName(filePath)) return
+
+      const name = filePath.replace(`${themePath}/`, "")
+      const data = await readFile(filePath, "utf-8")
+      const content = await formatSource(data)
+
+      sources.push({ name, content })
+    }),
+  )
+
+  const registry: Registry = { type: "theme", sources }
+  const content = JSON.stringify(registry)
+
+  await writeFileWithFormat(path.join(themePath, "registry.json"), content, {
+    parser: "json",
+  })
+}
+
 async function generateIndexRegistry() {
   const index = await readFile(path.join(ENTRY_PATH, "index.ts"), "utf-8")
   const registry: Registry = {
@@ -546,8 +572,11 @@ function main() {
 
       spinner.start("Generating registries")
 
-      await generateRegistries(sourceMap, dependencyMap, dependentMap)
-      await generateIndexRegistry()
+      await Promise.all([
+        generateRegistries(sourceMap, dependencyMap, dependentMap),
+        generateThemeRegistry(),
+        generateIndexRegistry(),
+      ])
 
       spinner.succeed("Generated registries")
 

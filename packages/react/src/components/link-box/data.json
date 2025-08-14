@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./link-box.style\"\nexport {\n  LinkBoxOverlay,\n  LinkBoxPropsContext,\n  LinkBoxRoot,\n  useLinkBoxPropsContext,\n} from \"./link-box\"\nexport type { LinkBoxOverlayProps, LinkBoxRootProps } from \"./link-box\"\nexport * as LinkBox from \"./namespace\"\n"
+    },
+    {
+      "name": "namespace.ts",
+      "content": "export {\n  LinkBoxOverlay as Overlay,\n  LinkBoxPropsContext as PropsContext,\n  LinkBoxRoot as Root,\n  useLinkBoxPropsContext as usePropsContext,\n} from \"./link-box\"\nexport type {\n  LinkBoxOverlayProps as OverlayProps,\n  LinkBoxRootProps as RootProps,\n} from \"./link-box\"\n"
+    },
+    {
+      "name": "link-box.style.ts",
+      "content": "import { defineComponentSlotStyle, focusRingStyle } from \"@yamada-ui/react\"\n\nexport const linkBoxStyle = defineComponentSlotStyle({\n  base: {\n    overlay: {\n      focusVisibleRing: \"none\",\n      position: \"static\",\n      _before: {\n        boxSize: \"full\",\n        cursor: \"inherit\",\n        display: \"block\",\n        inset: \"0\",\n        position: \"absolute\",\n        zIndex: \"0\",\n      },\n      _focusVisible: { _before: focusRingStyle.outline },\n    },\n    root: {\n      \"a[href]:not([data-link-box-overlay]), abbr[title]\": {\n        position: \"relative\",\n        zIndex: \"yamcha\",\n      },\n      position: \"relative\",\n    },\n  },\n})\n\nexport type LinkBoxStyle = typeof linkBoxStyle\n"
+    },
+    {
+      "name": "link-box.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps, Dict } from \"@yamada-ui/react\"\nimport type { LinkBoxStyle } from \"./link-box.style\"\nimport {\n  createSlotComponent,\n  radiusProperties,\n  styled,\n  useExtractProps,\n  dataAttr,\n} from \"@yamada-ui/react\"\nimport { linkBoxStyle } from \"./link-box.style\"\n\ninterface ComponentContext extends Dict {}\n\nexport interface LinkBoxRootProps\n  extends HTMLStyledProps,\n    ThemeProps<LinkBoxStyle> {}\n\nconst {\n  ComponentContext,\n  PropsContext: LinkBoxPropsContext,\n  useComponentContext,\n  usePropsContext: useLinkBoxPropsContext,\n  withContext,\n  withProvider,\n} = createSlotComponent<LinkBoxRootProps, LinkBoxStyle, ComponentContext>(\n  \"link-box\",\n  linkBoxStyle,\n)\n\nexport { LinkBoxPropsContext, useLinkBoxPropsContext }\n\n/**\n * `LinkBox` is a component that allows elements such as articles or cards to function as a single link.\n *\n * @see https://yamada-ui.com/components/link-box\n */\nexport const LinkBoxRoot = withProvider<\"div\", LinkBoxRootProps>(\n  ({ children, ...rest }) => {\n    const context = useExtractProps(rest, radiusProperties)\n\n    return (\n      <ComponentContext value={context}>\n        <styled.div {...rest}>{children}</styled.div>\n      </ComponentContext>\n    )\n  },\n  \"root\",\n)()\n\nexport interface LinkBoxOverlayProps extends HTMLStyledProps<\"a\"> {\n  /**\n   * If `true`, the link will open in new tab.\n   *\n   * @default false\n   */\n  external?: boolean\n}\n\nexport const LinkBoxOverlay = withContext<\"a\", LinkBoxOverlayProps>(\n  \"a\",\n  \"overlay\",\n)(undefined, ({ external, _before, ...rest }) => {\n  const context = useComponentContext()\n\n  return {\n    rel: external ? \"noopener\" : undefined,\n    target: external ? \"_blank\" : undefined,\n    \"data-link-box-overlay\": dataAttr(true),\n    _before: { ..._before, ...context },\n    ...rest,\n  }\n})\n"
+    }
+  ]
+}

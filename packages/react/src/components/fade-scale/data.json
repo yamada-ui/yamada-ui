@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "components": ["motion"],
+    "externals": ["motion@12.18.1"],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": {
+    "components": ["popover"],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./fade-scale.style\"\nexport { FadeScale, fadeScaleVariants } from \"./fade-scale\"\nexport type { FadeScaleProps } from \"./fade-scale\"\n"
+    },
+    {
+      "name": "fade-scale.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const fadeScaleStyle = defineComponentStyle({\n  base: {\n    w: \"full\",\n  },\n})\n\nexport type FadeScaleStyle = typeof fadeScaleStyle\n"
+    },
+    {
+      "name": "fade-scale.tsx",
+      "content": "\"use client\"\n\nimport type { Variants } from \"motion/react\"\nimport type { ThemeProps } from \"@yamada-ui/react\"\nimport type {\n  HTMLMotionProps,\n  MotionTransitionVariants,\n  WithTransitionProps,\n} from \"../motion\"\nimport type { FadeScaleStyle } from \"./fade-scale.style\"\nimport { AnimatePresence } from \"motion/react\"\nimport { useMemo } from \"react\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { createTransition, motion } from \"../motion\"\nimport { fadeScaleStyle } from \"./fade-scale.style\"\n\nexport const fadeScaleVariants: Variants = {\n  enter: ({ delay, duration, enter, transition, transitionEnd } = {}) => ({\n    opacity: 1,\n    scale: 1,\n    transition: createTransition.enter(transition?.enter)(delay, duration),\n    transitionEnd: transitionEnd?.enter,\n    ...enter,\n  }),\n  exit: ({\n    delay,\n    duration,\n    exit,\n    reverse,\n    scale,\n    transition,\n    transitionEnd,\n  } = {}) => ({\n    opacity: 0,\n    transition: createTransition.exit(transition?.exit)(delay, duration),\n    ...(reverse\n      ? { scale, transitionEnd: transitionEnd?.exit }\n      : { transitionEnd: { scale, ...transitionEnd?.exit } }),\n    ...exit,\n  }),\n} satisfies MotionTransitionVariants\n\nexport interface FadeScaleProps\n  extends WithTransitionProps<HTMLMotionProps>,\n    ThemeProps<FadeScaleStyle> {\n  /**\n   * If `true`, the element will transition back to exit state.\n   *\n   * @default true\n   */\n  reverse?: boolean\n  /**\n   * The initial scale of the element.\n   *\n   * @default 0.95\n   */\n  scale?: number\n}\n\nconst {\n  PropsContext: FadeScalePropsContext,\n  usePropsContext: useFadeScalePropsContext,\n  withContext,\n} = createComponent<FadeScaleProps, FadeScaleStyle>(\n  \"fade-scale\",\n  fadeScaleStyle,\n)\n\nexport { FadeScalePropsContext, useFadeScalePropsContext }\n\n/**\n * `FadeScale` is a component that gradually scales up to reveal or scales down to hide an element.\n *\n * @see https://yamada-ui.com/components/fade-scale\n */\nexport const FadeScale = withContext<\"div\", FadeScaleProps>(\n  ({\n    delay,\n    duration,\n    open: openProp,\n    reverse = true,\n    scale = 0.95,\n    transition,\n    transitionEnd,\n    unmountOnExit,\n    ...rest\n  }) => {\n    const animate = openProp || unmountOnExit ? \"enter\" : \"exit\"\n    const open = unmountOnExit ? openProp && unmountOnExit : true\n\n    const custom = useMemo(\n      () => ({\n        delay,\n        duration,\n        reverse,\n        scale,\n        transition,\n        transitionEnd,\n      }),\n      [delay, duration, reverse, scale, transition, transitionEnd],\n    )\n\n    return (\n      <AnimatePresence custom={custom}>\n        {open ? (\n          <motion.div\n            animate={animate}\n            custom={custom}\n            exit=\"exit\"\n            initial=\"exit\"\n            variants={fadeScaleVariants}\n            {...rest}\n          />\n        ) : null}\n      </AnimatePresence>\n    )\n  },\n)()\n"
+    }
+  ]
+}

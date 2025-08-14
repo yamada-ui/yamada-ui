@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": ["react-focus-lock@^2.13.6"],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": {
+    "components": ["drawer", "modal"],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export { FocusLock } from \"./focus-lock\"\nexport type { FocusLockProps } from \"./focus-lock\"\n"
+    },
+    {
+      "name": "focus-lock.tsx",
+      "content": "\"use client\"\n\nimport type { FC, PropsWithChildren, RefObject } from \"react\"\nimport { useCallback } from \"react\"\nimport ReactFocusLock from \"react-focus-lock\"\nimport { getFocusableElements, interopDefault } from \"@yamada-ui/react\"\n\nconst InternalFocusLock = interopDefault(ReactFocusLock)\n\nexport interface FocusLockProps extends PropsWithChildren {\n  /**\n   * If `true`, the first focusable element within the `children` will auto-focused once `FocusLock` mounts.\n   *\n   * @default false\n   */\n  autoFocus?: boolean\n  /**\n   * The `ref` of the wrapper for which the focus-lock wraps.\n   */\n  contentRef?: RefObject<HTMLElement | null>\n  /**\n   * If `true`, focus trapping will be disabled.\n   *\n   * @default false\n   */\n  disabled?: boolean\n  /**\n   * `ref` of the element to return focus to when `FocusLock` unmounts.\n   */\n  finalFocusRef?: RefObject<HTMLElement | null>\n  /**\n   * `ref` of the element to receive focus initially.\n   */\n  initialFocusRef?: RefObject<HTMLElement | null>\n  /**\n   * Enables aggressive focus capturing within iframes.\n   * - If `true`: keep focus in the lock, no matter where lock is active.\n   * - If `false`:  allows focus to move outside of iframe.\n   *\n   * @default false\n   */\n  lockFocusAcrossFrames?: boolean\n  /**\n   * If `true`, disables text selections inside, and outside focus lock.\n   *\n   * @default false\n   */\n  persistentFocus?: boolean\n  /**\n   * If `true`, focus will be restored to the element that triggered the `FocusLock` once it unmounts.\n   *\n   * @default false\n   */\n  restoreFocus?: boolean\n}\n\n/**\n * `FocusLock` is a component that improves accessibility by restricting focus within elements such as modals and dialogs, and locking the focus within that range.\n *\n * @see https://yamada-ui.com/components/focus-lock\n */\nexport const FocusLock: FC<FocusLockProps> = ({\n  autoFocus,\n  children,\n  contentRef,\n  disabled,\n  finalFocusRef,\n  initialFocusRef,\n  lockFocusAcrossFrames,\n  persistentFocus,\n  restoreFocus,\n}) => {\n  const returnFocus = restoreFocus && !finalFocusRef\n\n  const onActivation = useCallback(() => {\n    if (initialFocusRef?.current) {\n      initialFocusRef.current.focus()\n    } else if (contentRef?.current) {\n      const focusables = getFocusableElements(contentRef.current)\n\n      if (focusables.length === 0)\n        requestAnimationFrame(() => {\n          contentRef.current?.focus()\n        })\n    }\n  }, [initialFocusRef, contentRef])\n\n  const onDeactivation = useCallback(() => {\n    finalFocusRef?.current?.focus()\n  }, [finalFocusRef])\n\n  return (\n    <InternalFocusLock\n      autoFocus={autoFocus}\n      crossFrame={lockFocusAcrossFrames}\n      disabled={disabled}\n      persistentFocus={persistentFocus}\n      returnFocus={returnFocus}\n      onActivation={onActivation}\n      onDeactivation={onDeactivation}\n    >\n      {children}\n    </InternalFocusLock>\n  )\n}\n"
+    }
+  ]
+}

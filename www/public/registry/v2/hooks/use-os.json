@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "import { isUndefined } from \"@yamada-ui/react\"\n\nexport type OS =\n  | \"android\"\n  | \"chromeos\"\n  | \"ios\"\n  | \"linux\"\n  | \"macos\"\n  | \"undetermined\"\n  | \"windows\"\n\nconst getOS = (): OS => {\n  const { userAgent } = window.navigator\n\n  const macos = /(Macintosh)|(MacIntel)|(MacPPC)|(Mac68K)/i\n  const windows = /(Win32)|(Win64)|(Windows)|(WinCE)/i\n  const ios = /(iPhone)|(iPad)|(iPod)/i\n  const android = /Android/i\n  const linux = /Linux/i\n  const chromeos = /CrOS/i\n\n  if (macos.test(userAgent)) return \"macos\"\n  if (ios.test(userAgent)) return \"ios\"\n  if (windows.test(userAgent)) return \"windows\"\n  if (android.test(userAgent)) return \"android\"\n  if (linux.test(userAgent)) return \"linux\"\n  if (chromeos.test(userAgent)) return \"chromeos\"\n\n  return \"undetermined\"\n}\n\n/**\n * `useOS` is a custom hook that returns the user's OS.\n *\n * @see https://yamada-ui.com/hooks/use-os\n */\nexport const useOS = (): OS => {\n  if (!isUndefined(window)) return getOS()\n\n  return \"undetermined\"\n}\n"
+    }
+  ]
+}

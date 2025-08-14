@@ -295,12 +295,12 @@ async function main() {
     path.dirname(CONFIG_PATH),
   )
   const { getSourceFile, getTypeChecker } = createProgram(fileNames, options)
-  const dirents = await readdir(ENTRY_PATH, { withFileTypes: true })
 
   spinner.succeed("Got tsconfig")
 
   spinner.start("Generating props types")
 
+  const dirents = await readdir(ENTRY_PATH, { withFileTypes: true })
   const targets = process.argv.slice(2)
 
   await Promise.all(

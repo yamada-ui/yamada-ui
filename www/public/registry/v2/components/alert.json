@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["icon", "loading", "status"],
     "externals": [],
@@ -7,6 +6,7 @@
     "providers": []
   },
   "dependents": { "components": ["snacks"], "hooks": [], "providers": [] },
+  "section": "components",
   "sources": [
     {
       "name": "alert.style.ts",

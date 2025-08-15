@@ -18,7 +18,7 @@ import {
 } from "typescript"
 import { ICON_TEMPLATE } from "../icons/template"
 
-type RegistryType = "components" | "hooks" | "providers" | "root" | "theme"
+type RegistrySection = "components" | "hooks" | "providers" | "root" | "theme"
 
 interface Source {
   name: string
@@ -41,7 +41,7 @@ interface Dependencies {
 }
 
 interface Registry {
-  type: RegistryType
+  section: RegistrySection
   sources: Source[]
   dependencies?: Dependencies
   dependents?: Dependents
@@ -62,8 +62,8 @@ const PUBLIC_PATH = path.join(process.cwd(), "www", "public", "registry", "v2")
 const PACKAGE_PATH = path.join(process.cwd(), "packages", "react")
 const PACKAGE_JSON_PATH = path.join(PACKAGE_PATH, "package.json")
 const ENTRY_PATH = path.join(PACKAGE_PATH, "src")
-const TARGET_DIRECTORIES = ["components", "hooks", "providers"]
-const PROVIDE_DIRECTORIES = ["core", "utils", "theme"]
+const TARGET_SECTIONS = ["components", "hooks", "providers"]
+const PROVIDE_SECTIONS = ["core", "utils", "theme"]
 const IGNORED_FILE_NAME = [
   ".test.(ts|tsx)",
   ".stories.(ts|tsx)",
@@ -147,7 +147,7 @@ async function formatSource(data: string) {
   while (match != null) {
     const [target] = match
 
-    if (new RegExp(`../(${PROVIDE_DIRECTORIES.join("|")})`).test(target)) {
+    if (new RegExp(`../(${PROVIDE_SECTIONS.join("|")})`).test(target)) {
       if (target.includes("import type")) {
         importTypeDeclarations.push(target)
       } else {
@@ -177,36 +177,36 @@ async function getSources() {
 
   await Promise.all(
     dirents.map(async (dirent) => {
-      const parentName = dirent.name
+      const sectionName = dirent.name
 
       if (!dirent.isDirectory()) return
-      if (!TARGET_DIRECTORIES.includes(parentName)) return
+      if (!TARGET_SECTIONS.includes(sectionName)) return
 
-      sourceMap[parentName] ??= {}
+      sourceMap[sectionName] ??= {}
 
-      const targetPath = path.join(dirent.parentPath, parentName)
+      const targetPath = path.join(dirent.parentPath, sectionName)
       const dirents = await readdir(targetPath, { withFileTypes: true })
 
       await Promise.all(
         dirents.map(async (dirent) => {
-          const childName = dirent.name
+          const name = dirent.name
 
           if (!dirent.isDirectory()) return
 
-          if (sourceMap[parentName]) sourceMap[parentName][childName] ??= []
+          if (sourceMap[sectionName]) sourceMap[sectionName][name] ??= []
 
-          const targetPath = path.join(dirent.parentPath, childName)
+          const targetPath = path.join(dirent.parentPath, name)
           const dirents = await readdir(targetPath, { withFileTypes: true })
 
           await Promise.all(
             dirents.map(async (dirent) => {
-              const name = dirent.name
+              const fileName = dirent.name
 
-              const sources = sourceMap[parentName]?.[childName]
-              const targetPath = path.join(dirent.parentPath, name)
+              const sources = sourceMap[sectionName]?.[name]
+              const targetPath = path.join(dirent.parentPath, fileName)
 
               if (dirent.isDirectory()) {
-                switch (name) {
+                switch (fileName) {
                   case "icons": {
                     sources?.push(...(await getIconsSources()))
 
@@ -229,7 +229,7 @@ async function getSources() {
                         const content = await formatSource(data)
 
                         sources?.push({
-                          name: `${name}/${dirent.name}`,
+                          name: `${fileName}/${dirent.name}`,
                           content,
                         })
                       }),
@@ -239,12 +239,12 @@ async function getSources() {
                   }
                 }
               } else {
-                if (shouldIgnoreFileName(name)) return
+                if (shouldIgnoreFileName(fileName)) return
 
                 const data = await readFile(targetPath, "utf-8")
                 const content = await formatSource(data)
 
-                sources?.push({ name, content })
+                sources?.push({ name: fileName, content })
               }
             }),
           )
@@ -290,40 +290,40 @@ async function getDependencies(
 
   await Promise.all(
     dirents.map(async (dirent) => {
-      const parentName = dirent.name
+      const sectionName = dirent.name
 
       if (!dirent.isDirectory()) return
-      if (!TARGET_DIRECTORIES.includes(parentName)) return
+      if (!TARGET_SECTIONS.includes(sectionName)) return
 
-      dependencyMap[parentName] ??= {}
+      dependencyMap[sectionName] ??= {}
 
-      const targetPath = path.join(dirent.parentPath, parentName)
+      const targetPath = path.join(dirent.parentPath, sectionName)
       const dirents = await readdir(targetPath, { withFileTypes: true })
 
       await Promise.all(
         dirents.map(async (dirent) => {
-          const childName = dirent.name
+          const name = dirent.name
 
           if (!dirent.isDirectory()) return
 
-          if (dependencyMap[parentName])
-            dependencyMap[parentName][childName] ??= {
+          if (dependencyMap[sectionName])
+            dependencyMap[sectionName][name] ??= {
               components: [],
               externals: [],
               hooks: [],
               providers: [],
             }
 
-          const targetPath = path.join(dirent.parentPath, childName)
+          const targetPath = path.join(dirent.parentPath, name)
           const dirents = await readdir(targetPath, { withFileTypes: true })
 
           dirents.forEach((dirent) => {
-            const name = dirent.name
+            const fileName = dirent.name
 
             if (dirent.isDirectory()) return
-            if (shouldIgnoreFileName(name)) return
+            if (shouldIgnoreFileName(fileName)) return
 
-            const targetPath = path.join(dirent.parentPath, name)
+            const targetPath = path.join(dirent.parentPath, fileName)
             const sourceFile = getSourceFile(targetPath)
 
             if (!sourceFile) return
@@ -331,28 +331,28 @@ async function getDependencies(
             sourceFile.statements.forEach((statement) => {
               if (!isImportDeclaration(statement)) return
 
-              const dependencies = dependencyMap[parentName]?.[childName]
+              const dependencies = dependencyMap[sectionName]?.[name]
               const module = statement.moduleSpecifier
                 .getText(sourceFile)
                 .replace(/["']/g, "")
 
               if (module.startsWith("../../")) {
-                const [parentName, childName] = module.split("/").slice(-2)
+                const [sectionName, name] = module.split("/").slice(-2)
 
-                if (!parentName || !childName) return
+                if (!sectionName || !name) return
 
-                const target = dependencies?.[parentName as keyof Dependencies]
+                const target = dependencies?.[sectionName as keyof Dependencies]
 
-                if (!target || target.includes(childName)) return
+                if (!target || target.includes(name)) return
 
-                target.push(childName)
+                target.push(name)
               } else if (module.startsWith("../")) {
-                const target = dependencies?.[parentName as keyof Dependencies]
-                const childName = module.split("/").at(-1)
+                const target = dependencies?.[sectionName as keyof Dependencies]
+                const name = module.split("/").at(-1)
 
-                if (!target || !childName || target.includes(childName)) return
+                if (!target || !name || target.includes(name)) return
 
-                target.push(childName)
+                target.push(name)
               } else if (!module.startsWith(".")) {
                 const target = dependencies?.externals
                 const name = getModuleNameWithVersion(module, externalMap)
@@ -375,36 +375,38 @@ function getDependents(dependencyMap: DependencyMap) {
   const dependentMap: DependentMap = {}
 
   function addDependent(
+    targetSectionName: string,
     targetName: string,
+    sectionName: string,
     name: string,
-    parentName: string,
-    childName: string,
   ) {
-    if (!dependentMap[targetName]) dependentMap[targetName] = {}
+    if (!dependentMap[targetSectionName]) dependentMap[targetSectionName] = {}
 
-    dependentMap[targetName][name] ??= {
+    dependentMap[targetSectionName][targetName] ??= {
       components: [],
       hooks: [],
       providers: [],
     }
 
     const target =
-      dependentMap[targetName][name][parentName as keyof Dependents]
+      dependentMap[targetSectionName][targetName][
+        sectionName as keyof Dependents
+      ]
 
-    target.push(childName)
+    target.push(name)
   }
 
-  Object.entries(dependencyMap).forEach(([parentName, children]) => {
+  Object.entries(dependencyMap).forEach(([sectionName, children]) => {
     Object.entries(children).forEach(
-      ([childName, { components, hooks, providers }]) => {
-        components.forEach((name) =>
-          addDependent("components", name, parentName, childName),
+      ([name, { components, hooks, providers }]) => {
+        components.forEach((targetName) =>
+          addDependent("components", targetName, sectionName, name),
         )
-        hooks.forEach((name) =>
-          addDependent("hooks", name, parentName, childName),
+        hooks.forEach((targetName) =>
+          addDependent("hooks", targetName, sectionName, name),
         )
-        providers.forEach((name) =>
-          addDependent("providers", name, parentName, childName),
+        providers.forEach((targetName) =>
+          addDependent("providers", targetName, sectionName, name),
         )
       },
     )
@@ -422,34 +424,30 @@ async function generateRegistries(
 
   await Promise.all(
     dirents.map(async (dirent) => {
-      const parentName = dirent.name
+      const sectionName = dirent.name
 
       if (!dirent.isDirectory()) return
-      if (!TARGET_DIRECTORIES.includes(parentName)) return
+      if (!TARGET_SECTIONS.includes(sectionName)) return
 
-      const targetPath = path.join(dirent.parentPath, parentName)
+      const targetPath = path.join(dirent.parentPath, sectionName)
       const dirents = await readdir(targetPath, { withFileTypes: true })
 
       await Promise.all(
         dirents.map(async (dirent) => {
-          const childName = dirent.name
+          const name = dirent.name
 
           if (!dirent.isDirectory()) return
 
-          const targetPath = path.join(
-            dirent.parentPath,
-            childName,
-            "registry.json",
+          const targetPath = path.join(dirent.parentPath, name, "registry.json")
+          const sources = (sourceMap[sectionName]?.[name] ?? []).sort((a, b) =>
+            a.name.localeCompare(b.name),
           )
-          const sources = (sourceMap[parentName]?.[childName] ?? []).sort(
-            (a, b) => a.name.localeCompare(b.name),
-          )
-          const dependencies = dependencyMap[parentName]?.[childName]
-          const dependents = dependentMap[parentName]?.[childName]
+          const dependencies = dependencyMap[sectionName]?.[name]
+          const dependents = dependentMap[sectionName]?.[name]
           const registry: Registry = {
-            type: parentName as RegistryType,
             dependencies,
             dependents,
+            section: sectionName as RegistrySection,
             sources,
           }
           const content = JSON.stringify(registry)
@@ -480,7 +478,7 @@ async function generateThemeRegistry() {
   )
 
   const registry: Registry = {
-    type: "theme",
+    section: "theme",
     sources: sources.sort((a, b) => a.name.localeCompare(b.name)),
   }
   const content = JSON.stringify(registry)
@@ -493,7 +491,7 @@ async function generateThemeRegistry() {
 async function generateIndexRegistry() {
   const index = await readFile(path.join(ENTRY_PATH, "index.ts"), "utf-8")
   const registry: Registry = {
-    type: "root",
+    section: "root",
     sources: [
       {
         name: "index.ts",
@@ -515,23 +513,23 @@ async function publishRegistries() {
 
   await Promise.all(
     filePaths.map(async (filePath) => {
-      const [parentName, childName] = filePath.split("/").slice(-3)
+      const [sectionName, name] = filePath.split("/").slice(-3)
 
-      if (!parentName || !childName) return
+      if (!sectionName || !name) return
 
       const content = await readFile(filePath, "utf-8")
 
       let targetPath: string
 
-      if (parentName === "react") {
+      if (sectionName === "react") {
         targetPath = path.join(PUBLIC_PATH, "index.json")
-      } else if (childName === "theme") {
+      } else if (name === "theme") {
         targetPath = path.join(PUBLIC_PATH, "theme.json")
       } else {
-        if (!existsSync(path.join(PUBLIC_PATH, parentName)))
-          await mkdir(path.join(PUBLIC_PATH, parentName), { recursive: true })
+        if (!existsSync(path.join(PUBLIC_PATH, sectionName)))
+          await mkdir(path.join(PUBLIC_PATH, sectionName), { recursive: true })
 
-        targetPath = path.join(PUBLIC_PATH, parentName, `${childName}.json`)
+        targetPath = path.join(PUBLIC_PATH, sectionName, `${name}.json`)
       }
 
       await writeFile(targetPath, content)

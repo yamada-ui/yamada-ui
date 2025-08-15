@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["motion"],
     "externals": ["motion@12.18.1"],
     "hooks": ["use-controllable-state"],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "airy.style.ts",

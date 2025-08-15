@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": [],
     "externals": ["motion@12.18.1"],
@@ -29,6 +28,7 @@
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "factory.ts",

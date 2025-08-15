@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["icon", "field"],
     "externals": [],
     "hooks": ["use-controllable-state"],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

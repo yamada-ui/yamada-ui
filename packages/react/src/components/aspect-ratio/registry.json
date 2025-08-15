@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": [],
     "externals": [],
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "aspect-ratio.style.ts",

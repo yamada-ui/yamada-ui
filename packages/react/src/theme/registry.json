@@ -1,5 +1,5 @@
 {
-  "type": "theme",
+  "section": "theme",
   "sources": [
     {
       "name": "config.ts",

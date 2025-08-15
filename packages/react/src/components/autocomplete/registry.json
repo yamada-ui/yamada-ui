@@ -1,15 +1,15 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["select", "field", "input", "group", "icon", "popover"],
     "externals": [],
     "hooks": ["use-combobox", "use-controllable-state"],
     "providers": ["i18n-provider"]
   },
+  "section": "components",
   "sources": [
     {
       "name": "autocomplete.style.ts",
-      "content": "import { defineComponentSlotStyle } from \"@yamada-ui/react\"\nimport { selectStyle } from \"../select/select.style\"\n\nexport const autocompleteStyle = defineComponentSlotStyle({\n  base: {\n    ...selectStyle.base,\n    empty: selectStyle.base?.option,\n  },\n\n  variants: {\n    filled: selectStyle.variants?.filled,\n    flushed: selectStyle.variants?.flushed,\n    outline: selectStyle.variants?.outline,\n    plain: selectStyle.variants?.plain,\n  },\n\n  sizes: {\n    xs: { ...selectStyle.sizes?.xs, empty: selectStyle.sizes?.xs.option },\n    sm: { ...selectStyle.sizes?.sm, empty: selectStyle.sizes?.sm.option },\n    md: { ...selectStyle.sizes?.md, empty: selectStyle.sizes?.md.option },\n    lg: { ...selectStyle.sizes?.lg, empty: selectStyle.sizes?.lg.option },\n    xl: { ...selectStyle.sizes?.xl, empty: selectStyle.sizes?.xl.option },\n  },\n\n  defaultProps: {\n    size: \"md\",\n    variant: \"outline\",\n  },\n})\n\nexport type AutocompleteStyle = typeof autocompleteStyle\n"
+      "content": "import { defineComponentSlotStyle } from \"@yamada-ui/react\"\nimport { selectStyle } from \"../select\"\n\nexport const autocompleteStyle = defineComponentSlotStyle({\n  base: {\n    ...selectStyle.base,\n    empty: selectStyle.base?.option,\n  },\n\n  variants: {\n    filled: selectStyle.variants?.filled,\n    flushed: selectStyle.variants?.flushed,\n    outline: selectStyle.variants?.outline,\n    plain: selectStyle.variants?.plain,\n  },\n\n  sizes: {\n    xs: { ...selectStyle.sizes?.xs, empty: selectStyle.sizes?.xs.option },\n    sm: { ...selectStyle.sizes?.sm, empty: selectStyle.sizes?.sm.option },\n    md: { ...selectStyle.sizes?.md, empty: selectStyle.sizes?.md.option },\n    lg: { ...selectStyle.sizes?.lg, empty: selectStyle.sizes?.lg.option },\n    xl: { ...selectStyle.sizes?.xl, empty: selectStyle.sizes?.xl.option },\n  },\n\n  defaultProps: {\n    size: \"md\",\n    variant: \"outline\",\n  },\n})\n\nexport type AutocompleteStyle = typeof autocompleteStyle\n"
     },
     {
       "name": "autocomplete.tsx",

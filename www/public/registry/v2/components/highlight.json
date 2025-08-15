@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["mark", "text"],
     "externals": [],
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "highlight.tsx",

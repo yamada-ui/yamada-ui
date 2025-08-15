@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["motion", "popover", "portal"],
     "externals": ["motion@12.18.1"],
@@ -11,6 +10,7 @@
     ],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["button", "input", "group", "icon", "field"],
     "externals": [],
     "hooks": ["use-counter", "use-event-listener", "use-interval"],
     "providers": ["i18n-provider"]
   },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

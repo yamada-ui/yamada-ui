@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": [],
     "externals": [],
@@ -7,6 +6,7 @@
     "providers": []
   },
   "dependents": { "components": ["client-only"], "hooks": [], "providers": [] },
+  "section": "components",
   "sources": [
     { "name": "index.ts", "content": "export * from \"./show\"\n" },
     {

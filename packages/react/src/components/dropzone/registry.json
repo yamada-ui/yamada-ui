@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["fade", "input", "loading", "portal", "field"],
     "externals": ["react-dropzone@^14.3.8", "file-selector@^2.1.2"],
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "accept-types.ts",

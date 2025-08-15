@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["group", "input", "icon", "field"],
     "externals": [],
@@ -11,6 +10,7 @@
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "checkbox-group.tsx",

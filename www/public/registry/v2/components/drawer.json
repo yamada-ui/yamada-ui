@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": [
       "modal",
@@ -15,6 +14,7 @@
     "hooks": ["use-value"],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "drawer.style.ts",

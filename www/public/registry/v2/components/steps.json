@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["icon"],
     "externals": [],
@@ -11,6 +10,7 @@
     ],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

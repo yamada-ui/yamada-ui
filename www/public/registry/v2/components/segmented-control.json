@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["field"],
     "externals": [],
     "hooks": ["use-value", "use-controllable-state", "use-descendants"],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["input", "field"],
     "externals": [],
     "hooks": ["use-controllable-state", "use-focus"],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "editable.style.ts",

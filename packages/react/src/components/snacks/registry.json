@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["close-button", "motion", "alert"],
     "externals": ["motion@12.18.1"],
     "hooks": ["use-timeout"],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

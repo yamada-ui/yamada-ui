@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["progress"],
     "externals": [],
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "circle-progress.style.ts",

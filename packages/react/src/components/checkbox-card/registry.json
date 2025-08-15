@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["checkbox", "group", "input", "icon"],
     "externals": [],
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "card-namespace.ts",

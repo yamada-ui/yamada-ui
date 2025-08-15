@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["input", "field", "group", "icon"],
     "externals": [],
@@ -7,6 +6,7 @@
     "providers": []
   },
   "dependents": { "components": ["select"], "hooks": [], "providers": [] },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

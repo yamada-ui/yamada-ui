@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["icon", "motion", "text", "portal", "center"],
     "externals": ["motion@12.18.1", "react-remove-scroll@^2.7.1"],
@@ -11,6 +10,7 @@
     "hooks": ["use-async-callback"],
     "providers": ["ui-provider"]
   },
+  "section": "components",
   "sources": [
     {
       "name": "audio.tsx",

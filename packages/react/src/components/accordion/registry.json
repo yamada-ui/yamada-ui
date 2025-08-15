@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["collapse", "motion", "icon"],
     "externals": [],
     "hooks": ["use-controllable-state", "use-descendants"],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "accordion.style.ts",

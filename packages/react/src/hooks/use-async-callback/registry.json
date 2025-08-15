@@ -1,11 +1,11 @@
 {
-  "type": "hooks",
   "dependencies": {
     "components": ["loading"],
     "externals": [],
     "hooks": ["use-processing"],
     "providers": []
   },
+  "section": "hooks",
   "sources": [
     {
       "name": "index.ts",

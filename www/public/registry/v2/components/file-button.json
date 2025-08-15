@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["button", "input", "portal", "field", "file-input"],
     "externals": [],
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "file-button.style.ts",

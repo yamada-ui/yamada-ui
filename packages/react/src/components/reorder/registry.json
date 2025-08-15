@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["motion", "icon"],
     "externals": ["motion@12.18.1"],
     "hooks": ["use-value"],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

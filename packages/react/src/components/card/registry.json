@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": [],
     "externals": [],
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "card.style.ts",

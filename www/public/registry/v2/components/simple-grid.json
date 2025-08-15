@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["grid"],
     "externals": [],
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

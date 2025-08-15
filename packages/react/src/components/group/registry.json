@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["flex"],
     "externals": [],
@@ -25,6 +24,7 @@
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "group.style.ts",

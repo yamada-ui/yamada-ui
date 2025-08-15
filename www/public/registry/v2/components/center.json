@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": [],
     "externals": [],
@@ -7,6 +6,7 @@
     "providers": []
   },
   "dependents": { "components": ["loading"], "hooks": [], "providers": [] },
+  "section": "components",
   "sources": [
     {
       "name": "center.style.ts",

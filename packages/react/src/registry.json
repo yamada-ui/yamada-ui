@@ -1,5 +1,5 @@
 {
-  "type": "root",
+  "section": "root",
   "sources": [
     {
       "name": "index.ts",

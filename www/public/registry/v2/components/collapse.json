@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["motion"],
     "externals": ["motion@12.18.1"],
@@ -7,6 +6,7 @@
     "providers": []
   },
   "dependents": { "components": ["accordion"], "hooks": [], "providers": [] },
+  "section": "components",
   "sources": [
     {
       "name": "collapse.style.ts",

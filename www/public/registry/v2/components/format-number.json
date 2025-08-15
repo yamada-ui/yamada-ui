@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": [],
     "externals": [],
@@ -7,6 +6,7 @@
     "providers": ["i18n-provider"]
   },
   "dependents": { "components": ["format-byte"], "hooks": [], "providers": [] },
+  "section": "components",
   "sources": [
     {
       "name": "format-number.style.ts",

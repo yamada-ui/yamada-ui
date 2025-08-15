@@ -1,8 +1,8 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { Kbd } from "."
-import { Text } from "../../components/text"
 import { COLOR_SCHEMES } from "../../utils"
+import { Text } from "../text"
 
 type Story = StoryFn<typeof Kbd>
 

@@ -2,11 +2,11 @@ import type { Meta, StoryFn } from "@storybook/react-vite"
 import { faker } from "@faker-js/faker"
 import { useMemo } from "react"
 import { For } from "."
-import { Card } from "../../components/card"
-import { VStack } from "../../components/stack"
-import { Text } from "../../components/text"
+import { Card } from "../card"
 import { EmptyState } from "../empty-state"
 import { BoxIcon } from "../icon"
+import { VStack } from "../stack"
+import { Text } from "../text"
 
 type Story = StoryFn<typeof For>
 

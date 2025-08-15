@@ -1,14 +1,7 @@
 {
   "type": "components",
   "dependencies": {
-    "components": [
-      "select.style",
-      "field",
-      "input",
-      "group",
-      "icon",
-      "popover"
-    ],
+    "components": ["select", "field", "input", "group", "icon", "popover"],
     "externals": [],
     "hooks": ["use-combobox", "use-controllable-state"],
     "providers": ["i18n-provider"]

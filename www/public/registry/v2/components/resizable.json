@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": [],
     "externals": ["react-resizable-panels@^3.0.4"],
     "hooks": ["use-value"],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

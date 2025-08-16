@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["group", "input", "field"],
     "externals": [],
@@ -7,6 +6,7 @@
     "providers": []
   },
   "dependents": { "components": ["radio-card"], "hooks": [], "providers": [] },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

@@ -1,5 +1,4 @@
 {
-  "type": "hooks",
   "dependencies": {
     "components": [],
     "externals": [],
@@ -18,6 +17,7 @@
     "hooks": ["use-combobox"],
     "providers": []
   },
+  "section": "hooks",
   "sources": [
     {
       "name": "index.ts",

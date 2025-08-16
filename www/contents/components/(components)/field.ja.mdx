@@ -5,4 +5,242 @@ storybook: components-field--basic
 source: components/field
 ---
 
+```tsx preview
+<Field.Root label="Email address">
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Field } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Field } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Field } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Field.Root>
+  <Field.Label />
+  <Field.HelperMessage />
+  <Field.ErrorMessage />
+</Field.Root>
+```
+
+### ヘルプメッセージを表示する
+
+ヘルプメッセージを表示する場合は、`helperMessage`に`ReactNode`を設定します。
+
+```tsx preview
+<Field.Root helperMessage="We'll never share your email." label="Email address">
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+または、`Field.HelperMessage`を使用してカスタマイズすることも可能です。
+
+```tsx preview
+<Field.Root label="Email address">
+  <Input type="email" placeholder="your email address" />
+  <Field.HelperMessage color="warning">
+    We'll never share your email.
+  </Field.HelperMessage>
+</Field.Root>
+```
+
+### エラーメッセージを表示する
+
+エラーメッセージを表示する場合は、`invalid`を`true`に設定し、`errorMessage`に`ReactNode`を設定します。
+
+```tsx preview
+<Field.Root errorMessage="Email is required." invalid label="Email address">
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+または、`Field.ErrorMessage`を使用してカスタマイズすることも可能です。
+
+```tsx preview
+<Field.Root invalid label="Email address">
+  <Input type="email" placeholder="your email address" />
+  <Field.ErrorMessage color="success">Email is required.</Field.ErrorMessage>
+</Field.Root>
+```
+
+### ヘルプメッセージとエラーメッセージの置き換える
+
+エラーメッセージは、`invalid`が`true`の場合のみ表示されます。エラーメッセージが表示されたときに、ヘルプメッセージをエラーメッセージで置き換える場合は、`replace`を`true`に設定します。
+デフォルトでは、`true`に設定されています。
+
+```tsx preview
+<VStack gap="md">
+  <Field.Root
+    errorMessage="Email is required."
+    helperMessage="We'll never share your email."
+    invalid
+    label="Email address"
+    replace
+  >
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+
+  <Field.Root
+    errorMessage="Email is required."
+    helperMessage="We'll never share your email."
+    invalid
+    label="Email address"
+    replace={false}
+  >
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+</VStack>
+```
+
+### 必須化する
+
+必須化する場合は、`required`を`true`に設定します。
+
+```tsx preview
+<Field.Root
+  helperMessage="We'll never share your email."
+  label="Email address"
+  required
+>
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+### 無効化する
+
+無効化する場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<Field.Root
+  disabled
+  helperMessage="We'll never share your email."
+  label="Email address"
+>
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<Field.Root
+  helperMessage="We'll never share your email."
+  label="Email address"
+  readOnly
+>
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+### 方向を変更する
+
+方向を変更する場合は、`orientation`に`horizontal`または`vertical`を設定します。デフォルトでは、`vertical`が設定されています。
+
+```tsx preview
+<VStack gap="md">
+  <For each={["vertical", "horizontal"]}>
+    {(orientation, index) => (
+      <Field.Root
+        key={index}
+        helperMessage="We'll never share your email."
+        label="Email address"
+        orientation={orientation}
+      >
+        <Input type="email" placeholder="your email address" />
+      </Field.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### ラベルをカスタマイズする
+
+ラベルをカスタマイズする場合は、`Field.Label`を使用します。
+
+```tsx preview
+<Field.Root>
+  <Field.Label color="success">Email address</Field.Label>
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+### 必須インジケーターをカスタマイズする
+
+必須インジケーターをカスタマイズする場合は、`requiredIndicator`に`ReactNode`を設定します。
+
+```tsx preview
+<VStack gap="md">
+  <Field.Root
+    label="Email address"
+    required
+    requiredIndicator={
+      <Tag colorScheme="red" size="sm">
+        required
+      </Tag>
+    }
+  >
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+
+  <Field.Root required>
+    <Field.Label
+      requiredIndicator={
+        <Tag colorScheme="red" size="sm">
+          required
+        </Tag>
+      }
+    >
+      Email address
+    </Field.Label>
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+</VStack>
+```
+
+### オプショナルインジケーターを使う
+
+オプショナルインジケーターを使う場合は、`optionalIndicator`に`ReactNode`を設定します。
+
+```tsx preview
+<VStack gap="md">
+  <Field.Root
+    label="Email address"
+    optionalIndicator={
+      <Tag colorScheme="primary" size="sm">
+        optional
+      </Tag>
+    }
+  >
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+
+  <Field.Root>
+    <Field.Label
+      optionalIndicator={
+        <Tag colorScheme="primary" size="sm">
+          optional
+        </Tag>
+      }
+    >
+      Email address
+    </Field.Label>
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+</VStack>
+```

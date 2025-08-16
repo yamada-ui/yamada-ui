@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["show"],
     "externals": [],
     "hooks": ["use-mounted"],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "client-only.tsx",

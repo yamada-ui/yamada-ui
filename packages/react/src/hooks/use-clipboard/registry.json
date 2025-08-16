@@ -1,11 +1,11 @@
 {
-  "type": "hooks",
   "dependencies": {
     "components": [],
     "externals": ["copy-to-clipboard@3.3.3"],
     "hooks": [],
     "providers": []
   },
+  "section": "hooks",
   "sources": [
     {
       "name": "index.ts",

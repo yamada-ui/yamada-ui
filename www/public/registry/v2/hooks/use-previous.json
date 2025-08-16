@@ -1,11 +1,11 @@
 {
-  "type": "hooks",
   "dependencies": {
     "components": [],
     "externals": [],
     "hooks": [],
     "providers": []
   },
+  "section": "hooks",
   "sources": [
     {
       "name": "index.ts",

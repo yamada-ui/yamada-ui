@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["fieldset"],
     "externals": [],
@@ -31,6 +30,7 @@
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "field.style.ts",

@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["button", "icon"],
     "externals": ["embla-carousel@^8.6.0", "embla-carousel-react@^8.6.0"],
     "hooks": ["use-value", "use-boolean", "use-controllable-state"],
     "providers": ["i18n-provider"]
   },
+  "section": "components",
   "sources": [
     {
       "name": "carousel.style.ts",

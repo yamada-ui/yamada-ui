@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["field"],
     "externals": [],
@@ -7,6 +6,7 @@
     "providers": ["i18n-provider"]
   },
   "dependents": { "components": ["hue-slider"], "hooks": [], "providers": [] },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

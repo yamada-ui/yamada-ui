@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["slider"],
     "externals": [],
@@ -11,6 +10,7 @@
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "hue-slider.style.ts",

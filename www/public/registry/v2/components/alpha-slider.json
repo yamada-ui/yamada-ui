@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["color-swatch", "hue-slider"],
     "externals": [],
     "hooks": ["use-value"],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "alpha-slider.style.ts",

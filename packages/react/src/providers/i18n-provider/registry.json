@@ -1,5 +1,4 @@
 {
-  "type": "providers",
   "dependencies": {
     "components": [],
     "externals": ["intl-messageformat@^10.7.16"],
@@ -30,6 +29,7 @@
     "hooks": [],
     "providers": ["ui-provider"]
   },
+  "section": "providers",
   "sources": [
     {
       "name": "i18n-cache.ts",

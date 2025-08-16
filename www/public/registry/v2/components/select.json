@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": [
       "menu",
@@ -14,10 +13,16 @@
     "hooks": ["use-combobox", "use-controllable-state"],
     "providers": ["i18n-provider"]
   },
+  "dependents": {
+    "components": ["autocomplete"],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",
-      "content": "export * as Select from \"./namespace\"\nexport {\n  SelectGroup,\n  SelectLabel,\n  SelectOption,\n  SelectPropsContext,\n  SelectRoot,\n  SelectSeparator,\n  useSelectPropsContext,\n} from \"./select\"\nexport type {\n  SelectGroupProps,\n  SelectLabelProps,\n  SelectOptionProps,\n  SelectRootProps,\n  SelectSeparatorProps,\n} from \"./select\"\nexport * from \"./use-select\"\n"
+      "content": "export * from \"./select.style\"\nexport * as Select from \"./namespace\"\nexport {\n  SelectGroup,\n  SelectLabel,\n  SelectOption,\n  SelectPropsContext,\n  SelectRoot,\n  SelectSeparator,\n  useSelectPropsContext,\n} from \"./select\"\nexport type {\n  SelectGroupProps,\n  SelectLabelProps,\n  SelectOptionProps,\n  SelectRootProps,\n  SelectSeparatorProps,\n} from \"./select\"\nexport * from \"./use-select\"\n"
     },
     {
       "name": "namespace.ts",

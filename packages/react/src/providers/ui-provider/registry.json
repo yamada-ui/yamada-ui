@@ -1,11 +1,11 @@
 {
-  "type": "providers",
   "dependencies": {
     "components": ["loading"],
     "externals": [],
     "hooks": [],
     "providers": ["i18n-provider"]
   },
+  "section": "providers",
   "sources": [
     { "name": "index.ts", "content": "export * from \"./ui-provider\"\n" },
     {

@@ -1,5 +1,4 @@
 {
-  "type": "hooks",
   "dependencies": {
     "components": [],
     "externals": ["scroll-into-view-if-needed@^3.1.0"],
@@ -11,6 +10,7 @@
     "hooks": [],
     "providers": []
   },
+  "section": "hooks",
   "sources": [
     {
       "name": "index.tsx",

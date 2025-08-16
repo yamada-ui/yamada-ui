@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["group", "input", "radio"],
     "externals": [],
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "card-namespace.ts",

@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["float"],
     "externals": [],
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

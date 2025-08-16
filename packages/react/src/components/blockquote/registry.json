@@ -1,11 +1,11 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["icon"],
     "externals": [],
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "blockquote.style.ts",

@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["grid"],
     "externals": [],
@@ -11,6 +10,7 @@
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "color-swatch-group.tsx",

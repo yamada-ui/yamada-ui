@@ -1,5 +1,4 @@
 {
-  "type": "components",
   "dependencies": {
     "components": ["motion", "portal", "fade-scale", "slide-fade"],
     "externals": ["motion@12.18.1"],
@@ -17,6 +16,7 @@
     "hooks": [],
     "providers": []
   },
+  "section": "components",
   "sources": [
     {
       "name": "index.ts",

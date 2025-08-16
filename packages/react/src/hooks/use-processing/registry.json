@@ -1,5 +1,4 @@
 {
-  "type": "hooks",
   "dependencies": {
     "components": [],
     "externals": [],
@@ -11,6 +10,7 @@
     "hooks": ["use-async-callback"],
     "providers": []
   },
+  "section": "hooks",
   "sources": [
     {
       "name": "index.ts",

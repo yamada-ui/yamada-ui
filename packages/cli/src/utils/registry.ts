@@ -10,6 +10,7 @@ import { readdir } from "fs/promises"
 import { HttpsProxyAgent } from "https-proxy-agent"
 import fetch from "node-fetch"
 import path from "path"
+import c from "picocolors"
 import { REGISTRY_URL, SECTION_NAMES } from "../constant"
 import { writeFileSafe } from "./fs"
 import { format } from "./prettier"
@@ -77,10 +78,12 @@ export async function fetchRegistry(
       case 400:
       case 401:
       case 403:
-        throw new Error(`You do not have access to the registry at ${name}.`)
+        throw new Error(
+          `You do not have access to the registry at ${c.red(name)}.`,
+        )
       case 404:
         throw new Error(
-          `The registry at ${name} was not found. Please make sure the registry is available.`,
+          `The registry at ${c.red(name)} was not found. Please make sure the registry is available.`,
         )
       case 500:
       case 501:
@@ -89,7 +92,7 @@ export async function fetchRegistry(
         throw new Error(`Service unavailable. Please try again later.`)
       default:
         throw new Error(
-          `An error occurred while fetching the registry at ${name}. Please try again later.`,
+          `An error occurred while fetching the registry at ${c.red(name)}. Please try again later.`,
         )
     }
   }
@@ -98,6 +101,7 @@ export async function fetchRegistry(
 export interface FetchRegistriesOptions extends FetchRegistryOptions {
   dependencies?: boolean
   dependents?: boolean
+  omit?: string[]
 }
 
 export async function fetchRegistries(
@@ -107,6 +111,7 @@ export async function fetchRegistries(
     cache = true,
     dependencies: withDependencies = true,
     dependents: withDependents = true,
+    omit = [],
   }: FetchRegistriesOptions = {},
 ): Promise<Registries> {
   const results: { [key: string]: Promise<Registry> | Registry } = {}
@@ -114,7 +119,7 @@ export async function fetchRegistries(
   async function fetch(names: string[]) {
     await Promise.all(
       names.map(async (name) => {
-        if (results[name]) return
+        if (results[name] || omit.includes(name)) return
 
         results[name] = fetchRegistry(name, { cache })
 
@@ -213,13 +218,13 @@ export function transformTemplate(
       if (!generated || !section) return
 
       if (section === targetSection) {
-        replaceValue = `from "../${name}"`
+        replaceValue = `from "${path.join("..", name)}"`
       } else {
-        const { path } = getSection(section) ?? {}
+        const { path: relativePath } = getSection(section) ?? {}
 
-        if (!path) return
+        if (!relativePath) return
 
-        replaceValue = `from "${path}/${name}"`
+        replaceValue = `from "${path.join("..", "..", relativePath, name)}"`
       }
     } else {
       const depth = (value.match(/\.\.\//g) || []).length
@@ -228,7 +233,7 @@ export function transformTemplate(
 
       if (depth === 1) {
         if (generated) {
-          replaceValue = `from "../${name}"`
+          replaceValue = `from "${path.join("..", name)}"`
         } else {
           replaceValue = `from "@yamada-ui/react/${targetSection}/${name}"`
         }

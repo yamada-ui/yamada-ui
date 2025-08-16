@@ -72,6 +72,10 @@ export const add = new Command("add")
 
       spinner.succeed("Fetched config")
 
+      let generatedNameMap: undefined | { [key in Section]: string[] }
+
+      const omittedGeneratedNames: string[] = []
+
       if (all) {
         const { proceed } = await prompts({
           type: "confirm",
@@ -100,6 +104,36 @@ export const add = new Command("add")
         componentNames = await fetchRegistryNames()
 
         spinner.succeed("Fetched all available components")
+      } else {
+        spinner.start("Getting generated data")
+
+        generatedNameMap = await getGeneratedNameMap(config)
+
+        const generatedNames = Object.values(generatedNameMap).flat()
+        const existsNames = componentNames.filter((name) =>
+          generatedNames.includes(name),
+        )
+
+        spinner.succeed("Got generated data")
+
+        if (!overwrite && existsNames.length) {
+          const colorizedNames = existsNames.map((name) => c.yellow(name))
+
+          const { overwrite } = await prompts({
+            type: "confirm",
+            name: "overwrite",
+            initial: false,
+            message: c.reset(
+              `The ${colorizedNames.join(", ")} components already exist. Do you want to overwrite them?`,
+            ),
+          })
+
+          if (!overwrite) process.exit(0)
+        }
+
+        omittedGeneratedNames.push(
+          ...generatedNames.filter((name) => !componentNames.includes(name)),
+        )
       }
 
       spinner.start("Fetching registries")
@@ -107,6 +141,7 @@ export const add = new Command("add")
       const registries = await fetchRegistries(componentNames, config, {
         dependencies: !all,
         dependents: !all,
+        omit: omittedGeneratedNames,
       })
       const registryNames = Object.keys(registries)
       const dependencies = [
@@ -117,38 +152,24 @@ export const add = new Command("add")
             .flat(),
         ),
       ]
+      const affectedNames = [
+        ...new Set(
+          Object.values(registries)
+            .map(({ dependents }) => [
+              ...(dependents?.components ?? []),
+              ...(dependents?.hooks ?? []),
+              ...(dependents?.providers ?? []),
+            ])
+            .flat()
+            .filter((dependent) => omittedGeneratedNames.includes(dependent)),
+        ),
+      ]
 
       spinner.succeed("Fetched registries")
 
-      spinner.start("Getting generated data")
-
-      const generatedNameMap = await getGeneratedNameMap(config)
-      const generatedNames = Object.values(generatedNameMap).flat()
-      const omittedGeneratedNames = generatedNames.filter(
-        (name) => !registryNames.includes(name),
-      )
-      const existsNames = registryNames.filter((name) =>
-        generatedNames.includes(name),
-      )
-
-      spinner.succeed("Got generated data")
-
-      if (!all && !overwrite && existsNames.length) {
-        const colorizedNames = existsNames.map((name) => c.yellow(name))
-
-        const { overwrite } = await prompts({
-          type: "confirm",
-          name: "overwrite",
-          initial: false,
-          message: c.reset(
-            `The ${colorizedNames.join(", ")} components already exist. Do you want to overwrite them?`,
-          ),
-        })
-
-        if (!overwrite) process.exit(0)
-      }
-
-      const unionNames = [...new Set([...generatedNames, ...registryNames])]
+      const targetNames = [
+        ...new Set([...omittedGeneratedNames, ...registryNames]),
+      ]
 
       const tasks = new Listr(
         Object.entries(registries)
@@ -161,7 +182,7 @@ export const add = new Command("add")
 
             return {
               task: async (_, task) => {
-                await generateSources(dirPath, registry, config, unionNames)
+                await generateSources(dirPath, registry, config, targetNames)
 
                 task.title = `Generated ${c.cyan(name)}`
               },
@@ -177,7 +198,7 @@ export const add = new Command("add")
           task: async (_, task) => {
             const targetPath = path.resolve(config.srcPath, "index.ts")
             const data = replaceIndex(
-              unionNames,
+              targetNames,
               await readFile(targetPath, "utf-8"),
               config,
             )
@@ -194,7 +215,7 @@ export const add = new Command("add")
           task: async (_, task) => {
             const { sources } = await fetchRegistry("index")
             const targetPath = path.resolve(config.srcPath, "index.ts")
-            const data = replaceIndex(unionNames, sources[0]!.content!, config)
+            const data = replaceIndex(targetNames, sources[0]!.content!, config)
             const content = await format(data)
 
             await writeFileSafe(targetPath, content)
@@ -205,16 +226,14 @@ export const add = new Command("add")
         })
       }
 
-      if (omittedGeneratedNames.length) {
+      if (affectedNames.length && generatedNameMap) {
         if (!overwrite) {
-          const colorizedNames = omittedGeneratedNames.map((name) =>
-            c.yellow(name),
-          )
+          const colorizedNames = affectedNames.map((name) => c.yellow(name))
 
           const { update } = await prompts({
             type: "confirm",
             name: "update",
-            initial: false,
+            initial: true,
             message: c.reset(
               `The following generated files will be updated: ${colorizedNames.join(", ")}. Do you want to update them?`,
             ),
@@ -226,7 +245,7 @@ export const add = new Command("add")
         if (overwrite) {
           Object.entries(generatedNameMap).forEach(([section, names]) => {
             names.forEach((name) => {
-              if (!omittedGeneratedNames.includes(name)) return
+              if (!affectedNames.includes(name)) return
 
               tasks.add({
                 task: async (_, task) => {
@@ -250,7 +269,7 @@ export const add = new Command("add")
                         section as Section,
                         await readFile(targetPath, "utf-8"),
                         config,
-                        unionNames,
+                        targetNames,
                       )
 
                       await writeFileSafe(targetPath, await format(content))

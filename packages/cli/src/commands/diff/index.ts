@@ -1,28 +1,42 @@
 import { Command } from "commander"
 import ora from "ora"
-import c from "picocolors"
 import { CONFIG_FILE_NAME } from "../../constant"
+import { getConfig, timer, validateDir } from "../../utils"
 
 interface Options {
+  config: string
   cwd: string
 }
 
 export const diff = new Command("diff")
   .description("Check for updates against the registry")
+  .argument("[component]", "Component to check")
   .option("--cwd <path>", "Current working directory", process.cwd())
   .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
-  .action(function ({ cwd }: Options) {
+  .action(async function (
+    componentName: string,
+    { config: configPath, cwd }: Options,
+  ) {
     const spinner = ora()
 
     try {
-      const start = process.hrtime.bigint()
+      const { end } = timer()
 
-      console.log(cwd)
+      spinner.start("Validating directory")
 
-      const end = process.hrtime.bigint()
-      const duration = (Number(end - start) / 1e9).toFixed(2)
+      await validateDir(cwd)
 
-      console.log("\n", c.green(`Done in ${duration}s`))
+      spinner.succeed("Validated directory")
+
+      spinner.start("Fetching config")
+
+      const config = await getConfig(cwd, configPath)
+
+      console.log(config)
+
+      spinner.succeed("Fetched config")
+
+      end()
     } catch (e) {
       if (e instanceof Error) {
         spinner.fail(e.message)

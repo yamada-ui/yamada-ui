@@ -1,61 +1,73 @@
-import type { Config, Data } from "../../index.type"
+import type { PackageNameWithVersion, UserConfig } from "../../index.type"
+import { isObject } from "@yamada-ui/utils"
 import boxen from "boxen"
 import { Command } from "commander"
 import { existsSync } from "fs"
+import { Listr } from "listr2"
 import ora from "ora"
 import path from "path"
 import c from "picocolors"
 import prompts from "prompts"
+import { rimraf } from "rimraf"
 import {
   CONFIG_FILE_NAME,
   DEFAULT_PACKAGE_JSON,
   DEFAULT_PACKAGE_NAME,
-  PATH,
-  REGISTRY_URL,
+  DEFAULT_PATH,
+  DEFAULT_SECTION_CONFIG,
+  REQUIRED_DEPENDENCIES,
+  REQUIRED_DEV_DEPENDENCIES,
   TSCONFIG_JSON,
 } from "../../constant"
 import {
   addWorkspace,
+  fetchRegistry,
   format,
+  getNotInstalledDependencies,
   getPackageJson,
   getPackageManager,
+  getPackageName,
   installDependencies,
-  requireDependencies,
+  packageAddCommand,
+  timer,
+  validateDir,
   writeFileSafe,
 } from "../../utils"
 
 interface Options {
   config: string
   cwd: string
+  overwrite: boolean
 }
 
 export const init = new Command("init")
   .description("Initialize your project and install dependencies")
   .option("--cwd <path>", "Current working directory", process.cwd())
   .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
-  .action(async function ({ config: configPath, cwd }: Options) {
+  .option("-o, --overwrite", "Overwrite existing files.", false)
+  .action(async function ({ config: configPath, cwd, overwrite }: Options) {
     const spinner = ora()
 
     try {
-      const start = process.hrtime.bigint()
+      const { end } = timer()
+
+      await validateDir(cwd)
 
       const configFileName = configPath.includes("/")
         ? configPath.split("/").at(-1)!
         : configPath
-      const config: Config = {
-        components: { ignore: [], path: "./components" },
-        hooks: { ignore: [], path: "./hooks" },
-        providers: { ignore: [], path: "./providers" },
-      }
+      const config: UserConfig = { ...DEFAULT_SECTION_CONFIG }
 
       configPath = path.resolve(cwd, configPath)
 
       let dependencies: string[] | undefined
+      let devDependencies: string[] | undefined
 
       let {
+        src = true,
         monorepo = true,
-        outdir,
-        packageName,
+        outdir = "",
+        packageName = "",
       } = await prompts([
         {
           type: "toggle",
@@ -63,29 +75,39 @@ export const init = new Command("init")
           active: "Yes",
           inactive: "No",
           initial: true,
-          message: `Would you like to use monorepo? (recommended)`,
+          message: c.reset(`Would you like to use monorepo? (recommended)`),
         },
         {
           type: "text",
           name: "outdir",
           initial: (_, { monorepo }) =>
-            monorepo ? PATH.MONOREPO : PATH.POLYREPO,
+            monorepo ? DEFAULT_PATH.monorepo : DEFAULT_PATH.polyrepo,
           message: (_, { monorepo }) =>
             monorepo
-              ? `What is the path to the monorepo?`
-              : `What is the path to the directory?`,
+              ? c.reset(`What is the path to the monorepo?`)
+              : c.reset(`What is the path to the directory?`),
         },
         {
           type: (_, { monorepo }) => (monorepo ? "text" : null),
           name: "packageName",
           initial: DEFAULT_PACKAGE_NAME,
-          message: "What is the package name?",
+          message: c.reset("What is the package name?"),
+        },
+        {
+          type: (_, { monorepo }) => (monorepo ? "toggle" : null),
+          name: "src",
+          active: "Yes",
+          inactive: "No",
+          initial: true,
+          message: c.reset(
+            "Would you like your code inside a `src/` directory?",
+          ),
         },
       ])
 
       // eslint-disable-next-line no-control-regex
       outdir = outdir.replace(/\x17/g, "").trim()
-      outdir ||= monorepo ? PATH.MONOREPO : PATH.POLYREPO
+      outdir ||= monorepo ? DEFAULT_PATH.monorepo : DEFAULT_PATH.polyrepo
       // eslint-disable-next-line no-control-regex
       packageName = packageName.replace(/\x17/g, "").trim()
       packageName ||= DEFAULT_PACKAGE_NAME
@@ -97,17 +119,19 @@ export const init = new Command("init")
         type: "confirm",
         name: "generate",
         initial: true,
-        message: `Generate ${c.cyan(configFileName)}. Proceed?`,
+        message: c.reset(`Generate ${c.cyan(configFileName)}. Proceed?`),
       })
 
       if (!generate) process.exit(0)
 
-      if (existsSync(configPath)) {
+      if (!overwrite && existsSync(configPath)) {
         const { overwrite } = await prompts({
           type: "confirm",
           name: "overwrite",
           initial: false,
-          message: `The config file already exists. Do you want to overwrite it?`,
+          message: c.reset(
+            `The config file already exists. Do you want to overwrite it?`,
+          ),
         })
 
         if (!overwrite) process.exit(0)
@@ -122,123 +146,208 @@ export const init = new Command("init")
 
       spinner.succeed(`Generated ${c.cyan(configFileName)}`)
 
+      const outdirPath = path.resolve(cwd, outdir)
+
+      if (!overwrite && existsSync(outdirPath)) {
+        const { overwrite } = await prompts({
+          type: "confirm",
+          name: "overwrite",
+          initial: false,
+          message: c.reset(
+            `The ${c.yellow(outdir)} directory already exists. Do you want to overwrite it?`,
+          ),
+        })
+
+        if (!overwrite) process.exit(0)
+
+        spinner.start("Clearing directory")
+
+        await rimraf(outdirPath)
+
+        spinner.succeed("Cleared directory")
+      }
+
       if (monorepo) {
-        const outdirPath = path.resolve(cwd, outdir)
-
-        if (existsSync(outdirPath)) throw new Error(`${outdir} already exists`)
-
-        const packageJson = { name: packageName, ...DEFAULT_PACKAGE_JSON }
-        const tsconfigJson = { ...TSCONFIG_JSON }
-
-        spinner.start("Fetching data")
-
-        const data = await fetch(path.join(REGISTRY_URL, "index.json"))
-        const { sources } = (await data.json()) as Data
-
-        spinner.succeed("Fetched data")
-
         const { generate } = await prompts({
           type: "confirm",
           name: "generate",
           initial: true,
-          message: `Generate ${c.cyan(packageName)}. Proceed?`,
+          message: c.reset(`Generate ${c.cyan(packageName)}. Proceed?`),
         })
 
         if (!generate) process.exit(0)
 
-        spinner.start(`Generating ${c.cyan(packageName)}`)
-
-        await Promise.all(
+        const tasks = new Listr(
           [
             {
-              content: await format(JSON.stringify(packageJson), {
-                parser: "json",
-              }),
-              path: path.resolve(outdirPath, "package.json"),
+              task: async (_, task) => {
+                const targetPath = path.resolve(outdirPath, "package.json")
+                const data = JSON.stringify({
+                  name: packageName,
+                  ...DEFAULT_PACKAGE_JSON,
+                })
+                const content = await format(data, { parser: "json" })
+
+                await writeFileSafe(targetPath, content)
+
+                task.title = `Generated ${c.cyan("package.json")}`
+              },
+              title: `Generating ${c.cyan("package.json")}`,
             },
             {
-              content: await format(JSON.stringify(tsconfigJson), {
-                parser: "json",
-              }),
-              path: path.resolve(outdirPath, "tsconfig.json"),
+              task: async (_, task) => {
+                const targetPath = path.resolve(outdirPath, "tsconfig.json")
+                const data = JSON.stringify({ ...TSCONFIG_JSON })
+                const content = await format(data, { parser: "json" })
+
+                await writeFileSafe(targetPath, content)
+
+                task.title = `Generated ${c.cyan("tsconfig.json")}`
+              },
+              title: `Generating ${c.cyan("tsconfig.json")}`,
             },
-            ...(await Promise.all(
-              sources.map(async ({ name, content }) => ({
-                content: await format(content),
-                path: path.resolve(outdirPath, "src", name),
-              })),
-            )),
-          ].map(({ content, path }) => writeFileSafe(path, content)),
+            {
+              task: async (_, task) => {
+                const targetPath = path.resolve(
+                  outdirPath,
+                  src ? "src" : "",
+                  "index.ts",
+                )
+                const { sources } = await fetchRegistry("index")
+                const content = await format(sources[0]!.content!)
+
+                await writeFileSafe(targetPath, content)
+
+                task.title = `Generated ${c.cyan("index.ts")}`
+              },
+              title: `Generating ${c.cyan("index.ts")}`,
+            },
+            {
+              task: async (_, task) => {
+                if (outdir.includes("/")) {
+                  const path = `${outdir.replace(/^\.\//, "").split("/")[0]}/**`
+
+                  await addWorkspace(cwd, path)
+                } else {
+                  await addWorkspace(cwd, outdir)
+                }
+
+                task.title = "Added workspace"
+              },
+              title: "Adding workspace",
+            },
+          ],
+          { concurrent: true },
         )
 
-        spinner.succeed(`Generated ${c.cyan(packageName)}`)
-
-        spinner.start("Adding workspace")
-
-        if (outdir.includes("/")) {
-          const path = `${outdir.replace(/^\.\//, "").split("/")[0]}/**`
-
-          await addWorkspace(cwd, path)
-        } else {
-          await addWorkspace(cwd, outdir)
-        }
-
-        spinner.succeed("Added workspace")
+        await tasks.run()
 
         const { install } = await prompts({
           type: "confirm",
           name: "install",
           initial: true,
-          message: `The workspace is generated. Do you want to install dependencies?`,
+          message: c.reset(
+            `The workspace is generated. Do you want to install dependencies?`,
+          ),
         })
 
         if (install) dependencies = []
       } else {
-        spinner.start("Getting package.json")
+        const notInstalledDependencies: PackageNameWithVersion[] = []
+        const notInstalledDevDependencies: PackageNameWithVersion[] = []
 
-        const packageJson = await getPackageJson(cwd)
-        const requiredDependencies = requireDependencies(packageJson, [
-          "react",
-          "react-dom",
-          "@yamada-ui/react",
-        ])
-        const notInstalledDependencies = Object.entries(
-          requiredDependencies,
-        ).filter(([_, version]) => !version)
+        const tasks = new Listr(
+          [
+            {
+              task: async (_, task) => {
+                const packageJson = await getPackageJson(cwd)
 
-        spinner.succeed("Got package.json")
+                notInstalledDependencies.push(
+                  ...getNotInstalledDependencies(
+                    packageJson,
+                    REQUIRED_DEPENDENCIES,
+                  ),
+                )
 
-        if (notInstalledDependencies.length) {
-          const dependencyNames = notInstalledDependencies.map(([name]) =>
-            c.cyan(name),
+                notInstalledDevDependencies.push(
+                  ...getNotInstalledDependencies(
+                    packageJson,
+                    REQUIRED_DEV_DEPENDENCIES,
+                  ),
+                )
+
+                task.title = `Checked ${c.cyan("package.json")} dependencies`
+              },
+              title: `Checking ${c.cyan("package.json")} dependencies`,
+            },
+            {
+              task: async (_, task) => {
+                const { sources } = await fetchRegistry("index")
+                const targetPath = path.resolve(outdirPath, "index.ts")
+                const content = await format(sources[0]!.content!)
+
+                await writeFileSafe(targetPath, content)
+
+                task.title = `Generated ${c.cyan("index.ts")}`
+              },
+              title: `Generating ${c.cyan("index.ts")}`,
+            },
+          ],
+          { concurrent: true },
+        )
+
+        await tasks.run()
+
+        if (
+          notInstalledDependencies.length ||
+          notInstalledDevDependencies.length
+        ) {
+          const colorizedNames = [
+            ...notInstalledDependencies,
+            ...notInstalledDevDependencies,
+          ].map((value) =>
+            c.cyan(
+              isObject(value)
+                ? value.current
+                  ? `${value.name}@${value.current}->${c.red(value.wanted)}`
+                  : value.name
+                : value,
+            ),
           )
 
           const { install } = await prompts({
             type: "confirm",
             name: "install",
             initial: true,
-            message: `The following dependencies are not installed: ${dependencyNames.join(", ")}. Do you want to install them?`,
+            message: c.reset(
+              `The following dependencies are not installed: ${colorizedNames.join(", ")}. Do you want to install them?`,
+            ),
           })
 
-          if (install) dependencies = dependencyNames
+          if (install) {
+            dependencies = notInstalledDependencies.map(getPackageName)
+            devDependencies = notInstalledDevDependencies.map(getPackageName)
+          }
         }
       }
 
-      if (dependencies) {
+      if (dependencies || devDependencies) {
         spinner.start("Installing dependencies")
 
-        installDependencies(cwd, dependencies)
+        if (dependencies) installDependencies(dependencies, { cwd })
+        if (devDependencies)
+          installDependencies(devDependencies, { cwd, dev: true })
 
         spinner.succeed("Installed dependencies")
       }
 
       if (packageName) {
         const packageManager = getPackageManager()
-        const command = packageManager === "npm" ? "install" : "add"
+        const command = packageAddCommand(packageManager)
 
         console.log(
           boxen(
-            `Run ${c.cyan(`${packageManager} ${command} "${packageName}@workspace:*"`)} in your application.`,
+            `Run ${c.cyan(`${command} "${packageName}@workspace:*"`)} in your application.`,
             {
               borderColor: "yellow",
               borderStyle: "round",
@@ -250,10 +359,7 @@ export const init = new Command("init")
         )
       }
 
-      const end = process.hrtime.bigint()
-      const duration = (Number(end - start) / 1e9).toFixed(2)
-
-      console.log("\n", c.green(`Done in ${duration}s`))
+      end()
     } catch (e) {
       if (e instanceof Error) {
         spinner.fail(e.message)

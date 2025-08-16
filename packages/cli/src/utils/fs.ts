@@ -1,5 +1,6 @@
-import fs, { existsSync } from "fs"
+import fs, { existsSync, statSync } from "fs"
 import { mkdir, writeFile } from "fs/promises"
+import c from "picocolors"
 
 export async function isWriteable(directory: string) {
   try {
@@ -26,4 +27,34 @@ export async function writeFileSafe(
   }
 
   await writeFile(path, content, options)
+}
+
+export async function validateDir(path: string) {
+  const writeable = await isWriteable(path)
+
+  if (!writeable)
+    throw new Error(
+      `The path ${path} does not writeable. Please check the permissions.`,
+    )
+
+  if (!existsSync(path))
+    throw new Error(`The path ${path} does not exist. Please try again.`)
+
+  if (!statSync(path).isDirectory())
+    throw new Error(`The path ${path} is not a directory. Please try again.`)
+
+  return true
+}
+
+export function timer() {
+  const start = process.hrtime.bigint()
+
+  const end = () => {
+    const end = process.hrtime.bigint()
+    const duration = (Number(end - start) / 1e9).toFixed(2)
+
+    console.log("\n", c.green(`Done in ${duration}s`))
+  }
+
+  return { end, start }
 }

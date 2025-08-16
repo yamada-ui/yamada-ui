@@ -265,7 +265,10 @@ export const init = new Command("init")
                 notInstalledDependencies.push(
                   ...getNotInstalledDependencies(
                     packageJson,
-                    REQUIRED_DEPENDENCIES,
+                    // TODO: Once `@yamada-ui/react` releases v2, I'll add it.
+                    // REQUIRED_DEPENDENCIES,
+                    // TODO: Once `@yamada-ui/react` releases v2, I'll remove it.
+                    [...REQUIRED_DEPENDENCIES, "@yamada-ui/react@dev"],
                   ),
                 )
 
@@ -338,10 +341,14 @@ export const init = new Command("init")
         if (devDependencies)
           installDependencies(devDependencies, { cwd, dev: true })
 
+        // TODO: Once `@yamada-ui/react` releases v2, I'll remove it.
+        if (monorepo)
+          installDependencies(["@yamada-ui/react@dev"], { cwd: outdirPath })
+
         spinner.succeed("Installed dependencies")
       }
 
-      if (packageName) {
+      if (monorepo) {
         const packageManager = getPackageManager()
         const command = packageAddCommand(packageManager)
 

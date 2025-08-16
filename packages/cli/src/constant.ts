@@ -1,6 +1,6 @@
 /* eslint-disable perfectionist/sort-objects */
 import type { Config } from "./index.type"
-import { splitVersion } from "./utils/package"
+import { splitVersion } from "./utils"
 
 export const CONFIG_FILE_NAME = "ui.json"
 export const DEFAULT_PACKAGE_NAME = "@workspaces/ui"
@@ -24,7 +24,8 @@ export const DEFAULT_SECTION_CONFIG: Pick<
 export const REQUIRED_DEPENDENCIES = [
   "react@^19",
   "react-dom@^19",
-  "@yamada-ui/react@^2",
+  // TODO: Once `@yamada-ui/react` releases v2, I'll add it.
+  // "@yamada-ui/react@^2",
 ]
 export const REQUIRED_DEV_DEPENDENCIES = [
   "@types/react@^19",

@@ -1,0 +1,1 @@
+import{r as s,ar as a}from"./iframe-DkaXVr_9.js";import{u as f}from"./index-UuYROTOa.js";const p=u=>{const[r,{off:t,on:n}]=f(u),o=s.useRef(0),e=s.useCallback(()=>{o.current+=1,n()},[n]),c=s.useCallback(()=>{o.current-=1,o.current<=0&&t()},[t]);return a(()=>{o.current=0}),s.useMemo(()=>({finish:c,loading:r,start:e}),[c,r,e])};export{p as u};

@@ -1,0 +1,1 @@
+import{n as l,o as x}from"./iframe-DkaXVr_9.js";const p=l({base:{display:"flex"}}),{PropsContext:d,withContext:f}=x("flex",p),C=f("div")(void 0,({align:e,basis:o,direction:t,grow:n,justify:s,shrink:i,wrap:a,...r})=>({alignItems:e,flexBasis:o,flexDirection:t,flexGrow:n,flexShrink:i,flexWrap:a,justifyContent:s,...r}));export{C as F,d as a};

@@ -1,10 +1,12 @@
 import type { Dict } from "@yamada-ui/utils"
+import type { PackageNameWithVersion, WantedVersion } from "../index.type"
 import { isObject } from "@yamada-ui/utils"
 import { execSync } from "child_process"
 import { existsSync } from "fs"
 import { readFile } from "fs/promises"
 import path from "path"
 import c from "picocolors"
+import semver from "semver"
 import validateProjectName from "validate-npm-package-name"
 import YAML from "yamljs"
 import { writeFileSafe } from "./fs"
@@ -48,67 +50,125 @@ export async function getPackageJson(cwd: string): Promise<Dict> {
   }
 }
 
-export function hasDependencies(
+export function getVersion(
   { dependencies, devDependencies }: Dict,
-  name: string,
-): string | undefined {
-  if (isObject(dependencies) && name in dependencies) return dependencies[name]
-  if (isObject(devDependencies) && name in devDependencies)
-    return devDependencies[name]
+  nameWithVersion: string,
+): string | undefined | WantedVersion {
+  const [name, version] = splitVersion(nameWithVersion)
+
+  if (!name) return
+
+  let currentVersion: string | undefined
+
+  if (isObject(dependencies) && name in dependencies) {
+    currentVersion = dependencies[name]
+  } else if (isObject(devDependencies) && name in devDependencies) {
+    currentVersion = devDependencies[name]
+  }
+
+  if (!version) return currentVersion
+  if (!currentVersion) return { wanted: version }
+
+  if (currentVersion === version || semver.satisfies(currentVersion, version)) {
+    return currentVersion
+  } else {
+    return { current: currentVersion, wanted: version }
+  }
 }
 
-export function requireDependencies(packageJson: Dict, dependencies: string[]) {
+export function findDependencies(packageJson: Dict, dependencies: string[]) {
   return Object.fromEntries(
     dependencies.map((dependency) => [
-      dependency,
-      hasDependencies(packageJson, dependency),
+      splitVersion(dependency)[0]!,
+      getVersion(packageJson, dependency),
     ]),
   )
 }
 
-export function installDependencies(cwd: string, dependencies?: string[]) {
+export function getNotInstalledDependencies(
+  packageJson: Dict,
+  dependencies: string[],
+): PackageNameWithVersion[] {
+  const installedDependencies = findDependencies(packageJson, dependencies)
+
+  return Object.entries(installedDependencies)
+    .filter(([_, version]) => !version || isObject(version))
+    .map(([name, version]) => (isObject(version) ? { name, ...version } : name))
+}
+
+export function splitVersion(value: string) {
+  if (value.startsWith("@")) {
+    const [, name, version] = value.split("@")
+
+    return [`@${name}`, version]
+  } else {
+    return value.split("@")
+  }
+}
+
+export function getPackageName(value: PackageNameWithVersion) {
+  return isObject(value) ? `${value.name}@${value.wanted}` : value
+}
+
+export interface PackageAddCommandOptions {
+  dev?: boolean
+  exact?: boolean
+}
+
+export function packageAddCommand(
+  packageManager: PackageManager,
+  { dev = false, exact = false }: PackageAddCommandOptions = {},
+) {
+  const command: string[] = [packageManager]
+
+  if (packageManager === "npm") {
+    command.push("install")
+  } else {
+    command.push("add")
+  }
+
+  if (dev) {
+    if (packageManager === "npm") {
+      command.push("--save-dev")
+    } else {
+      command.push("--dev")
+    }
+  }
+
+  if (exact) command.push("--save-exact")
+
+  return command.join(" ")
+}
+
+export function packageExecuteCommand(packageManager: PackageManager) {
+  switch (packageManager) {
+    case "npm":
+      return "npx"
+    case "pnpm":
+      return "pnpm dlx"
+    case "yarn":
+      return "yarn dlx"
+    case "bun":
+      return "bunx --bun"
+  }
+}
+
+export interface InstallDependenciesOptions extends PackageAddCommandOptions {
+  cwd?: string
+}
+
+export function installDependencies(
+  dependencies?: string[],
+  { cwd, dev, exact = true }: InstallDependenciesOptions = {},
+) {
   const packageManager = getPackageManager()
 
-  switch (packageManager) {
-    case "bun": {
-      if (dependencies?.length) {
-        execSync(`bun add ${dependencies.join(" ")}`, { cwd, stdio: "ignore" })
-      } else {
-        execSync(`bun install`, { cwd, stdio: "ignore" })
-      }
+  if (dependencies?.length) {
+    const command = packageAddCommand(packageManager, { dev, exact })
 
-      break
-    }
-    case "pnpm": {
-      if (dependencies?.length) {
-        execSync(`pnpm add ${dependencies.join(" ")}`, { cwd, stdio: "ignore" })
-      } else {
-        execSync(`pnpm install`, { cwd, stdio: "ignore" })
-      }
-
-      break
-    }
-    case "yarn": {
-      if (dependencies?.length) {
-        execSync(`yarn add ${dependencies.join(" ")}`, { cwd, stdio: "ignore" })
-      } else {
-        execSync(`yarn install`, { cwd, stdio: "ignore" })
-      }
-
-      break
-    }
-    default: {
-      if (dependencies?.length) {
-        execSync(`npm install ${dependencies.join(" ")}`, {
-          cwd,
-          stdio: "ignore",
-        })
-      } else {
-        execSync(`npm install`, { cwd, stdio: "ignore" })
-      }
-
-      break
-    }
+    execSync(`${command} ${dependencies.join(" ")}`, { cwd, stdio: "ignore" })
+  } else {
+    execSync(`${packageManager} install`, { cwd, stdio: "ignore" })
   }
 }
 

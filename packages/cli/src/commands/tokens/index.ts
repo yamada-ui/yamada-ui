@@ -11,8 +11,7 @@ import { ESLint } from "eslint"
 import { writeFile } from "fs/promises"
 import ora from "ora"
 import path from "path"
-import c from "picocolors"
-import { format, getModule } from "../../utils"
+import { format, getModule, timer } from "../../utils"
 import { config } from "./config"
 
 const TONES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
@@ -286,45 +285,51 @@ export const tokens = new Command("tokens")
     { cwd, internal, lint, out: outPath }: Options,
   ) {
     const spinner = ora()
-    const eslint = new ESLint({ fix: true })
 
-    const start = process.hrtime.bigint()
+    try {
+      const eslint = new ESLint({ fix: true })
 
-    spinner.start(`Getting theme`)
+      const { end } = timer()
 
-    cwd = path.resolve(cwd)
-    inputPath = path.resolve(cwd, inputPath)
+      spinner.start(`Getting theme`)
 
-    if (outPath) {
-      outPath = path.resolve(cwd, outPath)
-    } else if (inputPath.includes("/")) {
-      const dirPath = inputPath.split("/").slice(0, -1).join("/")
+      cwd = path.resolve(cwd)
+      inputPath = path.resolve(cwd, inputPath)
 
-      outPath = path.join(dirPath, "index.types.ts")
-    } else {
-      outPath = path.join(cwd, "index.types.ts")
+      if (outPath) {
+        outPath = path.resolve(cwd, outPath)
+      } else if (inputPath.includes("/")) {
+        const dirPath = inputPath.split("/").slice(0, -1).join("/")
+
+        outPath = path.join(dirPath, "index.types.ts")
+      } else {
+        outPath = path.join(cwd, "index.types.ts")
+      }
+
+      const { config, theme } = await getTheme(inputPath, cwd)
+
+      spinner.succeed(`Got theme`)
+
+      spinner.start(`Generating theme typings`)
+
+      let content = await generateThemeTokens(theme, { ...config, internal })
+
+      if (lint) {
+        const [result] = await eslint.lintText(content, { filePath: inputPath })
+
+        if (result?.output) content = result.output
+      }
+
+      await writeFile(outPath, content, "utf8")
+
+      spinner.succeed(`Generated theme typings`)
+
+      end()
+    } catch (e) {
+      if (e instanceof Error) {
+        spinner.fail(e.message)
+      } else {
+        spinner.fail("An unknown error occurred")
+      }
     }
-
-    const { config, theme } = await getTheme(inputPath, cwd)
-
-    spinner.succeed(`Got theme`)
-
-    spinner.start(`Generating theme typings`)
-
-    let content = await generateThemeTokens(theme, { ...config, internal })
-
-    if (lint) {
-      const [result] = await eslint.lintText(content, { filePath: inputPath })
-
-      if (result?.output) content = result.output
-    }
-
-    await writeFile(outPath, content, "utf8")
-
-    spinner.succeed(`Generated theme typings`)
-
-    const end = process.hrtime.bigint()
-    const duration = (Number(end - start) / 1e9).toFixed(2)
-
-    console.log("\n", c.green(`Done in ${duration}s`))
   })

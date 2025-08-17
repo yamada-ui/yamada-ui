@@ -11,6 +11,7 @@ import packageJson from "../../../package.json"
 import { CONFIG_FILE_NAME } from "../../constant"
 import {
   fetchRegistry,
+  format,
   getComponentFiles,
   getConfig,
   getGeneratedNameMap,
@@ -70,7 +71,7 @@ async function getData(componentNames: string[], config: Config) {
   return { data, registries }
 }
 
-function getDiff(
+async function getDiff(
   generatedNames: string[],
   data: data,
   registries: Registries,
@@ -78,33 +79,39 @@ function getDiff(
 ) {
   const changes: Changes = {}
 
-  Object.entries(data).forEach(([name, files]) => {
-    const registry = registries[name]
+  await Promise.all(
+    Object.entries(data).map(async ([name, files]) => {
+      const registry = registries[name]
 
-    if (!registry) return
+      if (!registry) return
 
-    Object.entries(files).forEach(([fileName, file]) => {
-      const registryFile = registry.sources.find(
-        ({ name }) => name === fileName,
+      await Promise.all(
+        Object.entries(files).map(async ([fileName, file]) => {
+          const registryFile = registry.sources.find(
+            ({ name }) => name === fileName,
+          )
+
+          if (!registryFile?.content) return
+
+          const content = await format(
+            transformContent(
+              registry.section,
+              registryFile.content,
+              config,
+              generatedNames,
+            ),
+          )
+
+          const diff = diffLines(file, content)
+
+          if (diff.length < 2) return
+
+          changes[name] ??= {}
+          changes[name][fileName] = diff
+        }),
       )
-
-      if (!registryFile?.content) return
-
-      const content = transformContent(
-        registry.section,
-        registryFile.content,
-        config,
-        generatedNames,
-      )
-
-      const diff = diffLines(file, content)
-
-      if (diff.length < 2) return
-
-      changes[name] ??= {}
-      changes[name][fileName] = diff
-    })
-  })
+    }),
+  )
 
   return changes
 }
@@ -112,6 +119,7 @@ function getDiff(
 interface Options {
   config: string
   cwd: string
+  detail: boolean
 }
 
 export const diff = new Command("diff")
@@ -183,7 +191,7 @@ export const diff = new Command("diff")
       }
 
       const { data, registries } = await getData(componentNames, config)
-      const changes = getDiff(generatedNames, data, registries, config)
+      const changes = await getDiff(generatedNames, data, registries, config)
       const hasChanges = Object.keys(changes).length
 
       console.log("---------------------------------")

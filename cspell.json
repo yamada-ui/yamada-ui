@@ -117,7 +117,8 @@
     "messageformat",
     "metafile",
     "mewtwo",
-
+    "nonconstructor",
+    "nonoctal",
     "nums",
     "nwsapi",
     "officedocument",

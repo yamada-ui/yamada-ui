@@ -1,7 +1,7 @@
 import type { Dict } from "@yamada-ui/utils"
 import type { PackageNameWithVersion, WantedVersion } from "../index.type"
 import { isObject } from "@yamada-ui/utils"
-import { execSync } from "child_process"
+import { execa } from "execa"
 import { existsSync } from "fs"
 import { readFile } from "fs/promises"
 import path from "path"
@@ -115,41 +115,41 @@ export interface PackageAddCommandOptions {
   exact?: boolean
 }
 
-export function packageAddCommand(
+export function packageAddArgs(
   packageManager: PackageManager,
   { dev = false, exact = false }: PackageAddCommandOptions = {},
 ) {
-  const command: string[] = [packageManager]
+  const args: string[] = []
 
   if (packageManager === "npm") {
-    command.push("install")
+    args.push("install")
   } else {
-    command.push("add")
+    args.push("add")
   }
 
   if (dev) {
     if (packageManager === "npm") {
-      command.push("--save-dev")
+      args.push("--save-dev")
     } else {
-      command.push("--dev")
+      args.push("--dev")
     }
   }
 
-  if (exact) command.push("--save-exact")
+  if (exact) args.push("--save-exact")
 
-  return command.join(" ")
+  return args
 }
 
-export function packageExecuteCommand(packageManager: PackageManager) {
+export function packageExecuteCommands(packageManager: PackageManager) {
   switch (packageManager) {
     case "npm":
-      return "npx"
+      return { args: [], command: "npx" }
     case "pnpm":
-      return "pnpm dlx"
+      return { args: ["dlx"], command: "pnpm" }
     case "yarn":
-      return "yarn dlx"
+      return { args: ["dlx"], command: "yarn" }
     case "bun":
-      return "bunx --bun"
+      return { args: ["--bun"], command: "bunx" }
   }
 }
 
@@ -157,18 +157,21 @@ export interface InstallDependenciesOptions extends PackageAddCommandOptions {
   cwd?: string
 }
 
-export function installDependencies(
+export async function installDependencies(
   dependencies?: string[],
   { cwd, dev, exact = true }: InstallDependenciesOptions = {},
 ) {
   const packageManager = getPackageManager()
 
   if (dependencies?.length) {
-    const command = packageAddCommand(packageManager, { dev, exact })
+    const args = packageAddArgs(packageManager, { dev, exact })
 
-    execSync(`${command} ${dependencies.join(" ")}`, { cwd, stdio: "ignore" })
+    await execa(packageManager, [...args, ...dependencies], {
+      cwd,
+      stdout: "ignore",
+    })
   } else {
-    execSync(`${packageManager} install`, { cwd, stdio: "ignore" })
+    await execa(packageManager, ["install"], { cwd, stdout: "ignore" })
   }
 }
 

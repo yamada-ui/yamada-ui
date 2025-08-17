@@ -28,7 +28,7 @@ import {
   getPackageManager,
   getPackageName,
   installDependencies,
-  packageAddCommand,
+  packageAddArgs,
   timer,
   validateDir,
   writeFileSafe,
@@ -154,7 +154,10 @@ export const init = new Command("init")
           name: "overwrite",
           initial: false,
           message: c.reset(
-            `The ${c.yellow(outdir)} directory already exists. Do you want to overwrite it?`,
+            [
+              `The ${c.yellow(outdir)} directory already exists.`,
+              "Do you want to overwrite it?",
+            ].join(" "),
           ),
         })
 
@@ -323,7 +326,10 @@ export const init = new Command("init")
             name: "install",
             initial: true,
             message: c.reset(
-              `The following dependencies are not installed: ${colorizedNames.join(", ")}. Do you want to install them?`,
+              [
+                `The following dependencies are not installed: ${colorizedNames.join(", ")}.`,
+                "Do you want to install them?",
+              ].join(" "),
             ),
           })
 
@@ -337,28 +343,36 @@ export const init = new Command("init")
       if (dependencies || devDependencies) {
         spinner.start("Installing dependencies")
 
-        if (dependencies) installDependencies(dependencies, { cwd })
+        if (dependencies) await installDependencies(dependencies, { cwd })
         if (devDependencies)
-          installDependencies(devDependencies, { cwd, dev: true })
+          await installDependencies(devDependencies, { cwd, dev: true })
 
         // TODO: Once `@yamada-ui/react` releases v2, I'll remove it.
         if (monorepo)
-          installDependencies(["@yamada-ui/react@dev"], { cwd: outdirPath })
+          await installDependencies(["@yamada-ui/react@dev"], {
+            cwd: outdirPath,
+          })
 
         spinner.succeed("Installed dependencies")
       }
 
       if (monorepo) {
         const packageManager = getPackageManager()
-        const command = packageAddCommand(packageManager)
+        const args = packageAddArgs(packageManager)
 
+        console.log("")
         console.log(
           boxen(
-            `Run ${c.cyan(`${command} "${packageName}@workspace:*"`)} in your application.`,
+            [
+              "Run",
+              c.cyan(
+                `${packageManager} ${args.join(" ")} "${packageName}@workspace:*"`,
+              ),
+              "in your application.",
+            ].join(" "),
             {
               borderColor: "yellow",
               borderStyle: "round",
-              margin: 1,
               padding: 1,
               textAlignment: "center",
             },

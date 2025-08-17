@@ -1,5 +1,8 @@
+import type { Config } from "../index.type"
 import fs, { existsSync, statSync } from "fs"
-import { mkdir, writeFile } from "fs/promises"
+import { mkdir, readdir, readFile, writeFile } from "fs/promises"
+import { glob } from "glob"
+import path from "path"
 import c from "picocolors"
 
 export async function isWriteable(directory: string) {
@@ -53,8 +56,51 @@ export function timer() {
     const end = process.hrtime.bigint()
     const duration = (Number(end - start) / 1e9).toFixed(2)
 
-    console.log("\n", c.green(`Done in ${duration}s`))
+    console.log("")
+    console.log(c.green(`Done in ${duration}s`))
   }
 
   return { end, start }
+}
+
+export async function getComponentFiles(
+  componentName: string,
+  { srcPath }: Config,
+) {
+  const files: { [key: string]: string } = {}
+  const [dirPath] = await glob(path.join(srcPath, "**", componentName))
+
+  if (!dirPath) return files
+
+  const dirents = await readdir(dirPath, { withFileTypes: true })
+
+  await Promise.all(
+    dirents.map(async (dirent) => {
+      const name = dirent.name
+
+      if (dirent.isDirectory()) {
+        const data = await readdir(path.join(dirent.parentPath, name), {
+          withFileTypes: true,
+        })
+
+        await Promise.all(
+          data.map(async (dirent) => {
+            if (dirent.isDirectory()) return
+
+            const targetPath = path.join(dirent.parentPath, dirent.name)
+            const data = await readFile(targetPath, "utf-8")
+
+            files[`${name}/${dirent.name}`] = data
+          }),
+        )
+      } else {
+        const targetPath = path.join(dirent.parentPath, dirent.name)
+        const data = await readFile(targetPath, "utf-8")
+
+        files[name] = data
+      }
+    }),
+  )
+
+  return files
 }

@@ -5,7 +5,7 @@ import path from "path"
 import c from "picocolors"
 import packageJson from "../../package.json"
 import { DEFAULT_PATH, SECTION_NAMES } from "../constant"
-import { getPackageManager, packageExecuteCommand } from "./package"
+import { getPackageManager, packageExecuteCommands } from "./package"
 
 export async function getConfig(
   cwd: string,
@@ -92,10 +92,11 @@ export async function getConfig(
     }
   } catch {
     const packageManager = getPackageManager()
-    const command = packageExecuteCommand(packageManager)
+    const { args, command } = packageExecuteCommands(packageManager)
+    const prefix = `${command}${args.length ? ` ${args.join(" ")}` : ""}`
 
     throw new Error(
-      `No config found. Please run ${c.cyan(`${command} ${packageJson.name}@latest init`)}.`,
+      `No config found. Please run ${c.cyan(`${prefix} ${packageJson.name}@latest init`)}.`,
     )
   }
 }

@@ -187,7 +187,7 @@ export async function getGeneratedNameMap(
   return Object.fromEntries(results) as { [key in Section]: string[] }
 }
 
-export function transformTemplate(
+export function transformContent(
   targetSection: RegistrySection,
   content: string,
   { getSection }: Config,
@@ -285,19 +285,14 @@ export async function generateSources(
       const targetPath = path.resolve(dirPath, fileName)
 
       if (content) {
-        content = transformTemplate(section, content, config, generatedNames)
+        content = transformContent(section, content, config, generatedNames)
 
         await writeFileSafe(targetPath, await format(content))
       } else if (template && data) {
         await Promise.all(
           data.map(async ({ name: fileName, ...rest }) => {
             content = transformTemplateContent(template, rest)
-            content = transformTemplate(
-              section,
-              content,
-              config,
-              generatedNames,
-            )
+            content = transformContent(section, content, config, generatedNames)
 
             await writeFileSafe(
               path.resolve(targetPath, fileName),

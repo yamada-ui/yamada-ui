@@ -1,10 +1,12 @@
-import { execSync } from "child_process"
+import { execa } from "execa"
 import { rmSync } from "fs"
 import path from "path"
 
-export function isInGitRepo(): boolean {
+export async function isInGitRepo(): Promise<boolean> {
   try {
-    execSync("git rev-parse --is-inside-work-tree", { stdio: "ignore" })
+    await execa("git", ["rev-parse", "--is-inside-work-tree"], {
+      stdout: "ignore",
+    })
 
     return true
   } catch {
@@ -12,29 +14,31 @@ export function isInGitRepo(): boolean {
   }
 }
 
-export function initGit(cwd: string): boolean {
+export async function initGit(cwd: string): Promise<boolean> {
   const gitPath = path.resolve(cwd, ".git")
 
   let isInit = false
 
   try {
-    execSync("git --version", { stdio: "ignore" })
+    await execa("git", ["--version"], { stdout: "ignore" })
 
-    if (isInGitRepo()) return false
+    if (await isInGitRepo()) return false
 
-    execSync("git init", { stdio: "ignore" })
+    await execa("git", ["init"], { stdout: "ignore" })
 
     isInit = true
 
     try {
-      execSync("git config init.defaultBranch", { stdio: "ignore" })
+      await execa("git", ["config", "init.defaultBranch"], {
+        stdout: "ignore",
+      })
     } catch {
-      execSync("git checkout -b main", { stdio: "ignore" })
+      await execa("git", ["checkout", "-b", "main"], { stdout: "ignore" })
     }
 
-    execSync("git add -A", { stdio: "ignore" })
-    execSync('git commit -m "Initial commit"', {
-      stdio: "ignore",
+    await execa("git", ["add", "-A"], { stdout: "ignore" })
+    await execa("git", ["commit", "-m", "Initial commit"], {
+      stdout: "ignore",
     })
 
     return true

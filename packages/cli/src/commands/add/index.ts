@@ -24,7 +24,7 @@ import {
   installDependencies,
   replaceIndex,
   timer,
-  transformTemplate,
+  transformContent,
   validateDir,
   writeFileSafe,
 } from "../../utils"
@@ -105,7 +105,7 @@ export const add = new Command("add")
 
         spinner.succeed("Fetched all available components")
       } else {
-        spinner.start("Getting generated data")
+        spinner.start("Getting generated components")
 
         generatedNameMap = await getGeneratedNameMap(config)
 
@@ -114,7 +114,7 @@ export const add = new Command("add")
           generatedNames.includes(name),
         )
 
-        spinner.succeed("Got generated data")
+        spinner.succeed("Got generated components")
 
         if (!overwrite && existsNames.length) {
           const colorizedNames = existsNames.map((name) => c.yellow(name))
@@ -124,7 +124,10 @@ export const add = new Command("add")
             name: "overwrite",
             initial: false,
             message: c.reset(
-              `The ${colorizedNames.join(", ")} components already exist. Do you want to overwrite them?`,
+              [
+                `The ${colorizedNames.join(", ")} components already exist.`,
+                "Do you want to overwrite them?",
+              ].join(" "),
             ),
           })
 
@@ -235,7 +238,10 @@ export const add = new Command("add")
             name: "update",
             initial: true,
             message: c.reset(
-              `The following generated files will be updated: ${colorizedNames.join(", ")}. Do you want to update them?`,
+              [
+                `The following generated files will be updated: ${colorizedNames.join(", ")}.`,
+                "Do you want to update them?",
+              ].join(" "),
             ),
           })
 
@@ -265,7 +271,7 @@ export const add = new Command("add")
                         dirent.parentPath,
                         dirent.name,
                       )
-                      const content = transformTemplate(
+                      const content = transformContent(
                         section as Section,
                         await readFile(targetPath, "utf-8"),
                         config,
@@ -314,7 +320,10 @@ export const add = new Command("add")
             name: "proceed",
             initial: true,
             message: c.reset(
-              `The following dependencies are not installed: ${colorizedNames.join(", ")}. Do you want to install them?`,
+              [
+                `The following dependencies are not installed: ${colorizedNames.join(", ")}.`,
+                "Do you want to install them?",
+              ].join(" "),
             ),
           })
 
@@ -323,8 +332,8 @@ export const add = new Command("add")
 
         if (install) {
           tasks.add({
-            task: (_, task) => {
-              installDependencies(
+            task: async (_, task) => {
+              await installDependencies(
                 notInstalledDependencies.map(getPackageName),
                 { cwd: targetPath },
               )

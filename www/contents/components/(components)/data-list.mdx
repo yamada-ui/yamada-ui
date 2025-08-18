@@ -72,12 +72,9 @@ import { DataList } from "@workspace/ui"
 </DataList.Root>
 ```
 
-- `DataList.Root`: A wrapper component that displays child elements (`DataList.Item`).
-- `DataList.Item`: A component for list items.
-- `DataList.Term`: A component that displays the term for an item.
-- `DataList.Description`: A component that displays the description for an item.
+### Use items
 
-Alternatively, you can omit `DataList.Item` by setting `items`.
+Pass data as an array to the `items` prop to render the DataList with a simple data structure.
 
 ```tsx preview functional
 const items = useMemo<DataList.RootProps["items"]>(
@@ -113,14 +110,10 @@ const items = useMemo<DataList.RootProps["items"]>(
 )
 
 return (
-  <VStack alignItems="start">
+  <VStack alignItems="start" separator={<Separator />}>
     <DataList.Root variant="subtle" items={items} />
 
-    <Separator />
-
     <DataList.Root variant="bold" items={items} />
-
-    <Separator />
 
     <DataList.Root variant="grid" items={items} />
   </VStack>
@@ -144,14 +137,10 @@ const items = useMemo<DataList.RootProps["items"]>(
 )
 
 return (
-  <VStack alignItems="start">
+  <VStack alignItems="start" separator={<Separator />}>
     <DataList.Root size="sm" items={items} />
 
-    <Separator />
-
     <DataList.Root size="md" items={items} />
-
-    <Separator />
 
     <DataList.Root size="lg" items={items} />
   </VStack>
@@ -177,10 +166,8 @@ const items = useMemo<DataList.RootProps["items"]>(
 )
 
 return (
-  <VStack alignItems="start">
+  <VStack alignItems="start" separator={<Separator />}>
     <DataList.Root items={items} orientation="horizontal" />
-
-    <Separator />
 
     <DataList.Root items={items} orientation="vertical" />
   </VStack>
@@ -369,7 +356,7 @@ return (
 ```
 
 ```tsx preview
-<DataList.Root w="fit-content" col={2}>
+<DataList.Root w="fit-content">
   <DataList.Item>
     <DataList.Term color="primary">白石うらら</DataList.Term>
     <DataList.Description>入れ替わりの魔女</DataList.Description>
@@ -437,7 +424,7 @@ return (
 ```
 
 ```tsx preview
-<DataList.Root w="fit-content" col={2}>
+<DataList.Root w="fit-content">
   <DataList.Item>
     <DataList.Term>白石うらら</DataList.Term>
     <DataList.Description color="primary">

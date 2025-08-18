@@ -72,16 +72,9 @@ import { DataList } from "@workspace/ui"
 </DataList.Root>
 ```
 
-- `DataList.Root`: 子要素(`DataList.Item`)を表示するラッパーコンポーネントです。
-- `DataList.Item`: 項目のコンポーネントです。
-- `DataList.Term`: 項目の用語を表示するコンポーネントです。
-- `DataList.Description`: 項目の説明を表示するコンポーネントです。
+### itemsを使用する
 
-:::warning
-`items`を使用せず、`orientation`を`"horizontal"`に設定している場合は、`col`に列数を設定する必要があります。
-:::
-
-または、`items`を設定することで`DataList.Item`を省略することができます。
+`items`propに配列としてデータを渡すことで、シンプルなデータ構造でDataListをレンダリングできます。
 
 ```tsx preview functional
 const items = useMemo<DataList.RootProps["items"]>(
@@ -97,7 +90,7 @@ const items = useMemo<DataList.RootProps["items"]>(
   [],
 )
 
-return <DataList.Root items={items} w="fit-content" />
+return <DataList.Root items={items} />
 ```
 
 ### バリアントを変更する
@@ -117,14 +110,10 @@ const items = useMemo<DataList.RootProps["items"]>(
 )
 
 return (
-  <VStack alignItems="start">
+  <VStack alignItems="start" separator={<Separator />}>
     <DataList.Root variant="subtle" items={items} />
 
-    <Separator />
-
     <DataList.Root variant="bold" items={items} />
-
-    <Separator />
 
     <DataList.Root variant="grid" items={items} />
   </VStack>
@@ -148,14 +137,10 @@ const items = useMemo<DataList.RootProps["items"]>(
 )
 
 return (
-  <VStack alignItems="start">
+  <VStack alignItems="start" separator={<Separator />}>
     <DataList.Root size="sm" items={items} />
 
-    <Separator />
-
     <DataList.Root size="md" items={items} />
-
-    <Separator />
 
     <DataList.Root size="lg" items={items} />
   </VStack>
@@ -181,10 +166,8 @@ const items = useMemo<DataList.RootProps["items"]>(
 )
 
 return (
-  <VStack alignItems="start">
+  <VStack alignItems="start" separator={<Separator />}>
     <DataList.Root items={items} orientation="horizontal" />
-
-    <Separator />
 
     <DataList.Root items={items} orientation="vertical" />
   </VStack>
@@ -373,7 +356,7 @@ return (
 ```
 
 ```tsx preview
-<DataList.Root w="fit-content" col={2}>
+<DataList.Root w="fit-content">
   <DataList.Item>
     <DataList.Term color="primary">白石うらら</DataList.Term>
     <DataList.Description>入れ替わりの魔女</DataList.Description>
@@ -441,7 +424,7 @@ return (
 ```
 
 ```tsx preview
-<DataList.Root w="fit-content" col={2}>
+<DataList.Root w="fit-content">
   <DataList.Item>
     <DataList.Term>白石うらら</DataList.Term>
     <DataList.Description color="primary">

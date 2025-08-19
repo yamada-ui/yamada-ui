@@ -4,4 +4,44 @@ description: "`FocusLock`は、モーダルやダイアログなどの要素で�
 source: components/focus-lock
 ---
 
+```tsx preview functional client
+const { open, onToggle } = useDisclosure()
+
+return (
+  <VStack align="flex-start" gap={0}>
+    <Button onClick={onToggle}>Please Click</Button>
+
+    <Collapse open={open}>
+      <FocusLock>
+        <VStack py="md" px="px">
+          <Input placeholder="This is Input" />
+
+          <Button alignSelf="center">Button</Button>
+        </VStack>
+      </FocusLock>
+    </Collapse>
+  </VStack>
+)
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { FocusLock } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { FocusLock } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { FocusLock } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<FocusLock />
+```

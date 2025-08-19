@@ -6,4 +6,125 @@ source: components/float
 style: components/float/float.style.ts
 ---
 
+```tsx preview
+<Box bg="bg.panel" boxSize="3xs" position="relative">
+  <Float
+    bg="bg.contrast"
+    color="fg.contrast"
+    fontSize="sm"
+    px="1.5"
+    rounded="l1"
+  >
+    New
+  </Float>
+</Box>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Float } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Float } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Float } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Float />
+```
+
+### 表示位置を変更する
+
+表示位置を変更する場合は、`placement`に`start-start`や`end-center`などを指定します。
+
+```tsx preview functional
+const placements = [
+  "start-start",
+  "start-center",
+  "start-end",
+  "center-start",
+  "center-center",
+  "center-end",
+  "end-start",
+  "end-center",
+  "end-end",
+] as const
+
+return (
+  <Grid gap="lg" p="lg" templateColumns="repeat(3, 1fr)">
+    {placements.map((placement) => (
+      <GridItem key={placement} bg="bg.panel" boxSize="3xs" position="relative">
+        <Float
+          bg="bg.contrast"
+          color="fg.contrast"
+          fontSize="sm"
+          placement={placement}
+          px="1.5"
+          rounded="md"
+        >
+          New
+        </Float>
+      </GridItem>
+    ))}
+  </Grid>
+)
+```
+
+### オフセットを変更する
+
+要素の大きさによっては、要素が意図しない位置になる場合があります。その場合は、`offset`で調整します。
+
+```tsx preview
+<Grid gap="md" p="md" templateColumns="repeat(3, 1fr)">
+  <GridItem bg="bg.panel" boxSize="3xs" position="relative">
+    <Float
+      bg="bg.contrast"
+      color="fg.contrast"
+      fontSize="sm"
+      offset="md"
+      placement="start-start"
+      px="1.5"
+      rounded="md"
+    >
+      New
+    </Float>
+  </GridItem>
+
+  <GridItem bg="bg.panel" boxSize="3xs" position="relative">
+    <Float
+      bg="bg.contrast"
+      color="fg.contrast"
+      fontSize="sm"
+      offset={["0", "md"]}
+      placement="center-start"
+      px="1.5"
+      rounded="md"
+    >
+      New
+    </Float>
+  </GridItem>
+
+  <GridItem bg="bg.panel" boxSize="3xs" position="relative">
+    <Float
+      bg="bg.contrast"
+      color="fg.contrast"
+      fontSize="sm"
+      offset={["md", "0"]}
+      placement="end-end"
+      px="1.5"
+      rounded="md"
+    >
+      New
+    </Float>
+  </GridItem>
+</Grid>
+```

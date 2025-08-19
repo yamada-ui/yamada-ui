@@ -6,4 +6,253 @@ source: components/file-button
 style: components/file-button/file-button.style.ts
 ---
 
+```tsx preview
+<VStack gap="md" alignItems="flex-start">
+  <FileButton>Upload</FileButton>
+
+  <FileButton
+    as={IconButton}
+    aria-label="Upload file"
+    icon={<PlusIcon fontSize="2xl" />}
+  />
+</VStack>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { FileButton } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { FileButton } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { FileButton } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<FileButton />
+```
+
+:::note
+`FileButton`は、内部的に[Button](/docs/components/button)を使用しています。
+:::
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => (
+      <FileButton variant={variant} key={index}>
+        Upload
+      </FileButton>
+    )}
+  </For>
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <FileButton size={size} key={index}>
+        Upload
+      </FileButton>
+    )}
+  </For>
+</Wrap>
+```
+
+### カラースキーマを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <FileButton colorScheme={colorScheme} key={index}>
+        Upload
+      </FileButton>
+    )}
+  </For>
+</Wrap>
+```
+
+### 複数選択を許容する
+
+複数選択を許容する場合は、`multiple`を`true`に設定します。
+
+```tsx preview
+<FileButton multiple>Upload</FileButton>
+```
+
+### 拡張子を指定する
+
+拡張子を指定する場合は、`accept`に文字列(タイプ)を設定します。
+
+```tsx preview
+<FileButton accept="image/png,image/jpeg">Upload</FileButton>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<VStack gap="md" alignItems="flex-start">
+  <FileButton disabled>Upload</FileButton>
+
+  <Field.Root
+    disabled
+    helperMessage="Please select a file to upload."
+    label="Upload file"
+  >
+    <FileButton alignSelf="flex-start">Upload</FileButton>
+  </Field.Root>
+</VStack>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<VStack gap="md" alignItems="flex-start">
+  <FileButton readOnly>Upload</FileButton>
+
+  <Field.Root
+    readOnly
+    helperMessage="Please select a file to upload."
+    label="Upload file"
+  >
+    <FileButton alignSelf="flex-start">Upload</FileButton>
+  </Field.Root>
+</VStack>
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`invalid`を`true`に設定します。
+
+```tsx preview
+<VStack gap="md" alignItems="flex-start">
+  <FileButton invalid>Upload</FileButton>
+
+  <Field.Root
+    invalid
+    helperMessage="Please select a file to upload."
+    label="Upload file"
+  >
+    <FileButton alignSelf="flex-start">Upload</FileButton>
+  </Field.Root>
+</VStack>
+```
+
+ボーダーのカラーを変更する場合は、`errorBorderColor`にカラーを設定します。
+
+```tsx preview
+<FileButton invalid errorBorderColor="warning">
+  Upload
+</FileButton>
+```
+
+### リセットする
+
+値をリセットする場合は、`resetRef`に`ref`を設定します。設定された`ref`にコールバック関数が付与されるので、それを実行します。
+
+```tsx preview functional client
+const [files, onChange] = useState<File[] | undefined>(undefined)
+const resetRef = useRef<() => void>(null)
+const onReset = () => {
+  onChange(undefined)
+  resetRef.current?.()
+}
+
+return (
+  <VStack gap="md">
+    <Text>files: {files?.length ?? 0}</Text>
+
+    <HStack>
+      <FileButton multiple resetRef={resetRef} onChange={onChange}>
+        Upload
+      </FileButton>
+
+      <Button onClick={onReset}>Reset</Button>
+    </HStack>
+  </VStack>
+)
+```
+
+### React Hook Formを使う
+
+```tsx preview functional client
+interface Data {
+  fileButton: File[] | null
+}
+
+const resetRef = useRef<() => void>(null)
+const {
+  control,
+  formState: { errors },
+  handleSubmit,
+  setValue,
+  watch,
+} = useForm<Data>()
+const onReset = () => {
+  setValue("fileButton", null)
+  resetRef.current?.()
+}
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)} gap="md">
+    <Field.Root
+      errorMessage={errors.fileButton?.message}
+      invalid={!!errors.fileButton}
+      label="Files"
+    >
+      <Controller
+        name="fileButton"
+        control={control}
+        render={({ field: { ref, name, onBlur, onChange } }) => (
+          <HStack>
+            <FileButton
+              {...{
+                ref,
+                name,
+                onBlur,
+                onChange,
+              }}
+              resetRef={resetRef}
+            >
+              Upload
+            </FileButton>
+
+            <Button onClick={onReset}>Reset</Button>
+          </HStack>
+        )}
+        rules={{
+          required: {
+            message: "This is required.",
+            value: true,
+          },
+        }}
+      />
+    </Field.Root>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

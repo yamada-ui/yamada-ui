@@ -1,5 +1,5 @@
 /* eslint-disable perfectionist/sort-objects */
-import type { Config } from "./index.type"
+import type { UserConfig } from "./index.type"
 import { splitVersion } from "./utils"
 
 export const CONFIG_FILE_NAME = "ui.json"
@@ -13,10 +13,7 @@ export const DEFAULT_PATH = {
   providers: "./providers",
 }
 export const SECTION_NAMES = ["components", "hooks", "providers"] as const
-export const DEFAULT_SECTION_CONFIG: Pick<
-  Config,
-  "components" | "hooks" | "providers"
-> = {
+export const DEFAULT_CONFIG: UserConfig = {
   components: { overwrite: true },
   hooks: { overwrite: true },
   providers: { overwrite: true },

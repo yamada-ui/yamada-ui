@@ -17,8 +17,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "files": [
-    "dist",
-    "bin"
+    "dist"
   ],
   "sideEffects": false,
   "publishConfig": {
@@ -34,11 +33,11 @@
     "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "bin": {
-    "yamada-cli": "bin/index.js"
+    "yamada-cli": "dist/index.js"
   },
   "scripts": {
     "clean": "rimraf node_modules dist trace coverage .turbo .eslintcache",
-    "start": "tsx src/index.ts --run",
+    "dev": "tsx src/index.ts",
     "build": "tsdown",
     "typecheck": " tsc --noEmit",
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",

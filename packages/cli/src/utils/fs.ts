@@ -1,9 +1,21 @@
+import type { ObjectEncodingOptions } from "fs"
 import type { Config } from "../index.type"
+import type { LintOptions } from "./lint"
+import type { FormatOptions } from "./prettier"
 import fs, { existsSync, statSync } from "fs"
-import { mkdir, readdir, readFile, writeFile } from "fs/promises"
+import {
+  mkdir,
+  writeFile as originalWriteFile,
+  readdir,
+  readFile,
+} from "fs/promises"
 import { glob } from "glob"
 import path from "path"
 import c from "picocolors"
+import { lint } from "./lint"
+import { format } from "./prettier"
+
+export const cwd = process.env.INIT_CWD ?? process.cwd()
 
 export async function isWriteable(directory: string) {
   try {
@@ -18,10 +30,27 @@ export async function isWriteable(directory: string) {
   }
 }
 
+export interface WriteFileOptions extends ObjectEncodingOptions {
+  cwd?: string
+  format?: FormatOptions
+  lint?: LintOptions
+}
+
+export async function writeFile(
+  path: string,
+  content: string,
+  { format: formatConfig, lint: lintConfig, ...rest }: WriteFileOptions = {},
+) {
+  content = await lint(content, { cwd: rest.cwd ?? cwd, ...lintConfig })
+  content = await format(content, formatConfig)
+
+  await originalWriteFile(path, content, rest.encoding ?? "utf-8")
+}
+
 export async function writeFileSafe(
   path: string,
   content: string,
-  options?: BufferEncoding,
+  options?: WriteFileOptions,
 ) {
   if (path.includes("/")) {
     const dirPath = path.split("/").slice(0, -1).join("/")

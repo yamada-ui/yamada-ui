@@ -11,10 +11,10 @@ import c from "picocolors"
 import prompts from "prompts"
 import { CONFIG_FILE_NAME } from "../../constant"
 import {
+  cwd,
   fetchRegistries,
   fetchRegistry,
   fetchRegistryNames,
-  format,
   generateSources,
   getConfig,
   getGeneratedNameMap,
@@ -30,35 +30,33 @@ import {
 } from "../../utils"
 
 interface Options {
-  all: boolean
   config: string
   cwd: string
+  format: boolean
   install: boolean
+  lint: boolean
   overwrite: boolean
 }
 
 export const add = new Command("add")
   .description("Add a component to your project")
   .argument("[components...]", "Components to add")
-  .option("--cwd <path>", "Current working directory", process.cwd())
+  .option("--cwd <path>", "Current working directory", cwd)
   .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing files.", false)
-  .option("-a, --all", "Add all available components")
   .option("-i, --install", "Install dependencies", false)
+  .option("-f, --format", "Format the output files.", false)
+  .option("-l, --lint", "Lint the output files.", false)
   .action(async function (
     componentNames: string[],
-    {
-      all = !componentNames.length,
-      config: configPath,
-      cwd,
-      install,
-      overwrite,
-    }: Options,
+    { config: configPath, cwd, format, install, lint, overwrite }: Options,
   ) {
     const spinner = ora()
 
     try {
       const { end } = timer()
+
+      const all = !componentNames.length
 
       spinner.start("Validating directory")
 
@@ -68,7 +66,7 @@ export const add = new Command("add")
 
       spinner.start("Fetching config")
 
-      const config = await getConfig(cwd, configPath)
+      const config = await getConfig(cwd, configPath, { format, lint })
 
       spinner.succeed("Fetched config")
 
@@ -200,14 +198,13 @@ export const add = new Command("add")
         tasks.add({
           task: async (_, task) => {
             const targetPath = path.resolve(config.srcPath, "index.ts")
-            const data = replaceIndex(
+            const content = replaceIndex(
               targetNames,
               await readFile(targetPath, "utf-8"),
               config,
             )
-            const content = await format(data)
 
-            await writeFileSafe(targetPath, content)
+            await writeFileSafe(targetPath, content, config)
 
             task.title = `Updated ${c.cyan("index.ts")}`
           },
@@ -218,10 +215,13 @@ export const add = new Command("add")
           task: async (_, task) => {
             const { sources } = await fetchRegistry("index")
             const targetPath = path.resolve(config.srcPath, "index.ts")
-            const data = replaceIndex(targetNames, sources[0]!.content!, config)
-            const content = await format(data)
+            const content = replaceIndex(
+              targetNames,
+              sources[0]!.content!,
+              config,
+            )
 
-            await writeFileSafe(targetPath, content)
+            await writeFileSafe(targetPath, content, config)
 
             task.title = `Generated ${c.cyan("index.ts")}`
           },
@@ -278,7 +278,7 @@ export const add = new Command("add")
                         targetNames,
                       )
 
-                      await writeFileSafe(targetPath, await format(content))
+                      await writeFileSafe(targetPath, content, config)
                     }),
                   )
 

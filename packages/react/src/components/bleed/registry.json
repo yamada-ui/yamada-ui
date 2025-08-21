@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "bleed.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const bleedStyle = defineComponentStyle({})\n\nexport type BleedStyle = typeof bleedStyle\n"
+    },
+    {
+      "name": "bleed.tsx",
+      "content": "\"use client\"\n\nimport type { CSSProps, HTMLStyledProps } from \"@yamada-ui/react\"\nimport type { BleedStyle } from \"./bleed.style\"\nimport { createComponent, varAttr, calc } from \"@yamada-ui/react\"\nimport { bleedStyle } from \"./bleed.style\"\n\nexport interface BleedProps extends HTMLStyledProps {\n  /**\n   * The CSS `margin-block` property.\n   */\n  block?: CSSProps[\"marginBlock\"]\n  /**\n   * The CSS `margin-block-end` property.\n   */\n  blockEnd?: CSSProps[\"marginBlockEnd\"]\n  /**\n   * The CSS `margin-block-start` property.\n   */\n  blockStart?: CSSProps[\"marginBlockStart\"]\n  /**\n   * The CSS `margin-inline` property.\n   */\n  inline?: \"full\" | CSSProps[\"marginInline\"]\n  /**\n   * The CSS `margin-inline-end` property.\n   */\n  inlineEnd?: \"full\" | CSSProps[\"marginInlineEnd\"]\n  /**\n   * The CSS `margin-inline-start` property.\n   */\n  inlineStart?: \"full\" | CSSProps[\"marginInlineStart\"]\n}\n\nconst {\n  PropsContext: BleedPropsContext,\n  usePropsContext: useBleedPropsContext,\n  withContext,\n} = createComponent<BleedProps, BleedStyle>(\"bleed\", bleedStyle)\n\nexport { BleedPropsContext, useBleedPropsContext }\n\n/**\n * `Bleed` is a component used to break an element from the boundaries of its container.\n *\n * @see https://yamada-ui.com/components/bleed\n */\nexport const Bleed = withContext(\"div\")(\n  undefined,\n  ({\n    block,\n    blockEnd,\n    blockStart,\n    inline,\n    inlineEnd,\n    inlineStart,\n    ...rest\n  }) => {\n    blockStart ??= block\n    blockEnd ??= block\n    inlineStart ??= inline\n    inlineEnd ??= inline\n\n    const inlineStartFull = inlineStart === \"full\"\n    const inlineEndFull = inlineEnd === \"full\"\n\n    const marginBlockStart = calc.negate(\"{block-start}\")\n    const marginBlockEnd = calc.negate(\"{block-end}\")\n    const marginInlineStart = inlineStartFull\n      ? \"calc(50% - 50vw)\"\n      : calc.negate(\"{inline-start}\")\n    const marginInlineEnd = inlineEndFull\n      ? \"calc(50% - 50vw)\"\n      : calc.negate(\"{inline-end}\")\n\n    return {\n      ...rest,\n      \"--block-end\": varAttr(blockEnd, \"spaces\"),\n      \"--block-start\": varAttr(blockStart, \"spaces\"),\n      \"--inline-end\": varAttr(inlineEnd, \"spaces\"),\n      \"--inline-start\": varAttr(inlineStart, \"spaces\"),\n      marginBlockEnd,\n      marginBlockStart,\n      marginInlineEnd,\n      marginInlineStart,\n    }\n  },\n)\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export * from \"./bleed.style\"\nexport { Bleed, BleedPropsContext, useBleedPropsContext } from \"./bleed\"\nexport type { BleedProps } from \"./bleed\"\n"
+    }
+  ]
+}

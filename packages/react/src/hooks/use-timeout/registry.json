@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": {
+    "components": ["loading", "snacks"],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport { useEffect } from \"react\"\nimport { useCallbackRef } from \"@yamada-ui/react\"\n\n/**\n * `useTimeout` is a custom hook that executes a function after a specified number of milliseconds.\n *\n * @see https://yamada-ui.com/hooks/use-timeout\n */\nexport const useTimeout = (\n  callback: (...args: any[]) => void,\n  delay: null | number,\n) => {\n  const callbackRef = useCallbackRef(callback)\n\n  useEffect(() => {\n    if (delay == null) return undefined\n\n    let timeoutId: NodeJS.Timeout | null = null\n\n    timeoutId = setTimeout(callbackRef, delay)\n\n    return () => {\n      clearTimeout(timeoutId)\n    }\n  }, [delay, callbackRef])\n}\n"
+    }
+  ]
+}

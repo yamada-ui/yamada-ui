@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport { useCallback, useState } from \"react\"\nimport { useSafeLayoutEffect } from \"@yamada-ui/react\"\n\ninterface EyeDropperOptions {\n  signal?: AbortSignal\n}\n\nexport interface EyeDropperReturn {\n  sRGBHex: string\n}\n\n/**\n * `useEyeDropper` is a custom hook that opens the eye dropper tool and returns the color value.\n *\n * @see https://yamada-ui.com/hooks/use-eye-dropper\n */\nexport const useEyeDropper = () => {\n  const [supported, setSupported] = useState(false)\n\n  useSafeLayoutEffect(() => {\n    setSupported(typeof window !== \"undefined\" && \"EyeDropper\" in window)\n  }, [])\n\n  const onOpen = useCallback(\n    async (\n      options: EyeDropperOptions = {},\n    ): Promise<EyeDropperReturn | undefined> => {\n      if (supported) {\n        const eyeDropper = new (window as any).EyeDropper()\n\n        return eyeDropper.open(options)\n      }\n\n      return Promise.resolve(undefined)\n    },\n    [supported],\n  )\n\n  return { supported, onOpen }\n}\n"
+    }
+  ]
+}

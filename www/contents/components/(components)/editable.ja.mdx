@@ -6,4 +6,337 @@ source: components/editable
 style: components/editable/editable.style.ts
 ---
 
+```tsx preview
+<Editable.Root defaultValue="なんとかなれーッ！">
+  <Editable.Preview />
+  <Editable.Input />
+</Editable.Root>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Editable } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Editable } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Editable } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Editable.Root>
+  <Editable.Preview />
+  <Editable.Input />
+  <Editable.Textarea />
+  <Editable.Control>
+    <Editable.EditTrigger />
+    <Editable.SubmitTrigger />
+    <Editable.CancelTrigger />
+  </Editable.Control>
+</Editable.Root>
+```
+
+### テキストエリアを使用する
+
+複数行にする場合は、`Editable.Textarea`を使用します。
+
+```tsx preview
+<Editable.Root defaultValue={`おやつ…って事!?\nそれって最高じゃん!!`}>
+  <Editable.Preview />
+  <Editable.Textarea />
+</Editable.Root>
+```
+
+### 編集モードをデフォルトにする
+
+編集モードをデフォルトにする場合は、`startWithEditView`を`true`に設定します。
+
+```tsx preview
+<Editable.Root defaultValue="なんとかなれーッ！" startWithEditView>
+  <Editable.Preview />
+  <Editable.Input />
+</Editable.Root>
+```
+
+### フォーカスが外れた場合に変更を確定しない
+
+フォーカスが外れた場合に変更を確定しない場合は、`submitOnBlur`を`false`に設定します。
+
+```tsx preview
+<Editable.Root defaultValue="なんとかなれーッ！" submitOnBlur={false}>
+  <Editable.Preview />
+  <Editable.Input />
+</Editable.Root>
+```
+
+### フォーカス時に選択しない
+
+フォーカス時にテキストを選択しない場合は、`selectAllOnFocus`を`false`に設定します。
+
+```tsx preview
+<Editable.Root defaultValue="なんとかなれーッ！" selectAllOnFocus={false}>
+  <Editable.Preview />
+  <Editable.Input />
+</Editable.Root>
+```
+
+### ボーダーのカラーを変更する
+
+ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
+
+```tsx preview
+<VStack gap="md">
+  <Editable.Root
+    defaultValue="Custom focus border color"
+    focusBorderColor="green.500"
+  >
+    <Editable.Preview />
+    <Editable.Input />
+  </Editable.Root>
+
+  <Editable.Root
+    defaultValue="Custom error border color"
+    errorBorderColor="orange.500"
+    invalid
+  >
+    <Editable.Preview />
+    <Editable.Input />
+  </Editable.Root>
+</VStack>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<VStack gap="md">
+  <Editable.Root defaultValue="Your email address" disabled>
+    <Editable.Preview />
+    <Editable.Input />
+  </Editable.Root>
+
+  <Field.Root
+    disabled
+    helperMessage="We'll never share your email."
+    label="Email address"
+  >
+    <Editable.Root defaultValue="Your email address">
+      <Editable.Preview />
+      <Editable.Input />
+    </Editable.Root>
+  </Field.Root>
+</VStack>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<VStack gap="md">
+  <Editable.Root defaultValue="Your email address" readOnly>
+    <Editable.Preview />
+    <Editable.Input />
+  </Editable.Root>
+
+  <Field.Root
+    readOnly
+    helperMessage="We'll never share your email."
+    label="Email address"
+  >
+    <Editable.Root defaultValue="Your email address">
+      <Editable.Preview />
+      <Editable.Input />
+    </Editable.Root>
+  </Field.Root>
+</VStack>
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`invalid`を`true`に設定します。
+
+```tsx preview
+<VStack gap="md">
+  <Editable.Root defaultValue="Your email address" invalid>
+    <Editable.Preview />
+    <Editable.Input />
+  </Editable.Root>
+
+  <Field.Root
+    invalid
+    helperMessage="We'll never share your email."
+    label="Email address"
+  >
+    <Editable.Root defaultValue="Your email address">
+      <Editable.Preview />
+      <Editable.Input />
+    </Editable.Root>
+  </Field.Root>
+</VStack>
+```
+
+### 制御する
+
+```tsx preview
+<Editable.Root defaultValue="なんとかなれーッ！">
+  <Editable.Preview />
+  <Editable.Input />
+
+  <Editable.Control>
+    <Editable.EditTrigger>
+      <IconButton
+        size="xs"
+        variant="ghost"
+        aria-label="Edit"
+        icon={<PencilIcon />}
+      />
+    </Editable.EditTrigger>
+    <Editable.SubmitTrigger>
+      <IconButton
+        size="xs"
+        variant="outline"
+        aria-label="Submit"
+        icon={<CheckIcon />}
+      />
+    </Editable.SubmitTrigger>
+    <Editable.CancelTrigger>
+      <IconButton
+        size="xs"
+        variant="outline"
+        aria-label="Cancel"
+        icon={<XIcon />}
+      />
+    </Editable.CancelTrigger>
+  </Editable.Control>
+</Editable.Root>
+```
+
+### 制御をカスタマイズする
+
+```tsx preview functional client
+const CustomControls = () => {
+  const { getCancelProps, getEditProps, getSubmitProps } = Editable.useContext()
+  return (
+    <ButtonGroup.Root size="xs">
+      <ButtonGroup.IconItem
+        icon={<PencilIcon />}
+        {...getEditProps()}
+        variant="ghost"
+        aria-label="Edit"
+      />
+
+      <ButtonGroup.IconItem
+        icon={<CheckIcon />}
+        {...getSubmitProps()}
+        variant="outline"
+        aria-label="Submit"
+      />
+
+      <ButtonGroup.IconItem
+        icon={<XIcon />}
+        {...getCancelProps()}
+        variant="outline"
+        aria-label="Cancel"
+      />
+    </ButtonGroup.Root>
+  )
+}
+
+return (
+  <Editable.Root defaultValue="なんとかなれーッ！" previewFocusable={false}>
+    <Editable.Preview />
+    <Editable.Input />
+    <CustomControls />
+  </Editable.Root>
+)
+```
+
+### React Hook Formを使う
+
+```tsx preview functional client
+interface Data {
+  input: string
+  textarea: string
+}
+
+const defaultValues: Data = {
+  input: "",
+  textarea: "",
+}
+
+const {
+  control,
+  formState: { errors },
+  handleSubmit,
+  watch,
+} = useForm<Data>({
+  defaultValues,
+})
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)} gap="md">
+    <Field.Root
+      errorMessage={errors.input?.message}
+      invalid={!!errors.input}
+      label="Name"
+    >
+      <Controller
+        name="input"
+        control={control}
+        render={({ field }) => (
+          <Editable.Root placeholder="ハチワレ" {...field}>
+            <Editable.Preview />
+            <Editable.Input />
+          </Editable.Root>
+        )}
+        rules={{
+          required: {
+            message: "This is required.",
+            value: true,
+          },
+        }}
+      />
+    </Field.Root>
+
+    <Field.Root
+      errorMessage={errors.textarea?.message}
+      invalid={!!errors.textarea}
+      label="Feedback"
+    >
+      <Controller
+        name="textarea"
+        control={control}
+        render={({ field }) => (
+          <Editable.Root placeholder="なんとかなれーッ！" {...field}>
+            <Editable.Preview />
+            <Editable.Textarea />
+          </Editable.Root>
+        )}
+        rules={{
+          required: {
+            message: "This is required.",
+            value: true,
+          },
+        }}
+      />
+    </Field.Root>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

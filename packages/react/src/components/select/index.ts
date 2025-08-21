@@ -1,3 +1,4 @@
+export * from "./select.style"
 export * as Select from "./namespace"
 export {
   SelectGroup,

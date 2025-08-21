@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./link.style\"\nexport { Link, LinkPropsContext, useLinkPropsContext } from \"./link\"\nexport type { LinkProps } from \"./link\"\n"
+    },
+    {
+      "name": "link.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const linkStyle = defineComponentStyle({\n  base: {\n    alignItems: \"center\",\n    cursor: \"pointer\",\n    display: \"inline-flex\",\n    gap: \"3\",\n    rounded: \"l1\",\n  },\n\n  variants: {\n    plain: {\n      color: \"colorScheme.solid\",\n      _hover: {\n        textDecoration: \"underline\",\n        textDecorationColor: \"currentColor\",\n        textUnderlineOffset: \"3px\",\n      },\n    },\n    underline: {\n      color: \"colorScheme.solid\",\n      textDecoration: \"underline\",\n      textDecorationColor: \"currentColor\",\n      textUnderlineOffset: \"3px\",\n    },\n  },\n\n  defaultProps: {\n    colorScheme: \"link\",\n    variant: \"plain\",\n  },\n})\n\nexport type LinkStyle = typeof linkStyle\n"
+    },
+    {
+      "name": "link.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { LinkStyle } from \"./link.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { linkStyle } from \"./link.style\"\n\nexport interface LinkProps extends HTMLStyledProps<\"a\">, ThemeProps<LinkStyle> {\n  /**\n   * If `true`, the link will open in new tab.\n   *\n   * @default false\n   */\n  external?: boolean\n}\n\nconst {\n  PropsContext: LinkPropsContext,\n  usePropsContext: useLinkPropsContext,\n  withContext,\n} = createComponent<LinkProps, LinkStyle>(\"link\", linkStyle)\n\nexport { LinkPropsContext, useLinkPropsContext }\n\n/**\n * `Link` is a component for creating hyperlinks to different web pages, locations within the same page, or other URLs.\n *\n * @see https://yamada-ui.com/components/link\n */\nexport const Link = withContext(\"a\")(undefined, ({ external, ...rest }) => ({\n  rel: external ? \"noopener\" : undefined,\n  target: external ? \"_blank\" : undefined,\n  ...rest,\n}))\n"
+    }
+  ]
+}

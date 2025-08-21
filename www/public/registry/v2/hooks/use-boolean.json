@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": {
+    "components": ["carousel"],
+    "hooks": ["use-processing"],
+    "providers": []
+  },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport { useCallback, useState } from \"react\"\n\n/**\n * `useBoolean` is a custom hook used to manage boolean values using `on`, `off`, and `toggle` functions.\n *\n * @see https://yamada-ui.com/hooks/use-boolean\n */\nexport const useBoolean = (init = false): UseBooleanReturn => {\n  const [flg, setFlg] = useState<boolean>(init)\n\n  const on = useCallback(() => setFlg(true), [])\n\n  const off = useCallback(() => setFlg(false), [])\n\n  const toggle = useCallback(() => setFlg((prev) => !prev), [])\n\n  return [flg, { off, toggle, on }]\n}\n\nexport type UseBooleanReturn = [\n  flg: boolean,\n  setFlg: { off: () => void; toggle: () => void; on: () => void },\n]\n"
+    }
+  ]
+}

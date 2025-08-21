@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": { "components": ["loading"], "hooks": [], "providers": [] },
+  "section": "components",
+  "sources": [
+    {
+      "name": "center.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const centerStyle = defineComponentStyle({\n  base: {\n    display: \"flex\",\n    placeContent: \"center\",\n    placeItems: \"center\",\n  },\n})\n\nexport type CenterStyle = typeof centerStyle\n"
+    },
+    {
+      "name": "center.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { CenterStyle } from \"./center.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { centerStyle } from \"./center.style\"\n\nexport interface CenterProps extends HTMLStyledProps, ThemeProps<CenterStyle> {}\n\nconst {\n  PropsContext: CenterPropsContext,\n  usePropsContext: useCenterPropsContext,\n  withContext,\n} = createComponent<CenterProps, CenterStyle>(\"center\", centerStyle)\n\nexport { CenterPropsContext, useCenterPropsContext }\n\n/**\n * `Center` is a component that aligns the child elements in the center within the component.\n *\n * @see https://yamada-ui.com/components/center\n */\nexport const Center = withContext(\"div\", {\n  base: {\n    display: \"flex\",\n    placeContent: \"center\",\n    placeItems: \"center\",\n  },\n})()\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export * from \"./center.style\"\nexport { Center, CenterPropsContext, useCenterPropsContext } from \"./center\"\nexport type { CenterProps } from \"./center\"\n"
+    }
+  ]
+}

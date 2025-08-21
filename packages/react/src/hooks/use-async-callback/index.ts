@@ -3,7 +3,7 @@ import type { LoadingOptions } from "../../components/loading"
 import type { LoadingMethod } from "../../components/loading/loading"
 import { useCallback, useMemo } from "react"
 import { useLoading } from "../../components/loading"
-import { useProcessing } from "../../hooks/use-processing"
+import { useProcessing } from "../use-processing"
 
 type Callback = (...args: any[]) => any
 

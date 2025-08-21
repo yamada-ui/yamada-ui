@@ -6,4 +6,103 @@ source: components/flip
 style: components/flip/flip.style.ts
 ---
 
+```tsx preview
+<Flip from={<AppleIcon fontSize="2xl" />} to={<CherryIcon fontSize="2xl" />} />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Flip } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Flip } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Flip } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Flip />
+```
+
+### Change Direction
+
+To change the direction, set `orientation` to `horizontal` or `vertical`. By default, `horizontal` is set.
+
+```tsx preview
+<Flip
+  orientation="vertical"
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### Change the Duration
+
+To change the duration, set a numerical value (seconds) to `duration`.
+
+```tsx preview
+<Flip
+  duration={1.4}
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### Delay
+
+If you want to delay the switch, set a numerical value (seconds) to `delay`.
+
+```tsx preview
+<Flip
+  delay={1}
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<Flip
+  disabled
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### ReadOnly
+
+To readyOnly, set `readOnly` to `true`.
+
+```tsx preview
+<Flip
+  readOnly
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### Control
+
+```tsx preview functional client
+const [value, onChange] = useState<KeyframeIdent>("from")
+
+return (
+  <Flip
+    from={<AppleIcon fontSize="2xl" />}
+    to={<CherryIcon fontSize="2xl" />}
+    value={value}
+    onChange={onChange}
+  />
+)
+```

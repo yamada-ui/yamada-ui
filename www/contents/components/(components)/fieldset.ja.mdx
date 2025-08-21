@@ -6,4 +6,273 @@ source: components/fieldset
 style: components/fieldset/fieldset.style.ts
 ---
 
+```tsx preview
+<Fieldset.Root legend="Contact details">
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Fieldset } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Fieldset } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Fieldset } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Fieldset.Root>
+  <Fieldset.Legend />
+  <Fieldset.Header>
+    <Fieldset.Legend />
+    <Fieldset.HelperMessage />
+  </Fieldset.Header>
+  <Fieldset.Content />
+  <Fieldset.HelperMessage />
+  <Fieldset.ErrorMessage />
+</Fieldset.Root>
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack gap="md">
+  <For each={["plain", "elevated", "outline", "panel"]}>
+    {(variant, index) => (
+      <Fieldset.Root
+        key={index}
+        variant={variant}
+        helperMessage="Please provide your contact details below."
+        legend="Contact details"
+      >
+        <Field.Root label="Name">
+          <Input type="text" placeholder="Your name" />
+        </Field.Root>
+
+        <Field.Root label="Email address">
+          <Input type="email" placeholder="Your email address" />
+        </Field.Root>
+      </Fieldset.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack gap="md">
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <Fieldset.Root
+        key={index}
+        size={size}
+        helperMessage="Please provide your contact details below."
+        legend="Contact details"
+      >
+        <Field.Root label="Name">
+          <Input type="text" placeholder="Your name" />
+        </Field.Root>
+
+        <Field.Root label="Email address">
+          <Input type="email" placeholder="Your email address" />
+        </Field.Root>
+      </Fieldset.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### ヘルプメッセージを表示する
+
+ヘルプメッセージを表示する場合は、`helperMessage`に`ReactNode`を設定します。
+
+```tsx preview
+<Fieldset.Root
+  helperMessage="Please provide your contact details below."
+  legend="Contact details"
+>
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
+```
+
+または、`Fieldset.HelperMessage`を使用してカスタマイズすることも可能です。
+
+```tsx preview
+<Fieldset.Root legend="Contact details">
+  <Fieldset.HelperMessage color="warning">
+    Please provide your contact details below.
+  </Fieldset.HelperMessage>
+
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
+```
+
+### エラーメッセージを表示する
+
+エラーメッセージを表示する場合は、`invalid`を`true`に設定し、`errorMessage`に`ReactNode`を設定します。
+
+```tsx preview
+<Fieldset.Root
+  errorMessage="Some fields are invalid. Please check them."
+  helperMessage="Please provide your contact details below."
+  invalid
+  legend="Contact details"
+>
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
+```
+
+または、`Fieldset.ErrorMessage`を使用してカスタマイズすることも可能です。
+
+```tsx preview
+<Fieldset.Root
+  helperMessage="Please provide your contact details below."
+  invalid
+  legend="Contact details"
+>
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+
+  <Fieldset.ErrorMessage color="success">
+    Some fields are invalid. Please check them.
+  </Fieldset.ErrorMessage>
+</Fieldset.Root>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<Fieldset.Root
+  disabled
+  helperMessage="Please provide your contact details below."
+  legend="Contact details"
+>
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<Field.Root
+  helperMessage="We'll never share your email."
+  label="Email address"
+  readOnly
+>
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+### キャプションをカスタマイズする
+
+キャプションをカスタマイズする場合は、`Fieldset.Legend`を使用します。
+
+```tsx preview
+<Fieldset.Root helperMessage="Please provide your contact details below.">
+  <Fieldset.Legend color="success">Contact details</Fieldset.Legend>
+
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
+```
+
+### ヘッダーをカスタマイズする
+
+ヘッダーをカスタマイズする場合は、`Fieldset.Header`を使用します。
+
+```tsx preview
+<Fieldset.Root>
+  <Fieldset.Header borderBottomWidth="1px" pb="md">
+    <Fieldset.Legend>Contact details</Fieldset.Legend>
+    <Fieldset.HelperMessage>
+      Please provide your contact details below.
+    </Fieldset.HelperMessage>
+  </Fieldset.Header>
+
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
+```
+
+### コンテンツをカスタマイズする
+
+コンテンツをカスタマイズする場合は、`Fieldset.Content`を使用します。
+
+```tsx preview
+<Fieldset.Root
+  errorMessage="Some fields are invalid. Please check them."
+  helperMessage="Please provide your contact details below."
+  invalid
+  legend="Contact details"
+>
+  <Fieldset.Content borderWidth="1px" p="md" rounded="l2">
+    <Field.Root label="Name">
+      <Input type="text" placeholder="Your name" />
+    </Field.Root>
+
+    <Field.Root label="Email address">
+      <Input type="email" placeholder="Your email address" />
+    </Field.Root>
+  </Fieldset.Content>
+</Fieldset.Root>
+```

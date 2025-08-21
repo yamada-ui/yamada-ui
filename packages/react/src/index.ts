@@ -1,13 +1,7 @@
-/**
- * CORE
- */
 export * from "./core"
 export * from "./theme"
 export * from "./utils"
 
-/**
- * COMPONENTS
- */
 export * from "./components/accordion"
 export * from "./components/airy"
 export * from "./components/alert"
@@ -115,15 +109,7 @@ export * from "./components/toggle"
 export * from "./components/tooltip"
 export * from "./components/visually-hidden"
 export * from "./components/wrap"
-// export * from "./components/calendar"
-// export * from "./components/charts"
-// export * from "./components/color-picker"
-// export * from "./components/notice"
-// export * from "./components/table"
 
-/**
- * HOOKS
- */
 export * from "./hooks/use-animation"
 export * from "./hooks/use-async"
 export * from "./hooks/use-async-callback"
@@ -159,10 +145,5 @@ export * from "./hooks/use-token"
 export * from "./hooks/use-value"
 export * from "./hooks/use-window-event"
 
-/**
- * PROVIDERS
- */
 export * from "./providers/i18n-provider"
 export * from "./providers/ui-provider"
-
-export * as Client from "./client"

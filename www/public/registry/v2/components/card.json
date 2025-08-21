@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "card.style.ts",
+      "content": "import { defineComponentSlotStyle } from \"@yamada-ui/react\"\n\nexport const cardStyle = defineComponentSlotStyle({\n  base: {\n    body: {\n      alignItems: \"start\",\n      display: \"flex\",\n      flex: \"1\",\n      flexDirection: \"column\",\n    },\n    footer: {\n      alignItems: \"center\",\n      display: \"flex\",\n      justifyContent: \"start\",\n    },\n    header: {\n      alignItems: \"center\",\n      display: \"flex\",\n      justifyContent: \"start\",\n    },\n    root: {\n      display: \"flex\",\n      flexDirection: \"column\",\n      overflowWrap: \"break-word\",\n      rounded: \"l2\",\n      w: \"full\",\n    },\n  },\n\n  variants: {\n    elevated: {\n      root: {\n        bg: \"bg.panel\",\n        boxShadow: \"md\",\n      },\n    },\n    outline: {\n      root: {\n        layerStyle: \"outline\",\n      },\n    },\n    panel: {\n      root: {\n        layerStyle: \"panel\",\n      },\n    },\n    solid: {\n      root: {\n        layerStyle: \"solid\",\n      },\n    },\n    subtle: {\n      root: {\n        layerStyle: \"subtle\",\n      },\n    },\n    surface: {\n      root: {\n        layerStyle: \"surface\",\n      },\n    },\n  },\n\n  sizes: {\n    sm: {\n      body: { gap: \"3\", px: \"3\", py: \"2\" },\n      footer: { gap: \"3\", pb: \"2\", px: \"3\" },\n      header: { fontSize: \"lg\", gap: \"3\", pt: \"2\", px: \"3\" },\n    },\n    md: {\n      body: { gap: \"4\", px: \"4\", py: \"3\" },\n      footer: { gap: \"4\", pb: \"3\", px: \"4\" },\n      header: { fontSize: \"xl\", gap: \"4\", pt: \"3\", px: \"4\" },\n    },\n    lg: {\n      body: { gap: \"6\", px: \"6\", py: \"5\" },\n      footer: { gap: \"6\", pb: \"5\", px: \"6\" },\n      header: { fontSize: \"2xl\", gap: \"6\", pt: \"5\", px: \"6\" },\n    },\n    xl: {\n      body: { gap: \"8\", px: \"8\", py: \"7\" },\n      footer: { gap: \"8\", pb: \"7\", px: \"8\" },\n      header: { fontSize: \"2xl\", gap: \"8\", pt: \"7\", px: \"8\" },\n    },\n  },\n\n  defaultProps: {\n    size: \"md\",\n    variant: \"panel\",\n  },\n})\n\nexport type CardStyle = typeof cardStyle\n"
+    },
+    {
+      "name": "card.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { CardStyle } from \"./card.style\"\nimport { createSlotComponent } from \"@yamada-ui/react\"\nimport { cardStyle } from \"./card.style\"\n\nexport interface CardRootProps\n  extends HTMLStyledProps<\"article\">,\n    ThemeProps<CardStyle> {}\n\nconst {\n  PropsContext: CardPropsContext,\n  usePropsContext: useCardPropsContext,\n  withContext,\n  withProvider,\n} = createSlotComponent<CardRootProps, CardStyle>(\"card\", cardStyle)\n\nexport { CardPropsContext, useCardPropsContext }\n\n/**\n * `Card` is a component that groups and displays related information. By default, it renders a `article` element.\n *\n * @see https://yamada-ui.com/components/card\n */\nexport const CardRoot = withProvider(\"article\", \"root\")()\n\nexport interface CardHeaderProps extends HTMLStyledProps<\"header\"> {}\n\nexport const CardHeader = withContext(\"header\", \"header\")()\n\nexport interface CardBodyProps extends HTMLStyledProps {}\n\nexport const CardBody = withContext(\"div\", \"body\")()\n\nexport interface CardFooterProps extends HTMLStyledProps<\"footer\"> {}\n\nexport const CardFooter = withContext(\"footer\", \"footer\")()\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export * from \"./card.style\"\nexport {\n  CardBody,\n  CardFooter,\n  CardHeader,\n  CardPropsContext,\n  CardRoot,\n  useCardPropsContext,\n} from \"./card\"\nexport type {\n  CardBodyProps,\n  CardFooterProps,\n  CardHeaderProps,\n  CardRootProps,\n} from \"./card\"\nexport * as Card from \"./namespace\"\n"
+    },
+    {
+      "name": "namespace.ts",
+      "content": "export type {\n  CardBodyProps as BodyProps,\n  CardFooterProps as FooterProps,\n  CardHeaderProps as HeaderProps,\n  CardRootProps as RootProps,\n} from \"./card\"\nexport {\n  CardBody as Body,\n  CardFooter as Footer,\n  CardHeader as Header,\n  CardPropsContext as PropsContext,\n  CardRoot as Root,\n  useCardPropsContext as usePropsContext,\n} from \"./card\"\n"
+    }
+  ]
+}

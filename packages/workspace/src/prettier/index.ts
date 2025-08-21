@@ -23,7 +23,7 @@ export async function writeFileWithFormat(
   options?: Options,
 ) {
   const formatted = await format(
-    typeof content === "string" ? content : JSON.stringify(content, null, 2),
+    typeof content === "string" ? content : JSON.stringify(content),
     options,
   )
 

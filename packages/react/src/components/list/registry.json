@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./list.style\"\nexport type { ListIconProps, ListItemProps, ListRootProps } from \"./list\"\nexport {\n  ListItem,\n  ListItemIcon,\n  ListPropsContext,\n  ListRoot,\n  useListPropsContext,\n} from \"./list\"\nexport * as List from \"./namespace\"\n"
+    },
+    {
+      "name": "list.style.ts",
+      "content": "import { defineComponentSlotStyle } from \"@yamada-ui/react\"\n\nexport const listStyle = defineComponentSlotStyle({\n  base: {\n    icon: {\n      display: \"inline-block\",\n      fontSize: \"lg\",\n      me: \"sm\",\n      verticalAlign: \"middle\",\n    },\n    item: {\n      \"&:has([data-list-icon])\": {\n        alignItems: \"center\",\n        display: \"inline-flex\",\n      },\n    },\n    root: {\n      display: \"flex\",\n      flexDirection: \"column\",\n      gap: \"sm\",\n    },\n  },\n\n  props: {\n    styleType: {\n      circle: { root: { ms: \"1.4em\" } },\n      decimal: {\n        item: { ps: \"0.3em\" },\n        root: { ms: \"1.2em\" },\n      },\n      disc: { root: { ms: \"1.4em\" } },\n      \"lower-alpha\": { item: { ps: \"0.2em\" }, root: { ms: \"1.2em\" } },\n      square: { root: { ms: \"1.4em\" } },\n    },\n  },\n})\n\nexport type ListStyle = typeof listStyle\n"
+    },
+    {
+      "name": "list.tsx",
+      "content": "\"use client\"\n\nimport type { ReactElement } from \"react\"\nimport type {\n  CSSProps,\n  HTMLProps,\n  HTMLStyledProps,\n  ThemeProps,\n} from \"@yamada-ui/react\"\nimport type { ListStyle } from \"./list.style\"\nimport { cloneElement, isValidElement, useMemo } from \"react\"\nimport { createSlotComponent, styled } from \"@yamada-ui/react\"\nimport { listStyle } from \"./list.style\"\n\nexport interface ListRootProps\n  extends HTMLStyledProps<\"ul\">,\n    Omit<ThemeProps<ListStyle>, \"styleType\"> {\n  /**\n   * If provided, generate elements based on items.\n   */\n  items?: ListItemProps[]\n  /**\n   * The CSS `list-style-position` property.\n   */\n  stylePosition?: CSSProps[\"listStylePosition\"]\n  /**\n   * The CSS `list-style-position` property.\n   */\n  styleType?: CSSProps[\"listStyleType\"]\n}\n\nconst {\n  PropsContext: ListPropsContext,\n  usePropsContext: useListPropsContext,\n  withContext,\n  withProvider,\n} = createSlotComponent<ListRootProps, ListStyle>(\"list\", listStyle)\n\nexport { ListPropsContext, useListPropsContext }\n\n/**\n * `List` is a component for displaying lists. By default, it renders a `ul` element.\n *\n * @see https://yamada-ui.com/components/list\n */\nexport const ListRoot = withProvider<\"ul\", ListRootProps, \"styleType\">(\n  ({\n    as: asProp,\n    children,\n    items,\n    stylePosition: listStylePosition,\n    styleType: listStyleType = \"none\",\n    ...rest\n  }) => {\n    const as = asProp ?? (listStyleType == \"decimal\" ? \"ol\" : undefined)\n    const computedChildren = useMemo(() => {\n      if (children) return children\n\n      return items?.map((props, index) => <ListItem key={index} {...props} />)\n    }, [children, items])\n\n    return (\n      <styled.ul\n        as={as}\n        listStylePosition={listStylePosition}\n        listStyleType={listStyleType}\n        role=\"list\"\n        {...rest}\n      >\n        {computedChildren}\n      </styled.ul>\n    )\n  },\n  \"root\",\n  { transferProps: [\"styleType\"] },\n)()\n\nexport interface ListItemProps extends HTMLStyledProps<\"li\"> {\n  /**\n   * The icon to use.\n   */\n  icon?: ReactElement<any>\n}\n\nexport const ListItem = withContext<\"li\", ListItemProps>(\n  ({ children, icon, ...rest }) => (\n    <styled.li {...rest}>\n      <ListItemIcon>{icon}</ListItemIcon>\n\n      {children}\n    </styled.li>\n  ),\n  \"item\",\n)()\n\nexport interface ListIconProps extends HTMLStyledProps<\"svg\"> {}\n\nexport const ListItemIcon = withContext<\"svg\", ListIconProps>(\n  ({ children, ...rest }) => {\n    if (isValidElement<HTMLProps<\"svg\">>(children)) {\n      return cloneElement(children, {\n        ...children.props,\n        ...rest,\n        role: \"presentation\",\n      })\n    } else {\n      return null\n    }\n  },\n  \"icon\",\n)({ \"data-list-icon\": \"\" })\n"
+    },
+    {
+      "name": "namespace.ts",
+      "content": "export {\n  ListItemIcon as Icon,\n  ListItem as Item,\n  ListPropsContext as PropsContext,\n  ListRoot as Root,\n  useListPropsContext as usePropsContext,\n} from \"./list\"\nexport type {\n  ListIconProps as IconProps,\n  ListItemProps as ItemProps,\n  ListRootProps as RootProps,\n} from \"./list\"\n"
+    }
+  ]
+}

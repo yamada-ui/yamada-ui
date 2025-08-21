@@ -1,0 +1,89 @@
+import type { Dict } from "@yamada-ui/utils"
+
+export interface SectionConfig {
+  dependencies?: boolean
+  dependents?: boolean
+  overwrite?: boolean
+  path?: string
+}
+
+export interface LintConfig {
+  enabled?: boolean
+  filePath?: string
+}
+export interface FormatConfig {
+  configPath?: null | string
+  enabled?: boolean
+}
+
+export interface UserConfig {
+  components?: SectionConfig
+  format?: FormatConfig
+  hooks?: SectionConfig
+  lint?: LintConfig
+  monorepo?: boolean
+  path?: string
+  providers?: SectionConfig
+}
+
+export interface SectionConfigWithPaths extends SectionConfig {
+  absolutePath: string
+  path: string
+  section: Section
+}
+
+export interface Config extends UserConfig {
+  src: boolean
+  cwd: string
+  getSection: (value?: string) => SectionConfigWithPaths | undefined
+  getSectionAbsolutePath: (section: Section) => string
+  getSectionPath: (section: Section) => string
+  rootPath: string
+  srcPath: string
+}
+
+export type RegistrySection =
+  | "components"
+  | "hooks"
+  | "providers"
+  | "root"
+  | "theme"
+
+export type Section = Exclude<RegistrySection, "root" | "theme">
+export interface Source {
+  name: string
+  content?: string
+  data?: Dict[]
+  template?: string
+}
+
+export interface Dependents {
+  components: string[]
+  hooks: string[]
+  providers: string[]
+}
+
+export interface Dependencies {
+  components: string[]
+  externals: string[]
+  hooks: string[]
+  providers: string[]
+}
+
+export interface Registry {
+  section: RegistrySection
+  sources: Source[]
+  dependencies?: Dependencies
+  dependents?: Dependents
+}
+
+export interface Registries {
+  [key: string]: Registry
+}
+
+export interface WantedVersion {
+  wanted: string
+  current?: string
+}
+
+export type PackageNameWithVersion = string | (WantedVersion & { name: string })

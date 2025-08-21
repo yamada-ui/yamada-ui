@@ -1,5 +1,5 @@
 import { defineComponentSlotStyle } from "../../core"
-import { selectStyle } from "../select/select.style"
+import { selectStyle } from "../select"
 
 export const autocompleteStyle = defineComponentSlotStyle({
   base: {

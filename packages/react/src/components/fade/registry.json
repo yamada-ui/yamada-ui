@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "components": ["motion"],
+    "externals": ["motion@12.18.1"],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": {
+    "components": ["drawer", "dropzone", "modal"],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "fade.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const fadeStyle = defineComponentStyle({\n  base: {\n    w: \"full\",\n  },\n})\n\nexport type FadeStyle = typeof fadeStyle\n"
+    },
+    {
+      "name": "fade.tsx",
+      "content": "\"use client\"\n\nimport type { Variants } from \"motion/react\"\nimport type { ThemeProps } from \"@yamada-ui/react\"\nimport type {\n  HTMLMotionProps,\n  MotionTransitionVariants,\n  WithTransitionProps,\n} from \"../motion\"\nimport type { FadeStyle } from \"./fade.style\"\nimport { AnimatePresence } from \"motion/react\"\nimport { useMemo } from \"react\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { createTransition, motion } from \"../motion\"\nimport { fadeStyle } from \"./fade.style\"\n\nexport const fadeVariants: Variants = {\n  enter: ({ delay, duration, enter, transition, transitionEnd } = {}) => ({\n    opacity: 1,\n    transition: createTransition.enter(transition?.enter)(delay, duration),\n    transitionEnd: transitionEnd?.enter,\n    ...enter,\n  }),\n  exit: ({ delay, duration, exit, transition, transitionEnd } = {}) => ({\n    opacity: 0,\n    transition: createTransition.exit(transition?.exit)(delay, duration),\n    transitionEnd: transitionEnd?.exit,\n    ...exit,\n  }),\n} satisfies MotionTransitionVariants\n\nexport interface FadeProps\n  extends WithTransitionProps<HTMLMotionProps>,\n    ThemeProps<FadeStyle> {}\n\nconst {\n  PropsContext: FadePropsContext,\n  usePropsContext: useFadePropsContext,\n  withContext,\n} = createComponent<FadeProps, FadeStyle>(\"fade\", fadeStyle)\n\nexport { FadePropsContext, useFadePropsContext }\n\n/**\n * `Fade` is a component that gradually shows or hides an element.\n *\n * @see https://yamada-ui.com/components/fade\n */\nexport const Fade = withContext<\"div\", FadeProps>(\n  ({\n    delay,\n    duration,\n    open: openProp,\n    transition,\n    transitionEnd,\n    unmountOnExit,\n    ...rest\n  }) => {\n    const animate = openProp || unmountOnExit ? \"enter\" : \"exit\"\n    const open = unmountOnExit ? openProp && unmountOnExit : true\n\n    const custom = useMemo(\n      () => ({\n        delay,\n        duration,\n        transition,\n        transitionEnd,\n      }),\n      [delay, duration, transition, transitionEnd],\n    )\n\n    return (\n      <AnimatePresence custom={custom}>\n        {open ? (\n          <motion.div\n            animate={animate}\n            custom={custom}\n            exit=\"exit\"\n            initial=\"exit\"\n            variants={fadeVariants}\n            {...rest}\n          />\n        ) : null}\n      </AnimatePresence>\n    )\n  },\n)()\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export * from \"./fade.style\"\nexport {\n  Fade,\n  FadePropsContext,\n  fadeVariants,\n  useFadePropsContext,\n} from \"./fade\"\nexport type { FadeProps } from \"./fade\"\n"
+    }
+  ]
+}

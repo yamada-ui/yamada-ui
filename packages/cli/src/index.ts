@@ -1,31 +1,40 @@
+import checkNode from "cli-check-node"
+import unhandledError from "cli-handle-unhandled"
 import { Command } from "commander"
-import { createRequire } from "node:module"
 import c from "picocolors"
-import { actionTheme, actionTokens } from "./command/index.js"
-import { initCLI } from "./utils/index.js"
+import updateNotifier from "update-notifier"
+import packageJson from "../package.json"
+import { add } from "./commands/add"
+import { diff } from "./commands/diff"
+import { init } from "./commands/init"
+import { tokens } from "./commands/tokens"
 
-const pkg = createRequire(import.meta.url)("@yamada-ui/cli/package.json")
+export async function run() {
+  checkNode("22")
 
-export const run = async () => {
-  await initCLI()
+  await unhandledError()
+
+  updateNotifier({
+    pkg: packageJson,
+    shouldNotifyInNpmScript: true,
+    updateCheckInterval: 1000 * 60 * 60 * 24 * 3,
+  }).notify({ isGlobal: true })
+
+  console.log(
+    `\n${c.bold(c.green("Yamada UI CLI"))} v${packageJson.version} ${c.dim("by Yamada UI")}`,
+  )
+  console.log(`${c.dim(packageJson.description)}\n`)
+
   const program = new Command("Yamada UI CLI")
-    .version(pkg.version)
+    .version(packageJson.version, "-v, --version", "Display the version number")
     .usage(`${c.green("<command>")} [options]`)
 
-  program
-    .command("tokens <path>")
-    .option("--cwd <path>", "Current working directory")
-    .option("-o, --out <path>", `Output path`)
-    .option("-w, --watch [path]", "Watch directory for changes and rebuild")
-    .option("--internal", "Generate internal tokens")
-    .action(actionTokens)
-
-  program
-    .command("theme <path>")
-    .option("-b, --branch <branch>", "Branch to download")
-    .option("--cwd <path>", "Current working directory")
-    .option("-r, --replace", "Force replace the theme")
-    .action(actionTheme)
+  program.addCommand(init)
+  program.addCommand(add)
+  program.addCommand(diff)
+  program.addCommand(tokens)
 
   program.parse()
 }
+
+run()

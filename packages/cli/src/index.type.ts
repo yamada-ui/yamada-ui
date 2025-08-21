@@ -7,6 +7,10 @@ export interface SectionConfig {
   path?: string
 }
 
+export interface ThemeConfig {
+  path?: string
+}
+
 export interface LintConfig {
   enabled?: boolean
 }
@@ -24,6 +28,7 @@ export interface UserConfig {
   monorepo?: boolean
   path?: string
   providers?: SectionConfig
+  theme?: ThemeConfig
 }
 
 export interface SectionConfigWithPaths extends SectionConfig {

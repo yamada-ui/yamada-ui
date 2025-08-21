@@ -281,7 +281,7 @@ interface Options {
 
 export const tokens = new Command("tokens")
   .description("Generate theme typings")
-  .argument("<path>", "Path to the theme file")
+  .argument("[path]", "Path to the theme file")
   .option("--cwd <path>", "Current working directory", cwd)
   .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
   .option("-o, --out <path>", `Output path`)
@@ -289,7 +289,7 @@ export const tokens = new Command("tokens")
   .option("-l, --lint", "Lint the output file")
   .option("--internal", "Generate internal tokens", false)
   .action(async function (
-    inputPath: string,
+    inputPath: string | undefined,
     { config: configPath, cwd, format, internal, lint, out: outPath }: Options,
   ) {
     const spinner = ora()
@@ -310,8 +310,13 @@ export const tokens = new Command("tokens")
 
         config = await getConfig(cwd, configPath, { format, lint })
 
+        if (config.theme?.path)
+          inputPath ??= path.resolve(cwd, config.theme.path, "index.ts")
+
         spinner.succeed("Fetched config")
       }
+
+      if (!inputPath) throw new Error("No input path provided")
 
       spinner.start(`Getting theme`)
 

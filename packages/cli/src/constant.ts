@@ -3,6 +3,7 @@ import type { UserConfig } from "./index.type"
 import { splitVersion } from "./utils"
 
 export const CONFIG_FILE_NAME = "ui.json"
+export const THEME_PATH = "./theme"
 export const DEFAULT_PACKAGE_NAME = "@workspaces/ui"
 export const REGISTRY_URL = "https://v2.yamada-ui.com/registry/v2"
 export const DEFAULT_PATH = {

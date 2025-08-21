@@ -19,7 +19,7 @@ export async function getConfig(
   { format, lint }: GetConfigOptions = {},
 ): Promise<Config> {
   try {
-    const data = await readFile(path.resolve(cwd, configPath), "utf8")
+    const data = await readFile(path.resolve(cwd, configPath), "utf-8")
     const userConfig = JSON.parse(data) as UserConfig
 
     if (!isUndefined(format)) userConfig.format = { enabled: format }

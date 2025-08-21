@@ -7,6 +7,7 @@ import packageJson from "../package.json"
 import { add } from "./commands/add"
 import { diff } from "./commands/diff"
 import { init } from "./commands/init"
+import { theme } from "./commands/theme"
 import { tokens } from "./commands/tokens"
 
 export async function run() {
@@ -33,6 +34,7 @@ export async function run() {
   program.addCommand(add)
   program.addCommand(diff)
   program.addCommand(tokens)
+  program.addCommand(theme)
 
   program.parse()
 }

@@ -7,7 +7,7 @@ style: components/float/float.style.ts
 ---
 
 ```tsx preview
-<Box bg="bg.panel" boxSize="3xs" position="relative">
+<Box bg="bg.panel" boxSize="3xs" position="relative" m="lg">
   <Float
     bg="bg.contrast"
     color="fg.contrast"
@@ -60,9 +60,14 @@ const placements = [
 ] as const
 
 return (
-  <Grid gap="lg" p="lg" templateColumns="repeat(3, 1fr)">
+  <Grid p="lg" gap="lg" templateColumns="repeat(3, 1fr)">
     {placements.map((placement) => (
-      <GridItem key={placement} bg="bg.panel" boxSize="3xs" position="relative">
+      <GridItem
+        key={placement}
+        bg="bg.panel"
+        aspectRatio="1"
+        position="relative"
+      >
         <Float
           bg="bg.contrast"
           color="fg.contrast"
@@ -84,8 +89,8 @@ return (
 If the size of the element causes it to be positioned unexpectedly, adjust it using `offset`.
 
 ```tsx preview
-<Grid gap="md" p="md" templateColumns="repeat(3, 1fr)">
-  <GridItem bg="bg.panel" boxSize="3xs" position="relative">
+<Grid p="lg" gap="lg" templateColumns="repeat(3, 1fr)">
+  <GridItem bg="bg.panel" aspectRatio="1" position="relative">
     <Float
       bg="bg.contrast"
       color="fg.contrast"
@@ -99,7 +104,7 @@ If the size of the element causes it to be positioned unexpectedly, adjust it us
     </Float>
   </GridItem>
 
-  <GridItem bg="bg.panel" boxSize="3xs" position="relative">
+  <GridItem bg="bg.panel" aspectRatio="1" position="relative">
     <Float
       bg="bg.contrast"
       color="fg.contrast"
@@ -113,7 +118,7 @@ If the size of the element causes it to be positioned unexpectedly, adjust it us
     </Float>
   </GridItem>
 
-  <GridItem bg="bg.panel" boxSize="3xs" position="relative">
+  <GridItem bg="bg.panel" aspectRatio="1" position="relative">
     <Float
       bg="bg.contrast"
       color="fg.contrast"

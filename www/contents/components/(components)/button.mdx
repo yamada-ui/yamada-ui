@@ -39,7 +39,7 @@ import { Button } from "@workspace/ui"
   <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
     {(variant, index) => (
       <Button variant={variant} key={index}>
-        Button
+        {toTitleCase(variant)}
       </Button>
     )}
   </For>
@@ -52,8 +52,8 @@ import { Button } from "@workspace/ui"
 <Wrap gap="md">
   <For each={["xs", "sm", "md", "lg", "xl"]}>
     {(size, index) => (
-      <Button size={size} key={index}>
-        Button
+      <Button size={size} key={index} minW="24">
+        {toTitleCase(size)}
       </Button>
     )}
   </For>
@@ -67,7 +67,7 @@ import { Button } from "@workspace/ui"
   <For each={["success", "warning"]}>
     {(colorScheme, index) => (
       <Button colorScheme={colorScheme} key={index}>
-        Button
+        {toTitleCase(colorScheme)}
       </Button>
     )}
   </For>

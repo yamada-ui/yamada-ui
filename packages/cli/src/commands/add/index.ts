@@ -278,17 +278,16 @@ export const add = new Command("add")
         }
       }
 
-      if (existsSync(path.resolve(config.srcPath, "index.ts"))) {
+      if (existsSync(config.indexPath)) {
         tasks.add({
           task: async (_, task) => {
-            const targetPath = path.resolve(config.srcPath, "index.ts")
             const content = replaceIndex(
               targetNames,
-              await readFile(targetPath, "utf-8"),
+              await readFile(config.indexPath, "utf-8"),
               config,
             )
 
-            await writeFileSafe(targetPath, content, config)
+            await writeFileSafe(config.indexPath, content, config)
 
             task.title = `Updated ${c.cyan("index.ts")}`
           },
@@ -297,15 +296,12 @@ export const add = new Command("add")
       } else {
         tasks.add({
           task: async (_, task) => {
-            const { sources } = await fetchRegistry("index")
-            const targetPath = path.resolve(config.srcPath, "index.ts")
-            const content = replaceIndex(
-              targetNames,
-              sources[0]!.content!,
-              config,
-            )
+            const {
+              sources: [source],
+            } = await fetchRegistry("index")
+            const content = replaceIndex(targetNames, source!.content!, config)
 
-            await writeFileSafe(targetPath, content, config)
+            await writeFileSafe(config.indexPath, content, config)
 
             task.title = `Generated ${c.cyan("index.ts")}`
           },

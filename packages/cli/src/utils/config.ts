@@ -43,6 +43,11 @@ export async function getConfig(
       }),
     )
 
+    const indexPath = path.resolve(srcPath, "index.ts")
+
+    if (userConfig.theme?.path)
+      userConfig.theme.path = path.resolve(cwd, userConfig.theme.path)
+
     function isSection(section: string): section is Section {
       return SECTION_NAMES.includes(section as Section)
     }
@@ -102,6 +107,7 @@ export async function getConfig(
       getSection,
       getSectionAbsolutePath,
       getSectionPath,
+      indexPath,
       isSection,
       rootPath,
       srcPath,
@@ -112,7 +118,7 @@ export async function getConfig(
     const prefix = `${command}${args.length ? ` ${args.join(" ")}` : ""}`
 
     throw new Error(
-      `No config found. Please run ${c.cyan(`${prefix} ${packageJson.name}@latest init`)}.`,
+      `No ${c.yellow("config")} found. Please run ${c.cyan(`${prefix} ${packageJson.name}@latest init`)}.`,
     )
   }
 }

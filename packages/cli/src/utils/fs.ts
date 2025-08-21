@@ -1,5 +1,4 @@
 import type { ObjectEncodingOptions } from "fs"
-import type { Config } from "../index.type"
 import type { LintFilesOptions } from "./lint"
 import type { FormatOptions } from "./prettier"
 import fs, { existsSync, statSync } from "fs"
@@ -65,14 +64,18 @@ export async function validateDir(path: string) {
 
   if (!writeable)
     throw new Error(
-      `The path ${path} does not writeable. Please check the permissions.`,
+      `The path ${c.yellow(path)} does not writeable. Please check the permissions.`,
     )
 
   if (!existsSync(path))
-    throw new Error(`The path ${path} does not exist. Please try again.`)
+    throw new Error(
+      `The path ${c.yellow(path)} does not exist. Please try again.`,
+    )
 
   if (!statSync(path).isDirectory())
-    throw new Error(`The path ${path} is not a directory. Please try again.`)
+    throw new Error(
+      `The path ${c.yellow(path)} is not a directory. Please try again.`,
+    )
 
   return true
 }
@@ -91,12 +94,9 @@ export function timer() {
   return { end, start }
 }
 
-export async function getComponentFiles(
-  componentName: string,
-  { srcPath }: Config,
-) {
+export async function getFiles(pattern: string | string[]) {
   const files: { [key: string]: string } = {}
-  const [dirPath] = await glob(path.join(srcPath, "**", componentName))
+  const [dirPath] = await glob(pattern)
 
   if (!dirPath) return files
 

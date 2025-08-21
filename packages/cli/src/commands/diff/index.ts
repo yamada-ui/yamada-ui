@@ -1,153 +1,22 @@
-import type { ChangeObject } from "diff"
-import type { ListrTask } from "listr2"
-import type { Config, Registries } from "../../index.type"
 import boxen from "boxen"
 import { Command } from "commander"
-import { diffLines } from "diff"
-import { Listr } from "listr2"
+import { existsSync } from "fs"
 import ora from "ora"
-import path from "path"
 import c from "picocolors"
 import packageJson from "../../../package.json"
 import { CONFIG_FILE_NAME } from "../../constant"
 import {
   cwd,
-  fetchRegistry,
-  formatText,
-  getComponentFiles,
   getConfig,
   getGeneratedNameMap,
   getPackageManager,
-  lintText,
   packageExecuteCommands,
   timer,
-  transformContent,
   validateDir,
 } from "../../utils"
-
-interface data {
-  [key: string]: { [key: string]: string }
-}
-
-interface Changes {
-  [key: string]: {
-    [key: string]: ChangeObject<string>[]
-  }
-}
-
-async function getData(
-  componentNames: string[],
-  config: Config,
-  concurrent = true,
-) {
-  const data: { [key: string]: { [key: string]: string } } = {}
-  const registries: Registries = {}
-  const tasks = new Listr(
-    [
-      ...componentNames.map(
-        (componentName) =>
-          ({
-            task: async (_, task) => {
-              data[componentName] = await getComponentFiles(
-                componentName,
-                config,
-              )
-
-              task.title = `Got ${c.cyan(componentName)} files`
-            },
-            title: `Getting ${c.cyan(componentName)} files`,
-          }) satisfies ListrTask,
-      ),
-      ...componentNames.map(
-        (componentName) =>
-          ({
-            task: async (_, task) => {
-              registries[componentName] = await fetchRegistry(componentName)
-
-              task.title = `Fetched ${c.cyan(componentName)} registry`
-            },
-            title: `Fetching ${c.cyan(componentName)} registry`,
-          }) satisfies ListrTask,
-      ),
-    ],
-    { concurrent },
-  )
-
-  await tasks.run()
-
-  return { data, registries }
-}
-
-async function getDiff(
-  generatedNames: string[],
-  data: data,
-  registries: Registries,
-  config: Config,
-  concurrent = true,
-) {
-  const { cwd, format, lint } = config
-  const changes: Changes = {}
-
-  const tasks = new Listr(
-    Object.entries(registries).map(
-      ([name, { section, sources }]) =>
-        ({
-          task: async (_, task) => {
-            const files = data[name]
-
-            await Promise.all(
-              sources.map(async ({ name: fileName, content }) => {
-                if (!content) return
-
-                const file = files?.[fileName]
-
-                if (file) {
-                  const filePath = config.isSection(section)
-                    ? path.join(
-                        config.getSectionAbsolutePath(section),
-                        name,
-                        fileName,
-                      )
-                    : path.join(
-                        config.srcPath,
-                        section === "theme" ? name : "",
-                        fileName,
-                      )
-
-                  content = transformContent(
-                    section,
-                    content,
-                    config,
-                    generatedNames,
-                  )
-                  content = await lintText(content, { ...lint, cwd, filePath })
-                  content = await formatText(content, format)
-
-                  const diff = diffLines(file, content)
-
-                  if (diff.length > 1) {
-                    changes[name] ??= {}
-                    changes[name][fileName] = diff
-                  }
-                } else {
-                  changes[name] ??= {}
-                  changes[name][fileName] = []
-                }
-              }),
-            )
-
-            task.title = `Diffed ${c.cyan(name)}`
-          },
-          title: `Diffing ${c.cyan(name)}`,
-        }) satisfies ListrTask,
-    ),
-    { concurrent },
-  )
-
-  await tasks.run()
-
-  return changes
-}
+import { getComponentData } from "./get-component-data"
+import { getComponentDiff } from "./get-component-diff"
+import { printCount, printDiff } from "./print-diff"
 
 interface Options {
   config: string
@@ -164,7 +33,7 @@ export const diff = new Command("diff")
   .option("-s, --sequential", "run tasks sequentially.", false)
   .option("-d, --detail", "show detailed changes", false)
   .action(async function (
-    componentName: string | undefined,
+    targetName: string | undefined,
     { config: configPath, cwd, detail, sequential }: Options,
   ) {
     const spinner = ora()
@@ -175,8 +44,8 @@ export const diff = new Command("diff")
       const packageManager = getPackageManager()
       const { args, command } = packageExecuteCommands(packageManager)
       const prefix = `${command}${args.length ? ` ${args.join(" ")}` : ""}`
-      const addCommand = c.cyan(`${prefix} ${packageJson.name}@latest add`)
-      const diffCommand = c.cyan(`${prefix} ${packageJson.name}@latest diff`)
+      const getCommand = (command: string) =>
+        c.cyan(`${prefix} ${packageJson.name}@latest ${command}`)
 
       spinner.start("Validating directory")
 
@@ -195,41 +64,61 @@ export const diff = new Command("diff")
       const componentNames: string[] = []
       const generatedNameMap = await getGeneratedNameMap(config)
       const generatedNames = Object.values(generatedNameMap).flat()
+      const existsTheme = !!config.theme?.path && existsSync(config.theme.path)
+
+      let index = targetName === "index"
+      let theme = targetName === "theme"
 
       spinner.succeed("Got generated components")
 
-      if (componentName) {
-        if (generatedNames.includes(componentName)) {
-          componentNames.push(componentName)
-        } else {
-          throw new Error(
-            [
-              `No ${c.yellow(componentName)} found in generated components.`,
-              `Please run ${addCommand} ${c.green(componentName)}`,
-              "to add it.",
-            ].join(" "),
-          )
-        }
-      } else {
-        componentNames.push(...generatedNames)
+      if (theme && !existsTheme) {
+        throw new Error(
+          [
+            `No ${c.yellow("theme")} found.`,
+            `Please run ${getCommand("theme")}`,
+            "to generate it.",
+          ].join(" "),
+        )
       }
 
-      if (!componentNames.length) {
+      if (!index && !theme) {
+        if (targetName) {
+          if (generatedNames.includes(targetName)) {
+            componentNames.push(targetName)
+          } else {
+            throw new Error(
+              [
+                `No ${c.yellow(targetName)} found in generated components.`,
+                `Please run ${getCommand("add")} ${c.green(targetName)}`,
+                "to add it.",
+              ].join(" "),
+            )
+          }
+        } else {
+          componentNames.push(...generatedNames)
+
+          index = true
+
+          if (existsTheme) theme = true
+        }
+      }
+
+      if (!index && !theme && !componentNames.length) {
         throw new Error(
           [
             "No components found.",
-            `Please run ${addCommand} ${c.green("<component>")}`,
+            `Please run ${getCommand("add")} ${c.green("<component>")}`,
             "to add components.",
           ].join(" "),
         )
       }
 
-      const { data, registries } = await getData(
+      const { data, registries } = await getComponentData(
         componentNames,
         config,
-        !sequential,
+        { concurrent: !sequential, index, theme },
       )
-      const changes = await getDiff(
+      const changes = await getComponentDiff(
         generatedNames,
         data,
         registries,
@@ -243,8 +132,8 @@ export const diff = new Command("diff")
       if (!hasChanges) {
         console.log(c.cyan("No updates found."))
       } else {
-        if (componentName) {
-          const diff = changes[componentName]
+        if (targetName) {
+          const diff = changes[targetName]
 
           if (!diff) return
 
@@ -266,29 +155,18 @@ export const diff = new Command("diff")
             })
           })
         } else {
-          componentNames.forEach((name) => {
-            const diff = changes[name]
+          if (index) {
+            const diff = changes.index
 
             if (!diff) return
 
-            console.log(`- ${name}`)
+            printCount("index.ts", diff["index.ts"], "")
+          }
 
-            Object.entries(diff).forEach(([fileName, diff]) => {
-              const added = diff.reduce((prev, { added, count }) => {
-                if (added) return prev + count
+          if (theme) printDiff("theme", changes.theme)
 
-                return prev
-              }, 0)
-              const removed = diff.reduce((prev, { count, removed }) => {
-                if (removed) return prev + count
-
-                return prev
-              }, 0)
-
-              console.log(
-                `  - ${c.cyan(fileName)} ${c.green(added)} insertions ${c.red(removed)} deletions`,
-              )
-            })
+          componentNames.forEach((name) => {
+            printDiff(name, changes[name])
           })
 
           console.log("")
@@ -296,7 +174,7 @@ export const diff = new Command("diff")
             boxen(
               [
                 "Run",
-                c.cyan(diffCommand),
+                getCommand("diff"),
                 c.green("<component>"),
                 "to see the changes.",
               ].join(" "),

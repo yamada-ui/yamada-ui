@@ -43,6 +43,7 @@ export interface Config extends UserConfig {
   getSection: (value?: string) => SectionConfigWithPaths | undefined
   getSectionAbsolutePath: (section: Section) => string
   getSectionPath: (section: Section) => string
+  indexPath: string
   isSection: (section: string) => section is Section
   rootPath: string
   srcPath: string

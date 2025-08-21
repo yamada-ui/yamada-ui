@@ -28,13 +28,13 @@ interface Options {
 }
 
 export const theme = new Command("theme")
-  .description("Generate theme to your project")
-  .argument("[path]", "Path to the theme directory", THEME_PATH)
-  .option("--cwd <path>", "Current working directory", cwd)
-  .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
+  .description("generate theme to your project")
+  .argument("[path]", "path to the theme directory", THEME_PATH)
+  .option("--cwd <path>", "current working directory", cwd)
+  .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing directory.", false)
-  .option("-f, --format", "Format the output files.")
-  .option("-l, --lint", "Lint the output files.")
+  .option("-f, --format", "format the output files.")
+  .option("-l, --lint", "lint the output files.")
   .action(async function (
     themePath: string,
     { config: configPath, cwd, format, lint, overwrite }: Options,

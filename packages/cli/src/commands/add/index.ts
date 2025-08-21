@@ -40,15 +40,15 @@ interface Options {
 }
 
 export const add = new Command("add")
-  .description("Add a component to your project")
-  .argument("[components...]", "Components to add")
-  .option("--cwd <path>", "Current working directory", cwd)
-  .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
+  .description("add a component to your project")
+  .argument("[components...]", "components to add")
+  .option("--cwd <path>", "current working directory", cwd)
+  .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing files.", false)
-  .option("-i, --install", "Install dependencies", false)
-  .option("-s, --sequential", "Run tasks sequentially.", false)
-  .option("-f, --format", "Format the output files.")
-  .option("-l, --lint", "Lint the output files.")
+  .option("-i, --install", "install dependencies", false)
+  .option("-s, --sequential", "run tasks sequentially.", false)
+  .option("-f, --format", "format the output files.")
+  .option("-l, --lint", "lint the output files.")
   .action(async function (
     componentNames: string[],
     {

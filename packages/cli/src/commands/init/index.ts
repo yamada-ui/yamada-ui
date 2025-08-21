@@ -41,10 +41,10 @@ interface Options {
 }
 
 export const init = new Command("init")
-  .description("Initialize your project and install dependencies")
-  .option("--cwd <path>", "Current working directory", cwd)
-  .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
-  .option("-o, --overwrite", "Overwrite existing files.", false)
+  .description("initialize your project and install dependencies")
+  .option("--cwd <path>", "current working directory", cwd)
+  .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
+  .option("-o, --overwrite", "overwrite existing files.", false)
   .action(async function ({ config: configPath, cwd, overwrite }: Options) {
     const spinner = ora()
 

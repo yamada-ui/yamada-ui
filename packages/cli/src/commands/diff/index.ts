@@ -157,12 +157,12 @@ interface Options {
 }
 
 export const diff = new Command("diff")
-  .description("Check for updates against the registry")
-  .argument("[component]", "Component to check")
-  .option("--cwd <path>", "Current working directory", cwd)
-  .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
-  .option("-s, --sequential", "Run tasks sequentially.", false)
-  .option("-d, --detail", "Show detailed changes", false)
+  .description("check for updates against the registry")
+  .argument("[component]", "component to check")
+  .option("--cwd <path>", "current working directory", cwd)
+  .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
+  .option("-s, --sequential", "run tasks sequentially.", false)
+  .option("-d, --detail", "show detailed changes", false)
   .action(async function (
     componentName: string | undefined,
     { config: configPath, cwd, detail, sequential }: Options,

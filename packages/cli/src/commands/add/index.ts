@@ -36,6 +36,7 @@ interface Options {
   install: boolean
   lint: boolean
   overwrite: boolean
+  sequential: boolean
 }
 
 export const add = new Command("add")
@@ -45,18 +46,25 @@ export const add = new Command("add")
   .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing files.", false)
   .option("-i, --install", "Install dependencies", false)
-  .option("-f, --format", "Format the output files.", false)
-  .option("-l, --lint", "Lint the output files.", false)
+  .option("-s, --sequential", "Run tasks sequentially.", false)
+  .option("-f, --format", "Format the output files.")
+  .option("-l, --lint", "Lint the output files.")
   .action(async function (
     componentNames: string[],
-    { config: configPath, cwd, format, install, lint, overwrite }: Options,
+    {
+      config: configPath,
+      cwd,
+      format,
+      install,
+      lint,
+      overwrite,
+      sequential,
+    }: Options,
   ) {
     const spinner = ora()
 
     try {
       const { end } = timer()
-
-      const all = !componentNames.length
 
       spinner.start("Validating directory")
 
@@ -74,7 +82,7 @@ export const add = new Command("add")
 
       const omittedGeneratedNames: string[] = []
 
-      if (all) {
+      if (!componentNames.length) {
         const { proceed } = await prompts({
           type: "confirm",
           name: "proceed",
@@ -140,8 +148,8 @@ export const add = new Command("add")
       spinner.start("Fetching registries")
 
       const registries = await fetchRegistries(componentNames, config, {
-        dependencies: !all,
-        dependents: !all,
+        dependencies: !!componentNames.length,
+        dependents: !!componentNames.length,
         omit: omittedGeneratedNames,
       })
       const registryNames = Object.keys(registries)
@@ -168,6 +176,21 @@ export const add = new Command("add")
 
       spinner.succeed("Fetched registries")
 
+      if (componentNames.length !== registryNames.length) {
+        const colorizedNames = registryNames.map((name) => c.yellow(name))
+
+        const { proceed } = await prompts({
+          type: "confirm",
+          name: "proceed",
+          initial: true,
+          message: c.reset(
+            `The following components will be added: ${colorizedNames.join(", ")}. Do you want to add them?`,
+          ),
+        })
+
+        if (!proceed) process.exit(0)
+      }
+
       const targetNames = [
         ...new Set([...omittedGeneratedNames, ...registryNames]),
       ]
@@ -175,8 +198,7 @@ export const add = new Command("add")
       const tasks = new Listr(
         Object.entries(registries)
           .map(([name, registry]): ListrTask | undefined => {
-            if (registry.section === "root" || registry.section === "theme")
-              return
+            if (!config.isSection(registry.section)) return
 
             const sectionPath = config.getSectionAbsolutePath(registry.section)
             const dirPath = path.join(sectionPath, name)
@@ -191,43 +213,8 @@ export const add = new Command("add")
             }
           })
           .filter((task) => !isUndefined(task)),
-        { concurrent: true },
+        { concurrent: !sequential },
       )
-
-      if (existsSync(path.resolve(config.srcPath, "index.ts"))) {
-        tasks.add({
-          task: async (_, task) => {
-            const targetPath = path.resolve(config.srcPath, "index.ts")
-            const content = replaceIndex(
-              targetNames,
-              await readFile(targetPath, "utf-8"),
-              config,
-            )
-
-            await writeFileSafe(targetPath, content, config)
-
-            task.title = `Updated ${c.cyan("index.ts")}`
-          },
-          title: `Updating ${c.cyan("index.ts")}`,
-        })
-      } else {
-        tasks.add({
-          task: async (_, task) => {
-            const { sources } = await fetchRegistry("index")
-            const targetPath = path.resolve(config.srcPath, "index.ts")
-            const content = replaceIndex(
-              targetNames,
-              sources[0]!.content!,
-              config,
-            )
-
-            await writeFileSafe(targetPath, content, config)
-
-            task.title = `Generated ${c.cyan("index.ts")}`
-          },
-          title: `Generating ${c.cyan("index.ts")}`,
-        })
-      }
 
       if (affectedNames.length && generatedNameMap) {
         if (!overwrite) {
@@ -289,6 +276,41 @@ export const add = new Command("add")
             })
           })
         }
+      }
+
+      if (existsSync(path.resolve(config.srcPath, "index.ts"))) {
+        tasks.add({
+          task: async (_, task) => {
+            const targetPath = path.resolve(config.srcPath, "index.ts")
+            const content = replaceIndex(
+              targetNames,
+              await readFile(targetPath, "utf-8"),
+              config,
+            )
+
+            await writeFileSafe(targetPath, content, config)
+
+            task.title = `Updated ${c.cyan("index.ts")}`
+          },
+          title: `Updating ${c.cyan("index.ts")}`,
+        })
+      } else {
+        tasks.add({
+          task: async (_, task) => {
+            const { sources } = await fetchRegistry("index")
+            const targetPath = path.resolve(config.srcPath, "index.ts")
+            const content = replaceIndex(
+              targetNames,
+              sources[0]!.content!,
+              config,
+            )
+
+            await writeFileSafe(targetPath, content, config)
+
+            task.title = `Generated ${c.cyan("index.ts")}`
+          },
+          title: `Generating ${c.cyan("index.ts")}`,
+        })
       }
 
       if (dependencies.length) {

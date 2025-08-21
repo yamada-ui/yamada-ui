@@ -1,6 +1,6 @@
 import type { ObjectEncodingOptions } from "fs"
 import type { Config } from "../index.type"
-import type { LintOptions } from "./lint"
+import type { LintFilesOptions } from "./lint"
 import type { FormatOptions } from "./prettier"
 import fs, { existsSync, statSync } from "fs"
 import {
@@ -12,8 +12,8 @@ import {
 import { glob } from "glob"
 import path from "path"
 import c from "picocolors"
-import { lint } from "./lint"
-import { format } from "./prettier"
+import { lintFiles } from "./lint"
+import { formatFiles } from "./prettier"
 
 export const cwd = process.env.INIT_CWD ?? process.cwd()
 
@@ -33,18 +33,17 @@ export async function isWriteable(directory: string) {
 export interface WriteFileOptions extends ObjectEncodingOptions {
   cwd?: string
   format?: FormatOptions
-  lint?: LintOptions
+  lint?: LintFilesOptions
 }
 
 export async function writeFile(
   path: string,
   content: string,
-  { format: formatConfig, lint: lintConfig, ...rest }: WriteFileOptions = {},
+  options: WriteFileOptions = {},
 ) {
-  content = await lint(content, { cwd: rest.cwd ?? cwd, ...lintConfig })
-  content = await format(content, formatConfig)
-
-  await originalWriteFile(path, content, rest.encoding ?? "utf-8")
+  await originalWriteFile(path, content, options.encoding ?? "utf-8")
+  await lintFiles(path, { cwd: options.cwd ?? cwd, ...options.lint })
+  await formatFiles(path, options.format)
 }
 
 export async function writeFileSafe(

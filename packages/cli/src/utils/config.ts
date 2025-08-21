@@ -43,8 +43,9 @@ export async function getConfig(
       }),
     )
 
-    userConfig.lint ??= {}
-    userConfig.lint.filePath ??= path.resolve(srcPath, "index.ts")
+    function isSection(section: string): section is Section {
+      return SECTION_NAMES.includes(section as Section)
+    }
 
     function getSectionAbsolutePath(section: Section) {
       return path.resolve(
@@ -101,6 +102,7 @@ export async function getConfig(
       getSection,
       getSectionAbsolutePath,
       getSectionPath,
+      isSection,
       rootPath,
       srcPath,
     }

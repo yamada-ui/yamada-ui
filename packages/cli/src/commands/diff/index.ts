@@ -6,17 +6,19 @@ import { Command } from "commander"
 import { diffLines } from "diff"
 import { Listr } from "listr2"
 import ora from "ora"
+import path from "path"
 import c from "picocolors"
 import packageJson from "../../../package.json"
 import { CONFIG_FILE_NAME } from "../../constant"
 import {
   cwd,
   fetchRegistry,
-  format,
+  formatText,
   getComponentFiles,
   getConfig,
   getGeneratedNameMap,
   getPackageManager,
+  lintText,
   packageExecuteCommands,
   timer,
   transformContent,
@@ -33,7 +35,11 @@ interface Changes {
   }
 }
 
-async function getData(componentNames: string[], config: Config) {
+async function getData(
+  componentNames: string[],
+  config: Config,
+  concurrent = true,
+) {
   const data: { [key: string]: { [key: string]: string } } = {}
   const registries: Registries = {}
   const tasks = new Listr(
@@ -64,7 +70,7 @@ async function getData(componentNames: string[], config: Config) {
           }) satisfies ListrTask,
       ),
     ],
-    { concurrent: true },
+    { concurrent },
   )
 
   await tasks.run()
@@ -77,42 +83,68 @@ async function getDiff(
   data: data,
   registries: Registries,
   config: Config,
+  concurrent = true,
 ) {
+  const { cwd, format, lint } = config
   const changes: Changes = {}
 
-  await Promise.all(
-    Object.entries(data).map(async ([name, files]) => {
-      const registry = registries[name]
+  const tasks = new Listr(
+    Object.entries(registries).map(
+      ([name, { section, sources }]) =>
+        ({
+          task: async (_, task) => {
+            const files = data[name]
 
-      if (!registry) return
+            await Promise.all(
+              sources.map(async ({ name: fileName, content }) => {
+                if (!content) return
 
-      await Promise.all(
-        Object.entries(files).map(async ([fileName, file]) => {
-          const registryFile = registry.sources.find(
-            ({ name }) => name === fileName,
-          )
+                const file = files?.[fileName]
 
-          if (!registryFile?.content) return
+                if (file) {
+                  const filePath = config.isSection(section)
+                    ? path.join(
+                        config.getSectionAbsolutePath(section),
+                        name,
+                        fileName,
+                      )
+                    : path.join(
+                        config.srcPath,
+                        section === "theme" ? name : "",
+                        fileName,
+                      )
 
-          const content = await format(
-            transformContent(
-              registry.section,
-              registryFile.content,
-              config,
-              generatedNames,
-            ),
-          )
+                  content = transformContent(
+                    section,
+                    content,
+                    config,
+                    generatedNames,
+                  )
+                  content = await lintText(content, { ...lint, cwd, filePath })
+                  content = await formatText(content, format)
 
-          const diff = diffLines(file, content)
+                  const diff = diffLines(file, content)
 
-          if (diff.length < 2) return
+                  if (diff.length > 1) {
+                    changes[name] ??= {}
+                    changes[name][fileName] = diff
+                  }
+                } else {
+                  changes[name] ??= {}
+                  changes[name][fileName] = []
+                }
+              }),
+            )
 
-          changes[name] ??= {}
-          changes[name][fileName] = diff
-        }),
-      )
-    }),
+            task.title = `Diffed ${c.cyan(name)}`
+          },
+          title: `Diffing ${c.cyan(name)}`,
+        }) satisfies ListrTask,
+    ),
+    { concurrent },
   )
+
+  await tasks.run()
 
   return changes
 }
@@ -121,6 +153,7 @@ interface Options {
   config: string
   cwd: string
   detail: boolean
+  sequential: boolean
 }
 
 export const diff = new Command("diff")
@@ -128,10 +161,11 @@ export const diff = new Command("diff")
   .argument("[component]", "Component to check")
   .option("--cwd <path>", "Current working directory", cwd)
   .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
+  .option("-s, --sequential", "Run tasks sequentially.", false)
   .option("-d, --detail", "Show detailed changes", false)
   .action(async function (
     componentName: string | undefined,
-    { config: configPath, cwd, detail = false }: Options,
+    { config: configPath, cwd, detail = false, sequential }: Options,
   ) {
     const spinner = ora()
 
@@ -156,10 +190,9 @@ export const diff = new Command("diff")
 
       spinner.succeed("Fetched config")
 
-      const componentNames: string[] = []
-
       spinner.start("Getting generated components")
 
+      const componentNames: string[] = []
       const generatedNameMap = await getGeneratedNameMap(config)
       const generatedNames = Object.values(generatedNameMap).flat()
 
@@ -191,8 +224,18 @@ export const diff = new Command("diff")
         )
       }
 
-      const { data, registries } = await getData(componentNames, config)
-      const changes = await getDiff(generatedNames, data, registries, config)
+      const { data, registries } = await getData(
+        componentNames,
+        config,
+        !sequential,
+      )
+      const changes = await getDiff(
+        generatedNames,
+        data,
+        registries,
+        config,
+        !sequential,
+      )
       const hasChanges = Object.keys(changes).length
 
       console.log("---------------------------------")

@@ -5,6 +5,7 @@ import type {
   Registry,
   RegistrySection,
   Section,
+  Source,
 } from "../index.type"
 import { readdir } from "fs/promises"
 import { HttpsProxyAgent } from "https-proxy-agent"
@@ -127,7 +128,7 @@ export async function fetchRegistries(
         const { dependencies, dependents, section } = results[name]
         const target: string[] = []
 
-        if (section === "root" || section === "theme") return
+        if (!config.isSection(section)) return
 
         withDependencies =
           withDependencies && (config[section]?.dependents ?? true)
@@ -273,6 +274,31 @@ export function transformTemplateContent(template: string, data: Dict) {
   return content
 }
 
+export async function generateSource(
+  dirPath: string,
+  section: RegistrySection,
+  { name: fileName, content, data, template }: Source,
+  config: Config,
+  generatedNames: string[] = [],
+) {
+  const targetPath = path.resolve(dirPath, fileName)
+
+  if (content) {
+    content = transformContent(section, content, config, generatedNames)
+
+    await writeFileSafe(targetPath, content, config)
+  } else if (template && data) {
+    await Promise.all(
+      data.map(async ({ name: fileName, ...rest }) => {
+        content = transformTemplateContent(template, rest)
+        content = transformContent(section, content, config, generatedNames)
+
+        await writeFileSafe(path.resolve(targetPath, fileName), content, config)
+      }),
+    )
+  }
+}
+
 export async function generateSources(
   dirPath: string,
   { section, sources }: Registry,
@@ -280,28 +306,10 @@ export async function generateSources(
   generatedNames: string[] = [],
 ) {
   await Promise.all(
-    sources.map(async ({ name: fileName, content, data, template }) => {
-      const targetPath = path.resolve(dirPath, fileName)
-
-      if (content) {
-        content = transformContent(section, content, config, generatedNames)
-
-        await writeFileSafe(targetPath, content, config)
-      } else if (template && data) {
-        await Promise.all(
-          data.map(async ({ name: fileName, ...rest }) => {
-            content = transformTemplateContent(template, rest)
-            content = transformContent(section, content, config, generatedNames)
-
-            await writeFileSafe(
-              path.resolve(targetPath, fileName),
-              content,
-              config,
-            )
-          }),
-        )
-      }
-    }),
+    sources.map(
+      async (source) =>
+        await generateSource(dirPath, section, source, config, generatedNames),
+    ),
   )
 }
 

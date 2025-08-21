@@ -9,8 +9,8 @@ export interface SectionConfig {
 
 export interface LintConfig {
   enabled?: boolean
-  filePath?: string
 }
+
 export interface FormatConfig {
   configPath?: null | string
   enabled?: boolean
@@ -38,6 +38,7 @@ export interface Config extends UserConfig {
   getSection: (value?: string) => SectionConfigWithPaths | undefined
   getSectionAbsolutePath: (section: Section) => string
   getSectionPath: (section: Section) => string
+  isSection: (section: string) => section is Section
   rootPath: string
   srcPath: string
 }

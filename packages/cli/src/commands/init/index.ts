@@ -1,5 +1,5 @@
 import type { PackageNameWithVersion, UserConfig } from "../../index.type"
-import { isObject } from "@yamada-ui/utils"
+import { isObject, merge } from "@yamada-ui/utils"
 import boxen from "boxen"
 import { Command } from "commander"
 import { existsSync } from "fs"
@@ -11,18 +11,18 @@ import prompts from "prompts"
 import { rimraf } from "rimraf"
 import {
   CONFIG_FILE_NAME,
+  DEFAULT_CONFIG,
   DEFAULT_PACKAGE_JSON,
   DEFAULT_PACKAGE_NAME,
   DEFAULT_PATH,
-  DEFAULT_SECTION_CONFIG,
   REQUIRED_DEPENDENCIES,
   REQUIRED_DEV_DEPENDENCIES,
   TSCONFIG_JSON,
 } from "../../constant"
 import {
   addWorkspace,
+  cwd,
   fetchRegistry,
-  format,
   getNotInstalledDependencies,
   getPackageJson,
   getPackageManager,
@@ -42,7 +42,7 @@ interface Options {
 
 export const init = new Command("init")
   .description("Initialize your project and install dependencies")
-  .option("--cwd <path>", "Current working directory", process.cwd())
+  .option("--cwd <path>", "Current working directory", cwd)
   .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "Overwrite existing files.", false)
   .action(async function ({ config: configPath, cwd, overwrite }: Options) {
@@ -56,7 +56,7 @@ export const init = new Command("init")
       const configFileName = configPath.includes("/")
         ? configPath.split("/").at(-1)!
         : configPath
-      const config: UserConfig = { ...DEFAULT_SECTION_CONFIG }
+      const config: UserConfig = { ...DEFAULT_CONFIG }
 
       configPath = path.resolve(cwd, configPath)
 
@@ -65,6 +65,8 @@ export const init = new Command("init")
 
       let {
         src = true,
+        format = true,
+        lint = true,
         monorepo = true,
         outdir = "",
         packageName = "",
@@ -103,6 +105,22 @@ export const init = new Command("init")
             "Would you like your code inside a `src/` directory?",
           ),
         },
+        {
+          type: "toggle",
+          name: "format",
+          active: "Yes",
+          inactive: "No",
+          initial: true,
+          message: c.reset(`Would you like to use Prettier?`),
+        },
+        {
+          type: "toggle",
+          name: "lint",
+          active: "Yes",
+          inactive: "No",
+          initial: true,
+          message: c.reset(`Would you like to use ESLint?`),
+        },
       ])
 
       // eslint-disable-next-line no-control-regex
@@ -114,6 +132,8 @@ export const init = new Command("init")
 
       config.monorepo = monorepo
       config.path = outdir
+      config.format = { enabled: format }
+      config.lint = { enabled: lint }
 
       const { generate } = await prompts({
         type: "confirm",
@@ -141,7 +161,8 @@ export const init = new Command("init")
 
       await writeFileSafe(
         configPath,
-        await format(JSON.stringify(config), { parser: "json" }),
+        JSON.stringify(config),
+        merge(config, { format: { parser: "json" } }),
       )
 
       spinner.succeed(`Generated ${c.cyan(configFileName)}`)
@@ -185,13 +206,16 @@ export const init = new Command("init")
             {
               task: async (_, task) => {
                 const targetPath = path.resolve(outdirPath, "package.json")
-                const data = JSON.stringify({
+                const content = JSON.stringify({
                   name: packageName,
                   ...DEFAULT_PACKAGE_JSON,
                 })
-                const content = await format(data, { parser: "json" })
 
-                await writeFileSafe(targetPath, content)
+                await writeFileSafe(
+                  targetPath,
+                  content,
+                  merge(config, { format: { parser: "json" } }),
+                )
 
                 task.title = `Generated ${c.cyan("package.json")}`
               },
@@ -200,10 +224,13 @@ export const init = new Command("init")
             {
               task: async (_, task) => {
                 const targetPath = path.resolve(outdirPath, "tsconfig.json")
-                const data = JSON.stringify({ ...TSCONFIG_JSON })
-                const content = await format(data, { parser: "json" })
+                const content = JSON.stringify({ ...TSCONFIG_JSON })
 
-                await writeFileSafe(targetPath, content)
+                await writeFileSafe(
+                  targetPath,
+                  content,
+                  merge(config, { format: { parser: "json" } }),
+                )
 
                 task.title = `Generated ${c.cyan("tsconfig.json")}`
               },
@@ -217,9 +244,9 @@ export const init = new Command("init")
                   "index.ts",
                 )
                 const { sources } = await fetchRegistry("index")
-                const content = await format(sources[0]!.content!)
+                const content = sources[0]!.content!
 
-                await writeFileSafe(targetPath, content)
+                await writeFileSafe(targetPath, content, config)
 
                 task.title = `Generated ${c.cyan("index.ts")}`
               },
@@ -230,9 +257,9 @@ export const init = new Command("init")
                 if (outdir.includes("/")) {
                   const path = `${outdir.replace(/^\.\//, "").split("/")[0]}/**`
 
-                  await addWorkspace(cwd, path)
+                  await addWorkspace(cwd, path, config)
                 } else {
-                  await addWorkspace(cwd, outdir)
+                  await addWorkspace(cwd, outdir, config)
                 }
 
                 task.title = "Added workspace"
@@ -290,9 +317,9 @@ export const init = new Command("init")
               task: async (_, task) => {
                 const { sources } = await fetchRegistry("index")
                 const targetPath = path.resolve(outdirPath, "index.ts")
-                const content = await format(sources[0]!.content!)
+                const content = sources[0]!.content!
 
-                await writeFileSafe(targetPath, content)
+                await writeFileSafe(targetPath, content, config)
 
                 task.title = `Generated ${c.cyan("index.ts")}`
               },

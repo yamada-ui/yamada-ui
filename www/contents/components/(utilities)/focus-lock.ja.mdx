@@ -8,15 +8,15 @@ source: components/focus-lock
 const { open, onToggle } = useDisclosure()
 
 return (
-  <VStack align="flex-start" gap={0}>
+  <VStack align="flex-start" gap="0">
     <Button onClick={onToggle}>Please Click</Button>
 
     <Collapse open={open}>
       <FocusLock>
-        <VStack py="md" px="px">
-          <Input placeholder="This is Input" />
+        <VStack mt="lg" bg="bg.panel" p="lg" rounded="l2">
+          <Input placeholder="This is Input" bg="bg" />
 
-          <Button alignSelf="center">Button</Button>
+          <Button alignSelf="flex-end">Button</Button>
         </VStack>
       </FocusLock>
     </Collapse>

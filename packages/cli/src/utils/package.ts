@@ -1,6 +1,10 @@
 import type { Dict } from "@yamada-ui/utils"
-import type { PackageNameWithVersion, WantedVersion } from "../index.type"
-import { isObject } from "@yamada-ui/utils"
+import type {
+  PackageNameWithVersion,
+  UserConfig,
+  WantedVersion,
+} from "../index.type"
+import { isObject, merge } from "@yamada-ui/utils"
 import { execa } from "execa"
 import { existsSync } from "fs"
 import { readFile } from "fs/promises"
@@ -10,7 +14,6 @@ import semver from "semver"
 import validateProjectName from "validate-npm-package-name"
 import YAML from "yamljs"
 import { writeFileSafe } from "./fs"
-import { format } from "./prettier"
 
 export type PackageManager = "bun" | "npm" | "pnpm" | "yarn"
 
@@ -175,16 +178,19 @@ export async function installDependencies(
   }
 }
 
-export async function addWorkspace(cwd: string, workspacePath: string) {
+export async function addWorkspace(
+  cwd: string,
+  workspacePath: string,
+  config: UserConfig,
+) {
   const packageManager = getPackageManager()
 
   switch (packageManager) {
     case "pnpm": {
-      if (existsSync(path.resolve(cwd, "pnpm-workspace.yaml"))) {
-        const content = await readFile(
-          path.resolve(cwd, "pnpm-workspace.yaml"),
-          "utf8",
-        )
+      const targetPath = path.resolve(cwd, "pnpm-workspace.yaml")
+
+      if (existsSync(targetPath)) {
+        const content = await readFile(targetPath, "utf8")
         const json = YAML.parse(content)
 
         json.packages ??= []
@@ -192,15 +198,20 @@ export async function addWorkspace(cwd: string, workspacePath: string) {
         if (!json.packages.includes(workspacePath)) {
           json.packages.push(workspacePath)
 
-          const content = await format(YAML.stringify(json), { parser: "yaml" })
-
-          await writeFileSafe(path.resolve(cwd, "pnpm-workspace.yaml"), content)
+          await writeFileSafe(
+            targetPath,
+            YAML.stringify(json),
+            merge(config, { format: { parser: "yaml" } }),
+          )
         }
       } else {
-        const data = YAML.stringify({ packages: [workspacePath] })
-        const content = await format(data, { parser: "yaml" })
+        const content = YAML.stringify({ packages: [workspacePath] })
 
-        await writeFileSafe(path.resolve(cwd, "pnpm-workspace.yaml"), content)
+        await writeFileSafe(
+          targetPath,
+          content,
+          merge(config, { format: { parser: "yaml" } }),
+        )
       }
 
       break
@@ -213,11 +224,14 @@ export async function addWorkspace(cwd: string, workspacePath: string) {
       if (!packageJson.workspaces.includes(workspacePath)) {
         packageJson.workspaces.push(workspacePath)
 
-        const content = await format(JSON.stringify(packageJson), {
-          parser: "json",
-        })
+        const targetPath = path.resolve(cwd, "package.json")
+        const content = JSON.stringify(packageJson)
 
-        await writeFileSafe(path.resolve(cwd, "package.json"), content)
+        await writeFileSafe(
+          targetPath,
+          content,
+          merge(config, { format: { parser: "json" } }),
+        )
       }
 
       break

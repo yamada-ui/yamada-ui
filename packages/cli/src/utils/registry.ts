@@ -13,7 +13,6 @@ import path from "path"
 import c from "picocolors"
 import { REGISTRY_URL, SECTION_NAMES } from "../constant"
 import { writeFileSafe } from "./fs"
-import { format } from "./prettier"
 
 const agent = process.env.https_proxy
   ? new HttpsProxyAgent(process.env.https_proxy)
@@ -287,7 +286,7 @@ export async function generateSources(
       if (content) {
         content = transformContent(section, content, config, generatedNames)
 
-        await writeFileSafe(targetPath, await format(content))
+        await writeFileSafe(targetPath, content, config)
       } else if (template && data) {
         await Promise.all(
           data.map(async ({ name: fileName, ...rest }) => {
@@ -296,7 +295,8 @@ export async function generateSources(
 
             await writeFileSafe(
               path.resolve(targetPath, fileName),
-              await format(content),
+              content,
+              config,
             )
           }),
         )

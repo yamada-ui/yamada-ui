@@ -1,17 +1,25 @@
 import type { Dict } from "@yamada-ui/utils"
+import type { Config } from "../../index.type"
 import {
   getObject,
   isArray,
   isObject,
   isString,
+  merge,
   omitObject,
 } from "@yamada-ui/utils"
 import { Command } from "commander"
-import { ESLint } from "eslint"
-import { writeFile } from "fs/promises"
 import ora from "ora"
 import path from "path"
-import { format, getModule, timer } from "../../utils"
+import { CONFIG_FILE_NAME } from "../../constant"
+import {
+  cwd,
+  getConfig,
+  getModule,
+  timer,
+  validateDir,
+  writeFileSafe,
+} from "../../utils"
 import { config } from "./config"
 
 const TONES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
@@ -138,7 +146,7 @@ function extractKeys(obj: Dict, key: string) {
   return Object.keys(property)
 }
 
-async function generateThemeTokens(
+function generateThemeTokens(
   theme: Dict,
   { internal = false, theme: { responsive = false } = {} }: Dict,
 ) {
@@ -218,41 +226,37 @@ async function generateThemeTokens(
   const themeSchemes = extractThemeSchemes(theme)
 
   if (internal) {
-    return await format(
-      [
-        `import type { UsageThemeTokens } from "./system"`,
-        ``,
-        `export interface GeneratedThemeTokens extends UsageThemeTokens {`,
-        print({
-          ...tokens,
-          apply,
-          colorSchemes,
-          layerStyles,
-          textStyles,
-          themeSchemes,
-        }),
-        `}`,
-      ].join("\n"),
-    )
+    return [
+      `import type { UsageThemeTokens } from "./system"`,
+      ``,
+      `export interface GeneratedThemeTokens extends UsageThemeTokens {`,
+      print({
+        ...tokens,
+        apply,
+        colorSchemes,
+        layerStyles,
+        textStyles,
+        themeSchemes,
+      }),
+      `}`,
+    ].join("\n")
   } else {
-    return format(
-      [
-        `import type { UsageThemeTokens } from "@yamada-ui/react"`,
-        ``,
-        `declare module '@yamada-ui/react' {`,
-        `  interface CustomThemeTokens extends UsageThemeTokens {`,
-        `    ${print({
-          ...tokens,
-          apply,
-          colorSchemes,
-          layerStyles,
-          textStyles,
-          themeSchemes,
-        })}`,
-        `  }`,
-        `}`,
-      ].join("\n"),
-    )
+    return [
+      `import type { UsageThemeTokens } from "@yamada-ui/react"`,
+      ``,
+      `declare module '@yamada-ui/react' {`,
+      `  interface CustomThemeTokens extends UsageThemeTokens {`,
+      `    ${print({
+        ...tokens,
+        apply,
+        colorSchemes,
+        layerStyles,
+        textStyles,
+        themeSchemes,
+      })}`,
+      `  }`,
+      `}`,
+    ].join("\n")
   }
 }
 
@@ -267,29 +271,47 @@ async function getTheme(path: string, cwd: string) {
 }
 
 interface Options {
+  config: string
   cwd: string
   internal: boolean
-  lint: boolean
+  format?: boolean
+  lint?: boolean
   out?: string
 }
 
 export const tokens = new Command("tokens")
   .description("Generate theme typings")
   .argument("<path>", "Path to the theme file")
-  .option("--cwd <path>", "Current working directory", process.cwd())
+  .option("--cwd <path>", "Current working directory", cwd)
+  .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
   .option("-o, --out <path>", `Output path`)
-  .option("-l, --lint", "Lint the output file", false)
+  .option("-f, --format", "Format the output file")
+  .option("-l, --lint", "Lint the output file")
   .option("--internal", "Generate internal tokens", false)
   .action(async function (
     inputPath: string,
-    { cwd, internal, lint, out: outPath }: Options,
+    { config: configPath, cwd, format, internal, lint, out: outPath }: Options,
   ) {
     const spinner = ora()
 
     try {
-      const eslint = new ESLint({ fix: true })
-
       const { end } = timer()
+
+      spinner.start("Validating directory")
+
+      await validateDir(cwd)
+
+      spinner.succeed("Validated directory")
+
+      let config: Config | undefined
+
+      if (!internal) {
+        spinner.start("Fetching config")
+
+        config = await getConfig(cwd, configPath, { format, lint })
+
+        spinner.succeed("Fetched config")
+      }
 
       spinner.start(`Getting theme`)
 
@@ -306,21 +328,28 @@ export const tokens = new Command("tokens")
         outPath = path.join(cwd, "index.types.ts")
       }
 
-      const { config, theme } = await getTheme(inputPath, cwd)
+      const { config: themeConfig, theme } = await getTheme(inputPath, cwd)
 
       spinner.succeed(`Got theme`)
 
       spinner.start(`Generating theme typings`)
 
-      let content = await generateThemeTokens(theme, { ...config, internal })
+      const content = generateThemeTokens(theme, {
+        ...themeConfig,
+        internal,
+      })
 
-      if (lint) {
-        const [result] = await eslint.lintText(content, { filePath: inputPath })
-
-        if (result?.output) content = result.output
-      }
-
-      await writeFile(outPath, content, "utf8")
+      await writeFileSafe(
+        outPath,
+        content,
+        config
+          ? merge(config, { lint: { filePath: inputPath } })
+          : {
+              cwd,
+              format: { enabled: format },
+              lint: { enabled: lint, filePath: inputPath },
+            },
+      )
 
       spinner.succeed(`Generated theme typings`)
 

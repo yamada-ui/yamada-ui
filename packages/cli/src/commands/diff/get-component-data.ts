@@ -27,34 +27,8 @@ export async function getComponentData(
 ) {
   const data: Data = {}
   const registries: Registries = {}
-  const tasks = new Listr(
-    componentNames
-      .map(
-        (componentName) =>
-          [
-            {
-              task: async (_, task) => {
-                data[componentName] = await getFiles(
-                  path.join(config.srcPath, "**", componentName),
-                )
 
-                task.title = `Got ${c.cyan(componentName)} files`
-              },
-              title: `Getting ${c.cyan(componentName)} files`,
-            },
-            {
-              task: async (_, task) => {
-                registries[componentName] = await fetchRegistry(componentName)
-
-                task.title = `Fetched ${c.cyan(componentName)} registry`
-              },
-              title: `Fetching ${c.cyan(componentName)} registry`,
-            },
-          ] satisfies ListrTask[],
-      )
-      .flat(),
-    { concurrent },
-  )
+  const tasks = new Listr([], { concurrent })
 
   if (index) {
     tasks.add([
@@ -95,6 +69,34 @@ export async function getComponentData(
       },
     ])
   }
+
+  tasks.add(
+    componentNames
+      .map(
+        (componentName) =>
+          [
+            {
+              task: async (_, task) => {
+                data[componentName] = await getFiles(
+                  path.join(config.srcPath, "**", componentName),
+                )
+
+                task.title = `Got ${c.cyan(componentName)} files`
+              },
+              title: `Getting ${c.cyan(componentName)} files`,
+            },
+            {
+              task: async (_, task) => {
+                registries[componentName] = await fetchRegistry(componentName)
+
+                task.title = `Fetched ${c.cyan(componentName)} registry`
+              },
+              title: `Fetching ${c.cyan(componentName)} registry`,
+            },
+          ] satisfies ListrTask[],
+      )
+      .flat(),
+  )
 
   await tasks.run()
 

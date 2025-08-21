@@ -7,7 +7,7 @@ style: components/file-button/file-button.style.ts
 ---
 
 ```tsx preview
-<VStack gap="md" alignItems="flex-start">
+<Wrap gap="md">
   <FileButton>Upload</FileButton>
 
   <FileButton
@@ -15,7 +15,7 @@ style: components/file-button/file-button.style.ts
     aria-label="Upload file"
     icon={<PlusIcon fontSize="2xl" />}
   />
-</VStack>
+</Wrap>
 ```
 
 ## Usage
@@ -40,10 +40,6 @@ import { FileButton } from "@workspace/ui"
 <FileButton />
 ```
 
-:::note
-`FileButton` internally uses the [Button](/docs/components/button) component.
-:::
-
 ### Change Variant
 
 ```tsx preview
@@ -51,7 +47,7 @@ import { FileButton } from "@workspace/ui"
   <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
     {(variant, index) => (
       <FileButton variant={variant} key={index}>
-        Upload
+        {toTitleCase(variant)}
       </FileButton>
     )}
   </For>
@@ -64,8 +60,8 @@ import { FileButton } from "@workspace/ui"
 <Wrap gap="md">
   <For each={["xs", "sm", "md", "lg", "xl"]}>
     {(size, index) => (
-      <FileButton size={size} key={index}>
-        Upload
+      <FileButton size={size} key={index} minW="24">
+        {toTitleCase(size)}
       </FileButton>
     )}
   </For>
@@ -79,7 +75,7 @@ import { FileButton } from "@workspace/ui"
   <For each={["success", "warning"]}>
     {(colorScheme, index) => (
       <FileButton colorScheme={colorScheme} key={index}>
-        Upload
+        {toTitleCase(colorScheme)}
       </FileButton>
     )}
   </For>
@@ -107,15 +103,17 @@ To specify file extensions, set `accept` to a string(type).
 To disable, set `disabled` to `true`.
 
 ```tsx preview
-<VStack gap="md" alignItems="flex-start">
-  <FileButton disabled>Upload</FileButton>
+<VStack>
+  <FileButton disabled alignSelf="flex-start">
+    Upload
+  </FileButton>
 
   <Field.Root
     disabled
     helperMessage="Please select a file to upload."
     label="Upload file"
   >
-    <FileButton alignSelf="flex-start">Upload</FileButton>
+    <FileButton justifySelf="flex-start">Upload</FileButton>
   </Field.Root>
 </VStack>
 ```
@@ -125,15 +123,17 @@ To disable, set `disabled` to `true`.
 To make it read-only, set `readOnly` to `true`.
 
 ```tsx preview
-<VStack gap="md" alignItems="flex-start">
-  <FileButton readOnly>Upload</FileButton>
+<VStack>
+  <FileButton readOnly alignSelf="flex-start">
+    Upload
+  </FileButton>
 
   <Field.Root
     readOnly
     helperMessage="Please select a file to upload."
     label="Upload file"
   >
-    <FileButton alignSelf="flex-start">Upload</FileButton>
+    <FileButton justifySelf="flex-start">Upload</FileButton>
   </Field.Root>
 </VStack>
 ```
@@ -143,15 +143,17 @@ To make it read-only, set `readOnly` to `true`.
 To make the input invalid, set `invalid` to `true`.
 
 ```tsx preview
-<VStack gap="md" alignItems="flex-start">
-  <FileButton invalid>Upload</FileButton>
+<VStack>
+  <FileButton invalid alignSelf="flex-start">
+    Upload
+  </FileButton>
 
   <Field.Root
     invalid
     helperMessage="Please select a file to upload."
     label="Upload file"
   >
-    <FileButton alignSelf="flex-start">Upload</FileButton>
+    <FileButton justifySelf="flex-start">Upload</FileButton>
   </Field.Root>
 </VStack>
 ```
@@ -177,7 +179,7 @@ const onReset = () => {
 }
 
 return (
-  <VStack gap="md">
+  <VStack>
     <Text>files: {files?.length ?? 0}</Text>
 
     <HStack>
@@ -185,7 +187,9 @@ return (
         Upload
       </FileButton>
 
-      <Button onClick={onReset}>Reset</Button>
+      <Button onClick={onReset} variant="subtle">
+        Reset
+      </Button>
     </HStack>
   </VStack>
 )
@@ -215,7 +219,7 @@ const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
 console.log("watch:", watch())
 
 return (
-  <VStack as="form" onSubmit={handleSubmit(onSubmit)} gap="md">
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
     <Field.Root
       errorMessage={errors.fileButton?.message}
       invalid={!!errors.fileButton}
@@ -238,7 +242,9 @@ return (
               Upload
             </FileButton>
 
-            <Button onClick={onReset}>Reset</Button>
+            <Button onClick={onReset} variant="subtle">
+              Reset
+            </Button>
           </HStack>
         )}
         rules={{

@@ -37,8 +37,4 @@ export async function run() {
   program.parse()
 }
 
-if (process.argv.includes("--run")) {
-  process.argv = process.argv.filter((arg) => arg !== "--run")
-
-  run()
-}
+run()

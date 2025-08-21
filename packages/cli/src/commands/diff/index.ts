@@ -10,6 +10,7 @@ import c from "picocolors"
 import packageJson from "../../../package.json"
 import { CONFIG_FILE_NAME } from "../../constant"
 import {
+  cwd,
   fetchRegistry,
   format,
   getComponentFiles,
@@ -125,7 +126,7 @@ interface Options {
 export const diff = new Command("diff")
   .description("Check for updates against the registry")
   .argument("[component]", "Component to check")
-  .option("--cwd <path>", "Current working directory", process.cwd())
+  .option("--cwd <path>", "Current working directory", cwd)
   .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
   .option("-d, --detail", "Show detailed changes", false)
   .action(async function (

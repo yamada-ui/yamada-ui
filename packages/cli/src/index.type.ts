@@ -7,9 +7,20 @@ export interface SectionConfig {
   path?: string
 }
 
+export interface LintConfig {
+  enabled?: boolean
+  filePath?: string
+}
+export interface FormatConfig {
+  configPath?: null | string
+  enabled?: boolean
+}
+
 export interface UserConfig {
   components?: SectionConfig
+  format?: FormatConfig
   hooks?: SectionConfig
+  lint?: LintConfig
   monorepo?: boolean
   path?: string
   providers?: SectionConfig

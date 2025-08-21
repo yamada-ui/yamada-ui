@@ -10,7 +10,8 @@
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache",
-    "format": "prettier . --ignore-path ../../.prettierignore --check --cache"
+    "format": "prettier . --ignore-path ../../.prettierignore --check --cache",
+    "cli": "pnpm -C ../../packages/cli dev"
   },
   "dependencies": {
     "@remix-run/node": "^2.17.0",

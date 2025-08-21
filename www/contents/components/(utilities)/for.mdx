@@ -19,15 +19,15 @@ return (
   <VStack gap="md">
     <For each={items}>
       {({ name, breathing }, index) => (
-        <Card.Root key={index} size="md" variant="outline">
+        <Card.Root key={index}>
           <Card.Header>
-            <Text as="h1" fontSize="lg">
-              {name}
-            </Text>
+            <Heading size="md">{name}</Heading>
           </Card.Header>
 
-          <Card.Body pt="sm">
-            <Text color="muted">{breathing.join(", ")}</Text>
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
           </Card.Body>
         </Card.Root>
       )}
@@ -96,15 +96,15 @@ return (
   <VStack gap="md">
     <For each={items} filter={({ breathing }) => breathing.length == 1}>
       {({ name, breathing }, index) => (
-        <Card.Root key={index} size="md" variant="outline">
+        <Card.Root key={index}>
           <Card.Header>
-            <Text as="h1" fontSize="lg">
-              {name}
-            </Text>
+            <Heading size="md">{name}</Heading>
           </Card.Header>
 
-          <Card.Body pt="sm">
-            <Text color="muted">{breathing.join(", ")}</Text>
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
           </Card.Body>
         </Card.Root>
       )}
@@ -131,15 +131,15 @@ return (
   <VStack gap="md">
     <For each={items} sort={(a, b) => a.breathing.length - b.breathing.length}>
       {({ name, breathing }, index) => (
-        <Card.Root key={index} size="md" variant="outline">
+        <Card.Root key={index}>
           <Card.Header>
-            <Text as="h1" fontSize="lg">
-              {name}
-            </Text>
+            <Heading size="md">{name}</Heading>
           </Card.Header>
 
-          <Card.Body pt="sm">
-            <Text color="muted">{breathing.join(", ")}</Text>
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
           </Card.Body>
         </Card.Root>
       )}
@@ -166,15 +166,15 @@ return (
   <VStack gap="md">
     <For each={items} offset={1}>
       {({ name, breathing }, index) => (
-        <Card.Root key={index} size="md" variant="outline">
+        <Card.Root key={index}>
           <Card.Header>
-            <Text as="h1" fontSize="lg">
-              {name}
-            </Text>
+            <Heading size="md">{name}</Heading>
           </Card.Header>
 
-          <Card.Body pt="sm">
-            <Text color="muted">{breathing.join(", ")}</Text>
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
           </Card.Body>
         </Card.Root>
       )}
@@ -201,15 +201,15 @@ return (
   <VStack gap="md">
     <For each={items} limit={2}>
       {({ name, breathing }, index) => (
-        <Card.Root key={index} size="md" variant="outline">
+        <Card.Root key={index}>
           <Card.Header>
-            <Text as="h1" fontSize="lg">
-              {name}
-            </Text>
+            <Heading size="md">{name}</Heading>
           </Card.Header>
 
-          <Card.Body pt="sm">
-            <Text color="muted">{breathing.join(", ")}</Text>
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
           </Card.Body>
         </Card.Root>
       )}
@@ -236,15 +236,15 @@ return (
   <VStack gap="md">
     <For each={items} reverse>
       {({ name, breathing }, index) => (
-        <Card.Root key={index} size="md" variant="outline">
+        <Card.Root key={index}>
           <Card.Header>
-            <Text as="h1" fontSize="lg">
-              {name}
-            </Text>
+            <Heading size="md">{name}</Heading>
           </Card.Header>
 
-          <Card.Body pt="sm">
-            <Text color="muted">{breathing.join(", ")}</Text>
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
           </Card.Body>
         </Card.Root>
       )}

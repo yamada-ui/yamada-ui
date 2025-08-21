@@ -32,11 +32,11 @@ import {
 interface Options {
   config: string
   cwd: string
-  format: boolean
   install: boolean
-  lint: boolean
   overwrite: boolean
   sequential: boolean
+  format?: boolean
+  lint?: boolean
 }
 
 export const add = new Command("add")

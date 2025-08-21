@@ -165,7 +165,7 @@ export const diff = new Command("diff")
   .option("-d, --detail", "Show detailed changes", false)
   .action(async function (
     componentName: string | undefined,
-    { config: configPath, cwd, detail = false, sequential }: Options,
+    { config: configPath, cwd, detail, sequential }: Options,
   ) {
     const spinner = ora()
 

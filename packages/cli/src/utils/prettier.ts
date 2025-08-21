@@ -1,17 +1,23 @@
-import type { Options } from "prettier"
-import {
-  format as OriginalFormat,
-  resolveConfig,
-  resolveConfigFile,
-} from "prettier"
+import type { BuiltInParserName } from "prettier"
+import type { FormatConfig } from "../index.type"
+import { format as prettier, resolveConfig, resolveConfigFile } from "prettier"
 
-export async function format(content: string, options?: Options) {
-  const path = await resolveConfigFile()
+export interface FormatOptions extends FormatConfig {
+  parser?: BuiltInParserName
+}
 
-  const config = path ? await resolveConfig(path) : {}
+export async function format(
+  content: string,
+  { configPath, enabled = true, ...options }: FormatOptions = {},
+) {
+  if (!enabled) return content
 
   try {
-    return OriginalFormat(content, {
+    configPath ??= await resolveConfigFile()
+
+    const config = configPath ? await resolveConfig(configPath) : {}
+
+    return prettier(content, {
       ...config,
       parser: "typescript",
       ...options,

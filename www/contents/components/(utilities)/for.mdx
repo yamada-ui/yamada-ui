@@ -5,4 +5,250 @@ storybook: components-for--basic
 source: components/for
 ---
 
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack gap="md">
+    <For each={items}>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { For } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { For } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { For } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<For />
+```
+
+### Fallback
+
+Use the `fallback` prop to render a fallback component when the array is empty or undefined.
+
+```tsx preview
+<VStack gap="md">
+  <For
+    each={[]}
+    fallback={
+      <EmptyState.Root
+        description="There are no items to show"
+        indicator={<BoxIcon />}
+      />
+    }
+  >
+    {(item, index) => <Text key={index}>{item}</Text>}
+  </For>
+</VStack>
+```
+
+### Filter
+
+Use the `filter` prop to filter the array items.
+
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack gap="md">
+    <For each={items} filter={({ breathing }) => breathing.length == 1}>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Sort
+
+Use the `sort` prop to sort the array items.
+
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack gap="md">
+    <For each={items} sort={(a, b) => a.breathing.length - b.breathing.length}>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Offset
+
+To start from a specific element in the array, set the starting position in `offset`.
+
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack gap="md">
+    <For each={items} offset={1}>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Limit Display Count
+
+To limit the number of items displayed, set the `limit`.
+
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack gap="md">
+    <For each={items} limit={2}>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Reverse Order
+
+To reverse the order, set `reverse` to `true`.
+
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack gap="md">
+    <For each={items} reverse>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```

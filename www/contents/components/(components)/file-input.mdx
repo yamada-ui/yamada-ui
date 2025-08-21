@@ -6,4 +6,358 @@ source: components/file-input
 style: components/file-input/file-input.style.ts
 ---
 
+```tsx preview
+<FileInput placeholder="Please upload file" />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { FileInput } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { FileInput } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { FileInput } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<FileInput />
+```
+
+### Change Variant
+
+```tsx preview
+<VStack gap="md">
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <FileInput
+        key={index}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack gap="md">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <FileInput key={index} size={size} placeholder={toTitleCase(size)} />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <FileInput
+        key={index}
+        colorScheme={colorScheme}
+        placeholder={toTitleCase(colorScheme)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Allow Multiple Selection
+
+To allow multiple selection, set `multiple` to `true`.
+
+```tsx preview
+<FileInput placeholder="multiple" multiple />
+```
+
+### Specify File Extensions
+
+To specify file extensions, set `accept` to a string(type).
+
+```tsx preview
+<FileInput accept="image/png,image/jpeg" placeholder="only png, jpeg" />
+```
+
+### Customize Separator
+
+To customize the separator, set `separator` to a string.
+
+```tsx preview
+<FileInput placeholder="Please upload file" multiple separator=";" />
+```
+
+### Use Custom Component
+
+To use a custom component, set `component` to a `ReactNode`. `component` provides `value`(`File`) and `index`.
+
+```tsx preview
+<FileInput
+  component={({ value: { name } }) => <Tag>{name}</Tag>}
+  gapY="xs"
+  multiple
+  placeholder="Please upload file"
+/>
+```
+
+### Format File Names
+
+To format file names, use `format`. `format` provides `File`.
+
+```tsx preview
+<FileInput
+  format={({ name }) => name.substring(0, name.indexOf("."))}
+  multiple
+  placeholder="Please upload file"
+/>
+```
+
+### Customize Children
+
+To customize children, use `children`. `children` provides `File` as an array.
+
+```tsx preview
+<FileInput multiple>
+  {(files) => <Text>Selected: {files?.length ?? 0}</Text>}
+</FileInput>
+```
+
+### Add Addon
+
+To add an addon, wrap `FileInput` with `InputGroup.Root` and use `InputGroup.Addon`.
+
+```tsx preview
+<InputGroup.Root>
+  <InputGroup.Addon>
+    <FileIcon />
+  </InputGroup.Addon>
+  <FileInput placeholder="Please upload file" />
+</InputGroup.Root>
+```
+
+### Add Element
+
+To add an element, wrap `FileInput` with `InputGroup.Root` and use `InputGroup.Element`.
+
+```tsx preview
+<InputGroup.Root>
+  <InputGroup.Element>
+    <FileIcon />
+  </InputGroup.Element>
+  <FileInput placeholder="Please upload file" />
+</InputGroup.Root>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<VStack gap="md">
+  <FileInput placeholder="Please upload file" disabled />
+
+  <InputGroup.Root disabled>
+    <InputGroup.Addon>
+      <FileIcon />
+    </InputGroup.Addon>
+    <FileInput placeholder="Please upload file" />
+  </InputGroup.Root>
+
+  <Field.Root disabled label="Upload file">
+    <FileInput placeholder="Please upload file" />
+  </Field.Root>
+</VStack>
+```
+
+### Read-Only
+
+To make it read-only, set `readOnly` to `true`.
+
+```tsx preview
+<VStack gap="md">
+  <FileInput placeholder="Please upload file" readOnly />
+
+  <InputGroup.Root readOnly>
+    <InputGroup.Addon>
+      <FileIcon />
+    </InputGroup.Addon>
+    <FileInput placeholder="Please upload file" />
+  </InputGroup.Root>
+
+  <Field.Root readOnly label="Upload file">
+    <FileInput placeholder="Please upload file" />
+  </Field.Root>
+</VStack>
+```
+
+### Invalid
+
+To make the input invalid, set `invalid` to `true`.
+
+```tsx preview
+<VStack gap="md">
+  <FileInput placeholder="Please upload file" invalid />
+
+  <InputGroup.Root invalid>
+    <InputGroup.Addon>
+      <FileIcon />
+    </InputGroup.Addon>
+    <FileInput placeholder="Please upload file" />
+  </InputGroup.Root>
+
+  <Field.Root errorMessage="File is required." invalid label="Upload file">
+    <FileInput placeholder="Please upload file" />
+  </Field.Root>
+</VStack>
+```
+
+### Change Border Color
+
+To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
+
+```tsx preview
+<VStack gap="md">
+  <FileInput
+    focusBorderColor="success"
+    placeholder="Custom focus border color"
+  />
+
+  <InputGroup.Root variant="flushed" focusBorderColor="success">
+    <InputGroup.Element>
+      <FileIcon />
+    </InputGroup.Element>
+    <FileInput placeholder="Custom focus border color" />
+  </InputGroup.Root>
+
+  <FileInput
+    errorBorderColor="warning"
+    invalid
+    placeholder="Custom error border color"
+  />
+
+  <InputGroup.Root errorBorderColor="warning" invalid>
+    <InputGroup.Addon>
+      <FileIcon />
+    </InputGroup.Addon>
+    <FileInput placeholder="Custom error border color" />
+  </InputGroup.Root>
+</VStack>
+```
+
+### Reset
+
+To reset the value, set `resetRef` to `ref`. A callback function will be attached to the set `ref`, execute it.
+
+```tsx preview functional client
+const [value, onChange] = useState<File[] | undefined>(undefined)
+const resetRef = useRef<() => void>(null)
+const onReset = () => {
+  onChange(undefined)
+  resetRef.current?.()
+}
+
+return (
+  <VStack gap="md">
+    <Text>files: {value?.length ?? 0}</Text>
+
+    <InputGroup.Root>
+      <FileInput
+        multiple
+        placeholder="placeholder"
+        resetRef={resetRef}
+        value={value}
+        onChange={onChange}
+      />
+
+      {value?.length ? (
+        <InputGroup.Element clickable onClick={onReset}>
+          <Center as="button" focusVisibleRing="outside" p="0.5" rounded="xs">
+            <XIcon fontSize="xl" />
+          </Center>
+        </InputGroup.Element>
+      ) : null}
+    </InputGroup.Root>
+  </VStack>
+)
+```
+
+### Use React Hook Form
+
+```tsx preview functional client
+interface Data {
+  fileInput: File[] | undefined
+}
+
+const resetRef = useRef<() => void>(null)
+const {
+  control,
+  formState: { errors },
+  handleSubmit,
+  setValue,
+  watch,
+} = useForm<Data>()
+
+const onReset = () => {
+  setValue("fileInput", undefined)
+  resetRef.current?.()
+}
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <Field.Root
+      errorMessage={errors.fileInput?.message}
+      invalid={!!errors.fileInput}
+      label="Files"
+    >
+      <Controller
+        name="fileInput"
+        control={control}
+        render={({ field }) => (
+          <InputGroup.Root>
+            <FileInput multiple {...field} resetRef={resetRef} />
+
+            {field.value?.length ? (
+              <InputGroup.Element clickable onClick={onReset}>
+                <Center
+                  as="button"
+                  focusVisibleRing="outside"
+                  p="0.5"
+                  rounded="xs"
+                >
+                  <XIcon fontSize="xl" />
+                </Center>
+              </InputGroup.Element>
+            ) : null}
+          </InputGroup.Root>
+        )}
+        rules={{
+          required: {
+            message: "This is required.",
+            value: true,
+          },
+        }}
+      />
+    </Field.Root>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

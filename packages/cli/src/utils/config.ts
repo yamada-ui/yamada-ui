@@ -1,4 +1,5 @@
 import type { Config, Section, UserConfig } from "../index.type"
+import { isUndefined } from "@yamada-ui/utils"
 import { existsSync } from "fs"
 import { readFile } from "fs/promises"
 import path from "path"
@@ -7,13 +8,23 @@ import packageJson from "../../package.json"
 import { DEFAULT_PATH, SECTION_NAMES } from "../constant"
 import { getPackageManager, packageExecuteCommands } from "./package"
 
+export interface GetConfigOptions {
+  format?: boolean
+  lint?: boolean
+}
+
 export async function getConfig(
   cwd: string,
   configPath: string,
+  { format, lint }: GetConfigOptions = {},
 ): Promise<Config> {
   try {
     const data = await readFile(path.resolve(cwd, configPath), "utf8")
     const userConfig = JSON.parse(data) as UserConfig
+
+    if (!isUndefined(format)) userConfig.format = { enabled: format }
+    if (!isUndefined(lint)) userConfig.lint = { enabled: lint }
+
     const rootPath = path.resolve(
       cwd,
       userConfig.path ??
@@ -31,6 +42,9 @@ export async function getConfig(
         return [section, replacedSection]
       }),
     )
+
+    userConfig.lint ??= {}
+    userConfig.lint.filePath ??= path.resolve(srcPath, "index.ts")
 
     function getSectionAbsolutePath(section: Section) {
       return path.resolve(

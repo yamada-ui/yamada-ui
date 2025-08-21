@@ -130,7 +130,7 @@ export const Disabled: Story = () => {
         helperMessage="Please select a file to upload."
         label="Upload file"
       >
-        <FileButton alignSelf="flex-start">Upload</FileButton>
+        <FileButton justifySelf="flex-start">Upload</FileButton>
       </Field.Root>
     </>
   )
@@ -169,7 +169,7 @@ export const Readonly: Story = () => {
         label="Upload file"
         readOnly
       >
-        <FileButton alignSelf="flex-start">Upload</FileButton>
+        <FileButton justifySelf="flex-start">Upload</FileButton>
       </Field.Root>
     </>
   )
@@ -204,7 +204,7 @@ export const Invalid: Story = () => {
       </Wrap>
 
       <Field.Root errorMessage="File is required." invalid label="Upload file">
-        <FileButton alignSelf="flex-start">Upload</FileButton>
+        <FileButton justifySelf="flex-start">Upload</FileButton>
       </Field.Root>
     </>
   )

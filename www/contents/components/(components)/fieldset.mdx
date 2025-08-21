@@ -62,11 +62,19 @@ import { Fieldset } from "@workspace/ui"
         legend="Contact details"
       >
         <Field.Root label="Name">
-          <Input type="text" placeholder="Your name" />
+          <Input
+            type="text"
+            placeholder="Your name"
+            bg={["elevated", "panel"].includes(variant) ? "bg" : undefined}
+          />
         </Field.Root>
 
         <Field.Root label="Email address">
-          <Input type="email" placeholder="Your email address" />
+          <Input
+            type="email"
+            placeholder="Your email address"
+            bg={["elevated", "panel"].includes(variant) ? "bg" : undefined}
+          />
         </Field.Root>
       </Fieldset.Root>
     )}

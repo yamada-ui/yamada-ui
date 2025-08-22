@@ -56,6 +56,12 @@ async function mergeContent(
   return { conflict, content }
 }
 
+export interface ConflictMap {
+  [key: string]: {
+    [key: string]: string
+  }
+}
+
 export interface UpdateFilesOptions {
   concurrent?: boolean
   install?: boolean
@@ -67,6 +73,7 @@ export async function updateFiles(
   config: Config,
   { concurrent = true, install = false }: UpdateFilesOptions = {},
 ) {
+  const conflictMap: ConflictMap = {}
   const notInstalledDependencies: string[] = []
   const shouldUninstallDependencies: string[] = []
 
@@ -142,6 +149,11 @@ export async function updateFiles(
                       })
                     : config,
                 )
+
+                if (conflict) {
+                  conflictMap[name] ??= {}
+                  conflictMap[name][fileName] = config.indexPath
+                }
               } else {
                 await Promise.all(
                   sources.map(async ({ name: fileName, content }) => {
@@ -207,6 +219,11 @@ export async function updateFiles(
                               })
                             : config,
                         )
+
+                        if (conflict) {
+                          conflictMap[name] ??= {}
+                          conflictMap[name][fileName] = currentFilePath
+                        }
                       } else {
                         const remoteContent = transformContent(
                           section,
@@ -227,8 +244,7 @@ export async function updateFiles(
                   }),
                 )
               }
-            } catch (e) {
-              console.log(e)
+            } catch {
             } finally {
               await rimraf(tempDirPath)
             }
@@ -256,7 +272,7 @@ export async function updateFiles(
       ),
     })
 
-    if (!install) return
+    if (!install) return conflictMap
   }
 
   const cwd = config.monorepo ? config.rootPath : config.cwd
@@ -269,4 +285,6 @@ export async function updateFiles(
 
   if (notInstalledDependencies.length)
     await installDependencies(notInstalledDependencies, { cwd })
+
+  return conflictMap
 }

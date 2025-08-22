@@ -89,15 +89,15 @@ export async function getDiff(
               const [source] = sources
 
               const fileName = source!.name
-              const localeContent = localeRegistry.sources[0]!.content!
-
-              const content = await generateIndexContent(
-                source!.content!,
-                config,
-                generatedNames,
-              )
-
-              const diff = diffLines(localeContent, content)
+              const [remoteContent, localeContent] = await Promise.all([
+                generateIndexContent(source!.content!, config, generatedNames),
+                generateIndexContent(
+                  localeRegistry.sources[0]!.content!,
+                  config,
+                  generatedNames,
+                ),
+              ])
+              const diff = diffLines(localeContent, remoteContent)
 
               if (diff.length < 2) return
 
@@ -112,23 +112,29 @@ export async function getDiff(
                     )
 
                     if (source) {
-                      const localeContent = source.content!
                       const filePath = getFilePath(
                         section,
                         name,
                         fileName,
                         config,
                       )
-
-                      content = await generateContent(
-                        filePath,
-                        section,
-                        content,
-                        config,
-                        generatedNames,
-                      )
-
-                      const diff = diffLines(localeContent, content)
+                      const [remoteContent, localeContent] = await Promise.all([
+                        generateContent(
+                          filePath,
+                          section,
+                          content,
+                          config,
+                          generatedNames,
+                        ),
+                        generateContent(
+                          filePath,
+                          section,
+                          source.content!,
+                          config,
+                          generatedNames,
+                        ),
+                      ])
+                      const diff = diffLines(localeContent, remoteContent)
 
                       if (diff.length < 2) return
 

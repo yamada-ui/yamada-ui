@@ -14,6 +14,7 @@ import {
   timer,
   validateDir,
 } from "../../utils"
+import { printConflicts } from "../update/print-conflicts"
 import { updateFiles } from "../update/update-files"
 import { getDiff } from "./get-diff"
 import { getRegistriesAndFiles } from "./get-registries-and-files"
@@ -152,10 +153,25 @@ export const diff = new Command("diff")
           message: c.reset("Do you want to update the files?"),
         })
 
-        if (update)
-          await updateFiles(generatedNames, registries, config, {
-            concurrent: !sequential,
-          })
+        if (update) {
+          const conflictMap = await updateFiles(
+            generatedNames,
+            registries,
+            config,
+            {
+              concurrent: !sequential,
+            },
+          )
+
+          if (Object.keys(conflictMap).length) {
+            console.log("---------------------------------")
+            spinner.warn(
+              "There are conflicts. Please check the following files:",
+            )
+
+            printConflicts(conflictMap, config)
+          }
+        }
       }
 
       end()

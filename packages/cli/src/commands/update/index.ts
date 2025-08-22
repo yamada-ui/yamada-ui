@@ -15,6 +15,7 @@ import {
 } from "../../utils"
 import { getDiff } from "../diff/get-diff"
 import { getRegistriesAndFiles } from "../diff/get-registries-and-files"
+import { printConflicts } from "./print-conflicts"
 import { updateFiles } from "./update-files"
 
 interface Options {
@@ -126,10 +127,22 @@ export const update = new Command("update")
       if (!hasChanges) {
         console.log(c.cyan("No updates found."))
       } else {
-        await updateFiles(generatedNames, registries, config, {
-          concurrent: !sequential,
-          install,
-        })
+        const conflictMap = await updateFiles(
+          generatedNames,
+          registries,
+          config,
+          {
+            concurrent: !sequential,
+            install,
+          },
+        )
+
+        if (Object.keys(conflictMap).length) {
+          console.log("---------------------------------")
+          spinner.warn("There are conflicts. Please check the following files:")
+
+          printConflicts(conflictMap, config)
+        }
       }
 
       end()

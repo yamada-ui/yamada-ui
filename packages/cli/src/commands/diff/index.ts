@@ -1,8 +1,8 @@
-import boxen from "boxen"
 import { Command } from "commander"
 import { existsSync } from "fs"
 import ora from "ora"
 import c from "picocolors"
+import prompts from "prompts"
 import packageJson from "../../../package.json"
 import { CONFIG_FILE_NAME } from "../../constant"
 import {
@@ -14,9 +14,10 @@ import {
   timer,
   validateDir,
 } from "../../utils"
-import { getComponentData } from "./get-component-data"
-import { getComponentDiff } from "./get-component-diff"
-import { printCount, printDiff } from "./print-diff"
+import { updateFiles } from "../update/update-files"
+import { getDiff } from "./get-diff"
+import { getRegistriesAndFiles } from "./get-registries-and-files"
+import { printDiff, printDiffFile, printDiffFiles } from "./print-diff"
 
 interface Options {
   config: string
@@ -113,14 +114,13 @@ export const diff = new Command("diff")
         )
       }
 
-      const { data, registries } = await getComponentData(
+      const { registries } = await getRegistriesAndFiles(
         componentNames,
         config,
         { concurrent: !sequential, index, theme },
       )
-      const changes = await getComponentDiff(
+      const changes = await getDiff(
         generatedNames,
-        data,
         registries,
         config,
         !sequential,
@@ -133,60 +133,29 @@ export const diff = new Command("diff")
         console.log(c.cyan("No updates found."))
       } else {
         if (targetName) {
-          const diff = changes[targetName]
-
-          if (!diff) return
-
-          Object.entries(diff).forEach(([fileName, diff], index) => {
-            if (!!index) console.log("")
-
-            console.log(`- ${c.cyan(fileName)}`)
-
-            console.log("")
-
-            diff.forEach(({ added, removed, value }) => {
-              if (added) {
-                return process.stdout.write(c.green(value))
-              } else if (removed) {
-                return process.stdout.write(c.red(value))
-              } else {
-                if (detail) return process.stdout.write(value)
-              }
-            })
-          })
+          printDiff(changes[targetName], detail)
         } else {
-          if (index) {
-            const diff = changes.index
-
-            if (!diff) return
-
-            printCount("index.ts", diff["index.ts"], "")
-          }
-
-          if (theme) printDiff("theme", changes.theme)
+          if (index) printDiffFile("index.ts", changes.index?.["index.ts"])
+          if (theme) printDiffFiles("theme", changes.theme)
 
           componentNames.forEach((name) => {
-            printDiff(name, changes[name])
+            printDiffFiles(name, changes[name])
           })
-
-          console.log("")
-          console.log(
-            boxen(
-              [
-                "Run",
-                getCommand("diff"),
-                c.green("<component>"),
-                "to see the changes.",
-              ].join(" "),
-              {
-                borderColor: "yellow",
-                borderStyle: "round",
-                padding: 1,
-                textAlignment: "center",
-              },
-            ),
-          )
         }
+
+        console.log("---------------------------------")
+
+        const { update } = await prompts({
+          type: "confirm",
+          name: "update",
+          initial: true,
+          message: c.reset("Do you want to update the files?"),
+        })
+
+        if (update)
+          await updateFiles(generatedNames, registries, config, {
+            concurrent: !sequential,
+          })
       }
 
       end()

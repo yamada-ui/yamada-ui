@@ -15,6 +15,7 @@ import {
   DEFAULT_PACKAGE_JSON,
   DEFAULT_PACKAGE_NAME,
   DEFAULT_PATH,
+  REGISTRY_FILE_NAME,
   REQUIRED_DEPENDENCIES,
   REQUIRED_DEV_DEPENDENCIES,
   TSCONFIG_JSON,
@@ -238,15 +239,22 @@ export const init = new Command("init")
             },
             {
               task: async (_, task) => {
-                const targetPath = path.resolve(
-                  outdirPath,
-                  src ? "src" : "",
-                  "index.ts",
-                )
-                const { sources } = await fetchRegistry("index")
-                const content = sources[0]!.content!
+                const targetPath = path.resolve(outdirPath, src ? "src" : "")
+                const registry = await fetchRegistry("index")
+                const content = registry.sources[0]!.content!
 
-                await writeFileSafe(targetPath, content, config)
+                await Promise.all([
+                  writeFileSafe(
+                    path.join(targetPath, "index.ts"),
+                    content,
+                    config,
+                  ),
+                  writeFileSafe(
+                    path.join(targetPath, REGISTRY_FILE_NAME),
+                    JSON.stringify(registry),
+                    merge(config, { format: { parser: "json" } }),
+                  ),
+                ])
 
                 task.title = `Generated ${c.cyan("index.ts")}`
               },
@@ -315,11 +323,21 @@ export const init = new Command("init")
             },
             {
               task: async (_, task) => {
-                const { sources } = await fetchRegistry("index")
-                const targetPath = path.resolve(outdirPath, "index.ts")
-                const content = sources[0]!.content!
+                const registry = await fetchRegistry("index")
+                const content = registry.sources[0]!.content!
 
-                await writeFileSafe(targetPath, content, config)
+                await Promise.all([
+                  writeFileSafe(
+                    path.resolve(outdirPath, "index.ts"),
+                    content,
+                    config,
+                  ),
+                  writeFileSafe(
+                    path.resolve(outdirPath, REGISTRY_FILE_NAME),
+                    JSON.stringify(registry),
+                    merge(config, { format: { parser: "json" } }),
+                  ),
+                ])
 
                 task.title = `Generated ${c.cyan("index.ts")}`
               },

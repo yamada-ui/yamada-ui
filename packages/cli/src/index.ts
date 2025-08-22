@@ -9,6 +9,7 @@ import { diff } from "./commands/diff"
 import { init } from "./commands/init"
 import { theme } from "./commands/theme"
 import { tokens } from "./commands/tokens"
+import { update } from "./commands/update"
 
 export async function run() {
   checkNode("22")
@@ -32,6 +33,7 @@ export async function run() {
 
   program.addCommand(init)
   program.addCommand(add)
+  program.addCommand(update)
   program.addCommand(diff)
   program.addCommand(theme)
   program.addCommand(tokens)

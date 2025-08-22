@@ -94,13 +94,11 @@ export function timer() {
   return { end, start }
 }
 
-export async function getFiles(pattern: string | string[]) {
+export async function getFiles(pattern: string) {
   const files: { [key: string]: string } = {}
   const [dirPath] = await glob(pattern)
 
-  if (!dirPath) return files
-
-  const dirents = await readdir(dirPath, { withFileTypes: true })
+  const dirents = await readdir(dirPath!, { withFileTypes: true })
 
   await Promise.all(
     dirents.map(async (dirent) => {
@@ -121,7 +119,7 @@ export async function getFiles(pattern: string | string[]) {
             files[`${name}/${dirent.name}`] = data
           }),
         )
-      } else {
+      } else if (!name.endsWith(".json")) {
         const targetPath = path.join(dirent.parentPath, dirent.name)
         const data = await readFile(targetPath, "utf-8")
 
@@ -130,5 +128,5 @@ export async function getFiles(pattern: string | string[]) {
     }),
   )
 
-  return files
+  return { dirPath: dirPath!, files }
 }

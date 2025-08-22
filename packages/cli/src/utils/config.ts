@@ -5,7 +5,7 @@ import { readFile } from "fs/promises"
 import path from "path"
 import c from "picocolors"
 import packageJson from "../../package.json"
-import { DEFAULT_PATH, SECTION_NAMES } from "../constant"
+import { DEFAULT_PATH, REGISTRY_FILE_NAME, SECTION_NAMES } from "../constant"
 import { getPackageManager, packageExecuteCommands } from "./package"
 
 export interface GetConfigOptions {
@@ -44,6 +44,7 @@ export async function getConfig(
     )
 
     const indexPath = path.resolve(srcPath, "index.ts")
+    const registryPath = path.resolve(srcPath, REGISTRY_FILE_NAME)
 
     if (userConfig.theme?.path)
       userConfig.theme.path = path.resolve(cwd, userConfig.theme.path)
@@ -109,6 +110,7 @@ export async function getConfig(
       getSectionPath,
       indexPath,
       isSection,
+      registryPath,
       rootPath,
       srcPath,
     }

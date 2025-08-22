@@ -9,7 +9,11 @@ import path from "path"
 import c from "picocolors"
 import prompts from "prompts"
 import { rimraf } from "rimraf"
-import { CONFIG_FILE_NAME, THEME_PATH } from "../../constant"
+import {
+  CONFIG_FILE_NAME,
+  REGISTRY_FILE_NAME,
+  THEME_PATH,
+} from "../../constant"
 import {
   cwd,
   fetchRegistry,
@@ -29,21 +33,19 @@ interface Options {
 
 export const theme = new Command("theme")
   .description("generate theme to your project")
-  .argument("[path]", "path to the theme directory", THEME_PATH)
+  .argument("[path]", "path to the theme directory")
   .option("--cwd <path>", "current working directory", cwd)
   .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing directory.", false)
   .option("-f, --format", "format the output files.")
   .option("-l, --lint", "lint the output files.")
   .action(async function (
-    themePath: string,
+    themePath: string | undefined,
     { config: configPath, cwd, format, lint, overwrite }: Options,
   ) {
     const spinner = ora()
 
     try {
-      const themeAbsolutePath = path.resolve(cwd, themePath)
-
       const { end } = timer()
 
       spinner.start("Validating directory")
@@ -55,6 +57,9 @@ export const theme = new Command("theme")
       spinner.start("Fetching config")
 
       const config = await getConfig(cwd, configPath, { format, lint })
+      const themeAbsolutePath = themePath
+        ? path.resolve(cwd, themePath)
+        : (config.theme?.path ?? path.resolve(cwd, THEME_PATH))
 
       spinner.succeed("Fetched config")
 
@@ -79,7 +84,7 @@ export const theme = new Command("theme")
 
       spinner.start("Fetching registry")
 
-      const { sources } = await fetchRegistry("theme")
+      const registry = await fetchRegistry("theme")
 
       spinner.succeed("Fetched registry")
 
@@ -87,15 +92,20 @@ export const theme = new Command("theme")
         [
           {
             task: async (_, task) => {
-              await Promise.all(
-                sources.map(async ({ name, content }) => {
+              await Promise.all([
+                ...registry.sources.map(async ({ name, content }) => {
                   if (!content) return
 
                   const targetPath = path.resolve(themeAbsolutePath, name)
 
                   await writeFileSafe(targetPath, content, config)
                 }),
-              )
+                writeFileSafe(
+                  path.resolve(themeAbsolutePath, REGISTRY_FILE_NAME),
+                  JSON.stringify(registry),
+                  merge(config, { format: { parser: "json" } }),
+                ),
+              ])
 
               task.title = `Generated theme`
             },

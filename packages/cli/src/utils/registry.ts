@@ -7,12 +7,13 @@ import type {
   Section,
   Source,
 } from "../index.type"
-import { readdir } from "fs/promises"
+import { merge } from "@yamada-ui/utils"
+import { readdir, readFile } from "fs/promises"
 import { HttpsProxyAgent } from "https-proxy-agent"
 import fetch from "node-fetch"
 import path from "path"
 import c from "picocolors"
-import { REGISTRY_URL, SECTION_NAMES } from "../constant"
+import { REGISTRY_FILE_NAME, REGISTRY_URL, SECTION_NAMES } from "../constant"
 import { writeFileSafe } from "./fs"
 
 const agent = process.env.https_proxy
@@ -163,6 +164,10 @@ export function pruneRegistry() {
   registryStore.clear()
 }
 
+export async function fetchLocaleRegistry(path: string) {
+  return JSON.parse(await readFile(path, "utf-8")) as Registry
+}
+
 export async function getGeneratedNameMap(
   config: Config,
 ): Promise<{ [key in Section]: string[] }> {
@@ -301,16 +306,20 @@ export async function generateSource(
 
 export async function generateSources(
   dirPath: string,
-  { section, sources }: Registry,
+  registry: Registry,
   config: Config,
   generatedNames: string[] = [],
 ) {
-  await Promise.all(
-    sources.map(
-      async (source) =>
-        await generateSource(dirPath, section, source, config, generatedNames),
+  await Promise.all([
+    ...registry.sources.map((source) =>
+      generateSource(dirPath, registry.section, source, config, generatedNames),
     ),
-  )
+    writeFileSafe(
+      path.resolve(dirPath, REGISTRY_FILE_NAME),
+      JSON.stringify(registry),
+      merge(config, { format: { parser: "json" } }),
+    ),
+  ])
 }
 
 export function replaceIndex(

@@ -45,6 +45,7 @@ export interface Config extends UserConfig {
   getSectionPath: (section: Section) => string
   indexPath: string
   isSection: (section: string) => section is Section
+  registryPath: string
   rootPath: string
   srcPath: string
 }

@@ -1,21 +1,41 @@
 import type { ChangeObject } from "diff"
-import type { Diff } from "./get-component-diff"
+import type { Diff } from "./get-diff"
 import c from "picocolors"
 
-export function printDiff(name: string, diff: Diff | undefined) {
+export function printDiff(diff: Diff | undefined, detail = false) {
+  if (!diff) return
+
+  Object.entries(diff).forEach(([fileName, diff]) => {
+    console.log(`- ${c.cyan(fileName)}`)
+
+    console.log("")
+
+    diff.forEach(({ added, removed, value }) => {
+      if (added) {
+        return process.stdout.write(c.green(value))
+      } else if (removed) {
+        return process.stdout.write(c.red(value))
+      } else {
+        if (detail) return process.stdout.write(value)
+      }
+    })
+  })
+}
+
+export function printDiffFiles(name: string, diff: Diff | undefined) {
   if (!diff) return
 
   console.log(`- ${name}`)
 
   Object.entries(diff).forEach(([fileName, changes]) => {
-    printCount(fileName, changes)
+    printDiffFile(fileName, changes, "  ")
   })
 }
 
-export function printCount(
+export function printDiffFile(
   name: string,
   changes: ChangeObject<string>[] = [],
-  space = "  ",
+  space = "",
 ) {
   const added = changes.reduce((prev, { added, count }) => {
     if (added) return prev + count

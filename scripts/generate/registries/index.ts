@@ -99,7 +99,7 @@ async function getIconsSources() {
       name: "icons",
       data: icons.map((iconName) => ({
         name: `${toKebabCase(iconName)}.tsx`,
-        iconName,
+        iconName: iconName.replace(/Icon$/, ""),
       })),
       template: ICON_TEMPLATE,
     },

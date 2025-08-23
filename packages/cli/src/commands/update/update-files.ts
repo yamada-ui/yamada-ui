@@ -3,7 +3,7 @@ import type { Config } from "../../index.type"
 import type { DiffRegistries } from "../diff/get-registries-and-files"
 import { merge } from "@yamada-ui/utils"
 import { execa, ExecaError } from "execa"
-import { mkdtemp, writeFile } from "fs/promises"
+import { mkdtemp } from "fs/promises"
 import { Listr } from "listr2"
 import { tmpdir } from "os"
 import path from "path"
@@ -43,8 +43,12 @@ async function mergeContent(
     content = stdout
   } catch (e) {
     if (e instanceof ExecaError) {
-      conflict = true
-      content = (e.stdout as string | undefined) || fallback
+      if (e.stdout as string | undefined) {
+        conflict = true
+        content = e.stdout as unknown as string
+      } else {
+        content = fallback
+      }
     }
   }
 
@@ -76,6 +80,10 @@ export async function updateFiles(
   const conflictMap: ConflictMap = {}
   const notInstalledDependencies: string[] = []
   const shouldUninstallDependencies: string[] = []
+  const disabledFormatAndLint = {
+    format: { enabled: false },
+    lint: { enabled: false },
+  }
 
   const tasks = new Listr(
     Object.entries(remote).map(
@@ -128,8 +136,16 @@ export async function updateFiles(
                 ])
 
                 await Promise.all([
-                  writeFile(remoteFilePath, remoteContent),
-                  writeFile(localeFilePath, localeContent),
+                  writeFileSafe(
+                    remoteFilePath,
+                    remoteContent,
+                    disabledFormatAndLint,
+                  ),
+                  writeFileSafe(
+                    localeFilePath,
+                    localeContent,
+                    disabledFormatAndLint,
+                  ),
                 ])
 
                 const { conflict, content: mergedContent } = await mergeContent(
@@ -142,12 +158,7 @@ export async function updateFiles(
                 await writeFileSafe(
                   config.indexPath,
                   mergedContent,
-                  conflict
-                    ? merge(config, {
-                        format: { enabled: false },
-                        lint: { enabled: false },
-                      })
-                    : config,
+                  conflict ? merge(config, disabledFormatAndLint) : config,
                 )
 
                 if (conflict) {
@@ -197,8 +208,16 @@ export async function updateFiles(
                           ])
 
                         await Promise.all([
-                          writeFile(remoteFilePath, remoteContent),
-                          writeFile(localeFilePath, localeContent),
+                          writeFileSafe(
+                            remoteFilePath,
+                            remoteContent,
+                            disabledFormatAndLint,
+                          ),
+                          writeFileSafe(
+                            localeFilePath,
+                            localeContent,
+                            disabledFormatAndLint,
+                          ),
                         ])
 
                         const { conflict, content: mergedContent } =
@@ -209,14 +228,19 @@ export async function updateFiles(
                             remoteContent,
                           )
 
+                        if (fileName === "index.ts") {
+                          console.log({
+                            localeContent,
+                            mergedContent,
+                            remoteContent,
+                          })
+                        }
+
                         await writeFileSafe(
                           currentFilePath,
                           mergedContent,
                           conflict
-                            ? merge(config, {
-                                format: { enabled: false },
-                                lint: { enabled: false },
-                              })
+                            ? merge(config, disabledFormatAndLint)
                             : config,
                         )
 

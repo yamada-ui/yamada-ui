@@ -7,8 +7,10 @@ import { Listr } from "listr2"
 import path from "path"
 import c from "picocolors"
 import {
+  transformContent,
   transformContentWithFormatAndLint,
   transformIndexWithFormatAndLint,
+  transformTemplateContent,
 } from "../../utils"
 
 export interface Diff {
@@ -40,12 +42,12 @@ export async function getDiff(
 
   const tasks = new Listr(
     Object.entries(remote).map(
-      ([name, { section, sources }]) =>
+      ([componentName, { section, sources }]) =>
         ({
           task: async (_, task) => {
-            const localeRegistry = locale[name]!
+            const localeRegistry = locale[componentName]!
 
-            if (name === "index") {
+            if (componentName === "index") {
               const [source] = sources
 
               const fileName = source!.name
@@ -65,23 +67,23 @@ export async function getDiff(
 
               if (diff.length < 2) return
 
-              changes[name] ??= {}
-              changes[name][fileName] = diff
+              changes[componentName] ??= {}
+              changes[componentName][fileName] = diff
             } else {
               await Promise.all(
-                sources.map(async ({ name: fileName, content }) => {
+                sources.map(async ({ name, content, data, template }) => {
+                  const filePath = getFilePath(
+                    section,
+                    componentName,
+                    name,
+                    config,
+                  )
                   const source = localeRegistry.sources.find(
-                    ({ name }) => name === fileName,
+                    (source) => source.name === name,
                   )
 
                   if (content) {
                     if (source) {
-                      const filePath = getFilePath(
-                        section,
-                        name,
-                        fileName,
-                        config,
-                      )
                       const [remoteContent, localeContent] = await Promise.all([
                         transformContentWithFormatAndLint(
                           filePath,
@@ -102,29 +104,91 @@ export async function getDiff(
 
                       if (diff.length < 2) return
 
-                      changes[name] ??= {}
-                      changes[name][fileName] = diff
+                      changes[componentName] ??= {}
+                      changes[componentName][name] = diff
                     } else {
-                      changes[name] ??= {}
-                      changes[name][fileName] = [
+                      const remoteContent = transformContent(
+                        section,
+                        content,
+                        config,
+                        generatedNames,
+                      )
+
+                      changes[componentName] ??= {}
+                      changes[componentName][name] = [
                         {
                           added: true,
-                          count: content.length,
+                          count: remoteContent.length,
                           removed: false,
-                          value: content,
+                          value: remoteContent,
                         },
                       ]
                     }
-                  } else {
-                    // TODO: Add template file
+                  } else if (template && data) {
+                    await Promise.all(
+                      data.map(async ({ name: fileName, ...remoteRest }) => {
+                        const localeData = source?.data?.find(
+                          ({ name }) => name === fileName,
+                        )
+
+                        if (localeData) {
+                          if (template === source?.template) return
+
+                          const { name: _name, ...localeRest } = localeData
+                          const [remoteContent, localeContent] =
+                            await Promise.all([
+                              transformContentWithFormatAndLint(
+                                path.join(filePath, fileName),
+                                section,
+                                transformTemplateContent(template, remoteRest),
+                                config,
+                                generatedNames,
+                              ),
+                              transformContentWithFormatAndLint(
+                                path.join(filePath, fileName),
+                                section,
+                                transformTemplateContent(
+                                  source!.template!,
+                                  localeRest,
+                                ),
+                                config,
+                                generatedNames,
+                              ),
+                            ])
+                          const diff = diffLines(localeContent, remoteContent)
+
+                          if (diff.length < 2) return
+
+                          changes[componentName] ??= {}
+                          changes[componentName][`${name}/${fileName}`] = diff
+                        } else {
+                          const remoteContent = transformContent(
+                            section,
+                            transformTemplateContent(template, remoteRest),
+                            config,
+                            generatedNames,
+                          )
+
+                          changes[componentName] ??= {}
+                          changes[componentName][`${name}/${fileName}`] = [
+                            {
+                              added: true,
+                              count: remoteContent.length,
+                              removed: false,
+                              value: remoteContent,
+                            },
+                          ]
+                        }
+                      }),
+                    )
                   }
                 }),
               )
             }
 
-            task.title = `Diffed ${c.cyan(name)}`
+            task.title = `Checked ${c.cyan(componentName)}`
           },
-          title: `Diffing ${c.cyan(name)}`,
+          title: `Checking ${c.cyan(componentName)}`,
         }) satisfies ListrTask,
     ),
     { concurrent },

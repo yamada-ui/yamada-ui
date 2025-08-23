@@ -378,8 +378,12 @@ export async function generateSource(
   } else if (template && data) {
     await Promise.all(
       data.map(async ({ name: fileName, ...rest }) => {
-        content = transformTemplateContent(template, rest)
-        content = transformContent(section, content, config, generatedNames)
+        const content = transformContent(
+          section,
+          transformTemplateContent(template, rest),
+          config,
+          generatedNames,
+        )
 
         await writeFileSafe(path.resolve(targetPath, fileName), content, config)
       }),

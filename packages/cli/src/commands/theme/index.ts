@@ -118,7 +118,7 @@ export const theme = new Command("theme")
               const userConfig = JSON.parse(data) as UserConfig
 
               userConfig.theme ??= {}
-              userConfig.theme.path = themePath
+              userConfig.theme.path ??= themePath ?? THEME_PATH
 
               await writeFileSafe(
                 targetPath,

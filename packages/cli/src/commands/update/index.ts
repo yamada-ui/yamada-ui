@@ -1,3 +1,4 @@
+import type { DiffRegistries } from "../diff/get-registries-and-files"
 import { Command } from "commander"
 import { existsSync } from "fs"
 import ora from "ora"
@@ -127,9 +128,22 @@ export const update = new Command("update")
       if (!hasChanges) {
         console.log(c.cyan("No updates found."))
       } else {
+        const changeNames = Object.keys(changes)
+        const omittedRegistries: DiffRegistries = {
+          locale: Object.fromEntries(
+            Object.entries(registries.locale).filter(([name]) =>
+              changeNames.includes(name),
+            ),
+          ),
+          remote: Object.fromEntries(
+            Object.entries(registries.remote).filter(([name]) =>
+              changeNames.includes(name),
+            ),
+          ),
+        }
         const conflictMap = await updateFiles(
           generatedNames,
-          registries,
+          omittedRegistries,
           config,
           {
             concurrent: !sequential,

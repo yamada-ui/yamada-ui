@@ -1,13 +1,14 @@
 import type { LintConfig } from "../index.type"
 import { ESLint } from "eslint"
 
-export interface LintOptions extends LintConfig {
+export interface LintTextOptions extends LintConfig {
   cwd?: string
+  filePath?: string
 }
 
-export async function lint(
+export async function lintText(
   content: string,
-  { cwd, enabled = true, filePath }: LintOptions = {},
+  { cwd, enabled = true, filePath }: LintTextOptions = {},
 ) {
   if (!enabled) return content
 
@@ -22,4 +23,21 @@ export async function lint(
   } catch {
     return content
   }
+}
+
+export interface LintFilesOptions extends Omit<LintTextOptions, "filePath"> {}
+
+export async function lintFiles(
+  patterns: string | string[],
+  { cwd, enabled = true }: LintFilesOptions = {},
+) {
+  if (!enabled) return
+
+  try {
+    const eslint = new ESLint({ cwd, fix: true })
+
+    const results = await eslint.lintFiles(patterns)
+
+    await ESLint.outputFixes(results)
+  } catch {}
 }

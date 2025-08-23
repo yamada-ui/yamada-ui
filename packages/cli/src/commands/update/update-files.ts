@@ -14,14 +14,12 @@ import {
   installDependencies,
   splitVersion,
   transformContent,
+  transformContentWithFormatAndLint,
+  transformIndexWithFormatAndLint,
   uninstallDependencies,
   writeFileSafe,
 } from "../../utils"
-import {
-  generateContent,
-  generateIndexContent,
-  getFilePath,
-} from "../diff/get-diff"
+import { getFilePath } from "../diff/get-diff"
 
 async function mergeContent(
   remoteFilePath: string,
@@ -123,12 +121,12 @@ export async function updateFiles(
                   `locale-${fileName}`,
                 )
                 const [remoteContent, localeContent] = await Promise.all([
-                  generateIndexContent(
+                  transformIndexWithFormatAndLint(
                     sources[0]!.content!,
                     config,
                     generatedNames,
                   ),
-                  generateIndexContent(
+                  transformIndexWithFormatAndLint(
                     localeRegistry.sources[0]!.content!,
                     config,
                     generatedNames,
@@ -191,14 +189,14 @@ export async function updateFiles(
                       if (source) {
                         const [remoteContent, localeContent] =
                           await Promise.all([
-                            generateContent(
+                            transformContentWithFormatAndLint(
                               currentFilePath,
                               section,
                               content,
                               config,
                               generatedNames,
                             ),
-                            generateContent(
+                            transformContentWithFormatAndLint(
                               currentFilePath,
                               section,
                               source.content!,

@@ -15,6 +15,8 @@ import path from "path"
 import c from "picocolors"
 import { REGISTRY_FILE_NAME, REGISTRY_URL, SECTION_NAMES } from "../constant"
 import { writeFileSafe } from "./fs"
+import { lintText } from "./lint"
+import { formatText } from "./prettier"
 
 const agent = process.env.https_proxy
   ? new HttpsProxyAgent(process.env.https_proxy)
@@ -269,12 +271,93 @@ export function transformContent(
   return content
 }
 
+export async function transformContentWithFormatAndLint(
+  filePath: string,
+  section: RegistrySection,
+  content: string,
+  config: Config,
+  generatedNames: string[],
+) {
+  const { cwd, format, lint } = config
+
+  content = transformContent(section, content, config, generatedNames)
+  content = await lintText(content, {
+    ...lint,
+    cwd,
+    filePath,
+  })
+  content = await formatText(content, format)
+
+  return content
+}
+
 export function transformTemplateContent(template: string, data: Dict) {
   let content = template
 
   Object.entries(data).forEach(([key, value]) => {
     content = content.replace(new RegExp(`{{${key}}}`, "g"), value)
   })
+
+  return content
+}
+
+export function transformIndex(
+  generatedNames: string[],
+  content: string,
+  { getSection }: Config,
+) {
+  const matches = content.matchAll(/from\s+["']([^"']+)["']/g)
+
+  matches.forEach((match) => {
+    const [searchValue, value] = match
+
+    if (!value) return
+
+    const name = value.split("/").at(-1)
+
+    if (!name) return
+
+    const generated = generatedNames.includes(name)
+
+    let replaceValue: string
+
+    if (generated) {
+      const [section] = value.split("/").slice(-2)
+      const { path } = getSection(section) ?? {}
+
+      if (!path) return
+
+      replaceValue = `from "${path}/${name}"`
+    } else {
+      const omittedValue = value.replace(/(\.\.\/|\.\/)/g, "")
+      const query = omittedValue.split("/").slice(0, -1).join("/")
+      const { section } = getSection(query) ?? {}
+
+      if (!section) return
+
+      replaceValue = `from "@yamada-ui/react/${section}/${name}"`
+    }
+
+    content = content.replace(searchValue, replaceValue)
+  })
+
+  return content
+}
+
+export async function transformIndexWithFormatAndLint(
+  content: string,
+  config: Config,
+  generatedNames: string[],
+) {
+  const { cwd, format, lint } = config
+
+  content = transformIndex(generatedNames, content, config)
+  content = await lintText(content, {
+    ...lint,
+    cwd,
+    filePath: config.indexPath,
+  })
+  content = await formatText(content, format)
 
   return content
 }
@@ -320,47 +403,4 @@ export async function generateSources(
       merge(config, { format: { parser: "json" } }),
     ),
   ])
-}
-
-export function replaceIndex(
-  generatedNames: string[],
-  content: string,
-  { getSection }: Config,
-) {
-  const matches = content.matchAll(/from\s+["']([^"']+)["']/g)
-
-  matches.forEach((match) => {
-    const [searchValue, value] = match
-
-    if (!value) return
-
-    const name = value.split("/").at(-1)
-
-    if (!name) return
-
-    const generated = generatedNames.includes(name)
-
-    let replaceValue: string
-
-    if (generated) {
-      const [section] = value.split("/").slice(-2)
-      const { path } = getSection(section) ?? {}
-
-      if (!path) return
-
-      replaceValue = `from "${path}/${name}"`
-    } else {
-      const omittedValue = value.replace(/(\.\.\/|\.\/)/g, "")
-      const query = omittedValue.split("/").slice(0, -1).join("/")
-      const { section } = getSection(query) ?? {}
-
-      if (!section) return
-
-      replaceValue = `from "@yamada-ui/react/${section}/${name}"`
-    }
-
-    content = content.replace(searchValue, replaceValue)
-  })
-
-  return content
 }

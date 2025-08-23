@@ -22,9 +22,9 @@ import {
   getPackageJson,
   getPackageName,
   installDependencies,
-  replaceIndex,
   timer,
   transformContent,
+  transformIndex,
   validateDir,
   writeFileSafe,
 } from "../../utils"
@@ -281,7 +281,7 @@ export const add = new Command("add")
       if (existsSync(config.indexPath)) {
         tasks.add({
           task: async (_, task) => {
-            const content = replaceIndex(
+            const content = transformIndex(
               targetNames,
               await readFile(config.indexPath, "utf-8"),
               config,
@@ -299,7 +299,11 @@ export const add = new Command("add")
             const {
               sources: [source],
             } = await fetchRegistry("index")
-            const content = replaceIndex(targetNames, source!.content!, config)
+            const content = transformIndex(
+              targetNames,
+              source!.content!,
+              config,
+            )
 
             await writeFileSafe(config.indexPath, content, config)
 

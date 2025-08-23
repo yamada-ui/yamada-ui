@@ -7,3 +7,46 @@ style: components/heading/heading.style.ts
 ---
 
 ## 使い方
+
+```tsx preview
+<Heading>ギャルのパンティーおくれーーーっ！！！！！</Heading>
+```
+
+## サイズを変更する
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      { as: "h1", size: "4xl" },
+      { as: "h2", size: "3xl" },
+      { as: "h2", size: "2xl" },
+      { as: "h3", size: "xl" },
+      { as: "h3", size: "lg" },
+      { as: "h4", size: "md" },
+      { as: "h5", size: "sm" },
+      { as: "h6", size: "xs" },
+    ]}
+  >
+    {({ as, size }, index) => (
+      <Heading key={index} as={as} size={size} truncated>
+        ギャルのパンティーおくれーーーっ！！！！！
+      </Heading>
+    )}
+  </For>
+</VStack>
+```
+
+## グラデーションをつける
+
+```tsx preview
+<Heading
+  size="2xl"
+  bgClip="text"
+  bgGradient="linear(to-l, #7928CA, #FF0080)"
+  truncated
+  w="full"
+>
+  クリリンのことか……クリリンのことかーーーっ！！！！！
+</Heading>
+```

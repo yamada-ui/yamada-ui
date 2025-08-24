@@ -1,48 +1,68 @@
 import type { ChangeObject } from "diff"
 import type { ListrTask } from "listr2"
-import type { Config, RegistrySection } from "../../index.type"
-import type { DiffRegistries } from "./get-registries-and-files"
+import type {
+  Config,
+  PackageNameWithVersion,
+  RegistrySection,
+} from "../../index.type"
+import type { RegistryMap } from "./get-registries-and-files"
+import { isUndefined } from "@yamada-ui/utils"
 import { diffLines } from "diff"
 import { Listr } from "listr2"
 import path from "path"
 import c from "picocolors"
 import {
+  getPackageName,
+  splitVersion,
   transformContent,
   transformContentWithFormatAndLint,
   transformIndexWithFormatAndLint,
   transformTemplateContent,
 } from "../../utils"
 
-export interface Diff {
-  [key: string]: ChangeObject<string>[]
-}
+export type Diff = ChangeObject<string>[]
 
 export interface Changes {
-  [key: string]: Diff
+  [key: string]:
+    | { diff: Diff; locale: string; remote: string }
+    | { diff: Diff; locale: string }
+    | { diff: Diff; remote: string }
 }
 
-export function getFilePath(
+export interface ChangeMap {
+  [key: string]: Changes
+}
+
+export interface DependencyMap {
+  add: string[]
+  remove: string[]
+  update: Exclude<PackageNameWithVersion, string>[]
+}
+
+export function getDirPath(
   section: RegistrySection,
   name: string,
-  fileName: string,
   config: Config,
 ) {
   return config.isSection(section)
-    ? path.join(config.getSectionAbsolutePath(section), name, fileName)
-    : path.join(config.srcPath, section === "theme" ? name : "", fileName)
+    ? path.join(config.getSectionAbsolutePath(section), name)
+    : section === "theme"
+      ? config.theme!.path!
+      : config.srcPath
 }
 
 export async function getDiff(
   generatedNames: string[],
-  { locale, remote }: DiffRegistries,
+  { locale, remote }: RegistryMap,
   config: Config,
   concurrent = true,
 ) {
-  const changes: Changes = {}
+  const changeMap: ChangeMap = {}
+  const dependencyMap: DependencyMap = { add: [], remove: [], update: [] }
 
   const tasks = new Listr(
     Object.entries(remote).map(
-      ([componentName, { section, sources }]) =>
+      ([componentName, { dependencies, section, sources }]) =>
         ({
           task: async (_, task) => {
             const localeRegistry = locale[componentName]!
@@ -51,7 +71,7 @@ export async function getDiff(
               const [source] = sources
 
               const fileName = source!.name
-              const [remoteContent, localeContent] = await Promise.all([
+              const [remote, locale] = await Promise.all([
                 transformIndexWithFormatAndLint(
                   source!.content!,
                   config,
@@ -63,66 +83,107 @@ export async function getDiff(
                   generatedNames,
                 ),
               ])
-              const diff = diffLines(localeContent, remoteContent)
+              const diff = diffLines(locale, remote)
 
               if (diff.length < 2) return
 
-              changes[componentName] ??= {}
-              changes[componentName][fileName] = diff
+              changeMap[componentName] ??= {}
+              changeMap[componentName][fileName] = {
+                diff,
+                locale,
+                remote,
+              }
             } else {
+              const dirPath = getDirPath(section, componentName, config)
+
+              if (dependencies || localeRegistry.dependencies) {
+                const remoteDependencies = dependencies?.externals ?? []
+                const localeDependencies =
+                  localeRegistry.dependencies?.externals ?? []
+                const remotePackageNames =
+                  remoteDependencies.map(getPackageName)
+                const localePackageNames =
+                  localeDependencies.map(getPackageName)
+                const add = remotePackageNames.filter(
+                  (name) => !localePackageNames.includes(name),
+                )
+                const remove = localePackageNames.filter(
+                  (name) => !remotePackageNames.includes(name),
+                )
+                const update = localeDependencies
+                  .map((name) => {
+                    const [packageName, current] = splitVersion(name)
+                    const remoteDependency = remoteDependencies.find(
+                      (name) => getPackageName(name) === packageName,
+                    )
+                    if (!remoteDependency) return
+
+                    const [, wanted] = splitVersion(remoteDependency)
+
+                    if (current === wanted) return
+
+                    return { name: packageName, current, wanted: wanted! }
+                  })
+                  .filter((data) => !isUndefined(data))
+
+                dependencyMap.add.push(...add)
+                dependencyMap.remove.push(...remove)
+                dependencyMap.update.push(...update)
+              }
+
               await Promise.all(
                 sources.map(async ({ name, content, data, template }) => {
-                  const filePath = getFilePath(
-                    section,
-                    componentName,
-                    name,
-                    config,
-                  )
+                  const targetPath = path.join(dirPath, name)
                   const source = localeRegistry.sources.find(
                     (source) => source.name === name,
                   )
 
                   if (content) {
                     if (source) {
-                      const [remoteContent, localeContent] = await Promise.all([
+                      const [remote, locale] = await Promise.all([
                         transformContentWithFormatAndLint(
-                          filePath,
+                          targetPath,
                           section,
                           content,
                           config,
                           generatedNames,
                         ),
                         transformContentWithFormatAndLint(
-                          filePath,
+                          targetPath,
                           section,
                           source.content!,
                           config,
                           generatedNames,
                         ),
                       ])
-                      const diff = diffLines(localeContent, remoteContent)
+                      const diff = diffLines(locale, remote)
 
                       if (diff.length < 2) return
 
-                      changes[componentName] ??= {}
-                      changes[componentName][name] = diff
+                      changeMap[componentName] ??= {}
+                      changeMap[componentName][name] = {
+                        diff,
+                        locale,
+                        remote,
+                      }
                     } else {
-                      const remoteContent = transformContent(
+                      const remote = transformContent(
                         section,
                         content,
                         config,
                         generatedNames,
                       )
-
-                      changes[componentName] ??= {}
-                      changes[componentName][name] = [
+                      const diff: Diff = [
                         {
                           added: true,
-                          count: remoteContent.length,
+                          count: remote.length,
                           removed: false,
-                          value: remoteContent,
+                          value: remote,
                         },
                       ]
+
+                      changeMap[componentName] ??= {}
+                      changeMap[componentName][name] = { diff, remote }
                     }
                   } else if (template && data) {
                     await Promise.all(
@@ -135,55 +196,111 @@ export async function getDiff(
                           if (template === source?.template) return
 
                           const { name: _name, ...localeRest } = localeData
-                          const [remoteContent, localeContent] =
-                            await Promise.all([
-                              transformContentWithFormatAndLint(
-                                path.join(filePath, fileName),
-                                section,
-                                transformTemplateContent(template, remoteRest),
-                                config,
-                                generatedNames,
+                          const [remote, locale] = await Promise.all([
+                            transformContentWithFormatAndLint(
+                              path.join(targetPath, fileName),
+                              section,
+                              transformTemplateContent(template, remoteRest),
+                              config,
+                              generatedNames,
+                            ),
+                            transformContentWithFormatAndLint(
+                              path.join(targetPath, fileName),
+                              section,
+                              transformTemplateContent(
+                                source!.template!,
+                                localeRest,
                               ),
-                              transformContentWithFormatAndLint(
-                                path.join(filePath, fileName),
-                                section,
-                                transformTemplateContent(
-                                  source!.template!,
-                                  localeRest,
-                                ),
-                                config,
-                                generatedNames,
-                              ),
-                            ])
-                          const diff = diffLines(localeContent, remoteContent)
+                              config,
+                              generatedNames,
+                            ),
+                          ])
+                          const diff = diffLines(locale, remote)
 
                           if (diff.length < 2) return
 
-                          changes[componentName] ??= {}
-                          changes[componentName][`${name}/${fileName}`] = diff
+                          changeMap[componentName] ??= {}
+                          changeMap[componentName][`${name}/${fileName}`] = {
+                            diff,
+                            locale,
+                            remote,
+                          }
                         } else {
-                          const remoteContent = transformContent(
+                          const remote = transformContent(
                             section,
                             transformTemplateContent(template, remoteRest),
                             config,
                             generatedNames,
                           )
-
-                          changes[componentName] ??= {}
-                          changes[componentName][`${name}/${fileName}`] = [
+                          const diff: Diff = [
                             {
                               added: true,
-                              count: remoteContent.length,
+                              count: remote.length,
                               removed: false,
-                              value: remoteContent,
+                              value: remote,
                             },
                           ]
+
+                          changeMap[componentName] ??= {}
+                          changeMap[componentName][`${name}/${fileName}`] = {
+                            diff,
+                            remote,
+                          }
                         }
                       }),
                     )
                   }
                 }),
               )
+
+              const removeSources = localeRegistry.sources.filter(
+                ({ name }) => !sources.some((source) => source.name === name),
+              )
+
+              removeSources.forEach(({ name, content, data, template }) => {
+                if (content) {
+                  const locale = transformContent(
+                    section,
+                    content,
+                    config,
+                    generatedNames,
+                  )
+                  const diff: Diff = [
+                    {
+                      added: false,
+                      count: locale.length,
+                      removed: true,
+                      value: locale,
+                    },
+                  ]
+
+                  changeMap[componentName] ??= {}
+                  changeMap[componentName][name] = { diff, locale }
+                } else if (template && data) {
+                  data.forEach(({ name: fileName, ...remoteRest }) => {
+                    const locale = transformContent(
+                      section,
+                      transformTemplateContent(template, remoteRest),
+                      config,
+                      generatedNames,
+                    )
+                    const diff: Diff = [
+                      {
+                        added: true,
+                        count: locale.length,
+                        removed: false,
+                        value: locale,
+                      },
+                    ]
+
+                    changeMap[componentName] ??= {}
+                    changeMap[componentName][`${name}/${fileName}`] = {
+                      diff,
+                      locale,
+                    }
+                  })
+                }
+              })
             }
 
             task.title = `Checked ${c.cyan(componentName)}`
@@ -196,5 +313,5 @@ export async function getDiff(
 
   await tasks.run()
 
-  return changes
+  return { changeMap, dependencyMap }
 }

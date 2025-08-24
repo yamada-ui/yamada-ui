@@ -20,7 +20,7 @@ import {
   getGeneratedNameMap,
   getNotInstalledDependencies,
   getPackageJson,
-  getPackageName,
+  getPackageNameWithVersion,
   installDependencies,
   timer,
   transformContent,
@@ -385,7 +385,7 @@ export const add = new Command("add")
           tasks.add({
             task: async (_, task) => {
               await installDependencies(
-                notInstalledDependencies.map(getPackageName),
+                notInstalledDependencies.map(getPackageNameWithVersion),
                 { cwd: targetPath },
               )
 

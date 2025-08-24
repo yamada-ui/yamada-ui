@@ -1,4 +1,3 @@
-import type { DiffRegistries } from "../diff/get-registries-and-files"
 import { Command } from "commander"
 import { existsSync } from "fs"
 import ora from "ora"
@@ -110,45 +109,34 @@ export const update = new Command("update")
         componentNames.push(...generatedNames)
       }
 
-      const { registries } = await getRegistriesAndFiles(
+      const { registryMap } = await getRegistriesAndFiles(
         componentNames,
         config,
         { concurrent: !sequential, index, theme },
       )
-      const changes = await getDiff(
+      const { changeMap, dependencyMap } = await getDiff(
         generatedNames,
-        registries,
+        registryMap,
         config,
         !sequential,
       )
-      const hasChanges = Object.keys(changes).length
+      const hasChanges = !!Object.keys(changeMap).length
+      const hasDependencyChanges =
+        !!dependencyMap.add.length ||
+        !!dependencyMap.remove.length ||
+        !!dependencyMap.update.length
 
       console.log("---------------------------------")
 
-      if (!hasChanges) {
+      if (!hasChanges && !hasDependencyChanges) {
         console.log(c.cyan("No updates found."))
       } else {
-        const changeNames = Object.keys(changes)
-        const omittedRegistries: DiffRegistries = {
-          locale: Object.fromEntries(
-            Object.entries(registries.locale).filter(([name]) =>
-              changeNames.includes(name),
-            ),
-          ),
-          remote: Object.fromEntries(
-            Object.entries(registries.remote).filter(([name]) =>
-              changeNames.includes(name),
-            ),
-          ),
-        }
         const conflictMap = await updateFiles(
-          generatedNames,
-          omittedRegistries,
+          changeMap,
+          dependencyMap,
+          registryMap,
           config,
-          {
-            concurrent: !sequential,
-            install,
-          },
+          { concurrent: !sequential, install },
         )
 
         if (Object.keys(conflictMap).length) {

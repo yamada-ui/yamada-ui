@@ -15,7 +15,7 @@ export interface FileMap {
   [key: string]: Files
 }
 
-export interface DiffRegistries {
+export interface RegistryMap {
   locale: Registries
   remote: Registries
 }
@@ -36,7 +36,7 @@ export async function getRegistriesAndFiles(
   }: GetComponentDataOptions = {},
 ) {
   const fileMap: FileMap = {}
-  const registries: DiffRegistries = {
+  const registryMap: RegistryMap = {
     locale: {},
     remote: {},
   }
@@ -50,7 +50,7 @@ export async function getRegistriesAndFiles(
           fileMap.index = {
             "index.ts": await readFile(config.indexPath, "utf-8"),
           }
-          registries.locale.index = await fetchLocaleRegistry(
+          registryMap.locale.index = await fetchLocaleRegistry(
             config.registryPath,
           )
 
@@ -60,7 +60,7 @@ export async function getRegistriesAndFiles(
       },
       {
         task: async (_, task) => {
-          registries.remote.index = await fetchRegistry("index")
+          registryMap.remote.index = await fetchRegistry("index")
 
           task.title = `Fetched ${c.cyan("index")} registry`
         },
@@ -78,7 +78,7 @@ export async function getRegistriesAndFiles(
           const { dirPath, files } = await getFiles(config.theme.path)
 
           fileMap.theme = files
-          registries.locale.theme = await fetchLocaleRegistry(
+          registryMap.locale.theme = await fetchLocaleRegistry(
             path.join(dirPath, REGISTRY_FILE_NAME),
           )
 
@@ -88,7 +88,7 @@ export async function getRegistriesAndFiles(
       },
       {
         task: async (_, task) => {
-          registries.remote.theme = await fetchRegistry("theme")
+          registryMap.remote.theme = await fetchRegistry("theme")
           task.title = `Fetched ${c.cyan("theme")} registry`
         },
         title: `Fetching ${c.cyan("theme")} registry`,
@@ -107,7 +107,7 @@ export async function getRegistriesAndFiles(
                   path.join(config.srcPath, "**", componentName),
                 )
                 fileMap[componentName] = files
-                registries.locale[componentName] = await fetchLocaleRegistry(
+                registryMap.locale[componentName] = await fetchLocaleRegistry(
                   path.join(dirPath, REGISTRY_FILE_NAME),
                 )
 
@@ -117,7 +117,7 @@ export async function getRegistriesAndFiles(
             },
             {
               task: async (_, task) => {
-                registries.remote[componentName] =
+                registryMap.remote[componentName] =
                   await fetchRegistry(componentName)
 
                 task.title = `Fetched ${c.cyan(componentName)} registry`
@@ -131,5 +131,5 @@ export async function getRegistriesAndFiles(
 
   await tasks.run()
 
-  return { fileMap, registries }
+  return { fileMap, registryMap }
 }

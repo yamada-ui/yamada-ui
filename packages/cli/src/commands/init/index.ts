@@ -27,7 +27,7 @@ import {
   getNotInstalledDependencies,
   getPackageJson,
   getPackageManager,
-  getPackageName,
+  getPackageNameWithVersion,
   installDependencies,
   packageAddArgs,
   timer,
@@ -379,8 +379,12 @@ export const init = new Command("init")
           })
 
           if (install) {
-            dependencies = notInstalledDependencies.map(getPackageName)
-            devDependencies = notInstalledDevDependencies.map(getPackageName)
+            dependencies = notInstalledDependencies.map(
+              getPackageNameWithVersion,
+            )
+            devDependencies = notInstalledDevDependencies.map(
+              getPackageNameWithVersion,
+            )
           }
         }
       }

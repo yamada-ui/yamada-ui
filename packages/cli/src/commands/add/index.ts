@@ -9,7 +9,7 @@ import ora from "ora"
 import path from "path"
 import c from "picocolors"
 import prompts from "prompts"
-import { CONFIG_FILE_NAME } from "../../constant"
+import { CONFIG_FILE_NAME, REGISTRY_FILE_NAME } from "../../constant"
 import {
   cwd,
   fetchRegistries,
@@ -252,20 +252,49 @@ export const add = new Command("add")
 
                   await Promise.all(
                     dirents.map(async (dirent) => {
-                      if (dirent.isDirectory()) return
+                      if (dirent.isDirectory()) {
+                        const dirents = await readdir(
+                          path.join(dirent.parentPath, name),
+                          {
+                            withFileTypes: true,
+                          },
+                        )
 
-                      const targetPath = path.join(
-                        dirent.parentPath,
-                        dirent.name,
-                      )
-                      const content = transformContent(
-                        section as Section,
-                        await readFile(targetPath, "utf-8"),
-                        config,
-                        targetNames,
-                      )
+                        await Promise.all(
+                          dirents.map(async (dirent) => {
+                            if (dirent.isDirectory()) return
+                            if (dirent.name === REGISTRY_FILE_NAME) return
 
-                      await writeFileSafe(targetPath, content, config)
+                            const targetPath = path.join(
+                              dirent.parentPath,
+                              dirent.name,
+                            )
+                            const data = await readFile(targetPath, "utf-8")
+                            const content = transformContent(
+                              section as Section,
+                              data,
+                              config,
+                              targetNames,
+                            )
+
+                            await writeFileSafe(targetPath, content, config)
+                          }),
+                        )
+                      } else if (dirent.name !== REGISTRY_FILE_NAME) {
+                        const targetPath = path.join(
+                          dirent.parentPath,
+                          dirent.name,
+                        )
+                        const data = await readFile(targetPath, "utf-8")
+                        const content = transformContent(
+                          section as Section,
+                          data,
+                          config,
+                          targetNames,
+                        )
+
+                        await writeFileSafe(targetPath, content, config)
+                      }
                     }),
                   )
 

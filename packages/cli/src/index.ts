@@ -1,5 +1,4 @@
 import checkNode from "cli-check-node"
-import unhandledError from "cli-handle-unhandled"
 import { Command } from "commander"
 import c from "picocolors"
 import updateNotifier from "update-notifier"
@@ -11,10 +10,8 @@ import { theme } from "./commands/theme"
 import { tokens } from "./commands/tokens"
 import { update } from "./commands/update"
 
-export async function run() {
+export function run() {
   checkNode("22")
-
-  await unhandledError()
 
   updateNotifier({
     pkg: packageJson,

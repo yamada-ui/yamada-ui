@@ -5,7 +5,12 @@ import { Listr } from "listr2"
 import path from "path"
 import c from "picocolors"
 import { REGISTRY_FILE_NAME } from "../../constant"
-import { fetchLocaleRegistry, fetchRegistry, getFiles } from "../../utils"
+import {
+  fetchLocaleRegistry,
+  fetchRegistry,
+  getFiles,
+  transformExtension,
+} from "../../utils"
 
 export interface Files {
   [key: string]: string
@@ -47,8 +52,10 @@ export async function getRegistriesAndFiles(
     tasks.add([
       {
         task: async (_, task) => {
+          const indexFileName = transformExtension("index.ts", config.jsx)
+
           fileMap.index = {
-            "index.ts": await readFile(config.indexPath, "utf-8"),
+            [indexFileName]: await readFile(config.indexPath, "utf-8"),
           }
           registryMap.locale.index = await fetchLocaleRegistry(
             config.registryPath,

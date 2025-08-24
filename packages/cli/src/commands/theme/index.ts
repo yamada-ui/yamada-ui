@@ -18,7 +18,11 @@ import {
   cwd,
   fetchRegistry,
   getConfig,
+  isTsx,
   timer,
+  transformExtension,
+  transformTsToJs,
+  transformTsxToJsx,
   validateDir,
   writeFileSafe,
 } from "../../utils"
@@ -28,6 +32,7 @@ interface Options {
   cwd: string
   overwrite: boolean
   format?: boolean
+  js?: boolean
   lint?: boolean
 }
 
@@ -37,11 +42,12 @@ export const theme = new Command("theme")
   .option("--cwd <path>", "current working directory", cwd)
   .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing directory.", false)
+  .option("-j, --js", "use js instead of ts")
   .option("-f, --format", "format the output files.")
   .option("-l, --lint", "lint the output files.")
   .action(async function (
     themePath: string | undefined,
-    { config: configPath, cwd, format, lint, overwrite }: Options,
+    { config: configPath, cwd, format, js, lint, overwrite }: Options,
   ) {
     const spinner = ora()
 
@@ -56,14 +62,14 @@ export const theme = new Command("theme")
 
       spinner.start("Fetching config")
 
-      const config = await getConfig(cwd, configPath, { format, lint })
-      const themeAbsolutePath = themePath
+      const config = await getConfig(cwd, configPath, { format, jsx: js, lint })
+      const resolvedPath = themePath
         ? path.resolve(cwd, themePath)
         : (config.theme?.path ?? path.resolve(cwd, THEME_PATH))
 
       spinner.succeed("Fetched config")
 
-      if (!overwrite && existsSync(themeAbsolutePath)) {
+      if (!overwrite && existsSync(resolvedPath)) {
         const { overwrite } = await prompts({
           type: "confirm",
           name: "overwrite",
@@ -77,7 +83,7 @@ export const theme = new Command("theme")
 
         spinner.start("Clearing directory")
 
-        await rimraf(themeAbsolutePath)
+        await rimraf(resolvedPath)
 
         spinner.succeed("Cleared directory")
       }
@@ -96,12 +102,19 @@ export const theme = new Command("theme")
                 ...registry.sources.map(async ({ name, content }) => {
                   if (!content) return
 
-                  const targetPath = path.resolve(themeAbsolutePath, name)
+                  name = transformExtension(name, config.jsx)
+
+                  const targetPath = path.resolve(resolvedPath, name)
+
+                  if (config.jsx)
+                    content = isTsx(name)
+                      ? transformTsxToJsx(content)
+                      : transformTsToJs(content)
 
                   await writeFileSafe(targetPath, content, config)
                 }),
                 writeFileSafe(
-                  path.resolve(themeAbsolutePath, REGISTRY_FILE_NAME),
+                  path.resolve(resolvedPath, REGISTRY_FILE_NAME),
                   JSON.stringify(registry),
                   merge(config, { format: { parser: "json" } }),
                 ),

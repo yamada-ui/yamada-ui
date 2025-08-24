@@ -13,11 +13,15 @@ import path from "path"
 import c from "picocolors"
 import {
   getPackageName,
+  isJsx,
   splitVersion,
   transformContent,
   transformContentWithFormatAndLint,
+  transformExtension,
   transformIndexWithFormatAndLint,
   transformTemplateContent,
+  transformTsToJs,
+  transformTsxToJsx,
 } from "../../utils"
 
 export type Diff = ChangeObject<string>[]
@@ -45,7 +49,7 @@ export function getDirPath(
   config: Config,
 ) {
   return config.isSection(section)
-    ? path.join(config.getSectionAbsolutePath(section), name)
+    ? path.join(config.getSectionResolvedPath(section), name)
     : section === "theme"
       ? config.theme!.path!
       : config.srcPath
@@ -70,7 +74,7 @@ export async function getDiff(
             if (componentName === "index") {
               const [source] = sources
 
-              const fileName = source!.name
+              const fileName = transformExtension(source!.name, config.jsx)
               const [remote, locale] = await Promise.all([
                 transformIndexWithFormatAndLint(
                   source!.content!,
@@ -133,10 +137,13 @@ export async function getDiff(
 
               await Promise.all(
                 sources.map(async ({ name, content, data, template }) => {
-                  const targetPath = path.join(dirPath, name)
                   const source = localeRegistry.sources.find(
                     (source) => source.name === name,
                   )
+
+                  name = transformExtension(name, config.jsx)
+
+                  const targetPath = path.join(dirPath, name)
 
                   if (content) {
                     if (source) {
@@ -167,12 +174,18 @@ export async function getDiff(
                         remote,
                       }
                     } else {
-                      const remote = transformContent(
+                      let remote = transformContent(
                         section,
                         content,
                         config,
                         generatedNames,
                       )
+
+                      if (config.jsx)
+                        remote = isJsx(name)
+                          ? transformTsxToJsx(remote)
+                          : transformTsToJs(remote)
+
                       const diff: Diff = [
                         {
                           added: true,
@@ -191,6 +204,8 @@ export async function getDiff(
                         const localeData = source?.data?.find(
                           ({ name }) => name === fileName,
                         )
+
+                        fileName = transformExtension(fileName, config.jsx)
 
                         if (localeData) {
                           if (template === source?.template) return
@@ -226,12 +241,18 @@ export async function getDiff(
                             remote,
                           }
                         } else {
-                          const remote = transformContent(
+                          let remote = transformContent(
                             section,
                             transformTemplateContent(template, remoteRest),
                             config,
                             generatedNames,
                           )
+
+                          if (config.jsx)
+                            remote = isJsx(fileName)
+                              ? transformTsxToJsx(remote)
+                              : transformTsToJs(remote)
+
                           const diff: Diff = [
                             {
                               added: true,
@@ -259,12 +280,18 @@ export async function getDiff(
 
               removeSources.forEach(({ name, content, data, template }) => {
                 if (content) {
-                  const locale = transformContent(
+                  let locale = transformContent(
                     section,
                     content,
                     config,
                     generatedNames,
                   )
+
+                  if (config.jsx)
+                    locale = isJsx(name)
+                      ? transformTsxToJsx(locale)
+                      : transformTsToJs(locale)
+
                   const diff: Diff = [
                     {
                       added: false,
@@ -278,12 +305,18 @@ export async function getDiff(
                   changeMap[componentName][name] = { diff, locale }
                 } else if (template && data) {
                   data.forEach(({ name: fileName, ...remoteRest }) => {
-                    const locale = transformContent(
+                    let locale = transformContent(
                       section,
                       transformTemplateContent(template, remoteRest),
                       config,
                       generatedNames,
                     )
+
+                    if (config.jsx)
+                      locale = isJsx(fileName)
+                        ? transformTsxToJsx(locale)
+                        : transformTsToJs(locale)
+
                     const diff: Diff = [
                       {
                         added: true,

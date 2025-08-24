@@ -12,6 +12,7 @@ import {
   getPackageManager,
   packageExecuteCommands,
   timer,
+  transformExtension,
   validateDir,
 } from "../../utils"
 import { printConflicts } from "../update/print-conflicts"
@@ -145,8 +146,12 @@ export const diff = new Command("diff")
         if (targetName) {
           printDiff(changeMap[targetName], detail)
         } else {
-          if (index && changeMap.index)
-            printDiffFile("index.ts", changeMap.index["index.ts"]?.diff)
+          if (index && changeMap.index) {
+            const indexFileName = transformExtension("index.ts", config.jsx)
+
+            printDiffFile(indexFileName, changeMap.index[indexFileName]?.diff)
+          }
+
           if (theme && changeMap.theme) printDiffFiles("theme", changeMap.theme)
 
           componentNames.forEach((name) => {

@@ -35,18 +35,26 @@ export const DEFAULT_PACKAGE_JSON = {
   type: "module",
   private: true,
   scripts: {},
-  exports: {
-    ".": "./src/index.ts",
-    "./components/*": "./src/components/*/index.ts",
-    "./hooks/*": "./src/hooks/*/index.ts",
-    "./providers/*": "./src/providers/*/index.ts",
-  },
   dependencies: Object.fromEntries(
     REQUIRED_DEPENDENCIES.map((dependency) => splitVersion(dependency)),
   ),
   devDependencies: Object.fromEntries(
     REQUIRED_DEV_DEPENDENCIES.map((dependency) => splitVersion(dependency)),
   ),
+}
+export const DEFAULT_PACKAGE_JSON_EXPORTS = {
+  TSX: {
+    ".": "./src/index.ts",
+    "./components/*": "./src/components/*/index.ts",
+    "./hooks/*": "./src/hooks/*/index.ts",
+    "./providers/*": "./src/providers/*/index.ts",
+  },
+  JSX: {
+    ".": "./src/index.js",
+    "./components/*": "./src/components/*/index.js",
+    "./hooks/*": "./src/hooks/*/index.js",
+    "./providers/*": "./src/providers/*/index.js",
+  },
 }
 export const TSCONFIG_JSON = {
   compilerOptions: {

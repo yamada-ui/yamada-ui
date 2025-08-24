@@ -6,4 +6,166 @@ source: components/alert
 style: components/alert/alert.style.ts
 ---
 
+```tsx preview
+<Alert.Root>
+  <Alert.Icon />
+  <Alert.Title>セル</Alert.Title>
+  <Alert.Description>
+    か…完全体に………完全体になれさえすれば………！！！
+  </Alert.Description>
+</Alert.Root>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Alert } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Alert } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Alert } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Alert.Root>
+  <Alert.Icon />
+  <Alert.Title />
+  <Alert.Description />
+</Alert.Root>
+```
+
+## ステータスを変更する
+
+```tsx preview
+<VStack>
+  <For each={["info", "success", "warning", "error"]}>
+    {(status, index) => (
+      <Alert.Root key={index} status={status}>
+        <Alert.Icon />
+        <Alert.Title>セル</Alert.Title>
+        <Alert.Description>
+          か…完全体に………完全体になれさえすれば………！！！
+        </Alert.Description>
+      </Alert.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["plain", "solid", "subtle", "surface", "island"]}>
+    {(variant, index) => (
+      <Alert.Root key={index} variant={variant}>
+        {variant !== "island" && <Alert.Icon />}
+        <Alert.Title>セル</Alert.Title>
+        <Alert.Description>
+          か…完全体に………完全体になれさえすれば………！！！
+        </Alert.Description>
+      </Alert.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## カラースキームを変更する
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      { colorScheme: "green", status: "info" },
+      { colorScheme: "purple", status: "success" },
+      { colorScheme: "sky", status: "warning" },
+      { colorScheme: "pink", status: "error" },
+    ]}
+  >
+    {(row, index) => (
+      <Alert.Root key={index} colorScheme={row.colorScheme} status={row.status}>
+        <Alert.Icon />
+        <Alert.Title>セル</Alert.Title>
+        <Alert.Description>
+          か…完全体に………完全体になれさえすれば………！！！
+        </Alert.Description>
+      </Alert.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## ローディングを適応する
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      { variant: "plain", status: "info", loadingScheme: undefined },
+      { variant: "subtle", status: "success", loadingScheme: "grid" },
+      { variant: "solid", status: "warning", loadingScheme: "puff" },
+      { variant: "surface", status: "error", loadingScheme: "dots" },
+    ]}
+  >
+    {(row, index) => (
+      <Alert.Root variant={row.variant} status={row.status}>
+        <Alert.Loading loadingScheme={row.loadingScheme} />
+        <Alert.Title>セル</Alert.Title>
+        <Alert.Description>
+          か…完全体に………完全体になれさえすれば………！！！
+        </Alert.Description>
+      </Alert.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## レイアウトを変更する
+
+```tsx preview
+<VStack>
+  <Alert.Root
+    alignItems="center"
+    flexDirection="column"
+    h="2xs"
+    justifyContent="center"
+    status="success"
+    textAlign="center"
+  >
+    <Alert.Icon boxSize="40px" mr={0} />
+    <Alert.Title fontSize="lg" mb={1} mr={0} mt={4}>
+      セル
+    </Alert.Title>
+    <Alert.Description>
+      か…完全体に………完全体になれさえすれば………！！！
+    </Alert.Description>
+  </Alert.Root>
+
+  <Alert.Root status="success">
+    <Alert.Icon />
+
+    <VStack gap="xs">
+      <Alert.Title>セル</Alert.Title>
+      <Alert.Description>
+        か…完全体に………完全体になれさえすれば………！！！
+      </Alert.Description>
+    </VStack>
+
+    <CloseButton
+      colorScheme="mono"
+      position="absolute"
+      right={2}
+      top={2}
+      onClick={noop}
+    />
+  </Alert.Root>
+</VStack>
+```

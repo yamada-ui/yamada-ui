@@ -178,6 +178,25 @@ export async function installDependencies(
   }
 }
 
+export interface UninstallDependenciesOptions
+  extends Pick<InstallDependenciesOptions, "cwd"> {}
+
+export async function uninstallDependencies(
+  dependencies: string[],
+  { cwd }: InstallDependenciesOptions = {},
+) {
+  const packageManager = getPackageManager()
+
+  if (dependencies.length) {
+    const command = packageManager === "npm" ? "uninstall" : "remove"
+
+    await execa(packageManager, [command, ...dependencies], {
+      cwd,
+      stdout: "ignore",
+    })
+  }
+}
+
 export async function addWorkspace(
   cwd: string,
   workspacePath: string,

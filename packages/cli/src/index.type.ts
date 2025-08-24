@@ -7,10 +7,14 @@ export interface SectionConfig {
   path?: string
 }
 
+export interface ThemeConfig {
+  path?: string
+}
+
 export interface LintConfig {
   enabled?: boolean
-  filePath?: string
 }
+
 export interface FormatConfig {
   configPath?: null | string
   enabled?: boolean
@@ -24,6 +28,7 @@ export interface UserConfig {
   monorepo?: boolean
   path?: string
   providers?: SectionConfig
+  theme?: ThemeConfig
 }
 
 export interface SectionConfigWithPaths extends SectionConfig {
@@ -38,6 +43,9 @@ export interface Config extends UserConfig {
   getSection: (value?: string) => SectionConfigWithPaths | undefined
   getSectionAbsolutePath: (section: Section) => string
   getSectionPath: (section: Section) => string
+  indexPath: string
+  isSection: (section: string) => section is Section
+  registryPath: string
   rootPath: string
   srcPath: string
 }

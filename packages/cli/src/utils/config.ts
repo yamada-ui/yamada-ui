@@ -5,7 +5,7 @@ import { readFile } from "fs/promises"
 import path from "path"
 import c from "picocolors"
 import packageJson from "../../package.json"
-import { DEFAULT_PATH, SECTION_NAMES } from "../constant"
+import { DEFAULT_PATH, REGISTRY_FILE_NAME, SECTION_NAMES } from "../constant"
 import { getPackageManager, packageExecuteCommands } from "./package"
 
 export interface GetConfigOptions {
@@ -19,7 +19,7 @@ export async function getConfig(
   { format, lint }: GetConfigOptions = {},
 ): Promise<Config> {
   try {
-    const data = await readFile(path.resolve(cwd, configPath), "utf8")
+    const data = await readFile(path.resolve(cwd, configPath), "utf-8")
     const userConfig = JSON.parse(data) as UserConfig
 
     if (!isUndefined(format)) userConfig.format = { enabled: format }
@@ -43,8 +43,15 @@ export async function getConfig(
       }),
     )
 
-    userConfig.lint ??= {}
-    userConfig.lint.filePath ??= path.resolve(srcPath, "index.ts")
+    const indexPath = path.resolve(srcPath, "index.ts")
+    const registryPath = path.resolve(srcPath, REGISTRY_FILE_NAME)
+
+    if (userConfig.theme?.path)
+      userConfig.theme.path = path.resolve(cwd, userConfig.theme.path)
+
+    function isSection(section: string): section is Section {
+      return SECTION_NAMES.includes(section as Section)
+    }
 
     function getSectionAbsolutePath(section: Section) {
       return path.resolve(
@@ -101,6 +108,9 @@ export async function getConfig(
       getSection,
       getSectionAbsolutePath,
       getSectionPath,
+      indexPath,
+      isSection,
+      registryPath,
       rootPath,
       srcPath,
     }
@@ -110,7 +120,7 @@ export async function getConfig(
     const prefix = `${command}${args.length ? ` ${args.join(" ")}` : ""}`
 
     throw new Error(
-      `No config found. Please run ${c.cyan(`${prefix} ${packageJson.name}@latest init`)}.`,
+      `No ${c.yellow("config")} found. Please run ${c.cyan(`${prefix} ${packageJson.name}@latest init`)}.`,
     )
   }
 }

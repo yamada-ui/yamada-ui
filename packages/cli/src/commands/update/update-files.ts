@@ -1,6 +1,7 @@
 import type { ListrTask } from "listr2"
 import type { Config } from "../../index.type"
-import type { DiffRegistries } from "../diff/get-registries-and-files"
+import type { ChangeMap, DependencyMap } from "../diff/get-diff"
+import type { RegistryMap } from "../diff/get-registries-and-files"
 import { merge } from "@yamada-ui/utils"
 import { execa, ExecaError } from "execa"
 import { mkdtemp } from "fs/promises"
@@ -10,17 +11,15 @@ import path from "path"
 import c from "picocolors"
 import prompts from "prompts"
 import { rimraf } from "rimraf"
+import { REGISTRY_FILE_NAME } from "../../constant"
 import {
+  getPackageName,
+  getPackageNameWithVersion,
   installDependencies,
-  splitVersion,
-  transformContent,
-  transformContentWithFormatAndLint,
-  transformIndexWithFormatAndLint,
-  transformTemplateContent,
   uninstallDependencies,
   writeFileSafe,
 } from "../../utils"
-import { getFilePath } from "../diff/get-diff"
+import { getDirPath } from "../diff/get-diff"
 
 async function mergeContent(
   remotePath: string,
@@ -71,81 +70,49 @@ export interface UpdateFilesOptions {
 }
 
 export async function updateFiles(
-  generatedNames: string[],
-  { locale, remote }: DiffRegistries,
+  changeMap: ChangeMap,
+  { add, remove, update }: DependencyMap,
+  { remote }: RegistryMap,
   config: Config,
   { concurrent = true, install = false }: UpdateFilesOptions = {},
 ) {
   const conflictMap: ConflictMap = {}
-  const notInstalledDependencies: string[] = []
-  const shouldUninstallDependencies: string[] = []
   const disabledFormatAndLint = {
     format: { enabled: false },
     lint: { enabled: false },
   }
 
   const tasks = new Listr(
-    Object.entries(remote).map(
-      ([componentName, { dependencies, section, sources }]) =>
+    Object.entries(changeMap).map(
+      ([componentName, changes]) =>
         ({
           task: async (_, task) => {
             const tempDirPath = await mkdtemp(
               path.join(tmpdir(), `yamada-ui-${componentName}-`),
             )
-            const localeRegistry = locale[componentName]!
-
-            if (dependencies || localeRegistry.dependencies) {
-              const add =
-                dependencies?.externals.filter(
-                  (name) =>
-                    !localeRegistry.dependencies?.externals.includes(name),
-                ) ?? []
-              const remove =
-                localeRegistry.dependencies?.externals.filter(
-                  (name) => !dependencies?.externals.includes(name),
-                ) ?? []
-
-              notInstalledDependencies.push(...add)
-              shouldUninstallDependencies.push(...remove)
-            }
+            const registry = remote[componentName]!
+            const dirPath = getDirPath(registry.section, componentName, config)
 
             try {
               if (componentName === "index") {
-                const [source] = sources
-                const fileName = source!.name
-                const remotePath = path.join(tempDirPath, `remote-${fileName}`)
-                const localePath = path.join(tempDirPath, `locale-${fileName}`)
-                const [remoteContent, localeContent] = await Promise.all([
-                  transformIndexWithFormatAndLint(
-                    sources[0]!.content!,
-                    config,
-                    generatedNames,
-                  ),
-                  transformIndexWithFormatAndLint(
-                    localeRegistry.sources[0]!.content!,
-                    config,
-                    generatedNames,
-                  ),
-                ])
+                const name = config.indexPath.split("/").at(-1)!
+                const data = changes[name]!
+
+                if (!("locale" in data && "remote" in data)) return
+
+                const remotePath = path.join(tempDirPath, `remote-${name}`)
+                const localePath = path.join(tempDirPath, `locale-${name}`)
 
                 await Promise.all([
-                  writeFileSafe(
-                    remotePath,
-                    remoteContent,
-                    disabledFormatAndLint,
-                  ),
-                  writeFileSafe(
-                    localePath,
-                    localeContent,
-                    disabledFormatAndLint,
-                  ),
+                  writeFileSafe(remotePath, data.remote, disabledFormatAndLint),
+                  writeFileSafe(localePath, data.locale, disabledFormatAndLint),
                 ])
 
                 const { conflict, content: mergedContent } = await mergeContent(
                   remotePath,
                   localePath,
                   config.indexPath,
-                  remoteContent,
+                  data.remote,
                 )
 
                 await writeFileSafe(
@@ -156,194 +123,70 @@ export async function updateFiles(
 
                 if (conflict) {
                   conflictMap[componentName] ??= {}
-                  conflictMap[componentName][fileName] = config.indexPath
+                  conflictMap[componentName][name] = config.indexPath
                 }
               } else {
                 await Promise.all(
-                  sources.map(async ({ name, content, data, template }) => {
-                    const currentPath = getFilePath(
-                      section,
-                      componentName,
-                      name,
-                      config,
-                    )
-                    const source = localeRegistry.sources.find(
-                      (source) => source.name === name,
-                    )
+                  Object.entries(changes).map(async ([name, { ...data }]) => {
+                    const currentPath = path.join(dirPath, name)
 
-                    if (content) {
-                      if (source) {
-                        const remotePath = path.join(
-                          tempDirPath,
-                          `remote-${name}`,
-                        )
-                        const localePath = path.join(
-                          tempDirPath,
-                          `locale-${name}`,
-                        )
-                        const [remoteContent, localeContent] =
-                          await Promise.all([
-                            transformContentWithFormatAndLint(
-                              currentPath,
-                              section,
-                              content,
-                              config,
-                              generatedNames,
-                            ),
-                            transformContentWithFormatAndLint(
-                              currentPath,
-                              section,
-                              source.content!,
-                              config,
-                              generatedNames,
-                            ),
-                          ])
-
-                        await Promise.all([
-                          writeFileSafe(
-                            remotePath,
-                            remoteContent,
-                            disabledFormatAndLint,
-                          ),
-                          writeFileSafe(
-                            localePath,
-                            localeContent,
-                            disabledFormatAndLint,
-                          ),
-                        ])
-
-                        const { conflict, content: mergedContent } =
-                          await mergeContent(
-                            remotePath,
-                            localePath,
-                            currentPath,
-                            remoteContent,
-                          )
-
-                        await writeFileSafe(
-                          currentPath,
-                          mergedContent,
-                          conflict
-                            ? merge(config, disabledFormatAndLint)
-                            : config,
-                        )
-
-                        if (conflict) {
-                          conflictMap[componentName] ??= {}
-                          conflictMap[componentName][name] = currentPath
-                        }
-                      } else {
-                        const remoteContent = transformContent(
-                          section,
-                          content,
-                          config,
-                          generatedNames,
-                        )
-
-                        await writeFileSafe(currentPath, remoteContent, config)
-                      }
-                    } else if (template && data) {
-                      await Promise.all(
-                        data.map(async ({ name: fileName, ...remoteRest }) => {
-                          const currentFilePath = path.join(
-                            currentPath,
-                            fileName,
-                          )
-                          const localeData = source?.data?.find(
-                            ({ name }) => name === fileName,
-                          )
-
-                          if (localeData) {
-                            if (template === source!.template) return
-
-                            const { name: _name, ...localeRest } = localeData
-                            const remotePath = path.join(
-                              tempDirPath,
-                              `remote-${name}-${fileName}`,
-                            )
-                            const localePath = path.join(
-                              tempDirPath,
-                              `locale-${name}-${fileName}`,
-                            )
-                            const [remoteContent, localeContent] =
-                              await Promise.all([
-                                transformContentWithFormatAndLint(
-                                  currentFilePath,
-                                  section,
-                                  transformTemplateContent(
-                                    template,
-                                    remoteRest,
-                                  ),
-                                  config,
-                                  generatedNames,
-                                ),
-                                transformContentWithFormatAndLint(
-                                  currentFilePath,
-                                  section,
-                                  transformTemplateContent(
-                                    source!.template!,
-                                    localeRest,
-                                  ),
-                                  config,
-                                  generatedNames,
-                                ),
-                              ])
-
-                            await Promise.all([
-                              writeFileSafe(
-                                remotePath,
-                                remoteContent,
-                                disabledFormatAndLint,
-                              ),
-                              writeFileSafe(
-                                localePath,
-                                localeContent,
-                                disabledFormatAndLint,
-                              ),
-                            ])
-
-                            const { conflict, content: mergedContent } =
-                              await mergeContent(
-                                remotePath,
-                                localePath,
-                                currentFilePath,
-                                remoteContent,
-                              )
-
-                            await writeFileSafe(
-                              currentFilePath,
-                              mergedContent,
-                              conflict
-                                ? merge(config, disabledFormatAndLint)
-                                : config,
-                            )
-
-                            if (conflict) {
-                              conflictMap[componentName] ??= {}
-                              conflictMap[componentName][
-                                `${name}/${fileName}`
-                              ] = currentFilePath
-                            }
-                          } else {
-                            const remoteContent = transformContent(
-                              section,
-                              transformTemplateContent(template, remoteRest),
-                              config,
-                              generatedNames,
-                            )
-
-                            await writeFileSafe(
-                              currentFilePath,
-                              remoteContent,
-                              config,
-                            )
-                          }
-                        }),
+                    if ("locale" in data && "remote" in data) {
+                      const remotePath = path.join(
+                        tempDirPath,
+                        `remote-${name}`,
                       )
+                      const localePath = path.join(
+                        tempDirPath,
+                        `locale-${name}`,
+                      )
+
+                      await Promise.all([
+                        writeFileSafe(
+                          remotePath,
+                          data.remote,
+                          disabledFormatAndLint,
+                        ),
+                        writeFileSafe(
+                          localePath,
+                          data.locale,
+                          disabledFormatAndLint,
+                        ),
+                      ])
+
+                      const { conflict, content: mergedContent } =
+                        await mergeContent(
+                          remotePath,
+                          localePath,
+                          currentPath,
+                          data.remote,
+                        )
+
+                      await writeFileSafe(
+                        currentPath,
+                        mergedContent,
+                        conflict
+                          ? merge(config, disabledFormatAndLint)
+                          : config,
+                      )
+
+                      if (conflict) {
+                        conflictMap[componentName] ??= {}
+                        conflictMap[componentName][name] = currentPath
+                      }
+                    } else if ("remote" in data) {
+                      await writeFileSafe(currentPath, data.remote, config)
+                    } else {
+                      await rimraf(currentPath)
                     }
                   }),
                 )
               }
+
+              await writeFileSafe(
+                path.resolve(dirPath, REGISTRY_FILE_NAME),
+                JSON.stringify(registry),
+                merge(config, { format: { parser: "json" } }),
+              )
             } catch {
             } finally {
               await rimraf(tempDirPath)
@@ -359,10 +202,7 @@ export async function updateFiles(
 
   await tasks.run()
 
-  if (
-    !install &&
-    (notInstalledDependencies.length || shouldUninstallDependencies.length)
-  ) {
+  if (!install && (add.length || remove.length || update.length)) {
     const { install } = await prompts({
       type: "confirm",
       name: "install",
@@ -377,14 +217,13 @@ export async function updateFiles(
 
   const cwd = config.monorepo ? config.rootPath : config.cwd
 
-  if (shouldUninstallDependencies.length)
-    await uninstallDependencies(
-      shouldUninstallDependencies.map((value) => splitVersion(value)[0]!),
-      { cwd },
-    )
+  remove.push(...update.map(({ name }) => name))
+  add.push(...update.map(getPackageNameWithVersion))
 
-  if (notInstalledDependencies.length)
-    await installDependencies(notInstalledDependencies, { cwd })
+  if (remove.length)
+    await uninstallDependencies(remove.map(getPackageName), { cwd })
+
+  if (add.length) await installDependencies(add, { cwd })
 
   return conflictMap
 }

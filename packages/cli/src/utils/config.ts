@@ -7,16 +7,18 @@ import c from "picocolors"
 import packageJson from "../../package.json"
 import { DEFAULT_PATH, REGISTRY_FILE_NAME, SECTION_NAMES } from "../constant"
 import { getPackageManager, packageExecuteCommands } from "./package"
+import { transformExtension } from "./typescript"
 
 export interface GetConfigOptions {
   format?: boolean
+  jsx?: boolean
   lint?: boolean
 }
 
 export async function getConfig(
   cwd: string,
   configPath: string,
-  { format, lint }: GetConfigOptions = {},
+  { format, jsx, lint }: GetConfigOptions = {},
 ): Promise<Config> {
   try {
     const data = await readFile(path.resolve(cwd, configPath), "utf-8")
@@ -24,6 +26,7 @@ export async function getConfig(
 
     if (!isUndefined(format)) userConfig.format = { enabled: format }
     if (!isUndefined(lint)) userConfig.lint = { enabled: lint }
+    if (!isUndefined(jsx)) userConfig.jsx = jsx
 
     const rootPath = path.resolve(
       cwd,
@@ -43,7 +46,10 @@ export async function getConfig(
       }),
     )
 
-    const indexPath = path.resolve(srcPath, "index.ts")
+    const indexPath = path.resolve(
+      srcPath,
+      transformExtension("index.ts", userConfig.jsx),
+    )
     const registryPath = path.resolve(srcPath, REGISTRY_FILE_NAME)
 
     if (userConfig.theme?.path)
@@ -53,7 +59,7 @@ export async function getConfig(
       return SECTION_NAMES.includes(section as Section)
     }
 
-    function getSectionAbsolutePath(section: Section) {
+    function getSectionResolvedPath(section: Section) {
       return path.resolve(
         srcPath,
         userConfig[section]?.path ?? DEFAULT_PATH[section],
@@ -77,8 +83,8 @@ export async function getConfig(
 
         return {
           ...userConfig[section],
-          absolutePath: getSectionAbsolutePath(section),
           path: getSectionPath(section),
+          resolvedPath: getSectionResolvedPath(section),
           section,
         }
       } else {
@@ -94,8 +100,8 @@ export async function getConfig(
 
         return {
           ...userConfig[section],
-          absolutePath: getSectionAbsolutePath(section),
           path: getSectionPath(section),
+          resolvedPath: getSectionResolvedPath(section),
           section,
         }
       }
@@ -106,8 +112,8 @@ export async function getConfig(
       src,
       cwd,
       getSection,
-      getSectionAbsolutePath,
       getSectionPath,
+      getSectionResolvedPath,
       indexPath,
       isSection,
       registryPath,

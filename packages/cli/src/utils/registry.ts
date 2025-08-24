@@ -17,6 +17,12 @@ import { REGISTRY_FILE_NAME, REGISTRY_URL, SECTION_NAMES } from "../constant"
 import { writeFileSafe } from "./fs"
 import { lintText } from "./lint"
 import { formatText } from "./prettier"
+import {
+  isJsx,
+  transformExtension,
+  transformTsToJs,
+  transformTsxToJsx,
+} from "./typescript"
 
 const agent = process.env.https_proxy
   ? new HttpsProxyAgent(process.env.https_proxy)
@@ -176,7 +182,7 @@ export async function getGeneratedNameMap(
   const results: [Section, string[]][] = await Promise.all(
     SECTION_NAMES.map(async (section) => {
       try {
-        const sectionPath = config.getSectionAbsolutePath(section)
+        const sectionPath = config.getSectionResolvedPath(section)
         const dirents = await readdir(sectionPath, { withFileTypes: true })
 
         return [
@@ -278,9 +284,15 @@ export async function transformContentWithFormatAndLint(
   config: Config,
   generatedNames: string[],
 ) {
-  const { cwd, format, lint } = config
+  const { cwd, format, jsx, lint } = config
 
   content = transformContent(section, content, config, generatedNames)
+
+  if (jsx)
+    content = isJsx(filePath)
+      ? transformTsxToJsx(content)
+      : transformTsToJs(content)
+
   content = await lintText(content, {
     ...lint,
     cwd,
@@ -349,13 +361,16 @@ export async function transformIndexWithFormatAndLint(
   config: Config,
   generatedNames: string[],
 ) {
-  const { cwd, format, lint } = config
+  const { cwd, format, indexPath, jsx, lint } = config
 
   content = transformIndex(generatedNames, content, config)
+
+  if (jsx) content = transformTsToJs(content)
+
   content = await lintText(content, {
     ...lint,
     cwd,
-    filePath: config.indexPath,
+    filePath: indexPath,
   })
   content = await formatText(content, format)
 
@@ -369,21 +384,32 @@ export async function generateSource(
   config: Config,
   generatedNames: string[] = [],
 ) {
+  fileName = transformExtension(fileName, config.jsx)
+
   const targetPath = path.resolve(dirPath, fileName)
 
   if (content) {
     content = transformContent(section, content, config, generatedNames)
 
+    if (config.jsx)
+      content = isJsx(fileName)
+        ? transformTsxToJsx(content)
+        : transformTsToJs(content)
+
     await writeFileSafe(targetPath, content, config)
   } else if (template && data) {
     await Promise.all(
       data.map(async ({ name: fileName, ...rest }) => {
-        const content = transformContent(
-          section,
-          transformTemplateContent(template, rest),
-          config,
-          generatedNames,
-        )
+        fileName = transformExtension(fileName, config.jsx)
+
+        let content = transformTemplateContent(template, rest)
+
+        content = transformContent(section, content, config, generatedNames)
+
+        if (config.jsx)
+          content = isJsx(fileName)
+            ? transformTsxToJsx(content)
+            : transformTsToJs(content)
 
         await writeFileSafe(path.resolve(targetPath, fileName), content, config)
       }),

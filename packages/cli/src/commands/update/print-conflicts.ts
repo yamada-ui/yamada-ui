@@ -1,12 +1,13 @@
 import type { Config } from "../../index.type"
 import type { ConflictMap } from "./update-files"
 import c from "picocolors"
+import { transformExtension } from "../../utils"
 
 export function printConflicts(conflictMap: ConflictMap, config: Config) {
   Object.entries(conflictMap).forEach(([name, files]) => {
     if (name === "index") {
       console.log(
-        `- ${c.yellow("index.ts")}: ${config.indexPath.replace(`${config.cwd}/`, "")}`,
+        `- ${c.yellow(transformExtension("index.ts", config.jsx))}: ${config.indexPath.replace(`${config.cwd}/`, "")}`,
       )
     } else {
       console.log(`- ${name}`)

@@ -11,6 +11,7 @@ import {
 import { glob } from "glob"
 import path from "path"
 import c from "picocolors"
+import { REGISTRY_FILE_NAME } from "../constant"
 import { lintFiles } from "./lint"
 import { formatFiles } from "./prettier"
 
@@ -105,13 +106,14 @@ export async function getFiles(pattern: string) {
       const name = dirent.name
 
       if (dirent.isDirectory()) {
-        const data = await readdir(path.join(dirent.parentPath, name), {
+        const dirents = await readdir(path.join(dirent.parentPath, name), {
           withFileTypes: true,
         })
 
         await Promise.all(
-          data.map(async (dirent) => {
+          dirents.map(async (dirent) => {
             if (dirent.isDirectory()) return
+            if (dirent.name === REGISTRY_FILE_NAME) return
 
             const targetPath = path.join(dirent.parentPath, dirent.name)
             const data = await readFile(targetPath, "utf-8")
@@ -119,7 +121,7 @@ export async function getFiles(pattern: string) {
             files[`${name}/${dirent.name}`] = data
           }),
         )
-      } else if (!name.endsWith(".json")) {
+      } else if (name !== REGISTRY_FILE_NAME) {
         const targetPath = path.join(dirent.parentPath, dirent.name)
         const data = await readFile(targetPath, "utf-8")
 

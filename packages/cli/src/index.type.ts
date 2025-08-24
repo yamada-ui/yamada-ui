@@ -24,6 +24,7 @@ export interface UserConfig {
   components?: SectionConfig
   format?: FormatConfig
   hooks?: SectionConfig
+  jsx?: boolean
   lint?: LintConfig
   monorepo?: boolean
   path?: string
@@ -32,8 +33,8 @@ export interface UserConfig {
 }
 
 export interface SectionConfigWithPaths extends SectionConfig {
-  absolutePath: string
   path: string
+  resolvedPath: string
   section: Section
 }
 
@@ -41,8 +42,8 @@ export interface Config extends UserConfig {
   src: boolean
   cwd: string
   getSection: (value?: string) => SectionConfigWithPaths | undefined
-  getSectionAbsolutePath: (section: Section) => string
   getSectionPath: (section: Section) => string
+  getSectionResolvedPath: (section: Section) => string
   indexPath: string
   isSection: (section: string) => section is Section
   registryPath: string

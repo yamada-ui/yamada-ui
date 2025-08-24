@@ -1,4 +1,3 @@
-import type { DiffRegistries } from "./get-registries-and-files"
 import { Command } from "commander"
 import { existsSync } from "fs"
 import ora from "ora"
@@ -13,13 +12,19 @@ import {
   getPackageManager,
   packageExecuteCommands,
   timer,
+  transformExtension,
   validateDir,
 } from "../../utils"
 import { printConflicts } from "../update/print-conflicts"
 import { updateFiles } from "../update/update-files"
 import { getDiff } from "./get-diff"
 import { getRegistriesAndFiles } from "./get-registries-and-files"
-import { printDiff, printDiffFile, printDiffFiles } from "./print-diff"
+import {
+  printDiff,
+  printDiffDependencies,
+  printDiffFile,
+  printDiffFiles,
+} from "./print-diff"
 
 interface Options {
   config: string
@@ -116,34 +121,45 @@ export const diff = new Command("diff")
         )
       }
 
-      const { registries } = await getRegistriesAndFiles(
+      const { registryMap } = await getRegistriesAndFiles(
         componentNames,
         config,
         { concurrent: !sequential, index, theme },
       )
-      const changes = await getDiff(
+      const { changeMap, dependencyMap } = await getDiff(
         generatedNames,
-        registries,
+        registryMap,
         config,
         !sequential,
       )
-      const hasChanges = Object.keys(changes).length
+      const hasChanges = !!Object.keys(changeMap).length
+      const hasDependencyChanges =
+        !!dependencyMap.add.length ||
+        !!dependencyMap.remove.length ||
+        !!dependencyMap.update.length
 
       console.log("---------------------------------")
 
-      if (!hasChanges) {
+      if (!hasChanges && !hasDependencyChanges) {
         console.log(c.cyan("No updates found."))
       } else {
         if (targetName) {
-          printDiff(changes[targetName], detail)
+          printDiff(changeMap[targetName], detail)
         } else {
-          if (index) printDiffFile("index.ts", changes.index?.["index.ts"])
-          if (theme) printDiffFiles("theme", changes.theme)
+          if (index && changeMap.index) {
+            const indexFileName = transformExtension("index.ts", config.jsx)
+
+            printDiffFile(indexFileName, changeMap.index[indexFileName]?.diff)
+          }
+
+          if (theme && changeMap.theme) printDiffFiles("theme", changeMap.theme)
 
           componentNames.forEach((name) => {
-            printDiffFiles(name, changes[name])
+            printDiffFiles(name, changeMap[name])
           })
         }
+
+        if (hasDependencyChanges) printDiffDependencies(dependencyMap)
 
         console.log("---------------------------------")
 
@@ -155,26 +171,12 @@ export const diff = new Command("diff")
         })
 
         if (update) {
-          const changeNames = Object.keys(changes)
-          const omittedRegistries: DiffRegistries = {
-            locale: Object.fromEntries(
-              Object.entries(registries.locale).filter(([name]) =>
-                changeNames.includes(name),
-              ),
-            ),
-            remote: Object.fromEntries(
-              Object.entries(registries.remote).filter(([name]) =>
-                changeNames.includes(name),
-              ),
-            ),
-          }
           const conflictMap = await updateFiles(
-            generatedNames,
-            omittedRegistries,
+            changeMap,
+            dependencyMap,
+            registryMap,
             config,
-            {
-              concurrent: !sequential,
-            },
+            { concurrent: !sequential },
           )
 
           if (Object.keys(conflictMap).length) {

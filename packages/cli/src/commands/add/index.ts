@@ -9,7 +9,7 @@ import ora from "ora"
 import path from "path"
 import c from "picocolors"
 import prompts from "prompts"
-import { CONFIG_FILE_NAME } from "../../constant"
+import { CONFIG_FILE_NAME, REGISTRY_FILE_NAME } from "../../constant"
 import {
   cwd,
   fetchRegistries,
@@ -20,11 +20,13 @@ import {
   getGeneratedNameMap,
   getNotInstalledDependencies,
   getPackageJson,
-  getPackageName,
+  getPackageNameWithVersion,
   installDependencies,
   timer,
   transformContent,
+  transformExtension,
   transformIndex,
+  transformTsToJs,
   validateDir,
   writeFileSafe,
 } from "../../utils"
@@ -200,7 +202,7 @@ export const add = new Command("add")
           .map(([name, registry]): ListrTask | undefined => {
             if (!config.isSection(registry.section)) return
 
-            const sectionPath = config.getSectionAbsolutePath(registry.section)
+            const sectionPath = config.getSectionResolvedPath(registry.section)
             const dirPath = path.join(sectionPath, name)
 
             return {
@@ -242,7 +244,7 @@ export const add = new Command("add")
 
               tasks.add({
                 task: async (_, task) => {
-                  const sectionPath = config.getSectionAbsolutePath(
+                  const sectionPath = config.getSectionResolvedPath(
                     section as Section,
                   )
                   const dirPath = path.join(sectionPath, name)
@@ -252,20 +254,53 @@ export const add = new Command("add")
 
                   await Promise.all(
                     dirents.map(async (dirent) => {
-                      if (dirent.isDirectory()) return
+                      if (dirent.isDirectory()) {
+                        const dirents = await readdir(
+                          path.join(dirent.parentPath, name),
+                          {
+                            withFileTypes: true,
+                          },
+                        )
 
-                      const targetPath = path.join(
-                        dirent.parentPath,
-                        dirent.name,
-                      )
-                      const content = transformContent(
-                        section as Section,
-                        await readFile(targetPath, "utf-8"),
-                        config,
-                        targetNames,
-                      )
+                        await Promise.all(
+                          dirents.map(async (dirent) => {
+                            if (dirent.isDirectory()) return
+                            if (dirent.name === REGISTRY_FILE_NAME) return
 
-                      await writeFileSafe(targetPath, content, config)
+                            const targetPath = path.join(
+                              dirent.parentPath,
+                              dirent.name,
+                            )
+
+                            let content = await readFile(targetPath, "utf-8")
+
+                            content = transformContent(
+                              section as Section,
+                              content,
+                              config,
+                              targetNames,
+                            )
+
+                            await writeFileSafe(targetPath, content, config)
+                          }),
+                        )
+                      } else if (dirent.name !== REGISTRY_FILE_NAME) {
+                        const targetPath = path.join(
+                          dirent.parentPath,
+                          dirent.name,
+                        )
+
+                        let content = await readFile(targetPath, "utf-8")
+
+                        content = transformContent(
+                          section as Section,
+                          content,
+                          config,
+                          targetNames,
+                        )
+
+                        await writeFileSafe(targetPath, content, config)
+                      }
                     }),
                   )
 
@@ -278,20 +313,20 @@ export const add = new Command("add")
         }
       }
 
+      const indexFileName = transformExtension("index.ts", config.jsx)
+
       if (existsSync(config.indexPath)) {
         tasks.add({
           task: async (_, task) => {
-            const content = transformIndex(
-              targetNames,
-              await readFile(config.indexPath, "utf-8"),
-              config,
-            )
+            let content = await readFile(config.indexPath, "utf-8")
+
+            content = transformIndex(targetNames, content, config)
 
             await writeFileSafe(config.indexPath, content, config)
 
-            task.title = `Updated ${c.cyan("index.ts")}`
+            task.title = `Updated ${c.cyan(indexFileName)}`
           },
-          title: `Updating ${c.cyan("index.ts")}`,
+          title: `Updating ${c.cyan(indexFileName)}`,
         })
       } else {
         tasks.add({
@@ -299,17 +334,15 @@ export const add = new Command("add")
             const {
               sources: [source],
             } = await fetchRegistry("index")
-            const content = transformIndex(
-              targetNames,
-              source!.content!,
-              config,
-            )
+            let content = transformIndex(targetNames, source!.content!, config)
+
+            if (config.jsx) content = transformTsToJs(content)
 
             await writeFileSafe(config.indexPath, content, config)
 
-            task.title = `Generated ${c.cyan("index.ts")}`
+            task.title = `Generated ${c.cyan(indexFileName)}`
           },
-          title: `Generating ${c.cyan("index.ts")}`,
+          title: `Generating ${c.cyan(indexFileName)}`,
         })
       }
 
@@ -356,7 +389,7 @@ export const add = new Command("add")
           tasks.add({
             task: async (_, task) => {
               await installDependencies(
-                notInstalledDependencies.map(getPackageName),
+                notInstalledDependencies.map(getPackageNameWithVersion),
                 { cwd: targetPath },
               )
 

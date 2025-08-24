@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "prettier . --ignore-path ../../../.prettierignore --check --cache",
-    "cli": "pnpm -C ../../../packages/cli dev"
+    "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {
     "@yamada-ui/react": "workspace:*",

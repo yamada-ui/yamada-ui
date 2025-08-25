@@ -81,7 +81,8 @@ const getFileMap = async (cwd: string, branch: string) => {
 
   const fileMap = new Map<string, string>()
 
-  const targetPath = `${REPO_NAME}-${branch.replace("/", "-")}/packages/theme/src`
+  const normalizedBranch = branch.startsWith("v") ? branch.slice(1) : branch
+  const targetPath = `${REPO_NAME}-${normalizedBranch}/packages/theme/src`
 
   const filter = (path: string) => {
     return path.startsWith(targetPath)

@@ -6,4 +6,98 @@ source: components/tag
 style: components/tag/tag.style.ts
 ---
 
+```tsx preview
+<Tag>Tag</Tag>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Tag } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Tag } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Tag } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Tag />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<HStack>
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant) => (
+      <Tag key={variant} variant={variant} colorScheme="primary">
+        {variant}
+      </Tag>
+    )}
+  </For>
+</HStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<HStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size) => (
+      <Tag key={size} size={size} colorScheme="primary">
+        {size}
+      </Tag>
+    )}
+  </For>
+</HStack>
+```
+
+### カラースキー厶を変更する
+
+```tsx preview
+<HStack>
+  <For each={["primary", "secondary", "success", "warning", "error"]}>
+    {(colorScheme) => (
+      <Tag key={colorScheme} colorScheme={colorScheme}>
+        {colorScheme}
+      </Tag>
+    )}
+  </For>
+</HStack>
+```
+
+### アイコンを使用する
+
+```tsx preview
+<HStack>
+  <Tag startIcon={<PlusIcon />}>startIcon</Tag>
+  <Tag endIcon={<PlusIcon />}>endIcon</Tag>
+</HStack>
+```
+
+### クローズボタンを使用する
+
+```tsx preview functional
+const onClose = () => {
+  // Handle close action
+  console.log("Tag closed")
+}
+
+return <Tag onClose={onClose}>Tag</Tag>
+```
+
+### クローズボタンを無効化する
+
+```tsx preview
+<Tag disabled onClose={() => {}}>
+  Tag
+</Tag>
+```

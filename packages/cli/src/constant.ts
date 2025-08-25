@@ -16,6 +16,7 @@ export const DEFAULT_PATH = {
 }
 export const SECTION_NAMES = ["components", "hooks", "providers"] as const
 export const DEFAULT_CONFIG: UserConfig = {
+  $schema: `${REGISTRY_URL}/config.schema.json`,
   components: { overwrite: true },
   hooks: { overwrite: true },
   providers: { overwrite: true },

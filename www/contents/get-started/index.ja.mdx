@@ -38,35 +38,13 @@ Vite.jsのプロジェクトにYamada UIをインストールして使用する�
 
 ## インストール
 
-プロジェクトにYamada UIをインストールするには、以下の手順に行ってください。
+プロジェクトにYamada UIをインストールするには、[CLI](/docs/get-started/cli)でセットアップするか、[npm](https://www.npmjs.com)からインストールします。
+
+### CLI
 
 ::::steps
 
-### パッケージをインストールする
-
-Yamada UIは、`@yamada-ui/react`をインストールするだけで、すべてのコンポーネントやフックを使用できます。
-
-:::code-group
-
-```bash [pnpm]
-pnpm add @yamada-ui/react
-```
-
-```bash [npm]
-npm install @yamada-ui/react
-```
-
-```bash [yarn]
-yarn add @yamada-ui/react
-```
-
-```bash [bun]
-bun add @yamada-ui/react
-```
-
-:::
-
-### 初期設定する
+#### セットアップする
 
 コマンドを実行すると、プロジェクトに必要なファイルやフォルダが作成されます。
 
@@ -90,9 +68,93 @@ bunx @yamada-ui/cli init
 
 :::
 
-### プロバイダーを追加する
+#### パッケージをインストールする
 
-Yamada UIをインストール後、アプリケーションのルートにUIProviderを追加します。
+アプリケーションに`@workspaces/ui`をインストールします。
+
+:::code-group
+
+```bash [pnpm]
+pnpm add "@workspaces/ui@workspace:*"
+```
+
+```bash [npm]
+npm install "@workspaces/ui@workspace:*"
+```
+
+```bash [yarn]
+yarn add "@workspaces/ui@workspace:*"
+```
+
+```bash [bun]
+bun add "@workspaces/ui@workspace:*"
+```
+
+:::
+
+#### プロバイダーを追加する
+
+インストール後、アプリケーションのルートに`UIProvider`を追加します。
+
+```tsx
+import { UIProvider } from "@workspaces/ui"
+
+const App = () => {
+  return (
+    <UIProvider>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+#### コンポーネントを使用する
+
+`UIProvider`を追加したら、アプリケーション内でコンポーネントを使用します。
+
+```tsx
+import { Button } from "@workspaces/ui"
+
+const App = () => {
+  return <Button>Click me</Button>
+}
+```
+
+これで、Yamada UIのセットアップは完了です！
+
+::::
+
+### npm
+
+::::steps
+
+#### パッケージをインストールする
+
+Yamada UIは、`@yamada-ui/react`をインストールするだけで、すべてのコンポーネントやフックを使用できます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm add @yamada-ui/react
+```
+
+```bash [npm]
+npm install @yamada-ui/react
+```
+
+```bash [yarn]
+yarn add @yamada-ui/react
+```
+
+```bash [bun]
+bun add @yamada-ui/react
+```
+
+:::
+
+#### プロバイダーを追加する
+
+インストール後、アプリケーションのルートに`UIProvider`を追加します。
 
 ```tsx
 import { UIProvider } from "@yamada-ui/react"
@@ -106,7 +168,7 @@ const App = () => {
 }
 ```
 
-### コンポーネントを使用する
+#### コンポーネントを使用する
 
 `UIProvider`を追加したら、アプリケーション内でコンポーネントを使用します。
 

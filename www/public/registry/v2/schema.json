@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "dependencies": {
+      "type": "object",
+      "description": "The dependencies of the registry.",
+      "properties": {
+        "externals": {
+          "type": "array",
+          "description": "The externals that the registry depends on.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "components": {
+          "type": "array",
+          "description": "The components that the registry depends on.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hooks": {
+          "type": "array",
+          "description": "The hooks that the registry depends on.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "providers": {
+          "type": "array",
+          "description": "The providers that the registry depends on.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["externals", "components", "hooks", "providers"]
+    },
+    "dependents": {
+      "type": "object",
+      "description": "The dependents of the registry.",
+      "properties": {
+        "components": {
+          "type": "array",
+          "description": "The components that depend on the registry.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hooks": {
+          "type": "array",
+          "description": "The hooks that depend on the registry.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "providers": {
+          "type": "array",
+          "description": "The providers that depend on the registry.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["components", "hooks", "providers"]
+    },
+    "section": {
+      "type": "string",
+      "description": "The section of the registry.",
+      "enum": ["components", "hooks", "providers", "root", "theme"]
+    },
+    "sources": {
+      "type": "array",
+      "description": "The sources of the registry.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the source."
+          },
+          "content": {
+            "type": "string",
+            "description": "The content of the source."
+          },
+          "template": {
+            "type": "string",
+            "description": "The template of the source."
+          },
+          "data": {
+            "type": "array",
+            "description": "The data of the source.",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": ["name"]
+      }
+    }
+  },
+  "required": ["section", "sources"]
+}

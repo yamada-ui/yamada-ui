@@ -23,7 +23,7 @@ import { Tag } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Tag } from "@workspace/ui"
+import { Tag } from "@workspaces/ui"
 ```
 
 :::
@@ -35,7 +35,7 @@ import { Tag } from "@workspace/ui"
 ### バリアントを変更する
 
 ```tsx preview
-<HStack>
+<Wrap gap="md">
   <For each={["solid", "subtle", "surface", "outline"]}>
     {(variant) => (
       <Tag key={variant} variant={variant} colorScheme="primary">
@@ -43,13 +43,13 @@ import { Tag } from "@workspace/ui"
       </Tag>
     )}
   </For>
-</HStack>
+</Wrap>
 ```
 
 ### サイズを変更する
 
 ```tsx preview
-<HStack>
+<Wrap gap="md">
   <For each={["sm", "md", "lg"]}>
     {(size) => (
       <Tag key={size} size={size} colorScheme="primary">
@@ -57,35 +57,35 @@ import { Tag } from "@workspace/ui"
       </Tag>
     )}
   </For>
-</HStack>
+</Wrap>
 ```
 
 ### カラースキー厶を変更する
 
 ```tsx preview
-<HStack>
-  <For each={["primary", "secondary", "success", "warning", "error"]}>
+<Wrap gap="md">
+  <For each={["success", "warning", "error"]}>
     {(colorScheme) => (
       <Tag key={colorScheme} colorScheme={colorScheme}>
         {colorScheme}
       </Tag>
     )}
   </For>
-</HStack>
+</Wrap>
 ```
 
 ### アイコンを使用する
 
 ```tsx preview
-<HStack>
+<Wrap gap="md">
   <Tag startIcon={<PlusIcon />}>startIcon</Tag>
   <Tag endIcon={<PlusIcon />}>endIcon</Tag>
-</HStack>
+</Wrap>
 ```
 
 ### クローズボタンを使用する
 
-```tsx preview functional
+```tsx preview functional client
 const onClose = () => {
   // Handle close action
   console.log("Tag closed")

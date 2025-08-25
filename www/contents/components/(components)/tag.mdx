@@ -23,7 +23,7 @@ import { Tag } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Tag } from "@workspace/ui"
+import { Tag } from "@workspaces/ui"
 ```
 
 :::
@@ -64,7 +64,7 @@ import { Tag } from "@workspace/ui"
 
 ```tsx preview
 <HStack>
-  <For each={["primary", "secondary", "success", "warning", "error"]}>
+  <For each={["success", "warning", "error"]}>
     {(colorScheme) => (
       <Tag key={colorScheme} colorScheme={colorScheme}>
         {colorScheme}
@@ -85,7 +85,7 @@ import { Tag } from "@workspace/ui"
 
 ### Use Close Button
 
-```tsx preview functional
+```tsx preview functional client
 const onClose = () => {
   // Handle close action
   console.log("Tag closed")

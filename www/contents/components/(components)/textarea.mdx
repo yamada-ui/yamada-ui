@@ -6,4 +6,265 @@ source: components/textarea
 style: components/textarea/textarea.style.ts
 ---
 
+```tsx preview
+<Textarea placeholder="basic" />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Textarea } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Textarea } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Textarea } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Textarea />
+```
+
+### Change Variants
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <Textarea
+        key={variant}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size) => <Textarea key={size} size={size} placeholder={`${size} size`} />}
+  </For>
+</VStack>
+```
+
+### Disable
+
+```tsx preview
+<VStack>
+  <Textarea disabled placeholder="Basic" />
+
+  <InputGroup.Root disabled>
+    <InputGroup.Addon>Email</InputGroup.Addon>
+    <Textarea placeholder="InputGroup" />
+  </InputGroup.Root>
+
+  <Field.Root disabled label="Feedback">
+    <Textarea placeholder="Field" />
+  </Field.Root>
+</VStack>
+```
+
+### Make Read-Only
+
+```tsx preview
+<VStack>
+  <Textarea readOnly placeholder="Basic" />
+
+  <InputGroup.Root readOnly>
+    <InputGroup.Addon>Email</InputGroup.Addon>
+    <Textarea placeholder="InputGroup" />
+  </InputGroup.Root>
+
+  <Field.Root readOnly>
+    <Textarea placeholder="Field" />
+  </Field.Root>
+</VStack>
+```
+
+### Make Invalid
+
+```tsx preview
+<VStack>
+  <Textarea invalid placeholder="Basic" />
+
+  <InputGroup.Root invalid>
+    <InputGroup.Addon>Email</InputGroup.Addon>
+    <Textarea placeholder="InputGroup" />
+  </InputGroup.Root>
+
+  <Field.Root invalid>
+    <Textarea placeholder="Field" />
+  </Field.Root>
+</VStack>
+```
+
+### Add Addons
+
+```tsx preview
+<VStack>
+  <InputGroup.Root>
+    <InputGroup.Addon>Email</InputGroup.Addon>
+    <Textarea placeholder="Your email address" />
+  </InputGroup.Root>
+
+  <InputGroup.Root>
+    <InputGroup.Addon>https://</InputGroup.Addon>
+    <Textarea placeholder="Your site address" />
+    <InputGroup.Addon>.com</InputGroup.Addon>
+  </InputGroup.Root>
+</VStack>
+```
+
+### Add Elements
+
+```tsx preview
+<InputGroup.Root>
+  <InputGroup.Element>
+    <MailIcon fontSize="xl" />
+  </InputGroup.Element>
+  <Textarea placeholder="Your email address" />
+</InputGroup.Root>
+```
+
+### Change Border Color
+
+```tsx preview
+<VStack>
+  <Textarea placeholder="Default border color" />
+
+  <Textarea focusBorderColor="green.500" placeholder="Custom border color" />
+
+  <InputGroup.Root variant="flushed" focusBorderColor="green.500">
+    <InputGroup.Element>
+      <MailIcon fontSize="xl" />
+    </InputGroup.Element>
+    <Textarea placeholder="With Element" />
+  </InputGroup.Root>
+
+  <Textarea
+    errorBorderColor="orange.500"
+    invalid
+    placeholder="Custom border color"
+  />
+
+  <InputGroup.Root errorBorderColor="orange.500" invalid>
+    <InputGroup.Addon>Email</InputGroup.Addon>
+    <Textarea placeholder="With Addon" />
+  </InputGroup.Root>
+</VStack>
+```
+
+### Customize Placeholder
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      { placeholder: "default placeholder" },
+      {
+        placeholder: "custom placeholder",
+        _placeholder: { color: "gray.500", opacity: 1 },
+      },
+      {
+        color: "green.500",
+        placeholder: "custom placeholder",
+        _placeholder: { color: "inherit" },
+      },
+    ]}
+  >
+    {({ color, placeholder, _placeholder }) => (
+      <Textarea
+        key={placeholder}
+        color={color}
+        placeholder={placeholder}
+        _placeholder={_placeholder}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Resize Behavior
+
+```tsx preview
+<VStack>
+  <For each={["block", "horizontal", "vertical", "none"]}>
+    {(resize) => <Textarea key={resize} placeholder={resize} resize={resize} />}
+  </For>
+</VStack>
+```
+
+### Use Auto-resize
+
+```tsx preview
+<Textarea autosize placeholder="autosize" />
+```
+
+### Control Resize
+
+```tsx preview functional client
+const resizeRef = useRef<() => void>(null)
+const onResize = () => {
+  resizeRef.current?.()
+}
+
+return (
+  <VStack>
+    <Textarea placeholder="use resize" resizeRef={resizeRef} />
+    <Button alignSelf="flex-end" onClick={onResize}>
+      Resize
+    </Button>
+  </VStack>
+)
+```
+
+### Use React Hook Form
+
+```tsx preview functional client
+interface Data {
+  textarea: string
+}
+
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+  watch,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <Field.Root
+      errorMessage={errors.textarea?.message}
+      invalid={!!errors.textarea}
+      label="Feedback"
+    >
+      <Textarea
+        placeholder="your feedback"
+        {...register("textarea", {
+          required: { message: "This is required.", value: true },
+        })}
+      />
+    </Field.Root>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

@@ -46,9 +46,10 @@ export const opened: APIHandler = async ({ constant, req, res }) => {
   let selectedReviewers: string[] = []
 
   if (
-    ["yamada-ui:changeset-release/main", "yamada-ui:v1/www"].includes(
-      head.label,
-    )
+    [
+      "yamada-ui:changeset-release/main",
+      "yamada-ui:changeset-release/v1",
+    ].includes(head.label)
   ) {
     if (count >= 1) return
 

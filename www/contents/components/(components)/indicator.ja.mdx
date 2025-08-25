@@ -6,4 +6,244 @@ source: components/indicator
 style: components/indicator/indicator.style.ts
 ---
 
+```tsx preview
+<Wrap gap="lg">
+  <Indicator label="New" colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430"
+    />
+  </Indicator>
+
+  <Indicator colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430"
+      shape="rounded"
+    />
+  </Indicator>
+</Wrap>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Indicator } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Indicator } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Indicator } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Indicator />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="lg">
+  <For each={["solid", "subtle", "surface"]}>
+    {(variant, index) => (
+      <Indicator key={index} variant={variant} label="New" colorScheme="info">
+        <Avatar
+          name="Hirotomo Yamada"
+          src="https://avatars.githubusercontent.com/u/84060430"
+        />
+      </Indicator>
+    )}
+  </For>
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="lg">
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <Indicator key={index} size={size} label="New" colorScheme="info">
+        <Avatar
+          name="Hirotomo Yamada"
+          src="https://avatars.githubusercontent.com/u/84060430"
+        />
+      </Indicator>
+    )}
+  </For>
+</Wrap>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<Wrap gap="lg">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Indicator key={index} colorScheme={colorScheme} label="New">
+        <Avatar
+          name="Hirotomo Yamada"
+          src="https://avatars.githubusercontent.com/u/84060430"
+        />
+      </Indicator>
+    )}
+  </For>
+</Wrap>
+```
+
+### 表示位置を変更する
+
+インジケーターの表示位置を変更したい場合は、`placement`に`start-start`や`center-end`などを指定します。
+
+```tsx preview functional
+const placements = [
+  "start-start",
+  "start-center",
+  "start-end",
+  "center-start",
+  "center-center",
+  "center-end",
+  "end-start",
+  "end-center",
+  "end-end",
+] as const
+
+return (
+  <Grid gap="lg" p="lg" templateColumns="repeat(3, 1fr)" w="fit-content">
+    <For each={placements}>
+      {(placement, index) => (
+        <Indicator
+          key={index}
+          label="New"
+          placement={placement}
+          colorScheme="info"
+        >
+          <Avatar
+            name="Hirotomo Yamada"
+            src="https://avatars.githubusercontent.com/u/84060430?v=4"
+          />
+        </Indicator>
+      )}
+    </For>
+  </Grid>
+)
+```
+
+### オフセットを変更する
+
+要素の大きさによっては、インジケーターが意図しない位置になる場合があります。その場合は、`offset`で調整します。
+
+```tsx preview
+<Wrap>
+  <Indicator offset="1.5" colorScheme="info">
+    <Avatar
+      size="xl"
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    />
+  </Indicator>
+</Wrap>
+```
+
+### 最大値を設定する
+
+最大値を設定するには、`overflowCount`に数値を設定します。
+
+```tsx preview
+<Wrap>
+  <Indicator label={100} overflowCount={99} colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    />
+  </Indicator>
+</Wrap>
+```
+
+### ゼロを表示しない
+
+例えば、通知の数をインジケーターで表示している場合、`0`を表示したくないケースがあると思います。その場合は、`showZero`を`false`に設定することで表示されなくなります。
+
+```tsx preview
+<Wrap gap="lg">
+  <Indicator label={0} colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    />
+  </Indicator>
+
+  <Indicator label={0} showZero={false} colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    />
+  </Indicator>
+</Wrap>
+```
+
+### 境界線を表示する
+
+要素とインジケーターの間に境界線をつけたい場合は、`withBorder`を`true`にします。
+
+```tsx preview
+<Wrap>
+  <Indicator withBorder colorScheme="info" label="New">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    />
+  </Indicator>
+</Wrap>
+```
+
+### ハイライトする
+
+ハイライトする場合は、`ping`プロパティを使用します。
+
+```tsx preview
+<Wrap gap="lg">
+  <Indicator
+    ping={{
+      scale: 1.4,
+    }}
+    label="New"
+    colorScheme="info"
+  >
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430"
+    />
+  </Indicator>
+
+  <Indicator ping colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430"
+      shape="rounded"
+    />
+  </Indicator>
+</Wrap>
+```
+
+### 非表示にする
+
+`disabled`を`true`にすることで、インジケーターは非表示になります。
+
+```tsx preview
+<Wrap>
+  <Indicator disabled label="New" colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430"
+    />
+  </Indicator>
+</Wrap>
+```

@@ -79,8 +79,8 @@ return (
       borderWidth="1px"
       overflowY="auto"
       p="lg"
-      h="lg"
-      rounded="l3"
+      h="sm"
+      rounded="l2"
     >
       <InfiniteScrollArea
         loading={<Loading.Oval fontSize="2xl" />}
@@ -345,7 +345,7 @@ return (
 )
 ```
 
-### Disable
+### Disabled
 
 To disable, set `disabled` to `true`. This is useful when you do not want to execute `onLoad` in response to scrolling under certain conditions.
 
@@ -364,10 +364,10 @@ return (
         if (index >= 5) finish()
       }}
       borderWidth="1px"
-      h="lg"
+      h="sm"
       overflowY="auto"
       p="lg"
-      rounded="l3"
+      rounded="l2"
     >
       {Array(count)
         .fill(0)
@@ -419,10 +419,10 @@ return (
         if (index >= 5) finish()
       }}
       borderWidth="1px"
-      h="lg"
+      h="sm"
       overflowY="auto"
       p="lg"
-      rounded="l3"
+      rounded="l2"
     >
       {Array(count)
         .fill(0)

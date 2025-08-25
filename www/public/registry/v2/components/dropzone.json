@@ -1,4 +1,5 @@
 {
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": ["fade", "input", "loading", "portal", "field"],
     "externals": ["react-dropzone@^14.3.8", "file-selector@^2.1.2"],

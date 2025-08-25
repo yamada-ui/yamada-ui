@@ -21,6 +21,7 @@ export interface FormatConfig {
 }
 
 export interface UserConfig {
+  $schema?: string
   components?: SectionConfig
   format?: FormatConfig
   hooks?: SectionConfig

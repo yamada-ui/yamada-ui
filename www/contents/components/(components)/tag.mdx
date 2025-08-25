@@ -35,7 +35,7 @@ import { Tag } from "@workspaces/ui"
 ### Change Variants
 
 ```tsx preview
-<HStack>
+<Wrap gap="md">
   <For each={["solid", "subtle", "surface", "outline"]}>
     {(variant) => (
       <Tag key={variant} variant={variant} colorScheme="primary">
@@ -43,13 +43,13 @@ import { Tag } from "@workspaces/ui"
       </Tag>
     )}
   </For>
-</HStack>
+</Wrap>
 ```
 
 ### Change Size
 
 ```tsx preview
-<HStack>
+<Wrap gap="md">
   <For each={["sm", "md", "lg"]}>
     {(size) => (
       <Tag key={size} size={size} colorScheme="primary">
@@ -57,13 +57,13 @@ import { Tag } from "@workspaces/ui"
       </Tag>
     )}
   </For>
-</HStack>
+</Wrap>
 ```
 
 ### Change Color Scheme
 
 ```tsx preview
-<HStack>
+<Wrap gap="md">
   <For each={["success", "warning", "error"]}>
     {(colorScheme) => (
       <Tag key={colorScheme} colorScheme={colorScheme}>
@@ -71,16 +71,16 @@ import { Tag } from "@workspaces/ui"
       </Tag>
     )}
   </For>
-</HStack>
+</Wrap>
 ```
 
 ### Use with Icon
 
 ```tsx preview
-<HStack>
+<Wrap gap="md">
   <Tag startIcon={<PlusIcon />}>startIcon</Tag>
   <Tag endIcon={<PlusIcon />}>endIcon</Tag>
-</HStack>
+</Wrap>
 ```
 
 ### Use Close Button
@@ -96,7 +96,7 @@ return <Tag onClose={onClose}>Tag</Tag>
 
 ### Disable Close Button
 
-```tsx preview
+```tsx preview client
 <Tag disabled onClose={() => {}}>
   Tag
 </Tag>

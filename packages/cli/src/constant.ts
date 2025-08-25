@@ -11,7 +11,7 @@ export const DEFAULT_PATH = {
   components: "./components",
   hooks: "./hooks",
   monorepo: "./workspaces/ui",
-  polyrepo: "./ui",
+  polyrepo: "./components/ui",
   providers: "./providers",
 }
 export const SECTION_NAMES = ["components", "hooks", "providers"] as const

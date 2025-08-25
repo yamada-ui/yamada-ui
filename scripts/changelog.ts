@@ -72,8 +72,8 @@ const getPullRequests = async (): Promise<
   if (arg.includes("--latest")) {
     const { data } = await octokit.pulls.list({
       ...REPO_REQUEST_PARAMETERS,
-      base: "main",
-      head: "yamada-ui:changeset-release/main",
+      base: "v1",
+      head: "yamada-ui:changeset-release/v1",
       state: "closed",
     })
 
@@ -81,8 +81,8 @@ const getPullRequests = async (): Promise<
   } else if (arg.includes("--current")) {
     const { data } = await octokit.pulls.list({
       ...REPO_REQUEST_PARAMETERS,
-      base: "main",
-      head: "yamada-ui:changeset-release/main",
+      base: "v1",
+      head: "yamada-ui:changeset-release/v1",
       state: "open",
     })
 
@@ -105,8 +105,8 @@ const getPullRequests = async (): Promise<
     do {
       const { data } = await octokit.pulls.list({
         ...REPO_REQUEST_PARAMETERS,
-        base: "main",
-        head: "yamada-ui:changeset-release/main",
+        base: "v1",
+        head: "yamada-ui:changeset-release/v1",
         page,
         per_page: perPage,
         state: "all",

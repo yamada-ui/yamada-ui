@@ -277,34 +277,21 @@ return (
 const [count, setCount] = useState<number>(50)
 
 return (
-  <InfiniteScrollArea
-    orientation="horizontal"
-    overflowX="auto"
-    h="full"
-    loading={<Loading.Oval fontSize="2xl" />}
-    onLoad={({ finish, index }) => {
-      console.log("load", index)
-      setCount((prev) => prev + 50)
-      if (index >= 5) finish()
-    }}
-  >
+  <>
     {Array(count)
       .fill(0)
       .map((_, index) => (
-        <Card.Root key={index} minW="sm" h="full">
-          <Card.Header>
-            <Heading size="xl">天元突破グレンラガン</Heading>
-          </Card.Header>
-
-          <Card.Body>
-            <Image
-              src="https://www.gurren-lagann.net/tv/images/kv.jpg"
-              w="full"
-            />
-          </Card.Body>
-        </Card.Root>
+        <Image
+          borderWidth="1px"
+          rounded="l2"
+          key={index}
+          src="https://gurren-lagann15th.com/assets/img/top/visual.jpg"
+          w="sm"
+          h="full"
+          objectFit="cover"
+        />
       ))}
-  </InfiniteScrollArea>
+  </>
 )
 ```
 
@@ -377,13 +364,12 @@ return (
         .map((_, index) => (
           <Card.Root key={index}>
             <Card.Header>
-              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">天元突破グレンラガン</Heading>
             </Card.Header>
 
             <Card.Body>
               <Text>
-                『ドラゴンボール』（DRAGON
-                BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+                いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
               </Text>
             </Card.Body>
           </Card.Root>
@@ -433,13 +419,12 @@ return (
         .map((_, index) => (
           <Card.Root key={index}>
             <Card.Header>
-              <Heading size="xl">『ドラゴンボール』（DRAGON BALL）</Heading>
+              <Heading size="xl">天元突破グレンラガン</Heading>
             </Card.Header>
 
             <Card.Body>
               <Text>
-                『ドラゴンボール』（DRAGON
-                BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+                いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
               </Text>
             </Card.Body>
           </Card.Root>

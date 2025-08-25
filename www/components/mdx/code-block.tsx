@@ -46,8 +46,8 @@ export function CodeBlock({
 
           <Tabs.Panel index={0} rounded="l2">
             {iframe ? (
-              <Iframe>
-                <Box h="full" overflow="auto" p="lg" w="full">
+              <Iframe borderWidth="1px" h="lg" rounded="l2">
+                <Box boxSize="full" overflow="auto" p="lg">
                   <ClientOnly
                     lang={lang}
                     code={children}

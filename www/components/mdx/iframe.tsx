@@ -1,11 +1,11 @@
 "use client"
 
-import type { PropsWithChildren } from "react"
+import type { HTMLStyledProps } from "@yamada-ui/react"
 import createEmotionCache from "@emotion/cache"
 import { CacheProvider } from "@emotion/react"
 import weakMemoize from "@emotion/weak-memoize"
 import { styled, UIProvider, useColorMode, useTheme } from "@yamada-ui/react"
-import { useEffect, useRef, useState } from "react"
+import { useLayoutEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 
 const createCache = weakMemoize((container: Node) =>
@@ -15,9 +15,9 @@ const createCache = weakMemoize((container: Node) =>
   }),
 )
 
-interface IframeProps extends PropsWithChildren {}
+interface IframeProps extends HTMLStyledProps<"iframe"> {}
 
-export function Iframe({ children }: IframeProps) {
+export function Iframe({ children, ...rest }: IframeProps) {
   const { colorMode } = useColorMode()
   const { themeScheme } = useTheme()
   const iframeRef = useRef<HTMLIFrameElement>(null)
@@ -27,7 +27,7 @@ export function Iframe({ children }: IframeProps) {
   const body = bodyRef.current
   const [, forceUpdate] = useState({})
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!iframeRef.current) return
 
     const iframe = iframeRef.current
@@ -38,27 +38,24 @@ export function Iframe({ children }: IframeProps) {
     forceUpdate({})
   }, [])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!iframeRef.current) return
 
     const iframe = iframeRef.current
 
-    if (iframe.contentDocument) {
-      iframe.contentDocument.documentElement.dataset.mode = colorMode
-      iframe.contentDocument.documentElement.dataset.theme = themeScheme
-      iframe.contentDocument.documentElement.style.colorScheme = colorMode
-    }
+    if (!iframe.contentDocument) return
+
+    iframe.contentDocument.documentElement.dataset.mode = colorMode
+    iframe.contentDocument.documentElement.dataset.theme = themeScheme
+    iframe.contentDocument.documentElement.style.colorScheme = colorMode
   }, [colorMode, themeScheme])
 
   return (
     <styled.iframe
       ref={iframeRef}
-      border="1px solid"
-      borderColor="border"
-      h="xl"
-      rounded="12"
+      boxSize="full"
       title="preview-iframe"
-      w="full"
+      {...rest}
     >
       {head && body
         ? createPortal(

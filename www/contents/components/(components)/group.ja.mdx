@@ -6,4 +6,103 @@ source: components/group
 style: components/group/group.style.ts
 ---
 
+```tsx preview
+<Group>
+  <Button>Button</Button>
+  <Button>Button</Button>
+  <Button>Button</Button>
+</Group>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Group } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Group } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Group } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Group />
+```
+
+### 方向を変更する
+
+方向を変更する場合は、`orientation`に`vertical`または`horizontal`を設定します。デフォルトは、`horizontal`です。
+
+```tsx preview
+<VStack gap="md" alignItems="flex-start">
+  <Group>
+    <Button>Button</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
+  </Group>
+
+  <Group orientation="vertical">
+    <Button>Button</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
+  </Group>
+</VStack>
+```
+
+### 子要素を引き延ばす
+
+子要素を横幅いっぱいに引き延ばすには、`grow`に`true`を設定します。
+
+```tsx preview
+<Group grow w="full">
+  <Button>Button</Button>
+  <Button>Button</Button>
+  <Button>Button</Button>
+</Group>
+```
+
+### 子要素を連結する
+
+子要素同士を連結したい場合は、`attached`に`true`を設定します。
+
+```tsx preview
+<VStack gap="md" alignItems="flex-start">
+  <Group attached>
+    <Input />
+    <IconButton
+      variant="surface"
+      aria-label="Add"
+      focusVisibleRing="inside"
+      icon={<PlusIcon fontSize="xl" />}
+    />
+  </Group>
+
+  <Group attached>
+    <Tag colorScheme="gray" variant="solid">
+      @yamada-ui/react
+    </Tag>
+    <Tag colorScheme="lime" variant="solid">
+      10k+
+    </Tag>
+  </Group>
+
+  <Group attached orientation="vertical">
+    <Button variant="outline" focusVisibleRing="inside">
+      Button
+    </Button>
+    <Button variant="outline" focusVisibleRing="inside">
+      Button
+    </Button>
+    <Button variant="outline" focusVisibleRing="inside">
+      Button
+    </Button>
+  </Group>
+</VStack>
+```

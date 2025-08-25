@@ -6,4 +6,202 @@ source: components/textarea
 style: components/textarea/textarea.style.ts
 ---
 
+```tsx preview
+<Textarea placeholder="basic" />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Textarea } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Textarea } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Textarea } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<Textarea />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <Textarea variant="outline" placeholder="outline" />
+  <Textarea variant="filled" placeholder="filled" />
+  <Textarea variant="flushed" placeholder="flushed" />
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <Textarea size="xs" placeholder="extra small size" />
+  <Textarea size="sm" placeholder="small size" />
+  <Textarea size="md" placeholder="medium size" />
+  <Textarea size="lg" placeholder="large size" />
+  <Textarea size="xl" placeholder="extra large size" />
+</VStack>
+```
+
+### 無効化する
+
+```tsx preview
+<Textarea disabled placeholder="basic" />
+```
+
+### 読み取り専用にする
+
+```tsx preview
+<Textarea placeholder="basic" readOnly />
+```
+
+### 無効な入力にする
+
+```tsx preview
+<Textarea invalid placeholder="basic" />
+```
+
+### アドオンを追加する
+
+```tsx preview
+<VStack>
+  <InputGroup.Root>
+    <InputGroup.Addon>Email</InputGroup.Addon>
+    <Textarea placeholder="Your email address" />
+  </InputGroup.Root>
+
+  <InputGroup.Root>
+    <InputGroup.Addon>https://</InputGroup.Addon>
+    <Textarea placeholder="Your site address" />
+    <InputGroup.Addon>.com</InputGroup.Addon>
+  </InputGroup.Root>
+</VStack>
+```
+
+### 要素を追加する
+
+```tsx preview
+<InputGroup.Root>
+  <InputGroup.Element>
+    <MailIcon fontSize="xl" />
+  </InputGroup.Element>
+  <Textarea placeholder="Your email address" />
+</InputGroup.Root>
+```
+
+### ボーダーの色を変更する
+
+```tsx preview
+<VStack>
+  <Textarea placeholder="Default border color" />
+  <Textarea focusBorderColor="green.500" placeholder="Custom border color" />
+  <Textarea
+    errorBorderColor="orange.500"
+    invalid
+    placeholder="Custom border color"
+  />
+</VStack>
+```
+
+### プレースホルダーをカスタマイズする
+
+```tsx preview
+<VStack>
+  <Textarea placeholder="default placeholder" />
+  <Textarea
+    placeholder="custom placeholder"
+    _placeholder={{ color: "gray.500", opacity: 1 }}
+  />
+  <Textarea
+    color="green.500"
+    placeholder="custom placeholder"
+    _placeholder={{ color: "inherit" }}
+  />
+</VStack>
+```
+
+### リサイズの動作を変更する
+
+```tsx preview
+<VStack>
+  <Textarea placeholder="block" resize="block" />
+  <Textarea placeholder="horizontal" resize="horizontal" />
+  <Textarea placeholder="vertical" resize="vertical" />
+  <Textarea placeholder="none" resize="none" />
+</VStack>
+```
+
+### 自動リサイズを使用する
+
+```tsx preview
+<Textarea autosize placeholder="autosize" />
+```
+
+### リサイズを制御する
+
+```tsx preview functional
+const resizeRef = useRef<() => void>(null)
+const onResize = () => {
+  resizeRef.current?.()
+}
+
+return (
+  <VStack>
+    <Textarea placeholder="use resize" resizeRef={resizeRef} />
+    <Button alignSelf="flex-end" onClick={onResize}>
+      Resize
+    </Button>
+  </VStack>
+)
+```
+
+### React Hook Formと組み合わせる
+
+```tsx preview functional
+interface Data {
+  textarea: string
+}
+
+const {
+  formState: { errors },
+  handleSubmit,
+  register,
+  watch,
+} = useForm<Data>()
+
+const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
+
+console.log("watch:", watch())
+
+return (
+  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+    <Field.Root
+      errorMessage={errors.textarea?.message}
+      invalid={!!errors.textarea}
+      label="Feedback"
+    >
+      <Textarea
+        placeholder="your feedback"
+        {...register("textarea", {
+          required: { message: "This is required.", value: true },
+        })}
+      />
+    </Field.Root>
+
+    <Button type="submit" alignSelf="flex-end">
+      Submit
+    </Button>
+  </VStack>
+)
+```

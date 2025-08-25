@@ -7,14 +7,7 @@ style: components/toggle/toggle.style.ts
 ---
 
 ```tsx preview
-<Wrap gap="md">
-  <Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
-
-  <Toggle px="4">
-    <ItalicIcon />
-    Italic
-  </Toggle>
-</Wrap>
+<Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
 ```
 
 ## Usage
@@ -30,7 +23,7 @@ import { Toggle } from "@/components/ui"
 ```
 
 ```ts [Monorepo]
-import { Toggle } from "@workspace/ui"
+import { Toggle } from "@workspaces/ui"
 ```
 
 :::
@@ -89,53 +82,18 @@ import { Toggle } from "@workspace/ui"
 ### Change Color Scheme
 
 ```tsx preview
-<VStack>
-  <For each={["subtle", "solid", "outline"]}>
-    {(variant) => (
-      <Wrap gap="md" key={variant}>
-        <For
-          each={[
-            "primary",
-            "secondary",
-            "success",
-            "warning",
-            "danger",
-            "link",
-            "gray",
-            "neutral",
-            "red",
-            "rose",
-            "pink",
-            "orange",
-            "amber",
-            "yellow",
-            "lime",
-            "green",
-            "emerald",
-            "teal",
-            "cyan",
-            "sky",
-            "blue",
-            "indigo",
-            "violet",
-            "purple",
-            "fuchsia",
-          ]}
-        >
-          {(colorScheme) => (
-            <Toggle
-              key={colorScheme}
-              variant={variant}
-              colorScheme={colorScheme}
-              aria-label="Toggle bold"
-              icon={<BoldIcon />}
-            />
-          )}
-        </For>
-      </Wrap>
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme) => (
+      <Toggle
+        key={colorScheme}
+        colorScheme={colorScheme}
+        aria-label="Toggle bold"
+        icon={<BoldIcon />}
+      />
     )}
   </For>
-</VStack>
+</Wrap>
 ```
 
 ### Disable
@@ -144,17 +102,11 @@ To disable, set `disabled` to `true`.
 
 ```tsx preview
 <Wrap gap="md">
-  <For each={["subtle", "solid", "outline"]}>
-    {(variant) => (
-      <Toggle
-        key={variant}
-        icon={<BoldIcon />}
-        aria-label="Toggle bold"
-        variant={variant}
-        disabled
-      />
-    )}
-  </For>
+  <Toggle icon={<BoldIcon />} aria-label="Toggle bold" disabled />
+
+  <Field.Root disabled label="Bold">
+    <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+  </Field.Root>
 </Wrap>
 ```
 
@@ -164,53 +116,29 @@ To make read-only, set `readOnly` to `true`.
 
 ```tsx preview
 <Wrap gap="md">
-  <For each={["subtle", "solid", "outline"]}>
-    {(variant) => (
-      <Toggle
-        key={variant}
-        icon={<BoldIcon />}
-        aria-label="Toggle bold"
-        variant={variant}
-        readOnly
-      />
-    )}
-  </For>
+  <Toggle icon={<BoldIcon />} aria-label="Toggle bold" readOnly />
+
+  <Field.Root label="Bold" readOnly>
+    <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+  </Field.Root>
 </Wrap>
 ```
 
 ### Rounded
 
 ```tsx preview
-<Wrap gap="md">
-  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
-    {(variant) => (
-      <Toggle
-        key={variant}
-        variant={variant}
-        aria-label="Toggle bold"
-        fullRounded
-        icon={<BoldIcon />}
-      />
-    )}
-  </For>
-</Wrap>
+<Toggle icon={<BoldIcon />} aria-label="Toggle bold" fullRounded />
 ```
 
 ### Invalid
 
 ```tsx preview
 <Wrap gap="md">
-  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
-    {(variant) => (
-      <Toggle
-        key={variant}
-        variant={variant}
-        aria-label="Toggle bold"
-        icon={<BoldIcon />}
-        invalid
-      />
-    )}
-  </For>
+  <Toggle icon={<BoldIcon />} aria-label="Toggle bold" invalid />
+
+  <Field.Root invalid label="Bold">
+    <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+  </Field.Root>
 </Wrap>
 ```
 
@@ -228,7 +156,7 @@ To make read-only, set `readOnly` to `true`.
 
 ### Control
 
-```tsx preview functional
+```tsx preview functional client
 const [checked, setChecked] = useState<boolean>(false)
 
 return (
@@ -256,7 +184,7 @@ import { ToggleGroup } from "@/components/ui"
 ```
 
 ```ts [Monorepo]
-import { ToggleGroup } from "@workspace/ui"
+import { ToggleGroup } from "@workspaces/ui"
 ```
 
 :::
@@ -285,7 +213,7 @@ import { ToggleGroup } from "@workspace/ui"
 
 For multiple selections, set `value` or `defaultValue` to an array.
 
-```tsx preview functional
+```tsx preview functional client
 const [value, setValue] = useState<string[]>([])
 
 return (

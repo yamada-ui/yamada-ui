@@ -23,7 +23,7 @@ import { Textarea } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Textarea } from "@workspace/ui"
+import { Textarea } from "@workspaces/ui"
 ```
 
 :::
@@ -36,9 +36,11 @@ import { Textarea } from "@workspace/ui"
 
 ```tsx preview
 <VStack>
-  <Textarea variant="outline" placeholder="outline" />
-  <Textarea variant="filled" placeholder="filled" />
-  <Textarea variant="flushed" placeholder="flushed" />
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <Textarea key={variant} variant={variant} placeholder={variant} />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -46,30 +48,61 @@ import { Textarea } from "@workspace/ui"
 
 ```tsx preview
 <VStack>
-  <Textarea size="xs" placeholder="extra small size" />
-  <Textarea size="sm" placeholder="small size" />
-  <Textarea size="md" placeholder="medium size" />
-  <Textarea size="lg" placeholder="large size" />
-  <Textarea size="xl" placeholder="extra large size" />
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size) => <Textarea key={size} size={size} placeholder={`${size} size`} />}
+  </For>
 </VStack>
 ```
 
 ### 無効化する
 
 ```tsx preview
-<Textarea disabled placeholder="basic" />
+<VStack>
+  <Textarea disabled placeholder="Basic" />
+
+  <InputGroup.Root disabled>
+    <InputGroup.Addon>Email</InputGroup.Addon>
+    <Textarea placeholder="InputGroup" />
+  </InputGroup.Root>
+
+  <Field.Root disabled label="Feedback">
+    <Textarea placeholder="Field" />
+  </Field.Root>
+</VStack>
 ```
 
 ### 読み取り専用にする
 
 ```tsx preview
-<Textarea placeholder="basic" readOnly />
+<VStack>
+  <Textarea readOnly placeholder="Basic" />
+
+  <InputGroup.Root readOnly>
+    <InputGroup.Addon>Email</InputGroup.Addon>
+    <Textarea placeholder="InputGroup" />
+  </InputGroup.Root>
+
+  <Field.Root readOnly>
+    <Textarea placeholder="Field" />
+  </Field.Root>
+</VStack>
 ```
 
 ### 無効な入力にする
 
 ```tsx preview
-<Textarea invalid placeholder="basic" />
+<VStack>
+  <Textarea invalid placeholder="Basic" />
+
+  <InputGroup.Root invalid>
+    <InputGroup.Addon>Email</InputGroup.Addon>
+    <Textarea placeholder="InputGroup" />
+  </InputGroup.Root>
+
+  <Field.Root invalid>
+    <Textarea placeholder="Field" />
+  </Field.Root>
+</VStack>
 ```
 
 ### アドオンを追加する
@@ -105,12 +138,26 @@ import { Textarea } from "@workspace/ui"
 ```tsx preview
 <VStack>
   <Textarea placeholder="Default border color" />
+
   <Textarea focusBorderColor="green.500" placeholder="Custom border color" />
+
+  <InputGroup.Root variant="flushed" focusBorderColor="green.500">
+    <InputGroup.Element>
+      <MailIcon fontSize="xl" />
+    </InputGroup.Element>
+    <Textarea placeholder="With Element" />
+  </InputGroup.Root>
+
   <Textarea
     errorBorderColor="orange.500"
     invalid
     placeholder="Custom border color"
   />
+
+  <InputGroup.Root errorBorderColor="orange.500" invalid>
+    <InputGroup.Addon>Email</InputGroup.Addon>
+    <Textarea placeholder="With Addon" />
+  </InputGroup.Root>
 </VStack>
 ```
 
@@ -118,16 +165,29 @@ import { Textarea } from "@workspace/ui"
 
 ```tsx preview
 <VStack>
-  <Textarea placeholder="default placeholder" />
-  <Textarea
-    placeholder="custom placeholder"
-    _placeholder={{ color: "gray.500", opacity: 1 }}
-  />
-  <Textarea
-    color="green.500"
-    placeholder="custom placeholder"
-    _placeholder={{ color: "inherit" }}
-  />
+  <For
+    each={[
+      { placeholder: "default placeholder" },
+      {
+        placeholder: "custom placeholder",
+        _placeholder: { color: "gray.500", opacity: 1 },
+      },
+      {
+        color: "green.500",
+        placeholder: "custom placeholder",
+        _placeholder: { color: "inherit" },
+      },
+    ]}
+  >
+    {({ color, placeholder, _placeholder }) => (
+      <Textarea
+        key={placeholder}
+        color={color}
+        placeholder={placeholder}
+        _placeholder={_placeholder}
+      />
+    )}
+  </For>
 </VStack>
 ```
 
@@ -135,10 +195,9 @@ import { Textarea } from "@workspace/ui"
 
 ```tsx preview
 <VStack>
-  <Textarea placeholder="block" resize="block" />
-  <Textarea placeholder="horizontal" resize="horizontal" />
-  <Textarea placeholder="vertical" resize="vertical" />
-  <Textarea placeholder="none" resize="none" />
+  <For each={["block", "horizontal", "vertical", "none"]}>
+    {(resize) => <Textarea key={resize} placeholder={resize} resize={resize} />}
+  </For>
 </VStack>
 ```
 
@@ -150,7 +209,7 @@ import { Textarea } from "@workspace/ui"
 
 ### リサイズを制御する
 
-```tsx preview functional
+```tsx preview functional client
 const resizeRef = useRef<() => void>(null)
 const onResize = () => {
   resizeRef.current?.()
@@ -168,7 +227,7 @@ return (
 
 ### React Hook Formと組み合わせる
 
-```tsx preview functional
+```tsx preview functional client
 interface Data {
   textarea: string
 }

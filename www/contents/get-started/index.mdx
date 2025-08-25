@@ -38,11 +38,97 @@ A guide for installing and using Yamada UI with Vite.js projects.
 
 ## Installation
 
-To install Yamada UI in your project, please follow the steps below.
+To install Yamada UI in your project, you can either set it up using the [CLI](/docs/get-started/cli) or install it via [npm](https://www.npmjs.com).
+
+### CLI
 
 ::::steps
 
-### Install the package
+#### Set up
+
+Running the command will create the necessary files and folders in your project.
+
+:::code-group
+
+```bash [pnpm]
+pnpm dlx @yamada-ui/cli init
+```
+
+```bash [npm]
+npx @yamada-ui/cli init
+```
+
+```bash [yarn]
+yarn dlx @yamada-ui/cli init
+```
+
+```bash [bun]
+bunx @yamada-ui/cli init
+```
+
+:::
+
+#### Install the package
+
+Install `@workspaces/ui` to your application.
+
+:::code-group
+
+```bash [pnpm]
+pnpm add "@workspaces/ui@workspace:*"
+```
+
+```bash [npm]
+npm install "@workspaces/ui@workspace:*"
+```
+
+```bash [yarn]
+yarn add "@workspaces/ui@workspace:*"
+```
+
+```bash [bun]
+bun add "@workspaces/ui@workspace:*"
+```
+
+:::
+
+#### Add provider
+
+After installing, add `UIProvider` to the root of your application.
+
+```tsx
+import { UIProvider } from "@workspaces/ui"
+
+const App = () => {
+  return (
+    <UIProvider>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+#### Use components
+
+After adding `UIProvider`, you can use the components in your application.
+
+```tsx
+import { Button } from "@workspaces/ui"
+
+const App = () => {
+  return <Button>Click me</Button>
+}
+```
+
+That's it! You've successfully set up Yamada UI.
+
+::::
+
+### npm
+
+::::steps
+
+#### Install the package
 
 Yamada UI can be installed with `@yamada-ui/react` only, and all components and hooks can be used.
 
@@ -66,33 +152,9 @@ bun add @yamada-ui/react
 
 :::
 
-### Initialize the project
+#### Add provider
 
-When the command is executed, files and folders necessary for your project will be created.
-
-:::code-group
-
-```bash [pnpm]
-pnpm dlx @yamada-ui/cli init
-```
-
-```bash [npm]
-npx @yamada-ui/cli init
-```
-
-```bash [yarn]
-yarn dlx @yamada-ui/cli init
-```
-
-```bash [bun]
-bunx @yamada-ui/cli init
-```
-
-:::
-
-### Add UIProvider
-
-After installing Yamada UI, add UIProvider to the root of your application.
+After installing, add `UIProvider` to the root of your application.
 
 ```tsx
 import { UIProvider } from "@yamada-ui/react"
@@ -106,9 +168,9 @@ const App = () => {
 }
 ```
 
-### Use components
+#### Use components
 
-Once you've added `UIProvider`, use the components in your application.
+After adding `UIProvider`, you can use the components in your application.
 
 ```tsx
 import { Button } from "@yamada-ui/react"
@@ -118,6 +180,6 @@ const App = () => {
 }
 ```
 
-With this, the setup for Yamada UI is complete!
+That's it! You've successfully set up Yamada UI.
 
 ::::

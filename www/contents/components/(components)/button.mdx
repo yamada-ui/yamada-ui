@@ -15,21 +15,27 @@ style: components/button/button.style.ts
 :::code-group
 
 ```tsx [package]
-import { Button } from "@yamada-ui/react"
+import { Button, ButtonGroup } from "@yamada-ui/react"
 ```
 
 ```tsx [alias]
-import { Button } from "@/components/ui"
+import { Button, ButtonGroup } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Button } from "@workspace/ui"
+import { Button, ButtonGroup } from "@workspaces/ui"
 ```
 
 :::
 
 ```tsx
 <Button />
+```
+
+```tsx
+<ButtonGroup.Root>
+  <ButtonGroup.Item />
+</ButtonGroup.Root>
 ```
 
 ### Change Variant
@@ -180,12 +186,10 @@ To use a loading animation, set `loading` to `true`. If you want to change the t
 ```
 
 :::note
-The loading animation for `Button` internally uses [Loading](/docs/components/loading).
+The loading for `Button` internally uses [Loading](/docs/components/loading).
 :::
 
 ### Grouping
-
-To group buttons, use `ButtonGroup`. `ButtonGroup` allows you to set `variant`, `size`, `colorScheme`, `disabled` for child elements (`Button`) in bulk.
 
 ```tsx preview
 <VStack>
@@ -195,7 +199,7 @@ To group buttons, use `ButtonGroup`. `ButtonGroup` allows you to set `variant`, 
   </ButtonGroup.Root>
 
   <Wrap gap="md">
-    <ButtonGroup.Root gap="sm">
+    <ButtonGroup.Root>
       <ButtonGroup.Item>Button</ButtonGroup.Item>
       <ButtonGroup.Item>Button</ButtonGroup.Item>
       <ButtonGroup.Item>Button</ButtonGroup.Item>
@@ -209,7 +213,7 @@ To group buttons, use `ButtonGroup`. `ButtonGroup` allows you to set `variant`, 
   </Wrap>
 
   <Wrap gap="md">
-    <ButtonGroup.Root orientation="vertical" gap="sm">
+    <ButtonGroup.Root orientation="vertical">
       <ButtonGroup.Item>Button</ButtonGroup.Item>
       <ButtonGroup.Item>Button</ButtonGroup.Item>
       <ButtonGroup.Item>Button</ButtonGroup.Item>

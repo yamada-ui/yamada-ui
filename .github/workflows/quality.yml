@@ -142,7 +142,9 @@ jobs:
 
       - name: Run lint
         if: steps.check-modified-www.outputs.any_changed == 'true'
-        run: pnpm www lint
+        run: |
+          pnpm www build:content
+          pnpm www lint
 
   typescript:
     name: TypeScript
@@ -195,7 +197,9 @@ jobs:
 
       - name: Run typecheck
         if: steps.check-modified-www.outputs.any_changed == 'true'
-        run: pnpm www typecheck
+        run: |
+          pnpm www build:content
+          pnpm www typecheck
 
   prettier:
     name: Prettier
@@ -249,4 +253,6 @@ jobs:
 
       - name: Run format
         if: steps.check-modified-www.outputs.any_changed == 'true'
-        run: pnpm www format
+        run: |
+          pnpm www build:content
+          pnpm www format

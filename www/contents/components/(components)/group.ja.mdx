@@ -41,7 +41,7 @@ import { Group } from "@workspace/ui"
 方向を変更する場合は、`orientation`に`vertical`または`horizontal`を設定します。デフォルトは、`horizontal`です。
 
 ```tsx preview
-<VStack gap="md" alignItems="flex-start">
+<VStack alignItems="flex-start">
   <Group>
     <Button>Button</Button>
     <Button>Button</Button>
@@ -73,7 +73,7 @@ import { Group } from "@workspace/ui"
 子要素同士を連結したい場合は、`attached`に`true`を設定します。
 
 ```tsx preview
-<VStack gap="md" alignItems="flex-start">
+<VStack alignItems="flex-start">
   <Group attached>
     <Input />
     <IconButton

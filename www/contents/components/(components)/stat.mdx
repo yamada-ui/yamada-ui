@@ -6,4 +6,127 @@ source: components/stat
 style: components/stat/stat.style.ts
 ---
 
+```tsx preview
+<Stat.Root>
+  <Stat.Label>Total Page Views</Stat.Label>
+  <Stat.Value>1,993,818</Stat.Value>
+  <Stat.HelperMessage>
+    <Stat.Icon type="increase" />
+    21% more than last month
+  </Stat.HelperMessage>
+</Stat.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Stat } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Stat } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Stat } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Stat.Root>
+  <Stat.Label />
+  <Stat.Value />
+  <Stat.Unit />
+  <Stat.HelperMessage />
+  <Stat.Icon />
+</Stat.Root>
+```
+
+:::note
+`Stat.Label`, `Stat.Value`, `Stat.HelperMessage`, and `Stat.Icon` can be omitted.
+:::
+
+### Change Size
+
+```tsx preview
+<VStack gap="md">
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size, index) => (
+      <Stat.Root
+        key={index}
+        size={size}
+        helperMessage="Time to complete"
+        label="Downloads"
+        value={
+          <>
+            8<Stat.Unit>hr</Stat.Unit>
+            18<Stat.Unit>min</Stat.Unit>
+          </>
+        }
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Stat.Root
+        key={index}
+        colorScheme={colorScheme}
+        helperMessage="21% more than last month"
+        label="Total Likes"
+        value="818K"
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Center Content
+
+To center the content, set `centerContent` to `true`.
+
+```tsx preview
+<Stat.Root
+  centerContent
+  helperMessage="From August 1 to August 18"
+  icon="increase"
+  label="Downloads"
+  value="18K"
+/>
+```
+
+### Display Unit
+
+```tsx preview
+<Stat.Root>
+  <Stat.Label>Time to complete</Stat.Label>
+  <Stat.Value>
+    8<Stat.Unit>hr</Stat.Unit>
+    18<Stat.Unit>min</Stat.Unit>
+  </Stat.Value>
+</Stat.Root>
+```
+
+### Display Decrease Icon
+
+To display a decrease icon, set the `type` of `Stat.Icon` to `decrease`.
+
+```tsx preview
+<Stat.Root>
+  <Stat.Label>Total Page Views</Stat.Label>
+  <Stat.Value>1,993,818</Stat.Value>
+  <Stat.HelperMessage>
+    <Stat.Icon type="decrease" />
+    21% more than last month
+  </Stat.HelperMessage>
+</Stat.Root>
+```

@@ -6,4 +6,103 @@ source: components/group
 style: components/group/group.style.ts
 ---
 
+```tsx preview
+<Group>
+  <Button>Button</Button>
+  <Button>Button</Button>
+  <Button>Button</Button>
+</Group>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Group } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Group } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Group } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Group />
+```
+
+### Change the Orientation
+
+To change the orientation, set `orientation` to either `vertical` or `horizontal`. The default is `horizontal`.
+
+```tsx preview
+<VStack alignItems="flex-start">
+  <Group>
+    <Button>Button</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
+  </Group>
+
+  <Group orientation="vertical">
+    <Button>Button</Button>
+    <Button>Button</Button>
+    <Button>Button</Button>
+  </Group>
+</VStack>
+```
+
+### Stretch Child Elements
+
+To stretch child elements to full width, set `grow` to `true`.
+
+```tsx preview
+<Group grow w="full">
+  <Button>Button</Button>
+  <Button>Button</Button>
+  <Button>Button</Button>
+</Group>
+```
+
+### Attach Child Elements
+
+To attach child elements together, set `attached` to `true`.
+
+```tsx preview
+<VStack alignItems="flex-start">
+  <Group attached>
+    <Input />
+    <IconButton
+      variant="surface"
+      aria-label="Add"
+      focusVisibleRing="inside"
+      icon={<PlusIcon fontSize="xl" />}
+    />
+  </Group>
+
+  <Group attached>
+    <Tag colorScheme="gray" variant="solid">
+      @yamada-ui/react
+    </Tag>
+    <Tag colorScheme="lime" variant="solid">
+      10k+
+    </Tag>
+  </Group>
+
+  <Group attached orientation="vertical">
+    <Button variant="outline" focusVisibleRing="inside">
+      Button
+    </Button>
+    <Button variant="outline" focusVisibleRing="inside">
+      Button
+    </Button>
+    <Button variant="outline" focusVisibleRing="inside">
+      Button
+    </Button>
+  </Group>
+</VStack>
+```

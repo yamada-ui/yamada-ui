@@ -18,21 +18,27 @@ style: components/avatar/avatar.style.ts
 :::code-group
 
 ```tsx [package]
-import { Avatar } from "@yamada-ui/react"
+import { Avatar, AvatarGroup } from "@yamada-ui/react"
 ```
 
 ```tsx [alias]
-import { Avatar } from "@/components/ui"
+import { Avatar, AvatarGroup } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Avatar } from "@workspace/ui"
+import { Avatar, AvatarGroup } from "@workspaces/ui"
 ```
 
 :::
 
 ```tsx
 <Avatar />
+```
+
+```tsx
+<AvatarGroup.Root>
+  <AvatarGroup.Item />
+</AvatarGroup.Root>
 ```
 
 ### Change Size
@@ -119,7 +125,7 @@ return (
 )
 ```
 
-### Avatar Group
+### Grouping
 
 If you want to control the number of avatars displayed, specify a number with `max`. If there are more avatars than the specified number, it truncates and displays the remaining avatars as `+X`.
 

@@ -15,21 +15,25 @@ style: components/toggle/toggle.style.ts
 :::code-group
 
 ```ts [Package]
-import { Toggle } from "@yamada-ui/react"
+import { Toggle, ToggleGroup } from "@yamada-ui/react"
 ```
 
 ```ts [Alias]
-import { Toggle } from "@/components/ui"
+import { Toggle, ToggleGroup } from "@/components/ui"
 ```
 
 ```ts [Monorepo]
-import { Toggle } from "@workspaces/ui"
+import { Toggle, ToggleGroup } from "@workspaces/ui"
 ```
 
 :::
 
 ```tsx
 <Toggle />
+
+<ToggleGroup.Root>
+  <ToggleGroup.Item />
+</ToggleGroup.Root>
 ```
 
 ### With Text
@@ -96,6 +100,12 @@ import { Toggle } from "@workspaces/ui"
 </Wrap>
 ```
 
+### Rounded
+
+```tsx preview
+<Toggle icon={<BoldIcon />} aria-label="Toggle bold" fullRounded />
+```
+
 ### Disable
 
 To disable, set `disabled` to `true`.
@@ -105,7 +115,7 @@ To disable, set `disabled` to `true`.
   <Toggle icon={<BoldIcon />} aria-label="Toggle bold" disabled />
 
   <Field.Root disabled label="Bold">
-    <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
   </Field.Root>
 </Wrap>
 ```
@@ -119,15 +129,9 @@ To make read-only, set `readOnly` to `true`.
   <Toggle icon={<BoldIcon />} aria-label="Toggle bold" readOnly />
 
   <Field.Root label="Bold" readOnly>
-    <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
   </Field.Root>
 </Wrap>
-```
-
-### Rounded
-
-```tsx preview
-<Toggle icon={<BoldIcon />} aria-label="Toggle bold" fullRounded />
 ```
 
 ### Invalid
@@ -137,7 +141,7 @@ To make read-only, set `readOnly` to `true`.
   <Toggle icon={<BoldIcon />} aria-label="Toggle bold" invalid />
 
   <Field.Root invalid label="Bold">
-    <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
   </Field.Root>
 </Wrap>
 ```
@@ -170,8 +174,6 @@ return (
 ```
 
 ### Grouping
-
-To group toggles, use `ToggleGroup`. `ToggleGroup` allows you to set `variant`, `size`, `colorScheme`, `disabled`, `readOnly` for child elements (`ToggleGroup.Item`) in bulk.
 
 :::code-group
 

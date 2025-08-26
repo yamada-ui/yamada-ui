@@ -15,21 +15,25 @@ style: components/toggle/toggle.style.ts
 :::code-group
 
 ```ts [Package]
-import { Toggle } from "@yamada-ui/react"
+import { Toggle, ToggleGroup } from "@yamada-ui/react"
 ```
 
 ```ts [Alias]
-import { Toggle } from "@/components/ui"
+import { Toggle, ToggleGroup } from "@/components/ui"
 ```
 
 ```ts [Monorepo]
-import { Toggle } from "@workspaces/ui"
+import { Toggle, ToggleGroup } from "@workspaces/ui"
 ```
 
 :::
 
 ```tsx
 <Toggle />
+
+<ToggleGroup.Root>
+  <ToggleGroup.Item />
+</ToggleGroup.Root>
 ```
 
 ### テキストと組み合わせる
@@ -96,6 +100,12 @@ import { Toggle } from "@workspaces/ui"
 </Wrap>
 ```
 
+### 角を丸くする
+
+```tsx preview
+<Toggle icon={<BoldIcon />} aria-label="Toggle bold" fullRounded />
+```
+
 ### 無効にする
 
 無効にする場合は、`disabled`を`true`にします。
@@ -105,7 +115,7 @@ import { Toggle } from "@workspaces/ui"
   <Toggle icon={<BoldIcon />} aria-label="Toggle bold" disabled />
 
   <Field.Root disabled label="Bold">
-    <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
   </Field.Root>
 </Wrap>
 ```
@@ -119,15 +129,9 @@ import { Toggle } from "@workspaces/ui"
   <Toggle icon={<BoldIcon />} aria-label="Toggle bold" readOnly />
 
   <Field.Root label="Bold" readOnly>
-    <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
   </Field.Root>
 </Wrap>
-```
-
-### 角を丸くする
-
-```tsx preview
-<Toggle icon={<BoldIcon />} aria-label="Toggle bold" fullRounded />
 ```
 
 ### 無効な状態にする
@@ -137,7 +141,7 @@ import { Toggle } from "@workspaces/ui"
   <Toggle icon={<BoldIcon />} aria-label="Toggle bold" invalid />
 
   <Field.Root invalid label="Bold">
-    <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
   </Field.Root>
 </Wrap>
 ```
@@ -170,8 +174,6 @@ return (
 ```
 
 ### グループ化する
-
-`Toggle`をグループ化する場合は、`ToggleGroup`を使用します。`ToggleGroup`は、子要素(`ToggleGroup.Item`)の`variant`, `size`, `colorScheme`, `disabled`, `readOnly`を一括で設定できます。
 
 :::code-group
 

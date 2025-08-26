@@ -52,7 +52,7 @@ import { Stat } from "@workspaces/ui"
 ### Change Size
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["xs", "sm", "md", "lg"]}>
     {(size, index) => (
       <Stat.Root
@@ -75,7 +75,7 @@ import { Stat } from "@workspaces/ui"
 ### Change Color Scheme
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["success", "warning"]}>
     {(colorScheme, index) => (
       <Stat.Root

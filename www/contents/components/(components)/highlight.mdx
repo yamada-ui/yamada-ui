@@ -40,7 +40,7 @@ import { Highlight } from "@workspaces/ui"
 ### Change Variant
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["subtle", "solid", "text", "accent"]}>
     {(variant, index) => (
       <Highlight
@@ -64,7 +64,7 @@ import { Highlight } from "@workspaces/ui"
 ### Change Color Scheme
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["warning", "success"]}>
     {(colorScheme, index) => (
       <Highlight key={index} query="わかんない" colorScheme={colorScheme}>

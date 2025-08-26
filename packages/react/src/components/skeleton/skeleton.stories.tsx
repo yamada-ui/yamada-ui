@@ -54,7 +54,7 @@ export const Variant: Story = () => {
 
 export const Size: Story = () => {
   return (
-    <VStack gap="md">
+    <VStack>
       <HStack>
         <SkeletonCircle boxSize="14" />
 
@@ -100,7 +100,7 @@ export const Children: Story = () => {
 
 export const StartAndEndColor: Story = () => {
   return (
-    <VStack gap="md">
+    <VStack>
       <HStack>
         <SkeletonCircle
           variant="shine"
@@ -152,7 +152,7 @@ export const Loaded: Story = () => {
   })
 
   return (
-    <VStack gap="md">
+    <VStack>
       <HStack>
         <SkeletonCircle loading={loading}>
           <Avatar
@@ -187,7 +187,7 @@ export const FadeDuration: Story = () => {
   })
 
   return (
-    <VStack gap="md">
+    <VStack>
       <HStack>
         <SkeletonCircle fadeDuration={2} loading={loading}>
           <Avatar

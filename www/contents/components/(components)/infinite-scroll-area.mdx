@@ -73,7 +73,7 @@ const [count, setCount] = useState<number>(50)
 const resetRef = useRef<() => void>(noop)
 
 return (
-  <VStack gap="md" h="full" alignItems="flex-start">
+  <VStack h="full" alignItems="flex-start">
     <VStack
       ref={rootRef}
       borderWidth="1px"
@@ -354,7 +354,7 @@ const [disabled, setDisabled] = useState<boolean>(false)
 const [count, setCount] = useState<number>(50)
 
 return (
-  <VStack gap="md" h="full" alignItems="flex-start">
+  <VStack h="full" alignItems="flex-start">
     <InfiniteScrollArea
       disabled={disabled}
       loading={<Loading.Oval fontSize="2xl" />}
@@ -409,7 +409,7 @@ const resetRef = useRef<() => void>(noop)
 const [count, setCount] = useState<number>(50)
 
 return (
-  <VStack gap="md" h="full" alignItems="flex-start">
+  <VStack h="full" alignItems="flex-start">
     <InfiniteScrollArea
       resetRef={resetRef}
       loading={<Loading.Oval fontSize="2xl" />}

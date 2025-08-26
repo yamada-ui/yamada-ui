@@ -113,12 +113,48 @@ export const ErrorMessage: Story = () => {
   )
 }
 
+export const Required: Story = () => {
+  return (
+    <Fieldset.Root
+      helperMessage="Please provide your contact details below."
+      legend="Contact details"
+      required
+    >
+      <Field.Root label="Name">
+        <Input type="text" placeholder="Your name" />
+      </Field.Root>
+
+      <Field.Root label="Email address">
+        <Input type="email" placeholder="Your email address" />
+      </Field.Root>
+    </Fieldset.Root>
+  )
+}
+
 export const Disabled: Story = () => {
   return (
     <Fieldset.Root
       disabled
       helperMessage="Please provide your contact details below."
       legend="Contact details"
+    >
+      <Field.Root label="Name">
+        <Input type="text" placeholder="Your name" />
+      </Field.Root>
+
+      <Field.Root label="Email address">
+        <Input type="email" placeholder="Your email address" />
+      </Field.Root>
+    </Fieldset.Root>
+  )
+}
+
+export const ReadOnly: Story = () => {
+  return (
+    <Fieldset.Root
+      helperMessage="Please provide your contact details below."
+      legend="Contact details"
+      readOnly
     >
       <Field.Root label="Name">
         <Input type="text" placeholder="Your name" />

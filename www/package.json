@@ -11,7 +11,7 @@
     "dev:next": "next dev --turbopack",
     "dev": "run-p dev:*",
     "build:content": "velite --clean",
-    "build:next": "next build",
+    "build:next": "next build  --turbopack",
     "build": "run-s build:*",
     "start": "next start",
     "typecheck": "tsc --noEmit",

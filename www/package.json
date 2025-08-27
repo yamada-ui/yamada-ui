@@ -11,7 +11,7 @@
     "dev:next": "next dev --turbopack",
     "dev": "run-p dev:*",
     "build:content": "velite --clean",
-    "build:next": "next build",
+    "build:next": "next build  --turbopack",
     "build": "run-s build:*",
     "start": "next start",
     "typecheck": "tsc --noEmit",
@@ -22,6 +22,9 @@
     "gen:contributors": "tsx scripts/generate/contributors"
   },
   "dependencies": {
+    "@emotion/cache": "^11.14.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/weak-memoize": "^0.4.0",
     "@lucide/lab": "^0.1.2",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",

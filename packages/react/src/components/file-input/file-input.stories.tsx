@@ -282,7 +282,7 @@ export const Reset: Story = () => {
   }
 
   return (
-    <VStack gap="md">
+    <VStack>
       <Text>files: {value?.length ?? 0}</Text>
 
       <InputGroup.Root>
@@ -310,7 +310,7 @@ export const CustomControl: Story = () => {
   const [value, onChange] = useState<File[] | undefined>([])
 
   return (
-    <VStack gap="md">
+    <VStack>
       <Text>files: {value?.length}</Text>
 
       <FileInput placeholder="placeholder" value={value} onChange={onChange} />

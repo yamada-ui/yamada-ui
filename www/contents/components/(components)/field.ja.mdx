@@ -83,7 +83,7 @@ import { Field } from "@workspaces/ui"
 デフォルトでは、`true`に設定されています。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <Field.Root
     errorMessage="Email is required."
     helperMessage="We'll never share your email."
@@ -153,7 +153,7 @@ import { Field } from "@workspaces/ui"
 方向を変更する場合は、`orientation`に`horizontal`または`vertical`を設定します。デフォルトでは、`vertical`が設定されています。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["vertical", "horizontal"]}>
     {(orientation, index) => (
       <Field.Root
@@ -185,7 +185,7 @@ import { Field } from "@workspaces/ui"
 必須インジケーターをカスタマイズする場合は、`requiredIndicator`に`ReactNode`を設定します。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <Field.Root
     label="Email address"
     required
@@ -218,7 +218,7 @@ import { Field } from "@workspaces/ui"
 オプショナルインジケーターを使う場合は、`optionalIndicator`に`ReactNode`を設定します。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <Field.Root
     label="Email address"
     optionalIndicator={

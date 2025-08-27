@@ -401,6 +401,10 @@ export const pseudoClasses = {
    */
   _notChecked: "&:not(:checked):not([data-checked]):not([aria-checked=true])",
   /**
+   * The CSS `&:not(:empty)` pseudo-class.
+   */
+  _notEmpty: "&:not(:empty)",
+  /**
    * The CSS `&:not(:first-of-type)` pseudo-class.
    */
   _notFirst: "&:not(:first-of-type)",

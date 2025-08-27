@@ -108,21 +108,21 @@ export const indicatorStyle = defineComponentSlotStyle({
       label: {
         fontSize: "xs",
         minBoxSize: "3",
-        px: "1.5",
+        _notEmpty: { px: "1.5" },
       },
     },
     md: {
       label: {
         fontSize: "sm",
         minBoxSize: "4",
-        px: "2",
+        _notEmpty: { px: "2" },
       },
     },
     lg: {
       label: {
         fontSize: "md",
         minBoxSize: "5",
-        px: "2.5",
+        _notEmpty: { px: "2.5" },
       },
     },
   },

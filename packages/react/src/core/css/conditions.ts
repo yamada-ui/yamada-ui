@@ -86,10 +86,6 @@ export const attributes = {
    */
   _hasIcon: "&:has(> [data-icon])",
   /**
-   * The CSS `&[data-holiday]` attribute selector.
-   */
-  _holiday: "&[data-holiday]",
-  /**
    * The CSS `&[data-idle]` attribute selector.
    */
   _idle: "&[data-idle]",
@@ -139,10 +135,6 @@ export const attributes = {
    */
   _numeric: "&[data-numeric]",
   /**
-   * The CSS `&:where([data-outside])` attribute selector.
-   */
-  _outside: "&:where([data-outside])",
-  /**
    * The CSS `&:is([data-pressed], [aria-pressed=true])` attribute selector.
    */
   _pressed: "&:is([data-pressed], [aria-pressed=true])",
@@ -163,21 +155,13 @@ export const attributes = {
    */
   _rtl: "[dir=rtl] &",
   /**
-   * The CSS `&:is([data-selected], [aria-selected=true])` attribute selector.
-   */
-  _selected: "&:is([data-selected], [aria-selected=true])",
-  /**
    * The CSS `&:is([data-start], [data-group-start])` attribute selector.
    */
   _start: "&:is([data-start], [data-group-start])",
   /**
-   * The CSS `&[data-today]` attribute selector.
+   * The CSS `&:is([data-selected], [aria-selected=true])` attribute selector.
    */
-  _today: "&[data-today]",
-  /**
-   * The CSS `&:where([data-weekend])` attribute selector.
-   */
-  _weekend: "&:where([data-weekend])",
+  _selected: "&:is([data-selected], [aria-selected=true])",
   /**
    * The CSS `&:is([hidden], [data-hidden])` attribute selector.
    */

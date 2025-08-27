@@ -454,7 +454,6 @@ export const CustomComponent: Story = () => {
       colorScheme="green"
       alignItems="flex-start"
       borderWidth="1px"
-      gap="md"
       px="md"
       py="3"
       rounded="l2"

@@ -754,7 +754,7 @@ export const Thumbnails: Story = () => {
   )
 
   return (
-    <VStack gap="md">
+    <VStack>
       <Carousel.Root index={index} onChange={setIndex}>
         <Carousel.List>
           {sources.map((src, index) => (

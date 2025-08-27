@@ -6,4 +6,565 @@ source: components/tabs
 style: components/tabs/tabs.style.ts
 ---
 
+```tsx preview
+<Tabs.Root>
+  <Tabs.List>
+    <Tabs.Tab index={0}>孫悟空</Tabs.Tab>
+    <Tabs.Tab index={1}>ベジータ</Tabs.Tab>
+    <Tabs.Tab index={2}>フリーザ</Tabs.Tab>
+  </Tabs.List>
+
+  <Tabs.Panel index={0}>
+    クリリンのことか……クリリンのことかーーーっ！！！！！
+  </Tabs.Panel>
+  <Tabs.Panel index={1}>へっ！きたねぇ花火だ</Tabs.Panel>
+  <Tabs.Panel index={2}>
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+  </Tabs.Panel>
+</Tabs.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Tabs } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Tabs } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Tabs } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Tabs.Root>
+  <Tabs.List>
+    <Tabs.Tab />
+  </Tabs.List>
+  <Tabs.Panels>
+    <Tabs.Panel />
+  </Tabs.Panels>
+</Tabs.Root>
+```
+
+### Use items
+
+```tsx preview functional
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: "孫悟空",
+    },
+    {
+      panel: "へっ！きたねぇ花火だ",
+      tab: "ベジータ",
+    },
+    {
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: "フリーザ",
+    },
+  ],
+  [],
+)
+
+return (
+  <Tabs.Root items={items}>
+    <Tabs.List />
+    <Tabs.Panels />
+  </Tabs.Root>
+)
+```
+
+### Change Variants
+
+```tsx preview functional
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: "孫悟空",
+    },
+    {
+      panel: "へっ！きたねぇ花火だ",
+      tab: "ベジータ",
+    },
+    {
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: "フリーザ",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["line", "outline", "subtle", "plain"]}>
+      {(variant) => (
+        <Tabs.Root key={variant} variant={variant} items={items}>
+          <Tabs.List />
+          <Tabs.Panels />
+        </Tabs.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Size
+
+```tsx preview functional
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: "孫悟空",
+    },
+    {
+      panel: "へっ！きたねぇ花火だ",
+      tab: "ベジータ",
+    },
+    {
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: "フリーザ",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size) => (
+        <Tabs.Root key={size} size={size} items={items}>
+          <Tabs.List />
+          <Tabs.Panels />
+        </Tabs.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Select a Default Item
+
+```tsx preview functional
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: "孫悟空",
+    },
+    {
+      panel: "へっ！きたねぇ花火だ",
+      tab: "ベジータ",
+    },
+    {
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: "フリーザ",
+    },
+  ],
+  [],
+)
+
+return (
+  <Tabs.Root defaultIndex={1} items={items}>
+    <Tabs.List />
+    <Tabs.Panels />
+  </Tabs.Root>
+)
+```
+
+### Change Orientation
+
+```tsx preview functional
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: "孫悟空",
+    },
+    {
+      panel: "へっ！きたねぇ花火だ",
+      tab: "ベジータ",
+    },
+    {
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: "フリーザ",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["horizontal", "vertical"]}>
+      {(orientation) => (
+        <Tabs.Root key={orientation} orientation={orientation} items={items}>
+          <Tabs.List />
+          <Tabs.Panels />
+        </Tabs.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Alignment
+
+```tsx preview functional
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: "孫悟空",
+    },
+    {
+      panel: "へっ！きたねぇ花火だ",
+      tab: "ベジータ",
+    },
+    {
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: "フリーザ",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["start", "center", "end"]}>
+      {(align) => (
+        <Tabs.Root key={align} align={align} items={items}>
+          <Tabs.List />
+          <Tabs.Panels />
+        </Tabs.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Stretch to Container Width
+
+```tsx preview functional
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: "孫悟空",
+    },
+    {
+      panel: "へっ！きたねぇ花火だ",
+      tab: "ベジータ",
+    },
+    {
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: "フリーザ",
+    },
+  ],
+  [],
+)
+
+return (
+  <Tabs.Root fitted items={items}>
+    <Tabs.List />
+    <Tabs.Panels />
+  </Tabs.Root>
+)
+```
+
+### Disable
+
+```tsx preview functional
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: "孫悟空",
+    },
+    {
+      disabled: true,
+      panel: "へっ！きたねぇ花火だ",
+      tab: "ベジータ",
+    },
+    {
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: "フリーザ",
+    },
+  ],
+  [],
+)
+
+return (
+  <Tabs.Root items={items}>
+    <Tabs.List />
+    <Tabs.Panels />
+  </Tabs.Root>
+)
+```
+
+### Manual Activation
+
+By default, the focused tab is automatically activated. If you want to activate the tab at a specific time (when `Enter` or `Space` is pressed), set `manual` to `true`.
+
+```tsx preview functional
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: "孫悟空",
+    },
+    {
+      panel: "へっ！きたねぇ花火だ",
+      tab: "ベジータ",
+    },
+    {
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: "フリーザ",
+    },
+  ],
+  [],
+)
+
+return (
+  <Tabs.Root manual items={items}>
+    <Tabs.List />
+    <Tabs.Panels />
+  </Tabs.Root>
+)
+```
+
+### Make Links
+
+```tsx preview functional
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      asChild: true,
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: (
+        <Text as="a" href="#孫悟空">
+          孫悟空
+        </Text>
+      ),
+    },
+    {
+      asChild: true,
+      panel: "へっ！きたねぇ花火だ",
+      tab: (
+        <Text as="a" href="#ベジータ">
+          ベジータ
+        </Text>
+      ),
+    },
+    {
+      asChild: true,
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: (
+        <Text as="a" href="#フリーザ">
+          フリーザ
+        </Text>
+      ),
+    },
+  ],
+  [],
+)
+
+return (
+  <Tabs.Root items={items}>
+    <Tabs.List />
+    <Tabs.Panels />
+  </Tabs.Root>
+)
+```
+
+### Lazy Rendering
+
+```tsx preview functional
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: "孫悟空",
+    },
+    {
+      panel: "へっ！きたねぇ花火だ",
+      tab: "ベジータ",
+    },
+    {
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: "フリーザ",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["unmount", "keepMounted"]}>
+      {(lazyBehavior) => (
+        <Tabs.Root
+          key={lazyBehavior}
+          lazy
+          lazyBehavior={lazyBehavior}
+          items={items}
+        >
+          <Tabs.List />
+          <Tabs.Panels />
+        </Tabs.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Dynamic Tabs
+
+```tsx preview functional client
+const [index, setIndex] = useState(0)
+const [items, setItems] = useState<Required<Tabs.RootProps>["items"]>([
+  { id: uuid(), panel: "Tab Content", tab: "Tab" },
+  { id: uuid(), panel: "Tab Content", tab: "Tab" },
+  { id: uuid(), panel: "Tab Content", tab: "Tab" },
+])
+
+const onAddTab = () => {
+  const nextItems = [...items, { id: uuid(), panel: "Tab Content", tab: "Tab" }]
+  setItems(nextItems)
+  setIndex(nextItems.length - 1)
+}
+
+const onRemoveTab = (id: string) => {
+  const removeIndex = items.findIndex((item) => item.id === id)
+  const nextItems = items.filter((item) => item.id !== id)
+
+  setItems(nextItems)
+
+  if (removeIndex < index) {
+    setIndex(index - 1)
+  } else if (removeIndex === index) {
+    setIndex(Math.min(index, nextItems.length - 1))
+  }
+}
+
+return (
+  <Tabs.Root index={index} items={items} manual onChange={setIndex}>
+    <Tabs.List>
+      {items.map(({ id, tab }, index) => {
+        const hasRemove = items.length > 1
+
+        return (
+          <Tabs.Tab key={id} index={index} transition="none">
+            {tab}
+            {hasRemove ? (
+              <IconButton
+                as="span"
+                size="2xs"
+                variant="ghost"
+                aria-label="Remove Tab"
+                icon={<XIcon />}
+                role="button"
+                onClick={(ev) => {
+                  ev.stopPropagation()
+                  onRemoveTab(id!)
+                }}
+              />
+            ) : null}
+          </Tabs.Tab>
+        )
+      })}
+
+      <Button
+        size="xs"
+        variant="ghost"
+        role="tab"
+        startIcon={<PlusIcon />}
+        onClick={onAddTab}
+      >
+        Add Tab
+      </Button>
+    </Tabs.List>
+
+    {items.map(({ id, panel }, index) => (
+      <Tabs.Panel key={id} index={index}>
+        <Heading>
+          {panel} {id}
+        </Heading>
+
+        <Text>index: {index}</Text>
+        <Text>id: {id}</Text>
+      </Tabs.Panel>
+    ))}
+  </Tabs.Root>
+)
+```
+
+### Customize Tabs
+
+```tsx preview
+<Tabs.Root>
+  <Tabs.List borderWidth={1}>
+    <Tabs.Tab index={0}>孫悟空</Tabs.Tab>
+    <Tabs.Tab index={1}>ベジータ</Tabs.Tab>
+    <Tabs.Tab index={2}>フリーザ</Tabs.Tab>
+  </Tabs.List>
+
+  <Tabs.Panel index={0}>
+    クリリンのことか……クリリンのことかーーーっ！！！！！
+  </Tabs.Panel>
+  <Tabs.Panel index={1}>へっ！きたねぇ花火だ</Tabs.Panel>
+  <Tabs.Panel index={2}>
+    私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+  </Tabs.Panel>
+</Tabs.Root>
+```
+
+### Control
+
+```tsx preview functional client
+const [index, onChange] = useState<number>(0)
+
+const items = useMemo<Tabs.RootProps["items"]>(
+  () => [
+    {
+      panel: "クリリンのことか……クリリンのことかーーーっ！！！！！",
+      tab: "孫悟空",
+    },
+    {
+      panel: "へっ！きたねぇ花火だ",
+      tab: "ベジータ",
+    },
+    {
+      panel:
+        "私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……",
+      tab: "フリーザ",
+    },
+  ],
+  [],
+)
+
+return (
+  <Tabs.Root index={index} onChange={onChange} items={items}>
+    <Tabs.List />
+    <Tabs.Panels />
+  </Tabs.Root>
+)
+```

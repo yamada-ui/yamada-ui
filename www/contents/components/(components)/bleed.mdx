@@ -7,7 +7,7 @@ style: components/bleed/bleed.style.ts
 ---
 
 ```tsx preview
-<Card.Root maxW="xl">
+<Card.Root maxW="full">
   <Card.Header>
     <Heading size="lg">北斗の拳</Heading>
   </Card.Header>
@@ -160,18 +160,18 @@ To match the screen width, set `inline` to `full`.
 
 ```tsx preview iframe
 <Center w="full">
-  <VStack gap="lg" maxW="xl" alignItems="center">
-    <Bleed blockStart="md" inline="full">
+  <VStack gap="lg" maxW="full">
+    <Bleed blockStart="lg" inline="full">
       <Image
         src="https://hokuto-no-ken.jp/wp/wp-content/themes/hokuto_cms_40th/images/main_vs_bg_new.jpg"
         alt="北斗の拳"
-        maxH="lg"
+        maxH="xs"
         objectFit="cover"
         w="full"
       />
     </Bleed>
 
-    <Heading textAlign="center">
+    <Heading alignSelf="center">
       <Image
         src="https://hokuto-no-ken.jp/wp/wp-content/uploads/2017/03/title_hokuto.png"
         alt="北斗の拳"

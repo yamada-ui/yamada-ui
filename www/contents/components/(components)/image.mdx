@@ -1,9 +1,37 @@
 ---
 title: Image
-description: "`Image` is a component that displays images with fallback support."
+description: "`Image` is a component that displays images."
 storybook: components-image--basic
 source: components/image
 style: components/image/image.style.ts
 ---
 
+```tsx preview
+<Image
+  src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
+  alt="ドラゴンボール"
+  boxSize="xl"
+/>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Image } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Image } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Image } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Image />
+```

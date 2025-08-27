@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
+import type { FieldProps } from "../field"
 import type { FieldsetStyle } from "./fieldset.style"
 import { useId, useMemo } from "react"
 import { createSlotComponent, styled } from "../../core"
@@ -9,7 +10,10 @@ import { createContext, dataAttr, useSplitChildren } from "../../utils"
 import { fieldsetStyle } from "./fieldset.style"
 
 interface FieldsetContext
-  extends Pick<FieldsetRootProps, "disabled" | "invalid"> {
+  extends Pick<
+    FieldsetRootProps,
+    "disabled" | "invalid" | "readOnly" | "required"
+  > {
   id?: string
 }
 
@@ -22,13 +26,8 @@ export { FieldsetContext, useFieldsetContext }
 
 export interface FieldsetRootProps
   extends HTMLStyledProps<"fieldset">,
-    ThemeProps<FieldsetStyle> {
-  /**
-   * If `true`, the fieldset will be disabled.
-   *
-   * @default false
-   */
-  disabled?: boolean
+    ThemeProps<FieldsetStyle>,
+    FieldProps {
   /**
    * The fieldset error message to use.
    */
@@ -37,12 +36,6 @@ export interface FieldsetRootProps
    * The fieldset helper message to use.
    */
   helperMessage?: ReactNode
-  /**
-   * If `true`, the fieldset will be invalid.
-   *
-   * @default false
-   */
-  invalid?: boolean
   /**
    * The fieldset legend to use.
    */
@@ -95,6 +88,8 @@ export const FieldsetRoot = withProvider<"fieldset", FieldsetRootProps>(
     helperMessage,
     invalid,
     legend,
+    readOnly,
+    required,
     contentProps,
     errorMessageProps,
     headerProps,
@@ -126,8 +121,10 @@ export const FieldsetRoot = withProvider<"fieldset", FieldsetRootProps>(
         id,
         disabled,
         invalid,
+        readOnly,
+        required,
       }),
-      [id, disabled, invalid],
+      [id, disabled, invalid, readOnly, required],
     )
 
     return (

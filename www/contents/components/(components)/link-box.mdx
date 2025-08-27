@@ -6,4 +6,90 @@ source: components/link-box
 style: components/link-box/link-box.style.ts
 ---
 
+```tsx preview
+<LinkBox.Root
+  as="article"
+  layerStyle="panel"
+  alignItems="flex-start"
+  display="flex"
+  flexDirection="column"
+  gap="sm"
+  p="md"
+  rounded="l2"
+>
+  <Text>荒川弘</Text>
+
+  <Heading size="2xl">
+    <LinkBox.Overlay
+      href="https://ja.wikipedia.org/wiki/%E9%8B%BC%E3%81%AE%E9%8C%AC%E9%87%91%E8%A1%93%E5%B8%AB"
+      external
+    >
+      鋼の錬金術師
+    </LinkBox.Overlay>
+  </Heading>
+
+  <Text>
+    『鋼の錬金術師』（FULL METAL
+    ALCHEMIST）は、荒川弘による日本の漫画作品。『月刊少年ガンガン』（スクウェア・エニックス）において、2001年8月号から2010年7月号まで連載された。全108話。同年10月号には番外編が掲載された。略称は「ハガレン」。
+  </Text>
+</LinkBox.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { LinkBox } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { LinkBox } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { LinkBox } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<LinkBox.Root>
+  <LinkBox.Overlay />
+</LinkBox.Root>
+```
+
+### Nested Links
+
+```tsx preview
+<LinkBox.Root
+  as="article"
+  layerStyle="panel"
+  alignItems="flex-start"
+  display="flex"
+  flexDirection="column"
+  gap="sm"
+  p="md"
+  rounded="l2"
+>
+  <Text>荒川弘</Text>
+
+  <Heading size="2xl">
+    <LinkBox.Overlay
+      href="https://ja.wikipedia.org/wiki/%E9%8B%BC%E3%81%AE%E9%8C%AC%E9%87%91%E8%A1%93%E5%B8%AB"
+      external
+    >
+      鋼の錬金術師
+    </LinkBox.Overlay>
+  </Heading>
+
+  <Text>
+    『鋼の錬金術師』（FULL METAL
+    ALCHEMIST）は、荒川弘による日本の漫画作品。『月刊少年ガンガン』（スクウェア・エニックス）において、2001年8月号から2010年7月号まで連載された。全108話。同年10月号には番外編が掲載された。略称は「ハガレン」。
+  </Text>
+
+  <Link href="https://www.hagaren.jp/" external>
+    TVアニメオフィシャルサイト
+  </Link>
+</LinkBox.Root>
+```

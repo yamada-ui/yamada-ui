@@ -13,7 +13,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <VStack gap="md">
+    <VStack>
       <Text fontSize="6xl" truncated>
         私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
       </Text>

@@ -16,7 +16,7 @@ export const Basic = () => {
 
   return (
     <>
-      <HStack gap="md">
+      <HStack>
         <Input
           placeholder="text to be copied..."
           value={value}
@@ -38,7 +38,7 @@ export const Timeout = () => {
 
   return (
     <>
-      <HStack gap="md">
+      <HStack>
         <Input
           placeholder="text to be copied..."
           value={value}
@@ -61,7 +61,7 @@ export const DirectCopy = () => {
   const value = "孫悟空"
 
   return (
-    <HStack gap="md">
+    <HStack>
       <Input readOnly value={value} />
       <Button onClick={() => onCopy(value)}>
         {copied ? "Copied!" : "Copy"}

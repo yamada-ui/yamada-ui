@@ -16,7 +16,7 @@ const items = useMemo(
 )
 
 return (
-  <VStack gap="md">
+  <VStack>
     <For each={items}>
       {({ name, breathing }, index) => (
         <Card.Root key={index}>
@@ -63,7 +63,7 @@ import { For } from "@workspaces/ui"
 配列が空または未定義の場合にフォールバックコンポーネントをレンダリングするには、`fallback`プロパティを使用します。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For
     each={[]}
     fallback={
@@ -93,7 +93,7 @@ const items = useMemo(
 )
 
 return (
-  <VStack gap="md">
+  <VStack>
     <For each={items} filter={({ breathing }) => breathing.length == 1}>
       {({ name, breathing }, index) => (
         <Card.Root key={index}>
@@ -128,7 +128,7 @@ const items = useMemo(
 )
 
 return (
-  <VStack gap="md">
+  <VStack>
     <For each={items} sort={(a, b) => a.breathing.length - b.breathing.length}>
       {({ name, breathing }, index) => (
         <Card.Root key={index}>
@@ -163,7 +163,7 @@ const items = useMemo(
 )
 
 return (
-  <VStack gap="md">
+  <VStack>
     <For each={items} offset={1}>
       {({ name, breathing }, index) => (
         <Card.Root key={index}>
@@ -198,7 +198,7 @@ const items = useMemo(
 )
 
 return (
-  <VStack gap="md">
+  <VStack>
     <For each={items} limit={2}>
       {({ name, breathing }, index) => (
         <Card.Root key={index}>
@@ -233,7 +233,7 @@ const items = useMemo(
 )
 
 return (
-  <VStack gap="md">
+  <VStack>
     <For each={items} reverse>
       {({ name, breathing }, index) => (
         <Card.Root key={index}>

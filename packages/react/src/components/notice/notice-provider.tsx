@@ -43,7 +43,6 @@ type NoticePosition =
   | "top-right"
 
 /**
- * @private
  * Creates a position string from vertical and horizontal placement.
  */
 const createPositionFromPlacement = (
@@ -65,7 +64,6 @@ const placementMapping = {
 } as const
 
 /**
- * @private
  * Maps NoticePlacement to NoticePosition for the Toaster.
  */
 export const mapPlacementToPosition = (
@@ -99,6 +97,9 @@ const createMethods = (refs: {
   },
 })
 
+/**
+ * `NoticeProvider` is a provider component that manages notice placement and limits.
+ */
 export const NoticeProvider: FC<NoticeProviderProps> = ({
   children,
   containerRef,
@@ -147,7 +148,6 @@ interface NoticeProviderComponentProps {
 }
 
 /**
- * @private
  * NoticeProviderComponent is only used internally by NoticeProvider to render the Toaster.
  */
 const NoticeProviderComponent: FC<NoticeProviderComponentProps> = ({

@@ -1,4 +1,6 @@
 export { Notice } from "./notice"
 export type { NoticeProps } from "./notice"
+export { NoticeProvider, useNoticeContext } from "./notice-provider"
+export type { NoticeContext, NoticeProviderProps } from "./notice-provider"
 export { useNotice } from "./use-notice"
 export type { UseNoticeOptions } from "./use-notice"

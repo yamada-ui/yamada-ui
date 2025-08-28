@@ -489,7 +489,9 @@ export const UseClose = () => {
   }
 
   const onClose = () => {
-    if (ref.current) notice.close(ref.current)
+    if (ref.current) {
+      notice.close(ref.current)
+    }
   }
 
   const onCloseAll = () => {
@@ -521,13 +523,14 @@ export const UseUpdate = () => {
   }
 
   const onUpdate = () => {
-    if (ref.current)
+    if (ref.current) {
       notice.update(ref.current, {
         colorScheme: "blue",
         description: "よくも…よくも…オレの…ブルマを!!",
         duration: 30000,
         title: "ベジータ",
       })
+    }
   }
 
   return (

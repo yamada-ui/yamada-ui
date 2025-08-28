@@ -5,4 +5,250 @@ storybook: components-for--basic
 source: components/for
 ---
 
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={items}>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { For } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { For } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { For } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<For />
+```
+
+### フォールバック
+
+配列が空または未定義の場合にフォールバックコンポーネントをレンダリングするには、`fallback`プロパティを使用します。
+
+```tsx preview
+<VStack>
+  <For
+    each={[]}
+    fallback={
+      <EmptyState.Root
+        description="There are no items to show"
+        indicator={<BoxIcon />}
+      />
+    }
+  >
+    {(item, index) => <Text key={index}>{item}</Text>}
+  </For>
+</VStack>
+```
+
+### フィルター
+
+フィルタリングする場合は、`filter`プロパティを使用します。
+
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={items} filter={({ breathing }) => breathing.length == 1}>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### ソートする
+
+ソートする場合は、`sort`プロパティを使用します。
+
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={items} sort={(a, b) => a.breathing.length - b.breathing.length}>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### オフセットを変更する
+
+配列の途中の要素から開始する場合は、`offset`に開始位置を設定します。
+
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={items} offset={1}>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 表示件数を制限する
+
+表示件数を制限する場合は、`limit`を設定します。
+
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={items} limit={2}>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 並び順を反転させる
+
+並び順を反転させる場合は、`reverse`を`true`に設定します。
+
+```tsx preview functional
+const items = useMemo(
+  () => [
+    { name: "竈門炭治郎", breathing: ["水の呼吸", "日の呼吸"] },
+    { name: "我妻善逸", breathing: ["雷の呼吸"] },
+    { name: "嘴平伊之助", breathing: ["獣の呼吸"] },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={items} reverse>
+      {({ name, breathing }, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="md">{name}</Heading>
+          </Card.Header>
+
+          <Card.Body pt="xs">
+            <Text fontSize="sm" color="fg.muted">
+              {breathing.join(", ")}
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      )}
+    </For>
+  </VStack>
+)
+```

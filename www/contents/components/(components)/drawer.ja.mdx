@@ -6,4 +6,376 @@ source: components/drawer
 style: components/drawer/drawer.style.ts
 ---
 
+```tsx preview
+<Drawer.Root>
+  <Drawer.OpenTrigger>
+    <Button>Open Drawer</Button>
+  </Drawer.OpenTrigger>
+
+  <Drawer.Content>
+    <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+    <Drawer.Body>
+      『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Drawer.Body>
+
+    <Drawer.Footer>
+      <Drawer.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Drawer.CloseTrigger>
+      <Button colorScheme="primary">Wikipedia</Button>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer.Root>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Drawer } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Drawer } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Drawer } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Drawer.Root>
+  <Drawer.OpenTrigger />
+  <Drawer.Content>
+    <Drawer.Overlay />
+    <Drawer.CloseButton />
+    <Drawer.Header />
+    <Drawer.Body />
+    <Drawer.Footer />
+    <Drawer.CloseTrigger />
+  </Drawer.Content>
+</Drawer.Root>
+```
+
+:::note
+`Drawer.Overlay`と`Drawer.CloseButton`は、省略することができます。
+:::
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg", "xl", "full"]}>
+    {(size) => (
+      <Drawer.Root key={size} size={size}>
+        <Drawer.OpenTrigger>
+          <Button>Open "{size}" Drawer</Button>
+        </Drawer.OpenTrigger>
+
+        <Drawer.Content>
+          <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+          <Drawer.Body>
+            『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+          </Drawer.Body>
+
+          <Drawer.Footer>
+            <Drawer.CloseTrigger>
+              <Button variant="ghost">とじる</Button>
+            </Drawer.CloseTrigger>
+            <Button colorScheme="primary">Wikipedia</Button>
+          </Drawer.Footer>
+        </Drawer.Content>
+      </Drawer.Root>
+    )}
+  </For>
+</Wrap>
+```
+
+### 位置を変更する
+
+表示位置を変更するには、`placement`に`block-start`や`inline-start`などを設定します。デフォルトでは、`inline-end`が設定されています。
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["block-start", "inline-start", "inline-end", "block-end"]}>
+    {(placement) => (
+      <Drawer.Root key={placement} placement={placement}>
+        <Drawer.OpenTrigger>
+          <Button>Open "{placement}" Drawer</Button>
+        </Drawer.OpenTrigger>
+
+        <Drawer.Content>
+          <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+          <Drawer.Body>
+            『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+          </Drawer.Body>
+
+          <Drawer.Footer>
+            <Drawer.CloseTrigger>
+              <Button variant="ghost">とじる</Button>
+            </Drawer.CloseTrigger>
+            <Button colorScheme="primary">Wikipedia</Button>
+          </Drawer.Footer>
+        </Drawer.Content>
+      </Drawer.Root>
+    )}
+  </For>
+</Wrap>
+```
+
+### 所要時間を変更する
+
+所要時間を変更する場合は、`duration`に数値(秒)を設定します。
+
+```tsx preview
+<Drawer.Root duration={0.7}>
+  <Drawer.OpenTrigger>
+    <Button>Open Drawer</Button>
+  </Drawer.OpenTrigger>
+
+  <Drawer.Content>
+    <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+    <Drawer.Body>
+      『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Drawer.Body>
+
+    <Drawer.Footer>
+      <Drawer.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Drawer.CloseTrigger>
+      <Button colorScheme="primary">Wikipedia</Button>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer.Root>
+```
+
+### マウント時にスクロールをブロックしない
+
+デフォルトでは、パネルを開いた際に主要なコンテンツのスクロールをブロックしています。これは、アクセシビリティを確保するためです。もし、主要なコンテンツのスクロールをブロックしたくない場合は、`blockScrollOnMount`を`false`に設定します。
+
+```tsx preview
+<Drawer.Root blockScrollOnMount={false}>
+  <Drawer.OpenTrigger>
+    <Button>Open Drawer</Button>
+  </Drawer.OpenTrigger>
+
+  <Drawer.Content>
+    <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+    <Drawer.Body>
+      『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Drawer.Body>
+
+    <Drawer.Footer>
+      <Drawer.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Drawer.CloseTrigger>
+      <Button colorScheme="primary">Wikipedia</Button>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer.Root>
+```
+
+### 閉じるボタンをカスタマイズする
+
+`Drawer.CloseButton`に`props`などを渡して、カスタマイズしたい場合は、省略せずに設定します。
+
+```tsx preview
+<Drawer.Root>
+  <Drawer.OpenTrigger>
+    <Button>Open Drawer</Button>
+  </Drawer.OpenTrigger>
+
+  <Drawer.Content>
+    <Drawer.CloseButton colorScheme="red" />
+
+    <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+    <Drawer.Body>
+      『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Drawer.Body>
+
+    <Drawer.Footer>
+      <Drawer.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Drawer.CloseTrigger>
+      <Button colorScheme="primary">Wikipedia</Button>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer.Root>
+```
+
+### 閉じるボタンを無効にする
+
+閉じるボタンを無効にする場合は、`withCloseButton`を`false`に設定します。
+
+```tsx preview
+<Drawer.Root withCloseButton={false}>
+  <Drawer.OpenTrigger>
+    <Button>Open Drawer</Button>
+  </Drawer.OpenTrigger>
+
+  <Drawer.Content>
+    <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+    <Drawer.Body>
+      『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Drawer.Body>
+
+    <Drawer.Footer>
+      <Drawer.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Drawer.CloseTrigger>
+      <Button colorScheme="primary">Wikipedia</Button>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer.Root>
+```
+
+### ドラッグして閉じる
+
+`Drawer`をドラッグで閉じたい場合は、`closeOnDrag`を`true`に設定します。
+
+```tsx preview
+<Drawer.Root closeOnDrag>
+  <Drawer.OpenTrigger>
+    <Button>Open Drawer</Button>
+  </Drawer.OpenTrigger>
+
+  <Drawer.Content>
+    <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+    <Drawer.Body>
+      『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Drawer.Body>
+
+    <Drawer.Footer>
+      <Drawer.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Drawer.CloseTrigger>
+      <Button colorScheme="primary">Wikipedia</Button>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer.Root>
+```
+
+### ドラッグバーを非表示にする
+
+ドラッグバーを非表示にする場合は、`withDragBar`を`false`に設定します。
+
+```tsx preview
+<Drawer.Root closeOnDrag withDragBar={false}>
+  <Drawer.OpenTrigger>
+    <Button>Open Drawer</Button>
+  </Drawer.OpenTrigger>
+
+  <Drawer.Content>
+    <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+    <Drawer.Body>
+      『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Drawer.Body>
+
+    <Drawer.Footer>
+      <Drawer.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Drawer.CloseTrigger>
+      <Button colorScheme="primary">Wikipedia</Button>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer.Root>
+```
+
+### オーバーレイをカスタマイズする
+
+`Drawer.Overlay`に`props`などを渡して、カスタマイズしたい場合は、省略せずに設定します。
+
+```tsx preview
+<Drawer.Root>
+  <Drawer.OpenTrigger>
+    <Button>Open Drawer</Button>
+  </Drawer.OpenTrigger>
+
+  <Drawer.Overlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
+
+  <Drawer.Content>
+    <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+    <Drawer.Body>
+      『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Drawer.Body>
+
+    <Drawer.Footer>
+      <Drawer.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Drawer.CloseTrigger>
+      <Button colorScheme="primary">Wikipedia</Button>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer.Root>
+```
+
+### オーバーレイを無効にする
+
+パネルのオーバーレイを無効(非表示)にする場合は、`withOverlay`を`false`にします。
+
+```tsx preview
+<Drawer.Root withOverlay={false}>
+  <Drawer.OpenTrigger>
+    <Button>Open Drawer</Button>
+  </Drawer.OpenTrigger>
+
+  <Drawer.Content>
+    <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+    <Drawer.Body>
+      『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+    </Drawer.Body>
+
+    <Drawer.Footer>
+      <Drawer.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Drawer.CloseTrigger>
+      <Button colorScheme="primary">Wikipedia</Button>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer.Root>
+```
+
+### 制御する
+
+表示・非表示を制御するには、`open`と`onClose`を設定します。
+
+```tsx preview functional client
+const { open, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Drawer</Button>
+
+    <Drawer.Root open={open} onClose={onClose}>
+      <Drawer.Content>
+        <Drawer.Header>ドラゴンボール</Drawer.Header>
+
+        <Drawer.Body>
+          『ドラゴンボール』は、鳥山明による日本の漫画作品です。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+        </Drawer.Body>
+
+        <Drawer.Footer>
+          <Button variant="ghost" onClick={onClose}>
+            とじる
+          </Button>
+          <Button colorScheme="primary">Wikipedia</Button>
+        </Drawer.Footer>
+      </Drawer.Content>
+    </Drawer.Root>
+  </>
+)
+```

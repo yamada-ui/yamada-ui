@@ -17,8 +17,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "files": [
-    "dist",
-    "bin"
+    "dist"
   ],
   "sideEffects": false,
   "publishConfig": {
@@ -34,10 +33,11 @@
     "url": "https://github.com/yamada-ui/yamada-ui/issues"
   },
   "bin": {
-    "yamada-cli": "bin/index.js"
+    "yamada-cli": "dist/index.js"
   },
   "scripts": {
     "clean": "rimraf node_modules dist trace coverage .turbo .eslintcache",
+    "dev": "tsx src/index.ts",
     "build": "tsdown",
     "typecheck": " tsc --noEmit",
     "typetrace": "tsc --noEmit --generateTrace ./trace --incremental false",
@@ -46,21 +46,37 @@
     "format": "prettier . --ignore-path ../../.prettierignore --check --cache"
   },
   "dependencies": {
-    "chokidar": "^4.0.3",
+    "@yamada-ui/utils": "workspace:*",
+    "boxen": "^8.0.1",
     "cli-check-node": "^1.3.4",
-    "cli-handle-unhandled": "^1.1.2",
     "commander": "^14.0.0",
+    "diff": "^8.0.2",
     "esbuild": "^0.25.8",
+    "eslint": "^9.32.0",
+    "execa": "9.3.1",
     "glob": "^11.0.3",
+    "https-proxy-agent": "^7.0.6",
+    "listr2": "^9.0.1",
     "node-eval": "^2.0.0",
+    "node-fetch": "^3.3.2",
     "ora": "^8.2.0",
     "picocolors": "^1.1.1",
     "prettier": "^3.6.2",
-    "tar": "^7.4.3",
-    "typescript": "^5.9.2"
+    "prompts": "^2.4.2",
+    "rimraf": "^6.0.1",
+    "semver": "^7.7.2",
+    "sucrase": "^3.35.0",
+    "validate-npm-package-name": "^6.0.2",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "@types/prompts": "^2.4.9",
+    "@types/semver": "^7.7.0",
     "@types/update-notifier": "6.0.8",
+    "@types/validate-npm-package-name": "^4.0.2",
+    "@types/yamljs": "^0.2.34",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2",
     "update-notifier": "^7.3.1"
   }
 }

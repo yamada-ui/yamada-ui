@@ -1,18 +1,13 @@
-/**
- * CORE
- */
 export * from "./core"
 export * from "./theme"
 export * from "./utils"
 
-/**
- * COMPONENTS
- */
 export * from "./components/accordion"
 export * from "./components/airy"
 export * from "./components/alert"
 export * from "./components/alpha-slider"
 export * from "./components/aspect-ratio"
+export * from "./components/autocomplete"
 export * from "./components/avatar"
 export * from "./components/badge"
 export * from "./components/bleed"
@@ -20,9 +15,12 @@ export * from "./components/blockquote"
 export * from "./components/box"
 export * from "./components/breadcrumb"
 export * from "./components/button"
+export * from "./components/calendar"
 export * from "./components/card"
 export * from "./components/carousel"
 export * from "./components/center"
+export * from "./components/checkbox"
+export * from "./components/checkbox-card"
 export * from "./components/circle-progress"
 export * from "./components/client-only"
 export * from "./components/close-button"
@@ -55,7 +53,6 @@ export * from "./components/heading"
 export * from "./components/highlight"
 export * from "./components/hue-slider"
 export * from "./components/icon"
-export * from "./components/icon-button"
 export * from "./components/image"
 export * from "./components/indicator"
 export * from "./components/infinite-scroll-area"
@@ -80,6 +77,8 @@ export * from "./components/pin-input"
 export * from "./components/popover"
 export * from "./components/portal"
 export * from "./components/progress"
+export * from "./components/radio"
+export * from "./components/radio-card"
 export * from "./components/rating"
 export * from "./components/reorder"
 export * from "./components/resizable"
@@ -96,6 +95,7 @@ export * from "./components/slide"
 export * from "./components/slide-fade"
 export * from "./components/slider"
 export * from "./components/slot"
+export * from "./components/snacks"
 export * from "./components/stack"
 export * from "./components/stat"
 export * from "./components/status"
@@ -110,19 +110,7 @@ export * from "./components/toggle"
 export * from "./components/tooltip"
 export * from "./components/visually-hidden"
 export * from "./components/wrap"
-// export * from "./components/autocomplete"
-// export * from "./components/calendar"
-// export * from "./components/charts"
-// export * from "./components/checkbox"
-// export * from "./components/color-picker"
-// export * from "./components/notice"
-// export * from "./components/radio"
-// export * from "./components/snacks"
-// export * from "./components/table"
 
-/**
- * HOOKS
- */
 export * from "./hooks/use-animation"
 export * from "./hooks/use-async"
 export * from "./hooks/use-async-callback"
@@ -158,10 +146,5 @@ export * from "./hooks/use-token"
 export * from "./hooks/use-value"
 export * from "./hooks/use-window-event"
 
-/**
- * PROVIDERS
- */
 export * from "./providers/i18n-provider"
 export * from "./providers/ui-provider"
-
-export * as Client from "./client"

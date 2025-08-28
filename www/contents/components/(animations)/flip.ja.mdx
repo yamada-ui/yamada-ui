@@ -6,4 +6,103 @@ source: components/flip
 style: components/flip/flip.style.ts
 ---
 
+```tsx preview
+<Flip from={<AppleIcon fontSize="2xl" />} to={<CherryIcon fontSize="2xl" />} />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Flip } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Flip } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Flip } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Flip />
+```
+
+### 方向を変更する
+
+方向を変更する場合は、`orientation`に`vertical`または`horizontal`を設定します。デフォルトは`horizontal`です。
+
+```tsx preview
+<Flip
+  orientation="vertical"
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### 所要時間を変更する
+
+所要時間を変更する場合は、`duration`に数値(秒)を設定します。
+
+```tsx preview
+<Flip
+  duration={1.4}
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### 遅延させる
+
+切り替えを遅延させたい場合は、`delay`に数値(秒)を設定します。
+
+```tsx preview
+<Flip
+  delay={1}
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`にします。
+
+```tsx preview
+<Flip
+  disabled
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<Flip
+  readOnly
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### 制御する
+
+```tsx preview functional client
+const [value, onChange] = useState<KeyframeIdent>("from")
+
+return (
+  <Flip
+    from={<AppleIcon fontSize="2xl" />}
+    to={<CherryIcon fontSize="2xl" />}
+    value={value}
+    onChange={onChange}
+  />
+)
+```

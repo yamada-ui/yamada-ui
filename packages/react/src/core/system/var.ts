@@ -146,10 +146,15 @@ export function createVars(
               return tokenToVar(value).reference
             } else if (value in cssMap && cssMap[value]?.ref) {
               return cssMap[value].ref
+            } else if (fallbackValue) {
+              fallbackValue =
+                fallbackValue in cssMap && cssMap[fallbackValue]?.ref
+                  ? cssMap[fallbackValue]?.ref
+                  : fallbackValue
+
+              return `var(--${prefix}-${value}, ${fallbackValue})`
             } else {
-              return fallbackValue
-                ? `var(--${prefix}-${value}, ${fallbackValue})`
-                : `var(--${prefix}-${value})`
+              return `var(--${prefix}-${value})`
             }
           }
         })
@@ -324,13 +329,14 @@ export function mergeVars(...fns: CreateVars[]) {
 export function varAttr(
   value: StyleValueWithCondition<number | string> | undefined,
   token?: ThemeToken,
+  fallbackValue?: string,
 ): StyleValueWithCondition<number | string> | undefined {
   if (isUndefined(value) || isNull(value)) return value
 
   if (isObject(value) || isArray(value)) {
-    return replaceObject(value, (value) => varAttr(value, token))
+    return replaceObject(value, (value) => varAttr(value, token, fallbackValue))
   } else {
-    return token ? `{${token}.${value}, ${value}}` : value
+    return token ? `{${token}.${value}, ${fallbackValue ?? value}}` : value
   }
 }
 

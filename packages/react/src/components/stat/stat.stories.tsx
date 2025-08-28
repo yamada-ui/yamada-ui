@@ -44,8 +44,7 @@ export const Size: Story = () => {
           key={key}
           colorScheme={row}
           size={column}
-          helperMessage="Time to complete"
-          label="Downloads"
+          label="Time to complete"
           value={
             <>
               8<Stat.Unit>hr</Stat.Unit>

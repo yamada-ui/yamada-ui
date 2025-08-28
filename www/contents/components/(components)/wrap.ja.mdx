@@ -6,4 +6,34 @@ source: components/wrap
 style: components/wrap/wrap.style.ts
 ---
 
+```tsx preview
+<Wrap gap="md">
+  {Array.from({ length: 20 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
+</Wrap>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Wrap } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Wrap } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Wrap } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Wrap />
+```

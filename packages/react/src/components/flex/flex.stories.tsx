@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import type { FlexProps } from "../flex"
 import { useMemo } from "react"
-import { For } from "../../components/for"
 import { Box } from "../box"
 import { Flex, FlexPropsContext } from "../flex"
+import { For } from "../for"
 
 type Story = StoryFn<typeof Flex>
 

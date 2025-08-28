@@ -16,12 +16,8 @@ export const buttonStyle = defineComponentStyle({
     userSelect: "none",
     verticalAlign: "middle",
     whiteSpace: "nowrap",
-    _readOnly: {
-      layerStyle: "readOnly",
-    },
-    _disabled: {
-      layerStyle: "disabled",
-    },
+    _readOnly: { layerStyle: "readOnly" },
+    _disabled: { layerStyle: "disabled" },
   },
 
   props: {
@@ -31,42 +27,30 @@ export const buttonStyle = defineComponentStyle({
      * @default false
      */
     fullRounded: {
-      true: {
-        rounded: "full",
-      },
+      true: { rounded: "full" },
     },
   },
 
   variants: {
     ghost: {
       layerStyle: "ghost",
-      _hover: {
-        layerStyle: "ghost.hover",
-      },
+      _hover: { layerStyle: "ghost.hover" },
     },
     outline: {
       layerStyle: "outline",
-      _hover: {
-        layerStyle: "outline.hover",
-      },
+      _hover: { layerStyle: "outline.hover" },
     },
     solid: {
       layerStyle: "solid",
-      _hover: {
-        layerStyle: "solid.hover",
-      },
+      _hover: { layerStyle: "solid.hover" },
     },
     subtle: {
       layerStyle: "subtle",
-      _hover: {
-        layerStyle: "subtle.hover",
-      },
+      _hover: { layerStyle: "subtle.hover" },
     },
     surface: {
       layerStyle: "surface",
-      _hover: {
-        layerStyle: "surface.hover",
-      },
+      _hover: { layerStyle: "surface.hover" },
     },
   },
 
@@ -78,9 +62,7 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.8}",
       minW: "8",
       px: "2",
-      _icon: {
-        fontSize: "md",
-      },
+      _icon: { fontSize: "md" },
     },
     sm: {
       fontSize: "sm",
@@ -89,9 +71,7 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.9}",
       minW: "9",
       px: "3",
-      _icon: {
-        fontSize: "md",
-      },
+      _icon: { fontSize: "md" },
     },
     md: {
       fontSize: "md",
@@ -100,9 +80,7 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.10}",
       minW: "10",
       px: "3",
-      _icon: {
-        fontSize: "lg",
-      },
+      _icon: { fontSize: "lg" },
     },
     lg: {
       fontSize: "lg",
@@ -111,9 +89,7 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.11}",
       minW: "11",
       px: "4",
-      _icon: {
-        fontSize: "2xl",
-      },
+      _icon: { fontSize: "2xl" },
     },
     xl: {
       fontSize: "xl",
@@ -122,9 +98,7 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.12}",
       minW: "12",
       px: "5",
-      _icon: {
-        fontSize: "2xl",
-      },
+      _icon: { fontSize: "2xl" },
     },
     "2xl": {
       fontSize: "xl",
@@ -133,9 +107,7 @@ export const buttonStyle = defineComponentStyle({
       lineHeight: "{sizes.14}",
       minW: "14",
       px: "5",
-      _icon: {
-        fontSize: "2xl",
-      },
+      _icon: { fontSize: "2xl" },
     },
   },
 

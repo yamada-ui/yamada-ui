@@ -5,4 +5,242 @@ storybook: components-field--basic
 source: components/field
 ---
 
+```tsx preview
+<Field.Root label="Email address">
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Field } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Field } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Field } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Field.Root>
+  <Field.Label />
+  <Field.HelperMessage />
+  <Field.ErrorMessage />
+</Field.Root>
+```
+
+### Displaying a Helper Message
+
+To display a helper message, set a `ReactNode` to `helperMessage`.
+
+```tsx preview
+<Field.Root helperMessage="We'll never share your email." label="Email address">
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+Alternatively, you can customize using `Field.HelperMessage`.
+
+```tsx preview
+<Field.Root label="Email address">
+  <Input type="email" placeholder="your email address" />
+  <Field.HelperMessage color="warning">
+    We'll never share your email.
+  </Field.HelperMessage>
+</Field.Root>
+```
+
+### Displaying an Error Message
+
+To display an error message, set `invalid` to `true` and assign a `ReactNode` to `errorMessage`.
+
+```tsx preview
+<Field.Root errorMessage="Email is required." invalid label="Email address">
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+Alternatively, you can customize using `Field.ErrorMessage`.
+
+```tsx preview
+<Field.Root invalid label="Email address">
+  <Input type="email" placeholder="your email address" />
+  <Field.ErrorMessage color="success">Email is required.</Field.ErrorMessage>
+</Field.Root>
+```
+
+### Replacing Helper and Error Messages
+
+Error messages are only displayed when `invalid` is `true`. To replace the helper message with the error message when the error message is displayed, set `replace` to `true`.
+By default, it is set to `true`.
+
+```tsx preview
+<VStack>
+  <Field.Root
+    errorMessage="Email is required."
+    helperMessage="We'll never share your email."
+    invalid
+    label="Email address"
+    replace
+  >
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+
+  <Field.Root
+    errorMessage="Email is required."
+    helperMessage="We'll never share your email."
+    invalid
+    label="Email address"
+    replace={false}
+  >
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+</VStack>
+```
+
+### Required
+
+To make it required, set `required` to `true`.
+
+```tsx preview
+<Field.Root
+  helperMessage="We'll never share your email."
+  label="Email address"
+  required
+>
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<Field.Root
+  disabled
+  helperMessage="We'll never share your email."
+  label="Email address"
+>
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+### Read-Only
+
+To make it read-only, set `readOnly` to `true`.
+
+```tsx preview
+<Field.Root
+  helperMessage="We'll never share your email."
+  label="Email address"
+  readOnly
+>
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+### Change Direction
+
+To change the direction, set `orientation` to `horizontal` or `vertical`. By default, `vertical` is set.
+
+```tsx preview
+<VStack>
+  <For each={["vertical", "horizontal"]}>
+    {(orientation, index) => (
+      <Field.Root
+        key={index}
+        helperMessage="We'll never share your email."
+        label="Email address"
+        orientation={orientation}
+      >
+        <Input type="email" placeholder="your email address" />
+      </Field.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Customize the Label
+
+To customize the label, use `Field.Label`.
+
+```tsx preview
+<Field.Root>
+  <Field.Label color="success">Email address</Field.Label>
+  <Input type="email" placeholder="your email address" />
+</Field.Root>
+```
+
+### Customize the Required Indicator
+
+To customize the required indicator, set a `ReactNode` to `requiredIndicator`.
+
+```tsx preview
+<VStack>
+  <Field.Root
+    label="Email address"
+    required
+    requiredIndicator={
+      <Tag colorScheme="red" size="sm">
+        required
+      </Tag>
+    }
+  >
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+
+  <Field.Root required>
+    <Field.Label
+      requiredIndicator={
+        <Tag colorScheme="red" size="sm">
+          required
+        </Tag>
+      }
+    >
+      Email address
+    </Field.Label>
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+</VStack>
+```
+
+### Using an Optional Indicator
+
+To use an optional indicator, set a `ReactNode` to `optionalIndicator`.
+
+```tsx preview
+<VStack>
+  <Field.Root
+    label="Email address"
+    optionalIndicator={
+      <Tag colorScheme="primary" size="sm">
+        optional
+      </Tag>
+    }
+  >
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+
+  <Field.Root>
+    <Field.Label
+      optionalIndicator={
+        <Tag colorScheme="primary" size="sm">
+          optional
+        </Tag>
+      }
+    >
+      Email address
+    </Field.Label>
+    <Input type="email" placeholder="your email address" />
+  </Field.Root>
+</VStack>
+```

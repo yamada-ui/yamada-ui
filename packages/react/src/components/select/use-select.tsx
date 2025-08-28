@@ -3,9 +3,12 @@
 import type { ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type {
+  ComboboxItem,
+  ComboboxItemWithValue,
   UseComboboxItemProps,
   UseComboboxProps,
 } from "../../hooks/use-combobox"
+import type { Dict } from "../../utils"
 import type { FieldProps } from "../field"
 import { cloneElement, isValidElement, useCallback, useMemo } from "react"
 import { useCombobox, useComboboxItem } from "../../hooks/use-combobox"
@@ -25,19 +28,23 @@ import {
 } from "../../utils"
 import { useFieldProps } from "../field"
 
-export interface SelectRenderProps extends SelectItemWithValue {
+interface SelectRenderProps extends ComboboxItemWithValue {
   count: number
   index: number
   separator: string
 }
 
-const defaultRender = ({
+export interface SelectItemRender {
+  (props: SelectRenderProps): ReactNode
+}
+
+const defaultRender: SelectItemRender = ({
   count,
   index,
   label,
   separator,
   value,
-}: SelectRenderProps) => {
+}) => {
   const last = count - 1 === index
 
   return (
@@ -47,20 +54,6 @@ const defaultRender = ({
     </span>
   )
 }
-
-interface SelectSharedItem extends Omit<HTMLProps, "children" | "value"> {
-  label: ReactNode
-}
-
-export interface SelectItemWithValue extends SelectSharedItem {
-  value?: string
-}
-
-export interface SelectItemWithItems extends SelectSharedItem {
-  items: SelectItemWithValue[]
-}
-
-export type SelectItem = SelectItemWithItems | SelectItemWithValue
 
 interface SelectContext extends Pick<UseSelectReturn, "max" | "value"> {}
 
@@ -82,11 +75,17 @@ export interface UseSelectProps<Y extends string | string[] = string>
    */
   defaultValue?: Y
   /**
+   * If `true`, include placeholder in options.
+   *
+   * @default true
+   */
+  includePlaceholder?: boolean
+  /**
    * If provided, generate options based on items.
    *
    * @default '[]'
    */
-  items?: SelectItem[]
+  items?: ComboboxItem[]
   /**
    * The maximum selectable value.
    */
@@ -101,12 +100,6 @@ export interface UseSelectProps<Y extends string | string[] = string>
    * The placeholder for select.
    */
   placeholder?: string
-  /**
-   * If `true`, include placeholders in options.
-   *
-   * @default true
-   */
-  placeholderInOptions?: boolean
   /**
    * The function to render the selected items.
    */
@@ -138,10 +131,10 @@ export const useSelect = <Y extends string | string[] = string>(
       closeOnSelect = !multiple,
       defaultValue = (multiple ? [] : "") as Y,
       disabled,
+      includePlaceholder = !multiple,
       items: itemProp = [],
       max,
       placeholder,
-      placeholderInOptions = !multiple,
       readOnly,
       render = defaultRender,
       separator = ",",
@@ -176,11 +169,27 @@ export const useSelect = <Y extends string | string[] = string>(
     },
     [max, setValue],
   )
+  const items = useMemo<ComboboxItem[]>(() => {
+    const items = [...itemProp]
+
+    if (placeholder)
+      items.unshift({
+        hidden: !includePlaceholder,
+        label: placeholder,
+        value: "",
+      })
+
+    return items
+  }, [itemProp, placeholder, includePlaceholder])
+  const empty = useMemo(
+    () => !items.filter(({ hidden }) => !hidden).length,
+    [items],
+  )
   const {
     descendants,
     interactive,
     open,
-    getContentProps,
+    getContentProps: getComboboxContentProps,
     getSeparatorProps,
     getTriggerProps,
     onActiveDescendant,
@@ -198,20 +207,8 @@ export const useSelect = <Y extends string | string[] = string>(
     ...eventProps,
     ...rest,
   })
-  const items = useMemo<SelectItem[]>(() => {
-    const items = [...itemProp]
-
-    if (placeholder)
-      items.unshift({
-        hidden: !placeholderInOptions,
-        label: placeholder,
-        value: "",
-      })
-
-    return items
-  }, [itemProp, placeholder, placeholderInOptions])
-  const valueMap = useMemo<{ [key: string]: SelectItemWithValue }>(() => {
-    const valueMap: { [key: string]: SelectItemWithValue } = {}
+  const valueMap = useMemo<{ [key: string]: ComboboxItemWithValue }>(() => {
+    const valueMap: { [key: string]: ComboboxItemWithValue } = {}
 
     items.forEach((item) => {
       if ("items" in item) {
@@ -229,7 +226,7 @@ export const useSelect = <Y extends string | string[] = string>(
 
     return valueMap
   }, [items])
-  const selectedItems = useMemo<SelectItemWithValue[]>(() => {
+  const selectedItems = useMemo<ComboboxItemWithValue[]>(() => {
     if (isArray(value)) {
       if (value.length) {
         return toArray(value.map((value) => valueMap[value]))
@@ -246,7 +243,7 @@ export const useSelect = <Y extends string | string[] = string>(
     return selectedItems.map((item, index) => {
       const component = render({ count, index, separator, ...item })
 
-      if (isValidElement<any>(component)) {
+      if (isValidElement<Dict>(component)) {
         return cloneElement(component, { ...component.props, key: index })
       } else {
         return component
@@ -274,6 +271,11 @@ export const useSelect = <Y extends string | string[] = string>(
     [children, getTriggerProps, labelId, placeholder],
   )
 
+  const getContentProps: PropGetter = useCallback(
+    (props) => getComboboxContentProps({ hidden: empty, ...props }),
+    [empty, getComboboxContentProps],
+  )
+
   const getIconProps: PropGetter = useCallback(
     (props) => ({ ...dataProps, ...props }),
     [dataProps],
@@ -288,10 +290,7 @@ export const useSelect = <Y extends string | string[] = string>(
         ...props,
         onClick: handlerAll(props.onClick, onClear),
         onKeyDown: handlerAll(props.onKeyDown, (ev) =>
-          runKeyAction(ev, {
-            Enter: onClear,
-            Escape: onClear,
-          }),
+          runKeyAction(ev, { Enter: onClear, Space: onClear }),
         ),
       }),
     [getIconProps, onClear, t],
@@ -299,12 +298,12 @@ export const useSelect = <Y extends string | string[] = string>(
 
   return {
     descendants,
+    includePlaceholder,
     interactive,
     items,
     max,
     open,
     placeholder,
-    placeholderInOptions,
     setValue,
     value,
     valueMap,

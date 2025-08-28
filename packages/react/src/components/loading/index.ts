@@ -1,5 +1,5 @@
 export * from "./loading.style"
-export type { LoadingProps, LoadingScheme } from "./loading"
+export type { LoadingScheme } from "./loading"
 export { LoadingPropsContext, useLoadingPropsContext } from "./loading"
 export * from "./loading-provider"
 export * as Loading from "./namespace"

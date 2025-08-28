@@ -5,4 +5,336 @@ storybook: hooks-useinfinitescroll--basic
 source: hooks/use-infinite-scroll
 ---
 
-### 使い方
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+const { ref, finish } = useInfiniteScroll({
+  onLoad: ({ finish, index }) => {
+    console.log("onLoad", index)
+    setCount((prev) => prev + 50)
+    if (index >= 5) finish()
+  },
+})
+
+return (
+  <VStack>
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+
+    {!finish ? (
+      <Center ref={ref} w="full">
+        <Loading.Oval fontSize="2xl" />
+      </Center>
+    ) : null}
+  </VStack>
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useInfiniteScroll } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useInfiniteScroll } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useInfiniteScroll } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+const { ref, finish } = useInfiniteScroll()
+```
+
+### ビューポートを指定する
+
+ビューポートを指定する場合は、`rootRef`に`ref`を設定します。
+
+:::note
+`rootRef`が設定されない場合は、ブラウザのビューポートが使用されます。
+:::
+
+```tsx preview functional iframe client
+const rootRef = useRef<HTMLDivElement | null>(null)
+const resetRef = useRef<() => void>(noop)
+const [count, setCount] = useState<number>(50)
+const { ref, finish } = useInfiniteScroll({
+  resetRef,
+  rootRef,
+  onLoad: ({ finish, index }) => {
+    console.log("onLoad", index)
+    setCount((prev) => prev + 50)
+    if (index >= 5) finish()
+  },
+})
+
+return (
+  <VStack h="full" alignItems="flex-start">
+    <VStack
+      ref={rootRef}
+      borderWidth="1px"
+      overflowY="auto"
+      p="lg"
+      h="sm"
+      rounded="l2"
+    >
+      {Array(count)
+        .fill(0)
+        .map((_, index) => (
+          <Card.Root key={index}>
+            <Card.Header>
+              <Heading size="xl">天元突破グレンラガン</Heading>
+            </Card.Header>
+
+            <Card.Body>
+              <Text>
+                いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+              </Text>
+            </Card.Body>
+          </Card.Root>
+        ))}
+
+      {!finish ? (
+        <Center ref={ref} w="full">
+          <Loading.Oval fontSize="2xl" />
+        </Center>
+      ) : null}
+    </VStack>
+
+    <Button onClick={() => resetRef.current()}>Reset</Button>
+  </VStack>
+)
+```
+
+### rootMarginを設定する
+
+[rootMargin](https://developer.mozilla.org/ja/docs/Web/API/Intersection_Observer_API#rootmargin)を設定する場合は、`rootMargin`に文字列を設定します。
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+const { ref, finish } = useInfiniteScroll({
+  rootMargin: "300px 0px 0px 0px",
+  onLoad: ({ finish, index }) => {
+    console.log("onLoad", index)
+    setCount((prev) => prev + 50)
+    if (index >= 5) finish()
+  },
+})
+
+return (
+  <VStack>
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+
+    {!finish ? (
+      <Center ref={ref} w="full">
+        <Loading.Oval fontSize="2xl" />
+      </Center>
+    ) : null}
+  </VStack>
+)
+```
+
+### thresholdを設定する
+
+[threshold](https://developer.mozilla.org/ja/docs/Web/API/Intersection_Observer_API#threshold)を設定する場合は、`threshold`に数値を設定します。
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+const { ref, finish } = useInfiniteScroll({
+  threshold: 1,
+  onLoad: ({ finish, index }) => {
+    console.log("onLoad", index)
+    setCount((prev) => prev + 50)
+    if (index >= 5) finish()
+  },
+})
+
+return (
+  <VStack>
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+
+    {!finish ? (
+      <Center ref={ref} w="full">
+        <Loading.Oval fontSize="2xl" />
+      </Center>
+    ) : null}
+  </VStack>
+)
+```
+
+### 初回に読み込む
+
+初回に読み込む場合は、`initialLoad`を`true`に設定します。デフォルトでは、`initialLoad`が`false`に設定されており、初回(`index=0`)の`onLoad`は実行されません。
+
+`true`: スクロール量に関わらず、初回の`onLoad`は実行され、提供される`index`は`0`から始まります。\
+`false`: スクロールが一定に達すると`onLoad`が実行され、提供される`index`は`1`から始まります。
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+const { ref, finish } = useInfiniteScroll({
+  initialLoad: true,
+  onLoad: ({ finish, index }) => {
+    console.log("onLoad", index)
+    setCount((prev) => prev + 50)
+    if (index >= 5) finish()
+  },
+})
+
+return (
+  <VStack>
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+
+    {!finish ? (
+      <Center ref={ref} w="full">
+        <Loading.Oval fontSize="2xl" />
+      </Center>
+    ) : null}
+  </VStack>
+)
+```
+
+### 開始するindexを変更する
+
+開始する`index`を変更する場合は、`startIndex`に数値を設定します。デフォルトは、`1`です。
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+const { ref, finish } = useInfiniteScroll({
+  startIndex: 3,
+  onLoad: ({ finish, index }) => {
+    console.log("onLoad", index)
+    setCount((prev) => prev + 50)
+    if (index >= 5) finish()
+  },
+})
+
+return (
+  <VStack>
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+
+    {!finish ? (
+      <Center ref={ref} w="full">
+        <Loading.Oval fontSize="2xl" />
+      </Center>
+    ) : null}
+  </VStack>
+)
+```
+
+### 反転させる
+
+反転させる場合は、`reverse`を`true`に設定します。デフォルトは、`false`です。
+
+```tsx preview functional iframe client
+const rootRef = useRef<HTMLDivElement>(null)
+const [count, setCount] = useState<number>(50)
+const { ref, finish } = useInfiniteScroll({
+  reverse: true,
+  rootRef,
+  onLoad: ({ finish, index }) => {
+    console.log("onLoad", index)
+    setCount((prev) => prev + 50)
+    if (index >= 5) finish()
+  },
+})
+
+return (
+  <VStack ref={rootRef} gap="md" h="full" overflow="auto">
+    {!finish ? (
+      <Center ref={ref} w="full">
+        <Loading.Oval fontSize="2xl" />
+      </Center>
+    ) : null}
+
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+  </VStack>
+)
+```

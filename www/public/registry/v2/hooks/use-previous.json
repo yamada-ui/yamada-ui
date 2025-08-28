@@ -1,0 +1,16 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport { useEffect, useRef } from \"react\"\n\n/**\n * `usePrevious` is a custom hook for obtaining the previous value.\n *\n * @see https://yamada-ui.com/hooks/use-previous\n */\nexport const usePrevious = <Y>(value: Y) => {\n  const ref = useRef<undefined | Y>(undefined)\n\n  useEffect(() => {\n    ref.current = value\n  }, [value])\n\n  return ref.current\n}\n"
+    }
+  ]
+}

@@ -6,4 +6,60 @@ source: components/mark
 style: components/mark/mark.style.ts
 ---
 
+```tsx preview
+<Text>
+  領域展開<Mark colorScheme="warning">無量空処</Mark>
+</Text>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Mark } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Mark } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Mark } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Mark />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "accent"]}>
+    {(variant, index) => (
+      <Text key={index}>
+        <Mark variant={variant} colorScheme="warning">
+          {toTitleCase(variant)}
+        </Mark>
+      </Text>
+    )}
+  </For>
+</Wrap>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Text key={index}>
+        <Mark colorScheme={colorScheme}>{toTitleCase(colorScheme)}</Mark>
+      </Text>
+    )}
+  </For>
+</Wrap>
+```

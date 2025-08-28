@@ -3,14 +3,13 @@ import type { SubmitHandler } from "react-hook-form"
 import { PropsTable } from "#storybook"
 import { useRef, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
-import { Button } from "../../components/button"
-import { PlusIcon } from "../../components/icon"
-import { HStack, VStack } from "../../components/stack"
-import { Text } from "../../components/text"
 import { COLOR_SCHEMES, toTitleCase } from "../../utils"
+import { Button, IconButton } from "../button"
 import { Field } from "../field"
 import { For } from "../for"
-import { IconButton } from "../icon-button"
+import { PlusIcon } from "../icon"
+import { HStack, VStack } from "../stack"
+import { Text } from "../text"
 import { Wrap } from "../wrap"
 import { FileButton } from "./file-button"
 
@@ -131,7 +130,7 @@ export const Disabled: Story = () => {
         helperMessage="Please select a file to upload."
         label="Upload file"
       >
-        <FileButton alignSelf="flex-start">Upload</FileButton>
+        <FileButton justifySelf="flex-start">Upload</FileButton>
       </Field.Root>
     </>
   )
@@ -170,7 +169,7 @@ export const Readonly: Story = () => {
         label="Upload file"
         readOnly
       >
-        <FileButton alignSelf="flex-start">Upload</FileButton>
+        <FileButton justifySelf="flex-start">Upload</FileButton>
       </Field.Root>
     </>
   )
@@ -205,7 +204,7 @@ export const Invalid: Story = () => {
       </Wrap>
 
       <Field.Root errorMessage="File is required." invalid label="Upload file">
-        <FileButton alignSelf="flex-start">Upload</FileButton>
+        <FileButton justifySelf="flex-start">Upload</FileButton>
       </Field.Root>
     </>
   )
@@ -229,7 +228,7 @@ export const Reset: Story = () => {
   }
 
   return (
-    <VStack gap="md">
+    <VStack>
       <Text>files: {files?.length ?? 0}</Text>
 
       <HStack>

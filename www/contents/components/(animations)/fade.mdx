@@ -6,4 +6,78 @@ source: components/fade
 style: components/fade/fade.style.ts
 ---
 
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <Fade open={open} borderWidth={1} p="md" rounded="l2">
+      その打球、消えるよ
+    </Fade>
+  </VStack>
+)
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Fade } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Fade } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Fade } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Fade />
+```
+
+### Change the Duration
+
+To change the duration, set a number (in seconds) to `duration`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <Fade open={open} duration={0.4} borderWidth={1} p="md" rounded="l2">
+      その打球、消えるよ
+    </Fade>
+  </VStack>
+)
+```
+
+### Unmount on Exit
+
+To unmount the component when it is not visible, set `unmountOnExit` to `true`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack align="flex-start">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <Fade open={open} unmountOnExit borderWidth={1} p="md" rounded="l2">
+      その打球、消えるよ
+    </Fade>
+
+    <Box borderWidth={1} p="md" rounded="l2" w="full">
+      俺はたった今からデータを捨てる！そして俺は過去を凌駕する！
+    </Box>
+  </VStack>
+)
+```

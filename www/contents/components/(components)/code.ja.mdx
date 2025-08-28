@@ -6,4 +6,70 @@ source: components/code
 style: components/code/code.style.ts
 ---
 
+```tsx preview
+<Code>console.log("Hello, Yamada!")</Code>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Code } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Code } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Code } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Code />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack alignItems="flex-start">
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant, index) => (
+      <Code key={index} variant={variant}>
+        console.log("Hello, Yamada!")
+      </Code>
+    )}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack alignItems="flex-start">
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size, index) => (
+      <Code key={index} size={size}>
+        console.log("Hello, Yamada!")
+      </Code>
+    )}
+  </For>
+</VStack>
+```
+
+### カラースキーマを変更する
+
+```tsx preview
+<VStack alignItems="flex-start">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Code key={index} colorScheme={colorScheme}>
+        console.log("Hello, Yamada!")
+      </Code>
+    )}
+  </For>
+</VStack>
+```

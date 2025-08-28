@@ -9,8 +9,6 @@ import type {
   WithoutThemeProps,
 } from "../../core"
 import type { ReactNodeOrFunction } from "../../utils"
-import type { ButtonGroupProps } from "../button"
-import type { IconButtonProps } from "../icon-button"
 import type { PaginationStyle } from "./pagination.style"
 import type { Page, UsePaginationProps } from "./use-pagination"
 import { cloneElement, isValidElement, useMemo } from "react"
@@ -26,7 +24,6 @@ import {
   ChevronsRightIcon,
   EllipsisIcon,
 } from "../icon"
-import { IconButton } from "../icon-button"
 import { paginationStyle } from "./pagination.style"
 import {
   PaginationContext,
@@ -36,7 +33,7 @@ import {
 
 export interface PaginationRootProps
   extends WithoutThemeProps<
-      Omit<ButtonGroupProps, "onChange" | "page">,
+      Omit<ButtonGroup.RootProps, "onChange" | "page">,
       PaginationStyle
     >,
     ThemeProps<PaginationStyle>,
@@ -277,9 +274,14 @@ export const PaginationRoot = withProvider<
 
     return (
       <PaginationContext value={context}>
-        <ButtonGroup as="nav" size={size} variant={variant} {...getRootProps()}>
+        <ButtonGroup.Root
+          as="nav"
+          size={size}
+          variant={variant}
+          {...getRootProps()}
+        >
           {computedChildren}
-        </ButtonGroup>
+        </ButtonGroup.Root>
       </PaginationContext>
     )
   },
@@ -323,10 +325,10 @@ export const PaginationItems: FC<PaginationItemsProps> = ({
   )
 }
 
-export interface PaginationItemProps extends IconButtonProps {}
+export interface PaginationItemProps extends ButtonGroup.IconItemProps {}
 
 export const PaginationItem = withContext<"button", PaginationItemProps>(
-  IconButton,
+  ButtonGroup.IconItem,
   "item",
 )()
 

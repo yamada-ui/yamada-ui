@@ -1,0 +1,25 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": { "components": ["picture"], "hooks": [], "providers": [] },
+  "section": "components",
+  "sources": [
+    {
+      "name": "image.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const imageStyle = defineComponentStyle({})\n\nexport type ImageStyle = typeof imageStyle\n"
+    },
+    {
+      "name": "image.tsx",
+      "content": "\"use client\"\n\nimport type { CSSProps, HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { ImageStyle } from \"./image.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { imageStyle } from \"./image.style\"\n\nexport interface ImageProps\n  extends HTMLStyledProps<\"img\">,\n    ThemeProps<ImageStyle> {\n  /**\n   * The CSS `object-fit` property.\n   */\n  fit?: CSSProps[\"objectFit\"]\n}\n\nconst {\n  PropsContext: ImagePropsContext,\n  usePropsContext: useImagePropsContext,\n  withContext,\n} = createComponent<ImageProps, ImageStyle>(\"image\", imageStyle)\n\nexport { ImagePropsContext, useImagePropsContext }\n\n/**\n * `Image` is a component that displays images with fallback support.\n *\n * @see https://yamada-ui.com/components/image\n */\nexport const Image = withContext(\"img\")(undefined, ({ fit, ...rest }) => ({\n  objectFit: fit,\n  ...rest,\n}))\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export * from \"./image.style\"\nexport { Image, ImagePropsContext, useImagePropsContext } from \"./image\"\nexport {\n  Image as Img,\n  ImagePropsContext as ImgPropsContext,\n  useImagePropsContext as useImgPropsContext,\n} from \"./image\"\nexport type { ImageProps } from \"./image\"\nexport type { ImageProps as ImgProps } from \"./image\"\n"
+    }
+  ]
+}

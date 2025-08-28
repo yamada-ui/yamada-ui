@@ -1,0 +1,24 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": ["flex"],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./wrap.style\"\nexport type { WrapProps } from \"./wrap\"\nexport { useWrapPropsContext, Wrap, WrapPropsContext } from \"./wrap\"\n"
+    },
+    {
+      "name": "wrap.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const wrapStyle = defineComponentStyle({\n  base: {\n    flexWrap: \"wrap\",\n  },\n})\n\nexport type WrapStyle = typeof wrapStyle\n"
+    },
+    {
+      "name": "wrap.tsx",
+      "content": "\"use client\"\n\nimport type { ThemeProps, WithoutThemeProps } from \"@yamada-ui/react\"\nimport type { FlexProps } from \"../flex\"\nimport type { WrapStyle } from \"./wrap.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { Flex } from \"../flex\"\nimport { wrapStyle } from \"./wrap.style\"\n\nexport interface WrapProps\n  extends WithoutThemeProps<FlexProps, WrapStyle>,\n    ThemeProps<WrapStyle> {}\n\nconst {\n  PropsContext: WrapPropsContext,\n  usePropsContext: useWrapPropsContext,\n  withContext,\n} = createComponent<WrapProps, WrapStyle>(\"wrap\", wrapStyle)\n\nexport { useWrapPropsContext, WrapPropsContext }\n\n/**\n * `Wrap` is a component that has `wrap` set on `Flex`. It inherits convenient style shorthand from `Flex`.\n *\n * @see https://yamada-ui.com/components/wrap\n */\nexport const Wrap = withContext<\"div\", WrapProps>(Flex)()\n"
+    }
+  ]
+}

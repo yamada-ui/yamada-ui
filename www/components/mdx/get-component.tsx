@@ -2,15 +2,17 @@ import type { ComponentType } from "react"
 import type { Transform } from "sucrase"
 import { burger } from "@lucide/lab"
 import * as Components from "@yamada-ui/react"
-import { Client, isFunction, Text } from "@yamada-ui/react"
+import { isFunction, Text } from "@yamada-ui/react"
 import React, { isValidElement } from "react"
 import { transform as originalTransform } from "sucrase"
+import { wait } from "@/utils/async"
 
 const components = {
   burger,
   React,
+  wait,
   ...React,
-  ...(process.env.NODE_ENV === "development" ? Client : Components),
+  ...Components,
 }
 
 function trim(code: string) {

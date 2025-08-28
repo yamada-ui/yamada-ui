@@ -17,6 +17,7 @@ import {
 interface ExportedType {
   name: string
   as?: string
+  namespace?: string
 }
 
 interface Prop {
@@ -85,10 +86,11 @@ function shouldIgnoreProperty(property: Symbol) {
   return external || excluded
 }
 
-function extractTypeExports(code: string) {
+async function extractTypeExports(path: string, prev?: Partial<ExportedType>) {
+  const code = await readFile(path, "utf-8")
   const exportedTypes: ExportedType[] = []
 
-  const regexp = /export type\s*{([^}]+)}/g
+  let regexp = /export type\s*{([^}]+)}/g
   let match = regexp.exec(code)
 
   while (match != null) {
@@ -99,8 +101,30 @@ function extractTypeExports(code: string) {
 
       const [name, , as] = row.split(" ")
 
-      if (name) exportedTypes.push({ as, name })
+      if (name) exportedTypes.push({ ...prev, as, name })
     })
+
+    match = regexp.exec(code)
+  }
+
+  regexp = /export \* as (\w+) from "\.\/(\w+(?:-namespace)?)"/g
+  match = regexp.exec(code)
+
+  while (match != null) {
+    const [, namespace, fileName] = match
+
+    if (namespace && fileName?.endsWith("namespace")) {
+      const namespacePath =
+        path.split("/").slice(0, -1).join("/") + "/" + `${fileName}.ts`
+
+      exportedTypes.push(
+        ...(await extractTypeExports(namespacePath, {
+          namespace: prev?.namespace
+            ? `${prev.namespace}.${namespace}`
+            : namespace,
+        })),
+      )
+    }
 
     match = regexp.exec(code)
   }
@@ -262,7 +286,7 @@ async function main() {
 
   const start = process.hrtime.bigint()
 
-  spinner.start("Getting config")
+  spinner.start("Getting tsconfig")
 
   const { config } = readConfigFile(CONFIG_PATH, sys.readFile)
   const { fileNames, options } = parseJsonConfigFileContent(
@@ -271,42 +295,32 @@ async function main() {
     path.dirname(CONFIG_PATH),
   )
   const { getSourceFile, getTypeChecker } = createProgram(fileNames, options)
-  const dirents = await readdir(ENTRY_PATH, { withFileTypes: true })
 
-  spinner.succeed("Got config")
+  spinner.succeed("Got tsconfig")
 
   spinner.start("Generating props types")
+
+  const dirents = await readdir(ENTRY_PATH, { withFileTypes: true })
+  const targets = process.argv.slice(2)
 
   await Promise.all(
     dirents.map(async (dirent) => {
       if (!dirent.isDirectory()) return
+
+      if (targets.length && !targets.includes(dirent.name)) return
 
       const dirPath = path.join(dirent.parentPath, dirent.name)
       const relativePath = dirPath.replace(process.cwd() + "/", "")
       const filePaths = fileNames.filter((fileName) =>
         fileName.startsWith(dirPath + "/"),
       )
-      const exportedTypes: ExportedType[] = []
-      const namespace = filePaths.some((filePath) =>
-        filePath.endsWith("namespace.ts"),
-      )
+      const indexPath = path.join(dirPath, "index.ts")
+      const exportedTypes = await extractTypeExports(indexPath)
 
-      if (namespace) {
-        const namespacePath = path.join(dirPath, "namespace.ts")
-        const namespace = await readFile(namespacePath, "utf-8")
-
-        exportedTypes.push(...extractTypeExports(namespace))
-      } else {
-        const indexPath = path.join(dirPath, "index.ts")
-        const index = await readFile(indexPath, "utf-8")
-
-        exportedTypes.push(...extractTypeExports(index))
-      }
-
-      const data: { [key: string]: Props } = {}
+      const data: { [key: string]: Props | { [key: string]: Props } } = {}
 
       await Promise.all(
-        exportedTypes.map(async ({ as, name }) => {
+        exportedTypes.map(async ({ as, name, namespace }) => {
           if (shouldIgnoreTypeName(name)) {
             spinner.info(
               `Omitted type: ${c.yellow(name)} (${path.join(relativePath, "index.ts")})`,
@@ -321,6 +335,9 @@ async function main() {
                 if (!sourceFile) return
 
                 const componentName = (as ?? name).replace(/Props$/, "")
+
+                if (!componentName) return
+
                 const props = await extractPropsOfTypeName(
                   sourceFile,
                   getTypeChecker(),
@@ -333,20 +350,19 @@ async function main() {
                     )
                 })
 
-                if (!isEmptyObject(props)) data[componentName] = props
+                if (isEmptyObject(props)) return
+
+                if (namespace) {
+                  data[namespace] ??= {}
+                  data[namespace][componentName] = props
+                } else {
+                  data[componentName] = props
+                }
               }),
             )
           }
         }),
       )
-
-      if (!namespace && Object.keys(data).length > 1) {
-        spinner.warn(
-          `Multiple components: ${c.yellow(Object.keys(data).join(", "))} (${path.join(relativePath, "index.ts")})`,
-        )
-
-        spinner.start("Generating props types")
-      }
 
       if (isEmptyObject(data)) {
         spinner.info(
@@ -356,7 +372,19 @@ async function main() {
         spinner.start("Generating props types")
       } else {
         const sortedData = Object.fromEntries(
-          Object.entries(data).sort(([a], [b]) => a.localeCompare(b)),
+          Object.entries(data)
+            .sort(([a], [b]) => a.localeCompare(b))
+            .map(([key, data]) => {
+              if ("type" in Object.values(data)[0]) {
+                return [key, data]
+              } else {
+                const sortedData = Object.fromEntries(
+                  Object.entries(data).sort(([a], [b]) => a.localeCompare(b)),
+                )
+
+                return [key, sortedData]
+              }
+            }),
         )
 
         await writeFileWithFormat(

@@ -8,6 +8,7 @@ import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { readFile } from "fs/promises"
 import { createTranslator } from "next-intl"
 import path from "path"
+import { pathToFileURL } from "url"
 import { getLang, langs } from "@/utils/i18n"
 import { getPathname } from "@/utils/route"
 
@@ -70,8 +71,9 @@ export async function generateDocMap(docs: Doc[]) {
 
   for (let { locale, status, path, title } of docs) {
     const lang = getLang(locale)
+    const langPath = pathToFileURL(`${MESSAGES_PATH}/${lang}.json`).href
     const messages = (
-      await import(`${MESSAGES_PATH}/${lang}.json`, {
+      await import(langPath, {
         with: { type: "json" },
       })
     ).default

@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "monorepo": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to use a monorepo."
+    },
+    "path": {
+      "type": "string",
+      "default": "./components/ui",
+      "description": "The path to the workspace."
+    },
+    "format": {
+      "type": "object",
+      "description": "The configuration for the format section.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to use Prettier."
+        }
+      }
+    },
+    "lint": {
+      "type": "object",
+      "description": "The configuration for the lint section.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to use ESLint."
+        }
+      }
+    },
+    "jsx": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to use JSX."
+    },
+    "theme": {
+      "type": "object",
+      "description": "The configuration for the theme section.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "default": "./theme",
+          "description": "The path to the theme section."
+        }
+      }
+    },
+    "components": {
+      "type": "object",
+      "description": "The configuration for the components section.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "default": "./components",
+          "description": "The path to the components section."
+        },
+        "overwrite": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to overwrite the components section when adding components."
+        },
+        "dependencies": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to include dependencies when adding components."
+        },
+        "dependents": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to include dependents when adding components."
+        }
+      }
+    },
+    "hooks": {
+      "type": "object",
+      "description": "The configuration for the hooks section.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "default": "./hooks",
+          "description": "The path to the hooks section."
+        },
+        "overwrite": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to overwrite the hooks section when adding hooks."
+        },
+        "dependencies": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to include dependencies when adding hooks."
+        },
+        "dependents": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to include dependents when adding hooks."
+        }
+      }
+    },
+    "providers": {
+      "type": "object",
+      "description": "The configuration for the providers section.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "default": "./providers",
+          "description": "The path to the providers section."
+        },
+        "overwrite": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to overwrite the providers section when adding providers."
+        },
+        "dependencies": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to include dependencies when adding providers."
+        },
+        "dependents": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to include dependents when adding providers."
+        }
+      }
+    }
+  }
+}

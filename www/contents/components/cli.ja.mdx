@@ -3,6 +3,203 @@ title: CLI
 description: CLIコマンドを使用してコンポーネントを生成する方法を学ぶ。
 ---
 
-## インストール
-
 ## 使い方
+
+:::warning
+下記のコマンドを実行する前に、`@yamada-ui/cli`をインストールして`init`コマンドを実行する必要があります。詳しくは、[こちら](/docs/get-started/cli)をご覧ください。
+:::
+
+### コンポーネントを追加する
+
+`add`コマンドを実行すると、プロジェクトに指定したコンポーネントと依存関係が追加されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add box
+```
+
+```bash [npm]
+npm yamada-cli add box
+```
+
+```bash [yarn]
+yarn yamada-cli add box
+```
+
+```bash [bun]
+bun yamada-cli add box
+```
+
+:::
+
+:::note
+指定したコンポーネントに依存しているコンポーネントもすべて追加されます。
+:::
+
+コンポーネントを指定しない場合は、利用可能なすべてのコンポーネントが追加されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add
+```
+
+```bash [npm]
+npm yamada-cli add
+```
+
+```bash [yarn]
+yarn yamada-cli add
+```
+
+```bash [bun]
+bun yamada-cli add
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli add [options] [components...]
+
+add a component to your project
+
+Arguments:
+  components           components to add
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --overwrite      overwrite existing files. (default: false)
+  -i, --install        install dependencies (default: false)
+  -s, --sequential     run tasks sequentially. (default: false)
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### 差分を確認する
+
+`diff`コマンドを実行すると、指定したコンポーネントのローカルとリモートの差分を確認できます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli diff box
+```
+
+```bash [npm]
+npm yamada-cli diff box
+```
+
+```bash [yarn]
+yarn yamada-cli diff box
+```
+
+```bash [bun]
+bun yamada-cli diff box
+```
+
+:::
+
+コンポーネントを指定しない場合は、ローカルにあるすべてのコンポーネントの差分を確認できます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli diff
+```
+
+```bash [npm]
+npm yamada-cli diff
+```
+
+```bash [yarn]
+yarn yamada-cli diff
+```
+
+```bash [bun]
+bun yamada-cli diff
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli diff [options] [component]
+
+check for updates against the registry
+
+Arguments:
+  component            component to check
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -s, --sequential     run tasks sequentially. (default: false)
+  -d, --detail         show detailed changes (default: false)
+  -h, --help           display help for command
+```
+
+### コンポーネントを更新する
+
+`update`コマンドを実行すると、指定したコンポーネントを更新します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli update box
+```
+
+```bash [npm]
+npm yamada-cli update box
+```
+
+```bash [yarn]
+yarn yamada-cli update box
+```
+
+```bash [bun]
+bun yamada-cli update box
+```
+
+:::
+
+コンポーネントを指定しない場合は、ローカルにあるすべてのコンポーネントが更新されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli update
+```
+
+```bash [npm]
+npm yamada-cli update
+```
+
+```bash [yarn]
+yarn yamada-cli update
+```
+
+```bash [bun]
+bun yamada-cli update
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli update [options] [components...]
+
+update components in your project
+
+Arguments:
+  components           components to update
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -i, --install        install dependencies (default: false)
+  -s, --sequential     run tasks sequentially. (default: false)
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```

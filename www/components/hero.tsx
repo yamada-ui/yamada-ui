@@ -31,7 +31,7 @@ export function Hero({
         </VStack>
 
         {primaryButtonProps || secondaryButtonProps ? (
-          <ButtonGroup size="xs">
+          <ButtonGroup.Root size="xs">
             {primaryButtonProps ? (
               <NextLinkButton fontSize="sm" {...primaryButtonProps} />
             ) : null}
@@ -42,7 +42,7 @@ export function Hero({
                 {...secondaryButtonProps}
               />
             ) : null}
-          </ButtonGroup>
+          </ButtonGroup.Root>
         ) : null}
       </VStack>
     </Center>

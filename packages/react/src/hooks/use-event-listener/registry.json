@@ -1,0 +1,21 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": {
+    "components": ["number-input", "popover", "tooltip"],
+    "hooks": ["use-clickable", "use-focus"],
+    "providers": []
+  },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport type { EventMap, EventType } from \"@yamada-ui/react\"\nimport { useCallback, useEffect, useRef } from \"react\"\nimport { useEnvironment, isFunction, useCallbackRef } from \"@yamada-ui/react\"\n\nexport const useEventListener = <Y extends EventType>(\n  target: (() => EventTarget | null) | EventTarget | null | undefined,\n  ev: Y,\n  handler: (ev: EventMap[Y]) => void,\n  options?: AddEventListenerOptions | boolean,\n) => {\n  const { getDocument } = useEnvironment()\n  const listener = useCallbackRef(handler)\n\n  useEffect(() => {\n    const el = isFunction(target) ? target() : (target ?? getDocument())\n\n    if (!el) return\n\n    el.addEventListener(\n      ev,\n      listener as EventListenerOrEventListenerObject,\n      options,\n    )\n\n    return () => {\n      el.removeEventListener(\n        ev,\n        listener as EventListenerOrEventListenerObject,\n        options,\n      )\n    }\n  }, [ev, target, options, listener, handler, getDocument])\n\n  return () => {\n    const el = isFunction(target) ? target() : (target ?? document)\n\n    el?.removeEventListener(\n      ev,\n      listener as EventListenerOrEventListenerObject,\n      options,\n    )\n  }\n}\n\nexport const useEventListeners = () => {\n  const listeners = useRef(new Map())\n  const currentListeners = listeners.current\n\n  const add = useCallback(\n    <Y extends EventType>(\n      el: EventTarget,\n      ev: Y,\n      listener: (ev: EventMap[Y]) => void,\n      options?: AddEventListenerOptions | boolean,\n    ) => {\n      listeners.current.set(listener, { el, ev, options })\n\n      el.addEventListener(\n        ev,\n        listener as EventListenerOrEventListenerObject,\n        options,\n      )\n    },\n    [],\n  )\n\n  const remove = useCallback(\n    <Y extends EventType>(\n      el: EventTarget,\n      ev: Y,\n      listener: (ev: EventMap[Y]) => void,\n      options?: boolean | EventListenerOptions,\n    ) => {\n      el.removeEventListener(\n        ev,\n        listener as EventListenerOrEventListenerObject,\n        options,\n      )\n\n      listeners.current.delete(listener)\n    },\n    [],\n  )\n\n  useEffect(\n    () => () => {\n      currentListeners.forEach(({ el, ev, options }, key) =>\n        remove(el, ev, key, options),\n      )\n    },\n    [remove, currentListeners],\n  )\n\n  return { add, remove }\n}\n"
+    }
+  ]
+}

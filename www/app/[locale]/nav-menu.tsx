@@ -1,12 +1,11 @@
 "use client"
 
 import type { NextLinkButtonProps } from "@/components"
-import type { ButtonGroupProps } from "@yamada-ui/react"
 import { ButtonGroup, handlerAll } from "@yamada-ui/react"
 import { NextLinkButton } from "@/components"
 import { usePathname } from "@/i18n"
 
-export interface NavMenuProps extends ButtonGroupProps {
+export interface NavMenuProps extends ButtonGroup.RootProps {
   items: { href: string; label: string }[]
   itemProps?: Omit<NextLinkButtonProps, "href">
   onClose?: () => void
@@ -16,7 +15,7 @@ export function NavMenu({ items, itemProps, onClose, ...rest }: NavMenuProps) {
   const pathname = usePathname()
 
   return (
-    <ButtonGroup as="nav" size="sm" variant="ghost" gap="xs" {...rest}>
+    <ButtonGroup.Root as="nav" size="sm" variant="ghost" gap="xs" {...rest}>
       {items.map(({ href, label }) => (
         <NextLinkButton
           key={href}
@@ -34,6 +33,6 @@ export function NavMenu({ items, itemProps, onClose, ...rest }: NavMenuProps) {
           {label}
         </NextLinkButton>
       ))}
-    </ButtonGroup>
+    </ButtonGroup.Root>
   )
 }

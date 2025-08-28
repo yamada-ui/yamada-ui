@@ -6,6 +6,7 @@ import type { FieldStyle } from "./field.style"
 import { isValidElement, useId, useMemo, useState } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { createContext, dataAttr, useSplitChildren } from "../../utils"
+import { useFieldsetContext } from "../fieldset"
 import { fieldStyle } from "./field.style"
 
 export interface FieldContext
@@ -176,7 +177,7 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
       <FieldContext value={context}>
         <styled.div
           data-disabled={dataAttr(disabled)}
-          // data-focus={dataAttr(focused)}
+          data-focus={dataAttr(focused)}
           data-invalid={dataAttr(invalid)}
           data-readonly={dataAttr(readOnly)}
           {...rest}
@@ -192,8 +193,6 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
               </FieldLabel>
             ) : null)}
 
-          {omittedChildren}
-
           {customHelperMessage ||
             (helperMessage ? (
               <FieldHelperMessage {...helperMessageProps}>
@@ -207,6 +206,8 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
                 {errorMessage}
               </FieldErrorMessage>
             ) : null)}
+
+          {omittedChildren}
         </styled.div>
       </FieldContext>
     )
@@ -241,18 +242,26 @@ export const FieldLabel = withContext<"label", FieldLabelProps>(
     requiredIndicator = null,
     ...rest
   }) => {
-    const context = useFieldContext()
+    const fieldsetContext = useFieldsetContext()
+    const fieldContext = useFieldContext()
 
-    required ??= context?.required
+    id ??= fieldContext?.id
+    htmlFor ??= fieldContext?.id
+    required ??= fieldContext?.required ?? fieldsetContext?.required
+
+    const disabled = fieldContext?.disabled ?? fieldsetContext?.disabled
+    const invalid = fieldContext?.invalid ?? fieldsetContext?.invalid
+    const readOnly = fieldContext?.readOnly ?? fieldsetContext?.readOnly
+    const focused = fieldContext?.focused
 
     return (
       <styled.label
-        id={id ?? context?.labelId}
-        htmlFor={htmlFor ?? context?.id}
-        data-disabled={dataAttr(context?.disabled)}
-        data-focus={dataAttr(context?.focused)}
-        data-invalid={dataAttr(context?.invalid)}
-        data-readonly={dataAttr(context?.readOnly)}
+        id={id}
+        htmlFor={htmlFor}
+        data-disabled={dataAttr(disabled)}
+        data-focus={dataAttr(focused)}
+        data-invalid={dataAttr(invalid)}
+        data-readonly={dataAttr(readOnly)}
         {...rest}
       >
         {children}
@@ -293,11 +302,20 @@ export interface FieldHelperMessageProps extends HTMLStyledProps<"span"> {}
 
 export const FieldHelperMessage = withContext<"span", FieldHelperMessageProps>(
   (props) => {
-    const { helperMessageId, invalid, replace } = useFieldContext() ?? {}
+    const fieldsetContext = useFieldsetContext()
+    const {
+      helperMessageId,
+      invalid = fieldsetContext?.invalid,
+      replace,
+    } = useFieldContext() ?? {}
 
-    if (replace && invalid) return null
-
-    return <styled.span id={helperMessageId} {...props} />
+    return (
+      <styled.span
+        id={helperMessageId}
+        hidden={replace && invalid ? true : false}
+        {...props}
+      />
+    )
   },
   "helperMessage",
 )()
@@ -306,11 +324,18 @@ export interface FieldErrorMessageProps extends HTMLStyledProps<"span"> {}
 
 export const FieldErrorMessage = withContext<"span", FieldErrorMessageProps>(
   (props) => {
-    const { errorMessageId, invalid } = useFieldContext() ?? {}
+    const fieldsetContext = useFieldsetContext()
+    const { errorMessageId, invalid = fieldsetContext?.invalid } =
+      useFieldContext() ?? {}
 
-    if (!invalid) return null
-
-    return <styled.span id={errorMessageId} aria-live="polite" {...props} />
+    return (
+      <styled.span
+        id={errorMessageId}
+        aria-live={invalid ? "polite" : undefined}
+        hidden={!invalid}
+        {...props}
+      />
+    )
   },
   "errorMessage",
 )()

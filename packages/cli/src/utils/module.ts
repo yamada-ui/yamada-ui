@@ -1,10 +1,10 @@
+import { isObject } from "@yamada-ui/utils"
 import { build } from "esbuild"
 import { realpathSync } from "fs"
 import nodeEval from "node-eval"
 import { Script } from "vm"
-import { isObject } from "./assertion.js"
 
-export const getModule = async (file: string, cwd: string) => {
+export async function getModule(file: string, cwd: string) {
   const result = await build({
     absWorkingDir: cwd,
     bundle: true,

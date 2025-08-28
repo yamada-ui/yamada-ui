@@ -20,7 +20,7 @@ import { ToggleGroupContext, useToggleGroup } from "./use-toggle-group"
  *
  * @see https://yamada-ui.com/components/toggle
  */
-export interface ToggleGroupProps<Y extends string | string[] = string>
+export interface ToggleGroupRootProps<Y extends string | string[] = string>
   extends Omit<
       WithoutThemeProps<GroupProps, ToggleStyle>,
       "defaultValue" | "onChange" | "value"
@@ -28,8 +28,8 @@ export interface ToggleGroupProps<Y extends string | string[] = string>
     UseToggleGroupProps<Y>,
     ThemeProps<ToggleStyle> {}
 
-export const ToggleGroup = component<"div", ToggleGroupProps>(
-  (props: ToggleGroupProps) => {
+export const ToggleGroupRoot = component<"div", ToggleGroupRootProps>(
+  (props: ToggleGroupRootProps) => {
     const [, { colorScheme, size, variant, attached, ...rest }] =
       useRootComponentProps(props, "group", {
         transferProps: ["size", "variant", "colorScheme"],
@@ -73,6 +73,6 @@ export const ToggleGroup = component<"div", ToggleGroupProps>(
   "group",
 )() as GenericsComponent<{
   <Y extends string | string[] = string>(
-    props: ToggleGroupProps<Y>,
+    props: ToggleGroupRootProps<Y>,
   ): ReactElement
 }>

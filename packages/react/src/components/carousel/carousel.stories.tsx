@@ -2,7 +2,7 @@ import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
 import { useMemo, useRef, useState } from "react"
 import { COLOR_SCHEMES, dataAttr } from "../../utils"
-import { Button, ButtonGroup } from "../button"
+import { ButtonGroup } from "../button"
 import { Center } from "../center"
 import { ArrowLeftIcon, ArrowRightIcon, CircleIcon } from "../icon"
 import { Image } from "../image"
@@ -754,7 +754,7 @@ export const Thumbnails: Story = () => {
   )
 
   return (
-    <VStack gap="md">
+    <VStack>
       <Carousel.Root index={index} onChange={setIndex}>
         <Carousel.List>
           {sources.map((src, index) => (
@@ -851,8 +851,8 @@ export const CustomComponent: Story = () => {
               color="transparent"
               fill="colorScheme.solid/40"
               fontSize="2xl"
-              _selected={{ fill: "colorScheme.solid" }}
               _hover={{ _notSelected: { fill: "colorScheme.solid/70" } }}
+              _selected={{ fill: "colorScheme.solid" }}
             />
           </Center>
         )}
@@ -894,8 +894,8 @@ export const CustomControl: Story = () => {
         <Carousel.Indicators />
       </Carousel.Root>
 
-      <ButtonGroup>
-        <Button
+      <ButtonGroup.Root>
+        <ButtonGroup.Item
           disabled={sources.length === 50}
           onClick={() => {
             const num = (sources.length + 1).toString().padStart(2, "0")
@@ -909,8 +909,8 @@ export const CustomControl: Story = () => {
           }}
         >
           Add
-        </Button>
-        <Button
+        </ButtonGroup.Item>
+        <ButtonGroup.Item
           disabled={sources.length === 1}
           onClick={() => {
             if (index === sources.length - 1) setIndex((prev) => prev - 1)
@@ -919,43 +919,51 @@ export const CustomControl: Story = () => {
           }}
         >
           Remove
-        </Button>
-      </ButtonGroup>
+        </ButtonGroup.Item>
+      </ButtonGroup.Root>
 
       <VStack gap="sm">
         <Text>State</Text>
-        <ButtonGroup>
-          <Button onClick={() => setIndex(0)}>Home</Button>
-          <Button
+        <ButtonGroup.Root>
+          <ButtonGroup.Item onClick={() => setIndex(0)}>Home</ButtonGroup.Item>
+          <ButtonGroup.Item
             onClick={() =>
               setIndex((prev) => (prev === 0 ? sources.length - 1 : prev - 1))
             }
           >
             Prev
-          </Button>
-          <Button
+          </ButtonGroup.Item>
+          <ButtonGroup.Item
             onClick={() =>
               setIndex((prev) => (prev === sources.length - 1 ? 0 : prev + 1))
             }
           >
             Next
-          </Button>
-          <Button onClick={() => setIndex(sources.length - 1)}>End</Button>
-        </ButtonGroup>
+          </ButtonGroup.Item>
+          <ButtonGroup.Item onClick={() => setIndex(sources.length - 1)}>
+            End
+          </ButtonGroup.Item>
+        </ButtonGroup.Root>
       </VStack>
 
       <VStack gap="sm">
         <Text>Ref</Text>
-        <ButtonGroup>
-          <Button onClick={() => controlRef.current?.scrollTo(0)}>Home</Button>
-          <Button onClick={() => controlRef.current?.scrollPrev()}>Prev</Button>
-          <Button onClick={() => controlRef.current?.scrollNext()}>Next</Button>
-          <Button
+        <ButtonGroup.Root>
+          <ButtonGroup.Item onClick={() => controlRef.current?.scrollTo(0)}>
+            Home
+          </ButtonGroup.Item>
+          <ButtonGroup.Item onClick={() => controlRef.current?.scrollPrev()}>
+            Prev
+          </ButtonGroup.Item>
+          <ButtonGroup.Item onClick={() => controlRef.current?.scrollNext()}>
+            Next
+          </ButtonGroup.Item>
+          <ButtonGroup.Item
             onClick={() => controlRef.current?.scrollTo(sources.length - 1)}
           >
             End
-          </Button>
-        </ButtonGroup>
+          </ButtonGroup.Item>
+        </ButtonGroup.Root>
       </VStack>
     </>
   )

@@ -6,4 +6,77 @@ source: components/link
 style: components/link/link.style.ts
 ---
 
+```tsx preview
+<Link href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB">
+  ドラゴンボール - wikipedia
+</Link>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Link } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Link } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Link } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Link />
+```
+
+### Change variant
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["plain", "underline"]}>
+    {(variant) => (
+      <Link
+        key={variant}
+        variant={variant}
+        href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
+      >
+        ドラゴンボール - wikipedia
+      </Link>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning", "link"]}>
+    {(colorScheme) => (
+      <Link
+        key={colorScheme}
+        colorScheme={colorScheme}
+        href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
+      >
+        ドラゴンボール - wikipedia
+      </Link>
+    )}
+  </For>
+</Wrap>
+```
+
+### External Links
+
+```tsx preview
+<Link
+  href="https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%AB"
+  external
+>
+  ドラゴンボール - wikipedia
+</Link>
+```

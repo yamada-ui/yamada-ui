@@ -7,3 +7,174 @@ style: components/card/card.style.ts
 ---
 
 ## 使い方
+
+```tsx preview
+<Card.Root>
+  <Card.Header>
+    <Heading size="xl">『SLAM DUNK』（スラムダンク）</Heading>
+  </Card.Header>
+
+  <Card.Body color="fg.muted">
+    <Text>
+      『SLAM
+      DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
+    </Text>
+  </Card.Body>
+</Card.Root>
+```
+
+:::code-group
+
+```tsx [package]
+import { Card } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Card } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Card } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Card.Root>
+  <Card.Header />
+  <Card.Body />
+  <Card.Footer />
+</Card.Root>
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["elevated", "outline", "subtle", "solid"]}>
+    {(variant, index) => (
+      <Card.Root key={index} variant={variant}>
+        <Card.Header>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+        </Card.Header>
+
+        <Card.Body>
+          <Text>
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
+          </Text>
+        </Card.Body>
+      </Card.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "normal", "lg"]}>
+    {(size, index) => (
+      <Card.Root key={index} size={size}>
+        <Card.Header>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+        </Card.Header>
+
+        <Card.Body>
+          <Text>
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
+          </Text>
+        </Card.Body>
+      </Card.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      { variant: "subtle", colorScheme: "green" },
+      { variant: "solid", colorScheme: "pink" },
+    ]}
+  >
+    {({ variant, colorScheme }, index) => (
+      <Card.Root key={index} variant={variant} colorScheme={colorScheme}>
+        <Card.Header>
+          <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+        </Card.Header>
+
+        <Card.Body>
+          <Text>
+            『SLAM
+            DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
+          </Text>
+        </Card.Body>
+      </Card.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### レイアウトをカスタマイズする
+
+```tsx preview
+<Card.Root maxW="md">
+  <Card.Header justifyContent="center">
+    <Image
+      src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
+      w="full"
+      rounded="md"
+    />
+  </Card.Header>
+
+  <Card.Body>
+    <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+
+    <Text>
+      『SLAM
+      DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
+    </Text>
+  </Card.Body>
+
+  <Card.Footer>
+    <Button colorScheme="primary">Wikipedia</Button>
+  </Card.Footer>
+</Card.Root>
+```
+
+```tsx preview
+<Card.Root
+  flexDirection={{ base: "row", md: "column" }}
+  overflow="hidden"
+  variant="outline"
+>
+  <Image
+    src="https://slamdunk-movie.jp/files/images/p_gallery_03.jpg"
+    objectFit="cover"
+    maxW={{ base: "30%", md: "100%" }}
+  />
+
+  <VStack gap="0">
+    <Card.Header>
+      <Heading size="md">『SLAM DUNK』（スラムダンク）</Heading>
+    </Card.Header>
+
+    <Card.Body>
+      <Text>
+        『SLAM
+        DUNK』（スラムダンク）は、バスケットボールを題材にした井上雄彦による日本の漫画作品。主人公の不良少年桜木花道の挑戦と成長を軸にしたバスケットボール漫画。
+      </Text>
+    </Card.Body>
+
+    <Card.Footer>
+      <Button colorScheme="primary">Wikipedia</Button>
+    </Card.Footer>
+  </VStack>
+</Card.Root>
+```

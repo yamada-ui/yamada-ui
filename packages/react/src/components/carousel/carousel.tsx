@@ -9,7 +9,7 @@ import type {
   StyleValue,
   ThemeProps,
 } from "../../core"
-import type { IconButtonProps } from "../icon-button"
+import type { IconButtonProps } from "../button"
 import type { CarouselStyle } from "./carousel.style"
 import type {
   CarouselAlign,
@@ -21,8 +21,8 @@ import { cloneElement, isValidElement, useMemo } from "react"
 import { createSlotComponent, styled, varAttr } from "../../core"
 import { useValue } from "../../hooks/use-value"
 import { dataAttr } from "../../utils"
+import { IconButton } from "../button"
 import { ChevronLeftIcon, ChevronRightIcon } from "../icon"
-import { IconButton } from "../icon-button"
 import { carouselStyle } from "./carousel.style"
 import {
   CarouselContext,

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react"
 import { Steps } from "."
 import { COLOR_SCHEMES } from "../../utils"
 import { Box } from "../box"
-import { Button, ButtonGroup } from "../button"
+import { ButtonGroup } from "../button"
 import { VStack } from "../stack"
 
 type Story = StoryFn<typeof Steps.Root>
@@ -49,14 +49,14 @@ export const Basic: Story = () => {
         地球の神と殺された仲間たちを甦らせるため、重傷で入院中の悟空に代わり、悟飯、クリリン、ブルマの3人が神とピッコロの故郷であるナメック星へ向かう。だが、そこには地球で闘ったベジータや、界王すら畏怖する宇宙の帝王・フリーザとその一味が不老不死を求めて来襲し、ナメック星人を虐殺しながらドラゴンボールを略奪していた。悟飯たちはベジータ、フリーザ一味とのドラゴンボールをめぐる三つ巴の攻防の末、後から到着した悟空とナメック星人たちの協力を得てナメック星の神龍・ポルンガを呼び出し、ピッコロと地球のドラゴンボールを復活させる。
       </Steps.CompletedContent>
 
-      <ButtonGroup>
+      <ButtonGroup.Root>
         <Steps.PrevTrigger>
-          <Button>Prev</Button>
+          <ButtonGroup.Item>Prev</ButtonGroup.Item>
         </Steps.PrevTrigger>
         <Steps.NextTrigger>
-          <Button>Next</Button>
+          <ButtonGroup.Item>Next</ButtonGroup.Item>
         </Steps.NextTrigger>
-      </ButtonGroup>
+      </ButtonGroup.Root>
     </Steps.Root>
   )
 }
@@ -89,15 +89,14 @@ export const Variant: Story = () => {
             <Steps.List />
             <Steps.Contents />
 
-            <ButtonGroup>
+            <ButtonGroup.Root>
               <Steps.PrevTrigger>
-                <Button>Prev</Button>
+                <ButtonGroup.Item>Prev</ButtonGroup.Item>
               </Steps.PrevTrigger>
-
               <Steps.NextTrigger>
-                <Button>Next</Button>
+                <ButtonGroup.Item>Next</ButtonGroup.Item>
               </Steps.NextTrigger>
-            </ButtonGroup>
+            </ButtonGroup.Root>
           </Steps.Root>
         )
       }}
@@ -123,15 +122,14 @@ export const Size: Story = () => {
             <Steps.List />
             <Steps.Contents />
 
-            <ButtonGroup>
+            <ButtonGroup.Root>
               <Steps.PrevTrigger>
-                <Button>Prev</Button>
+                <ButtonGroup.Item>Prev</ButtonGroup.Item>
               </Steps.PrevTrigger>
-
               <Steps.NextTrigger>
-                <Button>Next</Button>
+                <ButtonGroup.Item>Next</ButtonGroup.Item>
               </Steps.NextTrigger>
-            </ButtonGroup>
+            </ButtonGroup.Root>
           </Steps.Root>
         )
       }}
@@ -173,14 +171,14 @@ export const Orientation: Story = () => {
           地球の神と殺された仲間たちを甦らせるため、重傷で入院中の悟空に代わり、悟飯、クリリン、ブルマの3人が神とピッコロの故郷であるナメック星へ向かう。だが、そこには地球で闘ったベジータや、界王すら畏怖する宇宙の帝王・フリーザとその一味が不老不死を求めて来襲し、ナメック星人を虐殺しながらドラゴンボールを略奪していた。悟飯たちはベジータ、フリーザ一味とのドラゴンボールをめぐる三つ巴の攻防の末、後から到着した悟空とナメック星人たちの協力を得てナメック星の神龍・ポルンガを呼び出し、ピッコロと地球のドラゴンボールを復活させる。
         </Steps.CompletedContent>
 
-        <ButtonGroup>
+        <ButtonGroup.Root>
           <Steps.PrevTrigger>
-            <Button>Prev</Button>
+            <ButtonGroup.Item>Prev</ButtonGroup.Item>
           </Steps.PrevTrigger>
           <Steps.NextTrigger>
-            <Button>Next</Button>
+            <ButtonGroup.Item>Next</ButtonGroup.Item>
           </Steps.NextTrigger>
-        </ButtonGroup>
+        </ButtonGroup.Root>
       </Steps.Root>
 
       <Steps.Root h="lg" items={items} orientation="vertical">
@@ -192,14 +190,14 @@ export const Orientation: Story = () => {
             地球の神と殺された仲間たちを甦らせるため、重傷で入院中の悟空に代わり、悟飯、クリリン、ブルマの3人が神とピッコロの故郷であるナメック星へ向かう。だが、そこには地球で闘ったベジータや、界王すら畏怖する宇宙の帝王・フリーザとその一味が不老不死を求めて来襲し、ナメック星人を虐殺しながらドラゴンボールを略奪していた。悟飯たちはベジータ、フリーザ一味とのドラゴンボールをめぐる三つ巴の攻防の末、後から到着した悟空とナメック星人たちの協力を得てナメック星の神龍・ポルンガを呼び出し、ピッコロと地球のドラゴンボールを復活させる。
           </Steps.CompletedContent>
 
-          <ButtonGroup>
+          <ButtonGroup.Root>
             <Steps.PrevTrigger>
-              <Button>Prev</Button>
+              <ButtonGroup.Item>Prev</ButtonGroup.Item>
             </Steps.PrevTrigger>
             <Steps.NextTrigger>
-              <Button>Next</Button>
+              <ButtonGroup.Item>Next</ButtonGroup.Item>
             </Steps.NextTrigger>
-          </ButtonGroup>
+          </ButtonGroup.Root>
         </VStack>
       </Steps.Root>
     </>
@@ -239,14 +237,14 @@ export const Lazy: Story = () => {
         地球の神と殺された仲間たちを甦らせるため、重傷で入院中の悟空に代わり、悟飯、クリリン、ブルマの3人が神とピッコロの故郷であるナメック星へ向かう。だが、そこには地球で闘ったベジータや、界王すら畏怖する宇宙の帝王・フリーザとその一味が不老不死を求めて来襲し、ナメック星人を虐殺しながらドラゴンボールを略奪していた。悟飯たちはベジータ、フリーザ一味とのドラゴンボールをめぐる三つ巴の攻防の末、後から到着した悟空とナメック星人たちの協力を得てナメック星の神龍・ポルンガを呼び出し、ピッコロと地球のドラゴンボールを復活させる。
       </Steps.CompletedContent>
 
-      <ButtonGroup>
+      <ButtonGroup.Root>
         <Steps.PrevTrigger>
-          <Button>Prev</Button>
+          <ButtonGroup.Item>Prev</ButtonGroup.Item>
         </Steps.PrevTrigger>
         <Steps.NextTrigger>
-          <Button>Next</Button>
+          <ButtonGroup.Item>Next</ButtonGroup.Item>
         </Steps.NextTrigger>
-      </ButtonGroup>
+      </ButtonGroup.Root>
     </Steps.Root>
   )
 }
@@ -284,14 +282,14 @@ export const LazyBehavior: Story = () => {
         地球の神と殺された仲間たちを甦らせるため、重傷で入院中の悟空に代わり、悟飯、クリリン、ブルマの3人が神とピッコロの故郷であるナメック星へ向かう。だが、そこには地球で闘ったベジータや、界王すら畏怖する宇宙の帝王・フリーザとその一味が不老不死を求めて来襲し、ナメック星人を虐殺しながらドラゴンボールを略奪していた。悟飯たちはベジータ、フリーザ一味とのドラゴンボールをめぐる三つ巴の攻防の末、後から到着した悟空とナメック星人たちの協力を得てナメック星の神龍・ポルンガを呼び出し、ピッコロと地球のドラゴンボールを復活させる。
       </Steps.CompletedContent>
 
-      <ButtonGroup>
+      <ButtonGroup.Root>
         <Steps.PrevTrigger>
-          <Button>Prev</Button>
+          <ButtonGroup.Item>Prev</ButtonGroup.Item>
         </Steps.PrevTrigger>
         <Steps.NextTrigger>
-          <Button>Next</Button>
+          <ButtonGroup.Item>Next</ButtonGroup.Item>
         </Steps.NextTrigger>
-      </ButtonGroup>
+      </ButtonGroup.Root>
     </Steps.Root>
   )
 }
@@ -328,14 +326,14 @@ export const CustomIndicator: Story = () => {
     <Steps.Root items={items}>
       <Steps.List />
 
-      <ButtonGroup>
+      <ButtonGroup.Root>
         <Steps.PrevTrigger>
-          <Button>Prev</Button>
+          <ButtonGroup.Item>Prev</ButtonGroup.Item>
         </Steps.PrevTrigger>
         <Steps.NextTrigger>
-          <Button>Next</Button>
+          <ButtonGroup.Item>Next</ButtonGroup.Item>
         </Steps.NextTrigger>
-      </ButtonGroup>
+      </ButtonGroup.Root>
     </Steps.Root>
   )
 }
@@ -386,14 +384,14 @@ export const CustomComponent: Story = () => {
         地球の神と殺された仲間たちを甦らせるため、重傷で入院中の悟空に代わり、悟飯、クリリン、ブルマの3人が神とピッコロの故郷であるナメック星へ向かう。だが、そこには地球で闘ったベジータや、界王すら畏怖する宇宙の帝王・フリーザとその一味が不老不死を求めて来襲し、ナメック星人を虐殺しながらドラゴンボールを略奪していた。悟飯たちはベジータ、フリーザ一味とのドラゴンボールをめぐる三つ巴の攻防の末、後から到着した悟空とナメック星人たちの協力を得てナメック星の神龍・ポルンガを呼び出し、ピッコロと地球のドラゴンボールを復活させる。
       </Steps.CompletedContent>
 
-      <ButtonGroup>
+      <ButtonGroup.Root>
         <Steps.PrevTrigger>
-          <Button>Prev</Button>
+          <ButtonGroup.Item>Prev</ButtonGroup.Item>
         </Steps.PrevTrigger>
         <Steps.NextTrigger>
-          <Button>Next</Button>
+          <ButtonGroup.Item>Next</ButtonGroup.Item>
         </Steps.NextTrigger>
-      </ButtonGroup>
+      </ButtonGroup.Root>
     </Steps.Root>
   )
 }
@@ -413,14 +411,14 @@ export const CustomControl: Story = () => {
     <Steps.Root index={index} items={items} onChange={setIndex}>
       <Steps.List />
 
-      <ButtonGroup>
+      <ButtonGroup.Root>
         <Steps.PrevTrigger>
-          <Button>Prev</Button>
+          <ButtonGroup.Item>Prev</ButtonGroup.Item>
         </Steps.PrevTrigger>
         <Steps.NextTrigger>
-          <Button>Next</Button>
+          <ButtonGroup.Item>Next</ButtonGroup.Item>
         </Steps.NextTrigger>
-      </ButtonGroup>
+      </ButtonGroup.Root>
     </Steps.Root>
   )
 }

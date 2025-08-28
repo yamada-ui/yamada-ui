@@ -1,0 +1,16 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport { useEffect, useMemo, useRef, useState } from \"react\"\nimport { createdDom } from \"@yamada-ui/react\"\n\nexport interface ObserverRect extends Omit<DOMRectReadOnly, \"toJSON\"> {}\n\nconst defaultRect: ObserverRect = {\n  bottom: 0,\n  height: 0,\n  left: 0,\n  right: 0,\n  top: 0,\n  width: 0,\n  x: 0,\n  y: 0,\n}\n\n/**\n * `useResizeObserver` is a custom hook that tracks changes in the size and position of an element.\n *\n * @see https://yamada-ui.com/hooks/use-resize-observer\n */\nexport const useResizeObserver = <Y extends HTMLElement = any>() => {\n  const id = useRef(0)\n  const ref = useRef<Y>(null)\n  const [rect, setRect] = useState<ObserverRect>(defaultRect)\n\n  const observer = useMemo(() => {\n    if (!createdDom()) return null\n\n    return new ResizeObserver(([entry]) => {\n      if (!entry) return\n\n      cancelAnimationFrame(id.current)\n\n      id.current = requestAnimationFrame(() => {\n        if (ref.current) setRect(entry.contentRect)\n      })\n    })\n  }, [])\n\n  useEffect(() => {\n    if (ref.current) observer?.observe(ref.current)\n\n    return () => {\n      observer?.disconnect()\n\n      if (id.current) cancelAnimationFrame(id.current)\n    }\n  }, [observer])\n\n  return [ref, rect] as const\n}\n\nexport const useElementSize = <Y extends HTMLElement = any>() => {\n  const [ref, { height, width }] = useResizeObserver<Y>()\n\n  return { ref, height, width }\n}\n"
+    }
+  ]
+}

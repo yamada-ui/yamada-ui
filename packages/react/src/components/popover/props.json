@@ -1,5 +1,325 @@
 {
-  "Anchor": {
+  "Popover": {
+    "Anchor": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Body": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Content": {
+      "as": {
+        "type": "keyof IntrinsicElements",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "portalProps": {
+        "type": "Omit<PortalProps, \"children\">",
+        "description": "Props for portal component.",
+        "required": false
+      }
+    },
+    "Footer": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Header": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "animationScheme": {
+        "type": "\"scale\" | \"none\" | SimplePlacement",
+        "defaultValue": "\"scale\"",
+        "description": "The animation of the element.",
+        "required": false
+      },
+      "autoFocus": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, focus will be transferred to the first interactive element when the popover opens.",
+        "required": false
+      },
+      "autoUpdate": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, automatically updates the position of the floating element when necessary.",
+        "required": false
+      },
+      "blockScrollOnMount": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, scrolling will be disabled on the `body` when the modal opens.",
+        "required": false
+      },
+      "children": {
+        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: { ...; }) => ReactNode)",
+        "description": "The children of the popover.",
+        "required": false
+      },
+      "closeOnBlur": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the popover will close when you blur out it by clicking outside or tabbing out.",
+        "required": false
+      },
+      "closeOnEsc": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the popover will hide on pressing Esc key.",
+        "required": false
+      },
+      "closeOnScroll": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the popover will hide on scroll.",
+        "required": false
+      },
+      "defaultOpen": {
+        "type": "boolean",
+        "description": "If `true`, the element will be initially opened.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the popover will be disabled.",
+        "required": false
+      },
+      "duration": {
+        "type": "number | MotionLifecycleProps<number>",
+        "defaultValue": "0.2",
+        "description": "The animation duration.",
+        "required": false
+      },
+      "elements": {
+        "type": "{\n  floating?: HTMLElement | null | undefined\n  reference?: HTMLButtonElement | null | undefined\n}",
+        "description": "Object containing the reference and floating elements.",
+        "required": false
+      },
+      "flip": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.",
+        "required": false
+      },
+      "gutter": {
+        "type": "number",
+        "defaultValue": "8",
+        "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier.",
+        "required": false
+      },
+      "initialFocusRef": {
+        "type": "RefObject<HTMLElement | null>",
+        "description": "The `ref` of the element that should receive focus when the popover opens.",
+        "required": false
+      },
+      "matchWidth": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns.",
+        "required": false
+      },
+      "middleware": {
+        "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
+        "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
+        "required": false
+      },
+      "modal": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the popover will be modal.\n\n- scrolling is blocked.\n- focus is trapped within the popover.",
+        "required": false
+      },
+      "offset": {
+        "type": "[number, number]",
+        "description": "The main and cross-axis offset to displace popper element from its reference element.",
+        "required": false
+      },
+      "onClose": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to close the element.",
+        "required": false
+      },
+      "onOpen": {
+        "type": "() => void | Promise<void>",
+        "description": "Callback invoked to open the element.",
+        "required": false
+      },
+      "open": {
+        "type": "boolean",
+        "description": "If `true`, the element will be opened.",
+        "required": false
+      },
+      "openOnClick": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the popover will be opened when click on the field.",
+        "required": false
+      },
+      "placement": {
+        "type": "Direction",
+        "defaultValue": "\"end\"",
+        "description": "The placement of the popper relative to its reference.",
+        "required": false
+      },
+      "platform": {
+        "type": "Platform",
+        "description": "Custom or extended platform object.",
+        "required": false
+      },
+      "preventOverflow": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+        "required": false
+      },
+      "strategy": {
+        "type": "Strategy",
+        "defaultValue": "\"absolute\"",
+        "description": "The CSS positioning strategy to use.",
+        "required": false
+      },
+      "transform": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "Whether to use `transform` for positioning instead of `top` and `left`\n(layout) in the `floatingStyles` object.",
+        "required": false
+      },
+      "updateRef": {
+        "type": "RefObject<() => void>",
+        "description": "Update the position of the floating element, re-rendering the component if required.",
+        "required": false
+      },
+      "whileElementsMounted": {
+        "type": "(\n  reference: HTMLButtonElement,\n  floating: HTMLElement,\n  update: () => void,\n) => () => void",
+        "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
+        "required": false
+      },
+      "withCloseButton": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, display the popover close button.",
+        "required": false
+      }
+    },
+    "Trigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    }
+  },
+  "PopoverAnchor": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -21,7 +341,7 @@
       "required": false
     }
   },
-  "Body": {
+  "PopoverBody": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -43,7 +363,7 @@
       "required": false
     }
   },
-  "Content": {
+  "PopoverContent": {
     "as": {
       "type": "keyof IntrinsicElements",
       "description": "The HTML element to render.",
@@ -70,7 +390,7 @@
       "required": false
     }
   },
-  "Footer": {
+  "PopoverFooter": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -92,7 +412,7 @@
       "required": false
     }
   },
-  "Header": {
+  "PopoverHeader": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -114,7 +434,7 @@
       "required": false
     }
   },
-  "Root": {
+  "PopoverRoot": {
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
       "description": "The size of the component.",
@@ -185,7 +505,7 @@
       "required": false
     },
     "elements": {
-      "type": "{\n  floating?: HTMLElement | null | undefined\n  reference?: HTMLDivElement | null | undefined\n}",
+      "type": "{\n  floating?: HTMLElement | null | undefined\n  reference?: HTMLButtonElement | null | undefined\n}",
       "description": "Object containing the reference and floating elements.",
       "required": false
     },
@@ -243,6 +563,12 @@
       "description": "If `true`, the element will be opened.",
       "required": false
     },
+    "openOnClick": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the popover will be opened when click on the field.",
+      "required": false
+    },
     "placement": {
       "type": "Direction",
       "defaultValue": "\"end\"",
@@ -278,7 +604,7 @@
       "required": false
     },
     "whileElementsMounted": {
-      "type": "(\n  reference: HTMLDivElement,\n  floating: HTMLElement,\n  update: () => void,\n) => () => void",
+      "type": "(\n  reference: HTMLButtonElement,\n  floating: HTMLElement,\n  update: () => void,\n) => () => void",
       "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
       "required": false
     },
@@ -289,7 +615,7 @@
       "required": false
     }
   },
-  "Trigger": {
+  "PopoverTrigger": {
     "as": {
       "type": "As",
       "description": "The HTML element to render.",
@@ -308,6 +634,20 @@
     "colorScheme": {
       "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
       "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "PopupAnimation": {
+    "animationScheme": {
+      "type": "\"scale\" | \"none\" | SimplePlacement",
+      "defaultValue": "\"scale\"",
+      "description": "The animation of the element.",
+      "required": false
+    },
+    "duration": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
+      "description": "The animation duration.",
       "required": false
     }
   }

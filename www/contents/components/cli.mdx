@@ -3,6 +3,203 @@ title: CLI
 description: Learn how to generate components using CLI commands.
 ---
 
-## Installation
-
 ## Usage
+
+:::warning
+Before running the following commands, you need to install `@yamada-ui/cli` and execute the `init` command. For more details, please see [here](/docs/get-started/cli).
+:::
+
+### Add Components
+
+When you run the `add` command, the specified component and its dependencies will be added to your project.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add box
+```
+
+```bash [npm]
+npm yamada-cli add box
+```
+
+```bash [yarn]
+yarn yamada-cli add box
+```
+
+```bash [bun]
+bun yamada-cli add box
+```
+
+:::
+
+:::note
+All components that the specified component depends on will also be added.
+:::
+
+If you don't specify a component, all available components will be added.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add
+```
+
+```bash [npm]
+npm yamada-cli add
+```
+
+```bash [yarn]
+yarn yamada-cli add
+```
+
+```bash [bun]
+bun yamada-cli add
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli add [options] [components...]
+
+add a component to your project
+
+Arguments:
+  components           components to add
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --overwrite      overwrite existing files. (default: false)
+  -i, --install        install dependencies (default: false)
+  -s, --sequential     run tasks sequentially. (default: false)
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### Check Differences
+
+When you run the `diff` command, you can check the difference between the local and remote components.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli diff box
+```
+
+```bash [npm]
+npm yamada-cli diff box
+```
+
+```bash [yarn]
+yarn yamada-cli diff box
+```
+
+```bash [bun]
+bun yamada-cli diff box
+```
+
+:::
+
+If you don't specify a component, you can check the difference for all components in your project.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli diff
+```
+
+```bash [npm]
+npm yamada-cli diff
+```
+
+```bash [yarn]
+yarn yamada-cli diff
+```
+
+```bash [bun]
+bun yamada-cli diff
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli diff [options] [component]
+
+check for updates against the registry
+
+Arguments:
+  component            component to check
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -s, --sequential     run tasks sequentially. (default: false)
+  -d, --detail         show detailed changes (default: false)
+  -h, --help           display help for command
+```
+
+### Update Components
+
+When you run the `update` command, the specified component will be updated.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli update box
+```
+
+```bash [npm]
+npm yamada-cli update box
+```
+
+```bash [yarn]
+yarn yamada-cli update box
+```
+
+```bash [bun]
+bun yamada-cli update box
+```
+
+:::
+
+If you don't specify a component, all components in your project will be updated.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli update
+```
+
+```bash [npm]
+npm yamada-cli update
+```
+
+```bash [yarn]
+yarn yamada-cli update
+```
+
+```bash [bun]
+bun yamada-cli update
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli update [options] [components...]
+
+update components in your project
+
+Arguments:
+  components           components to update
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -i, --install        install dependencies (default: false)
+  -s, --sequential     run tasks sequentially. (default: false)
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```

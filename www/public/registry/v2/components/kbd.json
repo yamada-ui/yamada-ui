@@ -1,0 +1,24 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./kbd.style\"\nexport { Kbd, KbdPropsContext, useKbdPropsContext } from \"./kbd\"\nexport type { KbdProps } from \"./kbd\"\n"
+    },
+    {
+      "name": "kbd.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const kbdStyle = defineComponentStyle({\n  base: {\n    textStyle: \"mono\",\n    alignItems: \"center\",\n    display: \"inline-flex\",\n    rounded: \"l1\",\n  },\n\n  variants: {\n    outline: {\n      layerStyle: \"outline\",\n    },\n    solid: {\n      layerStyle: \"solid\",\n    },\n    subtle: {\n      layerStyle: \"subtle\",\n    },\n    surface: {\n      layerStyle: \"surface\",\n    },\n  },\n\n  sizes: {\n    sm: {\n      fontSize: \"xs\",\n      lineHeight: \"{sizes.4}\",\n      minH: \"4\",\n      px: \"1\",\n    },\n    md: {\n      fontSize: \"sm\",\n      lineHeight: \"{sizes.5}\",\n      minH: \"5\",\n      px: \"1.5\",\n    },\n    lg: {\n      fontSize: \"md\",\n      lineHeight: \"{sizes.6}\",\n      minH: \"6\",\n      px: \"2\",\n    },\n  },\n\n  defaultProps: {\n    size: \"md\",\n    variant: \"surface\",\n  },\n})\n\nexport type KbdStyle = typeof kbdStyle\n"
+    },
+    {
+      "name": "kbd.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { KbdStyle } from \"./kbd.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { kbdStyle } from \"./kbd.style\"\n\nexport interface KbdProps\n  extends HTMLStyledProps<\"kbd\">,\n    ThemeProps<KbdStyle> {}\n\nconst {\n  PropsContext: KbdPropsContext,\n  usePropsContext: useKbdPropsContext,\n  withContext,\n} = createComponent<KbdProps, KbdStyle>(\"kbd\", kbdStyle)\n\nexport { KbdPropsContext, useKbdPropsContext }\n\n/**\n * `Kbd` is a component that represents keyboard input.\n *\n * @see https://yamada-ui.com/components/kbd\n */\nexport const Kbd = withContext(\"kbd\")()\n"
+    }
+  ]
+}

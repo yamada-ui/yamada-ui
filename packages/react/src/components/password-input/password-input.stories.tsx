@@ -260,7 +260,7 @@ export const Meter: Story = () => {
   }
 
   return (
-    <VStack gap="md">
+    <VStack>
       <PasswordInput
         placeholder="Your password"
         value={value}
@@ -285,7 +285,7 @@ export const CustomControl: Story = () => {
   const [visible, setVisible] = useState(true)
 
   return (
-    <VStack gap="md">
+    <VStack>
       <Text>Password visibility: {visible ? "show" : "hide"}</Text>
 
       <PasswordInput

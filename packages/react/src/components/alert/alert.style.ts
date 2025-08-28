@@ -9,12 +9,12 @@ export const alertStyle = defineComponentSlotStyle({
       boxSize: "5",
       flexShrink: 0,
       fontSize: "xl",
-      marginEnd: "3",
+      me: "3",
     },
     loading: {
       flexShrink: 0,
       fontSize: "xl",
-      marginEnd: "3",
+      me: "3",
     },
     root: {
       alignItems: "start",
@@ -29,7 +29,7 @@ export const alertStyle = defineComponentSlotStyle({
     title: {
       display: "block",
       lineHeight: "shorter",
-      marginEnd: "2",
+      me: "2",
     },
   },
 

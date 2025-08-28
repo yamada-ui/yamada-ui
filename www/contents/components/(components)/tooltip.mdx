@@ -6,4 +6,148 @@ source: components/tooltip
 style: components/tooltip/tooltip.style.ts
 ---
 
+```tsx preview
+<Tooltip content="へっ！きたねぇ花火だ">
+  <Button>Please Hover</Button>
+</Tooltip>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Tooltip } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Tooltip } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Tooltip } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Tooltip />
+```
+
+### Change the Display Position
+
+To change the display position, set `placement` to values like `end` or `center-start`. By default, `start` is set.
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      "start",
+      "start-start",
+      "start-end",
+      "start-center",
+      "end",
+      "end-start",
+      "end-end",
+      "end-center",
+      "center-start",
+      "center-end",
+    ]}
+  >
+    {(placement, index) => (
+      <Tooltip key={index} content="へっ！きたねぇ花火だ" placement={placement}>
+        <Button minW="xs" w="fit-content">
+          Open "{toTitleCase(placement)}" Tooltip
+        </Button>
+      </Tooltip>
+    )}
+  </For>
+</VStack>
+```
+
+### Change the Animation
+
+To change the show or hide animation, set `animation` to values like `top` or `left`. By default, `scale` is set.
+
+```tsx preview
+<VStack>
+  <For
+    each={["scale", "block-end", "inline-start", "inline-end", "block-start"]}
+  >
+    {(animationScheme, index) => (
+      <Tooltip
+        key={index}
+        animationScheme={animationScheme}
+        content="へっ！きたねぇ花火だ"
+      >
+        <Button minW="xs" w="fit-content">
+          Open "{animationScheme}" Tooltip
+        </Button>
+      </Tooltip>
+    )}
+  </For>
+</VStack>
+```
+
+### Change the Duration
+
+To change the duration, set `duration` to a number (seconds).
+
+```tsx preview
+<Tooltip content="へっ！きたねぇ花火だ" duration={0.7}>
+  <Button>Please Hover</Button>
+</Tooltip>
+```
+
+### Change the Offset
+
+Depending on the size of the element or the situation, you may want to adjust the position of the tooltip. In that case, adjust the position using `gutter` or `offset`.
+
+`gutter` allows you to set the difference with simple elements, and `offset` allows you to set `[horizontal axis, vertical axis]`.
+
+```tsx preview
+<VStack>
+  <Tooltip content="へっ！きたねぇ花火だ" gutter={32}>
+    <Button w="fit-content">Please Hover</Button>
+  </Tooltip>
+
+  <Tooltip content="へっ！きたねぇ花火だ" offset={[16, 16]}>
+    <Button w="fit-content">Please Hover</Button>
+  </Tooltip>
+</VStack>
+```
+
+### Add a Delay
+
+If you want to delay the display or hiding, set `openDelay` or `closeDelay` to a number (milliseconds).
+
+```tsx preview
+<Tooltip
+  content="へっ！きたねぇ花火だ"
+  placement="top"
+  openDelay={500}
+  closeDelay={500}
+>
+  <Button>Delay Open and Close 500ms</Button>
+</Tooltip>
+```
+
+### Disable
+
+To disable the tooltip, set `disabled` to `true`.
+
+```tsx preview
+<Tooltip content="へっ！きたねぇ花火だ" disabled>
+  <Button>Please Hover</Button>
+</Tooltip>
+```
+
+### Always Display
+
+To always display the tooltip, set `open` to `true`.
+
+```tsx preview
+<Tooltip content="へっ！きたねぇ花火だ" open>
+  <Button>Please Hover</Button>
+</Tooltip>
+```

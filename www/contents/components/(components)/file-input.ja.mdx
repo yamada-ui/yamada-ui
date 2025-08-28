@@ -6,4 +6,290 @@ source: components/file-input
 style: components/file-input/file-input.style.ts
 ---
 
+```tsx preview
+<FileInput placeholder="Please upload file" />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { FileInput } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { FileInput } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { FileInput } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<FileInput />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant, index) => (
+      <FileInput
+        key={index}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <FileInput key={index} size={size} placeholder={toTitleCase(size)} />
+    )}
+  </For>
+</VStack>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <FileInput
+        key={index}
+        colorScheme={colorScheme}
+        placeholder={toTitleCase(colorScheme)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### 複数選択を許容する
+
+複数選択を許容する場合は、`multiple`を`true`に設定します。
+
+```tsx preview
+<FileInput placeholder="multiple" multiple />
+```
+
+### 拡張子を指定する
+
+拡張子を指定する場合は、`accept`に文字列(タイプ)を設定します。
+
+```tsx preview
+<FileInput accept="image/png,image/jpeg" placeholder="only png, jpeg" />
+```
+
+### 区切りをカスタマイズする
+
+区切りをカスタマイズする場合は、`separator`に文字列を設定します。
+
+```tsx preview
+<FileInput placeholder="Please upload file" multiple separator=";" />
+```
+
+### カスタムコンポーネントを使用する
+
+カスタムコンポーネントを使用する場合は、`component`に`ReactNode`を設定します。`component`は、`value`(`File`)と`index`を提供します。
+
+```tsx preview
+<FileInput
+  component={({ value: { name } }) => <Tag>{name}</Tag>}
+  gapY="xs"
+  multiple
+  placeholder="Please upload file"
+/>
+```
+
+### ファイル名を整形する
+
+ファイル名を整形する場合は、`format`を使用します。`format`は、`File`を提供します。
+
+```tsx preview
+<FileInput
+  format={({ name }) => name.substring(0, name.indexOf("."))}
+  multiple
+  placeholder="Please upload file"
+/>
+```
+
+### 子要素をカスタマイズする
+
+子要素をカスタマイズする場合は、`children`を使用します。`children`は、`File`を配列で提供します。
+
+```tsx preview
+<FileInput multiple>
+  {(files) => <Text>Selected: {files?.length ?? 0}</Text>}
+</FileInput>
+```
+
+### アドオンを追加する
+
+アドオンを追加する場合は、`FileInput`を`InputGroup.Root`でラッピングし、`InputGroup.Addon`を使用します。
+
+```tsx preview
+<InputGroup.Root>
+  <InputGroup.Addon>
+    <FileIcon />
+  </InputGroup.Addon>
+  <FileInput placeholder="Please upload file" />
+</InputGroup.Root>
+```
+
+### 要素を追加する
+
+要素を追加する場合は、`FileInput`を`InputGroup.Root`でラッピングし、`InputGroup.Element`を使用します。
+
+```tsx preview
+<InputGroup.Root>
+  <InputGroup.Element>
+    <FileIcon />
+  </InputGroup.Element>
+  <FileInput placeholder="Please upload file" />
+</InputGroup.Root>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <FileInput placeholder="Please upload file" disabled />
+
+  <InputGroup.Root disabled>
+    <InputGroup.Addon>
+      <FileIcon />
+    </InputGroup.Addon>
+    <FileInput placeholder="Please upload file" />
+  </InputGroup.Root>
+
+  <Field.Root disabled label="Upload file">
+    <FileInput placeholder="Please upload file" />
+  </Field.Root>
+</VStack>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <FileInput placeholder="Please upload file" readOnly />
+
+  <InputGroup.Root readOnly>
+    <InputGroup.Addon>
+      <FileIcon />
+    </InputGroup.Addon>
+    <FileInput placeholder="Please upload file" />
+  </InputGroup.Root>
+
+  <Field.Root readOnly label="Upload file">
+    <FileInput placeholder="Please upload file" />
+  </Field.Root>
+</VStack>
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`invalid`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <FileInput placeholder="Please upload file" invalid />
+
+  <InputGroup.Root invalid>
+    <InputGroup.Addon>
+      <FileIcon />
+    </InputGroup.Addon>
+    <FileInput placeholder="Please upload file" />
+  </InputGroup.Root>
+
+  <Field.Root errorMessage="File is required." invalid label="Upload file">
+    <FileInput placeholder="Please upload file" />
+  </Field.Root>
+</VStack>
+```
+
+### ボーダーのカラーを変更する
+
+ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
+
+```tsx preview
+<VStack>
+  <FileInput
+    focusBorderColor="success"
+    placeholder="Custom focus border color"
+  />
+
+  <InputGroup.Root variant="flushed" focusBorderColor="success">
+    <InputGroup.Element>
+      <FileIcon />
+    </InputGroup.Element>
+    <FileInput placeholder="Custom focus border color" />
+  </InputGroup.Root>
+
+  <FileInput
+    errorBorderColor="warning"
+    invalid
+    placeholder="Custom error border color"
+  />
+
+  <InputGroup.Root errorBorderColor="warning" invalid>
+    <InputGroup.Addon>
+      <FileIcon />
+    </InputGroup.Addon>
+    <FileInput placeholder="Custom error border color" />
+  </InputGroup.Root>
+</VStack>
+```
+
+### リセットする
+
+値をリセットする場合は、`resetRef`に`ref`を設定します。設定された`ref`にコールバック関数が付与されるので、それを実行します。
+
+```tsx preview functional client
+const [value, onChange] = useState<File[] | undefined>(undefined)
+const resetRef = useRef<() => void>(null)
+const onReset = () => {
+  onChange(undefined)
+  resetRef.current?.()
+}
+
+return (
+  <VStack>
+    <Text>files: {value?.length ?? 0}</Text>
+
+    <InputGroup.Root>
+      <FileInput
+        multiple
+        placeholder="placeholder"
+        resetRef={resetRef}
+        value={value}
+        onChange={onChange}
+      />
+
+      {value?.length ? (
+        <InputGroup.Element clickable onClick={onReset}>
+          <Center as="button" focusVisibleRing="outside" p="0.5" rounded="xs">
+            <XIcon fontSize="xl" />
+          </Center>
+        </InputGroup.Element>
+      ) : null}
+    </InputGroup.Root>
+  </VStack>
+)
+```

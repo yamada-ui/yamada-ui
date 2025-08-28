@@ -1,0 +1,29 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": {
+    "components": ["highlight", "loading"],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./text.style\"\nexport { Text, TextPropsContext, useTextPropsContext } from \"./text\"\nexport type { TextProps } from \"./text\"\n"
+    },
+    {
+      "name": "text.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const textStyle = defineComponentStyle({})\n\nexport type TextStyle = typeof textStyle\n"
+    },
+    {
+      "name": "text.tsx",
+      "content": "\"use client\"\n\nimport type { CSSProps, HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { TextStyle } from \"./text.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { textStyle } from \"./text.style\"\n\nexport interface TextProps extends HTMLStyledProps<\"p\">, ThemeProps<TextStyle> {\n  /**\n   * The CSS `text-align` property.\n   */\n  align?: CSSProps[\"textAlign\"]\n  /**\n   * The CSS `text-transform` property.\n   */\n  casing?: CSSProps[\"textTransform\"]\n  /**\n   * The CSS `text-decoration` property.\n   */\n  decoration?: CSSProps[\"textDecoration\"]\n}\n\nconst {\n  PropsContext: TextPropsContext,\n  usePropsContext: useTextPropsContext,\n  withContext,\n} = createComponent<TextProps, TextStyle>(\"text\", textStyle)\n\nexport { TextPropsContext, useTextPropsContext }\n\n/**\n * `Text` is a component that represents a paragraph of text. By default, it renders a `p` element.\n *\n * @see https://yamada-ui.com/components/text\n */\nexport const Text = withContext(\"p\")(\n  undefined,\n  ({\n    align: textAlign,\n    casing: textTransform,\n    decoration: textDecoration,\n    ...rest\n  }) => ({\n    textAlign,\n    textDecoration,\n    textTransform,\n    ...rest,\n  }),\n)\n"
+    }
+  ]
+}

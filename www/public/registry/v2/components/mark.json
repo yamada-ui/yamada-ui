@@ -1,0 +1,25 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": { "components": ["highlight"], "hooks": [], "providers": [] },
+  "section": "components",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "export * from \"./mark.style\"\nexport { Mark, MarkPropsContext, useMarkPropsContext } from \"./mark\"\nexport type { MarkProps } from \"./mark\"\n"
+    },
+    {
+      "name": "mark.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const markStyle = defineComponentStyle({\n  base: {\n    bg: \"transparent\",\n    whiteSpace: \"nowrap\",\n  },\n\n  variants: {\n    accent: {\n      color: \"colorScheme.solid\",\n    },\n    solid: {\n      layerStyle: \"solid\",\n    },\n    subtle: {\n      layerStyle: \"subtle\",\n    },\n    text: {\n      fontWeight: \"semibold\",\n    },\n  },\n\n  defaultProps: {\n    variant: \"subtle\",\n  },\n})\n\nexport type MarkStyle = typeof markStyle\n"
+    },
+    {
+      "name": "mark.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { MarkStyle } from \"./mark.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { markStyle } from \"./mark.style\"\n\nexport interface MarkProps\n  extends HTMLStyledProps<\"mark\">,\n    ThemeProps<MarkStyle> {}\n\nconst {\n  PropsContext: MarkPropsContext,\n  usePropsContext: useMarkPropsContext,\n  withContext,\n} = createComponent<MarkProps, MarkStyle>(\"mark\", markStyle)\n\nexport { MarkPropsContext, useMarkPropsContext }\n\n/**\n * `Mark` is a component that emphasizes a specific part of the text.\n *\n * @see https://yamada-ui.com/components/mark\n */\nexport const Mark = withContext(\"mark\")()\n"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "aspect-ratio.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const aspectRatioStyle = defineComponentStyle({\n  base: {\n    \"& > *:not(style)\": {\n      alignItems: \"center\",\n      bottom: \"0\",\n      display: \"flex\",\n      h: \"100%\",\n      justifyContent: \"center\",\n      left: \"0\",\n      overflow: \"hidden\",\n      position: \"absolute\",\n      right: \"0\",\n      top: \"0\",\n      w: \"100%\",\n    },\n    \"& > img, & > video\": {\n      objectFit: \"cover\",\n    },\n    position: \"relative\",\n  },\n})\n\nexport type AspectRatioStyle = typeof aspectRatioStyle\n"
+    },
+    {
+      "name": "aspect-ratio.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, StyleValue } from \"@yamada-ui/react\"\nimport type { AspectRatioStyle } from \"./aspect-ratio.style\"\nimport { Children } from \"react\"\nimport { createComponent, replaceObject } from \"@yamada-ui/react\"\nimport { aspectRatioStyle } from \"./aspect-ratio.style\"\n\nexport interface AspectRatioProps extends HTMLStyledProps {\n  /**\n   * The aspect ratio of the Box.\n   *\n   * @default '4 / 3'\n   */\n  ratio?: StyleValue<number>\n}\n\nconst {\n  PropsContext: AspectRatioPropsContext,\n  usePropsContext: useAspectRatioPropsContext,\n  withContext,\n} = createComponent<AspectRatioProps, AspectRatioStyle>(\n  \"aspect-ratio\",\n  aspectRatioStyle,\n)\n\nexport { AspectRatioPropsContext, useAspectRatioPropsContext }\n\n/**\n * `AspectRatio` is a component for embedding things like videos and maps while maintaining the aspect ratio.\n *\n * @see https://yamada-ui.com/components/aspect-ratio\n */\nexport const AspectRatio = withContext(\"div\")(\n  undefined,\n  ({ children, ratio = 4 / 3, ...rest }) => {\n    const child = Children.only(children)\n\n    return {\n      ...rest,\n      children: child,\n      _before: {\n        display: \"block\",\n        h: 0,\n        pb: replaceObject(ratio, (r) => `${(1 / r) * 100}%`),\n      },\n    }\n  },\n)\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export * from \"./aspect-ratio.style\"\nexport {\n  AspectRatio,\n  AspectRatioPropsContext,\n  useAspectRatioPropsContext,\n} from \"./aspect-ratio\"\nexport type { AspectRatioProps } from \"./aspect-ratio\"\n"
+    }
+  ]
+}

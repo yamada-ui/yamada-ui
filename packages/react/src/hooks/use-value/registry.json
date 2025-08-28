@@ -1,0 +1,39 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": ["use-breakpoint"],
+    "providers": []
+  },
+  "dependents": {
+    "components": [
+      "alpha-slider",
+      "breadcrumb",
+      "carousel",
+      "drawer",
+      "group",
+      "hue-slider",
+      "infinite-scroll-area",
+      "pagination",
+      "reorder",
+      "resizable",
+      "segmented-control",
+      "skeleton",
+      "slide",
+      "slide-fade",
+      "slider",
+      "steps",
+      "tabs"
+    ],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.ts",
+      "content": "\"use client\"\n\nimport type {\n  Breakpoint,\n  ColorMode,\n  ColorModeArray,\n  ResponsiveObject,\n  System,\n} from \"@yamada-ui/react\"\nimport { useMemo } from \"react\"\nimport {\n  getColorModeValue,\n  useColorMode,\n  useSystem,\n  isArray,\n  isObject,\n} from \"@yamada-ui/react\"\nimport { getBreakpointValue, useBreakpoint } from \"../use-breakpoint\"\n\n/**\n * `useValue` is a custom hook that combines `useBreakpointValue` and `useColorModeValue`.\n *\n * @see https://yamada-ui.com/hooks/use-value\n */\nexport const useValue = <Y,>(\n  value: ColorModeArray<Y, false> | ResponsiveObject<Y, false> | Y,\n): Y => {\n  const system = useSystem()\n  const breakpoint = useBreakpoint()\n  const { colorMode } = useColorMode()\n\n  return useMemo(() => {\n    return getValue(value)(system, colorMode, breakpoint)\n  }, [value, system, colorMode, breakpoint])\n}\n\nexport const getValue =\n  <Y,>(value: ColorModeArray<Y, false> | ResponsiveObject<Y, false> | Y) =>\n  (system: System, colorMode: ColorMode, breakpoint: Breakpoint): Y => {\n    if (isObject<ResponsiveObject<Y, false>>(value)) {\n      return getBreakpointValue(value)(system, breakpoint)\n    } else if (isArray<ColorModeArray<Y, false>>(value)) {\n      const [light, dark] = value\n\n      return getColorModeValue(light, dark)(colorMode)\n    } else {\n      return value\n    }\n  }\n"
+    }
+  ]
+}

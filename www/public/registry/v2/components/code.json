@@ -1,0 +1,24 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "code.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const codeStyle = defineComponentStyle({\n  base: {\n    alignItems: \"center\",\n    display: \"inline-flex\",\n    fontFamily: \"mono\",\n    rounded: \"l1\",\n  },\n\n  variants: {\n    outline: {\n      layerStyle: \"outline\",\n    },\n    solid: {\n      layerStyle: \"solid\",\n    },\n    subtle: {\n      layerStyle: \"subtle\",\n    },\n    surface: {\n      layerStyle: \"surface\",\n    },\n  },\n\n  sizes: {\n    xs: {\n      fontSize: \"2xs\",\n      lineHeight: \"{sizes.4}\",\n      minH: \"4\",\n      px: \"1\",\n    },\n    sm: {\n      fontSize: \"xs\",\n      lineHeight: \"{sizes.5}\",\n      minH: \"5\",\n      px: \"1.5\",\n    },\n    md: {\n      fontSize: \"sm\",\n      lineHeight: \"{sizes.6}\",\n      minH: \"6\",\n      px: \"2\",\n    },\n    lg: {\n      fontSize: \"sm\",\n      lineHeight: \"{sizes.7}\",\n      minH: \"7\",\n      px: \"2.5\",\n    },\n  },\n\n  defaultProps: {\n    size: \"sm\",\n    variant: \"subtle\",\n  },\n})\n\nexport type CodeStyle = typeof codeStyle\n"
+    },
+    {
+      "name": "code.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { CodeStyle } from \"./code.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { codeStyle } from \"./code.style\"\n\nexport interface CodeProps\n  extends HTMLStyledProps<\"code\">,\n    ThemeProps<CodeStyle> {}\n\nconst {\n  PropsContext: CodePropsContext,\n  usePropsContext: useCodePropsContext,\n  withContext,\n} = createComponent<CodeProps, CodeStyle>(\"code\", codeStyle)\n\nexport { CodePropsContext, useCodePropsContext }\n\n/**\n * `Code` is a component that represents a code block. By default, it renders a `code` element.\n *\n * @see https://yamada-ui.com/components/code\n */\nexport const Code = withContext(\"code\")()\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export * from \"./code.style\"\nexport { Code, CodePropsContext, useCodePropsContext } from \"./code\"\nexport type { CodeProps } from \"./code\"\n"
+    }
+  ]
+}

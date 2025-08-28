@@ -18,21 +18,27 @@ style: components/avatar/avatar.style.ts
 :::code-group
 
 ```tsx [package]
-import { Avatar } from "@yamada-ui/react"
+import { Avatar, AvatarGroup } from "@yamada-ui/react"
 ```
 
 ```tsx [alias]
-import { Avatar } from "@/components/ui"
+import { Avatar, AvatarGroup } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Avatar } from "@workspace/ui"
+import { Avatar, AvatarGroup } from "@workspaces/ui"
 ```
 
 :::
 
 ```tsx
 <Avatar />
+```
+
+```tsx
+<AvatarGroup.Root>
+  <AvatarGroup.Item />
+</AvatarGroup.Root>
 ```
 
 ### バリアントを変更する
@@ -131,31 +137,31 @@ return (
 )
 ```
 
-### アバターグループ
+### グループ化する
 
 表示するアバターの数を制御する場合は、`max`に数値を指定します。指定された数以上のアバターが存在する場合は、切り詰めて残りのアバターを`+X`のように表示されます。
 
 ```tsx preview
-<AvatarGroup max={3}>
-  <Avatar
+<AvatarGroup.Root max={3}>
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-  <Avatar
+  <AvatarGroup.Item
     name="Hirotomo Yamada"
     src="https://avatars.githubusercontent.com/u/84060430?v=4"
   />
-</AvatarGroup>
+</AvatarGroup.Root>
 ```

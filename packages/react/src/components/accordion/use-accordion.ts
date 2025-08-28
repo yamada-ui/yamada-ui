@@ -1,6 +1,6 @@
 "use client"
 
-import type { KeyboardEvent, KeyboardEventHandler } from "react"
+import type { KeyboardEvent } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import { useCallback, useEffect, useId, useState } from "react"
 import { useControllableState } from "../../hooks/use-controllable-state"
@@ -13,6 +13,7 @@ import {
   handlerAll,
   isArray,
   mergeRefs,
+  runKeyAction,
 } from "../../utils"
 
 const {
@@ -205,7 +206,7 @@ export const useAccordionItem = ({
 
   const onKeyDown = useCallback(
     (ev: KeyboardEvent<HTMLButtonElement>) => {
-      const actions: { [key: string]: KeyboardEventHandler } = {
+      runKeyAction(ev, {
         ArrowDown: () => {
           const next = descendants.enabledNextValue(index)
 
@@ -226,14 +227,7 @@ export const useAccordionItem = ({
 
           first?.node.focus()
         },
-      }
-
-      const action = actions[ev.key]
-
-      if (!action) return
-
-      ev.preventDefault()
-      action(ev)
+      })
     },
     [descendants, index],
   )

@@ -5,4 +5,73 @@ storybook: components-clientonly--basic
 source: components/client-only
 ---
 
+```tsx preview
+<ClientOnly>
+  <IconButton aria-label="Plus" icon={<PlusIcon />} />
+</ClientOnly>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { ClientOnly } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { ClientOnly } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { ClientOnly } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<ClientOnly />
+```
+
+### フォールバック
+
+子要素の準備中に読み込み状態をレンダリングするには、`fallback`プロパティを使用します。
+
+```tsx preview
+<ClientOnly fallback={<Skeleton boxSize="10" rounded="l2" />}>
+  <IconButton aria-label="Plus" icon={<PlusIcon />} />
+</ClientOnly>
+```
+
+### レンダリングプロップ
+
+コンポーネントが`window`, `document`, `localStorage`などのブラウザ専用APIにアクセスする場合は、レンダリングプロパティパターンを使用します。
+このパターンにより、ブラウザAPIにアクセスするコンポーネントがクライアント側でのみ評価され、ハイドレーションの不一致やサーバー側のエラーが防止されます。\
+また、サーバー側では必要のない重いコンポーネントのレンダリングにも使用できます。
+
+```tsx preview
+<ClientOnly fallback={<SkeletonText lineClamp={2} />}>
+  {() => (
+    <VStack gap="sm">
+      <Text>Current URL: {window.location.href}</Text>
+      <Text>Screen width: {window.innerWidth}px</Text>
+    </VStack>
+  )}
+</ClientOnly>
+```
+
+:::warning
+コンポーネントを直接渡すこともできますが、ブラウザAPIにアクセスするコンポーネントの場合は注意が必要です。
+:::
+
+```tsx
+/* サーバー側でエラーを引き起こす可能性があります */
+<ClientOnly fallback={<Skeleton />}>
+  <ComponentThatUsesWindow />
+</ClientOnly>
+
+/* 安全です */
+<ClientOnly fallback={<Skeleton />}>
+  {() => <ComponentThatUsesWindow />}
+</ClientOnly>
+```

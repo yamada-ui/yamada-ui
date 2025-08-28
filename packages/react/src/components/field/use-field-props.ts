@@ -36,19 +36,19 @@ export const useFieldProps = <Y extends HTMLElement, M extends Dict>(
 
   id ??= fieldContext?.id
   disabled ??= fieldContext?.disabled ?? fieldsetContext?.disabled
-  required ??= fieldContext?.required
-  readOnly ??= fieldContext?.readOnly
+  required ??= fieldContext?.required ?? fieldsetContext?.required
+  readOnly ??= fieldContext?.readOnly ?? fieldsetContext?.readOnly
   invalid ??= fieldContext?.invalid ?? fieldsetContext?.invalid
 
   const props = useMemo(
     () => ({
       id,
       disabled,
-      readOnly: notSupportReadOnly ? undefined : readOnly,
+      readOnly,
       required,
       ...rest,
     }),
-    [id, disabled, readOnly, required, rest, notSupportReadOnly],
+    [id, disabled, readOnly, required, rest],
   )
   const dataProps = useMemo(
     () => ({

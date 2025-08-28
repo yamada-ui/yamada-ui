@@ -15,21 +15,27 @@ style: components/button/button.style.ts
 :::code-group
 
 ```tsx [package]
-import { Button } from "@yamada-ui/react"
+import { Button, ButtonGroup } from "@yamada-ui/react"
 ```
 
 ```tsx [alias]
-import { Button } from "@/components/ui"
+import { Button, ButtonGroup } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Button } from "@workspace/ui"
+import { Button, ButtonGroup } from "@workspaces/ui"
 ```
 
 :::
 
 ```tsx
 <Button />
+```
+
+```tsx
+<ButtonGroup.Root>
+  <ButtonGroup.Item />
+</ButtonGroup.Root>
 ```
 
 ### バリアントを変更する
@@ -39,7 +45,7 @@ import { Button } from "@workspace/ui"
   <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
     {(variant, index) => (
       <Button variant={variant} key={index}>
-        Button
+        {toTitleCase(variant)}
       </Button>
     )}
   </For>
@@ -52,8 +58,8 @@ import { Button } from "@workspace/ui"
 <Wrap gap="md">
   <For each={["xs", "sm", "md", "lg", "xl"]}>
     {(size, index) => (
-      <Button size={size} key={index}>
-        Button
+      <Button size={size} key={index} minW="24">
+        {toTitleCase(size)}
       </Button>
     )}
   </For>
@@ -67,7 +73,7 @@ import { Button } from "@workspace/ui"
   <For each={["success", "warning"]}>
     {(colorScheme, index) => (
       <Button colorScheme={colorScheme} key={index}>
-        Button
+        {toTitleCase(colorScheme)}
       </Button>
     )}
   </For>
@@ -180,46 +186,44 @@ import { Button } from "@workspace/ui"
 ```
 
 :::note
-`Button`のローディングアニメーションは、内部的に[Loading](/docs/components/loading)を使用しています。
+`Button`のローディングは、内部的に[Loading](/docs/components/loading)を使用しています。
 :::
 
 ### グループ化する
 
-ボタンをグループ化する場合は、`ButtonGroup`を使用します。`ButtonGroup`は、子要素(`Button`)の`variant`, `size`, `colorScheme`, `disabled`を一括で設定できます。
-
 ```tsx preview
 <VStack>
-  <ButtonGroup attached variant="outline">
-    <Button>Button</Button>
-    <IconButton icon={<PlusIcon />} />
-  </ButtonGroup>
+  <ButtonGroup.Root attached variant="outline">
+    <ButtonGroup.Item>Button</ButtonGroup.Item>
+    <ButtonGroup.IconItem icon={<PlusIcon />} />
+  </ButtonGroup.Root>
 
   <Wrap gap="md">
-    <ButtonGroup gap="sm">
-      <Button>Button</Button>
-      <Button>Button</Button>
-      <Button>Button</Button>
-    </ButtonGroup>
+    <ButtonGroup.Root>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
 
-    <ButtonGroup attached disabled variant="outline">
-      <Button>Button</Button>
-      <Button>Button</Button>
-      <Button>Button</Button>
-    </ButtonGroup>
+    <ButtonGroup.Root attached disabled variant="outline">
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
   </Wrap>
 
   <Wrap gap="md">
-    <ButtonGroup orientation="vertical" gap="sm">
-      <Button>Button</Button>
-      <Button>Button</Button>
-      <Button>Button</Button>
-    </ButtonGroup>
+    <ButtonGroup.Root orientation="vertical">
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
 
-    <ButtonGroup orientation="vertical" attached variant="outline">
-      <Button>Button</Button>
-      <Button>Button</Button>
-      <Button>Button</Button>
-    </ButtonGroup>
+    <ButtonGroup.Root orientation="vertical" attached variant="outline">
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+      <ButtonGroup.Item>Button</ButtonGroup.Item>
+    </ButtonGroup.Root>
   </Wrap>
 </VStack>
 ```

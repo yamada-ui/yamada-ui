@@ -1,5 +1,5 @@
 import { defineComponentSlotStyle } from "../../core"
-import { iconButtonStyle } from "../icon-button"
+import { iconButtonStyle } from "../button"
 
 export const toggleStyle = defineComponentSlotStyle({
   base: {
@@ -30,16 +30,20 @@ export const toggleStyle = defineComponentSlotStyle({
       root: {
         _checked: {
           layerStyle: "solid",
+          _invalid: {
+            borderColor: "{error-border-color}",
+            borderWidth: "1px",
+          },
         },
         _notChecked: {
           layerStyle: "ghost",
           _hover: {
             layerStyle: "ghost.hover",
           },
-        },
-        _invalid: {
-          borderColor: "{error-border-color}",
-          borderWidth: "1px",
+          _invalid: {
+            borderColor: "{error-border-color}",
+            borderWidth: "1px",
+          },
         },
       },
     },
@@ -68,16 +72,20 @@ export const toggleStyle = defineComponentSlotStyle({
       root: {
         _checked: {
           layerStyle: "subtle",
+          _invalid: {
+            borderColor: "{error-border-color}",
+            borderWidth: "1px",
+          },
         },
         _notChecked: {
           layerStyle: "solid",
           _hover: {
             layerStyle: "solid.hover",
           },
-        },
-        _invalid: {
-          borderColor: "{error-border-color}",
-          borderWidth: "1px",
+          _invalid: {
+            borderColor: "{error-border-color}",
+            borderWidth: "1px",
+          },
         },
       },
     },
@@ -85,16 +93,20 @@ export const toggleStyle = defineComponentSlotStyle({
       root: {
         _checked: {
           layerStyle: "solid",
+          _invalid: {
+            borderColor: "{error-border-color}",
+            borderWidth: "1px",
+          },
         },
         _notChecked: {
           layerStyle: "subtle",
           _hover: {
             layerStyle: "subtle.hover",
           },
-        },
-        _invalid: {
-          borderColor: "{error-border-color}",
-          borderWidth: "1px",
+          _invalid: {
+            borderColor: "{error-border-color}",
+            borderWidth: "1px",
+          },
         },
       },
     },
@@ -104,7 +116,6 @@ export const toggleStyle = defineComponentSlotStyle({
           layerStyle: "solid",
           _invalid: {
             borderColor: "{error-border-color}",
-            borderWidth: "1px",
           },
         },
         _notChecked: {

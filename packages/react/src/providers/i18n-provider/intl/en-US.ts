@@ -1,10 +1,26 @@
 export default {
+  autocomplete: {
+    "Clear value": "Clear value",
+    "No results found": "No results found",
+  },
   avatar: {
     "Avatar Icon": "Avatar Icon",
   },
   breadcrumb: {
     Breadcrumb: "Breadcrumb",
     Ellipsis: "Ellipsis",
+  },
+  calendar: {
+    "Choose the month": "Choose the month",
+    "Choose the year": "Choose the year",
+    dd: "dd",
+    "dddd, MMMM DD, YYYY": "dddd, MMMM DD, YYYY",
+    "Go to the next month": "Go to the next month",
+    "Go to the previous month": "Go to the previous month",
+    MMM: "MMM",
+    "MMMM YYYY": "MMMM YYYY",
+    Today: "Today",
+    YYYY: "YYYY",
   },
   carousel: {
     "Go to next slide": "Go to next slide",

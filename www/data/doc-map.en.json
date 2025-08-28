@@ -1112,11 +1112,7 @@
       "segment": "theming",
       "pathname": "/docs/theming",
       "items": [
-        {
-          "title": "CLI",
-          "segment": "cli",
-          "pathname": "/docs/theming/cli"
-        },
+        { "title": "CLI", "segment": "cli", "pathname": "/docs/theming/cli" },
         {
           "title": "Customization",
           "segment": "customization",

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "section": "components",
+  "sources": [
+    {
+      "name": "em.style.ts",
+      "content": "import { defineComponentStyle } from \"@yamada-ui/react\"\n\nexport const emStyle = defineComponentStyle({\n  base: {\n    fontSize: \"italic\",\n  },\n})\n\nexport type EmStyle = typeof emStyle\n"
+    },
+    {
+      "name": "em.tsx",
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { EmStyle } from \"./em.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { emStyle } from \"./em.style\"\n\nexport interface EmProps extends HTMLStyledProps<\"em\">, ThemeProps<EmStyle> {}\n\nconst {\n  PropsContext: EmPropsContext,\n  usePropsContext: useEmPropsContext,\n  withContext,\n} = createComponent<EmProps, EmStyle>(\"em\", emStyle)\n\nexport { EmPropsContext, useEmPropsContext }\n\n/**\n * `Em` is a component that represents emphasized text. By default, it renders a `em` element.\n *\n * @see https://yamada-ui.com/components/em\n */\nexport const Em = withContext(\"em\")()\n"
+    },
+    {
+      "name": "index.ts",
+      "content": "export * from \"./em.style\"\nexport { Em, EmPropsContext, useEmPropsContext } from \"./em\"\nexport type { EmProps } from \"./em\"\n"
+    }
+  ]
+}

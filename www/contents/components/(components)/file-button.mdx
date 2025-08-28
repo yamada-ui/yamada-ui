@@ -6,4 +6,191 @@ source: components/file-button
 style: components/file-button/file-button.style.ts
 ---
 
+```tsx preview
+<Wrap gap="md">
+  <FileButton>Upload</FileButton>
+
+  <FileButton
+    as={IconButton}
+    aria-label="Upload file"
+    icon={<PlusIcon fontSize="2xl" />}
+  />
+</Wrap>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { FileButton } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { FileButton } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { FileButton } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<FileButton />
+```
+
+### Change Variant
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => (
+      <FileButton variant={variant} key={index}>
+        {toTitleCase(variant)}
+      </FileButton>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Size
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <FileButton size={size} key={index} minW="24">
+        {toTitleCase(size)}
+      </FileButton>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <FileButton colorScheme={colorScheme} key={index}>
+        {toTitleCase(colorScheme)}
+      </FileButton>
+    )}
+  </For>
+</Wrap>
+```
+
+### Allow Multiple Selection
+
+To allow multiple selection, set `multiple` to `true`.
+
+```tsx preview
+<FileButton multiple>Upload</FileButton>
+```
+
+### Specify File Extensions
+
+To specify file extensions, set `accept` to a string(type).
+
+```tsx preview
+<FileButton accept="image/png,image/jpeg">Upload</FileButton>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<VStack>
+  <FileButton disabled alignSelf="flex-start">
+    Upload
+  </FileButton>
+
+  <Field.Root
+    disabled
+    helperMessage="Please select a file to upload."
+    label="Upload file"
+  >
+    <FileButton justifySelf="flex-start">Upload</FileButton>
+  </Field.Root>
+</VStack>
+```
+
+### Read-Only
+
+To make it read-only, set `readOnly` to `true`.
+
+```tsx preview
+<VStack>
+  <FileButton readOnly alignSelf="flex-start">
+    Upload
+  </FileButton>
+
+  <Field.Root
+    readOnly
+    helperMessage="Please select a file to upload."
+    label="Upload file"
+  >
+    <FileButton justifySelf="flex-start">Upload</FileButton>
+  </Field.Root>
+</VStack>
+```
+
+### Invalid
+
+To make the input invalid, set `invalid` to `true`.
+
+```tsx preview
+<VStack>
+  <FileButton invalid alignSelf="flex-start">
+    Upload
+  </FileButton>
+
+  <Field.Root
+    invalid
+    helperMessage="Please select a file to upload."
+    label="Upload file"
+  >
+    <FileButton justifySelf="flex-start">Upload</FileButton>
+  </Field.Root>
+</VStack>
+```
+
+To change the border color, set `errorBorderColor` to a color.
+
+```tsx preview
+<FileButton invalid errorBorderColor="warning">
+  Upload
+</FileButton>
+```
+
+### Reset
+
+To reset the value, set `resetRef` to `ref`. A callback function will be attached to the set `ref`, execute it.
+
+```tsx preview functional client
+const [files, onChange] = useState<File[] | undefined>(undefined)
+const resetRef = useRef<() => void>(null)
+const onReset = () => {
+  onChange(undefined)
+  resetRef.current?.()
+}
+
+return (
+  <VStack>
+    <Text>files: {files?.length ?? 0}</Text>
+
+    <HStack>
+      <FileButton multiple resetRef={resetRef} onChange={onChange}>
+        Upload
+      </FileButton>
+
+      <Button onClick={onReset} variant="subtle">
+        Reset
+      </Button>
+    </HStack>
+  </VStack>
+)
+```

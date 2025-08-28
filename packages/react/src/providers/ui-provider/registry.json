@@ -1,0 +1,17 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": ["loading"],
+    "externals": [],
+    "hooks": [],
+    "providers": ["i18n-provider"]
+  },
+  "section": "providers",
+  "sources": [
+    { "name": "index.ts", "content": "export * from \"./ui-provider\"\n" },
+    {
+      "name": "ui-provider.tsx",
+      "content": "import type { FC } from \"react\"\nimport type {\n  ColorModeProviderProps,\n  ThemeConfig,\n  ThemeProviderProps,\n  UsageTheme,\n  DefaultTheme,\n  DeepMerge,\n} from \"@yamada-ui/react\"\nimport type { I18nProviderProps } from \"../i18n-provider\"\nimport { LoadingProvider } from \"../../components/loading\"\nimport {\n  ColorModeProvider,\n  EnvironmentProvider,\n  SystemProvider,\n  ThemeProvider,\n  defaultConfig,\n  defaultTheme,\n  merge,\n} from \"@yamada-ui/react\"\nimport { I18nProvider } from \"../i18n-provider\"\n\nexport interface UIProviderProps\n  extends Omit<ThemeProviderProps, \"storageKey\">,\n    Pick<ColorModeProviderProps, \"colorMode\">,\n    I18nProviderProps {\n  /**\n   * Key of value saved in storage.\n   * By default, it is saved to `local storage`.\n   */\n  colorModeStorageKey?: string\n  /**\n   * Key of value saved in storage.\n   * By default, it is saved to `local storage`.\n   */\n  themeSchemeStorageKey?: string\n}\n\n/**\n * The global provider that must be added to make all Yamada UI components work correctly.\n */\nexport const UIProvider: FC<UIProviderProps> = ({\n  children,\n  colorMode,\n  colorModeStorageKey,\n  config = defaultConfig,\n  cookie,\n  dir,\n  disableGlobalStyle,\n  disableResetStyle,\n  intl,\n  locale,\n  storage,\n  theme = defaultTheme,\n  themeSchemeStorageKey,\n}) => {\n  return (\n    <EnvironmentProvider>\n      <I18nProvider dir={dir} intl={intl} locale={locale}>\n        <SystemProvider config={config} theme={theme}>\n          <ThemeProvider\n            config={config}\n            cookie={cookie}\n            disableGlobalStyle={disableGlobalStyle}\n            disableResetStyle={disableResetStyle}\n            storage={storage}\n            storageKey={themeSchemeStorageKey}\n            theme={theme}\n          >\n            <ColorModeProvider\n              colorMode={colorMode}\n              config={config}\n              cookie={cookie}\n              storage={storage}\n              storageKey={colorModeStorageKey}\n            >\n              <LoadingProvider {...config.loading}>{children}</LoadingProvider>\n            </ColorModeProvider>\n          </ThemeProvider>\n        </SystemProvider>\n      </I18nProvider>\n    </EnvironmentProvider>\n  )\n}\n\nexport const extendTheme = <Y extends UsageTheme>(theme: Y) => {\n  return merge<DeepMerge<DefaultTheme, Y>>(defaultTheme, theme)\n}\n\nexport const extendConfig = (config: ThemeConfig) => {\n  return merge(defaultConfig, config)\n}\n"
+    }
+  ]
+}

@@ -8,12 +8,14 @@ import type {
   ThemeProps,
   WithoutThemeProps,
 } from "../../core"
-import type { UseComboboxGroupProps } from "../../hooks/use-combobox"
+import type {
+  ComboboxItem,
+  UseComboboxGroupProps,
+} from "../../hooks/use-combobox"
 import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
 import type { SelectStyle } from "./select.style"
 import type {
-  SelectItem,
   UseSelectOptionProps,
   UseSelectProps,
   UseSelectReturn,
@@ -24,16 +26,12 @@ import {
   ComboboxContext,
   ComboboxDescendantsContext,
   ComboboxGroupContext,
+  createComboboxChildren,
+  createComboboxItem,
   useComboboxGroup,
   useComboboxGroupContext,
 } from "../../hooks/use-combobox"
-import {
-  cast,
-  findChild,
-  getValidChildren,
-  isArray,
-  isSomeElement,
-} from "../../utils"
+import { cast, isArray } from "../../utils"
 import { useGroupItemProps } from "../group"
 import { CheckIcon, ChevronDownIcon, XIcon } from "../icon"
 import { InputGroup, useInputBorder, useInputPropsContext } from "../input"
@@ -41,7 +39,9 @@ import { Popover, usePopoverProps } from "../popover"
 import { selectStyle } from "./select.style"
 import { SelectContext, useSelect, useSelectOption } from "./use-select"
 
-interface ComponentContext extends Pick<UseSelectReturn, "getSeparatorProps"> {}
+interface ComponentContext
+  extends Pick<UseSelectReturn, "getSeparatorProps">,
+    Pick<SelectRootProps, "groupProps" | "optionProps"> {}
 
 export interface SelectRootProps<Y extends string | string[] = string>
   extends Omit<
@@ -85,9 +85,17 @@ export interface SelectRootProps<Y extends string | string[] = string>
    */
   elementProps?: InputGroup.ElementProps
   /**
+   * Props for group element.
+   */
+  groupProps?: Omit<SelectGroupProps, "children" | "label">
+  /**
    * Props for icon element.
    */
   iconProps?: SelectIconProps
+  /**
+   * Props for option element.
+   */
+  optionProps?: Omit<SelectOptionProps, "children" | "value">
   /**
    * Props for placeholder element.
    */
@@ -135,7 +143,9 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
         items: itemsProp,
         contentProps,
         elementProps,
+        groupProps,
         iconProps,
+        optionProps,
         placeholderProps,
         rootProps,
         ...rest
@@ -146,45 +156,25 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
       "defaultOpen",
       "onOpen",
       "onClose",
+      "openOnClick",
     ])
-    const items = useMemo<SelectItem[]>(() => {
+    const items = useMemo<ComboboxItem[]>(() => {
       if (itemsProp) return itemsProp
 
-      const validChildren = getValidChildren(children)
-
-      return validChildren
-        .filter(
-          ({ type }) =>
-            isSomeElement(type, SelectOption) ||
-            isSomeElement(type, SelectGroup),
-        )
-        .map(({ type, props }) => {
-          if (isSomeElement(type, SelectOption)) {
-            return { label: props.children, value: props.value }
-          } else {
-            const validChildren = getValidChildren(props.children)
-            const label = findChild(validChildren, SelectLabel)
-
-            return {
-              items: validChildren
-                .filter(({ type }) => isSomeElement(type, SelectOption))
-                .map(({ props }) => ({
-                  label: props.children,
-                  value: props.value,
-                })),
-              label: label?.props.children ?? props.label,
-            }
-          }
-        })
+      return createComboboxItem(children, {
+        Group: SelectGroup,
+        Label: SelectLabel,
+        Option: SelectOption,
+      })
     }, [itemsProp, children])
     const {
       descendants,
+      includePlaceholder,
       interactive,
       items: computedItems,
       max,
       open,
       placeholder,
-      placeholderInOptions,
       value,
       getClearIconProps,
       getContentProps,
@@ -193,6 +183,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
       getRootProps,
       getSeparatorProps,
       onActiveDescendant,
+      onChange,
       onClose,
       onOpen,
       onSelect,
@@ -202,6 +193,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
         animationScheme: "block-start",
         autoFocus: false,
         matchWidth: true,
+        openOnClick: false,
         ...popoverProps,
         disabled: !interactive,
         open,
@@ -217,7 +209,7 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
             {placeholder ? (
               <SelectOption
                 {...placeholderProps}
-                hidden={!placeholderInOptions}
+                hidden={!includePlaceholder}
                 value=""
               >
                 {placeholder}
@@ -228,45 +220,26 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
           </>
         )
 
-      return computedItems.map((item, index) => {
-        if ("items" in item) {
-          const { items = [], label, ...rest } = item
-
-          return (
-            <SelectGroup key={index} label={label} {...rest}>
-              {items.map(({ label, ...rest }, index) => (
-                <SelectOption key={index} {...rest}>
-                  {label}
-                </SelectOption>
-              ))}
-            </SelectGroup>
-          )
-        } else {
-          const { label, ...rest } = item
-
-          return (
-            <SelectOption key={index} {...rest}>
-              {label}
-            </SelectOption>
-          )
-        }
+      return createComboboxChildren(computedItems, {
+        Group: SelectGroup,
+        Option: SelectOption,
       })
     }, [
       children,
       computedItems,
       placeholder,
-      placeholderInOptions,
+      includePlaceholder,
       placeholderProps,
     ])
     const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
     const comboboxContext = useMemo(
-      () => ({ onActiveDescendant, onClose, onSelect }),
-      [onActiveDescendant, onClose, onSelect],
+      () => ({ max, value, onActiveDescendant, onChange, onClose, onSelect }),
+      [max, onActiveDescendant, onChange, onClose, onSelect, value],
     )
     const selectContext = useMemo(() => ({ max, value }), [max, value])
     const componentContext = useMemo(
-      () => ({ getSeparatorProps }),
-      [getSeparatorProps],
+      () => ({ getSeparatorProps, groupProps, optionProps }),
+      [getSeparatorProps, groupProps, optionProps],
     )
     const hasValue = isArray(value) ? !!value.length : !!value
 
@@ -387,7 +360,11 @@ export interface SelectGroupProps
 
 export const SelectGroup = withContext<"div", SelectGroupProps>(
   ({ children, label, labelProps, ...rest }) => {
-    const { getGroupProps, getLabelProps } = useComboboxGroup(rest)
+    const { groupProps } = useComponentContext()
+    const { getGroupProps, getLabelProps } = useComboboxGroup({
+      ...groupProps,
+      ...rest,
+    })
     const context = useMemo(() => ({ getLabelProps }), [getLabelProps])
 
     return (
@@ -412,12 +389,18 @@ export interface SelectOptionProps
 }
 
 export const SelectOption = withContext<"div", SelectOptionProps>(
-  ({ children, icon = <CheckIcon />, ...rest }) => {
-    const { getIndicatorProps, getOptionProps } = useSelectOption(rest)
+  ({ children, icon: iconProp, ...rest }) => {
+    const { optionProps: { icon, ...optionProps } = {} } = useComponentContext()
+    const { getIndicatorProps, getOptionProps } = useSelectOption({
+      ...optionProps,
+      ...rest,
+    })
 
     return (
       <styled.div {...getOptionProps()}>
-        <SelectIndicator {...getIndicatorProps()}>{icon}</SelectIndicator>
+        <SelectIndicator {...getIndicatorProps()}>
+          {iconProp ?? icon ?? <CheckIcon />}
+        </SelectIndicator>
         {children}
       </styled.div>
     )

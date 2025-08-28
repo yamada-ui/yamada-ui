@@ -1,7 +1,7 @@
 "use client"
 
+import type { ReactElement } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
-// import type { LoadingScheme } from "../loading"
 import type { CloseButtonProps } from "../close-button"
 import type { NoticeStyle } from "./notice.style"
 import type { UseNoticeOptions } from "./use-notice"
@@ -12,70 +12,145 @@ import { Alert } from "../alert"
 import { CloseButton } from "../close-button"
 import { noticeStyle } from "./notice.style"
 
-export interface NoticeContext {}
+interface ComponentContext {}
 
-export const {
-  component,
+export interface NoticeProps
+  extends UseNoticeOptions,
+    HTMLStyledProps,
+    ThemeProps<NoticeStyle> {
+  /**
+   * The toast ID for dismissal.
+   */
+  t: number | string
+  /**
+   * If `true`, shows a close button.
+   */
+  closable?: boolean
+  /**
+   * The description text.
+   */
+  description?: string
+  /**
+   * The icon element or loading scheme.
+   */
+  icon?: ReactElement | { variant?: string }
+  /**
+   * The loading scheme.
+   */
+  loadingScheme?: string
+  /**
+   * The status of the notice.
+   */
+  status?: "error" | "info" | "loading" | "success" | "warning"
+  /**
+   * The title text.
+   */
+  title?: string
+  /**
+   * If `true`, shows an icon.
+   */
+  withIcon?: boolean
+  /**
+   * Props for the close button.
+   */
+  closeButtonProps?: CloseButtonProps
+  /**
+   * Props for the content container.
+   */
+  contentProps?: HTMLStyledProps
+  /**
+   * Props for the description.
+   */
+  descriptionProps?: HTMLStyledProps
+  /**
+   * Props for the icon.
+   */
+  iconProps?: HTMLStyledProps
+  /**
+   * Props for the loading component.
+   */
+  loadingProps?: HTMLStyledProps
+  /**
+   * Props for the title.
+   */
+  titleProps?: HTMLStyledProps
+}
+
+const {
   ComponentContext,
   PropsContext: NoticePropsContext,
-  useComponentContext,
   usePropsContext: useNoticePropsContext,
   withContext,
   withProvider,
-} = createSlotComponent<UseNoticeOptions, NoticeStyle, NoticeContext>(
+} = createSlotComponent<NoticeProps, NoticeStyle, ComponentContext>(
   "notice",
   noticeStyle,
 )
 
-interface NoticeProps
-  extends UseNoticeOptions,
-    HTMLStyledProps,
-    ThemeProps<NoticeStyle> {
-  t: number | string
-}
+export { NoticePropsContext, useNoticePropsContext }
 
+/**
+ * `Notice` is a component that conveys information to the user.
+ *
+ * @see https://yamada-ui.com/components/notice
+ */
 export const Notice = withProvider<"div", NoticeProps>(
-  ({ closable, description, icon, status, t, title, onClick, ...props }) => {
+  ({
+    closable,
+    description,
+    icon,
+    loadingScheme,
+    status,
+    t,
+    title,
+    withIcon = true,
+    closeButtonProps,
+    contentProps,
+    descriptionProps,
+    iconProps,
+    loadingProps,
+    titleProps,
+    ...rest
+  }) => {
     return (
-      <Alert.Root {...props}>
-        {status === "loading" ? (
-          <Alert.Loading loadingScheme={icon?.variant} />
-        ) : (
-          <Alert.Icon />
-        )}
-        {title || description ? (
-          <NoticeContent>
-            {title ? <Alert.Title>{title}</Alert.Title> : null}
-            {description ? (
-              <Alert.Description>{description}</Alert.Description>
-            ) : null}
-          </NoticeContent>
-        ) : null}
-        {closable ? (
-          <NoticeCloseButton
-            onClick={handlerAll(onClick, () => toast.dismiss(t))}
-          />
-        ) : null}
-      </Alert.Root>
+      <ComponentContext>
+        <Alert.Root {...rest}>
+          {withIcon ? (
+            status === "loading" || loadingScheme ? (
+              <Alert.Loading
+                loadingScheme={loadingScheme || icon?.variant}
+                {...loadingProps}
+              />
+            ) : (
+              <Alert.Icon {...iconProps} />
+            )
+          ) : null}
+          {title || description ? (
+            <NoticeContent {...contentProps}>
+              {title ? (
+                <Alert.Title {...titleProps}>{title}</Alert.Title>
+              ) : null}
+              {description ? (
+                <Alert.Description {...descriptionProps}>
+                  {description}
+                </Alert.Description>
+              ) : null}
+            </NoticeContent>
+          ) : null}
+          {closable ? (
+            <NoticeCloseButton
+              {...closeButtonProps}
+              onClick={handlerAll(closeButtonProps?.onClick, () =>
+                toast.dismiss(t),
+              )}
+            />
+          ) : null}
+        </Alert.Root>
+      </ComponentContext>
     )
   },
-  "root",
+  "item",
 )()
-
-// export interface NoticeRootProps
-//   extends HTMLStyledProps,
-//     ThemeProps<NoticeStyle> {
-// }
-
-// /**
-//  * `Notice` is a component that conveys information to the user.
-//  *
-//  * @see https://yamada-ui.com/components/notice
-//  */
-// export const NoticeRoot = withContext<"div", NoticeRootProps>(
-//   (props) => <Alert.Root {...props} />,
-//   "root",
-// )()
 
 export interface NoticeContentProps extends HTMLStyledProps {}
 
@@ -83,41 +158,6 @@ export const NoticeContent = withContext<"div", NoticeContentProps>(
   "div",
   "content",
 )()
-
-// export interface NoticeIconProps extends HTMLStyledProps<"svg"> {}
-
-// export const NoticeIcon = withContext<"svg", NoticeIconProps>(
-//   (props) => <Alert.Icon {...props} />,
-//   "icon",
-// )()
-
-// export interface NoticeLoadingProps extends HTMLStyledProps<"svg"> {
-//   /**
-//    * The loading scheme.
-//    *
-//    * @default 'oval'
-//    */
-//   loadingScheme?: LoadingScheme
-// }
-
-// export const NoticeLoading = withContext<"svg", NoticeLoadingProps>(
-//   ({ loadingScheme, ...props }) => <Alert.Loading loadingScheme={loadingScheme} {...props} />,
-//   "loading",
-// )()
-
-// export interface NoticeTitleProps extends HTMLStyledProps<"p"> {}
-
-// export const NoticeTitle = withContext<"p", NoticeTitleProps>(
-//   (props) => <Alert.Title {...props} />,
-//   "title",
-// )()
-
-// export interface NoticeDescriptionProps extends HTMLStyledProps<"span"> {}
-
-// export const NoticeDescription = withContext<"span", NoticeDescriptionProps>(
-//   (props) => <Alert.Description {...props} />,
-//   "description",
-// )()
 
 export interface NoticeCloseButtonProps extends CloseButtonProps {}
 

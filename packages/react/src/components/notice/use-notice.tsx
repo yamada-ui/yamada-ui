@@ -1,6 +1,7 @@
 import type { ReactElement, ReactNode } from "react"
-import type { NoticeConfig, NoticePlacement } from "../../core"
+import type { HTMLStyledProps, NoticeConfig } from "../../core"
 import type { AlertRootProps } from "../alert"
+import type { CloseButtonProps } from "../close-button"
 import type { LoadingScheme } from "../loading"
 import type { StatusScheme } from "../status"
 import { useMemo } from "react"
@@ -48,11 +49,9 @@ export interface UseNoticeOptions extends NoticeConfig {
    */
   limit?: number
   /**
-   * The placement of the notice.
-   *
-   * @default 'start-center'
+   * The loading scheme.
    */
-  placement?: NoticePlacement
+  loadingScheme?: string
   /**
    * The status of the notice.
    */
@@ -61,6 +60,34 @@ export interface UseNoticeOptions extends NoticeConfig {
    * The title of the notice.
    */
   title?: string
+  /**
+   * If `true`, shows an icon.
+   */
+  withIcon?: boolean
+  /**
+   * Props for the close button.
+   */
+  closeButtonProps?: CloseButtonProps
+  /**
+   * Props for the content container.
+   */
+  contentProps?: HTMLStyledProps
+  /**
+   * Props for the description.
+   */
+  descriptionProps?: HTMLStyledProps
+  /**
+   * Props for the icon.
+   */
+  iconProps?: HTMLStyledProps
+  /**
+   * Props for the loading component.
+   */
+  loadingProps?: HTMLStyledProps
+  /**
+   * Props for the title.
+   */
+  titleProps?: HTMLStyledProps
 }
 
 export interface NoticeComponentProps {
@@ -90,14 +117,26 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
         closable,
         component,
         description,
-        duration = 5000,
+        duration,
         icon,
         limit,
+        loadingScheme,
         placement = "start-center",
         status,
         title,
+        withIcon,
+        closeButtonProps,
+        contentProps,
+        descriptionProps,
+        iconProps,
+        loadingProps,
+        titleProps,
         ...toastOptions
       } = finalOptions
+
+      if (duration === null) {
+        duration = Number.POSITIVE_INFINITY
+      }
 
       if (limit) {
         const currentLimit = getLimit(placement)
@@ -126,9 +165,17 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
               closable={closable}
               description={description}
               icon={icon}
+              loadingScheme={loadingScheme}
               status={status}
               t={t}
               title={title}
+              withIcon={withIcon}
+              closeButtonProps={closeButtonProps}
+              contentProps={contentProps}
+              descriptionProps={descriptionProps}
+              iconProps={iconProps}
+              loadingProps={loadingProps}
+              titleProps={titleProps}
             />
           ) as ReactElement,
         {

@@ -12,7 +12,7 @@ export const noticeStyle = defineComponentSlotStyle({
     content: {
       flex: 1,
     },
-    root: {
+    item: {
       alignItems: "center",
       display: "flex",
       maxW: "36rem",
@@ -23,19 +23,19 @@ export const noticeStyle = defineComponentSlotStyle({
 
   sizes: {
     sm: {
-      root: {
+      item: {
         maxW: "24rem",
         minW: "16rem",
       },
     },
     md: {
-      root: {
+      item: {
         maxW: "36rem",
         minW: "20rem",
       },
     },
     lg: {
-      root: {
+      item: {
         maxW: "48rem",
         minW: "24rem",
       },

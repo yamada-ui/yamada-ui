@@ -1,3 +1,4 @@
-export * from "./notice.style"
-export { NoticeProvider } from "./notice-provider"
-export * from "./use-notice"
+export { Notice } from "./notice"
+export type { NoticeProps } from "./notice"
+export { useNotice } from "./use-notice"
+export type { UseNoticeOptions } from "./use-notice"

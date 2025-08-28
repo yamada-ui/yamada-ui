@@ -5,7 +5,7 @@ export const inputElementStyle = defineComponentStyle({
     alignItems: "center",
     color: "fg.subtle",
     display: "flex",
-    fontSize: "md",
+    fontSize: "1em",
     height: "full",
     justifyContent: "center",
     position: "absolute",

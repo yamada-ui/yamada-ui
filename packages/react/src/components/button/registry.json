@@ -8,6 +8,7 @@
   },
   "dependents": {
     "components": [
+      "calendar",
       "carousel",
       "close-button",
       "drawer",

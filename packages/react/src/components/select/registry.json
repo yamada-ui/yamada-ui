@@ -15,7 +15,7 @@
     "providers": ["i18n-provider"]
   },
   "dependents": {
-    "components": ["autocomplete"],
+    "components": ["autocomplete", "calendar"],
     "hooks": [],
     "providers": []
   },

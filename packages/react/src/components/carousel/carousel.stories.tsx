@@ -851,8 +851,8 @@ export const CustomComponent: Story = () => {
               color="transparent"
               fill="colorScheme.solid/40"
               fontSize="2xl"
-              _selected={{ fill: "colorScheme.solid" }}
               _hover={{ _notSelected: { fill: "colorScheme.solid/70" } }}
+              _selected={{ fill: "colorScheme.solid" }}
             />
           </Center>
         )}

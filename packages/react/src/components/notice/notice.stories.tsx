@@ -446,7 +446,7 @@ export const WithCloseStrategy = () => {
   const notice = useNotice()
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <Center gap="md" h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button
         onClick={() =>
           notice({
@@ -458,6 +458,18 @@ export const WithCloseStrategy = () => {
         }
       >
         Show Notice
+      </Button>
+      <Button
+        onClick={() =>
+          notice({
+            closable: true,
+            closeStrategy: "button",
+            description: "オッス！オラ悟空！",
+            title: "孫悟空",
+          })
+        }
+      >
+        Show Notice (button)
       </Button>
     </Center>
   )
@@ -567,8 +579,14 @@ export const CustomComponent = () => {
       <Button
         onClick={() =>
           notice({
-            component: () => (
-              <Box bg="purple.500" color="white" px={4} py={3}>
+            component: ({ onClose }) => (
+              <Box
+                bg="purple.500"
+                color="white"
+                px={4}
+                py={3}
+                onClick={onClose}
+              >
                 ギャルのパンティーおくれーーーっ！！！！！
               </Box>
             ),

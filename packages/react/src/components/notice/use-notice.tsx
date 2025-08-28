@@ -115,6 +115,7 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
       const {
         variant,
         closable,
+        closeStrategy,
         component,
         description,
         duration,
@@ -145,15 +146,17 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
         }
       }
 
+      const finalToastOptions = {
+        ...toastOptions,
+        dismissible: closeStrategy !== "button" && closable,
+        duration,
+        toasterId: placement,
+      }
+
       if (component) {
         return toast.custom(
           (t) => component({ onClose: () => toast.dismiss(t) }) as ReactElement,
-          {
-            ...toastOptions,
-            id: finalOptions.id,
-            duration,
-            toasterId: placement,
-          },
+          finalToastOptions,
         )
       }
 
@@ -178,11 +181,7 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
               titleProps={titleProps}
             />
           ) as ReactElement,
-        {
-          ...toastOptions,
-          duration,
-          toasterId: finalOptions.placement ?? "start-center",
-        },
+        finalToastOptions,
       )
     }
 

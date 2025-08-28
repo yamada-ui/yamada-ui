@@ -30,6 +30,9 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 
 ```tsx
 <Toggle />
+```
+
+```tsx
 <ToggleGroup.Root>
   <ToggleGroup.Item />
 </ToggleGroup.Root>
@@ -161,6 +164,8 @@ To make read-only, set `readOnly` to `true`.
 
 ### Invalid
 
+To set invalid state, set `invalid` to `true`.
+
 ```tsx preview
 <Wrap gap="md">
   <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
@@ -178,6 +183,8 @@ To make read-only, set `readOnly` to `true`.
 ```
 
 ### Change Invalid Border Color
+
+To change the border color, set `errorBorderColor` to the color.
 
 ```tsx preview
 <Toggle

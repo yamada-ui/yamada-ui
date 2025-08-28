@@ -30,6 +30,9 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 
 ```tsx
 <Toggle />
+```
+
+```tsx
 <ToggleGroup.Root>
   <ToggleGroup.Item />
 </ToggleGroup.Root>
@@ -101,6 +104,8 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 
 ### 丸くする
 
+丸くする場合は、`fullRounded`を`true`に設定します。
+
 ```tsx preview
 <Wrap gap="md">
   <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
@@ -159,6 +164,8 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 
 ### 無効な状態にする
 
+無効な状態にする場合は、`invalid`を`true`に設定します。
+
 ```tsx preview
 <Wrap gap="md">
   <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
@@ -176,6 +183,8 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 ```
 
 ### 無効な状態におけるボーダーの色を変更する
+
+ボーダーのカラーを変更する場合は、`errorBorderColor`にカラーを設定します。
 
 ```tsx preview
 <Toggle
@@ -203,12 +212,6 @@ return (
 ```
 
 ### グループ化する
-
-```tsx
-<ToggleGroup.Root>
-  <ToggleGroup.Item />
-</ToggleGroup.Root>
-```
 
 ```tsx preview
 <ToggleGroup.Root>

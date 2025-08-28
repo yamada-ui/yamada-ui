@@ -161,6 +161,8 @@ import { Textarea } from "@workspaces/ui"
 
 ### リサイズの動作を変更する
 
+リサイズの動作を変更する場合は、`resize`に`block`、`horizontal`、`vertical`、`none`のいずれかを設定します。
+
 ```tsx preview
 <VStack>
   <For each={["block", "horizontal", "vertical", "none"]}>

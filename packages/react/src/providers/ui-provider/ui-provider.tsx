@@ -74,8 +74,9 @@ export const UIProvider: FC<UIProviderProps> = ({
               storage={storage}
               storageKey={colorModeStorageKey}
             >
-              <LoadingProvider {...config.loading}>{children}</LoadingProvider>
-              <NoticeProvider config={config} theme={theme} />
+              <LoadingProvider {...config.loading}>
+                <NoticeProvider {...config.notice}>{children}</NoticeProvider>
+              </LoadingProvider>
             </ColorModeProvider>
           </ThemeProvider>
         </SystemProvider>

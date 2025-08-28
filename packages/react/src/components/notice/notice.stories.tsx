@@ -61,7 +61,7 @@ export const KeepStay = () => {
           notice({
             closable: true,
             description: "オッス！オラ悟空！",
-            duration: null,
+            duration: Number.POSITIVE_INFINITY,
             title: "孫悟空",
           })
         }
@@ -81,15 +81,14 @@ export const WithVariant = () => {
         <Button
           onClick={() =>
             notice({
-              variant: "basic",
+              variant: "plain",
               description: "オッス！オラ悟空！",
               title: "孫悟空",
             })
           }
         >
-          Show basic Notice
+          Show plain Notice
         </Button>
-
         <Button
           onClick={() =>
             notice({
@@ -101,7 +100,6 @@ export const WithVariant = () => {
         >
           Show solid Notice
         </Button>
-
         <Button
           onClick={() =>
             notice({
@@ -113,29 +111,27 @@ export const WithVariant = () => {
         >
           Show subtle Notice
         </Button>
-
         <Button
           onClick={() =>
             notice({
-              variant: "top-accent",
+              variant: "surface",
               description: "オッス！オラ悟空！",
               title: "孫悟空",
             })
           }
         >
-          Show top accent Notice
+          Show surface Notice
         </Button>
-
         <Button
           onClick={() =>
             notice({
-              variant: "left-accent",
+              variant: "island",
               description: "オッス！オラ悟空！",
               title: "孫悟空",
             })
           }
         >
-          Show left accent Notice
+          Show island Notice
         </Button>
       </Wrap>
     </Center>
@@ -341,7 +337,9 @@ export const WithColorScheme = () => {
 }
 
 export const WithPlacement = () => {
-  const notice = useNotice()
+  const notice = useNotice({
+    duration: Number.POSITIVE_INFINITY,
+  })
 
   return (
     <Center
@@ -531,10 +529,10 @@ export const UseUpdate = () => {
 }
 
 export const UseLimit = () => {
-  const notice = useNotice({ limit: 3 })
+  const notice = useNotice({ limit: 10 })
 
   return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
+    <Center gap="md" h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
       <Button
         onClick={() =>
           notice({
@@ -543,7 +541,19 @@ export const UseLimit = () => {
           })
         }
       >
-        Show Notice
+        Show Notice (limit: 10)
+      </Button>
+      <Button
+        onClick={() =>
+          notice({
+            description: "オッス！オラ悟空！",
+            limit: 2,
+            placement: "start-end",
+            title: "孫悟空",
+          })
+        }
+      >
+        Show Notice (limit: 2)
       </Button>
     </Center>
   )
@@ -567,48 +577,6 @@ export const CustomComponent = () => {
       >
         Show Notice
       </Button>
-    </Center>
-  )
-}
-
-export const CustomStyle = () => {
-  const notice = useNotice({
-    style: {
-      maxW: "100%",
-      minW: "100%",
-    },
-  })
-
-  return (
-    <Center h="calc(100vh - 16px * 2)" w="calc(100vw - 16px * 2)">
-      <Wrap gap="md">
-        <Button
-          onClick={() =>
-            notice({
-              closable: true,
-              description: "オッス！オラ悟空！",
-              title: "孫悟空",
-            })
-          }
-        >
-          Show Notice
-        </Button>
-
-        <Button
-          onClick={() =>
-            notice({
-              style: {
-                minW: "60%",
-              },
-              closable: true,
-              description: "オッス！オラ悟空！",
-              title: "孫悟空",
-            })
-          }
-        >
-          Show individual style Notice
-        </Button>
-      </Wrap>
     </Center>
   )
 }

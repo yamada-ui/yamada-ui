@@ -9,11 +9,20 @@ export const noticeStyle = defineComponentSlotStyle({
       top: "2",
       w: "6",
     },
+    content: {
+      flex: 1,
+    },
+    description: {},
+    icon: {},
+    loading: {},
     root: {
+      alignItems: "center",
+      display: "flex",
       maxW: "36rem",
       minW: "20rem",
       position: "relative",
     },
+    title: {},
   },
 
   sizes: {

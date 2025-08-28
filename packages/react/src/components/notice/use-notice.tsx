@@ -1,18 +1,19 @@
 import type { ReactElement, ReactNode } from "react"
-import type { NoticePlacement } from "../../core"
+import type { NoticeConfig, NoticePlacement } from "../../core"
+import type { AlertRootProps } from "../alert"
+import type { LoadingScheme } from "../loading"
+import type { StatusScheme } from "../status"
 import { useMemo } from "react"
 import { toast } from "sonner"
-import { Notice } from "."
+import { useSystem } from "../../core"
+import { Notice } from "./notice"
+import { useNoticeContext } from "./notice-provider"
 
-export interface UseNoticeOptions {
+export interface UseNoticeOptions extends NoticeConfig {
   /**
    * Unique identifier for the notice.
    */
   id?: number | string
-  /**
-   * Custom style object.
-   */
-  style?: { [key: string]: any }
   /**
    * The color scheme of the notice.
    */
@@ -20,13 +21,7 @@ export interface UseNoticeOptions {
   /**
    * The variant of the notice.
    */
-  variant?: "basic" | "left-accent" | "solid" | "subtle" | "top-accent"
-  /**
-   * If `true`, allows the notice to be removed.
-   *
-   * @default false
-   */
-  closable?: boolean
+  variant?: AlertRootProps["variant"]
   /**
    * Close strategy for the notice.
    */
@@ -40,14 +35,14 @@ export interface UseNoticeOptions {
    */
   description?: string
   /**
-   * The number of `ms` the notice will continue to be displayed.
-   *
-   * If `null`, the notice will continue to display.
-   * Please use in conjunction with `isClosable`.
-   *
-   * @default 5000
+   * Icon configuration for the notice.
    */
-  duration?: null | number
+  icon?: {
+    /**
+     * The variant of the icon.
+     */
+    variant?: LoadingScheme
+  }
   /**
    * The maximum value at which notice will be displayed.
    */
@@ -61,7 +56,7 @@ export interface UseNoticeOptions {
   /**
    * The status of the notice.
    */
-  status?: "error" | "info" | "loading" | "success" | "warning"
+  status?: "loading" | StatusScheme
   /**
    * The title of the notice.
    */
@@ -78,20 +73,38 @@ export interface NoticeComponentProps {
  * @see Docs https://yamada-ui.com/hooks/use-notice
  */
 export const useNotice = (defaultOptions?: UseNoticeOptions) => {
-  // const { theme } = useTheme()
+  const { getLimit, updateLimit } = useNoticeContext()
+  const { config } = useSystem()
 
   return useMemo(() => {
-    // const themeOptions = theme.notice?.options ?? {}
-
     const computedOptions = (options: UseNoticeOptions) => ({
-      // ...themeOptions,
+      ...config.notice,
       ...defaultOptions,
       ...options,
     })
 
     const notice = (options: UseNoticeOptions = {}) => {
       const finalOptions = computedOptions(options)
-      const { component, ...toastOptions } = finalOptions
+      const {
+        variant,
+        closable,
+        component,
+        description,
+        duration = 5000,
+        icon,
+        limit,
+        placement = "start-center",
+        status,
+        title,
+        ...toastOptions
+      } = finalOptions
+
+      if (limit) {
+        const currentLimit = getLimit(placement)
+        if (currentLimit !== limit) {
+          updateLimit({ limit, placement })
+        }
+      }
 
       if (component) {
         return toast.custom(
@@ -99,76 +112,48 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
           {
             ...toastOptions,
             id: finalOptions.id,
-            duration: finalOptions.duration ?? 5000,
+            duration,
+            toasterId: placement,
           },
         )
       }
 
       return toast.custom(
-        () =>
+        (t) =>
           (
-            <Notice.Root>
-              <Notice.Icon />
-              <Notice.Title />
-              <Notice.Description />
-              <Notice.CloseButton />
-            </Notice.Root>
+            <Notice
+              variant={variant}
+              closable={closable}
+              description={description}
+              icon={icon}
+              status={status}
+              t={t}
+              title={title}
+            />
           ) as ReactElement,
         {
-          ...finalOptions,
-          id: finalOptions.id,
-          duration: finalOptions.duration ?? 5000,
+          ...toastOptions,
+          duration,
+          toasterId: finalOptions.placement ?? "start-center",
         },
       )
-    }
-
-    notice.update = (
-      id: number | string,
-      options: Omit<UseNoticeOptions, "id">,
-    ) => {
-      const finalOptions = computedOptions(options)
-      toast.dismiss(id)
-
-      if (finalOptions.component) {
-        toast.custom(
-          (t) =>
-            finalOptions.component!({
-              onClose: () => toast.dismiss(t),
-            }) as ReactElement,
-          {
-            ...finalOptions,
-            id,
-            duration: finalOptions.duration ?? 5000,
-          },
-        )
-      } else {
-        toast(finalOptions.description || finalOptions.title || "Notice", {
-          ...finalOptions,
-          id,
-          duration: finalOptions.duration ?? 5000,
-          toasterId: finalOptions.placement ?? "start-center",
-        })
-      }
     }
 
     notice.close = (id: number | string) => {
       toast.dismiss(id)
     }
 
-    notice.closeAll = (_options?: { placement?: NoticePlacement[] }) => {
+    notice.closeAll = () => {
       // Sonner dismisses all toasts when called without an id
       toast.dismiss()
     }
 
-    notice.isActive = (_id: number | string) => {
-      // Sonner doesn't provide a direct way to check if a toast is active
-      // This is a limitation of the migration
-      return false
+    notice.update = (id: number | string, options: UseNoticeOptions) => {
+      // For Sonner, we need to dismiss the existing toast and create a new one
+      toast.dismiss(id)
+      return notice(options)
     }
 
     return notice
-  }, [
-    defaultOptions,
-    // theme
-  ])
+  }, [config.notice, defaultOptions, getLimit, updateLimit])
 }

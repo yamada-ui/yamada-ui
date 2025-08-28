@@ -27,6 +27,7 @@ export type LayerScheme =
   | "variant"
 export type KeyframeIdent = "from" | "to"
 export type Orientation = "horizontal" | "vertical"
+
 export type Placement =
   | "center"
   | "center-center"
@@ -105,12 +106,12 @@ export interface NoticeConfig {
   /**
    * The number of `ms` the notice will continue to be displayed.
    *
-   * If `null`, the notice will continue to display.
+   * If `Infinity`, the notice will continue to display.
    * Please use in conjunction with `closable`.
    *
    * @default 5000
    */
-  duration?: null | number
+  duration?: number
   /**
    * The maximum value at which notice will be displayed.
    */

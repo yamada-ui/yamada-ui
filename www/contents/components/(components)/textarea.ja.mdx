@@ -7,7 +7,7 @@ style: components/textarea/textarea.style.ts
 ---
 
 ```tsx preview
-<Textarea />
+<Textarea placeholder="Placeholder" />
 ```
 
 ## 使い方
@@ -15,25 +15,21 @@ style: components/textarea/textarea.style.ts
 :::code-group
 
 ```tsx [package]
-import { Textarea, InputGroup } from "@yamada-ui/react"
+import { Textarea } from "@yamada-ui/react"
 ```
 
 ```tsx [alias]
-import { Textarea, InputGroup } from "@/components/ui"
+import { Textarea } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Textarea, InputGroup } from "@workspaces/ui"
+import { Textarea } from "@workspaces/ui"
 ```
 
 :::
 
 ```tsx
-<InputGroup.Root>
-  <InputGroup.Addon />
-  <Textarea />
-  <InputGroup.Element />
-</InputGroup.Root>
+<Textarea />
 ```
 
 ### バリアントを変更する
@@ -82,6 +78,8 @@ import { Textarea, InputGroup } from "@workspaces/ui"
 
 ### 無効にする
 
+無効にする場合は、`disabled`を`true`に設定します。
+
 ```tsx preview
 <VStack>
   <For each={["outline", "filled", "flushed"]}>
@@ -98,6 +96,8 @@ import { Textarea, InputGroup } from "@workspaces/ui"
 ```
 
 ### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx preview
 <VStack>
@@ -116,6 +116,8 @@ import { Textarea, InputGroup } from "@workspaces/ui"
 
 ### 無効な入力にする
 
+無効な状態にする場合は、`invalid`を`true`に設定します。
+
 ```tsx preview
 <VStack>
   <For each={["outline", "filled", "flushed"]}>
@@ -126,39 +128,6 @@ import { Textarea, InputGroup } from "@workspaces/ui"
         placeholder={toTitleCase(variant)}
         invalid
       />
-    )}
-  </For>
-</VStack>
-```
-
-### アドオンを追加する
-
-```tsx preview
-<VStack>
-  <For each={["outline", "filled", "flushed"]}>
-    {(variant) => (
-      <InputGroup.Root key={variant} variant={variant}>
-        <InputGroup.Addon>https://</InputGroup.Addon>
-        <Textarea placeholder="Your site address" />
-        <InputGroup.Addon>.com</InputGroup.Addon>
-      </InputGroup.Root>
-    )}
-  </For>
-</VStack>
-```
-
-### 要素を追加する
-
-```tsx preview
-<VStack>
-  <For each={["outline", "filled", "flushed"]}>
-    {(variant) => (
-      <InputGroup.Root key={variant} variant={variant}>
-        <InputGroup.Element>
-          <MailIcon fontSize="xl" />
-        </InputGroup.Element>
-        <Textarea placeholder="Your email address" />
-      </InputGroup.Root>
     )}
   </For>
 </VStack>
@@ -180,6 +149,8 @@ import { Textarea, InputGroup } from "@workspaces/ui"
 ```
 
 ### プレースホルダーをカスタマイズする
+
+プレースホルダーの色を変更する場合は、propsに`_placeholder`を設定します。
 
 ```tsx preview
 <Textarea
@@ -206,8 +177,10 @@ import { Textarea, InputGroup } from "@workspaces/ui"
 
 ### 自動リサイズを使用する
 
+自動リサイズを有効にする場合は、`autosize`を`true`に設定します。
+
 ```tsx preview
-<Textarea autosize placeholder="autosize" />
+<Textarea autosize placeholder="Autosize" />
 ```
 
 ### リサイズを制御する
@@ -220,7 +193,7 @@ const onResize = () => {
 
 return (
   <VStack>
-    <Textarea placeholder="use resize" resizeRef={resizeRef} />
+    <Textarea placeholder="Use resize" resizeRef={resizeRef} />
     <Button alignSelf="flex-end" onClick={onResize}>
       Resize
     </Button>

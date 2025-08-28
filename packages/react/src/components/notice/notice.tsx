@@ -1,12 +1,13 @@
 "use client"
 
-import type { HTMLStyledProps } from "../../core"
+import type { HTMLStyledProps, ThemeProps } from "../../core"
 // import type { LoadingScheme } from "../loading"
 import type { CloseButtonProps } from "../close-button"
 import type { NoticeStyle } from "./notice.style"
 import type { UseNoticeOptions } from "./use-notice"
 import { toast } from "sonner"
 import { createSlotComponent } from "../../core"
+import { handlerAll } from "../../utils"
 import { Alert } from "../alert"
 import { CloseButton } from "../close-button"
 import { noticeStyle } from "./notice.style"
@@ -26,14 +27,17 @@ export const {
   noticeStyle,
 )
 
-interface NoticeProps extends UseNoticeOptions {
+interface NoticeProps
+  extends UseNoticeOptions,
+    HTMLStyledProps,
+    ThemeProps<NoticeStyle> {
   t: number | string
 }
 
 export const Notice = withProvider<"div", NoticeProps>(
-  ({ variant, closable, description, icon, status, t, title }) => {
+  ({ closable, description, icon, status, t, title, onClick, ...props }) => {
     return (
-      <Alert.Root variant={variant}>
+      <Alert.Root {...props}>
         {status === "loading" ? (
           <Alert.Loading loadingScheme={icon?.variant} />
         ) : (
@@ -48,7 +52,9 @@ export const Notice = withProvider<"div", NoticeProps>(
           </NoticeContent>
         ) : null}
         {closable ? (
-          <NoticeCloseButton onClick={() => toast.dismiss(t)} />
+          <NoticeCloseButton
+            onClick={handlerAll(onClick, () => toast.dismiss(t))}
+          />
         ) : null}
       </Alert.Root>
     )

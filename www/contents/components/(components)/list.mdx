@@ -6,4 +6,174 @@ source: components/list
 style: components/list/list.style.ts
 ---
 
+```tsx preview
+<List.Root>
+  <List.Item>
+    【一つ】この世界におけるあらゆる殺傷、戦争、略奪を禁ずる
+  </List.Item>
+  <List.Item>
+    【二つ】争いは全てゲームにおける勝敗で解決するものとする
+  </List.Item>
+  <List.Item>
+    【三つ】ゲームには、相互が対等と判断したものを賭けて行われる
+  </List.Item>
+  <List.Item>
+    【四つ】 "三"に反しない限り、ゲーム内容、賭けるものは一切を問わない
+  </List.Item>
+  <List.Item>【五つ】ゲーム内容は、挑まれた方が決定権を有する</List.Item>
+  <List.Item>【六つ】"盟約に誓って"行われた賭けは、絶対遵守される</List.Item>
+  <List.Item>
+    【七つ】集団における争いは、全権代理者をたてるものとする
+  </List.Item>
+  <List.Item>【八つ】ゲーム中の不正発覚は、敗北と見なす</List.Item>
+  <List.Item>【九つ】以上をもって神の名のもと絶対不変のルールとする</List.Item>
+  <List.Item>【十】みんななかよくプレイしましょう</List.Item>
+</List.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { List } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { List } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { List } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<List.Root>
+  <List.Item>
+    <List.Icon />
+  </List.Item>
+</List.Root>
+```
+
+### Use items
+
+```tsx preview functional
+const items = useMemo<List.RootProps["items"]>(
+  () => [
+    { children: "【一つ】この世界におけるあらゆる殺傷、戦争、略奪を禁ずる" },
+    { children: "【二つ】争いは全てゲームにおける勝敗で解決するものとする" },
+    {
+      children: "【三つ】ゲームには、相互が対等と判断したものを賭けて行われる",
+    },
+    {
+      children:
+        '【四つ】 "三"に反しない限り、ゲーム内容、賭けるものは一切を問わない',
+    },
+    { children: "【五つ】ゲーム内容は、挑まれた方が決定権を有する" },
+    { children: '【六つ】"盟約に誓って"行われた賭けは、絶対遵守される' },
+    { children: "【七つ】集団における争いは、全権代理者をたてるものとする" },
+    { children: "【八つ】ゲーム中の不正発覚は、敗北と見なす" },
+    { children: "【九つ】以上をもって神の名のもと絶対不変のルールとする" },
+    { children: "【十】みんななかよくプレイしましょう" },
+  ],
+  [],
+)
+
+return <List.Root items={items} />
+```
+
+### Use Marker
+
+```tsx preview
+<VStack>
+  <For each={["disc", "decimal", "square", "circle", "lower-alpha"]}>
+    {(styleType, index) => (
+      <List.Root key={index} styleType={styleType}>
+        <List.Item>
+          【一つ】この世界におけるあらゆる殺傷、戦争、略奪を禁ずる
+        </List.Item>
+        <List.Item>
+          【二つ】争いは全てゲームにおける勝敗で解決するものとする
+        </List.Item>
+        <List.Item>
+          【三つ】ゲームには、相互が対等と判断したものを賭けて行われる
+        </List.Item>
+        <List.Item>
+          【四つ】 "三"に反しない限り、ゲーム内容、賭けるものは一切を問わない
+        </List.Item>
+      </List.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Using Custom Icons
+
+To use custom icons for items, set a `ReactNode` to the `icon` property or use `List.Icon`.
+
+```tsx preview functional
+const items = useMemo<List.RootProps["items"]>(
+  () => [
+    {
+      icon: <CircleCheckIcon color="success" />,
+      children: "【一つ】この世界におけるあらゆる殺傷、戦争、略奪を禁ずる",
+    },
+    {
+      icon: <CircleCheckIcon color="success" />,
+      children: "【二つ】争いは全てゲームにおける勝敗で解決するものとする",
+    },
+    {
+      icon: <LoaderIcon color="fg.subtle" />,
+      children: "【三つ】ゲームには、相互が対等と判断したものを賭けて行われる",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <List.Root items={items} />
+
+    <List.Root>
+      <List.Item icon={<CircleCheckIcon color="success" />}>
+        【四つ】 "三"に反しない限り、ゲーム内容、賭けるものは一切を問わない
+      </List.Item>
+      <List.Item icon={<CircleCheckIcon color="success" />}>
+        【五つ】ゲーム内容は、挑まれた方が決定権を有する
+      </List.Item>
+      <List.Item icon={<LoaderIcon color="fg.subtle" />}>
+        【六つ】"盟約に誓って"行われた賭けは、絶対遵守される
+      </List.Item>
+    </List.Root>
+
+    <List.Root>
+      <List.Item>
+        <List.Icon>
+          <CircleCheckIcon color="success" />
+        </List.Icon>
+        【七つ】集団における争いは、全権代理者をたてるものとする
+      </List.Item>
+      <List.Item>
+        <List.Icon>
+          <CircleCheckIcon color="success" />
+        </List.Icon>
+        【八つ】ゲーム中の不正発覚は、敗北と見なす
+      </List.Item>
+      <List.Item>
+        <List.Icon>
+          <CircleCheckIcon color="success" />
+        </List.Icon>
+        【九つ】以上をもって神の名のもと絶対不変のルールとする
+      </List.Item>
+      <List.Item>
+        <List.Icon>
+          <LoaderIcon color="fg.subtle" />
+        </List.Icon>
+        【十】みんななかよくプレイしましょう
+      </List.Item>
+    </List.Root>
+  </VStack>
+)
+```

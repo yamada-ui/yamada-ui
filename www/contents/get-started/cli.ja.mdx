@@ -5,4 +5,389 @@ description: CLIコマンドを使用してコンポーネントやテーマを�
 
 ## インストール
 
-## 使い方
+CLIを使用するには、まずプロジェクトに`@yamada-ui/cli`をインストールする必要があります。
+
+:::code-group
+
+```bash [pnpm]
+pnpm add -D @yamada-ui/cli
+```
+
+```bash [npm]
+npm i -D @yamada-ui/cli
+```
+
+```bash [yarn]
+yarn add -D @yamada-ui/cli
+```
+
+```bash [bun]
+bun add -D @yamada-ui/cli
+```
+
+:::
+
+## コマンド
+
+### init
+
+`init`コマンドを実行すると、プロジェクトに必要なファイルやフォルダが作成されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli init
+```
+
+```bash [npm]
+npm yamada-cli init
+```
+
+```bash [yarn]
+yarn yamada-cli init
+```
+
+```bash [bun]
+bun yamada-cli init
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli init [options]
+
+initialize your project and install dependencies
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --overwrite      overwrite existing files. (default: false)
+  -j, --jsx            use jsx instead of tsx (default: false)
+  -h, --help           display help for command
+```
+
+`init`コマンドを実行すると、次のプロンプトが表示されます。
+
+```txt
+Would you like to use monorepo? (recommended) … No / Yes
+What is the path to the monorepo? … ./workspaces/ui
+What is the package name? … @workspaces/ui
+Would you like your code inside a `src/` directory? … No / Yes
+Would you like to use Prettier? … No / Yes
+Would you like to use ESLint? … No / Yes
+```
+
+プロンプトの後、コンフィグと必要な依存関係がインストールされます。
+
+### add
+
+`add`コマンドを実行すると、プロジェクトに指定したコンポーネントと依存関係が追加されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add box
+```
+
+```bash [npm]
+npm yamada-cli add box
+```
+
+```bash [yarn]
+yarn yamada-cli add box
+```
+
+```bash [bun]
+bun yamada-cli add box
+```
+
+:::
+
+:::note
+指定したコンポーネントに依存しているコンポーネントもすべて追加されます。
+:::
+
+コンポーネントを指定しない場合は、利用可能なすべてのコンポーネントが追加されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add
+```
+
+```bash [npm]
+npm yamada-cli add
+```
+
+```bash [yarn]
+yarn yamada-cli add
+```
+
+```bash [bun]
+bun yamada-cli add
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli add [options] [components...]
+
+add a component to your project
+
+Arguments:
+  components           components to add
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --overwrite      overwrite existing files. (default: false)
+  -i, --install        install dependencies (default: false)
+  -s, --sequential     run tasks sequentially. (default: false)
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### diff
+
+`diff`コマンドを実行すると、指定したコンポーネントのローカルとリモートの差分を確認できます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli diff box
+```
+
+```bash [npm]
+npm yamada-cli diff box
+```
+
+```bash [yarn]
+yarn yamada-cli diff box
+```
+
+```bash [bun]
+bun yamada-cli diff box
+```
+
+:::
+
+コンポーネントを指定しない場合は、ローカルにあるすべてのコンポーネントの差分を確認できます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli diff
+```
+
+```bash [npm]
+npm yamada-cli diff
+```
+
+```bash [yarn]
+yarn yamada-cli diff
+```
+
+```bash [bun]
+bun yamada-cli diff
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli diff [options] [component]
+
+check for updates against the registry
+
+Arguments:
+  component            component to check
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -s, --sequential     run tasks sequentially. (default: false)
+  -d, --detail         show detailed changes (default: false)
+  -h, --help           display help for command
+```
+
+### update
+
+`update`コマンドを実行すると、指定したコンポーネントを更新します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli update box
+```
+
+```bash [npm]
+npm yamada-cli update box
+```
+
+```bash [yarn]
+yarn yamada-cli update box
+```
+
+```bash [bun]
+bun yamada-cli update box
+```
+
+:::
+
+コンポーネントを指定しない場合は、ローカルにあるすべてのコンポーネントが更新されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli update
+```
+
+```bash [npm]
+npm yamada-cli update
+```
+
+```bash [yarn]
+yarn yamada-cli update
+```
+
+```bash [bun]
+bun yamada-cli update
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli update [options] [components...]
+
+update components in your project
+
+Arguments:
+  components           components to update
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -i, --install        install dependencies (default: false)
+  -s, --sequential     run tasks sequentially. (default: false)
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### theme
+
+`theme`コマンドを実行すると、指定されたパスにテーマを生成します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+:::note
+パスが指定されない場合は、`./theme`にテーマが生成されます。
+:::
+
+```bash
+Usage: pnpm yamada-cli theme [options] [path]
+
+generate theme to your project
+
+Arguments:
+  path                 path to the theme directory
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --overwrite      overwrite existing directory. (default: false)
+  -j, --js             use js instead of ts
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### tokens
+
+`tokens`コマンドを実行すると、カスタマイズしたテーマの型定義を更新できます。
+この型定義は、[Style Props](/docs/styling/style-props)などで使用されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli tokens
+```
+
+```bash [npm]
+npm yamada-cli tokens
+```
+
+```bash [yarn]
+yarn yamada-cli tokens
+```
+
+```bash [bun]
+bun yamada-cli tokens
+```
+
+:::
+
+:::note
+パスが指定されない場合は、コンフィグの`theme.path`を参照します。
+:::
+
+```bash
+Usage: pnpm yamada-cli tokens [options] [path]
+
+generate theme typings
+
+Arguments:
+  path                 path to the theme file
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --out <path>     output path
+  -f, --format         format the output file
+  -l, --lint           lint the output file
+  -h, --help           display help for command
+```
+
+## 設定
+
+`init`コマンドを実行した後、プロジェクトに`ui.json`が生成されます。`ui.json`を変更することで、さまざまなカスタマイズが可能です。
+
+| プロパティ                | 説明                                                                                             | デフォルト     |
+| ------------------------- | ------------------------------------------------------------------------------------------------ | -------------- |
+| `path`                    | 生成されるディレクトリのパス。                                                                   | `./ui`         |
+| `monorepo`                | モノレポで生成します。                                                                           | `false`        |
+| `jsx`                     | JSXファイルで生成します。                                                                        | `false`        |
+| `theme.path`              | テーマが生成されるディレクトリのパス。                                                           | `./theme`      |
+| `components.path`         | コンポーネントが生成されるディレクトリのパス。                                                   | `./components` |
+| `components.overwrite`    | コンポーネントなどが追加されたときにローカルの既存のコンポーネントの参照先を更新します。         | `false`        |
+| `components.dependents`   | コンポーネントを追加するときに依存されているコンポーネントも追加します。                         | `true`         |
+| `components.dependencies` | コンポーネントを追加するときに依存しているコンポーネントも追加します。                           | `false`        |
+| `hooks.path`              | フックが生成されるディレクトリのパス。                                                           | `./hooks`      |
+| `hooks.overwrite`         | コンポーネントなどが追加されたときにローカルの既存のフックの参照先を更新します。                 | `false`        |
+| `hooks.dependents`        | フックを追加するときに依存されているフックも追加します。                                         | `true`         |
+| `hooks.dependencies`      | フックを追加するときに依存しているフックも追加します。                                           | `false`        |
+| `providers.path`          | プロバイダーが生成されるディレクトリのパス。                                                     | `./providers`  |
+| `providers.overwrite`     | コンポーネントなどが追加されたときにローカルの既存のプロバイダーの参照先を更新します。           | `false`        |
+| `providers.dependents`    | プロバイダーを追加するときに依存されているプロバイダーも追加します。                             | `true`         |
+| `providers.dependencies`  | プロバイダーを追加するときに依存しているプロバイダーも追加します。                               | `false`        |
+| `format.configPath`       | [Prettier](https://prettier.io)が参照するコンフィグのパス。                                      | -              |
+| `format.enabled`          | コンポーネントなどを追加・更新するときに[Prettier](https://prettier.io)の`--write`を実行します。 | `false`        |
+| `lint.enabled`            | コンポーネントなどを追加・更新するときに[ESLint](https://eslint.org)の`--fix`を実行します。      | `false`        |

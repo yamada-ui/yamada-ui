@@ -3,6 +3,182 @@ title: CLI
 description: Learn how to generate themes using CLI commands.
 ---
 
-## Installation
-
 ## Usage
+
+:::warning
+Before running the following commands, you need to install `@yamada-ui/cli` and execute the `init` command. For more details, please see [here](/docs/get-started/cli).
+:::
+
+### Generate a Theme
+
+When you run the `theme` command, the theme will be generated at the specified path.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+:::note
+If you don't specify a path, the theme will be generated in `./theme`.
+:::
+
+```bash
+Usage: pnpm yamada-cli theme [options] [path]
+
+generate theme to your project
+
+Arguments:
+  path                 path to the theme directory
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --overwrite      overwrite existing directory. (default: false)
+  -j, --js             use js instead of ts
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### Check the Differences
+
+When you run the `diff` command, you can check the difference between the local and remote themes.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli diff theme
+```
+
+```bash [npm]
+npm yamada-cli diff theme
+```
+
+```bash [yarn]
+yarn yamada-cli diff theme
+```
+
+```bash [bun]
+bun yamada-cli diff theme
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli diff [options] [component]
+
+check for updates against the registry
+
+Arguments:
+  component            component to check
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -s, --sequential     run tasks sequentially. (default: false)
+  -d, --detail         show detailed changes (default: false)
+  -h, --help           display help for command
+```
+
+### Update the theme
+
+When you run the `update` command, the theme will be updated.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli update theme
+```
+
+```bash [npm]
+npm yamada-cli update theme
+```
+
+```bash [yarn]
+yarn yamada-cli update theme
+```
+
+```bash [bun]
+bun yamada-cli update theme
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli update [options] [components...]
+
+update components in your project
+
+Arguments:
+  components           components to update
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -i, --install        install dependencies (default: false)
+  -s, --sequential     run tasks sequentially. (default: false)
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### Update typings
+
+When you run the `tokens` command, you can update the customized theme typings.
+This typings are used for [Style Props](/docs/styling/style-props).
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli tokens
+```
+
+```bash [npm]
+npm yamada-cli tokens
+```
+
+```bash [yarn]
+yarn yamada-cli tokens
+```
+
+```bash [bun]
+bun yamada-cli tokens
+```
+
+:::
+
+:::note
+If you don't specify a path, the `theme.path` will be used.
+:::
+
+```bash
+Usage: pnpm yamada-cli tokens [options] [path]
+
+generate theme typings
+
+Arguments:
+  path                 path to the theme file
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --out <path>     output path
+  -f, --format         format the output file
+  -l, --lint           lint the output file
+  -h, --help           display help for command
+```

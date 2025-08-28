@@ -30,7 +30,6 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 
 ```tsx
 <Toggle />
-
 <ToggleGroup.Root>
   <ToggleGroup.Item />
 </ToggleGroup.Root>
@@ -100,10 +99,24 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 </Wrap>
 ```
 
-### Rounded
+### Change Shape
+
+To change the shape, set the `rounded` prop.
 
 ```tsx preview
-<Toggle icon={<BoldIcon />} aria-label="Toggle bold" fullRounded />
+<Wrap gap="md">
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        fullRounded
+      />
+    )}
+  </For>
+</Wrap>
 ```
 
 ### Disable
@@ -112,11 +125,17 @@ To disable, set `disabled` to `true`.
 
 ```tsx preview
 <Wrap gap="md">
-  <Toggle icon={<BoldIcon />} aria-label="Toggle bold" disabled />
-
-  <Field.Root disabled label="Bold">
-    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
-  </Field.Root>
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        disabled
+      />
+    )}
+  </For>
 </Wrap>
 ```
 
@@ -126,11 +145,17 @@ To make read-only, set `readOnly` to `true`.
 
 ```tsx preview
 <Wrap gap="md">
-  <Toggle icon={<BoldIcon />} aria-label="Toggle bold" readOnly />
-
-  <Field.Root label="Bold" readOnly>
-    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
-  </Field.Root>
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        readOnly
+      />
+    )}
+  </For>
 </Wrap>
 ```
 
@@ -138,11 +163,17 @@ To make read-only, set `readOnly` to `true`.
 
 ```tsx preview
 <Wrap gap="md">
-  <Toggle icon={<BoldIcon />} aria-label="Toggle bold" invalid />
-
-  <Field.Root invalid label="Bold">
-    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
-  </Field.Root>
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        invalid
+      />
+    )}
+  </For>
 </Wrap>
 ```
 
@@ -174,28 +205,6 @@ return (
 ```
 
 ### Grouping
-
-:::code-group
-
-```ts [Package]
-import { ToggleGroup } from "@yamada-ui/react"
-```
-
-```ts [Alias]
-import { ToggleGroup } from "@/components/ui"
-```
-
-```ts [Monorepo]
-import { ToggleGroup } from "@workspaces/ui"
-```
-
-:::
-
-```tsx
-<ToggleGroup.Root>
-  <ToggleGroup.Item />
-</ToggleGroup.Root>
-```
 
 ```tsx preview
 <ToggleGroup.Root>

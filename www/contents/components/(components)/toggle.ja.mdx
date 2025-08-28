@@ -30,7 +30,6 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 
 ```tsx
 <Toggle />
-
 <ToggleGroup.Root>
   <ToggleGroup.Item />
 </ToggleGroup.Root>
@@ -52,9 +51,9 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 ```tsx preview
 <Wrap gap="md">
   <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
-    {(variant, index) => (
+    {(variant) => (
       <Toggle
-        key={index}
+        key={variant}
         icon={<BoldIcon />}
         aria-label="Toggle bold"
         colorScheme="primary"
@@ -100,10 +99,22 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 </Wrap>
 ```
 
-### 角を丸くする
+### 丸くする
 
 ```tsx preview
-<Toggle icon={<BoldIcon />} aria-label="Toggle bold" fullRounded />
+<Wrap gap="md">
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        fullRounded
+      />
+    )}
+  </For>
+</Wrap>
 ```
 
 ### 無効にする
@@ -112,11 +123,17 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 
 ```tsx preview
 <Wrap gap="md">
-  <Toggle icon={<BoldIcon />} aria-label="Toggle bold" disabled />
-
-  <Field.Root disabled label="Bold">
-    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
-  </Field.Root>
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        disabled
+      />
+    )}
+  </For>
 </Wrap>
 ```
 
@@ -126,11 +143,17 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 
 ```tsx preview
 <Wrap gap="md">
-  <Toggle icon={<BoldIcon />} aria-label="Toggle bold" readOnly />
-
-  <Field.Root label="Bold" readOnly>
-    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
-  </Field.Root>
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        readOnly
+      />
+    )}
+  </For>
 </Wrap>
 ```
 
@@ -138,11 +161,17 @@ import { Toggle, ToggleGroup } from "@workspaces/ui"
 
 ```tsx preview
 <Wrap gap="md">
-  <Toggle icon={<BoldIcon />} aria-label="Toggle bold" invalid />
-
-  <Field.Root invalid label="Bold">
-    <Toggle justifySelf="flex-start" icon={<BoldIcon />} />
-  </Field.Root>
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        invalid
+      />
+    )}
+  </For>
 </Wrap>
 ```
 
@@ -174,22 +203,6 @@ return (
 ```
 
 ### グループ化する
-
-:::code-group
-
-```ts [Package]
-import { ToggleGroup } from "@yamada-ui/react"
-```
-
-```ts [Alias]
-import { ToggleGroup } from "@/components/ui"
-```
-
-```ts [Monorepo]
-import { ToggleGroup } from "@workspace/ui"
-```
-
-:::
 
 ```tsx
 <ToggleGroup.Root>

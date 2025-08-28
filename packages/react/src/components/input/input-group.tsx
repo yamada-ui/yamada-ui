@@ -78,7 +78,7 @@ export const InputGroupRoot = ((props: InputGroupRootProps) => {
     <InputPropsContext value={inputContext}>
       <InputAddonPropsContext value={sharedContext}>
         <InputElementPropsContext value={sharedContext}>
-          <Group attached w="full" {...rest}>
+          <Group attached minW="0" w="full" {...rest}>
             {cloneChildren}
           </Group>
         </InputElementPropsContext>

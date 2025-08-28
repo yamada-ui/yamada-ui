@@ -3,7 +3,7 @@ import { Button, ButtonPropsContext } from "../../components/button"
 import { For } from "../../components/for"
 import { Grid } from "../../components/grid"
 import { Text } from "../../components/text"
-import { dataAttr, toTitleCase } from "../../utils"
+import { toTitleCase } from "../../utils"
 
 export default {
   title: "Styled System / Focus Ring",
@@ -22,6 +22,7 @@ export const Basic = () => {
               "mixed",
               "outside",
               "inside",
+              "none",
             ] as const
           }
         >
@@ -29,12 +30,7 @@ export const Basic = () => {
             <Fragment key={index}>
               <Text fontWeight="medium">{toTitleCase(value ?? "default")}</Text>
 
-              <Button
-                data-focus-visible={dataAttr(value)}
-                focusVisibleRing={value}
-              >
-                Button
-              </Button>
+              <Button focusVisibleRing={value}>Button</Button>
             </Fragment>
           )}
         </For>

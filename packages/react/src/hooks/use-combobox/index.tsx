@@ -208,6 +208,7 @@ export interface UseComboboxProps
 }
 
 export const useCombobox = ({
+  "aria-label": ariaLabelProp,
   "aria-labelledby": ariaLabelledbyProp,
   closeOnSelect: closeOnSelectProp = true,
   defaultOpen,
@@ -452,11 +453,17 @@ export const useCombobox = ({
   }, [open])
 
   const getTriggerProps: PropGetter = useCallback(
-    ({ ref, "aria-labelledby": ariaLabelledby, ...props } = {}) => ({
+    ({
+      ref,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledby,
+      ...props
+    } = {}) => ({
       "aria-controls": open ? contentId : undefined,
       "aria-disabled": ariaAttr(!interactive),
       "aria-expanded": open,
       "aria-haspopup": "listbox",
+      "aria-label": ariaLabel || ariaLabelProp,
       "aria-labelledby": cx(ariaLabelledby, ariaLabelledbyProp),
       "data-disabled": dataAttr(disabled),
       "data-readonly": dataAttr(readOnly),
@@ -469,12 +476,13 @@ export const useCombobox = ({
       onKeyDown: handlerAll(props.onKeyDown, rest.onKeyDown, onKeyDown),
     }),
     [
+      open,
       contentId,
       interactive,
-      open,
       ariaLabelledbyProp,
       disabled,
       readOnly,
+      ariaLabelProp,
       rest,
       onClick,
       onKeyDown,

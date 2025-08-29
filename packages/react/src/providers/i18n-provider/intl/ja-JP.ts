@@ -10,6 +10,18 @@ export default {
     Breadcrumb: "パンくずリスト",
     Ellipsis: "省略記号",
   },
+  calendar: {
+    "Choose the month": "月を選択する",
+    "Choose the year": "年を選択する",
+    dd: "dd",
+    "dddd, MMMM DD, YYYY": "YYYY年MM月DD日dddd",
+    "Go to the next month": "次の月に移動する",
+    "Go to the previous month": "前の月に移動する",
+    MMM: "MM月",
+    "MMMM YYYY": "YYYY年MM月",
+    Today: "今日",
+    YYYY: "YYYY年",
+  },
   carousel: {
     "Go to next slide": "次のスライドに移動する",
     "Go to previous slide": "前のスライドに移動する",

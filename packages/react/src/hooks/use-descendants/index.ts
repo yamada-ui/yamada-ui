@@ -213,7 +213,9 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
     while (enabledValue == null) {
       index--
 
-      if (loop && index < 0) {
+      if (index < 0) {
+        if (!loop) return
+
         index = count() - 1
         recurred = true
       }
@@ -261,7 +263,9 @@ const descendantManager = <Y extends HTMLElement = HTMLElement, M = {}>() => {
     while (enabledValue == null) {
       index++
 
-      if (loop && index >= count()) {
+      if (index >= count()) {
+        if (!loop) return
+
         index = 0
         recurred = true
       }

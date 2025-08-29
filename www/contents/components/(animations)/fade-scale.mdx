@@ -9,7 +9,7 @@ source: components/fade-scale
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack align="flex-start" gap="md">
+  <VStack align="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
     <FadeScale open={open} borderWidth={1} p="md" rounded="l2">
@@ -32,7 +32,7 @@ import { FadeScale } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { FadeScale } from "@workspace/ui"
+import { FadeScale } from "@workspaces/ui"
 ```
 
 :::
@@ -49,7 +49,7 @@ To change the initial scale value, set a number to `scale`. The element will sca
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack align="flex-start" gap="md">
+  <VStack align="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
     <FadeScale open={open} scale={0.75} borderWidth={1} p="md" rounded="l2">
@@ -67,7 +67,7 @@ To change the duration, set a number (in seconds) to `duration`.
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack align="flex-start" gap="md">
+  <VStack align="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
     <FadeScale open={open} duration={0.4} borderWidth={1} p="md" rounded="l2">
@@ -85,7 +85,7 @@ To unmount the component when it is not visible, set `unmountOnExit` to `true`.
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack align="flex-start" gap="md">
+  <VStack align="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
     <FadeScale open={open} unmountOnExit borderWidth={1} p="md" rounded="l2">

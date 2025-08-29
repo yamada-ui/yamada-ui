@@ -5,4 +5,390 @@ description: Learn how to generate components and theme using CLI commands.
 
 ## Installation
 
-## Usage
+To use CLI, you need to install `@yamada-ui/cli` in your project.
+
+:::code-group
+
+```bash [pnpm]
+pnpm add -D @yamada-ui/cli
+```
+
+```bash [npm]
+npm i -D @yamada-ui/cli
+```
+
+```bash [yarn]
+yarn add -D @yamada-ui/cli
+```
+
+```bash [bun]
+bun add -D @yamada-ui/cli
+```
+
+:::
+
+## Commands
+
+### init
+
+When you run the `init` command, the necessary files and folders for your project will be created.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli init
+```
+
+```bash [npm]
+npm yamada-cli init
+```
+
+```bash [yarn]
+yarn yamada-cli init
+```
+
+```bash [bun]
+bun yamada-cli init
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli init [options]
+
+initialize your project and install dependencies
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --overwrite      overwrite existing files. (default: false)
+  -j, --jsx            use jsx instead of tsx (default: false)
+  -h, --help           display help for command
+```
+
+After running the `init` command, you will see the following prompts.
+
+```txt
+Would you like to use monorepo? (recommended) … No / Yes
+What is the path to the monorepo? … ./workspaces/ui
+What is the package name? … @workspaces/ui
+Would you like your code inside a `src/` directory? … No / Yes
+Would you like to use Prettier? … No / Yes
+Would you like to use ESLint? … No / Yes
+```
+
+After the prompts, the config and required dependencies will be installed.
+
+### add
+
+When you run the `add` command, the specified component and its dependencies will be added to your project.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add box
+```
+
+```bash [npm]
+npm yamada-cli add box
+```
+
+```bash [yarn]
+yarn yamada-cli add box
+```
+
+```bash [bun]
+bun yamada-cli add box
+```
+
+:::
+
+:::note
+All components that the specified component depends on will also be added.
+:::
+
+If you don't specify a component, all available components will be added.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli add
+```
+
+```bash [npm]
+npm yamada-cli add
+```
+
+```bash [yarn]
+yarn yamada-cli add
+```
+
+```bash [bun]
+bun yamada-cli add
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli add [options] [components...]
+
+add a component to your project
+
+Arguments:
+  components           components to add
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --overwrite      overwrite existing files. (default: false)
+  -i, --install        install dependencies (default: false)
+  -s, --sequential     run tasks sequentially. (default: false)
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### diff
+
+When you run the `diff` command, you can check the difference between the local and remote components.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli diff box
+```
+
+```bash [npm]
+npm yamada-cli diff box
+```
+
+```bash [yarn]
+yarn yamada-cli diff box
+```
+
+```bash [bun]
+bun yamada-cli diff box
+```
+
+:::
+
+If you don't specify a component, you can check the difference for all components in your project.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli diff
+```
+
+```bash [npm]
+npm yamada-cli diff
+```
+
+```bash [yarn]
+yarn yamada-cli diff
+```
+
+```bash [bun]
+bun yamada-cli diff
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli diff [options] [component]
+
+check for updates against the registry
+
+Arguments:
+  component            component to check
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -s, --sequential     run tasks sequentially. (default: false)
+  -d, --detail         show detailed changes (default: false)
+  -h, --help           display help for command
+```
+
+### update
+
+When you run the `update` command, the specified component will be updated.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli update box
+```
+
+```bash [npm]
+npm yamada-cli update box
+```
+
+```bash [yarn]
+yarn yamada-cli update box
+```
+
+```bash [bun]
+bun yamada-cli update box
+```
+
+:::
+
+If you don't specify a component, all components in your project will be updated.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli update
+```
+
+```bash [npm]
+npm yamada-cli update
+```
+
+```bash [yarn]
+yarn yamada-cli update
+```
+
+```bash [bun]
+bun yamada-cli update
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli update [options] [components...]
+
+update components in your project
+
+Arguments:
+  components           components to update
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -i, --install        install dependencies (default: false)
+  -s, --sequential     run tasks sequentially. (default: false)
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### theme
+
+When you run the `theme` command, the theme will be generated at the specified path.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+:::note
+If you don't specify a path, the theme will be generated in `./theme`.
+:::
+
+```bash
+Usage: pnpm yamada-cli theme [options] [path]
+
+generate theme to your project
+
+Arguments:
+  path                 path to the theme directory
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --overwrite      overwrite existing directory. (default: false)
+  -j, --js             use js instead of ts
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### tokens
+
+When you run the `tokens` command, you can update the customized theme typings.
+This typings are used for [Style Props](/docs/styling/style-props).
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli tokens
+```
+
+```bash [npm]
+npm yamada-cli tokens
+```
+
+```bash [yarn]
+yarn yamada-cli tokens
+```
+
+```bash [bun]
+bun yamada-cli tokens
+```
+
+:::
+
+:::note
+If you don't specify a path, the `theme.path` will be used.
+:::
+
+```bash
+Usage: pnpm yamada-cli tokens [options] [path]
+
+generate theme typings
+
+Arguments:
+  path                 path to the theme file
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --out <path>     output path
+  -f, --format         format the output file
+  -l, --lint           lint the output file
+  --internal           generate internal tokens (default: false)
+  -h, --help           display help for command
+```
+
+## Configuration
+
+After running the `init` command, a `ui.json` will be generated in your project. You can customize it in various ways.
+
+| プロパティ                | 説明                                                                                                         | デフォルト     |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------ | -------------- |
+| `path`                    | The path to the workspace.                                                                                   | `./ui`         |
+| `monorepo`                | Whether to use a monorepo.                                                                                   | `false`        |
+| `jsx`                     | Whether to use JSX.                                                                                          | `false`        |
+| `theme.path`              | The path to the theme directory.                                                                             | `./theme`      |
+| `components.path`         | The path to the components directory.                                                                        | `./components` |
+| `components.overwrite`    | Whether to update the local references of existing components when components are added.                     | `true`         |
+| `components.dependents`   | Whether to add dependents of components when components are added.                                           | `true`         |
+| `components.dependencies` | Whether to add dependencies of components when components are added.                                         | `false`        |
+| `hooks.path`              | The path to the hooks directory.                                                                             | `./hooks`      |
+| `hooks.overwrite`         | Whether to update the local references of existing hooks when components are added.                          | `false`        |
+| `hooks.dependents`        | Whether to add dependents of hooks when hooks are added.                                                     | `true`         |
+| `hooks.dependencies`      | Whether to add dependencies of hooks when hooks are added.                                                   | `false`        |
+| `providers.path`          | The path to the providers directory.                                                                         | `./providers`  |
+| `providers.overwrite`     | Whether to update the local references of existing providers when components are added.                      | `false`        |
+| `providers.dependents`    | Whether to add dependents of providers when providers are added.                                             | `true`         |
+| `providers.dependencies`  | Whether to add dependencies of providers when providers are added.                                           | `false`        |
+| `format.configPath`       | The path to the config file for [Prettier](https://prettier.io).                                             | -              |
+| `format.enabled`          | Whether to run the `--write` option of [Prettier](https://prettier.io) when components are added or updated. | `false`        |
+| `lint.enabled`            | Whether to run the `--fix` option of [ESLint](https://eslint.org) when components are added or updated.      | `false`        |

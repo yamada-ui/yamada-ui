@@ -25,7 +25,7 @@ import { Kbd } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Kbd } from "@workspace/ui"
+import { Kbd } from "@workspaces/ui"
 ```
 
 :::
@@ -37,7 +37,7 @@ import { Kbd } from "@workspace/ui"
 ### バリアントを変更する
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["solid", "subtle", "surface", "outline"]}>
     {(variant, index) => (
       <Text key={index}>
@@ -51,7 +51,7 @@ import { Kbd } from "@workspace/ui"
 ### サイズを変更する
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["sm", "md", "lg"]}>
     {(size, index) => (
       <Text key={index}>
@@ -65,7 +65,7 @@ import { Kbd } from "@workspace/ui"
 ### カラースキームを変更する
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["success", "warning"]}>
     {(colorScheme, index) => (
       <Text key={index}>

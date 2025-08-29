@@ -6,4 +6,150 @@ source: components/switch
 style: components/switch/switch.style.ts
 ---
 
+```tsx preview
+<Switch>Basic</Switch>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Switch } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Switch } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Switch } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Switch />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<HStack>
+  <For each={["thick", "thin"]}>
+    {(variant) => (
+      <Switch key={variant} variant={variant}>
+        {toTitleCase(variant)}
+      </Switch>
+    )}
+  </For>
+</HStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<HStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size) => (
+      <Switch key={size} size={size}>
+        Size ({size})
+      </Switch>
+    )}
+  </For>
+</HStack>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<HStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme) => (
+      <Switch key={colorScheme} colorScheme={colorScheme} defaultChecked>
+        {toTitleCase(colorScheme)}
+      </Switch>
+    )}
+  </For>
+</HStack>
+```
+
+### ラベルの位置を変更する
+
+```tsx preview
+<Switch reverse>Reverse Label</Switch>
+```
+
+### 形状を変更する
+
+```tsx preview
+<VStack>
+  <For each={["square", "rounded", "circle"]}>
+    {(shape) => (
+      <Switch key={shape} shape={shape} defaultChecked>
+        {toTitleCase(shape)}
+      </Switch>
+    )}
+  </For>
+</VStack>
+```
+
+### 無効化する
+
+```tsx preview
+<HStack>
+  <Switch disabled>Disabled</Switch>
+  <Switch disabled defaultChecked>
+    Disabled
+  </Switch>
+</HStack>
+```
+
+### 読み取り専用にする
+
+```tsx preview
+<HStack>
+  <Switch readOnly>Read Only</Switch>
+  <Switch readOnly defaultChecked>
+    Read Only
+  </Switch>
+</HStack>
+```
+
+### アイコンをカスタマイズする
+
+```tsx preview
+<Switch
+  size="lg"
+  icon={{ off: <MoonIcon fontSize="sm" />, on: <SunIcon fontSize="sm" /> }}
+>
+  Dark Mode
+</Switch>
+```
+
+### ラベルをカスタマイズする
+
+```tsx preview functional
+const id = useId()
+
+return (
+  <HStack gap="sm">
+    <Text as="label" htmlFor={id} userSelect="none">
+      Please Click
+    </Text>
+    <Switch id={id} />
+  </HStack>
+)
+```
+
+### 制御する
+
+```tsx preview functional client
+const [checked, { toggle }] = useBoolean(false)
+
+return (
+  <Switch checked={checked} onChange={toggle}>
+    Custom Control
+  </Switch>
+)
+```

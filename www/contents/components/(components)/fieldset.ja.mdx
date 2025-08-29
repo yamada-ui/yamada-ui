@@ -31,7 +31,7 @@ import { Fieldset } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Fieldset } from "@workspace/ui"
+import { Fieldset } from "@workspaces/ui"
 ```
 
 :::
@@ -52,7 +52,7 @@ import { Fieldset } from "@workspace/ui"
 ### バリアントを変更する
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["plain", "elevated", "outline", "panel"]}>
     {(variant, index) => (
       <Fieldset.Root
@@ -85,21 +85,22 @@ import { Fieldset } from "@workspace/ui"
 ### サイズを変更する
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["sm", "md", "lg"]}>
     {(size, index) => (
       <Fieldset.Root
         key={index}
         size={size}
+        variant="panel"
         helperMessage="Please provide your contact details below."
         legend="Contact details"
       >
         <Field.Root label="Name">
-          <Input type="text" placeholder="Your name" />
+          <Input type="text" placeholder="Your name" bg="bg" />
         </Field.Root>
 
         <Field.Root label="Email address">
-          <Input type="email" placeholder="Your email address" />
+          <Input type="email" placeholder="Your email address" bg="bg" />
         </Field.Root>
       </Fieldset.Root>
     )}
@@ -187,6 +188,26 @@ import { Fieldset } from "@workspace/ui"
 </Fieldset.Root>
 ```
 
+### 必須にする
+
+必須にする場合は、`required`を`true`に設定します。
+
+```tsx preview
+<Fieldset.Root
+  required
+  helperMessage="Please provide your contact details below."
+  legend="Contact details"
+>
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
+```
+
 ### 無効にする
 
 無効にする場合は、`disabled`を`true`に設定します。
@@ -212,13 +233,40 @@ import { Fieldset } from "@workspace/ui"
 読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx preview
-<Field.Root
+<Fieldset.Root
   helperMessage="We'll never share your email."
-  label="Email address"
+  legend="Email address"
   readOnly
 >
-  <Input type="email" placeholder="your email address" />
-</Field.Root>
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`invalid`を`true`に設定します。
+
+```tsx preview
+<Fieldset.Root
+  legend="Email address"
+  invalid
+  helperMessage="We'll never share your email."
+  errorMessage="Some fields are invalid. Please check them."
+>
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
 ```
 
 ### キャプションをカスタマイズする

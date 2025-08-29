@@ -1251,7 +1251,7 @@ export const standardStyles = {
   opacity: true,
   order: true,
   orphans: true,
-  outline: {},
+  outline: true,
   outlineColor: {
     properties: ["outlineColor"],
     token: "colors",
@@ -7415,6 +7415,17 @@ export interface StyleProps {
    */
   orphans?: StyleValueWithCondition<CSS.Property.Orphans>
   /**
+   * ### outline
+   *
+   * The <code>outline</code> CSS shorthand sets the color, style, and width of a line around an element, outside of the border.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-03-27
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/outline
+   */
+  outline?: StyleValueWithCondition<CSS.Property.Outline>
+  /**
    * ### outline-color
    *
    * The <code>outline-color</code>, <code>outline-style</code>, and <code>outline-width</code> and <code>outline-offset</code> CSS properties style a line around an element, outside of the border.
@@ -10464,19 +10475,6 @@ export interface StyleProps {
   my?: StyleValueWithCondition<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
-  >
-  /**
-   * ### outline
-   *
-   * The <code>outline</code> CSS shorthand sets the color, style, and width of a line around an element, outside of the border.
-   *
-   * @baseline `Newly available`
-   * @newly_available_date 2023-03-27
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/outline
-   */
-  outline?: StyleValueWithCondition<
-    "inside" | "mixed" | "outside" | CSS.Property.Outline
   >
   /**
    * ### padding-inline-end

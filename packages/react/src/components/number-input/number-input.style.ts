@@ -56,7 +56,7 @@ export const numberInputStyle = defineComponentSlotStyle({
   sizes: {
     xs: {
       control: {
-        boxSize: `calc({--input-height} - {spaces.2})`,
+        boxSize: `calc({--height} - {spaces.2})`,
         fontSize: inputStyle.sizes?.xs.fontSize,
       },
       field: inputStyle.sizes?.xs,
@@ -64,7 +64,7 @@ export const numberInputStyle = defineComponentSlotStyle({
     },
     sm: {
       control: {
-        boxSize: `calc({--input-height} - {spaces.2})`,
+        boxSize: `calc({--height} - {spaces.2})`,
         fontSize: inputStyle.sizes?.sm.fontSize,
       },
       field: inputStyle.sizes?.sm,
@@ -72,7 +72,7 @@ export const numberInputStyle = defineComponentSlotStyle({
     },
     md: {
       control: {
-        boxSize: `calc({--input-height} - {spaces.2})`,
+        boxSize: `calc({--height} - {spaces.2})`,
         fontSize: inputStyle.sizes?.md.fontSize,
       },
       field: inputStyle.sizes?.md,
@@ -80,7 +80,7 @@ export const numberInputStyle = defineComponentSlotStyle({
     },
     lg: {
       control: {
-        boxSize: `calc({--input-height} - {spaces.2.5})`,
+        boxSize: `calc({--height} - {spaces.2.5})`,
         fontSize: inputStyle.sizes?.lg.fontSize,
       },
       field: inputStyle.sizes?.lg,
@@ -88,7 +88,7 @@ export const numberInputStyle = defineComponentSlotStyle({
     },
     xl: {
       control: {
-        boxSize: `calc({--input-height} - {spaces.3})`,
+        boxSize: `calc({--height} - {spaces.3})`,
         fontSize: inputStyle.sizes?.xl.fontSize,
       },
       field: inputStyle.sizes?.xl,
@@ -96,7 +96,7 @@ export const numberInputStyle = defineComponentSlotStyle({
     },
     "2xl": {
       control: {
-        boxSize: `calc({--input-height} - {spaces.3})`,
+        boxSize: `calc({--height} - {spaces.3})`,
         fontSize: inputStyle.sizes?.["2xl"].fontSize,
       },
       field: inputStyle.sizes?.["2xl"],

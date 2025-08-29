@@ -24,7 +24,7 @@ import { Field } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Field } from "@workspace/ui"
+import { Field } from "@workspaces/ui"
 ```
 
 :::
@@ -83,7 +83,7 @@ Error messages are only displayed when `invalid` is `true`. To replace the helpe
 By default, it is set to `true`.
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <Field.Root
     errorMessage="Email is required."
     helperMessage="We'll never share your email."
@@ -153,7 +153,7 @@ To make it read-only, set `readOnly` to `true`.
 To change the direction, set `orientation` to `horizontal` or `vertical`. By default, `vertical` is set.
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["vertical", "horizontal"]}>
     {(orientation, index) => (
       <Field.Root
@@ -185,7 +185,7 @@ To customize the label, use `Field.Label`.
 To customize the required indicator, set a `ReactNode` to `requiredIndicator`.
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <Field.Root
     label="Email address"
     required
@@ -218,7 +218,7 @@ To customize the required indicator, set a `ReactNode` to `requiredIndicator`.
 To use an optional indicator, set a `ReactNode` to `optionalIndicator`.
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <Field.Root
     label="Email address"
     optionalIndicator={

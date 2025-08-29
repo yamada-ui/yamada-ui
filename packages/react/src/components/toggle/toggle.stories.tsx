@@ -108,7 +108,7 @@ export const Disabled: Story = () => {
       </Wrap>
 
       <Field.Root disabled label="Bold">
-        <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+        <Toggle icon={<BoldIcon />} justifySelf="flex-start" />
       </Field.Root>
     </>
   )
@@ -132,7 +132,7 @@ export const Readonly: Story = () => {
       </Wrap>
 
       <Field.Root label="Bold" readOnly>
-        <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+        <Toggle icon={<BoldIcon />} justifySelf="flex-start" />
       </Field.Root>
     </>
   )
@@ -156,7 +156,7 @@ export const Invalid: Story = () => {
       </Wrap>
 
       <Field.Root invalid label="Bold">
-        <Toggle alignSelf="flex-start" icon={<BoldIcon />} />
+        <Toggle icon={<BoldIcon />} justifySelf="flex-start" />
       </Field.Root>
     </>
   )

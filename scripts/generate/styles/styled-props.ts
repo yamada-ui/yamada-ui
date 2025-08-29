@@ -42,9 +42,6 @@ export const additionalProps = {
   marginY: { properties: ["marginTop", "marginBottom"] },
   maxBoxSize: { properties: ["maxWidth", "maxHeight"] },
   minBoxSize: { properties: ["minWidth", "minHeight"] },
-  outline: {
-    type: "CSS.Property.Outline | 'outside' | 'inside' | 'mixed'",
-  },
   paddingX: { properties: ["paddingInlineStart", "paddingInlineEnd"] },
   paddingY: { properties: ["paddingTop", "paddingBottom"] },
   scrollMarginX: { properties: ["scrollMarginLeft", "scrollMarginRight"] },

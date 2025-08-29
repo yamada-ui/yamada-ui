@@ -3,6 +3,182 @@ title: CLI
 description: CLIコマンドを使用してテーマを生成する方法を学ぶ。
 ---
 
-## インストール
-
 ## 使い方
+
+:::warning
+下記のコマンドを実行する前に、`@yamada-ui/cli`をインストールして`init`コマンドを実行する必要があります。詳しくは、[こちら](/docs/get-started/cli)をご覧ください。
+:::
+
+### テーマを生成する
+
+`theme`コマンドを実行すると、指定されたパスにテーマを生成します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+:::note
+パスが指定されない場合は、`./theme`にテーマが生成されます。
+:::
+
+```bash
+Usage: pnpm yamada-cli theme [options] [path]
+
+generate theme to your project
+
+Arguments:
+  path                 path to the theme directory
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --overwrite      overwrite existing directory. (default: false)
+  -j, --js             use js instead of ts
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### 差分を確認する
+
+`diff`コマンドを実行すると、テーマのローカルとリモートの差分を確認できます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli diff theme
+```
+
+```bash [npm]
+npm yamada-cli diff theme
+```
+
+```bash [yarn]
+yarn yamada-cli diff theme
+```
+
+```bash [bun]
+bun yamada-cli diff theme
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli diff [options] [component]
+
+check for updates against the registry
+
+Arguments:
+  component            component to check
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -s, --sequential     run tasks sequentially. (default: false)
+  -d, --detail         show detailed changes (default: false)
+  -h, --help           display help for command
+```
+
+### テーマを更新する
+
+`update`コマンドを実行すると、テーマを更新します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli update theme
+```
+
+```bash [npm]
+npm yamada-cli update theme
+```
+
+```bash [yarn]
+yarn yamada-cli update theme
+```
+
+```bash [bun]
+bun yamada-cli update theme
+```
+
+:::
+
+```bash
+Usage: pnpm yamada-cli update [options] [components...]
+
+update components in your project
+
+Arguments:
+  components           components to update
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -i, --install        install dependencies (default: false)
+  -s, --sequential     run tasks sequentially. (default: false)
+  -f, --format         format the output files.
+  -l, --lint           lint the output files.
+  -h, --help           display help for command
+```
+
+### 型定義を更新する
+
+`tokens`コマンドを実行すると、カスタマイズしたテーマの型定義を更新できます。
+この型定義は、[Style Props](/docs/styling/style-props)などで使用されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli tokens
+```
+
+```bash [npm]
+npm yamada-cli tokens
+```
+
+```bash [yarn]
+yarn yamada-cli tokens
+```
+
+```bash [bun]
+bun yamada-cli tokens
+```
+
+:::
+
+:::note
+パスが指定されない場合は、コンフィグの`theme.path`を参照します。
+:::
+
+```bash
+Usage: pnpm yamada-cli tokens [options] [path]
+
+generate theme typings
+
+Arguments:
+  path                 path to the theme file
+
+Options:
+  --cwd <path>         current working directory
+  -c, --config <path>  path to the config file (default: "ui.json")
+  -o, --out <path>     output path
+  -f, --format         format the output file
+  -l, --lint           lint the output file
+  -h, --help           display help for command
+```

@@ -1,6 +1,5 @@
 "use client"
 
-import type { ReactElement } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { CloseButtonProps } from "../close-button"
 import type { NoticeStyle } from "./notice.style"
@@ -17,16 +16,7 @@ interface ComponentContext {}
 export interface NoticeProps
   extends UseNoticeOptions,
     HTMLStyledProps,
-    ThemeProps<NoticeStyle> {
-  /**
-   * The toast ID for dismissal.
-   */
-  t: number | string
-  /**
-   * The icon element or loading scheme.
-   */
-  icon?: ReactElement | { variant?: string }
-}
+    ThemeProps<NoticeStyle> {}
 
 const {
   ComponentContext,
@@ -48,12 +38,12 @@ export { NoticePropsContext, useNoticePropsContext }
  */
 export const Notice = withProvider<"div", NoticeProps>(
   ({
+    id,
     closable,
     description,
     icon,
     loadingScheme,
     status,
-    t,
     title,
     withIcon = true,
     closeButtonProps,
@@ -93,7 +83,7 @@ export const Notice = withProvider<"div", NoticeProps>(
             <NoticeCloseButton
               {...closeButtonProps}
               onClick={handlerAll(closeButtonProps?.onClick, () =>
-                toast.dismiss(t),
+                toast.dismiss(id),
               )}
             />
           ) : null}

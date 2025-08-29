@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from "react"
+import type { ReactNode } from "react"
 import type { HTMLStyledProps, NoticeConfig } from "../../core"
 import type { Alert } from "../alert"
 import type { CloseButtonProps } from "../close-button"
@@ -132,13 +132,13 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
 
       if (component) {
         return toast.custom(
-          (t) => component({ onClose: () => toast.dismiss(t) }) as ReactElement,
+          (id) => component({ onClose: () => toast.dismiss(id) }),
           finalToastOptions,
         )
       }
 
       return toast.custom(
-        (t) => (<Notice {...noticeProps} t={t} />) as ReactElement,
+        (id) => <Notice {...noticeProps} id={id} />,
         finalToastOptions,
       )
     }

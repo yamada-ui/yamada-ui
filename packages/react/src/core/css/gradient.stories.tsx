@@ -10,7 +10,7 @@ export const Basic = () => {
     <Box
       bgGradient="linear(to-r, green.200, pink.500)"
       height="xs"
-      rounded="lg"
+      rounded="l3"
       w="full"
     />
   )
@@ -38,7 +38,7 @@ export const ColorMode = () => {
         "linear(to-b, orange.100, purple.300)",
       ]}
       height="xs"
-      rounded="lg"
+      rounded="l3"
       w="full"
     />
   )
@@ -53,7 +53,7 @@ export const Breakpoint = () => {
         lg: "linear(to-t, blue.200, teal.500)",
       }}
       height="xs"
-      rounded="lg"
+      rounded="l3"
       w="full"
     />
   )

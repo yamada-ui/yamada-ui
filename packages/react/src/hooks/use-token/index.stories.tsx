@@ -12,7 +12,7 @@ export const Basic = () => {
   const bg = useToken("colors", "primary")
 
   return (
-    <Box bg={bg} color="white" p="md" rounded="md">
+    <Box bg={bg} color="white" p="md" rounded="l2">
       Primary for color tokens is "{bg}"
     </Box>
   )

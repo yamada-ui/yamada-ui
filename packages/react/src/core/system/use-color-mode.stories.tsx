@@ -16,7 +16,7 @@ export const Basic = () => {
       bg={["blackAlpha.800", "whiteAlpha.800"]}
       color={["whiteAlpha.800", "blackAlpha.800"]}
       p="md"
-      rounded="md"
+      rounded="l2"
       transitionDuration="moderate"
       transitionProperty="all"
     >

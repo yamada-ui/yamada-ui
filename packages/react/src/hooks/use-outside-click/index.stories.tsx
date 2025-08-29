@@ -20,7 +20,7 @@ export const Basic = () => {
   })
 
   return open ? (
-    <Center ref={ref} bg="danger" color="white" h="10" px="4" rounded="md">
+    <Center ref={ref} bg="danger" color="white" h="10" px="4" rounded="l2">
       Hey, Click anywhere outside of me to close.
     </Center>
   ) : (

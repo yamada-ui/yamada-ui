@@ -3,14 +3,25 @@ import { defineComponentSlotStyle } from "../../core"
 export const noticeStyle = defineComponentSlotStyle({
   base: {
     closeButton: {
-      h: "6",
+      "&:is([data-variant='plain'], [data-variant='island'])": {
+        colorScheme: "mono",
+      },
+      "&:is([data-variant='solid'])": {
+        color: "colorScheme.contrast!",
+        _hover: { bg: "colorScheme.solid!" },
+      },
+      fontSize: "md!",
+      minBoxSize: "6!",
       position: "absolute",
-      right: "2",
-      top: "2",
-      w: "6",
+      right: "3",
+      top: "2.5",
     },
     content: {
-      flex: 1,
+      display: "flex",
+      flex: "1",
+      flexDirection: "column",
+      gap: "1",
+      pe: "6",
     },
     item: {
       alignItems: "center",

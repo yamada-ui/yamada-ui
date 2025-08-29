@@ -16,17 +16,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xs\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
       "description": "The variant of the component.",
       "required": false
     }

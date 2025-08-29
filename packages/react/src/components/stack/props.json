@@ -16,32 +16,32 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "align": {
-      "type": "AlignItems | [AlignItems | ({ _peerAccept?: AlignItems | [AlignItems | (... & { base?: AlignItems | [AlignItems | (... & ...), AlignItems | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: AlignItems | ... 2 more ... | undefined; }), AlignItems | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+      "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
       "description": "The CSS `align-items` property.",
       "required": false
     },
     "direction": {
-      "type": "FlexDirection | [FlexDirection | ({ _peerAccept?: FlexDirection | [FlexDirection | (... & { base?: FlexDirection | [...] | (... & ...) | undefined; ... 4 more ...; xl?: FlexDirection | ... 2 more ... | undefined; }), FlexDirection | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: FlexDirecti...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
     "justify": {
-      "type": "JustifyContent | [JustifyContent | ({ _peerAccept?: JustifyContent | [JustifyContent | (... & { ...; }), JustifyContent | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: JustifyContent | ... 2 more ... | undefined; } & { ...; }), JustifyContent | ({ ...; } & { ...; })] | ({ ...; } & { ...; })",
+      "type": "\"center\" | \"normal\" | \"left\" | \"right\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" ...",
       "description": "The CSS `justify-content` property.",
       "required": false
     },
     "separator": {
-      "type": "ReactElement<\n  unknown,\n  string | JSXElementConstructor<any>\n>",
+      "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
       "description": "If `true`, each stack item will show a separator.",
       "required": false
     },
     "wrap": {
-      "type": "FlexWrap | [FlexWrap | ({ _peerAccept?: FlexWrap | [FlexWrap | (... & { base?: FlexWrap | [FlexWrap | (... & ...), FlexWrap | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexWrap | ... 2 more ... | undefined; }), FlexWrap | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: Fle...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }
@@ -63,32 +63,32 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "align": {
-      "type": "AlignItems | [AlignItems | ({ _peerAccept?: AlignItems | [AlignItems | (... & { base?: AlignItems | [AlignItems | (... & ...), AlignItems | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: AlignItems | ... 2 more ... | undefined; }), AlignItems | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+      "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
       "description": "The CSS `align-items` property.",
       "required": false
     },
     "direction": {
-      "type": "FlexDirection | [FlexDirection | ({ _peerAccept?: FlexDirection | [FlexDirection | (... & { base?: FlexDirection | [...] | (... & ...) | undefined; ... 4 more ...; xl?: FlexDirection | ... 2 more ... | undefined; }), FlexDirection | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: FlexDirecti...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
     "justify": {
-      "type": "JustifyContent | [JustifyContent | ({ _peerAccept?: JustifyContent | [JustifyContent | (... & { ...; }), JustifyContent | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: JustifyContent | ... 2 more ... | undefined; } & { ...; }), JustifyContent | ({ ...; } & { ...; })] | ({ ...; } & { ...; })",
+      "type": "\"center\" | \"normal\" | \"left\" | \"right\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" ...",
       "description": "The CSS `justify-content` property.",
       "required": false
     },
     "separator": {
-      "type": "ReactElement<\n  unknown,\n  string | JSXElementConstructor<any>\n>",
+      "type": "ReactElement",
       "description": "If `true`, each stack item will show a separator.",
       "required": false
     },
     "wrap": {
-      "type": "FlexWrap | [FlexWrap | ({ _peerAccept?: FlexWrap | [FlexWrap | (... & { base?: FlexWrap | [FlexWrap | (... & ...), FlexWrap | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexWrap | ... 2 more ... | undefined; }), FlexWrap | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: Fle...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }
@@ -110,32 +110,32 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "align": {
-      "type": "AlignItems | [AlignItems | ({ _peerAccept?: AlignItems | [AlignItems | (... & { base?: AlignItems | [AlignItems | (... & ...), AlignItems | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: AlignItems | ... 2 more ... | undefined; }), AlignItems | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+      "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
       "description": "The CSS `align-items` property.",
       "required": false
     },
     "direction": {
-      "type": "FlexDirection | [FlexDirection | ({ _peerAccept?: FlexDirection | [FlexDirection | (... & { base?: FlexDirection | [...] | (... & ...) | undefined; ... 4 more ...; xl?: FlexDirection | ... 2 more ... | undefined; }), FlexDirection | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: FlexDirecti...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
     "justify": {
-      "type": "JustifyContent | [JustifyContent | ({ _peerAccept?: JustifyContent | [JustifyContent | (... & { ...; }), JustifyContent | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: JustifyContent | ... 2 more ... | undefined; } & { ...; }), JustifyContent | ({ ...; } & { ...; })] | ({ ...; } & { ...; })",
+      "type": "\"center\" | \"normal\" | \"left\" | \"right\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" ...",
       "description": "The CSS `justify-content` property.",
       "required": false
     },
     "separator": {
-      "type": "ReactElement<\n  unknown,\n  string | JSXElementConstructor<any>\n>",
+      "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
       "description": "If `true`, each stack item will show a separator.",
       "required": false
     },
     "wrap": {
-      "type": "FlexWrap | [FlexWrap | ({ _peerAccept?: FlexWrap | [FlexWrap | (... & { base?: FlexWrap | [FlexWrap | (... & ...), FlexWrap | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexWrap | ... 2 more ... | undefined; }), FlexWrap | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: Fle...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }
@@ -157,7 +157,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },

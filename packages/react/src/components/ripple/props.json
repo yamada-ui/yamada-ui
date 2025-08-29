@@ -1,7 +1,7 @@
 {
   "Ripple": {
     "as": {
-      "type": "keyof IntrinsicElements",
+      "type": "DOMElement",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -16,7 +16,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },

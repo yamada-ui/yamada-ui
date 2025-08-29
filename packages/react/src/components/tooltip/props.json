@@ -1,7 +1,7 @@
 {
   "Tooltip": {
     "animationScheme": {
-      "type": "\"scale\" | \"none\" | SimplePlacement",
+      "type": "\"none\" | \"scale\" | SimplePlacement",
       "defaultValue": "\"scale\"",
       "description": "The animation of the element.",
       "required": false
@@ -37,7 +37,7 @@
       "required": false
     },
     "content": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The content of the tooltip.",
       "required": false
     },
@@ -58,13 +58,13 @@
       "required": false
     },
     "duration": {
-      "type": "number | MotionLifecycleProps<number>",
+      "type": "PopupAnimationProps[\"duration\"]",
       "defaultValue": "0.1",
       "description": "The animation duration.",
       "required": false
     },
     "elements": {
-      "type": "{\n  floating?: HTMLElement | null | undefined\n  reference?: HTMLButtonElement | null | undefined\n}",
+      "type": "{\n  floating?: HTMLElement | null\n  reference?: null | Reference<Y>\n}",
       "description": "Object containing the reference and floating elements.",
       "required": false
     },
@@ -87,7 +87,7 @@
       "required": false
     },
     "middleware": {
-      "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
+      "type": "(false | Middleware | null | undefined)[]",
       "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
       "required": false
     },
@@ -152,7 +152,7 @@
       "required": false
     },
     "whileElementsMounted": {
-      "type": "(\n  reference: HTMLButtonElement,\n  floating: HTMLElement,\n  update: () => void,\n) => () => void",
+      "type": "(reference: Reference<Y>, floating: HTMLElement, update: () => void) => () => void",
       "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
       "required": false
     }

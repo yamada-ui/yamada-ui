@@ -16,7 +16,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -32,7 +32,7 @@
       "required": false
     },
     "finish": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The infinite scroll area finish to use.",
       "required": false
     },
@@ -48,23 +48,23 @@
       "required": false
     },
     "loading": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The infinite scroll area loading to use.",
       "required": false
     },
     "onLoad": {
-      "type": "({\n  entry,\n  finish,\n  index,\n}: {\n  finish: () => void\n  index: number\n  entry?: IntersectionObserverEntry | undefined\n}) => void | Promise<void>",
+      "type": "({ entry, finish, index }: { finish: () => void; index: number; entry?: IntersectionObserverEntry | undefined }) => void | Promise<void>",
       "description": "The callback invoked when trigger is intersect.",
       "required": false
     },
     "orientation": {
-      "type": "StyleValue<Orientation>",
+      "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "\"vertical\"",
       "description": "The orientation of the infinite scroll.",
       "required": false
     },
     "resetRef": {
-      "type": "RefObject<\n  (index?: number | undefined, runScroll?: boolean | undefined) => void\n>",
+      "type": "RefObject<(index?: number | undefined, runScroll?: boolean | undefined) => void>",
       "description": "Ref to a reset function.",
       "required": false
     },

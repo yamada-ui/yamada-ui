@@ -16,37 +16,37 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "block": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | \"7\" | ... 93 more ... | ({ ...; } & { ...; })",
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
       "description": "The CSS `margin-block` property.",
       "required": false
     },
     "blockEnd": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | \"7\" | ... 93 more ... | ({ ...; } & { ...; })",
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
       "description": "The CSS `margin-block-end` property.",
       "required": false
     },
     "blockStart": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | \"7\" | ... 93 more ... | ({ ...; } & { ...; })",
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
       "description": "The CSS `margin-block-start` property.",
       "required": false
     },
     "inline": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"full\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | ... 94 more ... | ({ ...; } & { ...; })",
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
       "description": "The CSS `margin-inline` property.",
       "required": false
     },
     "inlineEnd": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"full\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | ... 94 more ... | ({ ...; } & { ...; })",
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
       "description": "The CSS `margin-inline-end` property.",
       "required": false
     },
     "inlineStart": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"full\" | \"0.5\" | \"1.5\" | \"2\" | \"2.5\" | \"3\" | \"3.5\" | \"4\" | \"4.5\" | \"5\" | \"5.5\" | \"6\" | \"6.5\" | ... 94 more ... | ({ ...; } & { ...; })",
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
       "description": "The CSS `margin-inline-start` property.",
       "required": false
     }

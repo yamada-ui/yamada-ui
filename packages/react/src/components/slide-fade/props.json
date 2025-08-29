@@ -16,7 +16,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -36,25 +36,25 @@
       "required": true
     },
     "delay": {
-      "type": "number | MotionLifecycleProps<number>",
+      "type": "MotionLifecycleProps<number> | number",
       "defaultValue": "0",
       "description": "Custom `delay` definition for `enter` and `exit`.",
       "required": false
     },
     "duration": {
-      "type": "number | MotionLifecycleProps<number>",
+      "type": "MotionLifecycleProps<number> | number",
       "defaultValue": "0.2",
       "description": "Custom `duration` definition for `enter` and `exit`.",
       "required": false
     },
     "offsetX": {
-      "type": "StyleValue<string | number>",
+      "type": "string | number",
       "defaultValue": "0",
       "description": "The offset on the horizontal or `x` axis.",
       "required": false
     },
     "offsetY": {
-      "type": "StyleValue<string | number>",
+      "type": "string | number",
       "defaultValue": "8",
       "description": "The offset on the vertical or `y` axis.",
       "required": false

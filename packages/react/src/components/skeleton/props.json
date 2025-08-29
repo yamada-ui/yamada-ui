@@ -16,27 +16,27 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "variant": {
-      "type": "\"pulse\" | \"none\" | \"shine\" | [\"pulse\" | \"none\" | \"shine\" | ({ _peerAccept?: \"pulse\" | \"none\" | \"shine\" | [\"pulse\" | \"none\" | \"shine\" | (... & { base?: \"pulse\" | \"none\" | \"shine\" | [...] | (... & ...) | undefined; ... 4 more ...; xl?: \"pulse\" | ... 4 more ... | undefined; }), \"pulse\" | ... 2 more ... | (... & { ...; ...",
+      "type": "\"pulse\" | \"none\" | \"shine\"",
       "description": "The variant of the component.",
       "required": false
     },
     "duration": {
-      "type": "string | number",
+      "type": "number | string",
       "description": "The animation duration in seconds.",
       "required": false
     },
     "endColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The color at the animation end.",
       "required": false
     },
     "fadeDuration": {
-      "type": "string | number",
+      "type": "number | string",
       "description": "The fade in duration in seconds. Requires `loaded` toggled to `true` in order to see the transition.",
       "required": false
     },
@@ -47,13 +47,13 @@
       "required": false
     },
     "loading": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "true",
       "description": "If `false`, it'll render its children with a nice fade transition.",
       "required": false
     },
     "startColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The color at the animation start.",
       "required": false
     }
@@ -75,27 +75,27 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "variant": {
-      "type": "\"pulse\" | \"none\" | \"shine\" | [\"pulse\" | \"none\" | \"shine\" | ({ _peerAccept?: \"pulse\" | \"none\" | \"shine\" | [\"pulse\" | \"none\" | \"shine\" | (... & { base?: \"pulse\" | \"none\" | \"shine\" | [...] | (... & ...) | undefined; ... 4 more ...; xl?: \"pulse\" | ... 4 more ... | undefined; }), \"pulse\" | ... 2 more ... | (... & { ...; ...",
+      "type": "\"pulse\" | \"none\" | \"shine\"",
       "description": "The variant of the component.",
       "required": false
     },
     "duration": {
-      "type": "string | number",
+      "type": "number | string",
       "description": "The animation duration in seconds.",
       "required": false
     },
     "endColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The color at the animation end.",
       "required": false
     },
     "fadeDuration": {
-      "type": "string | number",
+      "type": "number | string",
       "description": "The fade in duration in seconds. Requires `loaded` toggled to `true` in order to see the transition.",
       "required": false
     },
@@ -106,13 +106,13 @@
       "required": false
     },
     "loading": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "true",
       "description": "If `false`, it'll render its children with a nice fade transition.",
       "required": false
     },
     "startColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The color at the animation start.",
       "required": false
     }
@@ -134,12 +134,12 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "variant": {
-      "type": "\"pulse\" | \"none\" | \"shine\" | [\"pulse\" | \"none\" | \"shine\" | ({ _peerAccept?: \"pulse\" | \"none\" | \"shine\" | [\"pulse\" | \"none\" | \"shine\" | (... & { base?: \"pulse\" | \"none\" | \"shine\" | [...] | (... & ...) | undefined; ... 4 more ...; xl?: \"pulse\" | ... 4 more ... | undefined; }), \"pulse\" | ... 2 more ... | (... & { ...; ...",
+      "type": "\"pulse\" | \"none\" | \"shine\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -149,7 +149,7 @@
       "required": false
     },
     "endColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The color at the animation end.",
       "required": false
     },
@@ -165,12 +165,12 @@
       "required": false
     },
     "lineClamp": {
-      "type": "StyleValue<number>",
+      "type": "number",
       "description": "The number of lines to display.",
       "required": false
     },
     "loading": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "true",
       "description": "If `false`, it'll render its children with a nice fade transition.",
       "required": false
@@ -181,7 +181,7 @@
       "required": false
     },
     "startColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The color at the animation start.",
       "required": false
     }

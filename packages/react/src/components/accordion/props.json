@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
@@ -27,7 +27,7 @@
         "required": false
       },
       "icon": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: { ...; }) => ReactNode)",
+        "type": "ReactNodeOrFunction<{ disabled?: boolean; expanded?: boolean }>",
         "description": "The accordion icon to use.",
         "required": false
       }
@@ -49,7 +49,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
@@ -59,12 +59,12 @@
         "required": true
       },
       "button": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: AccordionCallBackProps) => ReactNode)",
+        "type": "ReactNodeOrFunction<AccordionCallBackProps>",
         "description": "The accordion button to use.",
         "required": false
       },
       "children": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: AccordionCallBackProps) => ReactNode)",
+        "type": "ReactNodeOrFunction<AccordionCallBackProps>",
         "description": "The accordion children to use.",
         "required": false
       },
@@ -75,7 +75,7 @@
         "required": false
       },
       "icon": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: AccordionCallBackProps) => ReactNode)",
+        "type": "ReactNodeOrFunction<AccordionCallBackProps>",
         "description": "The accordion icon to use.",
         "required": false
       }
@@ -97,7 +97,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
@@ -184,12 +184,12 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "variant": {
-        "type": "\"panel\" | \"plain\" | [\"panel\" | \"plain\" | ({ _peerAccept?: \"panel\" | \"plain\" | [\"panel\" | \"plain\" | (... & { base?: \"panel\" | \"plain\" | [\"panel\" | \"plain\" | (... & ...), \"panel\" | ... 1 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"panel\" | ... 3 more ... | undefined; }), \"panel\" | ... 1 mo...",
+        "type": "\"panel\" | \"plain\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -199,7 +199,7 @@
         "required": false
       },
       "icon": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: AccordionCallBackProps) => ReactNode)",
+        "type": "ReactNodeOrFunction<AccordionCallBackProps>",
         "description": "The accordion icon for all items to use.",
         "required": false
       },
@@ -255,7 +255,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -265,7 +265,7 @@
       "required": false
     },
     "icon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: { ...; }) => ReactNode)",
+      "type": "ReactNodeOrFunction<{ disabled?: boolean; expanded?: boolean }>",
       "description": "The accordion icon to use.",
       "required": false
     }
@@ -287,7 +287,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -297,12 +297,12 @@
       "required": true
     },
     "button": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: AccordionCallBackProps) => ReactNode)",
+      "type": "ReactNodeOrFunction<AccordionCallBackProps>",
       "description": "The accordion button to use.",
       "required": false
     },
     "children": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: AccordionCallBackProps) => ReactNode)",
+      "type": "ReactNodeOrFunction<AccordionCallBackProps>",
       "description": "The accordion children to use.",
       "required": false
     },
@@ -313,7 +313,7 @@
       "required": false
     },
     "icon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: AccordionCallBackProps) => ReactNode)",
+      "type": "ReactNodeOrFunction<AccordionCallBackProps>",
       "description": "The accordion icon to use.",
       "required": false
     }
@@ -335,7 +335,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -422,12 +422,12 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "variant": {
-      "type": "\"panel\" | \"plain\" | [\"panel\" | \"plain\" | ({ _peerAccept?: \"panel\" | \"plain\" | [\"panel\" | \"plain\" | (... & { base?: \"panel\" | \"plain\" | [\"panel\" | \"plain\" | (... & ...), \"panel\" | ... 1 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"panel\" | ... 3 more ... | undefined; }), \"panel\" | ... 1 mo...",
+      "type": "\"panel\" | \"plain\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -437,7 +437,7 @@
       "required": false
     },
     "icon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: AccordionCallBackProps) => ReactNode)",
+      "type": "ReactNodeOrFunction<AccordionCallBackProps>",
       "description": "The accordion icon for all items to use.",
       "required": false
     },

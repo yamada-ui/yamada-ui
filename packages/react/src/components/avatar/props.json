@@ -16,32 +16,32 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { base?: \"lg\" | ... 6 more ... | undefined; ... 4 more ...; xl?: \"lg\" | ... 6 more ... | undefined; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ....",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
       "description": "The variant of the component.",
       "required": false
     },
     "alt": {
-      "type": "string",
+      "type": "HTMLProps<\"img\">[\"alt\"]",
       "description": "The `HTMLImageElement` property `alt`.",
       "required": false
     },
     "crossOrigin": {
-      "type": "\"\" | \"anonymous\" | \"use-credentials\"",
+      "type": "HTMLProps<\"img\">[\"crossOrigin\"]",
       "description": "The `HTMLImageElement` property `crossOrigin`.",
       "required": false
     },
     "fallback": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The fallback text to display if the image is not provided.",
       "required": false
     },
@@ -56,7 +56,7 @@
       "required": false
     },
     "icon": {
-      "type": "ReactElement<\n  unknown,\n  string | JSXElementConstructor<any>\n>",
+      "type": "ReactElement",
       "description": "The avatar icon to use.",
       "required": false
     },
@@ -66,7 +66,7 @@
       "required": false
     },
     "loading": {
-      "type": "\"lazy\" | \"eager\"",
+      "type": "HTMLProps<\"img\">[\"loading\"]",
       "description": "Defines loading strategy.",
       "required": false
     },
@@ -76,24 +76,24 @@
       "required": false
     },
     "referrerPolicy": {
-      "type": "HTMLAttributeReferrerPolicy",
+      "type": "HTMLProps<\"img\">[\"referrerPolicy\"]",
       "defaultValue": "\"no-referrer\"",
       "description": "Defining which referrer is sent when fetching the resource.",
       "required": false
     },
     "shape": {
-      "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
+      "type": "\"circle\" | \"square\" | \"rounded\"",
       "defaultValue": "\"circle\"",
       "description": "The shape of the component",
       "required": false
     },
     "src": {
-      "type": "string",
+      "type": "HTMLProps<\"img\">[\"src\"]",
       "description": "The image url of the avatar.",
       "required": false
     },
     "srcSet": {
-      "type": "string",
+      "type": "HTMLProps<\"img\">[\"srcSet\"]",
       "description": "List of sources to use for different screen resolutions.",
       "required": false
     }
@@ -116,32 +116,32 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { base?: \"lg\" | ... 6 more ... | undefined; ... 4 more ...; xl?: \"lg\" | ... 6 more ... | undefined; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ....",
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+        "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
         "description": "The variant of the component.",
         "required": false
       },
       "alt": {
-        "type": "string",
+        "type": "HTMLProps<\"img\">[\"alt\"]",
         "description": "The `HTMLImageElement` property `alt`.",
         "required": false
       },
       "crossOrigin": {
-        "type": "\"\" | \"anonymous\" | \"use-credentials\"",
+        "type": "HTMLProps<\"img\">[\"crossOrigin\"]",
         "description": "The `HTMLImageElement` property `crossOrigin`.",
         "required": false
       },
       "fallback": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The fallback text to display if the image is not provided.",
         "required": false
       },
@@ -156,7 +156,7 @@
         "required": false
       },
       "icon": {
-        "type": "ReactElement<\n  unknown,\n  string | JSXElementConstructor<any>\n>",
+        "type": "ReactElement",
         "description": "The avatar icon to use.",
         "required": false
       },
@@ -166,7 +166,7 @@
         "required": false
       },
       "loading": {
-        "type": "\"lazy\" | \"eager\"",
+        "type": "HTMLProps<\"img\">[\"loading\"]",
         "description": "Defines loading strategy.",
         "required": false
       },
@@ -176,24 +176,24 @@
         "required": false
       },
       "referrerPolicy": {
-        "type": "HTMLAttributeReferrerPolicy",
+        "type": "HTMLProps<\"img\">[\"referrerPolicy\"]",
         "defaultValue": "\"no-referrer\"",
         "description": "Defining which referrer is sent when fetching the resource.",
         "required": false
       },
       "shape": {
-        "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
+        "type": "\"circle\" | \"square\" | \"rounded\"",
         "defaultValue": "\"circle\"",
         "description": "The shape of the component",
         "required": false
       },
       "src": {
-        "type": "string",
+        "type": "HTMLProps<\"img\">[\"src\"]",
         "description": "The image url of the avatar.",
         "required": false
       },
       "srcSet": {
-        "type": "string",
+        "type": "HTMLProps<\"img\">[\"srcSet\"]",
         "description": "List of sources to use for different screen resolutions.",
         "required": false
       }
@@ -215,17 +215,17 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { base?: \"lg\" | ... 6 more ... | undefined; ... 4 more ...; xl?: \"lg\" | ... 6 more ... | undefined; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ....",
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+        "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -240,7 +240,7 @@
         "required": false
       },
       "shape": {
-        "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
+        "type": "\"circle\" | \"square\" | \"rounded\"",
         "defaultValue": "\"circle\"",
         "description": "The shape of the component",
         "required": false
@@ -264,17 +264,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { base?: \"lg\" | ... 6 more ... | undefined; ... 4 more ...; xl?: \"lg\" | ... 6 more ... | undefined; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ....",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"outline\" | \"solid\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -289,7 +289,7 @@
       "required": false
     },
     "shape": {
-      "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
+      "type": "\"circle\" | \"square\" | \"rounded\"",
       "defaultValue": "\"circle\"",
       "description": "The shape of the component",
       "required": false

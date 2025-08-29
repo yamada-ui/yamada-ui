@@ -6,12 +6,12 @@
       "required": true
     },
     "each": {
-      "type": "Y[] | readonly Y[]",
+      "type": "readonly Y[] | undefined | Y[]",
       "description": "The array to iterate over.",
       "required": false
     },
     "fallback": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The fallback content to render when the array is empty.",
       "required": false
     },

@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -39,7 +39,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -61,7 +61,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -83,22 +83,22 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"outline\" | \"subtle\" | \"surface\" | [\"outline\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"subtle\" | \"surface\" | [\"outline\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 2 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"outline\" | ... 4 more ... | undefined...",
+        "type": "\"outline\" | \"subtle\" | \"surface\"",
         "description": "The variant of the component.",
         "required": false
       },
       "addon": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The addon of the radio card.",
         "required": false
       },
@@ -119,7 +119,7 @@
         "required": false
       },
       "description": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The description of the radio card.",
         "required": false
       },
@@ -135,12 +135,12 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
@@ -166,13 +166,13 @@
         "required": false
       },
       "justify": {
-        "type": "StyleValue<\"end\" | \"start\">",
+        "type": "\"end\" | \"start\"",
         "defaultValue": "\"start\"",
         "description": "The justify indicator of the component",
         "required": false
       },
       "label": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The label of the radio card.",
         "required": false
       },
@@ -219,7 +219,7 @@
         "required": false
       },
       "shape": {
-        "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
+        "type": "\"circle\" | \"square\" | \"rounded\"",
         "defaultValue": "\"circle\"",
         "description": "The shape of the component",
         "required": false
@@ -254,7 +254,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -276,7 +276,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -299,33 +299,33 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"outline\" | \"subtle\" | \"surface\" | [\"outline\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"subtle\" | \"surface\" | [\"outline\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 2 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"outline\" | ... 4 more ... | undefined...",
+        "type": "\"outline\" | \"subtle\" | \"surface\"",
         "description": "The variant of the component.",
         "required": false
       },
       "align": {
-        "type": "AlignItems | [AlignItems | ({ _peerAccept?: AlignItems | [AlignItems | (... & { base?: AlignItems | [AlignItems | (... & ...), AlignItems | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: AlignItems | ... 2 more ... | undefined; }), AlignItems | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+        "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
         "description": "The CSS `align-items` property.",
         "required": false
       },
       "attached": {
-        "type": "StyleValue<boolean>",
+        "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
         "required": false
       },
       "basis": {
-        "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 98 more ... | ({ ...; } & { ...; })",
+        "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
         "description": "The CSS `flex-basis` property.",
         "required": false
       },
@@ -335,7 +335,7 @@
         "required": false
       },
       "direction": {
-        "type": "FlexDirection | [FlexDirection | ({ _peerAccept?: FlexDirection | [FlexDirection | (... & { base?: FlexDirection | [...] | (... & ...) | undefined; ... 4 more ...; xl?: FlexDirection | ... 2 more ... | undefined; }), FlexDirection | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: FlexDirecti...",
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
         "description": "The CSS `flex-direction` property.",
         "required": false
       },
@@ -346,17 +346,17 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
       "grow": {
-        "type": "StyleValue<boolean>",
+        "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, the children will grow to fill the available space.",
         "required": false
@@ -374,7 +374,7 @@
         "required": false
       },
       "justify": {
-        "type": "StyleValue<\"end\" | \"start\">",
+        "type": "\"end\" | \"start\"",
         "defaultValue": "\"start\"",
         "description": "The justify indicator of the component",
         "required": false
@@ -385,7 +385,7 @@
         "required": false
       },
       "orientation": {
-        "type": "StyleValue<\"horizontal\" | \"vertical\">",
+        "type": "\"horizontal\" | \"vertical\"",
         "defaultValue": "\"horizontal\"",
         "description": "The orientation of the group.",
         "required": false
@@ -403,18 +403,18 @@
         "required": false
       },
       "shape": {
-        "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
+        "type": "\"circle\" | \"square\" | \"rounded\"",
         "defaultValue": "\"circle\"",
         "description": "The shape of the component",
         "required": false
       },
       "shrink": {
-        "type": "FlexShrink | [FlexShrink | ({ _peerAccept?: FlexShrink | [FlexShrink | (... & { base?: FlexShrink | [FlexShrink | (... & ...), FlexShrink | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexShrink | ... 2 more ... | undefined; }), FlexShrink | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
         "description": "The CSS `flex-shrink` property.",
         "required": false
       },
       "stacking": {
-        "type": "StyleValue<\"first-on-top\" | \"last-on-top\">",
+        "type": "\"first-on-top\" | \"last-on-top\"",
         "description": "The stacking order of the group.",
         "required": false
       },
@@ -430,7 +430,7 @@
         "required": false
       },
       "wrap": {
-        "type": "FlexWrap | [FlexWrap | ({ _peerAccept?: FlexWrap | [FlexWrap | (... & { base?: FlexWrap | [FlexWrap | (... & ...), FlexWrap | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexWrap | ... 2 more ... | undefined; }), FlexWrap | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: Fle...",
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
         "description": "The CSS `flex-wrap` property.",
         "required": false
       }
@@ -454,7 +454,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -476,7 +476,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -498,7 +498,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -520,22 +520,22 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"outline\" | \"subtle\" | \"surface\" | [\"outline\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"subtle\" | \"surface\" | [\"outline\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 2 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"outline\" | ... 4 more ... | undefined...",
+        "type": "\"outline\" | \"subtle\" | \"surface\"",
         "description": "The variant of the component.",
         "required": false
       },
       "addon": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The addon of the radio card.",
         "required": false
       },
@@ -556,7 +556,7 @@
         "required": false
       },
       "description": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The description of the radio card.",
         "required": false
       },
@@ -572,12 +572,12 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
@@ -603,13 +603,13 @@
         "required": false
       },
       "justify": {
-        "type": "StyleValue<\"end\" | \"start\">",
+        "type": "\"end\" | \"start\"",
         "defaultValue": "\"start\"",
         "description": "The justify indicator of the component",
         "required": false
       },
       "label": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The label of the radio card.",
         "required": false
       },
@@ -656,7 +656,7 @@
         "required": false
       },
       "shape": {
-        "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
+        "type": "\"circle\" | \"square\" | \"rounded\"",
         "defaultValue": "\"circle\"",
         "description": "The shape of the component",
         "required": false
@@ -691,33 +691,33 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"subtle\" | \"surface\" | [\"outline\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"subtle\" | \"surface\" | [\"outline\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 2 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"outline\" | ... 4 more ... | undefined...",
+      "type": "\"outline\" | \"subtle\" | \"surface\"",
       "description": "The variant of the component.",
       "required": false
     },
     "align": {
-      "type": "AlignItems | [AlignItems | ({ _peerAccept?: AlignItems | [AlignItems | (... & { base?: AlignItems | [AlignItems | (... & ...), AlignItems | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: AlignItems | ... 2 more ... | undefined; }), AlignItems | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+      "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
       "description": "The CSS `align-items` property.",
       "required": false
     },
     "attached": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
       "required": false
     },
     "basis": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 98 more ... | ({ ...; } & { ...; })",
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
       "description": "The CSS `flex-basis` property.",
       "required": false
     },
@@ -727,7 +727,7 @@
       "required": false
     },
     "direction": {
-      "type": "FlexDirection | [FlexDirection | ({ _peerAccept?: FlexDirection | [FlexDirection | (... & { base?: FlexDirection | [...] | (... & ...) | undefined; ... 4 more ...; xl?: FlexDirection | ... 2 more ... | undefined; }), FlexDirection | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: FlexDirecti...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
@@ -738,17 +738,17 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },
     "grow": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the children will grow to fill the available space.",
       "required": false
@@ -766,7 +766,7 @@
       "required": false
     },
     "justify": {
-      "type": "StyleValue<\"end\" | \"start\">",
+      "type": "\"end\" | \"start\"",
       "defaultValue": "\"start\"",
       "description": "The justify indicator of the component",
       "required": false
@@ -777,7 +777,7 @@
       "required": false
     },
     "orientation": {
-      "type": "StyleValue<\"horizontal\" | \"vertical\">",
+      "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "\"horizontal\"",
       "description": "The orientation of the group.",
       "required": false
@@ -795,18 +795,18 @@
       "required": false
     },
     "shape": {
-      "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
+      "type": "\"circle\" | \"square\" | \"rounded\"",
       "defaultValue": "\"circle\"",
       "description": "The shape of the component",
       "required": false
     },
     "shrink": {
-      "type": "FlexShrink | [FlexShrink | ({ _peerAccept?: FlexShrink | [FlexShrink | (... & { base?: FlexShrink | [FlexShrink | (... & ...), FlexShrink | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexShrink | ... 2 more ... | undefined; }), FlexShrink | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
       "description": "The CSS `flex-shrink` property.",
       "required": false
     },
     "stacking": {
-      "type": "StyleValue<\"first-on-top\" | \"last-on-top\">",
+      "type": "\"first-on-top\" | \"last-on-top\"",
       "description": "The stacking order of the group.",
       "required": false
     },
@@ -822,7 +822,7 @@
       "required": false
     },
     "wrap": {
-      "type": "FlexWrap | [FlexWrap | ({ _peerAccept?: FlexWrap | [FlexWrap | (... & { base?: FlexWrap | [FlexWrap | (... & ...), FlexWrap | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexWrap | ... 2 more ... | undefined; }), FlexWrap | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: Fle...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }
@@ -844,7 +844,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -866,22 +866,22 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"subtle\" | \"surface\" | [\"outline\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"outline\" | \"subtle\" | \"surface\" | [\"outline\" | \"subtle\" | \"surface\" | (... & { ...; }), \"outline\" | ... 2 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"outline\" | ... 4 more ... | undefined...",
+      "type": "\"outline\" | \"subtle\" | \"surface\"",
       "description": "The variant of the component.",
       "required": false
     },
     "addon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The addon of the radio card.",
       "required": false
     },
@@ -902,7 +902,7 @@
       "required": false
     },
     "description": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The description of the radio card.",
       "required": false
     },
@@ -918,12 +918,12 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },
@@ -949,13 +949,13 @@
       "required": false
     },
     "justify": {
-      "type": "StyleValue<\"end\" | \"start\">",
+      "type": "\"end\" | \"start\"",
       "defaultValue": "\"start\"",
       "description": "The justify indicator of the component",
       "required": false
     },
     "label": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The label of the radio card.",
       "required": false
     },
@@ -1002,7 +1002,7 @@
       "required": false
     },
     "shape": {
-      "type": "StyleValue<\"circle\" | \"square\" | \"rounded\">",
+      "type": "\"circle\" | \"square\" | \"rounded\"",
       "defaultValue": "\"circle\"",
       "description": "The shape of the component",
       "required": false

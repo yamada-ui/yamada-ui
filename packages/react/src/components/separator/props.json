@@ -16,17 +16,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "variant": {
-      "type": "\"solid\" | \"dashed\" | \"dotted\" | [\"solid\" | \"dashed\" | \"dotted\" | ({ _peerAccept?: \"solid\" | \"dashed\" | \"dotted\" | [\"solid\" | \"dashed\" | \"dotted\" | (... & { base?: \"solid\" | ... 4 more ... | undefined; ... 4 more ...; xl?: \"solid\" | ... 4 more ... | undefined; }), \"solid\" | ... 2 more ... | (... & { ...; })] | { ...;...",
+      "type": "\"solid\" | \"dashed\" | \"dotted\"",
       "description": "The variant of the component.",
       "required": false
     },
     "orientation": {
-      "type": "StyleValue<\"horizontal\" | \"vertical\">",
+      "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "\"horizontal\"",
       "description": "The orientation of the divider.",
       "required": false

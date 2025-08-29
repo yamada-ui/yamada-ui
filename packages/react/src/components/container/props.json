@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -39,7 +39,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -61,7 +61,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -83,22 +83,22 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"outline\" | \"solid\" | \"subtle\" | \"panel\" | \"surface\" | \"elevated\" | [\"outline\" | \"solid\" | \"subtle\" | \"panel\" | \"surface\" | \"elevated\" | ({ _peerAccept?: \"outline\" | \"solid\" | ... 6 more ... | undefined; ... 178 more ...; _selection?: \"outline\" | ... 7 more ... | undefined; } & { ...; }), \"outline\" | ... 5 more ... ...",
+        "type": "\"outline\" | \"solid\" | \"subtle\" | \"panel\" | \"surface\" | \"elevated\" ...",
         "description": "The variant of the component.",
         "required": false
       },
       "centerContent": {
-        "type": "StyleValue<boolean>",
+        "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, container will center its children regardless of their width.",
         "required": false
@@ -122,7 +122,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -144,7 +144,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -166,7 +166,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -188,22 +188,22 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | \"md\" | \"sm\" | \"xl\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xl\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"solid\" | \"subtle\" | \"panel\" | \"surface\" | \"elevated\" | [\"outline\" | \"solid\" | \"subtle\" | \"panel\" | \"surface\" | \"elevated\" | ({ _peerAccept?: \"outline\" | \"solid\" | ... 6 more ... | undefined; ... 178 more ...; _selection?: \"outline\" | ... 7 more ... | undefined; } & { ...; }), \"outline\" | ... 5 more ... ...",
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"panel\" | \"surface\" | \"elevated\" ...",
       "description": "The variant of the component.",
       "required": false
     },
     "centerContent": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, container will center its children regardless of their width.",
       "required": false

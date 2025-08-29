@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
@@ -33,7 +33,7 @@
         "required": false
       },
       "controlRef": {
-        "type": "RefObject<ResizableItemControl | null>",
+        "type": "RefObject<null | ResizableItemControl>",
         "description": "Ref of the resizable item callback.",
         "required": false
       },
@@ -90,12 +90,12 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "variant": {
-        "type": "\"border\" | \"plain\" | \"spacer\" | [\"border\" | \"plain\" | \"spacer\" | ({ _peerAccept?: \"border\" | \"plain\" | \"spacer\" | [\"border\" | \"plain\" | \"spacer\" | (... & { base?: \"border\" | ... 4 more ... | undefined; ... 4 more ...; xl?: \"border\" | ... 4 more ... | undefined; }), \"border\" | ... 2 more ... | (... & { ...; })] | { ....",
+        "type": "\"border\" | \"plain\" | \"spacer\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -126,13 +126,13 @@
         "required": false
       },
       "orientation": {
-        "type": "StyleValue<\"horizontal\" | \"vertical\">",
+        "type": "\"horizontal\" | \"vertical\"",
         "defaultValue": "\"horizontal\"",
         "description": "The orientation of the resizable.",
         "required": false
       },
       "rootRef": {
-        "type": "type ONLY_FOR_FORMAT =\n  | RefObject<HTMLDivElement | null>\n  | ((instance: HTMLDivElement | null) => void)",
+        "type": "ForwardedRef<HTMLDivElement>",
         "description": "Ref for resizable root element.",
         "required": false
       },
@@ -164,7 +164,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
@@ -175,7 +175,7 @@
         "required": false
       },
       "icon": {
-        "type": "ReactElement<\n  unknown,\n  string | JSXElementConstructor<any>\n>",
+        "type": "ReactElement",
         "description": "The resizable trigger icon to use.",
         "required": false
       },
@@ -208,7 +208,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -224,7 +224,7 @@
       "required": false
     },
     "controlRef": {
-      "type": "RefObject<ResizableItemControl | null>",
+      "type": "RefObject<null | ResizableItemControl>",
       "description": "Ref of the resizable item callback.",
       "required": false
     },
@@ -281,12 +281,12 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "variant": {
-      "type": "\"border\" | \"plain\" | \"spacer\" | [\"border\" | \"plain\" | \"spacer\" | ({ _peerAccept?: \"border\" | \"plain\" | \"spacer\" | [\"border\" | \"plain\" | \"spacer\" | (... & { base?: \"border\" | ... 4 more ... | undefined; ... 4 more ...; xl?: \"border\" | ... 4 more ... | undefined; }), \"border\" | ... 2 more ... | (... & { ...; })] | { ....",
+      "type": "\"border\" | \"plain\" | \"spacer\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -317,13 +317,13 @@
       "required": false
     },
     "orientation": {
-      "type": "StyleValue<\"horizontal\" | \"vertical\">",
+      "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "\"horizontal\"",
       "description": "The orientation of the resizable.",
       "required": false
     },
     "rootRef": {
-      "type": "type ONLY_FOR_FORMAT =\n  | RefObject<HTMLDivElement | null>\n  | ((instance: HTMLDivElement | null) => void)",
+      "type": "ForwardedRef<HTMLDivElement>",
       "description": "Ref for resizable root element.",
       "required": false
     },
@@ -355,7 +355,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -366,7 +366,7 @@
       "required": false
     },
     "icon": {
-      "type": "ReactElement<\n  unknown,\n  string | JSXElementConstructor<any>\n>",
+      "type": "ReactElement",
       "description": "The resizable trigger icon to use.",
       "required": false
     },

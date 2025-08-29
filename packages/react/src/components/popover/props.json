@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -39,7 +39,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -61,7 +61,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
@@ -88,7 +88,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -110,19 +110,19 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
     },
     "Root": {
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xs\"",
         "description": "The size of the component.",
         "required": false
       },
       "animationScheme": {
-        "type": "\"scale\" | \"none\" | SimplePlacement",
+        "type": "\"none\" | \"scale\" | SimplePlacement",
         "defaultValue": "\"scale\"",
         "description": "The animation of the element.",
         "required": false
@@ -146,7 +146,7 @@
         "required": false
       },
       "children": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: { ...; }) => ReactNode)",
+        "type": "ReactNodeOrFunction<{\n  open: boolean\n  onClose: () => void\n}>",
         "description": "The children of the popover.",
         "required": false
       },
@@ -180,13 +180,13 @@
         "required": false
       },
       "duration": {
-        "type": "number | MotionLifecycleProps<number>",
+        "type": "PopupAnimationProps[\"duration\"]",
         "defaultValue": "0.2",
         "description": "The animation duration.",
         "required": false
       },
       "elements": {
-        "type": "{\n  floating?: HTMLElement | null | undefined\n  reference?: HTMLButtonElement | null | undefined\n}",
+        "type": "{\n  floating?: HTMLElement | null\n  reference?: null | Reference<Y>\n}",
         "description": "Object containing the reference and floating elements.",
         "required": false
       },
@@ -214,7 +214,7 @@
         "required": false
       },
       "middleware": {
-        "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
+        "type": "(false | Middleware | null | undefined)[]",
         "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
         "required": false
       },
@@ -285,7 +285,7 @@
         "required": false
       },
       "whileElementsMounted": {
-        "type": "(\n  reference: HTMLButtonElement,\n  floating: HTMLElement,\n  update: () => void,\n) => () => void",
+        "type": "(reference: Reference<Y>, floating: HTMLElement, update: () => void) => () => void",
         "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
         "required": false
       },
@@ -313,7 +313,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -336,7 +336,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -358,7 +358,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -380,7 +380,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -407,7 +407,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -429,19 +429,19 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
   },
   "PopoverRoot": {
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | \"xs\" | [\"lg\" | ... 3 more ... | (... & ...), \"lg\" | ... 3 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 5 more ....",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xs\"",
       "description": "The size of the component.",
       "required": false
     },
     "animationScheme": {
-      "type": "\"scale\" | \"none\" | SimplePlacement",
+      "type": "\"none\" | \"scale\" | SimplePlacement",
       "defaultValue": "\"scale\"",
       "description": "The animation of the element.",
       "required": false
@@ -465,7 +465,7 @@
       "required": false
     },
     "children": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ((props: { ...; }) => ReactNode)",
+      "type": "ReactNodeOrFunction<{\n  open: boolean\n  onClose: () => void\n}>",
       "description": "The children of the popover.",
       "required": false
     },
@@ -499,13 +499,13 @@
       "required": false
     },
     "duration": {
-      "type": "number | MotionLifecycleProps<number>",
+      "type": "PopupAnimationProps[\"duration\"]",
       "defaultValue": "0.2",
       "description": "The animation duration.",
       "required": false
     },
     "elements": {
-      "type": "{\n  floating?: HTMLElement | null | undefined\n  reference?: HTMLButtonElement | null | undefined\n}",
+      "type": "{\n  floating?: HTMLElement | null\n  reference?: null | Reference<Y>\n}",
       "description": "Object containing the reference and floating elements.",
       "required": false
     },
@@ -533,7 +533,7 @@
       "required": false
     },
     "middleware": {
-      "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
+      "type": "(false | Middleware | null | undefined)[]",
       "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
       "required": false
     },
@@ -604,7 +604,7 @@
       "required": false
     },
     "whileElementsMounted": {
-      "type": "(\n  reference: HTMLButtonElement,\n  floating: HTMLElement,\n  update: () => void,\n) => () => void",
+      "type": "(reference: Reference<Y>, floating: HTMLElement, update: () => void) => () => void",
       "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
       "required": false
     },
@@ -632,20 +632,20 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
   },
   "PopupAnimation": {
     "animationScheme": {
-      "type": "\"scale\" | \"none\" | SimplePlacement",
+      "type": "\"none\" | \"scale\" | SimplePlacement",
       "defaultValue": "\"scale\"",
       "description": "The animation of the element.",
       "required": false
     },
     "duration": {
-      "type": "number | MotionLifecycleProps<number>",
+      "type": "MotionTransitionProps[\"duration\"]",
       "defaultValue": "0.2",
       "description": "The animation duration.",
       "required": false

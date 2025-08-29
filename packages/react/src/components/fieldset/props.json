@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -39,7 +39,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -61,7 +61,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -83,7 +83,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -105,7 +105,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -127,17 +127,17 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
+        "type": "\"lg\" | \"md\" | \"sm\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"outline\" | \"panel\" | \"plain\" | \"elevated\" | [\"outline\" | \"panel\" | \"plain\" | \"elevated\" | ({ _peerAccept?: \"outline\" | \"panel\" | \"plain\" | \"elevated\" | [\"outline\" | \"panel\" | \"plain\" | \"elevated\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+        "type": "\"outline\" | \"panel\" | \"plain\" | \"elevated\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -146,14 +146,8 @@
         "description": "Props the content component.",
         "required": false
       },
-      "disabled": {
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "If `true`, the fieldset will be disabled.",
-        "required": false
-      },
       "errorMessage": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The fieldset error message to use.",
         "required": false
       },
@@ -168,7 +162,7 @@
         "required": false
       },
       "helperMessage": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The fieldset helper message to use.",
         "required": false
       },
@@ -180,17 +174,29 @@
       "invalid": {
         "type": "boolean",
         "defaultValue": "false",
-        "description": "If `true`, the fieldset will be invalid.",
+        "description": "If `true`, the field will be invalid.",
         "required": false
       },
       "legend": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The fieldset legend to use.",
         "required": false
       },
       "legendProps": {
         "type": "FieldsetLegendProps",
         "description": "Props the legend component.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
         "required": false
       }
     }
@@ -212,7 +218,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -234,7 +240,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -256,7 +262,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -278,7 +284,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -300,7 +306,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -322,17 +328,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
+      "type": "\"lg\" | \"md\" | \"sm\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"panel\" | \"plain\" | \"elevated\" | [\"outline\" | \"panel\" | \"plain\" | \"elevated\" | ({ _peerAccept?: \"outline\" | \"panel\" | \"plain\" | \"elevated\" | [\"outline\" | \"panel\" | \"plain\" | \"elevated\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+      "type": "\"outline\" | \"panel\" | \"plain\" | \"elevated\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -341,14 +347,8 @@
       "description": "Props the content component.",
       "required": false
     },
-    "disabled": {
-      "type": "boolean",
-      "defaultValue": "false",
-      "description": "If `true`, the fieldset will be disabled.",
-      "required": false
-    },
     "errorMessage": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The fieldset error message to use.",
       "required": false
     },
@@ -363,7 +363,7 @@
       "required": false
     },
     "helperMessage": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The fieldset helper message to use.",
       "required": false
     },
@@ -375,17 +375,29 @@
     "invalid": {
       "type": "boolean",
       "defaultValue": "false",
-      "description": "If `true`, the fieldset will be invalid.",
+      "description": "If `true`, the field will be invalid.",
       "required": false
     },
     "legend": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The fieldset legend to use.",
       "required": false
     },
     "legendProps": {
       "type": "FieldsetLegendProps",
       "description": "Props the legend component.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
       "required": false
     }
   }

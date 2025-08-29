@@ -16,17 +16,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { ...; }), \"2xl\" | ... 5 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl\" | .....",
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | ({ _peerAccept?: \"outline\" | \"plain\" | \"filled\" | \"flushed\" | [\"outline\" | \"plain\" | \"filled\" | \"flushed\" | (... & { ...; }), \"outline\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?...",
+      "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -53,22 +53,22 @@
       "required": false
     },
     "defaultValue": {
-      "type": "string | number",
+      "type": "number | string",
       "description": "The initial value of the counter.\nShould be less than `max` and greater than `min`.",
       "required": false
     },
     "elementProps": {
-      "type": "InputElementProps",
+      "type": "InputGroup.ElementProps",
       "description": "The props for the end element.",
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },
@@ -79,12 +79,12 @@
       "required": false
     },
     "format": {
-      "type": "(value: string | number) => string",
+      "type": "(value: number | string) => string",
       "description": "If using a custom display format, this converts the default format to the custom format.",
       "required": false
     },
     "getAriaValueText": {
-      "type": "(value: string | number) => string | undefined",
+      "type": "(value: number | string) => string | undefined",
       "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
       "required": false
     },
@@ -143,7 +143,7 @@
       "required": false
     },
     "rootProps": {
-      "type": "InputGroupRootProps",
+      "type": "InputGroup.RootProps",
       "description": "The props for the root element.",
       "required": false
     },
@@ -154,7 +154,7 @@
       "required": false
     },
     "value": {
-      "type": "string | number",
+      "type": "number | string",
       "description": "The value of the counter.\nShould be less than `max` and greater than `min`.",
       "required": false
     }

@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -39,7 +39,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -61,22 +61,22 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | (... & { ...; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"lg\" | ... 6 more ... | undefined; ...",
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"solid\" | \"panel\" | \"plain\" | \"dashed\" | [\"solid\" | \"panel\" | \"plain\" | \"dashed\" | ({ _peerAccept?: \"solid\" | \"panel\" | \"plain\" | \"dashed\" | [\"solid\" | \"panel\" | \"plain\" | \"dashed\" | (... & { ...; }), \"solid\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"solid\" | ... 5 ...",
+        "type": "\"solid\" | \"panel\" | \"plain\" | \"dashed\"",
         "description": "The variant of the component.",
         "required": false
       },
       "accept": {
-        "type": "string[] | Accept",
+        "type": "Accept | string[]",
         "description": "Set accepted file types.",
         "required": false
       },
@@ -93,17 +93,17 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
       "getFilesFromEvent": {
-        "type": "(\n  event: DropEvent,\n) => Promise<(File | DataTransferItem)[]>",
+        "type": "DropzoneOptions[\"getFilesFromEvent\"]",
         "description": "Use this to provide a custom file aggregator.",
         "required": false
       },
@@ -189,47 +189,47 @@
         "required": false
       },
       "onDragEnter": {
-        "type": "DragEventHandler<HTMLElement>",
+        "type": "DropzoneOptions[\"onDragEnter\"]",
         "description": "Callback for when the dragenter event occurs.",
         "required": false
       },
       "onDragLeave": {
-        "type": "DragEventHandler<HTMLElement>",
+        "type": "DropzoneOptions[\"onDragLeave\"]",
         "description": "Callback for when the dragleave event occurs.",
         "required": false
       },
       "onDragOver": {
-        "type": "DragEventHandler<HTMLElement>",
+        "type": "DropzoneOptions[\"onDragOver\"]",
         "description": "Callback for when the dragover event occurs.",
         "required": false
       },
       "onDrop": {
-        "type": "<T extends File>(\n  acceptedFiles: T[],\n  fileRejections: FileRejection[],\n  event: DropEvent,\n) => void",
+        "type": "DropzoneOptions[\"onDrop\"]",
         "description": "Callback for when the drop event occurs.\nNote that this callback is invoked after the `getFilesFromEvent` callback is done.",
         "required": false
       },
       "onDropAccepted": {
-        "type": "<T extends File>(files: T[], event: DropEvent) => void",
+        "type": "DropzoneOptions[\"onDropAccepted\"]",
         "description": "Callback for when the drop event occurs.\nNote that if no files are accepted, this callback is not invoked.",
         "required": false
       },
       "onDropRejected": {
-        "type": "(\n  fileRejections: FileRejection[],\n  event: DropEvent,\n) => void",
+        "type": "DropzoneOptions[\"onDropRejected\"]",
         "description": "Callback for when the drop event occurs.\nNote that if no files are rejected, this callback is not invoked.",
         "required": false
       },
       "onError": {
-        "type": "(err: Error) => void",
+        "type": "DropzoneOptions[\"onError\"]",
         "description": "Callback for when there's some error from any of the promises.",
         "required": false
       },
       "onFileDialogCancel": {
-        "type": "() => void",
+        "type": "DropzoneOptions[\"onFileDialogCancel\"]",
         "description": "Callback for when closing the file dialog with no selection.",
         "required": false
       },
       "onFileDialogOpen": {
-        "type": "() => void",
+        "type": "DropzoneOptions[\"onFileDialogOpen\"]",
         "description": "Callback for when opening the file dialog.",
         "required": false
       },
@@ -268,7 +268,7 @@
         "required": false
       },
       "validator": {
-        "type": "<T extends File>(\n  file: T,\n) => FileError | readonly FileError[] | null",
+        "type": "DropzoneOptions[\"validator\"]",
         "description": "Custom validation function.\nIt must return null if there's no errors.",
         "required": false
       }
@@ -290,7 +290,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -313,7 +313,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -335,7 +335,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -357,22 +357,22 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | [\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\" | (... & { ...; }), \"lg\" | ... 4 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"lg\" | ... 6 more ... | undefined; ...",
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xs\" | \"full\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"solid\" | \"panel\" | \"plain\" | \"dashed\" | [\"solid\" | \"panel\" | \"plain\" | \"dashed\" | ({ _peerAccept?: \"solid\" | \"panel\" | \"plain\" | \"dashed\" | [\"solid\" | \"panel\" | \"plain\" | \"dashed\" | (... & { ...; }), \"solid\" | ... 3 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"solid\" | ... 5 ...",
+      "type": "\"solid\" | \"panel\" | \"plain\" | \"dashed\"",
       "description": "The variant of the component.",
       "required": false
     },
     "accept": {
-      "type": "string[] | Accept",
+      "type": "Accept | string[]",
       "description": "Set accepted file types.",
       "required": false
     },
@@ -389,17 +389,17 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" | \"amber.800\" | \"amber.900\" | \"amber.950\" | \"amber.bg\" | ... 663 more ... | ({ ...; } & { ...; })",
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },
     "getFilesFromEvent": {
-      "type": "(\n  event: DropEvent,\n) => Promise<(File | DataTransferItem)[]>",
+      "type": "DropzoneOptions[\"getFilesFromEvent\"]",
       "description": "Use this to provide a custom file aggregator.",
       "required": false
     },
@@ -485,47 +485,47 @@
       "required": false
     },
     "onDragEnter": {
-      "type": "DragEventHandler<HTMLElement>",
+      "type": "DropzoneOptions[\"onDragEnter\"]",
       "description": "Callback for when the dragenter event occurs.",
       "required": false
     },
     "onDragLeave": {
-      "type": "DragEventHandler<HTMLElement>",
+      "type": "DropzoneOptions[\"onDragLeave\"]",
       "description": "Callback for when the dragleave event occurs.",
       "required": false
     },
     "onDragOver": {
-      "type": "DragEventHandler<HTMLElement>",
+      "type": "DropzoneOptions[\"onDragOver\"]",
       "description": "Callback for when the dragover event occurs.",
       "required": false
     },
     "onDrop": {
-      "type": "<T extends File>(\n  acceptedFiles: T[],\n  fileRejections: FileRejection[],\n  event: DropEvent,\n) => void",
+      "type": "DropzoneOptions[\"onDrop\"]",
       "description": "Callback for when the drop event occurs.\nNote that this callback is invoked after the `getFilesFromEvent` callback is done.",
       "required": false
     },
     "onDropAccepted": {
-      "type": "<T extends File>(files: T[], event: DropEvent) => void",
+      "type": "DropzoneOptions[\"onDropAccepted\"]",
       "description": "Callback for when the drop event occurs.\nNote that if no files are accepted, this callback is not invoked.",
       "required": false
     },
     "onDropRejected": {
-      "type": "(\n  fileRejections: FileRejection[],\n  event: DropEvent,\n) => void",
+      "type": "DropzoneOptions[\"onDropRejected\"]",
       "description": "Callback for when the drop event occurs.\nNote that if no files are rejected, this callback is not invoked.",
       "required": false
     },
     "onError": {
-      "type": "(err: Error) => void",
+      "type": "DropzoneOptions[\"onError\"]",
       "description": "Callback for when there's some error from any of the promises.",
       "required": false
     },
     "onFileDialogCancel": {
-      "type": "() => void",
+      "type": "DropzoneOptions[\"onFileDialogCancel\"]",
       "description": "Callback for when closing the file dialog with no selection.",
       "required": false
     },
     "onFileDialogOpen": {
-      "type": "() => void",
+      "type": "DropzoneOptions[\"onFileDialogOpen\"]",
       "description": "Callback for when opening the file dialog.",
       "required": false
     },
@@ -564,7 +564,7 @@
       "required": false
     },
     "validator": {
-      "type": "<T extends File>(\n  file: T,\n) => FileError | readonly FileError[] | null",
+      "type": "DropzoneOptions[\"validator\"]",
       "description": "Custom validation function.\nIt must return null if there's no errors.",
       "required": false
     }
@@ -586,7 +586,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }

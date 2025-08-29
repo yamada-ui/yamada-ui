@@ -16,7 +16,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -36,13 +36,13 @@
       "required": true
     },
     "delay": {
-      "type": "number | MotionLifecycleProps<number>",
+      "type": "MotionLifecycleProps<number> | number",
       "defaultValue": "0",
       "description": "Custom `delay` definition for `enter` and `exit`.",
       "required": false
     },
     "duration": {
-      "type": "number | MotionLifecycleProps<number>",
+      "type": "MotionLifecycleProps<number> | number",
       "defaultValue": "0.2",
       "description": "Custom `duration` definition for `enter` and `exit`.",
       "required": false
@@ -53,7 +53,7 @@
       "required": false
     },
     "placement": {
-      "type": "StyleValue<\n  \"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\"\n>",
+      "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" ...",
       "defaultValue": "\"inline-end\"",
       "description": "The placement of the slide.",
       "required": false

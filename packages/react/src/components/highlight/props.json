@@ -16,7 +16,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -31,17 +31,17 @@
       "required": true
     },
     "align": {
-      "type": "TextAlign | [TextAlign | ({ _peerAccept?: TextAlign | [TextAlign | (... & { base?: TextAlign | [TextAlign | (... & ...), TextAlign | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: TextAlign | ... 2 more ... | undefined; }), TextAlign | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _select...",
+      "type": "\"center\" | \"left\" | \"right\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" ...",
       "description": "The CSS `text-align` property.",
       "required": false
     },
     "casing": {
-      "type": "TextTransform | [TextTransform | ({ _peerAccept?: TextTransform | [TextTransform | (... & { base?: TextTransform | [...] | (... & ...) | undefined; ... 4 more ...; xl?: TextTransform | ... 2 more ... | undefined; }), TextTransform | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: TextTransfo...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | \"capitalize\" | \"full-size-kana\" | \"full-width\" ...",
       "description": "The CSS `text-transform` property.",
       "required": false
     },
     "decoration": {
-      "type": "TextDecoration<0 | (string & {})> | [TextDecoration<0 | (string & {})> | ({ _peerAccept?: TextDecoration<0 | (string & {})> | [...] | { ...; } | undefined; ... 178 more ...; _selection?: TextDecoration<...> | ... 2 more ... | undefined; } & { ...; }), TextDecoration<...> | ({ ...; } & { ...; })] | ({ ...; } & { ...;...",
+      "type": "0 | \"black\" | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" ...",
       "description": "The CSS `text-decoration` property.",
       "required": false
     },

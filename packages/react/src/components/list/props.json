@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -39,12 +39,12 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "icon": {
-        "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+        "type": "ReactElement<any>",
         "description": "The icon to use.",
         "required": false
       }
@@ -66,7 +66,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
@@ -76,12 +76,12 @@
         "required": false
       },
       "stylePosition": {
-        "type": "ListStylePosition | [ListStylePosition | ({ _peerAccept?: ListStylePosition | [ListStylePosition | (... & { ...; }), ListStylePosition | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ListStylePosition | ... 2 more ... | undefined; } & { ...; }), ListStylePosition | ({ ...; } & { ...; })] |...",
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"inside\" | \"outside\" ...",
         "description": "The CSS `list-style-position` property.",
         "required": false
       },
       "styleType": {
-        "type": "ListStyleType | [ListStyleType | ({ _peerAccept?: ListStyleType | [ListStyleType | (... & { base?: ListStyleType | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ListStyleType | ... 2 more ... | undefined; }), ListStyleType | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ListStyleTy...",
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" ...",
         "description": "The CSS `list-style-position` property.",
         "required": false
       }
@@ -104,7 +104,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -126,12 +126,12 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "icon": {
-      "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+      "type": "ReactElement<any>",
       "description": "The icon to use.",
       "required": false
     }
@@ -153,7 +153,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -163,12 +163,12 @@
       "required": false
     },
     "stylePosition": {
-      "type": "ListStylePosition | [ListStylePosition | ({ _peerAccept?: ListStylePosition | [ListStylePosition | (... & { ...; }), ListStylePosition | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ListStylePosition | ... 2 more ... | undefined; } & { ...; }), ListStylePosition | ({ ...; } & { ...; })] |...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"inside\" | \"outside\" ...",
       "description": "The CSS `list-style-position` property.",
       "required": false
     },
     "styleType": {
-      "type": "ListStyleType | [ListStyleType | ({ _peerAccept?: ListStyleType | [ListStyleType | (... & { base?: ListStyleType | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ListStyleType | ... 2 more ... | undefined; }), ListStyleType | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ListStyleTy...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" ...",
       "description": "The CSS `list-style-position` property.",
       "required": false
     }

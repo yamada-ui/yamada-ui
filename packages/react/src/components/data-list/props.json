@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -39,12 +39,12 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "description": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ReactNode[]",
+        "type": "ReactNode | ReactNode[]",
         "description": "The data list description to use.",
         "required": false
       },
@@ -54,7 +54,7 @@
         "required": false
       },
       "term": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ReactNode[]",
+        "type": "ReactNode | ReactNode[]",
         "description": "The data list term to use.",
         "required": false
       },
@@ -81,17 +81,17 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
+        "type": "\"lg\" | \"md\" | \"sm\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"subtle\" | \"bold\" | \"grid\" | [\"subtle\" | \"bold\" | \"grid\" | ({ _peerAccept?: \"subtle\" | \"bold\" | \"grid\" | [\"subtle\" | \"bold\" | \"grid\" | (... & { base?: \"subtle\" | \"bold\" | \"grid\" | [...] | (... & ...) | undefined; ... 4 more ...; xl?: \"subtle\" | ... 4 more ... | undefined; }), \"subtle\" | ... 2 more ... | (... & { ......",
+        "type": "\"subtle\" | \"bold\" | \"grid\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -106,7 +106,7 @@
         "required": false
       },
       "orientation": {
-        "type": "StyleValue<\"horizontal\" | \"vertical\">",
+        "type": "\"horizontal\" | \"vertical\"",
         "defaultValue": "\"horizontal\"",
         "description": "The orientation of the data list.",
         "required": false
@@ -134,7 +134,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -157,7 +157,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -179,12 +179,12 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "description": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ReactNode[]",
+      "type": "ReactNode | ReactNode[]",
       "description": "The data list description to use.",
       "required": false
     },
@@ -194,7 +194,7 @@
       "required": false
     },
     "term": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ReactNode[]",
+      "type": "ReactNode | ReactNode[]",
       "description": "The data list term to use.",
       "required": false
     },
@@ -221,17 +221,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | ({ _peerAccept?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & { base?: \"lg\" | \"md\" | \"sm\" | [\"lg\" | \"md\" | \"sm\" | (... & ...), \"lg\" | ... 2 more ... | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: \"lg\" | ... 4 more ... | undefined; }), \"lg\" | ... 2 more ...",
+      "type": "\"lg\" | \"md\" | \"sm\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"subtle\" | \"bold\" | \"grid\" | [\"subtle\" | \"bold\" | \"grid\" | ({ _peerAccept?: \"subtle\" | \"bold\" | \"grid\" | [\"subtle\" | \"bold\" | \"grid\" | (... & { base?: \"subtle\" | \"bold\" | \"grid\" | [...] | (... & ...) | undefined; ... 4 more ...; xl?: \"subtle\" | ... 4 more ... | undefined; }), \"subtle\" | ... 2 more ... | (... & { ......",
+      "type": "\"subtle\" | \"bold\" | \"grid\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -246,7 +246,7 @@
       "required": false
     },
     "orientation": {
-      "type": "StyleValue<\"horizontal\" | \"vertical\">",
+      "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "\"horizontal\"",
       "description": "The orientation of the data list.",
       "required": false
@@ -274,7 +274,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }

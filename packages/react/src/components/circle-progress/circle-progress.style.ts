@@ -41,7 +41,7 @@ export const circleProgressStyle = defineComponentSlotStyle({
         animationDuration: "{duration, 1.5s}",
         animationIterationCount: "infinite",
         animationTimingFunction: "linear",
-        keyframes: {
+        _keyframes: {
           "0%": {
             strokeDasharray: "1, 400",
             strokeDashoffset: "0",

@@ -105,15 +105,14 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
       const finalOptions = computedOptions(options)
       const {
         component,
-        duration,
+        duration: rawDuration,
         limit,
         placement = "start-center",
         ...noticeProps
       } = finalOptions
 
-      if (duration === null) {
-        duration = Number.POSITIVE_INFINITY
-      }
+      const duration =
+        rawDuration === null ? Number.POSITIVE_INFINITY : rawDuration
 
       if (limit) {
         const currentLimit = getLimit(placement)

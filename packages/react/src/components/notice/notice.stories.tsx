@@ -61,7 +61,7 @@ export const KeepStay = () => {
           notice({
             closable: true,
             description: "オッス！オラ悟空！",
-            duration: Number.POSITIVE_INFINITY,
+            duration: null,
             title: "孫悟空",
           })
         }

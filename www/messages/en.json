@@ -84,6 +84,12 @@
       "prop": "Prop",
       "default": "Default",
       "type": "Type / Description"
+    },
+    "stylePropsTable": {
+      "prop": "Prop",
+      "description": "Description",
+      "property": "CSS Property",
+      "token": "Theme Token"
     }
   }
 }

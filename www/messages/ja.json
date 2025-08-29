@@ -84,6 +84,12 @@
       "prop": "Prop",
       "default": "デフォルト",
       "type": "型 / 説明"
+    },
+    "stylePropsTable": {
+      "prop": "Prop",
+      "description": "説明",
+      "property": "CSSプロパティ",
+      "token": "テーマトークン"
     }
   }
 }

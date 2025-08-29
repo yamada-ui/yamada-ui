@@ -1,0 +1,70 @@
+{
+  "Tag": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\" | \"plain\" ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "closeButtonProps": {
+      "type": "TagCloseButtonProps",
+      "description": "Props for tag close button element.",
+      "required": false
+    },
+    "contentProps": {
+      "type": "TagContentProps",
+      "description": "Props for content element.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the tag is disabled.",
+      "required": false
+    },
+    "endIcon": {
+      "type": "ReactNode",
+      "description": "Icon to be displayed to the end of the tag.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "HTMLStyledProps<\"span\">",
+      "description": "Props for icon element.",
+      "required": false
+    },
+    "onClose": {
+      "type": "MouseEventHandler<HTMLElement>",
+      "description": "Function to be executed when the close button is clicked.",
+      "required": false
+    },
+    "startIcon": {
+      "type": "ReactNode",
+      "description": "Icon to be displayed to the start of the tag.",
+      "required": false
+    }
+  }
+}

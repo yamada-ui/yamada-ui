@@ -1,0 +1,340 @@
+{
+  "Blockquote": {
+    "Caption": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "withDash": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the dash will be shown.",
+        "required": false
+      }
+    },
+    "Cite": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Content": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "citeUrl": {
+        "type": "string",
+        "description": "The URL of the citation of the blockquote.",
+        "required": false
+      }
+    },
+    "Icon": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"solid\" | \"subtle\" | \"plain\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "captionProps": {
+        "type": "HTMLStyledProps<\"figcaption\">",
+        "description": "The props for the `BlockquoteCaption` component.",
+        "required": false
+      },
+      "cite": {
+        "type": "ReactNode",
+        "description": "The citation of the blockquote.",
+        "required": false
+      },
+      "citeProps": {
+        "type": "HTMLStyledProps<\"cite\">",
+        "description": "The props for the `BlockquoteCite` component.",
+        "required": false
+      },
+      "citeUrl": {
+        "type": "string",
+        "description": "The URL of the citation of the blockquote.",
+        "required": false
+      },
+      "contentProps": {
+        "type": "HTMLStyledProps<\"blockquote\">",
+        "description": "The props for the `BlockquoteContent` component.",
+        "required": false
+      },
+      "icon": {
+        "type": "ReactNode",
+        "description": "The icon of the blockquote.",
+        "required": false
+      },
+      "justify": {
+        "type": "\"center\" | \"end\" | \"start\"",
+        "defaultValue": "\"start\"",
+        "description": "The alignment of the blockquote.",
+        "required": false
+      },
+      "withDash": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the dash will be shown.",
+        "required": false
+      }
+    }
+  },
+  "BlockquoteCaption": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "withDash": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the dash will be shown.",
+      "required": false
+    }
+  },
+  "BlockquoteCite": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "BlockquoteContent": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "citeUrl": {
+      "type": "string",
+      "description": "The URL of the citation of the blockquote.",
+      "required": false
+    }
+  },
+  "BlockquoteIcon": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "BlockquoteRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"solid\" | \"subtle\" | \"plain\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "captionProps": {
+      "type": "HTMLStyledProps<\"figcaption\">",
+      "description": "The props for the `BlockquoteCaption` component.",
+      "required": false
+    },
+    "cite": {
+      "type": "ReactNode",
+      "description": "The citation of the blockquote.",
+      "required": false
+    },
+    "citeProps": {
+      "type": "HTMLStyledProps<\"cite\">",
+      "description": "The props for the `BlockquoteCite` component.",
+      "required": false
+    },
+    "citeUrl": {
+      "type": "string",
+      "description": "The URL of the citation of the blockquote.",
+      "required": false
+    },
+    "contentProps": {
+      "type": "HTMLStyledProps<\"blockquote\">",
+      "description": "The props for the `BlockquoteContent` component.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactNode",
+      "description": "The icon of the blockquote.",
+      "required": false
+    },
+    "justify": {
+      "type": "\"center\" | \"end\" | \"start\"",
+      "defaultValue": "\"start\"",
+      "description": "The alignment of the blockquote.",
+      "required": false
+    },
+    "withDash": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the dash will be shown.",
+      "required": false
+    }
+  }
+}

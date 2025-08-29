@@ -1,0 +1,60 @@
+{
+  "Highlight": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "children": {
+      "type": "string",
+      "description": "The text used for searching.",
+      "required": true
+    },
+    "query": {
+      "type": "string | string[]",
+      "description": "Can be a single string or an array of strings. These are the terms that are highlighted in the text.",
+      "required": true
+    },
+    "align": {
+      "type": "\"center\" | \"left\" | \"right\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" ...",
+      "description": "The CSS `text-align` property.",
+      "required": false
+    },
+    "casing": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" | \"capitalize\" | \"full-size-kana\" | \"full-width\" ...",
+      "description": "The CSS `text-transform` property.",
+      "required": false
+    },
+    "decoration": {
+      "type": "0 | \"black\" | \"blue\" | \"cyan\" | \"fuchsia\" | \"gray\" | \"green\" | \"indigo\" | \"lime\" | \"orange\" ...",
+      "description": "The CSS `text-decoration` property.",
+      "required": false
+    },
+    "fragment": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, `Fragment` is used for rendering.",
+      "required": false
+    },
+    "markProps": {
+      "type": "MarkProps",
+      "description": "Properties passed to the Mark component which is used to highlight the matched terms.",
+      "required": false
+    }
+  }
+}

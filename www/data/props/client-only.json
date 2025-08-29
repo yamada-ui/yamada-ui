@@ -1,0 +1,14 @@
+{
+  "ClientOnly": {
+    "children": {
+      "type": "ReactNodeOrFunction",
+      "description": "The content to render on the client side.\n\n**Note:** Use the function pattern when accessing browser-only APIs.",
+      "required": false
+    },
+    "fallback": {
+      "type": "ReactNode",
+      "description": "The fallback content to render while the component is mounting on the client\nside.",
+      "required": false
+    }
+  }
+}

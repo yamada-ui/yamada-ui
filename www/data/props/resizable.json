@@ -1,0 +1,384 @@
+{
+  "Resizable": {
+    "Item": {
+      "as": {
+        "type": "keyof HTMLElementTagNameMap",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "collapsedSize": {
+        "type": "number",
+        "description": "The collapsed size of the resizable item.",
+        "required": false
+      },
+      "collapsible": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the resizable item can be collapsed.",
+        "required": false
+      },
+      "controlRef": {
+        "type": "RefObject<null | ResizableItemControl>",
+        "description": "Ref of the resizable item callback.",
+        "required": false
+      },
+      "defaultSize": {
+        "type": "number",
+        "description": "The initial size of the resizable item.",
+        "required": false
+      },
+      "maxSize": {
+        "type": "number",
+        "description": "The maximum allowed value of the resizable item.",
+        "required": false
+      },
+      "minSize": {
+        "type": "number",
+        "description": "The minimum allowed value of the resizable item.",
+        "required": false
+      },
+      "onCollapse": {
+        "type": "() => void",
+        "description": "The callback invoked when resizable item are collapsed.",
+        "required": false
+      },
+      "onExpand": {
+        "type": "() => void",
+        "description": "The callback invoked when resizable item are expanded.",
+        "required": false
+      },
+      "onResize": {
+        "type": "(size: number, prevSize: number | undefined) => void",
+        "description": "The callback invoked when resizable item are resized.",
+        "required": false
+      },
+      "order": {
+        "type": "number",
+        "description": "Order for the resizable item.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"border\" | \"plain\" | \"spacer\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "controlRef": {
+        "type": "RefObject<ResizableGroupControl | null>",
+        "description": "Ref of the resizable item callback.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "description": "If `true`, the resizable trigger will be disabled.",
+        "required": false
+      },
+      "groupProps": {
+        "type": "ResizableGroupProps",
+        "description": "Props for resizable component.",
+        "required": false
+      },
+      "keyboardStep": {
+        "type": "number",
+        "defaultValue": "10",
+        "description": "Unit to resize by keyboard operation.",
+        "required": false
+      },
+      "onLayout": {
+        "type": "PanelGroupOnLayout",
+        "description": "The callback invoked when resizable items are resized.",
+        "required": false
+      },
+      "orientation": {
+        "type": "\"horizontal\" | \"vertical\"",
+        "defaultValue": "\"horizontal\"",
+        "description": "The orientation of the resizable.",
+        "required": false
+      },
+      "rootRef": {
+        "type": "ForwardedRef<HTMLDivElement>",
+        "description": "Ref for resizable root element.",
+        "required": false
+      },
+      "storage": {
+        "type": "PanelGroupStorage",
+        "description": "A callback that gets and sets a value in custom storage.",
+        "required": false
+      },
+      "storageKey": {
+        "type": "string",
+        "description": "Key of value saved in storage.\nBy default, it is saved to `local storage`.",
+        "required": false
+      }
+    },
+    "Trigger": {
+      "as": {
+        "type": "keyof HTMLElementTagNameMap",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the resizable trigger will be disabled.",
+        "required": false
+      },
+      "icon": {
+        "type": "ReactElement",
+        "description": "The resizable trigger icon to use.",
+        "required": false
+      },
+      "iconProps": {
+        "type": "HTMLStyledProps",
+        "description": "Props for resizable trigger icon component.",
+        "required": false
+      },
+      "onDragging": {
+        "type": "(dragging: boolean) => void",
+        "description": "The callback invoked when resizable trigger are dragged.",
+        "required": false
+      }
+    }
+  },
+  "ResizableItem": {
+    "as": {
+      "type": "keyof HTMLElementTagNameMap",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "collapsedSize": {
+      "type": "number",
+      "description": "The collapsed size of the resizable item.",
+      "required": false
+    },
+    "collapsible": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the resizable item can be collapsed.",
+      "required": false
+    },
+    "controlRef": {
+      "type": "RefObject<null | ResizableItemControl>",
+      "description": "Ref of the resizable item callback.",
+      "required": false
+    },
+    "defaultSize": {
+      "type": "number",
+      "description": "The initial size of the resizable item.",
+      "required": false
+    },
+    "maxSize": {
+      "type": "number",
+      "description": "The maximum allowed value of the resizable item.",
+      "required": false
+    },
+    "minSize": {
+      "type": "number",
+      "description": "The minimum allowed value of the resizable item.",
+      "required": false
+    },
+    "onCollapse": {
+      "type": "() => void",
+      "description": "The callback invoked when resizable item are collapsed.",
+      "required": false
+    },
+    "onExpand": {
+      "type": "() => void",
+      "description": "The callback invoked when resizable item are expanded.",
+      "required": false
+    },
+    "onResize": {
+      "type": "(size: number, prevSize: number | undefined) => void",
+      "description": "The callback invoked when resizable item are resized.",
+      "required": false
+    },
+    "order": {
+      "type": "number",
+      "description": "Order for the resizable item.",
+      "required": false
+    }
+  },
+  "ResizableRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"border\" | \"plain\" | \"spacer\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "controlRef": {
+      "type": "RefObject<ResizableGroupControl | null>",
+      "description": "Ref of the resizable item callback.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "If `true`, the resizable trigger will be disabled.",
+      "required": false
+    },
+    "groupProps": {
+      "type": "ResizableGroupProps",
+      "description": "Props for resizable component.",
+      "required": false
+    },
+    "keyboardStep": {
+      "type": "number",
+      "defaultValue": "10",
+      "description": "Unit to resize by keyboard operation.",
+      "required": false
+    },
+    "onLayout": {
+      "type": "PanelGroupOnLayout",
+      "description": "The callback invoked when resizable items are resized.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the resizable.",
+      "required": false
+    },
+    "rootRef": {
+      "type": "ForwardedRef<HTMLDivElement>",
+      "description": "Ref for resizable root element.",
+      "required": false
+    },
+    "storage": {
+      "type": "PanelGroupStorage",
+      "description": "A callback that gets and sets a value in custom storage.",
+      "required": false
+    },
+    "storageKey": {
+      "type": "string",
+      "description": "Key of value saved in storage.\nBy default, it is saved to `local storage`.",
+      "required": false
+    }
+  },
+  "ResizableTrigger": {
+    "as": {
+      "type": "keyof HTMLElementTagNameMap",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the resizable trigger will be disabled.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactElement",
+      "description": "The resizable trigger icon to use.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "HTMLStyledProps",
+      "description": "Props for resizable trigger icon component.",
+      "required": false
+    },
+    "onDragging": {
+      "type": "(dragging: boolean) => void",
+      "description": "The callback invoked when resizable trigger are dragged.",
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "Tooltip": {
+    "animationScheme": {
+      "type": "\"none\" | \"scale\" | SimplePlacement",
+      "defaultValue": "\"scale\"",
+      "description": "The animation of the element.",
+      "required": false
+    },
+    "autoUpdate": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, automatically updates the position of the floating element when necessary.",
+      "required": false
+    },
+    "closeDelay": {
+      "type": "number",
+      "defaultValue": "100",
+      "description": "The delay before hiding the tooltip.",
+      "required": false
+    },
+    "closeOnClick": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the tooltip will hide on click.",
+      "required": false
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the tooltip will hide on pressing Esc key.",
+      "required": false
+    },
+    "closeOnScroll": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the tooltip will hide on scroll.",
+      "required": false
+    },
+    "content": {
+      "type": "ReactNode",
+      "description": "The content of the tooltip.",
+      "required": false
+    },
+    "contentProps": {
+      "type": "HTMLMotionProps",
+      "description": "Props for content element.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the element will be initially opened.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the tooltip will be disabled.",
+      "required": false
+    },
+    "duration": {
+      "type": "PopupAnimationProps[\"duration\"]",
+      "defaultValue": "0.1",
+      "description": "The animation duration.",
+      "required": false
+    },
+    "elements": {
+      "type": "{\n  floating?: HTMLElement | null\n  reference?: null | Reference<Y>\n}",
+      "description": "Object containing the reference and floating elements.",
+      "required": false
+    },
+    "flip": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.",
+      "required": false
+    },
+    "gutter": {
+      "type": "number",
+      "defaultValue": "8",
+      "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier.",
+      "required": false
+    },
+    "matchWidth": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns.",
+      "required": false
+    },
+    "middleware": {
+      "type": "(false | Middleware | null | undefined)[]",
+      "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
+      "required": false
+    },
+    "offset": {
+      "type": "[number, number]",
+      "description": "The main and cross-axis offset to displace popper element from its reference element.",
+      "required": false
+    },
+    "onClose": {
+      "type": "() => void | Promise<void>",
+      "description": "Callback invoked to close the element.",
+      "required": false
+    },
+    "onOpen": {
+      "type": "() => void | Promise<void>",
+      "description": "Callback invoked to open the element.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the element will be opened.",
+      "required": false
+    },
+    "openDelay": {
+      "type": "number",
+      "defaultValue": "400",
+      "description": "The delay before showing the tooltip.",
+      "required": false
+    },
+    "placement": {
+      "type": "Direction",
+      "defaultValue": "\"start\"",
+      "description": "The placement of the popper relative to its reference.",
+      "required": false
+    },
+    "platform": {
+      "type": "Platform",
+      "description": "Custom or extended platform object.",
+      "required": false
+    },
+    "portalProps": {
+      "type": "Omit<PortalProps, \"children\">",
+      "description": "Props for portal component.",
+      "required": false
+    },
+    "preventOverflow": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "strategy": {
+      "type": "Strategy",
+      "defaultValue": "\"absolute\"",
+      "description": "The CSS positioning strategy to use.",
+      "required": false
+    },
+    "transform": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "Whether to use `transform` for positioning instead of `top` and `left`\n(layout) in the `floatingStyles` object.",
+      "required": false
+    },
+    "whileElementsMounted": {
+      "type": "(reference: Reference<Y>, floating: HTMLElement, update: () => void) => () => void",
+      "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
+      "required": false
+    }
+  }
+}

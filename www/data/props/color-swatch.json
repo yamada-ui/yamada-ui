@@ -1,0 +1,105 @@
+{
+  "ColorSwatch": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"circle\" | \"square\" | \"plain\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "color": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "defaultValue": "\"#ffffff00\"",
+      "description": "The color used for the swatch element.",
+      "required": false
+    },
+    "layers": {
+      "type": "HTMLStyledProps[]",
+      "description": "The overlay used for the swatch element.",
+      "required": false
+    },
+    "withShadow": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the swatch element has an inner `box-shadow`.",
+      "required": false
+    }
+  },
+  "ColorSwatchGroup": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"circle\" | \"square\" | \"plain\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "itemProps": {
+      "type": "ColorSwatchProps",
+      "description": "The props for the `ColorSwatch` component.",
+      "required": false
+    },
+    "items": {
+      "type": "CSSProps[\"color\"][]",
+      "defaultValue": "\"#ffffff00\"",
+      "description": "The color used for the swatch element.",
+      "required": false
+    },
+    "layers": {
+      "type": "HTMLStyledProps[]",
+      "description": "The overlay used for the swatch element.",
+      "required": false
+    },
+    "withShadow": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the swatch element has an inner `box-shadow`.",
+      "required": false
+    }
+  }
+}

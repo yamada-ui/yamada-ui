@@ -1,0 +1,1022 @@
+{
+  "RadioCard": {
+    "Addon": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Description": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Label": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"outline\" | \"subtle\" | \"surface\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "addon": {
+        "type": "ReactNode",
+        "description": "The addon of the radio card.",
+        "required": false
+      },
+      "addonProps": {
+        "type": "RadioCardAddonProps",
+        "description": "Props for the addon component.",
+        "required": false
+      },
+      "checked": {
+        "type": "boolean",
+        "description": "If `true`, the radio will be checked.",
+        "required": false
+      },
+      "defaultChecked": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the radio will be initially checked.",
+        "required": false
+      },
+      "description": {
+        "type": "ReactNode",
+        "description": "The description of the radio card.",
+        "required": false
+      },
+      "descriptionProps": {
+        "type": "RadioCardDescriptionProps",
+        "description": "Props for the description component.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be disabled.",
+        "required": false
+      },
+      "errorBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "description": "The border color when the input is invalid.",
+        "required": false
+      },
+      "focusBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "description": "The border color when the input is focused.",
+        "required": false
+      },
+      "id": {
+        "type": "string",
+        "description": "id assigned to input.",
+        "required": false
+      },
+      "indicatorProps": {
+        "type": "RadioCardIndicatorProps",
+        "description": "Props for the indicator component.",
+        "required": false
+      },
+      "inputProps": {
+        "type": "HTMLStyledProps<\"input\">",
+        "description": "Props for the input element.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "justify": {
+        "type": "\"end\" | \"start\"",
+        "defaultValue": "\"start\"",
+        "description": "The justify indicator of the component",
+        "required": false
+      },
+      "label": {
+        "type": "ReactNode",
+        "description": "The label of the radio card.",
+        "required": false
+      },
+      "labelProps": {
+        "type": "RadioCardLabelProps",
+        "description": "Props for the label component.",
+        "required": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The name of the input field in a radio.",
+        "required": false
+      },
+      "onBlur": {
+        "type": "FocusEventHandler<HTMLInputElement>",
+        "description": "The callback invoked when the radio is blurred.",
+        "required": false
+      },
+      "onChange": {
+        "type": "ChangeEventHandler<HTMLInputElement>",
+        "description": "The callback invoked when the checked state changes.",
+        "required": false
+      },
+      "onFocus": {
+        "type": "FocusEventHandler<HTMLInputElement>",
+        "description": "The callback invoked when the radio is focused.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "rootProps": {
+        "type": "HTMLStyledProps<\"label\">",
+        "description": "Props for the label element.",
+        "required": false
+      },
+      "shape": {
+        "type": "\"circle\" | \"square\" | \"rounded\"",
+        "defaultValue": "\"circle\"",
+        "description": "The shape of the component",
+        "required": false
+      },
+      "value": {
+        "type": "Y",
+        "description": "The value of the radio.",
+        "required": false
+      },
+      "withIndicator": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the indicator will be displayed.",
+        "required": false
+      }
+    }
+  },
+  "RadioCardAddon": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "RadioCardDescription": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "RadioCardGroup": {
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"outline\" | \"subtle\" | \"surface\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "align": {
+        "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
+        "description": "The CSS `align-items` property.",
+        "required": false
+      },
+      "attached": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
+        "required": false
+      },
+      "basis": {
+        "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+        "description": "The CSS `flex-basis` property.",
+        "required": false
+      },
+      "defaultValue": {
+        "type": "Y",
+        "description": "The initial value of the radio group.",
+        "required": false
+      },
+      "direction": {
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
+        "description": "The CSS `flex-direction` property.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be disabled.",
+        "required": false
+      },
+      "errorBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "description": "The border color when the input is invalid.",
+        "required": false
+      },
+      "focusBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "description": "The border color when the input is focused.",
+        "required": false
+      },
+      "grow": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the children will grow to fill the available space.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "items": {
+        "type": "RadioCardItem<Y>[]",
+        "defaultValue": "\"[]\"",
+        "description": "If provided, generate options based on items.",
+        "required": false
+      },
+      "justify": {
+        "type": "\"end\" | \"start\"",
+        "defaultValue": "\"start\"",
+        "description": "The justify indicator of the component",
+        "required": false
+      },
+      "onChange": {
+        "type": "(value: Y) => void",
+        "description": "The callback fired when any children radio is checked or unchecked.",
+        "required": false
+      },
+      "orientation": {
+        "type": "\"horizontal\" | \"vertical\"",
+        "defaultValue": "\"horizontal\"",
+        "description": "The orientation of the group.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "shape": {
+        "type": "\"circle\" | \"square\" | \"rounded\"",
+        "defaultValue": "\"circle\"",
+        "description": "The shape of the component",
+        "required": false
+      },
+      "shrink": {
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
+        "description": "The CSS `flex-shrink` property.",
+        "required": false
+      },
+      "stacking": {
+        "type": "\"first-on-top\" | \"last-on-top\"",
+        "description": "The stacking order of the group.",
+        "required": false
+      },
+      "value": {
+        "type": "Y",
+        "description": "The value of the radio group.",
+        "required": false
+      },
+      "withIndicator": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the indicator will be displayed.",
+        "required": false
+      },
+      "wrap": {
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
+        "description": "The CSS `flex-wrap` property.",
+        "required": false
+      }
+    }
+  },
+  "RadioCardGroup.Item": {
+    "Addon": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Description": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Label": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"outline\" | \"subtle\" | \"surface\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "addon": {
+        "type": "ReactNode",
+        "description": "The addon of the radio card.",
+        "required": false
+      },
+      "addonProps": {
+        "type": "RadioCardAddonProps",
+        "description": "Props for the addon component.",
+        "required": false
+      },
+      "checked": {
+        "type": "boolean",
+        "description": "If `true`, the radio will be checked.",
+        "required": false
+      },
+      "defaultChecked": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the radio will be initially checked.",
+        "required": false
+      },
+      "description": {
+        "type": "ReactNode",
+        "description": "The description of the radio card.",
+        "required": false
+      },
+      "descriptionProps": {
+        "type": "RadioCardDescriptionProps",
+        "description": "Props for the description component.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be disabled.",
+        "required": false
+      },
+      "errorBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "description": "The border color when the input is invalid.",
+        "required": false
+      },
+      "focusBorderColor": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "description": "The border color when the input is focused.",
+        "required": false
+      },
+      "id": {
+        "type": "string",
+        "description": "id assigned to input.",
+        "required": false
+      },
+      "indicatorProps": {
+        "type": "RadioCardIndicatorProps",
+        "description": "Props for the indicator component.",
+        "required": false
+      },
+      "inputProps": {
+        "type": "HTMLStyledProps<\"input\">",
+        "description": "Props for the input element.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "justify": {
+        "type": "\"end\" | \"start\"",
+        "defaultValue": "\"start\"",
+        "description": "The justify indicator of the component",
+        "required": false
+      },
+      "label": {
+        "type": "ReactNode",
+        "description": "The label of the radio card.",
+        "required": false
+      },
+      "labelProps": {
+        "type": "RadioCardLabelProps",
+        "description": "Props for the label component.",
+        "required": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The name of the input field in a radio.",
+        "required": false
+      },
+      "onBlur": {
+        "type": "FocusEventHandler<HTMLInputElement>",
+        "description": "The callback invoked when the radio is blurred.",
+        "required": false
+      },
+      "onChange": {
+        "type": "ChangeEventHandler<HTMLInputElement>",
+        "description": "The callback invoked when the checked state changes.",
+        "required": false
+      },
+      "onFocus": {
+        "type": "FocusEventHandler<HTMLInputElement>",
+        "description": "The callback invoked when the radio is focused.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "rootProps": {
+        "type": "HTMLStyledProps<\"label\">",
+        "description": "Props for the label element.",
+        "required": false
+      },
+      "shape": {
+        "type": "\"circle\" | \"square\" | \"rounded\"",
+        "defaultValue": "\"circle\"",
+        "description": "The shape of the component",
+        "required": false
+      },
+      "value": {
+        "type": "Y",
+        "description": "The value of the radio.",
+        "required": false
+      },
+      "withIndicator": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the indicator will be displayed.",
+        "required": false
+      }
+    }
+  },
+  "RadioCardGroupRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"subtle\" | \"surface\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "align": {
+      "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
+      "description": "The CSS `align-items` property.",
+      "required": false
+    },
+    "attached": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
+      "required": false
+    },
+    "basis": {
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "description": "The CSS `flex-basis` property.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "Y",
+      "description": "The initial value of the radio group.",
+      "required": false
+    },
+    "direction": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "errorBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "description": "The border color when the input is invalid.",
+      "required": false
+    },
+    "focusBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "description": "The border color when the input is focused.",
+      "required": false
+    },
+    "grow": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the children will grow to fill the available space.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "items": {
+      "type": "RadioCardItem<Y>[]",
+      "defaultValue": "\"[]\"",
+      "description": "If provided, generate options based on items.",
+      "required": false
+    },
+    "justify": {
+      "type": "\"end\" | \"start\"",
+      "defaultValue": "\"start\"",
+      "description": "The justify indicator of the component",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: Y) => void",
+      "description": "The callback fired when any children radio is checked or unchecked.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the group.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"square\" | \"rounded\"",
+      "defaultValue": "\"circle\"",
+      "description": "The shape of the component",
+      "required": false
+    },
+    "shrink": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
+      "description": "The CSS `flex-shrink` property.",
+      "required": false
+    },
+    "stacking": {
+      "type": "\"first-on-top\" | \"last-on-top\"",
+      "description": "The stacking order of the group.",
+      "required": false
+    },
+    "value": {
+      "type": "Y",
+      "description": "The value of the radio group.",
+      "required": false
+    },
+    "withIndicator": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the indicator will be displayed.",
+      "required": false
+    },
+    "wrap": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
+      "description": "The CSS `flex-wrap` property.",
+      "required": false
+    }
+  },
+  "RadioCardLabel": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "RadioCardRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"subtle\" | \"surface\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "addon": {
+      "type": "ReactNode",
+      "description": "The addon of the radio card.",
+      "required": false
+    },
+    "addonProps": {
+      "type": "RadioCardAddonProps",
+      "description": "Props for the addon component.",
+      "required": false
+    },
+    "checked": {
+      "type": "boolean",
+      "description": "If `true`, the radio will be checked.",
+      "required": false
+    },
+    "defaultChecked": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the radio will be initially checked.",
+      "required": false
+    },
+    "description": {
+      "type": "ReactNode",
+      "description": "The description of the radio card.",
+      "required": false
+    },
+    "descriptionProps": {
+      "type": "RadioCardDescriptionProps",
+      "description": "Props for the description component.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "errorBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "description": "The border color when the input is invalid.",
+      "required": false
+    },
+    "focusBorderColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "description": "The border color when the input is focused.",
+      "required": false
+    },
+    "id": {
+      "type": "string",
+      "description": "id assigned to input.",
+      "required": false
+    },
+    "indicatorProps": {
+      "type": "RadioCardIndicatorProps",
+      "description": "Props for the indicator component.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "HTMLStyledProps<\"input\">",
+      "description": "Props for the input element.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "justify": {
+      "type": "\"end\" | \"start\"",
+      "defaultValue": "\"start\"",
+      "description": "The justify indicator of the component",
+      "required": false
+    },
+    "label": {
+      "type": "ReactNode",
+      "description": "The label of the radio card.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "RadioCardLabelProps",
+      "description": "Props for the label component.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the input field in a radio.",
+      "required": false
+    },
+    "onBlur": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the radio is blurred.",
+      "required": false
+    },
+    "onChange": {
+      "type": "ChangeEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the checked state changes.",
+      "required": false
+    },
+    "onFocus": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the radio is focused.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "rootProps": {
+      "type": "HTMLStyledProps<\"label\">",
+      "description": "Props for the label element.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"square\" | \"rounded\"",
+      "defaultValue": "\"circle\"",
+      "description": "The shape of the component",
+      "required": false
+    },
+    "value": {
+      "type": "Y",
+      "description": "The value of the radio.",
+      "required": false
+    },
+    "withIndicator": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the indicator will be displayed.",
+      "required": false
+    }
+  }
+}

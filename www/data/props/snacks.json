@@ -1,0 +1,52 @@
+{
+  "Snacks": {
+    "as": {
+      "type": "DOMElement",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "snacks": {
+      "type": "UseSnacksReturn[\"snacks\"]",
+      "description": "The snacks created by `useSnacks`.",
+      "required": true
+    },
+    "gap": {
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "defaultValue": "\"md\"",
+      "description": "The CSS `gap` property.",
+      "required": false
+    },
+    "gutter": {
+      "type": "[CSSProps[\"paddingTop\"], CSSProps[\"paddingBottom\"]]",
+      "defaultValue": "\"[0, 'lg']\"",
+      "description": "A property that provides spacing between the top and bottom.",
+      "required": false
+    },
+    "listProps": {
+      "type": "HTMLMotionProps",
+      "description": "Props for the snacks list element.",
+      "required": false
+    },
+    "negativeMargins": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, apply gutter value to negative margins",
+      "required": false
+    }
+  }
+}

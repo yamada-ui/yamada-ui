@@ -1,0 +1,90 @@
+{
+  "Progress": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"subtle\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "animated": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the progress bar will animate.",
+      "required": false
+    },
+    "duration": {
+      "type": "number | string",
+      "description": "The animation duration in seconds.",
+      "required": false
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "100",
+      "description": "The maximum value of the progress.",
+      "required": false
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The minimum value of the progress.",
+      "required": false
+    },
+    "rangeColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "description": "The color of the progress range.",
+      "required": false
+    },
+    "rangeProps": {
+      "type": "ProgressRangeProps",
+      "description": "Props for the progress range element.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"square\" | \"rounded\"",
+      "defaultValue": "rounded",
+      "description": "The shape of the progress bar.",
+      "required": false
+    },
+    "striped": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the progress bar will show stripe.",
+      "required": false
+    },
+    "trackColor": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "description": "The color of the progress track.",
+      "required": false
+    },
+    "value": {
+      "type": "null | number",
+      "defaultValue": "0",
+      "description": "The value of the progress. If `null`, the progress will be indeterminate.",
+      "required": false
+    }
+  }
+}

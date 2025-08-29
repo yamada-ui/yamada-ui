@@ -1,0 +1,138 @@
+{
+  "Switch": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"thin\" | \"thick\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "checked": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the switch will be checked.",
+      "required": false
+    },
+    "checkOnEnter": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the switch will be checked when the Enter key is pressed.",
+      "required": false
+    },
+    "defaultChecked": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the switch will be initially checked.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactNode | { off: ReactNode; on: ReactNode }",
+      "description": "The switch icon to use.",
+      "required": false
+    },
+    "id": {
+      "type": "string",
+      "description": "id assigned to input.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "HTMLStyledProps<\"input\">",
+      "description": "Props for switch input element.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "labelProps": {
+      "type": "HTMLStyledProps<\"span\">",
+      "description": "Props for switch label element.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The HTML `name` attribute used for forms.",
+      "required": false
+    },
+    "onBlur": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the switch is blurred.",
+      "required": false
+    },
+    "onChange": {
+      "type": "ChangeEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the checked state changes.",
+      "required": false
+    },
+    "onFocus": {
+      "type": "FocusEventHandler<HTMLInputElement>",
+      "description": "The callback invoked when the switch is focused.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "Change switch label from right to left.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"square\" | \"rounded\"",
+      "defaultValue": "circle",
+      "description": "The shape of the switch.",
+      "required": false
+    },
+    "tabIndex": {
+      "type": "number",
+      "description": "The tab-index property of the underlying input element.",
+      "required": false
+    },
+    "value": {
+      "type": "Y",
+      "description": "The value to be used in the switch input.",
+      "required": false
+    }
+  }
+}

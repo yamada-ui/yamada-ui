@@ -1,0 +1,80 @@
+{
+  "Flip": {
+    "as": {
+      "type": "keyof IntrinsicElements",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "KeyframeIdent",
+      "defaultValue": "\"from\"",
+      "description": "You can set the initial state.",
+      "required": false
+    },
+    "delay": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "　The animation delay.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the component is disabled.",
+      "required": false
+    },
+    "duration": {
+      "type": "number",
+      "defaultValue": "0.4",
+      "description": "The animation duration.",
+      "required": false
+    },
+    "from": {
+      "type": "ReactNode",
+      "description": "Passing React elements to \"from\" is required.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: KeyframeIdent) => void",
+      "description": "This is a callback function that is called when the animation state changes.",
+      "required": false
+    },
+    "orientation": {
+      "type": "Orientation",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the flip effect. Determines whether the flip occurs horizontally or vertically.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the component is readonly.",
+      "required": false
+    },
+    "to": {
+      "type": "ReactNode",
+      "description": "Passing React elements to \"to\" is required.",
+      "required": false
+    },
+    "value": {
+      "type": "KeyframeIdent",
+      "description": "Use this when you want to control the animation from outside the component.",
+      "required": false
+    }
+  }
+}

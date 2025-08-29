@@ -1,0 +1,104 @@
+{
+  "InfiniteScrollArea": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "behavior": {
+      "type": "ScrollBehavior",
+      "description": "Determines whether scrolling is instant or animates smoothly.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the infinite scroll is disabled.",
+      "required": false
+    },
+    "finish": {
+      "type": "ReactNode",
+      "description": "The infinite scroll area finish to use.",
+      "required": false
+    },
+    "indexRef": {
+      "type": "RefObject<(index: number) => void>",
+      "description": "Ref to a reset index function.",
+      "required": false
+    },
+    "initialLoad": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, invoke `onLoad` function for the first time.",
+      "required": false
+    },
+    "loading": {
+      "type": "ReactNode",
+      "description": "The infinite scroll area loading to use.",
+      "required": false
+    },
+    "onLoad": {
+      "type": "({ entry, finish, index }: { finish: () => void; index: number; entry?: IntersectionObserverEntry | undefined }) => void | Promise<void>",
+      "description": "The callback invoked when trigger is intersect.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "\"vertical\"",
+      "description": "The orientation of the infinite scroll.",
+      "required": false
+    },
+    "resetRef": {
+      "type": "RefObject<(index?: number | undefined, runScroll?: boolean | undefined) => void>",
+      "description": "Ref to a reset function.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, reverse direction.",
+      "required": false
+    },
+    "rootMargin": {
+      "type": "string",
+      "description": "Margin around the root. Can have values similar to the CSS margin property,\ne.g. \"10px 20px 30px 40px\" (top, right, bottom, left).",
+      "required": false
+    },
+    "rootRef": {
+      "type": "RefObject<HTMLElement | null>",
+      "description": "The element that is used as the viewport for checking visibility of the target.\nDefaults to the browser viewport if not specified or if `null`.",
+      "required": false
+    },
+    "startIndex": {
+      "type": "number",
+      "defaultValue": "1",
+      "description": "If set the `onLoad` function will start from the given index.\nIf `initialLoad` is `true`, index starts from `0`.",
+      "required": false
+    },
+    "threshold": {
+      "type": "number | number[]",
+      "description": "Either a single number or an array of numbers which indicate at what percentage of the target's visibility the observer's callback should be executed.",
+      "required": false
+    },
+    "triggerProps": {
+      "type": "HTMLStyledProps",
+      "description": "Props for infinite scroll area trigger component.",
+      "required": false
+    }
+  }
+}

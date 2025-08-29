@@ -1,0 +1,89 @@
+{
+  "SlideFade": {
+    "as": {
+      "type": "keyof IntrinsicElements",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "enter": {
+      "type": "any",
+      "description": "Custom `enter`.",
+      "required": true
+    },
+    "exit": {
+      "type": "any",
+      "description": "Custom `exit`.\n\nA target to animate to when this component is removed from the tree.\n\nThis component **must** be the first animatable child of an `AnimatePresence` to enable this exit animation.\n\nThis limitation exists because React doesn't allow components to defer unmounting until after\nan animation is complete. Once this limitation is fixed, the `AnimatePresence` component will be unnecessary.\n\n```jsx\nimport { AnimatePresence, motion } from \"framer-motion\"\n\nexport const MyComponent = ({ isVisible }) => {\n  return (\n    <AnimatePresence>\n      {isVisible && (\n        <motion.div\n          initial={{ opacity: 0 }}\n          animate={{ opacity: 1 }}\n          exit={{ opacity: 0 }}\n        />\n      )}\n    </AnimatePresence>\n  )\n}\n```",
+      "required": true
+    },
+    "initial": {
+      "type": "any",
+      "description": "Custom `initial`.\n\nProperties, variant label or array of variant labels to start in.\n\nSet to `false` to initialise with the values in `animate` (disabling the mount animation)\n\n```jsx\n// As values\n<motion.div initial={{ opacity: 1 }} />\n\n// As variant\n<motion.div initial=\"visible\" variants={variants} />\n\n// Multiple variants\n<motion.div initial={[\"visible\", \"active\"]} variants={variants} />\n\n// As false (disable mount animation)\n<motion.div initial={false} animate={{ opacity: 0 }} />\n```",
+      "required": true
+    },
+    "delay": {
+      "type": "MotionLifecycleProps<number> | number",
+      "defaultValue": "0",
+      "description": "Custom `delay` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "duration": {
+      "type": "MotionLifecycleProps<number> | number",
+      "defaultValue": "0.2",
+      "description": "Custom `duration` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "offsetX": {
+      "type": "string | number",
+      "defaultValue": "0",
+      "description": "The offset on the horizontal or `x` axis.",
+      "required": false
+    },
+    "offsetY": {
+      "type": "string | number",
+      "defaultValue": "8",
+      "description": "The offset on the vertical or `y` axis.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "Show the component. triggers when enter or exit states.",
+      "required": false
+    },
+    "reverse": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the element will be transitioned back to the offset when it leaves. Otherwise, it'll only fade out.",
+      "required": false
+    },
+    "transition": {
+      "type": "MotionLifecycleProps<Transition>",
+      "description": "Custom `transition` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "transitionEnd": {
+      "type": "MotionLifecycleProps<ResolvedValues>",
+      "description": "Custom `transitionEnd` definition for `enter` and `exit`.",
+      "required": false
+    },
+    "unmountOnExit": {
+      "type": "boolean",
+      "description": "If `true`, the element will unmount when `open={false}` and animation is done.",
+      "required": false
+    }
+  }
+}

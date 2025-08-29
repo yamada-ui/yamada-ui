@@ -1,0 +1,126 @@
+{
+  "Grid": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "area": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "description": "The CSS `grid-area` property.",
+      "required": false
+    },
+    "autoColumns": {
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "description": "The CSS `grid-auto-columns` property.",
+      "required": false
+    },
+    "autoFlow": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"dense\" ...",
+      "description": "The CSS `grid-auto-flow` property.",
+      "required": false
+    },
+    "autoRows": {
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "description": "The CSS `grid-auto-rows` property.",
+      "required": false
+    },
+    "column": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "description": "The CSS `grid-column` property.",
+      "required": false
+    },
+    "row": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "description": "The CSS `grid-row` property.",
+      "required": false
+    },
+    "templateAreas": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" ...",
+      "description": "The CSS `grid-template-areas` property.",
+      "required": false
+    },
+    "templateColumns": {
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "description": "The CSS `grid-template-columns` property.",
+      "required": false
+    },
+    "templateRows": {
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "description": "The CSS `grid-template-rows` property.",
+      "required": false
+    }
+  },
+  "GridItem": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "area": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "description": "The CSS `grid-area` property.",
+      "required": false
+    },
+    "colEnd": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "description": "The CSS `grid-column-end` property.",
+      "required": false
+    },
+    "colSpan": {
+      "type": "number",
+      "description": "The number of columns the grid item should `span`.",
+      "required": false
+    },
+    "colStart": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "description": "The CSS `grid-column-start` property.",
+      "required": false
+    },
+    "rowEnd": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "description": "The CSS `grid-row-end` property.",
+      "required": false
+    },
+    "rowSpan": {
+      "type": "number",
+      "description": "The number of rows the grid item should `span`.",
+      "required": false
+    },
+    "rowStart": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "description": "The CSS `grid-row-start` property.",
+      "required": false
+    }
+  }
+}

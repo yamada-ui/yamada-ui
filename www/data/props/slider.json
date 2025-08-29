@@ -1,0 +1,746 @@
+{
+  "Slider": {
+    "Mark": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "value": {
+        "type": "number",
+        "description": "The value of the mark.",
+        "required": true
+      },
+      "indicator": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "Whether the mark is an indicator.",
+        "required": false
+      }
+    },
+    "Marks": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "marks": {
+        "type": "(number | { label: ReactNode; value: number; indicator?: boolean })[]",
+        "description": "The marks to display on the slider.",
+        "required": true
+      },
+      "indicator": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "Whether the mark is an indicator.",
+        "required": false
+      }
+    },
+    "Range": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"outline\" | \"solid\"",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "betweenThumbs": {
+        "type": "number",
+        "defaultValue": "0",
+        "description": "The minimum distance between slider thumbs.\nUseful for preventing the thumbs from being too close together.",
+        "required": false
+      },
+      "defaultValue": {
+        "type": "Y",
+        "description": "The initial value of the slider.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be disabled.",
+        "required": false
+      },
+      "getAriaValueText": {
+        "type": "(value: number, index: number) => string | undefined",
+        "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
+        "required": false
+      },
+      "indicatorFill": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "description": "The fill color of the indicator.",
+        "required": false
+      },
+      "indicatorRounded": {
+        "type": "number | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" ...",
+        "description": "The rounded of the indicator.",
+        "required": false
+      },
+      "inputProps": {
+        "type": "SliderInputProps",
+        "description": "Props for the input element.",
+        "required": false
+      },
+      "invalid": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be invalid.",
+        "required": false
+      },
+      "marks": {
+        "type": "SliderMarksProps[\"marks\"]",
+        "description": "The marks to display on the slider.",
+        "required": false
+      },
+      "marksProps": {
+        "type": "Partial<SliderMarksProps>",
+        "description": "Props for the marks element.",
+        "required": false
+      },
+      "max": {
+        "type": "number",
+        "defaultValue": "100",
+        "description": "The maximum allowed value of the slider. Cannot be less than min.",
+        "required": false
+      },
+      "min": {
+        "type": "number",
+        "defaultValue": "0",
+        "description": "The minimum allowed value of the slider. Cannot be greater than max.",
+        "required": false
+      },
+      "name": {
+        "type": "string",
+        "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(value: Y) => void",
+        "description": "Function called whenever the slider value changes.",
+        "required": false
+      },
+      "onChangeEnd": {
+        "type": "(value: Y) => void",
+        "description": "Function called when the user is done selecting a new value.",
+        "required": false
+      },
+      "onChangeStart": {
+        "type": "(value: Y) => void",
+        "description": "Function called when the user starts selecting a new value.",
+        "required": false
+      },
+      "orientation": {
+        "type": "\"horizontal\" | \"vertical\"",
+        "defaultValue": "\"horizontal\"",
+        "description": "The orientation of the slider.",
+        "required": false
+      },
+      "rangeFill": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "description": "The fill color of the range.",
+        "required": false
+      },
+      "rangeProps": {
+        "type": "SliderRangeProps",
+        "description": "Props for the range element.",
+        "required": false
+      },
+      "readOnly": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be readonly.",
+        "required": false
+      },
+      "required": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the field will be required.",
+        "required": false
+      },
+      "shape": {
+        "type": "\"circle\" | \"square\" | \"rounded\"",
+        "defaultValue": "\"circle\"",
+        "description": "The shape of the thumb.",
+        "required": false
+      },
+      "step": {
+        "type": "number",
+        "defaultValue": "1",
+        "description": "The step in which increments or decrements have to be made.",
+        "required": false
+      },
+      "thumbFill": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "description": "The fill color of the thumb.",
+        "required": false
+      },
+      "thumbProps": {
+        "type": "SliderThumbProps",
+        "description": "Props for the thumb element.",
+        "required": false
+      },
+      "thumbRounded": {
+        "type": "number | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" ...",
+        "description": "The rounded of the thumb.",
+        "required": false
+      },
+      "thumbSize": {
+        "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+        "description": "The size of the thumb.",
+        "required": false
+      },
+      "thumbStroke": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "description": "The stroke color of the thumb.",
+        "required": false
+      },
+      "trackFill": {
+        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "description": "The fill color of the track.",
+        "required": false
+      },
+      "trackProps": {
+        "type": "SliderTrackProps",
+        "description": "Props for the track element.",
+        "required": false
+      },
+      "trackRounded": {
+        "type": "number | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" ...",
+        "description": "The rounded of the track.",
+        "required": false
+      },
+      "trackSize": {
+        "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+        "description": "The size of the track.",
+        "required": false
+      },
+      "value": {
+        "type": "Y",
+        "description": "The value of the slider.",
+        "required": false
+      }
+    },
+    "Thumb": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "index": {
+        "type": "number",
+        "description": "The index of the thumb.",
+        "required": false
+      }
+    },
+    "Thumbs": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "index": {
+        "type": "number",
+        "description": "The index of the thumb.",
+        "required": false
+      }
+    },
+    "Track": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    }
+  },
+  "SliderMark": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "value": {
+      "type": "number",
+      "description": "The value of the mark.",
+      "required": true
+    },
+    "indicator": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "Whether the mark is an indicator.",
+      "required": false
+    }
+  },
+  "SliderMarks": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "marks": {
+      "type": "(number | { label: ReactNode; value: number; indicator?: boolean })[]",
+      "description": "The marks to display on the slider.",
+      "required": true
+    },
+    "indicator": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "Whether the mark is an indicator.",
+      "required": false
+    }
+  },
+  "SliderRange": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "SliderRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"outline\" | \"solid\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "betweenThumbs": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The minimum distance between slider thumbs.\nUseful for preventing the thumbs from being too close together.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "Y",
+      "description": "The initial value of the slider.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be disabled.",
+      "required": false
+    },
+    "getAriaValueText": {
+      "type": "(value: number, index: number) => string | undefined",
+      "description": "This is used to format the value so that screen readers\ncan speak out a more human-friendly value.\n\nIt is used to set the `aria-valuetext` property of the input.",
+      "required": false
+    },
+    "indicatorFill": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "description": "The fill color of the indicator.",
+      "required": false
+    },
+    "indicatorRounded": {
+      "type": "number | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" ...",
+      "description": "The rounded of the indicator.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "SliderInputProps",
+      "description": "Props for the input element.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "marks": {
+      "type": "SliderMarksProps[\"marks\"]",
+      "description": "The marks to display on the slider.",
+      "required": false
+    },
+    "marksProps": {
+      "type": "Partial<SliderMarksProps>",
+      "description": "Props for the marks element.",
+      "required": false
+    },
+    "max": {
+      "type": "number",
+      "defaultValue": "100",
+      "description": "The maximum allowed value of the slider. Cannot be less than min.",
+      "required": false
+    },
+    "min": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The minimum allowed value of the slider. Cannot be greater than max.",
+      "required": false
+    },
+    "name": {
+      "type": "string",
+      "description": "The name attribute of the hidden `input` field.\nThis is particularly useful in forms.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: Y) => void",
+      "description": "Function called whenever the slider value changes.",
+      "required": false
+    },
+    "onChangeEnd": {
+      "type": "(value: Y) => void",
+      "description": "Function called when the user is done selecting a new value.",
+      "required": false
+    },
+    "onChangeStart": {
+      "type": "(value: Y) => void",
+      "description": "Function called when the user starts selecting a new value.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the slider.",
+      "required": false
+    },
+    "rangeFill": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "description": "The fill color of the range.",
+      "required": false
+    },
+    "rangeProps": {
+      "type": "SliderRangeProps",
+      "description": "Props for the range element.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be readonly.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "shape": {
+      "type": "\"circle\" | \"square\" | \"rounded\"",
+      "defaultValue": "\"circle\"",
+      "description": "The shape of the thumb.",
+      "required": false
+    },
+    "step": {
+      "type": "number",
+      "defaultValue": "1",
+      "description": "The step in which increments or decrements have to be made.",
+      "required": false
+    },
+    "thumbFill": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "description": "The fill color of the thumb.",
+      "required": false
+    },
+    "thumbProps": {
+      "type": "SliderThumbProps",
+      "description": "Props for the thumb element.",
+      "required": false
+    },
+    "thumbRounded": {
+      "type": "number | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" ...",
+      "description": "The rounded of the thumb.",
+      "required": false
+    },
+    "thumbSize": {
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "description": "The size of the thumb.",
+      "required": false
+    },
+    "thumbStroke": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "description": "The stroke color of the thumb.",
+      "required": false
+    },
+    "trackFill": {
+      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "description": "The fill color of the track.",
+      "required": false
+    },
+    "trackProps": {
+      "type": "SliderTrackProps",
+      "description": "Props for the track element.",
+      "required": false
+    },
+    "trackRounded": {
+      "type": "number | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" ...",
+      "description": "The rounded of the track.",
+      "required": false
+    },
+    "trackSize": {
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "description": "The size of the track.",
+      "required": false
+    },
+    "value": {
+      "type": "Y",
+      "description": "The value of the slider.",
+      "required": false
+    }
+  },
+  "SliderThumb": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "index": {
+      "type": "number",
+      "description": "The index of the thumb.",
+      "required": false
+    }
+  },
+  "SliderThumbs": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "index": {
+      "type": "number",
+      "description": "The index of the thumb.",
+      "required": false
+    }
+  },
+  "SliderTrack": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  }
+}

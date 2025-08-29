@@ -1,0 +1,554 @@
+{
+  "Button": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is disabled.",
+      "required": false
+    },
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "endIcon": {
+      "type": "ReactNode",
+      "description": "The icon to display at the end side of the button.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "ButtonIconProps",
+      "description": "The props of the icon element.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "loadingIcon": {
+      "type": "Loading.Scheme | ReactNode",
+      "defaultValue": "\"oval\"",
+      "description": "The icon to display when the button is loading.",
+      "required": false
+    },
+    "loadingMessage": {
+      "type": "ReactNode",
+      "description": "The message to display when the button is loading.",
+      "required": false
+    },
+    "loadingPlacement": {
+      "type": "\"end\" | \"start\"",
+      "defaultValue": "\"start\"",
+      "description": "The placement of the loading indicator. Accepts `start` or `end`.",
+      "required": false
+    },
+    "loadingProps": {
+      "type": "ButtonLoadingProps",
+      "description": "The props of the loading icon element.",
+      "required": false
+    },
+    "startIcon": {
+      "type": "ReactNode",
+      "description": "The icon to display at the start side of the button.",
+      "required": false
+    },
+    "type": {
+      "type": "HTMLProps<\"button\">[\"type\"]",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+      "required": false
+    }
+  },
+  "ButtonGroup": {
+    "IconItem": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "active": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is represented as active.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is disabled.",
+        "required": false
+      },
+      "disableRipple": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, disable ripple effects when pressing a element.",
+        "required": false
+      },
+      "fullRounded": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+        "required": false
+      },
+      "icon": {
+        "type": "ReactNode",
+        "description": "The icon to be used in the button.",
+        "required": false
+      },
+      "loading": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the loading state of the button is represented.",
+        "required": false
+      },
+      "type": {
+        "type": "\"button\" | \"submit\" | \"reset\"",
+        "defaultValue": "\"button\"",
+        "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "align": {
+        "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
+        "description": "The CSS `align-items` property.",
+        "required": false
+      },
+      "attached": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
+        "required": false
+      },
+      "basis": {
+        "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+        "description": "The CSS `flex-basis` property.",
+        "required": false
+      },
+      "direction": {
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
+        "description": "The CSS `flex-direction` property.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, all wrapped button will be disabled.",
+        "required": false
+      },
+      "fullRounded": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+        "required": false
+      },
+      "grow": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the children will grow to fill the available space.",
+        "required": false
+      },
+      "justify": {
+        "type": "\"center\" | \"normal\" | \"left\" | \"right\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" ...",
+        "description": "The CSS `justify-content` property.",
+        "required": false
+      },
+      "orientation": {
+        "type": "\"horizontal\" | \"vertical\"",
+        "defaultValue": "\"horizontal\"",
+        "description": "The orientation of the group.",
+        "required": false
+      },
+      "shrink": {
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
+        "description": "The CSS `flex-shrink` property.",
+        "required": false
+      },
+      "stacking": {
+        "type": "\"first-on-top\" | \"last-on-top\"",
+        "description": "The stacking order of the group.",
+        "required": false
+      },
+      "wrap": {
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
+        "description": "The CSS `flex-wrap` property.",
+        "required": false
+      }
+    },
+    "Item": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "active": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is represented as active.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is disabled.",
+        "required": false
+      },
+      "disableRipple": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, disable ripple effects when pressing a element.",
+        "required": false
+      },
+      "endIcon": {
+        "type": "ReactNode",
+        "description": "The icon to display at the end side of the button.",
+        "required": false
+      },
+      "fullRounded": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+        "required": false
+      },
+      "iconProps": {
+        "type": "ButtonIconProps",
+        "description": "The props of the icon element.",
+        "required": false
+      },
+      "loading": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the loading state of the button is represented.",
+        "required": false
+      },
+      "loadingIcon": {
+        "type": "Loading.Scheme | ReactNode",
+        "defaultValue": "\"oval\"",
+        "description": "The icon to display when the button is loading.",
+        "required": false
+      },
+      "loadingMessage": {
+        "type": "ReactNode",
+        "description": "The message to display when the button is loading.",
+        "required": false
+      },
+      "loadingPlacement": {
+        "type": "\"end\" | \"start\"",
+        "defaultValue": "\"start\"",
+        "description": "The placement of the loading indicator. Accepts `start` or `end`.",
+        "required": false
+      },
+      "loadingProps": {
+        "type": "ButtonLoadingProps",
+        "description": "The props of the loading icon element.",
+        "required": false
+      },
+      "startIcon": {
+        "type": "ReactNode",
+        "description": "The icon to display at the start side of the button.",
+        "required": false
+      },
+      "type": {
+        "type": "HTMLProps<\"button\">[\"type\"]",
+        "defaultValue": "\"button\"",
+        "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+        "required": false
+      }
+    }
+  },
+  "ButtonGroupRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "align": {
+      "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
+      "description": "The CSS `align-items` property.",
+      "required": false
+    },
+    "attached": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
+      "required": false
+    },
+    "basis": {
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "description": "The CSS `flex-basis` property.",
+      "required": false
+    },
+    "direction": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
+      "description": "The CSS `flex-direction` property.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, all wrapped button will be disabled.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "grow": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the children will grow to fill the available space.",
+      "required": false
+    },
+    "justify": {
+      "type": "\"center\" | \"normal\" | \"left\" | \"right\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" ...",
+      "description": "The CSS `justify-content` property.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the group.",
+      "required": false
+    },
+    "shrink": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
+      "description": "The CSS `flex-shrink` property.",
+      "required": false
+    },
+    "stacking": {
+      "type": "\"first-on-top\" | \"last-on-top\"",
+      "description": "The stacking order of the group.",
+      "required": false
+    },
+    "wrap": {
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
+      "description": "The CSS `flex-wrap` property.",
+      "required": false
+    }
+  },
+  "IconButton": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is disabled.",
+      "required": false
+    },
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactNode",
+      "description": "The icon to be used in the button.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "type": {
+      "type": "\"button\" | \"submit\" | \"reset\"",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+      "required": false
+    }
+  }
+}

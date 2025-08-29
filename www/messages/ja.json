@@ -79,6 +79,11 @@
       "clientOnly": "こちらのコードを使用する場合は、<tag>\"use client\"</tag>をファイルの上部に追加する必要があります。",
       "preview": "プレビュー",
       "code": "コード"
+    },
+    "propsTable": {
+      "prop": "Prop",
+      "default": "デフォルト",
+      "type": "型 / 説明"
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "Portal": {
+    "containerRef": {
+      "type": "RefObject<HTMLElement | null>",
+      "description": "The `ref` to the component where the portal will be attached to.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "If `true`, the forwarding will be disabled.",
+      "required": false
+    }
+  }
+}

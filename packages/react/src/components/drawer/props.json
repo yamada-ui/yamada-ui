@@ -17,17 +17,17 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | ... 6 more ... | (... & { ...; }), \"2xl\" | ... 6 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl...",
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
         "description": "The variant of the component.",
         "required": false
       },
@@ -50,7 +50,7 @@
         "required": false
       },
       "fullRounded": {
-        "type": "StyleValue<boolean>",
+        "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
         "required": false
@@ -67,7 +67,7 @@
         "required": false
       },
       "type": {
-        "type": "\"button\" | \"submit\" | \"reset\"",
+        "type": "\"button\" | \"reset\" | \"submit\"",
         "defaultValue": "\"button\"",
         "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
         "required": false
@@ -90,7 +90,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -112,7 +112,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -134,7 +134,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -156,7 +156,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -178,7 +178,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -200,14 +200,14 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
     },
     "Overlay": {
       "as": {
-        "type": "keyof IntrinsicElements",
+        "type": "DOMElement",
         "description": "The HTML element to render.",
         "required": false
       },
@@ -222,14 +222,14 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
     },
     "Root": {
       "size": {
-        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" | \"full\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" | \"full\" | ({ _peerAccept?: \"2xl\" | ... 12 more ... | undefined; ... 178 more ...; _selection?: \"2xl\" | ... 12 more ... | undefined; } & { ...; }), \"2xl\" | ......",
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" ...",
         "description": "The size of the component.",
         "required": false
       },
@@ -246,12 +246,12 @@
         "required": false
       },
       "body": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerBodyProps",
+        "type": "DrawerBodyProps | ReactNode",
         "description": "The drawer body to use.",
         "required": false
       },
       "cancel": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+        "type": "ButtonProps | ReactNode",
         "description": "The drawer cancel button to use.",
         "required": false
       },
@@ -303,7 +303,7 @@
         "required": false
       },
       "duration": {
-        "type": "number | MotionLifecycleProps<number>",
+        "type": "MotionTransitionProps[\"duration\"]",
         "description": "The animation duration.",
         "required": false
       },
@@ -313,12 +313,12 @@
         "required": false
       },
       "footer": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerFooterProps",
+        "type": "DrawerFooterProps | ReactNode",
         "description": "The drawer footer to use.",
         "required": false
       },
       "header": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerHeaderProps",
+        "type": "DrawerHeaderProps | ReactNode",
         "description": "The drawer header to use.",
         "required": false
       },
@@ -334,7 +334,7 @@
         "required": false
       },
       "middle": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+        "type": "ButtonProps | ReactNode",
         "description": "The drawer middle button to use.",
         "required": false
       },
@@ -379,7 +379,7 @@
         "required": false
       },
       "placement": {
-        "type": "StyleValue<SimplePlacement>",
+        "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" ...",
         "defaultValue": "\"inline-end\"",
         "description": "The placement of the drawer.",
         "required": false
@@ -396,17 +396,17 @@
         "required": false
       },
       "success": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+        "type": "ButtonProps | ReactNode",
         "description": "The drawer success button to use.",
         "required": false
       },
       "title": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerTitleProps",
+        "type": "DrawerTitleProps | ReactNode",
         "description": "The drawer title to use.",
         "required": false
       },
       "trigger": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The modal trigger to use.",
         "required": false
       },
@@ -446,7 +446,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -469,7 +469,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -491,17 +491,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | ... 6 more ... | (... & { ...; }), \"2xl\" | ... 6 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl...",
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
       "description": "The variant of the component.",
       "required": false
     },
@@ -524,7 +524,7 @@
       "required": false
     },
     "fullRounded": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
@@ -541,7 +541,7 @@
       "required": false
     },
     "type": {
-      "type": "\"button\" | \"submit\" | \"reset\"",
+      "type": "\"button\" | \"reset\" | \"submit\"",
       "defaultValue": "\"button\"",
       "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
       "required": false
@@ -564,7 +564,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -586,7 +586,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -608,7 +608,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -630,7 +630,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -652,7 +652,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -674,14 +674,14 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
   },
   "DrawerOverlay": {
     "as": {
-      "type": "keyof IntrinsicElements",
+      "type": "DOMElement",
       "description": "The HTML element to render.",
       "required": false
     },
@@ -696,14 +696,14 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
   },
   "DrawerRoot": {
     "size": {
-      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" | \"full\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" | \"full\" | ({ _peerAccept?: \"2xl\" | ... 12 more ... | undefined; ... 178 more ...; _selection?: \"2xl\" | ... 12 more ... | undefined; } & { ...; }), \"2xl\" | ......",
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" ...",
       "description": "The size of the component.",
       "required": false
     },
@@ -720,12 +720,12 @@
       "required": false
     },
     "body": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerBodyProps",
+      "type": "DrawerBodyProps | ReactNode",
       "description": "The drawer body to use.",
       "required": false
     },
     "cancel": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+      "type": "ButtonProps | ReactNode",
       "description": "The drawer cancel button to use.",
       "required": false
     },
@@ -777,7 +777,7 @@
       "required": false
     },
     "duration": {
-      "type": "number | MotionLifecycleProps<number>",
+      "type": "MotionTransitionProps[\"duration\"]",
       "description": "The animation duration.",
       "required": false
     },
@@ -787,12 +787,12 @@
       "required": false
     },
     "footer": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerFooterProps",
+      "type": "DrawerFooterProps | ReactNode",
       "description": "The drawer footer to use.",
       "required": false
     },
     "header": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerHeaderProps",
+      "type": "DrawerHeaderProps | ReactNode",
       "description": "The drawer header to use.",
       "required": false
     },
@@ -808,7 +808,7 @@
       "required": false
     },
     "middle": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+      "type": "ButtonProps | ReactNode",
       "description": "The drawer middle button to use.",
       "required": false
     },
@@ -853,7 +853,7 @@
       "required": false
     },
     "placement": {
-      "type": "StyleValue<SimplePlacement>",
+      "type": "\"block-end\" | \"block-start\" | \"inline-end\" | \"inline-start\" ...",
       "defaultValue": "\"inline-end\"",
       "description": "The placement of the drawer.",
       "required": false
@@ -870,17 +870,17 @@
       "required": false
     },
     "success": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | ButtonProps",
+      "type": "ButtonProps | ReactNode",
       "description": "The drawer success button to use.",
       "required": false
     },
     "title": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | DrawerTitleProps",
+      "type": "DrawerTitleProps | ReactNode",
       "description": "The drawer title to use.",
       "required": false
     },
     "trigger": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The modal trigger to use.",
       "required": false
     },
@@ -920,7 +920,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }

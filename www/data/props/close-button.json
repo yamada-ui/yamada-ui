@@ -1,0 +1,75 @@
+{
+  "CloseButton": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is disabled.",
+      "required": false
+    },
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "icon": {
+      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "description": "The icon to be used in the button.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "type": {
+      "type": "\"button\" | \"submit\" | \"reset\"",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+      "required": false
+    }
+  }
+}

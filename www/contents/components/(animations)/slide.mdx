@@ -73,7 +73,9 @@ return (
       ))}
     </Wrap>
 
-    <Button onClick={toggle}>Please Click</Button>
+    <Button onClick={toggle} alignSelf="flex-start">
+      Please Click
+    </Button>
 
     <Portal>
       <Slide open={open} placement={placement}>
@@ -99,7 +101,7 @@ return (
 
 ### Change Duration
 
-To change the duration, set a number (in seconds) to `duration`.Default is `{ enter: 0.4, exit: 0.3 }`.
+To change the duration, set a number (in seconds) to `duration`. Default is `{ enter: 0.4, exit: 0.3 }`.
 
 ```tsx preview functional client
 const [open, { toggle }] = useBoolean()

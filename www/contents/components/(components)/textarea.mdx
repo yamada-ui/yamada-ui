@@ -6,7 +6,202 @@ source: components/textarea
 style: components/textarea/textarea.style.ts
 ---
 
+```tsx preview
+<Textarea placeholder="Placeholder" />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Textarea } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Textarea } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Textarea } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Textarea />
+```
+
+### Change Variants
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <Textarea
+        key={variant}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size) => (
+      <Textarea key={size} size={size} placeholder={`Size (${size})`} />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme) => (
+      <Textarea
+        key={colorScheme}
+        colorScheme={colorScheme}
+        placeholder={toTitleCase(colorScheme)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Disable
+
+To disable the input, set `disabled` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <Textarea
+        key={variant}
+        disabled
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Make Read-Only
+
+To make read-only, set `readOnly` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <Textarea
+        key={variant}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+        readOnly
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Make Invalid
+
+To make invalid, set `invalid` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <Textarea
+        key={variant}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+        invalid
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Border Color
+
+To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
+
+```tsx preview
+<VStack>
+  <Textarea focusBorderColor="green.500" placeholder="Custom border color" />
+  <Textarea
+    errorBorderColor="orange.500"
+    invalid
+    placeholder="Custom border color"
+  />
+</VStack>
+```
+
+### Customize Placeholder
+
+To change the placeholder color, set `_placeholder` to the props.
+
+```tsx preview
+<Textarea
+  placeholder="Custom placeholder"
+  _placeholder={{ color: "green.500" }}
+/>
+```
+
+### Change Resize Behavior
+
+To change the resize behavior, set `resize` to one of `block`, `horizontal`, `vertical`, or `none`.
+
+```tsx preview
+<VStack>
+  <For each={["block", "horizontal", "vertical", "none"]}>
+    {(resize) => (
+      <Textarea
+        key={resize}
+        placeholder={toTitleCase(resize)}
+        resize={resize}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Use Auto-resize
+
+To enable auto-resizing, set `autosize` to `true`.
+
+```tsx preview
+<Textarea autosize placeholder="Autosize" />
+```
+
+### Control Resize
+
+```tsx preview functional client
+const resizeRef = useRef<() => void>(null)
+const onResize = () => {
+  resizeRef.current?.()
+}
+
+return (
+  <VStack>
+    <Textarea placeholder="Use resize" resizeRef={resizeRef} />
+    <Button alignSelf="flex-end" onClick={onResize}>
+      Resize
+    </Button>
+  </VStack>
+)
+```
 
 ## Props
 

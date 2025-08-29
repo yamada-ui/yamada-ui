@@ -107,6 +107,7 @@ export * from "./components/textarea"
 export * from "./components/timeline"
 export * from "./components/toggle"
 export * from "./components/tooltip"
+export * from "./components/tree"
 export * from "./components/visually-hidden"
 export * from "./components/wrap"
 

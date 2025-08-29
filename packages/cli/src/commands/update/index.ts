@@ -17,6 +17,7 @@ import { getDiff } from "../diff/get-diff"
 import { getRegistriesAndFiles } from "../diff/get-registries-and-files"
 import { printConflicts } from "./print-conflicts"
 import { updateFiles } from "./update-files"
+import { validateDiff3 } from "./validate-diff-3"
 
 interface Options {
   config: string
@@ -57,6 +58,12 @@ export const update = new Command("update")
 
       spinner.succeed("Validated directory")
 
+      spinner.start("Validating methods")
+
+      await validateDiff3()
+
+      spinner.succeed("Validated methods")
+
       spinner.start("Fetching config")
 
       const config = await getConfig(cwd, configPath, { format, lint })
@@ -66,9 +73,9 @@ export const update = new Command("update")
       spinner.start("Getting generated components")
 
       const all = !targetNames.length
-      const index = all || targetNames.includes("index")
-      const theme = all || targetNames.includes("theme")
       const existsTheme = !!config.theme?.path && existsSync(config.theme.path)
+      const index = all || targetNames.includes("index")
+      const theme = all ? existsTheme : targetNames.includes("theme")
 
       if (theme && !existsTheme) {
         throw new Error(

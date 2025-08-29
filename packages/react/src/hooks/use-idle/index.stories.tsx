@@ -16,7 +16,7 @@ export const Basic = () => {
       bg={idle ? "blue.500" : "red.500"}
       color="white"
       p="md"
-      rounded="md"
+      rounded="l2"
       transitionDuration="moderate"
       transitionProperty="all"
     >

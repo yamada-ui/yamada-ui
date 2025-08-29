@@ -34,7 +34,7 @@ export const ExitPresenceAnimation: Story = () => {
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             p="md"
-            rounded="md"
+            rounded="l2"
           >
             Motion
           </Motion>
@@ -56,7 +56,7 @@ export const MotionConfig: Story = () => {
         bg="mono"
         color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
       >
         Motion
       </Motion>

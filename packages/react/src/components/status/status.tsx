@@ -49,7 +49,10 @@ export const Status = withProvider<"div", StatusProps>(
     )
   },
   "root",
-)({ colorScheme: "info", value: "info" })
+)(undefined, ({ colorScheme, value = "info", ...rest }) => ({
+  colorScheme: colorScheme ?? value,
+  ...rest,
+}))
 
 interface StatusIndicatorProps extends HTMLStyledProps {}
 

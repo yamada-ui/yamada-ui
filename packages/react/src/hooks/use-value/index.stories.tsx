@@ -27,7 +27,7 @@ export const Basic = () => {
       bg={bg}
       color={color}
       p="md"
-      rounded="md"
+      rounded="l2"
       transitionDuration="moderate"
       transitionProperty="all"
     >

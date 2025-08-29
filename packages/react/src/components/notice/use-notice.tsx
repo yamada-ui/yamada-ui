@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import type { ReactElement, ReactNode } from "react"
 import type { HTMLStyledProps, NoticeConfig } from "../../core"
 import type { Alert } from "../alert"
 import type { CloseButtonProps } from "../close-button"
@@ -11,11 +11,11 @@ import { isArray } from "../../utils"
 import { Notice } from "./notice"
 import { useNoticeContext } from "./notice-provider"
 
-type CloseAction = "button" | "click" | "drag"
+export type CloseAction = "button" | "click" | "drag"
 
 export interface UseNoticeOptions
   extends NoticeConfig,
-    Omit<Alert.RootProps, "direction" | "title">,
+    Omit<Alert.RootProps, "direction" | "id" | "status" | "title">,
     Pick<Alert.LoadingProps, "loadingScheme"> {
   /**
    * Unique identifier for the notice.
@@ -24,6 +24,8 @@ export interface UseNoticeOptions
   /**
    * Close strategy for the notice.
    * Can be a single action or an array of actions.
+   *
+   * @default ["drag"]
    */
   closeStrategy?: CloseAction | CloseAction[]
   /**
@@ -46,7 +48,7 @@ export interface UseNoticeOptions
   /**
    * The loading scheme.
    */
-  loadingScheme?: string
+  loadingScheme?: LoadingScheme
   /**
    * The status of the notice.
    */
@@ -70,19 +72,19 @@ export interface UseNoticeOptions
   /**
    * Props for the description.
    */
-  descriptionProps?: HTMLStyledProps
+  descriptionProps?: Alert.DescriptionProps
   /**
    * Props for the icon.
    */
-  iconProps?: HTMLStyledProps
+  iconProps?: Alert.IconProps
   /**
    * Props for the loading component.
    */
-  loadingProps?: HTMLStyledProps
+  loadingProps?: Alert.LoadingProps
   /**
    * Props for the title.
    */
-  titleProps?: HTMLStyledProps
+  titleProps?: Alert.TitleProps
 }
 
 export interface NoticeComponentProps {
@@ -125,7 +127,7 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
         }
       }
 
-      const { closable, closeStrategy } = noticeProps
+      const { closable, closeStrategy = ["drag"] } = noticeProps
 
       const closeActions = isArray(closeStrategy)
         ? closeStrategy
@@ -139,7 +141,8 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
 
       if (component) {
         return toast.custom(
-          (id) => component({ onClose: () => toast.dismiss(id) }),
+          (id) =>
+            component({ onClose: () => toast.dismiss(id) }) as ReactElement,
           finalToastOptions,
         )
       }

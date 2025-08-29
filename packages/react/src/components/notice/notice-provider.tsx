@@ -29,9 +29,14 @@ export interface NoticeProviderProps
   containerRef?: RefObject<HTMLElement>
 }
 
+interface NoticeLimitState {
+  limit: number
+  placement: NoticePlacement
+}
+
 export interface NoticeContext {
   getLimit: (placement: NoticePlacement) => number
-  updateLimit: (state: { limit: number; placement: NoticePlacement }) => void
+  updateLimit: (state: NoticeLimitState) => void
 }
 
 type VerticalPlacement = "bottom" | "top"
@@ -57,7 +62,7 @@ export const NoticeContext = createContext({} as NoticeContext)
 
 interface NoticeMethods {
   getLimit: (placement: NoticePlacement) => number
-  updateLimit: (state: { limit: number; placement: NoticePlacement }) => void
+  updateLimit: (state: NoticeLimitState) => void
 }
 
 type Controller = ReturnType<typeof createController>
@@ -70,10 +75,10 @@ const createController = () => ({
 const createMethods = (refs: {
   [K in NoticePlacement]?: RefObject<Controller>
 }): NoticeMethods => ({
-  getLimit: (placement: NoticePlacement) => {
+  getLimit: (placement) => {
     return refs[placement]?.current.getLimit.current?.(placement) ?? 3
   },
-  updateLimit: (state: { limit: number; placement: NoticePlacement }) => {
+  updateLimit: (state) => {
     refs[state.placement]?.current.updateLimit.current?.(state)
   },
 })

@@ -10,11 +10,12 @@ import { handlerAll, noop } from "../../utils"
 import { Alert } from "../alert"
 import { CloseButton } from "../close-button"
 import { noticeStyle } from "./notice.style"
+
 interface ComponentContext {}
 
 export interface NoticeProps
   extends UseNoticeOptions,
-    HTMLStyledProps,
+    Omit<HTMLStyledProps, "id">,
     ThemeProps<NoticeStyle> {
   /**
    * Close actions for the notice.
@@ -61,7 +62,7 @@ export const Notice = withProvider<"div", NoticeProps>(
     ...rest
   }) => {
     return (
-      <ComponentContext>
+      <ComponentContext value={{}}>
         <Alert.Root
           {...rest}
           onClick={handlerAll(

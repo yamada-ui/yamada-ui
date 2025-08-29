@@ -1,6 +1,6 @@
 import type { ReactElement, ReactNode } from "react"
 import type { HTMLStyledProps, NoticeConfig } from "../../core"
-import type { AlertRootProps } from "../alert"
+import type { Alert } from "../alert"
 import type { CloseButtonProps } from "../close-button"
 import type { LoadingScheme } from "../loading"
 import type { StatusScheme } from "../status"
@@ -10,19 +10,14 @@ import { useSystem } from "../../core"
 import { Notice } from "./notice"
 import { useNoticeContext } from "./notice-provider"
 
-export interface UseNoticeOptions extends NoticeConfig {
+export interface UseNoticeOptions
+  extends NoticeConfig,
+    Omit<Alert.RootProps, "direction" | "title">,
+    Pick<Alert.LoadingProps, "loadingScheme"> {
   /**
    * Unique identifier for the notice.
    */
   id?: number | string
-  /**
-   * The color scheme of the notice.
-   */
-  colorScheme?: string
-  /**
-   * The variant of the notice.
-   */
-  variant?: AlertRootProps["variant"]
   /**
    * Close strategy for the notice.
    */
@@ -44,10 +39,6 @@ export interface UseNoticeOptions extends NoticeConfig {
      */
     variant?: LoadingScheme
   }
-  /**
-   * The maximum value at which notice will be displayed.
-   */
-  limit?: number
   /**
    * The loading scheme.
    */
@@ -113,26 +104,11 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
     const notice = (options: UseNoticeOptions = {}) => {
       const finalOptions = computedOptions(options)
       const {
-        variant,
-        closable,
-        closeStrategy,
         component,
-        description,
         duration,
-        icon,
         limit,
-        loadingScheme,
         placement = "start-center",
-        status,
-        title,
-        withIcon,
-        closeButtonProps,
-        contentProps,
-        descriptionProps,
-        iconProps,
-        loadingProps,
-        titleProps,
-        ...toastOptions
+        ...noticeProps
       } = finalOptions
 
       if (duration === null) {
@@ -146,8 +122,9 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
         }
       }
 
+      const { closable, closeStrategy } = noticeProps
+
       const finalToastOptions = {
-        ...toastOptions,
         dismissible: closeStrategy !== "button" && closable,
         duration,
         toasterId: placement,
@@ -161,26 +138,7 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
       }
 
       return toast.custom(
-        (t) =>
-          (
-            <Notice
-              variant={variant}
-              closable={closable}
-              description={description}
-              icon={icon}
-              loadingScheme={loadingScheme}
-              status={status}
-              t={t}
-              title={title}
-              withIcon={withIcon}
-              closeButtonProps={closeButtonProps}
-              contentProps={contentProps}
-              descriptionProps={descriptionProps}
-              iconProps={iconProps}
-              loadingProps={loadingProps}
-              titleProps={titleProps}
-            />
-          ) as ReactElement,
+        (t) => (<Notice {...noticeProps} t={t} />) as ReactElement,
         finalToastOptions,
       )
     }
@@ -203,3 +161,5 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
     return notice
   }, [config.notice, defaultOptions, getLimit, updateLimit])
 }
+
+export type UseNoticeReturn = ReturnType<typeof useNotice>

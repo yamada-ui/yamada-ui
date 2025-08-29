@@ -23,57 +23,9 @@ export interface NoticeProps
    */
   t: number | string
   /**
-   * If `true`, shows a close button.
-   */
-  closable?: boolean
-  /**
-   * The description text.
-   */
-  description?: string
-  /**
    * The icon element or loading scheme.
    */
   icon?: ReactElement | { variant?: string }
-  /**
-   * The loading scheme.
-   */
-  loadingScheme?: string
-  /**
-   * The status of the notice.
-   */
-  status?: "error" | "info" | "loading" | "success" | "warning"
-  /**
-   * The title text.
-   */
-  title?: string
-  /**
-   * If `true`, shows an icon.
-   */
-  withIcon?: boolean
-  /**
-   * Props for the close button.
-   */
-  closeButtonProps?: CloseButtonProps
-  /**
-   * Props for the content container.
-   */
-  contentProps?: HTMLStyledProps
-  /**
-   * Props for the description.
-   */
-  descriptionProps?: HTMLStyledProps
-  /**
-   * Props for the icon.
-   */
-  iconProps?: HTMLStyledProps
-  /**
-   * Props for the loading component.
-   */
-  loadingProps?: HTMLStyledProps
-  /**
-   * Props for the title.
-   */
-  titleProps?: HTMLStyledProps
 }
 
 const {

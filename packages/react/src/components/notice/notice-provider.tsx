@@ -34,43 +34,24 @@ export interface NoticeContext {
   updateLimit: (state: { limit: number; placement: NoticePlacement }) => void
 }
 
-type NoticePosition =
-  | "bottom-center"
-  | "bottom-left"
-  | "bottom-right"
-  | "top-center"
-  | "top-left"
-  | "top-right"
+type VerticalPlacement = "bottom" | "top"
+type HorizontalPlacement = "center" | "left" | "right"
 
-/**
- * Creates a position string from vertical and horizontal placement.
- */
-const createPositionFromPlacement = (
-  vertical: "bottom" | "top",
-  horizontal: "center" | "left" | "right",
-): NoticePosition => {
-  return `${vertical}-${horizontal}`
-}
-
-const placementMapping = {
-  end: createPositionFromPlacement("bottom", "right"),
-  "end-center": createPositionFromPlacement("bottom", "center"),
-  "end-end": createPositionFromPlacement("bottom", "right"),
-  "end-start": createPositionFromPlacement("bottom", "left"),
-  start: createPositionFromPlacement("top", "right"),
-  "start-center": createPositionFromPlacement("top", "center"),
-  "start-end": createPositionFromPlacement("top", "right"),
-  "start-start": createPositionFromPlacement("top", "left"),
-} as const
+type NoticePosition = `${VerticalPlacement}-${HorizontalPlacement}`
 
 /**
  * Maps NoticePlacement to NoticePosition for the Toaster.
  */
-export const mapPlacementToPosition = (
-  placement: NoticePlacement = "start-center",
-): NoticePosition => {
-  return placementMapping[placement]
-}
+const placements = {
+  end: "bottom-right",
+  "end-center": "bottom-center",
+  "end-end": "bottom-right",
+  "end-start": "bottom-left",
+  start: "top-right",
+  "start-center": "top-center",
+  "start-end": "top-right",
+  "start-start": "top-left",
+} satisfies { [K in NoticePlacement]: NoticePosition }
 
 export const NoticeContext = createContext({} as NoticeContext)
 
@@ -116,7 +97,7 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
   )
 
   const components = useMemo(() => {
-    return Object.keys(placementMapping).map((placement) => {
+    return Object.keys(placements).map((placement) => {
       const placementKey = placement as NoticePlacement
       if (!limits.current[placementKey]) {
         limits.current[placementKey] = { current: createController() }
@@ -155,7 +136,7 @@ const NoticeProviderComponent: FC<NoticeProviderComponentProps> = ({
   limit,
   placement,
 }) => {
-  const position = mapPlacementToPosition(placement)
+  const position = useMemo(() => placements[placement], [placement])
   const [visibleToasts, setVisibleToasts] = useState(limit)
 
   const getLimit = useCallback<NoticeMethods["getLimit"]>(

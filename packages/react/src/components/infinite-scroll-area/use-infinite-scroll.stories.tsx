@@ -80,7 +80,7 @@ export const Root = () => {
         maxH="xl"
         overflowY="auto"
         p="md"
-        rounded="md"
+        rounded="l2"
       >
         {Array(count)
           .fill(0)

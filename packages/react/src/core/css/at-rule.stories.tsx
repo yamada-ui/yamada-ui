@@ -12,7 +12,7 @@ export const Basic = () => {
       borderWidth="1px"
       boxSize="3xs"
       p="md"
-      rounded="md"
+      rounded="l2"
       _print={{ color: "success" }}
     >
       <Text>Print me</Text>
@@ -29,7 +29,7 @@ export const Container = () => {
       overflow="auto"
       p="md"
       resize="both"
-      rounded="md"
+      rounded="l2"
     >
       <Text
         _container={[
@@ -52,7 +52,7 @@ export const ContainerName = () => {
       overflow="auto"
       p="md"
       resize="both"
-      rounded="md"
+      rounded="l2"
     >
       <Center
         borderWidth="1px"
@@ -62,7 +62,7 @@ export const ContainerName = () => {
         overflow="auto"
         p="md"
         resize="both"
-        rounded="md"
+        rounded="l2"
       >
         <Text
           _container={[

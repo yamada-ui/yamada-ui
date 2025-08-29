@@ -14,7 +14,7 @@ export const Basic = () => {
       bg="bg.contrast"
       color="fg.contrast"
       p="md"
-      rounded="md"
+      rounded="l2"
       transitionDuration="moderate"
       transitionProperty="all"
     >
@@ -33,7 +33,7 @@ export const Hook = () => {
       bg={bg}
       color={color}
       p="md"
-      rounded="md"
+      rounded="l2"
       transitionDuration="moderate"
       transitionProperty="all"
     >

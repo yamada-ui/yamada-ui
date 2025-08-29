@@ -539,7 +539,7 @@ export const ScrollOnMount: Story = () => {
         boxShadow="md"
         gap="md"
         p="md"
-        rounded="md"
+        rounded="l2"
         textAlign="center"
       >
         <Container.Header flexDirection="column">

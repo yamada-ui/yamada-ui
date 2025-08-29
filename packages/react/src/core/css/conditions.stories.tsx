@@ -16,7 +16,7 @@ export const After = () => {
       m="lg"
       p="lg"
       pos="relative"
-      rounded="lg"
+      rounded="l3"
       _after={{
         bg: "secondary",
         color: "white",
@@ -41,7 +41,7 @@ export const Before = () => {
       m="lg"
       p="lg"
       pos="relative"
-      rounded="lg"
+      rounded="l3"
       _before={{
         bg: "secondary",
         color: "white",
@@ -65,7 +65,7 @@ export const Hover = () => {
       color="fg.contrast"
       cursor="pointer"
       p="md"
-      rounded="md"
+      rounded="l2"
       transitionDuration="slower"
       transitionProperty="all"
       transitionTimingFunction="ease-in-out"
@@ -83,7 +83,7 @@ export const Group = () => {
       focusVisibleRing="outline"
       p="md"
       role="group"
-      rounded="md"
+      rounded="l2"
       tabIndex={0}
       w="auto"
     >
@@ -111,7 +111,7 @@ export const Peer = () => {
         bg="bg.contrast"
         color="fg.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         _peerFocus={{ bg: "secondary" }}
       >
         Focus the peer
@@ -122,7 +122,7 @@ export const Peer = () => {
         borderWidth="1px"
         focusVisibleRing="outline"
         p="md"
-        rounded="md"
+        rounded="l2"
         tabIndex={0}
       >
         Focus me!
@@ -132,7 +132,7 @@ export const Peer = () => {
         bg="bg.contrast"
         color="fg.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         _peerFocus={{ bg: "secondary" }}
       >
         Focus the peer
@@ -147,7 +147,7 @@ export const Orientation = () => {
       bg="bg.contrast"
       color="fg.contrast"
       p="md"
-      rounded="lg"
+      rounded="l3"
       _portrait={{ bg: "secondary" }}
     >
       Box
@@ -165,7 +165,7 @@ export const Other = () => {
           key={number}
           boxSize="5xs"
           color="white"
-          rounded="md"
+          rounded="l2"
           _even={{ bg: "blue.500" }}
           _odd={{ bg: "red.500" }}
         >

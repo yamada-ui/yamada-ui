@@ -12,7 +12,7 @@ export const Interpolation = () => {
         boxShadow="0 0 0 1px {colors.primary}"
         color="white"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Change {`"{colors.primary}"`} to "var(--ui-colors-primary)"
@@ -22,7 +22,7 @@ export const Interpolation = () => {
         border="{sizes.1} solid {colors.secondary}"
         color="white"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Change {`"{sizes.1}"`} to "var(--ui-sizes-1)"
@@ -38,7 +38,7 @@ export const Variable = () => {
       bg="{bg}"
       color="{fg}"
       p="md"
-      rounded="md"
+      rounded="l2"
       {...{ "--fg": "colors.fg.contrast" }}
     >
       Box

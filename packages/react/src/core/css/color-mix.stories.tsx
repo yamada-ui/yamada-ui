@@ -14,7 +14,7 @@ export const Basic = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         "in srgb" + "red.500" + "blue.500"
@@ -25,7 +25,7 @@ export const Basic = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         "in srgb" + "gree.500" + "#000000"
@@ -36,7 +36,7 @@ export const Basic = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         "in lab" + "orange.500 80%" + "purple.500 20%"
@@ -47,7 +47,7 @@ export const Basic = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         "in lch longer hue" + "hsl(200deg 50% 80%)" + "#000000"
@@ -64,7 +64,7 @@ export const Tint = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Tint color
@@ -75,7 +75,7 @@ export const Tint = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Tint color
@@ -86,7 +86,7 @@ export const Tint = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Tint color
@@ -103,7 +103,7 @@ export const Shade = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Shade color
@@ -114,7 +114,7 @@ export const Shade = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Shade color
@@ -125,7 +125,7 @@ export const Shade = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Shade color
@@ -142,7 +142,7 @@ export const Transparentize = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Transparentize color
@@ -153,7 +153,7 @@ export const Transparentize = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Transparentize color
@@ -164,7 +164,7 @@ export const Transparentize = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Transparentize color
@@ -175,7 +175,7 @@ export const Transparentize = () => {
         color="white"
         height="2xs"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="full"
       >
         Transparentize color
@@ -194,7 +194,7 @@ export const Tone = () => {
           color="white"
           height="5xs"
           p="md"
-          rounded="md"
+          rounded="l2"
           w="full"
         >
           <Text

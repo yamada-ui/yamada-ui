@@ -73,7 +73,7 @@ export const Pseudo = () => {
       m="lg"
       p="lg"
       pos="relative"
-      rounded="lg"
+      rounded="l3"
       _after={{
         animation,
         bg: "secondary",
@@ -202,7 +202,7 @@ export const Dynamic = () => {
         bg="mono"
         color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
       >
         Box
       </Box>
@@ -287,7 +287,7 @@ export const DynamicAndMultiple = () => {
         bg="mono"
         color="mono.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
       >
         Box
       </Box>

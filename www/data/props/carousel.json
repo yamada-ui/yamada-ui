@@ -1,0 +1,842 @@
+{
+  "Carousel": {
+    "Indicator": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "index": {
+        "type": "number",
+        "description": "The index of the carousel indicator.",
+        "required": true
+      }
+    },
+    "Indicators": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "render": {
+        "type": "(props: { index: number; selected: boolean }) => ReactNode",
+        "description": "The function used to generate children.\nit will be called with `{ index: number; selected: boolean }`.",
+        "required": false
+      }
+    },
+    "Item": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "index": {
+        "type": "number",
+        "description": "The index of the carousel item.",
+        "required": true
+      },
+      "slideSize": {
+        "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+        "description": "The size of the carousel item.",
+        "required": false
+      }
+    },
+    "List": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      }
+    },
+    "NextTrigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "active": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is represented as active.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is disabled.",
+        "required": false
+      },
+      "disableRipple": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, disable ripple effects when pressing a element.",
+        "required": false
+      },
+      "fullRounded": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+        "required": false
+      },
+      "icon": {
+        "type": "ReactNode",
+        "description": "The icon to be used in the button.",
+        "required": false
+      },
+      "loading": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the loading state of the button is represented.",
+        "required": false
+      },
+      "type": {
+        "type": "\"button\" | \"submit\" | \"reset\"",
+        "defaultValue": "\"button\"",
+        "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+        "required": false
+      }
+    },
+    "PrevTrigger": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "variant": {
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "description": "The variant of the component.",
+        "required": false
+      },
+      "active": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is represented as active.",
+        "required": false
+      },
+      "disabled": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is disabled.",
+        "required": false
+      },
+      "disableRipple": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, disable ripple effects when pressing a element.",
+        "required": false
+      },
+      "fullRounded": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+        "required": false
+      },
+      "icon": {
+        "type": "ReactNode",
+        "description": "The icon to be used in the button.",
+        "required": false
+      },
+      "loading": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the loading state of the button is represented.",
+        "required": false
+      },
+      "type": {
+        "type": "\"button\" | \"submit\" | \"reset\"",
+        "defaultValue": "\"button\"",
+        "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+        "required": false
+      }
+    },
+    "Root": {
+      "as": {
+        "type": "As",
+        "description": "The HTML element to render.",
+        "required": false
+      },
+      "asChild": {
+        "type": "boolean",
+        "description": "Merges its props onto its immediate child.",
+        "required": false
+      },
+      "css": {
+        "type": "CSSObject | CSSObject[]",
+        "description": "The CSS object.",
+        "required": false
+      },
+      "colorScheme": {
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "description": "Set color scheme variables.",
+        "required": false
+      },
+      "size": {
+        "type": "\"lg\" | \"md\" | \"sm\"",
+        "description": "The size of the component.",
+        "required": false
+      },
+      "align": {
+        "type": "\"center\" | \"end\" | \"start\" | (viewSize: number, snapSize: number, index: number) => number ...",
+        "defaultValue": "\"center\"",
+        "description": "The alignment of the carousel.",
+        "required": false
+      },
+      "autoplay": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the carousel will be autoplay.",
+        "required": false
+      },
+      "containScroll": {
+        "type": "false | \"trimSnaps\" | \"keepSnaps\"",
+        "defaultValue": "false",
+        "description": "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.",
+        "required": false
+      },
+      "controlRef": {
+        "type": "RefObject<EmblaCarouselType | null>",
+        "description": "Ref of the resizable item callback.",
+        "required": false
+      },
+      "defaultIndex": {
+        "type": "number",
+        "defaultValue": "0",
+        "description": "The initial index of the carousel slide.",
+        "required": false
+      },
+      "delay": {
+        "type": "number",
+        "defaultValue": "4000",
+        "description": "The number for the autoplay interval of the carousel.",
+        "required": false
+      },
+      "dragFree": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, momentum scrolling will be enabled.",
+        "required": false
+      },
+      "draggable": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, carousel can be scrolled with mouse and touch interactions.",
+        "required": false
+      },
+      "duration": {
+        "type": "number",
+        "defaultValue": "25",
+        "description": "Set scroll duration when triggered by any of the API methods.\nHigher numbers enables slower scrolling.\nDrag interactions are not affected because duration is then determined by the drag force.",
+        "required": false
+      },
+      "includeGapInSize": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, gap will be treated as part of the carousel slide size.",
+        "required": false
+      },
+      "index": {
+        "type": "number",
+        "description": "The index of the carousel slide.",
+        "required": false
+      },
+      "inViewThreshold": {
+        "type": "number | number[]",
+        "defaultValue": "0",
+        "description": "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view.",
+        "required": false
+      },
+      "loop": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, infinite looping.\nAutomatically falls back to false if slide content isn't enough to loop.",
+        "required": false
+      },
+      "onChange": {
+        "type": "(index: number) => void",
+        "description": "The callback invoked when carousel slide selected.",
+        "required": false
+      },
+      "onScrollProgress": {
+        "type": "(progress: number) => void",
+        "description": "A callback that return the current scroll amount when the carousel is scrolled.",
+        "required": false
+      },
+      "orientation": {
+        "type": "\"horizontal\" | \"vertical\"",
+        "defaultValue": "\"horizontal\"",
+        "description": "The orientation of the carousel.",
+        "required": false
+      },
+      "plugins": {
+        "type": "CreatePluginType<LoosePluginType, {}>[]",
+        "description": "Embla plugins to use.",
+        "required": false
+      },
+      "skipSnaps": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.\nNote that this option will be ignored if the dragFree option is set to true.",
+        "required": false
+      },
+      "slideSize": {
+        "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+        "description": "The size of the carousel item.",
+        "required": false
+      },
+      "slidesToScroll": {
+        "type": "number",
+        "defaultValue": "1",
+        "description": "The number of slides that should be scrolled with next or previous buttons.",
+        "required": false
+      },
+      "stopMouseEnterAutoplay": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, autoplay will pause when the mouse entries over.",
+        "required": false
+      },
+      "watchDrag": {
+        "type": "DragHandlerOptionType",
+        "defaultValue": "true",
+        "description": "Enables for scrolling the carousel with mouse and touch interactions.\nSet this to `false` to disable drag events or pass a custom callback to add your own drag logic.",
+        "required": false
+      },
+      "watchResize": {
+        "type": "ResizeHandlerOptionType",
+        "defaultValue": "true",
+        "description": "Embla automatically watches the container and slides for size changes and runs `reInit` when any size has changed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own resize logic.",
+        "required": false
+      },
+      "watchSlides": {
+        "type": "SlidesHandlerOptionType",
+        "defaultValue": "true",
+        "description": "Embla automatically watches the container for added and/or removed slides and runs `reInit` if needed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own slides changed logic.",
+        "required": false
+      }
+    }
+  },
+  "CarouselIndicator": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "index": {
+      "type": "number",
+      "description": "The index of the carousel indicator.",
+      "required": true
+    }
+  },
+  "CarouselIndicators": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "render": {
+      "type": "(props: { index: number; selected: boolean }) => ReactNode",
+      "description": "The function used to generate children.\nit will be called with `{ index: number; selected: boolean }`.",
+      "required": false
+    }
+  },
+  "CarouselItem": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "index": {
+      "type": "number",
+      "description": "The index of the carousel item.",
+      "required": true
+    },
+    "slideSize": {
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "description": "The size of the carousel item.",
+      "required": false
+    }
+  },
+  "CarouselList": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    }
+  },
+  "CarouselNextTrigger": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is disabled.",
+      "required": false
+    },
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactNode",
+      "description": "The icon to be used in the button.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "type": {
+      "type": "\"button\" | \"submit\" | \"reset\"",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+      "required": false
+    }
+  },
+  "CarouselPrevTrigger": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "active": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is represented as active.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is disabled.",
+      "required": false
+    },
+    "disableRipple": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, disable ripple effects when pressing a element.",
+      "required": false
+    },
+    "fullRounded": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactNode",
+      "description": "The icon to be used in the button.",
+      "required": false
+    },
+    "loading": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the loading state of the button is represented.",
+      "required": false
+    },
+    "type": {
+      "type": "\"button\" | \"submit\" | \"reset\"",
+      "defaultValue": "\"button\"",
+      "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
+      "required": false
+    }
+  },
+  "CarouselRoot": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "align": {
+      "type": "\"center\" | \"end\" | \"start\" | (viewSize: number, snapSize: number, index: number) => number ...",
+      "defaultValue": "\"center\"",
+      "description": "The alignment of the carousel.",
+      "required": false
+    },
+    "autoplay": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the carousel will be autoplay.",
+      "required": false
+    },
+    "containScroll": {
+      "type": "false | \"trimSnaps\" | \"keepSnaps\"",
+      "defaultValue": "false",
+      "description": "Clear leading and trailing empty space that causes excessive scrolling.\nUse trimSnaps to only use snap points that trigger scrolling or keepSnaps to keep them.",
+      "required": false
+    },
+    "controlRef": {
+      "type": "RefObject<EmblaCarouselType | null>",
+      "description": "Ref of the resizable item callback.",
+      "required": false
+    },
+    "defaultIndex": {
+      "type": "number",
+      "defaultValue": "0",
+      "description": "The initial index of the carousel slide.",
+      "required": false
+    },
+    "delay": {
+      "type": "number",
+      "defaultValue": "4000",
+      "description": "The number for the autoplay interval of the carousel.",
+      "required": false
+    },
+    "dragFree": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, momentum scrolling will be enabled.",
+      "required": false
+    },
+    "draggable": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, carousel can be scrolled with mouse and touch interactions.",
+      "required": false
+    },
+    "duration": {
+      "type": "number",
+      "defaultValue": "25",
+      "description": "Set scroll duration when triggered by any of the API methods.\nHigher numbers enables slower scrolling.\nDrag interactions are not affected because duration is then determined by the drag force.",
+      "required": false
+    },
+    "includeGapInSize": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, gap will be treated as part of the carousel slide size.",
+      "required": false
+    },
+    "index": {
+      "type": "number",
+      "description": "The index of the carousel slide.",
+      "required": false
+    },
+    "inViewThreshold": {
+      "type": "number | number[]",
+      "defaultValue": "0",
+      "description": "Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view.",
+      "required": false
+    },
+    "loop": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, infinite looping.\nAutomatically falls back to false if slide content isn't enough to loop.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(index: number) => void",
+      "description": "The callback invoked when carousel slide selected.",
+      "required": false
+    },
+    "onScrollProgress": {
+      "type": "(progress: number) => void",
+      "description": "A callback that return the current scroll amount when the carousel is scrolled.",
+      "required": false
+    },
+    "orientation": {
+      "type": "\"horizontal\" | \"vertical\"",
+      "defaultValue": "\"horizontal\"",
+      "description": "The orientation of the carousel.",
+      "required": false
+    },
+    "plugins": {
+      "type": "CreatePluginType<LoosePluginType, {}>[]",
+      "description": "Embla plugins to use.",
+      "required": false
+    },
+    "skipSnaps": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, allow the carousel to skip scroll snaps if it's dragged vigorously.\nNote that this option will be ignored if the dragFree option is set to true.",
+      "required": false
+    },
+    "slideSize": {
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "description": "The size of the carousel item.",
+      "required": false
+    },
+    "slidesToScroll": {
+      "type": "number",
+      "defaultValue": "1",
+      "description": "The number of slides that should be scrolled with next or previous buttons.",
+      "required": false
+    },
+    "stopMouseEnterAutoplay": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, autoplay will pause when the mouse entries over.",
+      "required": false
+    },
+    "watchDrag": {
+      "type": "DragHandlerOptionType",
+      "defaultValue": "true",
+      "description": "Enables for scrolling the carousel with mouse and touch interactions.\nSet this to `false` to disable drag events or pass a custom callback to add your own drag logic.",
+      "required": false
+    },
+    "watchResize": {
+      "type": "ResizeHandlerOptionType",
+      "defaultValue": "true",
+      "description": "Embla automatically watches the container and slides for size changes and runs `reInit` when any size has changed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own resize logic.",
+      "required": false
+    },
+    "watchSlides": {
+      "type": "SlidesHandlerOptionType",
+      "defaultValue": "true",
+      "description": "Embla automatically watches the container for added and/or removed slides and runs `reInit` if needed.\nSet this to `false` to disable this behaviour or pass a custom callback to add your own slides changed logic.",
+      "required": false
+    }
+  }
+}

@@ -16,17 +16,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { ...; }), \"2xl\" | ... 5 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl\" | .....",
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
       "description": "The variant of the component.",
       "required": false
     },
@@ -49,12 +49,12 @@
       "required": false
     },
     "endIcon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The icon to display at the end side of the button.",
       "required": false
     },
     "fullRounded": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
@@ -71,13 +71,13 @@
       "required": false
     },
     "loadingIcon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "Loading.Scheme | ReactNode",
       "defaultValue": "\"oval\"",
       "description": "The icon to display when the button is loading.",
       "required": false
     },
     "loadingMessage": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The message to display when the button is loading.",
       "required": false
     },
@@ -93,12 +93,12 @@
       "required": false
     },
     "startIcon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The icon to display at the start side of the button.",
       "required": false
     },
     "type": {
-      "type": "\"button\" | \"submit\" | \"reset\"",
+      "type": "HTMLProps<\"button\">[\"type\"]",
       "defaultValue": "\"button\"",
       "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
       "required": false
@@ -122,17 +122,17 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | ... 6 more ... | (... & { ...; }), \"2xl\" | ... 6 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl...",
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
         "description": "The variant of the component.",
         "required": false
       },
@@ -155,13 +155,13 @@
         "required": false
       },
       "fullRounded": {
-        "type": "StyleValue<boolean>",
+        "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
         "required": false
       },
       "icon": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The icon to be used in the button.",
         "required": false
       },
@@ -172,7 +172,7 @@
         "required": false
       },
       "type": {
-        "type": "\"button\" | \"submit\" | \"reset\"",
+        "type": "\"button\" | \"reset\" | \"submit\"",
         "defaultValue": "\"button\"",
         "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
         "required": false
@@ -195,38 +195,38 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { ...; }), \"2xl\" | ... 5 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl\" | .....",
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
         "description": "The variant of the component.",
         "required": false
       },
       "align": {
-        "type": "AlignItems | [AlignItems | ({ _peerAccept?: AlignItems | [AlignItems | (... & { base?: AlignItems | [AlignItems | (... & ...), AlignItems | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: AlignItems | ... 2 more ... | undefined; }), AlignItems | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+        "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
         "description": "The CSS `align-items` property.",
         "required": false
       },
       "attached": {
-        "type": "StyleValue<boolean>",
+        "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
         "required": false
       },
       "basis": {
-        "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 98 more ... | ({ ...; } & { ...; })",
+        "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
         "description": "The CSS `flex-basis` property.",
         "required": false
       },
       "direction": {
-        "type": "FlexDirection | [FlexDirection | ({ _peerAccept?: FlexDirection | [FlexDirection | (... & { base?: FlexDirection | [...] | (... & ...) | undefined; ... 4 more ...; xl?: FlexDirection | ... 2 more ... | undefined; }), FlexDirection | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: FlexDirecti...",
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
         "description": "The CSS `flex-direction` property.",
         "required": false
       },
@@ -237,40 +237,40 @@
         "required": false
       },
       "fullRounded": {
-        "type": "StyleValue<boolean>",
+        "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
         "required": false
       },
       "grow": {
-        "type": "StyleValue<boolean>",
+        "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, the children will grow to fill the available space.",
         "required": false
       },
       "justify": {
-        "type": "JustifyContent | [JustifyContent | ({ _peerAccept?: JustifyContent | [JustifyContent | (... & { ...; }), JustifyContent | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: JustifyContent | ... 2 more ... | undefined; } & { ...; }), JustifyContent | ({ ...; } & { ...; })] | ({ ...; } & { ...; })",
+        "type": "\"center\" | \"normal\" | \"left\" | \"right\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" ...",
         "description": "The CSS `justify-content` property.",
         "required": false
       },
       "orientation": {
-        "type": "StyleValue<\"horizontal\" | \"vertical\">",
+        "type": "\"horizontal\" | \"vertical\"",
         "defaultValue": "\"horizontal\"",
         "description": "The orientation of the group.",
         "required": false
       },
       "shrink": {
-        "type": "FlexShrink | [FlexShrink | ({ _peerAccept?: FlexShrink | [FlexShrink | (... & { base?: FlexShrink | [FlexShrink | (... & ...), FlexShrink | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexShrink | ... 2 more ... | undefined; }), FlexShrink | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
         "description": "The CSS `flex-shrink` property.",
         "required": false
       },
       "stacking": {
-        "type": "StyleValue<\"first-on-top\" | \"last-on-top\">",
+        "type": "\"first-on-top\" | \"last-on-top\"",
         "description": "The stacking order of the group.",
         "required": false
       },
       "wrap": {
-        "type": "FlexWrap | [FlexWrap | ({ _peerAccept?: FlexWrap | [FlexWrap | (... & { base?: FlexWrap | [FlexWrap | (... & ...), FlexWrap | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexWrap | ... 2 more ... | undefined; }), FlexWrap | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: Fle...",
+        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
         "description": "The CSS `flex-wrap` property.",
         "required": false
       }
@@ -292,17 +292,17 @@
         "required": false
       },
       "colorScheme": {
-        "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { ...; }), \"2xl\" | ... 5 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl\" | .....",
+        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+        "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
         "description": "The variant of the component.",
         "required": false
       },
@@ -325,12 +325,12 @@
         "required": false
       },
       "endIcon": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The icon to display at the end side of the button.",
         "required": false
       },
       "fullRounded": {
-        "type": "StyleValue<boolean>",
+        "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
         "required": false
@@ -347,13 +347,13 @@
         "required": false
       },
       "loadingIcon": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "Loading.Scheme | ReactNode",
         "defaultValue": "\"oval\"",
         "description": "The icon to display when the button is loading.",
         "required": false
       },
       "loadingMessage": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The message to display when the button is loading.",
         "required": false
       },
@@ -369,12 +369,12 @@
         "required": false
       },
       "startIcon": {
-        "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+        "type": "ReactNode",
         "description": "The icon to display at the start side of the button.",
         "required": false
       },
       "type": {
-        "type": "\"button\" | \"submit\" | \"reset\"",
+        "type": "HTMLProps<\"button\">[\"type\"]",
         "defaultValue": "\"button\"",
         "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
         "required": false
@@ -398,38 +398,38 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | (... & { ...; }), \"2xl\" | ... 5 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl\" | .....",
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
       "description": "The variant of the component.",
       "required": false
     },
     "align": {
-      "type": "AlignItems | [AlignItems | ({ _peerAccept?: AlignItems | [AlignItems | (... & { base?: AlignItems | [AlignItems | (... & ...), AlignItems | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: AlignItems | ... 2 more ... | undefined; }), AlignItems | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+      "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
       "description": "The CSS `align-items` property.",
       "required": false
     },
     "attached": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the borderRadius of button that are direct children will be altered to look flushed together.",
       "required": false
     },
     "basis": {
-      "type": "number | \"1\" | (string & {}) | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"2xs\" | \"5xl\" | \"6xl\" | \"7xl\" | \"8xl\" | \"9xl\" | \"full\" | \"0.5\" | \"1.5\" | \"1/2\" | \"1/3\" | \"1/4\" | ... 98 more ... | ({ ...; } & { ...; })",
+      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
       "description": "The CSS `flex-basis` property.",
       "required": false
     },
     "direction": {
-      "type": "FlexDirection | [FlexDirection | ({ _peerAccept?: FlexDirection | [FlexDirection | (... & { base?: FlexDirection | [...] | (... & ...) | undefined; ... 4 more ...; xl?: FlexDirection | ... 2 more ... | undefined; }), FlexDirection | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: FlexDirecti...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
@@ -440,40 +440,40 @@
       "required": false
     },
     "fullRounded": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "grow": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the children will grow to fill the available space.",
       "required": false
     },
     "justify": {
-      "type": "JustifyContent | [JustifyContent | ({ _peerAccept?: JustifyContent | [JustifyContent | (... & { ...; }), JustifyContent | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: JustifyContent | ... 2 more ... | undefined; } & { ...; }), JustifyContent | ({ ...; } & { ...; })] | ({ ...; } & { ...; })",
+      "type": "\"center\" | \"normal\" | \"left\" | \"right\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" ...",
       "description": "The CSS `justify-content` property.",
       "required": false
     },
     "orientation": {
-      "type": "StyleValue<\"horizontal\" | \"vertical\">",
+      "type": "\"horizontal\" | \"vertical\"",
       "defaultValue": "\"horizontal\"",
       "description": "The orientation of the group.",
       "required": false
     },
     "shrink": {
-      "type": "FlexShrink | [FlexShrink | ({ _peerAccept?: FlexShrink | [FlexShrink | (... & { base?: FlexShrink | [FlexShrink | (... & ...), FlexShrink | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexShrink | ... 2 more ... | undefined; }), FlexShrink | (... & { ...; })] | { ...; } | undefined; ... 178 more ......",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
       "description": "The CSS `flex-shrink` property.",
       "required": false
     },
     "stacking": {
-      "type": "StyleValue<\"first-on-top\" | \"last-on-top\">",
+      "type": "\"first-on-top\" | \"last-on-top\"",
       "description": "The stacking order of the group.",
       "required": false
     },
     "wrap": {
-      "type": "FlexWrap | [FlexWrap | ({ _peerAccept?: FlexWrap | [FlexWrap | (... & { base?: FlexWrap | [FlexWrap | (... & ...), FlexWrap | (... & ...)] | (... & ...) | undefined; ... 4 more ...; xl?: FlexWrap | ... 2 more ... | undefined; }), FlexWrap | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: Fle...",
+      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }
@@ -495,17 +495,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "ColorScheme | [ColorScheme | ({ _peerAccept?: ColorScheme | [ColorScheme | (... & { base?: ColorScheme | [...] | (... & ...) | undefined; ... 4 more ...; xl?: ColorScheme | ... 2 more ... | undefined; }), ColorScheme | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: ColorScheme | ... 2 more ...",
+      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | ({ _peerAccept?: \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\" | [\"2xl\" | ... 6 more ... | (... & { ...; }), \"2xl\" | ... 6 more ... | (... & { ...; })] | { ...; } | undefined; ... 178 more ...; _selection?: \"2xl...",
+      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | ({ _peerAccept?: \"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" | [...] | { ...; } | undefined; ... 178 more ...; _selection?: \"ghost\" | ... 6 more ... | undefined; } & { ...; }), \"ghost\" | ... 4 more...",
+      "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
       "description": "The variant of the component.",
       "required": false
     },
@@ -528,13 +528,13 @@
       "required": false
     },
     "fullRounded": {
-      "type": "StyleValue<boolean>",
+      "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the button is full rounded. Else, it'll be slightly round.",
       "required": false
     },
     "icon": {
-      "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>",
+      "type": "ReactNode",
       "description": "The icon to be used in the button.",
       "required": false
     },
@@ -545,7 +545,7 @@
       "required": false
     },
     "type": {
-      "type": "\"button\" | \"submit\" | \"reset\"",
+      "type": "\"button\" | \"reset\" | \"submit\"",
       "defaultValue": "\"button\"",
       "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
       "required": false

@@ -14,8 +14,10 @@ import { Callout } from "./callout"
 import { Card, CardGroup } from "./card"
 import { CodeBlock } from "./code-block"
 import { CodeGroup } from "./code-group"
+import { ComponentList } from "./component-list"
 import { Contributors } from "./contributors"
 import { H1, H2, H3, H4, H5, H6 } from "./heading"
+import { HookList } from "./hook-list"
 import { Link } from "./link"
 import { PropsTable } from "./props-table"
 import { Sponsors } from "./sponsors"
@@ -43,6 +45,7 @@ const mdxComponents: MDXComponents = {
     />
   ),
   "code-group": CodeGroup,
+  ComponentList,
   Contributors,
   h1: H1,
   h2: H2,
@@ -50,6 +53,7 @@ const mdxComponents: MDXComponents = {
   h4: H4,
   h5: H5,
   h6: H6,
+  HookList,
   li: (props) => (
     <List.Item
       css={{ "& p": { m: 0 } }}

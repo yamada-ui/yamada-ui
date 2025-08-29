@@ -106,7 +106,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
   )
 
   return (
-    <LoadingContext.Provider value={value}>
+    <LoadingContext value={value}>
       {children}
 
       <Controller ref={screen} {...screenConfig} component={Screen} />
@@ -119,7 +119,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
         blockScrollOnMount={backgroundConfig?.blockScrollOnMount ?? false}
         component={Background}
       />
-    </LoadingContext.Provider>
+    </LoadingContext>
   )
 }
 

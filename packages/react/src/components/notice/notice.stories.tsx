@@ -451,25 +451,49 @@ export const WithCloseStrategy = () => {
         onClick={() =>
           notice({
             closable: true,
-            closeStrategy: "element",
-            description: "オッス！オラ悟空！",
-            title: "孫悟空",
+            closeStrategy: ["click", "drag"],
+            description: "Click or drag to close",
+            title: "Click & Drag",
           })
         }
       >
-        Show Notice
+        Click & Drag
       </Button>
       <Button
         onClick={() =>
           notice({
             closable: true,
             closeStrategy: "button",
-            description: "オッス！オラ悟空！",
-            title: "孫悟空",
+            description: "Only button close",
+            title: "Button Only",
           })
         }
       >
-        Show Notice (button)
+        Button Only
+      </Button>
+      <Button
+        onClick={() =>
+          notice({
+            closable: true,
+            closeStrategy: ["click", "button"],
+            description: "Click or button to close",
+            title: "Click & Button",
+          })
+        }
+      >
+        Click & Button
+      </Button>
+      <Button
+        onClick={() =>
+          notice({
+            closable: true,
+            closeStrategy: "click",
+            description: "Only click to close",
+            title: "Click Only",
+          })
+        }
+      >
+        Click Only
       </Button>
     </Center>
   )

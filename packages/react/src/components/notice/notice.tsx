@@ -3,20 +3,24 @@
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { CloseButtonProps } from "../close-button"
 import type { NoticeStyle } from "./notice.style"
-import type { UseNoticeOptions } from "./use-notice"
+import type { CloseAction, UseNoticeOptions } from "./use-notice"
 import { toast } from "sonner"
 import { createSlotComponent } from "../../core"
-import { handlerAll } from "../../utils"
+import { handlerAll, noop } from "../../utils"
 import { Alert } from "../alert"
 import { CloseButton } from "../close-button"
 import { noticeStyle } from "./notice.style"
-
 interface ComponentContext {}
 
 export interface NoticeProps
   extends UseNoticeOptions,
     HTMLStyledProps,
-    ThemeProps<NoticeStyle> {}
+    ThemeProps<NoticeStyle> {
+  /**
+   * Close actions for the notice.
+   */
+  closeActions?: CloseAction[]
+}
 
 const {
   ComponentContext,
@@ -40,6 +44,7 @@ export const Notice = withProvider<"div", NoticeProps>(
   ({
     id,
     closable,
+    closeActions = ["click", "drag"],
     description,
     icon,
     loadingScheme,
@@ -52,11 +57,18 @@ export const Notice = withProvider<"div", NoticeProps>(
     iconProps,
     loadingProps,
     titleProps,
+    onClick,
     ...rest
   }) => {
     return (
       <ComponentContext>
-        <Alert.Root {...rest}>
+        <Alert.Root
+          {...rest}
+          onClick={handlerAll(
+            onClick,
+            closeActions.includes("click") ? () => toast.dismiss(id) : noop,
+          )}
+        >
           {withIcon ? (
             status === "loading" || loadingScheme ? (
               <Alert.Loading
@@ -79,7 +91,7 @@ export const Notice = withProvider<"div", NoticeProps>(
               ) : null}
             </NoticeContent>
           ) : null}
-          {closable ? (
+          {closable && closeActions.includes("button") ? (
             <NoticeCloseButton
               {...closeButtonProps}
               onClick={handlerAll(closeButtonProps?.onClick, () =>

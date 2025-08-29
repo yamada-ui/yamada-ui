@@ -7,8 +7,11 @@ import type { StatusScheme } from "../status"
 import { useMemo } from "react"
 import { toast } from "sonner"
 import { useSystem } from "../../core"
+import { isArray } from "../../utils"
 import { Notice } from "./notice"
 import { useNoticeContext } from "./notice-provider"
+
+type CloseAction = "button" | "click" | "drag"
 
 export interface UseNoticeOptions
   extends NoticeConfig,
@@ -20,8 +23,9 @@ export interface UseNoticeOptions
   id?: number | string
   /**
    * Close strategy for the notice.
+   * Can be a single action or an array of actions.
    */
-  closeStrategy?: "both" | "button" | "element"
+  closeStrategy?: CloseAction | CloseAction[]
   /**
    * Custom component to render.
    */
@@ -123,8 +127,12 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
 
       const { closable, closeStrategy } = noticeProps
 
+      const closeActions = isArray(closeStrategy)
+        ? closeStrategy
+        : [closeStrategy]
+
       const finalToastOptions = {
-        dismissible: closeStrategy !== "button" && closable,
+        dismissible: closeActions.includes("drag") && closable,
         duration,
         toasterId: placement,
       }
@@ -137,7 +145,7 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
       }
 
       return toast.custom(
-        (id) => <Notice {...noticeProps} id={id} />,
+        (id) => <Notice {...noticeProps} id={id} closeActions={closeActions} />,
         finalToastOptions,
       )
     }

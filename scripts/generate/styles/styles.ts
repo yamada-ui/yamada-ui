@@ -1,317 +1,141 @@
-import type { ThemeToken, Transforms } from "@yamada-ui/react"
-import type {
-  CSSCompatData,
-  CSSCompatStatement,
-  CSSProperties,
-  FeatureData,
-  Properties,
-  StyledProperties,
-} from "."
-import type { StyleConfig } from "./styled-props"
+import type { ThemeToken } from "@yamada-ui/react"
+import type { Baseline, Config, Docs } from "."
 import type { TransformOptions } from "./transform-props"
-import { conditionSelectors } from "@yamada-ui/react"
-import { isUndefined, toArray } from "@yamada-ui/utils"
-import { checkProps } from "./check"
-import { generateConfig } from "./config"
-import { overrideTypes } from "./override-types"
-import { shorthandProps } from "./shorthand-props"
-import { additionalProps, atRuleProps, styledProps } from "./styled-props"
-import { tokenMap, tokenPropertyMap } from "./tokens"
-import { transformMap } from "./transform-props"
+import { isString } from "@yamada-ui/react"
+import { tokenPropertyMap } from "./tokens"
 
-function hasTransform(
-  targetTransform: Transforms,
-  transforms: TransformOptions[] | undefined,
-) {
-  return !!transforms?.some(({ transform }) => transform === targetTransform)
-}
-
-function addType(result: string, value: string) {
-  return result.endsWith(">")
-    ? result.replace(/>$/, `${value}>`)
-    : result + value
-}
-
-function generateType({
-  type,
-  prop,
-  token,
-  transforms,
-  variableLength = false,
-}: {
-  type?: string | string[]
-  prop?: Properties
-  token?: ThemeToken
-  transforms?: TransformOptions[]
-  variableLength?: boolean
-}) {
-  const overrideType = prop ? overrideTypes[prop] : undefined
-
-  let result = !variableLength || token ? "StyleValueWithCondition<>" : ""
-
-  if (overrideType) {
-    result = addType(result, overrideType)
-  } else {
-    const isPx = hasTransform("px", transforms)
-    const isFraction = hasTransform("fraction", transforms)
-    const isNumber = isPx || isFraction
-
-    if (typeof type === "string") {
-      result = addType(result, type)
-    } else {
-      if (type?.length) {
-        result = addType(result, type.join(" | "))
-      } else {
-        result = addType(result, "AnyString")
-      }
-    }
-
-    if (isNumber) result = addType(result, ` | number`)
-  }
-
-  if (token) result = addType(result, `, "${token}"`)
-
-  return result
-}
-
-function getBaseline(feature?: FeatureData) {
-  if (!feature) return
-
+function generateBaseline({
+  newly_available_date,
+  status,
+  widely_available_date,
+}: Baseline) {
   const rows: string[] = []
 
-  switch (feature.status.baseline) {
-    case "high":
-      rows.push("@baseline `Widely available`")
-      break
+  if (status) rows.push(`@baseline \`${status}\``)
 
-    case "low":
-      rows.push("@baseline `Newly available`")
-      break
+  if (widely_available_date)
+    rows.push(`@widely_available_date ${widely_available_date}`)
 
-    default:
-      if (!feature.discouraged) rows.push("@baseline `Limited available`")
-  }
-
-  if (feature.status.baseline_high_date)
-    rows.push(`@widely_available_date ${feature.status.baseline_high_date}`)
-
-  if (feature.status.baseline_low_date)
-    rows.push(`@newly_available_date ${feature.status.baseline_low_date}`)
+  if (newly_available_date)
+    rows.push(`@newly_available_date ${newly_available_date}`)
 
   return rows
 }
 
-function generateDoc(...data: CSSCompatStatement[]) {
-  return function (rows: string[] = []) {
-    const deprecated = data.some(({ status }) => status?.deprecated)
-    const experimental = data.some(({ status }) => status?.experimental)
+function generateDoc(docs?: Docs | string) {
+  if (!docs) return
 
-    data.forEach(({ name, feature, mdn_url, spec_url, ...data }, index) => {
-      if (!!index) {
-        rows.push("", "------------------------------------", "")
-      }
-      let description = feature?.description_html ?? data.description
+  if (isString(docs)) {
+    return `/**\n${docs
+      .split("\n")
+      .map((row) => `* ${row}`)
+      .join("\n")}\n*/`
+  } else {
+    const rows: string[] = []
 
-      if (description) {
-        // description = description.replace(/(@\w+)/g, "`$1`")
-      } else {
-        description = `The CSS \`${name}\` property.`
-      }
+    Object.entries(docs).forEach(
+      (
+        [name, { baseline, deprecated, description, experimental, see }],
+        index,
+      ) => {
+        if (!!index) rows.push("", "------------------------------------", "")
 
-      const url = mdn_url ?? toArray(spec_url)[0]
-      const baseline = getBaseline(feature)
+        rows.push(`### ${name}`, "", description)
 
-      rows.push(`### ${name}`, "", description)
+        if (baseline) rows.push("", ...generateBaseline(baseline))
 
-      if (baseline) rows.push("", ...baseline)
+        if (see) rows.push("", `@see ${see}`)
 
-      if (url) rows.push("", `@see ${url}`)
-    })
-
-    if (experimental && deprecated) {
-      rows.push("", `@experimental`, `@deprecated`)
-    } else if (experimental) {
-      rows.push("", `@experimental`)
-    } else if (deprecated) {
-      rows.push("", `@deprecated`)
-    }
+        if (experimental && deprecated) {
+          rows.push("", `@experimental`, `@deprecated`)
+        } else if (experimental) {
+          rows.push("", `@experimental`)
+        } else if (deprecated) {
+          rows.push("", `@deprecated`)
+        }
+      },
+    )
 
     return `/**\n${rows.map((row) => `* ${row}`).join("\n")}\n*/`
   }
 }
 
+function generateTransform(...transforms: TransformOptions[]) {
+  let transform = transforms
+    .map(({ args, transform }) => {
+      let fn = `transforms.${transform}`
+
+      if (args) fn += `(${args.map((arg) => `"${arg}"`).join(", ")})`
+
+      return fn
+    })
+    .join(", ")
+
+  transform = transforms.length > 1 ? `pipe(${transform})` : transform
+
+  return `transform: ${transform}`
+}
+
+function generateConfig({ as, css, properties, token, transforms }: Config) {
+  if (as) return true
+
+  if (!properties && !token && !css && !transforms) return true
+
+  const result: string[] = []
+
+  if (properties)
+    result.push(`properties: [${properties.map((p) => `"${p}"`).join(", ")}]`)
+  if (token) result.push(`token: "${token}"`)
+  if (css) result.push(`static: ${JSON.stringify(css)}`)
+  if (transforms) result.push(generateTransform(...transforms))
+
+  return `{ ${result.join(", ")} }`
+}
+
+interface Data {
+  additional: { [key: string]: Config }
+  atRule: { [key: string]: Config }
+  pseudo: { [key: string]: Config }
+  standard: { [key: string]: Config }
+  styled: { [key: string]: Config }
+}
+
 export function generateStyles(
-  cssCompatData: CSSCompatData,
-  atRuleCompatData: CSSCompatData,
+  { additional, atRule, pseudo, standard, styled }: Data,
+  tokenProps: { [key in ThemeToken]?: string[] },
+  variableLengthProps: string[],
 ) {
-  const standardStyles: string[] = []
   const shorthandStyles: string[] = []
-  const pseudoStyles: string[] = []
-  const styledStyles: string[] = []
-  const atRuleStyles: string[] = []
   const styleProps: string[] = []
-  const variableLengthProps: string[] = []
-  const tokenProps: { [key in ThemeToken]?: string[] } = {}
-  const duplicatedProperties: { name: string; url?: string }[] = []
 
-  checkProps(cssCompatData)
+  function generateStyles([prop, config]: [string, Config]) {
+    const doc = generateDoc(config.docs)
 
-  conditionSelectors.forEach((selector) => {
-    const transforms = transformMap[selector]
+    if (doc) styleProps.push(doc)
 
-    if (!transforms) return
+    styleProps.push(`${prop}?: ${config.type}`)
 
-    const config = generateConfig({ properties: [selector], transforms })()
-
-    pseudoStyles.push(`"${selector}": ${config}`)
-  })
-
-  const excludedCSSCompatData = Object.fromEntries(
-    Object.entries(cssCompatData).filter(([name, data]) => {
-      const isExists = [
-        ...Object.keys(additionalProps),
-        ...Object.keys(styledProps),
-      ].includes(name)
-
-      if (isExists) {
-        const url = data.mdn_url ?? toArray(data.spec_url)[0]
-
-        duplicatedProperties.push({ name, url })
-
-        return false
-      } else {
-        return true
-      }
-    }),
-  )
-
-  Object.entries(excludedCSSCompatData).forEach(([_prop, data]) => {
-    const prop = _prop as CSSProperties | StyledProperties
-    const type = data.type
-    const token = tokenMap[prop]
-    const shorthands = shorthandProps[prop]
-    const transforms = transformMap[prop]
-    const config = generateConfig({ properties: [prop], token, transforms })()
-    const doc = generateDoc(data)()
-    const computedType = generateType({ type, prop, token, transforms })
-
-    standardStyles.push(`${prop}: ${config}`)
-    styleProps.push(...[doc, `${prop}?: ${computedType}`])
-
-    if (token) {
-      tokenProps[token] ??= []
-
-      tokenProps[token].push(prop)
-    }
-
-    if (shorthands) {
-      const shorthandStyle =
-        config === true
-          ? `{ properties: ["${prop}"] }`
-          : `standardStyles.${prop}`
-
-      shorthands.forEach((shorthandProp) => {
-        if (token) tokenProps[token]?.push(shorthandProp)
-
-        shorthandStyles.push(`${shorthandProp}: ${shorthandStyle}`)
-        styleProps.push(doc, `${shorthandProp}?: ${computedType}`)
-      })
-    }
-  })
-
-  const getRelatedCompatData = (
-    properties: string | string[] | undefined,
-    prop: string,
-    isAtRule = false,
-  ) => {
-    if (isAtRule) {
-      const computedProp = prop.replace(/^_/, "")
-      const computedName = toArray(properties)[0]
-        ?.replace(/^@/, "")
-        .split(" ")[0]
-
-      return Object.entries(atRuleCompatData).filter(
-        ([relatedProp, { name }]) =>
-          relatedProp === computedProp || name === computedName,
+    config.shorthands?.forEach((shorthandProp) => {
+      shorthandStyles.push(
+        `${shorthandProp}: ${config.as ? `{ properties: ["${prop}"] }` : `standardStyles.${prop}`}`,
       )
-    } else {
-      return Object.entries(cssCompatData).filter(
-        ([relatedProp]) =>
-          (typeof properties === "string"
-            ? relatedProp === properties
-            : properties?.includes(relatedProp)) || relatedProp === prop,
-      )
-    }
-  }
 
-  const addStyles = (
-    [prop, { type, description, properties, static: css, variableLength }]: [
-      string,
-      StyleConfig,
-    ],
-    targetStyles: string[],
-    isAtRule = false,
-  ) => {
-    if (variableLength) variableLengthProps.push(prop)
+      if (doc) styleProps.push(doc)
 
-    const relatedCompatData = getRelatedCompatData(properties, prop, isAtRule)
-    const relatedData = relatedCompatData.map(([_, data]) => data)
-    const types = relatedCompatData
-      .map(([_, { type }]) => type)
-      .filter((type) => !isUndefined(type))
-    const token = tokenMap[prop as Properties]
-    const shorthands = shorthandProps[prop as Properties]
-    const transforms = transformMap[prop as Properties]
-
-    type = generateType({
-      type: type ?? types,
-      token,
-      transforms,
-      variableLength,
+      styleProps.push(`${shorthandProp}?: ${config.type}`)
     })
 
-    const config = generateConfig({
-      css,
-      properties,
-      token,
-      transforms,
-    })(true)
-
-    const doc = generateDoc(...relatedData)(description)
-
-    targetStyles.push(`${prop}: ${config}`)
-    styleProps.push(...[doc, `${prop}?: ${type}`])
-
-    if (token) {
-      tokenProps[token] ??= []
-
-      tokenProps[token].push(prop)
-    }
-
-    if (shorthands) {
-      const shorthandStyle =
-        config === true
-          ? `{ properties: ["${prop}"] }`
-          : `standardStyles.${prop}`
-
-      shorthands.forEach((shorthandProp) => {
-        if (token) tokenProps[token]?.push(shorthandProp)
-
-        shorthandStyles.push(`${shorthandProp}: ${shorthandStyle}`)
-        styleProps.push(doc, `${shorthandProp}?: ${type}`)
-      })
-    }
+    return `${prop}: ${generateConfig(config)}`
   }
 
-  Object.entries<StyleConfig>(additionalProps).forEach((entry) =>
-    addStyles(entry, standardStyles),
+  const pseudoStyles = Object.entries(pseudo).map(
+    ([prop, config]) => `"${prop}": ${generateConfig(config)}`,
   )
-  Object.entries<StyleConfig>(styledProps).forEach((entry) =>
-    addStyles(entry, styledStyles),
+  const standardStyles = Object.entries({ ...standard, ...additional }).map(
+    generateStyles,
   )
-  Object.entries<StyleConfig>(atRuleProps).forEach((entry) =>
-    addStyles(entry, atRuleStyles, true),
-  )
+  const styledStyles = Object.entries(styled).map(generateStyles)
+  const atRuleStyles = Object.entries(atRule).map(generateStyles)
 
   const variableLengthProperties = variableLengthProps.map(
     (property) => `"${property}"`,
@@ -330,63 +154,67 @@ export function generateStyles(
     },
   )
 
-  const data = `
-    import type * as CSS from "csstype"
-    import type { AnyString } from "../../utils"
-    import type { ColorScheme, ThemeTokens } from "../system"
-    import type { StyleConfigs } from "./config"
-    import type { CSSObject, StyleValueWithCondition } from "./index.types"
-    import { transforms } from "./config"
-    import { pipe } from "./utils"
-
-    export type StandardStyleProperty = keyof typeof standardStyles
-
-    export const standardStyles = {
-      ${standardStyles.join(",\n")}
-    } as const satisfies StyleConfigs
-
-    export type ShorthandStyleProperty = keyof typeof shorthandStyles
-
-    export const shorthandStyles = {
-      ${shorthandStyles.join(",\n")}
-    } as const satisfies StyleConfigs
-
-    export type PseudoStyleProperty = keyof typeof pseudoStyles
-
-    export const pseudoStyles = {
-      ${pseudoStyles.join(",\n")}
-    } as const satisfies StyleConfigs
-
-    export type StyledStyleProperty = keyof typeof styledStyles
-
-    export const styledStyles = {
-      ${styledStyles.join(",\n")}
-    } as const satisfies StyleConfigs
-
-    export type AtRuleStyleProperty = keyof typeof atRuleStyles
-
-    export const atRuleStyles = {
-      ${atRuleStyles.join(",\n")}
-    } as const satisfies StyleConfigs
-
-    export type Styles = typeof styles
-
-    export const styles = { ...standardStyles, ...shorthandStyles, ...pseudoStyles, ...styledStyles, ...atRuleStyles } as const satisfies StyleConfigs
-
-    export type StyleProperty = keyof typeof styles
-
-    export const styleProperties = Object.keys(styles) as StyleProperty[]
-
-    export type VariableLengthProperty = typeof variableLengthProperties[number]
-
-    export const variableLengthProperties = [${variableLengthProperties.join(", ")}] as const
-
-    ${tokenProperties.join("\n\n")}
-
-    export interface StyleProps {
-      ${styleProps.join("\n")}
-    }
-  `
-
-  return { data, duplicatedProperties }
+  return [
+    `import type * as CSS from "csstype"`,
+    `import type { AnyString } from "../../utils"`,
+    `import type { ColorScheme, ThemeTokens } from "../system"`,
+    `import type { StyleConfigs } from "./config"`,
+    `import type { CSSObject, StyleValueWithCondition } from "./index.types"`,
+    `import { transforms } from "./config"`,
+    `import { pipe } from "./utils"`,
+    ``,
+    `export type StandardStyleProperty = keyof typeof standardStyles`,
+    ``,
+    `export const standardStyles = {`,
+    standardStyles.join(",\n"),
+    `} as const satisfies StyleConfigs`,
+    ``,
+    `export type ShorthandStyleProperty = keyof typeof shorthandStyles`,
+    ``,
+    `export const shorthandStyles = {`,
+    shorthandStyles.join(",\n"),
+    `} as const satisfies StyleConfigs`,
+    ``,
+    `export type PseudoStyleProperty = keyof typeof pseudoStyles`,
+    ``,
+    `export const pseudoStyles = {`,
+    pseudoStyles.join(",\n"),
+    `} as const satisfies StyleConfigs`,
+    ``,
+    `export type StyledStyleProperty = keyof typeof styledStyles`,
+    ``,
+    `export const styledStyles = {`,
+    styledStyles.join(",\n"),
+    `} as const satisfies StyleConfigs`,
+    ``,
+    `export type AtRuleStyleProperty = keyof typeof atRuleStyles`,
+    ``,
+    `export const atRuleStyles = {`,
+    atRuleStyles.join(",\n"),
+    `} as const satisfies StyleConfigs`,
+    ``,
+    `export type Styles = typeof styles`,
+    ``,
+    `export const styles = {`,
+    `  ...standardStyles,`,
+    `  ...shorthandStyles,`,
+    `  ...pseudoStyles,`,
+    `  ...styledStyles,`,
+    `  ...atRuleStyles,`,
+    `} as const satisfies StyleConfigs`,
+    ``,
+    `export type StyleProperty = keyof typeof styles`,
+    ``,
+    `export const styleProperties = Object.keys(styles) as StyleProperty[]`,
+    ``,
+    `export type VariableLengthProperty = typeof variableLengthProperties[number]`,
+    ``,
+    `export const variableLengthProperties = [${variableLengthProperties.join(", ")}] as const`,
+    ``,
+    tokenProperties.join("\n\n"),
+    ``,
+    `export interface StyleProps {`,
+    styleProps.join("\n"),
+    `}`,
+  ].join("\n")
 }

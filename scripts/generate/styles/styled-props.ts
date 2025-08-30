@@ -208,16 +208,7 @@ export const additionalProps = {
 export const styledProps = {
   apply: {
     type: `AnyString, "apply"`,
-    description: [
-      "Apply other styles defined in `theme.styles`.",
-      "",
-      "@example",
-      "```jsx",
-      "<Box apply='mdx.h1'>Box</Box>",
-      "```",
-      "",
-      "This will apply styles defined in `theme.styles.mdx.h1`",
-    ],
+    description: ["Apply other styles defined in `theme.styles`."],
   },
   layerStyle: {
     type: `AnyString, "layerStyles"`,
@@ -250,10 +241,6 @@ export const styledProps = {
 } as const satisfies { [key: string]: StyleConfig }
 
 export const atRuleProps = {
-  keyframes: {
-    type: "AnyString | { [key: string]: CSSObject }",
-    properties: ["animationName"],
-  },
   _container: {
     type: `{ ${[
       "name?: AnyString",
@@ -284,6 +271,10 @@ export const atRuleProps = {
       "[key: string]: any",
     ].join(";")}}[]`,
     variableLength: true,
+  },
+  _keyframes: {
+    type: "AnyString | { [key: string]: CSSObject }",
+    properties: ["animationName"],
   },
   _landscape: {
     type: "CSSObject",

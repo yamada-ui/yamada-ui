@@ -10,19 +10,25 @@ import {
 import { Suspense, useMemo } from "react"
 import * as runtime from "react/jsx-runtime"
 import { langConditions } from "@/utils/i18n"
+import { AtRulePropsTable } from "./at-rule-props-table"
 import { Callout } from "./callout"
 import { Card, CardGroup } from "./card"
 import { CodeBlock } from "./code-block"
 import { CodeGroup } from "./code-group"
+import { ComponentList } from "./component-list"
+import { ConditionPropsTable } from "./condition-props-table"
 import { Contributors } from "./contributors"
 import { H1, H2, H3, H4, H5, H6 } from "./heading"
+import { HookList } from "./hook-list"
 import { Link } from "./link"
 import { PropsTable } from "./props-table"
 import { Sponsors } from "./sponsors"
 import { Steps } from "./steps"
+import { StylePropsTable } from "./style-props-table"
 
 const mdxComponents: MDXComponents = {
   a: Link,
+  AtRulePropsTable,
   blockquote: (props) => (
     <Blockquote.Root css={{ "& p": { m: "0" } }} my="md" {...props} />
   ),
@@ -43,6 +49,8 @@ const mdxComponents: MDXComponents = {
     />
   ),
   "code-group": CodeGroup,
+  ComponentList,
+  ConditionPropsTable,
   Contributors,
   h1: H1,
   h2: H2,
@@ -50,6 +58,7 @@ const mdxComponents: MDXComponents = {
   h4: H4,
   h5: H5,
   h6: H6,
+  HookList,
   li: (props) => (
     <List.Item
       css={{ "& p": { m: 0 } }}
@@ -71,6 +80,7 @@ const mdxComponents: MDXComponents = {
   strong: (props) => (
     <Text as="strong" color="fg" fontWeight="semibold" {...props} />
   ),
+  StylePropsTable,
   table: (props) => (
     <Box my="lg">
       <NativeTable.Root

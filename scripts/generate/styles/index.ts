@@ -1,7 +1,11 @@
+import type { CSSObject } from "@emotion/react"
 import type { CompatData, CompatStatement } from "@mdn/browser-compat-data"
+import type { AnyString, ThemeToken, Transforms } from "@yamada-ui/react"
 import type * as CSS from "csstype"
-import type { additionalProps, atRuleProps, styledProps } from "./styled-props"
+import type { StyleConfig } from "./styled-props"
+import type { TransformOptions } from "./transform-props"
 import bcd from "@mdn/browser-compat-data"
+import { conditionSelectors } from "@yamada-ui/react"
 import {
   getMemoizedObject as get,
   isUndefined,
@@ -9,9 +13,11 @@ import {
   toCamelCase,
 } from "@yamada-ui/utils"
 import { writeFileWithFormat } from "@yamada-ui/workspace/prettier"
+import { Command } from "commander"
 import { execa } from "execa"
 import { glob } from "glob"
 import ora from "ora"
+import path from "path"
 import c from "picocolors"
 import {
   createProgram,
@@ -19,10 +25,30 @@ import {
   isTypeAliasDeclaration,
 } from "typescript"
 import { features } from "web-features"
+import { checkProps } from "./check"
 import { excludeProps } from "./exclude-props"
+import { overrideTypes } from "./override-types"
+import { shorthandProps } from "./shorthand-props"
+import { additionalProps, atRuleProps, styledProps } from "./styled-props"
 import { generateStyles } from "./styles"
+import { tokenMap } from "./tokens"
+import { transformMap } from "./transform-props"
 
-export const OUT_PATH = "packages/react/src/core/css/styles.ts"
+export const STYLES_PATH = path.resolve(
+  process.cwd(),
+  "packages",
+  "react",
+  "src",
+  "core",
+  "css",
+  "styles.ts",
+)
+export const STYLES_PUBLISH_PATH = path.resolve(
+  process.cwd(),
+  "www",
+  "data",
+  "styles.json",
+)
 
 export type Properties = CSSProperties | StyledProperties
 export type CSSProperties = keyof CSS.PropertiesFallback
@@ -185,78 +211,444 @@ async function getCSSTypes() {
   return data
 }
 
-async function main() {
-  const spinner = ora()
+function hasTransform(
+  targetTransform: Transforms,
+  transforms: TransformOptions[] | undefined,
+) {
+  return !!transforms?.some(({ transform }) => transform === targetTransform)
+}
 
-  const start = process.hrtime.bigint()
+function addType(result: string, value: string) {
+  return result.endsWith(">")
+    ? result.replace(/>$/, `${value}>`)
+    : result + value
+}
 
-  spinner.start(`Getting the "csstype" module`)
+function generateType({
+  type,
+  prop,
+  token,
+  transforms,
+  variableLength = false,
+}: {
+  type?: string | string[]
+  prop?: Properties
+  token?: ThemeToken
+  transforms?: TransformOptions[]
+  variableLength?: boolean
+}) {
+  const overrideType = prop ? overrideTypes[prop] : undefined
 
-  const cssTypes = await getCSSTypes()
+  let result = !variableLength || token ? "StyleValueWithCondition<>" : ""
 
-  spinner.succeed(`Got the "csstype" module`)
+  if (overrideType) {
+    result = addType(result, overrideType)
+  } else {
+    const isPx = hasTransform("px", transforms)
+    const isFraction = hasTransform("fraction", transforms)
+    const isNumber = isPx || isFraction
 
-  const {
-    atRuleCompatData,
-    cssCompatData,
-    deprecatedProperties,
-    excludedProperties,
-    notHasTypeProperties,
-  } = getCSSCompatData(cssTypes)
+    if (typeof type === "string") {
+      result = addType(result, type)
+    } else {
+      if (type?.length) {
+        result = addType(result, type.join(" | "))
+      } else {
+        result = addType(result, "AnyString")
+      }
+    }
 
-  if (deprecatedProperties.length) {
-    spinner.warn(`Deprecated properties`)
-
-    deprecatedProperties.forEach(({ name, url }) => {
-      console.log("  -", c.yellow(name), `(${url})`)
-    })
+    if (isNumber) result = addType(result, ` | number`)
   }
 
-  if (notHasTypeProperties.length) {
-    spinner.warn(`Properties that are not present in "csstype"`)
+  if (token) result = addType(result, `, "${token}"`)
 
-    notHasTypeProperties.forEach(({ name, url }) => {
-      console.log("  -", c.yellow(name), `(${url})`)
-    })
+  return result
+}
+
+export interface Doc {
+  deprecated: boolean
+  description: string
+  experimental: boolean
+  baseline?: Baseline
+  see?: string
+}
+
+export interface Docs {
+  [key: string]: Doc
+}
+
+export interface Config {
+  as?: boolean
+  type?: string
+  css?: CSSObject
+  docs?: Docs | string
+  properties?: (AnyString | CSSProperties | StyledProperties)[]
+  shorthands?: string[]
+  token?: ThemeToken
+  transforms?: TransformOptions[]
+}
+
+interface GetConfigOptions {
+  css?: CSSObject
+  properties?: (AnyString | CSSProperties | StyledProperties)[]
+  token?: ThemeToken
+  transforms?: TransformOptions[]
+}
+
+export function generateConfig({
+  css,
+  properties,
+  token,
+  transforms,
+}: GetConfigOptions) {
+  return function (skip?: boolean) {
+    if (!skip && !token && !transforms && !css) return { as: true }
+
+    const config: Config = {}
+
+    if (properties) config.properties = properties
+    if (token) config.token = token
+    if (css) config.css = css
+
+    if (transforms || token) {
+      transforms ??= []
+
+      if (token) transforms.unshift({ args: [token], transform: "token" })
+
+      config.transforms = transforms
+    }
+
+    return config
+  }
+}
+
+export interface Baseline {
+  newly_available_date?: string
+  status?: string
+  widely_available_date?: string
+}
+
+function getBaseline(feature?: FeatureData) {
+  if (!feature) return
+
+  let baseline: Baseline | undefined
+
+  switch (feature.status.baseline) {
+    case "high": {
+      baseline ??= {}
+      baseline.status = "Widely available"
+      break
+    }
+
+    case "low":
+      baseline ??= {}
+      baseline.status = "Newly available"
+      break
+
+    default:
+      if (!feature.discouraged) {
+        baseline ??= {}
+        baseline.status = "Limited available"
+      }
   }
 
-  if (excludedProperties.length) {
-    spinner.info(`Excluded properties`)
-
-    excludedProperties.forEach(({ name, url }) => {
-      console.log("  -", c.blue(name), `(${url})`)
-    })
+  if (feature.status.baseline_high_date) {
+    baseline ??= {}
+    baseline.widely_available_date = feature.status.baseline_high_date
   }
 
-  spinner.start(`Writing file "${OUT_PATH}"`)
+  if (feature.status.baseline_low_date) {
+    baseline ??= {}
+    baseline.newly_available_date = feature.status.baseline_low_date
+  }
 
-  const { data, duplicatedProperties } = generateStyles(
-    cssCompatData,
-    atRuleCompatData,
+  return baseline
+}
+
+function generateDocs(...data: CSSCompatStatement[]) {
+  return function (rows: string[] = []): Docs | string {
+    if (rows.length) return rows.join("\n")
+
+    const deprecated = data.some(({ status }) => status?.deprecated)
+    const experimental = data.some(({ status }) => status?.experimental)
+
+    return Object.fromEntries(
+      data.map(({ name, feature, mdn_url, spec_url, ...data }) => {
+        let description = feature?.description_html ?? data.description
+
+        if (!description) description = `The CSS \`${name}\` property.`
+
+        const see = mdn_url ?? toArray(spec_url)[0]
+        const baseline = getBaseline(feature)
+
+        return [name, { baseline, deprecated, description, experimental, see }]
+      }),
+    )
+  }
+}
+
+function generateData(
+  cssCompatData: CSSCompatData,
+  atRuleCompatData: CSSCompatData,
+) {
+  const tokenProps: { [key in ThemeToken]?: string[] } = {}
+  const variableLengthProps: string[] = []
+  const duplicatedProps: { name: string; url?: string }[] = []
+
+  checkProps(cssCompatData)
+
+  const pseudo = Object.fromEntries(
+    conditionSelectors
+      .map((selector) => {
+        const transforms = transformMap[selector]
+
+        if (!transforms) return
+
+        const config = generateConfig({ properties: [selector], transforms })()
+
+        return [selector, config]
+      })
+      .filter((data) => !isUndefined(data)),
+  ) as { [key: string]: Config }
+
+  const excludedCSSCompatData = Object.fromEntries(
+    Object.entries(cssCompatData).filter(([name, data]) => {
+      const isExists = [
+        ...Object.keys(additionalProps),
+        ...Object.keys(styledProps),
+      ].includes(name)
+
+      if (isExists) {
+        const url = data.mdn_url ?? toArray(data.spec_url)[0]
+
+        duplicatedProps.push({ name, url })
+
+        return false
+      } else {
+        return true
+      }
+    }),
   )
 
-  if (duplicatedProperties.length) {
-    spinner.info(`Duplicated properties that are present in "StyledProps"`)
+  const standard = Object.fromEntries(
+    Object.entries(excludedCSSCompatData).map(([name, data]) => {
+      const prop = name as CSSProperties | StyledProperties
+      const token = tokenMap[prop]
+      const shorthands = shorthandProps[prop]
+      const transforms = transformMap[prop]
+      const config = generateConfig({ properties: [prop], token, transforms })()
+      const docs = generateDocs(data)()
+      const type = generateType({
+        type: data.type,
+        prop,
+        token,
+        transforms,
+      })
 
-    duplicatedProperties.forEach(({ name, url }) => {
-      console.log("  -", c.blue(name), `(${url})`)
-    })
+      if (token) {
+        tokenProps[token] ??= []
+        tokenProps[token].push(prop)
+      }
+
+      if (shorthands) {
+        shorthands.forEach((shorthandProp) => {
+          if (token) tokenProps[token]?.push(shorthandProp)
+        })
+      }
+
+      return [name, { ...config, type, docs, shorthands }]
+    }),
+  ) as { [key: string]: Config }
+
+  function getRelatedCompatData(
+    properties: string | string[] | undefined,
+    prop: string,
+    isAtRule = false,
+  ) {
+    if (isAtRule) {
+      const computedProp = prop.replace(/^_/, "")
+      const computedName = toArray(properties)[0]
+        ?.replace(/^@/, "")
+        .split(" ")[0]
+
+      return Object.entries(atRuleCompatData).filter(
+        ([relatedProp, { name }]) =>
+          relatedProp === computedProp || name === computedName,
+      )
+    } else {
+      return Object.entries(cssCompatData).filter(
+        ([relatedProp]) =>
+          (typeof properties === "string"
+            ? relatedProp === properties
+            : properties?.includes(relatedProp)) || relatedProp === prop,
+      )
+    }
   }
 
-  await writeFileWithFormat(OUT_PATH, data)
+  function generateDate(isAtRule = false) {
+    return function ([
+      prop,
+      { type, description, properties, static: css, variableLength },
+    ]: [string, StyleConfig]) {
+      if (variableLength) variableLengthProps.push(prop)
 
-  spinner.succeed(`Wrote file "${OUT_PATH}"`)
+      const relatedCompatData = getRelatedCompatData(properties, prop, isAtRule)
+      const relatedData = relatedCompatData.map(([_, data]) => data)
+      const types = relatedCompatData
+        .map(([_, { type }]) => type)
+        .filter((type) => !isUndefined(type))
+      const token = tokenMap[prop as Properties]
+      const shorthands = shorthandProps[prop as Properties]
+      const transforms = transformMap[prop as Properties]
 
-  spinner.start(`Fixing eslint`)
+      type = generateType({
+        type: type ?? types,
+        token,
+        transforms,
+        variableLength,
+      })
 
-  await execa("eslint", [OUT_PATH, "--fix"])
+      const config = generateConfig({
+        css,
+        properties,
+        token,
+        transforms,
+      })(true)
+      const docs = generateDocs(...relatedData)(description)
 
-  spinner.succeed(`Fixed eslint`)
+      if (token) {
+        tokenProps[token] ??= []
+        tokenProps[token].push(prop)
+      }
 
-  const end = process.hrtime.bigint()
-  const duration = (Number(end - start) / 1e9).toFixed(2)
+      if (shorthands) {
+        shorthands.forEach((shorthandProp) => {
+          if (token) tokenProps[token]?.push(shorthandProp)
+        })
+      }
 
-  console.log("\n", c.green(`Done in ${duration}s`))
+      return [prop, { ...config, type, docs, shorthands }]
+    }
+  }
+
+  const additional = Object.fromEntries(
+    Object.entries<StyleConfig>(additionalProps).map(generateDate()),
+  ) as { [key: string]: Config }
+  const styled = Object.fromEntries(
+    Object.entries<StyleConfig>(styledProps).map(generateDate()),
+  ) as { [key: string]: Config }
+  const atRule = Object.fromEntries(
+    Object.entries<StyleConfig>(atRuleProps).map(generateDate(true)),
+  ) as { [key: string]: Config }
+
+  return {
+    data: { additional, atRule, pseudo, standard, styled },
+    duplicatedProps,
+    tokenProps,
+    variableLengthProps,
+  }
+}
+
+function main() {
+  const program = new Command()
+  const spinner = ora()
+
+  program
+    .option("-p, --publish", "publish the styles")
+    .action(async ({ publish = false }) => {
+      const start = process.hrtime.bigint()
+
+      spinner.start(`Getting the "csstype" module`)
+
+      const cssTypes = await getCSSTypes()
+
+      spinner.succeed(`Got the "csstype" module`)
+
+      const {
+        atRuleCompatData,
+        cssCompatData,
+        deprecatedProperties,
+        excludedProperties,
+        notHasTypeProperties,
+      } = getCSSCompatData(cssTypes)
+
+      if (deprecatedProperties.length) {
+        spinner.warn(`Deprecated properties`)
+
+        deprecatedProperties.forEach(({ name, url }) => {
+          console.log("  -", c.yellow(name), `(${url})`)
+        })
+      }
+
+      if (notHasTypeProperties.length) {
+        spinner.warn(`Properties that are not present in "csstype"`)
+
+        notHasTypeProperties.forEach(({ name, url }) => {
+          console.log("  -", c.yellow(name), `(${url})`)
+        })
+      }
+
+      if (excludedProperties.length) {
+        spinner.info(`Excluded properties`)
+
+        excludedProperties.forEach(({ name, url }) => {
+          console.log("  -", c.blue(name), `(${url})`)
+        })
+      }
+
+      spinner.start(`Writing file`)
+
+      const { data, duplicatedProps, tokenProps, variableLengthProps } =
+        generateData(cssCompatData, atRuleCompatData)
+      const content = generateStyles(data, tokenProps, variableLengthProps)
+
+      if (duplicatedProps.length) {
+        spinner.info(`Duplicated props that are present in "StyledProps"`)
+
+        duplicatedProps.forEach(({ name, url }) => {
+          console.log("  -", c.blue(name), `(${url})`)
+        })
+      }
+
+      if (!publish) {
+        await writeFileWithFormat(STYLES_PATH, content)
+      } else {
+        const omittedData = Object.fromEntries(
+          Object.entries(data).map(([key, value]) => {
+            const data = Object.fromEntries(
+              Object.entries(value).map(
+                ([key, { transforms: _transforms, ...config }]) => [
+                  key,
+                  config,
+                ],
+              ),
+            )
+
+            return [key, data]
+          }),
+        )
+
+        await writeFileWithFormat(STYLES_PUBLISH_PATH, omittedData, {
+          parser: "json",
+        })
+      }
+
+      spinner.succeed(`Wrote file`)
+
+      spinner.start(`Fixing eslint`)
+
+      if (!publish) await execa("eslint", [STYLES_PATH, "--fix"])
+
+      spinner.succeed(`Fixed eslint`)
+
+      const end = process.hrtime.bigint()
+      const duration = (Number(end - start) / 1e9).toFixed(2)
+
+      console.log("\n", c.green(`Done in ${duration}s`))
+    })
+
+  program.parse()
 }
 
 main()

@@ -603,7 +603,7 @@ export const ContextMenu: Story = () => {
           borderWidth="1px"
           h="xs"
           p="md"
-          rounded="md"
+          rounded="l2"
           w="full"
         >
           <Text>Right click here</Text>

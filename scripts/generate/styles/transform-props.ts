@@ -25,7 +25,7 @@ export const transformProps: TransformProps = {
 
   animation: tokens.animations,
 
-  keyframes: ["keyframes"],
+  keyframes: ["_keyframes"],
 
   bgClip: ["backgroundClip"],
 

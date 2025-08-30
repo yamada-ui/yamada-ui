@@ -427,3 +427,22 @@ export const WithFiltering = () => {
     </VStack>
   )
 }
+
+export const ShowIndentGuide = () => {
+  return (
+    <VStack gap="4">
+      <Tree.Root
+        defaultExpanded={["1", "2"]}
+        nodes={sampleNodes}
+        showIndentGuide
+      >
+        <Tree.Tree>
+          <Tree.Label>Tree with Indent Guide</Tree.Label>
+          {sampleNodes.map((node, index) => (
+            <Tree.Node key={node.id || index} node={node} />
+          ))}
+        </Tree.Tree>
+      </Tree.Root>
+    </VStack>
+  )
+}

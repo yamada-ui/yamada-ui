@@ -9,7 +9,8 @@ export const treeStyle = defineComponentSlotStyle({
       mr: "0.5rem",
     },
     branchContent: {
-      ml: "1.5rem",
+      "--indent-size": "1.5rem",
+      ml: "{indent-size}",
       pl: "0.25rem",
     },
     branchControl: {
@@ -127,6 +128,36 @@ export const treeStyle = defineComponentSlotStyle({
       listStyle: "none",
       m: 0,
       p: 0,
+    },
+  },
+
+  props: {
+    /**
+     * Whether to show the indentation guide.
+     *
+     * @default false
+     */
+    showIndentGuide: {
+      true: {
+        branchContent: {
+          position: "relative",
+          _before: {
+            borderLeft: "1px solid",
+            borderLeftColor: "border",
+            content: '""',
+            display: "block",
+            h: "100%",
+            left: "0",
+            ml: "calc({indent-size} / 2 * -1)",
+            position: "absolute",
+            top: "0",
+            w: "1px",
+            _dark: {
+              borderLeftColor: "border",
+            },
+          },
+        },
+      },
     },
   },
 

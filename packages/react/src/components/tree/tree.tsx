@@ -679,6 +679,14 @@ export interface TreeNodeRenderProps {
    * This is automatically handled for custom render functions.
    */
   children?: ReactNode
+  /**
+   * Function to select the node.
+   */
+  onSelect?: () => void
+  /**
+   * Function to toggle the expand state of the node.
+   */
+  onToggleExpand?: () => void
 }
 
 export interface TreeNodeState {
@@ -794,6 +802,8 @@ export const TreeNode: FC<TreeNodeProps> = ({
     indexPath,
     node,
     nodeState,
+    onSelect: () => onSelect(nodeId),
+    onToggleExpand: handleToggleExpand,
   }
 
   if (render) {
@@ -862,8 +872,9 @@ export const TreeNode: FC<TreeNodeProps> = ({
     )
   } else {
     return selectionMode === "checkbox" ? (
-      <TreeItem>
+      <TreeItem data-node-id={nodeId}>
         <TreeItemCheckbox>
+          <TreeItemIndicator />
           <Checkbox
             checked={checked}
             disabled={node.disabled}
@@ -879,9 +890,10 @@ export const TreeNode: FC<TreeNodeProps> = ({
     ) : (
       <TreeItem
         data-disabled={dataAttr(node.disabled)}
-        data-selected={dataAttr(selected)}
+        data-node-id={nodeId}
         onClick={() => !node.disabled && onSelect(nodeId)}
       >
+        <TreeItemIndicator />
         <TreeItemText>{renderNodeName(node.name, filterQuery)}</TreeItemText>
       </TreeItem>
     )

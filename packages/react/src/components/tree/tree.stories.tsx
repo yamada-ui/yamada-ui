@@ -241,17 +241,42 @@ export const CustomIcons = () => {
           <Tree.Node
             key={node.id || index}
             node={node}
-            render={({ children, node, nodeState }) =>
+            render={({
+              children,
+              node,
+              nodeState,
+              onSelect,
+              onToggleExpand,
+            }) =>
               nodeState.isBranch ? (
                 <Tree.Branch>
-                  <Tree.BranchControl>
-                    <Tree.BranchIndicator>📁</Tree.BranchIndicator>
-                    <Tree.BranchText>{node.name}</Tree.BranchText>
+                  <Tree.BranchControl
+                    data-disabled={node.disabled ? "true" : undefined}
+                    data-expanded={nodeState.expanded ? "true" : undefined}
+                    onClick={!node.disabled ? onToggleExpand : undefined}
+                  >
+                    <Tree.BranchTrigger
+                      data-disabled={node.disabled ? "true" : undefined}
+                      data-expanded={nodeState.expanded ? "true" : undefined}
+                      onClick={!node.disabled ? onToggleExpand : undefined}
+                    >
+                      <Tree.BranchIndicator
+                        data-disabled={node.disabled ? "true" : undefined}
+                        data-expanded={nodeState.expanded ? "true" : undefined}
+                      >
+                        📁
+                      </Tree.BranchIndicator>
+                      <Tree.BranchText>{node.name}</Tree.BranchText>
+                    </Tree.BranchTrigger>
                   </Tree.BranchControl>
                   <Tree.BranchContent>{children}</Tree.BranchContent>
                 </Tree.Branch>
               ) : (
-                <Tree.Item>
+                <Tree.Item
+                  data-disabled={node.disabled ? "true" : undefined}
+                  data-selected={nodeState.selected ? "true" : undefined}
+                  onClick={!node.disabled ? onSelect : undefined}
+                >
                   <Tree.ItemIndicator>🎵</Tree.ItemIndicator>
                   <Tree.ItemText>{node.name}</Tree.ItemText>
                 </Tree.Item>

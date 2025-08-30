@@ -1,12 +1,148 @@
 ---
 title: Separator
 description: "`Separator` is a component that represents a division between elements."
-storybook: components-separator--basic
+storybook: components-separator--horizontal
 source: components/separator
 style: components/separator/separator.style.ts
 ---
 
+```tsx preview
+<Separator />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Separator } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Separator } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Separator } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Separator />
+```
+
+### Change Orientation
+
+```tsx preview functional client
+const [orientation, setOrientation] = useState("horizontal")
+
+return (
+  <VStack>
+    <HStack gap="md">
+      <Button
+        onClick={() => setOrientation("horizontal")}
+        variant={orientation === "horizontal" ? "solid" : "outline"}
+      >
+        Horizontal
+      </Button>
+      <Button
+        onClick={() => setOrientation("vertical")}
+        variant={orientation === "vertical" ? "solid" : "outline"}
+      >
+        Vertical
+      </Button>
+    </HStack>
+
+    <Box h="200px" w="full">
+      {orientation === "horizontal" ? (
+        <Separator orientation="horizontal" />
+      ) : (
+        <Separator orientation="vertical" />
+      )}
+    </Box>
+  </VStack>
+)
+```
+
+### Change Variant
+
+```tsx preview functional client
+const variants = ["solid", "dashed", "dotted"] as const
+
+return (
+  <VStack gap="lg">
+    {variants.map((variant) => (
+      <VStack key={variant} w="full">
+        <Text fontSize="sm" color="gray.600">
+          {variant}
+        </Text>
+        <Separator variant={variant} />
+      </VStack>
+    ))}
+  </VStack>
+)
+```
+
+### Change Size
+
+```tsx preview
+<VStack gap="lg">
+  <VStack w="full">
+    <Text fontSize="sm" color="gray.600">
+      50% width
+    </Text>
+    <Separator w="50%" />
+  </VStack>
+
+  <VStack w="full">
+    <Text fontSize="sm" color="gray.600">
+      200px width
+    </Text>
+    <Separator w="200px" />
+  </VStack>
+
+  <HStack h="100px">
+    <Text fontSize="sm" color="gray.600">
+      50% height
+    </Text>
+    <Separator orientation="vertical" h="50%" />
+  </HStack>
+</VStack>
+```
+
+### Change Color
+
+To change the color, set `borderColor`.
+
+```tsx preview
+<VStack gap="lg">
+  <VStack w="full">
+    <Text fontSize="sm" color="gray.600">
+      gray.500
+    </Text>
+    <Separator borderColor="gray.500" />
+  </VStack>
+  <VStack w="full">
+    <Text fontSize="sm" color="gray.600">
+      blue.500
+    </Text>
+    <Separator borderColor="blue.500" />
+  </VStack>
+  <VStack w="full">
+    <Text fontSize="sm" color="gray.600">
+      red.500
+    </Text>
+    <Separator borderColor="red.500" />
+  </VStack>
+  <VStack w="full">
+    <Text fontSize="sm" color="gray.600">
+      green.500
+    </Text>
+    <Separator borderColor="green.500" />
+  </VStack>
+</VStack>
+```
 
 ## Props
 

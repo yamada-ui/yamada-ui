@@ -5,40 +5,33 @@ export const treeStyle = defineComponentSlotStyle({
     branch: {
       listStyle: "none",
     },
+    branchCheckbox: {
+      mr: "0.5rem",
+    },
     branchContent: {
-      marginLeft: "1.5rem",
-      paddingLeft: "0.25rem",
+      ml: "1.5rem",
+      pl: "0.25rem",
     },
     branchControl: {
       alignItems: "center",
       cursor: "pointer",
       display: "flex",
+      focusVisibleRing: "inside",
       gap: "0.5rem",
-      padding: "0.25rem",
+      p: "0.25rem",
       rounded: "sm",
       transitionDuration: "moderate",
       transitionProperty: "common",
-      _hover: {
-        backgroundColor: "gray.100",
-        _dark: {
-          backgroundColor: "whiteAlpha.100",
-        },
-      },
-      _focusVisible: {
-        outline: "2px solid",
-        outlineColor: "blue.500",
-        outlineOffset: "2px",
-      },
     },
     branchIndentGuide: {
       borderLeft: "1px solid",
-      borderLeftColor: "gray.200",
-      height: "100%",
-      marginLeft: "0.75rem",
+      borderLeftColor: "border",
+      h: "100%",
+      left: "0.75rem",
       position: "absolute",
-      width: "1px",
+      w: "1px",
       _dark: {
-        borderLeftColor: "whiteAlpha.200",
+        borderLeftColor: "border",
       },
     },
     branchIndicator: {
@@ -48,11 +41,8 @@ export const treeStyle = defineComponentSlotStyle({
       fontSize: "0.75rem",
       justifyContent: "center",
       transitionDuration: "moderate",
-      transitionProperty: "transform",
-      width: "1rem",
-      _expanded: {
-        transform: "rotate(90deg)",
-      },
+      transitionProperty: "common",
+      w: "1rem",
     },
     branchText: {
       flex: 1,
@@ -63,55 +53,49 @@ export const treeStyle = defineComponentSlotStyle({
     branchTrigger: {
       alignItems: "center",
       appearance: "none",
-      background: "none",
+      bg: "none",
       border: 0,
       color: "inherit",
       cursor: "pointer",
       display: "flex",
+      focusVisibleRing: "inside",
       fontSize: "inherit",
       outline: 0,
-      padding: 0,
+      p: 0,
       rounded: "sm",
       transitionDuration: "moderate",
       transitionProperty: "common",
-      _focusVisible: {
-        outline: "2px solid",
-        outlineColor: "blue.500",
-        outlineOffset: "2px",
-      },
       _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
+        layerStyle: "disabled",
       },
     },
     item: {
       alignItems: "center",
       cursor: "pointer",
       display: "flex",
+      focusVisibleRing: "inside",
       gap: "0.5rem",
-      padding: "0.25rem",
+      p: "0.25rem",
       rounded: "sm",
       transitionDuration: "moderate",
       transitionProperty: "common",
       _selected: {
-        backgroundColor: "blue.50",
-        color: "blue.600",
+        bg: "colorScheme.50",
+        color: "colorScheme.600",
         _dark: {
-          backgroundColor: "blue.900",
-          color: "blue.200",
+          bg: "colorScheme.900",
+          color: "colorScheme.200",
         },
       },
       _hover: {
-        backgroundColor: "gray.100",
+        bg: "gray.100",
         _dark: {
-          backgroundColor: "whiteAlpha.100",
+          bg: "whiteAlpha.100",
         },
       },
-      _focusVisible: {
-        outline: "2px solid",
-        outlineColor: "blue.500",
-        outlineOffset: "2px",
-      },
+    },
+    itemCheckbox: {
+      mr: "0.5rem",
     },
     itemIndicator: {
       alignItems: "center",
@@ -119,7 +103,7 @@ export const treeStyle = defineComponentSlotStyle({
       flexShrink: 0,
       fontSize: "0.75rem",
       justifyContent: "center",
-      width: "1rem",
+      w: "1rem",
     },
     itemText: {
       flex: 1,
@@ -129,29 +113,29 @@ export const treeStyle = defineComponentSlotStyle({
     label: {
       fontSize: "sm",
       fontWeight: "medium",
-      marginBottom: "0.5rem",
+      mb: "0.5rem",
     },
     root: {
       listStyle: "none",
-      margin: 0,
-      padding: 0,
+      m: 0,
+      p: 0,
     },
     tree: {
       listStyle: "none",
-      margin: 0,
-      padding: 0,
+      m: 0,
+      p: 0,
     },
   },
 
   sizes: {
     sm: {
       branchControl: {
-        minHeight: "6",
-        padding: "0.125rem 0.25rem",
+        minH: "6",
+        p: "0.125rem 0.25rem",
       },
       item: {
-        minHeight: "6",
-        padding: "0.125rem 0.25rem",
+        minH: "6",
+        p: "0.125rem 0.25rem",
       },
       root: {
         fontSize: "sm",
@@ -159,12 +143,12 @@ export const treeStyle = defineComponentSlotStyle({
     },
     md: {
       branchControl: {
-        minHeight: "8",
-        padding: "0.25rem",
+        minH: "8",
+        p: "0.25rem",
       },
       item: {
-        minHeight: "8",
-        padding: "0.25rem",
+        minH: "8",
+        p: "0.25rem",
       },
       root: {
         fontSize: "md",
@@ -172,12 +156,12 @@ export const treeStyle = defineComponentSlotStyle({
     },
     lg: {
       branchControl: {
-        minHeight: "10",
-        padding: "0.375rem 0.5rem",
+        minH: "10",
+        p: "0.375rem 0.5rem",
       },
       item: {
-        minHeight: "10",
-        padding: "0.375rem 0.5rem",
+        minH: "10",
+        p: "0.375rem 0.5rem",
       },
       root: {
         fontSize: "lg",
@@ -185,8 +169,154 @@ export const treeStyle = defineComponentSlotStyle({
     },
   },
 
+  variants: {
+    ghost: {
+      branchControl: {
+        _hover: {
+          bg: "gray.100",
+          _dark: {
+            bg: "whiteAlpha.100",
+          },
+        },
+        _disabled: {
+          cursor: "not-allowed",
+          opacity: 0.6,
+          _hover: {
+            bg: "transparent",
+          },
+        },
+      },
+      item: {
+        _notSelected: {
+          layerStyle: "ghost",
+          _hover: {
+            layerStyle: "ghost.hover",
+          },
+        },
+        _selected: {
+          layerStyle: "solid",
+        },
+      },
+    },
+    outline: {
+      branchControl: {
+        _hover: {
+          bg: "gray.100",
+          _dark: {
+            bg: "whiteAlpha.100",
+          },
+        },
+        _disabled: {
+          cursor: "not-allowed",
+          opacity: 0.6,
+          _hover: {
+            bg: "transparent",
+          },
+        },
+      },
+      item: {
+        _notSelected: {
+          layerStyle: "outline",
+          _hover: {
+            layerStyle: "outline.hover",
+          },
+        },
+        _selected: {
+          layerStyle: "solid",
+          borderColor: "colorScheme.solid",
+          borderWidth: "1px",
+        },
+      },
+    },
+    solid: {
+      branchControl: {
+        _hover: {
+          bg: "gray.100",
+          _dark: {
+            bg: "whiteAlpha.100",
+          },
+        },
+        _disabled: {
+          cursor: "not-allowed",
+          opacity: 0.6,
+          _hover: {
+            bg: "transparent",
+          },
+        },
+      },
+      item: {
+        _notSelected: {
+          layerStyle: "solid",
+          _hover: {
+            layerStyle: "solid.hover",
+          },
+        },
+        _selected: {
+          layerStyle: "subtle",
+        },
+      },
+    },
+    subtle: {
+      branchControl: {
+        _hover: {
+          bg: "gray.100",
+          _dark: {
+            bg: "whiteAlpha.100",
+          },
+        },
+        _disabled: {
+          cursor: "not-allowed",
+          opacity: 0.6,
+          _hover: {
+            bg: "transparent",
+          },
+        },
+      },
+      item: {
+        _notSelected: {
+          layerStyle: "subtle",
+          _hover: {
+            layerStyle: "subtle.hover",
+          },
+        },
+        _selected: {
+          layerStyle: "solid",
+        },
+      },
+    },
+    surface: {
+      branchControl: {
+        _hover: {
+          bg: "gray.100",
+          _dark: {
+            bg: "whiteAlpha.100",
+          },
+        },
+        _disabled: {
+          cursor: "not-allowed",
+          opacity: 0.6,
+          _hover: {
+            bg: "transparent",
+          },
+        },
+      },
+      item: {
+        _notSelected: {
+          layerStyle: "surface",
+          _hover: {
+            layerStyle: "surface.hover",
+          },
+        },
+        _selected: {
+          layerStyle: "solid",
+        },
+      },
+    },
+  },
+
   defaultProps: {
     size: "md",
+    variant: "ghost",
   },
 })
 

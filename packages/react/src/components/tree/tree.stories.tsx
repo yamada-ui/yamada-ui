@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import type { TreeNode as TreeNodeType } from "./tree"
+import type { TreeNode as TreeNodeType } from "./tree-types"
 import { PropsTable } from "#storybook"
 import { useState } from "react"
 import { COLOR_SCHEMES } from "../../utils"
@@ -7,7 +7,7 @@ import { Button } from "../button"
 import { Input } from "../input"
 import { HStack, VStack } from "../stack"
 import { Tree } from "./index"
-import { createTreeCollection } from "./tree"
+import { createTreeCollection } from "./tree-collection"
 
 type Story = StoryFn<typeof Tree.Root>
 
@@ -46,7 +46,6 @@ const sampleNodes: TreeNodeType[] = [
   { id: "3", name: "Music" },
 ]
 
-// Create a tree collection for advanced examples
 const treeCollection = createTreeCollection({
   nodeToString: (node) => node.name,
   nodeToValue: (node) => node.id,
@@ -80,7 +79,6 @@ export const BasicTreeWithCollection = () => (
                 <Tree.BranchText>{node.name}</Tree.BranchText>
               </Tree.BranchControl>
               <Tree.BranchContent>
-                <Tree.BranchIndentGuide />
                 {node.children?.map((child) => (
                   <Tree.Node
                     key={treeCollection.getNodeValue(child)}
@@ -350,9 +348,9 @@ export const ControlledExpansion = () => {
   )
 }
 
-export const WithoutIndentation = () => {
+export const WithIndentation = () => {
   return (
-    <Tree.Root nodes={sampleNodes} showIndentGuide={false}>
+    <Tree.Root defaultExpanded={["1", "2"]} nodes={sampleNodes} showIndentGuide>
       <Tree.Tree>
         <Tree.Label>Tree without indentation guides</Tree.Label>
         {sampleNodes.map((node, index) => (
@@ -444,25 +442,6 @@ export const WithFiltering = () => {
               : "showing all"}
             )
           </Tree.Label>
-          {sampleNodes.map((node, index) => (
-            <Tree.Node key={node.id || index} node={node} />
-          ))}
-        </Tree.Tree>
-      </Tree.Root>
-    </VStack>
-  )
-}
-
-export const ShowIndentGuide = () => {
-  return (
-    <VStack gap="4">
-      <Tree.Root
-        defaultExpanded={["1", "2"]}
-        nodes={sampleNodes}
-        showIndentGuide
-      >
-        <Tree.Tree>
-          <Tree.Label>Tree with Indent Guide</Tree.Label>
           {sampleNodes.map((node, index) => (
             <Tree.Node key={node.id || index} node={node} />
           ))}

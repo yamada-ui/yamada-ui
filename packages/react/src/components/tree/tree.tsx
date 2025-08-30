@@ -1,7 +1,16 @@
 "use client"
 
-import type { FC, ReactNode } from "react"
-import type { HTMLStyledProps, ThemeProps } from "../../core"
+import type { FC } from "react"
+import type { HTMLStyledProps } from "../../core"
+import type { TreeCollection } from "./tree-collection"
+import type {
+  TreeNode,
+  TreeNodeProps,
+  TreeNodeRenderProps,
+  TreeNodeState,
+  TreeProps,
+  TreeRootProps,
+} from "./tree-types"
 import type { TreeStyle } from "./tree.style"
 import { useMemo, useState } from "react"
 import { createSlotComponent, styled } from "../../core"
@@ -17,328 +26,6 @@ import {
 } from "./tree-utils"
 import { treeStyle } from "./tree.style"
 import { useTree } from "./use-tree"
-
-export interface TreeNode {
-  /**
-   * The unique identifier for the node.
-   */
-  id: string
-  /**
-   * The display name of the node.
-   */
-  name: string
-  /**
-   * The children nodes.
-   */
-  children?: TreeNode[]
-  /**
-   * Additional data for the node.
-   */
-  data?: {
-    [key: string]: any
-  }
-  /**
-   * Whether the node is disabled.
-   */
-  disabled?: boolean
-  /**
-   * Whether the node is expanded.
-   */
-  expanded?: boolean
-  /**
-   * Whether the node is selected.
-   */
-  selected?: boolean
-}
-
-export interface TreeCollection {
-  /**
-   * Get all descendant nodes of a given node.
-   */
-  getDescendants: (id: string) => TreeNode[]
-  /**
-   * Get a node by its id.
-   */
-  getNode: (id: string) => TreeNode | undefined
-  /**
-   * Get the children of a node.
-   */
-  getNodeChildren: (node: TreeNode) => TreeNode[]
-  /**
-   * Get the level/depth of a node.
-   */
-  getNodeLevel: (id: string) => number
-  /**
-   * Get all nodes in the collection.
-   */
-  getNodes: () => TreeNode[]
-  /**
-   * Get the string representation of a node.
-   */
-  getNodeString: (node: TreeNode) => string
-  /**
-   * Get the value of a node.
-   */
-  getNodeValue: (node: TreeNode) => string
-  /**
-   * Get the parent node of a given node.
-   */
-  getParentNode: (id: string) => TreeNode | undefined
-  /**
-   * Get the root node.
-   */
-  getRootNode: () => TreeNode
-  /**
-   * Check if a node is a branch (has children).
-   */
-  isBranch: (node: TreeNode) => boolean
-  /**
-   * Remove a node at the specified index path and return a new collection.
-   */
-  remove: (indexPath: number[]) => TreeCollection
-  /**
-   * Replace a node at the specified index path and return a new collection.
-   */
-  replace: (indexPath: number[], node: TreeNode) => TreeCollection
-}
-
-export interface CreateTreeCollectionOptions {
-  /**
-   * Function to convert a node to its string representation.
-   */
-  nodeToString: (node: TreeNode) => string
-  /**
-   * Function to convert a node to its value.
-   */
-  nodeToValue: (node: TreeNode) => string
-  /**
-   * The root node of the tree.
-   */
-  rootNode: TreeNode
-}
-
-export const createTreeCollection = ({
-  nodeToString,
-  nodeToValue,
-  rootNode,
-}: CreateTreeCollectionOptions): TreeCollection => {
-  const nodeMap = new Map<string, TreeNode>()
-  const parentMap = new Map<string, string>()
-
-  const buildMaps = (node: TreeNode, parentId?: string) => {
-    nodeMap.set(nodeToValue(node), node)
-    if (parentId) {
-      parentMap.set(nodeToValue(node), parentId)
-    }
-    if (node.children) {
-      node.children.forEach((child) => buildMaps(child, nodeToValue(node)))
-    }
-  }
-
-  buildMaps(rootNode)
-
-  const getNodes = (): TreeNode[] => {
-    return Array.from(nodeMap.values())
-  }
-
-  const getNode = (id: string): TreeNode | undefined => {
-    return nodeMap.get(id)
-  }
-
-  const getRootNode = (): TreeNode => {
-    return rootNode
-  }
-
-  const getParentNode = (id: string): TreeNode | undefined => {
-    const parentId = parentMap.get(id)
-    return parentId ? nodeMap.get(parentId) : undefined
-  }
-
-  const getDescendants = (id: string): TreeNode[] => {
-    const node = nodeMap.get(id)
-    if (!node?.children) return []
-
-    const descendants: TreeNode[] = []
-    const collectDescendants = (children: TreeNode[]) => {
-      children.forEach((child) => {
-        descendants.push(child)
-        if (child.children) {
-          collectDescendants(child.children)
-        }
-      })
-    }
-    collectDescendants(node.children)
-    return descendants
-  }
-
-  const getNodeValue = (node: TreeNode): string => {
-    return nodeToValue(node)
-  }
-
-  const getNodeString = (node: TreeNode): string => {
-    return nodeToString(node)
-  }
-
-  const getNodeChildren = (node: TreeNode): TreeNode[] => {
-    return node.children || []
-  }
-
-  const isBranch = (node: TreeNode): boolean => {
-    return !!(node.children && node.children.length > 0)
-  }
-
-  const getNodeLevel = (id: string): number => {
-    let level = 0
-    let currentId = id
-    while (parentMap.has(currentId)) {
-      level++
-      currentId = parentMap.get(currentId)!
-    }
-    return level
-  }
-
-  const remove = (indexPath: number[]): TreeCollection => {
-    if (indexPath.length === 0) {
-      return createTreeCollection({
-        nodeToString,
-        nodeToValue,
-        rootNode,
-      })
-    }
-
-    const newRootNode = { ...rootNode }
-
-    const removeNodeAtPath = (
-      node: TreeNode,
-      path: number[],
-      depth = 0,
-    ): null | TreeNode => {
-      if (depth === path.length - 1) {
-        const indexToRemove = path[depth]!
-        if (
-          node.children &&
-          indexToRemove >= 0 &&
-          indexToRemove < node.children.length
-        ) {
-          const newChildren = node.children.filter(
-            (_, index) => index !== indexToRemove,
-          )
-          return {
-            ...node,
-            children: newChildren.length > 0 ? newChildren : undefined,
-          }
-        }
-        return node
-      }
-
-      if (node.children) {
-        const index = path[depth]!
-        if (index >= 0 && index < node.children.length) {
-          const newChildren = [...node.children]
-          const child = newChildren[index]
-          if (child) {
-            const result = removeNodeAtPath(child, path, depth + 1)
-            if (result === null) {
-              newChildren.splice(index, 1)
-            } else {
-              newChildren[index] = result
-            }
-            return {
-              ...node,
-              children: newChildren.length > 0 ? newChildren : undefined,
-            }
-          }
-        }
-      }
-
-      return node
-    }
-
-    const updatedRootNode = removeNodeAtPath(newRootNode, indexPath)
-    if (!updatedRootNode) {
-      return createTreeCollection({
-        nodeToString,
-        nodeToValue,
-        rootNode: { id: "ROOT", name: "", children: [] },
-      })
-    }
-
-    return createTreeCollection({
-      nodeToString,
-      nodeToValue,
-      rootNode: updatedRootNode,
-    })
-  }
-
-  const replace = (indexPath: number[], newNode: TreeNode): TreeCollection => {
-    if (indexPath.length === 0) {
-      return createTreeCollection({
-        nodeToString,
-        nodeToValue,
-        rootNode: newNode,
-      })
-    }
-
-    const newRootNode = { ...rootNode }
-
-    const replaceNodeAtPath = (
-      node: TreeNode,
-      path: number[],
-      depth = 0,
-    ): TreeNode => {
-      if (depth === path.length - 1) {
-        const indexToReplace = path[depth]!
-        if (
-          node.children &&
-          indexToReplace >= 0 &&
-          indexToReplace < node.children.length
-        ) {
-          const newChildren = [...node.children]
-          newChildren[indexToReplace] = newNode
-          return { ...node, children: newChildren }
-        }
-        return node
-      }
-
-      if (node.children) {
-        const index = path[depth]!
-        if (index >= 0 && index < node.children.length) {
-          const newChildren = [...node.children]
-          const child = newChildren[index]
-          if (child) {
-            newChildren[index] = replaceNodeAtPath(child, path, depth + 1)
-            return { ...node, children: newChildren }
-          }
-        }
-      }
-
-      return node
-    }
-
-    const updatedRootNode = replaceNodeAtPath(newRootNode, indexPath)
-
-    return createTreeCollection({
-      nodeToString,
-      nodeToValue,
-      rootNode: updatedRootNode,
-    })
-  }
-
-  return {
-    getDescendants,
-    getNode,
-    getNodeChildren,
-    getNodeLevel,
-    getNodes,
-    getNodeString,
-    getNodeValue,
-    getParentNode,
-    getRootNode,
-    isBranch,
-    remove,
-    replace,
-  }
-}
 
 interface TreeContext {
   expandedIds: string[]
@@ -373,100 +60,19 @@ interface ComponentContext
     | "onLoadChildrenError"
   > {}
 
-interface TreeItem extends TreeNode {
-  /**
-   * Props for the tree branch content element.
-   */
-  branchContentProps?: TreeBranchContentProps
-  /**
-   * Props for the tree branch indicator element.
-   */
-  branchIndicatorProps?: TreeBranchIndicatorProps
-  /**
-   * Props for the tree branch element.
-   */
-  branchProps?: TreeBranchProps
-  /**
-   * Props for the tree branch text element.
-   */
-  branchTextProps?: TreeBranchTextProps
-  /**
-   * Props for the tree branch trigger element.
-   */
-  branchTriggerProps?: TreeBranchTriggerProps
-  /**
-   * Props for the tree item element.
-   */
-  itemProps?: TreeItemProps
-}
+const {
+  ComponentContext,
+  PropsContext: TreePropsContext,
+  useComponentContext,
+  usePropsContext: useTreePropsContext,
+  withContext,
+  withProvider,
+} = createSlotComponent<TreeRootProps, TreeStyle, ComponentContext>(
+  "tree",
+  treeStyle,
+)
 
-export interface TreeRootProps
-  extends Omit<HTMLStyledProps, "onChange">,
-    ThemeProps<TreeStyle> {
-  /**
-   * The tree collection.
-   */
-  collection?: TreeCollection
-  /**
-   * The default expanded node IDs.
-   */
-  defaultExpanded?: string[]
-  /**
-   * The default selected node IDs.
-   */
-  defaultSelected?: string[]
-  /**
-   * The controlled expanded node IDs.
-   */
-  expandedIds?: string[]
-  /**
-   * Function to filter nodes based on a search query.
-   */
-  filterNodes?: (node: TreeNode, query: string) => boolean
-  /**
-   * The current filter query string.
-   */
-  filterQuery?: string
-  /**
-   * Function to load children for a node asynchronously.
-   */
-  loadChildren?: (node: TreeNode) => Promise<TreeNode[]>
-  /**
-   * The tree nodes to render.
-   */
-  nodes?: TreeNode[]
-  /**
-   * The controlled selected node IDs.
-   */
-  selectedIds?: string[]
-  /**
-   * The selection mode.
-   * @default "single"
-   */
-  selectionMode?: "checkbox" | "multiple" | "single"
-  /**
-   * Callback when a node is expanded/collapsed.
-   */
-  onExpandedChange?: (expandedIds: string[]) => void
-  /**
-   * Callback when loading children completes.
-   */
-  onLoadChildrenComplete?: (node: TreeNode, children: TreeNode[]) => void
-  /**
-   * Callback when loading children fails.
-   */
-  onLoadChildrenError?: (node: TreeNode, error: Error) => void
-  /**
-   * Callback when a node is selected.
-   */
-  onSelectionChange?: (selectedIds: string[]) => void
-}
-
-const { ComponentContext, useComponentContext, withContext, withProvider } =
-  createSlotComponent<TreeRootProps, TreeStyle, ComponentContext>(
-    "tree",
-    treeStyle,
-  )
+export { TreePropsContext, useTreePropsContext }
 
 /**
  * `Tree` is a component that displays hierarchical data in a tree structure.
@@ -638,80 +244,6 @@ export const Tree = withContext<"ul", TreeProps>(({ children, ...rest }) => {
   return <styled.ul {...rest}>{computedChildren}</styled.ul>
 }, "tree")()
 
-export interface TreeNodeProps {
-  /**
-   * The tree node to render.
-   */
-  node: TreeNode
-  /**
-   * The index path of the node in the tree.
-   */
-  indexPath?: number[]
-  /**
-   * Render function for custom node rendering.
-   */
-  render?: (props: TreeNodeRenderProps) => ReactNode
-  /**
-   * Props for the tree branch content element.
-   */
-  branchContentProps?: TreeBranchContentProps
-  /**
-   * Props for the tree branch element.
-   */
-  branchProps?: TreeBranchProps
-}
-
-export interface TreeNodeRenderProps {
-  /**
-   * The index path of the node.
-   */
-  indexPath: number[]
-  /**
-   * The tree node.
-   */
-  node: TreeNode
-  /**
-   * The node state information.
-   */
-  nodeState: TreeNodeState
-  /**
-   * The children content to render if the node is a branch and expanded.
-   * This is automatically handled for custom render functions.
-   */
-  children?: ReactNode
-  /**
-   * Function to select the node.
-   */
-  onSelect?: () => void
-  /**
-   * Function to toggle the expand state of the node.
-   */
-  onToggleExpand?: () => void
-}
-
-export interface TreeNodeState {
-  /**
-   * Whether the node is disabled.
-   */
-  disabled: boolean
-  /**
-   * Whether the node is expanded.
-   */
-  expanded: boolean
-  /**
-   * Whether the node is a branch (has children).
-   */
-  isBranch: boolean
-  /**
-   * Whether the node is loading children.
-   */
-  loading: boolean
-  /**
-   * Whether the node is selected.
-   */
-  selected: boolean
-}
-
 export const TreeNode: FC<TreeNodeProps> = ({
   indexPath = [],
   node,
@@ -874,7 +406,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
     return selectionMode === "checkbox" ? (
       <TreeItem data-node-id={nodeId}>
         <TreeItemCheckbox>
-          <TreeItemIndicator />
           <Checkbox
             checked={checked}
             disabled={node.disabled}
@@ -893,7 +424,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
         data-node-id={nodeId}
         onClick={() => !node.disabled && onSelect(nodeId)}
       >
-        <TreeItemIndicator />
         <TreeItemText>{renderNodeName(node.name, filterQuery)}</TreeItemText>
       </TreeItem>
     )

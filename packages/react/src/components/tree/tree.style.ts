@@ -58,6 +58,7 @@ export const treeStyle = defineComponentSlotStyle({
       display: "flex",
       focusVisibleRing: "inside",
       fontSize: "inherit",
+      gap: "2",
       outline: 0,
       p: 0,
       rounded: "sm",

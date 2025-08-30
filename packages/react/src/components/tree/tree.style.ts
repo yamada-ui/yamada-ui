@@ -6,33 +6,41 @@ export const treeStyle = defineComponentSlotStyle({
       listStyle: "none",
     },
     branchCheckbox: {
-      mr: "0.5rem",
+      mr: "2",
     },
     branchContent: {
-      "--indent-size": "1.5rem",
+      "--indent-size": "spaces.6",
       ml: "{indent-size}",
-      pl: "0.25rem",
+      pl: "1",
     },
     branchControl: {
       alignItems: "center",
       cursor: "pointer",
       display: "flex",
       focusVisibleRing: "inside",
-      gap: "0.5rem",
-      p: "0.25rem",
+      gap: "2",
+      p: "1",
       rounded: "sm",
       transitionDuration: "moderate",
       transitionProperty: "common",
+
+      _disabled: {
+        cursor: "not-allowed",
+        opacity: 0.6,
+        _hover: {
+          bg: "transparent",
+        },
+      },
     },
     branchIndicator: {
       alignItems: "center",
       display: "flex",
       flexShrink: 0,
-      fontSize: "0.75rem",
+      fontSize: "xs",
       justifyContent: "center",
       transitionDuration: "moderate",
       transitionProperty: "common",
-      w: "1rem",
+      w: "9xs",
     },
     branchText: {
       flex: 1,
@@ -74,8 +82,8 @@ export const treeStyle = defineComponentSlotStyle({
       cursor: "pointer",
       display: "flex",
       focusVisibleRing: "inside",
-      gap: "0.5rem",
-      p: "0.25rem",
+      gap: "2",
+      p: "1",
       rounded: "sm",
       transitionDuration: "moderate",
       transitionProperty: "common",
@@ -99,15 +107,15 @@ export const treeStyle = defineComponentSlotStyle({
       },
     },
     itemCheckbox: {
-      mr: "0.5rem",
+      mr: "2",
     },
     itemIndicator: {
       alignItems: "center",
       display: "flex",
       flexShrink: 0,
-      fontSize: "0.75rem",
+      fontSize: "xs",
       justifyContent: "center",
-      w: "1rem",
+      w: "9xs",
     },
     itemText: {
       flex: 1,
@@ -117,7 +125,7 @@ export const treeStyle = defineComponentSlotStyle({
     label: {
       fontSize: "sm",
       fontWeight: "medium",
-      mb: "0.5rem",
+      mb: "2",
     },
     root: {
       listStyle: "none",
@@ -163,39 +171,48 @@ export const treeStyle = defineComponentSlotStyle({
 
   sizes: {
     sm: {
+      branchContent: {
+        "--indent-size": "spaces.4",
+      },
       branchControl: {
         minH: "6",
-        p: "0.125rem 0.25rem",
+        p: "0.5 1",
       },
       item: {
         minH: "6",
-        p: "0.125rem 0.25rem",
+        p: "0.5 1",
       },
       root: {
         fontSize: "sm",
       },
     },
     md: {
+      branchContent: {
+        "--indent-size": "spaces.6",
+      },
       branchControl: {
         minH: "8",
-        p: "0.25rem",
+        p: "1",
       },
       item: {
         minH: "8",
-        p: "0.25rem",
+        p: "1",
       },
       root: {
         fontSize: "md",
       },
     },
     lg: {
+      branchContent: {
+        "--indent-size": "spaces.8",
+      },
       branchControl: {
         minH: "10",
-        p: "0.375rem 0.5rem",
+        p: "1.5 2",
       },
       item: {
         minH: "10",
-        p: "0.375rem 0.5rem",
+        p: "1.5 2",
       },
       root: {
         fontSize: "lg",
@@ -206,18 +223,9 @@ export const treeStyle = defineComponentSlotStyle({
   variants: {
     ghost: {
       branchControl: {
+        layerStyle: "ghost",
         _hover: {
-          bg: "gray.100",
-          _dark: {
-            bg: "whiteAlpha.100",
-          },
-        },
-        _disabled: {
-          cursor: "not-allowed",
-          opacity: 0.6,
-          _hover: {
-            bg: "transparent",
-          },
+          layerStyle: "ghost.hover",
         },
       },
       item: {
@@ -234,18 +242,9 @@ export const treeStyle = defineComponentSlotStyle({
     },
     outline: {
       branchControl: {
+        layerStyle: "outline",
         _hover: {
-          bg: "gray.100",
-          _dark: {
-            bg: "whiteAlpha.100",
-          },
-        },
-        _disabled: {
-          cursor: "not-allowed",
-          opacity: 0.6,
-          _hover: {
-            bg: "transparent",
-          },
+          layerStyle: "solid.hover",
         },
       },
       item: {
@@ -264,18 +263,9 @@ export const treeStyle = defineComponentSlotStyle({
     },
     solid: {
       branchControl: {
+        layerStyle: "solid",
         _hover: {
-          bg: "gray.100",
-          _dark: {
-            bg: "whiteAlpha.100",
-          },
-        },
-        _disabled: {
-          cursor: "not-allowed",
-          opacity: 0.6,
-          _hover: {
-            bg: "transparent",
-          },
+          layerStyle: "solid.hover",
         },
       },
       item: {
@@ -292,18 +282,9 @@ export const treeStyle = defineComponentSlotStyle({
     },
     subtle: {
       branchControl: {
+        layerStyle: "subtle",
         _hover: {
-          bg: "gray.100",
-          _dark: {
-            bg: "whiteAlpha.100",
-          },
-        },
-        _disabled: {
-          cursor: "not-allowed",
-          opacity: 0.6,
-          _hover: {
-            bg: "transparent",
-          },
+          layerStyle: "subtle.hover",
         },
       },
       item: {
@@ -320,18 +301,9 @@ export const treeStyle = defineComponentSlotStyle({
     },
     surface: {
       branchControl: {
+        layerStyle: "surface",
         _hover: {
-          bg: "gray.100",
-          _dark: {
-            bg: "whiteAlpha.100",
-          },
-        },
-        _disabled: {
-          cursor: "not-allowed",
-          opacity: 0.6,
-          _hover: {
-            bg: "transparent",
-          },
+          layerStyle: "surface.hover",
         },
       },
       item: {

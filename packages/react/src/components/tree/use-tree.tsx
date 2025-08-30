@@ -1,7 +1,6 @@
 import type { TreeNode } from "./tree"
 import { useCallback, useState } from "react"
 
-// Helper functions for tree operations
 const getAllDescendantIds = (node: TreeNode): string[] => {
   const descendants: string[] = []
   if (node.children) {
@@ -13,7 +12,6 @@ const getAllDescendantIds = (node: TreeNode): string[] => {
   return descendants
 }
 
-// Helper function to find parent nodes that need to be updated
 const findParentNodes = (nodes: TreeNode[], targetId: string): TreeNode[] => {
   const parents: TreeNode[] = []
 
@@ -36,7 +34,6 @@ const findParentNodes = (nodes: TreeNode[], targetId: string): TreeNode[] => {
   return parents
 }
 
-// Helper function to check if a parent should be fully selected
 const isParentFullySelected = (
   node: TreeNode,
   selectedIds: string[],
@@ -50,11 +47,9 @@ const isParentFullySelected = (
     selectedIds.includes(id),
   )
 
-  // Fully selected if all descendants are selected
   return selectedDescendants.length === descendantIds.length
 }
 
-// Helper function to propagate selection changes up the tree
 const propagateSelectionUp = (
   nodes: TreeNode[],
   selectedIds: string[],
@@ -69,7 +64,6 @@ const propagateSelectionUp = (
         newSelectedIds.push(parent.id)
       }
     } else {
-      // Remove parent if it's not fully selected
       const index = newSelectedIds.indexOf(parent.id)
       if (index > -1) {
         newSelectedIds.splice(index, 1)
@@ -135,20 +129,17 @@ export const useTree = ({
   const [expandedIds, setExpandedIds] = useState(defaultExpanded)
   const [selectedIds, setSelectedIds] = useState(defaultSelected)
 
-  // Use controlled values if provided, otherwise use internal state
   const finalExpandedIds = controlledExpandedIds ?? expandedIds
   const finalSelectedIds = controlledSelectedIds ?? selectedIds
 
   const onToggleExpand = useCallback(
     (nodeId: string) => {
       if (controlledExpandedIds !== undefined) {
-        // Controlled mode - let parent handle state
         const newExpandedIds = finalExpandedIds.includes(nodeId)
           ? finalExpandedIds.filter((id) => id !== nodeId)
           : [...finalExpandedIds, nodeId]
         onExpandedChange?.(newExpandedIds)
       } else {
-        // Uncontrolled mode - manage state internally
         const newExpandedIds = expandedIds.includes(nodeId)
           ? expandedIds.filter((id) => id !== nodeId)
           : [...expandedIds, nodeId]
@@ -162,10 +153,8 @@ export const useTree = ({
   const onExpandAll = useCallback(() => {
     const allBranchIds = getAllBranchIds(nodes)
     if (controlledExpandedIds !== undefined) {
-      // Controlled mode
       onExpandedChange?.(allBranchIds)
     } else {
-      // Uncontrolled mode
       setExpandedIds(allBranchIds)
       onExpandedChange?.(allBranchIds)
     }
@@ -173,10 +162,8 @@ export const useTree = ({
 
   const onCollapseAll = useCallback(() => {
     if (controlledExpandedIds !== undefined) {
-      // Controlled mode
       onExpandedChange?.([])
     } else {
-      // Uncontrolled mode
       setExpandedIds([])
       onExpandedChange?.([])
     }
@@ -185,7 +172,6 @@ export const useTree = ({
   const onSelect = useCallback(
     (nodeId: string) => {
       if (controlledSelectedIds !== undefined) {
-        // Controlled mode - use final values
         if (selectionMode === "checkbox") {
           const node = findNodeById(nodes, nodeId)
           if (!node) return
@@ -195,23 +181,18 @@ export const useTree = ({
 
           let newSelectedIds: string[]
 
-          // Check if the node is currently selected
           const isCurrentlySelected = finalSelectedIds.includes(nodeId)
 
           if (isCurrentlySelected) {
-            // Remove the node and all its descendants
             newSelectedIds = finalSelectedIds.filter(
               (id) => !allIdsToToggle.includes(id),
             )
           } else {
-            // Add the node and all its descendants
             newSelectedIds = [...finalSelectedIds, ...allIdsToToggle]
 
-            // Remove duplicates
             newSelectedIds = [...new Set(newSelectedIds)]
           }
 
-          // Propagate selection changes up the tree
           newSelectedIds = propagateSelectionUp(nodes, newSelectedIds, nodeId)
 
           onSelectionChange?.(newSelectedIds)
@@ -226,7 +207,6 @@ export const useTree = ({
           onSelectionChange?.(newSelectedIds)
         }
       } else {
-        // Uncontrolled mode - manage state internally
         if (selectionMode === "checkbox") {
           const node = findNodeById(nodes, nodeId)
           if (!node) return
@@ -236,23 +216,18 @@ export const useTree = ({
 
           let newSelectedIds: string[]
 
-          // Check if the node is currently selected
           const isCurrentlySelected = selectedIds.includes(nodeId)
 
           if (isCurrentlySelected) {
-            // Remove the node and all its descendants
             newSelectedIds = selectedIds.filter(
               (id) => !allIdsToToggle.includes(id),
             )
           } else {
-            // Add the node and all its descendants
             newSelectedIds = [...selectedIds, ...allIdsToToggle]
 
-            // Remove duplicates
             newSelectedIds = [...new Set(newSelectedIds)]
           }
 
-          // Propagate selection changes up the tree
           newSelectedIds = propagateSelectionUp(nodes, newSelectedIds, nodeId)
 
           setSelectedIds(newSelectedIds)

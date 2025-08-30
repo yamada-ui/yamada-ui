@@ -6,11 +6,9 @@ import type { TreeStyle } from "./tree.style"
 import { useMemo, useState } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { createContext, dataAttr } from "../../utils"
-import { IconButton } from "../button"
 import { Checkbox } from "../checkbox"
-import { ChevronDownIcon, ChevronRightIcon, PlusIcon, TrashIcon } from "../icon"
+import { ChevronDownIcon, ChevronRightIcon } from "../icon"
 import { Loading } from "../loading"
-import { HStack } from "../stack"
 import {
   filterTreeNodes,
   getExpandedIdsForFilteredNodes,
@@ -127,7 +125,6 @@ export const createTreeCollection = ({
   const nodeMap = new Map<string, TreeNode>()
   const parentMap = new Map<string, string>()
 
-  // Build maps for efficient lookups
   const buildMaps = (node: TreeNode, parentId?: string) => {
     nodeMap.set(nodeToValue(node), node)
     if (parentId) {
@@ -217,7 +214,6 @@ export const createTreeCollection = ({
       depth = 0,
     ): null | TreeNode => {
       if (depth === path.length - 1) {
-        // Remove the node at this index
         const indexToRemove = path[depth]!
         if (
           node.children &&
@@ -243,7 +239,6 @@ export const createTreeCollection = ({
           if (child) {
             const result = removeNodeAtPath(child, path, depth + 1)
             if (result === null) {
-              // Remove the entire subtree
               newChildren.splice(index, 1)
             } else {
               newChildren[index] = result
@@ -261,7 +256,6 @@ export const createTreeCollection = ({
 
     const updatedRootNode = removeNodeAtPath(newRootNode, indexPath)
     if (!updatedRootNode) {
-      // If root node was removed, create an empty root
       return createTreeCollection({
         nodeToString,
         nodeToValue,
@@ -293,7 +287,6 @@ export const createTreeCollection = ({
       depth = 0,
     ): TreeNode => {
       if (depth === path.length - 1) {
-        // Replace the node at this index
         const indexToReplace = path[depth]!
         if (
           node.children &&
@@ -370,7 +363,6 @@ const [TreeContext, useTreeContext] = createContext<TreeContext>({
 interface ComponentContext
   extends Pick<
     TreeRootProps,
-    | "actionsProps"
     | "collection"
     | "defaultExpanded"
     | "defaultSelected"
@@ -460,10 +452,6 @@ export interface TreeRootProps
    */
   showIndentGuide?: boolean
   /**
-   * Props for the tree node actions element.
-   */
-  actionsProps?: TreeNodeActionsProps
-  /**
    * Callback when a node is expanded/collapsed.
    */
   onExpandedChange?: (expandedIds: string[]) => void
@@ -506,7 +494,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
     selectedIds: controlledSelectedIds,
     selectionMode = "single",
     showIndentGuide = true,
-    actionsProps,
     onExpandedChange,
     onLoadChildrenComplete,
     onLoadChildrenError,
@@ -529,11 +516,9 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
       onSelectionChange,
     })
 
-    // Use controlled values if provided, otherwise use internal state
     let finalExpandedIds = controlledExpandedIds ?? expandedIds
     const finalSelectedIds = controlledSelectedIds ?? selectedIds
 
-    // Auto-expand paths to filtered nodes
     const autoExpandedIds = useMemo(() => {
       if (filterQuery.trim() && filterNodes) {
         const autoIds = getExpandedIdsForFilteredNodes(
@@ -546,7 +531,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
       return []
     }, [nodes, filterNodes, filterQuery])
 
-    // Merge auto-expanded IDs with user-controlled expanded IDs
     finalExpandedIds = useMemo(() => {
       if (autoExpandedIds.length > 0) {
         const merged = new Set([...autoExpandedIds, ...finalExpandedIds])
@@ -565,7 +549,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
         loadChildren,
         nodes,
         showIndentGuide,
-        actionsProps,
         onLoadChildrenComplete,
         onLoadChildrenError,
       }),
@@ -580,7 +563,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
         onLoadChildrenComplete,
         onLoadChildrenError,
         showIndentGuide,
-        actionsProps,
       ],
     )
 
@@ -628,74 +610,54 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
   "root",
 )()
 
-export interface TreeProps extends HTMLStyledProps<"ul"> {
-  /**
-   * Props for the tree node actions element.
-   */
-  actionsProps?: TreeNodeActionsProps
-}
+export interface TreeProps extends HTMLStyledProps<"ul"> {}
 
-export const Tree = withContext<"ul", TreeProps>(
-  ({ children, actionsProps, ...rest }) => {
-    const { collection, filterNodes, filterQuery, nodes, showIndentGuide } =
-      useComponentContext()
+export const Tree = withContext<"ul", TreeProps>(({ children, ...rest }) => {
+  const { collection, filterNodes, filterQuery, nodes, showIndentGuide } =
+    useComponentContext()
 
-    const computedChildren = useMemo(() => {
-      if (children) {
-        return children
-      } else if (collection) {
-        const rootNode = collection.getRootNode()
-        if (rootNode.children) {
-          const filteredChildren = filterTreeNodes(
-            rootNode.children,
-            filterNodes,
-            filterQuery,
-          )
-          return filteredChildren.map((node, index) => (
-            <TreeNode
-              key={collection.getNodeValue(node)}
-              indentGuide={
-                showIndentGuide ? <TreeBranchIndentGuide /> : undefined
-              }
-              indexPath={[index]}
-              node={node}
-              actionsProps={actionsProps}
-            />
-          ))
-        }
-        return null
-      } else {
-        const filteredNodes = filterTreeNodes(
-          nodes || [],
+  const computedChildren = useMemo(() => {
+    if (children) {
+      return children
+    } else if (collection) {
+      const rootNode = collection.getRootNode()
+      if (rootNode.children) {
+        const filteredChildren = filterTreeNodes(
+          rootNode.children,
           filterNodes,
           filterQuery,
         )
-        return filteredNodes.map((node, index) => (
+        return filteredChildren.map((node, index) => (
           <TreeNode
-            key={node.id || index}
+            key={collection.getNodeValue(node)}
             indentGuide={
               showIndentGuide ? <TreeBranchIndentGuide /> : undefined
             }
             indexPath={[index]}
             node={node}
-            actionsProps={actionsProps}
           />
         ))
       }
-    }, [
-      children,
-      nodes,
-      collection,
-      showIndentGuide,
-      filterNodes,
-      filterQuery,
-      actionsProps,
-    ])
+      return null
+    } else {
+      const filteredNodes = filterTreeNodes(
+        nodes || [],
+        filterNodes,
+        filterQuery,
+      )
+      return filteredNodes.map((node, index) => (
+        <TreeNode
+          key={node.id || index}
+          indentGuide={showIndentGuide ? <TreeBranchIndentGuide /> : undefined}
+          indexPath={[index]}
+          node={node}
+        />
+      ))
+    }
+  }, [children, nodes, collection, showIndentGuide, filterNodes, filterQuery])
 
-    return <styled.ul {...rest}>{computedChildren}</styled.ul>
-  },
-  "tree",
-)()
+  return <styled.ul {...rest}>{computedChildren}</styled.ul>
+}, "tree")()
 
 export interface TreeNodeProps {
   /**
@@ -714,10 +676,6 @@ export interface TreeNodeProps {
    * Render function for custom node rendering.
    */
   render?: (props: TreeNodeRenderProps) => ReactNode
-  /**
-   * Props for the tree node actions element.
-   */
-  actionsProps?: TreeNodeActionsProps
   /**
    * Props for the tree branch content element.
    */
@@ -776,7 +734,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
   indexPath = [],
   node,
   render,
-  actionsProps,
   branchContentProps,
   branchProps,
 }) => {
@@ -804,13 +761,10 @@ export const TreeNode: FC<TreeNodeProps> = ({
   const hasChildren = node.children && node.children.length > 0
   const shouldLoadChildren = loadChildren && !hasChildren && !loadedChildren
 
-  // Calculate indeterminate state for parent nodes
   const indeterminate = isParentIndeterminate(node, selectedIds)
-  // A parent is considered checked if it's fully selected OR if it's indeterminate
   const checked = selected || indeterminate
 
   const handleToggleExpand = async () => {
-    // Prevent expansion if node is disabled
     if (node.disabled) {
       return
     }
@@ -821,7 +775,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
         const children = await loadChildren(node)
         setLoadedChildren(children)
         onLoadChildrenComplete?.(node, children)
-        // Update the node with loaded children
         node.children = children
       } catch (error) {
         onLoadChildrenError?.(node, error as Error)
@@ -849,7 +802,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
     selected,
   }
 
-  // Generate children content for custom render functions
   const childrenContent =
     nodeState.isBranch && expanded ? (
       <>
@@ -860,7 +812,7 @@ export const TreeNode: FC<TreeNodeProps> = ({
             indentGuide={indentGuide}
             indexPath={[...indexPath, index]}
             node={child}
-            render={render} // Pass the same render function to maintain consistency
+            render={render}
           />
         ))}
       </>
@@ -873,12 +825,10 @@ export const TreeNode: FC<TreeNodeProps> = ({
     nodeState,
   }
 
-  // If a custom render function is provided, use it
   if (render) {
     return <>{render(renderProps)}</>
   }
 
-  // Default rendering logic
   if (nodeState.isBranch) {
     return (
       <TreeBranch {...branchProps}>
@@ -925,14 +875,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
               </TreeBranchText>
             )}
           </TreeBranchTrigger>
-          {actionsProps ? (
-            <TreeNodeActions
-              indexPath={indexPath}
-              node={node}
-              onAdd={actionsProps.onAdd}
-              onRemove={actionsProps.onRemove}
-            />
-          ) : null}
         </TreeBranchControl>
         <TreeBranchContent {...branchContentProps}>
           {showIndentGuide ? indentGuide : null}
@@ -943,7 +885,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
                   indentGuide={indentGuide}
                   indexPath={[...indexPath, index]}
                   node={child}
-                  actionsProps={actionsProps}
                 />
               ))
             : null}
@@ -965,14 +906,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
             </TreeItemText>
           </Checkbox>
         </TreeItemCheckbox>
-        {actionsProps ? (
-          <TreeNodeActions
-            indexPath={indexPath}
-            node={node}
-            onAdd={actionsProps.onAdd}
-            onRemove={actionsProps.onRemove}
-          />
-        ) : null}
       </TreeItem>
     ) : (
       <TreeItem
@@ -981,14 +914,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
         onClick={() => !node.disabled && onSelect(nodeId)}
       >
         <TreeItemText>{renderNodeName(node.name, filterQuery)}</TreeItemText>
-        {actionsProps ? (
-          <TreeNodeActions
-            indexPath={indexPath}
-            node={node}
-            onAdd={actionsProps.onAdd}
-            onRemove={actionsProps.onRemove}
-          />
-        ) : null}
       </TreeItem>
     )
   }
@@ -1010,7 +935,7 @@ export interface TreeBranchControlProps extends HTMLStyledProps {}
 export const TreeBranchControl = withContext<"div", TreeBranchControlProps>(
   "div",
   "branchControl",
-)()
+)({ "data-group": "" })
 
 export interface TreeBranchTriggerProps extends HTMLStyledProps<"button"> {}
 
@@ -1079,78 +1004,9 @@ export const TreeLabel = withContext<"label", TreeLabelProps>(
   "label",
 )()
 
-export interface TreeNodeActionsProps {
-  /**
-   * The index path of the node.
-   */
-  indexPath: number[]
-  /**
-   * The tree node.
-   */
-  node: TreeNode
-  /**
-   * Callback when the add action is triggered.
-   */
-  onAdd?: (props: TreeNodeActionsProps) => void
-  /**
-   * Callback when the remove action is triggered.
-   */
-  onRemove?: (props: TreeNodeActionsProps) => void
-}
+export interface TreeCollectionNameProps extends HTMLStyledProps {}
 
-/**
- * `TreeNodeActions` is a component that provides action buttons for tree nodes.
- * It displays remove and add buttons with hover effects.
- */
-export const TreeNodeActions: FC<TreeNodeActionsProps> = ({
-  indexPath,
-  node,
-  onAdd,
-  onRemove,
-}) => {
-  const { collection } = useTreeContext()
-  const isBranch = collection?.isBranch(node) ?? false
-
-  return (
-    <HStack
-      css={{
-        "[role=group]:hover &": { opacity: 1 },
-        "[role=treeitem]:hover &": { opacity: 1 },
-        opacity: 0,
-      }}
-      gap="0.5"
-      position="absolute"
-      right="0"
-      scale="0.8"
-      top="0"
-    >
-      <IconButton
-        size="xs"
-        variant="ghost"
-        aria-label="Remove node"
-        onClick={(e) => {
-          e.stopPropagation()
-          onRemove?.({ indexPath, node, onAdd, onRemove })
-        }}
-      >
-        <TrashIcon />
-      </IconButton>
-      {isBranch ? (
-        <IconButton
-          size="xs"
-          variant="ghost"
-          aria-label="Add node"
-          onClick={(e) => {
-            e.stopPropagation()
-            onAdd?.({ indexPath, node, onAdd, onRemove })
-          }}
-        >
-          <PlusIcon />
-        </IconButton>
-      ) : null}
-    </HStack>
-  )
-}
-
-// Re-export types from use-tree
-export type { UseTreeProps, UseTreeReturn } from "./use-tree"
+export const TreeCollectionName = withContext<"div", TreeCollectionNameProps>(
+  "div",
+  "collectionName",
+)()

@@ -11,6 +11,7 @@ export type {
   TreeBranchTextProps,
   TreeBranchTriggerProps,
   TreeCollection,
+  TreeCollectionNameProps,
   TreeItemCheckboxProps,
   TreeItemIndicatorProps,
   TreeItemProps,
@@ -22,7 +23,5 @@ export type {
   TreeNodeState,
   TreeProps,
   TreeRootProps,
-  UseTreeProps,
-  UseTreeReturn,
 } from "./tree"
 export * from "./use-tree"

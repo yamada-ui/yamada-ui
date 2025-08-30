@@ -69,6 +69,16 @@ export const treeStyle = defineComponentSlotStyle({
         layerStyle: "disabled",
       },
     },
+    collectionName: {
+      color: "colorScheme.600",
+      flex: 1,
+      fontSize: "sm",
+      fontWeight: "semibold",
+      lineHeight: "1.5",
+      _dark: {
+        color: "colorScheme.200",
+      },
+    },
     item: {
       alignItems: "center",
       cursor: "pointer",
@@ -92,6 +102,10 @@ export const treeStyle = defineComponentSlotStyle({
         _dark: {
           bg: "whiteAlpha.100",
         },
+      },
+      _disabled: {
+        cursor: "not-allowed",
+        opacity: 0.4,
       },
     },
     itemCheckbox: {

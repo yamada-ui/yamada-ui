@@ -6,7 +6,91 @@ source: components/status
 style: components/status/status.style.ts
 ---
 
+```tsx preview
+<Status />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Status } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Status } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Status } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Status />
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size) => (
+      <HStack key={size}>
+        <Status size={size} value="info">
+          Info
+        </Status>
+
+        <Status size={size} value="success">
+          Success
+        </Status>
+
+        <Status size={size} value="warning">
+          Warning
+        </Status>
+
+        <Status size={size} value="error">
+          Error
+        </Status>
+      </HStack>
+    )}
+  </For>
+</VStack>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<HStack>
+  <For
+    each={[
+      { colorScheme: "green", status: "info" },
+      { colorScheme: "purple", status: "success" },
+      { colorScheme: "blue", status: "warning" },
+      { colorScheme: "red", status: "error" },
+    ]}
+  >
+    {(row) => (
+      <Status key={row.status} colorScheme={row.colorScheme} value={row.status}>
+        {toTitleCase(row.status)}
+      </Status>
+    )}
+  </For>
+</HStack>
+```
+
+### ラベルを表示する
+
+```tsx preview
+<HStack>
+  <Status value="info">Info</Status>
+  <Status value="success">Success</Status>
+  <Status value="warning">Warning</Status>
+  <Status value="error">Error</Status>
+</HStack>
+```
 
 ## Props
 

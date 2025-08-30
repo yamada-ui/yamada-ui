@@ -345,7 +345,6 @@ interface TreeContext {
   nodes: TreeNode[]
   selectedIds: string[]
   selectionMode: "checkbox" | "multiple" | "single"
-  showIndentGuide: boolean
   onCollapseAll: () => void
   onExpandAll: () => void
   onSelect: (nodeId: string) => void
@@ -372,7 +371,6 @@ interface ComponentContext
     | "nodes"
     | "onLoadChildrenComplete"
     | "onLoadChildrenError"
-    | "showIndentGuide"
   > {}
 
 interface TreeItem extends TreeNode {
@@ -447,11 +445,6 @@ export interface TreeRootProps
    */
   selectionMode?: "checkbox" | "multiple" | "single"
   /**
-   * Whether to show indentation guides.
-   * @default true
-   */
-  showIndentGuide?: boolean
-  /**
    * Callback when a node is expanded/collapsed.
    */
   onExpandedChange?: (expandedIds: string[]) => void
@@ -493,7 +486,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
     nodes = [],
     selectedIds: controlledSelectedIds,
     selectionMode = "single",
-    showIndentGuide = true,
     onExpandedChange,
     onLoadChildrenComplete,
     onLoadChildrenError,
@@ -548,7 +540,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
         filterQuery,
         loadChildren,
         nodes,
-        showIndentGuide,
         onLoadChildrenComplete,
         onLoadChildrenError,
       }),
@@ -562,7 +553,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
         nodes,
         onLoadChildrenComplete,
         onLoadChildrenError,
-        showIndentGuide,
       ],
     )
 
@@ -574,7 +564,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
         nodes,
         selectedIds: finalSelectedIds,
         selectionMode,
-        showIndentGuide,
         onCollapseAll,
         onExpandAll,
         onLoadChildrenComplete,
@@ -587,7 +576,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
         finalExpandedIds,
         finalSelectedIds,
         selectionMode,
-        showIndentGuide,
         onToggleExpand,
         onSelect,
         onExpandAll,
@@ -613,8 +601,7 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
 export interface TreeProps extends HTMLStyledProps<"ul"> {}
 
 export const Tree = withContext<"ul", TreeProps>(({ children, ...rest }) => {
-  const { collection, filterNodes, filterQuery, nodes, showIndentGuide } =
-    useComponentContext()
+  const { collection, filterNodes, filterQuery, nodes } = useComponentContext()
 
   const computedChildren = useMemo(() => {
     if (children) {
@@ -630,9 +617,6 @@ export const Tree = withContext<"ul", TreeProps>(({ children, ...rest }) => {
         return filteredChildren.map((node, index) => (
           <TreeNode
             key={collection.getNodeValue(node)}
-            indentGuide={
-              showIndentGuide ? <TreeBranchIndentGuide /> : undefined
-            }
             indexPath={[index]}
             node={node}
           />
@@ -646,15 +630,10 @@ export const Tree = withContext<"ul", TreeProps>(({ children, ...rest }) => {
         filterQuery,
       )
       return filteredNodes.map((node, index) => (
-        <TreeNode
-          key={node.id || index}
-          indentGuide={showIndentGuide ? <TreeBranchIndentGuide /> : undefined}
-          indexPath={[index]}
-          node={node}
-        />
+        <TreeNode key={node.id || index} indexPath={[index]} node={node} />
       ))
     }
-  }, [children, nodes, collection, showIndentGuide, filterNodes, filterQuery])
+  }, [children, nodes, collection, filterNodes, filterQuery])
 
   return <styled.ul {...rest}>{computedChildren}</styled.ul>
 }, "tree")()
@@ -664,10 +643,6 @@ export interface TreeNodeProps {
    * The tree node to render.
    */
   node: TreeNode
-  /**
-   * The indent guide element.
-   */
-  indentGuide?: ReactNode
   /**
    * The index path of the node in the tree.
    */
@@ -730,7 +705,6 @@ export interface TreeNodeState {
 }
 
 export const TreeNode: FC<TreeNodeProps> = ({
-  indentGuide,
   indexPath = [],
   node,
   render,
@@ -743,7 +717,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
     loadChildren,
     selectedIds,
     selectionMode,
-    showIndentGuide,
     onLoadChildrenComplete,
     onLoadChildrenError,
     onSelect,
@@ -805,11 +778,9 @@ export const TreeNode: FC<TreeNodeProps> = ({
   const childrenContent =
     nodeState.isBranch && expanded ? (
       <>
-        {showIndentGuide ? indentGuide : null}
         {childrenToRender.map((child, index) => (
           <TreeNode
             key={collection ? collection.getNodeValue(child) : child.id}
-            indentGuide={indentGuide}
             indexPath={[...indexPath, index]}
             node={child}
             render={render}
@@ -877,12 +848,10 @@ export const TreeNode: FC<TreeNodeProps> = ({
           </TreeBranchTrigger>
         </TreeBranchControl>
         <TreeBranchContent {...branchContentProps}>
-          {showIndentGuide ? indentGuide : null}
           {expanded
             ? childrenToRender.map((child, index) => (
                 <TreeNode
                   key={collection ? collection.getNodeValue(child) : child.id}
-                  indentGuide={indentGuide}
                   indexPath={[...indexPath, index]}
                   node={child}
                 />
@@ -964,13 +933,6 @@ export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
   "div",
   "branchCheckbox",
 )()
-
-export interface TreeBranchIndentGuideProps extends HTMLStyledProps {}
-
-export const TreeBranchIndentGuide = withContext<
-  "div",
-  TreeBranchIndentGuideProps
->("div", "branchIndentGuide")()
 
 export interface TreeItemProps extends HTMLStyledProps<"li"> {}
 

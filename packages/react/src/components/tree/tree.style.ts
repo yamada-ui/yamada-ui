@@ -23,17 +23,6 @@ export const treeStyle = defineComponentSlotStyle({
       transitionDuration: "moderate",
       transitionProperty: "common",
     },
-    branchIndentGuide: {
-      borderLeft: "1px solid",
-      borderLeftColor: "border",
-      h: "100%",
-      left: "0.75rem",
-      position: "absolute",
-      w: "1px",
-      _dark: {
-        borderLeftColor: "border",
-      },
-    },
     branchIndicator: {
       alignItems: "center",
       display: "flex",

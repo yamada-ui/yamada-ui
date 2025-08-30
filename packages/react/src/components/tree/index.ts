@@ -5,7 +5,6 @@ export type {
   TreeBranchCheckboxProps,
   TreeBranchContentProps,
   TreeBranchControlProps,
-  TreeBranchIndentGuideProps,
   TreeBranchIndicatorProps,
   TreeBranchProps,
   TreeBranchTextProps,

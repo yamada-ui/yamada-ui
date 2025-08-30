@@ -149,14 +149,28 @@ export const ExpandCollapseAll = () => {
     setExpandedIds(newExpandedIds)
   }
 
+  const getAllBranchIds = (nodes: TreeNodeType[]): string[] => {
+    const branchIds: string[] = []
+
+    const traverse = (nodeList: TreeNodeType[]) => {
+      for (const node of nodeList) {
+        if (node.children && node.children.length > 0) {
+          branchIds.push(node.id)
+          traverse(node.children)
+        }
+      }
+    }
+
+    traverse(nodes)
+    return branchIds
+  }
+
   return (
     <VStack>
       <HStack>
         <Button
           onClick={() => {
-            const allBranchIds = sampleNodes
-              .filter((node) => node.children && node.children.length > 0)
-              .map((node) => node.id)
+            const allBranchIds = getAllBranchIds(sampleNodes)
             setExpandedIds(allBranchIds)
           }}
         >
@@ -181,6 +195,13 @@ export const ExpandCollapseAll = () => {
 
 export const AsyncLoading = () => {
   const loadChildren = async (node: TreeNodeType): Promise<TreeNodeType[]> => {
+    if (node.id.includes("static")) {
+      return [
+        { id: `${node.id}-static-1`, name: `${node.name} Static 1` },
+        { id: `${node.id}-static-2`, name: `${node.name} Static 2` },
+      ]
+    }
+
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     return [

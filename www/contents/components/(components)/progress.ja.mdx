@@ -6,7 +6,180 @@ source: components/progress
 style: components/progress/progress.style.ts
 ---
 
+```tsx preview
+<Progress value={50} />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Progress } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Progress } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Progress } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Progress value={50} />
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      {
+        colorScheme: "green",
+        value: 19,
+        size: "xs",
+      },
+      {
+        colorScheme: "pink",
+        value: 93,
+        size: "sm",
+      },
+      {
+        colorScheme: "purple",
+        value: 8,
+        size: "md",
+      },
+      {
+        colorScheme: "red",
+        value: 18,
+        size: "lg",
+      },
+    ]}
+  >
+    {({ colorScheme, value, size }, index) => (
+      <Progress
+        key={index}
+        aria-label="Storage space"
+        colorScheme={colorScheme}
+        value={value}
+        size={size}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### カラースキーマを変更する
+
+```tsx preview
+<Progress aria-label="Storage space" colorScheme="purple" value={18} />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <Progress aria-label="Storage space" variant="outline" value={50} />
+  <Progress aria-label="Storage space" variant="subtle" value={50} />
+</VStack>
+```
+
+### 形を変更する
+
+```tsx preview
+<VStack>
+  <Progress aria-label="Storage space" shape="rounded" value={50} />
+  <Progress aria-label="Storage space" shape="square" value={50} />
+  <Progress aria-label="Storage space" shape="circle" value={50} />
+</VStack>
+```
+
+### 色を変更する
+
+カラースキーマを使わずに色を変更したい場合は、`rangeColor`に色を指定します。
+
+```tsx preview
+<Progress aria-label="Storage space" rangeColor="green.500" value={18} />
+```
+
+### トラックの色を変更する
+
+トラックの色をカスタマイズするには、`trackColor`を使用します。
+
+```tsx preview
+<VStack>
+  <Progress
+    aria-label="Storage space"
+    trackColor="gray.300"
+    rangeColor="blue.500"
+    value={50}
+  />
+  <Progress
+    aria-label="Storage space"
+    trackColor="green.100"
+    rangeColor="green.600"
+    value={50}
+  />
+</VStack>
+```
+
+### ストライプを適応する
+
+`striped`を`true`に設定することで、背景色にストライプを適応できます。
+
+```tsx preview
+<Progress aria-label="Storage space" striped value={19} />
+```
+
+### ストライプにアニメーションを適応する
+
+背景色のストライプにアニメーションを追加したい場合は、`animated`を`true`に設定します。
+
+```tsx preview
+<Progress aria-label="Storage space" striped animated value={20} />
+```
+
+### アニメーション時間を変更する
+
+アニメーション時間を変更するには、`duration`を数値（秒）または文字列に設定します。
+
+```tsx preview
+<VStack>
+  <Progress
+    aria-label="Storage space"
+    striped
+    animated
+    duration={1}
+    value={50}
+  />
+  <Progress
+    aria-label="Storage space"
+    striped
+    animated
+    duration={2}
+    value={50}
+  />
+  <Progress
+    aria-label="Storage space"
+    striped
+    animated
+    duration="3s"
+    value={50}
+  />
+</VStack>
+```
+
+### アニメーションを適応する
+
+`value`を`null`に設定すると、アニメーションが適応されます。
+
+```tsx preview
+<Progress value={null} />
+```
 
 ## Props
 

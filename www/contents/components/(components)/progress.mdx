@@ -6,7 +6,180 @@ source: components/progress
 style: components/progress/progress.style.ts
 ---
 
+```tsx preview
+<Progress value={50} />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Progress } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Progress } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Progress } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Progress value={50} />
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      {
+        colorScheme: "green",
+        value: 19,
+        size: "xs",
+      },
+      {
+        colorScheme: "pink",
+        value: 93,
+        size: "sm",
+      },
+      {
+        colorScheme: "purple",
+        value: 8,
+        size: "md",
+      },
+      {
+        colorScheme: "red",
+        value: 18,
+        size: "lg",
+      },
+    ]}
+  >
+    {({ colorScheme, value, size }, index) => (
+      <Progress
+        key={index}
+        aria-label="Storage space"
+        colorScheme={colorScheme}
+        value={value}
+        size={size}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<Progress aria-label="Storage space" colorScheme="purple" value={18} />
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <Progress aria-label="Storage space" variant="outline" value={50} />
+  <Progress aria-label="Storage space" variant="subtle" value={50} />
+</VStack>
+```
+
+### Change Shape
+
+```tsx preview
+<VStack>
+  <Progress aria-label="Storage space" shape="rounded" value={50} />
+  <Progress aria-label="Storage space" shape="square" value={50} />
+  <Progress aria-label="Storage space" shape="circle" value={50} />
+</VStack>
+```
+
+### Change Color
+
+If you want to change the color without using a color scheme, specify the color in `rangeColor`.
+
+```tsx preview
+<Progress aria-label="Storage space" rangeColor="green.500" value={18} />
+```
+
+### Change Track Color
+
+To customize the track color, use `trackColor`.
+
+```tsx preview
+<VStack>
+  <Progress
+    aria-label="Storage space"
+    trackColor="gray.300"
+    rangeColor="blue.500"
+    value={50}
+  />
+  <Progress
+    aria-label="Storage space"
+    trackColor="green.100"
+    rangeColor="green.600"
+    value={50}
+  />
+</VStack>
+```
+
+### Apply Stripes
+
+By setting `striped` to `true`, you can apply stripes to the background color.
+
+```tsx preview
+<Progress aria-label="Storage space" striped value={19} />
+```
+
+### Apply Animation to Stripes
+
+If you want to add animation to the background color stripes, set `animated` to `true`.
+
+```tsx preview
+<Progress aria-label="Storage space" striped animated value={20} />
+```
+
+### Change Animation Duration
+
+To change the animation duration, set `duration` to a number (seconds) or a string.
+
+```tsx preview
+<VStack>
+  <Progress
+    aria-label="Storage space"
+    striped
+    animated
+    duration={1}
+    value={50}
+  />
+  <Progress
+    aria-label="Storage space"
+    striped
+    animated
+    duration={2}
+    value={50}
+  />
+  <Progress
+    aria-label="Storage space"
+    striped
+    animated
+    duration="3s"
+    value={50}
+  />
+</VStack>
+```
+
+### Apply Animation
+
+Setting `value` to `null` will apply animation.
+
+```tsx preview
+<Progress value={null} />
+```
 
 ## Props
 

@@ -1,6 +1,6 @@
 import type { TreeNode } from "./tree"
 import { useCallback, useMemo, useState } from "react"
-import { useTreeContext } from "./tree"
+import { useComponentContext } from "./tree"
 import { findNodeById, getAllDescendantIds } from "./tree-utils"
 
 /**
@@ -289,7 +289,7 @@ export const useTreeSelection = (
   nodeId: string | undefined,
   disabled = false,
 ) => {
-  const { onSelect } = useTreeContext()
+  const { onSelect } = useComponentContext()
 
   const handleSelection = useCallback(() => {
     if (!disabled && nodeId) {

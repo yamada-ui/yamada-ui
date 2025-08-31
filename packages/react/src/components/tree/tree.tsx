@@ -2,7 +2,6 @@
 
 import type { FC } from "react"
 import type { HTMLStyledProps } from "../../core"
-import type { TreeCollection } from "./tree-collection"
 import type {
   TreeNode,
   TreeNodeProps,
@@ -14,7 +13,7 @@ import type {
 import type { TreeStyle } from "./tree.style"
 import { useCallback, useMemo, useState } from "react"
 import { createSlotComponent, styled } from "../../core"
-import { createContext, dataAttr, handlerAll } from "../../utils"
+import { dataAttr, handlerAll } from "../../utils"
 import { Checkbox } from "../checkbox"
 import { ChevronDownIcon, ChevronRightIcon } from "../icon"
 import { Loading } from "../loading"
@@ -28,25 +27,6 @@ import {
 import { treeStyle } from "./tree.style"
 import { useTree, useTreeSelection } from "./use-tree"
 
-interface TreeContext {
-  expandedIds: string[]
-  nodes: TreeNode[]
-  selectedIds: string[]
-  selectionMode: "checkbox" | "multiple" | "single"
-  onCollapseAll: () => void
-  onExpandAll: () => void
-  onSelect: (nodeId: string) => void
-  onToggleExpand: (nodeId: string) => void
-  collection?: TreeCollection
-  loadChildren?: (node: TreeNode) => Promise<TreeNode[]>
-  onLoadChildrenComplete?: (node: TreeNode, children: TreeNode[]) => void
-  onLoadChildrenError?: (node: TreeNode, error: Error) => void
-}
-
-export const [TreeContext, useTreeContext] = createContext<TreeContext>({
-  name: "TreeContext",
-})
-
 interface ComponentContext
   extends Pick<
     TreeRootProps,
@@ -59,7 +39,15 @@ interface ComponentContext
     | "nodes"
     | "onLoadChildrenComplete"
     | "onLoadChildrenError"
-  > {}
+    | "selectionMode"
+  > {
+  expandedIds: string[]
+  selectedIds: string[]
+  onCollapseAll: () => void
+  onExpandAll: () => void
+  onSelect: (nodeId: string) => void
+  onToggleExpand: (nodeId: string) => void
+}
 
 const {
   ComponentContext,
@@ -73,7 +61,7 @@ const {
   treeStyle,
 )
 
-export { TreePropsContext, useTreePropsContext }
+export { TreePropsContext, useComponentContext, useTreePropsContext }
 
 /**
  * `Tree` is a component that displays hierarchical data in a tree structure.
@@ -152,30 +140,9 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
         collection,
         defaultExpanded,
         defaultSelected,
-        filterNodes,
-        filterQuery,
-        loadChildren,
-        nodes,
-        onLoadChildrenComplete,
-        onLoadChildrenError,
-      }),
-      [
-        collection,
-        defaultExpanded,
-        defaultSelected,
-        filterNodes,
-        filterQuery,
-        loadChildren,
-        nodes,
-        onLoadChildrenComplete,
-        onLoadChildrenError,
-      ],
-    )
-
-    const treeContext = useMemo(
-      () => ({
-        collection,
         expandedIds: finalExpandedIds,
+        filterNodes,
+        filterQuery,
         loadChildren,
         nodes,
         selectedIds: finalSelectedIds,
@@ -189,26 +156,28 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
       }),
       [
         collection,
+        defaultExpanded,
+        defaultSelected,
         finalExpandedIds,
+        filterNodes,
+        filterQuery,
         loadChildren,
         nodes,
         onCollapseAll,
         onExpandAll,
         onLoadChildrenComplete,
         onLoadChildrenError,
-        finalSelectedIds,
         onSelect,
         onToggleExpand,
+        finalSelectedIds,
         selectionMode,
       ],
     )
 
     return (
-      <TreeContext.Provider value={treeContext}>
-        <ComponentContext value={componentContext}>
-          <styled.div {...rest}>{children}</styled.div>
-        </ComponentContext>
-      </TreeContext.Provider>
+      <ComponentContext value={componentContext}>
+        <styled.div {...rest}>{children}</styled.div>
+      </ComponentContext>
     )
   },
   "root",
@@ -284,7 +253,7 @@ export const TreeNode: FC<TreeNodeProps> = ({
     onLoadChildrenComplete,
     onLoadChildrenError,
     onToggleExpand,
-  } = useTreeContext()
+  } = useComponentContext()
 
   const { filterQuery } = useComponentContext()
 
@@ -702,7 +671,7 @@ export interface TreeBranchCheckboxProps extends HTMLStyledProps {
  */
 export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
   ({ nodeId, ...rest }) => {
-    const { nodes, selectedIds, onSelect } = useTreeContext()
+    const { nodes, selectedIds, onSelect } = useComponentContext()
 
     if (!nodeId) {
       return <styled.div {...rest} />
@@ -804,7 +773,7 @@ export interface TreeItemCheckboxProps extends HTMLStyledProps {
  */
 export const TreeItemCheckbox = withContext<"div", TreeItemCheckboxProps>(
   ({ nodeId, ...rest }) => {
-    const { nodes, selectedIds, onSelect } = useTreeContext()
+    const { nodes, selectedIds, onSelect } = useComponentContext()
 
     if (!nodeId) {
       return <styled.div {...rest} />

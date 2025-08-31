@@ -128,7 +128,7 @@ export interface UseAutocompleteProps
   /**
    * If provided, generate options based on items.
    *
-   * @default '[]'
+   * @default []
    */
   items?: ComboboxItem[]
   /**

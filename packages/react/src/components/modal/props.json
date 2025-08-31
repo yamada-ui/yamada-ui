@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -39,17 +39,19 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+        "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "defaultValue": "hoge",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "defaultValue": "hoge",
         "description": "The variant of the component.",
         "required": false
       },
@@ -112,7 +114,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -134,7 +136,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -156,7 +158,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -178,7 +180,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -200,7 +202,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -222,14 +224,15 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
     },
     "Root": {
       "size": {
-        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" ...",
+        "type": "\"2xl\" | \"3xl\" | \"4xl\" | \"5xl\" | \"6xl\" | \"cover\" | \"full\" | \"lg\" | \"md\" | \"sm\" ...",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
@@ -356,7 +359,7 @@
         "required": false
       },
       "placement": {
-        "type": "\"center\" | \"center-center\" | \"center-end\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" | \"start-end\" | \"start-start\" ...",
+        "type": "\"center-center\" | \"center-end\" | \"center-start\" | \"center\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" | \"start-end\" | \"start-start\" ...",
         "defaultValue": "\"center\"",
         "description": "The placement of the modal.",
         "required": false
@@ -423,7 +426,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -446,7 +449,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -468,17 +471,19 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+      "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },
@@ -541,7 +546,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -563,7 +568,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -585,7 +590,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -607,7 +612,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -629,7 +634,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -651,14 +656,15 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
   },
   "ModalRoot": {
     "size": {
-      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" | \"5xl\" | \"6xl\" ...",
+      "type": "\"2xl\" | \"3xl\" | \"4xl\" | \"5xl\" | \"6xl\" | \"cover\" | \"full\" | \"lg\" | \"md\" | \"sm\" ...",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
@@ -785,7 +791,7 @@
       "required": false
     },
     "placement": {
-      "type": "\"center\" | \"center-center\" | \"center-end\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" | \"start-end\" | \"start-start\" ...",
+      "type": "\"center-center\" | \"center-end\" | \"center-start\" | \"center\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" | \"start-end\" | \"start-start\" ...",
       "defaultValue": "\"center\"",
       "description": "The placement of the modal.",
       "required": false
@@ -852,7 +858,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }

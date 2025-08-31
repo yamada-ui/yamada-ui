@@ -16,52 +16,52 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "area": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `grid-area` property.",
       "required": false
     },
     "autoColumns": {
-      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "type": "\"-moz-initial\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" | \"1/2\" | \"1/3\" | \"1/4\" | \"1/5\" | \"1/6\" ...",
       "description": "The CSS `grid-auto-columns` property.",
       "required": false
     },
     "autoFlow": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"dense\" ...",
+      "type": "\"-moz-initial\" | \"column\" | \"dense\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"row\" | \"unset\" ...",
       "description": "The CSS `grid-auto-flow` property.",
       "required": false
     },
     "autoRows": {
-      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "type": "\"-moz-initial\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" | \"1/2\" | \"1/3\" | \"1/4\" | \"1/5\" | \"1/6\" ...",
       "description": "The CSS `grid-auto-rows` property.",
       "required": false
     },
     "column": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `grid-column` property.",
       "required": false
     },
     "row": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `grid-row` property.",
       "required": false
     },
     "templateAreas": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"none\" ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"none\" | \"revert-layer\" | \"revert\" | \"unset\" ...",
       "description": "The CSS `grid-template-areas` property.",
       "required": false
     },
     "templateColumns": {
-      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "type": "\"-moz-initial\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" | \"1/2\" | \"1/3\" | \"1/4\" | \"1/5\" | \"1/6\" ...",
       "description": "The CSS `grid-template-columns` property.",
       "required": false
     },
     "templateRows": {
-      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "type": "\"-moz-initial\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" | \"1/2\" | \"1/3\" | \"1/4\" | \"1/5\" | \"1/6\" ...",
       "description": "The CSS `grid-template-rows` property.",
       "required": false
     }
@@ -83,17 +83,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "area": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `grid-area` property.",
       "required": false
     },
     "colEnd": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `grid-column-end` property.",
       "required": false
     },
@@ -103,12 +103,12 @@
       "required": false
     },
     "colStart": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `grid-column-start` property.",
       "required": false
     },
     "rowEnd": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `grid-row-end` property.",
       "required": false
     },
@@ -118,7 +118,7 @@
       "required": false
     },
     "rowStart": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} | \"auto\" ...",
+      "type": "\"-moz-initial\" | \"auto\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `grid-row-start` property.",
       "required": false
     }

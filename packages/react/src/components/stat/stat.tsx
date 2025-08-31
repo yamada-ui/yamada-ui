@@ -107,7 +107,7 @@ export interface StatIconProps extends HTMLStyledProps<"svg"> {
   /**
    * The type of the icon.
    *
-   * @default "increase"
+   * @default 'increase'
    */
   type?: "decrease" | "increase"
 }

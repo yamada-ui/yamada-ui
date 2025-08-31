@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -39,17 +39,19 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
-        "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+        "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "defaultValue": "hoge",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "defaultValue": "hoge",
         "description": "The variant of the component.",
         "required": false
       },
@@ -124,7 +126,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -146,7 +148,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -168,17 +170,19 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
         "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
+        "defaultValue": "\"solid\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -188,7 +192,7 @@
         "required": true
       },
       "align": {
-        "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
+        "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
         "description": "The CSS `align-items` property.",
         "required": false
       },
@@ -199,7 +203,7 @@
         "required": false
       },
       "basis": {
-        "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+        "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-auto\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" | \"1/2\" ...",
         "description": "The CSS `flex-basis` property.",
         "required": false
       },
@@ -231,7 +235,7 @@
         "required": false
       },
       "direction": {
-        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
+        "type": "\"-moz-initial\" | \"column-reverse\" | \"column\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"row-reverse\" | \"row\" | \"unset\" ...",
         "description": "The CSS `flex-direction` property.",
         "required": false
       },
@@ -279,7 +283,7 @@
         "required": false
       },
       "justify": {
-        "type": "\"center\" | \"normal\" | \"left\" | \"right\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" ...",
+        "type": "\"-moz-initial\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"left\" | \"normal\" | \"revert-layer\" ...",
         "description": "The CSS `justify-content` property.",
         "required": false
       },
@@ -300,7 +304,7 @@
         "required": false
       },
       "shrink": {
-        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
         "description": "The CSS `flex-shrink` property.",
         "required": false
       },
@@ -328,7 +332,7 @@
         "required": false
       },
       "wrap": {
-        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" ...",
         "description": "The CSS `flex-wrap` property.",
         "required": false
       }
@@ -350,7 +354,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -372,7 +376,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
@@ -406,7 +410,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -428,17 +432,19 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
-      "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\" | \"2xs\"",
+      "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },
@@ -513,7 +519,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -535,7 +541,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -557,17 +563,19 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
       "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
+      "defaultValue": "\"solid\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -577,7 +585,7 @@
       "required": true
     },
     "align": {
-      "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
+      "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
       "description": "The CSS `align-items` property.",
       "required": false
     },
@@ -588,7 +596,7 @@
       "required": false
     },
     "basis": {
-      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-auto\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" | \"1/2\" ...",
       "description": "The CSS `flex-basis` property.",
       "required": false
     },
@@ -620,7 +628,7 @@
       "required": false
     },
     "direction": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
+      "type": "\"-moz-initial\" | \"column-reverse\" | \"column\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"row-reverse\" | \"row\" | \"unset\" ...",
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
@@ -668,7 +676,7 @@
       "required": false
     },
     "justify": {
-      "type": "\"center\" | \"normal\" | \"left\" | \"right\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" ...",
+      "type": "\"-moz-initial\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"left\" | \"normal\" | \"revert-layer\" ...",
       "description": "The CSS `justify-content` property.",
       "required": false
     },
@@ -689,7 +697,7 @@
       "required": false
     },
     "shrink": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `flex-shrink` property.",
       "required": false
     },
@@ -717,7 +725,7 @@
       "required": false
     },
     "wrap": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" ...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }
@@ -739,7 +747,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -761,7 +769,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },

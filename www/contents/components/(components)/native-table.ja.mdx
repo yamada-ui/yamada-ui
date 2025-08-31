@@ -8,6 +8,577 @@ style: components/native-table/native-table.style.ts
 
 ## 使い方
 
+```tsx preview
+<NativeTable.Root>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール</NativeTable.Td>
+      <NativeTable.Td>1986年2月26日 - 1989年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全153話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールZ</NativeTable.Td>
+      <NativeTable.Td>1989年4月26日 - 1996年1月31日</NativeTable.Td>
+      <NativeTable.Td numeric>全291話 + スペシャル2話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールGT</NativeTable.Td>
+      <NativeTable.Td>1996年2月7日 - 1997年11月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全64話 + 番外編1話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール改</NativeTable.Td>
+      <NativeTable.Td>2009年4月5日 - 2015年6月28日</NativeTable.Td>
+      <NativeTable.Td numeric>全159話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール超</NativeTable.Td>
+      <NativeTable.Td>2015年7月5日 - 2018年3月25日</NativeTable.Td>
+      <NativeTable.Td numeric>全131話</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+
+  <NativeTable.Tfoot>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Tfoot>
+</NativeTable.Root>
+```
+
+## バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["line", "outline"]}>
+    {(variant, index) => (
+      <NativeTable.Root key={index} variant={variant}>
+        <NativeTable.Thead>
+          <NativeTable.Tr>
+            <NativeTable.Th>作品名</NativeTable.Th>
+            <NativeTable.Th>放送期間</NativeTable.Th>
+            <NativeTable.Th numeric>話数</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Thead>
+        <NativeTable.Tbody>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール</NativeTable.Td>
+            <NativeTable.Td>1986年2月26日 - 1989年4月19日</NativeTable.Td>
+            <NativeTable.Td numeric>全153話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボールZ</NativeTable.Td>
+            <NativeTable.Td>1989年4月26日 - 1996年1月31日</NativeTable.Td>
+            <NativeTable.Td numeric>全291話 + スペシャル2話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボールGT</NativeTable.Td>
+            <NativeTable.Td>1996年2月7日 - 1997年11月19日</NativeTable.Td>
+            <NativeTable.Td numeric>全64話 + 番外編1話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール改</NativeTable.Td>
+            <NativeTable.Td>2009年4月5日 - 2015年6月28日</NativeTable.Td>
+            <NativeTable.Td numeric>全159話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール超</NativeTable.Td>
+            <NativeTable.Td>2015年7月5日 - 2018年3月25日</NativeTable.Td>
+            <NativeTable.Td numeric>全131話</NativeTable.Td>
+          </NativeTable.Tr>
+        </NativeTable.Tbody>
+        <NativeTable.Tfoot>
+          <NativeTable.Tr>
+            <NativeTable.Th>作品名</NativeTable.Th>
+            <NativeTable.Th>放送期間</NativeTable.Th>
+            <NativeTable.Th numeric>話数</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Tfoot>
+      </NativeTable.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <NativeTable.Root key={index} size={size}>
+        <NativeTable.Thead>
+          <NativeTable.Tr>
+            <NativeTable.Th>作品名</NativeTable.Th>
+            <NativeTable.Th>放送期間</NativeTable.Th>
+            <NativeTable.Th numeric>話数</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Thead>
+        <NativeTable.Tbody>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール</NativeTable.Td>
+            <NativeTable.Td>1986年2月26日 - 1989年4月19日</NativeTable.Td>
+            <NativeTable.Td numeric>全153話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボールZ</NativeTable.Td>
+            <NativeTable.Td>1989年4月26日 - 1996年1月31日</NativeTable.Td>
+            <NativeTable.Td numeric>全291話 + スペシャル2話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボールGT</NativeTable.Td>
+            <NativeTable.Td>1996年2月7日 - 1997年11月19日</NativeTable.Td>
+            <NativeTable.Td numeric>全64話 + 番外編1話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール改</NativeTable.Td>
+            <NativeTable.Td>2009年4月5日 - 2015年6月28日</NativeTable.Td>
+            <NativeTable.Td numeric>全159話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール超</NativeTable.Td>
+            <NativeTable.Td>2015年7月5日 - 2018年3月25日</NativeTable.Td>
+            <NativeTable.Td numeric>全131話</NativeTable.Td>
+          </NativeTable.Tr>
+        </NativeTable.Tbody>
+        <NativeTable.Tfoot>
+          <NativeTable.Tr>
+            <NativeTable.Th>作品名</NativeTable.Th>
+            <NativeTable.Th>放送期間</NativeTable.Th>
+            <NativeTable.Th numeric>話数</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Tfoot>
+      </NativeTable.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## カラースキーマを変更する
+
+```tsx preview
+<VStack>
+  <For each={["green", "orange"]}>
+    {(color, index) => (
+      <NativeTable.Root key={index} colorScheme={color} variant="outline">
+        <NativeTable.Thead>
+          <NativeTable.Tr>
+            <NativeTable.Th>作品名</NativeTable.Th>
+            <NativeTable.Th>放送期間</NativeTable.Th>
+            <NativeTable.Th numeric>話数</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Thead>
+        <NativeTable.Tbody>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール</NativeTable.Td>
+            <NativeTable.Td>1986年2月26日 - 1989年4月19日</NativeTable.Td>
+            <NativeTable.Td numeric>全153話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボールZ</NativeTable.Td>
+            <NativeTable.Td>1989年4月26日 - 1996年1月31日</NativeTable.Td>
+            <NativeTable.Td numeric>全291話 + スペシャル2話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボールGT</NativeTable.Td>
+            <NativeTable.Td>1996年2月7日 - 1997年11月19日</NativeTable.Td>
+            <NativeTable.Td numeric>全64話 + 番外編1話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール改</NativeTable.Td>
+            <NativeTable.Td>2009年4月5日 - 2015年6月28日</NativeTable.Td>
+            <NativeTable.Td numeric>全159話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール超</NativeTable.Td>
+            <NativeTable.Td>2015年7月5日 - 2018年3月25日</NativeTable.Td>
+            <NativeTable.Td numeric>全131話</NativeTable.Td>
+          </NativeTable.Tr>
+        </NativeTable.Tbody>
+        <NativeTable.Tfoot>
+          <NativeTable.Tr>
+            <NativeTable.Th>作品名</NativeTable.Th>
+            <NativeTable.Th>放送期間</NativeTable.Th>
+            <NativeTable.Th numeric>話数</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Tfoot>
+      </NativeTable.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## 外枠の区切り線を追加する
+
+外枠の区切り線を追加する場合は、`withBorder` を true にします。
+
+```tsx preview
+<NativeTable.Root withBorder>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール</NativeTable.Td>
+      <NativeTable.Td>1986年2月26日 - 1989年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全153話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールZ</NativeTable.Td>
+      <NativeTable.Td>1989年4月26日 - 1996年1月31日</NativeTable.Td>
+      <NativeTable.Td numeric>全291話 + スペシャル2話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールGT</NativeTable.Td>
+      <NativeTable.Td>1996年2月7日 - 1997年11月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全64話 + 番外編1話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール改</NativeTable.Td>
+      <NativeTable.Td>2009年4月5日 - 2015年6月28日</NativeTable.Td>
+      <NativeTable.Td numeric>全159話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール超</NativeTable.Td>
+      <NativeTable.Td>2015年7月5日 - 2018年3月25日</NativeTable.Td>
+      <NativeTable.Td numeric>全131話</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+  <NativeTable.Tfoot>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Tfoot>
+</NativeTable.Root>
+```
+
+## 列の区切り線を追加する
+
+列の区切り線を追加する場合は、`withColumnBorders` を true にします。
+
+```tsx preview
+<NativeTable.Root withColumnBorders>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール</NativeTable.Td>
+      <NativeTable.Td>1986年2月26日 - 1989年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全153話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールZ</NativeTable.Td>
+      <NativeTable.Td>1989年4月26日 - 1996年1月31日</NativeTable.Td>
+      <NativeTable.Td numeric>全291話 + スペシャル2話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールGT</NativeTable.Td>
+      <NativeTable.Td>1996年2月7日 - 1997年11月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全64話 + 番外編1話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール改</NativeTable.Td>
+      <NativeTable.Td>2009年4月5日 - 2015年6月28日</NativeTable.Td>
+      <NativeTable.Td numeric>全159話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール超</NativeTable.Td>
+      <NativeTable.Td>2015年7月5日 - 2018年3月25日</NativeTable.Td>
+      <NativeTable.Td numeric>全131話</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+  <NativeTable.Tfoot>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Tfoot>
+</NativeTable.Root>
+```
+
+## 行ホバー時にハイライトする
+
+行にマウスホバーした際にハイライト表示したい場合は、`highlightOnHover` を指定します。
+
+```tsx preview
+<NativeTable.Root highlightOnHover>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール</NativeTable.Td>
+      <NativeTable.Td>1986年2月26日 - 1989年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全153話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールZ</NativeTable.Td>
+      <NativeTable.Td>1989年4月26日 - 1996年1月31日</NativeTable.Td>
+      <NativeTable.Td numeric>全291話 + スペシャル2話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールGT</NativeTable.Td>
+      <NativeTable.Td>1996年2月7日 - 1997年11月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全64話 + 番外編1話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール改</NativeTable.Td>
+      <NativeTable.Td>2009年4月5日 - 2015年6月28日</NativeTable.Td>
+      <NativeTable.Td numeric>全159話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール超</NativeTable.Td>
+      <NativeTable.Td>2015年7月5日 - 2018年3月25日</NativeTable.Td>
+      <NativeTable.Td numeric>全131話</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+  <NativeTable.Tfoot>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Tfoot>
+</NativeTable.Root>
+```
+
+## ストライプを付ける
+
+ストライプ（縞模様）を付けたい場合は、`striped` を指定します。バリアントと組み合わせて使えます。
+
+```tsx preview
+<VStack>
+  <For each={["line", "outline"]}>
+    {(variant, index) => (
+      <NativeTable.Root key={index} variant={variant} striped>
+        <NativeTable.Thead>
+          <NativeTable.Tr>
+            <NativeTable.Th>作品名</NativeTable.Th>
+            <NativeTable.Th>放送期間</NativeTable.Th>
+            <NativeTable.Th numeric>話数</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Thead>
+        <NativeTable.Tbody>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール</NativeTable.Td>
+            <NativeTable.Td>1986年2月26日 - 1989年4月19日</NativeTable.Td>
+            <NativeTable.Td numeric>全153話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボールZ</NativeTable.Td>
+            <NativeTable.Td>1989年4月26日 - 1996年1月31日</NativeTable.Td>
+            <NativeTable.Td numeric>全291話 + スペシャル2話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボールGT</NativeTable.Td>
+            <NativeTable.Td>1996年2月7日 - 1997年11月19日</NativeTable.Td>
+            <NativeTable.Td numeric>全64話 + 番外編1話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール改</NativeTable.Td>
+            <NativeTable.Td>2009年4月5日 - 2015年6月28日</NativeTable.Td>
+            <NativeTable.Td numeric>全159話</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ドラゴンボール超</NativeTable.Td>
+            <NativeTable.Td>2015年7月5日 - 2018年3月25日</NativeTable.Td>
+            <NativeTable.Td numeric>全131話</NativeTable.Td>
+          </NativeTable.Tr>
+        </NativeTable.Tbody>
+        <NativeTable.Tfoot>
+          <NativeTable.Tr>
+            <NativeTable.Th>作品名</NativeTable.Th>
+            <NativeTable.Th>放送期間</NativeTable.Th>
+            <NativeTable.Th numeric>話数</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Tfoot>
+      </NativeTable.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## スクロールエリアを有効にする
+
+横スクロールや縦スクロールを有効にしたい場合は、`withScrollArea` を指定します。`scrollAreaProps` でサイズも調整できます。
+
+```tsx preview
+<NativeTable.Root withScrollArea scrollAreaProps={{ maxW: "md" }}>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+      <NativeTable.Th>備考</NativeTable.Th>
+      <NativeTable.Th>備考2</NativeTable.Th>
+      <NativeTable.Th>備考3</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール</NativeTable.Td>
+      <NativeTable.Td>1986年2月26日 - 1989年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全153話</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールZ</NativeTable.Td>
+      <NativeTable.Td>1989年4月26日 - 1996年1月31日</NativeTable.Td>
+      <NativeTable.Td numeric>全291話 + スペシャル2話</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールGT</NativeTable.Td>
+      <NativeTable.Td>1996年2月7日 - 1997年11月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全64話 + 番外編1話</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール改</NativeTable.Td>
+      <NativeTable.Td>2009年4月5日 - 2015年6月28日</NativeTable.Td>
+      <NativeTable.Td numeric>全159話</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール超</NativeTable.Td>
+      <NativeTable.Td>2015年7月5日 - 2018年3月25日</NativeTable.Td>
+      <NativeTable.Td numeric>全131話</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+      <NativeTable.Td>---</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+</NativeTable.Root>
+```
+
+## ヘッダーを固定する
+
+テーブルのヘッダーを固定したい場合は、`stickyHeader` を指定します。`withScrollArea` と組み合わせて使うと便利です。
+
+```tsx preview
+<NativeTable.Root withScrollArea scrollAreaProps={{ maxH: "xs" }} stickyHeader>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール</NativeTable.Td>
+      <NativeTable.Td>1986年2月26日 - 1989年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全153話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールZ</NativeTable.Td>
+      <NativeTable.Td>1989年4月26日 - 1996年1月31日</NativeTable.Td>
+      <NativeTable.Td numeric>全291話 + スペシャル2話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールGT</NativeTable.Td>
+      <NativeTable.Td>1996年2月7日 - 1997年11月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全64話 + 番外編1話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール改</NativeTable.Td>
+      <NativeTable.Td>2009年4月5日 - 2015年6月28日</NativeTable.Td>
+      <NativeTable.Td numeric>全159話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール超</NativeTable.Td>
+      <NativeTable.Td>2015年7月5日 - 2018年3月25日</NativeTable.Td>
+      <NativeTable.Td numeric>全131話</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+</NativeTable.Root>
+```
+
+## キャプションを追加する
+
+```tsx preview
+<NativeTable.Root>
+  <NativeTable.Caption placement="start">
+    ©バードスタジオ/集英社・東映アニメーション
+  </NativeTable.Caption>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール</NativeTable.Td>
+      <NativeTable.Td>1986年2月26日 - 1989年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全153話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールZ</NativeTable.Td>
+      <NativeTable.Td>1989年4月26日 - 1996年1月31日</NativeTable.Td>
+      <NativeTable.Td numeric>全291話 + スペシャル2話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボールGT</NativeTable.Td>
+      <NativeTable.Td>1996年2月7日 - 1997年11月19日</NativeTable.Td>
+      <NativeTable.Td numeric>全64話 + 番外編1話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール改</NativeTable.Td>
+      <NativeTable.Td>2009年4月5日 - 2015年6月28日</NativeTable.Td>
+      <NativeTable.Td numeric>全159話</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ドラゴンボール超</NativeTable.Td>
+      <NativeTable.Td>2015年7月5日 - 2018年3月25日</NativeTable.Td>
+      <NativeTable.Td numeric>全131話</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+  <NativeTable.Tfoot>
+    <NativeTable.Tr>
+      <NativeTable.Th>作品名</NativeTable.Th>
+      <NativeTable.Th>放送期間</NativeTable.Th>
+      <NativeTable.Th numeric>話数</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Tfoot>
+</NativeTable.Root>
+```
+
 ## Props
 
 <PropsTable name="native-table" />

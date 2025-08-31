@@ -20,6 +20,7 @@ import { ChevronDownIcon, ChevronRightIcon } from "../icon"
 import { Loading } from "../loading"
 import {
   filterTreeNodes,
+  findNodeById,
   getExpandedIdsForFilteredNodes,
   isParentIndeterminate,
   renderNodeName,
@@ -127,9 +128,20 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
       onSelectionChange,
     })
 
-    let finalExpandedIds = controlledExpandedIds ?? expandedIds
-    const finalSelectedIds = controlledSelectedIds ?? selectedIds
-    const finalCheckedIds = controlledCheckedIds ?? checkedIds
+    const finalSelectedIds = useMemo(
+      () => controlledSelectedIds ?? selectedIds,
+      [controlledSelectedIds, selectedIds],
+    )
+
+    const finalCheckedIds = useMemo(
+      () => controlledCheckedIds ?? checkedIds,
+      [controlledCheckedIds, checkedIds],
+    )
+
+    const baseExpandedIds = useMemo(
+      () => controlledExpandedIds ?? expandedIds,
+      [controlledExpandedIds, expandedIds],
+    )
 
     const autoExpandedIds = useMemo(() => {
       if (filterQuery.trim() && filterNodes) {
@@ -143,13 +155,13 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
       return []
     }, [nodes, filterNodes, filterQuery])
 
-    finalExpandedIds = useMemo(() => {
+    const finalExpandedIds = useMemo(() => {
       if (autoExpandedIds.length > 0) {
-        const merged = new Set([...autoExpandedIds, ...finalExpandedIds])
+        const merged = new Set([...autoExpandedIds, ...baseExpandedIds])
         return Array.from(merged)
       }
-      return finalExpandedIds
-    }, [finalExpandedIds, autoExpandedIds])
+      return baseExpandedIds
+    }, [baseExpandedIds, autoExpandedIds])
 
     const componentContext = useMemo(
       () => ({
@@ -299,15 +311,42 @@ export const TreeNode: FC<TreeNodeProps> = ({
   const [loading, setLoading] = useState(false)
   const [loadedChildren, setLoadedChildren] = useState<null | TreeNode[]>(null)
 
-  const nodeId = collection ? collection.getNodeValue(node) : node.id
-  const expanded = expandedIds.includes(nodeId)
-  const selected = selectedIds.includes(nodeId)
-  const checked = checkedIds.includes(nodeId)
-  const indeterminate = isParentIndeterminate(node, checkedIds)
-  const hasChildren = node.children && node.children.length > 0
-  const shouldLoadChildren = loadChildren && !hasChildren && !loadedChildren
+  const nodeId = useMemo(
+    () => (collection ? collection.getNodeValue(node) : node.id),
+    [collection, node],
+  )
 
-  const handleToggleExpand = async () => {
+  const expanded = useMemo(
+    () => expandedIds.includes(nodeId),
+    [expandedIds, nodeId],
+  )
+
+  const selected = useMemo(
+    () => selectedIds.includes(nodeId),
+    [selectedIds, nodeId],
+  )
+
+  const checked = useMemo(
+    () => checkedIds.includes(nodeId),
+    [checkedIds, nodeId],
+  )
+
+  const indeterminate = useMemo(
+    () => isParentIndeterminate(node, checkedIds),
+    [node, checkedIds],
+  )
+
+  const hasChildren = useMemo(
+    () => node.children && node.children.length > 0,
+    [node.children],
+  )
+
+  const shouldLoadChildren = useMemo(
+    () => loadChildren && !hasChildren && !loadedChildren,
+    [loadChildren, hasChildren, loadedChildren],
+  )
+
+  const handleToggleExpand = useCallback(async () => {
     if (node.disabled) {
       return
     }
@@ -326,45 +365,84 @@ export const TreeNode: FC<TreeNodeProps> = ({
       }
     }
     onToggleExpand(nodeId)
-  }
-
-  const childrenToRender = loadedChildren || node.children || []
-
-  const nodeState: TreeNodeState = {
-    checked,
-    disabled: !!node.disabled,
-    expanded,
-    indeterminate,
-    isBranch:
-      hasChildren ||
-      shouldLoadChildren ||
-      !!(loadedChildren && loadedChildren.length > 0),
+  }, [
+    shouldLoadChildren,
     loading,
-    selected,
-  }
-
-  const childrenContent =
-    nodeState.isBranch && expanded ? (
-      <>
-        {childrenToRender.map((child, index) => (
-          <TreeNode
-            key={collection ? collection.getNodeValue(child) : child.id}
-            indexPath={[...indexPath, index]}
-            node={child}
-            render={render}
-          />
-        ))}
-      </>
-    ) : null
-
-  const renderProps: TreeNodeRenderProps = {
-    children: childrenContent,
-    indexPath,
+    loadChildren,
     node,
+    onLoadChildrenComplete,
+    onLoadChildrenError,
+    onToggleExpand,
     nodeId,
-    nodeState,
-    onToggleExpand: handleToggleExpand,
-  }
+  ])
+
+  const childrenToRender = useMemo(
+    () => loadedChildren || node.children || [],
+    [loadedChildren, node.children],
+  )
+
+  const nodeState = useMemo<TreeNodeState>(
+    () => ({
+      checked,
+      disabled: !!node.disabled,
+      expanded,
+      indeterminate,
+      isBranch:
+        hasChildren ||
+        shouldLoadChildren ||
+        !!(loadedChildren && loadedChildren.length > 0),
+      loading,
+      selected,
+    }),
+    [
+      checked,
+      node.disabled,
+      expanded,
+      indeterminate,
+      hasChildren,
+      shouldLoadChildren,
+      loadedChildren,
+      loading,
+      selected,
+    ],
+  )
+
+  const childrenContent = useMemo(() => {
+    if (nodeState.isBranch && expanded) {
+      return (
+        <>
+          {childrenToRender.map((child, index) => (
+            <TreeNode
+              key={collection ? collection.getNodeValue(child) : child.id}
+              indexPath={[...indexPath, index]}
+              node={child}
+              render={render}
+            />
+          ))}
+        </>
+      )
+    }
+    return null
+  }, [
+    nodeState.isBranch,
+    expanded,
+    childrenToRender,
+    collection,
+    indexPath,
+    render,
+  ])
+
+  const renderProps = useMemo<TreeNodeRenderProps>(
+    () => ({
+      children: childrenContent,
+      indexPath,
+      node,
+      nodeId,
+      nodeState,
+      onToggleExpand: handleToggleExpand,
+    }),
+    [childrenContent, indexPath, node, nodeId, nodeState, handleToggleExpand],
+  )
 
   if (render) {
     return <>{render(renderProps)}</>
@@ -579,21 +657,7 @@ export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
       )
     }
 
-    const findNode = (
-      searchNodes: TreeNode[],
-      targetId: string,
-    ): TreeNode | undefined => {
-      for (const node of searchNodes) {
-        if (node.id === targetId) return node
-        if (node.children) {
-          const found = findNode(node.children, targetId)
-          if (found) return found
-        }
-      }
-      return undefined
-    }
-
-    const node = findNode(nodes, nodeId)
+    const node = findNodeById(nodes, nodeId)
     if (!node) {
       return (
         <styled.div onClick={onClick} {...rest}>
@@ -702,21 +766,7 @@ export const TreeItemCheckbox = withContext<"div", TreeItemCheckboxProps>(
       return <styled.div {...rest}>{children}</styled.div>
     }
 
-    const findNode = (
-      searchNodes: TreeNode[],
-      targetId: string,
-    ): TreeNode | undefined => {
-      for (const node of searchNodes) {
-        if (node.id === targetId) return node
-        if (node.children) {
-          const found = findNode(node.children, targetId)
-          if (found) return found
-        }
-      }
-      return undefined
-    }
-
-    const node = findNode(nodes, nodeId)
+    const node = findNodeById(nodes, nodeId)
     if (!node) {
       return <styled.div {...rest}>{children}</styled.div>
     }

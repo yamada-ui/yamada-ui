@@ -1,16 +1,6 @@
 import type { TreeNode } from "./tree"
-import { useCallback, useState } from "react"
-
-const getAllDescendantIds = (node: TreeNode): string[] => {
-  const descendants: string[] = []
-  if (node.children) {
-    for (const child of node.children) {
-      descendants.push(child.id)
-      descendants.push(...getAllDescendantIds(child))
-    }
-  }
-  return descendants
-}
+import { useCallback, useMemo, useState } from "react"
+import { findNodeById, getAllDescendantIds } from "./tree-utils"
 
 const findParentNodes = (nodes: TreeNode[], targetId: string): TreeNode[] => {
   const parents: TreeNode[] = []
@@ -74,17 +64,6 @@ const propagateSelectionUp = (
   return newSelectedIds
 }
 
-const findNodeById = (nodes: TreeNode[], id: string): TreeNode | undefined => {
-  for (const node of nodes) {
-    if (node.id === id) return node
-    if (node.children) {
-      const found = findNodeById(node.children, id)
-      if (found) return found
-    }
-  }
-  return undefined
-}
-
 const getAllBranchIds = (nodes: TreeNode[]): string[] => {
   const branchIds: string[] = []
   for (const node of nodes) {
@@ -138,9 +117,20 @@ export const useTree = ({
   const [expandedIds, setExpandedIds] = useState(defaultExpanded)
   const [selectedIds, setSelectedIds] = useState(defaultSelected)
 
-  const finalCheckedIds = controlledCheckedIds ?? checkedIds
-  const finalExpandedIds = controlledExpandedIds ?? expandedIds
-  const finalSelectedIds = controlledSelectedIds ?? selectedIds
+  const finalCheckedIds = useMemo(
+    () => controlledCheckedIds ?? checkedIds,
+    [controlledCheckedIds, checkedIds],
+  )
+
+  const finalExpandedIds = useMemo(
+    () => controlledExpandedIds ?? expandedIds,
+    [controlledExpandedIds, expandedIds],
+  )
+
+  const finalSelectedIds = useMemo(
+    () => controlledSelectedIds ?? selectedIds,
+    [controlledSelectedIds, selectedIds],
+  )
 
   const onToggleExpand = useCallback(
     (nodeId: string) => {
@@ -225,8 +215,9 @@ export const useTree = ({
         const isCurrentlyChecked = finalCheckedIds.includes(nodeId)
 
         if (isCurrentlyChecked) {
+          const idsToToggleSet = new Set(allIdsToToggle)
           newCheckedIds = finalCheckedIds.filter(
-            (id) => !allIdsToToggle.includes(id),
+            (id) => !idsToToggleSet.has(id),
           )
         } else {
           newCheckedIds = [...finalCheckedIds, ...allIdsToToggle]
@@ -241,9 +232,8 @@ export const useTree = ({
         const isCurrentlyChecked = checkedIds.includes(nodeId)
 
         if (isCurrentlyChecked) {
-          newCheckedIds = checkedIds.filter(
-            (id) => !allIdsToToggle.includes(id),
-          )
+          const idsToToggleSet = new Set(allIdsToToggle)
+          newCheckedIds = checkedIds.filter((id) => !idsToToggleSet.has(id))
         } else {
           newCheckedIds = [...checkedIds, ...allIdsToToggle]
           newCheckedIds = [...new Set(newCheckedIds)]

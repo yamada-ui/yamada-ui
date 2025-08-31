@@ -65,48 +65,66 @@ export const getExpandedIdsForFilteredNodes = (
   }
 
   const expandedIds = new Set<string>()
+  const nodeMap = new Map<string, TreeNode>()
 
-  const collectParentIds = (node: TreeNode, allNodes: TreeNode[]): void => {
-    // Find this node in the original tree to get its path
-    const findNodePath = (
-      searchNodes: TreeNode[],
-      targetId: string,
-      path: string[] = [],
-    ): null | string[] => {
-      for (const n of searchNodes) {
-        if (n.id === targetId) {
-          return [...path, n.id]
-        }
-        if (n.children) {
-          const childPath = findNodePath(n.children, targetId, [...path, n.id])
-          if (childPath) return childPath
-        }
-      }
-      return null
-    }
-
-    const path = findNodePath(allNodes, node.id)
-    if (path) {
-      // Add all parent IDs (excluding the node itself)
-      for (let i = 0; i < path.length - 1; i++) {
-        expandedIds.add(path[i]!)
+  const buildNodeMap = (searchNodes: TreeNode[]): void => {
+    for (const node of searchNodes) {
+      nodeMap.set(node.id, node)
+      if (node.children) {
+        buildNodeMap(node.children)
       }
     }
   }
+  buildNodeMap(nodes)
 
+  const matchingNodeIds: string[] = []
   const collectMatchingNodes = (searchNodes: TreeNode[]): void => {
     for (const node of searchNodes) {
       if (filterFn(node, query)) {
-        collectParentIds(node, allNodes)
+        matchingNodeIds.push(node.id)
       }
       if (node.children) {
         collectMatchingNodes(node.children)
       }
     }
   }
-
-  const allNodes = nodes
   collectMatchingNodes(nodes)
+
+  const findParentIds = (nodeId: string): string[] => {
+    const parents: string[] = []
+    let currentNode = nodeMap.get(nodeId)
+
+    while (currentNode) {
+      let parent: TreeNode | undefined
+      const findParent = (searchNodes: TreeNode[]): boolean => {
+        for (const node of searchNodes) {
+          if (node.children?.some((child) => child.id === currentNode!.id)) {
+            parent = node
+            return true
+          }
+          if (node.children && findParent(node.children)) {
+            return true
+          }
+        }
+        return false
+      }
+
+      findParent(nodes)
+      if (parent) {
+        parents.push(parent.id)
+        currentNode = parent
+      } else {
+        break
+      }
+    }
+
+    return parents
+  }
+
+  for (const nodeId of matchingNodeIds) {
+    const parentIds = findParentIds(nodeId)
+    parentIds.forEach((id) => expandedIds.add(id))
+  }
 
   return Array.from(expandedIds)
 }
@@ -116,12 +134,17 @@ export const getExpandedIdsForFilteredNodes = (
  */
 export const getAllDescendantIds = (node: TreeNode): string[] => {
   const descendants: string[] = []
-  if (node.children) {
-    for (const child of node.children) {
-      descendants.push(child.id)
-      descendants.push(...getAllDescendantIds(child))
+
+  const collectIds = (currentNode: TreeNode): void => {
+    if (currentNode.children) {
+      for (const child of currentNode.children) {
+        descendants.push(child.id)
+        collectIds(child)
+      }
     }
   }
+
+  collectIds(node)
   return descendants
 }
 
@@ -141,9 +164,30 @@ export const isParentIndeterminate = (
     selectedIds.includes(id),
   )
 
-  // Indeterminate if some but not all descendants are selected
   return (
     selectedDescendants.length > 0 &&
     selectedDescendants.length < descendantIds.length
   )
+}
+
+/**
+ * Helper function to find a node by ID.
+ */
+export const findNodeById = (
+  nodes: TreeNode[],
+  targetId: string,
+): TreeNode | undefined => {
+  const nodeMap = new Map<string, TreeNode>()
+
+  const buildMap = (searchNodes: TreeNode[]): void => {
+    for (const node of searchNodes) {
+      nodeMap.set(node.id, node)
+      if (node.children) {
+        buildMap(node.children)
+      }
+    }
+  }
+
+  buildMap(nodes)
+  return nodeMap.get(targetId)
 }

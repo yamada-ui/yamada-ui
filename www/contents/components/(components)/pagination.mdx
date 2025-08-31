@@ -6,7 +6,188 @@ source: components/pagination
 style: components/pagination/pagination.style.ts
 ---
 
+```tsx preview
+<Pagination.Root total={10} />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Pagination } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Pagination } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Pagination } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Pagination.Root total={10} />
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["solid", "outline", "ghost", "unstyled"]}>
+    {(variant, index) => (
+      <Pagination.Root key={index} total={10} variant={variant} />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => <Pagination.Root key={index} total={10} size={size} />}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme) => (
+      <Pagination.Root key={colorScheme} colorScheme={colorScheme} total={10} />
+    )}
+  </For>
+</VStack>
+```
+
+### Default Page
+
+Set the initial page with the `defaultPage` prop.
+
+```tsx preview
+<Pagination.Root defaultPage={5} total={10} />
+```
+
+### Add Edge Control Buttons
+
+To add buttons to move to the first and last pages, set `withEdges` to `true`.
+
+```tsx preview
+<Pagination.Root total={20} withEdges />
+```
+
+### Customize the Number of Siblings
+
+To change the number of pages displayed on the left and right of the current page, set `siblings` to a number.
+
+```tsx preview
+<Pagination.Root total={77} siblings={3} />
+```
+
+### Customize the Number of Boundaries
+
+To change the number of pages displayed on the left and right edges, set `boundaries` to a number.
+
+```tsx preview
+<Pagination.Root total={77} boundaries={3} />
+```
+
+### Disable
+
+To disable the pagination, set `disabled` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["solid", "outline", "ghost", "unstyled"]}>
+    {(variant, index) => (
+      <Pagination.Root key={index} total={10} variant={variant} disabled />
+    )}
+  </For>
+</VStack>
+```
+
+### Display Text
+
+```tsx preview
+<VStack>
+  <Pagination.Root size="md" gap="md" total={10}>
+    <Pagination.PrevTrigger>
+      <Pagination.Item icon={<ChevronLeftIcon />} />
+    </Pagination.PrevTrigger>
+
+    <Pagination.Text format="compact" />
+
+    <Pagination.NextTrigger>
+      <Pagination.Item icon={<ChevronRightIcon />} />
+    </Pagination.NextTrigger>
+  </Pagination.Root>
+
+  <Pagination.Root size="md" gap="md" total={10}>
+    <Pagination.PrevTrigger>
+      <Pagination.Item icon={<ChevronLeftIcon />} />
+    </Pagination.PrevTrigger>
+
+    <Pagination.Text format="short" />
+
+    <Pagination.NextTrigger>
+      <Pagination.Item icon={<ChevronRightIcon />} />
+    </Pagination.NextTrigger>
+  </Pagination.Root>
+</VStack>
+```
+
+### Customize Control Buttons
+
+```tsx preview
+<Pagination.Root
+  total={10}
+  withEdges
+  controlNextProps={{
+    icon: <ArrowRightIcon />,
+  }}
+  controlPrevProps={{
+    icon: <ArrowLeftIcon />,
+  }}
+  edgeEndProps={{
+    icon: <ArrowRightToLineIcon />,
+  }}
+  edgeStartProps={{
+    icon: <ArrowLeftToLineIcon />,
+  }}
+/>
+```
+
+### Customize Text
+
+```tsx preview client
+<Pagination.Root size="md" gap="md" total={20}>
+  <Pagination.PrevTrigger>
+    <Pagination.Item icon={<ChevronLeftIcon />} />
+  </Pagination.PrevTrigger>
+
+  <Pagination.Text>
+    {({ page, total }) => `全${total}ページ中${page}ページ目`}
+  </Pagination.Text>
+
+  <Pagination.NextTrigger>
+    <Pagination.Item icon={<ChevronRightIcon />} />
+  </Pagination.NextTrigger>
+</Pagination.Root>
+```
+
+### Control
+
+```tsx preview functional client
+const [page, onChange] = useState<number>(1)
+
+return <Pagination.Root page={page} total={10} onChange={onChange} />
+```
 
 ## Props
 

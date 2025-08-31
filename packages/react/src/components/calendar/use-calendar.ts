@@ -252,7 +252,7 @@ export interface UseCalendarProps<Y extends MaybeDateValue = Date>
   /**
    * The initial month of the calendar.
    *
-   * @default 'new Date()'
+   * @default new Date()
    */
   defaultMonth?: Date
   /**
@@ -295,13 +295,13 @@ export interface UseCalendarProps<Y extends MaybeDateValue = Date>
   /**
    * The maximum possible date.
    *
-   * @default 'new Date(2099, 11, 31)'
+   * @default new Date(2099, 11, 31)
    */
   maxDate?: Date
   /**
    * The minimum possible date.
    *
-   * @default 'new Date(1900, 0, 1)'
+   * @default new Date(1900, 0, 1)
    */
   minDate?: Date
   /**

@@ -13,7 +13,7 @@ export const floatStyle = defineComponentStyle({
     /**
      * The placement of the float.
      *
-     * @default "start-end"
+     * @default 'start-end'
      */
     placement: {
       center: {},

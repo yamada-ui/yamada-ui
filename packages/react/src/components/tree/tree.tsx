@@ -29,12 +29,10 @@ import { treeStyle } from "./tree.style"
 import { useTree } from "./use-tree"
 
 interface TreeContext {
-  checkedIds: string[]
   expandedIds: string[]
   nodes: TreeNode[]
   selectedIds: string[]
   selectionMode: "checkbox" | "multiple" | "single"
-  onCheck: (nodeId: string) => void
   onCollapseAll: () => void
   onExpandAll: () => void
   onSelect: (nodeId: string) => void
@@ -53,7 +51,6 @@ interface ComponentContext
   extends Pick<
     TreeRootProps,
     | "collection"
-    | "defaultChecked"
     | "defaultExpanded"
     | "defaultSelected"
     | "filterNodes"
@@ -80,19 +77,14 @@ const {
  * Custom hook for handling tree item selection logic
  */
 const useTreeSelection = (nodeId: string | undefined, disabled = false) => {
-  const { selectionMode, onCheck, onSelect } = useTreeContext()
+  const { onSelect } = useTreeContext()
 
   const handleSelection = useCallback(() => {
     if (!disabled && nodeId) {
-      if (selectionMode === "checkbox") {
-        // In checkbox mode, clicking toggles the checked state
-        onCheck(nodeId)
-      } else {
-        // In other modes, clicking selects the item
-        onSelect(nodeId)
-      }
+      // Unified selection handler - selection mode determines behavior in the hook
+      onSelect(nodeId)
     }
-  }, [disabled, nodeId, onCheck, onSelect, selectionMode])
+  }, [disabled, nodeId, onSelect])
 
   return { handleSelection }
 }
@@ -106,10 +98,8 @@ export { TreePropsContext, useTreePropsContext }
  */
 export const TreeRoot = withProvider<"div", TreeRootProps>(
   ({
-    checkedIds: controlledCheckedIds,
     children,
     collection,
-    defaultChecked = [],
     defaultExpanded = [],
     defaultSelected = [],
     expandedIds: controlledExpandedIds,
@@ -119,7 +109,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
     nodes = [],
     selectedIds: controlledSelectedIds,
     selectionMode = "single",
-    onCheckedChange,
     onExpandedChange,
     onLoadChildrenComplete,
     onLoadChildrenError,
@@ -127,24 +116,19 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
     ...rest
   }) => {
     const {
-      checkedIds,
       expandedIds,
       selectedIds,
-      onCheck,
       onCollapseAll,
       onExpandAll,
       onSelect,
       onToggleExpand,
     } = useTree({
-      checkedIds: controlledCheckedIds,
-      defaultChecked,
       defaultExpanded,
       defaultSelected,
       expandedIds: controlledExpandedIds,
       nodes,
       selectedIds: controlledSelectedIds,
       selectionMode,
-      onCheckedChange,
       onExpandedChange,
       onSelectionChange,
     })
@@ -152,11 +136,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
     const finalSelectedIds = useMemo(
       () => controlledSelectedIds ?? selectedIds,
       [controlledSelectedIds, selectedIds],
-    )
-
-    const finalCheckedIds = useMemo(
-      () => controlledCheckedIds ?? checkedIds,
-      [controlledCheckedIds, checkedIds],
     )
 
     const baseExpandedIds = useMemo(
@@ -187,7 +166,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
     const componentContext = useMemo(
       () => ({
         collection,
-        defaultChecked,
         defaultExpanded,
         defaultSelected,
         filterNodes,
@@ -201,7 +179,6 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
         collection,
         defaultExpanded,
         defaultSelected,
-        defaultChecked,
         filterNodes,
         filterQuery,
         loadChildren,
@@ -213,14 +190,12 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
 
     const treeContext = useMemo(
       () => ({
-        checkedIds: finalCheckedIds,
         collection,
         expandedIds: finalExpandedIds,
         loadChildren,
         nodes,
         selectedIds: finalSelectedIds,
         selectionMode,
-        onCheck,
         onCollapseAll,
         onExpandAll,
         onLoadChildrenComplete,
@@ -229,20 +204,18 @@ export const TreeRoot = withProvider<"div", TreeRootProps>(
         onToggleExpand,
       }),
       [
-        finalCheckedIds,
         collection,
         finalExpandedIds,
         loadChildren,
         nodes,
-        finalSelectedIds,
-        selectionMode,
-        onCheck,
         onCollapseAll,
         onExpandAll,
         onLoadChildrenComplete,
         onLoadChildrenError,
+        finalSelectedIds,
         onSelect,
         onToggleExpand,
+        selectionMode,
       ],
     )
 
@@ -316,7 +289,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
   branchProps,
 }) => {
   const {
-    checkedIds,
     collection,
     expandedIds,
     loadChildren,
@@ -342,32 +314,27 @@ export const TreeNode: FC<TreeNodeProps> = ({
     [expandedIds, nodeId],
   )
 
-  const checked = useMemo(
-    () => checkedIds.includes(nodeId),
-    [checkedIds, nodeId],
-  )
-
   const selected = useMemo(() => {
     if (selectionMode === "checkbox") {
-      // In checkbox mode, selected state depends on checked state
-      // For parent nodes, selected if all children are checked
+      // In checkbox mode, selected state depends on hierarchical selection
+      // For parent nodes, selected if all children are selected
       const nodeHasChildren = node.children && node.children.length > 0
       if (nodeHasChildren && node.children) {
-        const allChildrenChecked = node.children.every((child) =>
-          checkedIds.includes(child.id),
+        const allChildrenSelected = node.children.every((child) =>
+          selectedIds.includes(child.id),
         )
-        return allChildrenChecked
+        return allChildrenSelected
       }
-      return checked
+      return selectedIds.includes(nodeId)
     } else {
-      // In other modes, selected state is independent
+      // In other modes, selected state is flat
       return selectedIds.includes(nodeId)
     }
-  }, [selectionMode, checked, selectedIds, nodeId, node.children, checkedIds])
+  }, [selectionMode, selectedIds, nodeId, node.children])
 
   const indeterminate = useMemo(
-    () => isParentIndeterminate(node, checkedIds),
-    [node, checkedIds],
+    () => isParentIndeterminate(node, selectedIds),
+    [node, selectedIds],
   )
 
   const hasChildren = useMemo(
@@ -383,7 +350,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
   const handleToggleExpand = useCallback(
     async (event?: React.MouseEvent) => {
       if (!event) {
-        // If no event, proceed with expansion (for programmatic calls)
         if (node.disabled) {
           return
         }
@@ -405,7 +371,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
         return
       }
 
-      // Handle expansion from trigger/control clicks (not from indicator anymore)
       event.stopPropagation()
 
       if (node.disabled) {
@@ -446,7 +411,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
 
   const nodeState = useMemo<TreeNodeState>(
     () => ({
-      checked,
       disabled: !!node.disabled,
       expanded,
       indeterminate,
@@ -458,7 +422,6 @@ export const TreeNode: FC<TreeNodeProps> = ({
       selected,
     }),
     [
-      checked,
       node.disabled,
       expanded,
       indeterminate,
@@ -634,15 +597,28 @@ export const TreeBranchControl = withContext<"div", TreeBranchControlProps>(
   "branchControl",
 )(
   { "data-group": "" },
-  ({ disabled, expanded, selected, onClick, ...rest }) => {
+  ({ disabled, expanded, selected, onClick, onDoubleClick, ...rest }) => {
     const nodeId = rest["data-node-id"] as string | undefined
     const { handleSelection } = useTreeSelection(nodeId, disabled)
+    const { onToggleExpand } = useTreeContext()
+
+    const handleDoubleClick = useCallback(
+      (event: React.MouseEvent) => {
+        event.preventDefault()
+        event.stopPropagation()
+        if (!disabled && nodeId) {
+          onToggleExpand(nodeId)
+        }
+      },
+      [disabled, nodeId, onToggleExpand],
+    )
 
     return {
       "data-disabled": dataAttr(disabled),
       "data-expanded": dataAttr(expanded),
       "data-selected": dataAttr(selected),
       onClick: handlerAll(handleSelection, onClick),
+      onDoubleClick: handlerAll(handleDoubleClick, onDoubleClick),
       ...rest,
     }
   },
@@ -709,16 +685,32 @@ export interface TreeBranchTextProps extends HTMLStyledProps<"span"> {
 export const TreeBranchText = withContext<"span", TreeBranchTextProps>(
   "span",
   "branchText",
-)(undefined, ({ disabled, nodeId, selected, onClick, ...rest }) => {
-  const { handleSelection } = useTreeSelection(nodeId, disabled)
+)(
+  undefined,
+  ({ disabled, nodeId, selected, onClick, onDoubleClick, ...rest }) => {
+    const { handleSelection } = useTreeSelection(nodeId, disabled)
+    const { onToggleExpand } = useTreeContext()
 
-  return {
-    "data-disabled": dataAttr(disabled),
-    "data-selected": dataAttr(selected),
-    onClick: handlerAll(handleSelection, onClick),
-    ...rest,
-  }
-})
+    const handleDoubleClick = useCallback(
+      (event: React.MouseEvent) => {
+        event.preventDefault()
+        event.stopPropagation()
+        if (!disabled && nodeId) {
+          onToggleExpand(nodeId)
+        }
+      },
+      [disabled, nodeId, onToggleExpand],
+    )
+
+    return {
+      "data-disabled": dataAttr(disabled),
+      "data-selected": dataAttr(selected),
+      onClick: handlerAll(handleSelection, onClick),
+      onDoubleClick: handlerAll(handleDoubleClick, onDoubleClick),
+      ...rest,
+    }
+  },
+)
 
 export interface TreeBranchCheckboxProps extends HTMLStyledProps {
   /**
@@ -729,7 +721,7 @@ export interface TreeBranchCheckboxProps extends HTMLStyledProps {
 
 export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
   ({ nodeId, ...rest }) => {
-    const { checkedIds, nodes, onCheck } = useTreeContext()
+    const { nodes, selectedIds, onSelect } = useTreeContext()
 
     if (!nodeId) {
       return <styled.div {...rest} />
@@ -740,11 +732,11 @@ export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
       return <styled.div {...rest} />
     }
 
-    const checked = checkedIds.includes(nodeId)
-    const indeterminate = isParentIndeterminate(node, checkedIds)
+    const checked = selectedIds.includes(nodeId)
+    const indeterminate = isParentIndeterminate(node, selectedIds)
 
     const handleCheckboxChange = (_checkedValue: boolean) => {
-      onCheck(nodeId)
+      onSelect(nodeId)
     }
 
     return (
@@ -782,8 +774,22 @@ export interface TreeItemProps extends HTMLStyledProps<"li"> {
 
 export const TreeItem = withContext<"li", TreeItemProps>("li", "item")(
   undefined,
-  ({ disabled, indexPath = [], nodeId, selected, onClick, ...rest }) => {
+  ({
+    disabled,
+    indexPath = [],
+    nodeId,
+    selected,
+    onClick,
+    onDoubleClick,
+    ...rest
+  }) => {
     const { handleSelection } = useTreeSelection(nodeId, disabled)
+
+    const handleDoubleClick = useCallback((event: React.MouseEvent) => {
+      // Leaf nodes don't expand/collapse, but prevent default behavior
+      event.preventDefault()
+      event.stopPropagation()
+    }, [])
 
     return {
       "data-disabled": dataAttr(disabled),
@@ -791,6 +797,7 @@ export const TreeItem = withContext<"li", TreeItemProps>("li", "item")(
       "data-selected": dataAttr(selected),
       "--depth": indexPath.length,
       onClick: handlerAll(handleSelection, onClick),
+      onDoubleClick: handlerAll(handleDoubleClick, onDoubleClick),
       ...rest,
     }
   },
@@ -819,7 +826,7 @@ export interface TreeItemCheckboxProps extends HTMLStyledProps {
 
 export const TreeItemCheckbox = withContext<"div", TreeItemCheckboxProps>(
   ({ nodeId, ...rest }) => {
-    const { checkedIds, nodes, onCheck } = useTreeContext()
+    const { nodes, selectedIds, onSelect } = useTreeContext()
 
     if (!nodeId) {
       return <styled.div {...rest} />
@@ -830,11 +837,11 @@ export const TreeItemCheckbox = withContext<"div", TreeItemCheckboxProps>(
       return <styled.div {...rest} />
     }
 
-    const checked = checkedIds.includes(nodeId)
-    const indeterminate = isParentIndeterminate(node, checkedIds)
+    const checked = selectedIds.includes(nodeId)
+    const indeterminate = isParentIndeterminate(node, selectedIds)
 
     const handleCheckboxChange = (_checkedValue: boolean) => {
-      onCheck(nodeId)
+      onSelect(nodeId)
     }
 
     return (

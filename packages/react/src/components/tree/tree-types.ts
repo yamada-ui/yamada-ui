@@ -120,10 +120,6 @@ export interface TreeNodeRenderProps {
 
 export interface TreeNodeState {
   /**
-   * Whether the node is checked (for checkbox mode).
-   */
-  checked: boolean
-  /**
    * Whether the node is disabled.
    */
   disabled: boolean
@@ -153,17 +149,9 @@ export interface TreeRootProps
   extends Omit<HTMLStyledProps, "onChange">,
     ThemeProps<TreeStyle> {
   /**
-   * The controlled checked node IDs (for checkbox mode).
-   */
-  checkedIds?: string[]
-  /**
    * The tree collection.
    */
   collection?: TreeCollection
-  /**
-   * The default checked node IDs (for checkbox mode).
-   */
-  defaultChecked?: string[]
   /**
    * The default expanded node IDs.
    */
@@ -201,10 +189,6 @@ export interface TreeRootProps
    * @default "single"
    */
   selectionMode?: "checkbox" | "multiple" | "single"
-  /**
-   * Callback when nodes are checked/unchecked (for checkbox mode).
-   */
-  onCheckedChange?: (checkedIds: string[]) => void
   /**
    * Callback when a node is expanded/collapsed.
    */

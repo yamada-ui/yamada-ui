@@ -382,11 +382,6 @@
               "pathname": "/docs/components/native-select"
             },
             {
-              "title": "NativeTable",
-              "segment": "native-table",
-              "pathname": "/docs/components/native-table"
-            },
-            {
               "title": "NumberInput",
               "segment": "number-input",
               "pathname": "/docs/components/number-input"
@@ -600,6 +595,11 @@
               "title": "ZStack",
               "segment": "z-stack",
               "pathname": "/docs/components/z-stack"
+            },
+            {
+              "title": "NativeTable",
+              "segment": "native-table",
+              "pathname": "/docs/components/native-table"
             }
           ]
         },

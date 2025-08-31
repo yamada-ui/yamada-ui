@@ -58,23 +58,20 @@ import { Pagination } from "@workspaces/ui"
 
 ```tsx preview
 <VStack>
-  <For
-    each={[
-      { variant: "solid", colorScheme: "secondary" },
-      { variant: "outline", colorScheme: "orange" },
-      { variant: "ghost", colorScheme: "cyan" },
-    ]}
-  >
-    {({ variant, colorScheme }, index) => (
-      <Pagination.Root
-        key={index}
-        total={10}
-        variant={variant}
-        colorScheme={colorScheme}
-      />
+  <For each={["success", "warning"]}>
+    {(colorScheme) => (
+      <Pagination.Root key={colorScheme} colorScheme={colorScheme} total={10} />
     )}
   </For>
 </VStack>
+```
+
+### Default Page
+
+Set the initial page with the `defaultPage` prop.
+
+```tsx preview
+<Pagination.Root defaultPage={5} total={10} />
 ```
 
 ### Add Edge Control Buttons
@@ -87,7 +84,7 @@ To add buttons to move to the first and last pages, set `withEdges` to `true`.
 
 ### Customize the Number of Siblings
 
-If you want to change the number of pages displayed before and after the current page, set the desired number to `siblings`.
+To change the number of pages displayed on the left and right of the current page, set `siblings` to a number.
 
 ```tsx preview
 <Pagination.Root total={77} siblings={3} />
@@ -95,23 +92,15 @@ If you want to change the number of pages displayed before and after the current
 
 ### Customize the Number of Boundaries
 
-If you want to change the number of pages displayed at the beginning and the end, set the desired number to `boundaries`.
+To change the number of pages displayed on the left and right edges, set `boundaries` to a number.
 
 ```tsx preview
 <Pagination.Root total={77} boundaries={3} />
 ```
 
-### Default Page
+### Disable
 
-Set the initial page with the `defaultPage` prop.
-
-```tsx preview
-<Pagination.Root defaultPage={5} total={10} />
-```
-
-### Disable Pagination
-
-If you want to disable pagination, set `disabled`.
+To disable the pagination, set `disabled` to `true`.
 
 ```tsx preview
 <VStack>
@@ -123,139 +112,81 @@ If you want to disable pagination, set `disabled`.
 </VStack>
 ```
 
-### Attach Buttons
-
-Make the pagination buttons appear connected by setting `attached` to `true`.
-
-```tsx preview
-<VStack>
-  <Pagination.Root variant="outline" attached total={10} />
-  <Pagination.Root variant="solid" attached total={10} />
-</VStack>
-```
-
-### Customize Control Buttons
-
-- `controlProps`: props that are set for both buttons.
-- `controlPrevProps`: props that are set for the previous button.
-- `controlNextProps`: props that are set for the next button.
-
-```tsx preview
-<VStack>
-  <For
-    each={[
-      { props: { controlProps: { children: <GhostIcon /> } } },
-      { props: { controlPrevProps: { children: <GhostIcon /> } } },
-      { props: { controlNextProps: { children: <GhostIcon /> } } },
-    ]}
-  >
-    {({ props }, index) => (
-      <Pagination.Root key={index} total={10} {...props} />
-    )}
-  </For>
-</VStack>
-```
-
-### Customize Edge Control Buttons
-
-- `edgeProps`: props that are set for both buttons.
-- `edgeStartProps`: props that are set for the first button.
-- `edgeEndProps`: props that are set for the last button.
-
-```tsx preview
-<VStack>
-  <For
-    each={[
-      { props: { edgeProps: { children: <GhostIcon /> } } },
-      { props: { edgeStartProps: { children: <GhostIcon /> } } },
-      { props: { edgeEndProps: { children: <GhostIcon /> } } },
-    ]}
-  >
-    {({ props }, index) => (
-      <Pagination.Root key={index} total={10} withEdges {...props} />
-    )}
-  </For>
-</VStack>
-```
-
-### Control
-
-```tsx preview functional
-const [page, onChange] = useState<number>(1)
-
-return <Pagination.Root page={page} total={10} onChange={onChange} />
-```
-
 ### Display Text
 
-Display pagination information using `Pagination.Text` with different formats.
-
-```tsx preview functional
-const [page, setPage] = useState(1)
-
-return (
-  <Wrap gap="md">
-    <Pagination.Root
-      size="md"
-      gap="md"
-      total={10}
-      page={page}
-      onChange={setPage}
-    >
-      <Pagination.PrevTrigger>
-        <Pagination.Item icon={<ChevronLeftIcon />} />
-      </Pagination.PrevTrigger>
-
-      <Pagination.Text format="compact" />
-
-      <Pagination.NextTrigger>
-        <Pagination.Item icon={<ChevronRightIcon />} />
-      </Pagination.NextTrigger>
-    </Pagination.Root>
-
-    <Pagination.Root
-      size="md"
-      gap="md"
-      total={10}
-      page={page}
-      onChange={setPage}
-    >
-      <Pagination.PrevTrigger>
-        <Pagination.Item icon={<ChevronLeftIcon />} />
-      </Pagination.PrevTrigger>
-
-      <Pagination.Text format="short" />
-
-      <Pagination.NextTrigger>
-        <Pagination.Item icon={<ChevronRightIcon />} />
-      </Pagination.NextTrigger>
-    </Pagination.Root>
-  </Wrap>
-)
-```
-
-### Customize Text
-
-Use a function to customize the text content.
-
-```tsx preview functional
-const [page, setPage] = useState(1)
-
-return (
-  <Pagination.Root size="md" gap="md" total={20} page={page} onChange={setPage}>
+```tsx preview
+<VStack>
+  <Pagination.Root size="md" gap="md" total={10}>
     <Pagination.PrevTrigger>
       <Pagination.Item icon={<ChevronLeftIcon />} />
     </Pagination.PrevTrigger>
 
-    <Pagination.Text>
-      {({ page, total }) => `Page ${page} of ${total} pages`}
-    </Pagination.Text>
+    <Pagination.Text format="compact" />
 
     <Pagination.NextTrigger>
       <Pagination.Item icon={<ChevronRightIcon />} />
     </Pagination.NextTrigger>
   </Pagination.Root>
-)
+
+  <Pagination.Root size="md" gap="md" total={10}>
+    <Pagination.PrevTrigger>
+      <Pagination.Item icon={<ChevronLeftIcon />} />
+    </Pagination.PrevTrigger>
+
+    <Pagination.Text format="short" />
+
+    <Pagination.NextTrigger>
+      <Pagination.Item icon={<ChevronRightIcon />} />
+    </Pagination.NextTrigger>
+  </Pagination.Root>
+</VStack>
+```
+
+### Customize Control Buttons
+
+```tsx preview
+<Pagination.Root
+  total={10}
+  withEdges
+  controlNextProps={{
+    icon: <ArrowRightIcon />,
+  }}
+  controlPrevProps={{
+    icon: <ArrowLeftIcon />,
+  }}
+  edgeEndProps={{
+    icon: <ArrowRightToLineIcon />,
+  }}
+  edgeStartProps={{
+    icon: <ArrowLeftToLineIcon />,
+  }}
+/>
+```
+
+### Customize Text
+
+```tsx preview client
+<Pagination.Root size="md" gap="md" total={20}>
+  <Pagination.PrevTrigger>
+    <Pagination.Item icon={<ChevronLeftIcon />} />
+  </Pagination.PrevTrigger>
+
+  <Pagination.Text>
+    {({ page, total }) => `全${total}ページ中${page}ページ目`}
+  </Pagination.Text>
+
+  <Pagination.NextTrigger>
+    <Pagination.Item icon={<ChevronRightIcon />} />
+  </Pagination.NextTrigger>
+</Pagination.Root>
+```
+
+### Control
+
+```tsx preview functional client
+const [page, onChange] = useState<number>(1)
+
+return <Pagination.Root page={page} total={10} onChange={onChange} />
 ```
 
 ## Props

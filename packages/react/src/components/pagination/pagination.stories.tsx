@@ -82,10 +82,6 @@ export const Disabled: Story = () => {
   return <Pagination.Root disabled total={10} />
 }
 
-export const Attached: Story = () => {
-  return <Pagination.Root variant="outline" attached total={10} />
-}
-
 export const Text: Story = () => {
   return (
     <PropsTable

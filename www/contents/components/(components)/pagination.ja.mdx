@@ -58,12 +58,18 @@ import { Pagination } from "@workspaces/ui"
 
 ```tsx preview
 <VStack>
-  <For each={["primary", "secondary", "success", "warning", "danger"]}>
+  <For each={["success", "warning"]}>
     {(colorScheme) => (
       <Pagination.Root key={colorScheme} colorScheme={colorScheme} total={10} />
     )}
   </For>
 </VStack>
+```
+
+### デフォルトのページを設定する
+
+```tsx preview
+<Pagination.Root defaultPage={5} total={10} />
 ```
 
 ### エッジコントロールボタンを追加する
@@ -76,7 +82,7 @@ import { Pagination } from "@workspaces/ui"
 
 ### 前後の数をカスタマイズする
 
-現在のページの前後に表示する数を変更したい場合は、`siblings`に表示したい数を設定します。
+現在のページの前後に表示する数を変更したい場合は、`siblings`に数値を設定します。
 
 ```tsx preview
 <Pagination.Root total={77} siblings={3} />
@@ -84,23 +90,15 @@ import { Pagination } from "@workspaces/ui"
 
 ### 最初と最後の数をカスタマイズする
 
-最初と最後に表示する数を変更したい場合は、`boundaries`に表示したい数を設定します。
+最初と最後に表示する数を変更したい場合は、`boundaries`に数値を設定します。
 
 ```tsx preview
 <Pagination.Root total={77} boundaries={3} />
 ```
 
-### デフォルトのページを設定する
+### 無効にする
 
-`defaultPage`プロパティで初期ページを設定します。
-
-```tsx preview
-<Pagination.Root defaultPage={5} total={10} />
-```
-
-### ページネーションを無効にする
-
-ページネーションを無効にしたい場合は、`disabled`を設定します。
+無効にする場合は、`disabled`を`true`に設定します。
 
 ```tsx preview
 <VStack>
@@ -112,139 +110,81 @@ import { Pagination } from "@workspaces/ui"
 </VStack>
 ```
 
-### ボタンを結合する
-
-`attached`を`true`に設定することで、ページネーションボタンを結合して表示します。
-
-```tsx preview
-<VStack>
-  <Pagination.Root variant="outline" attached total={10} />
-  <Pagination.Root variant="solid" attached total={10} />
-</VStack>
-```
-
-### コントロールボタンをカスタマイズする
-
-- `controlProps`: 両方のボタンに設定されるpropsです。
-- `controlPrevProps`: 前のボタンに設定されるpropsです。
-- `controlNextProps`: 次のボタンに設定されるpropsです。
-
-```tsx preview
-<VStack>
-  <For
-    each={[
-      { props: { controlProps: { children: <GhostIcon /> } } },
-      { props: { controlPrevProps: { children: <GhostIcon /> } } },
-      { props: { controlNextProps: { children: <GhostIcon /> } } },
-    ]}
-  >
-    {({ props }, index) => (
-      <Pagination.Root key={index} total={10} {...props} />
-    )}
-  </For>
-</VStack>
-```
-
-### エッジコントロールボタンをカスタマイズする
-
-- `edgeProps`: 両方のボタンに設定されるpropsです。
-- `edgeStartProps`: 最初のボタンに設定されるpropsです。
-- `edgeEndProps`: 最後のボタンに設定されるpropsです。
-
-```tsx preview
-<VStack>
-  <For
-    each={[
-      { props: { edgeProps: { children: <GhostIcon /> } } },
-      { props: { edgeStartProps: { children: <GhostIcon /> } } },
-      { props: { edgeEndProps: { children: <GhostIcon /> } } },
-    ]}
-  >
-    {({ props }, index) => (
-      <Pagination.Root key={index} total={10} withEdges {...props} />
-    )}
-  </For>
-</VStack>
-```
-
-### 制御する
-
-```tsx preview functional
-const [page, onChange] = useState<number>(1)
-
-return <Pagination.Root page={page} total={10} onChange={onChange} />
-```
-
 ### テキストを表示する
 
-`Pagination.Text`を使用して、異なるフォーマットでページネーション情報を表示できます。
-
-```tsx preview functional
-const [page, setPage] = useState(1)
-
-return (
-  <Wrap gap="md">
-    <Pagination.Root
-      size="md"
-      gap="md"
-      total={10}
-      page={page}
-      onChange={setPage}
-    >
-      <Pagination.PrevTrigger>
-        <Pagination.Item icon={<ChevronLeftIcon />} />
-      </Pagination.PrevTrigger>
-
-      <Pagination.Text format="compact" />
-
-      <Pagination.NextTrigger>
-        <Pagination.Item icon={<ChevronRightIcon />} />
-      </Pagination.NextTrigger>
-    </Pagination.Root>
-
-    <Pagination.Root
-      size="md"
-      gap="md"
-      total={10}
-      page={page}
-      onChange={setPage}
-    >
-      <Pagination.PrevTrigger>
-        <Pagination.Item icon={<ChevronLeftIcon />} />
-      </Pagination.PrevTrigger>
-
-      <Pagination.Text format="short" />
-
-      <Pagination.NextTrigger>
-        <Pagination.Item icon={<ChevronRightIcon />} />
-      </Pagination.NextTrigger>
-    </Pagination.Root>
-  </Wrap>
-)
-```
-
-### テキストをカスタマイズする
-
-関数を使用してテキストコンテンツをカスタマイズできます。
-
-```tsx preview functional
-const [page, setPage] = useState(1)
-
-return (
-  <Pagination.Root size="md" gap="md" total={20} page={page} onChange={setPage}>
+```tsx preview
+<VStack>
+  <Pagination.Root size="md" gap="md" total={10}>
     <Pagination.PrevTrigger>
       <Pagination.Item icon={<ChevronLeftIcon />} />
     </Pagination.PrevTrigger>
 
-    <Pagination.Text>
-      {({ page, total }) => `全${total}ページ中${page}ページ目`}
-    </Pagination.Text>
+    <Pagination.Text format="compact" />
 
     <Pagination.NextTrigger>
       <Pagination.Item icon={<ChevronRightIcon />} />
     </Pagination.NextTrigger>
   </Pagination.Root>
-)
+
+  <Pagination.Root size="md" gap="md" total={10}>
+    <Pagination.PrevTrigger>
+      <Pagination.Item icon={<ChevronLeftIcon />} />
+    </Pagination.PrevTrigger>
+
+    <Pagination.Text format="short" />
+
+    <Pagination.NextTrigger>
+      <Pagination.Item icon={<ChevronRightIcon />} />
+    </Pagination.NextTrigger>
+  </Pagination.Root>
+</VStack>
+```
+
+### コントロールボタンをカスタマイズする
+
+```tsx preview
+<Pagination.Root
+  total={10}
+  withEdges
+  controlNextProps={{
+    icon: <ArrowRightIcon />,
+  }}
+  controlPrevProps={{
+    icon: <ArrowLeftIcon />,
+  }}
+  edgeEndProps={{
+    icon: <ArrowRightToLineIcon />,
+  }}
+  edgeStartProps={{
+    icon: <ArrowLeftToLineIcon />,
+  }}
+/>
+```
+
+### テキストをカスタマイズする
+
+```tsx preview client
+<Pagination.Root size="md" gap="md" total={20}>
+  <Pagination.PrevTrigger>
+    <Pagination.Item icon={<ChevronLeftIcon />} />
+  </Pagination.PrevTrigger>
+
+  <Pagination.Text>
+    {({ page, total }) => `全${total}ページ中${page}ページ目`}
+  </Pagination.Text>
+
+  <Pagination.NextTrigger>
+    <Pagination.Item icon={<ChevronRightIcon />} />
+  </Pagination.NextTrigger>
+</Pagination.Root>
+```
+
+### 制御する
+
+```tsx preview functional client
+const [page, onChange] = useState<number>(1)
+
+return <Pagination.Root page={page} total={10} onChange={onChange} />
 ```
 
 ## Props

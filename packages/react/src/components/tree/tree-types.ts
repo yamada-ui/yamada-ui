@@ -96,6 +96,10 @@ export interface TreeNodeRenderProps {
    */
   node: TreeNode
   /**
+   * The unique identifier for the node.
+   */
+  nodeId: string
+  /**
    * The node state information.
    */
   nodeState: TreeNodeState

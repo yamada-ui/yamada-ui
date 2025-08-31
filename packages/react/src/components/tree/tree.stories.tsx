@@ -242,6 +242,7 @@ export const CustomIcons = () => {
             render={({
               children,
               node,
+              nodeId,
               nodeState,
               onSelect,
               onToggleExpand,
@@ -273,6 +274,7 @@ export const CustomIcons = () => {
                 <Tree.Item
                   data-disabled={node.disabled ? "true" : undefined}
                   data-selected={nodeState.selected ? "true" : undefined}
+                  nodeId={nodeId}
                   onClick={!node.disabled ? onSelect : undefined}
                 >
                   <Tree.ItemIndicator>🎵</Tree.ItemIndicator>

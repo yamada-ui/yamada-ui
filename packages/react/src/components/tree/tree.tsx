@@ -350,6 +350,7 @@ export const TreeNode: FC<TreeNodeProps> = ({
     children: childrenContent,
     indexPath,
     node,
+    nodeId,
     nodeState,
     onToggleExpand: handleToggleExpand,
   }

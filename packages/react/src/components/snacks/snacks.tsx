@@ -38,7 +38,7 @@ export interface SnacksProps extends HTMLMotionProps {
   /**
    * A property that provides spacing between the top and bottom.
    *
-   * @default "[0, 'lg']"
+   * @default [0, "lg"]
    */
   gutter?: [CSSProps["paddingTop"], CSSProps["paddingBottom"]]
   /**

@@ -41,7 +41,7 @@ export const groupStyle = defineComponentStyle({
     /**
      * The orientation of the group.
      *
-     * @default "horizontal"
+     * @default 'horizontal'
      */
     orientation: {
       horizontal: {

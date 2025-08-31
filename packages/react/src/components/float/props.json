@@ -16,17 +16,17 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "offset": {
-      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "type": "\"-0.5\" | \"-1.5\" | \"-1\" | \"-10\" | \"-11\" | \"-12\" | \"-13\" | \"-14\" | \"-15\" | \"-16\" ...",
       "description": "Changes position offset.",
       "required": false
     },
     "placement": {
-      "type": "\"center\" | \"end\" | \"start\" | \"center-center\" | \"center-end\" | \"center-start\" | \"end-center\" | \"end-end\" | \"end-start\" | \"start-center\" ...",
+      "type": "\"center-center\" | \"center-end\" | \"center-start\" | \"center\" | \"end-center\" | \"end-end\" | \"end-start\" | \"end\" | \"start-center\" | \"start-end\" ...",
       "defaultValue": "\"start-end\"",
       "description": "The placement of the float.",
       "required": false

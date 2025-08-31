@@ -234,6 +234,7 @@ export const CustomIcons = () => {
             node={node}
             render={({
               children,
+              indexPath,
               node,
               nodeId,
               nodeState,
@@ -241,7 +242,7 @@ export const CustomIcons = () => {
               onToggleExpand,
             }) =>
               nodeState.isBranch ? (
-                <Tree.Branch>
+                <Tree.Branch indexPath={indexPath}>
                   <Tree.BranchControl
                     data-disabled={node.disabled ? "true" : undefined}
                     data-expanded={nodeState.expanded ? "true" : undefined}
@@ -267,6 +268,7 @@ export const CustomIcons = () => {
                 <Tree.Item
                   data-disabled={node.disabled ? "true" : undefined}
                   data-selected={nodeState.selected ? "true" : undefined}
+                  indexPath={indexPath}
                   nodeId={nodeId}
                   onClick={!node.disabled ? onSelect : undefined}
                 >

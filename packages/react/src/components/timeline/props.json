@@ -138,6 +138,7 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
@@ -366,6 +367,7 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },

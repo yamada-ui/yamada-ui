@@ -22,11 +22,13 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
+      "defaultValue": "\"solid\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -156,11 +158,13 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
+        "defaultValue": "\"solid\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -289,11 +293,13 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
+        "defaultValue": "\"solid\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -353,7 +359,7 @@
       },
       "items": {
         "type": "RadioItem<Y>[]",
-        "defaultValue": "\"[]\"",
+        "defaultValue": "[]",
         "description": "If provided, generate options based on items.",
         "required": false
       },
@@ -436,11 +442,13 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"outline\" | \"solid\" | \"subtle\" | \"surface\"",
+      "defaultValue": "\"solid\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -500,7 +508,7 @@
     },
     "items": {
       "type": "RadioItem<Y>[]",
-      "defaultValue": "\"[]\"",
+      "defaultValue": "[]",
       "description": "If provided, generate options based on items.",
       "required": false
     },

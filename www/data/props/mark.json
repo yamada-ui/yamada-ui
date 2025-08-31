@@ -22,6 +22,7 @@
     },
     "variant": {
       "type": "\"accent\" | \"solid\" | \"subtle\" | \"text\"",
+      "defaultValue": "\"subtle\"",
       "description": "The variant of the component.",
       "required": false
     }

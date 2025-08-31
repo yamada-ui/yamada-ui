@@ -105,6 +105,7 @@
       },
       "variant": {
         "type": "\"island\" | \"plain\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "defaultValue": "\"plain\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -243,6 +244,7 @@
     },
     "variant": {
       "type": "\"island\" | \"plain\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "defaultValue": "\"plain\"",
       "description": "The variant of the component.",
       "required": false
     },

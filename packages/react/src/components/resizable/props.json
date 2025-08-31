@@ -96,6 +96,7 @@
       },
       "variant": {
         "type": "\"border\" | \"plain\" | \"spacer\"",
+        "defaultValue": "\"border\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -287,6 +288,7 @@
     },
     "variant": {
       "type": "\"border\" | \"plain\" | \"spacer\"",
+      "defaultValue": "\"border\"",
       "description": "The variant of the component.",
       "required": false
     },

@@ -50,11 +50,13 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\"",
+        "defaultValue": "hoge",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "[{ _peerAccept?: [... & { base?: [... & ..., ... & ...] | (... & ...) | undefined; \"2xl\"?: [... & ..., ... & ...] | (... & ...) | undefined; lg?: [...] | ... 1 more ... | undefined; md?: [...] | ... 1 more ... | undefined; sm?: [...] | ... 1 more ... | undefined; xl?: [...] | ... 1 more ... | undefined; }, ... & { ....",
+        "defaultValue": "hoge",
         "description": "The variant of the component.",
         "required": false
       },
@@ -308,11 +310,13 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\"",
+      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "[{ _peerAccept?: [... & { base?: [... & ..., ... & ...] | (... & ...) | undefined; \"2xl\"?: [... & ..., ... & ...] | (... & ...) | undefined; lg?: [...] | ... 1 more ... | undefined; md?: [...] | ... 1 more ... | undefined; sm?: [...] | ... 1 more ... | undefined; xl?: [...] | ... 1 more ... | undefined; }, ... & { ....",
+      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },

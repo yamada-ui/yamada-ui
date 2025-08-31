@@ -33,7 +33,7 @@
     },
     "gutter": {
       "type": "[CSSProps[\"paddingTop\"], CSSProps[\"paddingBottom\"]]",
-      "defaultValue": "\"[0, \"lg\"]\"",
+      "defaultValue": "[0, \"lg\"]",
       "description": "A property that provides spacing between the top and bottom.",
       "required": false
     },

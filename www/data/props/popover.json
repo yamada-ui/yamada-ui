@@ -118,6 +118,7 @@
     "Root": {
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xs\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
@@ -437,6 +438,7 @@
   "PopoverRoot": {
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xs\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },

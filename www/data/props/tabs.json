@@ -72,11 +72,13 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"line\" | \"outline\" | \"plain\" | \"subtle\"",
+        "defaultValue": "\"line\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -237,11 +239,13 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"line\" | \"outline\" | \"plain\" | \"subtle\"",
+      "defaultValue": "\"line\"",
       "description": "The variant of the component.",
       "required": false
     },

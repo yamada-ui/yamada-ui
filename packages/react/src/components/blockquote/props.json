@@ -122,6 +122,7 @@
       },
       "variant": {
         "type": "\"plain\" | \"solid\" | \"subtle\"",
+        "defaultValue": "\"subtle\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -291,6 +292,7 @@
     },
     "variant": {
       "type": "\"plain\" | \"solid\" | \"subtle\"",
+      "defaultValue": "\"subtle\"",
       "description": "The variant of the component.",
       "required": false
     },

@@ -22,6 +22,7 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },

@@ -67,11 +67,13 @@
       },
       "size": {
         "type": "\"full\" | \"lg\" | \"md\" | \"sm\" | \"xs\"",
+        "defaultValue": "\"sm\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"dashed\" | \"panel\" | \"plain\" | \"solid\"",
+        "defaultValue": "\"dashed\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -363,11 +365,13 @@
     },
     "size": {
       "type": "\"full\" | \"lg\" | \"md\" | \"sm\" | \"xs\"",
+      "defaultValue": "\"sm\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"dashed\" | \"panel\" | \"plain\" | \"solid\"",
+      "defaultValue": "\"dashed\"",
       "description": "The variant of the component.",
       "required": false
     },

@@ -55,11 +55,13 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"elevated\" | \"outline\" | \"panel\" | \"plain\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "defaultValue": "\"panel\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -163,11 +165,13 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"elevated\" | \"outline\" | \"panel\" | \"plain\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "defaultValue": "\"panel\"",
       "description": "The variant of the component.",
       "required": false
     },

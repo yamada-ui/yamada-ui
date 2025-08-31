@@ -131,11 +131,13 @@
       },
       "size": {
         "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "defaultValue": "hoge",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "defaultValue": "hoge",
         "description": "The variant of the component.",
         "required": false
       },
@@ -175,7 +177,7 @@
         "required": false
       },
       "type": {
-        "type": "\"button\" | \"submit\" | \"reset\"",
+        "type": "\"button\" | \"reset\" | \"submit\"",
         "defaultValue": "\"button\"",
         "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
         "required": false
@@ -204,11 +206,13 @@
       },
       "size": {
         "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "defaultValue": "hoge",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+        "defaultValue": "hoge",
         "description": "The variant of the component.",
         "required": false
       },
@@ -248,7 +252,7 @@
         "required": false
       },
       "type": {
-        "type": "\"button\" | \"submit\" | \"reset\"",
+        "type": "\"button\" | \"reset\" | \"submit\"",
         "defaultValue": "\"button\"",
         "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
         "required": false
@@ -277,6 +281,7 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
@@ -551,11 +556,13 @@
     },
     "size": {
       "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },
@@ -595,7 +602,7 @@
       "required": false
     },
     "type": {
-      "type": "\"button\" | \"submit\" | \"reset\"",
+      "type": "\"button\" | \"reset\" | \"submit\"",
       "defaultValue": "\"button\"",
       "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
       "required": false
@@ -624,11 +631,13 @@
     },
     "size": {
       "type": "\"2xl\" | \"2xs\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"ghost\" | \"outline\" | \"solid\" | \"subtle\" | \"surface\" ...",
+      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },
@@ -668,7 +677,7 @@
       "required": false
     },
     "type": {
-      "type": "\"button\" | \"submit\" | \"reset\"",
+      "type": "\"button\" | \"reset\" | \"submit\"",
       "defaultValue": "\"button\"",
       "description": "The type of button. Accepts `button`, `reset`, or `submit`.",
       "required": false
@@ -697,6 +706,7 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },

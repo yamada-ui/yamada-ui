@@ -22,11 +22,13 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xs\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"dashed\" | \"dotted\" | \"solid\"",
+      "defaultValue": "\"solid\"",
       "description": "The variant of the component.",
       "required": false
     },

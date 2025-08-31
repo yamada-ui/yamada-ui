@@ -95,6 +95,7 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xs\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
@@ -285,6 +286,7 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xs\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },

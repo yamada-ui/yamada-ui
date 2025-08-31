@@ -190,6 +190,7 @@
       },
       "variant": {
         "type": "\"panel\" | \"plain\"",
+        "defaultValue": "\"plain\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -428,6 +429,7 @@
     },
     "variant": {
       "type": "\"panel\" | \"plain\"",
+      "defaultValue": "\"plain\"",
       "description": "The variant of the component.",
       "required": false
     },

@@ -22,6 +22,7 @@
     },
     "variant": {
       "type": "\"plain\" | \"underline\"",
+      "defaultValue": "\"plain\"",
       "description": "The variant of the component.",
       "required": false
     },

@@ -89,11 +89,13 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"outline\" | \"subtle\" | \"surface\"",
+        "defaultValue": "\"surface\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -321,11 +323,13 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"outline\" | \"subtle\" | \"surface\"",
+        "defaultValue": "\"surface\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -352,7 +356,7 @@
       },
       "defaultValue": {
         "type": "Y[]",
-        "defaultValue": "\"[]\"",
+        "defaultValue": "[]",
         "description": "The initial value of the checkbox group.",
         "required": false
       },
@@ -391,7 +395,7 @@
       },
       "items": {
         "type": "CheckboxCardItem<Y>[]",
-        "defaultValue": "\"[]\"",
+        "defaultValue": "[]",
         "description": "If provided, generate options based on items.",
         "required": false
       },
@@ -553,11 +557,13 @@
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"outline\" | \"subtle\" | \"surface\"",
+        "defaultValue": "\"surface\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -740,11 +746,13 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"outline\" | \"subtle\" | \"surface\"",
+      "defaultValue": "\"surface\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -771,7 +779,7 @@
     },
     "defaultValue": {
       "type": "Y[]",
-      "defaultValue": "\"[]\"",
+      "defaultValue": "[]",
       "description": "The initial value of the checkbox group.",
       "required": false
     },
@@ -810,7 +818,7 @@
     },
     "items": {
       "type": "CheckboxCardItem<Y>[]",
-      "defaultValue": "\"[]\"",
+      "defaultValue": "[]",
       "description": "If provided, generate options based on items.",
       "required": false
     },
@@ -926,11 +934,13 @@
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"outline\" | \"subtle\" | \"surface\"",
+      "defaultValue": "\"surface\"",
       "description": "The variant of the component.",
       "required": false
     },

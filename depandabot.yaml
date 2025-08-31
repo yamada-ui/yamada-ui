@@ -1,0 +1,29 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+      timezone: "Asia/Tokyo"
+    assignees:
+      - "hirotomoyamada"
+    labels:
+      - "dependencies"
+    groups:
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+      eslint:
+        patterns:
+          - "*eslint*"
+      storybook:
+        patterns:
+          - "storybook"
+          - "@storybook/*"
+      changesets:
+        patterns:
+          - "@changesets/*"
+    open-pull-request-limit: 10

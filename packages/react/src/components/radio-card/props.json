@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -39,7 +39,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -61,7 +61,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -83,17 +83,19 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"outline\" | \"subtle\" | \"surface\"",
+        "defaultValue": "\"surface\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -135,12 +137,12 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
@@ -219,7 +221,7 @@
         "required": false
       },
       "shape": {
-        "type": "\"circle\" | \"square\" | \"rounded\"",
+        "type": "\"circle\" | \"rounded\" | \"square\"",
         "defaultValue": "\"circle\"",
         "description": "The shape of the component",
         "required": false
@@ -254,7 +256,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -276,7 +278,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -299,22 +301,24 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"outline\" | \"subtle\" | \"surface\"",
+        "defaultValue": "\"surface\"",
         "description": "The variant of the component.",
         "required": false
       },
       "align": {
-        "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
+        "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
         "description": "The CSS `align-items` property.",
         "required": false
       },
@@ -325,7 +329,7 @@
         "required": false
       },
       "basis": {
-        "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+        "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-auto\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" | \"1/2\" ...",
         "description": "The CSS `flex-basis` property.",
         "required": false
       },
@@ -335,7 +339,7 @@
         "required": false
       },
       "direction": {
-        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
+        "type": "\"-moz-initial\" | \"column-reverse\" | \"column\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"row-reverse\" | \"row\" | \"unset\" ...",
         "description": "The CSS `flex-direction` property.",
         "required": false
       },
@@ -346,12 +350,12 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
@@ -369,7 +373,7 @@
       },
       "items": {
         "type": "RadioCardItem<Y>[]",
-        "defaultValue": "\"[]\"",
+        "defaultValue": "[]",
         "description": "If provided, generate options based on items.",
         "required": false
       },
@@ -403,13 +407,13 @@
         "required": false
       },
       "shape": {
-        "type": "\"circle\" | \"square\" | \"rounded\"",
+        "type": "\"circle\" | \"rounded\" | \"square\"",
         "defaultValue": "\"circle\"",
         "description": "The shape of the component",
         "required": false
       },
       "shrink": {
-        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
         "description": "The CSS `flex-shrink` property.",
         "required": false
       },
@@ -430,7 +434,7 @@
         "required": false
       },
       "wrap": {
-        "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
+        "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" ...",
         "description": "The CSS `flex-wrap` property.",
         "required": false
       }
@@ -454,7 +458,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -476,7 +480,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -498,7 +502,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -520,17 +524,19 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
         "type": "\"outline\" | \"subtle\" | \"surface\"",
+        "defaultValue": "\"surface\"",
         "description": "The variant of the component.",
         "required": false
       },
@@ -572,12 +578,12 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
@@ -656,7 +662,7 @@
         "required": false
       },
       "shape": {
-        "type": "\"circle\" | \"square\" | \"rounded\"",
+        "type": "\"circle\" | \"rounded\" | \"square\"",
         "defaultValue": "\"circle\"",
         "description": "The shape of the component",
         "required": false
@@ -691,22 +697,24 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"outline\" | \"subtle\" | \"surface\"",
+      "defaultValue": "\"surface\"",
       "description": "The variant of the component.",
       "required": false
     },
     "align": {
-      "type": "\"center\" | \"normal\" | \"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"end\" | \"start\" ...",
+      "type": "\"-moz-initial\" | \"baseline\" | \"center\" | \"end\" | \"flex-end\" | \"flex-start\" | \"inherit\" | \"initial\" | \"normal\" | \"revert-layer\" ...",
       "description": "The CSS `align-items` property.",
       "required": false
     },
@@ -717,7 +725,7 @@
       "required": false
     },
     "basis": {
-      "type": "number | \"1\" | \"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"3xl\" | \"4xl\" | \"xs\" ...",
+      "type": "\"-moz-fit-content\" | \"-moz-initial\" | \"-moz-max-content\" | \"-moz-min-content\" | \"-webkit-auto\" | \"0.5\" | \"1.5\" | \"1\" | \"1/12\" | \"1/2\" ...",
       "description": "The CSS `flex-basis` property.",
       "required": false
     },
@@ -727,7 +735,7 @@
       "required": false
     },
     "direction": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"row\" | \"column\" | \"column-reverse\" | \"row-reverse\" ...",
+      "type": "\"-moz-initial\" | \"column-reverse\" | \"column\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"row-reverse\" | \"row\" | \"unset\" ...",
       "description": "The CSS `flex-direction` property.",
       "required": false
     },
@@ -738,12 +746,12 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },
@@ -761,7 +769,7 @@
     },
     "items": {
       "type": "RadioCardItem<Y>[]",
-      "defaultValue": "\"[]\"",
+      "defaultValue": "[]",
       "description": "If provided, generate options based on items.",
       "required": false
     },
@@ -795,13 +803,13 @@
       "required": false
     },
     "shape": {
-      "type": "\"circle\" | \"square\" | \"rounded\"",
+      "type": "\"circle\" | \"rounded\" | \"square\"",
       "defaultValue": "\"circle\"",
       "description": "The shape of the component",
       "required": false
     },
     "shrink": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | number & {} ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"revert-layer\" | \"revert\" | \"unset\" | number & {} ...",
       "description": "The CSS `flex-shrink` property.",
       "required": false
     },
@@ -822,7 +830,7 @@
       "required": false
     },
     "wrap": {
-      "type": "\"initial\" | \"inherit\" | \"-moz-initial\" | \"revert\" | \"revert-layer\" | \"unset\" | \"wrap\" | \"nowrap\" | \"wrap-reverse\" ...",
+      "type": "\"-moz-initial\" | \"inherit\" | \"initial\" | \"nowrap\" | \"revert-layer\" | \"revert\" | \"unset\" | \"wrap-reverse\" | \"wrap\" ...",
       "description": "The CSS `flex-wrap` property.",
       "required": false
     }
@@ -844,7 +852,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -866,17 +874,19 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xl\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
       "type": "\"outline\" | \"subtle\" | \"surface\"",
+      "defaultValue": "\"surface\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -918,12 +928,12 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },
@@ -1002,7 +1012,7 @@
       "required": false
     },
     "shape": {
-      "type": "\"circle\" | \"square\" | \"rounded\"",
+      "type": "\"circle\" | \"rounded\" | \"square\"",
       "defaultValue": "\"circle\"",
       "description": "The shape of the component",
       "required": false

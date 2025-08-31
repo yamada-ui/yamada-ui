@@ -17,7 +17,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
@@ -44,7 +44,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
@@ -71,17 +71,19 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "defaultValue": "hoge",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\"",
+        "type": "\"filled\" | \"flushed\" | \"outline\" | \"plain\"",
+        "defaultValue": "hoge",
         "description": "The variant of the component.",
         "required": false
       },
@@ -176,7 +178,7 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
@@ -187,7 +189,7 @@
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
@@ -226,7 +228,7 @@
       },
       "items": {
         "type": "ComboboxItem[]",
-        "defaultValue": "\"[]\"",
+        "defaultValue": "[]",
         "description": "If provided, generate options based on items.",
         "required": false
       },
@@ -377,7 +379,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -399,7 +401,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -421,7 +423,7 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       }
@@ -443,12 +445,13 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
         "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "defaultValue": "\"md\"",
         "description": "The size of the component.",
         "required": false
       },
@@ -474,7 +477,7 @@
       },
       "defaultMonth": {
         "type": "Date",
-        "defaultValue": "\"new Date()\"",
+        "defaultValue": "new Date()",
         "description": "The initial month of the calendar.",
         "required": false
       },
@@ -519,13 +522,13 @@
       },
       "maxDate": {
         "type": "Date",
-        "defaultValue": "\"new Date(2099, 11, 31)\"",
+        "defaultValue": "new Date(2099, 11, 31)",
         "description": "The maximum possible date.",
         "required": false
       },
       "minDate": {
         "type": "Date",
-        "defaultValue": "\"new Date(1900, 0, 1)\"",
+        "defaultValue": "new Date(1900, 0, 1)",
         "description": "The minimum possible date.",
         "required": false
       },
@@ -581,7 +584,7 @@
         "required": false
       },
       "shape": {
-        "type": "\"circle\" | \"square\" | \"rounded\"",
+        "type": "\"circle\" | \"rounded\" | \"square\"",
         "defaultValue": "\"circle\"",
         "description": "The shape of the cell",
         "required": false
@@ -615,7 +618,7 @@
       },
       "weekendDays": {
         "type": "number[]",
-        "defaultValue": "\"[0, 6]\"",
+        "defaultValue": "[0, 6]",
         "description": "Define weekend days.",
         "required": false
       },
@@ -652,17 +655,19 @@
         "required": false
       },
       "colorScheme": {
-        "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+        "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
         "description": "Set color scheme variables.",
         "required": false
       },
       "size": {
         "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+        "defaultValue": "hoge",
         "description": "The size of the component.",
         "required": false
       },
       "variant": {
-        "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\"",
+        "type": "\"filled\" | \"flushed\" | \"outline\" | \"plain\"",
+        "defaultValue": "hoge",
         "description": "The variant of the component.",
         "required": false
       },
@@ -757,7 +762,7 @@
         "required": false
       },
       "errorBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
         "description": "The border color when the input is invalid.",
         "required": false
       },
@@ -768,7 +773,7 @@
         "required": false
       },
       "focusBorderColor": {
-        "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+        "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
         "description": "The border color when the input is focused.",
         "required": false
       },
@@ -807,7 +812,7 @@
       },
       "items": {
         "type": "ComboboxItem[]",
-        "defaultValue": "\"[]\"",
+        "defaultValue": "[]",
         "description": "If provided, generate options based on items.",
         "required": false
       },
@@ -959,7 +964,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -986,7 +991,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -1013,17 +1018,19 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\"",
+      "type": "\"filled\" | \"flushed\" | \"outline\" | \"plain\"",
+      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },
@@ -1118,7 +1125,7 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
@@ -1129,7 +1136,7 @@
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },
@@ -1168,7 +1175,7 @@
     },
     "items": {
       "type": "ComboboxItem[]",
-      "defaultValue": "\"[]\"",
+      "defaultValue": "[]",
       "description": "If provided, generate options based on items.",
       "required": false
     },
@@ -1319,7 +1326,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -1341,7 +1348,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -1363,7 +1370,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     }
@@ -1385,12 +1392,13 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
       "type": "\"2xl\" | \"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "defaultValue": "\"md\"",
       "description": "The size of the component.",
       "required": false
     },
@@ -1416,7 +1424,7 @@
     },
     "defaultMonth": {
       "type": "Date",
-      "defaultValue": "\"new Date()\"",
+      "defaultValue": "new Date()",
       "description": "The initial month of the calendar.",
       "required": false
     },
@@ -1461,13 +1469,13 @@
     },
     "maxDate": {
       "type": "Date",
-      "defaultValue": "\"new Date(2099, 11, 31)\"",
+      "defaultValue": "new Date(2099, 11, 31)",
       "description": "The maximum possible date.",
       "required": false
     },
     "minDate": {
       "type": "Date",
-      "defaultValue": "\"new Date(1900, 0, 1)\"",
+      "defaultValue": "new Date(1900, 0, 1)",
       "description": "The minimum possible date.",
       "required": false
     },
@@ -1523,7 +1531,7 @@
       "required": false
     },
     "shape": {
-      "type": "\"circle\" | \"square\" | \"rounded\"",
+      "type": "\"circle\" | \"rounded\" | \"square\"",
       "defaultValue": "\"circle\"",
       "description": "The shape of the cell",
       "required": false
@@ -1557,7 +1565,7 @@
     },
     "weekendDays": {
       "type": "number[]",
-      "defaultValue": "\"[0, 6]\"",
+      "defaultValue": "[0, 6]",
       "description": "Define weekend days.",
       "required": false
     },
@@ -1594,17 +1602,19 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
     "size": {
       "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "defaultValue": "hoge",
       "description": "The size of the component.",
       "required": false
     },
     "variant": {
-      "type": "\"outline\" | \"plain\" | \"filled\" | \"flushed\"",
+      "type": "\"filled\" | \"flushed\" | \"outline\" | \"plain\"",
+      "defaultValue": "hoge",
       "description": "The variant of the component.",
       "required": false
     },
@@ -1699,7 +1709,7 @@
       "required": false
     },
     "errorBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
       "description": "The border color when the input is invalid.",
       "required": false
     },
@@ -1710,7 +1720,7 @@
       "required": false
     },
     "focusBorderColor": {
-      "type": "\"link\" | \"amber\" | \"amber.50\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.500\" | \"amber.600\" | \"amber.700\" ...",
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
       "description": "The border color when the input is focused.",
       "required": false
     },
@@ -1749,7 +1759,7 @@
     },
     "items": {
       "type": "ComboboxItem[]",
-      "defaultValue": "\"[]\"",
+      "defaultValue": "[]",
       "description": "If provided, generate options based on items.",
       "required": false
     },

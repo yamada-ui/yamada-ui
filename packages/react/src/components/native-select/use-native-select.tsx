@@ -34,7 +34,7 @@ export interface UseNativeSelectProps extends HTMLProps<"select">, FieldProps {
   /**
    * If provided, generate options based on items.
    *
-   * @default '[]'
+   * @default []
    */
   items?: NativeSelectItem[]
   /**

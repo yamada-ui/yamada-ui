@@ -1,12 +1,22 @@
+import type { ComponentStyle } from "@yamada-ui/react"
 import type {
   JSDocTagInfo,
   SourceFile,
+  Statement,
   Symbol,
   Type,
   TypeChecker,
   UnionType,
 } from "typescript"
-import { isEmptyObject, isString } from "@yamada-ui/utils"
+import {
+  isArray,
+  isEmptyObject,
+  isObject,
+  isString,
+  isUndefined,
+  toCamelCase,
+  toKebabCase,
+} from "@yamada-ui/utils"
 import { format, writeFileWithFormat } from "@yamada-ui/workspace/prettier"
 import { Command } from "commander"
 import { readdir, readFile } from "fs/promises"
@@ -172,15 +182,19 @@ function isPrivate(tags: JSDocTagInfo[]) {
   return !!tags.find(({ name }) => name === "private")
 }
 
-function getDefaultValue(tags: JSDocTagInfo[]) {
-  const value = tags
-    .find(({ name }) => name === "default")
-    ?.text?.map(({ text }) => text)
-    .join("\n")
+function getDefaultValue(name: string, prop: string, tags: JSDocTagInfo[]) {
+  if (prop === "variant" || prop === "size") {
+    return "hoge"
+  } else {
+    const value = tags
+      .find(({ name }) => name === "default")
+      ?.text?.map(({ text }) => text)
+      .join("\n")
 
-  if (!value) return
+    if (!value) return
 
-  return value.replace(/^'(.*)'$/, '"$1"')
+    return value.replace(/^'(.*)'$/, '"$1"')
+  }
 }
 
 function getDeprecated(tags: JSDocTagInfo[]) {
@@ -250,7 +264,7 @@ function getTypeValue(typeChecker: TypeChecker) {
 
       if (values.every((v) => v === "true" || v === "false")) return "boolean"
 
-      const value = values.join(" | ")
+      const value = values.sort((a, b) => a.localeCompare(b)).join(" | ")
 
       if (value.length < 50) return value
 
@@ -309,11 +323,56 @@ function sortByRequiredProps(props: Props) {
   )
 }
 
+async function getThemeDefaultValue(statement: Statement, dirPath: string) {
+  const themeProps: { [key: string]: string | undefined } = {
+    size: undefined,
+    variant: undefined,
+  }
+
+  if (!isInterfaceDeclaration(statement) || !statement.heritageClauses)
+    return themeProps
+
+  let name: string | undefined
+
+  statement.heritageClauses.forEach((clause) => {
+    clause.types.forEach((type) => {
+      const value = type.getText()
+
+      if (!value.startsWith("ThemeProps")) return
+
+      name = value.replace(/^ThemeProps<([^>]+)>$/, "$1")
+    })
+  })
+
+  if (!name) return themeProps
+
+  const fileName = `${toKebabCase(name.replace(/Style$/, ""))}.style.ts`
+  const style = await import(path.join(dirPath, fileName))
+  const { defaultProps } = style[toCamelCase(name)] as ComponentStyle
+
+  themeProps.variant = !isUndefined(defaultProps?.variant)
+    ? isObject(defaultProps.variant) || isArray(defaultProps.variant)
+      ? JSON.stringify(defaultProps.size)
+          .replace(/"(\w+)":/g, " $1: ")
+          .replace(/}$/, " }")
+      : `\"${defaultProps.variant}\"`
+    : undefined
+  themeProps.size = !isUndefined(defaultProps?.size)
+    ? isObject(defaultProps.size) || isArray(defaultProps.size)
+      ? JSON.stringify(defaultProps.size)
+          .replace(/"(\w+)":/g, " $1: ")
+          .replace(/}$/, " }")
+      : `\"${defaultProps.size}\"`
+    : undefined
+
+  return themeProps
+}
+
 function extractPropsOfTypeName(
   sourceFile: SourceFile,
   typeChecker: TypeChecker,
 ) {
-  return async function (name: string) {
+  return async function (dirPath: string, name: string) {
     const regexp = new RegExp(`^${name}$`)
     const statement = sourceFile.statements.find(
       (statement) =>
@@ -328,6 +387,7 @@ function extractPropsOfTypeName(
 
     const type = typeChecker.getTypeAtLocation(statement)
     const typeName = (statement as any).name.getText()
+    const themeProps = await getThemeDefaultValue(statement, dirPath)
 
     for (const property of type.getProperties()) {
       if (shouldIgnoreProperty(property)) continue
@@ -337,9 +397,9 @@ function extractPropsOfTypeName(
       if (isPrivate(tags)) continue
 
       const see = getSee(tags)
-      const defaultValue = getDefaultValue(tags)
-      const deprecated = getDeprecated(tags)
       const prop = property.getName()
+      const defaultValue = themeProps[prop] ?? getDefaultValue(name, prop, tags)
+      const deprecated = getDeprecated(tags)
       const description = await getDescription(typeChecker)(property)
       const { type, required } = await getType(sourceFile, typeChecker)(
         property,
@@ -427,7 +487,7 @@ function main() {
                     const props = await extractPropsOfTypeName(
                       sourceFile,
                       getTypeChecker(),
-                    )(name)
+                    )(dirPath, name)
 
                     Object.entries(props).forEach(([prop, { description }]) => {
                       if (isString(description) && !description)

@@ -6,7 +6,574 @@ source: components/modal
 style: components/modal/modal.style.ts
 ---
 
+```tsx preview
+<Modal.Root>
+  <Modal.OpenTrigger>
+    <Button>Open Modal</Button>
+  </Modal.OpenTrigger>
+
+  <Modal.Content>
+    <Modal.Header>
+      <Modal.Title>作品冒頭</Modal.Title>
+    </Modal.Header>
+
+    <Modal.Body>
+      青春とは嘘であり、悪である。
+      青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+      すべては彼らのご都合主義でしかない。結論を言おう。
+      青春を楽しむ愚か者ども、砕け散れ。
+    </Modal.Body>
+    <Modal.Footer>
+      <Modal.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Modal.CloseTrigger>
+      <Button>砕け散る</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Modal } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Modal } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Modal } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Modal.Root>
+  <Modal.OpenTrigger />
+  <Modal.Overlay />
+  <Modal.Content>
+    <Modal.CloseButton />
+    <Modal.Header>
+      <Modal.Title />
+    </Modal.Header>
+    <Modal.Body />
+    <Modal.Footer>
+      <Modal.CloseTrigger />
+    </Modal.Footer>
+  </Modal.Content>
+</Modal.Root>
+```
+
+### Use props
+
+```tsx preview
+<Modal.Root
+  body="青春とは嘘であり、悪である。青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。すべては彼らのご都合主義でしかない。結論を言おう。青春を楽しむ愚か者ども、砕け散れ。"
+  cancel="とじる"
+  success="砕け散る"
+  title="作品冒頭"
+  trigger={<Button>Open Modal</Button>}
+  onCancel={(onClose) => onClose()}
+  onSuccess={noop}
+/>
+```
+
+### Change Size
+
+```tsx preview functional
+const [size, setSize] = useState<Modal.RootProps["size"]>("md")
+const { open, onClose, onOpen } = useDisclosure()
+
+return (
+  <>
+    <Wrap gap="md">
+      <For each={["xs", "sm", "md", "lg", "xl", "cover", "full"] as const}>
+        {(size) => (
+          <Button
+            key={size}
+            onClick={() => {
+              setSize(size)
+              onOpen()
+            }}
+          >
+            Open "{size}" Modal
+          </Button>
+        )}
+      </For>
+    </Wrap>
+
+    <Modal.Root size={size} open={open} onClose={onClose}>
+      <Modal.Content>
+        <Modal.Header>
+          <Modal.Title>作品冒頭</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          青春とは嘘であり、悪である。
+          青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+          すべては彼らのご都合主義でしかない。結論を言おう。
+          青春を楽しむ愚か者ども、砕け散れ。
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="ghost" onClick={onClose}>
+            とじる
+          </Button>
+          <Button>砕け散る</Button>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal.Root>
+  </>
+)
+```
+
+### Change Position
+
+To change the display position, set `placement` to `start-center`, `center-start`, etc. By default, `center-center` is set.
+
+```tsx preview functional
+const [placement, setPlacement] =
+  useState<Modal.RootProps["placement"]>("center")
+const { open, onClose, onOpen } = useDisclosure()
+
+return (
+  <>
+    <Wrap gap="md">
+      <For
+        each={
+          [
+            "start-start",
+            "start-center",
+            "start-end",
+            "center-start",
+            "center-center",
+            "center-end",
+            "end-start",
+            "end-center",
+            "end-end",
+          ] as const
+        }
+      >
+        {(placement) => (
+          <Button
+            key={placement}
+            onClick={() => {
+              setPlacement(placement)
+              onOpen()
+            }}
+          >
+            Open "{placement}" Modal
+          </Button>
+        )}
+      </For>
+    </Wrap>
+
+    <Modal.Root open={open} placement={placement} onClose={onClose}>
+      <Modal.Content>
+        <Modal.Header>
+          <Modal.Title>作品冒頭</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          青春とは嘘であり、悪である。
+          青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+          すべては彼らのご都合主義でしかない。結論を言おう。
+          青春を楽しむ愚か者ども、砕け散れ。
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="ghost" onClick={onClose}>
+            とじる
+          </Button>
+          <Button>砕け散る</Button>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal.Root>
+  </>
+)
+```
+
+### Change Animation
+
+To change the show or hide animation, set `animation` to `block-start`, `inline-end`, etc. By default, `scale` is set.
+
+```tsx preview functional
+const [animationScheme, setAnimationScheme] =
+  useState<Modal.RootProps["animationScheme"]>("scale")
+const { open, onClose, onOpen } = useDisclosure()
+
+return (
+  <>
+    <Wrap gap="md">
+      <For
+        each={
+          [
+            "scale",
+            "block-start",
+            "inline-start",
+            "inline-end",
+            "block-end",
+          ] as const
+        }
+      >
+        {(animationScheme) => (
+          <Button
+            key={animationScheme}
+            onClick={() => {
+              setAnimationScheme(animationScheme)
+              onOpen()
+            }}
+          >
+            Open "{animationScheme}" Modal
+          </Button>
+        )}
+      </For>
+    </Wrap>
+
+    <Modal.Root animationScheme={animationScheme} open={open} onClose={onClose}>
+      <Modal.Content>
+        <Modal.Header>
+          <Modal.Title>作品冒頭</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          青春とは嘘であり、悪である。
+          青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+          すべては彼らのご都合主義でしかない。結論を言おう。
+          青春を楽しむ愚か者ども、砕け散れ。
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="ghost" onClick={onClose}>
+            とじる
+          </Button>
+          <Button>砕け散る</Button>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal.Root>
+  </>
+)
+```
+
+### Change Duration
+
+To change the duration, set `duration` to a numerical value (seconds).
+
+```tsx preview
+<Modal.Root duration={0.4}>
+  <Modal.OpenTrigger>
+    <Button>Open Modal</Button>
+  </Modal.OpenTrigger>
+
+  <Modal.Content>
+    <Modal.Header>
+      <Modal.Title>作品冒頭</Modal.Title>
+    </Modal.Header>
+
+    <Modal.Body>
+      青春とは嘘であり、悪である。
+      青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+      すべては彼らのご都合主義でしかない。結論を言おう。
+      青春を楽しむ愚か者ども、砕け散れ。
+    </Modal.Body>
+
+    <Modal.Footer>
+      <Modal.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Modal.CloseTrigger>
+      <Button>砕け散る</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal.Root>
+```
+
+### Change Overflow Behavior
+
+By default, `inside` is set, and scrolling only occurs within `Modal.Body`. If you set `outside`, scrolling will occur within the `Modal.Content`.
+
+```tsx preview functional
+const [scrollBehavior, setScrollBehavior] =
+  useState<Modal.RootProps["scrollBehavior"]>("inside")
+const { open, onClose, onOpen } = useDisclosure()
+
+return (
+  <>
+    <Wrap gap="md">
+      <For each={["inside", "outside"] as const}>
+        {(scrollBehavior) => (
+          <Button
+            key={scrollBehavior}
+            onClick={() => {
+              setScrollBehavior(scrollBehavior)
+              onOpen()
+            }}
+          >
+            Open "{scrollBehavior}" Modal
+          </Button>
+        )}
+      </For>
+    </Wrap>
+
+    <Modal.Root open={open} scrollBehavior={scrollBehavior} onClose={onClose}>
+      <Modal.Content h="xl">
+        <Modal.Header>
+          <Modal.Title>作品冒頭</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <Text>青春とは嘘であり、悪である。</Text>
+          <Text>
+            青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。
+          </Text>
+          <Text>
+            彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。
+          </Text>
+          <Text>
+            彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。
+          </Text>
+          <Text>
+            仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+          </Text>
+          <Text>すべては彼らのご都合主義でしかない。結論を言おう。</Text>
+          <Text>青春を楽しむ愚か者ども、砕け散れ。</Text>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="ghost" onClick={onClose}>
+            とじる
+          </Button>
+          <Button>砕け散る</Button>
+        </Modal.Footer>
+      </Modal.Content>
+    </Modal.Root>
+  </>
+)
+```
+
+### Do Not Block Scroll When Modal Opens
+
+By default, when the modal opens, it blocks the scroll of the main content to ensure accessibility. If you do not want to block the scroll of the main content, set `blockScrollOnMount` to `false`.
+
+```tsx preview
+<Modal.Root blockScrollOnMount={false}>
+  <Modal.OpenTrigger>
+    <Button>Open Modal</Button>
+  </Modal.OpenTrigger>
+
+  <Modal.Content>
+    <Modal.Header>
+      <Modal.Title>作品冒頭</Modal.Title>
+    </Modal.Header>
+
+    <Modal.Body>
+      青春とは嘘であり、悪である。
+      青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+      すべては彼らのご都合主義でしかない。結論を言おう。
+      青春を楽しむ愚か者ども、砕け散れ。
+    </Modal.Body>
+
+    <Modal.Footer>
+      <Modal.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Modal.CloseTrigger>
+      <Button>砕け散る</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal.Root>
+```
+
+### Customize the Overlay
+
+If you want to customize overlay, use `Modal.Overlay`.
+
+```tsx preview
+<Modal.Root>
+  <Modal.OpenTrigger>
+    <Button>Open Modal</Button>
+  </Modal.OpenTrigger>
+
+  <Modal.Overlay backdropFilter="blur(4px)" />
+
+  <Modal.Content>
+    <Modal.Header>
+      <Modal.Title>作品冒頭</Modal.Title>
+    </Modal.Header>
+
+    <Modal.Body>
+      青春とは嘘であり、悪である。
+      青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+      すべては彼らのご都合主義でしかない。結論を言おう。
+      青春を楽しむ愚か者ども、砕け散れ。
+    </Modal.Body>
+
+    <Modal.Footer>
+      <Modal.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Modal.CloseTrigger>
+      <Button>砕け散る</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal.Root>
+```
+
+### Disable the Overlay
+
+To disable (hide) the modal's overlay, set `withOverlay` to `false`.
+
+```tsx preview
+<Modal.Root withOverlay={false}>
+  <Modal.OpenTrigger>
+    <Button>Open Modal</Button>
+  </Modal.OpenTrigger>
+
+  <Modal.Content>
+    <Modal.Header>
+      <Modal.Title>作品冒頭</Modal.Title>
+    </Modal.Header>
+
+    <Modal.Body>
+      青春とは嘘であり、悪である。
+      青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+      すべては彼らのご都合主義でしかない。結論を言おう。
+      青春を楽しむ愚か者ども、砕け散れ。
+    </Modal.Body>
+
+    <Modal.Footer>
+      <Modal.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Modal.CloseTrigger>
+      <Button>砕け散る</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal.Root>
+```
+
+### Customize the Close Button
+
+If you want to customize close button, use `Modal.CloseButton`.
+
+```tsx preview
+<Modal.Root>
+  <Modal.OpenTrigger>
+    <Button>Open Modal</Button>
+  </Modal.OpenTrigger>
+
+  <Modal.Content>
+    <Modal.CloseButton colorScheme="warning" />
+
+    <Modal.Header>
+      <Modal.Title>作品冒頭</Modal.Title>
+    </Modal.Header>
+
+    <Modal.Body>
+      青春とは嘘であり、悪である。
+      青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+      すべては彼らのご都合主義でしかない。結論を言おう。
+      青春を楽しむ愚か者ども、砕け散れ。
+    </Modal.Body>
+
+    <Modal.Footer>
+      <Modal.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Modal.CloseTrigger>
+      <Button>砕け散る</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal.Root>
+```
+
+### Disable the Close Button
+
+To disable (hide) the modal's close button, set `withCloseButton` to `false`.
+
+```tsx preview
+<Modal.Root withCloseButton={false}>
+  <Modal.OpenTrigger>
+    <Button>Open Modal</Button>
+  </Modal.OpenTrigger>
+
+  <Modal.Content>
+    <Modal.Header>
+      <Modal.Title>作品冒頭</Modal.Title>
+    </Modal.Header>
+
+    <Modal.Body>
+      青春とは嘘であり、悪である。
+      青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+      すべては彼らのご都合主義でしかない。結論を言おう。
+      青春を楽しむ愚か者ども、砕け散れ。
+    </Modal.Body>
+
+    <Modal.Footer>
+      <Modal.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Modal.CloseTrigger>
+      <Button>砕け散る</Button>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal.Root>
+```
+
+### Nested Modals
+
+```tsx preview
+<Modal.Root>
+  <Modal.OpenTrigger>
+    <Button>Open Modal</Button>
+  </Modal.OpenTrigger>
+
+  <Modal.Content>
+    <Modal.Header>
+      <Modal.Title>作品冒頭</Modal.Title>
+    </Modal.Header>
+
+    <Modal.Body>
+      青春とは嘘であり、悪である。
+      青春をおう歌せし者達は常に自己と周囲を欺き自らを取り巻く環境のすべてを肯定的にとらえる。彼らは青春の２文字の前ならばどんな一般的な解釈も社会通念もねじ曲げてみせる。彼らにかかれば嘘も秘密も罪科も失敗さえも青春のスパイスでしかないのだ。仮に失敗することが青春の証しであるのなら友達作りに失敗した人間もまた青春のど真ん中でなければおかしいではないか。しかし彼らはそれを認めないだろう。
+      すべては彼らのご都合主義でしかない。結論を言おう。
+      青春を楽しむ愚か者ども、砕け散れ。
+    </Modal.Body>
+
+    <Modal.Footer>
+      <Modal.CloseTrigger>
+        <Button variant="ghost">とじる</Button>
+      </Modal.CloseTrigger>
+
+      <Modal.Root size="xl">
+        <Modal.OpenTrigger>
+          <Button>作品詳細</Button>
+        </Modal.OpenTrigger>
+
+        <Modal.Content>
+          <Modal.Header>
+            <Modal.Title>やはり俺の青春ラブコメはまちがっている。</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <Text>青春は残酷だ！？ひねくれ男の妄言ラブコメ</Text>
+            <Text>
+              ――青春は嘘で欺瞞だ。リア充爆発しろ!
+              ひねくれ者故に友達も彼女もいない高校生・八幡が生活指導の先生に連れてこられたのは、学園一の美少女・雪乃が所属する「奉仕部」だった――。
+              さえない僕がひょんなことから美少女と出会ったはずなのに、どうしてもラブコメにならない残念どころか間違いだらけの青春模様が繰り広げられる。
+              俺の青春、どうしてこうなった？
+            </Text>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Modal.CloseTrigger>
+              <Button variant="ghost">とじる</Button>
+            </Modal.CloseTrigger>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal.Root>
+    </Modal.Footer>
+  </Modal.Content>
+</Modal.Root>
+```
 
 ## Props
 

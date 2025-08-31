@@ -60,7 +60,7 @@ export interface CollapseProps
   /**
    * The height you want the content in its expanded state.
    *
-   * @default "auto"
+   * @default 'auto'
    */
   endingHeight?: number | string
   /**

@@ -80,6 +80,12 @@ export const createTreeCollection = ({
   const nodeMap = new Map<string, TreeNode>()
   const parentMap = new Map<string, string>()
 
+  /**
+   * Builds internal maps for quick node lookups and parent relationships.
+   *
+   * @param node - Current node being processed
+   * @param parentId - ID of the parent node
+   */
   const buildMaps = (node: TreeNode, parentId?: string) => {
     nodeMap.set(nodeToValue(node), node)
     if (parentId) {
@@ -114,6 +120,11 @@ export const createTreeCollection = ({
     if (!node?.children) return []
 
     const descendants: TreeNode[] = []
+    /**
+     * Recursively collects all descendant nodes.
+     *
+     * @param children - Array of child nodes to process
+     */
     const collectDescendants = (children: TreeNode[]) => {
       children.forEach((child) => {
         descendants.push(child)
@@ -163,6 +174,14 @@ export const createTreeCollection = ({
 
     const newRootNode = { ...rootNode }
 
+    /**
+     * Removes a node at the specified path recursively.
+     *
+     * @param node - Current node being processed
+     * @param path - Index path to the node to remove
+     * @param depth - Current depth in the path traversal
+     * @returns Updated node or null if removed
+     */
     const removeNodeAtPath = (
       node: TreeNode,
       path: number[],
@@ -236,6 +255,14 @@ export const createTreeCollection = ({
 
     const newRootNode = { ...rootNode }
 
+    /**
+     * Replaces a node at the specified path recursively.
+     *
+     * @param node - Current node being processed
+     * @param path - Index path to the node to replace
+     * @param depth - Current depth in the path traversal
+     * @returns Updated node with replacement
+     */
     const replaceNodeAtPath = (
       node: TreeNode,
       path: number[],

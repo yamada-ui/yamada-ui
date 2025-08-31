@@ -1,7 +1,25 @@
 export * from "./tree.style"
 export * as Tree from "./namespaces"
+export {
+  TreeBranch,
+  TreeBranchCheckbox,
+  TreeBranchContent,
+  TreeBranchControl,
+  TreeBranchIndicator,
+  TreeBranchText,
+  TreeBranchTrigger,
+  TreeCollectionName,
+  TreeItem,
+  TreeItemCheckbox,
+  TreeItemIndicator,
+  TreeItemText,
+  TreeLabel,
+  TreeNode,
+  TreePropsContext,
+  TreeRoot,
+  useTreePropsContext,
+} from "./tree"
 export type {
-  CreateTreeCollectionOptions,
   TreeBranchCheckboxProps,
   TreeBranchContentProps,
   TreeBranchControlProps,
@@ -9,8 +27,8 @@ export type {
   TreeBranchProps,
   TreeBranchTextProps,
   TreeBranchTriggerProps,
-  TreeCollection,
   TreeCollectionNameProps,
+  TreeItem,
   TreeItemCheckboxProps,
   TreeItemIndicatorProps,
   TreeItemProps,
@@ -23,4 +41,8 @@ export type {
   TreeProps,
   TreeRootProps,
 } from "./tree"
+export type {
+  CreateTreeCollectionOptions,
+  TreeCollection,
+} from "./tree-collection"
 export * from "./use-tree"

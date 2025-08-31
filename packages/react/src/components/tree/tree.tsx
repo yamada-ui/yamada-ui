@@ -26,7 +26,7 @@ import {
   renderNodeName,
 } from "./tree-utils"
 import { treeStyle } from "./tree.style"
-import { useTree } from "./use-tree"
+import { useTree, useTreeSelection } from "./use-tree"
 
 interface TreeContext {
   expandedIds: string[]
@@ -43,7 +43,7 @@ interface TreeContext {
   onLoadChildrenError?: (node: TreeNode, error: Error) => void
 }
 
-const [TreeContext, useTreeContext] = createContext<TreeContext>({
+export const [TreeContext, useTreeContext] = createContext<TreeContext>({
   name: "TreeContext",
 })
 
@@ -72,22 +72,6 @@ const {
   "tree",
   treeStyle,
 )
-
-/**
- * Custom hook for handling tree item selection logic
- */
-const useTreeSelection = (nodeId: string | undefined, disabled = false) => {
-  const { onSelect } = useTreeContext()
-
-  const handleSelection = useCallback(() => {
-    if (!disabled && nodeId) {
-      // Unified selection handler - selection mode determines behavior in the hook
-      onSelect(nodeId)
-    }
-  }, [disabled, nodeId, onSelect])
-
-  return { handleSelection }
-}
 
 export { TreePropsContext, useTreePropsContext }
 
@@ -281,6 +265,9 @@ export const Tree = withContext<"ul", TreeProps>(({ children, ...rest }) => {
   return <styled.ul {...rest}>{computedChildren}</styled.ul>
 }, "tree")()
 
+/**
+ * TreeNode component that renders individual tree nodes.
+ */
 export const TreeNode: FC<TreeNodeProps> = ({
   indexPath = [],
   node,
@@ -347,6 +334,11 @@ export const TreeNode: FC<TreeNodeProps> = ({
     [loadChildren, hasChildren, loadedChildren],
   )
 
+  /**
+   * Handles toggling the expand state of a node, including async loading.
+   *
+   * @param event - Optional mouse event that triggered the toggle
+   */
   const handleToggleExpand = useCallback(
     async (event?: React.MouseEvent) => {
       if (!event) {
@@ -572,6 +564,9 @@ export const TreeBranch = withContext<"li", TreeBranchProps>("li", "branch")(
 
 export interface TreeBranchContentProps extends HTMLStyledProps<"ul"> {}
 
+/**
+ * TreeBranchContent component that contains the child nodes of a branch.
+ */
 export const TreeBranchContent = withContext<"ul", TreeBranchContentProps>(
   "ul",
   "branchContent",
@@ -592,6 +587,9 @@ export interface TreeBranchControlProps extends HTMLStyledProps {
   selected?: boolean
 }
 
+/**
+ * TreeBranchControl component that wraps the branch trigger and handles user interactions.
+ */
 export const TreeBranchControl = withContext<"div", TreeBranchControlProps>(
   "div",
   "branchControl",
@@ -618,6 +616,9 @@ export interface TreeBranchTriggerProps extends HTMLStyledProps<"button"> {
   disabled?: boolean
 }
 
+/**
+ * TreeBranchTrigger component that acts as the clickable trigger for expanding/collapsing branches.
+ */
 export const TreeBranchTrigger = withContext<"button", TreeBranchTriggerProps>(
   "button",
   "branchTrigger",
@@ -637,6 +638,9 @@ export interface TreeBranchIndicatorProps extends HTMLStyledProps {
   onToggleExpand?: () => void
 }
 
+/**
+ * TreeBranchIndicator component that displays the expand/collapse icon for branches.
+ */
 export const TreeBranchIndicator = withContext<"div", TreeBranchIndicatorProps>(
   "div",
   "branchIndicator",
@@ -669,6 +673,9 @@ export interface TreeBranchTextProps extends HTMLStyledProps<"span"> {
   selected?: boolean
 }
 
+/**
+ * TreeBranchText component that displays the text content of a branch node.
+ */
 export const TreeBranchText = withContext<"span", TreeBranchTextProps>(
   "span",
   "branchText",
@@ -690,6 +697,9 @@ export interface TreeBranchCheckboxProps extends HTMLStyledProps {
   nodeId?: string
 }
 
+/**
+ * TreeBranchCheckbox component that provides checkbox functionality for branch nodes.
+ */
 export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
   ({ nodeId, ...rest }) => {
     const { nodes, selectedIds, onSelect } = useTreeContext()
@@ -743,6 +753,9 @@ export interface TreeItemProps extends HTMLStyledProps<"li"> {
   selected?: boolean
 }
 
+/**
+ * TreeItem component that represents a leaf node in the tree.
+ */
 export const TreeItem = withContext<"li", TreeItemProps>("li", "item")(
   undefined,
   ({ disabled, indexPath = [], nodeId, selected, onClick, ...rest }) => {
@@ -761,6 +774,9 @@ export const TreeItem = withContext<"li", TreeItemProps>("li", "item")(
 
 export interface TreeItemIndicatorProps extends HTMLStyledProps {}
 
+/**
+ * TreeItemIndicator component that displays an indicator icon for tree items.
+ */
 export const TreeItemIndicator = withContext<"div", TreeItemIndicatorProps>(
   "div",
   "itemIndicator",
@@ -768,6 +784,9 @@ export const TreeItemIndicator = withContext<"div", TreeItemIndicatorProps>(
 
 export interface TreeItemTextProps extends HTMLStyledProps<"span"> {}
 
+/**
+ * TreeItemText component that displays the text content of a tree item.
+ */
 export const TreeItemText = withContext<"span", TreeItemTextProps>(
   "span",
   "itemText",
@@ -780,6 +799,9 @@ export interface TreeItemCheckboxProps extends HTMLStyledProps {
   nodeId?: string
 }
 
+/**
+ * TreeItemCheckbox component that provides checkbox functionality for tree items.
+ */
 export const TreeItemCheckbox = withContext<"div", TreeItemCheckboxProps>(
   ({ nodeId, ...rest }) => {
     const { nodes, selectedIds, onSelect } = useTreeContext()
@@ -816,6 +838,9 @@ export const TreeItemCheckbox = withContext<"div", TreeItemCheckboxProps>(
 
 export interface TreeLabelProps extends HTMLStyledProps<"label"> {}
 
+/**
+ * TreeLabel component for labeling tree sections.
+ */
 export const TreeLabel = withContext<"label", TreeLabelProps>(
   "label",
   "label",
@@ -823,6 +848,9 @@ export const TreeLabel = withContext<"label", TreeLabelProps>(
 
 export interface TreeCollectionNameProps extends HTMLStyledProps {}
 
+/**
+ * TreeCollectionName component that displays the name of a tree collection.
+ */
 export const TreeCollectionName = withContext<"div", TreeCollectionNameProps>(
   "div",
   "collectionName",

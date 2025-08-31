@@ -19,6 +19,12 @@ export const filterTreeNodes = (
     return nodes
   }
 
+  /**
+   * Recursively filters a node and its children based on the filter function.
+   *
+   * @param node - The tree node to filter
+   * @returns Filtered node or null if it doesn't match and has no matching children
+   */
   const filterNodeRecursively = (node: TreeNode): null | TreeNode => {
     const matches = filterFn(node, query)
     const filteredChildren = node.children
@@ -83,6 +89,11 @@ export const getExpandedIdsForFilteredNodes = (
   const expandedIds = new Set<string>()
   const nodeMap = new Map<string, TreeNode>()
 
+  /**
+   * Builds a map of all nodes for quick lookup by ID.
+   *
+   * @param searchNodes - Array of tree nodes to build the map from
+   */
   const buildNodeMap = (searchNodes: TreeNode[]): void => {
     for (const node of searchNodes) {
       nodeMap.set(node.id, node)
@@ -94,6 +105,11 @@ export const getExpandedIdsForFilteredNodes = (
   buildNodeMap(nodes)
 
   const matchingNodeIds: string[] = []
+  /**
+   * Recursively collects all nodes that match the filter query.
+   *
+   * @param searchNodes - Array of tree nodes to search
+   */
   const collectMatchingNodes = (searchNodes: TreeNode[]): void => {
     for (const node of searchNodes) {
       if (filterFn(node, query)) {
@@ -106,12 +122,24 @@ export const getExpandedIdsForFilteredNodes = (
   }
   collectMatchingNodes(nodes)
 
+  /**
+   * Finds all parent node IDs for a given node ID.
+   *
+   * @param nodeId - The node ID to find parents for
+   * @returns Array of parent node IDs
+   */
   const findParentIds = (nodeId: string): string[] => {
     const parents: string[] = []
     let currentNode = nodeMap.get(nodeId)
 
     while (currentNode) {
       let parent: TreeNode | undefined
+      /**
+       * Recursively finds the parent node of the current node.
+       *
+       * @param searchNodes - Array of tree nodes to search
+       * @returns True if parent was found
+       */
       const findParent = (searchNodes: TreeNode[]): boolean => {
         for (const node of searchNodes) {
           if (node.children?.some((child) => child.id === currentNode!.id)) {
@@ -154,6 +182,11 @@ export const getExpandedIdsForFilteredNodes = (
 export const getAllDescendantIds = (node: TreeNode): string[] => {
   const descendants: string[] = []
 
+  /**
+   * Recursively collects all descendant node IDs for a given node.
+   *
+   * @param currentNode - The node to collect descendants from
+   */
   const collectDescendantIds = (currentNode: TreeNode): void => {
     if (currentNode.children) {
       for (const child of currentNode.children) {
@@ -206,6 +239,11 @@ export const findNodeById = (
 ): TreeNode | undefined => {
   const nodeMap = new Map<string, TreeNode>()
 
+  /**
+   * Builds a map of all nodes for quick lookup by ID.
+   *
+   * @param searchNodes - Array of tree nodes to build the map from
+   */
   const buildMap = (searchNodes: TreeNode[]): void => {
     for (const node of searchNodes) {
       nodeMap.set(node.id, node)

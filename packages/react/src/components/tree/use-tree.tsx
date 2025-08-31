@@ -1,7 +1,15 @@
 import type { TreeNode } from "./tree"
 import { useCallback, useMemo, useState } from "react"
+import { useTreeContext } from "./tree"
 import { findNodeById, getAllDescendantIds } from "./tree-utils"
 
+/**
+ * Finds all parent nodes of a given node ID.
+ *
+ * @param nodes - Array of tree nodes to search
+ * @param targetId - The target node ID to find parents for
+ * @returns Array of parent nodes
+ */
 const findParentNodes = (nodes: TreeNode[], targetId: string): TreeNode[] => {
   const parents: TreeNode[] = []
 
@@ -24,6 +32,13 @@ const findParentNodes = (nodes: TreeNode[], targetId: string): TreeNode[] => {
   return parents
 }
 
+/**
+ * Checks if a parent node is fully selected based on its children.
+ *
+ * @param node - The parent node to check
+ * @param selectedIds - Array of currently selected node IDs
+ * @returns True if all descendants are selected
+ */
 const isParentFullySelected = (
   node: TreeNode,
   selectedIds: string[],
@@ -40,6 +55,14 @@ const isParentFullySelected = (
   return selectedDescendants.length === descendantIds.length
 }
 
+/**
+ * Propagates selection state upward in the tree hierarchy.
+ *
+ * @param nodes - Array of tree nodes
+ * @param selectedIds - Current array of selected node IDs
+ * @param nodeId - The node ID that was toggled
+ * @returns Updated array of selected node IDs
+ */
 const propagateSelectionUp = (
   nodes: TreeNode[],
   selectedIds: string[],
@@ -64,6 +87,12 @@ const propagateSelectionUp = (
   return newSelectedIds
 }
 
+/**
+ * Gets all node IDs that are branches (have children).
+ *
+ * @param nodes - Array of tree nodes to search
+ * @returns Array of branch node IDs
+ */
 const getAllBranchIds = (nodes: TreeNode[]): string[] => {
   const branchIds: string[] = []
   for (const node of nodes) {
@@ -247,4 +276,27 @@ export const useTree = ({
     onSelect,
     onToggleExpand,
   }
+}
+
+/**
+ * Custom hook for handling tree item selection logic.
+ *
+ * @param nodeId - The node ID to handle selection for
+ * @param disabled - Whether the node is disabled
+ * @returns Object with selection handler
+ */
+export const useTreeSelection = (
+  nodeId: string | undefined,
+  disabled = false,
+) => {
+  const { onSelect } = useTreeContext()
+
+  const handleSelection = useCallback(() => {
+    if (!disabled && nodeId) {
+      // Unified selection handler - selection mode determines behavior in the hook
+      onSelect(nodeId)
+    }
+  }, [disabled, nodeId, onSelect])
+
+  return { handleSelection }
 }

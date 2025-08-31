@@ -333,7 +333,7 @@ export interface UseCalendarProps<Y extends MaybeDateValue = Date>
   /**
    * Define weekend days.
    *
-   * @default '[0, 6]'
+   * @default [0, 6]
    */
   weekendDays?: number[]
   /**

@@ -36,7 +36,7 @@ export interface RadioGroupRootProps<Y extends string = string>
   /**
    * If provided, generate options based on items.
    *
-   * @default '[]'
+   * @default []
    */
   items?: RadioItem<Y>[]
 }

@@ -94,7 +94,7 @@ export interface UseResizableProps extends HTMLProps {
   /**
    * The orientation of the resizable.
    *
-   * @default "horizontal"
+   * @default 'horizontal'
    */
   orientation?: Orientation
   /**

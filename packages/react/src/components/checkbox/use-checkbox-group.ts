@@ -37,7 +37,7 @@ export interface UseCheckboxGroupProps<Y extends string = string>
   /**
    * The initial value of the checkbox group.
    *
-   * @default '[]'
+   * @default []
    */
   defaultValue?: Y[]
   /**

@@ -48,7 +48,7 @@ export const progressStyle = defineComponentSlotStyle({
     /**
      * The shape of the progress bar.
      *
-     * @default rounded
+     * @default 'rounded'
      */
     shape: {
       circle: {

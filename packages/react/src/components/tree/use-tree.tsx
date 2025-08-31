@@ -98,18 +98,23 @@ const getAllBranchIds = (nodes: TreeNode[]): string[] => {
 
 export interface UseTreeProps {
   nodes: TreeNode[]
+  checkedIds?: string[]
+  defaultChecked?: string[]
   defaultExpanded?: string[]
   defaultSelected?: string[]
   expandedIds?: string[]
   selectedIds?: string[]
   selectionMode?: "checkbox" | "multiple" | "single"
+  onCheckedChange?: (checkedIds: string[]) => void
   onExpandedChange?: (expandedIds: string[]) => void
   onSelectionChange?: (selectedIds: string[]) => void
 }
 
 export interface UseTreeReturn {
+  checkedIds: string[]
   expandedIds: string[]
   selectedIds: string[]
+  onCheck: (nodeId: string) => void
   onCollapseAll: () => void
   onExpandAll: () => void
   onSelect: (nodeId: string) => void
@@ -117,18 +122,23 @@ export interface UseTreeReturn {
 }
 
 export const useTree = ({
+  checkedIds: controlledCheckedIds,
+  defaultChecked = [],
   defaultExpanded = [],
   defaultSelected = [],
   expandedIds: controlledExpandedIds,
   nodes,
   selectedIds: controlledSelectedIds,
   selectionMode = "single",
+  onCheckedChange,
   onExpandedChange,
   onSelectionChange,
 }: UseTreeProps): UseTreeReturn => {
+  const [checkedIds, setCheckedIds] = useState(defaultChecked)
   const [expandedIds, setExpandedIds] = useState(defaultExpanded)
   const [selectedIds, setSelectedIds] = useState(defaultSelected)
 
+  const finalCheckedIds = controlledCheckedIds ?? checkedIds
   const finalExpandedIds = controlledExpandedIds ?? expandedIds
   const finalSelectedIds = controlledSelectedIds ?? selectedIds
 
@@ -172,77 +182,24 @@ export const useTree = ({
   const onSelect = useCallback(
     (nodeId: string) => {
       if (controlledSelectedIds !== undefined) {
-        if (selectionMode === "checkbox") {
-          const node = findNodeById(nodes, nodeId)
-          if (!node) return
+        const newSelectedIds =
+          selectionMode === "single"
+            ? [nodeId]
+            : finalSelectedIds.includes(nodeId)
+              ? finalSelectedIds.filter((id) => id !== nodeId)
+              : [...finalSelectedIds, nodeId]
 
-          const descendantIds = getAllDescendantIds(node)
-          const allIdsToToggle = [nodeId, ...descendantIds]
-
-          let newSelectedIds: string[]
-
-          const isCurrentlySelected = finalSelectedIds.includes(nodeId)
-
-          if (isCurrentlySelected) {
-            newSelectedIds = finalSelectedIds.filter(
-              (id) => !allIdsToToggle.includes(id),
-            )
-          } else {
-            newSelectedIds = [...finalSelectedIds, ...allIdsToToggle]
-
-            newSelectedIds = [...new Set(newSelectedIds)]
-          }
-
-          newSelectedIds = propagateSelectionUp(nodes, newSelectedIds, nodeId)
-
-          onSelectionChange?.(newSelectedIds)
-        } else {
-          const newSelectedIds =
-            selectionMode === "single"
-              ? [nodeId]
-              : finalSelectedIds.includes(nodeId)
-                ? finalSelectedIds.filter((id) => id !== nodeId)
-                : [...finalSelectedIds, nodeId]
-
-          onSelectionChange?.(newSelectedIds)
-        }
+        onSelectionChange?.(newSelectedIds)
       } else {
-        if (selectionMode === "checkbox") {
-          const node = findNodeById(nodes, nodeId)
-          if (!node) return
+        const newSelectedIds =
+          selectionMode === "single"
+            ? [nodeId]
+            : selectedIds.includes(nodeId)
+              ? selectedIds.filter((id) => id !== nodeId)
+              : [...selectedIds, nodeId]
 
-          const descendantIds = getAllDescendantIds(node)
-          const allIdsToToggle = [nodeId, ...descendantIds]
-
-          let newSelectedIds: string[]
-
-          const isCurrentlySelected = selectedIds.includes(nodeId)
-
-          if (isCurrentlySelected) {
-            newSelectedIds = selectedIds.filter(
-              (id) => !allIdsToToggle.includes(id),
-            )
-          } else {
-            newSelectedIds = [...selectedIds, ...allIdsToToggle]
-
-            newSelectedIds = [...new Set(newSelectedIds)]
-          }
-
-          newSelectedIds = propagateSelectionUp(nodes, newSelectedIds, nodeId)
-
-          setSelectedIds(newSelectedIds)
-          onSelectionChange?.(newSelectedIds)
-        } else {
-          const newSelectedIds =
-            selectionMode === "single"
-              ? [nodeId]
-              : selectedIds.includes(nodeId)
-                ? selectedIds.filter((id) => id !== nodeId)
-                : [...selectedIds, nodeId]
-
-          setSelectedIds(newSelectedIds)
-          onSelectionChange?.(newSelectedIds)
-        }
+        setSelectedIds(newSelectedIds)
+        onSelectionChange?.(newSelectedIds)
       }
     },
     [
@@ -250,14 +207,61 @@ export const useTree = ({
       selectedIds,
       controlledSelectedIds,
       selectionMode,
-      nodes,
       onSelectionChange,
     ],
   )
 
+  const onCheck = useCallback(
+    (nodeId: string) => {
+      const node = findNodeById(nodes, nodeId)
+      if (!node) return
+
+      const descendantIds = getAllDescendantIds(node)
+      const allIdsToToggle = [nodeId, ...descendantIds]
+
+      if (controlledCheckedIds !== undefined) {
+        let newCheckedIds: string[]
+
+        const isCurrentlyChecked = finalCheckedIds.includes(nodeId)
+
+        if (isCurrentlyChecked) {
+          newCheckedIds = finalCheckedIds.filter(
+            (id) => !allIdsToToggle.includes(id),
+          )
+        } else {
+          newCheckedIds = [...finalCheckedIds, ...allIdsToToggle]
+          newCheckedIds = [...new Set(newCheckedIds)]
+        }
+
+        newCheckedIds = propagateSelectionUp(nodes, newCheckedIds, nodeId)
+        onCheckedChange?.(newCheckedIds)
+      } else {
+        let newCheckedIds: string[]
+
+        const isCurrentlyChecked = checkedIds.includes(nodeId)
+
+        if (isCurrentlyChecked) {
+          newCheckedIds = checkedIds.filter(
+            (id) => !allIdsToToggle.includes(id),
+          )
+        } else {
+          newCheckedIds = [...checkedIds, ...allIdsToToggle]
+          newCheckedIds = [...new Set(newCheckedIds)]
+        }
+
+        newCheckedIds = propagateSelectionUp(nodes, newCheckedIds, nodeId)
+        setCheckedIds(newCheckedIds)
+        onCheckedChange?.(newCheckedIds)
+      }
+    },
+    [finalCheckedIds, checkedIds, controlledCheckedIds, nodes, onCheckedChange],
+  )
+
   return {
+    checkedIds: finalCheckedIds,
     expandedIds: finalExpandedIds,
     selectedIds: finalSelectedIds,
+    onCheck,
     onCollapseAll,
     onExpandAll,
     onSelect,

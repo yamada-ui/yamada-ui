@@ -23,7 +23,20 @@ export const treeStyle = defineComponentSlotStyle({
       rounded: "sm",
       transitionDuration: "moderate",
       transitionProperty: "common",
-
+      _selected: {
+        bg: "colorScheme.50",
+        color: "colorScheme.600",
+        _dark: {
+          bg: "colorScheme.900",
+          color: "colorScheme.200",
+        },
+      },
+      _hover: {
+        bg: "gray.100",
+        _dark: {
+          bg: "whiteAlpha.100",
+        },
+      },
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.6,
@@ -47,6 +60,12 @@ export const treeStyle = defineComponentSlotStyle({
       fontSize: "sm",
       fontWeight: "medium",
       lineHeight: "1.5",
+      _selected: {
+        color: "colorScheme.600",
+        _dark: {
+          color: "colorScheme.200",
+        },
+      },
     },
     branchTrigger: {
       alignItems: "center",

@@ -68,32 +68,17 @@ export const BasicTree = () => (
 
 export const BasicTreeWithCollection = () => (
   <Tree.Root collection={treeCollection}>
+    <Tree.Tree />
+  </Tree.Root>
+)
+
+export const WithCollectionName = () => (
+  <Tree.Root collection={treeCollection}>
     <Tree.Tree>
-      <Tree.Node
-        node={treeCollection.getNode("root")!}
-        render={({ node, nodeState }) =>
-          nodeState.isBranch ? (
-            <Tree.Branch>
-              <Tree.BranchControl>
-                <Tree.BranchIndicator />
-                <Tree.BranchText>{node.name}</Tree.BranchText>
-              </Tree.BranchControl>
-              <Tree.BranchContent>
-                {node.children?.map((child) => (
-                  <Tree.Node
-                    key={treeCollection.getNodeValue(child)}
-                    node={child}
-                  />
-                ))}
-              </Tree.BranchContent>
-            </Tree.Branch>
-          ) : (
-            <Tree.Item>
-              <Tree.ItemText>{node.name}</Tree.ItemText>
-            </Tree.Item>
-          )
-        }
-      />
+      <Tree.CollectionName>My File System</Tree.CollectionName>
+      {treeCollection.getRootNode().children?.map((node) => (
+        <Tree.Node key={treeCollection.getNodeValue(node)} node={node} />
+      ))}
     </Tree.Tree>
   </Tree.Root>
 )

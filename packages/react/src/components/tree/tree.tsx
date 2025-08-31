@@ -12,7 +12,7 @@ import type {
   TreeRootProps,
 } from "./tree-types"
 import type { TreeStyle } from "./tree.style"
-import { useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import { createSlotComponent, styled } from "../../core"
 import { createContext, dataAttr, handlerAll } from "../../utils"
 import { Checkbox } from "../checkbox"
@@ -240,15 +240,26 @@ export const Tree = withContext<"ul", TreeProps>(({ children, ...rest }) => {
           filterNodes,
           filterQuery,
         )
-        return filteredChildren.map((node, index) => (
-          <TreeNode
-            key={collection.getNodeValue(node)}
-            indexPath={[index]}
-            node={node}
-          />
-        ))
+        return (
+          <>
+            <TreeCollectionName>
+              {collection.getNodeString(rootNode)}
+            </TreeCollectionName>
+            {filteredChildren.map((node, index) => (
+              <TreeNode
+                key={collection.getNodeValue(node)}
+                indexPath={[index]}
+                node={node}
+              />
+            ))}
+          </>
+        )
       }
-      return null
+      return (
+        <TreeCollectionName>
+          {collection.getNodeString(rootNode)}
+        </TreeCollectionName>
+      )
     } else {
       const filteredNodes = filterTreeNodes(
         nodes || [],
@@ -536,11 +547,15 @@ export interface TreeBranchCheckboxProps extends HTMLStyledProps {
 }
 
 export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
-  ({ children, nodeId, ...rest }) => {
+  ({ children, nodeId, onClick, ...rest }) => {
     const { checkedIds, nodes, onCheck } = useTreeContext()
 
     if (!nodeId) {
-      return <styled.div {...rest}>{children}</styled.div>
+      return (
+        <styled.div onClick={onClick} {...rest}>
+          {children}
+        </styled.div>
+      )
     }
 
     const findNode = (
@@ -559,7 +574,11 @@ export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
 
     const node = findNode(nodes, nodeId)
     if (!node) {
-      return <styled.div {...rest}>{children}</styled.div>
+      return (
+        <styled.div onClick={onClick} {...rest}>
+          {children}
+        </styled.div>
+      )
     }
 
     const checked = checkedIds.includes(nodeId)
@@ -569,13 +588,15 @@ export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
       onCheck(nodeId)
     }
 
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-      // Prevent event bubbling to parent TreeBranchControl when clicking checkbox
-      event.stopPropagation()
-    }
+    const handleClick = useCallback(
+      (event: React.MouseEvent<HTMLDivElement>) => {
+        event.stopPropagation()
+      },
+      [],
+    )
 
     return (
-      <styled.div {...rest} onClick={handleClick}>
+      <styled.div {...rest} onClick={handlerAll(handleClick, onClick)}>
         <Checkbox
           checked={checked}
           disabled={node.disabled}
@@ -610,18 +631,17 @@ export const TreeItem = withContext<"li", TreeItemProps>("li", "item")(
   ({ disabled, nodeId, selected, onClick, ...rest }) => {
     const { onSelect } = useTreeContext()
 
-    const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
+    const handleClick = useCallback(() => {
       if (!disabled && nodeId) {
         onSelect(nodeId)
       }
-      onClick?.(event)
-    }
+    }, [disabled, nodeId, onSelect])
 
     return {
       "data-disabled": dataAttr(disabled),
       "data-node-id": nodeId,
       "data-selected": dataAttr(selected),
-      onClick: handleClick,
+      onClick: handlerAll(handleClick, onClick),
       ...rest,
     }
   },

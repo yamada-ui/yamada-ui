@@ -250,7 +250,7 @@ function getTypeValue(typeChecker: TypeChecker) {
 
       if (values.every((v) => v === "true" || v === "false")) return "boolean"
 
-      const value = values.join(" | ")
+      const value = values.sort((a, b) => a.localeCompare(b)).join(" | ")
 
       if (value.length < 50) return value
 

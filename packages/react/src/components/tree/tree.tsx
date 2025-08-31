@@ -597,28 +597,15 @@ export const TreeBranchControl = withContext<"div", TreeBranchControlProps>(
   "branchControl",
 )(
   { "data-group": "" },
-  ({ disabled, expanded, selected, onClick, onDoubleClick, ...rest }) => {
+  ({ disabled, expanded, selected, onClick, ...rest }) => {
     const nodeId = rest["data-node-id"] as string | undefined
     const { handleSelection } = useTreeSelection(nodeId, disabled)
-    const { onToggleExpand } = useTreeContext()
-
-    const handleDoubleClick = useCallback(
-      (event: React.MouseEvent) => {
-        event.preventDefault()
-        event.stopPropagation()
-        if (!disabled && nodeId) {
-          onToggleExpand(nodeId)
-        }
-      },
-      [disabled, nodeId, onToggleExpand],
-    )
 
     return {
       "data-disabled": dataAttr(disabled),
       "data-expanded": dataAttr(expanded),
       "data-selected": dataAttr(selected),
       onClick: handlerAll(handleSelection, onClick),
-      onDoubleClick: handlerAll(handleDoubleClick, onDoubleClick),
       ...rest,
     }
   },
@@ -685,32 +672,16 @@ export interface TreeBranchTextProps extends HTMLStyledProps<"span"> {
 export const TreeBranchText = withContext<"span", TreeBranchTextProps>(
   "span",
   "branchText",
-)(
-  undefined,
-  ({ disabled, nodeId, selected, onClick, onDoubleClick, ...rest }) => {
-    const { handleSelection } = useTreeSelection(nodeId, disabled)
-    const { onToggleExpand } = useTreeContext()
+)(undefined, ({ disabled, nodeId, selected, onClick, ...rest }) => {
+  const { handleSelection } = useTreeSelection(nodeId, disabled)
 
-    const handleDoubleClick = useCallback(
-      (event: React.MouseEvent) => {
-        event.preventDefault()
-        event.stopPropagation()
-        if (!disabled && nodeId) {
-          onToggleExpand(nodeId)
-        }
-      },
-      [disabled, nodeId, onToggleExpand],
-    )
-
-    return {
-      "data-disabled": dataAttr(disabled),
-      "data-selected": dataAttr(selected),
-      onClick: handlerAll(handleSelection, onClick),
-      onDoubleClick: handlerAll(handleDoubleClick, onDoubleClick),
-      ...rest,
-    }
-  },
-)
+  return {
+    "data-disabled": dataAttr(disabled),
+    "data-selected": dataAttr(selected),
+    onClick: handlerAll(handleSelection, onClick),
+    ...rest,
+  }
+})
 
 export interface TreeBranchCheckboxProps extends HTMLStyledProps {
   /**
@@ -774,22 +745,8 @@ export interface TreeItemProps extends HTMLStyledProps<"li"> {
 
 export const TreeItem = withContext<"li", TreeItemProps>("li", "item")(
   undefined,
-  ({
-    disabled,
-    indexPath = [],
-    nodeId,
-    selected,
-    onClick,
-    onDoubleClick,
-    ...rest
-  }) => {
+  ({ disabled, indexPath = [], nodeId, selected, onClick, ...rest }) => {
     const { handleSelection } = useTreeSelection(nodeId, disabled)
-
-    const handleDoubleClick = useCallback((event: React.MouseEvent) => {
-      // Leaf nodes don't expand/collapse, but prevent default behavior
-      event.preventDefault()
-      event.stopPropagation()
-    }, [])
 
     return {
       "data-disabled": dataAttr(disabled),
@@ -797,7 +754,6 @@ export const TreeItem = withContext<"li", TreeItemProps>("li", "item")(
       "data-selected": dataAttr(selected),
       "--depth": indexPath.length,
       onClick: handlerAll(handleSelection, onClick),
-      onDoubleClick: handlerAll(handleDoubleClick, onDoubleClick),
       ...rest,
     }
   },

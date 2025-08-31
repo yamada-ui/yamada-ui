@@ -16,7 +16,7 @@
       "required": false
     },
     "colorScheme": {
-      "type": "\"link\" | \"amber\" | \"black\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
       "description": "Set color scheme variables.",
       "required": false
     },
@@ -26,7 +26,7 @@
       "required": false
     },
     "variant": {
-      "type": "\"thin\" | \"thick\"",
+      "type": "\"thick\" | \"thin\"",
       "description": "The variant of the component.",
       "required": false
     },
@@ -119,7 +119,7 @@
       "required": false
     },
     "shape": {
-      "type": "\"circle\" | \"square\" | \"rounded\"",
+      "type": "\"circle\" | \"rounded\" | \"square\"",
       "defaultValue": "circle",
       "description": "The shape of the switch.",
       "required": false

@@ -32,82 +32,23 @@ import { Separator } from "@workspaces/ui"
 <Separator />
 ```
 
-### 方向を変更する
-
-```tsx preview functional client
-const [orientation, setOrientation] = useState("horizontal")
-
-return (
-  <VStack>
-    <HStack gap="md">
-      <Button
-        onClick={() => setOrientation("horizontal")}
-        variant={orientation === "horizontal" ? "solid" : "outline"}
-      >
-        水平
-      </Button>
-      <Button
-        onClick={() => setOrientation("vertical")}
-        variant={orientation === "vertical" ? "solid" : "outline"}
-      >
-        垂直
-      </Button>
-    </HStack>
-
-    <Box h="200px" w="full">
-      {orientation === "horizontal" ? (
-        <Separator orientation="horizontal" />
-      ) : (
-        <Separator orientation="vertical" />
-      )}
-    </Box>
-  </VStack>
-)
-```
-
 ### バリアントを変更する
 
-```tsx preview functional client
-const variants = ["solid", "dashed", "dotted"] as const
-
-return (
-  <VStack gap="lg">
-    {variants.map((variant) => (
-      <VStack key={variant} w="full">
-        <Text fontSize="sm" color="gray.600">
-          {variant}
-        </Text>
-        <Separator variant={variant} />
-      </VStack>
-    ))}
-  </VStack>
-)
+```tsx preview
+<VStack>
+  <For each={["solid", "dashed", "dotted"]}>
+    {(variant, index) => <Separator key={index} variant={variant} />}
+  </For>
+</VStack>
 ```
 
 ### サイズを変更する
 
 ```tsx preview
-<VStack gap="lg">
-  <VStack w="full">
-    <Text fontSize="sm" color="gray.600">
-      幅50%
-    </Text>
-    <Separator w="50%" />
-  </VStack>
-
-  <VStack w="full">
-    <Text fontSize="sm" color="gray.600">
-      幅200px
-    </Text>
-    <Separator w="200px" />
-  </VStack>
-
-  <HStack h="100px">
-    <Text fontSize="sm" color="gray.600">
-      高さ50%
-    </Text>
-    <Separator orientation="vertical" h="50%" />
-  </HStack>
+<VStack>
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size, index) => <Separator key={index} size={size} />}
+  </For>
 </VStack>
 ```
 
@@ -116,31 +57,41 @@ return (
 色を変更するには、`borderColor`を設定します。
 
 ```tsx preview
-<VStack gap="lg">
-  <VStack w="full">
-    <Text fontSize="sm" color="gray.600">
-      gray.500
-    </Text>
-    <Separator borderColor="gray.500" />
-  </VStack>
-  <VStack w="full">
-    <Text fontSize="sm" color="gray.600">
-      blue.500
-    </Text>
-    <Separator borderColor="blue.500" />
-  </VStack>
-  <VStack w="full">
-    <Text fontSize="sm" color="gray.600">
-      red.500
-    </Text>
-    <Separator borderColor="red.500" />
-  </VStack>
-  <VStack w="full">
-    <Text fontSize="sm" color="gray.600">
-      green.500
-    </Text>
-    <Separator borderColor="green.500" />
-  </VStack>
+<VStack>
+  <Separator borderColor="success" />
+  <Separator borderColor="warning" />
+</VStack>
+```
+
+### 縦方向
+
+```tsx preview
+<HStack>
+  <Text>First</Text>
+  <Separator orientation="vertical" h="4" />
+  <Text>Second</Text>
+</HStack>
+```
+
+### ラベル
+
+```tsx preview
+<VStack>
+  <HStack>
+    <Text flexShrink="0">Label</Text>
+    <Separator flex="1" />
+  </HStack>
+
+  <HStack>
+    <Separator flex="1" />
+    <Text flexShrink="0">Label</Text>
+  </HStack>
+
+  <HStack>
+    <Separator flex="1" />
+    <Text flexShrink="0">Label</Text>
+    <Separator flex="1" />
+  </HStack>
 </VStack>
 ```
 

@@ -8,11 +8,6 @@ export const treeStyle = defineComponentSlotStyle({
     branchCheckbox: {
       mr: "2",
     },
-    branchContent: {
-      "--indent-size": "spaces.6",
-      ml: "{indent-size}",
-      pl: "1",
-    },
     branchControl: {
       alignItems: "center",
       cursor: "pointer",
@@ -20,29 +15,12 @@ export const treeStyle = defineComponentSlotStyle({
       focusVisibleRing: "inside",
       gap: "2",
       p: "1",
+      pl: "calc({depth} * {indent-size})",
       rounded: "sm",
       transitionDuration: "moderate",
       transitionProperty: "common",
-      _selected: {
-        bg: "colorScheme.50",
-        color: "colorScheme.600",
-        _dark: {
-          bg: "colorScheme.900",
-          color: "colorScheme.200",
-        },
-      },
-      _hover: {
-        bg: "gray.100",
-        _dark: {
-          bg: "whiteAlpha.100",
-        },
-      },
       _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.6,
-        _hover: {
-          bg: "transparent",
-        },
+        layerStyle: "disabled",
       },
     },
     branchIndicator: {
@@ -60,12 +38,6 @@ export const treeStyle = defineComponentSlotStyle({
       fontSize: "sm",
       fontWeight: "medium",
       lineHeight: "1.5",
-      _selected: {
-        color: "colorScheme.600",
-        _dark: {
-          color: "colorScheme.200",
-        },
-      },
     },
     branchTrigger: {
       alignItems: "center",
@@ -107,20 +79,6 @@ export const treeStyle = defineComponentSlotStyle({
       rounded: "sm",
       transitionDuration: "moderate",
       transitionProperty: "common",
-      _selected: {
-        bg: "colorScheme.50",
-        color: "colorScheme.600",
-        _dark: {
-          bg: "colorScheme.900",
-          color: "colorScheme.200",
-        },
-      },
-      _hover: {
-        bg: "gray.100",
-        _dark: {
-          bg: "whiteAlpha.100",
-        },
-      },
       _disabled: {
         cursor: "not-allowed",
         opacity: 0.4,
@@ -175,14 +133,10 @@ export const treeStyle = defineComponentSlotStyle({
             content: '""',
             display: "block",
             h: "100%",
-            left: "0",
-            ml: "calc({indent-size} / 2 * -1)",
+            left: "calc(({depth} * {indent-size}) + {spaces.2})",
             position: "absolute",
             top: "0",
             w: "1px",
-            _dark: {
-              borderLeftColor: "border",
-            },
           },
         },
       },
@@ -191,50 +145,44 @@ export const treeStyle = defineComponentSlotStyle({
 
   sizes: {
     sm: {
-      branchContent: {
-        "--indent-size": "spaces.4",
-      },
       branchControl: {
-        minH: "6",
-        p: "0.5 1",
+        p: "0.5",
+        pl: "calc({depth} * {indent-size})",
       },
       item: {
-        minH: "6",
-        p: "0.5 1",
+        p: "0.5",
+        pl: "max(calc({depth} * {indent-size}), {spaces.0.5})",
       },
       root: {
+        "--indent-size": "{spaces.4}",
         fontSize: "sm",
       },
     },
     md: {
-      branchContent: {
-        "--indent-size": "spaces.6",
-      },
       branchControl: {
-        minH: "8",
         p: "1",
+        pl: "calc({depth} * {indent-size})",
       },
       item: {
-        minH: "8",
         p: "1",
+        pl: "max(calc({depth} * {indent-size}), {spaces.1})",
       },
       root: {
+        "--indent-size": "{spaces.6}",
         fontSize: "md",
       },
     },
     lg: {
-      branchContent: {
-        "--indent-size": "spaces.8",
-      },
       branchControl: {
-        minH: "10",
-        p: "1.5 2",
+        p: "1.5",
+        pl: "calc({depth} * {indent-size})",
       },
       item: {
-        minH: "10",
-        p: "1.5 2",
+        p: "1.5",
+        pl: "max(calc({depth} * {indent-size}), {spaces.1.5})",
       },
       root: {
+        "--indent-size": "{spaces.8}",
         fontSize: "lg",
       },
     },
@@ -244,97 +192,100 @@ export const treeStyle = defineComponentSlotStyle({
     ghost: {
       branchControl: {
         layerStyle: "ghost",
+        _selected: {
+          layerStyle: "ghost.hover",
+        },
         _hover: {
           layerStyle: "ghost.hover",
         },
       },
       item: {
-        _notSelected: {
-          layerStyle: "ghost",
-          _hover: {
-            layerStyle: "ghost.hover",
-          },
-        },
+        layerStyle: "ghost",
         _selected: {
-          layerStyle: "solid",
+          layerStyle: "ghost.hover",
+        },
+        _hover: {
+          layerStyle: "ghost.hover",
+        },
+      },
+    },
+    item: {
+      layerStyle: "subtle",
+      _hover: {
+        layerStyle: "subtle.hover",
+        _selected: {
+          layerStyle: "subtle.hover",
         },
       },
     },
     outline: {
       branchControl: {
         layerStyle: "outline",
+        _selected: {
+          layerStyle: "outline.hover",
+        },
         _hover: {
-          layerStyle: "solid.hover",
+          layerStyle: "outline.hover",
         },
       },
       item: {
-        _notSelected: {
-          layerStyle: "outline",
-          _hover: {
-            layerStyle: "outline.hover",
-          },
-        },
+        layerStyle: "outline",
         _selected: {
-          layerStyle: "solid",
-          borderColor: "colorScheme.solid",
-          borderWidth: "1px",
+          layerStyle: "outline.hover",
+        },
+        _hover: {
+          layerStyle: "outline.hover",
         },
       },
     },
     solid: {
       branchControl: {
         layerStyle: "solid",
+        _selected: {
+          layerStyle: "solid.hover",
+        },
         _hover: {
           layerStyle: "solid.hover",
         },
       },
       item: {
-        _notSelected: {
-          layerStyle: "solid",
-          _hover: {
-            layerStyle: "solid.hover",
-          },
-        },
+        layerStyle: "solid",
         _selected: {
-          layerStyle: "subtle",
+          layerStyle: "solid.hover",
+        },
+        _hover: {
+          layerStyle: "solid.hover",
         },
       },
     },
     subtle: {
       branchControl: {
         layerStyle: "subtle",
-        _hover: {
+        _selected: {
           layerStyle: "subtle.hover",
         },
-      },
-      item: {
-        _notSelected: {
-          layerStyle: "subtle",
-          _hover: {
-            layerStyle: "subtle.hover",
-          },
-        },
-        _selected: {
-          layerStyle: "solid",
+        _hover: {
+          layerStyle: "subtle.hover",
         },
       },
     },
     surface: {
       branchControl: {
         layerStyle: "surface",
+        _selected: {
+          layerStyle: "surface.hover",
+        },
         _hover: {
           layerStyle: "surface.hover",
         },
       },
       item: {
-        _notSelected: {
-          layerStyle: "surface",
-          _hover: {
-            layerStyle: "surface.hover",
-          },
-        },
+        layerStyle: "surface",
         _selected: {
-          layerStyle: "solid",
+          layerStyle: "surface.hover",
+        },
+        _hover: {
+          layerStyle: "surface.hover",
         },
       },
     },

@@ -245,10 +245,10 @@ export const Tree = withContext<"ul", TreeProps>(({ children, ...rest }) => {
             <TreeCollectionName>
               {collection.getNodeString(rootNode)}
             </TreeCollectionName>
-            {filteredChildren.map((node, index) => (
+            {filteredChildren.map((node) => (
               <TreeNode
                 key={collection.getNodeValue(node)}
-                indexPath={[index]}
+                indexPath={[]}
                 node={node}
               />
             ))}
@@ -306,6 +306,7 @@ export const TreeNode: FC<TreeNodeProps> = ({
   const indeterminate = isParentIndeterminate(node, checkedIds)
   const hasChildren = node.children && node.children.length > 0
   const shouldLoadChildren = loadChildren && !hasChildren && !loadedChildren
+  const depth = indexPath.length
 
   const handleToggleExpand = async () => {
     if (node.disabled) {
@@ -372,7 +373,7 @@ export const TreeNode: FC<TreeNodeProps> = ({
 
   if (nodeState.isBranch) {
     return (
-      <TreeBranch {...branchProps}>
+      <TreeBranch depth={depth} {...branchProps}>
         <TreeBranchControl
           disabled={node.disabled}
           expanded={expanded}
@@ -424,22 +425,43 @@ export const TreeNode: FC<TreeNodeProps> = ({
     )
   } else {
     return selectionMode === "checkbox" ? (
-      <TreeItem disabled={node.disabled} nodeId={nodeId} selected={selected}>
+      <TreeItem
+        depth={depth}
+        disabled={node.disabled}
+        nodeId={nodeId}
+        selected={selected}
+      >
         <TreeItemCheckbox nodeId={nodeId}>
           <TreeItemText>{renderNodeName(node.name, filterQuery)}</TreeItemText>
         </TreeItemCheckbox>
       </TreeItem>
     ) : (
-      <TreeItem disabled={node.disabled} nodeId={nodeId} selected={selected}>
+      <TreeItem
+        depth={depth}
+        disabled={node.disabled}
+        nodeId={nodeId}
+        selected={selected}
+      >
         <TreeItemText>{renderNodeName(node.name, filterQuery)}</TreeItemText>
       </TreeItem>
     )
   }
 }
 
-export interface TreeBranchProps extends HTMLStyledProps<"li"> {}
+export interface TreeBranchProps extends HTMLStyledProps<"li"> {
+  /**
+   * The depth level of the branch in the tree.
+   */
+  depth?: number
+}
 
-export const TreeBranch = withContext<"li", TreeBranchProps>("li", "branch")()
+export const TreeBranch = withContext<"li", TreeBranchProps>("li", "branch")(
+  undefined,
+  ({ depth = 1, ...rest }) => ({
+    "--depth": depth,
+    ...rest,
+  }),
+)
 
 export interface TreeBranchContentProps extends HTMLStyledProps<"ul"> {}
 
@@ -613,6 +635,10 @@ export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
 
 export interface TreeItemProps extends HTMLStyledProps<"li"> {
   /**
+   * The depth level of the item in the tree.
+   */
+  depth?: number
+  /**
    * Whether the tree item is disabled.
    */
   disabled?: boolean
@@ -628,7 +654,7 @@ export interface TreeItemProps extends HTMLStyledProps<"li"> {
 
 export const TreeItem = withContext<"li", TreeItemProps>("li", "item")(
   undefined,
-  ({ disabled, nodeId, selected, onClick, ...rest }) => {
+  ({ depth = 1, disabled, nodeId, selected, onClick, ...rest }) => {
     const { onSelect } = useTreeContext()
 
     const handleClick = useCallback(() => {
@@ -641,6 +667,7 @@ export const TreeItem = withContext<"li", TreeItemProps>("li", "item")(
       "data-disabled": dataAttr(disabled),
       "data-node-id": nodeId,
       "data-selected": dataAttr(selected),
+      "--depth": depth,
       onClick: handlerAll(handleClick, onClick),
       ...rest,
     }

@@ -30,6 +30,14 @@ const sampleNodes: TreeNodeType[] = [
         children: [
           { id: "1-1-1", name: "Project A" },
           { id: "1-1-2", name: "Project B" },
+          {
+            id: "1-1-3",
+            name: "Folder",
+            children: [
+              { id: "1-1-3-1", name: "Sub project 1" },
+              { id: "1-1-3-2", name: "Sub project 2" },
+            ],
+          },
         ],
       },
       { id: "1-2", name: "Personal" },
@@ -335,7 +343,7 @@ export const ControlledExpansion = () => {
   )
 }
 
-export const WithIndentation = () => {
+export const WithIndentationGuide = () => {
   return (
     <Tree.Root defaultExpanded={["1", "2"]} nodes={sampleNodes} showIndentGuide>
       <Tree.Tree>

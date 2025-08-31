@@ -100,6 +100,12 @@ export interface UseTreeReturn {
   onToggleExpand: (nodeId: string) => void
 }
 
+/**
+ * Hook for managing tree component state and interactions.
+ *
+ * @param props - Configuration options for the tree hook
+ * @returns Tree state and interaction handlers
+ */
 export const useTree = ({
   checkedIds: controlledCheckedIds,
   defaultChecked = [],

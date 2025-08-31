@@ -3,7 +3,12 @@ import type { TreeNode } from "./tree"
 import { Highlight } from "../highlight"
 
 /**
- * Helper function to filter tree nodes based on a query.
+ * Filters tree nodes based on a search query.
+ *
+ * @param nodes - Array of tree nodes to filter
+ * @param filterFn - Function to determine if a node matches the query
+ * @param query - Search query string
+ * @returns Filtered array of tree nodes
  */
 export const filterTreeNodes = (
   nodes: TreeNode[],
@@ -14,11 +19,11 @@ export const filterTreeNodes = (
     return nodes
   }
 
-  const filterNode = (node: TreeNode): null | TreeNode => {
+  const filterNodeRecursively = (node: TreeNode): null | TreeNode => {
     const matches = filterFn(node, query)
     const filteredChildren = node.children
       ? node.children
-          .map(filterNode)
+          .map(filterNodeRecursively)
           .filter((child): child is TreeNode => child !== null)
       : []
 
@@ -32,11 +37,17 @@ export const filterTreeNodes = (
     return null
   }
 
-  return nodes.map(filterNode).filter((node): node is TreeNode => node !== null)
+  return nodes
+    .map(filterNodeRecursively)
+    .filter((node): node is TreeNode => node !== null)
 }
 
 /**
- * Helper function to render node name with highlighting.
+ * Renders a node name with highlighting for search matches.
+ *
+ * @param name - The node name to render
+ * @param filterQuery - The search query for highlighting
+ * @returns React node with or without highlighting
  */
 export const renderNodeName = (
   name: string,
@@ -53,7 +64,12 @@ export const renderNodeName = (
 }
 
 /**
- * Helper function to get all node IDs that should be expanded for filtered results.
+ * Gets all node IDs that should be expanded to show filtered search results.
+ *
+ * @param nodes - Array of tree nodes
+ * @param filterFn - Function to determine if a node matches the query
+ * @param query - Search query string
+ * @returns Array of node IDs that should be expanded
  */
 export const getExpandedIdsForFilteredNodes = (
   nodes: TreeNode[],
@@ -130,26 +146,33 @@ export const getExpandedIdsForFilteredNodes = (
 }
 
 /**
- * Helper function to get all descendant node IDs.
+ * Gets all descendant node IDs for a given node.
+ *
+ * @param node - The tree node to get descendants for
+ * @returns Array of descendant node IDs
  */
 export const getAllDescendantIds = (node: TreeNode): string[] => {
   const descendants: string[] = []
 
-  const collectIds = (currentNode: TreeNode): void => {
+  const collectDescendantIds = (currentNode: TreeNode): void => {
     if (currentNode.children) {
       for (const child of currentNode.children) {
         descendants.push(child.id)
-        collectIds(child)
+        collectDescendantIds(child)
       }
     }
   }
 
-  collectIds(node)
+  collectDescendantIds(node)
   return descendants
 }
 
 /**
- * Helper function to check if a parent should be indeterminate.
+ * Checks if a parent node should be in indeterminate state for checkbox mode.
+ *
+ * @param node - The parent tree node to check
+ * @param selectedIds - Array of currently selected node IDs
+ * @returns True if parent should be indeterminate
  */
 export const isParentIndeterminate = (
   node: TreeNode,
@@ -171,7 +194,11 @@ export const isParentIndeterminate = (
 }
 
 /**
- * Helper function to find a node by ID.
+ * Finds a tree node by its ID within a tree structure.
+ *
+ * @param nodes - Array of tree nodes to search
+ * @param targetId - The ID of the node to find
+ * @returns The found node or undefined if not found
  */
 export const findNodeById = (
   nodes: TreeNode[],

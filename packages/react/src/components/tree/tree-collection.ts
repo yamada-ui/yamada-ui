@@ -66,6 +66,12 @@ export interface CreateTreeCollectionOptions {
   rootNode: TreeNode
 }
 
+/**
+ * Creates a tree collection with utility methods for managing tree data.
+ *
+ * @param options - Configuration options for the tree collection
+ * @returns Tree collection with utility methods
+ */
 export const createTreeCollection = ({
   nodeToString,
   nodeToValue,

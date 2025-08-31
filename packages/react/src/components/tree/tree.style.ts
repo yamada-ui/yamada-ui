@@ -1,5 +1,8 @@
 import { defineComponentSlotStyle } from "../../core"
 
+/**
+ * Style configuration for the Tree component using the slot-based styling system.
+ */
 export const treeStyle = defineComponentSlotStyle({
   base: {
     branch: {
@@ -10,7 +13,6 @@ export const treeStyle = defineComponentSlotStyle({
     },
     branchControl: {
       alignItems: "center",
-      cursor: "pointer",
       display: "flex",
       focusVisibleRing: "inside",
       gap: "2",
@@ -45,7 +47,6 @@ export const treeStyle = defineComponentSlotStyle({
       bg: "none",
       border: 0,
       color: "inherit",
-      cursor: "pointer",
       display: "flex",
       focusVisibleRing: "inside",
       fontSize: "inherit",
@@ -71,7 +72,7 @@ export const treeStyle = defineComponentSlotStyle({
     },
     item: {
       alignItems: "center",
-      cursor: "pointer",
+      cursor: "default",
       display: "flex",
       focusVisibleRing: "inside",
       gap: "2",
@@ -80,8 +81,7 @@ export const treeStyle = defineComponentSlotStyle({
       transitionDuration: "moderate",
       transitionProperty: "common",
       _disabled: {
-        cursor: "not-allowed",
-        opacity: 0.4,
+        layerStyle: "disabled",
       },
     },
     itemCheckbox: {

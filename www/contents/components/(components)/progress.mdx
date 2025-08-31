@@ -32,42 +32,31 @@ import { Progress } from "@workspaces/ui"
 <Progress value={50} />
 ```
 
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["outline", "subtle"]}>
+    {(variant, index) => (
+      <Progress
+        key={index}
+        aria-label="Storage space"
+        colorScheme="success"
+        variant={variant}
+        value={50}
+      />
+    )}
+  </For>
+</VStack>
+```
+
 ### Change Size
 
 ```tsx preview
 <VStack>
-  <For
-    each={[
-      {
-        colorScheme: "green",
-        value: 19,
-        size: "xs",
-      },
-      {
-        colorScheme: "pink",
-        value: 93,
-        size: "sm",
-      },
-      {
-        colorScheme: "purple",
-        value: 8,
-        size: "md",
-      },
-      {
-        colorScheme: "red",
-        value: 18,
-        size: "lg",
-      },
-    ]}
-  >
-    {({ colorScheme, value, size }, index) => (
-      <Progress
-        key={index}
-        aria-label="Storage space"
-        colorScheme={colorScheme}
-        value={value}
-        size={size}
-      />
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <Progress key={index} aria-label="Storage space" value={31} size={size} />
     )}
   </For>
 </VStack>
@@ -79,28 +68,26 @@ import { Progress } from "@workspaces/ui"
 <Progress aria-label="Storage space" colorScheme="purple" value={18} />
 ```
 
-### Change Variant
-
-```tsx preview
-<VStack>
-  <Progress aria-label="Storage space" variant="outline" value={50} />
-  <Progress aria-label="Storage space" variant="subtle" value={50} />
-</VStack>
-```
-
 ### Change Shape
 
 ```tsx preview
 <VStack>
-  <Progress aria-label="Storage space" shape="rounded" value={50} />
-  <Progress aria-label="Storage space" shape="square" value={50} />
-  <Progress aria-label="Storage space" shape="circle" value={50} />
+  <For each={["rounded", "square", "circle"]}>
+    {(shape, index) => (
+      <Progress
+        key={index}
+        aria-label="Storage space"
+        shape={shape}
+        value={50}
+      />
+    )}
+  </For>
 </VStack>
 ```
 
-### Change Color
+### Change Range Color
 
-If you want to change the color without using a color scheme, specify the color in `rangeColor`.
+To change the range color, set `rangeColor` to a color.
 
 ```tsx preview
 <Progress aria-label="Storage space" rangeColor="green.500" value={18} />
@@ -108,74 +95,50 @@ If you want to change the color without using a color scheme, specify the color 
 
 ### Change Track Color
 
-To customize the track color, use `trackColor`.
+To change the track color, set `trackColor` to a color.
 
 ```tsx preview
-<VStack>
-  <Progress
-    aria-label="Storage space"
-    trackColor="gray.300"
-    rangeColor="blue.500"
-    value={50}
-  />
-  <Progress
-    aria-label="Storage space"
-    trackColor="green.100"
-    rangeColor="green.600"
-    value={50}
-  />
-</VStack>
+<Progress
+  aria-label="Storage space"
+  trackColor="green/50"
+  rangeColor="green"
+  value={50}
+/>
 ```
 
-### Apply Stripes
+### Stripes
 
-By setting `striped` to `true`, you can apply stripes to the background color.
+To use stripes, set `striped` to `true`.
 
 ```tsx preview
 <Progress aria-label="Storage space" striped value={19} />
 ```
 
-### Apply Animation to Stripes
+### Animated Stripes
 
-If you want to add animation to the background color stripes, set `animated` to `true`.
+To use animated stripes, set `animated` to `true`.
 
 ```tsx preview
 <Progress aria-label="Storage space" striped animated value={20} />
 ```
 
-### Change Animation Duration
+### Change Duration
 
-To change the animation duration, set `duration` to a number (seconds) or a string.
+To change the duration, set `duration` to a number (seconds) or a string.
 
 ```tsx preview
-<VStack>
-  <Progress
-    aria-label="Storage space"
-    striped
-    animated
-    duration={1}
-    value={50}
-  />
-  <Progress
-    aria-label="Storage space"
-    striped
-    animated
-    duration={2}
-    value={50}
-  />
-  <Progress
-    aria-label="Storage space"
-    striped
-    animated
-    duration="3s"
-    value={50}
-  />
-</VStack>
+<Progress
+  aria-label="Storage space"
+  striped
+  animated
+  duration="3s"
+  value={50}
+/>
 ```
 
-### Apply Animation
+### Use Animation
 
-Setting `value` to `null` will apply animation.
+To use animation, set `value` to `null`.
 
 ```tsx preview
 <Progress value={null} />

@@ -6,7 +6,259 @@ source: components/reorder
 style: components/reorder/reorder.style.ts
 ---
 
+```tsx preview
+<Reorder.Root>
+  <Reorder.Item value="虎杖悠仁">虎杖悠仁</Reorder.Item>
+  <Reorder.Item value="伏黒恵">伏黒恵</Reorder.Item>
+  <Reorder.Item value="釘崎野薔薇">釘崎野薔薇</Reorder.Item>
+  <Reorder.Item value="五条悟">五条悟</Reorder.Item>
+  <Reorder.Item value="七海建人">七海建人</Reorder.Item>
+</Reorder.Root>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import {
+  Reorder,
+  ReorderRoot,
+  ReorderItem,
+  ReorderTrigger,
+} from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import {
+  Reorder,
+  ReorderRoot,
+  ReorderItem,
+  ReorderTrigger,
+} from "@/components/ui"
+```
+
+```tsx [monorepo]
+import {
+  Reorder,
+  ReorderRoot,
+  ReorderItem,
+  ReorderTrigger,
+} from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Reorder.Root>
+  <Reorder.Item value="虎杖悠仁">虎杖悠仁</Reorder.Item>
+  <Reorder.Item value="伏黒恵">伏黒恵</Reorder.Item>
+  <Reorder.Item value="釘崎野薔薇">釘崎野薔薇</Reorder.Item>
+</Reorder.Root>
+```
+
+### itemsを使う
+
+```tsx preview functional
+const items = useMemo<Reorder.RootProps["items"]>(
+  () => [
+    { value: "虎杖悠仁", label: "虎杖悠仁" },
+    { value: "伏黒恵", label: "伏黒恵" },
+    { value: "釘崎野薔薇", label: "釘崎野薔薇" },
+    { value: "五条悟", label: "五条悟" },
+    { value: "七海建人", label: "七海建人" },
+  ],
+  [],
+)
+
+return <Reorder.Root items={items} />
+```
+
+### バリアントを変更する
+
+```tsx preview functional
+const items = useMemo<Reorder.RootProps["items"]>(
+  () => [
+    { value: "虎杖悠仁", label: "虎杖悠仁" },
+    { value: "伏黒恵", label: "伏黒恵" },
+    { value: "釘崎野薔薇", label: "釘崎野薔薇" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Reorder.Root variant="panel" items={items} />
+    <Reorder.Root variant="outline" items={items} />
+    <Reorder.Root variant="solid" items={items} />
+    <Reorder.Root variant="subtle" items={items} />
+    <Reorder.Root variant="surface" items={items} />
+    <Reorder.Root variant="elevated" items={items} />
+    <Reorder.Root variant="plain" items={items} />
+  </VStack>
+)
+```
+
+### サイズを変更する
+
+```tsx preview functional
+const items = useMemo<Reorder.RootProps["items"]>(
+  () => [
+    { value: "虎杖悠仁", label: "虎杖悠仁" },
+    { value: "伏黒恵", label: "伏黒恵" },
+    { value: "釘崎野薔薇", label: "釘崎野薔薇" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Reorder.Root size="sm" items={items} />
+    <Reorder.Root size="md" items={items} />
+    <Reorder.Root size="lg" items={items} />
+    <Reorder.Root size="xl" items={items} />
+  </VStack>
+)
+```
+
+### 方向を変更する
+
+方向を変更する場合は、`orientation`に`vertical`または`horizontal`を設定します。デフォルトでは、`vertical`が設定されています。
+
+```tsx preview functional
+const items = useMemo<Reorder.RootProps["items"]>(
+  () => [
+    { value: "虎杖悠仁", label: "虎杖悠仁" },
+    { value: "伏黒恵", label: "伏黒恵" },
+    { value: "釘崎野薔薇", label: "釘崎野薔薇" },
+    { value: "五条悟", label: "五条悟" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Reorder.Root orientation="vertical" items={items} />
+    <Reorder.Root orientation="horizontal" items={items} />
+  </VStack>
+)
+```
+
+### ドラッグアンドドロップ可能な領域を限定する
+
+ドラッグアンドドロップ可能な領域を限定する場合は、`ReorderTrigger`を使用します。
+
+```tsx preview
+<Reorder.Root>
+  <Reorder.Item value="虎杖悠仁">
+    <HStack>
+      <Reorder.Trigger />
+      <Text>虎杖悠仁</Text>
+    </HStack>
+  </Reorder.Item>
+
+  <Reorder.Item value="伏黒恵">
+    <HStack>
+      <Reorder.Trigger>
+        <GhostIcon />
+      </Reorder.Trigger>
+      <Text>伏黒恵</Text>
+    </HStack>
+  </Reorder.Item>
+
+  <Reorder.Item value="釘崎野薔薇">
+    <HStack>
+      <Reorder.Trigger />
+      <Text>釘崎野薔薇</Text>
+    </HStack>
+  </Reorder.Item>
+</Reorder.Root>
+```
+
+### 完了のイベントをハンドルする
+
+ユーザーのドラッグアンドドロップが終了し、項目の順序が完了されたイベントをハンドルしたい場合は、`onCompleteChange`を使用します。`onCompleteChange`は、完了した順序を配列で提供します。
+
+```tsx preview functional
+const items = useMemo<Reorder.RootProps["items"]>(
+  () => [
+    { value: "虎杖悠仁", label: "虎杖悠仁" },
+    { value: "伏黒恵", label: "伏黒恵" },
+    { value: "釘崎野薔薇", label: "釘崎野薔薇" },
+    { value: "五条悟", label: "五条悟" },
+  ],
+  [],
+)
+const [completedOrder, setCompletedOrder] = useState([
+  "虎杖悠仁",
+  "伏黒恵",
+  "釘崎野薔薇",
+  "五条悟",
+])
+
+return (
+  <>
+    <Text>完了時の順序: {completedOrder.join(", ")}</Text>
+    <Reorder.Root
+      items={items}
+      onCompleteChange={(values) => setCompletedOrder(values)}
+    />
+  </>
+)
+```
+
+### スクロール可能な領域で使う
+
+スクロールがある領域で使う場合は、項目がオフセットを正しく測定できるように`layoutScroll`を`true`に設定します。
+
+```tsx preview functional
+const items = useMemo<Reorder.RootProps["items"]>(
+  () => [
+    { value: "虎杖悠仁", label: "虎杖悠仁" },
+    { value: "伏黒恵", label: "伏黒恵" },
+    { value: "釘崎野薔薇", label: "釘崎野薔薇" },
+    { value: "五条悟", label: "五条悟" },
+    { value: "七海建人", label: "七海建人" },
+  ],
+  [],
+)
+
+return (
+  <VStack h="xs" overflowY="auto">
+    <Reorder.Root layoutScroll items={items} />
+  </VStack>
+)
+```
+
+### 制御する
+
+```tsx preview functional
+const items = useMemo<Reorder.RootProps["items"]>(
+  () => [
+    { value: "虎杖悠仁", label: "虎杖悠仁" },
+    { value: "伏黒恵", label: "伏黒恵" },
+    { value: "釘崎野薔薇", label: "釘崎野薔薇" },
+    { value: "五条悟", label: "五条悟" },
+  ],
+  [],
+)
+const [values, setValues] = useState([
+  "虎杖悠仁",
+  "伏黒恵",
+  "釘崎野薔薇",
+  "五条悟",
+])
+
+return (
+  <>
+    <Text>現在の順序: {values.join(", ")}</Text>
+    <Reorder.Root
+      items={items}
+      onChange={(newValues) => setValues(newValues)}
+    />
+  </>
+)
+```
 
 ## Props
 

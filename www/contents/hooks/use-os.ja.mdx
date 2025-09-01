@@ -5,6 +5,12 @@ storybook: hooks-useos--basic
 source: hooks/use-os
 ---
 
+```tsx preview functional client
+const os = useOS()
+
+return <Text>Your os is "{os}"</Text>
+```
+
 ### 使い方
 
 :::code-group
@@ -25,10 +31,4 @@ import { useOS } from "@workspaces/ui"
 
 ```tsx
 const os = useOS()
-```
-
-```tsx preview functional client
-const os = useOS()
-
-return <Text>Your os is "{os}"</Text>
 ```

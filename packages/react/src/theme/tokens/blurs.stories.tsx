@@ -7,12 +7,12 @@ import { Text } from "../../components/text"
 import { blurs } from "./blurs"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Blurs",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const Blurs = () => {
   return (
     <>
       <Heading>Blurs</Heading>

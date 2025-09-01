@@ -7,12 +7,12 @@ import { Text } from "../../components/text"
 import { aspectRatios } from "./aspect-ratios"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Aspect Ratios",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const AspectRatios = () => {
   return (
     <>
       <Heading>Aspect Ratios</Heading>

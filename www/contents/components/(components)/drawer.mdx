@@ -183,19 +183,17 @@ By default, scrolling of the main content is blocked when the panel is opened to
 </Drawer.Root>
 ```
 
-### Customize the Close Button
+### Disable the Close Button
 
-If you want to customize the `Drawer.CloseButton` by passing `props`, etc., set it without omitting.
+To disable the close button, set `withCloseButton` to `false`.
 
 ```tsx preview
-<Drawer.Root>
+<Drawer.Root withCloseButton={false}>
   <Drawer.OpenTrigger>
     <Button>Open Drawer</Button>
   </Drawer.OpenTrigger>
 
   <Drawer.Content>
-    <Drawer.CloseButton colorScheme="red" />
-
     <Drawer.Header>ドラゴンボール</Drawer.Header>
 
     <Drawer.Body>
@@ -212,12 +210,12 @@ If you want to customize the `Drawer.CloseButton` by passing `props`, etc., set 
 </Drawer.Root>
 ```
 
-### Disable the Close Button
+### Disable the Overlay
 
-To disable the close button, set `withCloseButton` to `false`.
+To disable (hide) the overlay of the panel, set `withOverlay` to `false`.
 
 ```tsx preview
-<Drawer.Root withCloseButton={false}>
+<Drawer.Root withOverlay={false}>
   <Drawer.OpenTrigger>
     <Button>Open Drawer</Button>
   </Drawer.OpenTrigger>
@@ -293,9 +291,7 @@ To hide the drag bar, set `withDragBar` to `false`.
 </Drawer.Root>
 ```
 
-### Customize the Overlay
-
-If you want to customize the `Drawer.Overlay` by passing `props`, etc., set it without omitting.
+### Customize the Close Button
 
 ```tsx preview
 <Drawer.Root>
@@ -303,9 +299,9 @@ If you want to customize the `Drawer.Overlay` by passing `props`, etc., set it w
     <Button>Open Drawer</Button>
   </Drawer.OpenTrigger>
 
-  <Drawer.Overlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
-
   <Drawer.Content>
+    <Drawer.CloseButton colorScheme="red" />
+
     <Drawer.Header>ドラゴンボール</Drawer.Header>
 
     <Drawer.Body>
@@ -322,15 +318,15 @@ If you want to customize the `Drawer.Overlay` by passing `props`, etc., set it w
 </Drawer.Root>
 ```
 
-### Disable the Overlay
-
-To disable (hide) the overlay of the panel, set `withOverlay` to `false`.
+### Customize the Overlay
 
 ```tsx preview
-<Drawer.Root withOverlay={false}>
+<Drawer.Root>
   <Drawer.OpenTrigger>
     <Button>Open Drawer</Button>
   </Drawer.OpenTrigger>
+
+  <Drawer.Overlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
 
   <Drawer.Content>
     <Drawer.Header>ドラゴンボール</Drawer.Header>

@@ -5,7 +5,7 @@ import type { GridStyle } from "./grid.style"
 import { createComponent } from "../../core"
 import { gridStyle } from "./grid.style"
 
-export interface GridProps extends HTMLStyledProps, ThemeProps<GridStyle> {
+export interface GridRootProps extends HTMLStyledProps, ThemeProps<GridStyle> {
   /**
    * The CSS `grid-area` property.
    */
@@ -48,7 +48,7 @@ const {
   PropsContext: GridPropsContext,
   usePropsContext: useGridPropsContext,
   withContext,
-} = createComponent<GridProps, GridStyle>("grid", gridStyle)
+} = createComponent<GridRootProps, GridStyle>("grid", gridStyle)
 
 export { GridPropsContext, useGridPropsContext }
 
@@ -57,7 +57,7 @@ export { GridPropsContext, useGridPropsContext }
  *
  * @see https://yamada-ui.com/components/grid
  */
-export const Grid = withContext("div")(
+export const GridRoot = withContext("div")(
   undefined,
   ({
     area: gridArea,

@@ -1,11 +1,10 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import { Grid } from "./grid"
-import { GridItem } from "./grid-item"
+import { Grid } from "./"
 
-type Story = StoryFn<typeof Grid>
+type Story = StoryFn<typeof Grid.Root>
 
-const meta: Meta<typeof Grid> = {
-  component: Grid,
+const meta: Meta<typeof Grid.Root> = {
+  component: Grid.Root,
   title: "Components / Grid",
 }
 
@@ -13,12 +12,12 @@ export default meta
 
 export const TemplateColumns: Story = () => {
   return (
-    <Grid gap="md" templateColumns="repeat(4, 1fr)" w="full">
-      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
+    <Grid.Root gap="md" templateColumns="repeat(4, 1fr)" w="full">
+      <Grid.Item bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="success"
         color="white"
         p="md"
@@ -26,9 +25,9 @@ export const TemplateColumns: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="warning"
         color="white"
         p="md"
@@ -36,9 +35,9 @@ export const TemplateColumns: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="danger"
         color="white"
         p="md"
@@ -46,19 +45,19 @@ export const TemplateColumns: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
-    </Grid>
+      </Grid.Item>
+    </Grid.Root>
   )
 }
 
 export const TemplateRows: Story = () => {
   return (
-    <Grid gap="md" templateRows="repeat(4, 1fr)" w="full">
-      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
+    <Grid.Root gap="md" templateRows="repeat(4, 1fr)" w="full">
+      <Grid.Item bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="success"
         color="white"
         p="md"
@@ -66,9 +65,9 @@ export const TemplateRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="warning"
         color="white"
         p="md"
@@ -76,9 +75,9 @@ export const TemplateRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="danger"
         color="white"
         p="md"
@@ -86,24 +85,24 @@ export const TemplateRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
-    </Grid>
+      </Grid.Item>
+    </Grid.Root>
   )
 }
 
 export const TemplateColumnsAndRows: Story = () => {
   return (
-    <Grid
+    <Grid.Root
       gap="md"
       templateColumns="repeat(3, 1fr)"
       templateRows="repeat(4, 1fr)"
       w="full"
     >
-      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
+      <Grid.Item bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="success"
         color="white"
         p="md"
@@ -111,9 +110,9 @@ export const TemplateColumnsAndRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="warning"
         color="white"
         p="md"
@@ -121,9 +120,9 @@ export const TemplateColumnsAndRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="danger"
         color="white"
         p="md"
@@ -131,13 +130,13 @@ export const TemplateColumnsAndRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
+      <Grid.Item bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="success"
         color="white"
         p="md"
@@ -145,9 +144,9 @@ export const TemplateColumnsAndRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="warning"
         color="white"
         p="md"
@@ -155,9 +154,9 @@ export const TemplateColumnsAndRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="danger"
         color="white"
         p="md"
@@ -165,13 +164,13 @@ export const TemplateColumnsAndRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem bg="info" color="white" p="md" rounded="l2" textAlign="center">
+      <Grid.Item bg="info" color="white" p="md" rounded="l2" textAlign="center">
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="success"
         color="white"
         p="md"
@@ -179,9 +178,9 @@ export const TemplateColumnsAndRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="warning"
         color="white"
         p="md"
@@ -189,9 +188,9 @@ export const TemplateColumnsAndRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         bg="danger"
         color="white"
         p="md"
@@ -199,14 +198,14 @@ export const TemplateColumnsAndRows: Story = () => {
         textAlign="center"
       >
         GridItem
-      </GridItem>
-    </Grid>
+      </Grid.Item>
+    </Grid.Root>
   )
 }
 
 export const TemplateAreas: Story = () => {
   return (
-    <Grid
+    <Grid.Root
       gap="md"
       templateAreas={`
         "one one two three"
@@ -215,7 +214,7 @@ export const TemplateAreas: Story = () => {
       `}
       w="full"
     >
-      <GridItem
+      <Grid.Item
         alignItems="center"
         area="one"
         bg="info"
@@ -225,9 +224,9 @@ export const TemplateAreas: Story = () => {
         rounded="l2"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         alignItems="center"
         area="two"
         bg="success"
@@ -237,9 +236,9 @@ export const TemplateAreas: Story = () => {
         rounded="l2"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         alignItems="center"
         area="three"
         bg="warning"
@@ -249,9 +248,9 @@ export const TemplateAreas: Story = () => {
         rounded="l2"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         alignItems="center"
         area="four"
         bg="danger"
@@ -261,9 +260,9 @@ export const TemplateAreas: Story = () => {
         rounded="l2"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         alignItems="center"
         area="five"
         bg="info"
@@ -273,9 +272,9 @@ export const TemplateAreas: Story = () => {
         rounded="l2"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         alignItems="center"
         area="six"
         bg="success"
@@ -285,9 +284,9 @@ export const TemplateAreas: Story = () => {
         rounded="l2"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         alignItems="center"
         area="seven"
         bg="warning"
@@ -297,9 +296,9 @@ export const TemplateAreas: Story = () => {
         rounded="l2"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         alignItems="center"
         area="eight"
         bg="danger"
@@ -309,20 +308,20 @@ export const TemplateAreas: Story = () => {
         rounded="l2"
       >
         GridItem
-      </GridItem>
-    </Grid>
+      </Grid.Item>
+    </Grid.Root>
   )
 }
 
 export const CustomStartAndEnd: Story = () => {
   return (
-    <Grid
+    <Grid.Root
       gap="md"
       templateColumns="repeat(4, 1fr)"
       templateRows="repeat(3, 1fr)"
       w="full"
     >
-      <GridItem
+      <Grid.Item
         alignItems="center"
         bg="info"
         color="white"
@@ -332,9 +331,9 @@ export const CustomStartAndEnd: Story = () => {
         rounded="l2"
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         alignItems="center"
         bg="success"
         color="white"
@@ -345,9 +344,9 @@ export const CustomStartAndEnd: Story = () => {
         rowSpan={3}
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         alignItems="center"
         bg="warning"
         color="white"
@@ -358,9 +357,9 @@ export const CustomStartAndEnd: Story = () => {
         rowStart={2}
       >
         GridItem
-      </GridItem>
+      </Grid.Item>
 
-      <GridItem
+      <Grid.Item
         alignItems="center"
         bg="danger"
         colEnd={3}
@@ -373,7 +372,7 @@ export const CustomStartAndEnd: Story = () => {
         rowStart={2}
       >
         GridItem
-      </GridItem>
-    </Grid>
+      </Grid.Item>
+    </Grid.Root>
   )
 }

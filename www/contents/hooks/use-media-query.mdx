@@ -5,4 +5,30 @@ storybook: hooks-usemediaquery--basic
 source: hooks/use-media-query
 ---
 
+```tsx preview functional client
+const isLarge = useMediaQuery("(min-width: 1280px)")
+
+return <Text>{isLarge ? "larger than 1280px" : "smaller than 1280px"}</Text>
+```
+
 ### Usage
+
+:::code-group
+
+```tsx [package]
+import { useMediaQuery } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useMediaQuery } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useMediaQuery } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const isLarge = useMediaQuery("(min-width: 1280px)")
+```

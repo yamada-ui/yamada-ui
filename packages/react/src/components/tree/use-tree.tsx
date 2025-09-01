@@ -1,7 +1,11 @@
 import type { TreeNode } from "./tree"
 import { useCallback, useMemo, useState } from "react"
 import { useComponentContext } from "./tree"
-import { findNodeById, getAllDescendantIds } from "./tree-utils"
+import {
+  findNodeById,
+  getAllDescendantIds,
+  isParentIndeterminate,
+} from "./tree-utils"
 
 /**
  * Finds all parent nodes of a given node ID.
@@ -299,4 +303,56 @@ export const useTreeSelection = (
   }, [disabled, nodeId, onSelect])
 
   return { handleSelection }
+}
+
+/**
+ * Custom hook to optimize node lookups and state calculations.
+ *
+ * @param nodeId - The node ID to get state for
+ * @returns Node state and metadata
+ */
+export const useNodeState = (nodeId: string | undefined) => {
+  const { expandedIds, nodes, selectedIds, selectionMode } =
+    useComponentContext()
+
+  return useMemo(() => {
+    if (!nodeId) {
+      return {
+        expanded: false,
+        indeterminate: false,
+        node: undefined,
+        selected: false,
+      }
+    }
+
+    const node = findNodeById(nodes, nodeId)
+    if (!node) {
+      return {
+        expanded: false,
+        indeterminate: false,
+        node: undefined,
+        selected: false,
+      }
+    }
+
+    const expanded = expandedIds.includes(nodeId)
+
+    let selected = false
+    if (selectionMode === "checkbox") {
+      const nodeHasChildren = node.children && node.children.length > 0
+      if (nodeHasChildren && node.children) {
+        selected = node.children.every((child) =>
+          selectedIds.includes(child.id),
+        )
+      } else {
+        selected = selectedIds.includes(nodeId)
+      }
+    } else {
+      selected = selectedIds.includes(nodeId)
+    }
+
+    const indeterminate = isParentIndeterminate(node, selectedIds)
+
+    return { expanded, indeterminate, node, selected }
+  }, [nodeId, nodes, selectedIds, expandedIds, selectionMode])
 }

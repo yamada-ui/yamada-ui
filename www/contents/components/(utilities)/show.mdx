@@ -5,4 +5,70 @@ storybook: components-show--basic
 source: components/show
 ---
 
+```tsx preview
+<Show when={true}>
+  <Text>インビジブルガール 葉隠透</Text>
+</Show>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Show } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Show } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Show } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Show />
+```
+
+### Render Conditionally
+
+To conditionally render content, set the `when` prop to a boolean value.
+
+```tsx preview functional client
+const [isVisible, setIsVisible] = useState(true)
+
+return (
+  <VStack>
+    <Button onClick={() => setIsVisible((prev) => !prev)}>
+      {isVisible ? "Hide" : "Show"} Content
+    </Button>
+    <Show when={isVisible}>
+      <Text>インビジブルガール 葉隠透</Text>
+    </Show>
+  </VStack>
+)
+```
+
+### With Fallback
+
+To render fallback content when the condition is false, use the `fallback` prop.
+
+```tsx preview functional client
+const [isVisible, setIsVisible] = useState(false)
+
+return (
+  <VStack>
+    <Button onClick={() => setIsVisible(!isVisible)}>Toggle Content</Button>
+    <Show when={isVisible} fallback={<Text color="gray.500">衣服</Text>}>
+      <Text color="green.500">インビジブルガール 葉隠透</Text>
+    </Show>
+  </VStack>
+)
+```
+
+## Props
+
+<PropsTable name="show" />

@@ -422,13 +422,22 @@ export const TreeNode: FC<TreeNodeProps> = ({
   const renderProps = useMemo<TreeNodeRenderProps>(
     () => ({
       children: childrenContent,
+      expanded,
       indexPath,
       node,
       nodeId,
       nodeState,
       onToggleExpand: handleToggleExpand,
     }),
-    [childrenContent, indexPath, node, nodeId, nodeState, handleToggleExpand],
+    [
+      childrenContent,
+      expanded,
+      indexPath,
+      node,
+      nodeId,
+      nodeState,
+      handleToggleExpand,
+    ],
   )
 
   if (render) {
@@ -438,15 +447,10 @@ export const TreeNode: FC<TreeNodeProps> = ({
   if (nodeState.isBranch) {
     return (
       <TreeBranch indexPath={indexPath} {...branchProps}>
-        <TreeBranchControl
-          data-node-id={nodeId}
-          disabled={node.disabled}
-          expanded={expanded}
-          selected={selected}
-        >
-          <TreeBranchTrigger disabled={node.disabled}>
+        <TreeBranchControl data-node-id={nodeId}>
+          <TreeBranchTrigger>
             <TreeBranchIndicator
-              expanded={expanded}
+              nodeId={nodeId}
               onToggleExpand={handleToggleExpand}
             >
               {loading ? (
@@ -457,26 +461,10 @@ export const TreeNode: FC<TreeNodeProps> = ({
                 <ChevronRightIcon />
               )}
             </TreeBranchIndicator>
-            {selectionMode === "checkbox" ? (
-              <>
-                <TreeBranchCheckbox nodeId={nodeId} />
-                <TreeBranchText
-                  disabled={node.disabled}
-                  nodeId={nodeId}
-                  selected={selected}
-                >
-                  {renderNodeName(node.name, filterQuery)}
-                </TreeBranchText>
-              </>
-            ) : (
-              <TreeBranchText
-                disabled={node.disabled}
-                nodeId={nodeId}
-                selected={selected}
-              >
-                {renderNodeName(node.name, filterQuery)}
-              </TreeBranchText>
-            )}
+            {selectionMode === "checkbox" && <TreeCheckbox nodeId={nodeId} />}
+            <TreeBranchText nodeId={nodeId}>
+              {renderNodeName(node.name, filterQuery)}
+            </TreeBranchText>
           </TreeBranchTrigger>
         </TreeBranchControl>
         <TreeBranchContent {...branchContentProps}>
@@ -493,23 +481,9 @@ export const TreeNode: FC<TreeNodeProps> = ({
       </TreeBranch>
     )
   } else {
-    return selectionMode === "checkbox" ? (
-      <TreeItem
-        disabled={node.disabled}
-        indexPath={indexPath}
-        nodeId={nodeId}
-        selected={selected}
-      >
-        <TreeItemCheckbox nodeId={nodeId} />
-        <TreeItemText>{renderNodeName(node.name, filterQuery)}</TreeItemText>
-      </TreeItem>
-    ) : (
-      <TreeItem
-        disabled={node.disabled}
-        indexPath={indexPath}
-        nodeId={nodeId}
-        selected={selected}
-      >
+    return (
+      <TreeItem indexPath={indexPath} nodeId={nodeId}>
+        {selectionMode === "checkbox" && <TreeCheckbox nodeId={nodeId} />}
         <TreeItemText>{renderNodeName(node.name, filterQuery)}</TreeItemText>
       </TreeItem>
     )
@@ -541,20 +515,7 @@ export const TreeBranchContent = withContext<"ul", TreeBranchContentProps>(
   "branchContent",
 )()
 
-export interface TreeBranchControlProps extends HTMLStyledProps {
-  /**
-   * Whether the branch control is disabled.
-   */
-  disabled?: boolean
-  /**
-   * Whether the branch is expanded.
-   */
-  expanded?: boolean
-  /**
-   * Whether the branch is selected.
-   */
-  selected?: boolean
-}
+export interface TreeBranchControlProps extends HTMLStyledProps {}
 
 /**
  * TreeBranchControl component that wraps the branch trigger and handles user interactions.
@@ -562,28 +523,39 @@ export interface TreeBranchControlProps extends HTMLStyledProps {
 export const TreeBranchControl = withContext<"div", TreeBranchControlProps>(
   "div",
   "branchControl",
-)(
-  { "data-group": "" },
-  ({ disabled, expanded, selected, onClick, ...rest }) => {
-    const nodeId = rest["data-node-id"] as string | undefined
-    const { handleSelection } = useTreeSelection(nodeId, disabled)
+)({ "data-group": "" }, ({ onClick, ...rest }) => {
+  const nodeId = rest["data-node-id"] as string | undefined
+  const { expandedIds, nodes, selectedIds, selectionMode } =
+    useComponentContext()
 
-    return {
-      "data-disabled": dataAttr(disabled),
-      "data-expanded": dataAttr(expanded),
-      "data-selected": dataAttr(selected),
-      onClick: handlerAll(handleSelection, onClick),
-      ...rest,
-    }
-  },
-)
+  if (!nodeId) {
+    return { onClick, ...rest }
+  }
 
-export interface TreeBranchTriggerProps extends HTMLStyledProps<"button"> {
-  /**
-   * Whether the branch trigger is disabled.
-   */
-  disabled?: boolean
-}
+  const node = findNodeById(nodes, nodeId)
+  if (!node) {
+    return { onClick, ...rest }
+  }
+
+  const expanded = expandedIds.includes(nodeId)
+  const selected =
+    selectionMode === "checkbox"
+      ? node.children && node.children.length > 0
+        ? node.children.every((child) => selectedIds.includes(child.id))
+        : selectedIds.includes(nodeId)
+      : selectedIds.includes(nodeId)
+  const { handleSelection } = useTreeSelection(nodeId, node.disabled)
+
+  return {
+    "data-disabled": dataAttr(node.disabled),
+    "data-expanded": dataAttr(expanded),
+    "data-selected": dataAttr(selected),
+    onClick: handlerAll(handleSelection, onClick),
+    ...rest,
+  }
+})
+
+export interface TreeBranchTriggerProps extends HTMLStyledProps<"button"> {}
 
 /**
  * TreeBranchTrigger component that acts as the clickable trigger for expanding/collapsing branches.
@@ -591,16 +563,30 @@ export interface TreeBranchTriggerProps extends HTMLStyledProps<"button"> {
 export const TreeBranchTrigger = withContext<"button", TreeBranchTriggerProps>(
   "button",
   "branchTrigger",
-)({}, ({ disabled, ...rest }) => ({
-  "data-disabled": dataAttr(disabled),
-  ...rest,
-}))
+)({}, ({ ...rest }) => {
+  const { nodes } = useComponentContext()
+  const nodeId = rest["data-node-id"] as string | undefined
+
+  if (!nodeId) {
+    return { ...rest }
+  }
+
+  const node = findNodeById(nodes, nodeId)
+  if (!node) {
+    return { ...rest }
+  }
+
+  return {
+    "data-disabled": dataAttr(node.disabled),
+    ...rest,
+  }
+})
 
 export interface TreeBranchIndicatorProps extends HTMLStyledProps {
   /**
-   * Whether the branch is expanded.
+   * The node ID for the branch indicator.
    */
-  expanded?: boolean
+  nodeId?: string
   /**
    * Callback function to toggle expand state.
    */
@@ -613,33 +599,35 @@ export interface TreeBranchIndicatorProps extends HTMLStyledProps {
 export const TreeBranchIndicator = withContext<"div", TreeBranchIndicatorProps>(
   "div",
   "branchIndicator",
-)({}, ({ expanded, onClick, onToggleExpand, ...rest }) => ({
-  "data-expanded": dataAttr(expanded),
-  onClick: handlerAll(
-    onToggleExpand
-      ? (e: React.MouseEvent) => {
-          e.stopPropagation()
-          onToggleExpand()
-        }
-      : undefined,
-    onClick,
-  ),
-  ...rest,
-}))
+)({}, ({ nodeId, onClick, onToggleExpand, ...rest }) => {
+  const { expandedIds } = useComponentContext()
+
+  if (!nodeId) {
+    return { onClick, ...rest }
+  }
+
+  const expanded = expandedIds.includes(nodeId)
+
+  return {
+    "data-expanded": dataAttr(expanded),
+    onClick: handlerAll(
+      onToggleExpand
+        ? (e: React.MouseEvent) => {
+            e.stopPropagation()
+            onToggleExpand()
+          }
+        : undefined,
+      onClick,
+    ),
+    ...rest,
+  }
+})
 
 export interface TreeBranchTextProps extends HTMLStyledProps<"span"> {
-  /**
-   * Whether the branch text is disabled.
-   */
-  disabled?: boolean
   /**
    * The node ID for the branch text.
    */
   nodeId?: string
-  /**
-   * Whether the branch text is selected.
-   */
-  selected?: boolean
 }
 
 /**
@@ -648,28 +636,45 @@ export interface TreeBranchTextProps extends HTMLStyledProps<"span"> {
 export const TreeBranchText = withContext<"span", TreeBranchTextProps>(
   "span",
   "branchText",
-)(undefined, ({ disabled, nodeId, selected, onClick, ...rest }) => {
-  const { handleSelection } = useTreeSelection(nodeId, disabled)
+)(undefined, ({ nodeId, onClick, ...rest }) => {
+  const { nodes, selectedIds, selectionMode } = useComponentContext()
+
+  if (!nodeId) {
+    return { onClick, ...rest }
+  }
+
+  const node = findNodeById(nodes, nodeId)
+  if (!node) {
+    return { onClick, ...rest }
+  }
+
+  const selected =
+    selectionMode === "checkbox"
+      ? node.children && node.children.length > 0
+        ? node.children.every((child) => selectedIds.includes(child.id))
+        : selectedIds.includes(nodeId)
+      : selectedIds.includes(nodeId)
+  const { handleSelection } = useTreeSelection(nodeId, node.disabled)
 
   return {
-    "data-disabled": dataAttr(disabled),
+    "data-disabled": dataAttr(node.disabled),
     "data-selected": dataAttr(selected),
     onClick: handlerAll(handleSelection, onClick),
     ...rest,
   }
 })
 
-export interface TreeBranchCheckboxProps extends HTMLStyledProps {
+export interface TreeCheckboxProps extends HTMLStyledProps {
   /**
-   * The node ID for the branch checkbox.
+   * The node ID for the checkbox.
    */
   nodeId?: string
 }
 
 /**
- * TreeBranchCheckbox component that provides checkbox functionality for branch nodes.
+ * TreeCheckbox component that provides checkbox functionality for tree nodes.
  */
-export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
+export const TreeCheckbox = withContext<"div", TreeCheckboxProps>(
   ({ nodeId, ...rest }) => {
     const { nodes, selectedIds, onSelect } = useComponentContext()
 
@@ -700,14 +705,10 @@ export const TreeBranchCheckbox = withContext<"div", TreeBranchCheckboxProps>(
       </styled.div>
     )
   },
-  "branchCheckbox",
+  "checkbox",
 )()
 
 export interface TreeItemProps extends HTMLStyledProps<"li"> {
-  /**
-   * Whether the tree item is disabled.
-   */
-  disabled?: boolean
   /**
    * The index path of the item in the tree.
    */
@@ -716,22 +717,30 @@ export interface TreeItemProps extends HTMLStyledProps<"li"> {
    * The node ID for the tree item.
    */
   nodeId?: string
-  /**
-   * Whether the tree item is selected.
-   */
-  selected?: boolean
 }
 
 /**
  * TreeItem component that represents a leaf node in the tree.
  */
 export const TreeItem = withContext<"li", TreeItemProps>("li", "item")(
-  undefined,
-  ({ disabled, indexPath = [], nodeId, selected, onClick, ...rest }) => {
-    const { handleSelection } = useTreeSelection(nodeId, disabled)
+  { "data-group": "" },
+  ({ indexPath = [], nodeId, onClick, ...rest }) => {
+    const { nodes, selectedIds } = useComponentContext()
+
+    if (!nodeId) {
+      return { "--depth": indexPath.length, onClick, ...rest }
+    }
+
+    const node = findNodeById(nodes, nodeId)
+    if (!node) {
+      return { "--depth": indexPath.length, onClick, ...rest }
+    }
+
+    const selected = selectedIds.includes(nodeId)
+    const { handleSelection } = useTreeSelection(nodeId, node.disabled)
 
     return {
-      "data-disabled": dataAttr(disabled),
+      "data-disabled": dataAttr(node.disabled),
       "data-node-id": nodeId,
       "data-selected": dataAttr(selected),
       "--depth": indexPath.length,
@@ -759,50 +768,6 @@ export interface TreeItemTextProps extends HTMLStyledProps<"span"> {}
 export const TreeItemText = withContext<"span", TreeItemTextProps>(
   "span",
   "itemText",
-)()
-
-export interface TreeItemCheckboxProps extends HTMLStyledProps {
-  /**
-   * The node ID for the item checkbox.
-   */
-  nodeId?: string
-}
-
-/**
- * TreeItemCheckbox component that provides checkbox functionality for tree items.
- */
-export const TreeItemCheckbox = withContext<"div", TreeItemCheckboxProps>(
-  ({ nodeId, ...rest }) => {
-    const { nodes, selectedIds, onSelect } = useComponentContext()
-
-    if (!nodeId) {
-      return <styled.div {...rest} />
-    }
-
-    const node = findNodeById(nodes, nodeId)
-    if (!node) {
-      return <styled.div {...rest} />
-    }
-
-    const checked = selectedIds.includes(nodeId)
-    const indeterminate = isParentIndeterminate(node, selectedIds)
-
-    const handleCheckboxChange = (_checkedValue: boolean) => {
-      onSelect(nodeId)
-    }
-
-    return (
-      <styled.div {...rest}>
-        <Checkbox
-          checked={checked}
-          disabled={node.disabled}
-          indeterminate={indeterminate}
-          onChange={(e) => handleCheckboxChange(e.target.checked)}
-        />
-      </styled.div>
-    )
-  },
-  "itemCheckbox",
 )()
 
 export interface TreeLabelProps extends HTMLStyledProps<"label"> {}

@@ -8,9 +8,6 @@ export const treeStyle = defineComponentSlotStyle({
     branch: {
       listStyle: "none",
     },
-    branchCheckbox: {
-      mr: "2",
-    },
     branchControl: {
       alignItems: "center",
       display: "flex",
@@ -61,6 +58,9 @@ export const treeStyle = defineComponentSlotStyle({
         layerStyle: "disabled",
       },
     },
+    checkbox: {
+      mr: "2",
+    },
     collectionName: {
       color: "colorScheme.600",
       flex: 1,
@@ -85,9 +85,7 @@ export const treeStyle = defineComponentSlotStyle({
         layerStyle: "disabled",
       },
     },
-    itemCheckbox: {
-      mr: "2",
-    },
+
     itemIndicator: {
       alignItems: "center",
       display: "flex",

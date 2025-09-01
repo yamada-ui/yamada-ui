@@ -88,6 +88,10 @@ export interface TreeNodeProps {
 
 export interface TreeNodeRenderProps {
   /**
+   * Whether the node is expanded.
+   */
+  expanded: boolean
+  /**
    * The index path of the node.
    */
   indexPath: number[]

@@ -4,6 +4,7 @@ import { PropsTable } from "#storybook"
 import { useState } from "react"
 import { COLOR_SCHEMES } from "../../utils"
 import { Button } from "../button"
+import { FolderClosedIcon, FolderOpenIcon, MusicIcon } from "../icon"
 import { Input } from "../input"
 import { HStack, VStack } from "../stack"
 import { Tree } from "./index"
@@ -234,45 +235,36 @@ export const CustomIcons = () => {
             node={node}
             render={({
               children,
+              expanded,
               indexPath,
               node,
               nodeId,
               nodeState,
-              onSelect,
               onToggleExpand,
             }) =>
               nodeState.isBranch ? (
                 <Tree.Branch indexPath={indexPath}>
-                  <Tree.BranchControl
-                    data-disabled={node.disabled ? "true" : undefined}
-                    data-expanded={nodeState.expanded ? "true" : undefined}
-                    onClick={!node.disabled ? onToggleExpand : undefined}
-                  >
-                    <Tree.BranchTrigger
-                      data-disabled={node.disabled ? "true" : undefined}
-                      data-expanded={nodeState.expanded ? "true" : undefined}
-                      onClick={!node.disabled ? onToggleExpand : undefined}
-                    >
+                  <Tree.BranchControl>
+                    <Tree.BranchTrigger>
                       <Tree.BranchIndicator
-                        data-disabled={node.disabled ? "true" : undefined}
-                        data-expanded={nodeState.expanded ? "true" : undefined}
+                        nodeId={nodeId}
+                        _groupHover={{ color: "yellow" }}
+                        onToggleExpand={onToggleExpand}
                       >
-                        📁
+                        {expanded ? <FolderOpenIcon /> : <FolderClosedIcon />}
                       </Tree.BranchIndicator>
-                      <Tree.BranchText>{node.name}</Tree.BranchText>
+                      <Tree.BranchText nodeId={nodeId}>
+                        {node.name}
+                      </Tree.BranchText>
                     </Tree.BranchTrigger>
                   </Tree.BranchControl>
                   <Tree.BranchContent>{children}</Tree.BranchContent>
                 </Tree.Branch>
               ) : (
-                <Tree.Item
-                  data-disabled={node.disabled ? "true" : undefined}
-                  data-selected={nodeState.selected ? "true" : undefined}
-                  indexPath={indexPath}
-                  nodeId={nodeId}
-                  onClick={!node.disabled ? onSelect : undefined}
-                >
-                  <Tree.ItemIndicator>🎵</Tree.ItemIndicator>
+                <Tree.Item indexPath={indexPath} nodeId={nodeId}>
+                  <Tree.ItemIndicator _groupHover={{ color: "red" }}>
+                    <MusicIcon />
+                  </Tree.ItemIndicator>
                   <Tree.ItemText>{node.name}</Tree.ItemText>
                 </Tree.Item>
               )

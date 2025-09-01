@@ -90,6 +90,10 @@
       "description": "説明",
       "property": "CSSプロパティ",
       "token": "テーマトークン"
+    },
+    "tokensTable": {
+      "token": "トークン",
+      "value": "値"
     }
   }
 }

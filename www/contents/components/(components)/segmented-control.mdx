@@ -6,7 +6,195 @@ source: components/segmented-control
 style: components/segmented-control/segmented-control.style.ts
 ---
 
+```tsx preview
+<SegmentedControl.Root defaultValue="ハチワレ">
+  <SegmentedControl.Item value="ハチワレ">ハチワレ</SegmentedControl.Item>
+  <SegmentedControl.Item value="うさぎ">うさぎ</SegmentedControl.Item>
+  <SegmentedControl.Item value="モモンガ">モモンガ</SegmentedControl.Item>
+</SegmentedControl.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { SegmentedControl } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { SegmentedControl } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { SegmentedControl } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<SegmentedControl.Root>
+  <SegmentedControl.Item />
+</SegmentedControl.Root>
+```
+
+### Use items
+
+```tsx preview functional
+const items = useMemo<SegmentedControl.RootProps["items"]>(
+  () => [
+    { label: "ハチワレ", value: "ハチワレ" },
+    { label: "うさぎ", value: "うさぎ" },
+    { label: "モモンガ", value: "モモンガ" },
+  ],
+  [],
+)
+
+return <SegmentedControl.Root defaultValue="ハチワレ" items={items} />
+```
+
+### Change size
+
+```tsx preview functional
+const items = useMemo<SegmentedControl.RootProps["items"]>(
+  () => [
+    { label: "ハチワレ", value: "ハチワレ" },
+    { label: "うさぎ", value: "うさぎ" },
+    { label: "モモンガ", value: "モモンガ" },
+  ],
+  [],
+)
+
+return (
+  <VStack alignItems="flex-start">
+    <For each={["sm", "md", "lg", "xl"]}>
+      {(size) => (
+        <SegmentedControl.Root
+          key={size}
+          size={size}
+          defaultValue="ハチワレ"
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change orientation
+
+```tsx preview functional
+const items = useMemo<SegmentedControl.RootProps["items"]>(
+  () => [
+    { label: "ハチワレ", value: "ハチワレ" },
+    { label: "うさぎ", value: "うさぎ" },
+    { label: "モモンガ", value: "モモンガ" },
+  ],
+  [],
+)
+
+return (
+  <VStack alignItems="flex-start">
+    <For each={["horizontal", "vertical"]}>
+      {(orientation) => (
+        <SegmentedControl.Root
+          key={orientation}
+          defaultValue="ハチワレ"
+          items={items}
+          orientation={orientation}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Make rounded
+
+```tsx preview functional
+const items = useMemo<SegmentedControl.RootProps["items"]>(
+  () => [
+    { label: "ハチワレ", value: "ハチワレ" },
+    { label: "うさぎ", value: "うさぎ" },
+    { label: "モモンガ", value: "モモンガ" },
+  ],
+  [],
+)
+
+return (
+  <SegmentedControl.Root defaultValue="ハチワレ" fullRounded items={items} />
+)
+```
+
+### Disable
+
+```tsx preview functional
+const items = useMemo<SegmentedControl.RootProps["items"]>(
+  () => [
+    { label: "ハチワレ", value: "ハチワレ" },
+    { label: "うさぎ", value: "うさぎ" },
+    { label: "モモンガ", value: "モモンガ" },
+  ],
+  [],
+)
+
+return (
+  <VStack alignItems="flex-start">
+    <SegmentedControl.Root defaultValue="ハチワレ" disabled items={items} />
+
+    <SegmentedControl.Root defaultValue="ハチワレ">
+      <SegmentedControl.Item value="ハチワレ">ハチワレ</SegmentedControl.Item>
+      <SegmentedControl.Item disabled value="うさぎ">
+        うさぎ
+      </SegmentedControl.Item>
+      <SegmentedControl.Item value="モモンガ">モモンガ</SegmentedControl.Item>
+    </SegmentedControl.Root>
+  </VStack>
+)
+```
+
+### Read-Only
+
+```tsx preview functional
+const items = useMemo<SegmentedControl.RootProps["items"]>(
+  () => [
+    { label: "ハチワレ", value: "ハチワレ" },
+    { label: "うさぎ", value: "うさぎ" },
+    { label: "モモンガ", value: "モモンガ" },
+  ],
+  [],
+)
+
+return (
+  <VStack alignItems="flex-start">
+    <SegmentedControl.Root defaultValue="ハチワレ" items={items} readOnly />
+
+    <SegmentedControl.Root defaultValue="ハチワレ">
+      <SegmentedControl.Item value="ハチワレ">ハチワレ</SegmentedControl.Item>
+      <SegmentedControl.Item readOnly value="うさぎ">
+        うさぎ
+      </SegmentedControl.Item>
+      <SegmentedControl.Item value="モモンガ">モモンガ</SegmentedControl.Item>
+    </SegmentedControl.Root>
+  </VStack>
+)
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState("ハチワレ")
+const items = useMemo<SegmentedControl.RootProps["items"]>(
+  () => [
+    { label: "ハチワレ", value: "ハチワレ" },
+    { label: "うさぎ", value: "うさぎ" },
+    { label: "モモンガ", value: "モモンガ" },
+  ],
+  [],
+)
+
+return <SegmentedControl.Root items={items} value={value} onChange={setValue} />
+```
 
 ## Props
 

@@ -7,12 +7,12 @@ import { Text } from "../../components/text"
 import { letterSpacings } from "./letter-spacings"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Letter Spacings",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const LetterSpacings = () => {
   return (
     <>
       <Heading>Letter Spacings</Heading>

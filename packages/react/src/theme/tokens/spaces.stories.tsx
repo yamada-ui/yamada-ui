@@ -9,12 +9,12 @@ import { spaces as semanticSpaces } from "../semantic-tokens/spaces"
 import { spaces } from "./spaces"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Spaces",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const Spaces = () => {
   return (
     <>
       <Heading>Spaces</Heading>

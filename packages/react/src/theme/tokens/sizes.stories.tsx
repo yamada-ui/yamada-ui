@@ -6,15 +6,16 @@ import { For } from "../../components/for"
 import { Heading } from "../../components/heading"
 import { Text } from "../../components/text"
 import { isSize } from "../../utils"
+import { sizes as semanticSizes } from "../semantic-tokens/sizes"
 import { sizes } from "./sizes"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Sizes",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const Sizes = () => {
   return (
     <>
       <Heading>Sizes</Heading>
@@ -59,7 +60,9 @@ export const Basic = () => {
           gapY="md"
           gridTemplateColumns="auto auto 1fr"
         >
-          <For each={Object.entries(sizes).filter(([key]) => isSize(key))}>
+          <For
+            each={Object.entries(semanticSizes).filter(([key]) => isSize(key))}
+          >
             {([token, value], index) => (
               <Fragment key={index}>
                 <Text>{token}</Text>
@@ -84,7 +87,9 @@ export const Basic = () => {
           gridTemplateColumns="auto auto 1fr"
         >
           <For
-            each={Object.entries(sizes).filter(([key]) => key.includes("/"))}
+            each={Object.entries(semanticSizes).filter(([key]) =>
+              key.includes("/"),
+            )}
           >
             {([token, value], index) => (
               <Fragment key={index}>

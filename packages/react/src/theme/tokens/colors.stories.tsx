@@ -15,12 +15,12 @@ import {
 } from "../../utils"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Colors",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const Colors = () => {
   return (
     <>
       <Heading>Colors</Heading>
@@ -49,7 +49,7 @@ export const Basic = () => {
                         w="full"
                       />
                       <Text
-                        color="muted"
+                        color="fg.muted"
                         fontSize="xs"
                         lineClamp={1}
                         textAlign="center"
@@ -87,7 +87,7 @@ export const Basic = () => {
                         w="full"
                       />
                       <Text
-                        color="muted"
+                        color="fg.muted"
                         fontSize="xs"
                         lineClamp={1}
                         textAlign="center"
@@ -113,6 +113,7 @@ export const Basic = () => {
                 "",
                 "subtle",
                 "overlay",
+                "ghost",
                 "muted",
                 "emphasized",
                 "contrast",
@@ -135,7 +136,7 @@ export const Basic = () => {
                   />
 
                   <Text
-                    color="muted"
+                    color="fg.muted"
                     fontSize="xs"
                     lineClamp={1}
                     textAlign="center"
@@ -183,7 +184,7 @@ export const Basic = () => {
                   </Center>
 
                   <Text
-                    color="muted"
+                    color="fg.muted"
                     fontSize="xs"
                     lineClamp={1}
                     textAlign="center"
@@ -228,7 +229,7 @@ export const Basic = () => {
                   />
 
                   <Text
-                    color="muted"
+                    color="fg.muted"
                     fontSize="xs"
                     lineClamp={1}
                     textAlign="center"
@@ -277,7 +278,7 @@ export const Basic = () => {
                       />
 
                       <Text
-                        color="muted"
+                        color="fg.muted"
                         fontSize="xs"
                         lineClamp={1}
                         textAlign="center"

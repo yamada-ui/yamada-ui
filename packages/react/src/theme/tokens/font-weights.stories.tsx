@@ -7,12 +7,12 @@ import { Text } from "../../components/text"
 import { fontWeights } from "./font-weights"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Font Weights",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const FontWeights = () => {
   return (
     <>
       <Heading>Font Weights</Heading>

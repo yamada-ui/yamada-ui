@@ -1,5 +1,11 @@
 # @yamada-ui/cli
 
+## 1.2.6
+
+### Patch Changes
+
+- [#4812](https://github.com/yamada-ui/yamada-ui/pull/4812) [`9d80abc`](https://github.com/yamada-ui/yamada-ui/commit/9d80abcdbb7a8fc1195d994664bca244600acf51) Thanks [@Systemad](https://github.com/Systemad)! - Normalizes targetPath folder name to match tarball naming
+
 ## 1.2.5
 
 ### Patch Changes

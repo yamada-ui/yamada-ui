@@ -754,7 +754,7 @@ export const Thumbnails: Story = () => {
   )
 
   return (
-    <VStack gap="md">
+    <VStack>
       <Carousel.Root index={index} onChange={setIndex}>
         <Carousel.List>
           {sources.map((src, index) => (
@@ -851,8 +851,8 @@ export const CustomComponent: Story = () => {
               color="transparent"
               fill="colorScheme.solid/40"
               fontSize="2xl"
-              _selected={{ fill: "colorScheme.solid" }}
               _hover={{ _notSelected: { fill: "colorScheme.solid/70" } }}
+              _selected={{ fill: "colorScheme.solid" }}
             />
           </Center>
         )}

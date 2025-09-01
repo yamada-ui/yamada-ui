@@ -7,3 +7,550 @@ style: components/native-table/native-table.style.ts
 ---
 
 ## Usage
+
+```tsx preview
+<NativeTable.Root>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>タイトル</NativeTable.Th>
+      <NativeTable.Th>公開日</NativeTable.Th>
+      <NativeTable.Th numeric>上映時間</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>アクション仮面VSハイグレ魔王</NativeTable.Td>
+      <NativeTable.Td>1993年7月24日</NativeTable.Td>
+      <NativeTable.Td numeric>93分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ブリブリ王国の秘宝</NativeTable.Td>
+      <NativeTable.Td>1994年4月23日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>雲黒斎の野望</NativeTable.Td>
+      <NativeTable.Td>1995年4月15日</NativeTable.Td>
+      <NativeTable.Td numeric>94分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ヘンダーランドの大冒険</NativeTable.Td>
+      <NativeTable.Td>1996年4月13日</NativeTable.Td>
+      <NativeTable.Td numeric>97分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>暗黒タマタマ大追跡</NativeTable.Td>
+      <NativeTable.Td>1997年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+
+  <NativeTable.Tfoot>
+    <NativeTable.Tr>
+      <NativeTable.Th>タイトル</NativeTable.Th>
+      <NativeTable.Th>公開日</NativeTable.Th>
+      <NativeTable.Th numeric>上映時間</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Tfoot>
+</NativeTable.Root>
+```
+
+## Change Variants
+
+```tsx preview
+<VStack>
+  <For each={["line", "outline"]}>
+    {(variant, index) => (
+      <NativeTable.Root key={index} variant={variant}>
+        <NativeTable.Thead>
+          <NativeTable.Tr>
+            <NativeTable.Th>タイトル</NativeTable.Th>
+            <NativeTable.Th>公開日</NativeTable.Th>
+            <NativeTable.Th numeric>上映時間</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Thead>
+
+        <NativeTable.Tbody>
+          <NativeTable.Tr>
+            <NativeTable.Td>アクション仮面VSハイグレ魔王</NativeTable.Td>
+            <NativeTable.Td>1993年7月24日</NativeTable.Td>
+            <NativeTable.Td numeric>93分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ブリブリ王国の秘宝</NativeTable.Td>
+            <NativeTable.Td>1994年4月23日</NativeTable.Td>
+            <NativeTable.Td numeric>96分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>雲黒斎の野望</NativeTable.Td>
+            <NativeTable.Td>1995年4月15日</NativeTable.Td>
+            <NativeTable.Td numeric>94分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ヘンダーランドの大冒険</NativeTable.Td>
+            <NativeTable.Td>1996年4月13日</NativeTable.Td>
+            <NativeTable.Td numeric>97分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>暗黒タマタマ大追跡</NativeTable.Td>
+            <NativeTable.Td>1997年4月19日</NativeTable.Td>
+            <NativeTable.Td numeric>96分</NativeTable.Td>
+          </NativeTable.Tr>
+        </NativeTable.Tbody>
+      </NativeTable.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## Change Size
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <NativeTable.Root key={index} size={size}>
+        <NativeTable.Thead>
+          <NativeTable.Tr>
+            <NativeTable.Th>タイトル</NativeTable.Th>
+            <NativeTable.Th>公開日</NativeTable.Th>
+            <NativeTable.Th numeric>上映時間</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Thead>
+
+        <NativeTable.Tbody>
+          <NativeTable.Tr>
+            <NativeTable.Td>アクション仮面VSハイグレ魔王</NativeTable.Td>
+            <NativeTable.Td>1993年7月24日</NativeTable.Td>
+            <NativeTable.Td numeric>93分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ブリブリ王国の秘宝</NativeTable.Td>
+            <NativeTable.Td>1994年4月23日</NativeTable.Td>
+            <NativeTable.Td numeric>96分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>雲黒斎の野望</NativeTable.Td>
+            <NativeTable.Td>1995年4月15日</NativeTable.Td>
+            <NativeTable.Td numeric>94分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ヘンダーランドの大冒険</NativeTable.Td>
+            <NativeTable.Td>1996年4月13日</NativeTable.Td>
+            <NativeTable.Td numeric>97分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>暗黒タマタマ大追跡</NativeTable.Td>
+            <NativeTable.Td>1997年4月19日</NativeTable.Td>
+            <NativeTable.Td numeric>96分</NativeTable.Td>
+          </NativeTable.Tr>
+        </NativeTable.Tbody>
+      </NativeTable.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["green", "orange"]}>
+    {(color, index) => (
+      <NativeTable.Root key={index} colorScheme={color} variant="outline">
+        <NativeTable.Thead>
+          <NativeTable.Tr>
+            <NativeTable.Th>タイトル</NativeTable.Th>
+            <NativeTable.Th>公開日</NativeTable.Th>
+            <NativeTable.Th numeric>上映時間</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Thead>
+
+        <NativeTable.Tbody>
+          <NativeTable.Tr>
+            <NativeTable.Td>アクション仮面VSハイグレ魔王</NativeTable.Td>
+            <NativeTable.Td>1993年7月24日</NativeTable.Td>
+            <NativeTable.Td numeric>93分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ブリブリ王国の秘宝</NativeTable.Td>
+            <NativeTable.Td>1994年4月23日</NativeTable.Td>
+            <NativeTable.Td numeric>96分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>雲黒斎の野望</NativeTable.Td>
+            <NativeTable.Td>1995年4月15日</NativeTable.Td>
+            <NativeTable.Td numeric>94分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ヘンダーランドの大冒険</NativeTable.Td>
+            <NativeTable.Td>1996年4月13日</NativeTable.Td>
+            <NativeTable.Td numeric>97分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>暗黒タマタマ大追跡</NativeTable.Td>
+            <NativeTable.Td>1997年4月19日</NativeTable.Td>
+            <NativeTable.Td numeric>96分</NativeTable.Td>
+          </NativeTable.Tr>
+        </NativeTable.Tbody>
+      </NativeTable.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## Add Outer Border
+
+To add an outer border, set `withBorder` to `true`.
+
+```tsx preview
+<NativeTable.Root withBorder>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>タイトル</NativeTable.Th>
+      <NativeTable.Th>公開日</NativeTable.Th>
+      <NativeTable.Th numeric>上映時間</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>アクション仮面VSハイグレ魔王</NativeTable.Td>
+      <NativeTable.Td>1993年7月24日</NativeTable.Td>
+      <NativeTable.Td numeric>93分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ブリブリ王国の秘宝</NativeTable.Td>
+      <NativeTable.Td>1994年4月23日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>雲黒斎の野望</NativeTable.Td>
+      <NativeTable.Td>1995年4月15日</NativeTable.Td>
+      <NativeTable.Td numeric>94分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ヘンダーランドの大冒険</NativeTable.Td>
+      <NativeTable.Td>1996年4月13日</NativeTable.Td>
+      <NativeTable.Td numeric>97分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>暗黒タマタマ大追跡</NativeTable.Td>
+      <NativeTable.Td>1997年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+</NativeTable.Root>
+```
+
+## Add Column Separators
+
+To add column separators, set `withColumnBorders` to `true`.
+
+```tsx preview
+<NativeTable.Root withColumnBorders>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>タイトル</NativeTable.Th>
+      <NativeTable.Th>公開日</NativeTable.Th>
+      <NativeTable.Th numeric>上映時間</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>アクション仮面VSハイグレ魔王</NativeTable.Td>
+      <NativeTable.Td>1993年7月24日</NativeTable.Td>
+      <NativeTable.Td numeric>93分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ブリブリ王国の秘宝</NativeTable.Td>
+      <NativeTable.Td>1994年4月23日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>雲黒斎の野望</NativeTable.Td>
+      <NativeTable.Td>1995年4月15日</NativeTable.Td>
+      <NativeTable.Td numeric>94分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ヘンダーランドの大冒険</NativeTable.Td>
+      <NativeTable.Td>1996年4月13日</NativeTable.Td>
+      <NativeTable.Td numeric>97分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>暗黒タマタマ大追跡</NativeTable.Td>
+      <NativeTable.Td>1997年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+</NativeTable.Root>
+```
+
+## Highlight on Row Hover
+
+To highlight rows when hovered, set `highlightOnHover` to `true`.
+
+```tsx preview
+<NativeTable.Root highlightOnHover>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>タイトル</NativeTable.Th>
+      <NativeTable.Th>公開日</NativeTable.Th>
+      <NativeTable.Th numeric>上映時間</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>アクション仮面VSハイグレ魔王</NativeTable.Td>
+      <NativeTable.Td>1993年7月24日</NativeTable.Td>
+      <NativeTable.Td numeric>93分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ブリブリ王国の秘宝</NativeTable.Td>
+      <NativeTable.Td>1994年4月23日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>雲黒斎の野望</NativeTable.Td>
+      <NativeTable.Td>1995年4月15日</NativeTable.Td>
+      <NativeTable.Td numeric>94分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ヘンダーランドの大冒険</NativeTable.Td>
+      <NativeTable.Td>1996年4月13日</NativeTable.Td>
+      <NativeTable.Td numeric>97分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>暗黒タマタマ大追跡</NativeTable.Td>
+      <NativeTable.Td>1997年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+</NativeTable.Root>
+```
+
+## Striped
+
+To enable striped rows, set `striped` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["line", "outline"]}>
+    {(variant, index) => (
+      <NativeTable.Root key={index} variant={variant} striped>
+        <NativeTable.Thead>
+          <NativeTable.Tr>
+            <NativeTable.Th>タイトル</NativeTable.Th>
+            <NativeTable.Th>公開日</NativeTable.Th>
+            <NativeTable.Th numeric>上映時間</NativeTable.Th>
+          </NativeTable.Tr>
+        </NativeTable.Thead>
+
+        <NativeTable.Tbody>
+          <NativeTable.Tr>
+            <NativeTable.Td>アクション仮面VSハイグレ魔王</NativeTable.Td>
+            <NativeTable.Td>1993年7月24日</NativeTable.Td>
+            <NativeTable.Td numeric>93分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ブリブリ王国の秘宝</NativeTable.Td>
+            <NativeTable.Td>1994年4月23日</NativeTable.Td>
+            <NativeTable.Td numeric>96分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>雲黒斎の野望</NativeTable.Td>
+            <NativeTable.Td>1995年4月15日</NativeTable.Td>
+            <NativeTable.Td numeric>94分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>ヘンダーランドの大冒険</NativeTable.Td>
+            <NativeTable.Td>1996年4月13日</NativeTable.Td>
+            <NativeTable.Td numeric>97分</NativeTable.Td>
+          </NativeTable.Tr>
+          <NativeTable.Tr>
+            <NativeTable.Td>暗黒タマタマ大追跡</NativeTable.Td>
+            <NativeTable.Td>1997年4月19日</NativeTable.Td>
+            <NativeTable.Td numeric>96分</NativeTable.Td>
+          </NativeTable.Tr>
+        </NativeTable.Tbody>
+      </NativeTable.Root>
+    )}
+  </For>
+</VStack>
+```
+
+## Scroll Area
+
+To enable scroll area, set `withScrollArea` to `true`.
+
+```tsx preview
+<NativeTable.Root withScrollArea>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>タイトル</NativeTable.Th>
+      <NativeTable.Th>公開日</NativeTable.Th>
+      <NativeTable.Th>オープニングテーマ</NativeTable.Th>
+      <NativeTable.Th>エンディングテーマ</NativeTable.Th>
+      <NativeTable.Th numeric>上映時間</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>アクション仮面VSハイグレ魔王</NativeTable.Td>
+      <NativeTable.Td>1993年7月24日</NativeTable.Td>
+      <NativeTable.Td>「オラはにんきもの」</NativeTable.Td>
+      <NativeTable.Td>「僕は永遠のお子様」</NativeTable.Td>
+      <NativeTable.Td numeric>93分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ブリブリ王国の秘宝</NativeTable.Td>
+      <NativeTable.Td>1994年4月23日</NativeTable.Td>
+      <NativeTable.Td>「オラはにんきもの」</NativeTable.Td>
+      <NativeTable.Td>「約束SEE YOU!」</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>雲黒斎の野望</NativeTable.Td>
+      <NativeTable.Td>1995年4月15日</NativeTable.Td>
+      <NativeTable.Td>「オラはにんきもの」</NativeTable.Td>
+      <NativeTable.Td>「たすけてケスタ」</NativeTable.Td>
+      <NativeTable.Td numeric>94分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ヘンダーランドの大冒険</NativeTable.Td>
+      <NativeTable.Td>1996年4月13日</NativeTable.Td>
+      <NativeTable.Td>「パカッポでGO!」</NativeTable.Td>
+      <NativeTable.Td>「SIX COLORS BOY」</NativeTable.Td>
+      <NativeTable.Td numeric>97分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>暗黒タマタマ大追跡</NativeTable.Td>
+      <NativeTable.Td>1997年4月19日</NativeTable.Td>
+      <NativeTable.Td>「年中夢中"I WANT YOU"」</NativeTable.Td>
+      <NativeTable.Td>「ひまわりの家」</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+</NativeTable.Root>
+```
+
+## Sticky Header
+
+To make the header sticky, set `stickyHeader` to `true`.
+
+```tsx preview
+<NativeTable.Root withScrollArea scrollAreaProps={{ maxH: "xs" }} stickyHeader>
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>タイトル</NativeTable.Th>
+      <NativeTable.Th>公開日</NativeTable.Th>
+      <NativeTable.Th numeric>上映時間</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>アクション仮面VSハイグレ魔王</NativeTable.Td>
+      <NativeTable.Td>1993年7月24日</NativeTable.Td>
+      <NativeTable.Td numeric>93分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ブリブリ王国の秘宝</NativeTable.Td>
+      <NativeTable.Td>1994年4月23日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>雲黒斎の野望</NativeTable.Td>
+      <NativeTable.Td>1995年4月15日</NativeTable.Td>
+      <NativeTable.Td numeric>94分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ヘンダーランドの大冒険</NativeTable.Td>
+      <NativeTable.Td>1996年4月13日</NativeTable.Td>
+      <NativeTable.Td numeric>97分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>暗黒タマタマ大追跡</NativeTable.Td>
+      <NativeTable.Td>1997年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>電撃!ブタのヒヅメ大作戦</NativeTable.Td>
+      <NativeTable.Td>1998年4月18日</NativeTable.Td>
+      <NativeTable.Td numeric>99分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>爆発!温泉わくわく大決戦</NativeTable.Td>
+      <NativeTable.Td>1999年4月17日</NativeTable.Td>
+      <NativeTable.Td numeric>99分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>嵐を呼ぶジャングル</NativeTable.Td>
+      <NativeTable.Td>2000年4月22日</NativeTable.Td>
+      <NativeTable.Td numeric>88分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>嵐を呼ぶ モーレツ!オトナ帝国の逆襲</NativeTable.Td>
+      <NativeTable.Td>2001年4月21日</NativeTable.Td>
+      <NativeTable.Td numeric>89分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>嵐を呼ぶ アッパレ!戦国大合戦</NativeTable.Td>
+      <NativeTable.Td>2002年4月20日</NativeTable.Td>
+      <NativeTable.Td numeric>95分</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+</NativeTable.Root>
+```
+
+## Add a Caption
+
+```tsx preview
+<NativeTable.Root>
+  <NativeTable.Caption placement="end">©臼井儀人／双葉社</NativeTable.Caption>
+
+  <NativeTable.Thead>
+    <NativeTable.Tr>
+      <NativeTable.Th>タイトル</NativeTable.Th>
+      <NativeTable.Th>公開日</NativeTable.Th>
+      <NativeTable.Th numeric>上映時間</NativeTable.Th>
+    </NativeTable.Tr>
+  </NativeTable.Thead>
+
+  <NativeTable.Tbody>
+    <NativeTable.Tr>
+      <NativeTable.Td>アクション仮面VSハイグレ魔王</NativeTable.Td>
+      <NativeTable.Td>1993年7月24日</NativeTable.Td>
+      <NativeTable.Td numeric>93分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ブリブリ王国の秘宝</NativeTable.Td>
+      <NativeTable.Td>1994年4月23日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>雲黒斎の野望</NativeTable.Td>
+      <NativeTable.Td>1995年4月15日</NativeTable.Td>
+      <NativeTable.Td numeric>94分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>ヘンダーランドの大冒険</NativeTable.Td>
+      <NativeTable.Td>1996年4月13日</NativeTable.Td>
+      <NativeTable.Td numeric>97分</NativeTable.Td>
+    </NativeTable.Tr>
+    <NativeTable.Tr>
+      <NativeTable.Td>暗黒タマタマ大追跡</NativeTable.Td>
+      <NativeTable.Td>1997年4月19日</NativeTable.Td>
+      <NativeTable.Td numeric>96分</NativeTable.Td>
+    </NativeTable.Tr>
+  </NativeTable.Tbody>
+</NativeTable.Root>
+```
+
+## Props
+
+<PropsTable name="native-table" />

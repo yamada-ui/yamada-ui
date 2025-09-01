@@ -11,7 +11,7 @@ export const Basic = () => {
       bg="bg.contrast"
       color="fg.contrast"
       p="calc(md + md)"
-      rounded="md"
+      rounded="l2"
       w="calc(lg / 2)"
     >
       Calc
@@ -25,7 +25,7 @@ export const Nested = () => {
       bg="bg.contrast"
       color="fg.contrast"
       p="calc(md + md)"
-      rounded="md"
+      rounded="l2"
       w="calc(lg - calc(2xs * 2))"
     >
       Calc
@@ -39,7 +39,7 @@ export const NumericToken = () => {
       bg="bg.contrast"
       color="fg.contrast"
       p="calc(md + md)"
-      rounded="md"
+      rounded="l2"
       w="calc(100% / {spaces.2})"
     >
       Use interpolated token
@@ -54,13 +54,13 @@ export const Min = () => {
       overflow="auto"
       p="md"
       resize="inline"
-      rounded="md"
+      rounded="l2"
     >
       <Center
         bg="bg.contrast"
         color="fg.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="min(100%, lg)"
       >
         Min
@@ -70,7 +70,7 @@ export const Min = () => {
         bg="bg.contrast"
         color="fg.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="min(100%, calc(md + md))"
       >
         Min with calc
@@ -80,7 +80,7 @@ export const Min = () => {
         bg="bg.contrast"
         color="fg.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="min(md)"
       >
         Omitted Min
@@ -96,13 +96,13 @@ export const Max = () => {
       overflow="auto"
       p="md"
       resize="inline"
-      rounded="md"
+      rounded="l2"
     >
       <Center
         bg="bg.contrast"
         color="fg.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="max(100%, lg)"
       >
         Max
@@ -112,7 +112,7 @@ export const Max = () => {
         bg="bg.contrast"
         color="fg.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="max(100%, calc(md + md))"
       >
         Max with calc
@@ -122,7 +122,7 @@ export const Max = () => {
         bg="bg.contrast"
         color="fg.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="max(md)"
       >
         Omitted Max
@@ -138,13 +138,13 @@ export const Clamp = () => {
       overflow="auto"
       p="md"
       resize="inline"
-      rounded="md"
+      rounded="l2"
     >
       <Center
         bg="bg.contrast"
         color="fg.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="clamp(md, 100%, xl)"
       >
         Clamp
@@ -154,7 +154,7 @@ export const Clamp = () => {
         bg="bg.contrast"
         color="fg.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="clamp(md, 100%, calc(md + md))"
       >
         Clamp with calc
@@ -164,7 +164,7 @@ export const Clamp = () => {
         bg="bg.contrast"
         color="fg.contrast"
         p="md"
-        rounded="md"
+        rounded="l2"
         w="clamp(md, lg)"
       >
         Omitted Clamp

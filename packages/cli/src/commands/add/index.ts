@@ -9,7 +9,7 @@ import ora from "ora"
 import path from "path"
 import c from "picocolors"
 import prompts from "prompts"
-import { CONFIG_FILE_NAME } from "../../constant"
+import { CONFIG_FILE_NAME, REGISTRY_FILE_NAME } from "../../constant"
 import {
   cwd,
   fetchRegistries,
@@ -20,11 +20,13 @@ import {
   getGeneratedNameMap,
   getNotInstalledDependencies,
   getPackageJson,
-  getPackageName,
+  getPackageNameWithVersion,
   installDependencies,
-  replaceIndex,
   timer,
   transformContent,
+  transformExtension,
+  transformIndex,
+  transformTsToJs,
   validateDir,
   writeFileSafe,
 } from "../../utils"
@@ -32,31 +34,39 @@ import {
 interface Options {
   config: string
   cwd: string
-  format: boolean
   install: boolean
-  lint: boolean
   overwrite: boolean
+  sequential: boolean
+  format?: boolean
+  lint?: boolean
 }
 
 export const add = new Command("add")
-  .description("Add a component to your project")
-  .argument("[components...]", "Components to add")
-  .option("--cwd <path>", "Current working directory", cwd)
-  .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
+  .description("add a component to your project")
+  .argument("[components...]", "components to add")
+  .option("--cwd <path>", "current working directory", cwd)
+  .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
   .option("-o, --overwrite", "overwrite existing files.", false)
-  .option("-i, --install", "Install dependencies", false)
-  .option("-f, --format", "Format the output files.", false)
-  .option("-l, --lint", "Lint the output files.", false)
+  .option("-i, --install", "install dependencies", false)
+  .option("-s, --sequential", "run tasks sequentially.", false)
+  .option("-f, --format", "format the output files.")
+  .option("-l, --lint", "lint the output files.")
   .action(async function (
     componentNames: string[],
-    { config: configPath, cwd, format, install, lint, overwrite }: Options,
+    {
+      config: configPath,
+      cwd,
+      format,
+      install,
+      lint,
+      overwrite,
+      sequential,
+    }: Options,
   ) {
     const spinner = ora()
 
     try {
       const { end } = timer()
-
-      const all = !componentNames.length
 
       spinner.start("Validating directory")
 
@@ -74,7 +84,7 @@ export const add = new Command("add")
 
       const omittedGeneratedNames: string[] = []
 
-      if (all) {
+      if (!componentNames.length) {
         const { proceed } = await prompts({
           type: "confirm",
           name: "proceed",
@@ -140,8 +150,8 @@ export const add = new Command("add")
       spinner.start("Fetching registries")
 
       const registries = await fetchRegistries(componentNames, config, {
-        dependencies: !all,
-        dependents: !all,
+        dependencies: !!componentNames.length,
+        dependents: !!componentNames.length,
         omit: omittedGeneratedNames,
       })
       const registryNames = Object.keys(registries)
@@ -168,6 +178,21 @@ export const add = new Command("add")
 
       spinner.succeed("Fetched registries")
 
+      if (componentNames.length !== registryNames.length) {
+        const colorizedNames = registryNames.map((name) => c.yellow(name))
+
+        const { proceed } = await prompts({
+          type: "confirm",
+          name: "proceed",
+          initial: true,
+          message: c.reset(
+            `The following components will be added: ${colorizedNames.join(", ")}. Do you want to add them?`,
+          ),
+        })
+
+        if (!proceed) process.exit(0)
+      }
+
       const targetNames = [
         ...new Set([...omittedGeneratedNames, ...registryNames]),
       ]
@@ -175,10 +200,9 @@ export const add = new Command("add")
       const tasks = new Listr(
         Object.entries(registries)
           .map(([name, registry]): ListrTask | undefined => {
-            if (registry.section === "root" || registry.section === "theme")
-              return
+            if (!config.isSection(registry.section)) return
 
-            const sectionPath = config.getSectionAbsolutePath(registry.section)
+            const sectionPath = config.getSectionResolvedPath(registry.section)
             const dirPath = path.join(sectionPath, name)
 
             return {
@@ -191,43 +215,8 @@ export const add = new Command("add")
             }
           })
           .filter((task) => !isUndefined(task)),
-        { concurrent: true },
+        { concurrent: !sequential },
       )
-
-      if (existsSync(path.resolve(config.srcPath, "index.ts"))) {
-        tasks.add({
-          task: async (_, task) => {
-            const targetPath = path.resolve(config.srcPath, "index.ts")
-            const content = replaceIndex(
-              targetNames,
-              await readFile(targetPath, "utf-8"),
-              config,
-            )
-
-            await writeFileSafe(targetPath, content, config)
-
-            task.title = `Updated ${c.cyan("index.ts")}`
-          },
-          title: `Updating ${c.cyan("index.ts")}`,
-        })
-      } else {
-        tasks.add({
-          task: async (_, task) => {
-            const { sources } = await fetchRegistry("index")
-            const targetPath = path.resolve(config.srcPath, "index.ts")
-            const content = replaceIndex(
-              targetNames,
-              sources[0]!.content!,
-              config,
-            )
-
-            await writeFileSafe(targetPath, content, config)
-
-            task.title = `Generated ${c.cyan("index.ts")}`
-          },
-          title: `Generating ${c.cyan("index.ts")}`,
-        })
-      }
 
       if (affectedNames.length && generatedNameMap) {
         if (!overwrite) {
@@ -255,7 +244,7 @@ export const add = new Command("add")
 
               tasks.add({
                 task: async (_, task) => {
-                  const sectionPath = config.getSectionAbsolutePath(
+                  const sectionPath = config.getSectionResolvedPath(
                     section as Section,
                   )
                   const dirPath = path.join(sectionPath, name)
@@ -265,20 +254,53 @@ export const add = new Command("add")
 
                   await Promise.all(
                     dirents.map(async (dirent) => {
-                      if (dirent.isDirectory()) return
+                      if (dirent.isDirectory()) {
+                        const dirents = await readdir(
+                          path.join(dirent.parentPath, name),
+                          {
+                            withFileTypes: true,
+                          },
+                        )
 
-                      const targetPath = path.join(
-                        dirent.parentPath,
-                        dirent.name,
-                      )
-                      const content = transformContent(
-                        section as Section,
-                        await readFile(targetPath, "utf-8"),
-                        config,
-                        targetNames,
-                      )
+                        await Promise.all(
+                          dirents.map(async (dirent) => {
+                            if (dirent.isDirectory()) return
+                            if (dirent.name === REGISTRY_FILE_NAME) return
 
-                      await writeFileSafe(targetPath, content, config)
+                            const targetPath = path.join(
+                              dirent.parentPath,
+                              dirent.name,
+                            )
+
+                            let content = await readFile(targetPath, "utf-8")
+
+                            content = transformContent(
+                              section as Section,
+                              content,
+                              config,
+                              targetNames,
+                            )
+
+                            await writeFileSafe(targetPath, content, config)
+                          }),
+                        )
+                      } else if (dirent.name !== REGISTRY_FILE_NAME) {
+                        const targetPath = path.join(
+                          dirent.parentPath,
+                          dirent.name,
+                        )
+
+                        let content = await readFile(targetPath, "utf-8")
+
+                        content = transformContent(
+                          section as Section,
+                          content,
+                          config,
+                          targetNames,
+                        )
+
+                        await writeFileSafe(targetPath, content, config)
+                      }
                     }),
                   )
 
@@ -289,6 +311,39 @@ export const add = new Command("add")
             })
           })
         }
+      }
+
+      const indexFileName = transformExtension("index.ts", config.jsx)
+
+      if (existsSync(config.indexPath)) {
+        tasks.add({
+          task: async (_, task) => {
+            let content = await readFile(config.indexPath, "utf-8")
+
+            content = transformIndex(targetNames, content, config)
+
+            await writeFileSafe(config.indexPath, content, config)
+
+            task.title = `Updated ${c.cyan(indexFileName)}`
+          },
+          title: `Updating ${c.cyan(indexFileName)}`,
+        })
+      } else {
+        tasks.add({
+          task: async (_, task) => {
+            const {
+              sources: [source],
+            } = await fetchRegistry("index")
+            let content = transformIndex(targetNames, source!.content!, config)
+
+            if (config.jsx) content = transformTsToJs(content)
+
+            await writeFileSafe(config.indexPath, content, config)
+
+            task.title = `Generated ${c.cyan(indexFileName)}`
+          },
+          title: `Generating ${c.cyan(indexFileName)}`,
+        })
       }
 
       if (dependencies.length) {
@@ -334,7 +389,7 @@ export const add = new Command("add")
           tasks.add({
             task: async (_, task) => {
               await installDependencies(
-                notInstalledDependencies.map(getPackageName),
+                notInstalledDependencies.map(getPackageNameWithVersion),
                 { cwd: targetPath },
               )
 

@@ -138,6 +138,10 @@ export const tabsStyle = defineComponentSlotStyle({
           mb: "-1px",
           roundedStart: "l2",
         },
+        _vertical: {
+          me: "-1px",
+          roundedLeft: "l2",
+        },
         _selected: {
           bg: "bg",
           borderColor: "border",
@@ -148,10 +152,6 @@ export const tabsStyle = defineComponentSlotStyle({
           _vertical: {
             borderRightColor: "transparent",
           },
-        },
-        _vertical: {
-          me: "-1px",
-          roundedLeft: "l2",
         },
       },
     },

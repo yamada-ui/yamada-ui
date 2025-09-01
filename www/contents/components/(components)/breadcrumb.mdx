@@ -30,7 +30,7 @@ import { Breadcrumb } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Breadcrumb } from "@workspace/ui"
+import { Breadcrumb } from "@workspaces/ui"
 ```
 
 :::
@@ -71,7 +71,7 @@ const items = useMemo<Breadcrumb.RootProps["items"]>(
 return <Breadcrumb.Root items={items} />
 ```
 
-### Change Variants
+### Change variant
 
 ```tsx preview
 <VStack>
@@ -247,3 +247,7 @@ return (
   />
 )
 ```
+
+## Props
+
+<PropsTable name="breadcrumb" />

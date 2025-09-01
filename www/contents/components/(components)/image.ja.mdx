@@ -1,9 +1,41 @@
 ---
 title: Image
-description: "`Image`は、フォールバックをサポートした画像を表示するコンポーネントです。"
+description: "`Image`は、画像を表示するコンポーネントです。"
 storybook: components-image--basic
 source: components/image
 style: components/image/image.style.ts
 ---
 
+```tsx preview
+<Image
+  src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
+  alt="ドラゴンボール"
+  boxSize="xl"
+/>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Image } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Image } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Image } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Image />
+```
+
+## Props
+
+<PropsTable name="image" />

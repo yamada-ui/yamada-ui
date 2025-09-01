@@ -1,4 +1,5 @@
 {
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
   "dependencies": {
     "components": ["motion", "portal", "fade-scale", "slide-fade"],
     "externals": ["motion@12.18.1"],

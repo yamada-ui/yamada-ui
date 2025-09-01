@@ -41,6 +41,7 @@ interface Dependencies {
 }
 
 interface Registry {
+  $schema: string
   section: RegistrySection
   sources: Source[]
   dependencies?: Dependencies
@@ -70,6 +71,7 @@ const IGNORED_FILE_NAME = [
   "^(?!.*\\.(ts|tsx)$).*",
 ]
 const IGNORED_MODULES = ["react", "react-dom"]
+const REGISTRY_SCHEMA_PATH = "https://v2.yamada-ui.com/registry/v2/schema.json"
 
 async function getExternals(): Promise<ExternalsMap> {
   const data = await readFile(PACKAGE_JSON_PATH, "utf-8")
@@ -99,7 +101,7 @@ async function getIconsSources() {
       name: "icons",
       data: icons.map((iconName) => ({
         name: `${toKebabCase(iconName)}.tsx`,
-        iconName,
+        iconName: iconName.replace(/Icon$/, ""),
       })),
       template: ICON_TEMPLATE,
     },
@@ -445,6 +447,7 @@ async function generateRegistries(
           const dependencies = dependencyMap[sectionName]?.[name]
           const dependents = dependentMap[sectionName]?.[name]
           const registry: Registry = {
+            $schema: REGISTRY_SCHEMA_PATH,
             dependencies,
             dependents,
             section: sectionName as RegistrySection,
@@ -478,6 +481,7 @@ async function generateThemeRegistry() {
   )
 
   const registry: Registry = {
+    $schema: REGISTRY_SCHEMA_PATH,
     section: "theme",
     sources: sources.sort((a, b) => a.name.localeCompare(b.name)),
   }
@@ -491,6 +495,7 @@ async function generateThemeRegistry() {
 async function generateIndexRegistry() {
   const index = await readFile(path.join(ENTRY_PATH, "index.ts"), "utf-8")
   const registry: Registry = {
+    $schema: REGISTRY_SCHEMA_PATH,
     section: "root",
     sources: [
       {
@@ -542,7 +547,7 @@ function main() {
   const spinner = ora()
 
   program
-    .option("-p, --publish", "Publish the registries")
+    .option("-p, --publish", "publish the registries")
     .action(async ({ publish = false }) => {
       const start = process.hrtime.bigint()
 

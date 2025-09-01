@@ -228,7 +228,7 @@ export const Reset: Story = () => {
   }
 
   return (
-    <VStack gap="md">
+    <VStack>
       <Text>files: {files?.length ?? 0}</Text>
 
       <HStack>

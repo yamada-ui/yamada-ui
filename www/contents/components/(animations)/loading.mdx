@@ -6,4 +6,66 @@ source: components/loading
 style: components/loading/loading.style.ts
 ---
 
+```tsx preview
+<Loading.Oval />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Loading } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Loading } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Loading } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Loading.Oval />
+<Loading.Rings />
+<Loading.Audio />
+<Loading.Dots />
+<Loading.Puff />
+<Loading.Rings />
+<Loading.Circles />
+```
+
+### Change Variant
+
+```tsx preview
+<Wrap gap="md">
+  <Loading.Oval color="red.500" fontSize="3xl" />
+  <Loading.Rings color="orange.500" fontSize="3xl" />
+  <Loading.Audio color="yellow.500" fontSize="3xl" />
+  <Loading.Dots color="green.500" fontSize="3xl" />
+  <Loading.Puff color="teal.500" fontSize="3xl" />
+  <Loading.Rings color="blue.500" fontSize="3xl" />
+  <Loading.Circles color="cyan.500" fontSize="3xl" />
+</Wrap>
+```
+
+### Change Size
+
+```tsx preview
+<Wrap gap="md">
+  <Loading.Oval color="red.500" fontSize="lg" />
+  <Loading.Rings color="orange.500" fontSize="xl" />
+  <Loading.Audio color="yellow.500" fontSize="2xl" />
+  <Loading.Dots color="green.500" fontSize="3xl" />
+  <Loading.Puff color="teal.500" fontSize="4xl" />
+  <Loading.Rings color="blue.500" fontSize="5xl" />
+  <Loading.Circles color="cyan.500" fontSize="6xl" />
+</Wrap>
+```
+
+## Props
+
+<PropsTable name="loading" />

@@ -62,7 +62,7 @@ export const tokens: Tokens = {
     "listStyleImage",
     "maskImage",
   ],
-  keyframes: ["animationName", "keyframes"],
+  keyframes: ["animationName", "_keyframes"],
   letterSpacings: ["letterSpacing"],
   lineHeights: ["lineHeight"],
   radii: [

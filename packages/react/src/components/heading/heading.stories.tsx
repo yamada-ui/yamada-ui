@@ -13,7 +13,7 @@ export default meta
 
 export const Basic: Story = () => {
   return (
-    <VStack gap="md">
+    <VStack>
       <Heading as="h1" size="4xl" truncated>
         ギャルのパンティーおくれーーーっ！！！！！
       </Heading>

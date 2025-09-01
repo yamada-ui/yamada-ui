@@ -12,7 +12,7 @@ export const Repeat = () => {
       overflow="auto"
       p="md"
       resize="inline"
-      rounded="md"
+      rounded="l2"
     >
       <Grid
         gap="md"
@@ -43,7 +43,7 @@ export const Minmax = () => {
       overflow="auto"
       p="md"
       resize="inline"
-      rounded="md"
+      rounded="l2"
     >
       <Grid gap="md" templateColumns="minmax(2xs, xs) 1fr 1fr" w="full">
         {Array.from({ length: 4 }).map((_, index) => (

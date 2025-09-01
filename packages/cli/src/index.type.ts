@@ -7,28 +7,35 @@ export interface SectionConfig {
   path?: string
 }
 
+export interface ThemeConfig {
+  path?: string
+}
+
 export interface LintConfig {
   enabled?: boolean
-  filePath?: string
 }
+
 export interface FormatConfig {
   configPath?: null | string
   enabled?: boolean
 }
 
 export interface UserConfig {
+  $schema?: string
   components?: SectionConfig
   format?: FormatConfig
   hooks?: SectionConfig
+  jsx?: boolean
   lint?: LintConfig
   monorepo?: boolean
   path?: string
   providers?: SectionConfig
+  theme?: ThemeConfig
 }
 
 export interface SectionConfigWithPaths extends SectionConfig {
-  absolutePath: string
   path: string
+  resolvedPath: string
   section: Section
 }
 
@@ -36,8 +43,11 @@ export interface Config extends UserConfig {
   src: boolean
   cwd: string
   getSection: (value?: string) => SectionConfigWithPaths | undefined
-  getSectionAbsolutePath: (section: Section) => string
   getSectionPath: (section: Section) => string
+  getSectionResolvedPath: (section: Section) => string
+  indexPath: string
+  isSection: (section: string) => section is Section
+  registryPath: string
   rootPath: string
   srcPath: string
 }

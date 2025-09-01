@@ -31,7 +31,7 @@ import { Fieldset } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Fieldset } from "@workspace/ui"
+import { Fieldset } from "@workspaces/ui"
 ```
 
 :::
@@ -52,7 +52,7 @@ import { Fieldset } from "@workspace/ui"
 ### Change Variant
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["plain", "elevated", "outline", "panel"]}>
     {(variant, index) => (
       <Fieldset.Root
@@ -85,21 +85,22 @@ import { Fieldset } from "@workspace/ui"
 ### Change Size
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["sm", "md", "lg"]}>
     {(size, index) => (
       <Fieldset.Root
         key={index}
         size={size}
+        variant="panel"
         helperMessage="Please provide your contact details below."
         legend="Contact details"
       >
         <Field.Root label="Name">
-          <Input type="text" placeholder="Your name" />
+          <Input type="text" placeholder="Your name" bg="bg" />
         </Field.Root>
 
         <Field.Root label="Email address">
-          <Input type="email" placeholder="Your email address" />
+          <Input type="email" placeholder="Your email address" bg="bg" />
         </Field.Root>
       </Fieldset.Root>
     )}
@@ -187,9 +188,29 @@ Alternatively, you can customize using `Fieldset.ErrorMessage`.
 </Fieldset.Root>
 ```
 
-### Disable
+### Required
 
-To disable, set `disabled` to `true`.
+To make it required, set `required` to `true`.
+
+```tsx preview
+<Fieldset.Root
+  disabled
+  helperMessage="Please provide your contact details below."
+  legend="Contact details"
+>
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
+```
+
+### Disabled
+
+To disabled, set `disabled` to `true`.
 
 ```tsx preview
 <Fieldset.Root
@@ -212,13 +233,40 @@ To disable, set `disabled` to `true`.
 To make it read-only, set `readOnly` to `true`.
 
 ```tsx preview
-<Field.Root
+<Fieldset.Root
   helperMessage="We'll never share your email."
-  label="Email address"
+  legend="Email address"
   readOnly
 >
-  <Input type="email" placeholder="your email address" />
-</Field.Root>
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
+```
+
+### Invalid
+
+To make the input invalid, set `invalid` to `true`.
+
+```tsx preview
+<Fieldset.Root
+  legend="Email address"
+  helperMessage="We'll never share your email."
+  errorMessage="Some fields are invalid. Please check them."
+  invalid
+>
+  <Field.Root label="Name">
+    <Input type="text" placeholder="Your name" />
+  </Field.Root>
+
+  <Field.Root label="Email address">
+    <Input type="email" placeholder="Your email address" />
+  </Field.Root>
+</Fieldset.Root>
 ```
 
 ### Customize the Legend
@@ -284,3 +332,7 @@ To customize the content, use `Fieldset.Content`.
   </Fieldset.Content>
 </Fieldset.Root>
 ```
+
+## Props
+
+<PropsTable name="fieldset" />

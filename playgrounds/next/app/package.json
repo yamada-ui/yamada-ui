@@ -9,18 +9,18 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings=0 --cache",
     "format": "prettier . --ignore-path ../../../.prettierignore --check --cache",
-    "cli": "pnpm -C ../../../packages/cli dev"
+    "yamada-cli": "pnpm -C ../../../packages/cli dev"
   },
   "dependencies": {
     "@yamada-ui/react": "workspace:*",
-    "next": "^15.4.5",
+    "next": "^15.5.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
-    "@types/node": "^24.1.0",
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
     "typescript": "^5.9.2"
   }
 }

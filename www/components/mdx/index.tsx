@@ -3,25 +3,32 @@ import {
   Blockquote,
   Box,
   Code,
-  Heading,
   List,
   NativeTable,
   Text,
 } from "@yamada-ui/react"
-import { useMemo } from "react"
+import { Suspense, useMemo } from "react"
 import * as runtime from "react/jsx-runtime"
 import { langConditions } from "@/utils/i18n"
+import { AtRulePropsTable } from "./at-rule-props-table"
 import { Callout } from "./callout"
 import { Card, CardGroup } from "./card"
 import { CodeBlock } from "./code-block"
 import { CodeGroup } from "./code-group"
+import { ComponentList } from "./component-list"
+import { ConditionPropsTable } from "./condition-props-table"
 import { Contributors } from "./contributors"
+import { H1, H2, H3, H4, H5, H6 } from "./heading"
+import { HookList } from "./hook-list"
 import { Link } from "./link"
+import { PropsTable } from "./props-table"
 import { Sponsors } from "./sponsors"
 import { Steps } from "./steps"
+import { StylePropsTable } from "./style-props-table"
 
 const mdxComponents: MDXComponents = {
   a: Link,
+  AtRulePropsTable,
   blockquote: (props) => (
     <Blockquote.Root css={{ "& p": { m: "0" } }} my="md" {...props} />
   ),
@@ -42,71 +49,16 @@ const mdxComponents: MDXComponents = {
     />
   ),
   "code-group": CodeGroup,
+  ComponentList,
+  ConditionPropsTable,
   Contributors,
-  h1: (props) => (
-    <Heading
-      as="h1"
-      size="5xl"
-      color="fg"
-      mb="md"
-      mt="xl"
-      scrollMarginTop="{header-height}"
-      {...props}
-    />
-  ),
-  h2: (props) => (
-    <Heading
-      as="h2"
-      size="3xl"
-      color="fg"
-      mb="md"
-      mt="xl"
-      scrollMarginTop="{header-height}"
-      {...props}
-    />
-  ),
-  h3: (props) => (
-    <Heading
-      as="h3"
-      size="2xl"
-      color="fg"
-      mb="md"
-      mt="lg"
-      scrollMarginTop="{header-height}"
-      {...props}
-    />
-  ),
-  h4: (props) => (
-    <Heading
-      as="h4"
-      size="xl"
-      color="fg"
-      mb="md"
-      mt="lg"
-      scrollMarginTop="{header-height}"
-      {...props}
-    />
-  ),
-  h5: (props) => (
-    <Heading
-      as="h5"
-      size="lg"
-      color="fg"
-      my="md"
-      scrollMarginTop="{header-height}"
-      {...props}
-    />
-  ),
-  h6: (props) => (
-    <Heading
-      as="h6"
-      size="md"
-      color="fg"
-      my="md"
-      scrollMarginTop="{header-height}"
-      {...props}
-    />
-  ),
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  h5: H5,
+  h6: H6,
+  HookList,
   li: (props) => (
     <List.Item
       css={{ "& p": { m: 0 } }}
@@ -118,14 +70,30 @@ const mdxComponents: MDXComponents = {
   ol: (props) => <List.Root my="md" styleType="decimal" {...props} />,
   p: (props) => <Text color="fg.emphasized" fontSize="sm" my="md" {...props} />,
   pre: CodeBlock,
+  PropsTable: (props) => (
+    <Suspense>
+      <PropsTable {...props} />
+    </Suspense>
+  ),
   Sponsors,
   steps: Steps,
   strong: (props) => (
     <Text as="strong" color="fg" fontWeight="semibold" {...props} />
   ),
+  StylePropsTable,
   table: (props) => (
-    <Box borderWidth="1px" my="lg" overflow="hidden" rounded="l2">
-      <NativeTable.Root variant="outline" border="none" {...props} />
+    <Box my="lg">
+      <NativeTable.Root
+        variant="outline"
+        border="none"
+        withScrollArea
+        scrollAreaProps={{
+          borderWidth: "1px",
+          rounded: "l2",
+          whiteSpace: { base: "inherit", md: "nowrap" },
+        }}
+        {...props}
+      />
     </Box>
   ),
   tbody: (props) => <NativeTable.Tbody {...props} />,
@@ -133,7 +101,14 @@ const mdxComponents: MDXComponents = {
     <NativeTable.Td color="fg.emphasized" fontSize="sm" {...props} />
   ),
   tfoot: (props) => <NativeTable.Tfoot {...props} />,
-  th: (props) => <NativeTable.Th fontSize="sm" textAlign="start" {...props} />,
+  th: (props) => (
+    <NativeTable.Th
+      fontSize="sm"
+      textAlign="start"
+      whiteSpace="nowrap"
+      {...props}
+    />
+  ),
   thead: (props) => <NativeTable.Thead {...props} />,
   tr: (props) => <NativeTable.Tr {...props} />,
   ul: (props) => <List.Root my="md" styleType="disc" {...props} />,

@@ -15,21 +15,27 @@ style: components/button/button.style.ts
 :::code-group
 
 ```tsx [package]
-import { Button } from "@yamada-ui/react"
+import { Button, ButtonGroup } from "@yamada-ui/react"
 ```
 
 ```tsx [alias]
-import { Button } from "@/components/ui"
+import { Button, ButtonGroup } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Button } from "@workspace/ui"
+import { Button, ButtonGroup } from "@workspaces/ui"
 ```
 
 :::
 
 ```tsx
 <Button />
+```
+
+```tsx
+<ButtonGroup.Root>
+  <ButtonGroup.Item />
+</ButtonGroup.Root>
 ```
 
 ### バリアントを変更する
@@ -180,12 +186,10 @@ import { Button } from "@workspace/ui"
 ```
 
 :::note
-`Button`のローディングアニメーションは、内部的に[Loading](/docs/components/loading)を使用しています。
+`Button`のローディングは、内部的に[Loading](/docs/components/loading)を使用しています。
 :::
 
 ### グループ化する
-
-ボタンをグループ化する場合は、`ButtonGroup`を使用します。`ButtonGroup`は、子要素(`Button`)の`variant`, `size`, `colorScheme`, `disabled`を一括で設定できます。
 
 ```tsx preview
 <VStack>
@@ -195,7 +199,7 @@ import { Button } from "@workspace/ui"
   </ButtonGroup.Root>
 
   <Wrap gap="md">
-    <ButtonGroup.Root gap="sm">
+    <ButtonGroup.Root>
       <ButtonGroup.Item>Button</ButtonGroup.Item>
       <ButtonGroup.Item>Button</ButtonGroup.Item>
       <ButtonGroup.Item>Button</ButtonGroup.Item>
@@ -209,7 +213,7 @@ import { Button } from "@workspace/ui"
   </Wrap>
 
   <Wrap gap="md">
-    <ButtonGroup.Root orientation="vertical" gap="sm">
+    <ButtonGroup.Root orientation="vertical">
       <ButtonGroup.Item>Button</ButtonGroup.Item>
       <ButtonGroup.Item>Button</ButtonGroup.Item>
       <ButtonGroup.Item>Button</ButtonGroup.Item>
@@ -223,3 +227,11 @@ import { Button } from "@workspace/ui"
   </Wrap>
 </VStack>
 ```
+
+## Props
+
+<PropsTable
+  name="button"
+  all
+  omit={["ButtonGroupRoot", "IconButton", "ButtonGroup.IconItem"]}
+/>

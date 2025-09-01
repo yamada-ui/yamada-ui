@@ -26,7 +26,7 @@ export const blockquoteStyle = defineComponentSlotStyle({
     /**
      * The alignment of the blockquote.
      *
-     * @default "start"
+     * @default 'start'
      */
     justify: {
       center: {

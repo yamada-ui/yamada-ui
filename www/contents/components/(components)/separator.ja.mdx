@@ -1,9 +1,100 @@
 ---
 title: Separator
 description: "`Separator`は、要素間において区切りを表すコンポーネントです。"
-storybook: components-separator--basic
+storybook: components-separator--horizontal
 source: components/separator
 style: components/separator/separator.style.ts
 ---
 
+```tsx preview
+<Separator />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Separator } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Separator } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Separator } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Separator />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["solid", "dashed", "dotted"]}>
+    {(variant, index) => <Separator key={index} variant={variant} />}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size, index) => <Separator key={index} size={size} />}
+  </For>
+</VStack>
+```
+
+### 色を変更する
+
+色を変更するには、`borderColor`を設定します。
+
+```tsx preview
+<VStack>
+  <Separator borderColor="success" />
+  <Separator borderColor="warning" />
+</VStack>
+```
+
+### 縦方向
+
+```tsx preview
+<HStack>
+  <Text>First</Text>
+  <Separator orientation="vertical" h="4" />
+  <Text>Second</Text>
+</HStack>
+```
+
+### ラベル
+
+```tsx preview
+<VStack>
+  <HStack>
+    <Text flexShrink="0">Label</Text>
+    <Separator flex="1" />
+  </HStack>
+
+  <HStack>
+    <Separator flex="1" />
+    <Text flexShrink="0">Label</Text>
+  </HStack>
+
+  <HStack>
+    <Separator flex="1" />
+    <Text flexShrink="0">Label</Text>
+    <Separator flex="1" />
+  </HStack>
+</VStack>
+```
+
+## Props
+
+<PropsTable name="separator" />

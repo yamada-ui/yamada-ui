@@ -6,4 +6,159 @@ source: components/icon-button
 style: components/icon-button/icon-button.style.ts
 ---
 
+```tsx preview
+<IconButton aria-label="Plus" icon={<PlusIcon />} />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { IconButton } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { IconButton } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { IconButton } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<IconButton />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["solid", "subtle", "surface", "outline", "ghost"]}>
+    {(variant, index) => (
+      <IconButton
+        key={index}
+        variant={variant}
+        aria-label="Plus"
+        icon={<PlusIcon />}
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="md" alignItems="flex-start">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <IconButton
+        key={index}
+        size={size}
+        aria-label="Plus"
+        icon={<PlusIcon />}
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <IconButton
+        key={index}
+        colorScheme={colorScheme}
+        aria-label="Plus"
+        icon={<PlusIcon />}
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### 形を変える
+
+角丸にする場合は、`fullRounded`を`true`にします。
+
+```tsx preview
+<Wrap gap="md">
+  <IconButton
+    variant="solid"
+    aria-label="Plus"
+    fullRounded
+    icon={<PlusIcon />}
+  />
+
+  <IconButton
+    variant="subtle"
+    aria-label="Minus"
+    fullRounded
+    icon={<MinusIcon />}
+  />
+
+  <IconButton
+    variant="surface"
+    aria-label="Bold"
+    fullRounded
+    icon={<BoldIcon />}
+  />
+
+  <IconButton
+    variant="outline"
+    aria-label="Light"
+    fullRounded
+    icon={<SunIcon />}
+  />
+
+  <IconButton
+    variant="ghost"
+    aria-label="Dark"
+    fullRounded
+    icon={<MoonIcon />}
+  />
+</Wrap>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`にします。
+
+```tsx preview
+<Wrap gap="md">
+  <IconButton variant="solid" aria-label="Plus" disabled icon={<PlusIcon />} />
+
+  <IconButton
+    variant="subtle"
+    aria-label="Minus"
+    disabled
+    icon={<MinusIcon />}
+  />
+
+  <IconButton
+    variant="surface"
+    aria-label="Bold"
+    disabled
+    icon={<BoldIcon />}
+  />
+
+  <IconButton
+    variant="outline"
+    aria-label="Light"
+    disabled
+    icon={<SunIcon />}
+  />
+
+  <IconButton variant="ghost" aria-label="Dark" disabled icon={<MoonIcon />} />
+</Wrap>
+```
+
+## Props
+
+<PropsTable name="button" all pick={["IconButton"]} />

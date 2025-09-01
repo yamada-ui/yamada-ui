@@ -10,7 +10,7 @@ style: components/fade/fade.style.ts
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack align="flex-start" gap="md">
+  <VStack align="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
     <Fade open={open} borderWidth={1} p="md" rounded="l2">
@@ -33,7 +33,7 @@ import { Fade } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Fade } from "@workspace/ui"
+import { Fade } from "@workspaces/ui"
 ```
 
 :::
@@ -50,7 +50,7 @@ To change the duration, set a number (in seconds) to `duration`.
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack align="flex-start" gap="md">
+  <VStack align="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
     <Fade open={open} duration={0.4} borderWidth={1} p="md" rounded="l2">
@@ -68,7 +68,7 @@ To unmount the component when it is not visible, set `unmountOnExit` to `true`.
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack align="flex-start" gap="md">
+  <VStack align="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
     <Fade open={open} unmountOnExit borderWidth={1} p="md" rounded="l2">
@@ -81,3 +81,7 @@ return (
   </VStack>
 )
 ```
+
+## Props
+
+<PropsTable name="fade" />

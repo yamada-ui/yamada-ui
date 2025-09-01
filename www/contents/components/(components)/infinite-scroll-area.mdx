@@ -6,4 +6,566 @@ source: components/infinite-scroll-area
 style: components/infinite-scroll-area/infinite-scroll-area.style.ts
 ---
 
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+
+return (
+  <InfiniteScrollArea
+    loading={<Loading.Oval fontSize="2xl" />}
+    onLoad={({ finish, index }) => {
+      console.log("load", index)
+      setCount((prev) => prev + 50)
+      if (index >= 5) finish()
+    }}
+  >
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+  </InfiniteScrollArea>
+)
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { InfiniteScrollArea } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { InfiniteScrollArea } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { InfiniteScrollArea } from "@workspace/ui"
+```
+
+:::
+
+```tsx
+<InfiniteScrollArea />
+```
+
+### Specify the Viewport
+
+To specify the viewport, set a `ref` to `rootRef`.
+
+:::note
+If `rootRef` is not set, the browser's viewport will be used.
+:::
+
+```tsx preview functional iframe client
+const rootRef = useRef<HTMLDivElement>(null)
+const [count, setCount] = useState<number>(50)
+const resetRef = useRef<() => void>(noop)
+
+return (
+  <VStack h="full" alignItems="flex-start">
+    <VStack
+      ref={rootRef}
+      borderWidth="1px"
+      overflowY="auto"
+      p="lg"
+      h="sm"
+      rounded="l2"
+    >
+      <InfiniteScrollArea
+        loading={<Loading.Oval fontSize="2xl" />}
+        resetRef={resetRef}
+        rootRef={rootRef}
+        onLoad={({ finish, index }) => {
+          console.log("load", index)
+          setCount((prev) => prev + 50)
+          if (index >= 5) finish()
+        }}
+      >
+        {Array(count)
+          .fill(0)
+          .map((_, index) => (
+            <Card.Root key={index}>
+              <Card.Header>
+                <Heading size="xl">天元突破グレンラガン</Heading>
+              </Card.Header>
+
+              <Card.Body>
+                <Text>
+                  いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+                </Text>
+              </Card.Body>
+            </Card.Root>
+          ))}
+      </InfiniteScrollArea>
+    </VStack>
+
+    <Button
+      onClick={() => {
+        setCount(50)
+        resetRef.current()
+      }}
+    >
+      Reset
+    </Button>
+  </VStack>
+)
+```
+
+### Set rootMargin
+
+To set [rootMargin](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#rootmargin), assign a string to rootMargin.
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+
+return (
+  <InfiniteScrollArea
+    rootMargin="300px 0px 0px 0px"
+    loading={<Loading.Oval fontSize="2xl" />}
+    onLoad={({ finish, index }) => {
+      console.log("load", index)
+      setCount((prev) => prev + 50)
+      if (index >= 5) finish()
+    }}
+  >
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+  </InfiniteScrollArea>
+)
+```
+
+### Set threshold
+
+To set [threshold](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#threshold), assign a number to `threshold`.
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+
+return (
+  <InfiniteScrollArea
+    threshold={1}
+    loading={<Loading.Oval fontSize="2xl" />}
+    onLoad={({ finish, index }) => {
+      console.log("load", index)
+      setCount((prev) => prev + 50)
+      if (index >= 5) finish()
+    }}
+  >
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+  </InfiniteScrollArea>
+)
+```
+
+### Initial Load
+
+To load initially, set `initialLoad` to `true`. By default, `initialLoad` is set to `false`, and the initial(`index=0`) `onLoad` is not executed.
+
+`true`: The first `onLoad` is executed regardless of the scroll amount, and the provided `index` starts from `0`.\
+`false`: `onLoad` is executed when a certain scroll is reached, and the provided `index` starts from `1`.
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+
+return (
+  <InfiniteScrollArea
+    initialLoad
+    loading={<Loading.Oval fontSize="2xl" />}
+    onLoad={({ finish, index }) => {
+      console.log("load", index)
+      setCount((prev) => prev + 50)
+      if (index >= 5) finish()
+    }}
+  >
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+  </InfiniteScrollArea>
+)
+```
+
+### Change the Starting index
+
+To change the starting index, set a number to `startIndex`. The default is `1`.
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+
+return (
+  <InfiniteScrollArea
+    startIndex={3}
+    loading={<Loading.Oval fontSize="2xl" />}
+    onLoad={({ finish, index }) => {
+      console.log("load", index)
+      setCount((prev) => prev + 50)
+      if (index >= 5) finish()
+    }}
+  >
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+  </InfiniteScrollArea>
+)
+```
+
+### Change the Orientation
+
+To change the orientation, set `orientation` to either `vertical` or `horizontal`. The default is `vertical`.
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+
+return (
+  <InfiniteScrollArea
+    orientation="horizontal"
+    overflowX="auto"
+    h="full"
+    loading={<Loading.Oval fontSize="2xl" />}
+    onLoad={({ finish, index }) => {
+      console.log("load", index)
+      setCount((prev) => prev + 50)
+      if (index >= 5) finish()
+    }}
+  >
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Image
+          borderWidth="1px"
+          rounded="l2"
+          key={index}
+          src="https://gurren-lagann15th.com/assets/img/top/visual.jpg"
+          w="sm"
+          h="full"
+          objectFit="cover"
+        />
+      ))}
+  </InfiniteScrollArea>
+)
+```
+
+### Reverse
+
+To reverse, set `reverse` to `true`. The default is `false`.
+
+```tsx preview functional iframe client
+const rootRef = useRef<HTMLDivElement>(null)
+const [count, setCount] = useState<number>(50)
+
+return (
+  <Box ref={rootRef} h="full" overflow="auto">
+    <InfiniteScrollArea
+      reverse
+      rootRef={rootRef}
+      loading={<Loading.Oval fontSize="2xl" />}
+      onLoad={({ finish, index }) => {
+        console.log("load", index)
+        setCount((prev) => prev + 50)
+        if (index >= 5) finish()
+      }}
+    >
+      {Array(count)
+        .fill(0)
+        .map((_, index) => (
+          <Card.Root key={index}>
+            <Card.Header>
+              <Heading size="xl">天元突破グレンラガン</Heading>
+            </Card.Header>
+
+            <Card.Body>
+              <Text>
+                いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+              </Text>
+            </Card.Body>
+          </Card.Root>
+        ))}
+    </InfiniteScrollArea>
+  </Box>
+)
+```
+
+### Disabled
+
+To disable, set `disabled` to `true`. This is useful when you do not want to execute `onLoad` in response to scrolling under certain conditions.
+
+```tsx preview functional iframe client
+const [disabled, setDisabled] = useState<boolean>(false)
+const [count, setCount] = useState<number>(50)
+
+return (
+  <VStack h="full" alignItems="flex-start">
+    <InfiniteScrollArea
+      disabled={disabled}
+      loading={<Loading.Oval fontSize="2xl" />}
+      onLoad={({ finish, index }) => {
+        console.log("load", index)
+        setCount((prev) => prev + 50)
+        if (index >= 5) finish()
+      }}
+      borderWidth="1px"
+      h="sm"
+      overflowY="auto"
+      p="lg"
+      rounded="l2"
+    >
+      {Array(count)
+        .fill(0)
+        .map((_, index) => (
+          <Card.Root key={index}>
+            <Card.Header>
+              <Heading size="xl">天元突破グレンラガン</Heading>
+            </Card.Header>
+
+            <Card.Body>
+              <Text>
+                いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+              </Text>
+            </Card.Body>
+          </Card.Root>
+        ))}
+    </InfiniteScrollArea>
+
+    <Button
+      colorScheme={disabled ? "success" : "danger"}
+      onClick={() => setDisabled((prev) => !prev)}
+    >
+      {disabled ? "Enable" : "Disabled"}
+    </Button>
+  </VStack>
+)
+```
+
+### Reset
+
+To reset the `index`, set a `ref` to `resetRef`. A callback function is attached to the set `ref`, so execute it.
+
+:::warning
+Executing the `resetRef` callback will also reset the scroll.
+:::
+
+```tsx preview functional iframe client
+const resetRef = useRef<() => void>(noop)
+const [count, setCount] = useState<number>(50)
+
+return (
+  <VStack h="full" alignItems="flex-start">
+    <InfiniteScrollArea
+      resetRef={resetRef}
+      loading={<Loading.Oval fontSize="2xl" />}
+      onLoad={({ finish, index }) => {
+        console.log("load", index)
+        setCount((prev) => prev + 50)
+        if (index >= 5) finish()
+      }}
+      borderWidth="1px"
+      h="sm"
+      overflowY="auto"
+      p="lg"
+      rounded="l2"
+    >
+      {Array(count)
+        .fill(0)
+        .map((_, index) => (
+          <Card.Root key={index}>
+            <Card.Header>
+              <Heading size="xl">天元突破グレンラガン</Heading>
+            </Card.Header>
+
+            <Card.Body>
+              <Text>
+                いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+              </Text>
+            </Card.Body>
+          </Card.Root>
+        ))}
+    </InfiniteScrollArea>
+
+    <Button
+      onClick={() => {
+        setCount(50)
+        resetRef.current()
+      }}
+    >
+      Reset
+    </Button>
+  </VStack>
+)
+```
+
+### Display an Element at the End of the Scroll
+
+To display an element at the end of the scroll, set a `ReactNode` to `finish`.
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+
+return (
+  <InfiniteScrollArea
+    finish={<>俺のドリルは！天を作るドリルだああああっ！！</>}
+    loading={<Loading.Oval fontSize="2xl" />}
+    onLoad={({ finish, index }) => {
+      console.log("load", index)
+      setCount((prev) => prev + 50)
+      if (index >= 1) finish()
+    }}
+  >
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+  </InfiniteScrollArea>
+)
+```
+
+### Customize the Trigger
+
+To customize the trigger, set `props` to `triggerProps`.
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+
+return (
+  <InfiniteScrollArea
+    triggerProps={{
+      bg: "primary.50",
+      p: "md",
+      rounded: "md",
+    }}
+    loading={<Loading.Oval fontSize="2xl" />}
+    onLoad={async ({ finish, index }) => {
+      console.log("load", index)
+      await wait(5000)
+      setCount((prev) => prev + 50)
+      if (index >= 5) finish()
+    }}
+  >
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+  </InfiniteScrollArea>
+)
+```
+
+### Customize the Loading
+
+To customize the loading, set a `ReactNode` to `loading`.
+
+```tsx preview functional iframe client
+const [count, setCount] = useState<number>(50)
+
+return (
+  <InfiniteScrollArea
+    loading={<>一回転すればほんの少しだけ前に進む、それがドリルなんだよ！！</>}
+    onLoad={async ({ finish, index }) => {
+      console.log("load", index)
+      await wait(5000)
+      setCount((prev) => prev + 50)
+      if (index >= 5) finish()
+    }}
+  >
+    {Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <Card.Root key={index}>
+          <Card.Header>
+            <Heading size="xl">天元突破グレンラガン</Heading>
+          </Card.Header>
+
+          <Card.Body>
+            <Text>
+              いいか、忘れんな。お前を信じろ。俺が信じるお前でもない。お前が信じる俺でもない。お前が信じる…お前を信じろ！
+            </Text>
+          </Card.Body>
+        </Card.Root>
+      ))}
+  </InfiniteScrollArea>
+)
+```
+
+## Props
+
+<PropsTable name="infinite-scroll-area" />

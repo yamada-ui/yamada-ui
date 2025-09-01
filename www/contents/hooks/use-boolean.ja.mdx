@@ -9,7 +9,7 @@ source: hooks/use-boolean
 const [flg, { on, off, toggle }] = useBoolean()
 
 return (
-  <VStack gap="md">
+  <VStack>
     <Text>state: {String(flg)}</Text>
 
     <ButtonGroup.Root wrap="wrap">
@@ -34,7 +34,7 @@ import { useBoolean } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { useBoolean } from "@workspace/ui"
+import { useBoolean } from "@workspaces/ui"
 ```
 
 :::
@@ -49,7 +49,7 @@ const [flg, { on, off, toggle }] = useBoolean()
 const [flg, { on, off, toggle }] = useBoolean()
 
 return (
-  <VStack gap="md">
+  <VStack>
     <Text>state: {String(flg)}</Text>
 
     <ButtonGroup.Root wrap="wrap">

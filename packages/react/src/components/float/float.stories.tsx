@@ -56,7 +56,7 @@ export const Placement: Story = () => {
             fontSize="sm"
             placement={placement}
             px="1.5"
-            rounded="md"
+            rounded="l2"
           >
             New
           </Float>
@@ -77,7 +77,7 @@ export const Offset: Story = () => {
           offset="md"
           placement="start-start"
           px="1.5"
-          rounded="md"
+          rounded="l2"
         >
           New
         </Float>
@@ -91,7 +91,7 @@ export const Offset: Story = () => {
           offset={["0", "md"]}
           placement="center-start"
           px="1.5"
-          rounded="md"
+          rounded="l2"
         >
           New
         </Float>
@@ -105,7 +105,7 @@ export const Offset: Story = () => {
           offset={["md", "0"]}
           placement="end-end"
           px="1.5"
-          rounded="md"
+          rounded="l2"
         >
           New
         </Float>

@@ -15,12 +15,12 @@ import {
 } from "../../utils"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Colors",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const Colors = () => {
   return (
     <>
       <Heading>Colors</Heading>

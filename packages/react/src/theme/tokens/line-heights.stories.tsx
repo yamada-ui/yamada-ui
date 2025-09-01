@@ -7,12 +7,12 @@ import { Text } from "../../components/text"
 import { lineHeights } from "./line-heights"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Line Heights",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const LineHeights = () => {
   return (
     <>
       <Heading>Line Heights</Heading>

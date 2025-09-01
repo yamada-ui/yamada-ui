@@ -9,12 +9,12 @@ import { isSize } from "../../utils"
 import { sizes } from "./sizes"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Sizes",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const Sizes = () => {
   return (
     <>
       <Heading>Sizes</Heading>

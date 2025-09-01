@@ -1,13 +1,17 @@
 "use client"
 
-import type { FC } from "react"
-import type { HTMLStyledProps } from "../../core"
+import type { FC, ReactNode } from "react"
 import type {
-  TreeNode,
-  TreeNodeProps,
+  HTMLProps,
+  HTMLStyledProps,
+  ThemeProps,
+  WithoutThemeProps,
+} from "../../core"
+import type { CheckboxProps } from "../checkbox"
+import type {
+  TreeNodeData,
   TreeNodeRenderProps,
   TreeNodeState,
-  TreeProps,
   TreeRootProps,
 } from "./tree-types"
 import type { TreeStyle } from "./tree.style"
@@ -18,7 +22,7 @@ import { Checkbox } from "../checkbox"
 import { ChevronDownIcon, ChevronRightIcon } from "../icon"
 import { Loading } from "../loading"
 import {
-  filterTreeNodes,
+  filterTreeNodeData,
   getExpandedIdsForFilteredNodes,
   renderNodeName,
 } from "./tree-utils"
@@ -192,7 +196,7 @@ export const Tree = withContext<"ul", TreeProps>(({ children, ...rest }) => {
     } else if (collection) {
       const rootNode = collection.getRootNode()
       if (rootNode.children) {
-        const filteredChildren = filterTreeNodes(
+        const filteredChildren = filterTreeNodeData(
           rootNode.children,
           filterNodes,
           filterQuery,
@@ -218,7 +222,7 @@ export const Tree = withContext<"ul", TreeProps>(({ children, ...rest }) => {
         </TreeCollectionName>
       )
     } else {
-      const filteredNodes = filterTreeNodes(
+      const filteredNodes = filterTreeNodeData(
         nodes || [],
         filterNodes,
         filterQuery,
@@ -231,6 +235,29 @@ export const Tree = withContext<"ul", TreeProps>(({ children, ...rest }) => {
 
   return <styled.ul {...rest}>{computedChildren}</styled.ul>
 }, "tree")()
+
+export interface TreeNodeProps {
+  /**
+   * The tree node to render.
+   */
+  node: TreeNodeData
+  /**
+   * The index path of the node in the tree.
+   */
+  indexPath?: number[]
+  /**
+   * Render function for custom node rendering.
+   */
+  render?: (props: TreeNodeRenderProps) => ReactNode
+  /**
+   * Props for the tree branch content element.
+   */
+  branchContentProps?: TreeBranchContentProps
+  /**
+   * Props for the tree branch element.
+   */
+  branchProps?: TreeBranchProps
+}
 
 /**
  * TreeNode component that renders individual tree nodes.
@@ -254,7 +281,9 @@ export const TreeNode: FC<TreeNodeProps> = ({
   const { filterQuery } = useComponentContext()
 
   const [loading, setLoading] = useState(false)
-  const [loadedChildren, setLoadedChildren] = useState<null | TreeNode[]>(null)
+  const [loadedChildren, setLoadedChildren] = useState<null | TreeNodeData[]>(
+    null,
+  )
 
   const nodeId = useMemo(
     () => (collection ? collection.getNodeValue(node) : node.id),
@@ -285,7 +314,7 @@ export const TreeNode: FC<TreeNodeProps> = ({
           return
         }
 
-        if (shouldLoadChildren && !loading) {
+        if (shouldLoadChildren && !loading && loadChildren) {
           setLoading(true)
           try {
             const children = await loadChildren(node)
@@ -308,7 +337,7 @@ export const TreeNode: FC<TreeNodeProps> = ({
         return
       }
 
-      if (shouldLoadChildren && !loading) {
+      if (shouldLoadChildren && !loading && loadChildren) {
         setLoading(true)
         try {
           const children = await loadChildren(node)
@@ -417,7 +446,7 @@ export const TreeNode: FC<TreeNodeProps> = ({
   if (nodeState.isBranch) {
     return (
       <TreeBranch indexPath={indexPath} {...branchProps}>
-        <TreeBranchControl data-node-id={nodeId}>
+        <TreeBranchControl nodeId={nodeId}>
           <TreeBranchTrigger>
             <TreeBranchIndicator
               nodeId={nodeId}
@@ -607,7 +636,10 @@ export const TreeBranchText = withContext<"span", TreeBranchTextProps>(
   }
 })
 
-export interface TreeCheckboxProps extends HTMLStyledProps<"label"> {
+export interface TreeCheckboxProps
+  extends Omit<WithoutThemeProps<CheckboxProps, TreeStyle>, "aria-label">,
+    Pick<HTMLProps<"label">, "aria-label">,
+    Omit<ThemeProps<TreeStyle>, "variant"> {
   /**
    * The node ID for the checkbox.
    */
@@ -617,29 +649,29 @@ export interface TreeCheckboxProps extends HTMLStyledProps<"label"> {
 /**
  * TreeCheckbox component that provides checkbox functionality for tree nodes.
  */
-export const TreeCheckbox = withContext<"label", TreeCheckboxProps>(
-  Checkbox,
-  "checkbox",
-)(undefined, ({ nodeId, onChange, ...rest }) => {
-  const { onSelect } = useComponentContext()
-  const { indeterminate, node, selected } = useNodeState(nodeId)
+export const TreeCheckbox = withContext<"label", TreeCheckboxProps>(Checkbox)(
+  undefined,
+  ({ nodeId, onClick, ...rest }) => {
+    const { onSelect } = useComponentContext()
+    const { indeterminate, node, selected } = useNodeState(nodeId)
 
-  if (!node) {
-    return { onChange, ...rest }
-  }
+    if (!node) {
+      return { onClick, ...rest }
+    }
 
-  const handleCheckboxChange = (_checkedValue: boolean) => {
-    onSelect(nodeId!)
-  }
+    const handleOnCLick = () => {
+      onSelect(nodeId!)
+    }
 
-  return {
-    checked: selected,
-    disabled: node.disabled,
-    indeterminate,
-    onChange: handlerAll(handleCheckboxChange, onChange),
-    ...rest,
-  }
-})
+    return {
+      checked: selected,
+      disabled: node.disabled,
+      indeterminate,
+      onClick: handlerAll(handleOnCLick, onClick),
+      ...rest,
+    }
+  },
+)
 
 export interface TreeItemProps extends HTMLStyledProps<"li"> {
   /**

@@ -1,9 +1,17 @@
 import type { ReactNode } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
+import type {
+  TreeBranchContentProps,
+  TreeBranchIndicatorProps,
+  TreeBranchProps,
+  TreeBranchTextProps,
+  TreeBranchTriggerProps,
+  TreeItemProps,
+} from "./tree"
 import type { TreeCollection } from "./tree-collection"
 import type { TreeStyle } from "./tree.style"
 
-export interface TreeNode {
+export interface TreeNodeData {
   /**
    * The unique identifier for the node.
    */
@@ -15,7 +23,7 @@ export interface TreeNode {
   /**
    * The children nodes.
    */
-  children?: TreeNode[]
+  children?: TreeNodeData[]
   /**
    * Additional data for the node.
    */
@@ -36,7 +44,7 @@ export interface TreeNode {
   selected?: boolean
 }
 
-export interface TreeItem extends TreeNode {
+export interface TreeItem extends TreeNodeData {
   /**
    * Props for the tree branch content element.
    */
@@ -63,29 +71,6 @@ export interface TreeItem extends TreeNode {
   itemProps?: TreeItemProps
 }
 
-export interface TreeNodeProps {
-  /**
-   * The tree node to render.
-   */
-  node: TreeNode
-  /**
-   * The index path of the node in the tree.
-   */
-  indexPath?: number[]
-  /**
-   * Render function for custom node rendering.
-   */
-  render?: (props: TreeNodeRenderProps) => ReactNode
-  /**
-   * Props for the tree branch content element.
-   */
-  branchContentProps?: TreeBranchContentProps
-  /**
-   * Props for the tree branch element.
-   */
-  branchProps?: TreeBranchProps
-}
-
 export interface TreeNodeRenderProps {
   /**
    * Whether the node is expanded.
@@ -98,7 +83,7 @@ export interface TreeNodeRenderProps {
   /**
    * The tree node.
    */
-  node: TreeNode
+  node: TreeNodeData
   /**
    * The unique identifier for the node.
    */
@@ -171,7 +156,7 @@ export interface TreeRootProps
   /**
    * Function to filter nodes based on a search query.
    */
-  filterNodes?: (node: TreeNode, query: string) => boolean
+  filterNodes?: (node: TreeNodeData, query: string) => boolean
   /**
    * The current filter query string.
    */
@@ -179,11 +164,11 @@ export interface TreeRootProps
   /**
    * Function to load children for a node asynchronously.
    */
-  loadChildren?: (node: TreeNode) => Promise<TreeNode[]>
+  loadChildren?: (node: TreeNodeData) => Promise<TreeNodeData[]>
   /**
    * The tree nodes to render.
    */
-  nodes?: TreeNode[]
+  nodes?: TreeNodeData[]
   /**
    * The controlled selected node IDs.
    */
@@ -200,11 +185,14 @@ export interface TreeRootProps
   /**
    * Callback when loading children completes.
    */
-  onLoadChildrenComplete?: (node: TreeNode, children: TreeNode[]) => void
+  onLoadChildrenComplete?: (
+    node: TreeNodeData,
+    children: TreeNodeData[],
+  ) => void
   /**
    * Callback when loading children fails.
    */
-  onLoadChildrenError?: (node: TreeNode, error: Error) => void
+  onLoadChildrenError?: (node: TreeNodeData, error: Error) => void
   /**
    * Callback when a node is selected.
    */

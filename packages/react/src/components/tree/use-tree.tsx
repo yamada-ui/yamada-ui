@@ -1,4 +1,4 @@
-import type { TreeNode } from "./tree"
+import type { TreeNodeData } from "./tree-types"
 import { useCallback, useMemo, useState } from "react"
 import { useComponentContext } from "./tree"
 import {
@@ -14,10 +14,13 @@ import {
  * @param targetId - The target node ID to find parents for
  * @returns Array of parent nodes
  */
-const findParentNodes = (nodes: TreeNode[], targetId: string): TreeNode[] => {
-  const parents: TreeNode[] = []
+const findParentNodes = (
+  nodes: TreeNodeData[],
+  targetId: string,
+): TreeNodeData[] => {
+  const parents: TreeNodeData[] = []
 
-  const search = (searchNodes: TreeNode[], targetId: string): boolean => {
+  const search = (searchNodes: TreeNodeData[], targetId: string): boolean => {
     for (const node of searchNodes) {
       if (node.id === targetId) {
         return true
@@ -44,7 +47,7 @@ const findParentNodes = (nodes: TreeNode[], targetId: string): TreeNode[] => {
  * @returns True if all descendants are selected
  */
 const isParentFullySelected = (
-  node: TreeNode,
+  node: TreeNodeData,
   selectedIds: string[],
 ): boolean => {
   if (!node.children || node.children.length === 0) {
@@ -68,7 +71,7 @@ const isParentFullySelected = (
  * @returns Updated array of selected node IDs
  */
 const propagateSelectionUp = (
-  nodes: TreeNode[],
+  nodes: TreeNodeData[],
   selectedIds: string[],
   nodeId: string,
 ): string[] => {
@@ -97,7 +100,7 @@ const propagateSelectionUp = (
  * @param nodes - Array of tree nodes to search
  * @returns Array of branch node IDs
  */
-const getAllBranchIds = (nodes: TreeNode[]): string[] => {
+const getAllBranchIds = (nodes: TreeNodeData[]): string[] => {
   const branchIds: string[] = []
   for (const node of nodes) {
     if (node.children && node.children.length > 0) {
@@ -109,7 +112,7 @@ const getAllBranchIds = (nodes: TreeNode[]): string[] => {
 }
 
 export interface UseTreeProps {
-  nodes: TreeNode[]
+  nodes: TreeNodeData[]
   defaultExpanded?: string[]
   defaultSelected?: string[]
   expandedIds?: string[]
@@ -197,7 +200,6 @@ export const useTree = ({
   const onSelect = useCallback(
     (nodeId: string) => {
       if (selectionMode === "checkbox") {
-        // Handle hierarchical selection for checkbox mode
         const node = findNodeById(nodes, nodeId)
         if (!node) return
 
@@ -239,7 +241,6 @@ export const useTree = ({
           onSelectionChange?.(newSelectedIds)
         }
       } else {
-        // Handle flat selection for single/multiple modes
         if (controlledSelectedIds !== undefined) {
           const newSelectedIds =
             selectionMode === "single"
@@ -297,7 +298,6 @@ export const useTreeSelection = (
 
   const handleSelection = useCallback(() => {
     if (!disabled && nodeId) {
-      // Unified selection handler - selection mode determines behavior in the hook
       onSelect(nodeId)
     }
   }, [disabled, nodeId, onSelect])
@@ -316,7 +316,7 @@ export const useNodeState = (nodeId: string | undefined) => {
     useComponentContext()
 
   return useMemo(() => {
-    if (!nodeId) {
+    if (!nodeId || !nodes) {
       return {
         expanded: false,
         indeterminate: false,

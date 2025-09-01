@@ -1,37 +1,37 @@
-import type { TreeNode } from "./tree"
+import type { TreeNodeData } from "./tree-types"
 
 export interface TreeCollection {
   /**
    * Get the string representation of a node.
    */
-  getNodeString: (node: TreeNode) => string
+  getNodeString: (node: TreeNodeData) => string
   /**
    * Get the value of a node.
    */
-  getNodeValue: (node: TreeNode) => string
+  getNodeValue: (node: TreeNodeData) => string
   /**
    * Get the root node.
    */
-  getRootNode: () => TreeNode
+  getRootNode: () => TreeNodeData
   /**
    * Check if a node is a branch (has children).
    */
-  isBranch: (node: TreeNode) => boolean
+  isBranch: (node: TreeNodeData) => boolean
 }
 
 export interface CreateTreeCollectionOptions {
   /**
    * Function to convert a node to its string representation.
    */
-  nodeToString: (node: TreeNode) => string
+  nodeToString: (node: TreeNodeData) => string
   /**
    * Function to convert a node to its value.
    */
-  nodeToValue: (node: TreeNode) => string
+  nodeToValue: (node: TreeNodeData) => string
   /**
    * The root node of the tree.
    */
-  rootNode: TreeNode
+  rootNode: TreeNodeData
 }
 
 /**
@@ -45,19 +45,19 @@ export const createTreeCollection = ({
   nodeToValue,
   rootNode,
 }: CreateTreeCollectionOptions): TreeCollection => {
-  const getRootNode = (): TreeNode => {
+  const getRootNode = (): TreeNodeData => {
     return rootNode
   }
 
-  const getNodeValue = (node: TreeNode): string => {
+  const getNodeValue = (node: TreeNodeData): string => {
     return nodeToValue(node)
   }
 
-  const getNodeString = (node: TreeNode): string => {
+  const getNodeString = (node: TreeNodeData): string => {
     return nodeToString(node)
   }
 
-  const isBranch = (node: TreeNode): boolean => {
+  const isBranch = (node: TreeNodeData): boolean => {
     return !!(node.children && node.children.length > 0)
   }
 

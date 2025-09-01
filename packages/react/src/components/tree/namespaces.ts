@@ -29,7 +29,4 @@ export type {
   TreeItemTextProps as ItemTextProps,
   TreeLabelProps as LabelProps,
   TreeNodeProps as NodeProps,
-  TreeNodeRenderProps as NodeRenderProps,
-  TreeNodeState as NodeState,
-  TreeRootProps as RootProps,
 } from "./tree"

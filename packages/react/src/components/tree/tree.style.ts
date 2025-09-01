@@ -5,6 +5,7 @@ export const treeStyle = defineComponentSlotStyle({
     branch: {
       listStyle: "none",
     },
+    branchContent: {},
     branchControl: {
       alignItems: "center",
       display: "flex",
@@ -82,7 +83,6 @@ export const treeStyle = defineComponentSlotStyle({
         layerStyle: "disabled",
       },
     },
-
     itemIndicator: {
       alignItems: "center",
       display: "flex",
@@ -207,15 +207,6 @@ export const treeStyle = defineComponentSlotStyle({
         },
         _selected: {
           layerStyle: "ghost.hover",
-        },
-      },
-    },
-    item: {
-      layerStyle: "subtle",
-      _hover: {
-        layerStyle: "subtle.hover",
-        _selected: {
-          layerStyle: "subtle.hover",
         },
       },
     },

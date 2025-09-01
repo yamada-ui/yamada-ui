@@ -27,17 +27,11 @@ export type {
   TreeBranchTriggerProps,
   TreeCheckboxProps,
   TreeCollectionNameProps,
-  TreeItem,
   TreeItemIndicatorProps,
   TreeItemProps,
   TreeItemTextProps,
   TreeLabelProps,
-  TreeNode,
-  TreeNodeProps,
-  TreeNodeRenderProps,
-  TreeNodeState,
   TreeProps,
-  TreeRootProps,
 } from "./tree"
 export type {
   CreateTreeCollectionOptions,

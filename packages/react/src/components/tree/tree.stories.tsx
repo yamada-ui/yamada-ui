@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import type { TreeNode as TreeNodeType } from "./tree-types"
+import type { TreeNodeData } from "./tree-types"
 import { PropsTable } from "#storybook"
 import { useState } from "react"
 import { COLOR_SCHEMES } from "../../utils"
@@ -20,7 +20,7 @@ const meta: Meta<typeof Tree.Root> = {
 
 export default meta
 
-const sampleNodes: TreeNodeType[] = [
+const sampleNodes: TreeNodeData[] = [
   {
     id: "1",
     name: "Documents",
@@ -141,10 +141,10 @@ export const ExpandCollapseAll = () => {
     setExpandedIds(newExpandedIds)
   }
 
-  const getAllBranchIds = (nodes: TreeNodeType[]): string[] => {
+  const getAllBranchIds = (nodes: TreeNodeData[]): string[] => {
     const branchIds: string[] = []
 
-    const traverse = (nodeList: TreeNodeType[]) => {
+    const traverse = (nodeList: TreeNodeData[]) => {
       for (const node of nodeList) {
         if (node.children && node.children.length > 0) {
           branchIds.push(node.id)
@@ -186,7 +186,7 @@ export const ExpandCollapseAll = () => {
 }
 
 export const AsyncLoading = () => {
-  const loadChildren = async (node: TreeNodeType): Promise<TreeNodeType[]> => {
+  const loadChildren = async (node: TreeNodeData): Promise<TreeNodeData[]> => {
     if (node.id.includes("static")) {
       return [
         { id: `${node.id}-static-1`, name: `${node.name} Static 1` },
@@ -202,7 +202,7 @@ export const AsyncLoading = () => {
     ]
   }
 
-  const asyncNodes: TreeNodeType[] = [
+  const asyncNodes: TreeNodeData[] = [
     {
       id: "async-1",
       name: "Async Folder 1",
@@ -277,7 +277,7 @@ export const CustomIcons = () => {
 }
 
 export const DisabledNodes = () => {
-  const disabledNodes: TreeNodeType[] = [
+  const disabledNodes: TreeNodeData[] = [
     {
       id: "1",
       name: "Enabled Folder",
@@ -406,7 +406,7 @@ export const Size: Story = () => {
 export const WithFiltering = () => {
   const [filterQuery, setFilterQuery] = useState("")
 
-  const filterFunction = (node: TreeNodeType, query: string) => {
+  const filterFunction = (node: TreeNodeData, query: string) => {
     return node.name.toLowerCase().includes(query.toLowerCase())
   }
 

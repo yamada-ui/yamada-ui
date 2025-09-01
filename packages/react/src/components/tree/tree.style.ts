@@ -1,8 +1,5 @@
 import { defineComponentSlotStyle } from "../../core"
 
-/**
- * Style configuration for the Tree component using the slot-based styling system.
- */
 export const treeStyle = defineComponentSlotStyle({
   base: {
     branch: {
@@ -196,19 +193,19 @@ export const treeStyle = defineComponentSlotStyle({
     ghost: {
       branchControl: {
         layerStyle: "ghost",
-        _selected: {
+        _hover: {
           layerStyle: "ghost.hover",
         },
-        _hover: {
+        _selected: {
           layerStyle: "ghost.hover",
         },
       },
       item: {
         layerStyle: "ghost",
-        _selected: {
+        _hover: {
           layerStyle: "ghost.hover",
         },
-        _hover: {
+        _selected: {
           layerStyle: "ghost.hover",
         },
       },
@@ -225,19 +222,19 @@ export const treeStyle = defineComponentSlotStyle({
     outline: {
       branchControl: {
         layerStyle: "outline",
-        _selected: {
+        _hover: {
           layerStyle: "outline.hover",
         },
-        _hover: {
+        _selected: {
           layerStyle: "outline.hover",
         },
       },
       item: {
         layerStyle: "outline",
-        _selected: {
+        _hover: {
           layerStyle: "outline.hover",
         },
-        _hover: {
+        _selected: {
           layerStyle: "outline.hover",
         },
       },
@@ -245,19 +242,19 @@ export const treeStyle = defineComponentSlotStyle({
     solid: {
       branchControl: {
         layerStyle: "solid",
-        _selected: {
+        _hover: {
           layerStyle: "solid.hover",
         },
-        _hover: {
+        _selected: {
           layerStyle: "solid.hover",
         },
       },
       item: {
         layerStyle: "solid",
-        _selected: {
+        _hover: {
           layerStyle: "solid.hover",
         },
-        _hover: {
+        _selected: {
           layerStyle: "solid.hover",
         },
       },
@@ -265,10 +262,10 @@ export const treeStyle = defineComponentSlotStyle({
     subtle: {
       branchControl: {
         layerStyle: "subtle",
-        _selected: {
+        _hover: {
           layerStyle: "subtle.hover",
         },
-        _hover: {
+        _selected: {
           layerStyle: "subtle.hover",
         },
       },
@@ -276,19 +273,19 @@ export const treeStyle = defineComponentSlotStyle({
     surface: {
       branchControl: {
         layerStyle: "surface",
-        _selected: {
+        _hover: {
           layerStyle: "surface.hover",
         },
-        _hover: {
+        _selected: {
           layerStyle: "surface.hover",
         },
       },
       item: {
         layerStyle: "surface",
-        _selected: {
+        _hover: {
           layerStyle: "surface.hover",
         },
-        _hover: {
+        _selected: {
           layerStyle: "surface.hover",
         },
       },

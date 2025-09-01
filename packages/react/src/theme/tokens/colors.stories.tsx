@@ -49,7 +49,7 @@ export const Colors = () => {
                         w="full"
                       />
                       <Text
-                        color="muted"
+                        color="fg.muted"
                         fontSize="xs"
                         lineClamp={1}
                         textAlign="center"
@@ -87,7 +87,7 @@ export const Colors = () => {
                         w="full"
                       />
                       <Text
-                        color="muted"
+                        color="fg.muted"
                         fontSize="xs"
                         lineClamp={1}
                         textAlign="center"
@@ -113,6 +113,7 @@ export const Colors = () => {
                 "",
                 "subtle",
                 "overlay",
+                "ghost",
                 "muted",
                 "emphasized",
                 "contrast",
@@ -135,7 +136,7 @@ export const Colors = () => {
                   />
 
                   <Text
-                    color="muted"
+                    color="fg.muted"
                     fontSize="xs"
                     lineClamp={1}
                     textAlign="center"
@@ -183,7 +184,7 @@ export const Colors = () => {
                   </Center>
 
                   <Text
-                    color="muted"
+                    color="fg.muted"
                     fontSize="xs"
                     lineClamp={1}
                     textAlign="center"
@@ -228,7 +229,7 @@ export const Colors = () => {
                   />
 
                   <Text
-                    color="muted"
+                    color="fg.muted"
                     fontSize="xs"
                     lineClamp={1}
                     textAlign="center"
@@ -277,7 +278,7 @@ export const Colors = () => {
                       />
 
                       <Text
-                        color="muted"
+                        color="fg.muted"
                         fontSize="xs"
                         lineClamp={1}
                         textAlign="center"

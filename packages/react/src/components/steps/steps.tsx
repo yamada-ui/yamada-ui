@@ -294,19 +294,19 @@ export interface StepsIndicatorProps extends HTMLStyledProps {
   /**
    * The element for the complete indicator.
    *
-   * @default '<CheckIcon />'
+   * @default <CheckIcon />
    */
   complete?: ReactNode
   /**
    * The element for the current indicator.
    *
-   * @default '<StepsNumber />'
+   * @default <StepsNumber />
    */
   current?: ReactNode
   /**
    * The element for the incomplete indicator.
    *
-   * @default '<StepsNumber />'
+   * @default <StepsNumber />
    */
   incomplete?: ReactNode
 }

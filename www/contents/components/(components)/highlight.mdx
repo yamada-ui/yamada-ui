@@ -5,4 +5,157 @@ storybook: components-highlight--basic
 source: components/highlight
 ---
 
+```tsx preview
+<Highlight query="わかんない" colorScheme="warning">
+  わかんないよ…。わっかんないよ！ ジュー君の言ってることはひとつもわかんないよ！
+  ジュー君がいいって言ってるもの、何がいいのかわかんないよ！
+  わかんない！私にはわかんないの！
+  ブラッディって何がカッコイイの？血なんて嫌だよ！痛いだけだよ！
+  狂うのどこがカッコイイの？クレイジーのどこがいいのかわかんない！
+</Highlight>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Highlight } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Highlight } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Highlight } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Highlight />
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["subtle", "solid", "text", "accent"]}>
+    {(variant, index) => (
+      <Highlight
+        key={index}
+        query="わかんない"
+        colorScheme="warning"
+        markProps={{ variant }}
+      >
+        わかんないよ…。わっかんないよ！
+        ジュー君の言ってることはひとつもわかんないよ！
+        ジュー君がいいって言ってるもの、何がいいのかわかんないよ！
+        わかんない！私にはわかんないの！
+        ブラッディって何がカッコイイの？血なんて嫌だよ！痛いだけだよ！
+        狂うのどこがカッコイイの？クレイジーのどこがいいのかわかんない！
+      </Highlight>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["warning", "success"]}>
+    {(colorScheme, index) => (
+      <Highlight key={index} query="わかんない" colorScheme={colorScheme}>
+        わかんないよ…。わっかんないよ！
+        ジュー君の言ってることはひとつもわかんないよ！
+        ジュー君がいいって言ってるもの、何がいいのかわかんないよ！
+        わかんない！私にはわかんないの！
+        ブラッディって何がカッコイイの？血なんて嫌だよ！痛いだけだよ！
+        狂うのどこがカッコイイの？クレイジーのどこがいいのかわかんない！
+      </Highlight>
+    )}
+  </For>
+</VStack>
+```
+
+### Specify Multiple
+
+```tsx preview
+<Highlight query={["わかんない", "ジュー君"]} colorScheme="warning">
+  わかんないよ…。わっかんないよ！ ジュー君の言ってることはひとつもわかんないよ！
+  ジュー君がいいって言ってるもの、何がいいのかわかんないよ！
+  わかんない！私にはわかんないの！
+  ブラッディって何がカッコイイの？血なんて嫌だよ！痛いだけだよ！
+  狂うのどこがカッコイイの？クレイジーのどこがいいのかわかんない！
+</Highlight>
+```
+
+### Style the Highlight
+
+```tsx preview
+<Highlight
+  query="わかんない"
+  colorScheme="warning"
+  markProps={{ rounded: "full" }}
+>
+  わかんないよ…。わっかんないよ！ ジュー君の言ってることはひとつもわかんないよ！
+  ジュー君がいいって言ってるもの、何がいいのかわかんないよ！
+  わかんない！私にはわかんないの！
+  ブラッディって何がカッコイイの？血なんて嫌だよ！痛いだけだよ！
+  狂うのどこがカッコイイの？クレイジーのどこがいいのかわかんない！
+</Highlight>
+```
+
+### Use Fragments
+
+By default, `Highlight` renders a `p` element. By setting `fragment`, `highlight` will use [Fragment](https://react.dev/reference/react/Fragment).
+
+```tsx preview
+<Text>
+  <Highlight fragment query="わかんない" colorScheme="warning">
+    わかんないよ…。わっかんないよ！
+    ジュー君の言ってることはひとつもわかんないよ！
+    ジュー君がいいって言ってるもの、何がいいのかわかんないよ！
+    わかんない！私にはわかんないの！
+    ブラッディって何がカッコイイの？血なんて嫌だよ！痛いだけだよ！
+    狂うのどこがカッコイイの？クレイジーのどこがいいのかわかんない！
+  </Highlight>
+</Text>
+```
+
+### Customize the Rendered Element
+
+By using `useHighlight`, you can customize multiple elements and their styles.
+
+```tsx preview functional client
+const chunks = useHighlight({
+  query: ["わかんない", "ジュー君"],
+  text: " わかんないよ…。わっかんないよ！ ジュー君の言ってることはひとつもわかんないよ！ ジュー君がいいって言ってるもの、何がいいのかわかんないよ！ わかんない！私にはわかんないの！ ブラッディって何がカッコイイの？血なんて嫌だよ！痛いだけだよ！ 狂うのどこがカッコイイの？クレイジーのどこがいいのかわかんない！",
+})
+
+return (
+  <Text>
+    {chunks.map(({ match, text }, index) =>
+      match ? (
+        text === "わかんない" ? (
+          <Mark key={index} colorScheme="warning">
+            {text}
+          </Mark>
+        ) : (
+          <Mark key={index} colorScheme="success">
+            {text}
+          </Mark>
+        )
+      ) : (
+        text
+      ),
+    )}
+  </Text>
+)
+```
+
+## Props
+
+<PropsTable name="highlight" />

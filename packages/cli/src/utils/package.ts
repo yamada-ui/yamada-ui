@@ -59,8 +59,6 @@ export function getVersion(
 ): string | undefined | WantedVersion {
   const [name, version] = splitVersion(nameWithVersion)
 
-  if (!name) return
-
   let currentVersion: string | undefined
 
   if (isObject(dependencies) && name in dependencies) {
@@ -82,7 +80,7 @@ export function getVersion(
 export function findDependencies(packageJson: Dict, dependencies: string[]) {
   return Object.fromEntries(
     dependencies.map((dependency) => [
-      splitVersion(dependency)[0]!,
+      splitVersion(dependency)[0],
       getVersion(packageJson, dependency),
     ]),
   )
@@ -103,13 +101,17 @@ export function splitVersion(value: string) {
   if (value.startsWith("@")) {
     const [, name, version] = value.split("@")
 
-    return [`@${name}`, version]
+    return [`@${name}`, version] as const
   } else {
-    return value.split("@")
+    return value.split("@") as [string, string | undefined]
   }
 }
 
-export function getPackageName(value: PackageNameWithVersion) {
+export function getPackageName(value: string) {
+  return splitVersion(value)[0]
+}
+
+export function getPackageNameWithVersion(value: PackageNameWithVersion) {
   return isObject(value) ? `${value.name}@${value.wanted}` : value
 }
 
@@ -175,6 +177,25 @@ export async function installDependencies(
     })
   } else {
     await execa(packageManager, ["install"], { cwd, stdout: "ignore" })
+  }
+}
+
+export interface UninstallDependenciesOptions
+  extends Pick<InstallDependenciesOptions, "cwd"> {}
+
+export async function uninstallDependencies(
+  dependencies: string[],
+  { cwd }: InstallDependenciesOptions = {},
+) {
+  const packageManager = getPackageManager()
+
+  if (dependencies.length) {
+    const command = packageManager === "npm" ? "uninstall" : "remove"
+
+    await execa(packageManager, [command, ...dependencies], {
+      cwd,
+      stdout: "ignore",
+    })
   }
 }
 

@@ -35,7 +35,7 @@ import { Accordion } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Accordion } from "@workspace/ui"
+import { Accordion } from "@workspaces/ui"
 ```
 
 :::
@@ -76,7 +76,7 @@ const items = useMemo<Accordion.RootProps["items"]>(
 return <Accordion.Root items={items} />
 ```
 
-### Change Variants
+### Change variant
 
 ```tsx preview
 <VStack>
@@ -120,9 +120,9 @@ To have a specific item expanded by default, set the item's `index` to `defaultI
 </Accordion.Root>
 ```
 
-### Expand Multiple Items at Once
+### Expand Multiple Items
 
-Setting `multiple` to `true` allows multiple items to be expanded at the same time.
+To expand multiple items, set `multiple` to `true`.
 
 ```tsx preview
 <Accordion.Root defaultIndex={[1, 2]} multiple>
@@ -140,7 +140,7 @@ Setting `multiple` to `true` allows multiple items to be expanded at the same ti
 </Accordion.Root>
 ```
 
-### Enable Toggling of Item Expansion/Collapse
+### Enable Toggling
 
 Setting `toggle` to `true` allows an expanded item to be collapsible again.
 
@@ -160,7 +160,7 @@ Setting `toggle` to `true` allows an expanded item to be collapsible again.
 </Accordion.Root>
 ```
 
-### Customize Icons
+### Hide Icon
 
 If you do not want to display an icon, set `iconHidden` to `true`.
 
@@ -180,7 +180,27 @@ If you do not want to display an icon, set `iconHidden` to `true`.
 </Accordion.Root>
 ```
 
-To change the icon, set a component to `icon`.
+### Disable an Item
+
+To disable a specific item, set `disabled`.
+
+```tsx preview
+<Accordion.Root>
+  <Accordion.Item button="孫悟空少年編" index={0}>
+    地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
+  </Accordion.Item>
+
+  <Accordion.Item button="ピッコロ大魔王編" disabled index={1}>
+    天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
+  </Accordion.Item>
+
+  <Accordion.Item button="サイヤ人編" index={2}>
+    ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
+  </Accordion.Item>
+</Accordion.Root>
+```
+
+### Customize Icon
 
 ```tsx preview
 <Accordion.Root icon={<GhostIcon />}>
@@ -218,29 +238,7 @@ If you want to switch icons based on the expansion and collapse state of an item
 </Accordion.Root>
 ```
 
-### Disable an Item
-
-To disable a specific item, set `disabled`.
-
-```tsx preview
-<Accordion.Root>
-  <Accordion.Item button="孫悟空少年編" index={0}>
-    地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-  </Accordion.Item>
-
-  <Accordion.Item button="ピッコロ大魔王編" disabled index={1}>
-    天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-  </Accordion.Item>
-
-  <Accordion.Item button="サイヤ人編" index={2}>
-    ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-  </Accordion.Item>
-</Accordion.Root>
-```
-
 ### Customize Label
-
-`Accordion.Item` internally renders `Accordion.Button` by setting the `label` in `props`, but if you want to customize `Accordion.Button`, set `Accordion.Button` to `children`.
 
 ```tsx preview
 <Accordion.Root>
@@ -277,8 +275,6 @@ To disable a specific item, set `disabled`.
 ```
 
 ### Customize Panel
-
-If `Accordion.Item` does not have `Accordion.Panel` in `children`, it automatically wraps `children` with `Accordion.Panel`. If you want to customize `Accordion.Panel`, set `Accordion.Panel` to `children`.
 
 ```tsx preview
 <Accordion.Root>
@@ -325,3 +321,7 @@ return (
   </Accordion.Root>
 )
 ```
+
+## Props
+
+<PropsTable name="accordion" />

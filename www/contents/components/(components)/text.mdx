@@ -6,4 +6,110 @@ source: components/text
 style: components/text/text.style.ts
 ---
 
+```tsx preview
+<Text>
+  私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+</Text>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Text } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Text } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Text } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Text />
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["6xl", "5xl", "4xl", "3xl", "2xl", "xl", "lg", "md", "sm", "xs"]}>
+    {(fontSize) => (
+      <Text key={fontSize} fontSize={fontSize} truncated>
+        私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
+      </Text>
+    )}
+  </For>
+</VStack>
+```
+
+### Render a different element
+
+By passing `as`, you can render it as a different element.
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      "b",
+      "i",
+      "u",
+      "abbr",
+      "del",
+      "em",
+      "ins",
+      "kbd",
+      "mark",
+      "s",
+      "samp",
+      "sub",
+    ]}
+  >
+    {(as) => (
+      <Text key={as} as={as}>
+        へっ！きたねぇ花火だ
+      </Text>
+    )}
+  </For>
+</VStack>
+```
+
+### Truncate Text
+
+If you want to truncate text after a certain number of lines, specify the number of lines with `lineClamp`. If the text exceeds the specified number of lines, an ellipsis will be displayed.
+
+```tsx preview
+<VStack>
+  <For each={[3, 2, 1]}>
+    {(lineClamp) => (
+      <Text key={lineClamp} fontSize="2xl" lineClamp={lineClamp}>
+        『ドラゴンボール』（DRAGON
+        BALL）は、鳥山明による日本の漫画作品。『週刊少年ジャンプ』（集英社）にて1984年51号から1995年25号まで連載された。世界中に散らばった七つの球をすべて集めると、どんな願いも一つだけ叶えられるという秘宝・ドラゴンボールと、主人公・孫悟空（そん・ごくう）を中心に展開する、「冒険」「夢」「バトル」「友情」などを描いた長編漫画。
+      </Text>
+    )}
+  </For>
+</VStack>
+```
+
+### Add Gradient
+
+```tsx preview
+<Text
+  w="full"
+  fontSize="xl"
+  fontWeight="bold"
+  bgGradient="linear(to-l, #7928CA, #FF0080)"
+  bgClip="text"
+>
+  やるじゃねえかサタン！おめえはホントに世界の救世主かもな！
+</Text>
+```
+
+## Props
+
+<PropsTable name="text" />

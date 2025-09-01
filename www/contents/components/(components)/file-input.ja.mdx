@@ -23,7 +23,7 @@ import { FileInput } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { FileInput } from "@workspace/ui"
+import { FileInput } from "@workspaces/ui"
 ```
 
 :::
@@ -35,7 +35,7 @@ import { FileInput } from "@workspace/ui"
 ### バリアントを変更する
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["outline", "filled", "flushed"]}>
     {(variant, index) => (
       <FileInput
@@ -51,7 +51,7 @@ import { FileInput } from "@workspace/ui"
 ### サイズを変更する
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["xs", "sm", "md", "lg", "xl"]}>
     {(size, index) => (
       <FileInput key={index} size={size} placeholder={toTitleCase(size)} />
@@ -63,7 +63,7 @@ import { FileInput } from "@workspace/ui"
 ### カラースキームを変更する
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <For each={["success", "warning"]}>
     {(colorScheme, index) => (
       <FileInput
@@ -100,9 +100,9 @@ import { FileInput } from "@workspace/ui"
 <FileInput placeholder="Please upload file" multiple separator=";" />
 ```
 
-### カスタムコンポーネントを使用する
+### カスタムコンポーネントを使う
 
-カスタムコンポーネントを使用する場合は、`component`に`ReactNode`を設定します。`component`は、`value`(`File`)と`index`を提供します。
+カスタムコンポーネントを使う場合は、`component`に`ReactNode`を設定します。`component`は、`value`(`File`)と`index`を提供します。
 
 ```tsx preview
 <FileInput
@@ -166,7 +166,7 @@ import { FileInput } from "@workspace/ui"
 無効にする場合は、`disabled`を`true`に設定します。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <FileInput placeholder="Please upload file" disabled />
 
   <InputGroup.Root disabled>
@@ -187,7 +187,7 @@ import { FileInput } from "@workspace/ui"
 読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <FileInput placeholder="Please upload file" readOnly />
 
   <InputGroup.Root readOnly>
@@ -208,7 +208,7 @@ import { FileInput } from "@workspace/ui"
 無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <FileInput placeholder="Please upload file" invalid />
 
   <InputGroup.Root invalid>
@@ -229,7 +229,7 @@ import { FileInput } from "@workspace/ui"
 ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <FileInput
     focusBorderColor="success"
     placeholder="Custom focus border color"
@@ -270,7 +270,7 @@ const onReset = () => {
 }
 
 return (
-  <VStack gap="md">
+  <VStack>
     <Text>files: {value?.length ?? 0}</Text>
 
     <InputGroup.Root>
@@ -294,70 +294,6 @@ return (
 )
 ```
 
-### React Hook Formを使う
+## Props
 
-```tsx preview functional client
-interface Data {
-  fileInput: File[] | undefined
-}
-
-const resetRef = useRef<() => void>(null)
-const {
-  control,
-  formState: { errors },
-  handleSubmit,
-  setValue,
-  watch,
-} = useForm<Data>()
-
-const onReset = () => {
-  setValue("fileInput", undefined)
-  resetRef.current?.()
-}
-const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-console.log("watch:", watch())
-
-return (
-  <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
-    <Field.Root
-      errorMessage={errors.fileInput?.message}
-      invalid={!!errors.fileInput}
-      label="Files"
-    >
-      <Controller
-        name="fileInput"
-        control={control}
-        render={({ field }) => (
-          <InputGroup.Root>
-            <FileInput multiple {...field} resetRef={resetRef} />
-
-            {field.value?.length ? (
-              <InputGroup.Element clickable onClick={onReset}>
-                <Center
-                  as="button"
-                  focusVisibleRing="outside"
-                  p="0.5"
-                  rounded="xs"
-                >
-                  <XIcon fontSize="xl" />
-                </Center>
-              </InputGroup.Element>
-            ) : null}
-          </InputGroup.Root>
-        )}
-        rules={{
-          required: {
-            message: "This is required.",
-            value: true,
-          },
-        }}
-      />
-    </Field.Root>
-
-    <Button type="submit" alignSelf="flex-end">
-      Submit
-    </Button>
-  </VStack>
-)
-```
+<PropsTable name="file-input" />

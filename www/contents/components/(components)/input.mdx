@@ -6,4 +6,257 @@ source: components/input
 style: components/input/input.style.ts
 ---
 
+```tsx preview
+<Input placeholder="Placeholder" />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Input, InputGroup } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Input, InputGroup } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Input, InputGroup } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Input />
+```
+
+```tsx
+<InputGroup.Root>
+  <InputGroup.Addon />
+  <Input />
+  <InputGroup.Element />
+</InputGroup.Root>
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <Input
+        key={variant}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size) => <Input key={size} size={size} placeholder={`Size (${size})`} />}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme) => (
+      <Input
+        key={colorScheme}
+        colorScheme={colorScheme}
+        placeholder={toTitleCase(colorScheme)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Disable
+
+To disable the input, set `disabled` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <Input
+        key={variant}
+        disabled
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Read-Only
+
+To read-only, set `readOnly` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <Input
+        key={variant}
+        readOnly
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Invalid
+
+To make invalid, set `invalid` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <Input
+        key={variant}
+        invalid
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Add Addons
+
+To add addons, wrap the `Input` in `InputGroup` and use `InputGroup.Addon`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <InputGroup.Root key={variant} variant={variant}>
+        <InputGroup.Addon>https://</InputGroup.Addon>
+        <Input placeholder="Your site address" />
+        <InputGroup.Addon>.com</InputGroup.Addon>
+      </InputGroup.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Add Elements
+
+To add elements, wrap the `Input` in `InputGroup` and use `InputGroup.Element`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <InputGroup.Root key={variant} variant={variant}>
+        <InputGroup.Element>
+          <PhoneIcon />
+        </InputGroup.Element>
+        <Input type="tel" placeholder="Your phone number" />
+      </InputGroup.Root>
+    )}
+  </For>
+</VStack>
+```
+
+### Change Type
+
+To change the type, set `type` to the [type](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types).
+
+```tsx preview
+<Input placeholder="Select Date and Time" type="datetime-local" />
+```
+
+### Change Border Color
+
+To change the border color, set `focusBorderColor` or `errorBorderColor` to the color.
+
+```tsx preview
+<VStack>
+  <Input focusBorderColor="green.500" placeholder="Custom focus border color" />
+  <Input
+    errorBorderColor="orange.500"
+    invalid
+    placeholder="Custom invalid border color"
+  />
+</VStack>
+```
+
+### Change Placeholder Color
+
+To change the placeholder color, set `_placeholder` to the props.
+
+```tsx preview
+<Input placeholder="Custom placeholder" _placeholder={{ color: "blue.500" }} />
+```
+
+### Floating Label
+
+```tsx preview
+<Field.Root>
+  <Input type="email" data-peer placeholder="" />
+  <Field.Label
+    css={{
+      bg: "bg",
+      fontSize: "sm",
+      fontWeight: "normal",
+      insetStart: "2",
+      pointerEvents: "none",
+      position: "absolute",
+      px: "1",
+      top: "-12px",
+      transitionDuration: "moderate",
+      transitionProperty: "top, color, font-size",
+      transitionTimingFunction: "ease-in-out",
+      zIndex: "yamcha",
+      _peerPlaceholderShown: {
+        color: "fg.subtle",
+        fontSize: "md",
+        insetStart: "2",
+        top: "5px",
+      },
+      _peerFocusVisible: {
+        color: "fg",
+        fontSize: "sm",
+        insetStart: "2",
+        top: "-12px",
+      },
+    }}
+  >
+    Email
+  </Field.Label>
+</Field.Root>
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState<string>("オッス！オラ悟空！")
+
+return <Input value={value} onChange={(ev) => setValue(ev.target.value)} />
+```
+
+## Props
+
+<PropsTable
+  name="input"
+  all
+  omit={["InputGroupRoot", "InputAddon", "InputElement"]}
+/>

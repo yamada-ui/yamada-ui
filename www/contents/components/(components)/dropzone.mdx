@@ -25,7 +25,7 @@ import { Dropzone } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Dropzone } from "@workspace/ui"
+import { Dropzone } from "@workspaces/ui"
 ```
 
 :::
@@ -308,9 +308,9 @@ To disable, set `disabled` to `true`.
 </VStack>
 ```
 
-### Make Read-Only
+### Read-Only
 
-To make read-only, set `readOnly` to `true`.
+To read-only, set `readOnly` to `true`.
 
 ```tsx preview
 <VStack>
@@ -326,9 +326,9 @@ To make read-only, set `readOnly` to `true`.
 </VStack>
 ```
 
-### Make Input Invalid
+### Invalid
 
-To make the input invalid, set `invalid` to `true`.
+To set invalid state, set `invalid` to `true`.
 
 ```tsx preview
 <VStack>
@@ -379,3 +379,7 @@ return (
   </VStack>
 )
 ```
+
+## Props
+
+<PropsTable name="dropzone" />

@@ -79,6 +79,17 @@
       "clientOnly": "If you use this code, you need to add <tag>\"use client\"</tag> to the top of the file.",
       "preview": "Preview",
       "code": "Code"
+    },
+    "propsTable": {
+      "prop": "Prop",
+      "default": "Default",
+      "type": "Type / Description"
+    },
+    "stylePropsTable": {
+      "prop": "Prop",
+      "description": "Description",
+      "property": "CSS Property",
+      "token": "Theme Token"
     }
   }
 }

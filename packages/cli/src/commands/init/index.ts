@@ -13,8 +13,10 @@ import {
   CONFIG_FILE_NAME,
   DEFAULT_CONFIG,
   DEFAULT_PACKAGE_JSON,
+  DEFAULT_PACKAGE_JSON_EXPORTS,
   DEFAULT_PACKAGE_NAME,
   DEFAULT_PATH,
+  REGISTRY_FILE_NAME,
   REQUIRED_DEPENDENCIES,
   REQUIRED_DEV_DEPENDENCIES,
   TSCONFIG_JSON,
@@ -26,10 +28,12 @@ import {
   getNotInstalledDependencies,
   getPackageJson,
   getPackageManager,
-  getPackageName,
+  getPackageNameWithVersion,
   installDependencies,
   packageAddArgs,
   timer,
+  transformExtension,
+  transformTsToJs,
   validateDir,
   writeFileSafe,
 } from "../../utils"
@@ -37,15 +41,22 @@ import {
 interface Options {
   config: string
   cwd: string
+  jsx: boolean
   overwrite: boolean
 }
 
 export const init = new Command("init")
-  .description("Initialize your project and install dependencies")
-  .option("--cwd <path>", "Current working directory", cwd)
-  .option("-c, --config <path>", "Path to the config file", CONFIG_FILE_NAME)
-  .option("-o, --overwrite", "Overwrite existing files.", false)
-  .action(async function ({ config: configPath, cwd, overwrite }: Options) {
+  .description("initialize your project and install dependencies")
+  .option("--cwd <path>", "current working directory", cwd)
+  .option("-c, --config <path>", "path to the config file", CONFIG_FILE_NAME)
+  .option("-o, --overwrite", "overwrite existing files.", false)
+  .option("-j, --jsx", "use jsx instead of tsx", false)
+  .action(async function ({
+    config: configPath,
+    cwd,
+    jsx,
+    overwrite,
+  }: Options) {
     const spinner = ora()
 
     try {
@@ -53,6 +64,7 @@ export const init = new Command("init")
 
       await validateDir(cwd)
 
+      const indexFileName = transformExtension("index.ts", jsx)
       const configFileName = configPath.includes("/")
         ? configPath.split("/").at(-1)!
         : configPath
@@ -130,7 +142,9 @@ export const init = new Command("init")
       packageName = packageName.replace(/\x17/g, "").trim()
       packageName ||= DEFAULT_PACKAGE_NAME
 
-      config.monorepo = monorepo
+      if (monorepo) config.monorepo = monorepo
+      if (jsx) config.jsx = jsx
+
       config.path = outdir
       config.format = { enabled: format }
       config.lint = { enabled: lint }
@@ -209,6 +223,7 @@ export const init = new Command("init")
                 const content = JSON.stringify({
                   name: packageName,
                   ...DEFAULT_PACKAGE_JSON,
+                  exports: DEFAULT_PACKAGE_JSON_EXPORTS[jsx ? "JSX" : "TSX"],
                 })
 
                 await writeFileSafe(
@@ -223,34 +238,29 @@ export const init = new Command("init")
             },
             {
               task: async (_, task) => {
-                const targetPath = path.resolve(outdirPath, "tsconfig.json")
-                const content = JSON.stringify({ ...TSCONFIG_JSON })
+                const targetPath = path.resolve(outdirPath, src ? "src" : "")
+                const registry = await fetchRegistry("index")
 
-                await writeFileSafe(
-                  targetPath,
-                  content,
-                  merge(config, { format: { parser: "json" } }),
-                )
+                let content = registry.sources[0]!.content!
 
-                task.title = `Generated ${c.cyan("tsconfig.json")}`
+                if (jsx) content = transformTsToJs(content)
+
+                await Promise.all([
+                  writeFileSafe(
+                    path.join(targetPath, indexFileName),
+                    content,
+                    config,
+                  ),
+                  writeFileSafe(
+                    path.join(targetPath, REGISTRY_FILE_NAME),
+                    JSON.stringify(registry),
+                    merge(config, { format: { parser: "json" } }),
+                  ),
+                ])
+
+                task.title = `Generated ${c.cyan(indexFileName)}`
               },
-              title: `Generating ${c.cyan("tsconfig.json")}`,
-            },
-            {
-              task: async (_, task) => {
-                const targetPath = path.resolve(
-                  outdirPath,
-                  src ? "src" : "",
-                  "index.ts",
-                )
-                const { sources } = await fetchRegistry("index")
-                const content = sources[0]!.content!
-
-                await writeFileSafe(targetPath, content, config)
-
-                task.title = `Generated ${c.cyan("index.ts")}`
-              },
-              title: `Generating ${c.cyan("index.ts")}`,
+              title: `Generating ${c.cyan(indexFileName)}`,
             },
             {
               task: async (_, task) => {
@@ -269,6 +279,24 @@ export const init = new Command("init")
           ],
           { concurrent: true },
         )
+
+        if (!jsx) {
+          tasks.add({
+            task: async (_, task) => {
+              const targetPath = path.resolve(outdirPath, "tsconfig.json")
+              const content = JSON.stringify({ ...TSCONFIG_JSON })
+
+              await writeFileSafe(
+                targetPath,
+                content,
+                merge(config, { format: { parser: "json" } }),
+              )
+
+              task.title = `Generated ${c.cyan("tsconfig.json")}`
+            },
+            title: `Generating ${c.cyan("tsconfig.json")}`,
+          })
+        }
 
         await tasks.run()
 
@@ -315,15 +343,28 @@ export const init = new Command("init")
             },
             {
               task: async (_, task) => {
-                const { sources } = await fetchRegistry("index")
-                const targetPath = path.resolve(outdirPath, "index.ts")
-                const content = sources[0]!.content!
+                const registry = await fetchRegistry("index")
 
-                await writeFileSafe(targetPath, content, config)
+                let content = registry.sources[0]!.content!
 
-                task.title = `Generated ${c.cyan("index.ts")}`
+                if (jsx) content = transformTsToJs(content)
+
+                await Promise.all([
+                  writeFileSafe(
+                    path.resolve(outdirPath, indexFileName),
+                    content,
+                    config,
+                  ),
+                  writeFileSafe(
+                    path.resolve(outdirPath, REGISTRY_FILE_NAME),
+                    JSON.stringify(registry),
+                    merge(config, { format: { parser: "json" } }),
+                  ),
+                ])
+
+                task.title = `Generated ${c.cyan(indexFileName)}`
               },
-              title: `Generating ${c.cyan("index.ts")}`,
+              title: `Generating ${c.cyan(indexFileName)}`,
             },
           ],
           { concurrent: true },
@@ -361,8 +402,12 @@ export const init = new Command("init")
           })
 
           if (install) {
-            dependencies = notInstalledDependencies.map(getPackageName)
-            devDependencies = notInstalledDevDependencies.map(getPackageName)
+            dependencies = notInstalledDependencies.map(
+              getPackageNameWithVersion,
+            )
+            devDependencies = notInstalledDevDependencies.map(
+              getPackageNameWithVersion,
+            )
           }
         }
       }

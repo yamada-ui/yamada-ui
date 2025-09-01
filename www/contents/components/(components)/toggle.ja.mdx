@@ -6,4 +6,255 @@ source: components/toggle
 style: components/toggle/toggle.style.ts
 ---
 
+```tsx preview
+<Toggle icon={<BoldIcon />} aria-label="Toggle bold" />
+```
+
 ## 使い方
+
+:::code-group
+
+```ts [Package]
+import { Toggle, ToggleGroup } from "@yamada-ui/react"
+```
+
+```ts [Alias]
+import { Toggle, ToggleGroup } from "@/components/ui"
+```
+
+```ts [Monorepo]
+import { Toggle, ToggleGroup } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Toggle />
+```
+
+```tsx
+<ToggleGroup.Root>
+  <ToggleGroup.Item />
+</ToggleGroup.Root>
+```
+
+### テキストと組み合わせる
+
+```tsx preview
+<Toggle px="4">
+  <ItalicIcon />
+  <Text as="span" fontSize="md">
+    Italic
+  </Text>
+</Toggle>
+```
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        colorScheme="primary"
+        variant={variant}
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### サイズを変更する
+
+```tsx preview
+<Wrap gap="md" alignItems="flex-start">
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size) => (
+      <Toggle
+        key={size}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        colorScheme="primary"
+        size={size}
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### カラースキーマを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["success", "warning"]}>
+    {(colorScheme) => (
+      <Toggle
+        key={colorScheme}
+        colorScheme={colorScheme}
+        aria-label="Toggle bold"
+        icon={<BoldIcon />}
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### 丸くする
+
+丸くする場合は、`fullRounded`を`true`に設定します。
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        fullRounded
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`にします。
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        disabled
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        readOnly
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### 無効な状態にする
+
+無効な状態にする場合は、`invalid`を`true`に設定します。
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["ghost", "subtle", "surface", "outline", "solid"]}>
+    {(variant) => (
+      <Toggle
+        key={variant}
+        icon={<BoldIcon />}
+        aria-label="Toggle bold"
+        variant={variant}
+        invalid
+      />
+    )}
+  </For>
+</Wrap>
+```
+
+### 無効な状態におけるボーダーの色を変更する
+
+ボーダーのカラーを変更する場合は、`errorBorderColor`にカラーを設定します。
+
+```tsx preview
+<Toggle
+  aria-label="Toggle bold"
+  errorBorderColor="orange.500"
+  icon={<BoldIcon />}
+  defaultChecked
+  invalid
+/>
+```
+
+### 制御する
+
+```tsx preview functional client
+const [checked, setChecked] = useState<boolean>(false)
+
+return (
+  <Toggle
+    icon={<BoldIcon />}
+    aria-label="Toggle bold"
+    checked={checked}
+    onChange={setChecked}
+  />
+)
+```
+
+### グループ化する
+
+```tsx preview
+<ToggleGroup.Root>
+  <ToggleGroup.Item value="bold" icon={<BoldIcon />} aria-label="Toggle bold" />
+  <ToggleGroup.Item
+    value="italic"
+    icon={<ItalicIcon />}
+    aria-label="Toggle italic"
+  />
+  <ToggleGroup.Item
+    value="underline"
+    icon={<UnderlineIcon />}
+    aria-label="Toggle underline"
+  />
+</ToggleGroup.Root>
+```
+
+複数選択の場合は、`value`または`defaultValue`を配列にします。
+
+```tsx preview functional client
+const [value, setValue] = useState<string[]>([])
+
+return (
+  <ToggleGroup.Root value={value} onChange={setValue}>
+    <ToggleGroup.Item
+      value="bold"
+      icon={<BoldIcon />}
+      aria-label="Toggle bold"
+    />
+    <ToggleGroup.Item
+      value="italic"
+      icon={<ItalicIcon />}
+      aria-label="Toggle italic"
+    />
+    <ToggleGroup.Item
+      value="underline"
+      icon={<UnderlineIcon />}
+      aria-label="Toggle underline"
+    />
+  </ToggleGroup.Root>
+)
+```
+
+## Props
+
+<PropsTable name="toggle" all omit={["ToggleGroupRoot"]} />

@@ -109,13 +109,27 @@ jobs:
         uses: tj-actions/changed-files@v46
         with:
           files: |
+            packages/workspace/src/eslint/**
+            packages/workspace/package.json
             scripts/**
             package.json
             tsconfig.json
             eslint.config.ts
 
+      - name: Check modified files
+        id: check-modified-www
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            packages/workspace/src/eslint/**
+            packages/workspace/package.json
+            www/**/*.{ts,tsx,mts,mdx}
+            www/package.json
+            www/tsconfig.json
+            www/eslint.config.ts
+
       - name: Install
-        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true'
+        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run lint
@@ -126,7 +140,13 @@ jobs:
         if: steps.check-modified-scripts.outputs.any_changed == 'true'
         run: pnpm lint:scripts
 
-  type_script:
+      - name: Run lint
+        if: steps.check-modified-www.outputs.any_changed == 'true'
+        run: |
+          pnpm www build:content
+          pnpm www lint
+
+  typescript:
     name: TypeScript
     runs-on: ubuntu-latest
     steps:
@@ -146,12 +166,25 @@ jobs:
         uses: tj-actions/changed-files@v46
         with:
           files: |
+            packages/workspace/src/typescript/**
+            packages/workspace/package.json
             scripts/**
             package.json
             tsconfig.json
 
+      - name: Check modified files
+        id: check-modified-www
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            packages/workspace/src/typescript/**
+            packages/workspace/package.json
+            www/**/*.{ts,tsx,mts}
+            www/package.json
+            www/tsconfig.json
+
       - name: Install
-        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true'
+        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run typecheck
@@ -161,6 +194,12 @@ jobs:
       - name: Run typecheck
         if: steps.check-modified-scripts.outputs.any_changed == 'true'
         run: pnpm typecheck:scripts
+
+      - name: Run typecheck
+        if: steps.check-modified-www.outputs.any_changed == 'true'
+        run: |
+          pnpm www build:content
+          pnpm www typecheck
 
   prettier:
     name: Prettier
@@ -183,12 +222,25 @@ jobs:
         uses: tj-actions/changed-files@v46
         with:
           files: |
+            packages/workspace/src/prettier/**
+            packages/workspace/package.json
             scripts/**
             .prettierignore
             .prettierrc.js
 
+      - name: Check modified files
+        id: check-modified-www
+        uses: tj-actions/changed-files@v46
+        with:
+          files: |
+            packages/workspace/src/prettier/**
+            packages/workspace/package.json
+            www/**
+            .prettierignore
+            .prettierrc.js
+
       - name: Install
-        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true'
+        if: steps.check-modified-packages.outputs.any_changed == 'true' || steps.check-modified-scripts.outputs.any_changed == 'true' || steps.check-modified-www.outputs.any_changed == 'true'
         uses: ./.github/composite-actions/install
 
       - name: Run format
@@ -198,3 +250,9 @@ jobs:
       - name: Run format
         if: steps.check-modified-scripts.outputs.any_changed == 'true'
         run: pnpm format:scripts
+
+      - name: Run format
+        if: steps.check-modified-www.outputs.any_changed == 'true'
+        run: |
+          pnpm www build:content
+          pnpm www format

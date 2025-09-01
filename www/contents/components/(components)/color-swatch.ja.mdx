@@ -23,7 +23,7 @@ import { ColorSwatch } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { ColorSwatch } from "@workspace/ui"
+import { ColorSwatch } from "@workspaces/ui"
 ```
 
 :::
@@ -84,7 +84,7 @@ import { ColorSwatch } from "@workspace/ui"
 
 ### グループ化する
 
-複数の色を含む見本を作成するには、`ColorSwatchGroup`を使用します。
+複数の色を含む見本を作成する場合は、`ColorSwatchGroup`を使用します。
 
 ```tsx preview
 <Wrap gap="md">
@@ -95,3 +95,7 @@ import { ColorSwatch } from "@workspace/ui"
   <ColorSwatchGroup items={[]} />
 </Wrap>
 ```
+
+## Props
+
+<PropsTable name="color-swatch" />

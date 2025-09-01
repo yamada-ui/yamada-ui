@@ -6,4 +6,144 @@ source: components/progress
 style: components/progress/progress.style.ts
 ---
 
+```tsx preview
+<Progress value={50} />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Progress } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Progress } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Progress } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Progress value={50} />
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["outline", "subtle"]}>
+    {(variant, index) => (
+      <Progress
+        key={index}
+        aria-label="Storage space"
+        colorScheme="success"
+        variant={variant}
+        value={50}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <Progress key={index} aria-label="Storage space" value={31} size={size} />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<Progress aria-label="Storage space" colorScheme="purple" value={18} />
+```
+
+### Change Shape
+
+```tsx preview
+<VStack>
+  <For each={["rounded", "square", "circle"]}>
+    {(shape, index) => (
+      <Progress
+        key={index}
+        aria-label="Storage space"
+        shape={shape}
+        value={50}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Range Color
+
+To change the range color, set `rangeColor` to a color.
+
+```tsx preview
+<Progress aria-label="Storage space" rangeColor="green.500" value={18} />
+```
+
+### Change Track Color
+
+To change the track color, set `trackColor` to a color.
+
+```tsx preview
+<Progress
+  aria-label="Storage space"
+  trackColor="green/50"
+  rangeColor="green"
+  value={50}
+/>
+```
+
+### Stripes
+
+To use stripes, set `striped` to `true`.
+
+```tsx preview
+<Progress aria-label="Storage space" striped value={19} />
+```
+
+### Animated Stripes
+
+To use animated stripes, set `animated` to `true`.
+
+```tsx preview
+<Progress aria-label="Storage space" striped animated value={20} />
+```
+
+### Change Duration
+
+To change the duration, set `duration` to a number (seconds) or a string.
+
+```tsx preview
+<Progress
+  aria-label="Storage space"
+  striped
+  animated
+  duration="3s"
+  value={50}
+/>
+```
+
+### Use Animation
+
+To use animation, set `value` to `null`.
+
+```tsx preview
+<Progress value={null} />
+```
+
+## Props
+
+<PropsTable name="progress" />

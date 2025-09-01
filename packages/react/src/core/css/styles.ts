@@ -1251,7 +1251,7 @@ export const standardStyles = {
   opacity: true,
   order: true,
   orphans: true,
-  outline: {},
+  outline: true,
   outlineColor: {
     properties: ["outlineColor"],
     token: "colors",
@@ -1948,12 +1948,12 @@ export const styledStyles = {
 export type AtRuleStyleProperty = keyof typeof atRuleStyles
 
 export const atRuleStyles = {
-  keyframes: {
+  _container: { transform: transforms.container },
+  _keyframes: {
     properties: ["animationName"],
     token: "keyframes",
     transform: pipe(transforms.token("keyframes"), transforms.keyframes),
   },
-  _container: { transform: transforms.container },
   _landscape: { properties: ["@media (orientation: landscape)"] },
   _media: { transform: transforms.media },
   _mediaDark: { properties: ["@media (prefers-color-scheme: dark)"] },
@@ -2135,7 +2135,7 @@ export const gradientProperties = [
 
 export type KeyframeProperty = (typeof keyframeProperties)[number]
 
-export const keyframeProperties = ["animationName", "keyframes"] as const
+export const keyframeProperties = ["animationName", "_keyframes"] as const
 
 export type RadiusProperty = (typeof radiusProperties)[number]
 
@@ -2288,13 +2288,6 @@ export const zIndexProperties = ["zIndex", "z"] as const
 export interface StyleProps {
   /**
    * Apply other styles defined in `theme.styles`.
-   *
-   * @example
-   * ```jsx
-   * <Box apply='mdx.h1'>Box</Box>
-   * ```
-   *
-   * This will apply styles defined in `theme.styles.mdx.h1`
    */
   apply?: StyleValueWithCondition<AnyString, "apply">
   /**
@@ -4626,7 +4619,6 @@ export interface StyleProps {
    *
    * The <code>clip</code> CSS property sets the visible area of an absolutely positioned element.
    *
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/clip
    *
    * @deprecated
@@ -4672,7 +4664,6 @@ export interface StyleProps {
    * ### color-adjust
    *
    * The <code>color-adjust</code> shorthand CSS property allows multiple performance related color adjustments to be set at once. Setting the <code>print-color-adjust</code> CSS property directly is preferred, as it is the only such adjustment so far defined.
-   *
    *
    * @see https://drafts.csswg.org/css-color-adjust-1/#color-adjust
    *
@@ -5576,7 +5567,6 @@ export interface StyleProps {
    *
    * The <code>font-stretch</code> CSS property selects a font face from a font family based on width, either by a keyword such as <code>condensed</code> or a percentage.
    *
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/font-stretch
    *
    * @deprecated
@@ -5843,7 +5833,6 @@ export interface StyleProps {
    *
    * The SVG 1.1 image format has several components that were excluded from SVG 2, such as fonts, alternate glyphs, and the <code>xlink</code> namespace.
    *
-   *
    * @see https://developer.mozilla.org/docs/Web/SVG/Reference/Attribute/glyph-orientation-horizontal
    *
    * @deprecated
@@ -5853,7 +5842,6 @@ export interface StyleProps {
    * ### glyph-orientation-vertical
    *
    * The <code>glyph-orientation-vertical</code> CSS property sets the orientation of glyphs in text rendered in a vertical writing mode.
-   *
    *
    * @see https://drafts.csswg.org/css-writing-modes-4/#glyph-orientation
    *
@@ -6170,7 +6158,6 @@ export interface StyleProps {
    * ### ime-mode
    *
    * The <code>ime-mode</code> CSS property sets the state of the input method editor for text fields.
-   *
    *
    * @see https://drafts.csswg.org/css-ui/#input-method-editor
    *
@@ -7415,6 +7402,17 @@ export interface StyleProps {
    */
   orphans?: StyleValueWithCondition<CSS.Property.Orphans>
   /**
+   * ### outline
+   *
+   * The <code>outline</code> CSS shorthand sets the color, style, and width of a line around an element, outside of the border.
+   *
+   * @baseline `Newly available`
+   * @newly_available_date 2023-03-27
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/outline
+   */
+  outline?: StyleValueWithCondition<CSS.Property.Outline>
+  /**
    * ### outline-color
    *
    * The <code>outline-color</code>, <code>outline-style</code>, and <code>outline-width</code> and <code>outline-offset</code> CSS properties style a line around an element, outside of the border.
@@ -7881,7 +7879,6 @@ export interface StyleProps {
    *
    * The <code>page-break-before</code>, <code>page-break-inside</code>, and <code>page-break-after</code> CSS properties are aliases to the <code>break-before</code>, <code>break-inside</code>, and <code>break-after</code> properties.
    *
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/page-break-after
    *
    * @deprecated
@@ -7892,7 +7889,6 @@ export interface StyleProps {
    *
    * The <code>page-break-before</code>, <code>page-break-inside</code>, and <code>page-break-after</code> CSS properties are aliases to the <code>break-before</code>, <code>break-inside</code>, and <code>break-after</code> properties.
    *
-   *
    * @see https://developer.mozilla.org/docs/Web/CSS/page-break-before
    *
    * @deprecated
@@ -7902,7 +7898,6 @@ export interface StyleProps {
    * ### page-break-inside
    *
    * The <code>page-break-before</code>, <code>page-break-inside</code>, and <code>page-break-after</code> CSS properties are aliases to the <code>break-before</code>, <code>break-inside</code>, and <code>break-after</code> properties.
-   *
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/page-break-inside
    *
@@ -10278,29 +10273,7 @@ export interface StyleProps {
    */
   invert?: StyleValueWithCondition<AnyString>
   /**
-   * ### keyframes
-   *
-   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
-   *
-   * @baseline `Widely available`
-   * @widely_available_date 2018-03-30
-   * @newly_available_date 2015-09-30
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/@keyframes
-   */
-  keyframes?: StyleValueWithCondition<
-    AnyString | { [key: string]: CSSObject },
-    "keyframes"
-  >
-  /**
    * Used to visually truncate a text after a number of lines.
-   * ### line-clamp
-   *
-   * The <code>line-clamp</code> CSS property limits the text in a block container to a certain number of lines. The prefixed <code>-webkit-line-clamp</code> is widely supported but only works with <code>-webkit-box-orient: vertical</code> in combination with <code>display: -webkit-box</code> or <code>display: -webkit-inline-box</code>.
-   *
-   * @baseline `Limited available`
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/line-clamp
    */
   lineClamp?: StyleValueWithCondition<number>
   /**
@@ -10464,19 +10437,6 @@ export interface StyleProps {
   my?: StyleValueWithCondition<
     CSS.Property.MarginBottom | CSS.Property.MarginTop | number,
     "spaces"
-  >
-  /**
-   * ### outline
-   *
-   * The <code>outline</code> CSS shorthand sets the color, style, and width of a line around an element, outside of the border.
-   *
-   * @baseline `Newly available`
-   * @newly_available_date 2023-03-27
-   *
-   * @see https://developer.mozilla.org/docs/Web/CSS/outline
-   */
-  outline?: StyleValueWithCondition<
-    "inside" | "mixed" | "outside" | CSS.Property.Outline
   >
   /**
    * ### padding-inline-end
@@ -10832,6 +10792,21 @@ export interface StyleProps {
     w?: CSS.Property.Width | number | ThemeTokens["sizes"]
     width?: CSS.Property.Width | number | ThemeTokens["sizes"]
   }[]
+  /**
+   * ### keyframes
+   *
+   * The <code>animation</code> CSS property animates an element's style over time, using keyframes described in <code>@keyframes</code> rules.
+   *
+   * @baseline `Widely available`
+   * @widely_available_date 2018-03-30
+   * @newly_available_date 2015-09-30
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/@keyframes
+   */
+  _keyframes?: StyleValueWithCondition<
+    AnyString | { [key: string]: CSSObject },
+    "keyframes"
+  >
   /**
    * ### media
    *

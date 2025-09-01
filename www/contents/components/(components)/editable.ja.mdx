@@ -26,7 +26,7 @@ import { Editable } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Editable } from "@workspace/ui"
+import { Editable } from "@workspaces/ui"
 ```
 
 :::
@@ -44,9 +44,7 @@ import { Editable } from "@workspace/ui"
 </Editable.Root>
 ```
 
-### テキストエリアを使用する
-
-複数行にする場合は、`Editable.Textarea`を使用します。
+### テキストエリアを使う
 
 ```tsx preview
 <Editable.Root defaultValue={`おやつ…って事!?\nそれって最高じゃん!!`}>
@@ -93,7 +91,7 @@ import { Editable } from "@workspace/ui"
 ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <Editable.Root
     defaultValue="Custom focus border color"
     focusBorderColor="green.500"
@@ -118,7 +116,7 @@ import { Editable } from "@workspace/ui"
 無効にする場合は、`disabled`を`true`に設定します。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <Editable.Root defaultValue="Your email address" disabled>
     <Editable.Preview />
     <Editable.Input />
@@ -142,7 +140,7 @@ import { Editable } from "@workspace/ui"
 読み取り専用にする場合は、`readOnly`を`true`に設定します。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <Editable.Root defaultValue="Your email address" readOnly>
     <Editable.Preview />
     <Editable.Input />
@@ -166,7 +164,7 @@ import { Editable } from "@workspace/ui"
 無効な入力にする場合は、`invalid`を`true`に設定します。
 
 ```tsx preview
-<VStack gap="md">
+<VStack>
   <Editable.Root defaultValue="Your email address" invalid>
     <Editable.Preview />
     <Editable.Input />
@@ -261,82 +259,6 @@ return (
 )
 ```
 
-### React Hook Formを使う
+## Props
 
-```tsx preview functional client
-interface Data {
-  input: string
-  textarea: string
-}
-
-const defaultValues: Data = {
-  input: "",
-  textarea: "",
-}
-
-const {
-  control,
-  formState: { errors },
-  handleSubmit,
-  watch,
-} = useForm<Data>({
-  defaultValues,
-})
-const onSubmit: SubmitHandler<Data> = (data) => console.log("submit:", data)
-
-console.log("watch:", watch())
-
-return (
-  <VStack as="form" onSubmit={handleSubmit(onSubmit)} gap="md">
-    <Field.Root
-      errorMessage={errors.input?.message}
-      invalid={!!errors.input}
-      label="Name"
-    >
-      <Controller
-        name="input"
-        control={control}
-        render={({ field }) => (
-          <Editable.Root placeholder="ハチワレ" {...field}>
-            <Editable.Preview />
-            <Editable.Input />
-          </Editable.Root>
-        )}
-        rules={{
-          required: {
-            message: "This is required.",
-            value: true,
-          },
-        }}
-      />
-    </Field.Root>
-
-    <Field.Root
-      errorMessage={errors.textarea?.message}
-      invalid={!!errors.textarea}
-      label="Feedback"
-    >
-      <Controller
-        name="textarea"
-        control={control}
-        render={({ field }) => (
-          <Editable.Root placeholder="なんとかなれーッ！" {...field}>
-            <Editable.Preview />
-            <Editable.Textarea />
-          </Editable.Root>
-        )}
-        rules={{
-          required: {
-            message: "This is required.",
-            value: true,
-          },
-        }}
-      />
-    </Field.Root>
-
-    <Button type="submit" alignSelf="flex-end">
-      Submit
-    </Button>
-  </VStack>
-)
-```
+<PropsTable name="editable" />

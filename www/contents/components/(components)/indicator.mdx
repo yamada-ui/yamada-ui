@@ -6,4 +6,248 @@ source: components/indicator
 style: components/indicator/indicator.style.ts
 ---
 
+```tsx preview
+<Wrap gap="lg">
+  <Indicator label="New" colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430"
+    />
+  </Indicator>
+
+  <Indicator colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430"
+      shape="rounded"
+    />
+  </Indicator>
+</Wrap>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Indicator } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Indicator } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Indicator } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Indicator />
+```
+
+### Change Variant
+
+```tsx preview
+<Wrap gap="lg">
+  <For each={["solid", "subtle", "surface"]}>
+    {(variant, index) => (
+      <Indicator key={index} variant={variant} label="New" colorScheme="info">
+        <Avatar
+          name="Hirotomo Yamada"
+          src="https://avatars.githubusercontent.com/u/84060430"
+        />
+      </Indicator>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Size
+
+```tsx preview
+<Wrap gap="lg">
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <Indicator key={index} size={size} label="New" colorScheme="info">
+        <Avatar
+          name="Hirotomo Yamada"
+          src="https://avatars.githubusercontent.com/u/84060430"
+        />
+      </Indicator>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<Wrap gap="lg">
+  <For each={["success", "warning"]}>
+    {(colorScheme, index) => (
+      <Indicator key={index} colorScheme={colorScheme} label="New">
+        <Avatar
+          name="Hirotomo Yamada"
+          src="https://avatars.githubusercontent.com/u/84060430"
+        />
+      </Indicator>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Display Position
+
+If you want to change the display position of the indicator, specify `start-end`, `center-end`, etc. for `placement`.
+
+```tsx preview functional
+const placements = [
+  "start-start",
+  "start-center",
+  "start-end",
+  "center-start",
+  "center-center",
+  "center-end",
+  "end-start",
+  "end-center",
+  "end-end",
+] as const
+
+return (
+  <Grid gap="lg" p="lg" templateColumns="repeat(3, 1fr)" w="fit-content">
+    <For each={placements}>
+      {(placement, index) => (
+        <Indicator
+          key={index}
+          label="New"
+          placement={placement}
+          colorScheme="info"
+        >
+          <Avatar
+            name="Hirotomo Yamada"
+            src="https://avatars.githubusercontent.com/u/84060430?v=4"
+          />
+        </Indicator>
+      )}
+    </For>
+  </Grid>
+)
+```
+
+### Change Offset
+
+To change the offset, set a value to `offset`.
+
+```tsx preview
+<Wrap>
+  <Indicator offset="1.5" colorScheme="info">
+    <Avatar
+      size="xl"
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    />
+  </Indicator>
+</Wrap>
+```
+
+### Set Maximum Value
+
+To set a maximum value, set a numeric value to `overflowCount`.
+
+```tsx preview
+<Wrap>
+  <Indicator label={100} overflowCount={99} colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    />
+  </Indicator>
+</Wrap>
+```
+
+### Hide Zero
+
+To hide zero, set `showZero` to `false`.
+
+```tsx preview
+<Wrap gap="lg">
+  <Indicator label={0} colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    />
+  </Indicator>
+
+  <Indicator label={0} showZero={false} colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    />
+  </Indicator>
+</Wrap>
+```
+
+### Show Border
+
+To show a border, set `withBorder` to `true`.
+
+```tsx preview
+<Wrap>
+  <Indicator withBorder colorScheme="info" label="New">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430?v=4"
+    />
+  </Indicator>
+</Wrap>
+```
+
+### Highlighting
+
+To highlight, set `ping` to `true`.
+
+```tsx preview
+<Wrap gap="lg">
+  <Indicator
+    ping={{
+      scale: 1.4,
+    }}
+    label="New"
+    colorScheme="info"
+  >
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430"
+    />
+  </Indicator>
+
+  <Indicator ping colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430"
+      shape="rounded"
+    />
+  </Indicator>
+</Wrap>
+```
+
+### Hide Indicator
+
+To hide the indicator, set `disabled` to `true`.
+
+```tsx preview
+<Wrap>
+  <Indicator disabled label="New" colorScheme="info">
+    <Avatar
+      name="Hirotomo Yamada"
+      src="https://avatars.githubusercontent.com/u/84060430"
+    />
+  </Indicator>
+</Wrap>
+```
+
+## Props
+
+<PropsTable name="indicator" />

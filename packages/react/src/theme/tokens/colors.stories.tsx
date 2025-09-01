@@ -45,7 +45,7 @@ export const Basic = () => {
                       <Box
                         bg={`${colorScheme}.${tone}`}
                         h="12"
-                        rounded="md"
+                        rounded="l2"
                         w="full"
                       />
                       <Text
@@ -83,7 +83,7 @@ export const Basic = () => {
                       <Box
                         bg={`${colorScheme}.${tone}`}
                         h="12"
-                        rounded="md"
+                        rounded="l2"
                         w="full"
                       />
                       <Text
@@ -130,7 +130,7 @@ export const Basic = () => {
                     borderColor="border.muted"
                     borderWidth="1px"
                     h="24"
-                    rounded="md"
+                    rounded="l2"
                     w="full"
                   />
 
@@ -176,7 +176,7 @@ export const Basic = () => {
                     borderColor="border.muted"
                     borderWidth="1px"
                     h="24"
-                    rounded="md"
+                    rounded="l2"
                     w="full"
                   >
                     <Text color={value ? `fg.${value}` : "fg"}>Ag</Text>
@@ -223,7 +223,7 @@ export const Basic = () => {
                     borderColor={value ? `border.${value}` : "border"}
                     borderWidth="3px"
                     h="24"
-                    rounded="md"
+                    rounded="l2"
                     w="full"
                   />
 
@@ -272,7 +272,7 @@ export const Basic = () => {
                         borderColor="border.muted"
                         borderWidth="1px"
                         h="24"
-                        rounded="md"
+                        rounded="l2"
                         w="full"
                       />
 

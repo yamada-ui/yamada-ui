@@ -12,13 +12,17 @@ function transformCode(
   text: string,
   code: FC = (props) => <Code {...props} />,
 ): ReactNode {
-  return text.split(/`([^`]+)`/).map((children, index) => {
-    if (index % 2 === 1) {
-      return code({ key: index, children })
-    } else {
-      return children
-    }
-  })
+  return text
+    .replace(/```([^`]+)```/g, "")
+    .replace(/\*\*([^`]+)\*\*/g, "$1")
+    .split(/`([^`]+)`/)
+    .map((children, index) => {
+      if (index % 2 === 1) {
+        return code({ key: index, children })
+      } else {
+        return children
+      }
+    })
 }
 
 export interface TextToHtmlOptions {

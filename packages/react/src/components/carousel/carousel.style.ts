@@ -9,14 +9,14 @@ export const carouselStyle = defineComponentSlotStyle({
       transitionDuration: "moderate",
       transitionProperty: "common",
       _horizontal: { w: "10" },
-      _selected: {
-        bg: "colorScheme.solid",
-      },
       _vertical: { h: "10" },
       _hover: {
         _notSelected: {
           bg: "colorScheme.solid/70",
         },
+      },
+      _selected: {
+        bg: "colorScheme.solid",
       },
       _disabled: {
         layerStyle: "disabled",

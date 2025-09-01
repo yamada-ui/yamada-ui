@@ -5,14 +5,24 @@ import type {
   Registry,
   RegistrySection,
   Section,
+  Source,
 } from "../index.type"
-import { readdir } from "fs/promises"
+import { merge } from "@yamada-ui/utils"
+import { readdir, readFile } from "fs/promises"
 import { HttpsProxyAgent } from "https-proxy-agent"
 import fetch from "node-fetch"
 import path from "path"
 import c from "picocolors"
-import { REGISTRY_URL, SECTION_NAMES } from "../constant"
+import { REGISTRY_FILE_NAME, REGISTRY_URL, SECTION_NAMES } from "../constant"
 import { writeFileSafe } from "./fs"
+import { lintText } from "./lint"
+import { formatText } from "./prettier"
+import {
+  isJsx,
+  transformExtension,
+  transformTsToJs,
+  transformTsxToJsx,
+} from "./typescript"
 
 const agent = process.env.https_proxy
   ? new HttpsProxyAgent(process.env.https_proxy)
@@ -127,7 +137,7 @@ export async function fetchRegistries(
         const { dependencies, dependents, section } = results[name]
         const target: string[] = []
 
-        if (section === "root" || section === "theme") return
+        if (!config.isSection(section)) return
 
         withDependencies =
           withDependencies && (config[section]?.dependents ?? true)
@@ -162,13 +172,17 @@ export function pruneRegistry() {
   registryStore.clear()
 }
 
+export async function fetchLocaleRegistry(path: string) {
+  return JSON.parse(await readFile(path, "utf-8")) as Registry
+}
+
 export async function getGeneratedNameMap(
   config: Config,
 ): Promise<{ [key in Section]: string[] }> {
   const results: [Section, string[]][] = await Promise.all(
     SECTION_NAMES.map(async (section) => {
       try {
-        const sectionPath = config.getSectionAbsolutePath(section)
+        const sectionPath = config.getSectionResolvedPath(section)
         const dirents = await readdir(sectionPath, { withFileTypes: true })
 
         return [
@@ -263,6 +277,32 @@ export function transformContent(
   return content
 }
 
+export async function transformContentWithFormatAndLint(
+  filePath: string,
+  section: RegistrySection,
+  content: string,
+  config: Config,
+  generatedNames: string[],
+) {
+  const { cwd, format, jsx, lint } = config
+
+  content = transformContent(section, content, config, generatedNames)
+
+  if (jsx)
+    content = isJsx(filePath)
+      ? transformTsxToJsx(content)
+      : transformTsToJs(content)
+
+  content = await lintText(content, {
+    ...lint,
+    cwd,
+    filePath,
+  })
+  content = await formatText(content, format)
+
+  return content
+}
+
 export function transformTemplateContent(template: string, data: Dict) {
   let content = template
 
@@ -273,39 +313,7 @@ export function transformTemplateContent(template: string, data: Dict) {
   return content
 }
 
-export async function generateSources(
-  dirPath: string,
-  { section, sources }: Registry,
-  config: Config,
-  generatedNames: string[] = [],
-) {
-  await Promise.all(
-    sources.map(async ({ name: fileName, content, data, template }) => {
-      const targetPath = path.resolve(dirPath, fileName)
-
-      if (content) {
-        content = transformContent(section, content, config, generatedNames)
-
-        await writeFileSafe(targetPath, content, config)
-      } else if (template && data) {
-        await Promise.all(
-          data.map(async ({ name: fileName, ...rest }) => {
-            content = transformTemplateContent(template, rest)
-            content = transformContent(section, content, config, generatedNames)
-
-            await writeFileSafe(
-              path.resolve(targetPath, fileName),
-              content,
-              config,
-            )
-          }),
-        )
-      }
-    }),
-  )
-}
-
-export function replaceIndex(
+export function transformIndex(
   generatedNames: string[],
   content: string,
   { getSection }: Config,
@@ -346,4 +354,83 @@ export function replaceIndex(
   })
 
   return content
+}
+
+export async function transformIndexWithFormatAndLint(
+  content: string,
+  config: Config,
+  generatedNames: string[],
+) {
+  const { cwd, format, indexPath, jsx, lint } = config
+
+  content = transformIndex(generatedNames, content, config)
+
+  if (jsx) content = transformTsToJs(content)
+
+  content = await lintText(content, {
+    ...lint,
+    cwd,
+    filePath: indexPath,
+  })
+  content = await formatText(content, format)
+
+  return content
+}
+
+export async function generateSource(
+  dirPath: string,
+  section: RegistrySection,
+  { name: fileName, content, data, template }: Source,
+  config: Config,
+  generatedNames: string[] = [],
+) {
+  fileName = transformExtension(fileName, config.jsx)
+
+  const targetPath = path.resolve(dirPath, fileName)
+
+  if (content) {
+    content = transformContent(section, content, config, generatedNames)
+
+    if (config.jsx)
+      content = isJsx(fileName)
+        ? transformTsxToJsx(content)
+        : transformTsToJs(content)
+
+    await writeFileSafe(targetPath, content, config)
+  } else if (template && data) {
+    await Promise.all(
+      data.map(async ({ name: fileName, ...rest }) => {
+        fileName = transformExtension(fileName, config.jsx)
+
+        let content = transformTemplateContent(template, rest)
+
+        content = transformContent(section, content, config, generatedNames)
+
+        if (config.jsx)
+          content = isJsx(fileName)
+            ? transformTsxToJsx(content)
+            : transformTsToJs(content)
+
+        await writeFileSafe(path.resolve(targetPath, fileName), content, config)
+      }),
+    )
+  }
+}
+
+export async function generateSources(
+  dirPath: string,
+  registry: Registry,
+  config: Config,
+  generatedNames: string[] = [],
+) {
+  await Promise.all([
+    ...registry.sources.map((source) =>
+      generateSource(dirPath, registry.section, source, config, generatedNames),
+    ),
+    writeFileSafe(
+      path.resolve(dirPath, REGISTRY_FILE_NAME),
+      JSON.stringify(registry),
+      merge(config, { format: { parser: "json" } }),
+    ),
+  ])
 }

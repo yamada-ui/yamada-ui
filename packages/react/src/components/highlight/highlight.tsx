@@ -40,20 +40,35 @@ export const Highlight: FC<HighlightProps> = ({
   ...rest
 }) => {
   const chunks = useHighlight({ query, text })
+  const { colorScheme } = rest
 
-  const Component: FC = fragment ? Fragment : Text
-
-  return (
-    <Component {...rest}>
-      {chunks.map(({ match, text }, index) =>
-        match ? (
-          <Mark key={index} {...markProps}>
-            {text}
-          </Mark>
-        ) : (
-          <Fragment key={index}>{text}</Fragment>
-        ),
-      )}
-    </Component>
-  )
+  if (fragment) {
+    return (
+      <>
+        {chunks.map(({ match, text }, index) =>
+          match ? (
+            <Mark key={index} colorScheme={colorScheme} {...markProps}>
+              {text}
+            </Mark>
+          ) : (
+            <Fragment key={index}>{text}</Fragment>
+          ),
+        )}
+      </>
+    )
+  } else {
+    return (
+      <Text {...rest}>
+        {chunks.map(({ match, text }, index) =>
+          match ? (
+            <Mark key={index} colorScheme={colorScheme} {...markProps}>
+              {text}
+            </Mark>
+          ) : (
+            <Fragment key={index}>{text}</Fragment>
+          ),
+        )}
+      </Text>
+    )
+  }
 }

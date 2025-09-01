@@ -3,17 +3,20 @@ import type { UserConfig } from "./index.type"
 import { splitVersion } from "./utils"
 
 export const CONFIG_FILE_NAME = "ui.json"
+export const REGISTRY_FILE_NAME = "registry.json"
+export const THEME_PATH = "./theme"
 export const DEFAULT_PACKAGE_NAME = "@workspaces/ui"
 export const REGISTRY_URL = "https://v2.yamada-ui.com/registry/v2"
 export const DEFAULT_PATH = {
   components: "./components",
   hooks: "./hooks",
   monorepo: "./workspaces/ui",
-  polyrepo: "./ui",
+  polyrepo: "./components/ui",
   providers: "./providers",
 }
 export const SECTION_NAMES = ["components", "hooks", "providers"] as const
 export const DEFAULT_CONFIG: UserConfig = {
+  $schema: `${REGISTRY_URL}/config.schema.json`,
   components: { overwrite: true },
   hooks: { overwrite: true },
   providers: { overwrite: true },
@@ -33,18 +36,26 @@ export const DEFAULT_PACKAGE_JSON = {
   type: "module",
   private: true,
   scripts: {},
-  exports: {
-    ".": "./src/index.ts",
-    "./components/*": "./src/components/*/index.ts",
-    "./hooks/*": "./src/hooks/*/index.ts",
-    "./providers/*": "./src/providers/*/index.ts",
-  },
   dependencies: Object.fromEntries(
     REQUIRED_DEPENDENCIES.map((dependency) => splitVersion(dependency)),
   ),
   devDependencies: Object.fromEntries(
     REQUIRED_DEV_DEPENDENCIES.map((dependency) => splitVersion(dependency)),
   ),
+}
+export const DEFAULT_PACKAGE_JSON_EXPORTS = {
+  TSX: {
+    ".": "./src/index.ts",
+    "./components/*": "./src/components/*/index.ts",
+    "./hooks/*": "./src/hooks/*/index.ts",
+    "./providers/*": "./src/providers/*/index.ts",
+  },
+  JSX: {
+    ".": "./src/index.js",
+    "./components/*": "./src/components/*/index.js",
+    "./hooks/*": "./src/hooks/*/index.js",
+    "./providers/*": "./src/providers/*/index.js",
+  },
 }
 export const TSCONFIG_JSON = {
   compilerOptions: {

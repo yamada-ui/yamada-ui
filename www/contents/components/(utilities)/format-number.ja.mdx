@@ -23,7 +23,7 @@ import { FormatNumber } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { FormatNumber } from "@workspace/ui"
+import { FormatNumber } from "@workspaces/ui"
 ```
 
 :::
@@ -63,7 +63,7 @@ import { FormatNumber } from "@workspace/ui"
 
 #### プロジェクト全体のロケールを設定する
 
-アプリケーション全体のロケールの設定をしたい場合は、`UIProvider`の`locale`に値を設定します。
+アプリケーション全体のロケールの設定をする場合は、`UIProvider`の`locale`に値を設定します。
 
 ```tsx
 import { UIProvider } from "@yamada-ui/react"
@@ -192,3 +192,7 @@ const App = () => {
   <FormatNumber value={-1234.5} signDisplay="exceptZero" />
 </VStack>
 ```
+
+## Props
+
+<PropsTable name="format-number" />

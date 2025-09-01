@@ -10,11 +10,11 @@ style: components/collapse/collapse.style.ts
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack align="flex-start" gap={0}>
+  <VStack align="flex-start" gap="0">
     <Button onClick={toggle}>Please Click</Button>
 
     <Collapse open={open}>
-      <Box borderWidth={1} mt="md" p="md" rounded="l2" w="full">
+      <Box borderWidth={1} mt="lg" p="md" rounded="l2" w="full">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>
     </Collapse>
@@ -35,7 +35,7 @@ import { Collapse } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Collapse } from "@workspace/ui"
+import { Collapse } from "@workspaces/ui"
 ```
 
 :::
@@ -52,11 +52,11 @@ import { Collapse } from "@workspace/ui"
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack align="flex-start" gap={0}>
+  <VStack align="flex-start" gap="0">
     <Button onClick={toggle}>Please Click</Button>
 
     <Collapse open={open} duration={0.7}>
-      <Box borderWidth={1} mt="md" p="md" rounded="l2" w="full">
+      <Box borderWidth={1} mt="lg" p="md" rounded="l2" w="full">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>
     </Collapse>
@@ -72,11 +72,11 @@ return (
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack align="flex-start" gap={0}>
+  <VStack align="flex-start" gap="0">
     <Button onClick={toggle}>Please Click</Button>
 
     <Collapse open={open} unmountOnExit>
-      <Box borderWidth={1} mt="md" p="md" rounded="l2" w="full">
+      <Box borderWidth={1} mt="lg" p="md" rounded="l2" w="full">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>
     </Collapse>
@@ -90,22 +90,22 @@ return (
 
 ### 不透明度を無効にする
 
-不透明度を無効にするには、`animationOpacity`を`false`に設定します。
+不透明度を無効にする場合は、`animationOpacity`を`false`に設定します。
 
 ```tsx preview functional client
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack align="flex-start" gap={0}>
+  <VStack align="flex-start" gap="0">
     <Button onClick={toggle}>Please Click</Button>
 
     <Collapse animationOpacity={false} open={open}>
-      <Box borderWidth={1} mt="md" p="md" rounded="l2" w="full">
+      <Box borderWidth={1} mt="lg" p="md" rounded="l2" w="full">
         クリリンのことか……クリリンのことかーーーっ！！！！！
       </Box>
     </Collapse>
 
-    <Box borderWidth={1} mt="md" p="md" rounded="l2" w="full">
+    <Box borderWidth={1} mt="lg" p="md" rounded="l2" w="full">
       私の戦闘力は530000です。ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……
     </Box>
   </VStack>
@@ -114,13 +114,13 @@ return (
 
 ### 高さに初期値を追加する
 
-高さに初期値を追加するには、`startingHeight`に文字列または数値を設定します。
+高さに初期値を追加する場合は、`startingHeight`に文字列または数値を設定します。
 
 ```tsx preview functional client
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack alignItems="flex-start" gap="md">
+  <VStack alignItems="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
     <Collapse open={open} startingHeight={23}>
@@ -133,3 +133,7 @@ return (
   </VStack>
 )
 ```
+
+## Props
+
+<PropsTable name="collapse" />

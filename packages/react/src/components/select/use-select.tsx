@@ -83,7 +83,7 @@ export interface UseSelectProps<Y extends string | string[] = string>
   /**
    * If provided, generate options based on items.
    *
-   * @default '[]'
+   * @default []
    */
   items?: ComboboxItem[]
   /**

@@ -377,26 +377,6 @@
               "pathname": "/docs/components/modal"
             },
             {
-              "title": "MonthPicker",
-              "segment": "month-picker",
-              "pathname": "/docs/components/month-picker"
-            },
-            {
-              "title": "MultiAutocomplete",
-              "segment": "multi-autocomplete",
-              "pathname": "/docs/components/multi-autocomplete"
-            },
-            {
-              "title": "MultiDatePicker",
-              "segment": "multi-date-picker",
-              "pathname": "/docs/components/multi-date-picker"
-            },
-            {
-              "title": "MultiSelect",
-              "segment": "multi-select",
-              "pathname": "/docs/components/multi-select"
-            },
-            {
               "title": "NativeSelect",
               "segment": "native-select",
               "pathname": "/docs/components/native-select"
@@ -461,16 +441,6 @@
               "title": "RadioCard",
               "segment": "radio-card",
               "pathname": "/docs/components/radio-card"
-            },
-            {
-              "title": "RangeDatePicker",
-              "segment": "range-date-picker",
-              "pathname": "/docs/components/range-date-picker"
-            },
-            {
-              "title": "RangeSlider",
-              "segment": "range-slider",
-              "pathname": "/docs/components/range-slider"
             },
             {
               "title": "Rating",
@@ -625,11 +595,6 @@
               "title": "Wrap",
               "segment": "wrap",
               "pathname": "/docs/components/wrap"
-            },
-            {
-              "title": "YearPicker",
-              "segment": "year-picker",
-              "pathname": "/docs/components/year-picker"
             },
             {
               "title": "ZStack",

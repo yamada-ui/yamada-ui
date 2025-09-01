@@ -55,7 +55,7 @@ import { Carousel } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Carousel } from "@workspace/ui"
+import { Carousel } from "@workspaces/ui"
 ```
 
 :::
@@ -269,7 +269,7 @@ const sources = useMemo(
 )
 
 return (
-  <Carousel.Root gap={0}>
+  <Carousel.Root gap="0">
     <Carousel.List>
       {sources.map((src, index) => (
         <Carousel.Item key={index} index={index}>
@@ -1023,7 +1023,7 @@ const sources = useMemo(
 )
 
 return (
-  <VStack gap="md">
+  <VStack>
     <Carousel.Root index={index} onChange={setIndex}>
       <Carousel.List>
         {sources.map((src, index) => (
@@ -1114,3 +1114,7 @@ return (
   </VStack>
 )
 ```
+
+## Props
+
+<PropsTable name="carousel" />

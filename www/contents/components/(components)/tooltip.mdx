@@ -25,7 +25,7 @@ import { Tooltip } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Tooltip } from "@workspace/ui"
+import { Tooltip } from "@workspaces/ui"
 ```
 
 :::
@@ -101,7 +101,7 @@ To change the duration, set `duration` to a number (seconds).
 
 ### Change the Offset
 
-Depending on the size of the element or the situation, you may want to adjust the position of the tooltip. In that case, adjust the position using `gutter` or `offset`.
+To change the offset, set `gutter` or `offset` to a value.
 
 `gutter` allows you to set the difference with simple elements, and `offset` allows you to set `[horizontal axis, vertical axis]`.
 
@@ -151,3 +151,7 @@ To always display the tooltip, set `open` to `true`.
   <Button>Please Hover</Button>
 </Tooltip>
 ```
+
+## Props
+
+<PropsTable name="tooltip" />

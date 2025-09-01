@@ -23,7 +23,7 @@ import { FormatByte } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { FormatByte } from "@workspace/ui"
+import { FormatByte } from "@workspaces/ui"
 ```
 
 :::
@@ -77,7 +77,7 @@ import { FormatByte } from "@workspace/ui"
 
 #### アプリケーション全体のロケールを設定する
 
-アプリケーション全体のロケールの設定をしたい場合は、`UIProvider`の`locale`に値を設定します。
+アプリケーション全体のロケールの設定をする場合は、`UIProvider`の`locale`に値を設定します。
 
 ```tsx
 import { UIProvider } from "@yamada-ui/react"
@@ -91,7 +91,7 @@ const App = () => {
 }
 ```
 
-### 単位フォーマット
+### 単位を変換する
 
 単位を変換する場合は、`unit`に`"byte"`または`"bit"`を設定します。デフォルトは`"byte"`です。
 
@@ -121,3 +121,7 @@ const App = () => {
   <FormatByte value={1024} unitDisplay="long" />
 </Grid>
 ```
+
+## Props
+
+<PropsTable name="format-byte" />

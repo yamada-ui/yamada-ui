@@ -27,7 +27,7 @@ export const Basic = () => {
       }}
       color="white"
       p="md"
-      rounded="md"
+      rounded="l2"
       transitionDuration="moderate"
       transitionProperty="all"
     >
@@ -56,7 +56,7 @@ export const Direction = () => {
         }}
         color="white"
         p="md"
-        rounded="md"
+        rounded="l2"
         transitionDuration="moderate"
         transitionProperty="all"
       >
@@ -92,7 +92,7 @@ export const Hook = () => {
       bg={bg}
       color="white"
       p="md"
-      rounded="md"
+      rounded="l2"
       transitionDuration="moderate"
       transitionProperty="all"
     >
@@ -138,7 +138,7 @@ export const Container = () => {
       overflow="auto"
       p="md"
       resize="inline"
-      rounded="md"
+      rounded="l2"
       w="full"
     >
       <Text

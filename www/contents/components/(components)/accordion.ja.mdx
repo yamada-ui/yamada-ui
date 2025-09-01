@@ -35,7 +35,7 @@ import { Accordion } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Accordion } from "@workspace/ui"
+import { Accordion } from "@workspaces/ui"
 ```
 
 :::
@@ -102,7 +102,7 @@ return <Accordion.Root items={items} />
 
 ### 特定の項目を展開済みにする
 
-最初から特定の項目を展開済みにする場合は`defaultIndex`に項目の`index`を設定します。
+最初から特定の項目を展開済みにする場合は、`defaultIndex`に項目の`index`を設定します。
 
 ```tsx preview
 <Accordion.Root defaultIndex={1}>
@@ -120,9 +120,9 @@ return <Accordion.Root items={items} />
 </Accordion.Root>
 ```
 
-### 複数の項目を一度に展開する
+### 複数の項目を展開する
 
-`multiple`を`true`に設定すると、複数の項目を一度に展開できるようになります。
+複数の項目を展開する場合は、`multiple`を`true`に設定します。
 
 ```tsx preview
 <Accordion.Root defaultIndex={[1, 2]} multiple>
@@ -160,9 +160,9 @@ return <Accordion.Root items={items} />
 </Accordion.Root>
 ```
 
-### アイコンをカスタマイズする
+### アイコンを非表示にする
 
-アイコンを表示したくない場合は、`iconHidden`を`true`に設定します。
+アイコンを非表示にする場合は、`iconHidden`を`true`に設定します。
 
 ```tsx preview
 <Accordion.Root iconHidden>
@@ -180,7 +180,27 @@ return <Accordion.Root items={items} />
 </Accordion.Root>
 ```
 
-アイコンを変更する場合は、`icon`にコンポーネントを設定します。
+### 項目を無効にする
+
+項目を無効にする場合は、`disabled`を設定します。
+
+```tsx preview
+<Accordion.Root>
+  <Accordion.Item button="孫悟空少年編" index={0}>
+    地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
+  </Accordion.Item>
+
+  <Accordion.Item button="ピッコロ大魔王編" disabled index={1}>
+    天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
+  </Accordion.Item>
+
+  <Accordion.Item button="サイヤ人編" index={2}>
+    ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
+  </Accordion.Item>
+</Accordion.Root>
+```
+
+### アイコンをカスタマイズする
 
 ```tsx preview
 <Accordion.Root icon={<GhostIcon />}>
@@ -198,7 +218,7 @@ return <Accordion.Root items={items} />
 </Accordion.Root>
 ```
 
-項目の展開と折りたたみの状態によって、アイコンを切り替えたい場合は、`icon`から提供される`expanded`で制御します。
+項目の展開と折りたたみの状態によって、アイコンを切り替える場合は、`icon`から提供される`expanded`で制御します。
 
 ```tsx preview
 <Accordion.Root
@@ -218,29 +238,7 @@ return <Accordion.Root items={items} />
 </Accordion.Root>
 ```
 
-### 項目を無効にする
-
-特定の項目を無効にしたい場合は、`disabled`を設定します。
-
-```tsx preview
-<Accordion.Root>
-  <Accordion.Item button="孫悟空少年編" index={0}>
-    地球の人里離れた山奥に住む尻尾の生えた少年・孫悟空はある日、西の都からやって来た少女・ブルマと出会う。そこで、7つ集めると神龍（シェンロン）が現れ、どんな願いでも一つだけ叶えてくれるというドラゴンボールの存在を、さらに育ての親である孫悟飯の形見として大切に持っていた球がその1つ「四星球（スーシンチュウ）」であることを知り、ブルマと共に残りのドラゴンボールを探す旅に出る。
-  </Accordion.Item>
-
-  <Accordion.Item button="ピッコロ大魔王編" disabled index={1}>
-    天下一武道会終了後、ピラフ一味によって復活したピッコロ大魔王によって、クリリンや亀仙人など悟空の仲間たちや多くの武道家たちが殺される。悟空は仇を討つため、道中に出会ったヤジロベーや仙猫カリンの協力を得て命を賭して潜在する力を引き出し、ピッコロ大魔王に闘いを挑み勝利する。闘いの後、悟空はピッコロ大魔王に殺された神龍や仲間たちの復活のため天界へ向かい、ドラゴンボールの創造者である神に会う。そこで神龍復活の条件として、神の下で天界で修行することとなった。
-  </Accordion.Item>
-
-  <Accordion.Item button="サイヤ人編" index={2}>
-    ピッコロ（マジュニア）との闘いから約5年後、息子の孫悟飯を儲けて平和な日々を過ごしていた悟空のもとに、実兄・ラディッツが宇宙より来襲し、自分が惑星ベジータの戦闘民族・サイヤ人であることを知らされる。さらわれた孫悟飯を助けるため悟空は宿敵ピッコロと手を組み、自らの命と引き換えにラディッツを倒すが、約1年後にはさらに強力なサイヤ人たちがドラゴンボールを求めて地球に来襲することを知る。
-  </Accordion.Item>
-</Accordion.Root>
-```
-
 ### ラベルをカスタマイズする
-
-`Accordion.Item`は、`props`の`button`を設定することで内部的に`Accordion.Button`をレンダリングしますが、`Accordion.Button`をカスタマイズしたい場合は、`children`に`Accordion.Button`を設定します。
 
 ```tsx preview
 <Accordion.Root>
@@ -277,8 +275,6 @@ return <Accordion.Root items={items} />
 ```
 
 ### パネルをカスタマイズする
-
-`Accordion.Item`は、`children`に`Accordion.Panel`が存在しない場合、自動的に`children`を`Accordion.Panel`でラッピングします。`Accordion.Panel`をカスタマイズしたい場合は、`children`に`Accordion.Panel`を設定します。
 
 ```tsx preview
 <Accordion.Root>
@@ -325,3 +321,7 @@ return (
   </Accordion.Root>
 )
 ```
+
+## Props
+
+<PropsTable name="accordion" />

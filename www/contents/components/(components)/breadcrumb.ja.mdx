@@ -30,7 +30,7 @@ import { Breadcrumb } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
-import { Breadcrumb } from "@workspace/ui"
+import { Breadcrumb } from "@workspaces/ui"
 ```
 
 :::
@@ -92,7 +92,7 @@ return <Breadcrumb.Root items={items} />
 
 ### 区切りをカスタマイズする
 
-区切りをカスタマイズするには、`separator`に区切り文字を設定します。
+区切りをカスタマイズする場合は、`separator`に区切り文字を設定します。
 
 ```tsx preview
 <Breadcrumb.Root separator="/">
@@ -105,7 +105,7 @@ return <Breadcrumb.Root items={items} />
 </Breadcrumb.Root>
 ```
 
-アイコンを区切りとして使用するには、`separator`に`ReactNode`を設定します。
+アイコンを区切りとして使う場合は、`separator`に`ReactNode`を設定します。
 
 ```tsx preview
 <Breadcrumb.Root separator={<ChevronsRightIcon />}>
@@ -247,3 +247,7 @@ return (
   />
 )
 ```
+
+## Props
+
+<PropsTable name="breadcrumb" />

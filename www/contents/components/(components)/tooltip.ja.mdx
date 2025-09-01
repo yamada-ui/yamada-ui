@@ -36,7 +36,7 @@ import { Tooltip } from "@workspaces/ui"
 
 ### 表示位置を変更する
 
-表示位置を変更するには、`placement`に`end`や`center-start`などを設定します。デフォルトでは、`start`が設定されています。
+表示位置を変更する場合は、`placement`に`end`や`center-start`などを設定します。デフォルトでは、`start`が設定されています。
 
 ```tsx preview
 <VStack>
@@ -67,7 +67,7 @@ import { Tooltip } from "@workspaces/ui"
 
 ### アニメーションを変更する
 
-表示または非表示のアニメーションを変更するには、`animationScheme`に`top`や`left`などを設定します。デフォルトでは、`scale`が設定されています。
+表示または非表示のアニメーションを変更する場合は、`animationScheme`に`top`や`left`などを設定します。デフォルトでは、`scale`が設定されています。
 
 ```tsx preview
 <VStack>
@@ -101,7 +101,7 @@ import { Tooltip } from "@workspaces/ui"
 
 ### オフセットを変更する
 
-要素の大きさやシチュエーションによっては、ツールチップの位置を変更したい場合があります。その場合は、`gutter`または`offset`で位置を調整します。
+オフセットを変更する場合は、`gutter`または`offset`に値を設定します。
 
 `gutter`は、単純な要素との差を設定でき、`offset`は、`[横軸, 縦軸]`を設定できます。
 
@@ -119,7 +119,7 @@ import { Tooltip } from "@workspaces/ui"
 
 ### 遅延させる
 
-表示または非表示を遅延させたい場合は、`openDelay`または`closeDelay`に数値(ミリ秒)を設定します。
+表示または非表示を遅延させる場合は、`openDelay`または`closeDelay`に数値(ミリ秒)を設定します。
 
 ```tsx preview
 <Tooltip
@@ -134,7 +134,7 @@ import { Tooltip } from "@workspaces/ui"
 
 ### 無効にする
 
-ツールチップを無効にするには、`disabled`を`true`に設定します。
+ツールチップを無効にする場合は、`disabled`を`true`に設定します。
 
 ```tsx preview
 <Tooltip content="へっ！きたねぇ花火だ" disabled>
@@ -144,7 +144,7 @@ import { Tooltip } from "@workspaces/ui"
 
 ### 常に表示する
 
-ツールチップを常に表示するには、`open`を`true`に設定します。
+ツールチップを常に表示する場合は、`open`を`true`に設定します。
 
 ```tsx preview
 <Tooltip content="へっ！きたねぇ花火だ" open>

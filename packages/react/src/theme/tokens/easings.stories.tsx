@@ -5,7 +5,7 @@ import { Container } from "../../components/container"
 import { For } from "../../components/for"
 import { Heading } from "../../components/heading"
 import { Text } from "../../components/text"
-import { borders } from "./borders"
+import { easings } from "./easings"
 
 const meta: Meta = {
   title: "Theme / Tokens",
@@ -13,10 +13,10 @@ const meta: Meta = {
 
 export default meta
 
-export const Borders = () => {
+export const Easings = () => {
   return (
     <>
-      <Heading>Borders</Heading>
+      <Heading>Easings</Heading>
 
       <Container.Root>
         <Container.Body
@@ -25,12 +25,28 @@ export const Borders = () => {
           gap="lg"
           gridTemplateColumns="auto auto 1fr"
         >
-          <For each={Object.entries(borders)}>
+          <For each={Object.entries(easings)}>
             {([token, value], index) => (
               <Fragment key={index}>
                 <Text>{token}</Text>
                 <Text color="fg.muted">{value}</Text>
-                <Box borderTop={token} />
+                <Box h="10" position="relative">
+                  <Box
+                    css={{
+                      "--animation-from-x": "0%",
+                      "--animation-to-x": "calc(100% - {spaces.10})",
+                    }}
+                    animationDirection="alternate"
+                    animationDuration="1s"
+                    animationIterationCount="infinite"
+                    animationName="position"
+                    animationTimingFunction={value}
+                    bg="green"
+                    boxSize="10"
+                    position="absolute"
+                    rounded="l2"
+                  />
+                </Box>
               </Fragment>
             )}
           </For>

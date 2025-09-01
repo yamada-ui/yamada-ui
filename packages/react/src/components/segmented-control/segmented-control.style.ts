@@ -44,7 +44,6 @@ export const segmentedControlStyle = defineComponentSlotStyle({
         rounded: "md",
         top: "anchor(--checked top)",
         transitionDuration: "moderate",
-        transitionProperty: "top, left, width",
         w: "anchor-size(--checked width)",
       },
       _dark: {
@@ -88,6 +87,9 @@ export const segmentedControlStyle = defineComponentSlotStyle({
         },
         root: {
           flexDirection: "row",
+          _before: {
+            transitionProperty: "left, width",
+          },
         },
       },
       vertical: {
@@ -96,6 +98,9 @@ export const segmentedControlStyle = defineComponentSlotStyle({
         },
         root: {
           flexDirection: "column",
+          _before: {
+            transitionProperty: "top, height",
+          },
         },
       },
     },

@@ -8,12 +8,12 @@ import { radii as semanticRadii } from "../semantic-tokens/radii"
 import { radii } from "./radii"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Radii",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const Radii = () => {
   return (
     <>
       <Heading>Radii</Heading>

@@ -31,10 +31,10 @@ export const keyframes = defineTokens.keyframes({
 
   "bg-position": {
     from: {
-      bgPosition: "var(--animation-from, 1rem) 0",
+      bgPosition: "{animation-from, 1rem} 0",
     },
     to: {
-      bgPosition: "var(--animation-to, 0) 0",
+      bgPosition: "{animation-to, 0} 0",
     },
   },
   position: {

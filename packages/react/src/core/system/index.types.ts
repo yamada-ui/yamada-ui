@@ -70,8 +70,6 @@ export interface BreakpointConfig {
    * The `ref` of the container element used in `useBreakpoint` and others.
    *
    * Even if this `ref` is not set, CSS query will work, but JavaScript operations such as `useBreakpoint` will not work.
-   *
-   * @external
    */
   containerRef?: RefObject<HTMLElement | null>
   /**
@@ -85,8 +83,6 @@ export interface BreakpointConfig {
   direction?: BreakpointDirection
   /**
    * The `breakpoint` custom identifier.
-   *
-   * @external
    *
    * @default '@media screen'
    */

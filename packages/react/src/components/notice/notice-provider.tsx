@@ -43,13 +43,11 @@ type ExtractVertical<T extends NoticePlacement> = T extends `start${string}`
   ? "top"
   : "bottom"
 
-type ExtractHorizontal<T extends NoticePlacement> = T extends `${string}-center`
-  ? "center"
-  : T extends `${string}-start`
-    ? "left"
-    : T extends `${string}-end`
-      ? "right"
-      : "center"
+type ExtractHorizontal<T extends NoticePlacement> = T extends `${string}-start`
+  ? "left"
+  : T extends `${string}-end`
+    ? "right"
+    : "center"
 
 type PlacementMapping = {
   [K in NoticePlacement]: `${ExtractVertical<K>}-${ExtractHorizontal<K>}`

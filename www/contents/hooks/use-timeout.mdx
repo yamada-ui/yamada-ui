@@ -5,4 +5,28 @@ storybook: hooks-usetimeout--basic
 source: hooks/use-timeout
 ---
 
+```tsx preview functional client
+const [state, setState] = useState<number>(1)
+
+useTimeout(() => setState((prev) => prev + 1), 3000)
+
+return <Text>Current state: {state}</Text>
+```
+
 ### Usage
+
+:::code-group
+
+```tsx [package]
+import { useTimeout } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useTimeout } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useTimeout } from "@workspaces/ui"
+```
+
+:::

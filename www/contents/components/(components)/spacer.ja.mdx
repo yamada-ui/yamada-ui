@@ -5,4 +5,46 @@ storybook: components-spacer--basic
 source: components/spacer
 ---
 
+```tsx preview
+<Flex gap="md" w="full">
+  <Box p="md" bg="bg.contrast" color="fg.contrast">
+    Box
+  </Box>
+
+  <Box p="md" bg="bg.contrast" color="fg.contrast">
+    Box
+  </Box>
+
+  <Spacer />
+
+  <Box p="md" bg="bg.contrast" color="fg.contrast">
+    Box
+  </Box>
+
+  <Box p="md" bg="bg.contrast" color="fg.contrast">
+    Box
+  </Box>
+</Flex>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Spacer } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Spacer } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Spacer } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Spacer />
+```

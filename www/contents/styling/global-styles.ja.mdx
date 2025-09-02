@@ -3,4 +3,117 @@ title: グローバルスタイル
 description: Yamada UIは、グローバルスタイルをカスタマイズおよび追加する機能を提供しています。
 ---
 
+## 概要
+
+グローバルスタイルは、アプリケーション全体で適用されるスタイルです。
+
+テーマで定義されているスタイルは[こちら](https://github.com/yamada-ui/yamada-ui/blob/main/packages/react/src/theme/styles/global-style.ts)です。
+
+```tsx
+export const globalStyle = defineStyles.globalStyle({
+  "*, *::before, *::after": {
+    borderColor: "border",
+    borderStyle: "solid",
+    borderWidth: "0",
+    focusVisibleRing: "outline",
+    fontFeatureSettings: '"cv11"',
+    overflowWrap: "break-word",
+  },
+  "*::placeholder, *[data-placeholder]": {
+    color: "fg.subtle",
+  },
+  body: {
+    colorScheme: "mono",
+    bg: "bg",
+    color: "fg",
+    fontFamily: "body",
+    lineHeight: "moderate",
+    overflowX: "hidden",
+    transitionDuration: "moderate",
+    transitionProperty: "background-color",
+  },
+})
+```
+
 ## カスタマイズ
+
+::::steps
+
+### テーマを生成する
+
+[CLI](/docs/theming/cli)を使用してテーマを生成します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+:::warning
+下記のコマンドを実行する前に、`@yamada-ui/cli`をインストールして`init`コマンドを実行する必要があります。詳しくは、[こちら](/docs/get-started/cli)をご覧ください。
+:::
+
+### スタイルを変更する
+
+生成したテーマの`styles/global-style.ts`を変更します。
+
+```tsx title="theme/styles/global-style.ts"
+import { defineStyles } from "@yamada-ui/react"
+
+export const globalStyle = defineStyles.globalStyle({
+  "*, *::before, *::after": {
+    borderColor: "border",
+    borderStyle: "solid",
+    borderWidth: "0",
+    focusVisibleRing: "outline",
+    fontFeatureSettings: '"cv11"',
+    overflowWrap: "break-word",
+  },
+  "*::placeholder, *[data-placeholder]": {
+    color: "fg.subtle",
+  },
+  body: {
+    colorScheme: "blue", // [!code highlight]
+    bg: "bg",
+    color: "fg",
+    fontFamily: "body",
+    lineHeight: "moderate",
+    overflowX: "hidden",
+    transitionDuration: "moderate",
+    transitionProperty: "background-color",
+  },
+})
+```
+
+### プロバイダーを更新する
+
+生成したテーマを`UIProvider`に設定します。
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+::::

@@ -3,4 +3,401 @@ title: Reset Styles
 description: Yamada UI provides features to customize and add reset styles.
 ---
 
+## Overview
+
+Reset styles are styles that are applied to the entire application.
+
+The styles defined in the theme are [here](https://github.com/yamada-ui/yamada-ui/blob/main/packages/react/src/theme/styles/reset-style.ts).
+
+```tsx
+export const resetStyle = defineStyles.resetStyle({
+  "*, *::before, *::after": {
+    boxSizing: "border-box",
+    margin: 0,
+    padding: 0,
+  },
+
+  "::-webkit-file-upload-button": {
+    font: "inherit",
+    WebkitAppearance: "button",
+  },
+
+  "::-webkit-search-cancel-button, ::-webkit-search-decoration": {
+    WebkitAppearance: "none",
+  },
+
+  "[contenteditable]": {
+    outline: "none",
+  },
+
+  "[hidden]:where(:not([hidden='until-found']))": {
+    display: "none !important",
+  },
+
+  "[type='time']::-webkit-calendar-picker-indicator": {
+    display: "none",
+  },
+
+  a: {
+    color: "inherit",
+    textDecoration: "none",
+  },
+
+  "abbr[title]": {
+    textDecoration: "underline dotted",
+  },
+
+  "b, strong": {
+    fontWeight: "bolder",
+  },
+
+  "button, input, optgroup, select, textarea": {
+    appearance: "none",
+    backgroundColor: "transparent",
+    border: 0,
+    borderRadius: 0,
+    color: "inherit",
+    font: "inherit",
+    fontFeatureSettings: "inherit",
+    fontVariationSettings: "inherit",
+    letterSpacing: "inherit",
+    outline: 0,
+    WebkitAppearance: "none",
+  },
+
+  "code, kbd, samp, pre": {
+    fontFamily: "inherit",
+    fontSize: "1em",
+  },
+
+  fieldset: {
+    border: 0,
+    minWidth: 0,
+  },
+
+  "h1, h2, h3, h4, h5, h6": {
+    fontSize: "inherit",
+    fontWeight: "inherit",
+  },
+
+  hr: {
+    blockSize: 0,
+    border: "none",
+    borderBlockStart: "1px solid",
+    color: "inherit",
+    overflow: "visible",
+  },
+
+  html: {
+    fontFamily:
+      "system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
+    lineHeight: 1.5,
+    WebkitTapHighlightColor: "transparent",
+    WebkitTextSizeAdjust: "100%",
+  },
+
+  "img, svg, video, canvas, audio, iframe, embed, object": {
+    display: "block",
+  },
+
+  "input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-outer-spin-button":
+    {
+      display: "none",
+    },
+
+  "input[type='search']": {
+    outlineOffset: "-2px",
+  },
+
+  legend: {
+    display: "table",
+    float: "left",
+    width: "100%",
+  },
+
+  mark: {
+    backgroundColor: "inherit",
+    color: "inherit",
+  },
+
+  progress: {
+    verticalAlign: "baseline",
+  },
+
+  small: {
+    fontSize: "80%",
+  },
+
+  sub: {
+    bottom: "-0.25em",
+  },
+
+  "sub, sup": {
+    fontSize: "75%",
+    lineHeight: 0,
+    position: "relative",
+    verticalAlign: "baseline",
+  },
+
+  summary: {
+    display: "list-item",
+  },
+
+  sup: {
+    top: "-0.5em",
+  },
+
+  "ul, ol": {
+    listStyle: "none",
+  },
+
+  "@media (prefers-reduced-motion: no-preference)": {
+    ":where(html:focus-within)": {
+      scrollBehavior: "smooth",
+    },
+  },
+
+  ":where(html:has(dialog:modal[open]))": {
+    overflow: "clip",
+  },
+
+  ":where(dialog, [popover])": {
+    background: "none",
+    border: "none",
+    color: "inherit",
+    inset: "unset",
+    maxHeight: "unset",
+    maxWidth: "unset",
+    overflow: "unset",
+  },
+
+  ":where(dialog:not([open], [popover]), [popover]:not(:popover-open))": {
+    display: "none !important",
+  },
+})
+```
+
 ## Customize
+
+::::steps
+
+### Generate a Theme
+
+Use the [CLI](/docs/theming/cli) to generate a theme.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+:::warning
+Before running the following commands, you need to install `@yamada-ui/cli` and execute the `init` command. For more details, please see [here](/docs/get-started/cli).
+:::
+
+### Change the Style
+
+Change the `styles/reset-style.ts` in the generated theme.
+
+```tsx title="theme/styles/reset-style.ts"
+import { defineStyles } from "@yamada-ui/react"
+
+export const resetStyle = defineStyles.resetStyle({
+  "*, *::before, *::after": {
+    boxSizing: "content-box", // [!code highlight]
+    margin: 0,
+    padding: 0,
+  },
+
+  "::-webkit-file-upload-button": {
+    font: "inherit",
+    WebkitAppearance: "button",
+  },
+
+  "::-webkit-search-cancel-button, ::-webkit-search-decoration": {
+    WebkitAppearance: "none",
+  },
+
+  "[contenteditable]": {
+    outline: "none",
+  },
+
+  "[hidden]:where(:not([hidden='until-found']))": {
+    display: "none !important",
+  },
+
+  "[type='time']::-webkit-calendar-picker-indicator": {
+    display: "none",
+  },
+
+  a: {
+    color: "inherit",
+    textDecoration: "none",
+  },
+
+  "abbr[title]": {
+    textDecoration: "underline dotted",
+  },
+
+  "b, strong": {
+    fontWeight: "bolder",
+  },
+
+  "button, input, optgroup, select, textarea": {
+    appearance: "none",
+    backgroundColor: "transparent",
+    border: 0,
+    borderRadius: 0,
+    color: "inherit",
+    font: "inherit",
+    fontFeatureSettings: "inherit",
+    fontVariationSettings: "inherit",
+    letterSpacing: "inherit",
+    outline: 0,
+    WebkitAppearance: "none",
+  },
+
+  "code, kbd, samp, pre": {
+    fontFamily: "inherit",
+    fontSize: "1em",
+  },
+
+  fieldset: {
+    border: 0,
+    minWidth: 0,
+  },
+
+  "h1, h2, h3, h4, h5, h6": {
+    fontSize: "inherit",
+    fontWeight: "inherit",
+  },
+
+  hr: {
+    blockSize: 0,
+    border: "none",
+    borderBlockStart: "1px solid",
+    color: "inherit",
+    overflow: "visible",
+  },
+
+  html: {
+    fontFamily:
+      "system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
+    lineHeight: 1.5,
+    WebkitTapHighlightColor: "transparent",
+    WebkitTextSizeAdjust: "100%",
+  },
+
+  "img, svg, video, canvas, audio, iframe, embed, object": {
+    display: "block",
+  },
+
+  "input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-outer-spin-button":
+    {
+      display: "none",
+    },
+
+  "input[type='search']": {
+    outlineOffset: "-2px",
+  },
+
+  legend: {
+    display: "table",
+    float: "left",
+    width: "100%",
+  },
+
+  mark: {
+    backgroundColor: "inherit",
+    color: "inherit",
+  },
+
+  progress: {
+    verticalAlign: "baseline",
+  },
+
+  small: {
+    fontSize: "80%",
+  },
+
+  sub: {
+    bottom: "-0.25em",
+  },
+
+  "sub, sup": {
+    fontSize: "75%",
+    lineHeight: 0,
+    position: "relative",
+    verticalAlign: "baseline",
+  },
+
+  summary: {
+    display: "list-item",
+  },
+
+  sup: {
+    top: "-0.5em",
+  },
+
+  "ul, ol": {
+    listStyle: "none",
+  },
+
+  "@media (prefers-reduced-motion: no-preference)": {
+    ":where(html:focus-within)": {
+      scrollBehavior: "smooth",
+    },
+  },
+
+  ":where(html:has(dialog:modal[open]))": {
+    overflow: "clip",
+  },
+
+  ":where(dialog, [popover])": {
+    background: "none",
+    border: "none",
+    color: "inherit",
+    inset: "unset",
+    maxHeight: "unset",
+    maxWidth: "unset",
+    overflow: "unset",
+  },
+
+  ":where(dialog:not([open], [popover]), [popover]:not(:popover-open))": {
+    display: "none !important",
+  },
+})
+```
+
+### Update the Provider
+
+Set the generated theme to `UIProvider`.
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+::::

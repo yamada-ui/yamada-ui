@@ -3,4 +3,135 @@ title: テキストスタイル
 description: Yamada UIは、再利用可能なスタイルを作成するための機能を提供しています。
 ---
 
-## 使い方
+## 概要
+
+テキストスタイルは、プロジェクト全体でテキストのスタイルを再利用するために使用されるトークンです。
+
+テーマで定義されているスタイルは[こちら](https://github.com/yamada-ui/yamada-ui/blob/main/packages/react/src/theme/styles/text-styles.ts)です。
+
+```tsx preview
+<Text textStyle="mono">Mono</Text>
+```
+
+```tsx
+export const textStyles = defineStyles.textStyle({
+  ghost: {
+    color: "colorScheme.outline",
+  },
+  mono: {
+    fontFamily: "mono",
+    fontWeight: "medium",
+    letterSpacing: "widest",
+    whiteSpace: "nowrap",
+  },
+  outline: {
+    color: "colorScheme.outline",
+  },
+  solid: {
+    color: "colorScheme.contrast",
+  },
+  subtle: {
+    color: "colorScheme.fg",
+  },
+  surface: {
+    color: "colorScheme.fg",
+  },
+})
+```
+
+## カスタマイズ
+
+::::steps
+
+### テーマを生成する
+
+[CLI](/docs/theming/cli)を使用してテーマを生成します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+:::warning
+下記のコマンドを実行する前に、`@yamada-ui/cli`をインストールして`init`コマンドを実行する必要があります。詳しくは、[こちら](/docs/get-started/cli)をご覧ください。
+:::
+
+### スタイルを変更する
+
+生成したテーマの`styles/text-styles.ts`を変更します。
+
+```tsx title="theme/styles/text-styles.ts" {4-9}
+import { defineStyles } from "@yamada-ui/react"
+
+export const textStyles = defineStyles.textStyle({
+  gradient: {
+    bgClip: "text",
+    bgGradient: "linear(to-l, #7928CA, #FF0080)",
+    fontSize: "5xl",
+    w: "full",
+  },
+  ghost: {
+    color: "colorScheme.outline",
+  },
+  mono: {
+    fontFamily: "mono",
+    fontWeight: "medium",
+    letterSpacing: "widest",
+    whiteSpace: "nowrap",
+  },
+  outline: {
+    color: "colorScheme.outline",
+  },
+  solid: {
+    color: "colorScheme.contrast",
+  },
+  subtle: {
+    color: "colorScheme.fg",
+  },
+  surface: {
+    color: "colorScheme.fg",
+  },
+})
+```
+
+### プロバイダーを更新する
+
+生成したテーマを`UIProvider`に設定します。
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### テキストスタイルを使う
+
+`textStyle`に値を設定します。
+
+```tsx
+<Text textStyle="gradient" />
+```
+
+::::

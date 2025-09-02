@@ -3,4 +3,219 @@ title: レイヤースタイル
 description: Yamada UIは、再利用可能なスタイルを作成するための機能を提供しています。
 ---
 
-## 使い方
+## 概要
+
+レイヤースタイルは、プロジェクト全体で視覚的なスタイルを再利用するために使用されるトークンです。
+
+テーマで定義されているスタイルは[こちら](https://github.com/yamada-ui/yamada-ui/blob/main/packages/react/src/theme/styles/layer-styles.ts)です。
+
+```tsx preview
+<Wrap gap="md" colorScheme="blue">
+  <For each={["solid", "subtle", "surface", "ghost", "outline"]}>
+    {(token, index) => (
+      <Box
+        as="button"
+        type="button"
+        key={index}
+        layerStyle={token}
+        px="md"
+        py="sm"
+        rounded="l2"
+        _hover={{ layerStyle: `${token}.hover` }}
+      >
+        {toTitleCase(token)}
+      </Box>
+    )}
+  </For>
+</Wrap>
+```
+
+```tsx
+export const layerStyles = defineStyles.layerStyle({
+  active: { opacity: 1 },
+  disabled: {
+    cursor: "not-allowed",
+    opacity: 0.4,
+    _ripple: { display: "none" },
+  },
+  ghost: {
+    bg: "transparent",
+    border: "1px solid transparent",
+    color: "colorScheme.outline",
+  },
+  "ghost.hover": {
+    bg: "colorScheme.ghost",
+  },
+  hover: { opacity: 0.8 },
+  outline: {
+    bg: "transparent",
+    border: "1px solid {colorScheme.muted}",
+    color: "colorScheme.outline",
+  },
+  "outline.hover": {
+    bg: "colorScheme.ghost",
+  },
+  panel: {
+    bg: "bg.panel",
+    borderColor: "border",
+    borderWidth: "1px",
+  },
+  readOnly: {
+    cursor: "default",
+    _ripple: { display: "none" },
+  },
+  solid: {
+    bg: "colorScheme.solid",
+    border: "1px solid transparent",
+    color: "colorScheme.contrast",
+  },
+  "solid.hover": {
+    bg: "colorScheme.solid/80",
+  },
+  subtle: {
+    bg: "colorScheme.subtle",
+    border: "1px solid transparent",
+    color: "colorScheme.fg",
+  },
+  "subtle.hover": {
+    bg: "colorScheme.muted",
+  },
+  surface: {
+    bg: "colorScheme.subtle",
+    border: "1px solid {colorScheme.muted}",
+    color: "colorScheme.fg",
+  },
+  "surface.hover": {
+    bg: "colorScheme.muted",
+  },
+  visuallyHidden: visuallyHiddenAttributes.style,
+})
+```
+
+## カスタマイズ
+
+::::steps
+
+### テーマを生成する
+
+[CLI](/docs/theming/cli)を使用してテーマを生成します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+:::warning
+下記のコマンドを実行する前に、`@yamada-ui/cli`をインストールして`init`コマンドを実行する必要があります。詳しくは、[こちら](/docs/get-started/cli)をご覧ください。
+:::
+
+### スタイルを変更する
+
+生成したテーマの`styles/layer-styles.ts`を変更します。
+
+```tsx title="theme/styles/layer-styles.ts"
+import { defineStyles, visuallyHiddenAttributes } from "@yamada-ui/react"
+
+export const layerStyles = defineStyles.layerStyle({
+  dim: { opacity: 0.6 }, // [!code highlight]
+  active: { opacity: 1 },
+  disabled: {
+    cursor: "not-allowed",
+    opacity: 0.4,
+    _ripple: { display: "none" },
+  },
+  ghost: {
+    bg: "transparent",
+    border: "1px solid transparent",
+    color: "colorScheme.outline",
+  },
+  "ghost.hover": {
+    bg: "colorScheme.ghost",
+  },
+  hover: { opacity: 0.8 },
+  outline: {
+    bg: "transparent",
+    border: "1px solid {colorScheme.muted}",
+    color: "colorScheme.outline",
+  },
+  "outline.hover": {
+    bg: "colorScheme.ghost",
+  },
+  panel: {
+    bg: "bg.panel",
+    borderColor: "border",
+    borderWidth: "1px",
+  },
+  readOnly: {
+    cursor: "default",
+    _ripple: { display: "none" },
+  },
+  solid: {
+    bg: "colorScheme.solid",
+    border: "1px solid transparent",
+    color: "colorScheme.contrast",
+  },
+  "solid.hover": {
+    bg: "colorScheme.solid/80",
+  },
+  subtle: {
+    bg: "colorScheme.subtle",
+    border: "1px solid transparent",
+    color: "colorScheme.fg",
+  },
+  "subtle.hover": {
+    bg: "colorScheme.muted",
+  },
+  surface: {
+    bg: "colorScheme.subtle",
+    border: "1px solid {colorScheme.muted}",
+    color: "colorScheme.fg",
+  },
+  "surface.hover": {
+    bg: "colorScheme.muted",
+  },
+  visuallyHidden: visuallyHiddenAttributes.style,
+})
+```
+
+### プロバイダーを更新する
+
+生成したテーマを`UIProvider`に設定します。
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### レイヤースタイルを使う
+
+`layerStyle`に値を設定します。
+
+```tsx
+<Box layerStyle="dim" />
+```
+
+::::

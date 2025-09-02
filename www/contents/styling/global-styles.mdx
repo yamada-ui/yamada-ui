@@ -3,4 +3,117 @@ title: Global Styles
 description: Yamada UI provides features to customize and add global styles.
 ---
 
+## Overview
+
+Global styles are styles that are applied to the entire application.
+
+The styles defined in the theme are [here](https://github.com/yamada-ui/yamada-ui/blob/main/packages/react/src/theme/styles/global-style.ts).
+
+```tsx
+export const globalStyle = defineStyles.globalStyle({
+  "*, *::before, *::after": {
+    borderColor: "border",
+    borderStyle: "solid",
+    borderWidth: "0",
+    focusVisibleRing: "outline",
+    fontFeatureSettings: '"cv11"',
+    overflowWrap: "break-word",
+  },
+  "*::placeholder, *[data-placeholder]": {
+    color: "fg.subtle",
+  },
+  body: {
+    colorScheme: "mono",
+    bg: "bg",
+    color: "fg",
+    fontFamily: "body",
+    lineHeight: "moderate",
+    overflowX: "hidden",
+    transitionDuration: "moderate",
+    transitionProperty: "background-color",
+  },
+})
+```
+
 ## Customize
+
+::::steps
+
+### Generate a Theme
+
+Use the [CLI](/docs/theming/cli) to generate a theme.
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+:::warning
+Before running the following commands, you need to install `@yamada-ui/cli` and execute the `init` command. For more details, please see [here](/docs/get-started/cli).
+:::
+
+### Change the Style
+
+Change the `styles/global-style.ts` in the generated theme.
+
+```tsx title="theme/styles/global-style.ts"
+import { defineStyles } from "@yamada-ui/react"
+
+export const globalStyle = defineStyles.globalStyle({
+  "*, *::before, *::after": {
+    borderColor: "border",
+    borderStyle: "solid",
+    borderWidth: "0",
+    focusVisibleRing: "outline",
+    fontFeatureSettings: '"cv11"',
+    overflowWrap: "break-word",
+  },
+  "*::placeholder, *[data-placeholder]": {
+    color: "fg.subtle",
+  },
+  body: {
+    colorScheme: "blue", // [!code highlight]
+    bg: "bg",
+    color: "fg",
+    fontFamily: "body",
+    lineHeight: "moderate",
+    overflowX: "hidden",
+    transitionDuration: "moderate",
+    transitionProperty: "background-color",
+  },
+})
+```
+
+### Update the Provider
+
+Set the generated theme to `UIProvider`.
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+::::

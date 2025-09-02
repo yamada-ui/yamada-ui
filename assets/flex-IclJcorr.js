@@ -1,0 +1,1 @@
+import{o as l,p}from"./iframe-zUpmkGgl.js";const x=l({base:{display:"flex"}}),{PropsContext:d,withContext:f}=p("flex",x),C=f("div")(void 0,({align:e,basis:o,direction:t,grow:s,justify:n,shrink:i,wrap:a,...r})=>({alignItems:e,flexBasis:o,flexDirection:t,flexGrow:s,flexShrink:i,flexWrap:a,justifyContent:n,...r}));export{C as F,d as a};

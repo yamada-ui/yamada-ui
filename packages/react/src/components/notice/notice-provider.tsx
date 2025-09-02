@@ -104,13 +104,7 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
 }) => {
   const limits = useRef<{ [K in NoticePlacement]?: RefObject<Controller> }>({})
 
-  const value = useMemo(
-    () => ({
-      getLimit: createMethods(limits.current).getLimit,
-      updateLimit: createMethods(limits.current).updateLimit,
-    }),
-    [],
-  )
+  const value = useMemo(() => ({ ...createMethods(limits.current) }), [])
 
   const components = useMemo(() => {
     return Object.keys(placements).map((placement) => {

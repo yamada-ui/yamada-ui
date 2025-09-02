@@ -1,3 +1,4 @@
+import { useEnvironment } from "../../core"
 import { isUndefined } from "../../utils"
 
 export type OS =
@@ -9,9 +10,7 @@ export type OS =
   | "undetermined"
   | "windows"
 
-const getOS = (): OS => {
-  const { userAgent } = window.navigator
-
+const getOS = ({ navigator: { userAgent } }: Window): OS => {
   const macos = /(Macintosh)|(MacIntel)|(MacPPC)|(Mac68K)/i
   const windows = /(Win32)|(Win64)|(Windows)|(WinCE)/i
   const ios = /(iPhone)|(iPad)|(iPod)/i
@@ -35,7 +34,10 @@ const getOS = (): OS => {
  * @see https://yamada-ui.com/hooks/use-os
  */
 export const useOS = (): OS => {
-  if (!isUndefined(window)) return getOS()
+  const { getWindow } = useEnvironment()
+  const win = getWindow()
+
+  if (!isUndefined(win)) return getOS(win)
 
   return "undetermined"
 }

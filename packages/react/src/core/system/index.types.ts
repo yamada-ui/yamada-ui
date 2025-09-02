@@ -118,7 +118,7 @@ export interface NoticeConfig {
   /**
    * The placement of the notice.
    *
-   * @default 'top'
+   * @default 'start-center'
    */
   placement?: NoticePlacement
 }

@@ -35,7 +35,7 @@ import { ClientOnly } from "@workspaces/ui"
 
 ### フォールバック
 
-子要素の準備中に読み込み状態をレンダリングするには、`fallback`プロパティを使用します。
+子要素の準備中に読み込み状態をレンダリングする場合は、`fallback`プロパティを使用します。
 
 ```tsx preview
 <ClientOnly fallback={<Skeleton boxSize="10" rounded="l2" />}>
@@ -75,3 +75,7 @@ import { ClientOnly } from "@workspaces/ui"
   {() => <ComponentThatUsesWindow />}
 </ClientOnly>
 ```
+
+## Props
+
+<PropsTable name="client-only" />

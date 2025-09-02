@@ -547,7 +547,7 @@ function main() {
   const spinner = ora()
 
   program
-    .option("-p, --publish", "Publish the registries")
+    .option("-p, --publish", "publish the registries")
     .action(async ({ publish = false }) => {
       const start = process.hrtime.bigint()
 

@@ -34,7 +34,7 @@ export interface ZStackProps
   /**
    * Stack in the specified direction.
    *
-   * @default "end"
+   * @default 'end'
    */
   direction?: Direction
   /**

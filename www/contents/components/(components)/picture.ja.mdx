@@ -5,4 +5,132 @@ storybook: components-picture--basic
 source: components/picture
 ---
 
+```tsx preview
+<Picture>
+  <Source
+    srcSet="https://dragon-ball-official.com/assets/img/intro/intro_4.png"
+    media="md"
+  />
+  <Source
+    srcSet="https://dragon-ball-official.com/assets/img/intro/intro_3.png"
+    media="lg"
+  />
+  <Source
+    srcSet="https://dragon-ball-official.com/assets/img/intro/intro_2.png"
+    media="xl"
+  />
+  <Image
+    src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
+    alt="Dragon Ball"
+    maxW="full"
+    w="xl"
+  />
+</Picture>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Picture, Source, Image } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Picture, Source, Image } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Picture, Source, Image } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Picture>
+  <Source />
+  <Image />
+</Picture>
+```
+
+### sourcesを使う
+
+```tsx preview
+<Picture
+  src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
+  alt="Dragon Ball"
+  maxW="full"
+  sources={[
+    {
+      srcSet: "https://dragon-ball-official.com/assets/img/intro/intro_2.png",
+      media: "xl",
+    },
+    {
+      srcSet: "https://dragon-ball-official.com/assets/img/intro/intro_3.png",
+      media: "lg",
+    },
+    {
+      srcSet: "https://dragon-ball-official.com/assets/img/intro/intro_4.png",
+      media: "md",
+    },
+  ]}
+  w="xl"
+/>
+```
+
+### カスタムメディアクエリを使用する
+
+```tsx preview
+<Picture
+  src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
+  alt="Dragon Ball"
+  maxW="full"
+  sources={[
+    {
+      srcSet: "https://dragon-ball-official.com/assets/img/intro/intro_6.png",
+      media: "(max-width: 480px)",
+    },
+    {
+      srcSet: "https://dragon-ball-official.com/assets/img/intro/intro_5.png",
+      maxW: "3xl",
+    },
+    {
+      srcSet: "https://dragon-ball-official.com/assets/img/intro/intro_3.png",
+      maxW: "976px",
+    },
+    {
+      srcSet: "https://dragon-ball-official.com/assets/img/intro/intro_2.png",
+      maxW: 1280,
+    },
+  ]}
+  w="xl"
+/>
+```
+
+### ソートを無効にする
+
+デフォルトでは、ソースの`minW` と `maxW` によってソートされます。このソートを無効にする場合は、`enableSorting`を`false`にします。
+
+```tsx preview
+<Picture
+  src="https://dragon-ball-official.com/assets/img/intro/intro_1.png"
+  alt="Dragon Ball"
+  enableSorting={false}
+  maxW="full"
+  sources={[
+    {
+      srcSet: "https://dragon-ball-official.com/assets/img/intro/intro_3.png",
+      media: "lg",
+    },
+    {
+      srcSet: "https://dragon-ball-official.com/assets/img/intro/intro_2.png",
+      media: "(max-width: 1280px)",
+    },
+  ]}
+  w="xl"
+/>
+```
+
+## Props
+
+<PropsTable name="picture" />

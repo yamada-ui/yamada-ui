@@ -1,9 +1,100 @@
 ---
 title: Separator
 description: "`Separator` is a component that represents a division between elements."
-storybook: components-separator--basic
+storybook: components-separator--horizontal
 source: components/separator
 style: components/separator/separator.style.ts
 ---
 
+```tsx preview
+<Separator />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Separator } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Separator } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Separator } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Separator />
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["solid", "dashed", "dotted"]}>
+    {(variant, index) => <Separator key={index} variant={variant} />}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size, index) => <Separator key={index} size={size} />}
+  </For>
+</VStack>
+```
+
+### Change Color
+
+To change the color, set `borderColor`.
+
+```tsx preview
+<VStack>
+  <Separator borderColor="success" />
+  <Separator borderColor="warning" />
+</VStack>
+```
+
+### Vertical
+
+```tsx preview
+<HStack>
+  <Text>First</Text>
+  <Separator orientation="vertical" h="4" />
+  <Text>Second</Text>
+</HStack>
+```
+
+### Label
+
+```tsx preview
+<VStack>
+  <HStack>
+    <Text flexShrink="0">Label</Text>
+    <Separator flex="1" />
+  </HStack>
+
+  <HStack>
+    <Separator flex="1" />
+    <Text flexShrink="0">Label</Text>
+  </HStack>
+
+  <HStack>
+    <Separator flex="1" />
+    <Text flexShrink="0">Label</Text>
+    <Separator flex="1" />
+  </HStack>
+</VStack>
+```
+
+## Props
+
+<PropsTable name="separator" />

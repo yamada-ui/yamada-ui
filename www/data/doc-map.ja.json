@@ -377,26 +377,6 @@
               "pathname": "/docs/components/modal"
             },
             {
-              "title": "MonthPicker",
-              "segment": "month-picker",
-              "pathname": "/docs/components/month-picker"
-            },
-            {
-              "title": "MultiAutocomplete",
-              "segment": "multi-autocomplete",
-              "pathname": "/docs/components/multi-autocomplete"
-            },
-            {
-              "title": "MultiDatePicker",
-              "segment": "multi-date-picker",
-              "pathname": "/docs/components/multi-date-picker"
-            },
-            {
-              "title": "MultiSelect",
-              "segment": "multi-select",
-              "pathname": "/docs/components/multi-select"
-            },
-            {
               "title": "NativeSelect",
               "segment": "native-select",
               "pathname": "/docs/components/native-select"
@@ -461,16 +441,6 @@
               "title": "RadioCard",
               "segment": "radio-card",
               "pathname": "/docs/components/radio-card"
-            },
-            {
-              "title": "RangeDatePicker",
-              "segment": "range-date-picker",
-              "pathname": "/docs/components/range-date-picker"
-            },
-            {
-              "title": "RangeSlider",
-              "segment": "range-slider",
-              "pathname": "/docs/components/range-slider"
             },
             {
               "title": "Rating",
@@ -625,11 +595,6 @@
               "title": "Wrap",
               "segment": "wrap",
               "pathname": "/docs/components/wrap"
-            },
-            {
-              "title": "YearPicker",
-              "segment": "year-picker",
-              "pathname": "/docs/components/year-picker"
             },
             {
               "title": "ZStack",
@@ -1185,102 +1150,102 @@
           "segment": "tokens",
           "items": [
             {
-              "title": "アニメーション (animation)",
+              "title": "アニメーション",
               "segment": "animations",
               "pathname": "/docs/theming/tokens/animations"
             },
             {
-              "title": "アスペクト比 (aspect-ratio)",
+              "title": "アスペクト比",
               "segment": "aspect-ratios",
               "pathname": "/docs/theming/tokens/aspect-ratios"
             },
             {
-              "title": "ぼかし (blur)",
+              "title": "ぼかし",
               "segment": "blurs",
               "pathname": "/docs/theming/tokens/blurs"
             },
             {
-              "title": "ボーダー (border)",
+              "title": "ボーダー",
               "segment": "borders",
               "pathname": "/docs/theming/tokens/borders"
             },
             {
-              "title": "ブレイクポイント (media query)",
+              "title": "ブレイクポイント",
               "segment": "breakpoints",
               "pathname": "/docs/theming/tokens/breakpoints"
             },
             {
-              "title": "カラー (color)",
+              "title": "カラー",
               "segment": "colors",
               "pathname": "/docs/theming/tokens/colors"
             },
             {
-              "title": "所要時間 (animation-duration)",
+              "title": "所要時間",
               "segment": "durations",
               "pathname": "/docs/theming/tokens/durations"
             },
             {
-              "title": "イージング (animation-timing-function)",
+              "title": "イージング",
               "segment": "easings",
               "pathname": "/docs/theming/tokens/easings"
             },
             {
-              "title": "文字の大きさ (font-size)",
+              "title": "文字の大きさ",
               "segment": "font-sizes",
               "pathname": "/docs/theming/tokens/font-sizes"
             },
             {
-              "title": "文字の太さ (font-weight)",
+              "title": "文字の太さ",
               "segment": "font-weights",
               "pathname": "/docs/theming/tokens/font-weights"
             },
             {
-              "title": "文字体 (font-family)",
+              "title": "文字体",
               "segment": "fonts",
               "pathname": "/docs/theming/tokens/fonts"
             },
             {
-              "title": "グラデーション (background-image)",
+              "title": "グラデーション",
               "segment": "gradients",
               "pathname": "/docs/theming/tokens/gradients"
             },
             {
-              "title": "キーフレーム (@keyframes)",
+              "title": "キーフレーム",
               "segment": "keyframes",
               "pathname": "/docs/theming/tokens/keyframes"
             },
             {
-              "title": "文字間隔 (letter-spacing)",
+              "title": "文字間隔",
               "segment": "letter-spacings",
               "pathname": "/docs/theming/tokens/letter-spacings"
             },
             {
-              "title": "行間 (line-height)",
+              "title": "行間",
               "segment": "line-heights",
               "pathname": "/docs/theming/tokens/line-heights"
             },
             {
-              "title": "角丸 (border-radius)",
+              "title": "角丸",
               "segment": "radii",
               "pathname": "/docs/theming/tokens/radii"
             },
             {
-              "title": "シャドウ (box-shadow)",
+              "title": "シャドウ",
               "segment": "shadows",
               "pathname": "/docs/theming/tokens/shadows"
             },
             {
-              "title": "サイズ (width, height)",
+              "title": "サイズ",
               "segment": "sizes",
               "pathname": "/docs/theming/tokens/sizes"
             },
             {
-              "title": "スペース (margin, padding)",
+              "title": "スペース",
               "segment": "spaces",
               "pathname": "/docs/theming/tokens/spaces"
             },
             {
-              "title": "位置 (z-index)",
+              "title": "位置",
               "segment": "z-indices",
               "pathname": "/docs/theming/tokens/z-indices"
             }

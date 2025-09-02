@@ -15,12 +15,12 @@ import {
 } from "../../utils"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Colors",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const Colors = () => {
   return (
     <>
       <Heading>Colors</Heading>
@@ -45,11 +45,11 @@ export const Basic = () => {
                       <Box
                         bg={`${colorScheme}.${tone}`}
                         h="12"
-                        rounded="md"
+                        rounded="l2"
                         w="full"
                       />
                       <Text
-                        color="muted"
+                        color="fg.muted"
                         fontSize="xs"
                         lineClamp={1}
                         textAlign="center"
@@ -83,11 +83,11 @@ export const Basic = () => {
                       <Box
                         bg={`${colorScheme}.${tone}`}
                         h="12"
-                        rounded="md"
+                        rounded="l2"
                         w="full"
                       />
                       <Text
-                        color="muted"
+                        color="fg.muted"
                         fontSize="xs"
                         lineClamp={1}
                         textAlign="center"
@@ -113,6 +113,7 @@ export const Basic = () => {
                 "",
                 "subtle",
                 "overlay",
+                "ghost",
                 "muted",
                 "emphasized",
                 "contrast",
@@ -130,12 +131,12 @@ export const Basic = () => {
                     borderColor="border.muted"
                     borderWidth="1px"
                     h="24"
-                    rounded="md"
+                    rounded="l2"
                     w="full"
                   />
 
                   <Text
-                    color="muted"
+                    color="fg.muted"
                     fontSize="xs"
                     lineClamp={1}
                     textAlign="center"
@@ -176,14 +177,14 @@ export const Basic = () => {
                     borderColor="border.muted"
                     borderWidth="1px"
                     h="24"
-                    rounded="md"
+                    rounded="l2"
                     w="full"
                   >
                     <Text color={value ? `fg.${value}` : "fg"}>Ag</Text>
                   </Center>
 
                   <Text
-                    color="muted"
+                    color="fg.muted"
                     fontSize="xs"
                     lineClamp={1}
                     textAlign="center"
@@ -223,12 +224,12 @@ export const Basic = () => {
                     borderColor={value ? `border.${value}` : "border"}
                     borderWidth="3px"
                     h="24"
-                    rounded="md"
+                    rounded="l2"
                     w="full"
                   />
 
                   <Text
-                    color="muted"
+                    color="fg.muted"
                     fontSize="xs"
                     lineClamp={1}
                     textAlign="center"
@@ -272,12 +273,12 @@ export const Basic = () => {
                         borderColor="border.muted"
                         borderWidth="1px"
                         h="24"
-                        rounded="md"
+                        rounded="l2"
                         w="full"
                       />
 
                       <Text
-                        color="muted"
+                        color="fg.muted"
                         fontSize="xs"
                         lineClamp={1}
                         textAlign="center"

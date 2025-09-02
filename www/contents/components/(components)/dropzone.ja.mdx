@@ -138,7 +138,7 @@ import { Dropzone } from "@workspaces/ui"
 
 ### 状態に応じた表示をする
 
-ファイルを受け入れたか、拒否されたかの状態に応じて、表示を制御したい場合は、`DropzoneAccept`, `DropzoneReject`, `DropzoneIdle`を使用します。
+ファイルを受け入れたか、拒否されたかの状態に応じて、表示を制御する場合は、`DropzoneAccept`, `DropzoneReject`, `DropzoneIdle`を使用します。
 
 - `DropzoneAccept`: ファイルが受け入れられたときに表示されるコンポーネントです。
 - `DropzoneReject`: ファイルが拒否されたときに表示されるコンポーネントです。
@@ -290,9 +290,9 @@ import { Dropzone } from "@workspaces/ui"
 </VStack>
 ```
 
-### 無効化する
+### 無効にする
 
-無効化する場合は、`disabled`を`true`に設定します。
+無効にする場合は、`disabled`を`true`に設定します。
 
 ```tsx preview
 <VStack>
@@ -379,3 +379,7 @@ return (
   </VStack>
 )
 ```
+
+## Props
+
+<PropsTable name="dropzone" />

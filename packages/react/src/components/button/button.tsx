@@ -159,7 +159,7 @@ export const Button = withContext<"button", ButtonProps>(
     )
 
     return (
-      <ButtonContext.Provider value={context}>
+      <ButtonContext value={context}>
         <styled.button
           ref={mergeRefs(ref, buttonRef)}
           as={as}
@@ -186,7 +186,7 @@ export const Button = withContext<"button", ButtonProps>(
 
           <Ripple {...rippleProps} />
         </styled.button>
-      </ButtonContext.Provider>
+      </ButtonContext>
     )
   },
 )()

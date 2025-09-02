@@ -56,7 +56,7 @@ export const PreviewDrawer = memo(function PreviewDrawer({
         p="{space}"
       >
         <Center
-          bg="bg.panel"
+          bg="bg.subtle"
           boxSize={{ base: "auto", md: "xs" }}
           gridRow={{ base: "1 / 3", md: "2 / 3" }}
           mx="auto"
@@ -71,7 +71,7 @@ export const PreviewDrawer = memo(function PreviewDrawer({
             fill="none"
             left="0"
             position="absolute"
-            stroke="border.muted/70"
+            stroke={["border.emphasized", "border.muted"]}
             strokeWidth="0.1"
             top="0"
             viewBox="0 0 24 24"
@@ -102,10 +102,11 @@ export const PreviewDrawer = memo(function PreviewDrawer({
         <VStack minW="0">
           <CodePreview
             lang="tsx"
+            bg="bg.subtle"
             code={`import { ${title} } from "@yamada-ui/react"`}
           />
 
-          <CodePreview lang="tsx" code={`<${title} />`} />
+          <CodePreview lang="tsx" bg="bg.subtle" code={`<${title} />`} />
         </VStack>
       </Drawer.Content>
     </Drawer.Root>

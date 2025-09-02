@@ -12,7 +12,7 @@ export const Basic = () => {
   const { ref, hovered } = useHover()
 
   return (
-    <Box ref={ref} bg="mono" color="mono.contrast" p="md" rounded="md" w="full">
+    <Box ref={ref} bg="mono" color="mono.contrast" p="md" rounded="l2" w="full">
       {hovered ? "I am hovered" : "Put mouse over me please"}
     </Box>
   )

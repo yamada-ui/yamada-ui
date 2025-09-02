@@ -207,7 +207,7 @@ import { Input, InputGroup } from "@workspaces/ui"
 <Input placeholder="Custom placeholder" _placeholder={{ color: "blue.500" }} />
 ```
 
-### フローティングラベルを使用する
+### フローティングラベルを使う
 
 ```tsx preview
 <Field.Root>
@@ -253,3 +253,11 @@ const [value, setValue] = useState<string>("オッス！オラ悟空！")
 
 return <Input value={value} onChange={(ev) => setValue(ev.target.value)} />
 ```
+
+## Props
+
+<PropsTable
+  name="input"
+  all
+  omit={["InputGroupRoot", "InputAddon", "InputElement"]}
+/>

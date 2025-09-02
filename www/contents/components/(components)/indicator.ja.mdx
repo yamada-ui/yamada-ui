@@ -100,7 +100,7 @@ import { Indicator } from "@workspaces/ui"
 
 ### 表示位置を変更する
 
-インジケーターの表示位置を変更したい場合は、`placement`に`start-start`や`center-end`などを指定します。
+表示位置を変更する場合は、`placement`に`start-start`や`center-end`などを指定します。
 
 ```tsx preview functional
 const placements = [
@@ -138,7 +138,7 @@ return (
 
 ### オフセットを変更する
 
-要素の大きさによっては、インジケーターが意図しない位置になる場合があります。その場合は、`offset`で調整します。
+オフセットを変更する場合は、`offset`に値を設定します。
 
 ```tsx preview
 <Wrap>
@@ -154,7 +154,7 @@ return (
 
 ### 最大値を設定する
 
-最大値を設定するには、`overflowCount`に数値を設定します。
+最大値を設定する場合は、`overflowCount`に数値を設定します。
 
 ```tsx preview
 <Wrap>
@@ -169,7 +169,7 @@ return (
 
 ### ゼロを表示しない
 
-例えば、通知の数をインジケーターで表示している場合、`0`を表示したくないケースがあると思います。その場合は、`showZero`を`false`に設定することで表示されなくなります。
+ゼロを表示しない場合は、`showZero`を`false`にします。
 
 ```tsx preview
 <Wrap gap="lg">
@@ -191,7 +191,7 @@ return (
 
 ### 境界線を表示する
 
-要素とインジケーターの間に境界線をつけたい場合は、`withBorder`を`true`にします。
+境界線を表示する場合は、`withBorder`を`true`にします。
 
 ```tsx preview
 <Wrap>
@@ -235,7 +235,7 @@ return (
 
 ### 非表示にする
 
-`disabled`を`true`にすることで、インジケーターは非表示になります。
+非表示にする場合は、`disabled`を`true`にします。
 
 ```tsx preview
 <Wrap>
@@ -247,3 +247,7 @@ return (
   </Indicator>
 </Wrap>
 ```
+
+## Props
+
+<PropsTable name="indicator" />

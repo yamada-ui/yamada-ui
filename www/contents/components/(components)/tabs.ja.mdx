@@ -320,7 +320,7 @@ return (
 
 ### アクティブをマニュアル化する
 
-デフォルトでは、フォーカスされたタブは自動的にアクティブ化されます。任意のタイミング(`Enter`や`Space`が押されたとき)でタブをアクティブ化したい場合は、`manual`を`true`に設定します。
+デフォルトでは、フォーカスされたタブは自動的にアクティブ化されます。任意のタイミング(`Enter`や`Space`が押されたとき)でタブをアクティブ化する合は、`manual`を`true`に設定します。
 
 ```tsx preview functional
 const items = useMemo<Tabs.RootProps["items"]>(
@@ -568,3 +568,7 @@ return (
   </Tabs.Root>
 )
 ```
+
+## Props
+
+<PropsTable name="tabs" />

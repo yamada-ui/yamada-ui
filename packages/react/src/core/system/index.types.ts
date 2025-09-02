@@ -27,7 +27,6 @@ export type LayerScheme =
   | "variant"
 export type KeyframeIdent = "from" | "to"
 export type Orientation = "horizontal" | "vertical"
-
 export type Placement =
   | "center"
   | "center-center"
@@ -64,7 +63,7 @@ export interface BreakpointConfig {
    * The base value for the `breakpoint` when `direction` is "down".
    * This is treated as the largest `breakpoint`.
    *
-   * @default "9999px"
+   * @default '9999px'
    */
   base?: string
   /**
@@ -81,7 +80,7 @@ export interface BreakpointConfig {
    * - `up`: mobile-first using `min-width`.
    * - `down`: desktop-first using `max-width`.
    *
-   * @default "down"
+   * @default 'down'
    */
   direction?: BreakpointDirection
   /**
@@ -89,7 +88,7 @@ export interface BreakpointConfig {
    *
    * @external
    *
-   * @default "@media screen"
+   * @default '@media screen'
    */
   identifier?: BreakpointIdentifier
 }

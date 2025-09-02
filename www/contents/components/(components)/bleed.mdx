@@ -75,8 +75,8 @@ import { Bleed } from "@workspace/ui"
 To align vertically, use the `block` property.
 
 ```tsx preview
-<Box p="xl" rounded="md" borderWidth="1" h="2xs">
-  <Bleed block="xl">
+<Box p="lg" rounded="l2" borderWidth="1px">
+  <Bleed block="lg">
     <Center maxH="2xs" overflow="hidden">
       <Image
         src="https://hokuto-no-ken.jp/wp/wp-content/themes/hokuto_cms_40th/images/main_vs_bg_new.jpg"
@@ -96,8 +96,8 @@ To align in a specific direction, use properties like `inlineStart` or `blockEnd
 
 ```tsx preview
 <VStack>
-  <Box p="xl" rounded="md" borderWidth="1" h="2xs">
-    <Bleed inlineStart="xl">
+  <Box p="lg" rounded="l2" borderWidth="1px">
+    <Bleed inlineStart="lg">
       <Center h="4xs" overflow="hidden">
         <Image
           src="https://hokuto-no-ken.jp/wp/wp-content/themes/hokuto_cms_40th/images/main_vs_bg_new.jpg"
@@ -110,8 +110,8 @@ To align in a specific direction, use properties like `inlineStart` or `blockEnd
     </Bleed>
   </Box>
 
-  <Box p="xl" rounded="md" borderWidth="1" h="2xs">
-    <Bleed inlineEnd="xl">
+  <Box p="lg" rounded="l2" borderWidth="1px">
+    <Bleed inlineEnd="lg">
       <Center h="4xs" overflow="hidden">
         <Image
           src="https://hokuto-no-ken.jp/wp/wp-content/themes/hokuto_cms_40th/images/main_vs_bg_new.jpg"
@@ -124,8 +124,8 @@ To align in a specific direction, use properties like `inlineStart` or `blockEnd
     </Bleed>
   </Box>
 
-  <Box p="xl" rounded="md" borderWidth="1" h="2xs">
-    <Bleed blockStart="xl">
+  <Box p="lg" rounded="l2" borderWidth="1px">
+    <Bleed blockStart="lg">
       <Center h="4xs" overflow="hidden">
         <Image
           src="https://hokuto-no-ken.jp/wp/wp-content/themes/hokuto_cms_40th/images/main_vs_bg_new.jpg"
@@ -138,8 +138,8 @@ To align in a specific direction, use properties like `inlineStart` or `blockEnd
     </Bleed>
   </Box>
 
-  <Box p="xl" rounded="md" borderWidth="1" h="2xs">
-    <Bleed blockEnd="xl">
+  <Box p="lg" rounded="l2" borderWidth="1px">
+    <Bleed blockEnd="lg">
       <Center h="4xs" overflow="hidden">
         <Image
           src="https://hokuto-no-ken.jp/wp/wp-content/themes/hokuto_cms_40th/images/main_vs_bg_new.jpg"
@@ -203,3 +203,7 @@ To match the screen width, set `inline` to `full`.
   </VStack>
 </Center>
 ```
+
+## Props
+
+<PropsTable name="bleed" />

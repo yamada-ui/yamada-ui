@@ -9,12 +9,12 @@ import { Text } from "../../components/text"
 import { keyframes } from "./keyframes"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Keyframes",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const Keyframes = () => {
   return (
     <>
       <Heading>Keyframes</Heading>

@@ -1,0 +1,19 @@
+{
+  "Show": {
+    "children": {
+      "type": "ReactNodeOrFunction<Y>",
+      "description": "The children to render if `when` is `true`",
+      "required": false
+    },
+    "fallback": {
+      "type": "ReactNode",
+      "description": "The fallback content to render if `when` is `false`",
+      "required": false
+    },
+    "when": {
+      "type": "null | Y",
+      "description": "If `true`, it'll render the `children` prop",
+      "required": false
+    }
+  }
+}

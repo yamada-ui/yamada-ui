@@ -6,4 +6,144 @@ source: components/progress
 style: components/progress/progress.style.ts
 ---
 
+```tsx preview
+<Progress value={50} />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Progress } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Progress } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Progress } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Progress value={50} />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["outline", "subtle"]}>
+    {(variant, index) => (
+      <Progress
+        key={index}
+        aria-label="Storage space"
+        colorScheme="success"
+        variant={variant}
+        value={50}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size, index) => (
+      <Progress key={index} aria-label="Storage space" value={31} size={size} />
+    )}
+  </For>
+</VStack>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<Progress aria-label="Storage space" colorScheme="purple" value={18} />
+```
+
+### 形を変更する
+
+```tsx preview
+<VStack>
+  <For each={["rounded", "square", "circle"]}>
+    {(shape, index) => (
+      <Progress
+        key={index}
+        aria-label="Storage space"
+        shape={shape}
+        value={50}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### レンジの色を変更する
+
+レンジの色を変更する場合は、`rangeColor`に色を設定します。
+
+```tsx preview
+<Progress aria-label="Storage space" rangeColor="red" value={18} />
+```
+
+### トラックの色を変更する
+
+トラックの色を変更する場合は、`trackColor`に色を設定します。
+
+```tsx preview
+<Progress
+  aria-label="Storage space"
+  trackColor="green/50"
+  rangeColor="green"
+  value={50}
+/>
+```
+
+### ストライプを使う
+
+ストライプを使う場合は、`striped`を`true`にします。
+
+```tsx preview
+<Progress aria-label="Storage space" striped value={19} />
+```
+
+### ストライプにアニメーションを使う
+
+ストライプにアニメーションを使う場合は、`animated`を`true`に設定します。
+
+```tsx preview
+<Progress aria-label="Storage space" striped animated value={20} />
+```
+
+### 所要時間を変更する
+
+所要時間を変更する場合は、`duration`に数値(秒)または文字列を設定します。
+
+```tsx preview
+<Progress
+  aria-label="Storage space"
+  striped
+  animated
+  duration="3s"
+  value={50}
+/>
+```
+
+### アニメーションを使う
+
+アニメーションを使う場合は、`value`を`null`に設定します。
+
+```tsx preview
+<Progress value={null} />
+```
+
+## Props
+
+<PropsTable name="progress" />

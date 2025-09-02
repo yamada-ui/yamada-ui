@@ -7,12 +7,12 @@ import { Text } from "../../components/text"
 import { fontSizes } from "./font-sizes"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Font Sizes",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const FontSizes = () => {
   return (
     <>
       <Heading>Font Sizes</Heading>

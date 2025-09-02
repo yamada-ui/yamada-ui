@@ -5,4 +5,50 @@ storybook: hooks-usebreakpointeffect--basic
 source: hooks/use-breakpoint-effect
 ---
 
+```tsx preview functional client
+const [device, setDevice] = useState("mobile");
+
+useBreakpointEffect(breakpoint => {
+  if (breakpoint === "sm") {
+    setDevice("mobile");
+  } else if (breakpoint === "md") {
+    setDevice("tablet");
+  } else {
+    setDevice("desktop");
+  }
+}, []);
+
+return <Text>The current device is "{device}"</Box>;
+```
+
 ### Usage
+
+:::code-group
+
+```tsx [package]
+import { useBreakpointEffect } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useBreakpointEffect } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useBreakpointEffect } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [device, setDevice] = useState("mobile")
+
+useBreakpointEffect((breakpoint) => {
+  if (breakpoint === "sm") {
+    setDevice("mobile")
+  } else if (breakpoint === "md") {
+    setDevice("tablet")
+  } else {
+    setDevice("desktop")
+  }
+}, [])
+```

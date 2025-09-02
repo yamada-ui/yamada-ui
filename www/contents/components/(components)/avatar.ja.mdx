@@ -83,7 +83,7 @@ import { Avatar, AvatarGroup } from "@workspaces/ui"
 
 ### 画像を表示する
 
-アバターに画像を表示したい場合は、`src`にパスを設定します。
+画像を表示する場合は、`src`にパスを設定します。
 
 ```tsx preview
 <Avatar src="https://avatars.githubusercontent.com/u/84060430?v=4" />
@@ -108,8 +108,6 @@ import { Avatar, AvatarGroup } from "@workspaces/ui"
 ```
 
 ### フォールバックをカスタマイズする
-
-フォールバックのアイコンや背景色をカスタマイズした例です。
 
 ```tsx preview
 <Wrap gap="md">
@@ -139,7 +137,7 @@ return (
 
 ### グループ化する
 
-表示するアバターの数を制御する場合は、`max`に数値を指定します。指定された数以上のアバターが存在する場合は、切り詰めて残りのアバターを`+X`のように表示されます。
+グループ化する場合は、`max`に数値を指定します。指定された数以上のアバターが存在する場合は、切り詰めて残りのアバターを`+X`のように表示されます。
 
 ```tsx preview
 <AvatarGroup.Root max={3}>

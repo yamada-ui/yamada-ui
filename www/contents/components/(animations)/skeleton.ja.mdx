@@ -6,7 +6,242 @@ source: components/skeleton
 style: components/skeleton/skeleton.style.ts
 ---
 
+```tsx preview
+<VStack>
+  <Skeleton />
+
+  <SkeletonCircle />
+
+  <SkeletonText />
+</VStack>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Skeleton, SkeletonCircle, SkeletonText } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Skeleton, SkeletonCircle, SkeletonText } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Skeleton, SkeletonCircle, SkeletonText } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Skeleton />
+
+<SkeletonCircle />
+
+<SkeletonText />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <HStack>
+    <For each={["pulse", "shine"]}>
+      {(variant) => (
+        <VStack key={variant}>
+          <SkeletonCircle variant={variant} />
+          <SkeletonText variant={variant} lineClamp={2} />
+          <Skeleton variant={variant} h="4xs" />
+        </VStack>
+      )}
+    </For>
+  </HStack>
+</VStack>
+```
+
+### サイズを変更する
+
+サイズを変更する場合は、`Style Props`を指定します。
+
+```tsx preview
+<VStack>
+  <HStack>
+    <SkeletonCircle boxSize="14" />
+
+    <SkeletonText h="6" lineClamp={2} />
+  </HStack>
+
+  <Skeleton h="20" />
+</VStack>
+```
+
+また、子要素を渡すことで、幅と高さを合わせることができます。
+
+```tsx preview
+<VStack gap="md">
+  <HStack>
+    <Skeleton>
+      <Badge>Badge</Badge>
+    </Skeleton>
+
+    <Skeleton loading={false}>
+      <Badge>Badge</Badge>
+    </Skeleton>
+  </HStack>
+
+  <HStack>
+    <SkeletonCircle>
+      <Avatar
+        name="プリン"
+        src="https://zukan.pokemon.co.jp/zukan-api/up/images/index/c8e0b40c9ec85d0218754642a64cc047.png"
+      />
+    </SkeletonCircle>
+
+    <SkeletonCircle loading={false}>
+      <Avatar
+        name="プリン"
+        src="https://zukan.pokemon.co.jp/zukan-api/up/images/index/c8e0b40c9ec85d0218754642a64cc047.png"
+      />
+    </SkeletonCircle>
+  </HStack>
+</VStack>
+```
+
+### 点滅のカラーを変更する
+
+点滅のカラーを変更する場合は、`startColor`と`endColor`プロパティを使用します。
+
+```tsx preview
+<VStack>
+  <Skeleton variant="shine" startColor="pink.500" endColor="orange.500" />
+
+  <SkeletonCircle variant="shine" startColor="pink.500" endColor="orange.500" />
+
+  <SkeletonText variant="shine" startColor="pink.500" endColor="orange.500" />
+</VStack>
+```
+
+### テキストの間隔を変更する
+
+テキスト行間の間隔を変更する場合は、`gap`プロパティを設定します。
+
+```tsx preview
+<SkeletonText gap="md" />
+```
+
+### 行数を指定する
+
+行数を指定する場合は、`lineClamp`に数値を設定します。
+
+```tsx preview
+<SkeletonText lineClamp={5} />
+```
+
+### 点滅の所要時間を変更する
+
+点滅の所要時間を変更する場合は、`duration`に数値(秒)を設定します。
+
+```tsx preview
+<VStack>
+  <Skeleton duration={1} />
+
+  <SkeletonCircle duration={2} />
+
+  <SkeletonText duration={2} />
+</VStack>
+```
+
+### 子要素を表示する
+
+子要素を表示する場合は、`loading`に`false`を渡します。
+
+```tsx preview functional
+const { loading } = useAsync(async () => {
+  await wait(3000)
+})
+
+const wait = async (ms) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
+
+return (
+  <VStack>
+    <HStack>
+      <SkeletonCircle loading={loading}>
+        <Avatar
+          name="プリン"
+          src="https://zukan.pokemon.co.jp/zukan-api/up/images/index/c8e0b40c9ec85d0218754642a64cc047.png"
+          size="xl"
+        />
+      </SkeletonCircle>
+
+      <SkeletonText lineClamp={2} loading={loading} _loading={{ h: "5" }}>
+        <Text fontWeight="bold" lineClamp={1}>
+          プリン
+        </Text>
+        <Text lineClamp={1}>
+          つぶらな 瞳が 揺れるとき 眠たくなるような 不思議で 気持ちの良い 歌を
+          歌う。
+        </Text>
+      </SkeletonText>
+    </HStack>
+
+    <Skeleton loading={loading}>
+      <Heading lineClamp={1}>ポケットモンスター</Heading>
+    </Skeleton>
+  </VStack>
+)
+```
+
+### フェードインの所要時間を変更する
+
+フェードインの所要時間を変更する場合は、`fadeDuration`に数値(秒)を設定します。
+
+```tsx preview functional
+const { loading } = useAsync(async () => {
+  await wait(3000)
+})
+
+const wait = async (ms) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms)
+  })
+
+return (
+  <VStack>
+    <HStack>
+      <SkeletonCircle fadeDuration={2} loading={loading}>
+        <Avatar
+          name="プリン"
+          src="https://zukan.pokemon.co.jp/zukan-api/up/images/index/c8e0b40c9ec85d0218754642a64cc047.png"
+          size="xl"
+        />
+      </SkeletonCircle>
+
+      <SkeletonText
+        fadeDuration={2}
+        lineClamp={2}
+        loading={loading}
+        _loading={{ h: "5" }}
+      >
+        <Text fontWeight="bold" lineClamp={1}>
+          プリン
+        </Text>
+        <Text lineClamp={1}>
+          つぶらな 瞳が 揺れるとき 眠たくなるような 不思議で 気持ちの良い 歌を
+          歌う。
+        </Text>
+      </SkeletonText>
+    </HStack>
+
+    <Skeleton fadeDuration={2} loading={loading}>
+      <Heading lineClamp={1}>ポケットモンスター</Heading>
+    </Skeleton>
+  </VStack>
+)
+```
 
 ## Props
 

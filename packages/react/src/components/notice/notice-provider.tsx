@@ -39,24 +39,35 @@ export interface NoticeContext {
   updateLimit: (state: NoticeLimitState) => void
 }
 
-type VerticalPlacement = "bottom" | "top"
-type HorizontalPlacement = "center" | "left" | "right"
+type ExtractVertical<T extends NoticePlacement> = T extends `start${string}`
+  ? "top"
+  : "bottom"
 
-type NoticePosition = `${VerticalPlacement}-${HorizontalPlacement}`
+type ExtractHorizontal<T extends NoticePlacement> = T extends `${string}-center`
+  ? "center"
+  : T extends `${string}-start`
+    ? "left"
+    : T extends `${string}-end`
+      ? "right"
+      : "center"
+
+type PlacementMapping = {
+  [K in NoticePlacement]: `${ExtractVertical<K>}-${ExtractHorizontal<K>}`
+}
 
 /**
  * Maps NoticePlacement to NoticePosition for the Toaster.
  */
-const placements = {
-  end: "bottom-right",
+const placements: PlacementMapping = {
+  end: "bottom-center",
   "end-center": "bottom-center",
   "end-end": "bottom-right",
   "end-start": "bottom-left",
-  start: "top-right",
+  start: "top-center",
   "start-center": "top-center",
   "start-end": "top-right",
   "start-start": "top-left",
-} satisfies { [K in NoticePlacement]: NoticePosition }
+}
 
 export const NoticeContext = createContext({} as NoticeContext)
 

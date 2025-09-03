@@ -52,7 +52,7 @@ import { Slide } from "@workspaces/ui"
 
 ### 表示位置を変更する
 
-表示位置を変更するには、`placement`に`block-start`、`block-end`、`inline-start`、または`inline-end`を設定します。デフォルトは`inline-end`です。
+表示位置を変更する場合は、`placement`に`block-start`、`block-end`、`inline-start`、または`inline-end`を設定します。デフォルトは`inline-end`です。
 
 ```tsx preview functional client
 const placements = ["block-start", "block-end", "inline-start", "inline-end"]
@@ -101,7 +101,7 @@ return (
 
 ### アニメーション時間を変更する
 
-アニメーション時間を変更するには、`duration`に数値（秒単位）を設定します。デフォルトは`{ enter: 0.4, exit: 0.3 }`です。
+アニメーション時間を変更する場合は、`duration`に数値（秒単位）を設定します。デフォルトは`{ enter: 0.4, exit: 0.3 }`です。
 
 ```tsx preview functional client
 const [open, { toggle }] = useBoolean()
@@ -127,7 +127,7 @@ return (
 
 ### 非表示時にアンマウントする
 
-コンポーネントが表示されていないときにアンマウントするには、`unmountOnExit`を`true`に設定します。
+コンポーネントが表示されていないときにアンマウントする場合は、`unmountOnExit`を`true`に設定します。
 
 ```tsx preview functional client
 const [open, { toggle }] = useBoolean()
@@ -153,7 +153,7 @@ return (
 
 ### 遅延させる
 
-アニメーションを遅延させるには、`delay`に数値（秒単位）を設定します。
+アニメーションを遅延させる場合は、`delay`に数値（秒単位）を設定します。
 
 ```tsx preview functional client
 const [open, { toggle }] = useBoolean()

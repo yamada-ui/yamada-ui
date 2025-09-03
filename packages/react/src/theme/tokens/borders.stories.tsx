@@ -8,12 +8,12 @@ import { Text } from "../../components/text"
 import { borders } from "./borders"
 
 const meta: Meta = {
-  title: "Theme / Tokens / Borders",
+  title: "Theme / Tokens",
 }
 
 export default meta
 
-export const Basic = () => {
+export const Borders = () => {
   return (
     <>
       <Heading>Borders</Heading>

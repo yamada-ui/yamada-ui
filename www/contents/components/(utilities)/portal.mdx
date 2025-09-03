@@ -4,7 +4,69 @@ description: "`Portal` is a component that renders elements outside of the curre
 source: components/portal
 ---
 
+```tsx preview
+<>
+  <Text>元の世界</Text>
+  <Portal>
+    <Text>ナツキ・スバル</Text>
+  </Portal>
+</>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Portal } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Portal } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Portal } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Portal />
+```
+
+### Change the destination
+
+To change the destination, set the `ref` of the destination to `containerRef`. By default, it transfers to the end of `document.body`.
+
+```tsx preview functional client
+const containerRef = useRef<HTMLDivElement>(null)
+
+return (
+  <VStack>
+    <Text>元の世界</Text>
+    <Portal containerRef={containerRef}>
+      <Text>ナツキ・スバル</Text>
+    </Portal>
+    <Box ref={containerRef} p="md" bg="bg.contrast" color="fg.contrast">
+      <Text>エミリアたん</Text>
+    </Box>
+  </VStack>
+)
+```
+
+### Disable portaling
+
+To disable forwarding, set `disabled` to `true`.
+
+```tsx preview
+<>
+  <Text>元の世界</Text>
+  <Portal disabled>
+    <Text>ナツキ・スバル</Text>
+  </Portal>
+</>
+```
 
 ## Props
 

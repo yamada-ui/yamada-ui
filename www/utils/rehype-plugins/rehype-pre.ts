@@ -19,6 +19,7 @@ export function rehypePre(): ReturnType<Plugin<[], Root>> {
             ? className[0].split("-")[1]
             : undefined
         node.properties.title = child.properties.title
+        node.properties.highlight = child.properties.highlight
         node.properties.preview = child.properties.preview
         node.properties.functional = child.properties.functional
         node.properties.client = child.properties.client

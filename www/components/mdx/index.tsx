@@ -22,9 +22,12 @@ import { H1, H2, H3, H4, H5, H6 } from "./heading"
 import { HookList } from "./hook-list"
 import { Link } from "./link"
 import { PropsTable } from "./props-table"
+import { SemanticTokensTable } from "./semantic-tokens-table"
 import { Sponsors } from "./sponsors"
 import { Steps } from "./steps"
 import { StylePropsTable } from "./style-props-table"
+import { TokensPreview } from "./tokens-preview"
+import { TokensTable } from "./tokens-table"
 
 const mdxComponents: MDXComponents = {
   a: Link,
@@ -75,6 +78,7 @@ const mdxComponents: MDXComponents = {
       <PropsTable {...props} />
     </Suspense>
   ),
+  SemanticTokensTable,
   Sponsors,
   steps: Steps,
   strong: (props) => (
@@ -110,6 +114,8 @@ const mdxComponents: MDXComponents = {
     />
   ),
   thead: (props) => <NativeTable.Thead {...props} />,
+  TokensPreview,
+  TokensTable,
   tr: (props) => <NativeTable.Tr {...props} />,
   ul: (props) => <List.Root my="md" styleType="disc" {...props} />,
 }

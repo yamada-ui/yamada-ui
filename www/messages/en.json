@@ -90,6 +90,10 @@
       "description": "Description",
       "property": "CSS Property",
       "token": "Theme Token"
+    },
+    "tokensTable": {
+      "token": "Token",
+      "value": "Value"
     }
   }
 }

@@ -29,7 +29,7 @@ export interface SegmentedControlRootProps<Y extends string = string>
   /**
    * If provided, generate segmented control buttons but based on items.
    *
-   * @default '[]'
+   * @default []
    */
   items?: SegmentedControlItem[]
 }

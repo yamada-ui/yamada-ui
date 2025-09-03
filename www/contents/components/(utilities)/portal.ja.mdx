@@ -4,7 +4,69 @@ description: "`Portal`は、現在の`DOM`階層の外側に要素をレンダ�
 source: components/portal
 ---
 
+```tsx preview
+<>
+  <Text>元の世界</Text>
+  <Portal>
+    <Text>ナツキ・スバル</Text>
+  </Portal>
+</>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Portal } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Portal } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Portal } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Portal />
+```
+
+### 転送先を変更する
+
+転送先を変更する場合は、`containerRef`に転送先の`ref`を設定します。デフォルトでは、`document.body`の終わりに転送します。
+
+```tsx preview functional client
+const containerRef = useRef<HTMLDivElement>(null)
+
+return (
+  <VStack>
+    <Text>元の世界</Text>
+    <Portal containerRef={containerRef}>
+      <Text>ナツキ・スバル</Text>
+    </Portal>
+    <Box ref={containerRef} p="md" bg="bg.contrast" color="fg.contrast">
+      <Text>エミリアたん</Text>
+    </Box>
+  </VStack>
+)
+```
+
+### 転送を無効にする
+
+転送を無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<>
+  <Text>元の世界</Text>
+  <Portal disabled>
+    <Text>ナツキ・スバル</Text>
+  </Portal>
+</>
+```
 
 ## Props
 

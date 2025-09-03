@@ -34,7 +34,7 @@ export interface ColorSwatchProps
   /**
    * The color used for the swatch element.
    *
-   * @default "#ffffff00"
+   * @default '#ffffff00'
    */
   color?: CSSProps["color"]
   /**

@@ -38,7 +38,7 @@ export interface CheckboxGroupRootProps<Y extends string = string>
   /**
    * If provided, generate options based on items.
    *
-   * @default '[]'
+   * @default []
    */
   items?: CheckboxItem<Y>[]
 }

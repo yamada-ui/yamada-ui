@@ -3,4 +3,219 @@ title: Layer Styles
 description: Yamada UI provides features to create reusable styles.
 ---
 
-## Usage
+## Overview
+
+Layer styles are tokens that are used to reuse visual styles across the project.
+
+The styles defined in the theme are [here](https://github.com/yamada-ui/yamada-ui/blob/main/packages/react/src/theme/styles/layer-styles.ts).
+
+```tsx preview
+<Wrap gap="md" colorScheme="blue">
+  <For each={["solid", "subtle", "surface", "ghost", "outline"]}>
+    {(token, index) => (
+      <Box
+        as="button"
+        type="button"
+        key={index}
+        layerStyle={token}
+        px="md"
+        py="sm"
+        rounded="l2"
+        _hover={{ layerStyle: `${token}.hover` }}
+      >
+        {toTitleCase(token)}
+      </Box>
+    )}
+  </For>
+</Wrap>
+```
+
+```tsx
+export const layerStyles = defineStyles.layerStyle({
+  active: { opacity: 1 },
+  disabled: {
+    cursor: "not-allowed",
+    opacity: 0.4,
+    _ripple: { display: "none" },
+  },
+  ghost: {
+    bg: "transparent",
+    border: "1px solid transparent",
+    color: "colorScheme.outline",
+  },
+  "ghost.hover": {
+    bg: "colorScheme.ghost",
+  },
+  hover: { opacity: 0.8 },
+  outline: {
+    bg: "transparent",
+    border: "1px solid {colorScheme.muted}",
+    color: "colorScheme.outline",
+  },
+  "outline.hover": {
+    bg: "colorScheme.ghost",
+  },
+  panel: {
+    bg: "bg.panel",
+    borderColor: "border",
+    borderWidth: "1px",
+  },
+  readOnly: {
+    cursor: "default",
+    _ripple: { display: "none" },
+  },
+  solid: {
+    bg: "colorScheme.solid",
+    border: "1px solid transparent",
+    color: "colorScheme.contrast",
+  },
+  "solid.hover": {
+    bg: "colorScheme.solid/80",
+  },
+  subtle: {
+    bg: "colorScheme.subtle",
+    border: "1px solid transparent",
+    color: "colorScheme.fg",
+  },
+  "subtle.hover": {
+    bg: "colorScheme.muted",
+  },
+  surface: {
+    bg: "colorScheme.subtle",
+    border: "1px solid {colorScheme.muted}",
+    color: "colorScheme.fg",
+  },
+  "surface.hover": {
+    bg: "colorScheme.muted",
+  },
+  visuallyHidden: visuallyHiddenAttributes.style,
+})
+```
+
+## Customize
+
+::::steps
+
+### Generate a Theme
+
+Use the [CLI](/docs/theming/cli) to generate a theme.
+
+:::warning
+Before running the following commands, you need to install `@yamada-ui/cli` and execute the `init` command. For more details, please see [here](/docs/get-started/cli).
+:::
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+### Change the Style
+
+Change the `styles/layer-styles.ts` in the generated theme.
+
+```tsx title="theme/styles/layer-styles.ts"
+import { defineStyles, visuallyHiddenAttributes } from "@yamada-ui/react"
+
+export const layerStyles = defineStyles.layerStyle({
+  dim: { opacity: 0.6 }, // [!code highlight]
+  active: { opacity: 1 },
+  disabled: {
+    cursor: "not-allowed",
+    opacity: 0.4,
+    _ripple: { display: "none" },
+  },
+  ghost: {
+    bg: "transparent",
+    border: "1px solid transparent",
+    color: "colorScheme.outline",
+  },
+  "ghost.hover": {
+    bg: "colorScheme.ghost",
+  },
+  hover: { opacity: 0.8 },
+  outline: {
+    bg: "transparent",
+    border: "1px solid {colorScheme.muted}",
+    color: "colorScheme.outline",
+  },
+  "outline.hover": {
+    bg: "colorScheme.ghost",
+  },
+  panel: {
+    bg: "bg.panel",
+    borderColor: "border",
+    borderWidth: "1px",
+  },
+  readOnly: {
+    cursor: "default",
+    _ripple: { display: "none" },
+  },
+  solid: {
+    bg: "colorScheme.solid",
+    border: "1px solid transparent",
+    color: "colorScheme.contrast",
+  },
+  "solid.hover": {
+    bg: "colorScheme.solid/80",
+  },
+  subtle: {
+    bg: "colorScheme.subtle",
+    border: "1px solid transparent",
+    color: "colorScheme.fg",
+  },
+  "subtle.hover": {
+    bg: "colorScheme.muted",
+  },
+  surface: {
+    bg: "colorScheme.subtle",
+    border: "1px solid {colorScheme.muted}",
+    color: "colorScheme.fg",
+  },
+  "surface.hover": {
+    bg: "colorScheme.muted",
+  },
+  visuallyHidden: visuallyHiddenAttributes.style,
+})
+```
+
+### Update the Provider
+
+Set the generated theme to `UIProvider`.
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### Use Layer Style
+
+Set the value to `layerStyle`.
+
+```tsx
+<Box layerStyle="dim" />
+```
+
+::::

@@ -5,7 +5,133 @@ source: components/ripple
 style: components/ripple/ripple.style.ts
 ---
 
+```tsx preview functional client
+const { onClick, ...rippleProps } = useRipple()
+
+return (
+  <Box
+    as="button"
+    type="button"
+    onClick={onClick}
+    py="sm"
+    px="md"
+    bg="bg.contrast"
+    color="fg.contrast"
+    rounded="12"
+    position="relative"
+    overflow="hidden"
+  >
+    <Text>Button</Text>
+
+    <Ripple {...rippleProps} />
+  </Box>
+)
+```
+
+:::warning
+`Ripple`の親要素のスタイルに`position: relative`と`overflow: hidden`を設定する必要があります。
+:::
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Ripple, useRipple } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Ripple, useRipple } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Ripple, useRipple } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Ripple />
+```
+
+### カラーを変更する
+
+カラーを変更する場合は、`color`に色を設定します。デフォルトでは、`currentColor`が設定されています。
+
+```tsx preview functional client
+const { onClick, ...rippleProps } = useRipple()
+
+return (
+  <Box
+    as="button"
+    type="button"
+    onClick={onClick}
+    py="sm"
+    px="md"
+    bg="bg.contrast"
+    color="fg.contrast"
+    rounded="12"
+    position="relative"
+    overflow="hidden"
+  >
+    <Text>Button</Text>
+
+    <Ripple color="warning" {...rippleProps} />
+  </Box>
+)
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview functional client
+const { onClick, ...rippleProps } = useRipple({ disabled: true })
+
+return (
+  <Box
+    as="button"
+    type="button"
+    onClick={onClick}
+    py="sm"
+    px="md"
+    bg="bg.contrast"
+    color="fg.contrast"
+    rounded="12"
+    position="relative"
+    overflow="hidden"
+  >
+    <Text>Button</Text>
+
+    <Ripple {...rippleProps} />
+  </Box>
+)
+```
+
+または、`Ripple`の`disabled`を`true`にすることで無効にできます。
+
+```tsx preview functional client
+const { onClick, ...rippleProps } = useRipple()
+
+return (
+  <Box
+    as="button"
+    type="button"
+    onClick={onClick}
+    py="sm"
+    px="md"
+    bg="bg.contrast"
+    color="fg.contrast"
+    rounded="12"
+    position="relative"
+    overflow="hidden"
+  >
+    <Text>Button</Text>
+
+    <Ripple disabled {...rippleProps} />
+  </Box>
+)
+```
 
 ## Props
 

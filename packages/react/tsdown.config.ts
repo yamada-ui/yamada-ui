@@ -3,7 +3,13 @@ import { defineConfig } from "tsdown"
 
 const sharedConfig: UserConfig = {
   target: "es2022",
-  entry: ["src/index.ts"],
+  entry: [
+    "src",
+    "!src/components/icon/icons",
+    "!src/**/*.json",
+    "!src/**/*.test.*",
+    "!src/**/*.stories.*",
+  ],
   platform: "browser",
   sourcemap: true,
   unbundle: true,

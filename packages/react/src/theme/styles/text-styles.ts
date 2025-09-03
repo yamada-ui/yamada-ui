@@ -1,6 +1,9 @@
 import { defineStyles } from "../../core"
 
 export const textStyles = defineStyles.textStyle({
+  ghost: {
+    color: "colorScheme.outline",
+  },
   mono: {
     fontFamily: "mono",
     fontWeight: "medium",

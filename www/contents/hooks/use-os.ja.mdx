@@ -5,4 +5,30 @@ storybook: hooks-useos--basic
 source: hooks/use-os
 ---
 
+```tsx preview functional client
+const os = useOS()
+
+return <Text>Your os is "{os}"</Text>
+```
+
 ### 使い方
+
+:::code-group
+
+```tsx [package]
+import { useOS } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useOS } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useOS } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const os = useOS()
+```

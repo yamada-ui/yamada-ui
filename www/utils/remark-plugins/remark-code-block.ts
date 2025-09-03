@@ -8,6 +8,7 @@ export function remarkCodeBlock(): ReturnType<Plugin<[], Root>> {
       if (node.type !== "code") return
       if (!node.meta) return
 
+      const [highlight] = node.meta.match(/{.+?}/) ?? [""]
       const [title] = node.meta.match(/(?<=title=("|'))(.*?)(?=("|'))/) ?? [""]
       const preview =
         node.meta.includes("preview") && !node.meta.includes("preview=false")
@@ -26,6 +27,7 @@ export function remarkCodeBlock(): ReturnType<Plugin<[], Root>> {
         ...node.data.hProperties,
         client,
         functional,
+        highlight,
         iframe,
         preview,
         title,

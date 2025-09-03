@@ -5,4 +5,40 @@ storybook: hooks-useprevious--basic
 source: hooks/use-previous
 ---
 
+```tsx preview functional client
+const [flg, { toggle }] = useBoolean()
+const prevFlg = usePrevious(flg)
+
+return (
+  <VStack>
+    <Text>
+      state: {String(flg)}, prev: {String(prevFlg)}
+    </Text>
+
+    <Button onClick={toggle}>Click me to toggle the boolean value</Button>
+  </VStack>
+)
+```
+
 ### Usage
+
+:::code-group
+
+```tsx [package]
+import { usePrevious } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { usePrevious } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { usePrevious } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [flg, { toggle }] = useBoolean()
+const prevFlg = usePrevious(flg)
+```

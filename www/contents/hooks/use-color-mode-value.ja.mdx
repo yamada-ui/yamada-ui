@@ -7,14 +7,9 @@ source: hooks/use-color-mode-value
 
 ```tsx preview functional client
 const { colorMode } = useColorMode()
-const bg = useColorModeValue("blackAlpha.800", "whiteAlpha.800")
-const color = useColorModeValue("whiteAlpha.800", "blackAlpha.800")
+const color = useColorModeValue("green", "red")
 
-return (
-  <Text bg={bg} color={color}>
-    The current colorMode is "{colorMode}"
-  </Text>
-)
+return <Text color={color}>The current colorMode is "{colorMode}"</Text>
 ```
 
 ### 使い方
@@ -36,5 +31,5 @@ import { useColorModeValue } from "@workspaces/ui"
 :::
 
 ```tsx
-const bg = useColorModeValue("blackAlpha.800", "whiteAlpha.800")
+const color = useColorModeValue("green", "red")
 ```

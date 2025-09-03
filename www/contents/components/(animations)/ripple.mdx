@@ -5,7 +5,133 @@ source: components/ripple
 style: components/ripple/ripple.style.ts
 ---
 
+```tsx preview functional client
+const { onClick, ...rippleProps } = useRipple()
+
+return (
+  <Box
+    as="button"
+    type="button"
+    onClick={onClick}
+    py="sm"
+    px="md"
+    bg="bg.contrast"
+    color="fg.contrast"
+    rounded="12"
+    position="relative"
+    overflow="hidden"
+  >
+    <Text>Button</Text>
+
+    <Ripple {...rippleProps} />
+  </Box>
+)
+```
+
+:::warning  
+You need to set `position: relative` and `overflow: hidden` on the parent element of `Ripple`.  
+:::
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Ripple, useRipple } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Ripple, useRipple } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Ripple, useRipple } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Ripple />
+```
+
+### Change the Color
+
+To change the color, set a color to `color`. By default, `currentColor` is set.
+
+```tsx preview functional client
+const { onClick, ...rippleProps } = useRipple()
+
+return (
+  <Box
+    as="button"
+    type="button"
+    onClick={onClick}
+    py="sm"
+    px="md"
+    bg="bg.contrast"
+    color="fg.contrast"
+    rounded="12"
+    position="relative"
+    overflow="hidden"
+  >
+    <Text>Button</Text>
+
+    <Ripple color="warning" {...rippleProps} />
+  </Box>
+)
+```
+
+### Disable Ripple
+
+To disable, set `disabled` to `true`.
+
+```tsx preview functional client
+const { onClick, ...rippleProps } = useRipple({ disabled: true })
+
+return (
+  <Box
+    as="button"
+    type="button"
+    onClick={onClick}
+    py="sm"
+    px="md"
+    bg="bg.contrast"
+    color="fg.contrast"
+    rounded="12"
+    position="relative"
+    overflow="hidden"
+  >
+    <Text>Button</Text>
+
+    <Ripple {...rippleProps} />
+  </Box>
+)
+```
+
+Alternatively, you can disable it by setting `disabled` to `true` on `Ripple`.
+
+```tsx preview functional client
+const { onClick, ...rippleProps } = useRipple()
+
+return (
+  <Box
+    as="button"
+    type="button"
+    onClick={onClick}
+    py="sm"
+    px="md"
+    bg="bg.contrast"
+    color="fg.contrast"
+    rounded="12"
+    position="relative"
+    overflow="hidden"
+  >
+    <Text>Button</Text>
+
+    <Ripple disabled {...rippleProps} />
+  </Box>
+)
+```
 
 ## Props
 

@@ -5,4 +5,66 @@ storybook: hooks-usetheme--basic
 source: hooks/use-theme
 ---
 
+```tsx preview functional client
+const { theme } = useTheme()
+
+return <Text lineClamp={3}>{JSON.stringify(theme)}</Text>
+```
+
 ### 使い方
+
+:::code-group
+
+```tsx [package]
+import { useTheme } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useTheme } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useTheme } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { themeScheme, changeThemeScheme } = useTheme()
+```
+
+:::note
+テーマをもっと学びたい場合は、[こちら](/docs/theming)をご覧ください。
+:::
+
+#### テーマを切り替える
+
+```tsx preview functional client
+const { themeScheme, changeThemeScheme } = useTheme()
+
+return (
+  <>
+    <Text>The current scheme is "{themeScheme}"</Text>
+
+    <Wrap mt="md" gap="md">
+      <Button onClick={() => changeThemeScheme("base")}>Base Theme</Button>
+
+      <Button colorScheme="pink" onClick={() => changeThemeScheme("pink")}>
+        Pink Theme
+      </Button>
+
+      <Button colorScheme="purple" onClick={() => changeThemeScheme("purple")}>
+        Purple Theme
+      </Button>
+
+      <Button colorScheme="blue" onClick={() => changeThemeScheme("blue")}>
+        Blue Theme
+      </Button>
+    </Wrap>
+  </>
+)
+```
+
+:::warning
+テーマを切り替えるには、複数のテーマを用意する必要があります。詳しくは、[こちら](/docs/theming/switching-themes)をご覧ください。
+:::

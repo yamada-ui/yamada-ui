@@ -129,7 +129,7 @@ export interface SnacksConfig {
   /**
    * The direction of the snacks.
    *
-   * @default 'top'
+   * @default 'start'
    */
   direction?: SimpleDirection
   /**

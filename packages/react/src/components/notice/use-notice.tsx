@@ -37,22 +37,13 @@ export interface UseNoticeOptions
    */
   description?: string
   /**
-   * Icon configuration for the notice.
-   */
-  icon?: {
-    /**
-     * The variant of the icon.
-     */
-    variant?: LoadingScheme
-  }
-  /**
    * The loading scheme.
    */
   loadingScheme?: LoadingScheme
   /**
    * The status of the notice.
    */
-  status?: "loading" | StatusScheme
+  status?: StatusScheme
   /**
    * The title of the notice.
    */
@@ -113,7 +104,7 @@ export const useNotice = (defaultOptions?: UseNoticeOptions) => {
         component,
         duration: rawDuration,
         limit,
-        placement = "start-center",
+        placement = "start",
         ...noticeProps
       } = finalOptions
 

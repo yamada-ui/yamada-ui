@@ -4,6 +4,7 @@ import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { CloseButtonProps } from "../close-button"
 import type { NoticeStyle } from "./notice.style"
 import type { CloseAction, UseNoticeOptions } from "./use-notice"
+import { useCallback } from "react"
 import { toast } from "sonner"
 import { createSlotComponent } from "../../core"
 import { handlerAll, noop } from "../../utils"
@@ -44,10 +45,10 @@ export { NoticePropsContext, useNoticePropsContext }
 export const Notice = withProvider<"div", NoticeProps>(
   ({
     id,
+    variant = "plain",
     closable,
     closeActions = ["click", "drag"],
     description,
-    icon,
     loadingScheme,
     status,
     title,
@@ -61,47 +62,45 @@ export const Notice = withProvider<"div", NoticeProps>(
     onClick,
     ...rest
   }) => {
+    const onClose = useCallback(() => {
+      toast.dismiss(id)
+    }, [id])
+
     return (
-      <ComponentContext value={{}}>
-        <Alert.Root
-          {...rest}
-          onClick={handlerAll(
-            onClick,
-            closeActions.includes("click") ? () => toast.dismiss(id) : noop,
-          )}
-        >
-          {withIcon ? (
-            status === "loading" || loadingScheme ? (
-              <Alert.Loading
-                loadingScheme={loadingScheme || icon?.variant}
-                {...loadingProps}
-              />
-            ) : (
-              <Alert.Icon {...iconProps} />
-            )
-          ) : null}
-          {title || description ? (
-            <NoticeContent {...contentProps}>
-              {title ? (
-                <Alert.Title {...titleProps}>{title}</Alert.Title>
-              ) : null}
-              {description ? (
-                <Alert.Description {...descriptionProps}>
-                  {description}
-                </Alert.Description>
-              ) : null}
-            </NoticeContent>
-          ) : null}
-          {closable && closeActions.includes("button") ? (
-            <NoticeCloseButton
-              {...closeButtonProps}
-              onClick={handlerAll(closeButtonProps?.onClick, () =>
-                toast.dismiss(id),
-              )}
-            />
-          ) : null}
-        </Alert.Root>
-      </ComponentContext>
+      <Alert.Root
+        variant={variant}
+        status={status}
+        {...rest}
+        onClick={handlerAll(
+          onClick,
+          closeActions.includes("click") ? onClose : noop,
+        )}
+      >
+        {withIcon ? (
+          loadingScheme ? (
+            <Alert.Loading loadingScheme={loadingScheme} {...loadingProps} />
+          ) : (
+            <Alert.Icon {...iconProps} />
+          )
+        ) : null}
+        {title || description ? (
+          <NoticeContent {...contentProps}>
+            {title ? <Alert.Title {...titleProps}>{title}</Alert.Title> : null}
+            {description ? (
+              <Alert.Description {...descriptionProps}>
+                {description}
+              </Alert.Description>
+            ) : null}
+          </NoticeContent>
+        ) : null}
+        {closable && closeActions.includes("button") ? (
+          <NoticeCloseButton
+            data-variant={variant}
+            {...closeButtonProps}
+            onClick={handlerAll(closeButtonProps?.onClick, onClose)}
+          />
+        ) : null}
+      </Alert.Root>
     )
   },
   "item",

@@ -147,10 +147,8 @@ export const WithLoadingVariant = () => {
         <Button
           onClick={() =>
             notice({
-              variant: "subtle",
               description: "オッス！オラ悟空！",
-              icon: { variant: "oval" },
-              status: "loading",
+              loadingScheme: "oval",
               title: "孫悟空",
             })
           }
@@ -161,10 +159,8 @@ export const WithLoadingVariant = () => {
         <Button
           onClick={() =>
             notice({
-              variant: "solid",
               description: "オッス！オラ悟空！",
-              icon: { variant: "grid" },
-              status: "loading",
+              loadingScheme: "grid",
               title: "孫悟空",
             })
           }
@@ -175,10 +171,8 @@ export const WithLoadingVariant = () => {
         <Button
           onClick={() =>
             notice({
-              variant: "subtle",
               description: "オッス！オラ悟空！",
-              icon: { variant: "puff" },
-              status: "loading",
+              loadingScheme: "puff",
               title: "孫悟空",
             })
           }
@@ -189,10 +183,8 @@ export const WithLoadingVariant = () => {
         <Button
           onClick={() =>
             notice({
-              variant: "solid",
               description: "オッス！オラ悟空！",
-              icon: { variant: "dots" },
-              status: "loading",
+              loadingScheme: "dots",
               title: "孫悟空",
             })
           }
@@ -262,7 +254,6 @@ export const WithStatus = () => {
           onClick={() =>
             notice({
               description: "オッス！オラ悟空！",
-              status: "loading",
               title: "孫悟空",
             })
           }

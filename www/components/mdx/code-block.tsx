@@ -15,6 +15,7 @@ export interface CodeBlockProps extends Omit<GridProps, "children"> {
   client?: boolean
   code?: string
   functional?: boolean
+  highlight?: string
   iframe?: boolean
   preview?: boolean
   title?: string
@@ -26,6 +27,7 @@ export function CodeBlock({
   children = code,
   client = false,
   functional = false,
+  highlight,
   iframe = false,
   preview = false,
   title,
@@ -66,7 +68,9 @@ export function CodeBlock({
             )}
           </Tabs.Panel>
           <Tabs.Panel index={1} tabIndex={-1}>
-            <Pre lang={lang}>{children}</Pre>
+            <Pre lang={lang} highlight={highlight}>
+              {children}
+            </Pre>
           </Tabs.Panel>
         </Tabs.Root>
 
@@ -110,14 +114,14 @@ export function CodeBlock({
           </Text>
         </Flex>
 
-        <Pre lang={lang} roundedTop="0">
+        <Pre lang={lang} highlight={highlight} roundedTop="0">
           {children}
         </Pre>
       </Grid>
     )
   } else {
     return (
-      <Pre lang={lang} my="lg">
+      <Pre lang={lang} highlight={highlight} my="lg">
         {children}
       </Pre>
     )
@@ -128,12 +132,22 @@ export interface PreProps extends Omit<BoxProps, "children"> {
   lang: string
   children?: string
   code?: string
+  highlight?: string
 }
 
-export async function Pre({ lang, code, children = code, ...rest }: PreProps) {
+export async function Pre({
+  lang,
+  code,
+  children = code,
+  highlight,
+  ...rest
+}: PreProps) {
   if (!children) return null
 
-  const html = await codeToHtml(children, { lang })
+  const html = await codeToHtml(children, {
+    lang,
+    meta: { __raw: highlight ?? "" },
+  })
 
   return (
     <CodePreview html={html} {...rest}>

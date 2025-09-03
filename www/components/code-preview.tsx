@@ -10,6 +10,7 @@ export interface CodePreviewProps extends Omit<GridProps, "children"> {
   lang?: string
   children?: string
   code?: string
+  highlight?: string
   html?: string
 }
 
@@ -18,6 +19,7 @@ export function CodePreview({
   bg = "bg.panel",
   code,
   children = code,
+  highlight,
   html: htmlProp,
   ...props
 }: CodePreviewProps) {
@@ -35,14 +37,18 @@ export function CodePreview({
   useLayoutEffect(() => {
     if (html || !children || !lang) return
 
-    codeToHtml(children, { lang }).then(setHtml)
-  }, [children, html, lang])
+    codeToHtml(children, { lang, meta: { __raw: highlight ?? "" } }).then(
+      setHtml,
+    )
+  }, [children, highlight, html, lang])
 
   if (!html || !children) return null
 
   return (
     <Grid
+      maxH={{ base: "lg", md: "40" }}
       minH={{ base: "16", md: "12" }}
+      overflowY="auto"
       position="relative"
       rounded="l2"
       {...rest}
@@ -68,7 +74,7 @@ export function CodePreview({
             mx: "calc({space} * -1)",
             position: "relative",
             px: "{space}",
-            w: "calc(full + ({space} * 2))",
+            w: "calc(full + ({space} * 4))",
           },
           "& code .diff.add": {
             bg: ["green.400/15", "green.500/15"],
@@ -89,7 +95,7 @@ export function CodePreview({
             },
           },
           "& code .highlighted": {
-            bg: ["black.muted", "white.subtle"],
+            bg: ["black.400/15", "white.500/15"],
           },
           "& code .highlighted-word": {
             bg: ["black.muted", "white.subtle"],

@@ -46,8 +46,6 @@ export const UIProvider: FC<UIProviderProps> = ({
   config = defaultConfig,
   cookie,
   dir,
-  disableGlobalStyle,
-  disableResetStyle,
   intl,
   locale,
   storage,
@@ -61,8 +59,6 @@ export const UIProvider: FC<UIProviderProps> = ({
           <ThemeProvider
             config={config}
             cookie={cookie}
-            disableGlobalStyle={disableGlobalStyle}
-            disableResetStyle={disableResetStyle}
             storage={storage}
             storageKey={themeSchemeStorageKey}
             theme={theme}

@@ -38,7 +38,9 @@
   },
   "scripts": {
     "clean": "rimraf node_modules dist trace coverage storybook-static .turbo .eslintcache",
+    "prebuild": "tsx scripts/pre-build",
     "build": "tsdown",
+    "postbuild": "tsx scripts/post-build",
     "storybook": "storybook dev -p 6006 -c storybook",
     "storybook:serve": "npx http-server ./storybook-static",
     "storybook:build": "storybook build -c storybook",

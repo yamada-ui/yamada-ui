@@ -5,4 +5,30 @@ storybook: hooks-usecolormode--basic
 source: hooks/use-color-mode
 ---
 
+```tsx preview functional client
+const { colorMode } = useColorMode()
+
+return <Text>The current colorMode is "{colorMode}"</Text>
+```
+
 ### Usage
+
+:::code-group
+
+```tsx [package]
+import { useColorMode } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useColorMode } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useColorMode } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { colorMode } = useColorMode()
+```

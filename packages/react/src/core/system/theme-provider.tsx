@@ -68,18 +68,6 @@ export interface ThemeProviderProps
    */
   cookie?: string
   /**
-   * If `true`, will not mount the global styles defined in the theme.
-   *
-   * @default true
-   */
-  disableGlobalStyle?: boolean
-  /**
-   * If `true`, `ResetStyle` component will be mounted to help reset browser styles.
-   *
-   * @default true
-   */
-  disableResetStyle?: boolean
-  /**
    * The storage to use.
    * If you are using a server-side rendering library, you should use `cookie`.
    *

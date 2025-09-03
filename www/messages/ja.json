@@ -12,7 +12,7 @@
     "group": {
       "frameworks": "フレームワーク",
       "tokens": "デザイントークン",
-      "configuration": "設定",
+      "configuration": "コンフィグ",
       "styles": "スタイル",
       "components": "コンポーネント",
       "charts": "チャート",

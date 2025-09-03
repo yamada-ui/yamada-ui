@@ -5,4 +5,38 @@ storybook: hooks-usewindowevent--basic
 source: hooks/use-window-event
 ---
 
+```tsx preview functional client
+const [count, setCount] = useState(0)
+
+useWindowEvent("click", () => {
+  setCount((prev) => prev + 1)
+})
+
+return <Text>Click count: {count}</Text>
+```
+
 ### Usage
+
+:::code-group
+
+```tsx [package]
+import { useWindowEvent } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useWindowEvent } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useWindowEvent } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [count, setCount] = useState(0)
+
+useWindowEvent("click", () => {
+  setCount((prev) => prev + 1)
+})
+```

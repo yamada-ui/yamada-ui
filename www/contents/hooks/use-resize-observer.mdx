@@ -5,4 +5,44 @@ storybook: hooks-useresizeobserver--basic
 source: hooks/use-resize-observer
 ---
 
+```tsx preview functional client
+const [flg, { toggle }] = useBoolean()
+const [ref, rect] = useResizeObserver<HTMLButtonElement>()
+
+return (
+  <VStack>
+    <Text>{JSON.stringify(rect)}</Text>
+
+    <Button
+      ref={ref}
+      h={flg ? "xl" : "sm"}
+      w={flg ? "xl" : "sm"}
+      onClick={toggle}
+    >
+      Click me to toggle the boolean value
+    </Button>
+  </VStack>
+)
+```
+
 ### Usage
+
+:::code-group
+
+```tsx [package]
+import { useResizeObserver } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useResizeObserver } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useResizeObserver } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [ref, rect] = useResizeObserver<HTMLButtonElement>()
+```

@@ -5,4 +5,30 @@ storybook: hooks-useidle--basic
 source: hooks/use-idle
 ---
 
+```tsx preview functional client
+const idle = useIdle(2000)
+
+return <Text>Current state: {idle ? "idle" : "not idle"}</Text>
+```
+
 ### 使い方
+
+:::code-group
+
+```tsx [package]
+import { useIdle } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useIdle } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useIdle } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const idle = useIdle(2000)
+```

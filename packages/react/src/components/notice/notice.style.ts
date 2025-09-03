@@ -31,31 +31,6 @@ export const noticeStyle = defineComponentSlotStyle({
       position: "relative",
     },
   },
-
-  sizes: {
-    sm: {
-      item: {
-        maxW: "24rem",
-        minW: "16rem",
-      },
-    },
-    md: {
-      item: {
-        maxW: "36rem",
-        minW: "20rem",
-      },
-    },
-    lg: {
-      item: {
-        maxW: "48rem",
-        minW: "24rem",
-      },
-    },
-  },
-
-  defaultProps: {
-    size: "md",
-  },
 })
 
 export type NoticeStyle = typeof noticeStyle

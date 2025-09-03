@@ -81,11 +81,16 @@ const createController = () => ({
   updateLimit: createRef<NoticeMethods["updateLimit"]>(),
 })
 
-const createMethods = (refs: {
-  [K in NoticePlacement]?: RefObject<Controller>
-}): NoticeMethods => ({
+const createMethods = (
+  refs: {
+    [K in NoticePlacement]?: RefObject<Controller>
+  },
+  defaultLimit: number,
+): NoticeMethods => ({
   getLimit: (placement) => {
-    return refs[placement]?.current.getLimit.current?.(placement) ?? 3
+    return (
+      refs[placement]?.current.getLimit.current?.(placement) ?? defaultLimit
+    )
   },
   updateLimit: (state) => {
     refs[state.placement]?.current.updateLimit.current?.(state)
@@ -102,7 +107,10 @@ export const NoticeProvider: FC<NoticeProviderProps> = ({
 }) => {
   const limits = useRef<{ [K in NoticePlacement]?: RefObject<Controller> }>({})
 
-  const value = useMemo(() => ({ ...createMethods(limits.current) }), [])
+  const value = useMemo(
+    () => ({ ...createMethods(limits.current, limit) }),
+    [limit],
+  )
 
   const components = useMemo(() => {
     return Object.keys(placements).map((placement) => {
@@ -152,7 +160,7 @@ const NoticeProviderComponent: FC<NoticeProviderComponentProps> = ({
       if (target === placement && visibleToasts !== limit) {
         return visibleToasts
       }
-      return 3
+      return limit
     },
     [placement, limit, visibleToasts],
   )

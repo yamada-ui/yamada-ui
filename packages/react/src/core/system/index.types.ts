@@ -109,6 +109,8 @@ export interface NoticeConfig {
   duration?: null | number
   /**
    * The maximum value at which notice will be displayed.
+   *
+   * @default 3
    */
   limit?: number
   /**

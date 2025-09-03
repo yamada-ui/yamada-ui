@@ -6,9 +6,9 @@ source: hooks/use-media-query
 ---
 
 ```tsx preview functional client
-const isLarge = useMediaQuery("(min-width: 1280px)")
+const large = useMediaQuery("(min-width: 1280px)")
 
-return <Text>{isLarge ? "larger than 1280px" : "smaller than 1280px"}</Text>
+return <Text>{large ? "larger than 1280px" : "smaller than 1280px"}</Text>
 ```
 
 ### 使い方
@@ -30,5 +30,5 @@ import { useMediaQuery } from "@workspaces/ui"
 :::
 
 ```tsx
-const isLarge = useMediaQuery("(min-width: 1280px)")
+const large = useMediaQuery("(min-width: 1280px)")
 ```

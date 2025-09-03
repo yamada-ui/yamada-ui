@@ -1,4 +1,8 @@
-import type { BundledLanguage, CodeToHastOptionsCommon } from "shiki"
+import type {
+  BundledLanguage,
+  CodeOptionsMeta,
+  CodeToHastOptionsCommon,
+} from "shiki"
 import {
   transformerMetaHighlight,
   transformerNotationDiff,
@@ -14,7 +18,7 @@ export async function codeToHtml(
     lang,
     transformers = [],
     ...rest
-  }: CodeToHastOptionsCommon<BundledLanguage>,
+  }: CodeOptionsMeta & CodeToHastOptionsCommon<BundledLanguage>,
 ) {
   const html = await originalCodeToHtml(code, {
     lang,

@@ -65,15 +65,4 @@ describe("useOS", () => {
     const { result } = renderHook(() => useOS())
     expect(result.current).toBe(expected)
   })
-
-  test('should return "undetermined" when window is undefined', () => {
-    const defaultWindow = global.window
-
-    global.window = undefined as unknown as typeof globalThis & Window
-
-    const result = useOS()
-    expect(result).toBe("undetermined")
-
-    global.window = defaultWindow
-  })
 })

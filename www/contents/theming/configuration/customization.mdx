@@ -3,4 +3,69 @@ title: Customization
 description: Learn how to customize the configuration of Yamada UI.
 ---
 
-## Overview
+To change the prefix of CSS variables, set the value to `css.varPrefix`.
+
+::::steps
+
+### Generate a Theme
+
+Use the [CLI](/docs/theming/cli) to generate a theme.
+
+:::warning
+Before running the following commands, you need to install `@yamada-ui/cli` and execute the `init` command. For more details, please see [here](/docs/get-started/cli).
+:::
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+### Change the Config
+
+Change the `config.ts` in the generated theme.
+
+```tsx title="theme/config.ts"
+import { defineConfig } from "@yamada-ui/react"
+
+export const config = defineConfig({
+  css: { varPrefix: "custom" }, // [!code highlight]
+  breakpoint: { direction: "down", identifier: "@media screen" },
+  defaultColorMode: "dark",
+  defaultThemeScheme: "base",
+  theme: { responsive: true },
+})
+```
+
+### Update the Provider
+
+Set the generated theme to `UIProvider`.
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme, config } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme} config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+::::

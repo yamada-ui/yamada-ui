@@ -371,24 +371,24 @@ Options:
 
 After running the `init` command, a `ui.json` will be generated in your project. You can customize it in various ways.
 
-| プロパティ                | 説明                                                                                                         | デフォルト     |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------ | -------------- |
-| `path`                    | The path to the workspace.                                                                                   | `./ui`         |
-| `monorepo`                | Whether to use a monorepo.                                                                                   | `false`        |
-| `jsx`                     | Whether to use JSX.                                                                                          | `false`        |
-| `theme.path`              | The path to the theme directory.                                                                             | `./theme`      |
-| `components.path`         | The path to the components directory.                                                                        | `./components` |
-| `components.overwrite`    | Whether to update the local references of existing components when components are added.                     | `true`         |
-| `components.dependents`   | Whether to add dependents of components when components are added.                                           | `true`         |
-| `components.dependencies` | Whether to add dependencies of components when components are added.                                         | `false`        |
-| `hooks.path`              | The path to the hooks directory.                                                                             | `./hooks`      |
-| `hooks.overwrite`         | Whether to update the local references of existing hooks when components are added.                          | `false`        |
-| `hooks.dependents`        | Whether to add dependents of hooks when hooks are added.                                                     | `true`         |
-| `hooks.dependencies`      | Whether to add dependencies of hooks when hooks are added.                                                   | `false`        |
-| `providers.path`          | The path to the providers directory.                                                                         | `./providers`  |
-| `providers.overwrite`     | Whether to update the local references of existing providers when components are added.                      | `false`        |
-| `providers.dependents`    | Whether to add dependents of providers when providers are added.                                             | `true`         |
-| `providers.dependencies`  | Whether to add dependencies of providers when providers are added.                                           | `false`        |
-| `format.configPath`       | The path to the config file for [Prettier](https://prettier.io).                                             | -              |
-| `format.enabled`          | Whether to run the `--write` option of [Prettier](https://prettier.io) when components are added or updated. | `false`        |
-| `lint.enabled`            | Whether to run the `--fix` option of [ESLint](https://eslint.org) when components are added or updated.      | `false`        |
+| Property                  | Default        | Description                                                                                                  |
+| ------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `path`                    | `./ui`         | The path to the workspace.                                                                                   |
+| `monorepo`                | `false`        | Whether to use a monorepo.                                                                                   |
+| `jsx`                     | `false`        | Whether to use JSX.                                                                                          |
+| `theme.path`              | `./theme`      | The path to the theme directory.                                                                             |
+| `components.path`         | `./components` | The path to the components directory.                                                                        |
+| `components.overwrite`    | `true`         | Whether to update the local references of existing components when components are added.                     |
+| `components.dependents`   | `true`         | Whether to add dependents of components when components are added.                                           |
+| `components.dependencies` | `false`        | Whether to add dependencies of components when components are added.                                         |
+| `hooks.path`              | `./hooks`      | The path to the hooks directory.                                                                             |
+| `hooks.overwrite`         | `false`        | Whether to update the local references of existing hooks when components are added.                          |
+| `hooks.dependents`        | `true`         | Whether to add dependents of hooks when hooks are added.                                                     |
+| `hooks.dependencies`      | `false`        | Whether to add dependencies of hooks when hooks are added.                                                   |
+| `providers.path`          | `./providers`  | The path to the providers directory.                                                                         |
+| `providers.overwrite`     | `false`        | Whether to update the local references of existing providers when components are added.                      |
+| `providers.dependents`    | `true`         | Whether to add dependents of providers when providers are added.                                             |
+| `providers.dependencies`  | `false`        | Whether to add dependencies of providers when providers are added.                                           |
+| `format.configPath`       | -              | The path to the config file for [Prettier](https://prettier.io).                                             |
+| `format.enabled`          | `false`        | Whether to run the `--write` option of [Prettier](https://prettier.io) when components are added or updated. |
+| `lint.enabled`            | `false`        | Whether to run the `--fix` option of [ESLint](https://eslint.org) when components are added or updated.      |

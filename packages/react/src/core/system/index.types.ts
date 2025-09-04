@@ -1,5 +1,5 @@
 import type { RefObject } from "react"
-import type { DefaultTheme } from "../../theme"
+import type { theme } from "../../theme"
 import type { AnyString, Booleanish, Dict } from "../../utils"
 import type {
   CSSAnimationObject,
@@ -70,8 +70,6 @@ export interface BreakpointConfig {
    * The `ref` of the container element used in `useBreakpoint` and others.
    *
    * Even if this `ref` is not set, CSS query will work, but JavaScript operations such as `useBreakpoint` will not work.
-   *
-   * @external
    */
   containerRef?: RefObject<HTMLElement | null>
   /**
@@ -85,8 +83,6 @@ export interface BreakpointConfig {
   direction?: BreakpointDirection
   /**
    * The `breakpoint` custom identifier.
-   *
-   * @external
    *
    * @default '@media screen'
    */
@@ -118,7 +114,7 @@ export interface NoticeConfig {
   /**
    * The placement of the notice.
    *
-   * @default 'top'
+   * @default 'start'
    */
   placement?: NoticePlacement
 }
@@ -133,7 +129,7 @@ export interface SnacksConfig {
   /**
    * The direction of the snacks.
    *
-   * @default 'top'
+   * @default 'start'
    */
   direction?: SimpleDirection
   /**
@@ -613,6 +609,7 @@ export interface CSSMap {
 }
 
 export interface CustomTheme {}
+export type DefaultTheme = typeof theme
 
 export interface CustomThemeTokens {}
 

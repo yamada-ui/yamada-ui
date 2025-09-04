@@ -25,7 +25,7 @@ export { GroupPropsContext, useGroupPropsContext }
 /**
  * `Group` is a component that groups and attaches multiple elements together.
  *
- * @see https://yamada-ui.com/components/group
+ * @see https://yamada-ui.com/docs/components/group
  */
 export const Group = withContext<"div", GroupProps, "attached" | "orientation">(
   Flex,

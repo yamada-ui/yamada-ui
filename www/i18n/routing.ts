@@ -7,7 +7,9 @@ export const routing = defineRouting({
   localePrefix: {
     mode: "as-needed",
     prefixes: Object.fromEntries(
-      CONSTANTS.I18N.LOCALES.map((locale) => [locale, `/${getLang(locale)}`]),
+      CONSTANTS.I18N.LOCALES.filter(
+        (locale) => locale !== CONSTANTS.I18N.DEFAULT_LOCALE,
+      ).map((locale) => [locale, `/${getLang(locale)}`]),
     ),
   },
   locales: CONSTANTS.I18N.LOCALES,

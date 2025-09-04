@@ -1,6 +1,5 @@
 import { a11y, render, screen } from "#test"
-import { UIProvider } from "../../providers/ui-provider"
-import { defaultConfig } from "../../theme"
+import { extendConfig, UIProvider } from "../../providers/ui-provider"
 import { Image } from "../image"
 import { Picture, Source } from "./picture"
 
@@ -145,6 +144,7 @@ describe("<Picture />", () => {
   })
 
   test("should sorting sources with custom direction", () => {
+    const config = extendConfig({ breakpoint: { direction: "up" } })
     const { container } = render(
       <Picture
         src={src}
@@ -156,15 +156,7 @@ describe("<Picture />", () => {
         ]}
       />,
       {
-        wrapper: (props) => (
-          <UIProvider
-            config={{
-              ...defaultConfig,
-              breakpoint: { direction: "up" },
-            }}
-            {...props}
-          />
-        ),
+        wrapper: (props) => <UIProvider config={config} {...props} />,
       },
     )
     const sources = container.querySelectorAll("source")

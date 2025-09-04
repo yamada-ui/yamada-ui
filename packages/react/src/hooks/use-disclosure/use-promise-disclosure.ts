@@ -20,7 +20,7 @@ export interface UsePromiseDisclosureProps<
  * `usePromiseDisclosure` is a custom hook that helps handle common open/close or toggle scenarios with promises.
  * It can be used to control components such as `Modal`, `Dialog`, `Drawer`, etc.
  *
- * @see https://yamada-ui.com/hooks/use-promise-disclosure
+ * @see https://yamada-ui.com/docs/hooks/use-promise-disclosure
  */
 export const usePromiseDisclosure = <
   Y = never,

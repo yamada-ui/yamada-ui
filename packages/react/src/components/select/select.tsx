@@ -123,7 +123,7 @@ export { SelectPropsContext, useSelectPropsContext }
 /**
  * `Select` is a component used for allowing a user to choose one option from a list.
  *
- * @see https://yamada-ui.com/components/select
+ * @see https://yamada-ui.com/docs/components/select
  */
 export const SelectRoot = withProvider<"div", SelectRootProps>(
   <Y extends string | string[] = string>(props: SelectRootProps<Y>) => {

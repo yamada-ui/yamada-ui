@@ -4,7 +4,203 @@ description: Learn how to customize breakpoints.
 ---
 
 :::tip
-Breakpoints overview is [here](/docs/styling/responsive-design).
+Responsive design overview is [here](/docs/styling/responsive-design).
 :::
 
+## Overview
+
+Breakpoints are tokens used for responsive design, such as [Responsive Design](/docs/styling/responsive-design).
+
+The breakpoints defined in the theme are [here](https://github.com/yamada-ui/yamada-ui/blob/main/packages/react/src/theme/tokens/breakpoints.ts).
+
+```tsx
+export const breakpoints = defineTokens.breakpoints({
+  sm: "30em",
+  md: "48em",
+  lg: "61em",
+  xl: "80em",
+  "2xl": "90em",
+})
+```
+
 ## Customize
+
+::::steps
+
+### Generate a Theme
+
+Use the [CLI](/docs/theming/cli) to generate a theme.
+
+:::warning
+Before running the following commands, you need to install `@yamada-ui/cli` and execute the `init` command. For more details, please see [here](/docs/get-started/cli).
+:::
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+### Change the Token
+
+Change the `tokens/breakpoints.ts` in the generated theme.
+
+```tsx title="theme/tokens/breakpoints.ts"
+import { defineTokens } from "@yamada-ui/react"
+
+export const breakpoints = defineTokens.breakpoints({
+  sm: "27em", // [!code highlight]
+  md: "48em",
+  lg: "61em",
+  xl: "80em",
+  "2xl": "90em",
+})
+```
+
+### Update the Provider
+
+Set the generated theme to the `UIProvider`.
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+::::
+
+## Media Queries
+
+By default, the responsive design uses the `@media(max-width)` media query.
+
+```tsx preview functional
+const config = defineConfig({ breakpoint: { direction: "up" } })
+
+const Component: FC<{ query: string }> = ({ query }) => {
+  const breakpoint = useBreakpoint()
+
+  return (
+    <Text>
+      The breakpoint when using{" "}
+      <Text as="span" color="info">
+        {query}
+      </Text>{" "}
+      is "{breakpoint}".
+    </Text>
+  )
+}
+
+return (
+  <VStack gap="md">
+    <Component query="@media(max-width)" />
+
+    <UIProvider config={config}>
+      <Component query="@media(min-width)" />
+    </UIProvider>
+  </VStack>
+)
+```
+
+If you want to use the `@media(min-width)` media query, set the `breakpoint.direction` to `"up"` in the config.
+
+::::steps
+
+### Change the Config
+
+Change the `config.ts` in the generated theme.
+
+```tsx title="theme/config.ts"
+import { defineConfig } from "@yamada-ui/react"
+
+export const config = defineConfig({
+  css: { varPrefix: "ui" },
+  breakpoint: { direction: "up", identifier: "@media screen" }, // [!code highlight]
+  defaultColorMode: "light",
+  defaultThemeScheme: "base",
+  theme: { responsive: true },
+})
+```
+
+### Update the Provider
+
+Set the generated theme to `UIProvider`.
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme, config } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme} config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+::::
+
+## Container Queries
+
+The responsive design uses the media query. If you want to use the container query, set the `breakpoint.identifier` to `"@container"` in the config.
+
+```tsx preview functional
+const containerRef = useRef<HTMLDivElement>(null)
+const config = defineConfig({
+  breakpoint: { containerRef, identifier: "@container" },
+})
+
+const Component: FC<{ query: string }> = ({ query }) => {
+  const breakpoint = useBreakpoint()
+
+  return (
+    <Text>
+      The breakpoint when using{" "}
+      <Text as="span" color="info">
+        {query}
+      </Text>{" "}
+      is "{breakpoint}".
+    </Text>
+  )
+}
+
+return (
+  <Box
+    ref={containerRef}
+    bg="bg.panel"
+    containerType="inline-size"
+    overflow="auto"
+    maxW="full"
+    p="md"
+    resize="inline"
+    w="full"
+  >
+    <Component query="@media(max-width)" />
+
+    <UIProvider config={config}>
+      <Component query="@container" />
+    </UIProvider>
+  </Box>
+)
+```

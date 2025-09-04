@@ -23,7 +23,7 @@ export interface UseFocusOnShowProps {
 /**
  * `useFocusOnShow` is a custom hook that focuses on the target element when it is shown.
  *
- * @see https://yamada-ui.com/hooks/use-focus-on-show
+ * @see https://yamada-ui.com/docs/hooks/use-focus-on-show
  */
 export const useFocusOnShow = <Y extends HTMLElement>(
   refOrEl: RefObject<null | Y> | Y,
@@ -97,7 +97,7 @@ export interface UseFocusOnMouseDownProps {
 /**
  * `useFocusOnPointerDown` is a custom hook that focuses on the target element when it is clicked.
  *
- * @see https://yamada-ui.com/hooks/use-focus-on-pointer-down
+ * @see https://yamada-ui.com/docs/hooks/use-focus-on-pointer-down
  */
 export const useFocusOnPointerDown = ({
   ref,

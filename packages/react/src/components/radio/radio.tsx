@@ -59,7 +59,7 @@ export {
 /**
  * `Radio` is a component used for allowing users to select one option from multiple choices.
  *
- * @see https://yamada-ui.com/components/radio
+ * @see https://yamada-ui.com/docs/components/radio
  */
 export const Radio = withProvider<"label", RadioProps>(
   ({

@@ -5,7 +5,6 @@ import type {
   ThemeProviderProps,
   UsageTheme,
 } from "../../core"
-import type { DefaultTheme } from "../../theme"
 import type { DeepMerge } from "../../utils"
 import type { I18nProviderProps } from "../i18n-provider"
 import { LoadingProvider } from "../../components/loading"
@@ -15,7 +14,7 @@ import {
   SystemProvider,
   ThemeProvider,
 } from "../../core"
-import { defaultConfig, defaultTheme } from "../../theme"
+import { config as defaultConfig, theme as defaultTheme } from "../../theme"
 import { merge } from "../../utils"
 import { I18nProvider } from "../i18n-provider"
 
@@ -45,8 +44,6 @@ export const UIProvider: FC<UIProviderProps> = ({
   config = defaultConfig,
   cookie,
   dir,
-  disableGlobalStyle,
-  disableResetStyle,
   intl,
   locale,
   storage,
@@ -60,8 +57,6 @@ export const UIProvider: FC<UIProviderProps> = ({
           <ThemeProvider
             config={config}
             cookie={cookie}
-            disableGlobalStyle={disableGlobalStyle}
-            disableResetStyle={disableResetStyle}
             storage={storage}
             storageKey={themeSchemeStorageKey}
             theme={theme}
@@ -81,6 +76,8 @@ export const UIProvider: FC<UIProviderProps> = ({
     </EnvironmentProvider>
   )
 }
+
+type DefaultTheme = typeof defaultTheme
 
 export const extendTheme = <Y extends UsageTheme>(theme: Y) => {
   return merge<DeepMerge<DefaultTheme, Y>>(defaultTheme, theme)

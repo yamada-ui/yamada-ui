@@ -33,7 +33,7 @@ export interface UseLazyMountProps {
 /**
  * `useLazyMount` is a custom hook for lazily mounting content.
  *
- * @see https://yamada-ui.com/hooks/use-lazy-mount
+ * @see https://yamada-ui.com/docs/hooks/use-lazy-mount
  */
 export const useLazyMount = ({
   children,

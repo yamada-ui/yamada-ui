@@ -49,7 +49,7 @@ export { PasswordInputPropsContext, usePasswordInputPropsContext }
 /**
  * `PasswordInput` is a component that allows users to input passwords with a visibility toggle.
  *
- * @see https://yamada-ui.com/components/password-input
+ * @see https://yamada-ui.com/docs/components/password-input
  */
 export const PasswordInput = withProvider<"input", PasswordInputProps>(
   ({

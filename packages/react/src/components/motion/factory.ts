@@ -44,6 +44,6 @@ function factory() {
 /**
  * `motion` is a component that allows for the easy implementation of a wide variety of animations.
  *
- * @see https://yamada-ui.com/components/motion
+ * @see https://yamada-ui.com/docs/components/motion
  */
 export const motion = factory()

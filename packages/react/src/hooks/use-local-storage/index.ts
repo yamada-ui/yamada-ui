@@ -129,7 +129,7 @@ export const createStorage = <Y>(type: StorageType, name: string) => {
 /**
  * `useLocalStorage` is a custom hook for storing, updating, and retrieving values in local storage.
  *
- * @see https://yamada-ui.com/hooks/use-local-storage
+ * @see https://yamada-ui.com/docs/hooks/use-local-storage
  */
 export const useLocalStorage = <Y = string>(props: StorageProps<Y>) =>
   createStorage<Y>("localStorage", "use-local-storage")(props)

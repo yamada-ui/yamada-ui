@@ -74,7 +74,7 @@ export { AlphaSliderPropsContext, useAlphaSliderPropsContext }
 /**
  * `AlphaSlider` is a component used to allow the user to select color transparency.
  *
- * @see https://yamada-ui.com/components/alpha-slider
+ * @see https://yamada-ui.com/docs/components/alpha-slider
  */
 export const AlphaSliderRoot = withProvider<"div", AlphaSliderRootProps>(
   ({

@@ -21,7 +21,7 @@ export interface ShowProps<Y> {
 /**
  * `Show` is a component that shows or hides its children based on a condition.
  *
- * @see https://yamada-ui.com/components/show
+ * @see https://yamada-ui.com/docs/components/show
  */
 export const Show = <Y,>({
   children,

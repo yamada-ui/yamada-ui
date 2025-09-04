@@ -44,7 +44,7 @@ export interface RadioGroupRootProps<Y extends string = string>
 /**
  * `RadioGroup` is a component that groups `Radio` components.
  *
- * @see https://yamada-ui.com/components/radio
+ * @see https://yamada-ui.com/docs/components/radio
  */
 export const RadioGroupRoot = component<"div", RadioGroupRootProps>((props) => {
   const [

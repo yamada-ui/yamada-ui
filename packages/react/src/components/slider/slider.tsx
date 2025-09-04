@@ -114,7 +114,7 @@ export { SliderPropsContext, useSliderPropsContext }
 /**
  * `Slider` is a component used for allowing users to select a value from a range.
  *
- * @see https://yamada-ui.com/components/slider
+ * @see https://yamada-ui.com/docs/components/slider
  */
 export const SliderRoot = withProvider<"div", SliderRootProps, "orientation">(
   <Y extends [number, number] | number = number>({

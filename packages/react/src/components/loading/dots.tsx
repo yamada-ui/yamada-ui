@@ -9,7 +9,7 @@ export interface DotsProps extends LoadingProps {}
 /**
  * `Loading` is a component displayed during waiting times, such as when data is being loaded.
  *
- * @see https://yamada-ui.com/components/feedback/loading
+ * @see https://yamada-ui.com/docs/components/feedback/loading
  */
 export const Dots = withContext<"svg", DotsProps>(({ dur = "1s", ...rest }) => {
   return (

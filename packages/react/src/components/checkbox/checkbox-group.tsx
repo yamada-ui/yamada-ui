@@ -46,7 +46,7 @@ export interface CheckboxGroupRootProps<Y extends string = string>
 /**
  * `CheckboxGroup` is a component that groups `Checkbox` components.
  *
- * @see https://yamada-ui.com/components/checkbox
+ * @see https://yamada-ui.com/docs/components/checkbox
  */
 export const CheckboxGroupRoot = component<"div", CheckboxGroupRootProps>(
   (props) => {

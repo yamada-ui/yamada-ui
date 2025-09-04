@@ -6,6 +6,6 @@ import { component, Icon } from "../icon"
 /**
  * `ArrowUp01Icon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/docs/components/icon
  */
 export const ArrowUp01Icon = component(Icon)({ as: ArrowUp01 })

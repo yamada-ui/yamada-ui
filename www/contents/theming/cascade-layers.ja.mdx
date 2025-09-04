@@ -8,3 +8,96 @@ description: CSSカスケードレイヤーをカスタマイズする方法を�
 :::
 
 ## カスタマイズ
+
+::::steps
+
+### テーマを生成する
+
+[CLI](/docs/theming/cli)を使用してテーマを生成します。
+
+:::warning
+下記のコマンドを実行する前に、`@yamada-ui/cli`をインストールして`init`コマンドを実行する必要があります。詳しくは、[こちら](/docs/get-started/cli)をご覧ください。
+:::
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+### コンフィグを変更する
+
+生成したテーマの`config.ts`を変更します。
+
+```tsx title="theme/config.ts" {1,4-13,16}
+import type { LayersConfig } from "@yamada-ui/react"
+import { defineConfig } from "@yamada-ui/react"
+
+export const layers: LayersConfig = {
+  tokens: { name: "tokens", order: 0 },
+  reset: { name: "reset", order: 1 },
+  global: { name: "global", order: 2 },
+  base: { name: "base", order: 3 },
+  size: { name: "size", order: 4 },
+  variant: { name: "variant", order: 5 },
+  props: { name: "props", order: 6 },
+  compounds: { name: "compounds", order: 7 },
+}
+
+export const config = defineConfig({
+  css: { layers, varPrefix: "ui" },
+  breakpoint: { direction: "down", identifier: "@media screen" },
+  defaultColorMode: "dark",
+  defaultThemeScheme: "base",
+  theme: { responsive: true },
+})
+```
+
+### プロバイダーを更新する
+
+生成したテーマを`UIProvider`に設定します。
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme, config } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme} config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+::::
+
+## 無効にする
+
+カスケードレイヤーを無効にする場合は、`css.layers`に`false`にします。
+
+```tsx title="theme/config.ts"
+import { defineConfig } from "@yamada-ui/react"
+
+export const config = defineConfig({
+  css: { layers: false, varPrefix: "ui" }, // [!code highlight]
+  breakpoint: { direction: "down", identifier: "@media screen" },
+  defaultColorMode: "dark",
+  defaultThemeScheme: "base",
+  theme: { responsive: true },
+})
+```

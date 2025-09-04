@@ -6,7 +6,7 @@ import { useEnvironment } from "../../core"
 /**
  * `useMediaQuery` is a custom hook that detects whether it matches a media query.
  *
- * @see https://yamada-ui.com/hooks/use-media-query
+ * @see https://yamada-ui.com/docs/hooks/use-media-query
  */
 export const useMediaQuery = (query: string, fallback = false): boolean => {
   const { getWindow } = useEnvironment()

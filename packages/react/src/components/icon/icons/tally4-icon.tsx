@@ -6,6 +6,6 @@ import { component, Icon } from "../icon"
 /**
  * `Tally4Icon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/docs/components/icon
  */
 export const Tally4Icon = component(Icon)({ as: Tally4 })

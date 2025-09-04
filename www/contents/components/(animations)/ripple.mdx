@@ -9,27 +9,27 @@ style: components/ripple/ripple.style.ts
 const { onClick, ...rippleProps } = useRipple()
 
 return (
-  <Box
+  <Center
     as="button"
     type="button"
     onClick={onClick}
-    py="sm"
-    px="md"
+    h="10"
+    px="3"
     bg="bg.contrast"
     color="fg.contrast"
-    rounded="12"
+    rounded="l2"
     position="relative"
     overflow="hidden"
   >
     <Text>Button</Text>
 
     <Ripple {...rippleProps} />
-  </Box>
+  </Center>
 )
 ```
 
-:::warning  
-You need to set `position: relative` and `overflow: hidden` on the parent element of `Ripple`.  
+:::warning
+You need to set `position: relative` and `overflow: hidden` on the parent element of `Ripple`.
 :::
 
 ## Usage
@@ -62,22 +62,22 @@ To change the color, set a color to `color`. By default, `currentColor` is set.
 const { onClick, ...rippleProps } = useRipple()
 
 return (
-  <Box
+  <Center
     as="button"
     type="button"
     onClick={onClick}
-    py="sm"
-    px="md"
+    h="10"
+    px="3"
     bg="bg.contrast"
     color="fg.contrast"
-    rounded="12"
+    rounded="l2"
     position="relative"
     overflow="hidden"
   >
     <Text>Button</Text>
 
     <Ripple color="warning" {...rippleProps} />
-  </Box>
+  </Center>
 )
 ```
 
@@ -89,22 +89,22 @@ To disable, set `disabled` to `true`.
 const { onClick, ...rippleProps } = useRipple({ disabled: true })
 
 return (
-  <Box
+  <Center
     as="button"
     type="button"
     onClick={onClick}
-    py="sm"
-    px="md"
+    h="10"
+    px="3"
     bg="bg.contrast"
     color="fg.contrast"
-    rounded="12"
+    rounded="l2"
     position="relative"
     overflow="hidden"
   >
     <Text>Button</Text>
 
     <Ripple {...rippleProps} />
-  </Box>
+  </Center>
 )
 ```
 
@@ -114,22 +114,22 @@ Alternatively, you can disable it by setting `disabled` to `true` on `Ripple`.
 const { onClick, ...rippleProps } = useRipple()
 
 return (
-  <Box
+  <Center
     as="button"
     type="button"
     onClick={onClick}
-    py="sm"
-    px="md"
+    h="10"
+    px="3"
     bg="bg.contrast"
     color="fg.contrast"
-    rounded="12"
+    rounded="l2"
     position="relative"
     overflow="hidden"
   >
     <Text>Button</Text>
 
     <Ripple disabled {...rippleProps} />
-  </Box>
+  </Center>
 )
 ```
 

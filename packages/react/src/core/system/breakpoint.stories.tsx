@@ -1,12 +1,9 @@
 import type { FC } from "react"
-import type { ThemeConfig } from "./index.types"
 import { useRef } from "react"
 import { Box } from "../../components/box"
 import { Text } from "../../components/text"
 import { useBreakpoint, useBreakpointValue } from "../../hooks/use-breakpoint"
-import { UIProvider } from "../../providers/ui-provider"
-import { defaultConfig } from "../../theme"
-import { merge } from "../../utils"
+import { extendConfig, UIProvider } from "../../providers/ui-provider"
 
 export default {
   title: "Styled System / Responsive",
@@ -37,9 +34,7 @@ export const Basic = () => {
 }
 
 export const Direction = () => {
-  const config = merge<ThemeConfig>(defaultConfig, {
-    breakpoint: { direction: "up" },
-  })
+  const config = extendConfig({ breakpoint: { direction: "up" } })
 
   const App: FC = () => {
     const breakpoint = useBreakpoint()
@@ -104,11 +99,8 @@ export const Hook = () => {
 export const Container = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const breakpoint = useBreakpoint()
-  const config = merge<ThemeConfig>(defaultConfig, {
-    breakpoint: {
-      containerRef,
-      identifier: "@container",
-    },
+  const config = extendConfig({
+    breakpoint: { containerRef, identifier: "@container" },
   })
 
   const App: FC = () => {

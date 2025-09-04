@@ -45,7 +45,7 @@ export interface ForProps<Y> {
 /**
  * `For` is a component used to loop over an array and render a component for each item.
  *
- * @see https://yamada-ui.com/components/for
+ * @see https://yamada-ui.com/docs/components/for
  */
 export const For = <Y,>({
   children,

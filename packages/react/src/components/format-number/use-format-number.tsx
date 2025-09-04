@@ -11,7 +11,7 @@ export interface FormatNumberOptions extends Intl.NumberFormatOptions {
 /**
  * `useFormatNumber` is a custom hook that returns the formatted number.
  *
- * @see https://yamada-ui.com/hooks/use-format-number
+ * @see https://yamada-ui.com/docs/hooks/use-format-number
  */
 export const useFormatNumber = (
   value: number,

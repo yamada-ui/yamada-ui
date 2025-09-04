@@ -59,7 +59,7 @@ export { FileInputPropsContext, useFileInputPropsContext }
 /**
  * `FileInput` is a component used for users to select files.
  *
- * @see https://yamada-ui.com/components/file-input
+ * @see https://yamada-ui.com/docs/components/file-input
  */
 export const FileInput = withProvider<"input", FileInputProps>(
   ({

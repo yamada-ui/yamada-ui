@@ -18,6 +18,6 @@ export { EmPropsContext, useEmPropsContext }
 /**
  * `Em` is a component that represents emphasized text. By default, it renders a `em` element.
  *
- * @see https://yamada-ui.com/components/em
+ * @see https://yamada-ui.com/docs/components/em
  */
 export const Em = withContext("em")()

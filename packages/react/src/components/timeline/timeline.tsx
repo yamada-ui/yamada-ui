@@ -81,7 +81,7 @@ export { TimelinePropsContext, useTimelinePropsContext }
 /**
  * `Timeline` is a component that is used to display a list of events in chronological order.
  *
- * @see https://yamada-ui.com/components/timeline
+ * @see https://yamada-ui.com/docs/components/timeline
  */
 export const TimelineRoot = withProvider(
   ({ children, index = -1, items = [], ...rest }) => {

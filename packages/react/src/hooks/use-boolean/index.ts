@@ -5,7 +5,7 @@ import { useCallback, useState } from "react"
 /**
  * `useBoolean` is a custom hook used to manage boolean values using `on`, `off`, and `toggle` functions.
  *
- * @see https://yamada-ui.com/hooks/use-boolean
+ * @see https://yamada-ui.com/docs/hooks/use-boolean
  */
 export const useBoolean = (init = false): UseBooleanReturn => {
   const [flg, setFlg] = useState<boolean>(init)

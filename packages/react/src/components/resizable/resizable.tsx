@@ -27,7 +27,7 @@ import {
 /**
  * `Resizable` is accessible resizable panel groups and layouts with keyboard support.
  *
- * @see https://yamada-ui.com/components/resizable
+ * @see https://yamada-ui.com/docs/components/resizable
  */
 export interface ResizableRootProps
   extends HTMLStyledProps,

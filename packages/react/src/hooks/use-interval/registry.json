@@ -15,7 +15,7 @@
   "sources": [
     {
       "name": "index.ts",
-      "content": "\"use client\"\n\nimport { useEffect } from \"react\"\nimport { useCallbackRef } from \"@yamada-ui/react\"\n\n/**\n * `useInterval` is a custom hook that runs a function at a specified interval.\n *\n * @see https://yamada-ui.com/hooks/use-interval\n */\nexport const useInterval = (callback: () => void, delay: null | number) => {\n  const callbackRef = useCallbackRef(callback)\n\n  useEffect(() => {\n    let timeoutId: NodeJS.Timeout | null = null\n\n    if (delay !== null) timeoutId = setInterval(callbackRef, delay)\n\n    return () => {\n      if (timeoutId) clearInterval(timeoutId)\n    }\n  }, [delay, callbackRef])\n}\n"
+      "content": "\"use client\"\n\nimport { useEffect } from \"react\"\nimport { useCallbackRef } from \"@yamada-ui/react\"\n\n/**\n * `useInterval` is a custom hook that runs a function at a specified interval.\n *\n * @see https://yamada-ui.com/docs/hooks/use-interval\n */\nexport const useInterval = (callback: () => void, delay: null | number) => {\n  const callbackRef = useCallbackRef(callback)\n\n  useEffect(() => {\n    let timeoutId: NodeJS.Timeout | null = null\n\n    if (delay !== null) timeoutId = setInterval(callbackRef, delay)\n\n    return () => {\n      if (timeoutId) clearInterval(timeoutId)\n    }\n  }, [delay, callbackRef])\n}\n"
     }
   ]
 }

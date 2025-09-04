@@ -42,7 +42,7 @@ export { ProgressPropsContext, useProgressPropsContext }
 /**
  * `Progress` is a component for visually indicating progress.
  *
- * @see https://yamada-ui.com/components/progress
+ * @see https://yamada-ui.com/docs/components/progress
  */
 export const Progress = withProvider(
   ({ css, max, min, rangeColor, trackColor, value, rangeProps, ...rest }) => {

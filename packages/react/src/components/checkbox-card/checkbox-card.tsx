@@ -91,7 +91,7 @@ export {
 /**
  * `CheckboxCard` is a component used for allowing users to select multiple values from multiple options.
  *
- * @see https://yamada-ui.com/components/checkbox-card
+ * @see https://yamada-ui.com/docs/components/checkbox-card
  */
 export const CheckboxCardRoot = withProvider<"label", CheckboxCardRootProps>(
   ({

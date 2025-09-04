@@ -19,7 +19,7 @@ export interface ColorSwatchGroupProps extends Omit<ColorSwatchProps, "color"> {
 /**
  * `ColorSwatchGroup` is a component that displays color samples.
  *
- * @see https://yamada-ui.com/components/color-swatch
+ * @see https://yamada-ui.com/docs/components/color-swatch
  */
 export const ColorSwatchGroup = (({
   items = [],

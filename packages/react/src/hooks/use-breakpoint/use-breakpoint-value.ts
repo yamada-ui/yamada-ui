@@ -7,7 +7,7 @@ import { useBreakpoint } from "./use-breakpoint"
  * `useBreakpointValue` is a custom hook that returns the value of the current breakpoint from the provided object.
  * This hook monitors changes in the window size and returns the appropriate value.
  *
- * @see https://yamada-ui.com/hooks/use-breakpoint-value
+ * @see https://yamada-ui.com/docs/hooks/use-breakpoint-value
  */
 export const useBreakpointValue = <Y>(
   values: ResponsiveObject<Y, false>,

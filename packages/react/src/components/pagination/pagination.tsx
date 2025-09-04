@@ -110,7 +110,7 @@ export { PaginationPropsContext, usePaginationPropsContext }
 /**
  * `Pagination` is a component for managing the pagination and navigation of content.
  *
- * @see https://yamada-ui.com/components/pagination
+ * @see https://yamada-ui.com/docs/components/pagination
  */
 export const PaginationRoot = withProvider<
   "nav",

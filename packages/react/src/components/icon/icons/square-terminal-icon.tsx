@@ -6,6 +6,6 @@ import { component, Icon } from "../icon"
 /**
  * `SquareTerminalIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/docs/components/icon
  */
 export const SquareTerminalIcon = component(Icon)({ as: SquareTerminal })

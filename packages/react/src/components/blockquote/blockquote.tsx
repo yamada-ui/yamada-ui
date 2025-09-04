@@ -57,7 +57,7 @@ export { BlockquotePropsContext, useBlockquotePropsContext }
 /**
  * `Blockquote` is a component that represents a blockquote. By default, it renders a `blockquote` element.
  *
- * @see https://yamada-ui.com/components/blockquote
+ * @see https://yamada-ui.com/docs/components/blockquote
  */
 export const BlockquoteRoot = withProvider<"figure", BlockquoteRootProps>(
   ({

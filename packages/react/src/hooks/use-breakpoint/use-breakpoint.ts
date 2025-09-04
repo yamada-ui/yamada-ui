@@ -9,7 +9,7 @@ import { createdDom, isUndefined, noop } from "../../utils"
  * `useBreakpoint` is a custom hook that returns the current breakpoint.
  * This hook monitors changes in the window size and returns the appropriate value.
  *
- * @see https://yamada-ui.com/hooks/use-breakpoint
+ * @see https://yamada-ui.com/docs/hooks/use-breakpoint
  */
 export const useBreakpoint = () => {
   const animationFrameId = useRef(0)

@@ -12,7 +12,6 @@ import type {
   ComboboxItem,
   UseComboboxGroupProps,
 } from "../../hooks/use-combobox"
-import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
 import type { SelectStyle } from "./select.style"
 import type {
@@ -60,7 +59,6 @@ export interface SelectRootProps<Y extends string | string[] = string>
       | "withCloseButton"
     >,
     ThemeProps<SelectStyle>,
-    FieldProps,
     UseInputBorderProps {
   /**
    * If `true`, display the clear icon.

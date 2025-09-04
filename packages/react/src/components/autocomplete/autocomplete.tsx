@@ -11,7 +11,6 @@ import type {
   ComboboxItem,
   UseComboboxGroupProps,
 } from "../../hooks/use-combobox"
-import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
 import type { AutocompleteStyle } from "./autocomplete.style"
 import type {
@@ -66,7 +65,6 @@ export interface AutocompleteRootProps
       | "withCloseButton"
     >,
     ThemeProps<AutocompleteStyle>,
-    FieldProps,
     UseInputBorderProps {
   /**
    * If `true`, display the clear icon.

@@ -62,7 +62,7 @@ export function useAsyncFunc<Y extends FunctionReturningPromise>(
   initialState: StateFromFunctionReturningPromise<Y> = { loading: false },
 ): AsyncFnReturn<Y> {
   const lastCallId = useRef(0)
-  const isMounted = useMounted()
+  const mounted = useMounted()
   const [state, setState] =
     useState<StateFromFunctionReturningPromise<Y>>(initialState)
 
@@ -75,13 +75,13 @@ export function useAsyncFunc<Y extends FunctionReturningPromise>(
 
       return func(...args).then(
         (value) => {
-          if (isMounted() && callId === lastCallId.current)
+          if (mounted() && callId === lastCallId.current)
             setState({ loading: false, value })
 
           return value
         },
         (error) => {
-          if (isMounted() && callId === lastCallId.current)
+          if (mounted() && callId === lastCallId.current)
             setState({ error, loading: false })
 
           return error

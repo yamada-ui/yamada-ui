@@ -54,7 +54,7 @@ export { TooltipPropsContext, useTooltipPropsContext }
 /**
  * `Tooltip` is a component that displays short information, such as supplementary details for an element.
  *
- * @see https://yamada-ui.com/components/tooltip
+ * @see https://yamada-ui.com/docs/components/tooltip
  */
 export const Tooltip: FC<TooltipProps> = (props) => {
   const [

@@ -117,7 +117,7 @@ export { MenuPropsContext, useMenuPropsContext }
 /**
  * `Menu` is a component that displays a common dropdown menu.
  *
- * @see https://yamada-ui.com/components/menu
+ * @see https://yamada-ui.com/docs/components/menu
  */
 export const MenuRoot: FC<MenuRootProps> = (props) => {
   const [styleContext, mergedProps] = useRootComponentProps(props)

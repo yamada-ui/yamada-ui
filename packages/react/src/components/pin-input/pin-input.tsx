@@ -59,7 +59,7 @@ export { PinInputPropsContext, usePinInputPropsContext }
 /**
  * `PinInput` is a component used to capture pin codes or OTP (One-Time Password) inputs.
  *
- * @see https://yamada-ui.com/components/pin-input
+ * @see https://yamada-ui.com/docs/components/pin-input
  */
 export const PinInputRoot = withProvider<"div", PinInputRootProps>(
   ({ children, errorBorderColor, focusBorderColor, items = 4, ...rest }) => {

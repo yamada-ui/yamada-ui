@@ -18,7 +18,7 @@ export function useMounted(props?: { delay?: number; state?: true }): boolean
 /**
  * `useMounted` is a custom hook that returns a boolean indicating whether the component is mounted.
  *
- * @see https://yamada-ui.com/hooks/use-mounted
+ * @see https://yamada-ui.com/docs/hooks/use-mounted
  */
 export function useMounted({ delay = 0, state = false }: UseMountedProps = {}) {
   const mountedRef = useRef(false)

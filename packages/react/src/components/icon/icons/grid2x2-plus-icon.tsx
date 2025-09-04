@@ -6,6 +6,6 @@ import { component, Icon } from "../icon"
 /**
  * `Grid2x2PlusIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/docs/components/icon
  */
 export const Grid2x2PlusIcon = component(Icon)({ as: Grid2x2Plus })

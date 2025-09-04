@@ -7,7 +7,7 @@ import { useBoolean } from "../use-boolean"
 /**
  * `useProcessing` is a custom hook for handling processing states.
  *
- * @see https://yamada-ui.com/hooks/use-processing
+ * @see https://yamada-ui.com/docs/hooks/use-processing
  */
 export const useProcessing = (init?: boolean) => {
   const [loading, { off, on }] = useBoolean(init)

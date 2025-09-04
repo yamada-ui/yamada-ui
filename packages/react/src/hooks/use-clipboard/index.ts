@@ -12,7 +12,7 @@ export interface UseClipboardOptions {
 /**
  * `useClipboard` is a custom hook that performs the operation of copying a value to the clipboard.
  *
- * @see https://yamada-ui.com/hooks/use-clipboard
+ * @see https://yamada-ui.com/docs/hooks/use-clipboard
  */
 export const useClipboard = (
   defaultValue = "",

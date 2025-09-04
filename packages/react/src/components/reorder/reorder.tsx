@@ -44,7 +44,7 @@ export { ReorderPropsContext, useReorderPropsContext }
 /**
  * `Reorder` is a component that allows you to change the order of items using drag and drop.
  *
- * @see https://yamada-ui.com/components/reorder
+ * @see https://yamada-ui.com/docs/components/reorder
  */
 export const ReorderRoot = withProvider<"ul", ReorderRootProps>(
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint

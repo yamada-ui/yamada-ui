@@ -10,7 +10,7 @@ import { HStack, VStack } from "../../components/stack"
 import { Tag } from "../../components/tag"
 import { Wrap } from "../../components/wrap"
 import { UIProvider } from "../../providers/ui-provider"
-import { defaultConfig, defaultTheme } from "../../theme"
+import { config as defaultConfig, theme as defaultTheme } from "../../theme"
 import { toTitleCase } from "../../utils"
 import { useTheme } from "./theme-provider"
 

@@ -36,7 +36,7 @@ export { StatusPropsContext, useStatusPropsContext }
 /**
  * `Status` is component that indicate the status of a process or state.
  *
- * @see https://yamada-ui.com/components/status
+ * @see https://yamada-ui.com/docs/components/status
  */
 export const Status = withProvider<"div", StatusProps>(
   ({ children, indicatorProps, labelProps, ...rest }) => {

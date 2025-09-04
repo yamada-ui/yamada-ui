@@ -1,4 +1,9 @@
-import { Box, defaultTheme, isObject, NativeTable } from "@yamada-ui/react"
+import {
+  Box,
+  theme as defaultTheme,
+  isObject,
+  NativeTable,
+} from "@yamada-ui/react"
 import { useTranslations } from "next-intl"
 import { Row } from "./tokens-table"
 

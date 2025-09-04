@@ -221,23 +221,13 @@ import { Field } from "@workspaces/ui"
 <VStack>
   <Field.Root
     label="Email address"
-    optionalIndicator={
-      <Tag colorScheme="primary" size="sm">
-        optional
-      </Tag>
-    }
+    optionalIndicator={<Tag size="sm">optional</Tag>}
   >
     <Input type="email" placeholder="your email address" />
   </Field.Root>
 
   <Field.Root>
-    <Field.Label
-      optionalIndicator={
-        <Tag colorScheme="primary" size="sm">
-          optional
-        </Tag>
-      }
-    >
+    <Field.Label optionalIndicator={<Tag size="sm">optional</Tag>}>
       Email address
     </Field.Label>
     <Input type="email" placeholder="your email address" />

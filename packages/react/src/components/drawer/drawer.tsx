@@ -122,7 +122,7 @@ export { DrawerPropsContext, useDrawerPropsContext }
 /**
  * `Drawer` is a component for a panel that appears from the edge of the screen.
  *
- * @see https://yamada-ui.com/components/drawer
+ * @see https://yamada-ui.com/docs/components/drawer
  */
 export const DrawerRoot = withProvider<"div", DrawerRootProps, "placement">(
   ({

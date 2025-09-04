@@ -35,7 +35,7 @@ export { FormatNumberPropsContext, useFormatNumberPropsContext }
 /**
  * `FormatNumber` is used to format numbers to a specific locale and options.
  *
- * @see https://yamada-ui.com/components/format-number
+ * @see https://yamada-ui.com/docs/components/format-number
  */
 export const FormatNumber = withContext<"span", FormatNumberProps>(
   ({

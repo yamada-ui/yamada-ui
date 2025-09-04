@@ -20,6 +20,6 @@ export { KbdPropsContext, useKbdPropsContext }
 /**
  * `Kbd` is a component that represents keyboard input.
  *
- * @see https://yamada-ui.com/components/kbd
+ * @see https://yamada-ui.com/docs/components/kbd
  */
 export const Kbd = withContext("kbd")()

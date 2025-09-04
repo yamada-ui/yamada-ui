@@ -39,7 +39,7 @@ export { SwitchPropsContext, useSwitchPropsContext }
 /**
  * `Switch` is a component used to toggle between on and off states.
  *
- * @see https://yamada-ui.com/components/switch
+ * @see https://yamada-ui.com/docs/components/switch
  */
 export const Switch = withProvider<"input", SwitchProps>(
   ({ children, icon, inputProps, labelProps, ...props }) => {

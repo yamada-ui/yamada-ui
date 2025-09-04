@@ -42,7 +42,7 @@ export { SimpleGridPropsContext, useSimpleGridPropsContext }
 /**
  * `SimpleGrid` is a component that makes `Grid` simpler and more user-friendly.
  *
- * @see https://yamada-ui.com/components/simple-grid
+ * @see https://yamada-ui.com/docs/components/simple-grid
  */
 export const SimpleGrid = withContext<"div", SimpleGridProps>(Grid)(
   undefined,

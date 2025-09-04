@@ -44,7 +44,7 @@ export { FadePropsContext, useFadePropsContext }
 /**
  * `Fade` is a component that gradually shows or hides an element.
  *
- * @see https://yamada-ui.com/components/fade
+ * @see https://yamada-ui.com/docs/components/fade
  */
 export const Fade = withContext<"div", FadeProps>(
   ({

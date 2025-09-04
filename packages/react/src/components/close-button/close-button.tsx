@@ -31,7 +31,7 @@ export { CloseButtonPropsContext, useCloseButtonPropsContext }
 /**
  * `CloseButton` is a component used primarily to trigger the close functionality of a component.
  *
- * @see https://yamada-ui.com/components/close-button
+ * @see https://yamada-ui.com/docs/components/close-button
  */
 export const CloseButton = withContext<"button", CloseButtonProps>(IconButton)(
   undefined,

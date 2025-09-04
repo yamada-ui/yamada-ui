@@ -55,7 +55,7 @@ export { NumberInputPropsContext, useNumberInputPropsContext }
 /**
  * `NumberInput` is a component used to obtain numeric input from the user.
  *
- * @see https://yamada-ui.com/components/number-input
+ * @see https://yamada-ui.com/docs/components/number-input
  */
 export const NumberInput = withProvider<"input", NumberInputProps>(
   ({

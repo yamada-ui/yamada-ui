@@ -1,8 +1,6 @@
 import type { CSSModifierObject } from "../../core"
-import { defaultTheme } from ".."
 import { Heading } from "../../components/heading"
-import { UIProvider } from "../../providers/ui-provider"
-import { merge } from "../../utils"
+import { extendTheme, UIProvider } from "../../providers/ui-provider"
 
 export default {
   title: "Theme / Text Style",
@@ -18,7 +16,7 @@ export const Basic = () => {
     },
   }
 
-  const theme = merge(defaultTheme, { styles: { textStyles } })
+  const theme = extendTheme({ styles: { textStyles } })
 
   return (
     <UIProvider theme={theme}>

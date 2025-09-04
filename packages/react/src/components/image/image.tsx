@@ -25,7 +25,7 @@ export { ImagePropsContext, useImagePropsContext }
 /**
  * `Image` is a component that displays images with fallback support.
  *
- * @see https://yamada-ui.com/components/image
+ * @see https://yamada-ui.com/docs/components/image
  */
 export const Image = withContext("img")(undefined, ({ fit, ...rest }) => ({
   objectFit: fit,

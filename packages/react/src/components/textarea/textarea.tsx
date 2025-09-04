@@ -29,7 +29,7 @@ export { TextareaPropsContext, useTextareaPropsContext }
 /**
  * `Textarea` is a component used to obtain multi-line text input.
  *
- * @see https://yamada-ui.com/components/textarea
+ * @see https://yamada-ui.com/docs/components/textarea
  */
 export const Textarea = withContext("textarea")(
   (props) => {

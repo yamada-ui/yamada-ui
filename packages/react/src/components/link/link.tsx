@@ -25,7 +25,7 @@ export { LinkPropsContext, useLinkPropsContext }
 /**
  * `Link` is a component for creating hyperlinks to different web pages, locations within the same page, or other URLs.
  *
- * @see https://yamada-ui.com/components/link
+ * @see https://yamada-ui.com/docs/components/link
  */
 export const Link = withContext("a")(undefined, ({ external, ...rest }) => ({
   rel: external ? "noopener" : undefined,

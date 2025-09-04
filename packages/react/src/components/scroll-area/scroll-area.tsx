@@ -26,7 +26,7 @@ export { ScrollAreaPropsContext, useScrollAreaPropsContext }
 /**
  * `ScrollArea` is a component that displays a customized scrollbar.
  *
- * @see https://yamada-ui.com/components/scroll-area
+ * @see https://yamada-ui.com/docs/components/scroll-area
  */
 export const ScrollArea = withContext<"div", ScrollAreaProps>(
   ({ children, ...rest }) => {

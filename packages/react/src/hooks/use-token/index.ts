@@ -49,7 +49,10 @@ export const getToken =
         return value
       }
     } else {
-      value = get<[Y, Y] | undefined | Y>(theme, `semantics.${name}.${path}`)
+      value = get<[Y, Y] | undefined | Y>(
+        theme,
+        `semanticTokens.${name}.${path}`,
+      )
 
       if (isArray(value)) {
         value = [

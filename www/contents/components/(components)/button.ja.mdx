@@ -118,23 +118,23 @@ import { Button, ButtonGroup } from "@workspaces/ui"
 
 ```tsx preview
 <Wrap gap="md">
-  <Button colorScheme="primary" variant="solid" startIcon={<PlusIcon />}>
+  <Button variant="solid" startIcon={<PlusIcon />}>
     Button
   </Button>
 
-  <Button colorScheme="secondary" variant="subtle" endIcon={<ArrowRightIcon />}>
+  <Button variant="subtle" endIcon={<ArrowRightIcon />}>
     Button
   </Button>
 
-  <Button colorScheme="info" variant="surface" startIcon={<MailIcon />}>
+  <Button variant="surface" startIcon={<MailIcon />}>
     Button
   </Button>
 
-  <Button colorScheme="warning" variant="outline" startIcon={<CheckIcon />}>
+  <Button variant="outline" endIcon={<CheckIcon />}>
     Button
   </Button>
 
-  <Button colorScheme="danger" variant="ghost" startIcon={<XIcon />}>
+  <Button variant="ghost" startIcon={<XIcon />}>
     Button
   </Button>
 </Wrap>
@@ -146,34 +146,21 @@ import { Button, ButtonGroup } from "@workspaces/ui"
 
 ```tsx preview
 <Wrap gap="md">
-  <Button colorScheme="primary" loading>
+  <Button loading>Button</Button>
+
+  <Button variant="subtle" loading loadingIcon="dots">
     Button
   </Button>
 
-  <Button colorScheme="secondary" variant="subtle" loading loadingIcon="dots">
+  <Button variant="surface" loading loadingIcon={<Loading.Puff />}>
     Button
   </Button>
 
-  <Button
-    colorScheme="info"
-    variant="surface"
-    loading
-    loadingIcon={<Loading.Puff />}
-  >
-    Button
-  </Button>
-
-  <Button
-    colorScheme="warning"
-    variant="outline"
-    loading
-    loadingMessage="Loading..."
-  >
+  <Button variant="outline" loading loadingMessage="Loading...">
     Button
   </Button>
 
   <Button
-    colorScheme="danger"
     variant="ghost"
     loading
     loadingIcon="grid"

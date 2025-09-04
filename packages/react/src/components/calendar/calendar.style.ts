@@ -106,12 +106,23 @@ export const calendarStyle = defineComponentSlotStyle({
     weeks: {
       display: "grid",
       gap: "{cell-gap}",
-      gridTemplateRows: "repeat(6, 1fr)",
     },
     years: {},
   },
 
   props: {
+    /**
+     * If `true`, the calendar will be fixed rows.
+     *
+     * @default true
+     */
+    fixed: {
+      true: {
+        weeks: {
+          gridTemplateRows: "repeat(6, 1fr)",
+        },
+      },
+    },
     /**
      * The shape of the cell
      *
@@ -153,6 +164,7 @@ export const calendarStyle = defineComponentSlotStyle({
 
   defaultProps: {
     size: "md",
+    fixed: true,
     shape: "rounded",
   },
 })

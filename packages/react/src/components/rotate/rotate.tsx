@@ -84,7 +84,7 @@ export { RotatePropsContext, useRotatePropsContext }
 /**
  * `Rotate` is an animation component that alternately rotates two elements as they switch.
  *
- * @see https://yamada-ui.com/components/rotate
+ * @see https://yamada-ui.com/docs/components/rotate
  */
 export const Rotate = withContext<"button", RotateProps>(
   ({

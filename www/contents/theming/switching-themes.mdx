@@ -1,6 +1,159 @@
 ---
 title: Switching Themes
-description: Learn how to switch themes in your project.
+description: Yamada UI provides the functionality for users to switch themes.
 ---
 
-## Usage
+## Setup
+
+::::steps
+
+### Generate a Theme
+
+Use the [CLI](/docs/theming/cli) to generate a theme.
+
+:::warning
+Before running the following commands, you need to install `@yamada-ui/cli` and execute the `init` command. For more details, please see [here](/docs/get-started/cli).
+:::
+
+:::code-group
+
+```bash [pnpm]
+pnpm yamada-cli theme
+```
+
+```bash [npm]
+npm yamada-cli theme
+```
+
+```bash [yarn]
+yarn yamada-cli theme
+```
+
+```bash [bun]
+bun yamada-cli theme
+```
+
+:::
+
+### Add a Theme
+
+Change the `index.ts` in the generated theme.
+
+```tsx title="theme/index.ts"
+import { defineTheme } from "@yamada-ui/react"
+import { semanticTokens } from "./semantic-tokens"
+import { styles } from "./styles"
+import { tokens } from "./tokens"
+
+export { config } from "./config"
+
+export const theme = defineTheme({
+  styles,
+  ...tokens,
+  semanticTokens,
+  themeSchemes: {
+    blue: { semanticTokens: { colorSchemes: { primary: "blue" } } },
+    red: { semanticTokens: { colorSchemes: { primary: "red" } } },
+    green: { semanticTokens: { colorSchemes: { primary: "green" } } },
+  },
+})
+
+export type Theme = typeof theme
+```
+
+### Update the Provider
+
+Set the generated theme to `UIProvider`.
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### Add a Logic
+
+Use `useTheme` to switch themes. `useTheme` returns the `themeScheme` and `changeThemeScheme` to change the theme scheme.
+
+```tsx preview functional client
+const { themeScheme, changeThemeScheme } = useTheme()
+
+return (
+  <VStack>
+    <Text>The current scheme is "{themeScheme}"</Text>
+
+    <Wrap gap="md" alignItems="center">
+      <Badge colorScheme="primary">Primary</Badge>
+      <Badge colorScheme="secondary">Secondary</Badge>
+      <Tag colorScheme="primary">Primary</Tag>
+      <Tag colorScheme="secondary">Secondary</Tag>
+    </Wrap>
+
+    <Wrap gap="md">
+      <Button onClick={() => changeThemeScheme("base")}>Base Theme</Button>
+
+      <Button colorScheme="red" onClick={() => changeThemeScheme("red")}>
+        Red Theme
+      </Button>
+
+      <Button colorScheme="green" onClick={() => changeThemeScheme("green")}>
+        Green Theme
+      </Button>
+
+      <Button colorScheme="blue" onClick={() => changeThemeScheme("blue")}>
+        Blue Theme
+      </Button>
+    </Wrap>
+  </VStack>
+)
+```
+
+::::
+
+## Change the Default Theme Scheme
+
+To change the default theme scheme, set the value to `config.ts` in `defaultThemeScheme`.
+
+::::steps
+
+### Change the Config
+
+Change the `config.ts` in the generated theme.
+
+```tsx title="theme/config.ts"
+import { defineConfig } from "@yamada-ui/react"
+
+export const config = defineConfig({
+  css: { varPrefix: "ui" },
+  breakpoint: { direction: "down", identifier: "@media screen" },
+  defaultColorMode: "dark",
+  defaultThemeScheme: "blue", // [!code highlight]
+  theme: { responsive: true },
+})
+```
+
+### Update the Provider
+
+Set the generated theme to `UIProvider`.
+
+```tsx {2,6}
+import { UIProvider } from "@workspaces/ui"
+import { theme, config } from "@/theme"
+
+const App = () => {
+  return (
+    <UIProvider theme={theme} config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+::::

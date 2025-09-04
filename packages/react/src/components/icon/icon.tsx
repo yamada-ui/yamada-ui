@@ -25,7 +25,7 @@ export { component, IconPropsContext, useIconPropsContext, withContext }
 /**
  * `Icon` is a general icon component that can be used in your projects.
  *
- * @see https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/docs/components/icon
  */
 export const Icon = withContext("svg")(
   {

@@ -1,9 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { AnimatePresence, useScroll, useTransform } from "motion/react"
 import { useBoolean } from "../../hooks/use-boolean"
-import { UIProvider } from "../../providers/ui-provider"
-import { defaultConfig } from "../../theme"
-import { merge } from "../../utils"
 import { Box } from "../box"
 import { Button } from "../button"
 import { Text } from "../text"
@@ -41,26 +38,6 @@ export const ExitPresenceAnimation: Story = () => {
         ) : null}
       </AnimatePresence>
     </>
-  )
-}
-
-export const MotionConfig: Story = () => {
-  const config = merge(defaultConfig, {
-    motion: { config: { transition: { duration: 2 } } },
-  })
-
-  return (
-    <UIProvider config={config}>
-      <Motion
-        animate={{ x: 100 }}
-        bg="mono"
-        color="mono.contrast"
-        p="md"
-        rounded="l2"
-      >
-        Motion
-      </Motion>
-    </UIProvider>
   )
 }
 

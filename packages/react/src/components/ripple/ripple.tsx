@@ -44,7 +44,7 @@ export { RipplePropsContext, useRipplePropsContext }
 /**
  * `Ripple` is a component that adds a ripple effect to elements, allowing users to recognize when they have clicked.
  *
- * @see https://yamada-ui.com/components/ripple
+ * @see https://yamada-ui.com/docs/components/ripple
  */
 export const Ripple = withContext<"span", RippleProps>(
   ({

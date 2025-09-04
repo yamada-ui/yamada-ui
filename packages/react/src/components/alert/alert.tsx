@@ -55,7 +55,7 @@ export { AlertPropsContext, useAlertPropsContext }
 /**
  * `Alert` is a component that conveys information to the user.
  *
- * @see https://yamada-ui.com/components/alert
+ * @see https://yamada-ui.com/docs/components/alert
  */
 export const AlertRoot = withProvider<"div", AlertRootProps>(
   ({ status, colorScheme = status, ...props }) => {

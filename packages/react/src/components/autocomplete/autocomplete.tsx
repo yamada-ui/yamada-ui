@@ -134,7 +134,7 @@ export { AutocompletePropsContext, useAutocompletePropsContext }
 /**
  * `Autocomplete` is a component used to display suggestions in response to user text input.
  *
- * @see https://yamada-ui.com/components/autocomplete
+ * @see https://yamada-ui.com/docs/components/autocomplete
  */
 export const AutocompleteRoot = withProvider<"div", AutocompleteRootProps>(
   (props) => {

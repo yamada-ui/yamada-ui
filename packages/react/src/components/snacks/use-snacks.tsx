@@ -66,7 +66,7 @@ export interface UseSnacksOptions
 /**
  * `useSnacks` is a custom hook for controlling notifications used in forms and the like.
  *
- * @see https://yamada-ui.com/hooks/use-snacks
+ * @see https://yamada-ui.com/docs/hooks/use-snacks
  */
 export const useSnacks = (options: UseSnacksOptions = {}) => {
   const [items, setItems] = useState<Snack[]>([])

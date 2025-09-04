@@ -8,7 +8,7 @@ import { useBreakpoint } from "./use-breakpoint"
 /**
  * `useBreakpointEffect` is a custom hook that executes a specific callback function when the breakpoint changes.
  *
- * @see https://yamada-ui.com/hooks/use-breakpoint-effect
+ * @see https://yamada-ui.com/docs/hooks/use-breakpoint-effect
  */
 export const useBreakpointEffect = (
   callback: (breakpoint: Breakpoint) => void,

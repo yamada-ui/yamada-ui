@@ -24,7 +24,7 @@ export { ContainerPropsContext, useContainerPropsContext }
 /**
  * `Container` is a component used as a general division element. By default, it renders the `section` element.
  *
- * @see https://yamada-ui.com/components/container
+ * @see https://yamada-ui.com/docs/components/container
  */
 export const ContainerRoot = withProvider("section", "root")()
 

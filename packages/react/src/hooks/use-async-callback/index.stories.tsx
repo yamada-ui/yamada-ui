@@ -1,9 +1,5 @@
 import type { Meta } from "@storybook/react-vite"
-import type { FC } from "react"
 import { Button } from "../../components/button"
-import { UIProvider } from "../../providers/ui-provider"
-import { defaultConfig } from "../../theme"
-import { merge } from "../../utils"
 import { useAsyncCallback } from "./"
 
 const meta: Meta = {
@@ -37,32 +33,6 @@ export const Loading = () => {
     [],
     { loading: "page" },
   )
-
-  return (
-    <Button loading={loading} onClick={onClick}>
-      Click me
-    </Button>
-  )
-}
-
-export const Config = () => {
-  const config = merge(defaultConfig, {
-    loading: {
-      defaultComponent: "page",
-    },
-  })
-
-  return (
-    <UIProvider config={config}>
-      <App />
-    </UIProvider>
-  )
-}
-
-const App: FC = () => {
-  const [loading, onClick] = useAsyncCallback(async () => {
-    await wait(3000)
-  }, [])
 
   return (
     <Button loading={loading} onClick={onClick}>

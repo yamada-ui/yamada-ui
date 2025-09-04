@@ -164,7 +164,7 @@ export { CarouselPropsContext, useCarouselPropsContext }
 /**
  * `Carousel` is a component that displays multiple elements like a slideshow.
  *
- * @see https://yamada-ui.com/components/carousel
+ * @see https://yamada-ui.com/docs/components/carousel
  */
 export const CarouselRoot = withProvider<"section", CarouselRootProps>(
   ({ includeGapInSize = true, ...rest }) => {

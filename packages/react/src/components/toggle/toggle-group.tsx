@@ -18,7 +18,7 @@ import { ToggleGroupContext, useToggleGroup } from "./use-toggle-group"
 /**
  * `ToggleGroup` is a set of two-state buttons that can be toggled on or off.
  *
- * @see https://yamada-ui.com/components/toggle
+ * @see https://yamada-ui.com/docs/components/toggle
  */
 export interface ToggleGroupRootProps<Y extends string | string[] = string>
   extends Omit<

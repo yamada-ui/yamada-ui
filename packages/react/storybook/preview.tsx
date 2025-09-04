@@ -2,7 +2,7 @@ import type { Preview, StoryContext } from "@storybook/react-vite"
 import { useEffect } from "react"
 import { GLOBALS_UPDATED } from "storybook/internal/core-events"
 import { addons } from "storybook/preview-api"
-import { defaultConfig, isRtl, UIProvider, useColorMode, VStack } from "../src"
+import { extendConfig, isRtl, UIProvider, useColorMode, VStack } from "../src"
 import { themes } from "./themes"
 
 const channel = addons.getChannel()
@@ -28,9 +28,9 @@ const preview: Preview = {
     },
     function (Story, { globals, parameters }) {
       const { layout } = parameters
-      const { colorMode: initialColorMode, locale } = globals
+      const { colorMode: defaultColorMode, locale } = globals
       const dir = isRtl(globals.locale) ? "rtl" : "ltr"
-      const config = { ...defaultConfig, initialColorMode }
+      const config = extendConfig({ defaultColorMode })
 
       return (
         <UIProvider config={config} dir={dir} locale={locale}>

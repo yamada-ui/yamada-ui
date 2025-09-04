@@ -3,6 +3,10 @@ title: ブレイクポイント
 description: ブレイクポイントをカスタマイズする方法を学ぶ。
 ---
 
+:::tip
+レスポンシブデザインの概要は[こちら](/docs/styling/responsive-design)をご覧ください。
+:::
+
 ## 概要
 
 ブレイクポイントは、[レスポンシブデザイン](/docs/styling/responsive-design)などで使用されるトークンです。
@@ -91,9 +95,7 @@ const App = () => {
 デフォルトでは、`@media(max-width)`のメディアクエリを用いたレスポンシブデザインを採用しています。
 
 ```tsx preview functional
-const config = merge<ThemeConfig>(defaultConfig, {
-  breakpoint: { direction: "up" },
-})
+const config = defineConfig({ breakpoint: { direction: "up" } })
 
 const Component: FC<{ query: string }> = ({ query }) => {
   const breakpoint = useBreakpoint()
@@ -165,11 +167,8 @@ const App = () => {
 
 ```tsx preview functional
 const containerRef = useRef<HTMLDivElement>(null)
-const config = merge<ThemeConfig>(defaultConfig, {
-  breakpoint: {
-    containerRef,
-    identifier: "@container",
-  },
+const config = defineConfig({
+  breakpoint: { containerRef, identifier: "@container" },
 })
 
 const Component: FC<{ query: string }> = ({ query }) => {

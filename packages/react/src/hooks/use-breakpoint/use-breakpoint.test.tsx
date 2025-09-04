@@ -3,7 +3,7 @@ import type { ThemeConfig } from "../../core"
 import { render, renderHook, screen, waitFor } from "#test"
 import MatchMediaMock from "vitest-matchmedia-mock"
 import { styled, ThemeProvider } from "../../core"
-import { defaultConfig, defaultTheme } from "../../theme"
+import { config as defaultConfig, theme as defaultTheme } from "../../theme"
 import { useBreakpoint } from "./use-breakpoint"
 
 describe("useBreakpoint", () => {

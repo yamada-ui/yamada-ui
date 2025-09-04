@@ -138,7 +138,7 @@ export { PopoverPropsContext, usePopoverPropsContext }
 /**
  * `Popover` is a component that floats around an element to display information.
  *
- * @see https://yamada-ui.com/components/popover
+ * @see https://yamada-ui.com/docs/components/popover
  */
 export const PopoverRoot: FC<PopoverRootProps> = (props) => {
   const [

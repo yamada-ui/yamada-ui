@@ -12,7 +12,7 @@ type CSSObject =
 /**
  * `useAnimation` is a custom hook that implements animations similar to CSS `keyframes`.
  *
- * @see https://yamada-ui.com/hooks/use-animation
+ * @see https://yamada-ui.com/docs/hooks/use-animation
  */
 export const useAnimation = (cssObj: CSSObject): string => {
   const system = useSystem()
@@ -27,7 +27,7 @@ export const useAnimation = (cssObj: CSSObject): string => {
 /**
  * `useDynamicAnimation` is a custom hook used to switch animations.
  *
- * @see https://yamada-ui.com/hooks/use-dynamic-animation
+ * @see https://yamada-ui.com/docs/hooks/use-dynamic-animation
  */
 export const useDynamicAnimation = <
   Y extends

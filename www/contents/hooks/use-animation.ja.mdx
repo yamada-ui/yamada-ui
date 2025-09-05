@@ -5,4 +5,324 @@ storybook: hooks-useanimation--basic
 source: hooks/use-animation
 ---
 
-### 使い方
+```tsx preview functional client
+const animation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.500",
+    },
+    "20%": {
+      bg: "green.500",
+    },
+    "40%": {
+      bg: "purple.500",
+    },
+    "60%": {
+      bg: "yellow.500",
+    },
+    "80%": {
+      bg: "blue.500",
+    },
+    "100%": {
+      bg: "red.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return <Box w="full" h="xs" animation={animation} />
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useAnimation } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useAnimation } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useAnimation } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const animation = useAnimation(cssObj)
+```
+
+:::note
+アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/Web/CSS/@keyframes)と[CSSアニメーションの使用](https://developer.mozilla.org/ja/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
+:::
+
+:::note
+アニメーションをもっと学びたい場合は、[こちら](/styling/animation)をご覧ください。
+:::
+
+### 複数のアニメーションを使う
+
+複数のアニメーションを使う場合は、`useAnimation`に配列を渡します。
+
+```tsx preview functional client
+const animation = useAnimation([
+  {
+    keyframes: {
+      "0%": {
+        bg: "red.500",
+      },
+      "20%": {
+        bg: "green.500",
+      },
+      "40%": {
+        bg: "purple.500",
+      },
+      "60%": {
+        bg: "yellow.500",
+      },
+      "80%": {
+        bg: "blue.500",
+      },
+      "100%": {
+        bg: "red.500",
+      },
+    },
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
+  },
+  {
+    keyframes: {
+      "0%": {
+        h: "xs",
+      },
+      "50%": {
+        h: "md",
+      },
+      "100%": {
+        h: "xs",
+      },
+    },
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
+  },
+  {
+    keyframes: {
+      "0%": {
+        w: "full",
+      },
+      "50%": {
+        w: "50%",
+      },
+      "100%": {
+        w: "full",
+      },
+    },
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
+  },
+])
+
+return (
+  <Box h="md">
+    <Box w="full" h="xs" animation={animation} />
+  </Box>
+)
+```
+
+### レスポンシブスタイル
+
+レスポンシブスタイルを使う場合は、`animation`にオブジェクトを渡します。
+
+```tsx preview functional client
+const desktopAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.500",
+    },
+    "20%": {
+      bg: "green.500",
+    },
+    "40%": {
+      bg: "purple.500",
+    },
+    "60%": {
+      bg: "yellow.500",
+    },
+    "80%": {
+      bg: "blue.500",
+    },
+    "100%": {
+      bg: "red.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+const tabletAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "cyan.500",
+    },
+    "20%": {
+      bg: "emerald.500",
+    },
+    "40%": {
+      bg: "pink.500",
+    },
+    "60%": {
+      bg: "amber.500",
+    },
+    "80%": {
+      bg: "sky.500",
+    },
+    "100%": {
+      bg: "cyan.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return (
+  <Box
+    w="full"
+    h="xs"
+    animation={{ base: desktopAnimation, md: tabletAnimation }}
+  />
+)
+```
+
+### カラーモード
+
+カラーモードを使う場合は、`animation`に配列を渡します。
+
+```tsx preview functional client
+const lightAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.500",
+    },
+    "20%": {
+      bg: "green.500",
+    },
+    "40%": {
+      bg: "purple.500",
+    },
+    "60%": {
+      bg: "yellow.500",
+    },
+    "80%": {
+      bg: "blue.500",
+    },
+    "100%": {
+      bg: "red.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+const darkAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.800",
+    },
+    "20%": {
+      bg: "green.800",
+    },
+    "40%": {
+      bg: "purple.800",
+    },
+    "60%": {
+      bg: "yellow.800",
+    },
+    "80%": {
+      bg: "blue.800",
+    },
+    "100%": {
+      bg: "red.800",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return <Box w="full" h="xs" animation={[lightAnimation, darkAnimation]} />
+```
+
+:::note
+カラーモードをもっと学びたい場合は、[こちら](/styling/color-mode)をご覧ください。
+:::
+
+### 疑似要素を使う
+
+疑似要素を使う場合は、`_before`や`_after`などに`animation`を渡します。
+
+```tsx preview functional client
+const animation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.500",
+    },
+    "20%": {
+      bg: "green.500",
+    },
+    "40%": {
+      bg: "purple.500",
+    },
+    "60%": {
+      bg: "yellow.500",
+    },
+    "80%": {
+      bg: "blue.500",
+    },
+    "100%": {
+      bg: "red.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return (
+  <Box
+    bg="primary"
+    color="white"
+    m="lg"
+    p="lg"
+    pos="relative"
+    rounded="l3"
+    _after={{
+      animation,
+      bg: "secondary",
+      color: "white",
+      content: "'after'",
+      left: "lg",
+      p: "lg",
+      pos: "absolute",
+      rounded: "lg",
+      top: "lg",
+    }}
+  >
+    Box
+  </Box>
+)
+```
+
+### 動的にアニメーションを切り替える
+
+動的なアニメーション制御については、[`useDynamicAnimation`](/docs/hooks/use-dynamic-animation)をご覧ください。

@@ -5,4 +5,324 @@ storybook: hooks-useanimation--basic
 source: hooks/use-animation
 ---
 
-### Usage
+```tsx preview functional client
+const animation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.500",
+    },
+    "20%": {
+      bg: "green.500",
+    },
+    "40%": {
+      bg: "purple.500",
+    },
+    "60%": {
+      bg: "yellow.500",
+    },
+    "80%": {
+      bg: "blue.500",
+    },
+    "100%": {
+      bg: "red.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return <Box w="full" h="xs" animation={animation} />
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useAnimation } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useAnimation } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useAnimation } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const animation = useAnimation(cssObj)
+```
+
+:::note
+Animation settings are based on [@keyframes](https://developer.mozilla.org/en/Web/CSS/@keyframes) and [Using CSS animations](https://developer.mozilla.org/en/Web/CSS/CSS_animations/Using_CSS_animations#configuring_an_animation).
+:::
+
+:::note
+If you want to learn more about animations, please see [here](/styling/animation).
+:::
+
+### Use Multiple Animations
+
+To use multiple animations, pass an array to `useAnimation`.
+
+```tsx preview functional client
+const animation = useAnimation([
+  {
+    keyframes: {
+      "0%": {
+        bg: "red.500",
+      },
+      "20%": {
+        bg: "green.500",
+      },
+      "40%": {
+        bg: "purple.500",
+      },
+      "60%": {
+        bg: "yellow.500",
+      },
+      "80%": {
+        bg: "blue.500",
+      },
+      "100%": {
+        bg: "red.500",
+      },
+    },
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
+  },
+  {
+    keyframes: {
+      "0%": {
+        h: "xs",
+      },
+      "50%": {
+        h: "md",
+      },
+      "100%": {
+        h: "xs",
+      },
+    },
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
+  },
+  {
+    keyframes: {
+      "0%": {
+        w: "full",
+      },
+      "50%": {
+        w: "50%",
+      },
+      "100%": {
+        w: "full",
+      },
+    },
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
+  },
+])
+
+return (
+  <Box h="md">
+    <Box w="full" h="xs" animation={animation} />
+  </Box>
+)
+```
+
+### Responsive Styles
+
+To use responsive styles, pass an object to `animation`.
+
+```tsx preview functional client
+const desktopAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.500",
+    },
+    "20%": {
+      bg: "green.500",
+    },
+    "40%": {
+      bg: "purple.500",
+    },
+    "60%": {
+      bg: "yellow.500",
+    },
+    "80%": {
+      bg: "blue.500",
+    },
+    "100%": {
+      bg: "red.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+const tabletAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "cyan.500",
+    },
+    "20%": {
+      bg: "emerald.500",
+    },
+    "40%": {
+      bg: "pink.500",
+    },
+    "60%": {
+      bg: "amber.500",
+    },
+    "80%": {
+      bg: "sky.500",
+    },
+    "100%": {
+      bg: "cyan.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return (
+  <Box
+    w="full"
+    h="xs"
+    animation={{ base: desktopAnimation, md: tabletAnimation }}
+  />
+)
+```
+
+### Color Mode
+
+To use color mode, pass an array to `animation`.
+
+```tsx preview functional client
+const lightAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.500",
+    },
+    "20%": {
+      bg: "green.500",
+    },
+    "40%": {
+      bg: "purple.500",
+    },
+    "60%": {
+      bg: "yellow.500",
+    },
+    "80%": {
+      bg: "blue.500",
+    },
+    "100%": {
+      bg: "red.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+const darkAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.800",
+    },
+    "20%": {
+      bg: "green.800",
+    },
+    "40%": {
+      bg: "purple.800",
+    },
+    "60%": {
+      bg: "yellow.800",
+    },
+    "80%": {
+      bg: "blue.800",
+    },
+    "100%": {
+      bg: "red.800",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return <Box w="full" h="xs" animation={[lightAnimation, darkAnimation]} />
+```
+
+:::note
+If you want to learn more about color mode, please see [here](/styling/color-mode).
+:::
+
+### Use Pseudo Elements
+
+To use pseudo elements, pass `animation` to `_before`, `_after`, etc.
+
+```tsx preview functional client
+const animation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.500",
+    },
+    "20%": {
+      bg: "green.500",
+    },
+    "40%": {
+      bg: "purple.500",
+    },
+    "60%": {
+      bg: "yellow.500",
+    },
+    "80%": {
+      bg: "blue.500",
+    },
+    "100%": {
+      bg: "red.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return (
+  <Box
+    bg="primary"
+    color="white"
+    m="lg"
+    p="lg"
+    pos="relative"
+    rounded="l3"
+    _after={{
+      animation,
+      bg: "secondary",
+      color: "white",
+      content: "'after'",
+      left: "lg",
+      p: "lg",
+      pos: "absolute",
+      rounded: "lg",
+      top: "lg",
+    }}
+  >
+    Box
+  </Box>
+)
+```
+
+### Switch Animations Dynamically
+
+For dynamic animation control, please see [`useDynamicAnimation`](/docs/hooks/use-dynamic-animation).

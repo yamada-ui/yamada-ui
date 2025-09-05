@@ -285,7 +285,11 @@ return (
 
 ### Limit the Number of Displays
 
-To limit the number of displays, set a number to the `limit` prop.
+To limit the number of displays, set a number to the `limit` prop. By default, `3` is set.
+
+:::info
+If you want to display an unlimited number of notifications, set it to `null`.
+:::
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks({ limit: 5 })

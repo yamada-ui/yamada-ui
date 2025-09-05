@@ -285,7 +285,11 @@ return (
 
 ### 表示件数を制限する
 
-表示件数を制限する場合は、`limit`に数値を設定します。
+表示件数を制限する場合は、`limit`に数値を設定します。デフォルトでは、`3`が設定されています。
+
+:::info
+もし、無制限に表示したい場合は、`null`を設定します。
+:::
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks({ limit: 5 })

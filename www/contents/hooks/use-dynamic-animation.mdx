@@ -5,4 +5,152 @@ storybook: hooks-usedynamicanimation--basic
 source: hooks/use-dynamic-animation
 ---
 
-### Usage
+```tsx preview functional client
+const [animation, setAnimation] = useDynamicAnimation({
+  moveLeft: {
+    duration: "slower",
+    fillMode: "forwards",
+    keyframes: {
+      "0%": {
+        transform: "translateX(400%)",
+      },
+      "100%": {
+        transform: "translateX(0%)",
+      },
+    },
+    timingFunction: "ease-in-out",
+  },
+  moveRight: {
+    duration: "slower",
+    fillMode: "forwards",
+    keyframes: {
+      "0%": {
+        transform: "translateX(0%)",
+      },
+      "100%": {
+        transform: "translateX(400%)",
+      },
+    },
+    timingFunction: "ease-in-out",
+  },
+})
+
+return (
+  <VStack>
+    <Button
+      onClick={() =>
+        setAnimation((key) => (key === "moveRight" ? "moveLeft" : "moveRight"))
+      }
+    >
+      Please Click
+    </Button>
+
+    <Box animation={animation} bg="primary" color="white" p="md" rounded="l2">
+      Box
+    </Box>
+  </VStack>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useDynamicAnimation } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useDynamicAnimation } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useDynamicAnimation } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [animation, setAnimation] = useDynamicAnimation(arrayOrObj)
+```
+
+### Multiple Animations
+
+To use multiple animations, pass an array.
+
+```tsx preview functional client
+const [animation, setAnimation] = useDynamicAnimation({
+  moveLeft: [
+    {
+      duration: "slower",
+      fillMode: "forwards",
+      keyframes: {
+        "0%": {
+          transform: "translateX(400%)",
+        },
+        "100%": {
+          transform: "translateX(0%)",
+        },
+      },
+      timingFunction: "ease-in-out",
+    },
+    {
+      duration: "slower",
+      fillMode: "forwards",
+      keyframes: {
+        "0%": {
+          bg: "secondary",
+        },
+        "100%": {
+          bg: "primary",
+        },
+      },
+      timingFunction: "ease-in-out",
+    },
+  ],
+  moveRight: [
+    {
+      duration: "slower",
+      fillMode: "forwards",
+      keyframes: {
+        "0%": {
+          transform: "translateX(0%)",
+        },
+        "100%": {
+          transform: "translateX(400%)",
+        },
+      },
+      timingFunction: "ease-in-out",
+    },
+    {
+      duration: "slower",
+      fillMode: "forwards",
+      keyframes: {
+        "0%": {
+          bg: "primary",
+        },
+        "100%": {
+          bg: "secondary",
+        },
+      },
+      timingFunction: "ease-in-out",
+    },
+  ],
+})
+
+return (
+  <VStack>
+    <Button
+      onClick={() =>
+        setAnimation((key) => (key === "moveRight" ? "moveLeft" : "moveRight"))
+      }
+    >
+      Please Click
+    </Button>
+
+    <Box animation={animation} bg="primary" color="white" p="md" rounded="l2">
+      Box
+    </Box>
+  </VStack>
+)
+```

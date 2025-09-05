@@ -22,6 +22,7 @@ export function Header() {
     return [
       { href: "/docs", label: t("component.header.docs") },
       { href: "/icons", label: t("component.header.icons") },
+      { href: "/playground", label: t("component.header.playground") },
       { href: "/themes", label: t("component.header.themes") },
       {
         href: "https://yamada-colors.app",

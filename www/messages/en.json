@@ -80,6 +80,11 @@
       "preview": "Preview",
       "code": "Code"
     },
+    "playground": {
+      "title": "Playground",
+      "copyUrl": "Copy share URL",
+      "reset": "Reset"
+    },
     "propsTable": {
       "prop": "Prop",
       "default": "Default",

@@ -80,6 +80,11 @@
       "preview": "プレビュー",
       "code": "コード"
     },
+    "playground": {
+      "title": "プレイグラウンド",
+      "copyUrl": "共有URLをコピー",
+      "reset": "リセット"
+    },
     "propsTable": {
       "prop": "Prop",
       "default": "デフォルト",

@@ -28,3 +28,11 @@ import { useInterval } from "@/components/ui"
 ```tsx [monorepo]
 import { useInterval } from "@workspaces/ui"
 ```
+
+:::
+
+```tsx
+const [state, setState] = useState<number>(1)
+
+useInterval(() => setState((prev) => prev + 1), 3000)
+```

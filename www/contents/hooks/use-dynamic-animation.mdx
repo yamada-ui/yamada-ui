@@ -12,7 +12,7 @@ const [animation, setAnimation] = useDynamicAnimation({
     fillMode: "forwards",
     keyframes: {
       "0%": {
-        transform: "translateX(400%)",
+        transform: "translateX(100%)",
       },
       "100%": {
         transform: "translateX(0%)",
@@ -28,7 +28,7 @@ const [animation, setAnimation] = useDynamicAnimation({
         transform: "translateX(0%)",
       },
       "100%": {
-        transform: "translateX(400%)",
+        transform: "translateX(100%)",
       },
     },
     timingFunction: "ease-in-out",
@@ -36,7 +36,7 @@ const [animation, setAnimation] = useDynamicAnimation({
 })
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button
       onClick={() =>
         setAnimation((key) => (key === "moveRight" ? "moveLeft" : "moveRight"))
@@ -45,7 +45,7 @@ return (
       Please Click
     </Button>
 
-    <Box animation={animation} bg="primary" color="white" p="md" rounded="l2">
+    <Box animation={animation} bg="bg.contrast" color="fg.contrast" p="md">
       Box
     </Box>
   </VStack>
@@ -71,12 +71,12 @@ import { useDynamicAnimation } from "@workspaces/ui"
 :::
 
 ```tsx
-const [animation, setAnimation] = useDynamicAnimation(arrayOrObj)
+const [animation, setAnimation] = useDynamicAnimation()
 ```
 
 ### Multiple Animations
 
-To use multiple animations, pass an array.
+To use multiple animations, pass an object with the keys as the animation names.
 
 ```tsx preview functional client
 const [animation, setAnimation] = useDynamicAnimation({
@@ -86,7 +86,7 @@ const [animation, setAnimation] = useDynamicAnimation({
       fillMode: "forwards",
       keyframes: {
         "0%": {
-          transform: "translateX(400%)",
+          transform: "translateX(100%)",
         },
         "100%": {
           transform: "translateX(0%)",
@@ -99,10 +99,10 @@ const [animation, setAnimation] = useDynamicAnimation({
       fillMode: "forwards",
       keyframes: {
         "0%": {
-          bg: "secondary",
+          bg: "green",
         },
         "100%": {
-          bg: "primary",
+          bg: "orange",
         },
       },
       timingFunction: "ease-in-out",
@@ -117,7 +117,7 @@ const [animation, setAnimation] = useDynamicAnimation({
           transform: "translateX(0%)",
         },
         "100%": {
-          transform: "translateX(400%)",
+          transform: "translateX(100%)",
         },
       },
       timingFunction: "ease-in-out",
@@ -127,10 +127,10 @@ const [animation, setAnimation] = useDynamicAnimation({
       fillMode: "forwards",
       keyframes: {
         "0%": {
-          bg: "primary",
+          bg: "orange",
         },
         "100%": {
-          bg: "secondary",
+          bg: "green",
         },
       },
       timingFunction: "ease-in-out",
@@ -139,7 +139,7 @@ const [animation, setAnimation] = useDynamicAnimation({
 })
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button
       onClick={() =>
         setAnimation((key) => (key === "moveRight" ? "moveLeft" : "moveRight"))
@@ -148,7 +148,7 @@ return (
       Please Click
     </Button>
 
-    <Box animation={animation} bg="primary" color="white" p="md" rounded="l2">
+    <Box animation={animation} bg="orange" color="white" p="md">
       Box
     </Box>
   </VStack>

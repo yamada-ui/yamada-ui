@@ -2,9 +2,9 @@ import { DEFAULT_COLOR_SCHEMES, extendTheme } from "@yamada-ui/react"
 
 export const theme = extendTheme({
   fonts: {
-    body: "'Infer', 'Infer Fallback'",
-    heading: "'Infer', 'Infer Fallback'",
-    mono: "'Geist Mono', 'Geist Mono Fallback'",
+    body: '"Inter", "Inter Fallback"',
+    heading: '"Inter", "Inter Fallback"',
+    mono: '"Geist Mono", "Geist Mono Fallback"',
   },
   styles: {
     globalStyle: {

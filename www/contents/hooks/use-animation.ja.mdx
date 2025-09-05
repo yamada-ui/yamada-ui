@@ -54,20 +54,12 @@ import { useAnimation } from "@workspaces/ui"
 :::
 
 ```tsx
-const animation = useAnimation(cssObj)
+const animation = useAnimation()
 ```
-
-:::note
-アニメーションの設定は、[@keyframes](https://developer.mozilla.org/ja/Web/CSS/@keyframes)と[CSSアニメーションの使用](https://developer.mozilla.org/ja/Web/CSS/CSS_animations/Using_CSS_animations#アニメーションの設定)を基本としています。
-:::
-
-:::note
-アニメーションをもっと学びたい場合は、[こちら](/styling/animation)をご覧ください。
-:::
 
 ### 複数のアニメーションを使う
 
-複数のアニメーションを使う場合は、`useAnimation`に配列を渡します。
+複数のアニメーションを使う場合は、引数を配列に設定します。
 
 ```tsx preview functional client
 const animation = useAnimation([
@@ -137,9 +129,9 @@ return (
 )
 ```
 
-### レスポンシブスタイル
+### レスポンシブデザインを使う
 
-レスポンシブスタイルを使う場合は、`animation`にオブジェクトを渡します。
+レスポンシブデザインを使う場合は、`animation`にオブジェクトを設定します。
 
 ```tsx preview functional client
 const desktopAnimation = useAnimation({
@@ -203,7 +195,7 @@ return (
 )
 ```
 
-### カラーモード
+### カラーモードを使う
 
 カラーモードを使う場合は、`animation`に配列を渡します。
 
@@ -262,67 +254,3 @@ const darkAnimation = useAnimation({
 
 return <Box w="full" h="xs" animation={[lightAnimation, darkAnimation]} />
 ```
-
-:::note
-カラーモードをもっと学びたい場合は、[こちら](/styling/color-mode)をご覧ください。
-:::
-
-### 疑似要素を使う
-
-疑似要素を使う場合は、`_before`や`_after`などに`animation`を渡します。
-
-```tsx preview functional client
-const animation = useAnimation({
-  keyframes: {
-    "0%": {
-      bg: "red.500",
-    },
-    "20%": {
-      bg: "green.500",
-    },
-    "40%": {
-      bg: "purple.500",
-    },
-    "60%": {
-      bg: "yellow.500",
-    },
-    "80%": {
-      bg: "blue.500",
-    },
-    "100%": {
-      bg: "red.500",
-    },
-  },
-  duration: "10s",
-  iterationCount: "infinite",
-  timingFunction: "linear",
-})
-
-return (
-  <Box
-    bg="primary"
-    color="white"
-    m="lg"
-    p="lg"
-    pos="relative"
-    rounded="l3"
-    _after={{
-      animation,
-      bg: "secondary",
-      color: "white",
-      content: "'after'",
-      left: "lg",
-      p: "lg",
-      pos: "absolute",
-      rounded: "lg",
-      top: "lg",
-    }}
-  >
-    Box
-  </Box>
-)
-```
-
-### 動的にアニメーションを切り替える
-
-動的なアニメーション制御については、[`useDynamicAnimation`](/docs/hooks/use-dynamic-animation)をご覧ください。

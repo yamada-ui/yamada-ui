@@ -64,7 +64,7 @@ export { ColorSwatchPropsContext, useColorSwatchPropsContext }
 /**
  * `ColorSwatch` is a component that displays color samples.
  *
- * @see https://yamada-ui.com/components/color-swatch
+ * @see https://yamada-ui.com/docs/components/color-swatch
  */
 export const ColorSwatch = withProvider<"div", ColorSwatchProps>(
   ({

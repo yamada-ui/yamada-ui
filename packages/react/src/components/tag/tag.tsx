@@ -62,7 +62,7 @@ export { TagPropsContext, useTagPropsContext }
 /**
  * `Tag` is a component used to categorize or organize items using keywords that describe them.
  *
- * @see https://yamada-ui.com/components/tag
+ * @see https://yamada-ui.com/docs/components/tag
  */
 export const Tag = withProvider<"span", TagProps, "disabled">(
   ({

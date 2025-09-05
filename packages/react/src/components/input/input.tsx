@@ -32,7 +32,7 @@ export { InputPropsContext, useInputPropsContext }
 /**
  * `Input` is a component used to obtain text input from the user.
  *
- * @see https://yamada-ui.com/components/input
+ * @see https://yamada-ui.com/docs/components/input
  */
 export const Input: FC<InputProps> = withContext("input")(
   undefined,

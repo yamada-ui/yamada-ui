@@ -6,6 +6,6 @@ import { component, Icon } from "../icon"
 /**
  * `FolderClosedIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/docs/components/icon
  */
 export const FolderClosedIcon = component(Icon)({ as: FolderClosed })

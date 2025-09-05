@@ -13,7 +13,7 @@ export interface UseOutsideClickProps {
 /**
  * `useOutsideClick` is a custom hook that detects click events outside of an element.
  *
- * @see https://yamada-ui.com/hooks/use-outside-click
+ * @see https://yamada-ui.com/docs/hooks/use-outside-click
  */
 export const useOutsideClick = ({
   ref,

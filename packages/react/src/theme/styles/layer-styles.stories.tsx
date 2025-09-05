@@ -1,8 +1,6 @@
 import type { CSSModifierObject } from "../../core"
-import { defaultTheme } from ".."
 import { Center } from "../../components/center"
-import { UIProvider } from "../../providers/ui-provider"
-import { merge } from "../../utils"
+import { extendTheme, UIProvider } from "../../providers/ui-provider"
 
 export default {
   title: "Theme / Layer Style",
@@ -34,7 +32,7 @@ export const Basic = () => {
     },
   }
 
-  const theme = merge(defaultTheme, { styles: { layerStyles } })
+  const theme = extendTheme({ styles: { layerStyles } })
 
   return (
     <UIProvider theme={theme}>

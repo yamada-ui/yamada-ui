@@ -38,7 +38,7 @@ import { Tag } from "@workspaces/ui"
 <Wrap gap="md">
   <For each={["solid", "subtle", "surface", "outline"]}>
     {(variant) => (
-      <Tag key={variant} variant={variant} colorScheme="primary">
+      <Tag key={variant} variant={variant}>
         {variant}
       </Tag>
     )}
@@ -52,7 +52,7 @@ import { Tag } from "@workspaces/ui"
 <Wrap gap="md">
   <For each={["sm", "md", "lg"]}>
     {(size) => (
-      <Tag key={size} size={size} colorScheme="primary">
+      <Tag key={size} size={size}>
         {size}
       </Tag>
     )}

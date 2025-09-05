@@ -101,7 +101,7 @@ export { StepsPropsContext, useStepsPropsContext }
 /**
  * `Steps` is a component that displays the progress of a multi-step process.
  *
- * @see https://yamada-ui.com/components/steps
+ * @see https://yamada-ui.com/docs/components/steps
  */
 export const StepsRoot = withProvider<"div", StepsRootProps, "orientation">(
   ({

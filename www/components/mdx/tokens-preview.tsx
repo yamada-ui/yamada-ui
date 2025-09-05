@@ -5,7 +5,7 @@ import {
   COLOR_SCHEMES,
   Container,
   DEFAULT_COLOR_SCHEMES,
-  defaultTheme,
+  theme as defaultTheme,
   For,
   Grid,
   Heading,

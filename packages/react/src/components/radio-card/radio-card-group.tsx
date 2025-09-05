@@ -44,7 +44,7 @@ export interface RadioCardGroupRootProps<Y extends string = string>
 /**
  * `RadioCardGroup` is a component that groups `RadioCard` components.
  *
- * @see https://yamada-ui.com/components/radio-card
+ * @see https://yamada-ui.com/docs/components/radio-card
  */
 export const RadioCardGroupRoot = component<"div", RadioCardGroupRootProps>(
   (props) => {

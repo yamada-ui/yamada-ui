@@ -139,7 +139,7 @@ export { CalendarPropsContext, useCalendarPropsContext }
 /**
  * `Calendar` is a component for displaying or selecting dates in a calendar.
  *
- * @see https://yamada-ui.com/components/calendar
+ * @see https://yamada-ui.com/docs/components/calendar
  */
 export const CalendarRoot = withProvider(
   <Y extends MaybeDateValue = Date>({

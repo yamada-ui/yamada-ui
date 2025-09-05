@@ -78,7 +78,7 @@ export { RatingPropsContext, useRatingPropsContext }
 /**
  * `Rating` is a component used to allow users to provide ratings.
  *
- * @see https://yamada-ui.com/components/rating
+ * @see https://yamada-ui.com/docs/components/rating
  */
 export const Rating = withProvider<"div", RatingProps>(
   ({

@@ -41,7 +41,7 @@ export { ListPropsContext, useListPropsContext }
 /**
  * `List` is a component for displaying lists. By default, it renders a `ul` element.
  *
- * @see https://yamada-ui.com/components/list
+ * @see https://yamada-ui.com/docs/components/list
  */
 export const ListRoot = withProvider<"ul", ListRootProps, "styleType">(
   ({

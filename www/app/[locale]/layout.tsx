@@ -10,7 +10,7 @@ import {
 } from "@yamada-ui/react"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getTranslations, setRequestLocale } from "next-intl/server"
-import { Geist_Mono, Inter } from "next/font/google"
+import { Geist, Geist_Mono, Inter } from "next/font/google"
 import { notFound } from "next/navigation"
 import { Footer } from "@/app/[locale]/footer"
 import { Header } from "@/app/[locale]/header"
@@ -50,6 +50,13 @@ export async function generateMetadata({
 }
 
 const _inter = Inter({
+  style: "normal",
+  display: "block",
+  subsets: ["latin", "latin-ext"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+})
+
+const _geist = Geist({
   style: "normal",
   display: "block",
   subsets: ["latin", "latin-ext"],

@@ -192,7 +192,7 @@
       },
       "placeholder": {
         "type": "string",
-        "defaultValue": "\"○\"",
+        "defaultValue": "\"◯\"",
         "description": "The placeholder for the pin input.",
         "required": false
       },
@@ -428,7 +428,7 @@
     },
     "placeholder": {
       "type": "string",
-      "defaultValue": "\"○\"",
+      "defaultValue": "\"◯\"",
       "description": "The placeholder for the pin input.",
       "required": false
     },

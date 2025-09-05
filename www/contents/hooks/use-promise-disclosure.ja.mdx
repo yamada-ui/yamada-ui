@@ -21,9 +21,11 @@ const onClick = async () => {
 }
 
 return (
-  <VStack gap="0">
-    <Text>だ…大地よ海よ　そして生きているすべての　みんな…</Text>
-    <Text>このオラにほんのちょっとずつだけ元気をわけてくれ…！！！</Text>
+  <VStack alignItems="flex-start">
+    <VStack gap="0">
+      <Text>だ…大地よ海よ　そして生きているすべての　みんな…</Text>
+      <Text>このオラにほんのちょっとずつだけ元気をわけてくれ…！！！</Text>
+    </VStack>
 
     <Button onClick={onClick}>わけない</Button>
 
@@ -64,4 +66,10 @@ import { usePromiseDisclosure } from "@/components/ui"
 
 ```tsx [monorepo]
 import { usePromiseDisclosure } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { open, onClose, onOpen, onSuccess } = usePromiseDisclosure()
 ```

@@ -5,4 +5,40 @@ storybook: hooks-useprocessing--basic
 source: hooks/use-processing
 ---
 
+```tsx preview functional client
+const { loading, start, finish } = useProcessing()
+
+const onClick = () => {
+  start()
+
+  setTimeout(() => finish(), 3000)
+}
+
+return (
+  <Button loading={loading} onClick={onClick}>
+    Click me
+  </Button>
+)
+```
+
 ### 使い方
+
+:::code-group
+
+```tsx [package]
+import { useProcessing } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useProcessing } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useProcessing } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { loading, start, finish } = useProcessing()
+```

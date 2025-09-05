@@ -21,7 +21,7 @@ const onClick = async () => {
 }
 
 return (
-  <>
+  <VStack gap="0">
     <Text>だ…大地よ海よ　そして生きているすべての　みんな…</Text>
     <Text>このオラにほんのちょっとずつだけ元気をわけてくれ…！！！</Text>
 
@@ -30,13 +30,13 @@ return (
     <Modal.Root
       size="2xl"
       body={
-        <>
+        <VStack gap="0">
           <Text>き、きさまらいいかげんにしろーーーっ!!!</Text>
           <Text>さっさと協力しないかーーーっ!!!</Text>
           <Text>
             このミスター・サタンさまのたのみも、きけんというのかーーーっ!!!
           </Text>
-        </>
+        </VStack>
       }
       cancel="わけない"
       open={open}
@@ -46,7 +46,7 @@ return (
       onClose={onClose}
       onSuccess={onSuccess}
     />
-  </>
+  </VStack>
 )
 ```
 

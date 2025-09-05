@@ -52,41 +52,12 @@ import { NumberInput } from "@workspaces/ui"
 
 ```tsx preview
 <VStack>
-  <For each={["sm", "md", "lg"]}>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
     {(size) => (
       <NumberInput key={size} size={size} placeholder={`Size (${size})`} />
     )}
   </For>
 </VStack>
-```
-
-### Change Border Color
-
-To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
-
-```tsx preview
-<VStack>
-  <NumberInput
-    focusBorderColor="green.500"
-    placeholder="Custom focus border color"
-  />
-  <NumberInput
-    errorBorderColor="orange.500"
-    invalid
-    placeholder="Custom invalid border color"
-  />
-</VStack>
-```
-
-### Change Placeholder Color
-
-To change the placeholder color, set `props` to `_placeholder`.
-
-```tsx preview
-<NumberInput
-  placeholder="Custom placeholder"
-  _placeholder={{ color: "blue.500" }}
-/>
 ```
 
 ### Set Default Value
@@ -147,7 +118,7 @@ By default, the component accepts any numeric input from the user, but values ex
 
 ### Allow Out-of-Range Values
 
-In some scenarios, you may not want to block out-of-range values. In that case, set `keepWithinRange` to `false`.
+To allow out-of-range values, set `keepWithinRange` to `false`.
 
 ```tsx preview
 <NumberInput
@@ -216,6 +187,35 @@ To make the input invalid, set `invalid` to `true`.
 </VStack>
 ```
 
+### Change Border Color
+
+To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
+
+```tsx preview
+<VStack>
+  <NumberInput
+    focusBorderColor="green.500"
+    placeholder="Custom focus border color"
+  />
+  <NumberInput
+    errorBorderColor="orange.500"
+    invalid
+    placeholder="Custom invalid border color"
+  />
+</VStack>
+```
+
+### Change Placeholder Color
+
+To change the placeholder color, set `props` to `_placeholder`.
+
+```tsx preview
+<NumberInput
+  placeholder="Custom placeholder"
+  _placeholder={{ color: "blue.500" }}
+/>
+```
+
 ### Customize Stepper
 
 To customize the stepper, set `props` to `incrementProps` or `decrementProps`.
@@ -228,9 +228,9 @@ To customize the stepper, set `props` to `incrementProps` or `decrementProps`.
 />
 ```
 
-### Use Custom Component
+### Customize Component
 
-To use a custom component, use `useNumberInput`.
+To customize the component, use `useNumberInput`.
 
 ```tsx preview functional client
 const { getInputProps, getIncrementProps, getDecrementProps } = useNumberInput({
@@ -256,45 +256,6 @@ return (
     />
   </HStack>
 )
-```
-
-### Add Addon
-
-To add an addon, wrap `NumberInput` in `InputGroup` and use `InputGroup.Addon`.
-
-```tsx preview
-<VStack>
-  <For each={["outline", "filled", "flushed"]}>
-    {(variant) => (
-      <InputGroup.Root key={variant} variant={variant}>
-        <InputGroup.Addon>
-          <JapaneseYenIcon />
-        </InputGroup.Addon>
-        <NumberInput placeholder="Order Quantity" />
-        <InputGroup.Addon>.00</InputGroup.Addon>
-      </InputGroup.Root>
-    )}
-  </For>
-</VStack>
-```
-
-### Add Element
-
-To add an element, wrap `NumberInput` in `InputGroup` and use `InputGroup.Element`.
-
-```tsx preview
-<VStack>
-  <For each={["outline", "filled", "flushed"]}>
-    {(variant) => (
-      <InputGroup.Root key={variant} variant={variant}>
-        <InputGroup.Element>
-          <GaugeIcon />
-        </InputGroup.Element>
-        <NumberInput placeholder="Order Quantity" />
-      </InputGroup.Root>
-    )}
-  </For>
-</VStack>
 ```
 
 ### Control

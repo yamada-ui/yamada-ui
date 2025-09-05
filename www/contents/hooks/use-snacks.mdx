@@ -58,38 +58,7 @@ const { snack, snacks } = useSnacks()
 <Snacks />
 ```
 
-To display notifications, use `useSnacks`. `useSnacks` returns an instance for displaying and controlling notifications.
-
-```tsx preview functional client
-const { snack, snacks } = useSnacks()
-
-return (
-  <VStack>
-    <Wrap gap="md">
-      <Button
-        onClick={() => {
-          snack({
-            description: "こいつ、動くぞ！",
-            title: "アムロ・レイ",
-          })
-        }}
-      >
-        Add Snack
-      </Button>
-
-      <Button colorScheme="danger" onClick={snack.closeAll}>
-        Close all Snack
-      </Button>
-    </Wrap>
-
-    <Snacks snacks={snacks} />
-
-    <Input placeholder="Input" />
-  </VStack>
-)
-```
-
-### Change Variants
+### Change Variant
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks()
@@ -135,7 +104,7 @@ const { snack, snacks } = useSnacks()
 return (
   <VStack>
     <Wrap gap="md">
-      <For each={["info", "success", "warning", "error"]}>
+      <For each={["success", "warning"]}>
         {(colorScheme) => (
           <Button
             key={colorScheme}
@@ -271,6 +240,43 @@ return (
     </Wrap>
 
     <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+### Adjust Spacing
+
+`Snacks` has a folding animation implemented. If `gap` or similar is set on the parent element, it will result in an unnatural animation. In such cases, adjust the spacing with `gutter`.
+
+:::note
+`gutter` applies negative margin by default. If you want to disable negative margin, set `negateMargin` to `false`.
+:::
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks()
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          snack({
+            description: "良くも悪くも人間は変わるわ…あなたはどうかしら？",
+            title: "ミライ・ヤシマ",
+          })
+        }}
+      >
+        Add Snack
+      </Button>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} gutter={[0, "lg"]} negateMargin={false} mb="-md" />
 
     <Input placeholder="Input" />
   </VStack>

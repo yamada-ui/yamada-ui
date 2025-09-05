@@ -6,18 +6,16 @@ source: hooks/use-processing
 ---
 
 ```tsx preview functional client
-const processing = useProcessing()
+const { loading, start, finish } = useProcessing()
 
 const onClick = () => {
-  processing.start()
+  start()
 
-  setTimeout(() => {
-    processing.finish()
-  }, 3000)
+  setTimeout(() => finish(), 3000)
 }
 
 return (
-  <Button loading={processing.loading} onClick={onClick}>
+  <Button loading={loading} onClick={onClick}>
     Click me
   </Button>
 )
@@ -42,5 +40,5 @@ import { useProcessing } from "@workspaces/ui"
 :::
 
 ```tsx
-const processing = useProcessing()
+const { loading, start, finish } = useProcessing()
 ```

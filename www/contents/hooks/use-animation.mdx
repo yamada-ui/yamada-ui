@@ -54,20 +54,12 @@ import { useAnimation } from "@workspaces/ui"
 :::
 
 ```tsx
-const animation = useAnimation(cssObj)
+const animation = useAnimation()
 ```
-
-:::note
-Animation settings are based on [@keyframes](https://developer.mozilla.org/en/Web/CSS/@keyframes) and [Using CSS animations](https://developer.mozilla.org/en/Web/CSS/CSS_animations/Using_CSS_animations#configuring_an_animation).
-:::
-
-:::note
-If you want to learn more about animations, please see [here](/styling/animation).
-:::
 
 ### Use Multiple Animations
 
-To use multiple animations, pass an array to `useAnimation`.
+To use multiple animations, set the arguments as an array.
 
 ```tsx preview functional client
 const animation = useAnimation([
@@ -137,9 +129,9 @@ return (
 )
 ```
 
-### Responsive Styles
+### Use Responsive Design
 
-To use responsive styles, pass an object to `animation`.
+To use responsive design, set the `animation` as a object.
 
 ```tsx preview functional client
 const desktopAnimation = useAnimation({
@@ -203,7 +195,7 @@ return (
 )
 ```
 
-### Color Mode
+### Use Color Mode
 
 To use color mode, pass an array to `animation`.
 
@@ -262,67 +254,3 @@ const darkAnimation = useAnimation({
 
 return <Box w="full" h="xs" animation={[lightAnimation, darkAnimation]} />
 ```
-
-:::note
-If you want to learn more about color mode, please see [here](/styling/color-mode).
-:::
-
-### Use Pseudo Elements
-
-To use pseudo elements, pass `animation` to `_before`, `_after`, etc.
-
-```tsx preview functional client
-const animation = useAnimation({
-  keyframes: {
-    "0%": {
-      bg: "red.500",
-    },
-    "20%": {
-      bg: "green.500",
-    },
-    "40%": {
-      bg: "purple.500",
-    },
-    "60%": {
-      bg: "yellow.500",
-    },
-    "80%": {
-      bg: "blue.500",
-    },
-    "100%": {
-      bg: "red.500",
-    },
-  },
-  duration: "10s",
-  iterationCount: "infinite",
-  timingFunction: "linear",
-})
-
-return (
-  <Box
-    bg="primary"
-    color="white"
-    m="lg"
-    p="lg"
-    pos="relative"
-    rounded="l3"
-    _after={{
-      animation,
-      bg: "secondary",
-      color: "white",
-      content: "'after'",
-      left: "lg",
-      p: "lg",
-      pos: "absolute",
-      rounded: "lg",
-      top: "lg",
-    }}
-  >
-    Box
-  </Box>
-)
-```
-
-### Switch Animations Dynamically
-
-For dynamic animation control, please see [`useDynamicAnimation`](/docs/hooks/use-dynamic-animation).

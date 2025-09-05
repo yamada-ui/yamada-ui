@@ -42,12 +42,11 @@ import { NativeSelect } from "@workspaces/ui"
   <NativeSelect.Group>
     <NativeSelect.Option />
   </NativeSelect.Group>
+  <NativeSelect.Option />
 </NativeSelect.Root>
 ```
 
 ### Use items
-
-You can omit `NativeSelectOption` by setting `items`.
 
 ```tsx preview functional
 const items = useMemo<NativeSelect.Item[]>(
@@ -77,7 +76,7 @@ const items = useMemo<NativeSelect.Item[]>(
 )
 
 return (
-  <HStack>
+  <VStack>
     <For each={["outline", "filled", "flushed"]}>
       {(variant) => (
         <NativeSelect.Root
@@ -88,7 +87,7 @@ return (
         />
       )}
     </For>
-  </HStack>
+  </VStack>
 )
 ```
 
@@ -165,8 +164,6 @@ To group options, use `NativeSelect.Group`.
 </NativeSelect.Root>
 ```
 
-For `items`, set it up like this.
-
 ```tsx preview functional
 const items = useMemo<NativeSelect.Item[]>(
   () => [
@@ -187,37 +184,6 @@ const items = useMemo<NativeSelect.Item[]>(
         { label: "四ノ宮キコル", value: "四ノ宮キコル" },
       ],
     },
-  ],
-  [],
-)
-
-return <NativeSelect.Root items={items} placeholder="Select a character" />
-```
-
-### Disable option
-
-To disable a specific option, set `disabled` to `true`.
-
-```tsx preview
-<NativeSelect.Root placeholder="Select a character">
-  <NativeSelect.Option value="日比野カフカ">日比野カフカ</NativeSelect.Option>
-  <NativeSelect.Option disabled value="市川レノ">
-    市川レノ
-  </NativeSelect.Option>
-  <NativeSelect.Option value="亜白ミナ">亜白ミナ</NativeSelect.Option>
-  <NativeSelect.Option value="四ノ宮キコル">四ノ宮キコル</NativeSelect.Option>
-</NativeSelect.Root>
-```
-
-Alternatively, you can set `disabled` to `true` in the item when using `items`.
-
-```tsx preview functional
-const items = useMemo<NativeSelect.Item[]>(
-  () => [
-    { label: "日比野カフカ", value: "日比野カフカ" },
-    { disabled: true, label: "市川レノ", value: "市川レノ" },
-    { label: "亜白ミナ", value: "亜白ミナ" },
-    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
   ],
   [],
 )
@@ -249,37 +215,33 @@ return (
 )
 ```
 
-### Change border color
+### Disable option
 
-To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
+To disable an option, set `disabled` to `true` in `NativeSelect.Option`.
+
+```tsx preview
+<NativeSelect.Root placeholder="Select a character">
+  <NativeSelect.Option value="日比野カフカ">日比野カフカ</NativeSelect.Option>
+  <NativeSelect.Option disabled value="市川レノ">
+    市川レノ
+  </NativeSelect.Option>
+  <NativeSelect.Option value="亜白ミナ">亜白ミナ</NativeSelect.Option>
+  <NativeSelect.Option value="四ノ宮キコル">四ノ宮キコル</NativeSelect.Option>
+</NativeSelect.Root>
+```
 
 ```tsx preview functional
 const items = useMemo<NativeSelect.Item[]>(
   () => [
     { label: "日比野カフカ", value: "日比野カフカ" },
-    { label: "市川レノ", value: "市川レノ" },
+    { disabled: true, label: "市川レノ", value: "市川レノ" },
     { label: "亜白ミナ", value: "亜白ミナ" },
     { label: "四ノ宮キコル", value: "四ノ宮キコル" },
   ],
   [],
 )
 
-return (
-  <VStack>
-    <NativeSelect.Root items={items} placeholder="Default Border Color" />
-    <NativeSelect.Root
-      focusBorderColor="green.500"
-      items={items}
-      placeholder="Custom Border Color"
-    />
-    <NativeSelect.Root
-      errorBorderColor="orange.500"
-      invalid
-      items={items}
-      placeholder="Custom Border Color"
-    />
-  </VStack>
-)
+return <NativeSelect.Root items={items} placeholder="Select a character" />
 ```
 
 ### Disable
@@ -298,17 +260,19 @@ const items = useMemo<NativeSelect.Item[]>(
 )
 
 return (
-  <For each={["outline", "filled", "flushed"]}>
-    {(variant) => (
-      <NativeSelect.Root
-        key={variant}
-        disabled
-        variant={variant}
-        items={items}
-        placeholder={toTitleCase(variant)}
-      />
-    )}
-  </For>
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <NativeSelect.Root
+          key={variant}
+          disabled
+          variant={variant}
+          items={items}
+          placeholder={toTitleCase(variant)}
+        />
+      )}
+    </For>
+  </VStack>
 )
 ```
 
@@ -328,17 +292,19 @@ const items = useMemo<NativeSelect.Item[]>(
 )
 
 return (
-  <For each={["outline", "filled", "flushed"]}>
-    {(variant) => (
-      <NativeSelect.Root
-        key={variant}
-        readOnly
-        variant={variant}
-        items={items}
-        placeholder={toTitleCase(variant)}
-      />
-    )}
-  </For>
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <NativeSelect.Root
+          key={variant}
+          readOnly
+          variant={variant}
+          items={items}
+          placeholder={toTitleCase(variant)}
+        />
+      )}
+    </For>
+  </VStack>
 )
 ```
 
@@ -358,23 +324,55 @@ const items = useMemo<NativeSelect.Item[]>(
 )
 
 return (
-  <For each={["outline", "filled", "flushed"]}>
-    {(variant) => (
-      <NativeSelect.Root
-        key={variant}
-        invalid
-        variant={variant}
-        items={items}
-        placeholder={toTitleCase(variant)}
-      />
-    )}
-  </For>
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <NativeSelect.Root
+          key={variant}
+          invalid
+          variant={variant}
+          items={items}
+          placeholder={toTitleCase(variant)}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change border color
+
+To change the border color, set a color to `focusBorderColor` or `errorBorderColor`.
+
+```tsx preview functional
+const items = useMemo<NativeSelect.Item[]>(
+  () => [
+    { label: "日比野カフカ", value: "日比野カフカ" },
+    { label: "市川レノ", value: "市川レノ" },
+    { label: "亜白ミナ", value: "亜白ミナ" },
+    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <NativeSelect.Root
+      focusBorderColor="green.500"
+      placeholder="Custom focus border color"
+      items={items}
+    />
+    <NativeSelect.Root
+      errorBorderColor="orange.500"
+      invalid
+      placeholder="Custom invalid border color"
+      items={items}
+    />
+  </VStack>
 )
 ```
 
 ### Customize icon
-
-To customize the icon, set props to `iconProps`.
 
 ```tsx preview functional
 const items = useMemo<NativeSelect.Item[]>(
@@ -391,7 +389,7 @@ return (
   <NativeSelect.Root
     items={items}
     placeholder="Select a character"
-    iconProps={{ children: <ChevronsDownIcon /> }}
+    icon={<ChevronsDownIcon />}
   />
 )
 ```

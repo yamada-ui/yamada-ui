@@ -56,12 +56,70 @@ import { PinInput } from "@workspaces/ui"
 
 ```tsx preview
 <VStack>
-  <For each={["blue", "red", "green"]}>
+  <For each={["green", "orange"]}>
     {(colorScheme) => (
       <PinInput.Root key={colorScheme} colorScheme={colorScheme} />
     )}
   </For>
 </VStack>
+```
+
+### Set Default Value
+
+To set a default value, set a string to `defaultValue`.
+
+```tsx preview
+<VStack>
+  <For each={["1234", "123"]}>
+    {(defaultValue) => (
+      <PinInput.Root key={defaultValue} defaultValue={defaultValue} />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Placeholder
+
+To change the placeholder, set a string to `placeholder`.
+
+```tsx preview
+<PinInput.Root placeholder="💩" />
+```
+
+### Change Number of Fields
+
+To change the number of fields, set a number to `items`.
+
+```tsx preview
+<VStack>
+  <For each={[3, 4, 5, 6]}>
+    {(items) => <PinInput.Root key={items} items={items} />}
+  </For>
+</VStack>
+```
+
+### Change Type
+
+By default, only numeric input is allowed. To support alphanumeric, set `type` to `alphanumeric`.
+
+```tsx preview
+<PinInput.Root type="alphanumeric" />
+```
+
+### Use as One-Time Password
+
+To use as a one-time password (`autocomplete="one-time-code"`), set `otp` to `true`.
+
+```tsx preview
+<PinInput.Root otp />
+```
+
+### Mask Entered Value
+
+To mask the entered value, set `mask` to `true`.
+
+```tsx preview
+<PinInput.Root mask />
 ```
 
 ### Disabled
@@ -100,57 +158,15 @@ To make invalid, set `invalid` to `true`.
 </PinInput.Root>
 ```
 
-### Set Default Value
-
-To set a default value, set a string or number to `defaultValue`.
-
-```tsx preview
-<VStack>
-  <For each={["1234", "123"]}>
-    {(defaultValue) => (
-      <PinInput.Root key={defaultValue} defaultValue={defaultValue} />
-    )}
-  </For>
-</VStack>
-```
-
-### Change Number of Fields
-
-To change the number of fields, set a number to `items`.
-
-```tsx preview
-<VStack>
-  <For each={[3, 4, 5, 6]}>
-    {(items) => <PinInput.Root key={items} items={items} />}
-  </For>
-</VStack>
-```
-
-### Change Type
-
-By default, only numeric input is allowed. To support alphanumeric, set `type` to `alphanumeric`.
-
-```tsx preview
-<PinInput.Root type="alphanumeric" />
-```
-
 ### Change Border Color
 
-To change the border color, use the `focusBorderColor` or `errorBorderColor` properties.
+To change the border color, set `focusBorderColor` or `errorBorderColor` to the color.
 
 ```tsx preview
 <VStack>
   <PinInput.Root focusBorderColor="green.500" />
   <PinInput.Root errorBorderColor="orange.500" invalid />
 </VStack>
-```
-
-### Change Placeholder
-
-To change the placeholder, set a string to `placeholder`.
-
-```tsx preview
-<PinInput.Root placeholder="💩" />
 ```
 
 ### Set Action on Completion
@@ -163,40 +179,28 @@ const { page } = useLoading()
 return <PinInput.Root onComplete={() => page.start({ duration: 5000 })} />
 ```
 
-### Use as One-Time Password
-
-To use as a one-time password (`autocomplete="one-time-code"`), set `otp` to `true`.
-
-```tsx preview
-<PinInput.Root otp />
-```
-
-### Mask Entered Value
-
-To mask the entered value, set `mask` to `true`.
-
-```tsx preview
-<PinInput.Root mask />
-```
-
-### Use Custom Field
-
-To use a custom field, use `PinInput.Field`.
-
-```tsx preview
-<PinInput.Root>
-  <For each={[0, 1, 2, 3]}>
-    {(index) => <PinInput.Field key={index} index={index} />}
-  </For>
-</PinInput.Root>
-```
-
 ### Disable Focus Management
 
 By default, when a field is entered, the focus automatically moves to the next field. Also, when the `BackSpace` key is pressed, the focus moves to the previous field. To disable this control, set `manageFocus` to `false`.
 
 ```tsx preview
 <PinInput.Root manageFocus={false} />
+```
+
+### Customize Field
+
+```tsx preview
+<PinInput.Root>
+  <For each={[0, 1, 2, 3]}>
+    {(index) => (
+      <PinInput.Field
+        key={index}
+        index={index}
+        _placeholder={{ color: "blue.500" }}
+      />
+    )}
+  </For>
+</PinInput.Root>
 ```
 
 ### Control

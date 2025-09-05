@@ -4,4 +4,84 @@ description: "`useLazyMount`は、コンテンツを遅延マウントするた�
 source: hooks/use-lazy-mount
 ---
 
-### 使い方
+```tsx preview functional client
+const [mounted, setMounted] = useState(false)
+
+const lazyContent = useLazyMount({
+  children: <Text>秋山澪</Text>,
+  lazy: true,
+  mounted,
+})
+
+return (
+  <VStack>
+    <Button onClick={(prev) => setMounted(!prev)}>Toggle mounted</Button>
+    {lazyContent}
+  </VStack>
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useLazyMount } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useLazyMount } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useLazyMount } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const lazyContent = useLazyMount({ children, lazy, mounted })
+```
+
+### マウント状態を保持する
+
+マウント状態を保持する場合は、`lazyBehavior`を`"keepMounted"`に設定します。
+
+```tsx preview functional client
+const [mounted, setMounted] = useState(false)
+
+const lazyContent = useLazyMount({
+  children: <Text>秋山澪</Text>,
+  lazy: true,
+  lazyBehavior: "keepMounted",
+  mounted,
+})
+
+return (
+  <VStack>
+    <Button onClick={(prev) => setMounted(!prev)}>Toggle mounted</Button>
+    {lazyContent}
+  </VStack>
+)
+```
+
+### 遅延読み込みを無効にする
+
+遅延読み込みを無効にするは、`lazy`を`false`に設定します。
+
+```tsx preview functional client
+const [mounted, setMounted] = useState(false)
+
+const content = useLazyMount({
+  children: <Text>秋山澪</Text>,
+  lazy: false,
+  mounted,
+})
+
+return (
+  <VStack>
+    <Button onClick={(prev) => setMounted(!prev)}>Toggle mounted</Button>
+    {content}
+  </VStack>
+)
+```

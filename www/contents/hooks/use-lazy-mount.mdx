@@ -4,4 +4,84 @@ description: "`useLazyMount` is a custom hook for lazily mounting content."
 source: hooks/use-lazy-mount
 ---
 
-### Usage
+```tsx preview functional client
+const [mounted, setMounted] = useState(false)
+
+const lazyContent = useLazyMount({
+  children: <Text>秋山澪</Text>,
+  lazy: true,
+  mounted,
+})
+
+return (
+  <VStack>
+    <Button onClick={(prev) => setMounted(!prev)}>Toggle mounted</Button>
+    {lazyContent}
+  </VStack>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useLazyMount } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useLazyMount } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useLazyMount } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const lazyContent = useLazyMount({ children, lazy, mounted })
+```
+
+### Keep Mounted
+
+To keep the mounted state, set `lazyBehavior` to `"keepMounted"`.
+
+```tsx preview functional client
+const [mounted, setMounted] = useState(false)
+
+const lazyContent = useLazyMount({
+  children: <Text>秋山澪</Text>,
+  lazy: true,
+  lazyBehavior: "keepMounted",
+  mounted,
+})
+
+return (
+  <VStack>
+    <Button onClick={(prev) => setMounted(!prev)}>Toggle mounted</Button>
+    {lazyContent}
+  </VStack>
+)
+```
+
+### Disable Lazy Loading
+
+To disable lazy loading, set `lazy` to `false`.
+
+```tsx preview functional client
+const [mounted, setMounted] = useState(false)
+
+const content = useLazyMount({
+  children: <Text>秋山澪</Text>,
+  lazy: false,
+  mounted,
+})
+
+return (
+  <VStack>
+    <Button onClick={(prev) => setMounted(!prev)}>Toggle mounted</Button>
+    {content}
+  </VStack>
+)
+```

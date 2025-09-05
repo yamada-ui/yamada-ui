@@ -62,12 +62,6 @@ export const diff = new Command("diff")
 
       spinner.succeed("Validated directory")
 
-      spinner.start("Validating methods")
-
-      await validateDiff3()
-
-      spinner.succeed("Validated methods")
-
       spinner.start("Fetching config")
 
       const config = await getConfig(cwd, configPath)
@@ -178,6 +172,12 @@ export const diff = new Command("diff")
         })
 
         if (update) {
+          spinner.start("Validating methods")
+
+          await validateDiff3()
+
+          spinner.succeed("Validated methods")
+
           const conflictMap = await updateFiles(
             changeMap,
             dependencyMap,

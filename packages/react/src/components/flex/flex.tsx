@@ -49,7 +49,7 @@ export { FlexPropsContext, useFlexPropsContext }
 /**
  * `Flex` is a component that sets `flex` to `Box`. Also, convenient style shorthand is available.
  *
- * @see https://yamada-ui.com/components/flex
+ * @see https://yamada-ui.com/docs/components/flex
  */
 export const Flex = withContext("div")(
   undefined,

@@ -5,4 +5,51 @@ storybook: hooks-useoutsideclick--basic
 source: hooks/use-outside-click
 ---
 
+```tsx preview functional client
+const ref = useRef<HTMLDivElement>(null)
+const { open, onOpen, onClose } = useDisclosure()
+
+useOutsideClick({
+  ref,
+  handler: onClose,
+})
+
+return (
+  <>
+    {open ? (
+      <Center ref={ref} h="10" px="3" bg="danger" color="white" rounded="l2">
+        Hey, Click anywhere outside of me to close.
+      </Center>
+    ) : (
+      <Button onClick={onOpen}>Please Click</Button>
+    )}
+  </>
+)
+```
+
 ### 使い方
+
+:::code-group
+
+```tsx [package]
+import { useOutsideClick } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useOutsideClick } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useOutsideClick } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { open, onOpen, onClose } = useDisclosure()
+
+useOutsideClick({
+  ref,
+  handler: onClose,
+})
+```

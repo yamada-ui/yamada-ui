@@ -44,7 +44,7 @@ export { SkeletonPropsContext, useSkeletonPropsContext }
 /**
  * `Skeleton` is a component that acts as a placeholder until content is loaded.
  *
- * @see https://yamada-ui.com/components/skeleton
+ * @see https://yamada-ui.com/docs/components/skeleton
  */
 export const Skeleton = withContext("div", { transferProps: ["loading"] })(
   undefined,

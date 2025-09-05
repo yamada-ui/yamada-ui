@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
 import { PropsTable } from "#storybook"
-import { defaultTheme } from "../../theme"
+import { theme as defaultTheme } from "../../theme"
 import { Wrap } from "../wrap"
 import { ColorSwatch, ColorSwatchGroup } from "./"
 

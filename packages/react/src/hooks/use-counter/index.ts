@@ -79,7 +79,7 @@ export interface UseCounterProps {
 /**
  * `useCounter` is a custom hook that returns the current counter value.
  *
- * @see https://yamada-ui.com/hooks/use-counter
+ * @see https://yamada-ui.com/docs/hooks/use-counter
  */
 export const useCounter = ({
   keepWithinRange = true,

@@ -22,7 +22,7 @@ export { useVStackPropsContext, VStackPropsContext }
 /**
  * `VStack` is a component that groups elements and provides space between child elements.
  *
- * @see https://yamada-ui.com/components/stack
+ * @see https://yamada-ui.com/docs/components/stack
  */
 export const VStack = withContext<"div", VStackProps>(Stack)(undefined, {
   direction: "column",

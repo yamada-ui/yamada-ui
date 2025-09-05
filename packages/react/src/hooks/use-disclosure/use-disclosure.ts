@@ -43,7 +43,7 @@ export interface UseDisclosureProps<
  * `useDisclosure` is a custom hook that helps handle common open/close or toggle scenarios.
  * It can be used to control components such as `Modal`, `Dialog`, `Drawer`, etc.
  *
- * @see https://yamada-ui.com/hooks/use-disclosure
+ * @see https://yamada-ui.com/docs/hooks/use-disclosure
  */
 export const useDisclosure = <
   Y = never,

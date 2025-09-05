@@ -55,7 +55,7 @@ export { GridPropsContext, useGridPropsContext }
 /**
  * `Grid` is a component for managing grid layouts. It also comes with handy style shorthand.
  *
- * @see https://yamada-ui.com/components/grid
+ * @see https://yamada-ui.com/docs/components/grid
  */
 export const Grid = withContext("div")(
   undefined,

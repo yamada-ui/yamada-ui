@@ -23,7 +23,7 @@ export interface ButtonGroupRootProps
 /**
  * `Button` is an interactive component that allows users to perform actions such as submitting forms and toggling modals.
  *
- * @see https://yamada-ui.com/components/button
+ * @see https://yamada-ui.com/docs/components/button
  */
 export const ButtonGroupRoot = (({
   size,

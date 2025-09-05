@@ -5,4 +5,42 @@ storybook: hooks-usevalue--basic
 source: hooks/use-value
 ---
 
+```tsx preview functional client
+const breakpoint = useBreakpoint()
+const color = useValue({ base: "red", md: "green" })
+
+return <Box color={color}>The current breakpoint is "{breakpoint}"</Box>
+```
+
+```tsx preview functional client
+const { colorMode } = useColorMode()
+const color = useValue(["green", "red"])
+
+return <Box color={color}>The current colorMode is "{colorMode}"</Box>
+```
+
 ### Usage
+
+:::code-group
+
+```tsx [package]
+import { useValue } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useValue } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useValue } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const color = useValue({ base: "red", md: "green" })
+```
+
+:::note
+`useValue` is using [useBreakpointValue](/hooks/use-breakpoint-value) and [useColorModeValue](/hooks/use-color-mode-value).
+:::

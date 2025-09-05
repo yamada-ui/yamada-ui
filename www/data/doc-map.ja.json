@@ -1016,6 +1016,11 @@
           "pathname": "/docs/styling/color-mode"
         },
         {
+          "title": "カラースキーム",
+          "segment": "color-scheme",
+          "pathname": "/docs/styling/color-scheme"
+        },
+        {
           "title": "CSSカスタムプロパティ",
           "segment": "css-custom-properties",
           "pathname": "/docs/styling/css-custom-properties"
@@ -1104,7 +1109,7 @@
           "pathname": "/docs/theming/cascade-layers"
         },
         {
-          "title": "設定",
+          "title": "コンフィグ",
           "segment": "configuration",
           "items": [
             {
@@ -1178,6 +1183,11 @@
               "title": "カラー",
               "segment": "colors",
               "pathname": "/docs/theming/tokens/colors"
+            },
+            {
+              "title": "カラースキーム",
+              "segment": "color-schemes",
+              "pathname": "/docs/theming/tokens/color-schemes"
             },
             {
               "title": "所要時間",

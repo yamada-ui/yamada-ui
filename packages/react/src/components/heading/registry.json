@@ -14,7 +14,7 @@
     },
     {
       "name": "heading.tsx",
-      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { HeadingStyle } from \"./heading.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { headingStyle } from \"./heading.style\"\n\nexport interface HeadingProps\n  extends HTMLStyledProps<\"h1\">,\n    ThemeProps<HeadingStyle> {}\n\nconst {\n  PropsContext: HeadingPropsContext,\n  usePropsContext: useHeadingPropsContext,\n  withContext,\n} = createComponent<HeadingProps, HeadingStyle>(\"heading\", headingStyle)\n\nexport { HeadingPropsContext, useHeadingPropsContext }\n\n/**\n * `Heading` is a component that represents section headings. By default, it renders an `h1` element.\n *\n * @see https://yamada-ui.com/components/heading\n */\nexport const Heading = withContext(\"h1\")()\n"
+      "content": "\"use client\"\n\nimport type { HTMLStyledProps, ThemeProps } from \"@yamada-ui/react\"\nimport type { HeadingStyle } from \"./heading.style\"\nimport { createComponent } from \"@yamada-ui/react\"\nimport { headingStyle } from \"./heading.style\"\n\nexport interface HeadingProps\n  extends HTMLStyledProps<\"h1\">,\n    ThemeProps<HeadingStyle> {}\n\nconst {\n  PropsContext: HeadingPropsContext,\n  usePropsContext: useHeadingPropsContext,\n  withContext,\n} = createComponent<HeadingProps, HeadingStyle>(\"heading\", headingStyle)\n\nexport { HeadingPropsContext, useHeadingPropsContext }\n\n/**\n * `Heading` is a component that represents section headings. By default, it renders an `h1` element.\n *\n * @see https://yamada-ui.com/docs/components/heading\n */\nexport const Heading = withContext(\"h1\")()\n"
     },
     {
       "name": "index.ts",

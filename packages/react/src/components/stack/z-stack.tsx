@@ -68,7 +68,7 @@ export { useZStackPropsContext, ZStackPropsContext }
 /**
  * `ZStack` is a component that groups elements and provides space between child elements.
  *
- * @see https://yamada-ui.com/components/stack
+ * @see https://yamada-ui.com/docs/components/stack
  */
 export const ZStack = withContext<"div", ZStackProps>(
   ({

@@ -20,6 +20,6 @@ export { SeparatorPropsContext, useSeparatorPropsContext }
 /**
  * `Separator` is a component that represents a division between elements.
  *
- * @see https://yamada-ui.com/components/separator
+ * @see https://yamada-ui.com/docs/components/separator
  */
 export const Separator = withContext("hr")()

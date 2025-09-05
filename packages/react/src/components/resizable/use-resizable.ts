@@ -119,7 +119,6 @@ export interface UseResizableProps extends HTMLProps {
 export const useResizable = ({
   id,
   ref,
-
   controlRef: controlRefProp,
   disabled,
   keyboardStep,
@@ -336,7 +335,9 @@ export const useResizableTrigger = ({
         id,
         "aria-orientation": orientation,
         "data-active": dataAttr(active),
+        "data-disabled": dataAttr(trulyDisabled),
         disabled: trulyDisabled,
+        tabIndex: trulyDisabled ? -1 : 0,
         tagName: props.as ?? as,
         ...rest,
         ...props,

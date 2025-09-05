@@ -6,6 +6,6 @@ import { component, Icon } from "../icon"
 /**
  * `HandshakeIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/docs/components/icon
  */
 export const HandshakeIcon = component(Icon)({ as: Handshake })

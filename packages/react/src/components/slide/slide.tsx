@@ -73,7 +73,7 @@ export { SlidePropsContext, useSlidePropsContext }
 /**
  * `Slide` is a component that shows or hides an element from the corners of the page.
  *
- * @see https://yamada-ui.com/components/slide
+ * @see https://yamada-ui.com/docs/components/slide
  */
 export const Slide = withContext<"div", SlideProps, "placement">(
   ({

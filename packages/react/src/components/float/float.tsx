@@ -26,7 +26,7 @@ export { FloatPropsContext, useFloatPropsContext }
 /**
  * `Float` is a component used to anchor an element to the edge of a container.
  *
- * @see https://yamada-ui.com/components/float
+ * @see https://yamada-ui.com/docs/components/float
  */
 export const Float = withContext("div")(undefined, ({ offset, ...rest }) => {
   const [offsetBlock, offsetInline] = isArray(offset)

@@ -13,14 +13,16 @@ return (
   <VStack>
     <Text>{JSON.stringify(rect)}</Text>
 
-    <Button
+    <Center
+      bg="bg.contrast"
+      color="fg.contrast"
       ref={ref}
-      h={flg ? "xl" : "sm"}
-      w={flg ? "xl" : "sm"}
+      boxSize={flg ? "xs" : "3xs"}
+      maxW="full"
       onClick={toggle}
     >
-      Click me to toggle the boolean value
-    </Button>
+      Click me
+    </Center>
   </VStack>
 )
 ```

@@ -30,7 +30,7 @@ export { AspectRatioPropsContext, useAspectRatioPropsContext }
 /**
  * `AspectRatio` is a component for embedding things like videos and maps while maintaining the aspect ratio.
  *
- * @see https://yamada-ui.com/components/aspect-ratio
+ * @see https://yamada-ui.com/docs/components/aspect-ratio
  */
 export const AspectRatio = withContext("div")(
   undefined,

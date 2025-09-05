@@ -288,19 +288,36 @@ export const useCombobox = ({
   )
 
   const onOpenWithActiveDescendant = useCallback(
-    (getFallbackDescendant: () => ComboboxDescendant | undefined) => {
+    (
+      getFallbackDescendant: () => ComboboxDescendant | undefined,
+      block: SimpleDirection = "start",
+    ) => {
       onOpen()
 
       setTimeout(() => {
-        const values = descendants.values()
-        const descendant = values.find(
-          ({ value }) => initialFocusValue === value,
-        )
+        if (!initialFocusValue) {
+          const descendant = getFallbackDescendant()
 
-        onActiveDescendant(descendant ?? getFallbackDescendant())
+          onActiveDescendant(descendant)
+          onScrollIntoView(descendant, block)
+        } else {
+          const values = descendants.values()
+          const descendant =
+            values.find(({ value }) => initialFocusValue === value) ??
+            getFallbackDescendant()
+
+          onActiveDescendant(descendant)
+          onScrollIntoView(descendant, block)
+        }
       })
     },
-    [descendants, initialFocusValue, onActiveDescendant, onOpen],
+    [
+      descendants,
+      initialFocusValue,
+      onActiveDescendant,
+      onOpen,
+      onScrollIntoView,
+    ],
   )
 
   const onClick = useCallback(
@@ -311,7 +328,7 @@ export const useCombobox = ({
 
       if (!open) {
         if (openOnClick)
-          onOpenWithActiveDescendant(() => descendants.enabledFirstValue())
+          onOpenWithActiveDescendant(descendants.enabledFirstValue)
       } else {
         onClose()
       }
@@ -333,13 +350,7 @@ export const useCombobox = ({
       runKeyAction(ev, {
         ArrowDown: () => {
           if (!open) {
-            onOpenWithActiveDescendant(() => {
-              const descendant = descendants.enabledFirstValue()
-
-              onScrollIntoView(descendant)
-
-              return descendant
-            })
+            onOpenWithActiveDescendant(descendants.enabledFirstValue)
           } else if (activeDescendant.current) {
             const descendant = descendants.enabledNextValue(
               activeDescendant.current,
@@ -358,13 +369,7 @@ export const useCombobox = ({
         },
         ArrowUp: () => {
           if (!open) {
-            onOpenWithActiveDescendant(() => {
-              const descendant = descendants.enabledLastValue()
-
-              onScrollIntoView(descendant, "end")
-
-              return descendant
-            })
+            onOpenWithActiveDescendant(descendants.enabledLastValue, "end")
           } else if (activeDescendant.current) {
             const descendant = descendants.enabledPrevValue(
               activeDescendant.current,
@@ -392,13 +397,7 @@ export const useCombobox = ({
         },
         Enter: () => {
           if (!open) {
-            onOpenWithActiveDescendant(() => {
-              const descendant = descendants.enabledFirstValue()
-
-              onScrollIntoView(descendant)
-
-              return descendant
-            })
+            onOpenWithActiveDescendant(descendants.enabledFirstValue)
           } else {
             if (!activeDescendant.current) return
 
@@ -418,13 +417,7 @@ export const useCombobox = ({
         },
         Space: () => {
           if (!open) {
-            onOpenWithActiveDescendant(() => {
-              const descendant = descendants.enabledFirstValue()
-
-              onScrollIntoView(descendant)
-
-              return descendant
-            })
+            onOpenWithActiveDescendant(descendants.enabledFirstValue)
           } else {
             if (!activeDescendant.current) return
 

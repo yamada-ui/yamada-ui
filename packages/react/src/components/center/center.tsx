@@ -18,7 +18,7 @@ export { CenterPropsContext, useCenterPropsContext }
 /**
  * `Center` is a component that aligns the child elements in the center within the component.
  *
- * @see https://yamada-ui.com/components/center
+ * @see https://yamada-ui.com/docs/components/center
  */
 export const Center = withContext("div", {
   base: {

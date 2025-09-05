@@ -56,12 +56,70 @@ import { PinInput } from "@workspaces/ui"
 
 ```tsx preview
 <VStack>
-  <For each={["blue", "red", "green"]}>
+  <For each={["green", "orange"]}>
     {(colorScheme) => (
       <PinInput.Root key={colorScheme} colorScheme={colorScheme} />
     )}
   </For>
 </VStack>
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に文字列を設定します。
+
+```tsx preview
+<VStack>
+  <For each={["1234", "123"]}>
+    {(defaultValue) => (
+      <PinInput.Root key={defaultValue} defaultValue={defaultValue} />
+    )}
+  </For>
+</VStack>
+```
+
+### プレースホルダーを変更する
+
+プレースホルダーを変更する場合は、`placeholder`に文字列を設定します。
+
+```tsx preview
+<PinInput.Root placeholder="💩" />
+```
+
+### フィールド数を変更する
+
+フィールド数を変更する場合は、`items`に数値を設定します。
+
+```tsx preview
+<VStack>
+  <For each={[3, 4, 5, 6]}>
+    {(items) => <PinInput.Root key={items} items={items} />}
+  </For>
+</VStack>
+```
+
+### タイプを変更する
+
+デフォルトでは、数値のみ入力が可能です。英数字をサポートする場合は、`type`に`alphanumeric`を設定します。
+
+```tsx preview
+<PinInput.Root type="alphanumeric" />
+```
+
+### ワンタイムパスワード
+
+ワンタイムパスワード(`autocomplete="one-time-code"`)を有効にするには、`otp`を`true`に設定します。
+
+```tsx preview
+<PinInput.Root otp />
+```
+
+### 入力された値をマスクする
+
+入力された値をマスクする場合は、`mask`を`true`に設定します。
+
+```tsx preview
+<PinInput.Root mask />
 ```
 
 ### 無効にする
@@ -100,43 +158,9 @@ import { PinInput } from "@workspaces/ui"
 </PinInput.Root>
 ```
 
-### Set Default Value
-
-デフォルトの値を設定する場合は、`defaultValue`に文字列または数値を設定します。
-
-```tsx preview
-<VStack>
-  <For each={["1234", "123"]}>
-    {(defaultValue) => (
-      <PinInput.Root key={defaultValue} defaultValue={defaultValue} />
-    )}
-  </For>
-</VStack>
-```
-
-### フィールド数を変更する
-
-フィールド数を変更する場合は、`items`に数値を設定します。
-
-```tsx preview
-<VStack>
-  <For each={[3, 4, 5, 6]}>
-    {(items) => <PinInput.Root key={items} items={items} />}
-  </For>
-</VStack>
-```
-
-### タイプを変更する
-
-デフォルトでは、数値のみ入力が可能です。英数字をサポートする場合は、`type`に`alphanumeric`を設定します。
-
-```tsx preview
-<PinInput.Root type="alphanumeric" />
-```
-
 ### ボーダーのカラーを変更する
 
-ボーダーカラーを変更するには、`focusBorderColor`や`errorBorderColor`プロパティを使用します。
+ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
 
 ```tsx preview
 <VStack>
@@ -145,50 +169,14 @@ import { PinInput } from "@workspaces/ui"
 </VStack>
 ```
 
-### プレースホルダーを変更する
+### 入力完了時のイベントをハンドルする
 
-プレースホルダーを変更する場合は、`placeholder`に文字列を設定します。
-
-```tsx preview
-<PinInput.Root placeholder="💩" />
-```
-
-### 入力完了時の動作を設定する
-
-入力完了時の動作を設定するには、`onComplete`プロパティを使用します。
+入力完了時のイベントをハンドルする場合は、`onComplete`を使用します。
 
 ```tsx preview functional client
 const { page } = useLoading()
 
 return <PinInput.Root onComplete={() => page.start({ duration: 5000 })} />
-```
-
-### ワンタイムパスワードとして使用する
-
-ワンタイムパスワード(`autocomplete="one-time-code"`)として使用するには、`otp`を`true`に設定します。
-
-```tsx preview
-<PinInput.Root otp />
-```
-
-### 入力された値をマスクする
-
-入力された値をマスクする場合は、`mask`を`true`に設定します。
-
-```tsx preview
-<PinInput.Root mask />
-```
-
-### カスタムフィールドを使用する
-
-カスタムフィールドを使用する場合は、`PinInput.Field`を使用します。
-
-```tsx preview
-<PinInput.Root>
-  <For each={[0, 1, 2, 3]}>
-    {(index) => <PinInput.Field key={index} index={index} />}
-  </For>
-</PinInput.Root>
 ```
 
 ### フォーカス管理を無効にする
@@ -197,6 +185,22 @@ return <PinInput.Root onComplete={() => page.start({ duration: 5000 })} />
 
 ```tsx preview
 <PinInput.Root manageFocus={false} />
+```
+
+### フィールドをカスタマイズする
+
+```tsx preview
+<PinInput.Root>
+  <For each={[0, 1, 2, 3]}>
+    {(index) => (
+      <PinInput.Field
+        key={index}
+        index={index}
+        _placeholder={{ color: "blue.500" }}
+      />
+    )}
+  </For>
+</PinInput.Root>
 ```
 
 ### 制御する

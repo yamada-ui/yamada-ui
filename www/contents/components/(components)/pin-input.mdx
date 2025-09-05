@@ -6,7 +6,211 @@ source: components/pin-input
 style: components/pin-input/pin-input.style.ts
 ---
 
+```tsx preview
+<PinInput.Root />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { PinInput } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { PinInput } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { PinInput } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<PinInput.Root />
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => <PinInput.Root key={variant} variant={variant} />}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size) => <PinInput.Root key={size} size={size} />}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["blue", "red", "green"]}>
+    {(colorScheme) => (
+      <PinInput.Root key={colorScheme} colorScheme={colorScheme} />
+    )}
+  </For>
+</VStack>
+```
+
+### Disabled
+
+To disable the input, set `disabled` to `true`.
+
+```tsx preview
+<PinInput.Root>
+  <For each={[0, 1, 2, 3]}>
+    {(index) => <PinInput.Field key={index} index={index} disabled />}
+  </For>
+</PinInput.Root>
+```
+
+### Read-Only
+
+To make read-only, set `readOnly` to `true`.
+
+```tsx preview
+<PinInput.Root>
+  <For each={[0, 1, 2, 3]}>
+    {(index) => <PinInput.Field key={index} index={index} readOnly />}
+  </For>
+</PinInput.Root>
+```
+
+### Invalid
+
+To make invalid, set `invalid` to `true`.
+
+```tsx preview
+<PinInput.Root>
+  <For each={[0, 1, 2, 3]}>
+    {(index) => <PinInput.Field key={index} index={index} invalid />}
+  </For>
+</PinInput.Root>
+```
+
+### Set Default Value
+
+To set a default value, set a string or number to `defaultValue`.
+
+```tsx preview
+<VStack>
+  <For each={["1234", "123"]}>
+    {(defaultValue) => (
+      <PinInput.Root key={defaultValue} defaultValue={defaultValue} />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Number of Fields
+
+To change the number of fields, set a number to `items`.
+
+```tsx preview
+<VStack>
+  <For each={[3, 4, 5, 6]}>
+    {(items) => <PinInput.Root key={items} items={items} />}
+  </For>
+</VStack>
+```
+
+### Change Type
+
+By default, only numeric input is allowed. To support alphanumeric, set `type` to `alphanumeric`.
+
+```tsx preview
+<PinInput.Root type="alphanumeric" />
+```
+
+### Change Border Color
+
+To change the border color, use the `focusBorderColor` or `errorBorderColor` properties.
+
+```tsx preview
+<VStack>
+  <PinInput.Root focusBorderColor="green.500" />
+  <PinInput.Root errorBorderColor="orange.500" invalid />
+</VStack>
+```
+
+### Change Placeholder
+
+To change the placeholder, set a string to `placeholder`.
+
+```tsx preview
+<PinInput.Root placeholder="💩" />
+```
+
+### Set Action on Completion
+
+To set the action on completion, use the `onComplete` property.
+
+```tsx preview functional client
+const { page } = useLoading()
+
+return <PinInput.Root onComplete={() => page.start({ duration: 5000 })} />
+```
+
+### Use as One-Time Password
+
+To use as a one-time password (`autocomplete="one-time-code"`), set `otp` to `true`.
+
+```tsx preview
+<PinInput.Root otp />
+```
+
+### Mask Entered Value
+
+To mask the entered value, set `mask` to `true`.
+
+```tsx preview
+<PinInput.Root mask />
+```
+
+### Use Custom Field
+
+To use a custom field, use `PinInput.Field`.
+
+```tsx preview
+<PinInput.Root>
+  <For each={[0, 1, 2, 3]}>
+    {(index) => <PinInput.Field key={index} index={index} />}
+  </For>
+</PinInput.Root>
+```
+
+### Disable Focus Management
+
+By default, when a field is entered, the focus automatically moves to the next field. Also, when the `BackSpace` key is pressed, the focus moves to the previous field. To disable this control, set `manageFocus` to `false`.
+
+```tsx preview
+<PinInput.Root manageFocus={false} />
+```
+
+### Control
+
+```tsx preview functional client
+const { page } = useLoading()
+const [value, onChange] = useState("")
+
+const onComplete = () => page.start({ duration: 5000 })
+
+return (
+  <PinInput.Root value={value} onChange={onChange} onComplete={onComplete} />
+)
+```
 
 ## Props
 

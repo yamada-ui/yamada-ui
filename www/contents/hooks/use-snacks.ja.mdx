@@ -96,7 +96,7 @@ return (
 )
 ```
 
-### カラースキーマを変更する
+### カラースキー厶を変更する
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks()
@@ -104,7 +104,7 @@ const { snack, snacks } = useSnacks()
 return (
   <VStack>
     <Wrap gap="md">
-      <For each={["info", "success", "warning", "error"]}>
+      <For each={["success", "warning"]}>
         {(colorScheme) => (
           <Button
             key={colorScheme}
@@ -240,6 +240,43 @@ return (
     </Wrap>
 
     <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+### 余白を調整する
+
+`Snacks`は折りたたむアニメーションが実装されています。もし、親要素に`gap`などが設定されている場合は不自然なアニメーションになってしまいます。その場合は、`gutter`で余白を調整します。
+
+:::note
+`gutter`は、デフォルトで負のマージンを付与します。もし、負のマージンを無効にしたい場合は、`negateMargin`を`false`に設定します。
+:::
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks()
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          snack({
+            description: "良くも悪くも人間は変わるわ…あなたはどうかしら？",
+            title: "ミライ・ヤシマ",
+          })
+        }}
+      >
+        Add Snack
+      </Button>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} gutter={[0, "lg"]} negateMargin={false} mb="-md" />
 
     <Input placeholder="Input" />
   </VStack>

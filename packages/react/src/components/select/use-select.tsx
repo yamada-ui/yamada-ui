@@ -1,6 +1,6 @@
 "use client"
 
-import type { ReactNode } from "react"
+import type { MouseEvent, ReactNode } from "react"
 import type { HTMLProps, PropGetter } from "../../core"
 import type {
   ComboboxItem,
@@ -32,6 +32,7 @@ interface SelectRenderProps extends ComboboxItemWithValue {
   count: number
   index: number
   separator: string
+  onClear: () => void
 }
 
 export interface SelectItemRender {
@@ -48,9 +49,12 @@ const defaultRender: SelectItemRender = ({
   const last = count - 1 === index
 
   return (
-    <span data-placeholder={dataAttr(value === "")}>
+    <span
+      style={{ marginInlineEnd: "var(--gap)" }}
+      data-placeholder={dataAttr(value === "")}
+    >
       {label}
-      {!last ? `${separator} ` : null}
+      {!last ? separator : null}
     </span>
   )
 }
@@ -241,7 +245,20 @@ export const useSelect = <Y extends string | string[] = string>(
     const count = selectedItems.length
 
     return selectedItems.map((item, index) => {
-      const component = render({ count, index, separator, ...item })
+      const onClear = (ev?: MouseEvent<HTMLElement>) => {
+        ev?.preventDefault()
+        ev?.stopPropagation()
+
+        if (item.value) onChange(item.value)
+      }
+
+      const component = render({
+        count,
+        index,
+        separator,
+        onClear,
+        ...item,
+      })
 
       if (isValidElement<Dict>(component)) {
         return cloneElement(component, { ...component.props, key: index })
@@ -249,7 +266,7 @@ export const useSelect = <Y extends string | string[] = string>(
         return component
       }
     })
-  }, [render, selectedItems, separator])
+  }, [onChange, render, selectedItems, separator])
 
   const onClear = useCallback(() => {
     setValue((prev) => (isArray(prev) ? [] : "") as Y)

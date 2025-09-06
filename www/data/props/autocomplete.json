@@ -216,7 +216,7 @@
         "required": false
       },
       "defaultValue": {
-        "type": "string",
+        "type": "Y",
         "description": "The initial value of the autocomplete.",
         "required": false
       },
@@ -334,9 +334,20 @@
         "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns.",
         "required": false
       },
+      "max": {
+        "type": "number",
+        "description": "The maximum selectable value.",
+        "required": false
+      },
       "middleware": {
         "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
         "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
+        "required": false
+      },
+      "multiple": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, the autocomplete will be multiple.",
         "required": false
       },
       "offset": {
@@ -345,7 +356,7 @@
         "required": false
       },
       "onChange": {
-        "type": "(value: string) => void",
+        "type": "(value: Y) => void",
         "description": "The callback invoked when value state changes.",
         "required": false
       },
@@ -381,10 +392,22 @@
         "description": "If `true`, the combobox will be opened when click on the field.",
         "required": false
       },
+      "openOnEnter": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the combobox will be opened when enter is pressed.",
+        "required": false
+      },
       "openOnFocus": {
         "type": "boolean",
         "defaultValue": "false",
         "description": "If `true`, the autocomplete will be opened when the input is focused.",
+        "required": false
+      },
+      "openOnSpace": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the combobox will be opened when space is pressed.",
         "required": false
       },
       "optionProps": {
@@ -420,6 +443,11 @@
         "description": "If `true`, the combobox will be readonly.",
         "required": false
       },
+      "render": {
+        "type": "(props: AutocompleteRenderProps) => ReactNode",
+        "description": "The function to render the selected items.",
+        "required": false
+      },
       "required": {
         "type": "boolean",
         "defaultValue": "false",
@@ -431,6 +459,23 @@
         "description": "Props for root element.",
         "required": false
       },
+      "selectFocusRef": {
+        "type": "RefObject<HTMLElement | null>",
+        "description": "The `ref` of the element that should receive focus when selected.",
+        "required": false
+      },
+      "selectOnSpace": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the item will be selected when space is pressed.",
+        "required": false
+      },
+      "separator": {
+        "type": "string",
+        "defaultValue": "\",\"",
+        "description": "The visual separator between each value.",
+        "required": false
+      },
       "strategy": {
         "type": "Strategy",
         "defaultValue": "\"absolute\"",
@@ -438,7 +483,7 @@
         "required": false
       },
       "value": {
-        "type": "string",
+        "type": "Y",
         "description": "The value of the autocomplete.",
         "required": false
       },
@@ -665,7 +710,7 @@
       "required": false
     },
     "defaultValue": {
-      "type": "string",
+      "type": "Y",
       "description": "The initial value of the autocomplete.",
       "required": false
     },
@@ -783,9 +828,20 @@
       "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns.",
       "required": false
     },
+    "max": {
+      "type": "number",
+      "description": "The maximum selectable value.",
+      "required": false
+    },
     "middleware": {
       "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
       "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
+      "required": false
+    },
+    "multiple": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the autocomplete will be multiple.",
       "required": false
     },
     "offset": {
@@ -794,7 +850,7 @@
       "required": false
     },
     "onChange": {
-      "type": "(value: string) => void",
+      "type": "(value: Y) => void",
       "description": "The callback invoked when value state changes.",
       "required": false
     },
@@ -830,10 +886,22 @@
       "description": "If `true`, the combobox will be opened when click on the field.",
       "required": false
     },
+    "openOnEnter": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the combobox will be opened when enter is pressed.",
+      "required": false
+    },
     "openOnFocus": {
       "type": "boolean",
       "defaultValue": "false",
       "description": "If `true`, the autocomplete will be opened when the input is focused.",
+      "required": false
+    },
+    "openOnSpace": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the combobox will be opened when space is pressed.",
       "required": false
     },
     "optionProps": {
@@ -869,6 +937,11 @@
       "description": "If `true`, the combobox will be readonly.",
       "required": false
     },
+    "render": {
+      "type": "(props: AutocompleteRenderProps) => ReactNode",
+      "description": "The function to render the selected items.",
+      "required": false
+    },
     "required": {
       "type": "boolean",
       "defaultValue": "false",
@@ -880,6 +953,23 @@
       "description": "Props for root element.",
       "required": false
     },
+    "selectFocusRef": {
+      "type": "RefObject<HTMLElement | null>",
+      "description": "The `ref` of the element that should receive focus when selected.",
+      "required": false
+    },
+    "selectOnSpace": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the item will be selected when space is pressed.",
+      "required": false
+    },
+    "separator": {
+      "type": "string",
+      "defaultValue": "\",\"",
+      "description": "The visual separator between each value.",
+      "required": false
+    },
     "strategy": {
       "type": "Strategy",
       "defaultValue": "\"absolute\"",
@@ -887,7 +977,7 @@
       "required": false
     },
     "value": {
-      "type": "string",
+      "type": "Y",
       "description": "The value of the autocomplete.",
       "required": false
     },

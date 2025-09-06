@@ -816,11 +816,11 @@ export const CustomRender: Story = () => {
       items={items}
       multiple
       placeholder="Select a character"
-      render={({ label, value }) =>
+      render={({ label, value, onClear }) =>
         value === "" ? (
           <Text data-placeholder>{label}</Text>
         ) : (
-          <Tag size="sm" _notLast={{ me: "1" }}>
+          <Tag size="sm" _notLast={{ me: "1" }} onClose={onClear}>
             {label}
           </Tag>
         )

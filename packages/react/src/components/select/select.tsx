@@ -191,7 +191,6 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
         animationScheme: "block-start",
         autoFocus: false,
         matchWidth: true,
-        openOnClick: false,
         ...popoverProps,
         disabled: !interactive,
         open,

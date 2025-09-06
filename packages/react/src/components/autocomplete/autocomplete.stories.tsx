@@ -333,6 +333,51 @@ export const DefaultInputValue: Story = () => {
   )
 }
 
+export const Multiple: Story = () => {
+  const items = useMemo<Autocomplete.Item[]>(
+    () => [
+      { label: "アグモン", value: "アグモン" },
+      { label: "ガブモン", value: "ガブモン" },
+      { label: "テントモン", value: "テントモン" },
+      { label: "ピヨモン", value: "ピヨモン" },
+      { label: "ゴマモン", value: "ゴマモン" },
+      { label: "パルモン", value: "パルモン" },
+      { label: "パタモン", value: "パタモン" },
+      { label: "テイルモン", value: "テイルモン" },
+    ],
+    [],
+  )
+
+  return (
+    <Autocomplete.Root items={items} multiple placeholder="Select a digimon" />
+  )
+}
+
+export const Max: Story = () => {
+  const items = useMemo<Autocomplete.Item[]>(
+    () => [
+      { label: "アグモン", value: "アグモン" },
+      { label: "ガブモン", value: "ガブモン" },
+      { label: "テントモン", value: "テントモン" },
+      { label: "ピヨモン", value: "ピヨモン" },
+      { label: "ゴマモン", value: "ゴマモン" },
+      { label: "パルモン", value: "パルモン" },
+      { label: "パタモン", value: "パタモン" },
+      { label: "テイルモン", value: "テイルモン" },
+    ],
+    [],
+  )
+
+  return (
+    <Autocomplete.Root
+      items={items}
+      max={3}
+      multiple
+      placeholder="Select a digimon"
+    />
+  )
+}
+
 export const Offset: Story = () => {
   const items = useMemo<Autocomplete.Item[]>(
     () => [

@@ -894,11 +894,6 @@
           "pathname": "/docs/hooks/use-interval"
         },
         {
-          "title": "useLazyMount",
-          "segment": "use-lazy-mount",
-          "pathname": "/docs/hooks/use-lazy-mount"
-        },
-        {
           "title": "useLoading",
           "segment": "use-loading",
           "pathname": "/docs/hooks/use-loading"
@@ -912,11 +907,6 @@
           "title": "useMediaQuery",
           "segment": "use-media-query",
           "pathname": "/docs/hooks/use-media-query"
-        },
-        {
-          "title": "useMounted",
-          "segment": "use-mounted",
-          "pathname": "/docs/hooks/use-mounted"
         },
         {
           "title": "useNotice",

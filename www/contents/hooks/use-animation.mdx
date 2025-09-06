@@ -5,4 +5,252 @@ storybook: hooks-useanimation--basic
 source: hooks/use-animation
 ---
 
-### Usage
+```tsx preview functional client
+const animation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.500",
+    },
+    "20%": {
+      bg: "green.500",
+    },
+    "40%": {
+      bg: "purple.500",
+    },
+    "60%": {
+      bg: "yellow.500",
+    },
+    "80%": {
+      bg: "blue.500",
+    },
+    "100%": {
+      bg: "red.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return <Box w="full" h="xs" animation={animation} />
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useAnimation } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useAnimation } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useAnimation } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const animation = useAnimation()
+```
+
+### Use Multiple Animations
+
+To use multiple animations, set the arguments as an array.
+
+```tsx preview functional client
+const animation = useAnimation([
+  {
+    keyframes: {
+      "0%": {
+        bg: "red.500",
+      },
+      "20%": {
+        bg: "green.500",
+      },
+      "40%": {
+        bg: "purple.500",
+      },
+      "60%": {
+        bg: "yellow.500",
+      },
+      "80%": {
+        bg: "blue.500",
+      },
+      "100%": {
+        bg: "red.500",
+      },
+    },
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
+  },
+  {
+    keyframes: {
+      "0%": {
+        h: "xs",
+      },
+      "50%": {
+        h: "md",
+      },
+      "100%": {
+        h: "xs",
+      },
+    },
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
+  },
+  {
+    keyframes: {
+      "0%": {
+        w: "full",
+      },
+      "50%": {
+        w: "50%",
+      },
+      "100%": {
+        w: "full",
+      },
+    },
+    duration: "10s",
+    iterationCount: "infinite",
+    timingFunction: "linear",
+  },
+])
+
+return (
+  <Box h="md">
+    <Box w="full" h="xs" animation={animation} />
+  </Box>
+)
+```
+
+### Use Responsive Design
+
+To use responsive design, set the `animation` as a object.
+
+```tsx preview functional client
+const desktopAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.500",
+    },
+    "20%": {
+      bg: "green.500",
+    },
+    "40%": {
+      bg: "purple.500",
+    },
+    "60%": {
+      bg: "yellow.500",
+    },
+    "80%": {
+      bg: "blue.500",
+    },
+    "100%": {
+      bg: "red.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+const tabletAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "cyan.500",
+    },
+    "20%": {
+      bg: "emerald.500",
+    },
+    "40%": {
+      bg: "pink.500",
+    },
+    "60%": {
+      bg: "amber.500",
+    },
+    "80%": {
+      bg: "sky.500",
+    },
+    "100%": {
+      bg: "cyan.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return (
+  <Box
+    w="full"
+    h="xs"
+    animation={{ base: desktopAnimation, md: tabletAnimation }}
+  />
+)
+```
+
+### Use Color Mode
+
+To use color mode, pass an array to `animation`.
+
+```tsx preview functional client
+const lightAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.500",
+    },
+    "20%": {
+      bg: "green.500",
+    },
+    "40%": {
+      bg: "purple.500",
+    },
+    "60%": {
+      bg: "yellow.500",
+    },
+    "80%": {
+      bg: "blue.500",
+    },
+    "100%": {
+      bg: "red.500",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+const darkAnimation = useAnimation({
+  keyframes: {
+    "0%": {
+      bg: "red.800",
+    },
+    "20%": {
+      bg: "green.800",
+    },
+    "40%": {
+      bg: "purple.800",
+    },
+    "60%": {
+      bg: "yellow.800",
+    },
+    "80%": {
+      bg: "blue.800",
+    },
+    "100%": {
+      bg: "red.800",
+    },
+  },
+  duration: "10s",
+  iterationCount: "infinite",
+  timingFunction: "linear",
+})
+
+return <Box w="full" h="xs" animation={[lightAnimation, darkAnimation]} />
+```

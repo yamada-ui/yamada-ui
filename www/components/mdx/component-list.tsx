@@ -23,6 +23,7 @@ export function ComponentList(props: ComponentListProps) {
 
   return (
     <Grid
+      fontSize="sm"
       gap={{ base: "lg", sm: "md" }}
       my="lg"
       templateColumns={{

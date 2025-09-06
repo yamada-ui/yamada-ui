@@ -41,7 +41,7 @@ export const Sizes = () => {
               <Fragment key={index}>
                 <Text>{token}</Text>
                 <Text color="fg.muted">{value}</Text>
-                <Box bg="green" h="4" maxW={value} rounded="l1" />
+                <Box bg="green" h="4" maxW={token} rounded="l1" />
               </Fragment>
             )}
           </For>
@@ -67,7 +67,7 @@ export const Sizes = () => {
               <Fragment key={index}>
                 <Text>{token}</Text>
                 <Text color="fg.muted">{value}</Text>
-                <Box bg="green" h="4" maxW={value} rounded="l1" />
+                <Box bg="green" h="4" maxW={token} rounded="l1" />
               </Fragment>
             )}
           </For>
@@ -95,7 +95,7 @@ export const Sizes = () => {
               <Fragment key={index}>
                 <Text>{token}</Text>
                 <Text color="fg.muted">{value}</Text>
-                <Box bg="green" h="4" maxW={value} rounded="l1" />
+                <Box bg="green" h="4" maxW={token} rounded="l1" />
               </Fragment>
             )}
           </For>

@@ -1016,6 +1016,11 @@
           "pathname": "/docs/styling/color-mode"
         },
         {
+          "title": "Color Scheme",
+          "segment": "color-scheme",
+          "pathname": "/docs/styling/color-scheme"
+        },
+        {
           "title": "CSS Custom Properties",
           "segment": "css-custom-properties",
           "pathname": "/docs/styling/css-custom-properties"
@@ -1178,6 +1183,11 @@
               "title": "Colors",
               "segment": "colors",
               "pathname": "/docs/theming/tokens/colors"
+            },
+            {
+              "title": "Color Schemes",
+              "segment": "color-schemes",
+              "pathname": "/docs/theming/tokens/color-schemes"
             },
             {
               "title": "Durations",

@@ -1,8 +1,37 @@
 ---
 title: useBreakpointState
 description: "`useBreakpointState` is a custom hook that takes a responsive object as an initial state and returns a state corresponding to the current breakpoint."
-storybook: hooks-usebreakpointstate--basic
-source: hooks/use-breakpoint-state
+source: hooks/use-breakpoint
 ---
 
+```tsx preview functional client
+const [value, setValue] = useBreakpointState({ base: 1, md: 2 })
+
+return (
+  <Button onClick={() => setValue((prev) => prev + 1)}>
+    The current value is "{value}"
+  </Button>
+)
+```
+
 ### Usage
+
+:::code-group
+
+```tsx [package]
+import { useBreakpointState } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useBreakpointState } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useBreakpointState } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [value, setValue] = useBreakpointState({ base: 1, md: 2 })
+```

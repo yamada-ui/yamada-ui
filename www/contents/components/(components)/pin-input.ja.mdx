@@ -6,7 +6,215 @@ source: components/pin-input
 style: components/pin-input/pin-input.style.ts
 ---
 
+```tsx preview
+<PinInput.Root />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { PinInput } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { PinInput } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { PinInput } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<PinInput.Root />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => <PinInput.Root key={variant} variant={variant} />}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size) => <PinInput.Root key={size} size={size} />}
+  </For>
+</VStack>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<VStack>
+  <For each={["green", "orange"]}>
+    {(colorScheme) => (
+      <PinInput.Root key={colorScheme} colorScheme={colorScheme} />
+    )}
+  </For>
+</VStack>
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に文字列を設定します。
+
+```tsx preview
+<VStack>
+  <For each={["1234", "123"]}>
+    {(defaultValue) => (
+      <PinInput.Root key={defaultValue} defaultValue={defaultValue} />
+    )}
+  </For>
+</VStack>
+```
+
+### プレースホルダーを変更する
+
+プレースホルダーを変更する場合は、`placeholder`に文字列を設定します。
+
+```tsx preview
+<PinInput.Root placeholder="💩" />
+```
+
+### フィールド数を変更する
+
+フィールド数を変更する場合は、`items`に数値を設定します。
+
+```tsx preview
+<VStack>
+  <For each={[3, 4, 5, 6]}>
+    {(items) => <PinInput.Root key={items} items={items} />}
+  </For>
+</VStack>
+```
+
+### タイプを変更する
+
+デフォルトでは、数値のみ入力が可能です。英数字をサポートする場合は、`type`に`alphanumeric`を設定します。
+
+```tsx preview
+<PinInput.Root type="alphanumeric" />
+```
+
+### ワンタイムパスワード
+
+ワンタイムパスワード(`autocomplete="one-time-code"`)を有効にするには、`otp`を`true`に設定します。
+
+```tsx preview
+<PinInput.Root otp />
+```
+
+### 入力された値をマスクする
+
+入力された値をマスクする場合は、`mask`を`true`に設定します。
+
+```tsx preview
+<PinInput.Root mask />
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<PinInput.Root>
+  <For each={[0, 1, 2, 3]}>
+    {(index) => <PinInput.Field key={index} index={index} disabled />}
+  </For>
+</PinInput.Root>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<PinInput.Root>
+  <For each={[0, 1, 2, 3]}>
+    {(index) => <PinInput.Field key={index} index={index} readOnly />}
+  </For>
+</PinInput.Root>
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`invalid`を`true`に設定します。
+
+```tsx preview
+<PinInput.Root>
+  <For each={[0, 1, 2, 3]}>
+    {(index) => <PinInput.Field key={index} index={index} invalid />}
+  </For>
+</PinInput.Root>
+```
+
+### ボーダーのカラーを変更する
+
+ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
+
+```tsx preview
+<VStack>
+  <PinInput.Root focusBorderColor="green.500" />
+  <PinInput.Root errorBorderColor="orange.500" invalid />
+</VStack>
+```
+
+### 入力完了時のイベントをハンドルする
+
+入力完了時のイベントをハンドルする場合は、`onComplete`を使用します。
+
+```tsx preview functional client
+const { page } = useLoading()
+
+return <PinInput.Root onComplete={() => page.start({ duration: 5000 })} />
+```
+
+### フォーカス管理を無効にする
+
+デフォルトでは、フィールドが入力されると、自動的に次のフィールドにフォーカスは移動します。また、`BackSpace`キーが入力された場合は、前のフィールドにフォーカスされます。この制御を無効にする場合は、`manageFocus`を`false`に設定します。
+
+```tsx preview
+<PinInput.Root manageFocus={false} />
+```
+
+### フィールドをカスタマイズする
+
+```tsx preview
+<PinInput.Root>
+  <For each={[0, 1, 2, 3]}>
+    {(index) => (
+      <PinInput.Field
+        key={index}
+        index={index}
+        _placeholder={{ color: "blue.500" }}
+      />
+    )}
+  </For>
+</PinInput.Root>
+```
+
+### 制御する
+
+```tsx preview functional client
+const { page } = useLoading()
+const [value, onChange] = useState("")
+
+const onComplete = () => page.start({ duration: 5000 })
+
+return (
+  <PinInput.Root value={value} onChange={onChange} onComplete={onComplete} />
+)
+```
 
 ## Props
 

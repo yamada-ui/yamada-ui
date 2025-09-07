@@ -254,7 +254,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   const items = useMemo<NativeSelect.Item[]>(
     () => [
       { label: "日比野カフカ", value: "日比野カフカ" },

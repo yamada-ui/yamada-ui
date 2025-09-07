@@ -86,7 +86,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   return (
     <>
       <Rating defaultValue={3} readOnly />

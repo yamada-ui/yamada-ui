@@ -12,7 +12,6 @@ import type {
   ComboboxItem,
   UseComboboxGroupProps,
 } from "../../hooks/use-combobox"
-import type { FieldProps } from "../field"
 import type { UseInputBorderProps } from "../input"
 import type { SelectStyle } from "./select.style"
 import type {
@@ -43,12 +42,12 @@ interface ComponentContext
   extends Pick<UseSelectReturn, "getSeparatorProps">,
     Pick<SelectRootProps, "groupProps" | "optionProps"> {}
 
-export interface SelectRootProps<Y extends string | string[] = string>
+export interface SelectRootProps<Multiple extends boolean = false>
   extends Omit<
       HTMLStyledProps,
       "defaultValue" | "offset" | "onChange" | "value"
     >,
-    UseSelectProps<Y>,
+    UseSelectProps<Multiple>,
     Omit<
       WithoutThemeProps<Popover.RootProps, SelectStyle>,
       | "autoFocus"
@@ -60,7 +59,6 @@ export interface SelectRootProps<Y extends string | string[] = string>
       | "withCloseButton"
     >,
     ThemeProps<SelectStyle>,
-    FieldProps,
     UseInputBorderProps {
   /**
    * If `true`, display the clear icon.
@@ -126,7 +124,7 @@ export { SelectPropsContext, useSelectPropsContext }
  * @see https://yamada-ui.com/docs/components/select
  */
 export const SelectRoot = withProvider<"div", SelectRootProps>(
-  <Y extends string | string[] = string>(props: SelectRootProps<Y>) => {
+  <Multiple extends boolean = false>(props: SelectRootProps<Multiple>) => {
     const [groupItemProps, mergedProps] = useGroupItemProps(props)
     const [
       popoverProps,
@@ -193,7 +191,6 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
         animationScheme: "block-start",
         autoFocus: false,
         matchWidth: true,
-        openOnClick: false,
         ...popoverProps,
         disabled: !interactive,
         open,
@@ -293,8 +290,8 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
 
   return { ...context, ...props }
 }) as GenericsComponent<{
-  <Y extends string | string[] = string>(
-    props: SelectRootProps<Y>,
+  <Multiple extends boolean = false>(
+    props: SelectRootProps<Multiple>,
   ): ReactElement
 }>
 

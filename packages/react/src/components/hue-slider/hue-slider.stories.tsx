@@ -58,7 +58,7 @@ export const Disabled: Story = () => {
   return <HueSlider.Root defaultValue={180} disabled />
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   return <HueSlider.Root defaultValue={180} readOnly />
 }
 

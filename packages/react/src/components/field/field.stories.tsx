@@ -111,7 +111,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   return (
     <Field.Root
       errorMessage="Email is required."

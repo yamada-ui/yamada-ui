@@ -86,7 +86,7 @@ export const Disabled: Story = () => {
   return <AlphaSlider.Root color="#775999" defaultValue={0.5} disabled />
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   return <AlphaSlider.Root color="#775999" defaultValue={0.5} readOnly />
 }
 

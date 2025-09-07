@@ -32,6 +32,10 @@ export default {
   closeButton: {
     Close: "Close",
   },
+  datePicker: {
+    "Clear value": "Clear value",
+    "MMMM DD, YYYY": "MMMM DD, YYYY",
+  },
   hueSlider: {
     Blue: "Blue",
     Cyan: "Cyan",

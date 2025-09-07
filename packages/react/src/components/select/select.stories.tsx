@@ -551,7 +551,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   const items = useMemo<Select.Item[]>(
     () => [
       { label: "木ノ下和也", value: "木ノ下和也" },
@@ -768,9 +768,9 @@ export const CustomIcon: Story = () => {
       />
 
       <Select.Root
+        icon={<ChevronsDownIcon />}
         items={items}
         placeholder="Select a character"
-        iconProps={{ children: <ChevronsDownIcon /> }}
       />
     </>
   )
@@ -820,7 +820,7 @@ export const CustomRender: Story = () => {
         value === "" ? (
           <Text data-placeholder>{label}</Text>
         ) : (
-          <Tag size="sm" _notLast={{ me: "1" }} onClose={onClear}>
+          <Tag size="sm" _notLast={{ me: "{gap}" }} onClose={onClear}>
             {label}
           </Tag>
         )

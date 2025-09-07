@@ -43,18 +43,18 @@ import {
 } from "./use-autocomplete"
 
 interface ComponentContext
-  extends Pick<UseAutocompleteReturn, "getSeparatorProps">,
+  extends Pick<UseAutocompleteReturn, "getInputProps" | "getSeparatorProps">,
     Pick<
       AutocompleteRootProps,
-      "emptyIcon" | "emptyProps" | "groupProps" | "optionProps"
+      "emptyIcon" | "emptyProps" | "groupProps" | "inputProps" | "optionProps"
     > {}
 
-export interface AutocompleteRootProps<Y extends string | string[] = string>
+export interface AutocompleteRootProps<Multiple extends boolean = false>
   extends Omit<
       HTMLStyledProps,
       "defaultValue" | "filter" | "offset" | "onChange" | "ref" | "value"
     >,
-    UseAutocompleteProps<Y>,
+    UseAutocompleteProps<Multiple>,
     Omit<
       WithoutThemeProps<Popover.RootProps, AutocompleteStyle>,
       | "autoFocus"
@@ -106,6 +106,10 @@ export interface AutocompleteRootProps<Y extends string | string[] = string>
    */
   iconProps?: AutocompleteIconProps
   /**
+   * The props for the input element.
+   */
+  inputProps?: HTMLStyledProps<"input">
+  /**
    * Props for option element.
    */
   optionProps?: Omit<AutocompleteOptionProps, "children" | "value">
@@ -136,7 +140,9 @@ export { AutocompletePropsContext, useAutocompletePropsContext }
  * @see https://yamada-ui.com/docs/components/autocomplete
  */
 export const AutocompleteRoot = withProvider(
-  <Y extends string | string[] = string>(props: AutocompleteRootProps<Y>) => {
+  <Multiple extends boolean = false>(
+    props: AutocompleteRootProps<Multiple>,
+  ) => {
     const [groupItemProps, mergedProps] = useGroupItemProps(props)
     const [
       popoverProps,
@@ -157,6 +163,7 @@ export const AutocompleteRoot = withProvider(
         emptyProps,
         groupProps,
         iconProps,
+        inputProps,
         optionProps,
         rootProps,
         ...rest
@@ -230,11 +237,21 @@ export const AutocompleteRoot = withProvider(
       () => ({
         emptyIcon,
         emptyProps,
+        getInputProps,
         getSeparatorProps,
         groupProps,
+        inputProps,
         optionProps,
       }),
-      [getSeparatorProps, groupProps, optionProps, emptyProps, emptyIcon],
+      [
+        emptyIcon,
+        emptyProps,
+        getInputProps,
+        getSeparatorProps,
+        groupProps,
+        inputProps,
+        optionProps,
+      ],
     )
     const hasValue = isArray(value) ? !!value.length : !!value
 
@@ -251,10 +268,7 @@ export const AutocompleteRoot = withProvider(
                   {...getRootProps({ ...groupItemProps, ...rootProps })}
                 >
                   <Popover.Trigger>
-                    <AutocompleteField
-                      inputProps={getInputProps()}
-                      {...getFieldProps(varProps)}
-                    >
+                    <AutocompleteField {...getFieldProps(varProps)}>
                       {fieldChildren}
                     </AutocompleteField>
                   </Popover.Trigger>
@@ -296,27 +310,29 @@ export const AutocompleteRoot = withProvider(
 
   return { ...context, ...props }
 }) as GenericsComponent<{
-  <Y extends string | string[] = string>(
-    props: AutocompleteRootProps<Y>,
+  <Multiple extends boolean = false>(
+    props: AutocompleteRootProps<Multiple>,
   ): ReactElement
 }>
 
-interface AutocompleteFieldProps extends HTMLStyledProps {
-  inputProps?: HTMLProps<"input">
-}
+interface AutocompleteFieldProps extends HTMLStyledProps {}
 
 const AutocompleteField = withContext<"div", AutocompleteFieldProps>(
   "div",
   "field",
-)({ "data-group-propagate": "" }, ({ children, inputProps, ...rest }) => ({
-  ...rest,
-  children: (
-    <>
-      {children}
-      <AutocompleteInput {...inputProps} />
-    </>
-  ),
-}))
+)({ "data-group-propagate": "" }, ({ children, ...rest }) => {
+  const { getInputProps, inputProps } = useComponentContext()
+
+  return {
+    ...rest,
+    children: (
+      <>
+        {children}
+        <AutocompleteInput {...getInputProps(inputProps)} />
+      </>
+    ),
+  }
+})
 
 interface AutocompleteInputProps extends HTMLStyledProps<"input"> {}
 

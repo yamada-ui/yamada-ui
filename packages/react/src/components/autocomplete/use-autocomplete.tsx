@@ -54,26 +54,22 @@ interface AutocompleteRenderProps extends ComboboxItemWithValue {
   max?: number
 }
 
-export interface SelectItemRender {
+export interface AutocompleteItemRender {
   (props: AutocompleteRenderProps): ReactNode
 }
 
-const defaultRender: SelectItemRender = ({
+const defaultRender: AutocompleteItemRender = ({
   count,
   focused,
   index,
   label,
   max,
   separator,
-  value,
 }) => {
   const last = count - 1 === index
 
   return (
-    <span
-      style={{ marginInlineEnd: "var(--gap)" }}
-      data-placeholder={dataAttr(value === "")}
-    >
+    <span style={{ marginInlineEnd: "var(--gap)" }}>
       {label}
       {((!isNumber(max) || count < max) && focused) || !last ? separator : null}
     </span>
@@ -132,7 +128,7 @@ const [AutocompleteContext, useAutocompleteContext] =
 
 export { AutocompleteContext, useAutocompleteContext }
 
-export interface UseAutocompleteProps<Y extends string | string[] = string>
+export interface UseAutocompleteProps<Multiple extends boolean = false>
   extends Omit<HTMLProps, "defaultValue" | "onChange" | "ref" | "value">,
     Omit<
       UseComboboxProps,
@@ -159,7 +155,7 @@ export interface UseAutocompleteProps<Y extends string | string[] = string>
   /**
    * The initial value of the autocomplete.
    */
-  defaultValue?: Y
+  defaultValue?: Multiple extends true ? string[] : string
   /**
    * The message displayed when the search yields no hits.
    *
@@ -199,7 +195,7 @@ export interface UseAutocompleteProps<Y extends string | string[] = string>
    *
    * @default false
    */
-  multiple?: boolean
+  multiple?: Multiple
   /**
    * If `true`, the autocomplete will be opened when the input value changes.
    *
@@ -229,20 +225,22 @@ export interface UseAutocompleteProps<Y extends string | string[] = string>
   /**
    * The value of the autocomplete.
    */
-  value?: Y
+  value?: Multiple extends true ? string[] : string
   /**
    * The callback invoked when value state changes.
    */
-  onChange?: (value: Y) => void
+  onChange?: (value: Multiple extends true ? string[] : string) => void
   /**
    * The callback invoked when input value state changes.
    */
   onInputChange?: (value: string) => void
 }
 
-export const useAutocomplete = <Y extends string | string[] = string>(
-  props: UseAutocompleteProps<Y> = {},
+export const useAutocomplete = <Multiple extends boolean = false>(
+  props: UseAutocompleteProps<Multiple> = {},
 ) => {
+  type MaybeValue = Multiple extends true ? string[] : string
+
   const { t } = useI18n("autocomplete")
   const {
     props: {
@@ -252,7 +250,7 @@ export const useAutocomplete = <Y extends string | string[] = string>(
       multiple = false,
       closeOnSelect = !multiple,
       defaultInputValue,
-      defaultValue = (multiple ? [] : "") as Y,
+      defaultValue = (multiple ? [] : "") as MaybeValue,
       disabled,
       emptyMessage = t("No results found"),
       filter = defaultFilter,
@@ -316,14 +314,16 @@ export const useAutocomplete = <Y extends string | string[] = string>(
       setValue((prev) => {
         if (isArray(prev)) {
           if (prev.includes(selectedValue)) {
-            return prev.filter((prevValue) => prevValue !== selectedValue) as Y
+            return prev.filter(
+              (prevValue) => prevValue !== selectedValue,
+            ) as MaybeValue
           } else if (!isNumber(max) || prev.length < max) {
-            return [...prev, selectedValue] as Y
+            return [...prev, selectedValue] as MaybeValue
           } else {
             return prev
           }
         } else {
-          return selectedValue as Y
+          return selectedValue as MaybeValue
         }
       })
 
@@ -411,7 +411,7 @@ export const useAutocomplete = <Y extends string | string[] = string>(
       }
     })
   }, [focused, max, onChange, render, separator, value, valueMap])
-  const hasValues = isArray(value) && value.length
+  const hasValues = isArray(value) && !!value.length
 
   const onInputChange = useCallback(
     (ev: ChangeEvent<HTMLInputElement>) => {
@@ -431,7 +431,7 @@ export const useAutocomplete = <Y extends string | string[] = string>(
 
       if (inputValue.length || isArray(value)) return
 
-      setValue("" as Y)
+      setValue("" as MaybeValue)
     },
     [
       activeDescendant,
@@ -450,16 +450,18 @@ export const useAutocomplete = <Y extends string | string[] = string>(
     (ev: KeyboardEvent<HTMLInputElement>) => {
       if (disabled || ev.nativeEvent.isComposing) return
 
+      const inputValue = cast<HTMLInputElement>(ev.target).value
+
       runKeyAction(
         ev,
         {
           Backspace: (ev) => {
             if (!isArray(value)) return
-            if (!!cast<HTMLInputElement>(ev.target).value.length) return
+            if (!!inputValue.length) return
 
             ev.preventDefault()
 
-            setValue((prev) => prev.slice(0, -1) as Y)
+            setValue((prev) => prev.slice(0, -1) as MaybeValue)
           },
           Enter: (ev) => {
             if (!open || !inputValue.length || activeDescendant.current) return
@@ -468,6 +470,8 @@ export const useAutocomplete = <Y extends string | string[] = string>(
 
             if (!item) {
               if (!allowCustomValue || !isArray(value)) return
+
+              ev.preventDefault()
 
               onSelect(inputValue)
             } else {
@@ -489,7 +493,6 @@ export const useAutocomplete = <Y extends string | string[] = string>(
       allowCustomValue,
       disabled,
       filteredItems,
-      inputValue,
       onSelect,
       open,
       setValue,
@@ -498,8 +501,10 @@ export const useAutocomplete = <Y extends string | string[] = string>(
   )
 
   const onClick = useCallback(() => {
+    if (!interactive) return
+
     inputRef.current?.focus()
-  }, [])
+  }, [interactive])
 
   const onMouseDown = useCallback(
     (ev: MouseEvent<HTMLInputElement>) => {
@@ -528,18 +533,19 @@ export const useAutocomplete = <Y extends string | string[] = string>(
       ev.preventDefault()
 
       if (
-        !contains(rootRef.current, ev.relatedTarget) &&
-        !contains(contentRef.current, ev.relatedTarget)
-      ) {
-        setFocused(false)
-        onClose()
-      }
+        contains(rootRef.current, ev.relatedTarget) ||
+        contains(contentRef.current, ev.relatedTarget)
+      )
+        return
+
+      setFocused(false)
+      onClose()
 
       if (isArray(value)) {
         setInputValue("")
       } else {
         if (allowCustomValue) {
-          if (inputValue) setValue(inputValue as Y)
+          if (inputValue) setValue(inputValue as MaybeValue)
         } else {
           const item = valueMap[value as string]
 
@@ -559,11 +565,19 @@ export const useAutocomplete = <Y extends string | string[] = string>(
   )
 
   const onClear = useCallback(() => {
-    setValue((prev) => (isArray(prev) ? [] : "") as Y)
+    setValue((prev) => (isArray(prev) ? [] : "") as MaybeValue)
     setInputValue("")
 
     if (focusOnClear) inputRef.current?.focus()
   }, [focusOnClear, setInputValue, setValue])
+
+  useUpdateEffect(() => {
+    if (isArray(valueProp)) return
+
+    setInputValue(
+      getInputValue(valueProp ? valueMap[valueProp as string] : undefined),
+    )
+  }, [valueProp])
 
   const getRootProps: PropGetter = useCallback(
     ({ ref, ...props } = {}) => ({
@@ -577,8 +591,8 @@ export const useAutocomplete = <Y extends string | string[] = string>(
   const getFieldProps: PropGetter = useCallback(
     (props = {}) =>
       getTriggerProps({
-        ...props,
         tabIndex: -1,
+        ...props,
         onClick: handlerAll(props.onClick, onClick),
       }),
 
@@ -600,6 +614,7 @@ export const useAutocomplete = <Y extends string | string[] = string>(
       autoCapitalize: "off",
       autoComplete: "off",
       autoCorrect: "off",
+      disabled: !interactive,
       placeholder: hasValues ? undefined : placeholder,
       spellCheck: false,
       value: inputValue,
@@ -614,6 +629,7 @@ export const useAutocomplete = <Y extends string | string[] = string>(
       focused,
       hasValues,
       inputValue,
+      interactive,
       max,
       onBlur,
       onFocus,
@@ -658,14 +674,6 @@ export const useAutocomplete = <Y extends string | string[] = string>(
       }),
     [getIconProps, onClear, t],
   )
-
-  useUpdateEffect(() => {
-    if (isArray(valueProp)) return
-
-    setInputValue(
-      getInputValue(valueProp ? valueMap[valueProp as string] : undefined),
-    )
-  }, [valueProp])
 
   return {
     children,

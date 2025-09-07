@@ -199,7 +199,7 @@
         "required": false
       },
       "defaultValue": {
-        "type": "Y",
+        "type": "Multiple extends true ? string[] : string",
         "description": "The initial value of the select.",
         "required": false
       },
@@ -297,7 +297,7 @@
         "required": false
       },
       "multiple": {
-        "type": "boolean",
+        "type": "Multiple",
         "defaultValue": "false",
         "description": "If `true`, the select will be multiple.",
         "required": false
@@ -308,7 +308,7 @@
         "required": false
       },
       "onChange": {
-        "type": "(value: Y) => void",
+        "type": "(value: Multiple extends true ? string[] : string) => void",
         "description": "The callback invoked when value state changes.",
         "required": false
       },
@@ -423,7 +423,7 @@
         "required": false
       },
       "value": {
-        "type": "Y",
+        "type": "Multiple extends true ? string[] : string",
         "description": "The value of the select.",
         "required": false
       },
@@ -661,7 +661,7 @@
       "required": false
     },
     "defaultValue": {
-      "type": "Y",
+      "type": "Multiple extends true ? string[] : string",
       "description": "The initial value of the select.",
       "required": false
     },
@@ -759,7 +759,7 @@
       "required": false
     },
     "multiple": {
-      "type": "boolean",
+      "type": "Multiple",
       "defaultValue": "false",
       "description": "If `true`, the select will be multiple.",
       "required": false
@@ -770,7 +770,7 @@
       "required": false
     },
     "onChange": {
-      "type": "(value: Y) => void",
+      "type": "(value: Multiple extends true ? string[] : string) => void",
       "description": "The callback invoked when value state changes.",
       "required": false
     },
@@ -885,7 +885,7 @@
       "required": false
     },
     "value": {
-      "type": "Y",
+      "type": "Multiple extends true ? string[] : string",
       "description": "The value of the select.",
       "required": false
     },

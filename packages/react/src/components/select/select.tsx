@@ -42,12 +42,12 @@ interface ComponentContext
   extends Pick<UseSelectReturn, "getSeparatorProps">,
     Pick<SelectRootProps, "groupProps" | "optionProps"> {}
 
-export interface SelectRootProps<Y extends string | string[] = string>
+export interface SelectRootProps<Multiple extends boolean = false>
   extends Omit<
       HTMLStyledProps,
       "defaultValue" | "offset" | "onChange" | "value"
     >,
-    UseSelectProps<Y>,
+    UseSelectProps<Multiple>,
     Omit<
       WithoutThemeProps<Popover.RootProps, SelectStyle>,
       | "autoFocus"
@@ -124,7 +124,7 @@ export { SelectPropsContext, useSelectPropsContext }
  * @see https://yamada-ui.com/docs/components/select
  */
 export const SelectRoot = withProvider<"div", SelectRootProps>(
-  <Y extends string | string[] = string>(props: SelectRootProps<Y>) => {
+  <Multiple extends boolean = false>(props: SelectRootProps<Multiple>) => {
     const [groupItemProps, mergedProps] = useGroupItemProps(props)
     const [
       popoverProps,
@@ -290,8 +290,8 @@ export const SelectRoot = withProvider<"div", SelectRootProps>(
 
   return { ...context, ...props }
 }) as GenericsComponent<{
-  <Y extends string | string[] = string>(
-    props: SelectRootProps<Y>,
+  <Multiple extends boolean = false>(
+    props: SelectRootProps<Multiple>,
   ): ReactElement
 }>
 

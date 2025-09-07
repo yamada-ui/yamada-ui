@@ -12,6 +12,7 @@ import { For } from "../for"
 import { BugIcon, ChevronsDownIcon, HeartIcon } from "../icon"
 import { InputGroup } from "../input"
 import { VStack } from "../stack"
+import { Tag } from "../tag"
 import { Text } from "../text"
 
 type Story = StoryFn<typeof Autocomplete.Root>
@@ -374,6 +375,31 @@ export const Max: Story = () => {
       max={3}
       multiple
       placeholder="Select a digimon"
+    />
+  )
+}
+
+export const Separator: Story = () => {
+  const items = useMemo<Autocomplete.Item[]>(
+    () => [
+      { label: "アグモン", value: "アグモン" },
+      { label: "ガブモン", value: "ガブモン" },
+      { label: "テントモン", value: "テントモン" },
+      { label: "ピヨモン", value: "ピヨモン" },
+      { label: "ゴマモン", value: "ゴマモン" },
+      { label: "パルモン", value: "パルモン" },
+      { label: "パタモン", value: "パタモン" },
+      { label: "テイルモン", value: "テイルモン" },
+    ],
+    [],
+  )
+
+  return (
+    <Autocomplete.Root
+      items={items}
+      multiple
+      placeholder="Select a digimon"
+      separator=";"
     />
   )
 }
@@ -838,7 +864,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   const items = useMemo<Autocomplete.Item[]>(
     () => [
       { label: "アグモン", value: "アグモン" },
@@ -1097,9 +1123,9 @@ export const CustomIcon: Story = () => {
       />
 
       <Autocomplete.Root
+        icon={<ChevronsDownIcon />}
         items={items}
         placeholder="Select a digimon"
-        iconProps={{ children: <ChevronsDownIcon /> }}
       />
     </>
   )
@@ -1125,6 +1151,35 @@ export const CustomOptionIcon: Story = () => {
       items={items}
       placeholder="Select a digimon"
       optionProps={{ icon: <BugIcon /> }}
+    />
+  )
+}
+
+export const CustomRender: Story = () => {
+  const items = useMemo<Autocomplete.ItemWithValue[]>(
+    () => [
+      { label: "アグモン", value: "アグモン" },
+      { label: "ガブモン", value: "ガブモン" },
+      { label: "テントモン", value: "テントモン" },
+      { label: "ピヨモン", value: "ピヨモン" },
+      { label: "ゴマモン", value: "ゴマモン" },
+      { label: "パルモン", value: "パルモン" },
+      { label: "パタモン", value: "パタモン" },
+      { label: "テイルモン", value: "テイルモン" },
+    ],
+    [],
+  )
+
+  return (
+    <Autocomplete.Root
+      items={items}
+      multiple
+      placeholder="Select a character"
+      render={({ label, onClear }) => (
+        <Tag size="sm" me="{gap}" onClose={onClear}>
+          {label}
+        </Tag>
+      )}
     />
   )
 }
@@ -1157,7 +1212,7 @@ export const CustomControl: Story = () => {
 
 export const ReactHookForm: Story = () => {
   interface Data {
-    select: string
+    autocomplete: string
   }
 
   const {
@@ -1187,12 +1242,12 @@ export const ReactHookForm: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Field.Root
-        errorMessage={errors.select?.message}
-        invalid={!!errors.select}
+        errorMessage={errors.autocomplete?.message}
+        invalid={!!errors.autocomplete}
         label="Who is your favorite digimon?"
       >
         <Controller
-          name="select"
+          name="autocomplete"
           control={control}
           render={({ field }) => (
             <Autocomplete.Root
@@ -1216,11 +1271,11 @@ export const ReactHookForm: Story = () => {
 
 export const ReactHookFormDefaultValue: Story = () => {
   interface Data {
-    select: string
+    autocomplete: string
   }
 
   const defaultValues: Data = {
-    select: "アグモン",
+    autocomplete: "アグモン",
   }
 
   const {
@@ -1250,12 +1305,12 @@ export const ReactHookFormDefaultValue: Story = () => {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
       <Field.Root
-        errorMessage={errors.select?.message}
-        invalid={!!errors.select}
+        errorMessage={errors.autocomplete?.message}
+        invalid={!!errors.autocomplete}
         label="Who is your favorite digimon?"
       >
         <Controller
-          name="select"
+          name="autocomplete"
           control={control}
           render={({ field }) => (
             <Autocomplete.Root

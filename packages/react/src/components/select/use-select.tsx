@@ -67,7 +67,7 @@ const [SelectContext, useSelectContext] = createContext<SelectContext>({
 
 export { SelectContext, useSelectContext }
 
-export interface UseSelectProps<Y extends string | string[] = string>
+export interface UseSelectProps<Multiple extends boolean = false>
   extends Omit<HTMLProps, "defaultValue" | "onChange" | "value">,
     Omit<
       UseComboboxProps,
@@ -77,7 +77,7 @@ export interface UseSelectProps<Y extends string | string[] = string>
   /**
    * The initial value of the select.
    */
-  defaultValue?: Y
+  defaultValue?: Multiple extends true ? string[] : string
   /**
    * If `true`, include placeholder in options.
    *
@@ -99,7 +99,7 @@ export interface UseSelectProps<Y extends string | string[] = string>
    *
    * @default false
    */
-  multiple?: boolean
+  multiple?: Multiple
   /**
    * The placeholder for select.
    */
@@ -117,23 +117,25 @@ export interface UseSelectProps<Y extends string | string[] = string>
   /**
    * The value of the select.
    */
-  value?: Y
+  value?: Multiple extends true ? string[] : string
   /**
    * The callback invoked when value state changes.
    */
-  onChange?: (value: Y) => void
+  onChange?: (value: Multiple extends true ? string[] : string) => void
 }
 
-export const useSelect = <Y extends string | string[] = string>(
-  props: UseSelectProps<Y> = {},
+export const useSelect = <Multiple extends boolean = false>(
+  props: UseSelectProps<Multiple> = {},
 ) => {
+  type MaybeValue = Multiple extends true ? string[] : string
+
   const { t } = useI18n("select")
   const {
     context: { labelId } = {},
     props: {
       multiple = false,
       closeOnSelect = !multiple,
-      defaultValue = (multiple ? [] : "") as Y,
+      defaultValue = (multiple ? [] : "") as MaybeValue,
       disabled,
       includePlaceholder = !multiple,
       items: itemProp = [],
@@ -160,14 +162,14 @@ export const useSelect = <Y extends string | string[] = string>(
       setValue((prev) => {
         if (isArray(prev)) {
           if (prev.includes(value)) {
-            return prev.filter((prevValue) => prevValue !== value) as Y
+            return prev.filter((prevValue) => prevValue !== value) as MaybeValue
           } else if (!isNumber(max) || prev.length < max) {
-            return [...prev, value] as Y
+            return [...prev, value] as MaybeValue
           } else {
             return prev
           }
         } else {
-          return value as Y
+          return value as MaybeValue
         }
       })
     },
@@ -269,7 +271,7 @@ export const useSelect = <Y extends string | string[] = string>(
   }, [onChange, render, selectedItems, separator])
 
   const onClear = useCallback(() => {
-    setValue((prev) => (isArray(prev) ? [] : "") as Y)
+    setValue((prev) => (isArray(prev) ? [] : "") as MaybeValue)
   }, [setValue])
 
   const getRootProps: PropGetter = useCallback(

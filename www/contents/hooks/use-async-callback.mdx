@@ -5,4 +5,72 @@ storybook: hooks-useasynccallback--basic
 source: hooks/use-async-callback
 ---
 
-### Usage
+```tsx preview functional client
+const [loading, onClick] = useAsyncCallback(async () => {
+  await wait(3000)
+}, [])
+
+return (
+  <Button loading={loading} onClick={onClick}>
+    Click me
+  </Button>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useAsyncCallback } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useAsyncCallback } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useAsyncCallback } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [loading, onClick] = useAsyncCallback(async () => {}, [])
+```
+
+### Use loading
+
+When using loading, set `loading` to `screen` or `page` etc.
+
+```tsx preview functional client
+const [loading, onClick] = useAsyncCallback(
+  async () => {
+    await wait(3000)
+  },
+  [],
+  { loading: "page" },
+)
+
+return (
+  <Button loading={loading} onClick={onClick}>
+    Click me
+  </Button>
+)
+```
+
+### Disable processing
+
+When disabling processing, set `processing` to `false`.
+
+```tsx preview functional client
+const [, onClick] = useAsyncCallback(
+  async () => {
+    await wait(3000)
+  },
+  [],
+  { loading: "page", processing: false },
+)
+
+return <Button onClick={onClick}>Click me</Button>
+```

@@ -5,4 +5,57 @@ storybook: hooks-useasync--basic
 source: hooks/use-async
 ---
 
+```tsx preview functional client
+const [flg, { toggle }] = useBoolean()
+const { value, error, loading } = useAsync(
+  async () =>
+    new Promise<string>((resolve, reject) => {
+      console.log("deps:", JSON.stringify(flg))
+
+      setTimeout(() => {
+        if (Math.random() > 0.5) {
+          resolve("Succeeded.")
+        } else {
+          reject(new Error("A pseudo random error occurred."))
+        }
+      }, 3000)
+    }),
+  [flg],
+)
+
+return (
+  <VStack alignItems="flex-start">
+    {loading ? (
+      <Text>Loading...</Text>
+    ) : error ? (
+      <Text>Error: {error.message}</Text>
+    ) : (
+      <Text>Value: {value}</Text>
+    )}
+
+    <Button onClick={toggle}>Update state</Button>
+  </VStack>
+)
+```
+
 ### 使い方
+
+:::code-group
+
+```tsx [package]
+import { useAsync } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useAsync } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useAsync } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { value, error, loading } = useAsync(async () => {}, [])
+```

@@ -399,7 +399,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
     () => [
       {

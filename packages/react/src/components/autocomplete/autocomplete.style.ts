@@ -5,13 +5,58 @@ export const autocompleteStyle = defineComponentSlotStyle({
   base: {
     ...selectStyle.base,
     empty: selectStyle.base?.option,
+    field: {
+      ...selectStyle.base?.field,
+      cursor: "text",
+      flexWrap: "wrap",
+      gapY: "{gap}",
+      py: "{gap}",
+    },
+    input: {
+      "&[data-max]": { caretColor: "transparent" },
+      flex: "1",
+      focusVisibleRing: "none",
+      _disabled: { cursor: "not-allowed" },
+    },
   },
 
   variants: {
-    filled: selectStyle.variants?.filled,
-    flushed: selectStyle.variants?.flushed,
-    outline: selectStyle.variants?.outline,
-    plain: selectStyle.variants?.plain,
+    filled: {
+      ...selectStyle.variants?.filled,
+      field: {
+        ...selectStyle.variants?.filled.field,
+        "&:focus:not([data-disabled])":
+          selectStyle.variants?.filled.field._expanded,
+        ":has(input:focus)": selectStyle.variants?.filled.field._expanded,
+      },
+    },
+    flushed: {
+      ...selectStyle.variants?.flushed,
+      field: {
+        ...selectStyle.variants?.flushed.field,
+        "&:focus:not([data-disabled])":
+          selectStyle.variants?.flushed.field._expanded,
+        ":has(input:focus)": selectStyle.variants?.flushed.field._expanded,
+      },
+    },
+    outline: {
+      ...selectStyle.variants?.outline,
+      field: {
+        ...selectStyle.variants?.outline.field,
+        "&:focus:not([data-disabled])":
+          selectStyle.variants?.outline.field._expanded,
+        ":has(input:focus)": selectStyle.variants?.outline.field._expanded,
+      },
+    },
+    plain: {
+      ...selectStyle.variants?.plain,
+      field: {
+        ...selectStyle.variants?.plain.field,
+        "&:focus:not([data-disabled])":
+          selectStyle.variants?.plain.field._expanded,
+        ":has(input:focus)": selectStyle.variants?.plain.field._expanded,
+      },
+    },
   },
 
   sizes: {

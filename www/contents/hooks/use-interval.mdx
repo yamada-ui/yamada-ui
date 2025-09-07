@@ -5,4 +5,34 @@ storybook: hooks-useinterval--basic
 source: hooks/use-interval
 ---
 
+```tsx preview functional client
+const [state, setState] = useState<number>(1)
+
+useInterval(() => setState((prev) => prev + 1), 3000)
+
+return <Box>Current state: {state}</Box>
+```
+
 ### Usage
+
+:::code-group
+
+```tsx [package]
+import { useInterval } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useInterval } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useInterval } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [state, setState] = useState<number>(1)
+
+useInterval(() => setState((prev) => prev + 1), 3000)
+```

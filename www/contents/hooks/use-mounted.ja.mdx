@@ -4,4 +4,54 @@ description: "`useMounted`は、コンポーネントがマウントされてい
 source: hooks/use-mounted
 ---
 
-### 使い方
+```tsx preview functional client
+const mounted = useMounted({ state: true })
+
+return (
+  <Text>{mounted ? "Component is mounted" : "Component is not mounted"}</Text>
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useMounted } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useMounted } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useMounted } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const mounted = useMounted()
+```
+
+### リアクティブな値
+
+リアクティブな値を使う場合は、`state`を`true`にします。
+
+```tsx preview functional client
+const mounted = useMounted({ state: true })
+
+return (
+  <Text>{mounted ? "Component is mounted" : "Component is not mounted"}</Text>
+)
+```
+
+### 遅延させる
+
+遅延させるには、`delay`に数値(ミリ秒)を設定します。
+
+```tsx preview functional client
+const mounted = useMounted({ state: true, delay: 1000 })
+
+return <Text>{mounted ? "Mounted after delay" : "Waiting..."}</Text>
+```

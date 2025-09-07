@@ -6,7 +6,127 @@ source: components/slide-fade
 style: components/slide-fade/slide-fade.style.ts
 ---
 
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack>
+    <Button onClick={toggle}>Please Click</Button>
+
+    <SlideFade open={open} borderWidth={1} p="md" rounded="l2">
+      クラスは最低じゃないぞ！メンバーが最低なだけだ！
+    </SlideFade>
+  </VStack>
+)
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { SlideFade } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { SlideFade } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { SlideFade } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<SlideFade />
+```
+
+### 継続時間を変更する
+
+継続時間を変更するには、`duration`に数値（秒）を設定します。
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack>
+    <Button onClick={toggle}>Please Click</Button>
+
+    <SlideFade open={open} duration={0.4} borderWidth={1} p="md" rounded="l2">
+      確かにアイツは勉強ができない。でもな、学力が低いからといって、全てが決まるわけじゃないだろう？
+    </SlideFade>
+  </VStack>
+)
+```
+
+### 位置を変更する
+
+要素が表示または非表示になる位置を変更するには、`offsetX`と`offsetY`に文字列または数値を指定します。
+
+- `offsetX`: 水平方向を指定します。デフォルトでは、`0`が設定されています。
+- `offsetY`: 垂直方向を指定します。デフォルトでは、`8`が設定されています。
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack>
+    <Button onClick={toggle}>Please Click</Button>
+
+    <SlideFade
+      open={open}
+      offsetX={8}
+      offsetY={0}
+      borderWidth={1}
+      p="md"
+      rounded="l2"
+    >
+      ……私、このクラスの皆が好きなんです。人の為に一生懸命な皆のいる、Fクラスが
+    </SlideFade>
+
+    <SlideFade open={open} offsetY={-8} borderWidth={1} p="md" rounded="l2">
+      ……女は胸じゃないのに。アキの、バカ……
+    </SlideFade>
+  </VStack>
+)
+```
+
+### 表示終了時にアンマウントする
+
+非表示時にコンポーネントをアンマウントするには、`unmountOnExit`を`true`に設定します。
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack>
+    <Button onClick={toggle}>Please Click</Button>
+
+    <SlideFade open={open} unmountOnExit borderWidth={1} p="md" rounded="l2">
+      考えすぎではないかのぅ。メイド服くらい人間一度は着るものじゃ
+    </SlideFade>
+  </VStack>
+)
+```
+
+### 遅延させる
+
+アニメーションを遅延させる場合は、`delay`に数値（秒）を設定します。
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack>
+    <Button onClick={toggle}>Please Click</Button>
+
+    <SlideFade open={open} delay={0.5} borderWidth={1} p="md" rounded="l2">
+      たとえ許されない行為であろうとも自分の気持ちは偽れない。正直に言おう、今僕は…純粋に欲望のために女子風呂を覗きたいッ！！
+    </SlideFade>
+  </VStack>
+)
+```
 
 ## Props
 

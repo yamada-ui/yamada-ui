@@ -13,7 +13,14 @@
     "providers": []
   },
   "dependents": {
-    "components": ["autocomplete", "menu", "modal", "select", "tooltip"],
+    "components": [
+      "autocomplete",
+      "date-picker",
+      "menu",
+      "modal",
+      "select",
+      "tooltip"
+    ],
     "hooks": [],
     "providers": []
   },

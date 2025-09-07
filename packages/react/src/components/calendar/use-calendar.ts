@@ -239,13 +239,7 @@ export const updateMaybeDateValue =
     }
   }
 
-export const getAdjustedMonth = (
-  value: MaybeDate,
-  month: Date,
-  range: boolean,
-) => {
-  if (range) return month
-
+export const getAdjustedMonth = (value: MaybeDate, month: Date) => {
   if (isDate(value)) {
     if (!isSameMonth(value, month)) month = dayjs(value).set("date", 1).toDate()
   } else if (isArray(value)) {
@@ -254,10 +248,10 @@ export const getAdjustedMonth = (
     if (lastValue && !isSameMonth(lastValue, month))
       month = dayjs(lastValue).set("date", 1).toDate()
   } else if (isObject(value)) {
-    if (value.start && !isSameMonth(value.start, month)) {
-      month = dayjs(value.start).set("date", 1).toDate()
-    } else if (value.end && !isSameMonth(value.end, month)) {
+    if (value.end) {
       month = dayjs(value.end).set("date", 1).toDate()
+    } else if (value.start) {
+      month = dayjs(value.start).set("date", 1).toDate()
     }
   }
 
@@ -463,9 +457,9 @@ export const useCalendar = <
         defaultMonth = dayjs(minDate).set("date", 1).toDate()
 
       if (valueProp) {
-        defaultMonth = getAdjustedMonth(valueProp, defaultMonth, range)
+        defaultMonth = getAdjustedMonth(valueProp, defaultMonth)
       } else if (defaultValue) {
-        defaultMonth = getAdjustedMonth(defaultValue, defaultMonth, range)
+        defaultMonth = getAdjustedMonth(defaultValue, defaultMonth)
       }
 
       return defaultMonth
@@ -614,8 +608,8 @@ export const useCalendar = <
   }, [])
 
   useUpdateEffect(() => {
-    setMonth((prev) => getAdjustedMonth(value, prev, range))
-  }, [value, range])
+    setMonth((prev) => getAdjustedMonth(value, prev))
+  }, [value])
 
   const getRootProps: PropGetter = useCallback(
     (props = {}) => ({

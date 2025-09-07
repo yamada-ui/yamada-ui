@@ -618,6 +618,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
       placeholder: hasValues ? undefined : placeholder,
       spellCheck: false,
       value: inputValue,
+      ...dataProps,
       ...props,
       onBlur: handlerAll(props.onBlur, onBlur),
       onChange: handlerAll(props.onChange, onInputChange),
@@ -626,6 +627,7 @@ export const useAutocomplete = <Multiple extends boolean = false>(
       onMouseDown: handlerAll(props.onMouseDown, onMouseDown),
     }),
     [
+      dataProps,
       focused,
       hasValues,
       inputValue,

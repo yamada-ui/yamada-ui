@@ -6,6 +6,7 @@ import { Indicator } from "../indicator"
 import { Text } from "../text"
 import { Wrap } from "../wrap"
 import { Calendar } from "./"
+import "dayjs/locale/ja"
 
 type Story = StoryFn<typeof Calendar.Root>
 
@@ -52,10 +53,10 @@ export const Shape: Story = () => {
       {(_, row, key) => (
         <Calendar.Root
           key={key}
-          defaultValue={[
-            new Date(),
-            new Date(new Date().setDate(new Date().getDate() + 4)),
-          ]}
+          defaultValue={{
+            end: new Date(new Date().setDate(new Date().getDate() + 4)),
+            start: new Date(),
+          }}
           range
           shape={row}
         />
@@ -112,11 +113,11 @@ export const DisabledDays: Story = () => {
 }
 
 export const Multiple: Story = () => {
-  return <Calendar.Root defaultValue={[]} />
+  return <Calendar.Root multiple />
 }
 
 export const Max: Story = () => {
-  return <Calendar.Root defaultValue={[]} max={3} />
+  return <Calendar.Root max={3} multiple />
 }
 
 export const Range: Story = () => {

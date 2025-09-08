@@ -67,7 +67,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   return (
     <For each={["thick", "thin"] as const}>
       {(variant, index) => (

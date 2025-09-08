@@ -199,7 +199,7 @@
         "required": false
       },
       "defaultValue": {
-        "type": "Y",
+        "type": "Multiple extends true ? string[] : string",
         "description": "The initial value of the select.",
         "required": false
       },
@@ -297,7 +297,7 @@
         "required": false
       },
       "multiple": {
-        "type": "boolean",
+        "type": "Multiple",
         "defaultValue": "false",
         "description": "If `true`, the select will be multiple.",
         "required": false
@@ -308,7 +308,7 @@
         "required": false
       },
       "onChange": {
-        "type": "(value: Y) => void",
+        "type": "(value: Multiple extends true ? string[] : string) => void",
         "description": "The callback invoked when value state changes.",
         "required": false
       },
@@ -331,6 +331,18 @@
         "type": "boolean",
         "defaultValue": "true",
         "description": "If `true`, the combobox will be opened when click on the field.",
+        "required": false
+      },
+      "openOnEnter": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the combobox will be opened when enter is pressed.",
+        "required": false
+      },
+      "openOnSpace": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the combobox will be opened when space is pressed.",
         "required": false
       },
       "optionProps": {
@@ -387,6 +399,17 @@
         "description": "Props for root element.",
         "required": false
       },
+      "selectFocusRef": {
+        "type": "RefObject<HTMLElement | null>",
+        "description": "The `ref` of the element that should receive focus when selected.",
+        "required": false
+      },
+      "selectOnSpace": {
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "If `true`, the item will be selected when space is pressed.",
+        "required": false
+      },
       "separator": {
         "type": "string",
         "defaultValue": "\",\"",
@@ -400,13 +423,19 @@
         "required": false
       },
       "value": {
-        "type": "Y",
+        "type": "Multiple extends true ? string[] : string",
         "description": "The value of the select.",
         "required": false
       },
       "whileElementsMounted": {
         "type": "(reference: HTMLButtonElement, floating: HTMLElement, update: () => void) => () => void",
         "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
+        "required": false
+      },
+      "wrap": {
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "If `true`, wrap the value text.",
         "required": false
       }
     },
@@ -632,7 +661,7 @@
       "required": false
     },
     "defaultValue": {
-      "type": "Y",
+      "type": "Multiple extends true ? string[] : string",
       "description": "The initial value of the select.",
       "required": false
     },
@@ -730,7 +759,7 @@
       "required": false
     },
     "multiple": {
-      "type": "boolean",
+      "type": "Multiple",
       "defaultValue": "false",
       "description": "If `true`, the select will be multiple.",
       "required": false
@@ -741,7 +770,7 @@
       "required": false
     },
     "onChange": {
-      "type": "(value: Y) => void",
+      "type": "(value: Multiple extends true ? string[] : string) => void",
       "description": "The callback invoked when value state changes.",
       "required": false
     },
@@ -764,6 +793,18 @@
       "type": "boolean",
       "defaultValue": "true",
       "description": "If `true`, the combobox will be opened when click on the field.",
+      "required": false
+    },
+    "openOnEnter": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the combobox will be opened when enter is pressed.",
+      "required": false
+    },
+    "openOnSpace": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the combobox will be opened when space is pressed.",
       "required": false
     },
     "optionProps": {
@@ -820,6 +861,17 @@
       "description": "Props for root element.",
       "required": false
     },
+    "selectFocusRef": {
+      "type": "RefObject<HTMLElement | null>",
+      "description": "The `ref` of the element that should receive focus when selected.",
+      "required": false
+    },
+    "selectOnSpace": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the item will be selected when space is pressed.",
+      "required": false
+    },
     "separator": {
       "type": "string",
       "defaultValue": "\",\"",
@@ -833,13 +885,19 @@
       "required": false
     },
     "value": {
-      "type": "Y",
+      "type": "Multiple extends true ? string[] : string",
       "description": "The value of the select.",
       "required": false
     },
     "whileElementsMounted": {
       "type": "(reference: HTMLButtonElement, floating: HTMLElement, update: () => void) => () => void",
       "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
+      "required": false
+    },
+    "wrap": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, wrap the value text.",
       "required": false
     }
   },

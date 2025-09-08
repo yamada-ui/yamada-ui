@@ -6,7 +6,415 @@ source: components/popover
 style: components/popover/popover.style.ts
 ---
 
+```tsx preview
+<Popover.Root>
+  <Popover.Trigger>
+    <Button>Click Me</Button>
+  </Popover.Trigger>
+
+  <Popover.Content>
+    <Popover.Header>空条承太郎</Popover.Header>
+    <Popover.Body>やれやれだぜ</Popover.Body>
+  </Popover.Content>
+</Popover.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Popover } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Popover } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Popover } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Popover.Root>
+  <Popover.Anchor />
+  <Popover.Trigger />
+  <Popover.Content>
+    <Popover.Header />
+    <Popover.Body />
+    <Popover.Footer />
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Change Size
+
+```tsx preview
+<Wrap gap="md">
+  <For each={["xs", "sm", "md", "lg"]}>
+    {(size) => (
+      <Popover.Root key={size} size={size}>
+        <Popover.Trigger>
+          <Button>Size ({size})</Button>
+        </Popover.Trigger>
+
+        <Popover.Content>
+          <Popover.Header>花京院典明</Popover.Header>
+          <Popover.Body>レロレロレロレロレロレロ</Popover.Body>
+        </Popover.Content>
+      </Popover.Root>
+    )}
+  </For>
+</Wrap>
+```
+
+### Add Footer
+
+```tsx preview
+<Popover.Root>
+  <Popover.Trigger>
+    <Button>Click Me</Button>
+  </Popover.Trigger>
+
+  <Popover.Content>
+    <Popover.Header>ジョルノ・ジョバァーナ</Popover.Header>
+    <Popover.Body>僕には夢がある</Popover.Body>
+    <Popover.Footer>黄金の風</Popover.Footer>
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Display Popover on Different Element
+
+To display a popover on a different element, use `Popover.Anchor`.
+
+```tsx preview
+<Popover.Root>
+  <Wrap gap="md">
+    <Popover.Anchor>
+      <Center borderWidth="1px" h="10" px="3" rounded="l2">
+        Here Display Popover
+      </Center>
+    </Popover.Anchor>
+
+    <Popover.Trigger>
+      <Button>Click Me</Button>
+    </Popover.Trigger>
+  </Wrap>
+
+  <Popover.Content>
+    <Popover.Header>ジョセフ・ジョースター</Popover.Header>
+    <Popover.Body>お前の次のセリフは…「そんなバカな！」と言う</Popover.Body>
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Change Animation
+
+To change the animation, set `animationScheme` to `"block-start"`, `"inline-end"`, etc. By default, `"scale"` is set.
+
+```tsx preview
+<Wrap gap="md">
+  <For
+    each={["scale", "block-start", "inline-start", "inline-end", "block-end"]}
+  >
+    {(animationScheme) => (
+      <Popover.Root key={animationScheme} animationScheme={animationScheme}>
+        <Popover.Trigger>
+          <Button>{toTitleCase(animationScheme)}</Button>
+        </Popover.Trigger>
+
+        <Popover.Content>
+          <Popover.Header>ブローノ・ブチャラティ</Popover.Header>
+          <Popover.Body>アリーヴェデルチ（さよならだ）</Popover.Body>
+        </Popover.Content>
+      </Popover.Root>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Placement
+
+To change the placement, set `placement` to `"start"`, `"end-end"`, etc. By default, `"end"` is set.
+
+```tsx preview
+<Wrap gap="md">
+  <For
+    each={["start", "start-start", "start-end", "end", "end-start", "end-end"]}
+  >
+    {(placement) => (
+      <Popover.Root key={placement} placement={placement}>
+        <Popover.Trigger>
+          <Button>{toTitleCase(placement)}</Button>
+        </Popover.Trigger>
+
+        <Popover.Content>
+          <Popover.Header>ディアボロ</Popover.Header>
+          <Popover.Body>これが…レクイエム…だ</Popover.Body>
+        </Popover.Content>
+      </Popover.Root>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Duration
+
+To change the duration, set `duration` to a number (seconds).
+
+```tsx preview
+<Popover.Root duration={0.7}>
+  <Popover.Trigger>
+    <Button>Click Me</Button>
+  </Popover.Trigger>
+
+  <Popover.Content>
+    <Popover.Header>吉良吉影</Popover.Header>
+    <Popover.Body>僕は平穏に暮らしたいだけなんだ</Popover.Body>
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Change Offset
+
+To change the offset, set `gutter` or `offset` to a value.
+
+```tsx preview
+<HStack>
+  <Popover.Root gutter={32}>
+    <Popover.Trigger>
+      <Button>Gutter</Button>
+    </Popover.Trigger>
+
+    <Popover.Content>
+      <Popover.Header>東方仗助</Popover.Header>
+      <Popover.Body>グレートだぜ</Popover.Body>
+    </Popover.Content>
+  </Popover.Root>
+
+  <Popover.Root offset={[16, 16]}>
+    <Popover.Trigger>
+      <Button>Offset</Button>
+    </Popover.Trigger>
+    <Popover.Content>
+      <Popover.Header>東方仗助</Popover.Header>
+      <Popover.Body>グレートだぜ</Popover.Body>
+    </Popover.Content>
+  </Popover.Root>
+</HStack>
+```
+
+### Use Modal
+
+To use modal, set `modal` to `true`. This enables scroll blocking and focus trapping.
+
+```tsx preview
+<Popover.Root modal>
+  <Popover.Trigger>
+    <Button>Open Profile</Button>
+  </Popover.Trigger>
+
+  <Popover.Content>
+    <Popover.Header>フーゴ・パンナコッタ</Popover.Header>
+    <Popover.Body>
+      <Field.Root label="スタンド名">
+        <Input placeholder="パープル・ヘイズ" />
+      </Field.Root>
+
+      <Field.Root label="能力">
+        <Input type="text" placeholder="ウイルス散布" />
+      </Field.Root>
+    </Popover.Body>
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Disable
+
+To disable the popover, set `disabled` to `true`.
+
+```tsx preview
+<Popover.Root disabled>
+  <Popover.Trigger>
+    <Button>Click Me</Button>
+  </Popover.Trigger>
+
+  <Popover.Content>
+    <Popover.Header>虹村億泰</Popover.Header>
+    <Popover.Body>おい、仗助！</Popover.Body>
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Disable Close on Outside Click
+
+To disable closing when clicking outside, set `closeOnBlur` to `false`.
+
+```tsx preview
+<Popover.Root closeOnBlur={false}>
+  <Popover.Trigger>
+    <Button>No Close on Blur</Button>
+  </Popover.Trigger>
+
+  <Popover.Content>
+    <Popover.Header>イギー</Popover.Header>
+    <Popover.Body>んがくく（犬の鳴き声）</Popover.Body>
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Disable Close on ESC Key
+
+To disable closing when pressing the ESC key, set `closeOnEsc` to `false`.
+
+```tsx preview
+<Popover.Root closeOnEsc={false}>
+  <Popover.Trigger>
+    <Button>No Close on ESC</Button>
+  </Popover.Trigger>
+
+  <Popover.Content>
+    <Popover.Header>ディオ・ブランドー</Popover.Header>
+    <Popover.Body>無駄無駄無駄！</Popover.Body>
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Disable Auto Focus
+
+To disable automatic focus when the popover opens, set `autoFocus` to `false`.
+
+```tsx preview
+<Popover.Root autoFocus={false}>
+  <Popover.Trigger>
+    <Button>No Auto Focus</Button>
+  </Popover.Trigger>
+
+  <Popover.Content>
+    <Popover.Header>岸辺露伴</Popover.Header>
+    <Popover.Body>
+      <Field.Root label="職業">
+        <Input placeholder="漫画家" />
+      </Field.Root>
+    </Popover.Body>
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Set Initial Focus
+
+To set the initial focus, pass a `Ref` to `initialFocusRef`.
+
+```tsx preview functional client
+const inputRef = useRef<HTMLInputElement>(null)
+
+return (
+  <Popover.Root initialFocusRef={inputRef}>
+    <Popover.Trigger>
+      <Button>Focus Email Input</Button>
+    </Popover.Trigger>
+
+    <Popover.Content>
+      <Popover.Header>ナランチャ・ギルガ</Popover.Header>
+      <Popover.Body>
+        <Field.Root label="スタンド名">
+          <Input placeholder="エアロスミス" />
+        </Field.Root>
+
+        <Field.Root label="好きなもの">
+          <Input ref={inputRef} type="text" placeholder="飛行機とピザ" />
+        </Field.Root>
+      </Popover.Body>
+    </Popover.Content>
+  </Popover.Root>
+)
+```
+
+### Block Scroll
+
+To block scrolling while the popover is open, set `blockScrollOnMount` to `true`.
+
+```tsx preview
+<Popover.Root blockScrollOnMount>
+  <Popover.Trigger>
+    <Button>Block Scroll</Button>
+  </Popover.Trigger>
+
+  <Popover.Content>
+    <Popover.Header>岸辺露伴</Popover.Header>
+    <Popover.Body>だが断る</Popover.Body>
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Close on Scroll
+
+To automatically close the popover when scrolling, set `closeOnScroll` to `true`.
+
+```tsx preview
+<Popover.Root closeOnScroll>
+  <Popover.Trigger>
+    <Button>Close on Scroll</Button>
+  </Popover.Trigger>
+
+  <Popover.Content>
+    <Popover.Header>ギアッチョ</Popover.Header>
+    <Popover.Body>根掘り葉掘り聞きやがって！</Popover.Body>
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Nest Popovers
+
+```tsx preview
+<Popover.Root>
+  <Popover.Trigger>
+    <Button>Open Parent</Button>
+  </Popover.Trigger>
+
+  <Popover.Content>
+    <Popover.Header>花京院典明</Popover.Header>
+    <Popover.Body>
+      <Text>やはりエジプトか……いつ出発する？</Text>
+
+      <Popover.Root>
+        <Popover.Trigger>
+          <Button>わたしも同行する</Button>
+        </Popover.Trigger>
+
+        <Popover.Content>
+          <Popover.Header>空条承太郎</Popover.Header>
+          <Popover.Body>花京院</Popover.Body>
+        </Popover.Content>
+      </Popover.Root>
+    </Popover.Body>
+  </Popover.Content>
+</Popover.Root>
+```
+
+### Control
+
+```tsx preview functional client
+const { open, onClose, onOpen } = useDisclosure()
+
+return (
+  <Popover.Root open={open} onClose={onClose} onOpen={onOpen}>
+    <Popover.Trigger>
+      <Button>Click Me</Button>
+    </Popover.Trigger>
+
+    <Popover.Content>
+      <Popover.Header>スピードワゴン</Popover.Header>
+      <Popover.Body>
+        こいつはくせえッー！ ゲロ以下のにおいがプンプンするぜッーーーーッ!!
+      </Popover.Body>
+    </Popover.Content>
+  </Popover.Root>
+)
+```
 
 ## Props
 

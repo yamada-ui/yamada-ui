@@ -129,7 +129,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   return (
     <>
       <For each={["outline", "solid"] as const}>

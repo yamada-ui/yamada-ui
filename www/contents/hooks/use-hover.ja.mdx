@@ -5,4 +5,34 @@ storybook: hooks-usehover--basic
 source: hooks/use-hover
 ---
 
+```tsx preview functional client
+const { hovered, ref } = useHover()
+
+return (
+  <Box ref={ref} w="full" bg="red.500" p="md" rounded="md" color="white">
+    {hovered ? "I am hovered" : "Put mouse over me please"}
+  </Box>
+)
+```
+
 ### 使い方
+
+:::code-group
+
+```tsx [package]
+import { useHover } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useHover } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useHover } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { hovered, ref } = useHover()
+```

@@ -204,7 +204,7 @@ export const Disabled: Story = () => {
   )
 }
 
-export const Readonly: Story = () => {
+export const ReadOnly: Story = () => {
   const items = useMemo<RadioGroup.RootProps["items"]>(
     () => [
       { defaultChecked: true, label: "織田信長", value: "1" },

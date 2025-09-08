@@ -9,7 +9,7 @@ source: hooks/use-disclosure
 const { open, onOpen, onClose } = useDisclosure()
 
 return (
-  <VStack align="flex-start">
+  <>
     <Button onClick={onOpen}>Open Modal</Button>
 
     <Modal.Root
@@ -23,7 +23,7 @@ return (
       onClose={onClose}
       onSuccess={onClose}
     />
-  </VStack>
+  </>
 )
 ```
 
@@ -64,7 +64,7 @@ const { open, onClose, onOpen } = useDisclosure<string, string>({
 })
 
 return (
-  <VStack align="flex-start">
+  <>
     <Button onClick={() => onOpen("This is arg.")}>Open Modal</Button>
 
     <Modal.Root
@@ -78,7 +78,7 @@ return (
       onClose={() => onClose("This is arg.")}
       onSuccess={() => onClose("This is arg.")}
     />
-  </VStack>
+  </>
 )
 ```
 
@@ -96,7 +96,7 @@ const { open, onClose, onOpen } = useDisclosure<string, string>({
 })
 
 return (
-  <VStack align="flex-start">
+  <>
     <Button onClick={() => onOpen("This is arg.")}>Open Modal</Button>
 
     <Modal.Root
@@ -110,6 +110,6 @@ return (
       onClose={() => onClose("This is arg.")}
       onSuccess={() => onClose("This is arg.")}
     />
-  </VStack>
+  </>
 )
 ```

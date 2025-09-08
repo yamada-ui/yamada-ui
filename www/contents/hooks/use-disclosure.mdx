@@ -5,4 +5,111 @@ storybook: hooks-usedisclosure--basic
 source: hooks/use-disclosure
 ---
 
-### Usage
+```tsx preview functional client
+const { open, onOpen, onClose } = useDisclosure()
+
+return (
+  <>
+    <Button onClick={onOpen}>Open Dialog</Button>
+
+    <Modal.Root
+      body="だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！"
+      cancel="わけない"
+      open={open}
+      success="わける"
+      title="孫悟空"
+      onCancel={onClose}
+      onClose={onClose}
+      onSuccess={onClose}
+    />
+  </>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useDisclosure } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useDisclosure } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useDisclosure } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { open, onOpen, onClose, onToggle } = useDisclosure()
+```
+
+### Using Callback Functions
+
+To use callback functions, assign a function to `onOpen` or `onClose`. This is useful for executing APIs or other logic before opening components such as [Modal](./docs/components/modal).
+
+```tsx preview functional client
+const { open, onClose, onOpen } = useDisclosure<string, string>({
+  onClose: (value) => {
+    console.log("onClose:", value)
+  },
+  onOpen: (value) => {
+    console.log("onOpen:", value)
+  },
+})
+
+return (
+  <>
+    <Button onClick={() => onOpen("This is arg")}>Open Dialog</Button>
+
+    <Modal.Root
+      body="だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！"
+      cancel="わけない"
+      open={open}
+      success="わける"
+      title="孫悟空"
+      onCancel={() => onClose("This is arg")}
+      onClose={() => onClose("This is arg")}
+      onSuccess={() => onClose("This is arg")}
+    />
+  </>
+)
+```
+
+By default, the callback functions are executed before `onOpen` or `onClose`. If you want the callbacks to be executed after `onOpen` or `onClose`, set the `timing` option to `"after"`.
+
+```tsx preview functional client
+const { open, onClose, onOpen } = useDisclosure<string, string>({
+  onClose: (value) => {
+    console.log("onClose:", value)
+  },
+  onOpen: (value) => {
+    console.log("onOpen:", value)
+  },
+  timing: "after",
+})
+
+return (
+  <>
+    <Button onClick={() => onOpen("This is arg")}>Open Dialog</Button>
+
+    <Modal.Root
+      body="だ…大地よ海よ　そして生きているすべての　みんな…
+      このオラにほんのちょっとずつだけ元気をわけてくれ…！！！"
+      cancel="わけない"
+      open={open}
+      success="わける"
+      title="孫悟空"
+      onCancel={() => onClose("This is arg")}
+      onClose={() => onClose("This is arg")}
+      onSuccess={() => onClose("This is arg")}
+    />
+  </>
+)
+```

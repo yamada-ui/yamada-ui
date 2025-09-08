@@ -101,7 +101,7 @@ export interface NoticeConfig {
   /**
    * The number of `ms` the notice will continue to be displayed.
    *
-   * If `null`, the notice will continue to display.
+   * If `null` or `Infinity, the notice will continue to display.
    * Please use in conjunction with `closable`.
    *
    * @default 5000
@@ -109,6 +109,8 @@ export interface NoticeConfig {
   duration?: null | number
   /**
    * The maximum value at which notice will be displayed.
+   *
+   * @default 3
    */
   limit?: number
   /**

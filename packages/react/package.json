@@ -94,7 +94,7 @@
     "clean-package": "2.2.0",
     "react-hook-form": "^7.62.0",
     "react-icons": "^5.5.0",
-    "use-mask-input": "^3.5.0"
+    "use-mask-input": "3.5.0"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",

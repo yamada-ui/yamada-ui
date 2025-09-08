@@ -387,8 +387,8 @@ importers:
         specifier: ^5.5.0
         version: 5.5.0(react@19.1.1)
       use-mask-input:
-        specifier: ^3.5.1
-        version: 3.5.1(react-dom@19.1.1)(react@19.1.1)
+        specifier: 3.5.0
+        version: 3.5.0(react-dom@19.1.1)(react@19.1.1)
 
   packages/utils:
     dependencies:
@@ -14439,8 +14439,8 @@ packages:
       react: 19.1.1
     dev: false
 
-  /use-mask-input@3.5.1(react-dom@19.1.1)(react@19.1.1):
-    resolution: {integrity: sha512-ml/B71s8oRdyB2taW8Ii6lGwr28VtHwqdkA1YAdQPHz1Xw/WP9/lE/gsdSgLf/sUmKMtvl97Z3c5wq7HWaKHlg==, tarball: https://registry.npmjs.org/use-mask-input/-/use-mask-input-3.5.1.tgz}
+  /use-mask-input@3.5.0(react-dom@19.1.1)(react@19.1.1):
+    resolution: {integrity: sha512-4hsAv7HcgL0E0tX4pckuuYI6BbMfWlsbHR2wKoI16fueSJHvtmTUP+se1bOOjijY6pH74DD6Q9OoH+5n4dfZwA==, tarball: https://registry.npmjs.org/use-mask-input/-/use-mask-input-3.5.0.tgz}
     engines: {node: '>=16', npm: '>=7'}
     peerDependencies:
       react: ^19.0.0

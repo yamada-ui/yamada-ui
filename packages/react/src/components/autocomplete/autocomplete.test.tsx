@@ -72,7 +72,7 @@ describe("<Autocomplete />", () => {
 
     expect(screen.getByTestId("root").tagName).toBe("DIV")
     expect(screen.getByTestId("icon").tagName).toBe("DIV")
-    expect(field.tagName).toBe("INPUT")
+    expect(field.tagName).toBe("DIV")
     expect(option.tagName).toBe("DIV")
     expect(option.children[0]?.tagName).toBe("DIV")
     expect(group.tagName).toBe("DIV")

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://v2.yamada-ui.com/registry/v2/schema.json",
+  "dependencies": {
+    "components": [],
+    "externals": [],
+    "hooks": [],
+    "providers": []
+  },
+  "dependents": { "components": ["date-picker"], "hooks": [], "providers": [] },
+  "section": "hooks",
+  "sources": [
+    {
+      "name": "index.tsx",
+      "content": "\"use client\"\n\nimport { useEffect, useMemo, useRef } from \"react\"\n\nexport interface UseFieldSizingProps {\n  value?: string\n}\n\nexport const useFieldSizing = <Y extends HTMLElement>({\n  value = \"\",\n}: UseFieldSizingProps) => {\n  const ref = useRef<Y>(null)\n  const textRef = useRef<HTMLSpanElement>(null)\n  const text = useMemo(\n    () => (\n      <span\n        ref={textRef}\n        style={{\n          opacity: 0,\n          overflow: \"hidden\",\n          position: \"absolute\",\n          whiteSpace: \"nowrap\",\n          zIndex: -1,\n        }}\n        aria-hidden\n      >\n        {value}\n      </span>\n    ),\n    [value],\n  )\n\n  useEffect(() => {\n    if (!textRef.current) return\n\n    const { width } = textRef.current.getBoundingClientRect()\n\n    if (ref.current) ref.current.style.width = `${width}px`\n  }, [value])\n\n  return { ref, text }\n}\n\nexport type UseFieldSizingReturn = ReturnType<typeof useFieldSizing>\n"
+    }
+  ]
+}

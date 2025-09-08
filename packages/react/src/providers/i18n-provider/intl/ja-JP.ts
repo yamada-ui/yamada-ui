@@ -32,6 +32,10 @@ export default {
   closeButton: {
     Close: "閉じる",
   },
+  datePicker: {
+    "Clear value": "値を消去する",
+    "MMMM DD, YYYY": "YYYY/MM/DD",
+  },
   hueSlider: {
     Blue: "青",
     Cyan: "シアン",

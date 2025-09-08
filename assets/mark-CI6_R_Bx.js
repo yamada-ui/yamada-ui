@@ -1,0 +1,1 @@
+import{o as t,p as e}from"./iframe-6Bjnmk15.js";const o=t({base:{bg:"transparent",whiteSpace:"nowrap"},variants:{accent:{color:"colorScheme.solid"},solid:{layerStyle:"solid"},subtle:{layerStyle:"subtle"},text:{fontWeight:"semibold"}},defaultProps:{variant:"subtle"}}),{withContext:a}=e("mark",o),s=a("mark")();export{s as M};

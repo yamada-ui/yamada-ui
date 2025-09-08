@@ -1,0 +1,127 @@
+import{d as re,U as ne,r as s,b as f,h as w,m as oe,H as ae,g as se,j as e,s as W,W as ce,C as J,J as k,T as ie,V as U}from"./iframe-6Bjnmk15.js";import{P as I}from"./props-table-ols_EFU2.js";import{u as X,C as G}from"./index.esm-B9t4C2Hk.js";import{u as le}from"./index-DWMqu5Gd.js";import{u as ue}from"./index-BYjVelZx.js";import{u as de}from"./use-field-props-CJllY30F.js";import{F as N}from"./for-DmT075i_.js";import{H as he}from"./h-stack-DkB3151u.js";import{B as Q}from"./button-CsD90Sgr.js";import{S as me,M as Se}from"./sun-icon-Bdr_Olcy.js";import"./preload-helper-D9Z9MdNV.js";import"./grid-BOPRDfru.js";import"./grid-item-b6_EoPjA.js";import"./flex-DoVac8e8.js";import"./heading-OelD6mpu.js";import"./button.style-BS6NiYW5.js";import"./use-ripple-DerRjSwg.js";import"./rings-B9NsMSz3.js";import"./createLucideIcon-dBwzvMsk.js";const pe=re({base:{label:{userSelect:"none"},root:{alignItems:"center",cursor:"pointer",display:"inline-flex",gap:"2",_readOnly:{layerStyle:"readOnly",pointerEvents:"none"},_disabled:{layerStyle:"disabled"}},thumb:{alignItems:"center",bg:"white",display:"inline-flex",justifyContent:"center",position:"absolute",rounded:"inherit",transitionDuration:"fast",transitionProperty:"background, transform",_checked:{transform:"translateX(100%)"}},track:{"--focus-ring-color":"{colorScheme.outline}",alignItems:"center",bg:"bg.muted",boxSizing:"content-box",display:"inline-flex",flexShrink:0,position:"relative",rounded:"full",transitionDuration:"fast",transitionProperty:"background",_peerFocusVisible:{...ne.outline}}},variants:{thin:{thumb:{boxShadow:"2xl",_checked:{bg:"colorScheme.solid"}},track:{"--focus-ring-offset":"4px",_checked:{bg:["colorScheme.muted","colorScheme.subtle"]}}},thick:{thumb:{_checked:{bg:"colorScheme.contrast"}},track:{p:"1",_checked:{bg:"colorScheme.solid"}}}},sizes:{sm:{label:{fontSize:"sm"},thumb:{boxSize:"3"},track:{w:"6"}},md:{label:{fontSize:"md"},thumb:{boxSize:"4"},track:{w:"8"}},lg:{label:{fontSize:"lg"},thumb:{boxSize:"5"},track:{w:"10"}}},props:{reverse:{false:{root:{flexDirection:"row"}},true:{root:{flexDirection:"row-reverse"}}},shape:{circle:{track:{rounded:"full"}},rounded:{thumb:{rounded:"l1"},track:{rounded:"l2"}},square:{track:{rounded:"0"}}}},compounds:[{css:{track:{h:"3"}},size:"sm",variant:"thick"},{css:{track:{h:"4"}},size:"md",variant:"thick"},{css:{track:{h:"5"}},size:"lg",variant:"thick"},{css:{track:{h:"2"}},size:"sm",variant:"thin"},{css:{track:{h:"3"}},size:"md",variant:"thin"},{css:{track:{h:"4"}},size:"lg",variant:"thin"}],defaultProps:{size:"md",variant:"thick",shape:"circle"}}),ke=(t={})=>{const r=s.useId(),{props:{id:o=r,ref:d,name:i,checked:u,checkOnEnter:h=!0,defaultChecked:R=!1,disabled:S,readOnly:p,required:b,value:_,onChange:B,...E},ariaProps:L,dataProps:l,eventProps:H}=de(t),m=!(p||S),M=s.useRef(null),[c,q]=ue({defaultValue:R,value:u}),A=s.useCallback(n=>{if(!m)return n.preventDefault();q(n.target.checked),B?.(n)},[B,q,m]),K=s.useCallback(n=>{m&&h&&n.key==="Enter"&&M.current?.click()},[m,h]),Y=s.useCallback((n={})=>({...l,htmlFor:o,"data-checked":f(c),...E,...n}),[c,E,o,l]),Z=s.useCallback((n={})=>({"data-checked":f(c),...l,...n}),[c,l]),$=s.useCallback((n={})=>({"data-checked":f(c),...l,...n}),[c,l]),ee=s.useCallback((n={})=>({...L,...l,id:o,type:"checkbox",name:i,style:ae.style,checked:c,disabled:S,readOnly:p,required:b,role:"switch",tabIndex:m?0:-1,value:_,...n,ref:oe(M,n.ref,d),onBlur:w(H.onBlur,n.onBlur),onChange:w(n.onChange,A),onFocus:w(H.onFocus,n.onFocus),onKeyDown:w(n.onKeyDown,K)}),[L,l,o,i,c,S,p,b,m,_,d,H,A,K]),te=s.useCallback((n={})=>({...l,"data-checked":f(c),...n}),[l,c]);return{checked:c,getInputProps:ee,getLabelProps:te,getRootProps:Y,getThumbProps:$,getTrackProps:Z}},{withContext:V,withProvider:be}=se("switch",pe),a=be(({children:t,icon:r,inputProps:o,labelProps:d,...i})=>{const{checked:u,getInputProps:h,getLabelProps:R,getRootProps:S,getThumbProps:p,getTrackProps:b}=ke(i);return e.jsxs(W.label,{...S(),children:[e.jsx(W.input,{"data-peer":!0,...h(o)}),e.jsx(we,{...b(),children:e.jsx(fe,{...p(),children:r&&ce(r)&&"on"in r?u?r.on:r.off:r})}),t?e.jsx(ge,{...R(d),children:t}):null]})},"root")(),fe=V("div","thumb")(),we=V("div","track")(),ge=V("span","label")(),Me={component:a,title:"Components / Switch"},g=()=>e.jsx(a,{children:"Switch"}),x=()=>e.jsx(I,{columns:["thick","thin"],rows:J,children:(t,r,o)=>e.jsx(a,{colorScheme:r,variant:t,defaultChecked:!0,children:"Switch"},o)}),C=()=>e.jsx(I,{columns:["sm","md","lg"],rows:J,children:(t,r,o)=>e.jsx(a,{colorScheme:r,size:t,defaultChecked:!0,children:"Switch"},o)}),y=()=>e.jsx(N,{each:["thick","thin"],children:(t,r)=>e.jsxs(s.Fragment,{children:[e.jsx(a,{variant:t,disabled:!0,children:k(t)}),e.jsx(a,{variant:t,defaultChecked:!0,disabled:!0,children:k(t)})]},r)}),j=()=>e.jsx(N,{each:["thick","thin"],children:(t,r)=>e.jsxs(s.Fragment,{children:[e.jsx(a,{variant:t,readOnly:!0,children:k(t)}),e.jsx(a,{variant:t,defaultChecked:!0,readOnly:!0,children:k(t)})]},r)}),v=()=>e.jsx(I,{variant:"stack",rows:["square","rounded","circle"],children:(t,r,o)=>e.jsx(s.Fragment,{children:e.jsx(a,{defaultChecked:!0,shape:r,children:k(r)})},o)}),F=()=>e.jsx(a,{reverse:!0,children:"Switch"}),P=()=>e.jsx(a,{size:"lg",icon:{off:e.jsx(Se,{fontSize:"sm"}),on:e.jsx(me,{fontSize:"sm"})},children:"Switch"}),z=()=>{const t=s.useId();return e.jsxs(he,{gap:"sm",children:[e.jsx(ie,{as:"label",htmlFor:t,userSelect:"none",children:"Please Click"}),e.jsx(a,{id:t})]})},D=()=>{const[t,{toggle:r}]=le(!1);return e.jsx(a,{checked:t,onChange:r,children:"Custom control"})},T=()=>{const{control:t,handleSubmit:r,watch:o}=X(),d=i=>console.log("submit:",i);return console.log("watch:",o()),e.jsxs(U,{as:"form",onSubmit:r(d),children:[e.jsx(G,{name:"switch",control:t,render:({field:{value:i,...u}})=>e.jsx(a,{checked:i,...u,children:"Dark mode"})}),e.jsx(Q,{type:"submit",alignSelf:"flex-end",children:"Submit"})]})},O=()=>{const t={switch:!0},{control:r,handleSubmit:o,watch:d}=X({defaultValues:t}),i=u=>console.log("submit:",u);return console.log("watch:",d()),e.jsxs(U,{as:"form",onSubmit:o(i),children:[e.jsx(G,{name:"switch",control:r,render:({field:{value:u,...h}})=>e.jsx(a,{checked:u,...h,children:"Dark mode"})}),e.jsx(Q,{type:"submit",alignSelf:"flex-end",children:"Submit"})]})};g.parameters={...g.parameters,docs:{...g.parameters?.docs,source:{originalSource:`() => {
+  return <Switch>Switch</Switch>;
+}`,...g.parameters?.docs?.source}}};x.parameters={...x.parameters,docs:{...x.parameters?.docs,source:{originalSource:`() => {
+  return <PropsTable columns={["thick", "thin"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => <Switch key={key} colorScheme={row} variant={column} defaultChecked>
+          Switch
+        </Switch>}
+    </PropsTable>;
+}`,...x.parameters?.docs?.source}}};C.parameters={...C.parameters,docs:{...C.parameters?.docs,source:{originalSource:`() => {
+  return <PropsTable columns={["sm", "md", "lg"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => <Switch key={key} colorScheme={row} size={column} defaultChecked>
+          Switch
+        </Switch>}
+    </PropsTable>;
+}`,...C.parameters?.docs?.source}}};y.parameters={...y.parameters,docs:{...y.parameters?.docs,source:{originalSource:`() => {
+  return <For each={["thick", "thin"] as const}>
+      {(variant, index) => <Fragment key={index}>
+          <Switch variant={variant} disabled>
+            {toTitleCase(variant)}
+          </Switch>
+
+          <Switch variant={variant} defaultChecked disabled>
+            {toTitleCase(variant)}
+          </Switch>
+        </Fragment>}
+    </For>;
+}`,...y.parameters?.docs?.source}}};j.parameters={...j.parameters,docs:{...j.parameters?.docs,source:{originalSource:`() => {
+  return <For each={["thick", "thin"] as const}>
+      {(variant, index) => <Fragment key={index}>
+          <Switch variant={variant} readOnly>
+            {toTitleCase(variant)}
+          </Switch>
+
+          <Switch variant={variant} defaultChecked readOnly>
+            {toTitleCase(variant)}
+          </Switch>
+        </Fragment>}
+    </For>;
+}`,...j.parameters?.docs?.source}}};v.parameters={...v.parameters,docs:{...v.parameters?.docs,source:{originalSource:`() => {
+  return <PropsTable variant="stack" rows={["square", "rounded", "circle"]}>
+      {(_, row, key) => <Fragment key={key}>
+          <Switch defaultChecked shape={row}>
+            {toTitleCase(row)}
+          </Switch>
+        </Fragment>}
+    </PropsTable>;
+}`,...v.parameters?.docs?.source}}};F.parameters={...F.parameters,docs:{...F.parameters?.docs,source:{originalSource:`() => {
+  return <Switch reverse>Switch</Switch>;
+}`,...F.parameters?.docs?.source}}};P.parameters={...P.parameters,docs:{...P.parameters?.docs,source:{originalSource:`() => {
+  return <Switch size="lg" icon={{
+    off: <MoonIcon fontSize="sm" />,
+    on: <SunIcon fontSize="sm" />
+  }}>
+      Switch
+    </Switch>;
+}`,...P.parameters?.docs?.source}}};z.parameters={...z.parameters,docs:{...z.parameters?.docs,source:{originalSource:`() => {
+  const id = useId();
+  return <HStack gap="sm">
+      <Text as="label" htmlFor={id} userSelect="none">
+        Please Click
+      </Text>
+
+      <Switch id={id} />
+    </HStack>;
+}`,...z.parameters?.docs?.source}}};D.parameters={...D.parameters,docs:{...D.parameters?.docs,source:{originalSource:`() => {
+  const [checked, {
+    toggle
+  }] = useBoolean(false);
+  return <Switch checked={checked} onChange={toggle}>
+      Custom control
+    </Switch>;
+}`,...D.parameters?.docs?.source}}};T.parameters={...T.parameters,docs:{...T.parameters?.docs,source:{originalSource:`() => {
+  interface Data {
+    switch: boolean;
+  }
+  const {
+    control,
+    handleSubmit,
+    watch
+  } = useForm<Data>();
+  const onSubmit: SubmitHandler<Data> = data => console.log("submit:", data);
+  console.log("watch:", watch());
+  return <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+      <Controller name="switch" control={control} render={({
+      field: {
+        value,
+        ...rest
+      }
+    }) => <Switch checked={value} {...rest}>
+            Dark mode
+          </Switch>} />
+
+      <Button type="submit" alignSelf="flex-end">
+        Submit
+      </Button>
+    </VStack>;
+}`,...T.parameters?.docs?.source}}};O.parameters={...O.parameters,docs:{...O.parameters?.docs,source:{originalSource:`() => {
+  interface Data {
+    switch: boolean;
+  }
+  const defaultValues: Data = {
+    switch: true
+  };
+  const {
+    control,
+    handleSubmit,
+    watch
+  } = useForm<Data>({
+    defaultValues
+  });
+  const onSubmit: SubmitHandler<Data> = data => console.log("submit:", data);
+  console.log("watch:", watch());
+  return <VStack as="form" onSubmit={handleSubmit(onSubmit)}>
+      <Controller name="switch" control={control} render={({
+      field: {
+        value,
+        ...rest
+      }
+    }) => <Switch checked={value} {...rest}>
+            Dark mode
+          </Switch>} />
+
+      <Button type="submit" alignSelf="flex-end">
+        Submit
+      </Button>
+    </VStack>;
+}`,...O.parameters?.docs?.source}}};const qe=["Basic","Variant","Size","Disabled","ReadOnly","Shape","Reverse","Icon","CustomLabel","CustomControl","ReactHookForm","ReactHookFormWithDefaultValue"];export{g as Basic,D as CustomControl,z as CustomLabel,y as Disabled,P as Icon,T as ReactHookForm,O as ReactHookFormWithDefaultValue,j as ReadOnly,F as Reverse,v as Shape,C as Size,x as Variant,qe as __namedExportsOrder,Me as default};

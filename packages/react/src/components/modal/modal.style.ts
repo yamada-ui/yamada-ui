@@ -17,7 +17,7 @@ export const modalStyle = defineComponentSlotStyle({
       top: "md",
     },
     content: {
-      bg: "bg.panel",
+      bg: ["bg", "bg.panel"],
       borderColor: "border.subtle",
       borderWidth: "1px",
       boxShadow: "lg",

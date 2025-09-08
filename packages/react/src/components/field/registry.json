@@ -10,6 +10,7 @@
     "components": [
       "autocomplete",
       "checkbox",
+      "date-picker",
       "dropzone",
       "editable",
       "fieldset",

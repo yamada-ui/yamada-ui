@@ -142,10 +142,10 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1
       react:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1(react@19.1.1)
       rimraf:
         specifier: ^6.0.1
@@ -338,10 +338,10 @@ importers:
         specifier: 12.18.1
         version: 12.18.1(react-dom@19.1.1)(react@19.1.1)
       react:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1(react@19.1.1)
       react-dropzone:
         specifier: ^14.3.8
@@ -400,7 +400,7 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       react:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1
 
   packages/workspace:
@@ -481,10 +481,10 @@ importers:
         specifier: ^3.6.2
         version: 3.6.2
       react:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1(react@19.1.1)
       typescript-eslint:
         specifier: ^8.42.0
@@ -505,10 +505,10 @@ importers:
         specifier: ^15.5.2
         version: 15.5.2(@babel/core@7.28.4)(react-dom@19.1.1)(react@19.1.1)
       react:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1(react@19.1.1)
     devDependencies:
       '@types/node':
@@ -533,10 +533,10 @@ importers:
         specifier: ^15.5.2
         version: 15.5.2(@babel/core@7.28.4)(react-dom@19.1.1)(react@19.1.1)
       react:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1(react@19.1.1)
     devDependencies:
       '@types/node':
@@ -570,10 +570,10 @@ importers:
         specifier: ^5.1.30
         version: 5.1.30
       react:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1(react@19.1.1)
     devDependencies:
       '@remix-run/dev':
@@ -601,10 +601,10 @@ importers:
         specifier: workspace:*
         version: link:../../packages/react
       react:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1(react@19.1.1)
     devDependencies:
       '@types/node':
@@ -659,10 +659,10 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6(next@15.5.2)(react@19.1.1)(typescript@5.9.2)
       react:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.0.0
         version: 19.1.1(react@19.1.1)
       react-hook-form:
         specifier: ^7.62.0

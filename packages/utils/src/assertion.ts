@@ -54,6 +54,9 @@ export function isObject<Y extends Dict>(value: any): value is Y {
   )
 }
 
+export function isDate(value: any): value is Date {
+  return value instanceof Date
+}
 export function isArray<Y extends any[]>(value: any): value is Y {
   return Array.isArray(value)
 }

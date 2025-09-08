@@ -6,7 +6,11 @@
     "hooks": [],
     "providers": []
   },
-  "dependents": { "components": ["select"], "hooks": [], "providers": [] },
+  "dependents": {
+    "components": ["date-picker", "select"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
     {

@@ -251,7 +251,7 @@ return (
 `Snacks` has a folding animation implemented. If `gap` or similar is set on the parent element, it will result in an unnatural animation. In such cases, adjust the spacing with `gutter`.
 
 :::note
-`gutter` applies negative margin by default. If you want to disable negative margin, set `negateMargin` to `false`.
+`gutter` applies negative margin by default. If you want to disable negative margin, set `negativeMargins` to `false`.
 :::
 
 ```tsx preview functional client
@@ -276,7 +276,12 @@ return (
       </Button>
     </Wrap>
 
-    <Snacks snacks={snacks} gutter={[0, "lg"]} negateMargin={false} mb="-md" />
+    <Snacks
+      snacks={snacks}
+      gutter={[0, "lg"]}
+      negativeMargins={false}
+      mb="-md"
+    />
 
     <Input placeholder="Input" />
   </VStack>
@@ -285,7 +290,11 @@ return (
 
 ### Limit the Number of Displays
 
-To limit the number of displays, set a number to the `limit` prop.
+To limit the number of displays, set a number to the `limit` prop. By default, `3` is set.
+
+:::info
+If you want to display an unlimited number of notifications, set it to `null`.
+:::
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks({ limit: 5 })

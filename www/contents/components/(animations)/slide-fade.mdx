@@ -10,10 +10,10 @@ style: components/slide-fade/slide-fade.style.ts
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
-    <SlideFade open={open} borderWidth={1} p="md" rounded="l2">
+    <SlideFade open={open} borderWidth="1px" p="md" rounded="l2">
       クラスは最低じゃないぞ！メンバーが最低なだけだ！
     </SlideFade>
   </VStack>
@@ -50,10 +50,10 @@ To change the duration, set a number (in seconds) to `duration`.
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
-    <SlideFade open={open} duration={0.4} borderWidth={1} p="md" rounded="l2">
+    <SlideFade open={open} duration={0.4} borderWidth="1px" p="md" rounded="l2">
       確かにアイツは勉強ができない。でもな、学力が低いからといって、全てが決まるわけじゃないだろう？
     </SlideFade>
   </VStack>
@@ -62,30 +62,27 @@ return (
 
 ### Change the Position
 
-To change the position where the element becomes visible or hidden, specify a string or number for `offsetX` and `offsetY`.
-
-- `offsetX`: Specifies the horizontal direction. By default, `0` is set.
-- `offsetY`: Specifies the vertical direction. By default, `8` is set.
+To change the position, specify a string or number for `offsetX` or `offsetY`.
 
 ```tsx preview functional client
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
     <SlideFade
       open={open}
       offsetX={8}
       offsetY={0}
-      borderWidth={1}
+      borderWidth="1px"
       p="md"
       rounded="l2"
     >
       ……私、このクラスの皆が好きなんです。人の為に一生懸命な皆のいる、Fクラスが
     </SlideFade>
 
-    <SlideFade open={open} offsetY={-8} borderWidth={1} p="md" rounded="l2">
+    <SlideFade open={open} offsetY={-8} borderWidth="1px" p="md" rounded="l2">
       ……女は胸じゃないのに。アキの、バカ……
     </SlideFade>
   </VStack>
@@ -100,14 +97,14 @@ To unmount the component when it is not visible, set `unmountOnExit` to `true`.
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
     <SlideFade
       open={open}
       offsetY={-8}
       unmountOnExit
-      borderWidth={1}
+      borderWidth="1px"
       p="md"
       rounded="l2"
     >
@@ -125,10 +122,10 @@ To delay the animation, set a number (in seconds) to `delay`.
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
-    <SlideFade open={open} delay={0.5} borderWidth={1} p="md" rounded="l2">
+    <SlideFade open={open} delay={0.5} borderWidth="1px" p="md" rounded="l2">
       たとえ許されない行為であろうとも自分の気持ちは偽れない。正直に言おう、今僕は…純粋に欲望のために女子風呂を覗きたいッ！！
     </SlideFade>
   </VStack>

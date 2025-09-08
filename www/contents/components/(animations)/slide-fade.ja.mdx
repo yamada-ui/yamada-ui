@@ -10,10 +10,10 @@ style: components/slide-fade/slide-fade.style.ts
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
-    <SlideFade open={open} borderWidth={1} p="md" rounded="l2">
+    <SlideFade open={open} borderWidth="1px" p="md" rounded="l2">
       クラスは最低じゃないぞ！メンバーが最低なだけだ！
     </SlideFade>
   </VStack>
@@ -42,18 +42,18 @@ import { SlideFade } from "@workspaces/ui"
 <SlideFade />
 ```
 
-### 継続時間を変更する
+### 所要時間を変更する
 
-継続時間を変更するには、`duration`に数値（秒）を設定します。
+所要時間を変更するには、`duration`に数値（秒）を設定します。
 
 ```tsx preview functional client
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
-    <SlideFade open={open} duration={0.4} borderWidth={1} p="md" rounded="l2">
+    <SlideFade open={open} duration={0.4} borderWidth="1px" p="md" rounded="l2">
       確かにアイツは勉強ができない。でもな、学力が低いからといって、全てが決まるわけじゃないだろう？
     </SlideFade>
   </VStack>
@@ -62,48 +62,45 @@ return (
 
 ### 位置を変更する
 
-要素が表示または非表示になる位置を変更するには、`offsetX`と`offsetY`に文字列または数値を指定します。
-
-- `offsetX`: 水平方向を指定します。デフォルトでは、`0`が設定されています。
-- `offsetY`: 垂直方向を指定します。デフォルトでは、`8`が設定されています。
+位置を変更するには、`offsetX`または`offsetY`に文字列または数値を指定します。
 
 ```tsx preview functional client
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
     <SlideFade
       open={open}
       offsetX={8}
       offsetY={0}
-      borderWidth={1}
+      borderWidth="1px"
       p="md"
       rounded="l2"
     >
       ……私、このクラスの皆が好きなんです。人の為に一生懸命な皆のいる、Fクラスが
     </SlideFade>
 
-    <SlideFade open={open} offsetY={-8} borderWidth={1} p="md" rounded="l2">
+    <SlideFade open={open} offsetY={-8} borderWidth="1px" p="md" rounded="l2">
       ……女は胸じゃないのに。アキの、バカ……
     </SlideFade>
   </VStack>
 )
 ```
 
-### 表示終了時にアンマウントする
+### 非表示時にアンマウントする
 
-非表示時にコンポーネントをアンマウントするには、`unmountOnExit`を`true`に設定します。
+非表示時にアンマウントする場合は、`unmountOnExit`を`true`に設定します。
 
 ```tsx preview functional client
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
-    <SlideFade open={open} unmountOnExit borderWidth={1} p="md" rounded="l2">
+    <SlideFade open={open} unmountOnExit borderWidth="1px" p="md" rounded="l2">
       考えすぎではないかのぅ。メイド服くらい人間一度は着るものじゃ
     </SlideFade>
   </VStack>
@@ -112,16 +109,16 @@ return (
 
 ### 遅延させる
 
-アニメーションを遅延させる場合は、`delay`に数値（秒）を設定します。
+遅延させる場合は、`delay`に数値（秒）を設定します。
 
 ```tsx preview functional client
 const [open, { toggle }] = useBoolean()
 
 return (
-  <VStack>
+  <VStack alignItems="flex-start">
     <Button onClick={toggle}>Please Click</Button>
 
-    <SlideFade open={open} delay={0.5} borderWidth={1} p="md" rounded="l2">
+    <SlideFade open={open} delay={0.5} borderWidth="1px" p="md" rounded="l2">
       たとえ許されない行為であろうとも自分の気持ちは偽れない。正直に言おう、今僕は…純粋に欲望のために女子風呂を覗きたいッ！！
     </SlideFade>
   </VStack>

@@ -6,7 +6,271 @@ source: components/number-input
 style: components/number-input/number-input.style.ts
 ---
 
+```tsx preview
+<NumberInput placeholder="placeholder" />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { NumberInput } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { NumberInput } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { NumberInput } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<NumberInput />
+```
+
+### バリアントを変更する
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <NumberInput
+        key={variant}
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size) => (
+      <NumberInput key={size} size={size} placeholder={`Size (${size})`} />
+    )}
+  </For>
+</VStack>
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に文字列または数値を設定します。
+
+```tsx preview
+<NumberInput defaultValue={18} placeholder="Order Quantity" />
+```
+
+### 最小・最大値を設定する
+
+最小値と最大値を設定する場合は、`min`または`max`に数値を設定します。
+
+```tsx preview
+<NumberInput defaultValue={18} min={8} max={31} placeholder="Order Quantity" />
+```
+
+### ステップ値を設定する
+
+ステップ値を設定する場合は、`step`に数値を設定します。
+
+```tsx preview
+<NumberInput
+  defaultValue={15}
+  step={5}
+  min={5}
+  max={30}
+  placeholder="Order Quantity"
+/>
+```
+
+### 小数点を設定する
+
+小数点を設定する場合は、`precision`に数値を設定します。
+
+```tsx preview
+<NumberInput
+  defaultValue={15}
+  precision={2}
+  step={0.2}
+  placeholder="Order Quantity"
+/>
+```
+
+### ブラー時の値のクランプを無効にする
+
+デフォルトでは、ユーザーの自由な数値入力を受け付けますが、`min`または`max`を超える数値は、ブラー時に自動的に調整されます。この自動的に調整される動作を無効にする場合は、`clampValueOnBlur`を`false`に設定します。
+
+```tsx preview
+<NumberInput
+  defaultValue={15}
+  max={30}
+  clampValueOnBlur={false}
+  placeholder="Order Quantity"
+/>
+```
+
+### 範囲外の値を許可する
+
+範囲外の値を許可する場合は、`keepWithinRange`を`false`に設定します。
+
+```tsx preview
+<NumberInput
+  defaultValue={15}
+  max={30}
+  keepWithinRange={false}
+  clampValueOnBlur={false}
+  placeholder="Order Quantity"
+/>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <NumberInput
+        key={variant}
+        disabled
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <NumberInput
+        key={variant}
+        readOnly
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`invalid`を`true`に設定します。
+
+```tsx preview
+<VStack>
+  <For each={["outline", "filled", "flushed"]}>
+    {(variant) => (
+      <NumberInput
+        key={variant}
+        invalid
+        variant={variant}
+        placeholder={toTitleCase(variant)}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### ボーダーのカラーを変更する
+
+ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
+
+```tsx preview
+<VStack>
+  <NumberInput
+    focusBorderColor="green.500"
+    placeholder="Custom focus border color"
+  />
+  <NumberInput
+    errorBorderColor="orange.500"
+    invalid
+    placeholder="Custom invalid border color"
+  />
+</VStack>
+```
+
+### プレースホルダーのカラーを変更する
+
+プレースホルダーのカラーを変更する場合は、`_placeholder`に`props`を設定します。
+
+```tsx preview
+<NumberInput
+  placeholder="Custom placeholder"
+  _placeholder={{ color: "blue.500" }}
+/>
+```
+
+### ステッパーをカスタマイズする
+
+ステッパーをカスタマイズする場合は、`incrementProps`または`decrementProps`に`props`を設定します。
+
+```tsx preview
+<NumberInput
+  placeholder="Order Quantity"
+  incrementProps={{ children: <PlusIcon /> }}
+  decrementProps={{ children: <MinusIcon /> }}
+/>
+```
+
+### コンポーネントをカスタマイズする
+
+コンポーネントをカスタマイズする場合は、`useNumberInput`を使用します。
+
+```tsx preview functional client
+const { getInputProps, getIncrementProps, getDecrementProps } = useNumberInput({
+  step: 0.01,
+  defaultValue: 3.14,
+  min: 3,
+  max: 4,
+  precision: 2,
+})
+
+return (
+  <HStack maxW="xs" gap="sm">
+    <IconButton
+      icon={<PlusIcon fontSize="2xl" />}
+      {...getIncrementProps()}
+      aria-label="Increment"
+    />
+    <Input {...getInputProps()} aria-label="Number Input" />
+    <IconButton
+      icon={<MinusIcon fontSize="2xl" />}
+      {...getDecrementProps()}
+      aria-label="Decrement"
+    />
+  </HStack>
+)
+```
+
+### 制御する
+
+```tsx preview functional client
+const [value, setValue] = useState(18)
+
+return (
+  <NumberInput
+    value={value}
+    onChange={(_, valueAsNumber) => setValue(valueAsNumber)}
+    placeholder="Order Quantity"
+  />
+)
+```
 
 ## Props
 

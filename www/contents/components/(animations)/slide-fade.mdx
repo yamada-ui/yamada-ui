@@ -6,7 +6,131 @@ source: components/slide-fade
 style: components/slide-fade/slide-fade.style.ts
 ---
 
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack alignItems="flex-start">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <SlideFade open={open} borderWidth="1px" p="md" rounded="l2">
+      クラスは最低じゃないぞ！メンバーが最低なだけだ！
+    </SlideFade>
+  </VStack>
+)
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { SlideFade } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { SlideFade } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { SlideFade } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<SlideFade />
+```
+
+### Change the Duration
+
+To change the duration, set a number (in seconds) to `duration`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack alignItems="flex-start">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <SlideFade open={open} duration={0.4} borderWidth="1px" p="md" rounded="l2">
+      確かにアイツは勉強ができない。でもな、学力が低いからといって、全てが決まるわけじゃないだろう？
+    </SlideFade>
+  </VStack>
+)
+```
+
+### Change the Position
+
+To change the position, specify a string or number for `offsetX` or `offsetY`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack alignItems="flex-start">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <SlideFade
+      open={open}
+      offsetX={8}
+      offsetY={0}
+      borderWidth="1px"
+      p="md"
+      rounded="l2"
+    >
+      ……私、このクラスの皆が好きなんです。人の為に一生懸命な皆のいる、Fクラスが
+    </SlideFade>
+
+    <SlideFade open={open} offsetY={-8} borderWidth="1px" p="md" rounded="l2">
+      ……女は胸じゃないのに。アキの、バカ……
+    </SlideFade>
+  </VStack>
+)
+```
+
+### Unmount on Exit
+
+To unmount the component when it is not visible, set `unmountOnExit` to `true`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack alignItems="flex-start">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <SlideFade
+      open={open}
+      offsetY={-8}
+      unmountOnExit
+      borderWidth="1px"
+      p="md"
+      rounded="l2"
+    >
+      考えすぎではないかのぅ。メイド服くらい人間一度は着るものじゃ
+    </SlideFade>
+  </VStack>
+)
+```
+
+### Add Delay
+
+To delay the animation, set a number (in seconds) to `delay`.
+
+```tsx preview functional client
+const [open, { toggle }] = useBoolean()
+
+return (
+  <VStack alignItems="flex-start">
+    <Button onClick={toggle}>Please Click</Button>
+
+    <SlideFade open={open} delay={0.5} borderWidth="1px" p="md" rounded="l2">
+      たとえ許されない行為であろうとも自分の気持ちは偽れない。正直に言おう、今僕は…純粋に欲望のために女子風呂を覗きたいッ！！
+    </SlideFade>
+  </VStack>
+)
+```
 
 ## Props
 

@@ -5,6 +5,7 @@ import type {
   KeyboardEvent,
   MouseEvent,
   ReactNode,
+  RefObject,
 } from "react"
 import type { HTMLProps, PropGetter, SimpleDirection } from "../../core"
 import type { Descendant } from "../use-descendants"
@@ -196,11 +197,33 @@ export interface UseComboboxProps
    */
   openOnClick?: boolean
   /**
+   * If `true`, the combobox will be opened when enter is pressed.
+   *
+   * @default true
+   */
+  openOnEnter?: boolean
+  /**
+   * If `true`, the combobox will be opened when space is pressed.
+   *
+   * @default true
+   */
+  openOnSpace?: boolean
+  /**
    * If `true`, the combobox will be readonly.
    *
    * @default false
    */
   readOnly?: boolean
+  /**
+   * The `ref` of the element that should receive focus when selected.
+   */
+  selectFocusRef?: RefObject<HTMLElement | null>
+  /**
+   * If `true`, the item will be selected when space is pressed.
+   *
+   * @default true
+   */
+  selectOnSpace?: boolean
   /**
    * The callback invoked when value is selected.
    */
@@ -216,7 +239,11 @@ export const useCombobox = ({
   initialFocusValue,
   open: openProp,
   openOnClick = true,
+  openOnEnter = true,
+  openOnSpace = true,
   readOnly,
+  selectFocusRef,
+  selectOnSpace = true,
   onChange: onChangeProp,
   onClose: onCloseProp,
   onOpen: onOpenProp,
@@ -238,7 +265,9 @@ export const useCombobox = ({
 
   const onSelect = useCallback(
     (value?: string, closeOnSelect = closeOnSelectProp) => {
-      triggerRef.current?.focus()
+      const ref = selectFocusRef ?? triggerRef
+
+      ref.current?.focus()
 
       if (!interactive || isUndefined(value)) return
 
@@ -248,7 +277,7 @@ export const useCombobox = ({
 
       onClose()
     },
-    [closeOnSelectProp, interactive, onChangeProp, onClose],
+    [closeOnSelectProp, interactive, onChangeProp, onClose, selectFocusRef],
   )
 
   const onScrollIntoView = useCallback(
@@ -288,19 +317,36 @@ export const useCombobox = ({
   )
 
   const onOpenWithActiveDescendant = useCallback(
-    (getFallbackDescendant: () => ComboboxDescendant | undefined) => {
+    (
+      getFallbackDescendant: () => ComboboxDescendant | undefined,
+      block: SimpleDirection = "start",
+    ) => {
       onOpen()
 
       setTimeout(() => {
-        const values = descendants.values()
-        const descendant = values.find(
-          ({ value }) => initialFocusValue === value,
-        )
+        if (!initialFocusValue) {
+          const descendant = getFallbackDescendant()
 
-        onActiveDescendant(descendant ?? getFallbackDescendant())
+          onActiveDescendant(descendant)
+          onScrollIntoView(descendant, block)
+        } else {
+          const values = descendants.values()
+          const descendant =
+            values.find(({ value }) => initialFocusValue === value) ??
+            getFallbackDescendant()
+
+          onActiveDescendant(descendant)
+          onScrollIntoView(descendant, block)
+        }
       })
     },
-    [descendants, initialFocusValue, onActiveDescendant, onOpen],
+    [
+      descendants,
+      initialFocusValue,
+      onActiveDescendant,
+      onOpen,
+      onScrollIntoView,
+    ],
   )
 
   const onClick = useCallback(
@@ -311,7 +357,7 @@ export const useCombobox = ({
 
       if (!open) {
         if (openOnClick)
-          onOpenWithActiveDescendant(() => descendants.enabledFirstValue())
+          onOpenWithActiveDescendant(descendants.enabledFirstValue)
       } else {
         onClose()
       }
@@ -330,119 +376,128 @@ export const useCombobox = ({
     (ev: KeyboardEvent<HTMLDivElement>) => {
       if (disabled || ev.nativeEvent.isComposing) return
 
-      runKeyAction(ev, {
-        ArrowDown: () => {
-          if (!open) {
-            onOpenWithActiveDescendant(() => {
+      runKeyAction(
+        ev,
+        {
+          ArrowDown: (ev) => {
+            ev.preventDefault()
+
+            if (!open) {
+              onOpenWithActiveDescendant(descendants.enabledFirstValue)
+            } else if (activeDescendant.current) {
+              const descendant = descendants.enabledNextValue(
+                activeDescendant.current,
+              )
+
+              onActiveDescendant(descendant)
+
+              onScrollIntoView(
+                descendant,
+                descendant?.recurred ? "start" : "end",
+              )
+            } else {
               const descendant = descendants.enabledFirstValue()
 
+              onActiveDescendant(descendant)
+
               onScrollIntoView(descendant)
+            }
+          },
+          ArrowUp: (ev) => {
+            ev.preventDefault()
 
-              return descendant
-            })
-          } else if (activeDescendant.current) {
-            const descendant = descendants.enabledNextValue(
-              activeDescendant.current,
-            )
+            if (!open) {
+              onOpenWithActiveDescendant(descendants.enabledLastValue, "end")
+            } else if (activeDescendant.current) {
+              const descendant = descendants.enabledPrevValue(
+                activeDescendant.current,
+              )
 
-            onActiveDescendant(descendant)
+              onActiveDescendant(descendant)
 
-            onScrollIntoView(descendant, descendant?.recurred ? "start" : "end")
-          } else {
-            const descendant = descendants.enabledFirstValue()
-
-            onActiveDescendant(descendant)
-
-            onScrollIntoView(descendant)
-          }
-        },
-        ArrowUp: () => {
-          if (!open) {
-            onOpenWithActiveDescendant(() => {
+              onScrollIntoView(
+                descendant,
+                descendant?.recurred ? "end" : "start",
+              )
+            } else {
               const descendant = descendants.enabledLastValue()
 
+              onActiveDescendant(descendant)
+
               onScrollIntoView(descendant, "end")
+            }
+          },
+          End: (ev) => {
+            ev.preventDefault()
 
-              return descendant
-            })
-          } else if (activeDescendant.current) {
-            const descendant = descendants.enabledPrevValue(
-              activeDescendant.current,
-            )
+            if (!open) return
 
-            onActiveDescendant(descendant)
-
-            onScrollIntoView(descendant, descendant?.recurred ? "end" : "start")
-          } else {
             const descendant = descendants.enabledLastValue()
 
             onActiveDescendant(descendant)
 
             onScrollIntoView(descendant, "end")
-          }
+          },
+          Enter: (ev) => {
+            if (!open) {
+              if (!openOnEnter) return
+
+              ev.preventDefault()
+
+              onOpenWithActiveDescendant(descendants.enabledFirstValue)
+            } else {
+              if (!activeDescendant.current) return
+
+              ev.preventDefault()
+
+              const { closeOnSelect, value } = activeDescendant.current
+
+              onSelect(value, closeOnSelect)
+            }
+          },
+          Home: (ev) => {
+            if (!open) return
+
+            ev.preventDefault()
+
+            const descendant = descendants.enabledFirstValue()
+
+            onActiveDescendant(descendant)
+
+            onScrollIntoView(descendant)
+          },
+          Space: (ev) => {
+            if (!open) {
+              if (!openOnSpace) return
+
+              ev.preventDefault()
+
+              onOpenWithActiveDescendant(descendants.enabledFirstValue)
+            } else {
+              if (!activeDescendant.current || !selectOnSpace) return
+
+              ev.preventDefault()
+
+              const { closeOnSelect, value } = activeDescendant.current
+
+              onSelect(value, closeOnSelect)
+            }
+          },
         },
-        End: () => {
-          if (!open) return
-
-          const descendant = descendants.enabledLastValue()
-
-          onActiveDescendant(descendant)
-
-          onScrollIntoView(descendant, "end")
-        },
-        Enter: () => {
-          if (!open) {
-            onOpenWithActiveDescendant(() => {
-              const descendant = descendants.enabledFirstValue()
-
-              onScrollIntoView(descendant)
-
-              return descendant
-            })
-          } else {
-            if (!activeDescendant.current) return
-
-            const { closeOnSelect, value } = activeDescendant.current
-
-            onSelect(value, closeOnSelect)
-          }
-        },
-        Home: () => {
-          if (!open) return
-
-          const descendant = descendants.enabledFirstValue()
-
-          onActiveDescendant(descendant)
-
-          onScrollIntoView(descendant)
-        },
-        Space: () => {
-          if (!open) {
-            onOpenWithActiveDescendant(() => {
-              const descendant = descendants.enabledFirstValue()
-
-              onScrollIntoView(descendant)
-
-              return descendant
-            })
-          } else {
-            if (!activeDescendant.current) return
-
-            const { closeOnSelect, value } = activeDescendant.current
-
-            onSelect(value, closeOnSelect)
-          }
-        },
-      })
+        { preventDefault: false },
+      )
     },
     [
       disabled,
       open,
       onOpenWithActiveDescendant,
       descendants,
-      onScrollIntoView,
       onActiveDescendant,
+      onScrollIntoView,
+      openOnEnter,
       onSelect,
+      openOnSpace,
+      selectOnSpace,
     ],
   )
 
@@ -516,6 +571,7 @@ export const useCombobox = ({
     onActiveDescendant,
     onClose,
     onOpen,
+    onOpenWithActiveDescendant,
     onScrollIntoView,
     onSelect,
   }

@@ -40,7 +40,7 @@ export const calendarStyle = defineComponentSlotStyle({
             layerStyle: "ghost.hover",
             boxSize: "{cell-size}",
             position: "absolute",
-            zIndex: "-1",
+            zIndex: "-2",
           },
         },
       "&[data-end]:not(:first-of-type)::before": {
@@ -63,12 +63,22 @@ export const calendarStyle = defineComponentSlotStyle({
       fontWeight: "normal",
       overflow: "inherit",
       rounded: "{cell-rounded}",
+      zIndex: "0",
       _hover: {
         "&:not([data-selected], [data-today], [data-between])": {
           layerStyle: "ghost.hover",
         },
       },
-      _selected: { layerStyle: "solid" },
+      _selected: {
+        layerStyle: "solid",
+        _after: {
+          layerStyle: "solid",
+          boxSize: "{cell-size}",
+          position: "absolute",
+          rounded: "{cell-rounded}",
+          zIndex: "-1",
+        },
+      },
     },
     month: {
       alignItems: "stretch",
@@ -106,12 +116,23 @@ export const calendarStyle = defineComponentSlotStyle({
     weeks: {
       display: "grid",
       gap: "{cell-gap}",
-      gridTemplateRows: "repeat(6, 1fr)",
     },
     years: {},
   },
 
   props: {
+    /**
+     * If `true`, the calendar will be fixed rows.
+     *
+     * @default true
+     */
+    fixed: {
+      true: {
+        weeks: {
+          gridTemplateRows: "repeat(6, 1fr)",
+        },
+      },
+    },
     /**
      * The shape of the cell
      *
@@ -153,6 +174,7 @@ export const calendarStyle = defineComponentSlotStyle({
 
   defaultProps: {
     size: "md",
+    fixed: true,
     shape: "rounded",
   },
 })

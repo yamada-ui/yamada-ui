@@ -1,0 +1,452 @@
+{
+  "DatePicker": {
+    "as": {
+      "type": "As",
+      "description": "The HTML element to render.",
+      "required": false
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "Merges its props onto its immediate child.",
+      "required": false
+    },
+    "css": {
+      "type": "CSSObject | CSSObject[]",
+      "description": "The CSS object.",
+      "required": false
+    },
+    "colorScheme": {
+      "type": "\"amber\" | \"black\" | \"blackAlpha\" | \"blue\" | \"cyan\" | \"danger\" | \"emerald\" | \"error\" | \"flashy\" | \"fuchsia\" ...",
+      "description": "Set color scheme variables.",
+      "required": false
+    },
+    "size": {
+      "type": "\"lg\" | \"md\" | \"sm\" | \"xl\" | \"xs\"",
+      "defaultValue": "\"md\"",
+      "description": "The size of the component.",
+      "required": false
+    },
+    "variant": {
+      "type": "\"filled\" | \"flushed\" | \"outline\" | \"plain\"",
+      "defaultValue": "\"outline\"",
+      "description": "The variant of the component.",
+      "required": false
+    },
+    "allowInput": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, allows input.",
+      "required": false
+    },
+    "allowInputBeyond": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, allows input of dates beyond the `minDate` and `maxDate` restrictions.",
+      "required": false
+    },
+    "animationScheme": {
+      "type": "\"scale\" | \"none\" | SimplePlacement",
+      "defaultValue": "\"scale\"",
+      "description": "The animation of the element.",
+      "required": false
+    },
+    "autoUpdate": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, automatically updates the position of the floating element when necessary.",
+      "required": false
+    },
+    "blockScrollOnMount": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, scrolling will be disabled on the `body` when the modal opens.",
+      "required": false
+    },
+    "calendarProps": {
+      "type": "Calendar.RootProps<Multiple, Range>",
+      "description": "The size of the calendar component.",
+      "required": false
+    },
+    "clearable": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, display the clear icon.",
+      "required": false
+    },
+    "clearIcon": {
+      "type": "ReactNode",
+      "description": "The icon to be used in the clear button.",
+      "required": false
+    },
+    "closeOnBlur": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the popover will close when you blur out it by clicking outside or tabbing out.",
+      "required": false
+    },
+    "closeOnChange": {
+      "type": "((ev: ChangeEvent<HTMLInputElement>) => boolean) | boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the date picker will be closed when the input value changes.",
+      "required": false
+    },
+    "closeOnEsc": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the popover will hide on pressing Esc key.",
+      "required": false
+    },
+    "closeOnScroll": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the popover will hide on scroll.",
+      "required": false
+    },
+    "closeOnSelect": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the list element will be closed when value is selected.",
+      "required": false
+    },
+    "contentProps": {
+      "type": "DatePickerContentProps",
+      "description": "Props for content element.",
+      "required": false
+    },
+    "defaultInputValue": {
+      "type": "MaybeInputValue<Range>",
+      "description": "The initial value of the input.",
+      "required": false
+    },
+    "defaultMonth": {
+      "type": "Date",
+      "defaultValue": "new Date()",
+      "description": "The initial month of the calendar.",
+      "required": false
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "description": "If `true`, the element will be initially opened.",
+      "required": false
+    },
+    "defaultValue": {
+      "type": "NonNullable<MaybeDateValue<Multiple, Range>>",
+      "description": "The initial value of the calendar.",
+      "required": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, disables the calendar.",
+      "required": false
+    },
+    "duration": {
+      "type": "number | MotionLifecycleProps<number>",
+      "defaultValue": "0.2",
+      "description": "The animation duration.",
+      "required": false
+    },
+    "elementProps": {
+      "type": "InputGroup.ElementProps",
+      "description": "The props for the end element.",
+      "required": false
+    },
+    "elements": {
+      "type": "{ floating?: HTMLElement | null | undefined; reference?: HTMLButtonElement | null | undefined }",
+      "description": "Object containing the reference and floating elements.",
+      "required": false
+    },
+    "errorBorderColor": {
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "description": "The border color when the input is invalid.",
+      "required": false
+    },
+    "excludeDate": {
+      "type": "(date: Date) => boolean",
+      "description": "Callback function to determine whether the day should be disabled.",
+      "required": false
+    },
+    "flip": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the popper will change its placement and flip when it's about to overflow its boundary area.",
+      "required": false
+    },
+    "focusBorderColor": {
+      "type": "\"-moz-initial\" | \"ActiveBorder\" | \"ActiveCaption\" | \"aliceblue\" | \"amber.100\" | \"amber.200\" | \"amber.300\" | \"amber.400\" | \"amber.50\" | \"amber.500\" ...",
+      "description": "The border color when the input is focused.",
+      "required": false
+    },
+    "focusOnClear": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the input will be focused when the clear icon is clicked.",
+      "required": false
+    },
+    "format": {
+      "type": "DatePickerFormat",
+      "description": "The format used for conversion.\nCheck the docs to see the format of possible modifiers you can pass.",
+      "required": false,
+      "see": "https://day.js.org/docs/en/display/format#list-of-localized-formats"
+    },
+    "gutter": {
+      "type": "number",
+      "defaultValue": "8",
+      "description": "The distance or margin between the reference and popper.\nIt is used internally to create an `offset` modifier.",
+      "required": false
+    },
+    "holidays": {
+      "type": "Date[]",
+      "description": "Define holidays.",
+      "required": false
+    },
+    "icon": {
+      "type": "ReactNode",
+      "description": "The icon to be used in the date picker.",
+      "required": false
+    },
+    "iconProps": {
+      "type": "DatePickerIconProps",
+      "description": "Props for icon element.",
+      "required": false
+    },
+    "inputProps": {
+      "type": "HTMLStyledProps<\"input\">",
+      "description": "The props for the input element.",
+      "required": false
+    },
+    "inputValue": {
+      "type": "MaybeInputValue<Range>",
+      "description": "The value of the input.",
+      "required": false
+    },
+    "invalid": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be invalid.",
+      "required": false
+    },
+    "locale": {
+      "type": "string",
+      "defaultValue": "\"en-US\"",
+      "description": "The locale of the calendar.\nCheck the docs to see the locale of possible modifiers you can pass.",
+      "required": false,
+      "see": "https://day.js.org/docs/en/i18n/instance-locale"
+    },
+    "matchWidth": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the popper will match the width of the reference at all times.\nIt's useful for `autocomplete`, `date-picker` and `select` patterns.",
+      "required": false
+    },
+    "max": {
+      "type": "number",
+      "description": "The maximum selectable value.",
+      "required": false
+    },
+    "maxDate": {
+      "type": "Date",
+      "defaultValue": "new Date(2099, 11, 31)",
+      "description": "The maximum possible date.",
+      "required": false
+    },
+    "middleware": {
+      "type": "(false | { name: string; options?: any; fn: (state: { x: number; y: number; placement: Placement; platform: Platform; strategy: Strategy; initialPlacement: Placement; middlewareData: MiddlewareData; rects: ElementRects; elements: Elements; }) => Promisable<...>; } | null | undefined)[]",
+      "description": "Array of middleware objects to modify the positioning or provide data for\nrendering.",
+      "required": false
+    },
+    "minDate": {
+      "type": "Date",
+      "defaultValue": "new Date(1900, 0, 1)",
+      "description": "The minimum possible date.",
+      "required": false
+    },
+    "month": {
+      "type": "Date",
+      "description": "The month of the calendar.",
+      "required": false
+    },
+    "multiple": {
+      "type": "Multiple",
+      "defaultValue": "false",
+      "description": "If `true`, the calendar will be multiple.",
+      "required": false
+    },
+    "offset": {
+      "type": "[number, number]",
+      "description": "The main and cross-axis offset to displace popper element from its reference element.",
+      "required": false
+    },
+    "onChange": {
+      "type": "(value: MaybeDateValue<Multiple, Range>) => void",
+      "description": "The callback invoked when value state changes.",
+      "required": false
+    },
+    "onChangeMonth": {
+      "type": "(value: Date) => void",
+      "description": "The callback invoked when month state changes.",
+      "required": false
+    },
+    "onClose": {
+      "type": "() => void | Promise<void>",
+      "description": "Callback invoked to close the element.",
+      "required": false
+    },
+    "onInputChange": {
+      "type": "(value: MaybeInputValue<Range>) => void",
+      "description": "The callback invoked when input value state changes.",
+      "required": false
+    },
+    "onOpen": {
+      "type": "() => void | Promise<void>",
+      "description": "Callback invoked to open the element.",
+      "required": false
+    },
+    "open": {
+      "type": "boolean",
+      "description": "If `true`, the element will be opened.",
+      "required": false
+    },
+    "openOnChange": {
+      "type": "((ev: ChangeEvent<HTMLInputElement>) => boolean) | boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the date picker will be opened when the input value changes.",
+      "required": false
+    },
+    "openOnClick": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the combobox will be opened when click on the field.",
+      "required": false
+    },
+    "openOnEnter": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the combobox will be opened when enter is pressed.",
+      "required": false
+    },
+    "openOnFocus": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the date picker will be opened when the input is focused.",
+      "required": false
+    },
+    "openOnSpace": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the combobox will be opened when space is pressed.",
+      "required": false
+    },
+    "parseDate": {
+      "type": "(value: string) => Date | undefined",
+      "description": "Function that converts the input value to Date type.",
+      "required": false
+    },
+    "pattern": {
+      "type": "RegExp",
+      "description": "The pattern used to check the input element.",
+      "required": false
+    },
+    "placeholder": {
+      "type": "string",
+      "description": "The placeholder for date picker.",
+      "required": false
+    },
+    "placement": {
+      "type": "Direction",
+      "defaultValue": "\"end-start\"",
+      "description": "The placement of the popper relative to its reference.",
+      "required": false
+    },
+    "platform": {
+      "type": "Platform",
+      "description": "Custom or extended platform object.",
+      "required": false
+    },
+    "preventOverflow": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, will prevent the popper from being cut off and ensure it's visible within the boundary area.",
+      "required": false
+    },
+    "range": {
+      "type": "Range",
+      "defaultValue": "false",
+      "description": "If `true`, enables date range selection.",
+      "required": false
+    },
+    "readOnly": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the combobox will be readonly.",
+      "required": false
+    },
+    "render": {
+      "type": "(props: DatePickerRenderProps) => ReactNode",
+      "description": "The function to render the selected date.",
+      "required": false
+    },
+    "required": {
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "If `true`, the field will be required.",
+      "required": false
+    },
+    "rootProps": {
+      "type": "InputGroup.RootProps",
+      "description": "Props for root element.",
+      "required": false
+    },
+    "selectFocusRef": {
+      "type": "RefObject<HTMLElement | null>",
+      "description": "The `ref` of the element that should receive focus when selected.",
+      "required": false
+    },
+    "selectOnSpace": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, the item will be selected when space is pressed.",
+      "required": false
+    },
+    "separator": {
+      "type": "string",
+      "defaultValue": "\",\"",
+      "description": "The visual separator between each value.",
+      "required": false
+    },
+    "startDayOfWeek": {
+      "type": "StartDayOfWeek",
+      "defaultValue": "\"monday\"",
+      "description": "Define the start day of the week.",
+      "required": false
+    },
+    "strategy": {
+      "type": "Strategy",
+      "defaultValue": "\"absolute\"",
+      "description": "The CSS positioning strategy to use.",
+      "required": false
+    },
+    "today": {
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": "If `true`, highlight today.",
+      "required": false
+    },
+    "value": {
+      "type": "NonNullable<MaybeDateValue<Multiple, Range>>",
+      "description": "The value of the calendar.",
+      "required": false
+    },
+    "weekendDays": {
+      "type": "number[]",
+      "defaultValue": "[0, 6]",
+      "description": "Define weekend days.",
+      "required": false
+    },
+    "whileElementsMounted": {
+      "type": "(reference: HTMLButtonElement, floating: HTMLElement, update: () => void) => () => void",
+      "description": "A callback invoked when both the reference and floating elements are\nmounted, and cleaned up when either is unmounted. This is useful for\nsetting up event listeners (e.g. pass `autoUpdate`).",
+      "required": false
+    }
+  }
+}

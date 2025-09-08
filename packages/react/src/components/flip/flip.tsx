@@ -97,7 +97,7 @@ export { FlipPropsContext, useFlipPropsContext }
 /**
  * `Flip` is an animation component that alternates between flipping two elements.
  *
- * @see https://yamada-ui.com/components/flip
+ * @see https://yamada-ui.com/docs/components/flip
  */
 export const Flip = withProvider(
   ({

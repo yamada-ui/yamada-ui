@@ -74,7 +74,7 @@ export { BreadcrumbPropsContext, useBreadcrumbPropsContext }
 /**
  * `Breadcrumb` is a component that helps users understand the hierarchy of a website.
  *
- * @see https://yamada-ui.com/components/breadcrumb
+ * @see https://yamada-ui.com/docs/components/breadcrumb
  */
 export const BreadcrumbRoot = withProvider<"nav", BreadcrumbRootProps>(
   ({

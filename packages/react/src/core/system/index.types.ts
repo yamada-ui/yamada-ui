@@ -1,5 +1,5 @@
 import type { RefObject } from "react"
-import type { DefaultTheme } from "../../theme"
+import type { theme } from "../../theme"
 import type { AnyString, Booleanish, Dict } from "../../utils"
 import type {
   CSSAnimationObject,
@@ -131,7 +131,7 @@ export interface SnacksConfig {
   /**
    * The direction of the snacks.
    *
-   * @default 'top'
+   * @default 'start'
    */
   direction?: SimpleDirection
   /**
@@ -611,6 +611,7 @@ export interface CSSMap {
 }
 
 export interface CustomTheme {}
+export type DefaultTheme = typeof theme
 
 export interface CustomThemeTokens {}
 

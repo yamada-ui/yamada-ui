@@ -5,4 +5,49 @@ storybook: hooks-useupdateeffect--basic
 source: hooks/use-update-effect
 ---
 
-### Usage
+```tsx preview functional client
+const [state, setState] = useState(1)
+const [updateState, setUpdateState] = useState(1)
+const [flg, { toggle }] = useBoolean()
+
+useEffect(() => {
+  setState((prev) => prev + 1)
+}, [flg])
+
+useUpdateEffect(() => {
+  setUpdateState((prev) => prev + 1)
+}, [flg])
+
+return (
+  <VStack alignItems="flex-start">
+    <VStack gap="0">
+      <Text>state changed by useEffect: {String(state)}</Text>
+      <Text>state changed by useUpdateEffect: {String(updateState)}</Text>
+    </VStack>
+
+    <Button onClick={toggle}>Update state</Button>
+  </VStack>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useUpdateEffect } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useUpdateEffect } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useUpdateEffect } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+useUpdateEffect(() => {}, [])
+```

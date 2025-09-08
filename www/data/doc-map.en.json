@@ -894,11 +894,6 @@
           "pathname": "/docs/hooks/use-interval"
         },
         {
-          "title": "useLazyMount",
-          "segment": "use-lazy-mount",
-          "pathname": "/docs/hooks/use-lazy-mount"
-        },
-        {
           "title": "useLoading",
           "segment": "use-loading",
           "pathname": "/docs/hooks/use-loading"
@@ -912,11 +907,6 @@
           "title": "useMediaQuery",
           "segment": "use-media-query",
           "pathname": "/docs/hooks/use-media-query"
-        },
-        {
-          "title": "useMounted",
-          "segment": "use-mounted",
-          "pathname": "/docs/hooks/use-mounted"
         },
         {
           "title": "useNotice",
@@ -1014,6 +1004,11 @@
           "title": "Color Mode",
           "segment": "color-mode",
           "pathname": "/docs/styling/color-mode"
+        },
+        {
+          "title": "Color Scheme",
+          "segment": "color-scheme",
+          "pathname": "/docs/styling/color-scheme"
         },
         {
           "title": "CSS Custom Properties",
@@ -1178,6 +1173,11 @@
               "title": "Colors",
               "segment": "colors",
               "pathname": "/docs/theming/tokens/colors"
+            },
+            {
+              "title": "Color Schemes",
+              "segment": "color-schemes",
+              "pathname": "/docs/theming/tokens/color-schemes"
             },
             {
               "title": "Durations",

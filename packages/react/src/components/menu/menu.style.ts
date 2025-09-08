@@ -67,7 +67,7 @@ export const menuStyle = defineComponentSlotStyle({
       focusVisibleRing: "none",
       minH: "{item-height}",
       userSelect: "none",
-      _activedescendant: { bg: "bg.muted/70" },
+      _activedescendant: { bg: ["bg.subtle/70", "bg.muted/70"] },
       _disabled: { layerStyle: "disabled" },
     },
     label: {

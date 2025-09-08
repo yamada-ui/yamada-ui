@@ -68,7 +68,7 @@ export {
 /**
  * `Checkbox` is a component used for allowing users to select multiple values from multiple options.
  *
- * @see https://yamada-ui.com/components/checkbox
+ * @see https://yamada-ui.com/docs/components/checkbox
  */
 export const Checkbox = withProvider<"label", CheckboxProps>(
   ({

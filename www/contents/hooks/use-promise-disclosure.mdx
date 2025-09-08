@@ -2,7 +2,74 @@
 title: usePromiseDisclosure
 description: "`usePromiseDisclosure` is a custom hook that helps handle common open/close or toggle scenarios with promises. It can be used to control components such as `Modal`, `Dialog`, `Drawer`, etc."
 storybook: hooks-usepromisedisclosure--basic
-source: hooks/use-promise-disclosure
+source: hooks/use-disclosure
 ---
 
-### Usage
+```tsx preview functional client
+const { open, onClose, onOpen, onSuccess } = usePromiseDisclosure()
+
+const onClick = async () => {
+  try {
+    await onOpen()
+
+    console.log("やるじゃねえか、サタン!!!")
+    console.log("おめえはホントに世界の…")
+    console.log("救世主かもな!!!!")
+  } catch {
+    console.error("地球は滅亡しました")
+  }
+}
+
+return (
+  <VStack alignItems="flex-start">
+    <VStack gap="0">
+      <Text>だ…大地よ海よ　そして生きているすべての　みんな…</Text>
+      <Text>このオラにほんのちょっとずつだけ元気をわけてくれ…！！！</Text>
+    </VStack>
+
+    <Button onClick={onClick}>わけない</Button>
+
+    <Modal.Root
+      size="2xl"
+      body={
+        <VStack gap="0">
+          <Text>き、きさまらいいかげんにしろーーーっ!!!</Text>
+          <Text>さっさと協力しないかーーーっ!!!</Text>
+          <Text>
+            このミスター・サタンさまのたのみも、きけんというのかーーーっ!!!
+          </Text>
+        </VStack>
+      }
+      cancel="わけない"
+      open={open}
+      success="わける"
+      title="ミスター・サタン"
+      onCancel={onClose}
+      onClose={onClose}
+      onSuccess={onSuccess}
+    />
+  </VStack>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { usePromiseDisclosure } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { usePromiseDisclosure } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { usePromiseDisclosure } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { open, onClose, onOpen, onSuccess } = usePromiseDisclosure()
+```

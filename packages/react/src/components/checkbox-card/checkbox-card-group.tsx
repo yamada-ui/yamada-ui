@@ -44,7 +44,7 @@ export interface CheckboxCardGroupRootProps<Y extends string = string>
 /**
  * `CheckboxCardGroup` is a component that groups `CheckboxCard` components.
  *
- * @see https://yamada-ui.com/components/checkbox-card
+ * @see https://yamada-ui.com/docs/components/checkbox-card
  */
 export const CheckboxCardGroupRoot = component<
   "div",

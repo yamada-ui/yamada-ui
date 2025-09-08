@@ -40,7 +40,7 @@ export const Spaces = () => {
               <Fragment key={index}>
                 <Text>{token}</Text>
                 <Text color="fg.muted">{value}</Text>
-                <Box bg="green" h="4" maxW={value} rounded="l1" />
+                <Box bg="green" h="4" maxW={token} rounded="l1" />
               </Fragment>
             )}
           </For>
@@ -64,7 +64,7 @@ export const Spaces = () => {
               <Fragment key={index}>
                 <Text>{token}</Text>
                 <Text color="fg.muted">{value}</Text>
-                <Box bg="green" h="4" maxW="full" rounded="l1" w={value} />
+                <Box bg="green" h="4" maxW={value} rounded="l1" />
               </Fragment>
             )}
           </For>

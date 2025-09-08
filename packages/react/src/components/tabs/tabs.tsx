@@ -67,7 +67,7 @@ export { TabsPropsContext, useTabsPropsContext }
 /**
  * `Tabs` is a component for switching between different display areas.
  *
- * @see https://yamada-ui.com/components/tabs
+ * @see https://yamada-ui.com/docs/components/tabs
  */
 export const TabsRoot = withProvider<"div", TabsRootProps, "orientation">(
   ({

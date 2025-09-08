@@ -8,7 +8,7 @@ type OmittedTheme = Omit<ThemeTokens, "colorSchemes" | "themeSchemes">
 /**
  * `useToken` is a custom hook for retrieving tokens from the theme.
  *
- * @see https://yamada-ui.com/hooks/use-token
+ * @see https://yamada-ui.com/docs/hooks/use-token
  */
 export const useToken = <
   Y extends number | string = string,
@@ -49,7 +49,10 @@ export const getToken =
         return value
       }
     } else {
-      value = get<[Y, Y] | undefined | Y>(theme, `semantics.${name}.${path}`)
+      value = get<[Y, Y] | undefined | Y>(
+        theme,
+        `semanticTokens.${name}.${path}`,
+      )
 
       if (isArray(value)) {
         value = [

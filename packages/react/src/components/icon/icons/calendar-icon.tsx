@@ -6,6 +6,6 @@ import { component, Icon } from "../icon"
 /**
  * `CalendarIcon` is [Lucide](https://lucide.dev) SVG icon component.
  *
- * @see https://yamada-ui.com/components/icon
+ * @see https://yamada-ui.com/docs/components/icon
  */
 export const CalendarIcon = component(Icon)({ as: Calendar })

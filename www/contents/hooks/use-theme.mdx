@@ -5,4 +5,73 @@ storybook: hooks-usetheme--basic
 source: hooks/use-theme
 ---
 
-### Usage
+```tsx preview functional client
+const { theme } = useTheme()
+
+return <Text lineClamp={3}>{JSON.stringify(theme)}</Text>
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useTheme } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useTheme } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useTheme } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { themeScheme, changeThemeScheme } = useTheme()
+```
+
+:::note
+For more information about themes, please see [here](/docs/theming).
+:::
+
+### Switching Themes
+
+```tsx preview functional client
+const { themeScheme, changeThemeScheme } = useTheme()
+
+return (
+  <VStack>
+    <Text>The current scheme is "{themeScheme}"</Text>
+
+    <Wrap gap="md" alignItems="center">
+      <Badge colorScheme="primary">Primary</Badge>
+      <Badge colorScheme="secondary">Secondary</Badge>
+      <Tag colorScheme="primary">Primary</Tag>
+      <Tag colorScheme="secondary">Secondary</Tag>
+    </Wrap>
+
+    <Wrap gap="md">
+      <Button onClick={() => changeThemeScheme("base")}>Base Theme</Button>
+
+      <Button colorScheme="red" onClick={() => changeThemeScheme("red")}>
+        Red Theme
+      </Button>
+
+      <Button colorScheme="green" onClick={() => changeThemeScheme("green")}>
+        Green Theme
+      </Button>
+
+      <Button colorScheme="blue" onClick={() => changeThemeScheme("blue")}>
+        Blue Theme
+      </Button>
+    </Wrap>
+  </VStack>
+)
+```
+
+:::warning
+In order to switch themes, you need to prepare multiple themes. For more details, please check [here](/docs/theming/switching-themes).
+:::

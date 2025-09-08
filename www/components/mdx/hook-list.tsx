@@ -19,6 +19,7 @@ export function HookList(props: HookListProps) {
 
   return (
     <Grid
+      fontSize="sm"
       gap={{ base: "lg", sm: "md" }}
       my="lg"
       templateColumns={{

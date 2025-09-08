@@ -1,8 +1,5 @@
 import type { Meta, StoryFn } from "@storybook/react-vite"
-import type { ThemeConfig } from "../../core"
-import { UIProvider } from "../../providers/ui-provider"
-import { defaultConfig } from "../../theme"
-import { merge } from "../../utils"
+import { extendConfig, UIProvider } from "../../providers/ui-provider"
 import { Image } from "../image"
 import { Picture, Source } from "./picture"
 
@@ -69,9 +66,7 @@ export const PropsPattern: Story = () => {
 }
 
 export const Direction: Story = () => {
-  const config = merge<ThemeConfig>(defaultConfig, {
-    breakpoint: { direction: "up" },
-  })
+  const config = extendConfig({ breakpoint: { direction: "up" } })
 
   return (
     <UIProvider config={config}>

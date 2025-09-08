@@ -40,7 +40,7 @@ export { IconButtonPropsContext, useIconButtonPropsContext }
 /**
  * `IconButton` is a component that displays an icon within a button.
  *
- * @see https://yamada-ui.com/components/icon-button
+ * @see https://yamada-ui.com/docs/components/icon-button
  */
 export const IconButton = withContext<"button", IconButtonProps>(Button)(
   undefined,

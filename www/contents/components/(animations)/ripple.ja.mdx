@@ -9,22 +9,22 @@ style: components/ripple/ripple.style.ts
 const { onClick, ...rippleProps } = useRipple()
 
 return (
-  <Box
+  <Center
     as="button"
     type="button"
     onClick={onClick}
-    py="sm"
-    px="md"
+    h="10"
+    px="3"
     bg="bg.contrast"
     color="fg.contrast"
-    rounded="12"
+    rounded="l2"
     position="relative"
     overflow="hidden"
   >
     <Text>Button</Text>
 
     <Ripple {...rippleProps} />
-  </Box>
+  </Center>
 )
 ```
 
@@ -62,22 +62,22 @@ import { Ripple, useRipple } from "@workspaces/ui"
 const { onClick, ...rippleProps } = useRipple()
 
 return (
-  <Box
+  <Center
     as="button"
     type="button"
     onClick={onClick}
-    py="sm"
-    px="md"
+    h="10"
+    px="3"
     bg="bg.contrast"
     color="fg.contrast"
-    rounded="12"
+    rounded="l2"
     position="relative"
     overflow="hidden"
   >
     <Text>Button</Text>
 
     <Ripple color="warning" {...rippleProps} />
-  </Box>
+  </Center>
 )
 ```
 
@@ -89,22 +89,22 @@ return (
 const { onClick, ...rippleProps } = useRipple({ disabled: true })
 
 return (
-  <Box
+  <Center
     as="button"
     type="button"
     onClick={onClick}
-    py="sm"
-    px="md"
+    h="10"
+    px="3"
     bg="bg.contrast"
     color="fg.contrast"
-    rounded="12"
+    rounded="l2"
     position="relative"
     overflow="hidden"
   >
     <Text>Button</Text>
 
     <Ripple {...rippleProps} />
-  </Box>
+  </Center>
 )
 ```
 
@@ -114,22 +114,22 @@ return (
 const { onClick, ...rippleProps } = useRipple()
 
 return (
-  <Box
+  <Center
     as="button"
     type="button"
     onClick={onClick}
-    py="sm"
-    px="md"
+    h="10"
+    px="3"
     bg="bg.contrast"
     color="fg.contrast"
-    rounded="12"
+    rounded="l2"
     position="relative"
     overflow="hidden"
   >
     <Text>Button</Text>
 
     <Ripple disabled {...rippleProps} />
-  </Box>
+  </Center>
 )
 ```
 

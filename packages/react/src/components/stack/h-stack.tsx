@@ -22,7 +22,7 @@ export { HStackPropsContext, useHStackPropsContext }
 /**
  * `HStack` is a component that groups elements and provides space between child elements.
  *
- * @see https://yamada-ui.com/components/stack
+ * @see https://yamada-ui.com/docs/components/stack
  */
 export const HStack = withContext<"div", HStackProps>(Stack)(undefined, {
   direction: "row",

@@ -5,4 +5,46 @@ storybook: hooks-uselocalstorage--basic
 source: hooks/use-local-storage
 ---
 
-### Usage
+```tsx preview functional client
+const [value, setValue, resetValue] = useLocalStorage<number>({
+  key: "value",
+  defaultValue: 1,
+})
+
+return (
+  <Wrap gap="md">
+    <Button onClick={() => setValue((prev) => prev + 1)}>
+      Current Local Storage value: {value}
+    </Button>
+
+    <Button colorScheme="danger" onClick={resetValue}>
+      Reset Local Storage value
+    </Button>
+  </Wrap>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useLocalStorage } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useLocalStorage } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useLocalStorage } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const [value, setValue, resetValue] = useLocalStorage<number>({
+  key: "value",
+  defaultValue: 1,
+})
+```

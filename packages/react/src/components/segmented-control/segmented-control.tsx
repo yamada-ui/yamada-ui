@@ -49,7 +49,7 @@ export { SegmentedControlPropsContext, useSegmentedControlPropsContext }
 /**
  * `SegmentedControl` is a component used for allowing users to select one option from multiple choices.
  *
- * @see https://yamada-ui.com/components/segmented-control
+ * @see https://yamada-ui.com/docs/components/segmented-control
  */
 export const SegmentedControlRoot = withProvider(
   ({ children, items = [], orientation: orientationProp, ...rest }) => {

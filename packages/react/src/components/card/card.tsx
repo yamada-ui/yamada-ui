@@ -21,7 +21,7 @@ export { CardPropsContext, useCardPropsContext }
 /**
  * `Card` is a component that groups and displays related information. By default, it renders a `article` element.
  *
- * @see https://yamada-ui.com/components/card
+ * @see https://yamada-ui.com/docs/components/card
  */
 export const CardRoot = withProvider("article", "root")()
 

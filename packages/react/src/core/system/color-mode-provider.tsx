@@ -185,7 +185,7 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
 /**
  * `useColorMode` is a custom hook that returns the current color mode.
  *
- * @see https://yamada-ui.com/hooks/use-color-mode
+ * @see https://yamada-ui.com/docs/hooks/use-color-mode
  */
 export const useColorMode = (): ColorModeContext => {
   const context = use(ColorModeContext)

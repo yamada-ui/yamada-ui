@@ -318,7 +318,7 @@ export type CreateDescendantRegister<Y extends HTMLElement, M = {}> = (
 /**
  * `useDescendants` is a custom hook that manages descendants.
  *
- * @see https://yamada-ui.com/hooks/use-descendants
+ * @see https://yamada-ui.com/docs/hooks/use-descendants
  */
 export const createDescendants = <
   Y extends HTMLElement = HTMLElement,

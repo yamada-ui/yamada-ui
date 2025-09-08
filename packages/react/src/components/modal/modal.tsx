@@ -98,7 +98,7 @@ export { ModalPropsContext, useModalPropsContext }
 /**
  * `Modal` is a component that is displayed over the main content to focus the user's attention solely on the information.
  *
- * @see https://yamada-ui.com/components/overlay/modal
+ * @see https://yamada-ui.com/docs/components/overlay/modal
  */
 export const ModalRoot = withProvider<"div", ModalRootProps>(
   ({

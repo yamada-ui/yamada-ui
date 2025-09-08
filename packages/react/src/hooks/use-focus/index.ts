@@ -8,7 +8,6 @@ import {
   getFirstFocusableElement,
   isRefObject,
   isSafari,
-  useSafeLayoutEffect,
   useUpdateEffect,
 } from "../../utils"
 import { useEventListener } from "../use-event-listener"
@@ -37,32 +36,30 @@ export const useFocusOnShow = <Y extends HTMLElement>(
     shouldFocus: false,
   },
 ) => {
-  const target = isRefObject(refOrEl) ? refOrEl.current : refOrEl
   const trulyShouldFocus = shouldFocus && visible
-  const trulyShouldFocusRef = useRef(trulyShouldFocus)
-  const lastVisibleRef = useRef(visible)
+  const focused = useRef(false)
 
-  useSafeLayoutEffect(() => {
-    if (!lastVisibleRef.current && visible)
-      trulyShouldFocusRef.current = trulyShouldFocus
+  const getTarget = useCallback(() => {
+    return isRefObject(refOrEl) ? refOrEl.current : refOrEl
+  }, [refOrEl])
 
-    lastVisibleRef.current = visible
-  }, [visible, trulyShouldFocus])
+  const getFocusTarget = useCallback(() => {
+    return isRefObject(focusRefOrEl) ? focusRefOrEl.current : focusRefOrEl
+  }, [focusRefOrEl])
 
   const onFocus = useCallback(() => {
-    if (!target || !trulyShouldFocusRef.current) return
+    const target = getTarget()
 
-    trulyShouldFocusRef.current = false
-
+    if (!target || !trulyShouldFocus || focused.current) return
     if (target.contains(document.activeElement as HTMLElement)) return
 
-    const focusTarget = isRefObject(focusRefOrEl)
-      ? focusRefOrEl.current
-      : focusRefOrEl
+    const focusTarget = getFocusTarget()
 
     if (focusTarget) {
       requestAnimationFrame(() => {
         focusTarget.focus({ preventScroll })
+
+        focused.current = true
       })
     } else {
       const firstFocusable = getFirstFocusableElement(target)
@@ -70,22 +67,28 @@ export const useFocusOnShow = <Y extends HTMLElement>(
       if (firstFocusable) {
         requestAnimationFrame(() => {
           firstFocusable.focus({ preventScroll })
+
+          focused.current = true
         })
       } else {
         requestAnimationFrame(() => {
           target.focus({ preventScroll })
+
+          focused.current = true
         })
       }
     }
-  }, [target, focusRefOrEl, preventScroll])
+  }, [getTarget, trulyShouldFocus, getFocusTarget, preventScroll])
 
   useUpdateEffect(() => {
-    requestAnimationFrame(() => {
-      onFocus()
-    })
+    focused.current = !trulyShouldFocus
+  }, [trulyShouldFocus])
+
+  useUpdateEffect(() => {
+    requestAnimationFrame(onFocus)
   }, [onFocus])
 
-  useEventListener(target, "transitionend", onFocus)
+  useEventListener(getTarget, "transitionend", onFocus)
 }
 
 export interface UseFocusOnMouseDownProps {

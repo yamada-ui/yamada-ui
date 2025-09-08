@@ -251,7 +251,7 @@ return (
 `Snacks`は折りたたむアニメーションが実装されています。もし、親要素に`gap`などが設定されている場合は不自然なアニメーションになってしまいます。その場合は、`gutter`で余白を調整します。
 
 :::note
-`gutter`は、デフォルトで負のマージンを付与します。もし、負のマージンを無効にしたい場合は、`negateMargin`を`false`に設定します。
+`gutter`は、デフォルトで負のマージンを付与します。もし、負のマージンを無効にしたい場合は、`negativeMargins`を`false`に設定します。
 :::
 
 ```tsx preview functional client
@@ -276,7 +276,12 @@ return (
       </Button>
     </Wrap>
 
-    <Snacks snacks={snacks} gutter={[0, "lg"]} negateMargin={false} mb="-md" />
+    <Snacks
+      snacks={snacks}
+      gutter={[0, "lg"]}
+      negativeMargins={false}
+      mb="-md"
+    />
 
     <Input placeholder="Input" />
   </VStack>
@@ -285,7 +290,11 @@ return (
 
 ### 表示件数を制限する
 
-表示件数を制限する場合は、`limit`に数値を設定します。
+表示件数を制限する場合は、`limit`に数値を設定します。デフォルトでは、`3`が設定されています。
+
+:::info
+もし、無制限に表示したい場合は、`null`を設定します。
+:::
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks({ limit: 5 })

@@ -4,4 +4,56 @@ description: "`useFocusOnShow` is a custom hook that focuses on the target eleme
 source: hooks/use-focus-on-show
 ---
 
+```tsx preview functional client
+const [visible, setVisible] = useState(false)
+const ref = useRef<HTMLElement>(null)
+const inputRef = useRef<HTMLInputElement>(null)
+
+useFocusOnShow(ref, {
+  focusTarget: inputRef,
+  visible,
+  shouldFocus: true,
+})
+
+return (
+  <VStack alignItems="flex-start">
+    <Button onClick={() => setVisible((prev) => !prev)}>
+      {visible ? "Hide" : "Show"} Content
+    </Button>
+
+    <Fade ref={ref} open={visible} borderWidth={1} p="md" rounded="l2">
+      <Field.Root label="This input will be focused when shown">
+        <Input ref={inputRef} placeholder="Type something here" />
+      </Field.Root>
+    </Fade>
+  </VStack>
+)
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { useFocusOnShow } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useFocusOnShow } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useFocusOnShow } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const ref = useRef<HTMLElement>(null)
+
+useFocusOnShow(ref, {
+  focusTarget,
+  visible: true,
+  shouldFocus: true,
+})
+```

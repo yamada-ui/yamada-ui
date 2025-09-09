@@ -1,33 +1,50 @@
 "use client"
 
 import type { PlaygroundFile } from "../types"
-import { javascript } from "@codemirror/lang-javascript"
-import { vscodeDark, vscodeLight } from "@uiw/codemirror-theme-vscode"
-import CodeMirror from "@uiw/react-codemirror"
-import { Resizable, useColorModeValue } from "@yamada-ui/react"
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react"
-import { ClientOnly } from "@/components/mdx/client-only"
-
-const extensions = [javascript({ jsx: true, typescript: true })]
+import type { EditorStateController } from "./editor"
+import { Resizable } from "@yamada-ui/react"
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react"
+import {
+  CodeMirrorEditor,
+  createEditorStateController,
+  PreviewEditor,
+} from "./editor"
 
 type EditorVisibility = "both" | "editor" | "preview"
 
 interface PlaygroundEditorController {
+  getCurrentCode: { current: (() => string) | null }
   toggleVisibility: { current: (() => void) | null }
 }
 
 interface PlaygroundEditorProps {
   file: PlaygroundFile
-  onCodeChange: (code: string) => void
+  onChange?: (code: string) => void
 }
 
 export const PlaygroundEditor = forwardRef<
   PlaygroundEditorController,
   PlaygroundEditorProps
->(function PlaygroundEditor({ file, onCodeChange }, ref) {
-  const theme = useColorModeValue(vscodeLight, vscodeDark)
+>(function PlaygroundEditor({ file, onChange }, ref) {
+  const editorState = useRef<EditorStateController | null>(null)
+
+  // Initialize editor state only once
+  if (!editorState.current) {
+    editorState.current = createEditorStateController()
+  }
+
   const [editorVisibility, setEditorVisibility] =
     useState<EditorVisibility>("both")
+
+  const codeMirrorRef = useRef<{ focus: () => void }>(null)
+  const previewRef = useRef<{ refresh: () => void }>(null)
 
   const toggleVisibility = useCallback(() => {
     setEditorVisibility((prev) => {
@@ -44,12 +61,24 @@ export const PlaygroundEditor = forwardRef<
     })
   }, [])
 
+  const getCurrentCode = useCallback(() => {
+    return editorState.current!.getValue.current?.() || file.code
+  }, [file.code])
+
+  // Update editor state when file changes
+  useEffect(() => {
+    if (editorState.current?.setValue.current) {
+      editorState.current.setValue.current(file.code)
+    }
+  }, [file.code])
+
   useImperativeHandle(
     ref,
     () => ({
+      getCurrentCode: { current: getCurrentCode },
       toggleVisibility: { current: toggleVisibility },
     }),
-    [toggleVisibility],
+    [getCurrentCode, toggleVisibility],
   )
 
   const showEditor =
@@ -72,17 +101,11 @@ export const PlaygroundEditor = forwardRef<
           roundedLeft={showPreview ? "l2" : "l2"}
           roundedRight={!showPreview ? "l2" : undefined}
         >
-          <CodeMirror
-            key={file.id}
-            basicSetup={{
-              autocompletion: true,
-              highlightActiveLine: true,
-              lineNumbers: true,
-            }}
-            extensions={extensions}
-            theme={theme}
-            value={file.code}
-            onChange={onCodeChange}
+          <CodeMirrorEditor
+            ref={codeMirrorRef}
+            editorState={editorState.current!}
+            initialValue={file.code}
+            onChange={onChange}
           />
         </Resizable.Item>
       ) : null}
@@ -98,7 +121,11 @@ export const PlaygroundEditor = forwardRef<
           roundedLeft={!showEditor ? "l2" : undefined}
           roundedRight="l2"
         >
-          <ClientOnly lang="tsx" code={file.code} functional />
+          <PreviewEditor
+            ref={previewRef}
+            editorState={editorState.current!}
+            initialValue={file.code}
+          />
         </Resizable.Item>
       ) : null}
     </Resizable.Root>

@@ -39,17 +39,14 @@ export const PlaygroundEditorSwitcher = forwardRef<
   const items = useMemo(
     () => [
       {
-        icon: LayoutPanelLeftIcon,
         label: "Both",
         value: "both" as EditorVisibility,
       },
       {
-        icon: CodeIcon,
         label: "Editor",
         value: "editor" as EditorVisibility,
       },
       {
-        icon: EyeIcon,
         label: "Preview",
         value: "preview" as EditorVisibility,
       },
@@ -58,9 +55,17 @@ export const PlaygroundEditorSwitcher = forwardRef<
   )
 
   const getCurrentIcon = useCallback(() => {
-    const currentItem = items.find((item) => item.value === editorVisibility)
-    return currentItem?.icon || LayoutPanelLeftIcon
-  }, [items, editorVisibility])
+    switch (editorVisibility) {
+      case "both":
+        return LayoutPanelLeftIcon
+      case "editor":
+        return CodeIcon
+      case "preview":
+        return EyeIcon
+      default:
+        return LayoutPanelLeftIcon
+    }
+  }, [editorVisibility])
 
   const switchMode = useCallback(() => {
     editorRef.current?.toggleVisibility.current?.()

@@ -377,7 +377,7 @@ export const useDatePicker = <
 
         setValue(
           (prev) =>
-            updateMaybeDateValue(date, range, max)(prev) as MaybeDateValue<
+            updateMaybeDateValue(date, max)(prev) as MaybeDateValue<
               Multiple,
               Range
             >,
@@ -401,7 +401,7 @@ export const useDatePicker = <
         return component
       }
     })
-  }, [dateToString, focused, max, range, render, separator, setValue, value])
+  }, [dateToString, focused, max, render, separator, setValue, value])
 
   const onChange = useCallback(
     (value: MaybeDateValue<Multiple, Range>) => {
@@ -549,11 +549,10 @@ export const useDatePicker = <
 
               setValue(
                 (prev) =>
-                  updateMaybeDateValue(
-                    date,
-                    range,
-                    max,
-                  )(prev) as MaybeDateValue<Multiple, Range>,
+                  updateMaybeDateValue(date, max)(prev) as MaybeDateValue<
+                    Multiple,
+                    Range
+                  >,
               )
             } else if (isObject(value)) {
               const align = contains(endInputRef.current, ev.target)
@@ -602,7 +601,6 @@ export const useDatePicker = <
       disabled,
       max,
       open,
-      range,
       setInputValue,
       setValue,
       stringToDate,

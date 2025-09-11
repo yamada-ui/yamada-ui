@@ -193,6 +193,8 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
               </FieldLabel>
             ) : null)}
 
+          {omittedChildren}
+
           {customHelperMessage ||
             (helperMessage ? (
               <FieldHelperMessage {...helperMessageProps}>
@@ -206,8 +208,6 @@ export const FieldRoot = withProvider<"div", FieldRootProps>(
                 {errorMessage}
               </FieldErrorMessage>
             ) : null)}
-
-          {omittedChildren}
         </styled.div>
       </FieldContext>
     )

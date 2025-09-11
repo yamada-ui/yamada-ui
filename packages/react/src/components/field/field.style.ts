@@ -52,8 +52,10 @@ export const fieldStyle = defineComponentSlotStyle({
         root: { gridTemplateColumns: "{field-label-width, spaces.32} 1fr" },
       },
       vertical: {
-        errorMessage: { order: "3" },
-        helperMessage: { order: "2" },
+        errorMessage: { gridColumn: "inherit" },
+        helperMessage: { gridColumn: "inherit" },
+        label: { gridColumn: "inherit" },
+        root: { gridTemplateColumns: "inherit" },
       },
     },
   },

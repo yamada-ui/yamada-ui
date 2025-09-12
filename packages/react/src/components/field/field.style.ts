@@ -46,14 +46,16 @@ export const fieldStyle = defineComponentSlotStyle({
      */
     orientation: {
       horizontal: {
-        errorMessage: { gridColumn: "2 / 3", gridRowStart: "3" },
-        helperMessage: { gridColumn: "2 / 3", gridRowStart: "2" },
-        label: { gridColumn: "1 / 2", gridRowStart: "1" },
+        errorMessage: { gridColumn: "2 / 3" },
+        helperMessage: { gridColumn: "2 / 3" },
+        label: { gridColumn: "1 / 2" },
         root: { gridTemplateColumns: "{field-label-width, spaces.32} 1fr" },
       },
       vertical: {
-        errorMessage: { order: "3" },
-        helperMessage: { order: "2" },
+        errorMessage: { gridColumn: "inherit" },
+        helperMessage: { gridColumn: "inherit" },
+        label: { gridColumn: "inherit" },
+        root: { gridTemplateColumns: "inherit" },
       },
     },
   },

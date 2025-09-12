@@ -1,1 +1,0 @@
-import{D as n}from"./iframe-6Bjnmk15.js";const c={enter:function(r){return function(t,e){return{...r??{duration:.2,ease:[0,0,.58,1]},...e?{duration:n(e)?e:e.enter}:{},delay:n(t)?t:t?.enter}}},exit:function(r){return function(t,e){return{...r??{duration:.2,ease:[.42,0,1,1]},...e?{duration:n(e)?e:e.exit}:{},delay:n(t)?t:t?.exit}}}};export{c};

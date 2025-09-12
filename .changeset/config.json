@@ -17,12 +17,5 @@
   "snapshot": {
     "useCalculatedVersion": true
   },
-  "ignore": [
-    "create-react-app",
-    "next-app",
-    "next-pages",
-    "vite-react",
-    "hono-react",
-    "remix"
-  ]
+  "ignore": ["next-app", "next-pages", "vite-react", "hono-react", "remix"]
 }

@@ -32,13 +32,6 @@ eslint:
         pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
       stage_fixed: true
 
-    create-react-app:
-      root: examples/vite/
-      glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"
-      run: |
-        pnpm eslint {staged_files} --max-warnings=0 --fix --cache --flag unstable_ts_config
-      stage_fixed: true
-
     hono:
       root: examples/vite/
       glob: "*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts}"

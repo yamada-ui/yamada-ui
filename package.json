@@ -73,8 +73,6 @@
     "www:translate": "pnpm --prefix www gen:translate",
     "www:tokens": "pnpm --prefix www gen:tokens",
     "www:label": "pnpm --prefix www gen:label",
-    "react:start": "pnpm --prefix examples/create-react-app start",
-    "react:build": "pnpm --prefix examples/create-react-app build",
     "next-pages:dev": "pnpm --prefix examples/next/pages dev",
     "next-pages:build": "pnpm --prefix examples/next/pages build",
     "next-pages:start": "pnpm --prefix examples/next/pages start",

@@ -412,10 +412,12 @@ function useStyle<
       props: propVariants,
       sizes,
       variants,
-      defaultProps = {},
+      defaultProps: { colorScheme: defaultColorScheme, ...defaultProps } = {},
     } = componentStyle
 
-    const colorScheme = props.colorScheme ?? rootColorScheme
+    const colorScheme =
+      props.colorScheme ?? rootColorScheme ?? defaultColorScheme
+
     const className = cx(defaultClassName ?? customClassName, props.className)
     const mergedProps = {
       ...mergeDefaultProps(defaultProps, props),

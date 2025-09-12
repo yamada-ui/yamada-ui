@@ -50,6 +50,7 @@ export const PreviewDrawer = memo(function PreviewDrawer({
     >
       <Drawer.Content
         alignItems="stretch"
+        bg={["bg", "bg.ghost"]}
         display="grid"
         gap="lg"
         gridTemplateColumns={{ base: "auto 1fr", lg: "1fr" }}
@@ -102,11 +103,10 @@ export const PreviewDrawer = memo(function PreviewDrawer({
         <VStack minW="0">
           <CodePreview
             lang="tsx"
-            bg="bg.subtle"
             code={`import { ${title} } from "@yamada-ui/react"`}
           />
 
-          <CodePreview lang="tsx" bg="bg.subtle" code={`<${title} />`} />
+          <CodePreview lang="tsx" code={`<${title} />`} />
         </VStack>
       </Drawer.Content>
     </Drawer.Root>

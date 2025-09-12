@@ -74,7 +74,7 @@
     "file-selector": "^2.1.2",
     "framesync": "6.1.2",
     "intl-messageformat": "^10.7.16",
-    "lucide-react": "0.542.0",
+    "lucide-react": "0.544.0",
     "motion": "12.18.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -83,7 +83,6 @@
     "react-focus-lock": "^2.13.6",
     "react-remove-scroll": "^2.7.1",
     "react-resizable-panels": "^3.0.5",
-    "recharts": "^3.1.2",
     "scroll-into-view-if-needed": "^3.1.0"
   },
   "devDependencies": {

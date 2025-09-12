@@ -26,6 +26,7 @@ export const modalStyle = defineComponentSlotStyle({
       maxH: "full",
       position: "relative",
       rounded: "l4",
+      w: "full",
       zIndex: "burter",
     },
     footer: {

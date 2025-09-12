@@ -839,11 +839,6 @@
           "pathname": "/docs/hooks/use-descendants"
         },
         {
-          "title": "useDisclosure",
-          "segment": "use-disclosure",
-          "pathname": "/docs/hooks/use-disclosure"
-        },
-        {
           "title": "useDynamicAnimation",
           "segment": "use-dynamic-animation",
           "pathname": "/docs/hooks/use-dynamic-animation"
@@ -977,6 +972,11 @@
           "title": "useWindowEvent",
           "segment": "use-window-event",
           "pathname": "/docs/hooks/use-window-event"
+        },
+        {
+          "title": "useDisclosure",
+          "segment": "use-disclosure",
+          "pathname": "/docs/hooks/use-disclosure"
         }
       ]
     },

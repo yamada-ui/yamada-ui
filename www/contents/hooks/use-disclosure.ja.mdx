@@ -51,7 +51,7 @@ const { open, onOpen, onClose, onToggle } = useDisclosure()
 
 ### コールバック関数を使う
 
-コールバック関数を使う場合は、`onOpen`または`onClose`に関数を設定します。これは、[Modal](./docs/components/modal)などのコンポーネントを開く前に、APIなどを実行するのに役立ちます。
+コールバック関数を使う場合は、`onOpen`または`onClose`に関数を設定します。これは、[Modal](/docs/components/modal)などのコンポーネントを開く前に、APIなどを実行するのに役立ちます。
 
 ```tsx preview functional client
 const { open, onClose, onOpen } = useDisclosure<string, string>({

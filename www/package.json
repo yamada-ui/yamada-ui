@@ -31,8 +31,8 @@
     "@yamada-ui/react": "workspace:*",
     "match-sorter": "^8.1.0",
     "motion": "12.18.1",
-    "next": "^15.5.2",
-    "next-intl": "^4.3.6",
+    "next": "^15.5.3",
+    "next-intl": "^4.3.7",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.62.0",
@@ -41,7 +41,7 @@
     "shiki": "3.3.0"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^15.5.2",
+    "@next/eslint-plugin-next": "^15.5.3",
     "@shikijs/rehype": "^3.12.2",
     "@shikijs/transformers": "^3.12.2",
     "@types/hast": "^3.0.4",

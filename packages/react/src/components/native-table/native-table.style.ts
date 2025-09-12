@@ -95,9 +95,6 @@ export const nativeTableStyle = defineComponentSlotStyle({
      */
     stickyFooter: {
       true: {
-        root: {
-          borderCollapse: "separate",
-        },
         tfoot: {
           "& tr": {
             bottom: "0",
@@ -114,9 +111,6 @@ export const nativeTableStyle = defineComponentSlotStyle({
      */
     stickyHeader: {
       true: {
-        root: {
-          borderCollapse: "separate",
-        },
         thead: {
           "& tr": {
             position: "sticky",
@@ -182,9 +176,6 @@ export const nativeTableStyle = defineComponentSlotStyle({
       },
       th: {
         borderBottomWidth: "1px",
-      },
-      tr: {
-        bg: "bg",
       },
     },
     outline: {

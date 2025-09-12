@@ -4,7 +4,6 @@ import type { FragmentContent, PageContent } from "@/data"
 import type { Descendant, HTMLProps } from "@yamada-ui/react"
 import type { ElementType, KeyboardEvent, ReactNode, RefObject } from "react"
 import {
-  AlignLeftIcon,
   assignRef,
   Box,
   Center,
@@ -22,6 +21,7 @@ import {
   runKeyAction,
   SearchIcon,
   Text,
+  TextAlignStartIcon,
   useDisclosure,
   useUpdateEffect,
   useWindowEvent,
@@ -363,7 +363,7 @@ function SearchContentBody({
             key={`${hit.pathname}-${index}`}
             href={hit.pathname}
             description={getDescription(hit)}
-            icon={hit.type === "fragment" ? HashIcon : AlignLeftIcon}
+            icon={hit.type === "fragment" ? HashIcon : TextAlignStartIcon}
             title={hit.title}
             onActive={onActive}
             onClose={onClose}

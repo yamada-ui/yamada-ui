@@ -6,7 +6,847 @@ source: components/menu
 style: components/menu/menu.style.ts
 ---
 
+```tsx preview
+<Menu.Root>
+  <Menu.Trigger>
+    <Button>Menu</Button>
+  </Menu.Trigger>
+
+  <Menu.Content>
+    <Menu.Item value="naruto">うずまきナルト</Menu.Item>
+    <Menu.Item value="sasuke">うちはサスケ</Menu.Item>
+    <Menu.Item value="sakura">春野サクラ</Menu.Item>
+  </Menu.Content>
+</Menu.Root>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Menu } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Menu } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Menu } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Menu.Root>
+  <Menu.Trigger />
+  <Menu.ContextTrigger />
+  <Menu.Anchor />
+  <Menu.Content>
+    <Menu.Header />
+    <Menu.Group>
+      <Menu.Item>
+        <Menu.Label />
+        <Menu.Indicator />
+        <Menu.Command />
+      </Menu.Item>
+    </Menu.Group>
+    <Menu.Separator />
+    <Menu.OptionGroup>
+      <Menu.OptionItem />
+    </Menu.OptionGroup>
+    <Menu.Footer />
+  </Menu.Content>
+</Menu.Root>
+```
+
+### itemsを使う
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+
+return (
+  <Menu.Root>
+    <Menu.Trigger>
+      <Button>Menu</Button>
+    </Menu.Trigger>
+
+    <Menu.Content items={items} />
+  </Menu.Root>
+)
+```
+
+### サイズを変更する
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+
+return (
+  <HStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size) => (
+        <Menu.Root key={size} size={size}>
+          <Menu.Trigger>
+            <Button>{toTitleCase(size)}</Button>
+          </Menu.Trigger>
+
+          <Menu.Content items={items} />
+        </Menu.Root>
+      )}
+    </For>
+  </HStack>
+)
+```
+
+### 選択時のイベントをハンドルする
+
+選択時のイベントをハンドルする場合は、`onSelect`を使用します。
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+
+return (
+  <Menu.Root onSelect={(value) => console.log("selected", value)}>
+    <Menu.Trigger>
+      <Button>Menu</Button>
+    </Menu.Trigger>
+
+    <Menu.Content items={items} />
+  </Menu.Root>
+)
+```
+
+### 区切り線を追加する
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+    { type: "separator" },
+    { label: "大蛇丸", value: "orochimaru" },
+    { label: "自來也", value: "pervy-sage" },
+    { label: "綱手", value: "tsunade" },
+  ],
+  [],
+)
+
+return (
+  <HStack>
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu with items</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu with composition</Button>
+      </Menu.Trigger>
+
+      <Menu.Content>
+        <Menu.Item value="naruto">うずまきナルト</Menu.Item>
+        <Menu.Item value="sasuke">うちはサスケ</Menu.Item>
+        <Menu.Item value="sakura">春野サクラ</Menu.Item>
+
+        <Menu.Separator />
+
+        <Menu.Item value="orochimaru">大蛇丸</Menu.Item>
+        <Menu.Item value="pervy-sage">自來也</Menu.Item>
+        <Menu.Item value="tsunade">綱手</Menu.Item>
+      </Menu.Content>
+    </Menu.Root>
+  </HStack>
+)
+```
+
+### グループ化する
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    {
+      items: [
+        { label: "うずまきナルト", value: "naruto" },
+        { label: "うちはサスケ", value: "sasuke" },
+        { label: "春野サクラ", value: "sakura" },
+      ],
+      label: "第七班",
+    },
+    {
+      items: [
+        { label: "大蛇丸", value: "orochimaru" },
+        { label: "自來也", value: "pervy-sage" },
+        { label: "綱手", value: "tsunade" },
+      ],
+      label: "伝説の三忍",
+    },
+  ],
+  [],
+)
+
+return (
+  <HStack>
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu with items</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu with composition</Button>
+      </Menu.Trigger>
+
+      <Menu.Content>
+        <Menu.Group label="第七班">
+          <Menu.Item value="naruto">うずまきナルト</Menu.Item>
+          <Menu.Item value="sasuke">うちはサスケ</Menu.Item>
+          <Menu.Item value="sakura">春野サクラ</Menu.Item>
+        </Menu.Group>
+
+        <Menu.Separator />
+
+        <Menu.Group label="伝説の三忍">
+          <Menu.Item value="orochimaru">大蛇丸</Menu.Item>
+          <Menu.Item value="pervy-sage">自來也</Menu.Item>
+          <Menu.Item value="tsunade">綱手</Menu.Item>
+        </Menu.Group>
+      </Menu.Content>
+    </Menu.Root>
+  </HStack>
+)
+```
+
+### アイコンを表示する
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    {
+      label: (
+        <>
+          <Menu.Indicator>
+            <PlusIcon />
+          </Menu.Indicator>
+          New Tab
+        </>
+      ),
+      value: "tab",
+    },
+    {
+      label: (
+        <>
+          <Menu.Indicator>
+            <SquareArrowOutUpRightIcon />
+          </Menu.Indicator>
+          New Window
+        </>
+      ),
+      value: "window",
+    },
+    {
+      label: (
+        <>
+          <Menu.Indicator>
+            <SquarePenIcon />
+          </Menu.Indicator>
+          New File
+        </>
+      ),
+      value: "file",
+    },
+  ],
+  [],
+)
+
+return (
+  <HStack>
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu with items</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu with composition</Button>
+      </Menu.Trigger>
+
+      <Menu.Content>
+        <Menu.Item value="tab">
+          <Menu.Indicator>
+            <PlusIcon />
+          </Menu.Indicator>
+          New Tab
+        </Menu.Item>
+        <Menu.Item value="window">
+          <Menu.Indicator>
+            <SquareArrowOutUpRightIcon />
+          </Menu.Indicator>
+          New Window
+        </Menu.Item>
+        <Menu.Item value="file">
+          <Menu.Indicator>
+            <SquarePenIcon />
+          </Menu.Indicator>
+          New File
+        </Menu.Item>
+      </Menu.Content>
+    </Menu.Root>
+  </HStack>
+)
+```
+
+### コマンドを表示する
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    {
+      label: (
+        <>
+          New Tab
+          <Menu.Command>⌘T</Menu.Command>
+        </>
+      ),
+      value: "tab",
+    },
+    {
+      label: (
+        <>
+          New Window
+          <Menu.Command>⌘N</Menu.Command>
+        </>
+      ),
+      value: "window",
+    },
+    {
+      label: (
+        <>
+          New File
+          <Menu.Command>⌘O</Menu.Command>
+        </>
+      ),
+      value: "file",
+    },
+  ],
+  [],
+)
+
+return (
+  <HStack>
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu with items</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu with composition</Button>
+      </Menu.Trigger>
+
+      <Menu.Content>
+        <Menu.Item value="tab">
+          New Tab
+          <Menu.Command>⌘T</Menu.Command>
+        </Menu.Item>
+        <Menu.Item value="window">
+          New Window
+          <Menu.Command>⌘N</Menu.Command>
+        </Menu.Item>
+        <Menu.Item value="file">
+          New File
+          <Menu.Command>⌘O</Menu.Command>
+        </Menu.Item>
+      </Menu.Content>
+    </Menu.Root>
+  </HStack>
+)
+```
+
+### 選択可能な項目を設定する
+
+```tsx preview functional
+const [value, setValue] = useState("naruto")
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    {
+      type: "checkbox",
+      items: [
+        { label: "うずまきナルト", value: "naruto" },
+        { label: "うちはサスケ", value: "sasuke" },
+        { label: "春野サクラ", value: "sakura" },
+        { label: "はたけカカシ", value: "kakashi", disabled: true },
+      ],
+      value,
+      onChange: setValue,
+    },
+  ],
+  [value],
+)
+
+return (
+  <HStack>
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu with items</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+
+    <Menu.Root>
+      <Menu.Trigger>
+        <Button>Menu with composition</Button>
+      </Menu.Trigger>
+
+      <Menu.Content>
+        <Menu.OptionGroup type="checkbox" value={value} onChange={setValue}>
+          <Menu.OptionItem value="naruto">うずまきナルト</Menu.OptionItem>
+          <Menu.OptionItem value="sasuke">うちはサスケ</Menu.OptionItem>
+          <Menu.OptionItem value="sakura">春野サクラ</Menu.OptionItem>
+          <Menu.OptionItem disabled value="kakashi">
+            はたけカカシ
+          </Menu.OptionItem>
+        </Menu.OptionGroup>
+      </Menu.Content>
+    </Menu.Root>
+  </HStack>
+)
+```
+
+### ネストさせる
+
+```tsx preview
+<Menu.Root>
+  <Menu.Trigger>
+    <Button>Menu</Button>
+  </Menu.Trigger>
+
+  <Menu.Content>
+    <Menu.Item value="naruto">うずまきナルト</Menu.Item>
+    <Menu.Item value="sasuke">うちはサスケ</Menu.Item>
+    <Menu.Item value="sakura">春野サクラ</Menu.Item>
+
+    <Menu.Root>
+      <Menu.Trigger>
+        <Menu.Item>Settings</Menu.Item>
+      </Menu.Trigger>
+
+      <Menu.Content>
+        <Menu.Item value="extensions">Extensions</Menu.Item>
+        <Menu.Item value="theme">Theme</Menu.Item>
+        <Menu.Item value="tasks">User Tasks</Menu.Item>
+      </Menu.Content>
+    </Menu.Root>
+  </Menu.Content>
+</Menu.Root>
+```
+
+### コンテキストメニューを使用する
+
+```tsx preview
+<Menu.Root>
+  <Menu.ContextTrigger>
+    <Center
+      borderStyle="dashed"
+      borderWidth="1px"
+      h="xs"
+      p="md"
+      rounded="l2"
+      w="full"
+    >
+      <Text>Right Click Here</Text>
+    </Center>
+  </Menu.ContextTrigger>
+
+  <Menu.Content>
+    <Menu.Item value="copy">Copy</Menu.Item>
+    <Menu.Item value="paste">Paste</Menu.Item>
+    <Menu.Item value="delete">Delete</Menu.Item>
+  </Menu.Content>
+</Menu.Root>
+```
+
+### 別の要素を参照して表示する
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+
+return (
+  <Menu.Root>
+    <HStack>
+      <Menu.Anchor>
+        <Center borderWidth="1px" h="10" px="3" rounded="l2">
+          Here display Popover
+        </Center>
+      </Menu.Anchor>
+
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+    </HStack>
+
+    <Menu.Content items={items} />
+  </Menu.Root>
+)
+```
+
+### 選択時の閉じる動作を無効にする
+
+選択時の閉じる動作を無効にする場合は、`closeOnSelect`を`false`に設定します。
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+return (
+  <Menu.Root closeOnSelect={false}>
+    <Menu.Trigger>
+      <Button>Menu</Button>
+    </Menu.Trigger>
+
+    <Menu.Content items={items} />
+  </Menu.Root>
+)
+```
+
+### 内部状態にアクセスする
+
+内部状態にアクセスする場合は、`Menu.Root`の`children`に関数を渡します。
+
+```tsx preview functional client
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+
+return (
+  <Menu.Root>
+    {({ open }) => (
+      <>
+        <Menu.Trigger>
+          <Button>{open ? "Close" : "Open"} Menu</Button>
+        </Menu.Trigger>
+
+        <Menu.Content items={items} />
+      </>
+    )}
+  </Menu.Root>
+)
+```
+
+### 初回のフォーカスを設定する
+
+初回のフォーカスを設定する場合は、`initialFocusRef`に`Ref`を渡します。
+
+```tsx preview functional client
+const ref = useRef<HTMLDivElement>(null)
+
+return (
+  <Menu.Root initialFocusRef={ref}>
+    <Menu.Trigger>
+      <Button>Menu</Button>
+    </Menu.Trigger>
+
+    <Menu.Content>
+      <Menu.Item value="status">Set Status</Menu.Item>
+      <Menu.Item ref={ref} value="profile">
+        Edit Profile
+      </Menu.Item>
+      <Menu.Item value="preferences">Preferences</Menu.Item>
+    </Menu.Content>
+  </Menu.Root>
+)
+```
+
+### 配置を変更する
+
+表示位置を変更する場合は、`placement`に`"start"`や`"end-end"`などを設定します。デフォルトでは、`"end-start"`が設定されています。
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+
+return (
+  <HStack>
+    <For
+      each={[
+        "start",
+        "start-start",
+        "start-end",
+        "end",
+        "end-start",
+        "end-end",
+      ]}
+    >
+      {(placement) => (
+        <Menu.Root key={placement} placement={placement}>
+          <Menu.Trigger>
+            <Button>{toTitleCase(placement)}</Button>
+          </Menu.Trigger>
+
+          <Menu.Content items={items} />
+        </Menu.Root>
+      )}
+    </For>
+  </HStack>
+)
+```
+
+### アニメーションを変更する
+
+アニメーションを変更する場合は、`animationScheme`に`"inline-start"`や`"block-end"`などを設定します。デフォルトでは、`"scale"`が設定されています。
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+
+return (
+  <HStack>
+    <For
+      each={["scale", "block-end", "block-start", "inline-start", "inline-end"]}
+    >
+      {(animationScheme) => (
+        <Menu.Root key={animationScheme} animationScheme={animationScheme}>
+          <Menu.Trigger>
+            <Button>{toTitleCase(animationScheme)}</Button>
+          </Menu.Trigger>
+
+          <Menu.Content items={items} />
+        </Menu.Root>
+      )}
+    </For>
+  </HStack>
+)
+```
+
+### オフセットを変更する
+
+オフセットを変更する場合は、`gutter`または`offset`に値を設定します。
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+return (
+  <HStack>
+    <Menu.Root gutter={32}>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+
+    <Menu.Root offset={[16, 16]}>
+      <Menu.Trigger>
+        <Button>Menu</Button>
+      </Menu.Trigger>
+
+      <Menu.Content items={items} />
+    </Menu.Root>
+  </HStack>
+)
+```
+
+### 継続時間を変更する
+
+所要時間を変更する場合は、`duration`に数値（秒）を設定します。
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+
+return (
+  <Menu.Root duration={0.4}>
+    <Menu.Trigger>
+      <Button>Menu</Button>
+    </Menu.Trigger>
+
+    <Menu.Content items={items} />
+  </Menu.Root>
+)
+```
+
+### 外側のクリック時に閉じない
+
+外側のクリック時に閉じない場合は、`closeOnBlur`を`false`に設定します。
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+return (
+  <Menu.Root closeOnBlur={false}>
+    <Menu.Trigger>
+      <Button>Menu</Button>
+    </Menu.Trigger>
+
+    <Menu.Content items={items} />
+  </Menu.Root>
+)
+```
+
+### 項目を無効にする
+
+項目を無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke", disabled: true },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+
+return (
+  <Menu.Root>
+    <Menu.Trigger>
+      <Button>Menu</Button>
+    </Menu.Trigger>
+
+    <Menu.Content items={items} />
+  </Menu.Root>
+)
+```
+
+### ヘッダーやフッターを追加する
+
+ヘッダーやフッターを追加する場合は、`Menu.Content`の`header`または`footer`に`ReactNode`を設定します。
+
+```tsx preview functional
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+    { label: "大蛇丸", value: "orochimaru" },
+    { label: "自來也", value: "pervy-sage" },
+    { label: "綱手", value: "tsunade" },
+  ],
+  [],
+)
+
+return (
+  <Menu.Root>
+    <Menu.Trigger>
+      <Button>Menu</Button>
+    </Menu.Trigger>
+
+    <Menu.Content
+      header="キャラクター"
+      footer="キャラクター"
+      items={items}
+      maxH="2xs"
+    />
+  </Menu.Root>
+)
+```
+
+### 制御する
+
+```tsx preview functional client
+const { open, onOpen, onClose } = useDisclosure()
+
+const items = useMemo<Menu.ContentProps["items"]>(
+  () => [
+    { label: "うずまきナルト", value: "naruto" },
+    { label: "うちはサスケ", value: "sasuke" },
+    { label: "春野サクラ", value: "sakura" },
+  ],
+  [],
+)
+
+return (
+  <Menu.Root open={open} onOpen={onOpen} onClose={onClose}>
+    <Menu.Trigger>
+      <Button>Menu</Button>
+    </Menu.Trigger>
+
+    <Menu.Content items={items} />
+  </Menu.Root>
+)
+```
 
 ## Props
 

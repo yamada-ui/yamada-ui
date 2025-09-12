@@ -5,7 +5,403 @@ storybook: components-checkbox--basic
 source: components/checkbox
 ---
 
+```tsx preview
+<Checkbox>キングダム ハーツ</Checkbox>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Checkbox, CheckboxGroup } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Checkbox, CheckboxGroup } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Checkbox, CheckboxGroup } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Checkbox />
+```
+
+```tsx
+<CheckboxGroup.Root>
+  <CheckboxGroup.Item />
+</CheckboxGroup.Root>
+```
+
+### Group
+
+```tsx preview
+<CheckboxGroup.Root defaultValue={["sora", "riku"]}>
+  <CheckboxGroup.Item value="sora">ソラ</CheckboxGroup.Item>
+  <CheckboxGroup.Item value="riku">リク</CheckboxGroup.Item>
+  <CheckboxGroup.Item value="kairi">カイリ</CheckboxGroup.Item>
+</CheckboxGroup.Root>
+```
+
+### Use Items
+
+```tsx preview functional
+const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  () => [
+    { label: "ソラ", value: "sora" },
+    { label: "リク", value: "riku" },
+    { label: "カイリ", value: "kairi" },
+  ],
+  [],
+)
+
+return <CheckboxGroup.Root items={items} />
+```
+
+### Change Variant
+
+```tsx preview functional
+const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "No checked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["solid", "subtle", "surface", "outline"]}>
+      {(variant) => (
+        <CheckboxGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Size
+
+```tsx preview functional
+const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "No checked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size) => (
+        <CheckboxGroup.Root
+          key={size}
+          size={size}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Set Default Value
+
+To set a default value, set `defaultValue` to an array of values.
+
+```tsx preview functional
+const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  () => [
+    { label: "ソラ", value: "sora" },
+    { label: "リク", value: "riku" },
+    { label: "カイリ", value: "kairi" },
+  ],
+  [],
+)
+
+return <CheckboxGroup.Root defaultValue={["sora"]} items={items} />
+```
+
+### Default Checked
+
+To default checked, set `defaultChecked` to `true`.
+
+```tsx preview
+<Checkbox defaultChecked>キングダム ハーツ</Checkbox>
+```
+
+### Indeterminate
+
+To make indeterminate, set `indeterminate` to `true`.
+
+```tsx preview functional client
+const [id0, id1, id2] = useIds()
+const [values, setValues] = useState([true, false, false])
+
+const allChecked = values.every(Boolean)
+const indeterminate = values.some(Boolean) && !allChecked
+
+return (
+  <VStack gap="sm">
+    <Checkbox
+      checked={allChecked}
+      indeterminate={indeterminate}
+      inputProps={{ "aria-controls": `${id0} ${id1} ${id2}` }}
+      onChange={(ev) =>
+        setValues([ev.target.checked, ev.target.checked, ev.target.checked])
+      }
+    >
+      デスティニーアイランド
+    </Checkbox>
+
+    <VStack gap="sm" ms="md">
+      <Checkbox
+        id={id0}
+        checked={values[0]}
+        onChange={(ev) =>
+          setValues([ev.target.checked, values[1]!, values[2]!])
+        }
+      >
+        ソラ
+      </Checkbox>
+      <Checkbox
+        id={id1}
+        checked={values[1]}
+        onChange={(ev) =>
+          setValues([values[0]!, ev.target.checked, values[2]!])
+        }
+      >
+        リク
+      </Checkbox>
+      <Checkbox
+        id={id2}
+        checked={values[2]}
+        onChange={(ev) =>
+          setValues([values[0]!, values[1]!, ev.target.checked])
+        }
+      >
+        カイリ
+      </Checkbox>
+    </VStack>
+  </VStack>
+)
+```
+
+### Max Selection
+
+To limit the maximum number of selections, set `max` to a number.
+
+```tsx preview functional
+const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  () => [
+    { label: "ソラ", value: "sora" },
+    { label: "リク", value: "riku" },
+    { label: "カイリ", value: "kairi" },
+  ],
+  [],
+)
+
+return <CheckboxGroup.Root items={items} max={2} />
+```
+
+### Change Direction
+
+To change the direction, set `orientation` to `"horizontal"` or `"vertical"`. The default is `"vertical"`.
+
+```tsx preview functional
+const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  () => [
+    { label: "ソラ", value: "sora" },
+    { label: "リク", value: "riku" },
+    { label: "カイリ", value: "kairi" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["horizontal", "vertical"]}>
+      {(orientation) => (
+        <CheckboxGroup.Root
+          key={orientation}
+          orientation={orientation}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Shape
+
+To change the shape, set `shape` to `"rounded"` or `"square"`. The default is `"rounded"`.
+
+```tsx preview
+<CheckboxGroup.Root>
+  <For each={["rounded", "square"]}>
+    {(shape) => (
+      <CheckboxGroup.Item key={shape} shape={shape} defaultChecked>
+        {toTitleCase(shape)}
+      </CheckboxGroup.Item>
+    )}
+  </For>
+</CheckboxGroup.Root>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<CheckboxGroup.Root>
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant) => (
+      <CheckboxGroup.Item key={variant} variant={variant} disabled>
+        {toTitleCase(variant)}
+      </CheckboxGroup.Item>
+    )}
+  </For>
+</CheckboxGroup.Root>
+```
+
+### Read-Only
+
+To read-only, set `readOnly` to `true`.
+
+```tsx preview
+<CheckboxGroup.Root>
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant) => (
+      <CheckboxGroup.Item
+        key={variant}
+        variant={variant}
+        readOnly
+        defaultChecked
+      >
+        {toTitleCase(variant)}
+      </CheckboxGroup.Item>
+    )}
+  </For>
+</CheckboxGroup.Root>
+```
+
+### Invalid
+
+To make invalid, set `invalid` to `true`.
+
+```tsx preview
+<CheckboxGroup.Root>
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant) => (
+      <CheckboxGroup.Item key={variant} variant={variant} invalid>
+        {toTitleCase(variant)}
+      </CheckboxGroup.Item>
+    )}
+  </For>
+</CheckboxGroup.Root>
+```
+
+### Change Border Color
+
+To change the border color, set `focusBorderColor` or `errorBorderColor` to a color value.
+
+```tsx preview
+<CheckboxGroup.Root>
+  <CheckboxGroup.Item value="default">Default Border Color</CheckboxGroup.Item>
+  <CheckboxGroup.Item focusBorderColor="green.500" value="custom">
+    Custom Border Color
+  </CheckboxGroup.Item>
+  <CheckboxGroup.Item errorBorderColor="orange.500" invalid value="error">
+    Custom Error Border Color
+  </CheckboxGroup.Item>
+</CheckboxGroup.Root>
+```
+
+### Customize Icon
+
+To customize icon, set `checkedIcon` to a `ReactNode`.
+
+```tsx preview functional
+const items = useMemo<CheckboxGroup.RootProps["items"]>(
+  () => [
+    { label: "ソラ", value: "sora" },
+    { label: "リク", value: "riku" },
+    { label: "カイリ", value: "kairi", checkedIcon: <HeartIcon /> },
+  ],
+  [],
+)
+
+return <CheckboxGroup.Root checkedIcon={<KeyIcon />} items={items} />
+```
+
+### Use Custom Component
+
+```tsx preview functional client
+const { getInputProps, getLabelProps, getRootProps } = useCheckboxGroup({
+  defaultValue: ["sora"],
+  max: 2,
+})
+
+const CustomCheckbox = ({ children, ...rest }) => {
+  return (
+    <Box
+      as="label"
+      css={{
+        "&:has(input:checked)": {
+          bg: "colorScheme.solid",
+          borderColor: "colorScheme.solid",
+          color: "colorScheme.contrast",
+        },
+        "&:has(input:disabled)": {
+          layerStyle: "disabled",
+        },
+        alignItems: "center",
+        borderWidth: "1px",
+        display: "flex",
+        h: "10",
+        px: "3",
+        rounded: "l2",
+      }}
+      {...getLabelProps()}
+    >
+      <Box as="input" {...getInputProps(rest)} />
+      {children}
+    </Box>
+  )
+}
+
+return (
+  <HStack {...getRootProps()}>
+    <CustomCheckbox value="sora">ソラ</CustomCheckbox>
+    <CustomCheckbox value="riku">リク</CustomCheckbox>
+    <CustomCheckbox value="kairi">カイリ</CustomCheckbox>
+  </HStack>
+)
+```
+
+### Control
+
+```tsx preview functional client
+const [checked, { toggle }] = useBoolean(false)
+
+return (
+  <Checkbox checked={checked} onChange={toggle}>
+    ソラ
+  </Checkbox>
+)
+```
 
 ## Props
 

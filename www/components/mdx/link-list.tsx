@@ -9,7 +9,7 @@ export interface LinkListProps extends VStackProps {
 
 export function LinkList({ items, ...rest }: LinkListProps) {
   return (
-    <VStack align="start" fontSize="sm" gap="md" {...rest}>
+    <VStack colorScheme="mono" align="start" fontSize="sm" gap="md" {...rest}>
       {items.map(({ href, label }, index) => (
         <NextLink key={index} href={href}>
           {label}

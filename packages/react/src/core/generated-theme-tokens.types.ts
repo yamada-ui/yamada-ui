@@ -41,6 +41,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "bg.contrast"
     | "bg.emphasized"
     | "bg.error"
+    | "bg.float"
     | "bg.ghost"
     | "bg.info"
     | "bg.muted"
@@ -1058,7 +1059,7 @@ export interface GeneratedThemeTokens extends UsageThemeTokens {
     | "sm"
     | "xl"
     | "xs"
-  textStyles: "mono" | "outline" | "solid" | "subtle" | "surface"
+  textStyles: "ghost" | "mono" | "outline" | "solid" | "subtle" | "surface"
   themeSchemes: never
   zIndices:
     | "beerus"

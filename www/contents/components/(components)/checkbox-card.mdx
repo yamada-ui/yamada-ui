@@ -5,7 +5,652 @@ storybook: components-checkboxcard--basic
 source: components/checkbox-card
 ---
 
+```tsx preview
+<CheckboxCardGroup.Root>
+  <CheckboxCardGroup.Item.Root value="1">
+    <CheckboxCardGroup.Item.Label>ビアンカ</CheckboxCardGroup.Item.Label>
+    <CheckboxCardGroup.Item.Description>
+      パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。
+    </CheckboxCardGroup.Item.Description>
+  </CheckboxCardGroup.Item.Root>
+  <CheckboxCardGroup.Item.Root value="2">
+    <CheckboxCardGroup.Item.Label>フローラ</CheckboxCardGroup.Item.Label>
+    <CheckboxCardGroup.Item.Description>
+      大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。
+    </CheckboxCardGroup.Item.Description>
+  </CheckboxCardGroup.Item.Root>
+  <CheckboxCardGroup.Item.Root value="3">
+    <CheckboxCardGroup.Item.Label>ルドマン</CheckboxCardGroup.Item.Label>
+    <CheckboxCardGroup.Item.Description>
+      なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。
+    </CheckboxCardGroup.Item.Description>
+  </CheckboxCardGroup.Item.Root>
+</CheckboxCardGroup.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { CheckboxCard, CheckboxCardGroup } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { CheckboxCard, CheckboxCardGroup } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { CheckboxCard, CheckboxCardGroup } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<CheckboxCardGroup.Root>
+  <CheckboxCardGroup.Item.Root>
+    <CheckboxCardGroup.Item.Label />
+    <CheckboxCardGroup.Item.Description />
+    <CheckboxCardGroup.Item.Addon />
+  </CheckboxCardGroup.Item.Root>
+</CheckboxCardGroup.Root>
+```
+
+### Use Items
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root items={items} />
+```
+
+### Change Variant
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "Unchecked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <CheckboxCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Size
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "Unchecked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size) => (
+        <CheckboxCardGroup.Root
+          key={size}
+          size={size}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Color Scheme
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "Unchecked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["success", "warning"]}>
+      {(colorScheme) => (
+        <CheckboxCardGroup.Root
+          key={colorScheme}
+          colorScheme={colorScheme}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Set Default Value
+
+To set a default value, set the value to `defaultValue`.
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root defaultValue={["1", "2"]} items={items} />
+```
+
+### Limit the Number of Selections
+
+To limit the number of selections, set a number to `max`.
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root items={items} max={2} />
+```
+
+### Change Orientation
+
+To change the orientation, set `orientation` to `"horizontal"` or `"vertical"`. By default, `"horizontal"` is set.
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root items={items} orientation="vertical" />
+```
+
+### Change Shape
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["rounded", "square"]}>
+      {(shape) => (
+        <CheckboxCardGroup.Root
+          key={shape}
+          shape={shape}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Alignment
+
+To change the alignment, set `justify` to `"start"` or `"end"`, etc. By default, `"start"` is set.
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["start", "end"]}>
+      {(justify) => (
+        <CheckboxCardGroup.Root
+          key={justify}
+          justify={justify}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Add Addon
+
+To add an addon, set `ReactNode` to `addon`.
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      addon: "ドラゴンクエストV 天空の花嫁",
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      addon: "ドラゴンクエストV 天空の花嫁",
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      addon: "ドラゴンクエストV 天空の花嫁",
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root items={items} orientation="vertical" />
+```
+
+### Hide Indicator
+
+To hide the indicator, set `withIndicator` to `false`.
+
+```tsx preview
+<CheckboxCardGroup.Root withIndicator={false}>
+  <CheckboxCardGroup.Item.Root flexDirection="row" gap="sm" value="1" w="auto">
+    <RabbitIcon fontSize="2xl" />
+    <Text as="span">ウサギ</Text>
+  </CheckboxCardGroup.Item.Root>
+  <CheckboxCardGroup.Item.Root flexDirection="row" gap="sm" value="2" w="auto">
+    <SnailIcon fontSize="2xl" />
+    <Text as="span">カタツムリ</Text>
+  </CheckboxCardGroup.Item.Root>
+  <CheckboxCardGroup.Item.Root flexDirection="row" gap="sm" value="3" w="auto">
+    <SquirrelIcon fontSize="2xl" />
+    <Text as="span">リス</Text>
+  </CheckboxCardGroup.Item.Root>
+</CheckboxCardGroup.Root>
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <CheckboxCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue={["1"]}
+          disabled
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Make Read Only
+
+To make read-only, set `readOnly` to `true`.
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <CheckboxCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue={["1"]}
+          readOnly
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Make Input Invalid
+
+To make the input invalid, set `invalid` to `true`.
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <CheckboxCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue={["1"]}
+          invalid
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Customize Border Color
+
+To customize the border color, set a value to `focusBorderColor` or `errorBorderColor`.
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <CheckboxCardGroup.Root focusBorderColor="green.500" items={items} />
+    <CheckboxCardGroup.Root
+      defaultValue={["1"]}
+      errorBorderColor="orange.500"
+      invalid
+      items={items}
+    />
+  </VStack>
+)
+```
+
+### Customize Icon
+
+To customize the icon, set `ReactNode` to `checkedIcon`.
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root checkedIcon={<PlusIcon />} items={items} />
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState(["1"])
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description:
+        "パパスの息子より、ふたつ年上のしっかり者の幼なじみ。彼と一緒に、レヌール城のお化け退治に繰り出した。",
+      label: "ビアンカ",
+      value: "1",
+    },
+    {
+      description:
+        "大富豪ルドマンの娘で、デボラの妹。ちょっぴり天然なところもある、清楚で可憐なお嬢様。",
+      label: "フローラ",
+      value: "2",
+    },
+    {
+      description:
+        "なんと、この私が、好きと申すか！？そ、それはいかん！もう１度、考えてみなさい。",
+      label: "ルドマン",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <CheckboxCardGroup.Root items={items} value={value} onChange={setValue} />
+)
+```
 
 ## Props
 

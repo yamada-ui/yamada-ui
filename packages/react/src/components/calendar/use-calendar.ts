@@ -206,15 +206,9 @@ export const sortDates = (dates: Date[], type: "asc" | "desc" = "asc") => {
 }
 
 export const updateMaybeDateValue =
-  (value: Date, range?: boolean, max?: number) =>
+  (value: Date, max?: number) =>
   (prev: MaybeDate): MaybeDate => {
-    if (isDate(prev)) {
-      if (isSameDate(prev, value)) {
-        return undefined
-      } else {
-        return value
-      }
-    } else if (isArray(prev)) {
+    if (isArray(prev)) {
       if (isIncludeDates(value, prev)) {
         return prev.filter((prevValue) => !isSameDate(prevValue, value))
       } else if (!isNumber(max) || prev.length < max) {
@@ -222,7 +216,7 @@ export const updateMaybeDateValue =
       } else {
         return prev
       }
-    } else if (isObject(prev)) {
+    } else if (isObject(prev) && !isDate(prev)) {
       const { end, start } = prev
 
       if ((start && end) || !start) {
@@ -235,6 +229,12 @@ export const updateMaybeDateValue =
         } else {
           return { end: value, start }
         }
+      }
+    } else {
+      if (isSameDate(prev, value)) {
+        return undefined
+      } else {
+        return value
       }
     }
   }
@@ -524,13 +524,13 @@ export const useCalendar = <
 
       setValue(
         (prev) =>
-          updateMaybeDateValue(value, range, max)(prev) as MaybeDateValue<
+          updateMaybeDateValue(value, max)(prev) as MaybeDateValue<
             Multiple,
             Range
           >,
       )
     },
-    [max, maxDate, minDate, range, setValue],
+    [max, maxDate, minDate, setValue],
   )
 
   const onMonthChange = useCallback(

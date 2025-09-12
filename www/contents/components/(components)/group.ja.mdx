@@ -38,7 +38,7 @@ import { Group } from "@workspaces/ui"
 
 ### 方向を変更する
 
-方向を変更する場合は、`orientation`に`vertical`または`horizontal`を設定します。デフォルトは、`horizontal`です。
+方向を変更する場合は、`orientation`に`"vertical"`または`"horizontal"`を設定します。デフォルトでは、`"horizontal"`が設定されています。
 
 ```tsx preview
 <VStack alignItems="flex-start">
@@ -58,7 +58,7 @@ import { Group } from "@workspaces/ui"
 
 ### 子要素を引き延ばす
 
-子要素を横幅いっぱいに引き延ばす場合は、`grow`に`true`を設定します。
+子要素を横幅いっぱいに引き延ばす場合は、`grow`を`true`に設定します。
 
 ```tsx preview
 <Group grow w="full">
@@ -70,7 +70,7 @@ import { Group } from "@workspaces/ui"
 
 ### 子要素を連結する
 
-子要素を連結する場合は、`attached`に`true`を設定します。
+子要素を連結する場合は、`attached`を`true`に設定します。
 
 ```tsx preview
 <VStack alignItems="flex-start">

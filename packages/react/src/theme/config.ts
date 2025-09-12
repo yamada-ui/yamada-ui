@@ -10,5 +10,6 @@ export const config = defineConfig({
   breakpoint: { direction: "down", identifier: "@media screen" },
   defaultColorMode: "light",
   defaultThemeScheme: "base",
+  notice: { duration: 5000 },
   theme: { responsive: true },
 })

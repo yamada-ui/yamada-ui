@@ -246,7 +246,7 @@ const Snack = withContext<"div", SnackProps>(
           )
         ) : null}
 
-        <SnackContent {...contentProps}>
+        <SnackContent data-close-button={dataAttr(closable)} {...contentProps}>
           {title ? (
             <Alert.Title me="0" {...titleProps}>
               {title}

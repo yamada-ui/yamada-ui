@@ -4,7 +4,7 @@ export const snacksStyle = defineComponentSlotStyle({
   base: {
     closeButton: {
       "&:is([data-variant='plain'], [data-variant='island'])": {
-        colorScheme: "mono",
+        colorScheme: "mono!",
       },
       "&:is([data-variant='solid'])": {
         color: "colorScheme.contrast!",
@@ -17,11 +17,11 @@ export const snacksStyle = defineComponentSlotStyle({
       top: "2.5",
     },
     content: {
+      "&[data-close-button]": { pe: "6" },
       display: "flex",
       flex: "1",
       flexDirection: "column",
       gap: "1",
-      pe: "6",
     },
     item: {
       insetX: "0",

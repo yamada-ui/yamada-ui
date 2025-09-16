@@ -288,7 +288,6 @@ return (
   <VStack>
     <Wrap gap="md">
       <Button
-        colorScheme="primary"
         onClick={() => {
           snack({
             description: "それでも男ですか！軟弱者！",
@@ -323,7 +322,6 @@ return (
   <VStack>
     <Wrap gap="md">
       <Button
-        colorScheme="primary"
         onClick={() => {
           snack({
             description: "ザクとは違うのだよ、ザクとは！",
@@ -413,7 +411,7 @@ return (
       </Button>
 
       <Button
-        colorScheme="secondary"
+        colorScheme="warning"
         onClick={() => {
           if (id.current)
             snack.update(id.current, {

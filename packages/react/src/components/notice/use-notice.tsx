@@ -1,17 +1,16 @@
-import type { ReactElement, ReactNode } from "react"
+"use client"
+
+import type { ReactNode } from "react"
 import type { HTMLStyledProps, NoticeConfig } from "../../core"
 import type { Alert } from "../alert"
 import type { CloseButtonProps } from "../close-button"
-import type { LoadingScheme } from "../loading"
 import type { StatusScheme } from "../status"
-import { useMemo } from "react"
+import { useCallback, useMemo } from "react"
 import { toast } from "sonner"
 import { useSystem } from "../../core"
 import { isArray } from "../../utils"
-import { Notice } from "./notice"
+import { NoticeItem } from "./notice"
 import { useNoticeContext } from "./notice-provider"
-
-export type CloseAction = "button" | "click" | "drag"
 
 export interface UseNoticeOptions
   extends NoticeConfig,
@@ -22,24 +21,9 @@ export interface UseNoticeOptions
    */
   id?: number | string
   /**
-   * Close strategy for the notice.
-   * Can be a single action or an array of actions.
-   *
-   * @default ["drag"]
-   */
-  closeStrategy?: CloseAction | CloseAction[]
-  /**
-   * Custom component to render.
-   */
-  component?: (props: { onClose: () => void }) => ReactNode
-  /**
    * The description of the notice.
    */
-  description?: string
-  /**
-   * The loading scheme.
-   */
-  loadingScheme?: LoadingScheme
+  description?: ReactNode
   /**
    * The status of the notice.
    */
@@ -47,7 +31,7 @@ export interface UseNoticeOptions
   /**
    * The title of the notice.
    */
-  title?: string
+  title?: ReactNode
   /**
    * If `true`, shows an icon.
    */
@@ -85,82 +69,77 @@ export interface NoticeComponentProps {
 /**
  * `useNotice` is a custom hook that controls the notifications of the application using Sonner.
  *
- * @see Docs https://yamada-ui.com/hooks/use-notice
+ * @see https://yamada-ui.com/docs/hooks/use-notice
  */
-export const useNotice = (defaultOptions?: UseNoticeOptions) => {
+export const useNotice = (options: UseNoticeOptions = {}) => {
   const { getLimit, updateLimit } = useNoticeContext()
   const { config } = useSystem()
 
+  const systemOptions = useMemo(() => config.notice ?? {}, [config])
+  const defaultOptions = useMemo(
+    () => ({ ...systemOptions, ...options }),
+    [options, systemOptions],
+  )
+
+  const getOptions = useCallback(
+    (options: UseNoticeOptions) => ({ ...defaultOptions, ...options }),
+    [defaultOptions],
+  )
+
   return useMemo(() => {
-    const computedOptions = (options: UseNoticeOptions) => ({
-      ...config.notice,
-      ...defaultOptions,
-      ...options,
-    })
-
     const notice = (options: UseNoticeOptions = {}) => {
-      const finalOptions = computedOptions(options)
-      const {
-        component,
-        duration: rawDuration,
-        limit,
-        placement = "start",
-        ...noticeProps
-      } = finalOptions
+      options = getOptions(options)
 
-      const duration =
-        rawDuration === null ? Number.POSITIVE_INFINITY : rawDuration
+      const {
+        closable = true,
+        closeStrategy = ["click", "drag"],
+        duration,
+        limit = 3,
+        placement = "start",
+        ...props
+      } = options
 
       if (limit) {
         const currentLimit = getLimit(placement)
-        if (currentLimit !== limit) {
-          updateLimit({ limit, placement })
-        }
+
+        if (currentLimit !== limit) updateLimit({ limit, placement })
       }
 
-      const { closable, closeStrategy = ["drag"] } = noticeProps
-
-      const closeActions = isArray(closeStrategy)
+      const closeStrategies = isArray(closeStrategy)
         ? closeStrategy
         : [closeStrategy]
 
-      const finalToastOptions = {
-        dismissible: closeActions.includes("drag") && closable,
-        duration,
+      const resolvedOptions = {
+        dismissible: closeStrategies.includes("drag") && closable,
+        duration: duration ?? Number.POSITIVE_INFINITY,
         toasterId: placement,
       }
 
-      if (component) {
-        return toast.custom(
-          (id) =>
-            component({ onClose: () => toast.dismiss(id) }) as ReactElement,
-          finalToastOptions,
-        )
-      }
-
       return toast.custom(
-        (id) => <Notice {...noticeProps} id={id} closeActions={closeActions} />,
-        finalToastOptions,
+        (id) => (
+          <NoticeItem
+            {...props}
+            id={id}
+            closable={closable}
+            closeStrategies={closeStrategies}
+          />
+        ),
+        resolvedOptions,
       )
     }
 
-    notice.close = (id: number | string) => {
-      toast.dismiss(id)
-    }
+    notice.close = (id: number | string) => toast.dismiss(id)
 
-    notice.closeAll = () => {
-      // Sonner dismisses all toasts when called without an id
-      toast.dismiss()
-    }
+    notice.closeAll = () => toast.dismiss()
 
     notice.update = (id: number | string, options: UseNoticeOptions) => {
-      // For Sonner, we need to dismiss the existing toast and create a new one
       toast.dismiss(id)
+
       return notice(options)
     }
 
     return notice
-  }, [config.notice, defaultOptions, getLimit, updateLimit])
+  }, [getLimit, getOptions, updateLimit])
 }
 
 export type UseNoticeReturn = ReturnType<typeof useNotice>

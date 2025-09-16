@@ -90,14 +90,22 @@ export interface BreakpointConfig {
 }
 
 export type NoticePlacement = Exclude<Placement, "center" | `center-${string}`>
+export type NoticeCloseStrategy = "button" | "click" | "drag"
 
 export interface NoticeConfig {
   /**
    * If `true`, allows the notice to be removed.
    *
-   * @default false
+   * @default true
    */
   closable?: boolean
+  /**
+   * Close strategy for the notice.
+   * Can be a single action or an array of actions.
+   *
+   * @default ["click", "drag"]
+   */
+  closeStrategy?: NoticeCloseStrategy | NoticeCloseStrategy[]
   /**
    * The number of `ms` the notice will continue to be displayed.
    *
@@ -107,6 +115,12 @@ export interface NoticeConfig {
    * @default 5000
    */
   duration?: null | number
+  /**
+   * If `true`, the notice will expand.
+   *
+   * @default false
+   */
+  expand?: boolean
   /**
    * The maximum value at which notice will be displayed.
    *

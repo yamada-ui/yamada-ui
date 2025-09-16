@@ -4,7 +4,7 @@ export const noticeStyle = defineComponentSlotStyle({
   base: {
     closeButton: {
       "&:is([data-variant='plain'], [data-variant='island'])": {
-        colorScheme: "mono",
+        colorScheme: "mono!",
       },
       "&:is([data-variant='solid'])": {
         color: "colorScheme.contrast!",
@@ -17,18 +17,19 @@ export const noticeStyle = defineComponentSlotStyle({
       top: "2.5",
     },
     content: {
+      "&[data-close-button]": { pe: "6" },
       display: "flex",
       flex: "1",
       flexDirection: "column",
       gap: "1",
-      pe: "6",
     },
     item: {
-      alignItems: "center",
-      display: "flex",
-      maxW: "36rem",
-      minW: "20rem",
+      minW: "sm",
       position: "relative",
+    },
+    root: {
+      "--mobile-offset": "{spaces.md}",
+      "--offset": "{spaces.lg}",
     },
   },
 })

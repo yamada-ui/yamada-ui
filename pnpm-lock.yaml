@@ -361,6 +361,9 @@ importers:
       scroll-into-view-if-needed:
         specifier: ^3.1.0
         version: 3.1.0
+      sonner:
+        specifier: ^2.0.7
+        version: 2.0.7(react-dom@19.1.1)(react@19.1.1)
     devDependencies:
       '@faker-js/faker':
         specifier: ^10.0.0
@@ -13037,6 +13040,16 @@ packages:
   /smol-toml@1.4.2:
     resolution: {integrity: sha512-rInDH6lCNiEyn3+hH8KVGFdbjc099j47+OSgbMrfDYX1CmXLfdKd7qi6IfcWj2wFxvSVkuI46M+wPGYfEOEj6g==, tarball: https://registry.npmjs.org/smol-toml/-/smol-toml-1.4.2.tgz}
     engines: {node: '>= 18'}
+    dev: false
+
+  /sonner@2.0.7(react-dom@19.1.1)(react@19.1.1):
+    resolution: {integrity: sha512-W6ZN4p58k8aDKA4XPcx2hpIQXBRAgyiWVkYhT7CvK6D3iAu7xjvVyhQHg2/iaKJZ1XVJ4r7XuwGL+WGEK37i9w==, tarball: https://registry.npmjs.org/sonner/-/sonner-2.0.7.tgz}
+    peerDependencies:
+      react: ^19.0.0
+      react-dom: ^19.0.0
+    dependencies:
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
     dev: false
 
   /sort-keys@4.2.0:

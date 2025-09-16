@@ -87,9 +87,9 @@ To change the locale, set a value for [locale](https://developer.mozilla.org/en-
 <Calendar.Root locale="ja" />
 ```
 
-### Change Date Format
+### Change Format
 
-To change the date format, set the `format` object.
+To change the format, set the `format` object.
 
 ```tsx preview functional
 const format = useMemo(
@@ -197,7 +197,7 @@ To change the start day of the week, set `startDayOfWeek` to `"sunday"` or `"mon
 
 ### Change Weekend Days
 
-To change which days are treated as weekends, set `weekendDays` to an array of days.
+To change which days are treated as weekends, set `weekendDays` to an array of days(numbers).
 
 ```tsx preview
 <Calendar.Root weekendDays={[0, 1]} />

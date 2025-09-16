@@ -59,7 +59,7 @@ import { Calendar } from "@workspaces/ui"
 </Wrap>
 ```
 
-### 形状を変更する
+### 形を変える
 
 ```tsx preview
 <Wrap gap="md">
@@ -87,9 +87,9 @@ import { Calendar } from "@workspaces/ui"
 <Calendar.Root locale="ja" />
 ```
 
-### 日付のフォーマットを変更する
+### フォーマットを変更する
 
-日付のフォーマットを変更するには、`format`オブジェクトを設定します。
+フォーマットを変更する場合は、`format`オブジェクトを設定します。
 
 ```tsx preview functional
 const format = useMemo(
@@ -106,7 +106,7 @@ return <Calendar.Root format={format} />
 
 ### デフォルトの日付を設定する
 
-デフォルトの日付を設定するには、`defaultValue`に`Date`を設定します。
+デフォルトの日付を設定する場合は、`defaultValue`に`Date`を設定します。
 
 ```tsx preview
 <Calendar.Root defaultValue={new Date()} />
@@ -114,55 +114,55 @@ return <Calendar.Root format={format} />
 
 ### デフォルトの月を設定する
 
-デフォルトの月を設定するには、`defaultMonth`に`Date`を設定します。
+デフォルトの月を設定する場合は、`defaultMonth`に`Date`を設定します。
 
 ```tsx preview
 <Calendar.Root defaultMonth={new Date("2025-10-01")} />
 ```
 
-### 最小の日付を設定する
+### 最小日付を設定する
 
-選択可能な最小の日付を設定するには、`minDate`に`Date`を設定します。
+最小日付を設定する場合は、`minDate`に`Date`を設定します。
 
 ```tsx preview
 <Calendar.Root minDate={new Date(new Date().setDate(1))} />
 ```
 
-### 最大の日付を設定する
+### 最大日付を設定する
 
-選択可能な最大の日付を設定するには、`maxDate`に`Date`を設定します。
+最大日付を設定する場合は、`maxDate`に`Date`を設定します。
 
 ```tsx preview
 <Calendar.Root maxDate={new Date(new Date().setDate(18))} />
 ```
 
-### 無効化する
+### 無効にする
 
-カレンダーを無効化するには、`disabled`を`true`に設定します。
+無効にする場合は、`disabled`を`true`に設定します。
 
 ```tsx preview
 <Calendar.Root disabled />
 ```
 
-### 今日の強調を無効化する
+### 今日の強調を無効にする
 
-今日の日付の強調を無効化するには、`today`を`false`に設定します。
+今日の強調を無効にする場合は、`today`を`false`に設定します。
 
 ```tsx preview
 <Calendar.Root today={false} />
 ```
 
-### 特定の曜日を無効化する
+### 特定の曜日を無効にする
 
-特定の曜日を無効化するには、`excludeDate`に条件関数を設定します。
+特定の曜日を無効にする場合は、`excludeDate`に関数を設定します。
 
 ```tsx preview
 <Calendar.Root excludeDate={(date) => [0, 1, 6].includes(date.getDay())} />
 ```
 
-### 複数選択を許容する
+### 複数選択を有効にする
 
-複数の日付を選択可能にするには、`multiple`を`true`に設定します。
+複数選択を有効にする場合は、`multiple`を`true`に設定します。
 
 ```tsx preview
 <Calendar.Root multiple />
@@ -170,7 +170,7 @@ return <Calendar.Root format={format} />
 
 ### 複数選択の最大数を設定する
 
-複数選択の最大選択数を設定するには、`max`に数値を設定します。
+複数選択の最大選択数を設定する場合は、`max`に数値を設定します。
 
 ```tsx preview
 <Calendar.Root multiple max={3} />
@@ -178,7 +178,7 @@ return <Calendar.Root format={format} />
 
 ### 期間選択を有効にする
 
-期間選択を有効にするには、`range`を`true`に設定します。
+期間選択を有効にする場合は、`range`を`true`に設定します。
 
 ```tsx preview
 <Calendar.Root range />
@@ -186,7 +186,7 @@ return <Calendar.Root format={format} />
 
 ### 週の開始曜日を変更する
 
-週の開始曜日を変更するには、`startDayOfWeek`に`"sunday"`または`"monday"`を設定します。
+週の開始曜日を変更する場合は、`startDayOfWeek`に`"sunday"`または`"monday"`を設定します。
 
 ```tsx preview
 <Wrap gap="md">
@@ -195,9 +195,9 @@ return <Calendar.Root format={format} />
 </Wrap>
 ```
 
-### 週末の日を変更する
+### 週末の曜日を変更する
 
-週末として扱う曜日を変更するには、`weekendDays`に曜日の配列を設定します。
+週末の曜日を変更する場合は、`weekendDays`に曜日(数値)の配列を設定します。
 
 ```tsx preview
 <Calendar.Root weekendDays={[0, 1]} />
@@ -205,7 +205,7 @@ return <Calendar.Root format={format} />
 
 ### 祝日を設定する
 
-祝日を設定するには、`holidays`に`Date`の配列を設定します。
+祝日を設定する場合は、`holidays`に`Date`の配列を設定します。
 
 ```tsx preview functional
 const holidays = useMemo(
@@ -238,7 +238,7 @@ return <Calendar.Root holidays={holidays} />
 
 ### 当月外の日付を非表示にする
 
-当月外の日付を非表示にするには、`dayProps`でスタイルを設定します。
+当月外の日付を非表示にする場合は、`dayProps`でスタイルを設定します。
 
 ```tsx preview
 <Calendar.Root

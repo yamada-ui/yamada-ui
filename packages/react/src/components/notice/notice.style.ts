@@ -1,6 +1,6 @@
 import { defineComponentSlotStyle } from "../../core"
 
-export const snacksStyle = defineComponentSlotStyle({
+export const noticeStyle = defineComponentSlotStyle({
   base: {
     closeButton: {
       "&:is([data-variant='plain'], [data-variant='island'])": {
@@ -24,20 +24,14 @@ export const snacksStyle = defineComponentSlotStyle({
       gap: "1",
     },
     item: {
-      insetX: "0",
-      maxW: "full",
-      position: "absolute",
-      top: "calc({gap} * {index})",
-      w: "100%",
-      zIndex: "{z-index}",
+      minW: "sm",
+      position: "relative",
     },
-    list: { position: "relative", w: "full" },
     root: {
-      "&[data-negative]": { m: "calc({top} * -1) 0 calc({bottom} * -1)" },
-      "--gap": "spaces.md",
-      w: "full",
+      "--mobile-offset": "{spaces.md}",
+      "--offset": "{spaces.lg}",
     },
   },
 })
 
-export type SnacksStyle = typeof snacksStyle
+export type NoticeStyle = typeof noticeStyle

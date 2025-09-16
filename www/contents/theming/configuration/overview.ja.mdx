@@ -13,42 +13,45 @@ export const config = defineConfig({
   breakpoint: { direction: "down", identifier: "@media screen" },
   defaultColorMode: "light",
   defaultThemeScheme: "base",
+  notice: { duration: 5000 },
   theme: { responsive: true },
 })
 ```
 
 ## プロパティ
 
-| プロパティ                              | デフォルト        | 説明                                                                                                                            |
-| --------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `css.layers`                            | -                 | [カスケードレイヤー](/docs/theming/cascade-layers)の設定。                                                                      |
-| `css.varPrefix`                         | `"ui"`            | CSS変数のプレフィックス。                                                                                                       |
-| `breakpoint.base`                       | `"9999px"`        | ブレイクポイントの基準値。                                                                                                      |
-| `breakpoint.containerRef`               | -                 | [コンテナクエリ](/docs/theming/breakpoints#コンテナクエリ)を使用する場合のコンテナ要素の参照先。                                |
-| `breakpoint.direction`                  | `"down"`          | [レスポンシブデザイン](/docs/styling/responsive-design)で採用される[メディアクエリ](/docs/theming/breakpoints#メディアクエリ)。 |
-| `breakpoint.identifier`                 | `"@media screen"` | ブレイクポイントで採用するクエリ。                                                                                              |
-| `defaultColorMode`                      | `"light"`         | デフォルトの[カラーモード](/docs/theming/color-mode)。                                                                          |
-| `defaultThemeScheme`                    | `"base"`          | デフォルトの[テーマスキーム](/docs/theming/switching-themes)。                                                                  |
-| `theme.responsive`                      | `false`           | テーマのトークンで[レスポンシブデザイン](/docs/styling/responsive-design)を採用します。                                         |
-| `disableTransitionOnChange`             | `false`           | カラーモードまたはテーマの切り替え時に`transition`を無効にします。                                                              |
-| `loading.screen.blockScrollOnMount`     | `true`            | [ローディング](/docs/hooks/use-loading)中にスクロールをロックします。                                                           |
-| `loading.screen.allowPinchZoom`         | `false`           | スクロールがロックされている場合、iOSでズームまたはピンチジェスチャを処理します。                                               |
-| `loading.screen.duration`               | `null`            | [ローディング](/docs/hooks/use-loading)の所要時間。                                                                             |
-| `loading.screen.loadingCount`           | `0`               | [ローディング](/docs/hooks/use-loading)の初期値。                                                                               |
-| `loading.page.blockScrollOnMount`       | `true`            | [ローディング](/docs/hooks/use-loading)中にスクロールをロックします。                                                           |
-| `loading.page.allowPinchZoom`           | `false`           | スクロールがロックされている場合、iOSでズームまたはピンチジェスチャを処理します。                                               |
-| `loading.page.duration`                 | `null`            | [ローディング](/docs/hooks/use-loading)の所要時間。                                                                             |
-| `loading.page.loadingCount`             | `0`               | [ローディング](/docs/hooks/use-loading)の初期値。                                                                               |
-| `loading.background.blockScrollOnMount` | `false`           | [ローディング](/docs/hooks/use-loading)中にスクロールをロックします。                                                           |
-| `loading.background.allowPinchZoom`     | `false`           | スクロールがロックされている場合、iOSでズームまたはピンチジェスチャを処理します。                                               |
-| `loading.background.duration`           | `null`            | [ローディング](/docs/hooks/use-loading)の所要時間。                                                                             |
-| `loading.background.loadingCount`       | `0`               | [ローディング](/docs/hooks/use-loading)の初期値。                                                                               |
-| `notice.closable`                       | `false`           | [通知](/docs/hooks/use-notice)に閉じるボタンを表示します。                                                                      |
-| `notice.duration`                       | `5000`            | [通知](/docs/hooks/use-notice)の所要時間。                                                                                      |
-| `notice.limit`                          | -                 | [通知](/docs/hooks/use-notice)の最大表示数。                                                                                    |
-| `notice.placement`                      | `"start"`         | [通知](/docs/hooks/use-notice)の位置。                                                                                          |
-| `snacks.closable`                       | `true`            | [スナック](/docs/hooks/use-snacks)に閉じるボタンを表示します。                                                                  |
-| `snacks.duration`                       | `5000`            | [スナック](/docs/hooks/use-snacks)の所要時間。                                                                                  |
-| `snacks.limit`                          | -                 | [スナック](/docs/hooks/use-snacks)の最大表示数。                                                                                |
-| `snacks.placement`                      | `"start"`         | [スナック](/docs/hooks/use-snacks)の位置。                                                                                      |
-| `snacks.startIndex`                     | `0`               | [スナック](/docs/hooks/use-snacks)が開始する`z-index`。                                                                         |
+| プロパティ                              | デフォルト          | 説明                                                                                                                            |
+| --------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `css.layers`                            | -                   | [カスケードレイヤー](/docs/theming/cascade-layers)の設定。                                                                      |
+| `css.varPrefix`                         | `"ui"`              | CSS変数のプレフィックス。                                                                                                       |
+| `breakpoint.base`                       | `"9999px"`          | ブレイクポイントの基準値。                                                                                                      |
+| `breakpoint.containerRef`               | -                   | [コンテナクエリ](/docs/theming/breakpoints#コンテナクエリ)を使用する場合のコンテナ要素の参照先。                                |
+| `breakpoint.direction`                  | `"down"`            | [レスポンシブデザイン](/docs/styling/responsive-design)で採用される[メディアクエリ](/docs/theming/breakpoints#メディアクエリ)。 |
+| `breakpoint.identifier`                 | `"@media screen"`   | ブレイクポイントで採用するクエリ。                                                                                              |
+| `defaultColorMode`                      | `"light"`           | デフォルトの[カラーモード](/docs/theming/color-mode)。                                                                          |
+| `defaultThemeScheme`                    | `"base"`            | デフォルトの[テーマスキーム](/docs/theming/switching-themes)。                                                                  |
+| `theme.responsive`                      | `false`             | テーマのトークンで[レスポンシブデザイン](/docs/styling/responsive-design)を採用します。                                         |
+| `disableTransitionOnChange`             | `false`             | カラーモードまたはテーマの切り替え時に`transition`を無効にします。                                                              |
+| `loading.screen.blockScrollOnMount`     | `true`              | [ローディング](/docs/hooks/use-loading)中にスクロールをロックします。                                                           |
+| `loading.screen.allowPinchZoom`         | `false`             | スクロールがロックされている場合、iOSでズームまたはピンチジェスチャを処理します。                                               |
+| `loading.screen.duration`               | `null`              | [ローディング](/docs/hooks/use-loading)の所要時間。                                                                             |
+| `loading.screen.loadingCount`           | `0`                 | [ローディング](/docs/hooks/use-loading)の初期値。                                                                               |
+| `loading.page.blockScrollOnMount`       | `true`              | [ローディング](/docs/hooks/use-loading)中にスクロールをロックします。                                                           |
+| `loading.page.allowPinchZoom`           | `false`             | スクロールがロックされている場合、iOSでズームまたはピンチジェスチャを処理します。                                               |
+| `loading.page.duration`                 | `null`              | [ローディング](/docs/hooks/use-loading)の所要時間。                                                                             |
+| `loading.page.loadingCount`             | `0`                 | [ローディング](/docs/hooks/use-loading)の初期値。                                                                               |
+| `loading.background.blockScrollOnMount` | `false`             | [ローディング](/docs/hooks/use-loading)中にスクロールをロックします。                                                           |
+| `loading.background.allowPinchZoom`     | `false`             | スクロールがロックされている場合、iOSでズームまたはピンチジェスチャを処理します。                                               |
+| `loading.background.duration`           | `null`              | [ローディング](/docs/hooks/use-loading)の所要時間。                                                                             |
+| `loading.background.loadingCount`       | `0`                 | [ローディング](/docs/hooks/use-loading)の初期値。                                                                               |
+| `notice.closable`                       | `true`              | [通知](/docs/hooks/use-notice)を閉じることができるようにします。                                                                |
+| `notice.closeStrategy`                  | `["click", "drag"]` | [通知](/docs/hooks/use-notice)の閉じる方法。                                                                                    |
+| `notice.duration`                       | `5000`              | [通知](/docs/hooks/use-notice)の所要時間。                                                                                      |
+| `notice.expand`                         | `false`             | [通知](/docs/hooks/use-notice)を展開して表示します。                                                                            |
+| `notice.limit`                          | `3`                 | [通知](/docs/hooks/use-notice)の最大表示数。                                                                                    |
+| `notice.placement`                      | `"start"`           | [通知](/docs/hooks/use-notice)の位置。                                                                                          |
+| `snacks.closable`                       | `true`              | [スナック](/docs/hooks/use-snacks)に閉じるボタンを表示します。                                                                  |
+| `snacks.duration`                       | `5000`              | [スナック](/docs/hooks/use-snacks)の所要時間。                                                                                  |
+| `snacks.limit`                          | -                   | [スナック](/docs/hooks/use-snacks)の最大表示数。                                                                                |
+| `snacks.placement`                      | `"start"`           | [スナック](/docs/hooks/use-snacks)の位置。                                                                                      |
+| `snacks.startIndex`                     | `0`                 | [スナック](/docs/hooks/use-snacks)が開始する`z-index`。                                                                         |

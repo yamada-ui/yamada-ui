@@ -493,6 +493,11 @@
               "pathname": "/docs/components/slider"
             },
             {
+              "title": "Snacks",
+              "segment": "snacks",
+              "pathname": "/docs/components/snacks"
+            },
+            {
               "title": "Spacer",
               "segment": "spacer",
               "pathname": "/docs/components/spacer"
@@ -600,11 +605,6 @@
               "title": "ZStack",
               "segment": "z-stack",
               "pathname": "/docs/components/z-stack"
-            },
-            {
-              "title": "Snacks",
-              "segment": "snacks",
-              "pathname": "/docs/components/snacks"
             }
           ]
         },

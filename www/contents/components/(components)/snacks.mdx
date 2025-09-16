@@ -212,7 +212,7 @@ return (
 
 ### Change Direction
 
-To change direction, set `start` or `end` to the `direction` prop. The default is `start`.
+To change direction, set `"start"` or `"end"` to the `direction` prop. The default is `"start"`.
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks({ direction: "end" })
@@ -244,55 +244,9 @@ return (
 )
 ```
 
-### Adjust Spacing
-
-`Snacks` has a folding animation implemented. If `gap` or similar is set on the parent element, it will result in an unnatural animation. In such cases, adjust the spacing with `gutter`.
-
-:::note
-`gutter` applies negative margin by default. If you want to disable negative margin, set `negativeMargins` to `false`.
-:::
-
-```tsx preview functional client
-const { snack, snacks } = useSnacks()
-
-return (
-  <VStack>
-    <Wrap gap="md">
-      <Button
-        onClick={() => {
-          snack({
-            description: "良くも悪くも人間は変わるわ…あなたはどうかしら？",
-            title: "ミライ・ヤシマ",
-          })
-        }}
-      >
-        Add Snack
-      </Button>
-
-      <Button colorScheme="danger" onClick={snack.closeAll}>
-        Close all Snack
-      </Button>
-    </Wrap>
-
-    <Snacks
-      snacks={snacks}
-      gutter={[0, "lg"]}
-      negativeMargins={false}
-      mb="-md"
-    />
-
-    <Input placeholder="Input" />
-  </VStack>
-)
-```
-
 ### Limit the Number of Displays
 
-To limit the number of displays, set a number to the `limit` prop. By default, `3` is set.
-
-:::info
-If you want to display an unlimited number of notifications, set it to `null`.
-:::
+To limit the number of displays, set a number to the `limit` prop. If you want to display an unlimited number of notifications, set it to `null`. By default, `3` is set.
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks({ limit: 5 })
@@ -323,9 +277,9 @@ return (
 )
 ```
 
-### Change Display Duration
+### Set the Display Duration
 
-To change display duration, set a number (in milliseconds) to the `duration` prop.
+To set the display duration, set a number (in milliseconds) to the `duration` prop.
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks()

@@ -212,7 +212,7 @@ return (
 
 ### 方向を変更する
 
-方向を変更する場合は、`direction`に`start`または`end`を設定します。デフォルトは`start`です。
+方向を変更する場合は、`direction`に`"start"`または`"end"`を設定します。デフォルトでは、`"start"`が設定されています。
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks({ direction: "end" })
@@ -244,55 +244,9 @@ return (
 )
 ```
 
-### 余白を調整する
-
-`Snacks`は折りたたむアニメーションが実装されています。もし、親要素に`gap`などが設定されている場合は不自然なアニメーションになってしまいます。その場合は、`gutter`で余白を調整します。
-
-:::note
-`gutter`は、デフォルトで負のマージンを付与します。もし、負のマージンを無効にしたい場合は、`negativeMargins`を`false`に設定します。
-:::
-
-```tsx preview functional client
-const { snack, snacks } = useSnacks()
-
-return (
-  <VStack>
-    <Wrap gap="md">
-      <Button
-        onClick={() => {
-          snack({
-            description: "良くも悪くも人間は変わるわ…あなたはどうかしら？",
-            title: "ミライ・ヤシマ",
-          })
-        }}
-      >
-        Add Snack
-      </Button>
-
-      <Button colorScheme="danger" onClick={snack.closeAll}>
-        Close all Snack
-      </Button>
-    </Wrap>
-
-    <Snacks
-      snacks={snacks}
-      gutter={[0, "lg"]}
-      negativeMargins={false}
-      mb="-md"
-    />
-
-    <Input placeholder="Input" />
-  </VStack>
-)
-```
-
 ### 表示件数を制限する
 
-表示件数を制限する場合は、`limit`に数値を設定します。デフォルトでは、`3`が設定されています。
-
-:::info
-もし、無制限に表示したい場合は、`null`を設定します。
-:::
+表示件数を制限する場合は、`limit`に数値を設定します。もし、無制限に表示したい場合は、`null`を設定します。デフォルトでは、`3`が設定されています。
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks({ limit: 5 })
@@ -323,9 +277,9 @@ return (
 )
 ```
 
-### 表示時間を変更する
+### 表示時間を設定する
 
-表示時間を変更する場合は、`duration`に数値(ミリ秒)を設定します。
+表示時間を設定する場合は、`duration`に数値(ミリ秒)を設定します。
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks()

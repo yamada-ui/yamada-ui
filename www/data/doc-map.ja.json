@@ -493,6 +493,11 @@
               "pathname": "/docs/components/slider"
             },
             {
+              "title": "Snacks",
+              "segment": "snacks",
+              "pathname": "/docs/components/snacks"
+            },
+            {
               "title": "Spacer",
               "segment": "spacer",
               "pathname": "/docs/components/spacer"
@@ -937,11 +942,6 @@
           "title": "useResizeObserver",
           "segment": "use-resize-observer",
           "pathname": "/docs/hooks/use-resize-observer"
-        },
-        {
-          "title": "useSnacks",
-          "segment": "use-snacks",
-          "pathname": "/docs/hooks/use-snacks"
         },
         {
           "title": "useTheme",

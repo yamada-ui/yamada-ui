@@ -76,7 +76,14 @@ function generateTransform(...transforms: TransformOptions[]) {
   return `transform: ${transform}`
 }
 
-function generateConfig({ as, css, properties, token, transforms }: Config) {
+function generateConfig({
+  as,
+  css,
+  important,
+  properties,
+  token,
+  transforms,
+}: Config) {
   if (as) return true
 
   if (!properties && !token && !css && !transforms) return true
@@ -87,6 +94,7 @@ function generateConfig({ as, css, properties, token, transforms }: Config) {
     result.push(`properties: [${properties.map((p) => `"${p}"`).join(", ")}]`)
   if (token) result.push(`token: "${token}"`)
   if (css) result.push(`static: ${JSON.stringify(css)}`)
+  if (important) result.push(`important: true`)
   if (transforms) result.push(generateTransform(...transforms))
 
   return `{ ${result.join(", ")} }`

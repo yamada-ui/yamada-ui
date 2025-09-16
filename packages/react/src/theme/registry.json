@@ -4,7 +4,7 @@
   "sources": [
     {
       "name": "config.ts",
-      "content": "import { defineConfig } from \"@yamada-ui/react\"\n\n/**\n * The default config of Yamada UI.\n *\n * @see https://yamada-ui.com/docs/theming/configuration/overview\n */\nexport const config = defineConfig({\n  css: { varPrefix: \"ui\" },\n  breakpoint: { direction: \"down\", identifier: \"@media screen\" },\n  defaultColorMode: \"light\",\n  defaultThemeScheme: \"base\",\n  theme: { responsive: true },\n})\n"
+      "content": "import { defineConfig } from \"@yamada-ui/react\"\n\n/**\n * The default config of Yamada UI.\n *\n * @see https://yamada-ui.com/docs/theming/configuration/overview\n */\nexport const config = defineConfig({\n  css: { varPrefix: \"ui\" },\n  breakpoint: { direction: \"down\", identifier: \"@media screen\" },\n  defaultColorMode: \"light\",\n  defaultThemeScheme: \"base\",\n  notice: { duration: 5000 },\n  theme: { responsive: true },\n})\n"
     },
     {
       "name": "index.ts",

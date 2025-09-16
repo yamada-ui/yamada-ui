@@ -6,6 +6,7 @@ import { Wrap } from "../wrap"
 import { useLoading } from "./loading-provider"
 
 export default {
+  parameters: { layout: "centered" },
   title: "Theme / Loading",
 }
 

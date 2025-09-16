@@ -1931,10 +1931,10 @@ export const pseudoStyles = {
 export type StyledStyleProperty = keyof typeof styledStyles
 
 export const styledStyles = {
-  apply: { transform: transforms.style() },
-  layerStyle: { transform: transforms.style("layerStyles") },
-  textStyle: { transform: transforms.style("textStyles") },
-  colorScheme: { transform: transforms.colorScheme },
+  apply: { important: true, transform: transforms.style() },
+  layerStyle: { important: true, transform: transforms.style("layerStyles") },
+  textStyle: { important: true, transform: transforms.style("textStyles") },
+  colorScheme: { important: true, transform: transforms.colorScheme },
   lineClamp: {
     properties: ["--line-clamp"],
     static: {
@@ -2304,7 +2304,7 @@ export interface StyleProps {
   /**
    * Set color scheme variables.
    */
-  colorScheme?: StyleValueWithCondition<ColorScheme>
+  colorScheme?: StyleValueWithCondition<AnyString | ColorScheme>
   /**
    * ### accent-color
    *

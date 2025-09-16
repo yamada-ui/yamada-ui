@@ -20,6 +20,7 @@ import { generateTransition } from "./transition"
 import { analyzeCSSValue, isCSSVar } from "./utils"
 
 export interface StyleConfig {
+  important?: boolean
   properties?: CSSProperties[]
   static?: CSSObject
   token?: ThemeToken

@@ -6,7 +6,11 @@
     "hooks": [],
     "providers": []
   },
-  "dependents": { "components": ["alert"], "hooks": [], "providers": [] },
+  "dependents": {
+    "components": ["alert", "notice"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
     {

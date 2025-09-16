@@ -600,6 +600,11 @@
               "title": "ZStack",
               "segment": "z-stack",
               "pathname": "/docs/components/z-stack"
+            },
+            {
+              "title": "Snacks",
+              "segment": "snacks",
+              "pathname": "/docs/components/snacks"
             }
           ]
         },
@@ -937,11 +942,6 @@
           "title": "useResizeObserver",
           "segment": "use-resize-observer",
           "pathname": "/docs/hooks/use-resize-observer"
-        },
-        {
-          "title": "useSnacks",
-          "segment": "use-snacks",
-          "pathname": "/docs/hooks/use-snacks"
         },
         {
           "title": "useTheme",

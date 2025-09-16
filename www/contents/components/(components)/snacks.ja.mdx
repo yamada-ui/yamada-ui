@@ -1,8 +1,8 @@
 ---
-title: useSnacks
-description: "`useSnacks` is a custom hook for controlling notifications used in forms and other similar situations."
-storybook: hooks-usesnacks--basic
-source: hooks/use-snacks
+title: Snacks
+description: "`Snacks`は、フォームなどで使用される通知を制御するコンポーネントです。"
+storybook: components-snacks--basic
+source: components/snacks
 ---
 
 ```tsx preview functional client
@@ -34,7 +34,7 @@ return (
 )
 ```
 
-## Usage
+## 使い方
 
 :::code-group
 
@@ -53,12 +53,10 @@ import { useSnacks, Snacks } from "@workspaces/ui"
 :::
 
 ```tsx
-const { snack, snacks } = useSnacks()
-
 <Snacks />
 ```
 
-### Change Variant
+### バリアントを変更する
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks()
@@ -96,7 +94,7 @@ return (
 )
 ```
 
-### Change Color Scheme
+### カラースキー厶を変更する
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks()
@@ -134,9 +132,9 @@ return (
 )
 ```
 
-### Change Status
+### ステータスを変更する
 
-To change status, set the `status` prop.
+ステータスを変更する場合は、`status`を設定します。
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks()
@@ -173,9 +171,9 @@ return (
 )
 ```
 
-### Change Loading Scheme
+### ローディングスキームを変更する
 
-To change loading scheme, set the `loadingScheme` prop.
+ローディングスキームを変更する場合は、`loadingScheme`を設定します。
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks()
@@ -212,9 +210,9 @@ return (
 )
 ```
 
-### Change Direction
+### 方向を変更する
 
-To change direction, set `start` or `end` to the `direction` prop. The default is `start`.
+方向を変更する場合は、`direction`に`start`または`end`を設定します。デフォルトは`start`です。
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks({ direction: "end" })
@@ -246,12 +244,12 @@ return (
 )
 ```
 
-### Adjust Spacing
+### 余白を調整する
 
-`Snacks` has a folding animation implemented. If `gap` or similar is set on the parent element, it will result in an unnatural animation. In such cases, adjust the spacing with `gutter`.
+`Snacks`は折りたたむアニメーションが実装されています。もし、親要素に`gap`などが設定されている場合は不自然なアニメーションになってしまいます。その場合は、`gutter`で余白を調整します。
 
 :::note
-`gutter` applies negative margin by default. If you want to disable negative margin, set `negativeMargins` to `false`.
+`gutter`は、デフォルトで負のマージンを付与します。もし、負のマージンを無効にしたい場合は、`negativeMargins`を`false`に設定します。
 :::
 
 ```tsx preview functional client
@@ -288,12 +286,12 @@ return (
 )
 ```
 
-### Limit the Number of Displays
+### 表示件数を制限する
 
-To limit the number of displays, set a number to the `limit` prop. By default, `3` is set.
+表示件数を制限する場合は、`limit`に数値を設定します。デフォルトでは、`3`が設定されています。
 
 :::info
-If you want to display an unlimited number of notifications, set it to `null`.
+もし、無制限に表示したい場合は、`null`を設定します。
 :::
 
 ```tsx preview functional client
@@ -325,9 +323,9 @@ return (
 )
 ```
 
-### Change Display Duration
+### 表示時間を変更する
 
-To change display duration, set a number (in milliseconds) to the `duration` prop.
+表示時間を変更する場合は、`duration`に数値(ミリ秒)を設定します。
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks()
@@ -360,9 +358,9 @@ return (
 )
 ```
 
-### Disable the Close Button
+### 閉じるボタンを無効にする
 
-To disable the close button, set `closable` to `false`.
+閉じるボタンを無効にする場合は、`closable`を`false`に設定します。
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks({ closable: false })
@@ -394,9 +392,9 @@ return (
 )
 ```
 
-### Close Notifications
+### 通知を閉じる
 
-To close notifications, use `snack.close` or `snack.closeAll`.
+通知を閉じる場合は、`snack.close`や`snack.closeAll`を使用します。
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks()
@@ -437,9 +435,9 @@ return (
 )
 ```
 
-### Update Notifications
+### 通知を更新する
 
-To update notifications, use `snack.update`.
+通知を更新する場合は、`snack.update`を使用します。
 
 ```tsx preview functional client
 const { snack, snacks } = useSnacks()
@@ -485,3 +483,7 @@ return (
   </VStack>
 )
 ```
+
+### Props
+
+<PropsTable name="snacks" />

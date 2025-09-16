@@ -50,9 +50,10 @@ import { useFocusOnShow } from "@workspaces/ui"
 
 ```tsx
 const ref = useRef<HTMLElement>(null)
+const focusTargetRef = useRef<HTMLElement>(null)
 
 useFocusOnShow(ref, {
-  focusTarget,
+  focusTarget: focusTargetRef,
   visible: true,
   shouldFocus: true,
 })

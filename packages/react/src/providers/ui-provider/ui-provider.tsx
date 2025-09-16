@@ -8,6 +8,7 @@ import type {
 import type { DeepMerge } from "../../utils"
 import type { I18nProviderProps } from "../i18n-provider"
 import { LoadingProvider } from "../../components/loading"
+import { NoticeProvider } from "../../components/notice"
 import {
   ColorModeProvider,
   EnvironmentProvider,
@@ -68,7 +69,9 @@ export const UIProvider: FC<UIProviderProps> = ({
               storage={storage}
               storageKey={colorModeStorageKey}
             >
-              <LoadingProvider {...config.loading}>{children}</LoadingProvider>
+              <LoadingProvider {...config.loading}>
+                <NoticeProvider {...config.notice}>{children}</NoticeProvider>
+              </LoadingProvider>
             </ColorModeProvider>
           </ThemeProvider>
         </SystemProvider>

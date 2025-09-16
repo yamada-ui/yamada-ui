@@ -1,0 +1,441 @@
+---
+title: Snacks
+description: "`Snacks` is a component for controlling notifications used in forms and other similar situations."
+storybook: components-snacks--basic
+source: components/snacks
+---
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks()
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          snack({
+            description: "こいつ、動くぞ！",
+            title: "アムロ・レイ",
+          })
+        }}
+      >
+        Add Snack
+      </Button>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+## Usage
+
+:::code-group
+
+```tsx [package]
+import { useSnacks, Snacks } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useSnacks, Snacks } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useSnacks, Snacks } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Snacks />
+```
+
+### Change Variant
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks()
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <For each={["plain", "solid", "subtle", "surface", "island"]}>
+        {(variant) => (
+          <Button
+            key={variant}
+            onClick={() => {
+              snack({
+                variant,
+                description: "美しいものが、嫌いな人がいるのかしら？",
+                title: "ララァ・スン",
+                withIcon: variant !== "island" ? true : false,
+              })
+            }}
+          >
+            Add "{toTitleCase(variant)}" Snack
+          </Button>
+        )}
+      </For>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+### Change Color Scheme
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks()
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <For each={["success", "warning"]}>
+        {(colorScheme) => (
+          <Button
+            key={colorScheme}
+            onClick={() => {
+              snack({
+                colorScheme,
+                description:
+                  "見せて貰おうか。連邦軍のモビルスーツの性能とやらを！",
+                title: "シャア・アズナブル",
+              })
+            }}
+          >
+            Add "{toTitleCase(colorScheme)}" Snack
+          </Button>
+        )}
+      </For>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+### Change Status
+
+To change status, set the `status` prop.
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks()
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <For each={["info", "success", "warning", "error"]}>
+        {(status) => (
+          <Button
+            key={status}
+            onClick={() => {
+              snack({
+                description: "アムロ、行きまーす！",
+                status,
+                title: "アムロ・レイ",
+              })
+            }}
+          >
+            Add "{toTitleCase(status)}" Snack
+          </Button>
+        )}
+      </For>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+### Change Loading Scheme
+
+To change loading scheme, set the `loadingScheme` prop.
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks()
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <For each={["oval", "grid", "puff", "dots"]}>
+        {(loadingScheme) => (
+          <Button
+            key={loadingScheme}
+            onClick={() => {
+              snack({
+                description: "大丈夫、あなたなら出来るわ。",
+                loadingScheme,
+                title: "セイラ・マス",
+              })
+            }}
+          >
+            Add "{toTitleCase(loadingScheme)}" Snack
+          </Button>
+        )}
+      </For>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+### Change Direction
+
+To change direction, set `"start"` or `"end"` to the `direction` prop. The default is `"start"`.
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks({ direction: "end" })
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          snack({
+            description:
+              "認めたくないものだな。自分自身の、若さゆえの過ちというものを。",
+            title: "シャア・アズナブル",
+          })
+        }}
+      >
+        Add Snack
+      </Button>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+### Limit the Number of Displays
+
+To limit the number of displays, set a number to the `limit` prop. If you want to display an unlimited number of notifications, set it to `null`. By default, `3` is set.
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks({ limit: 5 })
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          snack({
+            description: "殴られもせずに一人前になった奴がどこにいるものか！",
+            title: "ブライト・ノア",
+          })
+        }}
+      >
+        Add Snack
+      </Button>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+### Set the Display Duration
+
+To set the display duration, set a number (in milliseconds) to the `duration` prop.
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks()
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          snack({
+            description: "それでも男ですか！軟弱者！",
+            duration: 30000,
+            title: "セイラ・マス",
+          })
+        }}
+      >
+        Add Snack
+      </Button>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+### Disable the Close Button
+
+To disable the close button, set `closable` to `false`.
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks({ closable: false })
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          snack({
+            description: "ザクとは違うのだよ、ザクとは！",
+            title: "ランバ・ラル",
+          })
+        }}
+      >
+        Add Snack
+      </Button>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+### Close Notifications
+
+To close notifications, use `snack.close` or `snack.closeAll`.
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks()
+const id = useRef<string | undefined>(undefined)
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          id.current = snack({
+            description: "オレは、生きる！生きて、アイナと添い遂げる！",
+            title: "シロー・アマダ",
+          })
+        }}
+      >
+        Add Snack
+      </Button>
+
+      <Button
+        colorScheme="warning"
+        onClick={() => {
+          if (id.current) snack.close(id.current)
+        }}
+      >
+        Close last Snack
+      </Button>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+### Update Notifications
+
+To update notifications, use `snack.update`.
+
+```tsx preview functional client
+const { snack, snacks } = useSnacks()
+const id = useRef<string | undefined>(undefined)
+
+return (
+  <VStack>
+    <Wrap gap="md">
+      <Button
+        onClick={() => {
+          id.current = snack({
+            description:
+              "今の私は、クワトロ・バジーナ大尉だ。それ以上でも、それ以下でもない。",
+            title: "クワトロ・バジーナ",
+          })
+        }}
+      >
+        Add Snack
+      </Button>
+
+      <Button
+        colorScheme="warning"
+        onClick={() => {
+          if (id.current)
+            snack.update(id.current, {
+              colorScheme: "purple",
+              description: "そんな大人、修正してやる！",
+              title: "カミーユ・ビダン",
+            })
+        }}
+      >
+        Update last Snack
+      </Button>
+
+      <Button colorScheme="danger" onClick={snack.closeAll}>
+        Close all Snack
+      </Button>
+    </Wrap>
+
+    <Snacks snacks={snacks} />
+
+    <Input placeholder="Input" />
+  </VStack>
+)
+```
+
+## Props
+
+<PropsTable name="snacks" />

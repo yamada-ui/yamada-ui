@@ -5,7 +5,176 @@ storybook: components-alphaslider--basic
 source: components/alpha-slider
 ---
 
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.5} />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { AlphaSlider } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { AlphaSlider } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { AlphaSlider } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<AlphaSlider.Root color="#775999" />
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <AlphaSlider.Root
+        key={index}
+        size={size}
+        color="#775999"
+        defaultValue={0.5}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に値を設定します。
+
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.7} />
+```
+
+### 最小・最大値を設定する
+
+最小値と最大値を設定する場合は、`min`または`max`に数値を設定します。
+
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.5} min={0.25} max={0.75} />
+```
+
+### 方向を変更する
+
+方向を変更する場合は、`orientation`に`vertical`または`horizontal`を設定します。デフォルトは、`vertical`です。
+
+```tsx preview
+<AlphaSlider.Root
+  color="#775999"
+  defaultValue={0.5}
+  orientation="vertical"
+  h="xs"
+/>
+```
+
+### 形状を変更する
+
+```tsx preview
+<VStack>
+  <For each={["circle", "rounded", "square"]}>
+    {(shape, index) => (
+      <AlphaSlider.Root
+        key={index}
+        color="#775999"
+        defaultValue={0.5}
+        shape={shape}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### ステップ値を設定する
+
+ステップ値を設定する場合は、`step`に値を設定します。
+
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.5} step={0.1} />
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.5} disabled />
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.5} readOnly />
+```
+
+### ツールチップを表示する
+
+ツールチップを表示する場合は、`Tooltip`コンポーネントを使用します。
+
+```tsx preview functional
+const [value, setValue] = useState(0.5)
+
+return (
+  <AlphaSlider.Root color="#775999" value={value} onChange={setValue}>
+    <AlphaSlider.Track>
+      <Tooltip content={value}>
+        <AlphaSlider.Thumb />
+      </Tooltip>
+
+      <AlphaSlider.Overlay />
+    </AlphaSlider.Track>
+  </AlphaSlider.Root>
+)
+```
+
+### 変更の開始と終了のイベントをハンドルをする
+
+変更の開始と終了のイベントをハンドルをする場合は、`onChangeStart`や`onChangeEnd`を使用します。
+
+```tsx preview functional
+const [value, onChange] = useState(0.5)
+const [startValue, onChangeStart] = useState(0.5)
+const [endValue, onChangeEnd] = useState(0.5)
+
+return (
+  <VStack>
+    <Text>
+      Value: {value}, Start Value: {startValue}, End Value: {endValue}
+    </Text>
+
+    <AlphaSlider.Root
+      color="#775999"
+      value={value}
+      onChange={onChange}
+      onChangeStart={onChangeStart}
+      onChangeEnd={onChangeEnd}
+    />
+  </VStack>
+)
+```
+
+### 制御する
+
+```tsx preview functional
+const [value, setValue] = useState(0.5)
+
+return (
+  <VStack>
+    <AlphaSlider.Root color="#775999" value={value} onChange={setValue} />
+  </VStack>
+)
+```
 
 ## Props
 

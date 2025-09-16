@@ -5,7 +5,176 @@ storybook: components-alphaslider--basic
 source: components/alpha-slider
 ---
 
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.5} />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { AlphaSlider } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { AlphaSlider } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { AlphaSlider } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<AlphaSlider.Root color="#775999" />
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size, index) => (
+      <AlphaSlider.Root
+        key={index}
+        size={size}
+        color="#775999"
+        defaultValue={0.5}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Set Default Value
+
+To set a default value, set a value to `defaultValue`.
+
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.7} />
+```
+
+### Set Minimum and Maximum Values
+
+To set minimum and maximum values, set numbers to `min` or `max`.
+
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.5} min={0.25} max={0.75} />
+```
+
+### Change Orientation
+
+To change the orientation, set `orientation` to `vertical` or `horizontal`. The default is `vertical`.
+
+```tsx preview
+<AlphaSlider.Root
+  color="#775999"
+  defaultValue={0.5}
+  orientation="vertical"
+  h="xs"
+/>
+```
+
+### Change Shape
+
+```tsx preview
+<VStack>
+  <For each={["circle", "rounded", "square"]}>
+    {(shape, index) => (
+      <AlphaSlider.Root
+        key={index}
+        color="#775999"
+        defaultValue={0.5}
+        shape={shape}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Set Step Value
+
+To set the step value, set a value to `step`.
+
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.5} step={0.1} />
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.5} disabled />
+```
+
+### Make Read-Only
+
+To make read-only, set `readOnly` to `true`.
+
+```tsx preview
+<AlphaSlider.Root color="#775999" defaultValue={0.5} readOnly />
+```
+
+### Display Tooltip
+
+To display a tooltip, use the `Tooltip` component.
+
+```tsx preview functional
+const [value, setValue] = useState(0.5)
+
+return (
+  <AlphaSlider.Root color="#775999" value={value} onChange={setValue}>
+    <AlphaSlider.Track>
+      <Tooltip content={value}>
+        <AlphaSlider.Thumb />
+      </Tooltip>
+
+      <AlphaSlider.Overlay />
+    </AlphaSlider.Track>
+  </AlphaSlider.Root>
+)
+```
+
+### Handle Start and End Change Events
+
+To handle start and end change events, use `onChangeStart` and `onChangeEnd`.
+
+```tsx preview functional
+const [value, onChange] = useState(0.5)
+const [startValue, onChangeStart] = useState(0.5)
+const [endValue, onChangeEnd] = useState(0.5)
+
+return (
+  <VStack>
+    <Text>
+      Value: {value}, Start Value: {startValue}, End Value: {endValue}
+    </Text>
+
+    <AlphaSlider.Root
+      color="#775999"
+      value={value}
+      onChange={onChange}
+      onChangeStart={onChangeStart}
+      onChangeEnd={onChangeEnd}
+    />
+  </VStack>
+)
+```
+
+### Control
+
+```tsx preview functional
+const [value, setValue] = useState(0.5)
+
+return (
+  <VStack>
+    <AlphaSlider.Root color="#775999" value={value} onChange={setValue} />
+  </VStack>
+)
+```
 
 ## Props
 

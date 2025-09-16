@@ -6,7 +6,11 @@
     "hooks": [],
     "providers": []
   },
-  "dependents": { "components": ["snacks"], "hooks": [], "providers": [] },
+  "dependents": {
+    "components": ["notice", "snacks"],
+    "hooks": [],
+    "providers": []
+  },
   "section": "components",
   "sources": [
     {

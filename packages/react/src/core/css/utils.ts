@@ -1,5 +1,6 @@
 import type { Dict } from "../../utils"
 import type { ColorMode, System, ThemeToken, UsageTheme } from "../system"
+import type { StyleConfig } from "./config"
 import type { CSSFunction } from "./css"
 import type { CSSProperties } from "./index.types"
 import { isObject, isString, isUndefined } from "../../utils"
@@ -83,6 +84,39 @@ export function isCSSToken({ cssMap }: System) {
   return function (value: any) {
     return isObject(cssMap) && value in cssMap && !!cssMap[value]?.ref
   }
+}
+
+export function isImportant(value: any): boolean {
+  return (
+    isString(value) && (/\s*!important$/.test(value) || /\s*!$/.test(value))
+  )
+}
+
+export function omitImportant(value: any): string {
+  return isString(value) ? value.replace(/(!important|!)$/, "").trim() : value
+}
+
+export function insertImportant(value: any, style?: StyleConfig): any {
+  if (isString(value)) {
+    return value + " !important"
+  } else if (isObject(value)) {
+    if (style?.important) {
+      return Object.fromEntries(
+        Object.entries(value).map(([key, value]) => [
+          key,
+          value + " !important",
+        ]),
+      )
+    } else {
+      if (!style?.properties) return value
+
+      for (const property of style.properties) {
+        value[property] += " !important"
+      }
+    }
+  }
+
+  return value
 }
 
 export function analyzeCSSValue(value: any) {

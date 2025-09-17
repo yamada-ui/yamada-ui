@@ -5,4 +5,109 @@ storybook: hooks-useclipboard--basic
 source: hooks/use-clipboard
 ---
 
-### 使い方
+```tsx preview functional client
+const { onCopy, value, setValue, copied } = useClipboard()
+
+return (
+  <VStack>
+    <HStack>
+      <Input
+        placeholder="text to be copied..."
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
+    </HStack>
+
+    <Editable.Root placeholder="Paste here">
+      <Editable.Preview width="full" />
+      <Editable.Input />
+    </Editable.Root>
+  </VStack>
+)
+```
+
+## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useClipboard } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useClipboard } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useClipboard } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { onCopy, value, setValue, copied } = useClipboard("initial value")
+```
+
+### 初期値を使う
+
+```tsx preview functional client
+const { onCopy, value, setValue, copied } = useClipboard("initial value")
+
+return (
+  <VStack>
+    <HStack>
+      <Input
+        placeholder="text to be copied..."
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
+    </HStack>
+
+    <Editable.Root placeholder="Paste here">
+      <Editable.Preview width="full" />
+      <Editable.Input />
+    </Editable.Root>
+  </VStack>
+)
+```
+
+### タイムアウトを制御する
+
+```tsx functional=true
+const { onCopy, value, setValue, copied } = useClipboard("", 5000)
+
+return (
+  <VStack>
+    <HStack>
+      <Input
+        placeholder="text to be copied..."
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
+    </HStack>
+
+    <Editable.Root placeholder="Paste here">
+      <Editable.Preview width="full" />
+      <Editable.Input />
+    </Editable.Root>
+  </VStack>
+)
+```
+
+### 指定した値をコピーする
+
+```tsx functional=true
+const { onCopy, copied } = useClipboard()
+
+const value = "孫悟空"
+
+return (
+  <HStack>
+    <Input readOnly value={value} />
+    <Button onClick={() => onCopy(value)}>{copied ? "Copied!" : "Copy"}</Button>
+  </HStack>
+)
+```

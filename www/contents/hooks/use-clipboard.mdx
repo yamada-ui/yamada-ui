@@ -9,21 +9,16 @@ source: hooks/use-clipboard
 const { onCopy, value, setValue, copied } = useClipboard()
 
 return (
-  <VStack>
-    <HStack>
-      <Input
-        placeholder="text to be copied..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-      <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
-    </HStack>
-
-    <Editable.Root placeholder="Paste here">
-      <Editable.Preview width="full" />
-      <Editable.Input />
-    </Editable.Root>
-  </VStack>
+  <HStack>
+    <Input
+      placeholder="Text to be copied..."
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+    <Button disabled={!value} onClick={onCopy}>
+      {copied ? "Copied" : "Copy"}
+    </Button>
+  </HStack>
 )
 ```
 
@@ -55,59 +50,51 @@ const { onCopy, value, setValue, copied } = useClipboard("initial value")
 const { onCopy, value, setValue, copied } = useClipboard("initial value")
 
 return (
-  <VStack>
-    <HStack>
-      <Input
-        placeholder="text to be copied..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-      <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
-    </HStack>
-
-    <Editable.Root placeholder="Paste here">
-      <Editable.Preview width="full" />
-      <Editable.Input />
-    </Editable.Root>
-  </VStack>
+  <HStack>
+    <Input
+      placeholder="text to be copied..."
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+    <Button disabled={!value} onClick={onCopy}>
+      {copied ? "Copied" : "Copy"}
+    </Button>
+  </HStack>
 )
 ```
 
-### Controlling Timeout
+### Change Timeout
 
-```tsx functional=true
+To change the timeout, set a number(milliseconds) to the second argument. The default is `1500`.
+
+```tsx preview functional client
 const { onCopy, value, setValue, copied } = useClipboard("", 5000)
 
 return (
-  <VStack>
-    <HStack>
-      <Input
-        placeholder="text to be copied..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-      <Button onClick={onCopy}>{copied ? "Copied!" : "Copy"}</Button>
-    </HStack>
-
-    <Editable.Root placeholder="Paste here">
-      <Editable.Preview width="full" />
-      <Editable.Input />
-    </Editable.Root>
-  </VStack>
+  <HStack>
+    <Input
+      placeholder="text to be copied..."
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+    <Button disabled={!value} onClick={onCopy}>
+      {copied ? "Copied" : "Copy"}
+    </Button>
+  </HStack>
 )
 ```
 
 ### Copy the Specified Value
 
-```tsx functional=true
+```tsx preview functional client
 const { onCopy, copied } = useClipboard()
 
-const value = "Goku"
+const value = "Read-Only Value"
 
 return (
   <HStack>
     <Input readOnly value={value} />
-    <Button onClick={() => onCopy(value)}>{copied ? "Copied!" : "Copy"}</Button>
+    <Button onClick={() => onCopy(value)}>{copied ? "Copied" : "Copy"}</Button>
   </HStack>
 )
 ```

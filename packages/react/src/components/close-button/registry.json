@@ -7,7 +7,7 @@
     "providers": ["i18n-provider"]
   },
   "dependents": {
-    "components": ["drawer", "modal", "snacks"],
+    "components": ["drawer", "modal", "notice", "snacks"],
     "hooks": [],
     "providers": []
   },

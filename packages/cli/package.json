@@ -52,7 +52,7 @@
     "commander": "^14.0.0",
     "diff": "^8.0.2",
     "esbuild": "^0.25.9",
-    "eslint": "^9.34.0",
+    "eslint": "^9.35.0",
     "execa": "9.3.1",
     "glob": "^11.0.3",
     "https-proxy-agent": "^7.0.6",
@@ -71,7 +71,7 @@
   },
   "devDependencies": {
     "@types/prompts": "^2.4.9",
-    "@types/semver": "^7.7.0",
+    "@types/semver": "^7.7.1",
     "@types/update-notifier": "6.0.8",
     "@types/validate-npm-package-name": "^4.0.2",
     "@types/yamljs": "^0.2.34",

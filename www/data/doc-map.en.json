@@ -493,6 +493,11 @@
               "pathname": "/docs/components/slider"
             },
             {
+              "title": "Snacks",
+              "segment": "snacks",
+              "pathname": "/docs/components/snacks"
+            },
+            {
               "title": "Spacer",
               "segment": "spacer",
               "pathname": "/docs/components/spacer"
@@ -839,11 +844,6 @@
           "pathname": "/docs/hooks/use-descendants"
         },
         {
-          "title": "useDisclosure",
-          "segment": "use-disclosure",
-          "pathname": "/docs/hooks/use-disclosure"
-        },
-        {
           "title": "useDynamicAnimation",
           "segment": "use-dynamic-animation",
           "pathname": "/docs/hooks/use-dynamic-animation"
@@ -894,11 +894,6 @@
           "pathname": "/docs/hooks/use-interval"
         },
         {
-          "title": "useLazyMount",
-          "segment": "use-lazy-mount",
-          "pathname": "/docs/hooks/use-lazy-mount"
-        },
-        {
           "title": "useLoading",
           "segment": "use-loading",
           "pathname": "/docs/hooks/use-loading"
@@ -912,11 +907,6 @@
           "title": "useMediaQuery",
           "segment": "use-media-query",
           "pathname": "/docs/hooks/use-media-query"
-        },
-        {
-          "title": "useMounted",
-          "segment": "use-mounted",
-          "pathname": "/docs/hooks/use-mounted"
         },
         {
           "title": "useNotice",
@@ -954,11 +944,6 @@
           "pathname": "/docs/hooks/use-resize-observer"
         },
         {
-          "title": "useSnacks",
-          "segment": "use-snacks",
-          "pathname": "/docs/hooks/use-snacks"
-        },
-        {
           "title": "useTheme",
           "segment": "use-theme",
           "pathname": "/docs/hooks/use-theme"
@@ -987,6 +972,11 @@
           "title": "useWindowEvent",
           "segment": "use-window-event",
           "pathname": "/docs/hooks/use-window-event"
+        },
+        {
+          "title": "useDisclosure",
+          "segment": "use-disclosure",
+          "pathname": "/docs/hooks/use-disclosure"
         }
       ]
     },

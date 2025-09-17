@@ -86,7 +86,7 @@ export async function getRegistriesAndFiles(
 
           fileMap.theme = files
           registryMap.locale.theme = await fetchLocaleRegistry(
-            path.join(dirPath, REGISTRY_FILE_NAME),
+            path.posix.join(dirPath, REGISTRY_FILE_NAME),
           )
 
           task.title = `Got ${c.cyan("theme")} files`
@@ -111,11 +111,11 @@ export async function getRegistriesAndFiles(
             {
               task: async (_, task) => {
                 const { dirPath, files } = await getFiles(
-                  path.join(config.srcPath, "**", componentName),
+                  path.posix.join(config.srcPath, "**", componentName),
                 )
                 fileMap[componentName] = files
                 registryMap.locale[componentName] = await fetchLocaleRegistry(
-                  path.join(dirPath, REGISTRY_FILE_NAME),
+                  path.posix.join(dirPath, REGISTRY_FILE_NAME),
                 )
 
                 task.title = `Got ${c.cyan(componentName)} files`

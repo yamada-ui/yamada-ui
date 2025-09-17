@@ -60,6 +60,11 @@ export type StyleValue<Y, M = unknown> =
   | ColorModeValue<Y, M>
   | ResponsiveValue<Y, M>
 
+export type StyleImportantValue<Y extends string> =
+  | `${Y}!`
+  | `${Y} !important`
+  | Y
+
 export type StyleValueWithCondition<
   Y,
   M = unknown,

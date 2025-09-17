@@ -103,7 +103,7 @@ import { Resizable } from "@workspaces/ui"
 
 ### 方向を変更する
 
-方向を変更する場合は、`orientation`に`horizontal`または`vertical`を設定します。デフォルトでは、`horizontal`が設定されています。
+方向を変更する場合は、`orientation`に`"horizontal"`または`"vertical"`を設定します。デフォルトでは、`"horizontal"`が設定されています。
 
 ```tsx preview
 <VStack>
@@ -328,7 +328,7 @@ import { Resizable } from "@workspaces/ui"
 
 ### リサイズイベントをハンドルする
 
-リサイズイベントをハンドルしたい場合は、`onResize`を使用します。`onResize`は、変更したサイズと前回のサイズを提供します。
+リサイズイベントをハンドルする場合は、`onResize`を使用します。`onResize`は、変更したサイズと前回のサイズを提供します。
 
 ```tsx preview
 <Resizable.Root h="md" borderWidth="1px">

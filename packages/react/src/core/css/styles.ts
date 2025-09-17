@@ -551,6 +551,7 @@ export const standardStyles = {
     transform: pipe(transforms.function("brightness"), transforms.filter()),
   },
   captionSide: true,
+  caretAnimation: true,
   caretColor: {
     properties: ["caretColor"],
     token: "colors",
@@ -1631,6 +1632,7 @@ export const standardStyles = {
   scrollSnapAlign: true,
   scrollSnapStop: true,
   scrollSnapType: true,
+  scrollTargetGroup: true,
   scrollTimeline: true,
   scrollTimelineAxis: true,
   scrollTimelineName: true,
@@ -1787,6 +1789,7 @@ export const standardStyles = {
   viewTimelineInset: true,
   viewTimelineName: true,
   viewTransitionClass: true,
+  viewTransitionGroup: true,
   viewTransitionName: true,
   visibility: true,
   whiteSpace: true,
@@ -1928,10 +1931,10 @@ export const pseudoStyles = {
 export type StyledStyleProperty = keyof typeof styledStyles
 
 export const styledStyles = {
-  apply: { transform: transforms.style() },
-  layerStyle: { transform: transforms.style("layerStyles") },
-  textStyle: { transform: transforms.style("textStyles") },
-  colorScheme: { transform: transforms.colorScheme },
+  apply: { important: true, transform: transforms.style() },
+  layerStyle: { important: true, transform: transforms.style("layerStyles") },
+  textStyle: { important: true, transform: transforms.style("textStyles") },
+  colorScheme: { important: true, transform: transforms.colorScheme },
   lineClamp: {
     properties: ["--line-clamp"],
     static: {
@@ -2301,7 +2304,7 @@ export interface StyleProps {
   /**
    * Set color scheme variables.
    */
-  colorScheme?: StyleValueWithCondition<ColorScheme>
+  colorScheme?: StyleValueWithCondition<AnyString | ColorScheme>
   /**
    * ### accent-color
    *
@@ -4591,6 +4594,16 @@ export interface StyleProps {
    */
   caret?: StyleValueWithCondition<CSS.Property.CaretColor, "colors">
   /**
+   * ### caret-animation
+   *
+   * The CSS `caret-animation` property.
+   *
+   * @see https://developer.mozilla.org/docs/Web/CSS/caret-animation
+   *
+   * @experimental
+   */
+  caretAnimation?: StyleValueWithCondition<AnyString>
+  /**
    * ### caret-color
    *
    * The <code>caret-color</code> CSS property sets the color of the text insertion pointer in a text input.
@@ -4839,7 +4852,8 @@ export interface StyleProps {
    *
    * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container
@@ -4850,7 +4864,8 @@ export interface StyleProps {
    *
    * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container-name
@@ -4861,7 +4876,8 @@ export interface StyleProps {
    *
    * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/container-type
@@ -6324,7 +6340,9 @@ export interface StyleProps {
   /**
    * ### interactivity
    *
-   * The CSS `interactivity` property.
+   * The <code>interactivity: inert</code> CSS declaration makes an element and its descendants inert, like when using the <code>inert</code> HTML attribute. Inert elements can't be focused or clicked, their text can't be selected or found using the browser's find-in-page feature.
+   *
+   * @baseline `Limited available`
    *
    * @see https://drafts.csswg.org/css-ui-4/#propdef-interactivity
    *
@@ -8185,7 +8203,7 @@ export interface StyleProps {
   /**
    * ### reading-flow
    *
-   * The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation.
+   * The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The <code>reading-order</code> property overrides this order.
    *
    * @baseline `Limited available`
    *
@@ -8197,7 +8215,9 @@ export interface StyleProps {
   /**
    * ### reading-order
    *
-   * The CSS `reading-order` property.
+   * The <code>reading-flow</code> CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The <code>reading-order</code> property overrides this order.
+   *
+   * @baseline `Limited available`
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/reading-order
    *
@@ -9026,6 +9046,16 @@ export interface StyleProps {
    */
   scrollSnapType?: StyleValueWithCondition<CSS.Property.ScrollSnapType>
   /**
+   * ### scroll-target-group
+   *
+   * The CSS `scroll-target-group` property.
+   *
+   * @see https://drafts.csswg.org/css-overflow-5/#scroll-target-group
+   *
+   * @experimental
+   */
+  scrollTargetGroup?: StyleValueWithCondition<AnyString>
+  /**
    * ### scroll-timeline
    *
    * The <code>animation-timeline</code>, <code>scroll-timeline</code>, and <code>view-timeline</code> CSS properties advance animations based on the user's scroll position.
@@ -9352,9 +9382,7 @@ export interface StyleProps {
    *
    * @baseline `Limited available`
    *
-   * @see https://drafts.csswg.org/css-text-4/#propdef-text-autospace
-   *
-   * @experimental
+   * @see https://developer.mozilla.org/docs/Web/CSS/text-autospace
    */
   textAutospace?: StyleValueWithCondition<AnyString>
   /**
@@ -9980,6 +10008,16 @@ export interface StyleProps {
    * @see https://developer.mozilla.org/docs/Web/CSS/view-transition-class
    */
   viewTransitionClass?: StyleValueWithCondition<AnyString>
+  /**
+   * ### view-transition-group
+   *
+   * The CSS `view-transition-group` property.
+   *
+   * @see https://drafts.csswg.org/css-view-transitions-2/#view-transition-group-prop
+   *
+   * @experimental
+   */
+  viewTransitionGroup?: StyleValueWithCondition<AnyString>
   /**
    * ### view-transition-name
    *
@@ -10759,7 +10797,8 @@ export interface StyleProps {
    *
    * Container size queries with the <code>@container</code> at-rule apply styles to an element based on the dimensions of its container.
    *
-   * @baseline `Newly available`
+   * @baseline `Widely available`
+   * @widely_available_date 2025-08-14
    * @newly_available_date 2023-02-14
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/@container

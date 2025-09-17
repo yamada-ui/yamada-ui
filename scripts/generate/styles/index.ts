@@ -283,6 +283,7 @@ export interface Config {
   type?: string
   css?: CSSObject
   docs?: Docs | string
+  important?: boolean
   properties?: (AnyString | CSSProperties | StyledProperties)[]
   shorthands?: string[]
   token?: ThemeToken
@@ -291,6 +292,7 @@ export interface Config {
 
 interface GetConfigOptions {
   css?: CSSObject
+  important?: boolean
   properties?: (AnyString | CSSProperties | StyledProperties)[]
   token?: ThemeToken
   transforms?: TransformOptions[]
@@ -298,6 +300,7 @@ interface GetConfigOptions {
 
 export function generateConfig({
   css,
+  important,
   properties,
   token,
   transforms,
@@ -310,6 +313,7 @@ export function generateConfig({
     if (properties) config.properties = properties
     if (token) config.token = token
     if (css) config.css = css
+    if (important) config.important = important
 
     if (transforms || token) {
       transforms ??= []
@@ -489,7 +493,7 @@ function generateData(
   function generateDate(isAtRule = false) {
     return function ([
       prop,
-      { type, description, properties, static: css, variableLength },
+      { type, description, important, properties, static: css, variableLength },
     ]: [string, StyleConfig]) {
       if (variableLength) variableLengthProps.push(prop)
 
@@ -511,6 +515,7 @@ function generateData(
 
       const config = generateConfig({
         css,
+        important,
         properties,
         token,
         transforms,

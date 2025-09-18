@@ -547,6 +547,7 @@ export function TokensPreview({
                     "emphasized",
                     "contrast",
                     "panel",
+                    "float",
                     "info",
                     "success",
                     "warning",

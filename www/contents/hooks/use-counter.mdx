@@ -35,9 +35,21 @@ return (
 
 ## Usage
 
-```tsx
+:::code-group
+
+```tsx [package]
 import { useCounter } from "@yamada-ui/react"
 ```
+
+```tsx [alias]
+import { useCounter } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useCounter } from "@workspaces/ui"
+```
+
+:::
 
 ```tsx
 const { value, valueAsNumber, update, increment, decrement, reset, cast, out } =

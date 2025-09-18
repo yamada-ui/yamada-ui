@@ -6,7 +6,49 @@ source: components/stack
 style: components/stack/stack.style.ts
 ---
 
+```tsx preview
+<Stack>
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
+</Stack>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Stack } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Stack } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Stack } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Stack />
+```
+
+### Adding Separators Between Child Elements
+
+```tsx preview
+<Stack separator={<Separator />}>
+  {Array.from({ length: 4 }).map((_, index) => (
+    <Box key={index} bg="bg.contrast" color="fg.contrast" p="md">
+      Box
+    </Box>
+  ))}
+</Stack>
+```
 
 ## Props
 

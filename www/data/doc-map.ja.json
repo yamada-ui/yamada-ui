@@ -799,11 +799,6 @@
           "pathname": "/docs/hooks/use-breakpoint-effect"
         },
         {
-          "title": "useBreakpointEffect",
-          "segment": "use-update-breakpoint-effect",
-          "pathname": "/docs/hooks/use-update-breakpoint-effect"
-        },
-        {
           "title": "useBreakpointState",
           "segment": "use-breakpoint-state",
           "pathname": "/docs/hooks/use-breakpoint-state"
@@ -952,6 +947,11 @@
           "title": "useUpdateEffect",
           "segment": "use-update-effect",
           "pathname": "/docs/hooks/use-update-effect"
+        },
+        {
+          "title": "useUpdateBreakpointEffect",
+          "segment": "use-update-breakpoint-effect",
+          "pathname": "/docs/hooks/use-update-breakpoint-effect"
         },
         {
           "title": "useValue",

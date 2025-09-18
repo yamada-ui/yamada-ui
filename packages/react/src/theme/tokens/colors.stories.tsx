@@ -118,6 +118,7 @@ export const Colors = () => {
                 "emphasized",
                 "contrast",
                 "panel",
+                "float",
                 "info",
                 "success",
                 "warning",

@@ -3,7 +3,7 @@ import { defineComponentSlotStyle } from "../../core"
 export const tooltipStyle = defineComponentSlotStyle({
   base: {
     content: {
-      bg: ["bg", "bg.panel"],
+      bg: "bg.float",
       borderColor: "border.muted",
       borderWidth: "1px",
       boxShadow: "sm",

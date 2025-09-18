@@ -5,4 +5,393 @@ storybook: hooks-usenotice--basic
 source: hooks/use-notice
 ---
 
+```tsx preview functional client
+const notice = useNotice()
+
+return (
+  <Button
+    onClick={() =>
+      notice({
+        title: "シェリル・ノーム",
+        description: "私の歌を聴けー！",
+      })
+    }
+  >
+    Show Notice
+  </Button>
+)
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useNotice } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useNotice } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useNotice } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const notice = useNotice()
+```
+
+### バリアントを変更する
+
+```tsx preview functional client
+const notice = useNotice()
+
+return (
+  <Wrap gap="md">
+    <For each={["plain", "solid", "subtle", "surface", "island"] as const}>
+      {(variant) => (
+        <Button
+          key={variant}
+          onClick={() => {
+            notice({
+              variant,
+              description: "こんなサービス、滅多にしないんだからね！",
+              title: "シェリル・ノーム",
+              withIcon: variant !== "island" ? true : false,
+            })
+          }}
+        >
+          Add "{toTitleCase(variant)}" Snack
+        </Button>
+      )}
+    </For>
+  </Wrap>
+)
+```
+
+### カラースキームを変更する
+
+```tsx preview functional client
+const notice = useNotice()
+
+return (
+  <Wrap gap="md">
+    <For each={["info", "success", "warning", "error"] as const}>
+      {(colorScheme) => (
+        <Button
+          key={colorScheme}
+          onClick={() => {
+            notice({
+              colorScheme,
+              description:
+                "人は１人じゃ飛べない。飛んじゃいけない。それが分かったから…",
+              title: "早乙女アルト",
+            })
+          }}
+        >
+          Add "{toTitleCase(colorScheme)}" Snack
+        </Button>
+      )}
+    </For>
+  </Wrap>
+)
+```
+
+### ローディングスキームを変更する
+
+```tsx preview functional client
+const notice = useNotice()
+
+return (
+  <Wrap gap="md">
+    <For each={["oval", "grid", "puff", "dots"] as const}>
+      {(loadingScheme) => (
+        <Button
+          key={loadingScheme}
+          onClick={() => {
+            notice({
+              description: "人を本気で好きになるのは命がけなんだな。",
+              loadingScheme,
+              title: "ミハエル・ブラン",
+            })
+          }}
+        >
+          Add "{toTitleCase(loadingScheme)}" Snack
+        </Button>
+      )}
+    </For>
+  </Wrap>
+)
+```
+
+### ステータスを変更する
+
+ステータスを変更する場合は、`status`に`"info"`や`"success"`などを設定します。
+
+```tsx preview functional client
+const notice = useNotice()
+
+return (
+  <Wrap gap="md">
+    <For each={["info", "success", "warning", "error"] as const}>
+      {(status) => (
+        <Button
+          key={status}
+          onClick={() => {
+            notice({
+              description: "皆抱きしめて！銀河の果てまで！",
+              status,
+              title: "ランカ・リー",
+            })
+          }}
+        >
+          Add "{toTitleCase(status)}" Snack
+        </Button>
+      )}
+    </For>
+  </Wrap>
+)
+```
+
+### 表示件数を変更する
+
+表示件数を変更する場合は、`limit`に数値を設定します。
+
+```tsx preview functional client
+const notice = useNotice({ limit: 10 })
+
+return (
+  <Button
+    onClick={() =>
+      notice({
+        description: "お前の恋は何処にある！",
+        title: "クラン・クラン",
+      })
+    }
+  >
+    Show Notice
+  </Button>
+)
+```
+
+### 表示時間を変更する
+
+表示時間を変更する場合は、`duration`に数値を設定します。
+
+```tsx preview functional client
+const notice = useNotice({ duration: 10000 })
+
+return (
+  <Wrap gap="md">
+    <Button
+      onClick={() =>
+        notice({
+          description: "お前も、お前の夢も、俺が守る！",
+          title: "オズマ・リー",
+        })
+      }
+    >
+      Show Notice
+    </Button>
+
+    <Button
+      onClick={() =>
+        notice({
+          description: "お前も、お前の夢も、俺が守る！",
+          duration: 5000,
+          title: "オズマ・リー",
+        })
+      }
+    >
+      Show Notice with Option
+    </Button>
+  </Wrap>
+)
+```
+
+### 表示を維持する
+
+表示を維持する場合は、`duration`に`null`を設定します。
+
+```tsx preview functional client
+const notice = useNotice({ duration: null })
+
+return (
+  <Button
+    onClick={() =>
+      notice({
+        description:
+          "覚えておきなさい、こんなにいい女滅多にいないんだからねっ！",
+        title: "シェリル・ノーム",
+      })
+    }
+  >
+    Show Notice
+  </Button>
+)
+```
+
+### 表示位置を変更する
+
+表示位置を変更する場合は、`placement`に`"start"`や`"end"`などを設定します。
+
+```tsx preview functional client
+const notice = useNotice({ duration: null })
+
+return (
+  <Wrap gap="md">
+    <For
+      each={
+        [
+          "start-start",
+          "start-center",
+          "start-end",
+          "end-start",
+          "end-center",
+          "end-end",
+        ] as const
+      }
+    >
+      {(placement) => (
+        <Button
+          key={placement}
+          onClick={() =>
+            notice({
+              description: "お前が、お前たちが俺の翼だ！",
+              placement,
+              title: "早乙女アルト",
+            })
+          }
+        >
+          Open "{placement}" Notice
+        </Button>
+      )}
+    </For>
+  </Wrap>
+)
+```
+
+### 通知を閉じる方法を変更する
+
+通知を閉じる方法を変更する場合は、`closeStrategy`に`"click"`や`"drag"`などを設定します。
+
+```tsx preview functional client
+const notice = useNotice()
+
+return (
+  <Wrap gap="md">
+    <For each={["click", "drag", "button"] as const}>
+      {(closeStrategy) => (
+        <Button
+          key={closeStrategy}
+          onClick={() =>
+            notice({
+              closeStrategy,
+              description: "お前が、お前たちが俺の翼だ！",
+              title: "早乙女アルト",
+            })
+          }
+        >
+          {toTitleCase(closeStrategy)} Only
+        </Button>
+      )}
+    </For>
+
+    <For
+      each={
+        [
+          ["click", "drag"],
+          ["button", "drag"],
+        ] as NoticeCloseStrategy[][]
+      }
+    >
+      {(closeStrategy) => (
+        <Button
+          key={closeStrategy.join("-")}
+          onClick={() =>
+            notice({
+              closeStrategy,
+              description: "お前が、お前たちが俺の翼だ！",
+              title: "早乙女アルト",
+            })
+          }
+        >
+          {toTitleCase(closeStrategy[0]!)} & {toTitleCase(closeStrategy[1]!)}
+        </Button>
+      )}
+    </For>
+  </Wrap>
+)
+```
+
+### 通知を閉じる
+
+通知を閉じる場合は、`close`や`closeAll`を使用します。
+
+```tsx preview functional client
+const notice = useNotice()
+const id = useRef<number | string | null>(null)
+
+const onOpen = () => {
+  id.current = notice({
+    closable: true,
+    description: "お前が好きだ。",
+    duration: 30000,
+    title: "クラン・クラン",
+  })
+}
+
+const onClose = () => {
+  if (id.current) notice.close(id.current)
+}
+
+const onCloseAll = () => {
+  notice.closeAll()
+}
+
+return (
+  <Wrap gap="md">
+    <Button onClick={onOpen}>Show Notice</Button>
+    <Button onClick={onClose}>Close last Notice</Button>
+    <Button onClick={onCloseAll}>Close all Notice</Button>
+  </Wrap>
+)
+```
+
+### 通知を更新する
+
+通知を更新する場合は、`update`メソッドを使用します。
+
+```tsx preview functional client
+const notice = useNotice()
+const id = useRef<number | string | null>(null)
+
+const onOpen = () => {
+  id.current = notice({
+    colorScheme: "orange",
+    description: "チャンスは目の前にあるものよ。",
+    duration: 5000,
+    title: "シェリル・ノーム",
+  })
+}
+
+const onUpdate = () => {
+  if (id.current)
+    notice.update(id.current, {
+      colorScheme: "blue",
+      description: "人生はワン･ツー･デカルチャー！！頑張れ、私。",
+      duration: 5000,
+      title: "ランカ・リー",
+    })
+}
+
+return (
+  <Wrap gap="md">
+    <Button onClick={onOpen}>Show Notice</Button>
+    <Button onClick={onUpdate}>Update last Notice</Button>
+  </Wrap>
+)
+```

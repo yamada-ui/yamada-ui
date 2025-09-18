@@ -6,7 +6,305 @@ source: components/timeline
 style: components/timeline/timeline.style.ts
 ---
 
+```tsx preview
+<Timeline.Root>
+  <Timeline.Item>
+    <Timeline.Connector>
+      <Timeline.Indicator />
+    </Timeline.Connector>
+    <Timeline.Content>
+      <Timeline.Title>第1部 ファントムブラッド</Timeline.Title>
+      <Timeline.Description>
+        全てはここから始まった！ジョナサンとディオ、運命の出会い‼
+      </Timeline.Description>
+    </Timeline.Content>
+  </Timeline.Item>
+
+  <Timeline.Item>
+    <Timeline.Connector>
+      <Timeline.Indicator />
+    </Timeline.Connector>
+    <Timeline.Content>
+      <Timeline.Title>第2部 戦闘潮流</Timeline.Title>
+      <Timeline.Description>
+        石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼
+      </Timeline.Description>
+    </Timeline.Content>
+  </Timeline.Item>
+
+  <Timeline.Item>
+    <Timeline.Connector>
+      <Timeline.Indicator />
+    </Timeline.Connector>
+    <Timeline.Content>
+      <Timeline.Title>第3部 スターダストクルセイダース</Timeline.Title>
+      <Timeline.Description>
+        DIO復活…！永き因縁に終止符を打つスタンドバトル‼
+      </Timeline.Description>
+    </Timeline.Content>
+  </Timeline.Item>
+</Timeline.Root>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Timeline } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Timeline } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Timeline } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Timeline.Root>
+  <Timeline.Item>
+    <Timeline.Connector>
+      <Timeline.Indicator />
+    </Timeline.Connector>
+    <Timeline.Content>
+      <Timeline.Title />
+      <Timeline.Description />
+    </Timeline.Content>
+  </Timeline.Item>
+</Timeline.Root>
+```
+
+### itemsを使う
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+
+return <Timeline.Root items={items} />
+```
+
+### サイズを変更する
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size) => <Timeline.Root key={size} size={size} items={items} />}
+    </For>
+  </VStack>
+)
+```
+
+### カラースキームを変更する
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["success", "warning"]}>
+      {(colorScheme) => (
+        <Timeline.Root
+          key={colorScheme}
+          colorScheme={colorScheme}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 配置を変更する
+
+アイテムの配置を変更する場合は、`align`に`"start"`や`"end"`などを設定します。
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["start", "center", "end"]}>
+      {(align) => (
+        <Timeline.Root
+          key={align}
+          align={align}
+          items={
+            align !== "start"
+              ? items?.map((item, index) => ({
+                  align: align !== "end" && index % 2 === 0 ? "start" : "end",
+                  ...item,
+                }))
+              : items
+          }
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 形を変更する
+
+形を変更する場合は、`shape`に`"circle"`や`"rounded"`などを設定します。
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["circle", "rounded", "square"]}>
+      {(shape) => <Timeline.Root key={shape} shape={shape} items={items} />}
+    </For>
+  </VStack>
+)
+```
+
+### インジケーターをカスタマイズする
+
+インジケーターをカスタマイズする場合は、`indicator`に`ReactNode`を設定します。
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+      indicator: <GhostIcon fontSize="xl" />,
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+      indicator: <AxeIcon fontSize="xl" />,
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+      indicator: <SparklesIcon fontSize="xl" />,
+    },
+  ],
+  [],
+)
+
+return <Timeline.Root items={items} />
+```
+
+### 連結する
+
+連結する場合は、`attached`に`true`を設定します。
+
+```tsx preview functional
+const items = useMemo<Timeline.RootProps["items"]>(
+  () => [
+    {
+      description: "全てはここから始まった！ジョナサンとディオ、運命の出会い‼",
+      title: "第1部 ファントムブラッド",
+    },
+    {
+      description:
+        "石仮面を創った「柱の一族」が蘇る！究極の生命体カーズを打ち破れ‼",
+      title: "第2部 戦闘潮流",
+    },
+    {
+      description: "DIO復活…！永き因縁に終止符を打つスタンドバトル‼",
+      title: "第3部 スターダストクルセイダース",
+    },
+  ],
+  [],
+)
+return <Timeline.Root attached items={items} />
+```
 
 ## Props
 

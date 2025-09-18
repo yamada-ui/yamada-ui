@@ -397,11 +397,6 @@
               "pathname": "/docs/components/pagination"
             },
             {
-              "title": "PagingTable",
-              "segment": "paging-table",
-              "pathname": "/docs/components/paging-table"
-            },
-            {
               "title": "PasswordInput",
               "segment": "password-input",
               "pathname": "/docs/components/password-input"
@@ -852,11 +847,6 @@
           "title": "useEyeDropper",
           "segment": "use-eye-dropper",
           "pathname": "/docs/hooks/use-eye-dropper"
-        },
-        {
-          "title": "useFocusOnPointerDown",
-          "segment": "use-focus-on-pointer-down",
-          "pathname": "/docs/hooks/use-focus-on-pointer-down"
         },
         {
           "title": "useFocusOnShow",

@@ -46,7 +46,7 @@ export function CodePreview({
 
   return (
     <Grid
-      maxH={{ base: "lg", md: "40" }}
+      maxH={{ base: "lg", md: "md" }}
       minH={{ base: "16", md: "12" }}
       overflowY="auto"
       position="relative"

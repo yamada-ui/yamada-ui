@@ -4,4 +4,227 @@ description: "`useDescendants` is a custom hook that manages descendants."
 source: hooks/use-descendants
 ---
 
+```tsx preview functional client
+const { useDescendants, useDescendant, DescendantsContext } =
+  createDescendants()
+
+const ref = useRef<HTMLDivElement>(null)
+const descendants = useDescendants()
+
+const onFocus = useCallback(
+  (ev: FocusEvent<HTMLDivElement>) => {
+    if (ev.target !== ref.current) return
+
+    const descendant = descendants.enabledFirstValue()
+
+    if (descendant) {
+      descendant.node.focus()
+
+      if (ref.current) ref.current.tabIndex = -1
+    }
+  },
+  [descendants],
+)
+
+const onBlur = useCallback((ev: FocusEvent<HTMLDivElement>) => {
+  if (contains(ref.current, ev.relatedTarget)) return
+
+  if (ref.current) ref.current.tabIndex = 0
+}, [])
+
+const Item: FC<{ index: number }> = ({ index }) => {
+  const { descendants, register } = useDescendant()
+
+  const onKeyDown = useCallback(
+    (ev: KeyboardEvent<HTMLButtonElement>) => {
+      runKeyAction(ev, {
+        ArrowDown: () => {
+          const descendant = descendants.enabledNextValue(index)
+
+          if (descendant) descendant.node.focus()
+        },
+        ArrowUp: () => {
+          const descendant = descendants.enabledPrevValue(index)
+
+          if (descendant) descendant.node.focus()
+        },
+        Home: () => {
+          const descendant = descendants.enabledFirstValue()
+
+          if (descendant) descendant.node.focus()
+        },
+        End: () => {
+          const descendant = descendants.enabledLastValue()
+
+          if (descendant) descendant.node.focus()
+        },
+      })
+    },
+    [descendants],
+  )
+
+  return (
+    <Center
+      ref={register}
+      tabIndex={-1}
+      onKeyDown={onKeyDown}
+      bg="bg.contrast"
+      color="fg.contrast"
+      p="md"
+    >
+      Item {index}
+    </Center>
+  )
+}
+
+return (
+  <DescendantsContext value={descendants}>
+    <VStack
+      ref={ref}
+      tabIndex={0}
+      focusVisibleRing="none"
+      onFocus={onFocus}
+      onBlur={onBlur}
+    >
+      {Array.from({ length: 5 }).map((_, index) => (
+        <Item key={index} index={index} />
+      ))}
+    </VStack>
+  </DescendantsContext>
+)
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { createDescendants } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { createDescendants } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { createDescendants } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const {
+  DescendantsContext,
+  useDescendant,
+  useDescendantRegister,
+  useDescendants,
+  useDescendantsContext,
+} = createDescendants()
+```
+
+```tsx
+const descendants = useDescendants()
+```
+
+```tsx
+const { descendants, register } = useDescendant()
+```
+
+### Disable descendant
+
+To disable a descendant, set the `disabled` prop to `true` on `useDescendant`.
+
+```tsx preview functional client
+const { useDescendants, useDescendant, DescendantsContext } =
+  createDescendants()
+
+const ref = useRef<HTMLDivElement>(null)
+const descendants = useDescendants()
+
+const onFocus = useCallback(
+  (ev: FocusEvent<HTMLDivElement>) => {
+    if (ev.target !== ref.current) return
+
+    const descendant = descendants.enabledFirstValue()
+
+    if (descendant) {
+      descendant.node.focus()
+
+      if (ref.current) ref.current.tabIndex = -1
+    }
+  },
+  [descendants],
+)
+
+const onBlur = useCallback((ev: FocusEvent<HTMLDivElement>) => {
+  if (contains(ref.current, ev.relatedTarget)) return
+
+  if (ref.current) ref.current.tabIndex = 0
+}, [])
+
+const Item: FC<{ index: number; disabled?: boolean }> = ({
+  index,
+  disabled,
+}) => {
+  const { descendants, register } = useDescendant({ disabled })
+
+  const onKeyDown = useCallback(
+    (ev: KeyboardEvent<HTMLButtonElement>) => {
+      runKeyAction(ev, {
+        ArrowDown: () => {
+          const descendant = descendants.enabledNextValue(index)
+
+          if (descendant) descendant.node.focus()
+        },
+        ArrowUp: () => {
+          const descendant = descendants.enabledPrevValue(index)
+
+          if (descendant) descendant.node.focus()
+        },
+        Home: () => {
+          const descendant = descendants.enabledFirstValue()
+
+          if (descendant) descendant.node.focus()
+        },
+        End: () => {
+          const descendant = descendants.enabledLastValue()
+
+          if (descendant) descendant.node.focus()
+        },
+      })
+    },
+    [descendants],
+  )
+
+  return (
+    <Center
+      ref={register}
+      tabIndex={-1}
+      onKeyDown={onKeyDown}
+      bg="bg.contrast"
+      color="fg.contrast"
+      p="md"
+      data-disabled={dataAttr(disabled)}
+      _disabled={{ layerStyle: "disabled" }}
+    >
+      Item {index}
+    </Center>
+  )
+}
+
+return (
+  <DescendantsContext value={descendants}>
+    <VStack
+      ref={ref}
+      tabIndex={0}
+      focusVisibleRing="none"
+      onFocus={onFocus}
+      onBlur={onBlur}
+    >
+      {Array.from({ length: 5 }).map((_, index) => (
+        <Item key={index} index={index} disabled={index % 3 === 0} />
+      ))}
+    </VStack>
+  </DescendantsContext>
+)
+```

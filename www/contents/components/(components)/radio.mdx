@@ -5,7 +5,284 @@ storybook: components-radio--basic
 source: components/radio
 ---
 
+```tsx preview
+<RadioGroup.Root>
+  <RadioGroup.Item value="1">織田信長</RadioGroup.Item>
+  <RadioGroup.Item value="2">豊臣秀吉</RadioGroup.Item>
+  <RadioGroup.Item value="3">徳川家康</RadioGroup.Item>
+</RadioGroup.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Radio, RadioGroup } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Radio, RadioGroup } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Radio, RadioGroup } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Radio />
+
+<RadioGroup.Root>
+  <RadioGroup.Item />
+</RadioGroup.Root>
+```
+
+### Use Items
+
+```tsx preview functional
+const items = useMemo<RadioGroup.RootProps["items"]>(
+  () => [
+    { label: "織田信長", value: "1" },
+    { label: "豊臣秀吉", value: "2" },
+    { label: "徳川家康", value: "3" },
+  ],
+  [],
+)
+
+return <RadioGroup.Root items={items} />
+```
+
+### Change Variant
+
+```tsx preview
+<RadioGroup.Root>
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant) => (
+      <RadioGroup.Item key={variant} variant={variant} defaultChecked>
+        {toTitleCase(variant)}
+      </RadioGroup.Item>
+    )}
+  </For>
+</RadioGroup.Root>
+```
+
+### Change Size
+
+```tsx preview
+<RadioGroup.Root>
+  <For each={["sm", "md", "lg"]}>
+    {(size) => (
+      <RadioGroup.Item key={size} size={size} defaultChecked>
+        {toTitleCase(size)}
+      </RadioGroup.Item>
+    )}
+  </For>
+</RadioGroup.Root>
+```
+
+### Set Default Value
+
+To set a default value, set `defaultValue` to a value.
+
+```tsx preview functional
+const items = useMemo<RadioGroup.RootProps["items"]>(
+  () => [
+    { label: "織田信長", value: "1" },
+    { label: "豊臣秀吉", value: "2" },
+    { label: "徳川家康", value: "3" },
+  ],
+  [],
+)
+
+return <RadioGroup.Root defaultValue="1" items={items} />
+```
+
+### Default Checked
+
+To default checked, set `defaultChecked` to `true`.
+
+```tsx preview functional
+const items = useMemo<RadioGroup.RootProps["items"]>(
+  () => [
+    { defaultChecked: true, label: "織田信長", value: "1" },
+    { label: "豊臣秀吉", value: "2" },
+    { label: "徳川家康", value: "3" },
+  ],
+  [],
+)
+
+return <RadioGroup.Root items={items} />
+```
+
+### Change Direction
+
+To change the direction, set `orientation` to `"horizontal"` or `"vertical"`. The default is `"vertical"`.
+
+```tsx preview functional
+const items = useMemo<RadioGroup.RootProps["items"]>(
+  () => [
+    { label: "織田信長", value: "1" },
+    { label: "豊臣秀吉", value: "2" },
+    { label: "徳川家康", value: "3" },
+  ],
+  [],
+)
+
+return <RadioGroup.Root items={items} orientation="horizontal" />
+```
+
+### Change Shape
+
+To change the shape, set `shape` to `"circle"`, `"square"` or `"rounded"`. The default is `"circle"`.
+
+```tsx preview functional
+const items = useMemo<RadioGroup.RootProps["items"]>(
+  () => [
+    { label: "織田信長", value: "1" },
+    { label: "豊臣秀吉", value: "2" },
+    { label: "徳川家康", value: "3" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["circle", "square", "rounded"]}>
+      {(shape) => (
+        <RadioGroup.Root
+          key={shape}
+          defaultValue="1"
+          shape={shape}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview
+<RadioGroup.Root>
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant) => (
+      <RadioGroup.Item key={variant} variant={variant} disabled>
+        {toTitleCase(variant)}
+      </RadioGroup.Item>
+    )}
+  </For>
+</RadioGroup.Root>
+```
+
+### Read-Only
+
+To read-only, set `readOnly` to `true`.
+
+```tsx preview
+<RadioGroup.Root>
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant) => (
+      <RadioGroup.Item key={variant} variant={variant} readOnly defaultChecked>
+        {toTitleCase(variant)}
+      </RadioGroup.Item>
+    )}
+  </For>
+</RadioGroup.Root>
+```
+
+### Invalid
+
+To make invalid, set `invalid` to `true`.
+
+```tsx preview
+<RadioGroup.Root>
+  <For each={["solid", "subtle", "surface", "outline"]}>
+    {(variant) => (
+      <RadioGroup.Item key={variant} variant={variant} invalid>
+        {toTitleCase(variant)}
+      </RadioGroup.Item>
+    )}
+  </For>
+</RadioGroup.Root>
+```
+
+### Change Border Color
+
+To change the border color, set `focusBorderColor` or `errorBorderColor` to a color value.
+
+```tsx preview
+<RadioGroup.Root>
+  <RadioGroup.Item value="1">Default border color</RadioGroup.Item>
+  <RadioGroup.Item focusBorderColor="green.500" value="2">
+    Custom border color
+  </RadioGroup.Item>
+  <RadioGroup.Item errorBorderColor="orange.500" invalid value="3">
+    Custom border color
+  </RadioGroup.Item>
+</RadioGroup.Root>
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState("1")
+const items = useMemo<RadioGroup.RootProps["items"]>(
+  () => [
+    { label: "織田信長", value: "1" },
+    { label: "豊臣秀吉", value: "2" },
+    { label: "徳川家康", value: "3" },
+  ],
+  [],
+)
+
+return <RadioGroup.Root items={items} value={value} onChange={setValue} />
+```
+
+### Use Custom Component
+
+```tsx preview functional client
+const { getInputProps, getLabelProps, getRootProps } = useRadioGroup({
+  defaultValue: "1",
+})
+
+const CustomRadio = ({ children, ...rest }) => {
+  return (
+    <Box
+      as="label"
+      css={{
+        "&:has(input:checked)": {
+          bg: "colorScheme.solid",
+          borderColor: "colorScheme.solid",
+          color: "colorScheme.contrast",
+        },
+        alignItems: "center",
+        borderWidth: "1px",
+        display: "flex",
+        h: "10",
+        px: "3",
+        rounded: "l2",
+      }}
+      {...getLabelProps()}
+    >
+      <Box as="input" {...getInputProps(rest)} />
+      {children}
+    </Box>
+  )
+}
+
+return (
+  <HStack {...getRootProps()}>
+    <CustomRadio value="1">織田信長</CustomRadio>
+    <CustomRadio value="2">豊臣秀吉</CustomRadio>
+    <CustomRadio value="3">徳川家康</CustomRadio>
+  </HStack>
+)
+```
 
 ## Props
 

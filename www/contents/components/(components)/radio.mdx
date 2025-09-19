@@ -32,8 +32,6 @@ import { Radio, RadioGroup } from "@workspaces/ui"
 :::
 
 ```tsx
-<Radio />
-
 <RadioGroup.Root>
   <RadioGroup.Item />
 </RadioGroup.Root>
@@ -56,30 +54,56 @@ return <RadioGroup.Root items={items} />
 
 ### Change Variant
 
-```tsx preview
-<RadioGroup.Root>
-  <For each={["solid", "subtle", "surface", "outline"]}>
-    {(variant) => (
-      <RadioGroup.Item key={variant} variant={variant} defaultChecked>
-        {toTitleCase(variant)}
-      </RadioGroup.Item>
-    )}
-  </For>
-</RadioGroup.Root>
+```tsx preview functional
+const items = useMemo<RadioGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "No checked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["solid", "subtle", "surface", "outline"]}>
+      {(variant, index) => (
+        <RadioGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue="1"
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
 ```
 
 ### Change Size
 
-```tsx preview
-<RadioGroup.Root>
-  <For each={["sm", "md", "lg"]}>
-    {(size) => (
-      <RadioGroup.Item key={size} size={size} defaultChecked>
-        {toTitleCase(size)}
-      </RadioGroup.Item>
-    )}
-  </For>
-</RadioGroup.Root>
+```tsx preview functional
+const items = useMemo<RadioGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "No checked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size, index) => (
+        <RadioGroup.Root
+          key={size}
+          size={size}
+          defaultValue="1"
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
 ```
 
 ### Set Default Value

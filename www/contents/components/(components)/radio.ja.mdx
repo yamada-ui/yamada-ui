@@ -57,9 +57,8 @@ return <RadioGroup.Root items={items} />
 ```tsx preview functional
 const items = useMemo<RadioGroup.RootProps["items"]>(
   () => [
-    { label: "織田信長", value: "1" },
-    { label: "豊臣秀吉", value: "2" },
-    { label: "徳川家康", value: "3" },
+    { label: "Checked", value: "1" },
+    { label: "No checked", value: "2" },
   ],
   [],
 )
@@ -85,9 +84,8 @@ return (
 ```tsx preview functional
 const items = useMemo<RadioGroup.RootProps["items"]>(
   () => [
-    { label: "織田信長", value: "1" },
-    { label: "豊臣秀吉", value: "2" },
-    { label: "徳川家康", value: "3" },
+    { label: "Checked", value: "1" },
+    { label: "No checked", value: "2" },
   ],
   [],
 )

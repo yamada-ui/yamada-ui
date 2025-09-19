@@ -4,3 +4,114 @@ description: Vite.jsのプロジェクトにYamada UIをインストールして
 ---
 
 ## インストール
+
+::::steps
+
+### アプリケーションを作成する
+
+Viteのアプリケーションを作成します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm create vite my-app --template react-ts
+```
+
+```bash [npm]
+npm create vite my-app -- --template react-ts
+```
+
+```bash [yarn]
+yarn create vite my-app --template react-ts
+```
+
+```bash [bun]
+bun create vite my-app --template react-ts
+```
+
+:::
+
+### セットアップする
+
+コマンドを実行すると、プロジェクトに必要なファイルやフォルダが作成されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm dlx @yamada-ui/cli init
+```
+
+```bash [npm]
+npx @yamada-ui/cli init
+```
+
+```bash [yarn]
+yarn dlx @yamada-ui/cli init
+```
+
+```bash [bun]
+bunx @yamada-ui/cli init
+```
+
+:::
+
+### パッケージをインストールする
+
+アプリケーションに`@workspaces/ui`をインストールします。
+
+:::code-group
+
+```bash [pnpm]
+pnpm add "@workspaces/ui@workspace:*"
+```
+
+```bash [npm]
+npm install "@workspaces/ui@workspace:*"
+```
+
+```bash [yarn]
+yarn add "@workspaces/ui@workspace:*"
+```
+
+```bash [bun]
+bun add "@workspaces/ui@workspace:*"
+```
+
+:::
+
+### プロバイダーを追加する
+
+インストール後、アプリケーションのルートに`UIProvider`を追加します。
+
+```tsx title="main.tsx"
+import { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import App from "./App.tsx"
+import { UIProvider } from "@workspaces/ui"
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <UIProvider>
+      <App />
+    </UIProvider>
+  </StrictMode>,
+)
+```
+
+### コンポーネントを使用する
+
+`UIProvider`を追加したら、アプリケーション内でコンポーネントを使用します。
+
+```tsx title="App.tsx"
+import { Button } from "@workspaces/ui"
+
+function App() {
+  return <Button>Click me!</Button>
+}
+
+export default App
+```
+
+これで、Yamada UIのセットアップは完了です！
+
+::::

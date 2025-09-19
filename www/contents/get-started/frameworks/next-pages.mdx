@@ -4,3 +4,110 @@ description: A guide for installing and using Yamada UI with Next.js pages direc
 ---
 
 ## Installation
+
+::::steps
+
+### Create application
+
+Create Next.js application.
+
+:::code-group
+
+```bash [pnpm]
+pnpm create next-app my-app --typescript
+```
+
+```bash [npm]
+npx create-next-app my-app --typescript
+```
+
+```bash [yarn]
+yarn create next-app my-app --typescript
+```
+
+```bash [bun]
+bun create next-app my-app --typescript
+```
+
+:::
+
+### Setup
+
+Running the command will create the necessary files and folders in your project.
+
+:::code-group
+
+```bash [pnpm]
+pnpm dlx @yamada-ui/cli init
+```
+
+```bash [npm]
+npx @yamada-ui/cli init
+```
+
+```bash [yarn]
+yarn dlx @yamada-ui/cli init
+```
+
+```bash [bun]
+bunx @yamada-ui/cli init
+```
+
+:::
+
+### Install the package
+
+Install `@workspaces/ui` to your application.
+
+:::code-group
+
+```bash [pnpm]
+pnpm add "@workspaces/ui@workspace:*"
+```
+
+```bash [npm]
+npm install "@workspaces/ui@workspace:*"
+```
+
+```bash [yarn]
+yarn add "@workspaces/ui@workspace:*"
+```
+
+```bash [bun]
+bun add "@workspaces/ui@workspace:*"
+```
+
+:::
+
+### Add provider
+
+After installing, add `UIProvider` to the root of your application.
+
+```tsx title="_app.tsx"
+import { UIProvider } from "@yamada-ui/react"
+import type { AppProps } from "next/app"
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <UIProvider>
+      <Component {...pageProps} />
+    </UIProvider>
+  )
+}
+```
+
+### Use components
+
+After adding `UIProvider`, you can use the components in your application.
+
+```tsx title="index.tsx"
+import { Button } from "@workspaces/ui"
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+```
+
+That's it! You've successfully set up Yamada UI.
+
+::::

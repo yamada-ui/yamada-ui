@@ -3,6 +3,45 @@ title: インターポレーション
 description: Yamada UIでCSSカスタムプロパティ(変数)やテーマのトークンに簡単にアクセスできる機能を提供しています。
 ---
 
+## 概要
+
 インターポレーションは、[CSSカスタムプロパティ(変数)](/docs/styling/css-custom-properties)、または[テーマ](/docs/theming)のトークンを参照するための機能です。
 
 ## 使い方
+
+[CSSカスタムプロパティ(変数)](/docs/styling/css-custom-properties)を作成した場合、設定した`name`を`{name}`で参照することができます。
+
+```tsx preview
+<Box
+  p="md"
+  rounded="md"
+  {...{ "--custom-bg-color": "colors.success.bg" }}
+  bg="{custom-bg-color}"
+>
+  Box
+</Box>
+```
+
+### テーマのトークンを参照する
+
+Yamada UIの[Style Props](/docs/styling/style-props)は、対応するプロパティのみ[テーマ](/docs/theming)のトークンが参照されます。例えば、`borderRadius`は、`radii`のトークンを参照しますが、`spaces`のトークンは参照されません。`{}`を使用することで、対応するトークン以外を参照することができます。
+
+```tsx preview
+<VStack>
+  <Box p="md" rounded="md" border="1px solid">
+    Box
+  </Box>
+
+  <Box p="md" rounded="{spaces.md}" border="1px solid">
+    Box
+  </Box>
+</VStack>
+```
+
+また、文字列内に`{}`を使用することで、[テーマ](/docs/theming)のトークンを参照することができます。これは、[border](https://developer.mozilla.org/ja/docs/Web/CSS/border)などの[一括指定プロパティ](https://developer.mozilla.org/ja/docs/Web/CSS/Shorthand_properties)で有効です。
+
+```tsx preview
+<Box p="md" rounded="md" border="{sizes.1} solid {colors.success}">
+  Box
+</Box>
+```

@@ -3,4 +3,57 @@ title: CSS Custom Properties
 description: Yamada UI provides features to easily create and reference CSS custom properties.
 ---
 
+## Overview
+
+You can create and reference [CSS custom properties (variables)](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) in Yamada UI components.
+
+:::warning
+In most cases, you don't need custom properties when using Yamada UI's style system. This feature is useful when you want to reference Yamada UI theme tokens and other values in components from other libraries.
+:::
+
 ## Usage
+
+To create [CSS custom properties (variables)](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties), define properties with the `--` prefix in `Props` or the `css` property.
+
+```tsx
+<Box
+  css={{
+    "--bg": "colors.bg.contrast",
+  }}
+  {...{
+    "--fg": "colors.fg.contrast",
+  }}
+/>
+```
+
+The above code generates the following `CSS`:
+
+```css
+.Box {
+  --bg: var(--ui-colors-bg-contrast);
+  --fg: var(--ui-colors-fg-contrast);
+}
+```
+
+To reference custom properties, use CSS [var](https://developer.mozilla.org/en-US/docs/Web/CSS/var) or the style system's `{}` ([interpolation](/docs/styling/interpolation)).
+
+```tsx preview
+<Box
+  p="md"
+  rounded="md"
+  css={{
+    "--bg": "colors.bg.contrast",
+  }}
+  {...{
+    "--fg": "colors.fg.contrast",
+  }}
+  bg="var(--bg)"
+  color="{fg}"
+>
+  Box
+</Box>
+```
+
+:::warning
+Custom properties you set will only apply to child elements of the element where they are defined.
+:::

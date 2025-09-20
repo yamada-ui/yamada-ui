@@ -3,6 +3,110 @@ title: Focus Ring
 description: Yamada UI provides features to apply various styles when an element is focused.
 ---
 
+## Overview
+
+Focus rings are used to identify which element is currently focused on a page. While this is important from an accessibility perspective, it can be tedious to set up styles to display focus rings on all components.
+Yamada UI provides `focusRing` and `focusVisibleRing` properties to easily configure focus ring styles.
+
 ## Usage
 
+### focusRing
+
+`focusRing` maps to the `&:is(:focus, [data-focus])`.
+
+```tsx preview
+<Button variant="outline" focusRing="outside" data-focus>
+  Button
+</Button>
+```
+
+### focusVisibleRing
+
+`focusVisibleRing` maps to the `&:is(:focus-visible, [data-focus-visible])`.
+
+```tsx preview
+<Button variant="outline" focusVisibleRing="outside" data-focus-visible>
+  Button
+</Button>
+```
+
+### Difference between focusRing and focusVisibleRing
+
+`focusVisibleRing` works similarly to `focusRing`, but with an important difference. The styles are applied only when the element receives keyboard focus.\
+This ensures that focus rings are displayed only when navigating with a keyboard, improving accessibility without affecting mouse interactions.
+
 ## Customize
+
+### Change Variant
+
+```tsx preview
+<Wrap gap="md">
+  <For
+    each={[
+      undefined,
+      "outline",
+      "inline",
+      "mixed",
+      "outside",
+      "inside",
+      "none",
+    ]}
+  >
+    {(value, index) => (
+      <Button key={index} variant="outline" focusRing={value} data-focus>
+        {toTitleCase(value ?? "default")}
+      </Button>
+    )}
+  </For>
+</Wrap>
+```
+
+### Change Color
+
+To change the color, set a color value to `focusRingColor`.
+
+```tsx preview
+<Button
+  variant="outline"
+  focusRing="outline"
+  focusRingColor="success"
+  data-focus
+>
+  Button
+</Button>
+```
+
+### Change Width
+
+To change the width, set a value to `focusRingWidth`.
+
+```tsx preview
+<Button variant="outline" focusRing="outline" focusRingWidth="1px" data-focus>
+  Button
+</Button>
+```
+
+### Change Style
+
+To change the style, set a style value to `focusRingStyle`.
+
+```tsx preview
+<Button
+  variant="outline"
+  focusRing="outline"
+  focusRingStyle="dashed"
+  data-focus
+>
+  Button
+</Button>
+```
+
+### Change Offset
+
+To change the offset, set a numeric value to `focusRingOffset`.
+
+```tsx preview
+<Button variant="outline" focusRing="outline" focusRingOffset={1} data-focus>
+  Button
+</Button>
+```

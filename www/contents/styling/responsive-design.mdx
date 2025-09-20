@@ -7,4 +7,66 @@ description: Yamada UI provides features to change styles according to the scree
 By default, responsive design using `@media(max-width)` media queries is adopted. If you want to use `@media(min-width)` media queries, please refer to [here](/docs/theming/breakpoints#media-queries).
 :::
 
-## Usage
+## About Breakpoints
+
+Responsive styles refer to the breakpoints defined in the theme. Yamada UI has a Default Theme where [breakpoints](/docs/theming/tokens/breakpoints) are defined.
+
+:::note
+If you want to change the breakpoints, please check theme's [Breakpoints](/docs/theming/breakpoints).
+:::
+
+## Syntax for Responsive Styles
+
+To set responsive styles, simply pass an object to the style properties to support PC-first responsive styles.
+
+- The keys of the object define the keys set in the theme's [Breakpoints](/docs/theming/tokens/breakpoints).
+- The values of the object define the values of the styles set by the key.
+
+```tsx preview
+<Box
+  w="full"
+  p="md"
+  color="fg.contrast"
+  bg={{
+    base: "bg.contrast",
+    "2xl": "info",
+    xl: "warning",
+    lg: "danger",
+  }}
+>
+  This is Box
+</Box>
+```
+
+The above code generates the following CSS:
+
+```css
+.Box {
+  background: var(--ui-colors-bg-contrast);
+
+  @media screen and (max-width: 1440px) {
+    background: var(--ui-colors-info);
+  }
+
+  @media screen and (max-width: 1280px) {
+    background: var(--ui-colors-warning);
+  }
+
+  @media screen and (max-width: 976px) {
+    background: var(--ui-colors-warning);
+  }
+
+  @media screen and (max-width: 480px) {
+    background: var(--ui-colors-danger);
+  }
+}
+```
+
+## Responsive Utilities
+
+Yamada UI provides useful custom hooks for building responsive layouts.
+
+- [useBreakpoint](/docs/hooks/use-breakpoint)
+- [useBreakpointEffect](/docs/hooks/use-breakpoint-effect)
+- [useBreakpointState](/docs/hooks/use-breakpoint-state)
+- [useBreakpointValue](/docs/hooks/use-breakpoint-value)

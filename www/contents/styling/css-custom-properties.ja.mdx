@@ -4,3 +4,41 @@ description: Yamada UIは、CSSカスタムプロパティを簡単に作成・�
 ---
 
 ## 使い方
+
+[CSSカスタムプロパティ(変数)](https://developer.mozilla.org/ja/docs/Web/CSS/Using_CSS_custom_properties)を作成するには、`--`プレフィックスが付いたプロパティをpropsまたは`css`に設定します。
+
+```tsx
+<Box css={{ "--bg": "#d4d4d4" }} {...{ "--fg": "black" }} />
+```
+
+カスタムプロパティを参照するには、CSSの[var](https://developer.mozilla.org/ja/docs/Web/CSS/var)を使用するか、`{}`([インターポレーション](/docs/styling/interpolation))を使用します。
+
+```tsx preview
+<Box
+  p="md"
+  css={{ "--bg": "#d4d4d4" }}
+  {...{ "--fg": "black" }}
+  bg="var(--bg)"
+  color="{fg}"
+>
+  Box
+</Box>
+```
+
+:::warning
+設定したカスタムプロパティは、設定した要素の子要素にのみ適用されます。
+:::
+
+また、カスタムプロパティは[テーマ](/docs/theming)のトークンを参照することができます。
+
+```tsx preview
+<Box
+  p="md"
+  css={{ "--bg": "colors.bg.contrast" }}
+  {...{ "--fg": "colors.fg.contrast" }}
+  bg="var(--bg)"
+  color="{fg}"
+>
+  Box
+</Box>
+```

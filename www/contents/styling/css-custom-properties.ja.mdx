@@ -3,4 +3,70 @@ title: CSSカスタムプロパティ
 description: Yamada UIは、CSSカスタムプロパティを簡単に作成・使用する機能を提供しています。
 ---
 
+## 概要
+
+Yamada UIのコンポーネントでは、[CSSカスタムプロパティ(変数)](https://developer.mozilla.org/ja/docs/Web/CSS/Using_CSS_custom_properties)を作成・参照することができます。
+
 ## 使い方
+
+[CSSカスタムプロパティ(変数)](https://developer.mozilla.org/ja/docs/Web/CSS/Using_CSS_custom_properties)を作成するには、`--`プレフィックスが付いたプロパティを`Props`または`css`に定義します。
+
+```tsx
+<Box
+  css={{
+    "--bg": "#d4d4d4",
+  }}
+  {...{
+    "--fg": "black",
+  }}
+/>
+```
+
+上記のコードは、次のようなCSSが生成されます。
+
+```css
+.Box {
+  --bg: #d4d4d4;
+  --fg: black;
+}
+```
+
+カスタムプロパティを参照するには、CSSの[var](https://developer.mozilla.org/ja/docs/Web/CSS/var)を使用するか、`{}`([インターポレーション](/docs/styling/interpolation))を使用します。
+
+```tsx preview
+<Box
+  p="md"
+  css={{
+    "--bg": "#d4d4d4",
+  }}
+  {...{
+    "--fg": "black",
+  }}
+  bg="var(--bg)"
+  color="{fg}"
+>
+  Box
+</Box>
+```
+
+:::warning
+設定したカスタムプロパティは、設定した要素の子要素にのみ適用されます。
+:::
+
+また、カスタムプロパティはテーマのトークンを参照することができます。
+
+```tsx preview
+<Box
+  p="md"
+  css={{
+    "--bg": "colors.bg.contrast",
+  }}
+  {...{
+    "--fg": "colors.fg.contrast",
+  }}
+  bg="var(--bg)"
+  color="{fg}"
+>
+  Box
+</Box>
+```

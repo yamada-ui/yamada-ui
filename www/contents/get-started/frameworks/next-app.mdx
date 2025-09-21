@@ -82,8 +82,9 @@ bun add "@workspaces/ui@workspace:*"
 ### Add provider
 
 After installing, add `UIProvider` to the root of your application.
+To suppress hydration errors, add `suppressHydrationWarning` to the `html` and `body` tags.
 
-```tsx title="layout.tsx"
+```tsx title="layout.tsx" {1,9-11}
 import { UIProvider } from "@yamada-ui/react"
 
 export default function RootLayout({
@@ -105,7 +106,7 @@ export default function RootLayout({
 
 After adding `UIProvider`, you can use the components in your application.
 
-```tsx title="page.tsx"
+```tsx title="page.tsx" {1,4}
 import { Button } from "@workspaces/ui"
 
 export default function Home() {
@@ -116,3 +117,91 @@ export default function Home() {
 That's it! You've successfully set up Yamada UI.
 
 ::::
+
+## Add Scripts
+
+### ColorModeScript
+
+If you want to suppress screen flashing due to color mode, add `ColorModeScript` inside the `body`.
+
+Color mode is implemented using `localStorage` or `cookies`, and adding `ColorModeScript` allows proper synchronization functionality when the page loads.
+
+```tsx title="layout.tsx" {1,11}
+import { UIProvider, ColorModeScript } from "@workspaces/ui"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <ColorModeScript />
+
+        <UIProvider>{children}</UIProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+### ThemeSchemeScript
+
+If you want to suppress screen flashing due to theme scheme, add `ThemeSchemeScript` inside the `body`.
+
+Theme scheme is implemented using `localStorage` or `cookies`, and adding `ThemeSchemeScript` allows proper synchronization functionality when the page loads.
+
+```tsx title="layout.tsx" {1,11}
+import { UIProvider, ThemeSchemeScript } from "@workspaces/ui"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <ThemeSchemeScript />
+
+        <UIProvider>{children}</UIProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+### Specify type
+
+By specifying `"cookie"` for `type`, you can further suppress flashing.
+
+:::warning
+Using `cookies()` will opt into dynamic rendering. For more details, please refer to the [official documentation](https://nextjs.org/docs/app/api-reference/functions/cookies).
+:::
+
+```tsx title="layout.tsx" {1,2,9,14-17}
+import { UIProvider, ColorModeScript, ThemeSchemeScript } from "@workspaces/ui"
+import { cookies } from "next/headers"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const cookieStore = await cookies()
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <ColorModeScript type="cookie" />
+        <ThemeSchemeScript type="cookie" />
+
+        <UIProvider cookie={cookieStore.toString()} storage="cookie">
+          {children}
+        </UIProvider>
+      </body>
+    </html>
+  )
+}
+```

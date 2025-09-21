@@ -3,4 +3,145 @@ title: Conditional Styles
 description: Yamada UI provides features to apply styles according to conditions.
 ---
 
-Here's a list of all the conditional styles available in the library.
+## Overview
+
+Yamada UI allows you to write styles for [Pseudo Elements](/docs/styling/style-props#pseudo-elements), [Pseudo Classes](/docs/styling/style-props#pseudo-classes), and [Selectors](/docs/styling/style-props#selectors) using conditional styles.
+
+## Usage
+
+### Pseudo Elements
+
+To set styles for the `::before` pseudo-element, use `_before`.
+
+For a list of available pseudo-elements, see [here](/docs/styling/style-props#pseudo-elements).
+
+```tsx preview
+<Box
+  bg="bg.contrast"
+  color="fg.contrast"
+  m="lg"
+  p="lg"
+  w="5xs"
+  pos="relative"
+  _before={{
+    bg: "success",
+    color: "white",
+    content: "'before'",
+    left: "-xl",
+    p: "lg",
+    pos: "absolute",
+    top: "-lg",
+  }}
+>
+  Box
+</Box>
+```
+
+### Pseudo Classes
+
+To change the background color when hovering over an element, use `_hover`.
+
+For a list of available pseudo-classes, see [here](/docs/styling/style-props#pseudo-classes).
+
+```tsx preview
+<Box
+  w="full"
+  p="md"
+  color="fg.contrast"
+  bg={{ base: "bg.contrast", _hover: "success" }}
+>
+  Hover me
+</Box>
+```
+
+Conditional values can be nested to create complex selector rules.
+
+```tsx preview
+<Box
+  w="full"
+  p="md"
+  tabIndex={0}
+  color="fg.contrast"
+  bg="bg.contrast"
+  _hover={{ _focus: { bg: "success" } }}
+>
+  Hover and focus me
+</Box>
+```
+
+### Selectors
+
+To style based on the `data-orientation` attribute, use `_horizontal` or `_vertical`.
+
+For a list of available selectors, see [here](/docs/styling/style-props#selectors).
+
+```tsx preview
+<Box
+  w="full"
+  p="md"
+  data-orientation="horizontal"
+  _horizontal={{ bg: "success" }}
+  _vertical={{ bg: "warning" }}
+>
+  horizontal
+</Box>
+```
+
+#### Group Selectors
+
+To style an element based on the state or attributes of its parent element, add a `group` role to the parent element and use one of the `_group*` on the child element.
+
+For a list of group selectors, see [Selectors](/docs/styling/style-props#selectors).
+
+```tsx preview
+<Box role="group" w="full" p="md" bg="bg.subtle">
+  <Text _groupHover={{ color: "success" }}>Hover me</Text>
+</Box>
+```
+
+#### Sibling Selectors
+
+To style an element based on the state or attributes of its sibling element, add a `data-peer` attribute to the sibling element and use one of the `_peer*`.
+
+For a list of sibling selectors, see [Selectors](/docs/styling/style-props#selectors).
+
+```tsx preview
+<HStack>
+  <Center
+    bg="bg.contrast"
+    color="fg.contrast"
+    p="md"
+    _peerFocus={{
+      bg: "success",
+    }}
+  >
+    Focus the peer
+  </Center>
+
+  <Center
+    data-peer
+    borderWidth="1px"
+    focusVisibleRing="outline"
+    p="md"
+    tabIndex={0}
+  >
+    Focus me!
+  </Center>
+</HStack>
+```
+
+#### Arbitrary Selectors
+
+For arbitrary selectors, use `css` to write styles.
+
+```tsx preview
+<Box
+  w="full"
+  p="md"
+  color="white"
+  css={{ "&[data-state=closed]": { bg: "success" } }}
+  data-state="closed"
+>
+  Closed
+</Box>
+```

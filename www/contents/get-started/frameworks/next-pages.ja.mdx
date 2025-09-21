@@ -83,8 +83,8 @@ bun add "@workspaces/ui@workspace:*"
 
 インストール後、アプリケーションのルートに`UIProvider`を追加します。
 
-```tsx title="_app.tsx"
-import { UIProvider } from "@yamada-ui/react"
+```tsx title="_app.tsx" {1,6,8}
+import { UIProvider } from "@workspaces/ui"
 import type { AppProps } from "next/app"
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -100,7 +100,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 `UIProvider`を追加したら、アプリケーション内でコンポーネントを使用します。
 
-```tsx title="index.tsx"
+```tsx title="index.tsx" {1,4}
 import { Button } from "@workspaces/ui"
 
 export default function Home() {
@@ -111,3 +111,123 @@ export default function Home() {
 これで、Yamada UIのセットアップは完了です！
 
 ::::
+
+## Scriptを追加する
+
+### ColorModeScript
+
+カラーモードによる画面のフラッシュを抑制したい場合は、`body`内に`ColorModeScript`を追加します。
+
+カラーモードは`localStorage`や`cookies`を用いて実装されており、`ColorModeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
+
+```tsx title="_document.tsx" {2,9}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ColorModeScript } from "@workspaces/ui"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ColorModeScript />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+### ThemeSchemeScript
+
+テーマスキームによる画面のフラッシュを抑制したい場合は、`body`内に`ThemeSchemeScript`を追加します。
+
+テーマスキームは`localStorage`や`cookies`を用いて実装されており、`ThemeSchemeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
+
+```tsx title="_document.tsx" {2,9}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ThemeSchemeScript } from "@workspaces/ui"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ThemeSchemeScript />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+### typeを指定する
+
+`type`に`"cookie"`を指定することで、フラッシュをさらに抑制できます。
+
+```tsx title="_document.tsx" {2,9-10}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ColorModeScript, ThemeSchemeScript } from "@workspaces/ui"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ColorModeScript type="cookie" />
+        <ThemeSchemeScript type="cookie" />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+```tsx title="_app.tsx" {5,8}
+import { UIProvider } from "@workspaces/ui"
+import type { AppProps } from "next/app"
+
+export default function App({ Component, pageProps }: AppProps) {
+  const { cookie } = pageProps
+
+  return (
+    <UIProvider cookie={cookie}>
+      <Component {...pageProps} />
+    </UIProvider>
+  )
+}
+```
+
+複数のページで`getServerSideProps`を共通化するために、`getServerSideCommonProps`を定義します。
+
+```tsx title="get-server-side-props.ts"
+import { GetServerSidePropsContext } from "next"
+
+export const getServerSideCommonProps = ({
+  req,
+}: GetServerSidePropsContext) => {
+  return {
+    props: {
+      cookies: req.headers.cookie ?? "",
+    },
+  }
+}
+```
+
+作成した`getServerSideCommonProps`を各ページに追加します。
+
+```tsx title="index.tsx" {1,8}
+import { getServerSideCommonProps } from "../get-server-side-props.ts"
+import { Button } from "@workspaces/ui"
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+
+export const getServerSideProps = getServerSideCommonProps
+```

@@ -83,8 +83,8 @@ bun add "@workspaces/ui@workspace:*"
 
 After installing, add `UIProvider` to the root of your application.
 
-```tsx title="_app.tsx"
-import { UIProvider } from "@yamada-ui/react"
+```tsx title="_app.tsx" {1,6,8}
+import { UIProvider } from "@workspaces/ui"
 import type { AppProps } from "next/app"
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -100,7 +100,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 After adding `UIProvider`, you can use the components in your application.
 
-```tsx title="index.tsx"
+```tsx title="index.tsx" {1,4}
 import { Button } from "@workspaces/ui"
 
 export default function Home() {
@@ -111,3 +111,123 @@ export default function Home() {
 That's it! You've successfully set up Yamada UI.
 
 ::::
+
+## Add Scripts
+
+### ColorModeScript
+
+If you want to suppress screen flashing due to color mode, add `ColorModeScript` inside the `body`.
+
+Color mode is implemented using `localStorage` or `cookies`, and adding `ColorModeScript` allows proper synchronization functionality when the page loads.
+
+```tsx title="_document.tsx" {2,9}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ColorModeScript } from "@workspaces/ui"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ColorModeScript />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+### ThemeSchemeScript
+
+If you want to suppress screen flashing due to theme scheme, add `ThemeSchemeScript` inside the `body`.
+
+Theme scheme is implemented using `localStorage` or `cookies`, and adding `ThemeSchemeScript` allows proper synchronization functionality when the page loads.
+
+```tsx title="_document.tsx" {2,9}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ThemeSchemeScript } from "@workspaces/ui"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ThemeSchemeScript />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+### Specify type
+
+By specifying `"cookie"` for `type`, you can further suppress flashing.
+
+```tsx title="_document.tsx" {2,9-10}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ColorModeScript, ThemeSchemeScript } from "@workspaces/ui"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ColorModeScript type="cookie" />
+        <ThemeSchemeScript type="cookie" />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+```tsx title="_app.tsx" {5,8}
+import { UIProvider } from "@workspaces/ui"
+import type { AppProps } from "next/app"
+
+export default function App({ Component, pageProps }: AppProps) {
+  const { cookie } = pageProps
+
+  return (
+    <UIProvider cookie={cookie}>
+      <Component {...pageProps} />
+    </UIProvider>
+  )
+}
+```
+
+To standardize `getServerSideProps` across multiple pages, define `getServerSideCommonProps`.
+
+```tsx title="get-server-side-props.ts"
+import { GetServerSidePropsContext } from "next"
+
+export const getServerSideCommonProps = ({
+  req,
+}: GetServerSidePropsContext) => {
+  return {
+    props: {
+      cookies: req.headers.cookie ?? "",
+    },
+  }
+}
+```
+
+Add the created `getServerSideCommonProps` to each page.
+
+```tsx title="index.tsx" {1,8}
+import { getServerSideCommonProps } from "../get-server-side-props.ts"
+import { Button } from "@workspaces/ui"
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+
+export const getServerSideProps = getServerSideCommonProps
+```

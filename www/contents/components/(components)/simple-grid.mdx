@@ -6,7 +6,89 @@ source: components/simple-grid
 style: components/simple-grid/simple-grid.style.ts
 ---
 
+```tsx preview
+<SimpleGrid columns={2} gap="md" w="full">
+  <For each={Array.from({ length: 4 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+    )}
+  </For>
+</SimpleGrid>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { SimpleGrid } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { SimpleGrid } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { SimpleGrid } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<SimpleGrid />
+```
+
+### Adjusting gaps
+
+To adjust gaps, pass values to `gap`, `rowGap`, and `columnGap`.
+
+```tsx preview
+<SimpleGrid columns={2} columnGap="lg" rowGap="sm" w="full">
+  <For each={Array.from({ length: 4 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+    )}
+  </For>
+</SimpleGrid>
+```
+
+### Adjusting child width
+
+To adjust the width of child elements, pass a value to `minChildWidth`.
+
+```tsx preview
+<SimpleGrid gap="md" minChildWidth={{ base: "3xs", md: "8rem" }} w="full">
+  <For each={Array.from({ length: 4 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+    )}
+  </For>
+</SimpleGrid>
+```
 
 ## Props
 

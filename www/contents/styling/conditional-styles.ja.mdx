@@ -3,4 +3,145 @@ title: 条件付きスタイル
 description: Yamada UIは、条件に応じたスタイルを適用する機能を提供しています。
 ---
 
-ライブラリで利用可能なすべての条件付きスタイルのリストはこちらです。
+## 概要
+
+Yamada UIでは、条件付きスタイルを使用して、[擬似要素](/docs/styling/style-props#擬似要素)、[擬似クラス](/docs/styling/style-props#擬似クラス)、[セレクター](/docs/styling/style-props#セレクター)のスタイルを記述できます。
+
+## 使い方
+
+### 擬似要素
+
+`::before`擬似要素にスタイルを設定するには、`_before`を使用します。
+
+利用可能な擬似要素のリストは[こちら](/docs/styling/style-props#擬似要素)をご覧ください。
+
+```tsx preview
+<Box
+  bg="bg.contrast"
+  color="fg.contrast"
+  m="lg"
+  p="lg"
+  w="5xs"
+  pos="relative"
+  _before={{
+    bg: "success",
+    color: "white",
+    content: "'before'",
+    left: "-xl",
+    p: "lg",
+    pos: "absolute",
+    top: "-lg",
+  }}
+>
+  Box
+</Box>
+```
+
+### 擬似クラス
+
+要素にマウスをホバーした時に背景色を変更するには、`_hover`を使用します。
+
+利用可能な擬似クラスのリストは[こちら](/docs/styling/style-props#擬似クラス)をご覧ください。
+
+```tsx preview
+<Box
+  w="full"
+  p="md"
+  color="fg.contrast"
+  bg={{ base: "bg.contrast", _hover: "success" }}
+>
+  Hover me
+</Box>
+```
+
+条件値はネストして複雑なセレクタールールを作成できます。
+
+```tsx preview
+<Box
+  w="full"
+  p="md"
+  tabIndex={0}
+  color="fg.contrast"
+  bg="bg.contrast"
+  _hover={{ _focus: { bg: "success" } }}
+>
+  Hover and focus me
+</Box>
+```
+
+### セレクター
+
+`data-orientation`属性に基づいてスタイルするには、`_horizontal`もしくは`_vertical`を使用します。
+
+利用可能なセレクターのリストは[こちら](/docs/styling/style-props#セレクター)をご覧ください。
+
+```tsx preview
+<Box
+  w="full"
+  p="md"
+  data-orientation="horizontal"
+  _horizontal={{ bg: "success" }}
+  _vertical={{ bg: "warning" }}
+>
+  horizontal
+</Box>
+```
+
+#### グループセレクター
+
+親要素の状態または属性に基づいて要素にスタイルを設定するには、親要素に`group`roleを追加し、子要素で`_group*`のいずれかを使用します。
+
+グループセレクターのリストは[セレクター](/docs/styling/style-props#セレクター)をご覧ください。
+
+```tsx preview
+<Box role="group" w="full" p="md" bg="bg.subtle">
+  <Text _groupHover={{ color: "success" }}>Hover me</Text>
+</Box>
+```
+
+#### 兄弟セレクター
+
+兄弟要素の状態または属性に基づいて要素のスタイルを設定するには、 兄弟要素に`data-peer`属性を追加し、`_peer*`のいずれかを使用します。
+
+兄弟セレクターのリストは[セレクター](/docs/styling/style-props#セレクター)をご覧ください。
+
+```tsx preview
+<HStack>
+  <Center
+    bg="bg.contrast"
+    color="fg.contrast"
+    p="md"
+    _peerFocus={{
+      bg: "success",
+    }}
+  >
+    Focus the peer
+  </Center>
+
+  <Center
+    data-peer
+    borderWidth="1px"
+    focusVisibleRing="outline"
+    p="md"
+    tabIndex={0}
+  >
+    Focus me!
+  </Center>
+</HStack>
+```
+
+#### 任意のセレクター
+
+任意のセレクターは、`css`を使用してスタイルを記述します。
+
+```tsx preview
+<Box
+  w="full"
+  p="md"
+  color="white"
+  css={{ "&[data-state=closed]": { bg: "success" } }}
+  data-state="closed"
+>
+  Closed
+</Box>
+```

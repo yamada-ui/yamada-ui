@@ -1,0 +1,441 @@
+import type { Meta, StoryFn } from "@storybook/react-vite"
+import type { TreeNodeData } from "./tree-types"
+import { PropsTable } from "#storybook"
+import { useState } from "react"
+import { COLOR_SCHEMES } from "../../utils"
+import { Button } from "../button"
+import { FolderClosedIcon, FolderOpenIcon, MusicIcon } from "../icon"
+import { Input } from "../input"
+import { HStack, VStack } from "../stack"
+import { Tree } from "./index"
+import { createTreeCollection } from "./tree-collection"
+
+type Story = StoryFn<typeof Tree.Root>
+
+const meta: Meta<typeof Tree.Root> = {
+  component: Tree.Root,
+  parameters: { layout: "centered" },
+  title: "Components / Tree",
+}
+
+export default meta
+
+const sampleNodes: TreeNodeData[] = [
+  {
+    id: "1",
+    name: "Documents",
+    children: [
+      {
+        id: "1-1",
+        name: "Work",
+        children: [
+          { id: "1-1-1", name: "Project A" },
+          { id: "1-1-2", name: "Project B" },
+          {
+            id: "1-1-3",
+            name: "Folder",
+            children: [
+              { id: "1-1-3-1", name: "Sub project 1" },
+              { id: "1-1-3-2", name: "Sub project 2" },
+            ],
+          },
+        ],
+      },
+      { id: "1-2", name: "Personal" },
+    ],
+  },
+  {
+    id: "2",
+    name: "Pictures",
+    children: [
+      { id: "2-1", name: "Vacation" },
+      { id: "2-2", name: "Family" },
+    ],
+  },
+  { id: "3", name: "Music" },
+]
+
+const treeCollection = createTreeCollection({
+  nodeToString: (node) => node.name,
+  nodeToValue: (node) => node.id,
+  rootNode: {
+    id: "root",
+    name: "Root",
+    children: sampleNodes,
+  },
+})
+
+export const BasicTree = () => (
+  <Tree.Root nodes={sampleNodes}>
+    <Tree.Tree>
+      {sampleNodes.map((node, index) => (
+        <Tree.Node key={node.id || index} node={node} />
+      ))}
+    </Tree.Tree>
+  </Tree.Root>
+)
+
+export const BasicTreeWithCollection = () => (
+  <Tree.Root collection={treeCollection}>
+    <Tree.Tree />
+  </Tree.Root>
+)
+
+export const WithCollectionName = () => (
+  <Tree.Root collection={treeCollection}>
+    <Tree.Tree>
+      <Tree.CollectionName>My File System</Tree.CollectionName>
+      {treeCollection.getRootNode().children?.map((node) => (
+        <Tree.Node key={treeCollection.getNodeValue(node)} node={node} />
+      ))}
+    </Tree.Tree>
+  </Tree.Root>
+)
+
+export const WithDefaultExpanded = () => (
+  <Tree.Root defaultExpanded={["1", "1-1"]} nodes={sampleNodes}>
+    <Tree.Tree>
+      {sampleNodes.map((node, index) => (
+        <Tree.Node key={node.id || index} node={node} />
+      ))}
+    </Tree.Tree>
+  </Tree.Root>
+)
+
+export const WithCheckbox = () => {
+  return (
+    <Tree.Root
+      defaultExpanded={["1", "2"]}
+      nodes={sampleNodes}
+      selectionMode="checkbox"
+    >
+      <Tree.Tree>
+        {sampleNodes.map((node, index) => (
+          <Tree.Node key={node.id || index} node={node} />
+        ))}
+      </Tree.Tree>
+    </Tree.Root>
+  )
+}
+
+export const WithMultipleSelection = () => {
+  return (
+    <Tree.Root
+      defaultExpanded={["1", "2"]}
+      nodes={sampleNodes}
+      selectionMode="multiple"
+    >
+      <Tree.Tree>
+        {sampleNodes.map((node, index) => (
+          <Tree.Node key={node.id || index} node={node} />
+        ))}
+      </Tree.Tree>
+    </Tree.Root>
+  )
+}
+
+export const ExpandCollapseAll = () => {
+  const [expandedIds, setExpandedIds] = useState<string[]>([])
+
+  const handleExpandedChange = (newExpandedIds: string[]) => {
+    setExpandedIds(newExpandedIds)
+  }
+
+  const getAllBranchIds = (nodes: TreeNodeData[]): string[] => {
+    const branchIds: string[] = []
+
+    const traverse = (nodeList: TreeNodeData[]) => {
+      for (const node of nodeList) {
+        if (node.children && node.children.length > 0) {
+          branchIds.push(node.id)
+          traverse(node.children)
+        }
+      }
+    }
+
+    traverse(nodes)
+    return branchIds
+  }
+
+  return (
+    <VStack>
+      <HStack>
+        <Button
+          onClick={() => {
+            const allBranchIds = getAllBranchIds(sampleNodes)
+            setExpandedIds(allBranchIds)
+          }}
+        >
+          Expand All
+        </Button>
+        <Button onClick={() => setExpandedIds([])}>Collapse All</Button>
+      </HStack>
+      <Tree.Root
+        expandedIds={expandedIds}
+        nodes={sampleNodes}
+        onExpandedChange={handleExpandedChange}
+      >
+        <Tree.Tree>
+          {sampleNodes.map((node, index) => (
+            <Tree.Node key={node.id || index} node={node} />
+          ))}
+        </Tree.Tree>
+      </Tree.Root>
+    </VStack>
+  )
+}
+
+export const AsyncLoading = () => {
+  const loadChildren = async (node: TreeNodeData): Promise<TreeNodeData[]> => {
+    if (node.id.includes("static")) {
+      return [
+        { id: `${node.id}-static-1`, name: `${node.name} Static 1` },
+        { id: `${node.id}-static-2`, name: `${node.name} Static 2` },
+      ]
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    return [
+      { id: `${node.id}-async-1`, name: `${node.name} Child 1` },
+      { id: `${node.id}-async-2`, name: `${node.name} Child 2` },
+    ]
+  }
+
+  const asyncNodes: TreeNodeData[] = [
+    {
+      id: "async-1",
+      name: "Async Folder 1",
+    },
+    {
+      id: "async-2",
+      name: "Async Folder 2",
+    },
+    { id: "static", name: "Static Item" },
+  ]
+
+  return (
+    <Tree.Root loadChildren={loadChildren} nodes={asyncNodes}>
+      <Tree.Tree>
+        {asyncNodes.map((node, index) => (
+          <Tree.Node key={node.id || index} node={node} />
+        ))}
+      </Tree.Tree>
+    </Tree.Root>
+  )
+}
+
+export const CustomIcons = () => {
+  return (
+    <Tree.Root defaultExpanded={["1", "2"]} nodes={sampleNodes}>
+      <Tree.Tree>
+        {sampleNodes.map((node, index) => (
+          <Tree.Node
+            key={node.id || index}
+            node={node}
+            render={({
+              children,
+              expanded,
+              indexPath,
+              node,
+              nodeId,
+              nodeState,
+              onToggleExpand,
+            }) =>
+              nodeState.isBranch ? (
+                <Tree.Branch indexPath={indexPath}>
+                  <Tree.BranchControl>
+                    <Tree.BranchTrigger>
+                      <Tree.BranchIndicator
+                        nodeId={nodeId}
+                        _groupHover={{ color: "yellow" }}
+                        onToggleExpand={onToggleExpand}
+                      >
+                        {expanded ? <FolderOpenIcon /> : <FolderClosedIcon />}
+                      </Tree.BranchIndicator>
+                      <Tree.BranchText nodeId={nodeId}>
+                        {node.name}
+                      </Tree.BranchText>
+                    </Tree.BranchTrigger>
+                  </Tree.BranchControl>
+                  <Tree.BranchContent>{children}</Tree.BranchContent>
+                </Tree.Branch>
+              ) : (
+                <Tree.Item indexPath={indexPath} nodeId={nodeId}>
+                  <Tree.ItemIndicator _groupHover={{ color: "red" }}>
+                    <MusicIcon />
+                  </Tree.ItemIndicator>
+                  <Tree.ItemText>{node.name}</Tree.ItemText>
+                </Tree.Item>
+              )
+            }
+          />
+        ))}
+      </Tree.Tree>
+    </Tree.Root>
+  )
+}
+
+export const DisabledNodes = () => {
+  const disabledNodes: TreeNodeData[] = [
+    {
+      id: "1",
+      name: "Enabled Folder",
+      children: [
+        { id: "1-1", name: "Enabled Child" },
+        { id: "1-2", name: "Disabled Child", disabled: true },
+      ],
+    },
+    {
+      id: "2",
+      name: "Disabled Folder",
+      children: [{ id: "2-1", name: "Child in disabled folder" }],
+      disabled: true,
+    },
+    { id: "3", name: "Enabled Item" },
+  ]
+
+  return (
+    <Tree.Root nodes={disabledNodes}>
+      <Tree.Tree>
+        {disabledNodes.map((node, index) => (
+          <Tree.Node key={node.id || index} node={node} />
+        ))}
+      </Tree.Tree>
+    </Tree.Root>
+  )
+}
+
+export const ControlledExpansion = () => {
+  const [expandedIds, setExpandedIds] = useState<string[]>(["1"])
+
+  const handleExpandedChange = (newExpandedIds: string[]) => {
+    setExpandedIds(newExpandedIds)
+  }
+
+  return (
+    <VStack>
+      <HStack>
+        <Button onClick={() => setExpandedIds(["1", "1-1"])}>
+          Expand Work
+        </Button>
+        <Button onClick={() => setExpandedIds(["2"])}>Expand Pictures</Button>
+        <Button onClick={() => setExpandedIds([])}>Collapse All</Button>
+      </HStack>
+      <Tree.Root
+        expandedIds={expandedIds}
+        nodes={sampleNodes}
+        onExpandedChange={handleExpandedChange}
+      >
+        <Tree.Tree>
+          {sampleNodes.map((node, index) => (
+            <Tree.Node key={node.id || index} node={node} />
+          ))}
+        </Tree.Tree>
+      </Tree.Root>
+    </VStack>
+  )
+}
+
+export const WithIndentationGuide = () => {
+  return (
+    <Tree.Root defaultExpanded={["1", "2"]} nodes={sampleNodes} showIndentGuide>
+      <Tree.Tree>
+        <Tree.Label>Tree without indentation guides</Tree.Label>
+        {sampleNodes.map((node, index) => (
+          <Tree.Node key={node.id || index} node={node} />
+        ))}
+      </Tree.Tree>
+    </Tree.Root>
+  )
+}
+
+export const Variants: Story = () => {
+  return (
+    <PropsTable
+      columns={["ghost", "outline", "solid", "subtle", "surface"]}
+      rows={COLOR_SCHEMES}
+    >
+      {(column, row, key) => {
+        return (
+          <Tree.Root
+            key={key}
+            colorScheme={row}
+            variant={column}
+            defaultExpanded={["1", "2"]}
+            nodes={sampleNodes}
+          >
+            <Tree.Tree>
+              <Tree.Label>{`${row} ${column}`}</Tree.Label>
+              {sampleNodes.map((node, index) => (
+                <Tree.Node key={node.id || index} node={node} />
+              ))}
+            </Tree.Tree>
+          </Tree.Root>
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const Size: Story = () => {
+  return (
+    <PropsTable columns={["sm", "md", "lg"]} rows={COLOR_SCHEMES}>
+      {(column, row, key) => {
+        return (
+          <Tree.Root
+            key={key}
+            colorScheme={row}
+            size={column}
+            defaultExpanded={["1", "2"]}
+            nodes={sampleNodes}
+          >
+            <Tree.Tree>
+              <Tree.Label>{`${row} ${column}`}</Tree.Label>
+              {sampleNodes.map((node, index) => (
+                <Tree.Node key={node.id || index} node={node} />
+              ))}
+            </Tree.Tree>
+          </Tree.Root>
+        )
+      }}
+    </PropsTable>
+  )
+}
+
+export const WithFiltering = () => {
+  const [filterQuery, setFilterQuery] = useState("")
+
+  const filterFunction = (node: TreeNodeData, query: string) => {
+    return node.name.toLowerCase().includes(query.toLowerCase())
+  }
+
+  return (
+    <VStack gap="4">
+      <Input
+        placeholder="Filter nodes..."
+        value={filterQuery}
+        onChange={(e) => setFilterQuery(e.target.value)}
+      />
+      <Tree.Root
+        defaultExpanded={["1", "2"]}
+        filterNodes={filterFunction}
+        filterQuery={filterQuery}
+        nodes={sampleNodes}
+      >
+        <Tree.Tree>
+          <Tree.Label>
+            Filtered Tree (
+            {filterQuery
+              ? `showing results for "${filterQuery}"`
+              : "showing all"}
+            )
+          </Tree.Label>
+          {sampleNodes.map((node, index) => (
+            <Tree.Node key={node.id || index} node={node} />
+          ))}
+        </Tree.Tree>
+      </Tree.Root>
+    </VStack>
+  )
+}

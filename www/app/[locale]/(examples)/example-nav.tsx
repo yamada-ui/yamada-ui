@@ -13,7 +13,7 @@ export const ExampleNav = ({ example }: ExampleNavProps) => {
         {(slug) => (
           <NextLink
             key={slug}
-            href={slug === "example" ? "/" : `/examples/${slug}`}
+            href={slug === "examples" ? "/" : `/examples/${slug}`}
             colorScheme={slug === example ? "primary" : "gray"}
           >
             {toTitleCase(slug)}

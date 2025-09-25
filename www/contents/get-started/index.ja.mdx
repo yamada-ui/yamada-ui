@@ -96,7 +96,7 @@ bun add "@workspaces/ui@workspace:*"
 
 インストール後、アプリケーションのルートに`UIProvider`を追加します。
 
-```tsx
+```tsx {1,5,7}
 import { UIProvider } from "@workspaces/ui"
 
 const App = () => {
@@ -112,7 +112,7 @@ const App = () => {
 
 `UIProvider`を追加したら、アプリケーション内でコンポーネントを使用します。
 
-```tsx
+```tsx {1,4}
 import { Button } from "@workspaces/ui"
 
 const App = () => {
@@ -156,7 +156,7 @@ bun add @yamada-ui/react
 
 インストール後、アプリケーションのルートに`UIProvider`を追加します。
 
-```tsx
+```tsx {1,5,7}
 import { UIProvider } from "@yamada-ui/react"
 
 const App = () => {
@@ -172,7 +172,7 @@ const App = () => {
 
 `UIProvider`を追加したら、アプリケーション内でコンポーネントを使用します。
 
-```tsx
+```tsx {1,4}
 import { Button } from "@yamada-ui/react"
 
 const App = () => {

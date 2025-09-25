@@ -1,1 +1,0 @@
-import{r as c}from"./iframe-Brv718Ke.js";const e=({errorBorderColor:s,focusBorderColor:t}={})=>c.useMemo(()=>({"--error-border-color":s?`colors.${s}`:void 0,"--focus-border-color":t?`colors.${t}`:void 0}),[s,t]);export{e as u};

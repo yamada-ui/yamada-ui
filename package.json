@@ -99,7 +99,7 @@
     "react-dom": "^19.1.1",
     "rimraf": "^6.0.1",
     "storybook": "^9.1.5",
-    "tsdown": "^0.13.5",
+    "tsdown": "^0.15.4",
     "tsx": "^4.20.5",
     "turbo": "^2.5.6",
     "typescript": "^5.9.2",

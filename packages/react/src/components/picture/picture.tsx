@@ -3,8 +3,7 @@ import type { HTMLStyledProps, ThemeTokens } from "../../core"
 import type { AnyString } from "../../utils"
 import type { ImageProps } from "../image"
 import { useCallback, useMemo } from "react"
-import { styled, useSystem, useTheme } from "../../core"
-import { getToken } from "../../hooks/use-token"
+import { styled, tokenToValue, useSystem } from "../../core"
 import { getPx, isUndefined } from "../../utils"
 import { Image } from "../image"
 
@@ -73,11 +72,10 @@ export const Picture: FC<PictureProps> = ({
   pictureProps,
   ...rest
 }) => {
-  const { breakpoints, config } = useSystem()
-  const { theme } = useTheme()
-  const { queriesObj } = breakpoints
+  const system = useSystem()
+  const { queriesObj } = system.breakpoints
   const { direction = "down", identifier = "@media screen" } =
-    config.breakpoint ?? {}
+    system.config.breakpoint ?? {}
   const searchValue =
     identifier === "@media screen" ? "@media screen and " : `${identifier} `
 
@@ -100,14 +98,8 @@ export const Picture: FC<PictureProps> = ({
     const computedSources = sourcesProp.map(
       ({ maxW, media, minW, ...rest }) => {
         if (!media) {
-          if (minW)
-            minW = getPx(
-              getToken("sizes", minW as ThemeTokens["sizes"])(theme) ?? minW,
-            )
-          if (maxW)
-            maxW = getPx(
-              getToken("sizes", maxW as ThemeTokens["sizes"])(theme) ?? maxW,
-            )
+          if (minW) minW = getPx(tokenToValue(system)("sizes", minW))
+          if (maxW) maxW = getPx(tokenToValue(system)("sizes", maxW))
 
           media = createQuery(minW, maxW)
 
@@ -128,12 +120,12 @@ export const Picture: FC<PictureProps> = ({
       return computedSources
     }
   }, [
+    sourcesProp,
+    enableSorting,
+    system,
     queriesObj,
     searchValue,
-    sourcesProp,
     compareSources,
-    enableSorting,
-    theme,
   ])
 
   const sourceElements = useMemo(

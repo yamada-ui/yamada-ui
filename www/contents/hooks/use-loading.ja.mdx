@@ -5,4 +5,172 @@ storybook: hooks-useloading--basic
 source: hooks/use-loading
 ---
 
+```tsx preview functional client
+const { screen, page, background } = useLoading()
+
+const onLoadingScreen = async () => {
+  try {
+    screen.start()
+
+    await wait(3000)
+  } finally {
+    screen.finish()
+  }
+}
+
+const onLoadingPage = async () => {
+  try {
+    page.start()
+
+    await wait(3000)
+  } finally {
+    page.finish()
+  }
+}
+
+const onLoadingBackground = async () => {
+  try {
+    background.start()
+
+    await wait(3000)
+  } finally {
+    background.finish()
+  }
+}
+
+return (
+  <Wrap gap="md">
+    <Button onClick={onLoadingScreen}>Start Screen Loading</Button>
+    <Button onClick={onLoadingPage}>Start Page Loading</Button>
+    <Button onClick={onLoadingBackground}>Start Background Loading</Button>
+  </Wrap>
+)
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { useLoading } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { useLoading } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { useLoading } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+const { screen, page, background } = useLoading()
+```
+
+### タイムアウトを付与する
+
+タイムアウトを付与するには、`duration`に数値(ミリ秒)を設定します。
+
+```tsx preview functional client
+const { screen, page, background } = useLoading()
+
+return (
+  <Wrap gap="md">
+    <Button onClick={() => screen.start({ duration: 3000 })}>
+      Start Screen Loading
+    </Button>
+    <Button onClick={() => page.start({ duration: 3000 })}>
+      Start Page Loading
+    </Button>
+    <Button onClick={() => background.start({ duration: 3000 })}>
+      Start Background Loading
+    </Button>
+  </Wrap>
+)
+```
+
+### メッセージを付与する
+
+メッセージを付与する場合は、`message`に`ReactNode`を設定します。
+
+```tsx preview functional client
+const { screen, page, background } = useLoading()
+
+return (
+  <Wrap gap="md">
+    <Button
+      onClick={() => screen.start({ message: "Loading", duration: 3000 })}
+    >
+      Start Screen Loading
+    </Button>
+    <Button onClick={() => page.start({ message: "Loading", duration: 3000 })}>
+      Start Page Loading
+    </Button>
+    <Button
+      onClick={() => background.start({ message: "Loading", duration: 3000 })}
+    >
+      Start Background Loading
+    </Button>
+  </Wrap>
+)
+```
+
+### メッセージを更新する
+
+メッセージを更新する場合は、`update`を使用します。
+
+```tsx preview functional client
+const { screen, page, background } = useLoading()
+
+const onLoadingScreen = async () => {
+  try {
+    screen.start({ message: "Loading" })
+
+    await wait(3000)
+
+    screen.update({ message: "Please Wait" })
+
+    await wait(3000)
+  } finally {
+    screen.finish()
+  }
+}
+
+const onLoadingPage = async () => {
+  try {
+    page.start({ message: "Loading" })
+
+    await wait(3000)
+
+    page.update({ message: "Please Wait" })
+
+    await wait(3000)
+  } finally {
+    page.finish()
+  }
+}
+
+const onLoadingBackground = async () => {
+  try {
+    background.start({ message: "Loading" })
+
+    await wait(3000)
+
+    background.update({ message: "Please Wait" })
+
+    await wait(3000)
+  } finally {
+    background.finish()
+  }
+}
+
+return (
+  <Wrap gap="md">
+    <Button onClick={onLoadingScreen}>Start Screen Loading</Button>
+    <Button onClick={onLoadingPage}>Start Page Loading</Button>
+    <Button onClick={onLoadingBackground}>Start Background Loading</Button>
+  </Wrap>
+)
+```

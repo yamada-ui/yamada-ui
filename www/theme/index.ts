@@ -6,6 +6,9 @@ export const theme = extendTheme({
     heading: '"Inter", "Inter Fallback"',
     mono: '"Geist Mono", "Geist Mono Fallback"',
   },
+  gradients: {
+    blue: "linear(to-r, #132293, #2375b4)",
+  },
   styles: {
     globalStyle: {
       body: {

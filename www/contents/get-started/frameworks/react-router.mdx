@@ -1,0 +1,247 @@
+---
+title: React Router
+description: A guide for installing and using Yamada UI with React Router projects.
+---
+
+## Installation
+
+::::steps
+
+### Create application
+
+Create React Router application.
+
+:::code-group
+
+```bash [pnpm]
+pnpm create react-router my-app
+```
+
+```bash [npm]
+npx create-react-router my-app
+```
+
+```bash [yarn]
+yarn create react-router my-app
+```
+
+```bash [bun]
+bun create react-router my-app
+```
+
+:::
+
+### Setup
+
+Running the command will create the necessary files and folders in your project.
+
+:::code-group
+
+```bash [pnpm]
+pnpm dlx @yamada-ui/cli init
+```
+
+```bash [npm]
+npx @yamada-ui/cli init
+```
+
+```bash [yarn]
+yarn dlx @yamada-ui/cli init
+```
+
+```bash [bun]
+bunx @yamada-ui/cli init
+```
+
+:::
+
+### Install the package
+
+Install `@workspaces/ui` to your application.
+
+:::code-group
+
+```bash [pnpm]
+pnpm add "@workspaces/ui@workspace:*"
+```
+
+```bash [npm]
+npm install "@workspaces/ui@workspace:*"
+```
+
+```bash [yarn]
+yarn add "@workspaces/ui@workspace:*"
+```
+
+```bash [bun]
+bun add "@workspaces/ui@workspace:*"
+```
+
+:::
+
+### Add provider
+
+After installing, add `UIProvider` to the root of your application.
+To suppress hydration errors, add `suppressHydrationWarning` to the `html` and `body` tags.
+
+```tsx title="root.tsx" {2,6,12,13}
+import { Meta, Outlet, Scripts, ScrollRestoration } from "react-router"
+import { UIProvider } from "@workspaces/ui"
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+      </head>
+      <body suppressHydrationWarning>
+        <UIProvider>{children}</UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+
+export default function App() {
+  return <Outlet />
+}
+```
+
+### Use components
+
+After adding `UIProvider`, you can use the components in your application.
+
+```tsx title="home.tsx" {1,4}
+import { Button } from "@workspaces/ui"
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+```
+
+That's it! You've successfully set up Yamada UI.
+
+::::
+
+## Add Scripts
+
+### ColorModeScript
+
+If you want to suppress screen flashing due to color mode, add `ColorModeScript` inside the `body`.
+
+Color mode is implemented using `localStorage` or `cookies`, and adding `ColorModeScript` allows proper synchronization functionality when the page loads.
+
+```tsx title="root.tsx" {13}
+import { Meta, Outlet, Scripts, ScrollRestoration } from "react-router"
+import { UIProvider } from "@workspaces/ui"
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+      </head>
+      <body suppressHydrationWarning>
+        <ColorModeScript />
+
+        <UIProvider>{children}</UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+
+export default function App() {
+  return <Outlet />
+}
+```
+
+### ThemeSchemeScript
+
+If you want to suppress screen flashing due to theme scheme, add `ThemeSchemeScript` inside the `body`.
+
+Theme scheme is implemented using `localStorage` or `cookies`, and adding `ThemeSchemeScript` allows proper synchronization functionality when the page loads.
+
+```tsx title="root.tsx" {13}
+import { Meta, Outlet, Scripts, ScrollRestoration } from "react-router"
+import { UIProvider } from "@workspaces/ui"
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+      </head>
+      <body suppressHydrationWarning>
+        <ThemeSchemeScript />
+
+        <UIProvider>{children}</UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+
+export default function App() {
+  return <Outlet />
+}
+```
+
+### Specify type
+
+By specifying `"cookie"` for `type`, you can further suppress flashing.
+
+```tsx title="root.tsx" {2,7,10-15,18,28-31}
+import {
+  data,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useRouteLoaderData,
+} from "react-router"
+import { ColorModeScript, ThemeSchemeScript, UIProvider } from "@workspaces/ui"
+import type { Route } from "./+types/root"
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const cookie = request.headers.get("cookie") ?? ""
+  return data({ cookie })
+}
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  const { cookie } = useRouteLoaderData("root")
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+      </head>
+      <body suppressHydrationWarning>
+        <ColorModeScript type="cookie" />
+        <ThemeSchemeScript type="cookie" />
+
+        <UIProvider cookie={cookie} storage="cookie">
+          {children}
+        </UIProvider>
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+
+export default function App() {
+  return <Outlet />
+}
+```

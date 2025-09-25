@@ -3,6 +3,114 @@ title: フォーカスリング
 description: Yamada UIは、要素がフォーカスされたときに様々なスタイルを適用する機能を提供しています。
 ---
 
+## 概要
+
+フォーカスリングは、ページ上で現在フォーカスされている要素を識別するために使用されます。これはアクセシビリティの観点から重要ですが、すべてのコンポーネントにフォーカスリングを表示するようにスタイルを設定するのは面倒な場合があります。
+Yamada UIは、フォーカスリングのスタイルを簡単に設定するための`focusRing`と`focusVisibleRing`プロパティを提供します。
+
 ## 使い方
 
+### focusRing
+
+`focusRing`は`&:is(:focus, [data-focus])`に適用されます。
+
+```tsx preview
+<Button variant="outline" focusRing="outside" data-focus>
+  Button
+</Button>
+```
+
+### focusVisibleRing
+
+`focusVisibleRing`は`&:is(:focus-visible, [data-focus-visible])`に適用されます。
+
+```tsx preview
+<Button variant="outline" focusVisibleRing="outside" data-focus-visible>
+  Button
+</Button>
+```
+
+:::note
+Yamada UIでは、[グローバルスタイル](/docs/styling/global-styles)で`focusVisibleRing="outline"`がデフォルト設定として適用されています。そのため、個別の設定を行わなくても、すべてのコンポーネントで`focusVisibleRing`の機能が有効になっています。
+:::
+
+### focusRingとfocusVisibleRingの違い
+
+`focusVisibleRing`は`focusRing`と同様に機能しますが、重要な違いがあります。要素がキーボードフォーカスを受け取ったときにのみ、スタイルが適用されます。\
+これにより、キーボードで操作しているときのみフォーカスリングが表示されるようになり、マウスの操作に影響を与えず、アクセシビリティが向上します。
+
 ## カスタマイズ
+
+### バリアントを変更する
+
+```tsx preview
+<Wrap gap="md">
+  <For
+    each={[
+      undefined,
+      "outline",
+      "inline",
+      "mixed",
+      "outside",
+      "inside",
+      "none",
+    ]}
+  >
+    {(value, index) => (
+      <Button key={index} variant="outline" focusRing={value} data-focus>
+        {toTitleCase(value ?? "default")}
+      </Button>
+    )}
+  </For>
+</Wrap>
+```
+
+### 色を変更する
+
+色を変更する場合は、`focusRingColor`に値を設定します。
+
+```tsx preview
+<Button
+  variant="outline"
+  focusRing="outline"
+  focusRingColor="success"
+  data-focus
+>
+  Button
+</Button>
+```
+
+### 幅を変更する
+
+幅を変更する場合は、`focusRingWidth`に値を設定します。
+
+```tsx preview
+<Button variant="outline" focusRing="outline" focusRingWidth="1px" data-focus>
+  Button
+</Button>
+```
+
+### スタイルを変更する
+
+スタイルを変更する場合は、`focusRingStyle`に値を設定します。
+
+```tsx preview
+<Button
+  variant="outline"
+  focusRing="outline"
+  focusRingStyle="dashed"
+  data-focus
+>
+  Button
+</Button>
+```
+
+### オフセットを変更する
+
+オフセットを変更する場合は、`focusRingOffset`に値を設定します。
+
+```tsx preview
+<Button variant="outline" focusRing="outline" focusRingOffset="1px" data-focus>
+  Button
+</Button>
+```

@@ -1,11 +1,816 @@
 ---
 title: Select
-description: "`Select` is a component used for allowing a user to choose one option from a list."
+description: "`Select` is a component used for allowing a user to choose one value from a list of options."
 storybook: components-select--basic
 source: components/select
 ---
 
+```tsx preview
+<Select.Root placeholder="Select a character">
+  <Select.Option value="木ノ下和也">木ノ下和也</Select.Option>
+  <Select.Option value="一ノ瀬ちづる">一ノ瀬ちづる</Select.Option>
+  <Select.Option value="七海麻美">七海麻美</Select.Option>
+  <Select.Option value="更科瑠夏">更科瑠夏</Select.Option>
+  <Select.Option value="桜沢墨">桜沢墨</Select.Option>
+  <Select.Option value="八重森みに">八重森みに</Select.Option>
+</Select.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Select } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Select } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Select } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Select.Root>
+  <Select.Group>
+    <Select.Option />
+    <Select.Label />
+  </Select.Group>
+  <Select.Separator />
+</Select.Root>
+```
+
+### Group Options
+
+```tsx preview
+<Select.Root placeholder="Select a character">
+  <Select.Option value="水原千鶴">水原千鶴</Select.Option>
+  <Select.Group>
+    <Select.Label>主要人物</Select.Label>
+    <Select.Option value="木ノ下和也">木ノ下和也</Select.Option>
+    <Select.Option value="一ノ瀬ちづる">一ノ瀬ちづる</Select.Option>
+    <Select.Option value="七海麻美">七海麻美</Select.Option>
+    <Select.Option value="更科瑠夏">更科瑠夏</Select.Option>
+    <Select.Option value="桜沢墨">桜沢墨</Select.Option>
+    <Select.Option value="八重森みに">八重森みに</Select.Option>
+  </Select.Group>
+
+  <Select.Separator />
+
+  <Select.Group label="主要人物の関係者">
+    <Select.Option value="木ノ下和">木ノ下和</Select.Option>
+    <Select.Option value="一ノ瀬小百合">一ノ瀬小百合</Select.Option>
+    <Select.Option value="木部芳秋">木部芳秋</Select.Option>
+    <Select.Option value="栗林駿">栗林駿</Select.Option>
+  </Select.Group>
+</Select.Root>
+```
+
+### Using Items
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "水原千鶴", value: "水原千鶴" },
+    {
+      items: [
+        { label: "木ノ下和也", value: "木ノ下和也" },
+        { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+        { label: "七海麻美", value: "七海麻美" },
+        { label: "更科瑠夏", value: "更科瑠夏" },
+        { label: "桜沢墨", value: "桜沢墨" },
+        { label: "八重森みに", value: "八重森みに" },
+      ],
+      label: "主要人物",
+    },
+    {
+      items: [
+        { label: "木ノ下和", value: "木ノ下和" },
+        { label: "一ノ瀬小百合", value: "一ノ瀬小百合" },
+        { label: "木部芳秋", value: "木部芳秋" },
+        { label: "栗林駿", value: "栗林駿" },
+      ],
+      label: "主要人物の関係者",
+    },
+  ],
+  [],
+)
+
+return <Select.Root items={items} placeholder="Select a character" />
+```
+
+### Change Variant
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <Select.Root
+          key={variant}
+          variant={variant}
+          items={items}
+          placeholder={toTitleCase(variant)}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Size
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size) => (
+        <Select.Root
+          key={size}
+          size={size}
+          items={items}
+          placeholder={`Size: ${size}`}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Color Scheme
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["success", "warning"]}>
+      {(colorScheme) => (
+        <Select.Root
+          key={colorScheme}
+          colorScheme={colorScheme}
+          items={items}
+          placeholder={toTitleCase(colorScheme)}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Set Default Value
+
+To set a default value, set a value in `defaultValue`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    defaultValue="一ノ瀬ちづる"
+    items={items}
+    placeholder="Select a character"
+  />
+)
+```
+
+### Enable Multiple Selection
+
+To enable multiple selection, set `multiple` to `true`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return <Select.Root multiple items={items} placeholder="Select a character" />
+```
+
+### Limit Maximum Selection Count
+
+To limit the maximum selection count, set a number to `max`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    items={items}
+    multiple
+    max={3}
+    placeholder="Select a character"
+  />
+)
+```
+
+### Change Separator
+
+To change the separator, set a string to `separator`. By default, `,` is set.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    items={items}
+    multiple
+    placeholder="Select a character"
+    separator=";"
+  />
+)
+```
+
+### Enable Clear Button
+
+To enable the clear button, set `clearable` to `true`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return <Select.Root clearable items={items} placeholder="Select a character" />
+```
+
+### Change Offset
+
+To change the offset, set values to `gutter` or `offset`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+return (
+  <Select.Root items={items} placeholder="Select a character" gutter={16} />
+)
+```
+
+### Change Animation
+
+To change the animation, set values like `"block-start"` or `"inline-end"` to `animationScheme`.
+By default, `"scale"` is set.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    animationScheme="inline-start"
+    items={items}
+    placeholder="Select a character"
+  />
+)
+```
+
+### Change Placement
+
+To change the placement, set values like `"start"` or `"end-end"` to `placement`. By default, `"end"` is set.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    animationScheme="inline-start"
+    items={items}
+    placeholder="Select a character"
+    placement="center-end"
+    rootProps={{ w: "xs" }}
+  />
+)
+```
+
+### Exclude Placeholder from Options
+
+To exclude the placeholder from options, set `includePlaceholder` to `false`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    includePlaceholder={false}
+    items={items}
+    placeholder="Select a character"
+  />
+)
+```
+
+### Block Scroll
+
+To block scroll, set `blockScrollOnMount` to `true`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    items={items}
+    blockScrollOnMount
+    placeholder="Select a character"
+  />
+)
+```
+
+### Close Dropdown On Scroll
+
+To close the dropdown on scroll, set `closeOnScroll` to `true`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root closeOnScroll items={items} placeholder="Select a character" />
+)
+```
+
+### Don't Close Dropdown on Selection
+
+To not close the dropdown on selection, set `closeOnSelect` to `false`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { closeOnSelect: true, label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    closeOnSelect={false}
+    items={items}
+    placeholder="Select a character"
+  />
+)
+```
+
+### Disable Close on Blur
+
+To disable close on blur, set `closeOnBlur` to `false`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    closeOnBlur={false}
+    items={items}
+    placeholder="Select a character"
+  />
+)
+```
+
+### Disable Close Dropdown on ESC Key Press
+
+To disable close on ESC key press, set `closeOnEsc` to `false`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    closeOnEsc={false}
+    items={items}
+    placeholder="Select a character"
+  />
+)
+```
+
+### Disable Options
+
+To disable specific options, set `disabled` to `true`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { disabled: true, label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return <Select.Root items={items} placeholder="Select a character" />
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <Select.Root
+          key={variant}
+          variant={variant}
+          disabled
+          items={items}
+          placeholder={toTitleCase(variant)}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Read-Only
+
+To read-only, set `readOnly` to `true`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { disabled: true, label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <Select.Root
+          key={variant}
+          variant={variant}
+          readOnly
+          items={items}
+          placeholder={toTitleCase(variant)}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Invalid
+
+To make invalid, set `invalid` to `true`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <Select.Root
+          key={variant}
+          variant={variant}
+          invalid
+          items={items}
+          placeholder={toTitleCase(variant)}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Border Color
+
+To change the border color, set a value to `focusBorderColor` or `errorBorderColor`.
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Select.Root
+      focusBorderColor="green.500"
+      items={items}
+      placeholder="Custom border color"
+    />
+
+    <Select.Root
+      errorBorderColor="orange.500"
+      invalid
+      items={items}
+      placeholder="Custom border color"
+    />
+  </VStack>
+)
+```
+
+### Customize Icon
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+return (
+  <VStack>
+    <Select.Root
+      placeholder="Select a character"
+      iconProps={{ color: "orange" }}
+      items={items}
+    />
+
+    <Select.Root
+      icon={<ChevronsDownIcon />}
+      placeholder="Select a character"
+      items={items}
+    />
+  </VStack>
+)
+```
+
+### Customize Option Icon
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    items={items}
+    placeholder="Select a character"
+    optionProps={{ icon: <HeartIcon /> }}
+  />
+)
+```
+
+### Customize Multiple Selection Display
+
+```tsx preview functional
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    multiple
+    items={items}
+    placeholder="Select a character"
+    render={({ label, onClear }) => (
+      <Tag size="sm" me="{gap}" onClose={onClear}>
+        {label}
+      </Tag>
+    )}
+  />
+)
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState<string>("木ノ下和也")
+
+const items = useMemo<Select.Item[]>(
+  () => [
+    { label: "木ノ下和也", value: "木ノ下和也" },
+    { label: "一ノ瀬ちづる", value: "一ノ瀬ちづる" },
+    { label: "七海麻美", value: "七海麻美" },
+    { label: "更科瑠夏", value: "更科瑠夏" },
+    { label: "桜沢墨", value: "桜沢墨" },
+    { label: "八重森みに", value: "八重森みに" },
+  ],
+  [],
+)
+
+return (
+  <Select.Root
+    placeholder="Select a character"
+    value={value}
+    onChange={setValue}
+    items={items}
+  />
+)
+```
 
 ## Props
 

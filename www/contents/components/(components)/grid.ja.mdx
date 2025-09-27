@@ -7,10 +7,18 @@ style: components/grid/grid.style.ts
 ---
 
 ```tsx preview
-<Grid templateColumns="repeat(4, 1fr)" gap="md">
-  <For each={["primary", "secondary", "warning", "danger"]}>
-    {(bg, index) => (
-      <GridItem key={index} w="full" h="4xs" rounded="l2" bg={bg} />
+<Grid gap="md" templateColumns="repeat(4, 1fr)">
+  <For each={Array.from({ length: 4 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
     )}
   </For>
 </Grid>
@@ -22,29 +30,42 @@ style: components/grid/grid.style.ts
 
 ```tsx [package]
 import { Grid } from "@yamada-ui/react"
+import { GridItem } from "@yamada-ui/react"
 ```
 
 ```tsx [alias]
 import { Grid } from "@/components/ui"
+import { GridItem } from "@/components/ui"
 ```
 
 ```tsx [monorepo]
 import { Grid } from "@workspaces/ui"
+import { GridItem } from "@workspaces/ui"
 ```
 
 :::
 
 ```tsx
-<Grid />
+<Grid>
+  <Griditem />
+</Grid>
 ```
 
 ### テンプレート列
 
 ```tsx preview
-<Grid gap="md" templateColumns="repeat(4, 1fr)" w="full">
-  <For each={["primary", "secondary", "warning", "danger"]}>
-    {(bg, index) => (
-      <GridItem bg={bg} key={index} w="full" minH="4xs" p="md" rounded="l2" />
+<Grid gap="md" templateColumns="repeat(4, 1fr)">
+  <For each={Array.from({ length: 4 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
     )}
   </For>
 </Grid>
@@ -54,9 +75,17 @@ import { Grid } from "@workspaces/ui"
 
 ```tsx preview
 <Grid gap="md" templateRows="repeat(4, 1fr)" w="full">
-  <For each={["primary", "secondary", "warning", "danger"]}>
-    {(bg, index) => (
-      <GridItem bg={bg} key={index} w="full" minH="4xs" p="md" rounded="l2" />
+  <For each={Array.from({ length: 4 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
     )}
   </For>
 </Grid>
@@ -71,16 +100,17 @@ import { Grid } from "@workspaces/ui"
   templateRows="repeat(4, 1fr)"
   w="full"
 >
-  <For
-    each={Array.from({ length: 3 }, () => [
-      "primary",
-      "secondary",
-      "warning",
-      "danger",
-    ]).flat()}
-  >
-    {(bg, index) => (
-      <GridItem bg={bg} key={index} w="full" minH="4xs" p="md" rounded="l2" />
+  <For each={Array.from({ length: 12 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
     )}
   </For>
 </Grid>
@@ -97,27 +127,18 @@ import { Grid } from "@workspaces/ui"
   `}
   gap="md"
 >
-  <For
-    each={[
-      { area: "one", bg: "primary" },
-      { area: "two", bg: "secondary" },
-      { area: "three", bg: "warning" },
-      { area: "four", bg: "danger" },
-      { area: "five", bg: "primary" },
-      { area: "six", bg: "secondary" },
-      { area: "seven", bg: "warning" },
-      { area: "eight", bg: "danger" },
-    ]}
-  >
+  <For each={["one", "two", "three", "four", "five", "six", "seven", "eight"]}>
     {({ area, bg }, index) => (
       <GridItem
         key={index}
         area={area}
-        w="full"
-        minH="4xs"
-        rounded="md"
-        bg={bg}
-      />
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
     )}
   </For>
 </Grid>
@@ -132,39 +153,55 @@ import { Grid } from "@workspaces/ui"
   templateRows="repeat(3, 1fr)"
   w="full"
 >
-  <GridItem bg="primary" colSpan={2} minH="4xs" p="md" rounded="l2" w="full" />
+  <GridItem
+    bg="bg.contrast"
+    color="fg.contrast"
+    colSpan={2}
+    minH="4xs"
+    p="md"
+    rounded="l2"
+    w="full"
+  >
+    GridItem
+  </GridItem>
 
   <GridItem
-    bg="secondary"
+    bg="bg.contrast"
+    color="fg.contrast"
     colSpan={2}
     minH="4xs"
     p="md"
     rounded="l2"
     rowSpan={3}
     w="full"
-  />
+  >
+    GridItem
+  </GridItem>
 
   <GridItem
-    bg="warning"
+    bg="bg.contrast"
+    color="fg.contrast"
     minH="4xs"
     p="md"
-    rounded="l2"
     rowEnd={4}
     rowStart={2}
     w="full"
-  />
-
+  >
+    GridItem
+  </GridItem>
   <GridItem
-    bg="danger"
     colEnd={3}
+    bg="bg.contrast"
+    color="fg.contrast"
     colStart={2}
     minH="4xs"
     p="md"
-    rounded="l2"
     rowEnd={4}
     rowStart={2}
     w="full"
-  />
+  >
+    GridItem
+  </GridItem>
 </Grid>
 ```
 

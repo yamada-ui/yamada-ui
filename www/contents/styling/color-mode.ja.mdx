@@ -3,4 +3,61 @@ title: カラーモード
 description: Yamada UIは、カラーモードに応じてスタイルを変更する機能を提供しています。
 ---
 
-## 使い方
+## カラーモードについて
+
+Yamada UIには、アプリケーションのカラーモードを管理するためのサポートが組み込まれており、簡単にライトモード/ダークモードを実装することができます。\
+Yamada UIのすべてのコンポーネントは、ダークモードをサポートしています。シナリオによっては、コンポーネントをカラーモードに対応させる必要がある場合があります。
+
+:::info
+デフォルトのカラーモードを変更したい場合は、[こちら](/docs/theming/color-mode)をご覧ください。
+:::
+
+## カラーモードの構文
+
+カラーモードのスタイルを設定する場合は、スタイルの`props`に配列を渡すだけでカラーモードに対応します。
+
+- 第1引数にライトモードに設定したいスタイルの値を定義します。
+- 第2引数にダークモードに設定したいスタイルの値を定義します。
+
+```tsx preview
+<Box w="full" p="md" bg={["success", "warning"]} color="white">
+  This is Box
+</Box>
+```
+
+## カラーモードを切り替える
+
+アプリケーション内でカラーモードを変更したい場合は、`changeColorMode`か`toggleColorMode`を使用します。
+
+- `changeColorMode`: 任意のカラーモードを設定します。
+- `toggleColorMode`: ライトモードならダークモードへ、ダークモードならライトモードへ切り替えます。
+
+```tsx preview functional client
+const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
+
+return (
+  <Wrap gap="md">
+    <Button onClick={() => changeColorMode("light")}>ライトモード</Button>
+    <Button onClick={() => changeColorMode("dark")}>ダークモード</Button>
+    <Button onClick={() => changeColorMode("system")}>システム</Button>
+    <Button onClick={toggleColorMode}>
+      {colorMode === "light" ? "ダーク" : "ライト"}モードに切り替える
+    </Button>
+  </Wrap>
+)
+```
+
+## フラッシュを抑制する
+
+カラーモードによる画面のフラッシュを抑制したい場合は、`body`内に`ColorModeScript`を追加します。
+
+カラーモードは`localStorage`や`cookies`を用いて実装されており、`ColorModeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
+
+各フレームワークへの追加方法は[こちら](/docs/get-started#フレームワークを選択する)をご覧ください。
+
+## カラーモードのユーティリティ
+
+Yamada UIには、カラーモードの便利なカスタムフックを提供しています。
+
+- [useColorMode](/docs/hooks/use-color-mode)
+- [useColorModeValue](/docs/hooks/use-color-mode-value)

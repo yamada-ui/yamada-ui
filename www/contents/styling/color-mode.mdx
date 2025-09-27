@@ -3,4 +3,61 @@ title: Color Mode
 description: Yamada UI provides features to change styles according to the color mode.
 ---
 
-## Usage
+## About Color Mode
+
+Yamada UI has built-in support for managing the color mode of your application, making it easy to implement light/dark mode.\
+All components in Yamada UI support dark mode. In some scenarios, you may need to make components adapt to the color mode.
+
+:::info
+If you want to change the default color mode, please see [here](/docs/theming/color-mode).
+:::
+
+## Syntax for Color Mode
+
+To set styles for color mode, simply pass an array to the style `props` to support color mode.
+
+- Define the style value you want to set for light mode as the first argument.
+- Define the style value you want to set for dark mode as the second argument.
+
+```tsx preview
+<Box w="full" p="md" bg={["success", "warning"]} color="white">
+  This is Box
+</Box>
+```
+
+## Switching Color Mode
+
+To change the color mode within your application, use `changeColorMode` or `toggleColorMode`.
+
+- `changeColorMode`: Sets any color mode.
+- `toggleColorMode`: Switches from light mode to dark mode, or from dark mode to light mode.
+
+```tsx preview functional client
+const { colorMode, changeColorMode, toggleColorMode } = useColorMode()
+
+return (
+  <Wrap gap="md">
+    <Button onClick={() => changeColorMode("light")}>Light Mode</Button>
+    <Button onClick={() => changeColorMode("dark")}>Dark Mode</Button>
+    <Button onClick={() => changeColorMode("system")}>System</Button>
+    <Button onClick={toggleColorMode}>
+      Switch to {colorMode === "light" ? "Dark" : "Light"} Mode
+    </Button>
+  </Wrap>
+)
+```
+
+## Suppressing Flash
+
+To suppress screen flash caused by color mode, add `ColorModeScript` within the `body`.
+
+Color mode is implemented using `localStorage` and `cookies`, and adding `ColorModeScript` allows synchronization to work correctly when the page loads.
+
+For how to add it to each framework, please see [here](/docs/get-started#pick-your-framework).
+
+## Color Mode Utilities
+
+Yamada UI provides useful custom hooks for color mode.
+
+- [useColorMode](/docs/hooks/use-color-mode)
+- [useColorModeValue](/docs/hooks/use-color-mode-value)

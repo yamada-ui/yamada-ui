@@ -6,7 +6,167 @@ source: components/grid
 style: components/grid/grid.style.ts
 ---
 
+```tsx preview
+<Grid templateColumns="repeat(4, 1fr)" gap="md">
+  <For each={["primary", "secondary", "warning", "danger"]}>
+    {(bg, index) => (
+      <GridItem key={index} w="full" h="4xs" rounded="l2" bg={bg} />
+    )}
+  </For>
+</Grid>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Grid } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Grid } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Grid } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Grid />
+```
+
+### テンプレート列
+
+```tsx preview
+<Grid gap="md" templateColumns="repeat(4, 1fr)" w="full">
+  <For each={["primary", "secondary", "warning", "danger"]}>
+    {(bg, index) => (
+      <GridItem bg={bg} key={index} w="full" minH="4xs" p="md" rounded="l2" />
+    )}
+  </For>
+</Grid>
+```
+
+### テンプレート行
+
+```tsx preview
+<Grid gap="md" templateRows="repeat(4, 1fr)" w="full">
+  <For each={["primary", "secondary", "warning", "danger"]}>
+    {(bg, index) => (
+      <GridItem bg={bg} key={index} w="full" minH="4xs" p="md" rounded="l2" />
+    )}
+  </For>
+</Grid>
+```
+
+### テンプレート列と行
+
+```tsx preview
+<Grid
+  gap="md"
+  templateColumns="repeat(3, 1fr)"
+  templateRows="repeat(4, 1fr)"
+  w="full"
+>
+  <For
+    each={Array.from({ length: 3 }, () => [
+      "primary",
+      "secondary",
+      "warning",
+      "danger",
+    ]).flat()}
+  >
+    {(bg, index) => (
+      <GridItem bg={bg} key={index} w="full" minH="4xs" p="md" rounded="l2" />
+    )}
+  </For>
+</Grid>
+```
+
+### テンプレート領域
+
+```tsx preview
+<Grid
+  templateAreas={`
+    "one one two three"
+    "four five two six"
+    "four seven seven eight"
+  `}
+  gap="md"
+>
+  <For
+    each={[
+      { area: "one", bg: "primary" },
+      { area: "two", bg: "secondary" },
+      { area: "three", bg: "warning" },
+      { area: "four", bg: "danger" },
+      { area: "five", bg: "primary" },
+      { area: "six", bg: "secondary" },
+      { area: "seven", bg: "warning" },
+      { area: "eight", bg: "danger" },
+    ]}
+  >
+    {({ area, bg }, index) => (
+      <GridItem
+        key={index}
+        area={area}
+        w="full"
+        minH="4xs"
+        rounded="md"
+        bg={bg}
+      />
+    )}
+  </For>
+</Grid>
+```
+
+### 開始と終了を変更する
+
+```tsx preview
+<Grid
+  gap="md"
+  templateColumns="repeat(4, 1fr)"
+  templateRows="repeat(3, 1fr)"
+  w="full"
+>
+  <GridItem bg="primary" colSpan={2} minH="4xs" p="md" rounded="l2" w="full" />
+
+  <GridItem
+    bg="secondary"
+    colSpan={2}
+    minH="4xs"
+    p="md"
+    rounded="l2"
+    rowSpan={3}
+    w="full"
+  />
+
+  <GridItem
+    bg="warning"
+    minH="4xs"
+    p="md"
+    rounded="l2"
+    rowEnd={4}
+    rowStart={2}
+    w="full"
+  />
+
+  <GridItem
+    bg="danger"
+    colEnd={3}
+    colStart={2}
+    minH="4xs"
+    p="md"
+    rounded="l2"
+    rowEnd={4}
+    rowStart={2}
+    w="full"
+  />
+</Grid>
+```
 
 ## Props
 

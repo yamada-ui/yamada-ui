@@ -1,6 +1,6 @@
 ---
 title: NativeSelect
-description: "`NativeSelect` is a component used for allowing users to select one option from a list. It displays a native dropdown list provided by the browser (user agent)."
+description: "`NativeSelect` is a component used for allowing users to select one value from a list of options. It displays a native dropdown list provided by the browser (user agent)."
 storybook: components-nativeselect--basic
 source: components/native-select
 style: components/native-select/native-select.style.ts
@@ -276,7 +276,7 @@ return (
 )
 ```
 
-### Make read-only
+### Read-Only
 
 To make read-only, set `readOnly` to `true`.
 
@@ -308,9 +308,9 @@ return (
 )
 ```
 
-### Make input invalid
+### Invalid
 
-To make the input invalid, set `invalid` to `true`.
+To make invalid, set `invalid` to `true`.
 
 ```tsx preview functional
 const items = useMemo<NativeSelect.Item[]>(

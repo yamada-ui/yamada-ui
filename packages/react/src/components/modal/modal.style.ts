@@ -65,7 +65,7 @@ export const modalStyle = defineComponentSlotStyle({
       zIndex: "guldo",
     },
     title: {
-      fontSize: "xl",
+      fontSize: "lg",
       fontWeight: "semibold",
     },
   },

@@ -6,7 +6,204 @@ source: components/grid
 style: components/grid/grid.style.ts
 ---
 
+```tsx preview
+<Grid gap="md" templateColumns="repeat(4, 1fr)">
+  <For each={Array.from({ length: 4 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+    )}
+  </For>
+</Grid>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Grid } from "@yamada-ui/react"
+import { GridItem } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Grid } from "@/components/ui"
+import { GridItem } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Grid } from "@workspaces/ui"
+import { GridItem } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Grid>
+  <Griditem />
+</Grid>
+```
+
+### テンプレート列
+
+```tsx preview
+<Grid gap="md" templateColumns="repeat(4, 1fr)">
+  <For each={Array.from({ length: 4 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+    )}
+  </For>
+</Grid>
+```
+
+### テンプレート行
+
+```tsx preview
+<Grid gap="md" templateRows="repeat(4, 1fr)" w="full">
+  <For each={Array.from({ length: 4 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+    )}
+  </For>
+</Grid>
+```
+
+### テンプレート列と行
+
+```tsx preview
+<Grid
+  gap="md"
+  templateColumns="repeat(3, 1fr)"
+  templateRows="repeat(4, 1fr)"
+  w="full"
+>
+  <For each={Array.from({ length: 12 })}>
+    {(_, index) => (
+      <GridItem
+        key={index}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+    )}
+  </For>
+</Grid>
+```
+
+### テンプレート領域
+
+```tsx preview
+<Grid
+  templateAreas={`
+    "one one two three"
+    "four five two six"
+    "four seven seven eight"
+  `}
+  gap="md"
+>
+  <For each={["one", "two", "three", "four", "five", "six", "seven", "eight"]}>
+    {({ area, bg }, index) => (
+      <GridItem
+        key={index}
+        area={area}
+        bg="bg.contrast"
+        color="fg.contrast"
+        p="md"
+        textAlign="center"
+      >
+        GridItem
+      </GridItem>
+    )}
+  </For>
+</Grid>
+```
+
+### 開始と終了を変更する
+
+```tsx preview
+<Grid
+  gap="md"
+  templateColumns="repeat(4, 1fr)"
+  templateRows="repeat(3, 1fr)"
+  w="full"
+>
+  <GridItem
+    bg="bg.contrast"
+    color="fg.contrast"
+    colSpan={2}
+    minH="4xs"
+    p="md"
+    rounded="l2"
+    w="full"
+  >
+    GridItem
+  </GridItem>
+
+  <GridItem
+    bg="bg.contrast"
+    color="fg.contrast"
+    colSpan={2}
+    minH="4xs"
+    p="md"
+    rounded="l2"
+    rowSpan={3}
+    w="full"
+  >
+    GridItem
+  </GridItem>
+
+  <GridItem
+    bg="bg.contrast"
+    color="fg.contrast"
+    minH="4xs"
+    p="md"
+    rowEnd={4}
+    rowStart={2}
+    w="full"
+  >
+    GridItem
+  </GridItem>
+  <GridItem
+    colEnd={3}
+    bg="bg.contrast"
+    color="fg.contrast"
+    colStart={2}
+    minH="4xs"
+    p="md"
+    rowEnd={4}
+    rowStart={2}
+    w="full"
+  >
+    GridItem
+  </GridItem>
+</Grid>
+```
 
 ## Props
 

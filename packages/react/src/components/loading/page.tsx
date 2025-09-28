@@ -6,7 +6,7 @@ import { useTimeout } from "../../hooks/use-timeout"
 import { isValidElement } from "../../utils"
 import { motion } from "../motion"
 import { Text } from "../text"
-import { Loading } from "./"
+import { useLoadingComponent } from "./use-loading-component"
 
 const variants: { [key: string]: Variants } = {
   overlay: {
@@ -55,7 +55,9 @@ const variants: { [key: string]: Variants } = {
 export interface PageProps extends LoadingSharedProps {}
 
 export const Page: FC<PageProps> = memo(
-  ({ duration, initial, message, onFinish }) => {
+  ({ duration, initial, loadingScheme, message, onFinish }) => {
+    const Component = useLoadingComponent(loadingScheme)
+
     useTimeout(onFinish, duration)
 
     return (
@@ -92,7 +94,7 @@ export const Page: FC<PageProps> = memo(
           rounded="l2"
           variants={variants.panel}
         >
-          <Loading.Oval fontSize="6xl" />
+          <Component fontSize="6xl" />
 
           {message ? (
             isValidElement(message) ? (

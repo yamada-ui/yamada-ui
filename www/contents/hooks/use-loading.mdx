@@ -69,9 +69,37 @@ import { useLoading } from "@workspaces/ui"
 const { screen, page, background } = useLoading()
 ```
 
-### Adding a Timeout
+### Change Loading Scheme
 
-To add a timeout, set a number (milliseconds) to `duration`.
+```tsx preview functional client
+const { screen, page, background } = useLoading()
+
+return (
+  <Wrap gap="md">
+    <Button
+      onClick={() => screen.start({ loadingScheme: "grid", duration: 3000 })}
+    >
+      Start Screen Loading
+    </Button>
+    <Button
+      onClick={() => page.start({ loadingScheme: "dots", duration: 3000 })}
+    >
+      Start Page Loading
+    </Button>
+    <Button
+      onClick={() =>
+        background.start({ loadingScheme: "puff", duration: 3000 })
+      }
+    >
+      Start Background Loading
+    </Button>
+  </Wrap>
+)
+```
+
+### Set Duration
+
+To set the duration, set a number (milliseconds) to `duration`.
 
 ```tsx preview functional client
 const { screen, page, background } = useLoading()
@@ -91,9 +119,9 @@ return (
 )
 ```
 
-### Adding a Message
+### Set Message
 
-To add a message, set a `ReactNode` to `message`.
+To set a message, set a `ReactNode` to `message`.
 
 ```tsx preview functional client
 const { screen, page, background } = useLoading()
@@ -172,5 +200,43 @@ return (
     <Button onClick={onLoadingPage}>Start Page Loading</Button>
     <Button onClick={onLoadingBackground}>Start Background Loading</Button>
   </Wrap>
+)
+```
+
+## Configuration
+
+### Change Loading Scheme
+
+```tsx preview functional client
+const config = extendConfig({
+  loading: {
+    background: { loadingScheme: "puff" },
+    page: { loadingScheme: "dots" },
+    screen: { loadingScheme: "grid" },
+  },
+})
+
+const App: FC = () => {
+  const { screen, page, background } = useLoading()
+
+  return (
+    <Wrap gap="md">
+      <Button onClick={() => screen.start({ duration: 3000 })}>
+        Start Screen Loading
+      </Button>
+      <Button onClick={() => page.start({ duration: 3000 })}>
+        Start Page Loading
+      </Button>
+      <Button onClick={() => background.start({ duration: 3000 })}>
+        Start Background Loading
+      </Button>
+    </Wrap>
+  )
+}
+
+return (
+  <UIProvider config={config}>
+    <App />
+  </UIProvider>
 )
 ```

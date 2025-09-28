@@ -69,9 +69,37 @@ import { useLoading } from "@workspaces/ui"
 const { screen, page, background } = useLoading()
 ```
 
-### タイムアウトを付与する
+### ローディングスキームを変更する
 
-タイムアウトを付与するには、`duration`に数値(ミリ秒)を設定します。
+```tsx preview functional client
+const { screen, page, background } = useLoading()
+
+return (
+  <Wrap gap="md">
+    <Button
+      onClick={() => screen.start({ loadingScheme: "grid", duration: 3000 })}
+    >
+      Start Screen Loading
+    </Button>
+    <Button
+      onClick={() => page.start({ loadingScheme: "dots", duration: 3000 })}
+    >
+      Start Page Loading
+    </Button>
+    <Button
+      onClick={() =>
+        background.start({ loadingScheme: "puff", duration: 3000 })
+      }
+    >
+      Start Background Loading
+    </Button>
+  </Wrap>
+)
+```
+
+### 所要時間を設定する
+
+所要時間を設定する場合は、`duration`に数値(ミリ秒)を設定します。
 
 ```tsx preview functional client
 const { screen, page, background } = useLoading()
@@ -91,9 +119,9 @@ return (
 )
 ```
 
-### メッセージを付与する
+### メッセージを設定する
 
-メッセージを付与する場合は、`message`に`ReactNode`を設定します。
+メッセージを設定する場合は、`message`に`ReactNode`を設定します。
 
 ```tsx preview functional client
 const { screen, page, background } = useLoading()
@@ -172,5 +200,43 @@ return (
     <Button onClick={onLoadingPage}>Start Page Loading</Button>
     <Button onClick={onLoadingBackground}>Start Background Loading</Button>
   </Wrap>
+)
+```
+
+## コンフィグ
+
+### ローディングスキームを変更する
+
+```tsx preview functional client
+const config = extendConfig({
+  loading: {
+    background: { loadingScheme: "puff" },
+    page: { loadingScheme: "dots" },
+    screen: { loadingScheme: "grid" },
+  },
+})
+
+const App: FC = () => {
+  const { screen, page, background } = useLoading()
+
+  return (
+    <Wrap gap="md">
+      <Button onClick={() => screen.start({ duration: 3000 })}>
+        Start Screen Loading
+      </Button>
+      <Button onClick={() => page.start({ duration: 3000 })}>
+        Start Page Loading
+      </Button>
+      <Button onClick={() => background.start({ duration: 3000 })}>
+        Start Background Loading
+      </Button>
+    </Wrap>
+  )
+}
+
+return (
+  <UIProvider config={config}>
+    <App />
+  </UIProvider>
 )
 ```

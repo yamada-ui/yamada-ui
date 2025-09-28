@@ -1,7 +1,7 @@
 "use client"
 
 import type { FC, PropsWithChildren, ReactNode, RefObject } from "react"
-import type { LoadingConfig, ThemeConfig } from "../../core"
+import type { LoadingConfig, LoadingScheme, ThemeConfig } from "../../core"
 import { AnimatePresence } from "motion/react"
 import { createContext, createRef, use, useMemo, useRef, useState } from "react"
 import { RemoveScroll } from "react-remove-scroll"
@@ -38,12 +38,14 @@ interface LoadingMethods {
 
 export interface LoadingOptions {
   duration?: null | number
-  message?: ReactNode | undefined
+  loadingScheme?: LoadingScheme
+  message?: ReactNode
 }
 
 interface LoadingState {
   duration: null | number
   loadingCount: number
+  loadingScheme: LoadingScheme
   message: ReactNode | undefined
 }
 
@@ -125,6 +127,7 @@ export const LoadingProvider: FC<LoadingProviderProps> = ({
 
 export interface LoadingSharedProps {
   duration: null | number
+  loadingScheme: LoadingScheme
   message: ReactNode | undefined
   onFinish: () => void
   initial?: boolean | string
@@ -142,12 +145,14 @@ const Controller: FC<ControllerProps> = ({
   component: Component,
   duration: durationProp = null,
   loadingCount: loadingCountProp = 0,
+  loadingScheme: loadingSchemeProp = "oval",
 }) => {
   const loading = useRef<boolean>(false)
-  const [{ duration, loadingCount, message }, setState] =
+  const [{ duration, loadingCount, loadingScheme, message }, setState] =
     useState<LoadingState>({
       duration: durationProp,
       loadingCount: loadingCountProp,
+      loadingScheme: loadingSchemeProp,
       message: undefined,
     })
 
@@ -159,33 +164,45 @@ const Controller: FC<ControllerProps> = ({
         setState(({ loadingCount }) => ({
           duration: durationProp,
           loadingCount: decrementCount(loadingCount),
+          loadingScheme: loadingSchemeProp,
           message: undefined,
         }))
       },
 
-      force: ({ duration = durationProp, loadingCount = 0, message }) => {
+      force: ({
+        duration = durationProp,
+        loadingCount = 0,
+        loadingScheme = loadingSchemeProp,
+        message,
+      }) => {
         loading.current = !!loadingCount
 
         setState({
           duration,
           loadingCount,
+          loadingScheme,
           message,
         })
       },
 
-      start: ({ duration = durationProp, message } = {}) => {
+      start: ({
+        duration = durationProp,
+        loadingScheme = loadingSchemeProp,
+        message,
+      } = {}) => {
         loading.current = true
 
         setState(({ loadingCount }) => ({
           duration,
           loadingCount: incrementCount(loadingCount),
+          loadingScheme,
           message,
         }))
       },
 
       update: (next) => setState((prev) => ({ ...prev, ...next })),
     }),
-    [durationProp],
+    [durationProp, loadingSchemeProp],
   )
 
   assignRef(ref.current.start, start)
@@ -196,6 +213,7 @@ const Controller: FC<ControllerProps> = ({
   const props: LoadingSharedProps = {
     duration,
     initial: loadingCountProp > 0 ? false : "initial",
+    loadingScheme,
     message,
     onFinish: finish,
   }
@@ -205,9 +223,10 @@ const Controller: FC<ControllerProps> = ({
       setState({
         duration: durationProp,
         loadingCount: loadingCountProp,
+        loadingScheme: loadingSchemeProp,
         message: undefined,
       })
-  }, [loadingCountProp, durationProp])
+  }, [loadingCountProp, durationProp, loadingSchemeProp])
 
   return (
     <AnimatePresence initial={false}>

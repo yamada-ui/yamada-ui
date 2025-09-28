@@ -6,7 +6,7 @@ import { useTimeout } from "../../hooks/use-timeout"
 import { isValidElement } from "../../utils"
 import { motion } from "../motion"
 import { Text } from "../text"
-import { Loading } from "./"
+import { useLoadingComponent } from "./use-loading-component"
 
 const variants: Variants = {
   animate: {
@@ -34,7 +34,9 @@ const variants: Variants = {
 export interface BackgroundProps extends LoadingSharedProps {}
 
 export const Background: FC<BackgroundProps> = memo(
-  ({ duration, initial, message, onFinish }) => {
+  ({ duration, initial, loadingScheme, message, onFinish }) => {
+    const Component = useLoadingComponent(loadingScheme)
+
     useTimeout(onFinish, duration)
 
     return (
@@ -58,7 +60,7 @@ export const Background: FC<BackgroundProps> = memo(
         variants={variants}
         zIndex="beerus"
       >
-        <Loading.Oval fontSize="xl" />
+        <Component fontSize="xl" />
 
         {message ? (
           isValidElement(message) ? (

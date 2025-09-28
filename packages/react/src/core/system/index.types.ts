@@ -25,6 +25,15 @@ export type LayerScheme =
   | "size"
   | "tokens"
   | "variant"
+export type LoadingScheme =
+  | "audio"
+  | "circles"
+  | "dots"
+  | "grid"
+  | "oval"
+  | "puff"
+  | "rings"
+export type LoadingMethod = "background" | "page" | "screen"
 export type KeyframeIdent = "from" | "to"
 export type Orientation = "horizontal" | "vertical"
 export type Placement =
@@ -198,6 +207,10 @@ export interface LoadingConfig {
    * @default 0
    */
   loadingCount?: number
+  /**
+   * The default scheme of the loading.
+   */
+  loadingScheme?: LoadingScheme
 }
 
 export interface ThemeConfig {

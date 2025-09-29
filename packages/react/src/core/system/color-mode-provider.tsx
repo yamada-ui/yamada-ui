@@ -12,9 +12,9 @@ import {
   useState,
 } from "react"
 import { isEmptyObject, noop } from "../../utils"
+import { COLOR_MODE_STORAGE_KEY } from "../constant"
 import { useEnvironment } from "./environment-provider"
 import { createStorageManager } from "./storage-manager"
-import { COLOR_MODE_STORAGE_KEY } from "./storage-script"
 import { getPreventTransition } from "./theme-provider"
 import { useSystemColorMode } from "./use-system-color-mode"
 

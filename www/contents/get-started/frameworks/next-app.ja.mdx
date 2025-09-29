@@ -148,7 +148,7 @@ export default function RootLayout({
 
 もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultColorMode`を変更した場合は、`ColorModeScript`に`defaultValue`を設定します。
 
-```tsx title="layout.tsx" {2,12}
+```tsx title="layout.tsx" {12}
 import { UIProvider, ColorModeScript } from "@workspaces/ui"
 import { config } from "@/theme"
 
@@ -162,7 +162,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <ColorModeScript defaultValue={config.defaultColorMode} />
 
-        <UIProvider>{children}</UIProvider>
+        <UIProvider config={config}>{children}</UIProvider>
       </body>
     </html>
   )
@@ -197,7 +197,7 @@ export default function RootLayout({
 
 もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultThemeScheme`を変更した場合は、`ThemeSchemeScript`に`defaultValue`を設定します。
 
-```tsx title="layout.tsx" {2,12}
+```tsx title="layout.tsx" {12}
 import { UIProvider, ThemeSchemeScript } from "@workspaces/ui"
 import { config } from "@/theme"
 
@@ -211,7 +211,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <ThemeSchemeScript defaultValue={config.defaultThemeScheme} />
 
-        <UIProvider>{children}</UIProvider>
+        <UIProvider config={config}>{children}</UIProvider>
       </body>
     </html>
   )

@@ -112,13 +112,17 @@ export default function Home() {
 
 ::::
 
-## Scriptを追加する
+## スクリプト
 
 ### ColorModeScript
 
-カラーモードによる画面のフラッシュを抑制したい場合は、`body`内に`ColorModeScript`を追加します。
+[カラーモード](/docs/theming/color-mode)を使用する場合は、正常に動作させるために`body`に`ColorModeScript`を追加する必要があります。
 
-カラーモードは`localStorage`や`cookies`を用いて実装されており、`ColorModeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
+理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
+
+::::steps
+
+#### スクリプトを追加する
 
 ```tsx title="_document.tsx" {2,9}
 import { Html, Head, Main, NextScript } from "next/document"
@@ -129,56 +133,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
-        <ColorModeScript />
-
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  )
-}
-```
-
-### ThemeSchemeScript
-
-テーマスキームによる画面のフラッシュを抑制したい場合は、`body`内に`ThemeSchemeScript`を追加します。
-
-テーマスキームは`localStorage`や`cookies`を用いて実装されており、`ThemeSchemeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
-
-```tsx title="_document.tsx" {2,9}
-import { Html, Head, Main, NextScript } from "next/document"
-import { ThemeSchemeScript } from "@workspaces/ui"
-
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
-      <body>
-        <ThemeSchemeScript />
-
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  )
-}
-```
-
-### typeを指定する
-
-`type`に`"cookie"`を指定することで、フラッシュをさらに抑制できます。
-
-```tsx title="_document.tsx" {2,9-10}
-import { Html, Head, Main, NextScript } from "next/document"
-import { ColorModeScript, ThemeSchemeScript } from "@workspaces/ui"
-
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
-      <body>
         <ColorModeScript type="cookie" />
-        <ThemeSchemeScript type="cookie" />
 
         <Main />
         <NextScript />
@@ -187,6 +142,59 @@ export default function Document() {
   )
 }
 ```
+
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultColorMode`を変更した場合は、`ColorModeScript`に`defaultValue`を設定します。
+
+```tsx title="_document.tsx" {3,10}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ColorModeScript } from "@workspaces/ui"
+import { config } from "@/theme"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ColorModeScript type="cookie" defaultValue={config.defaultColorMode} />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+#### getServerSidePropsを追加する
+
+複数のページで[getServerSideProps](https://nextjs.org/docs/pages/building-your-application/data-fetching/get-server-side-props)を共通化するために、`getServerSideSharedProps`を定義します。
+
+```tsx title="get-server-side-props.ts"
+import { GetServerSidePropsContext } from "next"
+
+export const getServerSideSharedProps = ({
+  req,
+}: GetServerSidePropsContext) => {
+  return {
+    props: {
+      cookies: req.headers.cookie ?? "",
+    },
+  }
+}
+```
+
+```tsx title="index.tsx" {1,4}
+import { getServerSideSharedProps } from "@/get-server-side-props"
+import { Button } from "@workspaces/ui"
+
+export const getServerSideProps = getServerSideSharedProps
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+```
+
+#### プロバイダーを更新する
 
 ```tsx title="_app.tsx" {5,8}
 import { UIProvider } from "@workspaces/ui"
@@ -203,12 +211,70 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 ```
 
-複数のページで`getServerSideProps`を共通化するために、`getServerSideCommonProps`を定義します。
+::::
+
+### ThemeSchemeScript
+
+[テーマの切り替え](/docs/theming/switching-themes)を使用する場合は、正常に動作させるために`body`に`ThemeSchemeScript`を追加する必要があります。
+
+理由は、テーマの切り替えが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
+
+::::steps
+
+#### スクリプトを追加する
+
+```tsx title="_document.tsx" {2,9}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ThemeSchemeScript } from "@workspaces/ui"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ThemeSchemeScript type="cookie" />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultThemeScheme`を変更した場合は、`ThemeSchemeScript`に`defaultValue`を設定します。
+
+```tsx title="_document.tsx" {3,12}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ThemeSchemeScript } from "@workspaces/ui"
+import { config } from "@/theme"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ThemeSchemeScript
+          type="cookie"
+          defaultValue={config.defaultColorMode}
+        />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+#### getServerSidePropsを追加する
+
+複数のページで[getServerSideProps](https://nextjs.org/docs/pages/building-your-application/data-fetching/get-server-side-props)を共通化するために、`getServerSideSharedProps`を定義します。
 
 ```tsx title="get-server-side-props.ts"
 import { GetServerSidePropsContext } from "next"
 
-export const getServerSideCommonProps = ({
+export const getServerSideSharedProps = ({
   req,
 }: GetServerSidePropsContext) => {
   return {
@@ -219,15 +285,32 @@ export const getServerSideCommonProps = ({
 }
 ```
 
-作成した`getServerSideCommonProps`を各ページに追加します。
-
-```tsx title="index.tsx" {1,8}
-import { getServerSideCommonProps } from "../get-server-side-props.ts"
+```tsx title="index.tsx" {1,4}
+import { getServerSideSharedProps } from "@/get-server-side-props"
 import { Button } from "@workspaces/ui"
+
+export const getServerSideProps = getServerSideSharedProps
 
 export default function Home() {
   return <Button>Click me!</Button>
 }
-
-export const getServerSideProps = getServerSideCommonProps
 ```
+
+#### プロバイダーを更新する
+
+```tsx title="_app.tsx" {5,8}
+import { UIProvider } from "@workspaces/ui"
+import type { AppProps } from "next/app"
+
+export default function App({ Component, pageProps }: AppProps) {
+  const { cookie } = pageProps
+
+  return (
+    <UIProvider cookie={cookie}>
+      <Component {...pageProps} />
+    </UIProvider>
+  )
+}
+```
+
+::::

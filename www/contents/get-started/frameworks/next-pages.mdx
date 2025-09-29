@@ -112,13 +112,17 @@ That's it! You've successfully set up Yamada UI.
 
 ::::
 
-## Add Scripts
+## Scripts
 
 ### ColorModeScript
 
-If you want to suppress screen flashing due to color mode, add `ColorModeScript` inside the `body`.
+To use [Color Mode](/docs/theming/color-mode), you need to add `ColorModeScript` to the `body` to ensure it works correctly.
 
-Color mode is implemented using `localStorage` or `cookies`, and adding `ColorModeScript` allows proper synchronization functionality when the page loads.
+This is because color mode is implemented using `localStorage` or `cookies`, and adding the script ensures proper synchronization when the page loads.
+
+::::steps
+
+#### Add Script
 
 ```tsx title="_document.tsx" {2,9}
 import { Html, Head, Main, NextScript } from "next/document"
@@ -129,56 +133,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
-        <ColorModeScript />
-
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  )
-}
-```
-
-### ThemeSchemeScript
-
-If you want to suppress screen flashing due to theme scheme, add `ThemeSchemeScript` inside the `body`.
-
-Theme scheme is implemented using `localStorage` or `cookies`, and adding `ThemeSchemeScript` allows proper synchronization functionality when the page loads.
-
-```tsx title="_document.tsx" {2,9}
-import { Html, Head, Main, NextScript } from "next/document"
-import { ThemeSchemeScript } from "@workspaces/ui"
-
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
-      <body>
-        <ThemeSchemeScript />
-
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  )
-}
-```
-
-### Specify type
-
-By specifying `"cookie"` for `type`, you can further suppress flashing.
-
-```tsx title="_document.tsx" {2,9-10}
-import { Html, Head, Main, NextScript } from "next/document"
-import { ColorModeScript, ThemeSchemeScript } from "@workspaces/ui"
-
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
-      <body>
         <ColorModeScript type="cookie" />
-        <ThemeSchemeScript type="cookie" />
 
         <Main />
         <NextScript />
@@ -187,6 +142,59 @@ export default function Document() {
   )
 }
 ```
+
+If you change the `defaultColorMode` in your [config](/docs/theming/configuration/overview), set the `defaultValue` prop on `ColorModeScript`.
+
+```tsx title="_document.tsx" {3,10}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ColorModeScript } from "@workspaces/ui"
+import { config } from "@/theme"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ColorModeScript type="cookie" defaultValue={config.defaultColorMode} />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+#### Add getServerSideProps
+
+To share `getServerSideProps` across multiple pages, define `getServerSideSharedProps`.
+
+```tsx title="get-server-side-props.ts"
+import { GetServerSidePropsContext } from "next"
+
+export const getServerSideSharedProps = ({
+  req,
+}: GetServerSidePropsContext) => {
+  return {
+    props: {
+      cookies: req.headers.cookie ?? "",
+    },
+  }
+}
+```
+
+```tsx title="index.tsx" {1,4}
+import { getServerSideSharedProps } from "@/get-server-side-props"
+import { Button } from "@workspaces/ui"
+
+export const getServerSideProps = getServerSideSharedProps
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+```
+
+#### Update Provider
 
 ```tsx title="_app.tsx" {5,8}
 import { UIProvider } from "@workspaces/ui"
@@ -203,12 +211,70 @@ export default function App({ Component, pageProps }: AppProps) {
 }
 ```
 
-To standardize `getServerSideProps` across multiple pages, define `getServerSideCommonProps`.
+::::
+
+### ThemeSchemeScript
+
+To use [theme switching](/docs/theming/switching-themes), you need to add `ThemeSchemeScript` to the `body` to ensure it works correctly.
+
+This is because theme switching is implemented using `localStorage` or `cookies`, and adding the script ensures proper synchronization when the page loads.
+
+::::steps
+
+#### Add Script
+
+```tsx title="_document.tsx" {2,9}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ThemeSchemeScript } from "@workspaces/ui"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ThemeSchemeScript type="cookie" />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+If you change the `defaultThemeScheme` in your [config](/docs/theming/configuration/overview), set the `defaultValue` prop on `ThemeSchemeScript`.
+
+```tsx title="_document.tsx" {3,12}
+import { Html, Head, Main, NextScript } from "next/document"
+import { ThemeSchemeScript } from "@workspaces/ui"
+import { config } from "@/theme"
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head />
+      <body>
+        <ThemeSchemeScript
+          type="cookie"
+          defaultValue={config.defaultColorMode}
+        />
+
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+
+#### Add getServerSideProps
+
+To share `getServerSideProps` across multiple pages, define `getServerSideSharedProps`.
 
 ```tsx title="get-server-side-props.ts"
 import { GetServerSidePropsContext } from "next"
 
-export const getServerSideCommonProps = ({
+export const getServerSideSharedProps = ({
   req,
 }: GetServerSidePropsContext) => {
   return {
@@ -219,15 +285,32 @@ export const getServerSideCommonProps = ({
 }
 ```
 
-Add the created `getServerSideCommonProps` to each page.
-
-```tsx title="index.tsx" {1,8}
-import { getServerSideCommonProps } from "../get-server-side-props.ts"
+```tsx title="index.tsx" {1,4}
+import { getServerSideSharedProps } from "@/get-server-side-props"
 import { Button } from "@workspaces/ui"
+
+export const getServerSideProps = getServerSideSharedProps
 
 export default function Home() {
   return <Button>Click me!</Button>
 }
-
-export const getServerSideProps = getServerSideCommonProps
 ```
+
+#### Update Provider
+
+```tsx title="_app.tsx" {5,8}
+import { UIProvider } from "@workspaces/ui"
+import type { AppProps } from "next/app"
+
+export default function App({ Component, pageProps }: AppProps) {
+  const { cookie } = pageProps
+
+  return (
+    <UIProvider cookie={cookie}>
+      <Component {...pageProps} />
+    </UIProvider>
+  )
+}
+```
+
+::::

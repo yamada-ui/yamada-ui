@@ -1,6 +1,5 @@
 import type { DependencyList } from "react"
-import type { LoadingOptions } from "../../components/loading"
-import type { LoadingMethod } from "../../components/loading/loading"
+import type { Loading } from "../../components/loading"
 import { useCallback, useMemo } from "react"
 import { useLoading } from "../../components/loading"
 import { useProcessing } from "../use-processing"
@@ -12,11 +11,11 @@ export interface UseAsyncCallbackOptions {
    * The method to use for loading.
    * If `false`, the loading will not be shown.
    */
-  loading?: false | LoadingMethod
+  loading?: false | Loading.Method
   /**
    * The options to pass to the loading component.
    */
-  loadingOptions?: LoadingOptions
+  loadingOptions?: Loading.Options
   /**
    * If `false`, the processing will not change.
    *

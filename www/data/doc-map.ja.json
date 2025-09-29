@@ -939,11 +939,6 @@
           "pathname": "/docs/hooks/use-timeout"
         },
         {
-          "title": "useToken",
-          "segment": "use-token",
-          "pathname": "/docs/hooks/use-token"
-        },
-        {
           "title": "useUpdateEffect",
           "segment": "use-update-effect",
           "pathname": "/docs/hooks/use-update-effect"

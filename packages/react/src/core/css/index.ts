@@ -10,3 +10,12 @@ export * from "./merge-css"
 export * from "./styles"
 export * from "./use-css"
 export * from "./use-inject-vars"
+export {
+  getCSSFunction,
+  isCSSFunction,
+  isCSSToken,
+  isCSSVar,
+  tokenToValue,
+  tokenToVar,
+  varToValue,
+} from "./utils"

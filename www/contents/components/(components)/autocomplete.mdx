@@ -5,7 +5,1134 @@ storybook: components-autocomplete--basic
 source: components/autocomplete
 ---
 
+```tsx preview
+<Autocomplete.Root placeholder="Select a digimon">
+  <Autocomplete.Option value="アグモン">アグモン</Autocomplete.Option>
+  <Autocomplete.Option value="ガブモン">ガブモン</Autocomplete.Option>
+  <Autocomplete.Option value="テントモン">テントモン</Autocomplete.Option>
+  <Autocomplete.Option value="ピヨモン">ピヨモン</Autocomplete.Option>
+  <Autocomplete.Option value="ゴマモン">ゴマモン</Autocomplete.Option>
+  <Autocomplete.Option value="パルモン">パルモン</Autocomplete.Option>
+  <Autocomplete.Option value="パタモン">パタモン</Autocomplete.Option>
+  <Autocomplete.Option value="テイルモン">テイルモン</Autocomplete.Option>
+</Autocomplete.Root>
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Autocomplete } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Autocomplete } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Autocomplete } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Autocomplete.Root>
+  <Autocomplete.Group>
+    <Autocomplete.Label />
+    <Autocomplete.Option />
+  </Autocomplete.Group>
+</Autocomplete.Root>
+```
+
+### Grouping Options
+
+```tsx preview
+<Autocomplete.Root placeholder="Select a digimon">
+  <Autocomplete.Group>
+    <Autocomplete.Label>成長期</Autocomplete.Label>
+    <Autocomplete.Option value="アグモン">アグモン</Autocomplete.Option>
+    <Autocomplete.Option value="ガブモン">ガブモン</Autocomplete.Option>
+    <Autocomplete.Option value="テントモン">テントモン</Autocomplete.Option>
+    <Autocomplete.Option value="ピヨモン">ピヨモン</Autocomplete.Option>
+    <Autocomplete.Option value="ゴマモン">ゴマモン</Autocomplete.Option>
+    <Autocomplete.Option value="パルモン">パルモン</Autocomplete.Option>
+    <Autocomplete.Option value="パタモン">パタモン</Autocomplete.Option>
+    <Autocomplete.Option value="テイルモン">テイルモン</Autocomplete.Option>
+  </Autocomplete.Group>
+
+  <Autocomplete.Group label="成熟期">
+    <Autocomplete.Option value="グレイモン">グレイモン</Autocomplete.Option>
+    <Autocomplete.Option value="ガルルモン">ガルルモン</Autocomplete.Option>
+    <Autocomplete.Option value="カブテリモン">カブテリモン</Autocomplete.Option>
+    <Autocomplete.Option value="バードラモン">バードラモン</Autocomplete.Option>
+    <Autocomplete.Option value="イッカクモン">イッカクモン</Autocomplete.Option>
+    <Autocomplete.Option value="トグモン">トグモン</Autocomplete.Option>
+    <Autocomplete.Option value="エンジェモン">エンジェモン</Autocomplete.Option>
+  </Autocomplete.Group>
+
+  <Autocomplete.Group label="完全体">
+    <Autocomplete.Option value="メタルグレイモン">
+      メタルグレイモン
+    </Autocomplete.Option>
+    <Autocomplete.Option value="ワーガルルモン">
+      ワーガルルモン
+    </Autocomplete.Option>
+    <Autocomplete.Option value="アトラーカブテリモン">
+      アトラーカブテリモン
+    </Autocomplete.Option>
+    <Autocomplete.Option value="ガルダモン">ガルダモン</Autocomplete.Option>
+    <Autocomplete.Option value="ズドモン">ズドモン</Autocomplete.Option>
+    <Autocomplete.Option value="リリモン">リリモン</Autocomplete.Option>
+    <Autocomplete.Option value="ホーリーエンジェモン">
+      ホーリーエンジェモン
+    </Autocomplete.Option>
+    <Autocomplete.Option value="エンジェウーモン">
+      エンジェウーモン
+    </Autocomplete.Option>
+  </Autocomplete.Group>
+
+  <Autocomplete.Group label="究極体">
+    <Autocomplete.Option value="ウォーグレイモン">
+      ウォーグレイモン
+    </Autocomplete.Option>
+    <Autocomplete.Option value="メタルガルルモン">
+      メタルガルルモン
+    </Autocomplete.Option>
+    <Autocomplete.Option value="ヘラクルカブテリモン">
+      ヘラクルカブテリモン
+    </Autocomplete.Option>
+    <Autocomplete.Option value="ホウオウモン">ホウオウモン</Autocomplete.Option>
+    <Autocomplete.Option value="ヴァイクモン">ヴァイクモン</Autocomplete.Option>
+    <Autocomplete.Option value="ロゼモン">ロゼモン</Autocomplete.Option>
+    <Autocomplete.Option value="ゴッドドラモン">
+      ゴッドドラモン
+    </Autocomplete.Option>
+    <Autocomplete.Option value="ホーリードラモン">
+      ホーリードラモン
+    </Autocomplete.Option>
+  </Autocomplete.Group>
+</Autocomplete.Root>
+```
+
+### Use items
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "オメガモン", value: "オメガモン" },
+    { label: "ディアボロモン", value: "ディアボロモン" },
+    {
+      items: [
+        { label: "アグモン", value: "アグモン" },
+        { label: "ガブモン", value: "ガブモン" },
+        { label: "テントモン", value: "テントモン" },
+        { label: "ピヨモン", value: "ピヨモン" },
+        { label: "ゴマモン", value: "ゴマモン" },
+        { label: "パルモン", value: "パルモン" },
+        { label: "パタモン", value: "パタモン" },
+        { label: "テイルモン", value: "テイルモン" },
+      ],
+      label: "成長期",
+    },
+    {
+      items: [
+        { label: "グレイモン", value: "グレイモン" },
+        { label: "ガルルモン", value: "ガルルモン" },
+        { label: "カブテリモン", value: "カブテリモン" },
+        { label: "バードラモン", value: "バードラモン" },
+        { label: "イッカクモン", value: "イッカクモン" },
+        { label: "トグモン", value: "トグモン" },
+        { label: "エンジェモン", value: "エンジェモン" },
+      ],
+      label: "成熟期",
+    },
+    {
+      items: [
+        { label: "メタルグレイモン", value: "メタルグレイモン" },
+        { label: "ワーガルルモン", value: "ワーガルルモン" },
+        { label: "アトラーカブテリモン", value: "アトラーカブテリモン" },
+        { label: "ガルダモン", value: "ガルダモン" },
+        { label: "ズドモン", value: "ズドモン" },
+        { label: "リリモン", value: "リリモン" },
+        { label: "ホーリーエンジェモン", value: "ホーリーエンジェモン" },
+        { label: "エンジェウーモン", value: "エンジェウーモン" },
+      ],
+      label: "完全体",
+    },
+    {
+      items: [
+        { label: "ウォーグレイモン", value: "ウォーグレイモン" },
+        { label: "メタルガルルモン", value: "メタルガルルモン" },
+        { label: "ヘラクルカブテリモン", value: "ヘラクルカブテリモン" },
+        { label: "ホウオウモン", value: "ホウオウモン" },
+        { label: "ヴァイクモン", value: "ヴァイクモン" },
+        { label: "ロゼモン", value: "ロゼモン" },
+        { label: "ゴッドドラモン", value: "ゴッドドラモン" },
+        { label: "ホーリードラモン", value: "ホーリードラモン" },
+      ],
+      label: "究極体",
+    },
+  ],
+  [],
+)
+
+return <Autocomplete.Root items={items} placeholder="Select a digimon" />
+```
+
+### Use Query
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    {
+      label: (
+        <>
+          <Text as="span" flex="1">
+            アグモン
+          </Text>
+          <HeartIcon fontSize="lg" />
+        </>
+      ),
+      query: "アグモン",
+      value: "アグモン",
+    },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return <Autocomplete.Root items={items} placeholder="Select a digimon" />
+```
+
+### Change Variants
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <Autocomplete.Root
+          key={variant}
+          variant={variant}
+          placeholder={toTitleCase(variant)}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Sizes
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size) => (
+        <Autocomplete.Root
+          key={size}
+          size={size}
+          placeholder={`Size: ${size}`}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Set Default Value
+
+To set a default value, specify a value for `defaultValue`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <Autocomplete.Root
+    defaultValue="アグモン"
+    placeholder="Select a digimon"
+    items={items}
+  />
+)
+```
+
+### Set Default Input Value
+
+To set a default input value, specify a string for `defaultInputValue`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <Autocomplete.Root
+    defaultInputValue="モン"
+    openOnFocus
+    placeholder="Select a digimon"
+    items={items}
+  />
+)
+```
+
+### Enable Multiple Selection
+
+To enable multiple selection, set `multiple` to `true`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return <Autocomplete.Root multiple placeholder="Select digimon" items={items} />
+```
+
+### Limit Maximum Selections
+
+To limit the maximum number of selections, specify a number for `max`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <Autocomplete.Root
+    items={items}
+    multiple
+    max={3}
+    placeholder="Select digimon"
+  />
+)
+```
+
+### Change Separator
+
+To change the separator, specify a string for `separator`. By default, `,` is set.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <Autocomplete.Root
+    items={items}
+    multiple
+    placeholder="Select digimon"
+    separator=";"
+  />
+)
+```
+
+### Allow Custom Value
+
+To allow input of value not in the list, set `allowCustomValue` to `true`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <Autocomplete.Root
+    allowCustomValue
+    placeholder="Select a digimon"
+    items={items}
+    onChange={(value) => console.log("value:", value)}
+  />
+)
+```
+
+### Change Offset
+
+To change the offset, specify a value for `gutter` or `offset`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <Autocomplete.Root items={items} placeholder="Select a digimon" gutter={16} />
+)
+```
+
+### Change Animation
+
+To change the animation, specify `"block-start"` or `"inline-end"` for `animationScheme`.
+By default, `"scale"` is set.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <VStack>
+    <For
+      each={["scale", "block-end", "block-start", "inline-end", "inline-start"]}
+    >
+      {(animationScheme) => (
+        <Autocomplete.Root
+          key={animationScheme}
+          items={items}
+          animationScheme={animationScheme}
+          placeholder={toTitleCase(animationScheme)}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Placement
+
+To change the placement, specify `"start"` or `"end-end"` for `placement`. By default, `"end"` is set.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <Autocomplete.Root
+    animationScheme="inline-start"
+    items={items}
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Blocking Scroll
+
+To block scrolling, set `blockScrollOnMount` to `true`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    items={items}
+    blockScrollOnMount
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Open Dropdown On Focus
+
+To open the dropdown on focus, set `openOnFocus` to `true`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <Autocomplete.Root openOnFocus placeholder="Select a digimon" items={items} />
+)
+```
+
+### Close Dropdown On Scroll
+
+To close the dropdown on scroll, set `closeOnScroll` to `true`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    closeOnScroll
+    items={items}
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Handle opening the dropdown on change
+
+To open the dropdown on change, set a function to `openOnChange`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+return (
+  <Autocomplete.Root
+    items={items}
+    openOnChange={(ev) => ev.target.value.length > 2}
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Handle closing the dropdown on change
+
+To handle the event of closing the dropdown on change, set a function to `closeOnChange`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    closeOnChange={(ev) => !ev.target.value.length}
+    items={items}
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Disable Open Dropdown On Click
+
+To disable opening the dropdown on click, set `openOnClick` to `false`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    items={items}
+    openOnClick={false}
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Disable Focus After Clear
+
+To disable focus after clear, set `focusOnClear` to `false`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    defaultValue="アグモン"
+    focusOnClear={false}
+    items={items}
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Disable Close On Select
+
+To disable closing the dropdown on select, set `closeOnSelect` to `false`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { closeOnSelect: true, label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    closeOnSelect={false}
+    items={items}
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Disable Close On Outside Click
+
+To disable closing dropdown when clicking outside, set `closeOnBlur` to `false`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    closeOnBlur={false}
+    items={items}
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Disable Close On Esc
+
+To disable closing the dropdown with the Esc key, set `closeOnEsc` to `false`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    closeOnEsc={false}
+    items={items}
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Disable Clear Button
+
+To disable the clear button, set `clearable` to `false`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    clearable={false}
+    items={items}
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Disable Options
+
+To disable specific options, set `disabled` to `true`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { disabled: true, label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return <Autocomplete.Root items={items} placeholder="Select a digimon" />
+```
+
+### Disable
+
+To disable, set `disabled` to `true`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <Autocomplete.Root
+          variant={variant}
+          disabled
+          placeholder={toTitleCase(variant)}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Read-Only
+
+To make read-only, set `readOnly` to `true`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <Autocomplete.Root
+          variant={variant}
+          readOnly
+          placeholder={toTitleCase(variant)}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Invalid
+
+To make invalid, set `invalid` to `true`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["outline", "filled", "flushed"]}>
+      {(variant) => (
+        <Autocomplete.Root
+          variant={variant}
+          invalid
+          placeholder={toTitleCase(variant)}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### Change Border Color
+
+To customize focus and error border colors, set colors for `focusBorderColor` or `errorBorderColor`.
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Autocomplete.Root
+      focusBorderColor="green.500"
+      items={items}
+      placeholder="Custom border color"
+    />
+
+    <Autocomplete.Root
+      errorBorderColor="orange.500"
+      invalid
+      items={items}
+      placeholder="Custom border color"
+    />
+  </VStack>
+)
+```
+
+### Customize Empty Message
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    emptyMessage="You just hit a route that doesn't exist... the sadness.😢"
+    items={items}
+    placeholder="Select a digimon"
+  />
+)
+```
+
+### Customize Icons
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <Autocomplete.Root
+      placeholder="Select a digimon"
+      iconProps={{ color: "orange" }}
+      items={items}
+    />
+
+    <Autocomplete.Root
+      icon={<ChevronsDownIcon />}
+      placeholder="Select a digimon"
+      items={items}
+    />
+  </VStack>
+)
+```
+
+### Customize Option Icons
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    items={items}
+    placeholder="Select a digimon"
+    optionProps={{ icon: <BugIcon /> }}
+  />
+)
+```
+
+### Customize Multiple Selection Display
+
+```tsx preview functional
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    items={items}
+    multiple
+    placeholder="Select a character"
+    render={({ label, onClear }) => (
+      <Tag size="sm" me="{gap}" onClose={onClear}>
+        {label}
+      </Tag>
+    )}
+  />
+)
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState<string>("アグモン")
+const items = useMemo<Autocomplete.Item[]>(
+  () => [
+    { label: "アグモン", value: "アグモン" },
+    { label: "ガブモン", value: "ガブモン" },
+    { label: "テントモン", value: "テントモン" },
+    { label: "ピヨモン", value: "ピヨモン" },
+    { label: "ゴマモン", value: "ゴマモン" },
+    { label: "パルモン", value: "パルモン" },
+    { label: "パタモン", value: "パタモン" },
+    { label: "テイルモン", value: "テイルモン" },
+  ],
+  [],
+)
+
+return (
+  <Autocomplete.Root
+    value={value}
+    onChange={setValue}
+    items={items}
+    placeholder="Select a digimon"
+  />
+)
+```
 
 ## Props
 

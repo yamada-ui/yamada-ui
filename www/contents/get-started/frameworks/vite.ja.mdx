@@ -4,3 +4,238 @@ description: Vite.jsのプロジェクトにYamada UIをインストールして
 ---
 
 ## インストール
+
+::::steps
+
+### アプリケーションを作成する
+
+Viteのアプリケーションを作成します。
+
+:::code-group
+
+```bash [pnpm]
+pnpm create vite my-app --template react-ts
+```
+
+```bash [npm]
+npm create vite my-app -- --template react-ts
+```
+
+```bash [yarn]
+yarn create vite my-app --template react-ts
+```
+
+```bash [bun]
+bun create vite my-app --template react-ts
+```
+
+:::
+
+### セットアップする
+
+コマンドを実行すると、プロジェクトに必要なファイルやフォルダが作成されます。
+
+:::code-group
+
+```bash [pnpm]
+pnpm dlx @yamada-ui/cli init
+```
+
+```bash [npm]
+npx @yamada-ui/cli init
+```
+
+```bash [yarn]
+yarn dlx @yamada-ui/cli init
+```
+
+```bash [bun]
+bunx @yamada-ui/cli init
+```
+
+:::
+
+### パッケージをインストールする
+
+アプリケーションに`@workspaces/ui`をインストールします。
+
+:::code-group
+
+```bash [pnpm]
+pnpm add "@workspaces/ui@workspace:*"
+```
+
+```bash [npm]
+npm install "@workspaces/ui@workspace:*"
+```
+
+```bash [yarn]
+yarn add "@workspaces/ui@workspace:*"
+```
+
+```bash [bun]
+bun add "@workspaces/ui@workspace:*"
+```
+
+:::
+
+### プロバイダーを追加する
+
+インストール後、アプリケーションのルートに`UIProvider`を追加します。
+
+```tsx title="main.tsx" {4,8,10}
+import { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import App from "./App.tsx"
+import { UIProvider } from "@workspaces/ui"
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <UIProvider>
+      <App />
+    </UIProvider>
+  </StrictMode>,
+)
+```
+
+### コンポーネントを使用する
+
+`UIProvider`を追加したら、アプリケーション内でコンポーネントを使用します。
+
+```tsx title="App.tsx" {1,4}
+import { Button } from "@workspaces/ui"
+
+function App() {
+  return <Button>Click me!</Button>
+}
+
+export default App
+```
+
+これで、Yamada UIのセットアップは完了です！
+
+::::
+
+## スクリプト
+
+### ColorModeScript
+
+[カラーモード](/docs/theming/color-mode)を使用する場合は、正常に動作させるために`body`に`ColorModeScript`を追加する必要があります。
+
+理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
+
+```ts title="vite.config.ts" {1,4-18,22}
+import type { Plugin } from "vite"
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+import { COLOR_MODE_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
+
+function injectColorModeScript(): Plugin {
+  return {
+    name: "inject-color-mode-script",
+    transformIndexHtml(html) {
+      const content = getStorageScript(
+        "colorMode",
+        COLOR_MODE_STORAGE_KEY,
+      )({ defaultValue: "light" })
+
+      return html.replace("<body>", `<body><script>${content}</script>`)
+    },
+  }
+}
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), injectColorModeScript()],
+})
+```
+
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultColorMode`を変更した場合は、`ColorModeScript`に`defaultValue`を設定します。
+
+```ts title="vite.config.ts" {5,14}
+import type { Plugin } from "vite"
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+import { COLOR_MODE_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
+import { config } from "@/theme"
+
+function injectColorModeScript(): Plugin {
+  return {
+    name: "inject-color-mode-script",
+    transformIndexHtml(html) {
+      const content = getStorageScript(
+        "colorMode",
+        COLOR_MODE_STORAGE_KEY,
+      )({ defaultValue: config.defaultColorMode })
+
+      return html.replace("<body>", `<body><script>${content}</script>`)
+    },
+  }
+}
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), injectColorModeScript()],
+})
+```
+
+### ThemeSchemeScript
+
+[テーマの切り替え](/docs/theming/switching-themes)を使用する場合は、正常に動作させるために`body`に`ThemeSchemeScript`を追加する必要があります。
+
+理由は、テーマの切り替えが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
+
+```ts title="vite.config.ts" {1,4-18,22}
+import type { Plugin } from "vite"
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+import { getStorageScript, THEME_SCHEME_STORAGE_KEY } from "@workspaces/ui"
+
+function injectThemeSchemeScript(): Plugin {
+  return {
+    name: "inject-theme-scheme-scripts",
+    transformIndexHtml(html) {
+      const content = getStorageScript(
+        "themeScheme",
+        THEME_SCHEME_STORAGE_KEY,
+      )({ defaultValue: "base" })
+
+      return html.replace("<body>", `<body><script>${content}</script>`)
+    },
+  }
+}
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), injectThemeSchemeScript()],
+})
+```
+
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultThemeScheme`を変更した場合は、`ThemeSchemeScript`に`defaultValue`を設定します。
+
+```ts title="vite.config.ts" {5,14}
+import type { Plugin } from "vite"
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+import { getStorageScript, THEME_SCHEME_STORAGE_KEY } from "@workspaces/ui"
+import { config } from "@/theme"
+
+function injectThemeSchemeScript(): Plugin {
+  return {
+    name: "inject-theme-scheme-scripts",
+    transformIndexHtml(html) {
+      const content = getStorageScript(
+        "themeScheme",
+        THEME_SCHEME_STORAGE_KEY,
+      )({ defaultValue: config.defaultThemeScheme })
+
+      return html.replace("<body>", `<body><script>${content}</script>`)
+    },
+  }
+}
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), injectThemeSchemeScript()],
+})
+```

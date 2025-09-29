@@ -17,7 +17,7 @@ export const modalStyle = defineComponentSlotStyle({
       top: "md",
     },
     content: {
-      bg: ["bg", "bg.panel"],
+      bg: "bg.float",
       borderColor: "border.subtle",
       borderWidth: "1px",
       boxShadow: "lg",
@@ -65,7 +65,7 @@ export const modalStyle = defineComponentSlotStyle({
       zIndex: "guldo",
     },
     title: {
-      fontSize: "xl",
+      fontSize: "lg",
       fontWeight: "semibold",
     },
   },

@@ -397,11 +397,6 @@
               "pathname": "/docs/components/pagination"
             },
             {
-              "title": "PagingTable",
-              "segment": "paging-table",
-              "pathname": "/docs/components/paging-table"
-            },
-            {
               "title": "PasswordInput",
               "segment": "password-input",
               "pathname": "/docs/components/password-input"
@@ -491,6 +486,11 @@
               "title": "Slider",
               "segment": "slider",
               "pathname": "/docs/components/slider"
+            },
+            {
+              "title": "Snacks",
+              "segment": "snacks",
+              "pathname": "/docs/components/snacks"
             },
             {
               "title": "Spacer",
@@ -799,11 +799,6 @@
           "pathname": "/docs/hooks/use-breakpoint-effect"
         },
         {
-          "title": "useBreakpointEffect",
-          "segment": "use-update-breakpoint-effect",
-          "pathname": "/docs/hooks/use-update-breakpoint-effect"
-        },
-        {
           "title": "useBreakpointState",
           "segment": "use-breakpoint-state",
           "pathname": "/docs/hooks/use-breakpoint-state"
@@ -847,11 +842,6 @@
           "title": "useEyeDropper",
           "segment": "use-eye-dropper",
           "pathname": "/docs/hooks/use-eye-dropper"
-        },
-        {
-          "title": "useFocusOnPointerDown",
-          "segment": "use-focus-on-pointer-down",
-          "pathname": "/docs/hooks/use-focus-on-pointer-down"
         },
         {
           "title": "useFocusOnShow",
@@ -939,11 +929,6 @@
           "pathname": "/docs/hooks/use-resize-observer"
         },
         {
-          "title": "useSnacks",
-          "segment": "use-snacks",
-          "pathname": "/docs/hooks/use-snacks"
-        },
-        {
           "title": "useTheme",
           "segment": "use-theme",
           "pathname": "/docs/hooks/use-theme"
@@ -954,14 +939,14 @@
           "pathname": "/docs/hooks/use-timeout"
         },
         {
-          "title": "useToken",
-          "segment": "use-token",
-          "pathname": "/docs/hooks/use-token"
-        },
-        {
           "title": "useUpdateEffect",
           "segment": "use-update-effect",
           "pathname": "/docs/hooks/use-update-effect"
+        },
+        {
+          "title": "useUpdateBreakpointEffect",
+          "segment": "use-update-breakpoint-effect",
+          "pathname": "/docs/hooks/use-update-breakpoint-effect"
         },
         {
           "title": "useValue",

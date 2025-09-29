@@ -5,7 +5,231 @@ storybook: components-rating--basic
 source: components/rating
 ---
 
+```tsx preview
+<Rating />
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Rating } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Rating } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Rating } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Rating />
+```
+
+### サイズを変更する
+
+```tsx preview
+<VStack>
+  <For each={["xs", "sm", "md", "lg", "xl"]}>
+    {(size) => <Rating key={size} size={size} defaultValue={3} />}
+  </For>
+</VStack>
+```
+
+### カラースキームを変更する
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme) => (
+      <Rating key={colorScheme} colorScheme={colorScheme} defaultValue={3} />
+    )}
+  </For>
+</VStack>
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に数値を設定します。
+
+```tsx preview
+<Rating defaultValue={5} />
+```
+
+### 個数を変更する
+
+個数を変更する場合は、`count`に数値を設定します。
+
+```tsx preview
+<VStack>
+  <For each={[4, 5, 6]}>{(count) => <Rating key={count} count={count} />}</For>
+</VStack>
+```
+
+### 小数点を設定する
+
+小数点を設定する場合は、`fractions`に数値を設定します。
+
+例えば、`0.25`を設定する場合は、`4`を設定します。
+
+```tsx preview
+<VStack>
+  <For
+    each={[
+      { fractions: 2, defaultValue: 1.5 },
+      { fractions: 3, defaultValue: 2.33 },
+      { fractions: 4, defaultValue: 3.75 },
+    ]}
+  >
+    {({ fractions, defaultValue }) => (
+      <Rating
+        key={fractions}
+        fractions={fractions}
+        defaultValue={defaultValue}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### ハイライトする
+
+ハイライトする場合は、`highlightSelectedOnly`を`true`に設定します。
+
+```tsx preview
+<Rating defaultValue={3} highlightSelectedOnly />
+```
+
+### 色を変更する
+
+色を変更する場合は、`color`に文字列または関数を設定します。
+
+```tsx preview functional
+const getColor = useCallback((value: number) => {
+  switch (value) {
+    case 1:
+      return "red.500"
+
+    case 2:
+      return "orange.500"
+
+    case 3:
+      return "yellow.500"
+
+    case 4:
+      return "green.500"
+
+    case 5:
+      return "blue.500"
+
+    default:
+      return undefined
+  }
+}, [])
+
+return (
+  <VStack>
+    <Rating color="green.500" defaultValue={3} />
+    <Rating color={getColor} defaultValue={3} />
+  </VStack>
+)
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview
+<Rating disabled defaultValue={3} />
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<Rating readOnly defaultValue={3} />
+```
+
+### アイコンをカスタマイズする
+
+アイコンをカスタマイズする場合は、`emptyIcon`と`filledIcon`に`ReactNode`または関数を設定します。
+
+```tsx preview functional
+const getColor = useCallback((value: number) => {
+  switch (value) {
+    case 1:
+      return "red.500"
+
+    case 2:
+      return "orange.500"
+
+    case 3:
+      return "yellow.500"
+
+    case 4:
+      return "green.500"
+
+    case 5:
+      return "blue.500"
+
+    default:
+      return undefined
+  }
+}, [])
+
+const getIcon = useCallback((value: number) => {
+  switch (value) {
+    case 1:
+      return <AngryIcon />
+
+    case 2:
+      return <FrownIcon />
+
+    case 3:
+      return <SmileIcon />
+
+    case 4:
+      return <LaughIcon />
+
+    case 5:
+      return <SmilePlusIcon />
+
+    default:
+      return null
+  }
+}, [])
+
+return (
+  <VStack>
+    <Rating
+      defaultValue={3}
+      emptyIcon={<GhostIcon />}
+      filledIcon={<GhostIcon />}
+    />
+
+    <Rating
+      gap="xs"
+      color={getColor}
+      emptyIcon={getIcon}
+      filledIcon={getIcon}
+    />
+  </VStack>
+)
+```
+
+### 制御する
+
+```tsx preview functional
+const [value, onChange] = useState(3)
+
+return <Rating value={value} onChange={onChange} />
+```
 
 ## Props
 

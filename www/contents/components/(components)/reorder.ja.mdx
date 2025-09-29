@@ -108,7 +108,7 @@ return (
 
 ### 方向を変更する
 
-方向を変更する場合は、`orientation`に`vertical`または`horizontal`を設定します。デフォルトでは、`vertical`が設定されています。
+方向を変更する場合は、`orientation`に`vertical`または`"horizontal"`を設定します。デフォルトでは、`"vertical"`が設定されています。
 
 ```tsx preview functional
 const items = useMemo<Reorder.RootProps["items"]>(
@@ -162,7 +162,7 @@ return (
 
 ### 完了のイベントをハンドルする
 
-ユーザーのドラッグアンドドロップが終了し、項目の順序が完了されたイベントをハンドルしたい場合は、`onCompleteChange`を使用します。`onCompleteChange`は、完了した順序を配列で提供します。
+ユーザーのドラッグアンドドロップが終了し、項目の順序が完了されたイベントをハンドルする場合は、`onCompleteChange`を使用します。`onCompleteChange`は、完了した順序を配列で提供します。
 
 ```tsx preview functional
 const items = useMemo<Reorder.RootProps["items"]>(

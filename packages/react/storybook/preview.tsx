@@ -31,13 +31,15 @@ const preview: Preview = {
       const { colorMode: defaultColorMode, locale } = globals
       const dir = isRtl(globals.locale) ? "rtl" : "ltr"
       const config = extendConfig({ defaultColorMode })
+      const centered = layout === "centered"
 
       return (
         <UIProvider config={config} dir={dir} locale={locale}>
           <VStack
             align="start"
             gap={{ base: "lg", md: "md" }}
-            justify={layout === "centered" ? "center" : "start"}
+            justify={centered ? "center" : "start"}
+            m={centered ? "-md" : "0"}
             minH="100dvh"
             p={{ base: "lg", md: "md" }}
           >

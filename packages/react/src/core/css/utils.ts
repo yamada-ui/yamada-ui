@@ -1,5 +1,6 @@
 import type { Dict } from "../../utils"
 import type { ColorMode, System, ThemeToken, UsageTheme } from "../system"
+import type { StyleConfig } from "./config"
 import type { CSSFunction } from "./css"
 import type { CSSProperties } from "./index.types"
 import { isObject, isString, isUndefined } from "../../utils"
@@ -85,6 +86,39 @@ export function isCSSToken({ cssMap }: System) {
   }
 }
 
+export function isImportant(value: any): boolean {
+  return (
+    isString(value) && (/\s*!important$/.test(value) || /\s*!$/.test(value))
+  )
+}
+
+export function omitImportant(value: any): string {
+  return isString(value) ? value.replace(/(!important|!)$/, "").trim() : value
+}
+
+export function insertImportant(value: any, style?: StyleConfig): any {
+  if (isString(value)) {
+    return value + " !important"
+  } else if (isObject(value)) {
+    if (style?.important) {
+      return Object.fromEntries(
+        Object.entries(value).map(([key, value]) => [
+          key,
+          value + " !important",
+        ]),
+      )
+    } else {
+      if (!style?.properties) return value
+
+      for (const property of style.properties) {
+        value[property] += " !important"
+      }
+    }
+  }
+
+  return value
+}
+
 export function analyzeCSSValue(value: any) {
   let n = parseFloat(value.toString())
   const unit = value.toString().replace(String(n), "")
@@ -99,7 +133,33 @@ export function tokenToVar(system: System) {
     const resolvedToken = `${token}.${value}`
 
     if (isCSSToken(system)(resolvedToken)) {
-      return system.cssMap![resolvedToken]!.ref
+      return system.cssMap[resolvedToken]!.ref
+    } else {
+      return fallbackValue || value
+    }
+  }
+}
+
+export function varToValue(system: System) {
+  return function (variable: string): string {
+    const value = system.cssVars[variable]
+
+    if (isCSSVar(value)) {
+      return varToValue(system)(value.replace(/^var\(/, "").replace(/\)$/, ""))
+    } else {
+      return value
+    }
+  }
+}
+
+export function tokenToValue(system: System) {
+  return function (token: ThemeToken, value: any, fallbackValue?: any) {
+    const resolvedToken = `${token}.${value}`
+
+    if (isCSSToken(system)(resolvedToken)) {
+      const variable = system.cssMap[resolvedToken]!.var
+
+      return varToValue(system)(variable)
     } else {
       return fallbackValue || value
     }

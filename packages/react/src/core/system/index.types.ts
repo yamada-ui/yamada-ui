@@ -25,6 +25,15 @@ export type LayerScheme =
   | "size"
   | "tokens"
   | "variant"
+export type LoadingScheme =
+  | "audio"
+  | "circles"
+  | "dots"
+  | "grid"
+  | "oval"
+  | "puff"
+  | "rings"
+export type LoadingMethod = "background" | "page" | "screen"
 export type KeyframeIdent = "from" | "to"
 export type Orientation = "horizontal" | "vertical"
 export type Placement =
@@ -90,25 +99,41 @@ export interface BreakpointConfig {
 }
 
 export type NoticePlacement = Exclude<Placement, "center" | `center-${string}`>
+export type NoticeCloseStrategy = "button" | "click" | "drag"
 
 export interface NoticeConfig {
   /**
    * If `true`, allows the notice to be removed.
    *
-   * @default false
+   * @default true
    */
   closable?: boolean
   /**
+   * Close strategy for the notice.
+   * Can be a single action or an array of actions.
+   *
+   * @default ["click", "drag"]
+   */
+  closeStrategy?: NoticeCloseStrategy | NoticeCloseStrategy[]
+  /**
    * The number of `ms` the notice will continue to be displayed.
    *
-   * If `null`, the notice will continue to display.
+   * If `null` or `Infinity, the notice will continue to display.
    * Please use in conjunction with `closable`.
    *
    * @default 5000
    */
   duration?: null | number
   /**
+   * If `true`, the notice will expand.
+   *
+   * @default false
+   */
+  expand?: boolean
+  /**
    * The maximum value at which notice will be displayed.
+   *
+   * @default 3
    */
   limit?: number
   /**
@@ -182,6 +207,10 @@ export interface LoadingConfig {
    * @default 0
    */
   loadingCount?: number
+  /**
+   * The default scheme of the loading.
+   */
+  loadingScheme?: LoadingScheme
 }
 
 export interface ThemeConfig {

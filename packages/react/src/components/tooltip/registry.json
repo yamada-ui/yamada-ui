@@ -19,7 +19,7 @@
     },
     {
       "name": "tooltip.style.ts",
-      "content": "import { defineComponentSlotStyle } from \"@yamada-ui/react\"\n\nexport const tooltipStyle = defineComponentSlotStyle({\n  base: {\n    content: {\n      bg: [\"bg\", \"bg.panel\"],\n      borderColor: \"border.muted\",\n      borderWidth: \"1px\",\n      boxShadow: \"sm\",\n      fontSize: \"sm\",\n      maxW: \"xs\",\n      position: \"relative\",\n      px: \"sm\",\n      py: \"xs\",\n      rounded: \"l2\",\n      zIndex: \"ginyu\",\n    },\n  },\n})\n\nexport type TooltipStyle = typeof tooltipStyle\n"
+      "content": "import { defineComponentSlotStyle } from \"@yamada-ui/react\"\n\nexport const tooltipStyle = defineComponentSlotStyle({\n  base: {\n    content: {\n      bg: \"bg.float\",\n      borderColor: \"border.muted\",\n      borderWidth: \"1px\",\n      boxShadow: \"sm\",\n      fontSize: \"sm\",\n      maxW: \"xs\",\n      position: \"relative\",\n      px: \"sm\",\n      py: \"xs\",\n      rounded: \"l2\",\n    },\n    positioner: {\n      zIndex: \"ginyu\",\n    },\n  },\n})\n\nexport type TooltipStyle = typeof tooltipStyle\n"
     },
     {
       "name": "tooltip.tsx",

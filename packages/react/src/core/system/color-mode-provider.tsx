@@ -71,7 +71,7 @@ export const ColorModeProvider: FC<ColorModeProviderProps> = ({
     disableTransitionOnChange = true,
   } = {},
   cookie,
-  storage = "localStorage" as Storage,
+  storage = !!cookie ? "cookie" : "localStorage",
   storageKey = COLOR_MODE_STORAGE_KEY,
 }) => {
   const storageManager = useMemo(

@@ -395,3 +395,93 @@ return (
   </Wrap>
 )
 ```
+
+## Configuration
+
+### Make Notice Always Expand
+
+To make the notice always expand, set the `expand` to `true`.
+
+```tsx
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const config = extendConfig({
+  notice: {
+    expand: true,
+  },
+})
+
+const App = () => {
+  return (
+    <UIProvider config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### Change Placement
+
+To change the placement, set the `placement` to `"start"` or `"end"` etc.
+
+```tsx
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const config = extendConfig({
+  notice: {
+    placement: "end-end",,
+  },
+})
+
+const App = () => {
+  return (
+    <UIProvider config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### Change Limit
+
+To change the limit, set the `limit` to a number.
+
+```tsx
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const config = extendConfig({
+  notice: {
+    limit: 5,
+  },
+})
+
+const App = () => {
+  return (
+    <UIProvider config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```
+
+### Change Close Strategy
+
+To change the close strategy, set the `closeStrategy` to `"click"` or `"drag"` etc.
+
+```tsx
+import { UIProvider, extendConfig } from "@yamada-ui/react"
+
+const config = extendConfig({
+  notice: {
+    closeStrategy: "click",
+  },
+})
+
+const App = () => {
+  return (
+    <UIProvider config={config}>
+      <YourApplication />
+    </UIProvider>
+  )
+}
+```

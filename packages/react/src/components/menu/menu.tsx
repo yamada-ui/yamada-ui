@@ -269,14 +269,14 @@ export const MenuContextTrigger = withContext<"div", MenuContextTriggerProps>(
     return (
       <>
         <MenuAnchor>
-          <styled.div style={{ position: "absolute", ...rect }} />
+          <styled.div style={{ position: "fixed", ...rect }} />
         </MenuAnchor>
 
         <styled.div
           asChild
           {...getContextTriggerProps({
             onContextMenu: handlerAll(onContextMenu, (ev) => {
-              setRect({ left: ev.pageX, top: ev.pageY })
+              setRect({ left: ev.clientX, top: ev.clientY })
             }),
             ...rest,
           })}

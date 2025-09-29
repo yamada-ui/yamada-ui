@@ -82,7 +82,7 @@ bun add "@workspaces/ui@workspace:*"
 ### プロバイダーを追加する
 
 インストール後、アプリケーションのルートに`UIProvider`を追加します。
-ハイドレーションエラーを抑制するために、`html`タグと`body`タグに`suppressHydrationWarning`を追加します。
+ハイドレーションエラーを抑制するために、`html`と`body`に`suppressHydrationWarning`を`true`に設定します。
 
 ```tsx title="layout.tsx" {1,9-11}
 import { UIProvider } from "@workspaces/ui"
@@ -118,13 +118,13 @@ export default function Home() {
 
 ::::
 
-## Scriptを追加する
+## スクリプトを追加する
 
 ### ColorModeScript
 
-カラーモードによる画面のフラッシュを抑制したい場合は、`body`内に`ColorModeScript`を追加します。
+[カラーモード](/docs/theming/color-mode)を使用する場合は、正常に動作させるために`body`に`ColorModeScript`を追加する必要があります。
 
-カラーモードは`localStorage`や`cookies`を用いて実装されており、`ColorModeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
+理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
 
 ```tsx title="layout.tsx" {1,11}
 import { UIProvider, ColorModeScript } from "@workspaces/ui"
@@ -146,11 +146,34 @@ export default function RootLayout({
 }
 ```
 
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultColorMode`を変更した場合は、`ColorModeScript`に`defaultValue`を設定します。
+
+```tsx title="layout.tsx" {2,12}
+import { UIProvider, ColorModeScript } from "@workspaces/ui"
+import { config } from "@workspaces/theme"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <ColorModeScript defaultValue={config.defaultColorMode} />
+
+        <UIProvider>{children}</UIProvider>
+      </body>
+    </html>
+  )
+}
+```
+
 ### ThemeSchemeScript
 
-テーマスキームによる画面のフラッシュを抑制したい場合は、`body`内に`ThemeSchemeScript`を追加します。
+[テーマの切り替え](/docs/theming/switching-themes)を使用する場合は、正常に動作させるために`body`に`ThemeSchemeScript`を追加する必要があります。
 
-テーマスキームは`localStorage`や`cookies`を用いて実装されており、`ThemeSchemeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
+理由は、テーマの切り替えが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
 
 ```tsx title="layout.tsx" {1,11}
 import { UIProvider, ThemeSchemeScript } from "@workspaces/ui"
@@ -172,15 +195,38 @@ export default function RootLayout({
 }
 ```
 
-### typeを指定する
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultThemeScheme`を変更した場合は、`ThemeSchemeScript`に`defaultValue`を設定します。
 
-`type`に`"cookie"`を指定することで、フラッシュをさらに抑制できます。
+```tsx title="layout.tsx" {2,12}
+import { UIProvider, ThemeSchemeScript } from "@workspaces/ui"
+import { config } from "@workspaces/theme"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <ThemeSchemeScript defaultValue={config.defaultThemeScheme} />
+
+        <UIProvider>{children}</UIProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+### クッキーを使用する
+
+クッキーを使用することで、サーバーサイドレンダリングでも正常に動作させることができます。
 
 :::warning
-`cookies()`を使用すると動的レンダリングが選択されます。詳細は[公式のドキュメント](https://nextjs.org/docs/app/api-reference/functions/cookies)をご覧ください。
+[cookies](https://nextjs.org/docs/app/api-reference/functions/cookies)を使用した場合は、[ダイナミックレンダリング](https://nextjs.org/docs/app/getting-started/partial-prerendering#dynamic-rendering)が採用されます。
 :::
 
-```tsx title="layout.tsx" {1,2,9,14-17}
+```tsx title="layout.tsx" {2,9,14-17}
 import { UIProvider, ColorModeScript, ThemeSchemeScript } from "@workspaces/ui"
 import { cookies } from "next/headers"
 
@@ -197,9 +243,7 @@ export default function RootLayout({
         <ColorModeScript type="cookie" />
         <ThemeSchemeScript type="cookie" />
 
-        <UIProvider cookie={cookieStore.toString()} storage="cookie">
-          {children}
-        </UIProvider>
+        <UIProvider cookie={cookieStore.toString()}>{children}</UIProvider>
       </body>
     </html>
   )

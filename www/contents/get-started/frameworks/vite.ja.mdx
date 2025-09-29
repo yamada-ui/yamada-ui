@@ -116,13 +116,13 @@ export default App
 
 ::::
 
-## Scriptを追加する
+## スクリプト
 
 ### ColorModeScript
 
-カラーモードによる画面のフラッシュを抑制したい場合は、`body`内に`ColorModeScript`を追加します。
+[カラーモード](/docs/theming/color-mode)を使用する場合は、正常に動作させるために`body`に`ColorModeScript`を追加する必要があります。
 
-カラーモードは`localStorage`や`cookies`を用いて実装されており、`ColorModeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
+理由は、カラーモードが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
 
 ```ts title="vite.config.ts" {1,4-18,22}
 import type { Plugin } from "vite"
@@ -150,11 +150,40 @@ export default defineConfig({
 })
 ```
 
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultColorMode`を変更した場合は、`ColorModeScript`に`defaultValue`を設定します。
+
+```ts title="vite.config.ts" {5,14}
+import type { Plugin } from "vite"
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+import { COLOR_MODE_STORAGE_KEY, getStorageScript } from "@workspaces/ui"
+import { config } from "@/theme"
+
+function injectColorModeScript(): Plugin {
+  return {
+    name: "inject-color-mode-script",
+    transformIndexHtml(html) {
+      const content = getStorageScript(
+        "colorMode",
+        COLOR_MODE_STORAGE_KEY,
+      )({ defaultValue: config.defaultColorMode })
+
+      return html.replace("<body>", `<body><script>${content}</script>`)
+    },
+  }
+}
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), injectColorModeScript()],
+})
+```
+
 ### ThemeSchemeScript
 
-テーマスキームによる画面のフラッシュを抑制したい場合は、`body`内に`ThemeSchemeScript`を追加します。
+[テーマの切り替え](/docs/theming/switching-themes)を使用する場合は、正常に動作させるために`body`に`ThemeSchemeScript`を追加する必要があります。
 
-テーマスキームは`localStorage`や`cookies`を用いて実装されており、`ThemeSchemeScript`を追加することでページの読み込み時に同期を正しく機能させることができます。
+理由は、テーマの切り替えが`localStorage`や`cookies`を用いて実装されており、ページの読み込み時に同期を正しく機能させるためです。
 
 ```ts title="vite.config.ts" {1,4-18,22}
 import type { Plugin } from "vite"
@@ -170,6 +199,35 @@ function injectThemeSchemeScript(): Plugin {
         "themeScheme",
         THEME_SCHEME_STORAGE_KEY,
       )({ defaultValue: "base" })
+
+      return html.replace("<body>", `<body><script>${content}</script>`)
+    },
+  }
+}
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), injectThemeSchemeScript()],
+})
+```
+
+もし、[コンフィグ](/docs/theming/configuration/overview)の`defaultThemeScheme`を変更した場合は、`ThemeSchemeScript`に`defaultValue`を設定します。
+
+```ts title="vite.config.ts" {5,14}
+import type { Plugin } from "vite"
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+import { getStorageScript, THEME_SCHEME_STORAGE_KEY } from "@workspaces/ui"
+import { config } from "@/theme"
+
+function injectThemeSchemeScript(): Plugin {
+  return {
+    name: "inject-theme-scheme-scripts",
+    transformIndexHtml(html) {
+      const content = getStorageScript(
+        "themeScheme",
+        THEME_SCHEME_STORAGE_KEY,
+      )({ defaultValue: config.defaultThemeScheme })
 
       return html.replace("<body>", `<body><script>${content}</script>`)
     },

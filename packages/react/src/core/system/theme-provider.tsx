@@ -89,7 +89,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   children,
   config,
   cookie,
-  storage = "localStorage" as Storage,
+  storage = !!cookie ? "cookie" : "localStorage",
   storageKey = THEME_SCHEME_STORAGE_KEY,
   theme = {},
 }) => {

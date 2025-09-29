@@ -133,7 +133,33 @@ export function tokenToVar(system: System) {
     const resolvedToken = `${token}.${value}`
 
     if (isCSSToken(system)(resolvedToken)) {
-      return system.cssMap![resolvedToken]!.ref
+      return system.cssMap[resolvedToken]!.ref
+    } else {
+      return fallbackValue || value
+    }
+  }
+}
+
+export function varToValue(system: System) {
+  return function (variable: string): string {
+    const value = system.cssVars[variable]
+
+    if (isCSSVar(value)) {
+      return varToValue(system)(value.replace(/^var\(/, "").replace(/\)$/, ""))
+    } else {
+      return value
+    }
+  }
+}
+
+export function tokenToValue(system: System) {
+  return function (token: ThemeToken, value: any, fallbackValue?: any) {
+    const resolvedToken = `${token}.${value}`
+
+    if (isCSSToken(system)(resolvedToken)) {
+      const variable = system.cssMap[resolvedToken]!.var
+
+      return varToValue(system)(variable)
     } else {
       return fallbackValue || value
     }

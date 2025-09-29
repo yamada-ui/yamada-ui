@@ -4,3 +4,248 @@ description: A guide for installing and using Yamada UI with Next.js app directo
 ---
 
 ## Installation
+
+::::steps
+
+### Create application
+
+Create Next.js application.
+
+:::code-group
+
+```bash [pnpm]
+pnpm create next-app my-app --typescript
+```
+
+```bash [npm]
+npx create-next-app my-app --typescript
+```
+
+```bash [yarn]
+yarn create next-app my-app --typescript
+```
+
+```bash [bun]
+bun create next-app my-app --typescript
+```
+
+:::
+
+### Setup
+
+Running the command will create the necessary files and folders in your project.
+
+:::code-group
+
+```bash [pnpm]
+pnpm dlx @yamada-ui/cli init
+```
+
+```bash [npm]
+npx @yamada-ui/cli init
+```
+
+```bash [yarn]
+yarn dlx @yamada-ui/cli init
+```
+
+```bash [bun]
+bunx @yamada-ui/cli init
+```
+
+:::
+
+### Install the package
+
+Install `@workspaces/ui` to your application.
+
+:::code-group
+
+```bash [pnpm]
+pnpm add "@workspaces/ui@workspace:*"
+```
+
+```bash [npm]
+npm install "@workspaces/ui@workspace:*"
+```
+
+```bash [yarn]
+yarn add "@workspaces/ui@workspace:*"
+```
+
+```bash [bun]
+bun add "@workspaces/ui@workspace:*"
+```
+
+:::
+
+### Add provider
+
+After installing, add `UIProvider` to the root of your application.
+To suppress hydration errors, add `suppressHydrationWarning` to the `html` and `body` tags.
+
+```tsx title="layout.tsx" {1,9-11}
+import { UIProvider } from "@yamada-ui/react"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <UIProvider>{children}</UIProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+### Use components
+
+After adding `UIProvider`, you can use the components in your application.
+
+```tsx title="page.tsx" {1,4}
+import { Button } from "@workspaces/ui"
+
+export default function Home() {
+  return <Button>Click me!</Button>
+}
+```
+
+That's it! You've successfully set up Yamada UI.
+
+::::
+
+## Scripts
+
+### ColorModeScript
+
+To use [Color Mode](/docs/theming/color-mode), you need to add `ColorModeScript` to the `body` to ensure it works correctly.
+
+This is because color mode is implemented using `localStorage` or `cookies`, and adding the script ensures proper synchronization when the page loads.
+
+```tsx title="layout.tsx" {1,11}
+import { UIProvider, ColorModeScript } from "@workspaces/ui"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <ColorModeScript />
+
+        <UIProvider>{children}</UIProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+If you change the `defaultColorMode` in your [config](/docs/theming/configuration/overview), set the `defaultValue` prop on `ColorModeScript`.
+
+```tsx title="layout.tsx" {2,12}
+import { UIProvider, ColorModeScript } from "@workspaces/ui"
+import { config } from "@workspaces/theme"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <ColorModeScript defaultValue={config.defaultColorMode} />
+
+        <UIProvider>{children}</UIProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+### ThemeSchemeScript
+
+To use [theme switching](/docs/theming/switching-themes), you need to add `ThemeSchemeScript` to the `body` to ensure it works correctly.
+
+This is because theme switching is implemented using `localStorage` or `cookies`, and adding the script ensures proper synchronization when the page loads.
+
+```tsx title="layout.tsx" {1,11}
+import { UIProvider, ThemeSchemeScript } from "@workspaces/ui"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <ThemeSchemeScript />
+
+        <UIProvider>{children}</UIProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+If you change the `defaultThemeScheme` in your [config](/docs/theming/configuration/overview), set the `defaultValue` prop on `ThemeSchemeScript`.
+
+```tsx title="layout.tsx" {2,12}
+import { UIProvider, ThemeSchemeScript } from "@workspaces/ui"
+import { config } from "@workspaces/theme"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <ThemeSchemeScript defaultValue={config.defaultThemeScheme} />
+
+        <UIProvider>{children}</UIProvider>
+      </body>
+    </html>
+  )
+}
+```
+
+### Use cookies
+
+Using cookies allows you to ensure proper operation even on server-side rendering.
+
+:::warning
+Using [cookies](https://nextjs.org/docs/app/api-reference/functions/cookies) will opt into [dynamic rendering](https://nextjs.org/docs/app/getting-started/partial-prerendering#dynamic-rendering).
+:::
+
+```tsx title="layout.tsx" {2,9,14-17}
+import { UIProvider, ColorModeScript, ThemeSchemeScript } from "@workspaces/ui"
+import { cookies } from "next/headers"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const cookieStore = await cookies()
+
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <ColorModeScript type="cookie" />
+        <ThemeSchemeScript type="cookie" />
+
+        <UIProvider cookie={cookieStore.toString()}>{children}</UIProvider>
+      </body>
+    </html>
+  )
+}
+```

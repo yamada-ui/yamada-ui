@@ -1,6 +1,6 @@
 ---
 title: NativeSelect
-description: "`NativeSelect`は、ユーザーがオプションのリストから1つを選択するために使用されるコンポーネントです。ブラウザ（ユーザーエージェント）によって提供されるネイティブなドロップダウンリストを表示します。"
+description: "`NativeSelect`は、ユーザーがオプションのリストから1つの値を選択するために使用されるコンポーネントです。ブラウザ（ユーザーエージェント）によって提供されるネイティブなドロップダウンリストを表示します。"
 storybook: components-nativeselect--basic
 source: components/native-select
 style: components/native-select/native-select.style.ts
@@ -276,37 +276,6 @@ return (
 )
 ```
 
-```tsx preview functional
-const items = useMemo<NativeSelect.Item[]>(
-  () => [
-    { label: "日比野カフカ", value: "日比野カフカ" },
-    { disabled: true, label: "市川レノ", value: "市川レノ" },
-    { label: "亜白ミナ", value: "亜白ミナ" },
-    { label: "四ノ宮キコル", value: "四ノ宮キコル" },
-  ],
-  [],
-)
-
-return (
-  <VStack>
-    <NativeSelect.Root placeholder="Select a character">
-      <NativeSelect.Option value="日比野カフカ">
-        日比野カフカ
-      </NativeSelect.Option>
-      <NativeSelect.Option disabled value="市川レノ">
-        市川レノ
-      </NativeSelect.Option>
-      <NativeSelect.Option value="亜白ミナ">亜白ミナ</NativeSelect.Option>
-      <NativeSelect.Option value="四ノ宮キコル">
-        四ノ宮キコル
-      </NativeSelect.Option>
-    </NativeSelect.Root>
-
-    <NativeSelect.Root items={items} placeholder="Select a character" />
-  </VStack>
-)
-```
-
 ### 読み取り専用にする
 
 読み取り専用にする場合は、`readOnly`を`true`に設定します。
@@ -371,9 +340,9 @@ return (
 )
 ```
 
-### ボーダーのカラーを変更する
+### ボーダーの色を変更する
 
-ボーダーのカラーを変更する場合は、`focusBorderColor`または`errorBorderColor`にカラーを設定します。
+ボーダーの色を変更する場合は、`focusBorderColor`または`errorBorderColor`に値を設定します。
 
 ```tsx preview functional
 const items = useMemo<NativeSelect.Item[]>(

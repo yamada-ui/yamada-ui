@@ -1,11 +1,621 @@
 ---
 title: CheckboxCard
-description: "`CheckboxCard`は、ユーザーが複数の選択肢の中から複数の値を選択するための使用されるコンポーネントです。"
+description: "`CheckboxCard`は、ユーザーが複数の選択肢の中から複数の値を選択するために使用されるコンポーネントです。"
 storybook: components-checkboxcard--basic
 source: components/checkbox-card
 ---
 
+```tsx preview
+<CheckboxCardGroup.Root>
+  <CheckboxCardGroup.Item.Root value="1">
+    <CheckboxCardGroup.Item.Label>ドラえもん</CheckboxCardGroup.Item.Label>
+    <CheckboxCardGroup.Item.Description>
+      22世紀の未来から来たネコ型ロボット。
+    </CheckboxCardGroup.Item.Description>
+  </CheckboxCardGroup.Item.Root>
+  <CheckboxCardGroup.Item.Root value="2">
+    <CheckboxCardGroup.Item.Label>ドラミ</CheckboxCardGroup.Item.Label>
+    <CheckboxCardGroup.Item.Description>
+      ドラえもんの妹のロボット。
+    </CheckboxCardGroup.Item.Description>
+  </CheckboxCardGroup.Item.Root>
+  <CheckboxCardGroup.Item.Root value="3">
+    <CheckboxCardGroup.Item.Label>ガチャ子</CheckboxCardGroup.Item.Label>
+    <CheckboxCardGroup.Item.Description>
+      アヒル型のロボット。
+    </CheckboxCardGroup.Item.Description>
+  </CheckboxCardGroup.Item.Root>
+</CheckboxCardGroup.Root>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { CheckboxCard, CheckboxCardGroup } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { CheckboxCard, CheckboxCardGroup } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { CheckboxCard, CheckboxCardGroup } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<CheckboxCardGroup.Root>
+  <CheckboxCardGroup.Item.Root>
+    <CheckboxCardGroup.Item.Label />
+    <CheckboxCardGroup.Item.Description />
+    <CheckboxCardGroup.Item.Addon />
+  </CheckboxCardGroup.Item.Root>
+</CheckboxCardGroup.Root>
+```
+
+### itemsを使う
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root items={items} />
+```
+
+### バリアントを変更する
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "Unchecked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <CheckboxCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### サイズを変更する
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "Unchecked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["sm", "md", "lg"]}>
+      {(size) => (
+        <CheckboxCardGroup.Root
+          key={size}
+          size={size}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### カラースキームを変更する
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    { label: "Checked", value: "1" },
+    { label: "Unchecked", value: "2" },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["success", "warning"]}>
+      {(colorScheme) => (
+        <CheckboxCardGroup.Root
+          key={colorScheme}
+          colorScheme={colorScheme}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### デフォルトの値を設定する
+
+デフォルトの値を設定する場合は、`defaultValue`に値を設定します。
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root defaultValue={["1", "2"]} items={items} />
+```
+
+### 選択数を制限する
+
+選択数を制限する場合は、`max`に数値を設定します。
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root items={items} max={2} />
+```
+
+### 方向を変更する
+
+方向を変更する場合は、`orientation`に`"horizontal"`または`"vertical"`を設定します。デフォルトでは、`"horizontal"`が設定されています。
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root items={items} orientation="vertical" />
+```
+
+### 形を変更する
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["rounded", "square"]}>
+      {(shape) => (
+        <CheckboxCardGroup.Root
+          key={shape}
+          shape={shape}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 配置を変更する
+
+配置を変更する場合は、`justify`に`"start"`または`"end"`などを設定します。デフォルトでは、`"start"`が設定されています。
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["start", "end"]}>
+      {(justify) => (
+        <CheckboxCardGroup.Root
+          key={justify}
+          justify={justify}
+          defaultValue={["1"]}
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### アドオンを追加する
+
+アドオンを追加する場合は、`addon`に`ReactNode`を設定します。
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      addon: "藤子・F・不二雄",
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      addon: "藤子・F・不二雄",
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      addon: "藤子・F・不二雄",
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root items={items} orientation="vertical" />
+```
+
+### インジケーターを非表示にする
+
+インジケーターを非表示にする場合は、`withIndicator`を`false`に設定します。
+
+```tsx preview
+<CheckboxCardGroup.Root withIndicator={false}>
+  <CheckboxCardGroup.Item.Root flexDirection="row" gap="sm" value="1" w="auto">
+    <RabbitIcon fontSize="2xl" />
+    <Text as="span">ウサギ</Text>
+  </CheckboxCardGroup.Item.Root>
+  <CheckboxCardGroup.Item.Root flexDirection="row" gap="sm" value="2" w="auto">
+    <SnailIcon fontSize="2xl" />
+    <Text as="span">カタツムリ</Text>
+  </CheckboxCardGroup.Item.Root>
+  <CheckboxCardGroup.Item.Root flexDirection="row" gap="sm" value="3" w="auto">
+    <SquirrelIcon fontSize="2xl" />
+    <Text as="span">リス</Text>
+  </CheckboxCardGroup.Item.Root>
+</CheckboxCardGroup.Root>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`に設定します。
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <CheckboxCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue={["1"]}
+          disabled
+          items={items}
+        />
+      )}
+    </For>
+
+    <Field.Root disabled label="お気に入りのキャラクターは誰ですか？">
+      <CheckboxCardGroup.Root defaultValue={["1"]} items={items} />
+    </Field.Root>
+  </VStack>
+)
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <CheckboxCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue={["1"]}
+          readOnly
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### 無効な入力にする
+
+無効な入力にする場合は、`invalid`を`true`に設定します。
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <For each={["subtle", "surface", "outline"]}>
+      {(variant) => (
+        <CheckboxCardGroup.Root
+          key={variant}
+          variant={variant}
+          defaultValue={["1"]}
+          invalid
+          items={items}
+        />
+      )}
+    </For>
+  </VStack>
+)
+```
+
+### ボーダーの色を変更する
+
+ボーダーの色を変更する場合は、`focusBorderColor`または`errorBorderColor`に値を設定します。
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <VStack>
+    <CheckboxCardGroup.Root focusBorderColor="green.500" items={items} />
+    <CheckboxCardGroup.Root
+      defaultValue={["1"]}
+      errorBorderColor="orange.500"
+      invalid
+      items={items}
+    />
+  </VStack>
+)
+```
+
+### アイコンをカスタマイズする
+
+カスタムアイコンを使う場合は、`checkedIcon`に`ReactNode`を設定します。
+
+```tsx preview functional
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return <CheckboxCardGroup.Root checkedIcon={<PlusIcon />} items={items} />
+```
+
+### 制御する
+
+```tsx preview functional client
+const [value, setValue] = useState(["1"])
+const items = useMemo<CheckboxCardGroup.RootProps["items"]>(
+  () => [
+    {
+      description: "22世紀の未来から来たネコ型ロボット。",
+      label: "ドラえもん",
+      value: "1",
+    },
+    {
+      description: "ドラえもんの妹のロボット。",
+      label: "ドラミ",
+      value: "2",
+    },
+    {
+      description: "アヒル型のロボット。",
+      label: "ガチャ子",
+      value: "3",
+    },
+  ],
+  [],
+)
+
+return (
+  <CheckboxCardGroup.Root items={items} value={value} onChange={setValue} />
+)
+```
 
 ## Props
 

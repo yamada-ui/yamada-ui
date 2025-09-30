@@ -15,7 +15,7 @@ export const Basic: Story = () => {
   return (
     <Wrap gap="md">
       <Loading.Oval color="red.500" fontSize="6xl" />
-      <Loading.Rings color="orange.500" fontSize="6xl" />
+      <Loading.Grid color="orange.500" fontSize="6xl" />
       <Loading.Audio color="yellow.500" fontSize="6xl" />
       <Loading.Dots color="green.500" fontSize="6xl" />
       <Loading.Puff color="teal.500" fontSize="6xl" />

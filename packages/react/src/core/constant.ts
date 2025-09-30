@@ -1,5 +1,8 @@
 import type { LayersConfig } from "./system"
 
+export const COLOR_MODE_STORAGE_KEY = "color-mode"
+export const THEME_SCHEME_STORAGE_KEY = "theme-scheme"
+
 export const DEFAULT_VAR_PREFIX = "ui"
 export const DEFAULT_LOCALE = "en-US"
 export const DEFAULT_DIRECTION = "ltr"

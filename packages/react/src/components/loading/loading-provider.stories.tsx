@@ -15,18 +15,6 @@ const wait = async (ms: number) =>
     setTimeout(resolve, ms)
   })
 
-export const DefaultLoading = () => {
-  const config = extendConfig({
-    loading: { screen: { loadingCount: 1 } },
-  })
-
-  return (
-    <UIProvider config={config}>
-      <AsyncApp />
-    </UIProvider>
-  )
-}
-
 const AsyncApp: FC = () => {
   const { background, page, screen } = useLoading()
 
@@ -48,5 +36,33 @@ const AsyncApp: FC = () => {
         Start background loading
       </Button>
     </Wrap>
+  )
+}
+
+export const LoadingCount = () => {
+  const config = extendConfig({
+    loading: { screen: { loadingCount: 1 } },
+  })
+
+  return (
+    <UIProvider config={config}>
+      <AsyncApp />
+    </UIProvider>
+  )
+}
+
+export const LoadingScheme = () => {
+  const config = extendConfig({
+    loading: {
+      background: { loadingScheme: "puff" },
+      page: { loadingScheme: "dots" },
+      screen: { loadingScheme: "grid" },
+    },
+  })
+
+  return (
+    <UIProvider config={config}>
+      <AsyncApp />
+    </UIProvider>
   )
 }

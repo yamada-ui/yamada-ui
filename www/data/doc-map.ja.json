@@ -47,14 +47,14 @@
               "pathname": "/docs/get-started/frameworks/next-pages"
             },
             {
-              "title": "Remix",
-              "segment": "remix",
-              "pathname": "/docs/get-started/frameworks/remix"
-            },
-            {
               "title": "Vite",
               "segment": "vite",
               "pathname": "/docs/get-started/frameworks/vite"
+            },
+            {
+              "title": "React Router",
+              "segment": "react-router",
+              "pathname": "/docs/get-started/frameworks/react-router"
             }
           ]
         }
@@ -937,11 +937,6 @@
           "title": "useTimeout",
           "segment": "use-timeout",
           "pathname": "/docs/hooks/use-timeout"
-        },
-        {
-          "title": "useToken",
-          "segment": "use-token",
-          "pathname": "/docs/hooks/use-token"
         },
         {
           "title": "useUpdateEffect",

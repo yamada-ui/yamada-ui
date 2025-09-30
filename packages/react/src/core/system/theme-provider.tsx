@@ -19,10 +19,10 @@ import {
 } from "@emotion/react"
 import { use, useCallback, useEffect, useMemo, useState } from "react"
 import { isEmptyObject, isObject, isUndefined, merge } from "../../utils"
+import { THEME_SCHEME_STORAGE_KEY } from "../constant"
 import { css } from "../css"
 import { useEnvironment } from "./environment-provider"
 import { createStorageManager } from "./storage-manager"
-import { THEME_SCHEME_STORAGE_KEY } from "./storage-script"
 import { useSystem } from "./system-provider"
 
 export const getPreventTransition = (environment: Environment) => {
@@ -89,7 +89,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({
   children,
   config,
   cookie,
-  storage = "localStorage" as Storage,
+  storage = !!cookie ? "cookie" : "localStorage",
   storageKey = THEME_SCHEME_STORAGE_KEY,
   theme = {},
 }) => {

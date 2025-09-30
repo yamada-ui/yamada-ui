@@ -8,3 +8,208 @@ description: Yamada UIは、CSS値関数をより便利にした様々な関数�
 :::
 
 ## 計算・比較
+
+Yamada UIは、CSSの計算・比較関数をより便利にした関数を提供しています。
+
+### calc
+
+CSSの[calc](https://developer.mozilla.org/ja/docs/Web/CSS/calc)を使用して、[テーマ](/docs/theming)のトークンを参照・計算することができます。
+
+```tsx preview
+<Center w="calc(lg / 2)" bg="bg.contrast" color="fg.contrast" p="md">
+  Calc
+</Center>
+```
+
+```tsx preview
+<Center w="calc(xs + {spaces.2})" bg="bg.contrast" color="fg.contrast" p="md">
+  Use interpolated token
+</Center>
+```
+
+:::warning
+[テーマ](/docs/theming)の[スペース](/docs/theming/tokens/spaces)のトークンのように数値がトークン名の場合は、`{}`([インターポレーション](/docs/styling/interpolation))を使用して参照します。
+:::
+
+### min
+
+CSSの[min](https://developer.mozilla.org/ja/docs/Web/CSS/min)を使用して、渡された引数の中から最小の値を設定します。
+
+引数が1つの場合は、2つ目に`"100%"`が設定されます。
+
+```tsx preview
+<VStack>
+  <Center w="min(100%, lg)" bg="bg.contrast" color="fg.contrast" p="md">
+    Min
+  </Center>
+
+  <Center w="min(md)" bg="bg.contrast" color="fg.contrast" p="md">
+    Omitted Min
+  </Center>
+</VStack>
+```
+
+### max
+
+CSSの[max](https://developer.mozilla.org/ja/docs/Web/CSS/max)を使用して、渡された引数の中から最大の値を設定します。
+
+引数が1つの場合は、2つ目に`"100%"`が設定されます。
+
+```tsx preview
+<VStack>
+  <Center w="max(100%, 2xs)" bg="bg.contrast" color="fg.contrast" p="md">
+    Max
+  </Center>
+
+  <Center w="max(xs)" bg="bg.contrast" color="fg.contrast" p="md">
+    Omitted Max
+  </Center>
+</VStack>
+```
+
+### clamp
+
+CSSの[clamp](https://developer.mozilla.org/ja/docs/Web/CSS/clamp)を使用して、値を上限と下限の間に制御します。
+
+引数が2つの場合は、推奨値は`"100%"`が設定されます。
+
+```tsx preview
+<VStack>
+  <Center w="clamp(sm, 100%, xl)" bg="bg.contrast" color="fg.contrast" p="md">
+    Clamp
+  </Center>
+
+  <Center w="clamp(sm, lg)" bg="bg.contrast" color="fg.contrast" p="md">
+    Omitted Clamp
+  </Center>
+</VStack>
+```
+
+## カラー
+
+Yamada UIは、簡単に色と色を混ぜたり、色を明るく、暗くする関数を提供しています。
+
+### mix
+
+CSSの[color-mix](https://developer.mozilla.org/ja/docs/Web/CSS/color_value/color-mix)を使用して、色同士を混合することができます。
+
+引数は、2つまたは3つを指定することができます。[メソッド](https://developer.mozilla.org/ja/docs/Web/CSS/color-interpolation-method)は省略することができ、デフォルトは`in srgb`です。
+
+```tsx preview
+<Center bg="mix(red.500, blue.500)" p="md" color="white">
+  "in srgb" + "red.500" + "blue.500"
+</Center>
+```
+
+パーセンテージを指定することで、割合を変更できます。
+
+```tsx preview
+<Center bg="mix(in lab, orange.500 80%, purple.500 20%)" p="md" color="white">
+  "in lab" + "orange.500 80%" + "purple.500 20%"
+</Center>
+```
+
+:::warning
+パーセンテージは、両方合わせて`100%`になるようにします。
+:::
+
+### tint
+
+[mix](#mix)を使用して、指定した色に`#FFFFFF`を混ぜて、色を明るくすることができます。
+
+```tsx preview
+<Center preview bg="tint(purple.500, 50%)" p="md" color="white">
+  Tint color
+</Center>
+```
+
+### shade
+
+[mix](#mix)を使用して、指定した色に`#000000`を混ぜて、色を暗くすることができます。
+
+```tsx preview
+<Center bg="shade(yellow.500, 50%)" p="md" color="white">
+  Shade color
+</Center>
+```
+
+### transparentize
+
+[mix](#mix)を使用して、指定した色に`transparent`を混ぜて、色を透明にすることができます。`"#EC4040/50"`のようにショートハンドも使用できます。
+
+```tsx preview
+<Center bg="transparentize(red.500, 50%)" p="md" color="white">
+  Transparentize color
+</Center>
+```
+
+### tone
+
+[mix](#mix)を使用して、指定した色とトーンに基づいて、色を作成することができます。
+
+```tsx preview
+<VStack>
+  {TONES.map((tone) => (
+    <Center key={tone} bg={`tone(purple.500, ${tone})`} p="md" color="white">
+      <Text
+        color={`tone(purple.500, ${tone})`}
+        as="span"
+        filter="invert(100%) grayscale(100%) contrast(100)"
+      >
+        Tone {tone}
+      </Text>
+    </Center>
+  ))}
+</VStack>
+```
+
+## グラデーション
+
+Yamada UIは、簡単にグラデーションを作成する関数を提供しています。グラデーションを追加するには、`bgGradient`に関数と値を設定します。
+
+- `linear(<direction>, <from>, <to>)`
+- `radial(<from>, <to>)`
+
+`repeating-linear`や`conic`など、他のCSSのグラデーション関数も使用することもできます。
+
+`<direction>`には、ショートハンドも用意されています。
+
+```ts
+{
+  'to-t': 'to top',
+  'to-tr': 'to top right',
+  'to-r': 'to right',
+  'to-br': 'to bottom right',
+  'to-b': 'to bottom',
+  'to-bl': 'to bottom left',
+  'to-l': 'to left',
+  'to-tl': 'to top left',
+}
+```
+
+```tsx preview
+<Box bgGradient="linear(to-r, green.200, pink.500)" h="2xs" />
+```
+
+### 色のカスタマイズ
+
+テーマの[トークン](/docs/theming/tokens/colors)や[CSSの色の値](https://developer.mozilla.org/ja/Web/CSS/color)の両方を使用できます。
+
+```tsx preview
+<Box bgGradient="linear(to-r, #59a9e1, #f37bdf)" h="2xs" />
+```
+
+### テキストのグラデーション
+
+テキストのグラデーションを追加するには、`bgGradient`と`bgClip`に`text`を設定します。
+
+```tsx preview
+<Heading
+  size="xl"
+  bgGradient="linear(to-r, orange.400, red.500)"
+  bgClip="text"
+  truncated
+>
+  クリリンのことか……クリリンのことかーーーっ！！！！！
+</Heading>
+```

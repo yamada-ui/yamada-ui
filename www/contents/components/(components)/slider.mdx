@@ -3,9 +3,262 @@ title: Slider
 description: "`Slider` is a component used for allowing users to select a value from a range."
 storybook: components-slider--basic
 source: components/slider
+style: components/slider/slider.style.ts
 ---
 
+```tsx preview
+<Slider.Root defaultValue={50} />
+```
+
 ## Usage
+
+:::code-group
+
+```tsx [package]
+import { Slider } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Slider } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Slider } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Slider.Root>
+  <Slider.Track>
+    <Slider.Range />
+    <Slider.Thumb />
+  </Slider.Track>
+  <Slider.Marks />
+</Slider.Root>
+```
+
+### Change Variant
+
+```tsx preview
+<VStack>
+  <For each={["outline", "solid"]}>
+    {(variant) => (
+      <Slider.Root key={variant} variant={variant} defaultValue={50} />
+    )}
+  </For>
+</VStack>
+```
+
+### Change Size
+
+```tsx preview
+<VStack>
+  <For each={["sm", "md", "lg"]}>
+    {(size) => <Slider.Root key={size} size={size} defaultValue={50} />}
+  </For>
+</VStack>
+```
+
+### Change Color Scheme
+
+```tsx preview
+<VStack>
+  <For each={["success", "warning"]}>
+    {(colorScheme) => (
+      <Slider.Root
+        key={colorScheme}
+        colorScheme={colorScheme}
+        defaultValue={50}
+      />
+    )}
+  </For>
+</VStack>
+```
+
+### Set Default Value
+
+To set a default value, set a number to `defaultValue`.
+
+```tsx preview
+<Slider.Root defaultValue={50} />
+```
+
+### Set Minimum and Maximum Values
+
+To set minimum and maximum values, set a number to `min` or `max`.
+
+```tsx preview
+<Slider.Root defaultValue={50} min={0} max={200} />
+```
+
+### Enable Range Selection
+
+To enable range selection, set an array to `defaultValue` or `value`.
+
+```tsx preview
+<Slider.Root defaultValue={[25, 75]} />
+```
+
+### Set Minimum Distance
+
+To set the minimum distance between thumbs, set a number to `betweenThumbs`.
+
+```tsx preview
+<Slider.Root defaultValue={[25, 75]} betweenThumbs={25} />
+```
+
+### Change Orientation
+
+To change the orientation, set `orientation` to `"horizontal"` or `"vertical"`. The default is `"horizontal"`.
+
+```tsx preview
+<Slider.Root defaultValue={50} orientation="vertical" h="xs" />
+```
+
+### Use Marks
+
+To use marks, set an array to `marks`.
+
+```tsx preview functional
+const marks = useMemo(() => [25, 50, 75], [])
+
+return (
+  <VStack>
+    <Slider.Root defaultValue={50} marks={marks} />
+
+    <Slider.Root
+      defaultValue={50}
+      marks={[
+        { value: 25, label: "25" },
+        { value: 50, label: "50" },
+        { value: 75, label: "75" },
+      ]}
+    />
+  </VStack>
+)
+```
+
+### Change Shape
+
+```tsx preview
+<VStack>
+  <For each={["circle", "rounded", "square"]}>
+    {(shape) => <Slider.Root key={shape} shape={shape} defaultValue={50} />}
+  </For>
+</VStack>
+```
+
+### Disable
+
+To disable the slider, set `disabled` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "solid"]}>
+    {(variant) => (
+      <Slider.Root key={variant} variant={variant} defaultValue={50} disabled />
+    )}
+  </For>
+</VStack>
+```
+
+### Read-Only
+
+To make read-only, set `readOnly` to `true`.
+
+```tsx preview
+<VStack>
+  <For each={["outline", "solid"]}>
+    {(variant) => (
+      <Slider.Root key={variant} variant={variant} defaultValue={50} readOnly />
+    )}
+  </For>
+</VStack>
+```
+
+### Display Tooltips
+
+```tsx preview functional client
+const [value, setValue] = useState(50)
+
+return (
+  <Slider.Root value={value} onChange={setValue}>
+    <Slider.Track>
+      <Slider.Range />
+      <Tooltip content={value}>
+        <Slider.Thumb />
+      </Tooltip>
+    </Slider.Track>
+
+    <Slider.Marks marks={[25, 50, 75]} />
+  </Slider.Root>
+)
+```
+
+### Handle Start and End Events
+
+To handle start and end events, use `onChangeStart` or `onChangeEnd`.
+
+```tsx preview functional client
+const [value, onChange] = useState(50)
+const [startValue, onChangeStart] = useState(50)
+const [endValue, onChangeEnd] = useState(50)
+
+return (
+  <VStack>
+    <Text>
+      Value: {value}, Start Value: {startValue}, End Value: {endValue}
+    </Text>
+
+    <Slider.Root
+      value={value}
+      onChange={onChange}
+      onChangeStart={onChangeStart}
+      onChangeEnd={onChangeEnd}
+    />
+  </VStack>
+)
+```
+
+### Set Step Value
+
+To set a step value, set a number to `step`.
+
+```tsx preview
+<Slider.Root defaultValue={50} step={10} />
+```
+
+### Customize Styling
+
+```tsx preview
+<Slider.Root
+  defaultValue={50}
+  trackFill="red.bg"
+  rangeFill="red.bg"
+  thumbFill="red"
+  trackSize="5"
+/>
+```
+
+```tsx preview
+<Slider.Root defaultValue={50}>
+  <Slider.Track>
+    <Slider.Range />
+    <Slider.Thumb>
+      <AudioLinesIcon fontSize="sm" />
+    </Slider.Thumb>
+  </Slider.Track>
+</Slider.Root>
+```
+
+### Control
+
+```tsx preview functional client
+const [value, setValue] = useState(50)
+
+return <Slider.Root value={value} onChange={setValue} />
+```
 
 ## Props
 

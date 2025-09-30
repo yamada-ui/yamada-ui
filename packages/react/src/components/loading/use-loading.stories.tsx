@@ -30,7 +30,7 @@ export const Basic = () => {
   )
 }
 
-export const Timeout = () => {
+export const Duration = () => {
   const { background, page, screen } = useLoading()
 
   return (
@@ -65,6 +65,32 @@ export const Message = () => {
       </Button>
       <Button
         onClick={() => background.start({ duration: 5000, message: "Loading" })}
+      >
+        Start background loading
+      </Button>
+    </Wrap>
+  )
+}
+
+export const LoadingScheme = () => {
+  const { background, page, screen } = useLoading()
+
+  return (
+    <Wrap gap="md">
+      <Button
+        onClick={() => screen.start({ duration: 5000, loadingScheme: "grid" })}
+      >
+        Start screen loading
+      </Button>
+      <Button
+        onClick={() => page.start({ duration: 5000, loadingScheme: "dots" })}
+      >
+        Start page loading
+      </Button>
+      <Button
+        onClick={() =>
+          background.start({ duration: 5000, loadingScheme: "puff" })
+        }
       >
         Start background loading
       </Button>

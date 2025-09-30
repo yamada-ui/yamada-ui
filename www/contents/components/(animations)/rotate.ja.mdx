@@ -6,7 +6,109 @@ source: components/rotate
 style: components/rotate/rotate.style.ts
 ---
 
+```tsx preview
+<Rotate
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
 ## 使い方
+
+:::code-group
+
+```tsx [package]
+import { Rotate } from "@yamada-ui/react"
+```
+
+```tsx [alias]
+import { Rotate } from "@/components/ui"
+```
+
+```tsx [monorepo]
+import { Rotate } from "@workspaces/ui"
+```
+
+:::
+
+```tsx
+<Rotate />
+```
+
+### 角度を変更する
+
+角度を変更する場合は、`rotate`に数値を設定します。デフォルトでは、`45`が設定されています。
+
+```tsx preview
+<Rotate
+  rotate={-360}
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### 所要時間を変更する
+
+所要時間を変更する場合は、`duration`に数値(秒)を設定します。
+
+```tsx preview
+<Rotate
+  duration={1.4}
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### 遅延させる
+
+遅延させる場合は、`delay`に数値(秒)を設定します。
+
+```tsx preview
+<Rotate
+  delay={1}
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### 無効にする
+
+無効にする場合は、`disabled`を`true`にします。
+
+```tsx preview
+<Rotate
+  disabled
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### 読み取り専用にする
+
+読み取り専用にする場合は、`readOnly`を`true`に設定します。
+
+```tsx preview
+<Rotate
+  readOnly
+  from={<AppleIcon fontSize="2xl" />}
+  to={<CherryIcon fontSize="2xl" />}
+/>
+```
+
+### 制御する
+
+```tsx preview functional client
+const [value, onChange] = useState<KeyframeIdent>("from")
+
+return (
+  <Rotate
+    from={<AppleIcon fontSize="2xl" />}
+    to={<CherryIcon fontSize="2xl" />}
+    value={value}
+    onChange={onChange}
+  />
+)
+```
 
 ## Props
 

@@ -20,18 +20,18 @@ A guide for installing and using Yamada UI with Next.js app directory.
 A guide for installing and using Yamada UI with Next.js pages directory.
 
 :::
-:::card{href="/docs/get-started/frameworks/remix"}
-
-### Remix
-
-A guide for installing and using Yamada UI with Remix projects.
-
-:::
 :::card{href="/docs/get-started/frameworks/vite"}
 
 ### Vite
 
 A guide for installing and using Yamada UI with Vite.js projects.
+
+:::
+:::card{href="/docs/get-started/frameworks/react-router"}
+
+### React Router
+
+A guide for installing and using Yamada UI with React Router projects.
 
 :::
 ::::
@@ -44,7 +44,7 @@ To install Yamada UI in your project, you can either set it up using the [CLI](/
 
 ::::steps
 
-#### Set up
+#### Setup
 
 Running the command will create the necessary files and folders in your project.
 
@@ -96,7 +96,7 @@ bun add "@workspaces/ui@workspace:*"
 
 After installing, add `UIProvider` to the root of your application.
 
-```tsx
+```tsx {1,5,7}
 import { UIProvider } from "@workspaces/ui"
 
 const App = () => {
@@ -112,7 +112,7 @@ const App = () => {
 
 After adding `UIProvider`, you can use the components in your application.
 
-```tsx
+```tsx {1,4}
 import { Button } from "@workspaces/ui"
 
 const App = () => {
@@ -156,7 +156,7 @@ bun add @yamada-ui/react
 
 After installing, add `UIProvider` to the root of your application.
 
-```tsx
+```tsx {1,5,7}
 import { UIProvider } from "@yamada-ui/react"
 
 const App = () => {
@@ -172,7 +172,7 @@ const App = () => {
 
 After adding `UIProvider`, you can use the components in your application.
 
-```tsx
+```tsx {1,4}
 import { Button } from "@yamada-ui/react"
 
 const App = () => {

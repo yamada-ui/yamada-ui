@@ -1,6 +1,5 @@
 "use client"
 
-import type { FC } from "react"
 import type { HTMLStyledProps, ThemeProps } from "../../core"
 import type { FieldProps } from "../field"
 import type { InputStyle } from "./input.style"
@@ -34,24 +33,21 @@ export { InputPropsContext, useInputPropsContext }
  *
  * @see https://yamada-ui.com/docs/components/input
  */
-export const Input: FC<InputProps> = withContext("input")(
-  undefined,
-  (props) => {
-    const {
-      props: { errorBorderColor, focusBorderColor, htmlSize, ...rest },
-      ariaProps,
-      dataProps,
-      eventProps,
-    } = useFieldProps(props)
-    const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
+export const Input = withContext("input")(undefined, (props) => {
+  const {
+    props: { errorBorderColor, focusBorderColor, htmlSize, ...rest },
+    ariaProps,
+    dataProps,
+    eventProps,
+  } = useFieldProps(props)
+  const varProps = useInputBorder({ errorBorderColor, focusBorderColor })
 
-    return {
-      size: htmlSize,
-      ...ariaProps,
-      ...dataProps,
-      ...eventProps,
-      ...varProps,
-      ...rest,
-    }
-  },
-)
+  return {
+    size: htmlSize,
+    ...ariaProps,
+    ...dataProps,
+    ...eventProps,
+    ...varProps,
+    ...rest,
+  }
+})

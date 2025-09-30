@@ -13,6 +13,8 @@ export const tooltipStyle = defineComponentSlotStyle({
       px: "sm",
       py: "xs",
       rounded: "l2",
+    },
+    positioner: {
       zIndex: "ginyu",
     },
   },
